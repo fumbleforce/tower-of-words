@@ -9,6 +9,7 @@ Elsewhere: the rules every screen has to meet (no timers, one menu per target, s
 | Action | Desktop | Phone |
 |---|---|---|
 | Walk | W A S D or the arrow keys, or click the floor | Tap the floor |
+| Steer | Hold the left button on the floor and move the mouse | Hold a finger on the floor and drag |
 | Run | Hold Shift while walking, or turn Caps Lock on to run all the time (Shift runs even with it off) | Double-tap the floor (that walk is run) |
 | Use or talk to the target | E, Space or Enter; or click it or its marker | Tap it or its marker |
 | Open the target's action menu | Click it or its marker, when it has more than one thing to do (its action and Say) | Tap it or its marker, the same |
@@ -28,7 +29,9 @@ Elsewhere: the rules every screen has to meet (no timers, one menu per target, s
 | Send feedback (local builds only) | F8, or the note button top right | The note button |
 | Performance numbers on or off | F3, or Settings | Settings |
 
-Running (Jørgen, 2026-09-30: "I'd like to have Shift button to run, and caps lock to toggle running") works for the keys, a click on the floor and a click on something to use. Caps Lock is read from the keyboard itself, so running is on exactly when its light is. While a text field has focus (a word to type, the feedback note), Shift and Caps Lock only change the text; a word typed with Caps Lock on still counts. When the field closes with Caps Lock still on, he runs again. On the phone a double tap on the floor runs that one walk; a double click does the same on desktop. Walks the story makes (trips, scenes) keep their own pace. The walking hint on the train doesn't mention running.
+Running (Jørgen, 2026-09-30: "I'd like to have Shift button to run, and caps lock to toggle running") works for the keys, a click on the floor, steering and a click on something to use. Caps Lock is read from the keyboard itself, so running is on exactly when its light is. While a text field has focus (a word to type, the feedback note), Shift and Caps Lock only change the text; a word typed with Caps Lock on still counts. When the field closes with Caps Lock still on, he runs again. On the phone a double tap on the floor runs that one walk; a double click does the same on desktop. Walks the story makes (trips, scenes) keep their own pace. The walking hint on the train doesn't mention running.
+
+Steering (Jørgen, 2026-10-04: "I want to be able to hold down mouse and guide the character along, as alternative to wasd and click"; code in game3d/js/movement/steer.js): a press on the floor first walks there like a click. Held for a moment (0.22 s) or moved a little (10 px, a finger 16 px), it becomes steering: Eric walks toward the point under the cursor or finger and follows it as it moves, at walking pace, running with Shift or Caps Lock, or when the press was the second of a double tap. He goes straight where the way is clear and the short way round where it isn't (the fountain, a desk, a doorway). Steered along a wall he turns and walks along it; steered straight into one he stands. He goes round people as on any walk, stops when he reaches the point, turns on the spot when it swings round behind him, and sets off again when it moves away. A faint teal ring sits on the floor under the cursor while steering. Letting go stops him. A press on a person, a thing or a pin uses it as a click does and never steers. The keys win while both are used. Steering ends when a scene starts, the same as the keys stop. game3d/tools/steer-check.mjs steers round the plaza fountain and across the office with a held mouse or finger, and checks that letting go stops him, that a quick click still walks, that a click or a held press on Mio still targets her, and that his feet don't slide.
 
 A click on something he can use walks him there and uses it. If a scene starts on the way (he walks into a room with its own moment), he carries on to it and uses it when the scene ends.
 
@@ -42,7 +45,7 @@ While Eric is saying a word (its practice prompt, his voice, the answer), clicks
 
 On the train (game3d/js/onboard.js, notes/ONBOARDING.md for the design):
 
-- At the start the screen shows only one line on walking ("W A S D or click the floor to walk" / "Tap the floor to walk"). It steps aside while a line or caption is up, goes once Eric has walked a few steps and never comes back.
+- At the start the screen shows only one line on walking ("W A S D, or click or hold the floor to walk" / "Tap or hold the floor to walk"). It steps aside while a line or caption is up, goes once Eric has walked a few steps and never comes back.
 - No goal and no story hints until he has talked to a person. The first passenger he talks to points at the seat beside Mio, and that gives the first goal.
 - On desktop, the pin of the target in reach carries a small E key until E has been used five times; that's where E is taught, since the action menu only opens when asked for. The menu's rows drop their key caps after the same five uses. Its action word (Talk, Look, Pet, Push to your desk...) always stays: a box with only the name read as having no action (Jørgen, 2026-09-30: "interaction windows but no actions").
 - Say first shows only at the goal target (the cat), after Mio teaches おはようございます; after one use it shows wherever a word works. The tip that comes with the first word says "Press Q to say a word you know." on desktop and "Tap who you want to talk to, then Say a word." on the phone.
