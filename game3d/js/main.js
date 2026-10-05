@@ -118,7 +118,7 @@ export const game = {
     } catch (e) {
       console.error(e);
     } finally {
-      ui.closeTalk();
+      ui.closeTalk({ sceneOver: true });
       this.setHurry?.(false);
       this.busy = !!this.runner?.recoveryError;
       if (this.walker) this.walker.locked = this.busy;
