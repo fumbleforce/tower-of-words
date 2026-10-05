@@ -3,6 +3,7 @@
 // (walkRig) and one of the place's people (the story's walkPerson) past him, stops them and turns them on the spot,
 // and reports everyone in view who stepped on the spot or slid. Real time (the fast test runs the same check sped up).
 //   node game3d/tools/gait-check.mjs [w h]     PLACES=plaza,forecourt SECS=14 QS=&chibi=0 BASE=<worktree>/game3d
+//   RUN=1: Eric runs his legs (as a double tap does) instead of walking them.
 // Exits 1 when anyone is reported, or on a page error.
 import fs from 'node:fs';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
@@ -12,7 +13,8 @@ const base = process.env.BASE || 'game3d';
 const PLACES = (process.env.PLACES || 'plaza,forecourt').split(',');
 const SECS = +(process.env.SECS || 14);
 const QS = process.env.QS || '';
-const tag = `${W}x${H}${QS.replace(/[^a-z0-9=]/gi, '-')}${process.env.TAG ? '-' + process.env.TAG : ''}`;
+const RUN = process.env.RUN === '1';
+const tag = `${W}x${H}${QS.replace(/[^a-z0-9=]/gi, '-')}${RUN ? '-run' : ''}${process.env.TAG ? '-' + process.env.TAG : ''}`;
 const out = `game3d/shots/gait/${tag}`;
 fs.mkdirSync(out, { recursive: true });
 const errors = [];
@@ -25,7 +27,7 @@ await withBrowserJob('gait-check', async (browser) => {
     await page.goto(`http://127.0.0.1:8771/${base}/index.html?cap&q=1&place=${place}${QS}`, { timeout: 60000 });
     await page.waitForFunction(() => globalThis.__done, null, { timeout: 120000 });
     const r = await page.evaluate(
-      async ({ SECS }) => {
+      async ({ SECS, RUN }) => {
         const g = globalThis.__game,
           P = g.place;
         const { sim } = await import('./js/sim.js');
@@ -57,7 +59,10 @@ await withBrowserJob('gait-check', async (browser) => {
           (async () => {
             for (const [dx, dz] of [[3, 0], [3, 3], [0, 0]]) {
               const [x, z] = near(dx, dz);
-              await new Promise((res) => g.walker.goTo(x, z, res));
+              await new Promise((res) => {
+                g.walker.goTo(x, z, res);
+                g.walker.runTo = RUN;
+              });
               await sleep(0.8);
             }
             g.walker.faceTo?.(e.x - 3, e.z);
@@ -95,7 +100,7 @@ await withBrowserJob('gait-check', async (browser) => {
         );
         return { reports: C.reports(), windows: C.windows, people, other: other?.[0] };
       },
-      { SECS },
+      { SECS, RUN },
     );
     const walkers = Object.entries(r.people).filter(([, p]) => p.walk);
     console.log(

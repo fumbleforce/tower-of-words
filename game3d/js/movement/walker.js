@@ -10,7 +10,8 @@ import { heldRun, doubleTap } from './run-input.js';
 // running (Jørgen, 2026-09-30: "Shift button to run, and caps lock to toggle running"): the walker's speed times RUN
 // while Shift is held, Caps Lock is on (run-input.js) or the tapped route was a double tap. gait.run tells the avatar
 // to show the run clip (makeGait in mio.js); scripted walks never set it.
-export const RUN = 1.8;
+// 2.07 (Jørgen, 2026-10-05: "running should be a bit faster"): 15 % up from 1.8, so 2.7 m/s against the walk's 1.3.
+export const RUN = 2.07;
 const STEER_STOP = 0.3,
   STEER_GO = 0.5; // m from the steer point where a held walk stops, and how far it must move away to set off again
 
