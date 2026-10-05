@@ -2,7 +2,7 @@
  "title": "Crowd pilot: office man (A) and office woman (B), each on two rigs",
  "date": "2026-10-05",
  "by": "Claude (crowd-pilot agent, #232)",
- "status": "open",
+ "status": "decided",
  "question": "The first two sheets are ChatGPT pictures; every sheet after them shows real rigged 3D models, which you can turn, pan and play in the live viewer (first link). Which rig do you want for the crowd, (a) ours or (b) Meshy's, and are the office man and office woman right?",
  "multi": true,
  "media": [
@@ -190,5 +190,8 @@
   "art/parts/crowd-pilot-1/variety/b/v3.webp",
   "art/parts/crowd-pilot-1/variety/b/v4.webp",
   "art/parts/crowd-pilot-1/variety/b/v5.webp"
- ]
+ ],
+ "decision": "Failed round: broken walk, broken eyes, rig too exaggerated; crowd-pilot-2 redoes it",
+ "decided_at": "2026-10-05T23:12:24+0200",
+ "issue": 232
 }
