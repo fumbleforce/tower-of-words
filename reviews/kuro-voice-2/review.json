@@ -1,0 +1,106 @@
+{
+ "title": "Kuro voice, more relaxed",
+ "date": "2026-10-05",
+ "by": "voice agent",
+ "status": "open",
+ "multi": false,
+ "question": "Which of these is Kuro, relaxed and a little seductive?",
+ "media": [
+  {
+   "audio": "art/candidates/kuro-voice-2/0-ref.mp3",
+   "caption": "How to read this: each card plays the clone saying こんにちは。今日は受付にはいませんよ。 The reference voice, おはようございます。どうぞ。 and the English line for each are listed here. Reference line (all five): 受付でございます。お名前とご用件をお伺いします。… (the current one). Clone lines: おはようございます。どうぞ。 / こんにちは。今日は受付にはいませんよ。 / \"You're allowed to say good morning first.\" Seed 404. "
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/0-ref.mp3",
+   "caption": "0. Current (kuro-design): reference voice"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/0-ja1.mp3",
+   "caption": "0. Current (kuro-design): おはようございます。どうぞ。"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/0-en.mp3",
+   "caption": "0. Current (kuro-design): English line"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/a-ref.mp3",
+   "caption": "a. Relaxed and warm: reference voice"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/a-ja1.mp3",
+   "caption": "a. Relaxed and warm: おはようございます。どうぞ。"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/a-en.mp3",
+   "caption": "a. Relaxed and warm: English line"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/b-ref.mp3",
+   "caption": "b. Relaxed, husky: reference voice"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/b-ja1.mp3",
+   "caption": "b. Relaxed, husky: おはようございます。どうぞ。"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/b-en.mp3",
+   "caption": "b. Relaxed, husky: English line"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/c-ref.mp3",
+   "caption": "c. Lazy, teasing: reference voice"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/c-ja1.mp3",
+   "caption": "c. Lazy, teasing: おはようございます。どうぞ。"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/c-en.mp3",
+   "caption": "c. Lazy, teasing: English line"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/d-ref.mp3",
+   "caption": "d. Smooth, intimate: reference voice"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/d-ja1.mp3",
+   "caption": "d. Smooth, intimate: おはようございます。どうぞ。"
+  },
+  {
+   "audio": "art/candidates/kuro-voice-2/d-en.mp3",
+   "caption": "d. Smooth, intimate: English line"
+  }
+ ],
+ "options": [
+  {
+   "id": "0",
+   "label": "0. Current (kuro-design)",
+   "audio": "art/candidates/kuro-voice-2/0-ja2.mp3",
+   "note": "Today's voice, for comparison. Composed, even, precise."
+  },
+  {
+   "id": "a",
+   "label": "a. Relaxed and warm",
+   "audio": "art/candidates/kuro-voice-2/a-ja2.mp3",
+   "note": "Relaxed, low, unhurried, warm, a smile in the voice. Reference about 255 Hz (current about 286). Proposed VOICE.md wording if picked: Kuro. Relaxed and warm, low and unhurried, with a smile in her voice. Courteous at the desk without hurrying. A tease comes easily and kindly; she lets Eric notice it. No gushing or pet names."
+  },
+  {
+   "id": "b",
+   "label": "b. Relaxed, husky",
+   "audio": "art/candidates/kuro-voice-2/b-ja2.mp3",
+   "note": "Relaxed with a husky, slightly breathy low register. Lowest of the five: about 212 Hz. Proposed VOICE.md wording if picked: Kuro. Relaxed, low and a little husky, slightly breathy, warm. Courteous at the desk, never hurried. A tease is quiet and smoky; she lets Eric notice it. No gushing or pet names."
+  },
+  {
+   "id": "c",
+   "label": "c. Lazy, teasing",
+   "audio": "art/candidates/kuro-voice-2/c-ja2.mp3",
+   "note": "Lazy, teasing, amused, languid, slow vowels. Reference about 298 Hz. Proposed VOICE.md wording if picked: Kuro. Lazy and amused, unhurried, a little languid. Courteous at the desk but plainly enjoying Eric. She teases openly in a warm, easy voice and lets a line trail off. No gushing or pet names."
+  },
+  {
+   "id": "d",
+   "label": "d. Smooth, intimate",
+   "audio": "art/candidates/kuro-voice-2/d-ja2.mp3",
+   "note": "Smooth, intimate, low and slow, velvety with a soft breathy edge. The most seductive of the four. Reference about 264 Hz. Proposed VOICE.md wording if picked: Kuro. Smooth, low and slow, close and intimate, with a soft breathy edge. Courteous at the desk, composed, never hurried. She leaves a little silence after a line on purpose. No gushing or pet names."
+  }
+ ]
+}
