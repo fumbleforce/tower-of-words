@@ -377,6 +377,10 @@
           "label": "Guard desk",
           "kind": "thing small"
         },
+        "guard_monitor": {
+          "label": "Monitor",
+          "kind": "thing small"
+        },
         "counter": {
           "label": "Visitor counter",
           "kind": "thing small"
@@ -524,6 +528,10 @@
         "kuro": {
           "label": "Receptionist",
           "kind": "person"
+        },
+        "label_printer": {
+          "label": "Label printer",
+          "kind": "thing small"
         },
         "plaza_lane": {
           "label": "To the plaza",

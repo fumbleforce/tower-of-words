@@ -11,7 +11,8 @@ import { LU, LN, DOOR_U, OUT, CZ, CORE, CAR2_X, STAIR_X, GF } from './frame.js';
 // the reception counter's middle (u, n); Kuro stands 0.65 behind it
 export const RECEPTION = [1.3, 1.9];
 
-// the lobby's furniture, in the tower's frame: reception counter, sofas round a low table, plants, umbrella stand
+// the lobby's furniture, in the tower's frame: reception counter (Kuro's label printer on it: the returned marker),
+// sofas round a low table, plants, umbrella stand
 export function furniture(g) {
   const counter = new THREE.Group();
   counter.add(
@@ -26,6 +27,16 @@ export function furniture(g) {
     rbox(0.32, 0.2, 0.03, PAL.monitor, { x: -0.5, y: 0.59, z: -0.1, r: 0.01 }),
     rbox(0.3, 0.03, 0.22, PAL.paper, { x: 0.4, y: 0.59, z: 0.08, r: 0.005 }),
   );
+  // Kuro's label printer at the counter's west end, beside her screen: a squat grey case, a strip of white label out of its front slot, the roll's
+  // window on top
+  counter.add(
+    rbox(0.16, 0.1, 0.2, '#5d636d', { x: -0.85, y: 0.59, z: -0.06, r: 0.02 }),
+    rbox(0.1, 0.004, 0.08, '#f2f2ee', { x: -0.85, y: 0.62, z: 0.06, r: 0.002, cast: false }),
+    rbox(0.08, 0.012, 0.08, '#3e434d', { x: -0.85, y: 0.69, z: -0.08, r: 0.004, cast: false }),
+  );
+  const printer = new THREE.Object3D(); // where its marker hangs (places/forecourt.js label_printer)
+  printer.position.set(-0.85, 0.7, -0.06);
+  counter.add(printer);
   const cp = plant({ size: 0.42, seed: 12 });
   cp.position.set(RECEPTION[0] + 0.82, 0.59, -RECEPTION[1] - 0.02);
   g.add(cp);
@@ -111,6 +122,7 @@ export function furniture(g) {
   flat(DOOR_U + 0.15 - RECEPTION[0], 0.3, (RECEPTION[0] + DOOR_U + 0.15) / 2, gn, guide, 0.018);
   flat(0.6, 0.6, RECEPTION[0], gn, guide, 0.022); // over the line's end, clear of its top
   flat(2.9, 2.1, 7.88, 2.75, '#4f5a66', 0.011);
+  return { printer };
 }
 // the same pieces as walk-grid rectangles in (u, n), and the name stone outside
 export const FURNITURE = [

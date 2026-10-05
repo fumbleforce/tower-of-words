@@ -62,7 +62,7 @@ export function* headOfficeSteps(root, nav) {
   g.position.set(T.o[0], 0, T.o[1]);
   root.add(g);
   const inner = new THREE.Group();
-  furniture(inner);
+  const fur = furniture(inner);
   g.add(inner);
   mergeStatic(inner);
   yield;
@@ -144,6 +144,7 @@ export function* headOfficeSteps(root, nav) {
     entrance: at(DOOR_U, -0.75),
     receptionFront: at(RECEPTION[0], RECEPTION[1] - 0.8),
     kuroAt: [kx, kz],
+    labelPrinter: fur.printer, // Kuro's label printer on the counter (places/forecourt.js label_printer)
     top: TOP,
     // for the camera: the lobby's corners and the tower's south-west corner
     lobby: [at(0, 0), at(LU, 0), at(LU, LN), at(0, LN)],

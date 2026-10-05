@@ -58,10 +58,10 @@
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
     },
     "game3d/js/places/lobby.js": {
-      "lines": 689,
-      "bytes": 24338,
+      "lines": 696,
+      "bytes": 24748,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; C-0210 background people as things (explicit registrations, the rest in places/background-people.js); 2026-10-03 C-0378 day 2: the day-2 ways out spread into the registries and lobbyDay2 installed (places/lobby-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC)",
+      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; C-0210 background people as things (explicit registrations, the rest in places/background-people.js); 2026-10-03 C-0378 day 2: the day-2 ways out spread into the registries and lobbyDay2 installed (places/lobby-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 #227: the guard's monitor as a named thing (guard_monitor) and its place from the builder",
       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/office.js": {
@@ -100,10 +100,10 @@
       "reason": "Narrative execution, checkpoint replay and dialogue/audio dispatch remain after stage 2c; stage 3 reviews the presentation/audio boundary."
     },
     "game3d/js/scenes/lobby.js": {
-      "lines": 992,
-      "bytes": 32421,
+      "lines": 997,
+      "bytes": 32749,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-01 shared station display extracted with locker-bank fitout (#83); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop)",
+      "review": "C-0071; 2026-10-01 shared station display extracted with locker-bank fitout (#83); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-05 #227: the guard's monitor as a named thing (guard_monitor) and its place from the builder",
       "reason": "Existing lobby geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/scenes/office.js": {
