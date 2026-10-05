@@ -2,7 +2,8 @@
 # Voice every game line that has no clip: game3d/audio/<key>.mp3 for each manifest line whose current text has no clip.
 #   1. rewrite game3d/audio/manifest.json from the story (skip with --no-manifest)
 #   2. check the setup (venvs, clone references and transcripts, Qwen model: cfg.py setup), then take the GPU lock
-#      (waits while someone else holds it; GUIDE: GPU lock)
+#      (waits while someone else holds it or Jørgen's image gen dashboard has priority; GUIDE: GPU lock). When the
+#      dashboard asks for the GPU mid-batch, the batch stops with exit 75 and a rerun picks up from the takes on disk
 #   3. three takes per line (gen_takes.py), checked (check_takes.py); up to two retry rounds with new seeds for lines
 #      with no passing take
 #   4. export the best passing take (export.py); edge-tts for lines still failing only with EDGE_FALLBACK=1 (edge.py), else exit 1
@@ -42,9 +43,15 @@ step() {
   esac | tee -a "$LOG"
   rc=$(cat "$out.rc" 2>/dev/null || echo 1); rm -f "$out.rc"
   [ "$rc" = 0 ] && return 0
+  [ "$rc" = 75 ] && yielded
   say "--- last lines of $name, unfiltered:"; tail -n 15 "$out" | tee -a "$LOG"
   die "$name exited with $rc: a crash or setup error, not a failed take; stopping the batch (whole output: $out)"
 }
+
+# Jørgen's image gen dashboard has priority on the GPU (tools/gpu_priority.py): stop with exit 75, lock released by
+# the EXIT trap; a rerun picks up from the takes on disk
+PRIO="$REPO/tools/gpu_priority.py"
+yielded() { say "stopped for Jørgen's image gen dashboard (gpu.priority); takes so far are kept, rerun later"; exit 75; }
 
 for py in "$BENCH_PY" "$QWEN_PY"; do command -v "$py" > /dev/null || die "no Python at $py (QWEN_PY, BENCH_PY: see the voice-clips skill)"; done
 case " $* " in *" --no-manifest "*) ;; *) step voice_manifest all node "$REPO/game3d/tools/voice-manifest.mjs" ;; esac
@@ -62,8 +69,10 @@ print(any(e['overheard'] for e in manifest() if e['key'] in need))") || die "cou
 
 # the GPU lock: mkdir is the test-and-set; never remove a lock with someone else's name in it
 [ -d "$(dirname "$LOCKDIR")" ] || mkdir -p "$(dirname "$LOCKDIR")"
-until mkdir "$LOCKDIR" 2>/dev/null; do
-  say "GPU lock held by $(cat "$LOCKDIR/owner" 2>/dev/null), waiting ($(date +%T))"; sleep 120
+# never while the dashboard has priority; a lock left by dead browser jobs is freed first
+until ! "$BENCH_PY" "$PRIO" live > /dev/null && { "$BENCH_PY" "$PRIO" reclaim > /dev/null; mkdir "$LOCKDIR" 2>/dev/null; }; do
+  WHO=$("$BENCH_PY" "$PRIO" live) || WHO="GPU lock held by $(cat "$LOCKDIR/owner" 2>/dev/null)"
+  say "$WHO, waiting ($(date +%T))"; sleep 120
 done
 echo "$LOCK_ME" > "$LOCKDIR/owner"
 release() { grep -qx "$LOCK_ME" "$LOCKDIR/owner" 2>/dev/null && rm -r "$LOCKDIR" && echo "GPU lock released"; }
@@ -76,6 +85,7 @@ for seeds in 404,505,606 707,808,909 1010,1111,1212; do
   say "takes $seeds for: $KEYS"
   step gen_takes gen "$QWEN_PY" "$HERE/gen_takes.py" "$seeds" "$KEYS"
   grep -qx "$LOCK_ME" "$LOCKDIR/owner" 2>/dev/null || die "GPU lock lost, stopping"
+  "$BENCH_PY" "$PRIO" stop "$LOCK_ME" && yielded
   step check_takes check env DEV=cuda "$BENCH_PY" "$HERE/check_takes.py" takes
   step export_dry none "$BENCH_PY" "$HERE/export.py" --dry
   KEYS=$(sed -n 's/^NOPASS {"key": "\([^"]*\)".*/\1/p' "$WORK/logs/export_dry.out" | paste -sd, -)

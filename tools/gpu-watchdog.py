@@ -3,30 +3,25 @@
 
 The lock is the directory /tmp/claude-1000/gpu.lock with an `owner` file (GUIDE, GPU lock). A lock is stale when
 nothing alive can be holding it:
-  - owner browser-gpu-pool-v1: its slots are /tmp/claude-1000/browser.lock.<pid>; stale when no slot's pid is alive
-    (the pool crashed or was killed before it cleaned up). Empty slots are removed too.
-  - any other owner (a script, a dashboard session, an agent): stale when the lock is older than STALE_MIN minutes
-    AND ComfyUI has nothing running or queued AND no process other than ComfyUI is computing on the GPU AND no
-    lock-waiting job of that owner's name is running. imagegen-dashboard locks are checked against its server pid.
+  - owner browser-gpu-pool-v1: the slots of browser jobs that died are reclaimed (gpu.lock/slot.<n> record each
+    job's pid; their leftover Chromium is killed) and the lock goes with the last one (tools/gpu_priority.py reclaim,
+    the pool's own code in tools/lib/browser-gpu-slots.mjs).
+  - imagegen-dashboard: never. Jørgen's dashboard has priority and releases its own lock (a restarted server picks
+    its session up or closes it).
+  - any other owner (a script, an agent): stale when the lock is older than STALE_MIN minutes AND ComfyUI has nothing
+    running or queued AND no process other than ComfyUI is computing on the GPU.
 Run once (`python3 tools/gpu-watchdog.py`) or every minute from the systemd user timer gpu-watchdog.timer.
 It prints one line when it clears something, and logs to ~/.cache/gpu-watchdog.log. `--dry-run` only reports."""
 import json, os, shutil, subprocess, sys, time, urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import gpu_priority  # noqa: E402
 
 BASE = os.environ.get('GPU_WATCHDOG_BASE') or '/tmp/claude-1000'  # the env override is for tests only
 LOCK = os.path.join(BASE, 'gpu.lock')
 STALE_MIN = 10
 COMFY = 'http://127.0.0.1:8188'
 LOG = os.path.expanduser('~/.cache/gpu-watchdog.log')
-
-
-def alive(pid):
-    try:
-        os.kill(int(pid), 0)
-        return True
-    except (ProcessLookupError, ValueError):
-        return False
-    except PermissionError:
-        return True
 
 
 def comfy_busy():
@@ -56,11 +51,6 @@ def other_gpu_compute():
     return res
 
 
-def dashboard_alive():
-    out = subprocess.run(['pgrep', '-f', 'tools/imagegen/server.py'], capture_output=True, text=True).stdout.split()
-    return bool(out)
-
-
 def log(msg):
     line = time.strftime('%F %T ') + msg
     print(line, flush=True)
@@ -80,16 +70,14 @@ def main():
     except OSError:
         owner = ''
     age = (time.time() - os.path.getmtime(LOCK)) / 60
-    slots = [d for d in os.listdir(BASE) if d.startswith('browser.lock.')]
-    live_slots = [d for d in slots if alive(d.rsplit('.', 1)[1])]
     stale, why = False, ''
-    if owner.startswith('browser-gpu-pool'):
-        if not live_slots:
-            stale, why = True, f'browser pool lock with no live slot ({len(slots)} dead slots)'
-    elif owner.startswith('imagegen-dashboard'):
-        if not dashboard_alive():
-            stale, why = True, 'imagegen-dashboard lock but its server is not running'
-    elif age >= STALE_MIN and not comfy_busy() and not other_gpu_compute():
+    if owner.startswith(gpu_priority.POOL_PREFIX):
+        if not dry:
+            gpu_priority.reclaim(BASE, log=lambda m: log('browser pool: ' + m) if not m.startswith('reclaimed 0 ') else None)
+        return
+    if owner.startswith(gpu_priority.DASHBOARD):
+        return
+    if age >= STALE_MIN and not comfy_busy() and not other_gpu_compute():
         stale, why = True, f'owner "{owner[:60]}" idle for {age:.0f} min: ComfyUI idle, nothing else computing'
     if not stale:
         return
@@ -97,9 +85,6 @@ def main():
     if dry:
         return
     shutil.rmtree(LOCK, ignore_errors=True)
-    for d in slots:
-        if d not in live_slots:
-            shutil.rmtree(os.path.join(BASE, d), ignore_errors=True)
 
 
 if __name__ == '__main__':

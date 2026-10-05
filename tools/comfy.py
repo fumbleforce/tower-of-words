@@ -1,9 +1,24 @@
 """Minimal client for the local ComfyUI server (http://127.0.0.1:8188).
 Builds workflows for Anima-family models and SDXL (optionally with a style LoRA), queues them and saves the output.
 """
-import json, time, urllib.request, urllib.parse, os, random
+import json, time, urllib.request, urllib.parse, os, random, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import gpu_priority  # noqa: E402
 
 HOST = 'http://127.0.0.1:8188'
+
+
+def yield_to_dashboard(status=None):
+    """Stop the batch (exit 75, so finally blocks release the GPU lock) while Jørgen's image gen dashboard has
+    priority (tools/gpu_priority.py). Checked before every queued workflow, and when one ends interrupted."""
+    if status is not None and 'interrupt' not in json.dumps(status.get('messages', [])):
+        return
+    rec = gpu_priority.priority()
+    if gpu_priority.should_stop() and rec:
+        print(f'comfy: stopping: {gpu_priority.describe(rec)}. Run the batch again later; finished images are on disk.',
+              file=sys.stderr, flush=True)
+        raise SystemExit(gpu_priority.YIELDED)
 
 
 def _post(path, data):
@@ -111,6 +126,7 @@ def sdxl_refine(image_name, prompt, negative, ckpt, denoise=0.4, steps=28, cfg=5
 
 def run(workflow, out_path, timeout=900):
     """Queue a workflow, wait for it, save the first output image to out_path."""
+    yield_to_dashboard()
     pid = _post('/prompt', {'prompt': workflow})['prompt_id']
     t0 = time.time()
     while time.time() - t0 < timeout:
@@ -118,6 +134,7 @@ def run(workflow, out_path, timeout=900):
         if pid in hist:
             status = hist[pid].get('status', {})
             if status.get('status_str') == 'error':
+                yield_to_dashboard(status)
                 raise RuntimeError(json.dumps(status.get('messages', []))[:800])
             for node in hist[pid]['outputs'].values():
                 for img in node.get('images', []):
@@ -186,12 +203,14 @@ def run_video(workflow, out_mp4, fps, timeout=3600):
     """Queue a video workflow; assemble the saved frames into out_mp4 with ffmpeg. Returns seconds taken."""
     import subprocess, tempfile
     t0 = time.time()
+    yield_to_dashboard()
     pid = _post('/prompt', {'prompt': workflow})['prompt_id']
     while time.time() - t0 < timeout:
         hist = json.loads(_get(f'/history/{pid}'))
         if pid in hist:
             st = hist[pid].get('status', {})
             if st.get('status_str') == 'error':
+                yield_to_dashboard(st)
                 raise RuntimeError(json.dumps(st.get('messages', []))[:1200])
             imgs = [i for node in hist[pid]['outputs'].values() for i in node.get('images', []) if i.get('subfolder', '').startswith('frames')]
             if not imgs:
