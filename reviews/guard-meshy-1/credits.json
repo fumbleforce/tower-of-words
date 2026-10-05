@@ -1,0 +1,64 @@
+[
+ {
+  "service": "meshy",
+  "part": "guard-1",
+  "task": "01a10b0e-da7b-72fd-810f-7b4ac20adc4e",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 315,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/guard-meshy-1/pics/d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "guard-1-tex",
+  "task": "01a10b10-be00-7199-ae2b-83f84c417559",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 305,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/guard-meshy-1/meshy/guard-1-uv.glb"
+  },
+  "input": "art/parts/guard-meshy-1/pics/d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "guard-1-tex-rig",
+  "task": "01a10b11-43c5-711b-813c-369d492fdc12",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10b10-be00-7199-ae2b-83f84c417559",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "guard-sit",
+  "task": "01a10b11-a76e-76a3-b925-e37ba55b7540",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 297,
+  "settings": {
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "note": "for the game: tools/characters/meshy.py anim guard <rig task> 32 sit"
+ }
+]

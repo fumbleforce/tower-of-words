@@ -10,11 +10,11 @@ import { chibiFiles, chibiFrom, CHIBI_CAST } from './chibi.js';
 
 // Standing heights next to Mio (1.12) and Eric (1.2). While a model waits for Jørgen's approval it only loads with
 // ?cast3d=<id>[,<id>]; approved ids go in CAST3D_ON.
-export const CAST3D = { mori: 1.09, kenji: 1.12, kuro: 1.12, aoi: 1.09, emi: 1.09 };
+export const CAST3D = { mori: 1.09, kenji: 1.12, guard: 1.09, kuro: 1.12, aoi: 1.09, emi: 1.09 };
 // Kuro: Review kuro-meshy-orig-3 (Jørgen, 2026-10-04: "Yes, very good"); Aoi and Emi: Reviews aoi-meshy-1 and
 // emi-meshy-1, round 2; the staff from Reviews <id>-meshy-1, made the same way (Jørgen, 2026-10-05: "can you also
 // kick off the remaining staff and background characters in the new style")
-const CAST3D_ON = ['kuro', 'aoi', 'emi', 'mori', 'kenji'];
+const CAST3D_ON = ['kuro', 'aoi', 'emi', 'mori', 'kenji', 'guard'];
 const Q3 = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
 // only in a page: the unit tests import the cast in Node, where everyone stays code-built (as in chibi.js)
 const PAGE = typeof addEventListener === 'function';
@@ -22,10 +22,11 @@ const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter(
   (id) => PAGE && CAST3D[id] && !CHIBI_CAST.includes(id),
 );
 // The Meshy cast has no phone pose or library gestures: their scenes use the drawn ones (rig-gestures.js)
-const NO_EXTRAS = ['kuro', 'aoi', 'emi', 'mori', 'kenji'];
+const NO_EXTRAS = ['kuro', 'aoi', 'emi', 'mori', 'kenji', 'guard'];
 // Hand bones scaled at load (Jørgen on aoi-1: "her hands are larger than the others"; at 0.75 hers are between Kuro's
 // and Mio's, art/candidates/aoi-emi-meshy-2/hand_area.py); the rest is as Meshy made her
-const HANDS = { aoi: 0.75 };
+// The guard's came out larger still (0.139 of his height, Eric's 0.107; aoi-emi-meshy-2/hands.py): 0.75 brings them to Eric's
+const HANDS = { aoi: 0.75, guard: 0.75 };
 const PRE3 = {};
 const warn = (id) => (e) => {
   console.warn('3D cast', id, e);
@@ -61,6 +62,11 @@ export function meshyPerson(m) {
   (hb || m.root).add(m.head);
   m.headK = O();
   let last = null;
+  const bones = {};
+  m.model.traverse((o) => o.isBone && /^(Head|Spine)$/.test(o.name) && (bones[o.name] ??= o));
+  // m.lean = { head: [forward, side], spine: forward } (radians, about the body's own axes) bends the head and upper
+  // back over whatever the clip did this frame: Hamada asleep on the train (places/train.js); null leaves the clip
+  m.lean = null;
   const sks = [];
   m.model.traverse((o) => o.isSkinnedMesh && sks.push(o));
   // on the game's clock, which moves them (a sped-up or paused game, a slow frame): on the wall clock their steps
@@ -78,6 +84,7 @@ export function meshyPerson(m) {
       m.root.position.y = 0;
     }
     m.update(dt);
+    if (m.lean) leanOver(m, bones);
   };
   for (const sk of sks) sk.onBeforeRender = step;
   m.stepNow = step; // a gesture tween takes the frame's step first (rig-gestures.js boneTween)
@@ -86,6 +93,26 @@ export function meshyPerson(m) {
     m.sitAt(m.root.position.x, SEAT_Y, m.root.position.z, m.root.rotation.y);
   };
   return m;
+}
+// turn a bone by `a` radians about one of the body's axes ('x' side, 'z' forward), as rig-gestures.js turn()
+const _pw = new THREE.Quaternion(),
+  _r = new THREE.Quaternion(),
+  _mq = new THREE.Quaternion(),
+  _ax = new THREE.Vector3();
+function bend(root, b, axis, a) {
+  if (!b || !a) return;
+  root.getWorldQuaternion(_mq);
+  _ax.set(axis === 'x' ? 1 : 0, 0, axis === 'z' ? 1 : 0).applyQuaternion(_mq);
+  b.parent.updateWorldMatrix(true, false);
+  b.parent.getWorldQuaternion(_pw);
+  _r.setFromAxisAngle(_ax, a);
+  b.quaternion.premultiply(_pw.clone().invert().multiply(_r).multiply(_pw));
+}
+function leanOver(m, bones) {
+  const { head = [0, 0], spine = 0 } = m.lean;
+  bend(m.root, bones.Spine, 'x', spine);
+  bend(m.root, bones.Head, 'x', head[0]);
+  bend(m.root, bones.Head, 'z', head[1]);
 }
 export const meshy3 = (id) => {
   const p = PRE3[id];

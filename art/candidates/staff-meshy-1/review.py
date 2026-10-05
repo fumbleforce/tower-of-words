@@ -62,6 +62,34 @@ P = {
        'one piece, Meshy retexture styled from d1, auto-rig at 1.1 m, Meshy sit. Head share 0.46. Slimmer than his '
        'portrait. In the game at 1.12 tall in place of his code-built body. 23 Meshy credits; five pictures $1.23.',
   q='Is Kenji right?'),
+ 'guard': dict(
+  name='Mr. Ishibashi (the guard)', he='he', his='his', pic='d1', attempt='guard-1',
+  steps='ChatGPT pictures. Every take, in order, with your words as written: 1 "make a 3d chibi anime character in the '
+        'style of the attached image" (a1, a2; a1 has his hands out and stands at an angle, so it went on), 2 "Simplify '
+        'male character a LOT to match the detail level of the other chibi, with open eyes" (b1), 3 "Simpler head model, '
+        'no glasses, no name plate, no shoulder patch" (c1: glasses, name plate, badge and patch gone; the thin '
+        'moustache became a thick one), then your angle prompt with "he" and "his" (d1). Head share in d1: 0.41 (Eric '
+        '0.46, Kuro 0.41, Aoi 0.40, Emi 0.43), so no head-size follow-up. 5 takes, $1.24.',
+  shape='Meshy\'s previews; first roll, kept.',
+  uv='68 polygons, red; his eyes are modelled as separate sunken pieces, so they are added to the face\'s piece '
+     '(the script\'s new also= option) and painted with it',
+  faces='From below the chin in the texture\'s own colours: no black marks on the skin (cheek_fix.py finds no dark '
+        'texels on the skin under his jaw). There are grey-blue streaks along the underside of his moustache and a pale '
+        'blue patch under his chin, both only visible from below; the game\'s camera looks down on him, so the texture '
+        'is in the game as Meshy painted it. Say if they should be repainted.',
+  measure='Head share on the models (straight-on, flat colour, rest pose, each figure at the same height): Eric 0.46, '
+          'Kuro 0.41, Aoi 0.40, Emi 0.43, the guard 0.46 (0.41 in the picture). Hands, counted from the rig\'s hand '
+          'bones: 0.139 of his height, against Eric 0.107, Mio 0.105, Kenji 0.102, Mori 0.093. So, as for Aoi, the game '
+          'scales his two hand bones to 0.75 when he loads (0.104, Eric\'s size); the live viewer shows them as Meshy '
+          'made them.',
+  game='Meshy auto-rig at 1.1 m, 5 credits, and Meshy\'s Chair_Sit_Idle_F for his chair at the gate desk, 3 credits.',
+  credits='Meshy credits for the guard: 23 (shape 5, texture 10, rig 5, sit 3); balance 297 after him.',
+  ingame='In the game (day 1, 1366x860, test mode): the gate from above, and the guard seated at his desk as Eric '
+         'comes up to it, and at "nine o\'clock" (the clock emote over him).',
+  note='The rigged model from d1 (chat a1, b1, c1, d1): smart topology, 1,050 polygons, our UV layout with the face and '
+       'eyes in one piece, Meshy retexture styled from d1, auto-rig at 1.1 m, Meshy sit. Head share 0.46. In the game at '
+       '1.09 tall in place of his code-built body, hand bones at 0.75. 23 Meshy credits; five pictures $1.24.',
+  q='Is the guard right?'),
 }
 
 
