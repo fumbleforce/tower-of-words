@@ -34,6 +34,22 @@
         {"id": "fix240-seats-desk", "image": "bible/shots/showcase/emi-office-1/fix240-seats-desk.webp", "caption": "Every seat checked, with who sits there, desktop"},
         {"id": "fix240-seats-phone", "image": "bible/shots/showcase/emi-office-1/fix240-seats-phone.webp", "caption": "Every seat checked, phone"}
       ]
+    },
+    {
+      "title": "Emi faces the door (#241)",
+      "caption": "Jørgen: \"can you turn emi around, it doesnt make sense to have her back to the door, and the guest seat on the inner side of the office\". Her desk is turned round: she sits on the far side facing the doorway, and the guest chair is between the doorway and her desk, facing her. The window panel is now on the wall beside her, the calendar on the partition, the cabinet with the team photo behind her, and the coat stand and the bookcase with the prints by the doorway.",
+      "images": [
+        {"id": "fix241-before-face-desk", "image": "bible/shots/showcase/emi-office-1/fix241-before-face-desk.webp", "caption": "Before: from the doorway, desktop"},
+        {"id": "fix241-after-face-desk", "image": "bible/shots/showcase/emi-office-1/fix241-after-face-desk.webp", "caption": "After: from the doorway, desktop"},
+        {"id": "fix241-before-face-phone", "image": "bible/shots/showcase/emi-office-1/fix241-before-face-phone.webp", "caption": "Before: from the doorway, phone"},
+        {"id": "fix241-after-face-phone", "image": "bible/shots/showcase/emi-office-1/fix241-after-face-phone.webp", "caption": "After: from the doorway, phone"},
+        {"id": "fix241-before-close-desk", "image": "bible/shots/showcase/emi-office-1/fix241-before-close-desk.webp", "caption": "Before: from the game camera's side, desktop"},
+        {"id": "fix241-after-close-desk", "image": "bible/shots/showcase/emi-office-1/fix241-after-close-desk.webp", "caption": "After: from the game camera's side, desktop"},
+        {"id": "fix241-before-overview-desk", "image": "bible/shots/showcase/emi-office-1/fix241-before-overview-desk.webp", "caption": "Before: all of B2, desktop"},
+        {"id": "fix241-after-overview-desk", "image": "bible/shots/showcase/emi-office-1/fix241-after-overview-desk.webp", "caption": "After: all of B2, desktop"},
+        {"id": "fix241-before-overview-phone", "image": "bible/shots/showcase/emi-office-1/fix241-before-overview-phone.webp", "caption": "Before: B2, phone"},
+        {"id": "fix241-after-overview-phone", "image": "bible/shots/showcase/emi-office-1/fix241-after-overview-phone.webp", "caption": "After: B2, phone"}
+      ]
     }
   ],
   "links": [{"label": "Play it", "href": "game3d/"}]
