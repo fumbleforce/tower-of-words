@@ -102,11 +102,36 @@ await withBrowserJob('tickets-check', async (browser) => {
     const status = await page.evaluate(async () => (await import('./js/narrative/state.js')).flags.ticket_T0002);
     ok(status === 'progress', `${tag}: Take ticket left it ${status}`);
     await shot(page, '3-taken');
+    const paidNow = async () => +(await page.textContent('#ticketsApp .sum')).replace(/[^\d]/g, '');
+    const paid0 = await paidNow(); // what earlier tickets (day 1's) have paid already
     if (phone) {
       await page.click('#ticketsApp .tk-back');
       await page.waitForTimeout(200);
       ok(await page.isVisible('#ticketsApp .tk-list'), `${tag}: Back didn't return to the list`);
       await shot(page, '4-back');
+    }
+    // the keyboard (#235): Enter on a row opens it and the arrows then move through the list; the focus stays in the
+    // app each time (on the selected row, or on the phone's ticket, its Take or Back button)
+    const focusAt = () =>
+      page.evaluate(() => {
+        const a = document.activeElement,
+          app = document.getElementById('ticketsApp');
+        return {
+          inApp: app.contains(a) && a.getClientRects().length > 0,
+          sel: app.querySelector('.tk-rows .on')?.dataset.id || null,
+        };
+      });
+    await page.focus('#ticketsApp .tk-rows .tk-row[data-id="T-0001"]');
+    for (const [key, want] of [
+      ['Enter', 'T-0001'],
+      ['ArrowDown', 'T-0002'],
+      ['ArrowUp', 'T-0001'],
+    ]) {
+      await page.keyboard.press(key);
+      await page.waitForTimeout(150);
+      const f = await focusAt();
+      ok(f.inApp, `${tag}: after ${key} the focus left the ticket app`);
+      ok(f.sel === want, `${tag}: after ${key} ${f.sel} is selected, not ${want}`);
     }
     // 閉じる Close closes the app
     await page.click('#ticketsApp .tk-close');
@@ -139,7 +164,8 @@ await withBrowserJob('tickets-check', async (browser) => {
     await page.waitForSelector('#ticketsApp:not([hidden])', { timeout: 10000 });
     await page.waitForTimeout(400);
     ok(/Paid/.test(await page.textContent('#ticketsApp .d-meta')), `${tag}: the closed ticket doesn't say Paid`);
-    ok(/¥5,000/.test(await page.textContent('#ticketsApp .tk-info')), `${tag}: the status bar doesn't show ¥5,000 paid`);
+    const paid1 = await paidNow();
+    ok(paid1 - paid0 === 5000, `${tag}: the status bar's paid went from ¥${paid0} to ¥${paid1}, not ¥5,000 more`);
     await shot(page, '8-paid-app');
     await page.click('#ticketsApp .tk-close');
     await ctx.close();
