@@ -13,7 +13,7 @@ const STUBS = {
     export const lineHTML = (t) => t;`,
   '/js/settings.js': `export const settings = { skipUnread: false, textSpeed: 'normal', autoSpeed: 'normal' };
     export const CPS = {}; export const AUTO_WAIT = { normal: [500, 30] };`,
-  '/js/ui/portraits.js': 'export function showPortraits() {} export function resetPortraitSpeaker() {}',
+  '/js/ui/portraits.js': 'export function showPortraits() {} export function resetPortraitSpeaker() {} export function clearPortraits() {}',
   '/js/ui/door-card.js': 'export function showDoorCard() {}',
   '/js/ui/backlog.js': `export const lineId = (w, t) => t; export const wasRead = () => true; export function markRead() {}
     export function logLine() {} export const logToJSON = () => []; export function logLoad() {}

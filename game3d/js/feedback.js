@@ -211,6 +211,8 @@ async function send() {
   }
   busy = true;
   btn.disabled = true;
+  btn.classList.add('sending');
+  btn.textContent = 'Sending…';
   status('Sending…');
   const ac = new AbortController();
   sending = ac;
@@ -251,6 +253,8 @@ async function send() {
     if (sending === ac) sending = null;
     busy = false;
     btn.disabled = false;
+    btn.classList.remove('sending');
+    if (!sent) btn.textContent = 'Send';
     if (sent) btn.focus();
   }
 }

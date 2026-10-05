@@ -2,7 +2,7 @@ import { $, el } from './dom.js';
 import { lineHTML } from '../lang.js';
 import { settings, CPS } from '../settings.js';
 import { voice, stopVoice } from '../audio/core.js';
-import { showPortraits, resetPortraitSpeaker } from './portraits.js';
+import { showPortraits, resetPortraitSpeaker, clearPortraits } from './portraits.js';
 import { heardHTML, scramble, reveal, addPlayButtons, whileUnpaused } from './dialogue-text.js';
 import { showDoorCard } from './door-card.js';
 import { lineId, wasRead, markRead, logLine, logToJSON, logLoad } from './backlog.js';
@@ -255,8 +255,20 @@ export function createDialogue({ sfx }) {
         if (ch.hidden !== hd) ch.hidden = hd;
       }
     },
-    closeTalk() {
+    // The box only hides here; a reply list with no prompt of its own (runner `choice`, keepLine) shows it again with
+    // whatever it held. That is wanted within a scene (Mori's line stays over "Mime the ski-jump landing" after his
+    // gesture), but after text messages, or once the scene is over (`sceneOver`, main.js beat), what it held is
+    // emptied: Jørgen, day 3 at the desk, "mio is still showing in the dialogue after she sent messages before".
+    closeTalk({ sceneOver = false } = {}) {
       const t = $('#talk');
+      if (sceneOver || t.classList.contains('phone')) {
+        t.querySelector('.who').innerHTML = '';
+        t.querySelector('.line').innerHTML = '';
+        t.querySelector('.chips').innerHTML = '';
+        t.classList.remove('phone', 'heard');
+        showDoorCard(t, null);
+        clearPortraits();
+      }
       t.hidden = true;
       $('#stage').hidden = true;
       resetPortraitSpeaker();

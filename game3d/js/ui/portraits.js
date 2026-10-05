@@ -330,6 +330,11 @@ function watchTalk() {
 }
 setTimeout(watchTalk, 0);
 
+// the talk box was emptied (ui/dialogue.js closeTalk): nobody's picture comes back with it
+export function clearPortraits() {
+  for (const el of document.querySelectorAll('#stage .por')) el.hidden = true;
+}
+
 export function resetPortraitSpeaker() {
   lastNpc = null;
 }
