@@ -1,0 +1,143 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "rdbtAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "office room",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "people",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "A0",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "GE",
+    0
+   ],
+   "seed": 7001,
+   "steps": 30,
+   "cfg": 5.0,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 0.5
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "blockout/s1-ref"
+  }
+ },
+ "P0": {
+  "class_type": "ModelPatchLoader",
+  "inputs": {
+   "name": "anima-lllite-lineart-1.safetensors"
+  }
+ },
+ "I0": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "s1-lines.png"
+  }
+ },
+ "A0": {
+  "class_type": "AnimaLLLiteApply",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "model_patch": [
+    "P0",
+    0
+   ],
+   "image": [
+    "I0",
+    0
+   ],
+   "strength": 0.9,
+   "start_percent": 0.0,
+   "end_percent": 0.7
+  }
+ },
+ "G": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "empty.png"
+  }
+ },
+ "GE": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "G",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ }
+}
