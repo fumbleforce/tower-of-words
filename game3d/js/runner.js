@@ -2,7 +2,7 @@ import { newFrame, readCheckpoint } from './narrative/checkpoint.js';
 import { flagKeys } from './narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/runner.js');
 import { DEFAULT_SPEAKERS } from './narrative/speakers.js';
-import { MC, PLAYER_ID, expandMc, isPlayer } from './mc.js';
+import { MC, PLAYER_ID, expandMc } from './mc.js';
 import { storyPath } from './days.js';
 // Runs the story files (game3d/story/*.js, format in game3d/story/FORMAT.md) against a place.
 import { voiceThenBeat } from './ui.js';
@@ -12,7 +12,7 @@ import { recordHeard } from './narrative/heard-record.js';
 import { walkClear } from './movement/doorways.js';
 import { flags, cond } from './narrative/state.js';
 export { flags, cond } from './narrative/state.js';
-import { lineKey, heardKey, audioKeys } from './narrative/voice-keys.js';
+import { lineClip, audioKeys } from './narrative/voice-keys.js';
 import { playAmbient } from './narrative/ambient-lines.js';
 
 // hooks that keep the current line on screen (they belong to it)
@@ -291,7 +291,7 @@ export class Runner {
     this.lastStep = s;
     if (typeof s === 'string') return this.line(s);
     if (s.face && s.say) setFace(s.say, s.face);
-    if (s.say) return this.sayLine(s.say, s.text, s.voice || (s.overheard ? heardKey(s.text) : undefined), s.name, s);
+    if (s.say) return this.sayLine(s.say, s.text, s.voice, s.name, s);
     if (s.choice) return this.choice(s, context, key, cursor);
     if (s.offer) return this.offer(s, context, key);
     if (s.learn) {
@@ -353,15 +353,7 @@ export class Runner {
   async sayLine(who, text, voiceKey, name, s = {}) {
     const sp = name ? { ...this.speaker(who), name, role: '' } : this.speaker(who);
     this.game.talkingTo = who;
-    if (!voiceKey && !isPlayer(who) && !s.overheard) {
-      const k = lineKey(who, text);
-      if (audioKeys.has(k)) voiceKey = k;
-    }
-    // the player's lines in the protagonist's voice (data/mc/<id>.json voice.lines)
-    if (!voiceKey && isPlayer(who)) {
-      const k = lineKey(MC.voice.lines, text);
-      if (audioKeys.has(k)) voiceKey = k;
-    }
+    voiceKey ||= lineClip(who, text, s.overheard); // the protagonist's own clip, the shared one, or none
     if (voiceKey && s.overheard && !audioKeys.has(voiceKey)) voiceKey = null;
     this.game.setHurry?.(false);
     const shown = ui.say(sp, text, {

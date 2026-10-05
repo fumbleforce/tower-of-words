@@ -64,13 +64,24 @@ export function expandMc(v, mc = MC, seen = new Set()) {
   return v;
 }
 
-// The player's word clips are named after Eric's (lang.js and story `voice: 'eric-<word>'`); another protagonist's
-// are <voice.words>-<word>
+// ---------- voice clips (docs/game/systems.md, Protagonists) ----------
+// The default protagonist's clips keep the keys they always had. Another protagonist's own clip of a line: for a
+// word clip eric-<word>, <id>-<word>; for any other line, <key>-<id> (the player's lines, and a line whose text a
+// {mc.*} token changes). tools/voice-manifest.mjs lists them; the game plays one when it exists.
 const ERIC_CLIP = PROTAGONISTS[DEFAULT_MC].voice.words + '-';
-export const playerClip = (key, mc = MC) =>
-  key.startsWith(ERIC_CLIP) && mc.voice.words !== PROTAGONISTS[DEFAULT_MC].voice.words
-    ? mc.voice.words + '-' + key.slice(ERIC_CLIP.length)
-    : key;
+export const ownClip = (key, mc = MC) =>
+  mc.id === DEFAULT_MC
+    ? key
+    : key.startsWith(ERIC_CLIP)
+      ? mc.id + '-' + key.slice(ERIC_CLIP.length)
+      : key + '-' + mc.id;
+// The player's word clips (lang.js and story `voice: 'eric-<word>'`): the protagonist's own when `has` says it exists,
+// else the stand-in voice.words-<word> (Eric's while a protagonist has no voice of their own)
+export function playerClip(key, mc = MC, has = () => false) {
+  if (!key.startsWith(ERIC_CLIP) || mc.id === DEFAULT_MC) return key;
+  const own = ownClip(key, mc);
+  return has(own) ? own : mc.voice.words + '-' + key.slice(ERIC_CLIP.length);
+}
 
 // ---------- the save ----------
 // a save from before protagonists played Eric with the default cast

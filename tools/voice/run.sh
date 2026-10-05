@@ -6,7 +6,8 @@
 #   3. three takes per line (gen_takes.py), checked (check_takes.py); up to two retry rounds with new seeds for lines
 #      with no passing take
 #   4. export the best passing take (export.py); edge-tts for lines still failing only with EDGE_FALLBACK=1 (edge.py), else exit 1
-#   5. re-time known words in new overheard clips (spans.py), release the lock, run voice-manifest --check
+#   5. re-time known words in new overheard clips (spans.py), release the lock, run voice-manifest --check --voiced (the protagonists
+#      with a voice reference; one without has no lines in the manifest yet, docs/game/systems.md, Protagonists)
 # A step that exits non-zero (the manifest rewrite, a crash, a setup error, a lost lock) stops the batch with exit 1 and the end of its output;
 # only takes that were made and checked can count as "no passing take".
 # Usage: sh tools/voice/run.sh [--no-manifest] [--dry]   (--dry: list the lines that need a clip, check the setup, stop)
@@ -48,7 +49,7 @@ step() {
 for py in "$BENCH_PY" "$QWEN_PY"; do command -v "$py" > /dev/null || die "no Python at $py (QWEN_PY, BENCH_PY: see the voice-clips skill)"; done
 case " $* " in *" --no-manifest "*) ;; *) step voice_manifest all node "$REPO/game3d/tools/voice-manifest.mjs" ;; esac
 MISSING=$($BENCH_PY "$HERE/cfg.py" missing) || die "tools/voice/cfg.py could not list the lines with no clip (error above)"
-if [ -z "$MISSING" ]; then say "every line has a clip"; node "$REPO/game3d/tools/voice-manifest.mjs" --check; exit $?; fi
+if [ -z "$MISSING" ]; then say "every line has a clip"; node "$REPO/game3d/tools/voice-manifest.mjs" --check --voiced; exit $?; fi
 say "lines with no clip: $MISSING"
 # before the GPU lock: a missing reference or transcript would otherwise fail every take and look like "no passing take"
 SETUP=$($BENCH_PY "$HERE/cfg.py" setup "$MISSING" 2>&1) || { say "$SETUP"; die "the voice setup is incomplete (above); fix it before the batch waits for the GPU"; }
@@ -94,7 +95,7 @@ if [ "$OVERHEARD" = True ]; then
   step spans spans env DEV=cuda "$BENCH_PY" "$HERE/spans.py"
 fi
 release; trap - EXIT
-CHECK=$(node "$REPO/game3d/tools/voice-manifest.mjs" --check); RC=$?
+CHECK=$(node "$REPO/game3d/tools/voice-manifest.mjs" --check --voiced); RC=$?
 say "$CHECK"
 say "log: $LOG"
 exit $RC
