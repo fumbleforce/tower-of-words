@@ -155,7 +155,7 @@ const FIRE = {
     play(m, '.vm-led', [{ opacity: 1, fill: '#fff' }, { opacity: 0.2 }, { opacity: 1, fill: '#fff' }, { opacity: 1 }], { duration: 420 });
     play(m, '.vm-sign', [{ opacity: 1 }, { opacity: 0.55 }, { opacity: 1 }], { duration: 300, iterations: 2 });
     // The can drops with a clunk, then the flap swings up as it is taken out.
-    play(m, '.vm-art', [{ transform: 'none' }, { transform: 'translateY(1.5%) scale(1.02, .98)', offset: 0.35 }, { transform: 'none' }], { duration: 300, delay: 160, easing: 'ease-out' });
+    play(m, '.vend-art', [{ transform: 'none' }, { transform: 'translateY(1.5%) scale(1.02, .98)', offset: 0.35 }, { transform: 'none' }], { duration: 300, delay: 160, easing: 'ease-out' });
     play(m, '.vm-drop', [{ opacity: 0, transform: 'translateY(-14px)' }, { opacity: 1, transform: 'none', offset: 0.25 }, { opacity: 1, transform: 'none', offset: 0.6 }, { opacity: 0, transform: 'none' }], { duration: 900, delay: 120, easing: 'ease-in' });
     play(m, '.vm-flap', [{ transform: 'none' }, { transform: 'none', offset: 0.3 }, { transform: 'scaleY(.2)', offset: 0.5 }, { transform: 'scaleY(.2)', offset: 0.75 }, { transform: 'none' }], { duration: 1000, easing: 'ease-out' });
     return 420;

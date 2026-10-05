@@ -77,3 +77,20 @@ test('every action is a tap: nothing in Kotodama drags', async () => {
     assert.doesNotMatch(src, /drag\.js|pointermove|dragstart|touchmove|draggable/, f);
   }
 });
+
+test('every dispense animation targets a part its machine draws', async () => {
+  // #236 (Codex X-0535): the vending body squish aimed at .vm-art, a class the drawing never had
+  globalThis.matchMedia ??= () => ({ matches: false }); // what fx.js reads at load
+  globalThis.location ??= { search: '?fast' }; // ?fast: the dispense waits a quarter as long
+  const { MACHINE_ART, fireMachine } = await import('../../minigames/kotodama/machines.js');
+  for (const [id, art] of Object.entries(MACHINE_ART)) {
+    const classes = new Set([...art().matchAll(/class="([^"]+)"/g)].flatMap(m => m[1].split(/\s+/)));
+    const sels = [];
+    await fireMachine({ querySelectorAll: s => (sels.push(s), []) }, id);
+    assert.ok(sels.length, id);
+    for (const part of sels.flatMap(s => s.split(','))) {
+      const cls = part.trim().match(/^\.([\w-]+)/)?.[1];
+      assert.ok(classes.has(cls), `${id}: ${part.trim()} matches nothing in its drawing`);
+    }
+  }
+});
