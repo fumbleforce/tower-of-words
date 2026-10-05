@@ -658,7 +658,9 @@ function notFound() { return `<div class="page"><h1>Not found</h1><p><a href="#h
 // saved by the Send button through tools/review_server.py (POST /api/review/<id>). Drafts are kept in this browser
 // until sent, so a half-written comment survives a reload.
 const RSTATUS = { open: 'open', decided: 'decided', superseded: 'superseded' };
-const openReviews = () => (L.reviews || []).filter((r) => (r.status || 'open') === 'open');
+// Waiting for a pick: open and not answered since the item last changed (an agent posting a new round sets `updated`).
+const answered = (r) => !!(r.feedback && r.feedback.sent && (!r.updated || r.feedback.sent >= r.updated));
+const openReviews = () => (L.reviews || []).filter((r) => (r.status || 'open') === 'open' && !answered(r));
 const unread = (r) => r.feedback && r.feedback.sent && !r.feedback.read;
 // Both kinds of answer share the draft, send and status code; `kind` is 'review' or 'showcase'.
 const FOLDER = { review: 'reviews', showcase: 'showcase' };
