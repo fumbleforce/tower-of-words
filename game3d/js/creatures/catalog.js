@@ -51,6 +51,11 @@ export const CREATURES = {
     { id: 'dragonflies', kind: 'dragonfly', n: 4, when: 'day' },
     { id: 'cat', kind: 'cat', n: 1, when: 'evening', coat: 'black' },
   ],
+  pool: [
+    { id: 'sparrows', kind: 'sparrow', n: 3, when: 'day' },
+    { id: 'crows', kind: 'crow', n: 2, when: 'all' },
+    { id: 'dragonflies', kind: 'dragonfly', n: 3, when: 'day' },
+  ],
   office_quarter: [
     { id: 'pigeons', kind: 'pigeon', n: 6, when: 'day' },
     { id: 'sparrows', kind: 'sparrow', n: 3, when: 'day' },

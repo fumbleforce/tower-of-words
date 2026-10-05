@@ -1,6 +1,6 @@
 // The sports ground, walked up the north street from the east lane, west along the gym's front, up the pool walk
-// and east along the courts walk to the onsen path (docs/game/places.md). The gym and the pool are shut for now and
-// say so. South down the north street goes back to the east lane; east along the courts walk goes on to the onsen
+// and east along the courts walk to the onsen path (docs/game/places.md). The gym is shut for now and says so; the
+// pool's door leads through the shower pavilion onto the pool deck. South down the north street goes back to the east lane; east along the courts walk goes on to the onsen
 // path and the east coast; west along the lane round the gym's corner goes on to the office street.
 export default {
   start: 'arrive',
@@ -12,7 +12,7 @@ export default {
     'talk:office_street': 'to_offices',
     'zone:west_exit': 'to_offices',
     'talk:gym': 'shut',
-    'talk:pool': 'shut',
+    'talk:pool': 'to_pool',
   },
   goal: { north_street: 'true' },
   nodes: {
@@ -24,5 +24,6 @@ export default {
     to_east_lane: [{ do: 'trip', to: 'east_lane' }],
     to_coast: [{ do: 'trip', to: 'east_coast' }],
     to_offices: [{ do: 'trip', to: 'office_quarter' }],
+    to_pool: [{ do: 'trip', to: 'pool' }],
   },
 };

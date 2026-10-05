@@ -858,6 +858,36 @@
       "people": [],
       "hooks": []
     },
+    "pool": {
+      "things": {
+        "changing_room": {
+          "label": "To the changing room",
+          "kind": "thing",
+          "verb": "Go"
+        }
+      },
+      "spots": [
+        "deck_in",
+        "pool_steps",
+        "pool_blocks",
+        "lifeguard_chair",
+        "deck_benches",
+        "float_rack",
+        "pool_fence_corner",
+        "pool_lost_property"
+      ],
+      "nooks": [
+        "pool_fence_corner",
+        "pool_lost_property"
+      ],
+      "seats": [
+        "deck_bench_n",
+        "deck_bench_s"
+      ],
+      "zones": [],
+      "people": [],
+      "hooks": []
+    },
     "office_quarter": {
       "things": {
         "sports_lane": {

@@ -52,6 +52,8 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `sports` → `east_lane`, walk: the same walk the other way, south down the north street toward the back lane, crossfading to him walking on south past it.
 - `sports` → `east_coast`, walk: Eric walks east along the courts walk to its end; the camera closes in and crossfades to the same close framing of him walking on east to the foot of the onsen path, as the camera lets go. With the east lane and the east coast this closes a loop: up the north street, round by the pool and the courts, down the coast and back along the dorm row.
 - `east_coast` → `sports`, walk: the same walk the other way, west from the onsen path's foot along the courts walk, crossfading to him walking on west past the courts.
+- `sports` → `pool`, walk: Eric goes in at the shower pavilion's door at the pool walk's end; the camera closes in on him at the door and crossfades to the same close framing of him walking out of the men's changing room onto the deck, as the camera lets go. The changing room itself is not shown.
+- `pool` → `sports`, walk: the same way back, in at the men's changing room's door on the deck, crossfading to him walking out of the pavilion's door onto the pool walk, heading west.
 - `sports` → `office_quarter`, walk: Eric walks west along the sports lane past the gym's front, north round the gym's corner and west into the office street; the camera closes in and crossfades to the same close framing of him walking on west along the street, as the camera lets go.
 - `office_quarter` → `sports`, walk: the same corner the other way, east along the street, south round the gym's corner and east along the sports lane, crossfading to him walking on east toward the gym's front.
 - `office_quarter` → `harbour`, walk: Eric walks west along the office street past Amakawa Trading toward the harbour walk's mouth; the camera closes in and crossfades to the same close framing of him walking on west along the street past the walk's mouth, toward the supply yard, as the camera lets go.
@@ -89,6 +91,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `east_lane` | 69.27 | -2.75 | 0 | 1 | 0 | The middle of the pocket park's gravel square, where its two walks cross. Its camera turns: north-east over most of it, south-east over the south walk. |
 | `east_coast` | 126.5 | 10.5 | 0 | 1 | 0 | The middle of the dorms' sea terrace, at the dorm row's east end. Its camera turns: east along the row, north-east up the coast, north at the onsen. |
 | `sports` | 58.2 | -57.5 | 0 | 1 | 0 | The corner where the pool walk meets the courts walk. Its camera turns: a little east of north over the lane and the pool walk, east-north-east at the pavilion, east along the courts walk. |
+| `pool` | 58.2 | -57.5 | 0 | 1 | 0 | The sports ground's own frame and world, walked on the deck inside the pool's fence. Its camera looks a little east of north up the pool from the south-west. |
 | `office_quarter` | 4.5 | -54 | 0 | 1 | 0 | The office street where the quarter street meets it. Its camera turns: north-north-west along the street, north up the walks, from the south-east in the quarter street's mouth, as the sports lane by the gym. |
 | `harbour` | -100 | -88 | 0 | 1 | 0 | The corner of the quay where the ferry landing meets the supply yard. Its camera turns: the office street's look on the street and the harbour walk, a little west of north over the yard, the landing and the piers. |
 | `works` | -82 | -104 | 0 | 1 | 0 | The middle of the works lane where it meets the works yard. Its camera turns: from the south-east up the lane, from a little east of south over the yard, from the south-east on the hall apron, from the south-west up the street and the research walk. |
@@ -682,7 +685,7 @@ The north street and the sports lane are the lanes' brick between pale borders, 
 
 The gym: a long hall of pale concrete on a granite plinth under a shallow barrel-vaulted roof of muted green with standing seams, overhanging, its eaves and arched ends edged dark. Pilasters run down the long sides with a band of clerestory glass between them under the eaves; the south end carries the wall up into the arch with a lunette of glass and mullions. On the south face, on the door's axis, a glass front in a dark frame with two pairs of glass doors, shut, a white card on the glass of each: 準備中 CLOSED; a flat canopy on two posts over it with たいいくかん GYM on a board standing on its front edge, two lights under it, and beds of low shrubs either side between the face and the lane.
 
-The pool: behind a steel mesh fence, a deck of pale slabs round a 25 m pool of six lanes in a white coping, the lane lines dark under the water, lane ropes of blue and white floats with red at the ends, starting blocks at the pavilion's end and a ladder at each of that end's corners; a lifeguard's chair by its middle and white loungers down the east side. The shower pavilion closes the deck's north side: one tall storey of white walls on a plinth, a blue band round it, frosted windows high up, a flat roof with its plant and two rows of solar water heaters. Its door is on the west face at the end of the pool walk: glass in a dark frame under a canopy with プール POOL on a board on its front edge and a 準備中 CLOSED card on the glass. On the deck side the two changing rooms' doors, a blue and a red plate by them, and shower heads on the wall between. The pool walk has gravel against the gym's wall on one side and ground cover and lamps along the pool's fence on the other.
+The pool: behind a steel mesh fence, a deck of pale slabs round a 25 m pool of six lanes in a white coping, the lane lines dark under the water, lane ropes of blue and white floats with red at the ends, starting blocks at the pavilion's end and a ladder at each of that end's corners; a lifeguard's chair by its middle and white loungers down the east side. The shower pavilion closes the deck's north side: one tall storey of white walls on a plinth, a blue band round it, frosted windows high up, a flat roof with its plant and two rows of solar water heaters. Its door is on the west face at the end of the pool walk: glass in a dark frame under a canopy with プール POOL on a board on its front edge. It opens: through it and the men's changing room is the pool deck (`pool`, below). On the deck side the two changing rooms' doors, a blue and a red plate by them, and shower heads on the wall between. The pool walk has gravel against the gym's wall on one side and ground cover and lamps along the pool's fence on the other.
 
 Along the courts walk: a clipped hedge in front of the pool's and the courts' fences, two paved bays on its south side with a bench each looking over the walk at the pool, lamps behind the south kerb, and a hedge and the north residence's planting between the walk and the residence. The tennis courts (the east coast's, under the east coast above) have a gate in their south fence on the gate walk, its two mesh leaves shut with a chain and lock, and テニスコート TENNIS COURTS on a board on two posts beside the walk, facing west. Across the walk the north residence's door: a glazed pair in a panel of its wall under a canopy with two lights, and きたレジデンス NORTH RESIDENCE on a low wall by its walk, facing west. Trees between the pool and the courts; a wood of cherries, maples and a pine in the corner between the lane, the pool walk and the courts walk; zelkovas and cherries east of the north street up to the residence; pines, maples and zelkovas north of the gym.
 
@@ -697,7 +700,7 @@ In the morning the sun is the plaza's; after work the lamps, the gym's glass, th
 | `north_street` | To the north street | The north street's south end, back down to the east lane. |
 | `onsen_path` | To the onsen path | The courts walk's east end, on to the onsen path's foot in the east coast. |
 | `gym` | Gym | The gym's doors on its south face. Go in: shut. |
-| `pool` | Pool | The pool pavilion's door at the end of the pool walk. Go in: shut. |
+| `pool` | Pool | The pool pavilion's door at the end of the pool walk. Go in: through the men's changing room onto the pool deck (`pool`). |
 | `office_street` | To the office street | The office street west of the gym's corner, on to the office quarter. |
 
 ### Spots
@@ -744,7 +747,8 @@ The crowd ([systems.md](systems.md), The crowd):
 | Nodes | When | What happens |
 |---|---|---|
 | `arrive` | Arrive | Goal line: "Head office is back west past the plaza. Take its lift down to B2."; after work, "The dorms are back down the north street, east of the park." |
-| `shut` | Go in at the gym's or the pool's door | The door is shut; a card on the glass says 準備中: not open yet. |
+| `shut` | Go in at the gym's door | The door is shut; a card on the glass says 準備中: not open yet. |
+| `to_pool` | Go in at the pool pavilion's door | Eric walks in, and out of the men's changing room onto the pool deck. |
 | `to_east_lane` | Use or walk into the north street's south end | Eric walks back down to the east lane. |
 | `to_coast` | Use or walk into the courts walk's east end | Eric walks on east to the onsen path, in the east coast. |
 | `to_offices` | Use or walk west along the office street past the gym's corner | Eric walks on west along the office street, in the office quarter. |
@@ -759,6 +763,68 @@ The crowd ([systems.md](systems.md), The crowd):
 | `butterflies` | butterfly | 2 | `day` | Over the grass. |
 | `dragonflies` | dragonfly | 4 | `day` | Over the grass. |
 | `cat` | cat | 1 | `evening` | A black cat on a wall. Can be petted. |
+
+## Pool deck (`pool`)
+
+The deck round the outdoor pool, for the swimming club (issue #227; [days 3 to 5](../../notes/days3-5-outline.md), the season's last outdoor session). It is the sports ground's world (`sports`, above), walked inside the pool's fence instead of on the walks round it: Eric comes in through the shower pavilion, in at its door on the pool walk and out of the men's changing room onto the deck, and goes back the same way (Getting between places). The changing rooms themselves are not shown. It also loads directly with `?place=pool`, outside the changing room.
+
+Walked: the deck of pale slabs inside the fence, all the way round the pool. The water, the coping and the starting blocks are not walked; swimming is staged by a scene, never played.
+
+The pool is 25 m of six lanes in a white coping, the lane lines dark under the water, lane ropes of blue and white floats with red at the ends, six starting blocks along the pavilion's end and a steel ladder at each of that end's corners. At the south-west corner three steps go down into the first lane, each tread a paler band under the water with a white nosing, a steel rail either side curving from the coping into the water. On the pavilion's wall the two changing rooms' doors (men's west with a blue plate, women's east with a red one), the shower heads between them and a pace clock, white face, dark ring, red sweep hand. Down the west side, against the fence: a bench, the lifeguard's chair by the pool's middle with 飛び込み禁止 NO DIVING on a red board on the fence above it, and another bench. Down the east side the white loungers. Along the south fence the winter cover rolled blue on its reel between two A-frame stands, a crank on its west end; at the south-east corner a steel rack of kickboards in blue and yellow and a basket of pull buoys; at the north-east corner the attendant's folding table and chair, a clear lost-property tub and a clipboard on it.
+
+The camera looks a little east of north up the pool from the south-west and steeply, the pavilion behind the far end, following Eric. In the morning the sun is the plaza's; after work the pavilion's windows, the gym's glass and the lamps on the pool walk light up, as from the sports ground.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `changing_room` | To the changing room | The men's changing room's door on the pavilion's deck side, back through the pavilion to the pool walk. |
+
+### Spots
+
+`deck_in` (outside the men's changing room, the arrival point), `pool_steps` (on the deck at the top of the steps into the first lane), `pool_blocks` (the north end, behind the starting blocks' middle), `lifeguard_chair` (on the deck beside the lifeguard's chair), `deck_benches` (between the two benches on the west side), `float_rack` (in front of the kickboard rack); and each nook below
+
+### Nooks
+
+Small places off the deck, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `pool_fence_corner` | The deck's south-west corner, between the steps and the fence. | The reel's crank and the end of the rolled cover; the fence beside it, where things get hung up and forgotten. | Something left on the fence, waiting for its owner. |
+| `pool_lost_property` | The deck's north-east corner, by the attendant's table. | The folding table and chair, the lost-property tub and a clipboard. | Something in the tub; a word on the clipboard. |
+
+### Seats
+
+`deck_bench_n` (the bench against the west fence north of the lifeguard's chair, facing the pool), `deck_bench_s` (the one south of it, facing the pool)
+
+### Zones
+
+None.
+
+### Who's there when
+
+None of the cast yet.
+
+| Id | Usually | Schedule |
+|---|---|---|
+| `mio` | Not here. | – |
+
+No crowd.
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Arrive | Goal line: "Head office is back west past the plaza. Take its lift down to B2."; after work, "The dorms are back down the north street, east of the park." |
+| `to_sports` | Use the changing room's door | Eric walks back through the pavilion and out onto the pool walk. |
+
+### Creatures
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `sparrows` | sparrow | 3 | `day` | On the deck and the fence. |
+| `crows` | crow | 2 | `all` | On the pavilion's roof and the lamps. |
+| `dragonflies` | dragonfly | 3 | `day` | Over the grass round the fence. |
 
 ## Office street (`office_quarter`)
 
