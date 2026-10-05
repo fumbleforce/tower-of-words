@@ -1,0 +1,11 @@
+[["carina7-01","1. no 'both eyes visible'","still a stare (white round iris)",false],
+ ["carina7-02","2. plain 'slight smile'","still a stare",false],
+ ["carina7-03","3. 1 + 2 together","a little softer, wide eyes",false],
+ ["carina7-04","4. 3 + 'relaxed eyes'","calmer, lower lids",true],
+ ["carina7-05","5. 3 + 'half-lidded eyes'","calmer, lids lower",true],
+ ["carina7-06","6. 3 + 'gentle eyes'","still wide, a stare",false],
+ ["carina7-07","7. 'relaxed eyes' only","still a stare",false],
+ ["carina7-08","8. 'gentle eyes' only","slightly softer, wide",false],
+ ["carina7-09","9. smile weight 1.0 only","still a stare",false],
+ ["carina7-04-seed2","4. second seed","wide eyes again, a stare",false],
+ ["carina7-05-seed2","5. second seed","wide eyes again, a stare",false]]
