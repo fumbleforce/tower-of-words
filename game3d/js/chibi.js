@@ -276,7 +276,12 @@ export const playerBody = () => {
       loadMeshy(m.id, { dir: new URL(`../assets/${m.dir || m.id + '/'}`, import.meta.url).href, height: m.height });
   return CHIBI_ON ? loadChibi(m.chibi).catch(fallback(body)) : body();
 };
+// ?mio=meshy2: the candidate from reviews/mio-meshy-2 (assets/characters/mio2/), for checking it in the real game
+// until Jørgen picks; without it, her approved model
 export const mioBody = () => {
-  const mio = () => loadMio({ height: 1.12 });
+  const mio =
+    Q.get('mio') === 'meshy2'
+      ? () => loadMeshy('mio2', { dir: CDIR + 'mio2/', height: 1.12, extra: false })
+      : () => loadMio({ height: 1.12 });
   return CHIBI_ON ? loadChibi('mio').catch(fallback(mio)) : mio();
 };

@@ -1,6 +1,6 @@
 """Turnaround stills for the parts round (reviews/char-mio-parts-1). Blender, run with -t 8:
 
-  blender -b -t 8 -P tools/characters/parts/render.py -- <model.glb|.blend> <outdir> [size=1024] [face_z=1.38] [face_dist=0.9]
+  blender -b -t 8 -P tools/characters/parts/render.py -- <model.glb|.blend> <outdir> [size=1024] [face_z=1.38] [face_dist=0.9] [engine=cycles]
 
 Same camera and light for every attempt and for meshy-single, so they compare: a 50 mm camera at chest height,
 front, her left three-quarter (image right side turned to us), her left side, back, and a face close-up (front and
@@ -37,6 +37,8 @@ root.scale = (f, f, f)
 root.location = (-(lo.x + hi.x) / 2 * f, -(lo.y + hi.y) / 2 * f, -lo.z * f)
 
 sc.render.engine = 'BLENDER_EEVEE'
+if opt.get('engine') == 'cycles':  # CPU only, no GPU lock needed; same camera and light
+    sc.render.engine = 'CYCLES'; sc.cycles.device = 'CPU'; sc.cycles.samples = int(opt.get('samples', 32))
 sc.render.resolution_x = sc.render.resolution_y = size
 sc.render.film_transparent = True
 sc.view_settings.view_transform = 'Standard'

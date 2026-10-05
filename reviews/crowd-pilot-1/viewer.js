@@ -1,15 +1,21 @@
 // Live viewer for Review crowd-pilot-1: the two pilot crowd models (A office man, B office woman), each on two rigs,
 // built by the game's own loader (game3d/js/avatar.js meshyFrom) from the files the game would load: walk.glb,
 // run.glb, sit.glb, base.webp and the approved relaxed-3 idle baked on that rig. Nothing here is in the game.
-//   viewer.html?s=<scene>&m=<motion>   scenes and files from ./viewer.json (paths from the repo root)
+// Other rounds pass their own config (reviews/mio-meshy-2): cfg=<json url, relative to this page>; a rig with
+// "loader": "mio" is Mio's approved model through game3d/js/mio.js loadMio, as the game shows her; "halves" names the
+// two halves of a row for the close-up views (default A and B); "varietyRigs" is optional.
+//   viewer.html?s=<scene>&m=<motion>[&cfg=<json>]   scenes and files from ./viewer.json (paths from the repo root)
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { meshyFrom } from '../../game3d/js/avatar.js';
+import { loadMio } from '../../game3d/js/mio.js';
 
 const ROOT = new URL('../../', location.href).href;
-const CFG = await fetch('./viewer.json').then((r) => r.json());
 const params = new URLSearchParams(location.search);
+const CFG = await fetch(params.get('cfg') || './viewer.json').then((r) => r.json());
+CFG.varietyRigs ||= [];
+const [HA, HB] = CFG.halves || ['A', 'B'];
 document.title = CFG.title;
 document.getElementById('title').textContent = CFG.title;
 document.getElementById('blurb').textContent = CFG.blurb;
@@ -48,6 +54,7 @@ const idleClip = (u) => fetch(ROOT + u).then((r) => r.json()).then((j) => THREE.
 
 // one person from a rig's files; tex overrides its base.webp (a colour variant)
 async function person(rig, { tex, height } = {}) {
+  if (rig.loader === 'mio') return loadMio({ height: height || rig.height });
   const files = await Promise.all([load(rig.dir + 'walk.glb'), load(rig.dir + 'run.glb'), idleClip(rig.idle),
     load(rig.dir + 'sit.glb'), texture(tex || rig.dir + 'base.webp')]);
   return meshyFrom(rig.id, [...files, null], { height: height || rig.height });
@@ -61,7 +68,7 @@ function seat() {
   return m;
 }
 
-let figures = [], motion = params.get('m') || 'idle', current = null, varig = params.get('r') || CFG.varietyRigs[0];
+let figures = [], motion = params.get('m') || 'idle', current = null, varig = params.get('r') || CFG.varietyRigs[0] || '';
 function play(f) {
   f.seat.visible = motion === 'sit';
   if (motion === 'sit') return f.m.sitAt(0, 0.3, 0, 0);
@@ -123,14 +130,15 @@ let facing = 0;
 const face = (a) => { facing = a; for (const f of figures) f.g.rotation.y = a; };
 const VIEWS = {
   'whole row': () => { face(0); frameAll(); },
-  'A: shoulders and elbows': () => { face(0); frameAll(0.72, 0.85, 0); },
-  'A: hips and knees': () => { face(0); frameAll(0.3, 0.85, 0); },
-  'B: shoulders and elbows': () => { face(0); frameAll(0.72, 0.85, 1); },
-  'B: hips and knees': () => { face(0); frameAll(0.3, 0.85, 1); },
+  [`${HA}: shoulders and elbows`]: () => { face(0); frameAll(0.72, 0.85, 0); },
+  [`${HA}: hips and knees`]: () => { face(0); frameAll(0.3, 0.85, 0); },
+  [`${HB}: shoulders and elbows`]: () => { face(0); frameAll(0.72, 0.85, 1); },
+  [`${HB}: hips and knees`]: () => { face(0); frameAll(0.3, 0.85, 1); },
+  ...(CFG.halves ? { [`${HA}: face`]: () => { face(0); frameAll(0.92, 0.5, 0); }, [`${HB}: face`]: () => { face(0); frameAll(0.92, 0.5, 1); } } : {}),
   'three-quarter': () => { face(-0.7); frameAll(); },
   'from the side': () => { face(-Math.PI / 2); frameAll(); },
-  'A from the side, hips and knees': () => { face(-Math.PI / 2); frameAll(0.3, 0.85, 0); },
-  'B from the side, hips and knees': () => { face(-Math.PI / 2); frameAll(0.3, 0.85, 1); },
+  [`${HA} from the side, hips and knees`]: () => { face(-Math.PI / 2); frameAll(0.3, 0.85, 0); },
+  [`${HB} from the side, hips and knees`]: () => { face(-Math.PI / 2); frameAll(0.3, 0.85, 1); },
   'from behind': () => { face(Math.PI); frameAll(); },
 };
 
@@ -158,6 +166,7 @@ buttons('varig', CFG.varietyRigs.map((r) => [r, CFG.varietyRigLabels[r]]), (r) =
   setPressed('varig', r);
   if (CFG.scenes[current].rows) show(current);
 });
+if (!CFG.varietyRigs.length) document.getElementById('varig').previousElementSibling.hidden = true;
 buttons('views', Object.keys(VIEWS).map((k) => [k, k]), (k) => VIEWS[k]());
 let spin = false;
 document.getElementById('spin').onclick = (e) => { spin = !spin; e.target.setAttribute('aria-pressed', String(spin)); };
