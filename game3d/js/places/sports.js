@@ -13,8 +13,8 @@ import { turningCam, followFit } from './turning-cam.js';
 
 // The sports ground (scenes/sports.js): the north street walked on north from the east lane, past the back lane, to
 // the sports lane, the gym's front, the pool walk to the shower pavilion and the courts walk to the onsen path; it
-// also loads with ?place=sports. The gym is shut for now (its door says so); the shower pavilion's door at the pool
-// walk's end leads through to the pool deck (places/pool.js). South down the north
+// also loads with ?place=sports. The gym's main doors lead into its corner (places/gym.js); the shower pavilion's
+// door at the pool walk's end leads through to the pool deck (places/pool.js). South down the north
 // street goes back to the east lane; east along the courts walk goes on to the onsen path, in the east coast; west
 // along the lane round the gym's corner goes on to the office street, in the office quarter.
 //
@@ -128,8 +128,10 @@ export async function sportsPlace(game) {
       if (near(back.zone) && !game.prepared.east_lane) game.prepare?.('east_lane');
       if (near(on.zone) && !game.prepared.east_coast) game.prepare?.('east_coast');
       if (near(west.zone) && !game.prepared.office_quarter) game.prepare?.('office_quarter');
-      const [px, pz] = dk('pool').step;
-      if (Math.hypot(p.x - px, p.z - pz) < 8 && !game.prepared.pool) game.prepare?.('pool');
+      for (const id of ['pool', 'gym']) {
+        const [dx, dz] = dk(id).step;
+        if (Math.hypot(p.x - dx, p.z - dz) < 8 && !game.prepared[id]) game.prepare?.(id);
+      }
     },
     onPeriod(period) {
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
@@ -159,10 +161,13 @@ export async function sportsPlace(game) {
       office_quarter: (g) => walkIn(g, cam, west.arrive, west.in, Math.PI / 2),
       // out of the shower pavilion's door onto the pool walk, walking west
       pool: (g) => walkIn(g, cam, dk('pool').local, dk('pool').step, -Math.PI / 2),
+      // out of the gym's main doors onto its apron, walking south
+      gym: (g) => walkIn(g, cam, dk('gym').local, dk('gym').step, 0),
     },
     tripOutTo: {
       ...Object.fromEntries(Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)])),
       pool: (g) => walkOut(g, cam, dk('pool').step, dk('pool').local),
+      gym: (g) => walkOut(g, cam, dk('gym').step, dk('gym').local),
     },
   };
   return P;

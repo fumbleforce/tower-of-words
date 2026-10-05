@@ -5,7 +5,7 @@
 //   running north-south, overhanging, with a dark edge along its eaves and round its arched ends
 //   the arched ends: the wall carried up into the arch, and in the south one a lunette of glass with mullions
 //   the entrance, on the south face on the door's axis: a glass front in a dark frame, two pairs of glass doors in
-//   it, shut, with a 準備中 CLOSED card on the glass; a flat canopy on two posts over it, たいいくかん GYM on a board
+//   it (the corner inside them: scenes/rooms/gym.js); a flat canopy on two posts over it, たいいくかん GYM on a board
 //   standing on its front edge; beds of low shrubs either side between the face and the lane
 // After work the glass is lit from inside.
 import * as THREE from 'three';
@@ -144,14 +144,12 @@ function entrance(p, glow, signs, lights) {
   glow.push(new THREE.BoxGeometry(FW, 2.4, 0.02).translate(GX, 0.3 + 1.2, f + 0.09));
   for (let i = 0; i <= 6; i++) p.box(C.frame, 0.07, 2.45, 0.07, GX - FW / 2 + (FW * i) / 6, 0.27, f + 0.11);
   p.box(C.frame, FW, 0.08, 0.07, GX, 2.68, f + 0.11);
-  // two pairs of doors in the middle bays, steel pulls, shut
+  // two pairs of doors in the middle bays, steel pulls (inside: places/gym.js)
   for (const s of [-1, 1]) {
     const x = GX + s * DW;
     p.box(STEEL.pale, 0.04, 0.5, 0.04, x - s * (DW - 0.12), 0.85, f + 0.16);
     p.box(C.frame, 0.06, 2.1, 0.08, x, 0.27, f + 0.13);
   }
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, [GX + 0.5, 1.25, f + 0.14], 0, { door: 'gym' });
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, [GX - 0.5, 1.25, f + 0.14], 0, { door: 'gym' });
   // the step and the canopy on two posts, its board standing on the front edge
   p.box(BLOCK.plinth, FW + 0.6, 0.08, 0.9, GX, 0, f + 0.45, { surf: 'concrete' });
   const CD = 1.25;

@@ -39,6 +39,7 @@ import { eastLanePlace as east_lane } from './places/east-lane.js';
 import { eastCoastPlace as east_coast } from './places/east-coast.js';
 import { sportsPlace as sports } from './places/sports.js';
 import { poolPlace as pool } from './places/pool.js';
+import { gymPlace as gym } from './places/gym.js';
 import { officeQuarterPlace as office_quarter } from './places/office-quarter.js';
 import { harbourPlace as harbour } from './places/harbour.js';
 import { worksPlace as works } from './places/works.js';
@@ -68,6 +69,7 @@ const PLACES = {
   east_coast,
   sports,
   pool,
+  gym,
   office_quarter,
   harbour,
   works,

@@ -106,6 +106,15 @@ export const CHUNKS = {
     view: [-4, 22, -40, 0],
     anchor: 'the sports ground’s own, the deck inside the pool’s fence',
   },
+  gym: {
+    at: [47.05, -50.9],
+    turn: 0, // an interior: the camera looks in from the south over the cut-down front wall (scenes/rooms/gym.js)
+    scale: 1,
+    level: 0,
+    walk: [-9.4, 9.4, -11.8, 0],
+    view: [-9.6, 9.6, -12, 0.4],
+    anchor: 'the gym’s main doors, inside: the south end of the hall as far as the divider net',
+  },
   office_quarter: {
     at: [4.5, -54],
     turn: 0, // the camera turns itself: north-north-west along the street, north up the walks, as the sports lane by the gym (scenes/office-quarter.js)
