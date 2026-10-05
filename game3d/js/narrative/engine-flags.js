@@ -14,7 +14,7 @@ export const ENGINE_WRITES = {
   },
   'game3d/js/sim.js': {
     'exact': ['period', 'day', 'gift_reaction'],
-    'prefix': ['met_', 'bond_', 'step_', 'bondready_', 'register_', 'gift_', 'rel_', 'rem_', 'fact_'],
+    'prefix': ['met_', 'bond_', 'bond2_', 'step_', 'bondready_', 'register_', 'gift_', 'rel_', 'rem_', 'fact_'],
   },
   'game3d/js/places/train.js': {
     'exact': ['arrived'],
@@ -34,6 +34,7 @@ export const ENGINE_WRITES = {
   },
 };
 
+ENGINE_WRITES['game3d/js/period-flags.js'] = { exact: [], prefix: ['period_'] };
 ENGINE_WRITES['game3d/js/gameplay/gifts.js'] = { exact: [], prefix: ['gave_'] };
 ENGINE_WRITES['game3d/js/finds/index.js'] = { exact: [], prefix: ['found_'] };
 ENGINE_WRITES['game3d/js/tickets/model.js'] = { exact: [], prefix: ['ticket_', 'ticketread_'] };

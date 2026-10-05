@@ -17,6 +17,7 @@ import { peopleCards } from './ui/people-view.js';
 import PEOPLE from '../story/people.js';
 import { MC, expandMc, migrateMc } from './mc.js';
 import { newCast } from './roles.js';
+import { markPeriod } from './period-flags.js';
 
 expandMc(PEOPLE); // the protagonist's tokens in the People cards (mc.js)
 
@@ -103,6 +104,7 @@ export function setPeriod(p, game) {
   if (!PERIODS.includes(p)) return;
   sim.period = p;
   flags[ENGINE_KEYS.period] = p;
+  markPeriod(p, PERIODS);
   ui.clock(sim.date, periodName(p));
   applySchedule(game);
   save(game);
@@ -245,7 +247,7 @@ export function noteTeacher(who, cmd) {
   if (who && !sim.taught[cmd]) sim.taught[cmd] = who;
 }
 
-// flags the story can test: bond_<id> (points), step_<id>, bondready_<id> (the step waiting on its scene)
+// flags the story can test: bond_<id> (points), step_<id>, bondready_<id> (the step waiting on its scene), bond2_<id>
 function sync(who) {
   const q = bonds.p[who];
   if (!q) return;
@@ -253,6 +255,7 @@ function sync(who) {
   flags[ENGINE_KEYS.bond + who] = q.pts;
   flags[ENGINE_KEYS.step + who] = bonds.step(who);
   flags[ENGINE_KEYS.bondready + who] = bonds.ready(who);
+  if (bonds.step(who) >= 2) flags[ENGINE_KEYS.bond2 + who] = true; // step 2 Friendly reached; bonds never go down
 }
 function syncAll() {
   for (const id of Object.keys(bonds.p)) sync(id);
@@ -521,6 +524,7 @@ export function restore(game, d) {
   ui.logLoad?.(d.log, sim.day || 1);
   sim.met = new Set(d.met || []);
   Object.assign(flags, d.flags || {});
+  markPeriod(sim.period, PERIODS); // a new day's opening save carries the last day's evening
   for (const k of d.known || []) known.add(k);
   for (const k of d.seen || []) seen.add(k);
   for (const f of d.found || []) game.found.add(f);

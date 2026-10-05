@@ -141,6 +141,8 @@ export async function lobbyPlace(game) {
     counter_front: [-4.2, 1.4],
     desk_front: [2.1, BZ + 0.72],
     outside: [0, Z + 1.5],
+    gate_lockers: [-4.4, -Z + 1.05], // in front of the coin lockers at the back wall's west end
+    gate_staff_door: [3.95, -Z + 0.65], // in front of the staff door (階段 STAIRS) on the guard's side
   };
   const seats = {
     bench_r: { x: 3.25, z: 1.52, y: 0.29, top: 0.29, ry: 0 }, // a cushion's front edge: legs hang in front of it

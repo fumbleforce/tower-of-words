@@ -113,6 +113,8 @@ export function* eastCoastSteps() {
       square: P.pt([C.AXIS_X + 1.2, C.AXIS_Z + 1.4]),
       bench: P.pt([C.SQUARE_BENCHES[0][0], C.SQUARE_BENCHES[0][1] + 0.7]),
     },
+    // the sea terrace's east bench, which looks south over the wall to the sea: the spot is just behind it
+    terraceBench: P.pt([C.TERRACE[1] - 1.1, C.TERRACE[3] - 1.35]),
     camera: { elev: 46, fov: 24 },
     evening() {
       nooks.evening();

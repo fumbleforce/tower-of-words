@@ -15,6 +15,7 @@ Jørgen (2026-09-28): a day clock with periods, NPC schedules and NPC-to-NPC rel
 - Day 2 is Friday 2 October and uses two periods: morning (it starts in Eric's room) and after work (from sitting at his B2 desk). Its story set, the places it opens and the ways between them are game3d/story/day2/ ([stories/day2](stories/day2/README.md)); game3d/js/days.js says which set a day plays and where it starts. A later day's own walks between places are the same in both periods.
 - Day 3 is Saturday 3 October, a free day ([stories/day3](stories/day3/README.md)): it starts in room 203 in the morning and has four periods, morning, lunch, afternoon and evening. On a weekend the HUD names them Morning, Lunch, Afternoon and Evening ("Sat 3 Oct · Morning"); a weekday keeps Morning at work and After work. Its story set and ways are game3d/story/day3/; who is where in each period is game3d/js/places/day3/plan.js (places.md, Who's there when). The day ends at the bed in room 203 in the evening (Sleep).
 - A free day's clock moves only when the player chooses ([days 3 to 5](../../notes/days3-5-outline.md), Routine and clock). At the desk in room 203 Eric sits in its chair and picks "Spend the rest of the morning here" (of lunch, of the afternoon), which moves to the next period, or "Rest until evening", which moves to the evening; both are always there before the evening. A club session uses the evening without moving the clock. The place takes the new period's light at once.
+- Every period change sets the flags `period_early`, `period_morning`, `period_lunch`, `period_afternoon` and `period_evening`: only the current period's is true, the rest are false, so `period_lunch` clears when the afternoon starts. Loading a save, and a new day's start, set them from the saved period. Later days' optional scenes read them as show conditions; day 1 keeps its own `afternoon_on` and `evening_on`, which stay true once set.
 - Sleep, the weekend's period names, a sixth period (night) and the week are to build.
 
 ## Schedules
@@ -68,6 +69,7 @@ Points come from:
 
 - At most 3 points per person per day. Points never go down.
 - The People panel shows each met person's step as hearts with a line on where things stand, never the points or what the next step needs ([controls-and-ui.md](controls-and-ui.md), People).
+- Reaching step 2 sets the flag `bond2_<id>` (`bond2_mio`), which stays true. Steps 3 to 5 are the scenes' own flags ([cast.md](cast.md), Personal plots and bond milestones).
 - While a step's scene hasn't played, points stop at its threshold, so nobody can be ground past it. Day 1 only reaches steps 1 and 2; the scenes for steps 3 to 5 are to build.
 - How people get on with each other (`likes`, `owes`, `rivals`, one way) is data too, and can change in play. Ambient moments and lines can depend on it.
 - The register each person expects ([cast.md](cast.md), What they like) is compared with the last word Eric said to them, so a line can react to too polite or too casual.
