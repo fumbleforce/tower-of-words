@@ -14,7 +14,7 @@
     "crop": { "W": 648, "H": 768, "f": [116, 203, 340, 394] },
     "note": "PLACEHOLDER: Eric's portraits and crop until Carina's are approved (art agent)"
   },
-  "model": { "id": "eric", "height": 1.2, "chibi": "eric" },
+  "model": { "id": "carina", "dir": "characters/carina/", "height": 1.12, "chibi": "eric" },
   "voice": {
     "lines": "eric",
     "words": "eric",
@@ -27,5 +27,5 @@
     "home": "dorm room 203 on 2F"
   },
   "text": {},
-  "placeholders": ["portrait", "model", "voice.lines", "voice.words", "voice.ref"]
+  "placeholders": ["portrait", "voice.lines", "voice.words", "voice.ref"]
 }

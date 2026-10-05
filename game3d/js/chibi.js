@@ -269,10 +269,11 @@ const fallback = (load) => (e) => {
   return load();
 };
 // the player's and Mio's bodies for main.js boot(); a chibi that fails to load falls back to the approved model.
-// The player's is the protagonist's (data/mc/<id>.json model: assets/<id>/ and its chibi)
+// The player's is the protagonist's (data/mc/<id>.json model: assets/<dir or id>/ and its chibi)
 export const playerBody = () => {
   const m = MC.model,
-    body = () => loadMeshy(m.id, { dir: new URL(`../assets/${m.id}/`, import.meta.url).href, height: m.height });
+    body = () =>
+      loadMeshy(m.id, { dir: new URL(`../assets/${m.dir || m.id + '/'}`, import.meta.url).href, height: m.height });
   return CHIBI_ON ? loadChibi(m.chibi).catch(fallback(body)) : body();
 };
 export const mioBody = () => {
