@@ -3,9 +3,9 @@
   "exceptions": {
     "game3d/js/avatar.js": {
       "lines": 477,
-      "bytes": 15528,
+      "bytes": 15671,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones); 2026-10-05 C-0441 meshyFiles split out of loadMeshy, so cast3d.js makes a copy of Kuro, Aoi and Emi for each place",
+      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones); 2026-10-05 C-0441 meshyFiles split out of loadMeshy, so cast3d.js makes a copy of Kuro, Aoi and Emi for each place; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow)",
       "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."
     },
     "game3d/js/cast.js": {
@@ -17,9 +17,9 @@
     },
     "game3d/js/look/detail.js": {
       "lines": 670,
-      "bytes": 26877,
+      "bytes": 26916,
       "owner": "codex-tui",
-      "review": "C-0071",
+      "review": "C-0071; 2026-10-05 #240 the desk's pedestals PED wide (props.js)",
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
@@ -37,10 +37,10 @@
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
     },
     "game3d/js/mio.js": {
-      "lines": 821,
-      "bytes": 29528,
+      "lines": 822,
+      "bytes": 29645,
       "owner": "codex-tui",
-      "review": "C-0071",
+      "review": "C-0071; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow)",
       "reason": "Existing procedural character and animation implementation; changes require character review."
     },
     "game3d/js/perf/batch.js": {
@@ -86,10 +86,10 @@
       "reason": "Existing post-processing pipeline and shader text; keep shader contents intact."
     },
     "game3d/js/props.js": {
-      "lines": 532,
-      "bytes": 19261,
+      "lines": 533,
+      "bytes": 19403,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112)",
+      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112); 2026-10-05 #240 PED, the desks' narrower drawer pedestals, so seated knees fit between them",
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {

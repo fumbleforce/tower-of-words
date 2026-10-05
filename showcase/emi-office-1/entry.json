@@ -22,6 +22,18 @@
         {"id": "emi-at-desk-phone", "image": "bible/shots/showcase/emi-office-1/emi-at-desk-phone.webp", "caption": "Emi at her desk, phone"},
         {"id": "copy-room-after", "image": "bible/shots/showcase/emi-office-1/copy-room-after-desk.webp", "caption": "The copy room now: copier, fax and paper shelf along the partition, a smaller worktable"}
       ]
+    },
+    {
+      "title": "Fix: Emi no longer sits through her desk (#240)",
+      "caption": "Jørgen: \"why is she clipped into the table\". People placed straight into a seat started a short blend from standing to sitting while the body was already moved back for the seat, so for that moment (and in any still or paused frame) they sat about half a metre forward, in the desk. They now go straight into the seated pose. The desks' drawer pedestals are also a little narrower, because Eric's knees went 5 cm into them at his desk. A new check (game3d/tools/seat-check.mjs) measures every seated body against the desk or table in front of it, on every seat in B2, the train and the day-2 bench.",
+      "images": [
+        {"id": "fix240-before-desk", "image": "bible/shots/showcase/emi-office-1/emi-at-desk-desk.webp", "caption": "Before, desktop"},
+        {"id": "fix240-before-phone", "image": "bible/shots/showcase/emi-office-1/emi-at-desk-phone.webp", "caption": "Before, phone"},
+        {"id": "fix240-after-desk", "image": "bible/shots/showcase/emi-office-1/fix240-after-desk.webp", "caption": "After, desktop"},
+        {"id": "fix240-after-phone", "image": "bible/shots/showcase/emi-office-1/fix240-after-phone.webp", "caption": "After, phone"},
+        {"id": "fix240-seats-desk", "image": "bible/shots/showcase/emi-office-1/fix240-seats-desk.webp", "caption": "Every seat checked, with who sits there, desktop"},
+        {"id": "fix240-seats-phone", "image": "bible/shots/showcase/emi-office-1/fix240-seats-phone.webp", "caption": "Every seat checked, phone"}
+      ]
     }
   ],
   "links": [{"label": "Play it", "href": "game3d/"}]

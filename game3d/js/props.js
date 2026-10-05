@@ -373,6 +373,7 @@ export function plainMonitor({ on = true, kind } = {}) {
   g.add(s);
   return g;
 }
+export const PED = 0.26; // a desk's drawer pedestals: wide enough to leave room for seated knees (#240)
 // desk facing +z (the sitter sits on the +z side)
 export const desk = (o) => (LOOK.detail ? D.desk(o) : plainDesk(o));
 export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = {}) {
@@ -381,11 +382,11 @@ export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1
   g.add(rbox(w, 0.04, d, PAL.deskTop, { y: H - 0.04, r: 0.012 }));
   // drawer pedestals both sides
   for (const sx of [-1, 1]) {
-    g.add(rbox(0.34, H - 0.05, d - 0.06, PAL.drawer, { x: sx * (w / 2 - 0.19), r: 0.015 }));
+    g.add(rbox(PED, H - 0.05, d - 0.06, PAL.drawer, { x: sx * (w / 2 - 0.02 - PED / 2), r: 0.015 }));
     for (let k = 0; k < 3; k++)
       g.add(
-        rbox(0.26, 0.012, 0.01, PAL.trim, {
-          x: sx * (w / 2 - 0.19),
+        rbox(PED - 0.08, 0.012, 0.01, PAL.trim, {
+          x: sx * (w / 2 - 0.02 - PED / 2),
           y: 0.08 + k * 0.1,
           z: (d - 0.06) / 2 + 0.003,
           r: 0.004,
@@ -393,7 +394,7 @@ export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1
         }),
       );
   }
-  g.add(rbox(w - 0.72, 0.2, 0.03, PAL.drawer, { y: 0.16, z: -d / 2 + 0.05, r: 0.01 }));
+  g.add(rbox(w - 2 * (PED + 0.02), 0.2, 0.03, PAL.drawer, { y: 0.16, z: -d / 2 + 0.05, r: 0.01 }));
   if (mon) {
     const m = plainMonitor();
     m.position.set(0, H, -d * 0.2);
