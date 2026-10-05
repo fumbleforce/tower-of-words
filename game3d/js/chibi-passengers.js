@@ -1,5 +1,5 @@
-// The train's unnamed passengers as generic chibis (chibi-crowd.js), when the chibi look is on: the young man, the
-// girl with headphones, the man with a book and the woman with a bun (docs/game/cast.md). Each code-built passenger
+// The train's unnamed passengers as generic chibis (chibi-crowd.js), when the chibi look is on: the girl with
+// headphones, the man with a book and the woman with a bun (docs/game/cast.md). Each code-built passenger
 // (train/people.js buildPassengers) becomes a chibi in place, the same object, so places/train.js and
 // train/discoveries.js keep every reference they hold; the things that tell them apart move over onto the chibi: the
 // headphones, the book, the phones, and a bun for the woman. Called by trainDiscoveries before it reads their parts.
@@ -9,7 +9,6 @@ import { HEAD } from './train/people.js';
 
 // id: [base, variant, colours]
 const WHO = {
-  youth: ['shirt', 3],
   music: ['hoodie', 2],
   reader: ['suit', 5, { top: '#4a4f5c', hair: '#141417' }],
   bun: ['blouse', 4, { hair: '#3a2619', top: '#e6dfd0', bottom: '#2b2f3a' }],

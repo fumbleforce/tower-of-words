@@ -19,7 +19,6 @@ export const DEFAULT_SPEAKERS = {
   reader: { name: 'Man with a book', color: '#a8b0bf' },
   music: { name: 'Girl with headphones', color: '#a8b0bf' },
   bun: { name: 'Woman with a bun', color: '#a8b0bf' },
-  youth: { name: 'Young man', color: '#a8b0bf' },
   stander: { name: 'Man by the door', color: '#a8b0bf' },
   commuter: { name: 'Office worker', color: '#a8b0bf' },
   rei: { name: 'Rei', role: 'Sales', color: '#c9ced8' },

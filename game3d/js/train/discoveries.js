@@ -1,9 +1,6 @@
 // Small things the monorail passengers can show Eric (the train discoveries), as place hooks for the story:
-//   phone      { who: 'youth', state: 'show' | 'point' | 'away' }   he turns to Eric and holds out his phone: the photo
-//              of his first goal fills the held view (ui/held-view.js); point: his other hand on the screen, a ring
-//              round him in the photo
-//              { who: 'music', state: 'show' | 'away' }             she turns her phone to Eric: the video of her
-//              practising plays, with its sound
+//   phone      { who: 'music', state: 'show' | 'away' }             she turns her phone to Eric: the video of her
+//              practising plays, with its sound (ui/held-view.js)
 //              { who: 'kuroda', state: 'buzz' | 'tap' }             his phone beside him lights up and buzzes with his
 //              12F 9:00 reminder (until tapped); tap: eyes shut, his hand taps it silent and the screen goes dark
 //   headphones { who: 'music', state: 'lift' | 'on' }               she lifts the headphone on Eric's side: her guitar
@@ -15,12 +12,11 @@
 //              the held view shows the book's page and the printout side by side
 // Every state is kept in snapshot()/restore(), so Continue and a restarted scene put the props back.
 import * as THREE from 'three';
-import { phone as phoneProp } from './people.js';
 import { chibiPassengers } from '../chibi-passengers.js';
 import { reminderScreen, bookPage, printoutSheet } from './held-screens.js';
-import { footballPhoto, guitarVideo } from './screen-scenes.js';
+import { guitarVideo } from './screen-scenes.js';
 import { shopBag } from './shop-bag.js';
-import { showHeld, hideHeld, ringHeld } from '../ui/held-view.js';
+import { showHeld, hideHeld } from '../ui/held-view.js';
 import { sfx, running, isMuted } from '../sfx.js';
 import { PLAYER_ID } from '../mc.js';
 
@@ -51,27 +47,15 @@ const armState = (a) => [a.rotation.x, a.rotation.y, a.rotation.z];
 // car: the car's root (props go in its frame, as the passengers do); nav: its walk grid (the bag on the floor blocks it)
 export function trainDiscoveries(game, { people, car, nav, SEAT_Y }) {
   chibiPassengers(people); // with the chibi look: the passengers become generic chibis first, their props moved over
-  const { youth, music, kuroda, reader, bun } = people;
-  const st = { youth: 'away', music: 'lap', kuroda: 'off', cup: 'on', bag: 0, printout: 'away' };
+  const { music, kuroda, reader, bun } = people;
+  const st = { music: 'lap', kuroda: 'off', cup: 'on', bag: 0, printout: 'away' };
   const tween = (dur, fn) => game.tween(dur, (k) => fn(ease(k)));
   const armTo = (arm, to, dur = 0.5) => {
     const from = armState(arm);
     return tween(dur, (k) => arm.rotation.set(...from.map((v, i) => v + (to[i] - v) * k)));
   };
   const eric = () => [game.player.root.position.x, game.player.root.position.z];
-  // the photo is drawn into a corner of the game's canvas: that has to happen inside a frame, just before the frame's
-  // own render covers it, or the corner could show for a frame (update() runs these)
-  const inFrame = [];
-  const nextFrame = (fn) => new Promise((res) => inFrame.push(() => res(fn())));
   const pan = (r) => Math.max(-0.7, Math.min(0.7, (r.root.position.x - eric()[0]) / 3));
-
-  // ---- the young man: a phone in his near hand (arms[1] faces the aisle), the photo made the first time it's shown
-  const yArm = youth.arms[1],
-    yRest = armState(yArm),
-    yOther = youth.arms[0],
-    yOtherRest = armState(yOther);
-  const yPhone = inHand(yArm, phoneProp());
-  let photo = null;
 
   // ---- the girl with headphones: her own phone moves from her lap to Eric; the headphone cup on the aisle side
   const mPhone = music.torso.children.find((o) => o.isGroup && o !== music.head && !music.arms.includes(o));
@@ -155,27 +139,7 @@ export function trainDiscoveries(game, { people, car, nav, SEAT_Y }) {
 
   const hooks = {
     phone: async ({ who, state }) => {
-      if (who === 'youth') {
-        if (state === 'show') {
-          youth.lookTarget = eric();
-          yPhone.visible = true;
-          await armTo(yArm, [-1.5, 0, -0.1], 0.6);
-          photo ||= await nextFrame(() => footballPhoto(game.renderer));
-          showHeld('youth', [{ canvas: photo.canvas, frame: 'phone' }]);
-          st.youth = 'show';
-        } else if (state === 'point') {
-          await armTo(yOther, [-1.4, 0, 0.45], 0.45);
-          ringHeld('youth', photo?.me);
-          st.youth = 'point';
-          await game.wait(1100); // a moment on the ring before whatever comes next
-        } else if (state === 'away') {
-          hideHeld('youth');
-          await Promise.all([armTo(yArm, yRest, 0.5), armTo(yOther, yOtherRest, 0.4)]);
-          yPhone.visible = false;
-          youth.lookTarget = null;
-          st.youth = 'away';
-        }
-      } else if (who === 'music') {
+      if (who === 'music') {
         if (state === 'show') {
           music.lookTarget = eric();
           const p0 = mPhone.position.clone(),
@@ -318,7 +282,6 @@ export function trainDiscoveries(game, { people, car, nav, SEAT_Y }) {
   return {
     hooks,
     update(dt) {
-      while (inFrame.length) inFrame.shift()();
       if (st.music === 'show' && video) video.update(dt);
       if (st.kuroda === 'buzz') {
         // it buzzes beside him until he taps it: two pulses every 1.4 s, the phone shivering while it does
@@ -343,14 +306,12 @@ export function trainDiscoveries(game, { people, car, nav, SEAT_Y }) {
       stopLeak();
       stopVideo();
       Object.assign(st, {
-        youth: s.youth,
         music: s.music,
         kuroda: s.kuroda,
         cup: s.cup,
         bag: s.bag,
         printout: s.printout,
       });
-      yPhone.visible = st.youth !== 'away';
       if (s.phone) {
         mPhone.position.fromArray(s.phone.position);
         mPhone.quaternion.fromArray(s.phone.quaternion);
@@ -362,7 +323,7 @@ export function trainDiscoveries(game, { people, car, nav, SEAT_Y }) {
       bag.setClosed(st.bag || 0);
       bag.setSlider(s.slider ?? (st.bag ? 1 : 0));
     },
-    // the photo's and the video's sound: stop when the place goes
+    // the video's sound: stop when the place goes
     dispose() {
       stopLeak();
       stopVideo();

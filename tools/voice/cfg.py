@@ -70,7 +70,7 @@ def speakers():
     sp['ann'] = sp['conductor']
     sp['commuter'] = sp['sales1']
     # train passengers: borrowed voices, none of them recurring cast
-    sp['bun'] = sp['sales2']; sp['youth'] = sp['sales1']; sp['music'] = sp['kuro']; sp['stander'] = sp['reader']
+    sp['bun'] = sp['sales2']; sp['music'] = sp['kuro']; sp['stander'] = sp['reader']
     # the canteen worker closing the plaza terrace after work (evening discovery): a borrowed voice, not Kuro's
     sp['canteen_worker'] = sp['sales2']
     # Background people use the approved body-matched contextual Talk presets.
@@ -84,7 +84,7 @@ def speakers():
 
 FEMALE = {'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'worker_a',
           'member', 'rei'}
-MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'youth', 'stander', 'worker_b',
+MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'stander', 'worker_b',
         'commuter_1', 'commuter_2', 'commuter_3', 'attendant'}
 # clones whose reference speaks English: their Japanese is made from the timbre alone (gen_takes.xvec)
 XVEC_JA = {'eric'}

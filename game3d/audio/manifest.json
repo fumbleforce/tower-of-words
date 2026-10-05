@@ -307,26 +307,6 @@
   "emo": "warm"
  },
  {
-  "key": "ln-t6y7ml",
-  "speaker": "youth",
-  "text": "負けたけど、初めてゴール決めたんだ。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "proud"
- },
- {
-  "key": "ln-1iogb45",
-  "speaker": "eric",
-  "text": "That's you?",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "curious"
- },
- {
   "key": "ln-k8txd4",
   "speaker": "music",
   "text": "あ、ごめん。音、漏れてた？",
@@ -360,16 +340,6 @@
   ],
   "clear": [],
   "emo": "polite"
- },
- {
-  "key": "oh-1i5g6pb",
-  "speaker": "youth",
-  "text": "あ、ども。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "casual"
  },
  {
   "key": "oh-5hn713",

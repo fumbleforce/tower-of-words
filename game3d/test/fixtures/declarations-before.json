@@ -74,10 +74,6 @@
       "name": "Woman with a bun",
       "color": "#a8b0bf"
     },
-    "youth": {
-      "name": "Young man",
-      "color": "#a8b0bf"
-    },
     "stander": {
       "name": "Man by the door",
       "color": "#a8b0bf"
@@ -212,10 +208,6 @@
           "label": "Woman with a bun",
           "kind": "person small"
         },
-        "youth": {
-          "label": "Young man",
-          "kind": "person small"
-        },
         "tama": {
           "label": "Cat",
           "verb": "Pet",
@@ -322,7 +314,6 @@
         "music",
         "stander",
         "bun",
-        "youth",
         "tama",
         "guard"
       ],

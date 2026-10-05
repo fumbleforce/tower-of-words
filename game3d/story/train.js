@@ -7,7 +7,6 @@ export default {
     kuroda: { name: 'Sleeping man' },
     reader: { name: 'Man with a book' },
     bun: { name: 'Woman with a bun' },
-    youth: { name: 'Young man' },
     music: { name: 'Girl with headphones' },
     stander: { name: 'Man with a bag' },
   },
@@ -44,7 +43,6 @@ export default {
     'talk:kuroda': 'hamada',
     'talk:aoi': [{ if: '!seat_goal && !sat', node: 'first_aoi' }, 'phone_girl'],
     'talk:bun': [{ if: '!seat_goal && !sat', node: 'first_bun' }, 'bun'],
-    'talk:youth': [{ if: '!seat_goal && !sat', node: 'first_youth' }, 'youth'],
     'talk:music': [{ if: '!seat_goal && !sat', node: 'first_music' }, 'music'],
     'talk:reader': 'reader',
     'talk:window': 'window',
@@ -54,7 +52,6 @@ export default {
     'talk:plant': 'plant',
     'talk:bags': 'seat_bags',
     'say:ohayo:bun': 'ohayo_bun',
-    'say:ohayo:youth': 'ohayo_youth',
     'say:ohayo:music': 'ohayo_music',
     'say:matte:tama': 'matte_tama',
     'say:ohayo:tama': [{ if: 'cat_task', node: 'ohayo_cat' }, 'ohayo_tama'],
@@ -90,11 +87,6 @@ export default {
       { do: 'gesture', who: 'bun', kind: 'point', to: 'seat_far_r' },
       { call: 'nod_seat' },
     ],
-    first_youth: [
-      { call: 'youth' },
-      { do: 'gesture', who: 'youth', kind: 'point', to: 'seat_far_r' },
-      { call: 'nod_seat' },
-    ],
     first_music: [
       { call: 'music' },
       { do: 'gesture', who: 'music', kind: 'point', to: 'seat_far_r' },
@@ -122,22 +114,6 @@ export default {
         { set: "train_bun_seen" },
       ] },
     ],
-    youth: [
-      { if: "train_youth_seen", then: [
-        { do: "gesture", who: "youth", kind: "nod", to: "eric" },
-      ], else: [
-        { do: "cam", on: "youth", zoom: 1.7 },
-        { do: "phone", who: "youth", state: "show" },
-        { say: "youth", emo: "proud", text: "負けたけど、初めてゴール決めたんだ。", en: "We lost, but I scored my first goal." },
-        { do: "gesture", who: "eric", kind: "point", to: "youth" },
-        { say: "eric", emo: "curious", text: "That's you?" },
-        { do: "phone", who: "youth", state: "point" },
-        { do: "gesture", who: "youth", kind: "nod", to: "eric" },
-        { do: "phone", who: "youth", state: "away" },
-        { do: "cam", back: true },
-        { set: "train_youth_seen" },
-      ] },
-    ],
     music: [
       { if: "train_music_seen", then: [
         { do: "emote", who: "music", kind: "♪" },
@@ -156,7 +132,6 @@ export default {
     ],
     stander: [{ do: 'emote', who: 'stander', kind: '…' }],
     ohayo_bun: [{ say: 'bun', overheard: true, emo: 'warm', text: 'はい、{ohayo}。' }],
-    ohayo_youth: [{ say: 'youth', overheard: true, emo: 'casual', text: 'あ、ども。' }],
     ohayo_music: [{ do: 'emote', who: 'music', kind: '?' }],
     ohayo_stander: [{ say: 'stander', overheard: true, emo: 'low', text: '…{ohayo}。' }],
     window: [{ say: 'eric', emo: 'tired', text: "Sea on both sides. Nobody said the island was this far out." }],
