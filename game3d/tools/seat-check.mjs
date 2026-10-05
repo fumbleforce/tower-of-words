@@ -13,6 +13,9 @@
 // shortest of the six axis rays out of it. The seat itself (the cushion under the hips and the chair it belongs to)
 // is reported but doesn't fail: sitting presses into it. Anything else deeper than TOL fails: the desk or table top,
 // a drawer pedestal, a wall.
+// The player (Eric's body, or another protagonist's with QS=&mc=<id>) on each seat the game puts them on also fails
+// when it sits in the seat rather than on it ("MC is sitting inside the seats", Jørgen, 2026-10-05): the hips joint
+// below the seat top, the hips and thighs more than SINK into it, or more than LEGS of the lower legs inside it.
 // Output: game3d/shots/seats/<w>x<h>/ (log.json, one close still per seat and occupant, sheet.webp).
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { execFileSync } from 'node:child_process';
@@ -27,6 +30,8 @@ fs.mkdirSync(out, { recursive: true });
 const phone = +W < 700;
 const SHOTS = process.env.SHOTS !== '0';
 const TOL = 0.01; // 1 cm: a hand resting on a desk, cloth against an edge
+const SINK = 0.03; // 3 cm: the player pressing into a cushion (a seat top given a cm low included); deeper reads as sitting in it
+const LEGS = 0.4; // the lower legs in the seat: a third is the back of the calves against a train seat's front lip; half is legs buried
 const base = process.env.BASE || 'game3d';
 const ONLY = process.env.ONLY?.split(',');
 const SCENES = [
@@ -87,12 +92,29 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
     r.root.updateMatrixWorld(true);
     const pts = [],
       v = new THREE.Vector3();
+    // the vertices the body sits on: skinned mostly to the hips or a thigh bone (pts.seat, indices into pts / 3)
+    pts.seat = [];
+    pts.bone = [];
     r.root.traverse((o) => {
       if (!o.isMesh || !shown(o) || o.material?.transparent || !o.geometry?.attributes?.position) return;
-      const pos = o.geometry.attributes.position;
+      const pos = o.geometry.attributes.position,
+        si = o.isSkinnedMesh && o.geometry.attributes.skinIndex,
+        sw = si && o.geometry.attributes.skinWeight,
+        sitBone = si && o.skeleton.bones.map((b) => /hips|pelvis|up_?leg|thigh/i.test(b.name) && !/spine/i.test(b.name));
       for (let i = 0; i < pos.count; i++) {
         o.getVertexPosition(i, v);
         v.applyMatrix4(o.matrixWorld);
+        if (si) {
+          let best = 0,
+            bone = -1;
+          for (let k = 0; k < 4; k++)
+            if (sw.getComponent(i, k) > best) {
+              best = sw.getComponent(i, k);
+              bone = si.getComponent(i, k);
+            }
+          if (sitBone[bone]) pts.seat.push(pts.length / 3);
+          pts.bone[pts.length / 3] = o.skeleton.bones[bone]?.name;
+        }
         pts.push(v.x, v.y, v.z);
       }
     });
@@ -179,7 +201,9 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
           pz = at.z + dz;
         if (px < b.min.x || px > b.max.x || pz < b.min.z || pz > b.max.z || b.min.y > y0) continue;
         const [c, d] = cast(triOf(f), px + 1e-4, y0, pz + 1.3e-4, 0, -1, 0);
-        if (c && (!best || d < best.d)) best = { f, d };
+        // a seat is under the hips joint (3 cm of slack for one sunk into it): a bench back or armrest the side
+        // samples catch is higher than that
+        if (c && y0 - d < h.y + 0.03 && (!best || d < best.d)) best = { f, d };
       }
     const off = Math.hypot(h.x - at.x, h.z - at.z);
     if (!best) return { top: null, parts: new Set(), hip: h, at, off };
@@ -230,6 +254,21 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
     // of the seat point (knees in a drawer pedestal, the chest in the desk top) and not the seat's own chair; a
     // bench back, the wall behind or the floor under the feet is "other"
     const hits = new Map();
+    // how far the body goes down into the seat ("MC is sitting inside the seats", Jørgen, 2026-10-05): the deepest
+    // body vertex inside the seat's surface, below its top (for the log: the back of a calf in a seat's front lip is
+    // fine), and the share of the lower legs' vertices inside it (legs buried in a deep cushion is not)
+    let sink = { depth: 0, what: '' };
+    const legs = new Set(),
+      legsIn = new Set();
+    pts.bone.forEach((b, j) => b && /leg|foot|toe/i.test(b) && !/up_?leg/i.test(b) && legs.add(j));
+    // the underside of the seated body: its lowest hips or thigh vertex over the seat (up to 20 cm ahead of the seat
+    // point; the knees can hang past the front edge), from the seat top (negative: below it)
+    let under = Infinity;
+    for (const j of pts.seat) {
+      const i = j * 3,
+        ahead = (pts[i] - seat.at.x) * fwd.x + (pts[i + 2] - seat.at.z) * fwd.z;
+      if (ahead < 0.2) under = Math.min(under, pts[i + 1] - top);
+    }
     for (let i = 0; i < pts.length; i += 3) {
       const x = pts[i] + 1.1e-5, y = pts[i + 1] + 0.7e-5, z = pts[i + 2] + 1.3e-5;
       for (const n of near) {
@@ -242,6 +281,10 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
         let depth = Math.min(du, dd);
         for (const [dx, dy, dz] of AX.slice(2)) depth = Math.min(depth, cast(n.t, x, y, z, dx, dy, dz)[1]);
         const ahead = (x - seat.at.x) * fwd.x + (z - seat.at.z) * fwd.z;
+        // the seat's surface: its own cushion or a neighbouring one at the same height (a gap between two)
+        const surface = n.seat || Math.abs(b.max.y - top) < 0.03;
+        if (surface && top - y > sink.depth) sink = { depth: top - y, what: name(n.f.o), ahead: +ahead.toFixed(3), bone: pts.bone[i / 3] };
+        if (surface && legs.has(i / 3)) legsIn.add(i / 3);
         const kind = n.seat ? 'seat' : y > top + 0.03 && ahead > 0.12 ? 'table' : 'other';
         const key = n.f.o.uuid + kind;
         const k = hits.get(key) || { what: name(n.f.o), kind, depth: 0, verts: 0 };
@@ -262,12 +305,27 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
       hip: [seat.hip.x, seat.hip.y, seat.hip.z].map((v) => +v.toFixed(3)),
       at: [seat.at.x, seat.at.z].map((v) => +v.toFixed(3)),
       hipOff: +seat.off.toFixed(3), // how far the hips are from where the place seated them
+      hipUp: seat.top === null ? null : +(seat.hip.y - seat.top).toFixed(3), // hips joint over the seat top
+      sink: +sink.depth.toFixed(3),
+      sinkInto: sink.what,
+      sinkAhead: sink.ahead,
+      sinkBone: sink.bone,
+      under: under === Infinity ? null : +under.toFixed(3),
+      legsIn: legs.size ? +(legsIn.size / legs.size).toFixed(3) : null,
       verts: pts.length / 3,
       worst: tables.length ? tables[0].depth : 0,
       over: tables.filter((h) => h.depth > TOL),
       other: list.filter((h) => h.kind === 'other' && h.depth > TOL).slice(0, 3),
     };
   }
+  // the deeper of two frames into the seat, and the lower hips
+  const low = (p, q) => (p === null || q === null ? null : Math.min(p, q));
+  const deeper = (a, b) => ({
+    ...(a.sink > b.sink ? { sink: a.sink, sinkInto: a.sinkInto } : { sink: b.sink, sinkInto: b.sinkInto }),
+    hipUp: low(a.hipUp, b.hipUp),
+    under: low(a.under, b.under),
+    legsIn: a.legsIn === null || b.legsIn === null ? null : Math.max(a.legsIn, b.legsIn),
+  });
   // the first frame after sitting (what a still or a paused game shows) and after the clips have settled
   const both = async (r) => {
     await frames(2);
@@ -276,7 +334,7 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
     await frames(2);
     const b = measure(r);
     const w = a.worst > b.worst ? a : b;
-    return { ...b, worst: w.worst, over: w.over, first: a.worst, settled: b.worst, hipOffMax: Math.max(a.hipOff, b.hipOff) };
+    return { ...b, worst: w.worst, over: w.over, first: a.worst, settled: b.worst, hipOffMax: Math.max(a.hipOff, b.hipOff), ...deeper(a, b) };
   };
   const res = { placed: [], tried: [] };
   if (phase === 'placed') {
@@ -290,7 +348,7 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
       const a = before[i],
         b = measure(rigs[p.id]),
         w = a.worst > b.worst ? a : b;
-      Object.assign(p, b, { worst: w.worst, over: w.over, first: a.worst, settled: b.worst, hipOffMax: Math.max(a.hipOff, b.hipOff) });
+      Object.assign(p, b, { worst: w.worst, over: w.over, first: a.worst, settled: b.worst, hipOffMax: Math.max(a.hipOff, b.hipOff), ...deeper(a, b) });
     });
     return res;
   }
@@ -396,16 +454,25 @@ await withBrowserJob('seat-check', async (browser) => {
     log[sc.name] = res;
     // fails for whoever sits there in the game; any other body on the seat only reports (a seat to fix before
     // the story puts that person there)
-    const say = (label, m, strict = true) => {
-      const bad = [];
+    const say = (label, m, strict = true, player = false) => {
+      const bad = [],
+        others = [];
       if (m.hipOffMax > 0.1) bad.push(`hips ${m.hipOffMax} m off the seat point`);
       if (m.over.length) bad.push(m.over.map((o) => `${o.depth} m into ${o.what}`).join('; '));
+      // the player on top of the seat, not in it: the hips joint over the seat top, the seat of the trousers no
+      // deeper than SINK into it, and the lower legs hanging in front of it, not buried in it
+      const sunk = [];
+      if (m.hipUp !== null && m.hipUp < 0) sunk.push(`hips ${-m.hipUp} m below the seat top`);
+      if (m.under !== null && m.under < -SINK) sunk.push(`seat of the body ${-m.under} m down into the seat`);
+      if (m.legsIn !== null && m.legsIn > LEGS) sunk.push(`${Math.round(m.legsIn * 100)}% of the lower legs inside ${m.sinkInto}`);
+      if (sunk.length) (strict && player ? bad : others).push(...sunk);
       if (bad.length) (strict ? fails : notes).push(`${sc.name} ${label}: ${bad.join('; ')}`);
+      if (others.length) notes.push(`${sc.name} ${label}: ${others.join('; ')}`);
       const other = m.other.length ? `  (also ${m.other.map((o) => `${o.depth} into ${o.what}`).join('; ')})` : '';
-      console.log(`${sc.name.padEnd(12)} ${label.padEnd(22)} seat ${m.seatTop} desk/table ${m.first} first frame, ${m.settled} settled, hips off ${m.hipOffMax} ${m.over.length ? 'OVERLAP' : 'ok'}${other}`);
+      console.log(`${sc.name.padEnd(12)} ${label.padEnd(22)} seat ${m.seatTop} desk/table ${m.first} first frame, ${m.settled} settled, hips off ${m.hipOffMax}, hips up ${m.hipUp}, under ${m.under}, legs in ${m.legsIn} ${m.over.length ? 'OVERLAP' : 'ok'}${other}`);
     };
-    for (const p of res.placed) say(`${p.id} as placed`, p);
-    for (const t of res.tried) say(`${t.id} on ${t.seat}`, t, t.seat === 'at_' + t.id || [MINE[t.seat]].flat().includes(t.id));
+    for (const p of res.placed) say(`${p.id} as placed`, p, true, p.id === 'eric');
+    for (const t of res.tried) say(`${t.id} on ${t.seat}`, t, t.seat === 'at_' + t.id || [MINE[t.seat]].flat().includes(t.id), t.id === 'eric');
     const placedAt = (who, s) => res.placed.some((p) => p.id === who && Math.hypot(p.at[0] - s.x, p.at[1] - s.z) < 0.15);
     await shoot(
       Object.entries(MINE)

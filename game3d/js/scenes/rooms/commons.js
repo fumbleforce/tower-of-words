@@ -148,7 +148,8 @@ function lounge(kit, nav) {
           bz - 0.4 + i * 0.1,
         );
   nav.block(R.x0, R.x0 + 0.36, bz - 0.55, bz + 0.55);
-  return { seat: { x: sx - 0.04, z: tz, top: 0.2, ry: -Math.PI / 2 }, front: [sx - 0.65, tz + 0.2] };
+  // the seat point near the cushion's front edge, so a seated body's lower legs hang in front of it, not through it
+  return { seat: { x: sx - 0.21, z: tz, top: 0.2, ry: -Math.PI / 2 }, front: [sx - 0.65, tz + 0.2] };
 }
 
 // the long shared table, chairs round it; at its east end the art club's materials: a paper stack, a cutting mat

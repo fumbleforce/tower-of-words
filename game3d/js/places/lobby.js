@@ -134,7 +134,7 @@ export async function lobbyPlace(game) {
   const spots = {
     entrance_in: [0, Z - 0.8],
     bench_l: [-3.9, 3.2],
-    bench_r: [3.6, 1.95],
+    bench_r: [3.25, 1.95],
     before_gate: [0.93, BZ + 0.55],
     after_gate: [0, BZ - 0.9],
     lift_front: [-1.0, -Z + 0.6],
@@ -143,7 +143,7 @@ export async function lobbyPlace(game) {
     outside: [0, Z + 1.5],
   };
   const seats = {
-    bench_r: { x: 3.6, z: 1.15, y: 0.29, top: 0.29, ry: 0 },
+    bench_r: { x: 3.25, z: 1.52, y: 0.29, top: 0.29, ry: 0 }, // a cushion's front edge: legs hang in front of it
     bench_l: { x: -3.9, z: 2.4, y: 0.29, top: 0.29, ry: 0 },
   };
   const rigAnchor =

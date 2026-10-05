@@ -2,10 +2,10 @@
   "defaultLines": 400,
   "exceptions": {
     "game3d/js/avatar.js": {
-      "lines": 477,
-      "bytes": 15671,
+      "lines": 475,
+      "bytes": 15740,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones); 2026-10-05 C-0441 meshyFiles split out of loadMeshy, so cast3d.js makes a copy of Kuro, Aoi and Emi for each place; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow)",
+      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones); 2026-10-05 C-0441 meshyFiles split out of loadMeshy, so cast3d.js makes a copy of Kuro, Aoi and Emi for each place; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow); 2026-10-05 seat height (feedback 2026-10-05_192459): sitAt puts the measured underside on the seat top (movement/sit-height.js)",
       "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."
     },
     "game3d/js/cast.js": {
@@ -23,10 +23,10 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 630,
-      "bytes": 22731,
+      "lines": 631,
+      "bytes": 22774,
       "owner": "codex-tui",
-      "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171); C-0210 close-only things lose close calls for the target (same line); 2026-10-01 issue #137: size passed to the place lifecycle (one line); 2026-10-02 issue #173: one import line for the shotengai place factory; 2026-10-02 issue #173: one import line for the east lane place factory (the gate and forecourt factories imported under their place names, so the registry stays on one line); 2026-10-02 issue #173: one import line for the east coast place factory; 2026-10-02 issue #173: one import line for the sports place factory; 2026-10-02 issue #173: one import line for the office quarter place factory, and the place registry one name a line (it no longer fits on one; the registration check needs plain keys); 2026-10-02 issue #173: one import line and one registry line for the harbour place factory; 2026-10-02 issue #173: one import line and one registry line for the works place factory; 2026-10-03 C-0378 day 2: Continue moved out to continue.js (ceiling lowered); ?day=N boot; 2026-10-04 C-0413: the per-frame target scan moved out to gameplay/targeting.js (ceiling lowered); 2026-10-04 C-0429: one import and one boot line for the local scene viewer hook (plugins.js installViewer); 2026-10-04 C-0439: hold to steer, one import, one install and two call lines (movement/steer.js); 2026-10-05 #227: one import line and one registry line for the pool deck place factory; 2026-10-05 #227: the same for the gym corner, the dorm common room and the karaoke desk and booth; 2026-10-05 #251: one import line and the Continue line that reloads into a save of another protagonist (mc.js)",
+      "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171); C-0210 close-only things lose close calls for the target (same line); 2026-10-01 issue #137: size passed to the place lifecycle (one line); 2026-10-02 issue #173: one import line for the shotengai place factory; 2026-10-02 issue #173: one import line for the east lane place factory (the gate and forecourt factories imported under their place names, so the registry stays on one line); 2026-10-02 issue #173: one import line for the east coast place factory; 2026-10-02 issue #173: one import line for the sports place factory; 2026-10-02 issue #173: one import line for the office quarter place factory, and the place registry one name a line (it no longer fits on one; the registration check needs plain keys); 2026-10-02 issue #173: one import line and one registry line for the harbour place factory; 2026-10-02 issue #173: one import line and one registry line for the works place factory; 2026-10-03 C-0378 day 2: Continue moved out to continue.js (ceiling lowered); ?day=N boot; 2026-10-04 C-0413: the per-frame target scan moved out to gameplay/targeting.js (ceiling lowered); 2026-10-04 C-0429: one import and one boot line for the local scene viewer hook (plugins.js installViewer); 2026-10-04 C-0439: hold to steer, one import, one install and two call lines (movement/steer.js); 2026-10-05 #227: one import line and one registry line for the pool deck place factory; 2026-10-05 #227: the same for the gym corner, the dorm common room and the karaoke desk and booth; 2026-10-05 #251: one import line and the Continue line that reloads into a save of another protagonist (mc.js); 2026-10-05 setSitLift imported from movement/sit-height.js (seat height fix)",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
@@ -59,9 +59,9 @@
     },
     "game3d/js/places/lobby.js": {
       "lines": 700,
-      "bytes": 25042,
+      "bytes": 25096,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; C-0210 background people as things (explicit registrations, the rest in places/background-people.js); 2026-10-03 C-0378 day 2: the day-2 ways out spread into the registries and lobbyDay2 installed (places/lobby-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 #227: the guard's monitor as a named thing (guard_monitor) and its place from the builder; 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each",
+      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; C-0210 background people as things (explicit registrations, the rest in places/background-people.js); 2026-10-03 C-0378 day 2: the day-2 ways out spread into the registries and lobbyDay2 installed (places/lobby-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 #227: the guard's monitor as a named thing (guard_monitor) and its place from the builder; 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-05 the gate bench seat at a cushion front edge (feedback 2026-10-05_192459)",
       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/office.js": {

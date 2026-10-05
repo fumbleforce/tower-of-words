@@ -241,6 +241,7 @@ import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
 import { meshyGait, codeStride, clipAction, clipActions, holdNow } from './movement/gait.js';
 import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR } from './mio.js';
 import { loadRelaxedIdle } from './relaxed-idle.js';
+import { seatUnderside, sitRootY } from './movement/sit-height.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
 export const loadEric = (o = {}) => loadMeshy('eric', { dir: EDIR, height: 1.2, ...o });
 // one-shot gesture clips from Meshy's library (bow, wave, shrug, nod), retargeted onto each rig as JSON
@@ -433,6 +434,7 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
   sitHip = new THREE.Vector3();
   hips.getWorldPosition(sitHip);
   root.worldToLocal(sitHip);
+  const sitUnder = seatUnderside(id + ':' + holder.scale.x, model, root, sitHip);
   mixer.stopAllAction();
   cur = null;
   curName = '';
@@ -461,17 +463,13 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
     get state() {
       return curName;
     },
-    // hips on the seat top at (x, z), facing ry, straight into the seated frame (gait.js holdNow)
+    // seated on the seat top at (x, z), facing ry, straight into the seated frame (gait.js holdNow)
     sitAt(x, seatTop, z, ry) {
-      root.position.set(x, seatTop + (SIT_LIFT - sitHip.y) * root.scale.x, z);
+      root.position.set(x, sitRootY(seatTop, sitUnder, root.scale.x), z);
       root.rotation.y = ry;
       setState('sit');
       holdNow(mixer, cur, [...Object.values(actions), ...Object.values(gact)], restoreBones, snapBones);
     },
   };
   return a;
-}
-export let SIT_LIFT = 0.05;
-export function setSitLift(v) {
-  SIT_LIFT = v;
 }
