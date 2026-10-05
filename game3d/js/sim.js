@@ -16,7 +16,7 @@ import { MOMENTS, REASONS, EXPECT } from './bonds/day1.js';
 import { peopleCards } from './ui/people-view.js';
 import PEOPLE from '../story/people.js';
 import { MC, expandMc, migrateMc } from './mc.js';
-import { defaultCast } from './roles.js';
+import { newCast } from './roles.js';
 
 expandMc(PEOPLE); // the protagonist's tokens in the People cards (mc.js)
 
@@ -57,7 +57,7 @@ export function installSim(game) {
   if (G === game) return;
   G = game;
   game.mc = MC; // the protagonist (mc.js) and the cast by role (roles.js; a save brings its own)
-  game.cast ||= defaultCast();
+  game.cast ||= newCast();
   const H = game.hooks;
   H.bond = (s) => {
     bond(game, s.who, s.add, s);
@@ -485,7 +485,7 @@ export function save(game) {
     if (game.ended) data.ended = true;
     data.log = ui.logJSON?.(); // the backlog (ui/backlog.js)
     data.mc = MC.id; // who plays this game (mc.js), and who fills each role (roles.js)
-    data.cast = game.cast || defaultCast();
+    data.cast = game.cast || newCast();
     localStorage.setItem(KEY, JSON.stringify(data));
   } catch {
     /* storage may be off */
@@ -500,7 +500,7 @@ export function loadSave() {
   }
 }
 export function restore(game, d) {
-  game.cast = d.cast || defaultCast();
+  game.cast = d.cast || newCast();
   game.pendingStart = d.pendingStart || null;
   game.transition = d.transition || null;
   game.ended = !!d.ended;

@@ -1,7 +1,9 @@
 // Seated people against the furniture round their seat (Jørgen, 2026-10-05, #240, on Emi at her new desk: "why is
 // she clipped into the table").
-//   node game3d/tools/seat-check.mjs [w] [h]          (BASE=<path to game3d> for a worktree, SHOTS=0 for no stills)
-// For each place where people sit (B2 on day 1 and day 2, the train, the day-2 party bench), it measures:
+//   node game3d/tools/seat-check.mjs [w] [h]          (BASE=<path to game3d> for a worktree, SHOTS=0 for no stills,
+//   ONLY=train,gate for some scenes, QS=&mc=carina adds to the page query: another protagonist's body as Eric)
+// For each place where people sit (B2 on day 1 and day 2, the train, the gate's bench, the day-2 party bench), it
+// measures:
 //  - everyone the place seats itself (as placed), and
 //  - every 3D-model body there (Eric, Mio and the Meshy cast) put on every seat of that place (the seats the story
 //    uses, the desk chairs people are placed on, Emi's guest chair and the lunch crates).
@@ -30,18 +32,19 @@ const SCENES = [
   { name: 'office-day1', q: 'place=office', office: true },
   { name: 'office-day2', q: 'day=2&place=office', office: true },
   { name: 'train', q: 'place=train' },
+  { name: 'gate', q: 'place=gate' },
   { name: 'party-day2', q: 'day=2&place=shotengai', party: true },
 ];
 const fails = [],
   notes = [];
 const log = {};
 // who sits on each named seat in the game (besides everyone a place seats itself, checked where they are): Eric at
-// his desk, on Emi's guest chair, on his lunch crate, on any free train seat and the party bench; Mio at her desk, her
-// crate and her train seats; Emi at her desk; Mori on the bench
+// his desk, on Emi's guest chair, on his lunch crate, on any free train seat, the gate's bench and the party bench;
+// Mio at her desk, her crate and her train seats; Emi at her desk; Mori on the bench
 const MINE = {
   my_seat: 'eric', mio_seat: 'mio', emi_seat: 'emi', emi_guest: 'eric', lunch_eric: 'eric', lunch_mio: 'mio',
   seat_aoi: 'eric', seat_far_r: ['eric', 'mio'], seat_near_l: 'eric', seat_near_r: 'eric', seat_mio: 'mio',
-  party_seat: 'eric', party_mori: 'mori',
+  party_seat: 'eric', party_mori: 'mori', bench_r: 'eric',
 };
 
 // ---- in the page ----
@@ -368,7 +371,7 @@ await withBrowserJob('seat-check', async (browser) => {
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', (e) => errors.push(e.message));
-    await page.goto(`http://127.0.0.1:8771/${base}/index.html?cap&q=1&${sc.q}`, { timeout: 60000 });
+    await page.goto(`http://127.0.0.1:8771/${base}/index.html?cap&q=1&${sc.q}${process.env.QS || ''}`, { timeout: 60000 });
     await page.waitForFunction(() => window.__done && window.__game?.place, null, { timeout: 120000 });
     await page.waitForTimeout(1500);
     const run = (phase, placed) => page.evaluate(inPage, { scene: sc, TOL, phase, placed }).catch((e) => ({ error: e.message }));

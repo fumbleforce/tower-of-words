@@ -1,4 +1,5 @@
 // Short named day-one scenarios restored through Continue. No full-day replay per branch.
+// --mc <id> / --cast <set or role=person,...> (or MC=, CAST=): every route as that protagonist and cast.
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -6,9 +7,10 @@ import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import day1 from '../test/routes/index.mjs';
 import day2 from '../test/routes/day2.mjs';
 import { choiceInventory, runRoute } from '../test/routes/driver.mjs';
+import { mcArgs } from '../test/support/mc-args.mjs';
 
 // --day 2: day 2's routes and its own choice inventory (test/routes/day2.mjs); day 1's otherwise
-const argv = process.argv.slice(2), dayAt = argv.indexOf('--day'), day = dayAt >= 0 ? +argv[dayAt + 1] : 1;
+const who = mcArgs(), argv = who.rest, dayAt = argv.indexOf('--day'), day = dayAt >= 0 ? +argv[dayAt + 1] : 1;
 const args = dayAt >= 0 ? argv.filter((_, i) => i !== dayAt && i !== dayAt + 1) : argv, worker = args[0] === '--worker';
 const routes = day === 2 ? day2 : day1;
 const names = new Set(routes.map(route => route.id));
@@ -22,7 +24,7 @@ if (args[0] === '--list') {
     await withBrowserJob(`day${day}-branches`, async browser => {
       for (const route of assigned) results.push(await runRoute(browser, route, {
         base: `http://127.0.0.1:${process.env.PORT || 8771}/${process.env.BASE || 'game3d'}`,
-        viewport: { width: +(process.env.WIDTH || 390), height: +(process.env.HEIGHT || 844) },
+        viewport: { width: +(process.env.WIDTH || 390), height: +(process.env.HEIGHT || 844) }, who,
       }));
     }, { timeoutMs: 280000 });
   } catch (error) {
@@ -37,7 +39,7 @@ if (args[0] === '--list') {
   selected.forEach((route, index) => groups[index % groups.length].push(route.id));
   const runWorker = group => new Promise(resolve => {
     let output = '';
-    const child = spawn(process.execPath, [fileURLToPath(import.meta.url), '--worker', ...group, '--day', String(day)], { env: process.env, stdio: ['ignore', 'pipe', 'pipe'] });
+    const child = spawn(process.execPath, [fileURLToPath(import.meta.url), '--worker', ...group, '--day', String(day)], { env: { ...process.env, MC: who.mc || '', CAST: who.spec || '' }, stdio: ['ignore', 'pipe', 'pipe'] });
     const timer = setTimeout(() => child.kill('SIGTERM'), 290000);
     child.stdout.on('data', data => { output += data; });
     child.stderr.on('data', data => { output += data; });
@@ -61,6 +63,7 @@ if (args[0] === '--list') {
   for (const row of results.sort((a, b) => a.id.localeCompare(b.id))) {
     console.log(`${row.pass ? 'PASS' : 'FAIL'} ${row.id.padEnd(30)} ${row.seconds?.toFixed(1) || '-'}s${row.error ? '  ' + row.error.split('\n')[0] : ''}`);
   }
+  if (who.label) console.log('playing:', who.label);
   console.log(`Routes ${passed}/${selected.length}; authored choice options ${inventory.length - missing.length}/${inventory.length}${args.length ? ' (selected routes only)' : ''}`);
   if (!args.length) for (const choice of missing) console.log(`UNCOVERED ${choice.id} ${choice.text}`);
   const directory = fileURLToPath(new URL(`../shots/routes/${new Date().toISOString().replace(/[:.]/g, '-')}-${process.pid}/`, import.meta.url));

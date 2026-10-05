@@ -24,7 +24,8 @@ export function choiceInventory(day = 1) {
   return found;
 }
 
-function seedSave(seed) {
+// who: --mc / --cast (test/support/mc-args.mjs); the save carries them as a new game started with them would
+function seedSave(seed, who = {}) {
   const place = seed.place, period = seed.period || 'morning', day = seed.day || 1;
   const known = seed.known || [];
   const flags = { place, period, ...seed.flags };
@@ -33,6 +34,7 @@ function seedSave(seed) {
     inv: seed.inv || [], yen: seed.yen ?? 1000, bonds: {},
     ui: { goal: 'Continue the branch under test.', sideGoal: '' },
     runner: { onceDone: seed.onceDone || [], execution }, pendingStart: null,
+    ...(who.mc ? { mc: who.mc } : {}), ...(who.cast ? { cast: who.cast } : {}),
     ...(seed.world ? { world: seed.world } : {}) };
 }
 
@@ -149,15 +151,15 @@ function expectNodes(actual, expected, label) {
   assert.equal(next, expected.length, `${label}: missing ordered node ${expected[next]}; saw ${actual.join(', ')}`);
 }
 
-export async function runRoute(browser, route, { base, viewport }) {
+export async function runRoute(browser, route, { base, viewport, who = {} }) {
   const started = Date.now();
   let opened, closing = false;
   const blocked = [], priorNodes = [], priorChoices = [];
   try {
     for (const word of route.expect.known || []) assert.ok(!(route.seed.known || []).includes(word),
       `Expected learned word ${word} is already in seed.known`);
-    const saved = seedSave(route.seed);
-    opened = await openGame(browser, { mode: 'title', viewport, url: `${base}/index.html?q=0`,
+    const saved = seedSave(route.seed, who);
+    opened = await openGame(browser, { mode: 'title', viewport, url: `${base}/index.html?q=0${who.query || ''}`,
       beforeNavigate: async (page, context) => {
         await context.route('**/*', scopedRoute({ publicOnly: true, isClosing: () => closing, onFailure: message => blocked.push(message) }));
         await page.addInitScript(saved => {
@@ -203,11 +205,13 @@ export async function runRoute(browser, route, { base, viewport }) {
       const { known } = await import(new URL('js/lang.js', location.href));
       const g = window.__game;
       return { ...window.__branch, flags: { ...flags }, known: [...known], inv: [...g.sim.inv], yen: g.sim.yen,
-        period: g.sim.period, ended: !!window.__ended, recovery: g.runner.recoveryError };
+        period: g.sim.period, ended: !!window.__ended, recovery: g.runner.recoveryError, mc: g.mc?.id, cast: g.cast };
     });
     expectNodes(priorNodes, route.expect.beforeReloadNodes || [], 'Before reload');
     assert.deepEqual([...opened.errors, ...blocked, ...state.errors], []);
     assert.ok(!state.recovery, state.recovery);
+    if (who.mc) assert.equal(state.mc, who.mc, 'Protagonist');
+    if (who.cast) assert.deepEqual(state.cast.roles, who.cast.roles, 'Cast');
     assert.deepEqual(state.queue, [], 'Route left choices unexercised');
     expectNodes(state.nodes, route.expect.nodes || [], route.resumeAt ? 'After reload' : 'Route');
     for (const [key, value] of Object.entries(route.expect.flags || {})) {

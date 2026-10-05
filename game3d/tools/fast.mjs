@@ -1,6 +1,7 @@
 // Fast QA run: the whole day in test mode (?test=fast). node game3d/tools/fast.mjs [w] [h] [seconds]
 // DAY=2 plays day 2 instead (?day=2: from a plain finished day 1; HISTORY=mori|cold for the other day-1 histories).
 // Runs at quality tier 0; QUALITY=1 (or 2) runs the day at that tier, with its own perf baseline (phone-q1).
+// --mc <id> plays another protagonist (?mc=), --cast <set or role=person,...> another cast (?cast=); or MC=, CAST=.
 // Prints PASS/FAIL, the places reached, the time taken and any page errors; saves the end screen.
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { fastResult } from '../test/support/fast-result.mjs';
@@ -11,6 +12,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { ensureBuild } from '../../tools/lib/build-stamp.mjs';
+import { mcArgs } from '../test/support/mc-args.mjs';
+const who = mcArgs();
 // Build checks first (fail the build): every spoken line has a voice clip, and no text in the story carries escape
 // leftovers (a backslash, &quot; ...), in spoken lines, narration, choices or prompts alike.
 {
@@ -39,8 +42,9 @@ import { ensureBuild } from '../../tools/lib/build-stamp.mjs';
   if (fails.length && process.env.SKIP_CHECKS) console.log('(build checks failing, skipped for this run: SKIP_CHECKS)');
   else if (fails.length) { console.log('FAIL build checks\n' + fails.join('\n')); process.exit(1); }
 }
-const [W = '1366', H = '860', S = '180'] = process.argv.slice(2);
+const [W = '1366', H = '860', S = '180'] = who.rest;
 const overrides = Object.fromEntries(['MOVE_WARN', 'VOICE_WARN', 'SKIP_CHECKS'].map(key => [key, !!process.env[key]]));
+if (who.label) console.log('playing:', who.label);
 console.log('overrides:', Object.keys(overrides).filter(key => overrides[key]).join(', ') || 'none');
 const output = fileURLToPath(new URL(`../shots/fast/${new Date().toISOString().replace(/[:.]/g, '-')}-${process.pid}`, import.meta.url));
 fs.mkdirSync(output, { recursive: true });
@@ -53,7 +57,7 @@ try { build = ensureBuild().id; } catch (error) { console.log('build stamp faile
 try {
   if (![W, H, S].every(value => Number.isFinite(+value) && +value > 0)) throw new Error('Width, height and seconds must be positive numbers');
   await withBrowserJob('fast-test', async browser => {
-    const url = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=${+process.env.QUALITY || 0}${process.env.ROUTE ? '&route=' + encodeURIComponent(process.env.ROUTE) : ''}${+process.env.DAY > 1 ? `&day=${+process.env.DAY}${process.env.HISTORY ? '&history=' + process.env.HISTORY : ''}` : ''}${process.env.Q || ''}`;
+    const url = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=${+process.env.QUALITY || 0}${process.env.ROUTE ? '&route=' + encodeURIComponent(process.env.ROUTE) : ''}${+process.env.DAY > 1 ? `&day=${+process.env.DAY}${process.env.HISTORY ? '&history=' + process.env.HISTORY : ''}` : ''}${who.query}${process.env.Q || ''}`;
     const game = await openGame(browser, { viewport: { width: +W, height: +H }, mode: 'fast', url });
     const { page } = game;
     pageErrors = game.errors;
@@ -63,10 +67,12 @@ try {
     try { await page.waitForFunction(() => window.__test?.done, null, { timeout: routeMs }); }
     catch (error) { errors.push(`Route wait failed: ${error.message.split('\n')[0]}`); }
     run = await page.evaluate(() => ({
-      ...window.__test, ended: !!window.__ended, place: window.__game.place?.name,
+      ...window.__test, ended: !!window.__ended, place: window.__game.place?.name, mc: window.__game.mc?.id, cast: window.__game.cast,
       goal: window.__game.ui.goalText, voices: window.__voiceLog, move: window.__moveCheck,
       gait: window.__gaitCheck && { long: window.__gaitCheck.reports(4), short: window.__gaitCheck.reports(2).length, windows: window.__gaitCheck.windows },
     }));
+    if (who.mc && run.mc !== who.mc) errors.push(`played ${run.mc}, not --mc ${who.mc}`);
+    if (who.cast && JSON.stringify(run.cast?.roles) !== JSON.stringify(who.cast.roles)) errors.push(`cast ${JSON.stringify(run.cast?.roles)}, not --cast ${who.spec}`);
     // per-place frame times, draw calls and triangles (js/perf/metrics.js); written to perf.json below
     try { perf = await page.evaluate(() => window.__perfReport?.() ?? null); }
     catch (error) { console.log(`perf numbers unavailable: ${error.message.split('\n')[0]}`); }
@@ -92,7 +98,7 @@ try {
     process.exitCode = 1;
   }
 }
-fs.writeFileSync(path.join(output, 'result.json'), JSON.stringify({ viewport: [+W, +H], run, ...result }, null, 2));
+fs.writeFileSync(path.join(output, 'result.json'), JSON.stringify({ viewport: [+W, +H], mc: who.mc, cast: who.spec, run, ...result }, null, 2));
 console.log(result.verdict, `${W}x${H}`, `${((Date.now() - started) / 1000).toFixed(0)} s`, 'route:', run.route,
   'places:', (run.places || []).join(' > '), 'at:', run.place, '| goal:', run.goal);
 console.log(`movement: ${run.move?.steps || 0} steps, ${result.overlaps || 0} overlaps, ${result.spins || 0} spins`);
