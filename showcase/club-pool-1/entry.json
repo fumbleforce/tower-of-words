@@ -1,0 +1,96 @@
+{
+  "title": "The pool deck, through the shower pavilion",
+  "date": "2026-10-05",
+  "by": "claude-agent:club-places",
+  "caption": "For the swimming club's last outdoor session of the season (days 3 to 5). The pavilion's door at the end of the pool walk now opens: Eric walks in and comes out of the men's changing room onto the deck, and goes back the same way. It also loads with ?place=pool. Nobody is there yet; the swim itself will be a scene.",
+  "sections": [
+    {
+      "title": "The pavilion's door",
+      "caption": "Before: the door at the pool walk's end was shut with a 準備中 card. After: the card is gone and Go in takes Eric through to the deck.",
+      "images": [
+        {
+          "id": "before-door-desk",
+          "image": "game3d/shots/club-before/pool-door-desk.png",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "before-door-phone",
+          "image": "game3d/shots/club-before/pool-door-phone.png",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-door-desk",
+          "image": "game3d/shots/club-pool/door-desk.png",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "after-door-phone",
+          "image": "game3d/shots/club-pool/door-phone.png",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "Out of the changing room",
+      "caption": "Where the trip puts him: outside the men's changing room, the pace clock on the wall between the showers.",
+      "images": [
+        {
+          "id": "after-arrive-desk",
+          "image": "game3d/shots/club-pool/deck-in-desk.png",
+          "caption": "Arriving, desktop"
+        },
+        {
+          "id": "after-arrive-phone",
+          "image": "game3d/shots/club-pool/deck-in-phone.png",
+          "caption": "Arriving, phone"
+        }
+      ]
+    },
+    {
+      "title": "The deck",
+      "caption": "Before: the deck could only be seen through the fence. After: walkable all round the pool. The steps down into the first lane with their rails, the winter cover on its reel against the south fence, two benches and the lifeguard's chair under the NO DIVING board on the west side, the loungers on the east side, the kickboard rack and pull buoys, the attendant's table with the lost-property tub.",
+      "images": [
+        {
+          "id": "after-south-desk",
+          "image": "game3d/shots/club-pool/deck-south-desk.png",
+          "caption": "The steps and the reel, desktop"
+        },
+        {
+          "id": "after-south-phone",
+          "image": "game3d/shots/club-pool/deck-south-phone.png",
+          "caption": "The steps and the reel, phone"
+        },
+        {
+          "id": "after-mid-desk",
+          "image": "game3d/shots/club-pool/deck-mid-desk.png",
+          "caption": "The west side, desktop"
+        },
+        {
+          "id": "after-mid-phone",
+          "image": "game3d/shots/club-pool/deck-mid-phone.png",
+          "caption": "The west side, phone"
+        },
+        {
+          "id": "after-east-desk",
+          "image": "game3d/shots/club-pool/deck-east-desk.png",
+          "caption": "The north end after work, desktop"
+        },
+        {
+          "id": "after-east-phone",
+          "image": "game3d/shots/club-pool/deck-east-phone.png",
+          "caption": "The north end after work, phone"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play it",
+      "href": "game3d/index.html?place=pool"
+    },
+    {
+      "label": "Places doc",
+      "href": "docs/game/places.md"
+    }
+  ]
+}
