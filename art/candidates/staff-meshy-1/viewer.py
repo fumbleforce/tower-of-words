@@ -28,8 +28,8 @@ os.makedirs(d, exist_ok=True)
 json.dump(cfg, open(f'{d}/viewer.json', 'w'), indent=1, ensure_ascii=False)
 if sit:
     led = json.load(open(f'{d}/credits.json'))
-    if not any(e['part'].endswith('-sit') for e in led):
-        led.append({'service': 'meshy', 'part': f'{cid}-sit', 'task': sit[0], 'status': 'SUCCEEDED', 'credits': int(sit[1]),
+    if not any(e.get('task') == sit[0] for e in led):
+        led.append({'service': 'meshy', 'part': f'{cid}-sit-' + sit[0][:8], 'task': sit[0], 'status': 'SUCCEEDED', 'credits': int(sit[1]),
                     'balance_after': int(sit[2]), 'settings': {'action_id': 32, 'name': 'Chair_Sit_Idle_F'},
                     'note': f'for the game: tools/characters/meshy.py anim {cid} <rig task> 32 sit'})
         json.dump(led, open(f'{d}/credits.json', 'w'), indent=1)
