@@ -9,10 +9,10 @@
   "pronouns": { "they": "she", "them": "her", "their": "her", "theirs": "hers", "themself": "herself" },
   "address": { "default": "カリーナさん", "by": {} },
   "portrait": {
-    "set": "eric",
+    "set": "carina",
     "faces": ["neutral", "surprised", "tired"],
-    "crop": { "W": 648, "H": 768, "f": [116, 203, 340, 394] },
-    "note": "PLACEHOLDER: Eric's portraits and crop until Carina's are approved (art agent)"
+    "crop": { "W": 648, "H": 768, "f": [219, 216, 429, 396] },
+    "note": "art/approved/carina (Jørgen's carina-9-jorgen face; fitted to the cast framing by tools/portrait_fit.py, face box from art/approved/carina/crop.json)"
   },
   "model": { "id": "carina", "dir": "characters/carina/", "height": 1.12, "chibi": "eric" },
   "voice": {
@@ -27,5 +27,5 @@
     "home": "dorm room 203 on 2F"
   },
   "text": {},
-  "placeholders": ["portrait", "voice.lines", "voice.words", "voice.ref"]
+  "placeholders": ["voice.lines", "voice.words", "voice.ref"]
 }
