@@ -14,12 +14,12 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { ensureBuild } from '../../tools/lib/build-stamp.mjs';
 import { mcArgs } from '../test/support/mc-args.mjs';
 const who = mcArgs();
-// Build checks first (fail the build): every spoken line has a voice clip, and no text in the story carries escape
+// Build checks first (fail the build): every line the protagonist playing hears or says has a voice clip, and no text in the story carries escape
 // leftovers (a backslash, &quot; ...), in spoken lines, narration, choices or prompts alike.
 {
   const G = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
   const fails = [];
-  try { console.log(execFileSync('node', [path.join(G, 'tools/voice-manifest.mjs'), '--check', '--day', String(+process.env.DAY || 1)], { encoding: 'utf8' }).trim()); }
+  try { console.log(execFileSync('node', [path.join(G, 'tools/voice-manifest.mjs'), '--check', '--day', String(+process.env.DAY || 1), '--mc', who.mc || 'eric'], { encoding: 'utf8' }).trim()); }
   catch (e) {
     const out = (e.stdout || '').trim() || 'voice check failed';
     // VOICE_WARN=1: missing clips warn instead of failing (a build shipped before the GPU is free); escapes still fail
