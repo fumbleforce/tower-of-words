@@ -1,5 +1,120 @@
 [
   {
+    "id_": "prop/dorm_commons/art_table",
+    "kind": "prop",
+    "name": "Art materials",
+    "paths": [
+      "game3d/js/places/commons.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "commons.js things.art_table",
+    "place": "dorm_commons",
+    "used": [
+      "Dorm common room: tap target 'Art materials'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "commons"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/dorm_commons/commons_board",
+    "kind": "prop",
+    "name": "Notice board",
+    "paths": [
+      "game3d/js/places/commons.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "commons.js things.commons_board",
+    "place": "dorm_commons",
+    "used": [
+      "Dorm common room: tap target 'Notice board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "commons"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_commons/commons_door",
+    "kind": "prop",
+    "name": "To the inner court",
+    "paths": [
+      "game3d/js/places/commons.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "commons.js things.commons_door",
+    "place": "dorm_commons",
+    "used": [
+      "Dorm common room: tap target 'To the inner court'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "commons"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_commons/commons_printer",
+    "kind": "prop",
+    "name": "Printer",
+    "paths": [
+      "game3d/js/places/commons.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "commons.js things.commons_printer",
+    "place": "dorm_commons",
+    "used": [
+      "Dorm common room: tap target 'Printer'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "commons"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/dorm_commons/drying_rack",
+    "kind": "prop",
+    "name": "Drying rack",
+    "paths": [
+      "game3d/js/places/commons.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "commons.js things.drying_rack",
+    "place": "dorm_commons",
+    "used": [
+      "Dorm common room: tap target 'Drying rack'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "commons"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/dorm_court/bath",
     "kind": "prop",
     "name": "Bath",
@@ -246,6 +361,29 @@
     "view": {
       "type": "room",
       "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_coast/commons",
+    "kind": "prop",
+    "name": "Common room",
+    "paths": [
+      "game3d/js/places/east-coast.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-coast.js things.commons",
+    "place": "east_coast",
+    "used": [
+      "East coast: tap target 'Common room'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-coast"
     },
     "tags": [
       "in game",

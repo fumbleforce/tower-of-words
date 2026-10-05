@@ -108,6 +108,7 @@
       "shotengai": "game3d/js/places/shotengai.js",
       "east_lane": "game3d/js/places/east-lane.js",
       "east_coast": "game3d/js/places/east-coast.js",
+      "dorm_commons": "game3d/js/places/commons.js",
       "sports": "game3d/js/places/sports.js",
       "pool": "game3d/js/places/pool.js",
       "gym": "game3d/js/places/gym.js",
@@ -129,6 +130,7 @@
       "shotengai": {},
       "east_lane": {},
       "east_coast": {},
+      "dorm_commons": {},
       "sports": {},
       "pool": {},
       "gym": {},
@@ -267,6 +269,7 @@
     "shotengai",
     "east_lane",
     "east_coast",
+    "dorm_commons",
     "sports",
     "pool",
     "gym",
@@ -507,6 +510,9 @@
     "east_coast:shut",
     "east_coast:to_east_lane",
     "east_coast:to_sports",
+    "east_coast:to_commons",
+    "dorm_commons:arrive",
+    "dorm_commons:to_court",
     "sports:arrive",
     "sports:to_east_lane",
     "sports:to_coast",
@@ -1355,6 +1361,18 @@
     {
       "from": "east_coast:to_sports",
       "to": "sports:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "east_coast:to_commons",
+      "to": "dorm_commons:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "dorm_commons:to_court",
+      "to": "east_coast:arrive",
       "kind": "trip",
       "labels": []
     },

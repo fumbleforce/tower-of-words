@@ -28,6 +28,7 @@ const POSE = {
   row: { yaw: -Math.PI / 2 - 0.25, elev: deg(58) }, // a little from the north, steep: the row's trees are on its south side
   coast: { yaw: -0.6, elev: deg(56) },
   onsen: { yaw: 0, elev: deg(52) },
+  inner: { yaw: 0.12, elev: deg(56) }, // on the inner court: north, the common room's door facing it
 };
 const smooth = THREE.MathUtils.smoothstep,
   lerp = THREE.MathUtils.lerp;
@@ -38,6 +39,7 @@ export async function eastCoastPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const T = w.turns;
   const turn = turningCam(cam, (x, z) => {
+    if (inRect(x, z, T.inner)) return POSE.inner;
     const r = (1 - smooth(x, T.row.x[0], T.row.x[1])) * smooth(z, T.row.z[0], T.row.z[1]),
       o = 1 - smooth(z, T.onsen.z[0], T.onsen.z[1]);
     return {
@@ -46,6 +48,7 @@ export async function eastCoastPlace(game) {
     };
   });
   const door = w.doors[0],
+    commons = w.doors[1],
     out = w.exits.east_lane,
     west = w.exits.sports;
   const pool = roadClosure({ nav: w.nav, space: w.root }, west, (x, z) => inRect(x, z, west.zone));
@@ -82,6 +85,13 @@ export async function eastCoastPlace(game) {
       spot: () => door.step,
       face: () => door.local,
     },
+    // the common room's glazed door on the inner court (places/commons.js)
+    commons: {
+      ...PLACE_DETAILS.east_coast.things.commons,
+      anchor: (v) => v.set(commons.local[0], 1.95, commons.local[1]),
+      spot: () => commons.step,
+      face: () => commons.local,
+    },
   };
   const P = {
     scene: w.scene,
@@ -101,6 +111,8 @@ export async function eastCoastPlace(game) {
       east_coast_lookout: w.nooks.east_coast_lookout,
       east_coast_shrine: w.nooks.east_coast_shrine,
       lookout_view: visit.spots.lookout_view,
+      inner_court: w.inner.square,
+      inner_court_bench: w.inner.bench,
     },
     seats: {},
     people: { kuroda: visit.people.kuroda },
@@ -125,6 +137,8 @@ export async function eastCoastPlace(game) {
       const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;
       if (near(out.zone) && !game.prepared.east_lane) game.prepare?.('east_lane');
       if (near(west.zone) && !game.prepared.sports && !pool.closed()) game.prepare?.('sports');
+      const [cx, cz] = commons.step;
+      if (Math.hypot(p.x - cx, p.z - cz) < 7 && !game.prepared.dorm_commons) game.prepare?.('dorm_commons');
     },
     onPeriod(period) {
       w.cards(sim.day, period); // the shops' door cards for the day and the time (scenes/shop-signs.js WHEN)
@@ -149,10 +163,15 @@ export async function eastCoastPlace(game) {
     // in off the dorm street onto the row, walking east; out the same way; from the sports ground in along the
     // courts walk to the onsen path's foot, walking east, and out the same way
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, Math.PI / 2),
-    tripInFrom: { sports: (g) => walkIn(g, cam, west.edge, west.in, Math.PI / 2) },
-    tripOutTo: Object.fromEntries(
-      Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)]),
-    ),
+    tripInFrom: {
+      sports: (g) => walkIn(g, cam, west.edge, west.in, Math.PI / 2),
+      // out of the common room's glazed door onto the inner court, walking south
+      dorm_commons: (g) => walkIn(g, cam, commons.local, commons.step, 0),
+    },
+    tripOutTo: {
+      ...Object.fromEntries(Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)])),
+      dorm_commons: (g) => walkOut(g, cam, commons.step, commons.local),
+    },
   };
   visit.install(P);
   return P;

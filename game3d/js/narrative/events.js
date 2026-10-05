@@ -21,6 +21,7 @@ export const PLACE_EVENTS = {
   shotengai: { start: { id: 'start', source: 'engine' } },
   east_lane: { start: { id: 'start', source: 'engine' } },
   east_coast: { start: { id: 'start', source: 'engine' } },
+  dorm_commons: { start: { id: 'start', source: 'engine' } },
   sports: { start: { id: 'start', source: 'engine' } },
   pool: { start: { id: 'start', source: 'engine' } },
   gym: { start: { id: 'start', source: 'engine' } },

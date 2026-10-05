@@ -33,6 +33,7 @@ const BATCHED = new Set([
   'shotengai',
   'east_lane',
   'east_coast',
+  'dorm_commons',
   'sports',
   'pool',
   'gym',

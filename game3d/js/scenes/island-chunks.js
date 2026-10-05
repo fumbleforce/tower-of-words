@@ -88,6 +88,15 @@ export const CHUNKS = {
     view: [-56, 18, -112, 20],
     anchor: 'the middle of the dorms’ sea terrace, at the dorm row’s east end',
   },
+  dorm_commons: {
+    at: [100.9, 2.1],
+    turn: 0, // an interior: the camera looks in from the south over the cut-down front wall (scenes/rooms/commons.js)
+    scale: 1,
+    level: 0,
+    walk: [-4.0, 4.0, -4.7, 0],
+    view: [-4.2, 4.2, -4.9, 0.4],
+    anchor: 'the common room’s glazed door in dorm_gallery’s south face, inside',
+  },
   sports: {
     at: [58.2, -57.5],
     turn: 0, // the camera turns itself: north over the lane and the pool walk, east along the courts walk (scenes/sports.js)

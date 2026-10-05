@@ -56,10 +56,19 @@ export const GATE = { x: GX, w: 2.5 }; // between its posts
 export const PORCH = [GX - 1.6, GX + 1.6, HALL[3], HALL[3] + 1.1];
 const STONE_WALK = [GX - 1, GX + 1, HALL[3] + 0.2, WALL_Z + 0.6]; // the gate to the door, in and under the porch
 
+// the inner court (dorm-court/cluster.js lays it): north off the row up the north-south walk to the common room's
+// glazed door in dorm_gallery's south face, and the east-west walk from dorm_1e's door to dorm_3's, crossing at the
+// square round the maple's bed
+const NS = C.NS,
+  EW = C.EW;
+export const INNER = [EW[0], EW[1], C.COURT[2], C.ROW[2]];
 // the walkable rects, in the island frame
 const ROW = C.ROW;
 const I_WALKS = [
   [ROW[0] - 0.3, ROW[1], ROW[2], ROW[3]],
+  [NS[0], NS[1], C.COURT[2] + 0.12, ROW[2] + 0.1],
+  [EW[0] + 0.12, EW[1] - 0.12, EW[2], EW[3]],
+  C.SQUARE,
   C.SQUARE_END,
   C.SEA_WALK,
   C.TERRACE,
@@ -134,10 +143,21 @@ export const FURNITURE = [
   post([TR[1] - 0.4, TR[2] + 0.4]),
   [TR[0], TR[1], TR[3] - 0.3, TR[3] + 0.1],
   ...LAMPS.map((p) => post(p)),
+  // the inner court's: the maple's raised bed, the benches round it, the bins, the two lamps
+  C.PLANTER,
+  ...C.SQUARE_BENCHES.map(([x, z, f]) =>
+    Math.abs(Math.sin(f)) > 0.5 ? [x - 0.3, x + 0.3, z - 0.62, z + 0.62] : [x - 0.62, x + 0.62, z - 0.3, z + 0.3],
+  ),
+  post([C.SQUARE_BINS[0], C.SQUARE_BINS[1]], 0.35),
+  ...C.COURT_LAMPS.map((p) => post(p)),
 ].map(rect);
 
 // the shut door: on the hall's south face under the porch (local), and where Eric stands to try it (step)
-export const DOORS = [{ id: 'onsen', local: pt([GX, HALL[3]]), step: pt([GX - 0.35, HALL[3] + 1.0]) }];
+export const DOORS = [
+  { id: 'onsen', local: pt([GX, HALL[3]]), step: pt([GX - 0.35, HALL[3] + 1.0]) },
+  // the common room's glazed door in dorm_gallery's south face, on the north-south walk's axis
+  { id: 'commons', local: pt([C.AXIS_X, C.COURT[2]]), step: pt([C.AXIS_X, C.COURT[2] + 1.0]) },
+];
 
 // the ways out ({ edge, lane, zone } as the east lane's EXITS): west along the dorm row onto the dorm street, to the
 // east lane; west along the courts walk from the onsen path's foot, to the sports ground (in: where he walks to,
@@ -178,6 +198,7 @@ export const BOUNDS = (() => {
 // then from the coast's look to the onsen's as he comes off the coast walk onto the onsen path ([z from, z to]);
 // all in the chunk's frame
 export const TURNS = {
+  inner: rect([INNER[0], INNER[1], INNER[2] - 1, INNER[3] - 0.2]), // on the inner court: north at the common room
   row: { x: [pt([SQ[1] - 4, 0])[0], pt([TR[1] - 1, 0])[0]], z: [pt([0, ROW[2] - 8])[1], pt([0, ROW[2] - 4])[1]] },
   onsen: { z: [pt([0, W2[2] - 2])[1], pt([0, W2[3]])[1]] },
 };

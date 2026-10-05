@@ -56,6 +56,8 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `sports` → `gym`, walk: Eric goes in at the gym's main doors; the camera closes in on him at the doors and crossfades to the same close framing of him walking in onto the entrance's tiles inside them, as the camera lets go.
 - `gym` → `sports`, walk: the same way back, out through the main doors, crossfading to him walking out onto the gym's apron and the sports lane, heading south.
 - `pool` → `sports`, walk: the same way back, in at the men's changing room's door on the deck, crossfading to him walking out of the pavilion's door onto the pool walk, heading west.
+- `east_coast` → `dorm_commons`, walk: Eric goes in at the common room's glazed door at the north end of the inner court; the camera closes in on him at the door and crossfades to the same close framing of him walking in onto the common room's floor, as the camera lets go.
+- `dorm_commons` → `east_coast`, walk: the same way back, out through the glazed door, crossfading to him walking out onto the inner court, heading south.
 - `sports` → `office_quarter`, walk: Eric walks west along the sports lane past the gym's front, north round the gym's corner and west into the office street; the camera closes in and crossfades to the same close framing of him walking on west along the street, as the camera lets go.
 - `office_quarter` → `sports`, walk: the same corner the other way, east along the street, south round the gym's corner and east along the sports lane, crossfading to him walking on east toward the gym's front.
 - `office_quarter` → `harbour`, walk: Eric walks west along the office street past Amakawa Trading toward the harbour walk's mouth; the camera closes in and crossfades to the same close framing of him walking on west along the street past the walk's mouth, toward the supply yard, as the camera lets go.
@@ -92,6 +94,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `shotengai` | 64.5 | 20.15 | 270 | 1 | 0 | The middle of the arcade's east mouth, between the two shop rows; its camera looks west down the arcade. |
 | `east_lane` | 69.27 | -2.75 | 0 | 1 | 0 | The middle of the pocket park's gravel square, where its two walks cross. Its camera turns: north-east over most of it, south-east over the south walk. |
 | `east_coast` | 126.5 | 10.5 | 0 | 1 | 0 | The middle of the dorms' sea terrace, at the dorm row's east end. Its camera turns: east along the row, north-east up the coast, north at the onsen. |
+| `dorm_commons` | 100.9 | 2.1 | 0 | 1 | 0 | The common room's glazed door in dorm_gallery's south face, inside. An interior, looked into from the south over its cut-down front wall. |
 | `sports` | 58.2 | -57.5 | 0 | 1 | 0 | The corner where the pool walk meets the courts walk. Its camera turns: a little east of north over the lane and the pool walk, east-north-east at the pavilion, east along the courts walk. |
 | `pool` | 58.2 | -57.5 | 0 | 1 | 0 | The sports ground's own frame and world, walked on the deck inside the pool's fence. Its camera looks a little east of north up the pool from the south-west. |
 | `gym` | 47.05 | -50.9 | 0 | 1 | 0 | The gym's main doors, inside: the south end of the hall as far as the divider net. An interior, looked into from the south over its cut-down front wall. |
@@ -598,13 +601,13 @@ The crowd ([systems.md](systems.md), The crowd):
 
 The third district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Dorms" and "Sports and baths"). It runs from the dorm street east along the dorm row to the dorms' sea terrace, north up the east coast and on to the onsen's front. The dorm row, the terrace and the blocks round the inner court are the dorm cluster the plaza, the east lane and the dorm courtyard show as backdrop (under the dorm courtyard below), built by the same code, with the courtyard and Eric's block as the plaza shows them. Eric comes in from the east lane, off the dorm street (Getting between places).
 
-Walked: the dorm row from the dorm street east to the square at dorm_3's door, the walk on east to the sea terrace, and the terrace (not its pine bed, benches, drinks machine or lamp); the east coast walk out of the terrace's east side, north along the coast behind dorm_4, west where the coast comes in, north past dorm_6 and west behind the north residence; the onsen path north along the tennis courts' fence and east along the onsen's precinct wall to the red gate; inside the gate, the stone walk to the onsen's porch; and from the onsen path's foot a few steps west along the courts walk, which goes on to the sports ground (`sports`, below). The terrace's low wall on the coast side is now open on its east side, where the walk leaves it; a finger sign there points along it: Onsen 温泉 →, and another where the onsen path turns east.
+Walked: the dorm row from the dorm street east to the square at dorm_3's door, and north off it the inner court (issue #227, the art club): the north-south walk up to the common room's glazed door in dorm_gallery's south face, the paved square round the maple's raised bed where it crosses the east-west walk, and that walk from dorm_1e's door to dorm_3's (not the bed, the benches, the bins or the lamps); the walk on east to the sea terrace, and the terrace (not its pine bed, benches, drinks machine or lamp); the east coast walk out of the terrace's east side, north along the coast behind dorm_4, west where the coast comes in, north past dorm_6 and west behind the north residence; the onsen path north along the tennis courts' fence and east along the onsen's precinct wall to the red gate; inside the gate, the stone walk to the onsen's porch; and from the onsen path's foot a few steps west along the courts walk, which goes on to the sports ground (`sports`, below). The terrace's low wall on the coast side is now open on its east side, where the walk leaves it; a finger sign there points along it: Onsen 温泉 →, and another where the onsen path turns east.
 
 The coast walk is pale slabs between kerbs, 2 wide, turning in squares. On its landward edge stand post lamps about every 8, and two paved bays with a bench look over it to the sea. Between it and the coast's wall (the forecourt's wall, rocks and broken surf, here along the east coast) a strip of black pines; behind dorm_4 and dorm_6 a grove of cherries on the lawn; where it turns inland, pines and zelkovas; a clipped hedge along the north residence's back. The onsen path runs between the tennis courts (two hard courts with their lines and nets inside a steel fence) and the onsen's grounds: a wood of pines, maples and zelkovas, kept back from the path by a band of layered planting, and a belt of trees between the path and the precinct wall.
 
 The onsen: a precinct wall of white plaster on a stone base under a tiled cap, the red gate in its south side on the hall's door axis: two round vermilion posts on stones, a tie beam, a dark top beam and a small tiled gable, its two leaves standing open against the wall's inside, and by its west post a tall board with おんせん written top to bottom. Inside, a stone walk of dark slabs runs up to the porch between raked gravel, with a big black pine and a set of rocks to the west, a maple to the east and a stone lantern either side of the walk by the porch; a moss garden with maples and a pine lies behind the west corner. The hall is two storeys of white plaster between dark timber posts over a dark timber skirt, with lattice windows over paper screens, a tiled pent roof along the ground floor and a tiled gable roof over all. The porch on the axis has two posts with paper lanterns, its own tiled roof, and おんせん ONSEN on a board standing on its eave; its sliding lattice doors are shut, with a white card on the glass: 準備中 CLOSED (after work on day 2 a larger notice in its place: 本日休業, ボイラー修理のため, CLOSED TODAY · BOILER REPAIR). East of the hall, toward the sea, two bath courtyards behind bamboo fences, each with a rock-edged pool. Nothing behind the door is built.
 
-The camera turns with the place, and a held direction key keeps its frame until it is let go (as in the east lane). Along the row it looks east toward the terrace and the sea, from a little north of the row and steeply, so the row's trees, on its south side, don't hide Eric; over the terrace it turns to look north-east up the coast, the sea on the right; as he comes off the coast walk onto the onsen path it turns to look north, so the gate and the hall's front face it.
+The camera turns with the place, and a held direction key keeps its frame until it is let go (as in the east lane). Along the row it looks east toward the terrace and the sea, from a little north of the row and steeply, so the row's trees, on its south side, don't hide Eric; over the terrace it turns to look north-east up the coast, the sea on the right; as he comes off the coast walk onto the onsen path it turns to look north, so the gate and the hall's front face it. On the inner court it looks north from the row's side, so the common room's door faces it.
 
 In the morning the sun is the plaza's; after work the lamps, the stone lanterns, the porch's lanterns and the onsen's paper screens light up, with the town's windows. It also loads directly with `?place=east_coast`, on the row. Nobody is here yet.
 
@@ -617,10 +620,11 @@ In the morning the sun is the plaza's; after work the lamps, the stone lanterns,
 | `lookout` | Lookout | The lookout nook (`east_coast_lookout`); its pin shows while the story uses it (day 2). Look. The coin telescope's slot is taped over ("Free to use"). Below it, in a gap in the armour rocks, narrow maintenance steps go down off the sea wall's coping into the water, the lowest two wet and under the surface; they can't be walked. |
 | `kuroda` | Mr. Hamada | Day 2, after work, at the telescope. |
 | `onsen` | Onsen | The onsen's door under its porch. Go in: shut. |
+| `commons` | Common room | The common room's glazed door in dorm_gallery's south face, at the north end of the inner court's north-south walk. Go in: into the dorm common room (`dorm_commons`). |
 
 ### Spots
 
-`row_entry` (on the dorm row, the terrace ahead); `lookout_view` (the shoreline below the lookout, where the view through the telescope is framed from above); and each nook below
+`row_entry` (on the dorm row, the terrace ahead); `inner_court` (on the inner court's square, by the maple's bed), `inner_court_bench` (in front of the square's bench facing the common room); `lookout_view` (the shoreline below the lookout, where the view through the telescope is framed from above); and each nook below
 
 ### Nooks
 
@@ -667,6 +671,7 @@ The crowd ([systems.md](systems.md), The crowd):
 | `shut` | Go in at the onsen's door | The door is shut; a card on the glass says 準備中: not open yet. |
 | `to_east_lane` | Use or walk into the dorm row's west end | Eric walks back to the dorm street. |
 | `to_sports` | Use or walk west along the courts walk | Eric walks on west to the sports ground. |
+| `to_commons` | Go in at the common room's glazed door | Eric walks in, into the dorm common room. |
 
 ### Creatures
 
@@ -677,6 +682,62 @@ The crowd ([systems.md](systems.md), The crowd):
 | `crows` | crow | 2 | `all` | On the roofs and the trees. |
 | `butterflies` | butterfly | 2 | `day` | Over the grass. |
 | `dragonflies` | dragonfly | 3 | `day` | Over the grass. |
+
+## Dorm common room (`dorm_commons`)
+
+The ground floor of dorm_gallery, the dorms' common building on the inner court, for the art club (issue #227; [days 3 to 5](../../notes/days3-5-outline.md): the shared table, the materials, the drying shelf and the printer). In through the glazed door at the north end of the inner court's north-south walk, off the dorm row in the east coast, and out the same way (Getting between places). It also loads directly with `?place=dorm_commons`, inside the door. Built as a room in its own frame (scenes/rooms/commons.js) on the club interiors' shared shell.
+
+The camera looks in from the south over the cut-down front wall: on a desktop the whole room in one still frame, on a phone following Eric. Walked: the floor round the furniture.
+
+A boarded floor and pale walls, three windows high in the north wall onto the back walk. West, the lounge: a TV on a low cabinet against the wall, a teal sofa facing it across a low table with a remote and two mugs, on a rug; a bookshelf of mixed spines nearer the door. In the middle the long shared table with green chairs round it, the art club's materials set out at its east end: a cutting mat with a stack of paper, two jars of brushes, paint tubes and a palette. Against the north wall a drying rack of wire shelves, sheets laid flat on it and one hung by pegs from the top rail, and beside it the shared kitchen: the fridge with notes stuck on its door, a counter with the sink, two hobs, a kettle and a rice cooker, a wall cupboard over it. By the east wall the printer on a low cabinet, a sheet in its tray, and a notice board over it.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `commons_door` | To the inner court | The glazed door, back out onto the inner court. |
+| `commons_printer` | Printer | The common room's printer by the east wall. Named for the tickets; nothing uses it yet. |
+| `art_table` | Art materials | The art club's materials at the shared table's east end. Nothing uses them yet. |
+| `drying_rack` | Drying rack | The rack of wire shelves against the north wall, sheets drying on it. Nothing uses it yet. |
+| `commons_board` | Notice board | The notices over the printer. Nothing uses it yet. |
+
+### Spots
+
+`commons_in` (inside the door, the arrival point), `commons_table` (at the table's south-east corner, by the materials), `commons_sofa` (between the sofa and the table), `commons_kitchen` (at the kitchen counter), `commons_rack` (in front of the drying rack); and each nook below
+
+### Nooks
+
+Small places in the room, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `commons_books` | In front of the bookshelf by the west wall. | Three shelves of mixed spines with gaps. | Something left between two books. |
+| `commons_fridge` | At the fridge, at the kitchen's west end. | Notes stuck on its door, names on the food inside. | A note on the door, a name on a box. |
+
+### Seats
+
+`commons_sofa` (the sofa, facing the TV)
+
+### Zones
+
+None.
+
+### Who's there when
+
+None of the cast yet.
+
+| Id | Usually | Schedule |
+|---|---|---|
+| `mio` | Not here. | – |
+
+No crowd.
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Arrive | Goal line: "Head office is back west past the plaza. Take its lift down to B2."; after work, "The dorms are back along the row, through the gate off the street." |
+| `to_court` | Use the glazed door | Eric walks back out onto the inner court. |
 
 ## Gym and pool (`sports`)
 

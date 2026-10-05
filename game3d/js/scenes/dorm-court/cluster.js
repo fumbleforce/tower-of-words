@@ -132,23 +132,10 @@ function* court(p, lights) {
   ])
     mound(p, AXIS_X + dx, AXIS_Z + dz, 0.2, LEAF.fresh, { y: 0.4 });
   yield;
-  // round the bed, no two corners alike: a bench facing it, one turned to face along the walk, a bench facing the
-  // gallery, the sorted bins
-  const off = (ns[1] - ns[0]) / 2 + 0.85;
-  bench(p, AXIS_X - off, SQUARE[2] + 0.45, 0, { len: 1.1 });
-  bench(p, AXIS_X + off + 0.2, SQUARE[2] + 0.75, -Math.PI / 2, { len: 1.1 });
-  bench(p, AXIS_X - off, SQUARE[3] - 0.45, Math.PI, { len: 1.1 });
-  bins(p, AXIS_X + off, SQUARE[3] - 0.35, Math.PI);
-  // the lamps on the east-west walk's edges just outside the square, one each side
-  lamps(
-    lights,
-    p,
-    [
-      [SQUARE[0] - 0.5, EW[2] + 0.2],
-      [SQUARE[1] + 0.5, EW[3] - 0.2],
-    ],
-    { pool: 1.5 },
-  );
+  // round the bed: three benches, the sorted bins; the lamps on the east-west walk's edges (cluster-plan.js)
+  for (const [x, z, f] of C.SQUARE_BENCHES) bench(p, x, z, f, { len: 1.1 });
+  bins(p, ...C.SQUARE_BINS);
+  lamps(lights, p, C.COURT_LAMPS, { pool: 1.5 });
   yield;
   const gz = GAL[3] + 0.3;
   // two bikes left on the apron by the common building's east end, and a third by dorm_1e's door
