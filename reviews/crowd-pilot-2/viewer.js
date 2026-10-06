@@ -157,8 +157,10 @@ function frameAll(y = 0.55, k = 1) {
   const xs = figures.map((f) => f.x0);
   const w = loop ? 2 * (OVAL.half + OVAL.r) + 0.6 : Math.max(...xs) - Math.min(...xs) + 1;
   const cx = (Math.max(...xs) + Math.min(...xs)) / 2;
+  const aspect = canvas.clientWidth / canvas.clientHeight;
+  const distance = Math.max(1.2 + w * 1.25, w / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * aspect));
   controls.target.set(cx, y, 0);
-  camera.position.set(cx, y + (loop ? 2.2 : 0.5) * k, (1.2 + w * 1.25) * k);
+  camera.position.set(cx, y + (loop ? 2.2 : 0.5) * k, distance * k);
   controls.update();
 }
 
