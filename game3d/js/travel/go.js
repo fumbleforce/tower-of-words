@@ -46,6 +46,7 @@ export async function travelStates(game) {
   const opts = {
     day,
     cond,
+    visited,
     transitions: day === 1 ? transitions : null,
     onceFor: (p) => (p === here ? game.runner.onceDone : null),
   };

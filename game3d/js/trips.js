@@ -2,6 +2,7 @@
 // them with the transition's dialogue slots from game3d/story/transitions.js. A place with more than one
 // neighbour gives per-neighbour moves in tripOutTo / tripInFrom (keyed by the other place's name).
 import { ui } from './ui.js';
+import { fastLiftArrival } from './travel/arrival.js';
 
 export async function leave(game, place, slot) {
   const talk = slot.walk ? game.runner.ambient(slot.walk) : null;
@@ -41,7 +42,7 @@ function camSettled(game, place) {
 
 export async function arrive(game, place, slot) {
   const tripIn = place.tripInFrom?.[game.transition?.from] || place.tripIn;
-  if (tripIn) await tripIn(game, slot);
+  if (!fastLiftArrival(game, place) && tripIn) await tripIn(game, slot);
   await fadeGone(game);
   await camSettled(game, place);
   if (slot.arrive && slot.arrive.length) {

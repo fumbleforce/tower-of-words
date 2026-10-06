@@ -60,7 +60,9 @@ const GROUPS = [
 ];
 // every pinned place (and the place he's in), grouped; desktop only
 export function listHTML(states, picked) {
-  const rows = Object.values(states).filter((s) => s.state !== 'hidden' && (PINS[s.id]?.at || s.state === 'here'));
+  const rows = Object.values(states).filter(
+    (s) => s.state !== 'hidden' && (PINS[s.id]?.at || s.id === 'office' || s.state === 'here'),
+  );
   return GROUPS.map(([title, test]) => {
     const g = rows.filter(test).sort((a, b) => (a.route?.units ?? 0) - (b.route?.units ?? 0));
     if (!g.length) return '';
