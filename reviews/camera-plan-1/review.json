@@ -2,8 +2,8 @@
  "title": "Camera modes: try the alternatives",
  "date": "2026-10-06",
  "by": "Claude (plan), Codex (playable review demo)",
- "status": "open",
- "question": "Playable desktop camera revision following your request: \"try gta style\". Click Play inside the scene to capture the mouse, move the mouse to look, use WASD to move and Shift to run. Esc releases the mouse for the toolbar. The selected 1c distance and height are unchanged. The camera follows the character; the character turns toward travel. Sideways and backward movement keep the chosen view direction. Preview scene camera frames actual nearby participants; Return to walking offers Play again. Phones keep overview. Please try the controls again. This is a review prototype; production camera and saved progress are unchanged.",
+ "status": "decided",
+ "question": "Approved as v1 in chat on 2026-10-06: \"yeah its alright as a v1\". The desktop prototype uses GTA-style captured mouse look, camera-relative WASD and Shift running at the selected 1c distance and height; Esc releases the cursor. Phones keep overview. The playable links remain available. Production integration is tracked in issue #265.",
  "multi": true,
  "media": [
   {
@@ -82,7 +82,7 @@
   {
    "id": "1c",
    "label": "1c. Further and higher, 3.6 back, 2.8 up",
-   "note": "Selected angle: 3.6 back, 2.8 up. The revised demo uses captured mouse look and camera-relative WASD, following your request to try GTA style. Esc returns the cursor. Controls await your review."
+   "note": "Selected angle: 3.6 back, 2.8 up. GTA-style captured mouse look and camera-relative movement approved as v1 in the decision above."
   },
   {
    "id": "2a",
@@ -165,5 +165,10 @@
    "href": "game3d/index.html"
   }
  ],
- "issue": 265
+ "issue": 265,
+ "decided": [
+  "1c"
+ ],
+ "decision": "Jørgen in chat, 2026-10-06: \"yeah its alright as a v1\". Approves the GTA-style desktop prototype at the selected 1c angle. Phone overview remains. Production integration follows in #265.",
+ "decided_at": "2026-10-06T14:18:30+0200"
 }
