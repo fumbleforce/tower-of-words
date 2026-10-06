@@ -31,39 +31,41 @@
           <select id="camera">
             <option value="1a">1a · Follow, 2.8 back / 2.1 up</option>
             <option value="1b">1b · Close, 2.3 back / 1.45 up</option>
-            <option value="1c">1c · High, 3.6 back / 2.8 up</option>
+            <option value="1c" selected>1c · High, 3.6 back / 2.8 up</option>
             <option value="orbit">4a · Free orbit</option>
             <option value="overview">Current overview</option>
           </select></label
         >
-        <label
-          >Touch
-          <select id="touch">
-            <option value="2a">2a · Hold to walk, two fingers to look</option>
-            <option value="2b">2b · Thumb stick, drag to look</option>
-            <option value="2c">2c · Hold to walk, look strip</option>
-          </select></label
-        >
         <button id="reset" type="button">Reset view</button>
+        <button id="scene" type="button">Preview scene camera</button>
       </div>
       <details>
         <summary>Controls and prototype limits</summary>
         <p>
           Desktop: click the scene, then WASD or arrows to walk, Shift to run,
-          right-drag to look. Wheel zooms in free orbit. On a phone, choose a
-          touch layout above. Follow returns behind you after walking; free
-          orbit holds your angle. Reset view restores the chosen distance and
-          your facing.
+          right-drag or middle-drag to look. Walking follows the view, including
+          while you turn it. The camera keeps your chosen direction. Reset view
+          puts it behind your current facing. Wheel zooms in free orbit. Left
+          click focuses the scene; use WASD to move in third person.
         </p>
         <p>
           This demo uses the actual places and walking collision. Camera
           obstruction checks pull the view in near walls; the train camera stays
           below its roof. Rooms still have the overview's cutaway walls, and
-          story, conversation, and pin behavior are not demonstrated. Demo
-          progress and settings last only until this frame reloads. The game's
-          default camera is unchanged.
+          pins and authored story transitions are not demonstrated. Scene camera
+          frames two actual nearby characters and pauses player movement; it
+          previews framing only, with no conversation playing. Demo progress and
+          settings last only until this frame reloads. The game's default camera
+          is unchanged.
         </p>
       </details>
+      <p id="scene-note" role="status">
+        Scene preview: frames two nearby characters without moving them.
+      </p>
+      <p id="mobile-note" hidden>
+        Third-person view is desktop only. This device shows the current
+        overview; tap or hold to walk.
+      </p>
     </header>
     <main>
       <iframe
@@ -75,7 +77,7 @@
     </main>
     <footer>
       <span id="hint">Click scene, then WASD to walk · right-drag to look</span
-      ><span>Review prototype · choices 1a, 1b, 1c and 4a</span>
+      ><span>Desktop review prototype · 1c selected</span>
     </footer>
     <script type="module" src="demo.mjs"></script>
   </body>

@@ -2,7 +2,11 @@
 
 Jørgen, 2026-10-05: "wish I could have more camera mode, like close third person".
 
-The open choices are in Review item `reviews/camera-plan-1`. Its [playable demo](../reviews/camera-plan-1/demo.html) now lets the player compare all three follow presets, free orbit and overview in the real plaza, B2 office, Room 203 and train. It includes the three proposed touch layouts. The original static mocks remain below the demo links. The demo runs the game shell in its own frame with memory-only storage, private mode off and story triggers disabled. Camera rays pull in at obstructions; cutaway walls and authored story/conversation camera behavior remain prototype limits. Production camera code and defaults are unchanged. What the camera does today is described in docs/game/controls-and-ui.md (Camera); this file only covers what close mode adds and changes.
+The open review is `reviews/camera-plan-1`. Its [playable desktop demo](../reviews/camera-plan-1/demo.html?camera=1c) runs separately from saved progress. Jørgen picked 1c's angle on 2026-10-06 and requested a controls rewrite: "the controls are awkward due to the slow moving camera and the character returns to the original direction of travel after moving another way". He also said "lets drop phone support for this 3rd person view altogether" and requested a scene camera framing conversation participants independently of the MC.
+
+The revised prototype keeps 1c's 3.6-back / 2.8-up angle. WASD uses the requested camera yaw on every frame, including while looking; camera position follows directly and yaw changes only on mouse look or Reset view. Left click focuses the canvas instead of starting hold-to-steer in third person. Existing collision, gait and Shift running are reused. The third-person phone controls have been removed; touch devices get overview. A Scene camera button frames two visible nearby characters, pauses player movement and offers Return to walking. It uses their actual positions, without moving them or adding dialogue. Room 203 may have no nearby pair; try B2 or the train.
+
+The demo uses memory-only storage, private mode off and disabled story triggers. Camera rays pull in at obstructions. Cutaway walls, pins, authored story transitions and conversation integration remain prototype limits. Production camera code and defaults are unchanged. The review remains open for the revised controls and framing. The earlier proposal below is retained for unimplemented production work; these decisions override its old automatic follow and phone assumptions.
 
 ## What is there now
 
@@ -24,9 +28,9 @@ A second camera mode next to today's. Today's view (call it Overview) stays the 
 
 - Behind Eric and above him: the pivot at his shoulders (0.85 of his height), the camera 2.8 units back along his facing and 2.1 above his feet, aimed at a point 1.2 ahead of him at chest height, which makes it about 15 degrees down. Eric is about 1.4 units tall in the office and the flat (1.2 on the train), so that is two body lengths back and a little over his head. He stands in the lower middle of the frame, and what he walks toward fills the rest. This is decision 1's default; the review shows it next to a closer shoulder shot (2.3 back, 1.45 up, 7 degrees). A further, higher option (3.6 back, 2.8 up) is available in the playable review demo.
 - Lens: 50 degrees vertical on a wide screen. On a phone held upright the frame is narrow, so 50 would see only 24 degrees across; the phone gets 65 (36 across). The mocks show that on the phone he still fills a lot of the frame and the top third is mostly empty above the room's walls, so the phone may want the further shot even if the desktop keeps the default.
-- Yaw follows his heading on a slow spring (about 0.6 s), so short turns and the walk round a desk don't swing the view. Standing still, it holds. A look input (below) moves the yaw and pitch away from behind him; after he has walked for 2 s with no look input it eases back behind him.
+- Yaw holds the direction chosen with the mouse. Moving or turning the character never recentres it. Reset view is the explicit return behind the character.
 - Pitch: 5 to 40 degrees down, 15 by default, changed by the look input.
-- Same springs as today (cam.js `damp`); the Reduce motion setting slows the follow and turns off the auto-recentre.
+- The review follows player position and mouse look directly, with no slow follow spring or automatic recentering.
 
 ### Camera collision
 
@@ -94,16 +98,14 @@ Indoors close mode is cheaper (less of the floor is in view). Outdoors, looking 
 
 ### Desktop
 
-- WASD and the arrows walk relative to the camera, as today. While the mouse turns the view, the held keys' frame follows the view (the walker's `keyFrame` refreshes on a look input); a camera that swings back behind him on its own does not bend the walk, as today.
-- Look: hold the right mouse button (or the middle one) and move the mouse. The left button keeps click to walk, click to use and hold to steer, unchanged. No pointer lock by default; it would hide the cursor that clicks people and pins.
+- WASD and arrows use the requested camera yaw every frame. The basis transforms into player-parent coordinates; obstruction movement cannot steer the player. The camera never swings behind him automatically.
+- Look: hold the right mouse button (or the middle one) and move the mouse. In the revised third-person review, left click only focuses the view. Use WASD to move; production interaction integration awaits review. No pointer lock by default; it would hide the cursor that clicks people and pins.
 - The mouse wheel keeps the backlog; it does not zoom.
 - No new keys besides the toggle.
 
 ### Phone
 
-Default: tap to walk and hold to steer stay exactly as taught on the train, and the camera swings behind him as he walks, so most of the time no look input is needed. Looking around is a two-finger drag anywhere on the view (turn and tilt). A one-finger drag stays steering.
-
-The other two options are in the review: a thumb stick bottom left with a one-finger drag on the rest of the screen to look (the usual phone 3D layout, but it takes over the steering drag and needs teaching), or tap and hold as today with a look strip along the bottom edge.
+Third-person support was dropped by Jørgen on 2026-10-06. Keep the existing overview and phone controls; no third-person touch layouts or HUD toggle.
 
 ### Taps on things
 
@@ -112,7 +114,7 @@ Tapping a person, a thing or a pin uses it, as today, in every mode. A tap on th
 ## The toggle
 
 - Key: C on desktop (free today; it would show in the Settings key list and could be rebound like Say).
-- Phone: a camera button in the HUD's top right row, before the menu button, shown from the moment Eric walks on the train.
+- Phone: no third-person toggle; overview remains the only mode.
 - Settings, Controls: "Camera: Overview / Close", segmented buttons like the other choices.
 - Remembered per device with the other settings (settings.js, localStorage), not in the save.
 - Switching eases between the two shots over about 0.6 s, the same spring as a story shot, never a cut.
@@ -165,6 +167,6 @@ Not in the default scope. A third mode where the look input orbits freely round 
 1. Close camera in the plaza only, desktop, behind a URL flag: shot, follow, look with the mouse, collision. Screenshots and a short clip for Jørgen.
 2. The toggle, the setting and the hand-over to authored shots.
 3. Rooms: the cone, blockers and occluder test for B2, the lobby and room 203.
-4. Phone controls (the picked option) and the HUD button.
+4. Desktop interaction integration; phone remains overview.
 5. Pins, post and the far plane; the perf pass.
 6. The fast-test mode and the coverage pass; then the critic and a cold player in close mode.

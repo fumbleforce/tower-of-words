@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { createSceneShot } from "./scene-camera.mjs";
 import { HF } from "../../game3d/js/train/car.js";
 
 export const PRESETS = {
@@ -7,8 +8,6 @@ export const PRESETS = {
   "1c": [3.6, 2.8],
 };
 const clamp = THREE.MathUtils.clamp;
-const angle = (from, to) =>
-  Math.atan2(Math.sin(to - from), Math.cos(to - from));
 
 // Review-only adapter: all camera changes live in this frame. The production camera still updates underneath.
 export function installCamera(game, initial) {
@@ -17,13 +16,11 @@ export function installCamera(game, initial) {
     player = game.player.root;
   const authored = { fov: camera.fov, near: camera.near };
   const oldUpdate = place.cam.update.bind(place.cam);
-  let mode = "1a",
+  let mode = "1c",
     yaw = 0,
-    lookYaw = 0,
     pitch = 0,
     zoom = 1,
-    lastLook = -Infinity,
-    fresh = true;
+    scene = null;
   const feet = new THREE.Vector3(),
     forward = new THREE.Vector3(),
     target = new THREE.Vector3(),
@@ -74,14 +71,13 @@ export function installCamera(game, initial) {
   }
   function reset() {
     yaw = heading();
-    lookYaw = 0;
     pitch = 0;
     zoom = 1;
-    fresh = true;
-    lastLook = -Infinity;
   }
   function setMode(next) {
     if (!(next in PRESETS) && next !== "overview" && next !== "orbit") return;
+    scene = null;
+    game.walker.locked = false;
     mode = next;
     camera.fov = authored.fov;
     camera.near = authored.near;
@@ -92,10 +88,9 @@ export function installCamera(game, initial) {
     reset();
   }
   function look(dx, dy) {
-    if (mode === "overview") return;
-    lookYaw -= dx * 0.008;
+    if (mode === "overview" || scene) return;
+    yaw -= dx * 0.008;
     pitch = clamp(pitch + dy * 0.005, -0.18, 0.65);
-    lastLook = performance.now();
   }
   function obstruction(from, to) {
     const delta = to.clone().sub(from),
@@ -130,26 +125,7 @@ export function installCamera(game, initial) {
       to.copy(from).addScaledVector(delta, Math.max(0.22, hit.distance - 0.15));
     return !!hit;
   }
-  place.cam.update = (dt, ...args) => {
-    oldUpdate(dt, ...args);
-    if (mode === "overview") return;
-    player.getWorldPosition(feet);
-    const facing = heading();
-    if (fresh) yaw = facing;
-    const moving = game.walker.gait.v > 0.08;
-    if (mode !== "orbit" && moving) {
-      yaw += angle(yaw, facing) * (1 - Math.exp(-dt / 0.6));
-      if (performance.now() - lastLook > 2000) lookYaw *= Math.exp(-dt / 0.6);
-    }
-    const [back, up] = PRESETS[mode] || PRESETS["1a"];
-    const bearing = yaw + lookYaw;
-    forward.set(Math.sin(bearing), 0, Math.cos(bearing));
-    const height = 1.12 * (place.charScale || 1);
-    pivot.copy(feet);
-    pivot.y += height * 0.85;
-    target.copy(pivot).addScaledVector(forward, mode === "orbit" ? 0 : 1.2);
-    desired.copy(feet).addScaledVector(forward, -back * zoom * Math.cos(pitch));
-    desired.y += up * zoom + back * zoom * Math.sin(pitch);
+  function constrain(desired) {
     // Keep the train camera under its low roof; other rooms retain their open ceiling for this review.
     local.copy(desired);
     place.space.worldToLocal(local);
@@ -159,6 +135,26 @@ export function installCamera(game, initial) {
     local.z = clamp(local.z, nav.z0 + 0.15, nav.z1 - 0.15);
     desired.copy(local);
     place.space.localToWorld(desired);
+  }
+  place.cam.update = (dt, ...args) => {
+    oldUpdate(dt, ...args);
+    if (mode === "overview") return;
+    if (scene) {
+      scene.update();
+      fadePlayer(false);
+      return;
+    }
+    player.getWorldPosition(feet);
+    const [back, up] = PRESETS[mode] || PRESETS["1a"];
+    const bearing = yaw;
+    forward.set(Math.sin(bearing), 0, Math.cos(bearing));
+    const height = 1.12 * (place.charScale || 1);
+    pivot.copy(feet);
+    pivot.y += height * 0.85;
+    target.copy(pivot).addScaledVector(forward, mode === "orbit" ? 0 : 1.2);
+    desired.copy(feet).addScaledVector(forward, -back * zoom * Math.cos(pitch));
+    desired.y += up * zoom + back * zoom * Math.sin(pitch);
+    constrain(desired);
     const blocked = obstruction(pivot, desired);
     camera.position.copy(desired);
     const fov = camera.aspect < 1 ? 65 : 50;
@@ -172,25 +168,43 @@ export function installCamera(game, initial) {
     fadePlayer(camera.position.distanceTo(pivot) < 0.7);
     api.blocked = blocked;
     api.distance = camera.position.distanceTo(pivot);
-    fresh = false;
   };
   const api = {
     get mode() {
       return mode;
     },
     get yaw() {
-      return yaw + lookYaw;
+      return yaw;
+    },
+    get scene() {
+      return scene?.label || null;
+    },
+    sceneShot() {
+      if (scene) {
+        scene = null;
+        game.walker.locked = false;
+      } else {
+        scene = createSceneShot(game, obstruction, constrain);
+        if (scene) {
+          game.walker.keys.clear();
+          game.walker.stop();
+          game.walker.sync();
+          game.walker.locked = true;
+          scene.update();
+        }
+      }
+      return scene?.label || null;
     },
     setMode,
     reset,
     look,
     zoom(delta) {
-      if (mode === "orbit")
+      if (mode === "orbit" && !scene)
         zoom = clamp(zoom * Math.exp(delta * 0.001), 0.5, 2.5);
     },
     blocked: false,
     distance: 0,
   };
-  setMode(initial || "1a");
+  setMode(initial || "1c");
   return api;
 }
