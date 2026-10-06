@@ -1,0 +1,44 @@
+{
+  "title": "Pool changing rooms and evening lighting",
+  "date": "2026-10-06",
+  "by": "codex-exec:model_review",
+  "caption": "Walkable locker and shower rooms, working floodlights and visible equipment handling. Swimwear is still missing: the current everyday outfits remain visible and require proper approved variants.",
+  "images": [
+    {
+      "id": "lockers-desktop",
+      "image": "bible/shots/showcase/pool-facilities-1/lockers-desktop.png",
+      "caption": "Desktop: numbered lockers, benches and the shared entry corridor."
+    },
+    {
+      "id": "shower-phone",
+      "image": "bible/shots/showcase/pool-facilities-1/shower-phone.png",
+      "caption": "Phone: the protagonist’s shower route within the changing room."
+    },
+    {
+      "id": "lights-desktop",
+      "image": "bible/shots/showcase/pool-facilities-1/lights-desktop.png",
+      "caption": "Desktop: the evening deck with four physical floodlights."
+    },
+    {
+      "id": "lights-phone",
+      "image": "bible/shots/showcase/pool-facilities-1/lights-phone.png",
+      "caption": "Phone: evening pool approach."
+    },
+    {
+      "id": "carry-desktop",
+      "image": "bible/shots/showcase/pool-facilities-1/carry-desktop.png",
+      "caption": "Desktop: a bag carried visibly by its handle."
+    },
+    {
+      "id": "carry-phone",
+      "image": "bible/shots/showcase/pool-facilities-1/carry-phone.png",
+      "caption": "Phone: the same equipment carry."
+    }
+  ],
+  "links": [
+    {
+      "label": "Pool facilities",
+      "href": "game3d/?day=3&place=pool"
+    }
+  ]
+}

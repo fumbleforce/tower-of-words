@@ -24,8 +24,19 @@ export const POOL = {
   l: 16.7,
 };
 export const WATER = [POOL.x - POOL.w / 2, POOL.x + POOL.w / 2, POOL.z - POOL.l / 2, POOL.z + POOL.l / 2];
+export const FLOODLIGHTS = [
+  [DX0 + 0.28, DZ0 + 3],
+  [DX1 - 0.28, DZ0 + 3],
+  [DX0 + 0.28, DZ1 - 2],
+  [DX1 - 0.28, DZ1 - 2],
+];
 export const COPING = 0.3; // round the water
 export const LANE_W = POOL.w / 6;
+// Low club luggage racks beside the steps and beside the attendant.
+export const BAG_RACKS = [
+  [WATER[0] + LANE_W / 2 - 2.3, WATER[3] + COPING - 0.55],
+  [WATER[0] + LANE_W / 2 + 2.1, WATER[3] + 2.15],
+];
 // the steps down into the first lane at the south end: three treads, their rails on the coping either side
 export const STEPS = {
   x0: WATER[0],
@@ -74,6 +85,8 @@ const I_WALKS = [[DX0 + 0.12, DX1 - 0.12, DZ0 + 0.08, DZ1 - 0.12]];
 // what stands on it: the pool and its coping (with the starting blocks), the chair, the benches, the loungers, the
 // reel, the rack and basket, the table, the shower posts along the pavilion's wall
 const I_BLOCKS = [
+  ...FLOODLIGHTS.map((p) => box(p, 0.45, 0.45)),
+  ...BAG_RACKS.map(([x, z]) => box([x + 0.38, z], 1.15, 0.44)),
   [WATER[0] - COPING, WATER[1] + COPING, WATER[2] - COPING - 0.35, WATER[3] + COPING],
   box(CHAIR, 0.75, 0.75),
   ...BENCHES.map(([x, z]) => [DX0, x + 0.32, z - BENCH_LEN / 2 - 0.05, z + BENCH_LEN / 2 + 0.05]),

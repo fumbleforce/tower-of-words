@@ -1102,24 +1102,24 @@ No crowd.
 
 ## Pool deck (`pool`)
 
-The deck round the outdoor pool, for the swimming club (issue #227; [days 3 to 5](../../notes/days3-5-outline.md), the season's last outdoor session). It is the sports ground's world (`sports`, above), walked inside the pool's fence instead of on the walks round it: Eric comes in through the shower pavilion, in at its door on the pool walk and out of the men's changing room onto the deck, and goes back the same way (Getting between places). The changing rooms themselves are not shown. It also loads directly with `?place=pool`, outside the changing room.
+The deck round the outdoor pool, for the swimming club (issue #227; [days 3 to 5](../../notes/days3-5-outline.md), the season's last outdoor session). It is the sports ground's world (`sports`, above), walked inside the pool's fence instead of on the walks round it. The player enters the pavilion's west door from the pool walk, follows its shared corridor through their own changing room, and reaches the deck through that room's door. Both rooms contain numbered lockers, a slatted bench and a tiled shower with a drain; the roof and near walls are cut away in this place. The other changing room is outside the player's walking grid. `?place=pool` starts inside the common entrance.
 
-Walked: the deck of pale slabs inside the fence, all the way round the pool. The water, the coping and the starting blocks are not walked; swimming is staged by a scene, never played.
+Walked: the pavilion entrance, corridor, own changing room and shower route, then the deck of pale slabs all the way round the pool. The water, the coping and the starting blocks are not walked; swimming is staged by a scene, never played.
 
-The pool is 25 m of six lanes in a white coping, the lane lines dark under the water, lane ropes of blue and white floats with red at the ends, six starting blocks along the pavilion's end and a steel ladder at each of that end's corners. At the south-west corner three steps go down into the first lane, each tread a paler band under the water with a white nosing, a steel rail either side curving from the coping into the water. On the pavilion's wall the two changing rooms' doors (men's west with a blue plate, women's east with a red one), the shower heads between them and a pace clock, white face, dark ring, red sweep hand. Down the west side, against the fence: a bench, the lifeguard's chair by the pool's middle with 飛び込み禁止 NO DIVING on a red board on the fence above it, and another bench. Down the east side the white loungers. Along the south fence the winter cover rolled blue on its reel between two A-frame stands, a crank on its west end; at the south-east corner a steel rack of kickboards in blue and yellow and a basket of pull buoys; at the north-east corner the attendant's folding table and chair, a clear lost-property tub and a clipboard on it.
+The pool is 25 m of six lanes in a white coping, the lane lines dark under the water, lane ropes of blue and white floats with red at the ends, six starting blocks along the pavilion's end and a steel ladder at each of that end's corners. At the south-west corner three steps go down into the first lane, each tread a paler band under the water with a white nosing, a steel rail either side curving from the coping into the water. On the pavilion's deck face the two changing rooms' doors (men's west with a blue plate, women's east with a red one), the shower heads between them and a pace clock on its own stand, white face, dark ring, red sweep hand. Down the west side, against the fence: a bench, the lifeguard's chair by the pool's middle with 飛び込み禁止 NO DIVING on a red board on the fence above it, and another bench. Down the east side the white loungers. Along the south fence the winter cover rolled blue on its reel between two A-frame stands, a crank on its west end; at the south-east corner a steel rack of kickboards in blue and yellow and a basket of pull buoys; at the north-east corner the attendant's folding table and chair, a clear lost-property tub and a clipboard on it.
 
-The camera looks a little east of north up the pool from the south-west and steeply, the pavilion behind the far end, following Eric. In the morning the sun is the plaza's; after work the pavilion's windows, the gym's glass and the lamps on the pool walk light up, as from the sports ground.
+The camera looks a little east of north up the pool from the south-west and steeply, the pavilion behind the far end, following Eric. The water-entry conversation uses a lower, closer view across the lanes; Continue retains the shot, and release or a later authored shot restores the walking angle. In the morning the sun is the plaza's. At evening four raised floodlights illuminate the water and deck; they switch off when daylight returns, including a time change while inside. The gym's glass and pool-walk lamps also light up.
 
 ### Things
 
 | Id | Label | What it is |
 |---|---|---|
-| `changing_room` | To the changing room | The men's changing room's door on the pavilion's deck side, back through the pavilion to the pool walk. |
+| `changing_room` | Pool exit | The common west entrance of the pavilion, returning to the sports-ground pool walk. The stable trigger id is retained for existing stories. |
 | `pool_goggles` | Goggles | Day 3, evening, members of the swimming club only: a pair of goggles hung on the fence by the south-west corner, until their owner has them back. |
 
 ### Spots
 
-`deck_in` (outside the men's changing room, the arrival point), `pool_steps` (on the deck at the top of the steps into the first lane), `pool_blocks` (the north end, behind the starting blocks' middle), `lifeguard_chair` (on the deck beside the lifeguard's chair), `deck_benches` (between the two benches on the west side), `float_rack` (in front of the kickboard rack); and each nook below
+`deck_in` (outside the protagonist's changing-room door on the deck), `pool_steps` (on the deck at the top of the steps into the first lane), `pool_blocks` (the north end, behind the starting blocks' middle), `lifeguard_chair` (on the deck beside the lifeguard's chair), `deck_benches` (between the two benches on the west side), `float_rack` (in front of the kickboard rack); and each nook below
 
 ### Nooks
 
@@ -1140,9 +1140,7 @@ None.
 
 ### Who's there when
 
-Day 3, evening: the swimming club's last outdoor swim (game3d/js/places/day3/swim.js, `poolSession`). Before it Emi stands by the steps with the club's three bags, Kuro is already in the water in the second lane, a member stands with the equipment list and the attendant packs the unused floats on the south deck; after it Emi rests on the south bench and Kuro by its end with their towels, the bags with the attendant. A swimming player changes in their own changing room: Carina comes and goes by the women's door (`changing_room` is hers).
-
-None of the cast yet.
+Day 3, evening: the swimming club's last outdoor swim (game3d/js/places/day3/swim.js, `poolSession`). Before it Emi stands by the steps with the club's three bags, Kuro is already in the water in the second lane, a member stands with the equipment list and the attendant packs the unused floats on the south deck; after it Emi rests on the south bench and Kuro by its end with their towels, the bags with the attendant. Bags rest on low racks and are carried visibly by their handles; the equipment sheet moves between hands, the bench and the attendant's table. A swimming player walks to their own lockers and shower before using the pool steps. A local swim overlay keeps each rig's face above the water, animates the arms and leans forward for lengths; actors use the steps to get out. Continue restores water or bench poses, and leaving cancels pending movement. Approved swimwear variants are still missing for Kuro, Emi and both protagonists: their everyday meshes remain visible, so the wardrobe requirement is not complete.
 
 | Id | Usually | Schedule |
 |---|---|---|

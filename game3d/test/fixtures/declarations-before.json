@@ -1157,7 +1157,7 @@
     "pool": {
       "things": {
         "changing_room": {
-          "label": "To the changing room",
+          "label": "Pool exit",
           "kind": "thing",
           "verb": "Go"
         },
