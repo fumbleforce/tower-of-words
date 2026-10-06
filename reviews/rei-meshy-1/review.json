@@ -1,9 +1,9 @@
 {
  "title": "Rei: a 3D model made the way Kuro, Aoi and Emi were",
  "date": "2026-10-05",
- "by": "Claude (staff-meshy agent)",
+ "by": "Claude; rig recovery by Codex",
  "status": "decided",
- "question": "The first two sheets are ChatGPT pictures; every sheet after them is a render of the real rigged model, which you can turn in the live viewer (links below; rei-1-rig2 is the new rig). Your note on rei-1: \"model good, rig terrible\". rei-1-rig2 is the same model on a new rig of ours, and she is in the game now. Is her rig right?",
+ "question": "Real rigged 3D models, with a live viewer below. Your selected Rei model and texture are unchanged. The recovered rig corrects the backward knee bend, wide thigh angle and backward idle lean. The earlier attempts remain below.",
  "multi": false,
  "media": [
   {
@@ -65,6 +65,22 @@
   {
    "image": "art/parts/rei-meshy-1/sheets/rig2-ingame.webp",
    "caption": "In the game (day 1, test mode, 2560x1440): seated on the train with Meshy's Chair_Sit_Idle_F, as she is before the story seats Mio in her place. The story keeps her hidden for the rest of day 1, so this still shows her for the picture only. Run, sit, idle and walk were also checked frame by frame: her head, chest and hips turn exactly as Emi's do (at most 4.5, 17 and 7 degrees in the walk)."
+  },
+  {
+   "image": "art/parts/rei-rig-2/viewer/compare-idle-side.png",
+   "caption": "Recovered rig, before and after from the side. Corrected Emi idle maps through the same bone directions as Rei\u2019s repaired walk. Her hands remain clear of her jacket and thighs."
+  },
+  {
+   "image": "art/parts/rei-rig-2/viewer/cast-walk-side.png",
+   "caption": "Rei beside Emi and Kuro, using the game loader. Walking foot slip: Rei 0.15, Emi 0.15, Kuro 0.14. Rei\u2019s previous rig measured 0.81. Her thigh angle is now 7.8\u00b0, matching both comparisons, previously 18.7\u00b0."
+  },
+  {
+   "image": "art/parts/rei-rig-2/train/close.png",
+   "caption": "Rei in the real train seat with her laptop attached to her lap, before the story gives the seat to Mio. The selected mesh, UVs, normals, triangles and texture are unchanged."
+  },
+  {
+   "image": "art/parts/rei-rig-2/viewer/idle-trial-side.png",
+   "caption": "Idle attempts retained: left is the generic rest-frame bake; right maps the corrected Emi idle through Rei\u2019s donor-aligned rig, as the repaired walk does. The right-hand version is installed, with her feet under her hips and forward knee flexion."
   }
  ],
  "options": [
@@ -91,9 +107,25 @@
     "art/parts/rei-meshy-1/game/train-rei.png"
    ],
    "note": "rei-1 as Meshy made it (the same vertices, UVs and texture, unchanged) on a rig of ours: the game's Meshy skeleton placed inside her body, with Emi's bone orientations, so Meshy's walk, run and sit play on her as on Emi; the ponytail weighted to her head and neck. In the game since this round, 1.12 tall. No Meshy credits, no pictures."
+  },
+  {
+   "id": "rei-1-rig3",
+   "label": "rei-1-rig3 (recovered rig)",
+   "image": "art/parts/rei-rig-2/viewer/rei-idle-front.png",
+   "images": [
+    "art/parts/rei-rig-2/viewer/rei-idle-side.png",
+    "art/parts/rei-rig-2/viewer/rei-walk-side.png",
+    "art/parts/rei-rig-2/viewer/rei-run-side.png",
+    "art/parts/rei-rig-2/viewer/rei-sit-side.png"
+   ],
+   "note": "Same selected mesh and texture. Bone axes follow the direction of Rei\u2019s own limbs; Emi\u2019s walk, run and sit now bend her knees forward. The corrected Emi idle uses the same bone mapping and keeps her feet under her hips. Ponytail head/neck weights preserved. No new paid generation."
   }
  ],
  "links": [
+  {
+   "label": "Live repaired rig: walk, run, sit and idle; compare before or beside Emi and Kuro",
+   "href": "reviews/crowd-pilot-1/viewer.html?cfg=../rei-meshy-1/rig-repair-viewer.json&s=compare&m=idle"
+  },
   {
    "label": "Live 3D: rei-1-rig2, the new rig, alone (turn, zoom, idle, walk; switch to rei-1 to compare)",
    "href": "tools/characters/parts/viewer.html?cfg=/reviews/rei-meshy-1/viewer.json&a=rei-1-rig2&m=walk&c=none"
@@ -116,5 +148,20 @@
  ],
  "decision": "Answered; follow-up handled",
  "decided_at": "2026-10-05T23:15:37+0200",
- "issue": 271
+ "issue": 271,
+ "updated": "2026-10-06T10:15:00+02:00",
+ "viewer_files": [
+  "art/parts/rei-rig-2/before/walk.glb",
+  "art/parts/rei-rig-2/before/run.glb",
+  "art/parts/rei-rig-2/before/sit.glb",
+  "art/parts/rei-rig-2/before/base.webp",
+  "art/parts/rei-rig-2/before/idle.json",
+  "art/parts/rei-rig-2/game/walk.glb",
+  "art/parts/rei-rig-2/game/run.glb",
+  "art/parts/rei-rig-2/game/sit.glb",
+  "art/parts/rei-rig-2/game/base.webp",
+  "art/parts/rei-rig-2/game/idle.json",
+  "art/parts/rei-rig-2/game/idle-native.json",
+  "art/parts/rei-rig-2/game/idle-donor.json"
+ ]
 }

@@ -1,0 +1,329 @@
+{
+  "before": {
+    "walk": {
+      "head_forward_degrees": [
+        -5.0094,
+        -0.5925
+      ],
+      "left_knee_forward_leg_fraction": [
+        -0.0846,
+        0.2268
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.6428,
+        0.381
+      ],
+      "right_knee_forward_leg_fraction": [
+        -0.131,
+        0.1964
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.5982,
+        0.3619
+      ]
+    },
+    "run": {
+      "head_forward_degrees": [
+        3.6235,
+        9.1043
+      ],
+      "left_knee_forward_leg_fraction": [
+        -0.0254,
+        2.5833
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.8844,
+        0.2436
+      ],
+      "right_knee_forward_leg_fraction": [
+        -0.1473,
+        0.8831
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.8244,
+        0.376
+      ]
+    },
+    "sit": {
+      "head_forward_degrees": [
+        -12.661,
+        49.5196
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.2567,
+        0.328
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        0.2503,
+        0.5055
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.0116,
+        0.2947
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        0.3267,
+        0.7232
+      ]
+    }
+  },
+  "repair": {
+    "walk": {
+      "head_forward_degrees": [
+        -2.0003,
+        2.3973
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.0458,
+        0.3218
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.5118,
+        0.5267
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.0437,
+        0.3262
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.5027,
+        0.4677
+      ]
+    },
+    "run": {
+      "head_forward_degrees": [
+        6.4846,
+        12.099
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.107,
+        1.2769
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.7503,
+        0.3791
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.0243,
+        0.8551
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.6961,
+        0.4664
+      ]
+    },
+    "sit": {
+      "head_forward_degrees": [
+        -9.559,
+        52.7369
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.4128,
+        0.4777
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        0.2811,
+        0.5197
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.2814,
+        0.4787
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        0.3117,
+        0.7337
+      ]
+    },
+    "idle": {
+      "head_forward_degrees": [
+        -6.8082,
+        -1.7421
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.1312,
+        0.1312
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.0022,
+        -0.0022
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.1648,
+        0.1648
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.0566,
+        -0.0566
+      ]
+    },
+    "idle_native_attempt": {
+      "head_forward_degrees": [
+        -9.8038,
+        -4.7518
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.0043,
+        0.0043
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.1574,
+        -0.1574
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.0043,
+        0.0043
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.1574,
+        -0.1574
+      ]
+    }
+  },
+  "emi": {
+    "walk": {
+      "head_forward_degrees": [
+        -2.0548,
+        2.3085
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.0451,
+        0.3095
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.4988,
+        0.5328
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.0436,
+        0.3227
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.4989,
+        0.4694
+      ]
+    },
+    "run": {
+      "head_forward_degrees": [
+        6.5751,
+        12.146
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.1061,
+        0.9098
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.7363,
+        0.3952
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.0243,
+        0.794
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.6906,
+        0.4683
+      ]
+    },
+    "sit": {
+      "head_forward_degrees": [
+        -11.0201,
+        51.4461
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.4219,
+        0.5009
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        0.329,
+        0.554
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.2834,
+        0.4861
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        0.3267,
+        0.7386
+      ]
+    }
+  },
+  "kuro": {
+    "walk": {
+      "head_forward_degrees": [
+        -0.5262,
+        3.9357
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.0456,
+        0.3171
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.5061,
+        0.5297
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.0437,
+        0.3271
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.5034,
+        0.4676
+      ]
+    },
+    "run": {
+      "head_forward_degrees": [
+        8.0306,
+        13.6184
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.1068,
+        1.0928
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.7444,
+        0.3861
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.0244,
+        0.8737
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.6974,
+        0.4663
+      ]
+    },
+    "sit": {
+      "head_forward_degrees": [
+        -10.2599,
+        53.5425
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.4171,
+        0.4872
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        0.3005,
+        0.5337
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.2809,
+        0.4767
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        0.3076,
+        0.7326
+      ]
+    }
+  },
+  "mesh_unchanged": {
+    "POSITION": true,
+    "NORMAL": true,
+    "TEXCOORD_0": true,
+    "indices": true,
+    "texture": true
+  },
+  "weights": {
+    "unchanged_from_previous_custom_rig": true,
+    "max_sum_error": 1.1920928955078125e-07
+  }
+}
