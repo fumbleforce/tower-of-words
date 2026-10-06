@@ -89,8 +89,10 @@ function cracks(p, [x0, x1, z0, z1], n, seed) {
   }
 }
 
-function* paving(pv, p) {
-  // the lane on the harbour's slabs (harbour/quay.js lays its mouth from the same origin)
+// the lane, the yard and the aprons: the lane's slabs, the works' older concrete, its patches, kerbs and cracks
+// (the harbour lays them too, as it sees them up the works lane: laneViewSteps)
+function* yardPaving(pv, p, laneTo = L[3] + 0.4) {
+  // the lane in the supply yard's slabs (harbour/quay.js), from the yard's north edge
   const lane = {
     pattern: 'grid',
     module: [2.4, 2.4],
@@ -99,7 +101,7 @@ function* paving(pv, p) {
     gap: 0.03,
     origin: [L[0], Y[3] + 4],
   };
-  pv.field([L[0], L[1], P.FOOT[2], L[3] + 0.4], lane);
+  pv.field([L[0], L[1], P.FOOT[2], laneTo], lane);
   pv.field([L[1], P.FOOT[1], P.FOOT[2], P.FOOT[3]], lane);
   pv.field(P.PLANT_APRON, lane);
   // the works' own older concrete
@@ -133,20 +135,24 @@ function* paving(pv, p) {
       h: 0.009,
     });
   yield;
-  worksStreet(pv, p, [S[2], S[3]]);
-  walk(pv, P.RWALK, true);
-  pv.field(P.N4_LANDING, { ...SLABS, origin: [P.N4_LANDING[0], P.N4_LANDING[2]] });
-  pv.field(P.W2_COURT, { ...SLABS, origin: [P.W2_COURT[0], P.W2_COURT[2]] });
-  yield;
   // kerbs where the paving meets the lawn
   kerb(p, [L[0], P.PLANT_APRON[3]], [L[0], L[3]], { off: 0.08 });
   kerb(p, [L[0], P.FOOT[2]], [L[0], P.PLANT_APRON[2]], { off: 0.08 });
   kerb(p, [L[1], Y[2]], [L[1], L[2]], { off: -0.08 });
   kerbRect(p, A, { sides: 's' });
-  kerbRect(p, P.RWALK, { sides: 'ns', gaps: { n: [[P.STATION_GATE[0], P.STATION_GATE[1]]], s: [] } });
   cracks(p, [L[1], Y[1] - 4, Y[2], Y[3]], 16, 11);
   cracks(p, [G[0], G[1], G[2], G[3]], 7, 23);
   cracks(p, [A[0], A[1], A[2], A[3]], 7, 31);
+  yield;
+}
+
+function* paving(pv, p) {
+  yield* yardPaving(pv, p);
+  worksStreet(pv, p, [S[2], S[3]]);
+  walk(pv, P.RWALK, true);
+  pv.field(P.N4_LANDING, { ...SLABS, origin: [P.N4_LANDING[0], P.N4_LANDING[2]] });
+  pv.field(P.W2_COURT, { ...SLABS, origin: [P.W2_COURT[0], P.W2_COURT[2]] });
+  kerbRect(p, P.RWALK, { sides: 'ns', gaps: { n: [[P.STATION_GATE[0], P.STATION_GATE[1]]], s: [] } });
   yield;
 }
 
@@ -159,16 +165,19 @@ function pole(p, x, z) {
   p.box('#5a6066', 0.3, 0.45, 0.3, x + 0.2, 5.6, z, NO); // the transformer can
 }
 
+// the lamps of a kind ('arm' or 'post') that `keep` keeps
+function lampsOf(p, lights, kind, keep = () => true) {
+  const pts = P.LAMPS[kind].filter(keep);
+  lamps(
+    lights,
+    p,
+    pts.map(([x, z]) => [x, z]),
+    { kind, dirs: pts.map((q) => q[2] ?? 0), pool: kind === 'arm' ? 1.4 : 1.0 },
+  );
+}
+
 function* furniture(p, lights, signRoot) {
-  for (const kind of ['arm', 'post']) {
-    const pts = P.LAMPS[kind];
-    lamps(
-      lights,
-      p,
-      pts.map(([x, z]) => [x, z]),
-      { kind, dirs: pts.map((q) => q[2] ?? 0), pool: kind === 'arm' ? 1.4 : 1.0 },
-    );
-  }
+  for (const kind of ['arm', 'post']) lampsOf(p, lights, kind);
   fingerSign(signRoot, p, ...P.SIGN, P.SIGN_BOARDS);
   // utility poles down the street's west side, the wires between them
   const zs = [-61, -72, -83, -94, -103.5],
@@ -190,11 +199,15 @@ function* fences(p, mesh) {
 }
 
 // the trees and the weeds
+// between the lane and the harbour office, and between the office and the plant (the harbour plants them too)
+const LANE_BELTS = [
+  [[P.PLANT[0] + 1, L[0] - 1.0, -108.8, -105.6], [keyaki, sakura, pine], 501, 3.0],
+  [[-87.4, L[0] - 1.1, -105, -100.4], [pine, keyaki], 503, 2.8],
+];
+
 function* trees(p) {
   for (const [r, kinds, seed, pitch] of [
-    // between the lane and the harbour office, and between the office and the plant
-    [[P.PLANT[0] + 1, L[0] - 1.0, -108.8, -105.6], [keyaki, sakura, pine], 501, 3.0],
-    [[-87.4, L[0] - 1.1, -105, -100.4], [pine, keyaki], 503, 2.8],
+    ...LANE_BELTS,
     // behind the street's east side, south of the recycling centre
     [[S[1] + 1.4, -40.5, -89.5, -64.5], [keyaki, ginkgo, sakura], 505, 3.2],
     // south of the research walk
@@ -211,6 +224,15 @@ function* trees(p) {
   }
   for (let k = 0; k < 8; k++) grass(p, G[0] + 0.3 + k * 1.05, G[2] + 0.2, { h: 0.4, seed: 540 + k });
   yield;
+}
+
+// what the harbour sees up the works lane from the supply yard (scenes/harbour.js): the lane, the yard and the
+// aprons, the arm lamps along the lane and the yard, the trees either side of the harbour office; c: the harbour's
+// cells; lights: its lightSet
+export function* laneViewSteps(c, lights) {
+  yield* yardPaving(c.paver, c.parts, L[3]); // to the supply yard's edge, its slabs on
+  lampsOf(c.parts, lights, 'arm', ([, z]) => z < Y[3] + 1);
+  for (const [r, kinds, seed, pitch] of LANE_BELTS) yield* belt(c.parts, r, kinds, { seed, pitch });
 }
 
 // c: cells (dorm-court/cells.js); lights: a lightSet; signRoot: the finger sign's boards; mesh: the chain-link's Parts

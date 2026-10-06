@@ -44,7 +44,8 @@ export function fence(p, mesh, a, b, { h = 1.6, gaps = [] } = {}) {
   }
 }
 
-function pipeBridge(p) {
+// the pipe bridge (the harbour builds it too, over the buildings it sees up the works lane)
+export function pipeBridge(p) {
   const x0 = P.PLANT[1],
     x1 = P.FACTORY[0],
     z = P.PIPE_Z;
@@ -169,7 +170,8 @@ function lot(p, mesh) {
     grass(p, x0 + 0.5 + ((k * 1.37) % (x1 - x0 - 1)), z1 - 0.5 - ((k * 0.83) % 3), { seed: 300 + k });
 }
 
-function corner(p, mesh, plain) {
+// the smoking corner behind the server hall (the harbour builds it too, beside the works lane's mouth)
+export function corner(p, mesh, plain) {
   const [x0, x1, z0, z1] = P.CORNER;
   fence(p, mesh, [x0, z0 + 0.15], [P.HALL[0], z0 + 0.15]);
   for (const [x, z] of P.CONDENSERS) {

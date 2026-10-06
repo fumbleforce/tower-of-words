@@ -210,6 +210,14 @@ function mast(p, glow, lights, [x, z]) {
   lights.lit.push([x, z + 3.5, 3.6]);
 }
 
+// what the works see of the yard from the works street's mouth (harbour/grounds.js worksViewSteps): the containers,
+// the loads and the masts east of x0; p: a Parts collector (casting); g: one for the small things; lights: a lightSet
+export function yardView(p, g, lights, x0) {
+  P.STACKS.forEach((s, i) => s[0] > x0 && stack(p, s, i));
+  P.CRATES.forEach((c, i) => c[0] > x0 && load(g, c, i));
+  for (const m of P.MASTS) if (m[0] > x0) mast(p, lights.glowParts, lights, m);
+}
+
 // p: a Parts collector (casting); g: a cells' collector for the small things; lights: a lightSet; signs: a signSet
 export function* yardSteps(p, g, lights, signs) {
   const glow = lights.glowParts;

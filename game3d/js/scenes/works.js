@@ -6,7 +6,9 @@
 // server hall are works/buildings.js; the pipe bridge, the siding and the nooks' props works/props.js; the ground,
 // the lamps, the poles, the fences and the planting works/grounds.js; the recycling centre's and Amakawa Research's
 // fronts, and the harbour office's, are the office row's (office-quarter/row.js), the warehouse the harbour's
-// (harbour/yard.js); the town round it the layout (skyline.js).
+// (harbour/yard.js); the town round it the layout (skyline.js). Past the works street's mouth, not walked here, the
+// harbour's view of the office street, Amakawa Trading's front and the supply yard (harbour/grounds.js
+// worksViewSteps), so the next place stands modelled before the crossfade.
 // The camera turns: from the south-east up the lane, from a little east of south over the yard, from the south-east
 // on the hall apron, from the south-west up the street and the research walk (places/works.js eases it).
 // Evening: the lamps, the server hall's door and two of its windows, the two fronts' ground floors and canopies and
@@ -25,9 +27,10 @@ import { signSet } from './shop-signs.js';
 import { placeIn } from './dorm-court/cluster.js';
 import { cells } from './dorm-court/cells.js';
 import { coastLand } from './island-west.js';
-import { frontSteps } from './office-quarter/row.js';
+import { frontSteps, rowSteps } from './office-quarter/row.js';
 import { shed as warehouse } from './harbour/yard.js';
 import { front as harbourFront } from './harbour/plan.js';
+import { worksViewSteps } from './harbour/grounds.js';
 import { buildingsSteps } from './works/buildings.js';
 import { propsSteps } from './works/props.js';
 import { groundsSteps } from './works/grounds.js';
@@ -67,11 +70,13 @@ export function* worksSteps() {
   warehouse(p, lights.glowParts, lights, signs);
   // the ground and the small things, in cells so what the camera can't see is culled (a group of its own, added
   // after the merge below, so the merge leaves the cells apart); the chain-link in a see-through set of its own
-  const c = cells([-78, -64, -50], [-110, -100, -80]),
+  const c = cells([-78, -64, -50, -36], [-110, -100, -80, -62]),
     wg = placeIn(new THREE.Group(), CHUNK),
     mesh = new Parts();
   yield* propsSteps(p, c.parts, mesh, plain);
   yield* groundsSteps(c, lights, isl, mesh);
+  yield* worksViewSteps(c, p, lights);
+  yield* rowSteps(sets, c.paver, c.parts, signs, lights, ['w1']);
   yield* c.paver.build(wg);
   for (const m of yield* c.parts.build(wg)) m.castShadow = false;
   p.build(isl);
@@ -94,6 +99,7 @@ export function* worksSteps() {
       'n4',
       'works_orange',
       'dock_shed',
+      'w1',
     ],
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
