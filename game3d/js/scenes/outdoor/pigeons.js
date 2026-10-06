@@ -7,6 +7,7 @@
 //   flock.update(dt, t, eric)   eric: his position in the same frame as root (a Vector3 or { x, z })
 //   flock.state()               for checks: [{ state, x, y, z }]
 import * as THREE from 'three';
+import { updateInstanceBounds } from '../../perf/instance-bounds.js';
 import { running, bus, isMuted } from '../../sfx.js';
 
 const SCARE = 2.1, // Eric this close: they fly
@@ -42,7 +43,6 @@ export function pigeons(root, home, { n = 5, seed = 7 } = {}) {
       count,
     );
     m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-    m.frustumCulled = false; // they fly well outside the rest pose's bounds
     m.castShadow = false;
     m.receiveShadow = false;
     m.name = 'pigeons'; // named: the static merge (scenes/merge-static.js) leaves it alone
@@ -317,7 +317,7 @@ export function pigeons(root, home, { n = 5, seed = 7 } = {}) {
         wings[side > 0 ? 0 : 1].setMatrixAt(i, M);
       }
     });
-    for (const m of [bodies, heads, beaks, tails, ...wings]) m.instanceMatrix.needsUpdate = true;
+    for (const m of [bodies, heads, beaks, tails, ...wings]) m.visible = updateInstanceBounds(m);
   }
   write();
 

@@ -665,3 +665,54 @@ The reception lobby, glass partition and changing block add geometry to the gym.
 p99 16.8 ms at both sizes; this desktop GPU timing is not a phone hardware measurement.
 The gym baseline uses build 1006-0729-a6aa0d51 with the printout pickup correction applied.
 Artifacts: game3d/shots/gym-recovery-logs/ (fast logs and per-place performance reports).
+
+
+## Moving creature draws (#237, 2026-10-06)
+
+Birds of each species now share one standard skinned mesh, with one bone per rigid body or wing.
+This reduces three draws to one while preserving the original vertices, vertex colours, material and
+pose matrices. Insects, ground discs and the older plaza flock recompute conservative bounds after
+movement; hidden zero-scale slots no longer stretch those bounds back to the origin. Species counts,
+behaviour, geometry and quality settings are unchanged. No performance baseline was raised.
+
+The bounded `tools/perf/creature-parity.mjs` compares four species in four poses against main: all
+1,126,400 rendered pixels were identical under explicit software GL. It also steps the older flock
+through 120 simulated seconds and 15 complete departures/returns: state and instance matrices match
+exactly, hidden parts stop drawing, and every visible vertex stays inside its bounds. Unit tests
+check repeated wing/fold cycles and the exact skinned vertex positions under a transformed parent.
+`tools/perf/scene-probe.mjs` samples actual renderer counters and 120 frame intervals at a fixed camera;
+software timings are not hardware performance evidence.
+
+Final measurements use the corrected place clock from `e67ccb26` on both sides. The GPU identifies as
+ANGLE/Vulkan on an NVIDIA RTX 3080; these are desktop-GPU measurements at two viewport sizes, not
+physical-phone hardware results. Quality is q0. The following stationary-camera samples ran alone on
+the GPU, after warm-up, with 120 frame intervals per scene. Every before/after sample had a 16.7 ms
+median and 16.8 ms p99.
+
+| Viewport | Scene | Calls before → after | Triangles before → after |
+|---|---|---:|---:|
+| 1366×860 | plaza | 85 → 79 | 230,414 → 230,414 |
+| 1366×860 | east_lane | 60 → 56 | 161,072 → 161,072 |
+| 1366×860 | dorms | 89 → 89 | 81,609 → 81,609 |
+| 390×844 | plaza | 67 → 55 | 216,338 → 215,618 |
+| 390×844 | east_lane | 49 → 45 | 137,850 → 137,850 |
+| 390×844 | dorms | 39 → 39 | 71,573 → 71,573 |
+
+The full day-1 magic route passed before and after at both sizes, 73 seconds each, with no bypasses
+or sustained movement/gait failures. Its median plaza calls fell **61 → 52 on phone** and **78 → 69
+on desktop**, below the existing warning thresholds. Route triangles were 214,064 → 213,302 and
+227,598 → 226,750 respectively. These functional runs overlapped other browser jobs, so their frame
+time tails are not used as timing evidence; the quiet samples above are separate.
+
+The original dorm frame-time regression did not reproduce in the quiet checks. The expanded dorm
+still submits about 83k triangles during the full route and warns against the older 59.5k baseline.
+That warning remains visible. Experimental dorm spatial/shadow grouping reduced too few triangles
+and increased calls, so none of those changes were retained. Scene content and all budgets remain
+unchanged. The east-lane samples retain the original triangle count while reducing calls.
+
+Validation: full CPU gate and staged commit checks passed; an independent code and tool review found
+no blocking findings; root reviewed the pose sheet and both live plaza views without an appearance
+blocker. Reproducible checks are `node --test game3d/test/unit/instance-bounds.test.mjs`,
+`AFTER=.claude/worktrees/<name>/game3d node game3d/tools/perf/creature-parity.mjs`, and the scene probe
+command in that tool's header. Captured reports, route logs and comparison sheets from this run are
+preserved outside the disposable worktree at `/tmp/perf-237-evidence/`.
