@@ -173,8 +173,13 @@ async function room(view) {
   }
   const anim = [];
   scene.traverse((o) => { if (o.userData && typeof o.userData.tick === 'function') anim.push(o); });
+  // Frame the playable room, excluding backdrop geometry and floors staged elsewhere.
+  const bounds = view.room === 'dorms'
+    ? { ...w.bounds, z0: w.bounds.back, z1: w.bounds.near }
+    : view.room === 'gym' ? w.bounds : view.room === 'sports' ? w.nav : null;
   return {
     scene, object: w.root, room: view.room, actions: [], play() {}, update() {},
+    bounds,
     focus: view.anchor ? { anchor: view.anchor, spot: view.spot, small: view.small } : null,
   };
 }
@@ -189,7 +194,7 @@ export class Stage {
     this.r.setPixelRatio(pixelRatio || Math.min(2, window.devicePixelRatio || 1));
     el.appendChild(this.r.domElement);
     this.size(width, height);
-    this.cam = new THREE.PerspectiveCamera(30, 1, 0.05, 200);
+    this.cam = new THREE.PerspectiveCamera(30, this.W / this.H, 0.05, 200);
     this.yaw = 0.5; this.pitch = 0.18; this.dist = 3; this.target = new THREE.Vector3(0, 0.6, 0);
     this.auto = true; this.clock = new THREE.Clock(); this.running = false;
     this.figureScene = this.makeFigureScene();
@@ -240,8 +245,13 @@ export class Stage {
     } else if (b.scene) {
       // the room's floor size (scenes/office.js X0..X1, Z0..Z1; scenes/lobby.js X, Z; train/car.js LX, LZ), not its
       // bounding box, which can hold a street or a sky
-      const span = { office: 14, lobby: 12.6 }[b.room] || Math.max(size.x, size.z) * 1.05;
-      this.target.set(0, 0.3, b.room === 'train' ? 0 : 0.4); this.yaw = 0.0; this.pitch = b.room === 'train' ? 0.8 : 0.95;
+      const bounds = b.bounds;
+      const span = bounds
+        ? Math.max((bounds.x1 - bounds.x0) / Math.min(1, this.cam.aspect), bounds.z1 - bounds.z0) * 1.15
+        : { office: 14, lobby: 12.6 }[b.room] || Math.max(size.x, size.z) * 1.05;
+      this.target.set(bounds ? (bounds.x0 + bounds.x1) / 2 : 0, 0.3,
+        bounds ? (bounds.z0 + bounds.z1) / 2 : b.room === 'train' ? 0 : 0.4);
+      this.yaw = 0.0; this.pitch = b.room === 'train' ? 0.8 : 0.95;
       this.cam.fov = 28; this.dist = span / (2 * Math.tan(THREE.MathUtils.degToRad(14))) * 0.95; this.minD = 1; this.maxD = this.dist * 2.5; this.auto = false;
     } else {
       const h = Math.max(size.y, 0.2), wdt = Math.max(size.x, size.z);
@@ -254,6 +264,10 @@ export class Stage {
     this.place();
   }
   place() {
+    // Wide district overviews need depth precision for their closely layered paving.
+    this.cam.near = this.built?.scene ? Math.max(0.05, this.dist / 100) : 0.05;
+    this.cam.far = Math.max(200, this.dist * 4);
+    this.cam.updateProjectionMatrix();
     const cp = Math.cos(this.pitch);
     this.cam.position.set(this.target.x + Math.sin(this.yaw) * cp * this.dist, this.target.y + Math.sin(this.pitch) * this.dist, this.target.z + Math.cos(this.yaw) * cp * this.dist);
     this.cam.lookAt(this.target);
