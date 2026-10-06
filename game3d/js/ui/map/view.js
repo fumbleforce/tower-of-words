@@ -9,9 +9,9 @@ import { cardHTML, listHTML, pinClass, dot } from './panel.js';
 import { PINS, pinOf } from '../../travel/pins.js';
 import { travelStates, goTo } from '../../travel/go.js';
 import { sim, periodName } from '../../sim.js';
+import { placeLabels } from './labels.js';
+import { mapGoal, mapPlayer } from './marks.js';
 
-const TEAL = '#6fd0c6',
-  INK = '#0e2a28';
 const phone = () => document.body.classList.contains('phone');
 const shell = () => window.__shell;
 
@@ -27,15 +27,16 @@ export function createMapView(game) {
     <div class="mv-map" tabindex="-1">
       <canvas aria-hidden="true"></canvas>
       <div class="mv-pins"></div>
-      <div class="mv-head"><b>Map</b><span class="mv-when"></span></div>
+      <div class="mv-head"><b>Amakawa <span>Island map</span></b><span class="mv-when"></span></div>
       <div class="mv-goal" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V4"/><path d="M6 4.5h11l-2.5 4 2.5 4H6"/></svg><span></span></div>
       <ul class="mv-legend" aria-hidden="true">
         <li>${dot({ state: 'here' })}You are here</li><li>${dot({ state: 'go', visited: true })}Been here</li>
         <li>${dot({ state: 'go', visited: false })}Not been here yet</li><li>${dot({ state: 'closed' })}Not open today</li>
       </ul>
+      <div class="mv-tools"><span class="mv-north" aria-label="North is up">↑<b>N</b></span><button type="button" data-zoom="in" aria-label="Zoom in">+</button><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" class="mv-home" aria-label="Centre on your location">◎</button><button type="button" class="mv-fit">View island</button></div>
       <p class="mv-help">Drag to pan · wheel to zoom · M or Esc closes</p>
     </div>
-    <aside class="mv-side"><div class="mv-card"></div><nav class="mv-list" aria-label="Places"></nav></aside>
+    <aside class="mv-side"><button type="button" class="mv-places" aria-expanded="false">Places <span>⌃</span></button><div class="mv-card"></div><nav class="mv-list" aria-label="Places"></nav></aside>
     <button type="button" class="mv-close" aria-label="Close the map" data-first><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`;
   document.body.appendChild(root);
   const $ = (s) => root.querySelector(s);
@@ -83,48 +84,9 @@ export function createMapView(game) {
     clampView();
     drawBase(ctx, v);
     ctx.setTransform(v.dpr, 0, 0, v.dpr, 0, 0);
-    if (goal) flag(...toView(v, ...goal));
-    if (eric) arrow(...toView(v, eric.x, eric.z), eric.a);
+    if (goal) mapGoal(ctx, ...toView(v, ...goal));
+    if (eric) mapPlayer(ctx, ...toView(v, eric.x, eric.z), eric.a);
     placePins();
-  }
-  function flag(x, y) {
-    ctx.fillStyle = 'rgba(111, 208, 198, 0.18)';
-    ctx.beginPath();
-    ctx.arc(x, y, 20, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = TEAL;
-    ctx.strokeStyle = INK;
-    ctx.lineWidth = 1.4;
-    ctx.beginPath();
-    ctx.moveTo(x - 5, y + 12);
-    ctx.lineTo(x - 5, y - 12);
-    ctx.lineTo(x + 9, y - 12);
-    ctx.lineTo(x + 5, y - 6);
-    ctx.lineTo(x + 9, y);
-    ctx.lineTo(x - 5, y);
-    ctx.fill();
-    ctx.stroke();
-  }
-  function arrow(x, y, a) {
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.fillStyle = 'rgba(111, 208, 198, 0.22)';
-    ctx.beginPath();
-    ctx.arc(0, 0, 17, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.rotate(a);
-    ctx.fillStyle = TEAL;
-    ctx.strokeStyle = INK;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(11, 0);
-    ctx.lineTo(-7, -8);
-    ctx.lineTo(-3, 0);
-    ctx.lineTo(-7, 8);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-    ctx.restore();
   }
   function buildPins() {
     pinsEl.textContent = '';
@@ -143,51 +105,52 @@ export function createMapView(game) {
       pins[s.id] = b;
     }
   }
-  // each pin at its point, its label beside it: on the right, else on the left, else a little above or below.
-  // Where no place is free, the pin nearer Eric keeps its label (the picked pin and his own first).
-  const SPOTS = [
-    [false, 0],
-    [true, 0],
-    [false, -1],
-    [false, 1],
-    [true, -1],
-    [true, 1],
-  ];
   function placePins() {
+    const selected = pinOf(picked).name;
     const at = (id) => toView(v, ...PINS[id].at);
     const e = eric ? toView(v, eric.x, eric.z) : [v.w / 2, v.h / 2];
     const rank = (id) =>
-      id === picked ? -2 : states[id]?.state === 'here' ? -1 : Math.hypot(...at(id).map((c, i) => c - e[i]));
-    const order = Object.keys(pins).sort((a, b) => rank(a) - rank(b));
-    const taken = order.map((id) => {
-      const [x, y] = at(id);
-      return { x0: x - 12, x1: x + 12, y0: y - 12, y1: y + 12 };
-    });
-    for (const id of order) {
-      const b = pins[id],
-        [x, y] = at(id);
-      const lw = (b._lw ||= b.querySelector('.lb').offsetWidth + 10);
-      const boxOf = ([l, dy]) => {
-        const y0 = y - 13 + dy * 24;
-        return l ? { x0: x - 16 - lw, x1: x - 14, y0, y1: y0 + 26 } : { x0: x + 14, x1: x + 16 + lw, y0, y1: y0 + 26 };
-      };
-      const free = (spot) => {
-        const bx = boxOf(spot);
-        return (
-          bx.x0 > 2 &&
-          bx.x1 < v.w - 2 &&
-          !taken.some((o) => bx.x0 < o.x1 && bx.x1 > o.x0 && bx.y0 < o.y1 && bx.y1 > o.y0)
-        );
-      };
-      const spot = SPOTS.find(free);
-      if (spot) taken.push(boxOf(spot));
-      const [left, dy] = spot || [false, 0];
-      b.classList.toggle('nolabel', !spot);
-      b.classList.toggle('left', left);
-      b.dataset.dy = dy;
-      b.classList.toggle('on', id === picked);
-      b.style.transform = `translate(${Math.round(left && spot ? x + 22 - b.offsetWidth : x - 22)}px, ${Math.round(y - 22)}px)`;
-      b.hidden = x < -40 || y < -40 || x > v.w + 40 || y > v.h + 40;
+      id === selected ? -2 : states[id]?.state === 'here' ? -1 : Math.hypot(...at(id).map((c, i) => c - e[i]));
+    const points = Object.keys(pins)
+      .sort((a, b) => rank(a) - rank(b))
+      .map((id) => {
+        const b = pins[id],
+          [x, y] = at(id);
+        b.hidden = x < -22 || y < 76 || x > v.w + 22 || y > v.h + 22;
+        b.classList.toggle('on', id === selected);
+        b.style.transform = `translate(${Math.round(x - 22)}px, ${Math.round(y - 22)}px)`;
+        return { id, x, y, width: b.querySelector('.lb').offsetWidth };
+      })
+      .filter((p) => !pins[p.id].hidden);
+    const areaRect = area.getBoundingClientRect();
+    const blocked = ['.mv-tools', '.mv-goal', '.mv-legend']
+      .map((selector) => $(selector))
+      .filter((el) => !el.hidden && el.offsetWidth)
+      .map((el) => {
+        const r = el.getBoundingClientRect();
+        return {
+          x0: r.left - areaRect.left - 6,
+          x1: r.right - areaRect.left + 6,
+          y0: r.top - areaRect.top - 6,
+          y1: r.bottom - areaRect.top + 6,
+        };
+      });
+    for (const result of placeLabels(points, v.w, v.h, phone() ? 86 : 70, blocked)) {
+      const b = pins[result.id],
+        label = b.querySelector('.lb');
+      b.classList.toggle('nolabel', !!result.hidden);
+      label.style.left = `${22 + (result.dx || 0)}px`;
+      label.style.top = `${22 + (result.dy || 0)}px`;
+      if (!result.hidden && result.dy) {
+        const p = points.find((p) => p.id === result.id);
+        ctx.strokeStyle = '#45616dcc';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x + (result.dx < 0 ? -18 : 18), p.y + result.dy);
+        ctx.lineTo(p.x + (result.dx < 0 ? result.dx + p.width : result.dx), p.y + result.dy);
+        ctx.stroke();
+      }
     }
   }
 
@@ -196,11 +159,15 @@ export function createMapView(game) {
     const s = picked ? states[picked] : null;
     $('.mv-card').innerHTML = cardHTML(s, states, { phone: phone() });
     root.classList.toggle('picked', !!s);
-    if (!phone()) $('.mv-list').innerHTML = listHTML(states, picked);
+    $('.mv-list').innerHTML = listHTML(states, picked);
     redraw();
   }
   function pick(id, { focusList = false } = {}) {
     picked = id;
+    if (!focusList) {
+      root.classList.remove('places-open');
+      $('.mv-places').setAttribute('aria-expanded', 'false');
+    }
     if (states[id]?.state === 'go') game.prepare?.(id); // built while he reads the card (places/lifecycle.js)
     side();
     if (focusList) root.querySelector(`.mv-list [data-pick="${id}"]`)?.focus({ preventScroll: true });
@@ -237,6 +204,8 @@ export function createMapView(game) {
     }
     eric = ericAt(game);
     goal = goalAt(game);
+    root.classList.remove('places-open');
+    $('.mv-places').setAttribute('aria-expanded', 'false');
     size();
     const here = eric || { x: 0, z: 0 };
     if (phone()) Object.assign(v, { scale: 3.25, cx: here.x, cz: here.z });
@@ -254,6 +223,9 @@ export function createMapView(game) {
   function close() {
     if (!open) return;
     open = false;
+    ptrs.clear();
+    pinch = 0;
+    dragged = false;
     cancelAnimationFrame(raf);
     raf = 0;
     game.mapOpen = false;
@@ -273,8 +245,32 @@ export function createMapView(game) {
     const t = e.target.closest('button');
     if (!t) return;
     e.stopPropagation();
-    if (t.classList.contains('mv-close') || t.classList.contains('mv-cancel')) {
-      if (t.classList.contains('mv-close')) close();
+    if (t.dataset.zoom) {
+      zoomAt(t.dataset.zoom === 'in' ? 1.35 : 1 / 1.35, v.w / 2, v.h / 2);
+      redraw();
+    } else if (t.classList.contains('mv-home')) {
+      Object.assign(v, { cx: eric?.x || 0, cz: eric?.z || 0, scale: phone() ? 3.25 : 5 });
+      redraw();
+    } else if (t.classList.contains('mv-fit')) {
+      Object.assign(v, { cx: (BOUNDS.x0 + BOUNDS.x1) / 2, cz: (BOUNDS.z0 + BOUNDS.z1) / 2, scale: minScale });
+      redraw();
+    } else if (t.classList.contains('mv-places')) {
+      const expanded = root.classList.toggle('places-open');
+      t.setAttribute('aria-expanded', String(expanded));
+    } else if (t.classList.contains('mv-close') || t.classList.contains('mv-cancel')) {
+      if (t.dataset.zoom) {
+        zoomAt(t.dataset.zoom === 'in' ? 1.35 : 1 / 1.35, v.w / 2, v.h / 2);
+        redraw();
+      } else if (t.classList.contains('mv-home')) {
+        Object.assign(v, { cx: eric?.x || 0, cz: eric?.z || 0, scale: phone() ? 3.25 : 5 });
+        redraw();
+      } else if (t.classList.contains('mv-fit')) {
+        Object.assign(v, { cx: (BOUNDS.x0 + BOUNDS.x1) / 2, cz: (BOUNDS.z0 + BOUNDS.z1) / 2, scale: minScale });
+        redraw();
+      } else if (t.classList.contains('mv-places')) {
+        const expanded = root.classList.toggle('places-open');
+        t.setAttribute('aria-expanded', String(expanded));
+      } else if (t.classList.contains('mv-close')) close();
       else ((picked = null), side());
     } else if (t.classList.contains('mv-go')) go();
     else if (t.dataset.pick) {
@@ -307,6 +303,7 @@ export function createMapView(game) {
     moved = 0,
     pinch = 0;
   area.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.mv-tools')) return;
     ptrs.set(e.pointerId, [e.clientX, e.clientY]);
     moved = 0;
     if (ptrs.size === 2) pinch = spread();
@@ -365,6 +362,12 @@ export function createMapView(game) {
     },
     { passive: false },
   );
+  new ResizeObserver(() => {
+    if (open) {
+      size();
+      redraw();
+    }
+  }).observe(area);
   addEventListener('resize', () => {
     if (!open) return;
     size();
