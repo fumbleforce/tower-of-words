@@ -29,7 +29,9 @@ def main():
                      if os.path.isfile(os.path.join(base, f, 'text.md')) and os.path.getmtime(os.path.join(base, f)) > cutoff)
     if not folders:
         return
-    state_path = os.path.join(root, '.git', 'claude-game-feedback-seen.json')
+    # Each client must see the feedback even if the other client already read its notification.
+    client = 'codex' if data.get('client') == 'codex' else 'claude'
+    state_path = os.path.join(root, '.git', f'{client}-game-feedback-seen.json')
     try:
         seen = set(json.load(open(state_path, encoding='utf-8')))
     except Exception:
