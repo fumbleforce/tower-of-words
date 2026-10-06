@@ -2,6 +2,8 @@
 // contact shadows, a walk grid with A* for tap-to-move, the player controller and the talk markers.
 import * as THREE from 'three';
 import { DECAL } from './look/decal.js';
+import { iconName, pinGlyph } from './gameplay/pin-kinds.js';
+import { createPinTip, tipOf, privateOn, PIN_GLYPHS, HEART } from './ui/pin-tip.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
@@ -200,11 +202,10 @@ export class Walker {
 // A small DOM pin that follows a 3D point: a circle with a symbol on a short line down to the person or thing.
 const NEAR_PIN = 2.5; // m from Eric to the spot in front of it
 // a thing may name its own symbol: item.icon is a name ('heart-soft', 'heart-hard') or a function giving one (or
-// ''), and the pin takes the class icon-<name> (css/marks.css). Only the name is known here; local plugins supply it.
-const HEART =
-  '<svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5C5.2 15.6 3 12.2 3 8.8 3 6.3 5 4.5 7.3 4.5c1.9 0 3.5 1 4.7 2.8 1.2-1.8 2.8-2.8 4.7-2.8C19 4.5 21 6.3 21 8.8c0 3.4-2.2 6.8-9 11.7z"/></svg>';
+// ''), and the pin takes the class icon-<name> (css/marks.css), in private mode only. Only the name is known here;
+// local plugins supply it.
 function setIcon(m) {
-  const name = typeof m.icon === 'function' ? m.icon() : m.icon;
+  const name = privateOn() ? iconName(m) : '';
   if (name === m._ic) return;
   if (m._ic) m.el.classList.remove('icon-' + m._ic);
   if (name) m.el.classList.add('icon-' + name);
@@ -214,24 +215,20 @@ export class Markers {
   constructor(layer) {
     this.layer = layer;
     this.list = [];
+    this.tip = createPinTip(layer, this); // the tooltip on hover or a long press (ui/pin-tip.js)
   }
   add(item) {
     const el = document.createElement('button');
     el.className = 'mark' + (item.kind ? ' ' + item.kind : '');
     el.type = 'button';
-    // a pin with an icon (speech for people, a small eye for things), and a tag with the verb and name that
-    // opens out when you're close. The whole button is at least 48 px for touch.
-    const person = /person/.test(item.kind || '');
-    const paw =
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="15.5" rx="5" ry="4.2"/><circle cx="6.2" cy="10" r="2"/><circle cx="9.6" cy="6.8" r="2"/><circle cx="14.4" cy="6.8" r="2"/><circle cx="17.8" cy="10" r="2"/></svg>';
-    const icon =
-      item.verb === 'Pet'
-        ? paw
-        : person
-          ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3.5V16H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg>'
-          : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c4.4 0 7.8 3.3 9 6-1.2 2.7-4.6 6-9 6s-7.8-3.3-9-6c1.2-2.7 4.6-6 9-6zm0 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>';
-    el.innerHTML = `<span class="pin" aria-hidden="true">${icon}</span><span class="tag"><span class="vb">${item.verb || (person ? 'Talk' : 'Look')}</span><span class="nm">${item.label}</span><span class="key">E</span></span><span class="stem" aria-hidden="true"></span>`;
-    el.setAttribute('aria-label', item.label);
+    // a pin with its symbol (gameplay/pin-kinds.js pinGlyph: speech for people, a paw, the eye for things, a door,
+    // arrow, stairs or lift for the ways between places), and a tag that carries the E key cap (css/marks.css).
+    // The whole button is at least 48 px for touch.
+    const glyph = pinGlyph(item);
+    el.classList.add('g-' + glyph);
+    const t = tipOf(item);
+    el.innerHTML = `<span class="pin" aria-hidden="true">${PIN_GLYPHS[glyph]}</span><span class="tag"><span class="vb">${t.verb}</span><span class="nm">${item.label}</span><span class="key">E</span></span><span class="stem" aria-hidden="true"></span>`;
+    el.setAttribute('aria-label', t.text);
     if (item.icon) el.querySelector('.pin').insertAdjacentHTML('beforeend', HEART);
     this.layer.appendChild(el);
     item.el = el;
@@ -293,6 +290,7 @@ export class Markers {
         if (want !== m.label) {
           m.label = want;
           m.el.querySelector('.nm').textContent = want;
+          m.el.setAttribute('aria-label', tipOf(m).text);
         }
       }
       if (m.icon) setIcon(m);
@@ -313,5 +311,6 @@ export class Markers {
       e.m.el.classList.toggle('crowded', hit);
       if (!hit) kept.push(e);
     }
+    this.tip.update();
   }
 }

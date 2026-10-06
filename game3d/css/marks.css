@@ -1,11 +1,12 @@
 /* ---------- what can be used: a pin over every usable person and thing ----------
    Jørgen, 2026-09-29: "the microscopic dots are not enough to indicate interactive elements, they look like bugs
    really. earlier you had a line and a circle with a symbol which was better." So every usable person and thing on
-   screen carries a pin again: a circle with a symbol (speech for people, a paw for the cat, an eye for things) on a
-   short line down to it (engine.js Markers). It must not clutter or cover people (his earlier complaint), so:
+   screen carries a pin again: a circle with a symbol (speech for people, a paw for the cat, an eye for things, and
+   a door, arrow, stairs, lift or place marker for the ways between places: gameplay/pin-kinds.js) on a short line
+   down to it (engine.js Markers). It must not clutter or cover people (his earlier complaint), so:
    - pins further from Eric are smaller and paler (engine.js scales each pin from its tip and sets --mo);
    - where two pins would overlap, only the one nearer to Eric shows (.crowded);
-   - no labels: the action beside the target has the name and the verb.
+   - no labels: the action menu has the name and the verb, and a tooltip says them on hover or a long press (below).
    The goal's pin is teal and larger. The one in reach keeps the small bobbing pointer (in place of the line), with
    the 3D outline on its body. Loaded after style.css, so it overrides the older pin rules there. */
 #marks { visibility: visible; }
@@ -131,3 +132,19 @@ body.phone #marks .mark.goal.below.flip .pin { left: -60px; }
 #marks .mark[class*="icon-heart"] .pin svg.heart { display: block; }
 #marks .mark.icon-heart-soft .pin svg.heart, #marks .mark.icon-heart-soft.near .pin svg.heart { fill: #c9a0ff; }
 #marks .mark.icon-heart-hard .pin svg.heart, #marks .mark.icon-heart-hard.near .pin svg.heart { fill: #ff5468; }
+
+/* the pin's tooltip (ui/pin-tip.js): the verb and what it is ("Look: Vending machine", "Go to the plaza") while the
+   mouse is on a pin, or after a long press on one on a phone. The action menu's slate with its teal verb, one line,
+   over the pin; it takes no taps. */
+#pinTip {
+  position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; white-space: nowrap;
+  max-width: min(80vw, calc(340px * var(--ui, 1))); overflow: hidden; text-overflow: ellipsis;
+  padding: calc(5px * var(--ui, 1)) calc(10px * var(--ui, 1)); border-radius: calc(9px * var(--ui, 1));
+  background: rgba(18, 22, 30, .94); border: 1px solid rgba(191, 241, 234, .4); box-shadow: 0 4px 14px rgba(0, 0, 0, .45);
+  color: var(--ink, #eef2f6); font: 500 calc(14px * var(--ui, 1))/1.25 var(--font);
+}
+#pinTip[hidden] { display: none; }
+#pinTip .vb { font-weight: 700; color: #bff1ea; }
+body.phone #pinTip { max-width: 86vw; padding: 7px 12px; border-radius: 10px; font-size: 16px; }
+/* a long press on a pin previews it: no callout or zoom */
+#marks .mark .pin { -webkit-touch-callout: none; touch-action: manipulation; }

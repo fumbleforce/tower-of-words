@@ -1,3 +1,4 @@
+import { travelOf } from '../../gameplay/pin-kinds.js';
 // The goal hook's `at` ({ do: 'goal', text: 'Sit by the lunchbox.', at: 'seat_far_r' }): the goal's teal pin over
 // that place, until the next goal replaces it or the place changes. Nothing is drawn on the floor (Jørgen,
 // docs/game/controls-and-ui.md, Markers): the pin is the mark, as for any goal. A thing or person with its own pin
@@ -34,7 +35,9 @@ export function goalAt(game, posOf) {
       id: 'goal_at',
       kind: 'thing small',
       label: s ? 'Free seat' : 'Here',
-      verb: 'Go to',
+      verb: 'Walk to',
+      // a spot to walk to: its own symbol and tooltip (gameplay/pin-kinds.js)
+      travel: travelOf(null, 'goal_at', { verb: 'Walk to', tip: s ? 'Walk to the free seat' : 'Walk here' }),
       anchor: (v) => P.space.localToWorld(v.set(s ? s.x : p[0], y, s ? s.z : p[1])),
       spot: () => p,
       enabled: () => game.place === P,

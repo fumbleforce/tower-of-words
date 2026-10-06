@@ -2,6 +2,7 @@
 // the ui object (ui.js). The rules it follows: docs/game/controls-and-ui.md, The HUD.
 import { $ } from './dom.js';
 import { thingBox, elBox } from './screen-box.js';
+import { tipOf } from './pin-tip.js';
 
 export function actMenu({ keyLabel, settings }) {
   return {
@@ -50,8 +51,8 @@ export function actMenu({ keyLabel, settings }) {
       }
       const ob = window.__onboard || {};
       const phone = document.body.classList.contains('phone');
-      const verb = target.verb || (/person/.test(target.kind || '') ? 'Talk' : 'Look'),
-        name = target.label || '';
+      // the same verb and name as the pin's tooltip (gameplay/pin-kinds.js pinTip; neutral for a private pin in public play)
+      const { verb, name } = tipOf(target);
       // Say shows for this target when a word does something here; the first time only at the goal (the cat)
       const sayHere = show && g.sayTarget === target && g.sayRow(target);
       const canUse = !g.canUse || g.canUse(target);

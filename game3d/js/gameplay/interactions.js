@@ -11,6 +11,7 @@ import { sim, ITEMS, meet, take, peopleHTML } from '../sim.js';
 import { isPerson, idleTalk } from './idle-talk.js';
 import { installDoorCards } from '../ui/door-card.js';
 import { PLAYER_ID } from '../mc.js';
+import { travelOf } from './pin-kinds.js';
 
 export function installInteractions(game) {
   const ui = game.ui;
@@ -32,9 +33,13 @@ export function installInteractions(game) {
       // (the train's "Wait by the doors" goal was on door_l and had no marker: a softlock)
       const quiet = !!t.noMarker;
       const L = labels[id];
+      // a way between places (a door, stairs, the lift, a way out) gets its own symbol and verb (pin-kinds.js)
+      const travel = travelOf(place.name, id, t);
       const item = {
         ...t,
         id,
+        travel,
+        verb: travel ? travel.verb : t.verb,
         label: Array.isArray(L) ? L[0] : L || t.label,
         labelIf: Array.isArray(L) ? { text: L[0], cond: L[1], other: t.label } : null,
         labelCond: cond,
