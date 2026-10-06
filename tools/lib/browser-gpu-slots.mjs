@@ -15,9 +15,9 @@
 // The GPU queue (gpu.queue/, rules and ranks in tools/gpu_priority.py): a browser
 // job that has to wait keeps a ticket there (enqueueGpuTicket) and passes it to
 // tryAcquireBrowserGpuSlot, which hands out a slot only when no exclusive job's
-// ticket goes first. Browser tickets rank after voices and before renders, and
-// while the pool holds the lock a new browser job does not join past an older
-// render, so neither side can keep the other out.
+// ticket goes first. Browser tickets rank after voices and take turns with
+// renders in the order they queued (orderKey), so neither side can keep the
+// other out.
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -89,10 +89,13 @@ function poolHeld(root) {
   return readOwner(path.join(root, 'gpu.lock', 'owner'))?.startsWith(poolPrefix) ?? false;
 }
 
-// Rank, then time. While the browser pool holds the lock a browser ticket counts
-// as a render, so it cannot join past an older render.
+// Rank, then time. A browser ticket always counts as a render: browser tests and
+// renders take turns in the order they queued, so neither can starve the other.
+// (Browser tests used to go first whenever the lock changed hands, and a steady
+// stream of them kept renders waiting for over an hour, 2026-10-06.)
 export function orderKey(ticket, held) {
-  const rank = ticket.kind === 'browser' && held ? GPU_RANKS.render : ticket.rank;
+  void held;
+  const rank = ticket.kind === 'browser' ? GPU_RANKS.render : ticket.rank;
   return [rank, ticket.time, path.basename(ticket.path ?? '')];
 }
 const before = (a, b) => a[0] - b[0] || a[1] - b[1] || (a[2] < b[2] ? -1 : a[2] > b[2] ? 1 : 0);

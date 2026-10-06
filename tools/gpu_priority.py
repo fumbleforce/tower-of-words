@@ -19,8 +19,8 @@ start time differs), is dropped. A ticket goes when its job takes the lock, give
   4 voice         voices
   5 render        scene renders and every other image or model job (the default)
   browser         headless browser GPU slots (tools/lib/browser-gpu-slots.mjs keeps the same rules in JavaScript).
-                  When the lock changes hands they go after voices and before renders. While the browser pool holds
-                  the lock, a new browser job joins only if no render has waited longer. So a waiting exclusive job
+                  They take turns with renders in queue order (a browser ticket counts as a render), after voices; a
+                  new browser job joins the running pool only if no render has waited longer. So a waiting exclusive job
                   gets the GPU once the running tests end (each is capped at 5 minutes), and browser tests that are
                   waiting get in between two renders.
 
@@ -240,10 +240,10 @@ def lock_owner(root=None):
 
 
 def order_key(ticket, pool_held):
-    """The queue order, the same rule as orderKey() in tools/lib/browser-gpu-slots.mjs: rank, then time. While the
-    browser pool holds the lock a browser ticket counts as a render, so it cannot join past an older render."""
+    """The queue order, the same rule as orderKey() in tools/lib/browser-gpu-slots.mjs: rank, then time. A browser
+    ticket always counts as a render, so browser tests and renders take turns in queue order and neither starves."""
     r = ticket['rank']
-    if ticket.get('kind') == 'browser' and pool_held:
+    if ticket.get('kind') == 'browser':
         r = RANKS['render']
     return (r, ticket['time'], os.path.basename(ticket.get('path', '')))
 
