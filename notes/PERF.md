@@ -649,3 +649,10 @@ plaza, the forecourt and the dorm courtyard builders; place shots at both sizes 
 Plaza budgets re-measured from the fast test (median calls, tris): desktop q0 60 → 64, 206k → 216k; phone q0 49 → 50,
 197k → 206k; phone q1 61 → 58, 198k → 208k (the clinic and the seafront since the last entries). Written to
 budgets.json.
+
+
+## Fast travel memory
+
+2026-10-06, issue #261, `game3d/tools/map-travel-check.mjs`, q0 on the desktop GPU with a 390 × 844 touch viewport. Six hops through the map from room 203: plaza, sports, shop street, east coast, gate, pool. The JS heap after garbage collection grew from 22 MB to 60 MB; nine places were prepared at the end, with 396 geometries and 134 textures. The 1366 × 860 run ended at 63 MB, 486 geometries and 137 textures. This is a browser memory sample, not a measurement on a physical phone.
+
+The full map uses a 2D canvas and stops the covered game's rendering loop; the browser check verifies that the render frame counter stops. Closing the map clears its canvas allocation. Prepared places remain cached, as during walking; no eviction was added.

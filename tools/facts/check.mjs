@@ -15,6 +15,7 @@ import { DEFAULT_SPEAKERS, PORTRAITS, ITEMS, PLACE_DETAILS, SHARED_THINGS, isEng
 import { storyBondGate } from '../../game3d/js/bonds/gates.js';
 import { PLACE_FILES } from '../../game3d/js/places/definitions.js';
 import { CHUNKS, PLACES, PLAN_PATHS } from '../../game3d/js/scenes/island-layout.js';
+import { PINS } from '../../game3d/js/travel/pins.js';
 import { CREATURES } from '../../game3d/js/creatures/catalog.js';
 import { CROWD } from '../../game3d/js/crowd/data.js';
 import fs from 'node:fs';
@@ -267,6 +268,17 @@ function checkIsland() {
   }
   for (const place of Object.keys(CHUNKS)) if (!seen.has(place)) bad(file, `"Where the places sit on the island": no row for \`${place}\``);
   for (const place of Object.keys(STORY)) if (place !== 'lift' && !CHUNKS[place]) bad(file, `"Where the places sit on the island": \`${place}\` is built but not placed`);
+  // "On the map": each place's pin (an island point) or the place it is inside, matching game3d/js/travel/pins.js
+  const pins = table(read(path.join(DOCS, 'places.md')), 'On the map', file), pinned = new Set();
+  for (const r of pins) {
+    const place = id(r.Place), p = PINS[place];
+    pinned.add(place);
+    if (!p) { bad(file, `"On the map": \`${place}\` has no pin in travel/pins.js`); continue; }
+    const inside = id(r.In || '');
+    if ((p.in || '') !== inside) bad(file, `"On the map": \`${place}\` is in "${inside}", pins.js has "${p.in || ''}"`);
+    if (p.at && !(Math.abs(+r.x - p.at[0]) < 0.005 && Math.abs(+r.z - p.at[1]) < 0.005)) bad(file, `"On the map": \`${place}\` is at ${r.x}, ${r.z}, pins.js has ${p.at.join(', ')}`);
+  }
+  for (const place of Object.keys(CHUNKS)) if (!pinned.has(place)) bad(file, `"On the map": no row for \`${place}\``);
 }
 
 // island.md: every place table row (Id, Place "English (日本語)") against PLACES, and the "Streets and paths" table

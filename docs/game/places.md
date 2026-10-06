@@ -29,7 +29,7 @@ Jørgen, 2026-10-02: "we must make the island feel more alive ... and small crea
 
 ## Getting between places
 
-There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transitions"). Each move is one trip the player watches. A trip is finished before anyone in the new place speaks: the crossfade has cleared and a camera pulling back from the arrival has settled. One line per trip: from, to, how, then what the player sees; a trip to or from a planned place is planned too. The bible draws these as the places diagram (http://127.0.0.1:8771/bible/#place-map).
+There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transitions"). Each move is one trip the player watches. Fast travel from the map (systems.md, Fast travel) skips the leaving walk: the frame crossfades straight into the arriving walk from the route's last place, as below. A trip is finished before anyone in the new place speaks: the crossfade has cleared and a camera pulling back from the arrival has settled. One line per trip: from, to, how, then what the player sees; a trip to or from a planned place is planned too. The bible draws these as the places diagram (http://127.0.0.1:8771/bible/#place-map).
 
 - `train` → `gate`, walk: Eric steps off onto the platform, follows the covered walkway and enters Honsha station's security room through its glass doors.
 - `gate` → `forecourt`, walk: Eric walks north out of the security room's back exit. The camera stays close and keeps its angle, then crossfades to him stepping out of the station's north door onto the court; on a phone the camera then turns to look east-north-east up the court at head office.
@@ -85,7 +85,7 @@ The dialogue slots for each trip are in game3d/story/transitions.js (format: FOR
 
 Every place has a spot in one island frame, fitted to [island-map-4](../../reviews/island-map-4/review.json) (2026-09-30). The frame: x runs east, z south, in game units, along the town's street grid, which the map draws turned about 23° clockwise from its up (Jørgen, 2026-09-30: "lol look at the lift, it sits at an angle inside the building, intersecting the wall"), so every building on the grid is square to the cameras; north means the grid's north; the origin is the head office door as the map draws it. The table gives the island point of each place's own (0, 0), its clockwise turn on the map in degrees, its scale (the train is built at people scale 1, everything else at 1.18) and its level (0 ground, -2 underground, 1 upstairs or raised). The walks between outdoor places crossfade, so neighbouring places don't have to touch.
 
-The buildings, paths, green and coast around the route, and the fit to the map, are data in game3d/js/scenes/island-layout.js. The island map shows all of it (`?map=1`, key M; `?mapcompare=1` over the reference); the differences are listed in notes/map-gaps.md.
+The buildings, paths, green and coast around the route, and the fit to the map, are data in game3d/js/scenes/island-layout.js. The dev island map shows all of it (`?map=1`, Shift+M; `?mapcompare=1` over the reference); the differences are listed in notes/map-gaps.md.
 
 | Place | x | z | Turn | Scale | Level | Pinned by |
 |---|---|---|---|---|---|---|
@@ -116,6 +116,32 @@ The ground past the exits (#260, Jørgen 2026-10-05: "the outer grounds should b
 - East lane: past the north street's top, the sports lane's corner, its verge and lamps, the pool walk's foot and the trees east of the north street; a belt of trees east of the north street's top; dorm_5 and the north residence built with ground floors.
 - Sports ground: past the north street's foot, the north street on south to the top leg with its avenue, lamps and r9's front; past the courts walk's east end, the onsen path north and the east coast walk's leg east, with their woods; a belt of trees north of the pool's pavilion and the courts' hall; past the sports lane's west end, the office street's lawns south of it planted as the office quarter plants them; dorm_5 and the north residence built with ground floors.
 - Office quarter: belts of trees on the lawns south of the street, between the bank, the print shop and m6.
+
+## On the map
+
+The game's map and the minimap (controls-and-ui.md, The map) show each outdoor place as a pin at an island point in the frame above; an interior has no pin of its own and is listed under the place its door is in. Names are the place names in the save list. The pins are data in game3d/js/travel/pins.js.
+
+| Place | x | z | In |
+|---|---|---|---|
+| `train` | -28.6 | -3.9 | |
+| `gate` | -14.45 | 6.5 | |
+| `forecourt` | -6 | -1 | |
+| `office` | | | `forecourt` |
+| `plaza` | 37.29 | -2.75 | |
+| `dorm_court` | 79.84 | -1.3 | |
+| `dorms` | | | `dorm_court` |
+| `shotengai` | 30.3 | 20.1 | |
+| `karaoke` | | | `shotengai` |
+| `karaoke_booth` | | | `karaoke` |
+| `east_lane` | 67.5 | -6.5 | |
+| `east_coast` | 126.5 | 10.5 | |
+| `dorm_commons` | | | `east_coast` |
+| `sports` | 58.2 | -57.5 | |
+| `pool` | | | `sports` |
+| `gym` | | | `sports` |
+| `office_quarter` | 4.5 | -54 | |
+| `harbour` | -85 | -75 | |
+| `works` | -66 | -106 | |
 
 ## Monorail (`train`)
 

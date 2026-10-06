@@ -262,6 +262,7 @@ const savesPanel = savesView({
 const openSaves = (mode) => savesPanel.open(mode);
 shell.saving = saving;
 shell.closeLayers = () => layers.slice().forEach((l) => closeLayer(l.el));
+Object.assign(shell, { openLayer, closeLayer }); // the map is a layer too (ui/map/view.js)
 saving.noteAutosave();
 
 // ---------- pause ----------

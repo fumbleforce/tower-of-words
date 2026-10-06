@@ -50,6 +50,7 @@ html, body { margin: 0; height: 100%; background: #0e121c; }
   const sv = document.createElement('link'); sv.rel = 'stylesheet'; sv.href = 'css/saves.css' + v; document.head.appendChild(sv);
   const vn = document.createElement('link'); vn.rel = 'stylesheet'; vn.href = 'css/vn.css' + v; document.head.appendChild(vn);
   const cl = document.createElement('link'); cl.rel = 'stylesheet'; cl.href = 'css/clubs.css' + v; document.head.appendChild(cl);
+  const mc = document.createElement('link'); mc.rel = 'stylesheet'; mc.href = 'css/map.css' + v; document.head.appendChild(mc);
   const imports = { three: './vendor/three/three.module.js', 'three/addons/': './vendor/' };
   for (const f of b.files) imports[new URL(f, location.href).href] = new URL(f + v, location.href).href;
   const map = document.createElement('script'); map.type = 'importmap'; map.textContent = JSON.stringify({ imports }); document.head.appendChild(map);
@@ -59,7 +60,7 @@ html, body { margin: 0; height: 100%; background: #0e121c; }
   const s = document.createElement('script'); s.type = 'module'; s.src = './js/main.js' + v; document.body.appendChild(s);
   // the shell (title, settings, pause, saves, loading): its own module, so a fault there never stops the game
   const m = document.createElement('script'); m.type = 'module'; m.src = './js/menu.js' + v; document.body.appendChild(m);
-  // the island map, a dev tool for now: only with ?map=1 or ?mapcompare=1 (js/map/index.js)
+  // the island map's dev view (Shift+M): only with ?map=1 or ?mapcompare=1 (js/map/index.js)
   if (/[?&]map/.test(location.search)) { const mp = document.createElement('script'); mp.type = 'module'; mp.src = './js/map/index.js' + v; document.body.appendChild(mp); }
   // tests and captures don't want the loader; and it never outlives a game that started without the shell
   if (/[?&](cap|test=)/.test(location.search)) document.getElementById('boot').remove();

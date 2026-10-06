@@ -13,7 +13,7 @@ import {
   PLACES,
   footprint,
 } from '../scenes/island-layout.js';
-import { shape, rectPts, circlePts, ribbon } from './layers.js';
+import { shape, rectPts, circlePts, ribbon } from '../ui/map/shapes.js';
 
 const INK = {
   building: '#c9ced6',

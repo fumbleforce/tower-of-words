@@ -22,6 +22,8 @@ import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.j
 import { installCreatures } from '../creatures/index.js';
 import { attachCrowd } from '../crowd/index.js';
 import { liftPeople } from '../look/char-lift.js';
+import { keepPublic } from '../travel/ways.js';
+import { noteVisit } from '../travel/visited.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -68,6 +70,7 @@ export function createPlaceLifecycle(
         place.name = name;
         noteBenches(place); // its benches' seats, before the draw-call pass merges them (places/day3/seats.js)
         await installBoot();
+        keepPublic(story); // its ways out as the public story wrote them, for fast travel (travel/ways.js)
         await installPlacePlugin(name, { game, story, place });
         await nextFrame();
         attachLift(game, place); // walk-in lift (places/lift.js)
@@ -106,6 +109,7 @@ export function createPlaceLifecycle(
     game.place = place;
     game.story = story;
     document.body.dataset.place = name;
+    noteVisit(name); // the places he has been to, for the map (travel/visited.js)
     game.runner.use(place, story);
     if (!resuming) game.pendingStart = name;
     place.space.add(game.player.root);
@@ -173,10 +177,16 @@ export function createPlaceLifecycle(
 
   // The trip between places: the old place plays its leaving move while the next one is ready (it was built
   // in the background), then a soft crossfade from the last frame into the next place, where its arriving
-  // move plays. No black screens.
-  async function travel(name, { arriving = false, fromName } = {}) {
-    const from = arriving ? { name: fromName } : game.place;
-    game.transition = { from: from.name, to: name, phase: arriving ? 'arriving' : 'leaving' };
+  // move plays. No black screens. Fast travel (travel/go.js): no leaving move, and he arrives as he would on foot
+  // from `via`, the route's last place before this one.
+  async function travel(name, { arriving = false, fromName, fast = false, via } = {}) {
+    const from = arriving ? { name: fromName } : fast ? { name: via } : game.place;
+    game.transition = {
+      from: from.name,
+      to: name,
+      phase: arriving ? 'arriving' : 'leaving',
+      ...(fast ? { fast } : {}),
+    };
     save(game);
     game.busy = true;
     game.walker.locked = true;
@@ -185,7 +195,8 @@ export function createPlaceLifecycle(
     const ready = prepare(name).then((r) => ((built = true), r));
     const tr = await game.runner.load('transitions');
     const slot = (tr && tr[`${from.name}_to_${name}`]) || {};
-    if (!arriving) await trips.leave(game, from, slot);
+    if (fast) game.walker.stop();
+    else if (!arriving) await trips.leave(game, from, slot);
     // body.loading (the chip, and a dimmed frame) only when the player is actually held up: the leaving walk is
     // over and the next place is still being built. A place built ahead (the lift, the outdoor chunks) never shows it.
     if (!built) {
