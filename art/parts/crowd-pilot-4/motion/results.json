@@ -1,0 +1,290 @@
+[
+  {
+    "width": 1366,
+    "way": "treadmill",
+    "motion": "idle",
+    "seconds": 10,
+    "states": [
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "treadmill",
+    "motion": "walk",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "treadmill",
+    "motion": "run",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "treadmill",
+    "motion": "idle",
+    "seconds": 10,
+    "states": [
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "treadmill",
+    "motion": "sit",
+    "seconds": 10,
+    "states": [
+      "sit",
+      "sit",
+      "sit",
+      "sit"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "treadmill",
+    "motion": "walk",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "loop",
+    "motion": "idle",
+    "seconds": 10,
+    "states": [
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "loop",
+    "motion": "walk",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "loop",
+    "motion": "run",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "loop",
+    "motion": "idle",
+    "seconds": 10,
+    "states": [
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "loop",
+    "motion": "sit",
+    "seconds": 10,
+    "states": [
+      "sit",
+      "sit",
+      "sit",
+      "sit"
+    ]
+  },
+  {
+    "width": 1366,
+    "way": "loop",
+    "motion": "walk",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "treadmill",
+    "motion": "idle",
+    "seconds": 10,
+    "states": [
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "treadmill",
+    "motion": "walk",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "treadmill",
+    "motion": "run",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "treadmill",
+    "motion": "idle",
+    "seconds": 10,
+    "states": [
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "treadmill",
+    "motion": "sit",
+    "seconds": 10,
+    "states": [
+      "sit",
+      "sit",
+      "sit",
+      "sit"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "treadmill",
+    "motion": "walk",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "loop",
+    "motion": "idle",
+    "seconds": 10,
+    "states": [
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "loop",
+    "motion": "walk",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "loop",
+    "motion": "run",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "loop",
+    "motion": "idle",
+    "seconds": 10,
+    "states": [
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "loop",
+    "motion": "sit",
+    "seconds": 10,
+    "states": [
+      "sit",
+      "sit",
+      "sit",
+      "sit"
+    ]
+  },
+  {
+    "width": 390,
+    "way": "loop",
+    "motion": "walk",
+    "seconds": 10,
+    "states": [
+      "walk",
+      "walk",
+      "walk",
+      "walk"
+    ]
+  }
+]

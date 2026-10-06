@@ -1,0 +1,170 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "rdbtAnima.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen_3_06b_base.safetensors",
+      "type": "stable_diffusion"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe. Front face texture of an adult anime woman, symmetrical calm angular anime eyes, broad shaped upper eyelids, large dark blue irises partly covered by the upper lids, simple flat iris fills, one small highlight per eye, clean dark upper lash edge. Eyes look straight forward. Preserve the guided eye shape and flat warm skin.",
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "worst quality, low quality, blurry, photorealistic, doll eyes, bulging eyes, concentric rings, glass eyes, glossy eyes, multiple catchlights, realistic eyeballs, staring, cross eyed, extra pupils, extra eyes, text, watermark, eye makeup, skin texture, wrinkles",
+      "clip": [
+        "2",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "14",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "13",
+        0
+      ],
+      "seed": 4111,
+      "steps": 30,
+      "cfg": 5,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "denoise": 0.3
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "7",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "8",
+        0
+      ],
+      "filename_prefix": "crowd4/b-calm"
+    }
+  },
+  "10": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "input.png"
+    }
+  },
+  "12": {
+    "class_type": "LoadImageMask",
+    "inputs": {
+      "image": "mask.png",
+      "channel": "red"
+    }
+  },
+  "11": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "10",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "SetLatentNoiseMask",
+    "inputs": {
+      "samples": [
+        "11",
+        0
+      ],
+      "mask": [
+        "12",
+        0
+      ]
+    }
+  },
+  "P": {
+    "class_type": "ModelPatchLoader",
+    "inputs": {
+      "name": "anima-lllite-inpainting-v2.safetensors"
+    }
+  },
+  "A": {
+    "class_type": "AnimaLLLiteApply",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "model_patch": [
+        "P",
+        0
+      ],
+      "image": [
+        "10",
+        0
+      ],
+      "mask": [
+        "12",
+        0
+      ],
+      "strength": 1.0,
+      "start_percent": 0.0,
+      "end_percent": 1.0
+    }
+  },
+  "14": {
+    "class_type": "DifferentialDiffusion",
+    "inputs": {
+      "model": [
+        "A",
+        0
+      ]
+    }
+  }
+}

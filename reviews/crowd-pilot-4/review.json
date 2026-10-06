@@ -1,0 +1,142 @@
+{
+  "title": "Crowd pilot round 4: two anime eye treatments",
+  "date": "2026-10-06",
+  "updated": "2026-10-06T21:24:50+02:00",
+  "by": "Codex",
+  "status": "open",
+  "issue": 232,
+  "multi": true,
+  "question": "Which eye treatment, if any, fits the cast: calm or open?",
+  "media": [
+    {
+      "image": "art/parts/crowd-pilot-4/sheets/faces-front.webp",
+      "caption": "Actual textured 3D models, beside Kenji, Kuro, Aoi and Emi. Your round-3 feedback: \u201cthe meshes are okay but the eyes are super creepy, too large for normal size, not large enough for anime eyes, creepy middle ground.\u201d Round 4 uses broad shaped lids, flat dark irises and one highlight. These are eye-only candidates; the game crowd has not changed."
+    },
+    {
+      "image": "art/parts/crowd-pilot-4/sheets/faces-left.webp",
+      "caption": "Same models turned 0.6 radians, at the same close-up distance. R3 mouths and repaired hair seams are preserved. The calm/open distinction is deliberately modest; A still has decorative outer lash wings."
+    },
+    {
+      "image": "art/parts/crowd-pilot-4/sheets/faces-right.webp",
+      "caption": "Opposite angle. Meshes, skin weights and all walk/run/sit/idle files are byte-identical to round 3. Every texel outside the projected eye mask is unchanged. The live viewer below lets you turn, compare, walk, run and sit."
+    },
+    {
+      "image": "art/parts/crowd-pilot-4/takes/a-calm/generated.png",
+      "caption": "Saved eye-paint attempt a-calm, before UV projection (not a separate model). Local rdbtAnima.safetensors; anima-lllite-inpainting-v2; strength 1; DifferentialDiffusion; seed 4101; 1280\u00d7704; 30 steps; CFG 5; Euler ancestral/normal; denoise 0.30. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe. Front face texture of an adult anime man, symmetrical calm angular anime eyes, broad shaped upper eyelids, large dark brown irises partly covered by the upper lids, simple flat iris fills, one small highlight per eye, clean dark upper lash edge. Eyes look straight forward. Preserve the guided eye shape and flat warm skin. Negative: worst quality, low quality, blurry, photorealistic, doll eyes, bulging eyes, concentric rings, glass eyes, glossy eyes, multiple catchlights, realistic eyeballs, staring, cross eyed, extra pupils, extra eyes, text, watermark, eye makeup, skin texture, wrinkles"
+    },
+    {
+      "image": "art/parts/crowd-pilot-4/takes/a-open/generated.png",
+      "caption": "Saved eye-paint attempt a-open, before UV projection (not a separate model). Local rdbtAnima.safetensors; anima-lllite-inpainting-v2; strength 1; DifferentialDiffusion; seed 4102; 1280\u00d7704; 30 steps; CFG 5; Euler ancestral/normal; denoise 0.30. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe. Front face texture of an adult anime man, symmetrical open expressive anime eyes, broad shaped upper eyelids, large dark brown irises partly covered by the upper lids, simple flat iris fills, one small highlight per eye, clean dark upper lash edge. Eyes look straight forward. Preserve the guided eye shape and flat warm skin. Negative: worst quality, low quality, blurry, photorealistic, doll eyes, bulging eyes, concentric rings, glass eyes, glossy eyes, multiple catchlights, realistic eyeballs, staring, cross eyed, extra pupils, extra eyes, text, watermark, eye makeup, skin texture, wrinkles"
+    },
+    {
+      "image": "art/parts/crowd-pilot-4/takes/b-calm/generated.png",
+      "caption": "Saved eye-paint attempt b-calm, before UV projection (not a separate model). Local rdbtAnima.safetensors; anima-lllite-inpainting-v2; strength 1; DifferentialDiffusion; seed 4111; 1280\u00d7704; 30 steps; CFG 5; Euler ancestral/normal; denoise 0.30. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe. Front face texture of an adult anime woman, symmetrical calm angular anime eyes, broad shaped upper eyelids, large dark blue irises partly covered by the upper lids, simple flat iris fills, one small highlight per eye, clean dark upper lash edge. Eyes look straight forward. Preserve the guided eye shape and flat warm skin. Negative: worst quality, low quality, blurry, photorealistic, doll eyes, bulging eyes, concentric rings, glass eyes, glossy eyes, multiple catchlights, realistic eyeballs, staring, cross eyed, extra pupils, extra eyes, text, watermark, eye makeup, skin texture, wrinkles"
+    },
+    {
+      "image": "art/parts/crowd-pilot-4/takes/b-open/generated.png",
+      "caption": "Saved eye-paint attempt b-open, before UV projection (not a separate model). Local rdbtAnima.safetensors; anima-lllite-inpainting-v2; strength 1; DifferentialDiffusion; seed 4112; 1280\u00d7704; 30 steps; CFG 5; Euler ancestral/normal; denoise 0.30. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe. Front face texture of an adult anime woman, symmetrical open expressive anime eyes, broad shaped upper eyelids, large dark blue irises partly covered by the upper lids, simple flat iris fills, one small highlight per eye, clean dark upper lash edge. Eyes look straight forward. Preserve the guided eye shape and flat warm skin. Negative: worst quality, low quality, blurry, photorealistic, doll eyes, bulging eyes, concentric rings, glass eyes, glossy eyes, multiple catchlights, realistic eyeballs, staring, cross eyed, extra pupils, extra eyes, text, watermark, eye makeup, skin texture, wrinkles"
+    }
+  ],
+  "options": [
+    {
+      "id": "a-calm",
+      "label": "a-calm: office man",
+      "image": "art/parts/crowd-pilot-4/captures/a-calm-front.png",
+      "images": [
+        "art/parts/crowd-pilot-4/captures/a-calm-left.png",
+        "art/parts/crowd-pilot-4/captures/a-calm-right.png"
+      ],
+      "note": "Calmer, lower lid opening. Flat dark iris, one highlight. Same R3 body, mouth, hair and animations. Candidate only; choosing an option does not install it automatically."
+    },
+    {
+      "id": "a-open",
+      "label": "a-open: office man",
+      "image": "art/parts/crowd-pilot-4/captures/a-open-front.png",
+      "images": [
+        "art/parts/crowd-pilot-4/captures/a-open-left.png",
+        "art/parts/crowd-pilot-4/captures/a-open-right.png"
+      ],
+      "note": "More open, expressive lid opening. Flat dark iris, one highlight. Same R3 body, mouth, hair and animations. Candidate only; choosing an option does not install it automatically."
+    },
+    {
+      "id": "b-calm",
+      "label": "b-calm: office woman",
+      "image": "art/parts/crowd-pilot-4/captures/b-calm-front.png",
+      "images": [
+        "art/parts/crowd-pilot-4/captures/b-calm-left.png",
+        "art/parts/crowd-pilot-4/captures/b-calm-right.png"
+      ],
+      "note": "Calmer, lower lid opening. Flat dark iris, one highlight. Same R3 body, mouth, hair and animations. Candidate only; choosing an option does not install it automatically."
+    },
+    {
+      "id": "b-open",
+      "label": "b-open: office woman",
+      "image": "art/parts/crowd-pilot-4/captures/b-open-front.png",
+      "images": [
+        "art/parts/crowd-pilot-4/captures/b-open-left.png",
+        "art/parts/crowd-pilot-4/captures/b-open-right.png"
+      ],
+      "note": "More open, expressive lid opening. Flat dark iris, one highlight. Same R3 body, mouth, hair and animations. Candidate only; choosing an option does not install it automatically."
+    }
+  ],
+  "links": [
+    {
+      "label": "Live 3D: all four, cast comparisons and sustained walking",
+      "href": "reviews/crowd-pilot-4/viewer.html?s=alternatives"
+    },
+    {
+      "label": "Round 3 and your original feedback",
+      "href": "bible/#review/crowd-pilot-3"
+    },
+    {
+      "label": "a-calm: exact settings, source hashes and preservation results",
+      "href": "art/parts/crowd-pilot-4/takes/a-calm/settings.json"
+    },
+    {
+      "label": "a-open: exact settings, source hashes and preservation results",
+      "href": "art/parts/crowd-pilot-4/takes/a-open/settings.json"
+    },
+    {
+      "label": "b-calm: exact settings, source hashes and preservation results",
+      "href": "art/parts/crowd-pilot-4/takes/b-calm/settings.json"
+    },
+    {
+      "label": "b-open: exact settings, source hashes and preservation results",
+      "href": "art/parts/crowd-pilot-4/takes/b-open/settings.json"
+    }
+  ],
+  "viewer_files": [
+    "art/parts/crowd-pilot-4/game/a-calm/base.webp",
+    "art/parts/crowd-pilot-4/game/a-calm/walk.glb",
+    "art/parts/crowd-pilot-4/game/a-calm/run.glb",
+    "art/parts/crowd-pilot-4/game/a-calm/sit.glb",
+    "art/parts/crowd-pilot-4/game/a-calm/idle.json",
+    "art/parts/crowd-pilot-4/takes/a-calm/workflow.json",
+    "art/parts/crowd-pilot-4/takes/a-calm/settings.json",
+    "art/parts/crowd-pilot-4/takes/a-calm/base.webp",
+    "art/parts/crowd-pilot-4/game/a-open/base.webp",
+    "art/parts/crowd-pilot-4/game/a-open/walk.glb",
+    "art/parts/crowd-pilot-4/game/a-open/run.glb",
+    "art/parts/crowd-pilot-4/game/a-open/sit.glb",
+    "art/parts/crowd-pilot-4/game/a-open/idle.json",
+    "art/parts/crowd-pilot-4/takes/a-open/workflow.json",
+    "art/parts/crowd-pilot-4/takes/a-open/settings.json",
+    "art/parts/crowd-pilot-4/takes/a-open/base.webp",
+    "art/parts/crowd-pilot-4/game/b-calm/base.webp",
+    "art/parts/crowd-pilot-4/game/b-calm/walk.glb",
+    "art/parts/crowd-pilot-4/game/b-calm/run.glb",
+    "art/parts/crowd-pilot-4/game/b-calm/sit.glb",
+    "art/parts/crowd-pilot-4/game/b-calm/idle.json",
+    "art/parts/crowd-pilot-4/takes/b-calm/workflow.json",
+    "art/parts/crowd-pilot-4/takes/b-calm/settings.json",
+    "art/parts/crowd-pilot-4/takes/b-calm/base.webp",
+    "art/parts/crowd-pilot-4/game/b-open/base.webp",
+    "art/parts/crowd-pilot-4/game/b-open/walk.glb",
+    "art/parts/crowd-pilot-4/game/b-open/run.glb",
+    "art/parts/crowd-pilot-4/game/b-open/sit.glb",
+    "art/parts/crowd-pilot-4/game/b-open/idle.json",
+    "art/parts/crowd-pilot-4/takes/b-open/workflow.json",
+    "art/parts/crowd-pilot-4/takes/b-open/settings.json",
+    "art/parts/crowd-pilot-4/takes/b-open/base.webp"
+  ]
+}

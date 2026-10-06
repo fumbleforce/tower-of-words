@@ -1,0 +1,164 @@
+{
+  "title": "Crowd pilot4: anime eye alternatives",
+  "blurb": "Real textured 3D candidates. Calm angular and open anime eye shapes use simpler iris fills; all meshes, rigs, bodies, mouths, hair and motion files are retained. Compare front and angles beside the cast, then walk. These are review candidates, not installed crowd.",
+  "rigs": {
+    "a-calm": {
+      "id": "crowd4-a-calm",
+      "label": "A, calm anime eyes",
+      "dir": "art/parts/crowd-pilot-4/game/a-calm/",
+      "idle": "art/parts/crowd-pilot-4/game/a-calm/idle.json",
+      "height": 1.09
+    },
+    "a-open": {
+      "id": "crowd4-a-open",
+      "label": "A, open anime eyes",
+      "dir": "art/parts/crowd-pilot-4/game/a-open/",
+      "idle": "art/parts/crowd-pilot-4/game/a-open/idle.json",
+      "height": 1.09
+    },
+    "b-calm": {
+      "id": "crowd4-b-calm",
+      "label": "B, calm anime eyes",
+      "dir": "art/parts/crowd-pilot-4/game/b-calm/",
+      "idle": "art/parts/crowd-pilot-4/game/b-calm/idle.json",
+      "height": 1.06
+    },
+    "b-open": {
+      "id": "crowd4-b-open",
+      "label": "B, open anime eyes",
+      "dir": "art/parts/crowd-pilot-4/game/b-open/",
+      "idle": "art/parts/crowd-pilot-4/game/b-open/idle.json",
+      "height": 1.06
+    },
+    "kenji": {
+      "id": "kenji",
+      "label": "Kenji (in game)",
+      "dir": "game3d/assets/characters/kenji/",
+      "idle": "game3d/assets/characters/relaxed-idle-kenji.json",
+      "height": 1.12
+    },
+    "kuro": {
+      "id": "kuro",
+      "label": "Kuro (in game)",
+      "dir": "game3d/assets/characters/kuro/",
+      "idle": "game3d/assets/characters/relaxed-idle-kuro.json",
+      "height": 1.12
+    },
+    "aoi": {
+      "id": "aoi",
+      "label": "Aoi (in game)",
+      "dir": "game3d/assets/characters/aoi/",
+      "idle": "game3d/assets/characters/relaxed-idle-aoi.json",
+      "height": 1.09
+    },
+    "emi": {
+      "id": "emi",
+      "label": "Emi (in game)",
+      "dir": "game3d/assets/characters/emi/",
+      "idle": "game3d/assets/characters/relaxed-idle-emi.json",
+      "height": 1.09
+    }
+  },
+  "scenes": {
+    "pair": {
+      "label": "Calm anime pair",
+      "items": [
+        {
+          "rig": "a-calm"
+        },
+        {
+          "rig": "b-calm"
+        }
+      ],
+      "gap": 0.9
+    },
+    "open": {
+      "label": "Open anime pair",
+      "items": [
+        {
+          "rig": "a-open"
+        },
+        {
+          "rig": "b-open"
+        }
+      ],
+      "gap": 0.9
+    },
+    "alternatives": {
+      "label": "All four alternatives",
+      "items": [
+        {
+          "rig": "a-calm"
+        },
+        {
+          "rig": "a-open"
+        },
+        {
+          "rig": "b-calm"
+        },
+        {
+          "rig": "b-open"
+        }
+      ],
+      "gap": 0.85
+    },
+    "cast": {
+      "label": "Calm beside cast",
+      "items": [
+        {
+          "rig": "kenji"
+        },
+        {
+          "rig": "a-calm"
+        },
+        {
+          "rig": "kuro"
+        },
+        {
+          "rig": "aoi"
+        },
+        {
+          "rig": "b-calm"
+        },
+        {
+          "rig": "emi"
+        }
+      ],
+      "gap": 0.85
+    },
+    "cast-open": {
+      "label": "Open beside cast",
+      "items": [
+        {
+          "rig": "kenji"
+        },
+        {
+          "rig": "a-open"
+        },
+        {
+          "rig": "kuro"
+        },
+        {
+          "rig": "aoi"
+        },
+        {
+          "rig": "b-open"
+        },
+        {
+          "rig": "emi"
+        }
+      ],
+      "gap": 0.85
+    }
+  },
+  "closeups": [
+    "a-calm",
+    "a-open",
+    "b-calm",
+    "b-open",
+    "kenji",
+    "kuro",
+    "aoi",
+    "emi"
+  ]
+}

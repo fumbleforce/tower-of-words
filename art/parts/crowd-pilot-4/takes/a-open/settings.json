@@ -1,0 +1,49 @@
+{
+  "id": "a-open",
+  "model": "a",
+  "style": "open",
+  "seed": 4102,
+  "width": 1280,
+  "height": 704,
+  "steps": 30,
+  "cfg": 5,
+  "denoise": 0.3,
+  "eye_dimensions": [
+    358,
+    294
+  ],
+  "centres": [
+    [
+      708,
+      1330
+    ],
+    [
+      1207,
+      1330
+    ]
+  ],
+  "crop": [
+    450,
+    1020,
+    1470,
+    1570
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe. Front face texture of an adult anime man, symmetrical open expressive anime eyes, broad shaped upper eyelids, large dark brown irises partly covered by the upper lids, simple flat iris fills, one small highlight per eye, clean dark upper lash edge. Eyes look straight forward. Preserve the guided eye shape and flat warm skin.",
+  "negative": "worst quality, low quality, blurry, photorealistic, doll eyes, bulging eyes, concentric rings, glass eyes, glossy eyes, multiple catchlights, realistic eyeballs, staring, cross eyed, extra pupils, extra eyes, text, watermark, eye makeup, skin texture, wrinkles",
+  "source_texture": "art/parts/crowd-pilot-3/game/a/base.webp",
+  "source_sha256": "b423e0bb5e4288430599eab5961d2e75a834477586c3e32c25ca09238a53d84a",
+  "rig": "art/parts/crowd-pilot-2/rig/a-rigged.glb",
+  "rig_sha256": "139c8544036bfdb06616c0e125b53a47e0d8f48231a6d904f546262299f3953a",
+  "method": "local RDBT LLLite masked img2img, front-to-UV projection; only eye strokes transferred",
+  "status": "rendered, awaiting live visual review",
+  "invariants": {
+    "unchanged_non_eye_texels": 3970225,
+    "outside_max_delta": 0,
+    "animation_sha256": {
+      "walk.glb": "f3ff91cda23d9631e4253015aa6f6fd2990e776b51fbe17fad00b8ec5357a846",
+      "run.glb": "e9eb3c2ce017c2dc30683ed751ef85e332f5df98eb8ac4276b68aaf7393e86d4",
+      "sit.glb": "b89ac8da6fc5613d87b07faac25b1ef227339ee27b7c8c9539c71b3adc0a3ee5",
+      "idle.json": "5dcf59704fb25e07253781bc231cbde7eb5fc2f38ef6d9edc2f36f6c5af673a8"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "b-calm",
+  "model": "b",
+  "style": "calm",
+  "seed": 4111,
+  "width": 1280,
+  "height": 704,
+  "steps": 30,
+  "cfg": 5,
+  "denoise": 0.3,
+  "eye_dimensions": [
+    356,
+    286
+  ],
+  "centres": [
+    [
+      705,
+      1250
+    ],
+    [
+      1209,
+      1250
+    ]
+  ],
+  "crop": [
+    450,
+    950,
+    1470,
+    1510
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe. Front face texture of an adult anime woman, symmetrical calm angular anime eyes, broad shaped upper eyelids, large dark blue irises partly covered by the upper lids, simple flat iris fills, one small highlight per eye, clean dark upper lash edge. Eyes look straight forward. Preserve the guided eye shape and flat warm skin.",
+  "negative": "worst quality, low quality, blurry, photorealistic, doll eyes, bulging eyes, concentric rings, glass eyes, glossy eyes, multiple catchlights, realistic eyeballs, staring, cross eyed, extra pupils, extra eyes, text, watermark, eye makeup, skin texture, wrinkles",
+  "source_texture": "art/parts/crowd-pilot-3/game/b/base.webp",
+  "source_sha256": "2d2728bf1658b5f5d31a95b807f4a9211448f4a2d05c23efa9306023590719a4",
+  "rig": "art/parts/crowd-pilot-2/rig/b-rigged.glb",
+  "rig_sha256": "5a07aeacd60f5b85ed17954f5d81220bf22a38da73a655b6f1d3c031d4662784",
+  "method": "local RDBT LLLite masked img2img, front-to-UV projection; only eye strokes transferred",
+  "status": "rendered, awaiting live visual review",
+  "invariants": {
+    "unchanged_non_eye_texels": 3907944,
+    "outside_max_delta": 0,
+    "animation_sha256": {
+      "walk.glb": "664ae56dccfc58230fe55dc04ed49077d8afd858035a77d7862edce9121060cd",
+      "run.glb": "fa83e8aad3bd01189c79a86b2bab70580379df243b0900198c2173aca9aec6f1",
+      "sit.glb": "b4f7c58c52f5f689fd1eb57585c2fa95854dc6282edb8fb888e15d818fff2ccc",
+      "idle.json": "ac64e437c0420fbda4d63e1c1e2bac4e8079ed66ec415c4c3f004b7f2508c826"
+    }
+  }
+}
