@@ -1,6 +1,6 @@
 import { place } from './shared.js';
 export default place(
-  { plaza: ['talk:plaza_lane', 'zone:plaza_exit'], karaoke: ['talk:karaoke'] },
+  { forecourt: ['talk:office_lane', 'zone:office_exit'], plaza: ['talk:plaza_lane', 'zone:plaza_exit'], karaoke: ['talk:karaoke'] },
   {
     labels: { aoi: ['Aoi', 'd3_aoi_intro'], kuro: ['Kuro', 'd3_kuro_intro'], rei: 'Tennis player' },
     on: {

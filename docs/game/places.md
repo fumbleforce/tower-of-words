@@ -41,6 +41,8 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `office` → `lift`, walk: after work, Eric walks from B2 into the same lift, the camera easing in on the car as in the morning; the near wall drops and the lights outside go down. He rides alone; once the car leaves B2 the office goes dark and out of view.
 - `lift` → `forecourt`, lift then walk: the floor display counts B2, B1, 1; the same shot of the car crossfades to head office's floor 1, the lights come up, the doors open and he walks out into the lobby, the wall rising behind him; the tower comes back over the lobby as he walks out of the door.
 - `forecourt` → `plaza`, walk: Eric walks east off the court along the lane by the tower's south face. The camera closes in on him at the lane's end and crossfades to the same close framing of him on the plaza's lane just west of the circle, walking in along the fountain's axis with the fountain ahead as the camera lets go.
+- `forecourt` → `shotengai`, walk: south through the bicycle parking and its open south edge onto the shopping street’s west passage; north returns to the same bike aisle. Available on days 1–5. The map uses the same paved connection.
+- `shotengai` → `forecourt`, walk: north along the west passage into the bicycle aisle, returning just south of head office.
 - `plaza` → `forecourt`, walk: the same walk the other way, west along the lane back toward the head office door.
 - `plaza` → `dorm_court`, walk: after work only. Eric walks east off the plaza along the lane; the camera closes in on him at the lane's end and crossfades to the same close framing of him walking on along the same brick lane, which runs past the dorm courtyard's front as the street. He turns in through the court's gate and walks up toward the hall doors, then the camera lets go.
 - `plaza` → `shotengai`, walk: Eric walks down the cross walk and turns east along the south walk; the camera closes in on him there and crossfades to the same close framing of him turning off the dorm street into the shop walk at the arcade's east mouth, walking west with the arcade ahead, as the camera lets go.
@@ -309,6 +311,8 @@ West of the platform shed, backdrop the court never sees (the island map and the
 
 At the end of the B2 conversation the camera releases its close-up before Mio leaves, so Eric can see and reach the lift. After work he comes up in the same lift and walks home east along the lane. The forecourt and the plaza then take the dorm courtyard's dusk light, and the head-office door and lift have no marker. After work Tama (`tama`, not a tap target here) is asleep at the east end of the garden bench, with room for Eric at the west end; she can walk along the seat, settle on his lap and hop back to her end. The fallen bike and its neighbour in the west rack can be stood up, wheeled into their places and tip over; where they stand or lie stays for the evening. A small station-wall light illuminates the rack after work, and the phone camera looks north in the bike court so the station wall does not hide it.
 
+The bicycle aisle continues south on a 2.5 m paved path into the shopping street’s west passage (#290). The south kerb is open across the path, and the camera follows to the entrance.
+
 ### Things
 
 | Id | Label | What it is |
@@ -317,13 +321,14 @@ At the end of the B2 conversation the camera releases its close-up before Mio le
 | `office_entrance` | Head office | The head office's entrance under its canopy. Using it walks Eric in through the doors to the lift, which starts the ride. |
 | `lift` | Lift to B2 | The B2 car in the lobby's lift core. |
 | `label_printer` | Label printer | Kuro's label printer on the reception desk, west of her screen: a squat grey case, a strip of white label out of its slot. Named for the reception's ticket (issue #227); nothing uses it yet. |
+| `shop_lane` | To the shopping street | South through the bicycle aisle, into the west passage. |
 | `plaza_lane` | To the plaza | The east end of the lane along the tower's south face. |
 | `garden_bench` | Garden bench | The bench on the gravel court in the south garden, Tama asleep at one end. After work only. |
 | `fallen_bicycle` | Bicycle | Whichever bike in the bike court's west row is lying in the aisle. After work only, while one is down. |
 
 ### Spots
 
-`station_exit`, `office_entrance`, `lift_front`, `plaza_lane`, `reception_office_door` (in front of the receptionist's office door, behind the desk's open end), `reception_office` (inside the office), and the nooks below: `forecourt_staff_gate`, `lobby_model`, `lobby_island_w`, `lobby_island_e`, `lobby_lift_bench`, `lobby_umbrella`
+`station_exit`, `office_entrance`, `lift_front`, `plaza_lane`, `shop_lane`, `reception_office_door` (in front of the receptionist's office door, behind the desk's open end), `reception_office` (inside the office), and the nooks below: `forecourt_staff_gate`, `lobby_model`, `lobby_island_w`, `lobby_island_e`, `lobby_lift_bench`, `lobby_umbrella`
 
 ### Nooks
 
@@ -344,7 +349,7 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Zones
 
-`lift_front`, `station_exit` (day 2: at the station's door, back into the security room), `plaza_lane` (the lane's east end along the tower's south face: walking into it starts the walk to the plaza), `reception_office` (inside the receptionist's office; nothing starts there yet)
+`lift_front`, `station_exit` (day 2: at the station's door, back into the security room), `plaza_lane` (the lane's east end along the tower's south face: walking into it starts the walk to the plaza), `shop_exit` (south end of the bicycle aisle), `reception_office` (inside the receptionist's office; nothing starts there yet)
 
 ### Who's there when
 
@@ -376,6 +381,7 @@ The crowd ([systems.md](systems.md), The crowd):
 
 | Nodes | When | What happens |
 |---|---|---|
+| `to_shotengai` | Walk south out of the bike court or use its travel marker | Walk into the shopping street’s west passage. |
 | `garden_bench`, `fallen_bicycle` | Optional interactions after work | [The walk home](stories/evening-walk.md) records these discoveries. |
 | `outside` | Arrive from the station, or up from B2 after work | The goal points to the head-office lift; after work, east along the lane to the dorms. |
 | `head_office` | Use the head-office entrance | Eric walks in to the lift; the goal points to the B2 lift. |
@@ -501,10 +507,13 @@ In the morning the sun comes from the east-south-east behind the camera's left s
 
 The [day-2 story](stories/day2/README.md) places B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. No arcade shop opens and Eric does no shopping. The pair of back-to-back benches at the foot of the east walk is theirs: Eric and Mori sit on the sea-facing one (Eric at its near end), Mio stands at its near end and Kenji at its far end, all in one conversation. The canteen's takeaway is a navy tray on the bench between the two seats, wrapped in a red cloth until it's opened, with three rice balls and three egg sandwiches on it; Mio's jar of pickles stands at her feet and a bag of drinks and two stacked takeaway boxes at Mori's. What Eric is given (his rice ball or sandwich, more food, a can) is laid by his seat; each change gets a close look at the food and back. Every shot of the group turns the camera to look in from over the sea wall, so the four stand side by side across a phone's screen; letting go turns it back down the street. Mio can be passed the sandwiches, which she holds on a plate. At the goodbye Kenji first gathers the boxes and the bag, then he and Mio walk off up the east walk; the tray goes with Mori to the back alley, where he packs what's left into the takeaway boxes (lifting the tray off and away) and can hand Eric one more rice ball, which he eats there. The [story handoff](../../game3d/story/day2/README.md) specifies this set’s closure cards, exit label and small discovery props. All of it is set from the story's flags (the `partySetup` and `partyFood` hooks), so a trip away or a Continue puts it back.
 
+The west passage is open north to head office through the bicycle parking (#290), as well as south to the promenade.
+
 ### Things
 
 | Id | Label | What it is |
 |---|---|---|
+| `office_lane` | To head office | North along the west passage into the bicycle court. |
 | `plaza_lane` | To the plaza | The shop walk's east end at the dorm street. |
 | `bike_shop` | Bike shop | The bike shop's door. Go in: shut. |
 | `store` | Konbini | The konbini's door. Go in: shut. |
@@ -518,7 +527,7 @@ The [day-2 story](stories/day2/README.md) places B2's welcome food on the promen
 
 ### Spots
 
-`plaza_entry` (on the shop walk, the arcade ahead); `party_group` (the middle of the party bench), `party_mio` and `party_kenji` (standing at its near and far ends); and each nook below
+`office_lane` (north entrance from the bicycle court), `plaza_entry` (on the shop walk, the arcade ahead); `party_group` (the middle of the party bench), `party_mio` and `party_kenji` (standing at its near and far ends); and each nook below
 
 ### Nooks
 
@@ -536,7 +545,7 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Zones
 
-`plaza_exit` (the shop walk's east end, out onto the dorm street)
+`office_exit` (north end of the west passage), `plaza_exit` (the shop walk's east end, out onto the dorm street)
 
 ### Who's there when
 
@@ -568,7 +577,8 @@ The crowd ([systems.md](systems.md), The crowd):
 
 | Nodes | When | What happens |
 |---|---|---|
-| `arrive` | Arrive | Goal line: "Head office is back past the plaza. Take its lift down to B2."; after work, "The dorms are up the street, east of the arcade." The way out east is the goal's pin. |
+| `to_forecourt` | Walk north out of the west passage or use its travel marker | Return to the bicycle aisle by head office. |
+| `arrive` | Arrive | Goal line: "Head office is north past the bicycle parking. Take its lift down to B2."; after work, "The dorms are up the street, east of the arcade." The way out east is the goal's pin. |
 | `shut` | Go in at any named shop's door but the karaoke box's | The door is shut; a card on the glass says 準備中: not open yet. |
 | `to_karaoke` | Go in at the karaoke box's door | Eric walks in, onto the front desk's floor. |
 | `to_plaza` | Use or walk into the shop walk's east end, before work is over | Eric walks back to the plaza. |

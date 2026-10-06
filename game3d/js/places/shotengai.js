@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { southLinkFrame } from '../scenes/forecourt/south-link.js';
 import { shotengaiSteps } from '../scenes/shotengai.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
@@ -22,6 +23,7 @@ export async function shotengaiPlace(game) {
   const w = await sliced(shotengaiSteps()); // in slices between frames: it's built while the plaza is played
   const cam = new RoomCam(w.camera);
   const flat = cam.elev;
+  const southLink = southLinkFrame('shotengai');
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const [, , az0, az1] = w.arcade;
   // the named shops' doors: shut (story/shotengai.js says so); a pin over each, Eric steps up to it
@@ -37,6 +39,12 @@ export async function shotengaiPlace(game) {
       anchor: (v) => v.set(w.edge[0], 1.1, w.edge[1] - 1.2),
       spot: () => [w.edge[0], w.edge[1] - 1.6],
       face: () => w.edge,
+    },
+    office_lane: {
+      ...PLACE_DETAILS.shotengai.things.office_lane,
+      anchor: (v) => v.set(southLink.edge[0], 1.1, southLink.edge[1]),
+      spot: () => southLink.lane,
+      face: () => southLink.edge,
     },
     bike_shop: {
       ...PLACE_DETAILS.shotengai.things.bike_shop,
@@ -101,6 +109,7 @@ export async function shotengaiPlace(game) {
     things,
     spots: {
       plaza_entry: w.in,
+      office_lane: southLink.lane,
       shotengai_shrine: w.nooks.shotengai_shrine,
       shotengai_back_alley: w.nooks.shotengai_back_alley,
       shotengai_pine_bench: w.nooks.shotengai_pine_bench,
@@ -117,7 +126,7 @@ export async function shotengaiPlace(game) {
       kuro: d3.people.kuro,
       rei: d3.people.rei,
     },
-    zones: { plaza_exit: (x, z) => z > w.exitZ },
+    zones: { office_exit: southLink.exit, plaza_exit: (x, z) => z > w.exitZ },
     hooks: { partySetup: party.hooks.partySetup, partyFood: party.hooks.partyFood },
     day3: (a) => d3.setup(P, a),
     fit(aspect) {
@@ -132,7 +141,7 @@ export async function shotengaiPlace(game) {
             new THREE.Vector3(0, 0, 4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-6.5, 0, az0 - 8, az1 + 6], lead: -1.4, limY: 0.96 },
+          { follow: true, clamp: [-6.5, 8.4, az0 - 8, az1 + 6], lead: -1.4, limY: 0.96 },
         );
       else
         cam.fit(
@@ -144,7 +153,7 @@ export async function shotengaiPlace(game) {
             new THREE.Vector3(0, 1.2, 2.4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-10, 1.2, az0 - 9, az1 + 7.5], lead: -3.4 },
+          { follow: true, clamp: [-10, 8.4, az0 - 9, az1 + 7.5], lead: -3.4 },
         );
     },
     pick(rc) {
@@ -185,8 +194,14 @@ export async function shotengaiPlace(game) {
     tripIn: (g) => walkIn(g, cam, w.edge, w.in, w.face),
     tripOut: (g) => walkOut(g, cam, [w.edge[0], w.edge[1] - 1.6], w.edge),
     // the karaoke box: in at its door off the arcade, and back out of it onto the arcade
-    tripInFrom: { karaoke: (g) => walkIn(g, cam, dk('karaoke').local, dk('karaoke').step, outOf('karaoke')) },
-    tripOutTo: { karaoke: (g) => walkOut(g, cam, dk('karaoke').step, dk('karaoke').local) },
+    tripInFrom: {
+      forecourt: (g) => walkIn(g, cam, southLink.edge, southLink.inside, -Math.PI / 2),
+      karaoke: (g) => walkIn(g, cam, dk('karaoke').local, dk('karaoke').step, outOf('karaoke')),
+    },
+    tripOutTo: {
+      forecourt: (g) => walkOut(g, cam, southLink.lane, southLink.edge),
+      karaoke: (g) => walkOut(g, cam, dk('karaoke').step, dk('karaoke').local),
+    },
   };
   party.install(P);
   // the arcade's glass roof fades while he is under it

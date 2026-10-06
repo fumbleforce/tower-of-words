@@ -19,6 +19,7 @@ import { skylineSteps } from './skyline.js';
 import { mergeStaticSteps } from './merge-static.js';
 import { drain } from '../perf/slice.js';
 import * as LAYOUT from './island-layout.js';
+import { southLinkFrame, buildSouthLink } from './forecourt/south-link.js';
 import { buildCourt } from './forecourt/court.js';
 import { buildLane } from './forecourt/lane.js';
 import { northSteps } from './forecourt/north.js';
@@ -36,7 +37,7 @@ import { buildNooks } from './outdoor/nooks.js';
 
 const { STATION, DOOR_X, X0, SE, ZN, HZ, HO_X, COURT, BIKES, GARDEN, LANE, LANE_Z, STRIP_S, STRIP_N, SERVICE, TE } = PL;
 // the nav grid: court, bikes, lane (up to where the plaza trip starts), lobby
-const WALK = [X0 + 0.2, PL.LANE_WALK, HZ - 9.8, BIKES[3]]; // north to the tower's north wall (the lobby's back rooms)
+const WALK = [X0 + 0.2, PL.LANE_WALK, HZ - 9.8, 12.75]; // north to the tower's north wall (the lobby's back rooms)
 const lanePt = (x) => [x, LANE_Z];
 
 // beyond the court: lawns round the paving, a few trees near it in small groups (the lane's gardens are in
@@ -55,9 +56,9 @@ function* town(root) {
   ]);
   const p = new Parts();
   sakura(p, -9.6, 7.5, 1.0, 5);
-  keyaki(p, 8.4, 12.6, 1.1, 6);
+  keyaki(p, 7.6, 12.6, 1.1, 6);
   sakura(p, 11.8, 13.2, 1.0, 7);
-  cluster(p, 10.2, 12.4, { n: 4, r: 0.35, seed: 6 });
+  cluster(p, 12.2, 12.4, { n: 4, r: 0.35, seed: 6 });
   p.build(root);
   farTrees(root, [
     [-9.8, 10.6, 1.15],
@@ -78,8 +79,9 @@ function* town(root) {
     to: 27,
     shops: SHOPS,
   });
-  mapOnly(shops.group, MAP_LAYER, 'shops');
-  const front = yield* seafrontSteps(root, { at, layer: MAP_LAYER, backWalk: true });
+  // The western shopfronts are now the visible destination of the south path.
+  mapOnly(shops.group, null, 'shops');
+  const front = yield* seafrontSteps(root, { at, backWalk: true });
   const sky = yield* skylineSteps(root, 'forecourt', {
     layout: LAYOUT,
     // built here (the shop rows on the map only)
@@ -116,7 +118,8 @@ export function* forecourtSteps() {
   // 2's walk back in to the platform goes through it (places/forecourt.js opens it for that walk, so he waits for
   // the gate room on floor)
   const doorway = [DOOR_X - 0.55, DOOR_X + 0.55, ZN - 0.1, ZN + 1.4];
-  const walkable = [COURT, BIKES, LANE, PL.GARDEN_PATH, PL.GARDEN_COURT, PL.SHED_WALK, tower, doorway];
+  const southLink = southLinkFrame('forecourt');
+  const walkable = [southLink.walk, COURT, BIKES, LANE, PL.GARDEN_PATH, PL.GARDEN_COURT, PL.SHED_WALK, tower, doorway];
   nav.extra = (x, z) => walkable.some((r) => PL.inRect(x, z, r));
   nav.blockTagged('station_door', doorway[0], doorway[1], ZN + 0.2, doorway[3]);
   // everything that never moves goes in one group, merged by material at the end
@@ -126,6 +129,7 @@ export function* forecourtSteps() {
   yield;
   const lamps = lightSet(); // every lamp's lantern and pool, one mesh each
   buildCourt(statics, nav, lamps);
+  buildSouthLink(statics);
   yield;
   buildLane(statics, nav, lamps);
   const north = yield* northSteps(statics, lamps);
@@ -143,6 +147,7 @@ export function* forecourtSteps() {
     scene,
     sun,
     nav,
+    southLink,
     stationExit: [DOOR_X, ZN + 0.35],
     start: [DOOR_X, ZN - 1.5], // clear of the exit canopy, so a camera from the side sees him
     officeEntrance: ho.entrance,

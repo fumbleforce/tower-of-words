@@ -5,6 +5,7 @@ export default {
   },
   start: 'outside',
   on: {
+    'talk:shop_lane': 'to_shotengai', 'zone:shop_exit': 'to_shotengai',
     // Kuro greets arrivals at reception and people heading home after work.
     'talk:garden_bench': { if: 'going_home', node: 'garden_bench' },
     'talk:fallen_bicycle': { if: 'going_home && !evening_bikes_upright', node: 'fallen_bicycle' },
@@ -21,6 +22,7 @@ export default {
   goal: { lift: '!going_home', plaza_lane: 'going_home' },
   labels: { kuro: 'Receptionist' },
   nodes: {
+    to_shotengai: [{ do: 'trip', to: 'shotengai' }],
     garden_bench: [
       { do: 'cam', on: 'garden_bench', zoom: 1.8 },
       { do: 'sit', who: 'eric', at: 'garden_bench' },

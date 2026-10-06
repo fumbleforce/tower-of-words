@@ -31,6 +31,8 @@ import { buildNooks } from './outdoor/nooks.js';
 import { shopDoor } from './plaza/east-shops.js';
 import { faceAt } from './outdoor/block.js';
 import { bandSteps } from './bands.js';
+import { bikeCourtBackdrop } from './forecourt/court.js';
+import { buildSouthLink } from './forecourt/south-link.js';
 
 const { CHUNK, local, rect, inRect } = P;
 // the sun, in the chunk's frame (local north is island west): mornings from the east-south-east over the camera's
@@ -69,6 +71,12 @@ export function* shotengaiSteps() {
   // the island frame for the builders that work in it; the plaza's, for the east lane's blocks
   const isl = placeIn(new THREE.Group(), CHUNK);
   root.add(isl);
+  const officeContext = new THREE.Group();
+  officeContext.position.set(LAYOUT.CHUNKS.forecourt.at[0], 0, LAYOUT.CHUNKS.forecourt.at[1]);
+  isl.add(officeContext);
+  bikeCourtBackdrop(officeContext);
+  buildSouthLink(officeContext);
+  yield;
   const pf = new THREE.Group();
   pf.position.set(LAYOUT.CHUNKS.plaza.at[0], 0, LAYOUT.CHUNKS.plaza.at[1]);
   isl.add(pf);

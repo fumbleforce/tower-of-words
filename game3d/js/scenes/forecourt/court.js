@@ -47,8 +47,22 @@ function paving(root) {
   pv.field(P.SERVICE, { ...court, pattern: 'bondZ' });
   walk(pv);
   // the bike court: brick in herringbone, a pale band where it meets the court's hedge
-  pv.field(BIKES, { pattern: 'herringbone', module: [0.3, 0.15], tones: GRANITE.brick, vary: 0.08, origin: [SE, ZN] });
+  bikePaving(pv);
   pv.build(root);
+}
+
+function bikePaving(pv) {
+  pv.field(BIKES, { pattern: 'herringbone', module: [0.3, 0.15], tones: GRANITE.brick, vary: 0.08, origin: [SE, ZN] });
+}
+
+// The same bike parking seen looking north from the shopping street; no extra walkable area.
+export function bikeCourtBackdrop(root) {
+  const pv = paver(),
+    p = new Parts();
+  bikePaving(pv);
+  pv.build(root);
+  bikes(root, p, () => {});
+  p.build(root);
 }
 
 // the kerbs where paving meets grass or a bed
@@ -57,7 +71,7 @@ function edges(p) {
   kerb(p, [P.SHED_ST[1], HZ], [5.95, HZ], { off: -0.08 }); // the court's north edge, from the shed street's mouth to
   // the service lane
   kerbRect(p, P.SERVICE, { sides: 'wn' }); // the service yard (forecourt/service.js)
-  kerbRect(p, BIKES, { sides: 's' });
+  kerb(p, [BIKES[0], BIKES[3]], [BIKES[1], BIKES[3]], { gaps: [[8.45, 10.95]] }); // south passage to the shops
   kerb(p, [LE, P.LANE[3]], [LE, ZN], { off: -0.08 }); // the court's east edge south of the lane
 }
 

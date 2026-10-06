@@ -48,6 +48,6 @@ None. The optional door experiment reuses words already learned on both day-1 ga
 |---|---|
 | `day2/train.js` | `d2_platform`, `d2_check`, `d2_report`, `d2_voice_test`, `d2_order_sensor`, `d2_keep_sensor`, `d2_submit`, `d2_checked_again`, `d2_mio_before`, `d2_mio_after`, `d2_mio_idle`, `d2_to_gate`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/gate.js` | `d2_gate`, `d2_guard`, `d2_guard_idle`, `d2_reader`, `d2_cat`, `d2_guard_food`, `d2_guard_drink`, `d2_cat_food`, `d2_cat_drink`, `d2_to_platform`, `d2_to_forecourt`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
-| `day2/forecourt.js` | `d2_arrive`, `d2_to_station`, `d2_to_office`, `d2_to_plaza`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
+| `day2/forecourt.js` | `d2_arrive`, `d2_to_station`, `d2_to_shotengai`, `d2_to_office`, `d2_to_plaza`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/office.js` | `d2_office`, `d2_brief`, `d2_assess`, `d2_limits`, `d2_invitation`, `d2_work`, `d2_notes`, `d2_leave_desk`, `d2_emi_waiting`, `d2_emi_later`, `d2_desk_wait`, `d2_desk_later`, `d2_mio_work`, `d2_mori_work`, `d2_kenji_work`, `d2_kenji_invite_again`, `d2_leave`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 
