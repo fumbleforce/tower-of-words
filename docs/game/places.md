@@ -55,6 +55,7 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `sports` → `pool`, walk: Eric goes in at the shower pavilion's door at the pool walk's end; the camera closes in on him at the door and crossfades to the same close framing of him walking out of the men's changing room onto the deck, as the camera lets go. The changing room itself is not shown.
 - `sports` → `gym`, walk: Eric goes in at the gym's main doors; the camera closes in on him at the doors and crossfades to the same close framing of him walking in onto the entrance's tiles inside them, as the camera lets go.
 - `gym` → `sports`, walk: the same way back, out through the main doors, crossfading to him walking out onto the gym's apron and the sports lane, heading south.
+- `gym` → `pool`, walk (once the story uses `gym_changing`): the protagonist walks in at their own changing room's doorway off the lobby (Carina the women's); the camera closes in on them there and crossfades to them walking out of the same changing room onto the deck, as from the sports ground.
 - `pool` → `sports`, walk: the same way back, in at the men's changing room's door on the deck, crossfading to him walking out of the pavilion's door onto the pool walk, heading west.
 - `east_coast` → `dorm_commons`, walk: Eric goes in at the common room's glazed door at the north end of the inner court; the camera closes in on him at the door and crossfades to the same close framing of him walking in onto the common room's floor, as the camera lets go.
 - `dorm_commons` → `east_coast`, walk: the same way back, out through the glazed door, crossfading to him walking out onto the inner court, heading south.
@@ -103,7 +104,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `dorm_commons` | 100.9 | 2.1 | 0 | 1 | 0 | The common room's glazed door in dorm_gallery's south face, inside. An interior, looked into from the south over its cut-down front wall. |
 | `sports` | 58.2 | -57.5 | 0 | 1 | 0 | The corner where the pool walk meets the courts walk. Its camera turns: a little east of north over the lane and the pool walk, east-north-east at the pavilion, east along the courts walk. |
 | `pool` | 58.2 | -57.5 | 0 | 1 | 0 | The sports ground's own frame and world, walked on the deck inside the pool's fence. Its camera looks a little east of north up the pool from the south-west. |
-| `gym` | 47.05 | -50.9 | 0 | 1 | 0 | The gym's main doors, inside: the south end of the hall as far as the divider net. An interior, looked into from the south over its cut-down front wall. |
+| `gym` | 47.05 | -50.9 | 0 | 1 | 0 | The gym's main doors, inside: the entrance lobby and the sports hall behind its glass wall. An interior, looked into from the south over its cut-down front wall. |
 | `office_quarter` | 4.5 | -54 | 0 | 1 | 0 | The office street where the quarter street meets it. Its camera turns: north-north-west along the street, north up the walks, from the south-east in the quarter street's mouth, as the sports lane by the gym. |
 | `harbour` | -100 | -88 | 0 | 1 | 0 | The corner of the quay where the ferry landing meets the supply yard. Its camera turns: the office street's look on the street and the harbour walk, a little west of north over the yard, the landing and the piers. |
 | `works` | -82 | -104 | 0 | 1 | 0 | The middle of the works lane where it meets the works yard. Its camera turns: from the south-east up the lane, from a little east of south over the yard, from the south-east on the hall apron, from the south-west up the street and the research walk. |
@@ -924,7 +925,7 @@ Walked: the north street from a little north of the back lane up to the sports l
 
 The north street and the sports lane are the lanes' brick between pale borders, turning into each other at a square of herringbone; the north street keeps its verge and zelkovas down its west side and its lamps on its east, as in the east lane, and the sports lane has a verge with a low hedge on its south side and post lamps behind its kerb, and no trees there, so nothing stands between Eric and the camera. The walks are the coast walk's pale slabs between kerbs. A finger sign at the lanes' corner points west: Gym 体育館 and Pool プール; another at the courts walk's start points east: Onsen 温泉.
 
-The gym: a long hall of pale concrete on a granite plinth under a shallow barrel-vaulted roof of muted green with standing seams, overhanging, its eaves and arched ends edged dark. Pilasters run down the long sides with a band of clerestory glass between them under the eaves; the south end carries the wall up into the arch with a lunette of glass and mullions. On the south face, on the door's axis, a glass front in a dark frame with two pairs of glass doors, which open onto the gym's corner (`gym`, below); a flat canopy on two posts over it with たいいくかん GYM on a board standing on its front edge, two lights under it, and beds of low shrubs either side between the face and the lane.
+The gym: a long hall of pale concrete on a granite plinth under a shallow barrel-vaulted roof of muted green with standing seams, overhanging, its eaves and arched ends edged dark. Pilasters run down the long sides with a band of clerestory glass between them under the eaves; the south end carries the wall up into the arch with a lunette of glass and mullions. On the south face, on the door's axis, a glass front in a dark frame with two pairs of glass doors, which open onto the gym's lobby (`gym`, below); a flat canopy on two posts over it with たいいくかん GYM on a board standing on its front edge, two lights under it, and beds of low shrubs either side between the face and the lane.
 
 The pool: behind a steel mesh fence, a deck of pale slabs round a 25 m pool of six lanes in a white coping, the lane lines dark under the water, lane ropes of blue and white floats with red at the ends, starting blocks at the pavilion's end and a ladder at each of that end's corners; a lifeguard's chair by its middle and white loungers down the east side. The shower pavilion closes the deck's north side: one tall storey of white walls on a plinth, a blue band round it, frosted windows high up, a flat roof with its plant and two rows of solar water heaters. Its door is on the west face at the end of the pool walk: glass in a dark frame under a canopy with プール POOL on a board on its front edge. It opens: through it and the men's changing room is the pool deck (`pool`, below). On the deck side the two changing rooms' doors, a blue and a red plate by them, and shower heads on the wall between. The pool walk has gravel against the gym's wall on one side and ground cover and lamps along the pool's fence on the other.
 
@@ -940,7 +941,7 @@ In the morning the sun is the plaza's; after work the lamps, the gym's glass, th
 |---|---|---|
 | `north_street` | To the north street | The north street's south end, back down to the east lane. |
 | `onsen_path` | To the onsen path | The courts walk's east end, on to the onsen path's foot in the east coast. |
-| `gym` | Gym | The gym's doors on its south face. Go in: into the gym's corner (`gym`). |
+| `gym` | Gym | The gym's doors on its south face. Go in: into the gym's lobby (`gym`). |
 | `pool` | Pool | The pool pavilion's door at the end of the pool walk. Go in: through the men's changing room onto the pool deck (`pool`). |
 | `court_display` | Score display | The tennis court's score display on its post by the net. Named for the tickets; nothing uses it yet. |
 | `ball_basket` | Ball basket | The wire basket of balls by the tennis court's bench. Nothing uses it yet. |
@@ -994,7 +995,7 @@ The crowd ([systems.md](systems.md), The crowd):
 | Nodes | When | What happens |
 |---|---|---|
 | `arrive` | Arrive | Goal line: "Head office is back west past the plaza. Take its lift down to B2."; after work, "The dorms are back down the north street, east of the park." |
-| `to_gym` | Go in at the gym's doors | Eric walks in through the main doors, into the gym's corner. |
+| `to_gym` | Go in at the gym's doors | Eric walks in through the main doors, into the gym's lobby. |
 | `to_pool` | Go in at the pool pavilion's door | Eric walks in, and out of the men's changing room onto the pool deck. |
 | `to_east_lane` | Use or walk into the north street's south end | Eric walks back down to the east lane. |
 | `to_coast` | Use or walk into the courts walk's east end | Eric walks on east to the onsen path, in the east coast. |
@@ -1011,27 +1012,32 @@ The crowd ([systems.md](systems.md), The crowd):
 | `dragonflies` | dragonfly | 4 | `day` | Over the grass. |
 | `cat` | cat | 1 | `evening` | A black cat on a wall. Can be petted. |
 
-## Gym corner (`gym`)
+## Gym (`gym`)
 
-The south end of the gym's hall, inside its main doors, for the clubs' winter meetings and the gym's tickets (issue #227; [days 3 to 5](../../notes/days3-5-outline.md): the booking terminal, the printer where `dashite` is taught, the desk fan, and the gym meetings after the pool closes). In through the main doors from the sports lane, out the same way (Getting between places). It also loads directly with `?place=gym`, inside the doors. Built as a room in its own frame (scenes/rooms/gym.js), on the club interiors' shared shell (scenes/rooms/shell.js) and machines (scenes/rooms/machines.js).
+The gym's ground floor inside its main doors: the entrance lobby with the reception, and the sports hall behind its glass wall, for the clubs' winter meetings and the gym's tickets (issue #227; [days 3 to 5](../../notes/days3-5-outline.md): the booking terminal, the printer where `dashite` is taught, the desk fan, and the gym meetings after the pool closes). Rebuilt as a company sports centre after Jørgen's in-game note of 2026-10-05 (notes/feedback-game/2026-10-05_225748: "there is a reception out on the gym floor itself, this gym is totally illogical in every respect"). In through the main doors from the sports lane, out the same way (Getting between places). It also loads directly with `?place=gym`, inside the doors. Built as a room in its own frame (scenes/rooms/gym.js, the lobby's furniture in gym-lobby.js, the hall in gym-hall.js, the plan in gym-plan.js), on the club interiors' shared shell (scenes/rooms/shell.js) and machines (scenes/rooms/machines.js).
 
-The camera looks in from the south over the cut-down front wall, steeply: on a desktop the whole corner in one still frame, on a phone following Eric. Walked: the hall's floor as far as the divider net, the entrance's tiles and the equipment store; not behind the desk.
+The camera looks in from the south over the cut-down front wall, steeply: on a desktop the whole floor in one still frame, on a phone following Eric. Walked: the entrance's tiles, the lobby, the staff side behind the reception counter (through the gap at its north end), and the hall through its open doors, with the equipment store; not the changing rooms or the pool corridor.
 
-Inside the glass doors a strip of grey tiles where outdoor shoes come off, a mat, a grey shoe locker of cubbies either side with a few pairs in them, and a crate of green indoor slippers. Beyond, the maple floor in narrow boards, the badminton court's lines in green across the middle with its net up on two posts and a shuttlecock or two on the floor, the basketball court's sidelines in red, a wainscot of boards round the walls to about chest height with a rail, and high windows over it down both long walls, sky beyond. East of the entrance the attendant's desk: a counter in blue-grey with a pale top, its return along the tiles; on it, facing the hall, the booking terminal (a screen on a short neck, a keypad and a card slot), an old desk fan with a caged head and a lever on its base, a tray of booking sheets, a bell and the printer, a paper tray out at its front; behind it the attendant's chair and a low cabinet of binders. On the east wall the club board, notices pinned on cork, and an AED in a white box under it. Down the west wall two long benches facing the hall. In the south-west corner the equipment store, its sliding door pushed open: a cart of basketballs, a cart of volleyballs, blue mats stacked, the badminton net posts and a low shelf with folded bibs on it. North-east, the winter meeting corner: two rows of blue folding chairs facing a whiteboard on wheels with notes on it, and a trolley of folded chairs against the wall. Across the hall a green divider net hangs from a rail; over it on the far wall a basketball goal and a clock.
+The entrance: inside the glass doors a strip of grey tiles where outdoor shoes come off, a mat, a grey shoe locker of cubbies either side with a few pairs in them, and a step up onto the lobby's pale floor with a steel rack of green indoor slippers on it and two pairs set out.
+
+The lobby: west of the entrance the reception, a counter in blue-grey with a pale top running along the lobby's west side, its front facing the lobby; on it, facing the lobby, the booking terminal (a screen on a short neck, a keypad and a card slot), an old desk fan with a caged head and a lever on its base, a tray of booking sheets, a bell and a pen stand. Behind it the staff side: the attendant's chair, and along the west wall a back counter with the printer on it (a paper tray out at its front), binders, and the key box on the wall over it. 受付 RECEPTION hangs over the staff side on the glass wall. A 受付 RECEPTION plate stands on the counter's north end. East of the entrance an umbrella stand inside the doors, a blue waiting bench along the east wall and another across the lobby facing the doors, a drinks machine, a plant in a white pot by the counter's front, and the club board (notices pinned on cork) on the solid pier at the glass wall's east end. In the lobby's north-east corner the changing block's front faces the lobby: the men's changing room's open doorway with a blue noren and 男子更衣室 MEN · CHANGING over it, the women's with a red noren and 女子更衣室 WOMEN · CHANGING, the pool's season notice between them ("Outdoor pool. Last swim: Sat 3 Oct. Swimming club meets in the hall from 10 Oct"), the pool corridor's shut glass door with プール POOL over it, and an AED in a white box east of it.
+
+The hall: across the lobby's north side a glass wall in a dark frame from the west wall to the pier, its double doors open on the entrance's axis with アリーナ SPORTS HALL over them. Behind it the maple floor in narrow boards, a wainscot of boards round the walls to about chest height with a rail, high windows over it down the west and east walls and along the north wall, sky beyond, and a red boundary line round the floor. The changing block's walls run back into the hall's east side, roofed. The badminton court's lines in green across the hall's north part with its net up on two posts and a shuttlecock or two on the floor; a basketball goal on the north wall over the court and a clock over the meeting corner. Down the west wall by the windows two long benches facing the hall; a cart of volleyballs inside the doors. In the north-west corner the equipment store, its sliding door in its south wall pushed open: a cart of basketballs, a cart of volleyballs, blue mats stacked, the badminton net posts and a low shelf with folded bibs on it. North-east, past the changing block, the winter meeting corner: two rows of blue folding chairs facing a whiteboard on wheels with notes on it, and a trolley of folded chairs against the east wall.
 
 ### Things
 
 | Id | Label | What it is |
 |---|---|---|
 | `gym_door` | To the sports lane | The main doors, back out onto the gym's apron. |
-| `booking_terminal` | Booking terminal | The terminal on the desk where the gym's courts and rooms are booked. Named for the tickets; nothing uses it yet. |
-| `gym_printer` | Printer | The printer at the desk's east end that prints the booking sheets. Named for the tickets; nothing uses it yet. |
-| `desk_fan` | Desk fan | The old fan on the desk, its starter lever on the base. Named for the tickets; nothing uses it yet. |
-| `gym_board` | Club board | The clubs' cork board on the east wall. Nothing uses it yet. |
+| `gym_changing` | To the pool | The protagonist's own changing room's doorway (the men's for Eric, the women's for Carina), through to the pool deck (`pool`). No pin until the story uses it (`talk:gym_changing`). |
+| `booking_terminal` | Booking terminal | The terminal on the reception counter where the gym's courts and rooms are booked. Ticket T-0004 and a kotodama target (`ugoite`). |
+| `gym_printer` | Printer | The printer on the back counter behind the reception, faced from the staff side; it prints the booking sheets (T-0004, where `dashite` is taught). |
+| `desk_fan` | Desk fan | The old fan on the reception counter, its starter lever on the base. |
+| `gym_board` | Club board | The clubs' cork board on the pier at the glass wall's east end. |
 
 ### Spots
 
-`gym_in` (on the tiles inside the doors, the arrival point), `gym_desk` (in front of the desk's counter), `gym_benches` (in front of the benches), `gym_meeting` (beside the folding chairs), `gym_court` (on the badminton court); and each nook below
+`gym_in` (on the lobby floor just past the step, the arrival point), `gym_desk` (in front of the reception counter at the terminal), `gym_lobby` (in front of the waiting bench across the lobby), `gym_benches` (in the hall in front of the benches), `gym_meeting` (in the hall beside the folding chairs), `gym_court` (on the badminton court); and each nook below
 
 ### Nooks
 
@@ -1039,12 +1045,12 @@ Small places off the floor, kept for later secrets, encounters and collectibles 
 
 | Id | Where | What's there | Could hold |
 |---|---|---|---|
-| `gym_store` | Inside the equipment store's open door. | The ball carts, the mats, the net posts and the shelf of bibs. | Something left in a cart; a ball with a name on it. |
-| `gym_lockers` | On the entrance's tiles, by the west shoe locker and the slipper crate. | Cubbies with a few pairs of shoes in them. | A shoe without its pair; a note in a cubby. |
+| `gym_store` | In the hall, inside the equipment store's open door. | The ball carts, the mats, the net posts and the shelf of bibs. | Something left in a cart; a ball with a name on it. |
+| `gym_lockers` | On the entrance's tiles, by the west shoe locker and the slipper rack. | Cubbies with a few pairs of shoes in them. | A shoe without its pair; a note in a cubby. |
 
 ### Seats
 
-`gym_bench_n` (the bench along the west wall nearer the net, facing the hall), `gym_bench_s` (the one nearer the doors)
+`gym_bench_n` (the hall's bench along the west wall nearer the court, facing the hall), `gym_bench_s` (the one nearer the glass wall)
 
 ### Zones
 
@@ -1052,16 +1058,16 @@ None.
 
 ### Who's there when
 
-Day 3: the attendant behind the desk through the day (not in the evening); Mori checking his Tuesday booking in the afternoon; Emi at the equipment store looking for the pool keys in the afternoon. The booking terminal and printer are ticket T-0004 (`bookingRepair`, game3d/js/places/day3/booking.js): the frozen screen, the red reset button under it, the sheet printed with the day's date, the attendant's check. On a later Saturday's first winter meeting (`day3Setup` state `winterClub`) Emi, Kuro and the attendant are by the benches.
+Day 3: the attendant behind the reception counter at the terminal through the day (not in the evening); Mori at the counter checking his Tuesday booking in the afternoon; Emi at the hall's equipment store looking for the pool keys in the afternoon. The booking terminal and printer are ticket T-0004 (`bookingRepair`, game3d/js/places/day3/booking.js): the frozen screen, the red reset button under it, the sheet printed with the day's date, the attendant's check. On a later Saturday's first winter meeting (`day3Setup` state `winterClub`) Emi, Kuro and the attendant are by the hall's benches.
 
 None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
-| `attendant` | Day 3: behind the desk in the morning, at lunch and in the afternoon. Label "Attendant". | – |
-| `mori` | Day 3, afternoon: at the desk about his booking. | – |
-| `emi` | Day 3, afternoon: by the equipment store. | – |
+| `attendant` | Day 3: behind the reception counter in the morning, at lunch and in the afternoon. Label "Attendant". | – |
+| `mori` | Day 3, afternoon: at the reception counter about his booking. | – |
+| `emi` | Day 3, afternoon: by the hall's equipment store. | – |
 | `kuro` | A later Saturday's winter meeting only. | – |
 
 No crowd.

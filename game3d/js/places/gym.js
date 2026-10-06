@@ -7,17 +7,21 @@ import { walkOut, walkIn } from './edge-walk.js';
 import { roomView, roomSave } from './room-view.js';
 import { day3Place } from './day3/place.js';
 import { gymDesk } from './day3/booking.js';
+import { MC } from '../mc.js';
 
-// The gym's corner inside its main door (scenes/rooms/gym.js): the entrance with its shoe lockers, the attendant's
-// desk with the booking terminal, the printer and the fan, the benches, the equipment store and the winter meeting
-// corner, as far as the divider net. In from the sports lane through the main doors, out the same way. It also loads
-// with ?place=gym, inside the doors. The camera looks in from the south over the cut-down front wall: the whole
-// corner on a desktop, following Eric on a phone.
+// The gym's ground floor (scenes/rooms/gym.js): the entrance lobby inside the main doors (the shoe lockers and the
+// slipper step, the reception counter with the booking terminal and the fan, the printer on the back counter behind
+// it, the club board, the changing rooms' and the pool corridor's doors), and the sports hall behind its glass wall
+// (the court, the benches, the equipment store, the winter meeting corner). In from the sports lane through the main
+// doors, out the same way. The protagonist's own changing room's door is the way to the pool deck once the story
+// uses it (talk:gym_changing): Carina's is the women's. It also loads with ?place=gym, inside the doors. The camera
+// looks in from the south over the cut-down front wall: the whole floor on a desktop, following Eric on a phone.
 export function gymPlace(game) {
   const w = buildGym();
   const cam = new RoomCam(w.camera);
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const d = w.door,
+    ch = MC.gender === 'woman' ? w.changing.women : w.changing.men, // the protagonist's own changing room
     save = roomSave(game, w.nav, d.in, cam);
   // day 3: the attendant, Mori and Emi; the booking repair at the desk (places/day3/booking.js)
   const d3 = day3Place(game, 'gym', { root: w.root, K, ids: ['attendant', 'mori', 'emi', 'kuro'] });
@@ -33,7 +37,16 @@ export function gymPlace(game) {
       spot: () => d.out,
       face: () => d.edge,
     },
-    // the desk's machines and the club board: named for the tickets and scenes that use them (no pin until one does)
+    // the protagonist's changing room's door, through to the pool deck; its pin shows once the story uses it
+    gym_changing: {
+      ...PLACE_DETAILS.gym.things.gym_changing,
+      anchor: (v) => v.set(ch.edge[0], 1.3, ch.edge[1] + 0.1),
+      spot: () => ch.out,
+      face: () => ch.edge,
+      enabled: () => game.runner.has('talk:gym_changing'),
+    },
+    // the reception's machines and the club board: the terminal and the fan on the counter, faced from the lobby;
+    // the printer on the back counter behind it, faced from the staff side
     booking_terminal: {
       ...PLACE_DETAILS.gym.things.booking_terminal,
       anchor: (v) => v.set(...w.terminal),
@@ -44,19 +57,19 @@ export function gymPlace(game) {
       ...PLACE_DETAILS.gym.things.gym_printer,
       anchor: (v) => v.set(...w.printer),
       face: () => [w.printer[0], w.printer[2]],
-      spot: () => [w.printer[0], w.spots.gym_desk[1]],
+      spot: () => w.spots.gym_printer,
     },
     desk_fan: {
       ...PLACE_DETAILS.gym.things.desk_fan,
       anchor: (v) => v.set(...w.fan),
       face: () => [w.fan[0], w.fan[2]],
-      spot: () => [w.fan[0], w.spots.gym_desk[1]],
+      spot: () => w.spots.gym_fan,
     },
     gym_board: {
       ...PLACE_DETAILS.gym.things.gym_board,
       anchor: (v) => v.set(...w.board),
       face: () => [w.board[0], w.board[2]],
-      spot: () => [w.board[0] - 0.8, w.board[2]],
+      spot: () => w.spots.gym_board,
     },
     attendant: { ...PLACE_DETAILS.gym.things.attendant, ...d3.thing('attendant') },
     mori: { ...PLACE_DETAILS.gym.things.mori, ...d3.thing('mori') },
@@ -78,6 +91,7 @@ export function gymPlace(game) {
     spots: {
       gym_in: d.in,
       gym_desk: w.spots.gym_desk,
+      gym_lobby: w.spots.gym_lobby,
       gym_benches: w.spots.gym_benches,
       gym_meeting: w.spots.gym_meeting,
       gym_court: w.spots.gym_court,
@@ -104,7 +118,10 @@ export function gymPlace(game) {
     restoreState: save.restore,
     // in through the main doors, walking north onto the tiles; out the same way
     tripIn: (g) => walkIn(g, cam, d.edge, d.in, Math.PI),
-    tripOutTo: { sports: (g) => walkOut(g, cam, d.out, d.edge) },
+    tripOutTo: {
+      sports: (g) => walkOut(g, cam, d.out, d.edge),
+      pool: (g) => walkOut(g, cam, ch.out, ch.edge), // in at the protagonist's changing room's door
+    },
   };
   return P;
 }

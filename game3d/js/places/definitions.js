@@ -55,7 +55,8 @@ export const NEXT = { train: 'gate', gate: 'forecourt', forecourt: 'office', dor
 // in the east coast, so the three make a loop; west past the gym's corner is the office quarter, and west along
 // its street the harbour; north out of the harbour, up the works lane or up the works street, are the old works,
 // whose two ways both lead back into the harbour, so the two make a loop. The pool deck is through the shower
-// pavilion's door at the sports ground's pool walk, and back; the gym's corner through its main doors on the lane;
+// pavilion's door at the sports ground's pool walk, and back, or from the gym's lobby through the protagonist's
+// changing room; the gym's lobby through its main doors on the lane;
 // the dorm common room through its glazed door on the inner court, off the east coast's dorm row;
 // the karaoke box's front desk through its door off the arcade, and its booth up the stairs.
 export const TRIPS = {
@@ -70,7 +71,7 @@ export const TRIPS = {
   dorm_commons: ['east_coast'],
   sports: ['east_lane', 'east_coast', 'office_quarter', 'pool', 'gym'],
   pool: ['sports'],
-  gym: ['sports'],
+  gym: ['sports', 'pool'],
   office_quarter: ['sports', 'harbour'],
   harbour: ['office_quarter', 'works'],
   works: ['harbour'],

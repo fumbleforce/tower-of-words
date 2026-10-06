@@ -140,7 +140,7 @@ export const CHUNKS = {
     level: 0,
     walk: [-9.4, 9.4, -11.8, 0],
     view: [-9.6, 9.6, -12, 0.4],
-    anchor: 'the gym’s main doors, inside: the south end of the hall as far as the divider net',
+    anchor: 'the gym’s main doors, inside: the entrance lobby, the sports hall behind its glass wall',
   },
   office_quarter: {
     at: [4.5, -54],

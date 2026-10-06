@@ -1266,6 +1266,29 @@
     ]
   },
   {
+    "id_": "prop/gym/gym_changing",
+    "kind": "prop",
+    "name": "To the pool",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "place": "gym",
+    "source": "gym.js things.gym_changing",
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "tags": [
+      "in game",
+      "thing"
+    ],
+    "used": [
+      "Gym: tap target 'To the pool'"
+    ],
+    "view": {
+      "room": "gym",
+      "type": "room"
+    }
+  },
+  {
     "id_": "prop/gym/gym_door",
     "kind": "prop",
     "name": "To the sports lane",

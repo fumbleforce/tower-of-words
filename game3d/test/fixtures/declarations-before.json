@@ -1138,6 +1138,11 @@
           "kind": "thing",
           "verb": "Go"
         },
+        "gym_changing": {
+          "label": "To the pool",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "booking_terminal": {
           "label": "Booking terminal",
           "kind": "thing small"
@@ -1174,6 +1179,7 @@
       "spots": [
         "gym_in",
         "gym_desk",
+        "gym_lobby",
         "gym_benches",
         "gym_meeting",
         "gym_court",

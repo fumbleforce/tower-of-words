@@ -57,21 +57,22 @@ export const POOL_DETAILS = {
   hooks: ['poolSession'],
 };
 
-// The gym's corner inside its main door (places/gym.js), from the sports lane.
+// The gym's lobby and sports hall (places/gym.js), from the sports lane.
 export const GYM_DETAILS = {
   things: {
     gym_door: { label: 'To the sports lane', kind: 'thing', verb: 'Go' },
+    gym_changing: { label: 'To the pool', kind: 'thing', verb: 'Go' }, // no pin until the story uses it
     booking_terminal: { label: 'Booking terminal', kind: 'thing small' },
     gym_printer: { label: 'Printer', kind: 'thing small' },
     desk_fan: { label: 'Desk fan', kind: 'thing small' },
     gym_board: { label: 'Club board', kind: 'thing' },
-    // day 3: the attendant at the desk, Mori's booking visit, Emi and Kuro (story/day3/gym.js, story/clubs.js)
+    // day 3: the attendant at the reception, Mori's booking visit, Emi and Kuro (story/day3/gym.js, story/clubs.js)
     attendant: { label: 'Attendant', kind: 'person' },
     mori: { label: 'Mr. Mori', kind: 'person' },
     emi: { label: 'Emi', kind: 'person' },
     kuro: { label: 'Receptionist', kind: 'person' },
   },
-  spots: ['gym_in', 'gym_desk', 'gym_benches', 'gym_meeting', 'gym_court', 'gym_store', 'gym_lockers'],
+  spots: ['gym_in', 'gym_desk', 'gym_lobby', 'gym_benches', 'gym_meeting', 'gym_court', 'gym_store', 'gym_lockers'],
   nooks: ['gym_store', 'gym_lockers'], // docs/game/places.md, "Nooks"
   seats: ['gym_bench_n', 'gym_bench_s'],
   zones: [],
