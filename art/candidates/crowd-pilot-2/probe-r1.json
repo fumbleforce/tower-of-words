@@ -1,0 +1,11 @@
+[
+ {"label": "A rig-a (r1 ours)", "dir": "/art/parts/crowd-pilot-1/game/a-own/", "idle": "/art/parts/crowd-pilot-1/game/a-own/idle.json", "height": 1.09},
+ {"label": "A rig-b (r1 Meshy)", "dir": "/art/parts/crowd-pilot-1/game/a-meshy/", "idle": "/art/parts/crowd-pilot-1/game/a-meshy/idle.json", "height": 1.09},
+ {"label": "B rig-a (r1 ours)", "dir": "/art/parts/crowd-pilot-1/game/b-own/", "idle": "/art/parts/crowd-pilot-1/game/b-own/idle.json", "height": 1.06},
+ {"label": "B rig-b (r1 Meshy)", "dir": "/art/parts/crowd-pilot-1/game/b-meshy/", "idle": "/art/parts/crowd-pilot-1/game/b-meshy/idle.json", "height": 1.06},
+ {"label": "Kenji (game)", "dir": "/game3d/assets/characters/kenji/", "idle": "/game3d/assets/characters/relaxed-idle-kenji.json", "height": 1.12},
+ {"label": "Hamada (game)", "dir": "/game3d/assets/characters/kuroda/", "idle": "/game3d/assets/characters/relaxed-idle-kuroda.json", "height": 1.09},
+ {"label": "Emi (game)", "dir": "/game3d/assets/characters/emi/", "idle": "/game3d/assets/characters/relaxed-idle-emi.json", "height": 1.09},
+ {"label": "Rei (game, our rig)", "dir": "/game3d/assets/characters/rei/", "idle": "/game3d/assets/characters/relaxed-idle-rei.json", "height": 1.12},
+ {"label": "Mio (game)", "mio": true, "height": 1.12}
+]

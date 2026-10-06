@@ -1,0 +1,5 @@
+[
+ {"id": "a", "label": "A, office man", "dir": "/art/parts/crowd-pilot-2/game/a/", "idle": "/art/parts/crowd-pilot-2/game/a/idle.json", "height": 1.09},
+ {"id": "b", "label": "B, office woman", "dir": "/art/parts/crowd-pilot-2/game/b/", "idle": "/art/parts/crowd-pilot-2/game/b/idle.json", "height": 1.06},
+ {"id": "kenji", "label": "Kenji (in the game)", "dir": "/game3d/assets/characters/kenji/", "idle": "/game3d/assets/characters/relaxed-idle-kenji.json", "height": 1.12}
+]

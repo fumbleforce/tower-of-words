@@ -1,0 +1,4 @@
+[
+ {"id": "a-own", "label": "A, round 1, rig (a) ours", "dir": "/art/parts/crowd-pilot-1/game/a-own/", "idle": "/art/parts/crowd-pilot-1/game/a-own/idle.json", "height": 1.09},
+ {"id": "b-meshy", "label": "B, round 1, rig (b) Meshy's weights", "dir": "/art/parts/crowd-pilot-1/game/b-meshy/", "idle": "/art/parts/crowd-pilot-1/game/b-meshy/idle.json", "height": 1.06}
+]
