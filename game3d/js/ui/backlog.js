@@ -1,17 +1,17 @@
-// The backlog: every line said so far today (spoken lines, narration, texts, the replies picked), and the panel that
+// The backlog: the most recent conversation entries (spoken lines, narration, texts, replies), and the panel that
 // shows it. Opened from the dialogue box's Log button, PageUp, the mouse wheel up or a swipe down on the box
-// (ui/vn-controls.js). The list rides in the save (sim.js save/restore), so it comes back with the day it belongs to.
+// (ui/vn-controls.js). Raw lines ride in the save across days and render with the player's current vocabulary.
 // Read state: which lines have been on screen before, by line id, kept in the browser across saves; Skip uses it.
-import { lineHTML } from '../lang.js';
+import { lineHTML, known } from '../lang.js';
 import { stopVoice, voice } from '../audio/core.js';
 import { heardHTML, addPlayButtons } from './dialogue-text.js';
 import { thumbStyle } from './portraits.js';
 import { el } from './dom.js';
+import { LOG_LIMIT, restoreLog, recordEntry, sameLine } from './backlog-records.js';
 
-const MAX = 400; // a whole day is well under this; the oldest go first
 const READ_KEY = 'amakawa-read';
 let items = [];
-let day = 1; // the day the list belongs to (set from the save)
+let day = 1; // the current save's day; individual entries retain their original day
 
 // ---------- read state ----------
 // a line's id: its speaker and its text (a rewritten line counts as new)
@@ -50,19 +50,27 @@ export function markRead(id) {
 // ---------- the list ----------
 // e: { k: 'line' | 'pick', who, name, role, color, phone, text, en, ov, clear, vk, face, seen, html }
 export function logLine(e) {
+  const game = globalThis.window?.__game;
+  e = recordEntry(e, {
+    day: game?.sim?.day || day,
+    period: game?.sim?.period,
+    place: game?.place?.name,
+    node: game?.runner?.currentNode,
+    known,
+  });
   const last = items[items.length - 1];
   // a choice keeps its line on screen: the same line again is not a new entry
-  if (last && last.k === e.k && last.text === e.text && last.who === e.who && e.k === 'line') return;
+  if (sameLine(last, e)) return;
   items.push(e);
-  if (items.length > MAX) items.splice(0, items.length - MAX);
+  if (items.length > LOG_LIMIT) items.splice(0, items.length - LOG_LIMIT);
   if (panel && !panel.hidden) render();
 }
 export const logSize = () => items.length;
 export function logToJSON() {
-  return { day, items };
+  return { v: 2, day, items };
 }
 export function logLoad(d, saveDay) {
-  items = d && d.day === saveDay && Array.isArray(d.items) ? d.items.slice(-MAX) : [];
+  items = restoreLog(d, saveDay);
   day = saveDay || 1;
 }
 
@@ -85,16 +93,17 @@ function itemHTML(e, i) {
   const name = e.name
     ? `<div class="who"><span class="nm" style="--c:${e.color || '#8fa3c0'}">${esc(e.name)}</span>${e.phone ? '<span class="rl txt">message</span>' : e.role ? `<span class="rl">${esc(e.role)}</span>` : ''}${e.en ? '<span class="rl">in Japanese</span>' : ''}</div>`
     : '';
+  const origin = `<div class="who"><span class="rl">Day ${e.day}${e.period ? ' · ' + esc(e.period) : ''}</span></div>`;
   return `<li class="${e.name ? 'say' : 'narr'}${e.ov ? ' heard' : ''}${e.phone ? ' text' : ''}${e.seen ? ' seen' : ''}">
     ${thumb ? `<span class="th" style="${thumb}"></span>` : '<span class="th none"></span>'}
-    <div class="bd">${name}<div class="tx">${body}</div></div>
+    <div class="bd">${origin}${name}<div class="tx">${body}</div></div>
     ${e.vk ? `<button type="button" class="rp" data-i="${i}" aria-label="Play this line again">${PLAY}</button>` : ''}
   </li>`;
 }
 function render() {
   list.innerHTML = items.length
     ? items.map(itemHTML).join('')
-    : '<li class="empty">Nothing has been said yet today.</li>';
+    : '<li class="empty">No conversations recorded yet.</li>';
   for (const tx of list.querySelectorAll('li:not(.heard) .tx')) addPlayButtons(tx);
 }
 function build(sayWord) {
