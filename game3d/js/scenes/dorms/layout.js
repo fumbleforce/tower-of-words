@@ -63,3 +63,10 @@ export const STAIR = {
   window: PL.STAIR_WINDOW.map((z) => z - PL.DORMS.z), // on the west face, along lane A
 };
 export const LANDING = [STAIR.a[0] + 0.45, 1.6]; // where Eric stands at the top of the stairs
+// The corridor floors run west past 206 to 207 and then the shared room, a flat's width at the block's west end
+// (the kitchen on 2F, the laundry on 3F), to the block's end wall with the fire escape's door in it
+export const SHARED_K = -4; // the shared room's place along the corridor, counted like the flats (Eric's is 0)
+export const WEST_END = SHARED_K * PITCH + X0 - T; // the end wall's inner face: the shared room's west wall's outer one
+// The floors Eric can walk, side by side in the one frame (places/dorms.js): 2F at the origin, 3F and the roof far
+// enough east that no camera on one ever sees another. Each is built in its own frame and set down at its x.
+export const LEVEL_DX = { '2f': 0, '3f': 40, roof: 80 };

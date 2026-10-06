@@ -68,6 +68,10 @@ export function installProgressionHooks(game, { travel }) {
   };
   // a side trip to a neighbouring chunk ({ do: 'trip', to: 'plaza' }), the same watched walk as next
   H.trip = ({ to }) => {
+    // a way out that starts with a walk inside the place (the dorms: out of the flat onto the corridor, the stairs
+    // down from there are the trip itself): that walk, and the trip is left to the player (places/dorms.js)
+    const via = game.place.tripVia?.(to);
+    if (via) return via();
     const from = game.place.name;
     if (!canTravel(from, to, sim.day)) {
       console.warn('trip: no way from', from, 'to', to);

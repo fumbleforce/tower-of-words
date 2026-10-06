@@ -7,6 +7,7 @@
 export const DAY3_ROUTE = [
   ['dorms', 'computer', ['Open repair requests']],
   ['dorms', 'door_out'],
+  ['dorms', 'stairs_down'],
   ['dorm_court', 'street_gate'],
   ['east_lane', 'plaza_lane'],
   ['plaza', 'noticeboard', ['Tell her not to worry']],
@@ -30,6 +31,7 @@ export const DAY3_ROUTE = [
   ['dorm_court', 'stairs'],
   ['dorms', 'computer', ['Rest until evening']],
   ['dorms', 'door_out'],
+  ['dorms', 'stairs_down'],
   ['dorm_court', 'street_gate'],
   ['east_lane', 'north_street'],
   ['sports', 'pool', ['Swim with Kuro', 'Sit with them after the swim']],

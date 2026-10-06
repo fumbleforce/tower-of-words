@@ -38,7 +38,7 @@ export function vending(T, { back = 1.0, n = 2, binSide = 1, seed = 1 }) {
 }
 // a drinks machine's front: a lit header, three shelves of bottles and cans with their price buttons, the coin panel
 // and the slot below
-function drinksFace(accent, seed) {
+export function drinksFace(accent, seed) {
   return (ctx, w, h) => {
     const r = rng(seed * 13 + 5);
     ctx.fillStyle = '#eef0f1';

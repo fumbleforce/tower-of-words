@@ -28,6 +28,8 @@ import {
   RETURN,
   STAIR,
   LANDING,
+  WEST_END,
+  LEVEL_DX,
 } from './dorms/layout.js';
 import { floors, walls, building, window_, outside } from './dorms/building.js';
 import { tallFront } from './dorms/doors.js';
@@ -36,10 +38,12 @@ import { below } from './dorms/below.js';
 import * as F from './dorms/furniture.js';
 import { desk } from './dorms/desk.js';
 import { kitchenette, bath, genkan, slidingDoor } from './dorms/entry.js';
+import { buildLevels, corridorNav, stairSpots } from './dorms/levels.js';
+import { SHARED } from './dorms/shared.js';
 
 const BG = '#1b1f26';
 
-function lights(scene, root, { lamp, desk, screen, seat, kitchen }) {
+function lights(scene, root, { lamp, desk, screen, seat, kitchen, stair }) {
   // dusk: a dim cool sky, a low cool key for the shadows
   scene.add(new THREE.HemisphereLight('#8e9cb6', '#3a3f4b', 1.05));
   const sun = new THREE.DirectionalLight('#b8c6e0', 0.55);
@@ -93,7 +97,17 @@ function lights(scene, root, { lamp, desk, screen, seat, kitchen }) {
   const out = new THREE.PointLight('#ffd7a0', 1.4, 2.4, 1.4);
   out.position.set((WIN[0] + WIN[1]) / 2 - 0.45, -0.1, OUT + 0.35);
   root.add(out);
-  return sun;
+  // the stair light: cool, over the landing
+  const stairLight = new THREE.PointLight('#dfe7f5', 1.1, 3.2, 1.4);
+  stairLight.position.copy(stair);
+  root.add(stairLight);
+  // the shared room's ceiling light: on 2F the kitchen's, cool white
+  const shared = new THREE.PointLight('#eef3ff', 1.7, 3.4, 1.3);
+  shared.position.set((SHARED.x0 + SHARED.x1) / 2, H + 0.1, -1.1);
+  root.add(shared);
+  // the other floors move these about rather than have lights of their own (places/dorms.js), so the count, and
+  // with it every material's shader, stays the same on every floor
+  return { sun, ceiling, desklamp, hood, corridor, out, stair: stairLight, shared };
 }
 
 export function buildDorms() {
@@ -102,15 +116,10 @@ export function buildDorms() {
   scene.background = new THREE.Color(BG);
   scene.add(root);
   const kit = new Kit();
-  // the walk: the flat, the corridor in front of it from a little past his door to the landing, and the landing
-  const WX0 = X0 - 0.5,
-    nav = new Nav(WX0, STAIR.east - 0.12, BACK + 0.1, STAIR.top - 0.08, 0.05);
-  nav.block(WX0, X0 + 0.08, BACK, CORR[0] + 0.1); // left of the flat
-  nav.block(X1 - 0.08, RETURN + 0.08, BACK, CORR[0] + 0.1); // right of it, to the return
-  nav.block(RETURN, STAIR.east, BACK, STAIR.back + 0.12); // behind the landing
-  nav.block(X0 - 0.2, X1 + 0.2, NEAR - 0.1, CORR[0] + 0.12); // his front wall and door: in only on the way in
-  nav.block(WX0, RETURN + 0.06, CORR[1] - 0.12, STAIR.top); // the parapet
-  nav.block(STAIR.east - 0.3, STAIR.east, 1.3, 1.7); // the fire hose cabinet
+  // the walk, one grid for every floor (dorms/levels.js): on 2F the flat, the corridor from the end wall to the
+  // landing, the kitchen; 3F and the roof further east
+  const nav = new Nav(WEST_END - 0.05, LEVEL_DX.roof + RETURN, BACK + 0.1, STAIR.top - 0.08, 0.05);
+  corridorNav(nav, true);
 
   floors(kit, root);
   walls(root);
@@ -120,8 +129,9 @@ export function buildDorms() {
   // its own materials: going in fades it out (places/dorms.js), and the cache's are every wall's
   front.traverse((o) => o.isMesh && (o.material = o.material.clone()));
   root.add(front);
-  stairs(kit, root);
+  const stair = stairs(kit, root);
   below(root);
+  const levels = buildLevels(kit, root, nav);
   // the four things Eric looks at get their own groups, for their outlines
   const obj = {
     window: new THREE.Group(),
@@ -147,15 +157,18 @@ export function buildDorms() {
   nav.block(X0, -0.4, PART - 0.06, PART + 0.06);
   nav.block(0.34, X1, PART - 0.06, PART + 0.06);
   kit.flush(root);
-  const sun = lights(scene, root, { ...d, kitchen });
+  const lit = lights(scene, root, { ...d, kitchen, stair });
 
   const win = [(WIN[0] + WIN[1]) / 2, BACK];
   const entry = [-0.1, -0.2]; // just through the doorway, clear of the things' spots
   return {
     root,
     scene,
-    sun,
+    sun: lit.sun,
+    lights: lit,
     nav,
+    levels, // the kitchen, 3F and the roof (dorms/levels.js)
+    stairsAt: stairSpots, // a corridor floor's landing and the tops of its flights, at its x
     start: entry,
     roomEntry: entry,
     // the trip in: up the last flight from the half landing onto the landing, then left into the corridor

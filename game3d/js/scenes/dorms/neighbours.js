@@ -20,7 +20,7 @@ const WALL = '#8a8f98', // the neighbours' walls: a shade darker than Eric's
 
 // one flat's shell: tatami, the entry strip's floor, the walls between flats with their cut caps, the partition,
 // the back wall round its window
-function shell(kit, ox) {
+export function shell(kit, ox) {
   const x0 = ox + X0,
     x1 = ox + X1,
     ux = (X1 - X0) / 1.5,
@@ -91,7 +91,7 @@ function shell(kit, ox) {
 }
 
 // the wall between two flats at x, and its cut cap
-function party(kit, x) {
+export function party(kit, x) {
   kit.box(WALL, T, H, NEAR + T - (BACK - T), x, 0, (NEAR + T + BACK - T) / 2, { surf: 'plaster' });
   kit.box(C.wallTop, T + 0.01, 0.03, NEAR + T - (BACK - T) + 0.01, x, H, (NEAR + T + BACK - T) / 2, { cast: false });
 }
@@ -142,7 +142,7 @@ function curtains(kit, ox, closed, color) {
 }
 
 // right, home: the kotatsu with dinner on it, the TV on against the left wall, washing on a rack by the window
-function home(kit, root, ox) {
+export function home(kit, root, ox) {
   bed(kit, ox + 0.5, ox + 1.02, BACK + 0.08, -1.2, '#5f7a74');
   curtains(kit, ox, true, '#7d8aa0');
   // the TV on its low stand in the corner, turned toward the kotatsu, the screen lit
@@ -196,7 +196,7 @@ function home(kit, root, ox) {
 }
 
 // left, out: dark, the bed made, the desk under the window with the monitor off, suits on a rail, a guitar case
-function out(kit, ox) {
+export function out(kit, ox) {
   bed(kit, ox + X0 + 0.02, ox + X0 + 0.52, BACK + 0.08, -1.2, '#6c6f86', { made: true });
   curtains(kit, ox, false, '#5e6d87');
   kit.box('#a4a8ae', 0.9, 0.03, 0.42, ox + 0.15, 0.4, BACK + 0.27, { r: 0.006, surf: 'laminate' });
@@ -230,7 +230,7 @@ function out(kit, ox) {
 }
 
 // the flats at the frame's edges: a desk lamp on in one, the other dark
-function edge(kit, root, ox, lit) {
+export function edge(kit, root, ox, lit) {
   const s = lit ? 1 : -1;
   bed(kit, ox - s * 0.75 - 0.25, ox - s * 0.75 + 0.25, BACK + 0.08, -1.2, lit ? '#6a7892' : '#5f7a74', {
     made: !lit,
@@ -254,7 +254,7 @@ function edge(kit, root, ox, lit) {
 
 // the dark over a flat: a black veil just under the cut, so a flat with its lights off reads as dark and a lit one
 // stays dimmer than Eric's. The caps stand above it, clean. One mesh per shade.
-function veils(root, shades) {
+export function veils(root, shades) {
   for (const [opacity, xs] of shades) {
     const g = mergeGeometries(
       xs.map((ox) =>
