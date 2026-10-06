@@ -38,6 +38,7 @@ export const DEFAULTS = {
   surfaces: true, // Surface detail: patterns in floors, walls, fabric and metal (look/procedural.js)
   chibi: false, // the Meshy chibis, from the next load (chibi.js; ?chibi=1 forces them). Off: Jørgen dropped the look, 2026-10-04
   reduceMotion: reduceDefault,
+  cameraMode: 'overview', // desktop only: 'overview' | 'follow' (approved camera-plan-1 preset 1c)
   keySay: 'KeyQ',
   uiSize: 1, // a multiplier on the viewport-based UI scale (0.85, 1, 1.2, 1.4)
   voiceInput: 'device', // 'off' | 'device' | 'browser': saying a word into the mic (the mic is only asked for on first press)

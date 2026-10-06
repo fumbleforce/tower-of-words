@@ -382,8 +382,7 @@ function setPaused(on) {
 shell.setPaused = setPaused;
 shell.isPaused = () => isPaused;
 
-// Esc: closes the top layer (or a game panel that's open); otherwise opens or closes the pause menu. Registered
-// in the capture phase so it sees the state before ui.js's own Esc handling. While paused, keys don't reach the game.
+// Esc releases mouse capture, then closes a layer or opens pause. Capture runs before ui.js; paused keys stay here.
 window.addEventListener(
   'keydown',
   (e) => {
@@ -443,6 +442,7 @@ window.addEventListener(
       return;
     }
     if (e.key === 'Escape') {
+      if (game()?.followCamera?.captured) return game().followCamera.releaseMouse();
       const top = topLayer();
       if (top) {
         e.preventDefault();

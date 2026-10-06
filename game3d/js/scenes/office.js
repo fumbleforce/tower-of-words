@@ -1,5 +1,4 @@
-// Place 3: the office floor seen from above with cutaway walls (game3d/ref/3-office.png), in the muted
-// palette of the lobby. Local space: floor y = 0, the lift at the bottom centre (+z, near the camera).
+// B2 office geometry. Overview uses cutaway walls; free interior camera closes the rooms.
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
@@ -9,7 +8,6 @@ import {
   emissive,
   rbox,
   plant,
-  wall,
   tileFloor,
   door,
   desk,
@@ -35,6 +33,7 @@ import { liveScreens } from '../props.js';
 import { drain } from '../perf/slice.js';
 import { emiOffice, emiOfficeBlocks, EMI_X, EMI_DOOR } from './office-emi.js';
 import { MC } from '../mc.js';
+import { officeWalls } from './office-enclosure.js';
 export { EMI } from './office-emi.js';
 
 export const K = 1.18; // people scale in the office and lobby
@@ -652,7 +651,7 @@ export function* officeSteps() {
 
   yield;
   // ---- walls ----
-  const W = (...a) => root.add(wall(...a));
+  const W = officeWalls(root, { x0: X0, x1: X1, z0: Z0, z1: Z1 });
   const LO = 0.7,
     MID = 0.95;
   yield;

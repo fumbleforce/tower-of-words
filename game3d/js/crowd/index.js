@@ -249,7 +249,7 @@ export async function attachCrowd(game, place, name) {
   function update(dt) {
     if (game.place !== place || !spec) return;
     if (sim.period !== period) configure(sim.period, false);
-    const cam = place.camera;
+    const cam = game.followCamera?.visibilityCamera || place.camera;
     M.multiplyMatrices(cam.projectionMatrix, cam.matrixWorldInverse);
     frustum.setFromProjectionMatrix(M);
     const scene = game.busy && !game.transition && !game.busyTrip;

@@ -17,14 +17,20 @@ import * as THREE from 'three';
 import { Nav } from '../../movement/navigation.js';
 import { wall } from '../../props.js';
 import { lightPool } from '../../places/life.js';
+import { roomEnclosure } from './enclosure.js';
 
-export function shell(root, R, { holes = {}, color, top } = {}) {
+export function shell(root, R, { holes = {}, color, top, entryDoor = false } = {}) {
   const { x0, x1, z0, z1, h, near, t } = R;
   const o = (k) => ({ holes: holes[k] || [], ...(color ? { color } : {}), ...(top ? { top } : {}) });
   root.add(wall('x', x0 - t, x1 + t, z0 - t / 2, h, t, o('n')));
   root.add(wall('z', z0, z1, x0 - t / 2, h, t, o('w')));
   root.add(wall('z', z0, z1, x1 + t / 2, h, t, o('e')));
   root.add(wall('x', x0 - t, x1 + t, z1 + t / 2, near, t, o('s')));
+  const enclosure = roomEnclosure(root, R, { color });
+  const doorHeight = Math.min(1.95, h - 0.12);
+  enclosure.wall('x', x0 - t, x1 + t, z1 + t / 2, near, t, o('s'), doorHeight);
+  if (entryDoor)
+    for (const [lo, hi, bottom] of holes.s || []) if (bottom === 0) enclosure.door('x', lo, hi, z1 + t / 2, doorHeight);
 }
 
 export function plankFloor(kit, R, { color, seam, w = 0.2, along = 'z', y = 0 } = {}) {

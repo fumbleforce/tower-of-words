@@ -1,5 +1,3 @@
-// Place 2: the company lobby with the security gate (game3d/ref/2-security-gate-muted.png).
-// Local space: floor at y = 0, the entrance at +z (near the camera), lifts on the back wall at -z.
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import {
@@ -29,6 +27,7 @@ import { drain } from '../perf/slice.js';
 import { exitFrame, exitSign, fareMachines, floorMarks, sign, EXIT_X, FARES } from './station-fittings.js';
 import { stationFitout, LOCKER_BOUNDS } from './station-fitout.js';
 import { countTex } from './gate-count.js';
+import { stationEnclosure, STATION_ENTRY_HEIGHT } from './station-enclosure.js';
 
 const X = 6.3,
   Z = 4.5,
@@ -236,8 +235,7 @@ function guardDesk() {
 
 function entrance() {
   const g = new THREE.Group();
-  // two fixed glass side panels and two sliding leaves, standing open: the leaves sit slid aside just inside the
-  // side panels (Jørgen: "I walk straight through the glass of the doors. Just leave them open.")
+  // Glass leaves park behind the fixed side panels, leaving the centre physically open.
   const glassM = new THREE.MeshStandardMaterial({
     color: '#9fb8c9',
     roughness: 0.05,
@@ -250,7 +248,7 @@ function entrance() {
   });
   const frame = mat('#3f444e');
   const W = 4.6,
-    H = 1.2,
+    H = STATION_ENTRY_HEIGHT,
     IN = W / 4 + 0.05; // IN: the edge of the opening, where the side panels start
   g.add(rbox(W + 0.2, 0.08, 0.14, null, { y: H, m: frame }));
   for (const x of [-W / 2, -IN, IN, W / 2]) g.add(rbox(0.09, H, 0.12, null, { x, m: frame }));
@@ -328,6 +326,7 @@ function mat2(w, d, color) {
 export const buildLobby = () => drain(lobbySteps());
 export function* lobbySteps() {
   const root = new THREE.Group();
+  stationEnclosure(root, X, Z, WH);
   const scene = new THREE.Scene();
   scene.background = new THREE.Color('#454a53');
   scene.add(root);

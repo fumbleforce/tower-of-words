@@ -40,6 +40,7 @@ import { desk } from './dorms/desk.js';
 import { kitchenette, bath, genkan, slidingDoor } from './dorms/entry.js';
 import { buildLevels, corridorNav, stairSpots } from './dorms/levels.js';
 import { SHARED } from './dorms/shared.js';
+import { dormEnclosures } from './dorms/enclosure.js';
 
 const BG = '#1b1f26';
 
@@ -132,6 +133,7 @@ export function buildDorms() {
   const stair = stairs(kit, root);
   below(root);
   const levels = buildLevels(kit, root, nav);
+  dormEnclosures(root, front, levels);
   // the four things Eric looks at get their own groups, for their outlines
   const obj = {
     window: new THREE.Group(),
