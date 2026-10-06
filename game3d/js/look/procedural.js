@@ -15,6 +15,7 @@
 // On/off at run time (Settings > Graphics > Surface detail): PROC.on is read when a material compiles, and the
 // program cache key carries it, so setProcedural() only asks the materials to recompile.
 import * as THREE from 'three';
+import { EXTERIOR_SURFACES } from './exterior.js';
 
 const KIND = {
   tile: 1,
@@ -42,6 +43,9 @@ const KIND = {
   stone: 12,
   soil: 13,
   paint: 14,
+  grass: 15,
+  asphalt: 16,
+  cladding: 17,
 };
 export const KINDS = Object.keys(KIND);
 const FN = {
@@ -59,6 +63,9 @@ const FN = {
   12: 'pStone',
   13: 'pSoil',
   14: 'pPaint',
+  15: 'pGrass',
+  16: 'pAsphalt',
+  17: 'pCladding',
 };
 
 export const PROC = { on: true };
@@ -187,6 +194,7 @@ vec3 pPaint(vec3 c){
   vec2 p = pplane(vPW, vPN);
   return c * (1.0 + (pfbm(p * 2.5) - 0.5) * 0.1 + (pn(p * 45.0) - 0.5) * 0.05 * paa(p, 45.0) * uDetail);
 }
+${EXTERIOR_SURFACES}
 `;
 
 function roughBody(kind) {

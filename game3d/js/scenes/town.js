@@ -36,7 +36,11 @@ export function groundPatches(root, patches, y = -0.018) {
       y,
       (z0 + z1) / 2,
     ]);
-  for (const [color, parts] of byColor) root.add(merged(parts, mat(color, { roughness: 0.9 })));
+  for (const [color, parts] of byColor) {
+    const mesh = merged(parts, mat(color, { roughness: 0.9 }));
+    mesh.userData.surf = color === TOWN.grass ? 'grass' : color === TOWN.road ? 'asphalt' : 'concrete';
+    root.add(mesh);
+  }
 }
 
 // blocks: { x, z, w, d, h, wall (index into TOWN.walls) }. Windows go on the south face (the one the camera sees)
@@ -65,7 +69,11 @@ export function blocks(root, list, { roof = null } = {}) {
       }
     }
   }
-  for (const [color, parts] of walls) root.add(merged(parts, mat(color)));
+  for (const [color, parts] of walls) {
+    const mesh = merged(parts, mat(color));
+    mesh.userData.surf = 'cladding';
+    root.add(mesh);
+  }
   root.add(merged(roofs, roof || new THREE.MeshBasicMaterial({ color: TOWN.roof, toneMapped: false })));
   if (windows.length) root.add(merged(windows, mat(TOWN.window, { roughness: 0.35 })));
 }
