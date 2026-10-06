@@ -70,7 +70,9 @@ export function makeGait(actions, { walkV, runV, runOff = 0 }, { root, idle } = 
         return;
       }
       W.timeScale = speedArg;
-      W.weight = 1;
+      // Keep the walk/run blend weights while both fade into idle. Restoring a
+      // full walk weight here abruptly mixes a second pose into a running body.
+      if (state === 'walk') W.weight = 1;
       if (runOn) {
         runOn = false;
         runW = 0;
