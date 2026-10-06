@@ -36,14 +36,18 @@ function seat(top = 0.3) {
 
 // a rigged Meshy character: states (idle, walk, run, sit), gestures and the phone pose where the rig has them
 function figure(m, view) {
-  const g = new THREE.Group(); g.add(m.root);
+  const g = new THREE.Group(), slide = new THREE.Group(); slide.add(m.root); g.add(slide);
   const seatBlock = seat(0.3); seatBlock.visible = false; g.add(seatBlock);
   const actions = [['idle', 'Idle'], ['walk', 'Walk'], ['run', 'Run'], ['sit', 'Sit']].map(([id, label]) => ({ id, label }));
   for (const k of m.gestures || []) actions.push({ id: 'g:' + k, label: k[0].toUpperCase() + k.slice(1) });
   if (m.phone) actions.push({ id: 'phone', label: 'Phone' });
-  let loopG = null, phoneOn = false;
+  const strides = m.strides || { walkV: 0.47, runV: 0.77 }; // Original Mio's loader uses fixed stride speeds.
+  let loopG = null, phoneOn = false, motion = 'idle';
   const play = async (id) => {
     loopG = null;
+    motion = id;
+    slide.position.set(0, 0, 0);
+    m.setGait(null, { run: id === 'run' });
     if (phoneOn && m.phone) { phoneOn = false; m.phone('away'); }
     seatBlock.visible = id === 'sit';
     if (id === 'sit') { m.sitAt(0, 0.3, 0, 0); return; }
@@ -55,11 +59,24 @@ function figure(m, view) {
       return;
     }
     if (id === 'phone') { m.setState('idle'); phoneOn = true; m.phone('look'); return; }
-    m.setState(id);
+    m.setState(id === 'run' ? 'walk' : id);
   };
   const first = view.play || (view.gesture ? 'g:' + view.gesture : view.phone ? 'phone' : 'idle');
   play(first);
-  return { object: g, actions, current: first, play, update: (dt) => { m.update(dt); if (m.placePhone) m.placePhone(); }, meshy: m };
+  return {
+    object: g, actions, current: first, play, meshy: m,
+    update(dt) {
+      if (motion === 'walk' || motion === 'run') {
+        // The game's gait follows root travel. Cancel that travel in a parent to keep the preview centred.
+        const speed = motion === 'run' ? strides.runV : strides.walkV;
+        m.root.position.z += speed * (m.root.scale.x || 1) * dt;
+        slide.position.z = -m.root.position.z;
+        m.setGait(speed, { run: motion === 'run' });
+      }
+      m.update(dt);
+      if (m.placePhone) m.placePhone();
+    },
+  };
 }
 
 // any GLB: its own clips, played one at a time (an optional base-colour texture for files that come without one)
