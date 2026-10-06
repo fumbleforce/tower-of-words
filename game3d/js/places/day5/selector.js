@@ -30,7 +30,7 @@ export function selectorRepair(game, P) {
   async function hook({ state }) {
     if (sim.period !== 'lunch' || !P.people.kenji?.root.visible)
       throw new Error('Selector check requires Kenji at lunch');
-    frame(game, 'song_terminal', 3.5);
+    frame(game, 'song_terminal');
     if (state === 'show') {
       restore();
       await game.wait(1100);

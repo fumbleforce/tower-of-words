@@ -43,7 +43,7 @@ export function mondayOffice(game, P, cast) {
     phone.visible = !ready && !flags.d5_team_witnessed;
     if (phone.visible) inHand(P, phone, 'kenji');
     await game.walkTo(-5.7, -2.45);
-    frame(game, 'vending', 3.5);
+    frame(game, 'vending');
   }
   async function ordinaryServe() {
     await gather();
@@ -69,7 +69,7 @@ export function mondayOffice(game, P, cast) {
   async function printLesson() {
     await game.hooks.walk({ who: 'mori', to: [-2.7, 4.0] });
     await game.walkTo(-2.1, 4.1);
-    frame(game, 'copier', 2.7);
+    frame(game, 'copier');
     await game.hooks.gesture({ who: 'mori', kind: 'point', to: 'copier' });
     sfx('tap');
     sfx('copier');
@@ -82,15 +82,15 @@ export function mondayOffice(game, P, cast) {
     if (state === 'aside') {
       await game.hooks.walk({ who: 'mio', to: [-5.4, -0.05] });
       await game.walkTo(-5.95, 0.15);
-      frame(game, 'mio', 2.2);
+      frame(game, 'mio');
       return;
     }
     if (state === 'private') {
       cast.hide('emi');
       door.visible = knob.visible = true;
-      frame(game, 'office_door', 1.9);
+      frame(game, 'office_door');
       await game.wait(600);
-      frame(game, 'kenji', 2);
+      frame(game, 'kenji');
       return;
     }
     if (state === 'phoneAway') {
@@ -101,7 +101,7 @@ export function mondayOffice(game, P, cast) {
       return;
     }
     if (state === 'clear') {
-      frame(game, 'mori', 2.2);
+      frame(game, 'mori');
       await game.hooks.gesture({ who: 'mori', kind: 'point', to: 'vending' });
       await moveProp(game, cup, [-6.68, 0.46, -1.3]);
       return;
@@ -118,7 +118,7 @@ export function mondayOffice(game, P, cast) {
       inHand(P, can, 'kenji', { side: -1 });
       await game.hooks.gesture({ who: 'kenji', kind: 'point', to: 'vending' });
       game.hooks.look({ who: 'mori', at: 'vending' });
-      frame(game, 'kenji', 2.3);
+      frame(game, 'kenji');
       return;
     }
     if (state === 'free') {
@@ -131,7 +131,7 @@ export function mondayOffice(game, P, cast) {
     throw new Error(`Unknown team drinks state: ${state}`);
   }
   async function day5Office({ state }) {
-    frame(game, 'mori', 2.4);
+    frame(game, 'mori');
     if (state === 'soup') {
       inHand(P, soup, 'mori');
       soup.rotation.z = 1.2;

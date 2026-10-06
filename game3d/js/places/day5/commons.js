@@ -56,17 +56,17 @@ export function mondayCommons(game, P) {
   };
   async function hook({ state }) {
     if (state === 'paper') {
-      frame(game, 'art_table', 2.8);
+      frame(game, 'art_table');
       paper.position.y = 0.6;
       await moveProp(game, paper, [table.x - 0.7, 0.42, table.z]);
     } else if (state === 'seat') {
-      frame(game, 'aoi', 2.4);
+      frame(game, 'aoi');
       await moveProp(game, bag, [-0.7, 0.14, -1.55]);
     } else if (state === 'sit') {
       await game.hooks.sit({ who: 'eric', at: 'd5_aoi_beside' });
       game.place.cam.release?.();
     } else if (state === 'sketch') {
-      frame(game, 'drying_rack', 3.2);
+      frame(game, 'drying_rack');
       const home = sketch.position.clone();
       await moveProp(game, sketch, [rack.x, rack.y + 0.1, rack.z + 0.2]);
       sketch.rotation.x = -0.5;

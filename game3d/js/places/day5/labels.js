@@ -35,9 +35,9 @@ export function labelRepair(game, P) {
       throw new Error('Reception verification requires Kuro');
     if (state === 'show') {
       restore();
-      frame(game, 'kuro', 2);
+      frame(game, 'kuro');
       await game.wait(400);
-      frame(game, 'label_printer', 3.2);
+      frame(game, 'label_printer');
     } else if (state === 'format') {
       selected.visible = true;
       sfx('tap');
@@ -50,7 +50,7 @@ export function labelRepair(game, P) {
     } else if (state === 'check') {
       inHand(P, wide, 'kuro');
       wide.rotation.set(-0.4, P.people.kuro.root.rotation.y, 0);
-      frame(game, 'kuro', 2.7);
+      frame(game, 'kuro');
       await game.wait(1000);
     } else throw new Error(`Unknown label repair state: ${state}`);
   }
