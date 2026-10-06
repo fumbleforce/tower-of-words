@@ -143,12 +143,12 @@
         }
       },
       "gym": {
-        "calls": 60,
-        "tris": 34573,
+        "calls": 59,
+        "tris": 34561,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1005-0813-abc9a3d7"
+          "build": "1006-0729-a6aa0d51"
         }
       },
       "dorm_commons": {
@@ -323,12 +323,12 @@
         }
       },
       "gym": {
-        "calls": 45,
-        "tris": 32897,
+        "calls": 44,
+        "tris": 32895,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1005-0813-abc9a3d7"
+          "build": "1006-0729-a6aa0d51"
         }
       },
       "dorm_commons": {

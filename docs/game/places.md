@@ -973,7 +973,6 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 Day 3: Rei serving on the west court in the afternoon. The office street is closed past the gym's corner by a barrier (places/closure.js); its marker moves to the barrier.
 
-None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
@@ -1058,7 +1057,7 @@ None.
 
 ### Who's there when
 
-Day 3: the attendant behind the reception counter at the terminal through the day (not in the evening); Mori at the counter checking his Tuesday booking in the afternoon; Emi at the hall's equipment store looking for the pool keys in the afternoon. The booking terminal and printer are ticket T-0004 (`bookingRepair`, game3d/js/places/day3/booking.js): the frozen screen, the red reset button under it, the sheet printed with the day's date, the attendant's check. On a later Saturday's first winter meeting (`day3Setup` state `winterClub`) Emi, Kuro and the attendant are by the hall's benches.
+Day 3: the attendant behind the reception counter at the terminal through the day (not in the evening); Mori at the counter checking his Tuesday booking in the afternoon; Emi at the hall's equipment store looking for the pool keys in the afternoon. The booking terminal and printer are ticket T-0004 (`bookingRepair`, game3d/js/places/day3/booking.js): the frozen screen, the red reset button under it, the sheet printed with the day's date, the attendant walks to the back counter to collect the sheet, carries it back to the terminal to read it, then lays it on the counter. On a later Saturday's first winter meeting (`day3Setup` state `winterClub`) Emi, Kuro and the attendant are by the hall's benches.
 
 None of the cast yet.
 

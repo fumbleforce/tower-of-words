@@ -11,6 +11,7 @@ import { flags } from '../../narrative/state.js';
 import { sim } from '../../sim.js';
 import { dateOf } from '../../bonds/model.js';
 import { sfx } from '../../sfx.js';
+import { walkRig, faceRig } from '../../move.js';
 import { rbox, textTexture } from '../../props.js';
 
 const panel = (w, h, draw, px = 256) => {
@@ -144,13 +145,21 @@ export function gymDesk(game, { w, cast }) {
       return;
     }
     if (state === 'check') {
-      // the attendant holds it up in front of her, reading down it, then lays it on the counter by the terminal
+      // Collect the sheet from the back counter before reading it at the terminal.
       const a = cast.people.attendant;
       const desk = [DESK[0], top + 0.012, DESK[1]];
       if (a) {
+        const home = [a.root.position.x, a.root.position.z],
+          facing = a.root.rotation.y;
+        await walkRig(game, a, w.spots.gym_printer);
+        await faceRig(game, a, [px, pz]);
         const yaw = a.root.rotation.y,
           p = a.root.position;
         put([p.x + Math.sin(yaw) * 0.32, top + 0.38, p.z + Math.cos(yaw) * 0.32], { flat: false, yaw });
+        a.root.attach(sheet);
+        await walkRig(game, a, home);
+        await faceRig(game, a, [home[0] + Math.sin(facing), home[1] + Math.cos(facing)]);
+        w.root.attach(sheet);
       } else put(desk);
       await game.wait(1200);
       put(desk);

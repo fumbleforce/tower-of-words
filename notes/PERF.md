@@ -656,3 +656,12 @@ budgets.json.
 2026-10-06, issue #261, `game3d/tools/map-travel-check.mjs`, q0 on the desktop GPU with a 390 × 844 touch viewport. Six hops through the map from room 203: plaza, sports, shop street, east coast, gate, pool. The JS heap after garbage collection grew from 22 MB to 60 MB; nine places were prepared at the end, with 396 geometries and 134 textures. The 1366 × 860 run ended at 63 MB, 486 geometries and 137 textures. This is a browser memory sample, not a measurement on a physical phone.
 
 The full map uses a 2D canvas and stops the covered game's rendering loop; the browser check verifies that the render frame counter stops. Closing the map clears its canvas allocation. Prepared places remain cached, as during walking; no eviction was added.
+
+### Sports centre lobby and hall (2026-10-06)
+
+The reception lobby, glass partition and changing block add geometry to the gym. Day 3 fast runs on
+1366×860 and 390×844, q0 on the GPU, measured 59 calls / 34,561 triangles on desktop and
+44 / 32,895 on phone (previous gym: 41 / 24,923 and 26 / 24,623). Median frame 16.7 ms and
+p99 16.8 ms at both sizes; this desktop GPU timing is not a phone hardware measurement.
+The gym baseline uses build 1006-0729-a6aa0d51 with the printout pickup correction applied.
+Artifacts: game3d/shots/gym-recovery-logs/ (fast logs and per-place performance reports).
