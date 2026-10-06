@@ -3,8 +3,6 @@ import { flagKeys } from '../narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/places/office.js');
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './saved-people.js';
-// Place 3, the office floor, as the engine side: things, spots, zones, the command effects and the arrival by lift.
-// Every word said here comes from game3d/story/office.js (placeholder: story/placeholder/office.js).
 import * as THREE from 'three';
 import { officeSteps, K, CN, CS, DOORWAYS, EMI } from '../scenes/office.js';
 import { sliced } from '../perf/slice.js';
@@ -910,6 +908,8 @@ export async function officePlace(game) {
       }
     },
     hooks: {
+      day5Office: (a) => P.monday.hooks.day5Office(a),
+      teamDrinks: (a) => P.monday.hooks.teamDrinks(a),
       copier: async ({ state }) => {
         st.copier = state;
         if (state === 'run') {

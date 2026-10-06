@@ -25,6 +25,7 @@ const { DAYS } = await imp('js/days.js');
 // day 2's new phrases (story/day2/words.js), until their clips exist and lang.js gives them a voice field
 const { WORDS: DAY2_WORDS } = await imp('story/day2/words.js');
 const { WORDS: DAY3_WORDS } = await imp('story/day3/words.js');
+const { KOTODAMA } = await imp('story/day5/index.js');
 const { WORDS: DAY4_WORDS } = await imp('story/day4/words.js');
 const jaRe = /[぀-ヿ一-龯]/;
 const resolve = (t) => t.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
@@ -39,6 +40,7 @@ export const storySets = () =>
     }),
   }))
     // the clubs' session nodes (story/clubs.js), played in their club's place from day 3 on (clubs/index.js withClubs)
+    .concat([{ day: 5, files: [{ name: 'kotodama-bridge', load: async () => ({ nodes: { bridge: structuredClone([KOTODAMA.first.requestLine, KOTODAMA.text.launchedMio]) } }) }] }])
     .concat([{ day: 3, files: [{ name: 'clubs', load: () => import(pathToFileURL(path.join(root, 'story/clubs.js')).href + '?' + Math.random()).then((m) => m.default) }] }]);
 
 // The lines one protagonist hears and says, keyed as for the default protagonist: { out: Map key -> entry, dayOfKey }

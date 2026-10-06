@@ -590,6 +590,7 @@
         "kuroda"
       ],
       "hooks": [
+        "labelRepair",
         "liftOpen",
         "liftClose",
         "gardenCat",
@@ -814,6 +815,10 @@
         "booth_screen": {
           "label": "Screen",
           "kind": "thing"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
         }
       },
       "spots": [
@@ -827,8 +832,12 @@
         "booth_seat_e"
       ],
       "zones": [],
-      "people": [],
-      "hooks": []
+      "people": [
+        "kenji"
+      ],
+      "hooks": [
+        "selectorRepair"
+      ]
     },
     "east_lane": {
       "things": {
@@ -944,6 +953,10 @@
         "tama": {
           "label": "Tama",
           "kind": "person"
+        },
+        "rei": {
+          "label": "Rei",
+          "kind": "person"
         }
       },
       "spots": [
@@ -969,7 +982,8 @@
         "emi",
         "aoi",
         "kuro",
-        "tama"
+        "tama",
+        "rei"
       ],
       "hooks": [
         "coastVisit"
@@ -1005,6 +1019,10 @@
         "mori": {
           "label": "Mr. Mori",
           "kind": "person"
+        },
+        "aoi": {
+          "label": "Aoi",
+          "kind": "person"
         }
       },
       "spots": [
@@ -1021,14 +1039,18 @@
         "commons_fridge"
       ],
       "seats": [
-        "commons_sofa"
+        "commons_sofa",
+        "d5_aoi_beside"
       ],
       "zones": [],
       "people": [
         "kenji",
-        "mori"
+        "mori",
+        "aoi"
       ],
-      "hooks": []
+      "hooks": [
+        "day5Commons"
+      ]
     },
     "sports": {
       "things": {
@@ -1848,6 +1870,8 @@
         "tama"
       ],
       "hooks": [
+        "day5Office",
+        "teamDrinks",
         "copier",
         "catTo",
         "chairRoll",

@@ -8,13 +8,14 @@ import day1 from '../test/routes/index.mjs';
 import day2 from '../test/routes/day2.mjs';
 import day3 from '../test/routes/day3.mjs';
 import day4 from '../test/routes/day4.mjs';
+import day5 from '../test/routes/day5.mjs';
 import { choiceInventory, runRoute } from '../test/routes/driver.mjs';
 import { mcArgs } from '../test/support/mc-args.mjs';
 
 // --day 2 (or 3): that day's routes and its own choice inventory (test/routes/day2.mjs, day3.mjs); day 1's otherwise
 const who = mcArgs(), argv = who.rest, dayAt = argv.indexOf('--day'), day = dayAt >= 0 ? +argv[dayAt + 1] : 1;
 const args = dayAt >= 0 ? argv.filter((_, i) => i !== dayAt && i !== dayAt + 1) : argv, worker = args[0] === '--worker';
-const routes = { 2: day2, 3: day3, 4: day4 }[day] || day1;
+const routes = { 2: day2, 3: day3, 4: day4, 5: day5 }[day] || day1;
 const names = new Set(routes.map(route => route.id));
 if (names.size !== routes.length) throw new Error('Duplicate route ID');
 if (args[0] === '--list') {

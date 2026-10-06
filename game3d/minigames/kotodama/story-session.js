@@ -30,6 +30,13 @@ export function configureStory(config) {
   };
   return {
     mode: config.mode,
+    voice(kind) {
+      const key = config.clips?.[kind];
+      if (!key || localStorage.getItem('mg-muted') === '1') return;
+      const clip = new Audio(new URL(`../../audio/${key}.mp3`, import.meta.url).href);
+      clip.volume = 0.9;
+      clip.play().catch(() => {});
+    },
     guide: contract.first.guide.map(s => ({ text: s.text, taps: [s.tap === 'dashite' ? ['fire'] : ['ni', 'o'].includes(s.tap) ? ['p', s.tap] : ['thing', s.tap]] })),
     delivered(result) {
       const served = result.deliveries.filter(d => d.kind === 'serve' && contract.people.includes(d.to));

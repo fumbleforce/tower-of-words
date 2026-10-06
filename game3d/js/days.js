@@ -6,6 +6,7 @@
 import { STORIES as DAY2_STORIES } from '../story/day2/index.js';
 import { STORIES as DAY3_STORIES } from '../story/day3/index.js';
 import { STORIES as DAY4_STORIES } from '../story/day4/index.js';
+import { STORIES as DAY5_STORIES } from '../story/day5/index.js';
 
 export const DAYS = {
   1: { dir: '', start: 'train', period: 'early' },
@@ -28,6 +29,7 @@ export const DAYS = {
     period: 'morning',
     files: Object.keys(DAY4_STORIES),
   },
+  5: { dir: 'day5/', start: 'dorms', period: 'morning', files: Object.keys(DAY5_STORIES) },
 };
 export const LAST_DAY = 4; // the last day a player plays on into; ?day=N starts any day in DAYS
 export const dayOf = (n) => DAYS[n] || DAYS[1];
@@ -58,7 +60,11 @@ export function sampleDayEnd(day, history = 'mio') {
   const h = String(history || 'mio').split(',');
   const one = sampleDayOneEnd(h.find((x) => ['mio', 'mori', 'cold'].includes(x)) || 'mio');
   const two = sampleDayTwoEnd(one, h.includes('keep') ? 'keep' : 'order');
-  return day <= 2 ? one : day === 3 ? two : { ...two, day: 3, flags: { ...two.flags, d3_complete: true } };
+  return day <= 2
+    ? one
+    : day === 3
+      ? two
+      : { ...two, day: day - 1, flags: { ...two.flags, d3_complete: true, ...(day > 4 ? { d4_complete: true } : {}) } };
 }
 // a plain finished day 2 on top of a finished day 1: the door report sent, the brief, the shift and the party done
 function sampleDayTwoEnd(one, report) {

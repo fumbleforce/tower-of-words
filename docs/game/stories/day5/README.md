@@ -1,6 +1,6 @@
 # Day 5
 
-Monday 5 October. Story authored; physical integration, voices and rendered playthroughs remain to build. The [story set](../../../../game3d/story/day5/index.js) includes weekday routine, two requests and a voluntary B2 demonstration. The [build contract](../../../../game3d/story/day5/README.md#build-contract-for-claude) and [Kotodama adapter data](../../../../game3d/story/day5/kotodama.js) specify the bridge. These files do not enable day 5.
+Monday 5 October. The story and physical implementation are registered; voice production and full rendered acceptance remain in progress. The [story set](../../../../game3d/story/day5/index.js) includes weekday routine, two requests and a voluntary B2 demonstration. The [build contract](../../../../game3d/story/day5/README.md#build-contract-for-claude) and [Kotodama adapter data](../../../../game3d/story/day5/kotodama.js) specify the bridge. The normal progression endpoint remains gated until those checks pass.
 
 ## Cast
 
@@ -40,4 +40,4 @@ No new word record. If unknown, `dashite` is taught through a separate typed pri
 | `day5/dorm_commons.js` | Art setup, Aoi's seat and the shelf sketch, without an album addition. |
 | Other files in `day5/` | Routes, deferred requests and optional place conversations. |
 
-The player can skip every job and demonstration and still Sleep. Exiting Kotodama keeps the same B2 evening and changes no world wallet, ticket, bond or period. The [optional packs](../early-optional/README.md) remain independent of the reveal. The Monday modules in `game3d/js/places/day5/` supply the schedule, label and selector repairs, B2 gathering, printer practice, common-room actions and the embedded Kotodama callback. The embedded session retains only its delivery result when returning to the live world; its score and hearts do not write world resources. Shared day registration, voices and rendered validation remain integration gates.
+The player can skip every job and demonstration and still Sleep. Exiting Kotodama keeps the same B2 evening and changes no world wallet, ticket, bond or period. The [optional packs](../early-optional/README.md) remain independent of the reveal. The Monday modules in `game3d/js/places/day5/` supply the schedule, label and selector repairs, B2 gathering, printer practice, common-room actions and the embedded Kotodama callback. The embedded session retains only its delivery result when returning to the live world; its score and hearts do not write world resources. Monday is registered for direct testing. Continue restores its physical props and selector motion; voices and rendered validation remain acceptance gates.

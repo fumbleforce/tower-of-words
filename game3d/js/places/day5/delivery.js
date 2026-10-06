@@ -2,6 +2,7 @@ import { KOTODAMA } from '../../../story/day5/index.js';
 import { flags } from '../../narrative/state.js';
 import { save } from '../../sim.js';
 import { expandText } from '../../mc.js';
+import { lineClip } from '../../narrative/voice-keys.js';
 import { eventId } from '../../narrative/events.js';
 import { deliveryReturn } from './delivery-state.js';
 
@@ -45,6 +46,10 @@ export async function delivery(game, mode) {
               session,
               contract: KOTODAMA,
               launchedMio: expandText(KOTODAMA.text.launchedMio.text),
+              clips: {
+                request: lineClip('kenji', KOTODAMA.first.requestLine.text, true),
+                launchedMio: lineClip('mio', expandText(KOTODAMA.text.launchedMio.text)),
+              },
             },
           },
           location.origin,

@@ -9,6 +9,7 @@ import office from '../../story/office.js';
 import { STORIES as day2 } from '../../story/day2/index.js';
 import { STORIES as day3 } from '../../story/day3/index.js';
 import { STORIES as day4 } from '../../story/day4/index.js';
+import { STORIES as day5 } from '../../story/day5/index.js';
 import CLUBS from '../../story/clubs.js';
 export const stories = { train, gate, office };
 // day 3's set with the swimming club's pool session in the pool's story, as the game plays it (clubs/index.js
@@ -16,8 +17,8 @@ export const stories = { train, gate, office };
 const clubNodes = Object.fromEntries(Object.entries(CLUBS.nodes).filter(([id]) => !/winter/.test(id)));
 const day3Played = { ...day3, pool: { ...day3.pool, nodes: { ...clubNodes, ...day3.pool.nodes } } };
 // each day's story set; a seed with day: 2 checkpoints into day 2's (story/day2/), day: 3 into day 3's
-const days = { 1: stories, 2: day2, 3: day3Played, 4: day4 };
-const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three', 4: 'Day four' };
+const days = { 1: stories, 2: day2, 3: day3Played, 4: day4, 5: day5 };
+const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three', 4: 'Day four', 5: 'Day five' };
 
 export function choiceInventory(day = 1) {
   const found = [];
@@ -47,7 +48,7 @@ function seedSave(seed, who = {}) {
 }
 
 async function installDriver(page, route, resume = false, made = 0) {
-  await page.evaluate(async ({ choices, pauseAt, resume }) => {
+  await page.evaluate(async ({ choices, pauseAt, resume, delivery }) => {
     const g = window.__game;
     const { ui, setMuted } = await import(new URL('js/ui.js', location.href));
     const { cond } = await import(new URL('js/narrative/state.js', location.href));
@@ -94,6 +95,11 @@ async function installDriver(page, route, resume = false, made = 0) {
     // The ticket app (ui/tickets-view.js) waits for the player: close it with its own × control, taking nothing.
     state.timer = setInterval(() => {
       g.setHurry(true);
+      const embedded = document.querySelector('iframe[title="Kotodama at B2"]')?.contentDocument;
+      if (embedded && delivery) {
+        const button = embedded.querySelector(delivery === 'first' ? '.hint-glow' : '.story-leave');
+        if (button && !button.disabled) button.click();
+      }
       const app = document.getElementById('ticketsApp');
       if (app && !app.hidden) {
         state.ticketApps = (state.ticketApps || 0) + 1;
@@ -106,7 +112,7 @@ async function installDriver(page, route, resume = false, made = 0) {
         board.click();
       }
     }, 30);
-  }, { choices: (route.choices || []).slice(made), pauseAt: route.resumeAt, resume }); // (made: picked before a reload)
+  }, { choices: (route.choices || []).slice(made), pauseAt: route.resumeAt, resume, delivery: route.delivery }); // (made: picked before a reload)
 }
 
 async function continueSave(page) {

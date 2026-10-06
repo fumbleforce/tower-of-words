@@ -9,6 +9,7 @@ import { dayCast } from '../day-cast.js';
 import { applyPlan, isDay3 } from './index.js';
 import { PLANS } from './plan.js';
 import { placeSigns } from './signs.js';
+import { PLANS as MONDAY } from '../day5/plan.js';
 import { PLANS as SUNDAY } from '../day4/plan.js';
 import { sim } from '../../sim.js';
 import { isSunday } from '../day4/calendar.js';
@@ -21,12 +22,12 @@ export function day3Place(game, name, { root, K = 1, ids = [] } = {}) {
     people: cast.people,
     thing: cast.thing,
     async setup(P, a = {}) {
-      const plan = (isSunday() ? SUNDAY : PLANS)[name] || {};
+      const plan = (sim.day === 5 ? MONDAY : isSunday() ? SUNDAY : PLANS)[name] || {};
       for (const id of Object.keys(plan)) if (!cast.people[id] && P.people[id]) cast.adopt(id, P.people[id]);
       applyPlan(cast, P, plan);
       if (sim.day === 3) placeSigns(P, name);
       for (const f of extra) await f(a);
-      if (isSunday()) applyPlan(cast, P, plan);
+      if (sim.day === 5 || isSunday()) applyPlan(cast, P, plan);
     },
     also(f) {
       extra.push(f);

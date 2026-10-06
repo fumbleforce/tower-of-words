@@ -59,3 +59,30 @@ test('guided scene creates only one request and emits success only after deliver
     delete globalThis.parent; delete globalThis.location;
   }
 });
+
+test('rounds report the actual last fulfilled request, preserving it after a wrong delivery', () => {
+  const shifts = structuredClone(SHIFTS), messages = [];
+  globalThis.parent = { postMessage: message => messages.push(message) };
+  globalThis.location = { origin: 'http://localhost' };
+  try {
+    for (const who of ['kenji', 'mori', 'mio']) {
+      SHIFTS.splice(0, SHIFTS.length, ...structuredClone(shifts));
+      const session = configureStory({ mode: 'rounds', contract: KOTODAMA, session: who, launchedMio: 'Carina, please put me down.' });
+      const run = newRun(1);
+      run.shift = who === 'mori' ? 0 : -1;
+      startShift(run);
+      if (who === 'mio') session.delivered(resolve(run, { machine: 'vend', what: ['melon'], to: ['kenji'] }, true));
+      const item = run.tickets[who]?.item;
+      assert.ok(item, `${who} has an actual pending request`);
+      const result = resolve(run, { machine: 'vend', what: [item], to: [who] }, true);
+      assert.equal(session.delivered(result), false);
+      session.delivered(resolve(run, { machine: 'vend', what: ['milk'], to: ['kenji'] }, true));
+      session.leave();
+      assert.equal(messages.at(-1).lastRecipient, who);
+      assert.equal(messages.at(-1).event, 'kotodama_exit');
+    }
+  } finally {
+    SHIFTS.splice(0, SHIFTS.length, ...shifts);
+    delete globalThis.parent; delete globalThis.location;
+  }
+});

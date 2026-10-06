@@ -17,7 +17,7 @@ export function commonsPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const d = w.door,
     save = roomSave(game, w.nav, d.in, cam);
-  const d3 = day3Place(game, 'dorm_commons', { root: w.root, K, ids: ['kenji', 'mori'] }); // day 3's evening: the TV
+  const d3 = day3Place(game, 'dorm_commons', { root: w.root, K, ids: ['kenji', 'mori', 'aoi'] }); // day 3's evening: the TV
   const things = {
     commons_door: {
       ...PLACE_DETAILS.dorm_commons.things.commons_door,
@@ -52,6 +52,7 @@ export function commonsPlace(game) {
     },
     kenji: { ...PLACE_DETAILS.dorm_commons.things.kenji, ...d3.thing('kenji') },
     mori: { ...PLACE_DETAILS.dorm_commons.things.mori, ...d3.thing('mori') },
+    aoi: { ...PLACE_DETAILS.dorm_commons.things.aoi, ...d3.thing('aoi') },
   };
   const P = {
     scene: w.scene,
@@ -74,10 +75,10 @@ export function commonsPlace(game) {
       commons_books: w.spots.commons_books,
       commons_fridge: w.spots.commons_fridge,
     },
-    seats: { commons_sofa: w.seats[0] },
-    people: { kenji: d3.people.kenji, mori: d3.people.mori },
+    seats: { commons_sofa: w.seats[0], d5_aoi_beside: { x: 0.5, z: -1.75, top: 0.25, ry: Math.PI, out: [0.5, -1.1] } },
+    people: { kenji: d3.people.kenji, mori: d3.people.mori, aoi: d3.people.aoi },
     zones: {},
-    hooks: {},
+    hooks: { day5Commons: (a) => P.monday.hooks.day5Commons(a) },
     day3: (a) => d3.setup(P, a),
     fit(aspect) {
       roomView(cam, w.bounds, aspect);

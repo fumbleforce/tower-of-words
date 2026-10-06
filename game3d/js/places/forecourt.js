@@ -205,6 +205,7 @@ export async function forecourtPlace(game) {
     },
     day3: (a) => d4.setup(P, a),
     hooks: {
+      labelRepair: (a) => P.monday.hooks.labelRepair(a),
       liftOpen: () => w.setLiftOpen(1),
       liftClose: () => w.setLiftOpen(0),
       gardenCat: garden.hooks.gardenCat,

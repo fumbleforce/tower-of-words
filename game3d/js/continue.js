@@ -22,6 +22,10 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
       await game.hooks.day4Setup();
       game.place.restoreState?.(saved);
     }
+    if (sim.day === 5) {
+      await game.hooks.day5Setup();
+      game.place.restoreState?.(saved);
+    }
     ui.refreshWords();
     ui.refreshPeople(sim.met.size);
     ui.refreshBag(sim);
