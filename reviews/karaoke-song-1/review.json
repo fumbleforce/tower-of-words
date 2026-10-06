@@ -1,0 +1,29 @@
+{
+  "title": "Karaoke song: Call on the way home",
+  "date": "2026-10-07",
+  "by": "Codex · karaoke song",
+  "status": "open",
+  "multi": false,
+  "question": "Does either singing voice and musical style fit Hamada’s karaoke scene?",
+  "media": [],
+  "options": [
+    {
+      "id": "a",
+      "label": "A · warm baritone direction",
+      "audio": "art/parts/karaoke-song-1/a-full.mp3",
+      "note": "Full 52.44-second take. Requested restrained adult folk-pop; the audible register/timbre awaits your judgment. Automated transcription differs on the first line and twice misses the final ようか: possible incomplete sung ending. Not ready to install."
+    },
+    {
+      "id": "b",
+      "label": "B · unforced tenor direction",
+      "audio": "art/parts/karaoke-song-1/b-full.mp3",
+      "note": "Full 54.20-second take. Requested unforced adult acoustic-pop. The isolated chorus recognizes rain and the complete ending, but two passes hear 明日の instead of intended 明日も. Listening, lyric and singing-voice approval remain pending."
+    }
+  ],
+  "links": [
+    {
+      "label": "Original lyrics, translation and full generation / QA record",
+      "href": "reviews/karaoke-song-1/details.html"
+    }
+  ]
+}
