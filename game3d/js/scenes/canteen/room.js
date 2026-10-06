@@ -11,7 +11,12 @@ export function buildCanteen() {
   scene.background = new THREE.Color('#29353a');
   scene.add(root);
   const nav = roomNav(R);
-  shell(root, R, { holes: { s: [[DOOR.x - 0.8, DOOR.x + 0.8, 0, R.near]] }, color: '#e1dbcb', top: '#9d9b8f' });
+  shell(root, R, {
+    entryDoor: true,
+    holes: { s: [[DOOR.x - 0.8, DOOR.x + 0.8, 0, R.near]] },
+    color: '#e1dbcb',
+    top: '#9d9b8f',
+  });
   kit.box('#d5c9af', R.x1 - R.x0, 0.12, -R.z0, 0, -0.12, R.z0 / 2, { surf: 'stone', cast: false });
   // Durable square floor tiles, a teal service strip and a recessed entry mat.
   for (let x = R.x0 + 0.75; x < R.x1; x += 0.75)

@@ -9,7 +9,7 @@ export function buildIzakaya() {
     k = new Kit();
   scene.background = new THREE.Color('#293138');
   scene.add(root);
-  shell(root, R, { holes: { s: [[-0.65, 0.65, 0, R.near]] }, color: '#d8cbbb', top: '#786d61' });
+  shell(root, R, { entryDoor: true, holes: { s: [[-0.65, 0.65, 0, R.near]] }, color: '#d8cbbb', top: '#786d61' });
   plankFloor(k, R, { color: '#92745e', seam: '#78604f', w: 0.28 });
   // Shoe-on dining room: a tiled threshold and mat, with coats and umbrellas beside the entrance.
   k.box('#748082', 1.3, 0.012, 0.79, 0, 0, -0.39, { surf: 'stone' });

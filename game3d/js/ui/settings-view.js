@@ -83,6 +83,15 @@ const SECTIONS = [
     'controls',
     'Controls',
     [
+      seg(
+        'cameraMode',
+        'Desktop camera',
+        [
+          ['overview', 'Overview'],
+          ['follow', 'Third person'],
+        ],
+        'Third person: click Mouse look, then move the mouse to look. WASD moves, Shift runs, E interacts. Esc releases the mouse. Story scenes use their own camera.',
+      ),
       { kind: 'key', key: 'keySay', label: 'Say key', help: SAY_HELP },
       seg('uiSize', 'Interface size', [
         [0.85, 'Small'],

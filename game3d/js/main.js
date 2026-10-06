@@ -11,7 +11,7 @@ import { createRenderer, Markers, Q, blob } from './engine.js';
 import { installMetrics } from './perf/metrics.js';
 import { createView } from './perf/view.js';
 import { guardedLoop } from './perf/gl-guard.js';
-import { pickPerson, softSeparate } from './move.js';
+import { softSeparate } from './move.js';
 import { scanTargets } from './gameplay/targeting.js';
 import { installSteer } from './movement/steer.js';
 import * as ambience from './ambience.js';
@@ -55,6 +55,8 @@ import { installSim, sim, stepAmbient, save, loadSave, clearSave } from './sim.j
 import { createContinue, dayStartSave } from './continue.js';
 import { installViewer } from './plugins.js';
 import { installHud } from './ui/hud.js';
+import { installFollowCamera } from './camera/index.js';
+import { installPointerInput } from './gameplay/pointer-input.js';
 
 const CAP = Q.has('cap');
 const TEST = Q.get('test') === 'fast';
@@ -357,57 +359,9 @@ game.overrideMaterials = () => [view.post?.gtao, view.outline].flatMap(overrides
 const { buildMarkers, use, standUp, held, holdNudge, say } = installInteractions(game);
 
 // ---------- input ----------
-const raycaster = new THREE.Raycaster();
+const followCamera = installFollowCamera(game, canvas);
 const steer = installSteer(game, canvas); // hold on the floor to steer (movement/steer.js)
-function ndc(e) {
-  const r = canvas.getBoundingClientRect();
-  return new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
-}
-canvas.addEventListener('pointerdown', (e) => {
-  unlockAudio();
-  if (game.busy || !game.place) return;
-  // what the cursor is visibly on first (the model itself), then the looser person and marker picks around it
-  raycaster.setFromCamera(ndc(e), game.place.camera);
-  const hitM = modelAt(raycaster);
-  if (hitM) {
-    use(hitM);
-    return;
-  }
-  const who = pickPerson(game, e.clientX, e.clientY, canvas);
-  if (who) {
-    use(who);
-    return;
-  }
-  const [w, h] = [canvas.clientWidth, canvas.clientHeight];
-  let best = null,
-    bd = 44;
-  const v = new THREE.Vector3();
-  for (const m of game.markers.list) {
-    if (!m.enabled()) continue;
-    for (const a of [m.anchor(v.clone()), m.body ? m.body(v.clone()) : null]) {
-      if (!a) continue;
-      a.project(game.place.camera);
-      const d = Math.hypot(((a.x + 1) / 2) * w - e.clientX, ((1 - a.y) / 2) * h - e.clientY);
-      if (d < bd) {
-        bd = d;
-        best = m;
-      }
-    }
-  }
-  if (best) {
-    use(best);
-    return;
-  }
-  raycaster.setFromCamera(ndc(e), game.place.camera);
-  const p = game.place.pick(raycaster);
-  if (held()) {
-    holdNudge();
-    return;
-  }
-  if (p) standUp();
-  game.walker.tapRay(raycaster, game.place);
-  steer.press(e);
-});
+installPointerInput(game, canvas, { use, standUp, held, holdNudge, steer, modelAt });
 document.getElementById('marks').addEventListener('click', (e) => {
   const b = e.target.closest('.mark');
   if (!b) return;
@@ -470,6 +424,7 @@ if (CAP)
   };
 const frame = guardedLoop(tick); // an error in one frame never stops the loop (perf/gl-guard.js)
 function tick() {
+  followCamera.refresh();
   const now = performance.now();
   if (game.mapOpen) return void (lastT = now); // the map covers the screen: nothing drawn (ui/map/view.js)
   if (game.paused) {
@@ -482,18 +437,19 @@ function tick() {
   if (!CAP || window.__run)
     while (dt > 1e-4) {
       const s = Math.min(0.05, dt);
-      step(s);
+      step(s, dt - s <= 1e-4);
       dt -= s;
     }
   render();
   frames++;
   if (frames > 3 && game.place) window.__done = true;
 }
-function step(dt) {
+function step(dt, drawn) {
   game.t += dt;
   const place = game.place;
   if (!place) return;
   const mio = game.player;
+  followCamera.beforeStep();
   let moving = false;
   if (held() && game.walker.keys.size) {
     game.walker.keys.clear();
@@ -512,6 +468,7 @@ function step(dt) {
   game.stepRigLayers(dt); // looks and cues over the idles (rig-gestures.js)
   softSeparate(game, dt); // people overlapping are pushed apart gently (move.js, soft collision)
   place.cam?.update?.(dt, mio.root.position);
+  followCamera.afterStep(drawn);
   if (!game.saveEnabled) return;
   // nearest usable thing, the Say target and near: triggers (gameplay/targeting.js); then the zones
   let { near, st } = scanTargets(game, nearSet);
