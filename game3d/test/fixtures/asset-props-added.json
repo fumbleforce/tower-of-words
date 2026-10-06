@@ -1542,6 +1542,52 @@
     ]
   },
   {
+    "id_": "prop/izakaya/izakaya_exit",
+    "kind": "prop",
+    "name": "To the shop street",
+    "paths": [
+      "game3d/js/places/izakaya.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "izakaya.js things.izakaya_exit",
+    "place": "izakaya",
+    "used": [
+      "Izakaya: tap target 'To the shop street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "izakaya"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/izakaya/party_seat",
+    "kind": "prop",
+    "name": "Your place at the table",
+    "paths": [
+      "game3d/js/places/izakaya.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "izakaya.js things.party_seat",
+    "place": "izakaya",
+    "used": [
+      "Izakaya: tap target 'Your place at the table'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "izakaya"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/karaoke_booth/booth_door",
     "kind": "prop",
     "name": "Downstairs",

@@ -117,7 +117,8 @@
       "office_quarter": "game3d/js/places/office-quarter.js",
       "harbour": "game3d/js/places/harbour.js",
       "works": "game3d/js/places/works.js",
-      "canteen": "game3d/js/places/canteen.js"
+      "canteen": "game3d/js/places/canteen.js",
+      "izakaya": "game3d/js/places/izakaya.js"
     },
     "events": {
       "train": {
@@ -145,7 +146,8 @@
       "office": {
         "sat_down": "sitDown"
       },
-      "canteen": {}
+      "canteen": {},
+      "izakaya": {}
     },
     "speakers": {
       "eric": {
@@ -270,6 +272,7 @@
     "dorm_court",
     "dorms",
     "shotengai",
+    "izakaya",
     "karaoke",
     "karaoke_booth",
     "east_lane",
@@ -508,6 +511,8 @@
     "shotengai:to_plaza",
     "shotengai:to_karaoke",
     "shotengai:to_dorms",
+    "izakaya:arrive",
+    "izakaya:leave",
     "karaoke:arrive",
     "karaoke:to_street",
     "karaoke:to_booth",
@@ -1348,6 +1353,12 @@
     {
       "from": "shotengai:to_dorms",
       "to": "dorm_court:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "izakaya:leave",
+      "to": "shotengai:arrive",
       "kind": "trip",
       "labels": []
     },

@@ -31,7 +31,7 @@ export async function shotengaiPlace(game) {
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
   // the way a door faces: from it out to the step in front of it
   const outOf = (id) => Math.atan2(dk(id).step[0] - dk(id).local[0], dk(id).step[1] - dk(id).local[1]);
-  const party = shotengaiParty(game, { w, K }); // day 2's gathering on the promenade (shotengai-party.js)
+  const party = shotengaiParty(game, { w, K }); // Kenji waits at the izakaya door.
   const d3 = day3Place(game, 'shotengai', { root: w.root, K, ids: ['kuroda', 'aoi', 'kuro', 'rei'] }); // day 3's shoppers
   const things = {
     plaza_lane: {
@@ -196,10 +196,12 @@ export async function shotengaiPlace(game) {
     // the karaoke box: in at its door off the arcade, and back out of it onto the arcade
     tripInFrom: {
       forecourt: (g) => walkIn(g, cam, southLink.edge, southLink.inside, -Math.PI / 2),
+      izakaya: (g) => walkIn(g, cam, dk('izakaya').local, dk('izakaya').step, outOf('izakaya')),
       karaoke: (g) => walkIn(g, cam, dk('karaoke').local, dk('karaoke').step, outOf('karaoke')),
     },
     tripOutTo: {
       forecourt: (g) => walkOut(g, cam, southLink.lane, southLink.edge),
+      izakaya: (g) => walkOut(g, cam, dk('izakaya').step, dk('izakaya').local),
       karaoke: (g) => walkOut(g, cam, dk('karaoke').step, dk('karaoke').local),
     },
   };

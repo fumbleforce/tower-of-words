@@ -1,0 +1,25 @@
+export const IZAKAYA_DETAILS = {
+  things: {
+    izakaya_exit: { label: 'To the shop street', kind: 'thing', verb: 'Go' },
+    party_seat: { label: 'Your place at the table', kind: 'thing', verb: 'Sit' },
+    mori: { label: 'Mr. Mori', kind: 'person' },
+    mio: { label: 'Mio', kind: 'person' },
+    kenji: { label: 'Kenji', kind: 'person' },
+    emi: { label: 'Emi', kind: 'person' },
+  },
+  spots: [
+    'izakaya_in',
+    'party_group',
+    'party_food',
+    'party_mori',
+    'party_mio',
+    'party_kenji',
+    'party_emi',
+    'service_counter',
+  ],
+  nooks: [],
+  seats: ['party_seat', 'party_mori', 'party_mio', 'party_kenji', 'party_emi'],
+  zones: ['izakaya_exit'],
+  people: ['mori', 'mio', 'kenji', 'emi'],
+  hooks: ['partySetup', 'partyFood'],
+};

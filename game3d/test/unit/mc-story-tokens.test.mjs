@@ -55,7 +55,7 @@ test('newly personalized lines have Carina keys and retain their original NPC sp
     'ln-yzzqmx-carina': 'mio', 'ln-2o5x1j-carina': 'kenji',
     'ln-754za5-carina': 'emi', 'ln-bv1y2f-carina': 'mio',
     'ln-r98ztf-carina': 'kenji', 'ln-1i72sjc-carina': 'kenji',
-    'ln-1b693d1-carina': 'mori', 'ln-p60qe1-carina': 'kenji',
+    'oh-18g7z40-carina': 'mori', 'ln-p60qe1-carina': 'kenji',
   };
   for (const [key, speaker] of Object.entries(expected)) {
     const entry = carina.find(line => line.key === key);

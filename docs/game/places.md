@@ -103,6 +103,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `dorm_court` | 79.84 | -1.3 | 90 | 1 | 0 | The open entrance court on the west side of the dorm blocks; its camera looks east at Eric's block. |
 | `dorms` | 85.49 | -1.79 | 90 | 1 | 1 | Eric's flat on 2F of his block, above the passage; its window faces the next block's west end, 1.2 out. The corridor runs to the stairs in the block's return. |
 | `shotengai` | 64.5 | 20.15 | 270 | 1 | 0 | The middle of the arcade's east mouth, between the two shop rows; its camera looks west down the arcade. |
+| `izakaya` | 68.6 | 17.9 | 0 | 1 | 0 | The existing izakaya ground floor, with its south-facing door on the shop walk. |
 | `karaoke` | 62.25 | 22.4 | 180 | 1 | 0 | The karaoke box's glass door off the arcade (south row, bay 14), inside. An interior, looked into from the door's side over its cut-down front wall. |
 | `karaoke_booth` | 59.4 | 24.6 | 180 | 1 | 1 | One booth upstairs over the front desk, its door from the corridor at the top of the stairs. An interior, looked into over its cut-down front wall. |
 | `east_lane` | 69.27 | -2.75 | 0 | 1 | 0 | The middle of the pocket park's gravel square, where its two walks cross. Its camera turns: north-east over most of it, south-east over the south walk. |
@@ -139,6 +140,7 @@ The game's map and the minimap (controls-and-ui.md, The map) show each outdoor p
 | `dorm_court` | 79.84 | -1.3 | |
 | `dorms` | | | `dorm_court` |
 | `shotengai` | 30.3 | 20.1 | |
+| `izakaya` | | | `shotengai` |
 | `karaoke` | | | `shotengai` |
 | `karaoke_booth` | | | `karaoke` |
 | `east_lane` | 67.5 | -6.5 | |
@@ -501,13 +503,11 @@ The shops with a name have a sign board over their bays on the front, the kana l
 
 Three alleys, one bay wide and five bays apart, cut through the south row between planted beds, from the arcade to the promenade. A walk runs down the rows' west end past the arcade's west mouth to the promenade (its north half, on to the footpath behind the rows, isn't walked); at the east end a walk turns down from the shop walk past a planted bed with a zelkova to the promenade. The promenade runs behind the south row in pale slabs, with a dark course on every bay line and a darker band along the sea wall where lamps, back-to-back benches and bins stand, from the foot of the walk south of the station (not walked) to a lookout with a rail over the rocks. On each alley's axis a band of darker stone crosses it to a flight of stairs down the wall to a sand beach; each flight's head is chained off between two posts, so the beach is seen and not walked: shrubs and rocks at the wall's foot, three beach huts by its west return, a few striped umbrellas, boulders in groups at the water's edge, wet sand and foam along the shore. East of the beach the wall stands in the sea on armour rocks, as west of the station, with three black pines behind it. The plaza and the forecourt draw the same street, from its backs, as backdrop and on the island map.
 
-In the morning the sun comes from the east-south-east behind the camera's left shoulder; after work it is low in the west, ahead down the street, and the shopfronts' glass, the signs, the lanterns with pools of light under them, the promenade's lamps and the izakaya's door light are lit. The shops stay shut, except the karaoke box, whose door opens onto its front desk (`karaoke`, below; on day 2 it is shut with the others). It also loads directly with `?place=shotengai`, at the shop walk. Nobody is here yet.
+In the morning the sun comes from the east-south-east behind the camera's left shoulder; after work it is low in the west, ahead down the street, and the shopfronts' glass, the signs, the lanterns with pools of light under them, the promenade's lamps and the izakaya's door light are lit. The karaoke door opens onto its front desk (`karaoke`, below; shut on day 2), and the izakaya door opens for the department's day-2 welcome dinner. Other shops stay shut. It also loads directly with `?place=shotengai`, at the shop walk. Nobody is here yet.
 
 ### Day-2 party plan
 
-The [day-2 story](stories/day2/README.md) places B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. No arcade shop opens and Eric does no shopping. The pair of back-to-back benches at the foot of the east walk is theirs: Eric and Mori sit on the sea-facing one (Eric at its near end), Mio stands at its near end and Kenji at its far end, all in one conversation. The canteen's takeaway is a navy tray on the bench between the two seats, wrapped in a red cloth until it's opened, with three rice balls and three egg sandwiches on it; Mio's jar of pickles stands at her feet and a bag of drinks and two stacked takeaway boxes at Mori's. What Eric is given (his rice ball or sandwich, more food, a can) is laid by his seat; each change gets a close look at the food and back. Every shot of the group turns the camera to look in from over the sea wall, so the four stand side by side across a phone's screen; letting go turns it back down the street. Mio can be passed the sandwiches, which she holds on a plate. At the goodbye Kenji first gathers the boxes and the bag, then he and Mio walk off up the east walk; the tray goes with Mori to the back alley, where he packs what's left into the takeaway boxes (lifting the tray off and away) and can hand Eric one more rice ball, which he eats there. The [story handoff](../../game3d/story/day2/README.md) specifies this set’s closure cards, exit label and small discovery props. All of it is set from the story's flags (the `partySetup` and `partyFood` hooks), so a trip away or a Continue puts it back.
-
-The west passage is open north to head office through the bicycle parking (#290), as well as south to the promenade.
+The welcome dinner is inside the izakaya, reached through its existing door off the shop walk. Kenji waits beside that door until the protagonist meets him. The promenade remains ordinary public seating; it has no dinner or party marker. Inside, the protagonist, Mori, Mio, Kenji and Emi occupy five actual chairs around one table, facing inward. Each setting has rice, a plate and a cup; shared platters hold yakitori and grilled vegetables, with pickles. The player walks from the entry to the chair before sitting. Dining actions use real wrist reaches. Mio and Kenji leave through the entrance at the goodbye; Mori and Emi stay at the table for the closing conversation. Saves keep the seated player, department positions and food progress.
 
 ### Things
 
@@ -520,7 +520,7 @@ The west passage is open north to head office through the bicycle parking (#290)
 | `bakery` | Bakery | The bakery's door. Go in: shut. |
 | `game_centre` | Game centre | The game centre's door. Go in: shut. |
 | `karaoke` | Karaoke | The karaoke box's door. Go in: into its front desk (`karaoke`). |
-| `izakaya` | Izakaya | The izakaya's door on the shop walk. Go in: shut. |
+| `izakaya` | Izakaya | The door on the shop walk. On day 2 after the shift, enter the real dining room. |
 | `mori` | Mr. Mori | Day 2, after work. |
 | `kenji` | Kenji | Day 2, after work. |
 | `party_seat` | Bench | Day 2: Eric's end of the party bench (the story labels it "Join the others" until he has eaten). Sit. |
@@ -541,7 +541,7 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Seats
 
-`party_seat` and `party_mori` (day 2: the sea-facing bench of the pair at the foot of the east walk, Eric's near end and Mori's far end; each is got onto from the floor beside its end of the bench)
+`party_seat` and `party_mori` remain only for old checkpoint compatibility. Their outdoor interaction is disabled; actual dinner chairs belong to `izakaya`.
 
 ### Zones
 
@@ -551,13 +551,13 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 Day 3: Mori shopping by the konbini in the morning; at lunch Kenji with his curry bread and Hamada making up his mind at the bakery, Aoi at the bike shop's window, Kuro and Rei at the izakaya's lunch counter; Kenji watching the game centre in the afternoon. Day 2's party is not here.
 
-Day 1: none of the cast. Day 2, before the shift ends, none of the party cast is here either. After work Kenji waits by the izakaya's blue curtain; Mori sits on the party bench and Mio stands at its near end. Kenji walks ahead to the bench's far end when Eric meets him, or goes there when Eric reaches the bench first. After the goodbye Mio and Kenji walk off up the east walk and Mori walks to `shotengai_back_alley` with the leftovers and rests there. There is only one Mori. The crowd leaves the party bench free (it sits nobody near the story's spots). Food and seating: the party plan above.
+Day 1: none of the cast. On day 2 after the shift, Kenji waits beside the izakaya door until the protagonist meets him. The department is seated inside the venue; there is no outdoor dinner or coda.
 
 | Id | Usually | Schedule |
 |---|---|---|
-| `mio` | Day 2 after work: standing at the near end of the party bench, until the goodbye. | – |
-| `mori` | Day 2 after work: on the party bench, then resting in the back alley. | – |
-| `kenji` | Day 2 after work: by the izakaya's curtain, then at the far end of the party bench, until the goodbye. | – |
+| `mio` | Day 2: inside the izakaya, hidden on the street. | – |
+| `mori` | Day 2: inside the izakaya. Day 3 shopping uses this place's body. | – |
+| `kenji` | Day 2 after work: by the izakaya's curtain until met, then inside. | – |
 | `kuroda` | Day 3, lunch: at the bakery, still deciding. | – |
 | `aoi` | Day 3, lunch: looking at shoes. Label "Woman from the train" until her introduction. | – |
 | `kuro` | Day 3, lunch: waiting at the izakaya. Label "Receptionist" until her introduction. | – |
@@ -1705,3 +1705,39 @@ None.
 | `sit_w`, `sit_e` | Use a dining chair | Sit; movement stands up onto the aisle. |
 
 This completes one ground-floor interior. The training centre, clinic, unassigned office blocks, canteen upper floor and shop facades without their own registered place remain exterior shells or closed areas; this change does not make every island building enterable.
+
+
+## Izakaya (`izakaya`)
+
+The dining room fits the existing 4 × 4.5 game-unit building footprint at the east end of the shop street. A tiled threshold and entry mat open onto a shoes-on dining room with five upholstered chairs, a timber table, warm wall lights, low green wall panelling and a compact kitchen service hatch. Coats and umbrellas have space beside the entry. The aisle runs along the east side of the table; each chair has a tested free approach and a route back to the door. No invisible shoe removal or separate unbuilt room is implied.
+
+### Things
+
+| Id | Label | Use |
+|---|---|---|
+| `izakaya_exit` | To the shop street | Return through the same physical door. |
+| `party_seat` | Your place at the table | Walk to the approach and sit. |
+| `mori` | Mr. Mori | Talk at his table place. |
+| `mio` | Mio | Talk at her table place. |
+| `kenji` | Kenji | Talk at his table place. |
+| `emi` | Emi | Talk at her table place. |
+
+### Spots
+
+`izakaya_in`, `party_group`, `party_food`, `party_mori`, `party_mio`, `party_kenji`, `party_emi`, `service_counter`
+
+### Seats
+
+`party_seat`, `party_mori`, `party_mio`, `party_kenji`, `party_emi`
+
+### People
+
+`mori`, `mio`, `kenji`, `emi`
+
+### Zones
+
+`izakaya_exit`
+
+### Hooks
+
+`partySetup`, `partyFood`

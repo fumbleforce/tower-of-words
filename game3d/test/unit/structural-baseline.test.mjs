@@ -46,6 +46,8 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   for (const event of ['kotodama_first', 'kotodama_cancel', 'kotodama_exit']) expected.engine.events.office[event] = 'teamDrinks';
   for (const flag of ['d5_delivery_seen', 'd5_last_recipient']) expected.engine.exact[flag] = ['game3d/js/places/day5/delivery-state.js'];
   for (const flag of ['d5_kenji_needs_intro', 'd5_mori_needs_intro', 'd3_emi_needs_intro']) expected.engine.exact[flag] = ['game3d/js/places/day5/place.js'];
+  expected.engine.exact.d2_content_revision = ['game3d/js/saves/day2.js'];
+  expected.engine.exact.place.push('game3d/js/saves/day2.js');
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {

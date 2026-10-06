@@ -13,7 +13,7 @@ export function direction(station, office, party, home) {
         else: [{ do: 'goal', text: 'Tell Emi on B2 what the check found.', at: office }] },
     ], else: [
       { if: '!d2_party_done', then: [
-        { if: 'd2_met_kenji || d2_ate', then: [{ do: 'goal', text: 'The others are at the sea-facing bench by the shop street.', at: party }],
+        { if: 'd2_met_kenji || d2_ate', then: [{ do: 'goal', text: 'The department is inside the izakaya on the shop street.', at: party }],
           else: [{ do: 'goal', text: 'Meet Kenji by the izakaya’s blue curtain.', at: party }] },
       ],
         else: [{ do: 'goal', text: 'Head home when you’re ready. Your room is 203.', at: home }] },

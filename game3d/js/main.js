@@ -38,6 +38,7 @@ import { officePlace as office } from './places/office.js';
 import { dormCourtPlace as dorm_court } from './places/dorm-court.js';
 import { dormsPlace as dorms } from './places/dorms.js';
 import { shotengaiPlace as shotengai } from './places/shotengai.js';
+import { izakayaPlace as izakaya } from './places/izakaya.js';
 import { karaokePlace as karaoke } from './places/karaoke.js';
 import { karaokeBoothPlace as karaoke_booth } from './places/karaoke-booth.js';
 import { eastLanePlace as east_lane } from './places/east-lane.js';
@@ -72,6 +73,7 @@ const PLACES = {
   dorm_court,
   dorms,
   shotengai,
+  izakaya,
   karaoke,
   karaoke_booth,
   east_lane,
@@ -216,8 +218,7 @@ game.onRecoveryError = (message) => {
   document.body.append(notice);
   notice.showModal();
 };
-// Clicking while a scene plays out (a walk, a door, a gesture) with no line waiting fast-forwards it to the next line
-// (Jørgen: clicks that did nothing were frustrating). runner clears it when a line, choice or prompt shows.
+// A tap advances a running action to its next line; Runner clears this when an input is shown.
 const HURRY = 6;
 game.hurry = false;
 game.setHurry = (on) => {
@@ -304,8 +305,7 @@ canvas.addEventListener('pointermove', (e) => {
   game.hover = best;
   canvas.style.cursor = best ? 'pointer' : '';
 });
-// the usable thing whose model is under the ray: the nearest hit wins, so the cat on the seat beats the seat, the
-// floor and whoever stands behind it (Jørgen: "I end up sitting on the cat"). Hover and click both use this.
+// Hover and click use the nearest model hit, so a cat wins over the seat underneath.
 function modelAt(ray) {
   ray.layers.enable(31); // Original interactive meshes remain pickable when batched.
   let best = null,
