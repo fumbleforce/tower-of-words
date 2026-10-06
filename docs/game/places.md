@@ -1493,7 +1493,7 @@ Emi's office is the left part of what was one big copy room, split by a partitio
 
 Day 3: B2 is empty on Saturday.
 
-Day 2 (the `officeDay2` hook, also on entering, before the lift doors open): before the shift ends Emi sits at her desk in her office, Mori sits at the chief's desk and Kenji at his. Mio is at the station on the warm promise history (`lunch_mio || mio_warm >= 2`) until `d2_ticket_done`, then at her desk beside Eric's; on the other history she is at her desk all morning. After work (sitting at Eric's desk) Emi is upstairs and the others have gone to the gathering, so none of them is here. Lunch, the copier and the day-1 evening don't run.
+Day 2 (the `officeDay2` hook, also on entering, before the lift doors open): before the shift ends Emi sits at her desk in her office, Mori sits at the chief's desk and Kenji at his. Mio is at the station on the warm promise history (`lunch_mio || mio_warm >= 2`) until `d2_ticket_done`, then at her desk beside Eric's; on the other history she is at her desk all morning. At her desk she alternates typing with reading the monitor and looks toward an approaching player; this activity yields during dialogue. After work (sitting at Eric's desk) Emi is upstairs and the others have gone to the gathering, so none of them is here. Lunch, the copier and the day-1 evening don't run.
 
 The story moves the clock ([systems.md](systems.md)): morning when Eric arrives, lunch at 12:10, afternoon at 14:00, evening at 18:05.
 
