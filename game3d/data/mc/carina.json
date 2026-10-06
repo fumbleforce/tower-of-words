@@ -26,6 +26,6 @@
     "job": "IT support engineer on B2, on a support contract to keep Amakawa's ancient systems running",
     "home": "dorm room 203 on 2F"
   },
-  "text": {},
+  "text": { "name_caps": "CARINA", "new_person": "new girl" },
   "placeholders": ["voice.lines", "voice.words", "voice.ref"]
 }

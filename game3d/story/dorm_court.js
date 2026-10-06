@@ -14,7 +14,7 @@ export default {
   nodes: {
     mailboxes: [
       { do: 'mailbox203', state: 'open' },
-      '> エリック · erikku · Eric',
+      '> {mc.name_jp} · {mc.name_ro} · {mc.name}',
       { do: 'find', id: 'bakery_flyer' },
       { do: 'mailbox203', state: 'close' },
     ],
