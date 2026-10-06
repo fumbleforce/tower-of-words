@@ -2,7 +2,7 @@
  "title": "Crowd pilot round 2: office man (A) and office woman (B) on Meshy's rig",
  "date": "2026-10-06",
  "by": "Claude (crowd-pilot agent, #232)",
- "status": "open",
+ "status": "superseded",
  "question": "Round 1 failed because its viewer never moved the people, so the game's gait (which times the walk to how far they go) held the walk's first frame with a leg up and then stood them back up, and because the man's eyes were loose shells that the texture smeared; this round both walk and run where they actually move (in the game and in a new viewer), both are on Meshy's own rig and clips with mended skin weights, and the man is a new shape with flat painted eyes. Are these two right to go ahead with the other five archetypes?",
  "multi": true,
  "media": [
@@ -118,5 +118,6 @@
   "art/parts/crowd-pilot-2/game/b/run.glb",
   "art/parts/crowd-pilot-2/game/b/sit.glb",
   "art/parts/crowd-pilot-2/game/b/walk.glb"
- ]
+ ],
+ "decision": "Pulled before his pick: critic 6.5 (A) and 6 (B), below the 8 bar. Round 3 fixes the eyes and B's hair parting first."
 }
