@@ -42,8 +42,8 @@ export function dormFloors(game, { w, cam, st, fitNow }) {
     },
     roof: {
       stair: [...L.lights.roof.toArray(), '#dfe7f5', 1.4], // the bulkhead over the stair house door
-      corridor: [dr - 4.8, 1.8, -0.4, '#c9d3e6', 0.8], // the sky over the washing
-      ceiling: [dr - 8.6, 1.4, 0.6, '#d6dceb', 0.8], // the west end
+      corridor: [dr - 4.8, 1.8, -0.4, '#c9d3e6', 1.1], // the sky over the washing
+      ceiling: [dr - 8.6, 1.4, 0.6, '#d6dceb', 1.1], // the west end
       shared: [dr + 4.3, 1.6, -0.9, '#c9d3e6', 0.7], // over the water tank
       desklamp: null,
       hood: null,
