@@ -2,7 +2,7 @@
 
 Jørgen, 2026-10-05: "wish I could have more camera mode, like close third person".
 
-This is the plan step only; nothing in game3d/ changes here. The open choices are in Review item `reviews/camera-plan-1`, with mock views: real screenshots of today's places with the camera moved by hand in a headless capture, not a built feature. What the camera does today is described in docs/game/controls-and-ui.md (Camera); this file only covers what close mode adds and changes.
+The open choices are in Review item `reviews/camera-plan-1`. Its [playable demo](../reviews/camera-plan-1/demo.html) now lets the player compare all three follow presets, free orbit and overview in the real plaza, B2 office, Room 203 and train. It includes the three proposed touch layouts. The original static mocks remain below the demo links. The demo runs the game shell in its own frame with memory-only storage, private mode off and story triggers disabled. Camera rays pull in at obstructions; cutaway walls and authored story/conversation camera behavior remain prototype limits. Production camera code and defaults are unchanged. What the camera does today is described in docs/game/controls-and-ui.md (Camera); this file only covers what close mode adds and changes.
 
 ## What is there now
 
@@ -22,7 +22,7 @@ A second camera mode next to today's. Today's view (call it Overview) stays the 
 
 ### The shot
 
-- Behind Eric and above him: the pivot at his shoulders (0.85 of his height), the camera 2.8 units back along his facing and 2.1 above his feet, aimed at a point 1.2 ahead of him at chest height, which makes it about 15 degrees down. Eric is about 1.4 units tall in the office and the flat (1.2 on the train), so that is two body lengths back and a little over his head. He stands in the lower middle of the frame, and what he walks toward fills the rest. This is decision 1's default; the review shows it next to a closer shoulder shot (2.3 back, 1.45 up, 7 degrees). A further, higher option (3.6 back, 2.8 up) is in the review too, but its mock was not captured: the browser slots were busy.
+- Behind Eric and above him: the pivot at his shoulders (0.85 of his height), the camera 2.8 units back along his facing and 2.1 above his feet, aimed at a point 1.2 ahead of him at chest height, which makes it about 15 degrees down. Eric is about 1.4 units tall in the office and the flat (1.2 on the train), so that is two body lengths back and a little over his head. He stands in the lower middle of the frame, and what he walks toward fills the rest. This is decision 1's default; the review shows it next to a closer shoulder shot (2.3 back, 1.45 up, 7 degrees). A further, higher option (3.6 back, 2.8 up) is available in the playable review demo.
 - Lens: 50 degrees vertical on a wide screen. On a phone held upright the frame is narrow, so 50 would see only 24 degrees across; the phone gets 65 (36 across). The mocks show that on the phone he still fills a lot of the frame and the top third is mostly empty above the room's walls, so the phone may want the further shot even if the desktop keeps the default.
 - Yaw follows his heading on a slow spring (about 0.6 s), so short turns and the walk round a desk don't swing the view. Standing still, it holds. A look input (below) moves the yaw and pitch away from behind him; after he has walked for 2 s with no look input it eases back behind him.
 - Pitch: 5 to 40 degrees down, 15 by default, changed by the look input.

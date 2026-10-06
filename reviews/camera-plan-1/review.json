@@ -1,43 +1,169 @@
 {
- "title": "Camera modes: close third person, plan",
+ "title": "Camera modes: try the alternatives",
  "date": "2026-10-06",
- "by": "Claude (plan agent, #265)",
+ "by": "Claude (plan), Codex (playable review demo)",
  "status": "open",
- "question": "This is a plan with mock views, not built: the pictures are real screenshots of today's game with the camera moved by hand in a headless capture, today's view on the left and the close view on the right. The mocks leave out the fixes the plan adds (pins behind walls hidden, the room's turning limit, no tilt-shift), so they show the problems too. Overview stays the default camera. Pick one per number: 1, follow distance and height (default 1a); 2, phone controls in close mode (default 2a); 3, the toggle key (default 3a, C); 4, a free orbit camera (default 4b, leave it out); 5, which scenes force the authored camera (default 5a).",
+ "question": "Try the playable camera demo using the links below: walk through the plaza, B2 office, Room 203 and train, and switch between 1a, 1b, 1c, free orbit and the current overview. It runs separately from your saved game. The older pictures below are static mocks. Overview stays the default in the game. Pick one per number: 1, follow distance and height (default 1a); 2, phone controls in close mode (default 2a); 3, the toggle key (default 3a, C); 4, a free orbit camera (default 4b, leave it out); 5, which scenes force the authored camera (default 5a). Story and conversation camera choices are still plans, not demonstrated here.",
  "multi": true,
  "media": [
-  {"image": "art/candidates/camera-plan-1/b2-desks-desk.webp", "caption": "B2, desktop 1366x860: Eric by Mio's desk, facing Mori. The close mock is at the default (2.8 back, 2.1 up, about 15 degrees down). The empty space at the top is the missing ceiling; the floating pins belong to things in the next rooms (the plan hides pins behind walls)."},
-  {"image": "art/candidates/camera-plan-1/b2-corridor-desk.webp", "caption": "B2, desktop: the corridor, looking east."},
-  {"image": "art/candidates/camera-plan-1/plaza-desk.webp", "caption": "Plaza, desktop: at the fountain's edge, looking north."},
-  {"image": "art/candidates/camera-plan-1/room-window-desk.webp", "caption": "Room 203, desktop: at the window, the desk to his left."},
-  {"image": "art/candidates/camera-plan-1/room-door-desk.webp", "caption": "Room 203, desktop: just inside the door, looking in."},
-  {"image": "art/candidates/camera-plan-1/train-desk.webp", "caption": "Train, desktop: in the aisle. The car's roof stops the camera and pulls it in over his head; the plan keeps the camera under the roof and fades the roof (see decision 5)."},
-  {"image": "art/candidates/camera-plan-1/b2-desks-phone.webp", "caption": "B2, phone 390x844, the same spot. On the phone he still fills a lot of the frame and the top third is empty above the walls."},
-  {"image": "art/candidates/camera-plan-1/b2-corridor-phone.webp", "caption": "B2 corridor, phone."},
-  {"image": "art/candidates/camera-plan-1/plaza-phone.webp", "caption": "Plaza, phone."},
-  {"image": "art/candidates/camera-plan-1/room-window-phone.webp", "caption": "Room 203, phone."},
-  {"image": "art/candidates/camera-plan-1/room-door-phone.webp", "caption": "Room 203 by the door, phone."},
-  {"image": "art/candidates/camera-plan-1/train-phone.webp", "caption": "Train, phone."},
-  {"image": "art/candidates/camera-plan-1/near-b2-south-desk.webp", "caption": "Extra, closer shoulder shot: B2 facing south, toward the walls that are cut low for the overview. The dark band is the outside, seen over them. The plan keeps the close camera from turning to face that side."},
-  {"image": "art/candidates/camera-plan-1/near-plaza-a-desk.webp", "caption": "Extra, closer shoulder shot: the plaza looking east, the most expensive view measured (296 draw calls a frame against 204 today on desktop; 132 against 78 on the phone)."}
+  {
+   "image": "art/candidates/camera-plan-1/b2-desks-desk.webp",
+   "caption": "B2, desktop 1366x860: Eric by Mio's desk, facing Mori. The close mock is at the default (2.8 back, 2.1 up, about 15 degrees down). The empty space at the top is the missing ceiling; the floating pins belong to things in the next rooms (the plan hides pins behind walls)."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/b2-corridor-desk.webp",
+   "caption": "B2, desktop: the corridor, looking east."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/plaza-desk.webp",
+   "caption": "Plaza, desktop: at the fountain's edge, looking north."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/room-window-desk.webp",
+   "caption": "Room 203, desktop: at the window, the desk to his left."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/room-door-desk.webp",
+   "caption": "Room 203, desktop: just inside the door, looking in."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/train-desk.webp",
+   "caption": "Train, desktop: in the aisle. The car's roof stops the camera and pulls it in over his head; the plan keeps the camera under the roof and fades the roof (see decision 5)."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/b2-desks-phone.webp",
+   "caption": "B2, phone 390x844, the same spot. On the phone he still fills a lot of the frame and the top third is empty above the walls."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/b2-corridor-phone.webp",
+   "caption": "B2 corridor, phone."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/plaza-phone.webp",
+   "caption": "Plaza, phone."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/room-window-phone.webp",
+   "caption": "Room 203, phone."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/room-door-phone.webp",
+   "caption": "Room 203 by the door, phone."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/train-phone.webp",
+   "caption": "Train, phone."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/near-b2-south-desk.webp",
+   "caption": "Extra, closer shoulder shot: B2 facing south, toward the walls that are cut low for the overview. The dark band is the outside, seen over them. The plan keeps the close camera from turning to face that side."
+  },
+  {
+   "image": "art/candidates/camera-plan-1/near-plaza-a-desk.webp",
+   "caption": "Extra, closer shoulder shot: the plaza looking east, the most expensive view measured (296 draw calls a frame against 204 today on desktop; 132 against 78 on the phone)."
+  }
  ],
  "options": [
-  {"id": "1a", "label": "1a. Follow 2.8 back, 2.1 up (default)", "image": "art/candidates/camera-plan-1/plaza-desk.webp", "note": "About 15 degrees down, two body lengths behind him. All the main mocks use this. The phone uses the same with a wider lens (65 degrees)."},
-  {"id": "1b", "label": "1b. Closer shoulder shot, 2.3 back, 1.45 up", "image": "art/candidates/camera-plan-1/near-room-window-desk.webp", "images": ["art/candidates/camera-plan-1/near-room-window-phone.webp"], "note": "About 7 degrees down, nearly eye level. Closer to him, but he covers much of the view, more so on the phone."},
-  {"id": "1c", "label": "1c. Further and higher, 3.6 back, 2.8 up", "note": "About 25 degrees down: more floor, less empty space over the walls, and he is smaller. No mock for this one; the capture was cut short while the browser slots were busy. It could also be the phone's setting with 1a on desktop."},
-  {"id": "2a", "label": "2a. Phone: tap and hold to walk as today, two-finger drag to look (default)", "note": "Nothing new to learn to move. The camera swings behind him as he walks, so looking round is rarely needed. A one-finger drag stays steering."},
-  {"id": "2b", "label": "2b. Phone: a thumb stick bottom left, one-finger drag elsewhere to look", "note": "The usual phone 3D layout. It replaces hold-to-steer in close mode and needs teaching, and the stick covers part of the view."},
-  {"id": "2c", "label": "2c. Phone: tap and hold as today, plus a look strip along the bottom edge", "note": "One thumb can look, but the strip takes space at the bottom, where the dialogue box also sits."},
-  {"id": "3a", "label": "3a. Toggle key C (default)", "note": "Free today. There is also a camera button in the phone HUD and Camera: Overview / Close in Settings, Controls, remembered per device."},
-  {"id": "3b", "label": "3b. Another key", "note": "Say which in a comment. Already taken: WASD, the arrows, E, Q, V, Tab, L, Y, H, R, Shift, Caps Lock, Ctrl, Space, Enter, Esc, PageUp, F3, F5, F8, F9."},
-  {"id": "4a", "label": "4a. Add a free orbit camera as a third mode", "note": "Orbits round him at any distance (pinch or wheel to zoom) and doesn't follow his heading. Cheap once close mode exists, since it reuses the collision and the room limits."},
-  {"id": "4b", "label": "4b. Leave the orbit camera out (default)", "note": "Build it later if close mode leaves you wanting it."},
-  {"id": "5a", "label": "5a. Authored camera in every scene and conversation (default)", "note": "The title and its flight, every story camera move, every conversation, word prompt and close look, the lift ride, the walks between places, and the train's departure and arrival use their own camera. Close mode is for free walking, the train car between beats included, and eases back in when a scene ends."},
-  {"id": "5b", "label": "5b. As 5a, but plain conversations stay close", "note": "A conversation with no camera move of its own keeps the close camera, turned to frame the person over his shoulder. Story camera moves, prompts, the lift, trips and the title still take over."},
-  {"id": "5c", "label": "5c. As 5a, and the train stays overview on day 1", "note": "The train's first minutes teach walking with the overview, and close mode starts at the station. This also leaves the train's low roof for later."}
+  {
+   "id": "1a",
+   "label": "1a. Follow 2.8 back, 2.1 up (default)",
+   "image": "art/candidates/camera-plan-1/plaza-desk.webp",
+   "note": "About 15 degrees down, two body lengths behind him. All the main mocks use this. The phone uses the same with a wider lens (65 degrees)."
+  },
+  {
+   "id": "1b",
+   "label": "1b. Closer shoulder shot, 2.3 back, 1.45 up",
+   "image": "art/candidates/camera-plan-1/near-room-window-desk.webp",
+   "images": [
+    "art/candidates/camera-plan-1/near-room-window-phone.webp"
+   ],
+   "note": "About 7 degrees down, nearly eye level. Closer to him, but he covers much of the view, more so on the phone."
+  },
+  {
+   "id": "1c",
+   "label": "1c. Further and higher, 3.6 back, 2.8 up",
+   "note": "About 25 degrees down: more floor, less empty space over the walls, and he is smaller. Now playable in the camera demo via the Try 1c link. It could also be the phone setting with 1a on desktop."
+  },
+  {
+   "id": "2a",
+   "label": "2a. Phone: tap and hold to walk as today, two-finger drag to look (default)",
+   "note": "Nothing new to learn to move. The camera swings behind him as he walks, so looking round is rarely needed. A one-finger drag stays steering."
+  },
+  {
+   "id": "2b",
+   "label": "2b. Phone: a thumb stick bottom left, one-finger drag elsewhere to look",
+   "note": "The usual phone 3D layout. It replaces hold-to-steer in close mode and needs teaching, and the stick covers part of the view."
+  },
+  {
+   "id": "2c",
+   "label": "2c. Phone: tap and hold as today, plus a look strip along the bottom edge",
+   "note": "One thumb can look, but the strip takes space at the bottom, where the dialogue box also sits."
+  },
+  {
+   "id": "3a",
+   "label": "3a. Toggle key C (default)",
+   "note": "Free today. There is also a camera button in the phone HUD and Camera: Overview / Close in Settings, Controls, remembered per device."
+  },
+  {
+   "id": "3b",
+   "label": "3b. Another key",
+   "note": "Say which in a comment. Already taken: WASD, the arrows, E, Q, V, Tab, L, Y, H, R, Shift, Caps Lock, Ctrl, Space, Enter, Esc, PageUp, F3, F5, F8, F9."
+  },
+  {
+   "id": "4a",
+   "label": "4a. Add a free orbit camera as a third mode",
+   "note": "Orbits round him at any distance (pinch or wheel to zoom) and doesn't follow his heading. Cheap once close mode exists, since it reuses the collision and the room limits."
+  },
+  {
+   "id": "4b",
+   "label": "4b. Leave the orbit camera out (default)",
+   "note": "Build it later if close mode leaves you wanting it."
+  },
+  {
+   "id": "5a",
+   "label": "5a. Authored camera in every scene and conversation (default)",
+   "note": "The title and its flight, every story camera move, every conversation, word prompt and close look, the lift ride, the walks between places, and the train's departure and arrival use their own camera. Close mode is for free walking, the train car between beats included, and eases back in when a scene ends."
+  },
+  {
+   "id": "5b",
+   "label": "5b. As 5a, but plain conversations stay close",
+   "note": "A conversation with no camera move of its own keeps the close camera, turned to frame the person over his shoulder. Story camera moves, prompts, the lift, trips and the title still take over."
+  },
+  {
+   "id": "5c",
+   "label": "5c. As 5a, and the train stays overview on day 1",
+   "note": "The train's first minutes teach walking with the overview, and close mode starts at the station. This also leaves the train's low roof for later."
+  }
  ],
  "links": [
-  {"label": "The full plan (notes/camera-modes-plan.md)", "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/camera-modes-plan.md"},
-  {"label": "Today's camera in the game", "href": "game3d/index.html"}
- ]
+  {
+   "label": "PLAY: camera comparison, all places and controls",
+   "href": "reviews/camera-plan-1/demo.html"
+  },
+  {
+   "label": "Try 1a: follow, 2.8 back / 2.1 up",
+   "href": "reviews/camera-plan-1/demo.html?camera=1a"
+  },
+  {
+   "label": "Try 1b: close shoulder, 2.3 back / 1.45 up",
+   "href": "reviews/camera-plan-1/demo.html?camera=1b"
+  },
+  {
+   "label": "Try 1c: further and higher, 3.6 back / 2.8 up",
+   "href": "reviews/camera-plan-1/demo.html?camera=1c"
+  },
+  {
+   "label": "Try 4a: free orbit (right-drag or touch to look)",
+   "href": "reviews/camera-plan-1/demo.html?camera=orbit"
+  },
+  {
+   "label": "The full plan (notes/camera-modes-plan.md)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/camera-modes-plan.md"
+  },
+  {
+   "label": "Today's camera in the game",
+   "href": "game3d/index.html"
+  }
+ ],
+ "issue": 265
 }
