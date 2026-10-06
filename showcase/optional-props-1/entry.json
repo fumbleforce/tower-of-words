@@ -1,0 +1,24 @@
+{
+  "title": "Optional looks around the island",
+  "date": "2026-10-06",
+  "by": "codex:flavor-finds",
+  "caption": "Ordinary objects can be inspected where they sit, with readable notes and small return actions.",
+  "images": [
+    {
+      "id": "loan-slippers",
+      "image": "bible/shots/showcase/optional-props-1/390-eric-slipper_pair.png",
+      "caption": "Loan slippers in the gym cubby, phone"
+    },
+    {
+      "id": "cup",
+      "image": "bible/shots/showcase/optional-props-1/390-eric-cafe_cup.png",
+      "caption": "A covered cup beside the footpath, phone"
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

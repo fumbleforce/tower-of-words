@@ -1,0 +1,25 @@
+{
+  "title": "Sunday objects and court staging",
+  "date": "2026-10-06",
+  "by": "codex:day4-build",
+  "caption": "The sports centre counter and court controls have visible working parts and close action views.",
+  "commit": "18ab07df",
+  "images": [
+    {
+      "id": "counter",
+      "image": "bible/shots/showcase/sunday-physical-1/reception-counter.png",
+      "caption": "Reception counter, desktop"
+    },
+    {
+      "id": "court-controls",
+      "image": "bible/shots/showcase/sunday-physical-1/court-controls.png",
+      "caption": "Court controls, phone"
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

@@ -120,6 +120,16 @@ await withBrowserJob(
       }
       await page.waitForTimeout(500);
       await page.screenshot({ path: `${out}/${width}-${mc}-${f.id}.png` });
+      if (process.env.SHOWCASE === '1' && ['slipper_pair', 'cafe_cup'].includes(f.id)) {
+        const folder = new URL('../../bible/shots/showcase/optional-props-1/', import.meta.url).pathname;
+        fs.mkdirSync(folder, { recursive: true });
+        await page.evaluate(id => window.__game.place.flavorFinds.props.get(id).reset(), f.id);
+        const hidden = await page.addStyleTag({ content: '#talk, #act { visibility: hidden !important; }' });
+        await page.waitForTimeout(250);
+        await page.screenshot({ path: `${folder}/${width}-${mc}-${f.id}.png` });
+        await hidden.evaluate(el => el.remove());
+        await page.evaluate(id => window.__game.place.flavorFinds.props.get(id).move(1), f.id);
+      }
       const saved = await page.evaluate(async () => {
         const g = window.__game,
           { save, loadSave } = await import(new URL('js/sim.js', location.href));

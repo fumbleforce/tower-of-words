@@ -2,6 +2,8 @@
 
 Twelve authored in-place interactions for #231. `days3-5-finds.js` owns the contents and `FINDS` owns their placement descriptors. Each nook is checked against the live place catalog by `node game3d/story/days3-5-finds-check.mjs`. The place lifecycle now consumes eligible entries through `js/flavor-finds/`, which stages ordinary props and the compact translated-note view. `tools/flavor-finds-check.mjs` exercises the live Look, repeat, interrupted Continue and return paths; its screenshots are written to `shots/flavor-finds/`.
 
+Rendered validation (2026-10-06): all twelve entries passed on 390×844 with Eric and 1366×860 with Carina, including date/condition boundaries, repeat use, returning to the entrance and public Continue during the look. Seven protagonist thoughts use the existing approved Eric reference; Carina uses the configured fallback. Neutral prop views are in `showcase/optional-props-1/`.
+
 ## Build contract
 
 Filter by `from`, `until` and `if` before creating a target at `at` with the given label. Merge only that eligible entry's node into its place. Dispatch it through an optional Look action; walking past does nothing. These are ordinary objects, without album collection or a reward marker.
