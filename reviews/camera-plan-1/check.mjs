@@ -1,30 +1,45 @@
-// Run from the repository root. BASE can point at a served worktree; screenshots stay outside git.
-// BASE=http://127.0.0.1:8771/.claude/worktrees/codex-camera-demo/ node reviews/camera-plan-1/check.mjs
+// BASE may point at a served worktree. GL=soft runs functional checks without a GPU slot.
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { withBrowserJob } from "../../tools/lib/browser-job.mjs";
 
 const base = process.env.BASE || "http://127.0.0.1:8771/";
-const out = process.env.OUT || "game3d/shots/camera-demo";
+const out = process.env.OUT || "game3d/shots/camera-response";
 fs.mkdirSync(out, { recursive: true });
 const results = [];
+const pose = () => {
+  const g = globalThis.__game,
+    c = globalThis.__cameraDemo.camera;
+  return {
+    p: g.player.root.position.toArray(),
+    yaw: c.yaw,
+    facing: g.player.root.rotation.y,
+    camera: g.place.camera.position.toArray(),
+    basis: g.walker.keyFrame?.toArray(),
+    scene: c.scene,
+    keys: g.walker.keys.size,
+    path: !!g.walker.path,
+  };
+};
+const distance = (a, b) => Math.hypot(a[0] - b[0], a[2] - b[2]);
 await withBrowserJob(
-  "camera-demo-check",
+  "camera-response-check",
   async (browser) => {
     for (const [width, height] of [
       [1366, 860],
       [390, 844],
     ]) {
+      const mobile = width < 600;
       const context = await browser.newContext({
         viewport: { width, height },
-        hasTouch: width < 600,
-        isMobile: width < 600,
+        hasTouch: mobile,
+        isMobile: mobile,
       });
       const page = await context.newPage();
       const errors = [],
         privateRequests = [];
-      page.on("pageerror", (error) => errors.push(error.message));
+      page.on("pageerror", (e) => errors.push(e.message));
       await page.route("**/*", (route) => {
         if (new URL(route.request().url()).pathname.includes("/private/")) {
           privateRequests.push(route.request().url());
@@ -32,43 +47,37 @@ await withBrowserJob(
         }
         return route.continue();
       });
-      await page.goto(
-        new URL("reviews/camera-plan-1/frame.html", base).href.replace(
-          "frame.html",
-          "demo.css",
-        ),
-      );
+      await page.goto(new URL("reviews/camera-plan-1/demo.css", base).href);
       const sentinel = await page.evaluate(() => {
         globalThis.localStorage.setItem(
           "amakawa-save",
-          '{"day":5,"sentinel":"keep this save"}',
+          '{"day":5,"sentinel":"keep"}',
         );
         globalThis.localStorage.setItem(
           "amakawa-settings",
           '{"v":2,"privateMode":true,"master":0.37}',
         );
-        globalThis.sessionStorage.setItem(
-          "camera-demo-sentinel",
-          "keep this session",
-        );
+        globalThis.sessionStorage.setItem("camera-demo-sentinel", "keep");
         return {
           local: { ...globalThis.localStorage },
           session: { ...globalThis.sessionStorage },
         };
       });
-      for (const place of ["plaza", "office", "dorms", "train"]) {
+      for (const place of process.env.QUICK
+        ? ["office"]
+        : ["plaza", "office", "dorms", "train"]) {
         const url = new URL("reviews/camera-plan-1/demo.html", base);
-        url.search = new URLSearchParams({ place, camera: "1a", touch: "2b" });
+        url.search = new URLSearchParams({ place, camera: "1c" });
         await page.goto(url.href);
         await page.waitForFunction(
           () => globalThis.document.querySelector("#status").hidden,
           null,
-          { timeout: 65000 },
+          { timeout: 90000 },
         );
         const frame = page
           .frames()
-          .find((frame) => frame.url().includes("/frame.html"));
-        assert.ok(frame, "isolated game frame exists");
+          .find((f) => f.url().includes("/frame.html"));
+        assert.ok(frame);
         assert.deepEqual(
           await frame.evaluate(() => ({
             private: globalThis.__settings.privateMode,
@@ -77,228 +86,162 @@ await withBrowserJob(
           })),
           { private: false, saving: false, idb: "undefined" },
         );
-        const modes = [];
-        for (const mode of ["1a", "1b", "1c", "orbit", "overview"]) {
-          await page.selectOption("#camera", mode);
-          await frame.waitForFunction(
-            (mode) => globalThis.__cameraDemo.camera.mode === mode,
-            mode,
+        assert.equal(
+          await page.locator("#touch").count(),
+          0,
+          "phone third-person controls removed",
+        );
+        if (mobile) {
+          assert.equal(
+            await frame.evaluate(() => globalThis.__cameraDemo.camera.mode),
+            "overview",
           );
-          await page.waitForTimeout(150);
-          const state = await frame.evaluate(() => ({
-            mode: globalThis.__cameraDemo.camera.mode,
-            position: globalThis.__game.place.camera.position.toArray(),
-            fov: globalThis.__game.place.camera.fov,
-            blocked: globalThis.__cameraDemo.camera.blocked,
-            distance: globalThis.__cameraDemo.camera.distance,
-          }));
-          assert.ok(state.position.every(Number.isFinite));
-          modes.push(state);
-          if (mode !== "orbit")
-            await page.screenshot({
-              path: path.join(out, `${place}-${width}-${mode}.png`),
-            });
-        }
-        if (place === "plaza") {
-          assert.notDeepEqual(
-            modes[0].position,
-            modes[1].position,
-            "1a and 1b differ",
+          assert.ok(await page.locator("#camera").isDisabled());
+          assert.ok(await page.locator("#mobile-note").isVisible());
+          assert.ok(await page.locator("#scene").isHidden());
+          // Even a direct message cannot switch a touch frame into third person.
+          await page.evaluate(() =>
+            globalThis.document
+              .querySelector("#world")
+              .contentWindow.postMessage(
+                { cameraDemo: true, name: "camera", value: "1c" },
+                globalThis.location.origin,
+              ),
           );
-          assert.notDeepEqual(
-            modes[0].position,
-            modes[2].position,
-            "1c is implemented",
-          );
-          await page.selectOption("#camera", "1a");
-          await frame.waitForFunction(
-            () => globalThis.__cameraDemo.camera.mode === "1a",
-          );
-          const before = await frame.evaluate(() =>
-            globalThis.__game.player.root.position.toArray(),
-          );
-          await frame.locator("#c").focus();
-          await page.keyboard.down("d");
-          await page.waitForTimeout(650);
-          await page.keyboard.up("d");
-          const after = await frame.evaluate(() =>
-            globalThis.__game.player.root.position.toArray(),
-          );
-          assert.ok(
-            Math.hypot(after[0] - before[0], after[2] - before[2]) > 0.15,
-            "keyboard walking moves the real body",
-          );
-          await page.selectOption("#camera", "orbit");
-          await frame.waitForFunction(
-            () => globalThis.__cameraDemo.camera.mode === "orbit",
-          );
-          const rect = await page.locator("#world").boundingBox();
-          const yaw = await frame.evaluate(
-            () => globalThis.__cameraDemo.camera.yaw,
-          );
-          await page.mouse.move(rect.x + 230, rect.y + 220);
-          await page.mouse.down({ button: "right" });
-          await page.mouse.move(rect.x + 290, rect.y + 240, { steps: 5 });
-          await page.mouse.up({ button: "right" });
-          assert.ok(
-            Math.abs(
-              (await frame.evaluate(() => globalThis.__cameraDemo.camera.yaw)) -
-                yaw,
-            ) > 0.2,
-            "right drag orbits",
-          );
-          await page.click("#reset");
           await page.waitForTimeout(100);
-          if (width < 600) {
-            // Real pointer capture on the thumb stick, including release outside its starting point.
-            const stick = await frame.locator(".demo-stick").boundingBox();
-            const start = await frame.evaluate(() =>
-              globalThis.__game.player.root.position.toArray(),
-            );
-            await page.mouse.move(stick.x + 52, stick.y + 52);
-            await page.mouse.down();
-            await page.mouse.move(stick.x + 85, stick.y + 52);
-            await page.waitForTimeout(600);
-            await page.mouse.up();
-            const end = await frame.evaluate(() =>
-              globalThis.__game.player.root.position.toArray(),
-            );
-            assert.ok(
-              Math.hypot(end[0] - start[0], end[2] - start[2]) > 0.1,
-              "thumb stick walks",
-            );
+          assert.equal(
+            await frame.evaluate(() => globalThis.__cameraDemo.camera.mode),
+            "overview",
+          );
+        } else {
+          assert.equal(
+            await frame.evaluate(() => globalThis.__cameraDemo.camera.mode),
+            "1c",
+          );
+          const view = await frame.evaluate(pose);
+          await frame.locator("#c").click({ position: { x: 300, y: 200 } });
+          await page.waitForTimeout(250);
+          assert.ok(
+            distance((await frame.evaluate(pose)).p, view.p) < 0.02,
+            "click only focuses",
+          );
+          if (place === "plaza") {
+            // Change direction without releasing every key, then keep walking longer
+            // than the old automatic camera return. Input basis must never turn itself.
+            await page.keyboard.down("w");
+            await page.waitForTimeout(500);
+            await page.keyboard.down("d");
+            await page.keyboard.up("w");
+            await page.waitForTimeout(700);
+            const right = await frame.evaluate(pose);
             assert.equal(
-              await frame.evaluate(() => globalThis.__game.walker.keys.size),
-              0,
-              "thumb stick releases its keys",
+              right.yaw,
+              view.yaw,
+              "character turn cannot rotate camera",
             );
-            await page.selectOption("#touch", "2c");
-            await frame.waitForFunction(
-              () => globalThis.__cameraDemo.controls.mode === "2c",
-            );
-            const strip = await frame.locator(".demo-strip").boundingBox();
-            const old = await frame.evaluate(
-              () => globalThis.__cameraDemo.camera.yaw,
-            );
-            await page.mouse.move(strip.x + 30, strip.y + 20);
-            await page.mouse.down();
-            await page.mouse.move(strip.x + 90, strip.y + 20, { steps: 4 });
-            await page.mouse.up();
+            assert.ok(distance(right.p, view.p) > 0.2, "real player moved");
+            const rect = await page.locator("#world").boundingBox();
+            await page.mouse.move(rect.x + 450, rect.y + 240);
+            await page.mouse.down({ button: "right" });
+            await page.mouse.move(rect.x + 560, rect.y + 240, { steps: 5 });
+            await page.mouse.up({ button: "right" });
+            await page.waitForTimeout(200);
+            const looked = await frame.evaluate(pose);
             assert.ok(
-              Math.abs(
-                (await frame.evaluate(
-                  () => globalThis.__cameraDemo.camera.yaw,
-                )) - old,
-              ) > 0.2,
-              "look strip rotates",
-            );
-            await page.selectOption("#touch", "2a");
-            await frame.waitForFunction(
-              () => globalThis.__cameraDemo.controls.mode === "2a",
-            );
-            const cdp = await context.newCDPSession(page);
-            const points = [
-              { x: 230, y: rect.y + 330 },
-              { x: 310, y: rect.y + 330 },
-            ];
-            const oldYaw = await frame.evaluate(
-              () => globalThis.__cameraDemo.camera.yaw,
-            );
-            await cdp.send("Input.dispatchTouchEvent", {
-              type: "touchStart",
-              touchPoints: points,
-            });
-            await cdp.send("Input.dispatchTouchEvent", {
-              type: "touchMove",
-              touchPoints: points.map((p) => ({ x: p.x - 50, y: p.y })),
-            });
-            await cdp.send("Input.dispatchTouchEvent", {
-              type: "touchEnd",
-              touchPoints: [],
-            });
-            assert.ok(
-              Math.abs(
-                (await frame.evaluate(
-                  () => globalThis.__cameraDemo.camera.yaw,
-                )) - oldYaw,
-              ) > 0.2,
-              "two fingers rotate",
-            );
-            await page.selectOption("#touch", "2b");
-            await frame.waitForFunction(
-              () => globalThis.__cameraDemo.controls.mode === "2b",
-            );
-            const thumbs = [
-              { x: stick.x + 85, y: stick.y + 52, id: 1 },
-              { x: 290, y: rect.y + 260, id: 2 },
-            ];
-            const readPose = () => ({
-              position: globalThis.__game.player.root.position.toArray(),
-              yaw: globalThis.__cameraDemo.camera.yaw,
-            });
-            const beforeThumbs = await frame.evaluate(readPose);
-            await cdp.send("Input.dispatchTouchEvent", {
-              type: "touchStart",
-              touchPoints: thumbs,
-            });
-            await cdp.send("Input.dispatchTouchEvent", {
-              type: "touchMove",
-              touchPoints: [thumbs[0], { ...thumbs[1], x: 340 }],
-            });
-            await page.waitForTimeout(600);
-            const duringThumbs = await frame.evaluate(readPose);
-            await cdp.send("Input.dispatchTouchEvent", {
-              type: "touchEnd",
-              touchPoints: [],
-            });
-            assert.ok(
-              Math.hypot(
-                duringThumbs.position[0] - beforeThumbs.position[0],
-                duringThumbs.position[2] - beforeThumbs.position[2],
-              ) > 0.1,
-              "walking continues while the other thumb looks",
+              Math.abs(looked.yaw - right.yaw) > 0.5,
+              "right drag is direct",
             );
             assert.ok(
-              Math.abs(duringThumbs.yaw - beforeThumbs.yaw) > 0.2,
-              "looking works while the other thumb walks",
+              Math.abs(looked.basis[0] - Math.sin(looked.yaw)) < 0.001 &&
+                Math.abs(looked.basis[2] - Math.cos(looked.yaw)) < 0.001,
+              "held movement follows requested camera yaw immediately",
             );
+            await page.waitForTimeout(2500);
             assert.equal(
-              await frame.evaluate(() => globalThis.__game.walker.keys.size),
-              0,
-              "both thumbs released",
+              (await frame.evaluate(pose)).yaw,
+              looked.yaw,
+              "no delayed recenter",
             );
-            await cdp.send("Input.dispatchTouchEvent", {
-              type: "touchStart",
-              touchPoints: [thumbs[0]],
-            });
+            await page.keyboard.up("d");
+            await page.waitForTimeout(400);
+            const stopped = await frame.evaluate(pose);
+            await page.waitForTimeout(500);
+            assert.ok(
+              distance((await frame.evaluate(pose)).p, stopped.p) < 0.02,
+              "no resumed old route",
+            );
+            await page.keyboard.down("w");
             await frame.evaluate(() =>
               globalThis.dispatchEvent(new globalThis.Event("blur")),
             );
             assert.equal(
-              await frame.evaluate(() => globalThis.__game.walker.keys.size),
+              (await frame.evaluate(pose)).keys,
               0,
-              "blur clears touch movement",
+              "blur clears movement",
             );
-            await cdp.send("Input.dispatchTouchEvent", {
-              type: "touchEnd",
-              touchPoints: [],
-            });
-            await cdp.detach();
+            await page.keyboard.up("w");
           }
+          await page.screenshot({
+            path: path.join(out, `${place}-${width}-1c.png`),
+          });
+          const before = await frame.evaluate(pose);
+          await page.click("#scene");
+          await page.waitForTimeout(200);
+          const scene = await frame.evaluate(pose);
+          if (scene.scene) {
+            assert.ok(
+              (await page.locator("#scene").textContent()) ===
+                "Return to walking",
+            );
+            await page.screenshot({
+              path: path.join(out, `${place}-${width}-scene.png`),
+            });
+            await frame.locator("#c").focus();
+            await page.keyboard.down("w");
+            await page.waitForTimeout(300);
+            await page.keyboard.up("w");
+            assert.ok(
+              distance((await frame.evaluate(pose)).p, scene.p) < 0.02,
+              "scene pauses player",
+            );
+            await page.click("#scene");
+            await page.waitForTimeout(150);
+            const restored = await frame.evaluate(pose);
+            assert.equal(
+              restored.yaw,
+              before.yaw,
+              "scene exit preserves view direction",
+            );
+            assert.equal(restored.keys, 0);
+            assert.equal(restored.path, false);
+            assert.ok(
+              Math.abs(restored.facing - before.facing) < 0.001,
+              "scene does not turn player",
+            );
+          } else
+            assert.match(
+              await page.locator("#scene-note").textContent(),
+              /No nearby pair/,
+            );
+          results.push({ width, place, view, scene });
         }
-        results.push({ width, height, place, modes });
+        if (mobile) {
+          await page.screenshot({
+            path: path.join(out, `${place}-${width}-overview.png`),
+          });
+          results.push({ width, place, mode: "overview" });
+        }
         assert.deepEqual(
           await page.evaluate(() => ({
             local: { ...globalThis.localStorage },
             session: { ...globalThis.sessionStorage },
           })),
           sentinel,
-          "host saves and settings are unchanged",
         );
         console.log("PASS", width, place);
       }
-      assert.deepEqual(privateRequests, [], "no private content requests");
-      assert.deepEqual(errors, [], "no page errors");
+      assert.deepEqual(privateRequests, []);
+      assert.deepEqual(errors, []);
       await context.close();
     }
   },
@@ -309,5 +252,5 @@ fs.writeFileSync(
   JSON.stringify(results, null, 2) + "\n",
 );
 console.log(
-  `PASS camera demo: ${results.length} place/viewport cases, storage isolation and controls`,
+  `PASS ${results.length} viewport/place cases: controls, scenes, phone overview and isolation`,
 );

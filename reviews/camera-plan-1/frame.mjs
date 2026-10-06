@@ -93,8 +93,12 @@ try {
   }
   const { installCamera } = await import(new URL("camera.mjs", demoBase));
   const { installControls } = await import(new URL("controls.mjs", demoBase));
-  const camera = installCamera(current, query.get("camera"));
-  const controls = installControls(current, camera, query.get("touch"));
+  const mobile = globalThis.matchMedia("(pointer: coarse)").matches;
+  const camera = installCamera(
+    current,
+    mobile ? "overview" : query.get("camera"),
+  );
+  const controls = installControls(current, camera);
   current.use = () => {};
   current.beat = async () => {};
   current.runner.trigger = () => {};
@@ -111,9 +115,21 @@ try {
     )
       return;
     const { name, value } = event.data;
-    if (name === "camera") camera.setMode(value);
-    if (name === "touch") controls.setMode(value);
-    if (name === "reset") camera.reset();
+    if (name === "camera") {
+      controls.stop();
+      camera.setMode(mobile ? "overview" : value);
+      tell({ scene: null });
+    }
+    if (name === "reset" && !mobile) {
+      controls.stop();
+      camera.reset();
+    }
+    if (name === "scene" && !mobile && camera.mode !== "overview") {
+      controls.stop();
+      const wasScene = camera.scene;
+      const scene = camera.sceneShot();
+      tell({ scene, unavailable: !wasScene && !scene });
+    }
   });
   tell({ ready: true });
 } catch (error) {

@@ -148,3 +148,17 @@ footer {
     font-size: 12px;
   }
 }
+
+#scene-note,
+#mobile-note {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+[hidden] {
+  display: none !important;
+}
