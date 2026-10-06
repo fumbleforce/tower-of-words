@@ -1,0 +1,7 @@
+[
+ {"label": "Carina (r2, our rig)", "dir": "/.claude/worktrees/agent-a51c1ef408af9cd42/game3d/assets/characters/carina/", "idle": "/art/parts/carina-meshy-1/r2/viewer/denim/idle.json", "height": 1.12},
+ {"label": "Carina (r2, Meshy's rig, mended weights)", "dir": "/art/parts/carina-meshy-1/r2/meshyrig/denim/", "idle": "/art/parts/carina-meshy-1/r2/viewer/denim/idle.json", "height": 1.12},
+ {"label": "Emi (game)", "dir": "/game3d/assets/characters/emi/", "idle": "/game3d/assets/characters/relaxed-idle-emi.json", "height": 1.09},
+ {"label": "Kuro (game)", "dir": "/game3d/assets/characters/kuro/", "idle": "/game3d/assets/characters/relaxed-idle-kuro.json", "height": 1.12},
+ {"label": "Rei (game, our rig)", "dir": "/game3d/assets/characters/rei/", "idle": "/game3d/assets/characters/relaxed-idle-rei.json", "height": 1.12}
+]

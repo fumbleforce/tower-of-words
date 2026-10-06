@@ -1,8 +1,10 @@
 #!/bin/sh
-# Carina's game files (reviews/carina-meshy-1, carina-2) from her rig of ours (rig.py, as Rei's): her carina-2 model
-# with the game's Meshy skeleton placed in her body and Emi's walk, run and Chair_Sit_Idle_F clips, each with the
-# embedded texture taken out (game3d/tools/slim_glb.py); base.webp is the texture as Meshy painted it. Then the
-# approved relaxed-3 idle is baked onto the rig, as for the others (rei-rig-1/install.sh; the server on 8771 must be up).
+# Carina's game files (reviews/carina-meshy-1, carina-2 round 2) from her rig of ours (rig.py, as Rei's): her carina-2
+# model after the round-2 Blender edits (fix_bl.py through r2.sh: the waist seam, the head at 0.85, dark denim
+# trousers) with the game's Meshy skeleton placed in her body and Emi's walk, run and Chair_Sit_Idle_F clips, each with
+# the embedded texture taken out (game3d/tools/slim_glb.py); base.webp is that model's texture. Then the approved
+# relaxed-3 idle is baked onto the rig, as for the others (rei-rig-1/install.sh; the server on 8771 must be up).
+# Run r2.sh models first.
 #   sh art/candidates/carina-meshy-1/install.sh        (run from the worktree root)
 set -e
 HERE=art/candidates/carina-meshy-1
@@ -10,13 +12,15 @@ M=/home/jorgen/repo/japanese/art/parts/carina-meshy-1
 G=game3d/assets/characters/carina
 PY=~/ai/sd/venv/bin/python
 WT=$(pwd)
-mkdir -p "$G" $M/rig
+SRC=$M/r2/model/carina-2r2-denim.glb
+mkdir -p "$G" $M/r2/rig
 rm -f "$G"/*.json "$G"/idle.glb
 for c in walk run sit; do
-  $PY $HERE/rig.py $M/meshy/carina-2-tex-rigged.glb "$WT/game3d/assets/characters/emi/$c.glb" $M/rig/carina2-$c.glb model=carina-2
+  $PY $HERE/rig.py $SRC "$WT/game3d/assets/characters/emi/$c.glb" $M/r2/rig/carina2r2-denim-$c.glb model=carina-2
 done
-python3 game3d/tools/slim_glb.py $M/rig/carina2-walk.glb "$G/walk.glb" $M/rig/carina2-run.glb "$G/run.glb" $M/rig/carina2-sit.glb "$G/sit.glb"
-$PY - $M/meshy/carina-2-tex.glb "$G/base.webp" <<'EOF'
+R=$M/r2/rig/carina2r2-denim
+python3 game3d/tools/slim_glb.py $R-walk.glb "$G/walk.glb" $R-run.glb "$G/run.glb" $R-sit.glb "$G/sit.glb"
+$PY - $SRC "$G/base.webp" <<'EOF'
 import io, json, struct, sys
 from PIL import Image
 b = open(sys.argv[1], 'rb').read(); n = struct.unpack('<I', b[12:16])[0]; j = json.loads(b[20:20 + n]); blob = b[28 + n:]
