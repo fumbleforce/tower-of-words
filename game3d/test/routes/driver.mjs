@@ -205,6 +205,11 @@ export async function runRoute(browser, route, { base, viewport, who = {} }) {
       assert.deepEqual(after.inv, checkpoint.inv, 'Continue must preserve inventory');
       assert.equal(after.yen, checkpoint.yen + (route.resumeYenDelta || 0), 'Continue must apply only the remaining payment');
     } else await settled(page, route.startAt || route.seed.place); // (startAt: where the opening scene ends up)
+    if (route.calendarDay) await page.evaluate(async day => {
+      const g = window.__game;
+      g.sim.day = day; g.flagsRef.day = day;
+      await g.hooks.day4Setup();
+    }, route.calendarDay);
     for (const step of route.actions || []) await action(page, step, step.settleAt || route.seed.place);
     if (route.expect.ended) {
       await page.locator('#end.in .again').waitFor({ state: 'visible', timeout: 5000 });

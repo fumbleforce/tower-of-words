@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { rbox, textTexture } from '../../props.js';
 import { sim } from '../../sim.js';
 import { movable } from './tennis-props.js';
+import { walkRig, faceRig } from '../../move.js';
 import { standPose } from '../../crowd/motion.js';
 
 const SIGNS = {
@@ -46,7 +47,7 @@ function card(lines) {
     ),
   );
 }
-export function sundayProps(game, P, name, cast) {
+export function sundayProps(game, P, name, shot) {
   const things = {};
   const objects = [],
     own = (o) => {
@@ -139,8 +140,8 @@ export function sundayProps(game, P, name, cast) {
   return {
     things,
     sync,
-    snapshot: () => captureObjects(objects),
-    load: (s) => restoreObjects(objects, s),
+    snapshot: () => captureObjects(sheet ? [...objects, sheet.children[0]] : objects),
+    load: (s) => restoreObjects(sheet ? [...objects, sheet.children[0]] : objects, s),
     async setup({ state } = {}) {
       sync();
       if (state === 'remote') {
@@ -148,16 +149,21 @@ export function sundayProps(game, P, name, cast) {
         standPose(r);
         r.seated = false;
         r.root.position.y = 0;
-        await game.wait(400);
+        await walkRig(game, r, P.spots.commons_sofa, { speed: 1.4 });
+        await faceRig(game, r, [P.seats.commons_sofa.x, P.seats.commons_sofa.z]);
+        await game.hooks.gesture({ who: 'kenji', kind: 'point' });
         follow(remote, 'kenji', 0.25, 0.65, 0.1);
         await game.wait(400);
       } else if (state === 'sketch') {
         const x = eraser.position.x;
-        P.cam.closeOn(P.things.art_table.face(), 2.2, sheet.position.y);
-        await game.tween(1, (k) => {
-          eraser.position.x = x + Math.sin(k * Math.PI * 6) * 0.04;
-          sheet.children[0].scale.x = 1 - k * 0.7;
-        });
+        shot.focus(P.things.art_table.face(), 8, sheet.position.y);
+        await Promise.all([
+          game.hooks.gesture({ who: 'mori', kind: 'point' }),
+          game.tween(1, (k) => {
+            eraser.position.x = x + Math.sin(k * Math.PI * 6) * 0.04;
+            sheet.children[0].scale.x = 1 - k * 0.7;
+          }),
+        ]);
       } else if (state === 'bags') {
         const r = P.people.kuroda;
         await game.tween(0.7, (k) => {

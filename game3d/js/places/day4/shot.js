@@ -23,6 +23,10 @@ export function actionShot(P) {
     load(s) {
       shot = s?.shot || null;
       home = s?.home || null;
+      if (shot) {
+        P.cam.closeOn(shot.point, P.cam.fitDist / shot.distance, shot.y);
+        Object.assign(P.cam, { yaw: shot.yaw, elev: shot.elev });
+      }
     },
   };
 }

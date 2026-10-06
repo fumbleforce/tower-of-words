@@ -4,7 +4,7 @@ import { dayCast } from '../day-cast.js';
 import { applyPlan } from '../day3/index.js';
 import { PLANS } from './plan.js';
 import { day3Place } from '../day3/place.js';
-import { sim } from '../../sim.js';
+import { isSunday } from './calendar.js';
 import { sundayProps } from './props.js';
 import { tennisCourt } from './tennis.js';
 import { actionShot } from './shot.js';
@@ -13,7 +13,7 @@ import { fanRepair } from './fan.js';
 export function attachSunday(game, P, name) {
   const cast = dayCast(game, { root: P.space, K: P.charScale || 1, have: P.people });
   const shot = actionShot(P);
-  const props = sundayProps(game, P, name, cast);
+  const props = sundayProps(game, P, name, shot);
   const court = name === 'sports' ? tennisCourt(game, P, cast, shot) : null;
   const fan = name === 'gym' ? fanRepair(game, P, shot) : null;
   P.sunday = {
@@ -76,5 +76,5 @@ export function attachSunday(game, P, name) {
   };
 }
 export function installDay4(game) {
-  game.hooks.day4Setup = (a) => sim.day === 4 && game.place?.day4(a);
+  game.hooks.day4Setup = (a) => isSunday() && game.place?.day4(a);
 }

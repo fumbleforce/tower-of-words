@@ -924,7 +924,7 @@ No crowd.
 
 The fourth district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Sports and baths"). It runs from the north street's top past the back lane, west along the sports lane to the gym's front, north up the pool walk between the gym and the pool to the shower pavilion's door, and east along the courts walk behind the north residence to the foot of the onsen path. Eric comes in from the east lane, up the north street, from the east coast, along the courts walk, and from the office street, round the gym's corner (Getting between places). With those two it closes the first loop round the south-east of the island. The back lane, the clinic, the grove, Amakawa Travel and the blocks south of the north street's top are the ground the east lane shows (under the plaza above), built by the same code, as are r3's and block_e3's fronts.
 
-Walked: the north street from a little north of the back lane up to the sports lane, with the short walk to r3's door; the sports lane from the gym's west corner east to the north street, and the gym's apron in front of its door; the pool walk from the sports lane north to the pavilion's door; the courts walk from the pool walk east to the onsen path's foot, with the short walks north to the tennis courts' gate and south to the north residence's door, on one axis across it; through the gate, the west tennis court and the run-off round it, as far east as the strip between the two courts (issue #227, the tennis club). Lawns, beds, the pool's deck (walked as `pool`, below) and the east court are not walked. West past the gym's front the sports lane turns north at the gym's corner by gym_link into the office street, walked a few steps west to where the office quarter takes over (`office_quarter`, below); the corner and the street in front of Amakawa Life and Construction, their fronts and Construction's walk are the office quarter's, built by the same code.
+Walked: the north street from a little north of the back lane up to the sports lane, with the short walk to r3's door; the sports lane from the gym's west corner east to the north street, and the gym's apron in front of its door; the pool walk from the sports lane north to the pavilion's door; the courts walk from the pool walk east to the onsen path's foot, with the short walks north to the tennis courts' gate and south to the north residence's door, on one axis across it; through the gate, both tennis courts and their run-off, with each net blocked. Sunday beginners use the west court while the doubles players use the east court. Lawns, beds and the pool's deck (walked as `pool`, below) are not walked. West past the gym's front the sports lane turns north at the gym's corner by gym_link into the office street, walked a few steps west to where the office quarter takes over (`office_quarter`, below); the corner and the street in front of Amakawa Life and Construction, their fronts and Construction's walk are the office quarter's, built by the same code.
 
 The north street and the sports lane are the lanes' brick between pale borders, turning into each other at a square of herringbone; the north street keeps its verge and zelkovas down its west side and its lamps on its east, as in the east lane, and the sports lane has a verge with a low hedge on its south side and post lamps behind its kerb, and no trees there, so nothing stands between Eric and the camera. The walks are the coast walk's pale slabs between kerbs. A finger sign at the lanes' corner points west: Gym 体育館 and Pool プール; another at the courts walk's start points east: Onsen 温泉.
 
@@ -974,13 +974,15 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Who's there when
 
-Day 3: Rei serving on the west court in the afternoon. The office street is closed past the gym's corner by a barrier (places/closure.js); its marker moves to the barrier.
+Day 3: Rei serving on the west court in the afternoon. Sunday afternoon and evening: Rei demonstrates the loose score button beside the bench; its cap can be lifted and reseated, with a visible double increment before repair and a single increment afterward. Sunday evening adds Aoi with a ball basket, two spare rackets, a member beside the bench and three players on the other court. The player and Aoi practise on the west court; Rei rejoins the east court for doubles. Evening floodlights illuminate the courts. Drinks, a loosened shoelace and the member’s bottle-and-ball action are physical props. The bench approach leaves room around seated knees. The office street is closed past the gym's corner by a barrier (places/closure.js); its marker moves to the barrier.
 
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
-| `rei` | Day 3, afternoon: serving on the west court. Label "Tennis player". | – |
+| `rei` | Day 3 afternoon and Sunday afternoon/evening at the courts. Label "Tennis player" until introduced. | – |
+| `aoi` | Sunday evening, first beside the gate and later practising or seated at the bench. | – |
+| `member` | Sunday evening beside the bench with a bottle and a ball. | – |
 
 The crowd ([systems.md](systems.md), The crowd):
 
