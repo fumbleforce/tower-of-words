@@ -6,6 +6,7 @@ import { canTravel } from './places/definitions.js';
 import { needsLegacyOpening } from './narrative/legacy-opening.js';
 import { showEnd } from './end.js';
 import { nextDaySave, sampleDayEnd } from './days.js';
+import { restoreMet } from './saves/met.js';
 
 export function createContinue(game, { enter, travel, startScene, PLACES }) {
   const ui = game.ui;
@@ -17,7 +18,7 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
     globalThis.__shell?.titleEntered?.(); // from the title's Continue: its shot fades to this place (menu.js)
     // Schedule hooks may set visibility flags; saved progression remains authoritative.
     for (const key of Object.keys(flags)) delete flags[key];
-    Object.assign(flags, saved.flags || {});
+    sim.met = restoreMet(saved, flags);
     if (sim.day === 4) {
       await game.hooks.day4Setup();
       game.place.restoreState?.(saved);

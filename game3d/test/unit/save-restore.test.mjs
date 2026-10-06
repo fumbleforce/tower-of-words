@@ -53,6 +53,69 @@ function reset() {
 }
 beforeEach(reset);
 
+test('day-three sample and saved history preserve known colleagues in story conditions', async () => {
+  const { sampleDayEnd, nextDaySave } = await import('../../js/days.js');
+  const opening = nextDaySave(sampleDayEnd(3));
+  assert(opening.met.includes('emi'));
+  assert.equal(opening.flags.met_emi, undefined, 'the historical sample relies on its met collection');
+  S.restore(game, opening);
+  assert.equal(flags.met_emi, true);
+  S.save(game);
+  const continued = S.loadSave();
+  reset();
+  S.restore(game, continued);
+  assert.equal(flags.met_emi, true);
+  assert(S.sim.met.has('emi'));
+});
+
+test('actual Continue retains derived meeting flags after place restoration and before arrival story', async () => {
+  const { createContinue } = await import('../../js/continue.js');
+  const { sampleDayEnd, nextDaySave } = await import('../../js/days.js');
+  const opening = nextDaySave(sampleDayEnd(3));
+  delete opening.flags.met_emi;
+  let started = false;
+  game.ui = Object.fromEntries(['refreshWords', 'refreshPeople', 'refreshBag', 'goal', 'sideGoal'].map(k => [k, () => {}]));
+  const continueFrom = createContinue(game, {
+    enter: async name => {
+      game.place = { name, people: {}, restoreState() { flags.fixture_schedule = true; } };
+    },
+    travel() { assert.fail('unexpected travel'); }, PLACES: {},
+    startScene(name) {
+      assert.equal(name, opening.place);
+      assert.equal(flags.fixture_schedule, undefined, 'transient placement flags are still cleared');
+      assert.equal(flags.met_emi, true, 'the actual title Continue boundary must preserve known Emi');
+      assert.equal(flags.d2_brief_done, opening.flags.d2_brief_done);
+      assert(S.sim.met.has('emi'));
+      started = true;
+    },
+  });
+  await continueFrom(opening);
+  assert(started);
+  assert.equal(game.busy, false);
+  assert.equal(game.saveEnabled, true);
+  S.save(game);
+  assert.equal(S.loadSave().flags.met_emi, true);
+});
+
+test('meeting an existing People entry repairs its missing story flag without another bond award', () => {
+  S.meet(game, 'emi');
+  const before = structuredClone(S.bonds.person('emi'));
+  delete flags.met_emi;
+  S.meet(game, 'emi');
+  assert.equal(flags.met_emi, true);
+  assert.deepEqual(S.bonds.person('emi'), before);
+});
+
+test('loading a different met collection removes stale met flags but preserves unrelated flags', () => {
+  flags.met_emi = true;
+  S.restore(game, { v: 1, day: 3, period: 'morning', met: ['mori'],
+    flags: { met_emi: true, d2_brief_done: true, fact_emi_ten_years: true } });
+  assert.equal(flags.met_emi, undefined);
+  assert.equal(flags.met_mori, true);
+  assert.equal(flags.d2_brief_done, true);
+  assert.equal(flags.fact_emi_ten_years, true);
+});
+
 test('simulation saves earlier-place gates and restores them before entering the current story', () => {
   S.absorb({ gates: { mio: { 3: 'train_trust', 4: 'train_close' } } });
   S.save(game);

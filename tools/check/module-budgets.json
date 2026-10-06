@@ -135,10 +135,10 @@
       "reason": "Existing wall, window and edge geometry builders share showcase dimensions and materials. Stage 5 room-builder review will separate reusable trim construction from room composition."
     },
     "game3d/js/sim.js": {
-      "lines": 557,
-      "bytes": 21769,
+      "lines": 555,
+      "bytes": 21740,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore); C-0438 People panel text from story/people.js, #223 (ceiling lowered); 2026-10-05 #251: imports, game.mc and game.cast, the save mc and cast fields and their migration (mc.js, roles.js); 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-05 #262: period_* flags (period-flags.js) on a period change and a load, bond2_<id> at step 2 (four lines); 2026-10-05 People portraits: peopleHTML passes the face crop through (14 bytes); 2026-10-06 #261: the visited places in the save, one import, one save and one restore line (travel/visited.js)",
+      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore); C-0438 People panel text from story/people.js, #223 (ceiling lowered); 2026-10-05 #251: imports, game.mc and game.cast, the save mc and cast fields and their migration (mc.js, roles.js); 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-05 #262: period_* flags (period-flags.js) on a period change and a load, bond2_<id> at step 2 (four lines); 2026-10-05 People portraits: peopleHTML passes the face crop through (14 bytes); 2026-10-06 #261: the visited places in the save, one import, one save and one restore line (travel/visited.js); 2026-10-06 #294: restore saved People/story flag parity in saves/met.js (ceiling lowered)",
       "reason": "Existing simulation, save and relationship integration; retain compatibility while extracting state."
     },
     "game3d/js/speech.js": {
