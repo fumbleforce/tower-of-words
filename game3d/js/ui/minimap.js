@@ -23,7 +23,8 @@ export function installMinimap(game) {
   btn.type = 'button';
   btn.hidden = true;
   btn.setAttribute('aria-label', 'Open the map (M)');
-  btn.innerHTML = '<canvas aria-hidden="true"></canvas><span class="mm-tag" aria-hidden="true"><kbd>M</kbd>Map</span>';
+  btn.innerHTML =
+    '<canvas aria-hidden="true"></canvas><span class="mm-north" aria-hidden="true">N</span><span class="mm-tag" aria-hidden="true"><kbd>M</kbd>Map</span>';
   document.getElementById('ui').appendChild(btn);
   const canvas = btn.querySelector('canvas'),
     ctx = canvas.getContext('2d');
@@ -75,6 +76,7 @@ export function installMinimap(game) {
         map.close();
       } else if (canOpen() && !window.__shell?.isPaused?.() && !document.querySelector('.layer.in')) {
         e.preventDefault();
+        e.stopImmediatePropagation(); // a closing map can still hold focus until its fade ends
         map.open();
       }
     },
@@ -89,8 +91,8 @@ export function installMinimap(game) {
           ? '#5b6370'
           : null
         : visited.has(id)
-          ? '#eef0f4'
-          : '#a9b1bf';
+          ? '#1d3946'
+          : '#667e88';
   function draw(e, goal) {
     const r = btn.getBoundingClientRect();
     const k = isPhone() ? 'phone' : 'desk';
@@ -99,16 +101,19 @@ export function installMinimap(game) {
       h = Math.round(r.height * dpr);
     if (canvas.width !== w || canvas.height !== h) Object.assign(canvas, { width: w, height: h });
     const v = { cx: e.x, cz: e.z, w: r.width, h: r.height, dpr, scale: SCALE[k] * (r.width / SIZE[k]) };
-    drawBase(ctx, v);
+    drawBase(ctx, { ...v, detail: false });
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     for (const [id, p] of Object.entries(PINS)) {
       const col = p.at && pinDot(id);
       if (!col) continue;
       const [x, y] = toView(v, ...p.at);
       ctx.fillStyle = col;
+      ctx.strokeStyle = '#eef6f1';
+      ctx.lineWidth = 1.2;
       ctx.beginPath();
       ctx.arc(x, y, isPhone() ? 2.6 : 3.6, 0, Math.PI * 2);
       ctx.fill();
+      ctx.stroke();
     }
     if (goal) {
       // the goal, or the point on the edge toward it

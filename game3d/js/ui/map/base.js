@@ -1,21 +1,27 @@
 // The island drawn for the game's map and the minimap (docs/game/controls-and-ui.md, The map): sea, land, sand,
-// green, paths and buildings straight from scenes/island-layout.js, in the HUD's slate. The shapes are built once
+// green, paths and buildings straight from scenes/island-layout.js, with a shared coastal palette. The shapes are built once
 // as Path2D in island units and drawn through the view's transform, so a pan or a zoom is one redraw and nothing is
 // kept per zoom level. North (the grid's north, -z) is up.
 import { BUILDINGS, PATHS, GREEN, COAST, SAND, HALF_EDGE, footprint } from '../../scenes/island-layout.js';
 
 export const INK = {
-  sea: '#101a24',
-  land: '#1f252d',
-  north: '#1a1f26',
-  green: '#26332d',
-  sand: '#2e3236',
-  path: '#39424e',
-  lane: '#424c59',
-  bld: '#3d4552',
-  bldEdge: '#4d5767',
-  beam: '#4a5361',
-  coast: '#2c3a48',
+  sea: '#24434f',
+  waterLine: '#355c69',
+  coast: '#779fa4',
+  land: '#bdcbc6',
+  north: '#afbfba',
+  green: '#8fae9a',
+  greenEdge: '#789888',
+  sand: '#d5d8c8',
+  path: '#eaf0eb',
+  lane: '#eaf0eb',
+  pathEdge: '#99aca7',
+  bld: '#7d939c',
+  bldEdge: '#526d79',
+  roof: '#b0c0c5',
+  shadow: '#9bafa9',
+  beam: '#526a77',
+  fountain: '#68aab5',
 };
 // what the map can be panned over: the built half of the island and its water
 export const BOUNDS = { x0: -132, x1: 142, z0: -140, z1: 58 };
@@ -47,6 +53,7 @@ function build() {
     flat: { path: newPath(), lane: newPath() }, // rects and circles, filled
     lines: [], // [{ path, w, lane, beam }], stroked at their width
     blds: newPath(),
+    roofs: [],
     coast: newPath(),
   };
   for (const g of SAND) poly(g.poly || rectOf(g.rect), L.sand);
@@ -65,7 +72,14 @@ function build() {
       t.arc(x, z, r, 0, Math.PI * 2);
     }
   }
-  for (const b of BUILDINGS) poly(footprint(b), L.blds);
+  for (const b of BUILDINGS) {
+    const points = footprint(b),
+      path = poly(points);
+    poly(points, L.blds);
+    const xs = points.map((p) => p[0]),
+      zs = points.map((p) => p[1]);
+    L.roofs.push({ path, kind: b.kind, box: [Math.min(...xs), Math.min(...zs), Math.max(...xs), Math.max(...zs)] });
+  }
   COAST.line.forEach(([x, z], i) => (i ? L.coast.lineTo(x, z) : L.coast.moveTo(x, z)));
   return L;
 }
@@ -79,43 +93,98 @@ export function drawBase(ctx, v) {
   ctx.fillStyle = INK.sea;
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   ctx.setTransform(k, 0, 0, k, v.dpr * (v.w / 2 - v.cx * v.scale), v.dpr * (v.h / 2 - v.cz * v.scale));
-  ctx.fillStyle = INK.land;
-  ctx.fill(L.land);
-  ctx.fillStyle = INK.north;
-  ctx.fill(L.north);
-  ctx.fillStyle = INK.sand;
-  ctx.fill(L.sand);
-  ctx.fillStyle = INK.green;
-  ctx.fill(L.green);
-  ctx.fillStyle = INK.path;
-  ctx.fill(L.flat.path);
-  ctx.fillStyle = INK.lane;
-  ctx.fill(L.flat.lane);
+  // Coast contours stay in the water: the land drawn next masks their inland half.
   ctx.lineJoin = 'round';
+  ctx.strokeStyle = INK.waterLine;
+  for (const width of [18, 10, 3]) {
+    ctx.lineWidth = width;
+    ctx.stroke(L.coast);
+    ctx.strokeStyle = width === 18 ? INK.sea : INK.coast;
+  }
+  for (const key of ['land', 'north', 'sand', 'green']) {
+    ctx.fillStyle = INK[key];
+    ctx.fill(L[key]);
+  }
+  ctx.strokeStyle = INK.greenEdge;
+  ctx.lineWidth = 0.4;
+  ctx.stroke(L.green);
   ctx.lineCap = 'round';
+  // A narrow verge separates pale paving from land and planting at every zoom.
+  ctx.strokeStyle = INK.pathEdge;
+  ctx.lineWidth = 0.6;
+  ctx.stroke(L.flat.path);
+  ctx.stroke(L.flat.lane);
   for (const l of L.lines) {
     if (l.beam) continue;
-    ctx.strokeStyle = l.lane ? INK.lane : INK.path;
+    ctx.lineWidth = l.w + 0.7;
+    ctx.stroke(l.path);
+  }
+  ctx.fillStyle = INK.path;
+  ctx.fill(L.flat.path);
+  ctx.fill(L.flat.lane);
+  ctx.strokeStyle = INK.path;
+  for (const l of L.lines) {
+    if (l.beam) continue;
     ctx.lineWidth = l.w;
     ctx.stroke(l.path);
   }
+  ctx.save();
+  ctx.translate(0.7, 0.9);
+  ctx.fillStyle = INK.shadow;
+  ctx.fill(L.blds);
+  ctx.restore();
   ctx.fillStyle = INK.bld;
   ctx.fill(L.blds);
   ctx.strokeStyle = INK.bldEdge;
-  ctx.lineWidth = 1 / v.scale;
+  ctx.lineWidth = 0.45;
   ctx.stroke(L.blds);
-  // the monorail's beam, dashed, over the ground
+  if (v.detail !== false) {
+    for (const roof of L.roofs) {
+      const [x0, z0, x1, z1] = roof.box;
+      ctx.save();
+      ctx.clip(roof.path);
+      ctx.strokeStyle = INK.roof;
+      ctx.lineWidth = 0.35;
+      ctx.strokeRect(x0 + 0.8, z0 + 0.8, x1 - x0 - 1.6, z1 - z0 - 1.6);
+      ctx.beginPath();
+      if (x1 - x0 > z1 - z0) {
+        ctx.moveTo(x0 + 0.8, (z0 + z1) / 2);
+        ctx.lineTo(x1 - 0.8, (z0 + z1) / 2);
+      } else {
+        ctx.moveTo((x0 + x1) / 2, z0 + 0.8);
+        ctx.lineTo((x0 + x1) / 2, z1 - 0.8);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+  // The fountain basin is a real landmark, centred in the existing paved circle.
+  const fountain = PATHS.find((p) => p.id === 'fountain_plaza').circle;
+  ctx.beginPath();
+  ctx.arc(fountain[0], fountain[1], 4.3, 0, Math.PI * 2);
+  ctx.fillStyle = INK.fountain;
+  ctx.fill();
+  ctx.strokeStyle = INK.path;
+  ctx.lineWidth = 0.9;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(fountain[0], fountain[1], 1.2, 0, Math.PI * 2);
+  ctx.fillStyle = INK.path;
+  ctx.fill();
+  // A rail centreline with ties is distinct from walkable paths.
   ctx.lineCap = 'butt';
-  ctx.strokeStyle = INK.beam;
-  ctx.setLineDash([2, 1.2]);
   for (const l of L.lines) {
     if (!l.beam) continue;
-    ctx.lineWidth = l.w * 0.6;
+    ctx.strokeStyle = INK.beam;
+    ctx.lineWidth = 0.5;
+    ctx.stroke(l.path);
+    ctx.setLineDash([0.45, 1.4]);
+    ctx.lineWidth = l.w;
     ctx.stroke(l.path);
   }
   ctx.setLineDash([]);
   ctx.strokeStyle = INK.coast;
-  ctx.lineWidth = 2 / v.scale;
+  ctx.lineWidth = 0.55;
   ctx.stroke(L.coast);
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
