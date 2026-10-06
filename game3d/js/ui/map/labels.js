@@ -4,7 +4,7 @@ export function placeLabels(points, width, height, top = 76, blocked = []) {
   const occupied = points.map(({ x, y }) => ({ x0: x - 23, x1: x + 23, y0: y - 23, y1: y + 23 }));
   occupied.push(...blocked);
   return points.map((p) => {
-    for (const dy of [0, -34, 34, -68, 68]) {
+    for (const dy of width < 700 ? [0, -34, 34] : [0, -34, 34, -68, 68]) {
       for (const left of [false, true]) {
         const dx = left ? -26 - p.width : 26;
         const box = { x0: p.x + dx, x1: p.x + dx + p.width, y0: p.y + dy - 15, y1: p.y + dy + 15 };

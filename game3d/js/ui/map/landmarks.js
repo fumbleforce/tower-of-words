@@ -25,9 +25,9 @@ export function mapFootprints(buildings, footprint) {
 }
 
 const COLORS = {
-  arcade: '#a0bec0',
-  pitch: '#788a96',
-  flat: '#8298a0',
+  arcade: '#91b9b8',
+  pitch: '#9b7967',
+  flat: '#9ba49e',
   garden: '#83a48f',
   solar: '#4e7787',
 };
@@ -36,6 +36,14 @@ export function drawRoof(ctx, roof, detail) {
     w = x1 - x0,
     d = z1 - z0;
   const type = roof.roofType;
+  const palette = {
+    tower: '#637f8a',
+    dorm: '#aa8975',
+    shop: '#b39677',
+    shed: '#929b9b',
+    gym: '#7e9f91',
+    office: '#9ba9a4',
+  };
   ctx.save();
   ctx.clip(roof.path);
   if (roof.kind === 'arcade') {
@@ -56,6 +64,8 @@ export function drawRoof(ctx, roof, detail) {
     ctx.restore();
     return;
   }
+  ctx.fillStyle = palette[roof.kind] || '#a2a69a';
+  ctx.fill(roof.path);
   if (type) {
     ctx.fillStyle = COLORS[type === 'pitch' ? 'pitch' : ['garden', 'beds'].includes(type) ? 'garden' : 'flat'];
     ctx.fill(roof.path);
@@ -64,7 +74,7 @@ export function drawRoof(ctx, roof, detail) {
     ctx.restore();
     return;
   }
-  ctx.strokeStyle = '#bfd0d0';
+  ctx.strokeStyle = '#e6e4ce';
   ctx.lineWidth = 0.3;
   ctx.strokeRect(x0 + 0.55, z0 + 0.55, w - 1.1, d - 1.1);
   ctx.beginPath();
@@ -89,9 +99,25 @@ export function drawRoof(ctx, roof, detail) {
     ctx.strokeRect(x0 + 1.2, z0 + 1.2, w - 2.4, d - 2.4);
     ctx.fillStyle = '#647f8b';
     ctx.fillRect(x0 + w * 0.28, z0 + d * 0.28, w * 0.44, d * 0.44);
+  } else if (roof.kind === 'dorm') {
+    ctx.fillStyle = '#d5c6ac';
+    for (let x = x0 + 1; x < x1 - 1; x += 2.4) ctx.fillRect(x, z1 - 1.2, 1.3, 0.7);
+    ctx.moveTo(x0 + w * 0.5, z0 + 0.6);
+    ctx.lineTo(x0 + w * 0.5, z1 - 0.6);
+  } else if (roof.id === 'gym' || roof.id === 'platform_shed') {
+    ctx.fillStyle = '#638785';
+    ctx.fillRect(x0 + w * 0.35, z0 + 0.6, w * 0.3, d - 1.2);
+    for (let z = z0 + 2; z < z1 - 1; z += 3) {
+      ctx.moveTo(x0 + 0.4, z);
+      ctx.lineTo(x1 - 0.4, z);
+    }
   } else {
-    // Parallel flat-roof seams remain quiet behind destination labels.
-    for (let x = x0 + 2; x < x1 - 0.8; x += 2.5) {
+    // A plant block and broad seams identify flat roofs without uniform barcode stripes.
+    if (w > 5 && d > 4) {
+      ctx.fillStyle = '#778e8b';
+      ctx.fillRect(x0 + 1, z0 + 1, Math.min(3, w * 0.25), Math.min(2, d * 0.25));
+    }
+    for (let x = x0 + 4; x < x1 - 0.8; x += 5) {
       ctx.moveTo(x, z0 + 0.6);
       ctx.lineTo(x, z1 - 0.6);
     }
