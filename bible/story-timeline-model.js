@@ -25,3 +25,15 @@ export function calendarStories(stories, files, routes) {
     status: /^built/.test(story.status || '') ? 'built' : 'documented', source: story.file, sourceLabel: story.title, storyId: story.id,
   })).filter(s => s.column >= 0 && s.column < 5) }));
 }
+
+export function storyCast(stories) {
+  const ids = new Set();
+  const visit = value => {
+    if (!value || typeof value !== 'object') return;
+    for (const [key, item] of Object.entries(value)) {
+      if ((key === 'say' || key === 'who') && typeof item === 'string') ids.add(item === 'miotext' ? 'mio' : item);
+      else if (typeof item === 'object') visit(item);
+    }
+  };
+  visit(stories); return [...ids];
+}
