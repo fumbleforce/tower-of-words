@@ -1,6 +1,6 @@
 import { place } from './shared.js';
 import saturday from '../day3/plaza.js';
-export default place({ east_lane: ['talk:dorm_lane', 'zone:dorm_exit'], shotengai: ['talk:shop_walk', 'zone:shop_walk'], forecourt: ['talk:office_lane', 'zone:office_lane'] }, {
+export default place({ canteen: ['talk:canteen_door'], east_lane: ['talk:dorm_lane', 'zone:dorm_exit'], shotengai: ['talk:shop_walk', 'zone:shop_walk'], forecourt: ['talk:office_lane', 'zone:office_lane'] }, {
   labels: { aoi: ['Aoi', 'd3_aoi_intro'] },
   on: { 'talk:noticeboard': 'd4_board', 'talk:board_map': 'd3_map', 'say:koko:board_map': 'd3_here', 'talk:aoi': 'd4_aoi_walk', 'talk:fountain': 'd4_fountain' },
   nodes: {

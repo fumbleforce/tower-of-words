@@ -29,6 +29,9 @@ Jørgen, 2026-10-02: "we must make the island feel more alive ... and small crea
 
 ## Getting between places
 
+- `plaza` → `canteen`, walk: through the glazed front door on the fountain axis, into the ground-floor dining room.
+- `canteen` → `plaza`, walk: out of the same door onto its terrace, facing the fountain.
+
 There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transitions"). Each move is one trip the player watches. Fast travel from the map (systems.md, Fast travel) skips the leaving walk: the frame crossfades straight into the arriving walk from the route's last place, as below. A trip is finished before anyone in the new place speaks: the crossfade has cleared and a camera pulling back from the arrival has settled. One line per trip: from, to, how, then what the player sees; a trip to or from a planned place is planned too. The bible draws these as the places diagram (http://127.0.0.1:8771/bible/#place-map).
 
 - `train` → `gate`, walk: Eric steps off onto the platform, follows the covered walkway and enters Honsha station's security room through its glass doors.
@@ -93,6 +96,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `gate` | -14.45 | 6.5 | 0 | 1 | 0 | The room centred on the station building's footprint. |
 | `forecourt` | -13.95 | -0.65 | 0 | 1 | 0 | The gate room: its exit is the station door. |
 | `office` | 8.75 | -8.45 | 0 | 1 | -2 | Its lift under the forecourt's lift. |
+| `canteen` | 33.885 | -20.5 | 0 | 1 | 0 | The ground-floor footprint, front edge centred in the existing canteen. |
 | `plaza` | 37.29 | -2.48 | 0 | 1 | 0 | Its fountain on the map's fountain, 2.4 south of it on the lane's axis. |
 | `dorm_court` | 79.84 | -1.3 | 90 | 1 | 0 | The open entrance court on the west side of the dorm blocks; its camera looks east at Eric's block. |
 | `dorms` | 85.49 | -1.79 | 90 | 1 | 1 | Eric's flat on 2F of his block, above the passage; its window faces the next block's west end, 1.2 out. The corridor runs to the stairs in the block's return. |
@@ -129,6 +133,7 @@ The game's map and the minimap (controls-and-ui.md, The map) show each outdoor p
 | `forecourt` | -6 | -1 | |
 | `office` | | | `forecourt` |
 | `plaza` | 37.29 | -2.75 | |
+| `canteen` | | | `plaza` |
 | `dorm_court` | 79.84 | -1.3 | |
 | `dorms` | | | `dorm_court` |
 | `shotengai` | 30.3 | 20.1 | |
@@ -403,6 +408,7 @@ In the morning the plaza is a side trip with no story beat: the goal points back
 | `fountain` | Fountain | The fountain in the middle of the plaza. |
 | `dorm_lane` | To the dorms | The lane east of the plaza, toward the dorms (before work is over, into the east lane). |
 | `training_door` | Training centre | block_e1's door at the head of the cross walk. Go in: it is locked. |
+| `canteen_door` | Canteen | The actual glazed front door on the fountain axis. Opens the ground-floor dining room on days 1–5. |
 | `canteen_table` | Canteen table | The terrace table nearest the link, with the last chair standing. After work only. |
 | `noticeboard` | Notice board | The notice board at the south of the circle. Read: its posts up close; from day 3 the club posters first, each with a slip to take ([systems.md](systems.md#notice-board)). |
 | `shop_walk` | To the shop street | The south walk east of the cross walk's foot, by the finger sign. |
@@ -459,6 +465,7 @@ The crowd ([systems.md](systems.md), The crowd):
 | Nodes | When | What happens |
 |---|---|---|
 | `canteen_table` | Optional terrace interaction after work | [The walk home](stories/evening-walk.md) records the encounter. |
+| `to_canteen` | Use the front canteen door | Walk into the ground-floor dining room. |
 | `arrive` | Arrive from the forecourt | The goal points back west to the head-office lift; after work, east to the dorms. |
 | `training_locked` | Go in at the training centre's door, morning or after work | The door is locked; a notice on the glass says the next new-staff training starts in April. |
 | `fountain` | Talk to the fountain | A sign on the rim asks people not to throw coins; the bottom is covered in coins. |
@@ -1653,3 +1660,40 @@ Played in the evening, after work.
 | `home` | In the room, on the walk home | A moment in the room, then the day saves and ends ([`mio-notices`](stories/mio-notices.md)). |
 | `window`, `boxes`, `bed` | Talk to them | Eric comments on the blocked sky, finding his clean shirts and being too tired to get up again. |
 | `computer` | Look at the computer | One line of narration: the company set it up and switched it on, and someone stuck a welcome note on the screen. |
+
+
+## Canteen (`canteen`)
+
+The furnished ground floor occupies the existing canteen footprint north of the fountain plaza. Eight six-seat tables, two usable end chairs, tiled floor, teal chairs and wall protection, a hot-food counter with tray rail and cashier terminal, water dispenser, cups and a tray-return trolley. Back windows and a kitchen hatch sit above the service line. Three unnamed diners use the existing generic bodies; a worker stands behind the counter during daytime. No new conversation or food transaction is attached. At evening the worker is gone, the exterior windows darken and the wall lights warm the room; diners can still sit indoors. The existing terrace closing scene stays outside.
+
+The entrance and return walk use the actual south-facing door. Main aisles connect the door, counter, water, return trolley and both usable chairs. Furniture and the staff lane block player movement. The upper floor and kitchen behind the serving line remain inaccessible. Desktop shows the room; phone follows the player.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `canteen_exit` | Fountain plaza | Go out through the front door. |
+| `canteen_seat_w` | Dining chair | Sit at the west side of the main aisle. |
+| `canteen_seat_e` | Dining chair | Sit at the east side of the main aisle. |
+
+### Spots
+
+`canteen_in`, `meal_counter`, `water`, `tray_return`
+
+### Seats
+
+`canteen_seat_w`, `canteen_seat_e`
+
+### Zones
+
+None.
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Enter | Points back to the plaza; no new dialogue. |
+| `to_plaza` | Use the door | Walk back onto the terrace. |
+| `sit_w`, `sit_e` | Use a dining chair | Sit; movement stands up onto the aisle. |
+
+This completes one ground-floor interior. The training centre, clinic, unassigned office blocks, canteen upper floor and shop facades without their own registered place remain exterior shells or closed areas; this change does not make every island building enterable.

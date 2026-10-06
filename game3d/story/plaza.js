@@ -5,6 +5,7 @@ export default {
   speakers: { canteen_worker: { name: 'Canteen worker' } },
   start: 'arrive',
   on: {
+    'talk:canteen_door': 'to_canteen',
     'idle:canteen_worker': [
       { if: 'going_home && evening_canteen_helped', node: 'canteen_goodbye' },
       { if: 'going_home', node: 'canteen_closing' },
@@ -22,6 +23,7 @@ export default {
   show: { canteen_table: 'going_home && !evening_canteen_helped' },
   goal: { office_lane: '!going_home', dorm_lane: 'going_home' },
   nodes: {
+    to_canteen: [{ do: 'trip', to: 'canteen' }],
     canteen_closing: [
       { do: 'look', who: 'canteen_worker', at: 'canteen_table' },
       { say: 'canteen_worker', overheard: true, emo: 'polite', text: '{sumimasen}、今日はもう終わりなんです。' },

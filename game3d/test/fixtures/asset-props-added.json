@@ -1,5 +1,74 @@
 [
   {
+    "id_": "prop/canteen/canteen_exit",
+    "kind": "prop",
+    "name": "Fountain plaza",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_exit",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Fountain plaza'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_seat_e",
+    "kind": "prop",
+    "name": "Dining chair",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_seat_e",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Dining chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_seat_w",
+    "kind": "prop",
+    "name": "Dining chair",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_seat_w",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Dining chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/dorm_commons/art_table",
     "kind": "prop",
     "name": "Art materials",
@@ -1960,6 +2029,29 @@
     "tags": [
       "in game",
       "thing small"
+    ]
+  },
+  {
+    "id_": "prop/plaza/canteen_door",
+    "kind": "prop",
+    "name": "Canteen",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.canteen_door",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Canteen'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
     ]
   },
   {
