@@ -31,7 +31,7 @@ const { WORDS: DAY4_WORDS } = await imp('story/day4/words.js');
 const jaRe = /[぀-ヿ一-龯]/;
 const resolve = (t) => t.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
 
-// each day's story files, freshly imported for one protagonist (expandMc fills the tokens in place)
+// Each protagonist expands a private copy; nested imports can share cached story objects.
 export const storySets = () =>
   Object.entries(DAYS).map(([day, d]) => ({
     day: +day,
@@ -79,7 +79,7 @@ async function collect(mc, sets) {
   // and each later day's own set (js/days.js): day 2 is story/day2/
   for (const { day, files } of sets) for (const { name, load } of files) {
     if (!load) continue;
-    const st = expandMc(await load(), mc);
+    const st = expandMc(structuredClone(await load()), mc);
     const had = new Set(out.keys());
     for (const [id, sp] of Object.entries(st.speakers || {})) if (sp && sp.phone) PHONE.add(id);
     if (name === 'transitions') for (const v of Object.values(st)) { walk(v.walk); walk(v.ride); walk(v.arrive); }

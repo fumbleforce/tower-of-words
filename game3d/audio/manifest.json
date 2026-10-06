@@ -7877,6 +7877,76 @@
   "emo": "curious"
  },
  {
+  "key": "ln-1lvkziu",
+  "speaker": "eric",
+  "text": "I’d have missed that tray.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-154534c",
+  "speaker": "eric",
+  "text": "Fair enough. I nearly put them in separate cubbies.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-12knlgc",
+  "speaker": "eric",
+  "text": "I’ll leave that under the carton.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1uf2fkx",
+  "speaker": "eric",
+  "text": "I wasn’t going to fit through there anyway.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-bsmfvf",
+  "speaker": "eric",
+  "text": "I wonder how many of these end up here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-2fbq5y",
+  "speaker": "eric",
+  "text": "Somebody found that out the hard way.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-e332e8",
+  "speaker": "eric",
+  "text": "I’d better leave that in place.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
   "key": "oh-pcyyz9",
   "speaker": "kenji",
   "text": "メロンソーダをください。",
@@ -8488,6 +8558,2162 @@
   "slow": true
  },
  {
+  "key": "carina-matte",
+  "speaker": "carina",
+  "text": "待って。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-akete",
+  "speaker": "carina",
+  "text": "開けて。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-kite",
+  "speaker": "carina",
+  "text": "来て。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-ugoite",
+  "speaker": "carina",
+  "text": "動いて。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-irete",
+  "speaker": "carina",
+  "text": "入れて。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-dashite",
+  "speaker": "carina",
+  "text": "出して。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-tomatte",
+  "speaker": "carina",
+  "text": "止まって。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-ohayo",
+  "speaker": "carina",
+  "text": "おはようございます。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-yoroshiku",
+  "speaker": "carina",
+  "text": "よろしくおねがいします。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-sumimasen",
+  "speaker": "carina",
+  "text": "すみません。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "carina-isshoni",
+  "speaker": "carina",
+  "text": "いっしょに。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "ln-uf8chl-carina",
+  "speaker": "carina",
+  "text": "Sea on both sides. Nobody said the island was this far out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-nv21v1-carina",
+  "speaker": "carina",
+  "text": "Yeah, IT support. I'm the contractor, it's my first day.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-m6bdio-carina",
+  "speaker": "carina",
+  "text": "A what?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-yzzqmx-carina",
+  "speaker": "mio",
+  "text": "Mm, like that. Don't worry, it's not mean, it's like saying “the new girl”. Only, you stay new girl for, um, maybe ten years.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "teasing"
+ },
+ {
+  "key": "ln-15pioie-carina",
+  "speaker": "carina",
+  "text": "Norway.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1f3apoo-carina",
+  "speaker": "carina",
+  "text": "Windows 95?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "surprised"
+ },
+ {
+  "key": "ln-mn2vz-carina",
+  "speaker": "carina",
+  "text": "Hi. Um... good morning?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-2gdgdf-carina",
+  "speaker": "carina",
+  "text": "Right, Mio did say nine.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1a2t8zl-carina",
+  "speaker": "carina",
+  "text": "The train doors, and now this...",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "whisper"
+ },
+ {
+  "key": "ln-t645tb-carina",
+  "speaker": "carina",
+  "text": "Arigatō.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1qad83b-carina",
+  "speaker": "carina",
+  "text": "I was only going to sit down for a second.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "ln-rh2bfc-carina",
+  "speaker": "carina",
+  "text": "B2. Sorry, I should have said.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-17d7qzu-carina",
+  "speaker": "carina",
+  "text": "I'll remember that.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-2o5x1j-carina",
+  "speaker": "kenji",
+  "text": "Carina-san? I am Kenji! Two months here, so now I am not the newest. Ah, sorry, your chair... I borrowed it. Mine is broken.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "excited"
+ },
+ {
+  "key": "ln-2sij6r-carina",
+  "speaker": "carina",
+  "text": "Nineteen ninety-six?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "surprised"
+ },
+ {
+  "key": "ln-1y5timr-carina",
+  "speaker": "carina",
+  "text": "The copier's fixed.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-xstxo2-carina",
+  "speaker": "carina",
+  "text": "I asked it nicely.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1aex6pt-carina",
+  "speaker": "carina",
+  "text": "Thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-754za5-carina",
+  "speaker": "emi",
+  "text": "You must be Carina. Emi, I run this lot. Sorry I wasn't about, I've been upstairs since seven begging for money.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-18mkp4n-carina",
+  "speaker": "carina",
+  "text": "How did it go?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-bv1y2f-carina",
+  "speaker": "mio",
+  "text": "Okay, I'm going home. Um... Carina?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-yet8nw-carina",
+  "speaker": "carina",
+  "text": "I was hoping I'd at least be able to see the sky.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "ln-wbv686-carina",
+  "speaker": "carina",
+  "text": "I can't remember which one I put the clean shirts in.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "ln-zco67p-carina",
+  "speaker": "carina",
+  "text": "If I lie down now, I'm not getting up again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "ln-anowsi-carina",
+  "speaker": "carina",
+  "text": "At least they set up my account.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-bvydd8-carina",
+  "speaker": "carina",
+  "text": "I need to buy a second pillow.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1p2erhs-carina",
+  "speaker": "carina",
+  "text": "I can hear people in the courtyard. I can’t see them from here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-bkxngo-carina",
+  "speaker": "carina",
+  "text": "There are the shirts. I should hang one up for Monday.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1cerra7-carina",
+  "speaker": "carina",
+  "text": "I can tell them about tonight when I call.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-a7hxqa-carina",
+  "speaker": "carina",
+  "text": "I'll find something to eat.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-q7145t-carina",
+  "speaker": "carina",
+  "text": "I’d like to have a look around.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1ptd3gi-carina",
+  "speaker": "carina",
+  "text": "I should decide where I’m going first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1dek99c-carina",
+  "speaker": "carina",
+  "text": "I could do with a drink.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1a2552h-carina",
+  "speaker": "carina",
+  "text": "Upstairs, 203. I know this bit now.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-jrslgr-carina",
+  "speaker": "carina",
+  "text": "Nothing new.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-yp3ofw-carina",
+  "speaker": "carina",
+  "text": "Oh, that’s what the ball is for. I thought it was a nest.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-itabkv-carina",
+  "speaker": "carina",
+  "text": "I can hear the water from the office steps. I thought it was a pipe leaking.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-kbrj6a-carina",
+  "speaker": "carina",
+  "text": "They still haven’t given you a badge, then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1s12sg1-carina",
+  "speaker": "carina",
+  "text": "I’m telling the wrong person. You’d eat my lunch as well.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-kz37la-carina",
+  "speaker": "carina",
+  "text": "I don’t suppose you’ve got any change. I’ll find a machine.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1knimwy-carina",
+  "speaker": "carina",
+  "text": "The sensor passes.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-7b5x51-carina",
+  "speaker": "carina",
+  "text": "待って.",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "matte",
+    "待って"
+   ]
+  ],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-v2ajs9-carina",
+  "speaker": "carina",
+  "text": "動いて.",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ugoite",
+    "動いて"
+   ]
+  ],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-1azg582-carina",
+  "speaker": "carina",
+  "text": "I’ve sent the report.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1proyh3-carina",
+  "speaker": "carina",
+  "text": "I put in for a replacement sensor.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-sqewc2-carina",
+  "speaker": "carina",
+  "text": "The sensor passes. I wouldn’t replace it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-r98ztf-carina",
+  "speaker": "kenji",
+  "text": "Carina! After work. Food. Welcome food!",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-17b87ok-carina",
+  "speaker": "carina",
+  "text": "That’s kind of him.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-k946lc-carina",
+  "speaker": "carina",
+  "text": "I should finish with Emi first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1i72sjc-carina",
+  "speaker": "kenji",
+  "text": "Carina! This way. Mori-san is there.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-1ffhzr1-carina",
+  "speaker": "carina",
+  "text": "I thought we were going inside.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1b693d1-carina",
+  "speaker": "mori",
+  "text": "カリーナさんは、どちらがいいですか。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1g0vquv-carina",
+  "speaker": "carina",
+  "text": "This is good. Thank you for doing all this.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1v3jviw-carina",
+  "speaker": "carina",
+  "text": "I should probably finish unpacking first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-s4w54k-carina",
+  "speaker": "carina",
+  "text": "You’ll have to show me. I only know the ski jump from television.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-185p4yn-carina",
+  "speaker": "carina",
+  "text": "What did you think of it?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1x7erri-carina",
+  "speaker": "carina",
+  "text": "I’m going to head back. Thank you for tonight.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-p60qe1-carina",
+  "speaker": "kenji",
+  "text": "Yes! See you Monday, Carina. Computer game also, maybe?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-186oae8-carina",
+  "speaker": "carina",
+  "text": "I don’t really know how to explain it yet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-1wr5b6m-carina",
+  "speaker": "carina",
+  "text": "Did we leave you with all the clearing up?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-bm35q9-carina",
+  "speaker": "carina",
+  "text": "I can carry them back then. You did enough tonight.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1gehvtb-carina",
+  "speaker": "carina",
+  "text": "I’d like to see more of Japan first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1iv7brb-carina",
+  "speaker": "carina",
+  "text": "I haven’t decided yet. I’m still finding my way round here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-wqxha0-carina",
+  "speaker": "carina",
+  "text": "A bit more of the island. I’ve barely been outside work.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1c6zzk2-carina",
+  "speaker": "carina",
+  "text": "I could bring my lunch down here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-ahm290-carina",
+  "speaker": "carina",
+  "text": "So this is the place on that flyer.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-sm8x5-carina",
+  "speaker": "carina",
+  "text": "That would save a wet walk before work.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-z69efc-carina",
+  "speaker": "carina",
+  "text": "I can have a look, then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-suqpq3-carina",
+  "speaker": "carina",
+  "text": "It’s all right. Is it broken?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-sorzna-carina",
+  "speaker": "carina",
+  "text": "There are steps all the way down between those rocks. You can’t see them from the path.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-9jij9d-carina",
+  "speaker": "carina",
+  "text": "I’ll stay up here, then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1k465dr-carina",
+  "speaker": "carina",
+  "text": "It’s easier to see where the water reaches from up here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1k8xanq-carina",
+  "speaker": "carina",
+  "text": "I can get back through the plaza.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-ilwr14-carina",
+  "speaker": "carina",
+  "text": "He’s eating his lunch. I’ll come back one morning.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1h4e3b6-carina",
+  "speaker": "carina",
+  "text": "Nine fingers again. He only does the checks in the morning.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-ev853h-carina",
+  "speaker": "carina",
+  "text": "That’s the monitor from my request list.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1cgzvh8-carina",
+  "speaker": "carina",
+  "text": "おはようございます.",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-18lg79h-carina",
+  "speaker": "carina",
+  "text": "The picture’s still steady.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1cxj7u9-carina",
+  "speaker": "carina",
+  "text": "I’ll come back in the morning when he can check it with me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1254rfy-carina",
+  "speaker": "carina",
+  "text": "Hold it there a second. The plug at the back is half out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-13g8eb9-carina",
+  "speaker": "carina",
+  "text": "Try turning it towards me again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-t5xtwj-carina",
+  "speaker": "carina",
+  "text": "Morning. You don’t have to get up.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1na6nr3-carina",
+  "speaker": "carina",
+  "text": "All right. I didn’t see anything.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-c4be4u-carina",
+  "speaker": "carina",
+  "text": "I’ll go round. You keep the shelter.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-8up9ur-carina",
+  "speaker": "carina",
+  "text": "That’s cleaner than my mug.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-ibqzn7-carina",
+  "speaker": "carina",
+  "text": "The station has signed it off.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1x8gij2-carina",
+  "speaker": "carina",
+  "text": "They need the test report before they can sign this off.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1jq7x5r-carina",
+  "speaker": "carina",
+  "text": "I’ll ask the guard in the morning.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1bnxq9q-carina",
+  "speaker": "carina",
+  "text": "So the new sensor’s in. Let’s see it work.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-m0qcov-carina",
+  "speaker": "carina",
+  "text": "Same old sensor, then. Let’s see if it behaves this time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-mzpd8p-carina",
+  "speaker": "carina",
+  "text": "There. It stopped short, the way it’s meant to.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-ygvqyq-carina",
+  "speaker": "carina",
+  "text": "Nobody’s printing anything today. I’ll leave you alone.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1coymf5-carina",
+  "speaker": "carina",
+  "text": "Too early to sleep. I could sit at the desk for a while.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-nkok6j-carina",
+  "speaker": "carina",
+  "text": "I can hear people out in the sun on the other side of the building.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1wlnttw-carina",
+  "speaker": "carina",
+  "text": "The towels are in the kitchen box, round the mugs. I knew I’d packed them somewhere.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1colwfw-carina",
+  "speaker": "carina",
+  "text": "I can leave the books until tomorrow.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-10fkzel-carina",
+  "speaker": "carina",
+  "text": "Nothing for 203.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-4jzp36-carina",
+  "speaker": "carina",
+  "text": "I’ll go up later. It’s too nice to sit indoors.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1ugch6q-carina",
+  "speaker": "carina",
+  "text": "All right, you can keep that spot.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-vz8i9g-carina",
+  "speaker": "carina",
+  "text": "They deliver rice as well. That would be a long walk with a sack.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-z61sqk-carina",
+  "speaker": "carina",
+  "text": "I can smell the toast from here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-xpv2y6-carina",
+  "speaker": "carina",
+  "text": "Morning. You were on my train, on the phone the whole way.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-kvzn3f-carina",
+  "speaker": "carina",
+  "text": "Where I work? IT support, down in B2.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1jpi4rx-carina",
+  "speaker": "carina",
+  "text": "She’s gone red. I think she’s asking whether I heard her on the phone.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1judhhw-carina",
+  "speaker": "carina",
+  "text": "Don’t worry about it. It was a long ride.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-i7cp77-carina",
+  "speaker": "carina",
+  "text": "I couldn’t follow a word of it, if that helps.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1xwrtar-carina",
+  "speaker": "carina",
+  "text": "Carina. よろしくおねがいします.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "yoroshiku",
+    "よろしくおねがいします"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-zz6sjj-carina",
+  "speaker": "carina",
+  "text": "The pool? I’ll have a look at the poster.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-17i8000-carina",
+  "speaker": "carina",
+  "text": "ここ. So we’re right by the fountain.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-n9uw8x-carina",
+  "speaker": "carina",
+  "text": "I’ve started using this sound to find my way home.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-j6mqdy-carina",
+  "speaker": "carina",
+  "text": "You’ve got the only dry patch in the shade.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-5mzqjy-carina",
+  "speaker": "carina",
+  "text": "There are enough balls here for me to lose a few.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1vzfau6-carina",
+  "speaker": "carina",
+  "text": "I know the numbers. Counting them while running is the problem.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-jt4qmm-carina",
+  "speaker": "emi",
+  "text": "You must be Carina. I’m Emi, your team lead. We’ve managed to miss each other at the office.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-1oyqkxf-carina",
+  "speaker": "carina",
+  "text": "Club members only, I think. The slips were on the plaza board.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-x7f563-carina",
+  "speaker": "carina",
+  "text": "The sign says the club has the pool this evening. I can come back then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-19pjla6-carina",
+  "speaker": "carina",
+  "text": "Are these somebody’s goggles?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-jgam7s-carina",
+  "speaker": "carina",
+  "text": "I’ll take your word for it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1cih3ak-carina",
+  "speaker": "carina",
+  "text": "Nobody’s on the desk this late. I’ll come back in the daytime.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-xjlw8-carina",
+  "speaker": "carina",
+  "text": "Hi. I’m from IT support, about the booking terminal?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-k12nub-carina",
+  "speaker": "carina",
+  "text": "And you need today’s list printed. There’s a reset button underneath. I’ll try that first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-n04xma-carina",
+  "speaker": "carina",
+  "text": "It probably just needed a minute.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-x03ufr-carina",
+  "speaker": "carina",
+  "text": "Let me print today’s list from here, so we know the whole thing comes out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1ptvtcz-carina",
+  "speaker": "carina",
+  "text": "I’d rather print it when he’s here to check it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-18awq8v-carina",
+  "speaker": "carina",
+  "text": "He’s got his sheet. I’ll leave the printer alone.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-y5usuf-carina",
+  "speaker": "carina",
+  "text": "What was that you said to it?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1o90k53-carina",
+  "speaker": "carina",
+  "text": "Swimming club at six is the last line. That’s all of it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1lnny36-carina",
+  "speaker": "mori",
+  "text": "あ、カリーナさん。こんにちは。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1tj8cfq-carina",
+  "speaker": "carina",
+  "text": "It’s frozen for you too? I’m looking at it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-53akh9-carina",
+  "speaker": "carina",
+  "text": "Tuesday’s the art club. I think he’s glad I signed up.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-12o2kwm-carina",
+  "speaker": "carina",
+  "text": "That feels better. I walked up here too fast.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-eq6hn2-carina",
+  "speaker": "carina",
+  "text": "I can just make out those steps without the telescope now.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1bjlevh-carina",
+  "speaker": "carina",
+  "text": "I wonder which bit of the mainland I came from.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-16f6kdr-carina",
+  "speaker": "carina",
+  "text": "Are you working?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-slo8hn-carina",
+  "speaker": "carina",
+  "text": "You’ve left the cloth at home today, then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1lt27b1-carina",
+  "speaker": "kenji",
+  "text": "Carina! Sit, sit. This is replay. I know winner.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-2y95xc-carina",
+  "speaker": "carina",
+  "text": "Don’t tell me, then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1e1b3ms-carina",
+  "speaker": "carina",
+  "text": "I’d better leave those to dry.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-wi7fmu-carina",
+  "speaker": "carina",
+  "text": "I haven’t got anything to print.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1ihbhyu-carina",
+  "speaker": "carina",
+  "text": "I should find out which of those cartons is milk before Monday.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-12o0sgp-carina",
+  "speaker": "carina",
+  "text": "I can hear the same losing tune from both machines.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-16f0hlf-carina",
+  "speaker": "carina",
+  "text": "They’re cooking already. I should eat before I come past here hungry.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1g73kky-carina",
+  "speaker": "mori",
+  "text": "あ、カリーナさん。お買い物ですか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1qovs1t-carina",
+  "speaker": "carina",
+  "text": "I’ll still help you carry those boxes back on Monday.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-nfa7nn-carina",
+  "speaker": "carina",
+  "text": "Oh, thanks. Take your time choosing.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-105jzy6-carina",
+  "speaker": "carina",
+  "text": "Still shopping for tennis things?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-9hlyte-carina",
+  "speaker": "carina",
+  "text": "Four of us fitted along here last night.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-nwnbrq-carina",
+  "speaker": "carina",
+  "text": "I could eat out here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1kgi8bv-carina",
+  "speaker": "carina",
+  "text": "I could manage the words if it were always this quiet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-xar669-carina",
+  "speaker": "carina",
+  "text": "I can go round through the plaza.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1fhw44u-carina",
+  "speaker": "carina",
+  "text": "Don’t put those down just to bow to me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-if6q0l-carina",
+  "speaker": "carina",
+  "text": "It’s much easier to hear the fridge when nobody’s here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-178mtjl-carina",
+  "speaker": "carina",
+  "text": "I’m not ready for bed yet. I could sit at the desk for a while.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-185ydx9-carina",
+  "speaker": "carina",
+  "text": "Somebody below me has burnt their toast. I should open this later.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-lcxb8e-carina",
+  "speaker": "carina",
+  "text": "There’s nothing for 203 today.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-4zeapz-carina",
+  "speaker": "carina",
+  "text": "I can go up for a rest and come out again later.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-xxewlg-carina",
+  "speaker": "carina",
+  "text": "All right. I’ll use the other end.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1dvp5ew-carina",
+  "speaker": "carina",
+  "text": "You’re going to tennis? I might see you there.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1g2wh9l-carina",
+  "speaker": "carina",
+  "text": "I can hear it before I turn the corner now.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-x20bvd-carina",
+  "speaker": "carina",
+  "text": "I’m Carina, from B2. I thought I’d have a look.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-k6wyo2-carina",
+  "speaker": "carina",
+  "text": "I remember you. I’m Carina.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-73f8v-carina",
+  "speaker": "carina",
+  "text": "Which bit was “together”?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-615i6y-carina",
+  "speaker": "carina",
+  "text": "いっしょに... 行きたい.",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ],
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-1arbziy-carina",
+  "speaker": "carina",
+  "text": "Let me stand a bit closer this time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-15e8s9f-carina",
+  "speaker": "carina",
+  "text": "Hang on, where should my feet be?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-fmgrt6-carina",
+  "speaker": "carina",
+  "text": "Shall we sit down for a bit?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-lt0bmw-carina",
+  "speaker": "carina",
+  "text": "Are they pinching? Mine do that after a while.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-10op0ch-carina",
+  "speaker": "carina",
+  "text": "I’m glad you came over to play.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-h2wcmv-carina",
+  "speaker": "carina",
+  "text": "It’s counting properly now.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1cpdsxp-carina",
+  "speaker": "carina",
+  "text": "I’ll ask someone about this when the afternoon players get here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1n9ircj-carina",
+  "speaker": "carina",
+  "text": "The cap’s catching on the edge. Can I lift it out?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-19prnei-carina",
+  "speaker": "carina",
+  "text": "Try it once more.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1rhp1ay-carina",
+  "speaker": "carina",
+  "text": "The balls at the bottom look much newer. Nobody wants to tip it out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-akd68l-carina",
+  "speaker": "carina",
+  "text": "The last booking is on here now. Could you check the date too?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-12hf1k5-carina",
+  "speaker": "carina",
+  "text": "It’s still running. I’ll leave it alone.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1lqeli2-carina",
+  "speaker": "carina",
+  "text": "I’ll come back when the attendant can check it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-xxkhzq-carina",
+  "speaker": "carina",
+  "text": "The fan from the list? Yes. The lever’s stuck halfway down.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-vvo8s-carina",
+  "speaker": "carina",
+  "text": "Let’s see if it keeps going.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-y773sm-carina",
+  "speaker": "carina",
+  "text": "The desk is closed until morning.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-za2wyv-carina",
+  "speaker": "carina",
+  "text": "The bookings are printing properly now.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-b2amj3-carina",
+  "speaker": "carina",
+  "text": "Is there?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-xxx97r-carina",
+  "speaker": "kuro",
+  "text": "Hello, Carina. There’s less wind at this end.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1nwp2h9-carina",
+  "speaker": "carina",
+  "text": "I’ll leave you the warm bit.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-16pwd91-carina",
+  "speaker": "carina",
+  "text": "I can smell the sea much more from up here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-12qt1es-carina",
+  "speaker": "carina",
+  "text": "I do that too. Eventually I have to leave the pencil alone.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1pi15ql-carina",
+  "speaker": "carina",
+  "text": "I’ll see you here for the art club.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1uz4sal-carina",
+  "speaker": "carina",
+  "text": "These are still damp at the corners.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-5qxc67-carina",
+  "speaker": "carina",
+  "text": "I’ll let you get your lunch.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1q90rpr-carina",
+  "speaker": "carina",
+  "text": "Oh, am I in the way? Sorry.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-zbiwr1-carina",
+  "speaker": "carina",
+  "text": "I can hear that machine from halfway down the street.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1vj5k5x-carina",
+  "speaker": "carina",
+  "text": "I should try a small carton first. I don’t know which one I like yet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1w05d5i-carina",
+  "speaker": "carina",
+  "text": "The Wednesday booking? It’s on the card here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1mdamku-carina",
+  "speaker": "carina",
+  "text": "Carina. I’m with IT support on B2.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-10mz8aj-carina",
+  "speaker": "carina",
+  "text": "Reception can check the label in the morning or afternoon.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1t9vd2v-carina",
+  "speaker": "carina",
+  "text": "There’s a wider format saved here. The printer is still using the narrow one.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-81733m-carina",
+  "speaker": "carina",
+  "text": "Does that have the whole name?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1no1224-carina",
+  "speaker": "carina",
+  "text": "Mio’s message said drinks here after six. I’ll come back then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-157zw6m-carina",
+  "speaker": "carina",
+  "text": "Kenji, I think I can get yours over to you without touching the machine.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-19gh5qi-carina",
+  "speaker": "mio",
+  "text": "I’ve seen her move things by speaking to them. I don’t know how. Do you want to see?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-ku10c8-carina",
+  "speaker": "carina",
+  "text": "Yes, I think it’s the same thing.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-vnii41-carina",
+  "speaker": "kenji",
+  "text": "Carina, what do you want?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-4f6obt-carina",
+  "speaker": "carina",
+  "text": "Water for me. Thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
   "key": "ln-xpw7lj-carina",
   "speaker": "emi",
   "text": "Morning, Carina. I’ve got ten minutes before they want me upstairs.",
@@ -8498,8 +10724,8 @@
   "emo": "bright"
  },
  {
-  "key": "ln-py8ybx",
-  "speaker": "eric",
+  "key": "ln-py8ybx-carina",
+  "speaker": "carina",
   "text": "I’m Carina. Good to meet you.",
   "lang": "en",
   "overheard": false,
@@ -8508,8 +10734,8 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1q7x4k4",
-  "speaker": "eric",
+  "key": "ln-1q7x4k4-carina",
+  "speaker": "carina",
   "text": "I’m Carina. Thank you.",
   "lang": "en",
   "overheard": false,
@@ -8518,8 +10744,128 @@
   "emo": "warm"
  },
  {
-  "key": "ln-13ajh93",
-  "speaker": "eric",
+  "key": "ln-1ss9z1t-carina",
+  "speaker": "carina",
+  "text": "From the machine?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-4kt2t9-carina",
+  "speaker": "carina",
+  "text": "Take your time. I always leave half of it in the can.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1fwmc3w-carina",
+  "speaker": "carina",
+  "text": "Yes please, I’d like some.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1dvqe9m-carina",
+  "speaker": "carina",
+  "text": "Somebody’s put a full box of paper beside it. That should save a few trips.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-w3cevn-carina",
+  "speaker": "carina",
+  "text": "That chair was taken before either of us got here, wasn’t it?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1ps337c-carina",
+  "speaker": "carina",
+  "text": "Somebody has the same radio station on as my neighbour back home.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-r8cjno-carina",
+  "speaker": "carina",
+  "text": "I’ll let you eat. See you later.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-bh5syw-carina",
+  "speaker": "carina",
+  "text": "Hello.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1ar74ks-carina",
+  "speaker": "carina",
+  "text": "I can get back to B2 from here without checking the map now.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1q5d8ly-carina",
+  "speaker": "carina",
+  "text": "They’ve put the cover over it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-17n8s8d-carina",
+  "speaker": "carina",
+  "text": "The request says to wait for a Sunday when someone can test it with me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1yd2rgr-carina",
+  "speaker": "carina",
+  "text": "I can hear the water against the steps from up here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-13ajh93-carina",
+  "speaker": "carina",
   "text": "I’m Carina. I’m on B2 too.",
   "lang": "en",
   "overheard": false,
@@ -8528,9 +10874,179 @@
   "emo": "warm"
  },
  {
-  "key": "ln-i0wwuc",
-  "speaker": "eric",
+  "key": "ln-1qhu0gg-carina",
+  "speaker": "carina",
+  "text": "You’re getting ready for tomorrow’s art club?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-sd99nu-carina",
+  "speaker": "carina",
+  "text": "I’ve signed up. I’ll see you here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-25der2-carina",
+  "speaker": "carina",
+  "text": "Thanks. I could sit down for a bit.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-vatlpu-carina",
+  "speaker": "carina",
+  "text": "That’s the wall outside my window. They can see it from the next block too.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-ecevgc-carina",
+  "speaker": "carina",
+  "text": "I haven’t been in yet. Let’s have a look.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-2svlri-carina",
+  "speaker": "carina",
+  "text": "I need breakfast things before I go home.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-i0wwuc-carina",
+  "speaker": "carina",
   "text": "Carina. You sent the request?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1y1ljkh-carina",
+  "speaker": "carina",
+  "text": "The request says to come here on Monday at lunch. I’ll try then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-15oxvvf-carina",
+  "speaker": "carina",
+  "text": "The edge of the songbook’s on the selector.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-130522h-carina",
+  "speaker": "carina",
+  "text": "The book’s still on it. Let’s move that first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-wcb63t-carina",
+  "speaker": "carina",
+  "text": "They keep the words on screen until the song starts. I could practise this bit.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1lvkziu-carina",
+  "speaker": "carina",
+  "text": "I’d have missed that tray.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-154534c-carina",
+  "speaker": "carina",
+  "text": "Fair enough. I nearly put them in separate cubbies.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-12knlgc-carina",
+  "speaker": "carina",
+  "text": "I’ll leave that under the carton.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1uf2fkx-carina",
+  "speaker": "carina",
+  "text": "I wasn’t going to fit through there anyway.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-bsmfvf-carina",
+  "speaker": "carina",
+  "text": "I wonder how many of these end up here.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-2fbq5y-carina",
+  "speaker": "carina",
+  "text": "Somebody found that out the hard way.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-e332e8-carina",
+  "speaker": "carina",
+  "text": "I’d better leave that in place.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -8546,5 +11062,150 @@
   "words": [],
   "clear": [],
   "emo": "dry"
+ },
+ {
+  "key": "ln-16dka0i-carina",
+  "speaker": "emi",
+  "text": "Carina! You found us.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-1imsd14-carina",
+  "speaker": "carina",
+  "text": "I think I’m in the right place this time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1sdy7hr-carina",
+  "speaker": "carina",
+  "text": "I’m Carina. Nice to meet you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-twfrvs-carina",
+  "speaker": "carina",
+  "text": "I’ll come in. I’m a bit out of practice.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1vdqzdk-carina",
+  "speaker": "carina",
+  "text": "I can carry those over. Go on.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-swvmx4-carina",
+  "speaker": "carina",
+  "text": "I’ll watch for a bit. Don’t wait for me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-dikb7f-carina",
+  "speaker": "carina",
+  "text": "Yes. I just need a moment at the wall.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1bh263p-carina",
+  "speaker": "carina",
+  "text": "At least it’s a short walk.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-2qksa8-carina",
+  "speaker": "carina",
+  "text": "I’ll head back. Thanks for having me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1axk4v1-carina",
+  "speaker": "carina",
+  "text": "I’ll remember that for next time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "carina-tabetai",
+  "speaker": "carina",
+  "text": "食べたい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-nomitai",
+  "speaker": "carina",
+  "text": "飲みたい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-mitai",
+  "speaker": "carina",
+  "text": "見たい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-ikitai",
+  "speaker": "carina",
+  "text": "行きたい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-koko",
+  "speaker": "carina",
+  "text": "ここ。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
  }
 ]

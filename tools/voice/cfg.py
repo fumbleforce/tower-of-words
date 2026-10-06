@@ -65,6 +65,7 @@ def speakers():
         'reader': ref('goro-ref12'),
         # Eric: the English voice eric-2 (no accent); his Japanese words are still read in Japanese (gen_takes.py)
         'eric': ref('eric-voice'),
+        'carina': ref('carina-voice-a'),  # Review carina-voice-1, a (2026-10-06)
         'emi': ref('emi-slice12'),
     }
     sp['ann'] = sp['conductor']
@@ -82,13 +83,13 @@ def speakers():
     return sp
 
 
-FEMALE = {'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'worker_a',
+FEMALE = {'carina', 'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'worker_a',
           'member', 'rei'}
 MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'stander', 'worker_b',
         'commuter_1', 'commuter_2', 'commuter_3', 'attendant'}
 # clones whose reference speaks English: their Japanese is made from the timbre alone (gen_takes.xvec)
-XVEC_JA = {'eric'}
-LUFS = {'eric': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0,  # Eric quieter, recorded voices a little under the cast
+XVEC_JA = {'eric', 'carina'}
+LUFS = {'eric': -23.0, 'carina': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0,  # player thoughts quieter, recorded voices a little under the cast
         'kuro': -20.0}  # Kuro's husky voice: "bit loud" at -18 (Review kuro-voice-2)
 LUFS_DEFAULT = -18.0
 

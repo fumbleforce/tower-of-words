@@ -2,7 +2,7 @@
 Japanese lines: passes on kana CER or on the written text compared character by character .
 English lines (Mio's and a few others): Whisper in English; both sides turned into plain letters (Japanese words to romaji,
 digits to words) and compared by character error rate.
-Japanese words said on their own (word-*, eric-*) and the Japanese parts of English lines (cfg.units) must also sound
+Japanese words said on their own (word-*, eric-*, carina-*) and the Japanese parts of English lines (cfg.units) must also sound
 Japanese: Whisper's language guess on the take, P(ja) >= 0.5 (native.py); word clips also get a rough pitch-accent check.
 Results go to <work>/metrics.json; takes measured before (same file time, same text) are skipped.
 Prints PASS or FAIL with every take's transcript for the lines that still need a clip.
@@ -120,7 +120,7 @@ def measure_en(items, refemb):
     return res
 
 
-word = lambda key: key.startswith(('word-', 'eric-')) or '~' in key  # Japanese said on its own or inside English
+word = lambda key: key.startswith(('word-', 'eric-', 'carina-')) or '~' in key  # Japanese said on its own or inside English
 
 OUT = METRICS
 old = json.load(open(OUT)) if os.path.exists(OUT) else {}
