@@ -32,7 +32,8 @@ import {
 import { buildDoorSets, lampShut, lampOpen } from '../train/doors.js';
 import { swingStraps } from '../train/straps.js';
 import { buildPassengers, sit, armsHold } from '../train/people.js';
-import { makeCat, catWalk, catHop } from '../creatures/cat.js';
+import { makeCat } from '../creatures/cat.js';
+import { moveTrainCat } from './train-cat.js';
 import { PEOPLE } from '../cast.js';
 import { inSeat, dozing } from '../cast3d.js';
 import { Nav, blob } from '../engine.js';
@@ -1435,8 +1436,7 @@ export async function trainPlace(game) {
       catTo: async ({ to }) => {
         const p = game.posOf(to);
         if (!p) return;
-        if (kitty.position.y > 0.05) await catHop(game, tama, [kitty.position.x, kitty.position.z * 0.55], 0); // off the seat
-        await catWalk(game, tama, p, { speed: 1.0, end: 'sit' }); // then she sits watching the door
+        await moveTrainCat(game, tama, p);
       },
       phone: finds.hooks.phone,
       headphones: finds.hooks.headphones,
