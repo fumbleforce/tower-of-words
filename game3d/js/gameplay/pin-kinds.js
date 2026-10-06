@@ -50,6 +50,8 @@ export const TRAVEL_PINS = {
   dorms: {
     door_203: { kind: 'door', tip: 'Go into room 203' },
     door_out: { kind: 'door', tip: 'Go out of your room' },
+    stairs_up: { kind: 'stairs', tip: 'Take the stairs up' },
+    stairs_down: { kind: 'stairs', tip: 'Take the stairs down' },
   },
   karaoke: {
     karaoke_door: { kind: 'door', verb: 'Go out' },
