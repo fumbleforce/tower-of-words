@@ -52,6 +52,7 @@ import { snapshot as snapshotOf, crossfade } from './places/crossfade.js';
 import { installSim, sim, stepAmbient, save, loadSave, clearSave } from './sim.js';
 import { createContinue, dayStartSave } from './continue.js';
 import { installViewer } from './plugins.js';
+import { installMinimap } from './ui/minimap.js';
 
 const CAP = Q.has('cap');
 const TEST = Q.get('test') === 'fast';
@@ -225,6 +226,7 @@ game.setHurry = (on) => {
   document.body.classList.toggle('hurry', on);
 };
 function hurryIfWaiting() {
+  if (game.mapOpen) return;
   if (
     game.busy &&
     !ui._advance &&
@@ -469,6 +471,7 @@ if (CAP)
 const frame = guardedLoop(tick); // an error in one frame never stops the loop (perf/gl-guard.js)
 function tick() {
   const now = performance.now();
+  if (game.mapOpen) return void (lastT = now); // the map covers the screen: nothing drawn (ui/map/view.js)
   if (game.paused) {
     lastT = now;
     render();
@@ -576,6 +579,7 @@ async function boot() {
   game.mioNpc.blob = blob(0.55, 0.4);
   game.mioNpc.root.add(game.mioNpc.blob);
   requestAnimationFrame(frame);
+  installMinimap(game); // the minimap and the map, M (ui/minimap.js)
   if (await installViewer(Q, { game, continueFrom })) return; // ?scene=<id>, local only (plugins.js)
   // ?day=2: straight into that day, from the player's own finished day before it, or a plain one (days.js)
   const forced = +Q.get('day') > 1 ? dayStartSave(+Q.get('day'), Q.get('history') || 'mio', Q.get('place')) : null;

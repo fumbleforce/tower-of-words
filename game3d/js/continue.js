@@ -31,7 +31,11 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
       showEnd(game);
       save(game);
     } else if (transition && canTravel(transition.from, transition.to, sim.day) && PLACES[transition.to]) {
-      await travel(transition.to, { arriving: saved.place === transition.to, fromName: transition.from });
+      await travel(transition.to, {
+        arriving: saved.place === transition.to,
+        fromName: transition.from,
+        ...(transition.fast ? { fast: true, via: transition.from } : {}), // fast travel (travel/go.js)
+      });
     } else if (saved.runner?.execution || saved.runner?.queued?.length)
       await game.beat(async () => {
         await game.runner.resume();

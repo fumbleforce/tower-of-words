@@ -51,7 +51,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     works: {},
     transitions: { sales1: 2, sales2: 1 },
   });
-  assert.equal(data.icons.length, 26); // 18th: the Photos chip (ui/finds-view.js); the ticket app (ui/tickets-view.js) has none; 19th: the phone's quick save chip (saves/actions.js); 20th and 21st: the dialogue box's row (ui/vn-controls.js) and the backlog (ui/backlog.js); the pins' symbols moved to ui/pin-tip.js with five new ones for the ways between places (door, arrow, stairs, lift, walk-to spot): 26
+  assert.equal(data.icons.length, 29); // 18th: the Photos chip (ui/finds-view.js); the ticket app (ui/tickets-view.js) has none; 19th: the phone's quick save chip (saves/actions.js); 20th and 21st: the dialogue box's row (ui/vn-controls.js) and the backlog (ui/backlog.js); the pins' symbols moved to ui/pin-tip.js with five new ones for the ways between places (door, arrow, stairs, lift, walk-to spot): 26; map goal, close and lock symbols: 29
 });
 
 test('the full public scanner registers parsed metadata and preserves existing icon IDs', () => {

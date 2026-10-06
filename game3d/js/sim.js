@@ -16,6 +16,7 @@ import { MOMENTS, REASONS, EXPECT } from './bonds/day1.js';
 import { peopleCards } from './ui/people-view.js';
 import PEOPLE from '../story/people.js';
 import { MC, expandMc, migrateMc } from './mc.js';
+import { visitedList, loadVisited } from './travel/visited.js';
 import { newCast } from './roles.js';
 import { markPeriod } from './period-flags.js';
 
@@ -473,6 +474,7 @@ export function save(game) {
       known: [...known],
       seen: [...seen],
       found: [...game.found],
+      visited: visitedList(), // the places he has been to, for the map (travel/visited.js)
       place: game.place && game.place.name,
       rel: {
         bonds: bonds.toJSON(),
@@ -523,6 +525,7 @@ export function restore(game, d) {
   sim.date = dateOf(sim.day || 1);
   ui.logLoad?.(d.log, sim.day || 1);
   sim.met = new Set(d.met || []);
+  loadVisited(d); // an older save is seeded from its day and place (travel/visited.js)
   Object.assign(flags, d.flags || {});
   markPeriod(sim.period, PERIODS); // a new day's opening save carries the last day's evening
   for (const k of d.known || []) known.add(k);

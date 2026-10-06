@@ -1,5 +1,5 @@
 // The island map, loaded by index.html only with ?map=1 or ?mapcompare=1 (a dev tool, not part of the game yet).
-// Key M or the Map button opens and closes it; ?mapcompare=1 opens the compare view straight away.
+// Shift+M (M is the game's own map, ui/minimap.js) or the Map button opens and closes it; ?mapcompare=1 opens the compare view straight away.
 // window.__map is the handle game3d/tools/map-shots.mjs drives.
 import { createMapScreen } from './screen.js';
 
@@ -28,7 +28,7 @@ window.addEventListener(
   'keydown',
   (e) => {
     if (e.target.closest?.('input, textarea, [contenteditable]') && !map.isOpen()) return;
-    if (e.code === 'KeyM') {
+    if (e.code === 'KeyM' && e.shiftKey) {
       toggle();
       e.preventDefault();
       e.stopPropagation();
