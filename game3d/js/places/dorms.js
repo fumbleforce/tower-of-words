@@ -194,6 +194,7 @@ export function dormsPlace(game) {
     camera: cam.camera,
     cam,
     space: w.root,
+    mapOffset: () => [floors.dx(), 0], // all floors share the same island footprint
     nav: w.nav,
     sun: w.sun,
     charScale: K,
