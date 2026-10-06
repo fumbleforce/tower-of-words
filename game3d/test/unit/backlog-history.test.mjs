@@ -15,7 +15,8 @@ registerHooks({
   },
 });
 const node = () => ({ innerHTML: '', textContent: '', hidden: true, children: {}, scrollHeight: 0,
-  classList: { add() {}, remove() {} }, addEventListener() {}, focus() {},
+  classList: { add() {}, remove() {} }, setAttribute() {},
+  addEventListener(type, callback) { (this.listeners ||= {})[type] = callback; }, focus() {},
   querySelector(s) { return this.children[s] ||= node(); }, querySelectorAll: () => [],
 });
 globalThis.__logPanel = node();
@@ -90,4 +91,34 @@ test('new entries snapshot mutable clear data and vocabulary instead of keeping 
   const [entry] = logToJSON().items;
   assert.deepEqual(entry.knownAtTime, ['matte']);
   assert.equal(entry.clear[0].en, 'test');
+});
+
+
+test('authored remarks survive rolling-history eviction and real save reload', async () => {
+  const { conversationMemory } = await import('../../js/conversations/state.js');
+  logLoad(null, 2); known.clear();
+  globalThis.window.__game.sim.day = 2;
+  const text = '寒かったですが、また行きたいですね。';
+  logLine({ k: 'line', who: 'mori', name: 'Mr. Mori', text, ov: true, vk: 'mori-original' });
+  for (let i = 0; i < LOG_LIMIT + 2; i++) logLine({ k: 'line', text: `Later ${i}` });
+  const saved = JSON.parse(JSON.stringify(logToJSON()));
+  assert.ok(!saved.items.some(entry => entry.text === text));
+  logLoad(saved, 9);
+  assert.equal(conversationMemory.has('mori_return_norway'), true);
+  known.add('ikitai');
+  openLog({ sayWord() {}, closed() {} });
+  globalThis.__logPanel.listeners.click({ stopPropagation() {}, closest() {}, target: {
+    closest: selector => selector === '.memories' ? {} : null,
+  } });
+  const html = globalThis.__logPanel.querySelector('.ls').innerHTML;
+  assert.match(html, /Mr. Mori/);
+  assert.match(html, /Day 2/);
+  assert.match(html, /行きたい/);
+  assert.doesNotMatch(html, /Later 399/);
+  assert.equal(conversationMemory.entries()[0].understoodAtTime, false);
+  assert.equal(conversationMemory.entries()[0].revisited, true);
+  assert.equal(conversationMemory.entries()[0].voiceKey, 'mori-original');
+  closeLog();
+  logLoad(null, 1);
+  assert.deepEqual(conversationMemory.entries(), []);
 });

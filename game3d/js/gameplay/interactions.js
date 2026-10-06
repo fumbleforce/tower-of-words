@@ -96,7 +96,7 @@ export function installInteractions(game) {
     }
   }
   // the action menu's own Pet/Talk row uses its target straight away (no menu again)
-  game.use = (item) => use(item, { direct: true });
+  game.use = (item, options = {}) => use(item, { ...options, direct: true });
   // a tap or click asks for a target's menu; E, Space and Enter use it straight away. The input that led to a use is
   // read from the last pointer press (main.js calls use() from its pointer and key handlers alike)
   let pointerAt = -1e9;
@@ -114,7 +114,8 @@ export function installInteractions(game) {
     if (!cutUse || this.busy) return; // a queued scene carries it on
     const u = cutUse;
     cutUse = null;
-    if (this.place === place && !this.walker.path && this.markers.list.includes(u) && u.enabled()) use(u);
+    if (this.place === place && !this.walker.path && this.markers.list.includes(u.item) && u.item.enabled())
+      use(u.item, u.options);
   };
   // get Eric out of his seat (a tap on the floor or on something out of reach does this)
   function standUp() {
@@ -156,7 +157,7 @@ export function installInteractions(game) {
       game._holdBow = false;
     });
   }
-  function use(item, { direct = false } = {}) {
+  function use(item, { direct = false, trigger = null } = {}) {
     // while Eric is saying a word (its practice prompt, his voice, the answer) a tap on anything else is ignored, so
     // the word is never lost to a new talk; saying is cleared in sayWord's finally, so this can't stick
     if (!item || game.busy || game.saying) return;
@@ -173,15 +174,15 @@ export function installInteractions(game) {
       if (item.face) game.walker.faceTo(...item.face());
       // tapped or clicked, with more than one thing to do there (its verb and Say): its menu opens, nothing is used
       // yet (Jørgen, 2026-10-02: the menu opening by itself "is very disruptive"). One thing to do: it's done.
-      if (ask && canUse(item) && sayRow(item)) {
+      if (ask && canUse(item) && (sayRow(item) || game.topicFor?.(item.id))) {
         game.targetLock = item;
         game.near = item;
         ui.openActs(item);
         return;
       }
-      talk(item);
+      talk(item, trigger);
     };
-    go.use = item; // the beat wrapper above sends him on to it if a scene cuts this walk
+    go.use = { item, options: { direct, trigger } }; // the beat wrapper above sends him on to it if a scene cuts this walk
     const sp = approachSpot(game, item) || (item.spot ? item.spot() : null);
     // seated: he talks from his seat to what's within reach; for anything further he stands up and walks over
     if (game.player.seated) {
@@ -200,7 +201,7 @@ export function installInteractions(game) {
       else game.walker.goTo(sp[0], sp[1], go);
     } else go();
   }
-  function talk(item) {
+  function talk(item, trigger) {
     const person = isPerson(game, item);
     if (game.place.people[item.id]) {
       meet(game, item.id);
@@ -208,7 +209,7 @@ export function installInteractions(game) {
     }
     // a thing whose only use now is a word (an empty talk node doesn't count): E opens the Say menu
     if (item.sayOnly?.()) return void say();
-    if (game.runner.trigger('talk:' + item.id)) return;
+    if (game.runner.trigger(trigger || 'talk:' + item.id)) return;
     if (item.act) {
       game.beat(() => item.act());
       return;

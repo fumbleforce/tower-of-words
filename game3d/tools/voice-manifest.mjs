@@ -15,6 +15,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const imp = (f) => import(pathToFileURL(path.join(root, f)).href);
+const { default: CONVERSATIONS } = await imp('story/conversations/index.js');
 const { WORDS } = await imp('js/lang.js');
 const { heardKey, lineKey } = await imp('tools/heardkey.mjs');
 // every story file the game loads (the same list story-check and lang-audit use), so a new place is voiced too
@@ -40,6 +41,7 @@ export const storySets = () =>
       return { name: n, load: fs.existsSync(f) ? () => import(pathToFileURL(f).href + '?' + Math.random()).then((m) => m.default) : null };
     }),
   }))
+    .concat([{ day: 0, files: [{ name: 'conversations', load: async () => CONVERSATIONS }] }])
     // Optional in-place finds keep their first-day grouping for focused production.
     .concat([3, 4, 5].map(day => ({ day, files: [{ name: 'flavor-finds', load: async () => ({ nodes: Object.fromEntries(FLAVOR_FINDS.filter(f => f.from === day).map(f => [f.node, FLAVOR_NODES[f.node]])) }) }] })))
     // the clubs' session nodes (story/clubs.js), played in their club's place from day 3 on (clubs/index.js withClubs)
@@ -49,12 +51,14 @@ export const storySets = () =>
 // The lines one protagonist hears and says, keyed as for the default protagonist: { out: Map key -> entry, dayOfKey }
 async function collect(mc, sets) {
   const out = new Map(), dayOfKey = new Map(), PHONE = new Set();
+  let storyKeys = null;
   function add(who, text, s = {}) {
     if (!who || !/^\w+$/.test(who) || !text) return;
     if (/text$/.test(who) || PHONE.has(who)) return; // chat messages on a phone (miotext, phone: true speakers): read, not spoken
     const spoken = resolve(text);
     const lang = s.overheard || (jaRe.test(spoken) && !/[a-zA-Z]{3,}/.test(spoken.replace(/\([^)]*\)/g, ''))) ? 'ja' : 'en';
     const key = s.voice || (s.overheard ? heardKey(text) : lineKey(who, text));
+    storyKeys?.add(key);
     const words = [];
     for (const [id, w] of Object.entries(WORDS)) for (const ja of [w.ja, ...(w.alias || [])]) if (spoken.includes(ja) && !words.some(([, x]) => x.includes(ja))) words.push([id, ja]);
     const clear = (s.clear || []).map((c) => (typeof c === 'string' ? c : c.ja));
@@ -80,11 +84,12 @@ async function collect(mc, sets) {
   for (const { day, files } of sets) for (const { name, load } of files) {
     if (!load) continue;
     const st = expandMc(structuredClone(await load()), mc);
-    const had = new Set(out.keys());
+    storyKeys = new Set();
     for (const [id, sp] of Object.entries(st.speakers || {})) if (sp && sp.phone) PHONE.add(id);
     if (name === 'transitions') for (const v of Object.values(st)) { walk(v.walk); walk(v.ride); walk(v.arrive); }
     else for (const nodes of Object.values(st.nodes || {})) walk(nodes);
-    for (const k of out.keys()) if (!had.has(k) && !dayOfKey.has(k)) dayOfKey.set(k, day);
+    // Shared topics can replay a line first authored on a particular day.
+    for (const k of storyKeys) if (day === 0 || !dayOfKey.has(k)) dayOfKey.set(k, day);
   }
   // day 2's and day 3's new phrases: the player saying each, and Mio's slow replay of it (the shell's word-<id>)
   for (const [id, w, day] of [...Object.entries(DAY2_WORDS).map(([k, v]) => [k, v, 2]), ...Object.entries(DAY3_WORDS).map(([k, v]) => [k, v, 3]), ...Object.entries(DAY4_WORDS).map(([k, v]) => [k, v, 4])]) {

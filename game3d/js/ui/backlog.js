@@ -7,6 +7,7 @@ import { stopVoice, voice } from '../audio/core.js';
 import { heardHTML, addPlayButtons } from './dialogue-text.js';
 import { thumbStyle } from './portraits.js';
 import { el } from './dom.js';
+import { conversationMemory, rememberEntry, rememberedLines } from '../conversations/state.js';
 import { LOG_LIMIT, restoreLog, recordEntry, sameLine } from './backlog-records.js';
 
 const READ_KEY = 'amakawa-read';
@@ -58,6 +59,7 @@ export function logLine(e) {
     node: game?.runner?.currentNode,
     known,
   });
+  rememberEntry(e);
   const last = items[items.length - 1];
   // a choice keeps its line on screen: the same line again is not a new entry
   if (sameLine(last, e)) return;
@@ -67,18 +69,23 @@ export function logLine(e) {
 }
 export const logSize = () => items.length;
 export function logToJSON() {
-  return { v: 2, day, items };
+  return { v: 2, day, items, memories: conversationMemory.toJSON() };
 }
 export function logLoad(d, saveDay) {
   items = restoreLog(d, saveDay);
+  conversationMemory.load(d?.memories);
+  for (const entry of items) rememberEntry(entry);
   day = saveDay || 1;
+  remembered = false;
 }
 
 // ---------- the panel ----------
 let panel = null,
   list = null,
   openedAt = 0,
-  onClose = null;
+  onClose = null,
+  remembered = false,
+  displayed = [];
 const esc = (s) =>
   String(s || '')
     .replace(/&/g, '&amp;')
@@ -101,9 +108,16 @@ function itemHTML(e, i) {
   </li>`;
 }
 function render() {
-  list.innerHTML = items.length
-    ? items.map(itemHTML).join('')
+  displayed = remembered ? rememberedLines() : items;
+  if (remembered) for (const entry of displayed) conversationMemory.revisit(entry.memoryId, known);
+  list.innerHTML = displayed.length
+    ? displayed.map(itemHTML).join('')
     : '<li class="empty">No conversations recorded yet.</li>';
+  const toggle = panel.querySelector('.memories');
+  toggle.hidden = rememberedLines().length === 0;
+  toggle.textContent = remembered ? 'All conversations' : 'Remembered remarks';
+  toggle.setAttribute('aria-pressed', String(remembered));
+  panel.querySelector('.n').textContent = `${displayed.length} ${displayed.length === 1 ? 'entry' : 'entries'}`;
   for (const tx of list.querySelectorAll('li:not(.heard) .tx')) addPlayButtons(tx);
 }
 function build(sayWord) {
@@ -112,6 +126,7 @@ function build(sayWord) {
     'vnlog',
     `<div class="sheet" role="dialog" aria-label="Backlog">
       <div class="hd"><span class="t">Backlog</span><span class="n"></span><button type="button" class="x" aria-label="Close the backlog"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <button type="button" class="memories" aria-pressed="false">Remembered remarks</button>
       <ol class="ls" tabindex="-1"></ol>
       <div class="ft"></div>
     </div>`,
@@ -127,9 +142,14 @@ function build(sayWord) {
   });
   panel.addEventListener('click', (e) => {
     e.stopPropagation();
+    if (e.target.closest('.memories')) {
+      remembered = !remembered;
+      render();
+      return;
+    }
     const rp = e.target.closest('.rp');
     if (rp) {
-      const it = items[+rp.dataset.i];
+      const it = displayed[+rp.dataset.i];
       for (const b of list.querySelectorAll('.rp.on')) b.classList.remove('on');
       rp.classList.add('on');
       voice(it.vk, { muffle: !!it.ov }).then(() => rp.classList.remove('on'));
@@ -161,7 +181,7 @@ export function openLog({ sayWord, closed }) {
   if (!panel) build(sayWord);
   onClose = closed;
   render();
-  panel.querySelector('.n').textContent = items.length ? `${items.filter((e) => e.k === 'line').length} lines` : '';
+
   panel.querySelector('.ft').textContent = document.body.classList.contains('phone')
     ? 'Tap outside the list to go back'
     : 'Esc, a click outside or scrolling down past the end goes back';
