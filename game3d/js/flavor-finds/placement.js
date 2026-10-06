@@ -16,7 +16,7 @@ export function placement(P, f) {
   if (f.id === 'crate_count') {
     const n = ALLEYS.find((n) => n.id === f.at),
       u = -n.len / 2 + 1.15;
-    Object.assign(result, { x: at[0] - u, z: at[1] - n.back + 0.19, y: 0.94 });
+    Object.assign(result, { x: at[0] - u, z: at[1] - n.back + 0.19, y: 0.94, shotYaw: 0, shotElev: 1.15 });
   }
   if (f.id === 'slipper_pair') Object.assign(result, { x: at[0] - 0.44, z: -0.54, y: 0.3, yaw: Math.PI / 2 });
   if (f.id === 'pool_key_tag') {

@@ -42,6 +42,16 @@ export function paper(g, lines, w = 0.25, h = 0.18) {
   g.add(o);
   return o;
 }
+export function twoSidedPaper(g, front, back, w, h) {
+  const card = group();
+  g.add(card);
+  const a = paper(card, front, w, h),
+    b = paper(card, back, w, h);
+  a.material.side = b.material.side = THREE.FrontSide;
+  b.rotation.y = Math.PI;
+  b.position.z = -0.001;
+  return card;
+}
 export function book(g, color = '#44788b') {
   box(g, 0.4, 0.025, 0.3, color);
   box(g, 0.38, 0.04, 0.28, '#eeeee5', 0, 0.027);
