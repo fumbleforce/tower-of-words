@@ -32,8 +32,14 @@ export default place(
         { do: 'gesture', who: 'attendant', kind: 'point', to: 'booking_terminal' },
         { do: 'cam', on: 'booking_terminal', zoom: 1.4 },
         '> The booking terminal on the counter has frozen.',
-        { say: 'attendant', overheard: true, emo: 'tired', text: '朝から、ずっとこのままなんです。今日の分をプリントしたいんですけど……', clear: ['プリント'] },
-        { say: 'eric', emo: 'curious', text: 'And you need today’s list printed. There’s a reset button underneath. I’ll try that first.' },
+        { say: 'attendant', overheard: true, emo: 'tired', text: '朝から、ずっとこのままで……。今日の{yoyaku}を、プリントしたいんです。', clear: ['プリント'] },
+        { if: '!know_yoyaku', then: [
+          { say: 'eric', emo: 'curious', text: 'Today’s bookings? {yoyaku}?' },
+          { say: 'attendant', overheard: true, emo: 'polite', text: 'はい、{yoyaku}です。' },
+          { say: 'attendant', emo: 'slow', slow: true, text: '{yoyaku}。' },
+          { do: 'type', word: 'yoyaku', from: 'attendant', prompt: 'Ask for the bookings the desk needs: yoyaku.' },
+        ] },
+        { say: 'eric', emo: 'curious', text: 'I can restart the terminal. Then we’ll check the whole {yoyaku} list, not just the first page.' },
         { choice: [
           { text: 'Restart the terminal with the red button.', go: 'd3_booking_reset' },
           { text: 'Say 動いて (ugoite, move) to the terminal.', if: 'know_ugoite', go: 'd3_booking_magic' },
@@ -57,7 +63,7 @@ export default place(
       ],
       d3_booking_ready: [
         { set: 'd3_booking_restarted' },
-        { say: 'eric', emo: 'warm', text: 'Let me print today’s list from here, so we know the whole thing comes out.' },
+        { say: 'eric', emo: 'warm', text: 'The screen’s back. We should print the bookings before I call it fixed.' },
         { do: 'gesture', who: 'attendant', kind: 'point', to: 'gym_printer' },
         { do: 'cam', back: true },
         { do: 'goal', text: 'Print today’s bookings on the printer behind the counter.', at: 'gym_printer' },
@@ -83,11 +89,12 @@ export default place(
       // Reuse only after a complete sheet is in the tray, with no queued print job.
       d3_dashite_word: [
         { do: 'gesture', who: 'eric', kind: 'point', to: 'gym_printer' },
-        { say: 'eric', emo: 'curious', text: 'What was that you said to it?' },
+        { say: 'eric', emo: 'curious', text: 'What did you say just before the paper came out?' },
         { do: 'emote', who: 'attendant', kind: 'sweat' },
         { say: 'attendant', overheard: true, emo: 'sheepish', text: 'あ、いつも言っちゃうんです。' },
         { do: 'gesture', who: 'attendant', kind: 'point', to: 'gym_printer' },
         { say: 'attendant', emo: 'slow', slow: true, text: '{dashite}。' },
+        { say: 'eric', emo: 'amused', text: 'Give it out? I could have used that at our copier on my first day.' },
         { do: 'type', word: 'dashite', from: 'attendant', prompt: 'Say it the way he says it to the printer: dashite.' },
       ],
       d3_print: [
@@ -98,6 +105,14 @@ export default place(
         { do: 'bookingRepair', state: 'check' },
         { say: 'attendant', overheard: true, emo: 'warm', text: '最後の行まで、ちゃんと出てます。' },
         { say: 'eric', emo: 'warm', text: 'Swimming club at six is the last line. That’s all of it.' },
+        { if: 'club_swimming', then: [
+          { say: 'eric', emo: 'warm', text: 'That’s my booking as well, then. I took one of the club slips.' },
+          { say: 'attendant', overheard: true, emo: 'warm', text: 'そうですか。では、六時にプールで。', clear: ['プール'] },
+        ], else: [
+          { say: 'attendant', overheard: true, emo: 'warm', text: '水泳部ですよ。よかったら、今夜どうぞ。' },
+          { do: 'gesture', who: 'attendant', kind: 'point', to: 'gym_board' },
+          { say: 'eric', emo: 'curious', text: 'I can join them? I’ll have a look at the poster before I go.' },
+        ] },
         { say: 'attendant', overheard: true, emo: 'polite', text: 'ありがとうございました。', clear: [{ ja: 'ありがとう', ro: 'arigatō', en: 'thank you' }] },
         { do: 'bow', who: 'attendant' },
         { set: 'd3_booking_done' }, { do: 'ticket', close: 'T-0004' },

@@ -190,5 +190,16 @@ for (const member of [false, true]) {
   assert.equal(p.dialogue.some(s => s.text.includes('join at the plaza')), !member);
   p.record(`Rei after repair, membership ${member}`);
 }
+for (const knows of [false, true]) {
+  const display = new Play('sports', { period: 'afternoon', know_gamen: knows });
+  display.run('d4_display', ['d4_display_leave']);
+  assert.equal(display.lines.some(s => s.includes('{gamen}')), knows);
+  assert(!display.hooks.some(h => h.do === 'type'));
+  const club = new Play('sports', { period: 'evening', club_tennis: true, know_yoyaku: knows, know_isshoni: true });
+  club.run('d4_tennis_offer', ['d4_tennis_leave']);
+  assert.equal(club.lines.some(s => s.includes('{yoyaku}')), knows);
+  assert(!club.hooks.some(h => h.do === 'type'));
+  display.record(`Familiar screen word ${knows}`); club.record(`Familiar booking word ${knows}`);
+}
 if (process.argv[2]) writeFileSync(process.argv[2], transcripts.join('\n'));
 console.log(`Day 4: ${checked} contextual nodes, routes, tokens and branch checks pass (authoring only).`);

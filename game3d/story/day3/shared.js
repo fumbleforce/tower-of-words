@@ -8,11 +8,15 @@ export const speakers = {
   aoi: { name: 'Woman from the train' },
   rei: { name: 'Tennis player' },
 };
-// Talk marks people met before their first line. Preserve an unmet Emi on arrival until she says her name.
-export const emiHello = [{ if: '!met_emi || d3_emi_needs_intro', then: [
-  { say: 'emi', emo: 'bright', text: 'You must be {mc.name}. I’m Emi, your team lead. We’ve managed to miss each other at the office.' },
-  { do: 'meet', who: 'emi' }, { unset: 'd3_emi_needs_intro' },
-] }];
+// Talk records a new person before their first line. Capture that case on arrival, but an earlier
+// conversation or a completed introduction always takes precedence over an old saved capture flag.
+export const emiNeedsIntro = '!d3_emi_introduced && !d2_brief_done && !fact_emi_ten_years && (!met_emi || d3_emi_needs_intro)';
+export const emiIntroduction = [
+  { say: 'emi', emo: 'bright', text: 'Oh, you must be {mc.name}. I’m Emi, from B2. It’s good to meet you at last.' },
+  { do: 'meet', who: 'emi' }, { set: 'd3_emi_introduced' }, { unset: 'd3_emi_needs_intro' },
+];
+export const emiHello = [{ if: emiNeedsIntro, then: emiIntroduction,
+  else: [{ unset: 'd3_emi_needs_intro' }] }];
 export const repairQueue = [
   { do: 'ticket', add: 'T-0003' },
   { do: 'ticket', add: 'T-0004' },
@@ -42,7 +46,8 @@ export function place(ways, { closed = [], on = {}, nodes = {}, at, show = {}, l
   for (const k of closed) o[k] = 'd3_closed';
   const combined = { ...n, ...nodes };
   combined.d3_arrive = [
-    { if: '!met_emi', then: [{ set: 'd3_emi_needs_intro' }] }, ...combined.d3_arrive,
+    { if: '!met_emi && !d2_brief_done && !fact_emi_ten_years && !d3_emi_introduced',
+      then: [{ set: 'd3_emi_needs_intro' }], else: [{ unset: 'd3_emi_needs_intro' }] }, ...combined.d3_arrive,
   ];
   return { speakers, start: 'd3_arrive', on: { ...o, ...on }, show, labels, nodes: combined };
 }

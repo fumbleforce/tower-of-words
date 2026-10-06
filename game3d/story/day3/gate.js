@@ -61,7 +61,16 @@ export default place(
         { say: 'guard', overheard: true, emo: 'polite', text: 'こちらに向けると、消えるんです。' },
         { do: 'monitorRepair', state: 'turn' },
         { set: 'd3_monitor_seen' },
-        { say: 'eric', emo: 'curious', text: 'Hold it there a second. The plug at the back is half out.' },
+        { if: '!know_gamen', then: [
+          { do: 'gesture', who: 'guard', kind: 'point', to: 'guard_monitor' },
+          { say: 'guard', overheard: true, emo: 'polite', text: '{gamen}が、消えます。' },
+          { say: 'eric', emo: 'curious', text: '{gamen} is the screen? It goes off when you turn it.' },
+          { say: 'guard', emo: 'slow', slow: true, text: '{gamen}。' },
+          { do: 'type', word: 'gamen', from: 'guard', prompt: 'Point out the screen you’re checking: gamen.' },
+        ] },
+        { say: 'eric', emo: 'curious', text: 'Could you hold it there? The lead pulls tight when you turn it.' },
+        { do: 'cam', on: 'guard_monitor', zoom: 1.4 },
+        { say: 'eric', emo: 'warm', text: 'The signal plug is half out. I can seat it, then we should try turning it again.' },
         { choice: [
           { text: 'Seat the loose connector.', go: 'd3_monitor_fix' },
           { text: 'Leave the monitor for another morning.', go: 'd3_monitor_later' },
@@ -70,9 +79,27 @@ export default place(
       d3_monitor_fix: [
         { do: 'ticket', start: 'T-0003' },
         { do: 'monitorRepair', state: 'seat' },
-        { say: 'eric', emo: 'warm', text: 'Try turning it towards me again.' },
+        { say: 'eric', emo: 'warm', text: 'All right, turn the {gamen} towards me again.' },
+        { go: 'd3_monitor_check' },
+      ],
+      d3_monitor_check: [
         { do: 'monitorRepair', state: 'verify' },
-        { say: 'guard', overheard: true, emo: 'warm', text: '今度は大丈夫です。ありがとうございます。', clear: [{ ja: 'ありがとう', ro: 'arigatō', en: 'thank you' }] },
+        { say: 'guard', overheard: true, emo: 'curious', text: '{gamen}は、どうですか？' },
+        { choice: [
+          { text: 'The picture stayed on. Finish the request.', go: 'd3_monitor_complete' },
+          { text: 'Ask him to turn it once more.', go: 'd3_monitor_again' },
+        ] },
+      ],
+      d3_monitor_again: [
+        { if: 'know_mouichido', then: [{ say: 'eric', emo: 'polite', text: '{mouichido}. Just to be sure.' }],
+          else: [{ say: 'eric', emo: 'polite', text: 'One more time, please. Just to be sure.' }] },
+        { do: 'gesture', who: 'eric', kind: 'point', to: 'guard_monitor' },
+        { go: 'd3_monitor_check' },
+      ],
+      d3_monitor_complete: [
+        { say: 'eric', emo: 'warm', text: 'The picture’s steady now, even when it turns.' },
+        { say: 'guard', overheard: true, emo: 'warm', text: '助かりました。人に見せるたびに、消えていたんです。' },
+        { say: 'eric', emo: 'amused', text: 'It was fine as long as nobody else needed to see it, then.' },
         { do: 'bow', who: 'guard' },
         { set: 'd3_monitor_done' }, { do: 'ticket', close: 'T-0003' },
         { if: '!d3_monitor_thanked', then: [

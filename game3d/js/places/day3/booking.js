@@ -20,7 +20,7 @@ const panel = (w, h, draw, px = 256) => {
   m.userData.noBatch = true;
   return m;
 };
-const ROWS = ['09:00  Tennis · court A', '13:00  Badminton', '16:00  Art club (Tue)', '18:00  Swimming club'];
+const ROWS = ['09:00  Tennis · court A', '13:00  Badminton', '16:00  Court B reservation', '18:00  Swimming club'];
 function screenDraw(state) {
   return (g, W, H) => {
     g.fillStyle = state === 'frozen' ? '#5a6470' : state === 'dark' ? '#07090c' : '#e9f1f6';

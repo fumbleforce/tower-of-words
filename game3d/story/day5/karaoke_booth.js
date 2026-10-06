@@ -42,6 +42,7 @@ export default place({ karaoke: ['talk:booth_door'] }, {
       { set: 'd5_selector_done' }, { do: 'ticket', close: 'T-0008' }, { do: 'save' }, { go: 'd5_selector_leave' },
     ],
     d5_selector_leave: [{ do: 'cam', back: true }],
-    d5_screen: [{ say: 'eric', emo: 'curious', text: 'They keep the words on screen until the song starts. I could practise this bit.' }],
+    d5_screen: [{ if: 'know_gamen', then: [{ say: 'eric', emo: 'curious', text: 'They keep the words on the {gamen} until the song starts. I could practise this bit.' }],
+      else: [{ say: 'eric', emo: 'curious', text: 'They keep the words on screen until the song starts. I could practise this bit.' }] }],
   },
 });

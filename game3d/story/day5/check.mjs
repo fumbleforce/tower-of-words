@@ -209,5 +209,12 @@ for (const event of [KOTODAMA.first.successEvent, KOTODAMA.first.cancelEvent, KO
   assert(STORIES.office.on['event:' + event]);
 }
 for (const mc of Object.values(PROTAGONISTS)) assert(!JSON.stringify(expandMc(structuredClone(KOTODAMA), mc)).includes('{mc.'));
+for (const knows of [false, true]) {
+  const p = new Play('karaoke_booth', { know_gamen: knows });
+  p.run('d5_screen');
+  assert.equal(p.lines.some(s => s.includes('{gamen}')), knows);
+  assert(!p.hooks.some(h => h.do === 'type'));
+  p.record(`Karaoke screen, familiar word ${knows}`);
+}
 if (process.argv[2]) writeFileSync(process.argv[2], transcripts.join('\n'));
 console.log(`Day 5: ${checked} contextual nodes, routes, tokens and branch checks pass (authoring only).`);
