@@ -55,6 +55,7 @@ export function actMenu({ keyLabel, settings }) {
       const { verb, name } = tipOf(target);
       // Say shows for this target when a word does something here; the first time only at the goal (the cat)
       const sayHere = show && g.sayTarget === target && g.sayRow(target);
+      const topic = g.topicFor?.(target.id);
       const canUse = !g.canUse || g.canUse(target);
       const uses = ob.uses || 0;
       const cyc = !ob.active && this.cycleInfo && this.cycleInfo.n > 1 ? this.cycleInfo : null;
@@ -63,6 +64,7 @@ export function actMenu({ keyLabel, settings }) {
         verb,
         name,
         sayHere,
+        topic?.label,
         canUse,
         cyc ? cyc.i + '/' + cyc.n : '',
         phone,
@@ -82,6 +84,7 @@ export function actMenu({ keyLabel, settings }) {
         act.innerHTML =
           head +
           (canUse ? `<button type="button" class="act use">${useFace}</button>` : '') +
+          (topic ? `<button type="button" class="act topic"><span class="lb">${topic.label}</span></button>` : '') +
           (sayHere
             ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="lb">Say a word</span></button>`
             : '') +
@@ -91,6 +94,10 @@ export function actMenu({ keyLabel, settings }) {
         act.querySelector('.use')?.addEventListener('click', (e) => {
           e.stopPropagation();
           g.use(g.near || target);
+        });
+        act.querySelector('.topic')?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (g.near === target && g.topicFor?.(target.id)) g.use(target, { trigger: topic.trigger });
         });
         act.querySelector('.say')?.addEventListener('click', (e) => {
           e.stopPropagation();

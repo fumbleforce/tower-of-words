@@ -4507,7 +4507,10 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": [],
+  "clear": [
+   "1994年",
+   "リレハンメル"
+  ],
   "emo": "warm"
  },
  {
@@ -9332,6 +9335,277 @@
   "emo": "curious"
  },
  {
+  "key": "oh-10n1bre",
+  "speaker": "mori",
+  "text": "すみません。後で、少しお話ししましょう。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "apologetic"
+ },
+ {
+  "key": "ln-1c9yqoz",
+  "speaker": "eric",
+  "text": "ノルウェー？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-d2r4du",
+  "speaker": "eric",
+  "text": "ノルウェー……行きたい？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-14qa3fd",
+  "speaker": "mori",
+  "text": "ええ。また行きたいです。リレハンメルに。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [
+   "リレハンメル"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-s6zqx",
+  "speaker": "mori",
+  "text": "その時の写真、まだ見つからなくて。……フォト。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "フォト"
+  ],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-gwmh7b",
+  "speaker": "eric",
+  "text": "Photo?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-2yxvrg",
+  "speaker": "mori",
+  "text": "はい。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-akz5l1",
+  "speaker": "mori",
+  "text": "写真、見たいですか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "mitai",
+    "見たい"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-2n5mws",
+  "speaker": "mori",
+  "text": "見たい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mitai",
+    "見たい"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-ch5o48",
+  "speaker": "eric",
+  "text": "見たい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mitai",
+    "見たい"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-hzy2dw",
+  "speaker": "mori",
+  "text": "探しておきます。見つかったら、声をかけますね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-goskhb",
+  "speaker": "eric",
+  "text": "フォト？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-p9ljpy",
+  "speaker": "mori",
+  "text": "すみません、まだです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "apologetic"
+ },
+ {
+  "key": "ln-1bbxejr",
+  "speaker": "kenji",
+  "text": "Sorry, work first. Later, okay?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "apologetic"
+ },
+ {
+  "key": "ln-192ljf7",
+  "speaker": "eric",
+  "text": "Where do you go after work?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-i54yrm",
+  "speaker": "kenji",
+  "text": "Game centre. Crane game is... expensive for me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-f0b5ni",
+  "speaker": "eric",
+  "text": "Is that near the shops?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-tqil9s",
+  "speaker": "kenji",
+  "text": "Yes! Shopping street. 行きたい? Is “want go”.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-1get0mo",
+  "speaker": "eric",
+  "text": "Do you ever win anything on that crane game?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-jj6u7h",
+  "speaker": "kenji",
+  "text": "Small one, sometimes. Big one? Never!",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-171tl7p",
+  "speaker": "kenji",
+  "text": "行きたい.",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-1h8vur5",
+  "speaker": "kenji",
+  "text": "Yes! Game centre is on shopping street.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
   "key": "ln-1lvkziu",
   "speaker": "eric",
   "text": "I’d have missed that tray.",
@@ -12972,6 +13246,96 @@
   "key": "ln-wcb63t-carina",
   "speaker": "carina",
   "text": "They keep the words on screen until the song starts. I could practise this bit.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1c9yqoz-carina",
+  "speaker": "carina",
+  "text": "ノルウェー？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-d2r4du-carina",
+  "speaker": "carina",
+  "text": "ノルウェー……行きたい？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-gwmh7b-carina",
+  "speaker": "carina",
+  "text": "Photo?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-ch5o48-carina",
+  "speaker": "carina",
+  "text": "見たい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mitai",
+    "見たい"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-goskhb-carina",
+  "speaker": "carina",
+  "text": "フォト？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-192ljf7-carina",
+  "speaker": "carina",
+  "text": "Where do you go after work?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-f0b5ni-carina",
+  "speaker": "carina",
+  "text": "Is that near the shops?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1get0mo-carina",
+  "speaker": "carina",
+  "text": "Do you ever win anything on that crane game?",
   "lang": "en",
   "overheard": false,
   "words": [],

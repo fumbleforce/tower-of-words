@@ -15,6 +15,7 @@ import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save, periodName }
 import * as trips from '../trips.js';
 import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
 import { installTickets } from '../tickets/index.js';
+import { installConversations, withConversations } from '../conversations/index.js';
 import { installClubs, withClubs, clubArrival } from '../clubs/index.js';
 import { installDay3 } from './day3/place.js';
 import { attachMonday, installDay5 } from './day5/place.js';
@@ -59,6 +60,7 @@ export function createPlaceLifecycle(
   const ui = game.ui;
   installFinds(game); // the photos and papers Eric picks up (finds/index.js)
   installTickets(game); // the repair tickets and their app on Eric's computers (tickets/index.js)
+  installConversations(game);
   installClubs(game); // the clubs and the notice board (clubs/index.js)
   installDay3(game); // Saturday's people and scenes, the story's day3Setup (places/day3/)
   installDay4(game);
@@ -110,7 +112,7 @@ export function createPlaceLifecycle(
   async function enter(name, { persist = true, resuming = false } = {}) {
     const { place } = await prepare(name);
     // the story for today (days.js): a place built on the title's day 1 still plays a later day's set
-    const story = withClubs(await game.runner.load(name)); // with the club sessions (clubs/index.js)
+    const story = withConversations(withClubs(await game.runner.load(name))); // with the club sessions (clubs/index.js)
     if (game.place && game.place.leave) game.place.leave();
     cancelSavedWalk(game.player);
     cancelSavedWalk(game.mioNpc);

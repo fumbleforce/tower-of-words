@@ -38,7 +38,7 @@ for (const [id, t] of Object.entries(TICKETS)) {
   if (!Number.isInteger(t.pay) || t.pay < 0) bad(f, `${id}: pay '${t.pay}' is not a whole number of yen`);
 }
 
-for (const name of STORY_FILES) {
+for (const name of [...STORY_FILES, 'conversations/index']) {
   let file = `story/${name}.js`;
   if (!fs.existsSync(path.join(root, file))) { file = `story/placeholder/${name}.js`; console.log(`(${name}: using the placeholder)`); }
   const st = (await import(pathToFileURL(path.join(root, file)).href)).default;
@@ -99,7 +99,7 @@ for (const name of STORY_FILES) {
       }
       continue;
     }
-    const m = /^(talk|say|near|zone|event):(?:(\w+):)?(.+)$/.exec(key);
+    const m = /^(talk|ask|say|near|zone|event):(?:(\w+):)?(.+)$/.exec(key);
     if (!m) { bad(file, `odd trigger ${key}`); continue; }
     const [, kind, cmd, id] = m;
     if (kind === 'say' && !SAYABLE.includes(cmd)) bad(file, `on ${key}: unknown command`);

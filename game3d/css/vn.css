@@ -97,3 +97,6 @@ body.phone .vnlog li.pick { padding-left: 46px; }
 body.phone .vnlog .tx { font-size: 16px; }
 /* the phone's swipe down and long press on the dialogue area are the game's, not the browser's */
 body.phone #talkHit, body.phone #talk { touch-action: none; -webkit-touch-callout: none; }
+
+.vnlog .memories { align-self: flex-start; min-height: 40px; margin: 8px 18px 2px; padding: 6px 12px; color: var(--ink); border: 1px solid var(--chip-edge); border-radius: 8px; background: transparent; font: inherit; cursor: pointer; }
+.vnlog .memories:hover, .vnlog .memories[aria-pressed="true"] { background: rgba(255, 255, 255, .08); }

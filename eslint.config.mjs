@@ -38,7 +38,7 @@ export default [
     'game3d/test/support/trace-clock.mjs', 'game3d/test/support/framing.mjs', 'game3d/test/support/wait-ready.mjs',
     'game3d/test/routes/driver.mjs',
     'game3d/test/unit/checkpoint.test.mjs', 'game3d/test/unit/save-restore.test.mjs',
-    'game3d/tools/canteen-check.mjs', 'game3d/tools/izakaya-staging.mjs', 'game3d/tools/izakaya-check.mjs', 'game3d/tools/day2-legacy-check.mjs', 'game3d/tools/a11y.mjs', 'game3d/tools/beat-shots.mjs', 'game3d/tools/chair-check.mjs', 'game3d/tools/fast.mjs',
+    'game3d/tools/canteen-check.mjs', 'game3d/tools/izakaya-staging.mjs', 'game3d/tools/izakaya-check.mjs', 'game3d/tools/day2-legacy-check.mjs', 'game3d/tools/conversation-check.mjs', 'game3d/tools/a11y.mjs', 'game3d/tools/beat-shots.mjs', 'game3d/tools/chair-check.mjs', 'game3d/tools/fast.mjs',
     'game3d/tools/chibi-shots.mjs', 'game3d/tools/chibi-crowd-shots.mjs', 'game3d/tools/chibi-perf.mjs', 'game3d/tools/chibi-tris.mjs', 'game3d/tools/chibi-hitch.mjs', 'game3d/tools/chibi-proportions.mjs', 'tools/characters/chibi-bake.mjs',
     'game3d/tools/hud-shots.mjs', 'game3d/tools/day4-shots.mjs', 'game3d/tools/flavor-finds-check.mjs',
       'game3d/tools/day5-shots.mjs', 'game3d/tools/mc-shots.mjs', 'game3d/tools/mc-check.mjs','game3d/tools/saves-check.mjs', 'game3d/tools/people-check.mjs', 'game3d/tools/tickets-check.mjs', 'game3d/tools/map-shots.mjs', 'game3d/tools/map-travel-check.mjs', 'game3d/tools/pins-outline-shots.mjs', 'game3d/tools/pin-tap-check.mjs', 'game3d/tools/pin-tip-check.mjs', 'game3d/tools/pin-count.mjs', 'game3d/tools/lift-door-shots.mjs', 'game3d/tools/look-bench.mjs', 'game3d/tools/train-door-shots.mjs',
