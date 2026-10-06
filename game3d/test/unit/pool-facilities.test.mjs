@@ -89,6 +89,8 @@ test('swimmer waterline follows actual head height without cumulative drift and 
     const original = rig.update,
       pose = swimmerPose(rig);
     pose.enter();
+    assert.equal(rig.swimming, true);
+    assert.equal(rig._noAvoid, true);
     for (let n = 0; n < 20; n++) rig.update(0.016);
     root.updateWorldMatrix(true, true);
     const p = new THREE.Vector3();
@@ -99,6 +101,8 @@ test('swimmer waterline follows actual head height without cumulative drift and 
     head.getWorldPosition(p);
     assert.ok(p.y > 0.33 && p.y < 0.37);
     pose.leave();
+    assert.equal(rig.swimming, false);
+    assert.equal(rig._noAvoid, undefined);
     assert.equal(root.position.y, 0);
     assert.ok(Math.abs(root.rotation.x - 0.1) < 1e-8);
     assert.ok(head.quaternion.angleTo(new THREE.Quaternion()) < 1e-8);
@@ -112,12 +116,14 @@ test('swimmer waterline follows actual head height without cumulative drift and 
 
 test('a scripted swimmer turns toward their listener without the paused walking controller', async () => {
   const root = new THREE.Group(); root.position.set(2, -.3, 3); root.rotation.y = Math.PI;
+  let duration;
   const game = { place: {}, player: { root, scripted: true }, walker: { faceTo() { throw Error('walker is paused'); } },
-    tween: async (_, step) => step(1) };
+    tween: async (seconds, step) => { duration = seconds; step(1); } };
   const action = poolAction(game);
   await action.run(() => faceSwimmer(game, action, { x: 3, z: 4 }));
   assert.ok(Math.abs(root.rotation.y - Math.PI / 4) < 1e-8);
   assert.equal(game.walker.facing, root.rotation.y);
+  assert.ok((Math.PI - Math.PI / 4) / duration <= 2.4, 'turn speed stays below stationary-spin threshold');
 });
 
 test('leaving a pool action cancels pending waits and late tween frames', async () => {
@@ -215,6 +221,10 @@ test('water dialogue framing survives Continue and restores walking angles on re
     helper.restore(saved);
     assert.deepEqual(cam.close.point, [2, 3]);
     assert.equal(cam.elev, .48);
+    cam.close = structuredClone(cam.close);
+    helper.update();
+    assert.equal(cam.elev, .48, 'Runner staging clone keeps the owned water shot');
+    assert.ok(helper.snapshot());
     cam.release();
     assert.deepEqual([cam.yaw, cam.elev], [-.22, .94]);
     assert.equal(helper.snapshot(), null);

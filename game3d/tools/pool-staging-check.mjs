@@ -68,6 +68,7 @@ assert.ok(reports.every(r => r.pass), JSON.stringify(reports));
 assert.ok(poses.some(p => p.node === 'club_swimming_length' && p.scripted && p.player[1] < 0), 'water pose captured');
 assert.ok(poses.some(p => p.node === 'club_swimming_sit' && p.seated && p.world.player.eric.seatOut), 'bench pose captured');
 for (const p of poses.filter(p => p.node === 'club_swimming_length')) {
+  assert.equal(p.world.swim.camera?.shot.elev, .48, 'owned water framing survives actual Runner Continue');
   const actor = p.world.player.eric, target = p.world.people.kuro.position;
   const expected = Math.atan2(target[0] - actor.position[0], target[2] - actor.position[2]);
   assert.ok(Math.cos(actor.rotation[1] - expected) > .98, 'scripted swimmer faces Kuro while the walking controller is paused');

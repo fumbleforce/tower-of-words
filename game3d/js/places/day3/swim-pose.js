@@ -15,7 +15,7 @@ export async function faceSwimmer(game, action, target) {
   const angle = Math.atan2(target.x - p.x, target.z - p.z);
   const delta = Math.atan2(Math.sin(angle - from), Math.cos(angle - from));
   await action.wait(
-    action.tween(0.35, (t) => {
+    action.tween(Math.max(0.35, Math.abs(delta) / 2.4), (t) => {
       player.root.rotation.y = from + delta * t;
     }),
   );
@@ -45,6 +45,7 @@ export function swimmerPose(rig) {
   let mode = null,
     time = 0,
     rootX = 0,
+    previousAvoid,
     immersion = 1;
   function undo() {
     if (!mode && !originals.size) return;
@@ -84,8 +85,13 @@ export function swimmerPose(rig) {
   return {
     enter(next = 'tread', depth = 1) {
       immersion = depth;
-      if (!mode) rootX = root.rotation.x;
+      if (!mode) {
+        rootX = root.rotation.x;
+        previousAvoid = rig._noAvoid;
+      }
       mode = next;
+      rig.swimming = true;
+      rig._noAvoid = true; // fixed water choreography must not be pushed onto the deck's walk grid
       rig.seated = false;
       rig.setState?.('idle');
       undo();
@@ -100,8 +106,10 @@ export function swimmerPose(rig) {
       apply();
     },
     leave() {
+      if (mode) rig._noAvoid = previousAvoid;
       undo();
       mode = null;
+      rig.swimming = false;
       root.position.y = 0;
     },
     get active() {
