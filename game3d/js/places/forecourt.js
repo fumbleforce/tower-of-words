@@ -31,6 +31,7 @@ export async function forecourtPlace(game) {
     office_entrance: w.officeEntrance,
     lift_front: w.liftOut,
     plaza_lane: w.plazaLane,
+    shop_lane: w.southLink.lane,
     forecourt_staff_gate: w.nooks.forecourt_staff_gate,
     // in the head office lobby: its nooks, the receptionist's office door and the office behind it
     lobby_model: w.headOffice.nooks.lobby_model,
@@ -93,6 +94,12 @@ export async function forecourtPlace(game) {
       anchor: (v) => v.set((w.plazaLane[0] + w.plazaEdge[0]) / 2, 1.1, (w.plazaLane[1] + w.plazaEdge[1]) / 2),
       spot: () => w.plazaLane,
       face: () => w.plazaEdge,
+    },
+    shop_lane: {
+      ...PLACE_DETAILS.forecourt.things.shop_lane,
+      anchor: (v) => v.set(w.southLink.edge[0], 1.1, w.southLink.edge[1]),
+      spot: () => w.southLink.lane,
+      face: () => w.southLink.edge,
     },
     garden_bench: {
       ...PLACE_DETAILS.forecourt.things.garden_bench,
@@ -200,6 +207,7 @@ export async function forecourtPlace(game) {
           l0 = w.laneAt(...w.plazaLane);
         return l.u > l0.u - 0.1 && Math.abs(l.off) < 1.2;
       },
+      shop_exit: w.southLink.exit,
       // inside the receptionist's office behind the feature wall
       reception_office: (x, z) => w.headOffice.inOffice(x, z),
     },
@@ -229,7 +237,7 @@ export async function forecourtPlace(game) {
             new THREE.Vector3(w.doorX, 0, w.stationExit[1] - 0.2),
           ],
           new THREE.Vector3(5.2, 0, -1.2),
-          { follow: true, clamp: [5.2, 26, -11.4, 3.5], limY: 0.96 }, // north as far as the lifts and the office
+          { follow: true, clamp: [5.2, 26, -11.4, 12.0], limY: 0.96 }, // north as far as the lifts and the office
         );
         return;
       }
@@ -244,7 +252,7 @@ export async function forecourtPlace(game) {
           new THREE.Vector3(0, 1.2, 2.4),
         ],
         new THREE.Vector3(0, 0, 0),
-        { follow: true, clamp: [-1.0, 30, -12.4, 8.0], lead: -1.6 },
+        { follow: true, clamp: [-1.0, 30, -12.4, 12.0], lead: -1.6 },
       );
       phone = true;
       north.dist = cam.fitDist;
@@ -263,6 +271,7 @@ export async function forecourtPlace(game) {
       garden.update(t);
       // heading for the lane (not for head office): build the plaza now, so the walk there needs no loading pause
       const e = game.player.root.position;
+      if (e.z > 8 && !game.prepared.shotengai) game.prepare?.('shotengai');
       if (e.x > 20 && e.z > w.hoDoor[1] && !game.prepared.plaza) game.prepare?.('plaza');
     },
     onPeriod(period) {
@@ -303,6 +312,7 @@ export async function forecourtPlace(game) {
     },
     // the walks to and from the fountain plaza (trips.js picks these by the other place's name)
     tripOutTo: {
+      shotengai: (g) => walkOut(g, cam, w.southLink.lane, w.southLink.edge),
       plaza: (g) => walkOut(g, cam, w.plazaLane, w.plazaEdge),
       // day 2: back in at the station's door, the way he came out of it (tripIn backwards)
       async gate(g) {
@@ -322,6 +332,7 @@ export async function forecourtPlace(game) {
       },
     },
     tripInFrom: {
+      shotengai: (g) => walkIn(g, cam, w.southLink.edge, w.southLink.inside, Math.PI),
       plaza: (g) => walkIn(g, cam, w.plazaEdge, w.plazaIn, w.laneFacing),
     },
     async tripIn(g) {

@@ -381,6 +381,7 @@
     "gate:tama_sumimasen",
     "gate:signin",
     "gate:poster",
+    "forecourt:to_shotengai",
     "forecourt:garden_bench",
     "forecourt:fallen_bicycle",
     "forecourt:outside",
@@ -501,6 +502,7 @@
     "dorms:boxes",
     "dorms:bed",
     "dorms:computer",
+    "shotengai:to_forecourt",
     "shotengai:arrive",
     "shotengai:shut",
     "shotengai:to_plaza",
@@ -1272,6 +1274,12 @@
       "call": true
     },
     {
+      "from": "forecourt:to_shotengai",
+      "to": "shotengai:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "forecourt:to_plaza",
       "to": "plaza:arrive",
       "kind": "trip",
@@ -1316,6 +1324,12 @@
     {
       "from": "canteen:to_plaza",
       "to": "plaza:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "shotengai:to_forecourt",
+      "to": "forecourt:outside",
       "kind": "trip",
       "labels": []
     },

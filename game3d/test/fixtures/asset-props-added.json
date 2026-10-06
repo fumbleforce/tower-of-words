@@ -1127,6 +1127,29 @@
     ]
   },
   {
+    "id_": "prop/forecourt/shop_lane",
+    "kind": "prop",
+    "name": "To the shopping street",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.shop_lane",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'To the shopping street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/forecourt/station_exit",
     "kind": "prop",
     "name": "Station",
@@ -2389,6 +2412,29 @@
     "place": "shotengai",
     "used": [
       "Shop street: tap target 'Karaoke'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/office_lane",
+    "kind": "prop",
+    "name": "To head office",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.office_lane",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'To head office'"
     ],
     "view": {
       "type": "room",

@@ -30,7 +30,7 @@ export const CHUNKS = {
     turn: 0,
     scale: 1,
     level: 0,
-    walk: [-6.6, 35, -13.4, 10.6],
+    walk: [-6.6, 35, -13.4, 12.75],
     view: [-42, 31, -28, 52.15], // west to the coast, over the platform shed, south to the beach (island-south.js)
     anchor: 'the gate room (its exit is the station door at local (-1.5, 2.65))',
   },
@@ -75,7 +75,7 @@ export const CHUNKS = {
     turn: 270, // looking west down the arcade from its east mouth; view: the rows' backs to the beach
     scale: 1,
     level: 0,
-    walk: [-12.25, 2.25, -77.9, 9.5],
+    walk: [-12.25, 8.65, -77.9, 9.5],
     view: [-27, 7, -80.5, 13.5],
     anchor: 'the middle of the arcade’s east mouth, between the two shop rows as drawn',
   },

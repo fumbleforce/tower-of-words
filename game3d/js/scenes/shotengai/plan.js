@@ -6,8 +6,8 @@
 //   the arcade: the walk between the two shop rows, from the west mouth to the east mouth, between the rows' posts
 //   the shop walk: on east out of the arcade past the izakaya's door to the dorm street, where Eric comes in from
 //   the plaza and leaves for it (or, after work, for the dorm courtyard up the street)
-//   the mouths' walks: down the rows' west end from the arcade to the promenade (its north half, on to the footpath
-//   behind the rows, is not walked), and down from the shop walk to the promenade's east end
+//   the mouths' walks: from head office's bicycle court down the rows' west end to the arcade and promenade,
+//   and down from the shop walk to the promenade's east end
 //   the alleys: three, one bay wide, through the south row from the arcade to the promenade
 //   the promenade: from the walk down from the station (not walked) east to the lookout; the stairs down to the beach
 //   are chained off at their heads, the beach is seen and not walked
@@ -34,7 +34,7 @@ export const ROW_W = BAYS.x0, // the rows' west and east ends
 export const ARCADE = [ROW_W, ROWS_Z.arcade, ROW_E, ROWS_Z.south];
 export const SHOP_WALK = path('arcade_end').rect;
 export const DORM_STREET = path('dorm_street').rect;
-export const WEST_WALK = [LINKS.west[0], ROWS_Z.arcade, LINKS.west[2], LINKS.west[3]];
+export const WEST_WALK = LINKS.west;
 export const EAST_WALK = LINKS.east;
 export const PROM = [-13.4, PROMENADE[1], PROMENADE[2], WALL_Z - 0.2]; // east of the walk down from the station
 export { ALLEYS };

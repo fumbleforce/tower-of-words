@@ -538,6 +538,11 @@
           "kind": "thing",
           "verb": "Go"
         },
+        "shop_lane": {
+          "label": "To the shopping street",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "garden_bench": {
           "label": "Garden bench",
           "kind": "thing",
@@ -558,6 +563,7 @@
         "office_entrance",
         "lift_front",
         "plaza_lane",
+        "shop_lane",
         "forecourt_staff_gate",
         "lobby_model",
         "lobby_island_w",
@@ -582,6 +588,7 @@
         "lift_front",
         "station_exit",
         "plaza_lane",
+        "shop_exit",
         "reception_office"
       ],
       "people": [
@@ -667,6 +674,11 @@
           "kind": "thing",
           "verb": "Go"
         },
+        "office_lane": {
+          "label": "To head office",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "bike_shop": {
           "label": "Bike shop",
           "kind": "thing",
@@ -729,6 +741,7 @@
       },
       "spots": [
         "plaza_entry",
+        "office_lane",
         "shotengai_shrine",
         "shotengai_back_alley",
         "shotengai_pine_bench",
@@ -746,6 +759,7 @@
         "party_mori"
       ],
       "zones": [
+        "office_exit",
         "plaza_exit"
       ],
       "people": [

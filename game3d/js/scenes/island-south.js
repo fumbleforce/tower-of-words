@@ -41,6 +41,7 @@ export const STAIRS = BAYS.alleys.map((i) => [
 export const ALLEYS = BAYS.alleys.map((i) => [bayMid(i) - 1, ROWS_Z.south, bayMid(i) + 1, ROWS_Z.back]);
 // the footpath along the north row's backs, as the plaza lays it (plaza/plan.js FOOTPATH), for the forecourt's tile
 export const BACK_WALK = [ROW_W - 2.5, ROWS_Z.north - 1.7, 17.5, ROWS_Z.north];
+export const OFFICE_SOUTH_LINK = { rect: [-5.5, 9.95, -3, 11.7], x: -4.25, seam: 11.75 };
 export const LINKS = {
   west: [ROW_W - 2.5, BACK_WALK[1], ROW_W, ROWS_Z.back], // from the back footpath past the arcade's mouth
   east: [PROMENADE[2] - 2.5, ROWS_Z.south, PROMENADE[2], ROWS_Z.back], // up from the promenade's east end
@@ -52,6 +53,12 @@ const WALL_E = 80;
 const ALLEY =
   'An alley through the south row from the arcade to the promenade, opposite a flight of stairs to the beach.';
 export const SOUTH_PATHS = [
+  {
+    id: 'office_south_walk',
+    kind: 'path',
+    rect: OFFICE_SOUTH_LINK.rect,
+    detail: 'From head office through the bicycle court to the shopping street’s west passage.',
+  },
   {
     id: 'promenade',
     kind: 'promenade',

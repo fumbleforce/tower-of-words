@@ -1,5 +1,5 @@
 import { place } from './shared.js';
-export default place({ plaza: ['talk:plaza_lane', 'zone:plaza_exit'], karaoke: ['talk:karaoke'] }, {
+export default place({ forecourt: ['talk:office_lane', 'zone:office_exit'], plaza: ['talk:plaza_lane', 'zone:plaza_exit'], karaoke: ['talk:karaoke'] }, {
   labels: { kuro: ['Kuro', 'd3_kuro_intro'] },
   on: { 'talk:mori': 'd4_mori', 'talk:kenji': 'd4_kenji', 'talk:kuroda': 'd4_hamada', 'talk:kuro': 'd4_kuro', 'talk:bakery': 'd4_bakery', 'talk:game_centre': 'd4_arcade', 'talk:store': 'd4_store' },
   nodes: {

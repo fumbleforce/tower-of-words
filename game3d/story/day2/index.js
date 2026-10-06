@@ -18,8 +18,8 @@ export const PERIODS = ['morning', 'evening'];
 export const TRIPS = {
   dorms: ['dorm_court'], dorm_court: ['dorms', 'east_lane'],
   east_lane: ['plaza', 'shotengai', 'dorm_court', 'east_coast'], east_coast: ['east_lane'],
-  canteen: ['plaza'], plaza: ['forecourt', 'east_lane', 'shotengai', 'canteen'], forecourt: ['gate', 'office', 'plaza'],
-  gate: ['train', 'forecourt'], train: ['gate'], office: ['forecourt'], shotengai: ['east_lane'],
+  canteen: ['plaza'], plaza: ['forecourt', 'east_lane', 'shotengai', 'canteen'], forecourt: ['gate', 'office', 'plaza', 'shotengai'],
+  gate: ['train', 'forecourt'], train: ['gate'], office: ['forecourt'], shotengai: ['east_lane', 'forecourt'],
 };
 // These are explicit requests, not engine registrations. The draft checker treats undeclared ids as errors.
 export const NEEDS = {

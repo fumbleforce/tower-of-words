@@ -210,7 +210,6 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
     [P[0], P[1], P[0], WALL_Z - 0.3],
     [-14.1, P[1], LINKS.west[0], P[1]],
     [LINKS.west[0], LINKS.west[1], LINKS.west[0], LINKS.west[3]],
-    [LINKS.west[0], LINKS.west[1], LINKS.west[2], LINKS.west[1]],
     [LINKS.east[2], LINKS.east[1], LINKS.east[2], LINKS.east[3]],
     [S.EAST_BED[0], S.EAST_BED[1], S.EAST_BED[0], S.EAST_BED[3]],
     [S.EAST_BED[0], S.EAST_BED[3], S.EAST_BED[2], S.EAST_BED[3]],

@@ -2,6 +2,7 @@
 export const SHOTENGAI_DETAILS = {
   things: {
     plaza_lane: { label: 'To the plaza', kind: 'thing', verb: 'Go' },
+    office_lane: { label: 'To head office', kind: 'thing', verb: 'Go' },
     bike_shop: { label: 'Bike shop', kind: 'thing', verb: 'Go in' },
     store: { label: 'Konbini', kind: 'thing', verb: 'Go in' },
     bakery: { label: 'Bakery', kind: 'thing', verb: 'Go in' },
@@ -20,6 +21,7 @@ export const SHOTENGAI_DETAILS = {
   },
   spots: [
     'plaza_entry',
+    'office_lane',
     'shotengai_shrine',
     'shotengai_back_alley',
     'shotengai_pine_bench',
@@ -29,7 +31,7 @@ export const SHOTENGAI_DETAILS = {
   ],
   nooks: ['shotengai_shrine', 'shotengai_back_alley', 'shotengai_pine_bench'], // docs/game/places.md, "Nooks"
   seats: ['party_seat', 'party_mori'],
-  zones: ['plaza_exit'],
+  zones: ['office_exit', 'plaza_exit'],
   people: ['mori', 'kenji', 'kuroda', 'aoi', 'kuro', 'rei'],
   hooks: ['partySetup', 'partyFood'],
 };
