@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { PROTAGONISTS, ownClip, playerClip } from '../../js/mc.js';
-import { manifestOf, voiceLines } from '../../tools/voice-manifest.mjs';
+import { manifestOf, voiceLines, mondayStandIns, standInKey } from '../../tools/voice-manifest.mjs';
 import { heardKey, lineKey } from '../../tools/heardkey.mjs';
 
 const { eric, carina } = PROTAGONISTS;
@@ -77,4 +77,25 @@ test('the game picks the protagonist’s own clip, else the stand-in', () => {
   assert.equal(playerClip('eric-ohayo', carina, () => false), carina.voice.words + '-ohayo');
   assert.equal(playerClip('eric-ohayo', eric, () => true), 'eric-ohayo');
   assert.equal(playerClip('word-ohayo', carina, () => true), 'word-ohayo');
+});
+
+
+test('Monday named lines retain configured stand-in casting without duplicating unchanged speech', async () => {
+  const byMc = await voiceLines();
+  const base = manifestOf({ eric: byMc.eric });
+  const extra = mondayStandIns(byMc, base);
+  assert.equal(PROTAGONISTS.carina.voice.ref, null);
+  assert.equal(extra.length, 6);
+  assert.ok(extra.every(line => line.speaker !== 'carina' && line.text.includes('Carina')));
+  assert.ok(extra.some(line => line.speaker === 'mio' && line.key.endsWith('-carina')));
+  assert.ok(extra.some(line => line.speaker === 'eric' && line.key === lineKey('eric', line.text)));
+  assert.equal(new Set([...base, ...extra].map(line => line.key)).size, base.length + extra.length);
+});
+
+
+test('stand-in validation preserves authored token hashes and overheard keys', () => {
+  for (const key of [lineKey('eric', '{dashite}。'), heardKey('今日は{ohayo}。'), 'eric-dashite']) {
+    const entry = { key: ownClip(key, carina), speaker: 'carina', text: 'Resolved text must not change the key' };
+    assert.equal(standInKey(entry, carina), key);
+  }
 });

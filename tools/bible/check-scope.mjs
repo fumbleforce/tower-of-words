@@ -65,7 +65,8 @@ export function scopedRoute({ publicOnly = false, onFailure, isClosing = () => f
         }
         return r;
       });
-      if (response.status() >= 300 && response.status() < 400) {
+      // 304 reuses a cached response; it does not navigate to another URL.
+      if (response.status() >= 300 && response.status() < 400 && response.status() !== 304) {
         onFailure(`redirect refused by Bible source scope: ${url}`);
         return await route.abort('blockedbyclient');
       }

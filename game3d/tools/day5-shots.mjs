@@ -11,9 +11,13 @@ await withBrowserJob('day5-staging', async browser => {
   for (const [place, period, hook, states] of [
     ['forecourt', 'morning', 'labelRepair', ['show', 'format', 'print', 'check']],
     ['karaoke_booth', 'lunch', 'selectorRepair', ['show', 'key', 'book', 'verify']],
+    ['office', 'afternoon', 'day5Office', ['soup', 'tea']],
+    ['plaza', 'lunch', 'day5Setup', ['aoiLunch']],
+    ['dorm_commons', 'lunch', 'day5Commons', ['paper']],
     ['office', 'evening', 'teamDrinks', ['gather', 'aside', 'private', 'phoneAway', 'clear', 'printLesson', 'deliveryPose', 'ordinaryServe', 'free']],
     ['dorm_commons', 'evening', 'day5Commons', ['seat', 'sit', 'sketch']],
   ]) {
+    if (process.env.ONLY && !process.env.ONLY.split(',').includes(place + ':' + period)) continue;
     const opened = await openGame(browser, { mode: 'title', viewport: { width, height }, url: `http://127.0.0.1:8771/${base}/index.html?q=0`, beforeNavigate: async page => {
       await page.addInitScript(({ place, period }) => {
         localStorage.setItem('amakawa-day1-save', JSON.stringify({ v: 1, day: 5, period, place, known: ['dashite', 'matte'], seen: [], found: [], met: [], taught: {}, inv: [], yen: 4000, bonds: {}, flags: { day: 5, period, place, d5_started: true }, runner: { onceDone: [] } }));
@@ -26,14 +30,14 @@ await withBrowserJob('day5-staging', async browser => {
     await page.waitForFunction(place => window.__game?.place?.name === place && !window.__game.busy, place, { timeout: 30000 });
     await page.evaluate(() => { window.__game.busy = true; window.__game.setHurry(true); });
     for (const state of states) {
-      await page.evaluate(async ({ hook, state }) => { const g = window.__game; await g.place.hooks[hook]({ state }); }, { hook, state });
+      await page.evaluate(async ({ hook, state }) => { const g = window.__game; if (state === 'deliveryPose') g.flagsRef.d5_delivery_seen = true; await (g.place.hooks[hook] || g.hooks[hook])({ state }); }, { hook, state });
       await page.waitForTimeout(500);
       await page.screenshot({ path: `${out}/${width}-${place}-${state}.png` });
     }
     const saved = await page.evaluate(() => {
       const g = window.__game, before = g.place.snapshotState();
       g.place.restoreState({ world: before, flags: g.flagsRef });
-      return { before: before.monday, after: g.place.snapshotState().monday, people: Object.fromEntries(Object.entries(g.place.people).map(([id, p]) => [id, { visible: p.root.visible, at: p.root.position.toArray() }])) };
+      return { before: before.monday, after: g.place.snapshotState().monday, player: { at: g.player.root.position.toArray(), ry: g.player.root.rotation.y }, people: Object.fromEntries(Object.entries(g.place.people).map(([id, p]) => [id, { visible: p.root.visible, at: p.root.position.toArray(), ry: p.root.rotation.y, seated: p.seated }])) };
     });
     assert.deepEqual(saved.before, saved.after, `${place} physical snapshot roundtrip`);
     fs.writeFileSync(`${out}/${width}-${place}-state.json`, JSON.stringify(saved, null, 2));

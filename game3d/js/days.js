@@ -31,7 +31,7 @@ export const DAYS = {
   },
   5: { dir: 'day5/', start: 'dorms', period: 'morning', files: Object.keys(DAY5_STORIES) },
 };
-export const LAST_DAY = 4; // the last day a player plays on into; ?day=N starts any day in DAYS
+export const LAST_DAY = 5; // the last day a player plays on into; ?day=N starts any day in DAYS
 export const dayOf = (n) => DAYS[n] || DAYS[1];
 // the story module path for a place on a day, relative to game3d/js/
 export const storyPath = (name, day = 1) => `../story/${dayOf(day).dir}${name}.js`;

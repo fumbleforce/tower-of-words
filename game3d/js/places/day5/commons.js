@@ -5,7 +5,7 @@ export function mondayCommons(game, P) {
   const table = anchor(P, 'art_table'),
     rack = anchor(P, 'drying_rack');
   const paper = prop(P, [0.3, 0.025, 0.22], '#edf0eb', [table.x - 0.7, 0.42, table.z]);
-  const bag = prop(P, [0.2, 0.24, 0.13], '#546b94', [0.5, 0.34, -1.75]);
+  const bag = prop(P, [0.2, 0.24, 0.13], '#546b94', [0.5, 0.34, -3.25]);
   const pencils = board(P, ['Pencils are in the tin.', 'Leave the sharpener here.'], { w: 0.38, h: 0.15 });
   pencils.position.set(table.x + 0.4, 0.43, table.z);
   pencils.rotation.x = -Math.PI / 2;
@@ -49,10 +49,10 @@ export function mondayCommons(game, P) {
   note.visible = false;
   P.seats.d5_aoi_beside = {
     x: 0.5,
-    z: -1.75,
+    z: -3.25,
     top: 0.25,
-    ry: Math.PI,
-    out: [0.5, -1.1],
+    ry: 0,
+    out: [0.5, -3.9],
   };
   async function hook({ state }) {
     if (state === 'paper') {
@@ -60,8 +60,9 @@ export function mondayCommons(game, P) {
       paper.position.y = 0.6;
       await moveProp(game, paper, [table.x - 0.7, 0.42, table.z]);
     } else if (state === 'seat') {
+      await game.walkTo(-1.45, -3.6);
       frame(game, 'aoi');
-      await moveProp(game, bag, [-0.7, 0.14, -1.55]);
+      await moveProp(game, bag, [-0.7, 0.14, -3.55]);
     } else if (state === 'sit') {
       await game.hooks.sit({ who: 'eric', at: 'd5_aoi_beside' });
       game.place.cam.release?.();
@@ -85,7 +86,7 @@ export function mondayCommons(game, P) {
   return {
     hook,
     restore() {
-      bag.position.set(0.5, 0.34, -1.75);
+      bag.position.set(0.5, 0.34, -3.25);
     },
   };
 }

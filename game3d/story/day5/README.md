@@ -1,6 +1,6 @@
 # Day 5 story handoff
 
-Monday, 5 October. Read `dorms.js`, `office.js`, `reveal.js`, `reception.js`, `karaoke_booth.js`, then the optional stops. This story follows the [days 3–5 outline](../../../notes/days3-5-outline.md); it awaits Claude's cold read and build. Day 3 is live; these new files do not enable Monday themselves.
+Monday, 5 October. Read `dorms.js`, `office.js`, `reveal.js`, `reception.js`, `karaoke_booth.js`, then the optional stops. This story follows the [days 3–5 outline](../../../notes/days3-5-outline.md); its reviewed public scenes are now physically integrated through Monday. Runtime registration, voice production and rendered checks are recorded in [the game facts](../../../docs/game/stories/day5/README.md).
 
 `index.js` supplies the place/trip set, four periods and requested hooks. Monday owns `d5_*`; the inherited station, booking and fan repairs keep their existing state. T-0007 and T-0008 are new. Repairs, confirmations and lessons cost no period. The room's chair advances time; the bed alone ends the day. No work, club visit, lesson or reveal is required to sleep.
 
@@ -16,13 +16,13 @@ The sketch is one optional shelf interaction, left where it was found, with no p
 
 Run `node game3d/story/day5/check.mjs /tmp/day5-transcripts.md`. It checks story references against the catalog plus `NEEDS`, route connectivity, Eric/Carina token expansion, first/known colleagues, learning order, reveal deferral/replay, each return recipient, both selector methods, label payment replay and no-job Sleep. Hooks are recorded, not rendered.
 
-Writing checks: Kenji wants to buy four drinks, Mori has art paper to set out, and Emi has an upstairs meeting. Avoided a secret society briefing, a boss ordering a demonstration and an accidental reveal treated as though everyone already knew. Cold-read acceptance and physical QA are still required.
+Writing checks: Kenji wants to buy four drinks, Mori has art paper to set out, and Emi has an upstairs meeting. Avoided a secret society briefing, a boss ordering a demonstration and an accidental reveal treated as though everyone already knew. Cold-read acceptance and physical QA are recorded with the build facts.
 
 The #230 adapter data is in `kotodama.js`: exact cast, first request, polite sentence, one-tap guidance, event names, return flags and the protagonist-token override for the prototype's hardcoded launched-Mio line. The story declares `event:kotodama_first`, `event:kotodama_cancel` and `event:kotodama_exit`; the builder supplies event delivery. Guided practice on days 3 and 4 stays at the gym printer. Monday is the first minigame entrance. No fresh scene-order or witness decision is needed: both follow the supplied outline.
 
 The shared `days3-5-finds.js` and `milestones/` packs are exported for the builder. Their Japanese dialogue follows the same blur rule as the day scenes. Their descriptors supply independent eligibility and their READMEs specify physical staging; exporting them does not dispatch scenes. Run both packs' authoring checks before integration.
 
-The working [voice sheet](VOICE.md) records the required skill pass. The checker rejects dialogue-level `en`, including the Kotodama adapter's lines, and checks Japanese-only speakers as in landed day 3. Glosses in word and command data remain allowed. See [COLD-READ.md](COLD-READ.md) for validation and reader findings. The story is authored; Claude's sample read and physical integration remain separate gates.
+The working [voice sheet](VOICE.md) records the required skill pass. The checker rejects dialogue-level `en`, including the Kotodama adapter's lines, and checks Japanese-only speakers as in landed day 3. Glosses in word and command data remain allowed. See [COLD-READ.md](COLD-READ.md) for validation and reader findings. The authored contract below remains the reference for the physical implementation.
 
 ## Build contract for Claude
 
