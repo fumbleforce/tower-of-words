@@ -11,6 +11,7 @@ import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { followFit } from './turning-cam.js';
 import { MC } from '../mc.js';
+import { sim } from '../sim.js';
 import { day3Place } from './day3/place.js';
 import { poolClub } from './day3/swim.js';
 
@@ -27,10 +28,12 @@ const seat = ({ at, top, ry }) => {
   return { x, z, top, ry };
 };
 export async function poolPlace(game) {
-  const w = await sliced(sportsSteps({ walks: D.WALKS, blocks: D.BLOCKS, start: D.EXIT.in }));
+  const closed = sim.day === 4;
+  const w = await sliced(sportsSteps(closed ? {} : { walks: D.WALKS, blocks: D.BLOCKS, start: D.EXIT.in }));
   const cam = new RoomCam({ ...w.camera, yaw: D.LOOK.yaw, elev: D.LOOK.elev }); // elev in degrees here
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-  const out = MC.gender === 'woman' ? D.EXIT_W : D.EXIT; // the protagonist's own changing room
+  const door = w.doors.find((d) => d.id === 'pool');
+  const out = closed ? { edge: door.local, lane: door.step, in: door.step } : MC.gender === 'woman' ? D.EXIT_W : D.EXIT; // the protagonist's own changing room
   const d3 = day3Place(game, 'pool', { root: w.root, K, ids: ['emi', 'kuro', 'attendant', 'member'] });
   const club = poolClub(game, { root: w.root, cast: d3.cast });
   d3.also(() => club.arrange());
@@ -50,6 +53,13 @@ export async function poolPlace(game) {
       ...PLACE_DETAILS.pool.things.pool_goggles,
       ...club.goggles(),
       anchor: (v) => club.goggles().anchor(v),
+    },
+    pool_notice: {
+      ...PLACE_DETAILS.pool.things.pool_notice,
+      anchor: (v) => P.sunday.things.pool_notice.anchor(v),
+      spot: () => P.sunday.things.pool_notice.spot(),
+      face: () => P.sunday.things.pool_notice.face(),
+      enabled: () => P.sunday.things.pool_notice.enabled(),
     },
   };
   const P = {

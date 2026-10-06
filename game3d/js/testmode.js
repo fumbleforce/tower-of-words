@@ -6,6 +6,7 @@ import { known, SAYABLE } from './lang.js';
 import { flags } from './narrative/state.js';
 import { doorwayAt } from './movement/doorways.js';
 import { day3Tick, preferred } from './testmode-day3.js';
+import { DAY4_ROUTE } from './testmode-day4.js';
 
 export function start(game) {
   setMuted(true);
@@ -52,7 +53,10 @@ export function start(game) {
     // the notice board up close (ui/finds-view.js showBoard): take the first slip on offer, then close it
     const board = globalThis.document?.getElementById('boardView');
     if (board && !board.hidden) {
-      const slip = board.querySelector('button.slip');
+      const slip =
+        (game.sim?.day === 4
+          ? [...board.querySelectorAll('button.slip')].find((b) => b.parentElement?.textContent.includes('Tennis'))
+          : null) || board.querySelector('button.slip');
       if (slip && !T.slipTaken) {
         T.slipTaken = true;
         T.log.push('board: take a slip');
@@ -80,6 +84,7 @@ export function start(game) {
     busyFor = 0;
     // day 3: the route through the Saturday (testmode-day3.js) before anything else
     if ((game.sim?.day || 1) === 3 && day3Tick(game, T, (T.route3 ||= { i: 0, wait: 0 }))) return;
+    if (game.sim?.day === 4 && day3Tick(game, T, (T.route4 ||= { i: 0, wait: 0 }), DAY4_ROUTE)) return;
     const list = game.markers.list.filter((m) => m.enabled());
     const goals = list.filter((m) => m.goal());
     // social route: at the jam, say すみません to the guard (the way a player takes the social way), not the goal

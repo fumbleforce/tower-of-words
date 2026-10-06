@@ -28,17 +28,18 @@ export const BENCH_LEN = 1.8;
 export const BASKET = [X0 + 0.75, CZ + 3.9];
 export const DISPLAY = [NET.x0 - 0.75, CZ - 0.6]; // on its post, facing east across the court
 
-// walkable: the west court and the run-off round it inside the fence, as far east as the strip between the courts
-// (the east court is only seen); the gate's opening in the south fence
+// Both courts and their run-off strips are walkable; each net is blocked.
+// Sunday's singles/doubles players use the east court, reached from the south gate.
 const STRIP_E = CXS[1] - W / 2 - 0.5;
 const I_WALKS = [
-  [X0 + 0.15, STRIP_E, Z0 + 0.15, Z1 - 0.12],
+  [X0 + 0.15, X1 - 0.15, Z0 + 0.15, Z1 - 0.12],
   [GATE_X - 0.7, GATE_X + 0.7, Z1 - 0.3, Z1 + 0.4],
 ];
 // what stands on it: the net (posts and band), the bench, the basket, the display's post, the gate's leaves
 const I_BLOCKS = [
+  [CXS[1] - W / 2 - 0.38, CXS[1] + W / 2 + 0.38, CZ - 0.08, CZ + 0.08],
   [NET.x0 - 0.08, NET.x1 + 0.08, NET.z - 0.08, NET.z + 0.08],
-  [X0, BENCH[0] + 0.3, BENCH[1] - BENCH_LEN / 2 - 0.05, BENCH[1] + BENCH_LEN / 2 + 0.05],
+  [X0, BENCH[0] + 0.65, BENCH[1] - BENCH_LEN / 2 - 0.05, BENCH[1] + BENCH_LEN / 2 + 0.05],
   [BASKET[0] - 0.3, BASKET[0] + 0.3, BASKET[1] - 0.3, BASKET[1] + 0.3],
   [DISPLAY[0] - 0.2, DISPLAY[0] + 0.2, DISPLAY[1] - 0.15, DISPLAY[1] + 0.15],
   ...[-1, 1].map((s) => [GATE_X + s * 0.68 - 0.05, GATE_X + s * 0.68 + 0.05, Z1 - 0.75, Z1]), // the gate's open leaves
@@ -51,7 +52,7 @@ export const FRAME = P.rect([CX - W / 2 - 0.9, CX + W / 2 + 0.9, CZ - L / 2 - 1.
 export const ON = P.rect([X0, STRIP_E, Z0, Z1 - 0.35]);
 export const SPOTS = {
   court_gate: P.pt([GATE_X, Z1 - 1.2]),
-  court_bench: P.pt([BENCH[0] + 0.85, BENCH[1]]),
+  court_bench: P.pt([BENCH[0] + 1.3, BENCH[1]]),
   court_net: P.pt([CX, NET.z + 1.0]),
   court_baseline_s: P.pt([CX + 1.2, CZ + L / 2 + 0.8]),
   court_baseline_n: P.pt([CX - 1.2, CZ - L / 2 - 0.8]),

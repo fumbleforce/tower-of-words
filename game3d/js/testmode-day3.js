@@ -43,13 +43,13 @@ export const DAY3_ROUTE = [
 ];
 
 // one tick of the route: true when it acted (or is waiting on its place), false once it has nothing to do here
-export function day3Tick(game, T, R) {
+export function day3Tick(game, T, R, route = DAY3_ROUTE) {
   const place = game.place.name;
-  if (DAY3_ROUTE[R.i] && DAY3_ROUTE[R.i][0] !== place) {
-    const j = DAY3_ROUTE.findIndex((s, k) => k > R.i && s[0] === place);
+  if (route[R.i] && route[R.i][0] !== place) {
+    const j = route.findIndex((s, k) => k > R.i && s[0] === place);
     if (j > 0) R.i = j;
   }
-  const step = DAY3_ROUTE[R.i];
+  const step = route[R.i];
   if (!step || step[0] !== place) return false;
   const m = game.markers.list.find((x) => x.id === step[1]);
   const t = game.place.things[step[1]];

@@ -8,6 +8,7 @@ import gate from '../../story/gate.js';
 import office from '../../story/office.js';
 import { STORIES as day2 } from '../../story/day2/index.js';
 import { STORIES as day3 } from '../../story/day3/index.js';
+import { STORIES as day4 } from '../../story/day4/index.js';
 import CLUBS from '../../story/clubs.js';
 export const stories = { train, gate, office };
 // day 3's set with the swimming club's pool session in the pool's story, as the game plays it (clubs/index.js
@@ -15,8 +16,8 @@ export const stories = { train, gate, office };
 const clubNodes = Object.fromEntries(Object.entries(CLUBS.nodes).filter(([id]) => !/winter/.test(id)));
 const day3Played = { ...day3, pool: { ...day3.pool, nodes: { ...clubNodes, ...day3.pool.nodes } } };
 // each day's story set; a seed with day: 2 checkpoints into day 2's (story/day2/), day: 3 into day 3's
-const days = { 1: stories, 2: day2, 3: day3Played };
-const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three' };
+const days = { 1: stories, 2: day2, 3: day3Played, 4: day4 };
+const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three', 4: 'Day four' };
 
 export function choiceInventory(day = 1) {
   const found = [];
@@ -202,7 +203,7 @@ export async function runRoute(browser, route, { base, viewport, who = {} }) {
       const after = await page.evaluate(() => ({ inv: window.__game.sim.inv, yen: window.__game.sim.yen, nodes: window.__branch.nodes }));
       assert.equal(after.nodes[0], route.resumeAt, 'Continue must resume at the unfinished node');
       assert.deepEqual(after.inv, checkpoint.inv, 'Continue must preserve inventory');
-      assert.equal(after.yen, checkpoint.yen, 'Continue must not spend twice');
+      assert.equal(after.yen, checkpoint.yen + (route.resumeYenDelta || 0), 'Continue must apply only the remaining payment');
     } else await settled(page, route.startAt || route.seed.place); // (startAt: where the opening scene ends up)
     for (const step of route.actions || []) await action(page, step, step.settleAt || route.seed.place);
     if (route.expect.ended) {
@@ -238,7 +239,7 @@ export async function runRoute(browser, route, { base, viewport, who = {} }) {
   } catch (error) {
     let state;
     try { state = await opened?.page.evaluate(() => ({ node: window.__game?.runner.currentNode, trace: window.__branch, goal: window.__game?.ui.goalText })); } catch {}
-    return { id: route.id, pass: false, seconds: (Date.now() - started) / 1000, error: error.message, state };
+    return { id: route.id, pass: false, seconds: (Date.now() - started) / 1000, error: error.message, pageErrors: opened?.errors || [], state };
   } finally {
     closing = true;
     if (opened) { await opened.page.evaluate(() => clearInterval(window.__branch?.timer)).catch(() => {}); await opened.close(); }

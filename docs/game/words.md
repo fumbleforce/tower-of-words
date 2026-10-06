@@ -17,6 +17,7 @@ Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say t
 | `nomitai` | 飲みたい | nomitai | I want to drink | phrase |
 | `mitai` | 見たい | mitai | I want to see | phrase |
 | `ikitai` | 行きたい | ikitai | I want to go | phrase |
+| `isshoni` | いっしょに | isshoni | together | phrase |
 | `koko` | ここ | koko | here | phrase |
 | `matte` | 待って | matte | wait | command |
 | `akete` | 開けて | akete | open | command |

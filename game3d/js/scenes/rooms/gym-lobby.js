@@ -3,19 +3,31 @@
 // printer and key box; the waiting benches, the umbrella stand, the drinks machine and the plant. Each laid into the room's Kit, each
 // blocking its footprint on the walk grid.
 import * as THREE from 'three';
-import { terminal, printer, deskFan } from './machines.js';
+import { terminal, printer } from './machines.js';
 import { C, R, DOOR, TILES, GLASS_Z, COUNTER, BACK, FRONT, TERM_Z } from './gym-plan.js';
 
 // the entrance: the tiles inside the doors, the step up to the lobby floor at their edge; a mat; the shoe lockers
 // either side facing in, cubbies with a few pairs of shoes; the slipper rack on the step; the lobby's floor
 export function entrance(kit, nav) {
   const [tx0, tx1, tz0] = TILES;
-  kit.box(C.tiles, tx1 - tx0, 0.006, -tz0, 0, 0, tz0 / 2, { surf: 'tile', cast: false });
+  kit.box(C.tiles, tx1 - tx0, 0.006, -tz0, 0, 0, tz0 / 2, {
+    surf: 'tile',
+    cast: false,
+  });
   kit.box(C.lobby, R.x1 - R.x0, 0.008, tz0 - GLASS_Z, 0, 0, (tz0 + GLASS_Z) / 2, { surf: 'tile', cast: false });
-  kit.box(C.lobby, tx0 - R.x0, 0.008, -tz0, (R.x0 + tx0) / 2, 0, tz0 / 2, { surf: 'tile', cast: false });
-  kit.box(C.lobby, R.x1 - tx1, 0.008, -tz0, (R.x1 + tx1) / 2, 0, tz0 / 2, { surf: 'tile', cast: false });
+  kit.box(C.lobby, tx0 - R.x0, 0.008, -tz0, (R.x0 + tx0) / 2, 0, tz0 / 2, {
+    surf: 'tile',
+    cast: false,
+  });
+  kit.box(C.lobby, R.x1 - tx1, 0.008, -tz0, (R.x1 + tx1) / 2, 0, tz0 / 2, {
+    surf: 'tile',
+    cast: false,
+  });
   kit.box('#6b6f74', tx1 - tx0, 0.035, 0.06, 0, 0, tz0, { cast: false }); // the step's nosing
-  kit.box('#4d5a63', 1.5, 0.014, 0.7, 0, 0.004, -0.5, { surf: 'carpet', cast: false });
+  kit.box('#4d5a63', 1.5, 0.014, 0.7, 0, 0.004, -0.5, {
+    surf: 'carpet',
+    cast: false,
+  });
   // the glass doors' frames standing in the gap of the front wall, open
   for (const x of DOOR) kit.box(C.frame, 0.06, 0.26, 0.08, x, 0, R.z1 + 0.09);
   const shoes = ['#2f3640', '#e8e6df', '#b5463c', '#4b6a8f', '#6b5a46'];
@@ -55,23 +67,37 @@ export function reception(kit, nav, signs) {
     len = z1 - z0,
     mz = (z0 + z1) / 2;
   kit.box(C.counterFront, d, h - 0.04, len, x, 0, mz, { surf: 'laminate' });
-  kit.box(C.counter, d + 0.1, 0.04, len + 0.06, x + 0.03, h - 0.04, mz, { surf: 'laminate' });
-  kit.box('#e9ece6', 0.004, 0.05, len, FRONT + 0.002, h - 0.16, mz, { cast: false }); // a pale band along its front
+  kit.box(C.counter, d + 0.1, 0.04, len + 0.06, x + 0.03, h - 0.04, mz, {
+    surf: 'laminate',
+  });
+  kit.box('#e9ece6', 0.004, 0.05, len, FRONT + 0.002, h - 0.16, mz, {
+    cast: false,
+  }); // a pale band along its front
   nav.block(x - d / 2 - 0.06, FRONT + 0.1, z0 - 0.06, z1 + 0.06);
   nav.block(x - d / 2 - 0.06, FRONT + 0.1, z1, R.z1); // the bit between its end and the front wall
   const term = terminal(kit, x + 0.05, h, TERM_Z, Math.PI / 2);
-  const fan = deskFan(kit, x - 0.02, h, -0.85, Math.PI / 2 + 0.35);
+  const fan = [x - 0.02, h + 0.5, -0.85];
   kit.box(C.slot, 0.2, 0.04, 0.26, x + 0.02, h, -1.45); // the sheets' tray
-  kit.box('#f4f2ec', 0.16, 0.02, 0.21, x + 0.02, h + 0.03, -1.45, { surf: 'paper' });
-  kit.cyl('#c9c4b6', 0.04, 0.05, 0.03, x + 0.12, h, -1.85, { seg: 12, surf: 'metal' }); // the bell
+  kit.box('#f4f2ec', 0.16, 0.02, 0.21, x + 0.02, h + 0.03, -1.45, {
+    surf: 'paper',
+  });
+  kit.cyl('#c9c4b6', 0.04, 0.05, 0.03, x + 0.12, h, -1.85, {
+    seg: 12,
+    surf: 'metal',
+  }); // the bell
   kit.cyl('#d9b24a', 0.008, 0.008, 0.03, x + 0.12, h + 0.03, -1.85, { seg: 6 });
   kit.cyl(C.slot, 0.03, 0.03, 0.08, x - 0.1, h, -3.2, { seg: 8 }); // the pen stand
-  for (const dz of [-0.01, 0.01]) kit.box(C.blue, 0.008, 0.07, 0.008, x - 0.1, h + 0.06, -3.2 + dz, { rx: dz * 8 });
+  for (const dz of [-0.01, 0.01])
+    kit.box(C.blue, 0.008, 0.07, 0.008, x - 0.1, h + 0.06, -3.2 + dz, {
+      rx: dz * 8,
+    });
   // behind: the chair
   const chx = x - 0.85,
     chz = -1.3;
   kit.box('#3a4254', 0.3, 0.05, 0.32, chx, 0.24, chz, { surf: 'fabric' });
-  kit.box('#3a4254', 0.05, 0.3, 0.32, chx - 0.16, 0.29, chz, { surf: 'fabric' });
+  kit.box('#3a4254', 0.05, 0.3, 0.32, chx - 0.16, 0.29, chz, {
+    surf: 'fabric',
+  });
   kit.cyl(C.steel, 0.02, 0.02, 0.22, chx, 0.02, chz, { seg: 6, surf: 'metal' });
   kit.box(C.slot, 0.34, 0.03, 0.34, chx, 0, chz);
   nav.block(chx - 0.25, chx + 0.22, chz - 0.22, chz + 0.22);
@@ -79,7 +105,9 @@ export function reception(kit, nav, signs) {
   const bw = BACK.x1 - BACK.x0,
     bx = (BACK.x0 + BACK.x1) / 2,
     bl = BACK.z1 - BACK.z0;
-  kit.box('#8e949e', bw, h - 0.04, bl, bx, 0, (BACK.z0 + BACK.z1) / 2, { surf: 'drawerfront' });
+  kit.box('#8e949e', bw, h - 0.04, bl, bx, 0, (BACK.z0 + BACK.z1) / 2, {
+    surf: 'drawerfront',
+  });
   kit.box(C.counter, bw + 0.04, 0.04, bl + 0.04, bx, h - 0.04, (BACK.z0 + BACK.z1) / 2, { surf: 'laminate' });
   nav.block(R.x0, BACK.x1 + 0.08, BACK.z0 - 0.06, BACK.z1 + 0.06);
   const prn = printer(kit, bx - 0.05, h, -2.75, Math.PI / 2);
@@ -111,16 +139,28 @@ export function lobby(kit, nav) {
     bz = -1.5,
     bl = 2.0;
   kit.box(C.blue, 0.36, 0.06, bl, bx, 0.2, bz, { r: 0.02, surf: 'fabric' });
-  kit.box(C.blue, 0.06, 0.32, bl, bx + 0.17, 0.26, bz, { r: 0.02, surf: 'fabric' });
-  for (const s of [-1, 1]) kit.box(C.steel, 0.3, 0.2, 0.04, bx, 0, bz + s * (bl / 2 - 0.15), { surf: 'metal' });
+  kit.box(C.blue, 0.06, 0.32, bl, bx + 0.17, 0.26, bz, {
+    r: 0.02,
+    surf: 'fabric',
+  });
+  for (const s of [-1, 1])
+    kit.box(C.steel, 0.3, 0.2, 0.04, bx, 0, bz + s * (bl / 2 - 0.15), {
+      surf: 'metal',
+    });
   nav.block(bx - 0.25, R.x1, bz - bl / 2 - 0.05, bz + bl / 2 + 0.05);
   // a second bench across the lobby facing the doors, and the umbrella stand inside them
   const sx = 5.7,
     sz = -2.4,
     sl = 2.0;
   kit.box(C.blue, sl, 0.06, 0.36, sx, 0.2, sz, { r: 0.02, surf: 'fabric' });
-  kit.box(C.blue, sl, 0.32, 0.06, sx, 0.26, sz - 0.17, { r: 0.02, surf: 'fabric' });
-  for (const s of [-1, 1]) kit.box(C.steel, 0.04, 0.2, 0.3, sx + s * (sl / 2 - 0.15), 0, sz, { surf: 'metal' });
+  kit.box(C.blue, sl, 0.32, 0.06, sx, 0.26, sz - 0.17, {
+    r: 0.02,
+    surf: 'fabric',
+  });
+  for (const s of [-1, 1])
+    kit.box(C.steel, 0.04, 0.2, 0.3, sx + s * (sl / 2 - 0.15), 0, sz, {
+      surf: 'metal',
+    });
   nav.block(sx - sl / 2 - 0.05, sx + sl / 2 + 0.05, sz - 0.25, sz + 0.25);
   const ux = 3.3,
     uz = -0.35;
@@ -130,7 +170,11 @@ export function lobby(kit, nav) {
     [0.05, -0.02, C.blue],
     [0.0, 0.06, C.red],
   ])
-    kit.cyl(col, 0.012, 0.012, 0.62, ux + dx, 0.05, uz + dz, { seg: 6, rx: dx * 2, rz: -dz * 2 });
+    kit.cyl(col, 0.012, 0.012, 0.62, ux + dx, 0.05, uz + dz, {
+      seg: 6,
+      rx: dx * 2,
+      rz: -dz * 2,
+    });
   nav.block(ux - 0.18, ux + 0.18, uz - 0.18, uz + 0.18);
   // the drinks machine: white, a dark window of bottles, the coin panel
   const vx = R.x1 - 0.32,

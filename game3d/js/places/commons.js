@@ -17,7 +17,7 @@ export function commonsPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const d = w.door,
     save = roomSave(game, w.nav, d.in, cam);
-  const d3 = day3Place(game, 'dorm_commons', { root: w.root, K, ids: ['kenji'] }); // day 3's evening: the TV
+  const d3 = day3Place(game, 'dorm_commons', { root: w.root, K, ids: ['kenji', 'mori'] }); // day 3's evening: the TV
   const things = {
     commons_door: {
       ...PLACE_DETAILS.dorm_commons.things.commons_door,
@@ -51,6 +51,7 @@ export function commonsPlace(game) {
       spot: () => [w.board[0] - 0.75, w.board[2]],
     },
     kenji: { ...PLACE_DETAILS.dorm_commons.things.kenji, ...d3.thing('kenji') },
+    mori: { ...PLACE_DETAILS.dorm_commons.things.mori, ...d3.thing('mori') },
   };
   const P = {
     scene: w.scene,
@@ -74,7 +75,7 @@ export function commonsPlace(game) {
       commons_fridge: w.spots.commons_fridge,
     },
     seats: { commons_sofa: w.seats[0] },
-    people: { kenji: d3.people.kenji },
+    people: { kenji: d3.people.kenji, mori: d3.people.mori },
     zones: {},
     hooks: {},
     day3: (a) => d3.setup(P, a),

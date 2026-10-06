@@ -57,13 +57,19 @@ export async function sportsPlace(game) {
     on = w.exits.east_coast,
     west = w.exits.office_quarter;
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
-  const court = { display: pt(CP.DISPLAY), basket: pt(CP.BASKET), spots: CP.SPOTS };
+  const court = {
+    display: pt(CP.DISPLAY),
+    basket: pt(CP.BASKET),
+    spots: CP.SPOTS,
+  };
   const bench = pt(CP.SEAT.at);
   let aspect = 1,
     framed = false; // the camera holding the whole court
-  const d3 = day3Place(game, 'sports', { root: w.root, K, ids: ['rei'] }); // day 3's afternoon: Rei's serves
+  const d3 = day3Place(game, 'sports', { root: w.root, K, ids: ['rei', 'aoi', 'member'] }); // day 3's afternoon: Rei's serves
   // day 3: the office street closed past the gym's corner (places/closure.js; story/day3/sports.js d3_closed)
-  const westClosed = roadClosure({ space: w.root, nav: w.nav }, west, (x, z) => inRect(x, z, west.zone), { days: [3] });
+  const westClosed = roadClosure({ space: w.root, nav: w.nav }, west, (x, z) => inRect(x, z, west.zone), {
+    days: [3, 4],
+  });
   const things = {
     // the ways out (plan.js EXITS)
     north_street: {
@@ -115,6 +121,15 @@ export async function sportsPlace(game) {
       face: () => court.basket,
     },
     rei: { ...PLACE_DETAILS.sports.things.rei, ...d3.thing('rei') },
+    aoi: { ...PLACE_DETAILS.sports.things.aoi, ...d3.thing('aoi') },
+    member: { ...PLACE_DETAILS.sports.things.member, ...d3.thing('member') },
+    bench_ball: {
+      ...PLACE_DETAILS.sports.things.bench_ball,
+      anchor: (v) => P.sunday.things.bench_ball.anchor(v),
+      spot: () => P.sunday.things.bench_ball.spot(),
+      face: () => P.sunday.things.bench_ball.face(),
+      enabled: () => P.sunday.things.bench_ball.enabled(),
+    },
   };
   const P = {
     scene: w.scene,
@@ -141,8 +156,15 @@ export async function sportsPlace(game) {
       court_display: CP.SPOTS.court_display,
       court_corner: CP.SPOTS.court_corner,
     },
-    seats: { court_bench: { x: bench[0], z: bench[1], top: CP.SEAT.top, ry: CP.SEAT.ry } },
-    people: { rei: d3.people.rei },
+    seats: {
+      court_bench: {
+        x: bench[0],
+        z: bench[1],
+        top: CP.SEAT.top,
+        ry: CP.SEAT.ry,
+      },
+    },
+    people: { rei: d3.people.rei, aoi: d3.people.aoi, member: d3.people.member },
     day3: (a) => d3.setup(P, a),
     onDay: (day) => westClosed.sync(day),
     zones: {
@@ -150,7 +172,7 @@ export async function sportsPlace(game) {
       east_exit: (x, z) => inRect(x, z, on.zone),
       west_exit: (x, z) => inRect(x, z, west.zone),
     },
-    hooks: {},
+    hooks: { courtRepair: (a) => P.sunday.hooks.courtRepair(a), tennisSession: (a) => P.sunday.hooks.tennisSession(a) },
     fit(a) {
       aspect = a;
       // fitted at the lane's look, kept through the turns; on the court, the whole court (both sides of the net)

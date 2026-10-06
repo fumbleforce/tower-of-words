@@ -54,7 +54,7 @@ export async function eastCoastPlace(game) {
     west = w.exits.sports;
   const pool = roadClosure({ nav: w.nav, space: w.root }, west, (x, z) => inRect(x, z, west.zone));
   const visit = coastVisit(game, { w, K }); // day 2's lookout: Mr. Hamada and the view (coast-visit.js)
-  const d3 = day3Place(game, 'east_coast', { root: w.root, K, ids: ['emi', 'aoi'] }); // day 3: the sea terrace
+  const d3 = day3Place(game, 'east_coast', { root: w.root, K, ids: ['emi', 'aoi', 'kuro', 'tama'] }); // day 3: the sea terrace
   const things = {
     dorm_street: {
       ...PLACE_DETAILS.east_coast.things.dorm_street,
@@ -96,6 +96,8 @@ export async function eastCoastPlace(game) {
       spot: () => commons.step,
       face: () => commons.local,
     },
+    kuro: { ...PLACE_DETAILS.east_coast.things.kuro, ...d3.thing('kuro') },
+    tama: { ...PLACE_DETAILS.east_coast.things.tama, ...d3.thing('tama') },
   };
   const P = {
     scene: w.scene,
@@ -120,7 +122,13 @@ export async function eastCoastPlace(game) {
       terrace_bench: w.terraceBench,
     },
     seats: {},
-    people: { kuroda: visit.people.kuroda, emi: d3.people.emi, aoi: d3.people.aoi },
+    people: {
+      kuroda: visit.people.kuroda,
+      emi: d3.people.emi,
+      aoi: d3.people.aoi,
+      kuro: d3.people.kuro,
+      tama: d3.people.tama,
+    },
     zones: {
       row_exit: (x, z) => inRect(x, z, out.zone),
       courts_exit: (x, z) => inRect(x, z, west.zone),

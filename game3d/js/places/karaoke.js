@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { day3Place } from './day3/place.js';
 import { buildKaraokeDesk } from '../scenes/rooms/karaoke.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
@@ -17,6 +18,7 @@ export function karaokePlace(game) {
   const d = w.door,
     s = w.stairs,
     save = roomSave(game, w.nav, d.in, cam);
+  const d4 = day3Place(game, 'karaoke', { root: w.root, K, ids: ['kuroda'] });
   const things = {
     karaoke_door: {
       ...PLACE_DETAILS.karaoke.things.karaoke_door,
@@ -37,6 +39,7 @@ export function karaokePlace(game) {
       face: () => [w.terminal[0], w.terminal[2]],
       spot: () => w.desk,
     },
+    kuroda: { ...PLACE_DETAILS.karaoke.things.kuroda, ...d4.thing('kuroda') },
   };
   const P = {
     scene: w.scene,
@@ -58,9 +61,11 @@ export function karaokePlace(game) {
       karaoke_stairs: s.foot,
     },
     seats: { karaoke_bench: w.seats[0] },
-    people: {},
+    people: { kuroda: d4.people.kuroda },
     zones: {},
+    day3: (a) => d4.setup(P, a),
     hooks: {},
+    update: (dt) => d4.update(dt),
     fit(aspect) {
       roomView(cam, w.bounds, aspect);
     },

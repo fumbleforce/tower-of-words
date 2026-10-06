@@ -1272,21 +1272,21 @@
     "paths": [
       "game3d/js/places/gym.js"
     ],
-    "place": "gym",
-    "source": "gym.js things.gym_changing",
     "status": "provisional",
     "status_from": "A named thing in the game (built in code)",
-    "tags": [
-      "in game",
-      "thing"
-    ],
+    "source": "gym.js things.gym_changing",
+    "place": "gym",
     "used": [
       "Gym: tap target 'To the pool'"
     ],
     "view": {
-      "room": "gym",
-      "type": "room"
-    }
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
   },
   {
     "id_": "prop/gym/gym_door",
@@ -2170,6 +2170,29 @@
     ]
   },
   {
+    "id_": "prop/pool/pool_notice",
+    "kind": "prop",
+    "name": "Pool notice",
+    "paths": [
+      "game3d/js/places/pool.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "pool.js things.pool_notice",
+    "place": "pool",
+    "used": [
+      "Pool deck: tap target 'Pool notice'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "pool"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
     "id_": "prop/shotengai/bakery",
     "kind": "prop",
     "name": "Bakery",
@@ -2366,6 +2389,29 @@
     "place": "sports",
     "used": [
       "Gym and pool: tap target 'Ball basket'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/sports/bench_ball",
+    "kind": "prop",
+    "name": "Ball by the bench",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.bench_ball",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'Ball by the bench'"
     ],
     "view": {
       "type": "room",

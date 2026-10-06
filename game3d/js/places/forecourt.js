@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { day3Place } from './day3/place.js';
 import { BIKES } from '../scenes/forecourt/plan.js';
 import { forecourtSteps } from '../scenes/forecourt.js';
 import { sliced } from '../perf/slice.js';
@@ -40,6 +41,7 @@ export async function forecourtPlace(game) {
     reception_office_door: w.headOffice.officeDoor,
     reception_office: w.headOffice.office,
   };
+  const d4 = day3Place(game, 'forecourt', { root: w.root, K, ids: ['kuroda'] });
   const things = {
     station_exit: {
       ...PLACE_DETAILS.forecourt.things.station_exit,
@@ -107,6 +109,7 @@ export async function forecourtPlace(game) {
       outline: bikes.outline,
       enabled: bikes.enabled,
     },
+    kuroda: { ...PLACE_DETAILS.forecourt.things.kuroda, ...d4.thing('kuroda') },
   };
   // an old save can hold a spot that is now a wall, a bike rack or the station (the court was rebuilt 2026-09-30):
   // move him to the nearest free ground, or to the station door when there is none nearby
@@ -187,7 +190,7 @@ export async function forecourtPlace(game) {
     things,
     spots,
     seats: { garden_bench: garden.seat },
-    people: { kuro: w.kuro, tama: garden.person },
+    people: { kuro: w.kuro, tama: garden.person, kuroda: d4.people.kuroda },
     zones: {
       lift_front: (x, z) => Math.hypot(x - w.liftOut[0], z - w.liftOut[1]) < 0.42,
       // day 2: back in at the station's door (the walk to the platform)
@@ -200,6 +203,7 @@ export async function forecourtPlace(game) {
       // inside the receptionist's office behind the feature wall
       reception_office: (x, z) => w.headOffice.inOffice(x, z),
     },
+    day3: (a) => d4.setup(P, a),
     hooks: {
       liftOpen: () => w.setLiftOpen(1),
       liftClose: () => w.setLiftOpen(0),
@@ -208,6 +212,7 @@ export async function forecourtPlace(game) {
     },
     liftSite: w.liftSite,
     liftLanding: w.liftLanding,
+    update: (dt) => d4.update(dt),
     fit(aspect) {
       // desktop: the station door and the head office door in one frame, then north into the lobby or east up the lane
       const k = turn;

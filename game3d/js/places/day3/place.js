@@ -9,6 +9,8 @@ import { dayCast } from '../day-cast.js';
 import { applyPlan, isDay3 } from './index.js';
 import { PLANS } from './plan.js';
 import { placeSigns } from './signs.js';
+import { PLANS as SUNDAY } from '../day4/plan.js';
+import { sim } from '../../sim.js';
 
 export function day3Place(game, name, { root, K = 1, ids = [] } = {}) {
   const cast = dayCast(game, { root, K, ids });
@@ -18,11 +20,12 @@ export function day3Place(game, name, { root, K = 1, ids = [] } = {}) {
     people: cast.people,
     thing: cast.thing,
     async setup(P, a = {}) {
-      const plan = PLANS[name] || {};
+      const plan = (sim.day === 4 ? SUNDAY : PLANS)[name] || {};
       for (const id of Object.keys(plan)) if (!cast.people[id] && P.people[id]) cast.adopt(id, P.people[id]);
       applyPlan(cast, P, plan);
-      placeSigns(P, name);
+      if (sim.day === 3) placeSigns(P, name);
       for (const f of extra) await f(a);
+      if (sim.day === 4) applyPlan(cast, P, plan);
     },
     also(f) {
       extra.push(f);
@@ -37,7 +40,10 @@ export function installDay3(game) {
     const P = game.place;
     if (!isDay3() || !P) return;
     if (!P.day3) {
-      const d3 = day3Place(game, P.name, { root: P.space, K: P.charScale || 1 });
+      const d3 = day3Place(game, P.name, {
+        root: P.space,
+        K: P.charScale || 1,
+      });
       if (P.onDay3) d3.also(P.onDay3); // the place's own props for the day (the station's monitor)
       P.day3 = (o) => d3.setup(P, o);
     }

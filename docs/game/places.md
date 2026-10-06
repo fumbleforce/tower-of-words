@@ -343,6 +343,8 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Who's there when
 
+Day 4: Hamada returns from the mainland in the morning with shopping bags. Kuro and Tama are offstage.
+
 Day 3: Kuro and Tama are not here on Saturday.
 
 Day 2: no day-1 Kuro encounter replays. The station door, head office's door and the lane stay open in both periods. A way out he arrives standing in (the lift, back up from B2) waits until he has stepped out of it.
@@ -352,6 +354,7 @@ Kuro works the head office reception all day. The two from Sales appear inside t
 | Id | Usually | Schedule |
 |---|---|---|
 | `kuro` | Behind the reception desk in the head office lobby, facing the door. Eric approaches the visitor spot in front of the desk to talk to her. | – |
+| `kuroda` | Beside the station entrance on Sunday morning, returning from the mainland. | – |
 | `mio` | Hidden (she ran ahead to a server). | – |
 
 The crowd ([systems.md](systems.md), The crowd):

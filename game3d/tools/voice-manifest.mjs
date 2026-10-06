@@ -25,6 +25,7 @@ const { DAYS } = await imp('js/days.js');
 // day 2's new phrases (story/day2/words.js), until their clips exist and lang.js gives them a voice field
 const { WORDS: DAY2_WORDS } = await imp('story/day2/words.js');
 const { WORDS: DAY3_WORDS } = await imp('story/day3/words.js');
+const { WORDS: DAY4_WORDS } = await imp('story/day4/words.js');
 const jaRe = /[぀-ヿ一-龯]/;
 const resolve = (t) => t.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
 
@@ -81,7 +82,7 @@ async function collect(mc, sets) {
     for (const k of out.keys()) if (!had.has(k) && !dayOfKey.has(k)) dayOfKey.set(k, day);
   }
   // day 2's and day 3's new phrases: the player saying each, and Mio's slow replay of it (the shell's word-<id>)
-  for (const [id, w, day] of [...Object.entries(DAY2_WORDS).map(([k, v]) => [k, v, 2]), ...Object.entries(DAY3_WORDS).map(([k, v]) => [k, v, 3])]) {
+  for (const [id, w, day] of [...Object.entries(DAY2_WORDS).map(([k, v]) => [k, v, 2]), ...Object.entries(DAY3_WORDS).map(([k, v]) => [k, v, 3]), ...Object.entries(DAY4_WORDS).map(([k, v]) => [k, v, 4])]) {
     if (WORDS[id]?.voice) continue;
     out.set('eric-' + id, { key: 'eric-' + id, speaker: 'eric', text: w.ja + '。', lang: 'ja', overheard: false, words: [], clear: [] });
     out.set('word-' + id, { key: 'word-' + id, speaker: 'mio', text: w.ja + '。', lang: 'ja', overheard: false, words: [[id, w.ja]], clear: [], emo: 'slow', slow: true });
