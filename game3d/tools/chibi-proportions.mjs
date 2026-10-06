@@ -66,7 +66,7 @@ await withBrowserJob('chibi-proportions', async (browser) => {
             const kuro = g.place.people?.kuro;
             if (!kuro) return { heights: 'no kuro' };
             const kq = kuro.root.getWorldQuaternion(new THREE.Quaternion());
-            const kp = kuro.root.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(1.4, 0, 0.9).applyQuaternion(kq));
+            const kp = kuro.root.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(1.4, 0, 1.4).applyQuaternion(kq));
             eric.root.position.set(kp.x, eric.root.position.y, kp.z);
             document.getElementById('marks').style.display = 'none';
             for (let i = 0; i < 60; i++) g.step?.(1 / 30);

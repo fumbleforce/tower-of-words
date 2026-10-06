@@ -554,10 +554,22 @@
         "office_entrance",
         "lift_front",
         "plaza_lane",
-        "forecourt_staff_gate"
+        "forecourt_staff_gate",
+        "lobby_model",
+        "lobby_island_w",
+        "lobby_island_e",
+        "lobby_lift_bench",
+        "lobby_umbrella",
+        "reception_office_door",
+        "reception_office"
       ],
       "nooks": [
-        "forecourt_staff_gate"
+        "forecourt_staff_gate",
+        "lobby_model",
+        "lobby_island_w",
+        "lobby_island_e",
+        "lobby_lift_bench",
+        "lobby_umbrella"
       ],
       "seats": [
         "garden_bench"
@@ -565,7 +577,8 @@
       "zones": [
         "lift_front",
         "station_exit",
-        "plaza_lane"
+        "plaza_lane",
+        "reception_office"
       ],
       "people": [
         "kuro",

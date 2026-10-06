@@ -51,10 +51,10 @@
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {
-      "lines": 1107,
-      "bytes": 41322,
+      "lines": 1018,
+      "bytes": 37831,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md); 2026-09-30 forecourt riders cast no sun shadow (notes/PERF.md, evening draw calls); 2026-09-30 displays and ride light split out (lift-displays.js, lift-light.js; issue #102); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC)",
+      "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md); 2026-09-30 forecourt riders cast no sun shadow (notes/PERF.md, evening draw calls); 2026-09-30 displays and ride light split out (lift-displays.js, lift-light.js; issue #102); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 #259: the cutaway (clip box, cut, cap) moved out to lift-cut.js (ceiling lowered)",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
     },
     "game3d/js/places/lobby.js": {
