@@ -2,7 +2,7 @@
  "title": "Carina's voice",
  "date": "2026-10-06",
  "by": "voice agent",
- "status": "open",
+ "status": "decided",
  "multi": false,
  "question": "Which of these is Carina?",
  "media": [
@@ -160,5 +160,11 @@
    "audio": "art/candidates/carina-voice-1/f-en1.mp3",
    "note": "The brightest, for range. Reference pitch about 346 Hz. Design prompt: \"A woman around thirty with a bright, clear, crisp voice. Medium-high pitch, polite and friendly, quick and articulate, composed. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 404, en2 404, ここ 404 with English 404, word 404."
   }
- ]
+ ],
+ "decided": [
+  "a"
+ ],
+ "decision": "Jørgen picked a, Tired and quiet, with no comment. Apply the selected reference to the currently playable public Carina lines and words.",
+ "decided_at": "2026-10-06T11:48:13+0200",
+ "issue": 277
 }
