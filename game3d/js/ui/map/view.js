@@ -10,6 +10,7 @@ import { PINS, pinOf } from '../../travel/pins.js';
 import { travelStates, goTo } from '../../travel/go.js';
 import { sim, periodName } from '../../sim.js';
 import { placeLabels } from './labels.js';
+import { drawCartography, scaleMetres } from './cartography.js';
 import { mapGoal, mapPlayer } from './marks.js';
 
 const phone = () => document.body.classList.contains('phone');
@@ -34,9 +35,9 @@ export function createMapView(game) {
         <li>${dot({ state: 'go', visited: false })}Not been here yet</li><li>${dot({ state: 'closed' })}Not open today</li>
       </ul>
       <div class="mv-tools"><span class="mv-north" aria-label="North is up">↑<b>N</b></span><button type="button" data-zoom="in" aria-label="Zoom in">+</button><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" class="mv-home" aria-label="Centre on your location">◎</button><button type="button" class="mv-fit">View island</button></div>
-      <p class="mv-help">Drag to pan · wheel to zoom · M or Esc closes</p>
+      <div class="mv-scale" aria-hidden="true"><span></span><i></i></div><p class="mv-help">Drag to pan · wheel to zoom · M or Esc closes</p>
     </div>
-    <aside class="mv-side"><button type="button" class="mv-places" aria-expanded="false">Places <span>⌃</span></button><div class="mv-card"></div><nav class="mv-list" aria-label="Places"></nav></aside>
+    <aside class="mv-side"><h2 class="mv-destinations">Places</h2><button type="button" class="mv-places" aria-expanded="false">Places <span>⌃</span></button><div class="mv-card"></div><nav class="mv-list" aria-label="Places"></nav></aside>
     <button type="button" class="mv-close" aria-label="Close the map" data-first><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`;
   document.body.appendChild(root);
   const $ = (s) => root.querySelector(s);
@@ -83,10 +84,13 @@ export function createMapView(game) {
     if (!open) return;
     clampView();
     drawBase(ctx, v);
+    const metres = scaleMetres(v.scale);
+    $('.mv-scale span').textContent = `${metres} m`;
+    $('.mv-scale i').style.width = `${(metres / 1.5) * v.scale}px`;
     ctx.setTransform(v.dpr, 0, 0, v.dpr, 0, 0);
     if (goal) mapGoal(ctx, ...toView(v, ...goal));
     if (eric) mapPlayer(ctx, ...toView(v, eric.x, eric.z), eric.a);
-    placePins();
+    drawCartography(ctx, v, placePins());
   }
   function buildPins() {
     pinsEl.textContent = '';
@@ -123,7 +127,7 @@ export function createMapView(game) {
       })
       .filter((p) => !pins[p.id].hidden);
     const areaRect = area.getBoundingClientRect();
-    const blocked = ['.mv-tools', '.mv-goal', '.mv-legend']
+    const blocked = ['.mv-tools', '.mv-goal', '.mv-legend', '.mv-scale']
       .map((selector) => $(selector))
       .filter((el) => !el.hidden && el.offsetWidth)
       .map((el) => {
@@ -135,23 +139,40 @@ export function createMapView(game) {
           y1: r.bottom - areaRect.top + 6,
         };
       });
+    const captionBlocks = [
+      ...blocked,
+      ...points.map((p) => ({ x0: p.x - 24, x1: p.x + 24, y0: p.y - 24, y1: p.y + 24 })),
+    ];
     for (const result of placeLabels(points, v.w, v.h, phone() ? 86 : 70, blocked)) {
       const b = pins[result.id],
         label = b.querySelector('.lb');
       b.classList.toggle('nolabel', !!result.hidden);
       label.style.left = `${22 + (result.dx || 0)}px`;
       label.style.top = `${22 + (result.dy || 0)}px`;
+      if (!result.hidden) {
+        const p = points.find((p) => p.id === result.id);
+        captionBlocks.push({
+          x0: p.x + result.dx,
+          x1: p.x + result.dx + p.width,
+          y0: p.y + result.dy - 16,
+          y1: p.y + result.dy + 16,
+        });
+      }
       if (!result.hidden && result.dy) {
         const p = points.find((p) => p.id === result.id);
-        ctx.strokeStyle = '#45616dcc';
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#f7f0df';
+        ctx.lineWidth = 3.5;
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(p.x + (result.dx < 0 ? -18 : 18), p.y + result.dy);
         ctx.lineTo(p.x + (result.dx < 0 ? result.dx + p.width : result.dx), p.y + result.dy);
         ctx.stroke();
+        ctx.strokeStyle = '#35544b';
+        ctx.lineWidth = 1.25;
+        ctx.stroke();
       }
     }
+    return captionBlocks;
   }
 
   // ---------- the card and the list ----------

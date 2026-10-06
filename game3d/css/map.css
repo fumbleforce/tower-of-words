@@ -13,7 +13,7 @@ body.phone #minimap .mm-tag { right:3px; bottom:3px; padding:3px 5px; font-size:
 body.phone #minimap .mm-tag kbd { display:none; }
 body.map-open #minimap { display:none; }
 
-#mapView { --map-panel:#172a34; --map-line:#3b535f; z-index:32; display:grid; grid-template-columns:minmax(0,1fr) 360px; background:#24434f; color:var(--ink); font-family:var(--font); }
+#mapView { --map-panel:#172a34; --map-line:#3b535f; z-index:32; display:grid; grid-template-columns:minmax(0,1fr) 320px; background:#1b3a45; color:var(--ink); font-family:var(--font); }
 #mapView.in { animation:fadeIn .16s ease; }
 #mapView .mv-map { position:relative; min-height:0; overflow:hidden; touch-action:none; cursor:grab; outline:none; }
 #mapView .mv-map:active { cursor:grabbing; }
@@ -22,11 +22,11 @@ body.map-open #minimap { display:none; }
 /* The button is always 44px. Labels have their own measured bounds, never a large invisible click rectangle. */
 #mapView .pin { position:absolute; left:0; top:0; display:grid; place-items:center; width:44px; height:44px; padding:0; border:0; background:none; color:var(--ink); font:700 14px/1 var(--font); cursor:pointer; pointer-events:auto; white-space:nowrap; }
 #mapView .pin[hidden] { display:none; }
-#mapView .pin .lb { position:absolute; transform:translateY(-50%); padding:7px 10px; border-radius:6px; background:#172a34f5; border:1px solid #536f7b; box-shadow:0 2px 4px #122c3633; }
+#mapView .pin .lb { position:absolute; transform:translateY(-50%); padding:6px 9px; border-radius:4px; color:#263e3b; background:#faf5e8f2; border:1px solid #748779; box-shadow:0 2px 3px #20352c26; }
 #mapView .pin.nolabel .lb { visibility:hidden; }
 #mapView .pin.here .lb { border-color:var(--accent); }
 #mapView .pin.new .lb { font-weight:500; }
-#mapView .pin.locked .lb { color:#c1ccd1; background:#344952f5; }
+#mapView .pin.locked .lb { color:#58675e; background:#dddccdF5; }
 #mapView .pin.on .lb { color:#13333a; background:#94ded4; border-color:#173c44; }
 #mapView .pin.on .dot { box-shadow:0 0 0 3px #172a34,0 0 0 5px #b3ebe2; }
 #mapView .pin:focus-visible { outline:2px solid #122f3c; outline-offset:-1px; border-radius:50%; }
@@ -43,16 +43,16 @@ body.map-open #minimap { display:none; }
 #mapView .mv-side .dot.been::after,#mapView .mv-legend .dot.been::after { width:5px; height:5px; }
 #mapView .mv-side .dot svg,#mapView .mv-legend .dot svg { width:9px; height:9px; }
 
-#mapView .mv-head { position:absolute; left:0; right:0; top:0; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:17px 24px; background:var(--map-panel); border-bottom:1px solid var(--map-line); pointer-events:none; }
-#mapView .mv-head b { font-size:24px; font-weight:800; line-height:1; letter-spacing:.01em; }
+#mapView .mv-head { position:absolute; left:18px; right:18px; top:16px; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:14px 18px; background:#142e37f5; border:1px solid #648080; border-radius:6px; box-shadow:0 3px 12px #152e3326; pointer-events:none; }
+#mapView .mv-head b { font-size:24px; font-weight:700; line-height:1; letter-spacing:.01em; }
 #mapView .mv-head b span { margin-left:12px; color:#adc2c9; font-size:14px; font-weight:500; letter-spacing:0; }
 #mapView .mv-when { color:#bed0d6; font-size:14px; font-variant-numeric:tabular-nums; }
-#mapView .mv-goal { position:absolute; top:76px; left:18px; display:flex; align-items:center; gap:9px; max-width:min(420px,calc(100% - 94px)); padding:10px 13px; border-radius:8px; background:#172a34ee; border:1px solid #668d91; font-size:14px; line-height:1.3; pointer-events:none; }
+#mapView .mv-goal { position:absolute; top:88px; left:18px; display:flex; align-items:center; gap:9px; max-width:min(420px,calc(100% - 94px)); padding:10px 13px; border-radius:8px; background:#172a34ee; border:1px solid #668d91; font-size:14px; line-height:1.3; pointer-events:none; }
 #mapView .mv-goal[hidden] { display:none; }
 #mapView .mv-goal svg { flex:none; width:16px; height:16px; fill:none; stroke:var(--accent); stroke-width:2; stroke-linejoin:round; }
 #mapView .mv-goal svg path + path { fill:var(--accent); }
-#mapView .mv-legend { position:absolute; left:18px; bottom:30px; display:grid; gap:9px; margin:0; padding:13px 15px; list-style:none; border-radius:10px; background:#172a34ed; border:1px solid var(--map-line); color:#d3dfe1; font-size:14px; pointer-events:none; }
-#mapView .mv-legend li { display:flex; align-items:center; gap:10px; }
+#mapView .mv-legend { position:absolute; left:18px; bottom:34px; display:flex; flex-wrap:wrap; max-width:calc(100% - 160px); gap:10px 16px; margin:0; padding:10px 12px; list-style:none; border-radius:6px; background:#172a34ed; border:1px solid var(--map-line); color:#d3dfe1; font-size:12px; pointer-events:none; }
+#mapView .mv-legend li { display:flex; align-items:center; gap:7px; }
 #mapView .mv-help { position:absolute; left:18px; bottom:8px; margin:0; color:#d2e0e3; font-size:12px; background:#24434fd9; padding:2px 5px; border-radius:4px; pointer-events:none; }
 #mapView .mv-tools { position:absolute; right:16px; bottom:22px; display:grid; grid-template-columns:44px 44px; gap:6px; cursor:default; }
 #mapView .mv-tools button { min-width:44px; min-height:44px; padding:0; border:1px solid #587581; border-radius:8px; background:var(--map-panel); color:var(--ink); cursor:pointer; font:700 24px/1 var(--font); }
@@ -63,9 +63,9 @@ body.map-open #minimap { display:none; }
 #mapView .mv-tools button:hover { background:#294550; }
 #mapView .mv-tools button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 
-#mapView .mv-side { position:relative; display:flex; flex-direction:column; min-height:0; padding:76px 0 0; background:var(--map-panel); border-left:1px solid var(--map-line); }
-#mapView .mv-card { padding:0 24px 22px; border-bottom:1px solid var(--map-line); }
-#mapView .mv-name { margin:0; font-size:25px; font-weight:800; line-height:1.25; }
+#mapView .mv-side { position:relative; display:flex; flex-direction:column; min-height:0; padding:26px 0 0; background:var(--map-panel); border-left:1px solid var(--map-line); }
+#mapView .mv-card { padding:18px 22px 22px; border-bottom:1px solid var(--map-line); }
+#mapView .mv-name { margin:0; font-size:24px; font-weight:650; line-height:1.25; }
 #mapView .mv-sub { margin:8px 0 0; color:#b9cbd1; font-size:14px; line-height:1.45; }
 #mapView .mv-why { margin:12px 0 0; color:var(--ink); font-size:15px; }
 #mapView .mv-tip { margin:0; color:#b9cbd1; font-size:14px; line-height:1.45; }
@@ -93,9 +93,13 @@ body.map-open #minimap { display:none; }
 #mapView .mv-close:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 #mapView .mv-close:hover { background:#385660; }
 #mapView .mv-places { display:none; }
+#mapView .mv-destinations { margin:0 22px 14px; color:#abc2bd; font-size:13px; font-weight:650; letter-spacing:.1em; text-transform:uppercase; }
+#mapView .mv-scale { position:absolute; left:20px; bottom:96px; display:grid; gap:5px; color:#e5eddf; font:600 11px/1 var(--font); text-shadow:0 1px 3px #17323c; pointer-events:none; }
+#mapView .mv-scale i { display:block; height:5px; border:solid #e5eddf; border-width:0 1px 2px; filter:drop-shadow(0 1px 1px #17323c); }
+
 
 body.phone #mapView { grid-template-columns:1fr; grid-template-rows:minmax(180px,1fr) auto; }
-body.phone #mapView .mv-head { align-items:flex-start; flex-direction:column; gap:7px; padding:calc(14px + env(safe-area-inset-top)) 16px 12px; }
+body.phone #mapView .mv-head { left:0; right:0; top:0; border:0; border-bottom:1px solid #587773; border-radius:0; align-items:flex-start; flex-direction:column; gap:7px; padding:calc(14px + env(safe-area-inset-top)) 16px 12px; }
 body.phone #mapView .mv-head b { font-size:22px; }
 body.phone #mapView .mv-head b span { margin-left:8px; font-size:13px; }
 body.phone #mapView .mv-when { font-size:13px; }
@@ -116,3 +120,6 @@ body.phone #mapView.places-open .mv-card { display:none; }
 body.phone #mapView.places-open .mv-places span { transform:rotate(180deg); }
 body.reduce-motion #mapView.in { animation:none; }
 @media (prefers-reduced-motion:reduce) { #mapView.in { animation:none; } }
+
+body.phone #mapView .mv-destinations { display:none; }
+body.phone #mapView .mv-scale { left:16px; bottom:18px; }

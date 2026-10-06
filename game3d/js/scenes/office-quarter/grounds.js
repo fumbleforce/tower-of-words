@@ -19,6 +19,7 @@ import { walk, tree } from '../plaza/east-lane.js';
 import { ORIGIN, PAVE_W } from './link.js';
 import { worksStreet } from '../works/grounds.js';
 import * as P from './plan.js';
+import { OFFICE_BELTS } from './planting-plan.js';
 
 const { STREET: S, QUARTER: Q, SHED, HARBOUR_WALK: HW, FOODS_WALK: FW, CON_WALK: CW } = P;
 const V = 1.1, // a verge's depth
@@ -104,20 +105,15 @@ function* edges(p, signRoot) {
 // the lawns' trees: belts between and behind the blocks north of the street, set back south of it; a few standing
 // free either side of the foods walk. [x0, x1]: only the belts that reach into it (the harbour lays the west end's)
 export function* planting(p, [x0, x1] = [-Infinity, Infinity]) {
-  const n = S[2]; // the street's north edge
-  for (const [r, kinds, seed] of [
-    [[-26.9, -24.6, -67, n - 2.2], [keyaki, sakura], 101],
-    [[-15.8, -10.8, -71, n - 2.2], [sakura, maple, keyaki], 103],
-    [[1.0, 5.3, -70, n - 5.6], [ginkgo, keyaki], 105], // short of the smoking corner (plan.js NOOKS)
-    [[-40, -28.5, -74, -63], [pine, keyaki, maple], 107],
-    [[-9.5, 14.2, -77, -65], [keyaki, sakura, pine], 109],
-    [[-23.5, -16.8, -80, -71.5], [maple, sakura], 111],
-    [[-39.5, -22, S[3] + 3.6, S[3] + 6.6], [keyaki, sakura, maple], 113],
-    [[-16.5, -8.4, S[3] + 3.6, S[3] + 10], [ginkgo, keyaki], 115],
-    [[7.5, 30.5, S[3] + 3.6, S[3] + 6.6], [sakura, keyaki, maple], 117],
-    [[-3.6, -0.4, -44, -36.5], [maple, sakura], 119],
-  ])
-    if (r[1] > x0 && r[0] < x1) yield* belt(p, r, kinds, { seed, pitch: 3.3 });
+  const kinds = { keyaki, sakura, maple, pine, ginkgo };
+  for (const [r, names, seed] of OFFICE_BELTS)
+    if (r[1] > x0 && r[0] < x1)
+      yield* belt(
+        p,
+        r,
+        names.map((name) => kinds[name]),
+        { seed, pitch: 3.3 },
+      );
   for (const [kind, x, z, s, seed] of [
     [sakura, -22.4, -61.2, 0.95, 121],
     [maple, -17.2, -60.4, 0.9, 122],

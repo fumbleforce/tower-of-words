@@ -2,27 +2,29 @@
 // green, paths and buildings straight from scenes/island-layout.js, with a shared coastal palette. The shapes are built once
 // as Path2D in island units and drawn through the view's transform, so a pan or a zoom is one redraw and nothing is
 // kept per zoom level. North (the grid's north, -z) is up.
+import { drawLandCover, drawPlanting, drawSea, crown } from './terrain.js';
+import { drawGardens } from './gardens.js';
 import { mapFootprints, drawRoof, drawGroundLandmarks } from './landmarks.js';
-import { BUILDINGS, PATHS, GREEN, COAST, SAND, HALF_EDGE, footprint } from '../../scenes/island-layout.js';
+import { BUILDINGS, PATHS, GREEN, COAST, SAND, footprint } from '../../scenes/island-layout.js';
 
 export const INK = {
-  sea: '#24434f',
+  sea: '#1b3a45',
   waterLine: '#355c69',
-  coast: '#779fa4',
-  land: '#bdcbc6',
-  north: '#afbfba',
-  green: '#8fae9a',
-  greenEdge: '#789888',
-  sand: '#d5d8c8',
-  path: '#eaf0eb',
-  lane: '#eaf0eb',
-  pathEdge: '#99aca7',
-  bld: '#7d939c',
-  bldEdge: '#526d79',
-  roof: '#b0c0c5',
-  shadow: '#9bafa9',
-  beam: '#526a77',
-  fountain: '#68aab5',
+  coast: '#d6d1ab',
+  land: '#d7d8b8',
+  north: '#c7cca7',
+  green: '#b3c494',
+  greenEdge: '#94a97d',
+  sand: '#e8d4a4',
+  path: '#f3ecda',
+  lane: '#e3c9a1',
+  pathEdge: '#abae92',
+  bld: '#a0a7a0',
+  bldEdge: '#657770',
+  roof: '#d7d9c4',
+  shadow: '#75836a77',
+  beam: '#526b71',
+  fountain: '#71a8ae',
 };
 // what the map can be panned over: the built half of the island and its water
 export const BOUNDS = { x0: -132, x1: 142, z0: -140, z1: 58 };
@@ -48,7 +50,6 @@ function build() {
   ];
   const L = {
     land: poly([...COAST.line, ...far]),
-    north: poly([...HALF_EDGE, [140, -400], [-154, -400]]),
     sand: newPath(),
     green: newPath(),
     flat: { path: newPath(), lane: newPath() }, // rects and circles, filled
@@ -81,6 +82,8 @@ function build() {
       zs = points.map((p) => p[1]);
     L.roofs.push({
       path,
+      id: b.id,
+      storeys: b.storeys,
       kind: b.kind,
       roofType: b.roofType,
       box: [Math.min(...xs), Math.min(...zs), Math.max(...xs), Math.max(...zs)],
@@ -101,19 +104,20 @@ export function drawBase(ctx, v) {
   ctx.setTransform(k, 0, 0, k, v.dpr * (v.w / 2 - v.cx * v.scale), v.dpr * (v.h / 2 - v.cz * v.scale));
   // Coast contours stay in the water: the land drawn next masks their inland half.
   ctx.lineJoin = 'round';
-  ctx.strokeStyle = INK.waterLine;
-  for (const width of [18, 10, 3]) {
-    ctx.lineWidth = width;
-    ctx.stroke(L.coast);
-    ctx.strokeStyle = width === 18 ? INK.sea : INK.coast;
-  }
-  for (const key of ['land', 'north', 'sand', 'green']) {
+  drawSea(ctx, L.coast);
+  ctx.fillStyle = INK.land;
+  ctx.fill(L.land);
+  ctx.save();
+  ctx.clip(L.land);
+  for (const key of ['sand', 'green']) {
     ctx.fillStyle = INK[key];
     ctx.fill(L[key]);
   }
+  drawLandCover(ctx, L.green, v.detail !== false);
   ctx.strokeStyle = INK.greenEdge;
   ctx.lineWidth = 0.4;
   ctx.stroke(L.green);
+  ctx.restore();
   ctx.lineCap = 'round';
   // A narrow verge separates pale paving from land and planting at every zoom.
   ctx.strokeStyle = INK.pathEdge;
@@ -127,13 +131,17 @@ export function drawBase(ctx, v) {
   }
   ctx.fillStyle = INK.path;
   ctx.fill(L.flat.path);
+  ctx.fillStyle = INK.lane;
   ctx.fill(L.flat.lane);
   ctx.strokeStyle = INK.path;
   for (const l of L.lines) {
     if (l.beam) continue;
     ctx.lineWidth = l.w;
+    ctx.strokeStyle = l.lane ? INK.lane : INK.path;
     ctx.stroke(l.path);
   }
+  drawPlanting(ctx, v.detail !== false);
+  drawGardens(ctx, crown, v.detail !== false);
   drawGroundLandmarks(ctx, v.detail !== false);
   ctx.save();
   ctx.translate(0.7, 0.9);
@@ -168,12 +176,32 @@ export function drawBase(ctx, v) {
     ctx.stroke(l.path);
     ctx.setLineDash([0.45, 1.4]);
     ctx.lineWidth = l.w;
+    ctx.strokeStyle = l.lane ? INK.lane : INK.path;
     ctx.stroke(l.path);
   }
   ctx.setLineDash([]);
   ctx.strokeStyle = INK.coast;
   ctx.lineWidth = 0.55;
   ctx.stroke(L.coast);
+  // The drawn south-half map ends here; fade its northern continuation rather than
+  // suggesting a large empty, finished district beyond the mapped extent.
+  if (v.detail !== false) {
+    ctx.setTransform(v.dpr, 0, 0, v.dpr, 0, 0);
+    const edge = v.h / 2 + (BOUNDS.z0 - v.cz) * v.scale;
+    if (edge > 0) {
+      const fade = ctx.createLinearGradient(0, Math.max(0, edge - 45), 0, edge + 18);
+      fade.addColorStop(0, '#e4e3ce');
+      fade.addColorStop(1, '#e4e3ce00');
+      ctx.fillStyle = fade;
+      ctx.fillRect(0, 0, v.w, edge + 18);
+      if (edge > 160) {
+        ctx.font = '500 12px system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#61746b';
+        ctx.fillText('Northern island', v.w / 2, edge - 28);
+      }
+    }
+  }
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
