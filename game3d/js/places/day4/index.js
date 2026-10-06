@@ -11,7 +11,11 @@ import { actionShot } from './shot.js';
 import { fanRepair } from './fan.js';
 
 export function attachSunday(game, P, name) {
-  const cast = dayCast(game, { root: P.space, K: P.charScale || 1, have: P.people });
+  const cast = dayCast(game, {
+    root: P.space,
+    K: P.charScale || 1,
+    have: P.people,
+  });
   const shot = actionShot(P);
   const props = sundayProps(game, P, name, shot);
   const court = name === 'sports' ? tennisCourt(game, P, cast, shot) : null;
@@ -25,8 +29,9 @@ export function attachSunday(game, P, name) {
     things: { ...props.things, ...court?.things },
   };
   const update = P.update;
-  P.update = (dt) => {
-    update?.(dt);
+  P.update = function (...args) {
+    update?.apply(this, args);
+    const [dt] = args;
     cast.update(dt);
     court?.update(dt);
     fan?.update(dt);
@@ -34,18 +39,21 @@ export function attachSunday(game, P, name) {
   };
   const snapshot = P.snapshotState,
     load = P.restoreState;
-  P.snapshotState = () => ({
-    ...snapshot?.(),
-    sunday: {
-      people: snapshotPeople(P.people),
-      shot: shot.snapshot(),
-      props: props.snapshot(),
-      court: court?.snapshot(),
-      fan: fan?.snapshot(),
-    },
-  });
-  P.restoreState = (saved) => {
-    load?.(saved);
+  P.snapshotState = function (...args) {
+    return {
+      ...snapshot?.apply(this, args),
+      sunday: {
+        people: snapshotPeople(P.people),
+        shot: shot.snapshot(),
+        props: props.snapshot(),
+        court: court?.snapshot(),
+        fan: fan?.snapshot(),
+      },
+    };
+  };
+  P.restoreState = function (...args) {
+    load?.apply(this, args);
+    const [saved] = args;
     const s = saved.world?.sunday;
     if (!s) return;
     restorePeople(P.people, s.people);
