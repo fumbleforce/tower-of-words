@@ -44,8 +44,11 @@ export function installGoalArrow({ game, phone, paused, root }) {
     }
     const act = document.getElementById('actMenu');
     if (act && !act.hidden) out.push(rect(act));
-    const mm = document.getElementById('minimap'); // ui/minimap.js, bottom left
-    if (mm && !mm.hidden) out.push(rect(mm));
+    // HUD controls and the optional metrics box stay clear of the moving edge button too.
+    for (const id of ['minimap', 'top', 'perfHud']) {
+      const el = document.getElementById(id);
+      if (el && !el.hidden && el.offsetWidth) out.push(rect(el));
+    }
     return out.filter((b) => b && b.x1 > 0 && b.x0 < innerWidth && b.y1 > 0 && b.y0 < innerHeight);
   };
   // the arrow's box when its point sits at (x, y); pointing right-to-left it is laid out mirrored (css .lefty)

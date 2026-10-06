@@ -264,7 +264,7 @@ body.phone #end ul.w { grid-template-columns: 1fr; }
 
 /* ---------- sim: clock, people, bag, give ---------- */
 #top .tr { display: flex; gap: 8px; margin-left: auto; }
-#clock { display: flex; gap: 8px; align-items: baseline; padding: 7px 12px; border-radius: 10px; background: rgba(24, 27, 34, .7); font-size: 13px; color: var(--ink-dim); white-space: nowrap; }
+#clock { display: flex; gap: 8px; align-items: center; padding: 7px 12px; border-radius: 10px; background: rgba(24, 27, 34, .7); font-size: 13px; color: var(--ink-dim); white-space: nowrap; }
 #clock[hidden] { display: none; }
 #clock .d { color: var(--ink); font-weight: 700; }
 #peopleBtn, #bagBtn { pointer-events: auto; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--panel-edge); background: var(--panel); cursor: pointer; font-size: 14px; }
@@ -962,8 +962,8 @@ body.phone #actMenu .act { padding: 0 12px; }
 #sayMenu button.cmd { display: flex; align-items: center; }
 
 /* QA round 1 */
-/* 3: phone HUD fits: no clock chip, tighter chips */
-body.phone #clock { display: none !important; }
+/* Phone HUD keeps the time control visible above the compact action chips. */
+body.phone #clock { min-height: 44px; margin-left: auto; }
 body.phone #hud { gap: 4px; }
 body.phone .hchip { padding: 0 7px 0 6px; }
 /* 4: the Say tip on the UI scale, clear of the goal */
@@ -1155,3 +1155,25 @@ body.phone #held .sheet + .sheet { margin-left: -18px; }
    tab, the HUD row and goal box, the pins and their tooltip, the action menu, the LED board and the lift's floor
    display. Text inside panels and dialogs stays selectable. */
 button, [role="button"], [role="tab"], #top, #marks, #actMenu, #board, #liftInd { -webkit-user-select: none; user-select: none; }
+
+/* Time controls: an explicit period picker, with the same slate HUD styling. */
+#clock { min-height: 44px; }
+#clock .clock-more { color: var(--ink-dim); font-size: 15px; }
+#clock:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#timeMenu .time-scrim { position: absolute; inset: 0; background: rgba(8, 12, 18, .48); }
+#timeMenu .time-card { position: absolute; top: 76px; right: 16px; width: min(360px, calc(100vw - 32px)); max-height: calc(100dvh - 100px); overflow-y: auto; padding: 20px; border: 1px solid var(--chip-edge); border-radius: 16px; background: #171c24; box-shadow: 0 14px 45px #0006; color: var(--ink); }
+#timeMenu header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+#timeMenu h2 { margin: 0 0 7px; font: 700 22px/1.2 var(--font); }
+#timeMenu p { font: 500 14px/1.5 var(--font); }
+#timeMenu .time-now { margin: 0; color: var(--ink-dim); }
+#timeMenu button { color: var(--ink); border: 1px solid var(--chip-edge); border-radius: 10px; background: #ffffff06; cursor: pointer; }
+#timeMenu button:hover { background: #6fd0c615; border-color: var(--accent); }
+#timeMenu button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#timeMenu .time-close { flex: 0 0 44px; width: 44px; height: 44px; font-size: 26px; }
+#timeMenu .time-options { display: grid; gap: 8px; margin-top: 20px; }
+#timeMenu .time-options:empty { display: none; }
+#timeMenu .time-options button { display: flex; justify-content: space-between; gap: 12px; align-items: center; min-height: 54px; padding: 10px 14px; font: 600 16px/1.3 var(--font); text-align: left; }
+#timeMenu small, #timeMenu .time-note { font-size: 13px; color: var(--ink-dim); }
+#timeMenu .time-note { margin: 16px 0 0; }
+#timeMenu .time-goal { border-left: 2px solid var(--accent); padding-left: 12px; }
+body.phone #timeMenu .time-card { top: auto; bottom: calc(14px + env(safe-area-inset-bottom)); left: 12px; right: 12px; width: auto; max-height: calc(100dvh - 48px); }

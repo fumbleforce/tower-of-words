@@ -1,3 +1,4 @@
+import { clockHTML, updateClock } from './ui/clock-button.js';
 export { PORTRAITS } from './ui/portrait-data.js';
 // HTML overlay: goal, words, the train's LED board, the talk panel, replies, fades, the end card.
 import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML, baseHTML, FORM_NOTE, BASE } from './lang.js';
@@ -100,7 +101,7 @@ export const ui = {
           <div id="hint" hidden role="status"><span class="hx"></span><button type="button" class="hclose" aria-label="Hide tip"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
         </div>
         <div class="tr" id="hud">
-          <div id="clock" class="hchip" hidden><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span class="d"></span><span class="p"></span></div>
+          ${clockHTML}
           <button id="peopleBtn" class="hchip" type="button" hidden aria-label="People you've met"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5"/><circle cx="16.5" cy="9.5" r="2.6"/><path d="M15.5 14.2c2.4.1 4.3 1.6 4.9 4.8"/></svg></span><span class="lbl">People</span><span class="n">0</span></button>
           <button id="bagBtn" class="hchip" type="button" hidden aria-label="Bag"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span><span class="lbl">Bag</span><span class="n">0</span></button>
           <button id="cmdsBtn" class="hchip" type="button" hidden aria-label="Words you can say"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3.5V16H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M8 9.5h8M8 12.5h5"/></svg></span><span class="lbl">Words</span><span class="n">0</span></button>
@@ -527,12 +528,7 @@ export const ui = {
   menuClosed() {
     return $('#sayMenu').hidden && $('#cmdsPanel').hidden && !document.querySelector('.panel:not([hidden])');
   },
-  clock(date, period) {
-    const c = $('#clock');
-    c.hidden = false;
-    c.querySelector('.d').textContent = date;
-    c.querySelector('.p').textContent = period;
-  },
+  clock: updateClock,
   refreshPeople(n) {
     const b = $('#peopleBtn');
     b.hidden = !n;

@@ -11,6 +11,7 @@
 // Lifetime: installed once for the page's life; the keydown and settings listeners are never removed. The loop
 // stops itself when neither the overlay nor the recorder needs it.
 import { settings, setSetting } from '../settings.js';
+import { followHud } from './overlay-position.js';
 
 const SAMPLE = 10; // frames between draw-call samples
 const WINDOW = 600; // frames in the overlay's rolling window (about 10 s at 60 fps)
@@ -22,13 +23,13 @@ const CSS = `
 #perfHud { position: fixed; right: 12px; top: 64px; z-index: 7; min-width: 196px; padding: 8px 10px; border-radius: 8px;
   background: rgba(16, 18, 23, .82); border: 1px solid rgba(255, 255, 255, .08); color: #eef0f4; pointer-events: none;
   font: 500 12px/1.5 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums;
-  white-space: pre; }
+  white-space: pre; overflow: hidden; }
 #perfHud[hidden] { display: none; }
 #perfHud b { color: #6fd0c6; font-weight: 700; }
 #perfHud i { font-style: normal; color: #a9b1bf; }
 #perfHud .over { color: #f08a7e; }
-body.phone #perfHud { top: 88px; right: 8px; min-width: 0; font-size: 11px; padding: 6px 8px; }
-body.at-title #perfHud { top: 12px; }
+body.phone #perfHud { right: 8px; min-width: 0; font-size: 11px; padding: 6px 8px; }
+
 `;
 
 // one place's recording: frame times every frame, draw calls and triangles every SAMPLE frames
@@ -76,7 +77,8 @@ export function installMetrics(game, qualityNow = () => null) {
     frame = 0,
     armed = false,
     running = false,
-    el = null;
+    el = null,
+    positionOverlay = null;
 
   function overlayOn() {
     return !!settings.perfOverlay;
@@ -162,9 +164,11 @@ export function installMetrics(game, qualityNow = () => null) {
     el.setAttribute('aria-hidden', 'true');
     el.hidden = true;
     document.body.appendChild(el);
+    positionOverlay = followHud(el);
   }
 
   function draw() {
+    positionOverlay?.();
     let sum = 0;
     for (let i = 0; i < ringN; i++) sum += scratch[i] = ring[i];
     const avg = ringN ? sum / ringN : 0;
