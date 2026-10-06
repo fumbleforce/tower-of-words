@@ -786,8 +786,8 @@ function pageReviewItem(id) {
     <div class="pill-row">${chip(st === 'superseded' ? 'legacy' : st)}<span class="pill">${esc(r.date || '')}</span><span class="pill">by ${esc(r.by || '')}</span><span class="pill">${multi ? 'pick one or more' : 'pick one'}</span></div>
     ${st === 'decided' ? `<div class="rdecision"><b>Decided: ${esc(pickedText(r))}</b>${r.decision ? `<div>${inline(r.decision)}</div>` : ''}${r.issue ? `<div class="small">The work on it: <a href="${esc(WORK.issueUrl(r.issue))}">issue #${esc(r.issue)}</a></div>` : ''}</div>` : ''}
     <p class="rq">${inline(r.question || '')}</p>
-    ${(r.media || []).length ? `<div class="rmedia" data-lbg>${r.media.map((m) => media(m)).join('')}</div>` : ''}
     ${(r.links || []).length ? `<p class="small">${r.links.map((l) => `<a href="${esc(/^https?:|^#/.test(l.href) ? l.href : ROOT + l.href)}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}
+    ${(r.media || []).length ? `<div class="rmedia" data-lbg>${r.media.map((m) => media(m)).join('')}</div>` : ''}
     <h2>Options</h2>
     <div class="ropts" data-lbg>${opts}</div>
     <h2>Overall</h2>
