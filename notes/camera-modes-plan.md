@@ -4,9 +4,11 @@ Jørgen, 2026-10-05: "wish I could have more camera mode, like close third perso
 
 The open review is `reviews/camera-plan-1`. Its [playable desktop demo](../reviews/camera-plan-1/demo.html?camera=1c) runs separately from saved progress. Jørgen picked 1c's angle on 2026-10-06 and requested a controls rewrite: "the controls are awkward due to the slow moving camera and the character returns to the original direction of travel after moving another way". He also said "lets drop phone support for this 3rd person view altogether" and requested a scene camera framing conversation participants independently of the MC.
 
-The revised prototype keeps 1c's 3.6-back / 2.8-up angle. WASD uses the requested camera yaw on every frame, including while looking; camera position follows directly and yaw changes only on mouse look or Reset view. Left click focuses the canvas instead of starting hold-to-steer in third person. Existing collision, gait and Shift running are reused. The third-person phone controls have been removed; touch devices get overview. A Scene camera button frames two visible nearby characters, pauses player movement and offers Return to walking. It uses their actual positions, without moving them or adding dialogue. Room 203 may have no nearby pair; try B2 or the train.
+Jørgen then rejected the revised controls: "that is just a free camera, it is nothing like a normal game camera", and specified "try gta style". The current prototype keeps 1c's 3.6-back / 2.8-up angle and replaces drag-to-look with an on-foot play mode. Click Play inside the game frame to capture the mouse. Continuous relative mouse motion looks around, WASD moves relative to the requested view, the character faces travel, and Shift runs. Esc or loss of focus releases capture and stops movement. The toolbar and scene preview remain accessible with the cursor released. Free orbit is removed from the active demo.
 
-The demo uses memory-only storage, private mode off and disabled story triggers. Camera rays pull in at obstructions. Cutaway walls, pins, authored story transitions and conversation integration remain prototype limits. Production camera code and defaults are unchanged. The review remains open for the revised controls and framing. The earlier proposal below is retained for unimplemented production work; these decisions override its old automatic follow and phone assumptions.
+The boom tracks character position directly. Moving forward keeps the view behind travel; lateral or backward input does not automatically rotate the camera and bend movement. Idle retains the last view, and Reset view explicitly recentres behind the character. The scene preview frames two actual nearby characters with movement paused, and Return to walking offers Play again. Existing collision and gait are reused; third-person remains desktop only.
+
+The demo uses memory-only storage, private mode off and disabled story triggers. Camera rays pull in at obstructions. Cutaway walls, pins, authored story transitions and conversation integration remain prototype limits. Production camera code and defaults are unchanged. The review remains open for the GTA-style controls and framing. The earlier proposal below is retained for unimplemented production work; these decisions override its old automatic follow and phone assumptions.
 
 ## What is there now
 
@@ -99,9 +101,8 @@ Indoors close mode is cheaper (less of the floor is in view). Outdoors, looking 
 ### Desktop
 
 - WASD and arrows use the requested camera yaw every frame. The basis transforms into player-parent coordinates; obstruction movement cannot steer the player. The camera never swings behind him automatically.
-- Look: hold the right mouse button (or the middle one) and move the mouse. In the revised third-person review, left click only focuses the view. Use WASD to move; production interaction integration awaits review. No pointer lock by default; it would hide the cursor that clicks people and pins.
+- Look: click Play for pointer lock, then move the mouse without a held button. Esc releases the cursor and stops movement. Use WASD to move; production interaction integration awaits review.
 - The mouse wheel keeps the backlog; it does not zoom.
-- No new keys besides the toggle.
 
 ### Phone
 

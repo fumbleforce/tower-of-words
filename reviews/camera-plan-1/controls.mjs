@@ -1,10 +1,11 @@
 import * as THREE from "three";
 
-// Review adapter: keep the production walker's collision, gait and run behavior.
-// Its movement basis comes from the requested view, never from the character's
-// facing or a camera position displaced by an obstruction.
+// Review adapter: retain the production walker's collision, gait and running.
+// Requested camera yaw supplies movement, never the avatar's turn or wall-clamped lens.
 export function installControls(game, camera) {
-  const canvas = globalThis.document.querySelector("#c");
+  const document = globalThis.document;
+  const canvas = document.querySelector("#c");
+  canvas.tabIndex = 0;
   const walker = game.walker;
   const update = walker.update.bind(walker);
   const forward = new THREE.Vector3(),
@@ -21,13 +22,56 @@ export function installControls(game, camera) {
     }
     return update(dt, ...args);
   };
-  let drag = null;
+  const panel = document.createElement("div");
+  panel.id = "demo-play";
+  panel.innerHTML =
+    '<button type="button">Play · capture mouse</button><p>Move the mouse to look · WASD to move · Shift to run<br>Esc releases the mouse for camera and scene controls</p>';
+  const style = document.createElement("style");
+  style.textContent = `#demo-play { position:fixed; inset:0; z-index:100; display:grid; place-content:center; text-align:center; background:#101c2955; color:white; font:15px system-ui; } #demo-play[hidden] { display:none; } #demo-play button { justify-self:center; border:1px solid #a4d9d1; border-radius:6px; background:#116c66; color:white; font:600 18px system-ui; padding:14px 24px; cursor:pointer; } #demo-play p { padding:12px; background:#172332eb; border-radius:6px; line-height:1.65; }`;
+  document.head.append(style);
+  document.body.append(panel);
+  let lookReady = false;
+  // camera.look uses the former drag scale; captured look is 0.003 rad/pixel.
+  const capturedLookScale = 0.375;
+  const locked = () => document.pointerLockElement === canvas;
+  const thirdPerson = () => camera.mode !== "overview";
+  function refresh() {
+    panel.hidden = !thirdPerson() || !!camera.scene || locked();
+  }
   function stop() {
     walker.keys.clear();
     walker.stop();
+    walker.sync();
     walker.keyFrame = null;
-    drag = null;
+    if (locked()) document.exitPointerLock();
+    refresh();
   }
+  function capture() {
+    if (!thirdPerson() || camera.scene || locked()) return;
+    canvas.focus();
+    try {
+      const request = canvas.requestPointerLock();
+      request?.catch(() => {
+        panel.querySelector("p").textContent =
+          "Mouse capture was not available. Click Play to try again.";
+        refresh();
+      });
+    } catch {
+      panel.querySelector("p").textContent =
+        "This browser could not capture the mouse. Try a desktop browser with pointer lock support.";
+    }
+  }
+  panel.querySelector("button").addEventListener("click", capture);
+  document.addEventListener("pointerlockchange", () => {
+    lookReady = locked();
+    if (!locked()) stop();
+    refresh();
+  });
+  document.addEventListener("pointerlockerror", () => {
+    panel.querySelector("p").textContent =
+      "Mouse capture was not available. Click Play to try again.";
+    refresh();
+  });
   const consume = (event) => {
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -35,69 +79,74 @@ export function installControls(game, camera) {
   globalThis.addEventListener(
     "pointerdown",
     (event) => {
-      if (event.target !== canvas || camera.mode === "overview") return;
+      if (event.target !== canvas || !thirdPerson()) return;
       consume(event);
-      canvas.focus();
-      // Left click only focuses in third person, so hold-to-steer cannot compete with WASD.
-      if (
-        !camera.scene &&
-        event.pointerType !== "touch" &&
-        [1, 2].includes(event.button)
-      ) {
-        drag = { id: event.pointerId, x: event.clientX, y: event.clientY };
-        canvas.setPointerCapture(event.pointerId);
-      }
+      if (event.button === 0) capture();
     },
     true,
   );
   globalThis.addEventListener(
-    "pointermove",
+    "mousemove",
     (event) => {
-      if (!drag || event.pointerId !== drag.id) return;
+      if (!locked() || !lookReady || camera.scene) return;
       consume(event);
-      camera.look(event.clientX - drag.x, event.clientY - drag.y);
-      drag.x = event.clientX;
-      drag.y = event.clientY;
+      // The entry warp can arrive before pointerlockchange acknowledges capture.
+      camera.look(
+        event.movementX * capturedLookScale,
+        event.movementY * capturedLookScale,
+      );
     },
     true,
   );
-  for (const type of ["pointerup", "pointercancel", "lostpointercapture"])
-    globalThis.addEventListener(
-      type,
-      (event) => {
-        if (event.pointerId === drag?.id) {
-          consume(event);
-          drag = null;
-        }
-      },
-      true,
-    );
-  globalThis.addEventListener("contextmenu", (event) => event.preventDefault());
+  globalThis.addEventListener(
+    "contextmenu",
+    (event) => thirdPerson() && event.preventDefault(),
+  );
   globalThis.addEventListener(
     "wheel",
     (event) => {
-      consume(event);
-      camera.zoom(event.deltaY);
+      if (thirdPerson()) consume(event);
     },
     { capture: true, passive: false },
   );
   globalThis.addEventListener("blur", stop);
-  globalThis.document.addEventListener(
+  document.addEventListener(
     "visibilitychange",
-    () => globalThis.document.hidden && stop(),
+    () => document.hidden && stop(),
   );
   globalThis.addEventListener(
     "keydown",
     (event) => {
+      if (event.code === "Escape") {
+        stop();
+        return;
+      }
       if (event.code === "Tab") return;
       if (
         !camera.scene &&
+        (!thirdPerson() || locked()) &&
         /^(Arrow|Key[WASD]$|Shift|CapsLock)/.test(event.code)
       )
         return;
+      // The play overlay remains keyboard operable without sending Enter to the game.
+      if (
+        panel.contains(event.target) &&
+        ["Enter", "Space"].includes(event.code)
+      ) {
+        event.stopImmediatePropagation();
+        if (!event.repeat) capture();
+        return;
+      }
       consume(event);
     },
     true,
   );
-  return { stop };
+  refresh();
+  return {
+    stop,
+    refresh,
+    get locked() {
+      return locked();
+    },
+  };
 }

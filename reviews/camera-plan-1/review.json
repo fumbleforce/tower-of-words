@@ -3,7 +3,7 @@
  "date": "2026-10-06",
  "by": "Claude (plan), Codex (playable review demo)",
  "status": "open",
- "question": "Playable desktop camera revision: 1c keeps your chosen angle, with direct camera-relative WASD and mouse look. The camera no longer turns itself toward the character. Click the scene to focus, then use WASD; right-drag to look. Preview scene camera frames two actual nearby characters without moving them or playing dialogue; Return to walking restores your view. Third-person phone support has been dropped; phones show overview. Please try the revised controls and scene framing. The older options and static mocks remain as the decision history. Production camera and saved progress are unchanged.",
+ "question": "Playable desktop camera revision following your request: \"try gta style\". Click Play inside the scene to capture the mouse, move the mouse to look, use WASD to move and Shift to run. Esc releases the mouse for the toolbar. The selected 1c distance and height are unchanged. The camera follows the character; the character turns toward travel. Sideways and backward movement keep the chosen view direction. Preview scene camera frames actual nearby participants; Return to walking offers Play again. Phones keep overview. Please try the controls again. This is a review prototype; production camera and saved progress are unchanged.",
  "multi": true,
  "media": [
   {
@@ -82,7 +82,7 @@
   {
    "id": "1c",
    "label": "1c. Further and higher, 3.6 back, 2.8 up",
-   "note": "Selected angle: 3.6 back, 2.8 up. The revised demo keeps this angle and replaces the automatic turning camera with direct camera-relative WASD and mouse look. Controls await your review."
+   "note": "Selected angle: 3.6 back, 2.8 up. The revised demo uses captured mouse look and camera-relative WASD, following your request to try GTA style. Esc returns the cursor. Controls await your review."
   },
   {
    "id": "2a",
@@ -112,7 +112,7 @@
   {
    "id": "4a",
    "label": "4a. Add a free orbit camera as a third mode",
-   "note": "Optional free orbit remains in the desktop comparison; wheel zooms. Follow presets also keep the direction you choose with the mouse."
+   "note": "Historical option. Free orbit has been removed from the active demo after your request for GTA-style on-foot controls."
   },
   {
    "id": "4b",
@@ -137,7 +137,7 @@
  ],
  "links": [
   {
-   "label": "PLAY: revised 1c desktop controls and scene camera",
+   "label": "PLAY: GTA-style desktop controls, selected 1c angle",
    "href": "reviews/camera-plan-1/demo.html?camera=1c"
   },
   {
@@ -155,10 +155,6 @@
   {
    "label": "Try 1c: further and higher, 3.6 back / 2.8 up",
    "href": "reviews/camera-plan-1/demo.html?camera=1c"
-  },
-  {
-   "label": "Try 4a: free orbit (right-drag to look)",
-   "href": "reviews/camera-plan-1/demo.html?camera=orbit"
   },
   {
    "label": "The full plan (notes/camera-modes-plan.md)",
