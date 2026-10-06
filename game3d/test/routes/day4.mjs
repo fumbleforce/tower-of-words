@@ -1,9 +1,41 @@
 // Sunday scenarios restored through the same public Continue path used by players.
+import saturday from './day3.mjs';
 const known = ['ohayo', 'yoroshiku', 'sumimasen', 'matte', 'akete', 'ugoite', 'irete', 'tabetai'];
 const seed = (place, flags = {}, extra = {}) => ({ day: 4, place, known, yen: 4000, ...extra,
   flags: { dorm_room_known: true, met_emi: true, d4_started: true, d3_time_seen: true, ...flags } });
 const use = target => ({ type: 'use', target });
+const inherited = new Set(['d3-map-koko', 'd3-map-down', 'd3-signoff-walk', 'd3-signoff-later',
+  'd3-guard-hello', 'd3-monitor-fix', 'd3-monitor-later', 'd3-booking-reset-print', 'd3-booking-word-later', 'd3-booking-later']);
 export default [
+  ...saturday.filter(r => inherited.has(r.id)).map(r => ({ ...r, id: r.id.replace('d3-', 'd4-carried-'),
+    description: 'Sunday carried request: ' + r.description,
+    seed: { ...r.seed, day: 4, flags: { ...r.seed.flags, d4_started: true } },
+  })),
+  ...['morning', 'lunch', 'afternoon'].map((period, i) => ({
+    id: 'd4-rest-' + period, description: 'The desk advances only one chosen period.',
+    seed: seed('dorms', {}, { period }), choices: ['Spend the rest of ' + (period === 'lunch' ? 'lunch' : 'the ' + period) + ' here.'],
+    actions: [use('computer')], expect: { period: ['lunch', 'afternoon', 'evening'][i] },
+  })),
+  { id: 'd4-room-inbox', description: 'Sunday request list and getting up without work.', seed: seed('dorms'),
+    choices: ['Open repair requests.', 'Get up.'], actions: [use('computer'), use('computer')],
+    expect: { flags: { ticket_T0005: 'new', ticket_T0006: 'new' }, yen: 4000 } },
+  { id: 'd4-rest-explained', description: 'First rest explains the time skip; backing out preserves morning.',
+    seed: seed('dorms', { d3_time_seen: false }), choices: ['Rest until evening.', 'Not yet.'], actions: [use('computer')],
+    expect: { flags: { d3_time_seen: true }, period: 'morning' } },
+  { id: 'd4-rest-first', description: 'Accept the first rest explanation, then stay up at the bed.',
+    seed: seed('dorms', { d3_time_seen: false }), choices: ['Rest until evening.', 'Rest until evening.', 'Stay up a little longer.'],
+    actions: [use('computer'), use('bed')], expect: { flags: { d4_complete: false }, period: 'evening' } },
+  { id: 'd4-tennis-known-invite', description: 'Known words combine in an invitation; early exit keeps the session unfinished.',
+    seed: seed('sports', { club_tennis: true, d3_aoi_intro: true, d4_rei_intro: true },
+      { period: 'evening', node: 'd4_tennis_offer', known: [...known, 'isshoni', 'ikitai'] }),
+    choices: ['Try saying “I’d like to go together”.', 'Come back to tennis later.'], actions: [],
+    expect: { flags: { d4_invitation_said: true, d4_tennis_done: false } } },
+  ...['Hit a few balls with Aoi.', 'Watch from the bench.'].map((choice, i) => ({
+    id: 'd4-tennis-repeat-' + i, description: 'Completed tennis offers ordinary play without a new reward.',
+    seed: seed('sports', { club_tennis: true, d4_tennis_done: true, d3_aoi_intro: true, d4_rei_intro: true },
+      { period: 'evening', node: 'd4_tennis_repeat' }), choices: [choice], actions: [],
+    expect: { flags: { d4_tennis_done: true }, yen: 4000 },
+  })),
   { id: 'd4-fan-lever', description: 'Mechanical fan repair, then repeat without another payment.', seed: seed('gym'),
     choices: ['Free the fan’s starter lever.'], actions: [use('desk_fan'), use('desk_fan')],
     expect: { flags: { d4_fan_done: true, ticket_T0006: 'done' }, yen: 5000, period: 'morning' } },
@@ -58,4 +90,9 @@ export default [
   { id: 'd4-pool-closed', description: 'Closed pool notice outside the pavilion, return to sports lane.',
     seed: seed('pool'), choices: [], actions: [use('pool_notice'), { ...use('changing_room'), settleAt: 'sports' }],
     expect: { flags: { d3_swim_done: false }, yen: 4000 } },
+  { id: 'd4-later-sunday', description: 'The retained local tennis scene works on the next Sunday after an early departure.',
+    seed: seed('sports', { club_tennis: true, clubday_tennis: 4, clubprog_tennis: 1, d3_aoi_intro: true, d4_rei_intro: true },
+      { period: 'evening', known: [...known, 'isshoni'] }), calendarDay: 11,
+    choices: ['Practise with Aoi.', 'Head out.'], actions: [use('aoi')],
+    expect: { flags: { d4_tennis_done: true, d4_played_aoi: true }, yen: 4000 } },
 ];

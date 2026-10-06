@@ -2,6 +2,7 @@
 import { captureObjects, restoreObjects } from './saved.js';
 import { snapshotPeople, restorePeople } from '../saved-people.js';
 import { sim } from '../../sim.js';
+import { isSunday } from './calendar.js';
 import { flags } from '../../narrative/state.js';
 import { dayCast } from '../day-cast.js';
 import { walkRig, faceRig } from '../../move.js';
@@ -62,11 +63,12 @@ export function tennisCourt(game, P, cast, shot) {
     const handName = dx < 0 ? 'LeftHand' : 'RightHand';
     const hand =
       (r.model || r.root).getObjectByName(handName) || (r.model || r.root).getObjectByName('mixamorig' + handName);
-    if (hand && o !== basketProp) {
+    if (hand) {
       hand.getWorldPosition(o.position);
       P.space.worldToLocal(o.position);
+      if (o === basketProp) o.position.y -= 0.25;
     }
-    o.rotation.set(0, yaw, 0);
+    o.rotation.set(0, yaw, o === basketProp ? 0 : Math.PI);
     o.visible = r.root.visible;
   };
   const walk = (id, to) => walkRig(game, rig(id), to, { speed: 1.8 });
@@ -99,7 +101,7 @@ export function tennisCourt(game, P, cast, shot) {
   function restore() {
     repair.restore();
     lights();
-    const active = sim.day === 4 && sim.period === 'evening';
+    const active = isSunday() && sim.period === 'evening';
     guests.forEach((g, i) =>
       active
         ? g.put('member', [east[0] + (i === 2 ? 3 : i ? 1 : -1), east[1] + (i === 0 ? -5 : 5)], east)
@@ -132,7 +134,7 @@ export function tennisCourt(game, P, cast, shot) {
     },
     spot: () => [bench.x + 1.3, bench.z + 1],
     face: () => [bench.x, bench.z + 1],
-    enabled: () => sim.day === 4 && sim.period === 'evening' && !flags.d4_bottle_seen,
+    enabled: () => isSunday() && sim.period === 'evening' && !flags.d4_bottle_seen,
   };
   async function serve(id) {
     held[1] = 'aoi';
@@ -267,7 +269,7 @@ export function tennisCourt(game, P, cast, shot) {
     update(dt) {
       lights();
       guests.forEach((g) => g.update(dt));
-      if (sim.day !== 4) {
+      if (!isSunday()) {
         rackets.forEach((r) => {
           r.visible = false;
         });

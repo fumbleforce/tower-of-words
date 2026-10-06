@@ -1,6 +1,6 @@
 # Day 4 story handoff
 
-Sunday, 4 October. Read `dorms.js`, `sports.js` and `tennis.js`, then `gym.js` and `fan.js`. The other places hold the routine, optional stops and return paths. The [outline](../../../notes/days3-5-outline.md) owns the schedule and scene order; [cast.md](../../../docs/game/cast.md#personal-plots-and-bond-milestones) owns the personal plots. This is authored data awaiting Claude's cold read and physical build, not a live day.
+Sunday, 4 October. Read `dorms.js`, `sports.js` and `tennis.js`, then `gym.js` and `fan.js`. The other places hold the routine, optional stops and return paths. The [outline](../../../notes/days3-5-outline.md) owns the schedule and scene order; [cast.md](../../../docs/game/cast.md#personal-plots-and-bond-milestones) owns the personal plots. The cold read is approved and physical integration is implemented. Day selection remains gated while final route and staging checks finish.
 
 `index.js` exports the same place set as day 3, with trips in both directions, periods, word records and `NEEDS`. `d4_*` owns new state. Deferred station and booking nodes retain `d3_*`, ticket ids and saved progress; their setup and goals now belong to Sunday. T-0005 and T-0006 are the new requests. Payment comes only from `ticket: close`, after the requester's check. No small job advances time. The day starts at home; the chair can advance each period or skip to evening with every job unfinished. Only evening Sleep sets `d4_complete`.
 
@@ -16,7 +16,7 @@ Writing checks: Rei wants her doubles game back; Aoi wants a turn and usable sho
 
 The shared `days3-5-finds.js` and `milestones/` packs are exported for the builder. Their Japanese dialogue follows the same blur rule as the day scenes. Their descriptors supply independent eligibility and their READMEs specify physical staging; exporting them does not dispatch scenes. Run both packs' authoring checks before integration.
 
-The working [voice sheet](VOICE.md) records the required skill pass. The authoring checker rejects every dialogue-level `en` field and checks Japanese-only speakers as in landed day 3. Translation glosses inside vocabulary data are still allowed. Validation and cold-read findings are recorded in [COLD-READ.md](COLD-READ.md); the story is authored and awaits physical integration.
+The working [voice sheet](VOICE.md) records the required skill pass. The authoring checker rejects every dialogue-level `en` field and checks Japanese-only speakers as in landed day 3. Translation glosses inside vocabulary data are still allowed. Validation and cold-read findings are recorded in [COLD-READ.md](COLD-READ.md); the reviewed story is implemented in places/day4/. All 657 collected approved-voice lines have clips; no Carina clone has been introduced.
 
 ## Build contract for Claude
 

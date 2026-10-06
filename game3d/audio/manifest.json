@@ -176,6 +176,22 @@
   "slow": true
  },
  {
+  "key": "word-isshoni",
+  "speaker": "mio",
+  "text": "いっしょに。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "eric-matte",
   "speaker": "eric",
   "text": "待って。",
@@ -270,6 +286,15 @@
   ],
   "clear": [],
   "emo": "polite"
+ },
+ {
+  "key": "eric-isshoni",
+  "speaker": "eric",
+  "text": "いっしょに。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
  },
  {
   "key": "oh-gtvr5a",
@@ -7308,31 +7333,6 @@
    [
     "koko",
     "ここ"
-   ]
-  ],
-  "clear": [],
-  "emo": "slow",
-  "slow": true
- },
- {
-  "key": "eric-isshoni",
-  "speaker": "eric",
-  "text": "いっしょに。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": []
- },
- {
-  "key": "word-isshoni",
-  "speaker": "mio",
-  "text": "いっしょに。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [
-   [
-    "isshoni",
-    "いっしょに"
    ]
   ],
   "clear": [],
