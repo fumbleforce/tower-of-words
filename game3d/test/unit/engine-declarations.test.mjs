@@ -27,6 +27,8 @@ test('actual engine writes and event calls agree with declarations', () => {
 
 test('actual source mutations fail the declaration guard before the game runs', () => {
   for (const [file, before, after] of [
+    ['game3d/js/saves/met.js', 'KEYS.met + id', 'KEYS.meet + id'],
+    ['game3d/js/saves/met.js', 'save.flags || {}', 'arbitraryObject'],
     ['game3d/js/sim.js', 'ENGINE_KEYS.gift_reaction', 'ENGINE_KEYS.gift_reactoin'],
     ['game3d/js/gameplay/gifts.js', 'KEYS.gave', 'KEYS.gvae'],
     ['game3d/js/places/train.js', "eventId('train', 'chime')", "eventId('train', 'chim')"],

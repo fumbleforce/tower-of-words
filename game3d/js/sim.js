@@ -19,6 +19,7 @@ import { MC, expandMc, migrateMc } from './mc.js';
 import { visitedList, loadVisited } from './travel/visited.js';
 import { newCast } from './roles.js';
 import { markPeriod } from './period-flags.js';
+import { restoreMet } from './saves/met.js';
 
 expandMc(PEOPLE); // the protagonist's tokens in the People cards (mc.js)
 
@@ -224,10 +225,8 @@ export function bond(game, who, add, opts = {}) {
 }
 export function meet(game, who) {
   if (!sim.people[who]) return;
-  if (!sim.met.has(who)) {
-    sim.met.add(who);
-    flags[ENGINE_KEYS.met + who] = true;
-  }
+  flags[ENGINE_KEYS.met + who] = true;
+  sim.met.add(who);
   if (bonds.meet(who)) {
     sync(who);
     checkSteps(game);
@@ -524,9 +523,8 @@ export function restore(game, d) {
   });
   sim.date = dateOf(sim.day || 1);
   ui.logLoad?.(d.log, sim.day || 1);
-  sim.met = new Set(d.met || []);
   loadVisited(d); // an older save is seeded from its day and place (travel/visited.js)
-  Object.assign(flags, d.flags || {});
+  sim.met = restoreMet(d, flags);
   markPeriod(sim.period, PERIODS); // a new day's opening save carries the last day's evening
   for (const k of d.known || []) known.add(k);
   for (const k of d.seen || []) seen.add(k);

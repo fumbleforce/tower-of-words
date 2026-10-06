@@ -3,7 +3,7 @@
 const modules = {
   'ui.js': `export const ui = new Proxy({}, { get: (_, key) => globalThis.__saveTestUI?.[key] || (() => {}) });
     export const voice = async () => {}; export const sfx = () => {};
-    export const setFace = () => {}; export const newScene = () => {}; export const PORTRAITS = {};
+    export const setFace = () => {}; export const newScene = () => {}; export const PORTRAITS = {}; export const FACE = {};
     export const voiceThenBeat = async () => {}; export const unlockAudio = () => {};
     export const pauseAudio = () => {}; export const keyLabel = () => '';`,
   'settings.js': `export const settings = {}; export const setSetting = () => {};
