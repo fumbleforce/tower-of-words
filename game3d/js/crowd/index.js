@@ -89,7 +89,7 @@ const rnd = (seed) => {
 const hashName = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 9973, 7);
 
 export async function attachCrowd(game, place, name) {
-  const data = CROWD[name];
+  const data = place.crowdPlan?.(CROWD[name]) || CROWD[name];
   const specs = data && Object.values(data.periods);
   if (!specs?.length || !place.nav || Q.has('nocrowd')) return null; // ?nocrowd: none (perf comparisons)
   const tier = crowdTier();

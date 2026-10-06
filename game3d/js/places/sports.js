@@ -13,6 +13,8 @@ import { walkOut, walkIn } from './edge-walk.js';
 import { turningCam, followFit, frameFit, quietly } from './turning-cam.js';
 import { roadClosure } from './closure.js';
 import { day3Place } from './day3/place.js';
+import { sim } from '../sim.js';
+import { sportsCrowd, SPORTS_CLOSED_DAYS } from './sports-crowd.js';
 
 // The sports ground (scenes/sports.js): the north street walked on north from the east lane, past the back lane, to
 // the sports lane, the gym's front, the pool walk to the shower pavilion and the courts walk to the onsen path; it
@@ -68,7 +70,7 @@ export async function sportsPlace(game) {
   const d3 = day3Place(game, 'sports', { root: w.root, K, ids: ['rei', 'aoi', 'member'] }); // day 3's afternoon: Rei's serves
   // day 3: the office street closed past the gym's corner (places/closure.js; story/day3/sports.js d3_closed)
   const westClosed = roadClosure({ space: w.root, nav: w.nav }, west, (x, z) => inRect(x, z, west.zone), {
-    days: [3, 4],
+    days: SPORTS_CLOSED_DAYS,
   });
   const things = {
     // the ways out (plan.js EXITS)
@@ -167,6 +169,7 @@ export async function sportsPlace(game) {
     people: { rei: d3.people.rei, aoi: d3.people.aoi, member: d3.people.member },
     day3: (a) => d3.setup(P, a),
     onDay: (day) => westClosed.sync(day),
+    crowdPlan: (data) => sportsCrowd(data, sim.day),
     zones: {
       north_exit: (x, z) => inRect(x, z, back.zone),
       east_exit: (x, z) => inRect(x, z, on.zone),
