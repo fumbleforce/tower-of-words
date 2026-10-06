@@ -16,6 +16,6 @@
   }
  },
  "comment": "During conversation, it woul be cool if we get a \"scene\" camera mode that zooms in on the participants independent of the MC, framing the conversation ",
- "read": false,
+ "read": true,
  "history": []
 }
