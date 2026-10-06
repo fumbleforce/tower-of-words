@@ -1,0 +1,17 @@
+# Crowd pilot 5: Meshy textures
+
+Round 4 was rejected. The user's exact feedback is in `reviews/crowd-pilot-4/feedback.json`; this round uses Meshy's retexture API, with no projected or hand-painted eye repairs.
+
+Initial batch: one picture-guided Meshy 7 texture for each existing A/B crowd shape. Inputs are the round-2 rigged GLBs and their original chibi style pictures, preserving original UVs, 2k base colour and no PBR maps. The current API documents `remove_lighting` only for Meshy 6, so the Meshy 7 request omits it. Each task costs 10 credits at the current documented rate; starting account balance was 125. Exact task IDs, source hashes, settings and charged credits are retained in this round's ledger. Source: https://docs.meshy.ai/en/api/retexture and https://docs.meshy.ai/en/api/pricing (checked 2026-10-06).
+
+Packaging will verify UV compatibility and use the existing geometry, weights, bones and animation clips unchanged. The game is not updated by generating candidates. All attempts appear in the new review, with actual front/side and walk/run captures beside the approved cast; the user picks any installation.
+
+Capture staging: one standing adult crowd character at a time, empty hands, neutral floor and background. Equal model height and camera distance beside the cast, neutral hemisphere plus an upper-left key. Front and both three-quarter views show the actual face planes; a normal game-distance view checks legibility. This is a material comparison, with no story action or invented props.
+
+The first image-guided A/B attempts were rejected by independent critique (A 5.5/10, B 6/10): both omit the mouth, their icon-like eyes do not match the cast's iris/sclera separation, and B has a pale patch inside the hair. Preserve these attempts. One bounded text-guided Meshy A/B retry keeps the same source mesh and API settings, replacing only the style input. Its prompt asks for the missing face features and continuous hair colour while specifying the existing office clothes. The capture staging stays identical; no local paint or UV projection is permitted.
+
+Result: four successful Meshy jobs, 40 credits charged, balance 85. Independent critique scored image-guided A 5.5/10 and B 6/10; text-guided A 7.5/10 and B 6.5/10. A’s retry has coherent anime eyes but a mouth placed too low on the chin facet. B retains the pale hair patch and duplicated-looking highlights at an angle. None passes the 8/10 finish bar; none is installed. The review is attempt history and direction feedback, not a finished-crowd claim. Further crowd generation is stopped for this batch.
+
+Validation: triangle-corner UVs are exactly equal; normalized triangle positions agree within 0.000002 m; generated texture pixels survive lossless WebP conversion unchanged. All sixteen candidate walk/run/sit/idle files match the existing source files byte for byte. Both texture batches passed desktop/phone sustained motion checks; the public review page resolves every image and its first live-viewer link. No protected source was requested.
+
+Reproduce: `python3 art/candidates/crowd-pilot-5/retexture.py --style image` or `--style text` resumes checkpointed task IDs. Use `~/ai/cv-venv/bin/python` for `prepare.py --style image|text` and `package.py` (existing NumPy/Pillow environment); then run `capture.mjs`, `check-motion.mjs` and `GL=soft node art/candidates/crowd-pilot-5/check-review.mjs`. Request JSON and raw API responses remain beside the original downloads on this machine; only the safe ledger is published.
