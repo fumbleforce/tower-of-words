@@ -51,11 +51,31 @@ export function inHand(P, item, who, { side = 1, height = 0.68 } = {}) {
     height,
     p.z - Math.sin(a) * 0.18 * side + Math.cos(a) * 0.22,
   );
+  const name = side < 0 ? 'LeftHand' : 'RightHand';
+  const hand =
+    (rig.model || rig.root).getObjectByName(name) || (rig.model || rig.root).getObjectByName('mixamorig' + name);
+  if (hand) {
+    hand.getWorldPosition(item.position);
+    P.space.worldToLocal(item.position);
+  }
   item.visible = true;
 }
-export function frame(game, id, distance = 2.4) {
+export function frame(game, id) {
   const P = game.place,
     person = P.people[id];
-  const at = person ? person.root.position : anchor(P, id);
-  P.monday.shot.focus([at.x, at.z], distance, person ? 0.75 : at.y, 0.35, person ? 0.3 : 0.7);
+  const at = person ? person.root.position.clone() : anchor(P, id);
+  const sizes = {
+    vending: [3.4, 2.4],
+    copier: [2.2, 1.8],
+    office_door: [1.5, 2],
+    label_printer: [1.4, 1],
+    song_terminal: [1.3, 0.9],
+    art_table: [1.8, 1],
+    drying_rack: [0.75, 0.65],
+  };
+  const [width, height] = sizes[id] || [1.5, 2];
+  const tangent = Math.tan((P.camera.fov * Math.PI) / 360);
+  const distance = 1.1 * Math.max(width / (2 * tangent * P.camera.aspect), height / (2 * tangent));
+  if (id === 'vending') at.set(-5.35, 0.9, -1.3);
+  P.monday.shot.focus([at.x, at.z], distance, person ? 0.85 : at.y, 0.35, person || id === 'vending' ? 0.3 : 0.7);
 }

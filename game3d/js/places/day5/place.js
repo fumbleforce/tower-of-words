@@ -89,6 +89,7 @@ export function attachMonday(game, P, name) {
       props.map(([child]) => child),
       state.props,
     );
+    shot.load(state.shot);
     state.pieces?.forEach((data, i) => {
       if (data) pieces[i]?.load?.(data);
     });
