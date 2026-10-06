@@ -1,0 +1,15 @@
+import * as mio from './mio.js';
+import * as mori from './mori.js';
+import * as kenji from './kenji.js';
+import * as emi from './emi.js';
+import * as guard from './guard.js';
+import * as kuroda from './kuroda.js';
+import * as kuro from './kuro.js';
+import * as aoi from './aoi.js';
+import * as rei from './rei.js';
+import * as tama from './tama.js';
+import { leave } from './shared.js';
+const people = [mio, mori, kenji, emi, guard, kuroda, kuro, aoi, rei, tama];
+export const SCENES = people.flatMap(person => person.scenes);
+export const NODES = Object.assign({ milestone_leave: leave }, ...people.map(person => person.nodes));
+export const NEEDS = { hooks: ['milestone'], speakers: { member: { name: 'Club member' } } };
