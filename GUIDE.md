@@ -35,7 +35,7 @@ Scope is day 1 only, except places: half the island is mapped for a future day 2
 - Build small slices and let him judge before scaling up. He benchmarks anything new (models, voices, cutouts) himself.
 - Style studies (2026-09-28): several attempts for him to judge, sheets at full resolution. Where the current one stands: docs/game/art-and-sound.md.
 - Relay feedback as given (Jørgen, 2026-09-28: "STOP overcorrections like this when I give feedback"). Pass his words on as the brief and point at the source he means. Don't add intensifiers or your own reading ("but clearly green").
-- Feedback log (2026-09-29): every message he types to Claude Code is saved word for word in notes/feedback-log/ (README there). Quote from it when briefing agents.
+- Feedback log (2026-09-29; Codex alignment 2026-10-06): every message he types to either agent is saved word for word in notes/feedback-log/ (README there). Verify the client hook is active or use its manual fallback; quote the log when briefing agents.
 - Left and right on a character mean hers (Jørgen, 2026-09-29: "left from HER perspective... none of these fixes it"). Her left is the image's right. Every brief and prompt that names a side says both: "her left (image right)".
 - Never open images or pages on his screen (no xdg-open). Give links only, on port 8771 (Engineering, Local review server).
 - Every build announcement to Jørgen names the build id shown in the game's corner (game3d/build.json), so he can check he's on it (2026-09-28).

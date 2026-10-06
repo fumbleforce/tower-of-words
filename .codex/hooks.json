@@ -1,0 +1,8 @@
+{
+  "description": "Amakawa: shared feedback log, Review/game feedback notifications and private-layout guard. Review these hooks in /hooks before trusting them.",
+  "hooks": {
+    "UserPromptSubmit": [{"hooks": [{"type": "command", "command": "python3 \"$(git rev-parse --show-toplevel)/tools/collab/codex_hooks.py\" prompt", "timeout": 60}]}],
+    "SessionStart": [{"matcher": "startup|resume|compact", "hooks": [{"type": "command", "command": "python3 \"$(git rev-parse --show-toplevel)/tools/collab/codex_hooks.py\" check", "timeout": 60}]}],
+    "PreToolUse": [{"matcher": "Bash|apply_patch|Read|Glob|Grep|Write|Edit|MultiEdit|NotebookEdit|view_image", "hooks": [{"type": "command", "command": "python3 \"$(git rev-parse --show-toplevel)/tools/collab/codex_hooks.py\" guard", "timeout": 10}]}]
+  }
+}

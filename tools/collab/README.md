@@ -1,3 +1,44 @@
+# Shared hooks and workflows
+
+Claude loads `.claude/settings.json`; Codex loads `.codex/hooks.json`. The
+Codex adapter (`codex_hooks.py`) calls the same feedback and notification
+implementations. It adds native patch-header handling to the local file guard.
+The hook configuration must be reviewed and trusted through Codex `/hooks`
+before automatic execution. Do not bypass trust or claim activation from a
+successful direct script test. See [Codex hook contracts](https://learn.chatgpt.com/docs/hooks).
+
+Until automatic delivery has been observed, send the current prompt as JSON
+(`prompt`, `session_id`, `turn_id`, `cwd`) to
+`python3 tools/collab/codex_hooks.py prompt`. Use `check` with the same JSON
+without `prompt` to check notifications without creating a feedback entry.
+Keep a stable turn id when retrying a prompt; a later identical message with a
+different turn id is still recorded. A hook error must be inspected, not treated
+as an empty feedback queue.
+
+Audit, 2026-10-06:
+
+| Workflow | Shared implementation and Codex handling |
+| --- | --- |
+| Verbatim messages | `feedback_log.py`; native prompt hook plus manual fallback. Backfill is documented in `notes/feedback-log/README.md`. |
+| Review/Showcase answers and stale tasks | `review_new.py`; Codex-prefixed session cursor so Claude notifications do not suppress Codex notifications. Run `tools/review.py pull` when checking remote answers; the notification hook itself only reads local answers. |
+| In-game feedback | `game_feedback_new.py`; separate client cursors, still one notification per feedback folder per client. |
+| Private file/layout guard | Existing local `private_guard.py`; Codex adapts patch paths and image reads and refuses the user-only manifest. The guard and `tools/private_layout.py`/`private-layout.json` currently live only in the main checkout; worktrees resolve that guard there. Missing guard dependencies fail closed. They were not swept into this public change. |
+| Inbox wakeups | `codex_wake.py bind` for the main session only; read `collab/to-codex.md` at each turn. A queued pointer does not mean its request was handled. |
+| Work ownership | `tools/work.py`, claims/releases and one task per worktree apply to both clients. |
+| Commit and landing checks | `core.hooksPath` points both clients/worktrees at `tools/check/hooks`; staged CPU/Facts/assets checks, title boot and pre-push secret scanning already apply. Land with `tools/land.sh`. |
+| Reusable workflows | Read applicable `.claude/skills/{fast-qa,land,post-review-item,voice-clips,portrait-round,rpg-scenes}/SKILL.md` directly. Codex does not inherit Claude's skill/agent discovery. |
+| Review roles | `.claude/agents/{reviewer,critic,cold-player,story-reader,builder,art-round}.md` define the work contracts; give those contracts to Codex subagents, with isolated files and fresh review context. |
+
+The guard is a tool-input check, not a filesystem sandbox: dynamically computed
+paths or reads inside scripts need the same manual care in both clients.
+Browser QA still needs explicit protected-route interception and public mode.
+Neither successful CPU checks nor a fast playthrough replace visual inspection,
+the cold player, or the required cross-team review. Approval requirements and
+asset storage remain in GUIDE.md; this adapter does not change them.
+
+Tests: `python3 -m unittest discover -s tools/collab -p 'test_codex_hooks.py' -v`.
+They use temporary feedback fixtures and never access personal asset folders.
+
 # Codex inbox wake
 
 `codex_wake.py` watches `collab/to-codex.md` and sends a short pointer through
