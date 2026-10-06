@@ -11,12 +11,13 @@ function bone(rig, name) {
   const model = rig.model || rig.root;
   return model.getObjectByName(name) || model.getObjectByName('mixamorig' + name);
 }
-export function poolHandling(root) {
+export function poolHandling(root, { codeArms = false } = {}) {
   const actors = new Map();
   function actor(rig) {
     if (actors.has(rig)) return actors.get(rig);
     const hand = bone(rig, 'RightHand') || rig.arms?.[1]?.userData.hand || rig.arms?.[1];
     const chain = [bone(rig, 'RightForeArm'), bone(rig, 'RightArm')].filter(Boolean);
+    if (!chain.length && codeArms && rig.arms?.[1]?.userData.hand) chain.push(rig.arms[1]);
     const original = rig.update,
       saved = new Map();
     const state = { hand, chain, target: null, held: null, offset: 0 };

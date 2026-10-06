@@ -902,7 +902,7 @@ A boarded floor and pale walls, three windows high in the north wall onto the ba
 
 ### Spots
 
-`commons_in` (inside the door, the arrival point), `commons_table` (at the table's south-east corner, by the materials), `commons_sofa` (between the sofa and the table), `commons_kitchen` (at the kitchen counter), `commons_rack` (in front of the drying rack); and each nook below
+`commons_in` (inside the door, the arrival point), `commons_table` (at the table's south-east corner, by the materials), `commons_sofa` (the clear floor beside the sofa end), `commons_tv` (the television, an aim point rather than a walk destination), `commons_kitchen` (at the kitchen counter), `commons_rack` (in front of the drying rack); and each nook below
 
 ### Nooks
 
@@ -923,9 +923,7 @@ None.
 
 ### Who's there when
 
-Day 3: Kenji on the sofa in front of the TV in the evening.
-
-None of the cast yet.
+Day 3 evening and day 4 morning: Kenji on the sofa watching a visible silent sports replay. Ordinary Talk offers replay and work topics, with shorter responses after each has been heard. His arcade conversation is recalled only if it actually happened. The Sunday remote-under-him action plays once before he sits again. The player approaches the free floor beside the occupied sofa end. No additional vocabulary lesson is required. Later recurring-calendar placement remains a separate dependency.
 
 | Id | Usually | Schedule |
 |---|---|---|
@@ -1676,7 +1674,7 @@ Played in the evening, after work.
 
 ## Canteen (`canteen`)
 
-The furnished ground floor occupies the existing canteen footprint north of the fountain plaza. Eight six-seat tables, two usable end chairs, tiled floor, teal chairs and wall protection, a hot-food counter with tray rail and cashier terminal, water dispenser, cups and a tray-return trolley. Back windows and a kitchen hatch sit above the service line. Three unnamed diners use the existing generic bodies; a worker stands behind the counter during daytime. No new conversation or food transaction is attached. At evening the worker is gone, the exterior windows darken and the wall lights warm the room; diners can still sit indoors. The existing terrace closing scene stays outside.
+The furnished ground floor occupies the existing canteen footprint north of the fountain plaza. Eight six-seat tables, two usable end chairs, tiled floor, teal chairs and wall protection, a hot-food counter with tray rail and cashier terminal, water dispenser, cups and a tray-return trolley. Back windows and a kitchen hatch sit above the service line. Three unnamed diners use the existing generic bodies. The same worker who closes the terrace stands behind the service counter during daytime, wiping it with a cloth held by her actual hand. Her ordinary Talk offers water and tray-return directions, a quieter-time question about closing, and a short repeat response; she recognises actual help with the terrace chairs. Lunch defers the closing question without consuming it. No food purchase or new word is attached. At evening the worker is gone, the exterior windows darken and the wall lights warm the room; diners can still sit indoors. The existing terrace closing scene stays outside.
 
 The entrance and return walk use the actual south-facing door. Main aisles connect the door, counter, water, return trolley and both usable chairs. Furniture and the staff lane block player movement. The upper floor and kitchen behind the serving line remain inaccessible. Desktop shows the room; phone follows the player.
 
@@ -1684,6 +1682,7 @@ The entrance and return walk use the actual south-facing door. Main aisles conne
 
 | Id | Label | What it is |
 |---|---|---|
+| `canteen_worker` | Canteen worker | Talk across the service counter during daytime. |
 | `canteen_exit` | Fountain plaza | Go out through the front door. |
 | `canteen_seat_w` | Dining chair | Sit at the west side of the main aisle. |
 | `canteen_seat_e` | Dining chair | Sit at the east side of the main aisle. |

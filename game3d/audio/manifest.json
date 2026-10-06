@@ -1992,6 +1992,126 @@
   "emo": "polite"
  },
  {
+  "key": "oh-il90du",
+  "speaker": "canteen_worker",
+  "text": "あ、椅子を運んでくれた方ですね。ありがとうございました。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-vjt3q4",
+  "speaker": "canteen_worker",
+  "text": "はい、どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-1vt8raf",
+  "speaker": "canteen_worker",
+  "text": "お水は、あちらです。コップは横にあります。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1fhr7td",
+  "speaker": "eric",
+  "text": "Thank you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-if4q38",
+  "speaker": "canteen_worker",
+  "text": "はい、そこです。ありがとうございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-10j990w",
+  "speaker": "canteen_worker",
+  "text": "はい、返却はこちらです。お箸は別にお願いします。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-1e1y2up",
+  "speaker": "canteen_worker",
+  "text": "すみません、今ちょっと……。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "apologetic"
+ },
+ {
+  "key": "ln-14kfm2l",
+  "speaker": "eric",
+  "text": "I’ll come back when it’s quieter.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-b71pl9",
+  "speaker": "canteen_worker",
+  "text": "今日も、外の椅子が待ってます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "matte",
+    "待って"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-la060z",
+  "speaker": "eric",
+  "text": "The chairs outside? You put them all away?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1f6w87d",
+  "speaker": "canteen_worker",
+  "text": "外の椅子？ ああ、毎日です。雨の日は、中も片付けないと。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
   "key": "oh-2kggvg",
   "speaker": "mori",
   "text": "おはようございます。森と申します。ITサポートへ、ようこそ。",
@@ -3434,16 +3554,6 @@
   "key": "oh-1c1wcn6",
   "speaker": "guard",
   "text": "点検ですね。どうぞ。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "oh-vjt3q4",
-  "speaker": "guard",
-  "text": "はい、どうぞ。",
   "lang": "ja",
   "overheard": true,
   "words": [],
@@ -6828,6 +6938,116 @@
   "key": "ln-p318in",
   "speaker": "kenji",
   "text": "Okay. I am quiet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-13f3fgu",
+  "speaker": "kenji",
+  "text": "Ah, Eric. TV again. My room is... small.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1yxqpbl",
+  "speaker": "kenji",
+  "text": "Same match. Still good!",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-1a8d2sf",
+  "speaker": "kenji",
+  "text": "Yes! Last point is very good. Look, look.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-12mqrzz",
+  "speaker": "eric",
+  "text": "You nearly told me again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1660mm1",
+  "speaker": "kenji",
+  "text": "Ah. Sorry!",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-15hax3x",
+  "speaker": "kenji",
+  "text": "Machine room? Still no Kenji.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-53ylet",
+  "speaker": "kenji",
+  "text": "Machine room is... no Kenji. Mio says.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-1ba1roq",
+  "speaker": "eric",
+  "text": "Have you tried asking her?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-mri098",
+  "speaker": "kenji",
+  "text": "Yes. Very fast no.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-pc47ha",
+  "speaker": "eric",
+  "text": "At least the crane machine lets you keep trying.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-fjvtz9",
+  "speaker": "kenji",
+  "text": "Crane takes my money. Every time.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -10647,6 +10867,36 @@
   "emo": "casual"
  },
  {
+  "key": "ln-1fhr7td-carina",
+  "speaker": "carina",
+  "text": "Thank you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-14kfm2l-carina",
+  "speaker": "carina",
+  "text": "I’ll come back when it’s quieter.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-la060z-carina",
+  "speaker": "carina",
+  "text": "The chairs outside? You put them all away?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
   "key": "ln-2o5x1j-carina",
   "speaker": "kenji",
   "text": "Carina-san? I am Kenji! Two months here, so now I am not the newest. Ah, sorry, your chair... I borrowed it. Mine is broken.",
@@ -12222,6 +12472,46 @@
   "key": "ln-2y95xc-carina",
   "speaker": "carina",
   "text": "Don’t tell me, then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-drxrj9-carina",
+  "speaker": "kenji",
+  "text": "Ah, Carina. TV again. My room is... small.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-12mqrzz-carina",
+  "speaker": "carina",
+  "text": "You nearly told me again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1ba1roq-carina",
+  "speaker": "carina",
+  "text": "Have you tried asking her?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-pc47ha-carina",
+  "speaker": "carina",
+  "text": "At least the crane machine lets you keep trying.",
   "lang": "en",
   "overheard": false,
   "words": [],

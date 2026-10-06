@@ -1043,6 +1043,7 @@
         "commons_in",
         "commons_table",
         "commons_sofa",
+        "commons_tv",
         "commons_kitchen",
         "commons_rack",
         "commons_books",
@@ -1063,7 +1064,8 @@
         "aoi"
       ],
       "hooks": [
-        "day5Commons"
+        "day5Commons",
+        "roomSofa"
       ]
     },
     "sports": {
@@ -1911,6 +1913,10 @@
     },
     "canteen": {
       "things": {
+        "canteen_worker": {
+          "label": "Canteen worker",
+          "kind": "person"
+        },
         "canteen_exit": {
           "label": "Fountain plaza",
           "kind": "thing",
@@ -1941,8 +1947,12 @@
       ],
       "nooks": [],
       "zones": [],
-      "people": [],
-      "hooks": []
+      "people": [
+        "canteen_worker"
+      ],
+      "hooks": [
+        "roomWorker"
+      ]
     },
     "izakaya": {
       "things": {

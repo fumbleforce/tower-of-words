@@ -1,5 +1,14 @@
+import { sofaNodes } from '../room-talk.js';
 import { place } from './shared.js';
-export default place({ east_coast: ['talk:commons_door'] }, { on: { 'talk:kenji': 'd4_tv', 'talk:mori': 'd4_sketch', 'talk:art_table': 'd4_art', 'talk:commons_board': 'd4_board', 'talk:drying_rack': 'd4_rack' }, nodes: {
+export default place({ east_coast: ['talk:commons_door'] }, { on: { 'talk:kenji': 'room_sunday_kenji', 'talk:mori': 'd4_sketch', 'talk:art_table': 'd4_art', 'talk:commons_board': 'd4_board', 'talk:drying_rack': 'd4_rack' }, nodes: {
+      ...sofaNodes,
+  room_sunday_kenji: [
+    { if: '!room_remote_found', then: [
+      { call: 'd4_tv' }, { set: 'room_remote_found' },
+      { do: 'sit', who: 'kenji', at: 'commons_sofa' },
+    ] },
+    { go: 'room_kenji' },
+  ],
   d4_tv: [{ do: 'day4Setup', state: 'remote' }, { say: 'kenji', emo: 'sheepish', text: 'Ah, sorry. Remote is under me!' }],
   d4_sketch: [
     { do: 'cam', on: 'mori', zoom: 1.2 },
