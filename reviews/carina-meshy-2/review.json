@@ -7,6 +7,18 @@
  "multi": false,
  "media": [
   {
+   "image": "art/parts/carina-meshy-1/r2/diag/waist-before/sheet.png",
+   "caption": "First diagnostic render: the original waist from four angles."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/r2/diag/waist-seam/sheet.png",
+   "caption": "First seam repair render, retained in order."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/r2/diag/waist-zoom/sheet.png",
+   "caption": "Closer diagnostic render before the final comparison sheets."
+  },
+  {
    "image": "art/parts/carina-meshy-1/sheets/r2-seam.webp",
    "caption": "Round 2, your words on carina-2: \"she has a small seam at the waist. Her head should be 15% smaller. Her pants should be a different color\". 1, the seam. It was in the texture, not the mesh or the rig: the underside of her top's hem and the top edge of the trousers were painted beige by Meshy's texture pass, which showed as a dotted light line under the hem. Painted out in Blender with the top's and the trousers' own colour on just those faces. Close-ups at the waist, before and after; these trousers are still black so only the seam changes, and the last one is the installed version with denim."
   },
@@ -28,7 +40,7 @@
   },
   {
    "image": "art/parts/carina-meshy-1/sheets/r2-walk.webp",
-   "caption": "carina-2-r2 in the walk from the side, frames 1 to 26 of Emi's walk on our rig: no gap or crease at the waist, and the trousers follow the legs."
+   "caption": "Earlier fitted-rig diagnostic: walk frames 1 to 26 retained in sequence. Its backward knee bending was found in the full-cycle joint check, so the native rig below replaces it."
   },
   {
    "image": "art/parts/carina-meshy-1/sheets/r2-walk-head.webp",
@@ -36,7 +48,7 @@
   },
   {
    "image": "art/parts/carina-meshy-1/r2/close/meshyrig-denim/body/y45.png",
-   "caption": "Later rig attempt: the same edited model with Meshy's own skeleton, repaired weights and walk/run/sit clips. Retained for comparison, not installed. The sit clip cost 3 Meshy credits before recovery; no credits spent during recovery."
+   "caption": "Installed rig: the same edited model with Meshy's native skeleton, repaired weights and walk/run/sit clips. The earlier fitted rig bent the knees backward during part of the walk; this one keeps forward knee flexion across the cycle. The sit clip cost 3 Meshy credits before recovery; no credits spent during recovery."
   }
  ],
  "options": [
@@ -48,7 +60,7 @@
     "art/parts/carina-meshy-1/r2/close/after-denim/body/y0.png",
     "art/parts/carina-meshy-1/r2/close/after-denim/head/y0.png"
    ],
-   "note": "Blender source edits: waist texture seam repaired; face and hair scaled uniformly to 0.85 around (0, 0.635, -0.0026); denim trousers via UV-island mask with shading retained. Same selected body and fitted rig with Emi's walk, run and sit; relaxed-3 idle; displayed at 1.12 m. Installed denim colour: sRGB 40, 60, 92."
+   "note": "Blender source edits: waist texture seam repaired; face and hair scaled uniformly to 0.85 around (0, 0.635, -0.0026); denim trousers via UV-island mask with shading retained. Same selected body, native Meshy skeleton, repaired weights and its walk, run and sit; relaxed-3 idle; displayed at 1.12 m. Installed denim colour: sRGB 40, 60, 92."
   },
   {
    "id": "carina-2-r2-grey",
@@ -58,7 +70,7 @@
     "art/parts/carina-meshy-1/r2/close/after-grey/body/y0.png",
     "art/parts/carina-meshy-1/r2/close/after-grey/head/y0.png"
    ],
-   "note": "Blender source edits: waist texture seam repaired; face and hair scaled uniformly to 0.85 around (0, 0.635, -0.0026); grey trousers via UV-island mask with shading retained. Same selected body and fitted rig with Emi's walk, run and sit; relaxed-3 idle; displayed at 1.12 m. Alternative grey colour: sRGB 122, 122, 124."
+   "note": "Blender source edits: waist texture seam repaired; face and hair scaled uniformly to 0.85 around (0, 0.635, -0.0026); grey trousers via UV-island mask with shading retained. Same selected body and fitted rig with Emi's walk, run and sit; relaxed-3 idle; displayed at 1.12 m. Alternative grey colour: sRGB 122, 122, 124. Colour comparison only: this saved grey version retains the earlier fitted rig."
   }
  ],
  "links": [

@@ -1,43 +1,12 @@
 #!/bin/sh
-# Carina's game files (reviews/carina-meshy-1, carina-2 round 2) from her rig of ours (rig.py, as Rei's): her carina-2
-# model after the round-2 Blender edits (fix_bl.py through r2.sh: the waist seam, the head at 0.85, dark denim
-# trousers) with the game's Meshy skeleton placed in her body and Emi's walk, run and Chair_Sit_Idle_F clips, each with
-# the embedded texture taken out (game3d/tools/slim_glb.py); base.webp is that model's texture. Then the approved
-# relaxed-3 idle is baked onto the rig, as for the others (rei-rig-1/install.sh; the server on 8771 must be up).
-# Run r2.sh models first.
-#   sh art/candidates/carina-meshy-1/install.sh        (run from the worktree root)
-set -e
-HERE=art/candidates/carina-meshy-1
-M=/home/jorgen/repo/japanese/art/parts/carina-meshy-1
-G=game3d/assets/characters/carina
-PY=~/ai/sd/venv/bin/python
-WT=$(pwd)
-SRC=$M/r2/model/carina-2r2-denim.glb
-mkdir -p "$G" $M/r2/rig
-rm -f "$G"/*.json "$G"/idle.glb
-for c in walk run sit; do
-  $PY $HERE/rig.py $SRC "$WT/game3d/assets/characters/emi/$c.glb" $M/r2/rig/carina2r2-denim-$c.glb model=carina-2
-done
-R=$M/r2/rig/carina2r2-denim
-python3 game3d/tools/slim_glb.py $R-walk.glb "$G/walk.glb" $R-run.glb "$G/run.glb" $R-sit.glb "$G/sit.glb"
-$PY - $SRC "$G/base.webp" <<'EOF'
-import io, json, struct, sys
-from PIL import Image
-b = open(sys.argv[1], 'rb').read(); n = struct.unpack('<I', b[12:16])[0]; j = json.loads(b[20:20 + n]); blob = b[28 + n:]
-bv = j['bufferViews'][j['images'][0]['bufferView']]
-im = Image.open(io.BytesIO(blob[bv.get('byteOffset', 0):bv.get('byteOffset', 0) + bv['byteLength']])).convert('RGB')
-im.save(sys.argv[2], quality=90, method=6)
-EOF
-# the approved idle, baked onto her rig (the exporter reads the creator's source models through the served worktree;
-# it also rewrites Eric's and Mio's idles, which stay as committed)
-S=/home/jorgen/repo/japanese/art/parts/src
-mkdir -p art/parts/src/mio art/parts/candidates
-LINKS="art/parts/src/eric art/parts/src/mio/mesh.glb art/parts/src/mio/tex.webp art/parts/candidates/idle-neutral-3.glb"
-ln -sfn $S/eric art/parts/src/eric; ln -sf $S/mio/mesh.glb art/parts/src/mio/mesh.glb; ln -sf $S/mio/tex.webp art/parts/src/mio/tex.webp
-ln -sf /home/jorgen/repo/japanese/art/parts/candidates/idle-neutral-3.glb art/parts/candidates/idle-neutral-3.glb
-SOURCE_BASE="http://127.0.0.1:8771/${WT#/home/jorgen/repo/japanese/}/" \
-  IDLE_SOURCE=/home/jorgen/repo/japanese/art/parts/candidates/idle-neutral-3.glb \
-  node tools/characters/export-approved-idle.mjs carina || { rm -f $LINKS; exit 1; }
-rm -f $LINKS
-git checkout game3d/assets/characters/relaxed-idle-eric.json game3d/assets/characters/relaxed-idle-mio.json
-ls -la "$G"
+# Install the saved, corrected Carina model on its native Meshy rig. The earlier
+# fitted rig is retained in r2/viewer/denim for diagnostics; it hyperextends knees.
+# Run r2.sh models and meshyrig.sh denim first if rebuilding from source.
+set -eu
+SRC=art/parts/carina-meshy-1/r2/meshyrig/denim
+DST=game3d/assets/characters/carina
+mkdir -p "$DST"
+for file in walk.glb run.glb sit.glb base.webp; do cp "$SRC/$file" "$DST/$file"; done
+# The separately tracked approved idle is retained; its donor stance is under a
+# shared cast review. Re-export it through tools/characters/export-approved-idle.mjs
+# when that source is corrected.
