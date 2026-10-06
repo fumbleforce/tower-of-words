@@ -8,7 +8,7 @@ import { PLACE_NAMES } from './places/definitions.js';
 import { LAST_DAY, nextDaySave } from './days.js';
 import { MC, isPlayer } from './mc.js';
 
-const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three' };
+const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three', 4: 'Day four' };
 const SAVE_KEY = 'amakawa-day1-save',
   CONTINUE_FLAG = 'amakawa-continue'; // menu.js: a reload with this set continues straight into the save
 
@@ -100,7 +100,13 @@ export async function showEnd(game) {
   // the scene fades out first, then the card comes in (QA round 1: the card faded in over live play)
   document.body.classList.add('ending');
   await new Promise((r) => setTimeout(r, 700));
-  ui.showEnd(endHTML(game, { photos: (window.__shell && window.__shell.photos) || {}, outro, ticket }));
+  ui.showEnd(
+    endHTML(game, {
+      photos: (window.__shell && window.__shell.photos) || {},
+      outro,
+      ticket,
+    }),
+  );
   const b = document.querySelector('#end .again');
   b.onclick = () => {
     document.body.classList.add('reloading');

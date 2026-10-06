@@ -1,6 +1,6 @@
 # Day 4
 
-Sunday 4 October. Story authored; physical integration, voices and rendered playthroughs remain to build. The [story set](../../../../game3d/story/day4/index.js) contains the open routes, routine, optional stops, tennis session and two new repair requests. Its [build contract](../../../../game3d/story/day4/README.md#build-contract-for-claude) specifies staging and save behaviour. Adding these files does not enable day 4.
+Sunday 4 October. Story and physical integration are implemented; final rendered checks and voice generation are in progress. The [story set](../../../../game3d/story/day4/index.js) contains the open routes, routine, optional stops, tennis session and two new repair requests. Its [build contract](../../../../game3d/story/day4/README.md#build-contract-for-claude) specifies staging and save behaviour. Day 4 remains gated by `LAST_DAY` until that validation finishes.
 
 ## Cast
 
@@ -28,7 +28,7 @@ At the court, Rei demonstrates one press adding two points. The player reseats t
 
 | Word | By | Node |
 |---|---|---|
-| `isshoni` (to build) | `aoi` | `d4_together` |
+| `isshoni` | `aoi` | `d4_together` |
 
 The invitation's word lesson is optional. Known `ikitai` can be combined with it; unknown `ikitai` is not assumed. The inherited printer lesson remains available separately after an ordinary print.
 
@@ -41,4 +41,4 @@ The invitation's word lesson is optional. Known `ikitai` can be combined with it
 | `day4/gym.js`, `day4/fan.js` | Deferred booking repair, fan request and printer lesson (`d3_booking`, `d4_fan`, `d4_printer`). |
 | Other files in `day4/` | Routes, deferred station work and optional place conversations. |
 
-The separate [finds and personal-scene packs](../early-optional/README.md) have independent eligibility. All day-4 staging remains to build.
+The separate [finds and personal-scene packs](../early-optional/README.md) have independent eligibility. Sunday staging lives in `game3d/js/places/day4/`, including physical repair state, court play, optional props and checkpoint restoration.

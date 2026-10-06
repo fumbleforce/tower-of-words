@@ -86,7 +86,9 @@ export function gymDesk(game, { w, cast }) {
   screen.position.set(sx, top + 0.22, sz);
   screen.rotation.y = ry - Math.PI;
   w.root.add(screen);
+  let screenState = 'frozen';
   const show = (k) => {
+    screenState = k;
     for (const [n, g] of Object.entries(screens)) g.visible = n === k;
   };
   // the reset button: red, under the terminal's front edge
@@ -175,6 +177,22 @@ export function gymDesk(game, { w, cast }) {
   }
   return {
     restore,
+    snapshot: () => ({
+      screen: screenState,
+      sheet: {
+        visible: sheet.visible,
+        position: sheet.position.toArray(),
+        rotation: sheet.rotation.toArray(),
+      },
+    }),
+    load(s) {
+      if (!s) return;
+      show(s.screen);
+      w.root.attach(sheet);
+      sheet.visible = s.sheet.visible;
+      sheet.position.fromArray(s.sheet.position);
+      sheet.rotation.fromArray(s.sheet.rotation);
+    },
     hooks: { bookingRepair },
     winterClub,
     kotodamaTargets: (id) => (id === 'booking_terminal' ? [screen] : null),

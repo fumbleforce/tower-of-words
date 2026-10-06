@@ -17,6 +17,7 @@ import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
 import { installTickets } from '../tickets/index.js';
 import { installClubs, withClubs, clubArrival } from '../clubs/index.js';
 import { installDay3 } from './day3/place.js';
+import { attachSunday, installDay4 } from './day4/index.js';
 import { noteBenches } from './day3/seats.js';
 import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
 import { installCreatures } from '../creatures/index.js';
@@ -58,6 +59,7 @@ export function createPlaceLifecycle(
   installTickets(game); // the repair tickets and their app on Eric's computers (tickets/index.js)
   installClubs(game); // the clubs and the notice board (clubs/index.js)
   installDay3(game); // Saturday's people and scenes, the story's day3Setup (places/day3/)
+  installDay4(game);
   watchPlacePlugins(game);
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
   setUrgent(() => !game.place || document.body.classList.contains('loading'));
@@ -66,6 +68,7 @@ export function createPlaceLifecycle(
       game.prepared[name] = (async () => {
         const story = await game.runner.load(name);
         const place = await PLACES[name](game, story);
+        attachSunday(game, place, name);
         assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
         place.name = name;
         noteBenches(place); // its benches' seats, before the draw-call pass merges them (places/day3/seats.js)

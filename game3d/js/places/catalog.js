@@ -1,106 +1,107 @@
+import { extendSundayCatalog } from './day4/catalog.js';
 import { TRAIN_DETAILS } from './catalog-train.js';
 import { SOUTH_HALF_DETAILS } from './catalog-south.js';
 import { OFFICE_DETAILS } from './catalog-office.js';
 // Labels and registration IDs shared by place factories and structural checks.
 export const PLACE_DETAILS = {
   train: TRAIN_DETAILS,
-  'gate': {
-    'things': {
-      'guard': {
-        'label': 'Mr. Ishibashi',
-        'kind': 'person',
+  gate: {
+    things: {
+      guard: {
+        label: 'Mr. Ishibashi',
+        kind: 'person',
       },
-      'kuroda': {
-        'label': 'Mr. Hamada',
-        'kind': 'person',
+      kuroda: {
+        label: 'Mr. Hamada',
+        kind: 'person',
       },
-      'aoi': {
-        'label': 'Aoi',
-        'kind': 'person',
+      aoi: {
+        label: 'Aoi',
+        kind: 'person',
       },
-      'tama': {
-        'label': 'Tama',
-        'verb': 'Pet',
-        'kind': 'person small',
+      tama: {
+        label: 'Tama',
+        verb: 'Pet',
+        kind: 'person small',
       },
-      'reader_l': {
-        'label': 'Card reader',
-        'kind': 'thing',
+      reader_l: {
+        label: 'Card reader',
+        kind: 'thing',
       },
-      'reader_r': {
-        'label': 'Card reader',
-        'kind': 'thing',
+      reader_r: {
+        label: 'Card reader',
+        kind: 'thing',
       },
-      'gate': {
-        'label': 'Gate',
-        'kind': 'thing',
+      gate: {
+        label: 'Gate',
+        kind: 'thing',
       },
-      'desk': {
-        'label': 'Guard desk',
-        'kind': 'thing small',
+      desk: {
+        label: 'Guard desk',
+        kind: 'thing small',
       },
-      'guard_monitor': {
-        'label': 'Monitor',
-        'kind': 'thing small',
+      guard_monitor: {
+        label: 'Monitor',
+        kind: 'thing small',
       },
-      'counter': {
-        'label': 'Visitor counter',
-        'kind': 'thing small',
+      counter: {
+        label: 'Visitor counter',
+        kind: 'thing small',
       },
-      'signin': {
-        'label': 'Visitor book',
-        'kind': 'thing small',
+      signin: {
+        label: 'Visitor book',
+        kind: 'thing small',
       },
-      'lostfound': {
-        'label': 'Lost and found',
-        'kind': 'thing small',
+      lostfound: {
+        label: 'Lost and found',
+        kind: 'thing small',
       },
-      'screen': {
-        'label': 'Notice screen',
-        'kind': 'thing small',
+      screen: {
+        label: 'Notice screen',
+        kind: 'thing small',
       },
-      'kiosk': {
-        'label': 'Coffee machine',
-        'kind': 'thing small',
+      kiosk: {
+        label: 'Coffee machine',
+        kind: 'thing small',
       },
-      'bench_l': {
-        'label': 'Bench',
-        'kind': 'thing small',
+      bench_l: {
+        label: 'Bench',
+        kind: 'thing small',
       },
-      'bench_r': {
-        'label': 'Bench',
-        'kind': 'thing small',
+      bench_r: {
+        label: 'Bench',
+        kind: 'thing small',
       },
-      'poster_l': { 'label': 'Poster', 'kind': 'thing small', 'pin': 'near' }, // a flat line: its pin only when close
-      'poster_r': { 'label': 'Poster', 'kind': 'thing small', 'pin': 'near' }, // a flat line: its pin only when close
-      'lift': {
-        'label': 'Station exit',
-        'kind': 'thing',
+      poster_l: { label: 'Poster', kind: 'thing small', pin: 'near' }, // a flat line: its pin only when close
+      poster_r: { label: 'Poster', kind: 'thing small', pin: 'near' }, // a flat line: its pin only when close
+      lift: {
+        label: 'Station exit',
+        kind: 'thing',
       },
-      'entrance': {
-        'label': 'Entrance',
-        'kind': 'thing small',
+      entrance: {
+        label: 'Entrance',
+        kind: 'thing small',
       },
-      'plant': {
-        'label': 'Plant',
-        'kind': 'thing small',
+      plant: {
+        label: 'Plant',
+        kind: 'thing small',
       },
-      'bowl': {
-        'label': "Tama's bowl",
-        'kind': 'thing small',
+      bowl: {
+        label: "Tama's bowl",
+        kind: 'thing small',
       },
       // background office workers (lobby.js extras): talked to through their idle: lines only; the two past the gate
       // are talked to across it until it opens (reachAfter: reach-check.mjs lifts that walk-grid block for them)
-      'worker_a': { 'label': 'Office worker', 'kind': 'person', 'reachAfter': 'gate' },
-      'worker_b': { 'label': 'Office worker', 'kind': 'person', 'reachAfter': 'gate' },
-      'commuter_1': { 'label': 'Office worker', 'kind': 'person' },
-      'commuter_2': { 'label': 'Office worker', 'kind': 'person' },
-      'commuter_3': { 'label': 'Office worker', 'kind': 'person' },
+      worker_a: { label: 'Office worker', kind: 'person', reachAfter: 'gate' },
+      worker_b: { label: 'Office worker', kind: 'person', reachAfter: 'gate' },
+      commuter_1: { label: 'Office worker', kind: 'person' },
+      commuter_2: { label: 'Office worker', kind: 'person' },
+      commuter_3: { label: 'Office worker', kind: 'person' },
       // day 2: the two ways out, back to the platform and out to head office's forecourt
-      'platform_way': { 'label': 'To the platform', 'kind': 'thing', 'verb': 'Go' },
-      'forecourt_way': { 'label': 'Station exit', 'kind': 'thing', 'verb': 'Go' },
+      platform_way: { label: 'To the platform', kind: 'thing', verb: 'Go' },
+      forecourt_way: { label: 'Station exit', kind: 'thing', verb: 'Go' },
     },
-    'spots': [
+    spots: [
       'entrance_in',
       'bench_l',
       'bench_r',
@@ -113,10 +114,10 @@ export const PLACE_DETAILS = {
       'gate_lockers',
       'gate_staff_door',
     ],
-    'seats': ['bench_r', 'bench_l'],
-    'zones': ['arch', 'past_gate', 'lift_front', 'platform_way', 'forecourt_way'],
-    'people': ['guard', 'kuroda', 'aoi', 'rei', 'tama'],
-    'hooks': [
+    seats: ['bench_r', 'bench_l'],
+    zones: ['arch', 'past_gate', 'lift_front', 'platform_way', 'forecourt_way'],
+    people: ['guard', 'kuroda', 'aoi', 'rei', 'tama'],
+    hooks: [
       'reader',
       'gate',
       'cardOk',
@@ -179,8 +180,18 @@ export const PLACE_DETAILS = {
       street_gate: { label: 'To the street', kind: 'thing', verb: 'Go' }, // day 2: out to the east lane
       tama: { label: 'Tama', verb: 'Pet', kind: 'person small' }, // day 3, the afternoon: asleep (places/day3/)
       // in the hall, a look line each (story/dorm-building.js)
-      hall_board: { label: 'Notice board', kind: 'thing', verb: 'Read', pin: 'near' },
-      manager_window: { label: "Manager's window", kind: 'thing', verb: 'Look', pin: 'near' },
+      hall_board: {
+        label: 'Notice board',
+        kind: 'thing',
+        verb: 'Read',
+        pin: 'near',
+      },
+      manager_window: {
+        label: "Manager's window",
+        kind: 'thing',
+        verb: 'Look',
+        pin: 'near',
+      },
     },
     spots: ['plaza_entry', 'dorm_entry', 'hall', 'passage', 'bath'],
     seats: [],
@@ -201,10 +212,25 @@ export const PLACE_DETAILS = {
       // (story/dorm-building.js), their pins only when he's close
       stairs_up: { label: 'Upstairs', kind: 'thing', verb: 'Go up' },
       stairs_down: { label: 'Downstairs', kind: 'thing', verb: 'Go down' },
-      kitchen: { label: 'Shared kitchen', kind: 'thing', verb: 'Look', pin: 'near' },
-      notices: { label: 'Notice board', kind: 'thing', verb: 'Read', pin: 'near' },
+      kitchen: {
+        label: 'Shared kitchen',
+        kind: 'thing',
+        verb: 'Look',
+        pin: 'near',
+      },
+      notices: {
+        label: 'Notice board',
+        kind: 'thing',
+        verb: 'Read',
+        pin: 'near',
+      },
       laundry: { label: 'Laundry', kind: 'thing', verb: 'Look', pin: 'near' },
-      drinks: { label: 'Drinks machine', kind: 'thing', verb: 'Look', pin: 'near' },
+      drinks: {
+        label: 'Drinks machine',
+        kind: 'thing',
+        verb: 'Look',
+        pin: 'near',
+      },
       washing: { label: 'Washing', kind: 'thing', verb: 'Look', pin: 'near' },
       planters: { label: 'Planters', kind: 'thing', verb: 'Look', pin: 'near' },
     },
@@ -260,5 +286,7 @@ export const PLACE_DETAILS = {
   },
   office: OFFICE_DETAILS,
 };
+
+extendSundayCatalog(PLACE_DETAILS);
 
 export const SHARED_THINGS = { mio: { label: 'Mio', kind: 'person' } };

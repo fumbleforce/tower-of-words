@@ -18,6 +18,10 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
     // Schedule hooks may set visibility flags; saved progression remains authoritative.
     for (const key of Object.keys(flags)) delete flags[key];
     Object.assign(flags, saved.flags || {});
+    if (sim.day === 4) {
+      await game.hooks.day4Setup();
+      game.place.restoreState?.(saved);
+    }
     ui.refreshWords();
     ui.refreshPeople(sim.met.size);
     ui.refreshBag(sim);

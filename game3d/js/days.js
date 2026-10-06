@@ -5,12 +5,29 @@
 // the state of being somewhere (the place's world, a running scene, a trip, one-off triggers) is cleared.
 import { STORIES as DAY2_STORIES } from '../story/day2/index.js';
 import { STORIES as DAY3_STORIES } from '../story/day3/index.js';
+import { STORIES as DAY4_STORIES } from '../story/day4/index.js';
 
 export const DAYS = {
   1: { dir: '', start: 'train', period: 'early' },
-  2: { dir: 'day2/', start: 'dorms', period: 'morning', files: Object.keys(DAY2_STORIES) },
+  2: {
+    dir: 'day2/',
+    start: 'dorms',
+    period: 'morning',
+    files: Object.keys(DAY2_STORIES),
+  },
   // Saturday: a free day (story/day3/README.md), its places from story/day3/index.js
-  3: { dir: 'day3/', start: 'dorms', period: 'morning', files: Object.keys(DAY3_STORIES) },
+  3: {
+    dir: 'day3/',
+    start: 'dorms',
+    period: 'morning',
+    files: Object.keys(DAY3_STORIES),
+  },
+  4: {
+    dir: 'day4/',
+    start: 'dorms',
+    period: 'morning',
+    files: Object.keys(DAY4_STORIES),
+  },
 };
 export const LAST_DAY = 3; // the last day a player plays on into; ?day=N starts any day in DAYS
 export const dayOf = (n) => DAYS[n] || DAYS[1];
@@ -40,7 +57,8 @@ export function nextDaySave(prev) {
 export function sampleDayEnd(day, history = 'mio') {
   const h = String(history || 'mio').split(',');
   const one = sampleDayOneEnd(h.find((x) => ['mio', 'mori', 'cold'].includes(x)) || 'mio');
-  return day <= 2 ? one : sampleDayTwoEnd(one, h.includes('keep') ? 'keep' : 'order');
+  const two = sampleDayTwoEnd(one, h.includes('keep') ? 'keep' : 'order');
+  return day <= 2 ? one : day === 3 ? two : { ...two, day: 3, flags: { ...two.flags, d3_complete: true } };
 }
 // a plain finished day 2 on top of a finished day 1: the door report sent, the brief, the shift and the party done
 function sampleDayTwoEnd(one, report) {
@@ -64,7 +82,14 @@ function sampleDayTwoEnd(one, report) {
     ticketread_T0001: true,
     ticketread_T0002: true,
   };
-  return { ...one, day: 2, flags, known: [...one.known, 'tabetai'], yen: one.yen + 3000, ended: true };
+  return {
+    ...one,
+    day: 2,
+    flags,
+    known: [...one.known, 'tabetai'],
+    yen: one.yen + 3000,
+    ended: true,
+  };
 }
 // ?day=2 with no day-1 save of one's own: a plain finished day 1 (the magic way through the gate, lunch with Mio).
 // &history=mori takes lunch with Mori instead; &history=cold, lunch alone and no promise from Mio.
@@ -86,7 +111,14 @@ export function sampleDayOneEnd(history = 'mio') {
     known,
     seen: [],
     found: [],
-    taught: { ohayo: 'mio', yoroshiku: 'mio', sumimasen: 'mio', matte: 'mio', akete: 'kuroda', ugoite: 'mio' },
+    taught: {
+      ohayo: 'mio',
+      yoroshiku: 'mio',
+      sumimasen: 'mio',
+      matte: 'mio',
+      akete: 'kuroda',
+      ugoite: 'mio',
+    },
     met: ['mio', 'guard', 'kuroda', 'emi', 'kenji', 'mori'],
     inv: [],
     yen: 1000,

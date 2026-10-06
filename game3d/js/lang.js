@@ -1,18 +1,58 @@
 import * as DAY2 from '../story/day2/words.js';
 import * as DAY3 from '../story/day3/words.js';
+import * as DAY4 from '../story/day4/words.js';
 import * as TICKETS from './tickets/words.js';
 import { MC } from './mc.js';
 // The few Japanese words in day one. Every one is shown with its reading and English, every time.
 // The four commands are the ones Mio can say to make things happen.
 
 export const WORDS = {
-  matte: { ja: '待って', alias: ['まって'], ro: 'matte', en: 'wait', cmd: true, voice: 'eric-matte' },
-  akete: { ja: '開けて', alias: ['あけて'], ro: 'akete', en: 'open', cmd: true, voice: 'eric-akete' },
+  matte: {
+    ja: '待って',
+    alias: ['まって'],
+    ro: 'matte',
+    en: 'wait',
+    cmd: true,
+    voice: 'eric-matte',
+  },
+  akete: {
+    ja: '開けて',
+    alias: ['あけて'],
+    ro: 'akete',
+    en: 'open',
+    cmd: true,
+    voice: 'eric-akete',
+  },
   kite: { ja: '来て', ro: 'kite', en: 'come', cmd: true, voice: 'eric-kite' },
-  ugoite: { ja: '動いて', alias: ['うごいて'], ro: 'ugoite', en: 'work, move', cmd: true, voice: 'eric-ugoite' },
-  irete: { ja: '入れて', ro: 'irete', en: 'pour, make (tea)', cmd: true, voice: 'eric-irete' },
-  dashite: { ja: '出して', ro: 'dashite', en: 'give it out', cmd: true, voice: 'eric-dashite' },
-  tomatte: { ja: '止まって', ro: 'tomatte', en: 'stop', cmd: true, voice: 'eric-tomatte' },
+  ugoite: {
+    ja: '動いて',
+    alias: ['うごいて'],
+    ro: 'ugoite',
+    en: 'work, move',
+    cmd: true,
+    voice: 'eric-ugoite',
+  },
+  irete: {
+    ja: '入れて',
+    ro: 'irete',
+    en: 'pour, make (tea)',
+    cmd: true,
+    voice: 'eric-irete',
+  },
+  dashite: {
+    ja: '出して',
+    ro: 'dashite',
+    en: 'give it out',
+    cmd: true,
+    voice: 'eric-dashite',
+  },
+  tomatte: {
+    ja: '止まって',
+    ro: 'tomatte',
+    en: 'stop',
+    cmd: true,
+    voice: 'eric-tomatte',
+  },
   honsha: { ja: '本社', ro: 'honsha', en: 'head office' },
   tsugiwa: { ja: 'つぎは', ro: 'tsugi wa', en: 'next' },
   ohayo: {
@@ -39,7 +79,11 @@ export const WORDS = {
     phrase: true,
     voice: 'eric-sumimasen',
   },
-  otsukare: { ja: 'お疲れさまです', ro: 'otsukaresama desu', en: 'the everyday hello at work' },
+  otsukare: {
+    ja: 'お疲れさまです',
+    ro: 'otsukaresama desu',
+    en: 'the everyday hello at work',
+  },
   // Eric never says it, so the replay is Mio's slow word clip (audio/word-gaijin.mp3), not an eric- clip
   gaijin: { ja: '外人', ro: 'gaijin', en: 'foreigner', voice: 'word-gaijin' },
   kotodama: { ja: '言霊', ro: 'kotodama', en: 'words with power in them' },
@@ -47,6 +91,7 @@ export const WORDS = {
   ...DAY2.WORDS,
   // day 3's (story/day3/words.js): koko, typed at the plaza's map
   ...DAY3.WORDS,
+  ...DAY4.WORDS,
   // the ticket system's labels (tickets/words.js): learned by tapping them in the app, never said
   ...TICKETS.WORDS,
 };
@@ -66,7 +111,12 @@ export const NAMES = [
   { ja: 'レイ', en: 'Rei' },
   { ja: 'タマ', en: 'Tama' },
 ];
-export const HONORIFICS = { さん: 'san', くん: 'kun', ちゃん: 'chan', 様: 'sama' };
+export const HONORIFICS = {
+  さん: 'san',
+  くん: 'kun',
+  ちゃん: 'chan',
+  様: 'sama',
+};
 const KANJI = /[\u3400-\u9fff々]/,
   KATA = /[\u30a0-\u30ff]/;
 // the name that starts at text[i] as a whole word (森 but not 森林, レイ but not キレイ), with its honorific
@@ -88,16 +138,45 @@ export const BASE = {
   akete: { form: 'te', ja: '開ける', ro: 'akeru', en: 'to open' },
   kite: { form: 'te', ja: '来る', ro: 'kuru', en: 'to come' },
   ugoite: { form: 'te', ja: '動く', ro: 'ugoku', en: 'to move, to run' },
-  irete: { form: 'te', ja: '入れる', ro: 'ireru', en: 'to put in, to make (tea)' },
-  dashite: { form: 'te', ja: '出す', ro: 'dasu', en: 'to put out, to hand over' },
+  irete: {
+    form: 'te',
+    ja: '入れる',
+    ro: 'ireru',
+    en: 'to put in, to make (tea)',
+  },
+  dashite: {
+    form: 'te',
+    ja: '出す',
+    ro: 'dasu',
+    en: 'to put out, to hand over',
+  },
   tomatte: { form: 'te', ja: '止まる', ro: 'tomaru', en: 'to stop' },
-  ohayo: { form: 'set', note: 'A fixed greeting. Gozaimasu makes it polite; with friends, just ohayō.' },
-  yoroshiku: { form: 'masu', lead: 'onegaishimasu: ', ja: 'お願いする', ro: 'onegai suru', en: 'to ask a favour' },
-  sumimasen: { form: 'set', note: 'A fixed phrase. The -masen ending is the polite way to say "not".' },
-  koko: { form: 'set', note: 'A place word: koko is here, by the one speaking.' },
+  ohayo: {
+    form: 'set',
+    note: 'A fixed greeting. Gozaimasu makes it polite; with friends, just ohayō.',
+  },
+  yoroshiku: {
+    form: 'masu',
+    lead: 'onegaishimasu: ',
+    ja: 'お願いする',
+    ro: 'onegai suru',
+    en: 'to ask a favour',
+  },
+  sumimasen: {
+    form: 'set',
+    note: 'A fixed phrase. The -masen ending is the polite way to say "not".',
+  },
+  koko: {
+    form: 'set',
+    note: 'A place word: koko is here, by the one speaking.',
+  },
   ...DAY2.BASE,
 };
-const FORM_NAME = { te: '-te form', masu: 'polite -masu form', ...DAY2.FORM_NAME };
+const FORM_NAME = {
+  te: '-te form',
+  masu: 'polite -masu form',
+  ...DAY2.FORM_NAME,
+};
 // what each ending does, in a line (shown once above the words that use it)
 export const FORM_NOTE = {
   ...DAY2.FORM_NOTE,

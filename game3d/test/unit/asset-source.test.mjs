@@ -75,7 +75,7 @@ test('all asset metadata survives formatting of every runtime and story source i
   const expected = assetSourceData(read);
   // and day 2's and day 3's words, which lang.js spreads into WORDS
   const files = [...assetSourceFiles, ...STORY_FILES.map(name => `game3d/story/${name}.js`), 'game3d/story/day2/words.js',
-    'game3d/story/day3/words.js'];
+    'game3d/story/day3/words.js', 'game3d/story/day4/words.js'];
   for (const singleQuote of [true, false]) {
     const formatted = {};
     for (const file of files) formatted[file] = await format(read(file), { parser: 'babel', singleQuote, printWidth: 80 });

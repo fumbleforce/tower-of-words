@@ -53,7 +53,9 @@ export function poolClub(game, { root, cast }) {
   const list = rbox(0.21, 0.01, 0.29, '#f5f3ec', { r: 0.002 });
   const floats = new THREE.Group();
   for (let i = 0; i < 5; i++) {
-    const f = rbox(0.42, 0.06, 0.3, ['#f0c33a', '#3a8fd0', '#e45a4a'][i % 3], { r: 0.02 });
+    const f = rbox(0.42, 0.06, 0.3, ['#f0c33a', '#3a8fd0', '#e45a4a'][i % 3], {
+      r: 0.02,
+    });
     f.position.set((i % 2) * 0.05, i * 0.065, 0);
     floats.add(f);
   }
@@ -91,8 +93,8 @@ export function poolClub(game, { root, cast }) {
   };
   // the group as the story has got to it, on every arrival and Continue (no timers: each state just set)
   function arrange() {
-    goggles.visible = sim.period === 'evening' && !flags.d3_goggles_returned && !!flags.club_swimming;
-    if (sim.period !== 'evening') {
+    goggles.visible = sim.day === 3 && sim.period === 'evening' && !flags.d3_goggles_returned && !!flags.club_swimming;
+    if (sim.day !== 3 || sim.period !== 'evening') {
       for (const o of [bags, list, floats, ...towels]) o.visible = false;
       for (const id of ['emi', 'kuro', 'attendant', 'member']) cast.hide(id);
       return;
@@ -101,7 +103,12 @@ export function poolClub(game, { root, cast }) {
     cast.put('attendant', ATTENDANT, [ATTENDANT[0] + 0.7, ATTENDANT[1] - 0.2]);
     if (flags.d3_swim_done) {
       // resting after the swim: Emi and Kuro on the south bench with their towels, the bags with the attendant
-      cast.seat('emi', { x: SEAT_S[0] + 0.02, z: SEAT_S[1] + 0.62, top: TOP, ry: EAST });
+      cast.seat('emi', {
+        x: SEAT_S[0] + 0.02,
+        z: SEAT_S[1] + 0.62,
+        top: TOP,
+        ry: EAST,
+      });
       cast.put('kuro', KURO_REST, [SEAT_S[0] + 0.6, SEAT_S[1]]);
       cast.put('member', [SEAT_N[0] + 1.2, SEAT_N[1] - 0.5], [SEAT_N[0], SEAT_N[1]]);
       setAt(bags, BAGS_ATT, 0.12);
@@ -214,7 +221,9 @@ export function poolClub(game, { root, cast }) {
       if (state === 'handover') {
         const emi = who('emi');
         setAt(list, [SEAT_S[0] + 0.05, SEAT_S[1] + 0.5], 0.36); // the list on the bench, dry
-        await walkRig(game, emi, [ATTENDANT[0] - 0.7, ATTENDANT[1] - 0.1], { speed: 1.1 });
+        await walkRig(game, emi, [ATTENDANT[0] - 0.7, ATTENDANT[1] - 0.1], {
+          speed: 1.1,
+        });
         await faceRig(game, emi, ATTENDANT);
         await faceRig(
           game,
@@ -224,7 +233,9 @@ export function poolClub(game, { root, cast }) {
         sfx('tap');
         setAt(bags, BAGS_ATT, 0.12);
         await game.wait(400);
-        await walkRig(game, emi, [STEPS_TOP[0] - 0.7, STEPS_TOP[1] - 0.3], { speed: 1.1 });
+        await walkRig(game, emi, [STEPS_TOP[0] - 0.7, STEPS_TOP[1] - 0.3], {
+          speed: 1.1,
+        });
         return;
       }
       if (state === 'bags') {
@@ -263,7 +274,12 @@ export function poolClub(game, { root, cast }) {
           await game.hooks.sit({ who: 'eric', at: 'deck_bench_s' });
         } else if (!game.player.seated) await game.hooks.sit({ who: 'eric', at: 'deck_bench_s' });
         // Emi beside the player on the bench, Kuro at its end with her towel (the player's own place is its middle)
-        cast.seat('emi', { x: SEAT_S[0] + 0.02, z: SEAT_S[1] + 0.62, top: TOP, ry: EAST });
+        cast.seat('emi', {
+          x: SEAT_S[0] + 0.02,
+          z: SEAT_S[1] + 0.62,
+          top: TOP,
+          ry: EAST,
+        });
         cast.put('kuro', KURO_REST, [SEAT_S[0] + 0.6, SEAT_S[1]]);
         towels.forEach((t, i) =>
           setAt(
@@ -289,7 +305,9 @@ export function poolClub(game, { root, cast }) {
       }
       if (state === 'goggles') {
         const m = who('member');
-        await walkRig(game, m, [FENCE[0] + 0.7, FENCE[1] - 0.6], { speed: 1.2 });
+        await walkRig(game, m, [FENCE[0] + 0.7, FENCE[1] - 0.6], {
+          speed: 1.2,
+        });
         await faceRig(game, m, FENCE);
         await game.wait(300);
         goggles.visible = false;

@@ -101,7 +101,7 @@ export function gymPlace(game) {
     seats: { gym_bench_n: w.seats[1], gym_bench_s: w.seats[0] },
     people: { attendant: d3.people.attendant, mori: d3.people.mori, emi: d3.people.emi, kuro: d3.people.kuro },
     zones: {},
-    hooks: { bookingRepair: desk.hooks.bookingRepair },
+    hooks: { bookingRepair: desk.hooks.bookingRepair, fanRepair: (a) => P.sunday.hooks.fanRepair(a) },
     day3: (a) => d3.setup(P, a),
     kotodamaTargets: desk.kotodamaTargets,
     fit(aspect) {
@@ -114,8 +114,11 @@ export function gymPlace(game) {
     update(dt) {
       d3.update(dt);
     },
-    snapshotState: save.snapshot,
-    restoreState: save.restore,
+    snapshotState: () => ({ ...save.snapshot(), booking: desk.snapshot() }),
+    restoreState(saved) {
+      save.restore(saved);
+      desk.load(saved.world?.booking);
+    },
     // in through the main doors, walking north onto the tiles; out the same way
     tripIn: (g) => walkIn(g, cam, d.edge, d.in, Math.PI),
     tripOutTo: {

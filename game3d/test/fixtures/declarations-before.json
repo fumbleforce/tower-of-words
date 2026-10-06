@@ -547,6 +547,10 @@
           "label": "Bicycle",
           "kind": "thing",
           "verb": "Stand up"
+        },
+        "kuroda": {
+          "label": "Mr. Hamada",
+          "kind": "person"
         }
       },
       "spots": [
@@ -582,7 +586,8 @@
       ],
       "people": [
         "kuro",
-        "tama"
+        "tama",
+        "kuroda"
       ],
       "hooks": [
         "liftOpen",
@@ -770,6 +775,10 @@
         "karaoke_desk": {
           "label": "Front desk",
           "kind": "thing"
+        },
+        "kuroda": {
+          "label": "Mr. Hamada",
+          "kind": "person"
         }
       },
       "spots": [
@@ -786,7 +795,9 @@
         "karaoke_bench"
       ],
       "zones": [],
-      "people": [],
+      "people": [
+        "kuroda"
+      ],
       "hooks": []
     },
     "karaoke_booth": {
@@ -925,6 +936,14 @@
           "label": "Common room",
           "kind": "thing",
           "verb": "Go in"
+        },
+        "kuro": {
+          "label": "Receptionist",
+          "kind": "person"
+        },
+        "tama": {
+          "label": "Tama",
+          "kind": "person"
         }
       },
       "spots": [
@@ -948,7 +967,9 @@
       "people": [
         "kuroda",
         "emi",
-        "aoi"
+        "aoi",
+        "kuro",
+        "tama"
       ],
       "hooks": [
         "coastVisit"
@@ -980,6 +1001,10 @@
         "kenji": {
           "label": "Kenji",
           "kind": "person"
+        },
+        "mori": {
+          "label": "Mr. Mori",
+          "kind": "person"
         }
       },
       "spots": [
@@ -1000,7 +1025,8 @@
       ],
       "zones": [],
       "people": [
-        "kenji"
+        "kenji",
+        "mori"
       ],
       "hooks": []
     },
@@ -1042,6 +1068,19 @@
         "rei": {
           "label": "Tennis player",
           "kind": "person"
+        },
+        "aoi": {
+          "label": "Woman from the train",
+          "kind": "person"
+        },
+        "member": {
+          "label": "Club member",
+          "kind": "person"
+        },
+        "bench_ball": {
+          "label": "Ball by the bench",
+          "kind": "thing small",
+          "verb": "Look"
         }
       },
       "spots": [
@@ -1070,9 +1109,14 @@
         "west_exit"
       ],
       "people": [
-        "rei"
+        "rei",
+        "aoi",
+        "member"
       ],
-      "hooks": []
+      "hooks": [
+        "courtRepair",
+        "tennisSession"
+      ]
     },
     "pool": {
       "things": {
@@ -1100,6 +1144,11 @@
         "pool_goggles": {
           "label": "Goggles",
           "kind": "thing small"
+        },
+        "pool_notice": {
+          "label": "Pool notice",
+          "kind": "thing small",
+          "verb": "Read"
         }
       },
       "spots": [
@@ -1202,7 +1251,8 @@
         "kuro"
       ],
       "hooks": [
-        "bookingRepair"
+        "bookingRepair",
+        "fanRepair"
       ]
     },
     "office_quarter": {
