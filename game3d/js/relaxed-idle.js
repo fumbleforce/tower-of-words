@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-// Frozen export of the exact relaxed-3 approval, in each game rig's native axes.
+// Baked relaxed-3 motion, with native cast stance adapted to each body's rest frames.
 export async function loadRelaxedIdle(rig, version = '') {
   const url = new URL(`../assets/characters/relaxed-idle-${rig}.json`, import.meta.url);
   const response = await fetch(url.href + version);

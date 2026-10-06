@@ -1,4 +1,5 @@
-// Bake the approved creator idle onto the original game rigs, preserving its skin deformation.
+// Bake the creator idle onto game rigs. New cast keep their own leg/spine rest
+// frames: copying Eric's absolute stance makes their shins and torso lean back.
 // Run with main served at 8771; SOURCE_BASE may point at another checkout with the candidate assets.
 import fs from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -20,9 +21,10 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
   );
   await page.goto(sourceBase + 'approved-idle-export');
   return page.evaluate(
-    async ({ base, extraIds }) => {
+    async ({ base, extraIds, characterDir }) => {
       const THREE = await import('three');
       const { loadLibrary, loadSource, makeRig, clipsFor } = await import(base + 'tools/creator/recipe.js');
+      const { retargetRotationValues } = await import(base + 'tools/creator/retarget.js');
       const { GLTFLoader } = await import(base + 'game3d/vendor/loaders/GLTFLoader.js');
       const lib = await loadLibrary();
       lib.anims = { approved: 'candidates/idle-neutral-3.glb' };
@@ -42,8 +44,8 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
           lib.src[id] = await loadSource(
             id,
             {
-              glb: `../../game3d/assets/characters/${id}/walk.glb`,
-              tex: `../../game3d/assets/characters/${id}/base.webp`,
+              glb: `../../${characterDir}${id}/walk.glb`,
+              tex: `../../${characterDir}${id}/base.webp`,
             },
             lib.src[lib.reference],
           );
@@ -55,11 +57,18 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
         if (nativeCast) for (const name of ['Head', 'head_end', 'headfront']) host.B[name].copy(ref.B[name]);
         const { rig, bones } = makeRig(host, ref);
         const clip = (await clipsFor(lib, host)).approved;
+        // Preserve the approved relaxed arms. Their pose is intentional, whereas
+        // the stance must account for each mesh's differently placed joints.
+        if (nativeCast) for (const track of clip.tracks) {
+          const [bone, property] = track.name.split('.');
+          if (property === 'quaternion' && !/Shoulder|Arm|Hand/.test(bone))
+            track.values = retargetRotationValues(track.values, bone, host, ref);
+        }
         const mixer = new THREE.AnimationMixer(rig);
         mixer.clipAction(clip).play();
         const gltf = await new GLTFLoader().loadAsync(
           base +
-            (['eric', 'mio'].includes(id) ? `game3d/assets/${id}/walk.glb` : `game3d/assets/characters/${id}/walk.glb`),
+            (['eric', 'mio'].includes(id) ? `game3d/assets/${id}/walk.glb` : `${characterDir}${id}/walk.glb`),
         );
         const model = gltf.scene;
         model.updateMatrixWorld(true);
@@ -146,12 +155,14 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
           clip: THREE.AnimationClip.toJSON(nativeClip),
           maxMatrixError,
           floorLift: -minY,
+          stance: nativeCast ? 'host-rest-frames' : 'original-approved',
         };
       }
       return out;
     },
     {
       base: sourceBase,
+      characterDir: process.env.CHARACTER_DIR || 'game3d/assets/characters/',
       extraIds: process.argv.slice(2).length ? process.argv.slice(2) : ['mori'],
     },
   );
@@ -162,6 +173,7 @@ for (const [id, result] of Object.entries(results)) {
     sourceSha256: sha256,
     maxMatrixError: result.maxMatrixError,
     floorLift: result.floorLift,
+    stance: result.stance,
   });
   fs.writeFileSync(new URL(`relaxed-idle-${id}.json`, output), JSON.stringify(result.clip) + '\n');
   console.log(`${id}: ${result.clip.tracks.length} tracks, max matrix error ${result.maxMatrixError}`);
