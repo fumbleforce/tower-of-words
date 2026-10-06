@@ -11,7 +11,7 @@ import { selectorRepair } from './selector.js';
 import { mondayOffice } from './office.js';
 import { mondayCommons } from './commons.js';
 import { mondayNotices } from './notices.js';
-import { prop, moveProp } from './props.js';
+import { prop, moveProp, inHand, frame } from './props.js';
 
 export function attachMonday(game, P, name) {
   const details = MONDAY_DETAILS[name] || {};
@@ -23,7 +23,13 @@ export function attachMonday(game, P, name) {
     have: P.people,
   });
   const shot = actionShot(P);
-  P.monday = { shot, cast, hooks: P.hooks, things: P.things, people: cast.people };
+  P.monday = {
+    shot,
+    cast,
+    hooks: P.hooks,
+    things: P.things,
+    people: cast.people,
+  };
   for (const id of ids) {
     P.people[id] = cast.people[id];
     P.things[id] = { ...details[id], ...cast.thing(id) };
@@ -73,16 +79,19 @@ export function attachMonday(game, P, name) {
   if (sim.day !== 5) for (const [child] of props) child.visible = false;
   const snapshot = P.snapshotState,
     load = P.restoreState;
-  P.snapshotState = () => ({
-    ...snapshot?.(),
-    monday: {
-      props: captureObjects(props.map(([child]) => child)),
-      shot: shot.snapshot(),
-      pieces: pieces.map((piece) => piece.snapshot?.() || null),
-    },
-  });
-  P.restoreState = (saved) => {
-    load?.(saved);
+  P.snapshotState = function (...args) {
+    return {
+      ...snapshot?.apply(this, args),
+      monday: {
+        props: captureObjects(props.map(([child]) => child)),
+        shot: shot.snapshot(),
+        pieces: pieces.map((piece) => piece.snapshot?.() || null),
+      },
+    };
+  };
+  P.restoreState = function (...args) {
+    load?.apply(this, args);
+    const [saved] = args;
     const state = saved.world?.monday;
     if (!state) return;
     restoreObjects(
@@ -94,9 +103,9 @@ export function attachMonday(game, P, name) {
       if (data) pieces[i]?.load?.(data);
     });
   };
-  const update = P.update?.bind(P);
-  P.update = (...args) => {
-    update?.(...args);
+  const update = P.update;
+  P.update = function (...args) {
+    update?.apply(this, args);
     if (sim.day === 5) {
       shot.update();
       cast.update(args[0]);
@@ -112,7 +121,14 @@ export function attachMonday(game, P, name) {
       if (!P.things[id] || !cast.people[id]) continue;
       P.things[id] = { ...P.things[id], ...cast.thing(id) };
     }
-    if (lunchBox) lunchBox.visible = lid.visible = sim.period === 'lunch';
+    if (lunchBox) {
+      lunchBox.visible = lid.visible = sim.period === 'lunch';
+      if (lunchBox.visible) {
+        inHand(P, lunchBox, 'aoi', { side: -1 });
+        lid.position.copy(lunchBox.position);
+        lid.position.y += 0.04;
+      }
+    }
     if (name === 'office') {
       P.hooks.machineDoor?.({
         state: sim.period === 'morning' || sim.period === 'lunch' ? 'open' : 'closed',
@@ -131,8 +147,20 @@ export function attachMonday(game, P, name) {
     for (const [id, rig] of Object.entries(P.people)) if (!cast.people[id]) cast.adopt(id, rig);
     if (name === 'office' && P.people.mio) P.things.mio = { ...details.mio, ...cast.thing('mio') };
     if (a.state === 'aoiLunch' && lunchBox) {
-      lunchBox.visible = lid.visible = true;
-      await moveProp(game, lid, [18.35, 0.67, -6.35]);
+      const aoi = P.people.aoi.root;
+      const beside = [
+        aoi.position.x + Math.cos(aoi.rotation.y) * 1.1 + Math.sin(aoi.rotation.y) * 0.8,
+        aoi.position.z - Math.sin(aoi.rotation.y) * 1.1 + Math.cos(aoi.rotation.y) * 0.8,
+      ];
+      await game.walkTo(...beside);
+      await game.hooks.face({ who: 'aoi', to: 'eric' });
+      frame(game, 'aoi');
+      inHand(P, lunchBox, 'aoi', { side: -1 });
+      inHand(P, lid, 'aoi');
+      const open = lid.position.toArray();
+      lid.position.copy(lunchBox.position);
+      lid.position.y += 0.05;
+      await moveProp(game, lid, open);
       return;
     }
     // Existing callbacks restore the station signoff, booking terminal and other inherited jobs.

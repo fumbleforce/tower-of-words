@@ -75,7 +75,7 @@ export function commonsPlace(game) {
       commons_books: w.spots.commons_books,
       commons_fridge: w.spots.commons_fridge,
     },
-    seats: { commons_sofa: w.seats[0], d5_aoi_beside: { x: 0.5, z: -1.75, top: 0.25, ry: Math.PI, out: [0.5, -1.1] } },
+    seats: { commons_sofa: w.seats[0], d5_aoi_beside: { x: 0.5, z: -3.25, top: 0.25, ry: 0, out: [0.5, -3.9] } },
     people: { kenji: d3.people.kenji, mori: d3.people.mori, aoi: d3.people.aoi },
     zones: {},
     hooks: { day5Commons: (a) => P.monday.hooks.day5Commons(a) },

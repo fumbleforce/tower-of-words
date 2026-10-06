@@ -39,8 +39,8 @@ function seedSave(seed, who = {}) {
   const known = seed.known || [];
   const flags = { place, period, ...seed.flags };
   const execution = seed.node ? { v: 3, place, frames: [newFrame(seed.node, days[day][place].nodes[seed.node])] } : null;
-  return { v: 1, day, place, period, flags, known, seen: [], found: seed.found || [], taught: {}, met: [],
-    inv: seed.inv || [], yen: seed.yen ?? 1000, bonds: {},
+  return { v: 1, day, place, period, flags, known, seen: [], found: seed.found || [], taught: {}, met: seed.met || [],
+    inv: seed.inv || [], yen: seed.yen ?? 1000, bonds: seed.bonds || {},
     ui: { goal: 'Continue the branch under test.', sideGoal: '' },
     runner: { onceDone: seed.onceDone || [], execution }, pendingStart: null,
     ...(who.mc ? { mc: who.mc } : {}), ...(who.cast ? { cast: who.cast } : {}),
@@ -48,7 +48,7 @@ function seedSave(seed, who = {}) {
 }
 
 async function installDriver(page, route, resume = false, made = 0) {
-  await page.evaluate(async ({ choices, pauseAt, resume, delivery }) => {
+  await page.evaluate(async ({ choices, pauseAt, resume, delivery, pauseDelivery }) => {
     const g = window.__game;
     const { ui, setMuted } = await import(new URL('js/ui.js', location.href));
     const { cond } = await import(new URL('js/narrative/state.js', location.href));
@@ -96,9 +96,22 @@ async function installDriver(page, route, resume = false, made = 0) {
     state.timer = setInterval(() => {
       g.setHurry(true);
       const embedded = document.querySelector('iframe[title="Kotodama at B2"]')?.contentDocument;
-      if (embedded && delivery) {
-        const button = embedded.querySelector(delivery === 'first' ? '.hint-glow' : '.story-leave');
-        if (button && !button.disabled) button.click();
+      if (embedded && delivery && (!pauseDelivery || resume)) {
+        if (['kenji', 'mori', 'mio'].includes(delivery)) {
+          const mg = embedded.defaultView.mg;
+          if (mg?.expect && mg.steps !== state.deliveryStep) {
+            state.deliveryStep = mg.steps;
+            if (state.deliveredTo === delivery) embedded.querySelector('.story-leave')?.click();
+            else if (mg.expect.kind === 'fill') {
+              const people = mg.expect.seq.filter(s => s.startsWith('.person')).map(s => s.match(/data-thing="(.*?)"/)[1]);
+              for (const selector of mg.expect.seq) embedded.querySelector(selector)?.click();
+              state.deliveredTo = people.at(-1);
+            } else if (mg.expect.kind === 'tap') embedded.querySelector(mg.expect.sel)?.click();
+          }
+        } else {
+          const button = embedded.querySelector(delivery === 'first' ? '.hint-glow' : '.story-leave');
+          if (button && !button.disabled) button.click();
+        }
       }
       const app = document.getElementById('ticketsApp');
       if (app && !app.hidden) {
@@ -112,7 +125,7 @@ async function installDriver(page, route, resume = false, made = 0) {
         board.click();
       }
     }, 30);
-  }, { choices: (route.choices || []).slice(made), pauseAt: route.resumeAt, resume, delivery: route.delivery }); // (made: picked before a reload)
+  }, { choices: (route.choices || []).slice(made), pauseAt: route.resumeAt, resume, delivery: route.delivery, pauseDelivery: route.resumeInDelivery }); // (made: picked before a reload)
 }
 
 async function continueSave(page) {
@@ -193,11 +206,13 @@ export async function runRoute(browser, route, { base, viewport, who = {} }) {
     const { page } = opened;
     await installDriver(page, route);
     await continueSave(page);
-    if (route.resumeAt) {
-      await page.waitForFunction(node => window.__game.runner.currentNode === node && !!window.__game.ui._advance,
+    if (route.resumeAt || route.resumeInDelivery) {
+      if (route.resumeAt) await page.waitForFunction(node => window.__game.runner.currentNode === node && !!window.__game.ui._advance,
         route.resumeAt, { timeout: 45000 });
+      else await page.waitForFunction(() => document.querySelector('iframe[title="Kotodama at B2"]')?.contentDocument?.querySelector('.hint-glow'), null, { timeout: 45000 });
       const checkpoint = await page.evaluate(() => JSON.parse(localStorage.getItem('amakawa-day1-save')));
-      assert.equal(checkpoint.runner.execution.frames.at(-1).node, route.resumeAt);
+      if (route.resumeAt) assert.equal(checkpoint.runner.execution.frames.at(-1).node, route.resumeAt);
+      else assert.ok(!checkpoint.flags.d5_delivery_seen, 'Undelivered session must remain unseen');
       const first = await page.evaluate(() => ({ nodes: window.__branch.nodes, choices: window.__branch.choices }));
       priorNodes.push(...first.nodes); priorChoices.push(...first.choices);
       await waitForGame(page, 45000, () => page.reload(), 'title');
@@ -207,7 +222,7 @@ export async function runRoute(browser, route, { base, viewport, who = {} }) {
       await continueSave(page);
       await settled(page, route.seed.place);
       const after = await page.evaluate(() => ({ inv: window.__game.sim.inv, yen: window.__game.sim.yen, nodes: window.__branch.nodes }));
-      assert.equal(after.nodes[0], route.resumeAt, 'Continue must resume at the unfinished node');
+      if (route.resumeAt) assert.equal(after.nodes[0], route.resumeAt, 'Continue must resume at the unfinished node');
       assert.deepEqual(after.inv, checkpoint.inv, 'Continue must preserve inventory');
       assert.equal(after.yen, checkpoint.yen + (route.resumeYenDelta || 0), 'Continue must apply only the remaining payment');
     } else await settled(page, route.startAt || route.seed.place); // (startAt: where the opening scene ends up)
@@ -230,7 +245,7 @@ export async function runRoute(browser, route, { base, viewport, who = {} }) {
       const { known } = await import(new URL('js/lang.js', location.href));
       const g = window.__game;
       return { ...window.__branch, flags: { ...flags }, known: [...known], inv: [...g.sim.inv], yen: g.sim.yen,
-        period: g.sim.period, ended: !!window.__ended, recovery: g.runner.recoveryError, mc: g.mc?.id, cast: g.cast };
+        period: g.sim.period, bonds: { ...g.sim.bonds }, ended: !!window.__ended, recovery: g.runner.recoveryError, mc: g.mc?.id, cast: g.cast };
     });
     expectNodes(priorNodes, route.expect.beforeReloadNodes || [], 'Before reload');
     assert.deepEqual([...opened.errors, ...blocked, ...state.errors], []);
@@ -244,7 +259,7 @@ export async function runRoute(browser, route, { base, viewport, who = {} }) {
       else assert.equal(state.flags[key], value, `Flag ${key}`);
     }
     for (const word of route.expect.known || []) assert.ok(state.known.includes(word), 'Missing learned word ' + word);
-    for (const key of ['inv', 'yen', 'period', 'ended']) if (key in route.expect) assert.deepEqual(state[key], route.expect[key], key);
+    for (const key of ['inv', 'yen', 'period', 'bonds', 'ended']) if (key in route.expect) assert.deepEqual(state[key], route.expect[key], key);
     return { id: route.id, pass: true, seconds: (Date.now() - started) / 1000, choices: [...priorChoices, ...state.choices], nodes: state.nodes, actions: state.actions,
       ...(route.resumeAt ? { beforeReload: { nodes: priorNodes, choices: priorChoices } } : {}) };
   } catch (error) {

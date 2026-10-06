@@ -130,19 +130,57 @@ export function manifestOf(byMc, day = 0) {
   return list;
 }
 
+// The unvoiced protagonist currently shares the default line voice. Keep the original
+// hash, including authored word tokens and overheard keys; manifest text is already resolved.
+export function standInKey(entry, mc) {
+  if (entry.key.startsWith(mc.id + '-')) return mc.voice.words + entry.key.slice(mc.id.length);
+  return entry.key.replace(new RegExp('-' + mc.id + '$'), '');
+}
+
+// Monday's new named introductions must also play for protagonists using an approved stand-in.
+// Unchanged lines keep their existing shared fallback; this never creates a new protagonist voice.
+export function mondayStandIns(byMc, list) {
+  const seen = new Set(list.map(e => e.key)), extra = [];
+  for (const [id, entries] of Object.entries(byMc)) {
+    const mc = PROTAGONISTS[id];
+    if (id === DEFAULT_MC || mc.voice.ref) continue;
+    for (const entry of entries) {
+      if (entry.day !== 5 || !entry.own || !entry.key.startsWith('ln-')) continue;
+      const player = entry.speaker === id;
+      const speaker = player ? mc.voice.lines : entry.speaker;
+      const key = player ? standInKey(entry, mc) : entry.key;
+      if (seen.has(key)) continue;
+      const line = { ...entry };
+      delete line.day;
+      delete line.own;
+      extra.push({ ...line, key, speaker });
+      seen.add(key);
+    }
+  }
+  return extra;
+}
+
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const arg = (name) => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : null; };
   const onlyDay = +arg('--day') || 0, onlyMc = arg('--mc'), check = process.argv.includes('--check');
   if (onlyMc && !PROTAGONISTS[onlyMc]) { console.log(`--mc ${onlyMc}: no such protagonist (${Object.keys(PROTAGONISTS).join(', ')})`); process.exit(2); }
   const voiced = (id) => id === DEFAULT_MC || !!PROTAGONISTS[id].voice.ref;
   const mcs = onlyMc ? [onlyMc] : Object.keys(PROTAGONISTS).filter((id) => (check && !process.argv.includes('--voiced')) || voiced(id));
-  const byMc = await voiceLines({ mcs });
+  const all = await voiceLines();
+  const byMc = Object.fromEntries(Object.entries(all).filter(([id]) => mcs.includes(id) || id === DEFAULT_MC));
   if (onlyMc && onlyMc !== DEFAULT_MC) delete byMc[DEFAULT_MC];
   const list = manifestOf(byMc, onlyDay);
+  if (!onlyMc && (!onlyDay || onlyDay === 5)) list.push(...mondayStandIns(all, list));
   if (check) {
     const bad = [];
     for (const o of list) {
-      if (!fs.existsSync(path.join(root, 'audio', o.key + '.mp3'))) bad.push(`NO CLIP ${o.key} ${o.speaker}: ${o.text}`);
+      const exists = key => fs.existsSync(path.join(root, 'audio', key + '.mp3'));
+      let playable = o.key;
+      // A selected protagonist without a reference uses the same fallback as runtime voice-keys.js.
+      if (onlyMc && !voiced(onlyMc) && !exists(playable)) {
+        playable = standInKey(o, PROTAGONISTS[onlyMc]);
+      }
+      if (!exists(playable)) bad.push(`NO CLIP ${playable} ${o.speaker}: ${o.text}`);
       if (/[\\]|\\[nt"']|&quot;|&amp;/.test(o.text)) bad.push(`ESCAPE ${o.key} ${o.speaker}: ${o.text}`);
     }
     console.log(bad.length ? bad.join('\n') : `voices ok: ${list.length} lines, all with clips, no escapes`);

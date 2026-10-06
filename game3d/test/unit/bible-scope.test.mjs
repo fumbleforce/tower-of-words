@@ -54,3 +54,17 @@ test('controlled shutdown catches a late fulfillment rejection', async () => {
   });
   assert.deepEqual(failures, []);
 });
+
+
+test('cached public font revalidation is fulfilled without treating 304 as a redirect', async () => {
+  const failures = [], response = { status: () => 304 };
+  let fulfilled = false;
+  await scopedRoute({ publicOnly: true, onFailure: message => failures.push(message) })({
+    request: () => ({ url: () => 'http://127.0.0.1:8771/game3d/fonts/zkg-bold.woff2' }),
+    fetch: async options => { assert.equal(options.maxRedirects, 0); return response; },
+    abort: async () => { assert.fail('304 must not be aborted'); },
+    fulfill: async options => { assert.equal(options.response, response); fulfilled = true; },
+  });
+  assert.equal(fulfilled, true);
+  assert.deepEqual(failures, []);
+});

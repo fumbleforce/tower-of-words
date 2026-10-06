@@ -2,13 +2,12 @@ import { flags } from '../../narrative/state.js';
 import { sfx } from '../../sfx.js';
 import { anchor, board, prop, moveProp, inHand, frame } from './props.js';
 import { delivery } from './delivery.js';
+import { deskDrinks } from './drinks.js';
 
 export function mondayOffice(game, P, cast) {
   const cup = prop(P, [0.1, 0.12, 0.1], '#6a9c80', [-5.7, 0.5, -1.5]);
   const can = prop(P, [0.09, 0.16, 0.09], '#5cc46a', [-4.62, 0.35, -2.0]);
-  const soup = prop(P, [0.09, 0.15, 0.09], '#e2c353', [2.6, 0.49, -3]);
-  const pot = prop(P, [0.15, 0.22, 0.15], '#708d9c', [2.7, 0.53, -3]);
-  const tea = prop(P, [0.08, 0.11, 0.08], '#d7e7df', [2.45, 0.49, -3]);
+  const { soup, pot, tea } = deskDrinks(P);
   const phone = prop(P, [0.07, 0.12, 0.013], '#17242d', [-4.3, 0.65, -0.9]);
   const paper = board(P, ['Request', 'Name:', 'Location:', 'Details:'], {
     w: 0.21,
@@ -32,9 +31,9 @@ export function mondayOffice(game, P, cast) {
   };
   reset();
   async function gather() {
-    cast.put('kenji', [-5.1, -1.45], [-4.62, -2.3]);
-    cast.put('mori', [-5.95, -0.6], [-4.7, -1.2]);
-    cast.put('mio', [-4.8, -0.55], [-4.7, -1.2]);
+    cast.put('kenji', [-5.0, -0.35], [-6.2, 0.1]);
+    cast.put('mori', [-6, -1.7], [-6.2, 0.1]);
+    cast.put('mio', [-4.75, -1.3], [-6.2, 0.1]);
     const ready = flags.d5_reveal_agreed || flags.d5_delivery_seen;
     if (ready) {
       cup.visible = true;
@@ -42,7 +41,7 @@ export function mondayOffice(game, P, cast) {
     } else inHand(P, cup, 'mori');
     phone.visible = !ready && !flags.d5_team_witnessed;
     if (phone.visible) inHand(P, phone, 'kenji');
-    await game.walkTo(-5.7, -2.45);
+    await game.walkTo(-6.2, 0.1);
     frame(game, 'vending');
   }
   async function ordinaryServe() {
@@ -118,7 +117,7 @@ export function mondayOffice(game, P, cast) {
       inHand(P, can, 'kenji', { side: -1 });
       await game.hooks.gesture({ who: 'kenji', kind: 'point', to: 'vending' });
       game.hooks.look({ who: 'mori', at: 'vending' });
-      frame(game, 'kenji');
+      frame(game, 'vending');
       return;
     }
     if (state === 'free') {
@@ -131,15 +130,26 @@ export function mondayOffice(game, P, cast) {
     throw new Error(`Unknown team drinks state: ${state}`);
   }
   async function day5Office({ state }) {
+    await game.walkTo(1.35, -1.6);
+    await game.hooks.face({ who: 'mori', to: 'eric' });
     frame(game, 'mori');
     if (state === 'soup') {
-      inHand(P, soup, 'mori');
-      soup.rotation.z = 1.2;
-      await game.wait(650);
-      soup.rotation.z = 0;
+      const arm = P.people.mori.arms?.[0];
+      const start = arm?.rotation.x || 0;
+      await game.tween(0.65, (t) => {
+        if (arm) arm.rotation.x = start + (-1.65 - start) * t;
+        inHand(P, soup, 'mori', { side: -1 });
+        soup.rotation.z = 1.2 * t;
+      });
+      await game.wait(400);
     } else if (state === 'tea') {
       pot.visible = tea.visible = true;
-      await game.hooks.gesture({ who: 'mori', kind: 'point', to: [2.45, -3] });
+      await game.hooks.gesture({
+        who: 'mori',
+        kind: 'point',
+        to: [1.23, -2.88],
+      });
+      await game.hooks.face({ who: 'mori', to: 'eric' });
     } else throw new Error(`Unknown office state: ${state}`);
   }
   return { hooks: { teamDrinks, day5Office }, restore: reset };
