@@ -2241,7 +2241,7 @@
   {
     "id_": "prop/pool/changing_room",
     "kind": "prop",
-    "name": "To the changing room",
+    "name": "Pool exit",
     "paths": [
       "game3d/js/places/pool.js"
     ],
@@ -2250,7 +2250,7 @@
     "source": "pool.js things.changing_room",
     "place": "pool",
     "used": [
-      "Pool deck: tap target 'To the changing room'"
+      "Pool deck: tap target 'Pool exit'"
     ],
     "view": {
       "type": "room",

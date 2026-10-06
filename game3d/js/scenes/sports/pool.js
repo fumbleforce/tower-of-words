@@ -22,6 +22,8 @@ import { BLOCK } from '../outdoor/block.js';
 import { meshFence } from './courts.js';
 import * as P from './plan.js';
 import * as D from './deck-plan.js';
+import { poolFloodlights } from './pool-lights.js';
+import { buildChangingRoom } from './changing-room.js';
 
 const C = {
   wall: '#dedcd5',
@@ -139,6 +141,11 @@ function steps(p) {
 // pace clock on the pavilion's wall, the rules on the west fence; the float rack and a basket of pull buoys at the south-east corner; the
 // attendant's folding table and chair at the north-east corner, a lost-property box and a clipboard on it
 function furniture(p, signs) {
+  for (const [x, z] of D.BAG_RACKS) {
+    p.box('#789096', 1.15, 0.055, 0.42, x + 0.38, 0.24, z);
+    for (const dx of [-0.1, 0.85])
+      for (const dz of [-0.15, 0.15]) p.box(STEEL.mid, 0.035, 0.24, 0.035, x + dx, 0, z + dz);
+  }
   for (const [x, z] of D.BENCHES) bench(p, x, z, Math.PI / 2, { len: D.BENCH_LEN });
   // the reel: the rolled blue cover on a steel drum between two A-frame stands, a crank on the west one
   const R = D.REEL,
@@ -293,11 +300,15 @@ function pavilion(p, glow, signs, lights) {
 
 // builds it all: the pavilion into p (Parts, casts), the deck, the pool and the fence into q (Parts that doesn't),
 // pv (a paver), signs (a signSet), lights (a lightSet); root takes the lit glass. Returns the evening switch.
-export function* poolSteps(root, p, q, pv, signs, lights) {
+export function* poolSteps(root, p, q, pv, signs, lights, { interior = false } = {}) {
   deck(q, pv, signs);
+  const floodlights = poolFloodlights(root, p);
   yield;
   const glow = [];
-  pavilion(p, glow, signs, lights);
+  if (interior) {
+    buildChangingRoom(p, pv, signs, lights);
+    p.box(STEEL.mid, 0.07, D.CLOCK[1], 0.07, D.CLOCK[0], 0, D.CLOCK[2]); // clock support with pavilion front cut away
+  } else pavilion(p, glow, signs, lights);
   const glass = new THREE.MeshStandardMaterial({
     color: C.frost,
     emissive: new THREE.Color('#fff0d8'),
@@ -307,15 +318,20 @@ export function* poolSteps(root, p, q, pv, signs, lights) {
   const g = glow.map((q) => q.toNonIndexed());
   for (const q of g)
     for (const n of Object.keys(q.attributes)) if (n !== 'position' && n !== 'normal') q.deleteAttribute(n);
-  const mesh = new THREE.Mesh(mergeGeometries(g), glass);
+  const mesh = new THREE.Mesh(g.length ? mergeGeometries(g) : new THREE.BufferGeometry(), glass);
   g.forEach((q) => q.dispose());
   glow.forEach((q) => q.dispose());
   mesh.name = 'pool:glass';
   root.add(mesh);
   yield;
   return {
+    floodlights,
+    onPeriod(period) {
+      glass.emissiveIntensity = period === 'evening' ? 0.6 : 0;
+      floodlights.onPeriod(period);
+    },
     evening() {
-      glass.emissiveIntensity = 0.6;
+      this.onPeriod('evening');
     },
   };
 }

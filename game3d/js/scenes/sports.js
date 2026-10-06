@@ -56,13 +56,14 @@ export function* sportsSteps({
   walks = [...P.WALKS, ...CP.WALKS],
   blocks = [...P.FURNITURE, ...CP.BLOCKS],
   start = P.IN,
+  poolInterior = false,
 } = {}) {
   const root = new THREE.Group(),
     scene = new THREE.Scene();
   scene.background = new THREE.Color(TOWN.roof);
   scene.add(root);
   const sun = outdoorLight(scene);
-  const shadows = sunFollow(sun); // the district is long: the sun's shadow box follows Eric
+  let shadows = sunFollow(sun); // the district is long: the sun's shadow box follows Eric
   shadows.follow(...start);
 
   // walkable: the streets and walks (plan.js WALKS), never what stands on them
@@ -84,7 +85,7 @@ export function* sportsSteps({
   // its own, added after the merge below, so the merge leaves the cells apart)
   const c = cells([62, 80], [-75, -60, -45]),
     wg = placeIn(new THREE.Group(), CHUNK);
-  const pool = yield* poolSteps(isl, p, c.parts, c.paver, signs, lights);
+  const pool = yield* poolSteps(isl, p, c.parts, c.paver, signs, lights, { interior: poolInterior });
   yield* groundsSteps(c, lights, signs, isl);
   courts(c.parts, signs);
   const sets = blockSets();
@@ -130,12 +131,20 @@ export function* sportsSteps({
   root.add(wg);
   yield* nav.buildSteps();
 
+  const dayLights = [],
+    dayMaterials = new Map();
+  scene.traverse((o) => {
+    if (o.isLight) dayLights.push([o, o.intensity, o.color.clone(), o.groundColor?.clone()]);
+    for (const m of Array.isArray(o.material) ? o.material : [o.material])
+      if (m?.emissive && !dayMaterials.has(m))
+        dayMaterials.set(m, { color: m.color.clone(), emissive: m.emissive.clone(), intensity: m.emissiveIntensity });
+  });
   return {
     root,
     scene,
     sun,
     nav,
-    follow: shadows.follow,
+    follow: (x, z) => shadows.follow(x, z),
     in: P.IN,
     arriveEdge: P.ARRIVE_EDGE,
     exits: P.EXITS,
@@ -161,6 +170,22 @@ export function* sportsSteps({
       if (offices.lit) offices.lit.visible = true;
       sky.onPeriod('evening');
     },
+    morning() {
+      for (const [light, intensity, color, ground] of dayLights) {
+        light.intensity = intensity;
+        light.color.copy(color);
+        if (ground) light.groundColor.copy(ground);
+      }
+      for (const [m, saved] of dayMaterials) {
+        m.color.copy(saved.color);
+        m.emissive.copy(saved.emissive);
+        m.emissiveIntensity = saved.intensity;
+      }
+      shadows = sunFollow(sun);
+      pool.onPeriod('morning');
+      sky.onPeriod('morning');
+    },
+    pool,
     skyline: sky.stats,
   };
 }

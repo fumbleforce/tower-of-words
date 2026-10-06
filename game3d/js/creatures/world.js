@@ -61,6 +61,9 @@ export function creatureWorld(game, place, pts, { sound, blobs, avoid = [] }) {
         const i = (start + j) % n;
         if (used?.has(i)) continue;
         _v.set(a[i * 3], a[i * 3 + 1], a[i * 3 + 2]);
+        // A cutaway interior may expose obsolete roof perches from the outdoor survey.
+        if (place.creatureExclusions?.some(([x0, x1, z0, z1]) => _v.x >= x0 && _v.x <= x1 && _v.z >= z0 && _v.z <= z1))
+          continue;
         if (o.maxY !== undefined && _v.y > o.maxY) continue;
         const d = Math.hypot(_v.x - near.x, _v.z - near.z);
         if (d < min || d > max) continue;
