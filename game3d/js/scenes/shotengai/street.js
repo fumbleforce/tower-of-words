@@ -15,13 +15,14 @@ import { cluster, LEAF } from '../outdoor/planting.js';
 import { bikeRow } from '../forecourt/details.js';
 import * as S from '../island-south.js';
 import * as P from './plan.js';
+import { crane } from './wares.js';
 
 const { BAYS, ROWS_Z } = S;
 const { ARCADE, SHOP_WALK, DORM_STREET, ROW_W, ROW_E } = P;
 const DOOR = { frame: '#3f4650', glass: '#5d6c79', handle: '#b8bcc0' };
 const SPINE = 1.5; // the arcade floor's middle band
 const BANNERS = ['#5d7a8c', '#8c6464', '#6f8474', '#7d7a8c']; // the awnings' family, a shade deeper
-const GOODS = { cabinet: ['#d7d3cc', '#6e88a6', '#c58c8f'], board: '#3f4650', crate: '#9b8466' };
+const GOODS = { board: '#3f4650' };
 
 // the arcade's floor: pale slabs, a band of darker stone down the middle laid across, a dark course on every bay
 // line, carried from the promenade's (outdoor/seafront.js); the shop walk in the arcade's stone; the dorm street's
@@ -78,15 +79,6 @@ function door(p, signs, { id, at: [x, z], out }) {
   if (id !== 'izakaya') signs.card('本日休業', 'CLOSED TODAY', 0.46, 0.3, card, ry, { when: 'evening2', door: id });
 }
 
-// a crane game cabinet: a pale case, a glass box on top with a coloured top light
-function crane(p, x, z, k) {
-  const c = GOODS.cabinet[k % 3];
-  p.box(c, 0.8, 0.8, 0.75, x, 0, z);
-  p.box('#9fb7c4', 0.74, 0.8, 0.68, x, 0.8, z, { cast: false });
-  p.box(c, 0.82, 0.22, 0.77, x, 1.6, z);
-  p.box(STEEL.dark, 0.3, 0.04, 0.12, x, 0.62, z + 0.38, { cast: false });
-}
-
 // an A-board on the walk: two leaning boards; note: a printed notice pinned on each face (the bakery's dorm
 // deliveries, read in story/day2/shotengai.js)
 function aBoard(p, x, z, ry, { note = false } = {}) {
@@ -133,6 +125,7 @@ export function* streetSteps(group, p, lights, signs) {
   // bakery and karaoke: an A-board each
   aBoard(p, mid(10) + 1.1, nz + 0.2, 0, { note: true });
   aBoard(p, mid(14) - 1.1, sz - 0.2, Math.PI);
+  signs.board('カラオケ', 'KARAOKE', '#354650', 0.42, 0.32, [mid(14) - 1.1, 0.43, sz - 0.29], Math.PI);
   keep.push(
     [mid(10) + 0.8, ROWS_Z.arcade, mid(10) + 1.4, nz + 0.45],
     [mid(14) - 1.4, sz - 0.45, mid(14) - 0.8, ROWS_Z.south],

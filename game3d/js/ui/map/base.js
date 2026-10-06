@@ -2,6 +2,7 @@
 // green, paths and buildings straight from scenes/island-layout.js, with a shared coastal palette. The shapes are built once
 // as Path2D in island units and drawn through the view's transform, so a pan or a zoom is one redraw and nothing is
 // kept per zoom level. North (the grid's north, -z) is up.
+import { mapFootprints, drawRoof, drawGroundLandmarks } from './landmarks.js';
 import { BUILDINGS, PATHS, GREEN, COAST, SAND, HALF_EDGE, footprint } from '../../scenes/island-layout.js';
 
 export const INK = {
@@ -72,13 +73,18 @@ function build() {
       t.arc(x, z, r, 0, Math.PI * 2);
     }
   }
-  for (const b of BUILDINGS) {
-    const points = footprint(b),
+  for (const b of mapFootprints(BUILDINGS, footprint)) {
+    const points = b.points,
       path = poly(points);
     poly(points, L.blds);
     const xs = points.map((p) => p[0]),
       zs = points.map((p) => p[1]);
-    L.roofs.push({ path, kind: b.kind, box: [Math.min(...xs), Math.min(...zs), Math.max(...xs), Math.max(...zs)] });
+    L.roofs.push({
+      path,
+      kind: b.kind,
+      roofType: b.roofType,
+      box: [Math.min(...xs), Math.min(...zs), Math.max(...xs), Math.max(...zs)],
+    });
   }
   COAST.line.forEach(([x, z], i) => (i ? L.coast.lineTo(x, z) : L.coast.moveTo(x, z)));
   return L;
@@ -128,6 +134,7 @@ export function drawBase(ctx, v) {
     ctx.lineWidth = l.w;
     ctx.stroke(l.path);
   }
+  drawGroundLandmarks(ctx, v.detail !== false);
   ctx.save();
   ctx.translate(0.7, 0.9);
   ctx.fillStyle = INK.shadow;
@@ -138,26 +145,7 @@ export function drawBase(ctx, v) {
   ctx.strokeStyle = INK.bldEdge;
   ctx.lineWidth = 0.45;
   ctx.stroke(L.blds);
-  if (v.detail !== false) {
-    for (const roof of L.roofs) {
-      const [x0, z0, x1, z1] = roof.box;
-      ctx.save();
-      ctx.clip(roof.path);
-      ctx.strokeStyle = INK.roof;
-      ctx.lineWidth = 0.35;
-      ctx.strokeRect(x0 + 0.8, z0 + 0.8, x1 - x0 - 1.6, z1 - z0 - 1.6);
-      ctx.beginPath();
-      if (x1 - x0 > z1 - z0) {
-        ctx.moveTo(x0 + 0.8, (z0 + z1) / 2);
-        ctx.lineTo(x1 - 0.8, (z0 + z1) / 2);
-      } else {
-        ctx.moveTo((x0 + x1) / 2, z0 + 0.8);
-        ctx.lineTo((x0 + x1) / 2, z1 - 0.8);
-      }
-      ctx.stroke();
-      ctx.restore();
-    }
-  }
+  for (const roof of L.roofs) drawRoof(ctx, roof, v.detail !== false);
   // The fountain basin is a real landmark, centred in the existing paved circle.
   const fountain = PATHS.find((p) => p.id === 'fountain_plaza').circle;
   ctx.beginPath();

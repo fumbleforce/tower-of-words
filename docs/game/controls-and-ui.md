@@ -118,6 +118,8 @@ Click the date/period chip in the top HUD, on desktop or phone, to open the time
 
 ### The map
 
+The map and minimap draw the shop street’s separate roof groups and open south-row alleys from the same bay plan as the 3D street. Glass arcade ribs, planted and solar roofs, the pool lanes and tennis courts distinguish landmarks without adding destination pins.
+
 Jørgen, 2026-10-05: "I want a minimap I can click, giving me a full interactive map, and fast travel to locations". He picked a clean map drawn from the island's layout data, a quick crossfade, no time cost, fast travel to any open place, the minimap bottom left and (by default) north up (Review minimap-plan-1). Code: game3d/js/ui/map/ (view.js, panel.js, base.js, where.js) and game3d/js/travel/; the rules for when he can go are in [systems.md](systems.md), Fast travel.
 
 - Opens from the minimap or with M, whenever the HUD is up, also in a conversation. The game pauses behind it and the 3D view isn't drawn while it is open; M, Esc or the 44 px close button (top right) shuts it.
