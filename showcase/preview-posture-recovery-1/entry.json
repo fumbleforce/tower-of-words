@@ -1,0 +1,39 @@
+{
+  "title": "Continuous model previews and corrected idle stance",
+  "date": "2026-10-06",
+  "by": "codex",
+  "caption": "Walk and run previews keep moving. The corrected idle stance removes the backward lean. Gym, sports and dorm room previews now fit the screen.",
+  "commit": [
+    "594493ca",
+    "68bbd09e",
+    "c1e24957",
+    "5446e1e6"
+  ],
+  "images": [
+    {
+      "id": "mio-side",
+      "image": "bible/shots/showcase/preview-posture-recovery-1/mio-side.png",
+      "caption": "Mio stance before and after the idle retargeting fix."
+    },
+    {
+      "id": "gym-phone",
+      "image": "bible/shots/showcase/preview-posture-recovery-1/gym-phone.png",
+      "caption": "The sports centre entrance in the phone asset preview."
+    },
+    {
+      "id": "sports-desktop",
+      "image": "bible/shots/showcase/preview-posture-recovery-1/sports-desktop.png",
+      "caption": "The sports hall in the desktop asset preview."
+    }
+  ],
+  "links": [
+    {
+      "label": "Mio live viewer",
+      "href": "reviews/crowd-pilot-1/viewer.html?cfg=../mio-meshy-2/viewer.json&s=now&m=walk"
+    },
+    {
+      "label": "Asset library",
+      "href": "tools/assets/"
+    }
+  ]
+}
