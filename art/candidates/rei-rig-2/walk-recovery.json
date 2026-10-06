@@ -1,0 +1,23 @@
+[
+  {
+    "id": "rei",
+    "label": "Rei, fixed rig",
+    "dir": "/.claude/worktrees/agent-aae25346acf8fdb8d/game3d/assets/characters/rei/",
+    "idle": "/.claude/worktrees/agent-aae25346acf8fdb8d/game3d/assets/characters/relaxed-idle-rei.json",
+    "height": 1.12
+  },
+  {
+    "id": "emi",
+    "label": "Emi",
+    "dir": "/game3d/assets/characters/emi/",
+    "idle": "/game3d/assets/characters/relaxed-idle-emi.json",
+    "height": 1.09
+  },
+  {
+    "id": "kuro",
+    "label": "Kuro",
+    "dir": "/game3d/assets/characters/kuro/",
+    "idle": "/game3d/assets/characters/relaxed-idle-kuro.json",
+    "height": 1.12
+  }
+]

@@ -1,0 +1,91 @@
+{
+  "title": "Rei rig repair",
+  "blurb": "The selected mesh and texture with corrected bone directions. Walk, run, idle and sit use the game loader.",
+  "halves": [
+    "before",
+    "repaired"
+  ],
+  "rigs": {
+    "before": {
+      "id": "rei",
+      "label": "Rei before",
+      "height": 1.12,
+      "dir": "art/parts/rei-rig-2/before/",
+      "idle": "art/parts/rei-rig-2/before/idle.json"
+    },
+    "repaired": {
+      "id": "rei",
+      "label": "Rei repaired",
+      "height": 1.12,
+      "dir": "art/parts/rei-rig-2/game/",
+      "idle": "art/parts/rei-rig-2/game/idle.json"
+    },
+    "emi": {
+      "id": "emi",
+      "label": "Emi",
+      "height": 1.09,
+      "dir": "game3d/assets/characters/emi/",
+      "idle": "game3d/assets/characters/relaxed-idle-emi.json"
+    },
+    "kuro": {
+      "id": "kuro",
+      "label": "Kuro",
+      "height": 1.12,
+      "dir": "game3d/assets/characters/kuro/",
+      "idle": "game3d/assets/characters/relaxed-idle-kuro.json"
+    },
+    "donor": {
+      "id": "rei",
+      "label": "Emi idle mapping",
+      "height": 1.12,
+      "dir": "art/parts/rei-rig-2/game/",
+      "idle": "art/parts/rei-rig-2/game/idle-donor.json"
+    }
+  },
+  "scenes": {
+    "compare": {
+      "label": "Before and repaired",
+      "items": [
+        {
+          "rig": "before"
+        },
+        {
+          "rig": "repaired"
+        }
+      ]
+    },
+    "cast": {
+      "label": "Rei beside Emi and Kuro",
+      "items": [
+        {
+          "rig": "emi"
+        },
+        {
+          "rig": "repaired"
+        },
+        {
+          "rig": "kuro"
+        }
+      ]
+    },
+    "rei": {
+      "label": "Rei close",
+      "items": [
+        {
+          "rig": "repaired"
+        }
+      ]
+    },
+    "idle-trial": {
+      "label": "Idle mapping comparison",
+      "items": [
+        {
+          "rig": "repaired"
+        },
+        {
+          "rig": "donor"
+        }
+      ]
+    }
+  }
+}
