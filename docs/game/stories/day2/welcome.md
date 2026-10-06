@@ -1,45 +1,36 @@
-# Welcome food
+# Welcome dinner
 
-The team has arranged food for Eric after work. Mori wants him to enjoy it, Kenji is eager to start eating, and Mio has brought pickles. Built; voice clips to make.
+The department gathers inside the izakaya after work: the player, Mori, Mio, Kenji and Emi sit around one table. The restaurant has a reachable entrance, aisle and exit. The shop-street Kenji interaction leads through its blue-curtain door; entering directly also works.
 
-## Cast
+## The meal
 
-`eric`, `mori`, `mio`, `kenji`
+Mori welcomes the player before they sit. Pre-served chicken skewers, grilled vegetables, rice, pickles and tea establish the meal. The player can ask to try kanpai for the toast, or simply raise their glass. Kenji models tabetai; the player chooses chicken or vegetables and types the word while taking that food. They then talk about after-work life or Norway, or eat and listen. The player can later ask Mori about the food; Mio then helps with oishii. Each taught word has a visible purpose, a slow model and a typed attempt.
 
-## Beats
+The player can stay, talk to each colleague, or say goodnight from their seat. Kenji optionally teaches nomitai when asked for a drink. Emi has department and food topics. Mio's door conversation distinguishes witnessing the experiment from hearing the player describe it. Mori's Japanese questions and Norway stories are made understandable by Emi, rather than granting the player unlearned Japanese comprehension.
 
-1. Kenji waits at the izakaya, then walks ahead to the promenade. Eric is free to explore; reaching the bench first gathers the group without requiring a second trip to Kenji.
-2. The party setup and food source are in [places.md](../../places.md#day-2-party-plan-not-built). Mio's greeting notices `lunch_mio`. Mori's Japanese is subtitled, never muffled.
-3. Kenji models tabetai, normally and slowly, with a short English explanation. Eric chooses a rice ball or an egg sandwich and types the word as he takes it. Those are the two required food actions. The choice changes the food handed over.
-4. He can ask what they do after work, talk with Mori about Norway (with a `lunch_mori` variation), or simply eat and listen. He can then walk around and talk to the group.
-5. Asking Kenji how to say he wants a drink optionally teaches nomitai, a second instance of the same pattern. It is never needed to finish the party or day. Repeating the food or drink word gets an offer while food is out. After the party, Mori still offers a leftover rice ball, or directs Eric to the dorm drinks machine once the tea is gone. Machines get no magical effect.
-6. “Head home” at Eric's seat gives one goodbye and packs the party. The route home and optional walks remain open. Mori rests at the back-alley nook only after this point; Eric can stop with him while he packs the leftover rice balls. They talk about the takeaway boxes and Mori’s Lillehammer photos, with context supplied if the player never heard about Norway. Eric may ask for “I want to go” and type ikitai, or leave; the word remains available on a return. It creates no tracked task or inventory reward.
+Goodnight walks Mio and Kenji out. Mori and Emi remain to pack leftovers. Emi interprets his Norway/photo conversation; the player can ask for ikitai or leave it for a return visit. No boxes errand or inventory reward is implied. The player can leave and return through the actual door.
 
-## Choices and flags
+## State and continuity
 
-| Flag | Set when | Read by |
-|---|---|---|
-| `d2_met_kenji` | Meeting Kenji or reaching the bench directly | Kenji's marker and goal |
-| `d2_food` | Choosing food (`riceball` or `sandwich`) | The handover |
-| `d2_ate` | Typing tabetai and taking the food | Party conversation and departure options |
-| `d2_party_done` | Saying goodnight at the seat | Actor placement, food replies and the room ending |
-| `d2_norway_talked` | Choosing Norway as the party topic | The coda supplies missing context |
-| `d2_mio_party_seen` | The optional conversation with Mio | Avoids repeating the talk about the doors |
-| `d2_mori_rest_seen` | The optional after-party encounter | Its short repeat response |
+`d2_met_kenji` records the doorway meeting or joining the meal directly. `d2_food` is yakitori or vegetables; `d2_ate` records taking it. `d2_party_done` records goodnight and permits the day ending at home. `d2_norway_talked`, `d2_mio_party_seen` and `d2_mori_rest_seen` preserve the optional conversations. The runtime restores food, seating and departure from these flags.
+
+Old outdoor-party saves move to this venue. Old day-2 execution checkpoints restart at the current place's progress-aware arrival rather than replaying obsolete script indices. Words, payments, inventory, relationships and completed reports remain intact. Completed parties do not teleport a player who is merely walking through the street.
 
 ## Words taught
 
 | Word | By | Node |
 |---|---|---|
+| `kanpai` | `emi` | `d2_toast_word` |
 | `tabetai` | `kenji` | `d2_take_food` |
+| `oishii` | `mio` | `d2_compliment` |
 | `nomitai` | `kenji` | `d2_drink_word` |
 | `ikitai` | `mori` | `d2_go_word` |
 
-Only tabetai is required. Every word starts unknown and is learned by typing. The optional coast phrase is in [Day-2 visits](visits.md).
+Only tabetai is required for the meal; the other four are optional. Every new word is learned by trying it, and known words can be used directly in dialogue without replaying the lesson.
 
 ## Nodes
 
 | File | Nodes |
 |---|---|
-| `day2/shotengai.js` | `d2_to_forecourt`, `d2_arrive`, `d2_meet_kenji`, `d2_supper`, `d2_take_food`, `d2_topic`, `d2_after_work`, `d2_norway`, `d2_quiet`, `d2_party_free`, `d2_seat_menu`, `d2_stay`, `d2_goodnight`, `d2_kenji_party`, `d2_drink_word`, `d2_no_drink`, `d2_more_drink`, `d2_more_food`, `d2_mio_party`, `d2_mori_party`, `d2_kenji_wait`, `d2_mio_wait`, `d2_mori_wait`, `d2_mori_rest`, `d2_go_word`, `d2_mori_rest_end`, `d2_leftovers`, `d2_mori_drink`, `d2_mori_rest_idle`, `d2_mori_rest_again`, `d2_mori_go_reply`, `d2_mori_see_reply`, `d2_empty_bench`, `d2_to_lane`, `d2_izakaya`, `d2_bakery`, `d2_shut`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
-
+| `day2/shotengai.js` | `d2_arrive`, `d2_meet_kenji`, `d2_kenji_wait`, `d2_izakaya`, `d2_to_forecourt`, `d2_to_lane`, `d2_bakery`, `d2_shut`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
+| `day2/izakaya.js` | `d2_izakaya_arrive`, `d2_exit_izakaya`, `d2_food_reply`, `d2_emi_party`, `d2_emi_department`, `d2_emi_food`, `d2_supper`, `d2_toast_word`, `d2_toast`, `d2_take_food`, `d2_compliment`, `d2_topic`, `d2_after_work`, `d2_norway`, `d2_quiet`, `d2_party_free`, `d2_seat_menu`, `d2_stay`, `d2_goodnight`, `d2_kenji_party`, `d2_drink_word`, `d2_no_drink`, `d2_more_drink`, `d2_more_food`, `d2_mio_party`, `d2_mori_party`, `d2_kenji_wait`, `d2_mio_wait`, `d2_mori_wait`, `d2_mori_rest`, `d2_go_word`, `d2_mori_rest_end`, `d2_leftovers`, `d2_mori_drink`, `d2_mori_rest_idle`, `d2_mori_rest_again`, `d2_mori_go_reply`, `d2_mori_see_reply`, `d2_empty_bench`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |

@@ -1,6 +1,6 @@
 # Day-2 visits
 
-Eric can use his room computer, take a nearby walk before or after work, and return home without a timer. Built. The room computer also opens the day-2 ticket app.
+Eric can use his room computer, take a nearby walk before or after work, and return home without a timer. The room computer also opens the day-2 ticket app.
 
 ## Cast
 
@@ -9,7 +9,7 @@ Eric can use his room computer, take a nearby walk before or after work, and ret
 ## Beats
 
 1. A message from Mio reminds Eric about the station at the beginning of day 2. His computer optionally opens the [repair requests](service.md#repair-requests) or lets him send a short message home. The message is fictional story text; no external service is contacted. Neither action changes the work schedule.
-2. Room, courtyard and street exits remain available all day. The open area and its two periods are listed in [the day-2 overview](README.md). New districts are the shop street, east lane and east coast. Shop interiors stay inaccessible; their cards reflect the period and individual closure reasons in the handoff. The north crossings have visible resurfacing barriers.
+2. Room, courtyard and street exits remain available all day. The open area and its two periods are listed in [the day-2 overview](README.md). New districts are the shop street, east lane and east coast. The izakaya opens for the department dinner; other shop interiors stay inaccessible; their cards reflect the period and individual closure reasons in the handoff. The north crossings have visible resurfacing barriers.
 3. At the east-lane liquor shop, a tag explains the existing cedar ball. The bakery’s A-board reveals delivery to the dorm manager’s window; Eric recognises it if he kept the flyer. Both have one first-visit interaction and a shorter return.
 4. The east-coast lookout telescope has a taped-over coin slot and is free to use. After work, Hamada is cleaning the lens; he yields the eyepiece to Eric. Looking down from here reveals narrow maintenance steps between the shoreline’s armour rocks, the lowest washed by the water. The view is framed and staged, and the steps are inaccessible. Eric may ask how to say “I want to see”, learn mitai, simply look, or leave. Skipping the word keeps it available on return; morning visitors can look without meeting Hamada.
 5. The route back stays available.
@@ -41,12 +41,9 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
 
 | File | Nodes |
 |---|---|
-| `day2/dorms.js` | `d2_room`, `d2_computer`, `d2_inbox`, `d2_write_home`, `d2_send_home`, `d2_close_computer`, `d2_leave_room`, `d2_bed`, `d2_window`, `d2_boxes`, `d2_end`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
+| `day2/dorms.js` | `d2_room`, `d2_first_request`, `d2_take_request`, `d2_ready_first`, `d2_computer`, `d2_inbox`, `d2_accept_at_computer`, `d2_write_home`, `d2_send_home`, `d2_close_computer`, `d2_leave_room`, `d2_bed`, `d2_window`, `d2_boxes`, `d2_end`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/dorm_court.js` | `d2_arrive`, `d2_hall`, `d2_go_up`, `d2_to_lane`, `d2_mailboxes`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/east_lane.js` | `d2_arrive`, `d2_to_plaza`, `d2_to_shops`, `d2_to_coast`, `d2_to_dorms`, `d2_sake_tag`, `d2_shut`, `d2_north_closed`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
-| `day2/plaza.js` | `d2_arrive`, `d2_to_office`, `d2_to_lane`, `d2_to_shops`, `d2_fountain`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
+| `day2/plaza.js` | `to_canteen`, `d2_arrive`, `d2_to_office`, `d2_to_lane`, `d2_to_shops`, `d2_fountain`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/east_coast.js` | `d2_arrive`, `d2_to_lane`, `d2_north_closed`, `d2_onsen`, `d2_lookout`, `d2_hamada`, `d2_see_word`, `d2_lookout_view`, `d2_hamada_idle`, `d2_hamada_again`, `d2_leave_lookout`, `d2_hamada_go`, `d2_hamada_food`, `d2_hamada_drink`, `d2_lookout_again`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
-
-
-
-The canteen ground floor is an optional, wordless stop through the plaza door: `day2/plaza.js` adds `to_canteen`; `day2/canteen.js` reuses the shared `arrive`, `to_plaza`, `sit_w` and `sit_e` nodes. It changes no job flags and returns through the same door.
+| `day2/canteen.js` | `arrive`, `to_plaza`, `sit_w`, `sit_e` |

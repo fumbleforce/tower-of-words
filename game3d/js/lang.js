@@ -219,7 +219,7 @@ export function iconHTML(id, cls = 'wi') {
   return ICON[id] ? `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[id]}</svg>` : '';
 }
 export const COMMANDS = ['matte', 'akete', 'kite', 'ugoite', 'irete', 'dashite', 'tomatte'];
-export const PHRASES = ['ohayo', 'yoroshiku', 'sumimasen', 'tabetai', 'nomitai', 'mitai', 'ikitai', 'koko'];
+export const PHRASES = Object.keys(WORDS).filter((id) => WORDS[id].phrase);
 export const SAYABLE = [...PHRASES, ...COMMANDS];
 
 // the words Eric has been taught in play (typed, `learn` or `offer`); nothing else counts as known

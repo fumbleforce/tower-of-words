@@ -13,6 +13,7 @@ export const PINS = {
   dorm_court: { at: [79.84, -1.3] },
   dorms: { in: 'dorm_court' },
   shotengai: { at: [30.3, 20.1] },
+  izakaya: { in: 'shotengai' },
   karaoke: { in: 'shotengai' },
   karaoke_booth: { in: 'karaoke' },
   east_lane: { at: [67.5, -6.5] },

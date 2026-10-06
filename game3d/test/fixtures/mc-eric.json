@@ -1,10 +1,9 @@
 {
- "about": "What the game showed for Eric before the protagonist config (#251), captured from the code and story at 13f71f23. game3d/test/unit/mc-identity.test.mjs checks that Eric still gets exactly this.",
+ "about": "What the game showed for Eric before the protagonist config (#251), captured from the code and story at 13f71f23. game3d/test/unit/mc-identity.test.mjs checks that Eric still gets exactly this. Day-2 dinner moved indoors in the quality rebuild; removed English replacement subtitle and moved identity lines to izakaya.js.",
  "story": {
   "game3d/story/day2/index.js": [
    "Eric! After work. Food. Welcome food!",
    "Eric! This way. Mori-san is there.",
-   "Which would you like, Eric?",
    "Yes! See you Monday, Eric. Computer game also, maybe?",
    "エリックさんは、どちらがいいですか。"
   ],
@@ -12,10 +11,7 @@
    "Eric! After work. Food. Welcome food!"
   ],
   "game3d/story/day2/shotengai.js": [
-   "Eric! This way. Mori-san is there.",
-   "Which would you like, Eric?",
-   "Yes! See you Monday, Eric. Computer game also, maybe?",
-   "エリックさんは、どちらがいいですか。"
+   "Eric! This way. Mori-san is there."
   ],
   "game3d/story/dorm_court.js": [
    "> エリック · erikku · Eric"
@@ -36,6 +32,10 @@
    "Eric",
    "Mm, like that. Don't worry, it's not mean, it's like saying “the new guy”. Only, you stay new guy for, um, maybe ten years.",
    "“I'm Eric.”"
+  ],
+  "game3d/story/day2/izakaya.js": [
+   "Yes! See you Monday, Eric. Computer game also, maybe?",
+   "エリックさんは、どちらがいいですか。"
   ]
  },
  "speaker": "Eric",

@@ -13,6 +13,11 @@ Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say t
 | `ohayo` | おはようございます | ohayō gozaimasu | good morning | phrase |
 | `yoroshiku` | よろしくおねがいします | yoroshiku onegaishimasu | nice to meet you | phrase |
 | `sumimasen` | すみません | sumimasen | excuse me, sorry | phrase |
+| `yasumi` | 休み | yasumi | a break; a day off | phrase |
+| `kanpai` | 乾杯 | kanpai | cheers | phrase |
+| `oishii` | おいしい | oishii | delicious | phrase |
+| `mouichido` | もう一度 | mou ichido | once more | phrase |
+| `daijoubu` | 大丈夫 | daijoubu | okay; all right | phrase |
 | `tabetai` | 食べたい | tabetai | I want to eat | phrase |
 | `nomitai` | 飲みたい | nomitai | I want to drink | phrase |
 | `mitai` | 見たい | mitai | I want to see | phrase |
@@ -70,9 +75,9 @@ Day 1 teaches nine words, in the order a player meets them. Who teaches each, an
 
 ## Taught on day 2
 
-The [day-2 set](../../game3d/story/day2/README.md) keeps its four records in `story/day2/words.js`; game3d/js/lang.js adds them to its words, so they are in the table above. Who teaches them, and in which node, is in [welcome.md](stories/day2/welcome.md) and [visits.md](stories/day2/visits.md).
+The [day-2 set](../../game3d/story/day2/README.md) keeps nine contextual phrases in story/day2/words.js. The station teaches mouichido and daijoubu for repeating the test and reporting its result. The meal teaches tabetai for the chosen food. Kanpai at the toast and oishii in a later compliment are optional. Optional conversations teach yasumi at reception, nomitai over tea, mitai at the telescope and ikitai with Mori. Exact teachers and nodes live in the [day-2 stories](stories/day2/README.md).
 
-The single new pattern is the **-tai form**, saying what you want to do yourself. The Words panel pairs 食べたい with 食べる (taberu, to eat), 飲みたい with 飲む (nomu, to drink), 見たい with 見る (miru, to see), and 行きたい with 行く (iku, to go), with one line on what -tai does over the phrases once one is known. Only tabetai is required; the other three are optional reinforcement in the gathering or nearby encounters. All start unknown, become known through typing, and are things to say to people. None commands a machine. Their clips (eric-<id> and word-<id> for each) are in the voice manifest, still to be made; until then the words have no play button and Eric says them silently.
+The **-tai form** expresses what the speaker wants to do. The Words panel pairs 食べたい with 食べる, 飲みたい with 飲む, 見たい with 見る, and 行きたい with 行く. Every new phrase starts unknown and is learned through typing. These phrases address people; none commands a machine. The protagonist's pronunciation key is declared in each word record and remapped for the chosen protagonist; clickable replay remains Mio's slow word clip.
 
 ## Taught on day 3
 

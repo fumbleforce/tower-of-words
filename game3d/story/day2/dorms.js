@@ -19,13 +19,29 @@ export default {
       { if: '!d2_started', then: [
         { set: 'd2_started' }, { unset: 'going_home' }, { do: 'period', to: 'morning' },
         { do: 'phone', who: 'eric', state: 'buzz' },
-        { say: 'miotext', text: 'station this morning, remember' },
+        { say: 'miotext', text: 'i sent you the station request, T-0002' },
+        { say: 'miotext', text: 'can you take it? they’re holding an empty car for the test' },
         { if: 'lunch_mio || mio_warm >= 2', then: [{ say: 'miotext', text: 'i’ll meet you down there' }],
           else: [{ say: 'miotext', text: 'the guard knows you’re coming' }] },
         { do: 'phone', who: 'eric', state: 'away' }, { do: 'save' },
       ] },
-      ...direction('door_out', 'door_out', 'door_out', 'door_out'),
+      { if: '!d2_ticket_taken && !d2_ticket_done', then: [{ go: 'd2_first_request' }], else: direction('door_out', 'door_out', 'door_out', 'door_out') },
     ],
+    d2_first_request: [
+      { do: 'tickets' },
+      { choice: [
+        { text: 'Take the station door check.', go: 'd2_take_request' },
+        { text: 'Get ready before accepting it.', go: 'd2_ready_first' },
+      ] },
+    ],
+    d2_take_request: [
+      { do: 'ticket', start: 'T-0002' }, { set: 'd2_ticket_taken' },
+      { do: 'phone', who: 'eric', state: 'buzz' },
+      { say: 'miotext', text: 'thanks, test it normally first so we have something to compare' },
+      { do: 'phone', who: 'eric', state: 'away' },
+      ...direction('door_out', 'door_out', 'door_out', 'door_out'), { do: 'save' },
+    ],
+    d2_ready_first: [{ do: 'goal', text: 'Read Mio’s station request on your computer when you’re ready.', at: 'computer' }],
     d2_computer: [
       { do: 'sit', who: 'eric', at: 'desk_chair' }, { do: 'cam', on: 'computer', zoom: 1.2 },
       { if: '!d2_computer_seen', then: [
@@ -41,8 +57,9 @@ export default {
     d2_inbox: [
       ...repairQueue,
       { do: 'tickets' }, { do: 'save' },
-      { go: 'd2_close_computer' },
+      { if: '!d2_ticket_taken && !d2_ticket_done', then: [{ choice: [{ text: 'Take the station door check.', go: 'd2_accept_at_computer' }, { text: 'Leave it for now.', go: 'd2_close_computer' }] }], else: [{ go: 'd2_close_computer' }] },
     ],
+    d2_accept_at_computer: [{ do: 'stand', who: 'eric' }, { do: 'cam', back: true }, { go: 'd2_take_request' }],
     d2_write_home: [
       { choice: [
         { text: '“I found the office. Still unpacking. I’ll call at the weekend.”', go: 'd2_send_home' },

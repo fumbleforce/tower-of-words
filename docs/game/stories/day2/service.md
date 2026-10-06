@@ -1,53 +1,40 @@
 # The station report
 
-Eric checks the doors before going to B2. Mio's explanation of yesterday's incident and Emi's newly secured parts budget meet in his report. Built. The ticket app is introduced for C-0383.
+The station job compares an ordinary passing door test with the effect of the player's spoken words. The report then determines whether Emi orders a sensor. T-0002 remains open until the station confirms it on day 3.
 
-## Cast
+## Taking and testing the request
 
-`eric`, `mio`, `guard`, `emi`, `kenji`, `mori`, `tama`
+Mio asks the player to take T-0002 at the start of the day. The ticket app shows the actual request before acceptance. The player can get ready first and accept at the room computer; arriving at the requested job also begins it. Both computers share the same list and read state. T-0001 records the completed day-1 copier repair and pays once; reading or returning never pays again.
 
-## Beats
+At the empty stationary carriage, Mio joins when `lunch_mio || mio_warm >= 2`; otherwise she helps by phone. The ordinary sensor test passes. She models “once more”; the player types it and runs a second ordinary test. The player then speaks the already-learned matte and ugoite with the doorway empty. The motor holds the doors open until released. This experiment happens before either report choice.
 
-1. At the station, Mio joins Eric exactly when she promised: `lunch_mio || mio_warm >= 2`. Otherwise she supplies the job context by message. The empty carriage is between runs and remains stationary.
-2. One interaction runs the door/sensor check and shows a pass. Eric can submit one of two reports, or optionally repeat the voice experiment first. The optional sequence uses already-known matte and ugoite; it never assumes akete was learned.
-3. He either confirms the sensor fault or reports that it passes. The submit confirms it was sent; Mio reacts to the chosen wording, in person or by message. On the warm history she then walks out to B2 and is absent on a station return. The report saves once and is read by Emi on B2. She places the replacement order or keeps the money. It has no bond penalty, hidden correct answer or extra follow-up quest.
-4. Emi asks about the old equipment; Eric can ask for assessment time or decline to promise ten years. He keeps the magic to himself. Emi supplies Mori’s notes on both reply paths; the camera frames Kenji before he invites Eric for after-work food, then goes ahead to help collect it. Emi has another meeting.
-5. At his desk, Eric can read the two repair requests. Closing the app leaves him seated with a choice to read Mori’s notes for the afternoon or get up. Choosing the notes advances to evening; the goal becomes the meeting by the izakaya. Browsing the app and getting up preserve the current period and desk objective. The app remains available at his B2 desk after work.
+The player can report the passing sensor or keep Mio's earlier sensor explanation. Both choices explicitly send a report. Mio responds in person or by message; the warm branch walks her back to work. She models “okay” for the guard's question about the doors, and the player types it. At the gate, the learned word is a direct dialogue reply. Emi later reads the report and either orders the replacement or keeps the budget. No bond penalty or hidden correct-answer reward is attached.
 
-## Repair requests
+## Work and conversations
 
-The ticket app first appears on day 2. It has two requests from the existing story, with English descriptions and a glossed Japanese noun in each. Their full text lives in [story/tickets.js](../../../../game3d/story/tickets.js). The same saved list opens from the room computer and Eric's B2 desk; the first opening teaches selecting a request to read it. The room visit is optional; the B2 desk supplies the glimpse if it was skipped. Reading has no reward, timer or effect on the time of day.
+Emi asks what the player can maintain and accepts a cautious answer. Kenji invites the whole department to the izakaya; Emi joins after her meeting. At the desk, the player can browse requests without advancing time. Mori's old copier request reveals why an apparently stale queue matters: removing jammed paper never solved the underlying fault. Choosing to review the requests with him spends the afternoon; getting up preserves it. The computer remains usable after work.
 
-| ID | Requester | Work and story effect |
-|---|---|---|
-| `T-0001` | Mr. Mori | The [day-1 repair](../copier.md) and Mio's closure are recorded as history. The day-2 queue records it as closed and credits its payment once, including when an older save first gains the queue. Later PC visits and Continue preserve that closure without paying again. Reading it does not replay the repair, reopen it or award another bond point. |
-| `T-0002` | Honsha station, via Mio | The station test begins work. Submitting the existing report records either a replacement request or a passing sensor result; Mio and Emi react through the existing report branches. The request stays in progress while the replacement or station confirmation is pending. |
+Mio has separate work and weekend topics, including a lunch-history-sensitive pickles callback. After both topics she needs to finish her work. Kuro has work and day-off topics at reception, direct known-word replies, and an invitation to swim tomorrow after six on both experienced and beginner branches. Her personal name still belongs to the day-3 introduction.
 
-`d2_ticket_done` means that Eric submitted the station report. It does not mean the repair request is closed. Day 2 can end with that request open. The app cannot bypass the station test or close the request merely by reading it. A later authored confirmation may close it; no such confirmation or new errand is added to day 2. T-0002 therefore pays nothing yet. Payment amounts live with the ticket data. The B2 conversation is this day's visit, not a requirement to attend every day.
+## State
 
-## Choices and flags
-
-| Flag | Set when | Read by |
-|---|---|---|
-| `d2_station_seen` | The first platform arrival | Arrival lines on returns |
-| `d2_mio_here` | The day-1 promise condition holds, until the station ticket is submitted | Setup, optional-test response and departure |
-| `d2_checked` | The check completes | Prevents replaying the mechanical check |
-| `d2_voice_tested` | The optional experiment ends | Hides its repeat option |
-| `d2_order_sensor` | Confirming the fault; unset for the pass report | Mio’s immediate reply and Emi’s response |
-| `d2_ticket_done` | Either report is submitted | Route goals and the B2 conversation |
-| `d2_brief_done` | The invitation finishes | Desk availability and repeat conversation |
-| `d2_shift_done` | Choosing to spend the afternoon on Mori’s notes | Period, placements and the party |
+`d2_ticket_taken` records accepting the request. `d2_checked` prevents repeated initial tests. `d2_voice_tested` records the experiment; `d2_mio_saw_test` separately records whether Mio witnessed it. `d2_order_sensor` selects the report, and `d2_ticket_done` means report submitted, not repair paid. `d2_brief_done` opens the afternoon review; `d2_shift_done` advances to evening. Kuro's work/weekend/greeting flags and Mio's two topic flags prevent repeated social introductions and support later callbacks.
 
 ## Words taught
 
-None. The optional door experiment reuses words already learned on both day-1 gate paths.
+| Word | By | Node |
+|---|---|---|
+| `mouichido` | `mio` | `d2_check` |
+| `daijoubu` | `mio` | `d2_submit` |
+| `yasumi` | `kuro` | `d2_kuro_work` |
+
+Mouichido and daijoubu are part of the station route. Yasumi is learned through the optional reception conversation. Pronunciation models and typed attempts use the chosen protagonist's clips. Japanese speech remains blurred except for known words, names and loanwords; there are no English replacement subtitles.
 
 ## Nodes
 
 | File | Nodes |
 |---|---|
 | `day2/train.js` | `d2_platform`, `d2_check`, `d2_report`, `d2_voice_test`, `d2_order_sensor`, `d2_keep_sensor`, `d2_submit`, `d2_checked_again`, `d2_mio_before`, `d2_mio_after`, `d2_mio_idle`, `d2_to_gate`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
-| `day2/gate.js` | `d2_gate`, `d2_guard`, `d2_guard_idle`, `d2_reader`, `d2_cat`, `d2_guard_food`, `d2_guard_drink`, `d2_cat_food`, `d2_cat_drink`, `d2_to_platform`, `d2_to_forecourt`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
-| `day2/forecourt.js` | `d2_arrive`, `d2_to_station`, `d2_to_shotengai`, `d2_to_office`, `d2_to_plaza`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
-| `day2/office.js` | `d2_office`, `d2_brief`, `d2_assess`, `d2_limits`, `d2_invitation`, `d2_work`, `d2_notes`, `d2_leave_desk`, `d2_emi_waiting`, `d2_emi_later`, `d2_desk_wait`, `d2_desk_later`, `d2_mio_work`, `d2_mori_work`, `d2_kenji_work`, `d2_kenji_invite_again`, `d2_leave`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
-
+| `day2/gate.js` | `d2_gate`, `d2_guard_report`, `d2_guard_ok`, `d2_guard_sent`, `d2_guard`, `d2_guard_idle`, `d2_reader`, `d2_cat`, `d2_guard_food`, `d2_guard_drink`, `d2_cat_food`, `d2_cat_drink`, `d2_to_platform`, `d2_to_forecourt`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
+| `day2/forecourt.js` | `d2_to_shotengai`, `d2_kuro_talk`, `d2_kuro_topics`, `d2_kuro_greet`, `d2_kuro_work`, `d2_kuro_weekend`, `d2_kuro_swimmer`, `d2_kuro_beginner`, `d2_kuro_ok`, `d2_kuro_end`, `d2_arrive`, `d2_to_station`, `d2_to_office`, `d2_to_plaza`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
+| `day2/office.js` | `d2_office`, `d2_brief`, `d2_assess`, `d2_limits`, `d2_invitation`, `d2_work`, `d2_leave_desk`, `d2_notes`, `d2_review_requests`, `d2_emi_waiting`, `d2_emi_later`, `d2_desk_wait`, `d2_desk_later`, `d2_mio_work`, `d2_mio_job`, `d2_mio_weekend`, `d2_mio_idle_work`, `d2_social_end`, `d2_mori_work`, `d2_kenji_work`, `d2_kenji_invite_again`, `d2_leave`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |

@@ -36,7 +36,8 @@ for (const [place, story] of Object.entries(STORIES)) {
       if (s.say) {
         assert(speakers[s.say], `${place}/${node}: unknown speaker ${s.say}`);
         assert(s.emo || speakers[s.say].phone, `${place}/${node}: unvoiced direction for ${s.say}`);
-        if (['mori', 'guard', 'kuroda'].includes(s.say)) assert(s.en && !s.overheard, `${place}/${node}: Japanese must be subtitled`);
+        assert(!s.en, `${place}/${node}: participant Japanese must not use en subtitles`);
+        if (['mori', 'guard', 'kuroda'].includes(s.say)) assert(s.overheard || (s.slow && /^\{\w+\}[。.]?$/.test(s.text)), `${place}/${node}: Japanese needs contextual comprehension or a modelled word`);
       }
       for (const k of ['text', 'prompt', 'line', 'en']) if (s[k]) text(s[k]);
       if (s.if) cond(s.if);
@@ -155,24 +156,24 @@ class Play {
   }
   move(to) {
     assert(TRIPS[this.place].includes(to), `No route ${this.place} -> ${to}`);
-    const route = Object.entries(STORIES[this.place].nodes).find(([, body]) => body.length === 1 && body[0].do === 'trip' && body[0].to === to);
+    const route = Object.entries(STORIES[this.place].nodes).find(([, body]) => body.some(step => step.do === 'trip' && step.to === to));
     assert(route, `No authored trip ${this.place} -> ${to}`); this.run(route[0]); assert.equal(this.place, to);
   }
 }
 // Reading the queue never spends the afternoon or finishes the outstanding station repair.
 for (const submitted of [false, true]) {
   const p = new Play({ d2_started: true, d2_ticket_done: submitted, period: 'morning' });
-  p.fire('talk:computer', ['d2_inbox']);
+  p.fire('talk:computer', ['d2_inbox', ...(!submitted ? ['d2_close_computer'] : [])]);
   assert.equal(p.tickets.status('T-0001'), 'done', 'Day-1 copier closure was lost');
   assert.equal(p.tickets.status('T-0002'), submitted ? 'progress' : 'new');
   assert.equal(p.flags.period, 'morning', 'Reading tickets spent the afternoon');
   assert.equal(!!p.flags.d2_shift_done, false);
   assert.deepEqual(p.payments, [{ id: 'T-0001', yen: TICKETS['T-0001'].pay }], 'Historical repair payment was not credited once');
-  p.fire('talk:computer', ['d2_inbox']);
+  p.fire('talk:computer', ['d2_inbox', ...(!submitted ? ['d2_close_computer'] : [])]);
   assert.equal(p.tickets.list().length, 2, 'Reopening duplicated a request');
   assert.equal(p.payments.length, 1, 'Reopening paid the same repair again');
   const resumed = new Play(JSON.parse(JSON.stringify(p.flags)));
-  resumed.fire('talk:computer', ['d2_inbox']);
+  resumed.fire('talk:computer', ['d2_inbox', ...(!submitted ? ['d2_close_computer'] : [])]);
   assert.equal(resumed.payments.length, 0, 'Continue paid the same repair again');
 }
 {
@@ -182,7 +183,7 @@ for (const submitted of [false, true]) {
   assert.equal(p.hooks.findLast(h => h.do === 'stand').who, 'eric');
   assert.equal(p.hooks.findLast(h => h.do === 'goal').at, 'my_desk');
   const resumed = new Play(JSON.parse(JSON.stringify(p.flags))); resumed.place = 'office';
-  resumed.fire('talk:my_chair', ['d2_notes']);
+  resumed.fire('talk:my_chair', ['d2_notes', 'd2_review_requests']);
   assert.equal(resumed.flags.period, 'evening'); assert(resumed.flags.d2_shift_done);
   assert.equal(resumed.tickets.status('T-0002'), 'progress', 'A submitted report closed the repair');
   resumed.fire('talk:my_desk');
@@ -203,8 +204,8 @@ const milestones = [
   [{ d2_ticket_done: true }, /Emi|B2/i],
   [{ d2_ticket_done: true, d2_brief_done: true }, /desk|ready to work/i],
   [{ d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true }, /Meet Kenji/i],
-  [{ d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true, d2_met_kenji: true }, /bench|others/i],
-  [{ d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true, d2_met_kenji: true, d2_ate: true }, /bench|others/i],
+  [{ d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true, d2_met_kenji: true }, /izakaya|department/i],
+  [{ d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true, d2_met_kenji: true, d2_ate: true }, /izakaya|department/i],
   [{ d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true, d2_met_kenji: true, d2_ate: true, d2_party_done: true }, /home|203/i],
 ];
 for (const [flags, intent] of milestones) for (const place of ['dorm_court', 'east_lane', 'east_coast', 'plaza', 'forecourt', 'gate', 'train']) {
@@ -230,36 +231,40 @@ for (const order of [false, true]) for (const warm of [false, true]) {
 }
 const transcripts = [];
 let routes = 0;
-for (const historyKind of ['cold', 'lunch', 'warmth']) for (const order of [false, true]) for (const experiment of [false, true])
-for (const topic of ['d2_norway', 'd2_quiet', 'd2_after_work']) for (const food of ['riceball', 'sandwich']) for (const extra of [false, true]) for (const meetFirst of [false, true]) {
+for (const historyKind of ['cold', 'lunch', 'warmth']) for (const order of [false, true])
+for (const topic of ['d2_norway', 'd2_quiet', 'd2_after_work']) for (const food of ['yakitori', 'vegetables']) for (const extra of [false, true]) for (const meetFirst of [false, true]) {
   const warm = historyKind !== 'cold';
   const history = { know_matte: true, know_ugoite: true, know_ohayo: true, know_akete: warm, lunch_mori: historyKind !== 'lunch', lunch_mio: historyKind === 'lunch', mio_warm: warm ? 2 : 0, going_home: true };
-  const p = new Play(history); p.run('d2_room'); assert(!p.flags.going_home);
+  const p = new Play(history); p.run('d2_room', ['d2_take_request']); assert(!p.flags.going_home);
   if (extra) p.fire('talk:computer', ['d2_write_home', 'd2_send_home']);
   p.move('dorm_court'); p.move('east_lane');
   if (extra) { p.move('east_coast'); p.fire('talk:lookout'); p.move('east_lane'); }
-  p.move('plaza'); p.move('forecourt'); p.move('gate'); p.move('train');
+  p.move('plaza'); p.move('forecourt');
+  if (extra) p.fire('talk:kuro', ['d2_kuro_work', 'd2_kuro_weekend', 'd2_kuro_beginner', 'd2_kuro_end']);
+  p.move('gate'); p.move('train');
   assert.equal(!!p.flags.d2_mio_here, warm);
-  p.fire('talk:door_test', [...(experiment ? ['d2_voice_test'] : []), order ? 'd2_order_sensor' : 'd2_keep_sensor']);
+  p.fire('talk:door_test', [order ? 'd2_order_sensor' : 'd2_keep_sensor']);
   assert(p.flags.d2_ticket_done); assert.equal(!!p.flags.d2_order_sensor, order);
-  assert.equal(p.hooks.filter(x => x.do === 'doorTest').length, 1);
-  assert.equal(p.hooks.filter(x => x.do === 'doorsHold').length, Number(experiment));
-  p.fire('talk:door_test'); assert.equal(p.hooks.filter(x => x.do === 'doorTest').length, 1, 'Repeat test replayed');
+  assert.equal(p.hooks.filter(x => x.do === 'doorTest').length, 2);
+  assert.equal(p.hooks.filter(x => x.do === 'doorsHold').length, 1);
+  p.fire('talk:door_test'); assert.equal(p.hooks.filter(x => x.do === 'doorTest').length, 2, 'Repeat test replayed');
   p.move('gate'); p.move('forecourt'); p.move('office');
   p.fire('talk:emi', [warm ? 'd2_limits' : 'd2_assess']);
   assert(p.lines.some(s => s.includes(order ? 'put the order through' : 'keep the money')), 'Report was not read');
-  p.fire(meetFirst ? 'talk:my_chair' : 'talk:my_desk', ['d2_notes']); assert(p.flags.d2_shift_done); assert.equal(p.flags.period, 'evening');
+  p.fire(meetFirst ? 'talk:my_chair' : 'talk:my_desk', ['d2_notes', 'd2_review_requests']); assert(p.flags.d2_shift_done); assert.equal(p.flags.period, 'evening');
   p.move('forecourt'); p.move('plaza'); p.move('shotengai');
   if (meetFirst) p.fire('talk:kenji');
-  p.fire('talk:party_seat', [{ go: 'd2_take_food', food }, topic]);
+  p.fire('talk:izakaya');
+  p.fire('talk:party_seat', [extra ? 'd2_toast_word' : 'd2_toast', { go: 'd2_take_food', food }, topic]);
+  if (extra) p.fire('talk:mori', ['d2_compliment']);
   assert.equal(p.flags.d2_food, food); assert(p.flags.know_tabetai); assert(!p.flags.know_nomitai);
   assert.equal(p.hooks.filter(x => x.do === 'type' && x.word === 'tabetai').length, 1);
-  assert.match(p.hooks.find(x => x.do === 'type' && x.word === 'tabetai').prompt, food === 'riceball' ? /rice ball/i : /sandwich/i, 'Food prompt lost the chosen object');
+  assert.match(p.hooks.find(x => x.do === 'type' && x.word === 'tabetai').prompt, food === 'yakitori' ? /chicken skewer/i : /grilled vegetables/i, 'Food prompt lost the chosen object');
   if (extra) { p.fire('talk:kenji', ['d2_drink_word']); assert(p.flags.know_nomitai); }
-  p.move('east_lane'); p.move('shotengai');
+  p.move('shotengai'); p.move('east_lane'); p.move('shotengai'); p.fire('talk:izakaya');
   p.fire('talk:party_seat', ['d2_goodnight']); assert(p.flags.d2_party_done);
   if (extra) { p.fire('talk:mori', ['d2_go_word']); p.fire('talk:mori'); assert(p.flags.d2_mori_rest_seen && p.flags.know_ikitai); }
-  p.move('east_lane'); p.move('plaza'); p.move('forecourt'); p.move('office');
+  p.move('shotengai'); p.move('east_lane'); p.move('plaza'); p.move('forecourt'); p.move('office');
   assert(p.hooks.at(-1).text.includes('Head home'), 'Office return lost the home goal');
   p.move('forecourt'); p.move('gate'); p.move('train');
   assert(!p.flags.d2_mio_here, 'Mio duplicated at the station after work');
@@ -272,7 +277,7 @@ for (const topic of ['d2_norway', 'd2_quiet', 'd2_after_work']) for (const food 
   assert.equal(p.tickets.status('T-0001'), 'done');
   assert.equal(p.tickets.status('T-0002'), 'progress', 'Day end required a closed station repair');
   for (const word of Object.keys(NEW_WORDS)) {
-    const expected = Number(extra || word === 'tabetai');
+    const expected = Number(extra || ['mouichido', 'daijoubu', 'tabetai'].includes(word));
     assert.equal(p.hooks.filter(h => h.do === 'type' && h.word === word).length, expected, `${word}: lesson repeated or became compulsory`);
     assert.equal(!!p.flags['know_' + word], !!expected);
   }
@@ -280,12 +285,12 @@ for (const topic of ['d2_norway', 'd2_quiet', 'd2_after_work']) for (const food 
   // A saved flag set must preserve typed words and completed scenes on return.
   const resumed = new Play(JSON.parse(JSON.stringify(p.flags))); resumed.place = 'shotengai'; resumed.run('d2_arrive');
   assert(!resumed.hooks.some(x => x.do === 'type')); assert(resumed.flags.d2_party_done);
-  if (process.env.TRANSCRIPTS) transcripts.push({ historyKind, order, experiment, food, extra, meetFirst, topic, lines: p.lines });
+  if (process.env.TRANSCRIPTS) transcripts.push({ historyKind, order, food, extra, meetFirst, topic, lines: p.lines });
   routes++;
 }
 // Optional lessons remain available after declining, leaving and restoring saved flags.
 for (const lesson of [
-  { place: 'shotengai', target: 'mori', word: 'ikitai', skip: 'd2_mori_rest_end', learn: 'd2_go_word' },
+  { place: 'izakaya', target: 'mori', word: 'ikitai', skip: 'd2_mori_rest_end', learn: 'd2_go_word' },
   { place: 'east_coast', target: 'kuroda', word: 'mitai', skip: 'd2_leave_lookout', learn: 'd2_see_word' },
 ]) {
   const flags = { d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true, d2_ate: true, d2_party_done: true };
