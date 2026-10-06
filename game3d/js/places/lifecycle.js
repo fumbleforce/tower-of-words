@@ -226,6 +226,9 @@ export function createPlaceLifecycle(
     startScene(name);
   }
   game.travel = travel;
+  // a crossfade inside one place (the dorm building's stairs, places/dorm-floors.js): the frame now, faded out later
+  game.snapshot = snapshot;
+  game.crossfade = crossfade;
   game.prepare = prepare; // a place can build a side-trip neighbour ahead, as the player heads for it
 
   function startScene(name) {

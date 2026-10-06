@@ -1,8 +1,8 @@
 // Checks that Eric can walk up to everything he can select: in each place (morning, and after work where the place
 // has an evening), from where he arrives, the walk grid must reach every enabled thing's approach spot, and come
 // within reach of every person (a thing marked `reachAfter` once that walk-grid block is lifted), and every nook's
-// spot (places/catalog*.js `nooks`). Prints a FAIL line
-// for each one he can't get to, and PASS at the end if none.
+// spot (places/catalog*.js `nooks`), each from its own floor's arrival where a place has several (`reachFrom`).
+// Prints a FAIL line for each one he can't get to, and PASS at the end if none.
 //   node game3d/tools/reach-check.mjs            (PLACES=plaza,dorm_court to limit; BASE=<worktree>/game3d)
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 
@@ -33,6 +33,8 @@ await withBrowserJob('reach-check', async (browser) => {
           [sx, sz] = P.start,
           out = [];
         const V = g.player.root.position.clone();
+        // a place of several floors (the dorm building) says which floor's landing a point is reached from
+        const from = (target) => P.reachFrom?.(target) || [sx, sz];
         // things marked `reachAfter: <walk-grid tag>` are reached once the story lifts that block (the train's doors,
         // the gate) and talked to across it before: checked last, with those blocks lifted (issue #129)
         const later = Object.entries(P.things).filter(([, t]) => t.reachAfter);
@@ -52,7 +54,7 @@ await withBrowserJob('reach-check', async (browser) => {
             target = [a.x, a.z];
             need = person ? 1.3 : 1.6; // a person can be talked to across a desk
           }
-          const r = reachableNear(nav, sx, sz, target[0], target[1]);
+          const r = reachableNear(nav, ...from(target), target[0], target[1]);
           const d = r ? Math.hypot(r[0] - target[0], r[1] - target[1]) : 1e9;
           out.push({ id, d: +d.toFixed(2), need, target: target.map((v) => +v.toFixed(2)), after: t.reachAfter });
         }
@@ -60,7 +62,7 @@ await withBrowserJob('reach-check', async (browser) => {
         const { PLACE_DETAILS } = await import('./js/places/catalog.js');
         for (const id of PLACE_DETAILS[P.name]?.nooks || []) {
           const target = P.spots[id];
-          const r = target && reachableNear(nav, sx, sz, target[0], target[1]);
+          const r = target && reachableNear(nav, ...from(target), target[0], target[1]);
           const d = r ? Math.hypot(r[0] - target[0], r[1] - target[1]) : 1e9;
           out.push({ id: `nook ${id}`, d: +d.toFixed(2), need: 0.3, target: (target || [NaN, NaN]).map((v) => +v.toFixed(2)) });
         }

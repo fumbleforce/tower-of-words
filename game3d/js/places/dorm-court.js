@@ -12,10 +12,14 @@ import { PLACE_DETAILS } from './catalog.js';
 import { found } from '../finds/index.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { day3Place } from './day3/place.js';
+import { HALL, BACK_Z, MANAGER } from '../scenes/dorm-court/plan.js';
+import { DORM_LOOKS } from '../../story/dorm-building.js';
 
 // The dorm courtyard, on the walk home after work; it also loads with ?place=dorm_court.
 // Eric walks in through the hall doors himself; the trip out starts at the passage at the back of the hall and
 // goes up the stairs to his floor (dorms).
+const BOARD = [HALL[1] - 0.1, BACK_Z], // the hall's notice board, and the manager's window
+  DESK = [(MANAGER[0] + MANAGER[1]) / 2, BACK_Z];
 const FLAP_OPEN = -1.9, // mailbox 203's flap swung open
   MAIL_ZOOM = 6; // the camera close on it, the number, the tape and the flyer readable on a phone
 export async function dormCourtPlace(game) {
@@ -76,7 +80,21 @@ export async function dormCourtPlace(game) {
       enabled: () => game.runner.has('talk:street_gate'),
     },
     tama: { ...PLACE_DETAILS.dorm_court.things.tama, ...d3.thing('tama') },
+    // the hall's notice board right of the passage, and the manager's window left of it: a look line each
+    hall_board: {
+      ...PLACE_DETAILS.dorm_court.things.hall_board,
+      anchor: (v) => v.set(BOARD[0], 1.35, BOARD[1]),
+      ...hallLook('hall_board', BOARD, [HALL[1] - 0.35, BACK_Z + 0.55]),
+    },
+    manager_window: {
+      ...PLACE_DETAILS.dorm_court.things.manager_window,
+      anchor: (v) => v.set(DESK[0], 1.5, DESK[1]),
+      ...hallLook('manager_window', DESK, [DESK[0], BACK_Z + 0.6]),
+    },
   };
+  function hallLook(id, at, spot) {
+    return { spot: () => spot, face: () => at, look: DORM_LOOKS[id] };
+  }
   const b = w.bounds;
   const P = {
     scene: w.scene,

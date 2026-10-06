@@ -23,7 +23,7 @@ export function plates(list) {
         g.textAlign = 'center';
         g.textBaseline = 'middle';
         g.font = `700 ${Math.round(h * 0.66)}px sans-serif`;
-        g.fillText(t, x + CELL, h * 0.54);
+        g.fillText(t, x + CELL, h * 0.54, CELL * 2 - 24); // a long word (KITCHEN) narrowed to fit its plate
       });
     },
     CELL * 2 * texts.length,

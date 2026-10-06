@@ -1,18 +1,23 @@
-// The stair hall at the corridor's east end, in the block's return (docs/game/places.md, Dorm building): the 2F
-// landing level with the corridor, the flight Eric comes up from the half landing along the west face (lane A),
-// beside it the flight down to 1F (lane B), a low wall between them. The stair window is on the west face over
-// lane A (the court sees it); the landing's back wall has the store's door, the 2F sign and a light. Everything is
-// cut at the ceiling like the flat, and the return in front of the stairs is cut at the floor, so the camera sees
-// the half landing. The return round the hall is cut solid.
+// The stair hall at the corridor's east end, in the block's return (docs/game/places.md, Dorm building), the same on
+// every corridor floor: the landing level with the corridor, the flight down along the west face (lane A) to the
+// half landing below, and beside it (lane B) the flight up to the next floor, cut a few treads up like the walls;
+// under it the flight from the half landing down to the floor below. The stair window is on the west face over lane
+// A (the court sees it); the landing's back wall has the floor's sign and a light, and on 2F the store's door, on 3F
+// a drinks machine. Everything is cut at the ceiling like the flats, and the return in front of the stairs is cut
+// at the floor, so the camera sees the half landing. The return round the hall is cut solid.
 import * as THREE from 'three';
 import { lightPool } from '../../places/life.js';
+import { textTexture, plane } from '../../props.js';
+import { drinksFace } from '../outdoor/nook-kits.js';
 import { RETURN, STAIR, STOREY, CORR, H, T, BACK, C } from './layout.js';
 import { plates } from './plates.js';
 
 const RISE = STOREY / 2 / (STAIR.treads + 1), // one step: half a storey in six
+  UP = 3, // treads of the flight up drawn before it is cut
   FLOOR = '#7a7f87',
   NOSE = '#a3a8ae',
   WALL = '#8a8f98',
+  RAIL = '#5d636c',
   DEEP = -2.45, // the court's ground, below 1F's floor
   RET_E = RETURN + 3.5, // the return's east side
   RET_S = 6.65; // its front, on the court
@@ -21,11 +26,15 @@ export function stairY(z) {
   const k = (z - STAIR.top) / (STAIR.half[0] - STAIR.top);
   return (-Math.min(1, Math.max(0, k)) * STOREY) / 2;
 }
+// and in lane B, up the flight to the next floor's half landing (the same pitch, the other way)
+export const stairUpY = (z) => -stairY(z);
+// how far up lane B's drawn treads go, and where Eric stands at their top before the next floor takes over
+export const UP_TOP = STAIR.top + UP * STAIR.tread;
 
-// a flight of steps in lane [x0, x1], from z0 by `dir` (+1 toward the camera), each `RISE` lower (or higher) than
+// a flight of `n` steps in lane [x0, x1], from z0 by `dir` (+1 toward the camera), each `step` lower (or higher) than
 // the one before, starting at y0
-function flight(kit, [x0, x1], z0, dir, y0, step) {
-  for (let i = 0; i < STAIR.treads; i++) {
+function flight(kit, [x0, x1], z0, dir, y0, step, n = STAIR.treads) {
+  for (let i = 0; i < n; i++) {
     const za = z0 + dir * i * STAIR.tread,
       zc = za + (dir * STAIR.tread) / 2,
       y = y0 + step * (i + 1);
@@ -41,7 +50,8 @@ function sloped(kit, color, x, w, h, [z0, y0], [z1, y1], o = {}) {
   kit.box(color, w, h, len, x, (y0 + y1) / 2, (z0 + z1) / 2, { rx, ...o });
 }
 
-export function stairs(kit, root) {
+// label: the floor's sign ('2F'); back: what stands on the landing's back wall ('store' or 'drinks')
+export function stairs(kit, root, { label = '2F', back: backWall = 'store' } = {}) {
   const { a, b, east, back, top, half, window: win } = STAIR;
   const x0 = RETURN,
     hy = -STOREY / 2;
@@ -50,24 +60,32 @@ export function stairs(kit, root) {
     surf: 'concrete',
     cast: false,
   });
-  // lane A: up from the half landing to the landing; lane B: down from the half landing to 1F, under the landing
+  // lane A: down to the half landing; lane B: up toward the next floor (cut), and under it down from the half
+  // landing to the floor below
   flight(kit, a, top, 1, 0, -RISE);
+  flight(kit, b, top, 1, 0, RISE, UP);
   flight(kit, b, half[0], -1, hy, -RISE);
   kit.box(FLOOR, b[1] - a[0], 0.2, half[1] - half[0], (a[0] + b[1]) / 2, hy - 0.2, (half[0] + half[1]) / 2, {
     surf: 'concrete',
   });
-  // under it all, 1F's floor at the foot of lane B
+  // the flight up's cut: the top tread capped pale, like a wall's cut, and its underside dark behind it
+  const ut = UP * RISE;
+  kit.box(C.wallTop, b[1] - b[0] + 0.01, 0.02, 0.03, (b[0] + b[1]) / 2, ut, UP_TOP - 0.015, { cast: false });
+  kit.box(C.cut, b[1] - b[0], ut + 0.2, 0.02, (b[0] + b[1]) / 2, -0.2, UP_TOP + 0.01, { cast: false });
+  // under it all, the floor below at the foot of lane B
   kit.box('#50555d', east - x0, 0.1, half[1] - back, (x0 + east) / 2, -STOREY - 0.1, (back + half[1]) / 2, {
     cast: false,
   });
-  // the low wall between the lanes, following lane A, with its rail; the guard wall at the landing's edge over B
+  // the low wall between the lanes, following lane A down, with its rail; the rail goes on up beside lane B's
+  // flight as far as it is drawn
   const wx = (a[1] + b[0]) / 2;
   sloped(kit, WALL, wx, 0.05, 0.5, [top, -0.05], [half[0], hy - 0.05], { surf: 'plaster' });
-  sloped(kit, '#5d636c', wx, 0.07, 0.03, [top, 0.45], [half[0], hy + 0.45], { cast: false });
-  kit.box(WALL, b[1] - b[0] + 0.1, 0.5, 0.05, (b[0] + b[1]) / 2, -0.02, top, { surf: 'plaster' });
-  kit.box('#5d636c', b[1] - b[0] + 0.12, 0.03, 0.07, (b[0] + b[1]) / 2, 0.48, top, { cast: false });
-  // a handrail on the west wall over lane A
-  sloped(kit, '#5d636c', a[0] + 0.04, 0.035, 0.035, [top, 0.55], [half[0], hy + 0.55], { cast: false });
+  sloped(kit, RAIL, wx, 0.07, 0.03, [top, 0.45], [half[0], hy + 0.45], { cast: false });
+  sloped(kit, RAIL, wx + 0.03, 0.035, 0.03, [top, 0.5], [UP_TOP, ut + 0.5], { cast: false });
+  kit.box(RAIL, 0.035, 0.5, 0.035, wx + 0.03, ut, UP_TOP - 0.02, { cast: false });
+  // a handrail on the west wall over lane A, and on the east wall over lane B
+  sloped(kit, RAIL, a[0] + 0.04, 0.035, 0.035, [top, 0.55], [half[0], hy + 0.55], { cast: false });
+  sloped(kit, RAIL, east - 0.04, 0.035, 0.035, [top, 0.55], [UP_TOP, ut + 0.55], { cast: false });
   // the west face: the return's wall on the court, from the corridor's parapet to the front, cut at the stair
   // window's sill (it stands between the camera and the landing); the window's sill and a sliver of its glass
   const wz = [CORR[1], half[1] + 0.1],
@@ -89,16 +107,19 @@ export function stairs(kit, root) {
     [T + 0.02, 0.035, half[1] + 0.1 - back, east + T / 2, H, (back + half[1] + 0.1) / 2],
     [east - x0 + T + 0.02, 0.035, T + 0.02, (x0 + east) / 2, H, back - T / 2],
   ]);
-  // on the back wall: the store's steel door, the 2F sign, a light; a fire hose cabinet on the east wall
+  // on the back wall: the floor's sign, a light, and the store's steel door or the drinks machine; a fire hose
+  // cabinet on the east wall
   const dx = east - 0.45;
-  kit.boxes(C.frame, [
-    [0.04, 1.3, 0.05, dx - 0.3, 0, back + 0.02],
-    [0.04, 1.3, 0.05, dx + 0.3, 0, back + 0.02],
-    [0.64, 0.05, 0.05, dx, 1.28, back + 0.02],
-  ]);
-  kit.box(C.steel, 0.56, 1.26, 0.03, dx, 0.01, back + 0.025, { surf: 'door' });
-  kit.box('#c9cdd2', 0.1, 0.025, 0.04, dx - 0.2, 0.62, back + 0.05, { r: 0.008, cast: false });
-  root.add(plates([['2F', x0 + 0.45, 1.05, back + 0.012, 0.36, 0.18]]));
+  if (backWall === 'store') {
+    kit.boxes(C.frame, [
+      [0.04, 1.3, 0.05, dx - 0.3, 0, back + 0.02],
+      [0.04, 1.3, 0.05, dx + 0.3, 0, back + 0.02],
+      [0.64, 0.05, 0.05, dx, 1.28, back + 0.02],
+    ]);
+    kit.box(C.steel, 0.56, 1.26, 0.03, dx, 0.01, back + 0.025, { surf: 'door' });
+    kit.box('#c9cdd2', 0.1, 0.025, 0.04, dx - 0.2, 0.62, back + 0.05, { r: 0.008, cast: false });
+  } else drinks(kit, root, dx, back);
+  root.add(plates([[label, x0 + 0.45, 1.05, back + 0.012, 0.36, 0.18]]));
   kit.box('#eef2f8', 0.2, 0.08, 0.07, x0 + 0.45, 1.36, back + 0.035, {
     r: 0.02,
     cast: false,
@@ -115,10 +136,26 @@ export function stairs(kit, root) {
   ];
   kit.boxes(C.cut, cut, { cast: false });
   kit.box(C.wallTop, RET_E - x0, 0.02, 0.03, (x0 + RET_E) / 2, 0.02, half[1] + 0.115, { cast: false });
-  // the stair light: cool, over the landing, and its pools on the landing and the half landing
-  const light = new THREE.PointLight('#dfe7f5', 1.1, 3.2, 1.4);
-  light.position.set((x0 + east) / 2, 1.3, (back + top) / 2 + 0.3);
-  root.add(light);
+  // the stair light's pools on the landing and the half landing (the light itself is the place's: places/dorms.js)
   root.add(lightPool((x0 + east) / 2, (back + top) / 2, 0.8, { color: '#dfe7f5', k: 0.16, y: -0.015 }));
   root.add(lightPool((a[0] + b[1]) / 2, (half[0] + half[1]) / 2, 0.6, { color: '#dfe7f5', k: 0.1, y: hy + 0.004 }));
+  return new THREE.Vector3((x0 + east) / 2, 1.3, (back + top) / 2 + 0.3); // where the stair light hangs
+}
+
+// the drinks machine against the landing's back wall at x: white, a blue top band, its lit front, a bin beside it
+// and its cool glow on the landing
+function drinks(kit, root, x, back) {
+  const W = 0.6,
+    Hm = 1.15,
+    D = 0.42,
+    z = back + D / 2 + 0.01;
+  kit.box('#3a3f47', W + 0.02, 0.05, D + 0.02, x, 0, z, { cast: false });
+  kit.box('#e3e6e8', W, Hm - 0.05, D, x, 0.05, z, { r: 0.01, surf: 'plastic' });
+  kit.box('#3f6f9e', W + 0.02, 0.07, D + 0.02, x, Hm - 0.06, z, { r: 0.01 });
+  const face = plane(W - 0.06, Hm - 0.18, textTexture(drinksFace('#3f6f9e', 2), 256, 512), { emissiveK: 0.75 });
+  face.position.set(x, 0.06 + (Hm - 0.18) / 2, back + D + 0.016);
+  root.add(face);
+  kit.cyl('#4a6490', 0.09, 0.08, 0.3, x - W / 2 - 0.14, 0, back + 0.2, { surf: 'plastic' });
+  kit.box('#2f333b', 0.07, 0.01, 0.03, x - W / 2 - 0.14, 0.3, back + 0.2, { cast: false });
+  root.add(lightPool(x, back + D + 0.45, 0.6, { color: '#dfeaff', k: 0.22, y: -0.012 }));
 }

@@ -4,9 +4,12 @@ import { travelOf } from '../../gameplay/pin-kinds.js';
 // docs/game/controls-and-ui.md, Markers): the pin is the mark, as for any goal. A thing or person with its own pin
 // just becomes the goal; a seat, spot or [x, z] gets a pin of its own, and tapping it walks Eric there (the floor in
 // front of a seat, where he steps to sit: the train's free_seat zone takes it from there).
+// A thing with `goalElse: <id>` hands the goal to that other thing while it can't be used itself (his flat's door
+// while he's on another floor of the dorm: the stairs back down, places/dorms.js).
 export function goalAt(game, posOf) {
   let pin = null,
-    forced = null;
+    forced = null,
+    stand = null;
   const clear = () => {
     if (pin) {
       pin.el.remove();
@@ -14,7 +17,8 @@ export function goalAt(game, posOf) {
       if (i >= 0) game.markers.list.splice(i, 1);
     }
     if (forced) forced.goal = forced.goal0;
-    pin = forced = null;
+    if (stand) stand.goal = stand.goal0;
+    pin = forced = stand = null;
   };
   return (at) => {
     clear();
@@ -25,6 +29,12 @@ export function goalAt(game, posOf) {
       own.goal0 = own.goal;
       own.goal = () => true;
       forced = own;
+      const other = own.goalElse && game.markers.list.find((m) => m.id === own.goalElse);
+      if (other) {
+        const was = (other.goal0 = other.goal);
+        other.goal = () => !own.enabled() || was();
+        stand = other;
+      }
       return;
     }
     const s = typeof at === 'string' ? P.seats?.[at] : null;

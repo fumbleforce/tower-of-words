@@ -7,9 +7,9 @@ import { wall, tileFloor, mat } from '../../props.js';
 import { lightPool } from '../../places/life.js';
 import * as L from './layout.js';
 import { Kit } from './kit.js';
-import { neighbours, SPAN } from './neighbours.js';
+import { neighbours, shell, party, edge, veils, SPAN } from './neighbours.js';
 import { plates } from './plates.js';
-import { neighbourDoor, corridorLight, NUMBER, DOOR_C } from './doors.js';
+import { neighbourDoor, corridorLight, number, DOOR_C, DOORS_2F } from './doors.js';
 
 const {
   X0,
@@ -30,6 +30,8 @@ const {
   DOOR,
   DOORWAY,
   RETURN,
+  SHARED_K,
+  WEST_END,
   C,
 } = L;
 
@@ -122,61 +124,31 @@ export function walls(root) {
   );
 }
 
-// the rest of the floor: the neighbours' flats either side, cut open like Eric's (neighbours.js), and past them
-// the building cut solid, to the return's west face on the right (the stairs, stairs.js); the corridor face runs
-// the whole way, and the corridor with it, from past the frame on the left to the landing
+// the rest of the floor: the neighbours' flats either side, cut open like Eric's (neighbours.js), and 207 past them
+// on the left to the shared room (the kitchen, shared.js); on the right past 201 the building cut solid to the
+// return's west face (the stairs, stairs.js); the corridor face runs the whole way, and the corridor with it
 export function building(kit, root) {
-  const W = 7,
-    zf = NEAR + T,
-    e = X1 + T + SPAN * PITCH; // the outer face of the last opened flat
+  const zf = NEAR + T,
+    e = X1 + T + SPAN * PITCH, // the outer face of the last opened flat
+    s1 = SHARED_K * PITCH + X1 + T; // the shared room's east wall's outer face
   neighbours(kit, root);
-  for (const [a, b] of [
-    [-W, -e],
-    [e, RETURN],
-  ]) {
-    kit.box(C.cut, b - a, H + 0.035, zf - (BACK - T), (a + b) / 2, 0, (zf + BACK - T) / 2, { cast: false });
-    kit.box(C.wallTop, 0.03, 0.04, zf - (BACK - T), a < 0 ? b - 0.015 : a + 0.015, H, (zf + BACK - T) / 2, {
-      cast: false,
-    });
-  }
-  for (const [a, b] of [
-    [-W, X0 - T],
+  // 207, past 206: dark, its bed made
+  shell(kit, -3 * PITCH);
+  party(kit, X1 + T / 2 - 3 * PITCH);
+  party(kit, X0 - T / 2 - 3 * PITCH);
+  edge(kit, root, -3 * PITCH, false);
+  veils(root, [[0.55, [-3 * PITCH]]]);
+  cutFlats(kit, [[e, RETURN]]);
+  facade(kit, [
+    [s1, X0 - T],
     [X1 + T, RETURN],
-  ]) {
-    kit.box(C.facade, b - a, H, 0.012, (a + b) / 2, 0, zf + 0.006, { surf: 'plaster', cast: false });
-    kit.box(C.wallTop, b - a, 0.04, T + 0.03, (a + b) / 2, H, zf - T / 2 + 0.015, { cast: false }); // over the cut block's top, H + 0.035
-  }
-  // the corridor: concrete, a gutter along the parapet, the parapet cut low like the flat's front wall
-  const z0 = zf,
-    z1 = zf + CORRIDOR,
-    cx = (RETURN - W) / 2,
-    len = RETURN + W;
-  kit.box('#737880', len, 0.2, CORRIDOR, cx, -0.22, (z0 + z1) / 2, {
-    surf: 'concrete',
-    cast: false,
-  });
-  kit.box('#4f545b', len, 0.004, 0.07, cx, -0.02, z1 - 0.05, { cast: false });
-  kit.box('#8b939e', len, 0.36, 0.1, cx, -0.03, z1 + 0.05, {
-    surf: 'concrete',
-  });
-  kit.box(C.wallTop, len + 0.02, 0.03, 0.12, cx, 0.33, z1 + 0.05, {
-    cast: false,
-  });
-  // the slab's edge under the parapet, seen from above over the roofs below
-  kit.box('#5b6068', len, 0.22, 0.02, cx, -0.25, z1 + 0.105, { cast: false });
-  // the neighbours' front doors, a flat's width apart, and every door's number over it
-  for (const k of [-2, -1, 1, 2]) neighbourDoor(kit, DOOR_C + k * PITCH, zf, k);
-  root.add(
-    plates(
-      Object.entries(NUMBER)
-        .filter(([k]) => +k)
-        .map(([k, n]) => [n, DOOR_C + k * PITCH, 1.43, zf + 0.017, 0.24, 0.12]), // the facade's face: zf + 0.012
-    ),
-  );
-  // a corridor light on the wall by every door, and the pools they throw
-  for (const k of [-2, -1, 1, 2]) corridorLight(kit, DOOR_C + k * PITCH, zf);
-  for (const k of [1, 2])
-    root.add(lightPool(DOOR_C + k * PITCH, (z0 + z1) / 2, 0.7, { color: '#dfe7f5', k: 0.12, y: -0.015 }));
+  ]);
+  corridor(kit);
+  // the neighbours' front doors, a flat's width apart, every door's number over it, a light by each
+  const ks = Object.keys(DOORS_2F).map(Number);
+  for (const k of ks) neighbourDoor(kit, DOOR_C + k * PITCH, zf, DOORS_2F[k]);
+  doorPlates(root, 2, ks);
+  corridorLights(kit, root, ks);
   // Eric's own front door, cut low with the wall, and its frame. The leaf is its own group, hinged on its left
   // edge, so the trip in can swing it open onto the corridor and shut it behind him (places/dorms.js)
   const [d0, d1] = DOOR;
@@ -191,6 +163,76 @@ export function building(kit, root) {
   const door = leaf.flush(new THREE.Group());
   door.position.set(d0 + 0.02, 0, NEAR + T / 2);
   return door;
+}
+
+// flats cut solid at the ceiling over x ranges [a, b]: the dark cut and its pale cap at each end
+export function cutFlats(kit, spans) {
+  const zf = NEAR + T;
+  for (const [a, b] of spans) {
+    kit.box(C.cut, b - a, H + 0.035, zf - (BACK - T), (a + b) / 2, 0, (zf + BACK - T) / 2, { cast: false });
+    for (const x of [a + 0.015, b - 0.015])
+      kit.box(C.wallTop, 0.03, 0.04, zf - (BACK - T), x, H, (zf + BACK - T) / 2, { cast: false });
+  }
+}
+
+// the corridor face of the flats over x ranges [a, b]: the facade's skin, and the cap over the cut block's top
+export function facade(kit, spans) {
+  const zf = NEAR + T;
+  for (const [a, b] of spans) {
+    kit.box(C.facade, b - a, H, 0.012, (a + b) / 2, 0, zf + 0.006, { surf: 'plaster', cast: false });
+    kit.box(C.wallTop, b - a, 0.04, T + 0.03, (a + b) / 2, H, zf - T / 2 + 0.015, { cast: false }); // over H + 0.035
+  }
+}
+
+// the number over each door at k along a floor (the facade's face is at zf + 0.012)
+export function doorPlates(root, floor, ks) {
+  root.add(plates(ks.map((k) => [number(floor, k), DOOR_C + k * PITCH, 1.43, NEAR + T + 0.017, 0.24, 0.12])));
+}
+
+// a corridor light on the wall by every door at k, and the pools they throw
+export function corridorLights(kit, root, ks) {
+  const zf = NEAR + T;
+  for (const k of ks) corridorLight(kit, DOOR_C + k * PITCH, zf);
+  for (const k of ks)
+    root.add(lightPool(DOOR_C + k * PITCH, zf + CORRIDOR / 2, 0.7, { color: '#dfe7f5', k: 0.12, y: -0.015 }));
+}
+
+// the open corridor from the block's west end to the return: concrete, a gutter along the parapet, the parapet cut
+// low like the flat's front wall, the slab's edge under it. Across its west end the block's end wall, cut at the
+// ceiling, with the fire escape's steel door in it under its green sign; past the wall, the escape's top landing.
+export function corridor(kit) {
+  const z0 = NEAR + T,
+    z1 = z0 + CORRIDOR,
+    x0 = WEST_END,
+    cx = (RETURN + x0) / 2,
+    len = RETURN - x0;
+  kit.box('#737880', len, 0.2, CORRIDOR, cx, -0.22, (z0 + z1) / 2, { surf: 'concrete', cast: false });
+  kit.box('#4f545b', len, 0.004, 0.07, cx, -0.02, z1 - 0.05, { cast: false });
+  kit.box('#8b939e', len, 0.36, 0.1, cx, -0.03, z1 + 0.05, { surf: 'concrete' });
+  kit.box(C.wallTop, len + 0.02, 0.03, 0.12, cx, 0.33, z1 + 0.05, { cast: false });
+  kit.box('#5b6068', len, 0.22, 0.02, cx, -0.25, z1 + 0.105, { cast: false });
+  // the end wall: across the corridor (its face), and the block's cut end behind it
+  kit.box(C.facade, T, H, z1 + 0.1 - z0, x0 - T / 2, 0, (z0 + z1 + 0.1) / 2, { surf: 'plaster' });
+  kit.box(C.cut, T, H + 0.035, z0 - (BACK - T), x0 - T / 2, 0, (z0 + BACK - T) / 2, { cast: false });
+  kit.box(C.wallTop, T + 0.02, 0.035, z1 + 0.1 - (BACK - T), x0 - T / 2, H, (BACK - T + z1 + 0.1) / 2, {
+    cast: false,
+  });
+  kit.box('#55606e', 0.04, 1.22, 0.5, x0 + 0.02, 0, z0 + 0.36, { surf: 'door' });
+  kit.box('#c9cdd2', 0.04, 0.025, 0.1, x0 + 0.05, 0.62, z0 + 0.18, { r: 0.008, cast: false });
+  kit.box('#3f8f5a', 0.014, 0.08, 0.2, x0 + 0.008, 1.33, z0 + 0.36, {
+    cast: false,
+    opts: { emissive: '#3fcf7a', emissiveIntensity: 0.8 },
+  });
+  // outside it, the escape's grey steel landing, its rail and the first steps down
+  const ox = x0 - T - 0.48;
+  kit.box('#6c737c', 0.9, 0.05, 0.95, ox, -0.06, z0 + 0.42, { cast: false });
+  kit.boxes('#7f868f', [
+    [0.04, 0.5, 0.04, ox - 0.43, 0, z0 - 0.03],
+    [0.04, 0.5, 0.04, ox - 0.43, 0, z0 + 0.88],
+    [0.9, 0.035, 0.035, ox, 0.5, z0 + 0.88],
+    [0.035, 0.035, 0.9, ox - 0.43, 0.5, z0 + 0.42],
+  ]);
+  for (let i = 0; i < 4; i++) kit.box('#6c737c', 0.4, 0.03, 0.18, ox + 0.2, -0.2 - i * 0.17, z0 + 1.0 + i * 0.18);
 }
 
 // the window: aluminium frame and glass, curtains drawn back, the air conditioner over it

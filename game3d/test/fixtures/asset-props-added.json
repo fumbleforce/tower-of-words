@@ -161,6 +161,29 @@
     ]
   },
   {
+    "id_": "prop/dorm_court/hall_board",
+    "kind": "prop",
+    "name": "Notice board",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.hall_board",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'Notice board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/dorm_court/mailboxes",
     "kind": "prop",
     "name": "Mailbox 203",
@@ -173,6 +196,29 @@
     "place": "dorm_court",
     "used": [
       "Dorm courtyard: tap target 'Mailbox 203'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_court/manager_window",
+    "kind": "prop",
+    "name": "Manager's window",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.manager_window",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'Manager's window'"
     ],
     "view": {
       "type": "room",
@@ -334,6 +380,190 @@
     "place": "dorms",
     "used": [
       "Eric's dorm room: tap target 'Front door'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/drinks",
+    "kind": "prop",
+    "name": "Drinks machine",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.drinks",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Drinks machine'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/kitchen",
+    "kind": "prop",
+    "name": "Shared kitchen",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.kitchen",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Shared kitchen'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/laundry",
+    "kind": "prop",
+    "name": "Laundry",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.laundry",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Laundry'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/notices",
+    "kind": "prop",
+    "name": "Notice board",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.notices",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Notice board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/planters",
+    "kind": "prop",
+    "name": "Planters",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.planters",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Planters'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/stairs_down",
+    "kind": "prop",
+    "name": "Downstairs",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.stairs_down",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Downstairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/stairs_up",
+    "kind": "prop",
+    "name": "Upstairs",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.stairs_up",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Upstairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/washing",
+    "kind": "prop",
+    "name": "Washing",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.washing",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Washing'"
     ],
     "view": {
       "type": "room",

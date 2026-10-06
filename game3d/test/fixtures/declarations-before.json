@@ -620,6 +620,18 @@
           "label": "Tama",
           "verb": "Pet",
           "kind": "person small"
+        },
+        "hall_board": {
+          "label": "Notice board",
+          "kind": "thing",
+          "verb": "Read",
+          "pin": "near"
+        },
+        "manager_window": {
+          "label": "Manager's window",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
         }
       },
       "spots": [
@@ -1388,6 +1400,52 @@
           "label": "Front door",
           "kind": "thing",
           "verb": "Go out"
+        },
+        "stairs_up": {
+          "label": "Upstairs",
+          "kind": "thing",
+          "verb": "Go up"
+        },
+        "stairs_down": {
+          "label": "Downstairs",
+          "kind": "thing",
+          "verb": "Go down"
+        },
+        "kitchen": {
+          "label": "Shared kitchen",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        },
+        "notices": {
+          "label": "Notice board",
+          "kind": "thing",
+          "verb": "Read",
+          "pin": "near"
+        },
+        "laundry": {
+          "label": "Laundry",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        },
+        "drinks": {
+          "label": "Drinks machine",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        },
+        "washing": {
+          "label": "Washing",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        },
+        "planters": {
+          "label": "Planters",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
         }
       },
       "spots": [
@@ -1395,7 +1453,23 @@
         "door_203",
         "room_entry",
         "window_front",
-        "desk_front"
+        "desk_front",
+        "landing_3f",
+        "roof_door",
+        "dorm_2f_end",
+        "dorm_kitchen_shelf",
+        "dorm_3f_end",
+        "dorm_laundry_box",
+        "dorm_roof_chairs",
+        "dorm_roof_units"
+      ],
+      "nooks": [
+        "dorm_2f_end",
+        "dorm_kitchen_shelf",
+        "dorm_3f_end",
+        "dorm_laundry_box",
+        "dorm_roof_chairs",
+        "dorm_roof_units"
       ],
       "seats": [
         "desk_chair"
@@ -1406,7 +1480,8 @@
       ],
       "people": [],
       "hooks": [
-        "enterRoom"
+        "enterRoom",
+        "leaveRoom"
       ]
     },
     "plaza": {

@@ -178,6 +178,9 @@ export const PLACE_DETAILS = {
       mailboxes: { label: 'Mailbox 203', kind: 'thing', verb: 'Take mail' },
       street_gate: { label: 'To the street', kind: 'thing', verb: 'Go' }, // day 2: out to the east lane
       tama: { label: 'Tama', verb: 'Pet', kind: 'person small' }, // day 3, the afternoon: asleep (places/day3/)
+      // in the hall, a look line each (story/dorm-building.js)
+      hall_board: { label: 'Notice board', kind: 'thing', verb: 'Read', pin: 'near' },
+      manager_window: { label: "Manager's window", kind: 'thing', verb: 'Look', pin: 'near' },
     },
     spots: ['plaza_entry', 'dorm_entry', 'hall', 'passage', 'bath'],
     seats: [],
@@ -193,13 +196,45 @@ export const PLACE_DETAILS = {
       boxes: { label: 'Boxes', kind: 'thing' },
       bed: { label: 'Bed', kind: 'thing' },
       computer: { label: 'Computer', kind: 'thing', verb: 'Look' },
-      door_out: { label: 'Front door', kind: 'thing', verb: 'Go out' }, // day 2: out of the room
+      door_out: { label: 'Front door', kind: 'thing', verb: 'Go out' }, // day 2 on: out of the room
+      // the stairs (places/dorm-floors.js), and the small things round the building with a look line each
+      // (story/dorm-building.js), their pins only when he's close
+      stairs_up: { label: 'Upstairs', kind: 'thing', verb: 'Go up' },
+      stairs_down: { label: 'Downstairs', kind: 'thing', verb: 'Go down' },
+      kitchen: { label: 'Shared kitchen', kind: 'thing', verb: 'Look', pin: 'near' },
+      notices: { label: 'Notice board', kind: 'thing', verb: 'Read', pin: 'near' },
+      laundry: { label: 'Laundry', kind: 'thing', verb: 'Look', pin: 'near' },
+      drinks: { label: 'Drinks machine', kind: 'thing', verb: 'Look', pin: 'near' },
+      washing: { label: 'Washing', kind: 'thing', verb: 'Look', pin: 'near' },
+      planters: { label: 'Planters', kind: 'thing', verb: 'Look', pin: 'near' },
     },
-    spots: ['landing', 'door_203', 'room_entry', 'window_front', 'desk_front'],
+    spots: [
+      'landing',
+      'door_203',
+      'room_entry',
+      'window_front',
+      'desk_front',
+      'landing_3f',
+      'roof_door',
+      'dorm_2f_end',
+      'dorm_kitchen_shelf',
+      'dorm_3f_end',
+      'dorm_laundry_box',
+      'dorm_roof_chairs',
+      'dorm_roof_units',
+    ],
+    nooks: [
+      'dorm_2f_end',
+      'dorm_kitchen_shelf',
+      'dorm_3f_end',
+      'dorm_laundry_box',
+      'dorm_roof_chairs',
+      'dorm_roof_units',
+    ], // docs/game/places.md, "Nooks"
     seats: ['desk_chair'],
     zones: ['door_203', 'room_exit'],
     people: [],
-    hooks: ['enterRoom'],
+    hooks: ['enterRoom', 'leaveRoom'],
   },
   plaza: {
     things: {
