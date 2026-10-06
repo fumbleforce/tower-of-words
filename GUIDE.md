@@ -112,7 +112,7 @@ No text on timers, the first screen (controls only), a goal line that stays, sep
 - UI must be recognisable for what it is (a phone looks like a phone), and every interaction is taught the first time it appears.
 - Game UI: anime-subtitle presentation plus an in-world company phone. The light review-page style (off-white, teal) is for internal pages only; in the game it "screams e-learning".
 - Avoid default AI aesthetics: brown, gold, serif, glows, eyebrow labels. Use the design-taste-frontend and game-ui-design skills.
-- Third-person camera is desktop only (Jørgen, 2026-10-06: "lets drop phone support for this 3rd person view altogether"); the existing phone overview remains supported.
+- Third-person camera is desktop only (Jørgen, 2026-10-06: "lets drop phone support for this 3rd person view altogether"); the existing phone overview remains supported. For its controls: "try gta style", after rejecting the free-camera feel.
 - Desktop and phone get separate layouts; check both with screenshots. Every part of the interface matches one design language (the "you reply" box failed this twice).
 - World style (Jørgen, 2026-09-27): flat-shaded simple 3D (docs/game/art-and-sound.md). Never mention or propose paper, cardboard, cut-out or pop-up styles in any form ("you always do and I hate it").
 - New props built with game3d/js/props.js get the world look from game3d/js/look/ (surface patterns, soft baked light, small modelled detail).

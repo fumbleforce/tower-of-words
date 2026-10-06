@@ -118,16 +118,19 @@ try {
     if (name === "camera") {
       controls.stop();
       camera.setMode(mobile ? "overview" : value);
+      controls.refresh();
       tell({ scene: null });
     }
     if (name === "reset" && !mobile) {
       controls.stop();
       camera.reset();
+      controls.refresh();
     }
     if (name === "scene" && !mobile && camera.mode !== "overview") {
       controls.stop();
       const wasScene = camera.scene;
       const scene = camera.sceneShot();
+      controls.refresh();
       tell({ scene, unavailable: !wasScene && !scene });
     }
   });

@@ -1,11 +1,12 @@
-// BASE may point at a served worktree. GL=soft runs functional checks without a GPU slot.
+// BASE may point at a served worktree. Uses native input in private Xvfb; see native-browser.mjs.
+// GL=soft selects software rendering without a GPU slot.
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { withBrowserJob } from "../../tools/lib/browser-job.mjs";
+import { withNativeBrowser } from "./native-browser.mjs";
 
 const base = process.env.BASE || "http://127.0.0.1:8771/";
-const out = process.env.OUT || "game3d/shots/camera-response";
+const out = process.env.OUT || "game3d/shots/camera-gta";
 fs.mkdirSync(out, { recursive: true });
 const results = [];
 const pose = () => {
@@ -20,12 +21,13 @@ const pose = () => {
     scene: c.scene,
     keys: g.walker.keys.size,
     path: !!g.walker.path,
+    locked: globalThis.__cameraDemo.controls.locked,
   };
 };
 const distance = (a, b) => Math.hypot(a[0] - b[0], a[2] - b[2]);
-await withBrowserJob(
-  "camera-response-check",
-  async (browser) => {
+await withNativeBrowser(
+  "camera-gta-check",
+  async (browser, native) => {
     for (const [width, height] of [
       [1366, 860],
       [390, 844],
@@ -64,7 +66,7 @@ await withBrowserJob(
         };
       });
       for (const place of process.env.QUICK
-        ? ["office"]
+        ? [process.env.QUICK === "1" ? "office" : process.env.QUICK]
         : ["plaza", "office", "dorms", "train"]) {
         const url = new URL("reviews/camera-plan-1/demo.html", base);
         url.search = new URLSearchParams({ place, camera: "1c" });
@@ -119,19 +121,39 @@ await withBrowserJob(
             "1c",
           );
           const view = await frame.evaluate(pose);
-          await frame.locator("#c").click({ position: { x: 300, y: 200 } });
-          await page.waitForTimeout(250);
+          const play = frame.locator("#demo-play button");
+          await page.screenshot({
+            path: path.join(out, `${place}-${width}-play.png`),
+          });
+          await native.clickElement(page, play);
+          await frame.waitForFunction(
+            () => globalThis.__cameraDemo.controls.locked,
+          );
+          await page.waitForTimeout(100);
           assert.ok(
             distance((await frame.evaluate(pose)).p, view.p) < 0.02,
-            "click only focuses",
+            "capture does not move player",
           );
           if (place === "plaza") {
             // Change direction without releasing every key, then keep walking longer
             // than the old automatic camera return. Input basis must never turn itself.
-            await page.keyboard.down("w");
+            native.down("w");
             await page.waitForTimeout(500);
-            await page.keyboard.down("d");
-            await page.keyboard.up("w");
+            const walkPose = await frame.evaluate(pose);
+            native.down("Shift");
+            await page.waitForTimeout(550);
+            const runPose = await frame.evaluate(pose);
+            const running = await frame.evaluate(
+              () => globalThis.__game.walker.gait.run,
+            );
+            assert.equal(running, true, "native Shift selects the run gait");
+            assert.ok(
+              distance(runPose.p, walkPose.p) > 0.95,
+              "Shift moves faster than walk speed",
+            );
+            native.up("Shift");
+            native.down("d");
+            native.up("w");
             await page.waitForTimeout(700);
             const right = await frame.evaluate(pose);
             assert.equal(
@@ -140,16 +162,16 @@ await withBrowserJob(
               "character turn cannot rotate camera",
             );
             assert.ok(distance(right.p, view.p) > 0.2, "real player moved");
-            const rect = await page.locator("#world").boundingBox();
-            await page.mouse.move(rect.x + 450, rect.y + 240);
-            await page.mouse.down({ button: "right" });
-            await page.mouse.move(rect.x + 560, rect.y + 240, { steps: 5 });
-            await page.mouse.up({ button: "right" });
+            // Actual pointer lock and browser mouse events; no drag button or direct camera call.
+            for (let i = 0; i < 5; i++) {
+              native.move(22, 0);
+              await page.waitForTimeout(30);
+            }
             await page.waitForTimeout(200);
             const looked = await frame.evaluate(pose);
             assert.ok(
-              Math.abs(looked.yaw - right.yaw) > 0.5,
-              "right drag is direct",
+              Math.abs(right.yaw - looked.yaw - 0.33) < 0.015,
+              "captured mouse looks without a drag button",
             );
             assert.ok(
               Math.abs(looked.basis[0] - Math.sin(looked.yaw)) < 0.001 &&
@@ -162,7 +184,7 @@ await withBrowserJob(
               looked.yaw,
               "no delayed recenter",
             );
-            await page.keyboard.up("d");
+            native.up("d");
             await page.waitForTimeout(400);
             const stopped = await frame.evaluate(pose);
             await page.waitForTimeout(500);
@@ -170,20 +192,53 @@ await withBrowserJob(
               distance((await frame.evaluate(pose)).p, stopped.p) < 0.02,
               "no resumed old route",
             );
-            await page.keyboard.down("w");
-            await frame.evaluate(() =>
-              globalThis.dispatchEvent(new globalThis.Event("blur")),
+            native.down("w");
+            native.press("Escape");
+            await frame.waitForFunction(
+              () => !globalThis.__cameraDemo.controls.locked,
             );
             assert.equal(
               (await frame.evaluate(pose)).keys,
               0,
-              "blur clears movement",
+              "Escape clears movement",
             );
-            await page.keyboard.up("w");
+            const escaped = await frame.evaluate(pose);
+            await page.waitForTimeout(250);
+            assert.ok(
+              distance((await frame.evaluate(pose)).p, escaped.p) < 0.01,
+              "Escape stops body immediately",
+            );
+            native.up("w");
+            await page.waitForTimeout(1300);
+            await native.clickElement(page, play);
+            await frame.waitForFunction(
+              () => globalThis.__cameraDemo.controls.locked,
+            );
+            native.down("w");
+            await frame.evaluate(() =>
+              globalThis.dispatchEvent(new globalThis.Event("blur")),
+            );
+            await frame.waitForFunction(
+              () => !globalThis.__cameraDemo.controls.locked,
+            );
+            assert.equal(
+              (await frame.evaluate(pose)).keys,
+              0,
+              "blur clears movement and pointer lock",
+            );
+            native.up("w");
+            await native.clickElement(page, play);
+            await frame.waitForFunction(
+              () => globalThis.__cameraDemo.controls.locked,
+            );
           }
           await page.screenshot({
             path: path.join(out, `${place}-${width}-1c.png`),
           });
+          native.press("Escape");
+          await frame.waitForFunction(
+            () => !globalThis.__cameraDemo.controls.locked,
+          );
           const before = await frame.evaluate(pose);
           await page.click("#scene");
           await page.waitForTimeout(200);
@@ -197,9 +252,9 @@ await withBrowserJob(
               path: path.join(out, `${place}-${width}-scene.png`),
             });
             await frame.locator("#c").focus();
-            await page.keyboard.down("w");
+            native.down("w");
             await page.waitForTimeout(300);
-            await page.keyboard.up("w");
+            native.up("w");
             assert.ok(
               distance((await frame.evaluate(pose)).p, scene.p) < 0.02,
               "scene pauses player",
@@ -213,6 +268,10 @@ await withBrowserJob(
               "scene exit preserves view direction",
             );
             assert.equal(restored.keys, 0);
+            assert.ok(
+              await frame.locator("#demo-play").isVisible(),
+              "return offers Play again",
+            );
             assert.equal(restored.path, false);
             assert.ok(
               Math.abs(restored.facing - before.facing) < 0.001,
