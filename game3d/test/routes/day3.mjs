@@ -11,7 +11,7 @@ const day2 = {
 };
 const started = { ...day2, d3_started: true, ticket_T0003: 'new', ticket_T0004: 'new' };
 const YEN = 4000;
-const seed = (place, flags = {}, extra = {}) => ({ day: 3, place, known, yen: YEN, ...extra, flags: { ...started, ...flags } });
+const seed = (place, flags = {}, extra = {}) => ({ day: 3, place, known, met: ['mio', 'guard', 'kuroda', 'emi', 'kenji', 'mori'], yen: YEN, ...extra, flags: { ...started, ...flags } });
 const use = (target, extra = {}) => ({ type: 'use', target, ...extra });
 const club = { club_swimming: true };
 
@@ -109,8 +109,29 @@ export default [
   {
     id: 'd3-monitor-fix', description: 'The monitor through the guard: the plug seated, his thanks; paid once, the screen still steady.',
     seed: seed('gate', { d3_monitor_seen: true, ticket_T0002: 'done' }),
-    choices: ['Look at the monitor.', 'Seat the loose connector.'], actions: [use('guard'), use('guard_monitor')],
-    expect: { nodes: ['d3_monitor', 'd3_monitor_fix', 'd3_monitor'], flags: { ticket_T0003: 'done', d3_monitor_done: true, d3_monitor_thanked: true }, yen: YEN + 1000 },
+    choices: ['Look at the monitor.', 'Seat the loose connector.', 'The picture stayed on. Finish the request.'], actions: [use('guard'), use('guard_monitor')],
+    expect: { nodes: ['d3_monitor', 'd3_monitor_fix', 'd3_monitor'], flags: { ticket_T0003: 'done', d3_monitor_done: true, d3_monitor_thanked: true }, known: ['gamen'], yen: YEN + 1000 },
+  },
+  {
+    id: 'd3-monitor-retest', description: 'Repeat the physical turning check before reporting the monitor fixed.',
+    seed: seed('gate', { d3_monitor_seen: true, ticket_T0002: 'done' }),
+    choices: ['Seat the loose connector.', 'Ask him to turn it once more.', 'The picture stayed on. Finish the request.'],
+    actions: [use('guard_monitor')],
+    expect: { nodes: ['d3_monitor_fix', 'd3_monitor_check', 'd3_monitor_again', 'd3_monitor_check', 'd3_monitor_complete'], flags: { ticket_T0003: 'done' }, known: ['gamen'], yen: YEN + 1000 },
+  },
+  {
+    id: 'd3-monitor-known-repeat', description: 'The previously learned station phrase is reused while asking for a real monitor retest.',
+    seed: seed('gate', { d3_monitor_seen: true, ticket_T0002: 'done' }, { known: [...known, 'mouichido'] }),
+    choices: ['Seat the loose connector.', 'Ask him to turn it once more.', 'The picture stayed on. Finish the request.'],
+    actions: [use('guard_monitor', { line: 'もう一度 (mou ichido, once more). Just to be sure.' })],
+    expect: { nodes: ['d3_monitor_fix', 'd3_monitor_check', 'd3_monitor_again', 'd3_monitor_complete'], flags: { ticket_T0003: 'done' }, known: ['gamen'], yen: YEN + 1000 },
+  },
+  {
+    id: 'd3-monitor-continue', description: 'Continue after seating the connector repeats the visible check, preserves the learned word and pays once.',
+    seed: seed('gate', { ticket_T0002: 'done' }, { node: 'd3_monitor' }),
+    resumeAt: 'd3_monitor_check', resumeYenDelta: 1000,
+    choices: ['Seat the loose connector.', 'The picture stayed on. Finish the request.'], actions: [use('guard_monitor')],
+    expect: { nodes: ['d3_monitor_check', 'd3_monitor_complete', 'd3_monitor'], flags: { ticket_T0003: 'done' }, known: ['gamen'], yen: YEN + 1000 },
   },
   {
     id: 'd3-monitor-later', description: 'The monitor left for another morning.',
@@ -122,7 +143,7 @@ export default [
     id: 'd3-booking-reset-print', description: 'The reset control, Print, the attendant’s word, the check; paid once.',
     seed: seed('gym'), choices: ['Restart the terminal with the red button.', 'Press Print for today’s bookings.'],
     actions: [use('booking_terminal'), use('gym_printer'), use('booking_terminal')],
-    expect: { nodes: ['d3_booking', 'd3_booking_reset', 'd3_booking_ready', 'd3_printer', 'd3_print', 'd3_dashite_word', 'd3_booking'], flags: { ticket_T0004: 'done', d3_booking_done: true }, known: ['dashite'], yen: YEN + 1500 },
+    expect: { nodes: ['d3_booking', 'd3_booking_reset', 'd3_booking_ready', 'd3_printer', 'd3_print', 'd3_dashite_word', 'd3_booking'], flags: { ticket_T0004: 'done', d3_booking_done: true }, known: ['dashite', 'yoyaku'], yen: YEN + 1500 },
   },
   {
     id: 'd3-booking-word-later', description: '動いて on the terminal; the printout left, then printed on a second try.',
@@ -139,7 +160,19 @@ export default [
   {
     id: 'd3-pool-swim-sit', description: 'A member arriving: the introductions, swimming with Kuro, sitting with them after.',
     seed: seed('pool', club, { period: 'evening' }), choices: ['Swim with Kuro.', 'Sit with them after the swim.'],
-    expect: { nodes: ['club_swimming_1', 'club_swimming_intro', 'club_swimming_pool', 'club_swimming_join', 'club_swimming_length', 'club_swimming_sit'], flags: { d3_swim_done: true, d3_player_swims: true, d3_kuro_intro: true, d3_swimming_shared: true } },
+    expect: { nodes: ['club_swimming_1', 'club_swimming_intro', 'club_swimming_pool', 'club_swimming_join', 'club_swimming_length', 'club_swimming_sit'], flags: { d3_swim_done: true, d3_player_swims: true, d3_kuro_intro: true, d3_swimming_shared: true }, known: [] },
+  },
+  {
+    id: 'd3-pool-optional-word', description: 'Choose to learn the swim reply, use it in the water invitation, then hear it again in a later conversation.',
+    seed: seed('pool', club, { period: 'evening' }), choices: ['Ask how to say you’ll swim.', 'Sit with them after the swim.'],
+    actions: [use('kuro')],
+    expect: { nodes: ['club_swimming_word', 'club_swimming_join', 'club_swimming_sit', 'd3_kuro_pool'], flags: { d3_swim_done: true }, known: ['oyogu'] },
+  },
+  {
+    id: 'd3-pool-swim-continue', description: 'Continue at water entry resumes the conversation and swim without inserting a lesson.',
+    seed: seed('pool', club, { period: 'evening', node: 'club_swimming_1' }), resumeAt: 'club_swimming_slow',
+    choices: ['Swim with Kuro.', 'Sit with them after the swim.'],
+    expect: { nodes: ['club_swimming_slow', 'club_swimming_sit'], flags: { d3_swim_done: true }, known: [] },
   },
   {
     id: 'd3-pool-bags-water', description: 'Carrying the bags, then into the water; goodnight and out to the sports ground.',
@@ -156,7 +189,7 @@ export default [
   {
     id: 'd3-pool-watch', description: 'Watching from the deck.',
     seed: seed('pool', club, { period: 'evening' }), choices: ['Sit on the deck and watch.', 'Sit with them after the swim.'],
-    expect: { nodes: ['club_swimming_watch', 'club_swimming_deck', 'club_swimming_length', 'club_swimming_sit'], flags: { d3_swim_done: true } },
+    expect: { nodes: ['club_swimming_watch', 'club_swimming_deck', 'club_swimming_length', 'club_swimming_sit'], flags: { d3_swim_done: true }, known: [] },
   },
   {
     id: 'd3-pool-leave-early', description: 'Leaving them to their evening: the swim waits at Emi.',

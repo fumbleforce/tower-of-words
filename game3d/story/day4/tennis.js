@@ -16,7 +16,10 @@ export const tennisNodes = {
     { if: 'd4_tennis_done', then: [{ go: 'd4_tennis_repeat' }] },
     { do: 'tennisSession', state: 'begin' },
     { call: 'd4_rei_name' }, { call: 'd4_aoi_name' },
-    { say: 'rei', name: 'Rei', emo: 'casual', text: 'We’ve got the practice court until they finish. Have you brought a racket?' },
+    { if: 'know_yoyaku', then: [
+      { say: 'eric', emo: 'curious', text: 'Do we have a {yoyaku} for this court?' },
+      { say: 'rei', name: 'Rei', emo: 'casual', text: 'Yes, until they finish their game. Have you brought a racket?' },
+    ], else: [{ say: 'rei', name: 'Rei', emo: 'casual', text: 'We’ve got the practice court until they finish. Have you brought a racket?' }] },
     { do: 'tennisSession', state: 'racket' },
     { say: 'aoi', name: 'Aoi', overheard: true, emo: 'hesitant', text: '私も、ラケットを借りていいですか。', clear: ['ラケット'] },
     { say: 'rei', name: 'Rei', emo: 'warm', text: 'You can both borrow one. Aoi, you can put the basket down.' },

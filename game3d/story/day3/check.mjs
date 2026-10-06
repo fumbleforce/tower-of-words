@@ -158,8 +158,11 @@ for (const f of [{}, { d2_ticket_done: true, period: 'afternoon' }]) {
 }
 {
   const p = new Play('gate'); p.run('d3_monitor', ['d3_monitor_later']); assert.equal(p.payments.length, 0);
-  p.run('d3_monitor', ['d3_monitor_fix']); p.run('d3_monitor');
+  p.run('d3_monitor', ['d3_monitor_fix', 'd3_monitor_again', 'd3_monitor_complete']); p.run('d3_monitor');
   assert.deepEqual(p.payments, [{ id: 'T-0003', yen: 1000 }]); assert.equal(p.flags.period, 'morning');
+  assert(p.flags.typed_gamen);
+  assert.equal(p.hooks.filter(h => h.do === 'type' && h.word === 'gamen').length, 1);
+  assert.equal(p.hooks.filter(h => h.do === 'monitorRepair' && h.state === 'verify').length, 2);
   const q = new Play('gate', structuredClone(p.flags)); q.run('d3_monitor'); assert.equal(q.payments.length, 0);
   p.record('Monitor: defer, fix, return');
 }
@@ -210,6 +213,8 @@ for (const route of poolChoices) for (const finish of ['club_swimming_sit', 'clu
   const p = new Play('pool', { period: 'evening', met_emi: known, kuro_reception_seen: known });
   p.run('club_swimming_1', [...route, finish]); assert(p.flags.d3_swim_done);
   assert.equal(p.flags.period, 'evening'); assert.equal(p.payments.length, 0);
+  assert(!p.hooks.some(h => h.do === 'type'), 'Every ordinary pool branch must work without a lesson');
+  assert(!p.flags.know_puru && !p.flags.know_yukkuri && !p.flags.know_miru, 'Context alone does not teach words');
   assert.equal(p.hooks.filter(h => h.do === 'bond').length, 2);
   assert(!p.hooks.some(h => h.do === 'bondStep'));
   if (route.includes('club_swimming_watch') || route.includes('club_swimming_deck')) assert(!p.flags.d3_player_swims);
@@ -259,6 +264,7 @@ for (const reported of [false, true]) {
 {
   const p = new Play('pool', { period: 'evening' }); p.run('club_swimming_1', ['club_swimming_leave_early']);
   assert(!p.flags.d3_swim_done); assert(!p.flags.d3_swimming_shared);
+  assert(!p.hooks.some(h => h.do === 'type'), 'Leave must precede any optional lesson');
   p.run('club_swimming_pool', ['club_swimming_watch', 'club_swimming_goodnight']); assert(p.flags.d3_swim_done);
 }
 {
@@ -278,10 +284,51 @@ for (const reported of [false, true]) {
 for (const [where, node] of [['gym', 'd3_emi'], ['east_coast', 'd3_emi_lunch'], ['pool', 'd3_emi_pool']]) {
   const p = new Play(where); p.run('d3_arrive'); p.flags.met_emi = true;
   p.run(node);
-  assert(p.lines.some(s => s.includes('I’m Emi, your team lead')), `${where}: first introduction lost to Talk`);
+  assert(p.lines.some(s => s.includes('I’m Emi, from B2')), `${where}: first introduction lost to Talk`);
   assert(!p.flags.d3_emi_needs_intro);
   const q = new Play('pool', structuredClone(p.flags));
-  q.run('club_swimming_intro'); assert(!q.lines.some(s => s.includes('I’m Emi, your team lead')), 'Repeated Emi introduction');
+  q.run('club_swimming_intro'); assert(!q.lines.some(s => s.includes('I’m Emi, from B2')), 'Repeated Emi introduction');
+}
+// Old saves can contain a stale arrival capture flag despite a completed earlier conversation.
+for (const history of [{ met_emi: true }, { d2_brief_done: true }, { fact_emi_ten_years: true }]) {
+  const p = new Play('pool', { ...history, d3_emi_needs_intro: true });
+  p.run('d3_arrive'); p.run('club_swimming_intro');
+  assert(!p.lines.some(s => s.includes('I’m Emi, from B2')));
+  assert(!p.flags.d3_emi_needs_intro);
+  p.record(`Known Emi: ${JSON.stringify(history)}`);
+}
+{
+  const p = new Play('pool', { met_emi: true, d2_kuro_weekend_seen: true });
+  p.run('club_swimming_intro');
+  assert(p.lines.some(s => s.includes('You said after six.')));
+  assert(p.lines.some(s => s.includes('I’m Kuro.')));
+  p.run('club_swimming_intro');
+  assert.equal(p.lines.filter(s => s.includes('You said after six.')).length, 1);
+  p.record('Kuro: previous day’s invitation remembered');
+}
+for (const route of poolChoices) {
+  const p = new Play('pool', { period: 'evening', know_oyogu: true, know_mitai: true });
+  p.run('club_swimming_1', [...route, 'club_swimming_goodnight']);
+  assert(!p.hooks.some(h => h.do === 'type'), 'Known pool words must not repeat compulsory practice');
+  assert(p.flags.d3_swim_done);
+}
+// Asking about the swim reply teaches exactly one word, then follows the chosen activity.
+{
+  const p = new Play('pool', { period: 'evening' });
+  p.run('club_swimming_1', ['club_swimming_word', 'club_swimming_goodnight']);
+  assert.deepEqual(p.hooks.filter(h => h.do === 'type').map(h => h.word), ['oyogu']);
+  assert(p.flags.d3_player_swims && p.flags.d3_swim_done);
+  p.run('d3_kuro_pool');
+  assert(p.lines.some(s => s.includes('まだ{oyogu}')));
+  assert(p.lines.some(s => s.includes('Not tonight.')));
+  p.record('Optional swim reply and later conversation reuse');
+}
+for (const knows of [false, true]) {
+  const p = new Play('pool', { period: 'evening', know_mitai: knows });
+  p.run('club_swimming_1', ['club_swimming_watch', 'club_swimming_goodnight']);
+  assert.equal(p.lines.some(s => s.includes('{mitai}.')), knows);
+  assert(!p.hooks.some(h => h.do === 'type'));
+  p.record(`Watching without a new lesson; prior mitai ${knows}`);
 }
 // Test seasonal dispatch through the real club model, including multiple missed/declined meetings.
 {
@@ -296,4 +343,4 @@ for (const [where, node] of [['gym', 'd3_emi'], ['east_coast', 'd3_emi_lunch'], 
 }
 const output = process.argv[2];
 if (output) writeFileSync(output, transcripts.join('\n'));
-console.log(`Day 3 authoring: ${checked} contextual nodes; routes, branches, tokens and once-only payments pass. Physical hooks are pending.`);
+console.log(`Day 3 authoring: ${checked} contextual nodes; routes, branches, tokens and once-only payments pass. Physical staging is checked separately.`);

@@ -17,7 +17,12 @@ export default place(
       d3_emi_pool: [...emiHello, { if: 'd3_swim_done', then: [
         { say: 'emi', emo: 'warm', text: 'I’m staying a bit longer. I’ve only just got comfortable.' },
       ], else: [{ say: 'emi', emo: 'bright', text: 'Come and join us if you like. The club slips are on the plaza board.' }] }],
-      d3_kuro_pool: [{ if: 'd3_kuro_intro', then: [
+      d3_kuro_pool: [
+        { if: 'd3_swim_done && know_oyogu', then: [
+          { say: 'kuro', name: 'Kuro', overheard: true, emo: 'curious', text: 'まだ{oyogu}？' },
+          { say: 'eric', emo: 'warm', text: 'Not tonight. I’ll stay here a bit longer.' }, { end: true },
+        ] },
+        { if: 'd3_kuro_intro', then: [
         { say: 'kuro', name: 'Kuro', emo: 'teasing', text: 'Enjoy it while it lasts. Next week it’s the gym, and nobody has told me how we swim in a gym.' },
       ], else: [{ if: 'kuro_reception_seen', then: [
         { say: 'kuro', emo: 'polite', text: 'Good evening. You found the pool too.' },

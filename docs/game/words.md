@@ -24,6 +24,9 @@ Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say t
 | `ikitai` | 行きたい | ikitai | I want to go | phrase |
 | `isshoni` | いっしょに | isshoni | together | phrase |
 | `koko` | ここ | koko | here | phrase |
+| `gamen` | 画面 | gamen | screen | phrase |
+| `yoyaku` | 予約 | yoyaku | booking | phrase |
+| `oyogu` | 泳ぐ | oyogu | swim | phrase |
 | `matte` | 待って | matte | wait | command |
 | `akete` | 開けて | akete | open | command |
 | `ugoite` | 動いて | ugoite | work, move | command |
@@ -81,7 +84,11 @@ The **-tai form** expresses what the speaker wants to do. The Words panel pairs 
 
 ## Taught on day 3
 
-The [day-3 set](../../game3d/story/day3/README.md) keeps its one new record, `koko` (ここ, here), in `story/day3/words.js`; lang.js adds it to its words. It is taught by typing at the plaza's map, whose handwritten sticker by the arrow says ここ (story/day3/plaza.js `d3_map`, `d3_koko_word`; optional), and said to the map afterwards. The Words panel calls it a place word. At the gym's printer the attendant says the known command 出して (dashite) to the machine out of habit; a player who doesn't know it yet can learn it there by typing, after the sheet is out (`d3_dashite_word`). Clips: eric-koko and word-koko in the voice manifest.
+The [day-3 set](../../game3d/story/day3/README.md) adds `gamen` (screen) and `yoyaku` (booking) through separate repair requests, with a typed model before using each in the request and result. The printer's existing `dashite` lesson follows the completed ordinary print. These are the three new words on the core repair route; learning does not itself produce magic.
+
+`koko` remains optional at the map (`d3_map`, `d3_koko_word`). At the swimming club, asking how to say you will swim teaches `oyogu`, then follows the choice into the water. Swimming, helping, watching and leaving all work without this lesson. Watching can reuse already-known `mitai`. The contextual pool and pace glosses do not mark words learned.
+
+Known `gamen` returns during the court display inspection (`d4_display`) and at the karaoke screen (`d5_screen`); `yoyaku` returns in the tennis reservation conversation (`d4_tennis_offer`). A later pool talk (`d3_kuro_pool`) reuses `oyogu`. Unknown-word branches retain ordinary English. `dashite` prepares the later guided vending request, with a completed-printer catch-up if it was missed. These scene locations describe current authored opportunities, not limits on when vocabulary can matter.
 
 ## Labels on the ticket system
 

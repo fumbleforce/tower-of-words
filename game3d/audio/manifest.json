@@ -336,6 +336,54 @@
   "slow": true
  },
  {
+  "key": "word-gamen",
+  "speaker": "mio",
+  "text": "画面。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-yoyaku",
+  "speaker": "mio",
+  "text": "予約。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-oyogu",
+  "speaker": "mio",
+  "text": "泳ぐ。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "word-isshoni",
   "speaker": "mio",
   "text": "いっしょに。",
@@ -532,6 +580,33 @@
   "key": "eric-koko",
   "speaker": "eric",
   "text": "ここ。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "eric-gamen",
+  "speaker": "eric",
+  "text": "画面。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "eric-yoyaku",
+  "speaker": "eric",
+  "text": "予約。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "eric-oyogu",
+  "speaker": "eric",
+  "text": "泳ぐ。",
   "lang": "ja",
   "overheard": false,
   "words": [],
@@ -5224,7 +5299,12 @@
   "text": "この画面も、見ていただけますか。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
   "clear": [],
   "emo": "polite"
  },
@@ -5298,9 +5378,55 @@
   "emo": "polite"
  },
  {
-  "key": "ln-1254rfy",
+  "key": "oh-1fuqsej",
+  "speaker": "guard",
+  "text": "画面が、消えます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-87r813",
   "speaker": "eric",
-  "text": "Hold it there a second. The plug at the back is half out.",
+  "text": "画面 is the screen? It goes off when you turn it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-17pkfeg",
+  "speaker": "guard",
+  "text": "画面。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-c0e73d",
+  "speaker": "eric",
+  "text": "Could you hold it there? The lead pulls tight when you turn it.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5308,9 +5434,9 @@
   "emo": "curious"
  },
  {
-  "key": "ln-13g8eb9",
+  "key": "ln-fv054u",
   "speaker": "eric",
-  "text": "Try turning it towards me again.",
+  "text": "The signal plug is half out. I can seat it, then we should try turning it again.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5318,21 +5444,89 @@
   "emo": "warm"
  },
  {
-  "key": "oh-iufy8n",
+  "key": "ln-aaoezp",
+  "speaker": "eric",
+  "text": "All right, turn the 画面 towards me again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-bdc52g",
   "speaker": "guard",
-  "text": "今度は大丈夫です。ありがとうございます。",
+  "text": "画面は、どうですか？",
   "lang": "ja",
   "overheard": true,
   "words": [
    [
-    "daijoubu",
-    "大丈夫"
+    "gamen",
+    "画面"
    ]
   ],
-  "clear": [
-   "ありがとう"
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1axzvi8",
+  "speaker": "eric",
+  "text": "もう一度. Just to be sure.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
   ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-16paktz",
+  "speaker": "eric",
+  "text": "One more time, please. Just to be sure.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1k5uymm",
+  "speaker": "eric",
+  "text": "The picture’s steady now, even when it turns.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "oh-1bk3xgn",
+  "speaker": "guard",
+  "text": "助かりました。人に見せるたびに、消えていたんです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-urldx3",
+  "speaker": "eric",
+  "text": "It was fine as long as nobody else needed to see it, then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
  },
  {
   "key": "ln-t5xtwj",
@@ -5886,9 +6080,9 @@
   "emo": "curious"
  },
  {
-  "key": "ln-1u7au79",
+  "key": "ln-19ileav",
   "speaker": "emi",
-  "text": "You must be Eric. I’m Emi, your team lead. We’ve managed to miss each other at the office.",
+  "text": "Oh, you must be Eric. I’m Emi, from B2. It’s good to meet you at last.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5914,6 +6108,31 @@
   "words": [],
   "clear": [],
   "emo": "bright"
+ },
+ {
+  "key": "oh-u58aeh",
+  "speaker": "kuro",
+  "text": "まだ泳ぐ？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1y0l09s",
+  "speaker": "eric",
+  "text": "Not tonight. I’ll stay here a bit longer.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "ln-1o0b7il",
@@ -6090,24 +6309,80 @@
   "emo": "bright"
  },
  {
-  "key": "oh-1fo69bs",
+  "key": "oh-16knx6b",
   "speaker": "attendant",
-  "text": "朝から、ずっとこのままなんです。今日の分をプリントしたいんですけど……",
+  "text": "朝から、ずっとこのままで……。今日の予約を、プリントしたいんです。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
   "clear": [
    "プリント"
   ],
   "emo": "tired"
  },
  {
-  "key": "ln-k12nub",
+  "key": "ln-to8pfp",
   "speaker": "eric",
-  "text": "And you need today’s list printed. There’s a reset button underneath. I’ll try that first.",
+  "text": "Today’s bookings? 予約?",
   "lang": "en",
   "overheard": false,
-  "words": [],
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1lbvcth",
+  "speaker": "attendant",
+  "text": "はい、予約です。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-ahmdzs",
+  "speaker": "attendant",
+  "text": "予約。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-oqevro",
+  "speaker": "eric",
+  "text": "I can restart the terminal. Then we’ll check the whole 予約 list, not just the first page.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
   "clear": [],
   "emo": "curious"
  },
@@ -6142,9 +6417,9 @@
   "emo": "hesitant"
  },
  {
-  "key": "ln-x03ufr",
+  "key": "ln-15jplz4",
   "speaker": "eric",
-  "text": "Let me print today’s list from here, so we know the whole thing comes out.",
+  "text": "The screen’s back. We should print the bookings before I call it fixed.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -6182,9 +6457,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-y5usuf",
+  "key": "ln-5xlwsa",
   "speaker": "eric",
-  "text": "What was that you said to it?",
+  "text": "What did you say just before the paper came out?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -6216,6 +6491,16 @@
   "clear": [],
   "emo": "slow",
   "slow": true
+ },
+ {
+  "key": "ln-zrxwsb",
+  "speaker": "eric",
+  "text": "Give it out? I could have used that at our copier on my first day.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
  },
  {
   "key": "oh-1xqxr5z",
@@ -6251,6 +6536,48 @@
   "words": [],
   "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "ln-12ctuxa",
+  "speaker": "eric",
+  "text": "That’s my booking as well, then. I took one of the club slips.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-faf075",
+  "speaker": "attendant",
+  "text": "そうですか。では、六時にプールで。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "プール"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1v2sfv0",
+  "speaker": "attendant",
+  "text": "水泳部ですよ。よかったら、今夜どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-vbd1yp",
+  "speaker": "eric",
+  "text": "I can join them? I’ll have a look at the poster before I go.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
  },
  {
   "key": "oh-1f9koot",
@@ -6756,6 +7083,43 @@
   "emo": "warm"
  },
  {
+  "key": "ln-1254rfy",
+  "speaker": "eric",
+  "text": "Hold it there a second. The plug at the back is half out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-13g8eb9",
+  "speaker": "eric",
+  "text": "Try turning it towards me again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-iufy8n",
+  "speaker": "guard",
+  "text": "今度は大丈夫です。ありがとうございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [
+   "ありがとう"
+  ],
+  "emo": "warm"
+ },
+ {
   "key": "ln-if6q0l",
   "speaker": "eric",
   "text": "It’s much easier to hear the fridge when nobody’s here.",
@@ -6888,6 +7252,31 @@
   "words": [],
   "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "ln-7qu2dp",
+  "speaker": "eric",
+  "text": "Do we have a 予約 for this court?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1qc1m1v",
+  "speaker": "rei",
+  "text": "Yes, until they finish their game. Have you brought a racket?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-tb48qd",
@@ -7249,6 +7638,21 @@
   "emo": "casual"
  },
  {
+  "key": "ln-1fajfm2",
+  "speaker": "eric",
+  "text": "The 画面 is fine. The button cap’s catching on the edge. Can I lift it out?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
   "key": "ln-1n9ircj",
   "speaker": "eric",
   "text": "The cap’s catching on the edge. Can I lift it out?",
@@ -7302,6 +7706,48 @@
   ],
   "clear": [],
   "emo": "casual"
+ },
+ {
+  "key": "oh-1fo69bs",
+  "speaker": "attendant",
+  "text": "朝から、ずっとこのままなんです。今日の分をプリントしたいんですけど……",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "プリント"
+  ],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-k12nub",
+  "speaker": "eric",
+  "text": "And you need today’s list printed. There’s a reset button underneath. I’ll try that first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-x03ufr",
+  "speaker": "eric",
+  "text": "Let me print today’s list from here, so we know the whole thing comes out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-y5usuf",
+  "speaker": "eric",
+  "text": "What was that you said to it?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
  },
  {
   "key": "ln-akd68l",
@@ -7706,7 +8152,12 @@
   "text": "水曜日の予約を、確認していたんです。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
   "clear": [],
   "emo": "polite"
  },
@@ -8856,6 +9307,21 @@
   "emo": "bright"
  },
  {
+  "key": "ln-54vkre",
+  "speaker": "eric",
+  "text": "They keep the words on the 画面 until the song starts. I could practise this bit.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
   "key": "ln-wcb63t",
   "speaker": "eric",
   "text": "They keep the words on screen until the song starts. I could practise this bit.",
@@ -8958,14 +9424,44 @@
   "emo": "dry"
  },
  {
-  "key": "ln-1qkyk6x",
+  "key": "ln-185x41c",
   "speaker": "emi",
-  "text": "Eric! You found us.",
+  "text": "Eric! I was hoping you’d make it.",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
   "emo": "bright"
+ },
+ {
+  "key": "ln-2u35qs",
+  "speaker": "kuro",
+  "text": "You came! I wasn’t sure if you’d remember.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-122sn4y",
+  "speaker": "eric",
+  "text": "You said after six. I thought I’d come and see.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1vpjfw2",
+  "speaker": "kuro",
+  "text": "And I still haven’t told you my name. I’m Kuro.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
  },
  {
   "key": "ln-1nigfzh",
@@ -9018,9 +9514,31 @@
   "emo": "warm"
  },
  {
-  "key": "ln-c0ot10",
+  "key": "oh-181egj4",
+  "speaker": "kuro",
+  "text": "このプール、今日で最後なんですよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "プール"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-bftv8e",
   "speaker": "emi",
-  "text": "I meant to be in already. I went for the keys and came back with everyone’s bags.",
+  "text": "Last evening at this pool. The water’s fine once you’re in, apparently.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-sjrqsa",
+  "speaker": "emi",
+  "text": "I came down to put these bags away and have a quick swim. I haven’t managed either yet.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -9040,19 +9558,19 @@
   "emo": "polite"
  },
  {
-  "key": "ln-a5hfa7",
+  "key": "ln-1tswwrc",
   "speaker": "emi",
-  "text": "And now the list as well. I’ll check it... no, actually, I’d like to swim first.",
+  "text": "Oh, she’s found me something else. That can wait until I’m dry again.",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "bright"
+  "emo": "amused"
  },
  {
-  "key": "oh-1txhw31",
+  "key": "oh-qicr44",
   "speaker": "kuro",
-  "text": "エミさん、まだ一本も泳いでいませんよ。",
+  "text": "エミさん、泳ぎに来たんでしょう？",
   "lang": "ja",
   "overheard": true,
   "words": [],
@@ -9060,46 +9578,9 @@
   "emo": "teasing"
  },
  {
-  "key": "ln-1gtwhl",
+  "key": "ln-1dx8kgf",
   "speaker": "emi",
-  "text": "I know, I know. Hang on, is he packing up already? We haven’t even started.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "puzzled"
- },
- {
-  "key": "oh-flndyr",
-  "speaker": "attendant",
-  "text": "使わない物を片づけるだけです。このコースは、最後まで開けておきますよ。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "akete",
-    "開けて"
-   ]
-  ],
-  "clear": [
-   "コース"
-  ],
-  "emo": "polite"
- },
- {
-  "key": "ln-nknsdh",
-  "speaker": "emi",
-  "text": "Oh, good, it’s only the spare floats. He’ll leave our lane open.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "casual"
- },
- {
-  "key": "ln-twfrvs",
-  "speaker": "eric",
-  "text": "I’ll come in. I’m a bit out of practice.",
+  "text": "Yes, I did come here to swim. You’re quite right.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -9107,9 +9588,112 @@
   "emo": "warm"
  },
  {
-  "key": "ln-e060n0",
+  "key": "oh-7wzweu",
   "speaker": "kuro",
-  "text": "Take it slowly. The steps are on this side.",
+  "text": "今日は、泳ぐ？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1ajzdw2",
+  "speaker": "emi",
+  "text": "She’s asking you too. 泳ぐ means swim. Or you can sit with us, there’s no test.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1b2o96d",
+  "speaker": "kuro",
+  "text": "泳ぐ。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "oh-1lh9nfb",
+  "speaker": "kuro",
+  "text": "ゆっくりで、いいですよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ゆっくり"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-13l352p",
+  "speaker": "emi",
+  "text": "Take it slowly, she says. I could do with remembering that myself.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-18o5dbe",
+  "speaker": "eric",
+  "text": "I may need a moment at the other end.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1w5ctyi",
+  "speaker": "eric",
+  "text": "泳ぐ. I’ll come in, but I’m a bit out of practice.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-11zfs6h",
+  "speaker": "eric",
+  "text": "I’ll come in, but I’m a bit out of practice.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-uedyue",
+  "speaker": "kuro",
+  "text": "The steps are on this side.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -9162,6 +9746,21 @@
   "emo": "bright"
  },
  {
+  "key": "ln-1pobol4",
+  "speaker": "eric",
+  "text": "見たい. I’ll watch for a bit. Don’t wait for me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "mitai",
+    "見たい"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
   "key": "ln-swvmx4",
   "speaker": "eric",
   "text": "I’ll watch for a bit. Don’t wait for me.",
@@ -9212,9 +9811,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1icvaof",
+  "key": "ln-znc1wy",
   "speaker": "emi",
-  "text": "I’d forgotten how quiet it is when your ears are under.",
+  "text": "I nearly stayed upstairs to finish an email. I’m glad I didn’t.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -9232,9 +9831,9 @@
   "emo": "polite"
  },
  {
-  "key": "ln-1vn3646",
+  "key": "ln-cm4y2e",
   "speaker": "emi",
-  "text": "One more length? Go on, then.",
+  "text": "One more length? Yes, we’ve got time.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -9270,9 +9869,19 @@
   "emo": "polite"
  },
  {
-  "key": "ln-9hs0jb",
+  "key": "ln-18oodus",
   "speaker": "emi",
-  "text": "I’d stay out here another week if they’d let us.",
+  "text": "I used to keep my goggles in my work bag so I’d actually come down. Then I started carrying everyone else’s things instead.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1dhkbiw",
+  "speaker": "kuro",
+  "text": "They can carry their own things. Come down with me next time.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -9300,19 +9909,9 @@
   "emo": "casual"
  },
  {
-  "key": "ln-nyfhjb",
-  "speaker": "kuro",
-  "text": "My hair will still be wet when I get home.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1bh263p",
+  "key": "ln-h2jwei",
   "speaker": "eric",
-  "text": "At least it’s a short walk.",
+  "text": "I’ll know where to find you if the email can wait.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -9602,6 +10201,33 @@
   "key": "carina-koko",
   "speaker": "carina",
   "text": "ここ。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-gamen",
+  "speaker": "carina",
+  "text": "画面。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-yoyaku",
+  "speaker": "carina",
+  "text": "予約。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "carina-oyogu",
+  "speaker": "carina",
+  "text": "泳ぐ。",
   "lang": "ja",
   "overheard": false,
   "words": [],
@@ -10604,9 +11230,24 @@
   "emo": "tired"
  },
  {
-  "key": "ln-1254rfy-carina",
+  "key": "ln-87r813-carina",
   "speaker": "carina",
-  "text": "Hold it there a second. The plug at the back is half out.",
+  "text": "画面 is the screen? It goes off when you turn it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-c0e73d-carina",
+  "speaker": "carina",
+  "text": "Could you hold it there? The lead pulls tight when you turn it.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -10614,14 +11255,74 @@
   "emo": "curious"
  },
  {
-  "key": "ln-13g8eb9-carina",
+  "key": "ln-fv054u-carina",
   "speaker": "carina",
-  "text": "Try turning it towards me again.",
+  "text": "The signal plug is half out. I can seat it, then we should try turning it again.",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "ln-aaoezp-carina",
+  "speaker": "carina",
+  "text": "All right, turn the 画面 towards me again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1axzvi8-carina",
+  "speaker": "carina",
+  "text": "もう一度. Just to be sure.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-16paktz-carina",
+  "speaker": "carina",
+  "text": "One more time, please. Just to be sure.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1k5uymm-carina",
+  "speaker": "carina",
+  "text": "The picture’s steady now, even when it turns.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-urldx3-carina",
+  "speaker": "carina",
+  "text": "It was fine as long as nobody else needed to see it, then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
  },
  {
   "key": "ln-t5xtwj-carina",
@@ -10954,14 +11655,24 @@
   "emo": "curious"
  },
  {
-  "key": "ln-jt4qmm-carina",
+  "key": "ln-1e93yrw-carina",
   "speaker": "emi",
-  "text": "You must be Carina. I’m Emi, your team lead. We’ve managed to miss each other at the office.",
+  "text": "Oh, you must be Carina. I’m Emi, from B2. It’s good to meet you at last.",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
   "emo": "bright"
+ },
+ {
+  "key": "ln-1y0l09s-carina",
+  "speaker": "carina",
+  "text": "Not tonight. I’ll stay here a bit longer.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "ln-1oyqkxf-carina",
@@ -11024,12 +11735,32 @@
   "emo": "warm"
  },
  {
-  "key": "ln-k12nub-carina",
+  "key": "ln-to8pfp-carina",
   "speaker": "carina",
-  "text": "And you need today’s list printed. There’s a reset button underneath. I’ll try that first.",
+  "text": "Today’s bookings? 予約?",
   "lang": "en",
   "overheard": false,
-  "words": [],
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-oqevro-carina",
+  "speaker": "carina",
+  "text": "I can restart the terminal. Then we’ll check the whole 予約 list, not just the first page.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
   "clear": [],
   "emo": "curious"
  },
@@ -11044,9 +11775,9 @@
   "emo": "hesitant"
  },
  {
-  "key": "ln-x03ufr-carina",
+  "key": "ln-15jplz4-carina",
   "speaker": "carina",
-  "text": "Let me print today’s list from here, so we know the whole thing comes out.",
+  "text": "The screen’s back. We should print the bookings before I call it fixed.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -11074,14 +11805,24 @@
   "emo": "warm"
  },
  {
-  "key": "ln-y5usuf-carina",
+  "key": "ln-5xlwsa-carina",
   "speaker": "carina",
-  "text": "What was that you said to it?",
+  "text": "What did you say just before the paper came out?",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
   "emo": "curious"
+ },
+ {
+  "key": "ln-zrxwsb-carina",
+  "speaker": "carina",
+  "text": "Give it out? I could have used that at our copier on my first day.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
  },
  {
   "key": "ln-1o90k53-carina",
@@ -11092,6 +11833,26 @@
   "words": [],
   "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "ln-12ctuxa-carina",
+  "speaker": "carina",
+  "text": "That’s my booking as well, then. I took one of the club slips.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-vbd1yp-carina",
+  "speaker": "carina",
+  "text": "I can join them? I’ll have a look at the poster before I go.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
  },
  {
   "key": "oh-1lnny36-carina",
@@ -11334,6 +12095,26 @@
   "emo": "warm"
  },
  {
+  "key": "ln-1254rfy-carina",
+  "speaker": "carina",
+  "text": "Hold it there a second. The plug at the back is half out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-13g8eb9-carina",
+  "speaker": "carina",
+  "text": "Try turning it towards me again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
   "key": "ln-if6q0l-carina",
   "speaker": "carina",
   "text": "It’s much easier to hear the fridge when nobody’s here.",
@@ -11432,6 +12213,21 @@
   "words": [],
   "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "ln-7qu2dp-carina",
+  "speaker": "carina",
+  "text": "Do we have a 予約 for this court?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
  },
  {
   "key": "ln-73f8v-carina",
@@ -11533,6 +12329,21 @@
   "emo": "casual"
  },
  {
+  "key": "ln-1fajfm2-carina",
+  "speaker": "carina",
+  "text": "The 画面 is fine. The button cap’s catching on the edge. Can I lift it out?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
   "key": "ln-1n9ircj-carina",
   "speaker": "carina",
   "text": "The cap’s catching on the edge. Can I lift it out?",
@@ -11556,6 +12367,36 @@
   "key": "ln-1rhp1ay-carina",
   "speaker": "carina",
   "text": "The balls at the bottom look much newer. Nobody wants to tip it out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-k12nub-carina",
+  "speaker": "carina",
+  "text": "And you need today’s list printed. There’s a reset button underneath. I’ll try that first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-x03ufr-carina",
+  "speaker": "carina",
+  "text": "Let me print today’s list from here, so we know the whole thing comes out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-y5usuf-carina",
+  "speaker": "carina",
+  "text": "What was that you said to it?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -12113,6 +12954,21 @@
   "emo": "hesitant"
  },
  {
+  "key": "ln-54vkre-carina",
+  "speaker": "carina",
+  "text": "They keep the words on the 画面 until the song starts. I could practise this bit.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "gamen",
+    "画面"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
   "key": "ln-wcb63t-carina",
   "speaker": "carina",
   "text": "They keep the words on screen until the song starts. I could practise this bit.",
@@ -12203,14 +13059,24 @@
   "emo": "dry"
  },
  {
-  "key": "ln-16dka0i-carina",
+  "key": "ln-t06jqz-carina",
   "speaker": "emi",
-  "text": "Carina! You found us.",
+  "text": "Carina! I was hoping you’d make it.",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
   "emo": "bright"
+ },
+ {
+  "key": "ln-122sn4y-carina",
+  "speaker": "carina",
+  "text": "You said after six. I thought I’d come and see.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "ln-1imsd14-carina",
@@ -12233,9 +13099,34 @@
   "emo": "warm"
  },
  {
-  "key": "ln-twfrvs-carina",
+  "key": "ln-18o5dbe-carina",
   "speaker": "carina",
-  "text": "I’ll come in. I’m a bit out of practice.",
+  "text": "I may need a moment at the other end.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1w5ctyi-carina",
+  "speaker": "carina",
+  "text": "泳ぐ. I’ll come in, but I’m a bit out of practice.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-11zfs6h-carina",
+  "speaker": "carina",
+  "text": "I’ll come in, but I’m a bit out of practice.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -12249,6 +13140,21 @@
   "lang": "en",
   "overheard": false,
   "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1pobol4-carina",
+  "speaker": "carina",
+  "text": "見たい. I’ll watch for a bit. Don’t wait for me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "mitai",
+    "見たい"
+   ]
+  ],
   "clear": [],
   "emo": "warm"
  },
@@ -12273,9 +13179,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1bh263p-carina",
+  "key": "ln-h2jwei-carina",
   "speaker": "carina",
-  "text": "At least it’s a short walk.",
+  "text": "I’ll know where to find you if the email can wait.",
   "lang": "en",
   "overheard": false,
   "words": [],
