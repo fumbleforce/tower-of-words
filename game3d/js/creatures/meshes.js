@@ -1,7 +1,9 @@
-// How the creatures are drawn: one instanced mesh per part and kind, so a place's whole flock of pigeons is three
-// draw calls (body, left wing, right wing) however many there are, and a mesh with nobody in it draws nothing.
+// Birds of one kind share a rigid skinned batch: one draw call for the whole flock, with each body and wing
+// retaining its own transform. Insects and ground discs are instanced; empty groups draw nothing.
 // No shadow pass: a soft disc under each creature on a surface (one more call for all of them) grounds it.
 import * as THREE from 'three';
+import { rigidBatch } from '../perf/rigid-batch.js';
+import { updateInstanceBounds } from '../perf/instance-bounds.js';
 import { birdGeometry, blobTexture } from './models.js';
 
 const mat = () => {
@@ -25,7 +27,6 @@ const ZERO = new THREE.Matrix4().makeScale(0, 0, 0);
 function instanced(geo, material, cap) {
   const m = new THREE.InstancedMesh(geo, material, cap);
   m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-  m.frustumCulled = false; // the instances roam the whole place; the base shape's bounds say nothing about them
   m.receiveShadow = true;
   m.castShadow = false;
   m.userData.noBatch = true; // they move: the draw-call pass leaves them alone (perf/batch.js)
@@ -52,7 +53,9 @@ export class BirdMeshes {
     this.left = instanced(g.wing, m, cap);
     this.right = instanced(g.right, m, cap);
     this.group = new THREE.Group();
-    this.group.add(this.body, this.left, this.right);
+    this.batch = rigidBatch([this.body, this.left, this.right]);
+    this.batch.mesh.userData.creature = true;
+    this.group.add(this.batch.mesh);
     this.used = 0;
   }
   pose(i, b) {
@@ -82,7 +85,7 @@ export class BirdMeshes {
   commit(any) {
     this.group.visible = any;
     if (!any) return;
-    for (const m of [this.body, this.left, this.right]) m.instanceMatrix.needsUpdate = true;
+    this.batch.commit();
   }
 }
 
@@ -116,7 +119,7 @@ export class Blobs {
   commit() {
     for (let i = this.n; i < this.mesh.count; i++) this.mesh.setMatrixAt(i, ZERO);
     this.mesh.visible = this.n > 0;
-    this.mesh.instanceMatrix.needsUpdate = true;
+    updateInstanceBounds(this.mesh);
   }
 }
 
@@ -140,7 +143,7 @@ export class InsectMeshes {
   commit(any) {
     this.mesh.visible = any;
     if (!any) return;
-    this.mesh.instanceMatrix.needsUpdate = true;
+    updateInstanceBounds(this.mesh);
     if (this.mesh.instanceColor) this.mesh.instanceColor.needsUpdate = true;
   }
 }
