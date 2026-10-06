@@ -3,6 +3,7 @@
 // street. A period with no entry is offstage. The format is places/day3/index.js applyPlan. Coordinates are each
 // place's own (its things, spots and seats where it has them).
 import { benchNear } from './seats.js';
+import { POSTS as GYM } from '../../scenes/rooms/gym-plan.js';
 
 const thingSpot =
   (id, [dx, dz] = [0, 0]) =>
@@ -61,12 +62,12 @@ export const PLANS = {
     tama: { afternoon: { at: (P) => catOnBench(P), yaw: 1.4, pose: 'sleep' } },
   },
   dorm_commons: { kenji: { evening: { seat: 'commons_sofa' } } },
-  // the gym's desk staffed through the day (the attendant behind the counter); Mori checking his Tuesday booking in
-  // the afternoon, Emi at the equipment store looking for the pool keys
+  // the gym's reception staffed through the day (the attendant behind the counter at the terminal); Mori at the
+  // counter about his Tuesday booking in the afternoon, Emi at the hall's equipment store looking for the pool keys
   gym: {
-    attendant: { '*': { if: "period != 'evening'", at: [4.75, -1.6], face: [4.6, -3.0] } },
-    mori: { afternoon: { at: [3.05, -3.35], face: [4.2, -2.55] } },
-    emi: { afternoon: { at: [-5.85, -3.5], face: [-7.4, -2.6] } },
+    attendant: { '*': { if: "period != 'evening'", ...GYM.attendant } },
+    mori: { afternoon: GYM.mori },
+    emi: { afternoon: GYM.emi },
     kuro: {},
   },
 };

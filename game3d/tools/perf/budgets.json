@@ -143,8 +143,8 @@
         }
       },
       "gym": {
-        "calls": 41,
-        "tris": 24923,
+        "calls": 60,
+        "tris": 34573,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -323,8 +323,8 @@
         }
       },
       "gym": {
-        "calls": 26,
-        "tris": 24623,
+        "calls": 45,
+        "tris": 32897,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
