@@ -169,7 +169,10 @@ export function createMapView(game) {
       $('.mv-places').setAttribute('aria-expanded', 'false');
     }
     if (states[id]?.state === 'go') game.prepare?.(id); // built while he reads the card (places/lifecycle.js)
+    const hadFocus = root.contains(document.activeElement);
     side();
+    if (hadFocus && !root.contains(document.activeElement) && !focusList)
+      (phone() ? $('.mv-places') : root.querySelector(`.mv-list [data-pick="${id}"]`))?.focus({ preventScroll: true });
     if (focusList) root.querySelector(`.mv-list [data-pick="${id}"]`)?.focus({ preventScroll: true });
   }
   async function go() {
@@ -258,19 +261,7 @@ export function createMapView(game) {
       const expanded = root.classList.toggle('places-open');
       t.setAttribute('aria-expanded', String(expanded));
     } else if (t.classList.contains('mv-close') || t.classList.contains('mv-cancel')) {
-      if (t.dataset.zoom) {
-        zoomAt(t.dataset.zoom === 'in' ? 1.35 : 1 / 1.35, v.w / 2, v.h / 2);
-        redraw();
-      } else if (t.classList.contains('mv-home')) {
-        Object.assign(v, { cx: eric?.x || 0, cz: eric?.z || 0, scale: phone() ? 3.25 : 5 });
-        redraw();
-      } else if (t.classList.contains('mv-fit')) {
-        Object.assign(v, { cx: (BOUNDS.x0 + BOUNDS.x1) / 2, cz: (BOUNDS.z0 + BOUNDS.z1) / 2, scale: minScale });
-        redraw();
-      } else if (t.classList.contains('mv-places')) {
-        const expanded = root.classList.toggle('places-open');
-        t.setAttribute('aria-expanded', String(expanded));
-      } else if (t.classList.contains('mv-close')) close();
+      if (t.classList.contains('mv-close')) close();
       else ((picked = null), side());
     } else if (t.classList.contains('mv-go')) go();
     else if (t.dataset.pick) {
@@ -287,6 +278,10 @@ export function createMapView(game) {
     const i = rows.indexOf(document.activeElement);
     if ((e.code === 'ArrowDown' || e.code === 'ArrowUp') && rows.length) {
       e.preventDefault();
+      if (phone()) {
+        root.classList.add('places-open');
+        $('.mv-places').setAttribute('aria-expanded', 'true');
+      }
       const n = i < 0 ? 0 : (i + (e.code === 'ArrowDown' ? 1 : rows.length - 1)) % rows.length;
       pick(rows[n].dataset.pick, { focusList: true });
     } else if (e.code === 'Tab') {

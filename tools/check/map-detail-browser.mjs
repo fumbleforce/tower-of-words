@@ -67,6 +67,12 @@ await withBrowserJob('map-detail', async browser => {
       return labels.flatMap((l,i) => [...pins.filter(p => p.dataset.pick !== l.id && hit(l.r,rect(p.querySelector('.dot')))).map(p => `${l.id}/${p.dataset.pick}`), ...labels.slice(i+1).filter(o=>hit(l.r,o.r)).map(o=>`${l.id}/${o.id}`)]);
     });
     assert.deepEqual(overlaps, []);
+    await page.keyboard.press('ArrowDown');
+    assert.equal(await page.evaluate(() => !!document.activeElement.closest('.mv-list') && document.activeElement.offsetWidth > 0),true,'arrow navigation focuses a visible list row');
+    if (phone) {
+      assert.equal(await page.locator('#mapView .mv-places').getAttribute('aria-expanded'),'true');
+      await page.locator('#mapView .mv-places').click();
+    }
     await page.keyboard.press('Tab');
     assert.equal(await page.evaluate(() => document.activeElement.closest('#mapView') !== null), true);
     await page.keyboard.press('Escape');
