@@ -120,11 +120,13 @@ function* quays(p) {
   yield;
 }
 
-// the ground: the yard's slabs and its painted footway, the landing, the piers' decks; kerbs where the yard and the
-// landing meet the land
-function* ground(pv, p) {
+// the yard: its slabs, the painted footway across it, the kerbs along its north edge (less the office's face and the
+// works lane) and its east edge north of the street (the works lay it too, seen from the works street's mouth,
+// harbour/grounds.js worksViewSteps)
+export function yardGround(pv, p) {
   const Y = P.YARD,
-    Ld = P.LANDING;
+    O = P.OFFICE,
+    W = P.WORKS_LANE;
   pv.field(Y, { pattern: 'grid', module: [2.4, 2.4], tones: CONCRETE, vary: 0.04, gap: 0.03, origin: [Y[0], Y[2]] });
   for (const [x0, x1, z0, z1] of P.FOOTWAY) {
     pv.field([x0, x1, z0, z1], {
@@ -143,25 +145,6 @@ function* ground(pv, p) {
       pv.field(r, { pattern: 'grid', module: [1.2, 1.2], tones: [C.footEdge], vary: 0, gap: 0, h: 0.013 });
     }
   }
-  yield;
-  pv.field(Ld, { pattern: 'grid', module: [0.9, 0.9], tones: GRANITE.pale, origin: [Ld[0], Ld[2]] });
-  for (const r of [P.FERRY_PIER, P.SUPPLY_PIER])
-    pv.field(r, { pattern: 'grid', module: [1.5, 2.0], tones: CONCRETE, vary: 0.04, gap: 0.03, origin: [r[0], r[2]] });
-  // the works lane's mouth
-  const W = P.WORKS_LANE;
-  pv.field([W[0], W[1], P.LANE_END - 1.6, Y[2]], {
-    pattern: 'grid',
-    module: [2.4, 2.4],
-    tones: CONCRETE,
-    vary: 0.04,
-    gap: 0.03,
-    origin: [W[0], Y[2]], // as the works lay the lane on north (works/grounds.js)
-  });
-  yield;
-  // kerbs: the yard's north edge (less the office's face and the works lane), its east edge north of the street, the
-  // landing's north edge either side of the terminal and its east end north of the yard
-  const O = P.OFFICE,
-    T = P.TERMINAL;
   kerb(p, [Y[0], Y[2]], [Y[1], Y[2]], {
     off: 0.08,
     gaps: [
@@ -170,9 +153,23 @@ function* ground(pv, p) {
     ],
   });
   kerb(p, [Y[1], Y[2]], [Y[1], P.STREET[2]], { off: -0.08 });
+}
+
+// the ground: the yard, the landing, the piers' decks; kerbs where the landing meets the land. The works lane, its
+// mouth and on north, is the works' own paving (works/grounds.js laneViewSteps, scenes/harbour.js)
+function* ground(pv, p) {
+  const Y = P.YARD,
+    Ld = P.LANDING,
+    T = P.TERMINAL;
+  yardGround(pv, p);
+  yield;
+  pv.field(Ld, { pattern: 'grid', module: [0.9, 0.9], tones: GRANITE.pale, origin: [Ld[0], Ld[2]] });
+  for (const r of [P.FERRY_PIER, P.SUPPLY_PIER])
+    pv.field(r, { pattern: 'grid', module: [1.5, 2.0], tones: CONCRETE, vary: 0.04, gap: 0.03, origin: [r[0], r[2]] });
+  yield;
+  // the landing's north edge either side of the terminal and its east end north of the yard
   kerb(p, [Ld[0], Ld[2]], [Ld[1], Ld[2]], { off: 0.08, gaps: [[T[0], T[1]]] });
   kerb(p, [Ld[1], Ld[2]], [Ld[1], Y[2]], { off: -0.08 });
-  for (const x of [W[0], W[1]]) kerb(p, [x, P.LANE_END - 1.6], [x, Y[2]], { off: x === W[0] ? 0.08 : -0.08 });
 }
 
 // pv: a paver; p: a Parts collector (or cells'); the water goes in `water`, a Parts of its own

@@ -366,12 +366,13 @@ function* hall(p, sets, signs, lights) {
 
 // p: a Parts collector (casting); sets: outdoor/block.js blockSets() (the hall's door glass and lit windows);
 // signs: the lit signSet (the hall's name); plain: an unlit signSet (the works' faded plates and boards);
-// lights: a lightSet
-export function* buildingsSteps(p, sets, signs, plain, lights) {
-  yield* factory(p, plain);
-  yield* plant(p, plain);
-  chimney(p);
-  yield* shed(p, plain);
-  kiosk(p, plain);
-  yield* hall(p, sets, signs, lights);
+// lights: a lightSet; only: which of them (the harbour builds the ones it sees up the works lane, scenes/harbour.js)
+export const BUILDING_IDS = ['factory', 'plant', 'chimney', 'shed', 'kiosk', 'hall'];
+export function* buildingsSteps(p, sets, signs, plain, lights, only = BUILDING_IDS) {
+  if (only.includes('factory')) yield* factory(p, plain);
+  if (only.includes('plant')) yield* plant(p, plain);
+  if (only.includes('chimney')) chimney(p);
+  if (only.includes('shed')) yield* shed(p, plain);
+  if (only.includes('kiosk')) kiosk(p, plain);
+  if (only.includes('hall')) yield* hall(p, sets, signs, lights);
 }

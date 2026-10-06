@@ -21,6 +21,7 @@ import { faces, faceAt, tOf, bayOf } from '../outdoor/block-face.js';
 import * as O from '../office-quarter/plan.js';
 import * as W from '../works/plan.js';
 import { nookWalks } from '../outdoor/nook-walks.js';
+import { WALKS as COAST_WALKS } from '../island-west.js';
 
 export const CHUNK = 'harbour';
 const AT = LAYOUT.CHUNKS[CHUNK].at;
@@ -55,6 +56,35 @@ export const STREET_TOP = W.STREET_SEAM - 0.2; // the works street's mouth this 
 export const EDGE = 0.4; // how far from a quay's edge he can walk
 // the bay off the harbour walk's sea side, halfway down: two benches looking west over the rocks
 export const BAY = [HW[0] - 2.2, HW[0], -42.4, -38.4];
+
+// the bands past the ways out, not walked here, built with the neighbours' own builders so the next place stands
+// modelled before the crossfade (notes/grounds-audit.md): east along the office street past Amakawa Foods to
+// Amakawa Electric's east end, with their fronts (office-quarter/grounds.js and row.js); up the works lane, the
+// works' ground, lamps and trees (works/grounds.js laneViewSteps) and the buildings it looks at (works/buildings.js,
+// the pipe bridge works/props.js); south past the walk's bollards, the coast walk on south to its bay and its leg
+// east past the platform shed's north end, kerbed by the coast kit (outdoor/coast.js)
+export const EAST_BAND = O.block('m2').rect[1] + 0.2;
+export const BAND_BLOCKS = ['w1', 'm1', 'm2'];
+export const WORKS_SEEN = ['factory', 'plant', 'chimney', 'shed', 'hall'];
+export const WORKS_SEEN_IDS = ['factory', 'nw_old', 'chimney', 'works_shed', 'works_blue']; // the same, layout ids
+export const SOUTH_BAND = -6; // the coast walk is laid south to here
+const cw = (id, o = {}) => ({ ...COAST_WALKS[id], ...o });
+export const BAND_WALKS = {
+  coast_path: cw('coast_path', { rect: [...COAST_WALKS.coast_path.rect.slice(0, 3), SOUTH_BAND], open: 'ns' }),
+  coast_bay: cw('coast_bay', { slabs: false }), // laid in the bay's slabs (grounds.js), no seams over them
+  coast_path_east: cw('coast_path_east', { open: 'e' }),
+};
+export const COAST_PATH = box(BAND_WALKS.coast_path.rect);
+export const COAST_BAY = box(BAND_WALKS.coast_bay.rect);
+export const COAST_EAST = box(BAND_WALKS.coast_path_east.rect);
+// what the works lay of the harbour, seen from the works street's mouth (grounds.js worksViewSteps): the office
+// street from the yard to Amakawa Trading's east end, the harbour walk's first stretch, the yard's gear east of x
+export const WORKS_VIEW = { street: [YARD[1], O.block('w1').rect[1] + 0.2], walk: STREET[3] + 12, yard: -80 };
+// the band's lamps: on down the coast walk's landward edge as on the harbour walk's, and along its leg's north edge
+export const BAND_LAMPS = {
+  path: [-22, -14].map((z) => [COAST_PATH[1] + 0.45, z]),
+  east: [-34, -26].map((x) => [x, COAST_EAST[2] - 0.45]),
+};
 
 // the buildings with a door on the yard or the landing: the face it is on and where along it, snapped to a bay of
 // the block's ground floor (as the office row's, office-quarter/plan.js); the name on the canopy [kana, English,
