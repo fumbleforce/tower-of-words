@@ -12,6 +12,8 @@ import { signSet } from './shop-signs.js';
 import { drain } from '../perf/slice.js';
 import { facadeDrainage } from './outdoor/facade-detail.js';
 import { shopWindow, shopShell } from './shotengai/facades.js';
+import { FRONT_IDS, displayCenters } from './shotengai/shopfront-plan.js';
+import { recessedShopWall, shopfront } from './shotengai/shopfronts.js';
 
 // parts merged into one mesh of one material (the parts are disposed)
 export function merged(parts, material, { cast = true } = {}) {
@@ -216,7 +218,18 @@ export function* shopStreetSteps(
         vc = row.v0 + depth / 2,
         f = row.front + row.dirF * 0.03,
         b = row.back - row.dirF * 0.03;
-      walls[(bi * 3 + ri) % 4].push(box(ub - ua - 0.06, h, depth, (ua + ub) / 2, 0, vc));
+      const fronts = shops.filter((s) => s.row === name && FRONT_IDS.includes(s.id) && s.door >= i0 && s.door <= i1);
+      walls[(bi * 3 + ri) % 4].push(
+        ...recessedShopWall(box, {
+          ua,
+          ub,
+          h,
+          depth,
+          v0: row.v0,
+          n: row.dirF,
+          centers: fronts.flatMap((s) => displayCenters(uOf(s.door) + bayW / 2)),
+        }),
+      );
       shopShell(fittings, {
         ua,
         ub,
@@ -233,7 +246,9 @@ export function* shopStreetSteps(
       for (let i = i0; i <= i1; i++) {
         const u = uOf(i) + bayW / 2;
         // ground floor: a shopfront or a shutter; an awning; upper-floor windows
-        if ((i + ri) % 5 === 3 && !named.has(name + i))
+        const front = fronts.find((s) => s.door === i);
+        if (front) shopfront(fittings, front.id, u, row.front, row.dirF);
+        else if ((i + ri) % 5 === 3 && !named.has(name + i))
           shutters.push(box(bayW - 0.9, storeyH * 0.76, 0.05, u, 0.05, f));
         else panes.push(box(bayW - 0.9, storeyH * 0.72, 0.05, u, 0.12, f));
         // the named shops' door bays have no awning, so the door shows from the street
