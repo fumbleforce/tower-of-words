@@ -17,6 +17,7 @@ import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
 import { installTickets } from '../tickets/index.js';
 import { installClubs, withClubs, clubArrival } from '../clubs/index.js';
 import { installDay3 } from './day3/place.js';
+import { attachMonday, installDay5 } from './day5/place.js';
 import { attachSunday, installDay4 } from './day4/index.js';
 import { noteBenches } from './day3/seats.js';
 import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
@@ -60,6 +61,7 @@ export function createPlaceLifecycle(
   installClubs(game); // the clubs and the notice board (clubs/index.js)
   installDay3(game); // Saturday's people and scenes, the story's day3Setup (places/day3/)
   installDay4(game);
+  installDay5(game);
   watchPlacePlugins(game);
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
   setUrgent(() => !game.place || document.body.classList.contains('loading'));
@@ -69,6 +71,7 @@ export function createPlaceLifecycle(
         const story = await game.runner.load(name);
         const place = await PLACES[name](game, story);
         attachSunday(game, place, name);
+        attachMonday(game, place, name);
         assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
         place.name = name;
         noteBenches(place); // its benches' seats, before the draw-call pass merges them (places/day3/seats.js)

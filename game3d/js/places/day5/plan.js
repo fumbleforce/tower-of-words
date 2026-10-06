@@ -17,12 +17,12 @@ export const PLANS = {
       morning: { at: [5.1, -2.8], face: [5.5, -3.4] },
       lunch: { at: [4.7, -2], face: [5.2, -2] },
       afternoon: { seat: 'mio_seat' },
-      evening: { at: [-3.75, -0.8], face: [-4.62, -2.3] },
+      evening: { at: [-4.8, -0.55], face: [-4.62, -2.3] },
     },
     kenji: {
       morning: home,
       afternoon: home,
-      evening: { at: [-4.3, -0.9], face: [-4.62, -2.3] },
+      evening: { at: [-5.1, -1.45], face: [-4.62, -2.3] },
     },
     mori: {
       morning: { at: [2.3, -2.5], face: [2.9, -3] },
@@ -38,7 +38,15 @@ export const PLANS = {
   shotengai: {
     mori: {},
     kenji: {},
-    kuroda: {},
+    kuroda: {
+      evening: {
+        at: (P) => {
+          const s = P.things.bakery.spot();
+          return [s[0] - 0.7, s[1] + 0.8];
+        },
+        face: (P) => P.things.bakery.face(),
+      },
+    },
     kuro: {},
     aoi: {},
     rei: { lunch: { at: [1.45, -1.8], face: [2.25, -1.8] } },

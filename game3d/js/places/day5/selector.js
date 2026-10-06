@@ -54,5 +54,18 @@ export function selectorRepair(game, P) {
       await game.wait(1100);
     } else throw new Error(`Unknown selector repair state: ${state}`);
   }
-  return { hook, restore, update, targets: [screen, key] };
+  return {
+    hook,
+    restore,
+    update,
+    magicTargets() {
+      stopped = true;
+      return [screen, key];
+    },
+    snapshot: () => ({ stopped, phase }),
+    load(state) {
+      stopped = state.stopped;
+      phase = state.phase;
+    },
+  };
 }

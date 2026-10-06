@@ -1,4 +1,5 @@
 import { extendSundayCatalog } from './day4/catalog.js';
+import { extendMondayCatalog } from './day5/catalog.js';
 import { TRAIN_DETAILS } from './catalog-train.js';
 import { SOUTH_HALF_DETAILS } from './catalog-south.js';
 import { OFFICE_DETAILS } from './catalog-office.js';
@@ -288,5 +289,6 @@ export const PLACE_DETAILS = {
 };
 
 extendSundayCatalog(PLACE_DETAILS);
+extendMondayCatalog(PLACE_DETAILS);
 
 export const SHARED_THINGS = { mio: { label: 'Mio', kind: 'person' } };

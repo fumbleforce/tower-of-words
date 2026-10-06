@@ -1,3 +1,4 @@
+import { day3Place } from './day3/place.js';
 import * as THREE from 'three';
 import { buildKaraokeBooth } from '../scenes/rooms/karaoke.js';
 import { RoomCam } from '../cam.js';
@@ -15,6 +16,7 @@ export function karaokeBoothPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const d = w.door,
     save = roomSave(game, w.nav, d.in, cam);
+  const d3 = day3Place(game, 'karaoke_booth', { root: w.root, K, ids: ['kenji'] });
   const things = {
     booth_door: {
       ...PLACE_DETAILS.karaoke_booth.things.booth_door,
@@ -35,6 +37,7 @@ export function karaokeBoothPlace(game) {
       face: () => [w.screen[0], w.screen[2]],
       spot: () => w.spots.booth_screen,
     },
+    kenji: { ...PLACE_DETAILS.karaoke_booth.things.kenji, ...d3.thing('kenji') },
   };
   const P = {
     scene: w.scene,
@@ -54,9 +57,9 @@ export function karaokeBoothPlace(game) {
       booth_screen: w.spots.booth_screen,
     },
     seats: { booth_seat_w: w.seats[0], booth_seat_e: w.seats[1] },
-    people: {},
+    people: { kenji: d3.people.kenji },
     zones: {},
-    hooks: {},
+    hooks: { selectorRepair: (a) => P.monday.hooks.selectorRepair(a) },
     fit(aspect) {
       roomView(cam, w.bounds, aspect);
     },
@@ -64,7 +67,9 @@ export function karaokeBoothPlace(game) {
       const point = new THREE.Vector3();
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
-    update() {},
+    update(dt) {
+      d3.update(dt);
+    },
     snapshotState: save.snapshot,
     restoreState: save.restore,
     // in from the corridor at the top of the stairs through the booth's door, walking west; back out the same way

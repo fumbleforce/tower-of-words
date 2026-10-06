@@ -50,6 +50,7 @@ export function installProgressionHooks(game, { travel }) {
     game.place?.onPeriod?.(p); // the place's light for the new period (outdoors, the room's window)
     if (p === 'evening') playMusic('night');
     if (sim.day === 4) game.place?.day4Period?.();
+    if (sim.day === 5) game.place?.day5Period?.();
   };
   // a story can change the loop: { hook: 'music', name: 'calm' | 'office' | 'lively' | 'night' | null }
   H.music = ({ name }) => playMusic(name || null);

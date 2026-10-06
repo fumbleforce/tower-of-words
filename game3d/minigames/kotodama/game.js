@@ -229,7 +229,10 @@ async function fire() {
   } else if (!note) sfx.wrong();
   const who = [...new Set(res.deliveries.filter(d => d.kind === 'serve').map(d => d.to))];
   for (const w of who.slice(0, 2)) L.push(says('served', w));
-  for (const d of res.deliveries.filter(x => x.kind === 'launch').slice(0, 1)) L.push({ ...says('launched', d.what), face: 'surprised' });
+  for (const d of res.deliveries.filter(x => x.kind === 'launch').slice(0, 1)) {
+    L.push({ ...says('launched', d.what), face: 'surprised' });
+    if (d.what === 'mio') story?.voice('launchedMio');
+  }
   for (const d of res.deliveries.filter(x => x.kind === 'spare').slice(0, 1)) L.push(says('spare', d.to));
   if (firstCmd && res.clean && !seen.has('second')) {
     seen.add('second');
@@ -298,7 +301,8 @@ function beginShift() {
   if (run.shift === 0) {
     const ask = says('ask', 'kenji', story ? 'melon' : 'cola');
     if (!taught('first')) startGuide(story?.guide || TUTORIAL, [ask]);
-    else setTalk([line('mio', COACH.first[0], COACH.first[1], 'coach'), ask]);
+    else setTalk(story ? [ask] : [line('mio', COACH.first[0], COACH.first[1], 'coach'), ask]);
+    story?.voice('request');
   } else if (run.shift === 1) {
     const coach = line('mio', COACH.shift2[0], COACH.shift2[1], 'coach');
     const p = plan(run);
@@ -325,7 +329,8 @@ function shiftEnd() {
     <p class="k-time">${story ? 'B2' : next.time}</p>
     <h2>${story ? 'Round' : 'Shift'} ${run.shift + 1} done</h2>
     <p class="sub">${run.score} points · ${run.hearts} ${run.hearts === 1 ? 'heart' : 'hearts'} left. Next: ${next.people.length} people, ${next.machines.length} machines. Pick one word to take into it.</p>
-    <div class="cards">${offers.map(powerCard).join('')}</div></div>`, 'between');
+    <div class="cards">${offers.map(powerCard).join('')}</div>${story ? '<button class="ghost story-exit">Back to B2</button>' : ''}</div>`, 'between');
+  if (story) $('.overlay .story-exit').onclick = () => story.leave();
   for (const b of document.querySelectorAll('.overlay .card'))
     b.onclick = () => {
       run.powers.add(b.dataset.power);
@@ -353,14 +358,14 @@ function end() {
     <p class="sub">${run.served} requests served${run.score >= was && was ? ' · new best' : ''}${daily ? ` · today’s best ${best}` : ''}</p>
     ${top ? `<div class="e-best"><small>Biggest command · ${top.points} points</small><div class="jp">${jp(top.markup)}</div><div class="gl">${top.en}</div></div>` : ''}
     <details class="e-said"><summary>Your best commands</summary><ul>${list.map(s => `<li><span class="jp">${jp(s.markup)}</span><span class="gl">${s.en} · ${s.points}</span></li>`).join('')}</ul></details>
-    <div class="e-btns">${daily ? '<button class="ghost share">Copy result</button>' : ''}<button class="primary again">Play again</button></div></div>`, 'end');
+    <div class="e-btns">${daily ? '<button class="ghost share">Copy result</button>' : ''}<button class="primary again">${story ? 'Back to B2' : 'Play again'}</button></div></div>`, 'end');
   const share = $('.overlay .share');
   if (share)
     share.onclick = () => {
       const text = `ことだま kotodama ${seed} · ${run.score} ${STAR_TEXT(run.score)} · biggest command ×${run.best ? run.best.n : 0}`;
       (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(() => (share.textContent = 'Copied'), () => (share.textContent = text));
     };
-  $('.overlay .again').onclick = () => start(false);
+  $('.overlay .again').onclick = () => story ? story.leave() : start(false);
   expect({ kind: 'end' });
 }
 

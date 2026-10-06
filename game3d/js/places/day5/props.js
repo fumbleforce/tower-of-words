@@ -53,6 +53,9 @@ export function inHand(P, item, who, { side = 1, height = 0.68 } = {}) {
   );
   item.visible = true;
 }
-export function frame(game, id, zoom = 2.4) {
-  game.hooks.cam({ on: id, zoom });
+export function frame(game, id, distance = 2.4) {
+  const P = game.place,
+    person = P.people[id];
+  const at = person ? person.root.position : anchor(P, id);
+  P.monday.shot.focus([at.x, at.z], distance, person ? 0.75 : at.y, 0.35, person ? 0.3 : 0.7);
 }

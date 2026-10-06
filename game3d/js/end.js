@@ -8,7 +8,7 @@ import { PLACE_NAMES } from './places/definitions.js';
 import { LAST_DAY, nextDaySave } from './days.js';
 import { MC, isPlayer } from './mc.js';
 
-const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three', 4: 'Day four' };
+const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three', 4: 'Day four', 5: 'Day five' };
 const SAVE_KEY = 'amakawa-day1-save',
   CONTINUE_FLAG = 'amakawa-continue'; // menu.js: a reload with this set continues straight into the save
 

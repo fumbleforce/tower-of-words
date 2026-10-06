@@ -1,6 +1,7 @@
 import { TRIPS as DAY2_TRIPS } from '../../story/day2/index.js';
 import { TRIPS as DAY3_TRIPS } from '../../story/day3/index.js';
 import { TRIPS as DAY4_TRIPS } from '../../story/day4/index.js';
+import { TRIPS as DAY5_TRIPS } from '../../story/day5/index.js';
 import { MC } from '../mc.js';
 // Narrative place order and source references, consumed by the runtime and its checks.
 export const PLACE_FILES = {
@@ -84,7 +85,7 @@ export const TRIPS = {
 };
 // Day 2 has its own ways (game3d/story/day2/index.js TRIPS, both periods), and no NEXT line; so has day 3's test
 // skeleton (story/day3/index.js).
-export const DAY_TRIPS = { 2: DAY2_TRIPS, 3: DAY3_TRIPS, 4: DAY4_TRIPS };
+export const DAY_TRIPS = { 2: DAY2_TRIPS, 3: DAY3_TRIPS, 4: DAY4_TRIPS, 5: DAY5_TRIPS };
 export const canTravel = (from, to, day = 1) =>
   DAY_TRIPS[day] ? !!DAY_TRIPS[day][from]?.includes(to) : NEXT[from] === to || !!TRIPS[from]?.includes(to);
 export const STORY_FILES = [

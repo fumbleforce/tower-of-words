@@ -6,6 +6,7 @@ import { known, SAYABLE } from './lang.js';
 import { flags } from './narrative/state.js';
 import { doorwayAt } from './movement/doorways.js';
 import { day3Tick, preferred } from './testmode-day3.js';
+import { day5Tick, day5DeliveryTick } from './testmode-day5.js';
 import { DAY4_ROUTE } from './testmode-day4.js';
 
 export function start(game) {
@@ -65,6 +66,7 @@ export function start(game) {
       T.log.push('board: close');
       return board.click();
     }
+    if (game.sim?.day === 5 && day5DeliveryTick()) return;
     const p = game.place;
     if (!p || !game.walker) return;
     if (p.name !== lastPlace) {
@@ -85,6 +87,7 @@ export function start(game) {
     // day 3: the route through the Saturday (testmode-day3.js) before anything else
     if ((game.sim?.day || 1) === 3 && day3Tick(game, T, (T.route3 ||= { i: 0, wait: 0 }))) return;
     if (game.sim?.day === 4 && day3Tick(game, T, (T.route4 ||= { i: 0, wait: 0 }), DAY4_ROUTE)) return;
+    if (game.sim?.day === 5 && day5Tick(game, T, (T.route5 ||= { i: 0, wait: 0 }))) return;
     const list = game.markers.list.filter((m) => m.enabled());
     const goals = list.filter((m) => m.goal());
     // social route: at the jam, say すみません to the guard (the way a player takes the social way), not the goal
