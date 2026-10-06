@@ -71,11 +71,13 @@ function seat() {
 let figures = [], motion = params.get('m') || 'idle', current = null, varig = params.get('r') || CFG.varietyRigs[0] || '';
 function play(f) {
   f.seat.visible = motion === 'sit';
+  f.slide.position.set(0, 0, 0);
   if (motion === 'sit') return f.m.sitAt(0, 0.3, 0, 0);
   f.m.root.position.set(0, 0, 0);
   f.m.root.rotation.set(0, 0, 0);
   f.m.seated = false;
-  f.m.setState(motion);
+  f.m.setState(motion === 'run' ? 'walk' : motion);
+  f.m.setGait(null, { run: motion === 'run' });
 }
 
 async function show(key) {
@@ -95,15 +97,19 @@ async function show(key) {
   const made = await Promise.all(list.map(async ({ it, x, z }) => {
     const rig = CFG.rigs[it.rig];
     const m = await person(rig, it);
-    const g = new THREE.Group();
+    const g = new THREE.Group(), slide = new THREE.Group();
     g.position.set(x, 0, z);
     const s = seat();
-    g.add(m.root, s);
+    slide.add(m.root);
+    g.add(slide, s);
     m.root.traverse((o) => { if (o.isMesh) o.castShadow = true; });
     const tag = document.createElement('div');
     tag.textContent = it.label || rig.label;
     tagBox.appendChild(tag);
-    return { g, m, seat: s, tag, h: it.height || rig.height };
+    // Mio's original loader uses these fixed stride speeds (game3d/js/mio.js makeGait); meshyFrom exposes its
+    // measured speeds on the returned rig. Both use body units per second.
+    const strides = m.strides || (rig.loader === 'mio' && { walkV: 0.47, runV: 0.77 });
+    return { g, slide, m, strides, seat: s, tag, h: it.height || rig.height };
   }));
   if (current !== key) return;
   figures = made;
@@ -119,8 +125,10 @@ function frameAll(y = 0.55, k = 1, part = null) {
   const xs = group.map((f) => f.g.position.x), zs = figures.map((f) => f.g.position.z);
   const w = Math.max(...xs) - Math.min(...xs) + 1, depth = Math.min(...zs), cx = (Math.max(...xs) + Math.min(...xs)) / 2;
   const up = CFG.scenes[current]?.camUp || 0;
+  const aspect = canvas.clientWidth / canvas.clientHeight;
+  const distance = Math.max(1.2 + w * 1.25, w / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * aspect));
   controls.target.set(cx, y, depth / 2);
-  camera.position.set(cx, y + (0.5 + up) * k, depth / 2 + (1.2 + w * 1.25) * k);
+  camera.position.set(cx, y + (0.5 + up) * k, depth / 2 + distance * k);
   controls.update();
 }
 
@@ -175,7 +183,17 @@ const clock = new THREE.Clock(), v = new THREE.Vector3();
 function frame() {
   const dt = Math.min(clock.getDelta(), 0.05);
   if (spin) for (const f of figures) f.g.rotation.y += dt * 0.6;
-  for (const f of figures) f.m.update(dt);
+  for (const f of figures) {
+    if (motion === 'walk' || motion === 'run') {
+      // The game's gait follows actual root travel and idles a stationary body. Move at the clip's measured
+      // speed, then cancel that travel in a parent group to keep this preview centred through every cycle.
+      const speed = motion === 'run' ? f.strides.runV : f.strides.walkV;
+      f.m.root.position.z += speed * (f.m.root.scale.x || 1) * dt;
+      f.slide.position.z = -f.m.root.position.z;
+      f.m.setGait(speed, { run: motion === 'run' });
+    }
+    f.m.update(dt);
+  }
   const w = canvas.clientWidth, h = canvas.clientHeight;
   if (canvas.width !== Math.floor(w * renderer.getPixelRatio()) || canvas.height !== Math.floor(h * renderer.getPixelRatio())) {
     renderer.setSize(w, h, false);
@@ -207,7 +225,7 @@ function closeOn(i, part, side) {
   controls.update();
 }
 window.__viewer = {
-  ready: true, show, view: (k) => VIEWS[k](), closeOn, camera, controls,
+  ready: true, show, view: (k) => VIEWS[k](), closeOn, camera, controls, figures: () => figures,
   setMotion: (m) => { motion = m; for (const f of figures) play(f); },
   setRig: (r) => { varig = r; return show(current); },
 };
