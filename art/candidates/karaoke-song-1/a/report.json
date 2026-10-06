@@ -1,0 +1,77 @@
+{
+  "take": "a",
+  "score": {
+    "prompt_id": "cc53281a-7a27-4c25-a8e6-79f148cac70d",
+    "seconds": 66.03,
+    "status": {
+      "status_str": "success",
+      "completed": true,
+      "messages": [
+        [
+          "execution_start",
+          {
+            "prompt_id": "cc53281a-7a27-4c25-a8e6-79f148cac70d",
+            "timestamp": 1791329490066
+          }
+        ],
+        [
+          "execution_cached",
+          {
+            "nodes": [],
+            "prompt_id": "cc53281a-7a27-4c25-a8e6-79f148cac70d",
+            "timestamp": 1791329490066
+          }
+        ],
+        [
+          "execution_success",
+          {
+            "prompt_id": "cc53281a-7a27-4c25-a8e6-79f148cac70d",
+            "timestamp": 1791329555098
+          }
+        ]
+      ]
+    }
+  },
+  "score_seconds": 52.8,
+  "bpm": 100,
+  "instrumental_trim": [
+    "intro 9 bars -> 1 (1 sung)",
+    "verse 9 bars kept",
+    "chorus 12 bars kept"
+  ],
+  "audio": {
+    "prompt_id": "d0a88066-221e-4b1a-ad50-c68e633d8ad7",
+    "seconds": 150.08,
+    "status": {
+      "status_str": "success",
+      "completed": true,
+      "messages": [
+        [
+          "execution_start",
+          {
+            "prompt_id": "d0a88066-221e-4b1a-ad50-c68e633d8ad7",
+            "timestamp": 1791329556101
+          }
+        ],
+        [
+          "execution_cached",
+          {
+            "nodes": [
+              "1"
+            ],
+            "prompt_id": "d0a88066-221e-4b1a-ad50-c68e633d8ad7",
+            "timestamp": 1791329556102
+          }
+        ],
+        [
+          "execution_success",
+          {
+            "prompt_id": "d0a88066-221e-4b1a-ad50-c68e633d8ad7",
+            "timestamp": 1791329705016
+          }
+        ]
+      ]
+    }
+  },
+  "audio_sha256": "250429f7d7abb17926319b79e1ad93d1ad72b4bc2dc6505b77b52c78e558b944"
+}

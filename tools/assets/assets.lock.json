@@ -1947,6 +1947,8 @@
   "art/parts/guard-meshy-1/sheets/tex.webp": {"size": 70880, "sha256": "a2d8bf8709e5c7592714655fb7d61875c8c84bd1988cee655a62e690331af54b", "type": "image/webp"},
   "art/parts/guard-meshy-1/sheets/uv.webp": {"size": 152818, "sha256": "e466ac582171281b74870cc33eb3741422e9fd1db8649466891c9fec618d7d29", "type": "image/webp"},
   "art/parts/guard-meshy-1/sheets/viewer.webp": {"size": 108324, "sha256": "14f4a7fba8661a3605fda8a9558bfbd2e5e1ed1a2c2fe0e4f7976f40c4483403", "type": "image/webp"},
+  "art/parts/karaoke-song-1/a-full.mp3": {"size": 1192733, "sha256": "0300726deb853b3e139e9603e8ee4caae9b6a8325a7c52a88de1bd4dc21f6e3b", "type": "audio/mpeg"},
+  "art/parts/karaoke-song-1/b-full.mp3": {"size": 1187638, "sha256": "bac5f6166dcd5c1c92401d8d7c4fb11e2dfaf35d3ee7c8d301a6d5d8dae06e67", "type": "audio/mpeg"},
   "art/parts/kenji-meshy-1/pics/d1.png": {"size": 731151, "sha256": "ee7e7b5779e1477d1283b63a2bb0daca1a4803dfc6ecd3f15dbc92a2ef5a121e", "type": "image/png"},
   "art/parts/kenji-meshy-1/pics/e2.png": {"size": 786382, "sha256": "69828d59476da0dc5f6f1b6a1b888b6ec45c2aa55b45e4afd5a8ee34c0008f93", "type": "image/png"},
   "art/parts/kenji-meshy-1/pics/f3.png": {"size": 805194, "sha256": "636cd38796dbf1aeb64c5cc4457d4bab1fe86ff4eff6a2d2bf1b8ff012a60d17", "type": "image/png"},

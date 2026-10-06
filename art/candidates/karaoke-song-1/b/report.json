@@ -1,0 +1,79 @@
+{
+  "take": "b",
+  "score": {
+    "prompt_id": "e524b10d-e11d-45b3-bc32-27a367424f30",
+    "seconds": 80.04,
+    "status": {
+      "status_str": "success",
+      "completed": true,
+      "messages": [
+        [
+          "execution_start",
+          {
+            "prompt_id": "e524b10d-e11d-45b3-bc32-27a367424f30",
+            "timestamp": 1791330074789
+          }
+        ],
+        [
+          "execution_cached",
+          {
+            "nodes": [],
+            "prompt_id": "e524b10d-e11d-45b3-bc32-27a367424f30",
+            "timestamp": 1791330074789
+          }
+        ],
+        [
+          "execution_success",
+          {
+            "prompt_id": "e524b10d-e11d-45b3-bc32-27a367424f30",
+            "timestamp": 1791330153813
+          }
+        ]
+      ]
+    }
+  },
+  "score_seconds": 53.592233009708735,
+  "bpm": 103,
+  "instrumental_trim": [
+    "intro 5 bars -> 1",
+    "verse 12 bars kept",
+    "chorus 9 bars kept",
+    "outro 5 bars -> 1"
+  ],
+  "audio": {
+    "prompt_id": "288a10a4-aaec-4000-91f4-6bf885734345",
+    "seconds": 154.08,
+    "status": {
+      "status_str": "success",
+      "completed": true,
+      "messages": [
+        [
+          "execution_start",
+          {
+            "prompt_id": "288a10a4-aaec-4000-91f4-6bf885734345",
+            "timestamp": 1791330154829
+          }
+        ],
+        [
+          "execution_cached",
+          {
+            "nodes": [
+              "1"
+            ],
+            "prompt_id": "288a10a4-aaec-4000-91f4-6bf885734345",
+            "timestamp": 1791330154830
+          }
+        ],
+        [
+          "execution_success",
+          {
+            "prompt_id": "288a10a4-aaec-4000-91f4-6bf885734345",
+            "timestamp": 1791330308262
+          }
+        ]
+      ]
+    }
+  },
+  "audio_sha256": "15b25997e372596473cd87e74479d99132161d48c6e5a2b541725d68d35560e2",
+  "error": "Expecting value: line 1 column 1 (char 0)"
+}

@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Call on the way home — karaoke candidates</title>
+<style>body{margin:auto;max-width:880px;padding:24px;background:#151b23;color:#e6e9ed;font:17px/1.55 system-ui}a{color:#9bd4ed}h1,h2{line-height:1.2}article{padding:20px;border:1px solid #475567;border-radius:12px;margin:24px 0}audio{width:100%}td,th{text-align:left;padding:8px;border-bottom:1px solid #475567}table{width:100%;border-collapse:collapse}code{overflow-wrap:anywhere}.muted{color:#b6c2ce}pre{white-space:pre-wrap}</style></head><body>
+<a href="../../bible/#review/karaoke-song-1">← Return to the choice</a>
+<h1>帰りの電話<br>Call on the way home</h1>
+<p>Two complete candidate recordings of a new fictional song for Hamada’s karaoke meeting. Both include generated singing and accompaniment. Neither is installed. These are new singing voices, not clones of his approved speaking voice.</p>
+<p><strong>Listening approval is still needed.</strong> This agent runtime could not receive audio for listening. The checks below cover transcription, duration and sample peaks; they do not establish musical quality, timbre, natural phrasing or a convincing character voice.</p>
+<article><h2>A · warm baritone direction</h2><audio controls preload="metadata" src="../../art/parts/karaoke-song-1/a-full.mp3"></audio><p>52.44 seconds; seed 207101; score 100 BPM. Requested acoustic guitar, piano, soft bass and drums, with restrained adult folk-pop singing.</p><p><strong>Known concern:</strong> full and isolated-ending transcription both stop at 「明日も同じ時間にかけ」, omitting the intended 「ようか」. The first line is also transcribed differently. Retained as the first attempt, not declared a complete lyric performance.</p></article>
+<article><h2>B · unforced tenor direction</h2><audio controls preload="metadata" src="../../art/parts/karaoke-song-1/b-full.mp3"></audio><p>54.20 seconds; seed 207102; score 103 BPM (prompt requested 104). Requested acoustic guitar, electric piano, soft bass and drums, with an unforced adult acoustic-pop voice.</p><p><strong>Known concern:</strong> both transcription passes hear 「明日の同じ時間」 instead of the intended 「明日も同じ時間」. The isolated chorus recognizes 「雨」 and the complete 「かけようか」 ending. Other transcript differences may be recognition errors; the actual lyrics still need listening.</p></article>
+<h2>Intended lyrics</h2>
+<table><thead><tr><th scope="col">Japanese</th><th scope="col">Meaning</th></tr></thead><tbody>
+<tr><td lang="ja">帰りの電車を一本見送って</td><td>I let one train home go by.</td></tr>
+<tr><td lang="ja">ホームの端で電話をかけた</td><td>I made a call at the end of the platform.</td></tr>
+<tr><td lang="ja">話すことなんてないと思ってた</td><td>I thought I had nothing to talk about.</td></tr>
+<tr><td lang="ja">そっちは雨かと聞いただけ</td><td>I only asked if it was raining there.</td></tr>
+<tr><td lang="ja">次の電車が来るまで話した</td><td>We talked until the next train came.</td></tr>
+<tr><td lang="ja">明日も同じ時間にかけようか</td><td>Shall I call at the same time tomorrow?</td></tr></tbody></table>
+<h2>Generation and checks</h2>
+<p>Local YuE2 3B INT8, 32 music steps, DPM2 / SGM uniform, CFG 1. No paid service. These are all two attempts in this round. Full raw FLAC, original and rendered scores, exact requests, workflows and reports are preserved. Instrumental intro/outro bars were shortened before synthesis; every score bar containing vocal notes was retained. The generated scores exceeded the requested 20–40 seconds, so the full recordings are shown instead of cutting a phrase to meet that length.</p>
+<p>No clipped samples were measured in either raw FLAC (A peak 0.866; B peak 0.990). Ending transcription is reported separately above. MP3 exports preserve full duration and do not splice, stretch or pitch-shift the performances. The old rejected karaoke lyrics/recordings were not reused.</p>
+<p>B’s generator reported a cleanup parsing error after successful synthesis because ComfyUI returned an empty successful response to model unloading. Its complete FLAC and successful generation record were preserved; unloading and GPU release were verified, and the wrapper was corrected without generating another take.</p>
+<p class="muted">This page asks whether a voice/style is worth pursuing. A pick does not silently waive the documented lyric defects or authorize a claim that the in-game performance is complete.</p>
+</body></html>
