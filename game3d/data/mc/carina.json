@@ -16,9 +16,9 @@
   },
   "model": { "id": "carina", "dir": "characters/carina/", "height": 1.12, "chibi": "eric" },
   "voice": {
-    "lines": "eric",
-    "words": "eric",
-    "ref": null,
+    "lines": "carina",
+    "words": "carina",
+    "ref": "tools/voice-refs/carina-voice-a.wav",
     "description": "Tired woman in her thirties, quiet and polite, no accent."
   },
   "bio": {
@@ -27,5 +27,5 @@
     "home": "dorm room 203 on 2F"
   },
   "text": { "name_caps": "CARINA", "new_person": "new girl" },
-  "placeholders": ["voice.lines", "voice.words", "voice.ref"]
+  "placeholders": []
 }

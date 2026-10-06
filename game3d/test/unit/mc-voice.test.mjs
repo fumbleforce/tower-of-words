@@ -80,22 +80,40 @@ test('the game picks the protagonist’s own clip, else the stand-in', () => {
 });
 
 
-test('Monday named lines retain configured stand-in casting without duplicating unchanged speech', async () => {
+test('approved Carina casting uses own Monday lines and emits no Eric stand-in additions', async () => {
   const byMc = await voiceLines();
   const base = manifestOf({ eric: byMc.eric });
-  const extra = mondayStandIns(byMc, base);
-  assert.equal(PROTAGONISTS.carina.voice.ref, null);
-  assert.equal(extra.length, 6);
-  assert.ok(extra.every(line => line.speaker !== 'carina' && line.text.includes('Carina')));
-  assert.ok(extra.some(line => line.speaker === 'mio' && line.key.endsWith('-carina')));
-  assert.ok(extra.some(line => line.speaker === 'eric' && line.key === lineKey('eric', line.text)));
-  assert.equal(new Set([...base, ...extra].map(line => line.key)).size, base.length + extra.length);
+  assert.ok(PROTAGONISTS.carina.voice.ref);
+  assert.deepEqual(mondayStandIns(byMc, base), []);
+  const named = byMc.carina.filter(line => line.day === 5 && line.own && line.text.includes('Carina'));
+  assert.ok(named.some(line => line.speaker === 'carina' && line.key.endsWith('-carina')));
+  assert.ok(named.some(line => line.speaker === 'mio' && line.key.endsWith('-carina')));
+  const all = manifestOf(byMc);
+  assert.equal(new Set(all.map(line => line.key)).size, all.length);
+});
+
+test('stand-in validation preserves authored token hashes and overheard keys', () => {
+  const standIn = { ...carina, voice: { ...carina.voice, lines: 'eric', words: 'eric', ref: null } };
+  for (const key of [lineKey('eric', '{dashite}。'), heardKey('今日は{ohayo}。'), 'eric-dashite']) {
+    const entry = { key: ownClip(key, carina), speaker: 'carina', text: 'Resolved text must not change the key' };
+    assert.equal(standInKey(entry, standIn), key);
+  }
 });
 
 
-test('stand-in validation preserves authored token hashes and overheard keys', () => {
-  for (const key of [lineKey('eric', '{dashite}。'), heardKey('今日は{ohayo}。'), 'eric-dashite']) {
-    const entry = { key: ownClip(key, carina), speaker: 'carina', text: 'Resolved text must not change the key' };
-    assert.equal(standInKey(entry, carina), key);
-  }
+test('collecting cached nested stories never consumes protagonist tokens', async () => {
+  const shared = story();
+  const original = structuredClone(shared);
+  const cached = [{ day: 5, files: [
+    { name: 'first', load: async () => ({ nodes: shared.nodes }) },
+    { name: 'second', load: async () => ({ nodes: shared.nodes }) },
+  ] }];
+  const first = await voiceLines({ sets: cached });
+  assert.deepEqual(shared, original);
+  const again = await voiceLines({ mcs: ['carina', 'eric'], sets: cached });
+  assert.deepEqual(again, first);
+  assert.ok(first.carina.some(o => o.text === 'Carina-san? I am Kenji!' && o.own));
+  assert.ok(first.carina.some(o => o.text === 'カリーナさんは、どちらがいいですか。' && o.own));
+  assert.ok(first.eric.some(o => o.text === 'Eric-san? I am Kenji!' && !o.own));
+  assert.deepEqual(shared, original);
 });
