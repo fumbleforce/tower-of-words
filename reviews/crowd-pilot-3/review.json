@@ -3,7 +3,7 @@
  "date": "2026-10-06",
  "updated": "2026-10-06T10:33:41+02:00",
  "by": "Claude crowd pilot, recovered and checked by Codex",
- "status": "open",
+ "status": "superseded",
  "issue": 232,
  "question": "Real 3D models with repainted eyes and mouths, repaired hair seams and corrected idle posture. Independent face critic: A 8/10, B 8/10. Try both in the live viewer below. Would you use either as an office crowd model?",
  "multi": true,
