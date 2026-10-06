@@ -20,7 +20,7 @@ const SLAB = '#767b83',
 export function flatRoof(p, [x0, x1, z0, z1], y, { edges = 's', units = [], vents = [], wall = PARAPET } = {}) {
   const cx = (x0 + x1) / 2,
     cz = (z0 + z1) / 2;
-  p.box(SLAB, x1 - x0, 0.14, z1 - z0, cx, y - 0.136, cz); // 4 mm proud of y: never level with the walls' tops under it
+  p.box(SLAB, x1 - x0, 0.14, z1 - z0, cx, y - 0.136, cz, { surf: 'roof' }); // 4 mm proud of y: never level with the walls' tops under it
   const t = 0.1,
     h = 0.18;
   const side = {

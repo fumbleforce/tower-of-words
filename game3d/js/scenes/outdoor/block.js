@@ -150,6 +150,7 @@ export function* officeBlockSteps(
     for (const o of myDoors) out.doors.push({ f, t: o.t, w: o.w, canopy: door(sets, f, o) });
     yield;
   }
+  if (roof !== 'plant') p.box('#626c76', w - 0.4, 0.018, d - 0.4, cx, top + 0.006, cz, { surf: 'roof', cast: false });
   if (roof === 'plant') {
     const sf = stair?.face === 's' && [stair.at - stair.w / 2, stair.at + stair.w / 2];
     roofPlant(p, rect, top, wall, sf);

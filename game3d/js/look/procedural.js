@@ -46,6 +46,10 @@ const KIND = {
   grass: 15,
   asphalt: 16,
   cladding: 17,
+  foliage: 18,
+  bark: 19,
+  roof: 20,
+  paving: 21,
 };
 export const KINDS = Object.keys(KIND);
 const FN = {
@@ -66,6 +70,10 @@ const FN = {
   15: 'pGrass',
   16: 'pAsphalt',
   17: 'pCladding',
+  18: 'pFoliage',
+  19: 'pBark',
+  20: 'pRoof',
+  21: 'pPaving',
 };
 
 export const PROC = { on: true };
