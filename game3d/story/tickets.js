@@ -25,4 +25,20 @@ export default {
     pay: 1500,
     text: 'The {予約|yoyaku|booking} terminal on the gym’s reception counter froze this morning, and I can’t get today’s bookings printed out.\n\nI’m at the counter all day, so come by whenever suits you. It can wait.',
   },
+  'T-0005': {
+    title: 'Court display counts twice', from: 'Tennis player at the sports courts', pay: 1500,
+    text: 'One press adds two points. We can play while it waits, but please check the button.\n\nI can test it with you at the courts on Sunday afternoon or evening.',
+  },
+  'T-0006': {
+    title: 'Gym desk fan has stopped', from: 'Gym attendant', pay: 1000,
+    text: 'The desk fan will not start. Its starter lever is sticking.\n\nPlease check that it turns all the way and back. The desk is staffed during the day; any day is fine.',
+  },
+  'T-0007': {
+    title: 'Visitor label cuts off the name', from: 'Reception', pay: 1500,
+    text: 'The visitor-label printer cuts off the end of a long name. Please check the saved format.\n\nReception can confirm a full printed name on weekday mornings or afternoons.',
+  },
+  'T-0008': {
+    title: 'Karaoke selector skips past songs', from: 'kenji', pay: 2000,
+    text: 'The selector keeps going past the song I want. I am checking the upstairs booth on Monday at lunch.\n\nPlease get it to stay on one row. Another Monday is fine if you are busy.',
+  },
 };
