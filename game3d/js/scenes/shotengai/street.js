@@ -16,6 +16,8 @@ import { bikeRow } from '../forecourt/details.js';
 import * as S from '../island-south.js';
 import * as P from './plan.js';
 import { crane } from './wares.js';
+import { displayKeep } from './shopfront-plan.js';
+import { frontCarts } from './front-carts.js';
 
 const { BAYS, ROWS_Z } = S;
 const { ARCADE, SHOP_WALK, DORM_STREET, ROW_W, ROW_E } = P;
@@ -107,7 +109,7 @@ function aBoard(p, x, z, ry, { note = false } = {}) {
 
 export function* streetSteps(group, p, lights, signs) {
   yield* floor(group);
-  const keep = [];
+  const keep = displayKeep(P.DOORS);
   // the doors, and what stands out in front of each named shop (kept clear of the door)
   for (const d of P.DOORS) door(p, signs, d);
   yield;
@@ -119,6 +121,7 @@ export function* streetSteps(group, p, lights, signs) {
   bikes.position.set(mid(2) - 0.9, 0, nz + 0.5);
   group.add(bikes);
   keep.push([mid(2) - 2.2, ROWS_Z.arcade, mid(2) - 0.6, nz + 0.8]);
+  keep.push(...frontCarts(p, mid, ROWS_Z.arcade));
   // konbini: the sorted bins by its door
   bins(p, mid(7) - 1.2, nz, 0);
   keep.push([mid(7) - 1.6, ROWS_Z.arcade, mid(7) - 0.8, nz + 0.25]);
