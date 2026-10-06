@@ -37,7 +37,7 @@ function limb(p, a, b, r0, r1, color = LEAF.bark) {
   g.applyQuaternion(
     new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), B.clone().sub(A).normalize()),
   );
-  p.geo(color, g.translate(...a));
+  p.geo(color, g.translate(...a), { surf: 'bark' });
 }
 // a crown blob: a faceted ball (a dodecahedron: round enough in a cluster, 36 triangles) scaled to (sx, sy, sz),
 // turned so no two show the same facets
@@ -45,7 +45,7 @@ function blob(p, x, y, z, r, color, { sx = 1, sy = 1, sz = 1, turn = 0 } = {}) {
   const g = new THREE.DodecahedronGeometry(r * 1.04, 0);
   g.rotateY(turn).rotateX(turn * 0.7);
   g.scale(sx, sy, sz);
-  p.geo(color, g.translate(x, y, z));
+  p.geo(color, g.translate(x, y, z), { surf: 'foliage' });
 }
 
 // zelkova: a clear trunk, three limbs opening into a vase, a broad crown of five blobs and a top
@@ -185,7 +185,9 @@ export function hedge(p, a, b, { w = 0.5, h = 0.55, y = 0, tones = [LEAF.deep, L
       len = step + 0.06;
     const g = roundedBox(alongX ? len : w, hh, alongX ? w : len, 1, 0.12);
     const c = s0 + step * (i + 0.5);
-    p.geo(tones[Math.floor(q() * tones.length)], g.translate(alongX ? c : a[0], y + hh / 2, alongX ? a[1] : c));
+    p.geo(tones[Math.floor(q() * tones.length)], g.translate(alongX ? c : a[0], y + hh / 2, alongX ? a[1] : c), {
+      surf: 'foliage',
+    });
   }
 }
 // an ornamental grass tuft: thin leaning blades
@@ -196,7 +198,7 @@ export function grass(p, x, z, { h = 0.45, color = '#6d7a58', seed = 1 } = {}) {
     const g = new THREE.ConeGeometry(0.035, h * (0.8 + q() * 0.4), 3);
     g.translate(0, (h * (0.8 + q() * 0.4)) / 2, 0);
     g.rotateZ(Math.cos(a) * 0.35).rotateX(Math.sin(a) * 0.35);
-    p.geo(color, g.translate(x + Math.cos(a) * 0.05, 0, z + Math.sin(a) * 0.05), { cast: false });
+    p.geo(color, g.translate(x + Math.cos(a) * 0.05, 0, z + Math.sin(a) * 0.05), { cast: false, surf: 'foliage' });
   }
 }
 
@@ -211,6 +213,7 @@ export function bed(p, [x0, x1, z0, z1], { y = 0.1, cover = true, soil = LEAF.mu
       roundedBox(x1 - x0 - 2 * i, 0.09, z1 - z0 - 2 * i, 1, 0.04).translate((x0 + x1) / 2, y + 0.02, (z0 + z1) / 2),
       {
         cast: false,
+        surf: 'foliage',
       },
     );
   }

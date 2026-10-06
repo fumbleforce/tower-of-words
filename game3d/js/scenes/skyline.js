@@ -324,7 +324,7 @@ export function* skylineSteps(
     // a path in its own stone (the terraces) lies 5 mm over the plain paths it overlaps, so the two never fight
     const py = p.color && p.color !== GROUND.path ? -0.125 : -0.13;
     const sh = shapeOf(p);
-    if (sh) flat(gb, ccw(sh.map(local)), py, color);
+    if (sh) flat(gb, ccw(sh.map(local)), py, color, 'paving');
     else if (p.points) {
       const pts = p.points.map(pt).map(local),
         hw = (p.width || 1.5) / 2;
@@ -336,7 +336,7 @@ export function* skylineSteps(
           A = [a[0] - d[0] * hw, a[1] - d[1] * hw],
           B = [b[0] + d[0] * hw, b[1] + d[1] * hw];
         const P = (q0, s) => [q0[0] + n[0] * hw * s, q0[1] + n[1] * hw * s];
-        flat(gb, ccw([P(A, 1), P(B, 1), P(B, -1), P(A, -1)]), py, color);
+        flat(gb, ccw([P(A, 1), P(B, 1), P(B, -1), P(A, -1)]), py, color, 'paving');
       }
     }
     yield;
@@ -345,18 +345,19 @@ export function* skylineSteps(
   // materials and meshes
   const litMat = mat(LIT, { emissive: new THREE.Color(LIT_GLOW), emissiveIntensity: 0.9 });
   const meshes = [];
-  const put = (m, { cast = false, recv = true, noLook = false } = {}) => {
+  const put = (m, { cast = false, recv = true, noLook = false, surf = null } = {}) => {
     if (!m) return null;
     m.castShadow = cast;
     m.receiveShadow = recv;
     if (noLook) m.userData.noLook = true;
+    if (surf) m.userData.surf = surf;
     root.add(m);
     meshes.push(m);
     return m;
   };
   let i = 0;
-  for (const [hex, b] of wallsNear) put(toMesh(b, mat(hex), `skyline:walls${i++}`), { cast: casts });
-  put(toMesh(roofNear, mat(TOWN.roof, { roughness: 0.9 }), 'skyline:roofs'));
+  for (const [hex, b] of wallsNear) put(toMesh(b, mat(hex), `skyline:walls${i++}`), { cast: casts, surf: 'cladding' });
+  put(toMesh(roofNear, mat(TOWN.roof, { roughness: 0.9 }), 'skyline:roofs'), { surf: 'roof' });
   put(toMesh(winNear, mat(TOWN.window, { roughness: 0.35 }), 'skyline:windows'));
   put(toMesh(bands, mat(TOWN.band), 'skyline:bands'), { cast: casts });
   put(toMesh(farB, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.9 }), 'skyline:far'), {

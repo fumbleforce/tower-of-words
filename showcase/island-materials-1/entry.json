@@ -1,0 +1,93 @@
+{
+  "title": "Island planting and roof materials",
+  "date": "2026-10-06",
+  "by": "codex",
+  "caption": "Lawns, planted beds, tree crowns and flat roofs now carry surface detail across the outdoor districts. The comparison uses the normal game camera.",
+  "sections": [
+    {
+      "title": "Pocket park",
+      "images": [
+        {
+          "id": "park-desk-before",
+          "image": "bible/shots/showcase/island-materials-1/park-desk-before.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "park-desk-after",
+          "image": "bible/shots/showcase/island-materials-1/park-desk-after.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "park-phone-before",
+          "image": "bible/shots/showcase/island-materials-1/park-phone-before.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "park-phone-after",
+          "image": "bible/shots/showcase/island-materials-1/park-phone-after.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "Coast walk",
+      "images": [
+        {
+          "id": "coast-desk-before",
+          "image": "bible/shots/showcase/island-materials-1/coast-desk-before.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "coast-desk-after",
+          "image": "bible/shots/showcase/island-materials-1/coast-desk-after.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "coast-phone-before",
+          "image": "bible/shots/showcase/island-materials-1/coast-phone-before.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "coast-phone-after",
+          "image": "bible/shots/showcase/island-materials-1/coast-phone-after.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "Small-block roofs",
+      "images": [
+        {
+          "id": "blocks-desk-before",
+          "image": "bible/shots/showcase/island-materials-1/blocks-desk-before.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "blocks-desk-after",
+          "image": "bible/shots/showcase/island-materials-1/blocks-desk-after.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "blocks-phone-before",
+          "image": "bible/shots/showcase/island-materials-1/blocks-phone-before.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "blocks-phone-after",
+          "image": "bible/shots/showcase/island-materials-1/blocks-phone-after.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "Measured cost",
+      "caption": "Matched quality-1 views on RTX 3080: park draw calls 158\u2192179 desktop and 61\u219267 phone; coast 112\u2192130 and 51\u219254; small blocks 139\u2192160 and 48\u219254. Median frame time stayed 16.7 ms in all six comparisons. These are short local measurements, not a guarantee for phone hardware. No new image textures or lights; surface groups add draws. Both full day-one routes passed at desktop and phone sizes. Roof and lawn patterns fade with distance. Navigation and existing building shapes remain unchanged apart from an inset roof membrane on generic blocks."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play the island",
+      "href": "game3d/"
+    }
+  ]
+}
