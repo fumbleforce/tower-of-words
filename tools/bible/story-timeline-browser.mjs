@@ -1,0 +1,44 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { withBrowserJob } from '../lib/browser-job.mjs';
+import { blockedSource } from './check-scope.mjs';
+const base=process.env.BASE||'http://127.0.0.1:8776/';
+const out='bible/shots/story-timeline';fs.mkdirSync(out,{recursive:true});
+await withBrowserJob('bible-story-timeline',async browser=>{
+ for(const width of [2560,390]){
+  const page=await browser.newPage({viewport:{width,height:width===390?844:1440}});
+  const errors=[],blocked=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.route('**/*',r=>{if(blockedSource(r.request().url(),true)){blocked.push(r.request().url());return r.abort();}return r.continue();});
+  await page.goto(base+'bible/#story-timeline',{waitUntil:'domcontentloaded'});
+  await page.locator('[data-beat="mio:3"]').waitFor({timeout:60000});
+  assert.equal(await page.locator('.tl-character').count(),10);
+  assert.equal(await page.locator('[data-beat]').count(),60);
+  if (width === 2560) assert.ok(await page.locator('.tl-chart').evaluate(el => el.scrollWidth <= el.clientWidth + 1));
+  await page.locator('[data-beat="mio:3"]').click();
+  assert.match(await page.locator('.tl-detail').innerText(),/Script written/i);
+  assert.equal(await page.evaluate(()=>globalThis.document.activeElement.dataset.beat),'mio:3');
+  assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth<=globalThis.innerWidth),true);
+  await page.screenshot({path:`${out}/routes-${width}.png`,fullPage:true});
+  await page.locator('[data-character]').selectOption('rei');
+  assert.equal(await page.locator('.tl-character').count(),1);
+  await page.locator('[data-beat="rei:5"]').focus();await page.keyboard.press('Enter');
+  assert.match(await page.locator('.tl-detail').innerText(),/friendship|friends|date/);
+  await page.locator('[data-mode="days"]').click();
+  assert.equal(await page.locator('.tl-column').count(),5);
+  assert.equal(await page.locator('.tl-chart').evaluate(el => el.scrollLeft),0);
+  assert.match(await page.locator('.tl-legend').innerText(),/documented story/);
+  await page.locator('[data-character]').selectOption('all');
+  assert.ok(await page.locator('[data-beat]').count()>10);
+  await page.locator('[data-search]').fill('missing-character-zz');
+  assert.match(await page.locator('.tl-no-results').innerText(),/No matching/);
+  await page.locator('[data-search]').fill('');
+  await page.screenshot({path:`${out}/days-${width}.png`,fullPage:true});
+  await page.goto(base+'bible/#story-timeline/routes/rei/rei%3A5');
+  await page.locator('[data-beat="rei:5"].selected').waitFor();
+  const visible = await page.locator('[data-beat="rei:5"]').evaluate(el => { const b=el.getBoundingClientRect(), f=el.closest('.tl-chart').getBoundingClientRect(), n=el.closest('.tl-grid').querySelector('.tl-character').getBoundingClientRect(); return b.left>=f.left+n.width && b.right<=f.right+1 && b.top>=f.top && b.bottom<=f.bottom+1; });
+  assert.ok(visible,'deep-linked selected stage is visible within the timeline');
+  assert.deepEqual(errors,[]);assert.deepEqual(blocked,[]);
+  await page.close();
+ }
+},{timeoutMs:285000});
+console.log('PASS timeline desktop/phone, filters, selection, keyboard and public-only source scope');

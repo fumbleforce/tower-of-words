@@ -217,7 +217,7 @@ function wordLabel(id) {
 // ------------------------------------------------------------------ pages
 const REMOTE_NAV = [['review', 'Review'], ['showcase', 'Showcase'], ['work', 'Work']];
 const NAV = [
-  ['review', 'Review'], ['showcase', 'Showcase'], ['work', 'Work'], ['home', 'Home'], ['characters', 'Characters'], ['places', 'Places'], ['place-map', 'Places diagram'], ['story', 'Stories'], ['story-map', 'Story map'],
+  ['review', 'Review'], ['showcase', 'Showcase'], ['work', 'Work'], ['home', 'Home'], ['characters', 'Characters'], ['places', 'Places'], ['place-map', 'Places diagram'], ['story', 'Stories'], ['story-timeline', 'Story timelines'], ['story-map', 'Story map'],
   ['words', 'Words and commands'], ['rules', 'Rules and decisions'], ['art', 'Art and style'], ['audio', 'Audio'],
   ['reviews', 'Review pages'], ['questions', 'Open questions'], ['sources', 'Sources'],
 ];
@@ -478,6 +478,7 @@ function pageStory() {
   const built = L.stories.filter((st) => /^built/.test(st.status)).length;
   return `<div class="page"><h1>Stories</h1>
     <p class="lede">The game is a set of storylines: a sub-plot, a person's thread, or one situation in one place. Each has its own file in docs/game/stories/, listed with its status in docs/game/README.md. Day one's scenes are storylines too. ${built} of ${L.stories.length} are built. ${liveTag('docs/game/stories/')} ${liveTag('docs/game/README.md')}</p>
+    <p><a href="#story-timeline">View character story timelines →</a></p>
     <div class="stories">${L.stories.map(storyCard).join('')}</div>
     <h2>The world they happen in</h2>
     <p><a href="#doc/docs/game/setting.md">The setting</a> (the island, Eric's job, kotodama, what kind of game this is) · <a href="#doc/docs/game/systems.md">Systems</a> · <a href="#doc/docs/game/controls-and-ui.md">Controls and UI</a> · <a href="#doc/docs/game/README.md">About these docs</a></p>
@@ -978,6 +979,9 @@ async function route() {
         const opts = { arg, here: HERE, liveTag, url, img, doc: L.files['docs/game/places.md'] || '', md: (t) => atBase('docs/game/places.md', () => md(t)), link: (p) => `<a href="#doc/${esc(p)}">${esc(p)}</a>` };
         try { await (await import(new URL('places-map.js', HERE).href)).mount($('#pmap'), opts); } catch (e) { $('#pmap').innerHTML = `<h1>Places diagram</h1><p>The diagram didn't load: ${esc(e.message)}</p>`; }
       };
+      break;
+    case 'story-timeline': html = '<div class="page story-timeline" id="story-timeline"><h1>Story timelines</h1><p>Reading character plans…</p></div>';
+      after = async () => { const el = $('#story-timeline'); try { await (await import(new URL('story-timeline.js', HERE).href)).mount(el, { ROOT, here: HERE, live: L, arg }); } catch (e) { el.innerHTML = `<h1>Story timelines</h1><p>The timeline could not load: ${esc(e.message)}</p>`; } };
       break;
     case 'story-map': html = `<div class="page smap" id="smap"><h1>Story map</h1><p class="muted">Reading the story files…</p></div>`;
       after = async () => { try { await (await import(new URL('story-map.js', HERE).href)).mount($('#smap'), { ROOT, arg, here: HERE, liveTag }); } catch (e) { $('#smap').innerHTML = `<h1>Story map</h1><p>The map didn't load: ${esc(e.message)}</p>`; } };
