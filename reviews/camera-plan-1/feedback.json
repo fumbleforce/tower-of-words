@@ -1,0 +1,21 @@
+{
+ "sent": "2026-10-06T12:22:29+0200",
+ "picked": [
+  "1c"
+ ],
+ "options": {
+  "1c": {
+   "star": false,
+   "reject": false,
+   "comment": "angle is fine but the controls are awkward due to the slow moving camera and the character returns to the original direction of travel after moving another way, it is very off-standard movement. Redo how the controls and camera work while in this perspective ."
+  },
+  "2a": {
+   "star": false,
+   "reject": true,
+   "comment": "lets drop phone support for this 3rd person view altogether."
+  }
+ },
+ "comment": "During conversation, it woul be cool if we get a \"scene\" camera mode that zooms in on the participants independent of the MC, framing the conversation ",
+ "read": false,
+ "history": []
+}
