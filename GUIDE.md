@@ -70,6 +70,8 @@ Plain writing (humanizer), how dialogue must sound (spoken, no AI voice, no expo
 - Natural casual Japanese at N5 to N4, in character. Nothing illogical or repeated.
 - Japanese speakers speak Japanese on screen in every conversation Eric is part of, as on day 1 (Jørgen, 2026-10-05, on day 3's gym desk: "first of all it should not be in english ... WHAT BUTTONS THIS IS A GYM"). How: game3d/story/FORMAT.md, Subtitled Japanese.
 - A repair job never just happens to Eric (Jørgen, 2026-10-05: "I am apparently just stumbling into a ticket I have not taken"). He knows about it before he arrives (his request list, a message), or someone asks him for help out loud and the ticket opens then.
+- Main tickets must teach useful language or move the plot forward, with an interesting player action and payoff; a long walk to an automatic check is not enough (Jørgen, 2026-10-06, day-two sensor ticket).
+- Cast members offer everyday conversation alongside story duties: personal topics, known words used in replies and opportunities to learn vocabulary, with natural limits when they are busy (Jørgen, 2026-10-06, Kuro on day two).
 
 ### Story craft
 
