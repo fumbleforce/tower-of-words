@@ -1,0 +1,302 @@
+{
+  "before": {
+    "rest": {
+      "head_forward_degrees": -4.767677204753169,
+      "left_knee_forward_leg_fraction": 0.021172885212224494,
+      "left_ankle_ahead_leg_fraction": 0.03679948954433628,
+      "right_knee_forward_leg_fraction": 0.021172679251669876,
+      "right_ankle_ahead_leg_fraction": 0.03679986436453092
+    },
+    "walk": {
+      "head_forward_degrees": [
+        -2.8237,
+        1.7555
+      ],
+      "left_knee_forward_leg_fraction": [
+        -0.0777,
+        0.2145
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.5103,
+        0.5574
+      ],
+      "right_knee_forward_leg_fraction": [
+        -0.1287,
+        0.1904
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.4503,
+        0.5413
+      ]
+    },
+    "run": {
+      "head_forward_degrees": [
+        5.7149,
+        11.1817
+      ],
+      "left_knee_forward_leg_fraction": [
+        -0.0179,
+        1.2593
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.7977,
+        0.4303
+      ],
+      "right_knee_forward_leg_fraction": [
+        -0.1408,
+        0.6514
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.7247,
+        0.5596
+      ]
+    },
+    "idle": {
+      "head_forward_degrees": [
+        -10.221,
+        -4.5987
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.016,
+        0.016
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        0.1261,
+        0.1261
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.013,
+        0.013
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        0.1223,
+        0.1223
+      ]
+    }
+  },
+  "denim": {
+    "rest": {
+      "head_forward_degrees": -4.767677204753169,
+      "left_knee_forward_leg_fraction": 0.021172885212224494,
+      "left_ankle_ahead_leg_fraction": 0.03679948954433628,
+      "right_knee_forward_leg_fraction": 0.021172679251669876,
+      "right_ankle_ahead_leg_fraction": 0.03679986436453092
+    },
+    "walk": {
+      "head_forward_degrees": [
+        -2.8237,
+        1.7555
+      ],
+      "left_knee_forward_leg_fraction": [
+        -0.0777,
+        0.2145
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.5103,
+        0.5574
+      ],
+      "right_knee_forward_leg_fraction": [
+        -0.1287,
+        0.1904
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.4503,
+        0.5413
+      ]
+    },
+    "run": {
+      "head_forward_degrees": [
+        5.7149,
+        11.1817
+      ],
+      "left_knee_forward_leg_fraction": [
+        -0.0179,
+        1.2593
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.7977,
+        0.4303
+      ],
+      "right_knee_forward_leg_fraction": [
+        -0.1408,
+        0.6514
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.7247,
+        0.5596
+      ]
+    },
+    "idle": {
+      "head_forward_degrees": [
+        -10.221,
+        -4.5987
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.016,
+        0.016
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        0.1261,
+        0.1261
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.013,
+        0.013
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        0.1223,
+        0.1223
+      ]
+    }
+  },
+  "grey": {
+    "rest": {
+      "head_forward_degrees": -4.767677204753169,
+      "left_knee_forward_leg_fraction": 0.021172885212224494,
+      "left_ankle_ahead_leg_fraction": 0.03679948954433628,
+      "right_knee_forward_leg_fraction": 0.021172679251669876,
+      "right_ankle_ahead_leg_fraction": 0.03679986436453092
+    },
+    "walk": {
+      "head_forward_degrees": [
+        -2.8237,
+        1.7555
+      ],
+      "left_knee_forward_leg_fraction": [
+        -0.0777,
+        0.2145
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.5103,
+        0.5574
+      ],
+      "right_knee_forward_leg_fraction": [
+        -0.1287,
+        0.1904
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.4503,
+        0.5413
+      ]
+    },
+    "run": {
+      "head_forward_degrees": [
+        5.7149,
+        11.1817
+      ],
+      "left_knee_forward_leg_fraction": [
+        -0.0179,
+        1.2593
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.7977,
+        0.4303
+      ],
+      "right_knee_forward_leg_fraction": [
+        -0.1408,
+        0.6514
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.7247,
+        0.5596
+      ]
+    },
+    "idle": {
+      "head_forward_degrees": [
+        -10.221,
+        -4.5987
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.016,
+        0.016
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        0.1261,
+        0.1261
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.013,
+        0.013
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        0.1223,
+        0.1223
+      ]
+    }
+  },
+  "meshyrig": {
+    "rest": {
+      "head_forward_degrees": -4.976077575194284,
+      "left_knee_forward_leg_fraction": 0.1653488508466225,
+      "left_ankle_ahead_leg_fraction": 0.01792238381750691,
+      "right_knee_forward_leg_fraction": 0.044059301508899286,
+      "right_ankle_ahead_leg_fraction": 0.27096924980935216
+    },
+    "walk": {
+      "head_forward_degrees": [
+        0.1437,
+        4.651
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.046,
+        0.3288
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.5205,
+        0.5241
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.0438,
+        0.3306
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.509,
+        0.466
+      ]
+    },
+    "run": {
+      "head_forward_degrees": [
+        8.7018,
+        14.2817
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.107,
+        1.8833
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        -0.7596,
+        0.3693
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.0244,
+        0.9564
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        -0.7035,
+        0.4646
+      ]
+    },
+    "idle": {
+      "head_forward_degrees": [
+        -10.221,
+        -4.5987
+      ],
+      "left_knee_forward_leg_fraction": [
+        0.016,
+        0.016
+      ],
+      "left_ankle_ahead_leg_fraction": [
+        0.1261,
+        0.1261
+      ],
+      "right_knee_forward_leg_fraction": [
+        0.013,
+        0.013
+      ],
+      "right_ankle_ahead_leg_fraction": [
+        0.1223,
+        0.1223
+      ]
+    }
+  }
+}

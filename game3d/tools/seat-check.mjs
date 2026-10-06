@@ -61,6 +61,7 @@ const MINE = {
 // ---- in the page ----
 async function inPage({ scene, TOL, phase, placed = [] }) {
   const THREE = await import('three');
+  const { seatSurface } = await import('./tools/seat-surface.mjs');
   const g = window.__game,
     P = g.place;
   const frames = (n = 3) => new Promise((r) => { const f = () => (--n <= 0 ? r() : requestAnimationFrame(f)); requestAnimationFrame(f); });
@@ -188,11 +189,15 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
     return r.root.parent ? r.root.parent.localToWorld(p) : p;
   };
   // the seat under that point: the first solid below it, and the chair it's part of (a group under 1.2 m)
-  function seatOf(r) {
+  function seatOf(r, known) {
     const h = world(hipsOf(r)),
       at = seatPoint(r),
       y0 = (r.root.parent ? r.root.parent.getWorldPosition(new THREE.Vector3()).y : 0) + 0.6;
-    // the highest solid under a few points round it (a slatted bench has gaps)
+    // Named seats supply their cushion height in the rig parent's coordinates. A nearby armrest can be below
+    // the hips and must not replace that cushion. Keep unknown seats on the original ray-based fallback.
+    const expected = known && new THREE.Vector3(known.x, known.top, known.z);
+    if (expected && known.local !== false && r.root.parent) r.root.parent.localToWorld(expected);
+    // several samples cover gaps between slats
     let best = null;
     for (const [dx, dz] of [[0, 0], [0.04, 0], [-0.04, 0], [0, 0.04], [0, -0.04], [0.08, 0.08], [-0.08, -0.08]])
       for (const f of furn) {
@@ -203,11 +208,11 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
         const [c, d] = cast(triOf(f), px + 1e-4, y0, pz + 1.3e-4, 0, -1, 0);
         // a seat is under the hips joint (3 cm of slack for one sunk into it): a bench back or armrest the side
         // samples catch is higher than that
-        if (c && y0 - d < h.y + 0.03 && (!best || d < best.d)) best = { f, d };
+        if (c) best = seatSurface(best, { f, top: y0 - d }, { expectedTop: expected?.y, hipY: h.y });
       }
     const off = Math.hypot(h.x - at.x, h.z - at.z);
     if (!best) return { top: null, parts: new Set(), hip: h, at, off };
-    const top = y0 - best.d;
+    const top = best.top;
     let grp = best.f.o;
     for (let p = grp.parent; p && p !== SC; p = p.parent) {
       const s = new THREE.Box3().setFromObject(p).getSize(new THREE.Vector3());
@@ -228,9 +233,9 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
   // overlaps of one seated rig with the furniture round it. Each solid it enters is the seat (its own chair or bench),
   // a desk or table (above the seat top and ahead of the seat: the top, a drawer pedestal, a modesty panel) or other
   // (a bench back, a wall). Only desks and tables fail.
-  function measure(r) {
+  function measure(r, known) {
     const pts = body(r);
-    const seat = seatOf(r);
+    const seat = seatOf(r, known);
     const top = seat.top ?? seat.hip.y - 0.06; // no chair under the point (Eric's, away in the machine room)
     const fwd = r.root.getWorldDirection(new THREE.Vector3());
     const bb = new THREE.Box3();
@@ -327,12 +332,12 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
     legsIn: a.legsIn === null || b.legsIn === null ? null : Math.max(a.legsIn, b.legsIn),
   });
   // the first frame after sitting (what a still or a paused game shows) and after the clips have settled
-  const both = async (r) => {
+  const both = async (r, known) => {
     await frames(2);
-    const a = measure(r);
+    const a = measure(r, known);
     window.__advance(0.6);
     await frames(2);
-    const b = measure(r);
+    const b = measure(r, known);
     const w = a.worst > b.worst ? a : b;
     return { ...b, worst: w.worst, over: w.over, first: a.worst, settled: b.worst, hipOffMax: Math.max(a.hipOff, b.hipOff), ...deeper(a, b) };
   };
@@ -387,7 +392,7 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
       r.root.visible = true;
       r.sitAt(x, s.top, z, s.ry || 0);
       r.seated = true;
-      res.tried.push({ seat: sid, id, ...(await both(r)) });
+      res.tried.push({ seat: sid, id, ...(await both(r, s)) });
       r.root.visible = false;
       if (sitter) sitter.root.visible = vis.get(sid.slice(3));
     }
