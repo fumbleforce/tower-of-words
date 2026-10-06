@@ -1,6 +1,6 @@
 # Days 3 to 5 flavor finds
 
-Twelve authored in-place interactions for #231. `days3-5-finds.js` owns the contents and `FINDS` owns their placement descriptors. Each nook is checked against the live place catalog by `node game3d/story/days3-5-finds-check.mjs`. This pack remains unplaced until the engine consumes it.
+Twelve authored in-place interactions for #231. `days3-5-finds.js` owns the contents and `FINDS` owns their placement descriptors. Each nook is checked against the live place catalog by `node game3d/story/days3-5-finds-check.mjs`. The place lifecycle now consumes eligible entries through `js/flavor-finds/`, which stages ordinary props and the compact translated-note view. `tools/flavor-finds-check.mjs` exercises the live Look, repeat, interrupted Continue and return paths; its screenshots are written to `shots/flavor-finds/`.
 
 ## Build contract
 

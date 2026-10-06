@@ -135,6 +135,15 @@ Things Eric picks up and keeps on his phone (Jørgen, 2026-09-30: "how lame, a p
 - The Photos chip (top right, "Photos 2/5") appears with the first find. Its album shows the five frames in the day's order, the found ones as prints with their title and the rest as empty frames (no names, no hints), and under them the papers he has kept. Tapping one shows it up close again.
 - The pictures are the ones Jørgen picked in Review photos-1 (2026-10-04), in game3d/assets/photos/: the early monorail, the cherry over the garden, pigeons at the fountain, the cat at the office, fireworks on a summer night. The album shows a small copy, the close look the large one (game3d/js/finds/prints.js). Titles, captions and the paper's text come from the story (game3d/story/finds.js). A found find is the flag `found_<id>`, so the save and Continue keep it.
 
+
+Twelve optional objects become available from days 3–5 (`story/days3-5-finds.js`, staged by `js/flavor-finds/`). Look frames the player beside the object, turns or lifts its attached part where appropriate, and shows its writing as a compact translated note. Walking past does nothing. The object returns to its place before the final `flavor_<id>_seen` flag is saved; Continue during an unfinished look restores the original object and offers Look again. These interactions add nothing to inventory or the album and do not change money, bonds, lessons or time.
+
+| First day | Objects |
+|---|---|
+| 3 | Umbrella tray card at the forecourt staff gate; crate tally in the shop alley; paired loan slippers in the gym cubby; pool key float on the lost-property table (day 3 evening swimming members only) |
+| 4 | Folded letter on the sports grove bench; ball tube attached to the court corner post; karaoke catalogue; reusable cup on the east-lane bench |
+| 5 | Commons phrasebook and fridge saucers; telescope coin flap at the lookout; lunch-order paper beneath the plaza bench leg |
+
 ## Tickets
 
 Repair tickets are how the work reaches Eric (Jørgen, 2026-10-03: "the main storyline progression should perhaps revolve around the tickets and going to the office. But as this is not a super efficient company, you don't necessarily have to go to the office every day. You don't need to complete the ticket every day. You just use those as levers to progress the story."). Day 2 is the first glimpse: the company's in-house ticket system on his computers, with two tickets.
