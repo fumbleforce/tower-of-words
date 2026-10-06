@@ -5,6 +5,8 @@ const svg = (vb, body, cls = '') => `<svg class="${cls}" viewBox="${vb}" aria-hi
 
 /** The things the machines put out. */
 export const ITEMS = {
+  // The public give-game melon can uses this green body and pale label band.
+  melon: () => svg('0 0 40 56', `<ellipse cx="20" cy="51" rx="12" ry="3" fill="#378342"/><rect x="8" y="8" width="24" height="43" rx="3" fill="#378342"/><rect x="8" y="8" width="18" height="43" rx="3" fill="#5cc46a"/><rect x="8" y="23" width="24" height="14" fill="#e9f6ea"/><rect x="9" y="4" width="22" height="6" rx="3" fill="#aab6bf"/><rect x="9" y="4" width="17" height="4" rx="2" fill="#e3e9ee"/>`, 'it'),
   cola: () => svg('0 0 40 56', `<ellipse cx="20" cy="51" rx="12" ry="3" fill="#8f1c22"/><rect x="8" y="8" width="24" height="43" rx="3" fill="#b8252b"/><rect x="8" y="8" width="18" height="43" rx="3" fill="#e0393e"/>
     <path d="M8 31 q8 -9 24 -5 v5 q-13 -4 -24 6z" fill="#fff"/><path d="M8 37 q10 -8 24 -3 v2 q-12 -4 -24 4z" fill="#ffd0d2" opacity=".7"/>
     <rect x="9" y="4" width="22" height="6" rx="3" fill="#aab6bf"/><rect x="9" y="4" width="17" height="4" rx="2" fill="#e3e9ee"/><rect x="11" y="12" width="3" height="15" rx="1.5" fill="#fff" opacity=".4"/>`, 'it'),

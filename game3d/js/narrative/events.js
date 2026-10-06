@@ -31,6 +31,9 @@ export const PLACE_EVENTS = {
   harbour: { start: { id: 'start', source: 'engine' } },
   works: { start: { id: 'start', source: 'engine' } },
   office: {
+    kotodama_first: { id: 'kotodama_first', source: 'place', hook: 'teamDrinks' },
+    kotodama_cancel: { id: 'kotodama_cancel', source: 'place', hook: 'teamDrinks' },
+    kotodama_exit: { id: 'kotodama_exit', source: 'place', hook: 'teamDrinks' },
     start: { id: 'start', source: 'engine' },
     sat_down: { id: 'sat_down', source: 'place', hook: 'sitDown' },
   },

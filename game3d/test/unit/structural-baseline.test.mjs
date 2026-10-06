@@ -40,6 +40,10 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   for (const k of ['club_', 'clubprog_', 'clubday_', 'clubev_']) expected.engine.prefix[k] = ['game3d/js/clubs/model.js'];
   expected.engine.prefix.bond2_ = ['game3d/js/sim.js'];
   expected.engine.prefix.period_ = ['game3d/js/period-flags.js'];
+  // Monday adds declared delivery returns and pre-Talk introduction state.
+  for (const event of ['kotodama_first', 'kotodama_cancel', 'kotodama_exit']) expected.engine.events.office[event] = 'teamDrinks';
+  for (const flag of ['d5_delivery_seen', 'd5_last_recipient']) expected.engine.exact[flag] = ['game3d/js/places/day5/delivery-state.js'];
+  for (const flag of ['d5_kenji_needs_intro', 'd5_mori_needs_intro', 'd3_emi_needs_intro']) expected.engine.exact[flag] = ['game3d/js/places/day5/place.js'];
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {

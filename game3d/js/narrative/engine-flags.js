@@ -34,6 +34,15 @@ export const ENGINE_WRITES = {
   },
 };
 
+ENGINE_WRITES['game3d/js/places/day5/delivery-state.js'] = {
+  exact: ['d5_delivery_seen', 'd5_last_recipient'],
+  prefix: [],
+};
+ENGINE_WRITES['game3d/js/places/day5/place.js'] = {
+  exact: ['d5_kenji_needs_intro', 'd5_mori_needs_intro', 'd3_emi_needs_intro'],
+  prefix: [],
+};
+
 ENGINE_WRITES['game3d/js/period-flags.js'] = { exact: [], prefix: ['period_'] };
 ENGINE_WRITES['game3d/js/gameplay/gifts.js'] = { exact: [], prefix: ['gave_'] };
 ENGINE_WRITES['game3d/js/finds/index.js'] = { exact: [], prefix: ['found_'] };
