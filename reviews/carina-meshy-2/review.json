@@ -2,8 +2,8 @@
  "title": "Carina: waist, head and trouser fixes",
  "date": "2026-10-06",
  "by": "Claude, recovered and checked by Codex",
- "status": "open",
- "question": "These are real 3D models in the live viewer; do you want to keep the installed denim trousers or use grey?",
+ "status": "decided",
+ "question": "Selected: carina-2-r2-grey.",
  "multi": false,
  "media": [
   {
@@ -20,7 +20,7 @@
   },
   {
    "image": "art/parts/carina-meshy-1/sheets/r2-seam.webp",
-   "caption": "Round 2, your words on carina-2: \"she has a small seam at the waist. Her head should be 15% smaller. Her pants should be a different color\". 1, the seam. It was in the texture, not the mesh or the rig: the underside of her top's hem and the top edge of the trousers were painted beige by Meshy's texture pass, which showed as a dotted light line under the hem. Painted out in Blender with the top's and the trousers' own colour on just those faces. Close-ups at the waist, before and after; these trousers are still black so only the seam changes, and the last one is the installed version with denim."
+   "caption": "Round 2, your words on carina-2: \"she has a small seam at the waist. Her head should be 15% smaller. Her pants should be a different color\". 1, the seam. It was in the texture, not the mesh or the rig: the underside of her top's hem and the top edge of the trousers were painted beige by Meshy's texture pass, which showed as a dotted light line under the hem. Painted out in Blender with the top's and the trousers' own colour on just those faces. Close-ups at the waist, before and after; these trousers are still black so only the seam changes, and the last one is the earlier version with denim."
   },
   {
    "image": "art/parts/carina-meshy-1/sheets/r2-head.webp",
@@ -32,11 +32,11 @@
   },
   {
    "image": "art/parts/carina-meshy-1/sheets/r2-trousers.webp",
-   "caption": "3, the trousers. You didn't name a colour, so the installed one is dark denim blue: it stands out against her black top and differs from her black top. Mid-grey is shown as an alternative. Only the trousers part of the texture is changed, done in Blender. Each spot keeps its own light and dark, so the shading and folds stay as they were. Her shoes are separate and didn't change."
+   "caption": "3, the trousers. You didn't name a colour, so the first refinement used dark denim blue: it stands out against her black top and differs from her black top. Mid-grey was selected on 2026-10-06 and is now installed. Only the trousers part of the texture is changed, done in Blender. Each spot keeps its own light and dark, so the shading and folds stay as they were. Her shoes are separate and didn't change."
   },
   {
    "image": "art/parts/carina-meshy-1/sheets/r2-body.webp",
-   "caption": "All three together, three-quarter view: before, after with denim (in the game), after with grey, and the back with denim."
+   "caption": "All three together, three-quarter view: before, after with denim (earlier), after with grey, and the back with denim."
   },
   {
    "image": "art/parts/carina-meshy-1/sheets/r2-walk.webp",
@@ -48,7 +48,7 @@
   },
   {
    "image": "art/parts/carina-meshy-1/r2/close/meshyrig-denim/body/y45.png",
-   "caption": "Installed rig: the same edited model with Meshy's native skeleton, repaired weights and walk/run/sit clips. The earlier fitted rig bent the knees backward during part of the walk; this one keeps forward knee flexion across the cycle. The sit clip cost 3 Meshy credits before recovery; no credits spent during recovery."
+   "caption": "Native rig diagnostic: the same edited model with Meshy's native skeleton, repaired weights and walk/run/sit clips. The earlier fitted rig bent the knees backward during part of the walk; this one keeps forward knee flexion across the cycle. The sit clip cost 3 Meshy credits before recovery; no credits spent during recovery."
   }
  ],
  "options": [
@@ -60,7 +60,7 @@
     "art/parts/carina-meshy-1/r2/close/after-denim/body/y0.png",
     "art/parts/carina-meshy-1/r2/close/after-denim/head/y0.png"
    ],
-   "note": "Blender source edits: waist texture seam repaired; face and hair scaled uniformly to 0.85 around (0, 0.635, -0.0026); denim trousers via UV-island mask with shading retained. Same selected body, native Meshy skeleton, repaired weights and its walk, run and sit; relaxed-3 idle; displayed at 1.12 m. Installed denim colour: sRGB 40, 60, 92."
+   "note": "Blender source edits: waist texture seam repaired; face and hair scaled uniformly to 0.85 around (0, 0.635, -0.0026); denim trousers via UV-island mask with shading retained. Same selected body, native Meshy skeleton, repaired weights and its walk, run and sit; relaxed-3 idle; displayed at 1.12 m. Earlier denim colour: sRGB 40, 60, 92."
   },
   {
    "id": "carina-2-r2-grey",
@@ -70,13 +70,13 @@
     "art/parts/carina-meshy-1/r2/close/after-grey/body/y0.png",
     "art/parts/carina-meshy-1/r2/close/after-grey/head/y0.png"
    ],
-   "note": "Blender source edits: waist texture seam repaired; face and hair scaled uniformly to 0.85 around (0, 0.635, -0.0026); grey trousers via UV-island mask with shading retained. Same selected body and fitted rig with Emi's walk, run and sit; relaxed-3 idle; displayed at 1.12 m. Alternative grey colour: sRGB 122, 122, 124. Colour comparison only: this saved grey version retains the earlier fitted rig."
+   "note": "Blender source edits: waist texture seam repaired; face and hair scaled uniformly to 0.85 around (0, 0.635, -0.0026); grey trousers via UV-island mask with shading retained. Same selected body and fitted rig with Emi's walk, run and sit; relaxed-3 idle; displayed at 1.12 m. Selected grey colour: sRGB 122, 122, 124. Colour comparison only: this saved grey version retains the earlier fitted rig. Selected 2026-10-06: its exact texture is installed on the current native rig and corrected posture. The original fitted-rig candidate remains in the comparison viewer."
   }
  ],
  "links": [
   {
    "label": "Live 3D: turn, zoom, idle, walk, run and sit",
-   "href": "reviews/carina-meshy-2/viewer.html"
+   "href": "reviews/carina-meshy-2/viewer.html?s=installed"
   },
   {
    "label": "Original model and every earlier attempt",
@@ -103,7 +103,17 @@
   "art/parts/carina-meshy-1/r2/viewer/meshyrig/idle.json",
   "art/parts/carina-meshy-1/r2/viewer/meshyrig/run.glb",
   "art/parts/carina-meshy-1/r2/viewer/meshyrig/sit.glb",
-  "art/parts/carina-meshy-1/r2/viewer/meshyrig/walk.glb"
+  "art/parts/carina-meshy-1/r2/viewer/meshyrig/walk.glb",
+  "game3d/assets/characters/carina/base.webp",
+  "game3d/assets/characters/carina/walk.glb",
+  "game3d/assets/characters/carina/run.glb",
+  "game3d/assets/characters/carina/sit.glb",
+  "game3d/assets/characters/relaxed-idle-carina.json"
  ],
- "issue": 268
+ "issue": 268,
+ "decided": [
+  "carina-2-r2-grey"
+ ],
+ "decision": "carina-2-r2-grey",
+ "decided_at": "2026-10-06T11:41:36+0200"
 }

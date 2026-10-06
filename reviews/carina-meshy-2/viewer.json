@@ -1,6 +1,6 @@
 {
  "title": "Carina: round 2",
- "blurb": "Real 3D models with the requested waist, head and trouser fixes. The denim model with its native Meshy rig is installed. The earlier fitted rig, grey colour alternative and original model remain here for comparison.",
+ "blurb": "The selected grey trousers are installed on Carina’s corrected native rig with the current game posture and animations. Earlier denim, grey and fitted-rig candidates remain available for comparison.",
  "rigs": {
   "denim": {
    "id": "carina",
@@ -25,15 +25,30 @@
   },
   "meshyrig": {
    "id": "carina",
-   "label": "Installed denim, native rig",
+   "label": "Earlier denim, native rig",
    "dir": "art/parts/carina-meshy-1/r2/viewer/meshyrig/",
    "idle": "art/parts/carina-meshy-1/r2/viewer/meshyrig/idle.json",
+   "height": 1.12
+  },
+  "installed": {
+   "id": "carina",
+   "label": "Selected grey, current game rig",
+   "dir": "game3d/assets/characters/carina/",
+   "idle": "game3d/assets/characters/relaxed-idle-carina.json",
    "height": 1.12
   }
  },
  "scenes": {
+  "installed": {
+   "label": "Installed grey",
+   "items": [
+    {
+     "rig": "installed"
+    }
+   ]
+  },
   "meshyrig": {
-   "label": "Installed denim",
+   "label": "Earlier denim, native rig",
    "items": [
     {
      "rig": "meshyrig"
@@ -91,6 +106,7 @@
   }
  },
  "closeups": [
+  "installed",
   "denim",
   "grey",
   "before",
