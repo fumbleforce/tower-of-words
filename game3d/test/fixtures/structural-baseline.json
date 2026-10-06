@@ -116,7 +116,8 @@
       "gym": "game3d/js/places/gym.js",
       "office_quarter": "game3d/js/places/office-quarter.js",
       "harbour": "game3d/js/places/harbour.js",
-      "works": "game3d/js/places/works.js"
+      "works": "game3d/js/places/works.js",
+      "canteen": "game3d/js/places/canteen.js"
     },
     "events": {
       "train": {
@@ -143,7 +144,8 @@
       "works": {},
       "office": {
         "sat_down": "sitDown"
-      }
+      },
+      "canteen": {}
     },
     "speakers": {
       "eric": {
@@ -264,6 +266,7 @@
     "forecourt",
     "office",
     "plaza",
+    "canteen",
     "dorm_court",
     "dorms",
     "shotengai",
@@ -472,6 +475,7 @@
     "office:matte_clock",
     "office:tomatte_fan",
     "office:~kenji_mori",
+    "plaza:to_canteen",
     "plaza:canteen_closing",
     "plaza:canteen_goodbye",
     "plaza:canteen_table",
@@ -482,6 +486,10 @@
     "plaza:to_dorms",
     "plaza:to_east_lane",
     "plaza:to_shops",
+    "canteen:arrive",
+    "canteen:to_plaza",
+    "canteen:sit_w",
+    "canteen:sit_e",
     "dorm_court:mailboxes",
     "dorm_court:arrive",
     "dorm_court:hall",
@@ -1276,6 +1284,12 @@
       "labels": []
     },
     {
+      "from": "plaza:to_canteen",
+      "to": "canteen:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "plaza:to_forecourt",
       "to": "forecourt:outside",
       "kind": "trip",
@@ -1296,6 +1310,12 @@
     {
       "from": "plaza:to_shops",
       "to": "shotengai:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "canteen:to_plaza",
+      "to": "plaza:arrive",
       "kind": "trip",
       "labels": []
     },

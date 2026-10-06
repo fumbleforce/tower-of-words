@@ -263,8 +263,22 @@ export const PLACE_DETAILS = {
     people: [],
     hooks: ['enterRoom', 'leaveRoom'],
   },
+  canteen: {
+    things: {
+      canteen_exit: { label: 'Fountain plaza', kind: 'thing', verb: 'Go out' },
+      canteen_seat_w: { label: 'Dining chair', kind: 'thing', verb: 'Sit', pin: 'near' },
+      canteen_seat_e: { label: 'Dining chair', kind: 'thing', verb: 'Sit', pin: 'near' },
+    },
+    spots: ['canteen_in', 'meal_counter', 'water', 'tray_return'],
+    seats: ['canteen_seat_w', 'canteen_seat_e'],
+    nooks: [],
+    zones: [],
+    people: [],
+    hooks: [],
+  },
   plaza: {
     things: {
+      canteen_door: { label: 'Canteen', kind: 'thing', verb: 'Go in' },
       office_lane: { label: 'To head office', kind: 'thing', verb: 'Go' },
       fountain: { label: 'Fountain', kind: 'thing' },
       dorm_lane: { label: 'To the dorms', kind: 'thing' },

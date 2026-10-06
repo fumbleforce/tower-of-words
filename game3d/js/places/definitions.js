@@ -9,6 +9,7 @@ export const PLACE_FILES = {
   gate: 'game3d/js/places/lobby.js',
   forecourt: 'game3d/js/places/forecourt.js',
   plaza: 'game3d/js/places/plaza.js',
+  canteen: 'game3d/js/places/canteen.js',
   office: 'game3d/js/places/office.js',
   dorm_court: 'game3d/js/places/dorm-court.js',
   dorms: 'game3d/js/places/dorms.js',
@@ -31,6 +32,7 @@ export const PLACE_NAMES = {
   gate: 'Station security',
   forecourt: 'Forecourt',
   plaza: 'Fountain plaza',
+  canteen: 'Canteen',
   office: 'IT support, B2',
   dorm_court: 'Dorm courtyard',
   dorms: `${MC.possessive} room`,
@@ -68,7 +70,8 @@ export const NEXT = {
 // the karaoke box's front desk through its door off the arcade, and its booth up the stairs.
 export const TRIPS = {
   forecourt: ['plaza'],
-  plaza: ['forecourt', 'dorm_court', 'shotengai', 'east_lane'],
+  plaza: ['forecourt', 'dorm_court', 'shotengai', 'east_lane', 'canteen'],
+  canteen: ['plaza'],
   office: ['forecourt'],
   shotengai: ['plaza', 'dorm_court', 'karaoke'],
   karaoke: ['shotengai', 'karaoke_booth'],
@@ -93,6 +96,7 @@ export const STORY_FILES = [
   'gate',
   'forecourt',
   'plaza',
+  'canteen',
   'office',
   'dorm_court',
   'dorms',

@@ -9,6 +9,7 @@ export const PINS = {
   forecourt: { at: [-6, -1] },
   office: { in: 'forecourt' },
   plaza: { at: [37.29, -2.75] },
+  canteen: { in: 'plaza' },
   dorm_court: { at: [79.84, -1.3] },
   dorms: { in: 'dorm_court' },
   shotengai: { at: [30.3, 20.1] },

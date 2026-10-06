@@ -47,3 +47,6 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
 | `day2/plaza.js` | `d2_arrive`, `d2_to_office`, `d2_to_lane`, `d2_to_shops`, `d2_fountain`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/east_coast.js` | `d2_arrive`, `d2_to_lane`, `d2_north_closed`, `d2_onsen`, `d2_lookout`, `d2_hamada`, `d2_see_word`, `d2_lookout_view`, `d2_hamada_idle`, `d2_hamada_again`, `d2_leave_lookout`, `d2_hamada_go`, `d2_hamada_food`, `d2_hamada_drink`, `d2_lookout_again`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 
+
+
+The canteen ground floor is an optional, wordless stop through the plaza door: `day2/plaza.js` adds `to_canteen`; `day2/canteen.js` reuses the shared `arrive`, `to_plaza`, `sit_w` and `sit_e` nodes. It changes no job flags and returns through the same door.

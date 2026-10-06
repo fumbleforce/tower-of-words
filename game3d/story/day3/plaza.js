@@ -1,6 +1,6 @@
 import { place, goal } from './shared.js';
 export default place(
-  { east_lane: ['talk:dorm_lane', 'zone:dorm_exit'], shotengai: ['talk:shop_walk', 'zone:shop_walk'],
+  { canteen: ['talk:canteen_door'], east_lane: ['talk:dorm_lane', 'zone:dorm_exit'], shotengai: ['talk:shop_walk', 'zone:shop_walk'],
     forecourt: ['talk:office_lane', 'zone:office_lane'] },
   {
     at: 'noticeboard',

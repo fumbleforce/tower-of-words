@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { plazaSteps } from '../scenes/plaza.js';
+import { PLAZA_DOOR } from '../scenes/canteen/plan.js';
 import { BASIN } from '../scenes/plaza/plan.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
@@ -34,6 +35,12 @@ export async function plazaPlace(game) {
     plaza_shrine: w.nooks.plaza_shrine,
   };
   const things = {
+    canteen_door: {
+      ...PLACE_DETAILS.plaza.things.canteen_door,
+      anchor: (v) => v.set(PLAZA_DOOR.edge[0], 1.4, PLAZA_DOOR.edge[1] - 0.34),
+      spot: () => PLAZA_DOOR.out,
+      face: () => PLAZA_DOOR.edge,
+    },
     office_lane: {
       ...PLACE_DETAILS.plaza.things.office_lane,
       anchor: (v) => v.set(w.westLane[0], 1.1, w.westLane[1]),
@@ -200,12 +207,14 @@ export async function plazaPlace(game) {
       cam.snap(game.player.root.position);
     },
     tripOutTo: {
+      canteen: (g) => walkOut(g, cam, PLAZA_DOOR.out, PLAZA_DOOR.edge),
       forecourt: (g) => walkOut(g, cam, w.westLane, w.westEdge),
       dorm_court: (g) => walkOut(g, cam, w.dormExit, w.dormEdge),
       shotengai: (g) => walkOut(g, cam, w.shopWalk, w.shopEdge),
       east_lane: (g) => walkOut(g, cam, w.dormExit, w.dormEdge),
     },
     tripInFrom: {
+      canteen: (g) => walkIn(g, cam, PLAZA_DOOR.edge, PLAZA_DOOR.out, 0),
       forecourt: (g) => walkIn(g, cam, w.arriveEdge, w.arriveIn, w.arriveFace),
       shotengai: (g) => walkIn(g, cam, w.shopEdge, w.shopWalk, -Math.PI / 2),
       east_lane: (g) => walkIn(g, cam, w.dormEdge, w.dormExit, -Math.PI / 2),

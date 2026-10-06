@@ -32,6 +32,7 @@ import { Runner, flags } from './runner.js';
 import { trainPlace as train } from './places/train.js';
 import { lobbyPlace as gate } from './places/lobby.js';
 import { forecourtPlace as forecourt } from './places/forecourt.js';
+import { canteenPlace as canteen } from './places/canteen.js';
 import { plazaPlace as plaza } from './places/plaza.js';
 import { officePlace as office } from './places/office.js';
 import { dormCourtPlace as dorm_court } from './places/dorm-court.js';
@@ -56,17 +57,17 @@ import { installMinimap } from './ui/minimap.js';
 
 const CAP = Q.has('cap');
 const TEST = Q.get('test') === 'fast';
-const TS = TEST ? +(Q.get('ts') || 8) : 1; // test mode: everything runs this many times faster
+const TS = TEST ? +(Q.get('ts') || 8) : 1; // test clock
 const canvas = document.getElementById('c');
 const renderer = createRenderer(canvas);
 ui.build();
 if (CAP) document.body.classList.add('cap');
-
 const PLACES = {
   train,
   gate,
   forecourt,
   plaza,
+  canteen,
   office,
   dorm_court,
   dorms,
@@ -85,7 +86,6 @@ const PLACES = {
 };
 assertRegistered(Object.keys(PLACE_FILES), PLACES, 'place factories');
 
-// ---------- shared game state ----------
 export const game = {
   renderer,
   ui,
