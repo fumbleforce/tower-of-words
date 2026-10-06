@@ -490,6 +490,11 @@
     "plaza:to_dorms",
     "plaza:to_east_lane",
     "plaza:to_shops",
+    "canteen:room_worker",
+    "canteen:room_water",
+    "canteen:room_trays",
+    "canteen:room_closing",
+    "canteen:room_worker_end",
     "canteen:arrive",
     "canteen:to_plaza",
     "canteen:sit_w",
@@ -1257,6 +1262,63 @@
       "kind": "go",
       "labels": [],
       "cond": ""
+    },
+    {
+      "from": "canteen:room_worker",
+      "to": "canteen:room_water",
+      "kind": "choice",
+      "labels": [
+        "Point to the water dispenser. “Water?”"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:room_worker",
+      "to": "canteen:room_trays",
+      "kind": "choice",
+      "labels": [
+        "Point to the tray-return trolley."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:room_worker",
+      "to": "canteen:room_closing",
+      "kind": "choice",
+      "labels": [
+        "Ask about closing up."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:room_worker",
+      "to": "canteen:room_worker_end",
+      "kind": "choice",
+      "labels": [
+        "Leave her to it."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:room_water",
+      "to": "canteen:room_worker_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:room_trays",
+      "to": "canteen:room_worker_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:room_closing",
+      "to": "canteen:room_worker_end",
+      "kind": "go",
+      "labels": [],
+      "cond": "(period == 'lunch')"
     },
     {
       "from": "dorm_court:go_up",
@@ -2058,6 +2120,9 @@
     "met_emi",
     "going_home",
     "evening_canteen_helped",
+    "room_worker_thanked",
+    "room_trays_seen",
+    "room_closing_seen",
     "dorm_room_known",
     "home_203",
     "found_bakery_flyer"

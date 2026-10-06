@@ -9,9 +9,11 @@ import { canteenSave } from './canteen-state.js';
 import { generic } from '../chibi-crowd.js';
 import { PEOPLE, idle } from '../cast.js';
 import { signBoard } from '../scenes/plaza-buildings.js';
-import { plant, clock } from '../props.js';
+import { plant, clock, rbox } from '../props.js';
 import { sim } from '../sim.js';
 import { blob } from '../engine.js';
+import { counterActivity } from './room-activity.js';
+import { AWNING } from '../scenes/plaza-buildings.js';
 
 export function canteenPlace(game) {
   const w = buildCanteen(),
@@ -37,6 +39,18 @@ export function canteenPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const save = canteenSave(game, w.nav, w.door.in, cam, w.seats);
   const things = {
+    canteen_worker: {
+      ...PLACE_DETAILS.canteen.things.canteen_worker,
+      fixedSpot: true,
+      anchor: (v) => {
+        residents[0].root.getWorldPosition(v);
+        v.y += 1.2;
+        return v;
+      },
+      spot: () => [1.8, -5.85],
+      face: () => [1.8, -7.7],
+      enabled: () => residents[0].root.visible,
+    },
     canteen_exit: {
       ...PLACE_DETAILS.canteen.things.canteen_exit,
       anchor: (v) => v.set(w.door.x, 0.9, 0),
@@ -63,7 +77,10 @@ export function canteenPlace(game) {
     ['cardigan', -4.6, -0.92, Math.PI, 0.34],
     ['polo', 8.05, -4.98, 0, 0.34],
   ].map(([kind, x, z, ry, seat], i) => {
-    const r = generic(kind, 63 + i) || PEOPLE.worker(63 + i);
+    const r =
+      generic(kind, i ? 63 + i : 25, i ? {} : { proxy: true, tint: { top: AWNING.canvas } }) ||
+      PEOPLE.worker(i ? 63 + i : 25);
+    if (!i && !r.chibi) r.torso.add(rbox(0.25, 0.3, 0.02, AWNING.canvas, { y: -0.15, z: 0.105, r: 0.008, seg: 1 }));
     r.root.scale.multiplyScalar(K);
     r.root.position.set(x, 0, z);
     r.root.rotation.y = ry;
@@ -95,9 +112,9 @@ export function canteenPlace(game) {
       tray_return: w.spots.tray_return,
     },
     seats: { canteen_seat_w: w.seats.canteen_seat_w, canteen_seat_e: w.seats.canteen_seat_e },
-    people: {},
+    people: { canteen_worker: residents[0] },
     zones: {},
-    hooks: {},
+    hooks: { roomWorker: (a) => activity.act(a) },
     fit(aspect) {
       roomView(cam, w.bounds, aspect);
     },
@@ -112,14 +129,21 @@ export function canteenPlace(game) {
     },
     update(dt, t) {
       if (shownPeriod !== sim.period) P.onPeriod(sim.period);
+      activity.update(dt);
       residents.forEach((r) => {
         if (!r.meshy && r.root.visible) idle(r, t);
       });
     },
-    snapshotState: save.snapshot,
-    restoreState: save.restore,
+    snapshotState: () => ({ ...save.snapshot(), roomActivity: activity.snapshot() }),
+    restoreState(saved) {
+      save.restore(saved);
+      activity.restore(saved.world?.roomActivity);
+    },
     tripIn: (g) => walkIn(g, cam, w.door.edge, w.door.in, Math.PI),
     tripOutTo: { plaza: (g) => walkOut(g, cam, w.door.out, w.door.edge) },
   };
+
+  const activity = counterActivity(game, P, residents[0]);
+  P.leave = () => activity.leave();
   return P;
 }

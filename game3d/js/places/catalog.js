@@ -267,6 +267,7 @@ export const PLACE_DETAILS = {
   },
   canteen: {
     things: {
+      canteen_worker: { label: 'Canteen worker', kind: 'person' },
       canteen_exit: { label: 'Fountain plaza', kind: 'thing', verb: 'Go out' },
       canteen_seat_w: { label: 'Dining chair', kind: 'thing', verb: 'Sit', pin: 'near' },
       canteen_seat_e: { label: 'Dining chair', kind: 'thing', verb: 'Sit', pin: 'near' },
@@ -275,8 +276,8 @@ export const PLACE_DETAILS = {
     seats: ['canteen_seat_w', 'canteen_seat_e'],
     nooks: [],
     zones: [],
-    people: [],
-    hooks: [],
+    people: ['canteen_worker'],
+    hooks: ['roomWorker'],
   },
   plaza: {
     things: {
