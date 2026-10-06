@@ -22,6 +22,7 @@ const { STORY_FILES } = await imp('js/places/definitions.js');
 // the story as each protagonist sees it: {mc.name} and the other tokens filled in (js/mc.js)
 const { expandMc, isPlayer, ownClip, PROTAGONISTS, DEFAULT_MC } = await imp('js/mc.js');
 const { DAYS } = await imp('js/days.js');
+const { NODES: FLAVOR_NODES, FINDS: FLAVOR_FINDS } = await imp('story/days3-5-finds.js');
 // day 2's new phrases (story/day2/words.js), until their clips exist and lang.js gives them a voice field
 const { WORDS: DAY2_WORDS } = await imp('story/day2/words.js');
 const { WORDS: DAY3_WORDS } = await imp('story/day3/words.js');
@@ -39,6 +40,8 @@ export const storySets = () =>
       return { name: n, load: fs.existsSync(f) ? () => import(pathToFileURL(f).href + '?' + Math.random()).then((m) => m.default) : null };
     }),
   }))
+    // Optional in-place finds keep their first-day grouping for focused production.
+    .concat([3, 4, 5].map(day => ({ day, files: [{ name: 'flavor-finds', load: async () => ({ nodes: Object.fromEntries(FLAVOR_FINDS.filter(f => f.from === day).map(f => [f.node, FLAVOR_NODES[f.node]])) }) }] })))
     // the clubs' session nodes (story/clubs.js), played in their club's place from day 3 on (clubs/index.js withClubs)
     .concat([{ day: 5, files: [{ name: 'kotodama-bridge', load: async () => ({ nodes: { bridge: structuredClone([KOTODAMA.first.requestLine, KOTODAMA.text.launchedMio]) } }) }] }])
     .concat([{ day: 3, files: [{ name: 'clubs', load: () => import(pathToFileURL(path.join(root, 'story/clubs.js')).href + '?' + Math.random()).then((m) => m.default) }] }]);

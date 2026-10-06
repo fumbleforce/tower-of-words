@@ -26,6 +26,7 @@ import { attachCrowd } from '../crowd/index.js';
 import { liftPeople } from '../look/char-lift.js';
 import { keepPublic } from '../travel/ways.js';
 import { noteVisit } from '../travel/visited.js';
+import { installFlavorFinds, attachFlavorFinds } from '../flavor-finds/index.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -62,6 +63,7 @@ export function createPlaceLifecycle(
   installDay3(game); // Saturday's people and scenes, the story's day3Setup (places/day3/)
   installDay4(game);
   installDay5(game);
+  installFlavorFinds(game);
   watchPlacePlugins(game);
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
   setUrgent(() => !game.place || document.body.classList.contains('loading'));
@@ -75,6 +77,7 @@ export function createPlaceLifecycle(
         assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
         place.name = name;
         noteBenches(place); // its benches' seats, before the draw-call pass merges them (places/day3/seats.js)
+        attachFlavorFinds(game, place, name, buildMarkers);
         await installBoot();
         keepPublic(story); // its ways out as the public story wrote them, for fast travel (travel/ways.js)
         await installPlacePlugin(name, { game, story, place });
@@ -114,6 +117,7 @@ export function createPlaceLifecycle(
     game.hold = null;
     game.place = place;
     game.story = story;
+    place.flavorFinds?.sync(story);
     document.body.dataset.place = name;
     noteVisit(name); // the places he has been to, for the map (travel/visited.js)
     game.runner.use(place, story);
