@@ -4,8 +4,11 @@
 import fs from 'node:fs';
 import { createHash } from 'node:crypto';
 import { withBrowserJob } from '../lib/browser-job.mjs';
+import { scopedRoute } from '../bible/check-scope.mjs';
+import { idleExportOptions } from './idle-export-options.mjs';
 const sourceBase = process.env.SOURCE_BASE || 'http://127.0.0.1:8771/';
-const output = new URL('../../game3d/assets/characters/', import.meta.url);
+// Candidate exports can reuse the same bake without writing approved game assets.
+const { output, extraIds, onlyExtra, retargetArms } = idleExportOptions();
 const source = new URL('../../art/parts/candidates/idle-neutral-3.glb', import.meta.url);
 const sourceBytes = fs.readFileSync(process.env.IDLE_SOURCE || source);
 const sha256 = createHash('sha256').update(sourceBytes).digest('hex');
@@ -13,6 +16,11 @@ if (sha256 !== '2d87466d9d82bf18fc24fcb6be18848b8b921d4981319df6548aa64c58c4ab5e
   throw Error('Approved idle has changed');
 const results = await withBrowserJob('export-approved-idle', async (browser) => {
   const page = await browser.newPage();
+  const scopeFailures = [];
+  await page.route('**/*', scopedRoute({ publicOnly: true, onFailure: (message) => scopeFailures.push(message) }));
+  await page.addInitScript(() =>
+    globalThis.localStorage.setItem('amakawa-settings', JSON.stringify({ privateMode: false })),
+  );
   await page.route('**/approved-idle-export', (route) =>
     route.fulfill({
       contentType: 'text/html',
@@ -20,8 +28,8 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
     }),
   );
   await page.goto(sourceBase + 'approved-idle-export');
-  return page.evaluate(
-    async ({ base, extraIds, characterDir }) => {
+  const result = await page.evaluate(
+    async ({ base, extraIds, characterDir, onlyExtra, retargetArms }) => {
       const THREE = await import('three');
       const { loadLibrary, loadSource, makeRig, clipsFor } = await import(base + 'tools/creator/recipe.js');
       const { retargetRotationValues } = await import(base + 'tools/creator/retarget.js');
@@ -39,7 +47,7 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
       const shared = (name) =>
         /^mixamorig/.test(name) ? map[name.replace(/^mixamorig:?/, '')] || name.replace(/^mixamorig:?/, '') : name;
       const out = {};
-      for (const id of ['eric', 'mio', ...extraIds]) {
+      for (const id of onlyExtra ? extraIds : ['eric', 'mio', ...extraIds]) {
         if (!lib.src[id])
           lib.src[id] = await loadSource(
             id,
@@ -59,16 +67,17 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
         const clip = (await clipsFor(lib, host)).approved;
         // Preserve the approved relaxed arms. Their pose is intentional, whereas
         // the stance must account for each mesh's differently placed joints.
-        if (nativeCast) for (const track of clip.tracks) {
-          const [bone, property] = track.name.split('.');
-          if (property === 'quaternion' && !/Shoulder|Arm|Hand/.test(bone))
-            track.values = retargetRotationValues(track.values, bone, host, ref);
-        }
+        // Candidate-only arm correction is explicit; production keeps its approved arm tracks.
+        if (nativeCast)
+          for (const track of clip.tracks) {
+            const [bone, property] = track.name.split('.');
+            if (property === 'quaternion' && (retargetArms || !/Shoulder|Arm|Hand/.test(bone)))
+              track.values = retargetRotationValues(track.values, bone, host, ref);
+          }
         const mixer = new THREE.AnimationMixer(rig);
         mixer.clipAction(clip).play();
         const gltf = await new GLTFLoader().loadAsync(
-          base +
-            (['eric', 'mio'].includes(id) ? `game3d/assets/${id}/walk.glb` : `${characterDir}${id}/walk.glb`),
+          base + (['eric', 'mio'].includes(id) ? `game3d/assets/${id}/walk.glb` : `${characterDir}${id}/walk.glb`),
         );
         const model = gltf.scene;
         model.updateMatrixWorld(true);
@@ -163,9 +172,13 @@ const results = await withBrowserJob('export-approved-idle', async (browser) => 
     {
       base: sourceBase,
       characterDir: process.env.CHARACTER_DIR || 'game3d/assets/characters/',
-      extraIds: process.argv.slice(2).length ? process.argv.slice(2) : ['mori'],
+      extraIds,
+      onlyExtra,
+      retargetArms,
     },
   );
+  if (scopeFailures.length) throw Error(scopeFailures.join('\n'));
+  return result;
 });
 for (const [id, result] of Object.entries(results)) {
   result.clip.userData = JSON.stringify({
