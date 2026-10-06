@@ -152,7 +152,7 @@ export function createPlaceLifecycle(
     game.player.scripted = false;
     game.player.setState('idle');
     game.player.root.visible = true;
-    game.walker = new SmoothWalker(game.player.root, place.nav, { speed: 1.3 });
+    game.walker = new SmoothWalker(game.player.root, place.nav, { speed: 1.43 });
     game.walker.facing = place.startFacing ?? Math.PI;
     game.player.root.rotation.y = game.walker.facing;
     const [sx, sz] = place.start;
