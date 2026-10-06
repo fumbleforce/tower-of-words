@@ -1,0 +1,20 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-07",
+  "transparent_background": false,
+  "candidates": [
+    {
+      "id": "a",
+      "prompt": "A landscape 3:2 tourist photograph as it would exist inside a softly lit, detailed low-poly 3D game. A winter view uphill from the lower spectator terrace at Lysgårdsbakkene in Lillehammer, around 1994. Two distinct parallel ski-jump hills rise diagonally across a snowy pine-covered hillside. Their narrow elevated inruns follow close above the terrain and end at short takeoff lips; the separate broad landing slopes continue smoothly downhill to the stadium apron. Both upper starting platforms fit inside the picture. A low natural-stone terrace edge crosses the foreground, with slender railings and empty stepped spectator terraces beside the slopes. Pale blue winter sky and dark conifers behind. Quiet ordinary travel-camera framing, clear readable ramp silhouettes, restrained blue-grey snow shadows and muted stone and timber, gentle winter sunlight from the left. Soft faceted 3D forms with subtle material detail, no heavy outlines or poster graphics. Present the entire image as one flat, front-on 1990s photographic print with a narrow clean off-white border and only slight age-softened colour. No people, lettering, dates, logos, flags, modern advertising, hands, desk, frame or objects outside the print.",
+      "file": "art/parts/mori-photo-1/a.png",
+      "sha256": "7e467ba7ad8e280e835c8467fe1c673d68f1e44e96c19c51e5e5afd12fe1d88c"
+    },
+    {
+      "id": "b",
+      "edit_target": "art/parts/mori-photo-1/a.png",
+      "prompt": "Edit this candidate tourist print into the approved game-world look while preserving its composition: the same two ski-jump hills, finite starting platforms, takeoff lips, landing slopes, empty spectator terraces, stone foreground wall, conifer ridge and winter light. Render the landscape as carefully modelled, softly lit low-poly 3D with broad matte facets, subtle surface detail and restrained blue-grey shadows. Simplify the tiny tree needles and stone grain so the jump profiles remain readable on a small phone screen. Keep it believable as an ordinary travel photograph within that stylized world, not a flat poster or diagram. Keep the narrow plain off-white photograph border, but make the edge wear slight and remove the heavy grain. No people, lettering, date, logos, new objects or change of camera.",
+      "file": "art/parts/mori-photo-1/b.png",
+      "sha256": "d5a08c0567d9d683565242ccc963f821602b0de9751fc66ca05fe5003814b2d9"
+    }
+  ]
+}

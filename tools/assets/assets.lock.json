@@ -2100,6 +2100,8 @@
   "art/parts/mori-meshy-1/sheets/tex.webp": {"size": 60016, "sha256": "56aae96874a1fb82a894961fa3cf3df28b9e2f863e8085ead67602f6c6363037", "type": "image/webp"},
   "art/parts/mori-meshy-1/sheets/uv.webp": {"size": 140688, "sha256": "b101fe90ea45fd7bbdaca83aa3bf53f3a858ab3cd2dec5e761159c0725d1fd12", "type": "image/webp"},
   "art/parts/mori-meshy-1/sheets/viewer.webp": {"size": 104100, "sha256": "4847eb29113ff21bce3cec11450b5bc9bb9a1a9bfdb73579394268a4d4c6dae4", "type": "image/webp"},
+  "art/parts/mori-photo-1/a.png": {"size": 2924215, "sha256": "7e467ba7ad8e280e835c8467fe1c673d68f1e44e96c19c51e5e5afd12fe1d88c", "type": "image/png"},
+  "art/parts/mori-photo-1/b.png": {"size": 2383548, "sha256": "d5a08c0567d9d683565242ccc963f821602b0de9751fc66ca05fe5003814b2d9", "type": "image/png"},
   "art/parts/pool-swimwear-1/captures/1366-carina-comparison.png": {"size": 269816, "sha256": "12805d8d80e83f05534792da23e91d11675bb4bd863f94d08e517662252aa3b3", "type": "image/png"},
   "art/parts/pool-swimwear-1/captures/1366-carina-idle-body-0.png": {"size": 207035, "sha256": "e3e42ab30d0ebf9678a40d586cec313b5f622ab3571ca714c6c20d66550c5a87", "type": "image/png"},
   "art/parts/pool-swimwear-1/captures/1366-carina-idle-body-1.57.png": {"size": 151461, "sha256": "d55e6c173a45988a62afa95282bdb9c4a6de7a980939f091cf5350dbf616a967", "type": "image/png"},
