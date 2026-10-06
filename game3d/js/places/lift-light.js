@@ -1,6 +1,7 @@
 // The light round the lift car during a ride (places/lift.js): the dim while he boards (setDark), and the dark once
 // the car has left the place's floor (setAway), when everything outside the car goes out of the frame.
 import * as THREE from 'three';
+import { wallTop } from './lift-cut.js';
 
 const DARK = 0.4; // how much of a place's own light stays on during the ride (dimmed, not black: QA round 1)
 const DARK_BG = new THREE.Color('#14171d'),
@@ -58,7 +59,7 @@ export function setAway(L, k) {
   m.material.color.copy(L.place.scene.background || DARK_BG);
   // the hole: the car's box (and the landing's floor) seen from the camera, where the lines of sight cross the shroud
   const { site, box, car } = L,
-    h = Math.max(site.wallH, box.top) + 0.06,
+    h = Math.max(wallTop(site), box.top) + 0.06, // over the place's tallest wall round the car
     c = L.place.space.worldToLocal(L.cam.camera.getWorldPosition(new THREE.Vector3()));
   let x0 = Infinity,
     x1 = -Infinity,

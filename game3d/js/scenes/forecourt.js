@@ -36,7 +36,7 @@ import { buildNooks } from './outdoor/nooks.js';
 
 const { STATION, DOOR_X, X0, SE, ZN, HZ, HO_X, COURT, BIKES, GARDEN, LANE, LANE_Z, STRIP_S, STRIP_N, SERVICE, TE } = PL;
 // the nav grid: court, bikes, lane (up to where the plaza trip starts), lobby
-const WALK = [X0 + 0.2, PL.LANE_WALK, HZ - 6.4, BIKES[3]];
+const WALK = [X0 + 0.2, PL.LANE_WALK, HZ - 9.8, BIKES[3]]; // north to the tower's north wall (the lobby's back rooms)
 const lanePt = (x) => [x, LANE_Z];
 
 // beyond the court: lawns round the paving, a few trees near it in small groups (the lane's gardens are in

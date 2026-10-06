@@ -5,11 +5,11 @@
 //
 //   the main walk: one designed path from the station door to the head office door, 2.4 wide, in three legs: north
 //   out of the station door to the court's axis, east along the axis, north to the head office door
-//   the court: pale stone round the walk, from the station's west face to the lobby's east wall
+//   the court: pale stone round the walk, from the station's west face to its east edge (LE)
 //   the bike court: south of the court, east of the station, behind a hedge
 //   the lane: east from the court's north-east corner along the tower's south face, an avenue on to the plaza
 import { STATION, DOOR_X } from '../station-exterior.js';
-import { T, at, DOOR_U, LU } from '../head-office/frame.js';
+import { T, at, DOOR_U } from '../head-office/frame.js';
 import { BUILDINGS, toLocal } from '../island-layout.js';
 
 export { STATION, DOOR_X };
@@ -18,7 +18,9 @@ export const X0 = STATION.x0, // the station's west face: the court's west edge
   ZN = STATION.zN, // its north face: the court's south edge
   HZ = T.o[1], // the tower's south face: the court's north edge
   HO_X = at(DOOR_U, 0)[0], // the head office door
-  LE = at(LU, 0)[0], // the lobby's east wall: the court's east edge
+  // the court's east edge, where the old lobby's east wall stood (u 9.9): pinned there on its own, so the wider
+  // atrium (head-office/frame.js LU) moves neither the court, the lane nor the garden
+  LE = at(9.9, 0)[0],
   TE = T.o[0] + T.W, // the tower's east face
   TN = T.o[1] - T.D; // its north face
 

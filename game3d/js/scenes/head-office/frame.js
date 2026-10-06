@@ -25,24 +25,38 @@ export const T = (() => {
 export const at = (u, n) => [T.o[0] + u, T.o[1] - n];
 export const inT = (x, z) => [x - T.o[0], T.o[1] - z];
 export const TOP = GF + (T.storeys - 1) * T.fh;
-export const LU = 9.9, // the lobby: u 0..LU, n 0..LN; the rest of the ground floor is the service block
-  LN = 6.2,
-  DOOR_U = 3.2, // the entrance, in the south face
-  DOOR_W = 1.6;
-export const DOOR = at(DOOR_U, 0);
-// the lift site: straight in from the door
-export const OUT = at(DOOR_U, 3.3).map((v) => Math.round(v * 100) / 100);
-export const CZ = Math.round((OUT[1] - 0.85) * 100) / 100; // the core's front wall, centre line
-// x0, x1, z back, z front face: the core's back wall stands against the inside of the lobby's back wall
-export const CORE = [OUT[0] - 1.6, OUT[0] + 5.6, at(0, LN)[1], CZ + 0.09];
-export const CAR2_X = OUT[0] + 2.0,
-  STAIR_X = OUT[0] + 3.3;
 // the curtain wall's bay lines along a face of length L (its fins stand on them); the ground floor's piers, glass
 // mullions and windows use the same lines, so the facade runs through from the plinth to the parapet
 export const bayLines = (L) => {
   const n = Math.round(L / 1.48);
   return Array.from({ length: n + 1 }, (_, i) => (L * i) / n);
-}; // the lift's lid over the car (unlit): the dark of the core's shafts in the cut
+};
+export const BU = bayLines(T.W); // the south face's bay lines: the atrium's grid along u (1.49 apart)
+// The lobby is a double-height atrium (Jørgen picked it, reviews/lobby-plan-1): u 0..LU (nine bays) by n 0..LN, AH
+// high (the ground floor and the first storey). Behind its back wall, up to the tower's north wall, a row of rooms
+// one storey high: the closed service room, the receptionist's office, the stair and the four lift shafts. East of
+// the atrium the back office.
+export const AH = GF + T.fh,
+  LU = BU[9],
+  LN = 7.5, // the back wall's face (the lift bank; the feature wall stands proud of it, FW)
+  FW = 7.2,
+  BACK = LN + 0.18, // the back rooms, from the back wall to the north wall's inside face (T.D - 0.18)
+  DOOR_U = 3.2, // the entrance, in the south face
+  DOOR_W = 1.6;
+export const DOOR = at(DOOR_U, 0);
+// the back rooms along u: the service room (west of the office), the receptionist's office (its door in the
+// feature wall's east end, OFFICE_DOOR), the stair (its door in the bay between the feature wall and the lifts) and
+// the four lifts, one a bay, the B2 car the west one, nearest the desk
+export const OFFICE = [BU[2], BU[4], BACK, T.D - 0.18],
+  OFFICE_DOOR = [4.95, 5.8],
+  STAIR_U = (BU[4] + BU[5]) / 2,
+  LIFTS = [5, 6, 7, 8].map((i) => (BU[i] + BU[i + 1]) / 2),
+  BANK = [BU[5], LU];
+// the lift site: the B2 car's doors in the back wall; CZ the wall's centre line (z), OUT where he stands to board
+export const CZ = Math.round((T.o[1] - LN - 0.09) * 100) / 100;
+export const OUT = [Math.round(at(LIFTS[0], 0)[0] * 100) / 100, Math.round((CZ + 0.85) * 100) / 100];
+// x0, x1, z back, z front face: the stair and the lift shafts behind the back wall
+export const CORE = [at(BU[4], 0)[0], at(LU, 0)[0], at(0, T.D - 0.18)[1], CZ + 0.09];
 
 // ---------- geometry in the tower's frame: boxes collected per material, merged into one mesh each ----------
 export function parts() {
@@ -65,14 +79,14 @@ export function parts() {
     },
   };
 }
-// The cut over the lobby: while Eric is in the lobby or the lift, only the part of the tower between him and the
-// camera fades: the lobby's glass front and canopy and the three storeys over the lobby, from the south face back
-// to the lobby's back wall and east to the first bay line past the lobby's east wall. The floors above that, and the
-// rest of the tower, stay, so the lobby reads as a room open to the camera at the foot of a standing tower (the
-// camera's 46 degrees see nothing of the storeys above the cut from the lobby floor). [u0, u1, y0, y1, n0, n1]
-export const NU = bayLines(T.W).find((u) => u >= LU - 1e-6),
-  NT = GF + 3 * T.fh;
-export const NOTCH = [-2, NU, 0.45, NT, -2.2, LN];
+// The cut over the lobby: while Eric is in the lobby, the receptionist's office or the lift, only the part of the
+// tower between him and the camera fades: the lobby's glass front and canopy and the storeys over the atrium, from
+// the south face back to its back wall and east to its east wall (a bay line). The floors above that, and the rest
+// of the tower, stay, so the lobby reads as a room open to the camera at the foot of a standing tower. The cut is
+// five storeys tall (NT): the camera looks into the lift car and the office behind the back wall over the south
+// face's storeys, at 46 degrees (50 in the lift), so a lower cut would hide them. [u0, u1, y0, y1, n0, n1]
+export const NT = GF + 5 * T.fh;
+export const NOTCH = [-2, LU, 0.45, NT, -2.2, LN];
 // a box collector that sends each box's part inside `region` to `fade` and the rest to `stay` (split along u, then
 // y, then n), so a floor band or a fin running across the cut's edge is cut exactly there
 export function splitParts(fade, stay, region = NOTCH) {

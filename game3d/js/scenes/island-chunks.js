@@ -21,12 +21,12 @@ export const CHUNKS = {
     turn: 0,
     scale: 1,
     level: 0,
-    walk: [-6.6, 35, -9.8, 10.6],
+    walk: [-6.6, 35, -13.4, 10.6],
     view: [-42, 31, -28, 52.15], // west to the coast, over the platform shed, south to the beach (island-south.js)
     anchor: 'the gate room (its exit is the station door at local (-1.5, 2.65))',
   },
   office: {
-    at: [3.75, -5.01],
+    at: [8.75, -8.45],
     turn: 0,
     scale: 1,
     level: -2,

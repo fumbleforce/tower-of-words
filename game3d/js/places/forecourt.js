@@ -31,6 +31,14 @@ export async function forecourtPlace(game) {
     lift_front: w.liftOut,
     plaza_lane: w.plazaLane,
     forecourt_staff_gate: w.nooks.forecourt_staff_gate,
+    // in the head office lobby: its nooks, the receptionist's office door and the office behind it
+    lobby_model: w.headOffice.nooks.lobby_model,
+    lobby_island_w: w.headOffice.nooks.lobby_island_w,
+    lobby_island_e: w.headOffice.nooks.lobby_island_e,
+    lobby_lift_bench: w.headOffice.nooks.lobby_lift_bench,
+    lobby_umbrella: w.headOffice.nooks.lobby_umbrella,
+    reception_office_door: w.headOffice.officeDoor,
+    reception_office: w.headOffice.office,
   };
   const things = {
     station_exit: {
@@ -189,6 +197,8 @@ export async function forecourtPlace(game) {
           l0 = w.laneAt(...w.plazaLane);
         return l.u > l0.u - 0.1 && Math.abs(l.off) < 1.2;
       },
+      // inside the receptionist's office behind the feature wall
+      reception_office: (x, z) => w.headOffice.inOffice(x, z),
     },
     hooks: {
       liftOpen: () => w.setLiftOpen(1),
@@ -213,7 +223,7 @@ export async function forecourtPlace(game) {
             new THREE.Vector3(w.doorX, 0, w.stationExit[1] - 0.2),
           ],
           new THREE.Vector3(5.2, 0, -1.2),
-          { follow: true, clamp: [5.2, 26, -6.2, 3.5], limY: 0.96 },
+          { follow: true, clamp: [5.2, 26, -11.4, 3.5], limY: 0.96 }, // north as far as the lifts and the office
         );
         return;
       }
@@ -228,7 +238,7 @@ export async function forecourtPlace(game) {
           new THREE.Vector3(0, 1.2, 2.4),
         ],
         new THREE.Vector3(0, 0, 0),
-        { follow: true, clamp: [-1.0, 30, -8.4, 8.0], lead: -1.6 },
+        { follow: true, clamp: [-1.0, 30, -12.4, 8.0], lead: -1.6 },
       );
       phone = true;
       north.dist = cam.fitDist;
