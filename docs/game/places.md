@@ -1590,8 +1590,8 @@ Eric arrives from the dorm courtyard (Getting between places) on the landing. Th
 | `door_203` | Room 203 | His front door on the corridor. |
 | `computer` | Computer | The company computer on his desk, switched on. Look. |
 | `door_out` | Front door | Day 2 on: the front door from inside, over the genkan. Go out: out onto the corridor (the `leaveRoom` hook). |
-| `stairs_up` | Upstairs | On 2F and 3F: the foot of the flight up, beside the flight down. Go up: up to 3F, or from 3F up past 4F and 5F and out of the stair house onto the roof. |
-| `stairs_down` | Downstairs | The top of the flight down on 3F (to 2F) and on 2F (day 2 on: the trip down to the courtyard); on the roof the stair house's door (down to 3F). |
+| `stairs_up` | Upstairs | A stair pin on 2F and 3F at the foot of the flight up, beside the flight down. Go up: up to 3F, or from 3F up past 4F and 5F and out of the stair house onto the roof. |
+| `stairs_down` | Downstairs | A stair pin at the top of the flight down on 3F (to 2F) and on 2F (day 2 on: the trip down to the courtyard); on the roof the stair house's door (down to 3F). |
 | `kitchen` | Shared kitchen | 2F, the shared kitchen at the corridor's west end. Look: a narration line (game3d/story/dorm-building.js). |
 | `notices` | Notice board | 2F, the notice board on the corridor wall by the stairs. Read: a narration line (game3d/story/dorm-building.js). |
 | `laundry` | Laundry | 3F, the washers in the laundry. Look: a narration line (game3d/story/dorm-building.js). |

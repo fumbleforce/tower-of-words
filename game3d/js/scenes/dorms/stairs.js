@@ -39,7 +39,9 @@ function flight(kit, [x0, x1], z0, dir, y0, step, n = STAIR.treads) {
       zc = za + (dir * STAIR.tread) / 2,
       y = y0 + step * (i + 1);
     kit.box(FLOOR, x1 - x0, RISE + 0.03, STAIR.tread + 0.002, (x0 + x1) / 2, y - RISE - 0.03, zc, { surf: 'concrete' });
-    kit.box(NOSE, x1 - x0, 0.012, 0.04, (x0 + x1) / 2, y, za + dir * (STAIR.tread - 0.02), { cast: false });
+    // the nosing on the edge he steps up onto: the far edge going down, the near one going up
+    const edge = step < 0 ? STAIR.tread - 0.02 : 0.02;
+    kit.box(NOSE, x1 - x0, 0.012, 0.04, (x0 + x1) / 2, y, za + dir * edge, { cast: false });
   }
 }
 

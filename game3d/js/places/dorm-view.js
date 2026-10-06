@@ -80,7 +80,7 @@ export function dormView(cam, w, st) {
           new THREE.Vector3(dx, 0, b.stairs.half[1]),
         ],
         new THREE.Vector3(dx, 0, (c0 + c1) / 2 - 0.3),
-        { follow: true, clamp: [dx + WEST_END + 1.3, dx + b.east - 1.2, 0.8, 1.4], lead: -0.6 },
+        { follow: true, clamp: [dx + WEST_END + 1.3, dx + b.east - 1.2, -0.6, 1.4], lead: -0.6 },
       );
   }
   // the roof's: the whole depth of the roof, from the front parapet to the next block's wall over the back one
@@ -98,7 +98,7 @@ export function dormView(cam, w, st) {
           new THREE.Vector3(dx, -0.4, R.z1 + 0.3),
         ],
         new THREE.Vector3(dx, 0, zm),
-        { follow: true, clamp: [dx + R.x0 + 4.3, dx + R.x1 + 0.9, zm - 0.75, zm - 0.45], limY: 0.92 },
+        { follow: true, clamp: [dx + R.x0 + 4.3, dx + R.x1 + 0.9, zm - 1.3, zm - 1.0], limY: 0.92 },
       );
     else
       cam.fit(

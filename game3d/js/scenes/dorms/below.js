@@ -7,7 +7,7 @@ import * as THREE from 'three';
 import { Parts } from '../outdoor/parts.js';
 import { hallRoof, laundryRoof, sentoRoofs } from '../dorm-court/frontages.js';
 import { BLOCK } from '../dorm-court/block.js';
-import { keyaki, maple, hedge, cluster, LEAF } from '../outdoor/planting.js';
+import { keyaki, maple, hedge, cluster } from '../outdoor/planting.js';
 import { lightPool } from '../../places/life.js';
 import * as PL from '../dorm-court/plan.js';
 
@@ -36,7 +36,7 @@ export function below(root, { drop = 0 } = {}) {
   p.box('#4b4f57', 24, 0.02, 10, 0, -0.02, PL.BLOCK_Z + 5, { cast: false });
   // the garden west of the laundry: moss under the trees, the hedge along the block's foot, shrubs, its tall lamp
   const [g0, g1, g2, g3] = PL.GARDEN;
-  p.box(LEAF.cover, g1 - g0, 0.03, g3 - g2, (g0 + g1) / 2, -0.01, (g2 + g3) / 2, { cast: false });
+  p.box('#2b372f', g1 - g0, 0.03, g3 - g2, (g0 + g1) / 2, -0.01, (g2 + g3) / 2, { cast: false }); // moss, in the dark
   hedge(p, [g0 + 0.5, g2 + 0.35], [g1 - 0.2, g2 + 0.35], { seed: 4 });
   for (const [x, z, seed] of [
     [-6.8, 0.2, 2],
