@@ -1,4 +1,4 @@
-import { characterRoutes, calendarStories, excerpt } from './story-timeline-model.js';
+import { characterRoutes, calendarStories, storyCast, excerpt } from './story-timeline-model.js';
 import { section } from './live.js';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const labels = { plan: 'Planned', written: 'Script written', built: 'Built in docs', documented: 'Documented' };
@@ -14,9 +14,10 @@ export async function mount(root, { ROOT, here, live, arg = '' }) {
   const state = { mode: mode === 'days' ? 'days' : 'routes', who: who || 'all', selected: selected ? decodeURIComponent(selected) : '', query: '' };
   const files = { ...live.files };
   const text = async path => { try { const r = await fetch(new URL(path, base), { cache: 'no-cache' }); if (!r.ok) throw new Error(r.status); return files[path] = await r.text(); } catch { failures.push(path); return ''; } };
-  const [milestones, bonds] = await Promise.all([
+  const [milestones, bonds, day3] = await Promise.all([
     import(new URL('game3d/story/milestones/index.js', base)).catch(() => { failures.push('Milestone scripts'); return { SCENES: [] }; }),
     import(new URL('game3d/js/bonds/model.js', base)),
+    import(new URL('game3d/story/day3/index.js', base)).catch(() => { failures.push('Day 3 cast'); return { STORIES: {} }; }),
     ...dayFiles.map(path => text(`docs/game/stories/${path}`)),
   ]);
   const routes = characterRoutes(files['docs/game/cast.md'] || '', milestones.SCENES);
@@ -27,7 +28,7 @@ export async function mount(root, { ROOT, here, live, arg = '' }) {
     const file = `docs/game/stories/${path}`, doc = files[file] || '';
     if (!doc) continue;
     stories.push({ id: path.replaceAll('/', '-').replace('.md', ''), day: +path.match(/^day(\d)/)[1], file,
-      title: doc.match(/^# (.+)$/m)?.[1] || path, status: 'documented', cast: [...section(doc, 'Cast').matchAll(/`([a-z_]+)`/g)].map(m => m[1]) });
+      title: doc.match(/^# (.+)$/m)?.[1] || path, status: /built in #\d+/.test(doc) ? 'built' : 'documented', cast: path === 'day3/README.md' ? storyCast(day3.STORIES) : [...section(doc, 'Cast').matchAll(/`([a-z_]+)`/g)].map(m => m[1]) });
   }
   const calendar = calendarStories(stories, files, routes);
   const persist = () => history.replaceState(null, '', `#story-timeline/${state.mode}/${state.who}${state.selected ? '/' + encodeURIComponent(state.selected) : ''}`);

@@ -1,6 +1,6 @@
 # Progression
 
-The bible’s [Story timelines](../../bible/#story-timeline) compares character progression by relationship stage and by opening day. It reads the existing character plans, story documents and written milestone descriptors, with their distinct implementation states; a scripted milestone is not treated as playable merely because its file exists.
+The bible’s [Story timelines](../../bible/#story-timeline) compares character progression by relationship stage and by opening day. It reads the existing character plans, story documents, day-three authored actors and written milestone descriptors, with their distinct implementation states; a scripted milestone is not treated as playable merely because its file exists.
 
 How the game opens up after day 1: which system comes in on which day, what moves the story forward, and how scripted events and free days fit together. Systems and structure only; what happens in the story is Codex's ([collab/PROTOCOL.md](../../collab/PROTOCOL.md)). Nothing here is built unless it says so. What exists today (the clock, bonds, the Words panel, saving, the crowd) is in [systems.md](systems.md).
 

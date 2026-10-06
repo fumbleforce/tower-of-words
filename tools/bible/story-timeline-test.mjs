@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
-import { characterRoutes, calendarStories } from '../../bible/story-timeline-model.js';
+import { characterRoutes, calendarStories, storyCast } from '../../bible/story-timeline-model.js';
 import { SCENES } from '../../game3d/story/milestones/index.js';
 const cast = fs.readFileSync(new URL('../../docs/game/cast.md', import.meta.url), 'utf8');
 test('every authored character plan has six ordered stages; scripts do not imply playable', () => {
@@ -23,4 +23,10 @@ test('calendar links only documented cast to the stated day, with no implied dep
     const steps=rows.find(r=>r.id===id).steps;
     assert.equal(steps.length,1); assert.equal(steps[0].column,1); assert.equal(steps[0].source,'lunch.md');
   }
+});
+
+import { STORIES as day3 } from '../../game3d/story/day3/index.js';
+test('day three cast comes from authored actors when its summary has no Cast section', () => {
+  const ids = storyCast(day3);
+  for (const id of ['mio', 'aoi', 'guard', 'emi', 'kuro', 'kenji']) assert.ok(ids.includes(id), id);
 });

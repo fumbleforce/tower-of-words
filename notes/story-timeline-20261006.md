@@ -2,9 +2,9 @@
 
 Request #280: a Gantt-style bible view of character-by-character storyline progression.
 
-The relationship view reads ten character plans and all six bond stages from cast.md and the bond model. A matching authored scene descriptor is labelled Script written, never inferred playable. The opening-day view reads cast membership from existing story documents; stories on one day are not represented as prerequisites for one another. Character and text filters, selection details and source links work on both scales.
+The relationship view reads ten character plans and all six bond stages from cast.md and the bond model. A matching authored scene descriptor is labelled Script written, never inferred playable. The opening-day view reads cast membership from existing story documents and day-three authored actors; stories on one day are not represented as prerequisites for one another. Character and text filters, selection details and source links work on both scales.
 
-- Two model tests pass against the real cast plans and authored scene descriptors.
+- Three model tests pass against the real cast plans and authored scene descriptors.
 - Actual browser checks pass at 2560×1440 and 390×844: all routes/stages, character filter, search/empty state, day scale, selection, keyboard focus and no document overflow.
 - All browser requests were restricted to public sources; no private source requested.
 - Full CPU gate passes. Game runtime is unchanged, so no additional full-day playthrough is required for this UI-only change.
