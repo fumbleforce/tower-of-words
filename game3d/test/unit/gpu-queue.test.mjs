@@ -153,10 +153,11 @@ test('browser slots and exclusive jobs cannot keep each other out', t => {
   assert.equal(joined.slot, 1);
   fs.rmSync(early.path);
   joined.release(); running.release();
-  // When the lock changes hands, waiting browser tests go before renders, so a run of renders lets them in.
-  assert.equal(take(root, 'render', render), 'False', 'the waiting browser test goes first');
-  const between = tryAcquireBrowserGpuSlot({ root, owner: 'late-test', ticket: late, ...quiet });
-  assert.equal(between.slot, 0);
-  late.remove(); between.release();
-  assert.equal(take(root, 'render', render), 'True');
+  // When the lock changes hands, the render that queued first goes first; the later browser test waits its turn.
+  assert.equal(tryAcquireBrowserGpuSlot({ root, owner: 'late-test', ticket: late, ...quiet }), null, 'no cutting in');
+  assert.equal(take(root, 'render', render), 'True', 'the older render goes first');
+  py(root, 'g.release("render")');
+  const after = tryAcquireBrowserGpuSlot({ root, owner: 'late-test', ticket: late, ...quiet });
+  assert.equal(after.slot, 0, 'then the browser test');
+  late.remove(); after.release();
 });
