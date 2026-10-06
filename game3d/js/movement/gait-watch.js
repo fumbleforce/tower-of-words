@@ -89,6 +89,9 @@ export function startGaitCheck(game) {
     const seen = new Set();
     for (const [id, r, seated] of list) {
       if (!r?.root?.parent || seen.has(r)) continue;
+      // Swimming uses an arm-driven water pose, not planted feet. Deleting its old window below
+      // makes the next dry step start a fresh measurement; pair collisions remain checked.
+      if (r.swimming) continue;
       // sitting, and getting up or down (the legs swing between the poses): not walking
       if (seated || r.state === 'sit') r._gwSat = t;
       if (t - (r._gwSat ?? -9) < SAT) continue;

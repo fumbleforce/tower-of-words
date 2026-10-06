@@ -53,7 +53,7 @@ export function bodies(game) {
     K = P.charScale || 1;
   const add = (id, r, crowd = false) => {
     if (!r || !r.root || seen.has(r.root) || !r.root.visible || !r.root.parent) return;
-    if (r.root.position.y < -0.3) return; // in the pool's water (places/day3/swim.js): off the deck's floor
+    if (r.root.position.y < -0.3 && !r.swimming) return; // active swimmers still count for pair overlap checks
     seen.add(r.root);
     r.root.getWorldPosition(_v);
     P.space.worldToLocal(_v);

@@ -102,7 +102,7 @@ export function poolClub(game, { root, cast }) {
     }
     cast.put('emi', [STEPS_TOP[0] - 1.6, STEPS_TOP[1] - 0.25], [LANE, WZ1]);
     cast.put('member', [STEPS_TOP[0] - 1.0, STEPS_TOP[1] - 1.25], [STEPS_TOP[0] - 1.6, STEPS_TOP[1] - 0.25]);
-    inWater('kuro', [LANE2, WZ1 - 0.9], 0); // in the second lane, clear of the steps
+    inWater('kuro', [LANE2, WZ1 - 1.8], 0); // leave the wall-side crossing to the shared steps clear
     setAt(bags, BAGS_AT, 0.415);
     handling.hold(who('member'), list);
     for (const t of towels) t.visible = false;
@@ -182,7 +182,7 @@ export function poolClub(game, { root, cast }) {
       return [r, x, r.root.position.z, id];
     });
     const far = WZ0 + 1.2,
-      near = WZ1 - 0.9;
+      near = WZ1 - 1.8;
     const cam = P().cam;
     camera.clear();
     cam.closeOn?.([(WX0 + WX1) / 2, (WZ0 + WZ1) / 2], 0.9);

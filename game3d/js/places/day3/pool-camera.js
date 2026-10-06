@@ -15,7 +15,11 @@ export function poolCamera(game) {
     };
   }
   function update() {
-    if (shot && cam.close !== held) clear();
+    if (shot && cam.close !== held) {
+      // Runner staging restores a serialized clone after the place restores its own state.
+      if (cam.close?.poolWaterShot) held = cam.close;
+      else clear();
+    }
     if (!shot || !cam.close) return;
     Object.assign(cam, { yaw: shot.yaw, elev: shot.elev });
     const width = Math.max(1, cam.camera.aspect);
@@ -29,6 +33,7 @@ export function poolCamera(game) {
       shot = { point, span, y, yaw, elev };
       cam.closeOn(point, 1, y);
       held = cam.close;
+      held.poolWaterShot = true;
       update();
     },
     clear,
@@ -40,6 +45,7 @@ export function poolCamera(game) {
       ({ shot, home } = saved);
       cam.closeOn(shot.point, 1, shot.y);
       held = cam.close;
+      held.poolWaterShot = true;
       update();
     },
     dispose() {

@@ -126,7 +126,8 @@ function furniture(game, C, dt, list) {
   if (!nav || !nav.clearance || (window.__lift && window.__lift.ride && window.__lift.ride.on)) return;
   const seen = new Set();
   for (const b of list) {
-    if (b.seated || b.id === 'tama' || b.rig._noAvoid || b.rig._walk || b.root.parent !== P.space) continue;
+    if (b.seated || b.rig.swimming || b.id === 'tama' || b.rig._noAvoid || b.rig._walk || b.root.parent !== P.space)
+      continue;
     if (b.x < nav.x0 || b.x > nav.x1 || b.z < nav.z0 || b.z > nav.z1) continue; // parked off the walk grid by a scene
     const w = game.walker;
     if (game.player && b.root === game.player.root && w && (w.moving || w.path)) continue;
