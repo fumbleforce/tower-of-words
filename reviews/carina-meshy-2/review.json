@@ -1,0 +1,97 @@
+{
+ "title": "Carina: waist, head and trouser fixes",
+ "date": "2026-10-06",
+ "by": "Claude, recovered and checked by Codex",
+ "status": "open",
+ "question": "These are real 3D models in the live viewer; do you want to keep the installed denim trousers or use grey?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r2-seam.webp",
+   "caption": "Round 2, your words on carina-2: \"she has a small seam at the waist. Her head should be 15% smaller. Her pants should be a different color\". 1, the seam. It was in the texture, not the mesh or the rig: the underside of her top's hem and the top edge of the trousers were painted beige by Meshy's texture pass, which showed as a dotted light line under the hem. Painted out in Blender with the top's and the trousers' own colour on just those faces. Close-ups at the waist, before and after; these trousers are still black so only the seam changes, and the last one is the installed version with denim."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r2-head.webp",
+   "caption": "2, the head 15% smaller. Hair and face scaled to 0.85 about the top of her neck in Blender, with the body unchanged, so the rig, the joints and the skin weights come out the same. The game stands every model at its own height, so she is still 1.12 tall, with a smaller head on a slightly bigger body. Front and side, before and after, both at 1.12."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r2-face.webp",
+   "caption": "The head close up after the change: face, eyes and hair are only scaled, nothing repainted. Before and after from the front and at three-quarter, then the other three-quarter and the back."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r2-trousers.webp",
+   "caption": "3, the trousers. You didn't name a colour, so the installed one is dark denim blue: it stands out against her black top and differs from her black top. Mid-grey is shown as an alternative. Only the trousers part of the texture is changed, done in Blender. Each spot keeps its own light and dark, so the shading and folds stay as they were. Her shoes are separate and didn't change."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r2-body.webp",
+   "caption": "All three together, three-quarter view: before, after with denim (in the game), after with grey, and the back with denim."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r2-walk.webp",
+   "caption": "carina-2-r2 in the walk from the side, frames 1 to 26 of Emi's walk on our rig: no gap or crease at the waist, and the trousers follow the legs."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r2-walk-head.webp",
+   "caption": "Her head in the walk, front and side: it turns and nods with the head joint as before (100% on the head bone), and no part of the neck or collar shows through the smaller head."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/r2/close/meshyrig-denim/body/y45.png",
+   "caption": "Later rig attempt: the same edited model with Meshy's own skeleton, repaired weights and walk/run/sit clips. Retained for comparison, not installed. The sit clip cost 3 Meshy credits before recovery; no credits spent during recovery."
+  }
+ ],
+ "options": [
+  {
+   "id": "carina-2-r2",
+   "label": "carina-2-r2",
+   "image": "art/parts/carina-meshy-1/r2/close/after-denim/body/y45.png",
+   "images": [
+    "art/parts/carina-meshy-1/r2/close/after-denim/body/y0.png",
+    "art/parts/carina-meshy-1/r2/close/after-denim/head/y0.png"
+   ],
+   "note": "Blender source edits: waist texture seam repaired; face and hair scaled uniformly to 0.85 around (0, 0.635, -0.0026); denim trousers via UV-island mask with shading retained. Same selected body and fitted rig with Emi's walk, run and sit; relaxed-3 idle; displayed at 1.12 m. Installed denim colour: sRGB 40, 60, 92."
+  },
+  {
+   "id": "carina-2-r2-grey",
+   "label": "carina-2-r2-grey",
+   "image": "art/parts/carina-meshy-1/r2/close/after-grey/body/y45.png",
+   "images": [
+    "art/parts/carina-meshy-1/r2/close/after-grey/body/y0.png",
+    "art/parts/carina-meshy-1/r2/close/after-grey/head/y0.png"
+   ],
+   "note": "Blender source edits: waist texture seam repaired; face and hair scaled uniformly to 0.85 around (0, 0.635, -0.0026); grey trousers via UV-island mask with shading retained. Same selected body and fitted rig with Emi's walk, run and sit; relaxed-3 idle; displayed at 1.12 m. Alternative grey colour: sRGB 122, 122, 124."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: turn, zoom, idle, walk, run and sit",
+   "href": "reviews/carina-meshy-2/viewer.html"
+  },
+  {
+   "label": "Original model and every earlier attempt",
+   "href": "bible/#review/carina-meshy-1"
+  }
+ ],
+ "viewer_files": [
+  "art/parts/carina-meshy-1/r2/viewer/denim/base.webp",
+  "art/parts/carina-meshy-1/r2/viewer/denim/idle.json",
+  "art/parts/carina-meshy-1/r2/viewer/denim/run.glb",
+  "art/parts/carina-meshy-1/r2/viewer/denim/sit.glb",
+  "art/parts/carina-meshy-1/r2/viewer/denim/walk.glb",
+  "art/parts/carina-meshy-1/r2/viewer/grey/base.webp",
+  "art/parts/carina-meshy-1/r2/viewer/grey/idle.json",
+  "art/parts/carina-meshy-1/r2/viewer/grey/run.glb",
+  "art/parts/carina-meshy-1/r2/viewer/grey/sit.glb",
+  "art/parts/carina-meshy-1/r2/viewer/grey/walk.glb",
+  "art/parts/carina-meshy-1/r2/viewer/before/base.webp",
+  "art/parts/carina-meshy-1/r2/viewer/before/idle.json",
+  "art/parts/carina-meshy-1/r2/viewer/before/run.glb",
+  "art/parts/carina-meshy-1/r2/viewer/before/sit.glb",
+  "art/parts/carina-meshy-1/r2/viewer/before/walk.glb",
+  "art/parts/carina-meshy-1/r2/viewer/meshyrig/base.webp",
+  "art/parts/carina-meshy-1/r2/viewer/meshyrig/idle.json",
+  "art/parts/carina-meshy-1/r2/viewer/meshyrig/run.glb",
+  "art/parts/carina-meshy-1/r2/viewer/meshyrig/sit.glb",
+  "art/parts/carina-meshy-1/r2/viewer/meshyrig/walk.glb"
+ ],
+ "issue": 268
+}

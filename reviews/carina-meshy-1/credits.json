@@ -96,5 +96,18 @@
    "model": "art/parts/carina-meshy-1/meshy/carina-2-tex.glb",
    "height_meters": 1.1
   }
+ },
+ {
+  "service": "meshy",
+  "part": "carina-2-tex-sit",
+  "task": "01a10e9f-230f-764a-9845-ae3635690ea9",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 125,
+  "settings": {
+   "rig_task_id": "01a10d65-e575-7116-85b1-5b6d4f230c49",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  }
  }
 ]

@@ -2,7 +2,7 @@
  "title": "Carina: her 3D model, made the way Kuro, Aoi, Emi and Rei were",
  "date": "2026-10-05",
  "by": "Claude (carina-meshy agent)",
- "status": "decided",
+ "status": "superseded",
  "question": "The sheets marked ChatGPT pictures are pictures; every other sheet is a render of a real rigged model, which you can turn and play in the live viewer (first link). carina-2 is made from your approved picture of her and is her body in the game now; is she right?",
  "multi": false,
  "media": [
@@ -95,6 +95,10 @@
   }
  ],
  "links": [
+  {
+   "label": "Round 2: requested fixes and trouser colours",
+   "href": "bible/#review/carina-meshy-2"
+  },
   {
    "label": "Live 3D: carina-2 beside the in-game Eric, Mio, Kuro, Aoi and Emi (turn, zoom, idle, walk; switch attempts to compare; on the local server)",
    "href": "tools/characters/parts/viewer.html?cfg=/reviews/carina-meshy-1/viewer.json&a=carina-2&m=walk&c=Eric%2C%20Mio%2C%20Kuro%2C%20Aoi%20and%20Emi"

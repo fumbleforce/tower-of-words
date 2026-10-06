@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Carina round 2</title>
+    <script type="importmap">
+      { "imports": { "three": "../../game3d/vendor/three/three.module.js", "three/addons/": "../../game3d/vendor/" } }
+    </script>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; font: 15px/1.4 system-ui, sans-serif; color: #1d2327; background: #f6f7f8; }
+      main { display: grid; grid-template-columns: 1fr 360px; height: 100vh; }
+      #view { position: relative; min-height: 0; }
+      canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+      #tags { position: absolute; inset: 0; pointer-events: none; }
+      #tags div { position: absolute; transform: translate(-50%, 0); background: rgba(255, 255, 255, 0.88); border: 1px solid #c9d0d4;
+        border-radius: 5px; padding: 2px 6px; font-size: 12px; white-space: nowrap; }
+      aside { padding: 16px; overflow: auto; border-left: 1px solid #dde1e4; background: #fff; }
+      h1 { font-size: 18px; margin: 0 0 6px; }
+      p { margin: 0 0 10px; color: #5d676e; }
+      .row { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+      button { font: inherit; padding: 6px 10px; border: 1px solid #c9d0d4; border-radius: 6px; background: #fff; cursor: pointer; }
+      button[aria-pressed='true'] { background: #0f6e6e; border-color: #0f6e6e; color: #fff; }
+      label { display: block; font-weight: 600; margin: 10px 0 4px; }
+      #status { position: absolute; left: 12px; bottom: 10px; color: #5d676e; font-size: 13px; }
+      @media (max-width: 760px) { main { grid-template-columns: 1fr; grid-template-rows: 62vh auto; height: auto; } aside { border-left: 0; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div id="view"><canvas id="c"></canvas><div id="tags"></div><div id="status">loading</div></div>
+      <aside>
+        <h1 id="title">Carina round 2</h1>
+        <p id="blurb"></p>
+        <p>Left drag turns, right drag (or two fingers) pans, wheel or pinch zooms.</p>
+        <label>Show</label>
+        <div class="row" id="scenes"></div>
+        <label>Motion (the files the game would load)</label>
+        <div class="row" id="motions"></div>
+        <label>Walk and run: where they go</label>
+        <div class="row" id="ways"></div>
+        <label>Look closer</label>
+        <div class="row" id="views"></div>
+        <div class="row"><button id="spin" aria-pressed="false">Turntable</button><button id="slow" aria-pressed="false">Quarter speed</button></div>
+      </aside>
+    </main>
+    <script type="module" src="../crowd-pilot-2/viewer.js"></script>
+  </body>
+</html>

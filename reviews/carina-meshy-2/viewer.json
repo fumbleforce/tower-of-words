@@ -1,0 +1,99 @@
+{
+ "title": "Carina: round 2",
+ "blurb": "Real 3D models with the requested waist, head and trouser fixes. Denim is installed; grey is an alternative. Use walk, run and sit to check the same files the game loads. The separate Meshy rig attempt is kept for comparison.",
+ "rigs": {
+  "denim": {
+   "id": "carina",
+   "label": "carina-2-r2, denim",
+   "dir": "art/parts/carina-meshy-1/r2/viewer/denim/",
+   "idle": "art/parts/carina-meshy-1/r2/viewer/denim/idle.json",
+   "height": 1.12
+  },
+  "grey": {
+   "id": "carina",
+   "label": "carina-2-r2-grey",
+   "dir": "art/parts/carina-meshy-1/r2/viewer/grey/",
+   "idle": "art/parts/carina-meshy-1/r2/viewer/grey/idle.json",
+   "height": 1.12
+  },
+  "before": {
+   "id": "carina",
+   "label": "carina-2, before",
+   "dir": "art/parts/carina-meshy-1/r2/viewer/before/",
+   "idle": "art/parts/carina-meshy-1/r2/viewer/before/idle.json",
+   "height": 1.12
+  },
+  "meshyrig": {
+   "id": "carina",
+   "label": "Meshy rig attempt",
+   "dir": "art/parts/carina-meshy-1/r2/viewer/meshyrig/",
+   "idle": "art/parts/carina-meshy-1/r2/viewer/meshyrig/idle.json",
+   "height": 1.12
+  }
+ },
+ "scenes": {
+  "compare": {
+   "label": "Before, denim, grey",
+   "items": [
+    {
+     "rig": "before"
+    },
+    {
+     "rig": "denim"
+    },
+    {
+     "rig": "grey"
+    }
+   ]
+  },
+  "denim": {
+   "label": "carina-2-r2, denim",
+   "items": [
+    {
+     "rig": "denim"
+    }
+   ]
+  },
+  "grey": {
+   "label": "carina-2-r2-grey",
+   "items": [
+    {
+     "rig": "grey"
+    }
+   ]
+  },
+  "before": {
+   "label": "carina-2, before",
+   "items": [
+    {
+     "rig": "before"
+    }
+   ]
+  },
+  "meshyrig": {
+   "label": "Meshy rig attempt",
+   "items": [
+    {
+     "rig": "meshyrig"
+    }
+   ]
+  },
+  "rigs": {
+   "label": "Rig comparison",
+   "items": [
+    {
+     "rig": "denim"
+    },
+    {
+     "rig": "meshyrig"
+    }
+   ]
+  }
+ },
+ "closeups": [
+  "denim",
+  "grey",
+  "before",
+  "meshyrig"
+ ]
+}
