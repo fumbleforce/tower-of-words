@@ -1,0 +1,67 @@
+{
+  "title": "Shop street and map detail",
+  "date": "2026-10-06",
+  "by": "codex-exec:day5_build",
+  "caption": "Fitted shop windows and crane cabinets, with separate shop roofs and open alleys on the map.",
+  "sections": [
+    {
+      "title": "Street approach",
+      "caption": "The same ordinary play camera before and after the detail pass.",
+      "images": [
+        {
+          "id": "before-entry",
+          "image": "game3d/shots/codex-route-detail/before/shop-entry-desk.png",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "entry",
+          "image": "game3d/shots/codex-route-detail/round2b/shop-entry-desk.png",
+          "caption": "Window frames, sills and downpipes"
+        },
+        {
+          "id": "phone-entry",
+          "image": "game3d/shots/codex-route-detail/round2b/shop-entry-phone.png",
+          "caption": "Approach on phone"
+        }
+      ]
+    },
+    {
+      "title": "Arcade",
+      "caption": "Cabinet prizes and the hanging claw are visible through the fitted front. The normal phone camera still sees the shopfronts at an angle.",
+      "images": [
+        {
+          "id": "cabinet",
+          "image": "game3d/shots/codex-route-detail/round2b/game-centre-desk.png",
+          "caption": "Game centre, desktop"
+        },
+        {
+          "id": "phone-cabinet",
+          "image": "game3d/shots/codex-route-detail/round2b/game-centre-phone.png",
+          "caption": "Game centre, phone"
+        }
+      ]
+    },
+    {
+      "title": "Map landmarks",
+      "caption": "Roof groups follow the built arcade; the three south-row alleys remain open. Pool and tennis markings use the playable geometry.",
+      "images": [
+        {
+          "id": "map",
+          "image": "game3d/shots/codex-route-detail/round2b/map-1366.png",
+          "caption": "Desktop map"
+        },
+        {
+          "id": "phone-map",
+          "image": "game3d/shots/codex-route-detail/round2b/island-390.png",
+          "caption": "Phone map"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

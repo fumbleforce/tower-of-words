@@ -17,27 +17,7 @@ import { STEEL } from './outdoor/furniture.js';
 // [first bay, last bay, roof (below), extra height] per building; bays are numbered from the rows' west end
 // (island-south.js BAYS). The south row leaves out the alleys' bays (1, 6, 11). An extra height of 1.45 is a third
 // storey.
-export const BLOCKS = {
-  north: [
-    [0, 1, 'plant', 0.35],
-    [2, 3, 'pitch', 0],
-    [4, 4, 'garden', 0.7],
-    [5, 7, 'solar', 0],
-    [8, 9, 'pitch', 0.35],
-    [10, 10, 'screen', 1.45],
-    [11, 12, 'beds', 0],
-    [13, 14, 'pitch', 0.35],
-  ],
-  south: [
-    [0, 0, 'pitch', 0],
-    [2, 3, 'screen', 0.35],
-    [4, 5, 'beds', 0],
-    [7, 8, 'pitch', 0.35],
-    [9, 10, 'plant', 0],
-    [12, 12, 'solar', 1.45],
-    [13, 14, 'garden', 0.35],
-  ],
-};
+export { BLOCKS } from './shop-roof-plan.js';
 
 const C = {
   slabs: ['#868b92', '#90959b', '#7e838a'],
@@ -69,7 +49,10 @@ function slab(p, u0, u1, v0, v1, h, seed) {
     uc = (u0 + u1) / 2,
     vc = (v0 + v1) / 2;
   // the deck sits just under the parapet's top, so the roof reads as a roof and not a tray
-  p.box(C.slabs[seed % 3], w - 0.1, 0.14, d - 0.1, uc, h, vc, { cast: false });
+  p.box(C.slabs[seed % 3], w - 0.1, 0.14, d - 0.1, uc, h, vc, {
+    cast: false,
+    surf: 'roof',
+  });
   for (const v of [v0 + 0.1, v1 - 0.1]) {
     p.box(C.parapet, w, 0.22, 0.2, uc, h, v);
     p.box(C.coping, w + 0.04, 0.05, 0.26, uc, h + 0.22, v);
@@ -82,8 +65,12 @@ function slab(p, u0, u1, v0, v1, h, seed) {
 
 // a condenser: a pale box with a grey fan disc on its top
 function condenser(p, u, v, h) {
-  p.box(C.plant, 0.95, 0.5, 0.7, u, h, v);
-  p.geo(C.fan, new THREE.CylinderGeometry(0.25, 0.25, 0.04, 10).translate(u, h + 0.5, v));
+  p.box(C.plant, 0.95, 0.5, 0.7, u, h, v, { surf: 'metal' });
+  for (const x of [-0.32, 0.32]) p.box(STEEL.dark, 0.09, 0.09, 0.62, u + x, h - 0.06, v);
+  for (let y = 0.12; y < 0.42; y += 0.065) p.box(C.fan, 0.66, 0.018, 0.016, u, h + y, v + 0.354, { cast: false });
+  p.geo(C.fan, new THREE.CylinderGeometry(0.25, 0.25, 0.04, 16).translate(u, h + 0.5, v));
+  for (const x of [-0.14, -0.07, 0, 0.07, 0.14])
+    p.box(C.louvre, 0.015, 0.018, 0.38, u + x, h + 0.523, v, { cast: false });
 }
 // the stair hut, its door facing along the roof (dir: +1 east, -1 west), a flat cap over it
 function hut(p, u, v, h, dir) {
@@ -137,23 +124,33 @@ function gardenRoof(p, beds, u0, u1, v0, v1, h, seed) {
     uc = (u0 + u1) / 2,
     y = h + 0.14;
   if (beds) {
-    p.box(C.gravel, u1 - u0 - 0.6, 0.03, v1 - v0 - 0.6, uc, y, vc, { cast: false });
+    p.box(C.gravel, u1 - u0 - 0.6, 0.03, v1 - v0 - 0.6, uc, y, vc, {
+      cast: false,
+    });
     const n = Math.max(2, Math.round((u1 - u0) / 2.6));
     for (let i = 0; i < n; i++) {
       const u = u0 + ((u1 - u0) * (i + 0.5)) / n,
         v = vc + (i % 2 ? 0.9 : -0.9);
       p.box(C.planter, 1.3, 0.4, 1.3, u, y, v);
       p.box(LEAF.cover, 1.15, 0.04, 1.15, u, y + 0.4, v, { cast: false });
-      cluster(p, u, v, { n: 4, r: 0.32, spread: 0.38, seed: seed + i, y: y + 0.4 });
+      cluster(p, u, v, {
+        n: 4,
+        r: 0.32,
+        spread: 0.38,
+        seed: seed + i,
+        y: y + 0.4,
+      });
     }
     p.box(C.deck, 1.6, 0.05, 1.0, uc, y, vc - (n % 2 ? 0.9 : 0));
     return;
   }
-  p.box(C.deck, u1 - u0 - 1.2, 0.05, 1.6, uc, y, vc);
+  p.box(C.deck, u1 - u0 - 1.2, 0.05, 1.6, uc, y, vc, { surf: 'door' });
   for (let u = u0 + 0.9; u < u1 - 0.6; u += 0.3) p.box(C.deckLine, 0.03, 0.06, 1.6, u, y, vc);
   for (const v of [v0 + 0.65, v1 - 0.65]) {
     p.box(C.planter, u1 - u0 - 0.6, 0.35, 0.7, uc, h, v);
-    p.box(LEAF.cover, u1 - u0 - 0.75, 0.04, 0.55, uc, h + 0.35, v, { cast: false });
+    p.box(LEAF.cover, u1 - u0 - 0.75, 0.04, 0.55, uc, h + 0.35, v, {
+      cast: false,
+    });
     for (let u = u0 + 0.6; u < u1 - 0.5; u += 0.6 + hash2(u, v, seed) * 0.9)
       mound(p, u, v, 0.24 + hash2(v, u, seed) * 0.16, GREENS[Math.floor(u * 3) % 3], { y: h + 0.35 });
   }

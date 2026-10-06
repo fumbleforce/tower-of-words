@@ -11,6 +11,7 @@ import { BLOCKS, roof, arcadeRoof } from './shop-roofs.js';
 import { signSet } from './shop-signs.js';
 import { drain } from '../perf/slice.js';
 import { facadeDrainage } from './outdoor/facade-detail.js';
+import { shopWindow, shopShell } from './shotengai/facades.js';
 
 // parts merged into one mesh of one material (the parts are disposed)
 export function merged(parts, material, { cast = true } = {}) {
@@ -186,7 +187,8 @@ export function* shopStreetSteps(
     awnings = [[], [], []],
     top = new Parts(),
     far = new Parts(),
-    arc = new Parts();
+    arc = new Parts(),
+    fittings = new Parts();
   const AWN = ['#6e7f8c', '#7d7a8c', '#6f8474'];
   const bayW = bays.w,
     uOf = (i) => bays.u0 + bayW * i; // a bay's west side
@@ -215,6 +217,17 @@ export function* shopStreetSteps(
         f = row.front + row.dirF * 0.03,
         b = row.back - row.dirF * 0.03;
       walls[(bi * 3 + ri) % 4].push(box(ub - ua - 0.06, h, depth, (ua + ub) / 2, 0, vc));
+      shopShell(fittings, {
+        ua,
+        ub,
+        v0: row.v0,
+        depth,
+        h,
+        floorH: storeyH,
+        front: f,
+        back: b,
+        n: row.dirF,
+      });
       trims.push(box(ub - ua - 0.06, 0.22, 0.12, (ua + ub) / 2, H - 0.02, row.front + row.dirF * 0.02));
       roof(ri ? far : top, kind, ua + 0.03, ub - 0.03, row.v0, row.v0 + depth, h, bi * 7 + ri, ri ? 1 : -1);
       for (let i = i0; i <= i1; i++) {
@@ -231,7 +244,13 @@ export function* shopStreetSteps(
               .translate(u, storeyH * 0.9, row.front + row.dirF * 0.4),
           );
         for (let s = 1; s < storeys; s++)
-          for (const o of [-1, 1]) panes.push(box(1.2, storeyH * 0.45, 0.05, u + o * 1.05, storeyH * (s + 0.28), f));
+          for (const o of [-1, 1]) {
+            const wy = storeyH * (s + 0.28);
+            panes.push(box(1.2, storeyH * 0.45, 0.05, u + o * 1.05, wy, f));
+            shopWindow(fittings, u + o * 1.05, wy, f, 1.2, storeyH * 0.45, {
+              n: row.dirF,
+            });
+          }
         // the back: a window on each upper floor, a door, a condenser on the wall
         for (let s = 1; s < storeys; s++) panes.push(box(0.9, storeyH * 0.38, 0.05, u + 0.9, storeyH * (s + 0.32), b));
         trims.push(box(0.8, storeyH * 0.8, 0.05, u - 1.2, 0, b));
@@ -243,8 +262,14 @@ export function* shopStreetSteps(
         [i1 === bays.n - 1, ub + 0.03],
       ])
         for (let s = 0; end && s < storeys; s++)
-          for (const o of [-1.1, 1.1])
-            panes.push(box(0.05, storeyH * 0.42, 1.0, ue, storeyH * (s + (s ? 0.3 : 0.36)), vc + o));
+          for (const o of [-1.1, 1.1]) {
+            const wy = storeyH * (s + (s ? 0.3 : 0.36));
+            panes.push(box(0.05, storeyH * 0.42, 1.0, ue, wy, vc + o));
+            shopWindow(fittings, ue, wy, vc + o, 1, storeyH * 0.42, {
+              side: true,
+              n: ue < ua ? -1 : 1,
+            });
+          }
       yield;
     }
   // the arcade's glass roof over the walk between the rows, on thin posts
@@ -253,7 +278,13 @@ export function* shopStreetSteps(
   const posts = [];
   for (let u = uMin + 1; u < uMax; u += bayW)
     for (const v of [depth + 0.35, depth * 2 - 0.35]) posts.push(box(0.1, H + 0.1, 0.1, u, 0, v));
-  walls.forEach((parts, k) => parts.length && g.add(merged(parts, mat(TOWN.walls[k]))));
+  walls.forEach((parts, k) => {
+    if (!parts.length) return;
+    const mesh = merged(parts, mat(TOWN.walls[k]));
+    mesh.userData.surf = 'plaster';
+    g.add(mesh);
+  });
+  fittings.build(g);
   g.add(merged(trims, mat('#8c939b')));
   g.add(merged(panes, glass, { cast: false }));
   yield;
