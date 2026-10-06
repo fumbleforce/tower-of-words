@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { test } from 'node:test';
+import { expandMc, PROTAGONISTS } from '../../js/mc.js';
 import { STORY_FILES, buildGraph } from '../../../bible/story-graph.js';
 import { assertRegistered, assertPlaceRegistered } from '../../js/narrative/registration.js';
 import { DEFAULT_SPEAKERS, PORTRAITS, ITEMS, PLACE_DETAILS } from '../../js/narrative/contracts.js';
@@ -16,7 +17,7 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   const files = {}, mods = {};
   for (const name of STORY_FILES) {
     const file = `game3d/story/${name}.js`;
-    mods[name] = (await import(new URL(file, root))).default;
+    mods[name] = expandMc(structuredClone((await import(new URL(file, root))).default), PROTAGONISTS.eric);
     files[file] = fs.readFileSync(new URL(file, root), 'utf8');
   }
   const graph = buildGraph({ files, mods });

@@ -40,7 +40,7 @@ export default {
       ], else: direction('plaza_lane', 'plaza_lane', 'kenji', 'plaza_lane') },
     ],
     d2_meet_kenji: [
-      { say: 'kenji', emo: 'bright', text: 'Eric! This way. Mori-san is there.' },
+      { say: 'kenji', emo: 'bright', text: '{mc.name}! This way. Mori-san is there.' },
       { set: 'd2_met_kenji' }, { do: 'walk', who: 'kenji', to: 'party_kenji', wait: false },
       { do: 'goal', text: 'Join the others at the sea-facing bench.', at: 'party_seat' },
     ],
@@ -59,7 +59,7 @@ export default {
       { say: 'kenji', emo: 'bright', text: '{tabetai}!' },
       { say: 'kenji', emo: 'slow', slow: true, text: '{tabetai}...' },
       { say: 'kenji', emo: 'bright', text: 'Is “want eat”. Me, yes!' },
-      { say: 'mori', emo: 'warm', text: 'エリックさんは、どちらがいいですか。', en: 'Which would you like, Eric?' },
+      { say: 'mori', emo: 'warm', text: '{mc.called.mori}は、どちらがいいですか。', en: 'Which would you like, {mc.name}?' },
       { choice: [
         { text: 'I’d like a rice ball.', set: { d2_food: 'riceball' }, go: 'd2_take_food' },
         { text: 'An egg sandwich, please.', set: { d2_food: 'sandwich' }, go: 'd2_take_food' },
@@ -122,7 +122,7 @@ export default {
       { say: 'eric', emo: 'warm', text: 'I’m going to head back. Thank you for tonight.' },
       { say: 'mori', emo: 'warm', text: '気をつけて。おやすみなさい。', en: 'Take care. Goodnight.' },
       { say: 'mio', emo: 'tired', text: 'Night. Give Mori-san a hand with the boxes, Kenji.' },
-      { say: 'kenji', emo: 'bright', text: 'Yes! See you Monday, Eric. Computer game also, maybe?' },
+      { say: 'kenji', emo: 'bright', text: 'Yes! See you Monday, {mc.name}. Computer game also, maybe?' },
       { do: 'stand', who: 'eric' }, { set: 'd2_party_done' }, { set: 'going_home' },
       { do: 'partySetup', state: 'pack' },
       { do: 'goal', text: 'Head home when you’re ready. Your room is 203.', at: 'plaza_lane' }, { do: 'save' },

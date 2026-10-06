@@ -178,7 +178,7 @@ export default {
       { do: 'meet', who: 'kenji' },
       { do: 'face', who: 'kenji', to: 'eric' },
       { say: 'kenji', face: 'grin', emo: 'bright', text: 'あ！新しい人！', overheard: true },
-      { say: 'kenji', face: 'grin', emo: 'excited', text: "Eric-san? I am Kenji! Two months here, so now I am not the newest. Ah, sorry, your chair... I borrowed it. Mine is broken." },
+      { say: 'kenji', face: 'grin', emo: 'excited', text: "{mc.name}-san? I am Kenji! Two months here, so now I am not the newest. Ah, sorry, your chair... I borrowed it. Mine is broken." },
       { do: 'gesture', who: 'kenji', kind: 'point' },
       { do: 'face', who: 'kenji', to: 'machine_door' },
       { say: 'kenji', face: 'grin', emo: 'bright', text: "I bring it back for you! It's in machine room, with the cat. Norway has the big forest cats, right? I see on YouTube, they are so big, like..." },
@@ -455,7 +455,7 @@ export default {
       { set: 'afternoon_on' },
       '> 14:00.',
       { if: 'hamada_friend', then: [
-        '> A box of rice crackers comes down from the twelfth floor, with a card in shaky capitals. TO B2 ERIC. THANK YOU. 12F HAMADA.',
+        '> A box of rice crackers comes down from the twelfth floor, with a card in shaky capitals. TO B2 {mc.name_caps}. THANK YOU. 12F HAMADA.',
         { say: 'mori', emo: 'warm', overheard: true, text: '経理の浜田さんから？珍しい。' },
         '> Mori hands the crackers round. Even Mio takes one.',
         { do: 'bond', who: 'mori', add: 1 },
@@ -559,7 +559,7 @@ export default {
       { do: 'face', who: 'emi', to: 'eric' },
       { do: 'cam', on: 'emi', zoom: 1.6 },
       { do: 'meet', who: 'emi' },
-      { say: 'emi', emo: 'bright', text: "You must be Eric. Emi, I run this lot. Sorry I wasn't about, I've been upstairs since seven begging for money." },
+      { say: 'emi', emo: 'bright', text: "You must be {mc.name}. Emi, I run this lot. Sorry I wasn't about, I've been upstairs since seven begging for money." },
       { say: 'eric', emo: 'tired', text: 'How did it go?' },
       { say: 'emi', emo: 'bright', text: "I got it. Well. I may have told them B2 can keep every machine on this island running for another ten years." },
       { say: 'emi', emo: 'bright', text: "With the right contractor, I said. So, welcome aboard. Tomorrow you and I should have a proper chat about what you can actually do." },
@@ -571,7 +571,7 @@ export default {
     ending: [
       { do: 'cam', on: 'mio', zoom: 1.6 },
       { do: 'goal', text: '' },
-      { if: 'lunch_mio', then: [{ say: 'mio', face: 'neutral', emo: 'hesitant', text: "Okay, I'm going home. Um... Eric?" }], else: [{ say: 'mio', face: 'neutral', emo: 'hesitant', text: "Okay, I'm going home. Hey, {gaijin}." }] },
+      { if: 'lunch_mio', then: [{ say: 'mio', face: 'neutral', emo: 'hesitant', text: "Okay, I'm going home. Um... {mc.name}?" }], else: [{ say: 'mio', face: 'neutral', emo: 'hesitant', text: "Okay, I'm going home. Hey, {gaijin}." }] },
       { say: 'mio', emo: 'low', text: "On the train you said {matte} and the doors just stopped. And Mori-san says {ugoite} to that copier every morning for thirty years, and today it works for you." },
       { if: 'gate_magic', then: [{ say: 'mio', emo: 'low', text: "And now everybody upstairs is talking about the lobby gate. That was {akete}, I guess?" }] },
       { if: 'lunch_mio', then: [{ say: 'mio', emo: 'dry', text: "And the rack, {tomatte}. That one I asked you, so... that one is my fault." }] },
@@ -595,7 +595,7 @@ export default {
       { say: 'mio', face: 'embarrassed', emo: 'low', text: "It was supposed to go on my list. ...Okay, I'm putting it on yours." },
       { do: 'phone', who: 'mio', state: 'away' },
       { do: 'sound', name: 'beep' },
-      '> REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: ERIC.',
+      '> REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: {mc.name_caps}.',
       { if: 'lunch_mio || mio_warm >= 2', then: [
         { say: 'mio', face: 'smile', emo: 'teasing', text: "Tomorrow morning you go down to the station, okay? I'll come too. I want to see how you, um... fix a sensor." },
       ], else: [
@@ -621,9 +621,9 @@ export default {
     // ------------------------------------------------------------------ things to poke
     tama: ['> She opens one eye, and closes it again.'],
     tama_ohayo: [{ do: 'emote', who: 'tama', kind: 'heart' }],
-    desk_look: ['> Your name card, in katakana. Someone has written ERIC under it in pen, just in case.'],
+    desk_look: ['> Your name card, in katakana. Someone has written {mc.name_caps} under it in pen, just in case.'],
     irete_kettle: [{ do: 'kettle', state: 'pour' }, '> The pot pours you a cup of tea.'],
-    inout_board: ['> Four names in Japanese, and one new magnet in capitals: ERIC.'],
+    inout_board: ['> Four names in Japanese, and one new magnet in capitals: {mc.name_caps}.'],
     covered: ["> There's no dust on the name card in front of it."],
     stairs: ['> The stairs up. A line of small paw prints goes up them in the dust.'],
     ugoite_coffee: [{ do: 'coffee' }, '> It gurgles, then goes quiet again.'],

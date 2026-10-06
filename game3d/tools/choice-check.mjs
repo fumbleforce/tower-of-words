@@ -2,6 +2,7 @@
 // machine takes no second order until 動いて, and the "mum" question on the train needs its setup line first.
 // node game3d/tools/choice-check.mjs  (bugs from notes/day1-choice-review-codex.md)
 import { giveItem } from '../js/gameplay/gifts.js';
+import { expandMc, PROTAGONISTS } from '../js/mc.js';
 import path from 'node:path';
 import { register } from 'node:module';
 import { pathToFileURL } from 'node:url';
@@ -19,7 +20,7 @@ let pick = () => 0, offered = [];
 globalThis.__ui = { say: async () => {}, closeTalk() {}, caption() {}, toast() {}, refreshWords() {}, introSay() {},
   choose: async (_w, _t, opts) => { const texts = opts.map((o) => o.html); offered.push(texts); return pick(texts); } };
 const { Runner, flags } = await import(pathToFileURL(path.join(root, 'js/runner.js')).href);
-const load = async (n) => (await import(pathToFileURL(path.join(root, `story/${n}.js`)).href)).default;
+const load = async (n) => expandMc(structuredClone((await import(pathToFileURL(path.join(root, `story/${n}.js`)).href)).default), PROTAGONISTS.eric);
 
 let fails = 0;
 const ok = (c, msg) => { if (!c) { fails++; console.log('FAIL ' + msg); } };

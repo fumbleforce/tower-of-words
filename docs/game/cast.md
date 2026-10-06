@@ -46,6 +46,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Eric (`eric`)
 
+- The default protagonist. Carina can play instead: a woman with the same bio and job, bisexual. The stable story id `eric` means the player whichever protagonist is chosen. Identity and asset selections come from game3d/data/mc/; see [Protagonists](systems.md#protagonists) for configuration and voice status.
 - The player. From Norway. Age not decided (old prompts said 34 or 29).
 - Work: IT support on B2, on a support contract to keep Amakawa's ancient systems running ([setting.md](setting.md)). Repair requests will take him all over the island.
 - Home: moving to the island on day 1; his things were sent ahead. A company dorm room, the worst one, facing a concrete wall a couple of metres away (decided for the VN version, 2026-09-25): room 203 on 2F (built as `dorms`, [places.md](places.md)).

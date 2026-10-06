@@ -186,11 +186,11 @@ export default {
       { say: 'mio', emo: 'dry', face: 'deadpan', text: "Ahh, you're the support contract? Mori-san said a {gaijin} is coming to help with the old machines. Amakawa never replaces anything, so, um... some of them are older than me." },
       { say: 'eric', emo: 'tired', text: 'A what?' },
       { do: 'type', word: 'gaijin', from: 'mio', prompt: 'mio: Gaijin. Um, foreigner? So... you, obviously.' },
-      { say: 'mio', emo: 'teasing', face: 'neutral', text: "Mm, like that. Don't worry, it's not mean, it's like saying “the new guy”. Only, you stay new guy for, um, maybe ten years." },
+      { say: 'mio', emo: 'teasing', face: 'neutral', text: "Mm, like that. Don't worry, it's not mean, it's like saying “the {mc.new_person}”. Only, you stay {mc.new_person} for, um, maybe ten years." },
       { say: 'mio', emo: 'dry', face: 'neutral', text: "I'm Mio. I'm also B2, so... same team, I guess." },
       { set: 'mio_named' },
       { choice: [
-        { text: '“I\'m Eric.”', go: 'its_eric' },
+        { text: '“I\'m {mc.name}.”', go: 'its_eric' },
         // only once she has mentioned her mother (catching or dropping the bag); not when she caught it herself
         { text: '“Were you visiting your mum?”', go: 'family', if: 'heard_mum' },
         { text: 'Just nod', go: 'leave_it' },

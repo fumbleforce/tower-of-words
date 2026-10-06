@@ -50,7 +50,7 @@ export default {
     d2_invitation: [
       { say: 'emi', emo: 'casual', text: 'Your repair list is on the computer. Mori’s left his notes beside it; have a look through them this afternoon.' },
       { do: 'cam', on: 'kenji', zoom: 1.2 },
-      { say: 'kenji', emo: 'bright', text: 'Eric! After work. Food. Welcome food!' },
+      { say: 'kenji', emo: 'bright', text: '{mc.name}! After work. Food. Welcome food!' },
       { do: 'cam', on: 'emi', zoom: 1.2 },
       { say: 'emi', emo: 'bright', text: 'Mori’s been arranging it. I’ve another meeting upstairs, so don’t wait for me.' },
       { say: 'eric', emo: 'warm', text: 'That’s kind of him.' },
