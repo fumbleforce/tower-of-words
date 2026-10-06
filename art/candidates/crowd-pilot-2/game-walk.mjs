@@ -10,7 +10,8 @@
 import fs from 'node:fs';
 import { withBrowserJob } from '../../../tools/lib/browser-job.mjs';
 
-const WT = 'http://127.0.0.1:8771/.claude/worktrees/agent-a65d0e4170275dcf7/';
+// WT: the served worktree the game loads from (default: the one this round ran in)
+const WT = process.env.WT || 'http://127.0.0.1:8771/.claude/worktrees/agent-a65d0e4170275dcf7/';
 const [cfg, out, place = 'forecourt', W = 1366, H = 860] = process.argv.slice(2);
 const FRAMES = +(process.env.FRAMES || 16), EVERY = +(process.env.EVERY || 0.1); // game seconds between frames
 fs.mkdirSync(out, { recursive: true });

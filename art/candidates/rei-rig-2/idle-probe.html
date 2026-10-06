@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>rei-rig-2 idle probe</title>
+    <script type="importmap">
+      { "imports": { "three": "../../../game3d/vendor/three/three.module.js", "three/addons/": "../../../game3d/vendor/" } }
+    </script>
+    <script type="module">
+      // The idle as the game plays it (avatar.js meshyFrom), measured two ways: straight from rest ("settled", nothing
+      // before it) and after 2 s of walking, as crowd-pilot-2's probe does it ("after walk": the walk-to-idle hand-over
+      // counts). Hips and head travel over 6 s in leg lengths; elbow bend (min, max) in degrees.
+      import * as THREE from 'three';
+      import { GLTFLoader } from '../../../game3d/vendor/loaders/GLTFLoader.js';
+      import { meshyFrom } from '../../../game3d/js/avatar.js';
+      const gl = new GLTFLoader();
+      const W = (o) => o.getWorldPosition(new THREE.Vector3());
+      const ang = (a, b, c) => {
+        const u = a.clone().sub(b).normalize(), v = c.clone().sub(b).normalize();
+        return 180 - (Math.acos(Math.max(-1, Math.min(1, u.dot(v)))) * 180) / Math.PI;
+      };
+      async function person(p) {
+        const d = p.dir;
+        const f = await Promise.all([gl.loadAsync(d + 'walk.glb'), gl.loadAsync(d + 'run.glb'),
+          fetch(p.idle).then((r) => r.json()).then((j) => THREE.AnimationClip.parse(j)), gl.loadAsync(d + 'sit.glb'),
+          new THREE.TextureLoader().loadAsync(d + 'base.webp')]);
+        return meshyFrom(p.label, [...f, null], { height: p.height });
+      }
+      function run(m, walkFirst) {
+        const B = {};
+        m.model.traverse((o) => o.isBone && (B[o.name] ??= o));
+        const dt = 1 / 60;
+        m.root.position.set(0, 0, 0);
+        m.setState('idle');
+        for (let i = 0; i < 60; i++) m.update(dt);
+        if (walkFirst) {
+          m.setState('walk');
+          m.setGait(null);
+          for (let i = 0; i < 120; i++) { m.root.position.z += 0.2 * dt; m.update(dt); }
+          m.setState('idle');
+        }
+        const rows = [];
+        for (let i = 0; i < 360; i++) {
+          m.update(dt);
+          m.root.updateMatrixWorld(true);
+          const r = {};
+          for (const k of ['Hips', 'Head', 'LeftArm', 'LeftForeArm', 'LeftHand', 'RightArm', 'RightForeArm', 'RightHand']) r[k] = W(B[k]);
+          rows.push(r);
+        }
+        const L = rows[0].Hips.y - m.root.position.y;
+        const span = (k) => ['x', 'y', 'z'].reduce((s, c) => s + Math.max(...rows.map((r) => r[k][c])) - Math.min(...rows.map((r) => r[k][c])), 0) / L;
+        const el = (s) => { const v = rows.map((r) => ang(r[s + 'Arm'], r[s + 'ForeArm'], r[s + 'Hand'])); return [Math.min(...v), Math.max(...v)].map((x) => Math.round(x)); };
+        return { hips: +span('Hips').toFixed(3), head: +span('Head').toFixed(3), elbow: [el('Left'), el('Right')] };
+      }
+      const cfg = await fetch(new URLSearchParams(location.search).get('cfg')).then((r) => r.json());
+      const res = [];
+      for (const p of cfg) res.push({ label: p.label, settled: run(await person(p), false), afterWalk: run(await person(p), true) });
+      window.__probe = res;
+    </script>
+  </head>
+  <body></body>
+</html>
