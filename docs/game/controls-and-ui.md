@@ -123,6 +123,7 @@ Jørgen, 2026-10-05: "I want a minimap I can click, giving me a full interactive
 - Desktop: the map on the left with a legend bottom left and "Drag to pan · wheel to zoom · M or Esc closes"; a side panel on the right with the card at the top (Go there carries its Enter key cap) and every place listed under Here, Fast travel (with the minutes on foot), Can't go now and Not open today. Up and Down move through the list and pick as they go; Enter (or a second click) on the picked row goes there. It opens showing the whole island, with the place he is in picked.
 - Phone: the map fills the screen and opens on Eric; drag to pan, pinch to zoom. The card is a bottom sheet: "Tap a place to see it. Drag or pinch to move the map." until a pin is tapped, then the card with Cancel and Go there. Interior destinations have tap targets at least 44 px tall.
 - Go there closes the map and fast travels (systems.md, Fast travel). Picking a place he can go to starts building it, so it is mostly ready by the time Go there is pressed.
+- Different floors of one building share its island footprint: the player arrow and goal marker stay over the building when the scene stages its floors beside each other.
 
 ## Camera
 
