@@ -10,13 +10,16 @@ import { sfx, unlock, muted, setMuted } from './audio.js';
 import { word } from '../common/sound.js';
 import { sleep } from './fx.js';
 import { jp } from '../common/jp.js';
+import { configureStory, storyConfig } from './story-session.js';
+
+const story = await storyConfig().then(config => config && configureStory(config));
 
 const opts = { en: true, polite: false };
 let run, tokens = [], explicit = null, busy = false, lines = [], guide = null, daily = true, seed = 0;
 const seen = new Set();
 // What this device has been taught already, so a second run starts without the walkthrough.
-const taught = k => localStorage.getItem(`kd-taught-${k}`) === '1';
-const learn = k => localStorage.setItem(`kd-taught-${k}`, '1');
+const taught = k => story ? story.mode === 'rounds' : localStorage.getItem(`kd-taught-${k}`) === '1';
+const learn = k => !story && localStorage.setItem(`kd-taught-${k}`, '1');
 const mg = (window.mg = { expect: null, steps: 0, done: false });
 const expect = e => {
   mg.expect = e;
@@ -202,6 +205,11 @@ async function fire() {
   const res = resolve(run, st, opts.polite);
   Object.assign(run.said[run.said.length - 1], { markup: m, en: english(st, opts.polite) });
   await act(st, res, plainText(m));
+  if (story?.delivered(res)) {
+    guide = null;
+    pointAt(null);
+    return;
+  }
   lastPoints(res);
   const L = [];
   const note = afterword(st, res);
@@ -288,8 +296,8 @@ function beginShift() {
   sfx.shift();
   guide = null;
   if (run.shift === 0) {
-    const ask = says('ask', 'kenji', 'cola');
-    if (!taught('first')) startGuide(TUTORIAL, [ask]);
+    const ask = says('ask', 'kenji', story ? 'melon' : 'cola');
+    if (!taught('first')) startGuide(story?.guide || TUTORIAL, [ask]);
     else setTalk([line('mio', COACH.first[0], COACH.first[1], 'coach'), ask]);
   } else if (run.shift === 1) {
     const coach = line('mio', COACH.shift2[0], COACH.shift2[1], 'coach');
@@ -298,7 +306,7 @@ function beginShift() {
       const taps = [['thing', p.who[0]], ['p', 'to'], ['thing', p.who[1]], ['p', 'ni'], ['thing', p.item], ['p', 'o'], ['fire']];
       startGuide([{ taps, text: TO_STEP }], [coach], 'と');
     } else setTalk([line('mio', COACH.shift2how[0], COACH.shift2how[1], 'coach')]);
-  } else setTalk([line('mio', COACH.shift3[0], COACH.shift3[1], 'coach')]);
+  } else setTalk(story ? [says('ask', 'mori', 'pudding')] : [line('mio', COACH.shift3[0], COACH.shift3[1], 'coach')]);
   render();
   nextExpect();
 }
@@ -314,8 +322,8 @@ function shiftEnd() {
   const offers = pool.slice(0, 3);
   sfx.shift();
   overlay(`<div class="sheet shift-card">
-    <p class="k-time">${next.time}</p>
-    <h2>Shift ${run.shift + 1} done</h2>
+    <p class="k-time">${story ? 'B2' : next.time}</p>
+    <h2>${story ? 'Round' : 'Shift'} ${run.shift + 1} done</h2>
     <p class="sub">${run.score} points · ${run.hearts} ${run.hearts === 1 ? 'heart' : 'hearts'} left. Next: ${next.people.length} people, ${next.machines.length} machines. Pick one word to take into it.</p>
     <div class="cards">${offers.map(powerCard).join('')}</div></div>`, 'between');
   for (const b of document.querySelectorAll('.overlay .card'))
@@ -334,13 +342,13 @@ function end() {
   const key = daily ? `kd-best-${seed}` : 'kd-best-free';
   const was = Number(localStorage.getItem(key) || 0);
   const best = Math.max(was, run.score);
-  localStorage.setItem(key, String(best));
+  if (!story) localStorage.setItem(key, String(best));
   const top = run.best && run.said[run.best.i];
   const list = [...run.said].filter(s => s.markup).sort((a, b) => b.points - a.points).slice(0, 5);
   const out = run.hearts <= 0;
   sfx.shift();
   overlay(`<div class="sheet end-card">
-    <p class="k-time">${out ? 'Out of hearts' : '20:00 · B2 closes'}</p>
+    <p class="k-time">${out ? 'Out of hearts' : story ? 'Rounds complete' : '20:00 · B2 closes'}</p>
     <div class="e-score"><b>${run.score}</b><span class="e-stars">${stars(run.score)}</span></div>
     <p class="sub">${run.served} requests served${run.score >= was && was ? ' · new best' : ''}${daily ? ` · today’s best ${best}` : ''}</p>
     ${top ? `<div class="e-best"><small>Biggest command · ${top.points} points</small><div class="jp">${jp(top.markup)}</div><div class="gl">${top.en}</div></div>` : ''}
@@ -363,7 +371,8 @@ function start(isDaily) {
   daily = isDaily;
   seed = isDaily ? daySeed() : Math.floor(Math.random() * 1e9);
   run = newRun(seed);
-  opts.polite = false;
+  opts.polite = !!story;
+  if (story) run.powers.add('kudasai');
   seen.clear();
   overlay('');
   $('.score').textContent = '0';
@@ -431,7 +440,14 @@ function boot() {
     } else return;
     e.preventDefault();
   });
-  title();
+  if (story) {
+    const leave = document.createElement('button');
+    leave.className = 'chip story-leave';
+    leave.textContent = story.mode === 'first' ? 'Leave the demonstration' : 'Back to B2';
+    leave.onclick = () => { if (!busy) story.leave(); };
+    document.querySelector('.h-right').prepend(leave);
+    start(false);
+  } else title();
 }
 
 function toggleSound(b) {

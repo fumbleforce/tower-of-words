@@ -93,8 +93,8 @@ export function lastPoints(res) {
 }
 
 export function hud(run, shift, opts) {
-  $('.h-clock').textContent = shift ? shift.time : '17:00';
-  $('.h-shift').textContent = run.shift >= 0 ? `shift ${run.shift + 1} of 3` : '';
+  $('.h-clock').textContent = shift?.story ? 'B2' : shift ? shift.time : '17:00';
+  $('.h-shift').textContent = run.shift >= 0 ? `${shift?.story ? 'Round' : 'shift'} ${run.shift + 1} of 3` : '';
   $('.hearts').innerHTML = Array.from({ length: 3 }, (_, i) => `<i class="${i < run.hearts ? 'on' : ''}"></i>`).join('');
   const st = $('.streak');
   st.hidden = run.streak < 1;

@@ -52,7 +52,7 @@ function floorLine() {
 /** Lays out one shift: its machines and people, the clock at its hour. */
 export function setShift(ix) {
   const sh = SHIFTS[ix];
-  room.querySelector('.clockwrap').innerHTML = clock(Number(sh.time.slice(0, 2)));
+  room.querySelector('.clockwrap').innerHTML = sh.story ? '' : clock(Number(sh.time.slice(0, 2)));
   const machines = room.querySelector('.machines');
   const people = room.querySelector('.people');
   machines.innerHTML = '';
