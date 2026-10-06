@@ -8,7 +8,7 @@ Jørgen then rejected the revised controls: "that is just a free camera, it is n
 
 The boom tracks character position directly. Moving forward keeps the view behind travel; lateral or backward input does not automatically rotate the camera and bend movement. Idle retains the last view, and Reset view explicitly recentres behind the character. The scene preview frames two actual nearby characters with movement paused, and Return to walking offers Play again. Existing collision and gait are reused; third-person remains desktop only.
 
-The demo uses memory-only storage, private mode off and disabled story triggers. Camera rays pull in at obstructions. Cutaway walls, pins, authored story transitions and conversation integration remain prototype limits. Production camera code and defaults are unchanged. The review remains open for the GTA-style controls and framing. The earlier proposal below is retained for unimplemented production work; these decisions override its old automatic follow and phone assumptions.
+The demo uses memory-only storage, private mode off and disabled story triggers. Camera rays pull in at obstructions. Cutaway walls, pins, authored story transitions and conversation integration remain prototype limits. Production camera code and defaults are unchanged. The GTA-style prototype is approved as v1; the decision is in reviews/camera-plan-1/review.json. Production integration remains tracked in #265. The earlier proposal below is retained for unimplemented production work; these decisions override its old automatic follow and phone assumptions.
 
 ## What is there now
 
