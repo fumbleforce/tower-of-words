@@ -1,0 +1,1570 @@
+[
+ {
+  "label": "Rei (game, our rig)",
+  "bones": 14,
+  "strides": {
+   "walkV": 0.5766683561557571,
+   "runV": 1.3400015963361542,
+   "runOff": 0.03
+  },
+  "viewerWalk": {
+   "states": [
+    "0.25s walk",
+    "0.50s walk",
+    "0.75s walk",
+    "1.00s walk",
+    "1.25s walk",
+    "1.50s walk",
+    "1.75s walk",
+    "2.00s walk",
+    "2.25s walk",
+    "2.50s walk",
+    "2.75s walk",
+    "3.00s walk"
+   ],
+   "maxFootGap": 0.027
+  },
+  "walk": {
+   "motion": "walk",
+   "speed": 0.563,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.81,
+   "meshSlip": 0.81,
+   "meshLift": 0.232,
+   "follow": 0.146,
+   "stepsPerSec": 0.67,
+   "footLift": 0.199,
+   "stride": 0.723,
+   "thigh": [
+    [
+     -45,
+     15
+    ],
+    [
+     -42,
+     19
+    ]
+   ],
+   "knee": 46,
+   "arm": [
+    [
+     -35,
+     22
+    ],
+    [
+     -35,
+     20
+    ]
+   ],
+   "bob": 0.102,
+   "sway": 0,
+   "headBob": 0.104,
+   "L": 0.412
+  },
+  "walkFast": {
+   "motion": "walk",
+   "speed": 0.921,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.82,
+   "meshSlip": 0.8,
+   "meshLift": 0.232,
+   "follow": 0.146,
+   "stepsPerSec": 1,
+   "footLift": 0.199,
+   "stride": 0.723,
+   "thigh": [
+    [
+     -45,
+     15
+    ],
+    [
+     -43,
+     19
+    ]
+   ],
+   "knee": 46,
+   "arm": [
+    [
+     -35,
+     22
+    ],
+    [
+     -35,
+     20
+    ]
+   ],
+   "bob": 0.102,
+   "sway": 0,
+   "headBob": 0.104,
+   "L": 0.412
+  },
+  "run": {
+   "motion": "run",
+   "speed": 2.046,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.85,
+   "meshSlip": 0.95,
+   "meshLift": 0.306,
+   "follow": 0.151,
+   "stepsPerSec": 2.67,
+   "footLift": 0.263,
+   "stride": 0.791,
+   "thigh": [
+    [
+     -44,
+     15
+    ],
+    [
+     -41,
+     21
+    ]
+   ],
+   "knee": 57,
+   "arm": [
+    [
+     -42,
+     16
+    ],
+    [
+     -43,
+     14
+    ]
+   ],
+   "bob": 0.09,
+   "sway": 0,
+   "headBob": 0.092,
+   "L": 0.412
+  },
+  "walkBack": {
+   "motion": "walk",
+   "speed": 0.563,
+   "states": [
+    "walk"
+   ],
+   "slip": 1.53,
+   "meshSlip": 1.79,
+   "meshLift": 0.232,
+   "follow": 0.146,
+   "stepsPerSec": 1,
+   "footLift": 0.199,
+   "stride": 0.723,
+   "thigh": [
+    [
+     -45,
+     15
+    ],
+    [
+     -42,
+     19
+    ]
+   ],
+   "knee": 46,
+   "arm": [
+    [
+     -35,
+     22
+    ],
+    [
+     -35,
+     20
+    ]
+   ],
+   "bob": 0.102,
+   "sway": 0,
+   "headBob": 0.104,
+   "L": 0.412
+  },
+  "lateral": {
+   "feetApart": [
+    0.246,
+    0.299
+   ],
+   "thighOut": 18.7
+  },
+  "idle": {
+   "hipsMove": 0.062,
+   "headMove": 0.16399999999999998,
+   "armOut": [
+    [
+     7,
+     13
+    ],
+    [
+     8,
+     35
+    ]
+   ],
+   "elbow": [
+    [
+     1,
+     15
+    ],
+    [
+     2,
+     36
+    ]
+   ],
+   "thighOut": [
+    [
+     0,
+     11
+    ],
+    [
+     0,
+     10
+    ]
+   ],
+   "feetApart": 0.307
+  }
+ },
+ {
+  "label": "Carina (game, our rig)",
+  "bones": 14,
+  "strides": {
+   "walkV": 0.5356697049490013,
+   "runV": 1.3291036511071443,
+   "runOff": 0.03
+  },
+  "viewerWalk": {
+   "states": [
+    "0.25s walk",
+    "0.50s walk",
+    "0.75s walk",
+    "1.00s walk",
+    "1.25s walk",
+    "1.50s walk",
+    "1.75s walk",
+    "2.00s walk",
+    "2.25s walk",
+    "2.50s walk",
+    "2.75s walk",
+    "3.00s walk"
+   ],
+   "maxFootGap": 0.027
+  },
+  "walk": {
+   "motion": "walk",
+   "speed": 0.565,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.16,
+   "meshSlip": 0.2,
+   "meshLift": 0.164,
+   "follow": 0.16,
+   "stepsPerSec": 0.67,
+   "footLift": 0.134,
+   "stride": 0.727,
+   "thigh": [
+    [
+     -34,
+     28
+    ],
+    [
+     -32,
+     32
+    ]
+   ],
+   "knee": 49,
+   "arm": [
+    [
+     -39,
+     4
+    ],
+    [
+     -35,
+     4
+    ]
+   ],
+   "bob": 0.103,
+   "sway": 0,
+   "headBob": 0.103,
+   "L": 0.41
+  },
+  "walkFast": {
+   "motion": "walk",
+   "speed": 0.924,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.17,
+   "meshSlip": 0.21,
+   "meshLift": 0.164,
+   "follow": 0.16,
+   "stepsPerSec": 1.33,
+   "footLift": 0.134,
+   "stride": 0.727,
+   "thigh": [
+    [
+     -34,
+     28
+    ],
+    [
+     -32,
+     32
+    ]
+   ],
+   "knee": 49,
+   "arm": [
+    [
+     -39,
+     4
+    ],
+    [
+     -35,
+     4
+    ]
+   ],
+   "bob": 0.103,
+   "sway": 0,
+   "headBob": 0.103,
+   "L": 0.41
+  },
+  "run": {
+   "motion": "run",
+   "speed": 2.054,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.2,
+   "meshSlip": 0.27,
+   "meshLift": 0.303,
+   "follow": 0.184,
+   "stepsPerSec": 2.67,
+   "footLift": 0.209,
+   "stride": 0.835,
+   "thigh": [
+    [
+     -33,
+     28
+    ],
+    [
+     -29,
+     35
+    ]
+   ],
+   "knee": 67,
+   "arm": [
+    [
+     -50,
+     0
+    ],
+    [
+     -48,
+     -4
+    ]
+   ],
+   "bob": 0.085,
+   "sway": 0,
+   "headBob": 0.085,
+   "L": 0.41
+  },
+  "walkBack": {
+   "motion": "walk",
+   "speed": 0.565,
+   "states": [
+    "walk"
+   ],
+   "slip": 1.97,
+   "meshSlip": 2.07,
+   "meshLift": 0.164,
+   "follow": 0.161,
+   "stepsPerSec": 0.67,
+   "footLift": 0.135,
+   "stride": 0.728,
+   "thigh": [
+    [
+     -35,
+     28
+    ],
+    [
+     -32,
+     32
+    ]
+   ],
+   "knee": 49,
+   "arm": [
+    [
+     -39,
+     4
+    ],
+    [
+     -35,
+     4
+    ]
+   ],
+   "bob": 0.103,
+   "sway": 0,
+   "headBob": 0.103,
+   "L": 0.41
+  },
+  "lateral": {
+   "feetApart": [
+    0.282,
+    0.334
+   ],
+   "thighOut": 9.4
+  },
+  "idle": {
+   "hipsMove": 0.061,
+   "headMove": 0.198,
+   "armOut": [
+    [
+     7,
+     12
+    ],
+    [
+     0,
+     14
+    ]
+   ],
+   "elbow": [
+    [
+     2,
+     39
+    ],
+    [
+     1,
+     22
+    ]
+   ],
+   "thighOut": [
+    [
+     7,
+     11
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "feetApart": 0.323
+  }
+ },
+ {
+  "label": "Emi (game)",
+  "bones": 14,
+  "strides": {
+   "walkV": 0.5378610322782231,
+   "runV": 1.3090249988340783,
+   "runOff": 0.03
+  },
+  "viewerWalk": {
+   "states": [
+    "0.25s walk",
+    "0.50s walk",
+    "0.75s walk",
+    "1.00s walk",
+    "1.25s walk",
+    "1.50s walk",
+    "1.75s walk",
+    "2.00s walk",
+    "2.25s walk",
+    "2.50s walk",
+    "2.75s walk",
+    "3.00s walk"
+   ],
+   "maxFootGap": 0.092
+  },
+  "walk": {
+   "motion": "walk",
+   "speed": 0.548,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.15,
+   "meshSlip": 0.16,
+   "meshLift": 0.168,
+   "follow": 0.127,
+   "stepsPerSec": 0.67,
+   "footLift": 0.148,
+   "stride": 0.707,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.1,
+   "sway": 0,
+   "headBob": 0.1,
+   "L": 0.409
+  },
+  "walkFast": {
+   "motion": "walk",
+   "speed": 0.896,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.16,
+   "meshSlip": 0.17,
+   "meshLift": 0.168,
+   "follow": 0.127,
+   "stepsPerSec": 1.33,
+   "footLift": 0.148,
+   "stride": 0.707,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.099,
+   "sway": 0,
+   "headBob": 0.1,
+   "L": 0.409
+  },
+  "run": {
+   "motion": "run",
+   "speed": 1.992,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.24,
+   "meshSlip": 0.21,
+   "meshLift": 0.239,
+   "follow": 0.143,
+   "stepsPerSec": 2.67,
+   "footLift": 0.21,
+   "stride": 0.772,
+   "thigh": [
+    [
+     -23,
+     38
+    ],
+    [
+     -19,
+     44
+    ]
+   ],
+   "knee": 89,
+   "arm": [
+    [
+     -34,
+     24
+    ],
+    [
+     -33,
+     21
+    ]
+   ],
+   "bob": 0.085,
+   "sway": 0,
+   "headBob": 0.085,
+   "L": 0.409
+  },
+  "walkBack": {
+   "motion": "walk",
+   "speed": 0.548,
+   "states": [
+    "walk"
+   ],
+   "slip": 1.98,
+   "meshSlip": 2.07,
+   "meshLift": 0.168,
+   "follow": 0.127,
+   "stepsPerSec": 1,
+   "footLift": 0.148,
+   "stride": 0.707,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.1,
+   "sway": 0,
+   "headBob": 0.1,
+   "L": 0.409
+  },
+  "lateral": {
+   "feetApart": [
+    0.211,
+    0.237
+   ],
+   "thighOut": 7.8
+  },
+  "idle": {
+   "hipsMove": 0.021,
+   "headMove": 0.13899999999999998,
+   "armOut": [
+    [
+     7,
+     18
+    ],
+    [
+     8,
+     17
+    ]
+   ],
+   "elbow": [
+    [
+     4,
+     26
+    ],
+    [
+     1,
+     9
+    ]
+   ],
+   "thighOut": [
+    [
+     0,
+     11
+    ],
+    [
+     6,
+     10
+    ]
+   ],
+   "feetApart": 0.218
+  }
+ },
+ {
+  "label": "Kuro (game)",
+  "bones": 14,
+  "strides": {
+   "walkV": 0.6458753168004824,
+   "runV": 1.5821913313637257,
+   "runOff": 0.03
+  },
+  "viewerWalk": {
+   "states": [
+    "0.25s walk",
+    "0.50s walk",
+    "0.75s walk",
+    "1.00s walk",
+    "1.25s walk",
+    "1.50s walk",
+    "1.75s walk",
+    "2.00s walk",
+    "2.25s walk",
+    "2.50s walk",
+    "2.75s walk",
+    "3.00s walk"
+   ],
+   "maxFootGap": 0.088
+  },
+  "walk": {
+   "motion": "walk",
+   "speed": 0.565,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.14,
+   "meshSlip": 0.15,
+   "meshLift": 0.133,
+   "follow": 0.125,
+   "stepsPerSec": 0.67,
+   "footLift": 0.154,
+   "stride": 0.725,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.088,
+   "sway": 0,
+   "headBob": 0.088,
+   "L": 0.475
+  },
+  "walkFast": {
+   "motion": "walk",
+   "speed": 0.925,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.15,
+   "meshSlip": 0.16,
+   "meshLift": 0.132,
+   "follow": 0.125,
+   "stepsPerSec": 1.33,
+   "footLift": 0.155,
+   "stride": 0.726,
+   "thigh": [
+    [
+     -24,
+     38
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.088,
+   "sway": 0,
+   "headBob": 0.088,
+   "L": 0.475
+  },
+  "run": {
+   "motion": "run",
+   "speed": 2.056,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.25,
+   "meshSlip": 0.18,
+   "meshLift": 0.212,
+   "follow": 0.138,
+   "stepsPerSec": 2.67,
+   "footLift": 0.226,
+   "stride": 0.792,
+   "thigh": [
+    [
+     -23,
+     38
+    ],
+    [
+     -19,
+     44
+    ]
+   ],
+   "knee": 89,
+   "arm": [
+    [
+     -34,
+     25
+    ],
+    [
+     -33,
+     21
+    ]
+   ],
+   "bob": 0.075,
+   "sway": 0,
+   "headBob": 0.074,
+   "L": 0.475
+  },
+  "walkBack": {
+   "motion": "walk",
+   "speed": 0.565,
+   "states": [
+    "walk"
+   ],
+   "slip": 1.99,
+   "meshSlip": 2.07,
+   "meshLift": 0.134,
+   "follow": 0.125,
+   "stepsPerSec": 1,
+   "footLift": 0.154,
+   "stride": 0.725,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.088,
+   "sway": 0,
+   "headBob": 0.088,
+   "L": 0.475
+  },
+  "lateral": {
+   "feetApart": [
+    0.161,
+    0.19
+   ],
+   "thighOut": 7.8
+  },
+  "idle": {
+   "hipsMove": 0.018,
+   "headMove": 0.12,
+   "armOut": [
+    [
+     7,
+     18
+    ],
+    [
+     8,
+     17
+    ]
+   ],
+   "elbow": [
+    [
+     4,
+     27
+    ],
+    [
+     1,
+     9
+    ]
+   ],
+   "thighOut": [
+    [
+     0,
+     11
+    ],
+    [
+     6,
+     10
+    ]
+   ],
+   "feetApart": 0.175
+  }
+ },
+ {
+  "label": "Kenji (game)",
+  "bones": 14,
+  "strides": {
+   "walkV": 0.5395995125780307,
+   "runV": 1.2678460810349566,
+   "runOff": 0.03
+  },
+  "viewerWalk": {
+   "states": [
+    "0.25s walk",
+    "0.50s walk",
+    "0.75s walk",
+    "1.00s walk",
+    "1.25s walk",
+    "1.50s walk",
+    "1.75s walk",
+    "2.00s walk",
+    "2.25s walk",
+    "2.50s walk",
+    "2.75s walk",
+    "3.00s walk"
+   ],
+   "maxFootGap": 0.096
+  },
+  "walk": {
+   "motion": "walk",
+   "speed": 0.499,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.2,
+   "meshSlip": 0.2,
+   "meshLift": 0.2,
+   "follow": 0.154,
+   "stepsPerSec": 0.67,
+   "footLift": 0.124,
+   "stride": 0.671,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.096,
+   "sway": 0,
+   "headBob": 0.096,
+   "L": 0.442
+  },
+  "walkFast": {
+   "motion": "walk",
+   "speed": 0.817,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.21,
+   "meshSlip": 0.2,
+   "meshLift": 0.2,
+   "follow": 0.153,
+   "stepsPerSec": 1.33,
+   "footLift": 0.124,
+   "stride": 0.671,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.095,
+   "sway": 0,
+   "headBob": 0.096,
+   "L": 0.442
+  },
+  "run": {
+   "motion": "run",
+   "speed": 1.815,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.27,
+   "meshSlip": 0.33,
+   "meshLift": 0.271,
+   "follow": 0.17,
+   "stepsPerSec": 2.33,
+   "footLift": 0.167,
+   "stride": 0.725,
+   "thigh": [
+    [
+     -23,
+     38
+    ],
+    [
+     -19,
+     44
+    ]
+   ],
+   "knee": 89,
+   "arm": [
+    [
+     -34,
+     24
+    ],
+    [
+     -33,
+     21
+    ]
+   ],
+   "bob": 0.082,
+   "sway": 0,
+   "headBob": 0.083,
+   "L": 0.442
+  },
+  "walkBack": {
+   "motion": "walk",
+   "speed": 0.499,
+   "states": [
+    "walk"
+   ],
+   "slip": 2.01,
+   "meshSlip": 2.11,
+   "meshLift": 0.2,
+   "follow": 0.153,
+   "stepsPerSec": 1,
+   "footLift": 0.124,
+   "stride": 0.671,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.096,
+   "sway": 0,
+   "headBob": 0.096,
+   "L": 0.442
+  },
+  "lateral": {
+   "feetApart": [
+    0.41,
+    0.451
+   ],
+   "thighOut": 6.7
+  },
+  "idle": {
+   "hipsMove": 0.187,
+   "headMove": 0.362,
+   "armOut": [
+    [
+     7,
+     14
+    ],
+    [
+     8,
+     23
+    ]
+   ],
+   "elbow": [
+    [
+     5,
+     10
+    ],
+    [
+     2,
+     17
+    ]
+   ],
+   "thighOut": [
+    [
+     1,
+     11
+    ],
+    [
+     7,
+     10
+    ]
+   ],
+   "feetApart": 0.468
+  }
+ },
+ {
+  "label": "Hamada (game)",
+  "bones": 14,
+  "strides": {
+   "walkV": 0.5418667226394488,
+   "runV": 1.3089861292525624,
+   "runOff": 0.03
+  },
+  "viewerWalk": {
+   "states": [
+    "0.25s walk",
+    "0.50s walk",
+    "0.75s walk",
+    "1.00s walk",
+    "1.25s walk",
+    "1.50s walk",
+    "1.75s walk",
+    "2.00s walk",
+    "2.25s walk",
+    "2.50s walk",
+    "2.75s walk",
+    "3.00s walk"
+   ],
+   "maxFootGap": 0.089
+  },
+  "walk": {
+   "motion": "walk",
+   "speed": 0.545,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.16,
+   "meshSlip": 0.17,
+   "meshLift": 0.258,
+   "follow": 0.138,
+   "stepsPerSec": 0.67,
+   "footLift": 0.143,
+   "stride": 0.682,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.098,
+   "sway": 0,
+   "headBob": 0.097,
+   "L": 0.428
+  },
+  "walkFast": {
+   "motion": "walk",
+   "speed": 0.892,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.17,
+   "meshSlip": 0.18,
+   "meshLift": 0.257,
+   "follow": 0.138,
+   "stepsPerSec": 1,
+   "footLift": 0.143,
+   "stride": 0.682,
+   "thigh": [
+    [
+     -24,
+     38
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.098,
+   "sway": 0,
+   "headBob": 0.097,
+   "L": 0.428
+  },
+  "run": {
+   "motion": "run",
+   "speed": 1.982,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.34,
+   "meshSlip": 0.52,
+   "meshLift": 0.377,
+   "follow": 0.16,
+   "stepsPerSec": 2.67,
+   "footLift": 0.237,
+   "stride": 0.771,
+   "thigh": [
+    [
+     -22,
+     38
+    ],
+    [
+     -18,
+     45
+    ]
+   ],
+   "knee": 94,
+   "arm": [
+    [
+     -38,
+     23
+    ],
+    [
+     -38,
+     19
+    ]
+   ],
+   "bob": 0.08,
+   "sway": 0,
+   "headBob": 0.078,
+   "L": 0.428
+  },
+  "walkBack": {
+   "motion": "walk",
+   "speed": 0.545,
+   "states": [
+    "walk"
+   ],
+   "slip": 1.97,
+   "meshSlip": 2.03,
+   "meshLift": 0.258,
+   "follow": 0.139,
+   "stepsPerSec": 0.67,
+   "footLift": 0.143,
+   "stride": 0.682,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.097,
+   "sway": 0,
+   "headBob": 0.097,
+   "L": 0.428
+  },
+  "lateral": {
+   "feetApart": [
+    0.231,
+    0.256
+   ],
+   "thighOut": 7.8
+  },
+  "idle": {
+   "hipsMove": 0.099,
+   "headMove": 0.27,
+   "armOut": [
+    [
+     7,
+     23
+    ],
+    [
+     8,
+     14
+    ]
+   ],
+   "elbow": [
+    [
+     3,
+     47
+    ],
+    [
+     1,
+     9
+    ]
+   ],
+   "thighOut": [
+    [
+     3,
+     11
+    ],
+    [
+     1,
+     10
+    ]
+   ],
+   "feetApart": 0.284
+  }
+ },
+ {
+  "label": "Aoi (game)",
+  "bones": 14,
+  "strides": {
+   "walkV": 0.5229680474246128,
+   "runV": 1.292690003007983,
+   "runOff": 0.03
+  },
+  "viewerWalk": {
+   "states": [
+    "0.25s walk",
+    "0.50s walk",
+    "0.75s walk",
+    "1.00s walk",
+    "1.25s walk",
+    "1.50s walk",
+    "1.75s walk",
+    "2.00s walk",
+    "2.25s walk",
+    "2.50s walk",
+    "2.75s walk",
+    "3.00s walk"
+   ],
+   "maxFootGap": 0.08
+  },
+  "walk": {
+   "motion": "walk",
+   "speed": 0.546,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.15,
+   "meshSlip": 0.22,
+   "meshLift": 0.198,
+   "follow": 0.203,
+   "stepsPerSec": 0.67,
+   "footLift": 0.151,
+   "stride": 0.653,
+   "thigh": [
+    [
+     -24,
+     38
+    ],
+    [
+     -21,
+     43
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.096,
+   "sway": 0,
+   "headBob": 0.096,
+   "L": 0.429
+  },
+  "walkFast": {
+   "motion": "walk",
+   "speed": 0.893,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.15,
+   "meshSlip": 0.22,
+   "meshLift": 0.197,
+   "follow": 0.202,
+   "stepsPerSec": 1.33,
+   "footLift": 0.151,
+   "stride": 0.653,
+   "thigh": [
+    [
+     -24,
+     37
+    ],
+    [
+     -21,
+     43
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.096,
+   "sway": 0,
+   "headBob": 0.096,
+   "L": 0.429
+  },
+  "run": {
+   "motion": "run",
+   "speed": 1.985,
+   "states": [
+    "walk"
+   ],
+   "slip": 0.49,
+   "meshSlip": 0.62,
+   "meshLift": 0.368,
+   "follow": 0.24,
+   "stepsPerSec": 2.33,
+   "footLift": 0.273,
+   "stride": 0.765,
+   "thigh": [
+    [
+     -22,
+     38
+    ],
+    [
+     -17,
+     46
+    ]
+   ],
+   "knee": 99,
+   "arm": [
+    [
+     -42,
+     24
+    ],
+    [
+     -43,
+     17
+    ]
+   ],
+   "bob": 0.075,
+   "sway": 0,
+   "headBob": 0.075,
+   "L": 0.429
+  },
+  "walkBack": {
+   "motion": "walk",
+   "speed": 0.546,
+   "states": [
+    "walk"
+   ],
+   "slip": 2,
+   "meshSlip": 2.15,
+   "meshLift": 0.197,
+   "follow": 0.202,
+   "stepsPerSec": 1,
+   "footLift": 0.15,
+   "stride": 0.653,
+   "thigh": [
+    [
+     -24,
+     38
+    ],
+    [
+     -21,
+     42
+    ]
+   ],
+   "knee": 78,
+   "arm": [
+    [
+     -25,
+     30
+    ],
+    [
+     -24,
+     28
+    ]
+   ],
+   "bob": 0.096,
+   "sway": 0,
+   "headBob": 0.096,
+   "L": 0.429
+  },
+  "lateral": {
+   "feetApart": [
+    0.293,
+    0.317
+   ],
+   "thighOut": 7.8
+  },
+  "idle": {
+   "hipsMove": 0.016,
+   "headMove": 0.177,
+   "armOut": [
+    [
+     7,
+     15
+    ],
+    [
+     8,
+     19
+    ]
+   ],
+   "elbow": [
+    [
+     2,
+     10
+    ],
+    [
+     1,
+     21
+    ]
+   ],
+   "thighOut": [
+    [
+     5,
+     11
+    ],
+    [
+     0,
+     10
+    ]
+   ],
+   "feetApart": 0.287
+  }
+ }
+]

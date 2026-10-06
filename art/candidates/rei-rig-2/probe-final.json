@@ -1,0 +1,10 @@
+[
+ {"label": "Rei before (rei-1-rig2)", "dir": "/game3d/assets/characters/rei/", "idle": "/game3d/assets/characters/relaxed-idle-rei.json", "height": 1.12},
+ {"label": "Rei after (rei-rig-2)", "dir": "/.claude/worktrees/agent-aae25346acf8fdb8d/game3d/assets/characters/rei/", "idle": "/.claude/worktrees/agent-aae25346acf8fdb8d/game3d/assets/characters/relaxed-idle-rei.json", "height": 1.12},
+ {"label": "Carina (our rig, as is)", "dir": "/game3d/assets/characters/carina/", "idle": "/game3d/assets/characters/relaxed-idle-carina.json", "height": 1.12},
+ {"label": "Emi", "dir": "/game3d/assets/characters/emi/", "idle": "/game3d/assets/characters/relaxed-idle-emi.json", "height": 1.09},
+ {"label": "Kuro", "dir": "/game3d/assets/characters/kuro/", "idle": "/game3d/assets/characters/relaxed-idle-kuro.json", "height": 1.12},
+ {"label": "Kenji", "dir": "/game3d/assets/characters/kenji/", "idle": "/game3d/assets/characters/relaxed-idle-kenji.json", "height": 1.12},
+ {"label": "Hamada", "dir": "/game3d/assets/characters/kuroda/", "idle": "/game3d/assets/characters/relaxed-idle-kuroda.json", "height": 1.09},
+ {"label": "Aoi", "dir": "/game3d/assets/characters/aoi/", "idle": "/game3d/assets/characters/relaxed-idle-aoi.json", "height": 1.09}
+]

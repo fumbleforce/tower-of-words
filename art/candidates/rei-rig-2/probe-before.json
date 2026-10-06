@@ -1,0 +1,9 @@
+[
+ {"label": "Rei (game, our rig)", "dir": "/game3d/assets/characters/rei/", "idle": "/game3d/assets/characters/relaxed-idle-rei.json", "height": 1.12},
+ {"label": "Carina (game, our rig)", "dir": "/game3d/assets/characters/carina/", "idle": "/game3d/assets/characters/relaxed-idle-carina.json", "height": 1.12},
+ {"label": "Emi (game)", "dir": "/game3d/assets/characters/emi/", "idle": "/game3d/assets/characters/relaxed-idle-emi.json", "height": 1.09},
+ {"label": "Kuro (game)", "dir": "/game3d/assets/characters/kuro/", "idle": "/game3d/assets/characters/relaxed-idle-kuro.json", "height": 1.12},
+ {"label": "Kenji (game)", "dir": "/game3d/assets/characters/kenji/", "idle": "/game3d/assets/characters/relaxed-idle-kenji.json", "height": 1.12},
+ {"label": "Hamada (game)", "dir": "/game3d/assets/characters/kuroda/", "idle": "/game3d/assets/characters/relaxed-idle-kuroda.json", "height": 1.09},
+ {"label": "Aoi (game)", "dir": "/game3d/assets/characters/aoi/", "idle": "/game3d/assets/characters/relaxed-idle-aoi.json", "height": 1.09}
+]

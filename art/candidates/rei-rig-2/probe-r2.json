@@ -1,0 +1,6 @@
+[
+ {"label": "Rei (round 1 rig, game)", "dir": "/game3d/assets/characters/rei/", "idle": "/game3d/assets/characters/relaxed-idle-rei.json", "height": 1.12},
+ {"label": "Rei (fixed rig)", "dir": "/art/parts/rei-rig-2/game/", "idle": "/art/parts/rei-rig-2/game/idle.json", "height": 1.12},
+ {"label": "Emi (game)", "dir": "/game3d/assets/characters/emi/", "idle": "/game3d/assets/characters/relaxed-idle-emi.json", "height": 1.09},
+ {"label": "Kuro (game)", "dir": "/game3d/assets/characters/kuro/", "idle": "/game3d/assets/characters/relaxed-idle-kuro.json", "height": 1.12}
+]

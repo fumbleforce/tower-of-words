@@ -1,0 +1,250 @@
+[
+ {
+  "label": "Rei before (rei-1-rig2)",
+  "settled": {
+   "hips": 0,
+   "head": 0.085,
+   "elbow": [
+    [
+     10,
+     10
+    ],
+    [
+     9,
+     9
+    ]
+   ]
+  },
+  "afterWalk": {
+   "hips": 0.033,
+   "head": 0.124,
+   "elbow": [
+    [
+     3,
+     58
+    ],
+    [
+     2,
+     23
+    ]
+   ]
+  }
+ },
+ {
+  "label": "Rei after (rei-rig-2)",
+  "settled": {
+   "hips": 0,
+   "head": 0.085,
+   "elbow": [
+    [
+     10,
+     10
+    ],
+    [
+     9,
+     9
+    ]
+   ]
+  },
+  "afterWalk": {
+   "hips": 0.045,
+   "head": 0.169,
+   "elbow": [
+    [
+     4,
+     54
+    ],
+    [
+     1,
+     9
+    ]
+   ]
+  }
+ },
+ {
+  "label": "Carina (our rig, as is)",
+  "settled": {
+   "hips": 0,
+   "head": 0.095,
+   "elbow": [
+    [
+     10,
+     10
+    ],
+    [
+     9,
+     9
+    ]
+   ]
+  },
+  "afterWalk": {
+   "hips": 0.043,
+   "head": 0.184,
+   "elbow": [
+    [
+     3,
+     56
+    ],
+    [
+     1,
+     20
+    ]
+   ]
+  }
+ },
+ {
+  "label": "Emi",
+  "settled": {
+   "hips": 0,
+   "head": 0.087,
+   "elbow": [
+    [
+     10,
+     10
+    ],
+    [
+     9,
+     9
+    ]
+   ]
+  },
+  "afterWalk": {
+   "hips": 0.067,
+   "head": 0.222,
+   "elbow": [
+    [
+     4,
+     54
+    ],
+    [
+     1,
+     9
+    ]
+   ]
+  }
+ },
+ {
+  "label": "Kuro",
+  "settled": {
+   "hips": 0,
+   "head": 0.07,
+   "elbow": [
+    [
+     10,
+     10
+    ],
+    [
+     9,
+     9
+    ]
+   ]
+  },
+  "afterWalk": {
+   "hips": 0.026,
+   "head": 0.131,
+   "elbow": [
+    [
+     4,
+     39
+    ],
+    [
+     1,
+     9
+    ]
+   ]
+  }
+ },
+ {
+  "label": "Kenji",
+  "settled": {
+   "hips": 0,
+   "head": 0.104,
+   "elbow": [
+    [
+     10,
+     10
+    ],
+    [
+     9,
+     9
+    ]
+   ]
+  },
+  "afterWalk": {
+   "hips": 0.162,
+   "head": 0.363,
+   "elbow": [
+    [
+     5,
+     54
+    ],
+    [
+     2,
+     9
+    ]
+   ]
+  }
+ },
+ {
+  "label": "Hamada",
+  "settled": {
+   "hips": 0,
+   "head": 0.084,
+   "elbow": [
+    [
+     10,
+     10
+    ],
+    [
+     9,
+     9
+    ]
+   ]
+  },
+  "afterWalk": {
+   "hips": 0.068,
+   "head": 0.24,
+   "elbow": [
+    [
+     4,
+     54
+    ],
+    [
+     1,
+     9
+    ]
+   ]
+  }
+ },
+ {
+  "label": "Aoi",
+  "settled": {
+   "hips": 0,
+   "head": 0.087,
+   "elbow": [
+    [
+     10,
+     10
+    ],
+    [
+     9,
+     9
+    ]
+   ]
+  },
+  "afterWalk": {
+   "hips": 0.076,
+   "head": 0.234,
+   "elbow": [
+    [
+     4,
+     54
+    ],
+    [
+     1,
+     9
+    ]
+   ]
+  }
+ }
+]
