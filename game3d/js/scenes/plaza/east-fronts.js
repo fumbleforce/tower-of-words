@@ -22,6 +22,7 @@ import { hash2 } from '../outdoor/parts.js';
 import { STEEL } from '../outdoor/furniture.js';
 import { faces, faceAt, tOf } from '../outdoor/block.js';
 import { drain } from '../../perf/slice.js';
+import { facadeDrainage } from '../outdoor/facade-detail.js';
 
 const PLINTH = '#6c7178',
   FRAME = '#4f565f',
@@ -68,7 +69,8 @@ export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => fals
       n = k.row.storeys,
       H = fh * n,
       wall = TOWN.walls[k.wall];
-    (casts(k) ? caster : p).box(wall, w, H, d, cx, 0, cz, { surf: 'plaster' });
+    (casts(k) ? caster : p).box(wall, w, H, d, cx, 0, cz, { surf: k.ground === 'office' ? 'cladding' : 'plaster' });
+    facadeDrainage(p, k.rect, H);
     // plinth and floor bands, all round
     p.box(PLINTH, w + 0.06, 0.32, d + 0.06, cx, 0, cz, { cast: false, surf: 'concrete' });
     for (let f = 1; f < n; f++) p.box(TOWN.band, w + 0.08, 0.12, d + 0.08, cx, f * fh - 0.06, cz, { cast: false });

@@ -19,6 +19,7 @@ import { STEEL } from './furniture.js';
 import { BLOCK, faces, onFace, tOf, vOf, bayOf } from './block-face.js';
 import { drain } from '../../perf/slice.js';
 import { STYLE, glassFront, copedParapet, punched, stairBay, roofPlant, frontDoor } from './block-style.js';
+import { facadeDrainage } from './facade-detail.js';
 
 export { BLOCK, faces, faceAt, tOf } from './block-face.js';
 
@@ -84,7 +85,8 @@ export function* officeBlockSteps(
   // the body: the ground floor's dark wall set back behind the piers, the upper floors flush with the face
   p.box(BLOCK.core, w - 0.3, gf, d - 0.3, cx, 0, cz, { surf: 'concrete' });
   // (a one-storey block gets a lid 1 cm thick instead, over the ground floor's top rather than level with it)
-  p.box(wall, w, Math.max(top - gf, 0.01), d, cx, gf, cz, { surf: 'concrete' });
+  p.box(wall, w, Math.max(top - gf, 0.01), d, cx, gf, cz, { surf: 'cladding' });
+  facadeDrainage(p, rect, top);
   const F = faces(rect);
   for (const [id, f] of Object.entries(F)) {
     const bw = bayOf(f.L),

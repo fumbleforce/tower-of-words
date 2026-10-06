@@ -1,0 +1,96 @@
+{
+  "title": "Exterior materials and facade detail",
+  "date": "2026-10-06",
+  "by": "codex",
+  "caption": "Lawns and building panels have visible material variation; nearby facades gain attached drainage and the canteen gains window sills. Existing paving, trees, routes and entrances stay in place.",
+  "sections": [
+    {
+      "title": "Cladding and lawn beside the training centre",
+      "caption": "Actual game rendering. Closer inspection camera.",
+      "images": [
+        {
+          "id": "office-front-desk-before",
+          "image": "bible/shots/showcase/exterior-detail-1/office-front-desk-before.png",
+          "caption": "Before, desktop."
+        },
+        {
+          "id": "office-front-desk-after",
+          "image": "bible/shots/showcase/exterior-detail-1/office-front-desk-after.png",
+          "caption": "After, desktop."
+        },
+        {
+          "id": "office-front-phone-before",
+          "image": "bible/shots/showcase/exterior-detail-1/office-front-phone-before.png",
+          "caption": "Before, phone."
+        },
+        {
+          "id": "office-front-phone-after",
+          "image": "bible/shots/showcase/exterior-detail-1/office-front-phone-after.png",
+          "caption": "After, phone."
+        }
+      ]
+    },
+    {
+      "title": "Canteen window sills",
+      "caption": "Actual game rendering. Closer inspection camera.",
+      "images": [
+        {
+          "id": "canteen-desk-before",
+          "image": "bible/shots/showcase/exterior-detail-1/canteen-desk-before.png",
+          "caption": "Before, desktop."
+        },
+        {
+          "id": "canteen-desk-after",
+          "image": "bible/shots/showcase/exterior-detail-1/canteen-desk-after.png",
+          "caption": "After, desktop."
+        },
+        {
+          "id": "canteen-phone-before",
+          "image": "bible/shots/showcase/exterior-detail-1/canteen-phone-before.png",
+          "caption": "Before, phone."
+        },
+        {
+          "id": "canteen-phone-after",
+          "image": "bible/shots/showcase/exterior-detail-1/canteen-phone-after.png",
+          "caption": "After, phone."
+        }
+      ]
+    },
+    {
+      "title": "Pocket park at the play camera",
+      "caption": "Actual game rendering at the ordinary play camera.",
+      "images": [
+        {
+          "id": "east-lane-desk-before",
+          "image": "bible/shots/showcase/exterior-detail-1/east-lane-desk-before.png",
+          "caption": "Before, desktop."
+        },
+        {
+          "id": "east-lane-desk-after",
+          "image": "bible/shots/showcase/exterior-detail-1/east-lane-desk-after.png",
+          "caption": "After, desktop."
+        },
+        {
+          "id": "east-lane-phone-before",
+          "image": "bible/shots/showcase/exterior-detail-1/east-lane-phone-before.png",
+          "caption": "Before, phone."
+        },
+        {
+          "id": "east-lane-phone-after",
+          "image": "bible/shots/showcase/exterior-detail-1/east-lane-phone-after.png",
+          "caption": "After, phone."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Walk the east lane",
+      "href": "game3d/?place=east_lane&skip"
+    },
+    {
+      "label": "Canteen exterior",
+      "href": "game3d/?place=plaza&skip&mx=0&mz=-15"
+    }
+  ]
+}

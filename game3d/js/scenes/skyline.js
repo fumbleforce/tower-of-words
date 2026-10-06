@@ -24,6 +24,7 @@ import { mat } from '../props.js';
 import { qualityTier } from '../settings.js';
 import { drain } from '../perf/slice.js';
 import { TOWN } from './town.js';
+import { kindOf, patchMaterial } from '../look/procedural.js';
 
 export const SEA = '#50667a';
 export const SAND = '#bdb8a8';
@@ -85,6 +86,7 @@ function tri(b, pts, n, color) {
     b.pos.push(p[0], p[1], p[2]);
     b.nor.push(n[0], n[1], n[2]);
     if (b.col) b.col.push(color.r, color.g, color.b);
+    if (b.look) b.look.push(kindOf(b.surface), 0, 0, 0.8);
   }
 }
 // a triangle wound so that its front face is the side the normal points to
@@ -120,7 +122,8 @@ function edgeBox(b, a, d, n, u0, u1, y0, y1, o0, o1, color) {
   for (const [p0, p1, p2, p3, nn] of s) quad(b, p0, p1, p2, p3, nn, color);
 }
 // a flat polygon at height y, facing up
-function flat(b, poly, y, color) {
+function flat(b, poly, y, color, surface = null) {
+  b.surface = surface;
   for (const [i, j, k] of THREE.ShapeUtils.triangulateShape(
     poly.map(([x, z]) => new THREE.Vector2(x, z)),
     [],
@@ -128,6 +131,7 @@ function flat(b, poly, y, color) {
     const P = (q) => [poly[q][0], y, poly[q][1]];
     face(b, P(i), P(j), P(k), [0, 1, 0], color);
   }
+  b.surface = null;
 }
 function toMesh(b, material, name) {
   if (!b.pos.length) return null;
@@ -135,6 +139,10 @@ function toMesh(b, material, name) {
   g.setAttribute('position', new THREE.Float32BufferAttribute(b.pos, 3));
   g.setAttribute('normal', new THREE.Float32BufferAttribute(b.nor, 3));
   if (b.col) g.setAttribute('color', new THREE.Float32BufferAttribute(b.col, 3));
+  if (b.look) {
+    g.setAttribute('aLook', new THREE.Float32BufferAttribute(b.look, 4));
+    patchMaterial(material);
+  }
   g.computeBoundingSphere();
   const m = new THREE.Mesh(g, material);
   m.name = name; // named: mergeStatic and the perf batch leave it as it is
@@ -283,14 +291,16 @@ export function* skylineSteps(
     yield;
   }
 
-  // ground: sea, land, green, paving, one vertex-coloured mesh just under the chunk's floor
-  const gb = bucket(true),
+  // Ground stays one mesh. Material roles ride per vertex, so lawn gets surface detail
+  // without applying grass to sea/paving or baking lighting across the whole island.
+  const gb = { ...bucket(true), look: [] },
     R = far + 30;
   const C = (hex) => new THREE.Color(hex);
   if (sea) flat(gb, rectPoly([cx - R, cz - R, cx + R, cz + R]), -0.2, C(GROUND.sea));
   // opts.land: the land as one island-frame polygon (scenes/island-west.js coastLand); without it, COAST if it is
   // a polygon, else land everywhere
-  if (land) flat(gb, ccw(land.map(local)), -0.16, C(landColor || GROUND.land));
+  if (land)
+    flat(gb, ccw(land.map(local)), -0.16, C(landColor || GROUND.land), landColor === TOWN.grass ? 'grass' : 'concrete');
   const coasts = L.COAST ? [].concat(L.COAST.poly || L.COAST.rect ? [L.COAST] : L.COAST) : [];
   for (const c of land ? [] : coasts) {
     const sh = Array.isArray(c[0]) ? c : shapeOf(c);
@@ -303,11 +313,11 @@ export function* skylineSteps(
   }
   for (const g of L.GREEN || []) {
     const sh = shapeOf(g);
-    if (sh) flat(gb, ccw(sh.map(local)), -0.145, C(g.color || GROUND.green));
+    if (sh) flat(gb, ccw(sh.map(local)), -0.145, C(g.color || GROUND.green), 'grass');
   }
   for (const g of L.MOWN || []) {
     const sh = shapeOf(g);
-    if (sh) flat(gb, ccw(sh.map(local)), g.y, C(g.color));
+    if (sh) flat(gb, ccw(sh.map(local)), g.y, C(g.color), 'grass');
   }
   for (const p of L.PATHS || []) {
     const color = C(p.color || GROUND.path);

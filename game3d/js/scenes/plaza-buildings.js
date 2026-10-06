@@ -10,6 +10,7 @@ import { Parts } from './outdoor/parts.js';
 import { BLOCKS, roof, arcadeRoof } from './shop-roofs.js';
 import { signSet } from './shop-signs.js';
 import { drain } from '../perf/slice.js';
+import { facadeDrainage } from './outdoor/facade-detail.js';
 
 // parts merged into one mesh of one material (the parts are disposed)
 export function merged(parts, material, { cast = true } = {}) {
@@ -80,6 +81,9 @@ export function* canteenSteps(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) 
     panes.push(box(bw - 0.24, 1.55, 0.04, bx, 0.18, S + 0.02));
     frames.push(box(0.05, 1.55, 0.06, bx, 0.18, S + 0.04));
     panes.push(box(bw - 0.3, 0.95, 0.04, bx, floorH + 0.5, S + 0.02));
+    // Projecting sills and shallow lintels give the upper windows a readable reveal.
+    bands.push(box(bw - 0.16, 0.08, 0.2, bx, floorH + 0.42, S + 0.07));
+    bands.push(box(bw - 0.18, 0.06, 0.12, bx, floorH + 1.45, S + 0.04));
   }
   for (let i = 0; i <= bays; i++) frames.push(box(0.24, H, 0.1, x0 + bw * i, 0, S + 0.05));
   // side windows on the east and west faces, upper floor only
@@ -99,6 +103,7 @@ export function* canteenSteps(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) 
   yield;
   // the awnings: a sloping canvas over each other bay, in stripes, with a straight valance at the front
   const cloth = new Parts();
+  facadeDrainage(cloth, [x0, x1, z0, z1], H);
   for (let i = 0; i < bays; i++) {
     const bx = x0 + bw * (i + 0.5);
     if (Math.abs(bx - dx) < bw / 2) continue;
@@ -130,7 +135,9 @@ export function* canteenSteps(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) 
   ])
     plant.push(box(pw, ph, pd, px, H, pz));
   plant.push(box(w * 0.3, 0.3, 0.35, x0 + w * 0.6, H + 0.15, cz + 2.2));
-  root.add(merged(walls, mat(TOWN.walls[1])));
+  const wallMesh = merged(walls, mat(TOWN.walls[1]));
+  wallMesh.userData.surf = 'cladding';
+  root.add(wallMesh);
   root.add(merged(frames, mat('#6c737c')));
   root.add(merged(bands, mat(TOWN.band)));
   root.add(merged(panes, glass, { cast: false }));
