@@ -10,6 +10,8 @@ import { placeStates, openToday, REASON } from '../../js/travel/rules.js';
 import { seedVisited, loadVisited, visited } from '../../js/travel/visited.js';
 import { PINS } from '../../js/travel/pins.js';
 import { PLACE_NAMES } from '../../js/places/definitions.js';
+import { fastLiftArrival } from '../../js/travel/arrival.js';
+import { cardHTML, listHTML } from '../../js/ui/map/panel.js';
 
 const STORY = new URL('../../story/', import.meta.url);
 // a day's stories, as runner.load finds them
@@ -24,7 +26,7 @@ async function stories(day) {
 const condOf = (flags) => createConditionEvaluator((k) => flags[k] ?? 0);
 async function states(day, here, flags = {}, extra = {}) {
   const { transitions, ...byPlace } = await stories(day);
-  const opts = { day, cond: condOf(flags), transitions: day === 1 ? transitions : null };
+  const opts = { day, visited: extra.visited, cond: condOf(flags), transitions: day === 1 ? transitions : null };
   const graph = waysGraph(byPlace, openToday(day), opts);
   const afterWork = waysGraph(byPlace, openToday(day), { ...opts, cond: condOf({ ...flags, going_home: true }) });
   return { graph, s: placeStates({ here, day, graph, afterWork, visited: new Set(), ...extra }) };
@@ -151,4 +153,51 @@ test('visited: saved as a list; an older save is seeded from its day and place',
   assert.deepEqual([...visited], ['harbour']);
   loadVisited({ day: 3, place: 'gym' });
   assert.ok(visited.has('gym') && visited.has('train'));
+});
+
+
+test('discovered B2 is a direct map destination on days 2–5, still gated before discovery', async () => {
+  for (const day of [2, 3, 4, 5]) {
+    const unseen = (await states(day, 'plaza')).s;
+    assert.equal(unseen.office.state, 'scene');
+    const {s, graph} = await states(day, 'plaza', {}, {visited: new Set(['office'])});
+    assert.equal(s.office.state, 'go', `day ${day}`);
+    assert.equal(s.office.route.via, 'forecourt');
+    assert.equal(graph.forecourt.find(w => w.to === 'office').scene, false);
+    assert.match(listHTML(s, null), /data-pick="office"/);
+    assert.match(cardHTML(s.forecourt, s, {phone: true}), /data-pick="office"/);
+    assert.match(cardHTML(s.office, s, {phone: true}), /Go there/);
+    const back = (await states(day, 'office', {}, {visited: new Set(['office'])})).s;
+    assert.equal(back.forecourt.state, 'go');
+    assert.equal(back.plaza.state, 'go');
+    const busy = (await states(day, 'plaza', {}, {visited: new Set(['office']), busy:'talking'})).s;
+    assert.equal(busy.office.state, 'wait');
+  }
+});
+
+test('B2 shortcut preserves first-day introduction, work and after-work return gates', async () => {
+  const visited = new Set(['office']);
+  assert.equal((await states(1,'forecourt',MORNING,{visited})).s.office.state,'scene');
+  assert.equal((await states(1,'office',MORNING,{visited})).s.plaza.state,'stuck');
+  assert.equal((await states(1,'office',EVENING,{visited})).s.forecourt.state,'go');
+  assert.equal((await states(1,'forecourt',EVENING,{visited})).s.office.state,'later');
+  const work = (await states(2,'office',{d2_ticket_done:true,d2_brief_done:true},{visited})).s;
+  assert.equal(work.forecourt.state,'go'); // Day 2's authored exit remains open during the shift.
+});
+
+test('fast lift arrival and resumed fast arrival use free landings without changing progression', () => {
+  for (const [name,from,at] of [['office','forecourt',[-5.45,-2.4]],['forecourt','office',[8,2]]]) {
+    const game={transition:{fast:true,from,to:name,phase:'arriving'},
+      player:{root:{position:{set(...p){this.at=p;}},rotation:{}},setState(s){this.state=s;}},
+      walker:{sync(){this.synced=true;}}, period:'afternoon',yen:5000};
+    const place={name,spots:{lift_out:at},liftSite:{out:at},nav:{free:()=>true},cam:{snap(){}}};
+    assert.equal(fastLiftArrival(game,place),true);
+    assert.deepEqual(game.player.root.position.at,[at[0],0,at[1]]);
+    assert.equal(game.walker.synced,true);
+    assert.equal(game.period,'afternoon');assert.equal(game.yen,5000);
+    place.nav.free=()=>false;
+    assert.throws(()=>fastLiftArrival(game,place),/free lift landing/);
+    game.transition.fast=false;
+    assert.equal(fastLiftArrival(game,place),false);
+  }
 });

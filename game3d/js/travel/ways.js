@@ -3,12 +3,12 @@
 // (runner.js entry), and the trip its node makes. Pure: a story, a condition function and the day in, ways out.
 //
 // A way is `scene` when walking it plays more than the walk: its node does anything besides the one trip (lines, a
-// `next` move, a lift opening), its transition has lines (story/transitions.js), or it is the lift to or from B2.
+// `next` move, a lift opening), its transition has lines (story/transitions.js), or it is the lift to or from B2 before B2 has been visited.
 // Fast travel only uses ways that are just a walk. Triggers a private plugin adds never count: lifecycle.js keeps
 // the story as the public files wrote it (keepPublic) before a plugin is installed.
 import { NEXT, canTravel } from '../places/definitions.js';
 
-const LIFT = 'office'; // B2: reached and left only by the lift
+const LIFT = 'office'; // B2: first visit uses the lift; discovered plain return routes can be fast-travelled
 const EXIT = /^(zone|talk):/;
 
 // the story as its files wrote it: the triggers and nodes, copied before a private plugin adds its own
@@ -51,7 +51,7 @@ export const isLift = (from, to) => from === LIFT || to === LIFT;
 // The ways out of `from` now: [{ to, key, node, scene }], one per target (a plain walk wins over a scene).
 // opts: cond (condition string -> bool), day, onceDone (the runner's used `once` triggers, for the place he's in),
 // transitions (story/transitions.js, for the lines a trip carries).
-export function waysOut(from, story, { cond, day = 1, onceDone = null, transitions = null } = {}) {
+export function waysOut(from, story, { cond, day = 1, onceDone = null, transitions = null, visited = new Set() } = {}) {
   const { on = {}, nodes = {} } = publicOf(story);
   const best = new Map();
   for (const [key, list] of Object.entries(on)) {
@@ -65,7 +65,10 @@ export function waysOut(from, story, { cond, day = 1, onceDone = null, transitio
     const to = m.do === 'next' ? NEXT[from] : m.to;
     if (!to || !canTravel(from, to, day)) continue;
     const scene =
-      m.do === 'next' || steps.length > 1 || isLift(from, to) || hasLines(transitions?.[`${from}_to_${to}`]);
+      m.do === 'next' ||
+      steps.length > 1 ||
+      (isLift(from, to) && !visited.has(LIFT)) ||
+      hasLines(transitions?.[`${from}_to_${to}`]);
     const prev = best.get(to);
     if (!prev || (prev.scene && !scene)) best.set(to, { to, key, node, scene });
   }
