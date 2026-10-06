@@ -1150,3 +1150,8 @@ body.phone #held .sheet .scr { width: min(186px, calc(50vw - 8px)); }
 body.phone #held .sheet + .sheet { margin-left: -18px; }
 /* Japanese spoken with an English subtitle (runner `en`): the name row says it's in Japanese */
 #talk .subtag { color: var(--ink-dim); font-size: 13px; font-weight: 500; }
+/* The clickable interface is not text to select (Jørgen, 2026-10-05: "the text in the interface should not be
+   highlightable, it is clickable gui. Other text inside modals etc should still be highlightable"): every button and
+   tab, the HUD row and goal box, the pins and their tooltip, the action menu, the LED board and the lift's floor
+   display. Text inside panels and dialogs stays selectable. */
+button, [role="button"], [role="tab"], #top, #marks, #actMenu, #board, #liftInd { -webkit-user-select: none; user-select: none; }
