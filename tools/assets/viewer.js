@@ -158,6 +158,8 @@ async function room(view) {
   else if (view.room === 'plaza') { w = (await mod('scenes/plaza.js')).buildPlaza(); scene = w.scene; }
   else if (view.room === 'dorm-court') { w = (await mod('scenes/dorm-court.js')).buildDormCourt(); scene = w.scene; }
   else if (view.room === 'dorms') { w = (await mod('scenes/dorms.js')).buildDorms(); scene = w.scene; }
+  else if (view.room === 'gym') { w = (await mod('scenes/rooms/gym.js')).buildGym(); scene = w.scene; }
+  else if (view.room === 'sports') { w = (await mod('scenes/sports.js')).buildSports(); scene = w.scene; }
   else if (view.room === 'train') {
     const car = (await mod('train/car.js')).buildCar('land');
     scene = new THREE.Scene(); scene.background = new THREE.Color('#9fb3c8');
