@@ -1,0 +1,20 @@
+{
+  "raw": "/home/jorgen/ai/island-audio/karaoke-song-2/a7/full.flac",
+  "raw_sha256": "ff2da3d8b1194f7bfe312c1e5014885b01ff65fb7b0ae2ccd3cd6aa7c19a893d",
+  "export": "art/parts/karaoke-song-2/a7-full.mp3",
+  "export_sha256": "fd18e9891ff0c7f94f7b877c755c78fc98b95a78b82f2e68d3ba1f44cd94d8fb",
+  "command": [
+    "ffmpeg",
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-i",
+    "/home/jorgen/ai/island-audio/karaoke-song-2/a7/full.flac",
+    "-codec:a",
+    "libmp3lame",
+    "-q:a",
+    "2",
+    "art/parts/karaoke-song-2/a7-full.mp3"
+  ],
+  "encoder": "ffmpeg version n9.0.1 Copyright (c) 2000-2026 the FFmpeg developers"
+}

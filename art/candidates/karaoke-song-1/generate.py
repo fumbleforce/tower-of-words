@@ -65,7 +65,7 @@ def exclusive(owner):
                 response.read()
 
 
-def generate(name):
+def generate(name, round_name='karaoke-song-1'):
     OUT.mkdir(parents=True, exist_ok=True)
     dst = OUT / name
     dst.mkdir(exist_ok=True)
@@ -80,7 +80,7 @@ def generate(name):
         print(name, 'already generated', flush=True)
         return
     report = {'take': name}
-    owner = 'codex-karaoke-song-' + name
+    owner = ('codex-karaoke-song-' if round_name == 'karaoke-song-1' else 'codex-' + round_name + '-') + name
     try:
         with exclusive(owner):
             graph = workflow(tags, LYRICS, 40, seed, INT8)
@@ -90,7 +90,7 @@ def generate(name):
             local_graphs = Path.home() / 'ai/workflows'
             local_graphs.mkdir(exist_ok=True)
             for folder in [graph_dir, local_graphs, dst]:
-                save(folder / ('karaoke-song-1-' + name + '-score.json'), score_graph)
+                save(folder / (round_name + '-' + name + '-score.json'), score_graph)
             score_path = dst / 'score.raw.abc'
             if not score_path.exists():
                 report['score'] = {}
@@ -106,9 +106,9 @@ def generate(name):
             del graph['2'], graph['P']
             graph['3']['inputs']['abc'] = abc
             graph['3']['inputs']['max_duration'] = seconds + 2
-            graph['8']['inputs']['filename_prefix'] = 'island/karaoke-song-1-' + name
+            graph['8']['inputs']['filename_prefix'] = 'island/' + round_name + '-' + name
             for folder in [graph_dir, local_graphs, dst]:
-                save(folder / ('karaoke-song-1-' + name + '-audio.json'), graph)
+                save(folder / (round_name + '-' + name + '-audio.json'), graph)
             report['audio'] = {}
             outputs = run(graph, report['audio'])
             for node in outputs.values():

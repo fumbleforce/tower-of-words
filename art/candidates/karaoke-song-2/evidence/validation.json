@@ -1,0 +1,17 @@
+{
+  "browser_transport": {
+    "log": "/tmp/codex-karaoke2-pagecheck.log",
+    "viewports": [1366, 390],
+    "players": 4,
+    "checks": ["audio metadata durations", "muted playback advances", "no horizontal overflow", "no page errors"],
+    "result": "PASS",
+    "limitation": "Transport test only; no audible quality or lyric-delivery approval."
+  },
+  "asset_upload": {
+    "command": "python3 tools/bible/pages.py push",
+    "uploaded_mp3s": 3,
+    "result": "PASS",
+    "metadata_scope": "Only the three owned MP3 entries retained as additive changes; unrelated generated media-list changes discarded."
+  },
+  "publication_scope": "Local Review plus asset media only; no site deployment, git push or runtime adoption."
+}

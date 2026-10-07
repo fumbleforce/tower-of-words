@@ -1,0 +1,36 @@
+{
+  "take": "a7",
+  "audio": {
+    "prompt_id": "e4708fe3-921e-4111-94e6-7c01eb3d325d",
+    "seconds": 158.08,
+    "status": {
+      "status_str": "success",
+      "completed": true,
+      "messages": [
+        [
+          "execution_start",
+          {
+            "prompt_id": "e4708fe3-921e-4111-94e6-7c01eb3d325d",
+            "timestamp": 1791386715433
+          }
+        ],
+        [
+          "execution_cached",
+          {
+            "nodes": [],
+            "prompt_id": "e4708fe3-921e-4111-94e6-7c01eb3d325d",
+            "timestamp": 1791386715433
+          }
+        ],
+        [
+          "execution_success",
+          {
+            "prompt_id": "e4708fe3-921e-4111-94e6-7c01eb3d325d",
+            "timestamp": 1791386872944
+          }
+        ]
+      ]
+    }
+  },
+  "audio_sha256": "ff2da3d8b1194f7bfe312c1e5014885b01ff65fb7b0ae2ccd3cd6aa7c19a893d"
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Karaoke A: complete-lyric follow-up",
+  "date": "2026-10-07",
+  "by": "Codex · karaoke song",
+  "status": "open",
+  "multi": false,
+  "question": "Does A6 preserve the selected tone and clearly sing all six lines, including the last question?",
+  "media": [],
+  "options": [
+    {
+      "id": "a6",
+      "label": "A6 · fuller articulation",
+      "audio": "art/parts/karaoke-song-2/a6-full.mp3",
+      "note": "50.96 seconds. Full transcription recognizes the first five lines as intended and includes the complete final question. Both passes misrecognize part of 同じ時間. This is the closest automated result; singing quality and the actual wording still need listening."
+    },
+    {
+      "id": "a5",
+      "label": "A5 · ending phrase change",
+      "audio": "art/parts/karaoke-song-2/a5-full.mp3",
+      "note": "51.60 seconds. The final question is recognized completely, but the earlier rain and next-train lines differ substantially in transcription. Listening is needed; this is not an accepted performance."
+    },
+    {
+      "id": "a7",
+      "label": "A7 · alternate synthesis seed",
+      "audio": "art/parts/karaoke-song-2/a7-full.mp3",
+      "note": "52.96 seconds. Several earlier words and the final question differ in both transcriptions. Four raw samples reach the clipping threshold. Retained as an unsuccessful follow-up; not ready to install."
+    },
+    {
+      "id": "neither",
+      "label": "None are ready; keep working",
+      "note": "Keep the selected A tone direction and correct the performance further."
+    }
+  ],
+  "links": [
+    {
+      "label": "All six attempts, original A, lyrics and exact checks",
+      "href": "reviews/karaoke-song-2/details.html"
+    }
+  ],
+  "issue": 320
+}

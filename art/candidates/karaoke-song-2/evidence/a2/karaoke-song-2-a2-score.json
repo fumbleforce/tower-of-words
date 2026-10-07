@@ -1,0 +1,36 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "yue2_3b_int8_convrot.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "YuE2GenerateABC",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "style": "Japanese, warm mature male baritone vocal, restrained adult register, modest Japanese folk pop, clear Japanese diction, acoustic guitar, piano, soft bass and drums, intimate karaoke accompaniment, complete short verse and refrain, 100 bpm",
+      "lyrics": "[verse]\n帰りの電車を一本見送って\nホームの端で電話をかけた\n話すことなんてないと思ってた\n\n[chorus]\nそっちは雨かと聞いただけ\n次の電車が来るまで話した\n明日も同じ時間にかけようか\n",
+      "seed": 208101,
+      "mode": "full",
+      "max_abc_tokens": 8192,
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "top_k": 30,
+      "repetition_penalty": 1.005,
+      "penalty_window": 100
+    }
+  },
+  "P": {
+    "class_type": "PreviewAny",
+    "inputs": {
+      "source": [
+        "2",
+        0
+      ]
+    }
+  }
+}

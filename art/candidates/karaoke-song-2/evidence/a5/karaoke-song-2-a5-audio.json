@@ -1,0 +1,96 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "yue2_3b_int8_convrot.safetensors"
+    }
+  },
+  "3": {
+    "class_type": "YuE2GenerateMusic",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "style": "Japanese, warm mature male baritone vocal, restrained adult register, modest Japanese folk pop, clear Japanese diction, acoustic guitar, piano, soft bass and drums, intimate karaoke accompaniment, complete short verse and refrain, 100 bpm",
+      "lyrics": "[verse]\n帰りの電車を一本見送って\nホームの端で電話をかけた\n話すことなんてないと思ってた\n\n[chorus]\nそっちは雨かと聞いただけ\n次の電車が来るまで話した\n明日も同じ時間にかけようか\n",
+      "abc": "X:1\nT:\nM:4/4\nL:1/16\nQ:1/4=100\nV: Vocal clef=treble name=\"Vocal Melody\" snm=\"Vocal\"\nV: Ins clef=treble name=\"Ins Melody\" snm=\"Inst.\"\nK:D\n% intro\nV: Vocal\n\"Asus4\"z8\"A\"z6A,2|\nV: Ins\nF8E6z2|\n% verse\nV: Vocal\n\"D\"F2EF3G2F2ED3D2|\"F#m7\"E2DE3DE3F4z2|\"Bm7\"z16|\"Bm7\"z12z2D2|\nV: Ins\nZ2|d4c2d4a6|c6d8z2|\nV: Vocal\n\"G\"B2AB3B2B2AA3F2|\"D/F#\"A4F2E2D4z2A,2|\"Em7\"B,2D2D2DD3B,D3B,2|\"A7sus4\"F6GFE4z4|\nV: Ins\nZ4|\nV: Vocal\n\"A\"z8F4A2A2|\nV: Ins\nz16|\n% chorus\nV: Vocal\n\"D\"f6f2e2d2c2d2|\"F#m7\"c6A2A4z2A2|\"Bm7\"B2d2d2Bd3B2d2B2|\"G\"d4z2d2d4e2e2|\nV: Ins\nZ4|\nV: Vocal\n\"D\"d4z2d2c2d4a2-|\"F#m7\"a8-a2f4e2-|\"G\"e2d12z2|\"A7sus4\"z6A,2F3E3D2|\nV: Ins\nZ4|\nV: Vocal\n\"D\"D4E4F4D4|\"D\"z16|\"D\"z16|\"D\"z16|\nV: Ins\nz16|g4d2g4f4A2|f16|z16|\n",
+      "seed": 207101,
+      "mode": "full",
+      "max_duration": 54.8,
+      "temperature": 1.0,
+      "top_p": 0.95,
+      "top_k": 100,
+      "repetition_penalty": 1.2
+    }
+  },
+  "4": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "EmptyYuE2LatentAudio",
+    "inputs": {
+      "seconds": [
+        "3",
+        1
+      ],
+      "batch_size": 1
+    }
+  },
+  "6": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "3",
+        0
+      ],
+      "negative": [
+        "4",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ],
+      "seed": 207101,
+      "steps": 32,
+      "cfg": 1.0,
+      "sampler_name": "dpm_2",
+      "scheduler": "sgm_uniform",
+      "denoise": 1.0
+    }
+  },
+  "7": {
+    "class_type": "VAEDecodeAudio",
+    "inputs": {
+      "samples": [
+        "6",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "8": {
+    "class_type": "SaveAudio",
+    "inputs": {
+      "audio": [
+        "7",
+        0
+      ],
+      "filename_prefix": "island/karaoke-song-2-a5"
+    }
+  }
+}
