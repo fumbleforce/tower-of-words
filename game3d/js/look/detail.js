@@ -6,6 +6,7 @@
 // it off); cast.js does the same for mug(). The showcase room uses them for its look 8 and for the extras here
 // (window frame, switch, socket, cables, tower, bin, pins, clock rim).
 import * as THREE from 'three';
+import { crtHousing } from './crt.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { PAL, PED, mat, emissive, rbox, plainPlant as basePlant, plainMonitor as baseMonitor, sh } from '../props.js';
 
@@ -205,7 +206,7 @@ export function socket() {
 
 // ---------- desk: chamfered top, pedestals with inset drawer fronts and bar handles, a modesty panel,
 // a keyboard with keys, a mouse, a tray with a lip, a pen cup with pens, binders with a ring hole (open: props.js) ---
-export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1, open = false } = {}) {
+export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1, open = false, crt = false } = {}) {
   const g = new THREE.Group();
   const H = 0.42;
   g.add(cbox(w, 0.04, d, PAL.deskTop, { y: H - 0.04, r: 0.014 }));
@@ -229,9 +230,8 @@ export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1, ope
     }
   }
   if (!open) g.add(cbox(w - 2 * (PED + 0.02), 0.22, 0.022, PAL.drawer, { y: 0.15, z: -d / 2 + 0.05 }));
-  // monitor: bezel frame, inset screen, a stand with a round foot and a hinge
   if (mon) {
-    const m = monitor();
+    const m = monitor({ crt });
     m.position.set(0, H, -d * 0.2);
     g.add(m);
   }
@@ -309,8 +309,8 @@ export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1, ope
   return g;
 }
 export function monitor(o = {}) {
-  const g = baseMonitor(o);
-  // drop the base monitor's body and stand, keep its screen (live, or off)
+  const g = baseMonitor({ ...o, crt: false });
+  // Keep the live base screen.
   const screen = g.children.find((c) => c.geometry && c.geometry.type === 'PlaneGeometry');
   g.clear();
   g.add(screen);
@@ -344,7 +344,7 @@ export function monitor(o = {}) {
     m: emissive('#6fd0c6', '#6fd0c6', 1.4),
   });
   g.add(led);
-  return g;
+  return o.crt ? crtHousing(g, cbox, mat) : g;
 }
 
 // centre: the origin at the middle of the cup, like cast.js's plain mug (the game places mugs by their middle)

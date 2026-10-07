@@ -176,7 +176,7 @@ export function* emiOffice(root, pool, { X0, CS, Z1, T }) {
     root.add(np);
   }
   {
-    const mo = monitor();
+    const mo = monitor({ crt: true });
     mo.position.set(X(-0.3), top, Z(-0.17));
     mo.rotation.y = 0.42; // turned to her, on the side away from the doorway, so the visitor sees her
     root.add(mo);

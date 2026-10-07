@@ -976,7 +976,7 @@ export function* officeSteps() {
   const dN = (i) => desks.find((d) => d.row === 'n' && d.i === i),
     dS = (i) => desks.find((d) => d.row === 's' && d.i === i);
   yield;
-  // desk island: two rows of three, back to back; the section chief's desk across the head
+  // Back-to-back desks; the chief sits across the head.
   const DX = [-2.0, -0.8, 0.4],
     ZN = -3.72,
     ZS = -3.0;
@@ -986,7 +986,7 @@ export function* officeSteps() {
     ['s', ZS, 1],
   ])
     for (let i = 0; i < 3; i++) {
-      const d = desk({ w: 1.12, d: 0.7, seed: i + (row === 'n' ? 3 : 0), clutter: 1 });
+      const d = desk({ w: 1.12, d: 0.7, seed: i + (row === 'n' ? 3 : 0), clutter: 1, crt: true });
       d.position.set(DX[i], 0, z);
       if (face < 0) d.rotation.y = Math.PI;
       root.add(d);
@@ -999,8 +999,8 @@ export function* officeSteps() {
     }
   yield;
   // the section chief's desk at the head of the island, facing along it
-  const chief = desk({ w: 1.2, d: 0.72, seed: 7 });
-  chief.rotation.y = -Math.PI / 2;
+  const chief = desk({ w: 1.2, d: 0.72, seed: 7, crt: true });
+  chief.rotation.y = Math.PI / 2;
   chief.position.set(1.55, 0, -3.36);
   root.add(chief);
   const chiefChair = officeChair('#2a2f3e');
@@ -1012,11 +1012,11 @@ export function* officeSteps() {
   yield;
   // the team has shrunk: three desks have their monitors under a cloth
   const cloth = (d) => {
-    // a pale dust sheet thrown over the monitor: the screen's shape under it, the hem spread on the desk
+    // Dust sheet follows the tube housing, with its hem on the desk.
     const g = new THREE.Group();
     const cm2 = mat('#c3bfb4', { roughness: 0.95 });
     g.add(
-      rbox(0.5, 0.32, 0.1, null, { y: 0.1, r: 0.06, seg: 3, m: cm2 }),
+      rbox(0.5, 0.34, 0.26, null, { y: 0.1, z: -0.027, r: 0.06, seg: 3, m: cm2 }),
       rbox(0.62, 0.03, 0.34, null, { r: 0.03, seg: 3, m: cm2 }),
       rbox(0.3, 0.1, 0.16, null, { y: 0.02, r: 0.04, m: cm2 }),
     );
@@ -1077,7 +1077,7 @@ export function* officeSteps() {
   fan2.add(new THREE.Group(), new THREE.Group(), new THREE.Group()); // the floor fan is gone; the updater still spins a dummy
   const cart = new THREE.Group();
   cart.add(rbox(0.5, 0.5, 0.4, '#6e747e', { r: 0.02 }));
-  const cm = monitor({ kind: 'term' });
+  const cm = monitor({ kind: 'term', crt: true });
   cm.position.set(0, 0.5, 0);
   cart.add(cm);
   cart.position.set(4.2, 0, -1.3);
