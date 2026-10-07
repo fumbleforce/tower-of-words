@@ -7,8 +7,8 @@
 // Each over a window of WIN game seconds; an episode is recorded when it lasts BAD windows in a row, with how long it
 // lasted. Everything is in the person's own body units, so the same numbers hold for every place and size.
 // game3d/tools/gait-check.mjs (real time) fails on any episode, reports(); the fast test (sped up 8 times) on those
-// of 4 windows or more, reports(4). Free walking is sampled after every simulation step; scripted walkers and
-// render-driven cast retain their drawn-frame clock. Mixing those clocks mistakes stale poses for sliding.
+// of 4 windows or more, reports(4). Free walking and synchronous procedural walks are sampled after every simulation step;
+// independently animated cast retain their drawn-frame clock. Mixing those clocks mistakes stale poses for sliding.
 import * as THREE from 'three';
 import { bodies } from './shared.js';
 
@@ -85,9 +85,10 @@ export function startGaitCheck(game) {
     const seen = new Set();
     for (const [id, r, seated] of list) {
       if (!r?.root?.parent || seen.has(r)) continue;
-      // Only free player movement and its pose finish together in main.step.
-      // walkRig moves on rAF; meshyPerson poses at render time. Preserve their clock.
-      const cadence = r === game.player && !r.scripted && !r._walk ? 'step' : 'drawn';
+      // walkPerson's callback moves and poses procedural rigs within main.step.
+      // setGait schedules a separate pose update; walkRig and Meshy keep the drawn clock.
+      const proceduralStep = typeof r._walk === 'function' && r.knees && !r.selfGait && !r.meshy && !r.setGait;
+      const cadence = proceduralStep || (r === game.player && !r.scripted && !r._walk) ? 'step' : 'drawn';
       if (cadence !== clock) {
         seen.add(r);
         continue;

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { registerHooks } from 'node:module';
+import { readFileSync } from 'node:fs';
 import * as THREE from '../../vendor/three/three.core.js';
 
 registerHooks({
@@ -22,12 +23,17 @@ function fixture() {
   scene.add(space);
   space.add(root);
   const feet = [new THREE.Object3D(), new THREE.Object3D()];
-  root.add(...feet);
+  const knees = feet.map((foot) => {
+    const knee = new THREE.Object3D();
+    knee.add(foot);
+    return knee;
+  });
+  root.add(...knees);
   const camera = new THREE.OrthographicCamera(-100, 100, 100, -100, 0.1, 1000);
   camera.position.set(0, 30, 100);
   camera.lookAt(0, 0, 0);
   camera.updateMatrixWorld();
-  const player = { root, feet, state: 'walk', _walk: false };
+  const player = { root, feet, knees, state: 'walk', _walk: false };
   const game = {
     place: { name: 'first', space, camera, people: {} },
     player,
@@ -199,4 +205,73 @@ test('long-running free steps keep strict limits while the drawn clock retains c
   for (let i = 0; i < 60; i++) drawn.sample(10000 + i * 0.1, 2, 10000 + i * 0.1, 'drawn');
   assert.ok(drawn.report.windows >= 8);
   assert.deepEqual(drawn.report.episodes, []);
+});
+
+const readerTrace = JSON.parse(readFileSync(new URL('../fixtures/reader-gait-samples.json', import.meta.url), 'utf8'));
+
+function replayReader(movement, bodySpeed = 1) {
+  const f = fixture();
+  const reader = f.game.player;
+  Object.assign(reader, movement);
+  f.game.player = null;
+  f.game.place.people.reader = reader;
+  for (const [t, clock, x, z, lx, lz, ly, rx, rz, ry] of readerTrace.samples) {
+    f.game.t = t;
+    reader.root.position.set(x * bodySpeed, 0, z * bodySpeed);
+    reader.feet[0].position.set(lx, ly, lz);
+    reader.feet[1].position.set(rx, ry, rz);
+    f.report.sample(clock);
+  }
+  return f;
+}
+
+test('recorded train reader strides are coherent at their completed step cadence', () => {
+  const stepped = replayReader({ _walk() {} });
+  assert.ok(stepped.report.windows >= 8, 'the real sampler measured the retained walk');
+  assert.deepEqual(stepped.report.episodes, []);
+  assert.ok(stepped.report.people.reader.ratio.every((r) => r > 1 && r < 1.3));
+
+  // The same poses sampled on the former drawn clock recreate the native aliasing.
+  const drawn = replayReader({ _walk: true });
+  assert.ok(drawn.report.episodes.some((e) => e.kind === 'slide' && e.windows === 3));
+  assert.deepEqual(drawn.report.people.reader.ratio, [2.4, 0.99, 1.69, 3.61, 8.93, 17.24, 4.37, 2.61]);
+});
+
+test('procedural step sampling still detects movement that outruns the recorded feet', () => {
+  const f = replayReader({ _walk() {} }, 4);
+  assert.ok(f.report.episodes.some((e) => e.kind === 'slide' && e.windows >= 4));
+});
+
+test('independently posed and unsupported callback rigs retain their drawn-frame cadence', () => {
+  for (const movement of [
+    { _walk() {}, meshy: true },
+    { _walk() {}, setGait() {} },
+    { _walk() {}, selfGait: true },
+    { _walk() {}, knees: null },
+  ]) {
+    const f = replayReader(movement);
+    assert.ok(f.report.episodes.some((e) => e.kind === 'slide' && e.windows === 3));
+    assert.equal(f.report.people.reader.windows, 8);
+  }
+});
+
+test('procedural callback handoff resets its window without hiding later sliding', () => {
+  const f = fixture(),
+    reader = f.game.player;
+  f.game.player = null;
+  f.game.place.people.reader = reader;
+  reader._walk = () => {};
+  for (let i = 0; i < 120; i++) f.sample(i / 60);
+  reader._walk = true;
+  f.offset(10);
+  f.sample(3, 1, 3, 'step');
+  f.sample(3, 1, 3, 'drawn');
+  for (let i = 181; i < 300; i++) f.sample(i / 60, 1, i / 60, 'drawn');
+  assert.deepEqual(f.report.episodes, []);
+  reader._walk = () => {};
+  f.offset(-10);
+  f.sample(6, 1, 6, 'drawn');
+  f.sample(6, 1, 6, 'step');
+  for (let i = 361; i < 600; i++) f.sample(i / 60, 1, 6);
+  assert.ok(f.report.episodes.some((e) => e.kind === 'slide' && e.windows >= 4));
 });
