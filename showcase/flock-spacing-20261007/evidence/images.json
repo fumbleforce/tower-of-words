@@ -1,0 +1,302 @@
+[
+  {
+    "original": "game3d/shots/flock-spacing/baseline/1366-diagnostic-flock.png",
+    "sha256": "d94f681bed6dc30355b82209841ca88cbd4b50f0d3d4114fe3156aa51a32f6ee",
+    "image": "bible/shots/showcase/flock-spacing-20261007/baseline/1366-diagnostic-flock.webp",
+    "image_sha256": "2e63bf4e91f7e3649cb03c1bea3c71ed6ebd7cd8af5639711152e49e740e758f"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/baseline/1366-native-feeding.png",
+    "sha256": "655edfdc57d209fdeb271b62c455d13c17a50af85115f6e6609cacd4da9f9bf6",
+    "image": "bible/shots/showcase/flock-spacing-20261007/baseline/1366-native-feeding.webp",
+    "image_sha256": "9e0520b10a3ef33f61d91af2d0270be1b4110e0c9924f3d43364ac9f5cca7e6d"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/baseline/1366-native-initial.png",
+    "sha256": "39bec904b473dd4b38b3831922708a1f33d2839c6b1ae0181dc74e791e093e5d",
+    "image": "bible/shots/showcase/flock-spacing-20261007/baseline/1366-native-initial.webp",
+    "image_sha256": "885680a3067fd0e7c798312870d6542f896a2be0bd65b62386b4c5e62a2e8a49"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/baseline/1366-native-return.png",
+    "sha256": "864e5e4d4a6a9283c2d25bc5dc76bd07d1f0aaf45ec8b74fc893797849b502a9",
+    "image": "bible/shots/showcase/flock-spacing-20261007/baseline/1366-native-return.webp",
+    "image_sha256": "d084bc5e8566a29d437f4ca401e018a8fecc125b310722425f695f6a54f6cbc8"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/baseline/1366-staged-approach.png",
+    "sha256": "0783c783309364e701628f4de174309ee7bd5d441d94fdfd18467b63ccaafe9f",
+    "image": "bible/shots/showcase/flock-spacing-20261007/baseline/1366-staged-approach.webp",
+    "image_sha256": "08f3fb890a4ebe3f993e9695f026d9f36e0b52c3c514c5016a0f6f4eecf32995"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/baseline/390-diagnostic-flock.png",
+    "sha256": "3858e083f5004eec9ddcae31abe73c8ff81373c0b0dac843ce36c530a5d182e4",
+    "image": "bible/shots/showcase/flock-spacing-20261007/baseline/390-diagnostic-flock.webp",
+    "image_sha256": "785821011c8dab942ce7ecc6b4ea1a5a6fabc900851abfdc0aabaadefedce650"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/baseline/390-native-feeding.png",
+    "sha256": "18b7ce79b33806869836f5126fbc709d29fbc345257fb4f071ab9ee1260aa50f",
+    "image": "bible/shots/showcase/flock-spacing-20261007/baseline/390-native-feeding.webp",
+    "image_sha256": "3bb3fa951be7dc62fa841ee36d58f422cf646cc8d960a1cb922e297c0ace3d01"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/baseline/390-native-initial.png",
+    "sha256": "9919c0158c921c2f6a3858fd0fab45896cd7e66a49422e2e45899236f1ea88fa",
+    "image": "bible/shots/showcase/flock-spacing-20261007/baseline/390-native-initial.webp",
+    "image_sha256": "4d591bc941354541662ab7ea393efd5aead35ca34e16e1d1ccee2f5610177e06"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/baseline/390-native-return.png",
+    "sha256": "5b535b66a11ae08b0dbe6cc1c9369c9fba435a3730e8d859904036db87ae4471",
+    "image": "bible/shots/showcase/flock-spacing-20261007/baseline/390-native-return.webp",
+    "image_sha256": "bd11503530f1444bc457d74bf53d290d1913aef9c14f3b0d8adbf5f2d1b2038a"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/baseline/390-staged-approach.png",
+    "sha256": "ba7d2351260bbc0077961ac10c783b52ce919e91834c072d9895a70929c8fdc2",
+    "image": "bible/shots/showcase/flock-spacing-20261007/baseline/390-staged-approach.webp",
+    "image_sha256": "1363e047cd682fc62df3bf410d22b197b5e4671e8ad69e92ba7bde3d317201df"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/fixed-1/1366-diagnostic-flock.png",
+    "sha256": "54e12e750b1aa88ae30738bd3f00c537fa1ddc4642faf0e46ffd991b0b103827",
+    "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/1366-diagnostic-flock.webp",
+    "image_sha256": "4c84f689ae61303b7c66b20621d71de7bd64e7ca31f646a0a126b4f365aa4ff9"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/fixed-1/1366-native-feeding.png",
+    "sha256": "bf255c3c763fed4a209a5d256bd75abe9ab160f95d82e2717ef7274fc7533d52",
+    "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/1366-native-feeding.webp",
+    "image_sha256": "bdec7c7110a356ee2559dc8ae4b6f0254c31a445d8627680bda9f74476a5fa0c"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/fixed-1/1366-native-initial.png",
+    "sha256": "1aae59926449ee1c2d853384dada6b8a227d0cb386d0b26afcc8bccc56f649d7",
+    "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/1366-native-initial.webp",
+    "image_sha256": "154dcb3f0ba27a804ca007d313c0e05ad11aec3dd0790c1853485ca7b606c259"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/fixed-1/1366-native-return.png",
+    "sha256": "af3522d244da49b0e086a8b3451420de49929ec0b47eba00387f61838f1986e7",
+    "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/1366-native-return.webp",
+    "image_sha256": "a8eb299a8ed45dbf970ea4bea3d0762d8b531c418c8dffebde2ad121e23797fb"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/fixed-1/1366-staged-approach.png",
+    "sha256": "5db8caacafb12ae977c8a380f89fbec835df73048f3b6ccffc95488b53bab14d",
+    "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/1366-staged-approach.webp",
+    "image_sha256": "39343c29343bffe6c2bfbc4902350f64d68843ef5461aa9011829814975495ef"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/fixed-1/390-diagnostic-flock.png",
+    "sha256": "223a0427da7f3e0f39d109f40ad4c5d37a0e89fc5d8615a0b13ed937fbf6b2ba",
+    "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/390-diagnostic-flock.webp",
+    "image_sha256": "ab8a581e82a2ec99b0d93ed84461a0f34cfc24a6ef560166d0e023d80dcc6971"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/fixed-1/390-native-feeding.png",
+    "sha256": "ef0dc36cbb15f39fec8448cf181e027f0d44f456286a899575a4354f67851072",
+    "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/390-native-feeding.webp",
+    "image_sha256": "a3f5dd7bd83042598f7a047b3dbd1b87f229dc7fe05856c33157db973eb64b84"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/fixed-1/390-native-initial.png",
+    "sha256": "c2c44ba221d4cabf4b196caba98aa7c9ab04ad198e87b6b129f60e6e121e19c5",
+    "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/390-native-initial.webp",
+    "image_sha256": "8a8efe3a2d0d4b5f285ca39f5fddaffa35042e288d2cbbf76d21aaf9cbf51009"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/fixed-1/390-native-return.png",
+    "sha256": "b960feb68afa34946c0148b4eb92cf6b29d1be24db75f76a4c618e91025b7588",
+    "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/390-native-return.webp",
+    "image_sha256": "5dc1ec65d37e785a2f8ad53fabacd0b4c2d2b957f485252946e88bf099df433b"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/fixed-1/390-staged-approach.png",
+    "sha256": "a1c462b931440715b8b7b53828dd58852aca52a74be443add4e82319fed202b7",
+    "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/390-staged-approach.webp",
+    "image_sha256": "7eb4f3f79e64ef8f7265261a83ed044b5fd111a8f068e3a79c9b16f3afa94900"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final/1366-diagnostic-flock.png",
+    "sha256": "1bf864b20082ca45e280bffe4ade4216ecf1795f6b3f2c637d84f084be50f6ff",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final/1366-diagnostic-flock.webp",
+    "image_sha256": "881ab5b5c8e6e60b0b1bc82940f44a47bbf0be3ddd949de24bfad2be6c5de453"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final/1366-native-feeding.png",
+    "sha256": "1fc2add05ad4e06570c12f8156f540b4e19531ae00a4d1464887e767dc0a029c",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final/1366-native-feeding.webp",
+    "image_sha256": "34f59dab7da2de873c3d7b78a5de81588ff02f03f3361c480ea6c1b2ec05c94c"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final/1366-native-initial.png",
+    "sha256": "698855ab57a796fdeeebe9caee9987515906d83f19bf8c716d01daa5220fffd4",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final/1366-native-initial.webp",
+    "image_sha256": "b7c399162fad44e6750f0f781d10cd6bf90f9aed971aae5523e97df57b8ad914"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final/1366-native-return.png",
+    "sha256": "c32b3577badfbb3a42dad8dad3fe79b9eb4b176787230c6ca1087be2e0cc9683",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final/1366-native-return.webp",
+    "image_sha256": "67defadec517fb49b7ef12007be3711b26cc939443e83011e177558caa6d8d71"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final/1366-staged-approach.png",
+    "sha256": "5cd017b1af313cc028b01773e09aa29a824237e15022daf852178be29293539d",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final/1366-staged-approach.webp",
+    "image_sha256": "d89512b43384dd26f0651a6d0dfc7cf51e20618107e1ebe484a7880ce7ef06a1"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final/390-diagnostic-flock.png",
+    "sha256": "7ceed96e2e5118ac0dfc140ba70f8f68678c437f139542dfb5eede17d0f127c5",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final/390-diagnostic-flock.webp",
+    "image_sha256": "60eef06444641bfaa099d8048f6d5a9bbb31c50be03bcfe3e1f36bc562d54eaa"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final/390-native-feeding.png",
+    "sha256": "fcd24566e5b6557ea4a721cb44aa93ce92e18b54f99619d05168df3cf9059e8a",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final/390-native-feeding.webp",
+    "image_sha256": "e16532fc91000e92daa019d22da25a9b612eb1efed0850b0101d282a5e72826b"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final/390-native-initial.png",
+    "sha256": "e95c4fd741b40deda73d328ca519be14aed6048173b05d86eeb9ff3b3aeebc83",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final/390-native-initial.webp",
+    "image_sha256": "96070f3346927f8d14719c801227191a54d316102f8da7dbe9ca72ff4452ec49"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final/390-native-return.png",
+    "sha256": "34b61b8fd07c0a9acecff7c69d8fc5a91ad74e7e6d7435a91f908b0f92be86bb",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final/390-native-return.webp",
+    "image_sha256": "a6befb7bf41d0a9508db02d8a70d0bfcd325038352a125f638752af8f16832fb"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final/390-staged-approach.png",
+    "sha256": "ba3eb19c49a70b634f884dd06af013f5c9d469018361e5c82b516c2627d55fd6",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final/390-staged-approach.webp",
+    "image_sha256": "3c55eaa45b8c041f1839ccb4017c3cd7a2dde7ba862cf8de4239a097084eda89"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final2/1366-diagnostic-flock.png",
+    "sha256": "63333ccf40e833a0e0cedca05ba1f74b35de965ee1521e893b7ec9dd8ed13abc",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final2/1366-diagnostic-flock.webp",
+    "image_sha256": "54b18d7f28956afac956b02ae8d48d6b91383d2530ce07302a32c2328580f62f"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final2/1366-native-feeding.png",
+    "sha256": "f62a0cefee17b89a0f57f145c3cf1cb266b8a9a627bc93a63c88e6e31f72323c",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final2/1366-native-feeding.webp",
+    "image_sha256": "a09d3dad8d91f44fd7e26eea4bef186640494ab2f6cf605e1da4f4390ef9da7f"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final2/1366-native-initial.png",
+    "sha256": "95b384e48f23cb8ea25d1cae7e5f810f3a03b880c5ff4a98b4d3f5e5ea381c37",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final2/1366-native-initial.webp",
+    "image_sha256": "cfa15517b2d5f5ed6134db03b2c264783eba1c0dcf9e72ab16e978255a5adc30"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final2/1366-native-return.png",
+    "sha256": "68b28b83b093fa04e66f3dcab6e4e325bd375b6c1430c7ffcb9832341dd82c80",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final2/1366-native-return.webp",
+    "image_sha256": "541ab959dd0a379749c21ce8bb50f229832b090af0740b30fc6b06b4f824bb22"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final2/1366-staged-approach.png",
+    "sha256": "e44d7bb3efb60ed8f8dc79ea8ca110fa726f4ee66e69a10904780f70295b8a1b",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final2/1366-staged-approach.webp",
+    "image_sha256": "99e5a349a92dca83a44501402bcde8e23d04e2a588c4159f9d6c542c979406e4"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final2/390-diagnostic-flock.png",
+    "sha256": "60ebacaf7b1aa3a74e054bd280fd9be0dff8e9827de1fdbaca376cf99daafd44",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final2/390-diagnostic-flock.webp",
+    "image_sha256": "16f37a6aac6a483393f2d7a06e74abd81091a5b9a597c32dff40bb2e63a870f3"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final2/390-native-feeding.png",
+    "sha256": "a4d354d6d8c9756804c818667a6d9a8094c613151c784da70d6892c4565aa3c5",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final2/390-native-feeding.webp",
+    "image_sha256": "9630e645a5f5b3cd19052758e4f463b5d03955e9c681e7da107ed16a4aa1a83f"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final2/390-native-initial.png",
+    "sha256": "23680063e38a314be12964b0d6e2efe210bf8938849541cd248cd7e740d35654",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final2/390-native-initial.webp",
+    "image_sha256": "79b722c67788e7ef9a502ff85b9bfd3b79f8aef29b199f4d40aaa84d226e69e1"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final2/390-native-return.png",
+    "sha256": "00fe7cd7c7287bc6955ff9a48920e45145dd487f74ecb8e39ed699ad09e7711b",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final2/390-native-return.webp",
+    "image_sha256": "9e41092b2eb72f94879cf3d77a68cf50e42f54cfa338a88b7be451e7de9e0285"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final2/390-staged-approach.png",
+    "sha256": "a4a9f91602bc9e62f398d813b256874a99caff9a8cef4b5e98a8b254ab8d528a",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final2/390-staged-approach.webp",
+    "image_sha256": "991c6519916c9d5c8a1d5d20a4a83a21935c742d3570d197551f533024ab69c7"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final3/1366-diagnostic-flock.png",
+    "sha256": "9b920db42a51f3aa284788e7a4e1c33e39c3317653000f5b4e6bf91b1c5132e5",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final3/1366-diagnostic-flock.webp",
+    "image_sha256": "84430ba4ffb37ab34e67b2c77fa417c06b2a96de93b14deb03b129adbee811ef"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final3/1366-native-feeding.png",
+    "sha256": "661df2a934a7236f47188d5b3eda5a791984c355b5557f30f9a91675a85d82c3",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final3/1366-native-feeding.webp",
+    "image_sha256": "2f12a79ee5a5151ac36b49f033f7dc28e641fe5b83da9ddd79174a76d447f8f5"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final3/1366-native-initial.png",
+    "sha256": "4a944e4a8a351b5c221ea74a6cb5e9960a87d4dfde98f3a6ae38cd5ecfc0de2b",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final3/1366-native-initial.webp",
+    "image_sha256": "c641a76bc0e6298f24b36753a276a24ee061447a2672a487b77cde2bd91932e0"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final3/1366-native-return.png",
+    "sha256": "025cae665e005cd17006ec304938bfa008715c75224581ef28a0800bbad62cab",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final3/1366-native-return.webp",
+    "image_sha256": "ada373eeee310953e7df90b4d0f54ac398c5fec867c2000959b57b82d86abe13"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final3/1366-staged-approach.png",
+    "sha256": "3964e1370e5da9dfce590b99888333881c0b5d92ca91ac3b57afa7355f23a88e",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final3/1366-staged-approach.webp",
+    "image_sha256": "fda8ccc370170ac0d9521a0a9ebf084e469e48cb37b0e1c18621c39f5267f571"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final3/390-diagnostic-flock.png",
+    "sha256": "3789558895223eab7b36599f492271b49d030f8b089298cc146b5c235703fab6",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final3/390-diagnostic-flock.webp",
+    "image_sha256": "e7ef415ee9e992f2fea860fddb1dfcb226d460ca58b93f5957f3f8ad9a7d2abc"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final3/390-native-feeding.png",
+    "sha256": "7f68bef12010f31f4a4932d591bff675f2e05394c6c02a0b374fd0c2bf11b6f9",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final3/390-native-feeding.webp",
+    "image_sha256": "5cbe91c889361655d0a8f10788e386eaaa676527c59179c3e6582e31131add7d"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final3/390-native-initial.png",
+    "sha256": "73a25c7f4dca36333abd0e849bff4eaac988ec7eea43d1698357b66f204dde0c",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final3/390-native-initial.webp",
+    "image_sha256": "10922b587c99e0b97f5a75bf4a7b5755a53e4dfd815c32644650648fffd2bd1e"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final3/390-native-return.png",
+    "sha256": "fe9bd8003404bd5972b22e561b8ccc208dd375b678611ab46cb3887dc8a48711",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final3/390-native-return.webp",
+    "image_sha256": "2c2dfd8b25254d29fd4c2ae62c2e4eba76f971270fb8cbf471eeb389cf7a6cfe"
+  },
+  {
+    "original": "game3d/shots/flock-spacing/final3/390-staged-approach.png",
+    "sha256": "478684d3428c71141b68c7f94b15b08a974d4962c113e1763218f727b97b749f",
+    "image": "bible/shots/showcase/flock-spacing-20261007/final3/390-staged-approach.webp",
+    "image_sha256": "80c48260a85652f58c2c28384cdee0f247f53989b9879fa10acdee11fcdb0ad7"
+  }
+]
