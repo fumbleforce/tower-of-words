@@ -68,6 +68,8 @@ await withBrowserJob('konbini-native', async browser => {
     await ready();await page.waitForFunction(()=>!globalThis.document.querySelector('#boot:not(.gone)'));await page.waitForTimeout(700);
     await use('store_door');await page.waitForFunction(()=>globalThis.__game.place.name==='konbini'&&!globalThis.__game.busy);
     await shot('arrival');await observe();const before=await state();
+    assert.equal(before.day,+(process.env.DAY||3));
+    assert.equal(await page.evaluate(()=>globalThis.__game.place.people.konbini_clerk.root.visible),true);
     await use('fridge');await finish([], 'Milk carton.');await add('Milk carton.');await add('Salted rice ball.');
     const basket=await state();assert.equal(basket.yen,before.yen);assert.deepEqual(basket.inv,before.inv);assert.equal(basket.flags.konbini_count,2);
     await reload();await finish([], 'Check out.');assert.equal((await state()).flags.konbini_count,2);await shot('basket-continue');

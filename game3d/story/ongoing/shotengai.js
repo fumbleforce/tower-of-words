@@ -2,7 +2,7 @@ import source from '../day3/shotengai.js';
 import { reiIntroduction } from './east_coast.js';
 import { interactions, place } from './shared.js';
 const familiar = interactions(source, [
-  'talk:bakery_door', 'talk:bakery', 'talk:bike_shop', 'talk:game_centre', 'talk:kenji', 'talk:kuroda', 'talk:kuro', 'talk:aoi',
+  'talk:store_door', 'talk:bakery_door', 'talk:bakery', 'talk:bike_shop', 'talk:game_centre', 'talk:kenji', 'talk:kuroda', 'talk:kuro', 'talk:aoi',
 ]);
 export default place('shotengai', {
   ...familiar,
@@ -17,7 +17,7 @@ export default place('shotengai', {
       { say: 'aoi', overheard: true, emo: 'polite', text: '{sumimasen}。{koko}、どうぞ。' },
       { do: 'gesture', who: 'aoi', kind: 'point' },
     ] }],
-    ongoing_store: [{ say: 'eric', emo: 'curious', text: 'I should find out which of those cartons is milk.' }],
+    ongoing_store: [{ if: 'konbini_visited', then: ['> Milk cartons · 150 yen'], else: [{ say: 'eric', emo: 'curious', text: 'I should find out which of those cartons is milk.' }] }],
     ongoing_bench: [{ say: 'eric', emo: 'warm', text: 'I could eat out here.' }],
     ongoing_mori_shopping: [
       { say: 'mori', overheard: true, emo: 'polite', text: 'あ、{mc.name_jp}さん。お買い物ですか。' },
