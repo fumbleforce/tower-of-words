@@ -1,6 +1,6 @@
 # Finds and early personal scenes
 
-Story authored; placement, dispatch, voices and physical checks remain to build. These packs accompany days 3 to 5 and the recurring meetings that follow. They do not register themselves or enable later days. Each day's index exports the descriptors for its builder.
+Implementation is partial. The twelve flavor finds are physically staged and registered through [js/flavor-finds/](../../../../game3d/js/flavor-finds/index.js). Mio’s weekday B2 lunch milestones at steps 2 and 3 are also integrated, including saved completion and the later east-coast lunch schedule; see [Memory](../../systems.md#memory). The remaining authored personal scenes are not made playable merely by appearing in the milestone pack. These packs accompany days 3 to 5 and recurring meetings; they do not enable later days.
 
 [Flavor finds](../../../../game3d/story/days3-5-finds.js) supplies twelve short in-place interactions at existing nooks. Each entry owns its first day, last day if any, condition, target and exact physical handling. Paper and object details are left where found. `flavor_<id>_seen` suppresses repeats; no inventory photo, album total, clock, wallet, ticket or bond changes. The single seasonal pool find expires after the October swim. The [placement contract](../../../../game3d/story/days3-5-finds-README.md) covers readable notes and restoration.
 
