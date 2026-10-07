@@ -2,7 +2,7 @@
 
 Work #322; [Review character-scale-1](../reviews/character-scale-1/review.json). User request: [in-game feedback](feedback-game/2026-10-07_091301/text.md).
 
-`?charscale=67` makes human bodies 67% of their existing size. Other values and an absent query retain the current size. The trial does not persist a setting. It covers Meshy/chibi cast, both protagonists, crowd and code-built fallback bodies. Approved source models, environment geometry and furniture are unchanged. Relative body heights remain unchanged. Cats and other creatures retain their existing size.
+`?charscale=85` compares the requested 15% reduction; `?charscale=67` retains the initial 33% reduction. Jørgen found the initial reduction too large (Review feedback, 2026-10-07: "this was too much, maybe 15% instead"). Other values and an absent query retain the current size. The trial does not persist a setting. It covers Meshy/chibi cast, both protagonists, crowd and code-built fallback bodies. Approved source models, environment geometry and furniture are unchanged. Relative body heights remain unchanged. Cats and other creatures retain their existing size.
 
 The multiplier runs before Meshy seat contact and stride measurement. Code-built bodies keep their existing scale chain and seat formulas. Trial person pins follow the head rather than their previous fixed world height; object markers and touch target sizes stay unchanged. Character roots and world movement coordinates retain their original units.
 
@@ -27,3 +27,13 @@ The opt-in full day-one magic route passed on desktop (73 seconds) and phone (10
 This is a sizing comparison. Outside wide shots make characters smaller on screen; furniture now reads larger, and seated feet may dangle. Existing contact scripts that use fixed world points for tableware, carried props, doors or handoffs need a separate visual audit if this size is selected. Shared-table seating and actual conversation were checked, not every story interaction in the game. No default change or broad staging-completion claim is made.
 
 The playable links currently point to the local trial worktree. They must change to the landed query URL before this worktree is retired. The environment is the main baseline, independent of the sunny street trial.
+
+## Requested 15% follow-up
+
+Review feedback 2026-10-07: “this was too much, maybe 15% instead”. The additional `charscale=85` query is opt-in; 67 remains available. Eric height is 1.416→1.2036 and Carina 1.3216→1.12336. Final round11 desktop and phone pairs pass size and same-camera assertions. Forecourt follows an exact native camera target after walking because round10 desktop failed a 2.5cm camera-depth difference caused by normal walk-arrival tolerance; both attempts are retained.
+
+Crowd12 verifies the 85% holder-scale ratio on actual commuters. Interaction13 verifies the phone resident marker opens dialogue after standing; Carina13 compares the dorm view. Carina12 stopped at the 100% baseline with a 4.1cm seat-underside measurement above the cushion; this needs separate investigation in work #323. It does not establish that resizing caused the gap, and no Carina canteen contact pass is claimed.
+
+The 85% full day-one magic route passes desktop 106s and phone 75s with no long gait errors. CPU 634 tests and repository checks pass. Performance warnings against older stored baselines remain. Independent review of the final thirty comparison frames scores 8 for this bounded trial; no default adoption or all-contact approval is claimed. No default scale or contact scripts changed. All 52 new native captures and failed attempts are retained in Review.
+
+The alternate Mio gait calibration now scales its walk/run stride targets. Native walks at 85% and 67% report median foot-speed ratios 0.96 and 1.08 with no sustained gait errors; independent source retest has no remaining findings. The separately loaded Mio model now resolves its actual Head/mixamorigHead bone for the trial marker. Four native coordinate assertions pass, but the office diagnostic captures leave Mio hidden/offscreen, so those captures do not establish a visible marker-placement pass. Both gait frames and all four diagnostic attempts are retained. Integration against the newly landed pool changes remains pending.
