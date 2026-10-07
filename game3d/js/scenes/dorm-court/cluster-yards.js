@@ -17,6 +17,7 @@ import { hedge, keyaki, sakura, ginkgo, pine, maple, mound, bed, LEAF } from '..
 import { drift } from '../forecourt/gardens.js';
 import { lamps, bench, STEEL } from '../outdoor/furniture.js';
 import * as C from './cluster-plan.js';
+import { terraceDetails, terraceVending } from '../east-coast/terrace-details.js';
 
 const { ROW, BACK, ENTRY, GARDEN, SQUARE_END: SQ, SEA_WALK: SW, TERRACE: TR } = C;
 export const pale = (pv, r) =>
@@ -78,7 +79,7 @@ export function shelter(p, lights, [x0, x1, z0, z1], open, seed) {
 }
 
 // the square at the row's east end: herringbone brick in a pale border, dorm_3's door on its north side
-export function* endSquare(pv, p, lights) {
+export function* endSquare(pv, p, lights, root) {
   const [x0, x1, z0, z1] = SQ;
   pv.field([x0, x1 - BW, z0, z1 - BW], {
     pattern: 'herringbone',
@@ -124,15 +125,15 @@ export function* endSquare(pv, p, lights) {
   for (const x of [TR[0] + 1.1, TR[1] - 1.1]) bench(p, x, TR[3] - 0.7, 0, { len: 1.3 });
   const vx = TR[0] + 0.6,
     vz = TR[2] + 0.55;
-  p.box('#3f6f9e', 0.75, 1.8, 0.65, vx, 0, vz);
-  lights.glowParts.push(new THREE.BoxGeometry(0.6, 0.9, 0.02).translate(vx, 1.15, vz + 0.33));
+  terraceVending(root, p, vx, vz);
   lights.lit.push([vx, vz + 0.9, 0.9]);
   // in the terrace's north half a raised bed with a big black pine, seen from up the row
   const tc = (TR[0] + TR[1]) / 2,
     tz = TR[2] + 1.6;
   yield;
   wallRect(p, [tc - 1.0, tc + 1.0, tz - 0.8, tz + 0.8], { h: 0.45 });
-  bed(p, [tc - 0.8, tc + 0.8, tz - 0.6, tz + 0.6], { y: 0.43 });
+  bed(p, [tc - 0.8, tc + 0.8, tz - 0.6, tz + 0.6], { y: 0.43, cover: false });
+  terraceDetails(p, TR, [tc - 1, tc + 1, tz - 0.8, tz + 0.8]);
   pine(p, tc, tz, 1.25, 81);
   lamps(lights, p, [[TR[1] - 0.4, TR[2] + 0.4]], { pool: 1.5 });
   yield;
