@@ -1,13 +1,14 @@
 // The gait check (Jørgen, 2026-10-03: "Why are all the animations wrong, people walk on the spot, and slide when they
-// move"). startGaitCheck(game) watches everyone in view, after each drawn frame, and records to window.__gaitCheck:
+// move"). startGaitCheck(game) watches everyone in view and records to window.__gaitCheck:
 //   on the spot  the feet stepping (moving against the body) while the body stays where it is
 //   slide        the body moving faster or slower than its steps carry it: the planted foot (the lower one) moves
 //                against the body at the ground speed when the walk is in time, so the ratio of the two is the slide
 //                (1 in time; under SLIDE_LO the feet outrun the ground, over SLIDE_HI they lag; no steps at all: glide)
 // Each over a window of WIN game seconds; an episode is recorded when it lasts BAD windows in a row, with how long it
 // lasted. Everything is in the person's own body units, so the same numbers hold for every place and size.
-// game3d/tools/gait-check.mjs (real time) fails on any episode, reports(); the fast test (sped up 8 times, sampled a
-// frame at a time, so a step can fall between samples) on those of 4 windows or more, reports(4).
+// game3d/tools/gait-check.mjs (real time) fails on any episode, reports(); the fast test (sped up 8 times) on those
+// of 4 windows or more, reports(4). Free walking is sampled after every simulation step; scripted walkers and
+// render-driven cast retain their drawn-frame clock. Mixing those clocks mistakes stale poses for sliding.
 import * as THREE from 'three';
 import { bodies } from './shared.js';
 
@@ -69,15 +70,10 @@ export function startGaitCheck(game) {
   C.reports = (min = BAD) =>
     C.episodes.filter((e) => e.windows >= min).map((e) => `${e.line} for ${(e.windows * WIN).toFixed(1)} s`);
   const track = new Map();
-  let lastT = null;
-  const loop = () => {
-    requestAnimationFrame(loop);
+  C.sample = (clock = 'step') => {
     const P = game.place,
       t = game.t || 0;
-    if (!P || !P.space || !P.camera || game.paused) return void (lastT = null);
-    const dt = lastT === null ? 0 : t - lastT;
-    lastT = t;
-    if (dt <= 0) return;
+    if (!P || !P.space || !P.camera || game.paused) return void track.clear();
     const cam = P.camera;
     _m.multiplyMatrices(cam.projectionMatrix, cam.matrixWorldInverse);
     _f.setFromProjectionMatrix(_m);
@@ -89,6 +85,13 @@ export function startGaitCheck(game) {
     const seen = new Set();
     for (const [id, r, seated] of list) {
       if (!r?.root?.parent || seen.has(r)) continue;
+      // Only free player movement and its pose finish together in main.step.
+      // walkRig moves on rAF; meshyPerson poses at render time. Preserve their clock.
+      const cadence = r === game.player && !r.scripted && !r._walk ? 'step' : 'drawn';
+      if (cadence !== clock) {
+        seen.add(r);
+        continue;
+      }
       // Swimming uses an arm-driven water pose, not planted feet. Deleting its old window below
       // makes the next dry step start a fresh measurement; pair collisions remain checked.
       if (r.swimming) continue;
@@ -112,11 +115,13 @@ export function startGaitCheck(game) {
       let k = track.get(r);
       // Samples are parent-local. Entering a new carrier or place starts a new
       // measurement frame; its coordinate offset is not distance walked.
-      if (!k || k.parent !== r.root.parent || k.space !== P.space) {
+      if (!k || k.parent !== r.root.parent || k.space !== P.space || k.clock !== clock) {
         track.set(
           r,
           (k = {
             id,
+            clock,
+            t,
             parent: r.root.parent,
             space: P.space,
             at,
@@ -128,6 +133,9 @@ export function startGaitCheck(game) {
         );
         continue;
       }
+      const dt = t - k.t;
+      if (dt <= 0) continue;
+      k.t = t;
       const w = k.w,
         dRoot = Math.hypot(at[0] - k.at[0], at[1] - k.at[1]);
       // the lower foot, if it was the lower one at the last sample too: the planted one
@@ -154,9 +162,8 @@ export function startGaitCheck(game) {
       let kind = '';
       if (vRoot < STILL && vAnim > STEPPING) kind = 'on the spot';
       else if (vRoot > MOVING && w.rootS > 0) {
-        // sampled coarsely (the sped-up fast test: a frame is several game steps), a quick step's swing falls
-        // between samples and reads short (a quick jog most): only a glide, hardly stepping at all, counts
-        const loose = w.t / w.n > 0.05 ? 2.5 : 1;
+        // Only the drawn clock can skip substeps; main.step is bounded to 0.05 s.
+        const loose = clock === 'drawn' && w.t / w.n > 0.05 ? 2.5 : 1;
         kind = ratio > SLIDE_HI * loose ? 'slide' : ratio < SLIDE_LO / loose ? 'slide (feet too fast)' : '';
       }
       const ps = (C.people[id] ||= {
@@ -188,6 +195,10 @@ export function startGaitCheck(game) {
     }
     for (const r of [...track.keys()]) if (!seen.has(r)) track.delete(r);
   };
-  requestAnimationFrame(loop);
+  const drawn = () => {
+    requestAnimationFrame(drawn);
+    C.sample('drawn');
+  };
+  requestAnimationFrame(drawn);
   return C;
 }
