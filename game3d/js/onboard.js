@@ -112,9 +112,11 @@ export function startOnboarding(game) {
     if (!g || !g.place || !g.player) return;
     const b = document.body;
     const onTrain = g.place.name === 'train' && !g.test;
+    const heldGoal = ob.holdGoal;
     ob.active = onTrain;
     ob.holdGoal = onTrain && !st.talked;
     ob.holdHints = onTrain && !st.talked;
+    if (heldGoal && !ob.holdGoal) ui.releaseGoal();
     if (b.classList.contains('ob-active') !== onTrain) b.classList.toggle('ob-active', onTrain);
     // the walking line: shown until he has walked a few steps (not while the title or a scene is up)
     const p = g.player.root.position;
