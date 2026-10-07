@@ -4,6 +4,8 @@
 // Served from the repo root by ./start. Nothing here reads island/private/, except the private Review folder when the
 // private bible (island/private/bible/index.html) names it in window.BIBLE_PRIVATE_REVIEWS.
 
+import { orderShowcase } from './showcase-order.js';
+
 import { STORY_FILES } from '../game3d/js/places/definitions.js';
 
 export const SOURCES = [
@@ -80,7 +82,15 @@ export async function loadLive(ROOT, snapshot, extraFiles = [], { remote = false
       .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || a.id.localeCompare(b.id));
     return L.reviews;
   };
-  L.reloadShowcase = async () => { L.showcase = await loadItems('showcase', 'entry.json'); return L.showcase; };
+  L.reloadShowcase = async () => {
+    let dates = {};
+    try {
+      const response = await fetch(abs('bible/showcase-dates.json'), { cache: 'no-cache' });
+      if (response.ok) dates = await response.json();
+    } catch (_) { /* authored timestamps remain usable on an older static host */ }
+    L.showcase = orderShowcase(await loadItems('showcase', 'entry.json'), dates);
+    return L.showcase;
+  };
   // the work tracker's GitHub issues and the stale list, from tools/review_server.py (GET /api/work, 60 s cache).
   // Without that server (a plain static host) L.work stays null and the Work page links to GitHub instead.
   L.reloadWork = async () => {

@@ -31,11 +31,13 @@ import sys
 import tarfile
 import time
 
+from showcase_dates import write_dates
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 REPO_BLOB = 'https://github.com/fumbleforce/tower-of-words/blob/main/'
 REPO_TREE = 'https://github.com/fumbleforce/tower-of-words/tree/main/'
 LIST = 'bible/pages-media.json'
-BIBLE_FILES = ['bible/index.html', 'bible/app.js', 'bible/app.css', 'bible/live.js', 'bible/work.js']
+BIBLE_FILES = ['bible/index.html', 'bible/app.js', 'bible/app.css', 'bible/live.js', 'bible/work.js', 'bible/showcase-order.js']
 MEDIA_RE = re.compile(r'\.(webp|png|jpe?g|gif|avif|mp3|wav|ogg|opus|m4a|mp4|webm)$', re.I)
 VIEWER_RE = re.compile(r'\.(glb|webp|json)$', re.I)  # review.json "viewer_files": staged as they are
 CONVERT_RE = re.compile(r'\.(png|jpe?g)$', re.I)
@@ -199,6 +201,7 @@ def cmd_stage(site):
     tar = git('archive', '--format=tar', 'HEAD', '--', *BIBLE_FILES, 'reviews', 'showcase', binary=True)
     with tarfile.open(fileobj=io.BytesIO(tar)) as t:
         t.extractall(site, filter='data')
+    write_dates(os.path.join(site, 'bible', 'showcase-dates.json'))
     idx = os.path.join(site, 'bible', 'index.html')
     html = open(idx, encoding='utf-8').read()
     html = html.replace("<script>window.BIBLE_ROOT = '../';", "<script>window.BIBLE_REMOTE = true; window.BIBLE_ROOT = '../';", 1)

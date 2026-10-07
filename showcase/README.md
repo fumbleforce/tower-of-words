@@ -30,7 +30,9 @@ The Showcase log in the world bible (http://127.0.0.1:8771/bible/#showcase) is w
 
 4. Check it: `node tools/bible/check.mjs` renders every entry and fails on an image path that doesn't resolve or a repeated image id.
 
-Entries are listed newest first by `date`.
+Entries start collapsed with the title, caption and one preview; Show details opens the section list, links and feedback; each section expands to its full image set. A direct entry link opens its details. Set optional `preview` to an image id to choose the summary picture; otherwise it uses the first image. All images remain in their original order inside the entry.
+
+Entries are listed newest first by their latest content timestamp, with id as a stable tie-breaker. `date` remains the authored date label. An optional ISO 8601 `updated` timestamp (including time zone) records a new round. `tools/bible/showcase_dates.py` derives historical times from the latest Git commit touching each public `entry.json`; feedback never bumps an entry. The local review server also uses the actual modification time for uncommitted entry changes. `./start` refreshes the static fallback, and public-site staging rebuilds it from committed HEAD. For a plain static server after editing entries, run `python3 tools/bible/showcase_dates.py --local`.
 
 ## Reading his feedback
 
