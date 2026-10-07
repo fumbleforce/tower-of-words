@@ -17,9 +17,9 @@
     },
     "game3d/js/look/detail.js": {
       "lines": 670,
-      "bytes": 26965,
+      "bytes": 26955,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-05 #240 the desk's pedestals PED wide (props.js); #248 the open desk option (one pedestal, no front panel)",
+      "review": "C-0071; 2026-10-05 #240 the desk's pedestals PED wide (props.js); #248 the open desk option (one pedestal, no front panel); 2026-10-07 X-0761: office-only CRT option, ceilings lowered",
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
@@ -87,9 +87,9 @@
     },
     "game3d/js/props.js": {
       "lines": 540,
-      "bytes": 19858,
+      "bytes": 19821,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112); 2026-10-05 #240 PED, the desks' narrower drawer pedestals, so seated knees fit between them; #248 desk({ open }), Emi's desk open underneath with two legs",
+      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112); 2026-10-05 #240 PED, the desks' narrower drawer pedestals, so seated knees fit between them; #248 desk({ open }), Emi's desk open underneath with two legs; 2026-10-07 X-0761: office-only CRT option, ceilings lowered",
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {
@@ -108,9 +108,9 @@
     },
     "game3d/js/scenes/office.js": {
       "lines": 1991,
-      "bytes": 68910,
+      "bytes": 68883,
       "owner": "codex-tui",
-      "review": "C-0110 / X-0193; C-0352: tray, sink plate and counter no longer overlap, unused kitchen()/tableSet() removed; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 the corridor door openings defined once, for the wall holes and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-07 X-0668: officeWalls wrapper reuses exact partition calls for follow-only enclosure; ceiling reduced; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced",
+      "review": "C-0110 / X-0193; C-0352: tray, sink plate and counter no longer overlap, unused kitchen()/tableSet() removed; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 the corridor door openings defined once, for the wall holes and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-07 X-0668: officeWalls wrapper reuses exact partition calls for follow-only enclosure; ceiling reduced; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced; 2026-10-07 X-0761: office-only CRT option, ceilings lowered",
       "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/showcase/decals.js": {

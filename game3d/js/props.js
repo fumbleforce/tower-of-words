@@ -1,5 +1,4 @@
-// Props and room parts for the lobby and the office, built the same way as the train car: one matte
-// material per colour, rounded boxes and a few convex hulls, no textures (signs and posters aside).
+// Shared matte props, rounded boxes and convex hulls.
 import * as THREE from 'three';
 import { roundedBox } from './perf/rounded-box.js';
 import { hull, icoPoints } from './train/hull.js';
@@ -8,6 +7,7 @@ import { screenMat, Screens } from './places/life.js';
 import { LOOK } from './look/flags.js';
 import { DECAL } from './look/decal.js';
 import * as D from './look/detail.js';
+import { crtHousing } from './look/crt.js';
 
 // every lit monitor built here flickers and scrolls; the active place calls liveScreens.update(t)
 export const liveScreens = new Screens();
@@ -360,7 +360,7 @@ export function plainChair(color = PAL.chair) {
   return g;
 }
 export const monitor = (o) => (LOOK.detail ? D.monitor(o) : plainMonitor(o));
-export function plainMonitor({ on = true, kind } = {}) {
+export function plainMonitor({ on = true, kind, crt = false } = {}) {
   const g = new THREE.Group();
   g.add(rbox(0.18, 0.02, 0.12, PAL.monitor, { r: 0.008 }));
   g.add(rbox(0.04, 0.12, 0.03, PAL.monitor, { y: 0.02, r: 0.01 }));
@@ -371,7 +371,7 @@ export function plainMonitor({ on = true, kind } = {}) {
   );
   s.position.set(0, 0.25, 0.019);
   g.add(s);
-  return g;
+  return crt ? crtHousing(g, rbox, mat) : g;
 }
 export const PED = 0.26; // a desk's drawer pedestals: wide enough to leave room for seated knees (#240)
 // desk facing +z (the sitter sits on the +z side). open: no front panel and one drawer unit, on the -x side, with two
@@ -383,7 +383,7 @@ export function desk(o = {}) {
   if (o.open) g.add(leg(-1), leg(1));
   return g;
 }
-export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1, open = false } = {}) {
+export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1, open = false, crt = false } = {}) {
   const g = new THREE.Group();
   const H = 0.42;
   g.add(rbox(w, 0.04, d, PAL.deskTop, { y: H - 0.04, r: 0.012 }));
@@ -403,7 +403,7 @@ export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1
   }
   if (!open) g.add(rbox(w - 2 * (PED + 0.02), 0.2, 0.03, PAL.drawer, { y: 0.16, z: -d / 2 + 0.05, r: 0.01 }));
   if (mon) {
-    const m = plainMonitor();
+    const m = plainMonitor({ crt });
     m.position.set(0, H, -d * 0.2);
     g.add(m);
   }
