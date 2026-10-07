@@ -1,0 +1,12 @@
+works-fidelity: waiting up to 60s for a browser GPU slot
+file:///home/jorgen/repo/japanese/.claude/worktrees/codex-works-fidelity/tools/lib/browser-job.mjs:132
+        if (remaining <= 0) throw Object.assign(new Error(`${name}: render deferred; browser GPU slots or exclusive GPU lock busy, an image or model job is ahead in the GPU queue (python3 tools/gpu_priority.py queue), or Jørgen's image gen dashboard has priority (gpu.priority)`), { code: 'GPU_DEFERRED' });
+                                                ^
+
+Error: works-fidelity: render deferred; browser GPU slots or exclusive GPU lock busy, an image or model job is ahead in the GPU queue (python3 tools/gpu_priority.py queue), or Jørgen's image gen dashboard has priority (gpu.priority)
+    at withBrowserJob (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-works-fidelity/tools/lib/browser-job.mjs:132:49)
+    at async file:///home/jorgen/repo/japanese/.claude/worktrees/codex-works-fidelity/game3d/tools/works-fidelity-check.mjs:10:1 {
+  code: 'GPU_DEFERRED'
+}
+
+Node.js v24.21.0

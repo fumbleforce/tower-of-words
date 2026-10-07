@@ -1,0 +1,1011 @@
+{
+  "viewport": [
+    1366,
+    860
+  ],
+  "mc": null,
+  "cast": null,
+  "run": {
+    "log": [
+      "train use:mio:0",
+      "train use:tama:0",
+      "train say:ohayo:tama",
+      "train say:ohayo:aoi",
+      "train say:ohayo:kuroda",
+      "train say:ohayo:reader",
+      "train say:ohayo:music",
+      "train say:ohayo:bun",
+      "train use:aoi",
+      "train use:kuroda",
+      "train use:reader",
+      "train use:music",
+      "train use:bun",
+      "train use:tama",
+      "train use:mio",
+      "train use:door_l:0",
+      "train say:yoroshiku:kuroda",
+      "train say:sumimasen:kuroda",
+      "train use:doors",
+      "gate use:guard:0",
+      "gate say:ohayo:guard",
+      "gate use:reader_r:0",
+      "gate use:kuroda:0",
+      "gate say:yoroshiku:guard",
+      "gate say:ohayo:tama",
+      "gate say:sumimasen:tama",
+      "gate say:matte:tama",
+      "gate use:guard",
+      "gate use:lift:0",
+      "forecourt use:lift:0",
+      "office use:mori:0",
+      "office say:ohayo:mori",
+      "office use:kenji:0",
+      "office say:ohayo:kenji",
+      "office use:machine_door:0",
+      "office use:tama:0",
+      "office use:copier:0",
+      "office use:mio:0",
+      "office use:my_desk:0",
+      "office use:lift:0",
+      "forecourt use:plaza_lane:0",
+      "plaza use:dorm_lane:0",
+      "dorm_court use:dorm_entry:0",
+      "dorm_court use:stairs:0",
+      "dorms use:door_203:0",
+      "dorms use:window",
+      "dorms use:boxes",
+      "dorms use:bed",
+      "dorms use:computer"
+    ],
+    "errors": [],
+    "places": [
+      "train",
+      "gate",
+      "forecourt",
+      "office",
+      "forecourt",
+      "plaza",
+      "dorm_court",
+      "dorms"
+    ],
+    "done": true,
+    "t0": 1920,
+    "route": "magic",
+    "choices": [],
+    "practice": 7,
+    "heard": [
+      {
+        "key": "bun-ohayo",
+        "text": "はい、{ohayo}。",
+        "known": [
+          "gaijin",
+          "ohayo"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:メ",
+          "gx:の",
+          "jp clear:おはようございます",
+          "gl:(ohayō gozaimasu, good morning)"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1wyzao6",
+        "text": "だから今日、配属が決まるの！どこでもいいけど、地下はいや。",
+        "known": [
+          "gaijin",
+          "ohayo"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:ロ",
+          "gx:オ",
+          "gx:ぱ",
+          "gx:い",
+          "gx:お",
+          "gx:ニ",
+          "gx:へ",
+          "gx:テ",
+          "gx:ら",
+          "gx:ル",
+          "gx:テ",
+          "gx:レ",
+          "gx:カ",
+          "gx:む",
+          "gx:べ",
+          "gx:ま",
+          "gx:れ",
+          "gx:ろ",
+          "gx:ね",
+          "gx:ス",
+          "gx:ツ",
+          "gx:つ",
+          "gx:ち",
+          "gx:げ",
+          "gx:ぜ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-f4h8qf",
+        "text": "あ、{sumimasen}！",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen"
+        ],
+        "tokens": [
+          "heardico:",
+          "plain:あ",
+          "jp clear:すみません",
+          "gl:(sumimasen, excuse me, sorry)"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-pcpzah",
+        "text": "この電車は、折り返し本土行きとなります。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:つ",
+          "gx:フ",
+          "gx:じ",
+          "gx:ひ",
+          "gx:ル",
+          "gx:チ",
+          "gx:ク",
+          "gx:き",
+          "gx:ぜ",
+          "gx:サ",
+          "gx:ぷ",
+          "gx:だ",
+          "gx:マ",
+          "gx:ぺ",
+          "gx:セ",
+          "gx:チ",
+          "gx:う",
+          "gx:ケ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-6afzfp",
+        "text": "あっ！{sumimasen}、{sumimasen}！",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte"
+        ],
+        "tokens": [
+          "heardico:",
+          "plain:あっ",
+          "jp clear:すみません",
+          "gl:(sumimasen, excuse me, sorry)",
+          "jp clear:すみません",
+          "gl:(sumimasen, excuse me, sorry)"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "guard-greeting-ohayo",
+        "text": "{ohayo}。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte"
+        ],
+        "tokens": [
+          "heardico:",
+          "jp clear:おはようございます",
+          "gl:(ohayō gozaimasu, good morning)"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "commuter-ohayo",
+        "text": "{ohayo}。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte"
+        ],
+        "tokens": [
+          "heardico:",
+          "jp clear:おはようございます",
+          "gl:(ohayō gozaimasu, good morning)"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1xht2cv",
+        "text": "{ohayo}。カードを、どうぞ。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte"
+        ],
+        "tokens": [
+          "heardico:",
+          "jp clear:おはようございます",
+          "gl:(ohayō gozaimasu, good morning)",
+          "gx:ト",
+          "gx:ム",
+          "gx:コ",
+          "gx:ふ",
+          "gx:キ",
+          "gx:ず",
+          "gx:あ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1242cc3",
+        "text": "カードを確認できません。係員にお声がけください。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:コ",
+          "gx:ヌ",
+          "gx:ぽ",
+          "gx:つ",
+          "gx:く",
+          "gx:ネ",
+          "gx:じ",
+          "gx:ノ",
+          "gx:ラ",
+          "gx:セ",
+          "gx:み",
+          "gx:ス",
+          "gx:が",
+          "gx:ト",
+          "gx:シ",
+          "gx:レ",
+          "gx:フ",
+          "gx:に",
+          "gx:け",
+          "gx:つ",
+          "gx:じ",
+          "gx:ん"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-fgq8j5",
+        "text": "…{sumimasen}。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte"
+        ],
+        "tokens": [
+          "heardico:",
+          "jp clear:すみません",
+          "gl:(sumimasen, excuse me, sorry)"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-6z5r52",
+        "text": "新しいカードですね。申し訳ありません、登録は九時からです。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:オ",
+          "gx:が",
+          "gx:は",
+          "gx:ス",
+          "gx:ハ",
+          "gx:ウ",
+          "gx:じ",
+          "gx:ぷ",
+          "gx:フ",
+          "gx:と",
+          "gx:だ",
+          "gx:の",
+          "gx:ぬ",
+          "gx:ソ",
+          "gx:あ",
+          "gx:ナ",
+          "gx:ら",
+          "gx:ラ",
+          "gx:ど",
+          "gx:す",
+          "gx:も",
+          "gx:け",
+          "gx:フ",
+          "gx:テ",
+          "gx:エ",
+          "gx:ツ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-45hdir",
+        "text": "{sumimasen}、{sumimasen}、通ります！",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte"
+        ],
+        "tokens": [
+          "heardico:",
+          "jp clear:すみません",
+          "gl:(sumimasen, excuse me, sorry)",
+          "jp clear:すみません",
+          "gl:(sumimasen, excuse me, sorry)",
+          "gx:だ",
+          "gx:セ",
+          "gx:ン",
+          "gx:カ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-vfghg0",
+        "text": "共連れを検知しました！",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:ナ",
+          "gx:ロ",
+          "gx:チ",
+          "gx:つ",
+          "gx:ラ",
+          "gx:ウ",
+          "gx:ざ",
+          "gx:モ",
+          "gx:ず",
+          "gx:ン"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1dxmpp2",
+        "text": "はい、アマカワ{honsha}、正面ゲートです。…はい。待ちます。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:メ",
+          "gx:の",
+          "gx:て",
+          "gx:ル",
+          "gx:ソ",
+          "gx:か",
+          "gx:ク",
+          "gx:ぎ",
+          "gx:タ",
+          "gx:か",
+          "gx:へ",
+          "gx:モ",
+          "gx:オ",
+          "gx:ぶ",
+          "gx:キ",
+          "gx:さ",
+          "gx:わ",
+          "gx:み",
+          "gx:ふ",
+          "gx:こ",
+          "gx:タ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-7p8glr",
+        "text": "え？今の…？",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "plain:え",
+          "gx:あ",
+          "gx:ホ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-10umez5",
+        "text": "猫はいません。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:む",
+          "gx:モ",
+          "gx:は",
+          "gx:マ",
+          "gx:ケ",
+          "gx:ひ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-10umez5",
+        "text": "猫はいません。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:む",
+          "gx:モ",
+          "gx:は",
+          "gx:マ",
+          "gx:ケ",
+          "gx:ひ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-10umez5",
+        "text": "猫はいません。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:む",
+          "gx:モ",
+          "gx:は",
+          "gx:マ",
+          "gx:ケ",
+          "gx:ひ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1dltuqt",
+        "text": "十時の会議、四番目の議題見た？",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:く",
+          "gx:ヘ",
+          "gx:ヘ",
+          "gx:き",
+          "gx:た",
+          "gx:ほ",
+          "gx:ぽ",
+          "gx:さ",
+          "gx:ラ",
+          "gx:に",
+          "gx:ナ",
+          "gx:ア",
+          "gx:え"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1aenxld",
+        "text": "B2のやつでしょ。コンサルタントが来るって。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "plain:B2",
+          "gx:ヘ",
+          "gx:ま",
+          "gx:ほ",
+          "gx:ざ",
+          "gx:ざ",
+          "gx:ぞ",
+          "plain:コンサルタント",
+          "gl:(konsarutanto, consultant)",
+          "gx:ヒ",
+          "gx:れ",
+          "gx:ハ",
+          "gx:よ",
+          "gx:ば"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1etvxoe",
+        "text": "え、今日から？",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "plain:え",
+          "gx:あ",
+          "gx:え",
+          "gx:ク",
+          "gx:ぺ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-2kggvg",
+        "text": "{ohayo}。森と申します。ITサポートへ、ようこそ。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "jp clear:おはようございます",
+          "gl:(ohayō gozaimasu, good morning)",
+          "plain name:森",
+          "gl:(Mori)",
+          "gx:ぱ",
+          "gx:に",
+          "gx:ど",
+          "gx:ン",
+          "gx:カ",
+          "plain:IT",
+          "gx:だ",
+          "gx:お",
+          "gx:あ",
+          "gx:ス",
+          "gx:ケ",
+          "gx:シ",
+          "gx:ぼ",
+          "gx:を",
+          "gx:お"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1c4p8ez",
+        "text": "はい、{ohayo}。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:メ",
+          "gx:の",
+          "jp clear:おはようございます",
+          "gl:(ohayō gozaimasu, good morning)"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-l719zo",
+        "text": "どうぞ、こちらへ。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:び",
+          "gx:ら",
+          "gx:フ",
+          "gx:に",
+          "gx:こ",
+          "gx:ぽ",
+          "gx:ぶ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1f7qwse",
+        "text": "あ！新しい人！",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "plain:あ",
+          "gx:キ",
+          "gx:ぐ",
+          "gx:ふ",
+          "gx:う"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-s2r34k",
+        "text": "かたっ！おはよう、でいいよ。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:エ",
+          "gx:メ",
+          "gx:な",
+          "jp clear:おはよう",
+          "gl:(ohayō gozaimasu, good morning)",
+          "gx:ぞ",
+          "gx:め",
+          "gx:も",
+          "gx:ぺ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1hzcx7w",
+        "text": "おはよう。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "jp clear:おはよう",
+          "gl:(ohayō gozaimasu, good morning)"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-6gg3pv",
+        "text": "森さん、{gaijin}にコピー機お願い。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "plain name:森さん",
+          "gl:(Mori-san)",
+          "jp clear:外人",
+          "gl:(gaijin, foreigner)",
+          "gx:シ",
+          "gx:ま",
+          "gx:る",
+          "gx:マ",
+          "gx:る",
+          "gx:ク",
+          "gx:ぼ",
+          "gx:ゆ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1q8rpu4",
+        "text": "外国の方、ですよ。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "plain:外国の方",
+          "gl:(gaikoku no kata, person from abroad, polite)",
+          "gx:ざ",
+          "gx:ぴ",
+          "gx:べ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1h03b93",
+        "text": "また食べられました…",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:フ",
+          "gx:メ",
+          "gx:ン",
+          "gx:ぱ",
+          "gx:ぷ",
+          "gx:ト",
+          "gx:メ",
+          "gx:じ",
+          "gx:ワ"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-19jgh3x",
+        "text": "…三十年。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete",
+          "ugoite"
+        ],
+        "tokens": [
+          "heardico:",
+          "plain:三十年",
+          "gl:(sanjūnen, thirty years)"
+        ],
+        "garbledKnown": []
+      },
+      {
+        "key": "oh-1gafjkp",
+        "text": "朝、ゲートが勝手に開いたって。",
+        "known": [
+          "gaijin",
+          "ohayo",
+          "yoroshiku",
+          "sumimasen",
+          "matte",
+          "akete",
+          "ugoite",
+          "tomatte"
+        ],
+        "tokens": [
+          "heardico:",
+          "gx:キ",
+          "plain:ゲート",
+          "gl:(gēto, gate)",
+          "gx:タ",
+          "gx:ニ",
+          "gx:メ",
+          "gx:セ",
+          "gx:ゆ",
+          "gx:め",
+          "gx:い",
+          "gx:ま",
+          "gx:じ"
+        ],
+        "garbledKnown": []
+      }
+    ],
+    "bonds": {
+      "mio": {
+        "step": 1,
+        "pts": 3,
+        "met": true,
+        "ready": 0,
+        "remembers": [
+          "caught_bag",
+          "held_doors",
+          "copier",
+          "lunch",
+          "rack"
+        ],
+        "facts": [
+          "her_list",
+          "why_b2"
+        ],
+        "log": [
+          "greet+1 said おはようございます to her first",
+          "scene+2 (day) lunch in the machine room"
+        ]
+      },
+      "kuroda": {
+        "step": 1,
+        "pts": 1,
+        "met": true,
+        "ready": 0,
+        "remembers": [
+          "held_doors",
+          "akete"
+        ],
+        "facts": [],
+        "log": [
+          "help+1 got him through the jammed gate"
+        ]
+      },
+      "guard": {
+        "step": 1,
+        "pts": 1,
+        "met": true,
+        "ready": 0,
+        "remembers": [
+          "greeted",
+          "gate_burst"
+        ],
+        "facts": [],
+        "log": [
+          "greet+1 greeted him"
+        ]
+      },
+      "mori": {
+        "step": 1,
+        "pts": 1,
+        "met": true,
+        "ready": 0,
+        "remembers": [
+          "ohayo",
+          "copier"
+        ],
+        "facts": [
+          "copier_1996",
+          "soup"
+        ],
+        "log": [
+          "ticket+1 fixed his copier"
+        ]
+      },
+      "kenji": {
+        "step": 1,
+        "pts": 1,
+        "met": true,
+        "ready": 0,
+        "remembers": [],
+        "facts": [
+          "chair",
+          "plain_ohayo"
+        ],
+        "log": [
+          "greet+1 greeted him"
+        ]
+      },
+      "emi": {
+        "step": 1,
+        "pts": 0,
+        "met": true,
+        "ready": 0,
+        "remembers": [],
+        "facts": [
+          "ten_years"
+        ],
+        "log": []
+      }
+    },
+    "bondRoute": "magic",
+    "day": 1,
+    "ended": true,
+    "place": "dorms",
+    "mc": "eric",
+    "cast": {
+      "set": "default",
+      "roles": {
+        "team_lead": "emi",
+        "receptionist": "kuro",
+        "new_hire": "aoi",
+        "sales": "rei",
+        "gate_guard": "guard",
+        "programmer": "mio",
+        "section_chief": "mori",
+        "engineer": "kenji"
+      }
+    },
+    "goal": "",
+    "voices": {
+      "plays": 0,
+      "maxActive": 0,
+      "overlaps": 0
+    },
+    "move": {
+      "overlaps": [],
+      "spins": [],
+      "steps": 12749,
+      "notes": [
+        "makeRoom at [-2.55, -0.31] -> no room",
+        "pass-through at t=205.6",
+        "pass-through at t=206.7",
+        "pass-through at t=207.8",
+        "pass-through at t=208.8",
+        "makeRoom at [0.16, -1.41] -> 1.74, -0.94"
+      ],
+      "passes": 4
+    },
+    "gait": {
+      "long": [],
+      "short": 2,
+      "windows": 2681
+    }
+  },
+  "pass": true,
+  "verdict": "PASS",
+  "errors": [],
+  "overlaps": 0,
+  "spins": 0,
+  "gait": 0,
+  "activeOverrides": []
+}

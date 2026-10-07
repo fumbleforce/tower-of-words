@@ -1,0 +1,19 @@
+{
+  "base": "71aec505571bb41768bc0c2a378a011590dd357a",
+  "originalStationFunctionUnchanged": true,
+  "stationFunctionSha256": "e79e6046244636bb029486dc2af3024b0ab3c790a76f9114a2c21807709cba87",
+  "filesUnchanged": [
+    {
+      "path": "game3d/js/scenes/works/plan.js",
+      "sha256": "cc0b2d2ab2118f40801c01a9a70db641c928f86d470874d6dbcdac997c78a0e0"
+    },
+    {
+      "path": "game3d/js/places/works.js",
+      "sha256": "2912595bf71603547c4bbdb5cb57862949a412d28f073cda69bffcbef5e660f1"
+    },
+    {
+      "path": "game3d/js/scenes/works/grounds.js",
+      "sha256": "1025c2da35c8a6d572451c95427d6c1205d8c3af2817942cde41cf0714f37949"
+    }
+  ]
+}
