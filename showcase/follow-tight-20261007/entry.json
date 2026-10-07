@@ -1,0 +1,1928 @@
+{
+  "title": "Continuous close camera in tight interiors",
+  "date": "2026-10-07",
+  "by": "codex-exec:tight-follow",
+  "caption": "The local player fades briefly when a wall compresses the follow camera, then returns when there is room.",
+  "preview": "candidate8-video-eric-85-north-end",
+  "sections": [
+    {
+      "title": "probe1",
+      "caption": "Rejected fixture: entry transition had not finished.",
+      "images": [
+        {
+          "id": "probe1-center-level",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe1/center-level.webp",
+          "caption": "center level"
+        },
+        {
+          "id": "probe1-center-old",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe1/center-old.webp",
+          "caption": "center old"
+        },
+        {
+          "id": "probe1-left-level",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe1/left-level.webp",
+          "caption": "left level"
+        },
+        {
+          "id": "probe1-left-normal",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe1/left-normal.webp",
+          "caption": "left normal"
+        },
+        {
+          "id": "probe1-left-roomy",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe1/left-roomy.webp",
+          "caption": "left roomy"
+        }
+      ]
+    },
+    {
+      "title": "probe2",
+      "caption": "Rejected fixture: entry transition had not finished.",
+      "images": [
+        {
+          "id": "probe2-center-level",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe2/center-level.webp",
+          "caption": "center level"
+        },
+        {
+          "id": "probe2-center-old",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe2/center-old.webp",
+          "caption": "center old"
+        },
+        {
+          "id": "probe2-left-level",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe2/left-level.webp",
+          "caption": "left level"
+        },
+        {
+          "id": "probe2-left-normal",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe2/left-normal.webp",
+          "caption": "left normal"
+        },
+        {
+          "id": "probe2-left-roomy",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe2/left-roomy.webp",
+          "caption": "left roomy"
+        }
+      ]
+    },
+    {
+      "title": "probe3",
+      "caption": "Rejected fixture: follow enclosure was not active before pause.",
+      "images": [
+        {
+          "id": "probe3-center-level",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe3/center-level.webp",
+          "caption": "center level"
+        },
+        {
+          "id": "probe3-center-old",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe3/center-old.webp",
+          "caption": "center old"
+        },
+        {
+          "id": "probe3-left-level",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe3/left-level.webp",
+          "caption": "left level"
+        },
+        {
+          "id": "probe3-left-normal",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe3/left-normal.webp",
+          "caption": "left normal"
+        },
+        {
+          "id": "probe3-left-roomy",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe3/left-roomy.webp",
+          "caption": "left roomy"
+        }
+      ]
+    },
+    {
+      "title": "probe4",
+      "caption": "Valid physical framing study; centered and shoulder compositions rejected.",
+      "images": [
+        {
+          "id": "probe4-center-level",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe4/center-level.webp",
+          "caption": "center level"
+        },
+        {
+          "id": "probe4-center-old",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe4/center-old.webp",
+          "caption": "center old"
+        },
+        {
+          "id": "probe4-left-level",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe4/left-level.webp",
+          "caption": "left level"
+        },
+        {
+          "id": "probe4-left-normal",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe4/left-normal.webp",
+          "caption": "left normal"
+        },
+        {
+          "id": "probe4-left-roomy",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe4/left-roomy.webp",
+          "caption": "left roomy"
+        }
+      ]
+    },
+    {
+      "title": "probe5",
+      "caption": "Valid shoulder and wide-lens studies. Independent composition score 5/10; rejected.",
+      "images": [
+        {
+          "id": "probe5-left-high",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe5/left-high.webp",
+          "caption": "left high"
+        },
+        {
+          "id": "probe5-left-medium",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe5/left-medium.webp",
+          "caption": "left medium"
+        },
+        {
+          "id": "probe5-left-wide",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe5/left-wide.webp",
+          "caption": "left wide"
+        }
+      ]
+    },
+    {
+      "title": "probe6",
+      "caption": "Valid side-camera studies. Independent composition score 5/10; rejected.",
+      "images": [
+        {
+          "id": "probe6-side-near",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe6/side-near.webp",
+          "caption": "side near"
+        },
+        {
+          "id": "probe6-side-wide",
+          "image": "bible/shots/showcase/follow-tight-20261007/probe6/side-wide.webp",
+          "caption": "side wide"
+        }
+      ]
+    },
+    {
+      "title": "candidate1",
+      "caption": "First centered fade. North crossing valid; second native mouse recapture timed out.",
+      "images": [
+        {
+          "id": "candidate1-eric-failure",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate1/eric-failure.webp",
+          "caption": "eric failure"
+        },
+        {
+          "id": "candidate1-eric-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate1/eric-north-00.webp",
+          "caption": "eric north 00"
+        },
+        {
+          "id": "candidate1-eric-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate1/eric-north-01.webp",
+          "caption": "eric north 01"
+        },
+        {
+          "id": "candidate1-eric-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate1/eric-north-02.webp",
+          "caption": "eric north 02"
+        },
+        {
+          "id": "candidate1-eric-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate1/eric-north-03.webp",
+          "caption": "eric north 03"
+        },
+        {
+          "id": "candidate1-eric-north-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate1/eric-north-after.webp",
+          "caption": "eric north after"
+        },
+        {
+          "id": "candidate1-eric-north-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate1/eric-north-before.webp",
+          "caption": "eric north before"
+        }
+      ]
+    },
+    {
+      "title": "candidate2",
+      "caption": "Both Eric crossings completed; screenshot timing delayed key release past the precise endpoint assertion.",
+      "images": [
+        {
+          "id": "candidate2-eric-failure",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-failure.webp",
+          "caption": "eric failure"
+        },
+        {
+          "id": "candidate2-eric-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-north-00.webp",
+          "caption": "eric north 00"
+        },
+        {
+          "id": "candidate2-eric-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-north-01.webp",
+          "caption": "eric north 01"
+        },
+        {
+          "id": "candidate2-eric-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-north-02.webp",
+          "caption": "eric north 02"
+        },
+        {
+          "id": "candidate2-eric-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-north-03.webp",
+          "caption": "eric north 03"
+        },
+        {
+          "id": "candidate2-eric-north-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-north-after.webp",
+          "caption": "eric north after"
+        },
+        {
+          "id": "candidate2-eric-north-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-north-before.webp",
+          "caption": "eric north before"
+        },
+        {
+          "id": "candidate2-eric-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-south-00.webp",
+          "caption": "eric south 00"
+        },
+        {
+          "id": "candidate2-eric-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-south-01.webp",
+          "caption": "eric south 01"
+        },
+        {
+          "id": "candidate2-eric-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-south-02.webp",
+          "caption": "eric south 02"
+        },
+        {
+          "id": "candidate2-eric-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-south-03.webp",
+          "caption": "eric south 03"
+        },
+        {
+          "id": "candidate2-eric-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-south-04.webp",
+          "caption": "eric south 04"
+        },
+        {
+          "id": "candidate2-eric-south-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-south-after.webp",
+          "caption": "eric south after"
+        },
+        {
+          "id": "candidate2-eric-south-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-south-before.webp",
+          "caption": "eric south before"
+        }
+      ]
+    },
+    {
+      "title": "candidate3",
+      "caption": "Added backward traversal. Eric completed all four sequences; precise south endpoint assertion failed after native key-up latency.",
+      "images": [
+        {
+          "id": "candidate3-eric-failure",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-failure.webp",
+          "caption": "eric failure"
+        },
+        {
+          "id": "candidate3-eric-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-00.webp",
+          "caption": "eric north 00"
+        },
+        {
+          "id": "candidate3-eric-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-01.webp",
+          "caption": "eric north 01"
+        },
+        {
+          "id": "candidate3-eric-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-02.webp",
+          "caption": "eric north 02"
+        },
+        {
+          "id": "candidate3-eric-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-03.webp",
+          "caption": "eric north 03"
+        },
+        {
+          "id": "candidate3-eric-north-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-04.webp",
+          "caption": "eric north 04"
+        },
+        {
+          "id": "candidate3-eric-north-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-after.webp",
+          "caption": "eric north after"
+        },
+        {
+          "id": "candidate3-eric-north-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-before.webp",
+          "caption": "eric north before"
+        },
+        {
+          "id": "candidate3-eric-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-repeat-00.webp",
+          "caption": "eric north repeat 00"
+        },
+        {
+          "id": "candidate3-eric-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-repeat-01.webp",
+          "caption": "eric north repeat 01"
+        },
+        {
+          "id": "candidate3-eric-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-repeat-02.webp",
+          "caption": "eric north repeat 02"
+        },
+        {
+          "id": "candidate3-eric-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-repeat-03.webp",
+          "caption": "eric north repeat 03"
+        },
+        {
+          "id": "candidate3-eric-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-repeat-04.webp",
+          "caption": "eric north repeat 04"
+        },
+        {
+          "id": "candidate3-eric-north-repeat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-repeat-after.webp",
+          "caption": "eric north repeat after"
+        },
+        {
+          "id": "candidate3-eric-north-repeat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-repeat-before.webp",
+          "caption": "eric north repeat before"
+        },
+        {
+          "id": "candidate3-eric-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-retreat-00.webp",
+          "caption": "eric north retreat 00"
+        },
+        {
+          "id": "candidate3-eric-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-retreat-01.webp",
+          "caption": "eric north retreat 01"
+        },
+        {
+          "id": "candidate3-eric-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-retreat-02.webp",
+          "caption": "eric north retreat 02"
+        },
+        {
+          "id": "candidate3-eric-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-retreat-03.webp",
+          "caption": "eric north retreat 03"
+        },
+        {
+          "id": "candidate3-eric-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-retreat-04.webp",
+          "caption": "eric north retreat 04"
+        },
+        {
+          "id": "candidate3-eric-north-retreat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-retreat-after.webp",
+          "caption": "eric north retreat after"
+        },
+        {
+          "id": "candidate3-eric-north-retreat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-north-retreat-before.webp",
+          "caption": "eric north retreat before"
+        },
+        {
+          "id": "candidate3-eric-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-south-00.webp",
+          "caption": "eric south 00"
+        },
+        {
+          "id": "candidate3-eric-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-south-01.webp",
+          "caption": "eric south 01"
+        },
+        {
+          "id": "candidate3-eric-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-south-02.webp",
+          "caption": "eric south 02"
+        },
+        {
+          "id": "candidate3-eric-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-south-03.webp",
+          "caption": "eric south 03"
+        },
+        {
+          "id": "candidate3-eric-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-south-04.webp",
+          "caption": "eric south 04"
+        },
+        {
+          "id": "candidate3-eric-south-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-south-after.webp",
+          "caption": "eric south after"
+        },
+        {
+          "id": "candidate3-eric-south-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-south-before.webp",
+          "caption": "eric south before"
+        }
+      ]
+    },
+    {
+      "title": "candidate4",
+      "caption": "100% Eric and Carina: native forward/backward and both doorway directions pass. Full videos show fade timing.",
+      "images": [
+        {
+          "id": "candidate4-carina-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-00.webp",
+          "caption": "carina north 00"
+        },
+        {
+          "id": "candidate4-carina-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-01.webp",
+          "caption": "carina north 01"
+        },
+        {
+          "id": "candidate4-carina-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-02.webp",
+          "caption": "carina north 02"
+        },
+        {
+          "id": "candidate4-carina-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-03.webp",
+          "caption": "carina north 03"
+        },
+        {
+          "id": "candidate4-carina-north-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-after.webp",
+          "caption": "carina north after"
+        },
+        {
+          "id": "candidate4-carina-north-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-before.webp",
+          "caption": "carina north before"
+        },
+        {
+          "id": "candidate4-carina-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-repeat-00.webp",
+          "caption": "carina north repeat 00"
+        },
+        {
+          "id": "candidate4-carina-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-repeat-01.webp",
+          "caption": "carina north repeat 01"
+        },
+        {
+          "id": "candidate4-carina-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-repeat-02.webp",
+          "caption": "carina north repeat 02"
+        },
+        {
+          "id": "candidate4-carina-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-repeat-03.webp",
+          "caption": "carina north repeat 03"
+        },
+        {
+          "id": "candidate4-carina-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-repeat-04.webp",
+          "caption": "carina north repeat 04"
+        },
+        {
+          "id": "candidate4-carina-north-repeat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-repeat-after.webp",
+          "caption": "carina north repeat after"
+        },
+        {
+          "id": "candidate4-carina-north-repeat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-repeat-before.webp",
+          "caption": "carina north repeat before"
+        },
+        {
+          "id": "candidate4-carina-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-retreat-00.webp",
+          "caption": "carina north retreat 00"
+        },
+        {
+          "id": "candidate4-carina-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-retreat-01.webp",
+          "caption": "carina north retreat 01"
+        },
+        {
+          "id": "candidate4-carina-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-retreat-02.webp",
+          "caption": "carina north retreat 02"
+        },
+        {
+          "id": "candidate4-carina-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-retreat-03.webp",
+          "caption": "carina north retreat 03"
+        },
+        {
+          "id": "candidate4-carina-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-retreat-04.webp",
+          "caption": "carina north retreat 04"
+        },
+        {
+          "id": "candidate4-carina-north-retreat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-retreat-after.webp",
+          "caption": "carina north retreat after"
+        },
+        {
+          "id": "candidate4-carina-north-retreat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-north-retreat-before.webp",
+          "caption": "carina north retreat before"
+        },
+        {
+          "id": "candidate4-carina-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-south-00.webp",
+          "caption": "carina south 00"
+        },
+        {
+          "id": "candidate4-carina-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-south-01.webp",
+          "caption": "carina south 01"
+        },
+        {
+          "id": "candidate4-carina-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-south-02.webp",
+          "caption": "carina south 02"
+        },
+        {
+          "id": "candidate4-carina-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-south-03.webp",
+          "caption": "carina south 03"
+        },
+        {
+          "id": "candidate4-carina-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-south-04.webp",
+          "caption": "carina south 04"
+        },
+        {
+          "id": "candidate4-carina-south-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-south-after.webp",
+          "caption": "carina south after"
+        },
+        {
+          "id": "candidate4-carina-south-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-south-before.webp",
+          "caption": "carina south before"
+        },
+        {
+          "id": "candidate4-eric-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-00.webp",
+          "caption": "eric north 00"
+        },
+        {
+          "id": "candidate4-eric-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-01.webp",
+          "caption": "eric north 01"
+        },
+        {
+          "id": "candidate4-eric-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-02.webp",
+          "caption": "eric north 02"
+        },
+        {
+          "id": "candidate4-eric-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-03.webp",
+          "caption": "eric north 03"
+        },
+        {
+          "id": "candidate4-eric-north-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-04.webp",
+          "caption": "eric north 04"
+        },
+        {
+          "id": "candidate4-eric-north-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-after.webp",
+          "caption": "eric north after"
+        },
+        {
+          "id": "candidate4-eric-north-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-before.webp",
+          "caption": "eric north before"
+        },
+        {
+          "id": "candidate4-eric-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-repeat-00.webp",
+          "caption": "eric north repeat 00"
+        },
+        {
+          "id": "candidate4-eric-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-repeat-01.webp",
+          "caption": "eric north repeat 01"
+        },
+        {
+          "id": "candidate4-eric-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-repeat-02.webp",
+          "caption": "eric north repeat 02"
+        },
+        {
+          "id": "candidate4-eric-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-repeat-03.webp",
+          "caption": "eric north repeat 03"
+        },
+        {
+          "id": "candidate4-eric-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-repeat-04.webp",
+          "caption": "eric north repeat 04"
+        },
+        {
+          "id": "candidate4-eric-north-repeat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-repeat-after.webp",
+          "caption": "eric north repeat after"
+        },
+        {
+          "id": "candidate4-eric-north-repeat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-repeat-before.webp",
+          "caption": "eric north repeat before"
+        },
+        {
+          "id": "candidate4-eric-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-retreat-00.webp",
+          "caption": "eric north retreat 00"
+        },
+        {
+          "id": "candidate4-eric-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-retreat-01.webp",
+          "caption": "eric north retreat 01"
+        },
+        {
+          "id": "candidate4-eric-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-retreat-02.webp",
+          "caption": "eric north retreat 02"
+        },
+        {
+          "id": "candidate4-eric-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-retreat-03.webp",
+          "caption": "eric north retreat 03"
+        },
+        {
+          "id": "candidate4-eric-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-retreat-04.webp",
+          "caption": "eric north retreat 04"
+        },
+        {
+          "id": "candidate4-eric-north-retreat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-retreat-after.webp",
+          "caption": "eric north retreat after"
+        },
+        {
+          "id": "candidate4-eric-north-retreat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-north-retreat-before.webp",
+          "caption": "eric north retreat before"
+        },
+        {
+          "id": "candidate4-eric-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-south-00.webp",
+          "caption": "eric south 00"
+        },
+        {
+          "id": "candidate4-eric-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-south-01.webp",
+          "caption": "eric south 01"
+        },
+        {
+          "id": "candidate4-eric-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-south-02.webp",
+          "caption": "eric south 02"
+        },
+        {
+          "id": "candidate4-eric-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-south-03.webp",
+          "caption": "eric south 03"
+        },
+        {
+          "id": "candidate4-eric-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-south-04.webp",
+          "caption": "eric south 04"
+        },
+        {
+          "id": "candidate4-eric-south-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-south-after.webp",
+          "caption": "eric south after"
+        },
+        {
+          "id": "candidate4-eric-south-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-south-before.webp",
+          "caption": "eric south before"
+        }
+      ]
+    },
+    {
+      "title": "candidate5-85",
+      "caption": "85% Eric and Carina: same native movement sequences pass.",
+      "images": [
+        {
+          "id": "candidate5-85-carina-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-00.webp",
+          "caption": "carina north 00"
+        },
+        {
+          "id": "candidate5-85-carina-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-01.webp",
+          "caption": "carina north 01"
+        },
+        {
+          "id": "candidate5-85-carina-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-02.webp",
+          "caption": "carina north 02"
+        },
+        {
+          "id": "candidate5-85-carina-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-03.webp",
+          "caption": "carina north 03"
+        },
+        {
+          "id": "candidate5-85-carina-north-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-04.webp",
+          "caption": "carina north 04"
+        },
+        {
+          "id": "candidate5-85-carina-north-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-after.webp",
+          "caption": "carina north after"
+        },
+        {
+          "id": "candidate5-85-carina-north-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-before.webp",
+          "caption": "carina north before"
+        },
+        {
+          "id": "candidate5-85-carina-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-repeat-00.webp",
+          "caption": "carina north repeat 00"
+        },
+        {
+          "id": "candidate5-85-carina-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-repeat-01.webp",
+          "caption": "carina north repeat 01"
+        },
+        {
+          "id": "candidate5-85-carina-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-repeat-02.webp",
+          "caption": "carina north repeat 02"
+        },
+        {
+          "id": "candidate5-85-carina-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-repeat-03.webp",
+          "caption": "carina north repeat 03"
+        },
+        {
+          "id": "candidate5-85-carina-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-repeat-04.webp",
+          "caption": "carina north repeat 04"
+        },
+        {
+          "id": "candidate5-85-carina-north-repeat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-repeat-after.webp",
+          "caption": "carina north repeat after"
+        },
+        {
+          "id": "candidate5-85-carina-north-repeat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-repeat-before.webp",
+          "caption": "carina north repeat before"
+        },
+        {
+          "id": "candidate5-85-carina-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-retreat-00.webp",
+          "caption": "carina north retreat 00"
+        },
+        {
+          "id": "candidate5-85-carina-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-retreat-01.webp",
+          "caption": "carina north retreat 01"
+        },
+        {
+          "id": "candidate5-85-carina-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-retreat-02.webp",
+          "caption": "carina north retreat 02"
+        },
+        {
+          "id": "candidate5-85-carina-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-retreat-03.webp",
+          "caption": "carina north retreat 03"
+        },
+        {
+          "id": "candidate5-85-carina-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-retreat-04.webp",
+          "caption": "carina north retreat 04"
+        },
+        {
+          "id": "candidate5-85-carina-north-retreat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-retreat-after.webp",
+          "caption": "carina north retreat after"
+        },
+        {
+          "id": "candidate5-85-carina-north-retreat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-north-retreat-before.webp",
+          "caption": "carina north retreat before"
+        },
+        {
+          "id": "candidate5-85-carina-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-south-00.webp",
+          "caption": "carina south 00"
+        },
+        {
+          "id": "candidate5-85-carina-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-south-01.webp",
+          "caption": "carina south 01"
+        },
+        {
+          "id": "candidate5-85-carina-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-south-02.webp",
+          "caption": "carina south 02"
+        },
+        {
+          "id": "candidate5-85-carina-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-south-03.webp",
+          "caption": "carina south 03"
+        },
+        {
+          "id": "candidate5-85-carina-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-south-04.webp",
+          "caption": "carina south 04"
+        },
+        {
+          "id": "candidate5-85-carina-south-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-south-after.webp",
+          "caption": "carina south after"
+        },
+        {
+          "id": "candidate5-85-carina-south-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-south-before.webp",
+          "caption": "carina south before"
+        },
+        {
+          "id": "candidate5-85-eric-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-00.webp",
+          "caption": "eric north 00"
+        },
+        {
+          "id": "candidate5-85-eric-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-01.webp",
+          "caption": "eric north 01"
+        },
+        {
+          "id": "candidate5-85-eric-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-02.webp",
+          "caption": "eric north 02"
+        },
+        {
+          "id": "candidate5-85-eric-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-03.webp",
+          "caption": "eric north 03"
+        },
+        {
+          "id": "candidate5-85-eric-north-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-after.webp",
+          "caption": "eric north after"
+        },
+        {
+          "id": "candidate5-85-eric-north-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-before.webp",
+          "caption": "eric north before"
+        },
+        {
+          "id": "candidate5-85-eric-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-repeat-00.webp",
+          "caption": "eric north repeat 00"
+        },
+        {
+          "id": "candidate5-85-eric-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-repeat-01.webp",
+          "caption": "eric north repeat 01"
+        },
+        {
+          "id": "candidate5-85-eric-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-repeat-02.webp",
+          "caption": "eric north repeat 02"
+        },
+        {
+          "id": "candidate5-85-eric-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-repeat-03.webp",
+          "caption": "eric north repeat 03"
+        },
+        {
+          "id": "candidate5-85-eric-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-repeat-04.webp",
+          "caption": "eric north repeat 04"
+        },
+        {
+          "id": "candidate5-85-eric-north-repeat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-repeat-after.webp",
+          "caption": "eric north repeat after"
+        },
+        {
+          "id": "candidate5-85-eric-north-repeat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-repeat-before.webp",
+          "caption": "eric north repeat before"
+        },
+        {
+          "id": "candidate5-85-eric-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-retreat-00.webp",
+          "caption": "eric north retreat 00"
+        },
+        {
+          "id": "candidate5-85-eric-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-retreat-01.webp",
+          "caption": "eric north retreat 01"
+        },
+        {
+          "id": "candidate5-85-eric-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-retreat-02.webp",
+          "caption": "eric north retreat 02"
+        },
+        {
+          "id": "candidate5-85-eric-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-retreat-03.webp",
+          "caption": "eric north retreat 03"
+        },
+        {
+          "id": "candidate5-85-eric-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-retreat-04.webp",
+          "caption": "eric north retreat 04"
+        },
+        {
+          "id": "candidate5-85-eric-north-retreat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-retreat-after.webp",
+          "caption": "eric north retreat after"
+        },
+        {
+          "id": "candidate5-85-eric-north-retreat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-north-retreat-before.webp",
+          "caption": "eric north retreat before"
+        },
+        {
+          "id": "candidate5-85-eric-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-south-00.webp",
+          "caption": "eric south 00"
+        },
+        {
+          "id": "candidate5-85-eric-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-south-01.webp",
+          "caption": "eric south 01"
+        },
+        {
+          "id": "candidate5-85-eric-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-south-02.webp",
+          "caption": "eric south 02"
+        },
+        {
+          "id": "candidate5-85-eric-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-south-03.webp",
+          "caption": "eric south 03"
+        },
+        {
+          "id": "candidate5-85-eric-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-south-04.webp",
+          "caption": "eric south 04"
+        },
+        {
+          "id": "candidate5-85-eric-south-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-south-after.webp",
+          "caption": "eric south after"
+        },
+        {
+          "id": "candidate5-85-eric-south-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-south-before.webp",
+          "caption": "eric south before"
+        }
+      ]
+    },
+    {
+      "title": "sanity1",
+      "caption": "Phone overview and four native look directions in the train and karaoke booth.",
+      "images": [
+        {
+          "id": "sanity1-dorms-390-0",
+          "image": "bible/shots/showcase/follow-tight-20261007/sanity1/dorms-390-0.webp",
+          "caption": "dorms 390 0"
+        },
+        {
+          "id": "sanity1-karaoke_booth-1366-0",
+          "image": "bible/shots/showcase/follow-tight-20261007/sanity1/karaoke_booth-1366-0.webp",
+          "caption": "karaoke_booth 1366 0"
+        },
+        {
+          "id": "sanity1-karaoke_booth-1366-1",
+          "image": "bible/shots/showcase/follow-tight-20261007/sanity1/karaoke_booth-1366-1.webp",
+          "caption": "karaoke_booth 1366 1"
+        },
+        {
+          "id": "sanity1-karaoke_booth-1366-2",
+          "image": "bible/shots/showcase/follow-tight-20261007/sanity1/karaoke_booth-1366-2.webp",
+          "caption": "karaoke_booth 1366 2"
+        },
+        {
+          "id": "sanity1-karaoke_booth-1366-3",
+          "image": "bible/shots/showcase/follow-tight-20261007/sanity1/karaoke_booth-1366-3.webp",
+          "caption": "karaoke_booth 1366 3"
+        },
+        {
+          "id": "sanity1-train-1366-0",
+          "image": "bible/shots/showcase/follow-tight-20261007/sanity1/train-1366-0.webp",
+          "caption": "train 1366 0"
+        },
+        {
+          "id": "sanity1-train-1366-1",
+          "image": "bible/shots/showcase/follow-tight-20261007/sanity1/train-1366-1.webp",
+          "caption": "train 1366 1"
+        },
+        {
+          "id": "sanity1-train-1366-2",
+          "image": "bible/shots/showcase/follow-tight-20261007/sanity1/train-1366-2.webp",
+          "caption": "train 1366 2"
+        },
+        {
+          "id": "sanity1-train-1366-3",
+          "image": "bible/shots/showcase/follow-tight-20261007/sanity1/train-1366-3.webp",
+          "caption": "train 1366 3"
+        }
+      ]
+    },
+    {
+      "title": "baseline1",
+      "caption": "Existing hard-hide camera: matching native 100% walkthroughs for both protagonists.",
+      "images": [
+        {
+          "id": "baseline1-carina-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-00.webp",
+          "caption": "carina north 00"
+        },
+        {
+          "id": "baseline1-carina-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-01.webp",
+          "caption": "carina north 01"
+        },
+        {
+          "id": "baseline1-carina-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-02.webp",
+          "caption": "carina north 02"
+        },
+        {
+          "id": "baseline1-carina-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-03.webp",
+          "caption": "carina north 03"
+        },
+        {
+          "id": "baseline1-carina-north-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-04.webp",
+          "caption": "carina north 04"
+        },
+        {
+          "id": "baseline1-carina-north-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-after.webp",
+          "caption": "carina north after"
+        },
+        {
+          "id": "baseline1-carina-north-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-before.webp",
+          "caption": "carina north before"
+        },
+        {
+          "id": "baseline1-carina-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-repeat-00.webp",
+          "caption": "carina north repeat 00"
+        },
+        {
+          "id": "baseline1-carina-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-repeat-01.webp",
+          "caption": "carina north repeat 01"
+        },
+        {
+          "id": "baseline1-carina-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-repeat-02.webp",
+          "caption": "carina north repeat 02"
+        },
+        {
+          "id": "baseline1-carina-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-repeat-03.webp",
+          "caption": "carina north repeat 03"
+        },
+        {
+          "id": "baseline1-carina-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-repeat-04.webp",
+          "caption": "carina north repeat 04"
+        },
+        {
+          "id": "baseline1-carina-north-repeat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-repeat-after.webp",
+          "caption": "carina north repeat after"
+        },
+        {
+          "id": "baseline1-carina-north-repeat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-repeat-before.webp",
+          "caption": "carina north repeat before"
+        },
+        {
+          "id": "baseline1-carina-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-retreat-00.webp",
+          "caption": "carina north retreat 00"
+        },
+        {
+          "id": "baseline1-carina-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-retreat-01.webp",
+          "caption": "carina north retreat 01"
+        },
+        {
+          "id": "baseline1-carina-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-retreat-02.webp",
+          "caption": "carina north retreat 02"
+        },
+        {
+          "id": "baseline1-carina-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-retreat-03.webp",
+          "caption": "carina north retreat 03"
+        },
+        {
+          "id": "baseline1-carina-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-retreat-04.webp",
+          "caption": "carina north retreat 04"
+        },
+        {
+          "id": "baseline1-carina-north-retreat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-retreat-after.webp",
+          "caption": "carina north retreat after"
+        },
+        {
+          "id": "baseline1-carina-north-retreat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-north-retreat-before.webp",
+          "caption": "carina north retreat before"
+        },
+        {
+          "id": "baseline1-carina-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-south-00.webp",
+          "caption": "carina south 00"
+        },
+        {
+          "id": "baseline1-carina-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-south-01.webp",
+          "caption": "carina south 01"
+        },
+        {
+          "id": "baseline1-carina-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-south-02.webp",
+          "caption": "carina south 02"
+        },
+        {
+          "id": "baseline1-carina-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-south-03.webp",
+          "caption": "carina south 03"
+        },
+        {
+          "id": "baseline1-carina-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-south-04.webp",
+          "caption": "carina south 04"
+        },
+        {
+          "id": "baseline1-carina-south-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-south-after.webp",
+          "caption": "carina south after"
+        },
+        {
+          "id": "baseline1-carina-south-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-south-before.webp",
+          "caption": "carina south before"
+        },
+        {
+          "id": "baseline1-eric-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-00.webp",
+          "caption": "eric north 00"
+        },
+        {
+          "id": "baseline1-eric-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-01.webp",
+          "caption": "eric north 01"
+        },
+        {
+          "id": "baseline1-eric-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-02.webp",
+          "caption": "eric north 02"
+        },
+        {
+          "id": "baseline1-eric-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-03.webp",
+          "caption": "eric north 03"
+        },
+        {
+          "id": "baseline1-eric-north-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-after.webp",
+          "caption": "eric north after"
+        },
+        {
+          "id": "baseline1-eric-north-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-before.webp",
+          "caption": "eric north before"
+        },
+        {
+          "id": "baseline1-eric-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-repeat-00.webp",
+          "caption": "eric north repeat 00"
+        },
+        {
+          "id": "baseline1-eric-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-repeat-01.webp",
+          "caption": "eric north repeat 01"
+        },
+        {
+          "id": "baseline1-eric-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-repeat-02.webp",
+          "caption": "eric north repeat 02"
+        },
+        {
+          "id": "baseline1-eric-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-repeat-03.webp",
+          "caption": "eric north repeat 03"
+        },
+        {
+          "id": "baseline1-eric-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-repeat-04.webp",
+          "caption": "eric north repeat 04"
+        },
+        {
+          "id": "baseline1-eric-north-repeat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-repeat-after.webp",
+          "caption": "eric north repeat after"
+        },
+        {
+          "id": "baseline1-eric-north-repeat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-repeat-before.webp",
+          "caption": "eric north repeat before"
+        },
+        {
+          "id": "baseline1-eric-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-retreat-00.webp",
+          "caption": "eric north retreat 00"
+        },
+        {
+          "id": "baseline1-eric-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-retreat-01.webp",
+          "caption": "eric north retreat 01"
+        },
+        {
+          "id": "baseline1-eric-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-retreat-02.webp",
+          "caption": "eric north retreat 02"
+        },
+        {
+          "id": "baseline1-eric-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-retreat-03.webp",
+          "caption": "eric north retreat 03"
+        },
+        {
+          "id": "baseline1-eric-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-retreat-04.webp",
+          "caption": "eric north retreat 04"
+        },
+        {
+          "id": "baseline1-eric-north-retreat-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-retreat-after.webp",
+          "caption": "eric north retreat after"
+        },
+        {
+          "id": "baseline1-eric-north-retreat-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-north-retreat-before.webp",
+          "caption": "eric north retreat before"
+        },
+        {
+          "id": "baseline1-eric-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-south-00.webp",
+          "caption": "eric south 00"
+        },
+        {
+          "id": "baseline1-eric-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-south-01.webp",
+          "caption": "eric south 01"
+        },
+        {
+          "id": "baseline1-eric-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-south-02.webp",
+          "caption": "eric south 02"
+        },
+        {
+          "id": "baseline1-eric-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-south-03.webp",
+          "caption": "eric south 03"
+        },
+        {
+          "id": "baseline1-eric-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-south-04.webp",
+          "caption": "eric south 04"
+        },
+        {
+          "id": "baseline1-eric-south-after",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-south-after.webp",
+          "caption": "eric south after"
+        },
+        {
+          "id": "baseline1-eric-south-before",
+          "image": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-south-before.webp",
+          "caption": "eric south before"
+        }
+      ]
+    },
+    {
+      "title": "candidate6-record",
+      "caption": "Shader hooks preserved. Native100 passes; diagnostic RECORD_ONLY still captured loop screenshots.",
+      "images": [
+        {
+          "id": "candidate6-record-carina-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-00.webp",
+          "caption": "carina north 00"
+        },
+        {
+          "id": "candidate6-record-carina-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-01.webp",
+          "caption": "carina north 01"
+        },
+        {
+          "id": "candidate6-record-carina-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-02.webp",
+          "caption": "carina north 02"
+        },
+        {
+          "id": "candidate6-record-carina-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-03.webp",
+          "caption": "carina north 03"
+        },
+        {
+          "id": "candidate6-record-carina-north-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-04.webp",
+          "caption": "carina north 04"
+        },
+        {
+          "id": "candidate6-record-carina-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-repeat-00.webp",
+          "caption": "carina north repeat 00"
+        },
+        {
+          "id": "candidate6-record-carina-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-repeat-01.webp",
+          "caption": "carina north repeat 01"
+        },
+        {
+          "id": "candidate6-record-carina-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-repeat-02.webp",
+          "caption": "carina north repeat 02"
+        },
+        {
+          "id": "candidate6-record-carina-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-repeat-03.webp",
+          "caption": "carina north repeat 03"
+        },
+        {
+          "id": "candidate6-record-carina-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-repeat-04.webp",
+          "caption": "carina north repeat 04"
+        },
+        {
+          "id": "candidate6-record-carina-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-retreat-00.webp",
+          "caption": "carina north retreat 00"
+        },
+        {
+          "id": "candidate6-record-carina-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-retreat-01.webp",
+          "caption": "carina north retreat 01"
+        },
+        {
+          "id": "candidate6-record-carina-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-retreat-02.webp",
+          "caption": "carina north retreat 02"
+        },
+        {
+          "id": "candidate6-record-carina-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-retreat-03.webp",
+          "caption": "carina north retreat 03"
+        },
+        {
+          "id": "candidate6-record-carina-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-north-retreat-04.webp",
+          "caption": "carina north retreat 04"
+        },
+        {
+          "id": "candidate6-record-carina-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-south-00.webp",
+          "caption": "carina south 00"
+        },
+        {
+          "id": "candidate6-record-carina-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-south-01.webp",
+          "caption": "carina south 01"
+        },
+        {
+          "id": "candidate6-record-carina-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-south-02.webp",
+          "caption": "carina south 02"
+        },
+        {
+          "id": "candidate6-record-carina-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-south-03.webp",
+          "caption": "carina south 03"
+        },
+        {
+          "id": "candidate6-record-carina-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-south-04.webp",
+          "caption": "carina south 04"
+        },
+        {
+          "id": "candidate6-record-eric-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-00.webp",
+          "caption": "eric north 00"
+        },
+        {
+          "id": "candidate6-record-eric-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-01.webp",
+          "caption": "eric north 01"
+        },
+        {
+          "id": "candidate6-record-eric-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-02.webp",
+          "caption": "eric north 02"
+        },
+        {
+          "id": "candidate6-record-eric-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-03.webp",
+          "caption": "eric north 03"
+        },
+        {
+          "id": "candidate6-record-eric-north-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-04.webp",
+          "caption": "eric north 04"
+        },
+        {
+          "id": "candidate6-record-eric-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-repeat-00.webp",
+          "caption": "eric north repeat 00"
+        },
+        {
+          "id": "candidate6-record-eric-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-repeat-01.webp",
+          "caption": "eric north repeat 01"
+        },
+        {
+          "id": "candidate6-record-eric-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-repeat-02.webp",
+          "caption": "eric north repeat 02"
+        },
+        {
+          "id": "candidate6-record-eric-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-repeat-03.webp",
+          "caption": "eric north repeat 03"
+        },
+        {
+          "id": "candidate6-record-eric-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-repeat-04.webp",
+          "caption": "eric north repeat 04"
+        },
+        {
+          "id": "candidate6-record-eric-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-retreat-00.webp",
+          "caption": "eric north retreat 00"
+        },
+        {
+          "id": "candidate6-record-eric-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-retreat-01.webp",
+          "caption": "eric north retreat 01"
+        },
+        {
+          "id": "candidate6-record-eric-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-retreat-02.webp",
+          "caption": "eric north retreat 02"
+        },
+        {
+          "id": "candidate6-record-eric-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-retreat-03.webp",
+          "caption": "eric north retreat 03"
+        },
+        {
+          "id": "candidate6-record-eric-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-north-retreat-04.webp",
+          "caption": "eric north retreat 04"
+        },
+        {
+          "id": "candidate6-record-eric-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-south-00.webp",
+          "caption": "eric south 00"
+        },
+        {
+          "id": "candidate6-record-eric-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-south-01.webp",
+          "caption": "eric south 01"
+        },
+        {
+          "id": "candidate6-record-eric-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-south-02.webp",
+          "caption": "eric south 02"
+        },
+        {
+          "id": "candidate6-record-eric-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-south-03.webp",
+          "caption": "eric south 03"
+        },
+        {
+          "id": "candidate6-record-eric-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-south-04.webp",
+          "caption": "eric south 04"
+        }
+      ]
+    },
+    {
+      "title": "candidate7-record-85",
+      "caption": "Shader hooks preserved, native85 passes; same remaining screenshot guard limitation.",
+      "images": [
+        {
+          "id": "candidate7-record-85-carina-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-00.webp",
+          "caption": "carina north 00"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-01.webp",
+          "caption": "carina north 01"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-02.webp",
+          "caption": "carina north 02"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-03.webp",
+          "caption": "carina north 03"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-04.webp",
+          "caption": "carina north 04"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-repeat-00.webp",
+          "caption": "carina north repeat 00"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-repeat-01.webp",
+          "caption": "carina north repeat 01"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-repeat-02.webp",
+          "caption": "carina north repeat 02"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-repeat-03.webp",
+          "caption": "carina north repeat 03"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-repeat-04.webp",
+          "caption": "carina north repeat 04"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-retreat-00.webp",
+          "caption": "carina north retreat 00"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-retreat-01.webp",
+          "caption": "carina north retreat 01"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-retreat-02.webp",
+          "caption": "carina north retreat 02"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-retreat-03.webp",
+          "caption": "carina north retreat 03"
+        },
+        {
+          "id": "candidate7-record-85-carina-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-north-retreat-04.webp",
+          "caption": "carina north retreat 04"
+        },
+        {
+          "id": "candidate7-record-85-carina-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-south-00.webp",
+          "caption": "carina south 00"
+        },
+        {
+          "id": "candidate7-record-85-carina-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-south-01.webp",
+          "caption": "carina south 01"
+        },
+        {
+          "id": "candidate7-record-85-carina-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-south-02.webp",
+          "caption": "carina south 02"
+        },
+        {
+          "id": "candidate7-record-85-carina-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-south-03.webp",
+          "caption": "carina south 03"
+        },
+        {
+          "id": "candidate7-record-85-carina-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-south-04.webp",
+          "caption": "carina south 04"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-00.webp",
+          "caption": "eric north 00"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-01.webp",
+          "caption": "eric north 01"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-02.webp",
+          "caption": "eric north 02"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-03.webp",
+          "caption": "eric north 03"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-04.webp",
+          "caption": "eric north 04"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-repeat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-repeat-00.webp",
+          "caption": "eric north repeat 00"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-repeat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-repeat-01.webp",
+          "caption": "eric north repeat 01"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-repeat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-repeat-02.webp",
+          "caption": "eric north repeat 02"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-repeat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-repeat-03.webp",
+          "caption": "eric north repeat 03"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-repeat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-repeat-04.webp",
+          "caption": "eric north repeat 04"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-retreat-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-retreat-00.webp",
+          "caption": "eric north retreat 00"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-retreat-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-retreat-01.webp",
+          "caption": "eric north retreat 01"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-retreat-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-retreat-02.webp",
+          "caption": "eric north retreat 02"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-retreat-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-retreat-03.webp",
+          "caption": "eric north retreat 03"
+        },
+        {
+          "id": "candidate7-record-85-eric-north-retreat-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-north-retreat-04.webp",
+          "caption": "eric north retreat 04"
+        },
+        {
+          "id": "candidate7-record-85-eric-south-00",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-south-00.webp",
+          "caption": "eric south 00"
+        },
+        {
+          "id": "candidate7-record-85-eric-south-01",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-south-01.webp",
+          "caption": "eric south 01"
+        },
+        {
+          "id": "candidate7-record-85-eric-south-02",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-south-02.webp",
+          "caption": "eric south 02"
+        },
+        {
+          "id": "candidate7-record-85-eric-south-03",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-south-03.webp",
+          "caption": "eric south 03"
+        },
+        {
+          "id": "candidate7-record-85-eric-south-04",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-south-04.webp",
+          "caption": "eric south 04"
+        }
+      ]
+    },
+    {
+      "title": "candidate8-video",
+      "caption": "Final screenshot-free native video, both actors at100% and85%. Independent rendered-transition review passes8/10. Stills here are frames extracted after recording.",
+      "images": [
+        {
+          "id": "candidate8-video-carina-100-north-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-100-north-end.webp",
+          "caption": "carina 100 north end"
+        },
+        {
+          "id": "candidate8-video-carina-100-north-repeat-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-100-north-repeat-end.webp",
+          "caption": "carina 100 north repeat end"
+        },
+        {
+          "id": "candidate8-video-carina-100-north-retreat-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-100-north-retreat-end.webp",
+          "caption": "carina 100 north retreat end"
+        },
+        {
+          "id": "candidate8-video-carina-100-north-start",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-100-north-start.webp",
+          "caption": "carina 100 north start"
+        },
+        {
+          "id": "candidate8-video-carina-100-south-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-100-south-end.webp",
+          "caption": "carina 100 south end"
+        },
+        {
+          "id": "candidate8-video-carina-85-north-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-85-north-end.webp",
+          "caption": "carina 85 north end"
+        },
+        {
+          "id": "candidate8-video-carina-85-north-repeat-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-85-north-repeat-end.webp",
+          "caption": "carina 85 north repeat end"
+        },
+        {
+          "id": "candidate8-video-carina-85-north-retreat-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-85-north-retreat-end.webp",
+          "caption": "carina 85 north retreat end"
+        },
+        {
+          "id": "candidate8-video-carina-85-north-start",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-85-north-start.webp",
+          "caption": "carina 85 north start"
+        },
+        {
+          "id": "candidate8-video-carina-85-south-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-85-south-end.webp",
+          "caption": "carina 85 south end"
+        },
+        {
+          "id": "candidate8-video-eric-100-north-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-100-north-end.webp",
+          "caption": "eric 100 north end"
+        },
+        {
+          "id": "candidate8-video-eric-100-north-repeat-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-100-north-repeat-end.webp",
+          "caption": "eric 100 north repeat end"
+        },
+        {
+          "id": "candidate8-video-eric-100-north-retreat-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-100-north-retreat-end.webp",
+          "caption": "eric 100 north retreat end"
+        },
+        {
+          "id": "candidate8-video-eric-100-north-start",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-100-north-start.webp",
+          "caption": "eric 100 north start"
+        },
+        {
+          "id": "candidate8-video-eric-100-south-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-100-south-end.webp",
+          "caption": "eric 100 south end"
+        },
+        {
+          "id": "candidate8-video-eric-85-north-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-85-north-end.webp",
+          "caption": "eric 85 north end"
+        },
+        {
+          "id": "candidate8-video-eric-85-north-repeat-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-85-north-repeat-end.webp",
+          "caption": "eric 85 north repeat end"
+        },
+        {
+          "id": "candidate8-video-eric-85-north-retreat-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-85-north-retreat-end.webp",
+          "caption": "eric 85 north retreat end"
+        },
+        {
+          "id": "candidate8-video-eric-85-north-start",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-85-north-start.webp",
+          "caption": "eric 85 north start"
+        },
+        {
+          "id": "candidate8-video-eric-85-south-end",
+          "image": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-85-south-end.webp",
+          "caption": "eric 85 south end"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play the game",
+      "href": "game3d/"
+    },
+    {
+      "label": "Evidence and limits",
+      "href": "notes/follow-tight-20261007.md"
+    },
+    {
+      "label": "candidate1: eric traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate1/eric-traversal.webm"
+    },
+    {
+      "label": "candidate2: eric traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate2/eric-traversal.webm"
+    },
+    {
+      "label": "candidate3: eric traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate3/eric-traversal.webm"
+    },
+    {
+      "label": "candidate4: carina traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate4/carina-traversal.webm"
+    },
+    {
+      "label": "candidate4: eric traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate4/eric-traversal.webm"
+    },
+    {
+      "label": "candidate5-85: carina traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate5-85/carina-traversal.webm"
+    },
+    {
+      "label": "candidate5-85: eric traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate5-85/eric-traversal.webm"
+    },
+    {
+      "label": "baseline1: carina traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/baseline1/carina-traversal.webm"
+    },
+    {
+      "label": "baseline1: eric traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/baseline1/eric-traversal.webm"
+    },
+    {
+      "label": "candidate6-record: carina traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate6-record/carina-traversal.webm"
+    },
+    {
+      "label": "candidate6-record: eric traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate6-record/eric-traversal.webm"
+    },
+    {
+      "label": "candidate7-record-85: carina traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/carina-traversal.webm"
+    },
+    {
+      "label": "candidate7-record-85: eric traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate7-record-85/eric-traversal.webm"
+    },
+    {
+      "label": "candidate8-video: carina 100 traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-100-traversal.webm"
+    },
+    {
+      "label": "candidate8-video: carina 85 traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate8-video/carina-85-traversal.webm"
+    },
+    {
+      "label": "candidate8-video: eric 100 traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-100-traversal.webm"
+    },
+    {
+      "label": "candidate8-video: eric 85 traversal",
+      "href": "bible/shots/showcase/follow-tight-20261007/candidate8-video/eric-85-traversal.webm"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { HF } from '../train/car.js';
 import { cameraObstruction } from './obstruction.js';
+import { playerFraming } from './framing.js';
 
 // The approved 1c lens. Authored cameras continue to update underneath; their exact pose/lens is restored
 // before the next step, resize, pause or scene, so their fitting never uses this camera's field of view.
@@ -25,16 +26,16 @@ export function followCamera(game, place) {
     ...[...Object.values(place.people || {}), ...(place.crowd || [])].map((p) => p?.root),
   ]);
   const obstruct = cameraObstruction(place, actors);
+  const framing = playerFraming(player);
   let authored = null,
     yaw = 0,
-    pitch = 0,
-    hidden = false,
-    oldVisible = true;
+    pitch = 0;
   player.getWorldDirection(forward);
   yaw = Math.atan2(forward.x, forward.z);
   const api = {
     visibilityCamera,
     setActive(value) {
+      if (!value) framing.reset();
       player.getWorldPosition(feet);
       for (const group of enclosures) {
         const data = group.userData.followEnclosure,
@@ -66,10 +67,7 @@ export function followCamera(game, place) {
         camera.updateMatrixWorld();
         authored = null;
       }
-      if (hidden) {
-        player.visible = oldVisible;
-        hidden = false;
-      }
+      framing.restore();
     },
     movementFrame() {
       forward.set(Math.sin(yaw), 0, Math.cos(yaw));
@@ -121,13 +119,7 @@ export function followCamera(game, place) {
       camera.lookAt(target);
       camera.updateMatrixWorld();
       visibilityCamera.copy(camera, false);
-      // Large chibi heads otherwise cover the view when a wall compresses the lens.
-      // Hide only this root at close range, never shared NPC materials.
-      if (api.distance < 1.15 * (place.charScale || 1)) {
-        oldVisible = player.visible;
-        player.visible = false;
-        hidden = true;
-      }
+      framing.update(api.distance, place.charScale || 1);
     },
   };
   return api;
