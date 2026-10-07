@@ -1,0 +1,51 @@
+{
+  "mode": "bridge",
+  "sourceDir": "/home/jorgen/repo/japanese/.claude/worktrees/codex-briefcase-carry/game3d/js/crowd/",
+  "sourceSha256": {
+    "looks": "35f518fc9488f91182d87707a60aa4cc91978424c9825c6298eadcc3d4196c25",
+    "motion": "25dd60c281a027b8b21f9c72e1768a33ff3a75dcf685a11ec1b85539a7787d5a",
+    "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75",
+    "bag-pose": "95863adf00bbdf5465f98356c22af3d98eacacb224adbe51aee5325080bcef34"
+  },
+  "errors": [],
+  "blocked": [
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/clips.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/model.glb?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/regions.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/model-lo.glb?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/regions-lo.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/model-far.glb?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/regions-far.json?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/base.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/mask.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/base-lo.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/mask-lo.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/base-far.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/chibi-gen-suit/mask-far.webp?v=1007-1550-dceb7ce8",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/walk.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/run.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/idle.json",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/sit.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/walk.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/run.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/idle.json",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/sit.glb",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-a/base.webp",
+    "http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/assets/characters/crowd-b/base.webp"
+  ],
+  "frames": [],
+  "error": "page.evaluate: Error: No leg triangles found; cannot claim bag clearance\n    at legClearance (http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/tools/crowd-bag-clearance.mjs:57:29)\n    at eval (eval at evaluate (:311:30), <anonymous>:24:22)\n    at SkinnedMesh.traverse (http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/vendor/three/three.core.js:12974:3)\n    at Group.traverse (http://127.0.0.1:8771/.claude/worktrees/codex-briefcase-carry/game3d/vendor/three/three.core.js:12980:18)\n    at eval (eval at evaluate (:311:30), <anonymous>:17:12)\n    at async <anonymous>:337:30\n    at withBrowserJob.timeoutMs (/home/jorgen/repo/japanese/.claude/worktrees/codex-briefcase-carry/game3d/tools/crowd-bag-live-check.mjs:29:27)\n    at async withBrowserJob (/home/jorgen/repo/japanese/.claude/worktrees/codex-briefcase-carry/tools/lib/browser-job.mjs:164:12)\n    at async file:///home/jorgen/repo/japanese/.claude/worktrees/codex-briefcase-carry/game3d/tools/crowd-bag-live-check.mjs:17:1",
+  "rawReport": {
+    "path": "/home/jorgen/repo/japanese/game3d/shots/crowd-bags/live-drawstep-bridge1/report.json",
+    "sha256": "f30efb6fe83ad72eb1b38219f33dda2f842152974b24becb6fdd0a2d58c08728",
+    "bytes": 4538
+  },
+  "measurements": {
+    "rows": 0,
+    "clearanceSamples": 0,
+    "intersectingSamples": 0,
+    "maximumDepth": 0,
+    "maximumPaletteError": 0,
+    "maximumSameFrameGripGap": null
+  }
+}

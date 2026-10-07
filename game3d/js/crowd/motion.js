@@ -191,7 +191,10 @@ export function stride(w, dt, visible) {
   if (!run || r.meshy) {
     if (!visible) return;
     stepGait(r, w.moved * dt, dt, { run });
-    if (!r.meshy && r.arms[1].children.length > 2) r.arms[1].rotation.x *= 0.35; // a bag: that arm hardly swings
+    if (!r.meshy && r.carryPose) {
+      r.arms[1].rotation.x *= 0.35; // a bag: that arm hardly swings
+      r.carryPose();
+    }
     return;
   }
   if (!visible) return;
@@ -236,6 +239,7 @@ export function standPose(r) {
   for (const a of r.arms) a.rotation.set(0, 0, 0);
   r.root.position.y = 0;
   r.seated = false;
+  r.carryPose?.();
 }
 
 // on a bench whose seat top is at seatY (place units), facing yaw
@@ -253,6 +257,7 @@ export function benchSit(r, x, z, yaw, seatY) {
     a.rotation.x = -0.7;
     a.rotation.z = (i ? -1 : 1) * 0.25;
   }
+  r.carryPose?.(seatY);
 }
 
 // the small life of someone not walking, by what they're doing. s: { mode, t, ph, phone, talker }
@@ -268,10 +273,12 @@ export function idleLife(s, dt) {
   r.torso.scale.y = 1 + 0.012 * Math.sin(t * 1.7);
   if (s.phone) {
     // looking down at a phone in the right hand, now and then up at the street
-    r.arms[1].rotation.x = -1.25;
-    r.arms[1].rotation.z = -0.1;
+    const phoneArm = r.arms[r.carryPose ? 0 : 1];
+    phoneArm.rotation.x = -1.25;
+    phoneArm.rotation.z = r.carryPose ? 0.1 : -0.1;
     r.head.rotation.x = 0.4 - Math.max(0, Math.sin(t * 0.35)) * 0.45;
     r.head.rotation.y = Math.sin(t * 0.21) * 0.25;
+    r.carryPose?.();
     return;
   }
   if (s.mode === 'chat') {

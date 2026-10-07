@@ -1,0 +1,90 @@
+[
+  {
+    "run": "resume-live-bridge",
+    "sourceSha256": {
+      "looks": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+    },
+    "reportSha256": "e93b468c8adac50e65077715dc3b659d1adaeefc90061c6969ffda38d62c191f",
+    "live": {
+      "firstTime": 0.06369999998807907,
+      "lastTime": 10.246899999976154,
+      "walkingRows": 5068
+    },
+    "samples": 146,
+    "intersections": 0,
+    "depth": 0,
+    "gripGap": 4.892739767263405e-07,
+    "paletteError": 9.53009386961412e-07,
+    "matrixError": 0,
+    "errors": []
+  },
+  {
+    "run": "resume-live-briefcase",
+    "sourceSha256": {
+      "looks": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+    },
+    "reportSha256": "7dd0e678bbe0fa1b1c8b8311e79e21b08d348c42353fa40e5c9f3ba28d5fd74b",
+    "live": {
+      "firstTime": 0.018699999988079072,
+      "lastTime": 10.17830000001192,
+      "walkingRows": 2458
+    },
+    "samples": 96,
+    "intersections": 0,
+    "depth": 0,
+    "gripGap": 9.511209240276058e-07,
+    "paletteError": 9.534471665517685e-07,
+    "matrixError": 0,
+    "errors": []
+  },
+  {
+    "run": "resume-live-briefcase-b",
+    "sourceSha256": {
+      "looks": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+    },
+    "reportSha256": "fbd93e4deebcdb7137badcb7a337fc49630303b04f64c2e9fc1911192d2b05b6",
+    "live": {
+      "firstTime": 0.0175,
+      "lastTime": 10.225300000011915,
+      "walkingRows": 3174
+    },
+    "samples": 107,
+    "intersections": 0,
+    "depth": 0,
+    "gripGap": 4.765536499388315e-07,
+    "paletteError": 4.7674731895597233e-07,
+    "matrixError": 0,
+    "errors": []
+  },
+  {
+    "run": "resume-live-tote",
+    "sourceSha256": {
+      "looks": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75",
+      "bag-pose": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+    },
+    "reportSha256": "1895cc738e064ce591a5c731fc8e4fb9195bdab19347ad84fd348aa2ad430a0b",
+    "live": {
+      "firstTime": 0.016200000047683717,
+      "lastTime": 10.245600000023838,
+      "walkingRows": 5721
+    },
+    "samples": 211,
+    "intersections": 0,
+    "depth": 0,
+    "gripGap": 3.483153979064516e-07,
+    "paletteError": 4.765781671522973e-07,
+    "matrixError": 0,
+    "errors": []
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "thickness": 0.5,
+  "sourceSha256": "5b017ec29e5da8940d2f5a894a2ae5067334819269c8c786b63d312cad39212e",
+  "quality": 2,
+  "frames": [
+    {
+      "file": "lobby-2560.png",
+      "width": 2560,
+      "height": 1440,
+      "position": [
+        15.58,
+        0,
+        -5.05
+      ],
+      "spot": "lobby_island_w",
+      "found": true
+    },
+    {
+      "file": "lobby-390.png",
+      "width": 390,
+      "height": 844,
+      "position": [
+        15.58,
+        0,
+        -5.05
+      ],
+      "spot": "lobby_island_w",
+      "found": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

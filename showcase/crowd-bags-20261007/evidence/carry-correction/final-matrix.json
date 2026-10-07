@@ -1,0 +1,182 @@
+[
+  {
+    "run": "legcheck-wrist-offset-bridge-100",
+    "scale": "100",
+    "mode": "bridge",
+    "sourceSha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "6dfacc4d2185aeb65f5c752209d73eda713dc1758b2aadebd78493055e55f6f5",
+    "images": 12,
+    "carriers": 1,
+    "gaitFrames": 270,
+    "transitionFrames": 120,
+    "maxGripDrift": 4.687563034070918e-13,
+    "minFloor": 0.16844091425495766
+  },
+  {
+    "run": "legcheck-wrist-offset-bridge-85",
+    "scale": "85",
+    "mode": "bridge",
+    "sourceSha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "f217d7111bc76fe005418bcf9dcaafaaf1785107e7d9c2fa029e8430a39ba755",
+    "images": 12,
+    "carriers": 1,
+    "gaitFrames": 270,
+    "transitionFrames": 120,
+    "maxGripDrift": 3.5972432145857734e-13,
+    "minFloor": 0.1450771672102025
+  },
+  {
+    "run": "legcheck-wrist-offset-fallback-100",
+    "scale": "100",
+    "mode": "fallback",
+    "sourceSha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "7912ff1e75c3526f2742e745fc47fe29524b6693da19bcfb9327f26aaf40dc0b",
+    "images": 36,
+    "carriers": 3,
+    "gaitFrames": 810,
+    "transitionFrames": 360,
+    "maxGripDrift": 4.4537105522511245e-15,
+    "minFloor": 0.10078548360290496
+  },
+  {
+    "run": "legcheck-wrist-offset-fallback-85",
+    "scale": "85",
+    "mode": "fallback",
+    "sourceSha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "0a2ec74728f827843068a7e7ef72a3ed0521c06feb038bb0248cfdded0a51892",
+    "images": 36,
+    "carriers": 3,
+    "gaitFrames": 810,
+    "transitionFrames": 360,
+    "maxGripDrift": 5.370829389866548e-15,
+    "minFloor": 0.08763301059130446
+  },
+  {
+    "run": "legcheck-wrist-offset-generated-100",
+    "scale": "100",
+    "mode": "generated",
+    "sourceSha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "a1e0ea411ec91e692b5942845b3345cdeb220b8034fe7ec24dd8606ac81f2168",
+    "images": 36,
+    "carriers": 3,
+    "gaitFrames": 810,
+    "transitionFrames": 360,
+    "maxGripDrift": 3.6425278773254764e-13,
+    "minFloor": 0.10716665618558407
+  },
+  {
+    "run": "legcheck-wrist-offset-generated-85",
+    "scale": "85",
+    "mode": "generated",
+    "sourceSha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "56c9b83cc7b14df0e1f9b7e36ddc5b0886c9c6361479a254e327e246781cd9eb",
+    "images": 36,
+    "carriers": 3,
+    "gaitFrames": 810,
+    "transitionFrames": 360,
+    "maxGripDrift": 5.0864952687724e-13,
+    "minFloor": 0.09378754906222753
+  },
+  {
+    "run": "legcheck-wrist-offset-generated-office-100",
+    "scale": "100",
+    "mode": "generated-office",
+    "sourceSha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "1c3ee4c0fa4bf47986ce81ee627f82cf0fa16016ae94a2ea15275c1128ee0c3c",
+    "images": 48,
+    "carriers": 4,
+    "gaitFrames": 1080,
+    "transitionFrames": 480,
+    "maxGripDrift": 4.687462060145328e-13,
+    "minFloor": 0.11225122465774678
+  },
+  {
+    "run": "legcheck-wrist-offset-generated-office-85",
+    "scale": "85",
+    "mode": "generated-office",
+    "sourceSha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "02dd2410f85bad18b565ea21b18c25f73e9d09a72ae0917ae56d5b5190e5531a",
+    "images": 48,
+    "carriers": 4,
+    "gaitFrames": 1080,
+    "transitionFrames": 480,
+    "maxGripDrift": 4.1238652626373395e-13,
+    "minFloor": 0.09836565583465459
+  },
+  {
+    "run": "legcheck-wrist-offset-normal-100",
+    "scale": "100",
+    "mode": "normal",
+    "sourceSha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "07aa8cc406fb1a6e381dd07b60d2c4940d90b87d94a0d715873491ef7018e62d",
+    "images": 72,
+    "carriers": 6,
+    "gaitFrames": 1620,
+    "transitionFrames": 720,
+    "maxGripDrift": 5.155231163830949e-13,
+    "minFloor": 0.05409928201250597
+  },
+  {
+    "run": "legcheck-wrist-offset-normal-85",
+    "scale": "85",
+    "mode": "normal",
+    "sourceSha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d",
+    "runtimeSources": {
+      "motion": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf",
+      "bag-pose": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb",
+      "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+    },
+    "reportSha256": "ce79441eb687e2d21610ede468262e39f667bed3395a9e8bdae6ecb25299ef2d",
+    "images": 72,
+    "carriers": 6,
+    "gaitFrames": 1620,
+    "transitionFrames": 720,
+    "maxGripDrift": 6.920477866187551e-13,
+    "minFloor": 0.047138148757167986
+  }
+]

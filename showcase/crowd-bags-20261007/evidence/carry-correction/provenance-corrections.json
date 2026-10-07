@@ -1,0 +1,16 @@
+{
+  "legcheck-baseline-85": {
+    "originalLabel": "baseline",
+    "actual": "current rotated candidate; versioned source URL missed the old override",
+    "supersededBy": "legcheck-true-baseline-85"
+  },
+  "legcheck-final-normal-85": {
+    "actual": "intermediate straight/turn/seat test before phone, shoe and live-render additions"
+  },
+  "legcheck-accepted-generated-85": {
+    "actual": "rejected: generated shirt/cardigan leg collisions"
+  },
+  "legcheck-wide-arm-generated-85": {
+    "actual": "rejected: generated cardigan leg collisions remain"
+  }
+}
