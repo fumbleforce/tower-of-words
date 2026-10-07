@@ -5,6 +5,7 @@ import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { waitForGame } from '../test/support/wait-ready.mjs';
 const width = +(process.argv[2] || 1366),
   phone = width < 600;
+const gameURL = `http://127.0.0.1:${process.env.PORT || 8771}/${process.env.BASE || 'game3d'}/index.html`;
 const out = new URL(`../shots/station-garden/${process.env.OUT || 'round1'}/`, import.meta.url).pathname;
 fs.mkdirSync(out, { recursive: true });
 await withBrowserJob(
@@ -70,7 +71,7 @@ await withBrowserJob(
       if (phone) await page.locator('#qsaveBtn').tap();
       else await page.keyboard.press('F5');
       await page.waitForTimeout(600);
-      await page.goto('http://127.0.0.1:8771/.claude/worktrees/codex-station-garden/game3d/index.html?q=0');
+      await page.goto(`${gameURL}?q=0`);
       if (phone) await page.locator('#title .mcont').tap();
       else await page.locator('#title .mcont').click();
       if (phone) await page.locator('.slot[data-id="quick"]').tap();
@@ -104,7 +105,7 @@ await withBrowserJob(
         60000,
         () =>
           page.goto(
-            `http://127.0.0.1:8771/.claude/worktrees/codex-station-garden/game3d/index.html?day=3&place=shotengai&mc=${phone ? 'carina' : 'eric'}&q=0`,
+            `${gameURL}?day=3&place=shotengai&mc=${phone ? 'carina' : 'eric'}&q=0`,
           ),
         'play',
       );
