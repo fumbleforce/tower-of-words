@@ -1,6 +1,6 @@
 # Yuzuki
 
-Proposed in play: Yuzuki knows how to make a useful story readable, including checking what a flattering version gets wrong. She sometimes likes a successful anecdote too much to let it change.
+Proposed in play: Yuzuki finds people interesting until they ask her to commit to being there next week. She enjoys an audience, keeps several friendships half alive and has volunteered for a local performance without checking whether she can bear being bad at it in public.
 
 ## Established
 
@@ -8,27 +8,24 @@ The `yuzuki` entry in [the bible](../../bible/facts.yaml) establishes PR and her
 
 ## Proposed history
 
-Yuzuki's first communications work involved producing small internal notices and interviewing people about work she did not understand. She discovered that an accurate quotation could still misrepresent someone if she removed the ordinary sentence that came just before it. A colleague once asked her to read a short piece back to its subject before publication. The subject objected to the flattering part, because it credited them with a team effort. Yuzuki changed it and kept being invited back.
+Yuzuki wanted communications work and applied for it directly. She liked interviewing people for a student publication, particularly the first meeting when everything was new. The repetitive part of staying in contact appealed less. PR gave her a job in which beginning a conversation was useful and finishing the article imposed a deadline she could not ignore.
 
-She moved towards explaining company activities to people who were interested but busy. She is good at finding a useful opening and likes the craft of arranging information. She also likes getting a laugh. When the room responds to a polished version of an anecdote, she is tempted to keep telling that version even after the speaker has corrected one detail.
+She is good at noticing what somebody hopes will be asked. She sometimes asks it because the answer will be useful, then finds herself moved by an answer she had expected to polish. At other times she is simply bored. She does not owe every subject an intimate interest, but she has a habit of promising to hear more later when a polite goodbye would have been fairer.
 
-She grew up near relatives who argued cheerfully about the best route to an ordinary destination. Most disputes were resolved by trying one route and complaining together when it was slower. She learned that disagreement need not end companionship, and that presenting a decision as obvious can conceal how much it depends on preference.
+Her closest friendship began with somebody who disliked her immediately. They were assigned to the same project and argued over whether the finished piece was any good. The friendship lasted because this person continued to have opinions after the project ended. They now exchange books, sometimes with rude notes on scraps of paper inside. Yuzuki likes the notes more than several of the books.
 
-Her closest friend repairs old bicycles for pleasure and sends long voice messages about finding the right part for a particular wheel. Yuzuki likes hearing the friend pleased with a result, though she struggles to recognise which part has changed between two photographs. She once praised the new saddle when the repair was to the hub, and her friend still teases her about it. They have travelled together successfully, despite wanting different things from the afternoon. Yuzuki often writes the postcard; her friend chooses where they sit to write it.
+She has dated readily and usually ended things before sharing a home was discussed. She likes the beginning of being known. The less flattering habits that become visible later make her want to introduce herself to somebody new. One former partner is now a friend and will leave a gathering while Yuzuki is still trying to tell the best version of what happened. She resents this and knows they are often right to catch the earlier train.
 
-She has had a few enjoyable dates and currently likes being single. She would consider a relationship with someone who enjoys her company after the anecdote runs out, but that is an ordinary preference, not a wound or promised route.
+She enjoys amateur theatre, sour sweets and buying a striking coat she can wear with the same ordinary clothes underneath. She has excellent recall for someone's voice and terrible recall for where she has put a ticket. She makes entertaining company on a bad journey and can make a perfectly good journey tiring by needing it to become a story.
 
-## What this gives play
+## The part she accepted
 
-She can help someone explain a useful idea and can over-polish the explanation until its owner feels absent. She is confident asking strangers a question and less confident showing a draft before she knows which part works. Her independent aim is a small staff piece that people keep because it is useful, alongside a holiday with enough unscheduled time to get bored once.
+A mainland amateur group needs someone for a small role. Yuzuki accepts while imagining the final performance. Rehearsals expose that she reads ahead for her own cue, comes in early and talks over somebody else's line. The group likes her but needs her to do the boring work. She is tempted to invent a professional conflict and withdraw.
 
-Incidental tells include repeating someone's name to check its reading, crossing out the clever headline she likes because it describes the wrong thing, and stopping at a confectioner's jars of sour plum sweets when she is supposed to be choosing lunch. She likes the ones sharp enough to make the first taste uncomfortable and keeps offering them to people who have already declined.
+She can stay and perform an unremarkable part properly, or leave honestly and help them find a replacement. The cast still has a show. The player can attend only if that event is later staged, and can hear how it went without attending. Her personal outcome is whether the people involved would choose to work with her again, not a prize for being secretly talented.
 
-## Discoveries across play
+## Getting to know her
 
-1. On an introduced PR assignment, she asks whether the player wants to see a draft. Known `mitai` can make the answer personal; a plain choice also works.
-2. If the player remembers an earlier detail differently, a follow-up lets her compare the versions. The payoff is a corrected piece and a different greeting next time, not uncovering a lie.
-3. After the player has heard about the bicycle photographs, `isshoni` can support asking about a trip with that friend. She can admit she is hoping to spend less of this visit outside a parts shop. Later she may offer the player one of the sour sweets she bought while waiting; declining leaves the conversation open.
-4. When familiar, she admits which unfinished draft she keeps postponing. Kanae may offer a relevant image only after Yuzuki asks; the player does not become an intermediary for confidential work.
+Her first account of the role is amusing and incomplete. A later shared `mouichido` connection can open why she has been repeating one short scene. The player hears a different account when rehearsal is difficult, and can revisit the topic after the performance date has passed. Missing an evening never removes the thread.
 
-She can share how she works without repeating an interview subject's private account. Her confident public manner is a part of her that she enjoys.
+Her proposed speech often starts with the funniest available detail, then returns to correct the chronology. She asks sharp questions and is less fluent when somebody asks the same kind back. Leave room for ordinary silence with her old friend; she does not have to entertain everyone in every scene. Work stories continue to protect their subjects' confidential details.

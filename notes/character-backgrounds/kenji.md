@@ -1,32 +1,33 @@
 # Kenji
 
-Proposed in play: Kenji knows how to get equipment and people ready for an event. He overestimates how much an enthusiastic offer counts until he has finished the dull last part of the job.
+Proposed in play: Kenji took the job that came with somewhere to live, then told everyone it was the plan. He wants to stay close to friends whose lives are beginning to go in different directions, and keeps arranging evenings they cannot all afford.
 
 ## Established
 
-[Cast](../../docs/game/cast.md#kenji-kenji): 21, two months on B2 before the player's arrival, eager and distractible, casual Japanese and limited school English. He likes Mori, owes Mio, borrowed the player's chair and is barred from the machine room. [Current karaoke route](../../docs/game/cast.md#kenji-finishing-the-part-he-promised) keeps the chair a specific debt rather than a permanent rescue routine.
+[Cast](../../docs/game/cast.md#kenji-kenji): 21, two months on B2 before the player's arrival, eager and distractible, casual Japanese and limited school English. He likes Mori, owes Mio, borrowed the player's chair and is barred from the machine room. His [karaoke route](../../docs/game/cast.md#kenji-finishing-the-part-he-promised) keeps that chair a specific debt.
 
 ## Proposed history
 
-Kenji's technical training was practical and fairly recent. He was useful in paired exercises because he would try a thing while his partner was still worrying about getting it wrong. The partner was useful because she checked which task they had actually been assigned. He remembers them as a very efficient team; she remembers having to remove three unnecessary features from their final project. They are still friends and each version is partly right.
+Kenji wanted to leave home before he had much idea what he would do elsewhere. He enjoyed the practical part of a technical course, applied for jobs with two classmates and received one offer that included affordable accommodation. The other two stayed on the mainland. He accepted before asking enough questions about B2. At home he described the machinery, the size of the company and the sea. Nobody needed to know that housing had settled the choice.
 
-A part-time job setting up rooms for ordinary events taught him to connect equipment, lift with another person and tell when an audience could not hear the speaker. He liked the few minutes when a room changed from empty to ready. He was less interested in counting the adapters back into the case afterwards. His supervisor did not despise him: she repeatedly trusted him with setup and checked the returns herself. He came away overestimating how much an enthusiastic offer reassures somebody.
+Before Amakawa he worked evenings in a cheap restaurant. He was fast at clearing tables and good at remembering which regular would be offended by being recognised. He quit when the shifts became his entire social life. One former coworker still gives him free extra rice if he visits near closing, then tells him to move because he is standing in the way. He enjoys that welcome more than being treated as the young professional back from his impressive job.
 
-He grew up among relatives who made space for younger cousins at meals and games. He learned to include a hesitant person by giving them something to do. Sometimes that works; sometimes he hands someone a job when they wanted to sit down. His mother still buys the same drink he liked as a teenager when he visits. He protests that he can buy his own, then takes two.
+His closest friend is better at most of the things Kenji considers himself good at. The friend is also perfectly happy at home and has no intention of following him to the island. Kenji finds this harder to understand than an argument would be. He sends pictures of places they could go when the friend visits. The replies are usually about dinner, a game they are playing or something Kenji has left in the old room.
 
-He has been on a few dates, including a short relationship with someone from training. They got along, but she tired of plans changing after he saw something else they could do. They parted without a grand confrontation. He misses a particular shared joke more than the possibility of restarting things. He is not secretly experienced or comically incapable; he is learning the difference between being good company and making a dependable plan.
+He had a girlfriend during the course. They spent hours on buses going to inexpensive places because neither could drive. She was more decisive than he was about what she wanted next. They broke up before his move, and he has sometimes retold the timing as though the move caused it. He knows the difference. He still takes the long route to a particular shop because they found it together and he likes the bread.
 
-## What this gives play
+Kenji enjoys guessing the identity of a song from its first few seconds, terrible amusement-arcade prizes and photographs of himself in places that look more expensive than they were. He will spend too much on a group evening and make up the difference with several cheap dinners. His room is reasonably tidy. The untidy part is the number of plans he has made with money he has not yet been paid.
 
-He can recover a room's mood after a small equipment failure, spot that someone has been left out and make a first attempt less embarrassing. He is unreliable about the boring last tenth of a task, especially when praise arrives early. Mio's specific restrictions remain credible consequences.
+## What happens around him
 
-He wants to host a karaoke evening that his old training friend would enjoy and afford one modest piece of audio equipment from his own pay. He can decide a purchase is too expensive and keep saving. A used price list in his pocket and a neatly wound cable beside an untidy bag make more sense together than a generic messy-boy room.
+He wants to bring his mainland friends to karaoke and show them that the move worked out. The price has risen since he first looked. He initially tries to shorten the evening without admitting why, then has to choose between telling them the real cost and paying the difference without telling them. The player can help compare plans, decline the outing or say it sounds too expensive. Kenji still makes the decision and lives with it.
 
-## Discoveries across play
+He is capable of doing a dull task when it belongs to something he wants. The route's unfinished chair and karaoke setup remain genuine failures; a friend asking him to collect a parcel may find him surprisingly reliable. Praise from Mori matters because Mori asks how the move is going without demanding an impressive answer. Kenji also likes making Mio laugh, especially when she is trying not to.
 
-1. His arcade conversation can mention the training partner while using the existing `ikitai` opportunity. Their history explains why he is confident she will come and why she asks for the actual time.
-2. At karaoke he checks whether the back seat can hear. Asked about it, he demonstrates the old setup job's simple check. This lets him be competent before the route tests his follow-through.
-3. A later visit finds him choosing between a cheaper cable and keeping the savings intact. The player can discuss it without being asked to buy anything. Kenji remembers an opinion they actually gave.
-4. Once he has kept an ordinary plan, he can mention the former relationship briefly. A joke he declines to explain is enough to leave a life beyond the conversation. Do not deliver the ex's grievances through another character.
+The friendship with his old classmate should survive some disappointment. A useful later change is Kenji visiting for an ordinary afternoon without selling the island first. He may stay on B2, leave later or discover an ambition there. None needs deciding in the first week.
 
-Past dates stay his to discuss; his former partner is not a subject for workplace teasing.
+## Getting to know him
+
+He talks readily about what he intends to do, interrupts himself when a better suggestion occurs and uses his small amount of English before he knows how the sentence ends. A personal question can make him unexpectedly brief. Avoid giving every failure a sheepish confession; sometimes he changes the subject and the player notices.
+
+The first talk about karaoke names who he hopes will come. The later price comparison gives familiar `yoyaku` and `ikitai` different uses. Learning the language for cost in a shop can reopen his earlier evasive remark about the booking. That opens an honest conversation, with an inexpensive alternative he can choose himself. A visit to the bakery can bring up the old bus trips much later, once the player already knows he lived elsewhere. His past relationship never becomes the punchline to a B2 joke.

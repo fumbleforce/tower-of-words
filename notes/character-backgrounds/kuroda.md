@@ -1,6 +1,6 @@
 # Mr. Hamada
 
-Proposed in play: Hamada likes finding the small discrepancy that lets two people stop worrying about a number. The apologetic opening that helps at work makes it harder to insist on finishing his own song.
+Proposed in play: Hamada is an apologetic commuter with an inconveniently loud singing voice. His mainland visits have acquired a purpose he enjoys, and he would like to invite somebody from the island without turning it into an apology for the evening.
 
 ## Established
 
@@ -8,27 +8,26 @@ Proposed in play: Hamada likes finding the small discrepancy that lets two peopl
 
 ## Proposed history
 
-Hamada began with routine invoice matching. He was good at finding the small discrepancy that explained why two reasonable people had different totals. Later he became the person colleagues asked to explain an unfamiliar expense form. He likes this work more than his tired appearance suggests. Correcting a mistake while there is still time to fix it gives him satisfaction; accusing somebody of making it does not.
+Hamada followed a friend into Amakawa because the application form was already on the kitchen table. He expected to stay a few years. The friend left; Hamada found that he liked the people in Accounts and was good enough at the work to have a life outside it. He can untangle a disputed total patiently, then become completely indecisive over two kinds of cake.
 
-Early in his career, an experienced coworker would start with an apology for taking someone's time and then ask an incisive question. Hamada adopted the opening and gradually used it everywhere. It helps him make a tense exchange easier, but can also make a simple request sound like a favour nobody should grant. He is capable of being firm on a number; it takes longer for him to insist on his turn with a microphone.
+His marriage ended several years ago. They had married young, remained fond of some of the same routines and stopped wanting the same future. Hamada had a talent for agreeing to a plan while hoping it would disappear. His former spouse became tired of having to be the person who either organised it or cancelled it. They can now share a meal with mutual friends without pretending to be close. Children are not specified by this proposal.
 
-Mainland trips are often visits to his sister and her household. He likes being given a small, specific job there: carrying something upstairs, reading instructions while someone else assembles the item. The train home is one of the few places where nothing needs answering, and he falls asleep. This is a proposed ordinary reason for some trips, not a rule that explains every journey or a diagnosis for his tiredness.
+After the separation he kept visiting his sister on the mainland. She took him to a small amateur singing group because he was staying all evening and she had somewhere to go. He meant to watch once. The group needed a lower voice for a song and he discovered he liked being heard. He has been returning, sometimes staying to eat with people afterwards. The monorail home is warm and he is tired, which accounts for some of the journeys on which he falls asleep. Other trips remain ordinary shopping and family visits.
 
-He married young. For years, a free Sunday meant a mainland outing and buying two different pastries to split on the way home. His spouse liked choosing somewhere they had never been; Hamada liked the familiar ending, comparing the two cakes over tea. Later his spouse wanted longer trips and classes together, while he was increasingly content with a meal and his existing friends. He kept agreeing to outings and leaving the planning to the person who wanted them. They separated several years ago. He still misses having someone who would take the half he liked less, and sometimes buys two pastries before remembering he is shopping for one. He now chooses a destination for his sister's visits instead of asking her to decide everything. Children remain unspecified.
+He has a particular friendship with a woman in the group who sings beautifully and tells dreadful jokes between songs. He laughs before the punchline because he knows how bad it will be. Their attraction is possible, not settled. He has never invited her to Amakawa and suspects he has made the island sound more depressing than it is.
 
-His oldest leisure friendship began because two colleagues liked very long songs everyone else skipped. He still has a handwritten song number from one of their evenings. Keeping the number was easier than keeping the evening in his own schedule.
+His apologetic speech is partly an old habit and partly a means of avoiding the instant in which somebody might say no. He can be stubborn after the apology. A disputed expense does not disappear because the person disputing it is louder, and a song he loves remains good however many people call it too long.
 
-## What this gives play
+## The invitation
 
-He remembers the little practical detail someone was worried about last time and asks whether it worked out. He can enjoy a ridiculous song with complete seriousness. He may insist that everyone is having a good time while his own turn has been given away. That is one habit, not evidence that he secretly hates his entire life.
+The singing group has an informal evening open to friends. Hamada mentions it at island karaoke, then immediately supplies reasons nobody need come. He has already chosen a song. A player who later asks about it finds he has been practising and is annoyed that everyone remembers only the invitation he nearly withdrew.
 
-He wants to sing the full song and arrange another meal with his sister before she has to ask him twice. When buying bread, he compares tomorrow's breakfast with what will survive the bag, then still chooses the fragile pastry occasionally. He folds a receipt at the printed total even when he has written a song number on the back.
+His existing karaoke route gives him a turn he keeps. This later gathering lets him enjoy being one of the people who belongs there already. The player can attend as a guest, ask how it went afterwards or be busy. Hamada performs in every version. His sister may still tell him the song was too long.
 
-## Discoveries across play
+He keeps a spare bag folded inside his work bag because he always buys too much bread before returning. He likes bright fruit sweets, cannot sleep comfortably with a light on and will stop to speak to a malfunctioning vending machine even when he knows it cannot answer.
 
-1. The existing `yoyaku` remark leads to his ordinary karaoke invitation. Let him specify something he wants to sing before anyone asks about loneliness or work.
-2. A later bakery conversation mentions the bag for a mainland visit. A remembered `isshoni` can help the player ask who is going; he can explain the family visit without introducing the whole family.
-3. When he shows the old song number, he can identify the colleague who first sang it with him by role rather than a new named character. A repeat greeting may ask whether they have spoken recently.
-4. When he chooses to discuss his former marriage, the two pastries give him an ordinary way into it. Later he can ask which of two mainland outings the player would enjoy, then say which one he has decided to suggest to his sister. The question recalls a conversation rather than requiring the player to plan his visit.
+## Getting to know him
 
-His former marriage is not an answer earned by sorting his accounts. Preserve his competence, let the apology sometimes be useful and keep the current song milestone's first successful completion intact.
+Talk about the music before asking about the marriage. A known `yoyaku` question can clarify whether the group evening requires a booking; a later `isshoni` question can reopen his first mention of his singing friend. The words clarify a relationship that already exists offscreen. They do not make her the player's next quest objective.
+
+His voice stays polite and apologetic, with sudden precision about a song's beginning. At karaoke he can ask for the track to start again and mean it. His past marriage comes up when a current invitation makes the contrast relevant, without assigning the player the role of therapist or deciding whom Hamada should date.

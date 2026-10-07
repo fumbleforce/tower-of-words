@@ -1,6 +1,6 @@
 # Aoi
 
-Proposed in play: Aoi has practical experience making rooms usable and wants her contribution noticed. She sometimes accepts a visible responsibility before asking the one basic question needed to do it well.
+Proposed in play: Aoi wants a room that looks like the life she expected to have by now. She has already changed direction once, is good at making a day out enjoyable and resents being treated as the junior member of a group even when she joined last.
 
 ## Established
 
@@ -8,27 +8,28 @@ Proposed in play: Aoi has practical experience making rooms usable and wants her
 
 ## Proposed history
 
-Before joining Amakawa, Aoi helped run bookings for a community activity room while studying. The paid work was modest: put the right materials out, tell the next group where to wait and check that a room was actually clear. She liked watching a space turn into something different when people arrived. Her qualification remains unspecified; this is not evidence that she is an engineer or already an experienced facilities manager.
+Aoi began a course she chose partly because a friend was taking it. She liked the friend, the first term and the idea of a creative job. She did not like the actual assignments enough to keep paying for them. After leaving she sold phone accessories in a shopping centre and told relatives she was deciding what to do next. The decision took longer than she had intended.
 
-A successful event once earned the organiser public praise while Aoi was thanked for being cheerful. The organiser later corrected the omission without prompting, and became someone Aoi trusted. She nevertheless began volunteering her name for visible tasks as quickly as possible. That can make her agree before she knows what the job entails. She wants her work to be seen and is not wrong to want that.
+She became good at hearing which part of a purchase somebody was excited about. A customer looking for a case that matched a bag rarely wanted a lecture about the most durable one. She enjoyed helping them choose. She disliked staying late to count stock and being told that her cheerfulness was the valuable part of her work.
 
-Her family treats minor occasions as worth marking: a new job, the first usable batch of something, a room finally painted. She sends photographs when something goes well. On the day she learned her assignment, she wanted a photograph that looked like the beginning of a proper adult life. The basement comment came from that superficial picture, not from a developed contempt for the people there.
+Amakawa offered regular hours and a room. She applied deliberately, worked for the interview and arrived wanting visible evidence that her life had moved forward. The phone remark about avoiding the basement belongs to that wish. Her Facilities assignment is new work to learn; the earlier shop job does not secretly make her an experienced scheduler.
 
-A friend from her earlier course introduced her to casual tennis. Aoi enjoyed the rallies more than the social hierarchy around who got a good partner. That friendship survived a disagreement over a group trip when Aoi agreed to everyone's suggestions and then resented the plan. The friend now asks her to choose one thing first. They can also simply send each other ridiculous shop signs without improving one another.
+Her closest friend has stayed with the original course and sometimes talks as if Aoi merely took a detour. Aoi is proud of the friend's work and has stopped asking to see all of it. They still have excellent afternoons together. Both like looking at flats neither can afford and disagreeing over which tiny balcony would justify the rent. Aoi can read a floor plan with startling concentration, then buy a lamp that will not fit her own shelf.
 
-Her relationship experience includes a brief, pleasant dating period that did not become exclusive. She was disappointed, asked clearly what the other person wanted, and accepted the answer. Neither orientation nor a preferred partner type is fixed by that anecdote.
+An earlier boyfriend was a few years ahead of her in work and liked showing her places she could not have afforded alone. Aoi enjoyed it. She also began letting his opinion settle what she ordered, wore and called a good evening. After ending the relationship, she went back to one of the restaurants by herself and found she did not particularly like the food. The discovery amused her more than it upset her.
 
-## What this gives play
+## What she wants next
 
-Aoi sees who has been waiting, knows that a booking needs cleanup time and remembers which object was promised to whom. She is less comfortable asking a senior person to clarify an apparently obvious term. When she is confident, her questions become satisfyingly exact. She can be proud of a small booking, irritated by an unfair turn and amused by her own first photograph in the same afternoon.
+The course friend has invited Aoi to the final exhibition. Aoi wants to go and has been helping choose what to wear. Then the friend suggests bringing some of Aoi's old work along to show a tutor who remembers her. Aoi had meant to attend an opening, have a drink and be pleased for somebody she likes. She does not want to spend it explaining why she stopped.
 
-She wants to hold a beginner practice that genuinely includes her, and furnish her room with something chosen for pleasure rather than supplied by the company. She wants a small green desk lamp with a tilting shade, so she can read in bed without leaving the ceiling light on. She has measured the shelf and still keeps comparing lamps that will not fit.
+For a few days she looks at the old work anyway and considers whether she could resume the course around her job. The actual assignments still leave her cold. What she envies is the friend's certainty about finishing something. Aoi can ask the friend to leave the old work out of the evening, or take it and discover that she enjoys discussing it without wanting to return. The friend may be relieved to stop treating her departure as unfinished business. They can also have an argument if Aoi insists the request was patronising when it was meant kindly.
 
-## Discoveries across play
+At tennis she wants to play enough to become good, wear something she likes and have people remember her name. The established booking route remains about the beginner time she promised. Her background gives the promise personal weight without making every match an exercise in self-confidence.
 
-1. Her existing `ikitai` conversation opens what she wants to do at tennis. She can mention the friend who introduced her without needing that friend to appear.
-2. A later `yoyaku` question about a booking she actually discussed reveals the community-room job. She shows why cleanup belongs in the time estimate, using a visible current booking.
-3. Once the train-call awkwardness is over, a conversation about first-job photographs lets her admit what she wanted the picture to look like. Do not make her apologise for the basement a second time.
-4. During an ordinary evening after practice, she can talk about the group trip or the short dating experience if relevant. These offer different personal subjects; neither is required to earn her trust milestone.
+She is generous with small celebrations and less generous when somebody else reaches a milestone she wanted first. She may complain about the friend, then defend the same friend when the player agrees too strongly. A full conversation needs both feelings.
 
-She does not disclose another person's message to prove she has been rejected. Her room purchases, friendships and improving tennis continue whether the player chooses romance, friendship or another activity.
+## Getting to know her
+
+An early lamp discussion can be funny and useful without turning into a biography. Later Aoi asks what the player thinks of the outfit she has chosen for the exhibition. Once she has mentioned the invitation, learning `mitai` elsewhere lets the player return to what she wants to see there. She talks readily about her friend's work before explaining why her own has come up. A question after the opening can concern an actual thing she enjoyed, rather than requiring a verdict on leaving the course.
+
+Her earlier course emerges when the player asks why she knows the friend. The relationship story belongs much later, perhaps after discussing a meal she now chooses for herself. Aoi asks concrete questions, changes her mind aloud and becomes more formal when she is embarrassed. She never acquires convenient English, and she does not apologise for the basement every time the player sees her.

@@ -1,6 +1,6 @@
 # Kaori
 
-Proposed in play: Kaori can judge a meal by what regular diners actually eat. Years of service make her decisive in a kitchen and unexpectedly slow to choose what she wants on an evening off.
+Proposed in play: Kaori likes loud company, takes sides quickly and has a much better memory for a slight than for a compliment. She took kitchen work to pay the rent and stayed because she enjoyed being good at it; her favourite day off involves neither cooking nor feeding anyone.
 
 ## Established
 
@@ -8,25 +8,26 @@ The `kaori` entry in [the bible](../../bible/facts.yaml) places her in the cante
 
 ## Proposed history
 
-Kaori learned professional kitchen work by starting with preparation and keeping pace with a larger service. Her first workplace served different numbers every day, and she became good at judging what could wait and what would deteriorate if left another minute. Later she chose staff catering because repeat customers let her see whether a meal had actually worked: what came back untouched, what people took before a late shift and which new dish they asked for again.
+Kaori's first paid kitchen work was washing up while sharing a flat with two friends. One was studying and the other kept changing jobs. Kaori intended to try something else when the rent was less frightening. A cook left, she was taught part of the preparation and she found she liked the pace. Training came through work. She changed kitchens for better pay and eventually chose staff catering because she wanted evenings she could reliably keep.
 
-A senior cook trusted her palate before trusting her estimates. He would accept her adjustment to a sauce and still make her count the portions. Kaori remembers this fondly and uses a similar distinction with people she trains. She can praise a good idea while making its proposer redo the arithmetic. She sometimes forgets that being corrected across a noisy kitchen is not how a new colleague wants to be addressed outside it.
+One of the old flatmates became a successful musician in a modest, working sense: travel, regular bookings and very little glamour. Kaori still goes to hear the band when she can. She is loud in the audience, knows which early song the musician has grown tired of and requests it anyway. Their friendship includes an old argument about rent which neither tells quite honestly.
 
-Her family took turns cooking rather than treating one person as the natural feeder of everyone else. Some meals were excellent and some were late. People sat and talked while waiting, and somebody could dislike dinner without upsetting the whole table. Kaori still enjoys hearing what a diner would have chosen instead.
+A previous partner loved her company at first and later wanted her to be less outspoken around friends. Kaori could be unkind when showing off. She heard every objection as a request to become quieter and refused all of them together. They separated. Some of the criticism was deserved; she will say that readily about an incident from years ago and resist it fiercely about one from last week.
 
-She has a steady partner with a different work pattern. They have learned to leave an honest note about whether they have already eaten, instead of waiting hungrily as a gesture. Their shared pleasure is a late breakfast of thick toast, soft eggs and grilled tomatoes, with marmalade for a second slice. Her partner makes the eggs and Kaori has to stop herself checking the pan. She likes the tomatoes almost burnt at the edges. They disagree about which pans can be left to soak and have stopped treating that disagreement as evidence of anything larger. The partner's name, gender and job remain undecided; the relationship itself is proposed, not a claim about romance availability.
+She is now in a steady relationship with someone who will tell her to stop halfway through a story. They share a liking for live music and compete over who can find the most dreadful roadside souvenir. Her partner's name and gender are open. Their home contains a ceramic fish they both deny choosing. The relationship is affectionate and still has arguments that end with one person going for a walk.
 
-## What this gives play
+Kaori is good with unfamiliar people who are not trying to impress her. She can be dismissive of someone who is, then discover she likes them once they give up. She likes swimming in the sea when it is safe, dislikes crowded organised outings and can spend a whole afternoon watching a band set up because she has a friend to talk to.
 
-Kaori knows how to change a sequence when an ingredient arrives late and how to give a novice one manageable job. She is less good at accepting a helper who wants to watch first. She enjoys an appreciative diner but dislikes being followed with questions during service. Away from the kitchen she can be a slow decision-maker precisely because nothing is burning.
+## A quarrel that belongs to her
 
-She wants regulars to choose her simmered pumpkin instead of leaving it for the last side-dish serving. She likes it less sweet than the current version and has begun adjusting a small batch, though some diners prefer the sweetness she is trying to remove. She also wants to eat a meal somebody else planned. Incidental tells include tasting with attention and then returning to a mundane conversation, reserving an undamaged container for taking breakfast home, and being unexpectedly fussy about a spoon's weight.
+The musician has stopped playing the old song. Kaori treats this as harmless pretension and makes a joke of it in front of the band. The friend is properly angry. Kaori first tells the story to the player in a version where the reaction sounds excessive. On a later visit she can supply the detail she left out: she had already been asked to stop.
 
-## Discoveries across play
+Repairing the friendship involves leaving that song alone, while finding something else to enjoy about the band as it is now. She can still think the new material is worse. A missed invitation or an awkward later reunion gives the disagreement consequences beyond one apology. Her partner need not explain the moral of it to her.
 
-1. Once she is introduced, a quiet meal conversation can use known `oishii` to ask about the pumpkin. She asks whether the player preferred the sweeter version, if they actually tried it, and hears the answer before explaining the change.
-2. On a later return, the player can ask whether the dish sold. Kaori's answer may be that the change failed. A repeat diner has a preference of their own; she can find that annoying and useful.
-3. An off-shift conversation about `yasumi` reveals the late breakfasts and the almost-burnt tomatoes. If Jun is known, she may ask whether the breakfast place he mentioned serves thick toast, giving the player an ordinary food question to take to him.
-4. When she chooses to discuss her earlier training, she can recall being praised and made to count again. A later service shows her doing the same with an adult colleague who has an opinion about it.
+The current kitchen can show her expertise without becoming the source of every personality trait. She takes pleasure in a well-received meal, is impatient when someone blocks the counter, and would happily let another cook plan her own supper.
 
-She shares household anecdotes readily once acquainted; her partner's private life stays theirs. The player can become a friend without displacing that relationship. Any wider romance design needs a separate decision rather than an assumed exception.
+## Getting to know her
+
+An introduction at work stays brief. Off shift, the music gives her a topic she will continue after the player expected to leave. Hearing `mouichido` in a rehearsal or club context can later clarify her first remark about wanting the old song again. The player may agree that the song is better and still object to her joke. Kaori remembers which opinion they gave.
+
+Her proposed voice has full, direct sentences and little need to soften an opinion once she knows someone. She occasionally tells a story louder than the setting requires. A later apology uses an actual detail rather than a declaration that she has learned to listen. Kaori remains distinct from the currently unnamed canteen worker until her own introduction and place are built.
