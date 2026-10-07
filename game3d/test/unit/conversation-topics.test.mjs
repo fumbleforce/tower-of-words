@@ -49,3 +49,32 @@ test('Hamada retains ordinary conversation after a remembered booking becomes un
   assert.ok(options.some(option => option.go === 'conversation_hamada_leave'));
   assert.equal(options.find(option => option.go === 'conversation_hamada_number').if, 'ms2_kuroda || karaoke_receipt_seen');
 });
+
+const everyday = [
+  ['mio','mio_mother_weekends','yasumi','ask:mio-break'],
+  ['guard','guard_short_rest','yasumi','ask:guard-break'],
+  ['kuro','kuro_swimming_pace','oyogu','ask:kuro-swimming','d3_kuro_intro'],
+  ['aoi','aoi_wants_tennis','ikitai','ask:aoi-tennis','d3_aoi_intro'],
+  ['rei','rei_another_game','mouichido','ask:rei-again','d4_rei_intro'],
+];
+for (const [who,id,word,trigger,intro] of everyday) for (const wordFirst of [false,true]) {
+  test(`${who} shared Chat survives either learning order without replacing ordinary Talk (${wordFirst})`,()=>{
+    const memory=createConversationMemory(REMARKS),words=new Set(wordFirst?[word]:[]), introductions=intro?{[intro]:true}:{};
+    assert.equal(topicFor(who,memory,words,false,introductions),null);
+    if(intro)assert.equal(topicFor(who,memory,words,true,{}),null,'eager met flag cannot introduce a name');
+    assert.equal(topicFor(who,memory,words,true,introductions).trigger,`ask:${who}`);
+    const remark=REMARKS.find(r=>r.id===id);
+    memory.hear({who,text:remark.lines[0],source:{day:6,place:'plaza'},known:words});
+    const restored=createConversationMemory(REMARKS);restored.load(JSON.parse(JSON.stringify(memory.toJSON())));
+    words.add(word);
+    assert.equal(topicFor(who,restored,words,true,introductions).trigger,trigger);
+    assert.equal(restored.entries()[0].understoodAtTime,wordFirst);
+    const story=withConversations({on:{[`talk:${who}`]:'urgent_job'},nodes:{urgent_job:[]}});
+    assert.equal(story.on[`talk:${who}`],'urgent_job');
+    const choices=story.nodes[story.on[trigger]].find(s=>s.choice).choice;
+    assert.ok(choices.length>=3,'newly understood question coexists with ordinary topics and leaving');
+  });
+}
+test('Emi has ordinary Chat without a word prerequisite',()=>{
+  assert.equal(topicFor('emi',createConversationMemory(REMARKS),new Set(),true).trigger,'ask:emi');
+});

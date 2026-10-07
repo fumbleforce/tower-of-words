@@ -6,11 +6,13 @@
 import { flags } from '../narrative/state.js';
 import { sit, armsLap } from '../cast.js';
 import { K, EMI } from '../scenes/office.js';
+import { officeChatCamera } from './office-chat-camera.js';
 import { deskActivity } from './office-desk-activity.js';
 
 export function officeDay2(game, { people, blobs }) {
   let P = null;
   const work = deskActivity(game);
+  const listen = deskActivity(game, 'emi');
   const show = (id, on) => {
     const r = id === 'mio' ? game.mioNpc : people[id];
     if (!r?.root) return;
@@ -47,10 +49,12 @@ export function officeDay2(game, { people, blobs }) {
     hook: ({ state = 'arrive' } = {}) => apply(state),
     install(place) {
       P = place;
+      officeChatCamera(game, P);
       const update = P.update;
       P.update = (dt, t) => {
         work(game.mioNpc, dt, t, flags.day === 2 && !flags.d2_shift_done);
         update(dt, t);
+        listen(people.emi, dt, t, false);
       };
       const day = P.onDay;
       P.onDay = (d) => {

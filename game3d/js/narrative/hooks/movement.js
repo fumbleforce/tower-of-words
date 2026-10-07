@@ -142,11 +142,11 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
     }
     await game.place.standPerson?.(who);
   };
-  H.cam = ({ on, zoom = 1.8, back }) => {
+  H.cam = ({ on, zoom = 1.8, back, conversation = false }) => {
     if (back) game.place.cam.release?.();
     else {
       const p = posOf(on);
-      if (p) game.place.cam.closeOn?.(p, zoom);
+      if (p) game.place.cam.closeOn?.(p, zoom, 0.5, { conversation });
     }
   };
   H.show = ({ id }) => {

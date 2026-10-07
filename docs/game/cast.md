@@ -398,3 +398,7 @@ People the engine defines that no storyline uses.
 1. Nobody says the guard's or Mr. Hamada's name out loud. The game calls them "Guard" and "Man from the train" on screen, and "The guard" and "Mr. Hamada" in the People panel (Hamada's name is only on the crackers card and in Mori's 浜田さん). Should the player learn their names, and when?
 2. The cat is labelled "Tama" at the gate and "Cat" on the train and in the office. Nobody tells Eric her name, though her name is the first in the visitor book.
 3. In the office, Mio's afternoon spot is `emi_seat` and the game's `mio_seat` is the same chair: Mio and Emi share one desk. Is that meant?
+
+## Everyday conversations
+
+Shared Chat is available alongside the place’s story Talk for the nine named cast entries in `game3d/story/conversations/`. Ordinary subjects, optional known-word replies and repeat responses survive later weeks. Kuro, Aoi and Rei keep their canonical introduction boundaries; their names are not revealed by the engine’s earlier meeting flag. Working mornings can defer a chat without discarding it. These conversations record personal knowledge and preferences, but do not award unplayed activities or relationship milestones. The cross-character word connections and catch-up lessons are documented in [language progression](language-progression.md).

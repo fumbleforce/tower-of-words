@@ -3,7 +3,8 @@ Japanese lines: passes on kana CER or on the written text compared character by 
 English lines (Mio's and a few others): Whisper in English; both sides turned into plain letters (Japanese words to romaji,
 digits to words) and compared by character error rate.
 Japanese words said on their own (word-*, eric-*, carina-*) and the Japanese parts of English lines (cfg.units) must also sound
-Japanese: Whisper's language guess on the take, P(ja) >= 0.5 (native.py); word clips also get a rough pitch-accent check.
+Japanese: Whisper's language guess on the take, P(ja) >= 0.5 (native.py); exact name readings require it too.
+Word clips also get a rough pitch-accent check.
 Results go to <work>/metrics.json; takes measured before (same file time, same text) are skipped.
 Prints PASS or FAIL with every take's transcript for the lines that still need a clip.
 Usage: DEV=cuda ~/ai/tts-bench/.venv/bin/python tools/voice/check_takes.py takes | reftext
@@ -15,6 +16,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from cfg import RAW, METRICS, VR, units, missing, speakers, FEMALE, MALE  # puts tools/island_audio on the path
 import check as C
 import jiwer, librosa
+from readings import reading_target, strict_reading
 import native as N
 from transformers import WhisperProcessor
 N.use(C.asr.model, WhisperProcessor(feature_extractor=C.asr.feature_extractor, tokenizer=C.asr.tokenizer))
@@ -132,9 +134,14 @@ for e in M:
     for p in sorted(glob.glob(f'{RAW}/{e["key"]}/*.wav')):
         tk = os.path.basename(p)[:-4]
         prev = old.get(e['key'], {}).get(tk)
-        if prev and prev.get('mtime') == int(os.path.getmtime(p)) and prev.get('text') == e['said'] and (e['lang'] == 'en' or not word(e['key']) or 'p_ja' in prev):
+        target = reading_target(e['said']) if e['lang'] == 'ja' else e['said']
+        needs_native = e['lang'] == 'ja' and (word(e['key']) or target != e['said'])
+        if (prev and prev.get('mtime') == int(os.path.getmtime(p))
+                and prev.get('text') == e['said']
+                and prev.get('reading', prev.get('text')) == target
+                and (not needs_native or prev.get('p_ja') is not None)):
             continue
-        items[e['lang']].append(((e['key'], tk), p, e['speaker'], e['said']))
+        items[e['lang']].append(((e['key'], tk), p, e['speaker'], target))
 print('to check', len(items['ja']), 'ja', len(items['en']), 'en', flush=True)
 said = {e['key']: e['said'] for e in M}
 for lang, its in items.items():
@@ -150,18 +157,22 @@ for lang, its in items.items():
                 nw = max(1, len(norm(said[key])))
                 ok_w = m['cer_written'] <= 0.2 or (nw <= 6 and round(m['cer_written'] * nw) <= 1)
                 m['read_ok'] = bool(m['cer'] <= 0.2 or (not m['short'] and max(1, len(C.kana(said[key]))) <= 6 and m['edits'] <= 1) or ok_w)
-                if word(key):
+                exact = strict_reading(said[key], m['asr'], C.kana)
+                if exact is not None:
+                    m['read_ok'] = exact
+                if word(key) or exact is not None:
                     y = C.trimmed(librosa.load(f'{RAW}/{key}/{tk}.wav', sr=16000)[0])
                     m['p_ja'], m['p_en'] = N.lang(y)
                     m['native_ok'] = m['p_ja'] >= P_JA
                     m['read_ok'] = bool(m['read_ok'] and m['native_ok'])
-                    if '~' not in key:
+                    if word(key) and '~' not in key:
                         a = N.accent(y, key.split('-', 1)[1], male=key.startswith('eric-'))
                         m['accent'] = list(a) if a else None
                 m['ok'] = bool(m['pitch_ok'] and m['dur_ok'] and m['read_ok'])
         for (key, tk), m in res.items():
             m['mtime'] = int(os.path.getmtime(f'{RAW}/{key}/{tk}.wav'))
             m['text'] = said[key]
+            m['reading'] = reading_target(said[key]) if lang == 'ja' else said[key]
             old.setdefault(key, {})[tk] = m
         os.makedirs(os.path.dirname(OUT), exist_ok=True)
         json.dump(old, open(OUT, 'w'), ensure_ascii=False, indent=1)

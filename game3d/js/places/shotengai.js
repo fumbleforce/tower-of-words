@@ -1,3 +1,4 @@
+import { conversationCamera } from './conversation-camera.js';
 import * as THREE from 'three';
 import { local as shopLocal } from '../scenes/shotengai/plan.js';
 import { southLinkFrame } from '../scenes/forecourt/south-link.js';
@@ -228,6 +229,11 @@ export async function shotengaiPlace(game) {
     },
   };
   party.install(P);
+  conversationCamera(game, P, {
+    aoi: { yaw: -0.85, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.0, height: 0.4 },
+    rei: { yaw: -2.15, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.0, height: 0.4 },
+    kuro: { yaw: -1.5, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.0, height: 0.4 },
+  });
   // the arcade's glass roof fades while he is under it
   addOccluder(P, w.arcadeRoof, footprint(w.arcade[0] - 0.2, w.arcade[1] + 0.2, az0 - 0.5, az1 + 0.5), {
     name: 'arcade',

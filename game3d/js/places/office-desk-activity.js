@@ -2,7 +2,7 @@
 // Upper-body offsets follow the mixer; its next update restores the clip pose.
 import * as THREE from 'three';
 
-export function deskActivity(game) {
+export function deskActivity(game, id = 'mio') {
   let rig = null,
     bones = {},
     weight = 0,
@@ -30,22 +30,25 @@ export function deskActivity(game) {
         if (bone.isBone) bones[bone.name.replace(/^mixamorig/, '')] = bone;
       });
     }
+    person?.stepNow?.(); // Staff Meshy rigs otherwise step at render time, after the overlay.
     if (!rig?.root.visible || !rig.seated || rig._walk || rig.state !== 'sit') {
       weight = gaze = 0;
       return;
     }
+    const listening = game.busy && game.place.cam.close?.conversationShot?.who === id;
     const working = active && !game.busy;
-    weight += ((working ? 1 : 0) - weight) * Math.min(1, dt * 6);
+    weight += ((working || listening ? 1 : 0) - weight) * Math.min(1, dt * 6);
     if (weight < 0.001) return;
     const p = game.player.root.position,
       here = rig.root.position;
     const near = Math.hypot(p.x - here.x, p.z - here.z) < 2.2;
     const delta = Math.atan2(p.x - here.x, p.z - here.z) - rig.root.rotation.y;
     const yaw = Math.atan2(Math.sin(delta), Math.cos(delta));
-    gaze += ((working && near ? Math.max(-0.7, Math.min(0.7, yaw)) : 0) - gaze) * Math.min(1, dt * 4);
+    gaze += (((working || listening) && near ? Math.max(-0.7, Math.min(0.7, yaw)) : 0) - gaze) * Math.min(1, dt * 4);
     rig.root.getWorldQuaternion(body);
     rotate(bones.Head, 'y', gaze * weight);
-    rotate(bones.Head, 'x', (-0.06 + Math.sin(t * 0.7) * 0.015) * weight);
+    rotate(bones.Head, 'x', (listening ? (id === 'mio' ? -0.65 : -0.1) : -0.06 + Math.sin(t * 0.7) * 0.015) * weight);
+    if (listening) return;
     // Three seconds of small alternating keystrokes, then a pause to read.
     const typing = !near && t % 5 < 3 ? 1 : 0;
     for (const [side, phase] of [

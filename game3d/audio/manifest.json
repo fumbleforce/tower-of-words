@@ -10715,7 +10715,7 @@
    ]
   ],
   "clear": [],
-  "emo": "warm"
+  "emo": "hesitant"
  },
  {
   "key": "oh-14klkit",
@@ -11293,6 +11293,1153 @@
    "レシート"
   ],
   "emo": "warm"
+ },
+ {
+  "key": "ln-19vo93t",
+  "speaker": "mio",
+  "text": "Give me until lunch? I’m trying to finish this before somebody adds another request.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1kvk39p",
+  "speaker": "eric",
+  "text": "Do you go back to the mainland much?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-ak7gv8",
+  "speaker": "mio",
+  "text": "Sometimes I stay with my mother. Then she sends me back with enough food for everybody.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-qlyv61",
+  "speaker": "mio",
+  "text": "It is. I still have to carry it all on the train, though.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-plytaq",
+  "speaker": "mio",
+  "text": "I told her there are shops here. She asked what I actually buy.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-rat4g5",
+  "speaker": "mio",
+  "text": "Then, when I leave, I get the same thing every time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-opri71",
+  "speaker": "mio",
+  "text": "休みの日ぐらい、仕事を忘れなさい。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "fond"
+ },
+ {
+  "key": "ln-19s7mn",
+  "speaker": "mio",
+  "text": "She has opinions about my weekends, also.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-sf8jno",
+  "speaker": "eric",
+  "text": "Does your mother still send food back with you?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-rx35ce",
+  "speaker": "mio",
+  "text": "Yes. I have to take the empty containers back before she runs out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-sd87g0",
+  "speaker": "eric",
+  "text": "Do you ever eat away from the servers?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-6h6z5r",
+  "speaker": "mio",
+  "text": "More than I used to. The bench by the water is quite good, when it’s not windy.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-xmo1l0",
+  "speaker": "mio",
+  "text": "I mean to. Then I come down to check one thing, and I’ve brought my lunch with me anyway.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-10hnknd",
+  "speaker": "eric",
+  "text": "飲みたい. I was going to get a drink.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "nomitai",
+    "飲みたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-xobbcv",
+  "speaker": "mio",
+  "text": "Go while you’ve got time. I start making tea here and find something else to do before I drink it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-cioyza",
+  "speaker": "mio",
+  "text": "Mm. You can hear the trains from there, but you don’t have to be on one.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1giemt2",
+  "speaker": "eric",
+  "text": "休み… Was she telling you to take a break?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-nb7uk0",
+  "speaker": "mio",
+  "text": "Yes. Or at least forget about work on my days off. You got that part?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-19prgqi",
+  "speaker": "mio",
+  "text": "I did tell her I’d been out. Then she wanted to know who with.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1ksply9",
+  "speaker": "mio",
+  "text": "She asks why I come back to B2 when I’m not even supposed to be working.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-13dogd",
+  "speaker": "mio",
+  "text": "That was a good guess. Just ask if you’re not sure, okay?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1xkqpst",
+  "speaker": "mio",
+  "text": "I know. She can tell when I’m checking something while we talk.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-jynzp",
+  "speaker": "mio",
+  "text": "Yes. It’s usually the first thing she asks when I call.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-13thoeb",
+  "speaker": "emi",
+  "text": "Can we catch up later? I need to get these requests upstairs before the meeting starts.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "apologetic"
+ },
+ {
+  "key": "ln-14in68h",
+  "speaker": "eric",
+  "text": "What made you join the swimming club?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-8jd46d",
+  "speaker": "emi",
+  "text": "I wanted an evening where I wasn’t somebody’s team lead. Kuro said I could just come along.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-12552q0",
+  "speaker": "emi",
+  "text": "Then someone asked about the booking and I knew who to call.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-1tozhxb",
+  "speaker": "emi",
+  "text": "I know. I hear a question and I’ve answered it before I remember I could have kept quiet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-urxea3",
+  "speaker": "emi",
+  "text": "Yes, I do. Once we actually start, I’m glad I came.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-y76mb8",
+  "speaker": "eric",
+  "text": "Are you getting much time to join in?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-q0pl2x",
+  "speaker": "emi",
+  "text": "Yes. I got a turn this time. Someone else kept the booking sheet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1jg1n49",
+  "speaker": "eric",
+  "text": "Good. I thought you wanted that turn.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1gjnebk",
+  "speaker": "emi",
+  "text": "Some. Next time, if I start collecting everybody’s names, remind me I came to do something else.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1mktxzh",
+  "speaker": "eric",
+  "text": "I can do that.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1yhltnu",
+  "speaker": "eric",
+  "text": "What makes things easier for you at work?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1f0kzzy",
+  "speaker": "emi",
+  "text": "Tell me what you’ve actually checked. If something still fails, I’d rather hear that than promise upstairs that it’s fixed.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1jryp4c",
+  "speaker": "emi",
+  "text": "I’m trying to stop making the promise first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-1tcezib",
+  "speaker": "eric",
+  "text": "大丈夫. I’ll tell you if I’m stuck.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1dp9vte",
+  "speaker": "eric",
+  "text": "I’ll bring you the result, even if it’s bad.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-if476k",
+  "speaker": "emi",
+  "text": "Good. It gives me something I can explain, at least.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-ho9reh",
+  "speaker": "emi",
+  "text": "Ask them to show you. And you can ask again. You’re allowed to take a moment.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1pocn7f",
+  "speaker": "emi",
+  "text": "もう一度. Once more.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-1fvs1hj",
+  "speaker": "emi",
+  "text": "もう一度.",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-z01ofb",
+  "speaker": "emi",
+  "text": "There. You can use that when you need another look at something, too.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1vvgygz",
+  "speaker": "guard",
+  "text": "少し、お休みになりますか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-114mron",
+  "speaker": "eric",
+  "text": "休み？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-3nmgs3",
+  "speaker": "guard",
+  "text": "はい。少し、休んでいってください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-114n262",
+  "speaker": "eric",
+  "text": "休み。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1bwzlzu",
+  "speaker": "guard",
+  "text": "そうですか。ゆっくりどうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-9j4sk4",
+  "speaker": "guard",
+  "text": "お仕事でしたか。お疲れさまです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "otsukare",
+    "お疲れさまです"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1uufk6j",
+  "speaker": "eric",
+  "text": "I won’t keep you. I was just passing.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-qbxfoa",
+  "speaker": "eric",
+  "text": "タマ？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1qcxm1g",
+  "speaker": "guard",
+  "text": "ここには、猫はいません。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-snm67f",
+  "speaker": "eric",
+  "text": "All right. I’ll leave you to it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "quiet"
+ },
+ {
+  "key": "oh-17it6ka",
+  "speaker": "kuro",
+  "text": "すみません。お話は、あとでもいいですか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "apologetic"
+ },
+ {
+  "key": "ln-1yzrs49",
+  "speaker": "eric",
+  "text": "玖路さん。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-od733g",
+  "speaker": "kuro",
+  "text": "こんにちは。仕事の外で会うと、ちょっと変な感じがしますね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-hlao41",
+  "speaker": "kuro",
+  "text": "こんにちは。いまは、ゆっくり話せますよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-por8tg",
+  "speaker": "kuro",
+  "text": "はい。ここでは、私も休んでますから。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1ibhus8",
+  "speaker": "kuro",
+  "text": "泳ぐのは好きなんです。速い人には、先に行ってもらいます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-i4t6m1",
+  "speaker": "kuro",
+  "text": "泳いだあとは、よく眠れるんです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-16gl7h2",
+  "speaker": "eric",
+  "text": "泳ぐ？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-igqspr",
+  "speaker": "kuro",
+  "text": "はい。ゆっくり泳ぐほうが好きですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-vd6x1v",
+  "speaker": "kuro",
+  "text": "いっしょに。クラブで会ったら、声をかけてください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-10btppt",
+  "speaker": "eric",
+  "text": "How do I say “a day off”?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-33dkzw",
+  "speaker": "kuro",
+  "text": "はい。休みです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1b85gcl",
+  "speaker": "eric",
+  "text": "How are you finding the job?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1vh5378",
+  "speaker": "aoi",
+  "text": "同じことを二回聞いちゃいました。さっき聞いたのに、分からなくなって。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-1bkxbti",
+  "speaker": "eric",
+  "text": "大丈夫？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-ir9p1j",
+  "speaker": "aoi",
+  "text": "大丈夫でした。すぐに教えてくれました。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1mwdht",
+  "speaker": "aoi",
+  "text": "今度は、分からなくなったところだけ聞いてみます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-y7k113",
+  "speaker": "eric",
+  "text": "What about tennis?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-rdkpbc",
+  "speaker": "aoi",
+  "text": "またテニスに行きたいです。今度は、もう少し長く打ちたくて。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [
+   "テニス"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-r34vsy",
+  "speaker": "aoi",
+  "text": "テニス、私も行きたいです。今度は、私も打ってみたくて。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [
+   "テニス"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1i0z7xm",
+  "speaker": "eric",
+  "text": "行きたい？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-talbdi",
+  "speaker": "aoi",
+  "text": "はい。自分で打つと、全然違うんですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-2okykx",
+  "speaker": "aoi",
+  "text": "はい。見てると、簡単そうなんですけどね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1pr5ls2",
+  "speaker": "aoi",
+  "text": "クラブで会ったら、いっしょにやりませんか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1ffs2e9",
+  "speaker": "aoi",
+  "text": "いっしょに。クラブで会ったら、声かけてください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-tl5zfv",
+  "speaker": "eric",
+  "text": "Do you always want another game?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1iuylhb",
+  "speaker": "rei",
+  "text": "負けると、もう一度って頼んじゃうんです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
+  ],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-1q4lx6b",
+  "speaker": "eric",
+  "text": "What does that request mean?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1qv4u2m",
+  "speaker": "rei",
+  "text": "Once more. I mean another game.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "rei-chat-repeat-slow",
+  "speaker": "rei",
+  "text": "もう一度。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-1mguo20",
+  "speaker": "eric",
+  "text": "もう一度… You ask for another game?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-aia71n",
+  "speaker": "rei",
+  "text": "Yes. I’ve lost the second game too. Then I go home.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-15uxm9z",
+  "speaker": "eric",
+  "text": "I’d ask again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-srv481",
+  "speaker": "rei",
+  "text": "You might have to find somebody else. I do have to go home eventually.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-y9jlb8",
+  "speaker": "eric",
+  "text": "One game is enough.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-17bfbmg",
+  "speaker": "rei",
+  "text": "All right. I’ll remember that.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-6gd4ve",
+  "speaker": "rei",
+  "text": "You said one game was enough. Has that changed?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1nin3sh",
+  "speaker": "rei",
+  "text": "You said you’d ask for another game. Still feel that way?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-1cwne0u",
+  "speaker": "rei",
+  "text": "Would you ask for another game, or stop there?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-d0hx4b",
+  "speaker": "eric",
+  "text": "Do your customers ever let you go home?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-36lrjb",
+  "speaker": "rei",
+  "text": "Sometimes a customer calls just as I’m leaving. If I answer, I miss my train.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1087w3z",
+  "speaker": "eric",
+  "text": "Do you answer?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1dbkv7y",
+  "speaker": "rei",
+  "text": "Usually. Some of them only call when something has actually gone wrong.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1um5lik",
+  "speaker": "eric",
+  "text": "I’d let it ring.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1l2clb2",
+  "speaker": "rei",
+  "text": "I’ve tried that. Then I spend the train ride wondering what happened.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-1w30t02",
+  "speaker": "rei",
+  "text": "I try to call them before I leave now. It doesn’t always work.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-1lvkziu",
@@ -15279,7 +16426,7 @@
    ]
   ],
   "clear": [],
-  "emo": "warm"
+  "emo": "hesitant"
  },
  {
   "key": "ln-1c9yqoz-carina",
@@ -15455,6 +16602,371 @@
   "words": [],
   "clear": [],
   "emo": "curious"
+ },
+ {
+  "key": "ln-1kvk39p-carina",
+  "speaker": "carina",
+  "text": "Do you go back to the mainland much?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-sf8jno-carina",
+  "speaker": "carina",
+  "text": "Does your mother still send food back with you?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-sd87g0-carina",
+  "speaker": "carina",
+  "text": "Do you ever eat away from the servers?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-10hnknd-carina",
+  "speaker": "carina",
+  "text": "飲みたい. I was going to get a drink.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "nomitai",
+    "飲みたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1giemt2-carina",
+  "speaker": "carina",
+  "text": "休み… Was she telling you to take a break?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-14in68h-carina",
+  "speaker": "carina",
+  "text": "What made you join the swimming club?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-y76mb8-carina",
+  "speaker": "carina",
+  "text": "Are you getting much time to join in?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1jg1n49-carina",
+  "speaker": "carina",
+  "text": "Good. I thought you wanted that turn.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1mktxzh-carina",
+  "speaker": "carina",
+  "text": "I can do that.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1yhltnu-carina",
+  "speaker": "carina",
+  "text": "What makes things easier for you at work?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1tcezib-carina",
+  "speaker": "carina",
+  "text": "大丈夫. I’ll tell you if I’m stuck.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1dp9vte-carina",
+  "speaker": "carina",
+  "text": "I’ll bring you the result, even if it’s bad.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-114mron-carina",
+  "speaker": "carina",
+  "text": "休み？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-114n262-carina",
+  "speaker": "carina",
+  "text": "休み。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1uufk6j-carina",
+  "speaker": "carina",
+  "text": "I won’t keep you. I was just passing.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-qbxfoa-carina",
+  "speaker": "carina",
+  "text": "タマ？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-snm67f-carina",
+  "speaker": "carina",
+  "text": "All right. I’ll leave you to it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "quiet"
+ },
+ {
+  "key": "ln-1yzrs49-carina",
+  "speaker": "carina",
+  "text": "玖路さん。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-16gl7h2-carina",
+  "speaker": "carina",
+  "text": "泳ぐ？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "oyogu",
+    "泳ぐ"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-10btppt-carina",
+  "speaker": "carina",
+  "text": "How do I say “a day off”?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1b85gcl-carina",
+  "speaker": "carina",
+  "text": "How are you finding the job?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1bkxbti-carina",
+  "speaker": "carina",
+  "text": "大丈夫？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-y7k113-carina",
+  "speaker": "carina",
+  "text": "What about tennis?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1i0z7xm-carina",
+  "speaker": "carina",
+  "text": "行きたい？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-tl5zfv-carina",
+  "speaker": "carina",
+  "text": "Do you always want another game?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1q4lx6b-carina",
+  "speaker": "carina",
+  "text": "What does that request mean?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1mguo20-carina",
+  "speaker": "carina",
+  "text": "もう一度… You ask for another game?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-15uxm9z-carina",
+  "speaker": "carina",
+  "text": "I’d ask again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-y9jlb8-carina",
+  "speaker": "carina",
+  "text": "One game is enough.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-d0hx4b-carina",
+  "speaker": "carina",
+  "text": "Do your customers ever let you go home?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1087w3z-carina",
+  "speaker": "carina",
+  "text": "Do you answer?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1um5lik-carina",
+  "speaker": "carina",
+  "text": "I’d let it ring.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-1lvkziu-carina",

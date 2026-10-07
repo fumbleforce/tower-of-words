@@ -26,7 +26,7 @@ try {
           if (!sessionStorage.getItem('continue-test-seeded')) {
             localStorage.setItem('amakawa-day1-save', JSON.stringify(data));
             localStorage.setItem('amakawa-slot-1', JSON.stringify({ data, place: data.place, period: data.period, at: 1 }));
-            localStorage.setItem('amakawa-settings', JSON.stringify({ textSpeed: 'instant', voiceOn: false, reduceMotion: true }));
+            localStorage.setItem('amakawa-settings', JSON.stringify({ v: 2, privateMode: false, textSpeed: 'instant', voiceOn: false, reduceMotion: true }));
             sessionStorage.setItem('continue-test-seeded', '1');
           }
         }, saved);
@@ -49,8 +49,13 @@ try {
         if (mode === 'pause' || mode === 'phone') {
           await page.locator('#pauseBtn').click();
           await page.locator('#pause .load').click();
-          await page.locator('#saves button.slot').filter({ hasText: 'Slot 1' }).click();
-          await page.waitForEvent('domcontentloaded', { timeout: 15000 });
+          await Promise.all([
+            page.waitForEvent('domcontentloaded', { timeout: 15000 }),
+            (async () => {
+              await page.locator('#saves button.slot').filter({ hasText: 'Slot 1' }).click();
+              await page.locator('#ask .yes').click();
+            })(),
+          ]);
           await waitForResume();
         }
         let capturedWorld;
@@ -103,7 +108,16 @@ try {
             trace: g.runner.trace || [], blocked: g.place.nav.rects.map(r => r.tag), continueFlag: sessionStorage.getItem('amakawa-continue') };
         });
         const { world, ...data } = state.data;
-        assert.deepEqual(data, { ...saved, pendingStart: null, runner: { ...saved.runner, execution: null } }, `${place}/${mode}: restored progression changed`);
+        assert.deepEqual(data, {
+          ...saved, pendingStart: null, runner: { ...saved.runner, execution: null },
+          mc: 'eric',
+          cast: { set: 'default', roles: {
+            programmer: 'mio', team_lead: 'emi', section_chief: 'mori', engineer: 'kenji',
+            receptionist: 'kuro', new_hire: 'aoi', sales: 'rei', gate_guard: 'guard',
+          } },
+          visited: { train: ['train'], gate: ['train', 'gate'], office: ['train', 'gate', 'forecourt', 'office'] }[place],
+          log: { v: 2, day: 1, items: [], memories: { v: 1, records: [] } },
+        }, `${place}/${mode}: restored progression or legacy-save migration changed`);
         assert.equal(state.bodyPlace, place);
         assert.equal(state.runnerPlace, true);
         assert.deepEqual(state.trace, [], 'idle Continue must not replay an opening');

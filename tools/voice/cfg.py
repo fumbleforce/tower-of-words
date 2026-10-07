@@ -10,6 +10,7 @@ Where things live:
   tools/voice/edge.json    lines voiced by the edge-tts fallback (GUIDE: edge-tts only as a fallback)
   $GAME3D_VOICE_WORK (default ~/ai/game3d-voice): raw/<key>/<take>.wav takes, metrics.json, report.json, logs. Not in git."""
 import json, os, re, sys
+from readings import reading_target
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, '..', '..'))
@@ -131,7 +132,7 @@ def manifest():
     for e in m:
         e['said'] = e['text']
         e['lang'] = e.get('lang') or 'ja'
-        t = TTS_OVERRIDE.get(e['key'], e['said'])
+        t = TTS_OVERRIDE.get(e['key'], reading_target(e['said']) if e['lang'] == 'ja' else e['said'])
         e['tts'] = tts_text(t) if e['lang'] == 'ja' else spoken(t.strip())
         if e['lang'] == 'en':
             ps = parts(t)
