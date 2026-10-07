@@ -42,7 +42,12 @@
         {
           "id": "room-evening-phone",
           "image": "bible/shots/showcase/north-campus-print-shop/room-evening-phone.png",
-          "caption": "The same room with evening lighting."
+          "caption": "Phone interior in daylight. This earlier capture changed the clock but did not apply the room’s evening lighting."
+        },
+        {
+          "id": "room-night-corrected-phone",
+          "image": "bible/shots/showcase/north-campus-print-shop/room-night-corrected-phone.png",
+          "caption": "Actual evening lighting after the production time-change hook, with the interior lamps lit."
         }
       ]
     },
