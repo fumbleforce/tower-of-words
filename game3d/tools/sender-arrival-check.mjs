@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { openGame } from '../test/support/open-game.mjs';
 import fixture from '../test/fixtures/save-v1.json' with { type: 'json' };
+const base = new URL((process.env.BASE || 'game3d') + '/', `http://127.0.0.1:${process.env.PORT || 8771}/`).href;
 const out=`/tmp/codex-sender-arrival-${process.env.ROUND||'1'}`;
 fs.mkdirSync(out,{recursive:true});
 await withBrowserJob('sender-arrival',async browser=>{
@@ -10,7 +11,7 @@ await withBrowserJob('sender-arrival',async browser=>{
  const saved={...structuredClone(fixture),place:'office',period:'morning'};
  Object.assign(saved.flags,{place:'office',period:'morning',machineOpen:true,chairHome:true,copier_done:true});
  await context.addInitScript(saved=>{if(!globalThis.sessionStorage.getItem('arrival-seed')){globalThis.localStorage.setItem('amakawa-day1-save',JSON.stringify(saved));globalThis.localStorage.setItem('amakawa-settings',JSON.stringify({v:2,privateMode:false,textSpeed:'instant',voiceOn:false}));globalThis.sessionStorage.setItem('arrival-seed','1');}},saved);
- const opened=await openGame({newContext:async()=>context},{mode:'title',url:'http://127.0.0.1:8786/game3d/index.html'}),{page}=opened;
+ const opened=await openGame({newContext:async()=>context},{mode:'title',url:`${base}index.html`}),{page}=opened;
  const resume=async()=>{await page.locator('#title .mcont').click();await page.locator('#saves button.slot').filter({hasText:'Autosave'}).click();await page.waitForFunction(()=>globalThis.__game?.place?.name==='office'&&!globalThis.__game.busy&&!globalThis.__game.player.scripted&&globalThis.__game.saveEnabled);};
  const capture=async label=>{
   await page.waitForTimeout(500);
