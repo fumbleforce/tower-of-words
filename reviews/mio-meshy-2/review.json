@@ -2,7 +2,7 @@
  "title": "Mio: a new 3D model, made the way Kuro, Aoi and Emi were",
  "date": "2026-10-06",
  "by": "Claude (mio-meshy agent)",
- "status": "open",
+ "status": "decided",
  "question": "The sheets marked ChatGPT pictures are pictures; every other sheet is a real rigged model (the live viewer, first link, plays the same files the game would load). Should mio-2 replace Mio's model in the game, and in which colours: as Meshy painted her (mio-2), with the hair and hoodie turned to the portrait's dark green (mio-2-green), or with the other texture pass (mio-2-d1)?",
  "multi": false,
  "media": [
@@ -120,5 +120,11 @@
    "label": "Kuro's round, the method (kuro-meshy-orig-3)",
    "href": "bible/#review/kuro-meshy-orig-3"
   }
- ]
+ ],
+ "decided": [
+  "mio-2"
+ ],
+ "decision": "mio-2 selected on2026-10-06. Install the selected native-texture model after checking sustained animation, seating and prop contacts.",
+ "decided_at": "2026-10-07T14:32:20+0200",
+ "issue": 335
 }
