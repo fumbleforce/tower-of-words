@@ -1,0 +1,372 @@
+{
+  "title": "Stop and turn before entering the lift",
+  "date": "2026-10-08",
+  "by": "codex",
+  "caption": "Both protagonists stop and face the opening before walking into the lift. Earlier rejected attempts remain below. This corrects the lift approach; other movement findings remain open.",
+  "preview": "eric-lift-facing-1-entry-walking",
+  "sections": [
+    {
+      "title": "Original approach — Carina",
+      "caption": "Baseline route rejected: walking continued during the lift wait. These are the retained route captures; the movement report records the timing fault.",
+      "images": [
+        {
+          "id": "carina-lift-ownership-1-failure",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/failure.png",
+          "caption": "Route end from the rejected attempt"
+        },
+        {
+          "id": "carina-lift-ownership-1-leg-0-a",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/leg-0-a.png",
+          "caption": "Movement check: leg-0-a"
+        },
+        {
+          "id": "carina-lift-ownership-1-leg-0-b",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/leg-0-b.png",
+          "caption": "Movement check: leg-0-b"
+        },
+        {
+          "id": "carina-lift-ownership-1-leg-1-a",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/leg-1-a.png",
+          "caption": "Movement check: leg-1-a"
+        },
+        {
+          "id": "carina-lift-ownership-1-leg-1-b",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/leg-1-b.png",
+          "caption": "Movement check: leg-1-b"
+        },
+        {
+          "id": "carina-lift-ownership-1-leg-2-a",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/leg-2-a.png",
+          "caption": "Movement check: leg-2-a"
+        },
+        {
+          "id": "carina-lift-ownership-1-leg-2-b",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/leg-2-b.png",
+          "caption": "Movement check: leg-2-b"
+        },
+        {
+          "id": "carina-lift-ownership-1-leg-3-a",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/leg-3-a.png",
+          "caption": "Movement check: leg-3-a"
+        },
+        {
+          "id": "carina-lift-ownership-1-leg-3-b",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/leg-3-b.png",
+          "caption": "Movement check: leg-3-b"
+        },
+        {
+          "id": "carina-lift-ownership-1-lift-forecourt",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/lift-forecourt.png",
+          "caption": "Back at the lobby"
+        },
+        {
+          "id": "carina-lift-ownership-1-lift-office",
+          "image": "game3d/shots/gait319/carina-lift-ownership-1/lift-office.png",
+          "caption": "Back at B2"
+        }
+      ]
+    },
+    {
+      "title": "First correction — Carina, rejected",
+      "caption": "Stopping the walk was insufficient: the stopping blend and turning entry still failed the movement check.",
+      "images": [
+        {
+          "id": "carina-lift-fixed-1-failure",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/failure.png",
+          "caption": "Route end from the rejected attempt"
+        },
+        {
+          "id": "carina-lift-fixed-1-leg-0-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/leg-0-a.png",
+          "caption": "Movement check: leg-0-a"
+        },
+        {
+          "id": "carina-lift-fixed-1-leg-0-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/leg-0-b.png",
+          "caption": "Movement check: leg-0-b"
+        },
+        {
+          "id": "carina-lift-fixed-1-leg-1-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/leg-1-a.png",
+          "caption": "Movement check: leg-1-a"
+        },
+        {
+          "id": "carina-lift-fixed-1-leg-1-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/leg-1-b.png",
+          "caption": "Movement check: leg-1-b"
+        },
+        {
+          "id": "carina-lift-fixed-1-leg-2-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/leg-2-a.png",
+          "caption": "Movement check: leg-2-a"
+        },
+        {
+          "id": "carina-lift-fixed-1-leg-2-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/leg-2-b.png",
+          "caption": "Movement check: leg-2-b"
+        },
+        {
+          "id": "carina-lift-fixed-1-leg-3-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/leg-3-a.png",
+          "caption": "Movement check: leg-3-a"
+        },
+        {
+          "id": "carina-lift-fixed-1-leg-3-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/leg-3-b.png",
+          "caption": "Movement check: leg-3-b"
+        },
+        {
+          "id": "carina-lift-fixed-1-lift-forecourt",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/lift-forecourt.png",
+          "caption": "Back at the lobby"
+        },
+        {
+          "id": "carina-lift-fixed-1-lift-office",
+          "image": "game3d/shots/gait319/lift-fix-candidate/carina-lift-fixed-1/lift-office.png",
+          "caption": "Back at B2"
+        }
+      ]
+    },
+    {
+      "title": "First correction — Eric, rejected",
+      "caption": "The same incomplete correction also failed for Eric. This attempt is preserved.",
+      "images": [
+        {
+          "id": "eric-lift-fixed-1-failure",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/failure.png",
+          "caption": "Route end from the rejected attempt"
+        },
+        {
+          "id": "eric-lift-fixed-1-leg-0-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/leg-0-a.png",
+          "caption": "Movement check: leg-0-a"
+        },
+        {
+          "id": "eric-lift-fixed-1-leg-0-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/leg-0-b.png",
+          "caption": "Movement check: leg-0-b"
+        },
+        {
+          "id": "eric-lift-fixed-1-leg-1-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/leg-1-a.png",
+          "caption": "Movement check: leg-1-a"
+        },
+        {
+          "id": "eric-lift-fixed-1-leg-1-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/leg-1-b.png",
+          "caption": "Movement check: leg-1-b"
+        },
+        {
+          "id": "eric-lift-fixed-1-leg-2-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/leg-2-a.png",
+          "caption": "Movement check: leg-2-a"
+        },
+        {
+          "id": "eric-lift-fixed-1-leg-2-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/leg-2-b.png",
+          "caption": "Movement check: leg-2-b"
+        },
+        {
+          "id": "eric-lift-fixed-1-leg-3-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/leg-3-a.png",
+          "caption": "Movement check: leg-3-a"
+        },
+        {
+          "id": "eric-lift-fixed-1-leg-3-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/leg-3-b.png",
+          "caption": "Movement check: leg-3-b"
+        },
+        {
+          "id": "eric-lift-fixed-1-lift-forecourt",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/lift-forecourt.png",
+          "caption": "Back at the lobby"
+        },
+        {
+          "id": "eric-lift-fixed-1-lift-office",
+          "image": "game3d/shots/gait319/lift-fix-candidate/eric-lift-fixed-1/lift-office.png",
+          "caption": "Back at B2"
+        }
+      ]
+    },
+    {
+      "title": "Corrected entry — Carina",
+      "caption": "Stand, turn toward the opening, then enter. The sequence and both completed journeys are retained.",
+      "images": [
+        {
+          "id": "carina-lift-facing-1-hold-early",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/hold-early.png",
+          "caption": "Arriving at the lift"
+        },
+        {
+          "id": "carina-lift-facing-1-hold-settled",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/hold-settled.png",
+          "caption": "Turning while standing"
+        },
+        {
+          "id": "carina-lift-facing-1-facing-door",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/facing-door.png",
+          "caption": "Facing the opening"
+        },
+        {
+          "id": "carina-lift-facing-1-entry-early",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/entry-early.png",
+          "caption": "Beginning entry"
+        },
+        {
+          "id": "carina-lift-facing-1-entry-blend",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/entry-blend.png",
+          "caption": "First forward step"
+        },
+        {
+          "id": "carina-lift-facing-1-entry-walking",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/entry-walking.png",
+          "caption": "Walking through the doorway"
+        },
+        {
+          "id": "carina-lift-facing-1-leg-0-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/leg-0-a.png",
+          "caption": "Movement check: leg-0-a"
+        },
+        {
+          "id": "carina-lift-facing-1-leg-0-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/leg-0-b.png",
+          "caption": "Movement check: leg-0-b"
+        },
+        {
+          "id": "carina-lift-facing-1-leg-1-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/leg-1-a.png",
+          "caption": "Movement check: leg-1-a"
+        },
+        {
+          "id": "carina-lift-facing-1-leg-1-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/leg-1-b.png",
+          "caption": "Movement check: leg-1-b"
+        },
+        {
+          "id": "carina-lift-facing-1-leg-2-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/leg-2-a.png",
+          "caption": "Movement check: leg-2-a"
+        },
+        {
+          "id": "carina-lift-facing-1-leg-2-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/leg-2-b.png",
+          "caption": "Movement check: leg-2-b"
+        },
+        {
+          "id": "carina-lift-facing-1-leg-3-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/leg-3-a.png",
+          "caption": "Movement check: leg-3-a"
+        },
+        {
+          "id": "carina-lift-facing-1-leg-3-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/leg-3-b.png",
+          "caption": "Movement check: leg-3-b"
+        },
+        {
+          "id": "carina-lift-facing-1-lift-forecourt",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/lift-forecourt.png",
+          "caption": "Back at the lobby"
+        },
+        {
+          "id": "carina-lift-facing-1-lift-office",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/carina-lift-facing-1/lift-office.png",
+          "caption": "Back at B2"
+        }
+      ]
+    },
+    {
+      "title": "Corrected entry — Eric",
+      "caption": "The same stop and turn works for Eric. The sequence and both completed journeys are retained.",
+      "images": [
+        {
+          "id": "eric-lift-facing-1-hold-early",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/hold-early.png",
+          "caption": "Arriving at the lift"
+        },
+        {
+          "id": "eric-lift-facing-1-hold-settled",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/hold-settled.png",
+          "caption": "Turning while standing"
+        },
+        {
+          "id": "eric-lift-facing-1-facing-door",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/facing-door.png",
+          "caption": "Facing the opening"
+        },
+        {
+          "id": "eric-lift-facing-1-entry-early",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/entry-early.png",
+          "caption": "Beginning entry"
+        },
+        {
+          "id": "eric-lift-facing-1-entry-blend",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/entry-blend.png",
+          "caption": "First forward step"
+        },
+        {
+          "id": "eric-lift-facing-1-entry-walking",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/entry-walking.png",
+          "caption": "Walking through the doorway"
+        },
+        {
+          "id": "eric-lift-facing-1-leg-0-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/leg-0-a.png",
+          "caption": "Movement check: leg-0-a"
+        },
+        {
+          "id": "eric-lift-facing-1-leg-0-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/leg-0-b.png",
+          "caption": "Movement check: leg-0-b"
+        },
+        {
+          "id": "eric-lift-facing-1-leg-1-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/leg-1-a.png",
+          "caption": "Movement check: leg-1-a"
+        },
+        {
+          "id": "eric-lift-facing-1-leg-1-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/leg-1-b.png",
+          "caption": "Movement check: leg-1-b"
+        },
+        {
+          "id": "eric-lift-facing-1-leg-2-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/leg-2-a.png",
+          "caption": "Movement check: leg-2-a"
+        },
+        {
+          "id": "eric-lift-facing-1-leg-2-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/leg-2-b.png",
+          "caption": "Movement check: leg-2-b"
+        },
+        {
+          "id": "eric-lift-facing-1-leg-3-a",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/leg-3-a.png",
+          "caption": "Movement check: leg-3-a"
+        },
+        {
+          "id": "eric-lift-facing-1-leg-3-b",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/leg-3-b.png",
+          "caption": "Movement check: leg-3-b"
+        },
+        {
+          "id": "eric-lift-facing-1-lift-forecourt",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/lift-forecourt.png",
+          "caption": "Back at the lobby"
+        },
+        {
+          "id": "eric-lift-facing-1-lift-office",
+          "image": "game3d/shots/gait319/lift-fix-candidate/facing/eric-lift-facing-1/lift-office.png",
+          "caption": "Back at B2"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play locally",
+      "href": "game3d/"
+    }
+  ],
+  "commit": "f012948d3fb2a7c3dd6c496247a99c04e7610174",
+  "updated": "2026-10-07T23:38:23.238142+00:00"
+}
