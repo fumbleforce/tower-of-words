@@ -8,7 +8,7 @@ const width = +(process.argv[2] || 1366),
   height = phone ? 844 : 860;
 const round = process.env.ROUND || 'baseline2',
   duration = +(process.env.HOLD_SECONDS || 120);
-const base = process.env.BASE || '.claude/worktrees/codex-shotengai-clearance/game3d';
+const base = process.env.BASE || 'game3d';
 const out = `game3d/shots/shotengai-clearance/${round}`;
 fs.mkdirSync(out, { recursive: true });
 await withBrowserJob(

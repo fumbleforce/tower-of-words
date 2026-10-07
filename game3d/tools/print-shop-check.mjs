@@ -5,7 +5,7 @@ import {withBrowserJob} from '../../tools/lib/browser-job.mjs';
 import {waitForGame} from '../test/support/wait-ready.mjs';
 const width=+(process.argv[2]||1366),height=width<600?844:860,phone=width<600;
 const day=+(process.env.DAY||1);
-const base=process.env.BASE||'.claude/worktrees/codex-north-campus/game3d';
+const base=process.env.BASE||'game3d';
 const out=new URL(`../shots/north-campus/${process.env.OUT||'hands6'}/`,import.meta.url).pathname;fs.mkdirSync(out,{recursive:true});
 await withBrowserJob('print-shop-'+width,async browser=>{
  const context=await browser.newContext({viewport:{width,height},isMobile:phone,hasTouch:phone}),page=await context.newPage(),errors=[],checks=[];
