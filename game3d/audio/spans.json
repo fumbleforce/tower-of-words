@@ -1,4 +1,18 @@
 {
+ "bun-ohayo": [
+  [
+   0.262,
+   1.689,
+   "ohayo"
+  ]
+ ],
+ "commuter-ohayo": [
+  [
+   0.0,
+   1.044,
+   "ohayo"
+  ]
+ ],
  "evening-canteen-worker": [
   [
    0.0,
@@ -54,6 +68,20 @@
    0.178,
    1.349,
    "sumimasen"
+  ]
+ ],
+ "guard-greeting-ohayo": [
+  [
+   0.0,
+   0.854,
+   "ohayo"
+  ]
+ ],
+ "kuro-otsukare": [
+  [
+   0.0,
+   1.462,
+   "otsukare"
   ]
  ],
  "oh-10n1bre": [

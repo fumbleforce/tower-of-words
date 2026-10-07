@@ -131,7 +131,7 @@ export default {
       ] },
     ],
     stander: [{ do: 'emote', who: 'stander', kind: '…' }],
-    ohayo_bun: [{ say: 'bun', overheard: true, emo: 'warm', text: 'はい、{ohayo}。' }],
+    ohayo_bun: [{ say: 'bun', voice: 'bun-ohayo', overheard: true, emo: 'warm', text: 'はい、{ohayo}。' }],
     ohayo_music: [{ do: 'emote', who: 'music', kind: '?' }],
     ohayo_stander: [{ say: 'stander', overheard: true, emo: 'low', text: '…{ohayo}。' }],
     window: [{ say: 'eric', emo: 'tired', text: "Sea on both sides. Nobody said the island was this far out." }],

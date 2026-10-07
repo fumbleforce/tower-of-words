@@ -677,8 +677,8 @@
   "emo": "shy"
  },
  {
-  "key": "oh-1c4p8ez",
-  "speaker": "mori",
+  "key": "bun-ohayo",
+  "speaker": "bun",
   "text": "はい、おはようございます。",
   "lang": "ja",
   "overheard": true,
@@ -689,7 +689,7 @@
    ]
   ],
   "clear": [],
-  "emo": "polite"
+  "emo": "warm"
  },
  {
   "key": "oh-5hn713",
@@ -1445,8 +1445,8 @@
   "emo": "low"
  },
  {
-  "key": "oh-19g18x",
-  "speaker": "aoi",
+  "key": "guard-greeting-ohayo",
+  "speaker": "guard",
   "text": "おはようございます。",
   "lang": "ja",
   "overheard": true,
@@ -1458,6 +1458,21 @@
   ],
   "clear": [],
   "emo": "polite"
+ },
+ {
+  "key": "commuter-ohayo",
+  "speaker": "commuter",
+  "text": "おはようございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "low"
  },
  {
   "key": "ln-mn2vz",
@@ -1902,8 +1917,8 @@
   "emo": "polite"
  },
  {
-  "key": "oh-1244oau",
-  "speaker": "guard",
+  "key": "kuro-otsukare",
+  "speaker": "kuro",
   "text": "お疲れさまです。",
   "lang": "ja",
   "overheard": true,
@@ -2142,6 +2157,21 @@
   ],
   "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "oh-1c4p8ez",
+  "speaker": "mori",
+  "text": "はい、おはようございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
  },
  {
   "key": "oh-l719zo",
@@ -3554,6 +3584,31 @@
   "key": "oh-1c1wcn6",
   "speaker": "guard",
   "text": "点検ですね。どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-1244oau",
+  "speaker": "guard",
+  "text": "お疲れさまです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "otsukare",
+    "お疲れさまです"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "guard-dozo",
+  "speaker": "guard",
+  "text": "はい、どうぞ。",
   "lang": "ja",
   "overheard": true,
   "words": [],
@@ -5357,8 +5412,8 @@
   "emo": "polite"
  },
  {
-  "key": "oh-3q3h4y",
-  "speaker": "aoi",
+  "key": "guard-konnichiwa",
+  "speaker": "guard",
   "text": "こんにちは。",
   "lang": "ja",
   "overheard": true,
@@ -6915,6 +6970,16 @@
   "emo": "bright"
  },
  {
+  "key": "aoi-konbanwa",
+  "speaker": "aoi",
+  "text": "こんばんは。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
   "key": "ln-xqrxp2",
   "speaker": "kenji",
   "text": "Eric! Sit, sit. This is replay. I know winner.",
@@ -7423,6 +7488,21 @@
   "words": [],
   "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "oh-19g18x",
+  "speaker": "aoi",
+  "text": "おはようございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
  },
  {
   "key": "ln-1g2wh9l",
@@ -9198,6 +9278,16 @@
   "words": [],
   "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "oh-3q3h4y",
+  "speaker": "aoi",
+  "text": "こんにちは。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
  },
  {
   "key": "ln-bh5syw",

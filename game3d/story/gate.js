@@ -106,8 +106,8 @@ export default {
     lobby_in: [
       { do: 'goal', text: 'Say good morning to the guard.' },
       { do: 'face', who: 'guard', to: 'gate' },
-      { say: 'guard', overheard: true, emo: 'polite', text: '{ohayo}。' },
-      { say: 'commuter', overheard: true, emo: 'low', text: '{ohayo}。' },
+      { say: 'guard', voice: 'guard-greeting-ohayo', overheard: true, emo: 'polite', text: '{ohayo}。' },
+      { say: 'commuter', voice: 'commuter-ohayo', overheard: true, emo: 'low', text: '{ohayo}。' },
       { do: 'face', who: 'guard', to: 'desk' },
       { do: 'typing', who: 'guard', ms: 3000 },
     ],

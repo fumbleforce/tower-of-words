@@ -38,7 +38,7 @@ export default place(
           { say: 'aoi', name: 'Aoi', overheard: true, emo: 'bright', text: '靴、買えました！明日はラケットを借りて、テニスです。', clear: ['ラケット', 'テニス'] },
           { do: 'emote', who: 'aoi', kind: '♪' },
         ], else: [
-          { say: 'aoi', overheard: true, emo: 'polite', text: 'こんばんは。' }, { do: 'bow', who: 'aoi' },
+          { say: 'aoi', voice: 'aoi-konbanwa', overheard: true, emo: 'polite', text: 'こんばんは。' }, { do: 'bow', who: 'aoi' },
         ] },
       ],
     },
