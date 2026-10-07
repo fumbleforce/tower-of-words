@@ -89,6 +89,10 @@ Eric starts with ¥1000. On day 1 the only shop is the B2 vending machine. A dri
 | `tea` | Royal milk tea | ¥130 |
 | `melon` | Melon soda | ¥130 |
 | `cornsoup` | Hot corn soup | ¥130 |
+| `curry_bread` | Curry bread | ¥180 |
+| `butter_roll` | Butter roll | ¥120 |
+
+From day three, the bakery sells two breads during the morning, lunch and afternoon. A saved receipt makes each confirmed purchase charge once, including Continue during the handoff. The purchased bread can be eaten at its window seat; eating consumes one owned bread without gift or relationship effects. Bread is not offered through the drink-gift interactions.
 
 ## Typing a word
 

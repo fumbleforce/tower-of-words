@@ -58,6 +58,27 @@ ENGINE_WRITES['game3d/js/settings.js'] = { exact: ['private_mode'], prefix: [] }
 
 ENGINE_WRITES['game3d/js/saves/day2.js'] = { exact: ['d2_content_revision', 'place'], prefix: [] };
 
+ENGINE_WRITES['game3d/js/places/bakery/trade.js'] = {
+  exact: [
+    'bakery_order_id',
+    'bakery_item',
+    'bakery_phase',
+    'bakery_cant_pay',
+    'bakery_paid_id',
+    'bakery_eaten_id',
+    'bakery_eat_id',
+    'bakery_eat_item',
+    'bakery_eat_phase',
+  ],
+  prefix: [],
+};
+ENGINE_WRITES['game3d/js/places/bakery/stage.js'] = {
+  exact: ['bakery_can_eat', 'bakery_has_curry', 'bakery_has_roll'],
+  prefix: [],
+};
+
+ENGINE_WRITES['game3d/js/places/bakery/action.js'] = { exact: ['bakery_action_complete'], prefix: [] };
+
 export const KNOW_PREFIX = 'know_';
 export function flagKeys(owner) {
   const spec = ENGINE_WRITES[owner];

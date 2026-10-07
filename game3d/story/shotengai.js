@@ -10,6 +10,7 @@ export default {
     'talk:bike_shop': 'shut',
     'talk:store': 'shut',
     'talk:bakery': 'shut',
+    'talk:bakery_door': 'shut',
     'talk:game_centre': 'shut',
     'talk:karaoke': 'to_karaoke',
     'talk:izakaya': 'shut',

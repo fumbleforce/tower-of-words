@@ -7,6 +7,15 @@
 // walk = its walkable rectangle and view = the part drawn on the map, both local [x0, x1, z0, z1];
 // anchor = what pins it to the reference.
 export const CHUNKS = {
+  bakery: {
+    at: [44.25, 17.9],
+    turn: 0,
+    scale: 1,
+    level: 0,
+    walk: [-2.04, 2.04, -2.71, -0.04],
+    view: [-2.22, 2.22, -4.48, 0.2],
+    anchor: 'the bakery bay 10 south door and existing ground-floor footprint',
+  },
   izakaya: {
     at: [68.6, 17.9],
     turn: 0,

@@ -103,6 +103,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `dorm_court` | 79.84 | -1.3 | 90 | 1 | 0 | The open entrance court on the west side of the dorm blocks; its camera looks east at Eric's block. |
 | `dorms` | 85.49 | -1.79 | 90 | 1 | 1 | Eric's flat on 2F of his block, above the passage; its window faces the next block's west end, 1.2 out. The corridor runs to the stairs in the block's return. |
 | `shotengai` | 64.5 | 20.15 | 270 | 1 | 0 | The middle of the arcade's east mouth, between the two shop rows; its camera looks west down the arcade. |
+| `bakery` | 44.25 | 17.9 | 0 | 1 | 0 | North row bay 10, inside its existing south-facing door. |
 | `izakaya` | 68.6 | 17.9 | 0 | 1 | 0 | The existing izakaya ground floor, with its south-facing door on the shop walk. |
 | `karaoke` | 62.25 | 22.4 | 180 | 1 | 0 | The karaoke box's glass door off the arcade (south row, bay 14), inside. An interior, looked into from the door's side over its cut-down front wall. |
 | `karaoke_booth` | 59.4 | 24.6 | 180 | 1 | 1 | One booth upstairs over the front desk, its door from the corridor at the top of the stairs. An interior, looked into over its cut-down front wall. |
@@ -141,6 +142,7 @@ The game's map and the minimap (controls-and-ui.md, The map) show each outdoor p
 | `dorms` | | | `dorm_court` |
 | `shotengai` | 30.3 | 20.1 | |
 | `izakaya` | | | `shotengai` |
+| `bakery` | | | `shotengai` |
 | `karaoke` | | | `shotengai` |
 | `karaoke_booth` | | | `karaoke` |
 | `east_lane` | 67.5 | -6.5 | |
@@ -509,7 +511,7 @@ The shops with a name have a sign board over their bays on the front, the kana l
 
 Three alleys, one bay wide and five bays apart, cut through the south row between planted beds, from the arcade to the promenade. A walk runs down the rows' west end past the arcade's west mouth to the promenade (its north half, on to the footpath behind the rows, isn't walked); at the east end a walk turns down from the shop walk past a planted bed with a zelkova to the promenade. The promenade runs behind the south row in pale slabs, with a dark course on every bay line and a darker band along the sea wall where lamps, back-to-back benches and bins stand, from the foot of the walk south of the station (not walked) to a lookout with a rail over the rocks. On each alley's axis a band of darker stone crosses it to a flight of stairs down the wall to a sand beach; each flight's head is chained off between two posts, so the beach is seen and not walked: shrubs and rocks at the wall's foot, three beach huts by its west return, a few striped umbrellas, boulders in groups at the water's edge, wet sand and foam along the shore. East of the beach the wall stands in the sea on armour rocks, as west of the station, with three black pines behind it. The plaza and the forecourt draw the same street, from its backs, as backdrop and on the island map.
 
-In the morning the sun comes from the east-south-east behind the camera's left shoulder; after work it is low in the west, ahead down the street, and the shopfronts' glass, the signs, the lanterns with pools of light under them, the promenade's lamps and the izakaya's door light are lit. The karaoke door opens onto its front desk (`karaoke`, below; shut on day 2), and the izakaya door opens for the department's day-2 welcome dinner. Other shops stay shut. It also loads directly with `?place=shotengai`, at the shop walk. Nobody is here yet.
+In the morning the sun comes from the east-south-east behind the camera's left shoulder; after work it is low in the west, ahead down the street, and the shopfronts' glass, the signs, the lanterns with pools of light under them, the promenade's lamps and the izakaya's door light are lit. The karaoke door opens onto its front desk (`karaoke`, below; shut on day 2), and the izakaya door opens for the department's day-2 welcome dinner. The bakery opens during daytime from day three; the remaining shops stay shut. It also loads directly with `?place=shotengai`, at the shop walk. Nobody is here yet.
 
 ### Day-2 party plan
 
@@ -523,7 +525,8 @@ The welcome dinner is inside the izakaya, reached through its existing door off 
 | `plaza_lane` | To the plaza | The shop walk's east end at the dorm street. |
 | `bike_shop` | Bike shop | The bike shop's door. Go in: shut. |
 | `store` | Konbini | The konbini's door. Go in: shut. |
-| `bakery` | Bakery | The bakery's door. Go in: shut. |
+| `bakery` | Delivery note | Read the physical A-board beside the bakery. |
+| `bakery_door` | Bakery | Enter during daytime from day three; otherwise the closed door. |
 | `game_centre` | Game centre | The game centre's door. Go in: shut. |
 | `karaoke` | Karaoke | The karaoke box's door. Go in: into its front desk (`karaoke`). |
 | `izakaya` | Izakaya | The door on the shop walk. On day 2 after the shift, enter the real dining room. |
@@ -1746,3 +1749,17 @@ The dining room fits the existing 4 × 4.5 game-unit building footprint at the e
 ### Hooks
 
 `partySetup`, `partyFood`
+
+
+## Bakery (`bakery`)
+
+The shop street bakery occupies its existing bay-10 ground floor. Open from day three in morning, lunch and afternoon; day-one and day-two closures remain. The street's `bakery` delivery note stays on the physical A-board; `bakery_door` enters the shop. Inside, labelled bread trays and tongs stand left of a clear aisle. A clerk works behind the rear counter, with a visible oven, cooling trays and reserved-order shelf. Selection, bagging and collection are shown at the rack and counter. The front-right perch faces frosted glazing on the actual street frontage; the shared east wall carries the bakery sign. Its approach stays separate from the door, which returns to the street.
+
+| Thing | Label | Action |
+|---|---|---|
+| `bakery_exit` | Shopping street | Go out |
+| `bread_rack` | Bread trays | Choose |
+| `bakery_clerk` | Bakery clerk | Talk and pay |
+| `bakery_seat` | Window seat | Sit or eat the purchased bread |
+
+Spots: `bakery_in`, `bread_rack`, `checkout`, `window`. Seat: `bakery_seat`. Person: `bakery_clerk`, an existing generic apron body. Hook: `bakeryShop`, staged selection, checkout, bag collection and eating. No zones or secret nooks. The near wall is cut for overview and closes with the existing room-shell support for desktop follow.

@@ -20,6 +20,7 @@ export const PLACE_EVENTS = {
   dorm_court: { start: { id: 'start', source: 'engine' } },
   dorms: { start: { id: 'start', source: 'engine' } },
   shotengai: { start: { id: 'start', source: 'engine' } },
+  bakery: { start: { id: 'start', source: 'engine' } },
   izakaya: { start: { id: 'start', source: 'engine' } },
   karaoke: { start: { id: 'start', source: 'engine' } },
   karaoke_booth: { start: { id: 'start', source: 'engine' } },

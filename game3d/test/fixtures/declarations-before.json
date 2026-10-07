@@ -175,6 +175,16 @@
     "cornsoup": {
       "name": "Hot corn soup",
       "price": 130
+    },
+    "curry_bread": {
+      "name": "Curry bread",
+      "price": 180,
+      "giftable": false
+    },
+    "butter_roll": {
+      "name": "Butter roll",
+      "price": 120,
+      "giftable": false
     }
   },
   "places": {
@@ -690,6 +700,12 @@
           "verb": "Go in"
         },
         "bakery": {
+          "label": "Delivery note",
+          "kind": "thing",
+          "verb": "Read",
+          "pin": "near"
+        },
+        "bakery_door": {
           "label": "Bakery",
           "kind": "thing",
           "verb": "Go in"
@@ -2013,6 +2029,46 @@
       "hooks": [
         "partySetup",
         "partyFood"
+      ]
+    },
+    "bakery": {
+      "things": {
+        "bakery_exit": {
+          "label": "Shopping street",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "bread_rack": {
+          "label": "Bread trays",
+          "kind": "thing",
+          "verb": "Choose"
+        },
+        "bakery_clerk": {
+          "label": "Bakery clerk",
+          "kind": "person"
+        },
+        "bakery_seat": {
+          "label": "Window seat",
+          "kind": "thing",
+          "verb": "Sit"
+        }
+      },
+      "spots": [
+        "bakery_in",
+        "bread_rack",
+        "checkout",
+        "window"
+      ],
+      "seats": [
+        "bakery_seat"
+      ],
+      "people": [
+        "bakery_clerk"
+      ],
+      "zones": [],
+      "nooks": [],
+      "hooks": [
+        "bakeryShop"
       ]
     }
   }

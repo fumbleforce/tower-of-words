@@ -16,10 +16,11 @@ import forecourt from './forecourt.js';
 import gate from './gate.js';
 import train from './train.js';
 import office from './office.js';
+import bakery from '../bakery.js';
 export { WORDS } from './words.js';
 export const PERIODS = ['morning', 'lunch', 'afternoon', 'evening'];
 export const STORIES = {
-  forecourt, gate, train, office, dorms, dorm_court, east_lane, plaza, canteen, sports, pool, gym, east_coast, dorm_commons, shotengai, karaoke, karaoke_booth,
+  bakery, forecourt, gate, train, office, dorms, dorm_court, east_lane, plaza, canteen, sports, pool, gym, east_coast, dorm_commons, shotengai, karaoke, karaoke_booth,
 };
 export const OPEN_PLACES = Object.keys(STORIES);
 // every way a story file here walks, so the trip is allowed (places/definitions.js canTravel)

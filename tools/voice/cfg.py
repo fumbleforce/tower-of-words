@@ -74,6 +74,7 @@ def speakers():
     sp['bun'] = sp['sales2']; sp['music'] = sp['kuro']; sp['stander'] = sp['reader']
     # the canteen worker closing the plaza terrace after work (evening discovery): a borrowed voice, not Kuro's
     sp['canteen_worker'] = sp['sales2']
+    sp['bakery_clerk'] = sp['sales2']
     # Background people use the approved body-matched contextual Talk presets.
     sp['worker_a'] = sp['sales2']; sp['worker_b'] = sp['reader']
     sp['commuter_1'] = sp['sales1']; sp['commuter_2'] = sp['reader']; sp['commuter_3'] = sp['kenji']
@@ -83,7 +84,7 @@ def speakers():
     return sp
 
 
-FEMALE = {'carina', 'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'worker_a',
+FEMALE = {'carina', 'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'bakery_clerk', 'worker_a',
           'member', 'rei'}
 MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'stander', 'worker_b',
         'commuter_1', 'commuter_2', 'commuter_3', 'attendant'}

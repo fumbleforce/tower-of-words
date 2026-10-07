@@ -50,7 +50,7 @@ test('the kinds: doors, stairs, the lift, ways out and walk-to spots', () => {
   assert.equal(kind('office', 'lift'), 'lift');
   assert.equal(kind('forecourt', 'office_entrance'), 'door');
   assert.equal(kind('dorms', 'door_203'), 'door');
-  assert.equal(kind('shotengai', 'bakery'), 'door'); // a shut shop's door with its card is still a door
+  assert.equal(kind('shotengai', 'bakery_door'), 'door'); // a shut shop's door with its card is still a door
   assert.equal(kind('dorm_court', 'stairs'), 'stairs');
   assert.equal(kind('karaoke', 'karaoke_stairs'), 'stairs');
   assert.equal(kind('plaza', 'office_lane'), 'exit');
@@ -109,7 +109,7 @@ test('the tooltip says the verb and what it is', () => {
   assert.equal(tip(pinFor('plaza', 'office_lane')), 'Go to head office');
   assert.equal(tip(pinFor('plaza', 'shop_walk')), 'Go to the shop street');
   assert.equal(tip(pinFor('karaoke', 'karaoke_door')), 'Go out to the shop street');
-  assert.equal(tip(pinFor('shotengai', 'bakery')), 'Go in: Bakery');
+  assert.equal(tip(pinFor('shotengai', 'bakery_door')), 'Go in: Bakery');
   assert.equal(tip(pinFor('forecourt', 'lift')), 'Take the lift down to B2');
   assert.equal(tip(pinFor('dorms', 'door_203')), 'Go into room 203');
   // the action menu's verb matches the tooltip

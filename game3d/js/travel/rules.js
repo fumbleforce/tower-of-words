@@ -1,3 +1,4 @@
+import { bakeryOpen } from '../gameplay/shop-hours.js';
 // Fast travel's rules (docs/game/systems.md, Fast travel): every place's state now, with its one-line reason.
 //   here     where Eric is
 //   go       he can fast travel there now
@@ -17,7 +18,9 @@ import { findRoute } from './route.js';
 import { isLift } from './ways.js';
 import { nameOf } from './pins.js';
 
-const DAY1_OPEN = [...new Set([...Object.entries(NEXT).flat(), ...Object.entries(TRIPS).flat(2)])];
+const DAY1_OPEN = [...new Set([...Object.entries(NEXT).flat(), ...Object.entries(TRIPS).flat(2)])].filter(
+  (id) => id !== 'bakery',
+);
 const OPEN = { 1: DAY1_OPEN, 2: DAY2_OPEN, 3: DAY3_OPEN, 4: DAY4_OPEN, 5: DAY5_OPEN };
 export const openToday = (day) => OPEN[day] || OPEN[Math.max(...Object.keys(OPEN).map(Number))];
 export function openEver(day) {
@@ -40,7 +43,15 @@ export const REASON = {
 
 // in: here, day, graph (ways.js waysGraph, ways open now), afterWork (the same with going_home set, day 1 only),
 // busy ('talking' | 'busy' | ''), visited (Set). Out: { place: { id, name, state, reason, route, visited } }.
-export function placeStates({ here, day = 1, graph, afterWork = null, busy = '', visited = new Set() }) {
+export function placeStates({
+  here,
+  day = 1,
+  period = 'morning',
+  graph,
+  afterWork = null,
+  busy = '',
+  visited = new Set(),
+}) {
   const today = new Set(openToday(day)),
     ever = openEver(day);
   const plainOut = (graph[here] || []).some((w) => !w.scene);
@@ -57,6 +68,11 @@ export function placeStates({ here, day = 1, graph, afterWork = null, busy = '',
     if (!today.has(id)) {
       s.state = 'closed';
       s.reason = REASON.closed;
+      continue;
+    }
+    if (id === 'bakery' && !bakeryOpen(day, period)) {
+      s.state = 'closed';
+      s.reason = 'Open in the morning, at lunch and in the afternoon.';
       continue;
     }
     const route = findRoute(graph, here, id);
