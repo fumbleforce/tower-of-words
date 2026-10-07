@@ -1,6 +1,6 @@
 # Day 5
 
-Monday 5 October. Monday is playable through the normal Days menu and Sunday’s end screen, with voiced scenes and saved physical actions. The [story set](../../../../game3d/story/day5/index.js) includes weekday routine, two requests and a voluntary B2 demonstration. The [build contract](../../../../game3d/story/day5/README.md#build-contract-for-claude) and [Kotodama adapter data](../../../../game3d/story/day5/kotodama.js) specify the bridge. Monday is the current progression endpoint; Sleep returns to its end screen without promising a day 6.
+Monday 5 October. Monday is playable through the normal Days menu and Sunday’s end screen, with voiced scenes and saved physical actions. The [story set](../../../../game3d/story/day5/index.js) includes weekday routine, two requests and a voluntary B2 demonstration. The [build contract](../../../../game3d/story/day5/README.md#build-contract-for-claude) and [Kotodama adapter data](../../../../game3d/story/day5/kotodama.js) specify the bridge. Monday completes the five opening days. Sleep continues into the recurring week, preserving progress; the [day loader](../../../../game3d/js/days.js) selects the ongoing routes after day 5. Those recurring activities do not imply that later character arcs are complete.
 
 ## Cast
 

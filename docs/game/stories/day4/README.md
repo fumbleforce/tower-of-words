@@ -1,6 +1,6 @@
 # Day 4
 
-Sunday 4 October. Story and physical integration are implemented; final rendered checks and voice generation are in progress. The [story set](../../../../game3d/story/day4/index.js) contains the open routes, routine, optional stops, tennis session and two new repair requests. Its [build contract](../../../../game3d/story/day4/README.md#build-contract-for-claude) specifies staging and save behaviour. Day 4 remains gated by `LAST_DAY` until that validation finishes.
+Sunday 4 October. Story, voices and physical integration are implemented; Sunday is playable through the normal Days menu and Saturday’s end screen. The [story set](../../../../game3d/story/day4/index.js) contains the open routes, routine, optional stops, tennis session and two new repair requests. Its [build contract](../../../../game3d/story/day4/README.md#build-contract-for-claude) specifies staging and save behaviour. The [day loader](../../../../game3d/js/days.js) includes Sunday among the five opening days.
 
 ## Cast
 

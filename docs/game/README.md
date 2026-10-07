@@ -80,7 +80,7 @@ The game is not one walkthrough. After day 1 it won't be linear at all, so the s
 | [`evening-walk`](stories/evening-walk.md) | Optional encounters on the walk home. | built |
 | [`tama`](stories/tama.md) | Tama the calico cat, who goes where she likes and isn't there, says the guard. | built |
 
-The [day-2 storylines](stories/day2/README.md) and [day 3](stories/day3/README.md) have their own indexes. [Day 4](stories/day4/README.md), [day 5](stories/day5/README.md) and their [optional finds and personal scenes](stories/early-optional/README.md) are authored and await physical integration.
+The [day-2 storylines](stories/day2/README.md), [day 3](stories/day3/README.md), [day 4](stories/day4/README.md) and [day 5](stories/day5/README.md) are playable with physical staging. Sleep continues into the recurring week after day 5; these recurring activities are not complete later character arcs. The [optional finds and personal scenes](stories/early-optional/README.md) have mixed status: the twelve finds and Mio’s weekday lunch milestones are integrated, while further authored personal scenes still need staging. Current runtime coverage is recorded in [systems.md](systems.md).
 
 ### Writing a storyline file
 

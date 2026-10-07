@@ -54,7 +54,7 @@ Three kinds of thing can happen on a day, checked in this order when a period st
 
 ## Order of systems
 
-Proposed; days after day 2 are not fixed. Places are from [island.md](island.md) and [places.md](places.md); each one leans on the Japanese hooks already listed there.
+The table preserves the introduction plan and proposed vocabulary uses; it is not a list of unbuilt systems or a claim that every listed word is taught. The five opening days, continuing calendar, notice board and current club sessions are implemented as described below. Places are from [island.md](island.md) and [places.md](places.md); each one leans on the Japanese hooks already listed there.
 
 | System | First day | Places | Japanese it practises |
 |---|---|---|---|
@@ -70,7 +70,7 @@ The notice board is the one place to find what's on (built; its rules are in [sy
 
 ## Clubs
 
-A club is a social space for getting to know people. There are no minigames: a session is a scene with the club's people and a word or two of Japanese. Clubs meet on fixed evenings, one session a week each. Membership, saved progress and the first swimming and tennis sessions are built; [systems.md](systems.md#clubs) records the playable meetings and remaining content. Art still requires its approved photograph, and karaoke its approved recording and integrated performance, before their meetings count.
+A club is a social space for getting to know people. There are no minigames: a session is a scene with the club's people and a word or two of Japanese. Clubs meet on fixed evenings, one session a week each. Membership, saved progress, the first swimming and tennis sessions, recurring winter practice and Mori’s art visits are built; [systems.md](systems.md#clubs) records the playable meetings and remaining content. Art uses the approved photograph with staged drawing, tea and return visits. Karaoke still requires its approved recording and integrated performance before that meeting counts. These playable sessions do not complete the clubs’ planned storylines or later special events.
 
 - Some of the cast belong to clubs, alongside new people with a reason to be there.
 - Each club has its own storylines and its own progression as Eric keeps going.
@@ -92,7 +92,7 @@ Per system, short. Paths are in game3d/.
 - Free periods and the week: the five opening days and a continuing week are built, with player-chosen period changes, recurring resident schedules and Sleep advancing the calendar while preserving progress. Current rules are in [The clock](systems.md#the-clock) and [Schedules](systems.md#schedules). Further authored events and a separate night period remain future work.
 - Events: a small scheduler that, when a period starts, offers eligible story and relationship events from conditions on day, flags and bond steps, keeping deferred events pending for a later eligible meeting. js/bonds/gates.js already holds the scene gates for steps 3 to 5, and js/story.js runs the nodes.
 - Notice board: built ([systems.md](systems.md#notice-board)).
-- Clubs: the mechanism and playable sessions are documented in [Clubs](systems.md#clubs). Further session stories remain content work; the art photograph and karaoke performance dependencies above still gate their unfinished meetings.
+- Clubs: the mechanism and playable sessions are documented in [Clubs](systems.md#clubs). Further session stories remain content work; the karaoke recording and performance dependency above still gates that unfinished meeting.
 - Pay: Eric has ¥1000 and the vending machine ([systems.md](systems.md), Gifts). Closing a ticket adds its pay to the wallet. The bakery and konbini now have working food counters and saved purchases; the liquor shop remains a frontage. These food purchases are separate from the planned room-upgrade shop.
 - Room upgrades: room 203 (js/places/dorms.js) needs slots where an item can be placed, the item list in data, and the room's state in the save (the save already keeps flags and the Bag).
 - Home visits: an interior per home. Reuse one dorm-room layout with different furniture where it fits; each home is entered only on invitation (a flag from a relationship event).
