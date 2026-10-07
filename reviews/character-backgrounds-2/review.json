@@ -1,0 +1,251 @@
+{
+  "title": "Character backgrounds: rewritten full cast",
+  "date": "2026-10-07",
+  "by": "Codex character-backgrounds",
+  "status": "open",
+  "question": "Rewritten background proposals, with the full reader below. Which histories should stay, and what still needs changing?",
+  "multi": true,
+  "options": [
+    {
+      "id": "eric",
+      "label": "eric · Eric",
+      "note": "The player accepted an overseas support contract partly to interrupt a life that had become easy to postpone. They have practical competence, old attachments and several possible answers to why this move mattered, which play should let them choose. Full history and discoveries: use the Eric reader link in the links above.",
+      "image": "game3d/assets/portraits/eric-neutral.webp"
+    },
+    {
+      "id": "carina",
+      "label": "carina · Carina",
+      "note": "Carina shares the protagonist's work and past in Norway while remaining a woman with her own player-chosen attractions, dislikes and reasons for coming. Her bisexuality is ordinary knowledge about her, and leaves the history of her relationships open. Full history and discoveries: use the Carina reader link in the links above.",
+      "image": "game3d/assets/portraits/carina-neutral.webp"
+    },
+    {
+      "id": "mio",
+      "label": "mio · Mio",
+      "note": "Mio is pleased that her mother has started going out more, until those plans interfere with Mio's visits. She likes frightening films, familiar company and winning arguments she claims not to care about. Full history and discoveries: use the Mio reader link in the links above.",
+      "image": "game3d/assets/portraits/mio-neutral.webp"
+    },
+    {
+      "id": "mori",
+      "label": "mori · Mr. Mori",
+      "note": "Mori misses the importance he used to have and enjoys the freedom he has now. A promised trip with an old friend is approaching, and he would rather stay to finish his drawing than admit he no longer wants their usual holiday. Full history and discoveries: use the Mr. Mori reader link in the links above.",
+      "image": "game3d/assets/portraits/mori-neutral.webp"
+    },
+    {
+      "id": "kenji",
+      "label": "kenji · Kenji",
+      "note": "Kenji took the job that came with somewhere to live, then told everyone it was the plan. He wants to stay close to friends whose lives are beginning to go in different directions, and keeps arranging evenings they cannot all afford. Full history and discoveries: use the Kenji reader link in the links above.",
+      "image": "game3d/assets/portraits/kenji-neutral.webp"
+    },
+    {
+      "id": "emi",
+      "label": "emi · Emi",
+      "note": "Emi chose responsibility early and likes having it. Away from work she buys ridiculous furniture, swims to clear her head and is considering sharing a home again after several years of enjoying one entirely to herself. Full history and discoveries: use the Emi reader link in the links above.",
+      "image": "game3d/assets/portraits/emi-neutral.webp"
+    },
+    {
+      "id": "guard",
+      "label": "guard · Mr. Ishibashi",
+      "note": "Ishibashi spent years trying to keep a small shop open and is relieved to have a wage now. He takes the gate seriously, argues cheerfully with his spouse about outings and is absurdly hard to please when somebody offers him a new pair of shoes. Full history and discoveries: use the Mr. Ishibashi reader link in the links above.",
+      "image": "game3d/assets/portraits/guard-neutral.webp"
+    },
+    {
+      "id": "kuroda",
+      "label": "kuroda · Mr. Hamada",
+      "note": "Hamada is an apologetic commuter with an inconveniently loud singing voice. His mainland visits have acquired a purpose he enjoys, and he would like to invite somebody from the island without turning it into an apology for the evening. Full history and discoveries: use the Mr. Hamada reader link in the links above.",
+      "image": "game3d/assets/portraits/kuroda-neutral.webp"
+    },
+    {
+      "id": "kuro",
+      "label": "kuro · Kuro",
+      "note": "Kuro likes choosing whom she wants and making the interest unmistakable. She can be generous, jealous and calculating in the same evening; an invitation from a former partner has given her a reason to test whether she still has the effect she remembers. Full history and discoveries: use the Kuro reader link in the links above.",
+      "image": "game3d/assets/portraits/kuro-neutral.webp"
+    },
+    {
+      "id": "aoi",
+      "label": "aoi · Aoi",
+      "note": "Aoi wants a room that looks like the life she expected to have by now. She has already changed direction once, is good at making a day out enjoyable and resents being treated as the junior member of a group even when she joined last. Full history and discoveries: use the Aoi reader link in the links above.",
+      "image": "game3d/assets/portraits/aoi-neutral.webp"
+    },
+    {
+      "id": "rei",
+      "label": "rei · Rei",
+      "note": "Rei likes winning, loves a bad adventure film and is saving for a small boat she has nowhere to keep. Sales gave her money and mobility after an earlier business failed; she has no interest in pretending that failure was secretly a good decision. Full history and discoveries: use the Rei reader link in the links above.",
+      "image": "game3d/assets/portraits/rei-neutral.webp"
+    },
+    {
+      "id": "tama",
+      "label": "tama · Tama",
+      "note": "Tama has several households' worth of acquaintances and no interest in making their accounts agree. She visits where she expects comfort, surprises people by changing her route and occasionally leaves two admirers each certain she has chosen the other. Full history and discoveries: use the Tama reader link in the links above."
+    },
+    {
+      "id": "kaori",
+      "label": "kaori · Kaori",
+      "note": "Kaori likes loud company, takes sides quickly and has a much better memory for a slight than for a compliment. She took kitchen work to pay the rent and stayed because she enjoyed being good at it; her favourite day off involves neither cooking nor feeding anyone. Full history and discoveries: use the Kaori reader link in the links above.",
+      "image": "art/approved/kaori/kaori-after.webp"
+    },
+    {
+      "id": "yuzuki",
+      "label": "yuzuki · Yuzuki",
+      "note": "Yuzuki finds people interesting until they ask her to commit to being there next week. She enjoys an audience, keeps several friendships half alive and has volunteered for a local performance without checking whether she can bear being bad at it in public. Full history and discoveries: use the Yuzuki reader link in the links above.",
+      "image": "art/approved/yuzuki/yuzuki-e-after.webp"
+    },
+    {
+      "id": "tsubasa",
+      "label": "tsubasa · Tsubasa",
+      "note": "Tsubasa is happiest with a long afternoon ahead and nobody asking where she will be at six. Her reliable work life supports an untidy collection of enthusiasms, and an invitation from an ex has made a usually easy decision surprisingly difficult. Full history and discoveries: use the Tsubasa reader link in the links above.",
+      "image": "art/approved/tsubasa/tsubasa-face-e85-11.webp"
+    },
+    {
+      "id": "kanae",
+      "label": "kanae · Kanae",
+      "note": "Kanae is attached to places other people are ready to leave. She takes photographs, keeps souvenirs that annoy her housemate and has accepted that she enjoys paid work more when it does not have to express everything she believes about art. Full history and discoveries: use the Kanae reader link in the links above.",
+      "image": "art/approved/kanae/kanae-after.webp"
+    },
+    {
+      "id": "sumi",
+      "label": "sumi · Sumi",
+      "note": "Sumi likes being praised for work she has chosen and gets prickly when praise arrives too easily. A cheerful domestic life sits beside an old artistic rivalry she has never quite admitted is still alive. Full history and discoveries: use the Sumi reader link in the links above.",
+      "image": "art/approved/sumi/sumi-after.webp"
+    },
+    {
+      "id": "saki",
+      "label": "saki · Saki",
+      "note": "Saki chose Legal because she liked the work and has no wish to make her evenings resemble it. She sings badly with enthusiasm, can be careless with an unimportant promise and has begun wondering whether an old friendship still includes room for the person she is now. Full history and discoveries: use the Saki reader link in the links above.",
+      "image": "art/approved/saki/saki-after.webp"
+    },
+    {
+      "id": "nanami",
+      "label": "nanami · Nanami",
+      "note": "Nanami is comfortable being underestimated until it costs her something she wants. She works the card desk, spends her own money on clothes nobody sees under the uniform and has a stubborn disagreement with her sister about a house neither of them lives in. Full history and discoveries: use the Nanami reader link in the links above.",
+      "image": "art/approved/nanami/nanami-g-after.webp"
+    },
+    {
+      "id": "kiyoko",
+      "label": "kiyoko · Kiyoko",
+      "note": "Kiyoko likes influence and good company, and is tired of pretending she never enjoys either for its own sake. An old friend has offered her a life with fewer obligations, just as somebody at Amakawa has finally begun asking for the judgement she most wants to give. Full history and discoveries: use the Kiyoko reader link in the links above.",
+      "image": "art/approved/kiyoko/kiyoko-camel-after.webp"
+    },
+    {
+      "id": "goro",
+      "label": "goro · Goro",
+      "note": "Goro is enjoying retirement more than he expected and has begun saying yes to plans before remembering that his spouse has a life of their own. He grows things, enjoys bad jokes and has never quite recovered from being the less adventurous brother. Full history and discoveries: use the Goro reader link in the links above.",
+      "image": "art/approved/goro/goro-after.webp"
+    },
+    {
+      "id": "jun",
+      "label": "jun · Jun",
+      "note": "Jun is good at making other people's evenings easy and deliberately makes his own more complicated. He took over the bar because he wanted it, likes a small risk and is considering bringing an old friend into a business arrangement that once damaged their friendship. Full history and discoveries: use the Jun reader link in the links above.",
+      "image": "art/approved/jun/jun-after.webp"
+    },
+    {
+      "id": "cctv",
+      "label": "cctv · Night CCTV operator, unnamed concept",
+      "note": "The proposed night operator chose hours that suit them, enjoys a crowded breakfast after work and is trying to finish a family project they insisted on taking over. Their confidence is much greater at starting something than at deciding it is finished. Full history and discoveries: use the Night CCTV operator, unnamed concept reader link in the links above.",
+      "image": "art/approved/cctv/nanami-f-after.webp"
+    }
+  ],
+  "links": [
+    {
+      "label": "Read all backgrounds and the coverage inventory",
+      "href": "reviews/character-backgrounds-2/index.html"
+    },
+    {
+      "label": "Compare the rejected first draft",
+      "href": "reviews/character-backgrounds-1/index.html"
+    },
+    {
+      "label": "Eric — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#eric"
+    },
+    {
+      "label": "Carina — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#carina"
+    },
+    {
+      "label": "Mio — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#mio"
+    },
+    {
+      "label": "Mr. Mori — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#mori"
+    },
+    {
+      "label": "Kenji — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#kenji"
+    },
+    {
+      "label": "Emi — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#emi"
+    },
+    {
+      "label": "Mr. Ishibashi — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#guard"
+    },
+    {
+      "label": "Mr. Hamada — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#kuroda"
+    },
+    {
+      "label": "Kuro — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#kuro"
+    },
+    {
+      "label": "Aoi — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#aoi"
+    },
+    {
+      "label": "Rei — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#rei"
+    },
+    {
+      "label": "Tama — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#tama"
+    },
+    {
+      "label": "Kaori — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#kaori"
+    },
+    {
+      "label": "Yuzuki — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#yuzuki"
+    },
+    {
+      "label": "Tsubasa — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#tsubasa"
+    },
+    {
+      "label": "Kanae — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#kanae"
+    },
+    {
+      "label": "Sumi — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#sumi"
+    },
+    {
+      "label": "Saki — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#saki"
+    },
+    {
+      "label": "Nanami — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#nanami"
+    },
+    {
+      "label": "Kiyoko — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#kiyoko"
+    },
+    {
+      "label": "Goro — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#goro"
+    },
+    {
+      "label": "Jun — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#jun"
+    },
+    {
+      "label": "Night CCTV operator, unnamed concept — full dossier",
+      "href": "reviews/character-backgrounds-2/index.html#cctv"
+    }
+  ],
+  "updated": "2026-10-07T15:24:09+02:00",
+  "issue": 327
+}

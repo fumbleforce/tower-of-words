@@ -1,6 +1,6 @@
 # Sumi
 
-Proposed in play: Sumi makes a document usable by thinking about whose hands it reaches next. She enjoys careful lettering and keeps an affectionate family note whose handwriting is terrible.
+Proposed in play: Sumi likes being praised for work she has chosen and gets prickly when praise arrives too easily. A cheerful domestic life sits beside an old artistic rivalry she has never quite admitted is still alive.
 
 ## Established
 
@@ -8,25 +8,24 @@ The `sumi` entry in [the bible](../../bible/facts.yaml) establishes General Affa
 
 ## Proposed history
 
-Sumi's early office work involved checking names, dates and quantities against handwritten requests. She became good at noticing a transposed number without treating its author as careless. Her first supervisor insisted on finding the person who would use a document before deciding whether it was finished. She retained the habit of asking where a piece of paper will go next, sometimes after everyone else thought the discussion was over.
+Sumi chose an office job because she wanted to support herself and liked knowing what the next month would pay. General Affairs was the opening she was offered. She settled into the work, made friends and had been at Amakawa for some time when a colleague mentioned an evening lettering class. Sumi went along expecting a pleasant few weeks. She began practising at home after the colleague stopped attending.
 
-She practised lettering through a local class because she liked the physical action. She stayed with it through a period when her work looked worse because she was trying something unfamiliar. A classmate who improved much faster remained a friend; they borrowed materials and complained about different parts of the same exercise. Sumi enjoys that someone can be better at an activity without becoming her instructor in everything.
+Her family is pleased she has found a hobby. Sumi initially used the word herself. As she improved, she began wanting the work to be judged alongside pieces made by people who spent their whole day at it. She has never tried to earn her living from lettering and does not want customers deciding what she makes. She does want to be taken seriously. She can enjoy an evening's practice and spoil it afterwards by comparing it with a former classmate's published work, which she knows extremely well.
 
-Her family wrote short notes to one another because their hours did not always match. The notes were useful and often funny by accident. A shopping reminder with one ambiguous character became a recurring joke, and Sumi kept it. Her pleasure in careful handwriting coexists with fondness for writing that fails to look careful at all.
+They were once close friends. The classmate had more confidence about submitting pieces and became the person asked to organise their little exhibitions. Sumi withdrew from the group after a disagreement she still describes as being about the venue. It was partly about having a piece refused. The classmate handled the refusal clumsily; Sumi returned every borrowed item in one bag, including a book that had been a gift.
 
-She is married to someone who leaves legible, untidy notes and cooks without measuring. They work well together, argue about where things should be stored and have different thresholds for replacing a worn household object. Their relationship has become easier as they have stopped describing every preference as the sensible one. The spouse's name, gender and job remain undecided. No child or dependent is implied.
+At home she is happily married to someone who makes her laugh and has no instinct for artistic diplomacy. They can tell when she has spent an evening looking at the classmate's new work because she starts criticising a perfectly innocent poster. Her spouse likes one of the rival's pieces. Sumi has learned to live with it hanging in the hallway, although she chose the wall with less light. The spouse's name and gender remain open.
 
-## What this gives play
+She loves elaborate detective plots and is very bad at resisting spoilers. She turns to the end, regrets doing so and continues reading anyway. She cooks the same few meals confidently and accepts compliments on them without the suspicion she brings to compliments on her lettering.
 
-Sumi can make an unwelcoming form easier to use and can spend too long perfecting a heading nobody needs perfected. She is patient with practice and impatient with being praised merely for being neat. She wants to produce lettering for something that will be used and handled, not kept pristine in a folder.
+## The invitation she kept
 
-She also wants a regular unhurried lunch with her classmate. That friend has their own work and occasionally cancels; the cancellation need not start a drama. Incidental tells include turning a page before stacking it because wet ink will transfer, saving an amusingly awkward note, and choosing the slightly uneven bowl she likes over its matching replacement.
+The old classmate has invited Sumi to contribute to another small exhibition. The invitation is specific and generous. Sumi first decides that accepting would make her look as if she had been waiting. Then she begins choosing which piece she would send.
 
-## Discoveries across play
+She may submit something and dislike where it is hung. She may go to the opening without submitting. Either way, the other artist has work and concerns of their own, including genuine pleasure at seeing her. Their friendship can resume unevenly while the rivalry remains. Sumi does not need to stop wanting her work to be good or to be recognised.
 
-1. After an introduction, a visible notice can prompt a question about why one line is larger. She shows its practical purpose before mentioning the lettering class.
-2. Known `mouichido` can support asking to watch one stroke again. This is optional observation, not a dexterity or vocabulary exam. A future word for writing would need its own later introduction.
-3. A note about lunch, shown by Sumi herself, lets `isshoni` support a tentative question about her classmate. The next conversation can recall whether they managed to meet, however many game days passed.
-4. When she offers the family-note anecdote, she may show a copy she has chosen to keep. Its importance is that the writing is bad and the memory good. The player is not rewarded for producing a corrected version.
+## Getting to know her
 
-Her marriage is an ordinary source of company and friction. It remains proposed, so any future route must settle it explicitly. Neither intimacy with the player nor career progression requires abandoning the life she already enjoys.
+The first encounter can concern ink on a cuff or an ordinary notice. Let Sumi be amused by a mistake before revealing which mistakes embarrass her. If she mentions wanting to see a show, known `mitai` later helps the player return to that remark and ask whose work is there. Her initial omission of the classmate's name then has meaning.
+
+A player who has seen her practising can ask what she submitted, after she has chosen. She can show a piece or decline without ending the friendship. Her proposed voice is patient when explaining a physical action and unexpectedly sharp when judging a work she cares about. Her spouse's blunt affection offers a different view of her from the one colleagues see. Neither an office form nor another person's private correspondence is a substitute for an actual invitation to this part of her life.

@@ -1,32 +1,31 @@
 # Carina
 
-Proposed in play: Carina brings the same practical history as Eric, with her own chosen ways to talk about friendship, attraction and the life she left in Norway. Her bisexuality does not prescribe her dating history.
+Proposed in play: Carina shares the protagonist's work and past in Norway while remaining a woman with her own player-chosen attractions, dislikes and reasons for coming. Her bisexuality is ordinary knowledge about her, and leaves the history of her relationships open.
 
 ## Established
 
 [Cast](../../docs/game/cast.md#eric-eric) and [configuration](../../game3d/data/mc/carina.json): Carina is a woman from Norway, bisexual, with Eric's biography and B2 support job. Her pronouns are she/her. She occupies the player role; Eric and Carina are alternatives, not colleagues living on the island together. Her established assets and address forms stay in the configuration.
 
-## Proposed history and player expression
+## Proposed history and expression
 
-The proposed work, family and friendship history is [the shared protagonist history](eric.md#proposed-history). Carina also prepared returned computers, learned from sitting with users, kept a game-night circle and chose the move herself. Her practical skill and limited Japanese stay the same.
+[The shared protagonist dossier](eric.md#proposed-shared-history) owns the work history, friends, family contact and reasons for applying to Amakawa. Carina does not acquire a different upbringing because a scene uses feminine pronouns. She and Eric are alternate player characters, never two colleagues present together.
 
-One optional personal memory is a former flat-share where she and a friend occasionally planned an evening out, then spent so long talking while getting ready that they abandoned the booking and cooked instead. They still send each other photographs of small domestic failures, including meals that refused to look like the recipe. This can be offered as one selectable memory to either protagonist; it is not a new mandatory biography exclusive to Carina.
+The useful extra detail is how the player can express that history. Carina may have enjoyed being the competent person friends called, found the expectation tiring, or felt both at different times. On arrival she may be pleased to be anonymous for a while and still miss being known without explanation. A joke from an old friend can feel welcome in one conversation and intrusive in another. These are available responses, not an automatic emotional arc.
 
-Carina is comfortable with being bisexual. Whether she tells a new acquaintance depends on the conversation, not on accumulating enough trust to confess a problem. She may have dated women, men, both or neither; being bisexual establishes no particular relationship count. If the player selects the shared past-relationship option, references follow the partner description the player actually gave.
+A proposed selectable memory concerns sharing a flat with a friend who always dressed for an evening out too early. They would talk in the kitchen until the booking was nearly missed, then argue about which one had been delaying. Carina may tell the story fondly, or explain why she preferred living alone afterwards. The memory can be offered to either protagonist and is recorded only if chosen.
 
-What she learned from living with friends can show in modest, useful ways. She asks whether an invitation includes food before agreeing to a time; she knows the difference between someone wanting company while they cook and someone wanting help. She may still misread a polite work invitation as a personal one because she lacks the language and local context. That misunderstanding should be allowed to stay small and recoverable.
+For previous relationships, the player chooses what they want to establish. Being bisexual does not require one former partner of each gender, simultaneous relationships, a confession scene or special indecision. Carina can mention a woman she dated as casually as any other character mentions a former partner. She can also choose a friend as the relevant person in a story about home. Later references follow that actual choice.
 
-## What this gives play
+## Being a person in the conversation
 
-Carina wants her own footing on the island, including people she sees by choice after work. She can enjoy being noticed and also want to finish a task. Her attraction stays player-led.
+Carina can dislike an outing another character has planned, tell somebody that a joke was poor or pursue an attraction directly. Her polite default voice does not oblige agreement. A warm answer, a dry answer and a direct refusal should sound like different choices by the same person.
 
-Her voice stays tired, polite and dry. She can find a situation funny without wanting to keep a conversation going.
+She may make the first invitation. The game must distinguish wanting company, asking for a date and accepting somebody else's invitation. A character's confidence or teasing does not supply Carina's answer. Once she has chosen a friendship, later scenes should contain things those two people enjoy together rather than repeatedly offering a romance she declined.
 
-## Discoveries across play
+She also needs opportunities to be wrong without becoming foolish. Assuming a colleague's repeated invitation is purely courteous, misunderstanding the scope of a promise or overestimating her own energy after work are ordinary mistakes. A later clarification can change the relationship without forcing a lesson or an apology out of every scene.
 
-1. A return visit to the dorm commons can offer the old flat-share memory if the player chooses it. Another resident might recognise the abandoned-booking problem.
-2. An `isshoni` invitation can recall an activity Carina actually chose. The companion asks whether she wants to go together, leaving her answer and interpretation open.
-3. In a conversation about former homes, the player can mention an old partner with the gender and terms they choose, or mention a friend instead. The other person remembers that specific disclosure and does not infer the rest.
-4. A later invitation can become explicitly a date by mutual agreement. Existing friendship milestones keep their outcomes, and narration uses Carina's selected identity throughout.
+## Continuing threads
 
-Messages from home recall only the details the player chose to establish.
+The old group evening and the storage decision from the shared dossier follow Carina's selected answers. If she mentioned the flatmate, a later message can recall that person and something they actually did together. A conversation about the room she wants on the island may reveal that she liked a former home for company rather than its furnishings.
+
+Known `isshoni` can let her return to an invitation she initially misunderstood. The reply should clarify the intended activity before asking what she wants. Knowledge opens an informed choice, and the resulting memory survives missed days. Shared scenes use her name and address forms from the configuration, including callbacks to any partner description she selected.

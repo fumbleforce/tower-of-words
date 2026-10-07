@@ -1,34 +1,35 @@
 # Kuro
 
-Proposed in play: Kuro is good at hearing the need behind a visitor's question. Away from the counter, her courtesy can outlast her interest; swimming gives her something she chooses for herself.
+Proposed in play: Kuro likes choosing whom she wants and making the interest unmistakable. She can be generous, jealous and calculating in the same evening; an invitation from a former partner has given her a reason to test whether she still has the effect she remembers.
 
 ## Established
 
-[Cast](../../docs/game/cast.md#kuro-kuro): 38, head-office receptionist, polite Japanese and short practical reception English. Her name is 玖路. The [voice sheet](../../game3d/story/VOICE.md#speakers) makes her warm, low and unhurried. Her [club route](../../docs/game/cast.md#kuro-being-recognised-away-from-the-counter) concerns being known away from reception. Earlier replacement-kiosk plots are legacy, not premises for this history.
+[Cast](../../docs/game/cast.md#kuro-kuro): 38, head-office receptionist, polite Japanese and short practical reception English. Her name is 玖路. The [voice sheet](../../game3d/story/VOICE.md#speakers) makes her warm, low and unhurried. Her [club route](../../docs/game/cast.md#kuro-being-recognised-away-from-the-counter) concerns being known away from reception. Earlier replacement-kiosk plots are legacy.
 
 ## Proposed history
 
-Kuro first worked in a role handling room reservations and visitor arrangements. She learned that people often ask for the thing whose name they know rather than the thing they need. Asking what somebody is trying to do became more useful than giving the fastest answer. Later reception work taught her to remember a face without pretending to remember every detail of the person's visit. Her English grew from a small number of repeated situations and rehearsal with a colleague; an easy greeting does not imply she can translate a personal conversation.
+At twenty-three, Kuro moved in with a partner who ran a small shop. She worked there for a while, liked the regulars and grew tired of spending every evening discussing stock. She also grew tired of the relationship before she admitted it. Leaving involved selling her share and staying with a friend above a noisy road. The partner wanted another chance. Kuro had already begun looking at rooms and was impatient with being asked to reconsider.
 
-She grew up with a close cousin who was much quicker to speak. Kuro learned to wait until the first proposal had worn itself out and then say what she wanted. In the family this worked well: the cousin listened. At work the same pause is sometimes mistaken for agreement. She does not need to become louder to become more decisive; she needs people to hear the actual answer she gives.
+A few temporary jobs followed. The reception vacancy came through someone she knew from the shop. Predictable hours and money of her own made the offer attractive. She stayed because the rest of her life became easier to arrange. She is good at the work and likes some regular visitors. A promotion that consumed her evenings would hold little appeal.
 
-Swimming began as a convenient activity with a friend after work. The friend stopped attending; Kuro found she wanted to keep going. She likes remembering how a movement feels and improving it by a small amount. She dislikes being hurried into competition just because someone has discovered she is capable. Her sense of leisure includes choosing the pace.
+Her oldest friend knew her before she acquired the composed way she now presents herself. Kuro can make almost anyone else wait for an answer; this friend will take the last pastry while she is doing it. They have supported each other through moves and arguments, and have also gone months without speaking after Kuro tried to arrange a friend's decision for her. The friend came back. She did not apologise for the decision.
 
-A previous partner enjoyed her calmness and began bringing every uncomfortable decision to her. Kuro initially liked being trusted. Over time she found that the pleasant evenings were increasingly spent helping that person prepare for conversations with other people. They ended the relationship after several direct discussions, not a single revelatory speech. She can remember its good parts without wanting it back. The partner's gender and identity remain open.
+Kuro has pursued relationships herself, including ones she knew were unlikely to become domestic. She likes anticipation and the moment somebody stops pretending they have not noticed her interest. She can become possessive before she has decided what she wants to offer in return. One former partner called this unfair and ended things. Kuro disliked the judgement, then disliked even more that an apology did not change the answer. She respects a refusal in what she does; it can still occupy her thoughts for weeks.
 
-## What this gives play
+She enjoys lavish television dramas, late dinners that run past the last sensible train and shopping for clothes with somebody who will give an actual opinion. She likes being looked at when she has chosen the occasion. At home she leaves books open face down and takes excellent care of a coat she bought at an irresponsible price. Swimming is physical pleasure and a part of the day she chose for herself.
 
-She can make a nervous visitor feel unhurried while keeping the queue moving. Off duty she sometimes keeps asking helpful questions after she has lost interest, then feels annoyed that the conversation has become work. She enjoys dry teasing and a little vanity about remembering a difficult swimming turn.
+## The reunion
 
-She wants to choose a comfortable winter activity and find somebody willing to compare two ordinary cafés on the mainland on a day off. She can go with her cousin or an existing friend. The player may join a plan but is not its reason for existing.
+The partner who ended things has invited several old friends to a restaurant opening. Kuro is included. She decides to go, buys something to wear and tells her oldest friend that she merely wants to try the food. The friend does not believe her. Kuro wants to discover whether the former partner still notices her, and wants to be the one who decides what that means.
 
-Incidental tells: moving her own bag onto the chair she intends to keep; pulling her damp towel free from the rest of her bag before she sits down; correcting a friend's exaggerated story with one calm detail and letting them continue.
+At the gathering, the former partner is warm but occupied with other people. Kuro can spend the evening drawing attention, enjoy a conversation with somebody else, or leave because she dislikes the position she has put herself in. None requires the former partner to renew an interest. A later account of the evening can be amusing and conspicuously omit the thing she went to find out. The player can notice the omission without demanding a confession.
 
-## Discoveries across play
+This does not have to end with Kuro becoming less forceful. She may decide she enjoyed the pursuit and accept that it led nowhere. She may try to turn the evening into a victory in the retelling, irritating the friend who was there. A future invitation from Kuro should feel wanted and specific. If the player chooses friendship, she can be disappointed and continue being interested in their company; romance does not arrive as payment for agreeing with her.
 
-1. Extend her existing `oyogu` remark into which part of swimming she enjoys. The answer concerns an activity, with an ordinary invitation if there is time.
-2. After she has given a preference away from the desk, a later conversation can mention the cousin who taught her that waiting to speak need not mean surrendering the choice. She should not explain it in those terms; an example of them choosing lunch is sufficient.
-3. The established `yasumi` catch-up can later support asking whether she made the café visit. The question persists through missed club sessions and recalls the person she said she would go with.
-4. In a mutually personal conversation, she can say what she enjoyed and disliked about the old relationship. She asks something of the player too, and accepts a short answer.
+Her interest can make a conversation uncomfortable in a way she intends. She holds a question, notices an evasion and sometimes returns to it later. She can also mistake reserve for a game and needs a clear answer before she knows to leave the subject alone. Do not let the player win every exchange by knowing a word, or make Kuro uniquely able to read everyone else.
 
-Do not make a patron's confidential business available through her growing affection. She can decline to discuss an ex while still accepting company, and a mild tease at reception does not promise a date.
+## Getting to know her
+
+Early talk can concern the drama she is following or an invitation she is deciding whether to accept. She gives an opinion and waits to see whether the player will risk having a different one. Keep her relaxed, warm delivery and polite Japanese; her limited reception English does not support a complex personal conversation.
+
+Once she has mentioned the gathering, `isshoni` learned elsewhere lets the player revisit who she expects to go with. The answer reveals that the oldest friend is attending too. A later question about the restaurant opens the evening's result, and a still later conversation may explain why the invitation mattered. The progression reveals her judgement, appetite and occasional self-deception through choices. It leaves her established swimming milestones unplayed and does not expose anyone else's personal correspondence.

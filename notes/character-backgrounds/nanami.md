@@ -1,6 +1,6 @@
 # Nanami
 
-Proposed in play: Nanami helps somebody finish a confusing process without making their difficulty public. She likes a clear sequence and can be unsettled when another sensible method works just as well.
+Proposed in play: Nanami is comfortable being underestimated until it costs her something she wants. She works the card desk, spends her own money on clothes nobody sees under the uniform and has a stubborn disagreement with her sister about a house neither of them lives in.
 
 ## Established
 
@@ -8,27 +8,24 @@ The `nanami` entry in [the bible](../../bible/facts.yaml) settles the ID-card de
 
 ## Proposed history
 
-Nanami's earlier work involved processing changes in employee details and handing over physical items that had to reach the right person. She learned that a simple replacement request can conceal several ordinary problems: a changed name, an unreadable old photograph or someone who has brought the wrong document because the instructions were unclear. Her practical strength is working out which question will let the person proceed.
+Nanami worked in a department store before Amakawa. She was good at dealing with returns and learned to recognise when a customer wanted an apology more than a replacement. The standing, late hours and changing rota became tiresome. A desk vacancy appealed because she knew when she would be free. She applied without any interest in a security career and has become competent at the actual work of checking and issuing cards.
 
-A colleague once made an error in a stack Nanami had checked. Nanami's first response was to establish which sheet she had handled. Their supervisor asked them to fix the queue first and reconstruct the mistake afterwards. The mistake was resolved and the relationship survived. Nanami retained both concerns: get the person through the process, and keep a record clear enough that responsibility can be discussed fairly later.
+Her parents moved several times when she was growing up. One house remained in family stories as the place where everything had been better. Nanami remembers a damp cupboard, good neighbours and a view she still misses. Her sister remembers being glad to leave. They can spend a whole lunch arguing about which room had which wallpaper and enjoy themselves until the subject reaches whether the house should still matter.
 
-She grew up helping organise a household shared with extended family. Privacy was sometimes a matter of not asking the obvious question when everybody was in the same room. She is comfortable making a quiet space for someone to give an answer, and dislikes people who treat her discretion as an invitation to gossip.
+The sisters now share responsibility for clearing an older relative's empty home. This is a proposed family arrangement, without any legal claim about inheritance. Nanami wants time to sort the contents and keep more than she has room for. Her sister wants the task finished. Nanami has been postponing the visit while accusing her sister of rushing it.
 
-Her long-term partner is sociable and tends to accept invitations immediately. Nanami likes that it gets them out of the house and dislikes discovering the plan while putting dinner on. They now check one another's availability before committing both of them. This is an ordinary working arrangement they occasionally forget. Their relationship has affection, attraction and irritated laughter without requiring a crisis. The partner's gender, name and work remain open.
+Her former partner could make a room laugh, and Nanami loved going out with them. Gradually she began hearing her own private embarrassments retold as amusing anecdotes. She sometimes laughed along and objected on the way home; the partner claimed not to know which stories were permitted. One repeated story ended the relationship after she had explicitly asked them to leave it alone. She misses their company at gatherings and is irritated when mutual friends act as though liking the ex means they must have misunderstood her. She also tells an extremely funny account of the breakup herself, leaving out how much she enjoyed the attention before she became its subject.
 
-She maintains a friendship with a former colleague who is much more decorative about everyday things: elaborate wrapping, carefully chosen birthday cards. Nanami used to think this was wasted effort until she received a card chosen so exactly for her that she kept it in a drawer. She still uses plain wrapping herself.
+She likes clothes with unusual linings, generous pockets and colours she would never choose for her work uniform. She will spend hours looking and then leave without buying. She is also a keen listener to gossip, though she refuses to pass on information from the desk. The distinction can be inconvenient when a friend is hoping she knows more than she will say.
 
-## What this gives play
+## The clearing-out visit
 
-She remembers a person's practical difficulty without advertising that memory. She can make a confusing process feel finite and sometimes becomes too attached to the sequence she has made clear. Someone who solves the problem by a different sensible route can leave her feeling unneeded for a moment.
+Nanami has chosen a large cabinet she intends to keep. Her sister points out that she has nowhere to put it. Nanami offers to pay for storage, then discovers she mostly wants somebody to agree that the cabinet was worth keeping. The sister wants one small, ugly object Nanami was about to throw away.
 
-She wants a clearer replacement-card instruction and to host a meal where she is ready before the first guest arrives. The player can have a pleasant conversation about either without receiving privileged access. A tell is testing a pen before handing it over, while failing to notice that her own pencil is still in her hair.
+They can each keep something and still disagree about the rest. The visit should include moments of pleasure and physical work, not only an argument about memory. The player may later hear that Nanami gave the cabinet away to somebody who will use it. She can regret this occasionally without needing a reversal.
 
-## Discoveries across play
+## Getting to know her
 
-1. Her introduction begins with a real request or an ordinary greeting at an available desk. Known `mouichido` can help ask her to indicate a step again. The action demonstrates patience before explaining its history.
-2. Later, a question about the clearer instructions lets her recall the colleague's mistake without naming the employee affected. Ishibashi can independently appreciate how much easier the form is to explain.
-3. `yoyaku` or `isshoni`, if already learned, can support a question about an invitation Nanami mentioned herself. She answers about her household's planning, not the contents of a work register.
-4. When familiar, she can show the card her old colleague sent. It supplies a different part of her taste, including the fact that she likes receiving fuss she would never produce herself.
+A conversation about a coat can be the first indication that Nanami enjoys being looked at when she chose what to wear. The house appears later through a mentioned day off. Learning `yasumi` lets the player return to the remark and discover that the day is already spoken for. A later question about whether she went gives the sister an ongoing place in the story.
 
-Security information remains work information. Her new biography does not authorise an overtime-hearing plot, a romance route or a secret access favour from the old plans.
+Her proposed voice is composed at the desk and more judgemental among friends. When she dislikes something, she often asks one precise question that makes the reason evident. She can also say she likes a ridiculous garment and buy it anyway. No personal topic grants access to security records; the player gets to know her from what she chooses to bring into conversation.

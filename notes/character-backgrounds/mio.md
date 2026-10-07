@@ -1,6 +1,6 @@
 # Mio
 
-Proposed in play: Mio learned to make useful things for people she liked, then let being the reliable fixer consume more of her time than she intended. Her mother and old internet friends still have claims on her attention that she often enjoys.
+Proposed in play: Mio is pleased that her mother has started going out more, until those plans interfere with Mio's visits. She likes frightening films, familiar company and winning arguments she claims not to care about.
 
 ## Established
 
@@ -8,27 +8,26 @@ Proposed in play: Mio learned to make useful things for people she liked, then l
 
 ## Proposed history
 
-Mio grew up in a home where her mother routinely sent visitors away with food. The visits were pleasant, but departures took an extra half-hour because another container had to be found. As a teenager she became good at packing a bag while still participating in a conversation. She loves the food and resents being treated as someone who cannot feed herself; both responses survive in the same train journey.
+As a teenager Mio stayed up exchanging bad horror films with people she knew online. They argued about endings, recommended things unavailable where the others lived and occasionally fell asleep before a group watch began. Some of her English came from those conversations. Later she wrote a small tool they needed and discovered she enjoyed making it work more than the course she was taking. Support scripting led to programming work. At Amakawa she found she could keep old systems running and avoid much of the social performance upstairs. She chose B2 when she had a choice about where to be useful; her dislike of bowing remains her own explanation.
 
-Her first sustained programming project was a small tool for a group of internet friends who exchanged game modifications. She liked making something people used every week. One friend wrote much better explanations than she did and regularly sent her annoyed questions that improved the tool. That friendship, mostly conducted through text, helped form her English. She can discuss a fault in English more easily than she can describe an unfamiliar food.
+At home she was the person who could be relied on to have no plans. Her mother would propose lunch and assume Mio would come. Mio complained about this while enjoying having a place reserved for her. Now her mother has made a close friend and sometimes spends a Saturday elsewhere. Mio can see the improvement in her mother's life. She still finds herself offering to visit on exactly the weekend already occupied.
 
-She entered working life through support scripting and test work before taking on the older systems at Amakawa. A successful early fix became everybody's expectation that she would handle the next exception too. She was fast, proud of the result and poor at correcting a flattering misunderstanding. In an upstairs review she once refused to dress an unfinished job as a completed one, then performed the expected apology so badly that everyone concentrated on her manners. Her preference for B2 grew from liking useful work and disliking that exchange. It does not make the basement a punishment she secretly longs to escape.
+Her mother has watched several of the horror films and likes the ones Mio considers embarrassing. They can spend an entire meal disputing whether an ending was frightening or merely dark enough that nobody could see anything. The pickles travel back in containers from both households. Mio objects to the quantity and later notices when a favourite kind is missing.
 
-An earlier relationship began with long evenings playing and talking online, then became an ordinary in-person relationship. They enjoyed many of the same things but treated silence differently: Mio thought parallel activity counted as being together; her partner often wanted an answer she had not noticed was being asked for. They ended it without either discovering a betrayal. She still uses a useful recommendation from that person. She does not owe a new friend their name or the full argument.
+She once dated someone she met through the film group. They were affectionate in person and tiresome to everybody else online, where even a minor disagreement became a public performance. Mio was particularly good at making the other person look unreasonable in a short message. After they separated, a mutual friend told her that agreeing with her had become exhausting. That friendship survived. She now sometimes leaves an argument unanswered, although she still writes the answer first.
 
-## What this gives play
+Mori makes her laugh because he follows a complaint to its practical conclusion. Kenji makes her laugh against her judgement. She is generous with people she has admitted into her day and perfectly capable of being unfair to somebody she has already decided will be annoying.
 
-She can identify a useful detail inside a rambling report and be bad at telling someone that their company is welcome. She keeps old, helpful instructions even when she dislikes their tone. When an internet friend is struggling with a small project, she will spend an evening testing it and neglect a meal she had been looking forward to. This kindness costs time and is sometimes poorly judged.
+## Present life
 
-Her independent want is to release a small update to that old hobby tool and spend a mainland visit doing something with her mother besides carrying food home. Neither requires the player.
+Mio wants to arrange one film evening that her scattered old group can actually attend. She has already vetoed two popular choices. A friend proposes something she would never select, and the only time everyone can manage falls during her usual mainland visit. She has to decide what she wants this particular weekend. Her mother has something else to do anyway, which makes the decision easier and irritates her.
 
-Incidental tells include peeling the label from an empty food container so her mother can reuse it, typing an English answer and deleting its overly formal greeting, and remembering which colleague takes the last clean mug.
+The player can hear about this without becoming the organiser. Joining her for a later discussion, disagreeing about the film or leaving her to the call all remain possible. An evening can go well even if she dislikes the film. Her existing route still governs leaving the working server alone; this gives her something definite to do after she leaves it.
 
-## Discoveries across play
+She buys cheap earrings she rarely wears to work, dislikes having a wet sleeve more than being caught in rain, and gets suspicious when somebody recommends a meal chiefly because it is healthy. None needs an explanation from her childhood.
 
-1. Her existing family remark and `yasumi` connection can lead to whether the next visit includes an outing. She initially discusses the practical nuisance of carrying empty containers, then names something she and her mother like doing.
-2. When she shows the player her hobby tool, she demonstrates its small purpose. Later she can report that a friend found a flaw after she thought it was finished. The player need not debug it.
-3. After repeated ordinary lunches, she may tell the upstairs-review story when a current misunderstanding makes it relevant. It explains a habit without proving that every manager is an idiot; she admits one correction she genuinely should have made.
-4. In an already personal conversation, she can acknowledge that she sometimes misses what silence means to somebody else. Her ex remains unnamed. A later quiet meal can test whether the player wants to talk, without awarding romance or completing her existing route.
+## Getting to know her
 
-Keep the relationship detail and workplace embarrassment out of gossip, files and early banter. Trust lets her give a fuller answer; it does not make her suddenly fluent in a therapist's account of herself.
+Begin with something she has just watched, or the container she is carrying. She can retell a ridiculous scene with more energy than she has given anything at work. Her loose English stays the voice-sheet English; it does not become polished when the subject is personal.
+
+A first remark about her mother being busy sounds like an ordinary scheduling complaint. After learning `yasumi` and `isshoni` in other conversations, the player can return to it and distinguish which of them had plans with somebody else. Mio can admit that she had expected the visit without blaming her mother's friend. A later greeting recalls the film evening's result, including a film she refused and eventually enjoyed. Longstanding internet friends continue to answer her even if the player pursues another route.

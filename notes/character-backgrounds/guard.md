@@ -1,6 +1,6 @@
 # Mr. Ishibashi
 
-Proposed in play: Ishibashi learned to make an entrance easy to understand without embarrassing the person using it. He can give someone else a calm arrival while repeatedly interrupting his own lunch.
+Proposed in play: Ishibashi spent years trying to keep a small shop open and is relieved to have a wage now. He takes the gate seriously, argues cheerfully with his spouse about outings and is absurdly hard to please when somebody offers him a new pair of shoes.
 
 ## Established
 
@@ -8,25 +8,26 @@ Proposed in play: Ishibashi learned to make an entrance easy to understand witho
 
 ## Proposed history
 
-Before working the passenger gate, Ishibashi handled access at another Amakawa entrance used mostly for deliveries. Drivers and staff arrived knowing exactly what they needed and often assumed he did too. He learned to put the relevant card, signature box or doorway into view before repeating an instruction. The precision in his hands comes from thousands of exchanges with distracted people.
+Ishibashi once sold household goods in a shop run with his spouse. He knew which customers would want to talk and which wanted the right screw in a bag. The shop never made much money. They kept it going longer than they should have, partly because neither wanted to be the first to suggest closing. When they finally sold the remaining stock, his spouse was relieved enough to book a short holiday. Ishibashi spent the first day worrying about the price of lunch.
 
-A respected older coworker once let a senior employee make a joke about a junior's lost pass while a queue watched. The card problem was trivial; the humiliation was what Ishibashi remembered. He decided that checking identity and making a person feel small were separable. He can still be brisk, and he is not universally tactful, but he does not let a familiar executive invent a different rule at his desk.
+Security work came through an acquaintance who told him about a vacancy. He took it for a regular wage and kept it because he liked knowing when the day's work ended. He learned the job properly. His precise gestures began as a way of showing a customer the size of a fitting across a crowded counter, then became useful with distracted people at the gate. The job is a second career rather than a lifelong calling.
 
-He grew up in a household where everyone had somewhere to be in the morning. Arriving early meant being able to sit down and eat properly. He retained the arrival time and gradually lost the sitting-down part. A sibling complains, affectionately, that he can discuss the best sheltered bench anywhere they have visited but never spends long on one.
+The marriage survived the shop more comfortably than either expected. His spouse has become sociable in a way he did not notice while they worked together all day. They go out separately and compare accounts over breakfast. He makes fun of the number of places she wants to visit, then asks what time they must leave. She knows that a complaint about the route often means he has already looked it up.
 
-His friendships tend to grow through repetition: a former coworker met for a regular meal, a neighbour encountered while hanging laundry, Hamada bringing the wrong kind of apology to a perfectly ordinary gate problem. He remembers people who stop appearing and asks after them without making an announcement. His romantic history remains unspecified; the proposal does not need a dead spouse to account for solitary breaks.
+An old customer still calls him to ask where to buy things. He likes being remembered and occasionally recommends the wrong shop because he has not admitted how much has changed. The next time they meet, he gives the correction without mentioning that he went to check. Some of his stubbornness is vanity.
 
-## What this gives play
+He prefers shoes that can be repaired, eats the same breakfast because he likes it and follows a television drama his spouse abandoned halfway through. He wants to know whether the unpleasant older brother gets his money back. He claims the programme has become ridiculous and still makes sure he is home for it.
 
-He notices hesitation before he notices a breach of etiquette. He can make a complicated entrance easy to understand and sometimes mistakes an unfamiliar approach for uncertainty that needs directing. A younger attendant who does the job well in a different order unsettles him more than he admits.
+## What matters now
 
-He wants to take a proper coastal walk with his sibling on a day off and find a lunch container that does not leak. Both can remain ordinary recurring subjects. The cat's bowl is another practical arrangement he would prefer nobody made sentimental. He moves it out of rain because wet food is a nuisance; affection is visible without having him explain himself.
+His spouse wants to spend a weekend in a town they visited while the shop was failing. Ishibashi remembers a miserable argument there. She remembers an excellent meal the next day and wants to try the restaurant again. He keeps suggesting other towns while pretending the transport is the problem.
 
-## Discoveries across play
+The eventual visit can be good, awkward or both. What changes is whether he can let her remember that period differently. His current break route stays modest: company at a bench, food and a cat he declines to acknowledge. It does not need to become a discussion of his whole marriage.
 
-1. The existing short-rest remark and `yasumi` connection can open which part of a break he likes. He indicates the dry seat and continues eating. Knowing the word does not force a long talk.
-2. After the player has seen his precise card gesture several times, an optional question lets him mention deliveries. A later ambiguous arrival can show the same technique helping somebody else.
-3. A recurring bench visit may find him testing his new lunch lid. He can mention the sibling who recommended it and their intended walk. `isshoni` supports asking whether they are going together once the remark has actually been heard.
-4. Only after reliable, undemanding company does he tell the lost-pass story. He names no embarrassed worker. Later the player may recognise why he shifts a difficult exchange away from the queue.
+At work he remains strict and fair. Friendship cannot purchase a pass through the gate. Away from it he can be suspicious of a fashionable restaurant, pleased to have been wrong and slow to say so.
 
-His security duties continue when he becomes a friend; operational routines remain work information.
+## Getting to know him
+
+A conversation about shoes or a purchase can reveal the shop years a little at a time. He knows enough to be useful and has firm opinions that the player may ignore. Later, an overheard remark about the weekend uses a destination the player has already heard him reject. Returning with `ikitai` learned elsewhere lets them ask who actually wants to go.
+
+He speaks clipped, polite Japanese. His answers become longer when describing the shop's strange customers; he can get halfway through a demonstration with his hands before remembering he is meant to be eating. A later greeting asks about the trip, with no deadline for seeing its result. Tama continues to have her own movements and is never a substitute spouse or a cure for loneliness.

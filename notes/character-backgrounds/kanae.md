@@ -1,6 +1,6 @@
 # Kanae
 
-Proposed in play: Kanae notices the ordinary activity that makes a photograph worth keeping. She has learned to ask before photographing or advising someone, while still occasionally making attention feel like evaluation.
+Proposed in play: Kanae is attached to places other people are ready to leave. She takes photographs, keeps souvenirs that annoy her housemate and has accepted that she enjoys paid work more when it does not have to express everything she believes about art.
 
 ## Established
 
@@ -8,27 +8,26 @@ The `kanae` entry in [the bible](../../bible/facts.yaml) establishes PR, her fil
 
 ## Proposed history
 
-Kanae first became interested in photographs because a relative took ordinary family pictures and always included what people had made: a meal, a repaired chair, a birthday cake leaning to one side. She liked those photographs more than the carefully posed ones. She still enjoys the accidental objects at the edge of a frame, although she has learned that an interesting detail can also be something its owner did not want recorded.
+Kanae wanted to make photographs and began with an optimistic idea of surviving on small commissions. Some clients paid late, some were easy to please and one wanted her to repeat a photograph she had made by accident. She spent more time looking for the next job than taking pictures. A regular PR post was a relief. She still makes her own work, but rent no longer depends on persuading somebody to want it.
 
-Her earliest paid visual work involved arranging small product pictures and producing images to a brief. It taught her patience with light and backgrounds, and how little glamour there is in moving a plain object a few centimetres twenty times. Later PR work gave her people to photograph. She likes waiting until somebody is absorbed in an activity, but asks before taking a picture intended for use.
+She grew up in a town she spent years wanting to leave. Now an old row of shops there is being replaced, and she has become embarrassingly attached to a street she used to call ugly. Her sister, who stayed, points out that the buildings leak and the replacement includes things people need. Kanae understands this when she is there. At a distance she keeps telling the story as a loss.
 
-An early subject liked a picture and disliked its caption. Kanae initially thought the caption was outside her responsibility. She now checks enough of the surrounding text to notice when the image appears to make a claim it does not support. She can still become impatient with someone who wants to plan every expression before the camera comes out.
+They get along best when doing something together with no need to agree. Her sister cooks; Kanae peels vegetables badly and is given easier jobs. They remember different versions of their childhood. Kanae's pictures are not decisive evidence about which version was happier.
 
-A school friend was her first willing portrait subject. Over the years that friend has become less comfortable being photographed, while their friendship has stayed close. They spend time together without the camera. This is a successful adjustment, not an unresolved refusal that the player should help overcome.
+She lives with a friend who has no artistic ambitions and likes the flat to look inhabited rather than exhibited. There are objections to the growing row of rescued shop signs and broken frames. Kanae has promised to clear a cupboard. The friend knows which objects she will actually miss and which she is keeping to avoid choosing.
 
-Kanae had an affectionate relationship with someone who also made things. It ended after they found themselves critiquing each other's work even during dinner. They are now occasional friendly contacts and have learned to ask before giving advice. She keeps one small print they gave her because she likes it.
+An earlier relationship with another maker lasted through a period when both were broke and pleased with themselves. It ended after some success made their rivalry difficult to ignore. Kanae still likes one piece they gave her. She is less happy about how often their name now appears next to it when she searches for an exhibition. Her jealousy is specific and sometimes petty.
 
-## What this gives play
+## What she is making
 
-She is good at noticing how work looks to the person doing it and bad at predicting when her intense attention feels like evaluation. She remembers a composition and forgets the name of the food she ate immediately afterwards. Her independent desire is a short series of island workers' hands doing ordinary jobs, with willing subjects and enough time to get a picture she likes.
+Kanae wants to photograph the old street before demolition, then becomes angry when her sister asks whether any current residents want the photographs. The project began with Kanae's own memory. She can keep that focus honestly, or invite people to choose what they want recorded and accept a different set of pictures.
 
-Incidental tells include lowering the camera while continuing to look, choosing a frame that leaves an object out, and using the last exposure on something nobody else thought remarkable. Film supplies impose ordinary limits; there is no endless free output or mandatory collectible album.
+One willing subject asks for a photograph of a repaired back room Kanae finds visually dull. Another wants the new building included. These choices complicate her work without making her a villain or a saviour. If the project appears in play, approved images must show what those people chose; the player cannot complete it by secretly photographing unwilling subjects.
 
-## Discoveries across play
+She likes strong citrus flavours, old disaster films and being out early enough to see a place before it fills. On a good day she can be content with a single picture. On a bad one she will complain all afternoon that the light was better yesterday.
 
-1. Once introduced, she may ask whether the player wants to see one selected print. Known `mitai` offers a reply; the print is shown voluntarily and only after its asset exists.
-2. A later question about an empty space in that image can reveal why she excluded a distracting object. Learning future vocabulary for a photograph could clarify an earlier remark, but that word is not added by this proposal.
-3. Yuzuki can refer the player to Kanae for an image already agreed for a staff piece. Kanae's account of the caption problem adds a different professional perspective without setting the women against each other.
-4. At a relaxed later meeting, she can mention the friend who no longer wants portraits or the print from her former partner. Each is an ordinary answer to a relevant question, not a tour through her private album.
+## Getting to know her
 
-Do not photograph the reluctant friend to complete a collection. The player earns a fuller picture of Kanae through what she chooses to show, including what she happily leaves unrecorded.
+A voluntarily shown print gives the first conversation something visible to concern itself with. Learning a word for a photograph or an old place can later open an earlier remark about home; the wording must be selected during scene writing and reused in a second context. The player can ask which person wanted the next image made, and discover Kanae's own part in the project changing.
+
+Her proposed voice is exact about visual details and vague about dates she has promised. She sometimes begins a criticism, looks again and changes it. Away from the camera she has ordinary funny stories and does not describe everybody as a potential portrait. A conversation with Yuzuki can show professional disagreement without turning their shared department into their whole relationship.

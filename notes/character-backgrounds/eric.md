@@ -1,34 +1,33 @@
 # Eric
 
-Proposed in play: The player asks users to show a fault because an early support job taught them how often the technician has misunderstood. Moving to Amakawa is a wanted change, with old friendships still worth keeping.
+Proposed in play: The player accepted an overseas support contract partly to interrupt a life that had become easy to postpone. They have practical competence, old attachments and several possible answers to why this move mattered, which play should let them choose.
 
 ## Established
 
 [Cast](../../docs/game/cast.md#eric-eric) and [setting](../../docs/game/setting.md#erics-job): Norwegian support engineer arriving for the first time, moving into room 203, almost no Japanese, tired, polite and dry. Age remains undecided. Carina has the same biography and job; `eric` is the shared player id. Nothing here explains kotodama or gives the player earlier knowledge of it.
 
-## Proposed history
+## Proposed shared history
 
-Before Amakawa, the player worked for a small support supplier in Norway. The first responsibility was preparing returned computers for reuse. Later came visits to ordinary workplaces with equipment that was old for different reasons: somebody needed one particular program, the replacement budget had gone elsewhere, or the person who understood the machine had left. Formal qualification and exact years remain open so neither protagonist acquires an accidental age.
+Before Amakawa, the player worked for a small support supplier in Norway. The work was varied enough to stay interesting and predictable enough that another year could pass without a decision. A colleague mentioned the overseas contract while complaining about a different application. The player asked for the details, put them aside and eventually applied. Their reason is selectable: the work, curiosity about Japan, wanting distance from a routine, or a combination. None supplies knowledge of kotodama.
 
-A patient colleague used to make the player sit beside the person reporting a fault before touching anything. One user could reliably reproduce a problem by doing a perfectly reasonable thing the support team had never tried. The player remembers being wrong in front of that colleague without being humiliated. This accounts for asking someone to demonstrate, believing a report that sounds unlikely, and getting impatient when another technician dismisses a user. It also left a blind spot: once the player understands a problem, they can assume everyone else has caught up.
+The old workplace included a friend who was better at meeting people and worse at admitting a mistake. They made a good pair on difficult visits. The player sometimes let that friend speak for both of them, then complained afterwards about what had been agreed. On one memorable job the user was right and both technicians were wrong. Their later jokes about it are affectionate, but the player now has a reason to ask for a demonstration before dismissing a report.
 
-Home life was ordinary and sufficiently secure to make moving possible. Family gatherings involved sharing food and washing up while people continued talking from another room. The player is comfortable contributing to a group without becoming its centre. One relative still sends pictures of household purchases with a question about where to plug something in. There is affection here, and some irritation when every conversation becomes remote support.
+Outside work they had a regular group evening. It involved games, food and an argument about which old film to put on once nobody wanted another round. The player usually arrived with something useful and an opinion they would offer only after somebody else had committed. They can recognise this habit in themselves or dispute it when the old friend brings it up.
 
-The player has a small surviving circle from before the move. A regular game evening taught them how differently people explain rules; the friend who takes longest to learn is the one who remembers everyone's running jokes. They promised to keep joining occasionally from Japan and underestimated the scheduling difficulty. The move was a wanted change of surroundings and work.
+A relative still sends photographs of household purchases with technical questions. The messages are partly an excuse to make contact. Whether the player enjoys this, answers reluctantly or starts asking more about the relative's day belongs to role-playing. Silence from home should not automatically mean abandonment or a tragic family history.
 
-Previous romance stays available for player authorship. If a player elects to mention an earlier relationship, the proposed shared history is a relationship that ended because their plans stopped fitting, without a villain or an abandoned dependent. Gender, duration and whether the player wants to discuss it remain choices. Silence must not be interpreted as loneliness, repression or a particular orientation.
+Past romance stays under player authorship. Options may include a relationship they ended, one in which they were left, a mutually comfortable separation or little romantic experience. Each choice needs a specific later callback if implemented. Choosing one never fixes a former partner's gender or invents an obligation the player was not told about. Eric and Carina share this biography; their selected identity remains intact.
 
-## What this gives play
+## A life the player can shape
 
-The player notices where somebody puts their hands during a demonstration, saves a screw until the end of a job and asks before moving a personal object. They can be helpful while tired and still want to finish a meal without another request. Their independent desire is to make an ordinary life on the island: find a comfortable place to spend an evening, keep one old friendship alive and become able to arrange something without a colleague translating.
+The move has practical costs. An invitation from the old group now falls at an inconvenient time. Something left in storage needs a decision. The first week on the island produces acquaintances before it produces people the player would telephone without a reason. These can support optional moments of pleasure, awkwardness and homesickness without insisting that the protagonist feels all three.
 
-These are available expressions of character, not automatic actions overriding player choice. Dryness can be warm or guarded. Practical skill must not make every colleague less competent, and a successful repair must not decide what the player feels about living here.
+The player may want adventure and discover they value an ordinary meal with familiar people. They may enjoy being useful while rejecting more work after hours. They may be attracted to somebody without wanting to stay on the island permanently. Dialogue choices need room for these positions to coexist, and should remember what the player actually said.
 
-## Discoveries across play
+Their practical competence is real. Repairs should let them identify something a colleague has missed while sometimes needing that colleague's help. Knowing an English technical term does not make them the most perceptive person in every room. Their humour stays tired, polite and dry.
 
-1. At an ordinary repair, an optional reply mentions the earlier support job while asking the user to repeat what happened. Knowing `mouichido` supplies another way to make that request; it earns no invented experience.
-2. After the player chooses to mention a game evening, Kenji can later ask how it went. Missing it produces a small human follow-up, not a lost friendship meter. The player can admit the time-zone mistake or change the subject.
-3. During a meal invitation, the player may describe the family habit of washing up while everyone talks. Mori can respond by giving them a towel, without either person delivering a family biography.
-4. Once the player has chosen a personal conversation, a companion may ask what made them move. Work, curiosity and wanting a change are separate honest replies. Earlier romance is offered only if the player raises it.
+## Discovering the protagonist through choices
 
-The same proposed history is owned here for both protagonists; [Carina](carina.md) records how to preserve her identity without creating a contradictory second life.
+A new colleague asking why they came gets a short selection of honest answers, not a single compulsory life story. After the player has mentioned home, Kenji can ask whether the old group met. The player can admit missing the call, say they joined it or decline the topic; the game must establish the chosen event before recalling it.
+
+An early Japanese phrase heard during a discussion of returning home can be reconsidered after learning the relevant travel word elsewhere. The meaning might concern a visit, rather than leaving Amakawa. That gives language knowledge a personal consequence without deciding the player's future. Decisions about friendships, work and romance remain separate, and the same options work for both protagonists.

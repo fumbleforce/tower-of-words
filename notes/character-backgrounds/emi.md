@@ -1,6 +1,6 @@
 # Emi
 
-Proposed in play: Emi understands how to get a repair funded and delivered because she has done the coordination herself. She enjoys a successful argument enough to promise more than the team can comfortably carry.
+Proposed in play: Emi chose responsibility early and likes having it. Away from work she buys ridiculous furniture, swims to clear her head and is considering sharing a home again after several years of enjoying one entirely to herself.
 
 ## Established
 
@@ -8,27 +8,26 @@ Proposed in play: Emi understands how to get a repair funded and delivered becau
 
 ## Proposed history
 
-Emi's early work was in service coordination: following an issue from the first telephone call to the person who could actually resolve it. She learned enough technical detail to distinguish a necessary part from a convenient request, while relying on technicians to tell her what she did not know. On an early job she promised a delivery before checking the supplier's remaining stock. It eventually arrived, but two people had rearranged their weekends unnecessarily. She remembers their names and does not treat the incident as a dramatic career-ending failure.
+Emi's first serious job was coordinating repairs for a supplier whose customers were angry before they reached her. She discovered that she liked resolving an argument and was good at remembering what she had promised. She sought the next promotion. Leading B2 was a choice made with some idea of the problems, and she would make it again. She likes the team and wants the authority to give them a better working day.
 
-She moved through responsibility for handovers and small teams before leading B2. The work she enjoys is making a repair possible when the person doing it lacks time, permission or a comprehensible reply. She also enjoys winning an argument and can confuse that pleasure with having secured the best outcome. On a good day she returns from a meeting with parts approved; on a bad one she returns with an extra promise the team now has to keep.
+She also likes winning. A concession obtained from an awkward manager can keep her pleased for an hour before she notices what she offered in exchange. At thirty-two she has enough experience to know this about herself and can still do it. Her former supervisor now works elsewhere; their occasional calls contain gossip, advice neither reliably follows and complaints about one another's taste in clothes.
 
-Her family and friends stayed close through fairly practical contact. One friend gives rambling accounts of a minor domestic purchase; Emi used to interrupt with a solution until the friend told her she was spoiling the story. They now deliberately call when neither is doing a task. These calls are enjoyable, not a weekly lesson in boundaries.
+A long relationship ended because Emi decided she wanted to live alone. Her partner wanted to keep trying and was hurt by how settled she already sounded. They no longer speak regularly. Emi sometimes misses being known that well, especially when she is ill, without wishing she had stayed.
 
-She swam regularly before managing people. She likes the repetitive physical effort and the conversations that resume afterwards with no need to fill the silence between lengths. The club offers something she already values, rather than a cure she has never considered.
+Living alone has made her unexpectedly fussy about some things and careless about others. She will eat supper from the pan, but the lamp beside the chair has to give exactly the right light. She buys second-hand furniture for imagined rooms larger than the one she has. A narrow green cabinet now blocks a cupboard unless she moves the chair. She likes it enough to keep moving the chair.
 
-A former long-term partner wanted to settle near a network of family and friends; Emi accepted a role that made that difficult. They tried making it work, then chose separately. She does not think choosing work was automatically wrong. What she regrets is speaking as though another person's life would sort itself around a decision she had already made. They occasionally exchange straightforward good wishes and do not remain a hidden romantic obstacle.
+Swimming belongs to years before B2. It is exercise she enjoys and an occasion to hear people talk about something she cannot approve or fund. She can become competitive over a distance she claims she is only swimming for pleasure. On an evening out she likes noisy places more than her colleagues expect, provided she chose to go.
 
-## What this gives play
+## A choice she has not made
 
-She can simplify an awkward request without talking down to its owner. Her habit of starting with the good news sometimes makes a genuine concern harder to hear. She asks the team's view, then starts answering her own question before they have finished. She can be funny about this without being the writer's self-aware management lecture.
+An old friend is moving nearer and has suggested sharing a place. They lived together briefly years ago and remember different things about it. Emi remembers good late dinners. The friend remembers Emi deciding which belongings could stay in the shared room. Both want the cheaper rent and the company; Emi is already measuring furniture before they have agreed.
 
-She wants to swim a comfortable continuous distance again and visit an old friend without combining the trip with company business. Her travel plans may progress offscreen. Ordinary tells include marking the important number before a meeting, putting a wet towel where it will actually dry, and remembering a friend's irrelevant purchase weeks later.
+This can run beside the swimming route without repeating its lessons. Emi may choose to keep separate homes and help the friend find somewhere nearby. She may try sharing and find parts of it difficult. The decision should cost her something she would enjoy in the other version.
 
-## Discoveries across play
+Her fondness for her team does not make all company decisions generous. She may choose an unpopular repair priority because she thinks it is necessary and expect the player to do the work. Later she can ask their view without disguising the fact that they disagreed.
 
-1. At a work pause she can explain why she checks a delivery date twice, prompted by a current parts conversation. The old weekend mistake supplies context, not another ticket.
-2. Her existing optional `mouichido` practice can be recalled during a club exercise somebody else leads. She can enjoy being shown again without immediately becoming the teacher.
-3. After regular club contact, she mentions the friend she wants to visit. `yoyaku` recognised in an earlier booking remark opens whether she has settled a date; it does not expose a calendar or private message.
-4. When a conversation has already become personal, she may explain why she asks directly what an invitation would mean for someone else's plans. The past partner is hers to mention.
+## Getting to know her
 
-The established route still owns the first full session she completes under somebody else's organisation.
+An early off-duty conversation can concern the cabinet. She has a photograph because she is proud of finding it cheaply; whether it fits is a separate question she would rather avoid. A later mention of a shared flat gives an earlier `isshoni` remark new context. The player can revisit it after learning the word in a club invitation, then ask which plan she chose after any number of game days.
+
+Her sentences stay quick and complete. When she is uncomfortable she describes the practical part of a decision in unnecessary detail, then gives one abrupt, plain admission. Do not have her diagnose this habit aloud. More personal history follows an exchange in which the player has also had room to say something, rather than a sequence of interview questions.
