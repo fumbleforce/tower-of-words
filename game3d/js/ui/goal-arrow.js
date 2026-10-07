@@ -93,8 +93,11 @@ export function installGoalArrow({ game, phone, paused, root }) {
       show = true;
       target = m;
       // the arrow sits where the goal would be, pulled in to the screen edge, and points out toward it
+      // #top uses CSS zoom and can grow when a hint wraps. A fixed top inset
+      // leaves no horizontal escape once that row reaches the arrow's old y.
+      const top = rect(document.getElementById('top'));
       const edge = 34,
-        topM = phone() ? 150 : 90,
+        topM = Math.max(phone() ? 150 : 90, (top?.y1 || 0) + size[1] / 2 + PAD),
         botM = phone() ? 110 : 70;
       let ax = Math.max(edge, Math.min(W - edge, x)),
         ay = Math.max(topM, Math.min(H - botM, y));

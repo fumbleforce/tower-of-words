@@ -1,0 +1,395 @@
+{
+  "title": "Destination arrows stay clear of the objective",
+  "date": "2026-10-07",
+  "by": "Codex",
+  "caption": "The destination arrow adjusts to the current HUD height when the interface grows or a hint wraps.",
+  "preview": "round1-2560-1-arrival",
+  "sections": [
+    {
+      "title": "Initial diagnostic: ordinary overview",
+      "caption": "No collision here; retained before matching the reported lens.",
+      "images": [
+        {
+          "id": "baseline1-1366-1-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/1366-1-arrival.webp",
+          "caption": "1366 1 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-1366-1-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/1366-1-garden.webp",
+          "caption": "1366 1 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-1366-1-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/1366-1-north.webp",
+          "caption": "1366 1 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-1366-1.4-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/1366-1.4-arrival.webp",
+          "caption": "1366 1.4 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-1366-1.4-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/1366-1.4-garden.webp",
+          "caption": "1366 1.4 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-1366-1.4-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/1366-1.4-north.webp",
+          "caption": "1366 1.4 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-2560-1-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/2560-1-arrival.webp",
+          "caption": "2560 1 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-2560-1-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/2560-1-garden.webp",
+          "caption": "2560 1 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-2560-1-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/2560-1-north.webp",
+          "caption": "2560 1 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-2560-1.4-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/2560-1.4-arrival.webp",
+          "caption": "2560 1.4 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-2560-1.4-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/2560-1.4-garden.webp",
+          "caption": "2560 1.4 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-2560-1.4-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/2560-1.4-north.webp",
+          "caption": "2560 1.4 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-390-1-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/390-1-arrival.webp",
+          "caption": "390 1 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-390-1-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/390-1-garden.webp",
+          "caption": "390 1 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline1-390-1-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline1/390-1-north.webp",
+          "caption": "390 1 north. HUD diagnostic with stock scene geometry."
+        }
+      ]
+    },
+    {
+      "title": "Reproduced overlap",
+      "caption": "Three enlarged or wide-screen cases put the destination over the objective.",
+      "images": [
+        {
+          "id": "baseline2-1366-1-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/1366-1-arrival.webp",
+          "caption": "1366 1 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-1366-1-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/1366-1-garden.webp",
+          "caption": "1366 1 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-1366-1-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/1366-1-north.webp",
+          "caption": "1366 1 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-1366-1.4-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/1366-1.4-arrival.webp",
+          "caption": "1366 1.4 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-1366-1.4-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/1366-1.4-garden.webp",
+          "caption": "1366 1.4 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-1366-1.4-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/1366-1.4-north.webp",
+          "caption": "1366 1.4 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-2560-1-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/2560-1-arrival.webp",
+          "caption": "2560 1 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-2560-1-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/2560-1-garden.webp",
+          "caption": "2560 1 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-2560-1-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/2560-1-north.webp",
+          "caption": "2560 1 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-2560-1.4-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/2560-1.4-arrival.webp",
+          "caption": "2560 1.4 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-2560-1.4-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/2560-1.4-garden.webp",
+          "caption": "2560 1.4 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-2560-1.4-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/2560-1.4-north.webp",
+          "caption": "2560 1.4 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-390-1-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/390-1-arrival.webp",
+          "caption": "390 1 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-390-1-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/390-1-garden.webp",
+          "caption": "390 1 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "baseline2-390-1-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/baseline2/390-1-north.webp",
+          "caption": "390 1 north. HUD diagnostic with stock scene geometry."
+        }
+      ]
+    },
+    {
+      "title": "Rendered HUD clearance",
+      "caption": "Destination stays below the current HUD bounds through resizing, enlarged UI and wrapped hints.",
+      "images": [
+        {
+          "id": "round1-1366-1-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/1366-1-arrival.webp",
+          "caption": "1366 1 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-1366-1-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/1366-1-garden.webp",
+          "caption": "1366 1 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-1366-1-hint",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/1366-1-hint.webp",
+          "caption": "1366 1 hint. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-1366-1-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/1366-1-north.webp",
+          "caption": "1366 1 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-1366-1.4-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/1366-1.4-arrival.webp",
+          "caption": "1366 1.4 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-1366-1.4-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/1366-1.4-garden.webp",
+          "caption": "1366 1.4 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-1366-1.4-hint",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/1366-1.4-hint.webp",
+          "caption": "1366 1.4 hint. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-1366-1.4-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/1366-1.4-north.webp",
+          "caption": "1366 1.4 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-2560-1-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/2560-1-arrival.webp",
+          "caption": "2560 1 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-2560-1-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/2560-1-garden.webp",
+          "caption": "2560 1 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-2560-1-hint",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/2560-1-hint.webp",
+          "caption": "2560 1 hint. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-2560-1-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/2560-1-north.webp",
+          "caption": "2560 1 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-2560-1.4-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/2560-1.4-arrival.webp",
+          "caption": "2560 1.4 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-2560-1.4-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/2560-1.4-garden.webp",
+          "caption": "2560 1.4 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-2560-1.4-hint",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/2560-1.4-hint.webp",
+          "caption": "2560 1.4 hint. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-2560-1.4-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/2560-1.4-north.webp",
+          "caption": "2560 1.4 north. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-390-1-arrival",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/390-1-arrival.webp",
+          "caption": "390 1 arrival. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-390-1-garden",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/390-1-garden.webp",
+          "caption": "390 1 garden. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-390-1-hint",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/390-1-hint.webp",
+          "caption": "390 1 hint. HUD diagnostic with stock scene geometry."
+        },
+        {
+          "id": "round1-390-1-north",
+          "image": "bible/shots/showcase/destination-pin-20261007/round1/390-1-north.webp",
+          "caption": "390 1 north. HUD diagnostic with stock scene geometry."
+        }
+      ]
+    },
+    {
+      "title": "Additional directions: diagnostic mismatch",
+      "caption": "No HUD overlaps. The direction assertion compared against the ticket pin while another exit was shown; this failed diagnostic is retained.",
+      "images": [
+        {
+          "id": "directions1-1366-1-office",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions1/1366-1-office.webp",
+          "caption": "1366 1 office. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions1-1366-1-plaza",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions1/1366-1-plaza.webp",
+          "caption": "1366 1 plaza. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions1-1366-1.4-office",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions1/1366-1.4-office.webp",
+          "caption": "1366 1.4 office. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions1-1366-1.4-plaza",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions1/1366-1.4-plaza.webp",
+          "caption": "1366 1.4 plaza. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions1-2560-1-office",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions1/2560-1-office.webp",
+          "caption": "2560 1 office. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions1-2560-1-plaza",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions1/2560-1-plaza.webp",
+          "caption": "2560 1 plaza. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions1-2560-1.4-office",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions1/2560-1.4-office.webp",
+          "caption": "2560 1.4 office. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions1-2560-1.4-plaza",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions1/2560-1.4-plaza.webp",
+          "caption": "2560 1.4 plaza. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions1-390-1-office",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions1/390-1-office.webp",
+          "caption": "390 1 office. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions1-390-1-plaza",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions1/390-1-plaza.webp",
+          "caption": "390 1 plaza. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        }
+      ]
+    },
+    {
+      "title": "Other destination directions",
+      "caption": "Existing office and plaza exits isolated as the goal. All ten arrows clear the HUD and retain the projected direction, including mirrored right-side labels.",
+      "images": [
+        {
+          "id": "directions2-1366-1-office",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions2/1366-1-office.webp",
+          "caption": "1366 1 office. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions2-1366-1-plaza",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions2/1366-1-plaza.webp",
+          "caption": "1366 1 plaza. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions2-1366-1.4-office",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions2/1366-1.4-office.webp",
+          "caption": "1366 1.4 office. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions2-1366-1.4-plaza",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions2/1366-1.4-plaza.webp",
+          "caption": "1366 1.4 plaza. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions2-2560-1-office",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions2/2560-1-office.webp",
+          "caption": "2560 1 office. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions2-2560-1-plaza",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions2/2560-1-plaza.webp",
+          "caption": "2560 1 plaza. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions2-2560-1.4-office",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions2/2560-1.4-office.webp",
+          "caption": "2560 1.4 office. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions2-2560-1.4-plaza",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions2/2560-1.4-plaza.webp",
+          "caption": "2560 1.4 plaza. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions2-390-1-office",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions2/390-1-office.webp",
+          "caption": "390 1 office. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        },
+        {
+          "id": "directions2-390-1-plaza",
+          "image": "bible/shots/showcase/destination-pin-20261007/directions2/390-1-plaza.webp",
+          "caption": "390 1 plaza. Existing exit isolated as a diagnostic goal; stock scene geometry."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}
