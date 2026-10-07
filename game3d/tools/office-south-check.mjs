@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { blockedSource } from '../../tools/bible/check-scope.mjs';
 import { waitForGame } from '../test/support/wait-ready.mjs';
-const base = process.env.BASE || '.claude/worktrees/codex-office-south-road/game3d';
+const base = process.env.BASE || 'game3d';
 const out = process.env.OUT || new URL('../shots/office-south-route/', import.meta.url).pathname;
 const width = +(process.argv[2] || 1366),
   height = +(process.argv[3] || 860),

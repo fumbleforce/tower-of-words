@@ -3,7 +3,7 @@ import {scopedRoute} from '../../tools/bible/check-scope.mjs';
 import {withBrowserJob} from '../../tools/lib/browser-job.mjs';
 import {waitForGame} from '../test/support/wait-ready.mjs';
 const width=+(process.argv[2]||1366),height=width<600?844:860;
-const base=process.env.BASE||'.claude/worktrees/codex-north-campus/game3d';
+const base=process.env.BASE||'game3d';
 const out=new URL('../shots/north-campus/draft3/',import.meta.url).pathname;fs.mkdirSync(out,{recursive:true});
 await withBrowserJob('campus-initial-'+width,async browser=>{
  const context=await browser.newContext({viewport:{width,height},isMobile:width<600,hasTouch:width<600}),page=await context.newPage(),errors=[];

@@ -8,7 +8,7 @@ const width = +(process.argv[2] || 1366),
   phone = width < 600;
 const serviceOnly = process.env.SERVICE === '1';
 const gardenOnly = process.env.GARDEN === '1';
-const base = process.env.BASE || '.claude/worktrees/codex-north-grounds/game3d';
+const base = process.env.BASE || 'game3d';
 const out = new URL(`../shots/north-grounds/${process.env.OUT || 'round1'}/`, import.meta.url).pathname;
 fs.mkdirSync(out, { recursive: true });
 await withBrowserJob(

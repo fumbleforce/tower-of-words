@@ -5,7 +5,7 @@ import {withBrowserJob} from '../../tools/lib/browser-job.mjs';
 import {waitForGame} from '../test/support/wait-ready.mjs';
 const width=+(process.argv[2]||1366),part=process.argv[3]||'loop',phone=width<600,height=phone?844:860;
 const day=+(process.env.DAY||3);
-const base=process.env.BASE||'.claude/worktrees/codex-north-campus/game3d';
+const base=process.env.BASE||'game3d';
 const out=new URL(`../shots/north-campus/${process.env.OUT||`routes-verge-${part}`}/`,import.meta.url).pathname;fs.mkdirSync(out,{recursive:true});
 await withBrowserJob(`campus-route-${part}-${width}`,async browser=>{
  const context=await browser.newContext({viewport:{width,height},isMobile:phone,hasTouch:phone}),page=await context.newPage(),errors=[],checks=[];

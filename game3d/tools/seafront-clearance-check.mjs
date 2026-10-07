@@ -7,7 +7,7 @@ const width = +(process.argv[2] || 1366),
   phone = width < 600,
   height = phone ? 844 : 860;
 const poseOnly = process.env.POSE_ONLY === '1';
-const base = process.env.BASE || '.claude/worktrees/codex-shotengai-clearance/game3d';
+const base = process.env.BASE || 'game3d';
 const out = `game3d/shots/shotengai-clearance/${process.env.ROUND || 'benches-seated'}`;
 fs.mkdirSync(out, { recursive: true });
 await withBrowserJob(

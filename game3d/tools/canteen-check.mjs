@@ -5,7 +5,7 @@ import path from 'node:path';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { waitForGame } from '../test/support/wait-ready.mjs';
 const output = new URL('../shots/canteen-interior/', import.meta.url).pathname;
-const base = process.env.BASE || '.claude/worktrees/codex-canteen-interior/game3d';
+const base = process.env.BASE || 'game3d';
 const width = +(process.argv[2] || 1366), height = +(process.argv[3] || 860), phone = width < height;
 const size = `${width}x${height}`;
 fs.mkdirSync(output, { recursive: true });
