@@ -2,10 +2,12 @@ import { Parts } from '../outdoor/parts.js';
 import { paver, GRANITE } from '../outdoor/paving.js';
 import { laneField } from '../outdoor/lane.js';
 import { kerb } from '../outdoor/edges.js';
-import { keyaki, pine, sakura, cluster, bed } from '../outdoor/planting.js';
+import { cluster, bed } from '../outdoor/planting.js';
 import { lamps, bench, fingerSign } from '../outdoor/furniture.js';
 import { CAMPUS_PATHS } from '../island-campus.js';
 import { pt, BENCH, BEDS } from './plan.js';
+import { campusLandscape } from './landscape.js';
+import { campusServiceFront } from './service-front.js';
 
 // Model the previously empty campus ground from its real mapped path footprints.
 export function* campusGrounds(root, lights) {
@@ -68,22 +70,8 @@ export function* campusGrounds(root, lights) {
       from = b;
     }
   }
-  const groups = [
-    [-37.3, -40.2, 1.1, pine],
-    [-39.4, -36.9, 0.9, pine],
-    [-33.2, -36.7, 1.05, sakura],
-    [-27.9, -31.1, 1.15, keyaki],
-    [-24, -36.4, 0.95, keyaki],
-    [-11.8, -36.2, 1.1, sakura],
-    [-8.9, -42.1, 0.95, keyaki],
-    [-3.4, -27.4, 1.0, keyaki],
-    [0.6, -37.3, 0.85, sakura],
-  ];
-  groups.forEach(([x, z, size, tree], i) => {
-    const p = pt([x, z]);
-    tree(parts, ...p, size, 830 + i);
-    cluster(parts, p[0] + 0.65, p[1] + 0.3, { n: 3, r: 0.32, seed: 830 + i });
-  });
+  campusLandscape(parts);
+  campusServiceFront(parts);
   for (const box of BEDS) {
     const a = pt([box[0], box[2]]),
       b = pt([box[1], box[3]]);

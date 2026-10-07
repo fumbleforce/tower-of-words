@@ -76,3 +76,122 @@ test('print shop occupies w3 and keeps all usable approaches connected around so
 });
 
 process.on('exit',()=>hooks.deregister());
+
+const { CAMPUS_GARDENS, CAMPUS_TREES, CAMPUS_DETAILS, PRINT_APRONS, insideGarden, gardenPlants } =
+  await import('../../js/scenes/campus/landscape-plan.js');
+const { campusLandscape } = await import('../../js/scenes/campus/landscape.js');
+const { drawPlanting } = await import('../../js/ui/map/terrain.js');
+test('campus landscaping preserves the nine tree identities and all existing crossing/seat approaches', () => {
+  assert.deepEqual(CAMPUS_TREES, [
+    ['pine', -37.3, -40.2, 1.1, 830],
+    ['pine', -39.4, -36.9, 0.9, 831],
+    ['sakura', -33.2, -36.7, 1.05, 832],
+    ['keyaki', -27.9, -31.1, 1.15, 833],
+    ['keyaki', -24, -36.4, 0.95, 834],
+    ['sakura', -11.8, -36.2, 1.1, 835],
+    ['keyaki', -8.9, -42.1, 0.95, 836],
+    ['keyaki', -3.4, -27.4, 1, 837],
+    ['sakura', 0.6, -37.3, 0.85, 838],
+  ]);
+  const w = buildCampus();
+  for (const garden of CAMPUS_GARDENS) {
+    const xs = garden.poly.map((p) => p[0]),
+      zs = garden.poly.map((p) => p[1]);
+    for (let x = Math.min(...xs); x <= Math.max(...xs); x += 0.12)
+      for (let z = Math.min(...zs); z <= Math.max(...zs); z += 0.12)
+        if (insideGarden(garden.poly, x, z))
+          assert.equal(w.nav.free(...P.pt([x, z])), false, `${garden.id} occupies walk ${x},${z}`);
+    assert.deepEqual(gardenPlants(garden), gardenPlants(garden), 'rebuild is deterministic');
+  }
+  for (const [id, [x, z, width, depth]] of Object.entries(CAMPUS_DETAILS))
+    for (let xx = x - width / 2; xx <= x + width / 2; xx += 0.1)
+      for (let zz = z - depth / 2; zz <= z + depth / 2; zz += 0.1)
+        assert.equal(w.nav.free(...P.pt([xx, zz])), false, `${id} occupies walk`);
+  for (const p of [P.BENCH.out, P.PRINT_STEP, ...Object.values(P.EXITS).map((e) => e.in)])
+    assert.ok(w.nav.path(...P.IN, ...p).length);
+});
+test('both new print apron wings are real reachable paving beside the original door path', () => {
+  const w = buildCampus();
+  for (const {
+    rect: [x, z, x1, z1],
+  } of PRINT_APRONS) {
+    const p = P.pt([(x + x1) / 2, (z + z1) / 2]);
+    assert.ok(w.nav.free(...p));
+    assert.ok(w.nav.path(...P.PRINT_STEP, ...p).length);
+  }
+});
+test('physical garden boundary and map boundary use the exact same shared polygon', () => {
+  const garden = CAMPUS_GARDENS[0],
+    original = garden.poly[0][0];
+  garden.poly[0][0] = original + 0.123; // A layout edit must reach both consumers without a parallel map edit.
+  try {
+    const vertices = [];
+    const parts = {
+      geo(color, g) {
+        if (g.type === 'ShapeGeometry')
+          for (let i = 0; i < g.attributes.position.count; i++)
+            vertices.push([g.attributes.position.getX(i), g.attributes.position.getZ(i)]);
+        g.dispose();
+      },
+      box() {},
+    };
+    campusLandscape(parts);
+    const paths = [];
+    let active;
+    const ctx = new Proxy(
+      {
+        beginPath() {
+          active = [];
+        },
+        moveTo(x, z) {
+          active.push([x, z]);
+        },
+        lineTo(x, z) {
+          active.push([x, z]);
+        },
+        fill() {
+          if (active?.length) paths.push(active);
+          active = null;
+        },
+      },
+      { get: (o, k) => o[k] || (() => {}) },
+    );
+    drawPlanting(ctx, false);
+    for (const p of garden.poly) {
+      const q = P.pt(p);
+      assert.ok(vertices.some((v) => Math.hypot(v[0] - q[0], v[1] - q[1]) < 1e-5));
+      assert.ok(paths.some((path) => path.some((v) => v[0] === p[0] && v[1] === p[1])));
+    }
+  } finally {
+    garden.poly[0][0] = original;
+  }
+});
+
+const { campusServiceFront } = await import('../../js/scenes/campus/service-front.js');
+const { PRINT_SERVICE_PAD, SERVICE_PAD_TOP, gardenCover } = await import('../../js/scenes/campus/landscape-plan.js');
+test('the actual print-stock hardstanding supports the trolley and keeps equipment out of the walking apron', () => {
+  const boxes = [], wheels = [], w = buildCampus();
+  const parts = {
+    box(color, width, height, depth, x, y, z) { boxes.push({ color, width, height, depth, x, y, z }); },
+    geo(color, g) { if (color === '#3f4848') { g.computeBoundingBox(); wheels.push(g.boundingBox.clone()); } g.dispose(); },
+  };
+  campusServiceFront(parts);
+  const pad = boxes.find(b => b.color === '#9b9f92');
+  const [x,z,x1,z1] = PRINT_SERVICE_PAD, a=P.pt([x,z]), b=P.pt([x1,z1]);
+  assert.ok(Math.abs(pad.x-pad.width/2-a[0])<1e-9 && Math.abs(pad.x+pad.width/2-b[0])<1e-9);
+  assert.ok(Math.abs(pad.z-pad.depth/2-a[1])<1e-9 && Math.abs(pad.z+pad.depth/2-b[1])<1e-9);
+  assert.equal(wheels.length,4);
+  for(const wheel of wheels){
+    assert.ok(wheel.min.y>=SERVICE_PAD_TOP && wheel.min.y<SERVICE_PAD_TOP+.004);
+    assert.ok(wheel.min.x>=a[0] && wheel.max.x<=b[0] && wheel.min.z>=a[1] && wheel.max.z<=b[1]);
+  }
+  for(const box of boxes.filter(b=>b.height>.06))for(const dx of [-.5,0,.5])for(const dz of [-.5,0,.5])
+    assert.equal(w.nav.free(box.x+box.width*dx,box.z+box.depth*dz),false,`${box.color} intrudes into a public path`);
+});
+test('the low planted layer overlaps into groups while keeping its edges within the shared outline', () => {
+ for(const garden of CAMPUS_GARDENS){
+  const cover=gardenCover(garden);assert.ok(cover.length>8,garden.id);
+  assert.ok(cover.filter(a=>cover.some(b=>a!==b&&Math.hypot(a.x-b.x,a.z-b.z)<a.r+b.r)).length>cover.length*.9);
+  for(const p of cover)for(let i=0;i<8;i++)assert.ok(insideGarden(garden.poly,p.x+Math.cos(i*Math.PI/4)*p.r,p.z+Math.sin(i*Math.PI/4)*p.r));
+ }
+});
