@@ -29,6 +29,8 @@ export const INK = {
 // what the map can be panned over: the built half of the island and its water
 export const BOUNDS = { x0: -132, x1: 142, z0: -140, z1: 58 };
 
+export const NORTH_FADE = 45;
+
 let layers = null;
 const newPath = () => new window.Path2D();
 function poly(pts, p = newPath()) {
@@ -189,7 +191,7 @@ export function drawBase(ctx, v) {
     ctx.setTransform(v.dpr, 0, 0, v.dpr, 0, 0);
     const edge = v.h / 2 + (BOUNDS.z0 - v.cz) * v.scale;
     if (edge > 0) {
-      const fade = ctx.createLinearGradient(0, Math.max(0, edge - 45), 0, edge + 18);
+      const fade = ctx.createLinearGradient(0, Math.max(0, edge - NORTH_FADE), 0, edge + 18);
       fade.addColorStop(0, '#e4e3ce');
       fade.addColorStop(1, '#e4e3ce00');
       ctx.fillStyle = fade;

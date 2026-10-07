@@ -3,13 +3,14 @@
 // the goal's flag; the picked place's card is a bottom sheet on the phone and a side panel on desktop
 // (ui/map/panel.js). Drag to pan, pinch or wheel to zoom; M, Esc or the close button shuts it. While it is open the
 // game is paused and the 3D view isn't drawn (main.js tick reads game.mapOpen). The canvas is emptied on close.
-import { drawBase, toView, fromView, BOUNDS } from './base.js';
+import { drawBase, toView, fromView, BOUNDS, NORTH_FADE } from './base.js';
 import { ericAt, goalAt } from './where.js';
 import { cardHTML, listHTML, pinClass, dot } from './panel.js';
 import { PINS, pinOf } from '../../travel/pins.js';
 import { travelStates, goTo } from '../../travel/go.js';
 import { sim, periodName } from '../../sim.js';
-import { placeLabels } from './labels.js';
+import { placeLabels, drawLabelLeader, labelRect } from './labels.js';
+import { fitMap, clampMap, mapFrame, sizeMap } from './viewport.js';
 import { drawCartography, scaleMetres } from './cartography.js';
 import { mapGoal, mapPlayer } from './marks.js';
 
@@ -53,28 +54,24 @@ export function createMapView(game) {
     raf = 0,
     eric = null,
     goal = null,
-    minScale = 1;
+    minScale = 1,
+    fitted = false,
+    frame = null;
   const pins = {}; // id -> button
 
   // ---------- drawing ----------
-  function clampView() {
-    v.scale = Math.max(minScale, Math.min(14, v.scale));
-    const hw = v.w / 2 / v.scale,
-      hh = v.h / 2 / v.scale;
-    const fit = (c, lo, hi, half) => (hi - lo < half * 2 ? (lo + hi) / 2 : Math.max(lo + half, Math.min(hi - half, c)));
-    v.cx = fit(v.cx, BOUNDS.x0, BOUNDS.x1, hw);
-    v.cz = fit(v.cz, BOUNDS.z0, BOUNDS.z1, hh);
-  }
   function size() {
-    const r = area.getBoundingClientRect();
-    v.w = Math.max(1, r.width);
-    v.h = Math.max(1, r.height);
-    v.dpr = Math.min(2, window.devicePixelRatio || 1);
-    canvas.width = Math.round(v.w * v.dpr);
-    canvas.height = Math.round(v.h * v.dpr);
-    canvas.style.width = v.w + 'px';
-    canvas.style.height = v.h + 'px';
-    minScale = Math.min(v.w / (BOUNDS.x1 - BOUNDS.x0), v.h / (BOUNDS.z1 - BOUNDS.z0));
+    const { rect, ...dimensions } = sizeMap(area, canvas);
+    Object.assign(v, dimensions);
+    frame = mapFrame(
+      rect,
+      [$('.mv-head'), $('.mv-goal')],
+      ['.mv-tools', '.mv-legend', '.mv-scale', '.mv-help'].map($),
+      NORTH_FADE,
+      BOUNDS,
+    );
+    minScale = fitMap(BOUNDS, v, frame).scale;
+    if (fitted) Object.assign(v, fitMap(BOUNDS, v, frame));
   }
   const redraw = () => {
     if (!raf && open) raf = requestAnimationFrame(draw);
@@ -82,7 +79,7 @@ export function createMapView(game) {
   function draw() {
     raf = 0;
     if (!open) return;
-    clampView();
+    clampMap(v, BOUNDS, frame, minScale);
     drawBase(ctx, v);
     const metres = scaleMetres(v.scale);
     $('.mv-scale span').textContent = `${metres} m`;
@@ -114,7 +111,13 @@ export function createMapView(game) {
     const at = (id) => toView(v, ...PINS[id].at);
     const e = eric ? toView(v, eric.x, eric.z) : [v.w / 2, v.h / 2];
     const rank = (id) =>
-      id === selected ? -2 : states[id]?.state === 'here' ? -1 : Math.hypot(...at(id).map((c, i) => c - e[i]));
+      id === selected
+        ? -4
+        : states[id]?.state === 'here'
+          ? -3
+          : phone() && v.scale < 2 && ['plaza', 'dorm_court'].includes(id)
+            ? -2
+            : Math.hypot(...at(id).map((c, i) => c - e[i]));
     const points = Object.keys(pins)
       .sort((a, b) => rank(a) - rank(b))
       .map((id) => {
@@ -141,9 +144,14 @@ export function createMapView(game) {
       });
     const captionBlocks = [
       ...blocked,
-      ...points.map((p) => ({ x0: p.x - 24, x1: p.x + 24, y0: p.y - 24, y1: p.y + 24 })),
+      ...points.map((p) => ({
+        x0: p.x - 24,
+        x1: p.x + 24,
+        y0: p.y - 24,
+        y1: p.y + 24,
+      })),
     ];
-    for (const result of placeLabels(points, v.w, v.h, phone() ? 86 : 70, blocked)) {
+    for (const result of placeLabels(points, v.w, v.h, frame.top, blocked)) {
       const b = pins[result.id],
         label = b.querySelector('.lb');
       b.classList.toggle('nolabel', !!result.hidden);
@@ -151,25 +159,11 @@ export function createMapView(game) {
       label.style.top = `${22 + (result.dy || 0)}px`;
       if (!result.hidden) {
         const p = points.find((p) => p.id === result.id);
-        captionBlocks.push({
-          x0: p.x + result.dx,
-          x1: p.x + result.dx + p.width,
-          y0: p.y + result.dy - 16,
-          y1: p.y + result.dy + 16,
-        });
+        captionBlocks.push(labelRect(p, result.dx, result.dy, 16));
       }
       if (!result.hidden && result.dy) {
         const p = points.find((p) => p.id === result.id);
-        ctx.strokeStyle = '#f7f0df';
-        ctx.lineWidth = 3.5;
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x + (result.dx < 0 ? -18 : 18), p.y + result.dy);
-        ctx.lineTo(p.x + (result.dx < 0 ? result.dx + p.width : result.dx), p.y + result.dy);
-        ctx.stroke();
-        ctx.strokeStyle = '#35544b';
-        ctx.lineWidth = 1.25;
-        ctx.stroke();
+        drawLabelLeader(ctx, p, result);
       }
     }
     return captionBlocks;
@@ -230,15 +224,11 @@ export function createMapView(game) {
     goal = goalAt(game);
     root.classList.remove('places-open');
     $('.mv-places').setAttribute('aria-expanded', 'false');
+    fitted = !phone();
     size();
     const here = eric || { x: 0, z: 0 };
     if (phone()) Object.assign(v, { scale: 3.25, cx: here.x, cz: here.z });
-    else
-      Object.assign(v, {
-        scale: minScale * 1.02,
-        cx: (BOUNDS.x0 + BOUNDS.x1) / 2,
-        cz: (BOUNDS.z0 + BOUNDS.z1) / 2,
-      });
+    else Object.assign(v, fitMap(BOUNDS, v, frame));
     picked = phone() ? null : game.place?.name || null;
     buildPins();
     side();
@@ -273,10 +263,16 @@ export function createMapView(game) {
       zoomAt(t.dataset.zoom === 'in' ? 1.35 : 1 / 1.35, v.w / 2, v.h / 2);
       redraw();
     } else if (t.classList.contains('mv-home')) {
-      Object.assign(v, { cx: eric?.x || 0, cz: eric?.z || 0, scale: phone() ? 3.25 : 5 });
+      fitted = false;
+      Object.assign(v, {
+        cx: eric?.x || 0,
+        cz: eric?.z || 0,
+        scale: phone() ? 3.25 : 5,
+      });
       redraw();
     } else if (t.classList.contains('mv-fit')) {
-      Object.assign(v, { cx: (BOUNDS.x0 + BOUNDS.x1) / 2, cz: (BOUNDS.z0 + BOUNDS.z1) / 2, scale: minScale });
+      fitted = true;
+      Object.assign(v, fitMap(BOUNDS, v, frame));
       redraw();
     } else if (t.classList.contains('mv-places')) {
       const expanded = root.classList.toggle('places-open');
@@ -334,6 +330,7 @@ export function createMapView(game) {
     const dx = e.clientX - p[0],
       dy = e.clientY - p[1];
     ptrs.set(e.pointerId, [e.clientX, e.clientY]);
+    fitted = false;
     if (ptrs.size === 1) {
       v.cx -= dx / v.scale;
       v.cz -= dy / v.scale;
@@ -362,9 +359,10 @@ export function createMapView(game) {
   area.addEventListener('pointerup', up);
   area.addEventListener('pointercancel', up);
   function zoomAt(k, px, py) {
+    fitted = false;
     const [x, z] = fromView(v, px, py);
     v.scale *= k;
-    clampView();
+    clampMap(v, BOUNDS, frame, minScale);
     v.cx = x - (px - v.w / 2) / v.scale;
     v.cz = z - (py - v.h / 2) / v.scale;
   }
@@ -390,5 +388,12 @@ export function createMapView(game) {
     side();
   });
 
-  return { open: openMap, close, isOpen: () => open, pick, states: () => states, root };
+  return {
+    open: openMap,
+    close,
+    isOpen: () => open,
+    pick,
+    states: () => states,
+    root,
+  };
 }
