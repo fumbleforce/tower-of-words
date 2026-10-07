@@ -10,7 +10,8 @@ if (selection && !names.includes(selection)) throw new Error('Unknown transition
 try {
   await withBrowserJob('transition-saves', async browser => {
     for (const scenario of selection ? [selection] : names) {
-      const place = scenario === 'braking' ? 'train' : scenario.startsWith('lift') ? 'gate' : 'office';
+      // The head-office lift is in the forecourt; the gate now leads to the outdoor walk.
+      const place = scenario === 'braking' ? 'train' : scenario.startsWith('lift') ? 'forecourt' : 'office';
       const saved = { ...structuredClone(fixture), place, period: place === 'office' ? 'morning' : 'early',
         flags: { ...fixture.flags, place, sat: true, gateOpen: true, cardOk: true, gate_through: true },
         runner: { onceDone: [], execution: null }, ui: { goal: '', sideGoal: '' } };
@@ -77,7 +78,7 @@ try {
             g.paused = true;
             if (scenario === 'lift-arriving') {
               localStorage.setItem('amakawa-day1-save', JSON.stringify(window.__arrivingSave));
-            } else if (scenario === 'lift-leaving') S.save(g); // a real manual save during the ride
+            } else S.save(g); // a real manual save of the paused brake or lift ride, not an earlier autosave
             return S.loadSave();
           }, scenario);
           if (scenario === 'braking') {
@@ -87,7 +88,7 @@ try {
           } else {
             assert.equal(captured.transition.to, 'office');
             assert.equal(captured.transition.phase, scenario === 'lift-arriving' ? 'arriving' : 'leaving');
-            assert.ok(captured.runner.onceDone.includes('zone:lift_front>to_lift'));
+            assert.ok(captured.runner.onceDone.includes('zone:lift_front>to_b2'));
           }
           await page.reload();
           await page.waitForFunction(() => window.__game?.place && !document.querySelector('#title')?.hidden);

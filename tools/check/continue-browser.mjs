@@ -123,6 +123,8 @@ try {
         const { world, ...data } = state.data;
         assert.deepEqual(data, {
           ...saved, pendingStart: null, runner: { ...saved.runner, execution: null },
+          // Office restoration initializes its lunch availability; day 1 has no offer.
+          flags: { ...saved.flags, ...(place === 'office' ? { mio_lunch_offer: 0 } : {}) },
           mc: 'eric',
           cast: { set: 'default', roles: {
             programmer: 'mio', team_lead: 'emi', section_chief: 'mori', engineer: 'kenji',
