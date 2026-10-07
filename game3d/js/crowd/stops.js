@@ -137,7 +137,9 @@ export function stopStep(b, dt, { place, eric, K, list = [] }) {
     r.torso.rotation.x = 0.75 * k;
     r.head.rotation.x = 0.35 * k;
     r.arms[0].rotation.x = -0.9 * k;
-    r.arms[1].rotation.x = -0.8 * k;
+    // Raise the carrying hand while bending so the bag stays above the paving.
+    r.arms[1].rotation.x = (!r.meshy && r.carryPose ? -1.1 : -0.8) * k;
+    r.carryPose?.();
   } else if (s.mode === 'window') {
     s.life.t += dt;
     r.head.rotation.y = Math.sin((s.life.t + s.life.ph) * 0.3) * 0.35;

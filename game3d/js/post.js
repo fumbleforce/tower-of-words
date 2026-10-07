@@ -333,7 +333,7 @@ export function makePost(renderer, place, tier = 2) {
   gtao.updateGtaoMaterial({
     radius: 0.55,
     distanceExponent: 1.0,
-    thickness: 1.5,
+    thickness: 0.5,
     scale: 1.2,
     samples: 16,
     distanceFallOff: 1.0,
