@@ -410,15 +410,15 @@ function step(dt, drawn) {
   softSeparate(game, dt); // people overlapping are pushed apart gently (move.js, soft collision)
   place.cam?.update?.(dt, mio.root.position);
   followCamera.afterStep(drawn);
+  window.__gaitCheck?.sample();
   if (!game.saveEnabled) return;
   // nearest usable thing, the Say target and near: triggers (gameplay/targeting.js); then the zones
   let { near, st } = scanTargets(game, nearSet);
   const mp = mio.root.position;
   for (const [z, fn] of Object.entries(place.zones || {})) {
     const inz = fn(mp.x, mp.z);
-    // a zone fires once per visit, but only when it can: if he walked in during a scene, or before the zone's
-    // condition was true (the lift before the gate flag), it fires as soon as it can while he's still inside.
-    // (Jørgen's lift softlock: entered while busy, the trigger was dropped and never came back.)
+    // A zone fires once per visit. Entry during a scene or before its condition becomes true
+    // remains pending until the trigger can run, even if the player stays inside.
     if (inz && !zoneSet.has(z) && !game.busy && game.runner.has('zone:' + z)) {
       zoneSet.add(z);
       game.runner.trigger('zone:' + z);

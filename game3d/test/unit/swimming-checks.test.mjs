@@ -24,7 +24,7 @@ test('water avoids ground checks; dry sliding/furniture and swimmer pair overlap
     nav: { x0: -100, x1: 100, z0: -100, z1: 100, clearance: () => 0 } } };
   const check = startMoveCheck(game);
   const step = (dx = .025) => {
-    game.t += .1; player.root.position.x += dx; player.update(.1); sample();
+    game.t += .1; player.root.position.x += dx; player.update(.1); globalThis.window.__gaitCheck.sample(); sample();
   };
   for (let i = 0; i < 70; i++) step();
   assert.deepEqual(check.overlaps, [], 'water is not deck furniture');

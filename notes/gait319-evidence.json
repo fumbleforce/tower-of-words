@@ -1,0 +1,530 @@
+{
+  "scope": "Gait #319 diagnostic evidence. All attempts retained; generated images and traces are not committed.",
+  "files": [
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/failure.png",
+      "bytes": 286564,
+      "sha256": "a311defc1cc490c6403ef5b8519ea6c5782a40a1888598c395413518d5754908"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/leg-0-a.png",
+      "bytes": 285496,
+      "sha256": "431b553875ec572e53b1e8f1c297f64c1018aadb19cac2c160378f8c184592f2"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/leg-0-b.png",
+      "bytes": 286267,
+      "sha256": "efd3ba4531ac89cdd0407e922f88aba3f4c9f08355a9d3e0506f37489f502c1b"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/leg-1-a.png",
+      "bytes": 281595,
+      "sha256": "a7c95047d2f0dddb990e00fec0ad167370d284d95a91b393993cba8687f53418"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/leg-1-b.png",
+      "bytes": 280200,
+      "sha256": "fe82a74e13872ce6c35e6e2388ceff824500a2ff04afb29f54d1c36dbe1ee887"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/leg-2-a.png",
+      "bytes": 300708,
+      "sha256": "c85699eb70ae45f32b34fe9aaadcbea13c500d47c6d3bfad1748d28ce7d03a61"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/leg-2-b.png",
+      "bytes": 302382,
+      "sha256": "1b8ddcedc94b6e0a1ebf2914fe7e92ecc2c73faf853dd079f692a6026af9f715"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/leg-3-a.png",
+      "bytes": 280953,
+      "sha256": "8a4af65d88dc4ee4ba830c341732b317e93504225853f5ab1337dd7dcbec8fce"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/leg-3-b.png",
+      "bytes": 280596,
+      "sha256": "13c0c3b23a1d5befb85a263b5855c4ef0c63e9d23fb8be955fde70b98f3050b3"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/lift-forecourt.png",
+      "bytes": 228980,
+      "sha256": "a1135afa6d6f86d6ae714ad4793559206ed16ed8541584656d065bf417b105ee"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/lift-office.png",
+      "bytes": 293317,
+      "sha256": "f783037ac856c2a2de4163201e952013fd31207d042ed2ebff69e000a5eb56a4"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-1/report.json",
+      "bytes": 2094756,
+      "sha256": "4e3ecefa3ac767b8a1d33d943f74b9c9018b3fea7928b11a44a9fc30a2399806"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/failure.png",
+      "bytes": 286673,
+      "sha256": "f21157f907e691234e5e68747383437d2fbf0e94ca8522e4a1bc153684f93243"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/leg-0-a.png",
+      "bytes": 285544,
+      "sha256": "b550454f4b7fda9895e01e9dc1f6c0772e8bc4d5713b460e62ac008913a22c72"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/leg-0-b.png",
+      "bytes": 286255,
+      "sha256": "ad2a069d897bac843af22b8bcb55f90dbffe60d0079b249ce27f144428b449ab"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/leg-1-a.png",
+      "bytes": 281353,
+      "sha256": "80ffddfdf9d31938d40cdaf772fb1c46f29d817e87e103da03ddc7e7c9ae03e7"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/leg-1-b.png",
+      "bytes": 280360,
+      "sha256": "4da9f97b5e8e357ce921e067e9a83dc3a0e8eac1041b9b7ce38816ebabf31aa2"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/leg-2-a.png",
+      "bytes": 300904,
+      "sha256": "192783ab5c0cbfb9dce29ab96e20cce13363028818ff24355b81c11f9701c424"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/leg-2-b.png",
+      "bytes": 302185,
+      "sha256": "1e5f85b7d6cab762b7c5ca49340455904a972816a8d9a0374a9609def62ad740"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/leg-3-a.png",
+      "bytes": 281111,
+      "sha256": "0ea64796a835bc27d52dba86b5d4721a4d60d8d5e4998018b6f229184bb5e9f7"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/leg-3-b.png",
+      "bytes": 280745,
+      "sha256": "937d7a330c840c57d198ba0d13d1b453da1b1f52181e355e3734377b8c06fd7d"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/lift-forecourt.png",
+      "bytes": 231397,
+      "sha256": "2b66d77f7831a79779c03b8ed95a64a925d7dabd9d786348851f523de2c8c8ba"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/lift-office.png",
+      "bytes": 293127,
+      "sha256": "a9c97004145204ef3cbbbc0678906646d4dea313fe61f09878b9cc9e23f51ce4"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-carina390-final2/report.json",
+      "bytes": 2089849,
+      "sha256": "ec9c15cc1231053fbc61535e78a7dba717b393bbe8ebfa521b4ca009e54474ed"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/failure.png",
+      "bytes": 795029,
+      "sha256": "44675f9166812e8029e45f5d23f45f856ffd9943536ece875171752272c12591"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/leg-0-a.png",
+      "bytes": 1109520,
+      "sha256": "62851c06269da23e402660caa41535016a3f07ed31ba2a783fe28c92f3adcf8b"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/leg-0-b.png",
+      "bytes": 1110878,
+      "sha256": "573012ae99b38f58b2c485abb3dc1925428e7236ad4006d5631dce67ccc9ad05"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/leg-1-a.png",
+      "bytes": 1111487,
+      "sha256": "a78970dd38035c40474a2e7b5a5cf2ae7682e986cdb890b5bc95ff1ab26271e2"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/leg-1-b.png",
+      "bytes": 1113238,
+      "sha256": "2028e10f8cbb5bc2792ece9d1b2b281fb1fbf73768277b3c1f65e0608caec649"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/leg-2-a.png",
+      "bytes": 1112014,
+      "sha256": "d46dbb34b2f445387069ab117867b303365106266893ac42ff5af15095e1fe67"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/leg-2-b.png",
+      "bytes": 1113659,
+      "sha256": "0daa91408279eac7a951564bf42b88d6bdd84aa8b5d6a46aa2e1767af80dbdb4"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/leg-3-a.png",
+      "bytes": 1111387,
+      "sha256": "69e2609da1fa48ffb4991c3611a0f292e2783c9860e8dd5e632f46283f81d0a6"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/leg-3-b.png",
+      "bytes": 1113151,
+      "sha256": "4d1534a6eb0a24ec76c64c2260e5007655b37efeae7f769a86d2a0d57faab214"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/lift-forecourt.png",
+      "bytes": 927740,
+      "sha256": "5a00245940829ecad5cf393299c0e1aa4663cd6a69cdf93914e1320345929c56"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-1/report.json",
+      "bytes": 2974795,
+      "sha256": "55f53646e8216704438f79b81fdc02619cb94bc7578244c9cf18e4189af252ea"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/leg-0-a.png",
+      "bytes": 1110757,
+      "sha256": "4748cea287c92aa2627a62a763104c8cdd3b9a7223a7b86e191dd75ae692a00c"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/leg-0-b.png",
+      "bytes": 1111708,
+      "sha256": "70beea36d954d6f10df572b369db13637034c069feeaa8328786aef8d00ea405"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/leg-1-a.png",
+      "bytes": 1112254,
+      "sha256": "bfe88a15309e5a40bc38299d05a5bf89d835e5efe7ef6135c3e0cdfd2ec8679b"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/leg-1-b.png",
+      "bytes": 1113948,
+      "sha256": "2be270abd15a4e7b003fac70f9516a60cf63d703a4c148e16876903dcb633cf9"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/leg-2-a.png",
+      "bytes": 1112974,
+      "sha256": "22c373a400f15ec749007acbee7719744fa3259fe1f94d2b9e95dba9687868a6"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/leg-2-b.png",
+      "bytes": 1114632,
+      "sha256": "83dbfc7aa5b0095f0e9988e7146cf4d4f85e7251ce906d051961918308cc59c0"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/leg-3-a.png",
+      "bytes": 1112345,
+      "sha256": "c701f59705455e318f73429c783e6b0853ccfcf8f446051107bbebc85ffdbed3"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/leg-3-b.png",
+      "bytes": 1114312,
+      "sha256": "de9f257979daa87b13300fc7e133ca01f87a1525cfefd7a4dd78d2bf96da4dc2"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/lift-forecourt.png",
+      "bytes": 933053,
+      "sha256": "3361842c373e1f83f2afd16e28a278c00bb906ee5c62876afa4d08fc98ccd273"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/lift-office.png",
+      "bytes": 1122165,
+      "sha256": "3f69527f6daa5cefebbee21da6294a4174ad91888d6059560a0028b5a9df4095"
+    },
+    {
+      "path": "game3d/shots/gait319/b2-eric1366-2/report.json",
+      "bytes": 2091295,
+      "sha256": "18d41fad0d8bc5adb97ca56f48ec7d52012a85455246a29500cfc38f9cc01d3f"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/leg-0-a.png",
+      "bytes": 285588,
+      "sha256": "8333a6ade8574c04fdc5157a30038e959fd3f98d7b1998e26816950ad539dd15"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/leg-0-b.png",
+      "bytes": 286331,
+      "sha256": "7aae44229a2017a9faa13c6311242f1ebc585490b2ad61d53d9da35b41bfec57"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/leg-1-a.png",
+      "bytes": 281930,
+      "sha256": "10e3a7eb6fb5fcd7de7ec4a59ad81df2f30b94b85c00bf3a3ab99a47234f5b59"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/leg-1-b.png",
+      "bytes": 280609,
+      "sha256": "522b64a67bc0e9bc976fb46d0cd51b15b4762d1a928633c4c6d21ab90bc1dd35"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/leg-2-a.png",
+      "bytes": 300892,
+      "sha256": "ba5a4161098d44574792439b56516aa80a758299a02fcccc60ca5f6ccf9c2cdc"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/leg-2-b.png",
+      "bytes": 302404,
+      "sha256": "7f312864d4cc955e8d57f4491da1e6a5085bd578ee68a5b781f4d9d955130e7c"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/leg-3-a.png",
+      "bytes": 281460,
+      "sha256": "6848e3780ca2b2fe3a5f84c2ef353225366bad723bdf9ce63a3d3b5fca312174"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/leg-3-b.png",
+      "bytes": 280956,
+      "sha256": "6688ce5b5ca53bdad8b91407c9e4951bb2572cab89cc2464df11cff3e38ce42a"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/lift-forecourt.png",
+      "bytes": 227970,
+      "sha256": "4c60be8c73eb0d2da6d0caeecd86d17525738c75daf03ae2f957509d29fb91dc"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/lift-office.png",
+      "bytes": 293456,
+      "sha256": "addda29b7eb999b8276fc8261df9bacc1107808c0bcf32308f8e1c562d9367c6"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-b2-carina390-2/report.json",
+      "bytes": 2362,
+      "sha256": "ee26d10d7c7e1a209b89b5a343294134bb7aea4c9e9bdcf85efac7db868d19d2"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-eric1366-1/end.png",
+      "bytes": 145232,
+      "sha256": "400e8c56537a068014dd294ee656497dd16dd599c30a81c757d733356cba14c6"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-eric1366-1/trace.json",
+      "bytes": 5216018,
+      "sha256": "4b63b7f6c214fe71360bfe29c8a8f5fa7782cc6d9d92fed1a03eb7df304b59e6"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-eric1366-throttle4/end.png",
+      "bytes": 145660,
+      "sha256": "29ad9aa735d5f595a229bca6ebbd175bdc5b1000b4f8ede978e59e4232b6e0c1"
+    },
+    {
+      "path": "game3d/shots/gait319/baseline-eric1366-throttle4/trace.json",
+      "bytes": 5335855,
+      "sha256": "fed689016abe1a0a8a95ee9a072576fcd6aa4ea917333ae6a19f535f054170f5"
+    },
+    {
+      "path": "game3d/shots/gait319/dual-eric1366-throttle4/end.png",
+      "bytes": 146112,
+      "sha256": "2bd8ab8356e5c38bdb8fb580a80768c2cf4e4edac6add44c4381c514694cc4c4"
+    },
+    {
+      "path": "game3d/shots/gait319/dual-eric1366-throttle4/trace.json",
+      "bytes": 5234077,
+      "sha256": "c8708bc6dd2bcf821e25dd0ab41411e4958950effda391c6748b33701cd6a458"
+    },
+    {
+      "path": "game3d/shots/gait319/step-eric1366-throttle4/end.png",
+      "bytes": 146077,
+      "sha256": "2f78548c6bb5b77a4375f76d1f8e885986f83e955b66629e99ff30014b189a6a"
+    },
+    {
+      "path": "game3d/shots/gait319/step-eric1366-throttle4/trace.json",
+      "bytes": 5365213,
+      "sha256": "978f8760d7df1aa3aec0faf1017b48b320563788e35d342abcb4432df39e1896"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-b2-carina-baseline.log",
+      "bytes": 1045,
+      "sha256": "6a0c05e8051978c60cef721bb82e9c2affe9ccba43bdb9ccb0b7f7100ae73c2d"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-b2-carina-baseline2.log",
+      "bytes": 626,
+      "sha256": "ab8b4c8ceeee49a063d6cf1d8e074ba59f7910474c3e69da7b8b0ae75870839d"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-b2-carina-final.log",
+      "bytes": 1045,
+      "sha256": "df59e075cd43fd071fac1176f8eabf2560a2ebe1eeaa9515b26e06c86ce10230"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-b2-carina-final2.log",
+      "bytes": 1169,
+      "sha256": "25265fb0712cc573f80313e9b03c9285b81df74394753762c09289575aaaaf62"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-b2-carina1.log",
+      "bytes": 1231,
+      "sha256": "ad66f4445b75f2b23dbd552857e847dc78da868757392e8e3f6ba9fd6cfff86d"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-b2-eric1.log",
+      "bytes": 702,
+      "sha256": "8eb88250ed07abbe26e5b50833b1b84975e67b3b8fa47548ea182fd7f7f18a1d"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-b2-eric2.log",
+      "bytes": 681,
+      "sha256": "45df6ed3b9eaebfc61cb856999a491a82e44bf8b9074573cec17d68b4985b7d7"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-baseline-throttle4.log",
+      "bytes": 4838,
+      "sha256": "49e515c7b44f7464011086f5aa634f218af609618a44815e9b9d0b1bf1fe8acb"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-baseline1.log",
+      "bytes": 893,
+      "sha256": "13fba08d3ddc16f1d7e3e36fd4a4f4ba37364932a272daa505cc46bc86799c50"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-cpu1.log",
+      "bytes": 179825,
+      "sha256": "4a7ec8a8d552888f03ec000f668783d2d219d046b7dd69e5c19b8ec7b941fc4a"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-cpu2.log",
+      "bytes": 179378,
+      "sha256": "6dec2f90ea5f6ba6a6c6291476d133b9b4e846aedc8fb8258e46d040f17bafcf"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-dual-throttle4.log",
+      "bytes": 4752,
+      "sha256": "e540c2bb3809714ff566cb1669e53e3ebf7b4cd19883008b87777e6343da945c"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-fast1366-final.log",
+      "bytes": 4006,
+      "sha256": "e0ce43ccdbdb8b92df7ddf96a66f61bd8bc7408f5f969c8fa5f5a14e4bda10eb"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-fast1366-repeat.log",
+      "bytes": 4045,
+      "sha256": "e4c7f71e9867e1f1b782e3a48ffeb423a9a2d38f5b569df45d24e20f7a81d263"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-fast1366.log",
+      "bytes": 1364,
+      "sha256": "f2212553cf2f4acc6369e024075782de6db76cb39df03426f9c2dc1343ee5ec8"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-fast390-final.log",
+      "bytes": 3939,
+      "sha256": "57e5d43943f378865668d42b1c6bcea9075815f0ad6422834c1cd4d257b1ea75"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-focused-final-format.log",
+      "bytes": 2189,
+      "sha256": "6313885d1f4ef9b1dd7d1a38d90a10ef656c517628ae9495a3a7f94a3531b56d"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-focused.log",
+      "bytes": 1905,
+      "sha256": "79608f01a6b189da86ac4aeb434405a2e155c210842f44b4e532937e0203bd57"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-focused2.log",
+      "bytes": 2082,
+      "sha256": "4f088752926d15698e15c3bd622e666c099902a32f14c31f442a87c77438f62b"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-focused3.log",
+      "bytes": 2082,
+      "sha256": "e793f8897aa0fa3cdc2be49665e9839e06f87216f4598a83fe3c5725a31770f8"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-focused4.log",
+      "bytes": 2189,
+      "sha256": "d23e9d057862b0a540791a2feb6f10800b960ed700e7ec5bf4cfd36e5c9e6008"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-format.log",
+      "bytes": 48,
+      "sha256": "353bca14ebabc938e0f81b40e353bb8b24251f67c5a5fd3d2adff4705b9960de"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-independent-final-focused.log",
+      "bytes": 2189,
+      "sha256": "8bb29f7e8997f0eef133da825928f51a6dafdec9da93a0bce67d047f391284c4"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-independent-focused.log",
+      "bytes": 2081,
+      "sha256": "31220f49d29607d80b016bba27a064dfcccde8635dc53dba61cdf26d2b0ad513"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-independent-review--42db999e.md",
+      "bytes": 8008,
+      "sha256": "42db999e1b18faf7f996acd56e9b6d771dae3ab063a5fd9e31e6364c7c2e9306"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-independent-review.md",
+      "bytes": 8903,
+      "sha256": "2a79154c19d9099ea79b0c7515a241aacd5b2330baa4ffea41f081fc1f711ca1"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-lint-final.log",
+      "bytes": 66,
+      "sha256": "a2f93ddc39596244d9d054144e934a7188372224655660c489321e48f487e4c1"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-mutant-control.log",
+      "bytes": 1640,
+      "sha256": "de62738f0428ad57962a1ece97d49200b0ed8ea270caa067e5e984283103172f"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-step-throttle4.log",
+      "bytes": 7652,
+      "sha256": "66e1bca92165014a697cba60461cce6f9694984eefe1db3e319d2c19a3e56cda"
+    },
+    {
+      "path": "game3d/shots/gait319/validation/codex-gait319-tools-format.log",
+      "bytes": 128,
+      "sha256": "5506c8bdbc7d66b457ee311743a04ce6955e251a4c4ea5df1179990dac69cdf2"
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T15-04-54-368Z-3363741/result.json",
+      "bytes": 528,
+      "sha256": "2798120064ce068cb72428f7ad7fe9c0807a066d5975665d22b0a56e7e5c4e4a"
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T15-08-55-869Z-3381722/1366x860.png",
+      "bytes": 147079,
+      "sha256": "ee28590b152268315d2acccf6128b015e00d4f27614ae9296b04654847f6c0e3"
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T15-08-55-869Z-3381722/perf.json",
+      "bytes": 2850,
+      "sha256": "b44e90c1f1788f1811e19d6a77ee6ec6707c03f46443a41b248c5ef8785f8631"
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T15-08-55-869Z-3381722/result.json",
+      "bytes": 21867,
+      "sha256": "502fd4e92c58e5379df3f65991f777bb8156e0eaedb8a01a8687733ddfa203b2"
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T15-15-04-913Z-3388882/390x844.png",
+      "bytes": 89093,
+      "sha256": "4fa9937956ecc83c07eafa8500d9e90fd78d8924e7dedae89e2efeadf9725777"
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T15-15-04-913Z-3388882/perf.json",
+      "bytes": 2835,
+      "sha256": "fde54fe45d81ad34b906f166ff28724f08fa9301b4c2eced1541fa358e860b0c"
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T15-15-04-913Z-3388882/result.json",
+      "bytes": 21836,
+      "sha256": "0c768b46836ac09089da5ce10232c814845a8f43dadaf0d06550bbad84128d32"
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T15-15-32-700Z-3390179/1366x860.png",
+      "bytes": 145933,
+      "sha256": "cfbcf1d844d5e54702624a35fbff3aea03db928e71e52b662e53a1d882677262"
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T15-15-32-700Z-3390179/perf.json",
+      "bytes": 2844,
+      "sha256": "e9b045f707c3bb823b7988ee23f27280cac8f60720bdd1c783f1143d5e2be79b"
+    },
+    {
+      "path": "game3d/shots/fast/2026-10-07T15-15-32-700Z-3390179/result.json",
+      "bytes": 21832,
+      "sha256": "81c46e42240c5e9c01b435658099a17d5ddb33fbe125b7695f834355bfa9fe7e"
+    }
+  ]
+}
