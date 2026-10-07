@@ -393,10 +393,28 @@ a.rrow:hover { text-decoration: none; border-color: var(--accent); }
 /* ---- showcase log: the review option cards with a flag instead of pick/star/reject ---- */
 .scentry { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 26px; }
 .page.showcase > .crumbs + .scentry { border-top: 0; padding-top: 0; margin-top: 0; }
+.scsummary { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-items: start; }
+.scsummary:has(.scpreview) { grid-template-columns: 240px minmax(0, 1fr); }
+.scpreview { width: 100%; padding: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); overflow: hidden; cursor: pointer; }
+.scpreview img { display: block; width: 100%; height: 150px; object-fit: contain; }
+.scintro { min-width: 0; }
+.scintro .sccaption { margin: 8px 0 12px; }
+.scentry:not(.expanded) .sccaption { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.sctoggle { min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); color: var(--accent); font: inherit; cursor: pointer; }
+.scpreview:focus-visible, .sctoggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.scentry.expanded .scpreview { display: none; }
+.scentry.expanded .scsummary { grid-template-columns: minmax(0, 1fr); }
+.scdetails { margin-top: 16px; }
+@media (max-width: 600px) {
+  .scsummary:has(.scpreview) { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .scpreview img { height: 170px; }
+  .sctoggle { width: 100%; }
+}
 .sctitle { margin: 0 0 6px; }
 .sctitle a { color: inherit; }
 .scsec { margin: 18px 0 6px; }
-.scsec > h3 { margin: 0 0 2px; }
+.scsec > summary { cursor: pointer; padding: 12px 0; font-weight: 600; }
+.scsec > summary .small { margin-left: 12px; font-weight: 400; }
 .scsec > p { margin: 0 0 10px; max-width: 70ch; }
 .scall { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; max-width: 760px; }
 .racts .rflag[aria-pressed="true"] { background: var(--new-bg); color: var(--new); border-color: var(--new); font-weight: 600; }

@@ -32,6 +32,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from bible.showcase_dates import showcase_dates
 import work  # noqa: E402  tools/work.py, the work tracker (GitHub issues)
 import review_commit  # noqa: E402  commits each saved answer so the public bible matches
 
@@ -197,6 +198,8 @@ class Handler(SimpleHTTPRequestHandler):
         if self.path.split('?')[0] == '/api/feedback':
             return self._json(200 if self._local() else 403, {'ok': self._local()})
         path = self.path.split('?')[0]
+        if path == '/bible/showcase-dates.json':
+            return self._json(200, showcase_dates(local=True))
         if path == '/api/work':
             try:
                 with WORK_LOCK:

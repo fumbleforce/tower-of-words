@@ -852,17 +852,31 @@ function showcaseEntry(e, solo) {
   const d = loadDraft('showcase', e), fb = e.feedback;
   const H = solo ? 'h1' : 'h2';
   const commits = [].concat(e.commit || []);
-  return `<article class="scentry" data-showcase="${esc(e.id)}" data-lbg>
-    <${H} class="sctitle">${solo ? esc(e.title) : `<a href="#showcase/${esc(e.id)}">${esc(e.title)}</a>`}</${H}>
-    <div class="pill-row"><span class="pill">${esc(e.date || '')}</span><span class="pill">by ${esc(e.by || '')}</span>${commits.map((c) => `<span class="pill mono" title="${esc(c)}">${esc(String(c).slice(0, 7))}</span>`).join('')}</div>
-    ${e.caption ? `<p class="rq">${inline(e.caption)}</p>` : ''}
+  const sections = showcaseSections(e), images = sections.flatMap(sec => sec.images || []);
+  const preview = images.find(im => im.id === e.preview) || images[0];
+  const details = `scdetails-${e.id}`;
+  const count = `${images.length} picture${images.length === 1 ? '' : 's'}${sections.length > 1 ? ` in ${sections.length} sections` : ''}`;
+  const activity = e.activity ? new Date(e.activity).toISOString().replace('T', ' ').slice(0, 16) + ' UTC' : '';
+  return `<article class="scentry${solo ? ' expanded' : ''}" data-showcase="${esc(e.id)}" data-lbg>
+    <div class="scsummary">
+      ${preview ? `<button type="button" class="scpreview" data-act="expand" aria-expanded="${!!solo}" aria-controls="${esc(details)}" aria-label="${solo ? 'Hide' : 'Show'} details for ${esc(e.title)}"><img src="${esc(url(preview.image))}" alt="${esc(preview.caption || e.title)}" loading="lazy"></button>` : ''}
+      <div class="scintro">
+        <${H} class="sctitle">${solo ? esc(e.title) : `<a href="#showcase/${esc(e.id)}">${esc(e.title)}</a>`}</${H}>
+        <div class="pill-row"><span class="pill"${activity ? ` title="Latest entry update: ${esc(activity)}"` : ''}>${esc(e.date || '')}</span></div>
+        ${e.caption ? `<p class="rq sccaption">${inline(e.caption)}</p>` : ''}
+        <button type="button" class="sctoggle" data-act="expand" aria-expanded="${!!solo}" aria-controls="${esc(details)}">${solo ? 'Hide' : 'Show'} details · ${count}</button>
+      </div>
+    </div>
+    <div class="scdetails" id="${esc(details)}"${solo ? '' : ' hidden'}>
+    <div class="pill-row"><span class="pill">by ${esc(e.by || '')}</span>${commits.map((c) => `<span class="pill mono" title="${esc(c)}">${esc(String(c).slice(0, 7))}</span>`).join('')}</div>
     ${(e.links || []).length ? `<p class="small">${e.links.map((l) => `<a href="${esc(/^https?:|^#/.test(l.href) ? l.href : ROOT + l.href)}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}
-    ${showcaseSections(e).map((sec) => `<section class="scsec">${sec.title ? `<h3>${esc(sec.title)}</h3>` : ''}${sec.caption ? `<p class="muted">${inline(sec.caption)}</p>` : ''}
-      <div class="ropts">${(sec.images || []).map((im) => showcaseImage(im, (d.items || {})[im.id] || {})).join('')}</div></section>`).join('')}
+    ${showcaseSections(e).map((sec) => `<details class="scsec"><summary><span>${esc(sec.title || 'Pictures')}</span><span class="muted small">${(sec.images || []).length} picture${(sec.images || []).length === 1 ? '' : 's'}</span></summary>${sec.caption ? `<p class="muted">${inline(sec.caption)}</p>` : ''}
+      <div class="ropts">${(sec.images || []).map((im) => showcaseImage(im, (d.items || {})[im.id] || {})).join('')}</div></details>`).join('')}
     <div class="scall"><div class="racts"><button type="button" class="rflag" data-act="flag" aria-pressed="${!!d.flag}">${d.flag ? '⚑ Flagged' : '⚑ Flag the whole entry'}</button></div>
       <textarea class="rcom overall" data-act="overall" rows="3" placeholder="Anything about ${esc(e.title)} as a whole" aria-label="Comment on the whole entry">${esc(d.comment || '')}</textarea></div>
     <div class="rsend"><button type="button" class="rsendbtn" data-act="send">Send</button><span class="rstate muted small" aria-live="polite">${sentLine(fb)}</span></div>
     ${fb && (fb.history || []).length ? legacyBox('Earlier sends', fb.history.slice().reverse().map((h) => `<div class="fact"><div class="t"><b>${esc((h.sent || '').replace('T', ' ').slice(0, 16))}</b>${h.flag ? ' flagged' : ''}${h.comment ? `<div class="muted">${esc(h.comment)}</div>` : ''}</div></div>`).join(''), fb.history.length) : ''}
+    </div>
   </article>`;
 }
 function pageShowcase(id) {
@@ -872,7 +886,7 @@ function pageShowcase(id) {
     return `<div class="page showcase"><div class="crumbs"><a href="#showcase">Showcase</a> /</div>${showcaseEntry(e, true)}</div>`;
   }
   return `<div class="page showcase"><h1>Showcase</h1>
-    <p class="lede">Finished work you can see, newest first. Nothing here needs a pick; choices go to <a href="#review">Review</a>. Flag anything that looks wrong, comment on an entry or a single picture, and press that entry's Send. Your notes are saved in the repo (showcase/&lt;id&gt;/feedback.json) and the agents read them from there.</p>
+    <p class="lede">Latest work first. Expand an entry for every picture, links and comments. Choices go to <a href="#review">Review</a>.</p>
     ${all.map((e) => showcaseEntry(e, false)).join('') || '<p class="muted">Nothing here yet.</p>'}
     <p class="muted small" style="margin-top:22px">How agents add entries: <a href="#doc/showcase/README.md">showcase/README.md</a>.</p></div>`;
 }
@@ -888,6 +902,18 @@ function showcaseDraftFromDom(box) {
 function showcaseClick(e) {
   const box = e.target.closest('.scentry'), btn = e.target.closest('button[data-act]');
   if (!box || !btn) return false;
+  if (btn.dataset.act === 'expand') {
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    box.classList.toggle('expanded', open);
+    box.querySelector('.scdetails').hidden = !open;
+    box.querySelectorAll('[data-act=expand]').forEach(toggle => {
+      toggle.setAttribute('aria-expanded', String(open));
+      if (toggle.classList.contains('sctoggle')) toggle.textContent = toggle.textContent.replace(/^(Show|Hide)/, open ? 'Hide' : 'Show');
+      else toggle.setAttribute('aria-label', toggle.getAttribute('aria-label').replace(/^(Show|Hide)/, open ? 'Hide' : 'Show'));
+    });
+    if (btn.classList.contains('scpreview')) box.querySelector('.sctoggle').focus();
+    return true;
+  }
   if (btn.dataset.act === 'send') { sendAnswer('showcase', box.dataset.showcase, showcaseDraftFromDom(box), box); return true; }
   const on = btn.getAttribute('aria-pressed') !== 'true', card = btn.closest('.scimg');
   btn.setAttribute('aria-pressed', String(on));

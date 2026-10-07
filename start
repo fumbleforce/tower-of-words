@@ -8,6 +8,8 @@ cd "$(dirname "$0")"
 PORT="${PORT:-8771}"
 URL="http://127.0.0.1:${PORT}/"
 
+python3 tools/bible/showcase_dates.py --local
+
 # The bible reads most things live from the repo; this rebuilds its hand-kept part (bible/facts.yaml, review
 # pages, prompts) so it's current too. A failure here never stops the server.
 if [[ -f tools/bible/build.py ]]; then
