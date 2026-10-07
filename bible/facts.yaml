@@ -492,7 +492,7 @@ cast_rules:
 places:
   - {id: train, ref: game3d/ref/1-train-arrival.png, shot: train.png, quotes: ["legacy/notes/GUIDE-history.md ~ Train scene (Jørgen, 2026-09-27)"]}
   - {id: gate, ref: game3d/ref/2-security-gate-muted.png, shot: gate.png, quotes: ["docs/game/art-and-sound.md ~ Palette: game3d/ref/2-security-gate-muted.png", "docs/game/stories/gate-morning.md ~ Jørgen asked for the gate to be a real situation #1"]}
-  - {id: office, ref: game3d/ref/3-office.png, shot: office.png, quotes: ["docs/game/controls-and-ui.md ~ The player character is always in view"]}
+  - {id: office, ref: game3d/ref/3-office.png, shot: office.png, quotes: ["docs/game/controls-and-ui.md ~ Overview keeps the player character in view"]}
 
 # The painted backgrounds from the VN era. Legacy: the world is flat-shaded 3D now.
 locations:
@@ -572,7 +572,7 @@ rules:
   - group: What the game is now
     quotes:
       - "GUIDE.md ~ Game first, learning light"
-      - "GUIDE.md ~ Scope (Jørgen, 2026-09-28)"
+      - "GUIDE.md ~ First passes are checkpoints"
       - "docs/game/setting.md ~ Eric is a Western IT support engineer from Norway #2"
       - "docs/game/systems.md ~ Jørgen (2026-09-28): a day clock with periods"
       - "GUIDE.md ~ Character arcs are to be designed in full RPG-walkthrough detail"
@@ -755,7 +755,6 @@ questions:
     - ["The environment style study: several attempts at the polish and vibe of the generated anime art, for Jørgen to judge.", "docs/game/art-and-sound.md ~ A style study aims at the polish", null]
     - ["Whether the bible goes public. It has never been committed.", "TODO.md ~ The bible (bible/) has never been committed", null]
     - ["The walkthrough's scope: Mio and Mori have full walkthroughs; GUIDE asks for arcs in full walkthrough detail, and also not to write ahead of the intro day.", "GUIDE.md ~ Character arcs are to be designed in full RPG-walkthrough detail", null]
-    - ["When to start fading the English translations.", "docs/game/setting.md ~ When to fade the English is decided later", null]
     - ["Over-head icons and labels are being redesigned.", "docs/game/controls-and-ui.md ~ The over-head icons and labels are being redesigned", null]
     - ["Aoi's age (22, 23 or 24 in different files).", "notes/mini-stories.md ~ Aoi's age", aoi]
     - ["Eric's age isn't in any current file (34 in the old portrait prompt, 29 in tools/production.py).", "tools/production.py ~ 29-year-old Nordic man", mc]
