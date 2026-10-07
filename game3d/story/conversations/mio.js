@@ -1,10 +1,19 @@
+const senderQuestions = [
+  { text: 'Did you get the log off that machine?', go: 'sender_offer', if: 'sender_available && sender_complaint_heard && !sender_delivered' },
+  { text: 'What are you trying to catch?', go: 'sender_offer', if: 'sender_available && !sender_complaint_heard && !sender_delivered' },
+  { text: 'What are you trying to catch?', go: 'sender_later', if: 'sender_available && sender_delivered && !sender_partial' },
+  { text: 'Ask about the held item.', go: 'sender_later', if: 'sender_available && sender_partial' },
+];
 const menu = (understood = false) => [
+  { do: 'sender', action: 'available' },
   { if: "place == 'office' && period_morning && (day == 1 || day == 2 || day == 5 || ongoing_workday)", then: [
     { say: 'mio', emo: 'casual', text: 'Give me until lunch? I’m trying to finish this before somebody adds another request.' },
+    { if: 'sender_available', then: [{ choice: [...senderQuestions, { text: 'I’ll let you get on.', go: 'chat_mio_leave' }] }] },
     { end: true },
   ] },
   { do: 'face', who: 'eric', to: 'mio' }, { do: 'face', who: 'mio', to: 'eric' }, { do: 'cam', on: 'mio', zoom: 1.3, conversation: 'mio' },
   { choice: [
+    ...senderQuestions,
     { text: 'Do you go back to the mainland much?', go: 'chat_mio_mainland', if: '!chat_mio_home' },
     { text: 'Does your mother still send food back with you?', go: 'chat_mio_food_again', if: 'chat_mio_home' },
     { text: 'Do you ever eat away from the servers?', go: 'chat_mio_lunch' },

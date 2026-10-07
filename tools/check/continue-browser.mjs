@@ -82,7 +82,20 @@ try {
           assert.equal(arrived.walk, undefined);
           assert.equal(arrived.seated, true);
           assert.deepEqual([arrived.position[0], arrived.position[2]], [2.16, -3.36]);
-          assert.ok(Math.abs(arrived.position[1] + 0.07) < 0.02, 'Mori is seated at chair height');
+          const contact = await page.evaluate(async () => {
+            const g = window.__game, { seatContact } = await import('/game3d/test/support/seat-contact.mjs');
+            const busy = g.busy, cam = g.place.cam;
+            g.busy = true;
+            try {
+              cam.closeOn([2.16, -3.36], cam.fitDist / 1.8, 0.6);
+              cam.close.conversationShot = { yaw: 0, elev: 0.35, fov: 55, minDistance: 1.8, halfWidth: 0.7 };
+              cam.snap(g.player.root.position);
+              await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+              return seatContact(g.place, g.place.people.mori, [...Object.values(g.place.people), g.player, g.mioNpc]);
+            } finally { g.busy = busy; cam.release(); }
+          });
+          assert.ok(contact.vertices > 0, 'Mori contact uses rendered body vertices');
+          assert.ok(contact.gap >= -0.012 && contact.gap <= 0.001, 'Mori body touches the actual cushion: ' + contact.gap);
         }
         if (mode === 'roundtrip') {
           if (place === 'office') await page.evaluate(async () => {

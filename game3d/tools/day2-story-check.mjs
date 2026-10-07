@@ -5,6 +5,7 @@ import { STORIES, WORDS as NEW_WORDS, NEEDS, TRIPS, OPEN_PLACES, PERIODS } from 
 import { WORDS } from '../js/lang.js';
 import { DEFAULT_SPEAKERS, PLACE_DETAILS, GLOBAL_HOOKS } from '../js/narrative/contracts.js';
 import { allowedConditionCharacters, compileCondition, createConditionEvaluator } from '../js/narrative/conditions.js';
+import CONVERSATIONS from '../story/conversations/index.js';
 import TICKETS from '../story/tickets.js';
 import { createTickets } from '../js/tickets/model.js';
 
@@ -41,11 +42,11 @@ for (const [place, story] of Object.entries(STORIES)) {
       }
       for (const k of ['text', 'prompt', 'line', 'en']) if (s[k]) text(s[k]);
       if (s.if) cond(s.if);
-      for (const k of ['go', 'call']) if (s[k]) assert(story.nodes[s[k]], `${place}/${node}: missing ${s[k]}`);
+      for (const k of ['go', 'call']) if (s[k]) assert(story.nodes[s[k]] || CONVERSATIONS.nodes[s[k]], `${place}/${node}: missing ${s[k]}`);
       for (const k of ['then', 'else']) if (s[k]) steps(s[k], node);
       for (const o of s.choice || []) {
         text(o.text); if (o.if) cond(o.if);
-        assert(story.nodes[o.go || o.call], `${place}/${node}: missing choice destination`);
+        assert(story.nodes[o.go || o.call] || CONVERSATIONS.nodes[o.go || o.call], `${place}/${node}: missing choice destination`);
       }
       if (s.do) {
         assert(hooks.has(s.do), `${place}/${node}: undeclared hook ${s.do}`);

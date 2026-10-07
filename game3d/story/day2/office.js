@@ -99,6 +99,7 @@ export default {
       { do: 'stand', who: 'eric' }, { do: 'save' },
     ],
     d2_mio_work: [
+      { if: 'sender_delivered', then: [{ go: 'sender_later' }] },
       { if: 'd2_mio_job_talked && d2_mio_weekend_talked', then: [
         { say: 'mio', emo: 'tired', text: 'I need to catch this before it restarts again. Can we talk at dinner?' },
       ], else: [{ choice: [
@@ -108,6 +109,7 @@ export default {
       ] }] },
     ],
     d2_mio_job: [
+      { if: 'sender_delivered', then: [{ go: 'sender_later' }] },
       { say: 'mio', emo: 'tired', text: 'The thing that sends everyone’s timesheets. It keeps restarting before I can get the log off it.' },
       { say: 'eric', emo: 'curious', text: 'Do they know it’s doing that?' },
       { say: 'mio', emo: 'dry', text: 'They know when payroll rings me. I’d like to get it first today.' },
@@ -119,7 +121,7 @@ export default {
       { say: 'mio', emo: 'dry', text: 'Mm. She thinks I’m giving them to the whole office. I haven’t corrected her.' },
       { set: 'd2_mio_weekend_talked' }, { go: 'd2_social_end' },
     ],
-    d2_mio_idle_work: [{ say: 'mio', emo: 'tired', text: 'Hang on. It’s finally giving me something.' }],
+    d2_mio_idle_work: [{ if: 'sender_delivered', then: [{ say: 'mio', emo: 'casual', text: 'Still here, yes. The others went through.' }], else: [{ say: 'mio', emo: 'tired', text: 'Hang on. It’s finally giving me something.' }] }],
     d2_social_end: [{ do: 'save' }],
     d2_mori_work: [{ say: 'mori', overheard: true, emo: 'polite', text: '古い資料ですが、よかったら使ってください。' }],
     d2_kenji_work: [{ say: 'kenji', emo: 'sheepish', text: 'Ah, sorry. Is loading. Very slow.' }],

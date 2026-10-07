@@ -19,7 +19,8 @@ import { mat, rbox, PAL } from '../props.js';
 import { route } from './route.js';
 import { chairPusher } from './office-chair.js';
 import { isPlayer } from '../mc.js';
-
+import { officeArrival } from './office-arrival.js';
+import { attachSender } from '../investigations/sender/index.js';
 export async function officePlace(game) {
   const w = await sliced(officeSteps()); // in slices between frames: it's built while the forecourt is played
   const cam = new RoomCam({ elev: 51, fov: 24 });
@@ -83,9 +84,7 @@ export async function officePlace(game) {
   w.root.add(alarm);
   const dS1 = w.dS(1),
     dS0 = w.dS(0);
-  // Mori waits 1.7 m out from the lift, to the stairs side, facing where Eric stops (LIFT_OUT, places/lift.js), clear
-  // of the doors, of anyone stepping out (0.7 m to each side) and of the way to the corridor, so his bow can't reach
-  // Eric (Jørgen: "Mori stands right in front of you and bows into your model")
+  // Mori's bow stays clear of the lift doors and the player's arrival point.
   const LIFT_OUT = [-5.45, -2.4],
     MORI_WAIT = [-6.0, -0.75];
   {
@@ -102,8 +101,12 @@ export async function officePlace(game) {
   w.root.add(moriBlob);
   w.mori.blob = moriBlob;
   blobs.mori = moriBlob;
-
   const spots = {
+    sender_console: [4.2, -0.78],
+    sender_guest: [4.92, -0.45],
+    sender_desk: [-1.25, -1.9],
+    sender_door: [5.7, 1.2],
+    sender_mori_door: [4.95, 0.1],
     lift_out: [-5.45, -2.4],
     mori_greet: [(LIFT_OUT[0] + MORI_WAIT[0]) / 2, (LIFT_OUT[1] + MORI_WAIT[1]) / 2],
     lobby: [-5.6, -1.0],
@@ -141,6 +144,8 @@ export async function officePlace(game) {
   const shut = (o) => !st.mdoorWant && o.position.x > 3.4 && o.position.z < CN;
   const cat = () => w.tama.getWorldPosition(new THREE.Vector3());
   const things = {
+    sender_console: { ...PLACE_DETAILS.office.things.sender_console, anchor: v3(4.2, 0.8, -1.3) },
+    sender_live: { ...PLACE_DETAILS.office.things.sender_live, anchor: v3(-2, 0.8, -3) },
     emi: {
       ...PLACE_DETAILS.office.things.emi,
       anchor: rigAnchor(w.emi),
@@ -790,27 +795,22 @@ export async function officePlace(game) {
       const p = new THREE.Vector3();
       return rc.ray.intersectPlane(floor, p) ? p : null;
     },
+    personArrived: officeArrival(people, moriBlob, K),
     walkPerson(id, [x, z], { speed } = {}) {
       const r = people[id];
       if (!r) return Promise.resolve();
       if (r.seated) standUp(id);
-      if (r.root && !r.hips) return walkRig(game, r, [x, z], { speed: speed || 1.0 });
       r.root.visible = true;
       if (blobs[id]) blobs[id].visible = true;
-      const chief = id === 'mori' && Math.hypot(x - 2.3, z + 2.55) < 0.05;
-      const path = routeTo(r.root.position, chief ? [2.3, -2.7] : [x, z]);
-      const pr = walkPerson(r, path, { speed: speed || 1.3, blobM: blobs[id] });
-      // Mori walking back to his desk sits down in the chief's chair
-      return chief
-        ? pr.then(() => {
-            sit(r);
-            r.root.position.set(2.16, r.root.position.y + 0.03 * K, -3.36);
-            r.root.rotation.y = -Math.PI / 2;
-            armsLap(r);
-            r.seated = true;
-            moriBlob.position.set(2.2, 0.004, -3.36);
-          })
-        : pr;
+      const parent = r.root.parent;
+      const pr = r.meshy
+        ? walkRig(game, r, [x, z], { speed: speed || 1.0 })
+        : walkPerson(r, routeTo(r.root.position, [x, z]), { speed: speed || 1.3, blobM: blobs[id] });
+      const token = r.root.userData.walkTok;
+      return pr.then(() => {
+        if (game.place === P && r.root.parent === parent && r.root.userData.walkTok === token)
+          P.personArrived(id, [x, z]);
+      });
     },
     async sitPerson(id, seatId) {
       const s = seats[seatId];
@@ -828,7 +828,6 @@ export async function officePlace(game) {
       r.seated = true;
       if (blobs[id]) blobs[id].position.set(s.x, 0.004, s.z);
     },
-    // a schedule's `sit` on a Continue (sim.js applySchedule, instant): Mio's rig straight into the seat
     placeSeated(id, seatId) {
       const r = id === 'mio' ? game.mioNpc : people[id],
         s = seats[seatId];
@@ -1118,6 +1117,7 @@ export async function officePlace(game) {
   }
   P.lunch = { food: lunchFood, state: lunchState }; // QA (tools/lunch-shots.mjs)
   day2.install(P);
+  attachSender(game, P, w);
   return P;
 }
 export const MIO_SEAT_Y = 0.0,

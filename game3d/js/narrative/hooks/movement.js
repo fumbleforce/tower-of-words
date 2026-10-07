@@ -29,7 +29,13 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
             r.root.position.z += r.root.position.z < 0 ? 0.45 : -0.45;
           }
           r.seated = false;
-          return walkRig(game, r, p, { speed: speed || 1.0, run });
+          const parent = r.root.parent;
+          const walk = walkRig(game, r, p, { speed: speed || 1.0, run });
+          const token = r.root.userData.walkTok;
+          return walk.then(() => {
+            if (game.place === place && r.root.parent === parent && r.root.userData.walkTok === token)
+              return place.personArrived?.(who, p);
+          });
         }
         return place.walkPerson(who, p, { speed, run });
       },

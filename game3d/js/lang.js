@@ -7,6 +7,7 @@ import { MC } from './mc.js';
 // The four commands are the ones Mio can say to make things happen.
 
 export const WORDS = {
+  mada: { ja: 'まだ', ro: 'mada', en: 'still; not yet', phrase: true, voice: 'eric-mada' },
   matte: {
     ja: '待って',
     alias: ['まって'],
