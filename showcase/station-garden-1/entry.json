@@ -1,0 +1,684 @@
+{
+  "title": "Station south garden",
+  "date": "2026-10-07",
+  "by": "codex-station-garden",
+  "caption": "A walkable planted loop beside the station, two usable benches, and a grounds worker with a visible maintenance routine. Earlier correction rounds are retained below.",
+  "sections": [
+    {
+      "title": "First layout and contact",
+      "caption": "Earlier diagnostic round, retained for comparison.",
+      "images": [
+        {
+          "id": "round1-1366-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/round1/1366-collect-contact.webp",
+          "caption": "1366 collect contact"
+        },
+        {
+          "id": "round1-1366-garden",
+          "image": "bible/shots/showcase/station-garden-1/round1/1366-garden.webp",
+          "caption": "1366 garden"
+        },
+        {
+          "id": "round1-1366-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/round1/1366-sweep-contact.webp",
+          "caption": "1366 sweep contact"
+        }
+      ]
+    },
+    {
+      "title": "Paving and moving tools corrected",
+      "caption": "Earlier diagnostic round, retained for comparison.",
+      "images": [
+        {
+          "id": "round2-1366-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/round2/1366-collect-contact.webp",
+          "caption": "1366 collect contact"
+        },
+        {
+          "id": "round2-1366-garden",
+          "image": "bible/shots/showcase/station-garden-1/round2/1366-garden.webp",
+          "caption": "1366 garden"
+        },
+        {
+          "id": "round2-1366-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/round2/1366-sweep-contact.webp",
+          "caption": "1366 sweep contact"
+        },
+        {
+          "id": "round2-390-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/round2/390-collect-contact.webp",
+          "caption": "390 collect contact"
+        },
+        {
+          "id": "round2-390-garden",
+          "image": "bible/shots/showcase/station-garden-1/round2/390-garden.webp",
+          "caption": "390 garden"
+        },
+        {
+          "id": "round2-390-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/round2/390-sweep-contact.webp",
+          "caption": "390 sweep contact"
+        }
+      ]
+    },
+    {
+      "title": "Walked loop and station boundary",
+      "caption": "Earlier diagnostic round, retained for comparison.",
+      "images": [
+        {
+          "id": "route1-1366-arcade-link",
+          "image": "bible/shots/showcase/station-garden-1/route1/1366-arcade-link.webp",
+          "caption": "1366 arcade link"
+        },
+        {
+          "id": "route1-1366-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/route1/1366-collect-contact.webp",
+          "caption": "1366 collect contact"
+        },
+        {
+          "id": "route1-1366-covered-approach",
+          "image": "bible/shots/showcase/station-garden-1/route1/1366-covered-approach.webp",
+          "caption": "1366 covered approach"
+        },
+        {
+          "id": "route1-1366-garden",
+          "image": "bible/shots/showcase/station-garden-1/route1/1366-garden.webp",
+          "caption": "1366 garden"
+        },
+        {
+          "id": "route1-1366-station-boundary",
+          "image": "bible/shots/showcase/station-garden-1/route1/1366-station-boundary.webp",
+          "caption": "1366 station boundary"
+        },
+        {
+          "id": "route1-1366-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/route1/1366-sweep-contact.webp",
+          "caption": "1366 sweep contact"
+        }
+      ]
+    },
+    {
+      "title": "First activity checkpoint",
+      "caption": "Earlier diagnostic round, retained for comparison.",
+      "images": [
+        {
+          "id": "activity1-1366-bench-sit",
+          "image": "bible/shots/showcase/station-garden-1/activity1/1366-bench-sit.webp",
+          "caption": "1366 bench sit"
+        },
+        {
+          "id": "activity1-1366-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity1/1366-collect-contact.webp",
+          "caption": "1366 collect contact"
+        },
+        {
+          "id": "activity1-1366-garden",
+          "image": "bible/shots/showcase/station-garden-1/activity1/1366-garden.webp",
+          "caption": "1366 garden"
+        },
+        {
+          "id": "activity1-1366-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity1/1366-sweep-contact.webp",
+          "caption": "1366 sweep contact"
+        },
+        {
+          "id": "activity1-1366-talk-continued",
+          "image": "bible/shots/showcase/station-garden-1/activity1/1366-talk-continued.webp",
+          "caption": "1366 talk continued"
+        },
+        {
+          "id": "activity1-1366-talk-first",
+          "image": "bible/shots/showcase/station-garden-1/activity1/1366-talk-first.webp",
+          "caption": "1366 talk first"
+        }
+      ]
+    },
+    {
+      "title": "Continue correction",
+      "caption": "Earlier diagnostic round, retained for comparison.",
+      "images": [
+        {
+          "id": "activity2-1366-bench-sit",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-bench-sit.webp",
+          "caption": "1366 bench sit"
+        },
+        {
+          "id": "activity2-1366-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-collect-contact.webp",
+          "caption": "1366 collect contact"
+        },
+        {
+          "id": "activity2-1366-desktop-follow",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-desktop-follow.webp",
+          "caption": "1366 desktop follow"
+        },
+        {
+          "id": "activity2-1366-evening",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-evening.webp",
+          "caption": "1366 evening"
+        },
+        {
+          "id": "activity2-1366-garden",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-garden.webp",
+          "caption": "1366 garden"
+        },
+        {
+          "id": "activity2-1366-morning-return",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-morning-return.webp",
+          "caption": "1366 morning return"
+        },
+        {
+          "id": "activity2-1366-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-sweep-contact.webp",
+          "caption": "1366 sweep contact"
+        },
+        {
+          "id": "activity2-1366-talk-busy",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-talk-busy.webp",
+          "caption": "1366 talk busy"
+        },
+        {
+          "id": "activity2-1366-talk-continued",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-talk-continued.webp",
+          "caption": "1366 talk continued"
+        },
+        {
+          "id": "activity2-1366-talk-first",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-talk-first.webp",
+          "caption": "1366 talk first"
+        },
+        {
+          "id": "activity2-1366-talk-repeat",
+          "image": "bible/shots/showcase/station-garden-1/activity2/1366-talk-repeat.webp",
+          "caption": "1366 talk repeat"
+        }
+      ]
+    },
+    {
+      "title": "Bench facing and morning reset",
+      "caption": "Earlier diagnostic round, retained for comparison.",
+      "images": [
+        {
+          "id": "activity3-1366-bench-2-sit",
+          "image": "bible/shots/showcase/station-garden-1/activity3/1366-bench-2-sit.webp",
+          "caption": "1366 bench 2 sit"
+        },
+        {
+          "id": "activity3-1366-bench-sit",
+          "image": "bible/shots/showcase/station-garden-1/activity3/1366-bench-sit.webp",
+          "caption": "1366 bench sit"
+        },
+        {
+          "id": "activity3-1366-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity3/1366-collect-contact.webp",
+          "caption": "1366 collect contact"
+        },
+        {
+          "id": "activity3-1366-garden",
+          "image": "bible/shots/showcase/station-garden-1/activity3/1366-garden.webp",
+          "caption": "1366 garden"
+        },
+        {
+          "id": "activity3-1366-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity3/1366-sweep-contact.webp",
+          "caption": "1366 sweep contact"
+        },
+        {
+          "id": "activity3-1366-talk-continued",
+          "image": "bible/shots/showcase/station-garden-1/activity3/1366-talk-continued.webp",
+          "caption": "1366 talk continued"
+        },
+        {
+          "id": "activity3-1366-talk-first",
+          "image": "bible/shots/showcase/station-garden-1/activity3/1366-talk-first.webp",
+          "caption": "1366 talk first"
+        },
+        {
+          "id": "activity3-390-arcade-link",
+          "image": "bible/shots/showcase/station-garden-1/activity3/390-arcade-link.webp",
+          "caption": "390 arcade link"
+        },
+        {
+          "id": "activity3-390-bench-2-sit",
+          "image": "bible/shots/showcase/station-garden-1/activity3/390-bench-2-sit.webp",
+          "caption": "390 bench 2 sit"
+        },
+        {
+          "id": "activity3-390-bench-sit",
+          "image": "bible/shots/showcase/station-garden-1/activity3/390-bench-sit.webp",
+          "caption": "390 bench sit"
+        },
+        {
+          "id": "activity3-390-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity3/390-collect-contact.webp",
+          "caption": "390 collect contact"
+        },
+        {
+          "id": "activity3-390-covered-approach",
+          "image": "bible/shots/showcase/station-garden-1/activity3/390-covered-approach.webp",
+          "caption": "390 covered approach"
+        },
+        {
+          "id": "activity3-390-garden",
+          "image": "bible/shots/showcase/station-garden-1/activity3/390-garden.webp",
+          "caption": "390 garden"
+        },
+        {
+          "id": "activity3-390-station-boundary",
+          "image": "bible/shots/showcase/station-garden-1/activity3/390-station-boundary.webp",
+          "caption": "390 station boundary"
+        },
+        {
+          "id": "activity3-390-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity3/390-sweep-contact.webp",
+          "caption": "390 sweep contact"
+        },
+        {
+          "id": "activity3-390-talk-continued",
+          "image": "bible/shots/showcase/station-garden-1/activity3/390-talk-continued.webp",
+          "caption": "390 talk continued"
+        },
+        {
+          "id": "activity3-390-talk-first",
+          "image": "bible/shots/showcase/station-garden-1/activity3/390-talk-first.webp",
+          "caption": "390 talk first"
+        }
+      ]
+    },
+    {
+      "title": "Phone and desktop lifecycle",
+      "caption": "Earlier diagnostic round, retained for comparison.",
+      "images": [
+        {
+          "id": "activity4-1366-bench-2-sit",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-bench-2-sit.webp",
+          "caption": "1366 bench 2 sit"
+        },
+        {
+          "id": "activity4-1366-bench-sit",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-bench-sit.webp",
+          "caption": "1366 bench sit"
+        },
+        {
+          "id": "activity4-1366-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-collect-contact.webp",
+          "caption": "1366 collect contact"
+        },
+        {
+          "id": "activity4-1366-desktop-follow",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-desktop-follow.webp",
+          "caption": "1366 desktop follow"
+        },
+        {
+          "id": "activity4-1366-evening",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-evening.webp",
+          "caption": "1366 evening"
+        },
+        {
+          "id": "activity4-1366-garden",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-garden.webp",
+          "caption": "1366 garden"
+        },
+        {
+          "id": "activity4-1366-morning-return",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-morning-return.webp",
+          "caption": "1366 morning return"
+        },
+        {
+          "id": "activity4-1366-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-sweep-contact.webp",
+          "caption": "1366 sweep contact"
+        },
+        {
+          "id": "activity4-1366-talk-busy",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-talk-busy.webp",
+          "caption": "1366 talk busy"
+        },
+        {
+          "id": "activity4-1366-talk-continued",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-talk-continued.webp",
+          "caption": "1366 talk continued"
+        },
+        {
+          "id": "activity4-1366-talk-first",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-talk-first.webp",
+          "caption": "1366 talk first"
+        },
+        {
+          "id": "activity4-1366-talk-repeat",
+          "image": "bible/shots/showcase/station-garden-1/activity4/1366-talk-repeat.webp",
+          "caption": "1366 talk repeat"
+        },
+        {
+          "id": "activity4-390-bench-2-sit",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-bench-2-sit.webp",
+          "caption": "390 bench 2 sit"
+        },
+        {
+          "id": "activity4-390-bench-sit",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-bench-sit.webp",
+          "caption": "390 bench sit"
+        },
+        {
+          "id": "activity4-390-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-collect-contact.webp",
+          "caption": "390 collect contact"
+        },
+        {
+          "id": "activity4-390-evening",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-evening.webp",
+          "caption": "390 evening"
+        },
+        {
+          "id": "activity4-390-garden",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-garden.webp",
+          "caption": "390 garden"
+        },
+        {
+          "id": "activity4-390-morning-return",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-morning-return.webp",
+          "caption": "390 morning return"
+        },
+        {
+          "id": "activity4-390-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-sweep-contact.webp",
+          "caption": "390 sweep contact"
+        },
+        {
+          "id": "activity4-390-talk-busy",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-talk-busy.webp",
+          "caption": "390 talk busy"
+        },
+        {
+          "id": "activity4-390-talk-continued",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-talk-continued.webp",
+          "caption": "390 talk continued"
+        },
+        {
+          "id": "activity4-390-talk-first",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-talk-first.webp",
+          "caption": "390 talk first"
+        },
+        {
+          "id": "activity4-390-talk-repeat",
+          "image": "bible/shots/showcase/station-garden-1/activity4/390-talk-repeat.webp",
+          "caption": "390 talk repeat"
+        }
+      ]
+    },
+    {
+      "title": "Registration and seated Continue checkpoint",
+      "caption": "Earlier diagnostic round, retained for comparison.",
+      "images": [
+        {
+          "id": "final-1366-bench-sit",
+          "image": "bible/shots/showcase/station-garden-1/final/1366-bench-sit.webp",
+          "caption": "1366 bench sit"
+        },
+        {
+          "id": "final-1366-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/final/1366-collect-contact.webp",
+          "caption": "1366 collect contact"
+        },
+        {
+          "id": "final-1366-garden",
+          "image": "bible/shots/showcase/station-garden-1/final/1366-garden.webp",
+          "caption": "1366 garden"
+        },
+        {
+          "id": "final-1366-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/final/1366-sweep-contact.webp",
+          "caption": "1366 sweep contact"
+        },
+        {
+          "id": "final-390-bench-sit",
+          "image": "bible/shots/showcase/station-garden-1/final/390-bench-sit.webp",
+          "caption": "390 bench sit"
+        },
+        {
+          "id": "final-390-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/final/390-collect-contact.webp",
+          "caption": "390 collect contact"
+        },
+        {
+          "id": "final-390-garden",
+          "image": "bible/shots/showcase/station-garden-1/final/390-garden.webp",
+          "caption": "390 garden"
+        },
+        {
+          "id": "final-390-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/final/390-sweep-contact.webp",
+          "caption": "390 sweep contact"
+        }
+      ]
+    },
+    {
+      "title": "Final garden interactions",
+      "caption": "Native phone and desktop; real bench and conversation Continue, completed work, evening and next morning.",
+      "images": [
+        {
+          "id": "final2-1366-bench-1-continued",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-bench-1-continued.webp",
+          "caption": "1366 bench 1 continued"
+        },
+        {
+          "id": "final2-1366-bench-2-continued",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-bench-2-continued.webp",
+          "caption": "1366 bench 2 continued"
+        },
+        {
+          "id": "final2-1366-bench-2-sit",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-bench-2-sit.webp",
+          "caption": "1366 bench 2 sit"
+        },
+        {
+          "id": "final2-1366-bench-sit",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-bench-sit.webp",
+          "caption": "1366 bench sit"
+        },
+        {
+          "id": "final2-1366-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-collect-contact.webp",
+          "caption": "1366 collect contact"
+        },
+        {
+          "id": "final2-1366-desktop-follow",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-desktop-follow.webp",
+          "caption": "1366 desktop follow"
+        },
+        {
+          "id": "final2-1366-evening",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-evening.webp",
+          "caption": "1366 evening"
+        },
+        {
+          "id": "final2-1366-garden",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-garden.webp",
+          "caption": "1366 garden"
+        },
+        {
+          "id": "final2-1366-morning-return",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-morning-return.webp",
+          "caption": "1366 morning return"
+        },
+        {
+          "id": "final2-1366-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-sweep-contact.webp",
+          "caption": "1366 sweep contact"
+        },
+        {
+          "id": "final2-1366-talk-busy",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-talk-busy.webp",
+          "caption": "1366 talk busy"
+        },
+        {
+          "id": "final2-1366-talk-continued",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-talk-continued.webp",
+          "caption": "1366 talk continued"
+        },
+        {
+          "id": "final2-1366-talk-done",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-talk-done.webp",
+          "caption": "1366 talk done"
+        },
+        {
+          "id": "final2-1366-talk-first",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-talk-first.webp",
+          "caption": "1366 talk first"
+        },
+        {
+          "id": "final2-1366-talk-repeat",
+          "image": "bible/shots/showcase/station-garden-1/final2/1366-talk-repeat.webp",
+          "caption": "1366 talk repeat"
+        },
+        {
+          "id": "final2-390-bench-1-continued",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-bench-1-continued.webp",
+          "caption": "390 bench 1 continued"
+        },
+        {
+          "id": "final2-390-bench-2-continued",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-bench-2-continued.webp",
+          "caption": "390 bench 2 continued"
+        },
+        {
+          "id": "final2-390-bench-2-sit",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-bench-2-sit.webp",
+          "caption": "390 bench 2 sit"
+        },
+        {
+          "id": "final2-390-bench-sit",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-bench-sit.webp",
+          "caption": "390 bench sit"
+        },
+        {
+          "id": "final2-390-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-collect-contact.webp",
+          "caption": "390 collect contact; rejected framing, worker outside camera; see corrected phone maintenance approach"
+        },
+        {
+          "id": "final2-390-evening",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-evening.webp",
+          "caption": "390 evening"
+        },
+        {
+          "id": "final2-390-garden",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-garden.webp",
+          "caption": "390 garden"
+        },
+        {
+          "id": "final2-390-morning-return",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-morning-return.webp",
+          "caption": "390 morning return"
+        },
+        {
+          "id": "final2-390-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-sweep-contact.webp",
+          "caption": "390 sweep contact; rejected framing, worker outside camera; see corrected phone maintenance approach"
+        },
+        {
+          "id": "final2-390-talk-busy",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-talk-busy.webp",
+          "caption": "390 talk busy"
+        },
+        {
+          "id": "final2-390-talk-continued",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-talk-continued.webp",
+          "caption": "390 talk continued"
+        },
+        {
+          "id": "final2-390-talk-done",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-talk-done.webp",
+          "caption": "390 talk done"
+        },
+        {
+          "id": "final2-390-talk-first",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-talk-first.webp",
+          "caption": "390 talk first"
+        },
+        {
+          "id": "final2-390-talk-repeat",
+          "image": "bible/shots/showcase/station-garden-1/final2/390-talk-repeat.webp",
+          "caption": "390 talk repeat"
+        }
+      ]
+    },
+    {
+      "title": "Corrected phone maintenance approach",
+      "caption": "Real walking approach with both actors present, followed by closer native diagnostic contact views. These replace final2 phone contact images, where the worker was outside the camera. No scene geometry or actor is hidden.",
+      "images": [
+        {
+          "id": "contact-final-390-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/contact-final/390-collect-contact.webp",
+          "caption": "390 collect contact"
+        },
+        {
+          "id": "contact-final-390-garden",
+          "image": "bible/shots/showcase/station-garden-1/contact-final/390-garden.webp",
+          "caption": "390 garden"
+        },
+        {
+          "id": "contact-final-390-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/contact-final/390-sweep-contact.webp",
+          "caption": "390 sweep contact"
+        },
+        {
+          "id": "contact-final-390-walking-approach",
+          "image": "bible/shots/showcase/station-garden-1/contact-final/390-walking-approach.webp",
+          "caption": "390 walking approach"
+        },
+        {
+          "id": "contact-final-390-worker-next-patch",
+          "image": "bible/shots/showcase/station-garden-1/contact-final/390-worker-next-patch.webp",
+          "caption": "390 worker next patch; routine movement assertion only, worker outside ordinary camera"
+        }
+      ]
+    },
+    {
+      "title": "Ordinary phone approach after the gull passes",
+      "caption": "Second ordinary approach frame keeps the player camera and all wildlife. The worker, hand, tools and litter are now unobstructed. Diagnostic close views and the movement assertion are retained from the same run.",
+      "images": [
+        {
+          "id": "approach-clear-390-collect-contact",
+          "image": "bible/shots/showcase/station-garden-1/approach-clear/390-collect-contact.webp",
+          "caption": "390 collect contact"
+        },
+        {
+          "id": "approach-clear-390-garden",
+          "image": "bible/shots/showcase/station-garden-1/approach-clear/390-garden.webp",
+          "caption": "390 garden"
+        },
+        {
+          "id": "approach-clear-390-sweep-contact",
+          "image": "bible/shots/showcase/station-garden-1/approach-clear/390-sweep-contact.webp",
+          "caption": "390 sweep contact"
+        },
+        {
+          "id": "approach-clear-390-walking-approach-clear",
+          "image": "bible/shots/showcase/station-garden-1/approach-clear/390-walking-approach-clear.webp",
+          "caption": "390 walking approach clear"
+        },
+        {
+          "id": "approach-clear-390-walking-approach",
+          "image": "bible/shots/showcase/station-garden-1/approach-clear/390-walking-approach.webp",
+          "caption": "390 walking approach"
+        },
+        {
+          "id": "approach-clear-390-worker-next-patch",
+          "image": "bible/shots/showcase/station-garden-1/approach-clear/390-worker-next-patch.webp",
+          "caption": "390 worker next patch; movement assertion only, worker outside ordinary camera"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play the shop street",
+      "href": "game3d/index.html?place=shotengai"
+    },
+    {
+      "label": "Implementation and QA notes",
+      "href": "notes/station-garden-20261007.md"
+    }
+  ]
+}

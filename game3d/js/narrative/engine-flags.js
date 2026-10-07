@@ -129,6 +129,11 @@ ENGINE_WRITES['game3d/js/places/ferry-terminal/food-state.js'] = {
 };
 
 export const KNOW_PREFIX = 'know_';
+ENGINE_WRITES['game3d/js/places/station-garden/index.js'] = {
+  exact: ['garden_worker_busy', 'garden_worker_done', 'garden_bench_free'],
+  prefix: [],
+};
+
 export function flagKeys(owner) {
   const spec = ENGINE_WRITES[owner];
   if (!spec) throw new Error('Unknown flag owner: ' + owner);

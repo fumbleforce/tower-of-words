@@ -62,7 +62,7 @@ function shed(root) {
   g.add(roof);
   g.updateMatrixWorld(true);
   // the stair foot and the west beam's end, in the forecourt's frame
-  const w = (u, v) => new THREE.Vector3(u, 0, v).applyMatrix4(g.matrixWorld);
+  const w = (u, v) => new THREE.Vector3(u, 0, v).applyMatrix4(g.matrix);
   return { foot: w(0, L / 2 + 2.6), beamEnd: w(-2.2, L / 2 + 6), roof };
 }
 
@@ -105,7 +105,17 @@ function approach(root, beamEnd) {
 }
 
 // the covered walkway from the stair foot: east along the shed's south end, then north to the station's glass front
-function walkway(root, foot, { x0: X0, x1: X1, zS: ZS }) {
+export function coveredWalk(station) {
+  const CX = (station.x0 + station.x1) / 2,
+    [x, z] = [SHED.c[0], SHED.c[1] + SHED.L / 2 + 2.6];
+  return [
+    [x - 0.9, CX + 1.2, z - 0.9, z + 0.9],
+    [CX - 1.2, CX + 1.2, station.zS, z - 0.9],
+  ];
+}
+
+function walkway(root, foot, station) {
+  const { x0: X0, x1: X1, zS: ZS } = station;
   const CX = (X0 + X1) / 2,
     z = foot.z, // the east run's middle line
     posts = [],
@@ -118,16 +128,18 @@ function walkway(root, foot, { x0: X0, x1: X1, zS: ZS }) {
   for (let zz = ZS + 1.2; zz < z - 0.9; zz += 2.5)
     posts.push([0.08, 2.2, 0.08, CX - 1.15, 0, zz], [0.08, 2.2, 0.08, CX + 1.15, 0, zz]);
   posts.push([0.08, 2.2, 0.08, CX + 1.15, 0, z + 0.85], [0.08, 2.2, 0.08, CX - 1.15, 0, z + 0.85]);
-  root.add(boxes(roofs, '#56697d'), boxes(posts, '#6f7782'));
+  const roof = boxes(roofs, '#56697d');
+  root.add(roof, boxes(posts, '#6f7782'));
   const stone = { color: '#8e8a86', seam: '#7f7b77' };
-  const walk = [foot.x - 0.9, CX + 1.2, z - 0.9, z + 0.9];
-  root.add(pavingRects([walk, [CX - 1.2, CX + 1.2, ZS, z - 0.9]], 0.9, stone));
+  root.add(pavingRects(coveredWalk(station), 0.9, stone));
+  return roof;
 }
 
 // the shed, the beam and the walkway round `station` (its outline { x0, x1, zN, zS }); returns the shed's roof
-export function buildShed(root, station) {
+export function buildShed(root, station, onWalkRoof = null) {
   const { foot, beamEnd, roof } = shed(root);
   approach(root, beamEnd);
-  walkway(root, foot, station);
+  const walkRoof = walkway(root, foot, station);
+  onWalkRoof?.(walkRoof);
   return roof;
 }

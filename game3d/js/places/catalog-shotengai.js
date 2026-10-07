@@ -1,11 +1,19 @@
 // The shop street's things and registration IDs (places/shotengai.js), kept beside the catalog (catalog.js).
 export const SHOTENGAI_DETAILS = {
   things: {
+    station_worker: { label: 'Grounds worker', kind: 'person' },
+    garden_bench_1: { label: 'Garden bench', kind: 'thing', verb: 'Sit' },
+    garden_bench_2: { label: 'Garden bench', kind: 'thing', verb: 'Sit' },
     plaza_lane: { label: 'To the plaza', kind: 'thing', verb: 'Go' },
     office_lane: { label: 'To head office', kind: 'thing', verb: 'Go' },
     bike_shop: { label: 'Bike shop', kind: 'thing', verb: 'Go in' },
     store: { label: 'Store window', kind: 'thing', verb: 'Look', pin: 'near' },
-    bakery: { label: 'Delivery note', kind: 'thing', verb: 'Read', pin: 'near' },
+    bakery: {
+      label: 'Delivery note',
+      kind: 'thing',
+      verb: 'Read',
+      pin: 'near',
+    },
     store_door: { label: 'Konbini', kind: 'thing', verb: 'Go in' },
     bakery_door: { label: 'Bakery', kind: 'thing', verb: 'Go in' },
     game_centre: { label: 'Game centre', kind: 'thing', verb: 'Go in' },
@@ -22,6 +30,10 @@ export const SHOTENGAI_DETAILS = {
     rei: { label: 'Tennis player', kind: 'person' },
   },
   spots: [
+    'station_garden',
+    'station_garden_approach',
+    'garden_free_bench',
+    'garden_next_patch',
     'plaza_entry',
     'office_lane',
     'shotengai_shrine',
@@ -31,11 +43,17 @@ export const SHOTENGAI_DETAILS = {
     'party_kenji',
     'party_mio',
   ],
-  nooks: ['shotengai_shrine', 'shotengai_back_alley', 'shotengai_pine_bench'], // docs/game/places.md, "Nooks"
-  seats: ['party_seat', 'party_mori'],
+  nooks: [
+    'station_garden',
+    'station_garden_approach',
+    'shotengai_shrine',
+    'shotengai_back_alley',
+    'shotengai_pine_bench',
+  ], // docs/game/places.md, "Nooks"
+  seats: ['garden_bench_1', 'garden_bench_2', 'party_seat', 'party_mori'],
   zones: ['office_exit', 'plaza_exit'],
-  people: ['mori', 'kenji', 'kuroda', 'aoi', 'kuro', 'rei'],
-  hooks: ['partySetup', 'partyFood'],
+  people: ['station_worker', 'mori', 'kenji', 'kuroda', 'aoi', 'kuro', 'rei'],
+  hooks: ['gardenWorker', 'partySetup', 'partyFood'],
 };
 
 // The karaoke box's (places/karaoke.js, karaoke-booth.js): the front desk downstairs, through its door off the

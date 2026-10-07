@@ -54,12 +54,6 @@ export const BANDS = {
     },
     // the dorm cluster's belt of pines south of the row's garden, as dorm-court/cluster-yards.js plants it
     { by: 'lawn', seed: 90, belts: [[[82, 94, 20.6, 25], 'pine,pine,sakura', 3.0]] },
-    // the garden south of the station and the coast's south walk, past the rows' west end and the promenade's
-    {
-      by: 'westCoast',
-      rects: [[-30, -5.5, 11, 26.9]],
-      pave: ['coast_south_walk', 'station_walk', 'south_link'],
-    },
   ],
   east_lane: [
     // the sports lane's corner with the north street and the lawns past it, past the north street's top

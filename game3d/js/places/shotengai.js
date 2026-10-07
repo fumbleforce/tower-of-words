@@ -13,6 +13,7 @@ import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { shotengaiParty } from './shotengai-party.js';
+import { stationGarden } from './station-garden/index.js';
 import { day3Place } from './day3/place.js';
 
 // The shop street and the seafront (scenes/shotengai.js): reached from the plaza down the cross walk and along the
@@ -33,9 +34,21 @@ export async function shotengaiPlace(game) {
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
   // the way a door faces: from it out to the step in front of it
   const outOf = (id) => Math.atan2(dk(id).step[0] - dk(id).local[0], dk(id).step[1] - dk(id).local[1]);
+  const garden = stationGarden(game, { w, K });
   const party = shotengaiParty(game, { w, K }); // Kenji waits at the izakaya door.
   const d3 = day3Place(game, 'shotengai', { root: w.root, K, ids: ['kuroda', 'aoi', 'kuro', 'rei'] }); // day 3's shoppers
   const things = {
+    station_worker: { ...PLACE_DETAILS.shotengai.things.station_worker, ...garden.thing('station_worker') },
+    garden_bench_1: {
+      ...PLACE_DETAILS.shotengai.things.garden_bench_1,
+      ...garden.thing('garden_bench_1'),
+      anchor: (v) => garden.thing('garden_bench_1').anchor(v),
+    },
+    garden_bench_2: {
+      ...PLACE_DETAILS.shotengai.things.garden_bench_2,
+      ...garden.thing('garden_bench_2'),
+      anchor: (v) => garden.thing('garden_bench_2').anchor(v),
+    },
     plaza_lane: {
       ...PLACE_DETAILS.shotengai.things.plaza_lane,
       anchor: (v) => v.set(w.edge[0], 1.1, w.edge[1] - 1.2),
@@ -127,6 +140,10 @@ export async function shotengaiPlace(game) {
     grade: MORNING_GRADE,
     things,
     spots: {
+      station_garden: garden.spots.station_garden,
+      station_garden_approach: garden.spots.station_garden_approach,
+      garden_free_bench: garden.spots.garden_free_bench,
+      garden_next_patch: garden.spots.garden_next_patch,
       plaza_entry: w.in,
       office_lane: southLink.lane,
       shotengai_shrine: w.nooks.shotengai_shrine,
@@ -136,8 +153,14 @@ export async function shotengaiPlace(game) {
       party_kenji: party.spots.party_kenji,
       party_mio: party.spots.party_mio,
     },
-    seats: { party_seat: party.seats.party_seat, party_mori: party.seats.party_mori },
+    seats: {
+      garden_bench_1: garden.seats.garden_bench_1,
+      garden_bench_2: garden.seats.garden_bench_2,
+      party_seat: party.seats.party_seat,
+      party_mori: party.seats.party_mori,
+    },
     people: {
+      station_worker: garden.people.station_worker,
       mori: party.people.mori,
       kenji: party.people.kenji,
       kuroda: d3.people.kuroda,
@@ -146,7 +169,11 @@ export async function shotengaiPlace(game) {
       rei: d3.people.rei,
     },
     zones: { office_exit: southLink.exit, plaza_exit: (x, z) => z > w.exitZ },
-    hooks: { partySetup: party.hooks.partySetup, partyFood: party.hooks.partyFood },
+    hooks: {
+      gardenWorker: garden.hooks.gardenWorker,
+      partySetup: party.hooks.partySetup,
+      partyFood: party.hooks.partyFood,
+    },
     day3: (a) => d3.setup(P, a),
     fit(aspect) {
       // as the plaza: the phone's camera distance on both, following him, a little ahead (west, down the street)
@@ -191,6 +218,10 @@ export async function shotengaiPlace(game) {
       cam.elev += (want - cam.elev) * Math.min(1, dt * 3);
     },
     onPeriod(period) {
+      if (period !== 'evening') {
+        w.morning();
+        P.grade = MORNING_GRADE;
+      }
       w.cards(sim.day, period); // the shops' door cards for the day and the time (scenes/shop-signs.js WHEN)
       if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
       eveningLight(w.scene, sim.day);
@@ -229,7 +260,9 @@ export async function shotengaiPlace(game) {
     },
   };
   party.install(P);
+  garden.install(P);
   conversationCamera(game, P, {
+    station_worker: { yaw: -0.7, elev: 40, fov: 45, minDistance: 8, halfWidth: 2.3, height: 0.4 },
     aoi: { yaw: -0.85, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.0, height: 0.4 },
     rei: { yaw: -2.15, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.0, height: 0.4 },
     kuro: { yaw: -1.5, elev: 35, fov: 45, minDistance: 4.5, halfWidth: 1.0, height: 0.4 },
