@@ -9,8 +9,15 @@ const THREE=await import('../../vendor/three/three.module.js');
 const {createArtStage}=await import('../../js/places/ongoing/art-stage.js');
 const {buildCommons}=await import('../../js/scenes/rooms/commons.js');
 const {ART_SEATS}=await import('../../js/places/ongoing/art-props.js');
-function rig(){const root=new THREE.Group();return {root,seated:false,update(){},setState(){},sitAt(x,y,z,ry){root.position.set(x,y,z);root.rotation.y=ry;}};}
-function fixture(){const player=rig(),mori=rig(),space=new THREE.Group();space.add(player.root,mori.root);const cam={yaw:0,elev:1,fitDist:12,release(){this.close=null;},closeOn(p,zoom,y){this.close={point:p,zoom,y};}};const P={space,people:{mori},cam,nav:{free:()=>true}};const game={player,place:P,walker:{sync(){}},tween:async(_,f)=>f(1),wait:async()=>{}};return {P,game,stage:createArtStage(game,P)};}
+function rig(x){
+ const root=new THREE.Group();root.position.set(x,0,-3.25);
+ const arm=new THREE.Bone();arm.name='RightArm';arm.position.set(-.15,.9,0);
+ const fore=new THREE.Bone();fore.name='RightForeArm';fore.position.set(0,-.26,0);
+ const hand=new THREE.Bone();hand.name='RightHand';hand.position.set(0,-.26,0);
+ root.add(arm);arm.add(fore);fore.add(hand);
+ return {root,seated:false,update(){},setState(){},sitAt(x,y,z,ry){root.position.set(x,y,z);root.rotation.y=ry;}};
+}
+function fixture(){const player=rig(.5),mori=rig(-.4),space=new THREE.Group();space.add(player.root,mori.root);const cam={yaw:0,elev:1,fitDist:12,release(){this.close=null;},closeOn(p,zoom,y){this.close={point:p,zoom,y};}};const P={space,people:{mori},cam,nav:{free:()=>true}};const game={player,place:P,walker:{sync(){}},tween:async(_,f)=>f(1),wait:async()=>{}};return {P,game,stage:createArtStage(game,P)};}
 test('art narrative entry requires an explicitly approved loaded photograph',async()=>{
  const f=fixture();assert.equal(f.stage.ready(),false);await assert.rejects(f.stage.act({state:'begin'}),/photograph/);assert.equal(f.stage.props.root.visible,false);
  f.stage.setPhotograph(new THREE.Texture({width:100,height:60}));assert.equal(f.stage.ready(),false);
@@ -38,10 +45,7 @@ test('leaving an in-flight drawing cancels late arm writes and restores original
  assert.equal(f.stage.props.root.children.length,f.stage.props.items.length,'all held props returned to owned root');
 });
 test('teapot stays on a real wrist across the dialogue pause and serialized Continue',async()=>{
- const f=fixture();for(const r of [f.game.player,f.P.people.mori]){
-  const arm=new THREE.Bone();arm.name='RightArm';arm.position.set(0,.65,0);const fore=new THREE.Bone();fore.name='RightForeArm';fore.position.set(0,-.23,0);const hand=new THREE.Bone();hand.name='RightHand';hand.position.set(0,-.23,0);r.root.add(arm);arm.add(fore);fore.add(hand);
- }
- f.game.player.root.position.set(.5,0,-3.25);f.P.people.mori.root.position.set(-.4,0,-3.25);
+ const f=fixture();
  f.stage.setPhotograph(new THREE.Texture({width:10,height:10}),{approved:true});f.stage.restore({active:true,drawing:'blank',people:{},props:{}});
  await f.stage.act({state:'takeTea'});const saved=JSON.parse(JSON.stringify(f.stage.snapshot()));assert.equal(saved.held[0].who,'eric');
  const wrist=f.game.player.root.getObjectByName('RightHand'),point=()=>f.P.space.worldToLocal(wrist.getWorldPosition(new THREE.Vector3()));
@@ -53,4 +57,14 @@ test('early practice draws only the player page and preserves it through seriali
  const f=fixture();f.stage.setPhotograph(new THREE.Texture({width:10,height:10}),{approved:true});f.stage.restore({active:true,drawing:'blank',people:{},props:{}});
  await f.stage.act({state:'drawTogether'});const saved=JSON.parse(JSON.stringify(f.stage.snapshot()));assert.equal(saved.drawing,'blank');assert.equal(saved.playerDrawing.kind,'slope');
  const restored=fixture();restored.stage.setPhotograph(new THREE.Texture({width:10,height:10}),{approved:true});restored.stage.restore(saved);assert.equal(restored.stage.props.player.snapshot().kind,'slope');assert.equal(restored.stage.props.mori.snapshot().kind,'blank');
+});
+test('pour keeps the real spout above the cup opening and restores a full cup',async()=>{
+ const f=fixture();f.game.tween=async(_,step)=>{for(let i=0;i<=20;i++)step(i/20);};
+ f.stage.setPhotograph(new THREE.Texture({width:10,height:10}),{approved:true});f.stage.restore({active:true,drawing:'blank',people:{},props:{}});
+ await f.stage.act({state:'takeTea'});await f.stage.act({state:'pour'});
+ const spout=f.stage.contacts.find(c=>c.phase==='pour-spout');assert.ok(spout&&spout.gap<.043,JSON.stringify(spout));
+ assert.equal(f.stage.props.cupLevels[1],1);assert.equal(f.stage.props.stream.visible,false);
+ const saved=JSON.parse(JSON.stringify(f.stage.snapshot()));f.stage.restore(saved);
+ assert.equal(f.stage.props.cupLevels[1],1);assert.equal(f.stage.props.cups[1].getObjectByName('tea').visible,true);
+ assert.equal(f.stage.props.pot.parent,f.stage.props.root);
 });

@@ -913,6 +913,8 @@ The camera looks in from the south over the cut-down front wall: on a desktop th
 
 A boarded floor and pale walls, three windows high in the north wall onto the back walk. West, the lounge: a TV on a low cabinet against the wall, a teal sofa facing it across a low table with a remote and two mugs, on a rug; a bookshelf of mixed spines nearer the door. In the middle the long shared table with green chairs round it, the art club's materials set out at its east end: a cutting mat with a stack of paper, two jars of brushes, paint tubes and a palette. Against the north wall a drying rack of wire shelves, sheets laid flat on it and one hung by pegs from the top rail, and beside it the shared kitchen: the fridge with notes stuck on its door, a counter with the sink, two hobs, a kettle and a rice cooker, a wall cupboard over it. By the east wall the printer on a low cabinet, a sheet in its tray, and a notice board over it.
 
+Tuesday evening art members sit at the two north-side table chairs with Mori. His approved Lillehammer photograph stays on the tabletop; pencils, separate drawing sheets, a teapot and open cups support the optional sketch and tea actions. The player reaches the chair from the clear north aisle. Leaving restores the ordinary room view and prior actor positions.
+
 ### Things
 
 | Id | Label | What it is |
