@@ -117,3 +117,14 @@ test('collecting cached nested stories never consumes protagonist tokens', async
   assert.ok(first.eric.some(o => o.text === 'Eric-san? I am Kenji!' && !o.own));
   assert.deepEqual(shared, original);
 });
+
+test('identical Japanese from different speakers cannot silently replace one voice', async () => {
+  const line = (say, voice) => ({ say, text: 'こんにちは。', overheard: true, ...(voice ? { voice } : {}) });
+  const scenes = lines => [{ day: 1, files: [{ name: 'greetings', load: async () => ({ nodes: { hello: lines } }) }] }];
+  await assert.rejects(voiceLines({ sets: scenes([line('guard'), line('aoi')]) }), /shared by guard and aoi/);
+  const keyed = await voiceLines({ sets: scenes([line('guard', 'guard-konnichiwa'), line('aoi')]) });
+  const entries = manifestOf(keyed).filter(row => row.text === 'こんにちは。');
+  assert.deepEqual(entries.map(row => [row.key, row.speaker]), [['guard-konnichiwa', 'guard'], [heardKey('こんにちは。'), 'aoi']]);
+  const repeated = await voiceLines({ sets: scenes([line('guard', 'guard-konnichiwa'), line('guard', 'guard-konnichiwa')]) });
+  assert.equal(manifestOf(repeated).filter(row => row.key === 'guard-konnichiwa').length, 1);
+});

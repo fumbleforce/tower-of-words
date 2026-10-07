@@ -16,7 +16,7 @@ export default place(
           { if: "period == 'evening'", then: [
             { say: 'guard', overheard: true, emo: 'polite', text: 'こんばんは。' }, { do: 'bow', who: 'guard' }, { end: true },
           ] },
-          { say: 'guard', overheard: true, emo: 'polite', text: 'こんにちは。' }, { do: 'bow', who: 'guard' }, { end: true },
+          { say: 'guard', voice: 'guard-konnichiwa', overheard: true, emo: 'polite', text: 'こんにちは。' }, { do: 'bow', who: 'guard' }, { end: true },
         ] },
         { if: "period == 'lunch'", then: [
           { say: 'guard', overheard: true, emo: 'polite', text: '今は休憩中です。点検は、また朝に。' },

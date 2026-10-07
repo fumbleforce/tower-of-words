@@ -71,7 +71,7 @@ export default {
     kuro: [
       { do: 'face', who: 'kuro', to: 'eric' },
       { if: 'going_home', then: [
-        { say: 'kuro', overheard: true, emo: 'polite', text: 'お疲れさまです。' },
+        { say: 'kuro', voice: 'kuro-otsukare', overheard: true, emo: 'polite', text: 'お疲れさまです。' },
         { do: 'bow', who: 'kuro' },
       ], else: [
         { say: 'kuro', overheard: true, emo: 'polite', text: '{ohayo}。どうぞ。' },
@@ -83,7 +83,7 @@ export default {
     ohayo_kuro: [
       { do: 'face', who: 'kuro', to: 'eric' },
       { if: 'going_home', then: [
-        { say: 'kuro', overheard: true, emo: 'polite', text: 'お疲れさまです。' },
+        { say: 'kuro', voice: 'kuro-otsukare', overheard: true, emo: 'polite', text: 'お疲れさまです。' },
       ], else: [
         { say: 'kuro', overheard: true, emo: 'polite', text: 'あ、{ohayo}。' },
       ] },

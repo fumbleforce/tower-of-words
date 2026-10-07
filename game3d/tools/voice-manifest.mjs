@@ -58,6 +58,9 @@ async function collect(mc, sets) {
     const spoken = resolve(text);
     const lang = s.overheard || (jaRe.test(spoken) && !/[a-zA-Z]{3,}/.test(spoken.replace(/\([^)]*\)/g, ''))) ? 'ja' : 'en';
     const key = s.voice || (s.overheard ? heardKey(text) : lineKey(who, text));
+    const previous = out.get(key);
+    if (previous && previous.speaker !== who)
+      throw new Error(`Voice key ${key} is shared by ${previous.speaker} and ${who}; give each speaker an explicit voice key`);
     storyKeys?.add(key);
     const words = [];
     for (const [id, w] of Object.entries(WORDS)) for (const ja of [w.ja, ...(w.alias || [])]) if (spoken.includes(ja) && !words.some(([, x]) => x.includes(ja))) words.push([id, ja]);

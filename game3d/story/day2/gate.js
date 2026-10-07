@@ -33,7 +33,7 @@ export default {
         { do: 'gesture', who: 'guard', kind: 'point', to: 'platform_way' },
       ], else: [{ say: 'guard', overheard: true, emo: 'polite', text: 'お疲れさまです。' }] },
     ],
-    d2_guard_idle: [{ say: 'guard', overheard: true, emo: 'polite', text: 'はい、どうぞ。' }],
+    d2_guard_idle: [{ say: 'guard', voice: 'guard-dozo', overheard: true, emo: 'polite', text: 'はい、どうぞ。' }],
     d2_reader: [{ do: 'reader', side: 'r', state: 'green' }, { do: 'gate', state: 'open' }],
     d2_cat: [
       { say: 'eric', emo: 'warm', text: 'They still haven’t given you a badge, then.' },
