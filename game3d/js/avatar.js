@@ -248,7 +248,7 @@ const json = (u) =>
   fetch(u + ver())
     .then((r) => (r.ok ? r.json() : null))
     .catch(() => null);
-// Any character made with the 3D workflow and rigged through Meshy's API (Eric, and the cast in assets/characters/<id>/):
+// Meshy API characters (Eric and the cast in assets/characters/<id>/):
 // walk, run, idle, sit clips, the base colour texture, optional phone and gestures.
 export async function loadMeshy(id, { height = 1.2, dir, stride, extra = true } = {}) {
   return meshyFrom(id, await meshyFiles(id, { dir, extra }), { height, stride });
@@ -263,7 +263,7 @@ export async function meshyFiles(id, { dir = CDIR + id + '/', extra = true } = {
     loadRelaxedIdle(id, ver()),
     load(dir + 'sit.glb' + ver()),
     new THREE.TextureLoader().loadAsync(dir + 'base.webp' + ver()),
-    ...['phone', ...GESTURES].map((f) => extra && json(CDIR + id + '/' + f + '.json')),
+    ...['phone', ...GESTURES].map((f) => (extra === true || extra === f) && json(CDIR + id + '/' + f + '.json')),
   ]);
 }
 // The person, at once, from files already loaded in loadMeshy's order (chibi.js makes several from one set).

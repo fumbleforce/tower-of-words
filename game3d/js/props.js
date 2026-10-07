@@ -1,4 +1,4 @@
-// Shared matte props, rounded boxes and convex hulls.
+import { deskKeyboard } from './desk-keyboard.js';
 import * as THREE from 'three';
 import { roundedBox } from './perf/rounded-box.js';
 import { hull, icoPoints } from './train/hull.js';
@@ -407,7 +407,7 @@ export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1
     m.position.set(0, H, -d * 0.2);
     g.add(m);
   }
-  g.add(rbox(0.36, 0.02, 0.12, '#cfd1d4', { y: H, z: d * 0.12, r: 0.008 }));
+  deskKeyboard(g, rbox, d);
   if (clutter) {
     // a paper tray, a pen cup, a binder or two
     g.add(rbox(0.2, 0.05, 0.26, PAL.dark, { x: -w * 0.36, y: H, z: -0.05, r: 0.01 }));

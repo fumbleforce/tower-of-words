@@ -8,8 +8,9 @@ export async function eatMioBento(game, job, mio, props, hands) {
     if (o.isBone && /^(mixamorig)?Head$/.test(o.name)) head = o;
   });
   if (!head) throw new Error('Mio lunch needs her real head anchor');
-  // Native face-surface pick at the lower lip, in this approved head bone's coordinates.
-  const mouth = hands.point(head, new THREE.Vector3(0, 0.055, 0.47)),
+  // Native face-surface picks at the lower lip. Mio2's API skeleton uses different bone units.
+  const lip = mio.id === 'mio2' ? new THREE.Vector3(0.23, 1.65, 13.44) : new THREE.Vector3(0, 0.055, 0.47);
+  const mouth = hands.point(head, lip),
     yaw = mio.root.rotation.y;
   const bowl = hands.point(props.rice, new THREE.Vector3(0, 0.008, 0));
   const arm = await hands.reach(job, mio, props.restingGrip().toArray(), 'chopsticks-pickup', {

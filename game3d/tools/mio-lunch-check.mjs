@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { waitForGame } from '../test/support/wait-ready.mjs';
+import { scopedRoute } from '../../tools/bible/check-scope.mjs';
 const width = +(process.argv[2] || 1366), step = +(process.argv[3] || 2), mc = width < 600 ? 'carina' : 'eric';
 const rootURL = `http://127.0.0.1:${process.env.PORT || 8771}/${process.env.BASE || 'game3d'}`;
 const out = new URL(`../shots/mio-lunch/${process.env.ROUND || 'round1'}/`, import.meta.url).pathname;
@@ -9,6 +10,8 @@ fs.mkdirSync(out, { recursive: true });
 await withBrowserJob(`mio-lunch-${width}-${step}`, async browser => {
   const context = await browser.newContext({ viewport: { width, height: width < 600 ? 844 : 860 } });
   const page = await context.newPage(), errors = [], captures = [];
+  let closing = false;
+  await context.route('**/*', scopedRoute({ publicOnly: true, isClosing: () => closing, onFailure: (e) => errors.push(e) }));
   page.on('pageerror', e => errors.push(e.message));
   page.on('console', m => { if (m.type() === 'warning' && /walkRig|Mio lunch/.test(m.text())) errors.push(m.text()); });
   await page.addInitScript(() => globalThis.localStorage.setItem('amakawa-settings', JSON.stringify({v:2, textSpeed:'instant', voiceOn:false, privateMode:false})));
@@ -20,14 +23,14 @@ await withBrowserJob(`mio-lunch-${width}-${step}`, async browser => {
       r.root.traverse(o => { if (o.isBone && /Head|Spine|Hand|Hips|Foot/.test(o.name)) bones[o.name] = g.place.space.worldToLocal(o.getWorldPosition(new THREE.Vector3())).toArray(); });
       const doors=[]; g.place.space.traverse(o=>{if(o.userData.hinge){ const b=new THREE.Box3().setFromObject(o); b.applyMatrix4(g.place.space.matrixWorld.clone().invert()); doors.push({hinge:o.userData.hinge,rotation:o.rotation.y,min:b.min.toArray(),max:b.max.toArray()}); }});
       let mouthSurface=[];
-      const head=bones.mixamorigHead;
+      const head=bones.mixamorigHead || bones.Head;
       if(head) {
         const forward=new THREE.Vector3(Math.sin(r.root.rotation.y),0,Math.cos(r.root.rotation.y));
-        for(const height of [.015,.025,.04,.06]) {
+        for(const height of [-.04,-.02,0,.015,.025,.04,.06]) {
           const at=new THREE.Vector3(...head).add(new THREE.Vector3(0,height,0)).addScaledVector(forward,.7);
           const origin=g.place.space.localToWorld(at),direction=forward.clone().transformDirection(g.place.space.matrixWorld).negate();
           const hits=new THREE.Raycaster(origin,direction,0,1).intersectObject(r.root,true);
-          mouthSurface.push({height,hits:hits.slice(0,5).map(h=>({name:h.object.name,point:g.place.space.worldToLocal(h.point.clone()).toArray(),uv:h.uv?.toArray()}))});
+          mouthSurface.push({height,hits:hits.slice(0,5).map(h=>({name:h.object.name,point:g.place.space.worldToLocal(h.point.clone()).toArray(),headLocal:r.model.getObjectByName('Head')?.worldToLocal(h.point.clone()).toArray(),uv:h.uv?.toArray()}))});
         }
       }
       const screenPicks=[];
@@ -42,9 +45,9 @@ await withBrowserJob(`mio-lunch-${width}-${step}`, async browser => {
     const file = `${out}/${width}-${step}-${label}.png`; await page.screenshot({ path: file }); captures.push(file); };
   let continued = false, checkpoint = null;
   try {
-    await waitForGame(page, 60000, () => page.goto(`${rootURL}/index.html?day=5&place=office&mc=${mc}&q=0`), 'play');
+    await waitForGame(page, 60000, () => page.goto(`${rootURL}/index.html?day=5&place=office&mc=${mc}&q=0${process.env.QS || ''}`), 'play');
     await page.waitForFunction(() => !globalThis.__game.busy);
-    const setup = async ({step,seed,choice}) => {
+    const setup = async ({step,seed,choice,diagnostic}) => {
       const g = globalThis.__game, S = await import('./js/sim.js'), {ui,setMuted} = await import('./js/ui.js');
       const {flags} = await import('./js/narrative/state.js');
       if (seed) {
@@ -65,6 +68,15 @@ await withBrowserJob(`mio-lunch-${width}-${step}`, async browser => {
       ui.say = function(...args) { this.auto = false; const result = say.apply(this,args); globalThis.__mioProof.lines.push(args[1]); globalThis.__mioProof.capture = 'line-' + globalThis.__mioProof.lines.length; return result; };
       ui.autoPick = () => { const wanted = choice === 'defer' ? 'Another time.' : choice === 'eat' ? 'Go and eat. I can keep an eye on it.' : step === 2 ? 'Stay for the rest of lunch.' : 'I can check the vent.';
         const options = g.runner.lastStep.choice; const i = options.findIndex(o=>o.text===wanted); globalThis.__mioProof.choices.push(options[Math.max(i,0)].text); return Math.max(i,0); };
+      if (diagnostic) {
+        const contacts=g.place.mioLunch.stage.hands.contacts, push=contacts.push.bind(contacts), wait=g.wait.bind(g);
+        contacts.push=(...entries)=>{const n=push(...entries),last=entries.at(-1);
+          if(['cable-pickup','cable-hook','bento-pickup'].includes(last?.id)) {
+            globalThis.__mioProof.contactCount=contacts.length; globalThis.__mioProof.capture=last.id;
+            globalThis.__mioContactHeld=true;g.paused=true;
+          }return n;};
+        g.wait=async(...args)=>{if(globalThis.__mioContactHeld) await new Promise(resolve=>globalThis.__mioContactRelease=resolve);return wait(...args);};
+      }
       globalThis.__mioTimer = setInterval(()=>{ const proof=globalThis.__mioProof, contacts=g.place.mioLunch.stage.hands.contacts;
         if (!proof.capture && contacts.length>proof.contactCount) { proof.contactCount=contacts.length; proof.capture=contacts.at(-1).id; g.paused=true; }
         const r=g.place.people.mio || g.mioNpc, p=r.root.position;
@@ -83,7 +95,7 @@ await withBrowserJob(`mio-lunch-${width}-${step}`, async browser => {
       return { sender:structuredClone(sender.read()), flags: Object.fromEntries(Object.entries(flags).filter(([k])=>k.startsWith('sender_'))),
         offered:flags.mio_lunch_offer, monitors:[g.place.sender.props.deskMonitor,g.place.sender.props.consoleScreen.parent].map(o=>{o.updateWorldMatrix(true,false);return o.matrixWorld.toArray();}) };
     };
-    const before = await page.evaluate(setup,{step,seed:true,choice:process.env.CHOICE});
+    const before = await page.evaluate(setup,{step,seed:true,choice:process.env.CHOICE,diagnostic:!!process.env.DIAGNOSTIC_CONTACTS});
     assert.equal(before.offered,step); assert.deepEqual(before.sender.acknowledged,[24,26,27]); assert.equal(before.sender.held,25);
     await page.waitForTimeout(1800);
     await shot('layout');
@@ -95,10 +107,18 @@ await withBrowserJob(`mio-lunch-${width}-${step}`, async browser => {
       if(status.recovery) throw new Error(`${status.recovery} at ${status.phase}`);
       if(status.capture) {
         await page.waitForTimeout(status.capture.startsWith('line-') ? 350 : 120); await shot((continued?'continued-':'') + status.capture);
+        if (process.env.DIAGNOSTIC_CONTACTS && ['cable-pickup','cable-hook','bento-pickup'].includes(status.capture)) {
+          const camera=await page.evaluate(async()=>{const g=globalThis.__game,T=await import('three'),c=g.place.cam.camera,
+            contact=g.place.mioLunch.stage.hands.contacts.at(-1),target=g.place.space.localToWorld(new T.Vector3(...contact.hand));
+            const saved={position:c.position.toArray(),quaternion:c.quaternion.toArray(),fov:c.fov};
+            c.position.copy(target).add(new T.Vector3(-.9,.65,.9));c.lookAt(target);c.fov=45;c.updateProjectionMatrix();c.updateMatrixWorld(true);return saved;});
+          await page.waitForTimeout(80);await shot(status.capture+'-held-detail');
+          await page.evaluate(saved=>{const c=globalThis.__game.place.cam.camera;c.position.fromArray(saved.position);c.quaternion.fromArray(saved.quaternion);c.fov=saved.fov;c.updateProjectionMatrix();c.updateMatrixWorld(true);},camera);
+        }
         if (!continued && process.env.CONTINUE_AT === status.capture) {
           checkpoint = await page.evaluate(async()=>{const S=await import('./js/sim.js'),g=globalThis.__game; S.save(g);return {saved:S.loadSave(),actual:g.place.mioLunch.stage.snapshot(),contacts:g.place.mioLunch.stage.hands.contacts,proof:globalThis.__mioProof};});
           fs.writeFileSync(`${out}/${width}-${step}-checkpoint.json`,JSON.stringify(checkpoint,null,2));
-          await waitForGame(page,60000,()=>page.goto(`${rootURL}/index.html?mc=${mc}&q=0`),'title');
+          await waitForGame(page,60000,()=>page.goto(`${rootURL}/index.html?mc=${mc}&q=0${process.env.QS || ''}`),'title');
           await page.locator('#title .mcont').click();
           await page.locator('#saves .slot[data-id="auto"]').click();
           await page.waitForFunction(()=>globalThis.__game?.place?.name==='office' && !globalThis.document.body.classList.contains('at-title') && !globalThis.document.body.classList.contains('title-leaving'));
@@ -109,7 +129,7 @@ await withBrowserJob(`mio-lunch-${width}-${step}`, async browser => {
         }
         await page.evaluate(async()=>{const proof=globalThis.__mioProof,{ui}=await import('./js/ui.js');
           if(proof.capture.startsWith('line-')) { ui.auto=true;ui._advance?.(); }
-          proof.capture=null;globalThis.__game.paused=false;
+          proof.capture=null;globalThis.__game.paused=false;globalThis.__mioContactHeld=false;globalThis.__mioContactRelease?.();globalThis.__mioContactRelease=null;
         });
       }
       if(!status.busy) break;
@@ -144,5 +164,5 @@ await withBrowserJob(`mio-lunch-${width}-${step}`, async browser => {
       contacts:globalThis.__game?.place?.mioLunch?.stage.hands.contacts})).catch(()=>null);
     fs.writeFileSync(`${out}/${width}-${step}-failure.json`,JSON.stringify({error:error.stack,errors,captures,live},null,2));
     throw error;
-  } finally { await context.close(); }
+  } finally { closing = true; await context.close(); }
 },{timeoutMs:240000,gpuWaitMs:1200000});

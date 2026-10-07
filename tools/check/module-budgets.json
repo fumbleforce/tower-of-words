@@ -3,9 +3,9 @@
   "exceptions": {
     "game3d/js/avatar.js": {
       "lines": 474,
-      "bytes": 15523,
+      "bytes": 15498,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones); 2026-10-05 C-0441 meshyFiles split out of loadMeshy, so cast3d.js makes a copy of Kuro, Aoi and Emi for each place; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow); 2026-10-05 seat height (feedback 2026-10-05_192459): sitAt puts the measured underside on the seat top (movement/sit-height.js); X-0747 optional pool-owned root retains actor identity, exact byte ceiling lowered",
+      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones); 2026-10-05 C-0441 meshyFiles split out of loadMeshy, so cast3d.js makes a copy of Kuro, Aoi and Emi for each place; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow); 2026-10-05 seat height (feedback 2026-10-05_192459): sitAt puts the measured underside on the seat top (movement/sit-height.js); X-0747 optional pool-owned root retains actor identity, exact byte ceiling lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered",
       "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."
     },
     "game3d/js/cast.js": {
@@ -16,10 +16,10 @@
       "reason": "Existing mixed character factories, appearance data and rig setup. Split factory families during the later character/module boundary review; avoid splitting coupled rig construction merely to hit a line target."
     },
     "game3d/js/look/detail.js": {
-      "lines": 670,
-      "bytes": 26955,
+      "lines": 665,
+      "bytes": 26656,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-05 #240 the desk's pedestals PED wide (props.js); #248 the open desk option (one pedestal, no front panel); 2026-10-07 X-0761: office-only CRT option, ceilings lowered",
+      "review": "C-0071; 2026-10-05 #240 the desk's pedestals PED wide (props.js); #248 the open desk option (one pedestal, no front panel); 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered",
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
@@ -66,16 +66,16 @@
     },
     "game3d/js/places/office.js": {
       "lines": 1116,
-      "bytes": 40640,
+      "bytes": 40631,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; 2026-10-03 C-0378 day 2: the officeDay2 hook registered and installed (places/office-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 copy_room and machine_room zones a step past their doors, and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Emi stays in her office on day 1 evening: the emi_door and emi_desk spots, and her shadow follows her; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced; 2026-10-07 #314: shared lunch food/seat definitions extracted, owned later-lunch adapter installed; ceiling lowered",
+      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; 2026-10-03 C-0378 day 2: the officeDay2 hook registered and installed (places/office-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 copy_room and machine_room zones a step past their doors, and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Emi stays in her office on day 1 evening: the emi_door and emi_desk spots, and her shadow follows her; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced; 2026-10-07 #314: shared lunch food/seat definitions extracted, owned later-lunch adapter installed; ceiling lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered",
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/train.js": {
-      "lines": 1743,
-      "bytes": 64345,
+      "lines": 1729,
+      "bytes": 63517,
       "owner": "codex-tui",
-      "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md); 2026-10-01 issue #145: car.cab in perfMovers, saved car parts restored only from the same build (notes/PERF.md); 2026-10-01 issue #144: the run in's speed moved to train/island.js with the island it shows; 2026-10-01 issue #156: WALK_X (the walkway out at the platform's south end) and the window's open-bay condition (#166); 2026-10-03 C-0378 day 2: the standing car, tester and walk in registered and installed (places/train-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 door_zone out on the platform, and the doorways (movement/doorways.js); 2026-10-05 C-0441 Aoi's Meshy model in her seat, and a walkRig way off the train for a Meshy passenger in alight; 2026-10-05 C-0444 the seat swaps moved to cast3d.js inSeat (Aoi, and Hamada dozing); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Rei's Meshy model: her laptop and the cup she holds hang on `lap` (cast3d.js meshyPerson's anchor over a seated Meshy person's hips, or the code-built torso), one line; 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each",
+      "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md); 2026-10-01 issue #145: car.cab in perfMovers, saved car parts restored only from the same build (notes/PERF.md); 2026-10-01 issue #144: the run in's speed moved to train/island.js with the island it shows; 2026-10-01 issue #156: WALK_X (the walkway out at the platform's south end) and the window's open-bay condition (#166); 2026-10-03 C-0378 day 2: the standing car, tester and walk in registered and installed (places/train-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 door_zone out on the platform, and the doorways (movement/doorways.js); 2026-10-05 C-0441 Aoi's Meshy model in her seat, and a walkRig way off the train for a Meshy passenger in alight; 2026-10-05 C-0444 the seat swaps moved to cast3d.js inSeat (Aoi, and Hamada dozing); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Rei's Meshy model: her laptop and the cup she holds hang on `lap` (cast3d.js meshyPerson's anchor over a seated Meshy person's hips, or the code-built torso), one line; 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/post.js": {
@@ -87,9 +87,9 @@
     },
     "game3d/js/props.js": {
       "lines": 540,
-      "bytes": 19821,
+      "bytes": 19768,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112); 2026-10-05 #240 PED, the desks' narrower drawer pedestals, so seated knees fit between them; #248 desk({ open }), Emi's desk open underneath with two legs; 2026-10-07 X-0761: office-only CRT option, ceilings lowered",
+      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112); 2026-10-05 #240 PED, the desks' narrower drawer pedestals, so seated knees fit between them; #248 desk({ open }), Emi's desk open underneath with two legs; 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered",
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {

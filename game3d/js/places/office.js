@@ -133,7 +133,7 @@ export async function officePlace(game) {
     // out: on from behind (in front: the desk)
     mio_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI, out: [dS0.seat[0], dS0.seat[1] + 0.45] },
   };
-  const day2 = officeDay2(game, { people, blobs }); // who is at B2 on day 2 (office-day2.js)
+  const day2 = officeDay2(game, { people, blobs, mioDesk: w.dS(0).group }); // day 2
   const rigAnchor =
     (rig, h = 1.25) =>
     (v) => {

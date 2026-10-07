@@ -1,3 +1,4 @@
+import { deskKeyboard } from '../desk-keyboard.js';
 // Small modelled detail (texture avenue 8, game3d/design/style/AVENUES.md): the props of props.js with more geometry
 // where the eye lands. Chamfered edges (rounded boxes with one segment, so the bevel is one flat face), door and
 // window frames and skirting in relief, rims on cups, paper piles of separate sheets, handles and hinges. Same colours
@@ -238,13 +239,7 @@ export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1, ope
   // keyboard with keys, mouse on a pad
   const kx = 0,
     kz = d * 0.12;
-  g.add(cbox(0.37, 0.016, 0.13, '#cfd1d4', { x: kx, y: H, z: kz, r: 0.006 }));
-  const keys = [];
-  for (let r = 0; r < 4; r++)
-    for (let c = 0; c < 14; c++)
-      keys.push([0.019, 0.008, 0.019, kx - 0.165 + c * 0.0254, H + 0.016, kz - 0.042 + r * 0.026]);
-  keys.push([0.15, 0.008, 0.019, kx, H + 0.016, kz + 0.062]); // space bar
-  g.add(boxes(keys, '#e6e7e8', { cast: false }));
+  deskKeyboard(g, cbox, d, boxes);
   g.add(cbox(0.2, 0.004, 0.17, PAL.charcoal, { x: kx + 0.3, y: H, z: kz, r: 0.003, cast: false }));
   const mouse = new THREE.Mesh(new THREE.SphereGeometry(0.03, 10, 6), mat('#d8dadc'));
   mouse.scale.set(0.8, 0.45, 1.2);

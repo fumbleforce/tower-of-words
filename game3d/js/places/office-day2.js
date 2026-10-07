@@ -9,9 +9,11 @@ import { K, EMI } from '../scenes/office.js';
 import { officeChatCamera } from './office-chat-camera.js';
 import { deskActivity } from './office-desk-activity.js';
 
-export function officeDay2(game, { people, blobs }) {
+export function officeDay2(game, { people, blobs, mioDesk }) {
   let P = null;
-  const work = deskActivity(game);
+  const keyboard = mioDesk.userData.keyboard;
+  keyboard.position.z = 0.25; // on the near edge of her 0.7-deep desk, within seated reach
+  const work = deskActivity(game, 'mio', keyboard);
   const listen = deskActivity(game, 'emi');
   const show = (id, on) => {
     const r = id === 'mio' ? game.mioNpc : people[id];
