@@ -27,6 +27,7 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 | `ferry_reader` | Reader | An unnamed adult reading a leaflet by the harbour window; existing generic body and approved sales1 voice. |
 | `ferry_traveller` | Traveller | An unnamed adult resting with a bag, which he moves from a usable seat; existing generic body and approved reader voice. |
 | `canteen_worker` | Canteen worker | An unnamed adult who works at the indoor service counter and closes the canteen terrace after work. |
+| `station_worker` | Grounds worker | An unnamed adult tending the station south garden by day; the existing grey worker body and borrowed reader voice. |
 | `attendant` | Attendant | The gym's attendant on day 3: the desk by day, the pool's floats at the club's evening. An office worker's body, a borrowed voice. |
 | `member` | Club member | A swimming club member on day 3's evening, with the equipment list; her goggles are on the pool's fence. An office worker's body, a borrowed voice. |
 | `bun` | Woman with a bun | A monorail passenger. |
@@ -320,6 +321,7 @@ Each People panel card has the name and one line about them, the same on every d
 | `rei` | Tennis player, then Rei after her introduction | Tennis player, then Rei | Rei |
 | `tama` | none | Cat | none |
 | `canteen_worker` | Canteen worker | Canteen worker | none |
+| `station_worker` | Grounds worker | Grounds worker | none |
 | `attendant` | Attendant | Attendant | none |
 | `member` | Club member | Club member | none |
 | `bun` | Woman with a bun | Woman with a bun | none |

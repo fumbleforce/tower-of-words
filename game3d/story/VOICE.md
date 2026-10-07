@@ -68,3 +68,7 @@ Who each person is (age, job, what they speak) is in docs/game/cast.md. This she
 ## Voice direction
 
 Every voiced line has an `emo` tag; the list and what each means are in VOICE-DIRECTION.md.
+
+### Station garden worker
+
+An unnamed adult tending the garden, using the approved reader clone. Polite, unhurried Japanese. He notices a visitor without turning the job into a lesson. First Talk offers an actually free bench; repeat Talk points toward the next visible patch. After both patches are clean, he parks his tools and takes a break. When collecting, he asks for a moment and keeps the exchange brief. Eric replies “Oh, thanks.” or “Sure. I’ll leave you to it.” No personal backstory, previous-day claim, or new vocabulary prompt.

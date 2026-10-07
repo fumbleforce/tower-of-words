@@ -3177,6 +3177,71 @@
   "clear": []
  },
  {
+  "key": "oh-1kfpo6b",
+  "speaker": "station_worker",
+  "text": "あ、こんにちは。そちらのベンチ、どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1mtg5xm",
+  "speaker": "eric",
+  "text": "Oh, thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-gqkvoa",
+  "speaker": "station_worker",
+  "text": "じゃあ、ちょっと休憩します。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-6pwugh",
+  "speaker": "station_worker",
+  "text": "次は、あっちを掃いてきます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-kfyy7z",
+  "speaker": "station_worker",
+  "text": "すみません、これだけ集めてしまうので。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "apologetic"
+ },
+ {
+  "key": "ln-1ga9pln",
+  "speaker": "eric",
+  "text": "Sure. I’ll leave you to it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
   "key": "bakery-welcome",
   "speaker": "bakery_clerk",
   "text": "いらっしゃいませ。トレーはこちらです。",
@@ -13528,6 +13593,26 @@
   "overheard": false,
   "words": [],
   "clear": []
+ },
+ {
+  "key": "ln-1mtg5xm-carina",
+  "speaker": "carina",
+  "text": "Oh, thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1ga9pln-carina",
+  "speaker": "carina",
+  "text": "Sure. I’ll leave you to it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "ln-anowsi-carina",

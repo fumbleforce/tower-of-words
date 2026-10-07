@@ -2998,6 +2998,52 @@
     ]
   },
   {
+    "id_": "prop/shotengai/garden_bench_1",
+    "kind": "prop",
+    "name": "Garden bench",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.garden_bench_1",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Garden bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/garden_bench_2",
+    "kind": "prop",
+    "name": "Garden bench",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.garden_bench_2",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Garden bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/shotengai/izakaya",
     "kind": "prop",
     "name": "Izakaya",

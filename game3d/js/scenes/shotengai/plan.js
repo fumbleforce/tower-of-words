@@ -14,6 +14,7 @@
 import * as LAYOUT from '../island-layout.js';
 import * as S from '../island-south.js';
 import { LOOKOUT_GAP } from '../outdoor/seafront.js';
+import { WALKS_LOCAL, BENCH_BLOCKS, TOOL_BLOCK } from '../station-garden/plan.js';
 import { nookWalks } from '../outdoor/nook-walks.js';
 
 export const CHUNK = 'shotengai';
@@ -36,7 +37,7 @@ export const SHOP_WALK = path('arcade_end').rect;
 export const DORM_STREET = path('dorm_street').rect;
 export const WEST_WALK = LINKS.west;
 export const EAST_WALK = LINKS.east;
-export const PROM = [-13.4, PROMENADE[1], PROMENADE[2], WALL_Z - 0.2]; // east of the walk down from the station
+export const PROM = [PROMENADE[0], PROMENADE[1], PROMENADE[2], WALL_Z - 0.2]; // east of the walk down from the station
 export { ALLEYS };
 
 // the arcade's posts, both sides, every bay (plaza-buildings.js shopStreet puts them 1 into each bay, 0.35 off
@@ -108,11 +109,17 @@ export const NOOKS = [
     pads: [[GX0 + 0.05, GX1 + 1.8, END_Z + 0.05, END_Z + 2.9]],
   },
 ];
-export const WALKS = [...[ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PROM].map(rect), ...nookWalks(NOOKS)];
+export const WALKS = [
+  ...[ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PROM].map(rect),
+  ...nookWalks(NOOKS),
+  ...WALKS_LOCAL,
+];
 export const STREET_END = rect([SHOP_WALK[2] - 0.1, SHOP_WALK[1], DORM_STREET[2], SHOP_WALK[3]]); // out onto the street
 export const FURNITURE = [
   ...S.LAMP_X.map((x) => [x - 0.15, S.FURNITURE_Z - 0.15, x + 0.15, S.FURNITURE_Z + 0.15]),
   ...S.BENCH_X.map((x) => [x - 0.95, S.BENCH_Z - 0.75, x + 0.95, S.BENCH_Z + 0.55]),
   ...S.BENCH_X.filter((_, i) => i % 2).map((x) => [x + 0.95, S.BENCH_Z - 0.25, x + 1.85, S.BENCH_Z + 0.25]),
-].map(rect);
+]
+  .map(rect)
+  .concat(BENCH_BLOCKS, [TOOL_BLOCK]);
 export const inRect = (x, z, [x0, x1, z0, z1], m = 0) => x > x0 + m && x < x1 - m && z > z0 + m && z < z1 - m;

@@ -15,7 +15,7 @@ import { boxes } from './forecourt/details.js';
 import { POOL_Y } from './outdoor/parts.js';
 import { hall, hallFares, ROOM } from './station-hall.js';
 import { FARES } from './station-fittings.js';
-import { buildShed } from './station-shed.js';
+import { buildShed, coveredWalk } from './station-shed.js';
 
 // the station's outline in the forecourt's frame: the gate room's walls (lobby.js X 6.3, Z 4.5, centred on the
 // forecourt's (-0.5, 7.15)); its north face is the court's south edge
@@ -160,7 +160,10 @@ function block(root) {
   }
   root.add(boxes(low, '#8a8f96'), boxes(lining, PAL.wall), boxes(stayFrame, '#5b616b'), boxes(stayTrim, '#b3b9c0'));
   const litGlass = boxes(stayGlass, '#8c9dad');
-  litGlass.material = mat('#8c9dad', { roughness: 0.45, metalness: 0.05 }).clone(); // its own: it glows after dark
+  litGlass.material = mat('#8c9dad', {
+    roughness: 0.45,
+    metalness: 0.05,
+  }).clone(); // its own: it glows after dark
   root.add(litGlass);
   const tops = [...low, ...lining].filter((b) => [LOW, H1].some((h) => Math.abs(b[4] + b[1] - h) < 1e-3));
   root.add(
@@ -265,6 +268,11 @@ function block(root) {
   );
   meshes[1].material = mat('#8c9dad', { roughness: 0.45, metalness: 0.05 });
   const glowing = [meshes[1], litGlass];
+  const daylight = glowing.map(({ material: m }) => ({
+    color: m.color.clone(),
+    emissive: m.emissive.clone(),
+    intensity: m.emissiveIntensity,
+  }));
   for (const m of meshes) root.add(m);
   root.add(sign);
   const occ = {};
@@ -327,7 +335,14 @@ function block(root) {
       updateOccluders(occ, pos, jump ? Infinity : dt);
     },
     onPeriod(period) {
-      if (period !== 'evening') return;
+      if (period !== 'evening') {
+        glowing.forEach(({ material: m }, i) => {
+          m.color.copy(daylight[i].color);
+          m.emissive.copy(daylight[i].emissive);
+          m.emissiveIntensity = daylight[i].intensity;
+        });
+        return;
+      }
       // the station is open late: its windows glow
       for (const { material: m } of glowing) {
         m.color.set('#c9b596');
@@ -340,11 +355,29 @@ function block(root) {
 }
 
 // the station, the shed, the beam and the walkway; returns the station's handle ({ update(pos, dt, dir), onPeriod })
-export function buildStation(root) {
+export function buildStation(root, { covered = false } = {}) {
   const station = block(root);
   // the shed's roof fades while the camera looks east over it (the phone's view out of the station)
-  const roof = buildShed(root, STATION);
+  const roof = buildShed(
+    root,
+    STATION,
+    covered
+      ? (walkRoof) => {
+          addOccluder(
+            station.occ,
+            [walkRoof],
+            (p) =>
+              coveredWalk(STATION).some(
+                ([x0, x1, z0, z1]) => p.x > x0 - 0.3 && p.x < x1 + 0.3 && p.z > z0 - 0.3 && p.z < z1 + 0.3,
+              ),
+            { name: 'covered-walk' },
+          );
+        }
+      : null,
+  );
   roof.name = 'station:shedRoof';
-  addOccluder(station.occ, [roof], () => station.view.x < -0.5, { name: 'shed' });
+  addOccluder(station.occ, [roof], () => station.view.x < -0.5, {
+    name: 'shed',
+  });
   return station;
 }

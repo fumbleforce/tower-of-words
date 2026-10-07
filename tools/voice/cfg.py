@@ -64,6 +64,7 @@ def speakers():
         'kenji': ref('kenji-design'),
         'kuro': ref('kuro-husky'),  # Review kuro-voice-2, b
         'reader': ref('goro-ref12'),
+        'station_worker': ref('goro-ref12'),
         # Eric: the English voice eric-2 (no accent); his Japanese words are still read in Japanese (gen_takes.py)
         'eric': ref('eric-voice'),
         'carina': ref('carina-voice-a'),  # Review carina-voice-1, a (2026-10-06)
@@ -99,6 +100,7 @@ LUFS_DEFAULT = -18.0
 
 # what the TTS reads instead of the written line (numbers, letters); the check still compares against the written line
 TTS_OVERRIDE = {
+    'oh-6pwugh': '次は、あっちをはいてきます。',  # 掃いて: retain the authored line, make its reading explicit.
     'oh-yowtk': 'ノルウェーから、ですね。私、千九百九十四年にリレハンメルへ行きました。',
     'ln-2sij76': 'Nineteen ninety-six.',
 }

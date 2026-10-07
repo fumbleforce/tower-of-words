@@ -1,5 +1,6 @@
 // Read asset metadata without loading renderers or starting audio/model requests.
 import fs from 'node:fs';
+import { staticStory } from '../lib/static-story.mjs';
 import { parseSource, visitSource, sourceBindings, staticValue, propertyName } from '../lib/source-data.mjs';
 import { STORY_FILES } from '../../game3d/js/places/definitions.js';
 
@@ -97,7 +98,7 @@ export function assetSourceData(read) {
 
   const stories = {};
   for (const name of STORY_FILES) {
-    const story = staticValue(ast(`game3d/story/${name}.js`).body.find(node => node.type === 'ExportDefaultDeclaration')?.declaration);
+    const story = staticStory(`game3d/story/${name}.js`, read);
     const speakers = {}, texts = [];
     const walk = value => {
       if (typeof value === 'string') {

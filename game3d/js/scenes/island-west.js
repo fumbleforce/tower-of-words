@@ -89,6 +89,8 @@ export const WALKS = {
   },
   coast_south_walk: { rect: [-40.6, 22.5, AXIS[1], 24.5] },
   station_walk: { rect: [AXIS[0], WALKWAY_S, AXIS[1], 22.5], open: 'n' },
+  garden_arcade: { rect: [-11.45, 23.7, -5.5, 25.3], open: 'e' },
+  garden_return: { rect: [-13.25, 25.3, -10.85, 26.4] },
   south_link: { rect: [AXIS[0], 24.5, AXIS[1], 26.9], open: 's' }, // to the promenade (island-south.js)
   // where the south walk meets the station's axis: a square in the terraces' stone, two benches on its east side
   garden_square: {
@@ -114,6 +116,8 @@ const DETAIL = {
     'From the corner terrace east across the lawn south of the station, under the line, to the station’s axis.',
   station_walk: 'Down the station’s axis from its covered walkway, between planted beds, to the south walk.',
   south_link: 'On down the station’s axis from the south walk to the promenade’s west end.',
+  garden_arcade: 'The garden square’s east path to the arcade’s western passage.',
+  garden_return: 'A paved return around the south garden bench to the promenade link.',
   garden_square: 'A square of slabs where the south walk meets the station’s axis, with two benches.',
 };
 export const WEST_PATHS = Object.entries(WALKS).map(([id, w]) => ({

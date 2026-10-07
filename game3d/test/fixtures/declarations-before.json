@@ -786,6 +786,20 @@
     },
     "shotengai": {
       "things": {
+        "station_worker": {
+          "label": "Grounds worker",
+          "kind": "person"
+        },
+        "garden_bench_1": {
+          "label": "Garden bench",
+          "kind": "thing",
+          "verb": "Sit"
+        },
+        "garden_bench_2": {
+          "label": "Garden bench",
+          "kind": "thing",
+          "verb": "Sit"
+        },
         "plaza_lane": {
           "label": "To the plaza",
           "kind": "thing",
@@ -869,6 +883,10 @@
         }
       },
       "spots": [
+        "station_garden",
+        "station_garden_approach",
+        "garden_free_bench",
+        "garden_next_patch",
         "plaza_entry",
         "office_lane",
         "shotengai_shrine",
@@ -879,11 +897,15 @@
         "party_mio"
       ],
       "nooks": [
+        "station_garden",
+        "station_garden_approach",
         "shotengai_shrine",
         "shotengai_back_alley",
         "shotengai_pine_bench"
       ],
       "seats": [
+        "garden_bench_1",
+        "garden_bench_2",
         "party_seat",
         "party_mori"
       ],
@@ -892,6 +914,7 @@
         "plaza_exit"
       ],
       "people": [
+        "station_worker",
         "mori",
         "kenji",
         "kuroda",
@@ -900,6 +923,7 @@
         "rei"
       ],
       "hooks": [
+        "gardenWorker",
         "partySetup",
         "partyFood"
       ]

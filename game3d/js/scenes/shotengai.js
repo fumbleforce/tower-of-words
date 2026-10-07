@@ -32,6 +32,9 @@ import { shopDoor } from './plaza/east-shops.js';
 import { faceAt } from './outdoor/block.js';
 import { bandSteps } from './bands.js';
 import { bikeCourtBackdrop } from './forecourt/court.js';
+import { daylightState } from './station-garden/daylight.js';
+import { gardenSteps } from './station-garden/build.js';
+import { BOUNDS as GARDEN_BOUNDS } from './station-garden/plan.js';
 import { buildSouthLink } from './forecourt/south-link.js';
 
 const { CHUNK, local, rect, inRect } = P;
@@ -64,7 +67,13 @@ export function* shotengaiSteps() {
   // walkable: the streets (plan.js WALKS) and the step out onto the dorm street; never a post, the promenade's
   // furniture or what stands in front of the shops
   const [wx0, wx1, wz0, wz1] = LAYOUT.CHUNKS[CHUNK].walk;
-  const nav = new Nav(wx0, wx1, wz0, wz1 + 2.1, 0.1);
+  const nav = new Nav(
+    Math.min(wx0, GARDEN_BOUNDS[0]),
+    Math.max(wx1, GARDEN_BOUNDS[1]),
+    Math.min(wz0, GARDEN_BOUNDS[2]),
+    wz1 + 2.1,
+    0.1,
+  );
   nav.extra = (x, z) => P.WALKS.some((r) => inRect(x, z, r, -0.02)) || inRect(x, z, P.STREET_END);
   for (const r of P.FURNITURE) nav.block(...r);
 
@@ -128,10 +137,11 @@ export function* shotengaiSteps() {
   const lit = lights.build(isl, { poolY: 0.03 });
   const doorCards = cards.build(isl);
   yield;
+  const garden = yield* gardenSteps(isl, root);
   const bands = yield* bandSteps(root, CHUNK); // the ground past the exits, as the neighbours build it (bands.js)
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['shops_north', 'arcade', 'shops_south', 'izakaya', 'ramen', ...bands.ids],
+    skip: ['shops_north', 'arcade', 'shops_south', 'izakaya', 'ramen', 'station', 'platform_shed', ...bands.ids],
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
   });
@@ -140,9 +150,12 @@ export function* shotengaiSteps() {
   yield* mergeStaticSteps(root);
   yield* nav.buildSteps();
 
+  const restoreDaylight = daylightState(scene);
+  let night = false;
   const edgeZ = local(P.EDGE)[1];
   const alleys = P.ALLEYS.map(rect);
   return {
+    garden,
     nooks: nooks.spots,
     root,
     scene,
@@ -163,7 +176,14 @@ export function* shotengaiSteps() {
     face: Math.PI, // walking in: west, local north
     doors: P.DOORS.map((d) => ({ ...d, local: local(d.at), step: local([d.at[0], d.at[1] + d.out * 0.85]) })),
     camera: { elev: 40, fov: 24 }, // a little lower than the plaza's, to see the shopfronts under the awnings
+    morning() {
+      if (!night) return;
+      night = false;
+      restoreDaylight();
+      sunDir = SUN_DIR.morning;
+    },
     evening() {
+      night = true;
       bands.evening();
       nooks.evening();
       sunDir = SUN_DIR.evening;
