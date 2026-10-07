@@ -1,3 +1,5 @@
+import { rackLight } from '../scenes/diorama/light.js';
+import { dioramaTrial, DIORAMA_GRADE } from '../scenes/diorama/index.js';
 import * as THREE from 'three';
 import { day3Place } from './day3/place.js';
 import { BIKES, CAMPUS_EXIT, inRect } from '../scenes/forecourt/plan.js';
@@ -25,7 +27,7 @@ export async function forecourtPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   // after work: Tama on the garden bench, and the fallen bicycle in the bike court
   const garden = gardenCat(game, w.root),
-    bikes = fallenBikes(game, w.root, w.nav);
+    bikes = fallenBikes(game, w.root, w.nav, dioramaTrial() ? { rackLight } : undefined);
   const spots = {
     station_exit: w.start,
     office_entrance: w.officeEntrance,
@@ -153,6 +155,11 @@ export async function forecourtPlace(game) {
     turnAt = null;
   const setTurn = (k) => {
     turn = k;
+    if (dioramaTrial()) {
+      cam.yaw = 0.35;
+      cam.elev = THREE.MathUtils.degToRad(48);
+      return;
+    }
     if (!phone || !north.dist) {
       if (cam.yaw) [cam.yaw, cam.elev] = [north.yaw, north.elev]; // back from a phone turn (the window was resized)
       return;
@@ -184,7 +191,7 @@ export async function forecourtPlace(game) {
     nav: w.nav,
     sun: w.sun,
     charScale: K,
-    start: w.start,
+    start: dioramaTrial() ? [9.7, 9.8] : w.start,
     startFacing: Math.PI,
     music: 'calm',
     grade: {
@@ -234,6 +241,22 @@ export async function forecourtPlace(game) {
       const k = turn;
       phone = false;
       setTurn(0);
+      if (dioramaTrial()) {
+        cam.elev = THREE.MathUtils.degToRad(48);
+        cam.yaw = 0.35;
+        const span = aspect < 1 ? 2.6 : 5.7;
+        cam.fit(
+          aspect,
+          [
+            new THREE.Vector3(-span, 0, -span * 0.66),
+            new THREE.Vector3(span, 0, span * 0.66),
+            new THREE.Vector3(0, 3, 0),
+          ],
+          new THREE.Vector3(0, 0, 0),
+          { follow: true, clamp: [-1, 32, -12, 14], lead: -0.7 },
+        );
+        return;
+      }
       if (aspect >= 1) {
         cam.fit(
           aspect,
@@ -287,6 +310,7 @@ export async function forecourtPlace(game) {
       if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
       relightLift(P);
       eveningLight(w.scene, sim.day);
+      if (dioramaTrial()) w.sun.position.add(w.sun.target.position);
       w.headOffice.onPeriod(period);
       w.station.onPeriod(period);
       w.sky?.onPeriod(period);
@@ -361,5 +385,8 @@ export async function forecourtPlace(game) {
       cam.release();
     },
   };
+  if (dioramaTrial()) {
+    P.grade = { ...P.grade, ...DIORAMA_GRADE };
+  }
   return P;
 }

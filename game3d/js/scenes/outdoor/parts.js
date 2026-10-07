@@ -25,7 +25,8 @@ export const hash2 = (x, z, k = 0) => {
 //   p.geo(color, geometry, { cast, surf })               any geometry, already placed
 const _c = new THREE.Color();
 export class Parts {
-  constructor() {
+  constructor({ planting = null } = {}) {
+    this.planting = planting;
     this.sets = new Map();
   }
   // alpha: one opacity per vertex (a set whose geometry all has it draws with vertex alpha: the surf's fading edge)

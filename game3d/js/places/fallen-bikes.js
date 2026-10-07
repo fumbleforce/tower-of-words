@@ -13,6 +13,7 @@ import { LOOSE_BIKES } from '../scenes/forecourt/court.js';
 import { glide } from '../move.js';
 import { running, bus, isMuted, sfx } from '../sfx.js';
 import { flags } from '../narrative/state.js';
+import { sim } from '../sim.js';
 import { hold, lean } from './eric-hold.js';
 
 // the story's flags for how far it got (story/forecourt.js fallen_bicycle): a place built later that evening, or
@@ -22,7 +23,7 @@ const TIPPED = 'evening_bike_tipped',
 const ease = (k) => k * k * (3 - 2 * k);
 const STAND = -0.09; // leaning a little on its stand (bicycle() leans every parked bike the same)
 
-export function fallenBikes(game, root, nav) {
+export function fallenBikes(game, root, nav, { rackLight } = {}) {
   const { row, step, fallen, leaning } = LOOSE_BIKES;
   const frame = new THREE.Group(); // the row's own frame: places along x, the aisle toward -z
   frame.rotation.y = row.turn;
@@ -49,7 +50,7 @@ export function fallenBikes(game, root, nav) {
   const diffuser = rbox(0.02, 0.11, 0.52, '#e2e8eb', { x: SE + 0.16, y: 2.35, z: 6.4 });
   diffuser.material = diffuser.material.clone();
   root.add(diffuser);
-  const light = new THREE.PointLight('#dae4ee', 0, 8, 2);
+  const light = rackLight ? rackLight(root) : new THREE.PointLight('#dae4ee', 0, 8, 2);
   light.position.set(SE + 0.55, 2.3, 6.4);
   root.add(light);
   const upright = (i) => ({ x: i * step, z: 0, y: 0, yaw: slotYaw(i, row.seed), roll: STAND });
@@ -80,8 +81,9 @@ export function fallenBikes(game, root, nav) {
   };
   function set(s) {
     state = s;
-    light.intensity = flags.going_home ? 14 : 0;
-    diffuser.material.emissive.set(flags.going_home ? '#b8c8d8' : '#000000');
+    const lit = flags.going_home && sim.period === 'evening';
+    light.intensity = lit ? 14 : 0;
+    diffuser.material.emissive.set(lit ? '#b8c8d8' : '#000000');
     if (bikes.fallen.wheel) bikes.fallen.wheel.rotation.z = s === 'fallen' ? 0 : -3.2;
     if (bikes.leaning.wheel) bikes.leaning.wheel.rotation.z = s === 'upright' ? -3.2 : 0;
     put(bikes.fallen, s === 'fallen' ? lying(fallen) : upright(fallen)); // 'lifted' and 'upright' look the same

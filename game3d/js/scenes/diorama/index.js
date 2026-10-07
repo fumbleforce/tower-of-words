@@ -1,0 +1,53 @@
+import * as THREE from 'three';
+import { streetDetails } from './details.js';
+import { finishStreet } from './materials.js';
+export { finishWindows } from './materials.js';
+import { meadowDetail } from './meadow.js';
+import { dressFoliage } from './foliage.js';
+import { softenStation } from './architecture.js';
+import { detailController } from './quality.js';
+import { splitStreetSurfaces } from './spatial.js';
+export { finishOffice } from './architecture.js';
+export const dioramaTrial = () => new URLSearchParams(location.search).get('diorama') === '1';
+export function dressStreet(root, scene, sun, station, nav) {
+  const environment = finishStreet(root);
+  const softened = softenStation(root);
+  const details = streetDetails(root, station, environment);
+  const leaves = dressFoliage(root, { budget: 32000, tileSize: 5, leafShadows: false, leafScale: 1.5 });
+  const meadow = meadowDetail(root, nav, { budget: 6500, shadows: false });
+  const surfaceTiles = splitStreetSurfaces(root);
+  scene.traverse((o) => {
+    if (o.isHemisphereLight) {
+      o.color.set('#c8dcf0');
+      o.groundColor.set('#968264');
+      o.intensity = 1.5;
+    } else if (o.isAmbientLight) o.intensity = 0.25;
+  });
+  sun.color.set('#ffe1b7');
+  sun.intensity = 2.9;
+  // Keep the street and garden inside the shadow camera, rather than centring it at the station's origin.
+  sun.target.position.set(12, 0, 5);
+  sun.position.copy(sun.target.position).add(new THREE.Vector3(-18, 24, 12));
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.bias = -0.00045;
+  sun.shadow.normalBias = 0.012;
+  sun.shadow.radius = 2;
+  root.userData.diorama = { leaves, meadow, details, softened, surfaceTiles };
+  root.userData.dioramaDetail = detailController(root);
+  root.userData.dioramaDetail();
+  return environment;
+}
+export const DIORAMA_GRADE = {
+  exposure: 1.02,
+  temp: 0.025,
+  sat: 1.04,
+  contrast: 1.05,
+  lift: [0.005, 0.006, 0.009],
+  shadowTint: [-0.01, 0, 0.016],
+  highTint: [0.014, 0.009, -0.006],
+  bloom: 0.13,
+  bloomThreshold: 0.95,
+  ao: 0.55,
+  vignette: 0.12,
+  blur: 0,
+};

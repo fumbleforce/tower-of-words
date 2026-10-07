@@ -114,10 +114,10 @@ function gate(root, p, set) {
   ]);
 }
 
-export function buildLane(root, nav, set) {
+export function buildLane(root, nav, set, planting = null) {
   const block = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
   paving(root);
-  const p = new Parts();
+  const p = new Parts({ planting });
   strips(p, block);
   lights(set, p);
   gate(root, p, set);

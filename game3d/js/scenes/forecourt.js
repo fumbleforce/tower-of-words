@@ -1,3 +1,5 @@
+import { trialPlanting } from './diorama/planting.js';
+import { dioramaTrial, dressStreet, finishWindows, finishOffice } from './diorama/index.js';
 // The station forecourt, the first outdoor chunk of island-map-4. The camera looks north, as in the station
 // security room. Everything stands on the town's grid (scenes/island-layout.js), square to the camera: Honsha station
 // is the two-storey block at the bottom left (scenes/station-exterior.js; its upper part fades while Eric stands just
@@ -42,7 +44,7 @@ const lanePt = (x) => [x, LANE_Z];
 
 // beyond the court: lawns round the paving, a few trees near it in small groups (the lane's gardens are in
 // lane.js, the north edge's avenues and grove in north.js), and the layout's buildings further out (skyline)
-function* town(root) {
+function* town(root, planting) {
   const G = TOWN.grass;
   groundPatches(root, [
     [-14, X0, -30, 16, G], // west of the court and the station, under the platform shed
@@ -54,7 +56,7 @@ function* town(root) {
     [STATION.x0, SE, STATION.zS, 16, G], // south of the station, round the walkway
     [COURT[1], 60, LANE[3], STRIP_S[3], G], // under the lane's south strip
   ]);
-  const p = new Parts();
+  const p = new Parts({ planting });
   sakura(p, -9.6, 7.5, 1.0, 5);
   keyaki(p, 7.6, 12.6, 1.1, 6);
   sakura(p, 11.8, 13.2, 1.0, 7);
@@ -123,23 +125,32 @@ export function* forecourtSteps() {
   nav.extra = (x, z) => walkable.some((r) => PL.inRect(x, z, r));
   nav.blockTagged('station_door', doorway[0], doorway[1], ZN + 0.2, doorway[3]);
   // everything that never moves goes in one group, merged by material at the end
+  const planting = dioramaTrial() ? trialPlanting() : null;
   const statics = new THREE.Group();
+  if (planting) statics.userData.dioramaPlanting = planting.records;
   root.add(statics);
   const station = buildStation(statics);
   yield;
   const lamps = lightSet(); // every lamp's lantern and pool, one mesh each
-  buildCourt(statics, nav, lamps);
+  buildCourt(statics, nav, lamps, planting);
   buildSouthLink(statics);
   yield;
-  buildLane(statics, nav, lamps);
-  const north = yield* northSteps(statics, lamps, { closed: false });
-  const nooks = buildNooks(PL.NOOKS, statics, { lights: lamps }); // outdoor/nooks.js: props round each, its spot named
+  buildLane(statics, nav, lamps, planting);
+  const north = yield* northSteps(statics, lamps, { closed: false, planting });
+  const nookParts = planting ? new Parts({ planting }) : null;
+  const nooks = buildNooks(PL.NOOKS, statics, { lights: lamps, p: nookParts });
+  nookParts?.build(statics); // outdoor/nooks.js: props round each, its spot named
   for (const r of nooks.blocks) nav.block(...r);
   const lights = lamps.build(statics);
   yield;
-  const { sky, front } = yield* town(statics);
+  const { sky, front } = yield* town(statics, planting);
+  const trialEnvironment = dioramaTrial() ? dressStreet(statics, scene, sun, station, nav) : null;
   yield* mergeStaticSteps(statics);
   const ho = yield* headOfficeSteps(root, nav);
+  if (trialEnvironment) {
+    finishOffice(root);
+    finishWindows(root, trialEnvironment);
+  }
   const lift = ho.landing;
   let previousTime = null;
   return {
@@ -184,6 +195,7 @@ export function* forecourtSteps() {
       if (north.lit) north.lit.visible = true; // the windows lit after work
     },
     update(t, dt) {
+      statics.userData.dioramaDetail?.();
       const elapsed = dt ?? (previousTime == null ? 1 / 60 : t - previousTime);
       previousTime = t;
       lift.update(Math.min(0.1, Math.max(0, elapsed)));
