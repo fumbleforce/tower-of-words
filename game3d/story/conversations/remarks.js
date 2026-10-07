@@ -1,5 +1,7 @@
 // Exact authored remarks, never inferred from a place visit or a completed day.
 export const REMARKS = [
+  { id: 'mio_sender_complaint', who: 'mio', name: 'Mio', words: [], lines: ['The thing that sends everyone’s timesheets. It keeps restarting before I can get the log off it.'] },
+  { id: 'mori_sender_retained', who: 'mori', name: 'Mr. Mori', words: ['mada'], lines: ['そちらには、{mada}残っていますよ。'] },
   {"id": "kuro_swimming_pace", "who": "kuro", "name": "Kuro", "words": ["oyogu"], "lines": ["{oyogu}のは好きなんです。速い人には、先に行ってもらいます。"]},
   {"id": "aoi_wants_tennis", "who": "aoi", "name": "Aoi", "words": ["ikitai"], "lines": ["テニス、私も{ikitai}です。今度は、私も打ってみたくて。", "またテニスに{ikitai}です。今度は、もう少し長く打ちたくて。"]},
   {"id": "rei_another_game", "who": "rei", "name": "Rei", "words": ["mouichido"], "lines": ["負けると、{mouichido}って頼んじゃうんです。"]},

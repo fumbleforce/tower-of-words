@@ -994,7 +994,7 @@ export function* officeSteps() {
       c.position.set(DX[i], 0, z + face * 0.5);
       c.rotation.y = face > 0 ? Math.PI : 0;
       if (!(row === 's' && i === 1)) root.add(c);
-      desks.push({ x: DX[i], z, face, chair: c, seat: [DX[i], z + face * 0.5], row, i });
+      desks.push({ group: d, x: DX[i], z, face, chair: c, seat: [DX[i], z + face * 0.5], row, i });
       yield;
     }
   yield;
@@ -1008,7 +1008,6 @@ export function* officeSteps() {
   chiefChair.position.set(2.2, 0, -3.36);
   root.add(chiefChair);
   yield;
-  // the empty desk in the north row carries boxes and a dead monitor
   root.add(rbox(0.4, 0.3, 0.34, PAL.box, { x: DX[2] + 0.25, y: 0.42, z: ZN - 0.05, r: 0.02 }));
   yield;
   // the team has shrunk: three desks have their monitors under a cloth
@@ -1059,7 +1058,6 @@ export function* officeSteps() {
   myChair.add(tama);
 
   yield;
-  // ---- machine room ----
   for (let i = 0; i < 4; i++) {
     const r = rack();
     r.position.set(4.1 + i * 0.72, 0, Z0 + 0.5);
@@ -1939,6 +1937,8 @@ export function* officeSteps() {
     sun,
     nav,
     desks,
+    senderCart: cart,
+    senderMonitor: cm,
     dN,
     dS,
     kenji,

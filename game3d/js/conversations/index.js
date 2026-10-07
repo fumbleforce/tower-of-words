@@ -1,3 +1,4 @@
+import { installSenderHook } from '../investigations/sender/hook.js';
 import CONVERSATIONS from '../../story/conversations/index.js';
 import { conversationMemory } from './state.js';
 import { known } from '../lang.js';
@@ -38,5 +39,6 @@ export function withConversations(story) {
   return { ...story, on: { ...shared.on, ...story.on }, nodes: { ...shared.nodes, ...story.nodes } };
 }
 export function installConversations(game) {
+  installSenderHook(game, flags);
   game.topicFor = (who) => topicFor(who, conversationMemory, known, game.sim?.met.has(who));
 }

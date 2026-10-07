@@ -1,6 +1,8 @@
 // B2's things and registration IDs (places/office.js), kept beside the catalog (catalog.js).
 export const OFFICE_DETAILS = {
   'things': {
+    'sender_console': { 'label': 'Sender console', 'kind': 'thing', 'verb': 'Inspect', 'pin': 'near' },
+    'sender_live': { 'label': 'Timesheet sender', 'kind': 'thing small', 'verb': 'Inspect', 'pin': 'near' },
     'emi': { 'label': 'Emi', 'kind': 'person' },
     'kenji': { 'label': 'Kenji', 'kind': 'person' },
     'rei': {
@@ -176,6 +178,11 @@ export const OFFICE_DETAILS = {
     },
   },
   'spots': [
+    'sender_console',
+    'sender_guest',
+    'sender_desk',
+    'sender_door',
+    'sender_mori_door',
     'lift_out',
     'mori_greet',
     'lobby',

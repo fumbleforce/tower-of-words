@@ -66,9 +66,9 @@
     },
     "game3d/js/places/office.js": {
       "lines": 1124,
-      "bytes": 41340,
+      "bytes": 41277,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; 2026-10-03 C-0378 day 2: the officeDay2 hook registered and installed (places/office-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 copy_room and machine_room zones a step past their doors, and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Emi stays in her office on day 1 evening: the emi_door and emi_desk spots, and her shadow follows her",
+      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; 2026-10-03 C-0378 day 2: the officeDay2 hook registered and installed (places/office-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 copy_room and machine_room zones a step past their doors, and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Emi stays in her office on day 1 evening: the emi_door and emi_desk spots, and her shadow follows her; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced",
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/train.js": {
@@ -108,9 +108,9 @@
     },
     "game3d/js/scenes/office.js": {
       "lines": 1991,
-      "bytes": 68953,
+      "bytes": 68910,
       "owner": "codex-tui",
-      "review": "C-0110 / X-0193; C-0352: tray, sink plate and counter no longer overlap, unused kitchen()/tableSet() removed; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 the corridor door openings defined once, for the wall holes and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-07 X-0668: officeWalls wrapper reuses exact partition calls for follow-only enclosure; ceiling reduced",
+      "review": "C-0110 / X-0193; C-0352: tray, sink plate and counter no longer overlap, unused kitchen()/tableSet() removed; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 the corridor door openings defined once, for the wall holes and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-07 X-0668: officeWalls wrapper reuses exact partition calls for follow-only enclosure; ceiling reduced; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced",
       "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/showcase/decals.js": {

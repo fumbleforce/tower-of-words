@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sender interaction lab</title></head><body style="margin:0;background:#283446"><button id="open">Inspect sender</button><script type="module">
+import {loadSender,senderAction} from '../js/investigations/sender/model.js';
+import {senderView} from '../js/investigations/sender/view.js';
+let state=loadSender(JSON.parse(localStorage.getItem('sender-lab')||'null'));
+state=senderAction(senderAction(state,{type:'offer'}),{type:'wake'});
+let view=null,timer=null;
+const persist=()=>localStorage.setItem('sender-lab',JSON.stringify(state));
+function next(){if(!view||!state.active)return;state=senderAction(state,{type:'advance'});persist();view.render();timer=setTimeout(next,240);}
+function open(){view=senderView({read:()=>state,act:action=>{state=senderAction(state,action);persist();if(action.type==='retry')next();},leave:()=>{view=null;clearTimeout(timer);}});if(state.active)next();}
+document.querySelector('#open').onclick=open;open();
+</script></body></html>

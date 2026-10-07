@@ -1484,6 +1484,8 @@ Emi's office is the left part of what was one big copy room, split by a partitio
 | `covered_monitor` | Covered monitor | South row, right. |
 | `machine_door` | Machine room | The machine room door, with a card reader. |
 | `racks` | Server racks | Inside the machine room, from the nineties. |
+| `sender_console` | Sender console | Existing cart: retained timesheet output, comparison and one reversible held slot after Mio offers the investigation. |
+| `sender_live` | Timesheet sender | Mio’s existing desk monitor: live pending, held and acknowledged items. |
 | `fire_exit` | Fire exit | End of the corridor. |
 | `noticeboard` | Noticeboard | Corridor. |
 | `extinguisher` | Extinguisher | Corridor. |
@@ -1504,7 +1506,7 @@ Emi's office is the left part of what was one big copy room, split by a partitio
 
 ### Spots
 
-`lift_out`, `mori_greet`, `lobby`, `office_door`, `my_seat`, `emi_seat`, `emi_door` (the doorway of Emi's office, in the corridor's south wall), `emi_desk` (the middle of her desk; for the camera and pins, not a walk target), `copier_front`, `coffee_front`, `corridor_w`, `corridor_e`, `machine_front`, `mio_by_desk`, `kenji_desk`
+`lift_out`, `mori_greet`, `lobby`, `office_door`, `my_seat`, `emi_seat`, `emi_door` (the doorway of Emi's office, in the corridor's south wall), `emi_desk` (the middle of her desk; for the camera and pins, not a walk target), `copier_front`, `coffee_front`, `corridor_w`, `corridor_e`, `machine_front`, `mio_by_desk`, `kenji_desk`, `sender_console`, `sender_guest`, `sender_desk`, `sender_door`, `sender_mori_door`
 
 ### Seats
 

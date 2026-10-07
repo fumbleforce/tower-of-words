@@ -1,5 +1,21 @@
 [
  {
+  "key": "word-mada",
+  "speaker": "mio",
+  "text": "まだ。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "word-matte",
   "speaker": "mio",
   "text": "待って。",
@@ -400,6 +416,15 @@
   "slow": true
  },
  {
+  "key": "eric-mada",
+  "speaker": "eric",
+  "text": "まだ。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
   "key": "eric-matte",
   "speaker": "eric",
   "text": "待って。",
@@ -672,7 +697,12 @@
   "text": "自分で録ったの。まだ下手だけど。",
   "lang": "ja",
   "overheard": false,
-  "words": [],
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
   "clear": [],
   "emo": "shy"
  },
@@ -1401,6 +1431,10 @@
   "overheard": true,
   "words": [
    [
+    "mada",
+    "まだ"
+   ],
+   [
     "mitai",
     "みたい"
    ]
@@ -1418,6 +1452,10 @@
   "overheard": true,
   "words": [
    [
+    "mada",
+    "まだ"
+   ],
+   [
     "mitai",
     "みたい"
    ]
@@ -1434,6 +1472,10 @@
   "lang": "ja",
   "overheard": true,
   "words": [
+   [
+    "mada",
+    "まだ"
+   ],
    [
     "mitai",
     "みたい"
@@ -4766,7 +4808,12 @@
   "text": "よかったです。まだありますから、どうぞ。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
   "clear": [],
   "emo": "warm"
  },
@@ -5271,7 +5318,12 @@
   "text": "まだありますよ。どうぞ。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
   "clear": [],
   "emo": "warm"
  },
@@ -5517,7 +5569,12 @@
   "text": "どうぞ。まだ見ますか。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
   "clear": [],
   "emo": "polite"
  },
@@ -6450,6 +6507,10 @@
   "overheard": true,
   "words": [
    [
+    "mada",
+    "まだ"
+   ],
+   [
     "oyogu",
     "泳ぐ"
    ]
@@ -6504,6 +6565,10 @@
   "lang": "ja",
   "overheard": true,
   "words": [
+   [
+    "mada",
+    "まだ"
+   ],
    [
     "daijoubu",
     "大丈夫"
@@ -7381,6 +7446,10 @@
   "lang": "ja",
   "overheard": true,
   "words": [
+   [
+    "mada",
+    "まだ"
+   ],
    [
     "sumimasen",
     "すみません"
@@ -8991,7 +9060,12 @@
   "text": "森さん、このことは、まだ他の人に話さないでください。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
   "clear": [
    "森"
   ],
@@ -9338,7 +9412,12 @@
   "text": "まだ、コーンが残っているんです。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
   "clear": [
    "コーン"
   ],
@@ -9658,7 +9737,12 @@
   "text": "パン、まだあるでしょうか。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
   "clear": [
    "パン"
   ],
@@ -10733,7 +10817,12 @@
   "text": "いえいえ、それは使ってください。こちらに、まだありますから。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
   "clear": [],
   "emo": "warm"
  },
@@ -10868,6 +10957,247 @@
   "emo": "warm"
  },
  {
+  "key": "ln-32ulsy",
+  "speaker": "mio",
+  "text": "The timesheet sender. It comes back up before I can see what made it fall over.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1633jtb",
+  "speaker": "eric",
+  "text": "Has any of that gone through?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1mdcw1c",
+  "speaker": "mio",
+  "text": "Not yet. The green light only means it's back on.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1k3v4l0",
+  "speaker": "mio",
+  "text": "Can you have a look at the other screen while I try it here?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1hy11uo",
+  "speaker": "mio",
+  "text": "まだ. Not yet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-tgxapj",
+  "speaker": "mio",
+  "text": "Mm. Still waiting.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-17pjlq5",
+  "speaker": "mori",
+  "text": "そちらには、まだ残っていますよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1nhsi3b",
+  "speaker": "eric",
+  "text": "まだ... You mean it's still there?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-11pg1cb",
+  "speaker": "mori",
+  "text": "はい。上に前の分が残っています。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1bok27q",
+  "speaker": "eric",
+  "text": "That's why you sent me over there.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-6d5o6a",
+  "speaker": "eric",
+  "text": "I'll look further back.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-zevr7y",
+  "speaker": "eric",
+  "text": "Both runs stop at this one.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-b3a1lm",
+  "speaker": "mio",
+  "text": "Let me see.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1nzdaaw",
+  "speaker": "mio",
+  "text": "We can hold that one here. It won't delete it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-x3k9ux",
+  "speaker": "mio",
+  "text": "Same place. I'll leave it stopped while you look.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1rhf7ah",
+  "speaker": "mio",
+  "text": "Okay. Those have gone through.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1kxecmc",
+  "speaker": "eric",
+  "text": "And this one stays here?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1iuufjr",
+  "speaker": "mio",
+  "text": "Yes. I can look at it without holding everyone else up.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1p0rao8",
+  "speaker": "mio",
+  "text": "Thanks. I was about to sit through that restart again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-d58fdg",
+  "speaker": "eric",
+  "text": "まだ?",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-10ayfdk",
+  "speaker": "mio",
+  "text": "Still here, yes. The others went through.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-fob8er",
+  "speaker": "mio",
+  "text": "I've kept the original. I want to know what it did before I change it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
   "key": "oh-10n1bre",
   "speaker": "mori",
   "text": "すみません。後で、少しお話ししましょう。",
@@ -10930,7 +11260,12 @@
   "text": "その時の写真、まだ見つからなくて。……フォト。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
   "clear": [
    "フォト"
   ],
@@ -11015,6 +11350,10 @@
   "overheard": true,
   "words": [
    [
+    "mada",
+    "まだ"
+   ],
+   [
     "sumimasen",
     "すみません"
    ]
@@ -11048,7 +11387,12 @@
   "text": "まだ、迷っていまして。次は、描き始めたいですね。",
   "lang": "ja",
   "overheard": true,
-  "words": [],
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
   "clear": [],
   "emo": "sheepish"
  },
@@ -13104,6 +13448,15 @@
   "words": [],
   "clear": [],
   "emo": "polite"
+ },
+ {
+  "key": "carina-mada",
+  "speaker": "carina",
+  "text": "まだ。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": []
  },
  {
   "key": "carina-matte",
@@ -16512,6 +16865,86 @@
   ],
   "clear": [],
   "emo": "hesitant"
+ },
+ {
+  "key": "ln-1633jtb-carina",
+  "speaker": "carina",
+  "text": "Has any of that gone through?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1nhsi3b-carina",
+  "speaker": "carina",
+  "text": "まだ... You mean it's still there?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1bok27q-carina",
+  "speaker": "carina",
+  "text": "That's why you sent me over there.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-6d5o6a-carina",
+  "speaker": "carina",
+  "text": "I'll look further back.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-zevr7y-carina",
+  "speaker": "carina",
+  "text": "Both runs stop at this one.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1kxecmc-carina",
+  "speaker": "carina",
+  "text": "And this one stays here?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-d58fdg-carina",
+  "speaker": "carina",
+  "text": "まだ?",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mada",
+    "まだ"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
  },
  {
   "key": "ln-1c9yqoz-carina",

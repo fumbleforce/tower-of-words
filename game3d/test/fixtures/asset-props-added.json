@@ -2495,6 +2495,66 @@
     ]
   },
   {
+    "id_": "prop/office/sender_console",
+    "kind": "prop",
+    "name": "Sender console",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.sender_console; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Sender console'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        4.2,
+        0.8,
+        -1.3
+      ],
+      "spot": null,
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office/sender_live",
+    "kind": "prop",
+    "name": "Timesheet sender",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.sender_live; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Timesheet sender'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -2,
+        0.8,
+        -3
+      ],
+      "spot": null,
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
     "id_": "prop/office/toilet_f",
     "kind": "prop",
     "name": "Women's toilet",

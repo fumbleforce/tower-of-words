@@ -49,4 +49,5 @@ export const GLOBAL_HOOKS = [
   'ongoingGoal',
   'artVisit',
   'flavorFind',
+  'sender',
 ];

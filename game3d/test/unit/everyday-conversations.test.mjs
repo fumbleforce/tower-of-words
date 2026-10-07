@@ -10,6 +10,7 @@ const { Runner, flags } = await import(root + 'game3d/js/runner.js');
 const { known } = await import(root + 'game3d/js/lang.js');
 const stories = {};
 for (const id of ['mio','emi','guard','kuro','aoi','rei']) stories[id] = (await import(root + `game3d/story/conversations/${id}.js`)).default;
+const shared = (await import(root + 'game3d/story/conversations/index.js')).default;
 const intro = { kuro:'d3_kuro_intro', aoi:'d3_aoi_intro', rei:'d4_rei_intro' };
 async function play(id, node, options = {}) {
   for (const k of Object.keys(flags)) delete flags[k];
@@ -66,7 +67,7 @@ test('Rei preserves a reversible conversational preference without inventing a p
 });
 test('all local node references resolve and Kuro/Aoi speech has no translated subtitle bypass',()=>{
  for(const [id,story] of Object.entries(stories)){
-  const walk=x=>{if(!x||typeof x!=='object')return;for(const k of ['go','call'])if(x[k])assert.ok(story.nodes[x[k]],`${id}:${x[k]}`);
+  const walk=x=>{if(!x||typeof x!=='object')return;for(const k of ['go','call'])if(x[k])assert.ok(story.nodes[x[k]] || shared.nodes[x[k]],`${id}:${x[k]}`);
    if(x.say===id&&['kuro','aoi','guard'].includes(id)){assert.equal(x.en,undefined);assert.ok(x.overheard||x.slow);}
    for(const v of Object.values(x))if(typeof v==='object')Array.isArray(v)?v.forEach(walk):walk(v);
   };walk(story.nodes);
@@ -80,9 +81,9 @@ test('proposed exact remarks survive save and accept either order without invent
   assert.equal(memory.ready(entry.id,words),false);
   memory.hear({who:entry.who,text:entry.lines[0],known:words,source:{day:8,period:'lunch',place:'plaza',node:'authored'}});
   const restored=createConversationMemory(catalogue);restored.load(memory.toJSON());
-  assert.equal(restored.entries()[0].understoodAtTime,before);
+  assert.equal(restored.entries()[0].understoodAtTime,before || entry.words.length === 0);
   entry.words.forEach(word=>words.add(word));assert.equal(restored.ready(entry.id,words),true);
-  assert.equal(restored.entries()[0].understoodAtTime,before);
+  assert.equal(restored.entries()[0].understoodAtTime,before || entry.words.length === 0);
  }
 });
 

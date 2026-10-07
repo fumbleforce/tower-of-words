@@ -127,6 +127,25 @@ ENGINE_WRITES['game3d/js/places/ferry-terminal/food-state.js'] = {
   exact: ['ferry_food_phase', 'ferry_food_item', 'ferry_food_id', 'ferry_consumed_id'],
   prefix: ['ferry_has_'],
 };
+ENGINE_WRITES['game3d/js/investigations/sender/state.js'] = {
+  exact: ['sender_state', 'sender_offered', 'sender_partial', 'sender_compared', 'sender_delivered'],
+  prefix: [],
+};
+ENGINE_WRITES['game3d/js/investigations/sender/hook.js'] = {
+  exact: ['sender_action_ok', 'sender_available'],
+  prefix: [],
+};
+ENGINE_WRITES['game3d/js/investigations/sender/index.js'] = {
+  exact: [
+    'sender_action_ok',
+    'sender_available',
+    'sender_complaint_heard',
+    'sender_remark_heard',
+    'sender_failed',
+    'sender_wants_mori',
+  ],
+  prefix: [],
+};
 
 export const KNOW_PREFIX = 'know_';
 ENGINE_WRITES['game3d/js/places/station-garden/index.js'] = {

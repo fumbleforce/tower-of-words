@@ -62,6 +62,9 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   expected.engine.exact.konbini_action_complete = ['game3d/js/places/konbini/action.js'];
   for(const flag of ["konbini_basket", "konbini_cant_pay", "konbini_consumed_id", "konbini_count", "konbini_food_id", "konbini_food_item", "konbini_food_phase", "konbini_full", "konbini_has_milk", "konbini_has_riceball", "konbini_order_id", "konbini_paid_id", "konbini_phase", "konbini_selected_coffee", "konbini_selected_milk", "konbini_selected_riceball", "konbini_selected_tea", "konbini_total"]) expected.engine.exact[flag] = ['game3d/js/places/konbini/trade.js'];
   for (const flag of ['garden_worker_busy', 'garden_worker_done', 'garden_bench_free']) expected.engine.exact[flag] = ['game3d/js/places/station-garden/index.js'];
+  for (const flag of ['sender_state', 'sender_offered', 'sender_partial', 'sender_compared', 'sender_delivered']) expected.engine.exact[flag] = ['game3d/js/investigations/sender/state.js'];
+  for (const flag of ['sender_action_ok', 'sender_available', 'sender_complaint_heard', 'sender_remark_heard', 'sender_failed', 'sender_wants_mori']) expected.engine.exact[flag] = ['game3d/js/investigations/sender/index.js'];
+  for (const flag of ['sender_action_ok', 'sender_available']) expected.engine.exact[flag].unshift('game3d/js/investigations/sender/hook.js');
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {
