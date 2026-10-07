@@ -87,6 +87,10 @@ follow-up #311 owns the underlying chair-arrival fix.
 The seven-image Showcase renders and decodes every image at both sizes with zero
 page errors. Its captures are hash-preserved in main and uploaded under the
 asset lock. The broader public-bible audit visited 277 routes and checked 4,925
-links/media; it reports 197 existing archive/source/quote problems, none on the
-new Showcase. Those are not reported as a whole-bible pass. Final browser logs
-and the merged branch report are preserved with the feature evidence.
+links/media and reports 197 archive/source/quote issues in the isolated worktree.
+A follow-up scope audit found all 186 parsed missing-file references present in
+main (179 files and seven directories); those worktree misses are not evidence
+of broken live assets. The remaining quote findings and the complete live bible
+have not been cleared. The new Showcase passes independently. The scope audit
+is preserved in game3d/shots/everyday-chat/final-logs/bible-audit-scope.json,
+alongside the final browser logs and merged branch report.
