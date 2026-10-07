@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { waitForGame } from '../test/support/wait-ready.mjs';
+const base = new URL((process.env.BASE || 'game3d') + '/', `http://127.0.0.1:${process.env.PORT || 8771}/`).href;
 const width=+(process.argv[2]||1366), mc=process.argv[3]||'eric', order=process.argv[4]||'none', releaseHeld=process.argv[5]==='release';
 const out=`/tmp/codex-sender-play-${process.env.ROUND||'1'}`;
 fs.mkdirSync(out,{recursive:true});
@@ -37,7 +38,7 @@ await withBrowserJob('sender-play',async browser=>{
  const captures=(async()=>{while(watching){try{const phase=await page.evaluate(()=>globalThis.__senderCapture);if(phase){if(['mori-remark','payoff-line'].includes(phase))await page.waitForTimeout(350);await samplePhysical(phase);await snapshot('story-'+phase);if(phase==='mori-remark'){await page.waitForTimeout(600);await samplePhysical('mori-remark-held');}await page.evaluate(async()=>{if(['mori-remark','payoff-line'].includes(globalThis.__senderCapture)){const {ui}=await import('./js/ui.js');ui.auto=true;ui._advance?.();}globalThis.__senderCaptured.add(globalThis.__senderCapture);globalThis.__senderCapture=null;globalThis.__game.paused=false;});}}catch{}await new Promise(r=>setTimeout(r,50));}})();
  const idle=()=>page.waitForFunction(()=>!globalThis.__game.busy,null,{timeout:60000});
  try{
-  await waitForGame(page,60000,()=>page.goto(`http://127.0.0.1:8786/game3d/index.html?day=2&place=office&mc=${mc}`),'play');
+  await waitForGame(page,60000,()=>page.goto(`${base}index.html?day=2&place=office&mc=${mc}`),'play');
   await idle();await samplePhysical('initial');
   await page.evaluate(async()=>{const g=globalThis.__game,{flags}=await import('./js/narrative/state.js');flags.d2_ticket_done=true;g.place.hooks.officeDay2({state:'arrive'});});
   await driver(['Give me a minute.']);
@@ -56,7 +57,7 @@ await withBrowserJob('sender-play',async browser=>{
   await page.waitForFunction(()=>globalThis.__game.place.sender.state.read().acknowledged.includes(26),null,{timeout:60000});
   const mid=await page.evaluate(()=>globalThis.__game.place.sender.state.read());
   await snapshot('ack26');
-  await page.goto('http://127.0.0.1:8786/game3d/index.html');await page.locator('#title .mcont').click();await page.locator('#saves button.slot').filter({hasText:'Autosave'}).click();
+  await page.goto(`${base}index.html`);await page.locator('#title .mcont').click();await page.locator('#saves button.slot').filter({hasText:'Autosave'}).click();
   await page.waitForFunction(()=>globalThis.__game?.place?.sender&&globalThis.document.querySelector('.sender-inspect'),null,{timeout:60000});
   await driver();
   await page.waitForFunction(()=>globalThis.__game.place.sender.state.read().acknowledged.includes(27));

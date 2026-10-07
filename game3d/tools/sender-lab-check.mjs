@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+const base = new URL((process.env.BASE || 'game3d') + '/', `http://127.0.0.1:${process.env.PORT || 8771}/`).href;
 const out = '/tmp/codex-sender-lab-proof-2';
 fs.mkdirSync(out, { recursive: true });
 await withBrowserJob('codex-sender-lab', async (browser) => {
@@ -10,7 +11,7 @@ await withBrowserJob('codex-sender-lab', async (browser) => {
     const errors = [];
     page.on('pageerror', (error) => errors.push(error.message));
     try {
-      await page.goto('http://127.0.0.1:8786/game3d/tools/sender-lab.html');
+      await page.goto(`${base}tools/sender-lab.html`);
       await page.getByRole('dialog').waitFor();
       await page.screenshot({ path: `${out}/${width}-initial.png` });
       await page.getByRole('button', { name: 'Attempt 2, item 25, started', exact: true }).click();

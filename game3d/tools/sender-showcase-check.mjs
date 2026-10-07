@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { blockedSource, scopedFetch } from '../../tools/bible/check-scope.mjs';
-const base=process.env.BIBLE_BASE||'http://127.0.0.1:8786/';
+const base=process.env.BIBLE_BASE||'http://127.0.0.1:8771/';
 const id='sender-investigation-20261007',out=`/tmp/codex-sender-showcase-check-${process.env.ROUND||'1'}`;
 fs.mkdirSync(out,{recursive:true});
 const entry=await (await scopedFetch(base+`showcase/${id}/entry.json`,{publicOnly:true})).json();
