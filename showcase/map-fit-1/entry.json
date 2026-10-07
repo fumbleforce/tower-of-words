@@ -1,0 +1,38 @@
+{
+  "title": "A clearer island overview",
+  "date": "2026-10-07",
+  "by": "codex",
+  "caption": "The map fits around its header and controls, with more labels visible on phones.",
+  "images": [
+    {
+      "id": "overview-1366",
+      "image": "bible/shots/showcase/map-fit-1/overview-1366.png",
+      "caption": "Desktop overview keeps the mapped island below the header."
+    },
+    {
+      "id": "overview-390",
+      "image": "bible/shots/showcase/map-fit-1/overview-390.png",
+      "caption": "Phone overview labels the fountain plaza and east lane."
+    },
+    {
+      "id": "resized-390",
+      "image": "bible/shots/showcase/map-fit-1/resized-390.png",
+      "caption": "The island refits when the viewport changes."
+    },
+    {
+      "id": "places-390",
+      "image": "bible/shots/showcase/map-fit-1/places-390.png",
+      "caption": "Opening Places leaves the island clear of the controls."
+    }
+  ],
+  "links": [
+    {
+      "label": "Open the game map",
+      "href": "game3d/"
+    },
+    {
+      "label": "Validation and retained attempts",
+      "href": "notes/map-fit-qa.md"
+    }
+  ]
+}
