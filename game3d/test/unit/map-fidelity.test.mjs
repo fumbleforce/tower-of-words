@@ -3,13 +3,14 @@ import assert from 'node:assert/strict';
 import { GREEN } from '../../js/scenes/island-layout.js';
 import { WEST_TREES } from '../../js/scenes/island-west.js';
 import { SOUTH_TREES } from '../../js/scenes/island-south.js';
+import { CAMPUS_TREES } from '../../js/scenes/campus/landscape-plan.js';
 import { coverMarks, polygonContains, plantedTrees, officeRegions } from '../../js/ui/map/terrain.js';
 import { rectPts } from '../../js/ui/map/shapes.js';
 import { scaleMetres, drawCartography } from '../../js/ui/map/cartography.js';
 import { toView, fromView } from '../../js/ui/map/base.js';
 
 test('map planting keeps exact world tree positions and irregular land cover inside its source regions', () => {
-  assert.deepEqual(plantedTrees, [...WEST_TREES, ...SOUTH_TREES]);
+  assert.deepEqual(plantedTrees, [...WEST_TREES, ...SOUTH_TREES, ...CAMPUS_TREES]);
   const marks = coverMarks();
   assert.deepEqual(marks, coverMarks(), 'redraws must not change the geography');
   assert.ok(marks.length > 80 && marks.length < 1000);

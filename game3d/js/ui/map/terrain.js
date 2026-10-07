@@ -4,9 +4,15 @@ import { GREEN, MOWN } from '../../scenes/island-layout.js';
 import { WEST_TREES, WEST_BEDS } from '../../scenes/island-west.js';
 import { SOUTH_TREES, SOUTH_SHRUBS, UMBRELLAS, HUTS } from '../../scenes/island-south.js';
 import { OFFICE_BELTS } from '../../scenes/office-quarter/planting-plan.js';
-import { rectPts } from './shapes.js';
+import { rectPts, shape } from './shapes.js';
+import {
+  CAMPUS_GARDENS,
+  CAMPUS_TREES,
+  PRINT_FOUNDATIONS,
+  PRINT_SERVICE_PAD,
+} from '../../scenes/campus/landscape-plan.js';
 
-export const plantedTrees = [...WEST_TREES, ...SOUTH_TREES];
+export const plantedTrees = [...WEST_TREES, ...SOUTH_TREES, ...CAMPUS_TREES];
 export function polygonContains(points, x, z) {
   let inside = false;
   for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
@@ -89,6 +95,13 @@ export function crown(ctx, x, z, size) {
   ctx.fill();
 }
 export function drawPlanting(ctx, detail) {
+  ctx.fillStyle = '#919787';
+  for (const garden of CAMPUS_GARDENS) {
+    shape(ctx, (x, z) => [x, z], garden.poly);
+    ctx.fill();
+  }
+  ctx.fillStyle = '#c0bfb0';
+  for (const [x, z, x1, z1] of [...PRINT_FOUNDATIONS, PRINT_SERVICE_PAD]) ctx.fillRect(x, z, x1 - x, z1 - z);
   ctx.fillStyle = '#6f916c';
   for (const [x, z, x1, z1] of WEST_BEDS) ctx.fillRect(x, z, x1 - x, z1 - z);
   if (!detail) return;

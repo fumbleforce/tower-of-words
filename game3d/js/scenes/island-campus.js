@@ -1,5 +1,8 @@
+import { PRINT_APRONS } from './campus/landscape-plan.js';
+
 // Built campus connections; the same footprints drive map paving and physical navigation.
 export const CAMPUS_PATHS = [
+  ...PRINT_APRONS,
   {
     id: 'shed_street_far',
     kind: 'lane',

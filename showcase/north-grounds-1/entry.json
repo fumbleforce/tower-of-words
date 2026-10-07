@@ -1,0 +1,72 @@
+{
+  "title": "North-campus garden and print frontage",
+  "date": "2026-10-07",
+  "by": "codex",
+  "caption": "A planted harbour-side rest pocket and grounded print-shop service frontage finish this part of the existing campus loop. This is a bounded grounds pass; the far north and other unfinished island areas remain open work.",
+  "sections": [
+    {
+      "title": "Harbour garden and rest pocket",
+      "caption": "Joined low cover, shrub groups and grasses frame the existing paths, trees and bench. The open lawn and circulation remain.",
+      "images": [
+        {
+          "id": "1366-coast",
+          "image": "bible/shots/showcase/north-grounds-1/1366-coast.png",
+          "caption": "Coastal garden from the normal desktop walking camera."
+        },
+        {
+          "id": "390-rest",
+          "image": "bible/shots/showcase/north-grounds-1/390-rest.png",
+          "caption": "Rest pocket and planting from the phone walking camera."
+        },
+        {
+          "id": "1366-rest",
+          "image": "bible/shots/showcase/north-grounds-1/1366-rest.png",
+          "caption": "Existing bench and clear approach, desktop."
+        },
+        {
+          "id": "390-rest-evening",
+          "image": "bible/shots/showcase/north-grounds-1/390-rest-evening.png",
+          "caption": "The same rest pocket under actual evening lighting, phone."
+        }
+      ]
+    },
+    {
+      "title": "Print-shop frontage",
+      "caption": "A level side apron and fitted hardstanding support sheltered paper stock and a returns trolley. The shop interior and its printing service were completed separately.",
+      "images": [
+        {
+          "id": "1366-service",
+          "image": "bible/shots/showcase/north-grounds-1/1366-service.png",
+          "caption": "Stock shelter, trolley and hardstanding viewed from the reachable door apron, desktop."
+        },
+        {
+          "id": "390-service",
+          "image": "bible/shots/showcase/north-grounds-1/390-service.png",
+          "caption": "Sheltered paper stock and foundation edge viewed from the reachable apron, phone. The trolley is outside this crop."
+        },
+        {
+          "id": "390-service-evening",
+          "image": "bible/shots/showcase/north-grounds-1/390-service-evening.png",
+          "caption": "The service frontage after the production evening transition, phone."
+        }
+      ]
+    },
+    {
+      "title": "Map follows the ground",
+      "caption": "The map uses the same planting outlines, original nine tree positions, apron and service-pad footprints as the world.",
+      "images": [
+        {
+          "id": "1366-map",
+          "image": "bible/shots/showcase/north-grounds-1/1366-map.png",
+          "caption": "Actual map opened during the native walking check, desktop."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Walk the north campus",
+      "href": "game3d/?day=3&place=campus"
+    }
+  ]
+}
