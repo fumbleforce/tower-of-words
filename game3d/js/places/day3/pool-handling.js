@@ -100,6 +100,10 @@ export function poolHandling(root, { codeArms = false } = {}) {
       for (const [rig, state] of actors) if (state.held === item) return rig;
       return null;
     },
+    release(rig) {
+      actors.get(rig)?.dispose();
+      actors.delete(rig);
+    },
     dispose() {
       for (const a of actors.values()) a.dispose();
       actors.clear();

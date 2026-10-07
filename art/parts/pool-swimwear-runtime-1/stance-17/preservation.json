@@ -1,0 +1,105 @@
+{
+  "rows": [
+    {
+      "id": "eric",
+      "motion": "walk",
+      "neutral_exact": true,
+      "body_face_uv_weights_bind_exact": true,
+      "hips_and_other_tracks_exact": true,
+      "changed_rotation_tracks": [
+        "LeftToeBase",
+        "LeftFoot",
+        "LeftLeg",
+        "LeftUpLeg",
+        "RightToeBase",
+        "RightFoot",
+        "RightLeg",
+        "RightUpLeg"
+      ]
+    },
+    {
+      "id": "eric",
+      "motion": "run",
+      "neutral_exact": true,
+      "body_face_uv_weights_bind_exact": true,
+      "hips_and_other_tracks_exact": true,
+      "changed_rotation_tracks": [
+        "LeftToeBase",
+        "LeftFoot",
+        "LeftLeg",
+        "LeftUpLeg",
+        "RightToeBase",
+        "RightFoot",
+        "RightLeg",
+        "RightUpLeg"
+      ]
+    },
+    {
+      "id": "carina",
+      "motion": "walk",
+      "neutral_exact": true,
+      "body_face_uv_weights_bind_exact": true,
+      "hips_and_other_tracks_exact": true,
+      "changed_rotation_tracks": [
+        "LeftToeBase",
+        "LeftFoot",
+        "LeftLeg",
+        "LeftUpLeg",
+        "RightToeBase",
+        "RightFoot",
+        "RightLeg",
+        "RightUpLeg"
+      ]
+    },
+    {
+      "id": "carina",
+      "motion": "run",
+      "neutral_exact": true,
+      "body_face_uv_weights_bind_exact": true,
+      "hips_and_other_tracks_exact": true,
+      "changed_rotation_tracks": [
+        "LeftToeBase",
+        "LeftFoot",
+        "LeftLeg",
+        "LeftUpLeg",
+        "RightToeBase",
+        "RightFoot",
+        "RightLeg",
+        "RightUpLeg"
+      ]
+    },
+    {
+      "id": "emi",
+      "motion": "walk",
+      "neutral_exact": true,
+      "body_face_uv_weights_bind_exact": true,
+      "hips_and_other_tracks_exact": true,
+      "changed_rotation_tracks": []
+    },
+    {
+      "id": "emi",
+      "motion": "run",
+      "neutral_exact": true,
+      "body_face_uv_weights_bind_exact": true,
+      "hips_and_other_tracks_exact": true,
+      "changed_rotation_tracks": []
+    },
+    {
+      "id": "kuro-b",
+      "motion": "walk",
+      "neutral_exact": true,
+      "body_face_uv_weights_bind_exact": true,
+      "hips_and_other_tracks_exact": true,
+      "changed_rotation_tracks": []
+    },
+    {
+      "id": "kuro-b",
+      "motion": "run",
+      "neutral_exact": true,
+      "body_face_uv_weights_bind_exact": true,
+      "hips_and_other_tracks_exact": true,
+      "changed_rotation_tracks": []
+    }
+  ],
+  "idle_sit_textures_exact": true
+}

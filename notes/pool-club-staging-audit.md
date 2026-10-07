@@ -10,3 +10,7 @@ Scope: public runtime and approved public asset catalogue, issue #296, following
 | Karaoke | Built reception and booth interiors. | Everyday clothes fit this activity; no pool-style changing prerequisite. |
 
 The public character loader currently selects approved fixed-outfit Meshy models and their movement clips. The public catalogue has no approved swimming variants. Outfit work needs variants derived from each approved base, preserving face, proportions and rig compatibility; the place should select them only after the visible locker transition and restore everyday clothing on exit/Continue. Appropriate pool staff/member clothing also needs selection. Do not substitute a tint or hide the mismatch under the water. This audit does not mark that dependency complete.
+
+## Selected swimwear follow-up — 2026-10-07
+
+Jørgen selected Kuro B, Emi, Eric and Carina from pool-swimwear-1. The bounded public pool integration now uses those appearances at the existing locker/session transitions, with saved outfit state, corrected seated poses and motion-only ankle/grounding repairs. This supersedes the missing-selected-cast-outfits entry above; it does not change the attendant/member casting or winter changing-room scope. Runtime and visual acceptance evidence is recorded separately with the integration's retained attempts.

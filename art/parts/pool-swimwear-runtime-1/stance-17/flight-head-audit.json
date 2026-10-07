@@ -1,0 +1,50 @@
+[
+  {
+    "id": "eric",
+    "motion": "walk",
+    "samples": 721,
+    "head_track_exact": true,
+    "head_range": 0.05324924741451287,
+    "wrap_head_step": 0.0003576161761338348,
+    "source_air_samples": 93,
+    "lost_air_samples": 0,
+    "minimum_sole": -0.0002838283468722447,
+    "maximum_sole": 0.0077187695022170435
+  },
+  {
+    "id": "eric",
+    "motion": "run",
+    "samples": 721,
+    "head_track_exact": true,
+    "head_range": 0.06163079872612942,
+    "wrap_head_step": 0.00012086784634590675,
+    "source_air_samples": 177,
+    "lost_air_samples": 0,
+    "minimum_sole": -0.001001341646700314,
+    "maximum_sole": 0.04009072491179006
+  },
+  {
+    "id": "carina",
+    "motion": "walk",
+    "samples": 721,
+    "head_track_exact": true,
+    "head_range": 0.05081796538912009,
+    "wrap_head_step": 0.0004017995664080676,
+    "source_air_samples": 0,
+    "lost_air_samples": 0,
+    "minimum_sole": -0.001208930087409974,
+    "maximum_sole": 0.0051225825215985375
+  },
+  {
+    "id": "carina",
+    "motion": "run",
+    "samples": 721,
+    "head_track_exact": true,
+    "head_range": 0.05771194956846193,
+    "wrap_head_step": 6.372418859512674e-05,
+    "source_air_samples": 182,
+    "lost_air_samples": 0,
+    "minimum_sole": -0.000725231112581211,
+    "maximum_sole": 0.03961983875565668
+  }
+]

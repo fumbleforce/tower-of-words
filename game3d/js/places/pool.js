@@ -14,6 +14,7 @@ import { MC } from '../mc.js';
 import { sim } from '../sim.js';
 import { day3Place } from './day3/place.js';
 import { poolClub } from './day3/swim.js';
+import { poolOutfits } from './day3/pool-outfits.js';
 import { changingPlan, CHANGING_ENTRY } from '../scenes/sports/changing-room.js';
 
 // Shared sports world with a cutaway pavilion, own changing-room route and deck navigation.
@@ -44,7 +45,8 @@ export async function poolPlace(game) {
   const door = w.doors.find((d) => d.id === 'pool');
   const out = closed ? { edge: door.local, lane: door.step, in: door.step } : MC.gender === 'woman' ? D.EXIT_W : D.EXIT; // the protagonist's own changing room
   const d3 = day3Place(game, 'pool', { root: w.root, K, ids: ['emi', 'kuro', 'attendant', 'member'] });
-  const club = poolClub(game, { root: w.root, cast: d3.cast });
+  const outfits = closed ? null : await poolOutfits(game, d3.cast);
+  const club = poolClub(game, { root: w.root, cast: d3.cast, outfits });
   d3.also(() => club.arrange());
   const things = {
     // The real pavilion exit; the changing rooms are walkable rooms inside this place.

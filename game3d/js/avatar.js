@@ -269,7 +269,7 @@ export async function meshyFiles(id, { dir = CDIR + id + '/', extra = true } = {
   ]);
 }
 // The person, at once, from files already loaded in loadMeshy's order (chibi.js makes several from one set).
-export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { height = 1.2, stride, size } = {}) {
+export function meshyFrom(id, [walk, run, idle, sitG, tex, phone, ...gj], { height = 1.2, stride, size, root } = {}) {
   tex.flipY = false;
   tex.colorSpace = THREE.SRGBColorSpace;
   const model = walk.scene;
@@ -295,8 +295,8 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
     o.material = m;
   });
   const H = size || new THREE.Box3().setFromObject(model).getSize(new THREE.Vector3()).y; // size: chibi.js
-  const root = new THREE.Group(),
-    holder = new THREE.Group();
+  root ??= new THREE.Group();
+  const holder = new THREE.Group();
   holder.scale.setScalar(height / H);
   holder.add(model);
   root.add(holder);
@@ -321,7 +321,7 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
   });
   const SIT_T = calmSitTime(model, mixer, actions.sit);
   const layers = poseLayer(model);
-  const ph = addPhone({ model, root, height, layers, json: phoneJson, bones: API_PHONE_BONES });
+  const ph = addPhone({ model, root, height, layers, json: phone, bones: API_PHONE_BONES });
   const gact = {};
   GESTURES.forEach((g, i) => {
     if (gj[i]) {
