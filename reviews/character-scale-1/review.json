@@ -307,36 +307,61 @@
         "bible/shots/reviews/character-scale-1/mio14-marker/chibi0-85.webp"
       ],
       "note": "Diagnostic office attempt: head-anchor coordinate assertions pass for both body types at 85% and default 100%, but Mio is hidden/offscreen in these captures. Retained attempt; no visual marker-placement pass claimed."
+    },
+    {
+      "id": "pool15-before",
+      "label": "pool15-before",
+      "image": "bible/shots/reviews/character-scale-1/pool15-before/bench.webp",
+      "images": [
+        "bible/shots/reviews/character-scale-1/pool15-before/changed-back.webp",
+        "bible/shots/reviews/character-scale-1/pool15-before/ordinary.webp",
+        "bible/shots/reviews/character-scale-1/pool15-before/water.webp"
+      ],
+      "note": "Before head-cache integration: ordinary pool entry, water, bench and changing back at85%. Native pin coordinates pass; no ordinary-route pin defect reproduced. Changed-back framing crops the player and is retained as limited evidence."
+    },
+    {
+      "id": "pool16-current-head",
+      "label": "pool16-current-head",
+      "image": "bible/shots/reviews/character-scale-1/pool16-current-head/bench.webp",
+      "images": [
+        "bible/shots/reviews/character-scale-1/pool16-current-head/cached-revisit.webp",
+        "bible/shots/reviews/character-scale-1/pool16-current-head/changed-back.webp",
+        "bible/shots/reviews/character-scale-1/pool16-current-head/diagnostic-restore-ordinary-npcs.webp",
+        "bible/shots/reviews/character-scale-1/pool16-current-head/ordinary.webp",
+        "bible/shots/reviews/character-scale-1/pool16-current-head/restore-bench-outfits.webp",
+        "bible/shots/reviews/character-scale-1/pool16-current-head/water.webp"
+      ],
+      "note": "Integrated85% trial: actual pool route plus explicitly diagnostic snapshot restoration of ordinary NPC outfits and then pool outfits. Pin anchors resolve current heads. Bench contact remains a staging limitation; changed-back crops the player, and the cached revisit is dialogue rather than visible-pin evidence."
     }
   ],
   "links": [
     {
       "label": "Play 85% characters in the dorms",
-      "href": ".claude/worktrees/codex-character-scale-trial/game3d/index.html?day=2&place=dorms&charscale=85&q=2"
+      "href": "game3d/index.html?day=2&place=dorms&charscale=85&q=2"
     },
     {
       "label": "Try 85% on the street",
-      "href": ".claude/worktrees/codex-character-scale-trial/game3d/index.html?day=2&place=forecourt&charscale=85&q=2"
+      "href": "game3d/index.html?day=2&place=forecourt&charscale=85&q=2"
     },
     {
       "label": "Try 85% at the canteen",
-      "href": ".claude/worktrees/codex-character-scale-trial/game3d/index.html?day=2&place=canteen&charscale=85&q=2"
+      "href": "game3d/index.html?day=2&place=canteen&charscale=85&q=2"
     },
     {
       "label": "Play 67% characters in the dorms",
-      "href": ".claude/worktrees/codex-character-scale-trial/game3d/index.html?day=2&place=dorms&charscale=67&q=2"
+      "href": "game3d/index.html?day=2&place=dorms&charscale=67&q=2"
     },
     {
       "label": "Play current 100% characters in the dorms",
-      "href": ".claude/worktrees/codex-character-scale-trial/game3d/index.html?day=2&place=dorms&charscale=100&q=2"
+      "href": "game3d/index.html?day=2&place=dorms&charscale=100&q=2"
     },
     {
       "label": "Try 67% on the street",
-      "href": ".claude/worktrees/codex-character-scale-trial/game3d/index.html?day=2&place=forecourt&charscale=67&q=2"
+      "href": "game3d/index.html?day=2&place=forecourt&charscale=67&q=2"
     },
     {
       "label": "Try 67% at the canteen",
-      "href": ".claude/worktrees/codex-character-scale-trial/game3d/index.html?day=2&place=canteen&charscale=67&q=2"
+      "href": "game3d/index.html?day=2&place=canteen&charscale=67&q=2"
     },
     {
       "label": "Validation and remaining staging work",

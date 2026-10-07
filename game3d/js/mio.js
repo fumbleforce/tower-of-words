@@ -1,9 +1,6 @@
-// Mio, the player: Jørgen's Meshy model (side/flat/meshy2), loaded the way side/flat/neon.html shows her.
-// The face fix, jaw fix, cleaned texture and foot fix are ported from neon.html with its default settings, so her
-// shape, face and eyes are exactly as approved there. The only change for the game is colour: the flat palette
-// colours are remapped per region (hair, hoodie, trousers, shoes) so she reads at game scale and sits in the
-// muted office palette. Nothing is moved, reshaped or removed for that.
+// Legacy Mio body and motion.
 import * as THREE from 'three';
+import { CHARACTER_SCALE } from './character-scale.js';
 import { loadRelaxedIdle } from './relaxed-idle.js';
 import { makeGait, holdNow } from './movement/gait.js';
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
@@ -575,6 +572,7 @@ export function addPhone({ model, root, height, layers, json, bones }) {
 
 // Load her once. `height` is her standing height in world units.
 export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
+  height *= CHARACTER_SCALE;
   const loader = new GLTFLoader();
   const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
   const [walk, run, sit, data, tex, idleClip] = await Promise.all([
@@ -742,7 +740,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
       b[0].quaternion.copy(b[2]);
     }
   };
-  const gait = makeGait(actions, { walkV: 0.47, runV: 0.77, runOff: 0.04 });
+  const gait = makeGait(actions, { walkV: 0.47 * CHARACTER_SCALE, runV: 0.77 * CHARACTER_SCALE, runOff: 0.04 });
   const activeWeight = (action) => (action.isScheduled() ? action.getEffectiveWeight() : 0);
   function update(dt, speed = 1) {
     t += dt;

@@ -2,8 +2,8 @@
   "defaultLines": 400,
   "exceptions": {
     "game3d/js/avatar.js": {
-      "lines": 475,
-      "bytes": 15738,
+      "lines": 474,
+      "bytes": 15523,
       "owner": "codex-tui",
       "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones); 2026-10-05 C-0441 meshyFiles split out of loadMeshy, so cast3d.js makes a copy of Kuro, Aoi and Emi for each place; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow); 2026-10-05 seat height (feedback 2026-10-05_192459): sitAt puts the measured underside on the seat top (movement/sit-height.js); X-0747 optional pool-owned root retains actor identity, exact byte ceiling lowered",
       "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."
@@ -37,8 +37,8 @@
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
     },
     "game3d/js/mio.js": {
-      "lines": 822,
-      "bytes": 29645,
+      "lines": 820,
+      "bytes": 29279,
       "owner": "codex-tui",
       "review": "C-0071; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow)",
       "reason": "Existing procedural character and animation implementation; changes require character review."
@@ -163,8 +163,8 @@
       "reason": "Existing shared train geometry helpers combine material construction, surfaces and furniture primitives. Stage 5 room-builder review will separate primitive helpers and material ownership."
     },
     "game3d/js/train/people.js": {
-      "lines": 853,
-      "bytes": 26126,
+      "lines": 852,
+      "bytes": 25990,
       "owner": "codex-tui",
       "review": "C-0071; 2026-10-03 C-0406 the cat moved to creatures/cat-rig.js and cat.js",
       "reason": "Existing passenger mesh factories, per-seat placement and idle motion share rig conventions. Stage 5 crowd and room-builder review will separate appearance construction from placement and motion."
