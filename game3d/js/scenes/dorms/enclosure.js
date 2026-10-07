@@ -1,5 +1,8 @@
+import * as THREE from 'three';
+import { Kit } from './kit.js';
+import { slidingDoor } from './entry.js';
 import { roomEnclosure } from '../rooms/enclosure.js';
-import { X0, X1, BACK, NEAR, H, PART, LOW, T, BATH_X, DOORWAY, C } from './layout.js';
+import { X0, X1, BACK, NEAR, H, PART, LOW, T, BATH_X, DOORWAY, DOORWAY_H, C } from './layout.js';
 
 // Match the fronts that the overview fades, without changing their state or materials.
 // Each ceiling applies only inside its own room; the outdoor corridor and roof stay open.
@@ -13,7 +16,12 @@ export function dormEnclosures(root, front, levels) {
     return room;
   };
   const own = add(root, X0, X1, front);
-  own.wall('x', X0, X1, PART, LOW, 0.08, { holes: [[...DOORWAY, 0, 1]] });
+  own.wall('x', X0, X1, PART, LOW, 0.08, {
+    holes: [[...DOORWAY, 0, DOORWAY_H]],
+  });
+  const panels = new Kit();
+  slidingDoor(panels, LOW, DOORWAY_H - 0.02);
+  own.add(panels.flush(new THREE.Group()), 'door');
   own.wall('z', PART + 0.05, NEAR, BATH_X, LOW, T);
   for (const entry of levels.fronts) {
     const parent = entry.group.parent,

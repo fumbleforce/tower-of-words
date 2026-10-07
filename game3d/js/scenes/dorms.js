@@ -21,6 +21,7 @@ import {
   CORRIDOR,
   WIN,
   DOOR,
+  DOORWAY,
   COUNTER_X,
   BATH_X,
   GENKAN_Z,
@@ -156,8 +157,8 @@ export function buildDorms() {
   genkan(kit, nav);
   slidingDoor(kit);
   // the partition, either side of the doorway
-  nav.block(X0, -0.4, PART - 0.06, PART + 0.06);
-  nav.block(0.34, X1, PART - 0.06, PART + 0.06);
+  nav.block(X0, DOORWAY[0], PART - 0.06, PART + 0.06);
+  nav.block(DOORWAY[1], X1, PART - 0.06, PART + 0.06);
   kit.flush(root);
   const lit = lights(scene, root, { ...d, kitchen, stair });
 
