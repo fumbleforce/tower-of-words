@@ -50,6 +50,7 @@ function blob(p, x, y, z, r, color, { sx = 1, sy = 1, sz = 1, turn = 0 } = {}) {
 
 // zelkova: a clear trunk, three limbs opening into a vase, a broad crown of five blobs and a top
 export function keyaki(p, x, z, s = 1, seed = 1) {
+  if (p.planting?.tree(p, { species: 'keyaki', x, z, scale: s, seed })) return;
   const r = rng(seed),
     h = 1.15 * s;
   limb(p, [x, 0, z], [x, h, z], 0.1 * s, 0.075 * s, LEAF.barkGrey);
@@ -74,6 +75,7 @@ export function keyaki(p, x, z, s = 1, seed = 1) {
 
 // cherry: a short leaning trunk and two limbs, a wide low crown of flattened blobs, one turning early
 export function sakura(p, x, z, s = 1, seed = 1) {
+  if (p.planting?.tree(p, { species: 'sakura', x, z, scale: s, seed })) return;
   const r = rng(seed + 11),
     lean = (r() - 0.5) * 0.3 * s;
   const top = [x + lean, 0.8 * s, z];
@@ -90,6 +92,7 @@ export function sakura(p, x, z, s = 1, seed = 1) {
 
 // black pine, clipped: a trunk that bends twice and flat cloud pads on short branches
 export function pine(p, x, z, s = 1, seed = 1) {
+  if (p.planting?.tree(p, { species: 'pine', x, z, scale: s, seed })) return;
   const r = rng(seed + 23);
   const pts = [
     [x, 0, z],
@@ -119,6 +122,7 @@ export function pine(p, x, z, s = 1, seed = 1) {
 
 // ginkgo: a straight trunk and a tall narrow crown, yellow-green in October
 export function ginkgo(p, x, z, s = 1, seed = 1) {
+  if (p.planting?.tree(p, { species: 'ginkgo', x, z, scale: s, seed })) return;
   limb(p, [x, 0, z], [x, 1.4 * s, z], 0.08 * s, 0.05 * s, LEAF.barkGrey);
   const tone = seed % 3 ? LEAF.ginkgo : '#76844a';
   [
@@ -131,6 +135,7 @@ export function ginkgo(p, x, z, s = 1, seed = 1) {
 
 // maple: three thin stems and a small crown; one blob turning
 export function maple(p, x, z, s = 1, seed = 1) {
+  if (p.planting?.tree(p, { species: 'maple', x, z, scale: s, seed })) return;
   const r = rng(seed + 41);
   for (let i = 0; i < 3; i++) {
     const a = (i / 3) * Math.PI * 2 + seed;
@@ -174,6 +179,7 @@ export function cluster(p, x, z, { n = 4, r = 0.4, spread = 0.55, seed = 1, tone
 }
 // a clipped hedge from a to b (axis-aligned), in segments that differ a little in height and tone
 export function hedge(p, a, b, { w = 0.5, h = 0.55, y = 0, tones = [LEAF.deep, LEAF.mid], seg = 1.1, seed = 1 } = {}) {
+  if (p.planting?.hedge(p, { a, b, w, h, y, seed })) return;
   const alongX = Math.abs(b[0] - a[0]) >= Math.abs(b[1] - a[1]);
   const L = alongX ? Math.abs(b[0] - a[0]) : Math.abs(b[1] - a[1]);
   const n = Math.max(1, Math.round(L / seg)),

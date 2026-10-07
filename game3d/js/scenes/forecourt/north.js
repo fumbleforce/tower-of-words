@@ -254,11 +254,11 @@ export function officeE1(sets, rect) {
 }
 
 // built in slices (js/perf/slice.js): it yields between parts, so the forecourt can build while the gate plays
-export function* northSteps(root, set, { closed = true } = {}) {
+export function* northSteps(root, set, { closed = true, planting = null } = {}) {
   paving(root);
   yield;
-  const p = new Parts(),
-    q = new Parts();
+  const p = new Parts({ planting }),
+    q = new Parts({ planting });
   streets(p, q, set);
   yield;
   if (closed) barrier(p);

@@ -232,10 +232,10 @@ function wayfinding(root, p, block) {
   block(x - 0.2, x + 0.2, z - 0.2, z + 0.2);
 }
 
-export function buildCourt(root, nav, set) {
+export function buildCourt(root, nav, set, planting = null) {
   const block = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
   paving(root);
-  const p = new Parts();
+  const p = new Parts({ planting });
   edges(p);
   northBed(p, block);
   westSquare(p, block);
