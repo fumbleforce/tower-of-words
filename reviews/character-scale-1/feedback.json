@@ -11,7 +11,7 @@
   }
  },
  "comment": "this was too much, maybe 15% instead",
- "read": false,
+ "read": true,
  "history": [
   {
    "sent": "2026-10-07T10:55:46+0200",
