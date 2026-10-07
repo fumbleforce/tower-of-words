@@ -1,0 +1,160 @@
+{
+  "title": "East coast terrace and promenade detail",
+  "date": "2026-10-07",
+  "by": "codex/model_review",
+  "caption": "The terrace gains a readable vending display and fitted stone and drainage details; low planting groups finish the promenade verge. This is a bounded finish pass on the existing coast, with navigation and scene positions preserved. Matched afternoon samples: terrace draw calls 130\u2192136 desktop and 56\u219261 phone; promenade 126\u2192128 desktop and 52\u219255 phone. Median frame time stayed 16.7 ms in these short 92\u201393-frame captures; this is not a sustained performance benchmark. No performance budgets changed.",
+  "sections": [
+    {
+      "title": "Matched afternoon baseline",
+      "caption": "Existing terrace and promenade at the same positions and afternoon lighting used for comparison.",
+      "images": [
+        {
+          "id": "before-afternoon-promenade-desk",
+          "image": "game3d/shots/coast-fidelity/before-afternoon/promenade-desk.png",
+          "caption": "Promenade desk"
+        },
+        {
+          "id": "before-afternoon-promenade-phone",
+          "image": "game3d/shots/coast-fidelity/before-afternoon/promenade-phone.png",
+          "caption": "Promenade phone"
+        },
+        {
+          "id": "before-afternoon-terrace-desk",
+          "image": "game3d/shots/coast-fidelity/before-afternoon/terrace-desk.png",
+          "caption": "Terrace desk"
+        },
+        {
+          "id": "before-afternoon-terrace-phone",
+          "image": "game3d/shots/coast-fidelity/before-afternoon/terrace-phone.png",
+          "caption": "Terrace phone"
+        }
+      ]
+    },
+    {
+      "title": "First pass",
+      "caption": "Early terrace detailing and isolated verge plants. Superseded by grouped planting fitted around the existing lamps.",
+      "images": [
+        {
+          "id": "round1-promenade-desk",
+          "image": "game3d/shots/coast-fidelity/round1/promenade-desk.png",
+          "caption": "Promenade desk"
+        },
+        {
+          "id": "round1-promenade-phone",
+          "image": "game3d/shots/coast-fidelity/round1/promenade-phone.png",
+          "caption": "Promenade phone"
+        },
+        {
+          "id": "round1-terrace-desk",
+          "image": "game3d/shots/coast-fidelity/round1/terrace-desk.png",
+          "caption": "Terrace desk"
+        },
+        {
+          "id": "round1-terrace-phone",
+          "image": "game3d/shots/coast-fidelity/round1/terrace-phone.png",
+          "caption": "Terrace phone"
+        }
+      ]
+    },
+    {
+      "title": "Final afternoon views",
+      "caption": "Stocked vending display, fitted stone faces and joints, flush drainage, and small planted verge groups. Existing paths, benches and trees stay in place.",
+      "images": [
+        {
+          "id": "round2-promenade-desk",
+          "image": "game3d/shots/coast-fidelity/round2/promenade-desk.png",
+          "caption": "Promenade desk"
+        },
+        {
+          "id": "round2-promenade-phone",
+          "image": "game3d/shots/coast-fidelity/round2/promenade-phone.png",
+          "caption": "Promenade phone"
+        },
+        {
+          "id": "round2-terrace-desk",
+          "image": "game3d/shots/coast-fidelity/round2/terrace-desk.png",
+          "caption": "Terrace desk"
+        },
+        {
+          "id": "round2-terrace-phone",
+          "image": "game3d/shots/coast-fidelity/round2/terrace-phone.png",
+          "caption": "Terrace phone"
+        }
+      ]
+    },
+    {
+      "title": "First evening input check",
+      "caption": "Preserved harness attempt: scenery loaded, but the frozen capture simulation prevented the walking assertion.",
+      "images": [
+        {
+          "id": "evening-promenade-desk",
+          "image": "game3d/shots/coast-fidelity/evening/promenade-desk.png",
+          "caption": "Promenade desk"
+        },
+        {
+          "id": "evening-terrace-desk",
+          "image": "game3d/shots/coast-fidelity/evening/terrace-desk.png",
+          "caption": "Terrace desk"
+        }
+      ]
+    },
+    {
+      "title": "Second evening input check",
+      "caption": "Preserved harness attempt before enabling real-time simulation in capture mode. No different scenery revision.",
+      "images": [
+        {
+          "id": "evening2-promenade-desk",
+          "image": "game3d/shots/coast-fidelity/evening2/promenade-desk.png",
+          "caption": "Promenade desk"
+        },
+        {
+          "id": "evening2-terrace-desk",
+          "image": "game3d/shots/coast-fidelity/evening2/terrace-desk.png",
+          "caption": "Terrace desk"
+        }
+      ]
+    },
+    {
+      "title": "Final evening views and walking",
+      "caption": "Normal evening lighting and real native click-to-walk along the promenade, on desktop and phone. Both players reached the target on walkable paving.",
+      "images": [
+        {
+          "id": "evening3-promenade-desk",
+          "image": "game3d/shots/coast-fidelity/evening3/promenade-desk.png",
+          "caption": "Promenade desk"
+        },
+        {
+          "id": "evening3-promenade-phone",
+          "image": "game3d/shots/coast-fidelity/evening3/promenade-phone.png",
+          "caption": "Promenade phone"
+        },
+        {
+          "id": "evening3-terrace-desk",
+          "image": "game3d/shots/coast-fidelity/evening3/terrace-desk.png",
+          "caption": "Terrace desk"
+        },
+        {
+          "id": "evening3-terrace-phone",
+          "image": "game3d/shots/coast-fidelity/evening3/terrace-phone.png",
+          "caption": "Terrace phone"
+        },
+        {
+          "id": "evening3-walk-desk",
+          "image": "game3d/shots/coast-fidelity/evening3/walk-desk.png",
+          "caption": "Walk desk"
+        },
+        {
+          "id": "evening3-walk-phone",
+          "image": "game3d/shots/coast-fidelity/evening3/walk-phone.png",
+          "caption": "Walk phone"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Walk along the east coast",
+      "href": "game3d/?place=east_coast"
+    }
+  ]
+}

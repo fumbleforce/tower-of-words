@@ -16,6 +16,7 @@ import { drift } from '../forecourt/gardens.js';
 import { belt } from '../dorm-court/cluster-yards.js';
 import { courts } from '../sports/courts.js';
 import * as P from './plan.js';
+import { promenadeDetails } from './terrace-details.js';
 
 export const Z_CUTS = [-72, -56, -40, -24, -8, 8];
 
@@ -62,6 +63,7 @@ export function* walkSteps(c, lights, signRoot, signs) {
   yield;
   const [, N1, W1, N2, W2] = P.COAST_LEGS, // the first leg is the link off the terrace
     [N3, E3] = P.ONSEN_LEGS;
+  promenadeDetails(p, N1, P.BAYS);
   // the bays, paved as the walk, a bench in each facing east over it
   for (const b of P.BAYS) {
     pv.field(b, { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid, origin: [0, 0] });

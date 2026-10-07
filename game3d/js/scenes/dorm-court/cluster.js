@@ -207,7 +207,7 @@ export function* clusterSteps(group, { plaza = false } = {}) {
   yield;
   yield* row(p, lights);
   yield;
-  yield* endSquare(pv, p, lights);
+  yield* endSquare(pv, p, lights, group);
   yield* backYards(pv, p, lights);
   yield* garden(pv, p);
   yield* belts(p);
