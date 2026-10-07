@@ -1,9 +1,11 @@
 // The office's conversation camera owns lens/direction restoration and save data.
 export function senderCamera(game, place) {
-  let shot = null;
+  let shot = null,
+    activeClose = null;
   function focus(point, distance, y, yaw, elev, halfWidth = 1.15) {
     shot = { point, distance, y, yaw, elev, halfWidth };
     place.cam.closeOn(point, place.cam.fitDist / distance, y);
+    activeClose = place.cam.close;
     place.cam.close.conversationShot = { yaw, elev, fov: 55, minDistance: distance, halfWidth };
     place.cam.snap(game.player.root.position);
   }
@@ -16,9 +18,10 @@ export function senderCamera(game, place) {
       shot = { pair: true };
     },
     update() {},
-    snapshot: () => (place.cam.close ? shot : null),
+    snapshot: () => (place.cam.close === activeClose ? shot : null),
     load(saved) {
       shot = saved;
+      activeClose = null;
       if (saved?.pair) this.pair();
       else if (saved) focus(saved.point, saved.distance, saved.y, saved.yaw, saved.elev, saved.halfWidth);
     },
