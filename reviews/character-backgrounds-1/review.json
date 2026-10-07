@@ -1,246 +1,247 @@
 {
-  "title": "Character backgrounds: full cast",
-  "date": "2026-10-07",
-  "by": "Codex character-backgrounds",
-  "status": "open",
-  "question": "Written background proposals, with the full reader linked below. Which histories would you like to keep, and what should change?",
-  "multi": true,
-  "options": [
-    {
-      "id": "eric",
-      "label": "eric · Eric",
-      "note": "The player asks users to show a fault because an early support job taught them how often the technician has misunderstood. Moving to Amakawa is a wanted change, with old friendships still worth keeping. Full history and discoveries: use the Eric reader link in the links above.",
-      "image": "game3d/assets/portraits/eric-neutral.webp"
-    },
-    {
-      "id": "carina",
-      "label": "carina · Carina",
-      "note": "Carina brings the same practical history as Eric, with her own chosen ways to talk about friendship, attraction and the life she left in Norway. Her bisexuality does not prescribe her dating history. Full history and discoveries: use the Carina reader link in the links above.",
-      "image": "game3d/assets/portraits/carina-neutral.webp"
-    },
-    {
-      "id": "mio",
-      "label": "mio · Mio",
-      "note": "Mio learned to make useful things for people she liked, then let being the reliable fixer consume more of her time than she intended. Her mother and old internet friends still have claims on her attention that she often enjoys. Full history and discoveries: use the Mio reader link in the links above.",
-      "image": "game3d/assets/portraits/mio-neutral.webp"
-    },
-    {
-      "id": "mori",
-      "label": "mori · Mr. Mori",
-      "note": "Mori can help another person start because he spent years making unfamiliar work approachable. He is slower to show his own unfinished drawing, despite having once taken a long-awaited holiday on his own. Full history and discoveries: use the Mr. Mori reader link in the links above.",
-      "image": "game3d/assets/portraits/mori-neutral.webp"
-    },
-    {
-      "id": "kenji",
-      "label": "kenji · Kenji",
-      "note": "Kenji knows how to get equipment and people ready for an event. He overestimates how much an enthusiastic offer counts until he has finished the dull last part of the job. Full history and discoveries: use the Kenji reader link in the links above.",
-      "image": "game3d/assets/portraits/kenji-neutral.webp"
-    },
-    {
-      "id": "emi",
-      "label": "emi · Emi",
-      "note": "Emi understands how to get a repair funded and delivered because she has done the coordination herself. She enjoys a successful argument enough to promise more than the team can comfortably carry. Full history and discoveries: use the Emi reader link in the links above.",
-      "image": "game3d/assets/portraits/emi-neutral.webp"
-    },
-    {
-      "id": "guard",
-      "label": "guard · Mr. Ishibashi",
-      "note": "Ishibashi learned to make an entrance easy to understand without embarrassing the person using it. He can give someone else a calm arrival while repeatedly interrupting his own lunch. Full history and discoveries: use the Mr. Ishibashi reader link in the links above.",
-      "image": "game3d/assets/portraits/guard-neutral.webp"
-    },
-    {
-      "id": "kuroda",
-      "label": "kuroda · Mr. Hamada",
-      "note": "Hamada likes finding the small discrepancy that lets two people stop worrying about a number. The apologetic opening that helps at work makes it harder to insist on finishing his own song. Full history and discoveries: use the Mr. Hamada reader link in the links above.",
-      "image": "game3d/assets/portraits/kuroda-neutral.webp"
-    },
-    {
-      "id": "kuro",
-      "label": "kuro · Kuro",
-      "note": "Kuro is good at hearing the need behind a visitor's question. Away from the counter, her courtesy can outlast her interest; swimming gives her something she chooses for herself. Full history and discoveries: use the Kuro reader link in the links above.",
-      "image": "game3d/assets/portraits/kuro-neutral.webp"
-    },
-    {
-      "id": "aoi",
-      "label": "aoi · Aoi",
-      "note": "Aoi has practical experience making rooms usable and wants her contribution noticed. She sometimes accepts a visible responsibility before asking the one basic question needed to do it well. Full history and discoveries: use the Aoi reader link in the links above.",
-      "image": "game3d/assets/portraits/aoi-neutral.webp"
-    },
-    {
-      "id": "rei",
-      "label": "rei · Rei",
-      "note": "Rei understands what happens after a sale because she began by following orders through fulfilment. On court she can turn that useful decisiveness into choosing a partner's shot for them. Full history and discoveries: use the Rei reader link in the links above.",
-      "image": "game3d/assets/portraits/rei-neutral.webp"
-    },
-    {
-      "id": "tama",
-      "label": "tama · Tama",
-      "note": "Different residents have earned different kinds of familiarity with Tama. Repeated encounters show a cat remembering useful places and people while remaining free to leave. Full history and discoveries: use the Tama reader link in the links above."
-    },
-    {
-      "id": "kaori",
-      "label": "kaori · Kaori",
-      "note": "Kaori can judge a meal by what regular diners actually eat. Years of service make her decisive in a kitchen and unexpectedly slow to choose what she wants on an evening off. Full history and discoveries: use the Kaori reader link in the links above.",
-      "image": "art/approved/kaori/kaori-after.webp"
-    },
-    {
-      "id": "yuzuki",
-      "label": "yuzuki · Yuzuki",
-      "note": "Yuzuki knows how to make a useful story readable, including checking what a flattering version gets wrong. She sometimes likes a successful anecdote too much to let it change. Full history and discoveries: use the Yuzuki reader link in the links above.",
-      "image": "art/approved/yuzuki/yuzuki-e-after.webp"
-    },
-    {
-      "id": "tsubasa",
-      "label": "tsubasa · Tsubasa",
-      "note": "Tsubasa checks how a plan will work in a real room and notices what still needs carrying back. Running and a happy relationship have taught her that doing things together need not mean matching everyone's pace. Full history and discoveries: use the Tsubasa reader link in the links above.",
-      "image": "art/approved/tsubasa/tsubasa-face-e85-11.webp"
-    },
-    {
-      "id": "kanae",
-      "label": "kanae · Kanae",
-      "note": "Kanae notices the ordinary activity that makes a photograph worth keeping. She has learned to ask before photographing or advising someone, while still occasionally making attention feel like evaluation. Full history and discoveries: use the Kanae reader link in the links above.",
-      "image": "art/approved/kanae/kanae-after.webp"
-    },
-    {
-      "id": "sumi",
-      "label": "sumi · Sumi",
-      "note": "Sumi makes a document usable by thinking about whose hands it reaches next. She enjoys careful lettering and keeps an affectionate family note whose handwriting is terrible. Full history and discoveries: use the Sumi reader link in the links above.",
-      "image": "art/approved/sumi/sumi-after.webp"
-    },
-    {
-      "id": "saki",
-      "label": "saki · Saki",
-      "note": "Saki hears the missing condition in an agreement. Her enjoyment of clear rules comes partly from games that were more fun once the argument was settled; her own competitive streak sometimes prolongs it. Full history and discoveries: use the Saki reader link in the links above.",
-      "image": "art/approved/saki/saki-after.webp"
-    },
-    {
-      "id": "nanami",
-      "label": "nanami · Nanami",
-      "note": "Nanami helps somebody finish a confusing process without making their difficulty public. She likes a clear sequence and can be unsettled when another sensible method works just as well. Full history and discoveries: use the Nanami reader link in the links above.",
-      "image": "art/approved/nanami/nanami-g-after.webp"
-    },
-    {
-      "id": "kiyoko",
-      "label": "kiyoko · Kiyoko",
-      "note": "Kiyoko can tell whose answer a meeting still needs. Experience gives her useful judgement and an occasional habit of deciding what a new person is like before they have finished speaking. Full history and discoveries: use the Kiyoko reader link in the links above.",
-      "image": "art/approved/kiyoko/kiyoko-camel-after.webp"
-    },
-    {
-      "id": "goro",
-      "label": "goro · Goro",
-      "note": "Goro enjoys patient observation and a small practical improvement. Retirement lets him choose when to stop, while a successor's successful changes still tempt him to explain his original method. Full history and discoveries: use the Goro reader link in the links above.",
-      "image": "art/approved/goro/goro-after.webp"
-    },
-    {
-      "id": "jun",
-      "label": "jun · Jun",
-      "note": "Jun makes a room welcoming without demanding conversation. Payroll and bar work reward his preparation, but he can be more irritated by a wrong stock estimate than by a difficult customer. Full history and discoveries: use the Jun reader link in the links above.",
-      "image": "art/approved/jun/jun-after.webp"
-    },
-    {
-      "id": "cctv",
-      "label": "cctv · Night CCTV operator, unnamed concept",
-      "note": "This optional operator describes what a screen actually shows and gives a clear handover. Their night schedule suits a preferred routine, while arranging company takes a little more planning. Full history and discoveries: use the Night CCTV operator, unnamed concept reader link in the links above.",
-      "image": "art/approved/cctv/nanami-f-after.webp"
-    }
-  ],
-  "links": [
-    {
-      "label": "Read all backgrounds and the coverage inventory",
-      "href": "reviews/character-backgrounds-1/index.html"
-    },
-    {
-      "label": "Eric — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#eric"
-    },
-    {
-      "label": "Carina — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#carina"
-    },
-    {
-      "label": "Mio — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#mio"
-    },
-    {
-      "label": "Mr. Mori — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#mori"
-    },
-    {
-      "label": "Kenji — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#kenji"
-    },
-    {
-      "label": "Emi — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#emi"
-    },
-    {
-      "label": "Mr. Ishibashi — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#guard"
-    },
-    {
-      "label": "Mr. Hamada — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#kuroda"
-    },
-    {
-      "label": "Kuro — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#kuro"
-    },
-    {
-      "label": "Aoi — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#aoi"
-    },
-    {
-      "label": "Rei — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#rei"
-    },
-    {
-      "label": "Tama — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#tama"
-    },
-    {
-      "label": "Kaori — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#kaori"
-    },
-    {
-      "label": "Yuzuki — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#yuzuki"
-    },
-    {
-      "label": "Tsubasa — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#tsubasa"
-    },
-    {
-      "label": "Kanae — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#kanae"
-    },
-    {
-      "label": "Sumi — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#sumi"
-    },
-    {
-      "label": "Saki — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#saki"
-    },
-    {
-      "label": "Nanami — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#nanami"
-    },
-    {
-      "label": "Kiyoko — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#kiyoko"
-    },
-    {
-      "label": "Goro — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#goro"
-    },
-    {
-      "label": "Jun — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#jun"
-    },
-    {
-      "label": "Night CCTV operator, unnamed concept — full dossier",
-      "href": "reviews/character-backgrounds-1/index.html#cctv"
-    }
-  ],
-  "issue": 327
+ "title": "Character backgrounds: full cast",
+ "date": "2026-10-07",
+ "by": "Codex character-backgrounds",
+ "status": "superseded",
+ "question": "Written background proposals, with the full reader linked below. Which histories would you like to keep, and what should change?",
+ "multi": true,
+ "options": [
+  {
+   "id": "eric",
+   "label": "eric · Eric",
+   "note": "The player asks users to show a fault because an early support job taught them how often the technician has misunderstood. Moving to Amakawa is a wanted change, with old friendships still worth keeping. Full history and discoveries: use the Eric reader link in the links above.",
+   "image": "game3d/assets/portraits/eric-neutral.webp"
+  },
+  {
+   "id": "carina",
+   "label": "carina · Carina",
+   "note": "Carina brings the same practical history as Eric, with her own chosen ways to talk about friendship, attraction and the life she left in Norway. Her bisexuality does not prescribe her dating history. Full history and discoveries: use the Carina reader link in the links above.",
+   "image": "game3d/assets/portraits/carina-neutral.webp"
+  },
+  {
+   "id": "mio",
+   "label": "mio · Mio",
+   "note": "Mio learned to make useful things for people she liked, then let being the reliable fixer consume more of her time than she intended. Her mother and old internet friends still have claims on her attention that she often enjoys. Full history and discoveries: use the Mio reader link in the links above.",
+   "image": "game3d/assets/portraits/mio-neutral.webp"
+  },
+  {
+   "id": "mori",
+   "label": "mori · Mr. Mori",
+   "note": "Mori can help another person start because he spent years making unfamiliar work approachable. He is slower to show his own unfinished drawing, despite having once taken a long-awaited holiday on his own. Full history and discoveries: use the Mr. Mori reader link in the links above.",
+   "image": "game3d/assets/portraits/mori-neutral.webp"
+  },
+  {
+   "id": "kenji",
+   "label": "kenji · Kenji",
+   "note": "Kenji knows how to get equipment and people ready for an event. He overestimates how much an enthusiastic offer counts until he has finished the dull last part of the job. Full history and discoveries: use the Kenji reader link in the links above.",
+   "image": "game3d/assets/portraits/kenji-neutral.webp"
+  },
+  {
+   "id": "emi",
+   "label": "emi · Emi",
+   "note": "Emi understands how to get a repair funded and delivered because she has done the coordination herself. She enjoys a successful argument enough to promise more than the team can comfortably carry. Full history and discoveries: use the Emi reader link in the links above.",
+   "image": "game3d/assets/portraits/emi-neutral.webp"
+  },
+  {
+   "id": "guard",
+   "label": "guard · Mr. Ishibashi",
+   "note": "Ishibashi learned to make an entrance easy to understand without embarrassing the person using it. He can give someone else a calm arrival while repeatedly interrupting his own lunch. Full history and discoveries: use the Mr. Ishibashi reader link in the links above.",
+   "image": "game3d/assets/portraits/guard-neutral.webp"
+  },
+  {
+   "id": "kuroda",
+   "label": "kuroda · Mr. Hamada",
+   "note": "Hamada likes finding the small discrepancy that lets two people stop worrying about a number. The apologetic opening that helps at work makes it harder to insist on finishing his own song. Full history and discoveries: use the Mr. Hamada reader link in the links above.",
+   "image": "game3d/assets/portraits/kuroda-neutral.webp"
+  },
+  {
+   "id": "kuro",
+   "label": "kuro · Kuro",
+   "note": "Kuro is good at hearing the need behind a visitor's question. Away from the counter, her courtesy can outlast her interest; swimming gives her something she chooses for herself. Full history and discoveries: use the Kuro reader link in the links above.",
+   "image": "game3d/assets/portraits/kuro-neutral.webp"
+  },
+  {
+   "id": "aoi",
+   "label": "aoi · Aoi",
+   "note": "Aoi has practical experience making rooms usable and wants her contribution noticed. She sometimes accepts a visible responsibility before asking the one basic question needed to do it well. Full history and discoveries: use the Aoi reader link in the links above.",
+   "image": "game3d/assets/portraits/aoi-neutral.webp"
+  },
+  {
+   "id": "rei",
+   "label": "rei · Rei",
+   "note": "Rei understands what happens after a sale because she began by following orders through fulfilment. On court she can turn that useful decisiveness into choosing a partner's shot for them. Full history and discoveries: use the Rei reader link in the links above.",
+   "image": "game3d/assets/portraits/rei-neutral.webp"
+  },
+  {
+   "id": "tama",
+   "label": "tama · Tama",
+   "note": "Different residents have earned different kinds of familiarity with Tama. Repeated encounters show a cat remembering useful places and people while remaining free to leave. Full history and discoveries: use the Tama reader link in the links above."
+  },
+  {
+   "id": "kaori",
+   "label": "kaori · Kaori",
+   "note": "Kaori can judge a meal by what regular diners actually eat. Years of service make her decisive in a kitchen and unexpectedly slow to choose what she wants on an evening off. Full history and discoveries: use the Kaori reader link in the links above.",
+   "image": "art/approved/kaori/kaori-after.webp"
+  },
+  {
+   "id": "yuzuki",
+   "label": "yuzuki · Yuzuki",
+   "note": "Yuzuki knows how to make a useful story readable, including checking what a flattering version gets wrong. She sometimes likes a successful anecdote too much to let it change. Full history and discoveries: use the Yuzuki reader link in the links above.",
+   "image": "art/approved/yuzuki/yuzuki-e-after.webp"
+  },
+  {
+   "id": "tsubasa",
+   "label": "tsubasa · Tsubasa",
+   "note": "Tsubasa checks how a plan will work in a real room and notices what still needs carrying back. Running and a happy relationship have taught her that doing things together need not mean matching everyone's pace. Full history and discoveries: use the Tsubasa reader link in the links above.",
+   "image": "art/approved/tsubasa/tsubasa-face-e85-11.webp"
+  },
+  {
+   "id": "kanae",
+   "label": "kanae · Kanae",
+   "note": "Kanae notices the ordinary activity that makes a photograph worth keeping. She has learned to ask before photographing or advising someone, while still occasionally making attention feel like evaluation. Full history and discoveries: use the Kanae reader link in the links above.",
+   "image": "art/approved/kanae/kanae-after.webp"
+  },
+  {
+   "id": "sumi",
+   "label": "sumi · Sumi",
+   "note": "Sumi makes a document usable by thinking about whose hands it reaches next. She enjoys careful lettering and keeps an affectionate family note whose handwriting is terrible. Full history and discoveries: use the Sumi reader link in the links above.",
+   "image": "art/approved/sumi/sumi-after.webp"
+  },
+  {
+   "id": "saki",
+   "label": "saki · Saki",
+   "note": "Saki hears the missing condition in an agreement. Her enjoyment of clear rules comes partly from games that were more fun once the argument was settled; her own competitive streak sometimes prolongs it. Full history and discoveries: use the Saki reader link in the links above.",
+   "image": "art/approved/saki/saki-after.webp"
+  },
+  {
+   "id": "nanami",
+   "label": "nanami · Nanami",
+   "note": "Nanami helps somebody finish a confusing process without making their difficulty public. She likes a clear sequence and can be unsettled when another sensible method works just as well. Full history and discoveries: use the Nanami reader link in the links above.",
+   "image": "art/approved/nanami/nanami-g-after.webp"
+  },
+  {
+   "id": "kiyoko",
+   "label": "kiyoko · Kiyoko",
+   "note": "Kiyoko can tell whose answer a meeting still needs. Experience gives her useful judgement and an occasional habit of deciding what a new person is like before they have finished speaking. Full history and discoveries: use the Kiyoko reader link in the links above.",
+   "image": "art/approved/kiyoko/kiyoko-camel-after.webp"
+  },
+  {
+   "id": "goro",
+   "label": "goro · Goro",
+   "note": "Goro enjoys patient observation and a small practical improvement. Retirement lets him choose when to stop, while a successor's successful changes still tempt him to explain his original method. Full history and discoveries: use the Goro reader link in the links above.",
+   "image": "art/approved/goro/goro-after.webp"
+  },
+  {
+   "id": "jun",
+   "label": "jun · Jun",
+   "note": "Jun makes a room welcoming without demanding conversation. Payroll and bar work reward his preparation, but he can be more irritated by a wrong stock estimate than by a difficult customer. Full history and discoveries: use the Jun reader link in the links above.",
+   "image": "art/approved/jun/jun-after.webp"
+  },
+  {
+   "id": "cctv",
+   "label": "cctv · Night CCTV operator, unnamed concept",
+   "note": "This optional operator describes what a screen actually shows and gives a clear handover. Their night schedule suits a preferred routine, while arranging company takes a little more planning. Full history and discoveries: use the Night CCTV operator, unnamed concept reader link in the links above.",
+   "image": "art/approved/cctv/nanami-f-after.webp"
+  }
+ ],
+ "links": [
+  {
+   "label": "Read all backgrounds and the coverage inventory",
+   "href": "reviews/character-backgrounds-1/index.html"
+  },
+  {
+   "label": "Eric — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#eric"
+  },
+  {
+   "label": "Carina — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#carina"
+  },
+  {
+   "label": "Mio — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#mio"
+  },
+  {
+   "label": "Mr. Mori — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#mori"
+  },
+  {
+   "label": "Kenji — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#kenji"
+  },
+  {
+   "label": "Emi — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#emi"
+  },
+  {
+   "label": "Mr. Ishibashi — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#guard"
+  },
+  {
+   "label": "Mr. Hamada — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#kuroda"
+  },
+  {
+   "label": "Kuro — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#kuro"
+  },
+  {
+   "label": "Aoi — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#aoi"
+  },
+  {
+   "label": "Rei — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#rei"
+  },
+  {
+   "label": "Tama — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#tama"
+  },
+  {
+   "label": "Kaori — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#kaori"
+  },
+  {
+   "label": "Yuzuki — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#yuzuki"
+  },
+  {
+   "label": "Tsubasa — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#tsubasa"
+  },
+  {
+   "label": "Kanae — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#kanae"
+  },
+  {
+   "label": "Sumi — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#sumi"
+  },
+  {
+   "label": "Saki — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#saki"
+  },
+  {
+   "label": "Nanami — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#nanami"
+  },
+  {
+   "label": "Kiyoko — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#kiyoko"
+  },
+  {
+   "label": "Goro — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#goro"
+  },
+  {
+   "label": "Jun — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#jun"
+  },
+  {
+   "label": "Night CCTV operator, unnamed concept — full dossier",
+   "href": "reviews/character-backgrounds-1/index.html#cctv"
+  }
+ ],
+ "issue": 327,
+ "decision": "Rewritten proposals are in character-backgrounds-2. The rejected first reader and its feedback remain available for comparison."
 }
