@@ -108,9 +108,6 @@ export function windowPane() {
       ctx.fillStyle = '#4d647a';
       ctx.fillRect(i === 2 ? 89 : 28, 20, 3, 93);
     }
-    // Quiet room silhouettes differ in placement and height, rather than a universal bottom stripe.
-    ctx.fillStyle = '#21364a';
-    ctx.fillRect(27 + (i % 3) * 14, 89 - (i % 2) * 9, 39, 25 + (i % 2) * 9);
     ctx.fillStyle = 'rgba(145,175,197,.18)';
     ctx.fillRect(7, 7, 1, 114);
     ctx.fillRect(7, 120, 115, 1);
@@ -122,7 +119,6 @@ export function windowPane() {
     lit.fillStyle = `rgb(${value},${value},${value})`;
     lit.fillRect(18, 20, 90, 93);
     lit.fillStyle = 'rgba(0,0,0,.65)';
-    lit.fillRect(27 + (i % 3) * 14, 89 - (i % 2) * 9, 39, 25 + (i % 2) * 9);
     lit.fillRect(61, 6, 2, 116);
     if (blind) {
       lit.fillStyle = 'rgba(0,0,0,.5)';

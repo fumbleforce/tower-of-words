@@ -5,12 +5,37 @@
   "caption": "An opt-in forecourt trial with fuller trees, clipped hedges, detailed paving and revised station and office windows. The Review contains every earlier attempt.",
   "sections": [
     {
+      "title": "Window correction",
+      "images": [
+        {
+          "id": "windows-20261007-office-day",
+          "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/morning-office-near.webp",
+          "caption": "Office glass after removing the repeated dark boxes, 2560 × 1440."
+        },
+        {
+          "id": "windows-20261007-office-evening",
+          "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/evening-office-native-right.webp",
+          "caption": "Office blinds and reflections during movement, evening lighting."
+        },
+        {
+          "id": "windows-20261007-station-evening",
+          "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/evening-station-near.webp",
+          "caption": "Station glazing and varied interior light, 2560 × 1440."
+        },
+        {
+          "id": "windows-20261007-station-phone",
+          "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/morning-station-near.webp",
+          "caption": "Station glass in the unchanged phone overview."
+        }
+      ]
+    },
+    {
       "title": "Daylight",
       "images": [
         {
           "id": "court58-wide-garden",
           "image": "bible/shots/reviews/diorama-street-1/court58-wide-2560/garden.webp",
-          "caption": "Garden and office frontage, 2560 \u00d7 1440."
+          "caption": "Garden and office frontage, 2560 × 1440."
         },
         {
           "id": "court56-desktop-1366-garden",
@@ -60,7 +85,6 @@
       "href": "game3d/index.html?day=2&place=forecourt&mc=eric&q=2&diorama=1"
     }
   ],
-  "preview": "court58-wide-garden",
-  "updated": "2026-10-07T11:44:13.972399+00:00",
-  "commit": "1be24ffa"
+  "preview": "windows-20261007-office-day",
+  "updated": "2026-10-07T12:56:42.543850+00:00"
 }
