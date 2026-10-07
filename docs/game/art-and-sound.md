@@ -39,6 +39,8 @@ Elsewhere: every approved file is listed in art/approved/README.md, and the bibl
 - With the chibi look off, everyone but Eric, Mio, Kuro, Aoi, Emi and the staff above is a chibi figure built in code (game3d/js/cast.js, game3d/js/train/people.js), about 2.8 to 3 heads tall.
 - New chibi pictures and 3D models are steered by tools/characters/ref/eric-chibi-ref.png and Jørgen's Mio chibi picture (Jørgen). The workflow that worked for Eric is in art/PROMPTS.md (3D characters).
 
+- Ordinary pool appearances: Jørgen selected Kuro B, Emi, Eric and Carina in `reviews/pool-swimwear-1` on 2026-10-07. The pool owns `assets/characters/swimwear-{kuro,emi,eric,carina}/`; everyday bodies elsewhere are unchanged. Original faces, body geometry, textures, UVs and weights are preserved. The derived rigs correct measured Eric/Carina ankle bind depth and seated lower-leg poses; their walk/run support-foot orientation and leg contact corrections preserve the original pelvis tracks and run flight. A pool-only mixer correction clears residual dry transition penetration. Seated and water poses keep their existing owners. Original and rejected motion attempts remain in `art/parts/pool-swimwear-runtime-1/`.
+
 ## Portraits
 
 The anime portraits beside the dialogue box. The faces each person has are in [cast.md](cast.md), Portraits; cut-outs use the refined matting (tools/matte_refine.py on BiRefNet-HR), which Jørgen approved.

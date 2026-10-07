@@ -1,0 +1,26 @@
+[
+  {
+    "id": "eric",
+    "mode": "walk",
+    "sha256": "a8e0b93b48d4dca855904b2bafb4cc7eca73591d548b018e2f988e93f282bd5e",
+    "reproduced_exactly": true
+  },
+  {
+    "id": "eric",
+    "mode": "run",
+    "sha256": "18a82ad4815409a0141292c9aaa539b00a529198fc5a1f7e578cc834e68d2a5f",
+    "reproduced_exactly": true
+  },
+  {
+    "id": "carina",
+    "mode": "walk",
+    "sha256": "779512122dce05b7f0ad7c1392d2037d4776a964be670b5c3a3c1634c6557f2a",
+    "reproduced_exactly": true
+  },
+  {
+    "id": "carina",
+    "mode": "run",
+    "sha256": "cf7c4163f2a9ff8fa4ff45aa9047f839e6dde7addf79d0f59ea570e65f117aed",
+    "reproduced_exactly": true
+  }
+]

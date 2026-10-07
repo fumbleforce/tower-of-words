@@ -1,0 +1,102 @@
+[
+  {
+    "runtime": "game3d/assets/characters/swimwear-eric/walk.glb",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/eric/walk.glb",
+    "sha256": "a8e0b93b48d4dca855904b2bafb4cc7eca73591d548b018e2f988e93f282bd5e"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-eric/run.glb",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/eric/run.glb",
+    "sha256": "18a82ad4815409a0141292c9aaa539b00a529198fc5a1f7e578cc834e68d2a5f"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-eric/idle.json",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/eric/idle.json",
+    "sha256": "40626565a37a07608540295a2df66308248323df0a81f8dbfc4713e83ca1dc2c"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-eric/sit.json",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/eric/sit.json",
+    "sha256": "dbae7cdf5f978dc7e9a473201358ee0f89718681b701861af42dd964ff279ba3"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-eric/base.webp",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/eric/base.webp",
+    "sha256": "ffc9079f3de078f01a210e738c6b40a589066367d7813b2f9a322b8be00729d8"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-carina/walk.glb",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/carina/walk.glb",
+    "sha256": "779512122dce05b7f0ad7c1392d2037d4776a964be670b5c3a3c1634c6557f2a"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-carina/run.glb",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/carina/run.glb",
+    "sha256": "cf7c4163f2a9ff8fa4ff45aa9047f839e6dde7addf79d0f59ea570e65f117aed"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-carina/idle.json",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/carina/idle.json",
+    "sha256": "681ce58bdb01e0ba57d7ffa6a9d6b876ad05a5ed2dcde719c9093727402cbc2a"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-carina/sit.json",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/carina/sit.json",
+    "sha256": "abf668f7a2b6133a249d74c7d7aa27c3a69600ec8a4763be7ca57f3884422e78"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-carina/base.webp",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/carina/base.webp",
+    "sha256": "b42872ced92f91fe1dfc6796cf9b5cafda887163206734a94aa1714874e087ef"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-emi/walk.glb",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/emi/walk.glb",
+    "sha256": "b0fabda1de84bba8793827e9da1f3d93a4e8c6bd0cf4eb647ad1be993f8ad549"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-emi/run.glb",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/emi/run.glb",
+    "sha256": "dcbfd0a24ea2e29d3a83e81cf41f2563771e0b6fe2cea6edf8e780cb075535c0"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-emi/idle.json",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/emi/idle.json",
+    "sha256": "f5a90774c863525b87fe92221bb12987b0cc74e939da6a1f3236a1f9952b5e51"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-emi/sit.json",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/emi/sit.json",
+    "sha256": "9d39463df426eb405a0f5644d9e32f4b9e4e4373f807fcaa0d49c33f9b79f431"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-emi/base.webp",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/emi/base.webp",
+    "sha256": "10dbe78dfcf166d9bbc5111d2b59beb6c77c4c119cb3dc5a40ee885b33a8cb87"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-kuro/walk.glb",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/kuro-b/walk.glb",
+    "sha256": "15508525d8ba958c28321056eee949ff990d1097fdb367941060718496643d62"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-kuro/run.glb",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/kuro-b/run.glb",
+    "sha256": "dcfafcb6b80a872bc6e35994b22e8b5f18d8f4161aa39c1ed3d939f926d004da"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-kuro/idle.json",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/kuro-b/idle.json",
+    "sha256": "dd4d4c8d4f3db266a9ecf054cee8ef6b579a14faa96166381282477fe52cd750"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-kuro/sit.json",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/kuro-b/sit.json",
+    "sha256": "d2828e8aa4129e11b0ef7ce9c68caffa0dcb139f38ace2bbf152fe1e4aa7a7ac"
+  },
+  {
+    "runtime": "game3d/assets/characters/swimwear-kuro/base.webp",
+    "source": "art/parts/pool-swimwear-runtime-1/stance-17/kuro-b/base.webp",
+    "sha256": "09cfdc172b09999776b5eac1d39405874ee29601348694f84b95113c5de36b51"
+  }
+]

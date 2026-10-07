@@ -10,6 +10,7 @@ export function poolSave(game, place, club) {
     }),
     restore(saved) {
       if (!saved.world?.player?.eric) return;
+      club.restoreOutfits?.(saved.world.swim);
       const player = game.player;
       restorePeople({ eric: player }, saved.world.player);
       restorePeople(place.people || {}, saved.world.people);

@@ -1,0 +1,86 @@
+{
+  "rows": [
+    {
+      "id": "eric",
+      "motion": "walk",
+      "vertices": 3331,
+      "neutral_max_delta_m": 9.851433502294782e-09,
+      "model_attributes_exact": true,
+      "weights_exact": true,
+      "non_target_nodes_exact": true,
+      "rotation_tracks_exact": true
+    },
+    {
+      "id": "eric",
+      "motion": "run",
+      "vertices": 3331,
+      "neutral_max_delta_m": 9.851433502294782e-09,
+      "model_attributes_exact": true,
+      "weights_exact": true,
+      "non_target_nodes_exact": true,
+      "rotation_tracks_exact": true
+    },
+    {
+      "id": "carina",
+      "motion": "walk",
+      "vertices": 3432,
+      "neutral_max_delta_m": 9.278917183219715e-09,
+      "model_attributes_exact": true,
+      "weights_exact": true,
+      "non_target_nodes_exact": true,
+      "rotation_tracks_exact": true
+    },
+    {
+      "id": "carina",
+      "motion": "run",
+      "vertices": 3432,
+      "neutral_max_delta_m": 9.278917183219715e-09,
+      "model_attributes_exact": true,
+      "weights_exact": true,
+      "non_target_nodes_exact": true,
+      "rotation_tracks_exact": true
+    },
+    {
+      "id": "emi",
+      "motion": "walk",
+      "vertices": 3395,
+      "neutral_max_delta_m": 0.0,
+      "model_attributes_exact": true,
+      "weights_exact": true,
+      "non_target_nodes_exact": true,
+      "rotation_tracks_exact": true
+    },
+    {
+      "id": "emi",
+      "motion": "run",
+      "vertices": 3395,
+      "neutral_max_delta_m": 0.0,
+      "model_attributes_exact": true,
+      "weights_exact": true,
+      "non_target_nodes_exact": true,
+      "rotation_tracks_exact": true
+    },
+    {
+      "id": "kuro-b",
+      "motion": "walk",
+      "vertices": 3341,
+      "neutral_max_delta_m": 0.0,
+      "model_attributes_exact": true,
+      "weights_exact": true,
+      "non_target_nodes_exact": true,
+      "rotation_tracks_exact": true
+    },
+    {
+      "id": "kuro-b",
+      "motion": "run",
+      "vertices": 3341,
+      "neutral_max_delta_m": 0.0,
+      "model_attributes_exact": true,
+      "weights_exact": true,
+      "non_target_nodes_exact": true,
+      "rotation_tracks_exact": true
+    }
+  ],
+  "textures_exact": true,
+  "body_face_uv_topology_weights_exact": true
+}

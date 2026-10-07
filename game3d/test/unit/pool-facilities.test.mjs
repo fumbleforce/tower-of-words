@@ -3,6 +3,8 @@ import { test } from 'node:test';
 import { registerHooks } from 'node:module';
 const hook = registerHooks({
   resolve(s, c, n) {
+    if (s === './ui.js' && c.parentURL?.endsWith('/sim.js'))
+      return n('data:text/javascript,export const ui = {}; export function sfx() {}', c);
     return n(
       s === 'three'
         ? new URL('../../vendor/three/three.module.js', import.meta.url).href
@@ -15,7 +17,7 @@ const hook = registerHooks({
 });
 Object.assign(globalThis, {
   location: { search: '' },
-  window: {},
+  window: { addEventListener() {} },
   addEventListener() {},
   innerWidth: 1366,
   innerHeight: 860,
@@ -30,6 +32,7 @@ const D = await import('../../js/scenes/sports/deck-plan.js');
 const { boundsOf, inRect } = await import('../../js/scenes/sports/plan.js');
 const { Nav } = await import('../../js/movement/navigation.js');
 const { swimmerPose, faceSwimmer } = await import('../../js/places/day3/swim-pose.js');
+const { poolClub } = await import('../../js/places/day3/swim.js');
 const { poolSave } = await import('../../js/places/day3/pool-save.js');
 const { creatureWorld } = await import('../../js/creatures/world.js');
 const { PERCHES } = await import('../../js/creatures/perches.js');
@@ -240,3 +243,33 @@ test('water dialogue framing survives Continue and restores walking angles on re
 });
 
 hook.deregister();
+
+// Runner rewinds staging before replaying the current line, so these checkpoints share one club instance.
+test('real pool club clears old water overlays before restoring a later dry checkpoint', () => {
+  const root = new THREE.Group();
+  function person() {
+    const body = new THREE.Group(), head = new THREE.Bone();
+    head.name = 'Head'; head.position.y = 1; body.add(head); root.add(body);
+    return { root: body, model: body, update() {}, setState(s) { this.state = s; },
+      sitAt(x, top, z, ry) { body.position.set(x, top, z); body.rotation.y = ry; this.state = 'sit'; } };
+  }
+  const player = person(), people = { emi: person(), kuro: person(), member: person(), attendant: person() };
+  const place = { name: 'pool', people, seats: { bench: { x: 1, z: 1, top: .34, ry: 1, out: [2, 1] } },
+    nav: { free: () => true }, start: [0, 0], cam: { snap() {} } };
+  const game = { player, place, walker: { sync() {}, stop() {} } };
+  const club = poolClub(game, { root, cast: { people } }), save = poolSave(game, place, club);
+  player.sitAt(1, .34, 1, 1); player.seated = true;
+  people.emi.sitAt(1, .34, 2, 1); people.emi.seated = true;
+  const dry = { world: save.snapshot() };
+  club.restore({ swimmers: { eric: 'tread', emi: 'tread' } });
+  player.update(.1); people.emi.update(.1);
+  assert.equal(player.swimming, true);
+  save.restore(dry);
+  for (let i = 0; i < 5; i++) { player.update(.1); people.emi.update(.1); }
+  for (const r of [player, people.emi]) {
+    assert.equal(r.swimming, false); assert.equal(r.seated, true); assert.equal(r.root.position.y, .34);
+  }
+  assert.equal(club.snapshot().swimmers.eric, null);
+  assert.equal(club.snapshot().swimmers.emi, null);
+  club.leave();
+});
