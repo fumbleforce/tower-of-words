@@ -172,6 +172,8 @@ export const EAST_BED = [ROW_E, ROWS_Z.south, LINKS.east[0], ROWS_Z.back];
 export const LAMP_X = [-7.5, 1.5, 6, 15, 24, 28.5, 37.5, 46.5, 51, 60, 69];
 export const BENCH_X = [-3, 10.5, 19.5, 33, 42, 55.5, 66];
 export const FURNITURE_Z = WALL_Z - BAND / 2 - 0.15;
+// Paired seats need usable knee/approach space on the sea side as well as the shops side.
+export const BENCH_Z = FURNITURE_Z - 0.65;
 
 // The shops with a name (docs/game/island.md, "Shop street and seafront"): the row, the bays they take, the bay
 // their door is in, their sign (kana, English, colour) on the front over the awnings, and the kana on their

@@ -1,0 +1,56 @@
+{
+  "title": "Space to pass and sit by the shop street",
+  "date": "2026-10-07",
+  "by": "codex",
+  "caption": "Pedestrians can pass the held izakaya conversation in both directions; the paired seafront benches have usable space beside the rail.",
+  "sections": [
+    {
+      "title": "Held conversation",
+      "caption": "Actual two-minute waits: desktop 6/14 and phone 7/7 completed passes in opposite directions, with neither speaker moved. Unchanged overlap, spin and gait checks report no episodes.",
+      "images": [
+        {
+          "id": "conversation-1366",
+          "image": "game3d/shots/shotengai-clearance/detour2/1366-4.png",
+          "caption": "Final frame after two minutes, desktop. Pass counts come from the full movement report, not this still."
+        },
+        {
+          "id": "conversation-390",
+          "image": "game3d/shots/shotengai-clearance/detour2/390-4.png",
+          "caption": "Final frame after two minutes, phone. Pass counts come from the full movement report, not this still."
+        }
+      ]
+    },
+    {
+      "title": "Both sides of the seafront benches",
+      "caption": "The pairs sit 0.65 m farther inland. Both protagonists walked around the ends and reached the rail-side and shop-side approaches.",
+      "images": [
+        {
+          "id": "bench-1366",
+          "image": "game3d/shots/shotengai-clearance/benches/1366-sea-approach.png",
+          "caption": "Desktop rail-side approach."
+        },
+        {
+          "id": "bench-390",
+          "image": "game3d/shots/shotengai-clearance/benches/390-shop-approach.png",
+          "caption": "Phone shop-side approach."
+        },
+        {
+          "id": "seated-1366",
+          "image": "game3d/shots/shotengai-clearance/benches-seated-final/1366-sea-seated.png",
+          "caption": "Eric seated toward the sea: posed lower-body mesh clears the rail by 0.67 m. QA fixture uses the real bench and production Sit code; it does not add a player Sit target."
+        },
+        {
+          "id": "seated-390",
+          "image": "game3d/shots/shotengai-clearance/benches-seated-final/390-sea-seated.png",
+          "caption": "Carina seated toward the sea: posed lower-body mesh clears the rail by 0.73 m. QA fixture uses the real bench and production Sit code; it does not add a player Sit target."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

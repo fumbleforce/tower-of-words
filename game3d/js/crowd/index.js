@@ -24,6 +24,7 @@ import { coarseGrid, routeBetween, snapFree, clearAt } from './paths.js';
 import { walkStep, stride, idleLife, stalled, gliding } from './motion.js';
 import { placeStill, stillSpots } from './still.js';
 import { wantStop, startStop, stopBeside, stopStep, endStop } from './stops.js';
+import { scenePaths } from './scene-paths.js';
 import { launcher } from './launch.js';
 import { bodies } from '../movement/shared.js';
 import { sim } from '../sim.js';
@@ -137,7 +138,8 @@ export async function attachCrowd(game, place, name) {
 
   // the walking lines between the ends, found once (in slices between frames)
   place.scene.updateMatrixWorld(true);
-  const g = coarseGrid(place.nav);
+  const g = coarseGrid(place.nav),
+    occupied = scenePaths(g);
   await nextFrame();
   const local = (v) => place.space.worldToLocal(v);
   const ends = {};
@@ -209,7 +211,7 @@ export async function attachCrowd(game, place, name) {
     if ((b.rejoins = (b.rejoins || 0) + 1) > 2) return false;
     const p = b.r.root.position,
       from = snapFree(g, [p.x, p.z], 0.3),
-      way = from && routeBetween(g, from, b.goal);
+      way = from && routeBetween(occupied.grid, from, b.goal);
     if (!way) return false;
     Object.assign(b, {
       line: [[p.x, p.z], ...way, ...b.tail],
@@ -256,6 +258,7 @@ export async function attachCrowd(game, place, name) {
     const list = bodies(game),
       eric = list.find((b) => b.root === game.player.root);
     const wide = scene ? 0.9 * K : 0;
+    const detour = occupied.update(list, eric, wide, K);
     const ctx = { g, K, eric, ends, place, list };
     let n = 0;
     for (const b of pool) {
@@ -297,6 +300,7 @@ export async function attachCrowd(game, place, name) {
           Math.hypot(eric.x - door[0], eric.z - door[1]) < 3.5 * K &&
           Math.hypot(p.x - door[0], p.z - door[1]) > 0.8 * K;
         if (b.wait) b.held = 0;
+        detour(b);
         let done = walkStep(game, b, dt, list, eric, wide);
         // held up (a jam at a corner, the story's people in the way) for a while: a new way round from here; with
         // none, gone if nobody sees, or on through; through a door once at it

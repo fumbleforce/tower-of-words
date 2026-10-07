@@ -112,7 +112,7 @@ export const WALKS = [...[ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PR
 export const STREET_END = rect([SHOP_WALK[2] - 0.1, SHOP_WALK[1], DORM_STREET[2], SHOP_WALK[3]]); // out onto the street
 export const FURNITURE = [
   ...S.LAMP_X.map((x) => [x - 0.15, S.FURNITURE_Z - 0.15, x + 0.15, S.FURNITURE_Z + 0.15]),
-  ...S.BENCH_X.map((x) => [x - 0.95, S.FURNITURE_Z - 0.75, x + 0.95, S.FURNITURE_Z + 0.55]),
-  ...S.BENCH_X.filter((_, i) => i % 2).map((x) => [x + 0.95, S.FURNITURE_Z - 0.25, x + 1.85, S.FURNITURE_Z + 0.25]),
+  ...S.BENCH_X.map((x) => [x - 0.95, S.BENCH_Z - 0.75, x + 0.95, S.BENCH_Z + 0.55]),
+  ...S.BENCH_X.filter((_, i) => i % 2).map((x) => [x + 0.95, S.BENCH_Z - 0.25, x + 1.85, S.BENCH_Z + 0.25]),
 ].map(rect);
 export const inRect = (x, z, [x0, x1, z0, z1], m = 0) => x > x0 + m && x < x1 - m && z > z0 + m && z < z1 - m;

@@ -521,6 +521,8 @@ In the morning the sun comes from the east-south-east behind the camera's left s
 
 ### Day-2 party plan
 
+Paired promenade benches sit inland from the rail, with reachable standing floor on both the sea and shop sides. Their geometry, crowd seat metadata and navigation blockers share the same offset. During a held conversation, pedestrians plan routes around the stationary speakers and the player’s existing give-way space.
+
 The welcome dinner is inside the izakaya, reached through its existing door off the shop walk. Kenji waits beside that door until the protagonist meets him. The promenade remains ordinary public seating; it has no dinner or party marker. Inside, the protagonist, Mori, Mio, Kenji and Emi occupy five actual chairs around one table, facing inward. Each setting has rice, a plate and a cup; shared platters hold yakitori and grilled vegetables, with pickles. The player walks from the entry to the chair before sitting. Dining actions use real wrist reaches. Mio and Kenji leave through the entrance at the goodbye; Mori and Emi stay at the table for the closing conversation. Saves keep the seated player, department positions and food progress.
 
 ### Things
