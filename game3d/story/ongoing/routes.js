@@ -17,6 +17,7 @@ export const ROUTES = {
     ]
   },
   "forecourt": {
+    "campus": ["talk:campus", "zone:campus_exit"],
     "shotengai": [
       "talk:shop_lane",
       "zone:shop_exit"
@@ -185,6 +186,7 @@ export const ROUTES = {
     ]
   },
   "office_quarter": {
+    "campus": ["talk:campus_shed", "zone:campus_shed_exit", "talk:campus_quarter", "zone:campus_quarter_exit"],
     "sports": [
       "talk:sports_lane",
       "zone:east_exit"
@@ -195,6 +197,7 @@ export const ROUTES = {
     ]
   },
   "harbour": {
+    "campus": ["talk:campus", "zone:campus_exit"],
     "office_quarter": [
       "talk:office_street",
       "zone:east_exit"
@@ -205,6 +208,15 @@ export const ROUTES = {
       "talk:works_street",
       "zone:street_exit"
     ]
+  },
+  "campus": {
+    "forecourt": ["talk:forecourt", "zone:forecourt_exit"],
+    "office_quarter": ["talk:office_quarter", "zone:office_quarter_exit", "talk:office_shed", "zone:office_shed_exit"],
+    "harbour": ["talk:harbour", "zone:harbour_exit"],
+    "print_shop": ["talk:print_shop"]
+  },
+  "print_shop": {
+    "campus": ["talk:print_exit"]
   },
   "works": {
     "harbour": [

@@ -4,8 +4,9 @@ import {scopedRoute} from '../../tools/bible/check-scope.mjs';
 import {withBrowserJob} from '../../tools/lib/browser-job.mjs';
 import {waitForGame} from '../test/support/wait-ready.mjs';
 const width=+(process.argv[2]||1366),part=process.argv[3]||'loop',phone=width<600,height=phone?844:860;
+const day=+(process.env.DAY||3);
 const base=process.env.BASE||'.claude/worktrees/codex-north-campus/game3d';
-const out=new URL(`../shots/north-campus/routes-verge-${part}/`,import.meta.url).pathname;fs.mkdirSync(out,{recursive:true});
+const out=new URL(`../shots/north-campus/${process.env.OUT||`routes-verge-${part}`}/`,import.meta.url).pathname;fs.mkdirSync(out,{recursive:true});
 await withBrowserJob(`campus-route-${part}-${width}`,async browser=>{
  const context=await browser.newContext({viewport:{width,height},isMobile:phone,hasTouch:phone}),page=await context.newPage(),errors=[],checks=[];
  let closing=false;
@@ -28,7 +29,7 @@ await withBrowserJob(`campus-route-${part}-${width}`,async browser=>{
   await page.waitForTimeout(600);assert.equal(await page.evaluate(()=>!!globalThis.__game.runner.recoveryError),false);checks.push(before+' → '+to);console.log('walked',checks.at(-1));await shot(checks.length+'-'+to);
  }
  try{
-  await waitForGame(page,60000,()=>page.goto(`http://127.0.0.1:8771/${base}/index.html?day=3&place=${part==='loop'?'office':'campus'}&mc=${phone?'carina':'eric'}&q=0`),'play');await page.waitForTimeout(500);await page.evaluate(async()=>{const {startMoveCheck}=await import('./js/movement/checks.js');startMoveCheck(globalThis.__game);});
+  await waitForGame(page,60000,()=>page.goto(`http://127.0.0.1:8771/${base}/index.html?day=${day}&place=${part==='loop'?'office':'campus'}&mc=${phone?'carina':'eric'}&q=0`),'play');await page.waitForTimeout(500);await page.evaluate(async()=>{const {startMoveCheck}=await import('./js/movement/checks.js');startMoveCheck(globalThis.__game);});
   if(part==='loop'){
    await go('lift','forecourt');await go('campus','campus');await go('print_shop','print_shop');await go('print_exit','campus');await go('office_shed','office_quarter');await go('campus_quarter','campus');
   }else{

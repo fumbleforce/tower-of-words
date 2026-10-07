@@ -1438,6 +1438,8 @@ Nobody yet.
 
 ## The lift (`lift`)
 
+Turning inside the car follows the shortest angle at a bounded eased speed, then synchronises the player’s walking direction. A half-turn takes longer than a small adjustment.
+
 A small lit car, the same inside head office at the forecourt (floor 1) and on B2. The display counts floors: B2, B1, 1 to 5 in the ride. No things of its own; the ride's lines are in the [`emi-budget`](stories/emi-budget.md) storyline.
 
 ## IT support, B2 (`office`)
@@ -1773,7 +1775,7 @@ The shop street bakery occupies its existing bay-10 ground floor. Open from day 
 Spots: `bakery_in`, `bread_rack`, `checkout`, `window`. Seat: `bakery_seat`. Person: `bakery_clerk`, an existing generic apron body. Hook: `bakeryShop`, staged selection, checkout, bag collection and eating. No zones or secret nooks. The near wall is cut for overview and closes with the existing room-shell support for desktop follow.
 ## North campus (`campus`)
 
-The shed street continues behind head office and the monorail wing, joins the office street at two mouths, and connects west to the harbour coast walk. These are continuous pedestrian paths with matched island coordinates at every crossing. Paving, kerbs, planted beds, trees, lamps, a resting bench and the existing bank and print-shop facades define the loop. The far northern island and the bank's interior remain unbuilt; this does not make every building enterable.
+The shed street continues behind head office and the monorail wing, joins the office street at two mouths, and connects west to the harbour coast walk. These are continuous pedestrian paths with matched island coordinates at every crossing. They and the print shop remain reachable in the continuing weeks after day five; the same saved Bag directory, seats and return paths apply. Paving, kerbs, planted beds, trees, lamps, a resting bench and the existing bank and print-shop facades define the loop. The far northern island and the bank's interior remain unbuilt; this does not make every building enterable.
 
 ### Things
 
