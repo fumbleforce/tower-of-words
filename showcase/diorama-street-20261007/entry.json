@@ -1,0 +1,66 @@
+{
+  "title": "Street and garden style trial",
+  "date": "2026-10-07",
+  "by": "Codex",
+  "caption": "An opt-in forecourt trial with fuller trees, clipped hedges, detailed paving and revised station and office windows. The Review contains every earlier attempt.",
+  "sections": [
+    {
+      "title": "Daylight",
+      "images": [
+        {
+          "id": "court58-wide-garden",
+          "image": "bible/shots/reviews/diorama-street-1/court58-wide-2560/garden.webp",
+          "caption": "Garden and office frontage, 2560 \u00d7 1440."
+        },
+        {
+          "id": "court56-desktop-1366-garden",
+          "image": "bible/shots/reviews/diorama-street-1/court56-desktop-1366/garden.webp",
+          "caption": "Garden and office facade, desktop"
+        },
+        {
+          "id": "court56-phone-q1-390-garden",
+          "image": "bible/shots/reviews/diorama-street-1/court56-phone-q1-390/garden.webp",
+          "caption": "Garden, phone"
+        },
+        {
+          "id": "court56-desktop-1366-street",
+          "image": "bible/shots/reviews/diorama-street-1/court56-desktop-1366/street.webp",
+          "caption": "Station frontage, desktop"
+        }
+      ]
+    },
+    {
+      "title": "Evening and materials",
+      "images": [
+        {
+          "id": "court57-inspection-1366-office-evening",
+          "image": "bible/shots/reviews/diorama-street-1/court57-inspection-1366/office-evening.webp",
+          "caption": "Office windows after work"
+        },
+        {
+          "id": "court57-inspection-390-station-evening",
+          "image": "bible/shots/reviews/diorama-street-1/court57-inspection-390/station-evening.webp",
+          "caption": "Tree base and station windows, phone"
+        },
+        {
+          "id": "court57-inspection-1366-station-evening",
+          "image": "bible/shots/reviews/diorama-street-1/court57-inspection-1366/station-evening.webp",
+          "caption": "Station facade at evening"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "All attempts and style feedback",
+      "href": "bible/#review/diorama-street-1"
+    },
+    {
+      "label": "Try the optional street style",
+      "href": "game3d/index.html?day=2&place=forecourt&mc=eric&q=2&diorama=1"
+    }
+  ],
+  "preview": "court58-wide-garden",
+  "updated": "2026-10-07T11:44:13.972399+00:00",
+  "commit": "1be24ffa"
+}

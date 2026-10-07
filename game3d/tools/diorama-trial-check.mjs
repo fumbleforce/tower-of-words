@@ -4,7 +4,7 @@ import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { scopedRoute } from '../../tools/bible/check-scope.mjs';
 import { waitForGame } from '../test/support/wait-ready.mjs';
 const width = +(process.argv[2] || 1366),
-  height = width < 600 ? 844 : 860;
+  height = +(process.env.HEIGHT || (width < 600 ? 844 : 860));
 const base = process.env.BASE || 'game3d',
   trial = process.env.TRIAL || '1',
   quality = +(process.env.Q || '2');
