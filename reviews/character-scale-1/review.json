@@ -1,372 +1,377 @@
 {
-  "title": "Character size: playable 15% and 33% reduction trials",
-  "date": "2026-10-07",
-  "by": "Codex character-scale trial",
-  "status": "open",
-  "issue": 322,
-  "question": "Does the new 15% reduction fit better? The earlier 33% comparison is retained below.",
-  "multi": true,
-  "media": [
-    {
-      "image": "bible/shots/reviews/character-scale-1/round11-1366/dorms-85.webp",
-      "caption": "Latest requested comparison: 85% character size, a 15% reduction. Actual playable game; default size remains 100%. Same furniture and camera within each pair."
-    },
-    {
-      "image": "bible/shots/reviews/character-scale-1/round11-390/canteen-detail-85.webp",
-      "caption": "Phone close-up at 85%. Eric cushion contact and actual resident conversation checked; Carina baseline seating measurement needs investigation (#323)."
-    }
-  ],
-  "options": [
-    {
-      "id": "round4-1366-100",
-      "label": "round4-1366-100",
-      "image": "bible/shots/reviews/character-scale-1/round4-1366/canteen-100.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round4-1366/dorms-100.webp",
-        "bible/shots/reviews/character-scale-1/round4-1366/forecourt-100.webp",
-        "bible/shots/reviews/character-scale-1/round4-1366/plaza-100.webp"
-      ],
-      "note": "Current 100%. First complete desktop capture. Dorm room, bicycle street, unoccupied canteen end seat and plaza. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "round4-1366-67",
-      "label": "round4-1366-67",
-      "image": "bible/shots/reviews/character-scale-1/round4-1366/canteen-67.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round4-1366/dorms-67.webp",
-        "bible/shots/reviews/character-scale-1/round4-1366/forecourt-67.webp",
-        "bible/shots/reviews/character-scale-1/round4-1366/plaza-67.webp"
-      ],
-      "note": "Requested 67% (33% smaller). First complete desktop capture. Dorm room, bicycle street, unoccupied canteen end seat and plaza. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "round5-390-100",
-      "label": "round5-390-100",
-      "image": "bible/shots/reviews/character-scale-1/round5-390/canteen-100.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round5-390/canteen-detail-100.webp",
-        "bible/shots/reviews/character-scale-1/round5-390/dorms-100.webp",
-        "bible/shots/reviews/character-scale-1/round5-390/forecourt-100.webp",
-        "bible/shots/reviews/character-scale-1/round5-390/plaza-100.webp"
-      ],
-      "note": "Current 100%. Phone comparison with the shared canteen table and its native camera close-up. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "round5-390-67",
-      "label": "round5-390-67",
-      "image": "bible/shots/reviews/character-scale-1/round5-390/canteen-67.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round5-390/canteen-detail-67.webp",
-        "bible/shots/reviews/character-scale-1/round5-390/dorms-67.webp",
-        "bible/shots/reviews/character-scale-1/round5-390/forecourt-67.webp",
-        "bible/shots/reviews/character-scale-1/round5-390/plaza-67.webp"
-      ],
-      "note": "Requested 67% (33% smaller). Phone comparison with the shared canteen table and its native camera close-up. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "round6-1366-100",
-      "label": "round6-1366-100",
-      "image": "bible/shots/reviews/character-scale-1/round6-1366/canteen-100.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round6-1366/canteen-detail-100.webp",
-        "bible/shots/reviews/character-scale-1/round6-1366/dorms-100.webp",
-        "bible/shots/reviews/character-scale-1/round6-1366/forecourt-100.webp",
-        "bible/shots/reviews/character-scale-1/round6-1366/plaza-100.webp"
-      ],
-      "note": "Current 100%. Final desktop comparison, including the shared table close-up. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "round6-1366-67",
-      "label": "round6-1366-67",
-      "image": "bible/shots/reviews/character-scale-1/round6-1366/canteen-67.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round6-1366/canteen-detail-67.webp",
-        "bible/shots/reviews/character-scale-1/round6-1366/dorms-67.webp",
-        "bible/shots/reviews/character-scale-1/round6-1366/forecourt-67.webp",
-        "bible/shots/reviews/character-scale-1/round6-1366/plaza-67.webp"
-      ],
-      "note": "Requested 67% (33% smaller). Final desktop comparison, including the shared table close-up. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "interaction7-390-100",
-      "label": "interaction7-390-100",
-      "image": "bible/shots/reviews/character-scale-1/interaction7-390/canteen-100.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/interaction7-390/canteen-detail-100.webp",
-        "bible/shots/reviews/character-scale-1/interaction7-390/canteen-talk-100.webp"
-      ],
-      "note": "Current 100%. Actual phone marker click opens the seated resident conversation. Eric stands and walks to the existing talk position. Both conversation frames are the same first line. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "interaction7-390-67",
-      "label": "interaction7-390-67",
-      "image": "bible/shots/reviews/character-scale-1/interaction7-390/canteen-67.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/interaction7-390/canteen-detail-67.webp",
-        "bible/shots/reviews/character-scale-1/interaction7-390/canteen-talk-67.webp"
-      ],
-      "note": "Requested 67% (33% smaller). Actual phone marker click opens the seated resident conversation. Eric stands and walks to the existing talk position. Both conversation frames are the same first line. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "carina8-390-100",
-      "label": "carina8-390-100",
-      "image": "bible/shots/reviews/character-scale-1/carina8-390/dorms-100.webp",
-      "images": [],
-      "note": "Current 100%. Carina in the dorm room, preserving her relative height next to Eric. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "carina8-390-67",
-      "label": "carina8-390-67",
-      "image": "bible/shots/reviews/character-scale-1/carina8-390/dorms-67.webp",
-      "images": [],
-      "note": "Requested 67% (33% smaller). Carina in the dorm room, preserving her relative height next to Eric. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "crowd9-1366-100",
-      "label": "crowd9-1366-100",
-      "image": "bible/shots/reviews/character-scale-1/crowd9-1366/forecourt-100.webp",
-      "images": [],
-      "note": "Current 100%. Actual office-street commuters. Camera and player position match; live crowds keep walking, so individual positions differ. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "crowd9-1366-67",
-      "label": "crowd9-1366-67",
-      "image": "bible/shots/reviews/character-scale-1/crowd9-1366/forecourt-67.webp",
-      "images": [],
-      "note": "Requested 67% (33% smaller). Actual office-street commuters. Camera and player position match; live crowds keep walking, so individual positions differ. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
-    },
-    {
-      "id": "round10-1366-100",
-      "label": "round10-1366-100",
-      "image": "bible/shots/reviews/character-scale-1/round10-1366/canteen-100.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round10-1366/canteen-detail-100.webp",
-        "bible/shots/reviews/character-scale-1/round10-1366/dorms-100.webp",
-        "bible/shots/reviews/character-scale-1/round10-1366/forecourt-100.webp",
-        "bible/shots/reviews/character-scale-1/round10-1366/plaza-100.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Retained attempt: all scenes captured, then forecourt camera comparison failed because the walked endpoint varied by 2.5cm in camera depth."
-    },
-    {
-      "id": "round10-1366-85",
-      "label": "round10-1366-85",
-      "image": "bible/shots/reviews/character-scale-1/round10-1366/canteen-85.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round10-1366/canteen-detail-85.webp",
-        "bible/shots/reviews/character-scale-1/round10-1366/dorms-85.webp",
-        "bible/shots/reviews/character-scale-1/round10-1366/forecourt-85.webp",
-        "bible/shots/reviews/character-scale-1/round10-1366/plaza-85.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Retained attempt: all scenes captured, then forecourt camera comparison failed because the walked endpoint varied by 2.5cm in camera depth."
-    },
-    {
-      "id": "round10-390-100",
-      "label": "round10-390-100",
-      "image": "bible/shots/reviews/character-scale-1/round10-390/canteen-100.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round10-390/canteen-detail-100.webp",
-        "bible/shots/reviews/character-scale-1/round10-390/dorms-100.webp",
-        "bible/shots/reviews/character-scale-1/round10-390/forecourt-100.webp",
-        "bible/shots/reviews/character-scale-1/round10-390/plaza-100.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%."
-    },
-    {
-      "id": "round10-390-85",
-      "label": "round10-390-85",
-      "image": "bible/shots/reviews/character-scale-1/round10-390/canteen-85.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round10-390/canteen-detail-85.webp",
-        "bible/shots/reviews/character-scale-1/round10-390/dorms-85.webp",
-        "bible/shots/reviews/character-scale-1/round10-390/forecourt-85.webp",
-        "bible/shots/reviews/character-scale-1/round10-390/plaza-85.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller."
-    },
-    {
-      "id": "round11-1366-100",
-      "label": "round11-1366-100",
-      "image": "bible/shots/reviews/character-scale-1/round11-1366/canteen-100.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round11-1366/canteen-detail-100.webp",
-        "bible/shots/reviews/character-scale-1/round11-1366/dorms-100.webp",
-        "bible/shots/reviews/character-scale-1/round11-1366/forecourt-100.webp",
-        "bible/shots/reviews/character-scale-1/round11-1366/plaza-100.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Final full comparison. Forecourt camera holds an exact world point after actual walking, avoiding arrival-tolerance drift."
-    },
-    {
-      "id": "round11-1366-85",
-      "label": "round11-1366-85",
-      "image": "bible/shots/reviews/character-scale-1/round11-1366/canteen-85.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round11-1366/canteen-detail-85.webp",
-        "bible/shots/reviews/character-scale-1/round11-1366/dorms-85.webp",
-        "bible/shots/reviews/character-scale-1/round11-1366/forecourt-85.webp",
-        "bible/shots/reviews/character-scale-1/round11-1366/plaza-85.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Final full comparison. Forecourt camera holds an exact world point after actual walking, avoiding arrival-tolerance drift."
-    },
-    {
-      "id": "round11-390-100",
-      "label": "round11-390-100",
-      "image": "bible/shots/reviews/character-scale-1/round11-390/canteen-100.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round11-390/canteen-detail-100.webp",
-        "bible/shots/reviews/character-scale-1/round11-390/dorms-100.webp",
-        "bible/shots/reviews/character-scale-1/round11-390/forecourt-100.webp",
-        "bible/shots/reviews/character-scale-1/round11-390/plaza-100.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Final full comparison. Forecourt camera holds an exact world point after actual walking, avoiding arrival-tolerance drift."
-    },
-    {
-      "id": "round11-390-85",
-      "label": "round11-390-85",
-      "image": "bible/shots/reviews/character-scale-1/round11-390/canteen-85.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/round11-390/canteen-detail-85.webp",
-        "bible/shots/reviews/character-scale-1/round11-390/dorms-85.webp",
-        "bible/shots/reviews/character-scale-1/round11-390/forecourt-85.webp",
-        "bible/shots/reviews/character-scale-1/round11-390/plaza-85.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Final full comparison. Forecourt camera holds an exact world point after actual walking, avoiding arrival-tolerance drift."
-    },
-    {
-      "id": "carina12-390-100",
-      "label": "carina12-390-100",
-      "image": "bible/shots/reviews/character-scale-1/carina12-390/dorms-100.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/carina12-390/failure-100.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Retained failed check: default-size Carina cushion measurement was 4.1cm above the seat; investigate separately in #323. This does not prove a new size regression."
-    },
-    {
-      "id": "crowd12-1366-100",
-      "label": "crowd12-1366-100",
-      "image": "bible/shots/reviews/character-scale-1/crowd12-1366/forecourt-100.webp",
-      "images": [],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Crowd bodies share the size factor; walkers keep moving so individual positions differ."
-    },
-    {
-      "id": "crowd12-1366-85",
-      "label": "crowd12-1366-85",
-      "image": "bible/shots/reviews/character-scale-1/crowd12-1366/forecourt-85.webp",
-      "images": [],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Crowd bodies share the size factor; walkers keep moving so individual positions differ."
-    },
-    {
-      "id": "carina13-390-100",
-      "label": "carina13-390-100",
-      "image": "bible/shots/reviews/character-scale-1/carina13-390/dorms-100.webp",
-      "images": [],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Carina dorm comparison; this does not certify her canteen seat contact."
-    },
-    {
-      "id": "carina13-390-85",
-      "label": "carina13-390-85",
-      "image": "bible/shots/reviews/character-scale-1/carina13-390/dorms-85.webp",
-      "images": [],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Carina dorm comparison; this does not certify her canteen seat contact."
-    },
-    {
-      "id": "interaction13-390-100",
-      "label": "interaction13-390-100",
-      "image": "bible/shots/reviews/character-scale-1/interaction13-390/canteen-100.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/interaction13-390/canteen-detail-100.webp",
-        "bible/shots/reviews/character-scale-1/interaction13-390/canteen-talk-100.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Actual resident marker click opens conversation after Eric stands and approaches."
-    },
-    {
-      "id": "interaction13-390-85",
-      "label": "interaction13-390-85",
-      "image": "bible/shots/reviews/character-scale-1/interaction13-390/canteen-85.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/interaction13-390/canteen-detail-85.webp",
-        "bible/shots/reviews/character-scale-1/interaction13-390/canteen-talk-85.webp"
-      ],
-      "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Actual resident marker click opens conversation after Eric stands and approaches."
-    },
-    {
-      "id": "legacy14-gait",
-      "label": "legacy14-gait",
-      "image": "bible/shots/reviews/character-scale-1/legacy14-gait/85.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/legacy14-gait/67.webp"
-      ],
-      "note": "Alternate Mio body gait after size-aware stride calibration; native fourteen-second walks at 85% and 67%. No sustained gait errors. Still images are retained context; movement measurements are in the test report."
-    },
-    {
-      "id": "mio14-marker",
-      "label": "mio14-marker",
-      "image": "bible/shots/reviews/character-scale-1/mio14-marker/chibi1-85.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/mio14-marker/chibi1-100.webp",
-        "bible/shots/reviews/character-scale-1/mio14-marker/chibi0-100.webp",
-        "bible/shots/reviews/character-scale-1/mio14-marker/chibi0-85.webp"
-      ],
-      "note": "Diagnostic office attempt: head-anchor coordinate assertions pass for both body types at 85% and default 100%, but Mio is hidden/offscreen in these captures. Retained attempt; no visual marker-placement pass claimed."
-    },
-    {
-      "id": "pool15-before",
-      "label": "pool15-before",
-      "image": "bible/shots/reviews/character-scale-1/pool15-before/bench.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/pool15-before/changed-back.webp",
-        "bible/shots/reviews/character-scale-1/pool15-before/ordinary.webp",
-        "bible/shots/reviews/character-scale-1/pool15-before/water.webp"
-      ],
-      "note": "Before head-cache integration: ordinary pool entry, water, bench and changing back at85%. Native pin coordinates pass; no ordinary-route pin defect reproduced. Changed-back framing crops the player and is retained as limited evidence."
-    },
-    {
-      "id": "pool16-current-head",
-      "label": "pool16-current-head",
-      "image": "bible/shots/reviews/character-scale-1/pool16-current-head/bench.webp",
-      "images": [
-        "bible/shots/reviews/character-scale-1/pool16-current-head/cached-revisit.webp",
-        "bible/shots/reviews/character-scale-1/pool16-current-head/changed-back.webp",
-        "bible/shots/reviews/character-scale-1/pool16-current-head/diagnostic-restore-ordinary-npcs.webp",
-        "bible/shots/reviews/character-scale-1/pool16-current-head/ordinary.webp",
-        "bible/shots/reviews/character-scale-1/pool16-current-head/restore-bench-outfits.webp",
-        "bible/shots/reviews/character-scale-1/pool16-current-head/water.webp"
-      ],
-      "note": "Integrated85% trial: actual pool route plus explicitly diagnostic snapshot restoration of ordinary NPC outfits and then pool outfits. Pin anchors resolve current heads. Bench contact remains a staging limitation; changed-back crops the player, and the cached revisit is dialogue rather than visible-pin evidence."
-    }
-  ],
-  "links": [
-    {
-      "label": "Play 85% characters in the dorms",
-      "href": "game3d/index.html?day=2&place=dorms&charscale=85&q=2"
-    },
-    {
-      "label": "Try 85% on the street",
-      "href": "game3d/index.html?day=2&place=forecourt&charscale=85&q=2"
-    },
-    {
-      "label": "Try 85% at the canteen",
-      "href": "game3d/index.html?day=2&place=canteen&charscale=85&q=2"
-    },
-    {
-      "label": "Play 67% characters in the dorms",
-      "href": "game3d/index.html?day=2&place=dorms&charscale=67&q=2"
-    },
-    {
-      "label": "Play current 100% characters in the dorms",
-      "href": "game3d/index.html?day=2&place=dorms&charscale=100&q=2"
-    },
-    {
-      "label": "Try 67% on the street",
-      "href": "game3d/index.html?day=2&place=forecourt&charscale=67&q=2"
-    },
-    {
-      "label": "Try 67% at the canteen",
-      "href": "game3d/index.html?day=2&place=canteen&charscale=67&q=2"
-    },
-    {
-      "label": "Validation and remaining staging work",
-      "href": "notes/character-scale-trial.md"
-    }
-  ],
-  "updated": "2026-10-07T09:25:35.485533+00:00"
+ "title": "Character size: playable 15% and 33% reduction trials",
+ "date": "2026-10-07",
+ "by": "Codex character-scale trial",
+ "status": "decided",
+ "issue": 322,
+ "question": "Does the new 15% reduction fit better? The earlier 33% comparison is retained below.",
+ "multi": true,
+ "media": [
+  {
+   "image": "bible/shots/reviews/character-scale-1/round11-1366/dorms-85.webp",
+   "caption": "Latest requested comparison: 85% character size, a 15% reduction. Actual playable game; default size remains 100%. Same furniture and camera within each pair."
+  },
+  {
+   "image": "bible/shots/reviews/character-scale-1/round11-390/canteen-detail-85.webp",
+   "caption": "Phone close-up at 85%. Eric cushion contact and actual resident conversation checked; Carina baseline seating measurement needs investigation (#323)."
+  }
+ ],
+ "options": [
+  {
+   "id": "round4-1366-100",
+   "label": "round4-1366-100",
+   "image": "bible/shots/reviews/character-scale-1/round4-1366/canteen-100.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round4-1366/dorms-100.webp",
+    "bible/shots/reviews/character-scale-1/round4-1366/forecourt-100.webp",
+    "bible/shots/reviews/character-scale-1/round4-1366/plaza-100.webp"
+   ],
+   "note": "Current 100%. First complete desktop capture. Dorm room, bicycle street, unoccupied canteen end seat and plaza. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "round4-1366-67",
+   "label": "round4-1366-67",
+   "image": "bible/shots/reviews/character-scale-1/round4-1366/canteen-67.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round4-1366/dorms-67.webp",
+    "bible/shots/reviews/character-scale-1/round4-1366/forecourt-67.webp",
+    "bible/shots/reviews/character-scale-1/round4-1366/plaza-67.webp"
+   ],
+   "note": "Requested 67% (33% smaller). First complete desktop capture. Dorm room, bicycle street, unoccupied canteen end seat and plaza. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "round5-390-100",
+   "label": "round5-390-100",
+   "image": "bible/shots/reviews/character-scale-1/round5-390/canteen-100.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round5-390/canteen-detail-100.webp",
+    "bible/shots/reviews/character-scale-1/round5-390/dorms-100.webp",
+    "bible/shots/reviews/character-scale-1/round5-390/forecourt-100.webp",
+    "bible/shots/reviews/character-scale-1/round5-390/plaza-100.webp"
+   ],
+   "note": "Current 100%. Phone comparison with the shared canteen table and its native camera close-up. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "round5-390-67",
+   "label": "round5-390-67",
+   "image": "bible/shots/reviews/character-scale-1/round5-390/canteen-67.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round5-390/canteen-detail-67.webp",
+    "bible/shots/reviews/character-scale-1/round5-390/dorms-67.webp",
+    "bible/shots/reviews/character-scale-1/round5-390/forecourt-67.webp",
+    "bible/shots/reviews/character-scale-1/round5-390/plaza-67.webp"
+   ],
+   "note": "Requested 67% (33% smaller). Phone comparison with the shared canteen table and its native camera close-up. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "round6-1366-100",
+   "label": "round6-1366-100",
+   "image": "bible/shots/reviews/character-scale-1/round6-1366/canteen-100.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round6-1366/canteen-detail-100.webp",
+    "bible/shots/reviews/character-scale-1/round6-1366/dorms-100.webp",
+    "bible/shots/reviews/character-scale-1/round6-1366/forecourt-100.webp",
+    "bible/shots/reviews/character-scale-1/round6-1366/plaza-100.webp"
+   ],
+   "note": "Current 100%. Final desktop comparison, including the shared table close-up. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "round6-1366-67",
+   "label": "round6-1366-67",
+   "image": "bible/shots/reviews/character-scale-1/round6-1366/canteen-67.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round6-1366/canteen-detail-67.webp",
+    "bible/shots/reviews/character-scale-1/round6-1366/dorms-67.webp",
+    "bible/shots/reviews/character-scale-1/round6-1366/forecourt-67.webp",
+    "bible/shots/reviews/character-scale-1/round6-1366/plaza-67.webp"
+   ],
+   "note": "Requested 67% (33% smaller). Final desktop comparison, including the shared table close-up. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "interaction7-390-100",
+   "label": "interaction7-390-100",
+   "image": "bible/shots/reviews/character-scale-1/interaction7-390/canteen-100.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/interaction7-390/canteen-detail-100.webp",
+    "bible/shots/reviews/character-scale-1/interaction7-390/canteen-talk-100.webp"
+   ],
+   "note": "Current 100%. Actual phone marker click opens the seated resident conversation. Eric stands and walks to the existing talk position. Both conversation frames are the same first line. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "interaction7-390-67",
+   "label": "interaction7-390-67",
+   "image": "bible/shots/reviews/character-scale-1/interaction7-390/canteen-67.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/interaction7-390/canteen-detail-67.webp",
+    "bible/shots/reviews/character-scale-1/interaction7-390/canteen-talk-67.webp"
+   ],
+   "note": "Requested 67% (33% smaller). Actual phone marker click opens the seated resident conversation. Eric stands and walks to the existing talk position. Both conversation frames are the same first line. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "carina8-390-100",
+   "label": "carina8-390-100",
+   "image": "bible/shots/reviews/character-scale-1/carina8-390/dorms-100.webp",
+   "images": [],
+   "note": "Current 100%. Carina in the dorm room, preserving her relative height next to Eric. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "carina8-390-67",
+   "label": "carina8-390-67",
+   "image": "bible/shots/reviews/character-scale-1/carina8-390/dorms-67.webp",
+   "images": [],
+   "note": "Requested 67% (33% smaller). Carina in the dorm room, preserving her relative height next to Eric. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "crowd9-1366-100",
+   "label": "crowd9-1366-100",
+   "image": "bible/shots/reviews/character-scale-1/crowd9-1366/forecourt-100.webp",
+   "images": [],
+   "note": "Current 100%. Actual office-street commuters. Camera and player position match; live crowds keep walking, so individual positions differ. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "crowd9-1366-67",
+   "label": "crowd9-1366-67",
+   "image": "bible/shots/reviews/character-scale-1/crowd9-1366/forecourt-67.webp",
+   "images": [],
+   "note": "Requested 67% (33% smaller). Actual office-street commuters. Camera and player position match; live crowds keep walking, so individual positions differ. Native game capture at quality 2; no image generation or scene retouching. Only the character-scale query differs within each pair."
+  },
+  {
+   "id": "round10-1366-100",
+   "label": "round10-1366-100",
+   "image": "bible/shots/reviews/character-scale-1/round10-1366/canteen-100.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round10-1366/canteen-detail-100.webp",
+    "bible/shots/reviews/character-scale-1/round10-1366/dorms-100.webp",
+    "bible/shots/reviews/character-scale-1/round10-1366/forecourt-100.webp",
+    "bible/shots/reviews/character-scale-1/round10-1366/plaza-100.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Retained attempt: all scenes captured, then forecourt camera comparison failed because the walked endpoint varied by 2.5cm in camera depth."
+  },
+  {
+   "id": "round10-1366-85",
+   "label": "round10-1366-85",
+   "image": "bible/shots/reviews/character-scale-1/round10-1366/canteen-85.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round10-1366/canteen-detail-85.webp",
+    "bible/shots/reviews/character-scale-1/round10-1366/dorms-85.webp",
+    "bible/shots/reviews/character-scale-1/round10-1366/forecourt-85.webp",
+    "bible/shots/reviews/character-scale-1/round10-1366/plaza-85.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Retained attempt: all scenes captured, then forecourt camera comparison failed because the walked endpoint varied by 2.5cm in camera depth."
+  },
+  {
+   "id": "round10-390-100",
+   "label": "round10-390-100",
+   "image": "bible/shots/reviews/character-scale-1/round10-390/canteen-100.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round10-390/canteen-detail-100.webp",
+    "bible/shots/reviews/character-scale-1/round10-390/dorms-100.webp",
+    "bible/shots/reviews/character-scale-1/round10-390/forecourt-100.webp",
+    "bible/shots/reviews/character-scale-1/round10-390/plaza-100.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%."
+  },
+  {
+   "id": "round10-390-85",
+   "label": "round10-390-85",
+   "image": "bible/shots/reviews/character-scale-1/round10-390/canteen-85.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round10-390/canteen-detail-85.webp",
+    "bible/shots/reviews/character-scale-1/round10-390/dorms-85.webp",
+    "bible/shots/reviews/character-scale-1/round10-390/forecourt-85.webp",
+    "bible/shots/reviews/character-scale-1/round10-390/plaza-85.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller."
+  },
+  {
+   "id": "round11-1366-100",
+   "label": "round11-1366-100",
+   "image": "bible/shots/reviews/character-scale-1/round11-1366/canteen-100.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round11-1366/canteen-detail-100.webp",
+    "bible/shots/reviews/character-scale-1/round11-1366/dorms-100.webp",
+    "bible/shots/reviews/character-scale-1/round11-1366/forecourt-100.webp",
+    "bible/shots/reviews/character-scale-1/round11-1366/plaza-100.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Final full comparison. Forecourt camera holds an exact world point after actual walking, avoiding arrival-tolerance drift."
+  },
+  {
+   "id": "round11-1366-85",
+   "label": "round11-1366-85",
+   "image": "bible/shots/reviews/character-scale-1/round11-1366/canteen-85.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round11-1366/canteen-detail-85.webp",
+    "bible/shots/reviews/character-scale-1/round11-1366/dorms-85.webp",
+    "bible/shots/reviews/character-scale-1/round11-1366/forecourt-85.webp",
+    "bible/shots/reviews/character-scale-1/round11-1366/plaza-85.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Final full comparison. Forecourt camera holds an exact world point after actual walking, avoiding arrival-tolerance drift."
+  },
+  {
+   "id": "round11-390-100",
+   "label": "round11-390-100",
+   "image": "bible/shots/reviews/character-scale-1/round11-390/canteen-100.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round11-390/canteen-detail-100.webp",
+    "bible/shots/reviews/character-scale-1/round11-390/dorms-100.webp",
+    "bible/shots/reviews/character-scale-1/round11-390/forecourt-100.webp",
+    "bible/shots/reviews/character-scale-1/round11-390/plaza-100.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Final full comparison. Forecourt camera holds an exact world point after actual walking, avoiding arrival-tolerance drift."
+  },
+  {
+   "id": "round11-390-85",
+   "label": "round11-390-85",
+   "image": "bible/shots/reviews/character-scale-1/round11-390/canteen-85.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/round11-390/canteen-detail-85.webp",
+    "bible/shots/reviews/character-scale-1/round11-390/dorms-85.webp",
+    "bible/shots/reviews/character-scale-1/round11-390/forecourt-85.webp",
+    "bible/shots/reviews/character-scale-1/round11-390/plaza-85.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Final full comparison. Forecourt camera holds an exact world point after actual walking, avoiding arrival-tolerance drift."
+  },
+  {
+   "id": "carina12-390-100",
+   "label": "carina12-390-100",
+   "image": "bible/shots/reviews/character-scale-1/carina12-390/dorms-100.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/carina12-390/failure-100.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Retained failed check: default-size Carina cushion measurement was 4.1cm above the seat; investigate separately in #323. This does not prove a new size regression."
+  },
+  {
+   "id": "crowd12-1366-100",
+   "label": "crowd12-1366-100",
+   "image": "bible/shots/reviews/character-scale-1/crowd12-1366/forecourt-100.webp",
+   "images": [],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Crowd bodies share the size factor; walkers keep moving so individual positions differ."
+  },
+  {
+   "id": "crowd12-1366-85",
+   "label": "crowd12-1366-85",
+   "image": "bible/shots/reviews/character-scale-1/crowd12-1366/forecourt-85.webp",
+   "images": [],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Crowd bodies share the size factor; walkers keep moving so individual positions differ."
+  },
+  {
+   "id": "carina13-390-100",
+   "label": "carina13-390-100",
+   "image": "bible/shots/reviews/character-scale-1/carina13-390/dorms-100.webp",
+   "images": [],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Carina dorm comparison; this does not certify her canteen seat contact."
+  },
+  {
+   "id": "carina13-390-85",
+   "label": "carina13-390-85",
+   "image": "bible/shots/reviews/character-scale-1/carina13-390/dorms-85.webp",
+   "images": [],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Carina dorm comparison; this does not certify her canteen seat contact."
+  },
+  {
+   "id": "interaction13-390-100",
+   "label": "interaction13-390-100",
+   "image": "bible/shots/reviews/character-scale-1/interaction13-390/canteen-100.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/interaction13-390/canteen-detail-100.webp",
+    "bible/shots/reviews/character-scale-1/interaction13-390/canteen-talk-100.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Current 100%. Actual resident marker click opens conversation after Eric stands and approaches."
+  },
+  {
+   "id": "interaction13-390-85",
+   "label": "interaction13-390-85",
+   "image": "bible/shots/reviews/character-scale-1/interaction13-390/canteen-85.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/interaction13-390/canteen-detail-85.webp",
+    "bible/shots/reviews/character-scale-1/interaction13-390/canteen-talk-85.webp"
+   ],
+   "note": "Native game capture at quality 2; same camera and environment within each pair. Requested 85%: 15% smaller. Actual resident marker click opens conversation after Eric stands and approaches."
+  },
+  {
+   "id": "legacy14-gait",
+   "label": "legacy14-gait",
+   "image": "bible/shots/reviews/character-scale-1/legacy14-gait/85.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/legacy14-gait/67.webp"
+   ],
+   "note": "Alternate Mio body gait after size-aware stride calibration; native fourteen-second walks at 85% and 67%. No sustained gait errors. Still images are retained context; movement measurements are in the test report."
+  },
+  {
+   "id": "mio14-marker",
+   "label": "mio14-marker",
+   "image": "bible/shots/reviews/character-scale-1/mio14-marker/chibi1-85.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/mio14-marker/chibi1-100.webp",
+    "bible/shots/reviews/character-scale-1/mio14-marker/chibi0-100.webp",
+    "bible/shots/reviews/character-scale-1/mio14-marker/chibi0-85.webp"
+   ],
+   "note": "Diagnostic office attempt: head-anchor coordinate assertions pass for both body types at 85% and default 100%, but Mio is hidden/offscreen in these captures. Retained attempt; no visual marker-placement pass claimed."
+  },
+  {
+   "id": "pool15-before",
+   "label": "pool15-before",
+   "image": "bible/shots/reviews/character-scale-1/pool15-before/bench.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/pool15-before/changed-back.webp",
+    "bible/shots/reviews/character-scale-1/pool15-before/ordinary.webp",
+    "bible/shots/reviews/character-scale-1/pool15-before/water.webp"
+   ],
+   "note": "Before head-cache integration: ordinary pool entry, water, bench and changing back at85%. Native pin coordinates pass; no ordinary-route pin defect reproduced. Changed-back framing crops the player and is retained as limited evidence."
+  },
+  {
+   "id": "pool16-current-head",
+   "label": "pool16-current-head",
+   "image": "bible/shots/reviews/character-scale-1/pool16-current-head/bench.webp",
+   "images": [
+    "bible/shots/reviews/character-scale-1/pool16-current-head/cached-revisit.webp",
+    "bible/shots/reviews/character-scale-1/pool16-current-head/changed-back.webp",
+    "bible/shots/reviews/character-scale-1/pool16-current-head/diagnostic-restore-ordinary-npcs.webp",
+    "bible/shots/reviews/character-scale-1/pool16-current-head/ordinary.webp",
+    "bible/shots/reviews/character-scale-1/pool16-current-head/restore-bench-outfits.webp",
+    "bible/shots/reviews/character-scale-1/pool16-current-head/water.webp"
+   ],
+   "note": "Integrated85% trial: actual pool route plus explicitly diagnostic snapshot restoration of ordinary NPC outfits and then pool outfits. Pin anchors resolve current heads. Bench contact remains a staging limitation; changed-back crops the player, and the cached revisit is dialogue rather than visible-pin evidence."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play 85% characters in the dorms",
+   "href": "game3d/index.html?day=2&place=dorms&charscale=85&q=2"
+  },
+  {
+   "label": "Try 85% on the street",
+   "href": "game3d/index.html?day=2&place=forecourt&charscale=85&q=2"
+  },
+  {
+   "label": "Try 85% at the canteen",
+   "href": "game3d/index.html?day=2&place=canteen&charscale=85&q=2"
+  },
+  {
+   "label": "Play 67% characters in the dorms",
+   "href": "game3d/index.html?day=2&place=dorms&charscale=67&q=2"
+  },
+  {
+   "label": "Play current 100% characters in the dorms",
+   "href": "game3d/index.html?day=2&place=dorms&charscale=100&q=2"
+  },
+  {
+   "label": "Try 67% on the street",
+   "href": "game3d/index.html?day=2&place=forecourt&charscale=67&q=2"
+  },
+  {
+   "label": "Try 67% at the canteen",
+   "href": "game3d/index.html?day=2&place=canteen&charscale=67&q=2"
+  },
+  {
+   "label": "Validation and remaining staging work",
+   "href": "notes/character-scale-trial.md"
+  }
+ ],
+ "updated": "2026-10-07T09:25:35.485533+00:00",
+ "decided": [
+  "carina13-390-85"
+ ],
+ "decision": "carina13-390-85 selected: yeah looks good. Use a15% reduction (85% size); earlier33% trial was too much.",
+ "decided_at": "2026-10-07T14:30:25+0200"
 }
