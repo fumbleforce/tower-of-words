@@ -6,6 +6,7 @@
 //   fly   along a curve from p0 through c to p1; lands at the end if `land`, else goes off
 //   soar  circling (gulls), steered by its group
 import * as THREE from 'three';
+import { groundPathFree } from './ground-spacing.js';
 
 // how each kind flies and how close it lets a person come (metres, before the place's people scale)
 export const HABITS = {
@@ -219,7 +220,11 @@ function choose(b, habit, W) {
     const len = (habit.hop ? 0.08 + Math.random() * 0.14 : 0.12 + Math.random() * 0.3) * W.K;
     const yaw = b.yaw + (Math.random() - 0.5) * 2.2;
     const to = new THREE.Vector3(b.p.x + Math.sin(yaw) * len, b.p.y, b.p.z + Math.cos(yaw) * len);
-    if (W.nav.free(to.x, to.z, 0.05) && to.distanceTo(b.home || to) < (habit.spread + 0.6) * W.K) {
+    if (
+      W.nav.free(to.x, to.z, 0.05) &&
+      to.distanceTo(b.home || to) < (b.groundSpread ?? (habit.spread + 0.6) * W.K) &&
+      groundPathFree(W, b, b.p, to)
+    ) {
       b.yaw = yaw;
       if (habit.hop)
         return {

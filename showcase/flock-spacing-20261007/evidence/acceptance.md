@@ -1,0 +1,13 @@
+# Ground flock spacing checks
+
+The repair reserves landing positions and whole ground steps across pigeon and sparrow groups. The radius includes the rendered tail, head and wings through pecking, shaking, touchdown and settling, scaled per bird. A crowded patch leaves a bird off the ground until room is available. Pending arrivals are cancelled when a flock scatters or leaves.
+
+Six focused unit tests cover repeated random samples, full eight-bird placement on free paving at three scales, two minutes of cross-group walking and hopping, intersecting paths, pending landings, blocked ground, cancellation, and actual posed geometry through ground and landing animation. They passed. Both strict full-day routes passed on the final runtime, at 1366 by 860 and 390 by 844, with no overrides. Existing performance baseline warnings remain in their logs.
+
+The final Works observer records 1,807 desktop and 1,873 phone samples with zero ground-clearance violations; both runs observe ground movement, the approached pigeons departing, and those pigeons returning to the ground. Its clearance circles are conservative bounds, not exact triangle intersections. The initial runs identified the original clumping on both sizes. Ground behavior is the scope; flight-path separation is unchanged.
+
+Independent Codex reviewer `flock_review` checked the source and all ten final3 images, independently reran the six tests, and reported no remaining findings. Its visual score was 8/10 (A8 B8 C8 D8 E8 F9 G8 H8). The reviewer found two earlier gaps, both repaired: the first clearance margin missed the tip of a touchdown wing, and the first browser return check could count sparrows while the approached pigeons were still away. A cropped phone inspection frame was also replaced with a wider view. Every earlier image remains in this entry, in attempt order.
+
+Native initial, feeding and return images use the ordinary game camera. Diagnostic flock images use a closer camera; staged-approach images move the player next to the flock to test its threat response. The final phone diagnostic includes the whole pigeon group without HUD occlusion. Stills alone do not establish animation smoothness; the timed observer also records active walk/hop frames.
+
+Original PNGs and full-day logs are retained in `game3d/shots/flock-spacing/` on this machine. `images.json` records each original and uploaded WebP hash. The five JSON reports retain source hashes and per-viewport observations, including the superseded assertions. This Codex review is separate from the requested Claude review; that cross-team response remains pending.

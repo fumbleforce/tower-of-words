@@ -10,6 +10,8 @@
 //                       they only sit.
 // A group out of its time of day (catalog.js `when`) flies off, and one coming into it flies in.
 import * as THREE from 'three';
+import { BIRDS } from './models.js';
+import { groundSpot } from './ground-spacing.js';
 import { HABITS, newBird, setDown, flyTo, flyIn, flyAway, stepBird } from './motion.js';
 
 const rnd = (a, b) => a + Math.random() * (b - a);
@@ -32,6 +34,9 @@ class Group {
     this.state = 'up'; // a flock comes down afresh when its time comes again
     for (const b of this.birds) {
       this.W.free(b);
+      b.groundGoal = null;
+      b.order = null;
+      b.delay = 0;
       if (b.mode === 'off') continue;
       if (this.W.inView(b.p)) flyAway(b, this.W.eric, this.habit, this.W.K);
       else b.mode = 'off';
@@ -62,37 +67,40 @@ export class Flock extends Group {
     this.state = 'up';
     this.home = new THREE.Vector3();
     this.perchKinds = def.kind === 'sparrow' ? ['hedge', 'low'] : ['high', 'low'];
+    for (const b of this.birds) {
+      // Covers the tail, pecking head and folded/shaking wings at the actual render scale.
+      b.groundRadius = BIRDS[def.kind].len * 1.2 * meshes.scale * b.size;
+    }
+    this.spread = Math.max(this.habit.spread * W.K, ...this.birds.map((b) => b.groundRadius * Math.sqrt(n) * 1.4));
+    (W.groundBirds ||= []).push(...this.birds);
   }
   // the flock down on a new bit of paving: at once (entering) or flying in
   land(at, now) {
-    const W = this.W,
-      K = W.K;
     this.home.copy(at);
-    for (const b of this.birds) {
-      let x = at.x,
-        z = at.z;
-      for (let k = 0; k < 6; k++) {
-        const a = Math.random() * 6.28,
-          r = Math.sqrt(Math.random()) * this.habit.spread * K;
-        if (W.nav.free(at.x + Math.cos(a) * r, at.z + Math.sin(a) * r, 0.05)) {
-          x = at.x + Math.cos(a) * r;
-          z = at.z + Math.sin(a) * r;
-          break;
-        }
-      }
-      b.home = this.home;
-      W.free(b);
-      if (now) setDown(b, x, at.y, z, { kind: 'ground' });
-      else {
-        b.delay = rnd(0, 1.2);
-        b.order = (bb) => {
-          _v.set(x, at.y, z);
-          if (bb.mode === 'off') flyIn(bb, _v, { kind: 'ground' }, this.habit, K);
-          else flyTo(bb, _v, { kind: 'ground' }, this.habit, K);
-        };
-      }
-    }
+    for (const b of this.birds) b.groundGoal = null;
+    for (const b of this.birds) this.landBird(b, now);
     this.state = 'down';
+  }
+  landBird(b, now) {
+    const W = this.W;
+    W.free(b);
+    const p = groundSpot(W, b, this.home, this.spread);
+    if (!p) {
+      if (b.mode !== 'off') flyAway(b, W.eric, this.habit, W.K);
+      return;
+    }
+    b.home = this.home;
+    b.groundSpread = this.spread;
+    b.groundGoal = p;
+    if (now) setDown(b, p.x, p.y, p.z, { kind: 'ground' });
+    else {
+      b.delay = rnd(0, 1.2);
+      b.order = (bb) => {
+        _v.set(p.x, p.y, p.z);
+        if (bb.mode === 'off') flyIn(bb, _v, { kind: 'ground' }, this.habit, W.K);
+        else flyTo(bb, _v, { kind: 'ground' }, this.habit, W.K);
+      };
+    }
   }
   scatter(from) {
     const W = this.W;
@@ -100,6 +108,9 @@ export class Flock extends Group {
     this.timer = rnd(10, 22);
     W.sound('flap', this.home);
     for (const b of this.birds) {
+      b.groundGoal = null;
+      b.order = null;
+      b.delay = 0;
       if (b.mode === 'off') continue;
       b.delay = rnd(0, 0.35);
       b.order = (bb) => {
@@ -120,6 +131,10 @@ export class Flock extends Group {
     const W = this.W;
     this.timer -= dt;
     if (this.state === 'down') {
+      if (this.timer <= 0) {
+        this.timer = 3;
+        for (const b of this.birds) if (b.mode === 'off' && !b.order) this.landBird(b, false);
+      }
       for (const b of this.birds) {
         if (b.mode !== 'rest' || b.on?.kind !== 'ground') continue;
         const t = this.threat(b, this.habit.scare * W.K);
@@ -127,7 +142,12 @@ export class Flock extends Group {
       }
       // Eric has walked on and the flock is out of sight: it moves on too, to come down near him again
       if (this.home.distanceTo(W.eric) > 26 * W.K && !W.inView(this.home)) {
-        for (const b of this.birds) b.mode = 'off';
+        for (const b of this.birds) {
+          b.mode = 'off';
+          b.groundGoal = null;
+          b.order = null;
+          b.delay = 0;
+        }
         this.state = 'up';
         this.timer = rnd(2, 6);
       }
@@ -141,7 +161,7 @@ export class Flock extends Group {
   // entering the place: down at once on paving in view, or coming in shortly if there is none
   reset(active) {
     this.active = active;
-    for (const b of this.birds) ((b.mode = 'off'), (b.delay = 0), (b.order = null));
+    for (const b of this.birds) ((b.mode = 'off'), (b.delay = 0), (b.order = null), (b.groundGoal = null));
     if (!active) return;
     const W = this.W,
       spot =

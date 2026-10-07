@@ -1,0 +1,294 @@
+{
+  "title": "Birds leave room for each other",
+  "date": "2026-10-07",
+  "by": "Codex",
+  "caption": "Ground pigeons and sparrows use separate landing spots and leave room along walking and hopping paths. Checked in the Works district at phone and desktop sizes.",
+  "preview": "final3-390-native-feeding",
+  "sections": [
+    {
+      "title": "Before the spacing fix",
+      "images": [
+        {
+          "id": "baseline-1366-diagnostic-flock",
+          "image": "bible/shots/showcase/flock-spacing-20261007/baseline/1366-diagnostic-flock.webp",
+          "caption": "1366 diagnostic flock. Diagnostic camera."
+        },
+        {
+          "id": "baseline-1366-native-feeding",
+          "image": "bible/shots/showcase/flock-spacing-20261007/baseline/1366-native-feeding.webp",
+          "caption": "1366 native feeding. Ordinary game camera."
+        },
+        {
+          "id": "baseline-1366-native-initial",
+          "image": "bible/shots/showcase/flock-spacing-20261007/baseline/1366-native-initial.webp",
+          "caption": "1366 native initial. Ordinary game camera."
+        },
+        {
+          "id": "baseline-1366-native-return",
+          "image": "bible/shots/showcase/flock-spacing-20261007/baseline/1366-native-return.webp",
+          "caption": "1366 native return. Ordinary game camera."
+        },
+        {
+          "id": "baseline-1366-staged-approach",
+          "image": "bible/shots/showcase/flock-spacing-20261007/baseline/1366-staged-approach.webp",
+          "caption": "1366 staged approach. Staged player approach."
+        },
+        {
+          "id": "baseline-390-diagnostic-flock",
+          "image": "bible/shots/showcase/flock-spacing-20261007/baseline/390-diagnostic-flock.webp",
+          "caption": "390 diagnostic flock. Diagnostic camera."
+        },
+        {
+          "id": "baseline-390-native-feeding",
+          "image": "bible/shots/showcase/flock-spacing-20261007/baseline/390-native-feeding.webp",
+          "caption": "390 native feeding. Ordinary game camera."
+        },
+        {
+          "id": "baseline-390-native-initial",
+          "image": "bible/shots/showcase/flock-spacing-20261007/baseline/390-native-initial.webp",
+          "caption": "390 native initial. Ordinary game camera."
+        },
+        {
+          "id": "baseline-390-native-return",
+          "image": "bible/shots/showcase/flock-spacing-20261007/baseline/390-native-return.webp",
+          "caption": "390 native return. Ordinary game camera."
+        },
+        {
+          "id": "baseline-390-staged-approach",
+          "image": "bible/shots/showcase/flock-spacing-20261007/baseline/390-staged-approach.webp",
+          "caption": "390 staged approach. Staged player approach."
+        }
+      ]
+    },
+    {
+      "title": "First spacing pass",
+      "images": [
+        {
+          "id": "fixed-1-1366-diagnostic-flock",
+          "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/1366-diagnostic-flock.webp",
+          "caption": "1366 diagnostic flock. Diagnostic camera."
+        },
+        {
+          "id": "fixed-1-1366-native-feeding",
+          "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/1366-native-feeding.webp",
+          "caption": "1366 native feeding. Ordinary game camera."
+        },
+        {
+          "id": "fixed-1-1366-native-initial",
+          "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/1366-native-initial.webp",
+          "caption": "1366 native initial. Ordinary game camera."
+        },
+        {
+          "id": "fixed-1-1366-native-return",
+          "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/1366-native-return.webp",
+          "caption": "1366 native return. Ordinary game camera."
+        },
+        {
+          "id": "fixed-1-1366-staged-approach",
+          "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/1366-staged-approach.webp",
+          "caption": "1366 staged approach. Staged player approach."
+        },
+        {
+          "id": "fixed-1-390-diagnostic-flock",
+          "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/390-diagnostic-flock.webp",
+          "caption": "390 diagnostic flock. Diagnostic camera."
+        },
+        {
+          "id": "fixed-1-390-native-feeding",
+          "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/390-native-feeding.webp",
+          "caption": "390 native feeding. Ordinary game camera."
+        },
+        {
+          "id": "fixed-1-390-native-initial",
+          "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/390-native-initial.webp",
+          "caption": "390 native initial. Ordinary game camera."
+        },
+        {
+          "id": "fixed-1-390-native-return",
+          "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/390-native-return.webp",
+          "caption": "390 native return. Ordinary game camera."
+        },
+        {
+          "id": "fixed-1-390-staged-approach",
+          "image": "bible/shots/showcase/flock-spacing-20261007/fixed-1/390-staged-approach.webp",
+          "caption": "390 staged approach. Staged player approach."
+        }
+      ]
+    },
+    {
+      "title": "First final check: return assertion later corrected",
+      "images": [
+        {
+          "id": "final-1366-diagnostic-flock",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final/1366-diagnostic-flock.webp",
+          "caption": "1366 diagnostic flock. Diagnostic camera."
+        },
+        {
+          "id": "final-1366-native-feeding",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final/1366-native-feeding.webp",
+          "caption": "1366 native feeding. Ordinary game camera."
+        },
+        {
+          "id": "final-1366-native-initial",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final/1366-native-initial.webp",
+          "caption": "1366 native initial. Ordinary game camera."
+        },
+        {
+          "id": "final-1366-native-return",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final/1366-native-return.webp",
+          "caption": "1366 native return. Ordinary game camera."
+        },
+        {
+          "id": "final-1366-staged-approach",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final/1366-staged-approach.webp",
+          "caption": "1366 staged approach. Staged player approach."
+        },
+        {
+          "id": "final-390-diagnostic-flock",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final/390-diagnostic-flock.webp",
+          "caption": "390 diagnostic flock. Diagnostic camera."
+        },
+        {
+          "id": "final-390-native-feeding",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final/390-native-feeding.webp",
+          "caption": "390 native feeding. Ordinary game camera."
+        },
+        {
+          "id": "final-390-native-initial",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final/390-native-initial.webp",
+          "caption": "390 native initial. Ordinary game camera."
+        },
+        {
+          "id": "final-390-native-return",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final/390-native-return.webp",
+          "caption": "390 native return. Ordinary game camera."
+        },
+        {
+          "id": "final-390-staged-approach",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final/390-staged-approach.webp",
+          "caption": "390 staged approach. Staged player approach."
+        }
+      ]
+    },
+    {
+      "title": "Pigeon return verified; phone close-up still cropped",
+      "images": [
+        {
+          "id": "final2-1366-diagnostic-flock",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final2/1366-diagnostic-flock.webp",
+          "caption": "1366 diagnostic flock. Diagnostic camera."
+        },
+        {
+          "id": "final2-1366-native-feeding",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final2/1366-native-feeding.webp",
+          "caption": "1366 native feeding. Ordinary game camera."
+        },
+        {
+          "id": "final2-1366-native-initial",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final2/1366-native-initial.webp",
+          "caption": "1366 native initial. Ordinary game camera."
+        },
+        {
+          "id": "final2-1366-native-return",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final2/1366-native-return.webp",
+          "caption": "1366 native return. Ordinary game camera."
+        },
+        {
+          "id": "final2-1366-staged-approach",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final2/1366-staged-approach.webp",
+          "caption": "1366 staged approach. Staged player approach."
+        },
+        {
+          "id": "final2-390-diagnostic-flock",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final2/390-diagnostic-flock.webp",
+          "caption": "390 diagnostic flock. Diagnostic camera."
+        },
+        {
+          "id": "final2-390-native-feeding",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final2/390-native-feeding.webp",
+          "caption": "390 native feeding. Ordinary game camera."
+        },
+        {
+          "id": "final2-390-native-initial",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final2/390-native-initial.webp",
+          "caption": "390 native initial. Ordinary game camera."
+        },
+        {
+          "id": "final2-390-native-return",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final2/390-native-return.webp",
+          "caption": "390 native return. Ordinary game camera."
+        },
+        {
+          "id": "final2-390-staged-approach",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final2/390-staged-approach.webp",
+          "caption": "390 staged approach. Staged player approach."
+        }
+      ]
+    },
+    {
+      "title": "Accepted spacing and full-flock framing",
+      "images": [
+        {
+          "id": "final3-1366-diagnostic-flock",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final3/1366-diagnostic-flock.webp",
+          "caption": "1366 diagnostic flock. Diagnostic camera."
+        },
+        {
+          "id": "final3-1366-native-feeding",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final3/1366-native-feeding.webp",
+          "caption": "1366 native feeding. Ordinary game camera."
+        },
+        {
+          "id": "final3-1366-native-initial",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final3/1366-native-initial.webp",
+          "caption": "1366 native initial. Ordinary game camera."
+        },
+        {
+          "id": "final3-1366-native-return",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final3/1366-native-return.webp",
+          "caption": "1366 native return. Ordinary game camera."
+        },
+        {
+          "id": "final3-1366-staged-approach",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final3/1366-staged-approach.webp",
+          "caption": "1366 staged approach. Staged player approach."
+        },
+        {
+          "id": "final3-390-diagnostic-flock",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final3/390-diagnostic-flock.webp",
+          "caption": "390 diagnostic flock. Diagnostic camera."
+        },
+        {
+          "id": "final3-390-native-feeding",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final3/390-native-feeding.webp",
+          "caption": "390 native feeding. Ordinary game camera."
+        },
+        {
+          "id": "final3-390-native-initial",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final3/390-native-initial.webp",
+          "caption": "390 native initial. Ordinary game camera."
+        },
+        {
+          "id": "final3-390-native-return",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final3/390-native-return.webp",
+          "caption": "390 native return. Ordinary game camera."
+        },
+        {
+          "id": "final3-390-staged-approach",
+          "image": "bible/shots/showcase/flock-spacing-20261007/final3/390-staged-approach.webp",
+          "caption": "390 staged approach. Staged player approach."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Works district",
+      "href": "game3d/?day=6&place=works"
+    },
+    {
+      "label": "Checks and remaining limits",
+      "href": "bible/#doc/showcase/flock-spacing-20261007/evidence/acceptance.md"
+    }
+  ]
+}
