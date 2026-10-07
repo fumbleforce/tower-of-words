@@ -1,0 +1,275 @@
+{
+  "title": "Revisit Japanese with the words you know now",
+  "date": "2026-10-07",
+  "by": "codex",
+  "caption": "Remembered remarks can show what you understood when you first heard them. New vocabulary stays hidden in that original reading.",
+  "preview": "round5-390-comparison-open",
+  "sections": [
+    {
+      "title": "round5",
+      "caption": "Final native UI: original/current/legacy readings, several remarks, keyboard Space and controller Close activation.",
+      "images": [
+        {
+          "id": "round5-1366-before-learning",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round5-1366-before-learning.png",
+          "caption": "round5, 1366-before-learning. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round5-1366-comparison-open",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round5-1366-comparison-open.png",
+          "caption": "round5, 1366-comparison-open. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round5-1366-current-reading",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round5-1366-current-reading.png",
+          "caption": "round5, 1366-current-reading. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round5-1366-legacy",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round5-1366-legacy.png",
+          "caption": "round5, 1366-legacy. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round5-1366-several-remarks",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round5-1366-several-remarks.png",
+          "caption": "round5, 1366-several-remarks. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round5-390-before-learning",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round5-390-before-learning.png",
+          "caption": "round5, 390-before-learning. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round5-390-comparison-open",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round5-390-comparison-open.png",
+          "caption": "round5, 390-comparison-open. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round5-390-current-reading",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round5-390-current-reading.png",
+          "caption": "round5, 390-current-reading. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round5-390-legacy",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round5-390-legacy.png",
+          "caption": "round5, 390-legacy. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round5-390-several-remarks",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round5-390-several-remarks.png",
+          "caption": "round5, 390-several-remarks. Native log UI using stored-remark fixtures; not a full authored story route."
+        }
+      ]
+    },
+    {
+      "title": "round4",
+      "caption": "Close activation correction verified with keyboard Enter and controller A; retained attempt.",
+      "images": [
+        {
+          "id": "round4-1366-before-learning",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round4-1366-before-learning.png",
+          "caption": "round4, 1366-before-learning. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round4-1366-comparison-open",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round4-1366-comparison-open.png",
+          "caption": "round4, 1366-comparison-open. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round4-1366-current-reading",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round4-1366-current-reading.png",
+          "caption": "round4, 1366-current-reading. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round4-1366-legacy",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round4-1366-legacy.png",
+          "caption": "round4, 1366-legacy. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round4-1366-several-remarks",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round4-1366-several-remarks.png",
+          "caption": "round4, 1366-several-remarks. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round4-390-before-learning",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round4-390-before-learning.png",
+          "caption": "round4, 390-before-learning. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round4-390-comparison-open",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round4-390-comparison-open.png",
+          "caption": "round4, 390-comparison-open. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round4-390-current-reading",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round4-390-current-reading.png",
+          "caption": "round4, 390-current-reading. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round4-390-legacy",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round4-390-legacy.png",
+          "caption": "round4, 390-legacy. Native log UI using stored-remark fixtures; not a full authored story route."
+        },
+        {
+          "id": "round4-390-several-remarks",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round4-390-several-remarks.png",
+          "caption": "round4, 390-several-remarks. Native log UI using stored-remark fixtures; not a full authored story route."
+        }
+      ]
+    },
+    {
+      "title": "round3",
+      "caption": "Earlier multi-remark and controller checks, before focused Close activation was corrected.",
+      "images": [
+        {
+          "id": "round3-1366-before-learning",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round3-1366-before-learning.png",
+          "caption": "round3, 1366-before-learning. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round3-1366-comparison-open",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round3-1366-comparison-open.png",
+          "caption": "round3, 1366-comparison-open. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round3-1366-current-reading",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round3-1366-current-reading.png",
+          "caption": "round3, 1366-current-reading. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round3-1366-legacy",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round3-1366-legacy.png",
+          "caption": "round3, 1366-legacy. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round3-1366-several-remarks",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round3-1366-several-remarks.png",
+          "caption": "round3, 1366-several-remarks. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round3-390-before-learning",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round3-390-before-learning.png",
+          "caption": "round3, 390-before-learning. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round3-390-comparison-open",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round3-390-comparison-open.png",
+          "caption": "round3, 390-comparison-open. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round3-390-current-reading",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round3-390-current-reading.png",
+          "caption": "round3, 390-current-reading. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round3-390-legacy",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round3-390-legacy.png",
+          "caption": "round3, 390-legacy. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round3-390-several-remarks",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round3-390-several-remarks.png",
+          "caption": "round3, 390-several-remarks. Native log UI using recorded-remark fixtures."
+        }
+      ]
+    },
+    {
+      "title": "round2",
+      "caption": "Settled rendering; prior to the multi-remark and controller-navigation coverage.",
+      "images": [
+        {
+          "id": "round2-1366-before-learning",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round2-1366-before-learning.png",
+          "caption": "round2, 1366-before-learning. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round2-1366-comparison-open",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round2-1366-comparison-open.png",
+          "caption": "round2, 1366-comparison-open. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round2-1366-current-reading",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round2-1366-current-reading.png",
+          "caption": "round2, 1366-current-reading. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round2-1366-legacy",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round2-1366-legacy.png",
+          "caption": "round2, 1366-legacy. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round2-390-before-learning",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round2-390-before-learning.png",
+          "caption": "round2, 390-before-learning. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round2-390-comparison-open",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round2-390-comparison-open.png",
+          "caption": "round2, 390-comparison-open. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round2-390-current-reading",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round2-390-current-reading.png",
+          "caption": "round2, 390-current-reading. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round2-390-legacy",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round2-390-legacy.png",
+          "caption": "round2, 390-legacy. Native log UI using recorded-remark fixtures."
+        }
+      ]
+    },
+    {
+      "title": "round1",
+      "caption": "Initial captures; legacy views caught mid-fade.",
+      "images": [
+        {
+          "id": "round1-1366-before-learning",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round1-1366-before-learning.png",
+          "caption": "round1, 1366-before-learning. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round1-1366-comparison-open",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round1-1366-comparison-open.png",
+          "caption": "round1, 1366-comparison-open. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round1-1366-current-reading",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round1-1366-current-reading.png",
+          "caption": "round1, 1366-current-reading. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round1-1366-legacy",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round1-1366-legacy.png",
+          "caption": "round1, 1366-legacy. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round1-390-before-learning",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round1-390-before-learning.png",
+          "caption": "round1, 390-before-learning. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round1-390-comparison-open",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round1-390-comparison-open.png",
+          "caption": "round1, 390-comparison-open. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round1-390-current-reading",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round1-390-current-reading.png",
+          "caption": "round1, 390-current-reading. Native log UI using recorded-remark fixtures."
+        },
+        {
+          "id": "round1-390-legacy",
+          "image": "bible/shots/showcase/memory-comparison-20261007/round1-390-legacy.png",
+          "caption": "round1, 390-legacy. Native log UI using recorded-remark fixtures."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

@@ -18,7 +18,8 @@ const STUBS = {
   '/js/ui/backlog.js': `export const lineId = (w, t) => t; export const wasRead = () => true; export function markRead() {}
     export function logLine() {} export const logToJSON = () => []; export function logLoad() {}
     export function openLog() {} export function closeLog() {} export const logOpen = () => false;
-    export const logSize = () => 0; export function scrollLog() {}`,
+    export const logSize = () => 0; export function scrollLog() {}
+    export function focusLog() {} export function activateLog() {}`,
   '/js/ui/dom.js': `const node = () => ({ hidden: false, innerHTML: '', textContent: 'a line', offsetWidth: 1,
       classList: { toggle() {}, add() {}, remove() {}, contains: () => false },
       querySelector() { return (this.kids ||= {}); }, querySelectorAll: () => [] });

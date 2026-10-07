@@ -13,7 +13,7 @@
 // dialogue.js calls skipLine() and autoLine() for every line and choiceShown() for every set of replies.
 import { settings, AUTO_WAIT } from '../settings.js';
 import { voice, muted } from '../audio/core.js';
-import { openLog, closeLog, logOpen, logSize, scrollLog } from './backlog.js';
+import { openLog, closeLog, logOpen, logSize, scrollLog, focusLog, activateLog } from './backlog.js';
 import { whileUnpaused } from './dialogue-text.js';
 import { $, el } from './dom.js';
 
@@ -205,6 +205,14 @@ window.addEventListener(
     if (/^(Shift|Alt|Meta|CapsLock)/.test(e.key) || !ui) return;
     if (vn.hidden) return (swallow(e), hide(false));
     if (logOpen()) {
+      if (e.code === 'Tab') {
+        focusLog(e.shiftKey ? -1 : 1);
+        return swallow(e);
+      }
+      if (e.code === 'Space' || e.code === 'Enter') {
+        activateLog();
+        return swallow(e);
+      }
       if (['Escape', 'KeyL', 'PageDown', 'Backspace'].includes(e.code)) closeLog();
       else if (e.code === 'ArrowDown' || e.code === 'ArrowUp' || e.code === 'PageUp')
         scrollLog(e.code === 'ArrowDown' ? 80 : -240);
@@ -330,6 +338,8 @@ const PAD = {
   8: 'hide',
   12: 'up',
   13: 'down',
+  14: 'left',
+  15: 'right',
 };
 const key = (code) =>
   window.dispatchEvent(
@@ -357,10 +367,12 @@ function pollPad() {
       if (vn.hidden) hide(false);
       else if (logOpen()) {
         if (what === 'up' || what === 'down') scrollLog(what === 'down' ? 80 : -240);
+        else if (what === 'left' || what === 'right') focusLog(what === 'right' ? 1 : -1);
+        else if (what === 'Space') activateLog();
         else if (what === 'Escape' || what === 'log') closeLog();
       } else if (what === 'Space' || what === 'Escape') key(what);
       else if (what === 'log') showLog();
-      else if (talkOpen() && !typing() && !['up', 'down'].includes(what)) act(what);
+      else if (talkOpen() && !typing() && !['up', 'down', 'left', 'right'].includes(what)) act(what);
     }
     padDown[i] = on;
   }
