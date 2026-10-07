@@ -45,7 +45,16 @@ function play(node, flags, picks) {
         lines.push(`CHOICE: ${c.text}`); return run(c.go) || { stop: true };
       }
       if (s.do) {
-        if (['milestone', 'gesture', 'face', 'look'].includes(s.do)) lines.push(`STAGE: ${s.do} ${s.who || ''} ${s.state || s.kind || ''} ${s.to || s.at || ''}`.trim());
+        if (['milestone', 'mioLunch', 'gesture', 'face', 'look'].includes(s.do)) lines.push(`STAGE: ${s.do} ${s.who || ''} ${s.state || s.kind || ''} ${s.to || s.at || ''}`.trim());
+        if (s.do === 'mioLunchComplete') {
+          assert([2, 3].includes(s.step)); assert.equal(typeof s.text, 'string');
+          assert.deepEqual(hooks.at(-1), { do: 'mioLunch', state: 'settle' });
+          const actions = hooks.filter(h => h.do === 'mioLunch').map(h => h.state);
+          assert.deepEqual(actions, s.step === 2 ? ['offerLunch', 'sit', 'eat', 'settle']
+            : ['offerHelp', 'acceptHelp', 'handover', 'leaveForLunch', 'inspect', 'mark', 'return', 'settle']);
+          f['ms' + s.step + '_mio'] = true;
+          if (s.step === 3) f.bond3_mio = true;
+        }
         hooks.push(s); if (s.do === 'bondStep') f['bond' + s.to + '_' + s.who] = true; }
     }
   }
@@ -64,18 +73,25 @@ for (const scene of SCENES) {
       if (p.pending) { queue.push(...p.pending.map(id => [...picks, id])); continue; }
       routes++;
       const complete = scene.step === 1 ? !picks.includes('milestone_leave') : p.flags['ms' + scene.step + '_' + scene.who];
-      const gates = p.hooks.filter(h => h.do === 'bondStep');
+      const gates = p.hooks.filter(h => h.do === 'bondStep' || (h.do === 'mioLunchComplete' && h.step === 3));
       assert.equal(gates.length, complete && scene.step === 3 ? 1 : 0);
-      assert.equal(p.hooks.filter(h => h.do === 'period').length, complete && scene.cost === 'next' ? 1 : 0);
+      assert.equal(p.hooks.filter(h => ['period', 'mioLunchComplete'].includes(h.do)).length, complete && scene.cost === 'next' ? 1 : 0);
       if (complete && scene.cost === 'next') {
+        const transaction = p.hooks.findIndex(h => h.do === 'mioLunchComplete');
         const period = p.hooks.findIndex(h => h.do === 'period');
         const completionSave = p.hooks.findLastIndex(h => h.do === 'save');
-        assert(period < completionSave, 'Save must include the consumed period');
-        assert(!p.hooks.slice(0, period).some(h => h.do === 'save'), 'No completed-scene save before its time cost');
+        if (transaction >= 0) {
+          assert.equal(scene.who, 'mio');
+          assert.equal(transaction, p.hooks.length - 1, 'Atomic completion must finish the scene');
+          assert(!p.hooks.some(h => ['period', 'save', 'bondStep', 'remember'].includes(h.do)), 'Mio completion cannot split its transaction');
+        } else {
+          assert(period < completionSave, 'Save must include the consumed period');
+          assert(!p.hooks.slice(0, period).some(h => h.do === 'save'), 'No completed-scene save before its time cost');
+        }
       }
       if (complete && scene.step >= 2) {
         const replay = play(scene.node, p.flags, []);
-        assert(!replay.pending); assert.equal(replay.hooks.filter(h => ['bondStep', 'period', 'remember'].includes(h.do)).length, 0);
+        assert(!replay.pending); assert.equal(replay.hooks.filter(h => ['bondStep', 'period', 'remember', 'mioLunchComplete'].includes(h.do)).length, 0);
       }
       if (!Object.keys(history).length) transcripts.push(`\n## ${scene.node} ${picks.join(', ')}\n${p.lines.join('\n')}`);
     }

@@ -1,5 +1,13 @@
 // Named engine writes, consumed by runtime key builders and structural checks.
 export const ENGINE_WRITES = {
+  'game3d/js/places/mio-lunch/index.js': {
+    'exact': ['mio_lunch_offer'],
+    'prefix': [],
+  },
+  'game3d/js/places/mio-lunch/state.js': {
+    'exact': ['ms2_mio', 'ms3_mio'],
+    'prefix': [],
+  },
   'game3d/js/narrative/hooks/movement.js': {
     'exact': [],
     'prefix': ['shown_'],

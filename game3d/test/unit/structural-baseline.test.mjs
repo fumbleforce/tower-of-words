@@ -28,6 +28,8 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   // Old source regex missed direct gate runner events. Their explicit declarations
   // add provenance only; all ordered graph IDs and edges must still match.
   const expected = structuredClone(baseline);
+  expected.engine.exact.mio_lunch_offer = ['game3d/js/places/mio-lunch/index.js'];
+  for (const key of ['ms2_mio','ms3_mio']) expected.engine.exact[key] = ['game3d/js/places/mio-lunch/state.js'];
   expected.engine.events.gate = { card_red: null, card_ok: null };
   expected.engine.prefix.gave_ = ['game3d/js/gameplay/gifts.js'];
   expected.engine.prefix.shown_ = ['game3d/js/narrative/hooks/movement.js'];

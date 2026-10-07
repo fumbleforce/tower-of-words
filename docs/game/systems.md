@@ -79,6 +79,8 @@ Points come from:
 
 People remember things Eric did ("You caught her lunch bag when the train lurched.") and he learns facts about them ("Has corn soup from a can every afternoon."). Both show in the People panel under that person. The texts are written for the player; day 1's are in game3d/js/bonds/day1.js.
 
+Mio’s weekday B2 lunch scenes (steps 2 and 3, from day five) use the existing relationship thresholds. Declining consumes nothing. Finishing the physical meal or returned checklist records the milestone and memory, opens the existing step-3 gate when applicable, and advances to the afternoon in one saved Runner effect. It grants no extra bond points. After step 3, her later weekday lunch schedule moves from B2 to the east-coast bench; the unbuilt later milestones stay unavailable.
+
 ## Gifts
 
 Eric starts with ¥1000. On day 1 the only shop is the B2 vending machine. A drink goes into the Bag; stand next to someone and press Give. How each person takes each drink is in [cast.md](cast.md), What they like. On day 1 a second drink for the same person is turned down and stays in the Bag.

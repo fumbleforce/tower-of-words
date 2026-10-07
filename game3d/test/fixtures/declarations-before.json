@@ -2312,6 +2312,8 @@
       "hooks": [
         "day5Office",
         "teamDrinks",
+        "mioLunch",
+        "mioLunchComplete",
         "copier",
         "catTo",
         "chairRoll",

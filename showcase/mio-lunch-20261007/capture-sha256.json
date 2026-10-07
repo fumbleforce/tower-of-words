@@ -1,0 +1,4286 @@
+[
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/door-final/1366-ordinary-office.webp",
+    "source": "game3d/shots/mio-lunch/door-final/1366-ordinary-office.png",
+    "sha256": "b49a7b3031c5cf104922efc24ea64abff3352dfc4f5d68057c692990c2f4b4e7",
+    "size": 781458
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/door-final/390-ordinary-office.webp",
+    "source": "game3d/shots/mio-lunch/door-final/390-ordinary-office.png",
+    "sha256": "2970ab1c40186957a11a80186c01df50c4b87e91a872ed0f67793a74c23165dc",
+    "size": 204432
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round1/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round1/1366-2-bento.png",
+    "sha256": "e036f806fb1f2a48ff9dbda7cf34c5af747c43dd179ecad49825fab24976d01b",
+    "size": 645370
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round1/1366-2-bite.webp",
+    "source": "game3d/shots/mio-lunch/round1/1366-2-bite.png",
+    "sha256": "12e633c97dd230f215913ef617884ace79dea75d9c275479ba2beffd26735c66",
+    "size": 643386
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round1/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round1/1366-2-cable-hook.png",
+    "sha256": "9a1a727ae2ccbd2445bc074c04e8abdbe925b4d7e348928808808abb4937cbe6",
+    "size": 616678
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round1/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round1/1366-2-cable-pickup.png",
+    "sha256": "891829ea01dac4f524dddd2e4bd82d8fb98d013f93ba02ebc2b66f3a81ec8478",
+    "size": 649738
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round1/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round1/1366-2-finished.png",
+    "sha256": "53196cc84baa86204b2263ca311eaf57166833f8611b2277140f4a9dbbd75119",
+    "size": 679272
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round1/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round1/1366-2-layout.png",
+    "sha256": "acfe3022f7e8a419266200a124aab49dd11ec01b16eff931ed51f4f4a79f347d",
+    "size": 52990
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round1/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round1/1366-2-line-1.png",
+    "sha256": "4e14eb587677a9db1d53f718828d86487be871b7d191b0e0c8b1f0f1d8ef8acd",
+    "size": 803826
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round1/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round1/1366-2-line-2.png",
+    "sha256": "184fdef61ca16cfd9cd869a75130784d38ce07b08b0a2f64c6bdece0eee6a208",
+    "size": 779968
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round1/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round1/1366-2-line-3.png",
+    "sha256": "90219c58c5074fa766e9522bdbc37cd11517f8cda774e0b5ba69997b6bb0ba60",
+    "size": 818766
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-2-bento.png",
+    "sha256": "f0b730d61d19b7b31069e82f6be9244f938395eb3a590940b69822ef0143094d",
+    "size": 184650
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-2-bite-mouth.png",
+    "sha256": "0b85499d34f52dd9116d80b595c73afda1b3d635c5777be9140e16d494f84c5b",
+    "size": 184294
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-2-cable-hook.png",
+    "sha256": "488d757d12f7c0b287fd91a77af451b29f355b3ddb0df52c03ab358d7975753a",
+    "size": 182260
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-2-cable-pickup.png",
+    "sha256": "7e05a3dc391c41296ddf525411685a0aae8dd6649d48c3aa535e212464a64b88",
+    "size": 191376
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-2-finished.png",
+    "sha256": "00420cab32f23ab77105ad8126cb6867da00ecd919a33e433b7209d61a25a1ac",
+    "size": 165280
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-2-layout.png",
+    "sha256": "100d1b2f966c4b44f793e67aca1f80e907feadfc5e4bd22e0301e48e8fc88a5f",
+    "size": 198802
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-2-line-1.png",
+    "sha256": "e8949b700b59dc61afed4c970c81f8a9fb96bd7bf6632b94f3349b42075d3455",
+    "size": 199620
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-2-line-2.png",
+    "sha256": "4c31e00ee40fab030e90a3631c3d6a85cba6b5c3e02977ef30bfe3ec1b85c953",
+    "size": 205400
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-2-line-3.png",
+    "sha256": "4c699f10e9d82dbcb930ff080416677160c2c5120c9db64bb7300e383ca4676c",
+    "size": 212592
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-bento-pickup.png",
+    "sha256": "0a174799c78e56a8632b34f810636397f106ecf820acb75820e7e35dad9df3ff",
+    "size": 191800
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-cable-hook.png",
+    "sha256": "514e7b1f5dd7f0ad57dd262aa034ead01839284f0b687903ea2d1cf74845a273",
+    "size": 182852
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-cable-pickup.png",
+    "sha256": "d667b19216e388f39efe4fde1b20682f2fa30124e1cd92e4aa5fb3f5b2b69a2f",
+    "size": 188788
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-checklist-support.png",
+    "sha256": "85df2e3f6b30a75fd9c41d602b8414a829613d1f59c8fd7974cd3148124826a2",
+    "size": 196602
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-finished.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-finished.png",
+    "sha256": "bc33373faef045ac8feee8366793300599017149ca0bc116648579e432c853f7",
+    "size": 183970
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-layout.png",
+    "sha256": "27a1b508ff13446b14975c62353bc17069ccf8e9f5b7992e7f7654a911ca33be",
+    "size": 199530
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-line-1.png",
+    "sha256": "67b8f4dd4db40fd3b1c71cc9d0ed74714bf2ac1249162e472ab330bab8529c77",
+    "size": 195394
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-line-2.png",
+    "sha256": "087e00b6c842ef83d6b02bc97388d38daf395fe51ea32eb41331a12978370f20",
+    "size": 197138
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-line-3.png",
+    "sha256": "7cc61de073e62e19de9c614e280f7767d4772769d4e4e379a7f78d07b361e4ff",
+    "size": 219490
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-line-4.png",
+    "sha256": "41f2712343e01b78476cb15f5baa5e79ac1556686ea17ec24489f406dfe918bc",
+    "size": 210624
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-line-5.png",
+    "sha256": "26313ea2382ab4076f2b82338a3dfcc622e546a130a16e06ad19245bd384c9bf",
+    "size": 214036
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-line-6.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-line-6.png",
+    "sha256": "1562b22de159d3072a81a86005b9ca3dce0ac4143963915844226ef1a9274753",
+    "size": 218090
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-line-7.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-line-7.png",
+    "sha256": "7403f3f40ddd30d746fb8763344115f1d96a30f28580109fe8550ed6142bc789",
+    "size": 207752
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-marked-sheet-pickup.png",
+    "sha256": "00cc59d986411634d8f0962e91f80c2e792e4b81e84053509e80ef0ac0618682",
+    "size": 171310
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-pencil-grip.png",
+    "sha256": "412153d4520a8f88f037e4209c00cb4db2def7ba5652842d1c8f7bbced00dd53",
+    "size": 189406
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-pencil-tip-mark.png",
+    "sha256": "fc448de46813f50686cfb55fe7a3fdef03a38c5116c9636a6be817ff894cfa99",
+    "size": 188178
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-sheet-handover-taker.png",
+    "sha256": "2c1f6e5f25b8b29b1ed8cdad1d82a4740ec613b5f07ceecfa8ca1ce1ba80adb5",
+    "size": 202288
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-sheet-handover.png",
+    "sha256": "cbf65a92cb7777b2ba3b24fe5a51d2765f45347716a0ee0127b898c4dad14e1c",
+    "size": 201848
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-sheet-pickup.png",
+    "sha256": "fe0a2dea40381d863025be6d465978c21745e572bc93ad99892b88109ffd5b59",
+    "size": 188474
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-sheet-return-taker.png",
+    "sha256": "4ed7db21cda8347a3744284f9dc8df0dbc4a5d7106acbe75805fa4dea0fc4664",
+    "size": 197876
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round10/390-3-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round10/390-3-sheet-return.png",
+    "sha256": "5e95ae13d47dd69b828246380bda70626fbde46dfb81f2edcd6f21f7395026bf",
+    "size": 195898
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-bento-pickup.png",
+    "sha256": "272f2e74938d4c9fcefd35c71ee4fe91ee27b7e1113797d2a442c6c06c1d7127",
+    "size": 639938
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-cable-hook.png",
+    "sha256": "9e87212e65971a31b3f41a664e6a1e6ec318408663451e26174fb0b138cb1c73",
+    "size": 637884
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-cable-pickup.png",
+    "sha256": "fa19c9260e382f5902bd4fc432ffbd11d41bc755d58ae3f4f877c4fc88470ac8",
+    "size": 631470
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-checklist-support.png",
+    "sha256": "5e17459f4f2e5e9689756f0e9e6ee3abdb9a40f1deb12e409758ea66e5e17b03",
+    "size": 683080
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-door-out.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-door-out.png",
+    "sha256": "c9bb5aa1a2de49a6dff875a82ec01bff6d0ba703a2fed562bf01cac288516312",
+    "size": 592456
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-failed.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-failed.png",
+    "sha256": "2b9ebe4456b4f5bdd99fd3239ee0f2949a2175f936aec35ba55e88be29668ce7",
+    "size": 884332
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-layout.png",
+    "sha256": "4045ac8523e2f55b2cb7de0db586c1aef4714d776c19c8297ae6c55f53830cf3",
+    "size": 776358
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-lift-out.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-lift-out.png",
+    "sha256": "0653ff056dc0495f2dd7eac687a3f27b1c0a33963e40d3573d4288a5282f6369",
+    "size": 620942
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-line-1.png",
+    "sha256": "d7fdbe945c684e84aa7e107d9971ecf5f38e60589672d8bb6a9a2458fa3066ea",
+    "size": 805096
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-line-2.png",
+    "sha256": "9739ac3845b897d167d8d76adfe74d0e6751a41e0ed1ac85a3e5727d78d50a1d",
+    "size": 815624
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-line-3.png",
+    "sha256": "5d86f7b8534aa9ac0d760391d3188d9b9001d90135276a4498f28712de76c9c3",
+    "size": 818866
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-line-4.png",
+    "sha256": "8c345185e20302be52034bd6899f2a6c0d3720247a93d27149000722e553294c",
+    "size": 832982
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-line-5.png",
+    "sha256": "d23ec766226b1898c2e649d0198bc67af76730e35b8fa191c94b1ad484b3699c",
+    "size": 666850
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-pencil-grip.png",
+    "sha256": "a8b0962a7e495c7ca1b0e2fd8337297a92b71c4356aa8c7755df114ecee36618",
+    "size": 679230
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-pencil-tip-mark.png",
+    "sha256": "343d6057299b3420ca1401b9e183630f42701042510728f757c49c7d830d8de2",
+    "size": 675446
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-sheet-handover-taker.png",
+    "sha256": "2499ecfa23100d8de0ec7f26d6e8c23b6f3c40bf3007ca312744cf46ea97c79d",
+    "size": 685734
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-sheet-handover.png",
+    "sha256": "55439a415d502792a92f23d3b92e6d8caa8662cdd744eef5b54ce70523529902",
+    "size": 676472
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/1366-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round11/1366-3-sheet-pickup.png",
+    "sha256": "e64c5a39c34db495947700615bb4004d9710d605548eb41ba71faf4266d5360d",
+    "size": 622522
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/390-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round11/390-2-bento.png",
+    "sha256": "49d264e97dcaab3b011255522cdfd19cff2d6493d65e606ba6a5756be6f237a6",
+    "size": 196410
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round11/390-2-bite-mouth.png",
+    "sha256": "00b1c02b4ad58ab6a1b5ee0c0b7a40f79773b2ca6db5af53afecebea60549f00",
+    "size": 195022
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round11/390-2-cable-hook.png",
+    "sha256": "95e82e9841d0262d79d9da05602cab8532d3f94e03a9447c5abf9fd4bc6d5587",
+    "size": 184300
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round11/390-2-cable-pickup.png",
+    "sha256": "0a84689ddc66090bc7d165d06f1d6e07ca965a4fa50fe37964e074a3d2210c9c",
+    "size": 188012
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/390-2-failed.webp",
+    "source": "game3d/shots/mio-lunch/round11/390-2-failed.png",
+    "sha256": "5548fb04101e15f7bfec23609225562b1ff9903b095e0c4cef183221fc367317",
+    "size": 191524
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round11/390-2-layout.png",
+    "sha256": "bf9dd56d8c9ed1ebbf79bcbbd2f3996adc1ee7c7b568e6219d9951b417924c85",
+    "size": 199508
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round11/390-2-line-1.png",
+    "sha256": "c68a50af3b22e7bf08fa1832a2c73e4a869f5f1c411c3ee4877f07069c0bacb4",
+    "size": 201480
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round11/390-2-line-2.png",
+    "sha256": "d2d0cdd04bd16b3fad89252b42f8666e5a562c64029096ceacbd7fa110d2df76",
+    "size": 204098
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round11/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round11/390-2-line-3.png",
+    "sha256": "573150629f02e9f7cd0e3b721be2563daba8e809d9764d3c2718f89168d60d93",
+    "size": 212282
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-bento-pickup.png",
+    "sha256": "8e11a6a05c596b70ebaeab9a21894e715ee439c0b6ed1cd8f8e47d9b73127e3b",
+    "size": 641758
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-cable-hook.png",
+    "sha256": "6893005ee1b08ec6d8f0c3a2d31899a86359f1cd0db51f5270e1763602434baa",
+    "size": 634986
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-cable-pickup.png",
+    "sha256": "032ffaac0ff203769f449c699f77fd4beaa146afbfd9f176f01c9f875b57f615",
+    "size": 630080
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-checklist-support.png",
+    "sha256": "2775073547498edbc56b871b12bad37be3eb06dcf4f044cb7ab760ceff08a3d2",
+    "size": 681098
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-checklist-support.png",
+    "sha256": "8a668f357ceb5fc6bbb4160aaf2a53ce73cb5c46d692e9cee4535c87fb8d7268",
+    "size": 681402
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-door-return.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-door-return.png",
+    "sha256": "4b853a81490c235fa406020b175c9e8a605d59c681474078f05005ce8fed5205",
+    "size": 603360
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-lift-return.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-lift-return.png",
+    "sha256": "151fc6ace8baa8279c40e5b6c5b18cc5d2bb0d77dd5be98b6689fa57f78fa5f6",
+    "size": 563320
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-line-1.png",
+    "sha256": "5cc0be5c6f0d11480059613314d979008ffb55f103f5bd4ee6069d1a70a2e94d",
+    "size": 909628
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-line-2.png",
+    "sha256": "6759eeb780466b065796dcc224f888d77c976e35163e478752c7b5b5650077d7",
+    "size": 794286
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-line-3.png",
+    "sha256": "a434b8f1e2a8f64d9f2deeeb1e7a0811f23aee8ffadb2edaa220125c832bf6f6",
+    "size": 818996
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-marked-sheet-pickup.png",
+    "sha256": "30a6133e79e44d4c79c4433953ea81e3779c318a0393227b245568b246a7597f",
+    "size": 608496
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-pencil-grip.png",
+    "sha256": "0ffe832c70f9655660a519bdeb276097978aa9da2d11be1f479e727cbbb71092",
+    "size": 675396
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-pencil-tip-mark.png",
+    "sha256": "5155ff4ef999c116d0c80c23837be2ea384bb3e9aa1a50f9060f120475784324",
+    "size": 670710
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-sheet-return-taker.png",
+    "sha256": "fbb2d6f601c9913b1e3a7481fa129d726484e40c9be7c67192ea28eaa6bd4139",
+    "size": 686408
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-sheet-return.png",
+    "sha256": "b4a607c1be0efd5374d287efa5ba7837a7f38b3bdf266eeb37d5f824c9de30a1",
+    "size": 684120
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-continued-start.png",
+    "sha256": "cf38c3b21ed13ac976a05d28514b1ab199edb36ed3c4cbe88de7bd5d66398847",
+    "size": 647802
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-door-out.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-door-out.png",
+    "sha256": "79065137de781b40511a4de4c144ce3eb5b248fa3e08ccf50e5625aeb0aadae5",
+    "size": 590518
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-finished.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-finished.png",
+    "sha256": "3fb39965239d7f474d2024629be3dc370a92eef3ccf9e03dc7b266d73061d586",
+    "size": 685890
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-layout.png",
+    "sha256": "0c62cc29fec3735c84c9d3e034bab45c2f2d05e8cfb0d8b41bcf77603c9fa957",
+    "size": 778278
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-lift-out.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-lift-out.png",
+    "sha256": "9fb90fec69537fcf07277bb3d22ce95144873fe38a76d90b08387ca556997470",
+    "size": 618414
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-line-1.png",
+    "sha256": "a7dda7bc3adc07d2e5245f9a9b216163c5803070c69a88578ee07abfdaf44bc8",
+    "size": 805116
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-line-2.png",
+    "sha256": "9fc8b13195360f84067aa49191b4711ee8ca7e9d52168b32c3e9999c7502ebb9",
+    "size": 813748
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-line-3.png",
+    "sha256": "36b87daeaf19cb3da6c6db2f26aba137bd7bca190d402222a38f5601018abd95",
+    "size": 796522
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-line-4.png",
+    "sha256": "6b04ed6a8646d23f977cf3d1d36b6c642fc1841765864470c7c013f9cea6243b",
+    "size": 819970
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-line-5.png",
+    "sha256": "a7cf04c90b07df35bcfd843522e6fbadba74b8c1fa8aeadce231391416d2f389",
+    "size": 727822
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-pencil-grip.png",
+    "sha256": "158ad8b161e3ead2d05dfef29464bf34cae18807c3fa250a0e33c64d01598100",
+    "size": 674294
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-pencil-tip-mark.png",
+    "sha256": "056501dfcd86843e486fb503ee47e902af8c5f7810b09c3e2ff8ee91936d7e7c",
+    "size": 670238
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-sheet-handover-taker.png",
+    "sha256": "ca688348fb142c8ba4ce464d1412bd31b4b08dc2c3c600dfe36ff49031ca4241",
+    "size": 690888
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-sheet-handover.png",
+    "sha256": "f9094fa7b20c3f3ae548488bdd8861f9153eb344ee0570747e4a6d1b53c16cd7",
+    "size": 676596
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/1366-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round12/1366-3-sheet-pickup.png",
+    "sha256": "9b70aabeeda65653a4ea00153fcb995d6039875ff827445cd3fb17a5dbbbc66b",
+    "size": 625184
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-bento.png",
+    "sha256": "6525c764469032233b761e34a78f89673f7c42adfa496282bbc62620aab8f0b4",
+    "size": 196696
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-bite-mouth.png",
+    "sha256": "4e85251b5edeb32a30fbdc670f0e999ce748c82fbac887c686d3e5f6ddbca81f",
+    "size": 194804
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-cable-hook.png",
+    "sha256": "5068e5b6a2c15b67ae9a51ab35a3e7a2f368bb57dea6e27deac603200c5cf5ca",
+    "size": 183978
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-cable-pickup.png",
+    "sha256": "aecb18e4eaef5d502d1b2273810ba5e6d47bbcd53a318a8224d40058ec563122",
+    "size": 186974
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-continued-bento.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-continued-bento.png",
+    "sha256": "bd6426d49f56cdf69e58063be1bb02ffb3d2abb7c8c9a475f3e2d74d7d9e41f2",
+    "size": 199832
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-continued-bite-mouth.png",
+    "sha256": "7628b88a05c5c5f6ed81d9dd094299ce098cf70bd630e99b636b31f64e48b13a",
+    "size": 199144
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-continued-line-1.png",
+    "sha256": "562809a928e74470eecb618eba31254ac7483dbec2ad65330182920d288ae17b",
+    "size": 207428
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-continued-line-2.png",
+    "sha256": "f4ea883fa075c9640e860d20cad3af9259ee917c4a46d92d56ec0d09d12d107c",
+    "size": 212472
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-continued-start.png",
+    "sha256": "bc3451aa488ef22d2a2eb4be45256cef23281ac0e0d03701f04854878ced76c6",
+    "size": 179610
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-finished.png",
+    "sha256": "7f34eb264cdac587e3f4d9b503c906600a173fa3e48ae07b25549e91478c6d8f",
+    "size": 144854
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-layout.png",
+    "sha256": "25fe1366208614b48a01dd32eec3b446471e617b19a6f4d1a62e39a8ed4087b8",
+    "size": 199526
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-line-1.png",
+    "sha256": "d14dc3043dda240ffaa41c650925b7ae1af0f183fb24c35a31070c2f3bde7ec9",
+    "size": 206116
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-line-2.png",
+    "sha256": "8847755d73dca9d2af76efc096a0b056c28b92016ff38f1d1d5e6c30391e27a0",
+    "size": 204464
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round12/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round12/390-2-line-3.png",
+    "sha256": "ebefd3ecac674ea7bb329f1a712e22af1a02ea09ec23860bc76b5a4f70452f2e",
+    "size": 212528
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round13/1366-2-cable-hook.png",
+    "sha256": "4a2d1833020dded8a0347733afd4f075ce385c41d011dad20805124362e088f1",
+    "size": 637796
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round13/1366-2-cable-pickup.png",
+    "sha256": "91886168442d1a22172cc4ba1fb75b2e33e9ba9eb9390cbbf7f11c581b522cb6",
+    "size": 630392
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round13/1366-2-finished.png",
+    "sha256": "54da010816e1ea09cd25ff7939156b8adbcdae88ec4e2b3c0e0eee61b6594a0a",
+    "size": 547960
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round13/1366-2-layout.png",
+    "sha256": "0a5f6c170d7ec100ec38577d19f0baacb9e14207bcfc9230c9aedfba40cbbcee",
+    "size": 776838
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round13/1366-2-line-1.png",
+    "sha256": "03869ea2ed91a370ffafd3b86aa1bc0ddd8f955f96b8a5b99a247beecbe84f15",
+    "size": 813182
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-cable-hook.png",
+    "sha256": "acc463b56e7b46bb2e484092c5770f994eb8aaf0e45477e3b5e5ac5630f81b65",
+    "size": 183926
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-cable-pickup.png",
+    "sha256": "4e11145884cbda31208c1d2f8726c8462496285a318327fbf0956ed48f78f1df",
+    "size": 188616
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-bento-pickup.png",
+    "sha256": "740936d33a80a38509ca4ce65dbfb1bf1b1a1235b203f2727ec6b42be887bdf5",
+    "size": 198798
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-checklist-support.png",
+    "sha256": "6b92636928646aa57475ad41d6a6b140cd327ec507224f730a49b71af7e63f77",
+    "size": 200896
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-door-out.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-door-out.png",
+    "sha256": "34c23450469b3e0160ebb99966c22d663397115efd1faa95c85528878e8b3ed2",
+    "size": 176122
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-door-return.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-door-return.png",
+    "sha256": "4b3f4f938951f819a11a4f70969990ddf83011aa81339d7f4b04260588840f7d",
+    "size": 177472
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-lift-out.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-lift-out.png",
+    "sha256": "340a2b3bad78f40afab8ef9869567e5466ad01a121eb2c75ee1ee4b9573a6d84",
+    "size": 173126
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-lift-return.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-lift-return.png",
+    "sha256": "7088f107c5bd76599ad74020dd51a796e483159c3f20f5b4c60ccaa4e01c1db0",
+    "size": 164922
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-line-1.png",
+    "sha256": "5bb0a7b692d4f37715d6d5951f12e235a9a33b1e299cd3c7a304e77d6d012d4f",
+    "size": 220756
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-line-2.png",
+    "sha256": "ef5d0372415bf2b5b6404740d058f861e507f805bb4f27fce7442b7e7712c685",
+    "size": 209754
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-line-3.png",
+    "sha256": "2f0ce778e1c9d7457f446b3bdd48340bc99cb10059ea8f432fe8c86507ff6b4a",
+    "size": 210586
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-line-4.png",
+    "sha256": "7c614768f8683b08c4a1eb75aabe6fee2482aec1bfac2970734a0d7f896ccbb2",
+    "size": 219084
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-line-5.png",
+    "sha256": "1c0b7c707faf8279501f49d41e7dd85705985296150bdd7582716ee79ce4dfbe",
+    "size": 211196
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-marked-sheet-pickup.png",
+    "sha256": "0bf62fedc08dbd9ceba196b99f0f66ff4bf790fcbe4720ab5b1bd7cc3dadc6a9",
+    "size": 175514
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-pencil-grip.png",
+    "sha256": "04a743f6d141e4a353fccfb0cdcb36d798807a9a7c37ad51f3cf733ae14caa29",
+    "size": 195312
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-pencil-tip-mark.png",
+    "sha256": "86488f4ad1b357940979f56eae759ce7f08f5c6b65c252578d2c0387a301cbfb",
+    "size": 192986
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-sheet-handover-taker.png",
+    "sha256": "e357a0e59830fb8a282a9688d94d817754218487e5cdca8ed7f9da3f9049e194",
+    "size": 207984
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-sheet-handover.png",
+    "sha256": "41821aa6d8a58886edb43788edcbf8d59f0c519667b4c61d066a3d7f5e5a6914",
+    "size": 205874
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-sheet-pickup.png",
+    "sha256": "ec890ab08ea0fb7a09e22bd09858abf0293fd71f71158823b9c655a38bb87cf7",
+    "size": 228624
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-sheet-return-taker.png",
+    "sha256": "0574c79b41012632c9a1280ce5dd6923654d77caac96bf517bbcef622c64e9c2",
+    "size": 202444
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-sheet-return.png",
+    "sha256": "339f2f8c4b287bbbd627fb899af6e409ab345824803110ed6127e5f134d9730e",
+    "size": 203132
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-continued-start.png",
+    "sha256": "640a222885c200c9c40077ed174e99a26c9db9e7d00e8c0175caefa5603511ee",
+    "size": 197114
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-finished.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-finished.png",
+    "sha256": "3532dad2a227fbd827ff92212000f869644c4fed9171c8611179e3e6b7066acb",
+    "size": 213536
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-layout.png",
+    "sha256": "93a8dea7cae5355eb02ce81bf5500ac05a79f37ac2aa0954abb8c0d7f755e2d9",
+    "size": 199648
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-line-1.png",
+    "sha256": "0db22d6517947f02674aeaebbf4c19a5af0eb9b73fb528f911f0fb230e30a745",
+    "size": 198260
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-line-2.png",
+    "sha256": "67b23a31adca7b4711de70a8959a3bce6080d45af3776085d51ec80dd6bf873d",
+    "size": 201278
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-sheet-handover-taker.png",
+    "sha256": "050f9dda211e838d2d399a7c99ab8874fd7fc71777e3f52210bc71cfff93012d",
+    "size": 202480
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-sheet-handover.png",
+    "sha256": "cff8a7ef1147438aaa687f586de1451ee0a6dca4824fd5aa73808e73c91f1c1c",
+    "size": 202116
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round13/390-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round13/390-3-sheet-pickup.png",
+    "sha256": "a442a9f08973770b2a2195101b97389f1a241decf7a73cdf9007016371ca0f28",
+    "size": 186336
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-bento.png",
+    "sha256": "006b8ad06f4105fe5d25393b7bf322850909494b48708752eabc2dad7a8294da",
+    "size": 700076
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-bite-mouth.png",
+    "sha256": "69e2122ee718e442cef605683c3d36b8efda6674f923ef1c611a49438558afb9",
+    "size": 671340
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-cable-hook.png",
+    "sha256": "9b3bee089b556edfa43805660e4b048abbeff6fce0b9f333ee8ea4cbc2c2ccaa",
+    "size": 637732
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-cable-pickup.png",
+    "sha256": "25dcc3358ac40f5e6a21d45960b8b3cad8997a7b053d8270760ece08bd55d711",
+    "size": 626648
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-continued-bento.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-continued-bento.png",
+    "sha256": "fb65f3e6e390bc18c1c6253fb2d6a8e3a5328ae26d06a3f3f5dc8292cb39d301",
+    "size": 704606
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-continued-bite-mouth.png",
+    "sha256": "cc90e90f9e658373cd3b540ccd27de5b6e68fa9a5d228ac6a98859b2a77235c3",
+    "size": 669512
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-continued-line-1.png",
+    "sha256": "0066fb25335b63d4d639b0c86ee8db5bd5095bd4d687c54abe6e09454de1b83b",
+    "size": 833858
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-continued-line-2.png",
+    "sha256": "a141be16ce680e19d8eaa270ff07219d0994234f9453d7d9d95c37c082fa829a",
+    "size": 866128
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-continued-start.png",
+    "sha256": "539d7343451da5781189c06409d68213f5492dec0782b41f15b11827f1099975",
+    "size": 706616
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-finished.png",
+    "sha256": "c12435adf637a321776f6575eabb849eecb7b387c8cfe2bc4cdb045956301423",
+    "size": 557618
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-layout.png",
+    "sha256": "43e2624b63399e924ef53c9afc07db8e1a3846f67171c27fda5430d971dcd058",
+    "size": 777680
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-line-1.png",
+    "sha256": "c97e4138fa159452856caf124b90ddf85da0334065cfabfc0553d2282ae7f7c6",
+    "size": 815158
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-line-2.png",
+    "sha256": "0621319fe8120719d143cecf0e83bb63733f8f3b5adc7db47de4c5fc72d8186b",
+    "size": 835524
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round14/1366-2-line-3.png",
+    "sha256": "347a8204ff86ddf5f40b8b7b51ca884712799217f7c8a0499bac3070ee938bdd",
+    "size": 865860
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-bento-pickup.png",
+    "sha256": "811ee3d4a7d6888c0eb37b79d7616769004459da3d9ffb6ef484b183ca1adc39",
+    "size": 190600
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-cable-hook.png",
+    "sha256": "6aa528e849262e12d68f78b91b6eb1af6ae0bb62192c61541577ee5dadfba8b6",
+    "size": 183714
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-cable-pickup.png",
+    "sha256": "80e2d6aedd254a164ac130e525fe0d10e8fda59e75b28acd92dfd7f64112f4bf",
+    "size": 187256
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-checklist-support.png",
+    "sha256": "f0e034a368f0bcd809d52c3de65e54c723717cb3d225b1319c2ca3928d0c3ac3",
+    "size": 195442
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-checklist-support.png",
+    "sha256": "e57da70e7e20943684908b3e51183d2596d61da7a4c33872cd70350ce19d6b45",
+    "size": 201282
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-door-return.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-door-return.png",
+    "sha256": "89eff31a7dbd34b08ebdc85c92db804f344fa86c2d484ab285c4155eaff93d7f",
+    "size": 177332
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-lift-return.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-lift-return.png",
+    "sha256": "f6443ad9e0dd386dce3dbf3af067b430ad8092abf4688f43c72199419785e56d",
+    "size": 175096
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-line-1.png",
+    "sha256": "0862c5121dc9f67b3a7fed93979367b9479d8fa67e28b51b71e9adfbd7607d46",
+    "size": 233260
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-line-2.png",
+    "sha256": "6b7d4ba9c276887a164aeeaa8e9e1f9625ed7cfa43489a0d0ab75176bb5893b6",
+    "size": 224936
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-line-3.png",
+    "sha256": "a2e997a69111835f7633b0914a5e0e28d5206e45611de138c42b2376d5f0080f",
+    "size": 211020
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-marked-sheet-pickup.png",
+    "sha256": "e225bc04b109589e665c8f59ab1f54a50870ce9bc0f94126725e9b271e6b9369",
+    "size": 175774
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-pencil-clip.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-pencil-clip.png",
+    "sha256": "77b305a66e2a99bdeb8c73129c7679db63c450cda195472b0f1b41450c536464",
+    "size": 194506
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-pencil-grip.png",
+    "sha256": "2d526a5d0ca1b61134711dcd15b2e7b848ca6b66d04c267c10c0f5cac6e3ec86",
+    "size": 192924
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-pencil-tip-mark.png",
+    "sha256": "ba3fc3af2521129346ac8cb2991030f10235d5c6dd1ae3f8bb8d8f0428ab6ccd",
+    "size": 193604
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-sheet-return-taker.png",
+    "sha256": "16f74f684da6b216d34d8362f00d3f59c5ecea001631488ff3d99c032c76a518",
+    "size": 205486
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-sheet-return.png",
+    "sha256": "ec06b21f058ca461f57d245b1f0b5daf105df19869df7e2fc52e4fe57ee5aef9",
+    "size": 202142
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-continued-start.png",
+    "sha256": "bd8ee4dd54671f432aa693ea15cd5e51459c5bf8add4b4daa3e75c08e9b08702",
+    "size": 186882
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-door-out.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-door-out.png",
+    "sha256": "6091f8d080ddaf8976a85f53d9f5dcfda2f139b2a7c80f6dfe36b643293cf231",
+    "size": 171534
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-finished.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-finished.png",
+    "sha256": "b20593585d91858decb535c89b7533415dbce2bfe77d8e90cc702f7409a084b1",
+    "size": 181776
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-layout.png",
+    "sha256": "378b1f7464192c8a1b1028d7b86b629eca04a9715a92022553725ffd0e78eedb",
+    "size": 200022
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-lift-out.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-lift-out.png",
+    "sha256": "2756008a942573111e448254b6541221c6b077f6d0d1c01c073759124a0dfdd3",
+    "size": 170000
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-line-1.png",
+    "sha256": "232c174cc862e8a61371f3ee5671d8676e7eab15516f5fe383d27d3938d65b03",
+    "size": 196898
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-line-2.png",
+    "sha256": "b78bb2c38802f60ca5252aa01edfe879c4f45cccc87b510351cb4d40abfc095d",
+    "size": 201022
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-line-3.png",
+    "sha256": "4d5e7320e32221f3df85ce3048b3110a72f498fe06979d4a2f6fe23ca7a94424",
+    "size": 221508
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-line-4.png",
+    "sha256": "f01df79d337f5929a081f79353ad715fb9462abe3ae0b16d730b6f8f9157e20c",
+    "size": 210130
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-line-5.png",
+    "sha256": "c062917adf3e6cbbb29680eb379ef1391f93681e47cf23421981e75ebeb4aa8e",
+    "size": 202466
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-pencil-grip.png",
+    "sha256": "0cec54d7269c565573a7f1a1af2d9aa03c6d10adf0d764d71064ecc50d9a9895",
+    "size": 190774
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-pencil-tip-mark.png",
+    "sha256": "15226fb8abf40f8e7109149c9a4432b932dc1beaf0e70ff6dcd975d897385ef8",
+    "size": 189360
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-sheet-handover-taker.png",
+    "sha256": "d3ff0ffb467bceaf51c82a13b2e23c9b9e8f50a7e5ae1746bcf84ceef0e256d3",
+    "size": 201424
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-sheet-handover.png",
+    "sha256": "16ca6dc0b2d4ea89a8c4353dcb9eb945d66d245109e0a06e2f1679433c582592",
+    "size": 202094
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round14/390-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round14/390-3-sheet-pickup.png",
+    "sha256": "4b519e9f84aea8662d5f37f16cb81879cf67d0cfa1f644e0259263431f775b34",
+    "size": 187266
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-bento-pickup.png",
+    "sha256": "f269b79ead534175953732225e460ed85939026c7285c974e763f9ad6ee41f52",
+    "size": 639396
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-cable-hook.png",
+    "sha256": "f1ed396e5e52df3f46685a3ed793c9b391837cfc62e2984f80bfc8384537bd74",
+    "size": 635204
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-cable-pickup.png",
+    "sha256": "23e1e7ae3dd49ed3c5b1e03d745bab1dddf442038fefca601f230ab2cffe7416",
+    "size": 626874
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-checklist-support.png",
+    "sha256": "3d770808a1335e49fa58b040eb7411cc85bc4be12c0269df9a0014d20c078316",
+    "size": 682004
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-door-out.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-door-out.png",
+    "sha256": "217e3c16a1e09094974db2e6e7a7daaa296884e036e77274f007da351bfcf281",
+    "size": 594582
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-door-return.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-door-return.png",
+    "sha256": "f8dc2ab1a9182f278bc48a3e9f38da9e10ad129b7cef8ff2c4179863eca904ca",
+    "size": 602422
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-finished.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-finished.png",
+    "sha256": "c9add7f9d150f83c36902897856c68d631262c592c19d80da6d6cf38671951cb",
+    "size": 674110
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-layout.png",
+    "sha256": "1de24cf220dfd6b11fd1cd3cdffb50703dff783ff5022f9a68e95b697f9dfcdc",
+    "size": 777406
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-lift-out.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-lift-out.png",
+    "sha256": "8c62d482d89657003df19a01fc8baa43a86ce8fed3abb5d25332a2f9b499ff48",
+    "size": 620728
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-lift-return.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-lift-return.png",
+    "sha256": "8dd5d987b21e28766594ec74a87f9beef705b62bc180beac89c221f94238bfde",
+    "size": 678680
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-line-1.png",
+    "sha256": "d0f89e982326040a4d8f21d5777f5875d3864be314d863ef9c6025dcb84abaf9",
+    "size": 811504
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-line-2.png",
+    "sha256": "163c1a8709fb26b17fe3174771beaa6dfe32f1b282769437eeba4a090421ed30",
+    "size": 818914
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-line-3.png",
+    "sha256": "6b0c3cad1c45870c20aabcfb291e95f6d6a2ef618b5bb0bd940ea50db334558d",
+    "size": 797660
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-line-4.png",
+    "sha256": "69aceb99fa186c969b9c3f072bf31a14ed6b661700f1c900572626b1ace4c977",
+    "size": 822284
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-line-5.png",
+    "sha256": "5ed02eae2ad5348ad37e8a336f56fcd9b4a393816b041254ff5c7173e56e7c25",
+    "size": 665128
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-line-6.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-line-6.png",
+    "sha256": "0a96ba7fed15cb5be10413e41ba61c10ccb0566953c26eb8e92b28e2446b8d88",
+    "size": 790674
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-line-7.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-line-7.png",
+    "sha256": "97969abf176d0925bd4e4971c42140c48cd613a434d485edd68149be495d2d0d",
+    "size": 813696
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-marked-sheet-pickup.png",
+    "sha256": "854bfaed88c3e777fce04afdbe28890ecd5bc10d2a5e2a8ecdadeccb9405a7dd",
+    "size": 608120
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-pencil-clip.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-pencil-clip.png",
+    "sha256": "13787e2b24a746093816886771cbd65baaf60696fd671b3ff0ac053868b8aa6a",
+    "size": 671020
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-pencil-grip.png",
+    "sha256": "3277dd37666f9baf09ae305b4da324b2ca1324f0a7aaed6b9166edc0e8beb277",
+    "size": 674070
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-pencil-tip-mark.png",
+    "sha256": "f4d5441aeaf88233f6273884b53d7e08f3593110bd7f845244c4bf7554d7e1cc",
+    "size": 672698
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-sheet-handover-taker.png",
+    "sha256": "97b8d1a74a35cf6200d03143f1da162097672e380d85fd93f1699ebc84ac6100",
+    "size": 685628
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-sheet-handover.png",
+    "sha256": "259ac095e4606bc075cdd781a44e2223e924d853b0c19372cbdb24570ca52227",
+    "size": 677948
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-sheet-pickup.png",
+    "sha256": "4024026776335897c5cf21f5ec7dc2f68c567bc11ae0582179b9b8cd669689df",
+    "size": 621360
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-sheet-return-taker.png",
+    "sha256": "c976ddcdcd6d79f78865a9de1f4250a3e2bb0c02aeb8747e134986222c9d972f",
+    "size": 685392
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/1366-3-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round15/1366-3-sheet-return.png",
+    "sha256": "0fa0084761ff9fce2be2003d3348d0e4815b896d54c25f68d69d27594123463f",
+    "size": 682420
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/390-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round15/390-2-bento.png",
+    "sha256": "82d9b1163fb23ba29448248b3c226300cb5388f431aa8062f10cf716097f517d",
+    "size": 195144
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round15/390-2-bite-mouth.png",
+    "sha256": "adf4cf743ade0ecc8808ea9e3d00bf77a3545753fb08a3e9c0d450204f0b5dde",
+    "size": 196630
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round15/390-2-cable-hook.png",
+    "sha256": "a6c0de81c05fe5cc445d2dabe36085471b734360f5602d95e63fcd3dab122b88",
+    "size": 184620
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round15/390-2-cable-pickup.png",
+    "sha256": "53176e5c963ae5dab591c46c8398943cafe8ce16bb0d49f7796276c281a6ee57",
+    "size": 185946
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round15/390-2-finished.png",
+    "sha256": "62e3a9e794f2493a8cb822b8608a170f30b56330522b75dceff9deadaee951cb",
+    "size": 146670
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round15/390-2-layout.png",
+    "sha256": "18e5570a9ef1342a879e1462aaf05f5876864ea57fe50f8f932c5273b8cf2199",
+    "size": 199478
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round15/390-2-line-1.png",
+    "sha256": "0acdc652788b6ac019bd25c20ddb992ca180d0af1529ead52b4aa987b9525fcd",
+    "size": 213890
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round15/390-2-line-2.png",
+    "sha256": "3a1d5cd4b24f69ce78ec9718c382c773c1251f8071b16aa8178f0d4fba9034c3",
+    "size": 217792
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round15/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round15/390-2-line-3.png",
+    "sha256": "952d1ec7e879c772ac5c7bb5d3d98dcf4b453f426e33a45a77978a7e2abb8cb1",
+    "size": 217110
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round16/1366-2-bento.png",
+    "sha256": "9b7f3f44f23dbe8b90aadb6dd218eb11d6189fc92048ec1619c41339a5159d97",
+    "size": 697954
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round16/1366-2-bite-mouth.png",
+    "sha256": "b40461890adc8a895c429fb9d50817a4ccf84484619f1f8c8244037d89ef07a8",
+    "size": 668278
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round16/1366-2-cable-hook.png",
+    "sha256": "3d219e7e5c33a34b3a53a0d1fb3dbaf4f8d5cc7dcab5abc653587e2eac5eaebe",
+    "size": 634234
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round16/1366-2-cable-pickup.png",
+    "sha256": "993f48fdf30c309c7c8b888859fcb5d1c55c2df5506c5eee59e0cbdb050ac323",
+    "size": 625522
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round16/1366-2-finished.png",
+    "sha256": "7de7f5e75720247430ea0e1224e5417ca03112df0acefadd8b89941668b86270",
+    "size": 593650
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round16/1366-2-layout.png",
+    "sha256": "c1e62f09ea969759577a9710cae7c9395e37e14479a70e81c3a7e787a311917c",
+    "size": 776914
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round16/1366-2-line-1.png",
+    "sha256": "8070a681d6792c90d7b08f53f12101714f155b92e4e412c41f154166d4d84cad",
+    "size": 812160
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round16/1366-2-line-2.png",
+    "sha256": "bb5a1b4fbf018823a151dc99d67462b23fc27eec6d31b1b288ac57eebb8096d5",
+    "size": 834690
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round16/1366-2-line-3.png",
+    "sha256": "880cf8a85e97b3b9d91df7f8a5adf21be87f6b8ab79269691054a1b3875e9d8c",
+    "size": 869940
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round16/390-2-cable-hook.png",
+    "sha256": "6693539d3d476b10acfee40f8a5788ad8e27e325b8ce9145bbb8da1a684ccbe1",
+    "size": 183768
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round16/390-2-cable-pickup.png",
+    "sha256": "b626997e5d4058dcda956eb27b854be1d25ecae35a2a869d9b9fa02659641449",
+    "size": 187062
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/390-2-failed.webp",
+    "source": "game3d/shots/mio-lunch/round16/390-2-failed.png",
+    "sha256": "33070d49dcc26d9bdd00a6acab65aa0bf191502f700268670552c38531d309ad",
+    "size": 195576
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round16/390-2-finished.png",
+    "sha256": "74c136868ceda72d7546a476ff349334b7e6ab4429c1d75fc31290c506262c71",
+    "size": 195948
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round16/390-2-layout.png",
+    "sha256": "c70d92857ff1c49a4276ba6aedc7743d7612ef047110d63f7c98dc7220ce1f2a",
+    "size": 201150
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round16/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round16/390-2-line-1.png",
+    "sha256": "9943d7de33c4b2e8796701827ede83d90c67360a8795538ca3950d8057a8bfca",
+    "size": 200970
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-bento.png",
+    "sha256": "a0760f34bea76c5c00b3888a675f8bd9a526b95d6efb8c97f0621897dbcfaee0",
+    "size": 195068
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-bite-mouth.png",
+    "sha256": "c66955bdfc573b90b0215e76865341182137c0920b49f5a3b68d957ba29f41f3",
+    "size": 196520
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-cable-hook.png",
+    "sha256": "630b6df4a4880a0eedbb3cd3aa67d896f351d40bc67c0bf14926631e386ff9a7",
+    "size": 183430
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-cable-pickup.png",
+    "sha256": "0890c767fd607448d3f352191607986afcedeeac0f3bd07c9418c78a45f5a5f8",
+    "size": 187850
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-continued-bento.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-continued-bento.png",
+    "sha256": "6dd718f528c24ebf47dd07f68ed504dcdfc80603abe539d14c6d117a3fa19352",
+    "size": 200786
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-continued-bite-mouth.png",
+    "sha256": "98f0fc47a166eff00a243583a9e78e9c87b5b21e0a8e02edc89858464e1bbfcd",
+    "size": 200476
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-continued-line-1.png",
+    "sha256": "f81f7992706bbbcd1778f903cd57b84d0769d6501fcd2bf283f15fb10933f7b6",
+    "size": 203614
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-continued-line-2.png",
+    "sha256": "9836ddad844c4ca5045569a1f4813d20cb17bfb2e2f9a360f6a813704d8572f8",
+    "size": 214038
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-continued-start.png",
+    "sha256": "a9c54dd5b7b75b94c0b7614e687234c01a8807f45ae5a8d5910deae51ca54ac7",
+    "size": 178928
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-finished.png",
+    "sha256": "81266a635d26e552bdd601d31b5986e30afb1d114e10459a4d5b188b140e7823",
+    "size": 143040
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-layout.png",
+    "sha256": "1ffd1ea06cce516c6ff5f3f3a6817acc5d777a6dd3a53bab9fd6a8ff50ccfa41",
+    "size": 199088
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-line-1.png",
+    "sha256": "4106b76710a558bd33f75a1cc14874402074c2c6aa300579b1d790e4d35b9736",
+    "size": 199940
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-line-2.png",
+    "sha256": "ac85ca8bf220b7f8e79a9e5421c6c5a542f0e8ed8326f7e3080bb1e331645088",
+    "size": 202440
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round17/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round17/390-2-line-3.png",
+    "sha256": "d3315bcb04a46cd94befc5819b69f397f2f2cbcb6f9f042fb5da60e789e7022f",
+    "size": 214512
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-bento.png",
+    "sha256": "3a8a547d0f7f1fc52decd5ad6a75715f16f04c7f345489589d8614d81fc95955",
+    "size": 701234
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-bite-mouth.png",
+    "sha256": "1714d4b6e275aec6c4fbb3d9790bc0b7a5abf2b85495ce817d004f153480b8a2",
+    "size": 671218
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-cable-hook.png",
+    "sha256": "cbb9b2c18e9b813f7c5dcf8779efe0681fc7dc6ef05eb647c916477b896eb3c2",
+    "size": 635468
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-cable-pickup.png",
+    "sha256": "62f508f380c9f133f3474131d87fcb35db50af252ff1c3ba66e337a5ed77d387",
+    "size": 635174
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-continued-bento.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-continued-bento.png",
+    "sha256": "275886c62aaa9f79233be877c17c3228ceecf1d60323e60f03acf5b05992e9ea",
+    "size": 697886
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-continued-bite-mouth.png",
+    "sha256": "6d9fb57f7f8cd705271100efeddbd8481a3d6b6efb293e4bc632735935c052cd",
+    "size": 667136
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-continued-line-1.png",
+    "sha256": "3dc3e6e34dc210613cfd337e130265e555b536013f336bb2ed69fea09d2efd3b",
+    "size": 839486
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-continued-line-2.png",
+    "sha256": "6376552439dc2f52a771c3e0e7f39ceafe89816a67ea44ad368743962d28411b",
+    "size": 872242
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-continued-start.png",
+    "sha256": "ea0fc3c967a0bacb4f396f7039ddd9510c0893c00a3ccf741ff7ed0ab674cf0c",
+    "size": 718924
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-finished.png",
+    "sha256": "0c7b119e8ad0780830c935fdfe6003731b39faedc8ed429bb6d85cad99384bc9",
+    "size": 549110
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-layout.png",
+    "sha256": "6e958f7ed6efe2d6262f3533e1ca0fce34f4ad0211cd962b9f24ba2f72c561fb",
+    "size": 778228
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-line-1.png",
+    "sha256": "e1ba55dad4de3b3ac44591b98d826967d18e1339102b9b4a4410a22a315a69dd",
+    "size": 813760
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-line-2.png",
+    "sha256": "512a2c855f6157bb4357c4d2a0f5b8f4c90d5c50311a5d0b27526f55315a76d1",
+    "size": 827142
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round18/1366-2-line-3.png",
+    "sha256": "f5c706c92ea296e853499a58e1d4400ef47143fbe9be9bcefc397b390b804ed5",
+    "size": 873376
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-bento.png",
+    "sha256": "8bd257eecefe366f74c2605847b1361eb70add8e348b05946fbac2669bb9c32b",
+    "size": 197578
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-bite-mouth.png",
+    "sha256": "e1d94d686d92f13ca2088ff141cadcadbdbfb19dd693e155129c4fa52143f2cd",
+    "size": 196812
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-cable-hook.png",
+    "sha256": "f2af000248633a45af830bffea7e19c46140b5262af4a89245ae1c6f8d9af6f0",
+    "size": 184598
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-cable-pickup.png",
+    "sha256": "dffd4ce35eaff8744f4a1fa91c644a1c1c8bcbdf0e4c859c330c239b96018205",
+    "size": 187710
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-continued-bento.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-continued-bento.png",
+    "sha256": "a5e2aa25b9e50689c30fb345caac264b4b230a38c8791991415484461c8a3305",
+    "size": 201132
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-continued-bite-mouth.png",
+    "sha256": "2af6acd97eab784696883ee1d403fe3519c0afb16988196470eb9674e7dd0650",
+    "size": 200620
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-continued-line-1.png",
+    "sha256": "f37592108f14fa90ecc27f7a56101e70fe6c89eab28e000f41eca167a7bfbe75",
+    "size": 198740
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-continued-line-2.png",
+    "sha256": "5707ab23c57bad62e0a606df3954d2a75d0e66a4701c928c985715ed7cfafab0",
+    "size": 213302
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-continued-start.png",
+    "sha256": "530ca0de4fb0420df768593d07340e2025489e71bcfcf1f66fc0211339b55d7a",
+    "size": 178446
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-finished.png",
+    "sha256": "1f46c33c073808ba0485f7cac1feb08bdcf90b98a8bf4f07466e8b5fb2d20235",
+    "size": 149988
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-layout.png",
+    "sha256": "13529eefbf6510e704f42b2ebc2733e37496496673dee2dd33430623d05b6f84",
+    "size": 199532
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-line-1.png",
+    "sha256": "9700df65e7c77b4527a253d7e003ec7640456cc5920dc0b018908a0f5b9cf0fc",
+    "size": 199154
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-line-2.png",
+    "sha256": "71b892fdf326c83ff880790e30349497ef14a9d71b3332032ebf9261902e9f6f",
+    "size": 198574
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round18/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round18/390-2-line-3.png",
+    "sha256": "ad33050ede24146c888277d711e88b4633442e12c0a7497c96a545ebf514f055",
+    "size": 213606
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round19/1366-2-bento.png",
+    "sha256": "a5fa4297f68cea57ce173ca2e6850c847931ba77dcccc9b7c1c0c4ff1c5995ab",
+    "size": 697844
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round19/1366-2-bite-mouth.png",
+    "sha256": "c16b477e3fa7c828034f146c1b3c1e1fcbb4cd2e35b9303d5a562f638419dacb",
+    "size": 668606
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round19/1366-2-cable-hook.png",
+    "sha256": "291667cfbd4f27b00b13ebe653aaa9a69a7edfa2aa0957dbb186d7a6e6a8903b",
+    "size": 636550
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round19/1366-2-cable-pickup.png",
+    "sha256": "d4141b9cc2013bcc88d9d928c3ff8a088fca7ba5c231fe5b7715e4204dc82a11",
+    "size": 634148
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round19/1366-2-finished.png",
+    "sha256": "9dcd08a73e0e85f8bd5d74cf937ee04875596e240f283a1f4b7c1427ac529d2d",
+    "size": 560456
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round19/1366-2-layout.png",
+    "sha256": "7d1ca959fad6df082435da7ae76fadc8125c761d84951785e35bc6e8db8020c1",
+    "size": 776030
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round19/1366-2-line-1.png",
+    "sha256": "760cc529c16facb582a35a3b60cc0dbaf2c0c42feffe14b84d3be132c2490af1",
+    "size": 815734
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round19/1366-2-line-2.png",
+    "sha256": "5b84c7f0c49340ee72ddaede5c50eeb75a11cd4716385bb7bf0e85eb13202cbf",
+    "size": 823778
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round19/1366-2-line-3.png",
+    "sha256": "16e428836720fdbcdabbb844fbdb893322a7a0207a6a0584a872bb3c560221ab",
+    "size": 871198
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-cable-hook.png",
+    "sha256": "fed4b17dfb69b06b11a2543e67baa13f196fe32e2e20cd0f4dece7e826ee1b55",
+    "size": 183452
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-cable-pickup.png",
+    "sha256": "41db5b6d9af337b4f44f2de920881c78503e02354d4c94b202346d3ef0bb533e",
+    "size": 186248
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-bento-pickup.png",
+    "sha256": "d63bb3018498acddced49721a5d0b9295914c606731039a28ae3c7df02c1189e",
+    "size": 197238
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-checklist-support.png",
+    "sha256": "8cffa15bcfd137ccbd2369bf3de764eb76ce587adf2d88ba557702fc8b51b911",
+    "size": 200354
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-door-out.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-door-out.png",
+    "sha256": "710facd6d51498586a082e8102b91f09ed9c6e299242d9c790f855150189b4dc",
+    "size": 175360
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-door-return.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-door-return.png",
+    "sha256": "2e57e83c4aac03975ee8df6f1cb2c13e6fedc2fc656dfbfd0ffbe054d1f63ea1",
+    "size": 177988
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-lift-out.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-lift-out.png",
+    "sha256": "5a58e50e12fc47b4b1f304c1a84e8feeada0e71e6f7f5a9f532cce51a6209420",
+    "size": 171906
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-lift-return.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-lift-return.png",
+    "sha256": "be2cf63dd98c7ee24c0e7a853f16f683d977aaa23866118e75d934e08c7a3535",
+    "size": 163096
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-line-1.png",
+    "sha256": "7136654833fe9250199f31144ff11c93a630511d237552ee4609347ffbd7f87d",
+    "size": 209782
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-line-2.png",
+    "sha256": "a4928a36a432430eb0353d59c8e07f04069bec3496e1b47bbbc344d84f8f2ea9",
+    "size": 209778
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-line-3.png",
+    "sha256": "11fc5fdfb70cc2ed700af99601534a04418765a8a5dcb594a4281f01ed9ba074",
+    "size": 197448
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-line-4.png",
+    "sha256": "da73005e139fa4c77664cdcf5a8b8fbb19acce76461662cf771756758104c827",
+    "size": 209556
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-line-5.png",
+    "sha256": "e5bce8c7df828166c4910b9def81de029f9a32d2d2a119ae6c7a407cae5357e6",
+    "size": 209928
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-marked-sheet-pickup.png",
+    "sha256": "1658602f3319f7a32a251d4d58744361c44bc3526762778330cdf3a8cb90f337",
+    "size": 175980
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-pencil-clip.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-pencil-clip.png",
+    "sha256": "9064c734b19846326cb83ecee42eec6741509bc502208d4930ab950bf1314aee",
+    "size": 192040
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-pencil-grip.png",
+    "sha256": "ca19d4cb85b188d9a21c4dffdd5b5dbbd617794e66da10ad608c1db6fea521e5",
+    "size": 195546
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-pencil-tip-mark.png",
+    "sha256": "c44a7f0521de2a303574c0370304702b832da62a0e20618d63b23d2266e1b058",
+    "size": 193760
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-sheet-handover-taker.png",
+    "sha256": "39b23d10619dd7d031c961d7cb18461c7eb2a277168909140b2f2f87eb2271e2",
+    "size": 207304
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-sheet-handover.png",
+    "sha256": "e3882f91a3e2f8d43a5b6874e3e87bfb1f4902490acfe65ef78dd3028ea2cef5",
+    "size": 204922
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-sheet-pickup.png",
+    "sha256": "d90cd150e5fa5e977795d356e3d7262fd104f810b8c7a33517f6f313f777bea1",
+    "size": 229906
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-sheet-return-taker.png",
+    "sha256": "b3026ba635dffd02ecb921d60ef2357e791c651d0024960ddacbf64d8d330a00",
+    "size": 205374
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-sheet-return.png",
+    "sha256": "c487f7044600e8928392759173151dd82d3167ffa5c62f32f08f653a8b88ecd7",
+    "size": 200696
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-continued-start.png",
+    "sha256": "28cebb592c1a6d7d3b18276f4b5186980eacd9a90fef337223f8cc4e86a7d023",
+    "size": 193020
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-finished.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-finished.png",
+    "sha256": "523ed936c701f75947dee258762c9794e4e1ee941a21959897cd7f70074786a2",
+    "size": 193934
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-layout.png",
+    "sha256": "5df4ebdaeec620869afef87b20bcc396b48b88a46866181a900f3885c38eb5f1",
+    "size": 198686
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-line-1.png",
+    "sha256": "f48a99d85556d12065ec4188bc2e0959320a3848bc0783654622e7baa7314347",
+    "size": 193096
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-line-2.png",
+    "sha256": "ea7c7d44d7d585f85695b85a0796bc291505b3aede2b63cdfc0cdc4fcb19a4c2",
+    "size": 196732
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-sheet-handover-taker.png",
+    "sha256": "5425bfd349e3c715cb2854529c2954767ebb26b9454b2bb7edd7be406c97c76b",
+    "size": 202492
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-sheet-handover.png",
+    "sha256": "305804f70cf172a7aabb1bca57d43464a259cc790111b309dfdc7030e29e7ebb",
+    "size": 202600
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round19/390-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round19/390-3-sheet-pickup.png",
+    "sha256": "7115f1a09a76276d07b4a4273fb779322424cfd59052f00498bc48f49fca00e6",
+    "size": 186512
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round2/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round2/1366-2-bento.png",
+    "sha256": "2a1ac2ce016afeb685d6d7f16408967ef3e11da59eb081df3cb22ce0e9f030db",
+    "size": 793066
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round2/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round2/1366-2-bite-mouth.png",
+    "sha256": "c49a319934506c47386b24c16c5ac680508d0c385f52850413df3198e7ea91d3",
+    "size": 791618
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round2/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round2/1366-2-cable-hook.png",
+    "sha256": "132365e0a70765445a9e7ed767a11f37565560bee6e65b31ab81b819800c0a33",
+    "size": 745498
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round2/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round2/1366-2-cable-pickup.png",
+    "sha256": "949e5f8117e68bc028a944727a568367cc481d4873ec45d2315bc5a6732c5066",
+    "size": 764116
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round2/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round2/1366-2-finished.png",
+    "sha256": "47408e9bd2efd8ae173a7f3a62ee27752291c8a903640c9a3702bf6900d2c682",
+    "size": 650302
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round2/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round2/1366-2-layout.png",
+    "sha256": "88b68bbe4d6debb4737694ef2fb43b43f50bf372e9530bf7832754e22274bdbd",
+    "size": 776310
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round2/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round2/1366-2-line-1.png",
+    "sha256": "ae3481e44d6907962a1256c7d34a8830176211c8555ef15921633f4505b12933",
+    "size": 897816
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round2/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round2/1366-2-line-2.png",
+    "sha256": "07485ee8ef805ee4156225e7c77c88dedf11123f757b122d9de5f199c94dce08",
+    "size": 890332
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round2/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round2/1366-2-line-3.png",
+    "sha256": "a6e6ef3de47beed1b89790a237033ce35a4f2d65061421123e3b0bbe60fa80af",
+    "size": 909778
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-bento.png",
+    "sha256": "9050496e7b54da03d677fa2d6b464ed31c1ad2bdb71cf1fdb9b4e807c5562e82",
+    "size": 702184
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-bite-mouth.png",
+    "sha256": "ad88652dbf69926193b39c31f3de3b68a4175a51362e384801f72ee226614305",
+    "size": 670310
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-cable-hook.png",
+    "sha256": "2aa6da7402ff154f8f611b3bf6585dd479ec5d94ac3f540416bef1439704908e",
+    "size": 636140
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-cable-pickup.png",
+    "sha256": "0832c801e4a2ab16edb34d9038722e8d01116e9fdf1cc663d4c11707e2159e08",
+    "size": 623642
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-continued-bento.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-continued-bento.png",
+    "sha256": "b58e65d8dc3c2c48d8ccaad5e02ac19c3090b0f703e03beea5322414a3620c70",
+    "size": 705400
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-continued-bite-mouth.png",
+    "sha256": "3bdf1caf7d906fe87ce1ff55b9d00716a1e2e2b8bdd57d1304515b7faca35569",
+    "size": 669990
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-continued-line-1.png",
+    "sha256": "41383ea08ca85180e36b9c0fc1be1bb4f337ef20a822a3fdbaa3a298fa305d1c",
+    "size": 826604
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-continued-line-2.png",
+    "sha256": "3b2c94e0cb7c6ff680b78ec830569699b67e0eb0b1e456b5be5ab7bc249ad1b7",
+    "size": 872874
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-continued-start.png",
+    "sha256": "9c42ce55de0420f3ff930f87e2cf20a45cc877139879235934d4c4447dd80d63",
+    "size": 715440
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-finished.png",
+    "sha256": "d54125fdc5738cbe3be5a93d2a34b62e1eb68af1d34f47560d3e45f0bb1545c1",
+    "size": 608784
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-layout.png",
+    "sha256": "a9942bc8d8a3c3a61cd295a1765e1da93c52e89f9c9565fbc6cf355abf45179e",
+    "size": 777026
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-line-1.png",
+    "sha256": "54e9e30f81b7167b1a7973db34771e79b7a8f2e8bd1ee9ff2ffd4f75fb1f1751",
+    "size": 816638
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-line-2.png",
+    "sha256": "32d3ba0a41766a63e17ecad86347fe06bed28cd72aed3162e837a93060410e78",
+    "size": 826340
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round20/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round20/1366-2-line-3.png",
+    "sha256": "55391bcb6246c91b075da12d5c25ee38c9d2529944e70958bf11c0c3176850c8",
+    "size": 872900
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-bite-mouth.png",
+    "sha256": "187c1d37abf046dacdc2143e9a64f1d47810cadb796ee66037854f1a393cfd98",
+    "size": 671408
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-cable-hook.png",
+    "sha256": "d58bc7e340af41122f4e9afd6f777ff405997cbd122cbd30d54c7171daa7414b",
+    "size": 637616
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-cable-pickup.png",
+    "sha256": "32d92c88c2ffd96fca6cc59a3ea82d720096b93dff2eddff6078afedf89c95ca",
+    "size": 624966
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-chopsticks-pickup.png",
+    "sha256": "71f3243ad640d269011976d47d56d277ba2c62eb2280706bddd298275015e33a",
+    "size": 699438
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-continued-bite-mouth.png",
+    "sha256": "6c85a3773076a128dd0a875841312dc4fa197c5bff21ed55d76bb6f1c8b83925",
+    "size": 668076
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-continued-chopsticks-pickup.png",
+    "sha256": "074633b012d47537e0dea5475da6b78f5d795cd229243559d29118f154cb3caf",
+    "size": 697458
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-continued-chopsticks-return.png",
+    "sha256": "14812e87017360b3ea867fd9572b8d7e9c30ffc0dd6e097b64321c91248e19fd",
+    "size": 666928
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-continued-line-1.png",
+    "sha256": "7058803f9940180cf7d3cf58abe69a48e10b38d3e3ead5e5bc990be26b237bb8",
+    "size": 826836
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-continued-line-2.png",
+    "sha256": "51264989566921a7494173726b4e60148e63244f73e097773e9d6a688f807e4b",
+    "size": 872924
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-continued-rice-pickup.png",
+    "sha256": "bd9f608e034fa5cbfdbfbb66d39ffb540892f04176e627001932a51653a38d52",
+    "size": 668936
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-continued-start.png",
+    "sha256": "c04d5db2ac6af2d69b9a7b5c2ed2840ba15cc9ddcc4f52e2035d59b80c91d7e1",
+    "size": 720338
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-finished.png",
+    "sha256": "f1e72385eb5039e11f94281833babf3b7bee8cede871ea7ccd8d115c94f8ecb5",
+    "size": 605506
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-layout.png",
+    "sha256": "dcd560c75c6d30b57e85f4c7c71df2a5ced8e96f0268dfc03813c820b83e8c80",
+    "size": 777962
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-line-1.png",
+    "sha256": "853c696fb5f59c17f8b776585fffd3ca3afe9f96d262ab52f148f1a61644a80a",
+    "size": 814696
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-line-2.png",
+    "sha256": "b07396c0e0ee4113a4f9473d5d1abf3432b75b0181a0f402fc93e2ed52d59fce",
+    "size": 828286
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-line-3.png",
+    "sha256": "80a2a9ec1cf94ddc9b1e0db946375c76392634a5ffede47317351ff9881651ee",
+    "size": 875832
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/1366-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round21/1366-2-rice-pickup.png",
+    "sha256": "9d5058066bef911edf979c2a6ea6cfdb52468e4163f7cf644dad11793f81876c",
+    "size": 672350
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-bite-mouth.png",
+    "sha256": "f95d848f1e8bd812c6cca5ab82c8aea3f93e8b73f759b2a7d0f68b71ffa23600",
+    "size": 196730
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-cable-hook.png",
+    "sha256": "09479918922c6346e55a072c560f11b43dc6f652dcaf727e4510d3eb01d9ded2",
+    "size": 183798
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-cable-pickup.png",
+    "sha256": "956895e66f638a05bf0bdf254e94433c093f7d9dee945a96fdb3b5fafbbfd68b",
+    "size": 186374
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-chopsticks-pickup.png",
+    "sha256": "03451c3b827a407e2a4551e70b92a03352fe5cb74386258b35118a06e719ffde",
+    "size": 196840
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-continued-bite-mouth.png",
+    "sha256": "c65e01a9470941f757892ceb5e2683e95fa3d15f6eceaedd5bb699c9d60701fb",
+    "size": 199926
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-continued-chopsticks-pickup.png",
+    "sha256": "19f355741132bb0b030f64728896f3b616a297e85c0caa39313c849c7d1998cb",
+    "size": 198808
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-continued-chopsticks-return.png",
+    "sha256": "01a7afa2ecda0eb9a14abf7fd579edb4e6f3386f13517446c93ca7f80bc7d88f",
+    "size": 200322
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-continued-line-1.png",
+    "sha256": "18b7f71ef8f4316c848317bcf6dda65044e9ce590076c9f1ba9778cfe58669a7",
+    "size": 198820
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-continued-line-2.png",
+    "sha256": "b0c071960d8eafe632132b213bc0170d3de99316c175c5f4d849ead8f97f6d9e",
+    "size": 212408
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-continued-rice-pickup.png",
+    "sha256": "3ba129c8cc4d128cced35c39d65e530fd3e01538761e511f27497f80d8f68d94",
+    "size": 199788
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-continued-start.png",
+    "sha256": "b9393ef9162d42646c5e44be86fc1d40e683fa1e5abe25f15995d2693a656533",
+    "size": 178198
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-finished.png",
+    "sha256": "e4ae22b75d5d22f905b59e7b209ae05d9e63ce2b110e3f16dc594666ea60901b",
+    "size": 144916
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-layout.png",
+    "sha256": "8b3b49bd8c5ac373a61817c4a0b2d86a4f0525ee53416b364f682287a1c267dc",
+    "size": 198812
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-line-1.png",
+    "sha256": "387256c32c8e70edd767fdff866f7076183fef8a1aff9fba5e1477b886cbf5c9",
+    "size": 198700
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-line-2.png",
+    "sha256": "ffbaa296bba9be04acd0fae69475029a5a518a02a655019af5949657ebe47c02",
+    "size": 198848
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-line-3.png",
+    "sha256": "f68e29e2e7d60445b8b1531cd8d53a372fa6d6bc3ee5874e940b912548ab4dbf",
+    "size": 212592
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round21/390-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round21/390-2-rice-pickup.png",
+    "sha256": "06f2b91b05081919269dcf5a29f0fd3f21e2da10867af79cdb8d4322f250ba36",
+    "size": 196524
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-bite-mouth.png",
+    "sha256": "f3c68294ace4bcbb12522cd8e84a78659f6e979d5d418ebf8763975c6c82cceb",
+    "size": 667590
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-cable-hook.png",
+    "sha256": "ba98ed2ab06da15efde536be20e1af3f9b639370fdce81cabc396cf90f98ff67",
+    "size": 639408
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-cable-pickup.png",
+    "sha256": "1c63d52f1685b6e77cdec0b183932d9f070d1c2e7c6e7e7195a0a0fb643dede7",
+    "size": 629602
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-chopsticks-pickup.png",
+    "sha256": "f569ef11a4f07574db16a92444dd2610741f3bdb303392d6764e377242991a35",
+    "size": 697266
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-continued-bite-mouth.png",
+    "sha256": "6e8c7b127f8294b33f7cc43b8dae198f190d60ce824acad836061d34c283c1be",
+    "size": 667882
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-continued-chopsticks-pickup.png",
+    "sha256": "031fa35dacc2343c377695a105cc926d9ac101919b9a85651c26816de1f7b20d",
+    "size": 702646
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-continued-chopsticks-return.png",
+    "sha256": "21c95973b4dd375f41e7e7a912994fa1ce1691b6f6d2cfee12249ef5be2496b4",
+    "size": 667734
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-continued-line-1.png",
+    "sha256": "39d755823a12830feb5dac312ee3aae00ab4e28513b3c87b8bfe4626daa147ef",
+    "size": 828490
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-continued-line-2.png",
+    "sha256": "93c85115df395cfab27bfa927d8c1b0b6e2f2fd2dd820f9a7fb195d0ed01d66f",
+    "size": 873682
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-continued-rice-pickup.png",
+    "sha256": "9a1203552484ab8cc52c9fb140790f8dab24e8acb1e099699c66addcff79598e",
+    "size": 669884
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-continued-start.png",
+    "sha256": "98655bef821de839e8f6add2906e31ff4df54434b7ea08818faafeb0688ca04c",
+    "size": 706320
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-finished.png",
+    "sha256": "a66186c10c411ca9eda0b4018197a5f00f61598822da985272010fe6159d5d04",
+    "size": 559198
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-layout.png",
+    "sha256": "6ae99517a0f9069f1b0028d3a62bb0749769674ecd4fab57968f3b728a4ad245",
+    "size": 777232
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-line-1.png",
+    "sha256": "d8a36949328488d96c1df96dbf07b615f2b582f99d3987d6f85155b1b27a282c",
+    "size": 815110
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-line-2.png",
+    "sha256": "331256dd3183ce5a4608849d8befb1415f39f2ee3b31b18b1e05ca0156aa9d88",
+    "size": 824952
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-line-3.png",
+    "sha256": "8972fcaffa311b166db45d1d8918edae9d00a5a69eaad6a3336053f541f90fd1",
+    "size": 873624
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/1366-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round22/1366-2-rice-pickup.png",
+    "sha256": "ea0e4840f786a36028dc80fb151f3a7a782a2ae6275296fb8f976101be522ebc",
+    "size": 669458
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-bite-mouth.png",
+    "sha256": "fb02df2123499a905bf2f852effcf3ca7e384f4823ac09b71dd4c58b4b6f72be",
+    "size": 195832
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-cable-hook.png",
+    "sha256": "cd44d839bd18d1c9208076b2aa3274acf32c39067fef50f441d2859a9ac6317a",
+    "size": 184642
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-cable-pickup.png",
+    "sha256": "f43865bcaeda901e18909b899127796837ad761c3b527f700d59ec9f79e8aea4",
+    "size": 188246
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-chopsticks-pickup.png",
+    "sha256": "c7579ef4fc45853e4240cb700140df8b426c6fec7085621fb9b4512781f3cd81",
+    "size": 195522
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-continued-bite-mouth.png",
+    "sha256": "0f9a644ce2f685a1f7cb20c65b7736cbc52d4c5a9942ab6f9062c47508be6918",
+    "size": 200602
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-continued-chopsticks-pickup.png",
+    "sha256": "7aa7a8ba9764558dd183325c0ea2f447f0cd71f8e2fb8bb29bd260bbee7f760c",
+    "size": 199714
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-continued-chopsticks-return.png",
+    "sha256": "1adf44cd0774b409f4334310877272413e16a0411a1e36507d158f4453015c2a",
+    "size": 199704
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-continued-line-1.png",
+    "sha256": "4c7dc8e53f0eee76e22a14ca43d42e6a3fe6cad39a737258429735634bca9491",
+    "size": 199174
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-continued-line-2.png",
+    "sha256": "3a7aef640ec5ec6224b4dbfd418715ecd803d75fe946f272bf3ed0e55e8f33fc",
+    "size": 212772
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-continued-rice-pickup.png",
+    "sha256": "6e6d733ea40a45219938b82663c8c4130bfc3d15861cf43156c79c4d34a5ca26",
+    "size": 198770
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-continued-start.png",
+    "sha256": "cf591c4e591fa4f963ea73663660d5bd390ad40707d34acc6c1e3f74f7bcc382",
+    "size": 178642
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-finished.png",
+    "sha256": "125307cc7cb15c47187006d4184a87d3e88db95a373d99854a4654433fc650e8",
+    "size": 146374
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-layout.png",
+    "sha256": "ef28ba28e4909730df79ce56d4726ab4816a47f8065d7463d212071ea3c7d62d",
+    "size": 200890
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-line-1.png",
+    "sha256": "7f1357151347c5f98c93bd7996bbe6fa8b51a5ecaa9f01ff0b916f01d0353912",
+    "size": 198654
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-line-2.png",
+    "sha256": "f61b3ddf28b677fe9c22753da232f812f00bff07513162e925dfd07a2753e37a",
+    "size": 198242
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-line-3.png",
+    "sha256": "415d27cc6eaab38bfde4f5dfecec8baac4332ccb31fa6499305f4c24295c053f",
+    "size": 212686
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round22/390-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round22/390-2-rice-pickup.png",
+    "sha256": "2b986bbaedbbb1d1491e540308021fc8ce8529a6f143b926d463005f648028f8",
+    "size": 195770
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-bite-mouth.png",
+    "sha256": "c91fe6c575e0cdcbe80f34e172ff4df3d258f9e28efc39203287947e433975b0",
+    "size": 672384
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-cable-hook.png",
+    "sha256": "926453c919697a5a98945a1081715320bd5638dbb67585f400f278b9b9393d16",
+    "size": 636948
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-cable-pickup.png",
+    "sha256": "01ef4286e8518ccbb68c2be6415744edf47ec4cb5080272f8c406941dc665697",
+    "size": 626618
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-chopsticks-pickup.png",
+    "sha256": "32f517cfaa57ad39011f024ecd392a496cd14c759da82f984d366d1f5a35661b",
+    "size": 699640
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-continued-bite-mouth.png",
+    "sha256": "b3aa926377bac4247eb4347077dc52611201423779194eb7e20f63cad5bf76f2",
+    "size": 673070
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-continued-chopsticks-pickup.png",
+    "sha256": "a028400e9c0b2a198224b2b0c9b3f0ee80dce2275bc451807e1e1244128c9c22",
+    "size": 706180
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-continued-chopsticks-return.png",
+    "sha256": "daeed02bfd24c93ed073e7f18e772ec83a5c045173faff016515f427215be934",
+    "size": 672272
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-continued-line-1.png",
+    "sha256": "014d59722c37f3a4b4854c5aec96c0420886f30750532e4e68b238b86e46ec7e",
+    "size": 828896
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-continued-line-2.png",
+    "sha256": "80c6fdf038e0cacabc25219cd74a94745acd6617f145ffcb6028f0c642d8100d",
+    "size": 875938
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-continued-rice-pickup.png",
+    "sha256": "e4a909550998cfda6307b72fa95da8a31e7dd26b8f4f40bd889cca5411590cf1",
+    "size": 674198
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-continued-start.png",
+    "sha256": "108b5e2ae830612f11dc7378b9bb4b2de32815ea0b39229fcebfa082a3968b1d",
+    "size": 706294
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-finished.png",
+    "sha256": "d8347746bd76aef8eaff3c134a6f498fde776b0255b6643209b642d5c68bbf60",
+    "size": 610096
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-layout.png",
+    "sha256": "382bf5bd4cd9247ee94632703be69938a68597ed18a61223c01aab33d03ca412",
+    "size": 776942
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-line-1.png",
+    "sha256": "191ceb219a721655f3d31949f7008613988a56cdb507792893930957578c3f09",
+    "size": 815182
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-line-2.png",
+    "sha256": "0a1c904f56a31301df5e670fbff83cf190147fe583f990b8c4b4640543b3f7dd",
+    "size": 827598
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-line-3.png",
+    "sha256": "b0081f69ebb43f715058684a38bb61959558eba1bb9cc418790828408571c92e",
+    "size": 874528
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-2-rice-pickup.png",
+    "sha256": "34b2d599c4f2cdae7f6a0f03d665769fbe0957dd9956b489cb5acca97c9aeac7",
+    "size": 671292
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-bento-pickup.png",
+    "sha256": "5de06165b2cd72c116799f4237196167b383892b5272504c1dc266332a24cd2c",
+    "size": 640060
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-cable-hook.png",
+    "sha256": "db1f5878287df01abcfc1641b72be5a3e48b97027e1d97e020e268a46a6c1c59",
+    "size": 632470
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-cable-pickup.png",
+    "sha256": "df72239ec84ae51d2d67f520257f13e8be91c83255482cbc4e828e92feb6f46c",
+    "size": 626182
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-checklist-support.png",
+    "sha256": "00d66fafa7520e97caedca6112eaf145219febede5b6d95ba225d37edd597b9e",
+    "size": 679448
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-checklist-support.png",
+    "sha256": "ff54befc385f6b1eb5c775a83d7ed40e695cb184f103a73cfff493d01bd35988",
+    "size": 679324
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-door-return.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-door-return.png",
+    "sha256": "e32d4d76656220d24bfbd49ef28252ce7f84aee69cc3e480c18e0947bc188a6b",
+    "size": 605696
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-lift-return.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-lift-return.png",
+    "sha256": "95cffd2c9934998a222be0903175e7f31feb8a08138355aba544e6badec62c12",
+    "size": 561912
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-line-1.png",
+    "sha256": "fb5ae5b6092e4bddd314c90c4d93d1e8e67a2378073c4495a9ce480ae1f8e7e6",
+    "size": 869672
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-line-2.png",
+    "sha256": "69f8fdc8ed3cbd38ade2e0c47b4d7542476de097d9dc3642cd5398aa49199c95",
+    "size": 781008
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-line-3.png",
+    "sha256": "53b10a2c0bcc855873b08bfcf6e5ab7597a03df7fd4035858539e478dd5fa5fb",
+    "size": 816426
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-marked-sheet-pickup.png",
+    "sha256": "6a7fc54d8e8e0e33ef2a0ade093d4974913c4bf2e44ed9abf3f3a5267df9f264",
+    "size": 609764
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-pencil-clip.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-pencil-clip.png",
+    "sha256": "1a7be11e68c04fdca5774138cd163db79de4691938f5177fdb9376d95e51e610",
+    "size": 672664
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-pencil-grip.png",
+    "sha256": "2ef67ba82d70d772bf3cc29463808c6b0aaf8ef8538bff2dcfa2cd32d883941b",
+    "size": 674152
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-pencil-tip-mark.png",
+    "sha256": "3d93cdff26af5c75ada5aec48d8f85adaab18c89e767e836e732a96ff16a3348",
+    "size": 673942
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-sheet-return-taker.png",
+    "sha256": "d0d60b60e89525e1aa01c98785ecac5993fa6ca784df18fa9d8375b5dcc0222a",
+    "size": 686248
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-sheet-return.png",
+    "sha256": "002bfa416dc4ab90049e6ecee71efc5b63d88bbe5ac54401fc9cdac3b50551d0",
+    "size": 685668
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-continued-start.png",
+    "sha256": "6dd5b399130ce12f7b5535a3365632782bde029b3a119d9b43d4607d47645d21",
+    "size": 652814
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-door-out.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-door-out.png",
+    "sha256": "97dc6dc9046ca40d356ca325c6d8db33a21f53e7e3e592add237e05a6f0a5a99",
+    "size": 593850
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-finished.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-finished.png",
+    "sha256": "e43fd249f2efdb15f9923ce2478fdcb447ad6bc40ee6fa2acf69aea7de022dc2",
+    "size": 664484
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-layout.png",
+    "sha256": "e008b681710dcc311bc76bb0ace12f9793a57f32e92cde07d6b49d3069c4b442",
+    "size": 777326
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-lift-out.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-lift-out.png",
+    "sha256": "3b2899ce3ecafdb2291577e60c566c6d3054ed1a7d1e44193d7292fadbc672c4",
+    "size": 617778
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-line-1.png",
+    "sha256": "59be0570449c04e7960973c02f35f59f25b7b89a3a41d0923141e4ded9006490",
+    "size": 814474
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-line-2.png",
+    "sha256": "f4d61c5f5016e2a2d8cb9ccb70b38372f964fc778fa60f716d64424140c1cd59",
+    "size": 816974
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-line-3.png",
+    "sha256": "4fa89adc989bfe729ab0764b437adb35616f1527f1e2a368e7ff98f16dc640d1",
+    "size": 779370
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-line-4.png",
+    "sha256": "75ffeebcb1492eda327a688da7e2ad405a06c299a8bbff710b5929424803be3a",
+    "size": 822704
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-line-5.png",
+    "sha256": "a8ba10e13b804c5ecbb38f31fddf74c17ca0e87f4f1dbb8c1866247228facd07",
+    "size": 754594
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-pencil-grip.png",
+    "sha256": "d33b30cef69edbfc240904b367763dbc1e7ead507c29a09ae1985fd9bdaaeeb0",
+    "size": 673496
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-pencil-tip-mark.png",
+    "sha256": "e88e9979ee50a0a4157abe76b206d1c4bae9cffedbc5e1bfbc9e262622d77b02",
+    "size": 669680
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-sheet-handover-taker.png",
+    "sha256": "956fd16344137bf578a8c356c0696cff6a445742a82b4ae8fe784293c5cdc706",
+    "size": 689690
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-sheet-handover.png",
+    "sha256": "22b13c44509cfdfc9c16528b18fb1766293be4f3e7580bae24c129489aa7eb98",
+    "size": 676726
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/1366-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/1366-3-sheet-pickup.png",
+    "sha256": "73561e7686486ef0cdc8cff2de6a78ab8e4fcfa39bb5b5e6f546b1f6de82c753",
+    "size": 627734
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-bite-mouth.png",
+    "sha256": "2d90d5944ec88dc4d7dcb12fc96cd9638d751060b03ec67dd48e68db3a2d55ee",
+    "size": 196204
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-cable-hook.png",
+    "sha256": "c41c426df01c5eb8bae3ab50b1972cd6d5fb00f940dabb816d38a880d3539d52",
+    "size": 184910
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-cable-pickup.png",
+    "sha256": "fb00c2fcf62d47fc494af0ad37daf8fdd8b773ae92634d8a3de9fa455f10a3d1",
+    "size": 186484
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-chopsticks-pickup.png",
+    "sha256": "d1efe78e3c58e6d7b602f042e0f8d82e51829fb340850e5b1605205b71e15fdd",
+    "size": 197866
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-continued-bite-mouth.png",
+    "sha256": "91edb16935e0b30135de451af9bbae53d97b71521dc8d40314e6288c8b231f48",
+    "size": 201258
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-continued-chopsticks-pickup.png",
+    "sha256": "845af893af99f192f565b4a50d18ce026b00eb355c4135bf0c8c7d3fb09344db",
+    "size": 199690
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-continued-chopsticks-return.png",
+    "sha256": "6c44920ea6143ac3367c130ca452292d25310e3a41a3b2de69cf6fc7c8eedc85",
+    "size": 201050
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-continued-line-1.png",
+    "sha256": "880be4f0a4b0eaea42538370fc252e36563369c21c62dd1e1d29b66189272115",
+    "size": 198920
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-continued-line-2.png",
+    "sha256": "1e34d945e8970b80fe0f598803b62faf261c59196ba9e5fca57b23821483b7f9",
+    "size": 212220
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-continued-rice-pickup.png",
+    "sha256": "e263fa1af685e6b176d7a873f5f057e754efa029da07bd3471640ea157850302",
+    "size": 198766
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-continued-start.png",
+    "sha256": "243e0701c58faade0c2b1937535c12423506d64e44822c4732ceb2d5e82a5ab9",
+    "size": 177932
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-finished.png",
+    "sha256": "62656f752ef7792de15ccd7cf946e91f8b64fc49f62e687407362e46ea000499",
+    "size": 144050
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-layout.png",
+    "sha256": "77f32a47a5a714f57b9257d867d00bf6eac9e251af9b50201144f3bee041cf9c",
+    "size": 199758
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-line-1.png",
+    "sha256": "db90f7748064ddfa3cc046f050c48bae73da1ce8baf3a1dbfcb8a281d033552c",
+    "size": 198830
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-line-2.png",
+    "sha256": "f29dc24853debe3b6acf2fe371e45acd8b02ad7c8684ab0be04e155962b53827",
+    "size": 199050
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-line-3.png",
+    "sha256": "ce7a7c9475d70ab0a98821e476ab65dec3fccf7a82c0827b0f70fc5dd920f5d2",
+    "size": 212958
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round23/390-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round23/390-2-rice-pickup.png",
+    "sha256": "76352ca402f024fc5cf94ac2cb16372beafaa01f944f204d2a39b7e673209f7e",
+    "size": 195818
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-bite-mouth.png",
+    "sha256": "6097ae667bbe0d71979adc486399b69a19d75dac9f56c9e1141d05cdfdc57a56",
+    "size": 670716
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-cable-hook.png",
+    "sha256": "413c1584a155b45820d9575104237b757b8d0aa3bf1a23871d16a1134c020931",
+    "size": 635960
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-cable-pickup.png",
+    "sha256": "cba827e74a7188c3ae6a688bb8de1f533c3b1555d1426daf4801e312bf297e96",
+    "size": 627140
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-chopsticks-pickup.png",
+    "sha256": "bb37207c990583577a9c4735eaded283e8a57a1485510543454bf1b1247d87ef",
+    "size": 699580
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-continued-bite-mouth.png",
+    "sha256": "cbf0c6b3b65ad90d8c69aec4bec25b881ab1d4d91b8fcc94eace5a7a98f580b9",
+    "size": 669124
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-continued-chopsticks-pickup.png",
+    "sha256": "d89c7f3e29895e273a41c5478998206b4baa1802068851a8acc5186e4b445e7b",
+    "size": 695902
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-continued-chopsticks-return.png",
+    "sha256": "59b35540c332538411beaeca1703718bc441771b4c6fa0c64a1d0b46f089569c",
+    "size": 668062
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-continued-line-1.png",
+    "sha256": "f60580f4b352e0155126cf34ac6a0603ff18014dc4f5e3b2ca68c182eb72844a",
+    "size": 828816
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-continued-line-2.png",
+    "sha256": "a1cd305da3a49337b32401f3cd4d0db81dda0aa21a6437cbc39c361cdf689e7d",
+    "size": 874624
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-continued-rice-pickup.png",
+    "sha256": "4205fd0c563cbcdb49721e13048f87715355061b48903cf58627e7630142d235",
+    "size": 668488
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-continued-start.png",
+    "sha256": "3685edb6987914cd6f76fad7e9b101354af953ad38d7561e55b4a68d32d0847a",
+    "size": 717254
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-finished.png",
+    "sha256": "4f38653a3a5cb096df449a621a963d2b362cad257359139503cfdedfd2f24d05",
+    "size": 551822
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-layout.png",
+    "sha256": "e28b8dde8f15145a2611c878faf9c0d426c41a3cee84aeabd3212989bf5d43ec",
+    "size": 776290
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-line-1.png",
+    "sha256": "5d893441e3eaed6ab9877245b272910d62298555f25b3b6d84bd88d39855ba3b",
+    "size": 816840
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-line-2.png",
+    "sha256": "23c9c6c5f251ce92b171666763ce310ce2c397d61314d8b4f9dee76f1f5b070c",
+    "size": 826546
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-line-3.png",
+    "sha256": "bdc138d16fb03f8f4b369f5d7e3072ba8de8c89e3ded06a7ddf6ecaa41d774ab",
+    "size": 872564
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/1366-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round24/1366-2-rice-pickup.png",
+    "sha256": "a787caf760a84adec54baecd9b2abdf73acc532bb3599c1dcef088e77bf661b5",
+    "size": 671068
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-bite-mouth.png",
+    "sha256": "86c694dd1f4938dbcf8308ae28a3875f1ed1bbe809d9637799da59e6a19f3c49",
+    "size": 196004
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-cable-hook.png",
+    "sha256": "b4760935e88cbd6ce0fbb4e725b07f2df35b94040d846345c9b417adc8936ec4",
+    "size": 185638
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-cable-pickup.png",
+    "sha256": "747ee4eb130d3be51d806def3d61f11bb087ee8536d35e34b38e7a68254ae66a",
+    "size": 188110
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-chopsticks-pickup.png",
+    "sha256": "74fa29613836c3be60732b7fc7b79028ee2645a53662151852f4d17c14a5117c",
+    "size": 197804
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-continued-bite-mouth.png",
+    "sha256": "03fef0f24d531a4f6d353907fbf70794d06c754659591fa87063945145c51672",
+    "size": 201834
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-continued-chopsticks-pickup.png",
+    "sha256": "7f602cfbbfe9bb30f53a2b504566cac70d2d8ae445eac073fb1c22740daf174e",
+    "size": 199556
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-continued-chopsticks-return.png",
+    "sha256": "d6e5d375e244e808c411bcd62e122073175092867b5a46be8cd267cee3d437c1",
+    "size": 201298
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-continued-line-1.png",
+    "sha256": "6899089eb7633f56e17cd7fe054d201f464934493fe87aa181fae9f42ae73419",
+    "size": 198580
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-continued-line-2.png",
+    "sha256": "bc2c38f71bb81d46b21eb23659ad2591b2c8d6ebbbb5f13c77f40d7e99a4e876",
+    "size": 212756
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-continued-rice-pickup.png",
+    "sha256": "e706c36ac00aa9798324694f543e4fc7b746aa833c22714dad8642f6aed4320b",
+    "size": 201272
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-continued-start.png",
+    "sha256": "b950595d4d7387edc8146a268fc43d850d8ab642043f84451c3fc69d1a01967e",
+    "size": 178468
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-finished.png",
+    "sha256": "6530930640b159b31252075149f1ae03e126ade708b1fc7a59abbcdb1e30f1da",
+    "size": 142384
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-layout.png",
+    "sha256": "09725a7c3c1ad6c090529da7f2d4ed3c36f978490464f7de4b63b7b844731cdb",
+    "size": 200652
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-line-1.png",
+    "sha256": "4a36f76b8cfc22b881264135f9d10bb2abfc303931de1b0f0115d81d3209946c",
+    "size": 198898
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-line-2.png",
+    "sha256": "bec700fc4865e659822512f1ddb9805da4f63f5218bffe1c0fa5b74d95199d45",
+    "size": 198418
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-line-3.png",
+    "sha256": "16c88b070574b73f1a01463ec4ccf6f90a40dbb95b9262bf5663df99d71ff80f",
+    "size": 212834
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round24/390-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round24/390-2-rice-pickup.png",
+    "sha256": "b92a3b94e144ce84dc6c47522c01382d81994e4915c95860e09b9646c46880be",
+    "size": 195390
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-bite-mouth.png",
+    "sha256": "037e8c435f2ecf54d28522b4db8943304c46a6783b40b25ee2307ad303a03346",
+    "size": 668832
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-cable-hook.png",
+    "sha256": "1b4632f8a313b7b4ebd528dc911ca574989315b5bc8824dd69ecb902da23a259",
+    "size": 635462
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-cable-pickup.png",
+    "sha256": "12459d31ee79f79a598c38ea01024db7b9d318af2be2d6a50d6bd11953c530aa",
+    "size": 621190
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-chopsticks-pickup.png",
+    "sha256": "5b084e91bf161cdc953f8fe12a9098b122f51361cb86ec5f809dfb837470aa46",
+    "size": 711526
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-continued-bite-mouth.png",
+    "sha256": "b901deec74dcfc210203d5569697b03f9d2cfa80baecf14912cd9922b62fcf87",
+    "size": 671374
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-continued-chopsticks-pickup.png",
+    "sha256": "a4a353b7d18c1ef55da8dd5bf633e9c69c4e6680336e434971501f1cd38bd687",
+    "size": 712124
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-continued-chopsticks-return.png",
+    "sha256": "e46a45bf1547a67c5cc55a4626f17e6669f73eafc2088839d2051f8e3ccc9aeb",
+    "size": 670402
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-continued-line-1.png",
+    "sha256": "519a93513e6a20d3bb05b0dd5089ab64d9cdd95e48d21018c5bf57bd3fd9bfe5",
+    "size": 839130
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-continued-line-2.png",
+    "sha256": "bcd5f314ce605be0149e2854aea10458c73d28ee141cb8cc4f886c29cab09c6e",
+    "size": 873116
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-continued-rice-pickup.png",
+    "sha256": "67ba13b372a7d0b8a56c2d76fc971952c75a69f4bd0cd31b2aace19044a11721",
+    "size": 671522
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-continued-start.png",
+    "sha256": "ed589d491a7eed70b56749b353a633e4ed9453c315343add3f2dfe1250eb826d",
+    "size": 720684
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-finished.png",
+    "sha256": "c562e3023bf04147a3c2655d16cde3c1244f670aadfa02e268f18f5ab026e75c",
+    "size": 556508
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-layout.png",
+    "sha256": "9e222c436dcd2a92bfb285c4a0f1117ec2499d8c2dce540460db97d597b1bdab",
+    "size": 776686
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-line-1.png",
+    "sha256": "5813bbd6040fce56a5edf9c7207fb84936468dcb46591ad0c67f11b2ac47191e",
+    "size": 819134
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-line-2.png",
+    "sha256": "7636d99440b21f8ef34596029eb7fa7ec63d5843c3e99ade3336421729003486",
+    "size": 826230
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-line-3.png",
+    "sha256": "71a74704f8c22ddef0c611e3a604820c3ed9231aad0ceb169082e9cd84a6bb9a",
+    "size": 874368
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/1366-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round25/1366-2-rice-pickup.png",
+    "sha256": "4794798090ff8259176f3bab6913081962425b92b56a8c9c69fb9d64f6e80993",
+    "size": 669308
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-bite-mouth.png",
+    "sha256": "9e761414550d718f62f03001996b3fbc5042569cff0c4fe8610eac7f27b2848b",
+    "size": 188082
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-cable-hook.png",
+    "sha256": "9ae10b433b2abe50e78a96771116fa2f50a76d7223bc5cfbb66b8595fbe9ede1",
+    "size": 184824
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-cable-pickup.png",
+    "sha256": "be59eda9958af14dfc75bd3c1eefe5315d1eeb3d05de78b9b66fbb54c6637885",
+    "size": 175666
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-chopsticks-pickup.png",
+    "sha256": "d1cb2d82dbc444968fcfec2b29742fae6dcfdd814810cec4efa1112501df6364",
+    "size": 191316
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-continued-bite-mouth.png",
+    "sha256": "6e2f08950cf773b437f4a6c6e61fb8e94a28f3cc117e4a4dca7537885b5b5014",
+    "size": 191108
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-continued-chopsticks-pickup.png",
+    "sha256": "e00dcd957e3a64c06a7c9df603dd652e904846a3882f2736570ea19e38a75bb7",
+    "size": 192906
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-continued-chopsticks-return.png",
+    "sha256": "98e6af9038c5f0c0af4ed48c952bf6824583f36e60747062b6286c016ece2d7b",
+    "size": 189352
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-continued-line-1.png",
+    "sha256": "eccee74ef30958d3a4a2c03530f87fbcb5fa76a7c73f0d32bade1fd8d3675bda",
+    "size": 198548
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-continued-line-2.png",
+    "sha256": "96002b840d394ef7988c8a1f741a78d756f4cd958379aadc15e0382ca9e5b788",
+    "size": 212294
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-continued-rice-pickup.png",
+    "sha256": "47d62d5e86d7dc047ae931dc983b866ecff6e9595a603c4460b27dad9bbf46e0",
+    "size": 189290
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-continued-start.png",
+    "sha256": "cd820478c22fc59006562588831d5e92f0d9254c7bc155e6ce5af999878c2346",
+    "size": 178730
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-finished.png",
+    "sha256": "128a45ab74eb15cc32dacd52e6adb8b4577ec4bc99f317e27634344e9760452f",
+    "size": 144168
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-layout.png",
+    "sha256": "3ea6cd286afbd844aa9775bb260af0e05a6cfc5e04d39867e3924c9e0f23114e",
+    "size": 198840
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-line-1.png",
+    "sha256": "3936ffec6673fa7efe4016c77cb3f77b3c4a62beb96155f59fed024d36039224",
+    "size": 198778
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-line-2.png",
+    "sha256": "554139aeb8cf6fbf16bafc4419a52e83931723d164d479b40d2d60e798bd08df",
+    "size": 198686
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-line-3.png",
+    "sha256": "24d3772f9c5a16ff332c26d56e0385ce7356b4ce3934dbf5568c8c2ac2abfd1b",
+    "size": 212740
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round25/390-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round25/390-2-rice-pickup.png",
+    "sha256": "31d07c74cfcc5b79e61a160c1187b8a884cb01ae057b6feb37962ba30e24cb3b",
+    "size": 187408
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-bento-pickup.png",
+    "sha256": "2fa94a4f2455cf076913a37c2cc656c4a5cf606365a0b702a369e30bffad3130",
+    "size": 640466
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-cable-hook.png",
+    "sha256": "8e433de262e672443609eeb3fb9c3a3f4c6d932d7e2806d0cb100878a26403fd",
+    "size": 637756
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-cable-pickup.png",
+    "sha256": "261a786ef0b744aafa50a6a8bb10af1fe50489e0286a71b57b7e235d8ed7d8a5",
+    "size": 629364
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-checklist-support.png",
+    "sha256": "b0ec3b4af61cfaa3ad35cb9daef8fb1b238d9c31be560a883f07ecc9fc17e2b3",
+    "size": 681450
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-checklist-support.png",
+    "sha256": "c3b21ff698806d84fa2647e143b8e64eb4652be94ff450147164aa06c0a08840",
+    "size": 682176
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-door-return.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-door-return.png",
+    "sha256": "41f402b67147e095c254e557cf13b8e79e0bb488238ae44248138c59972d9bd0",
+    "size": 601872
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-lift-return.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-lift-return.png",
+    "sha256": "add5f6c991a72fb954c2d2c09c0f7e94433f138ae77ec17248009cb763fd2b21",
+    "size": 565160
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-line-1.png",
+    "sha256": "0b0d5bb6e97f95935c0e568dfc3c66a53421bd595bae89cd3ba09297893704cc",
+    "size": 873930
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-line-2.png",
+    "sha256": "e900297b53b02d633ad0d951759ff6b74c3aab3feeaf3f45820ef8c5a6cf3390",
+    "size": 780028
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-line-3.png",
+    "sha256": "c172aff08db7d2f9224bfc121eab43a472a35aa3d75ec8204b81d1fdfd9fb5e1",
+    "size": 818920
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-marked-sheet-pickup.png",
+    "sha256": "0261426cd3528d1b4b4061b1d57ffc7e33dcd2235398b5bdd06a3006e923bc82",
+    "size": 606214
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-pencil-clip.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-pencil-clip.png",
+    "sha256": "1aab2bc38acf410b638567f41e707482e9272150fcb7564ffcc013ec92685bb5",
+    "size": 671718
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-pencil-grip.png",
+    "sha256": "040413c06633e02d97d37c4b29db2a621cc78553c785006250b9955c17bfa5f1",
+    "size": 675938
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-pencil-tip-mark.png",
+    "sha256": "71cac5c4124459db2e8196e404393a1d6295a9404fffe02e5df2bbc0844d16d6",
+    "size": 673306
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-sheet-return-taker.png",
+    "sha256": "a3ee21a8d22434424f4ee4e6a56927b870d3de01fcbdc3b21b79b13cfabadabf",
+    "size": 683520
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-sheet-return.png",
+    "sha256": "93f5d59b1d1d00c34ce8406183cbfefb719d554c2eaf8cf6f0a40145967b023a",
+    "size": 684080
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-continued-start.png",
+    "sha256": "f533bd8191b5d4d941da1fbf60f7fea83cc1a0690c9ebbb4af7ee74e62120dc1",
+    "size": 656724
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-door-out.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-door-out.png",
+    "sha256": "15fb5821f19369c026bc34cdbf2ef23d58c8b76fdf54196b286f2b16ca5782ef",
+    "size": 595156
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-finished.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-finished.png",
+    "sha256": "bd3197dbc816ea01ec3adaa57e0cfb3396719185b7a7a58f88e76c0356217d8c",
+    "size": 669416
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-layout.png",
+    "sha256": "4e894b78928d91f5aad7fb396ccfd379486410500c5c6d2b567657c0a8da3ffd",
+    "size": 776758
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-lift-out.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-lift-out.png",
+    "sha256": "b1513d2216fd6413ed96f5bdc0de4376e62c9063a529ed50ac802ffd0144f2c7",
+    "size": 619576
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-line-1.png",
+    "sha256": "07e17f73e26199e45358ae9841171b8e0ece9546955b73554d16d645998d6dd0",
+    "size": 814294
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-line-2.png",
+    "sha256": "f4b26a686383fb1988317fa5e3c55568ff80a0ce4bfc1cec98a4ed9d6d2f88d0",
+    "size": 815122
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-line-3.png",
+    "sha256": "fc9a7fa1d35cd39851309a10e899c37eddfe7ac8818e275b0607ed42d71faf91",
+    "size": 781552
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-line-4.png",
+    "sha256": "aea4be066f8545bf976d6937b041f27ae75f2446996ffbb0d5520771f6d2bd9b",
+    "size": 819644
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-line-5.png",
+    "sha256": "472d14b793687996a0f8506b74ec8578cfb3f76cefcb9231b988cc4266fbf490",
+    "size": 753464
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-pencil-grip.png",
+    "sha256": "c78f368310ce292ea9d5018960fdf3e2181cb40af7f192abed132e2857452f12",
+    "size": 676192
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-pencil-tip-mark.png",
+    "sha256": "d862122901a6e2d48ba036d680ec0266f3151010ff27140057195b59ff99bde0",
+    "size": 673964
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-sheet-handover-taker.png",
+    "sha256": "2a0612e828b46c4d4dc5490a49577de2c2b242f9182615485b51f948fbbc2147",
+    "size": 689114
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-sheet-handover.png",
+    "sha256": "5b9cf7693823542b32bcd6b62181c00591b6c8734ffa53c3149eee7595c04550",
+    "size": 677260
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/1366-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round26/1366-3-sheet-pickup.png",
+    "sha256": "5ba8d331d9131a1d13847ae1931049e3415d77b7356b44787a4827cf99c5bd41",
+    "size": 620738
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-bite-mouth.png",
+    "sha256": "e06c097d844eec56f4e63171f1b950967e4ec9c1a49675d20d794df329b5c10e",
+    "size": 189040
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-cable-hook.png",
+    "sha256": "ecf31f3ac3b1d51e13c9a7c9a7c1bf90e8574c61e98ffd1701756ba6740518cb",
+    "size": 184326
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-cable-pickup.png",
+    "sha256": "e5505a4a3d30c18b80a71ed0dbb699b4d2f23e60245455e301cbd78f22d3e476",
+    "size": 175346
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-chopsticks-pickup.png",
+    "sha256": "ad92d63cbb82eb6f8be9410dfa876f7e9e5c9f1f756d19cd4769fb3fe261c621",
+    "size": 192184
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-continued-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-continued-bite-mouth.png",
+    "sha256": "711bd8c2683320378b6f0ced49321076fdb99d55ac7a27d42b89fcdbca268bd0",
+    "size": 192288
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-continued-chopsticks-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-continued-chopsticks-pickup.png",
+    "sha256": "bceaf1d7f2351091aea8b2e535f7e888e7d19a00fafaa263755abbeb878fa67a",
+    "size": 196456
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-continued-chopsticks-return.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-continued-chopsticks-return.png",
+    "sha256": "8b45a89861a9946d23b08a1ce5a84a44eea8c51cf69cbdddb9b654ec703870fc",
+    "size": 191796
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-continued-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-continued-line-1.png",
+    "sha256": "547039f35c170a26eae75a0427c46e62f2da333e50ca3c097f5a25359d93f357",
+    "size": 198942
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-continued-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-continued-line-2.png",
+    "sha256": "a8e20fd604d9fd23e3b58349b747b49fa517db400cb747b55010dc05e4a3c9b8",
+    "size": 213146
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-continued-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-continued-rice-pickup.png",
+    "sha256": "365d11cdf050465b816d3bb8140ddef0f9250e304ff5c1c84c5c0dfbafa3cd44",
+    "size": 191478
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-continued-start.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-continued-start.png",
+    "sha256": "654aa5b70ca7b092bbc42889b3c3402960df72f27127742d27fa4dc0aaf91bce",
+    "size": 177550
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-finished.png",
+    "sha256": "56c34886a34edea16cd2b6921f9f0bdd86fb392c9dd6ab2555a5f5535fe83822",
+    "size": 146248
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-layout.png",
+    "sha256": "e5c35914d338431f447e904c829045fb659d1afee4cc2a62b55961541fbcf0b8",
+    "size": 198794
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-line-1.png",
+    "sha256": "204087a0d6c051db1529917b7606efafa43a5e67473d5254e6176db7aa5f8fe5",
+    "size": 198452
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-line-2.png",
+    "sha256": "ae2e3e7686b59498c81e3c91f8c7b84eeac8d25d2a280831a886bfd72e2d50d1",
+    "size": 198220
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-line-3.png",
+    "sha256": "496ab20cc72a45911e0a3a3309631cd6ec2649a452eb2e6f04dcc33cee8b3db5",
+    "size": 212544
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round26/390-2-rice-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round26/390-2-rice-pickup.png",
+    "sha256": "cfff7be28a76d23e8c9207b63d88a19bd9e5a3c801a725b5ce471f845de43a3c",
+    "size": 188274
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round3/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round3/1366-2-bento.png",
+    "sha256": "1a4aa17ff966e6a140cbc8f13e59620fb496dcc0f4f80aef41d13e27267e8822",
+    "size": 714726
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round3/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round3/1366-2-bite-mouth.png",
+    "sha256": "e55a78842266ec37dc09d7ebc6391b7e955cbd1cc145ffb1272434a08a5f5b58",
+    "size": 713982
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round3/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round3/1366-2-cable-hook.png",
+    "sha256": "7f5ebf7c95ab84ea1694dfe8deb1679e210cf667ad457aa60fe2ed748d11852f",
+    "size": 678032
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round3/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round3/1366-2-cable-pickup.png",
+    "sha256": "b047bedc6e4914b9504be2e5cb76f033c21e0c763de2e26a6548448e5d7f5ad6",
+    "size": 668842
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round3/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round3/1366-2-finished.png",
+    "sha256": "3ab1221370483a2ce8ecfe6a59c0523bf2b1e30624e947768cf6b9becc1f60f8",
+    "size": 632598
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round3/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round3/1366-2-layout.png",
+    "sha256": "671a0f7567f8179616773438cb407ff3f97e9f2cf39f05c3cca28a85649f220a",
+    "size": 777444
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round3/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round3/1366-2-line-1.png",
+    "sha256": "666d06477ef4f9ad236bfcad6808c006348a3fa987b92f8467176ef31f30deac",
+    "size": 825216
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round3/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round3/1366-2-line-2.png",
+    "sha256": "7b0f65cdf9a35a66ab1a9e9e04d944836a236b5c4196ee95e4274bb784f3c0ac",
+    "size": 787046
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round3/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round3/1366-2-line-3.png",
+    "sha256": "62c927335db28470837cbb7eb075d3c180909609edf69ffa07845e59901f8ec3",
+    "size": 829952
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round4/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round4/1366-2-bento.png",
+    "sha256": "dea0c3aae79b9a38eeda663eadcd2277900609c175d887f7e26215340fc233aa",
+    "size": 731654
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round4/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round4/1366-2-bite-mouth.png",
+    "sha256": "7d5305f82db8bba04ab8b2687096836ba8c5d6ba85dcccfbbd6fdd62516c676b",
+    "size": 730450
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round4/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round4/1366-2-cable-hook.png",
+    "sha256": "f9e3e540b61ab0d7b15e6472014d2da16d05af55b72409b0c25a26dbdd15b34d",
+    "size": 637090
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round4/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round4/1366-2-cable-pickup.png",
+    "sha256": "3581087664b07917dc31bacdaffeef2f3e1d97d0e19ad750d59048318ab61442",
+    "size": 633478
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round4/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round4/1366-2-finished.png",
+    "sha256": "ce5e2efeab4e7dbdd3041b5343a98c19bc8bf3164ccfaf39ce34bffdfc95127c",
+    "size": 671316
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round4/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round4/1366-2-layout.png",
+    "sha256": "8bd088b978f140be3b876e0cd54fb665f2afd8d243facf6dc6d6c7a0ac773e4c",
+    "size": 777054
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round4/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round4/1366-2-line-1.png",
+    "sha256": "2dccfcc83ae49c38aa833ce79cf65989cf17638d2b0fb39b1209cfdba5f1396e",
+    "size": 814800
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round4/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round4/1366-2-line-2.png",
+    "sha256": "722dd2087371bd45745636d1a08458f92d25c7781a15d0e8ea5e9c2f286dfa6d",
+    "size": 836128
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round4/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round4/1366-2-line-3.png",
+    "sha256": "3d22727d53a52087187e2a9bfab9ecbd50c9bb3ba248dc1eb490a544fcd8c8fc",
+    "size": 868070
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-2-bento.png",
+    "sha256": "47faebbdd5b6a70a3cd3891691c6819c39390a9b5771ac55f66605456ee4fa01",
+    "size": 726436
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-2-bite-mouth.png",
+    "sha256": "1f1bbba2158c7740f4c16b358b6d6f915357e0672a40bb87a0a24edff9ec4008",
+    "size": 725940
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-2-cable-hook.png",
+    "sha256": "1a42a4004e4ce61befa0f9c2f7a67542af03fb3b206f69dc563d836b2e2790cb",
+    "size": 639218
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-2-cable-pickup.png",
+    "sha256": "69cd7810629d19339c6defe75211ac5ce183c74e4885d32851a2b327a5740949",
+    "size": 631592
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-2-finished.png",
+    "sha256": "248918a4f12f34469f2bf25f9a40c09a03511932bb4d91ed3ca20337e1fe8dc1",
+    "size": 625176
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-2-layout.png",
+    "sha256": "ebf4a0e34d5f7912eb40558867a50201b3af837fb129a167d985924f592a88a2",
+    "size": 777278
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-2-line-1.png",
+    "sha256": "ba2a037dca2f00ee7c1a907c11ac22765a7d4dae6a15bb1ad6090afc29ce1f35",
+    "size": 809326
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-2-line-2.png",
+    "sha256": "752fbff882d4cb64d18a1bed68e36937d37dfa9670f1f30638916faa303a0b70",
+    "size": 826024
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-2-line-3.png",
+    "sha256": "29cf1a8063af10a7ef2d31d848daf4f100051cffff842b47ed6be9f13872215c",
+    "size": 860700
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-3-cable-hook.png",
+    "sha256": "9897d7a50c920d87352851a40299552d76b53e4bd84a84306f9e6e0ba503c1a5",
+    "size": 635686
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-3-cable-pickup.png",
+    "sha256": "6d8188181ddaaa8a1ef65ca4633f805536b5b6c2ffd5d78e8a362ccf8ec817ce",
+    "size": 630526
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-3-failed.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-3-failed.png",
+    "sha256": "0f046a9ca60888066e5fa268290686060f9356500dbaf3f87ff426d2d5e7b27f",
+    "size": 385094
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-3-layout.png",
+    "sha256": "9749400dbf2576c5c84a27a6fed8fc82b6049bafef69ac16ced7c671923ead7c",
+    "size": 777648
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-3-line-1.png",
+    "sha256": "4a8c7ab7596627d1b7762f04aca5ff61c79dcc2211aec7102832c03d79073abd",
+    "size": 809898
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round5/1366-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round5/1366-3-line-2.png",
+    "sha256": "8a8e6a5d82bd568a37342bbf759e5eab5f18e2b13e6a4fdab30dc25e14f8b380",
+    "size": 816602
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-2-bento.png",
+    "sha256": "42c18a63802dd0a86061480932ddf0471af961da77fc31a777ac6380b6457997",
+    "size": 730312
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-2-bite-mouth.png",
+    "sha256": "042773f1ba665047dfe9628edb061e0248562f24aa06c22ddbc84d7c8002f7b5",
+    "size": 730896
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-2-cable-hook.png",
+    "sha256": "5732230e9ead6790d96ee6325d5efefdee4365a78e65af1b898a33e1204f1593",
+    "size": 637046
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-2-cable-pickup.png",
+    "sha256": "b5be40d28452a7f6b29115f3c5da604c83711b3bccc1cff9558cf86ac5cf452c",
+    "size": 631542
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-2-finished.png",
+    "sha256": "74bb21a7beff7ca25ae554380ec262c551ce9795a90400f6d92d74876a8f7ad6",
+    "size": 628174
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-2-layout.png",
+    "sha256": "316ad43849156af222494bd3d8dd6c024c107f1320fbc9acb10658dd605bb60c",
+    "size": 776224
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-2-line-1.png",
+    "sha256": "6b6ed5a6225ffbd65800a9103c16c33f67f240dffb92bda38b7d727a5cf1dde0",
+    "size": 811668
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-2-line-2.png",
+    "sha256": "1c401953c1bb03d6518f369dcc1ca1c37052df0bacc1185bad7b158b94a4984e",
+    "size": 834240
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-2-line-3.png",
+    "sha256": "6fc9508bff1d93b7f873933490974faf70a240962d2b2037e2645bc5727a8f88",
+    "size": 865618
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-3-cable-hook.png",
+    "sha256": "a44c08980bef836f65dfa5abe2749c9b618aaf82eb652e31c5c4d6871c63543c",
+    "size": 637310
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-3-cable-pickup.png",
+    "sha256": "e4e633d5764776f0f1be0ad23730ad2893db9381b53e3b7316dafbeac8bee3ec",
+    "size": 631028
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-3-failed.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-3-failed.png",
+    "sha256": "14fe5882d8d4547fa995fb43d45f5e1bc53d9b1047d99b056e9b8da188e7b2d9",
+    "size": 319192
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-3-layout.png",
+    "sha256": "4969f62136953e91dc2989c398a25cfbb2a819b262a0539afd9b0199c5998c1f",
+    "size": 777856
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-3-line-1.png",
+    "sha256": "383c1c2bd0de0be8b8845c2a8db7da5d587d740d5d23e6553ea84991f9cc3ae5",
+    "size": 811530
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round6/1366-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round6/1366-3-line-2.png",
+    "sha256": "5d556d990dcc83c1212a5806bf60e02e839b1ad7642f0fca1fbb1328ff7effee",
+    "size": 819636
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-bento-pickup.png",
+    "sha256": "ad27477b22420d600501367b4ffce009bd537fb4790cba96594794ecbce8edc0",
+    "size": 750846
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-cable-hook.png",
+    "sha256": "74132bd02a9ac89f06f5a6795ac480a7a0871aa0e10f49fa5805896ef842906a",
+    "size": 637724
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-cable-pickup.png",
+    "sha256": "b47ad274316910ee5f4580c7032c433c450843b562ad901906337e7b6d6aef82",
+    "size": 629554
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-checklist-support.png",
+    "sha256": "6ba1464026384a0fb5ad49ffcb1acef02d87a571a7c9b4950b355e7d8f313522",
+    "size": 668034
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-failed.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-failed.png",
+    "sha256": "4bd89cd14dd290176accb6a72b900f6b64895cb72077b02b8c33c00d27262101",
+    "size": 366452
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-layout.png",
+    "sha256": "afef8d910cc31b01ab5925176c7ec02d080d24c2651a9466f6fbae5e815c9d0e",
+    "size": 776940
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-line-1.png",
+    "sha256": "62b90e61ce5fc079680f7d05c15054fc7b13058a5f73439f7f30ec3999971b05",
+    "size": 809606
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-line-2.png",
+    "sha256": "10843720ad7b7d9972e82fed5eb4e9459c6d1f48e5b71649602a57a43b29ea0e",
+    "size": 817514
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-line-3.png",
+    "sha256": "00d41a09a32b55da1421c3205be4f7a85de4a5c32fe9f5eee83045248685f40c",
+    "size": 809330
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-line-4.png",
+    "sha256": "62f0b08efc30cc065def3aab492e34c362a1542d6361df47d1658e1c36178216",
+    "size": 857640
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-line-5.png",
+    "sha256": "cf72f34f18f4d1c197a4a0345803eae54ffef6cc2df7771bda325d7634aab1c7",
+    "size": 787432
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-line-6.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-line-6.png",
+    "sha256": "5b9d7c6593b917c0401ec138e67aa8ac4e6ef7ad47d7a91077f967bdd050e94f",
+    "size": 781462
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-line-7.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-line-7.png",
+    "sha256": "76cab6f37e539480dfd60cef6c7ca126eea71c44b19c8e2f392cd63fc1f8ce9d",
+    "size": 817128
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-marked-sheet-pickup.png",
+    "sha256": "82c9593d98c6e46696e3bdfb76c7822a08082c400fc7b16e4f942b211041f521",
+    "size": 603012
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-pencil-grip.png",
+    "sha256": "7f53a7cbca1006b1b526b3983da8b21adf1d395624370c033679bb945db6021b",
+    "size": 689130
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-pencil-tip-mark.png",
+    "sha256": "eb7b870db19d2005fd1dddee99859e1e4cd162b1c5513cf406fe8e5f2163477f",
+    "size": 657712
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-sheet-handover-taker.png",
+    "sha256": "5b309cfd44d7de5dbf9b4cc99167562c8265786daf62bd7e76053cc55e77cfc2",
+    "size": 715534
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-sheet-handover.png",
+    "sha256": "e8dc1556e755a5b17cd100ac0be0b3c80a8304ce215fe23ab1bbceb2779af6f8",
+    "size": 708454
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-sheet-pickup.png",
+    "sha256": "d44f8df7fb908a05d2aab768a727da6e10538ee04971bf1c2e32ec6694928ba7",
+    "size": 632826
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-sheet-return-taker.png",
+    "sha256": "704b1ddfade0b67cd2a37e7ac9f4cc61a81be585ff0993eb9a4b39a1c8ed91dc",
+    "size": 608606
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round7/1366-3-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round7/1366-3-sheet-return.png",
+    "sha256": "cebe66249fabb3a193b1af406850e71119b8697a8445fb31a371a26be32e5c08",
+    "size": 607638
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-bento-pickup.png",
+    "sha256": "b9028f31fb5fad15058006e739e14e52745e69842366735fa4623b5d87fbb4ec",
+    "size": 670366
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-cable-hook.png",
+    "sha256": "ac8d1ae8f803fc98e1e2f0a57af396349ef1aad36d82960b9181d7950e9ceb0e",
+    "size": 634750
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-cable-pickup.png",
+    "sha256": "e359b689ca771874a3940b3c1be95f5f89f0afcfeaba61e34abcbf2b209fc53d",
+    "size": 628678
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-checklist-support.png",
+    "sha256": "1059c1f4e0f1e500cfe7dabde60ca1e366328a8e38290c14c7fcbf1d9586a80b",
+    "size": 680716
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-finished.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-finished.png",
+    "sha256": "4f10f40c55e3dd8281570ca182e80536db98c10e5c9d9c88bacbce6facc21622",
+    "size": 677684
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-layout.png",
+    "sha256": "24d84f3f26ac96a8b74c8b57637ab54e42ee8d9ff2a1a69ac0da0ebd39fdab7b",
+    "size": 777222
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-line-1.png",
+    "sha256": "bad47bdd989fe8989c6c4a41cab0b7ba031fbc83ee2ad3d946e88582567aba8b",
+    "size": 805134
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-line-2.png",
+    "sha256": "0182ce4b4a26e91d6048f1ac7dd015fa348c68c504342564aaa51941d7f7be7f",
+    "size": 815480
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-line-3.png",
+    "sha256": "90291e6a14887d50c7fc3c198abbbe6826259ef71c33ad55decb255d2870fb96",
+    "size": 784686
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-line-4.png",
+    "sha256": "c5a358ac6ebb4d174ff2f45c4c075610b3a4d429a58e0acae3176313dd53cb8a",
+    "size": 797532
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-line-5.png",
+    "sha256": "b6b965c1f57de593270b7e39cb256a31ee1785e9523b91761c4c552f4dda6634",
+    "size": 780540
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-line-6.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-line-6.png",
+    "sha256": "8ccb5c40f4e334f7acd38a355734def4302cbe2e6bf78d290227569c314dfdc8",
+    "size": 767438
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-line-7.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-line-7.png",
+    "sha256": "e8c8206d0553c7a65e9f445e1f0cf6bc15cbcbcd31e940b145981e971acebe83",
+    "size": 795304
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-marked-sheet-pickup.png",
+    "sha256": "e19146bb1cc90bc24ad903bcb50ff090a983ecb104e90932ee226bd9285eb18a",
+    "size": 609468
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-pencil-grip.png",
+    "sha256": "c4ae12c95ae7594f89abd625dd3379ba89c153e63d7f3fac01db186d85a66c94",
+    "size": 677122
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-pencil-tip-mark.png",
+    "sha256": "2e7969a328f8b19d852b0729c3aa92f819566363f869dcabc3b8ba7214381e5a",
+    "size": 672178
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-sheet-handover-taker.png",
+    "sha256": "1dd89fe6dcc546e847f500c0a7d593f718864a96afeb02706e7871359f23a1df",
+    "size": 674062
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-sheet-handover.png",
+    "sha256": "84934765832035b80926616d69edca92a09f96640fa105ebc85c54e22ee4b69d",
+    "size": 674734
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-sheet-pickup.png",
+    "sha256": "a7dc145a06f276e8941a6247ec498313ea0c9434b78f5d980ba6bc032ada2a6f",
+    "size": 630438
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-sheet-return-taker.png",
+    "sha256": "8e25c5dd92fdbb79a8e49d78ca9284c2b58ae201f53cd41c91a389ed7328d167",
+    "size": 674978
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round8/1366-3-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round8/1366-3-sheet-return.png",
+    "sha256": "160470df3b716435dfc332d30d86335b923b4da0c697a5686a22796002f2d041",
+    "size": 671458
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-bento-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-bento-pickup.png",
+    "sha256": "885d6ad7111f451049cd090fe9b5a8d83ae42b1a4fc042ced3d34fb0f868b04a",
+    "size": 639164
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-cable-hook.png",
+    "sha256": "b24553536464d1d143ea42425f712626a0dc19ea66bcc1e14fce16894db099cc",
+    "size": 640464
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-cable-pickup.png",
+    "sha256": "2e5e073035bf6ae93bf3c20e83b52b36b69cae6d7a8922a86be31cabe334d53c",
+    "size": 630200
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-checklist-support.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-checklist-support.png",
+    "sha256": "17f9583e47826ca8180cc0e594523b90cddb354cc9379a17c23b0fbae4923f1c",
+    "size": 681472
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-finished.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-finished.png",
+    "sha256": "27d88ea1129341e93c84117804c37ff8885f9b38debe07ad5e8d6034b0c0cfac",
+    "size": 688458
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-layout.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-layout.png",
+    "sha256": "d0742fe51d003587dfbfd8a4f9521a1f86fa035c0ca9033f2f48cf52dc353499",
+    "size": 777334
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-line-1.png",
+    "sha256": "2d829972fbc19cfcf991de4069378063ef523b679a1a7701f7629148d5d78c2d",
+    "size": 810000
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-line-2.png",
+    "sha256": "1c335ca256f118161a13f2d465819e15347ae8e8a2bb8282d7fb2401eaf57cb5",
+    "size": 818950
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-line-3.png",
+    "sha256": "13a2d899e0e0b9013f4c50e55a42cf1ce82d40410fd4f2957b30d19bfb2a8664",
+    "size": 795470
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-line-4.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-line-4.png",
+    "sha256": "81d6b15efabb3af5e466db0320b7f6e044db957a4e3168ab780e8615cd8d1f51",
+    "size": 814528
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-line-5.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-line-5.png",
+    "sha256": "31672acae952e6e54c96599d546114e6e52b72b6513a37ba9d981515cb2eb834",
+    "size": 670006
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-line-6.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-line-6.png",
+    "sha256": "d5485c400ba5d63d6611a16042df145980e130a892f302d28ff9404893e16539",
+    "size": 802638
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-line-7.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-line-7.png",
+    "sha256": "78c33ac33fce7c50ba733664a418d4ac1b701cf6376b8161d15c42133a9b6ea1",
+    "size": 830062
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-marked-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-marked-sheet-pickup.png",
+    "sha256": "b3090ebf0e7f958a0cc44fd4cbbc9cbdedd39abc4594825e1c2a97fe2a43f220",
+    "size": 607312
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-pencil-grip.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-pencil-grip.png",
+    "sha256": "5772f1030fe947610b3e816a125d5d07a6a26c23f63c376513de3280f5b07301",
+    "size": 682950
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-pencil-tip-mark.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-pencil-tip-mark.png",
+    "sha256": "55c93b71c3527992c91e35a0a82a92da96bc8fe2076414c2de0bd4b3def12835",
+    "size": 677134
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-sheet-handover-taker.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-sheet-handover-taker.png",
+    "sha256": "6f94914bc349b900d97832a738c3fc4ac7b093b32077f5059849d3b9f069aa66",
+    "size": 682956
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-sheet-handover.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-sheet-handover.png",
+    "sha256": "ad81c459e34852dadc672bebfc31bc91c638f4cb25cd48a23432846fe89c8bfb",
+    "size": 676156
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-sheet-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-sheet-pickup.png",
+    "sha256": "93e43fcab66a7c52a10fecac542d2c2109598d177938a4c5e15dc1882fee0c89",
+    "size": 622606
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-sheet-return-taker.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-sheet-return-taker.png",
+    "sha256": "20bf9572cab5cd12b6523e91c5f31390a60c4871014bd39ae202a41e2ca7d04e",
+    "size": 685586
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/1366-3-sheet-return.webp",
+    "source": "game3d/shots/mio-lunch/round9/1366-3-sheet-return.png",
+    "sha256": "7dcf0bf70a58dc11e4f3cdd8a9cafcdd569dc4ef977b4d159f710eb3dcaa6f68",
+    "size": 684130
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/390-2-bento.webp",
+    "source": "game3d/shots/mio-lunch/round9/390-2-bento.png",
+    "sha256": "c419fba4f4e0fa01d6539a6ed7aefef15e6a9c0b764b5cc6bd8791bcba082cda",
+    "size": 162040
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/390-2-bite-mouth.webp",
+    "source": "game3d/shots/mio-lunch/round9/390-2-bite-mouth.png",
+    "sha256": "515e6fb60953313626ba791ddc5d1c38a139c2e92cdc17a902cd076791dfb618",
+    "size": 161700
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/390-2-cable-hook.webp",
+    "source": "game3d/shots/mio-lunch/round9/390-2-cable-hook.png",
+    "sha256": "e23237cc2317378dc7a67f8ecb621cb11ec11e134e8d5c523b89e14b80f59a40",
+    "size": 181690
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/390-2-cable-pickup.webp",
+    "source": "game3d/shots/mio-lunch/round9/390-2-cable-pickup.png",
+    "sha256": "43cf043550e7fd6971ffc2b7a10cbd6328ebe6363725c25ec54eb0cd27babcac",
+    "size": 174518
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/390-2-finished.webp",
+    "source": "game3d/shots/mio-lunch/round9/390-2-finished.png",
+    "sha256": "5294ce1bac7c778193947aca81fa5c3b459284371684723d2d57f220a90b0f34",
+    "size": 176898
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/390-2-layout.webp",
+    "source": "game3d/shots/mio-lunch/round9/390-2-layout.png",
+    "sha256": "5496520516f35c904d08e578e6d7fac6cfbe53623659118d2a4253ffca3aa085",
+    "size": 199772
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/390-2-line-1.webp",
+    "source": "game3d/shots/mio-lunch/round9/390-2-line-1.png",
+    "sha256": "a3b24d80e9e265b13d4e31ef7f092a5d39d286fae6bd92bd4cc55232a0c4c738",
+    "size": 201246
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/390-2-line-2.webp",
+    "source": "game3d/shots/mio-lunch/round9/390-2-line-2.png",
+    "sha256": "2a92640259ea87e088b95820e29bf5c23a81fe7da013a158600b1ee195750c55",
+    "size": 185998
+  },
+  {
+    "image": "bible/shots/showcase/mio-lunch-20261007/round9/390-2-line-3.webp",
+    "source": "game3d/shots/mio-lunch/round9/390-2-line-3.png",
+    "sha256": "f07dd3976cef83770514a2759a2ef90d6ca5e7e99f6072bdf53e5f6296993960",
+    "size": 196704
+  }
+]

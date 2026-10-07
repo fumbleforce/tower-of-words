@@ -1,8 +1,10 @@
+import { nodes as mioLunchNodes } from '../milestones/mio.js';
 import { place, repairQueue, emiHello } from './shared.js';
 import { revealNodes } from './reveal.js';
 export default place({ forecourt: ['talk:lift'] }, {
-  on: { 'event:kotodama_first': 'd5_first_reactions', 'event:kotodama_cancel': 'd5_delivery_cancel', 'event:kotodama_exit': 'd5_rounds_exit', 'talk:my_desk': 'd5_desk', 'talk:my_chair': 'd5_desk', 'talk:emi': 'd5_emi', 'talk:kenji': 'd5_kenji', 'talk:mori': 'd5_mori', 'talk:mio': 'd5_mio', 'talk:vending': 'd5_drinks', 'talk:copier': 'd5_copier', 'talk:tama': 'd5_cat' },
+  on: { 'event:kotodama_first': 'd5_first_reactions', 'event:kotodama_cancel': 'd5_delivery_cancel', 'event:kotodama_exit': 'd5_rounds_exit', 'talk:my_desk': 'd5_desk', 'talk:my_chair': 'd5_desk', 'talk:emi': 'd5_emi', 'talk:kenji': 'd5_kenji', 'talk:mori': 'd5_mori', 'talk:mio': [{ node: 'ms_mio_help', if: 'mio_lunch_offer == 3' }, { node: 'ms_mio_lunch', if: 'mio_lunch_offer == 2' }, 'd5_mio'], 'talk:vending': 'd5_drinks', 'talk:copier': 'd5_copier', 'talk:tama': 'd5_cat' },
   nodes: {
+    ...mioLunchNodes,
     ...revealNodes,
     d5_desk: [{ do: 'sitDown' }, ...repairQueue, { do: 'tickets' }, { do: 'stand', who: 'eric' }, { do: 'save' }],
     d5_emi: [...emiHello,

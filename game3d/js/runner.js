@@ -15,27 +15,7 @@ export { flags, cond } from './narrative/state.js';
 import { lineClip, audioKeys } from './narrative/voice-keys.js';
 import { playAmbient } from './narrative/ambient-lines.js';
 
-// hooks that keep the current line on screen (they belong to it)
-const KEEP_TALK = new Set([
-  'type',
-  'expression',
-  'face',
-  'emote',
-  'voice',
-  'sound',
-  'hint',
-  'goal',
-  'learn',
-  'bond',
-  'meet',
-  'set',
-  'remember',
-  'fact',
-  'bondStep',
-  'relate',
-]);
-const DURABLE_HOOKS = new Set(['period', 'meet', 'buy', 'take', 'bond', 'bondStep', 'remember', 'fact', 'relate']);
-const WORLD_HOOKS = new Set(['depart', 'bag', 'arrive', 'alight', 'cup', 'lunchSit', 'lunchOver', 'sitDown']);
+import { KEEP_TALK, DURABLE_HOOKS, PERIOD_HOOKS, WORLD_HOOKS } from './narrative/hook-kinds.js';
 export class Runner {
   constructor(game) {
     this.game = game;
@@ -455,14 +435,14 @@ export class Runner {
       console.warn('unknown hook', s.do);
       return;
     }
-    if (DURABLE_HOOKS.has(s.do)) {
-      if (s.do === 'period' && context?.replaying && context.frame.done.includes(key + ':hook')) {
+    if (DURABLE_HOOKS.has(s.do) || PERIOD_HOOKS.has(s.do)) {
+      if (PERIOD_HOOKS.has(s.do) && context?.replaying && context.frame.done.includes(key + ':hook')) {
         const world = context.frame.worldAfter[key + ':hook'];
         if (world) this.game.restoreStaging(world);
       } else
         this.effect(context, key + ':hook', () => {
           const result = h(s);
-          if (s.do === 'period' && context)
+          if (PERIOD_HOOKS.has(s.do) && context)
             context.frame.worldAfter[key + ':hook'] = this.game.captureStaging?.() || null;
           return result;
         });

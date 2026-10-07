@@ -203,6 +203,8 @@ export const OFFICE_DETAILS = {
   'zones': ['office', 'emi_office', 'copy_room', 'kitchen', 'toilets', 'machine_room', 'corridor'],
   'people': ['emi', 'kenji', 'mori', 'aoi', 'rei', 'tama'],
   'hooks': [
+    'mioLunch',
+    'mioLunchComplete',
     'copier',
     'catTo',
     'chairRoll',
