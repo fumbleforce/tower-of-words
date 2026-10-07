@@ -1,7 +1,7 @@
 {
   "title": "Street-style trial: playable work in progress",
   "date": "2026-10-07",
-  "updated": "2026-10-07T08:46:31.945100+00:00",
+  "updated": "2026-10-07T09:10:59.932541+00:00",
   "by": "Codex",
   "status": "open",
   "issue": 321,
@@ -418,6 +418,15 @@
         "bible/shots/reviews/diorama-street-1/court29-390/station-return.webp"
       ],
       "note": "Native game render. Extend the same leaf treatment to the north court and station-return view. Procedural seeds711/1207. All named office/station panes use the new glazing. Work in progress; no image model."
+    },
+    {
+      "id": "reviewer29-evening",
+      "label": "reviewer29-evening",
+      "image": "bible/shots/reviews/diorama-street-1/reviewer29/codex-street-review-evening-29-regression.webp",
+      "images": [
+        "bible/shots/reviews/diorama-street-1/reviewer29/codex-street-review-evening-29.webp"
+      ],
+      "note": "Independent native browser probe: first image retains the rejected dark-lobby regression after material isolation; second shows restored window glow and corrected sunset direction. No image model. Per-mesh materials prevent the trial changing glass elsewhere. Daylight court29 review remains 6–7/10; office glazing, grass, crown variety and phone detail budget are still being revised."
     }
   ],
   "links": [
