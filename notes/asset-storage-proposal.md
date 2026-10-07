@@ -138,7 +138,9 @@ Tested against a local S3 server (SeaweedFS with signature checking on). A wrong
 
 - a binary file, by extension (sync.json's `binary_ext`) or by git's own binary detection, unless the file matches `commit_allow` in sync.json. The allow-list is empty: the only small binaries in code folders were the two fonts, and they're synced like everything else;
 - a path with a `private/` folder in it;
-- a text file over 2 MB (`max_text_kb`; the biggest tracked text file today is three.core.js at 1.4 MB).
+- a text file over 2 MiB (`max_text_kb`), except the exact generated `tools/assets/assets.lock.json` metadata file.
+
+The generated lock has a separate 16 MiB bounded read because every uploaded asset adds a metadata record. The staged syntax and asset gates still reject NUL, invalid UTF-8, malformed JSON, unsafe or private paths and invalid records. Its schema is limited to `about` and `files`, with each public path naming a nonnegative safe-integer size, SHA-256 and content type; the sync policy’s `never` patterns also apply. Other text and binary limits remain unchanged, and the exception does not use `commit_allow`. Checks read immutable staged blobs even when the working copy differs.
 
 Once the lock file exists, the hook also runs `sync.py check --offline --staged` (under a second) and refuses the commit while an asset it uses isn't pushed, so nobody has to remember to push. "Uses" means the file's name appears in a file the commit adds or changes, or the file sits in a folder the commit touches (a Showcase entry.json next to its images). Other unpushed files in the checkout, such as another task's Showcase round in progress, are only noted (issue #72).
 
