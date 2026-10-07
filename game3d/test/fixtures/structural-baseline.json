@@ -60,6 +60,57 @@
       ],
       "ferry_consumed_id": [
         "game3d/js/places/ferry-terminal/food-state.js"
+      ],
+      "canteen_dining_complete": [
+        "game3d/js/places/canteen/action.js"
+      ],
+      "canteen_order_id": [
+        "game3d/js/places/canteen/meal-state.js"
+      ],
+      "canteen_meal": [
+        "game3d/js/places/canteen/meal-state.js"
+      ],
+      "canteen_meal_phase": [
+        "game3d/js/places/canteen/meal-state.js"
+      ],
+      "canteen_meal_seat": [
+        "game3d/js/places/canteen/meal-state.js"
+      ],
+      "canteen_paid_id": [
+        "game3d/js/places/canteen/meal-state.js"
+      ],
+      "canteen_eaten_id": [
+        "game3d/js/places/canteen/meal-state.js"
+      ],
+      "canteen_delivered_id": [
+        "game3d/js/places/canteen/meal-state.js"
+      ],
+      "canteen_staff_present": [
+        "game3d/js/places/canteen/stage.js"
+      ],
+      "canteen_service_open": [
+        "game3d/js/places/canteen/stage.js"
+      ],
+      "canteen_paid": [
+        "game3d/js/places/canteen/stage.js"
+      ],
+      "canteen_outstanding": [
+        "game3d/js/places/canteen/stage.js"
+      ],
+      "canteen_player_at_shared": [
+        "game3d/js/places/canteen/stage.js"
+      ],
+      "canteen_curry_present": [
+        "game3d/js/places/canteen/stage.js"
+      ],
+      "canteen_recommendation_ready": [
+        "game3d/js/places/canteen/stage.js"
+      ],
+      "canteen_diner_busy": [
+        "game3d/js/places/canteen/stage.js"
+      ],
+      "canteen_container_closed": [
+        "game3d/js/places/canteen/diners.js"
       ]
     },
     "prefix": {
@@ -532,6 +583,30 @@
     "canteen:to_plaza",
     "canteen:sit_w",
     "canteen:sit_e",
+    "canteen:meal_closed",
+    "canteen:meal_menu",
+    "canteen:meal_confirm",
+    "canteen:pay_meal",
+    "canteen:collect_meal",
+    "canteen:choose_table",
+    "canteen:cancel_order",
+    "canteen:meal_table",
+    "canteen:eat_meal",
+    "canteen:meal_good",
+    "canteen:return_tray",
+    "canteen:get_water",
+    "canteen:dining_end",
+    "canteen:shirt_hello",
+    "canteen:shirt_food",
+    "canteen:shirt_break",
+    "canteen:cardigan_hello",
+    "canteen:cardigan_recommendation",
+    "canteen:cardigan_container",
+    "canteen:polo_hello",
+    "canteen:polo_chairs",
+    "canteen:choose_curry",
+    "canteen:choose_vegetables",
+    "canteen:sit_shared",
     "campus:to_print",
     "campus:arrive",
     "campus:to_forecourt",
@@ -1398,10 +1473,37 @@
     },
     {
       "from": "canteen:room_worker",
-      "to": "canteen:room_water",
+      "to": "canteen:collect_meal",
       "kind": "choice",
       "labels": [
-        "Point to the water dispenser. “Water?”"
+        "Collect my paid tray."
+      ],
+      "cond": "(canteen_meal_phase == 'paid' || canteen_meal_phase == 'parked')"
+    },
+    {
+      "from": "canteen:room_worker",
+      "to": "canteen:meal_menu",
+      "kind": "choice",
+      "labels": [
+        "Order lunch."
+      ],
+      "cond": "(canteen_service_open && !canteen_outstanding)"
+    },
+    {
+      "from": "canteen:room_worker",
+      "to": "canteen:meal_closed",
+      "kind": "choice",
+      "labels": [
+        "Ask about meals."
+      ],
+      "cond": "(!canteen_service_open)"
+    },
+    {
+      "from": "canteen:room_worker",
+      "to": "canteen:get_water",
+      "kind": "choice",
+      "labels": [
+        "Get some water."
       ],
       "cond": ""
     },
@@ -1452,6 +1554,394 @@
       "kind": "go",
       "labels": [],
       "cond": "(period == 'lunch')"
+    },
+    {
+      "from": "canteen:sit_w",
+      "to": "canteen:meal_table",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:sit_e",
+      "to": "canteen:meal_table",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:meal_closed",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:meal_menu",
+      "to": "canteen:choose_curry",
+      "kind": "choice",
+      "labels": [
+        "Curry rice."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:meal_menu",
+      "to": "canteen:choose_vegetables",
+      "kind": "choice",
+      "labels": [
+        "Rice and vegetables."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:meal_menu",
+      "to": "canteen:dining_end",
+      "kind": "choice",
+      "labels": [
+        "Not now."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:meal_confirm",
+      "to": "canteen:pay_meal",
+      "kind": "choice",
+      "labels": [
+        "Pay the price on the till."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:meal_confirm",
+      "to": "canteen:cancel_order",
+      "kind": "choice",
+      "labels": [
+        "Not now."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:pay_meal",
+      "to": "canteen:cancel_order",
+      "kind": "go",
+      "labels": [],
+      "cond": "(!canteen_paid)"
+    },
+    {
+      "from": "canteen:pay_meal",
+      "to": "canteen:collect_meal",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:collect_meal",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": "(canteen_meal_phase == 'paid' && canteen_delivered_id != canteen_order_id && (!canteen_service_open || !canteen_staff_present))"
+    },
+    {
+      "from": "canteen:collect_meal",
+      "to": "canteen:choose_table",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:choose_table",
+      "to": "canteen:sit_w",
+      "kind": "choice",
+      "labels": [
+        "Sit at the west end chair."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:choose_table",
+      "to": "canteen:sit_e",
+      "kind": "choice",
+      "labels": [
+        "Sit at the east end chair."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:choose_table",
+      "to": "canteen:sit_shared",
+      "kind": "choice",
+      "labels": [
+        "Sit beside the diner."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:choose_table",
+      "to": "canteen:dining_end",
+      "kind": "choice",
+      "labels": [
+        "Keep carrying the tray."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:cancel_order",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:meal_table",
+      "to": "canteen:eat_meal",
+      "kind": "choice",
+      "labels": [
+        "Eat my meal."
+      ],
+      "cond": "(canteen_meal_phase == 'table')"
+    },
+    {
+      "from": "canteen:meal_table",
+      "to": "canteen:shirt_hello",
+      "kind": "choice",
+      "labels": [
+        "Talk with the diner."
+      ],
+      "cond": "(canteen_player_at_shared)"
+    },
+    {
+      "from": "canteen:meal_table",
+      "to": "canteen:return_tray",
+      "kind": "choice",
+      "labels": [
+        "Return my tray."
+      ],
+      "cond": "(canteen_meal_phase == 'table' || canteen_meal_phase == 'eaten')"
+    },
+    {
+      "from": "canteen:meal_table",
+      "to": "canteen:dining_end",
+      "kind": "choice",
+      "labels": [
+        "Stay here."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:eat_meal",
+      "to": "canteen:meal_good",
+      "kind": "choice",
+      "labels": [
+        "{oishii}。"
+      ],
+      "cond": "(know_oishii)"
+    },
+    {
+      "from": "canteen:eat_meal",
+      "to": "canteen:meal_table",
+      "kind": "choice",
+      "labels": [
+        "Finish eating."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:meal_good",
+      "to": "canteen:meal_table",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:return_tray",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:get_water",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:shirt_hello",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": "(canteen_diner_busy)"
+    },
+    {
+      "from": "canteen:shirt_hello",
+      "to": "canteen:sit_shared",
+      "kind": "choice",
+      "labels": [
+        "Sit at the free chair."
+      ],
+      "cond": "(!canteen_player_at_shared)"
+    },
+    {
+      "from": "canteen:shirt_hello",
+      "to": "canteen:shirt_food",
+      "kind": "choice",
+      "labels": [
+        "Talk about the food."
+      ],
+      "cond": "(canteen_curry_present)"
+    },
+    {
+      "from": "canteen:shirt_hello",
+      "to": "canteen:shirt_break",
+      "kind": "choice",
+      "labels": [
+        "Ask about his break."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:shirt_hello",
+      "to": "canteen:dining_end",
+      "kind": "choice",
+      "labels": [
+        "Leave him to his meal."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:shirt_food",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:shirt_break",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:cardigan_hello",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": "(canteen_diner_busy)"
+    },
+    {
+      "from": "canteen:cardigan_hello",
+      "to": "canteen:cardigan_recommendation",
+      "kind": "choice",
+      "labels": [
+        "Ask about the vegetables she recommended."
+      ],
+      "cond": "(canteen_recommendation_ready)"
+    },
+    {
+      "from": "canteen:cardigan_hello",
+      "to": "canteen:cardigan_container",
+      "kind": "choice",
+      "labels": [
+        "Ask about her lunch container."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:cardigan_hello",
+      "to": "canteen:dining_end",
+      "kind": "choice",
+      "labels": [
+        "Let her eat."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:cardigan_recommendation",
+      "to": "canteen:choose_vegetables",
+      "kind": "choice",
+      "labels": [
+        "Order the vegetable set."
+      ],
+      "cond": "(canteen_service_open) && (!canteen_outstanding)"
+    },
+    {
+      "from": "canteen:cardigan_recommendation",
+      "to": "canteen:dining_end",
+      "kind": "choice",
+      "labels": [
+        "Leave her to her meal."
+      ],
+      "cond": "(canteen_service_open)"
+    },
+    {
+      "from": "canteen:cardigan_recommendation",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": "!(canteen_service_open)"
+    },
+    {
+      "from": "canteen:cardigan_container",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:polo_hello",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": "(canteen_diner_busy)"
+    },
+    {
+      "from": "canteen:polo_hello",
+      "to": "canteen:polo_chairs",
+      "kind": "choice",
+      "labels": [
+        "Mention helping with the terrace chairs."
+      ],
+      "cond": "(evening_canteen_helped)"
+    },
+    {
+      "from": "canteen:polo_hello",
+      "to": "canteen:dining_end",
+      "kind": "choice",
+      "labels": [
+        "Leave him to his drink."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "canteen:polo_chairs",
+      "to": "canteen:dining_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:choose_curry",
+      "to": "canteen:meal_confirm",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:choose_vegetables",
+      "to": "canteen:meal_confirm",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "canteen:sit_shared",
+      "to": "canteen:meal_table",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
     },
     {
       "from": "print_shop:directory",
@@ -3364,6 +3854,9 @@
     "room_worker_thanked",
     "room_trays_seen",
     "room_closing_seen",
+    "canteen_shirt_met",
+    "canteen_cardigan_met",
+    "canteen_polo_met",
     "dorm_room_known",
     "home_203",
     "garden_worker_met",
@@ -3371,12 +3864,26 @@
     "konbini_visited",
     "ferry_staff_met",
     "ferry_reader_met",
+    "canteen_dining_complete",
+    "place",
+    "canteen_meal_phase",
+    "canteen_service_open",
+    "canteen_outstanding",
+    "know_tabetai",
+    "canteen_paid",
+    "canteen_delivered_id",
+    "canteen_order_id",
+    "canteen_staff_present",
+    "canteen_player_at_shared",
+    "know_oishii",
+    "canteen_diner_busy",
+    "canteen_curry_present",
+    "canteen_recommendation_ready",
     "found_bakery_flyer",
     "garden_worker_busy",
     "garden_bench_free",
     "garden_worker_done",
     "bakery_action_complete",
-    "place",
     "bakery_phase",
     "bakery_item",
     "bakery_cant_pay",

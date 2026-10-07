@@ -46,7 +46,7 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
 | `day2/east_lane.js` | `d2_arrive`, `d2_to_plaza`, `d2_to_shops`, `d2_to_coast`, `d2_to_dorms`, `d2_sake_tag`, `d2_shut`, `d2_north_closed`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/plaza.js` | `to_canteen`, `d2_arrive`, `d2_to_office`, `d2_to_lane`, `d2_to_shops`, `d2_fountain`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/east_coast.js` | `d2_arrive`, `d2_to_lane`, `d2_north_closed`, `d2_onsen`, `d2_lookout`, `d2_hamada`, `d2_see_word`, `d2_lookout_view`, `d2_hamada_idle`, `d2_hamada_again`, `d2_leave_lookout`, `d2_hamada_go`, `d2_hamada_food`, `d2_hamada_drink`, `d2_lookout_again`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
-| `day2/canteen.js` | `room_worker`, `room_water`, `room_trays`, `room_closing`, `room_worker_end`, `arrive`, `to_plaza`, `sit_w`, `sit_e` |
+| `day2/canteen.js` | `room_worker`, `room_water`, `room_trays`, `room_closing`, `room_worker_end`, `arrive`, `to_plaza`, `sit_w`, `sit_e`, `meal_closed`, `meal_menu`, `meal_confirm`, `pay_meal`, `collect_meal`, `choose_table`, `cancel_order`, `meal_table`, `eat_meal`, `meal_good`, `return_tray`, `get_water`, `dining_end`, `shirt_hello`, `shirt_food`, `shirt_break`, `cardigan_hello`, `cardigan_recommendation`, `cardigan_container`, `polo_hello`, `polo_chairs`, `choose_curry`, `choose_vegetables`, `sit_shared` |
 
 ### North-campus routes
 

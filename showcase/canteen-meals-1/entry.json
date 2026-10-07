@@ -1,0 +1,70 @@
+{
+  "title": "Lunch and ordinary conversations in the canteen",
+  "date": "2026-10-07",
+  "by": "codex",
+  "caption": "Order lunch, carry a tray to a seat, eat, return it and get water. Three existing diners now have ordinary conversations and visible table activities.",
+  "sections": [
+    {
+      "title": "Canteen meals and diners",
+      "caption": "Lunch service uses posted prices. Seating and water remain available outside hot-service hours.",
+      "images": [
+        {
+          "id": "room-desktop",
+          "image": "bible/shots/showcase/canteen-meals-1/room-desktop.png",
+          "caption": "Dining room, desktop."
+        },
+        {
+          "id": "arrival-phone",
+          "image": "bible/shots/showcase/canteen-meals-1/arrival-phone.png",
+          "caption": "Arriving on phone, with the service menu below the HUD."
+        },
+        {
+          "id": "price-phone",
+          "image": "bible/shots/showcase/canteen-meals-1/price-phone.png",
+          "caption": "The price is shown before payment."
+        },
+        {
+          "id": "staff-delivery",
+          "image": "bible/shots/showcase/canteen-meals-1/staff-delivery.png",
+          "caption": "The worker brings the paid meal around the counter."
+        },
+        {
+          "id": "meal-phone",
+          "image": "bible/shots/showcase/canteen-meals-1/meal-phone.png",
+          "caption": "Eating at the shared table."
+        },
+        {
+          "id": "water-fill",
+          "image": "bible/shots/showcase/canteen-meals-1/water-fill.png",
+          "caption": "Filling the cup at the dispenser."
+        },
+        {
+          "id": "water-sip",
+          "image": "bible/shots/showcase/canteen-meals-1/water-sip.png",
+          "caption": "The player lifts the filled cup to drink."
+        },
+        {
+          "id": "diner-cardigan",
+          "image": "bible/shots/showcase/canteen-meals-1/diner-cardigan.png",
+          "caption": "Ordinary conversation beside a diner’s lunch container."
+        },
+        {
+          "id": "container-contact",
+          "image": "bible/shots/showcase/canteen-meals-1/container-contact.png",
+          "caption": "The diner closes her rice container."
+        },
+        {
+          "id": "diner-polo",
+          "image": "bible/shots/showcase/canteen-meals-1/diner-polo.png",
+          "caption": "A short conversation at the east table."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

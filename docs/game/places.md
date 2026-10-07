@@ -1701,9 +1701,13 @@ Played in the evening, after work.
 
 ## Canteen (`canteen`)
 
-The furnished ground floor occupies the existing canteen footprint north of the fountain plaza. Eight six-seat tables, two usable end chairs, tiled floor, teal chairs and wall protection, a hot-food counter with tray rail and cashier terminal, water dispenser, cups and a tray-return trolley. Back windows and a kitchen hatch sit above the service line. Three unnamed diners use the existing generic bodies. The same worker who closes the terrace stands behind the service counter during daytime, wiping it with a cloth held by her actual hand. Her ordinary Talk offers water and tray-return directions, a quieter-time question about closing, and a short repeat response; she recognises actual help with the terrace chairs. Lunch defers the closing question without consuming it. No food purchase or new word is attached. At evening the worker is gone, the exterior windows darken and the wall lights warm the room; diners can still sit indoors. The existing terrace closing scene stays outside.
+The furnished ground floor occupies the existing canteen footprint north of the fountain plaza. Eight six-seat tables have varied laminate surfaces, small wear marks and reachable napkin/condiment caddies. Three chairs are usable, including the existing chair opposite the diner in a shirt. The tiled floor, teal wall protection, hot wells and covers, vented kitchen hatch, tray rail, cashier, water dispenser and return trolley remain within the original room. The service menu and selected meal price come from the same canonical meal table as the till.
 
-The entrance and return walk use the actual south-facing door. Main aisles connect the door, counter, water, return trolley and both usable chairs. Furniture and the staff lane block player movement. The upper floor and kitchen behind the serving line remain inaccessible. Desktop shows the room; phone follows the player.
+Hot lunch is sold during the lunch period: curry rice costs ¥420 and rice with vegetables costs ¥480. The worker takes payment and carries the tray around the actual counter end; the player picks it up, carries it to a chair, eats and returns it. Water is free in every period, with a visible cup fill, sip and return. A carried tray is first set down in its separate counter bay when taking water or leaving normally. Payment and fulfilment receipts survive interruption and Continue; undelivered paid meals wait for the next staffed lunch, while a delivered or parked tray remains collectable without staff.
+
+The three existing unnamed diners have ordinary Talk, personal topics, short repeat replies and visible table activities. Their topics refer to the actual meals, lunch container, badge and terrace. Hearing the vegetable recommendation and knowing `oishii`, in either order, enables a later question about the dish. No conversation marks a new word known. The same worker who closes the terrace retains her closing-time topic and recognition of actual help. At evening she leaves; the room stays open, the windows darken and its wall lights warm the dining area. The existing terrace closing scene stays outside.
+
+The entrance and return walk use the actual south-facing door. Main aisles connect the door, counter, water, return trolley and all three usable chairs. Furniture and the staff lane block player movement. The upper floor and kitchen behind the serving line remain inaccessible. Desktop shows the room; phone follows the player.
 
 ### Things
 
@@ -1713,6 +1717,13 @@ The entrance and return walk use the actual south-facing door. Main aisles conne
 | `canteen_exit` | Fountain plaza | Go out through the front door. |
 | `canteen_seat_w` | Dining chair | Sit at the west side of the main aisle. |
 | `canteen_seat_e` | Dining chair | Sit at the east side of the main aisle. |
+| `canteen_seat_shared` | Shared table chair | Sit opposite the diner in a shirt. |
+| `canteen_shirt` | Diner in a shirt | Ordinary Talk beside his tray and work badge. |
+| `canteen_cardigan` | Diner in a cardigan | Ordinary Talk beside her rice container and side dish. |
+| `canteen_polo` | Diner with a water cup | Ordinary Talk at the east table. |
+| `canteen_water` | Water dispenser | Fill, drink and return a cup. |
+| `canteen_return` | Tray return | Return the player's tray. |
+| `canteen_collection` | My paid tray | Collect an existing entitlement or check its service availability. |
 
 ### Spots
 
@@ -1720,7 +1731,7 @@ The entrance and return walk use the actual south-facing door. Main aisles conne
 
 ### Seats
 
-`canteen_seat_w`, `canteen_seat_e`
+`canteen_seat_w`, `canteen_seat_e`, `canteen_seat_shared`
 
 ### Zones
 
@@ -1732,7 +1743,7 @@ None.
 |---|---|---|
 | `arrive` | Enter | Points back to the plaza; no new dialogue. |
 | `to_plaza` | Use the door | Walk back onto the terrace. |
-| `sit_w`, `sit_e` | Use a dining chair | Sit; movement stands up onto the aisle. |
+| `sit_w`, `sit_e`, `sit_shared` | Use a dining chair | Sit and use the meal/table choices; movement stands up onto the aisle. |
 
 This completes one ground-floor interior. The training centre, clinic, unassigned office blocks, canteen upper floor and shop facades without their own registered place remain exterior shells or closed areas; this change does not make every island building enterable.
 

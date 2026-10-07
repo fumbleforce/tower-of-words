@@ -207,6 +207,29 @@
     ]
   },
   {
+    "id_": "prop/canteen/canteen_collection",
+    "kind": "prop",
+    "name": "My paid tray",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_collection",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'My paid tray'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/canteen/canteen_exit",
     "kind": "prop",
     "name": "Fountain plaza",
@@ -219,6 +242,29 @@
     "place": "canteen",
     "used": [
       "Canteen: tap target 'Fountain plaza'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_return",
+    "kind": "prop",
+    "name": "Tray return",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_return",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Tray return'"
     ],
     "view": {
       "type": "room",
@@ -253,6 +299,29 @@
     ]
   },
   {
+    "id_": "prop/canteen/canteen_seat_shared",
+    "kind": "prop",
+    "name": "Shared table chair",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_seat_shared",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Shared table chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/canteen/canteen_seat_w",
     "kind": "prop",
     "name": "Dining chair",
@@ -265,6 +334,29 @@
     "place": "canteen",
     "used": [
       "Canteen: tap target 'Dining chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_water",
+    "kind": "prop",
+    "name": "Water dispenser",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_water",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Water dispenser'"
     ],
     "view": {
       "type": "room",
