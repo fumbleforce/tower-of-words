@@ -36,7 +36,8 @@ let available = false,
   shot = null,
   ctx = null,
   layer = null,
-  shotUrl = '';
+  shotUrl = '',
+  releaseView = null;
 
 // ---------- where the game is ----------
 async function gather() {
@@ -140,6 +141,7 @@ async function open() {
   isOpen = true;
   const g = game();
   wasPaused = !!g?.paused;
+  releaseView = g?.followCamera?.holdView();
   if (g && !wasPaused) setPause(true);
   const [c, cap] = await Promise.all([gather(), capture(layer)]);
   ctx = c;
@@ -189,6 +191,8 @@ function close() {
   }
   // the pause menu may have opened underneath (the tab went to the background); it keeps the game paused
   if (!wasPaused && !window.__shell?.isPaused?.()) setPause(false);
+  releaseView?.();
+  releaseView = null;
   $('#c')?.focus({ preventScroll: true });
 }
 
