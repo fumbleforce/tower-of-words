@@ -6,7 +6,8 @@ import { followControls } from './controls.js';
 export function installFollowCamera(game, canvas) {
   let place = null,
     lens = null,
-    active = false;
+    active = false,
+    held = null;
   const desktop = () =>
     followAvailable({
       width: innerWidth,
@@ -16,7 +17,7 @@ export function installFollowCamera(game, canvas) {
     });
   const allowed = () => settings.cameraMode === 'follow' && followAllowed(game, desktop());
   const controls = followControls(game, canvas, {
-    available: () => active,
+    available: () => active && !held,
     look: (x, y) => lens?.look(x, y),
     refresh,
   });
@@ -28,7 +29,11 @@ export function installFollowCamera(game, canvas) {
       place = game.place;
       lens = null;
       active = false;
+      held = null;
     }
+    // Feedback pauses the world but keeps the exact rendered lens and room enclosure.
+    if (held && desktop() && settings.cameraMode === 'follow') return controls.paint();
+    held = null;
     const next = allowed();
     if (active && !next) {
       lens?.restore();
@@ -43,6 +48,18 @@ export function installFollowCamera(game, canvas) {
   const api = {
     refresh,
     releaseMouse: controls.release,
+    holdView() {
+      if (!active) return () => {};
+      const token = {};
+      held = token;
+      controls.release();
+      controls.paint();
+      return () => {
+        if (held !== token) return;
+        held = null;
+        refresh();
+      };
+    },
     beforeStep() {
       lens?.restore();
       refresh();
@@ -78,6 +95,7 @@ export function installFollowCamera(game, canvas) {
   window.addEventListener(
     'resize',
     () => {
+      held = null; // A viewport change needs the normal layout fit; the captured PNG stays unchanged.
       lens?.restore();
       refresh();
     },
