@@ -1,8 +1,8 @@
-// Review character-scale-1: retain both requested size comparisons as query-only trials.
+// Review character-scale-1: the selected 15% reduction is the default; queries retain earlier comparisons.
 // Scale before measuring seats and strides; world roots, props and navigation keep their units.
 export function characterScale(search = '') {
   const value = new URLSearchParams(search).get('charscale');
-  return value === '85' ? 0.85 : value === '67' ? 0.67 : 1;
+  return value === '100' ? 1 : value === '67' ? 0.67 : 0.85;
 }
 export const CHARACTER_SCALE = characterScale(typeof location === 'undefined' ? '' : location.search);
 

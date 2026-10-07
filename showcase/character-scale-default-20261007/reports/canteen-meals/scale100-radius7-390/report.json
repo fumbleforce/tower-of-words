@@ -1,0 +1,198 @@
+{
+  "errors": [],
+  "result": {
+    "player": {
+      "at": [
+        3.85,
+        0,
+        -6.02928
+      ],
+      "yaw": 3.141592653589793,
+      "scale": 1.18
+    },
+    "contacts": [
+      {
+        "id": "payment",
+        "gap": 0.0029435804187785517,
+        "hand": [
+          4.029840871252942,
+          0.446327578647362,
+          -6.142498162916848
+        ],
+        "target": [
+          4.031485993717288,
+          0.4442129058521245,
+          -6.143717341627375
+        ],
+        "pose": {
+          "at": [
+            3.85,
+            0,
+            -6.02928
+          ],
+          "yaw": 3.141592653589793,
+          "scale": 1.18
+        }
+      },
+      {
+        "id": "payment-end",
+        "gap": 0.009341918329603141,
+        "hand": [
+          4.015426232110644,
+          0.7002580373068544,
+          -6.301888182895722
+        ],
+        "target": [
+          4.02,
+          0.701,
+          -6.31
+        ]
+      },
+      {
+        "id": "staff-tray-place",
+        "gap": 0,
+        "hand": [
+          4.06016698777213,
+          0.7361927827086943,
+          -6.727136439565473
+        ],
+        "target": [
+          4.06016698777213,
+          0.7361927827086943,
+          -6.727136439565473
+        ],
+        "pose": {
+          "at": [
+            3.85,
+            0,
+            -7.06568
+          ],
+          "yaw": 0,
+          "scale": 1.3569999999999998
+        }
+      },
+      {
+        "id": "staff-tray-place-end",
+        "gap": 0.024984914209561095,
+        "hand": [
+          4.05956578941703,
+          0.7091227244917491,
+          -6.733944189170724
+        ],
+        "target": [
+          4.0600000000000005,
+          0.7020000000000001,
+          -6.71
+        ]
+      },
+      {
+        "id": "tray-take",
+        "gap": 0.025010473290101864,
+        "hand": [
+          4.017944702660741,
+          0.7000285165960438,
+          -6.308175545059615
+        ],
+        "target": [
+          4.03,
+          0.7020000000000001,
+          -6.329999999999999
+        ],
+        "pose": {
+          "at": [
+            3.85,
+            0,
+            -6.02928
+          ],
+          "yaw": 3.141592653589793,
+          "scale": 1.18
+        }
+      },
+      {
+        "id": "tray-take-end",
+        "gap": 2.8312783357610173e-05,
+        "hand": [
+          4.013052742520303,
+          0.39836043183502345,
+          -6.037717095086511
+        ],
+        "target": [
+          4.013038564103926,
+          0.39838480627851225,
+          -6.037714550933389
+        ]
+      },
+      {
+        "id": "carry-0",
+        "gap": 0,
+        "hand": [
+          4.05005786333946,
+          0.7349079606833259,
+          -6.294931618237327
+        ],
+        "target": [
+          4.05005786333946,
+          0.7349079606833259,
+          -6.294931618237327
+        ]
+      },
+      {
+        "id": "carry-1",
+        "gap": 0.06141790504466131,
+        "hand": [
+          3.6506686775314776,
+          0.7274286929372952,
+          -6.237560772397298
+        ],
+        "target": [
+          3.6300578633394602,
+          0.7349079606833259,
+          -6.294931618237327
+        ]
+      }
+    ],
+    "phase": "carried",
+    "seats": [
+      "canteen_seat_w",
+      "canteen_seat_e",
+      "canteen_seat_shared"
+    ],
+    "people": [
+      "canteen_worker",
+      "canteen_shirt",
+      "canteen_cardigan",
+      "canteen_polo",
+      "mio"
+    ],
+    "things": [
+      "canteen_worker",
+      "canteen_exit",
+      "canteen_seat_w",
+      "canteen_seat_e",
+      "canteen_shirt",
+      "canteen_cardigan",
+      "canteen_polo",
+      "canteen_seat_shared",
+      "canteen_water",
+      "canteen_return",
+      "canteen_collection",
+      "mio"
+    ],
+    "nav": {
+      "canteen_worker": true,
+      "canteen_exit": true,
+      "canteen_seat_w": true,
+      "canteen_seat_e": true,
+      "canteen_shirt": true,
+      "canteen_cardigan": true,
+      "canteen_polo": true,
+      "canteen_seat_shared": true,
+      "canteen_water": true,
+      "canteen_return": true,
+      "canteen_collection": true,
+      "mio": false
+    },
+    "traceSamples": 1430
+  },
+  "original": "game3d/shots/canteen-meals/scale100-radius7-390/report.json"
+}

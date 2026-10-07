@@ -1,0 +1,15 @@
+(node:2827080) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/vendor/three/three.module.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ at 0.85: actual procedural worker carries with uncrossed arms and keeps the same physical rear grip through delivery (20.445402ms)
+✔ at 1: actual procedural worker carries with uncrossed arms and keeps the same physical rear grip through delivery (6.415782ms)
+✔ undelivered receipt cannot animate hidden staff or fulfil hot service outside lunch (2.121321ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 129.914804

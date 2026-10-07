@@ -1,0 +1,16 @@
+gait-check: GPU slot 3
+forecourt 390x844-chibi=0-charscale=67-legacy-scale-fix: 162 windows, 13 people in view, 13 walked; walked: kuro
+  eric: 12 walking windows, median ratio 1.46, bad 0
+  mio: 10 walking windows, median ratio 1.08, bad 0
+  crowd6: 24 walking windows, median ratio 0.99, bad 0
+  crowd13: 22 walking windows, median ratio 1.04, bad 0
+  crowd16: 4 walking windows, median ratio 1.06, bad 0
+  crowd12: 17 walking windows, median ratio 1.06, bad 0
+  crowd9: 13 walking windows, median ratio 1, bad 0
+  crowd10: 3 walking windows, median ratio 0.98, bad 0
+  crowd7: 12 walking windows, median ratio 1.01, bad 0
+  crowd5: 9 walking windows, median ratio 0.99, bad 0
+  crowd11: 6 walking windows, median ratio 1.09, bad 0
+  crowd8: 5 walking windows, median ratio 0.98, bad 0
+  crowd4: 2 walking windows, median ratio 1.17, bad 0
+PASS 390x844-chibi=0-charscale=67-legacy-scale-fix game3d/shots/gait/390x844-chibi=0-charscale=67-legacy-scale-fix

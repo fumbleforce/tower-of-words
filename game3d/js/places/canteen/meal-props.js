@@ -30,10 +30,10 @@ export function mealProps(P) {
   add(container.root, [-5.52, 0.625, -1.35]);
   const wrapper = add(rbox(0.15, 0.008, 0.11, '#d9dec9'), [8.3, 0.629, -4.6]);
   const badge = add(rbox(0.105, 0.012, 0.075, '#498894'), [-9.7, 0.627, -4.3]);
-  const cash = add(new THREE.Group(), [4.05, 0.701, -6.35]);
+  const cash = add(new THREE.Group(), [4.02, 0.701, -6.31]);
   cash.visible = false;
   const cup = add(waterCup(), [9.66, 0.61, -5.93]);
-  const tap = add(rbox(0.06, 0.075, 0.035, '#426675'), [9.65, 0.81, -5.91]);
+  const tap = add(rbox(0.06, 0.075, 0.035, '#426675'), [9.65, 0.74, -5.91]);
   add(rbox(0.035, 0.055, 0.07, '#879b9f'), [9.57, 0.77, -5.93]);
   const stream = add(
     new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.006, 0.08, 6), mat('#accdd4')),

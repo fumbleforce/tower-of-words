@@ -1,6 +1,7 @@
 import * as THREE from 'three';
-import { STAFF_COUNTER_ROUTE } from '../../scenes/canteen/plan.js';
+import { staffCounterRoute } from '../../scenes/canteen/plan.js';
 import { walkRig, faceRig } from '../../move.js';
+import { BODY, bodies } from '../../movement/shared.js';
 import { canteenServing } from '../../gameplay/canteen-meals.js';
 import { COLLECTION, PARKING, RETURN, tablePoint } from './meal-props.js';
 
@@ -14,8 +15,9 @@ export function mealService(game, P, state, props, hands, frame, commit, flags) 
       throw Error('Canteen approach blocked');
     if (face) await job.wait(faceRig(game, player, face));
   }
+  // Grip the front or rear rim inside its corners, within either protagonist's reach.
   function contactGrip(t, wrist, centre = t.root.position) {
-    return [-0.23, 0.23]
+    return [-0.18, 0.18]
       .flatMap((x) => [-0.19, 0.19].map((z) => new THREE.Vector3(x, 0.018, z).applyEuler(t.root.rotation)))
       .sort((a, b) => centre.clone().add(a).distanceTo(wrist) - centre.clone().add(b).distanceTo(wrist))[0];
   }
@@ -61,17 +63,19 @@ export function mealService(game, P, state, props, hands, frame, commit, flags) 
       if (!P.people.canteen_worker.root.visible || !canteenServing(game.sim.day, game.sim.period)) return false;
       await deliver(job);
     }
-    await walk(job, [at[0], -5.98], [at[0], -7]);
+    await walk(job, [at[0], -6.03], [at[0], -7]);
     await take(job, at);
     state.take();
     commit();
   }
   async function deliver(job) {
     const worker = P.people.canteen_worker,
-      t = tray();
+      t = tray(),
+      radius = Math.max(BODY * worker.root.scale.x, bodies(game).find((body) => body.root === worker.root)?.r || 0),
+      route = staffCounterRoute(radius);
     t.root.visible = true;
     hands.carry(worker, t);
-    for (const target of STAFF_COUNTER_ROUTE.slice(1)) {
+    for (const target of route.slice(1)) {
       await job.wait(faceRig(game, worker, target));
       await job.wait(walkRig(game, worker, target, { route: false, avoid: false, speed: 0.8 }));
     }
@@ -80,7 +84,7 @@ export function mealService(game, P, state, props, hands, frame, commit, flags) 
     await put(job, COLLECTION, worker);
     state.deliver();
     commit();
-    for (const target of STAFF_COUNTER_ROUTE.slice(0, -1).reverse()) {
+    for (const target of route.slice(0, -1).reverse()) {
       await job.wait(faceRig(game, worker, target));
       await job.wait(walkRig(game, worker, target, { route: false, avoid: false, speed: 0.8 }));
     }
@@ -224,7 +228,7 @@ export function mealService(game, P, state, props, hands, frame, commit, flags) 
     sit,
     returnTray,
     async pending(job) {
-      await walk(job, [COLLECTION[0], -5.98], [COLLECTION[0], -7]);
+      await walk(job, [COLLECTION[0], -6.03], [COLLECTION[0], -7]);
       frame('counter');
     },
     async pay(job) {
@@ -242,7 +246,7 @@ export function mealService(game, P, state, props, hands, frame, commit, flags) 
       try {
         await hands.reach(job, player, at.toArray(), {
           item: props.cash,
-          end: [4.05, 0.701, -6.35],
+          end: [4.02, 0.701, -6.31],
           id: 'payment',
           hold: 450,
         });
@@ -272,7 +276,7 @@ export function mealService(game, P, state, props, hands, frame, commit, flags) 
     },
     async water(job) {
       await park(job);
-      await walk(job, [9.5, -5.56], [9.5, -6.1]);
+      await walk(job, [9.56, -5.65], [9.56, -6.1]);
       frame('water');
       await job.wait(game.wait(450));
       const cup = props.cup,
@@ -286,7 +290,7 @@ export function mealService(game, P, state, props, hands, frame, commit, flags) 
           end: [9.57, 0.66, -5.9],
           id: 'cup-under-outlet',
         });
-        await hands.reach(job, player, [9.65, 0.81, -5.91], { id: 'water-control', hold: 250 });
+        await hands.reach(job, player, hands.point(props.tap).toArray(), { id: 'water-control', hold: 250 });
         props.tap.rotation.x = -0.25;
         props.stream.visible = true;
         P.canteenPhase = 'water-fill';
@@ -299,7 +303,7 @@ export function mealService(game, P, state, props, hands, frame, commit, flags) 
         props.stream.visible = false;
         props.tap.rotation.x = 0;
         await mouthAction(job, cup, new THREE.Vector3(0, 0.106, 0.025), { drink: true });
-        await job.wait(faceRig(game, player, [9.5, -6.1]));
+        await job.wait(faceRig(game, player, [9.56, -6.1]));
         frame('water');
         await hands.reach(job, player, [9.57, 0.66, -5.9], {
           item: cup,

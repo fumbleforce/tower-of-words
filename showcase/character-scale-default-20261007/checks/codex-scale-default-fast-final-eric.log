@@ -1,0 +1,30 @@
+voices ok: 517 lines, all with clips, no escapes
+playing: eric
+overrides: none
+fast-test: GPU slot 1
+(node:2760889) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/js/mc.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS 1366x860 73 s route: magic places: train > gate > forecourt > office > forecourt > plaza > dorm_court > dorms at: dorms | goal: 
+movement: 12756 steps, 0 overlaps, 0 spins
+gait: 2651 windows, 0 people stepping on the spot or sliding for 2.4 s or more (2 for 1.2 s or more: game3d/tools/gait-check.mjs looks closer)
+practice prompts passed via Say: 7
+bonds: magic {"mio":{"step":1,"pts":3,"met":true,"ready":0,"remembers":["caught_bag","held_doors","copier","lunch","rack"],"facts":["her_list","why_b2"],"log":["greet+1 said おはようございます to her first","scene+2 (day) lunch in the machine room"]},"kuroda":{"step":1,"pts":1,"met":true,"ready":0,"remembers":["held_doors","akete"],"facts":[],"log":["help+1 got him through the jammed gate"]},"guard":{"step":1,"pts":1,"
+voices: {"plays":0,"maxActive":0,"overlaps":0}
+heard: oh-f4h8qf あ、{sumimasen}！ | known gaijin,ohayo,yoroshiku,sumimasen | tokens heardico: plain:あ jp clear:すみません gl:(sumimasen, excuse me, sorry) clear
+heard: oh-6afzfp あっ！{sumimasen}、{sumimasen}！ | known gaijin,ohayo,yoroshiku,sumimasen,matte | tokens heardico: plain:あっ jp clear:すみません gl:(sumimasen, excuse me, sorry) jp clear:すみません gl:(sumimasen, excuse me, sorry) clear
+heard: oh-fgq8j5 …{sumimasen}。 | known gaijin,ohayo,yoroshiku,sumimasen,matte | tokens heardico: jp clear:すみません gl:(sumimasen, excuse me, sorry) clear
+heard: oh-45hdir {sumimasen}、{sumimasen}、通ります！ | known gaijin,ohayo,yoroshiku,sumimasen,matte | tokens heardico: jp clear:すみません gl:(sumimasen, excuse me, sorry) jp clear:すみません gl:(sumimasen, excuse me, sorry) gx:だ gx:セ gx:ン gx:カ clear
+last steps: plaza use:dorm_lane:0 | dorm_court use:dorm_entry:0 | dorm_court use:stairs:0 | dorms use:door_203:0 | dorms use:window | dorms use:boxes | dorms use:bed | dorms use:computer
+perf (desktop, gpu, q0; median/worst frame, median calls and tris): train 16.7/49.9 ms, 162 calls, 163k tris | gate 16.7/66.7 ms, 138 calls, 139k tris | forecourt 16.7/66.7 ms, 194 calls, 325k tris | office 16.7/33.3 ms, 463 calls, 587k tris | plaza 16.7/66.7 ms, 91 calls, 256k tris | dorm_court 16.7/33.4 ms, 102 calls, 115k tris | dorms 16.7/33.3 ms, 112 calls, 81k tris
+perf peaks (max sampled calls, when): train 234 (visit 1, 9.6 s in, Eric -1.2,-0.5) | gate 171 (visit 1, 4.3 s in, Eric 1.5,0.6) | forecourt 272 (visit 2, 2.1 s in, Eric 13.6,-2.3) | office 508 (visit 1, 12.2 s in, Eric -3.1,3.9) | plaza 101 (visit 1, 1.5 s in, Eric -3.5,2.9) | dorm_court 109 (visit 1, 1.4 s in, Eric 0.5,-1.5) | dorms 125 (visit 1, 1.3 s in, Eric 0.8,1.5)
+PERF WARN gate 1% low frame 33.3 ms is 98% over the baseline 16.8 ms
+PERF WARN forecourt triangles 325342 is 22% over the baseline 266000
+PERF WARN forecourt 1% low frame 33.3 ms is 98% over the baseline 16.8 ms
+PERF WARN plaza draw calls 91 is 42% over the baseline 64
+PERF WARN dorm_court draw calls 102 is 26% over the baseline 81
+PERF WARN dorm_court 1% low frame 33.4 ms is 99% over the baseline 16.8 ms
+PERF WARN dorms draw calls 112 is 35% over the baseline 83
+PERF WARN dorms triangles 80807 is 36% over the baseline 59511
+artifacts: /home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/shots/fast/2026-10-07T12-56-52-594Z-2760889

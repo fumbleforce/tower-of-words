@@ -1,0 +1,18 @@
+scale-default-390: GPU slot 2
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: eric office seat contact 0.03015747649774103
+    at withBrowserJob.timeoutMs (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/tools/character-scale-default-check.mjs:72:16)
+    at async withBrowserJob (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/tools/lib/browser-job.mjs:164:12)
+    at async file:///home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/tools/character-scale-default-check.mjs:13:1 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

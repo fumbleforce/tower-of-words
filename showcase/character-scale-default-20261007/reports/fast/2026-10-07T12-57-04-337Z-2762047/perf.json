@@ -1,0 +1,146 @@
+{
+  "layout": "phone",
+  "viewport": [
+    390,
+    844
+  ],
+  "gl": "gpu",
+  "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+  "quality": 0,
+  "sampleEvery": 10,
+  "places": {
+    "train": {
+      "frames": 1038,
+      "medianMs": 16.7,
+      "p99Ms": 16.8,
+      "worstMs": 50,
+      "samples": 103,
+      "calls": 126,
+      "callsMax": 203,
+      "callsMaxAt": {
+        "calls": 203,
+        "ms": 15733,
+        "visit": 1,
+        "x": -3,
+        "z": 2.2,
+        "trip": false
+      },
+      "tris": 164967,
+      "trisMax": 316570
+    },
+    "gate": {
+      "frames": 550,
+      "medianMs": 16.7,
+      "p99Ms": 33.3,
+      "worstMs": 66.7,
+      "samples": 55,
+      "calls": 91,
+      "callsMax": 127,
+      "callsMaxAt": {
+        "calls": 127,
+        "ms": 4367,
+        "visit": 1,
+        "x": 1.5,
+        "z": 0.5,
+        "trip": false
+      },
+      "tris": 123803,
+      "trisMax": 344966
+    },
+    "forecourt": {
+      "frames": 614,
+      "medianMs": 16.7,
+      "p99Ms": 33.3,
+      "worstMs": 83.3,
+      "samples": 62,
+      "calls": 155,
+      "callsMax": 210,
+      "callsMaxAt": {
+        "calls": 210,
+        "ms": 2183,
+        "visit": 2,
+        "x": 14.2,
+        "z": -1.7,
+        "trip": false
+      },
+      "tris": 297234,
+      "trisMax": 341639
+    },
+    "office": {
+      "frames": 1442,
+      "medianMs": 16.7,
+      "p99Ms": 16.8,
+      "worstMs": 33.3,
+      "samples": 144,
+      "calls": 174,
+      "callsMax": 242,
+      "callsMaxAt": {
+        "calls": 242,
+        "ms": 12066,
+        "visit": 1,
+        "x": -2.9,
+        "z": 4.2,
+        "trip": false
+      },
+      "tris": 285157,
+      "trisMax": 332585
+    },
+    "plaza": {
+      "frames": 235,
+      "medianMs": 16.7,
+      "p99Ms": 16.8,
+      "worstMs": 50,
+      "samples": 24,
+      "calls": 69,
+      "callsMax": 86,
+      "callsMaxAt": {
+        "calls": 86,
+        "ms": 1767,
+        "visit": 1,
+        "x": -0.8,
+        "z": 4.3,
+        "trip": false
+      },
+      "tris": 243449,
+      "trisMax": 253298
+    },
+    "dorm_court": {
+      "frames": 105,
+      "medianMs": 16.7,
+      "p99Ms": 33.3,
+      "worstMs": 33.4,
+      "samples": 10,
+      "calls": 79,
+      "callsMax": 83,
+      "callsMaxAt": {
+        "calls": 83,
+        "ms": 1317,
+        "visit": 1,
+        "x": 0.5,
+        "z": -1.2,
+        "trip": false
+      },
+      "tris": 104714,
+      "trisMax": 107538
+    },
+    "dorms": {
+      "frames": 177,
+      "medianMs": 16.7,
+      "p99Ms": 16.8,
+      "worstMs": 33.3,
+      "samples": 18,
+      "calls": 103,
+      "callsMax": 116,
+      "callsMaxAt": {
+        "calls": 116,
+        "ms": 1917,
+        "visit": 1,
+        "x": -0.1,
+        "z": 0.5,
+        "trip": false
+      },
+      "tris": 80789,
+      "trisMax": 81391
+    }
+  }
+}
