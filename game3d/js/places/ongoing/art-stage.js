@@ -20,6 +20,7 @@ export function createArtStage(game, P, { photograph = null, approved = false } 
     !!(accepted && texture?.image?.width > 0 && texture.image.height > 0 && P.people.mori?.sitAt && game.player?.sitAt);
   const frame = () => shot.focus([0.05, -2.75], 4.1 / Math.min(1, (P.camera?.aspect || 1.6) / 1.3), 0.55, 0.1, 0.8);
   const inspect = (point) => shot.focus(point, (P.camera?.aspect || 1.6) < 1 ? 4.8 : 2.3, 0.42, 0.05, 1.05);
+  const detail = (point, yaw = 0.65) => shot.focus(point, (P.camera?.aspect || 1.6) < 1 ? 5.8 : 3.1, 0.7, yaw, 0.8);
   function release() {
     action.cancel();
     moves.dispose();
@@ -37,6 +38,7 @@ export function createArtStage(game, P, { photograph = null, approved = false } 
   }
   return {
     props,
+    contacts: moves.contacts,
     ready,
     setPhotograph(value, { approved: pick = false } = {}) {
       texture = value;
@@ -65,36 +67,36 @@ export function createArtStage(game, P, { photograph = null, approved = false } 
         if (!active) throw new Error('Art club action without a started visit');
         frame();
         if (state === 'photo') {
-          await moves.move('mori', props.photo, [-0.42, 0.47, -2.7], { carry: true, keepHeld: true });
-          await action.wait(game.wait(400));
-          await moves.move('mori', props.photo, [0.38, 0.419, -2.35], { carry: true });
-          props.photo.rotation.x = -Math.PI / 2;
+          await moves.pointAt('mori', props.photo);
           inspect([0.15, -2.48]);
-        } else if (state === 'tracePhoto') await moves.move('mori', props.photo, [0.26, 0.45, -2.43]);
+        } else if (state === 'tracePhoto') await moves.pointAt('mori', props.photo);
         else if (state === 'firstPage') {
           inspect([-0.4, -2.85]);
           await moves.draw('mori', 'oversize');
           drawing = 'oversize';
         } else if (state === 'offerPage')
-          await moves.move('eric', props.player.mesh, [0.0, 0.415, -2.82], { carry: true });
-        else if (state === 'prepareTea') await moves.move('mori', props.pot, [-0.7, 0.58, -2.62]);
+          await moves.move('eric', props.player.mesh, [0.12, 0.415, -2.99], { carry: true });
+        else if (state === 'prepareTea') await moves.pointAt('mori', props.pot);
         else if (state === 'takeTea') {
-          await moves.move('mori', props.pot, [0.08, 0.57, -2.85], { carry: true, keepHeld: true });
-          await moves.move('eric', props.pot, [0.65, 0.57, -2.82], { carry: true, keepHeld: true });
-        } else if (state === 'pour') await moves.pour();
-        else if (state === 'pencilBeside')
-          await moves.move('eric', props.pencils[1], [-0.18, 0.425, -2.83], { carry: true });
+          await moves.move('eric', props.pot, [0.35, 0.63, -2.99], { carry: true, keepHeld: true });
+        } else if (state === 'pour') {
+          detail([0.25, -2.85]);
+          await moves.pour();
+        } else if (state === 'pencilBeside')
+          await moves.move('eric', props.pencils[1], [0.12, 0.425, -2.99], { carry: true });
         else if (state === 'drawSlope') {
+          detail([-0.25, -2.9], -0.35);
           await moves.draw('mori', 'slope');
           drawing = 'slope';
-        } else if (state === 'practice') await moves.move('mori', props.pencils[0], [-0.23, 0.43, -2.8]);
+        } else if (state === 'practice') await moves.pointAt('mori', props.pencils[0]);
         else if (state === 'showProgress') {
           drawing = 'slope';
           props.mori.draw(drawing);
         } else if (state === 'drawTogether') {
+          detail([0.05, -2.9], 0.35);
           await moves.draw('eric', 'slope');
           if (drawing === 'slope') await moves.draw('mori', 'slope');
-          else await moves.move('mori', props.pencils[0], [-0.23, 0.43, -2.8]);
+          else await moves.pointAt('mori', props.pencils[0]);
         } else if (state !== 'group') throw new Error('Unknown art activity ' + state);
       };
       return (
@@ -116,6 +118,7 @@ export function createArtStage(game, P, { photograph = null, approved = false } 
         drawing,
         held: moves.snapshot(),
         playerDrawing: props.player.snapshot(),
+        cupLevels: [...props.cupLevels],
         shot: shot.snapshot(),
         people: snapshotPeople(people()),
         props: Object.fromEntries(props.items.map((o) => [o.name, snapshotObject(o)])),
@@ -139,6 +142,7 @@ export function createArtStage(game, P, { photograph = null, approved = false } 
       drawing = saved.drawing || 'blank';
       props.mori.draw(drawing);
       props.reset();
+      (saved.cupLevels || []).forEach((level, i) => props.fillCup(i, level));
       for (const o of props.items) restoreObject(o, saved.props?.[o.name]);
       if (active) {
         restorePeople(people(), saved.people);

@@ -173,7 +173,7 @@ The built step-2 and step-3 offers use B2’s ordinary Talk action at weekday lu
 
 Route: art club in `dorm_commons`, with B2 lunches as early contact. He wants to draw the mainland ski jump he remembers, but turns every art session into sharpening pencils and making tea for everyone else. The old manager has kept the habit of making himself useful before taking a seat.
 
-Repeat meeting: Tuesday evening art club. His first reference is his own 1994 photograph; seeing it here establishes it before any later callback. It is a scene prop, not an album collectible.
+Repeat meeting: Tuesday evening art club. His first reference is his own 1994 photograph; seeing it here establishes it before any later callback. It is a scene prop, not an album collectible. The common-room first-page and later tea/shared-pencil scenes now play at the existing friendship gates; repeated visits preserve his progress and let the player continue their own drawing. Later milestones remain authored plans.
 
 | Step | Milestone and consequence |
 |---|---|

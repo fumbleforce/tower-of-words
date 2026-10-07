@@ -1,0 +1,758 @@
+{
+  "width": 1366,
+  "mc": "eric",
+  "visit": "defer",
+  "fixture": "Tuesday evening art member, no prior art visit; real title Continue and Runner",
+  "lines": [
+    "テつ、でぬをウノラぜあ。ケんふ、そぬムおサワ。",
+    "アつ、でぬをまノしぜあ。キんす、そラムおセワ。",
+    "アミ、でををまんしホあ。むんす、いラんおセワ。"
+  ],
+  "errors": [],
+  "seed": {
+    "rel": {
+      "bonds": {
+        "v": 1,
+        "day": 13,
+        "p": {
+          "mio": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "guard": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "kuroda": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "emi": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "kenji": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "mori": {
+            "pts": 14,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          }
+        },
+        "rel": {}
+      },
+      "moments": [],
+      "fired": [],
+      "ambient": []
+    },
+    "flags": {
+      "gate_magic": true,
+      "dorm_room_known": true,
+      "going_home": true,
+      "lunch_mio": true,
+      "mio_warm": 2,
+      "d2_started": true,
+      "d2_station_seen": true,
+      "d2_checked": true,
+      "d2_ticket_done": true,
+      "d2_order_sensor": true,
+      "d2_brief_done": true,
+      "d2_shift_done": true,
+      "d2_met_kenji": true,
+      "d2_ate": true,
+      "d2_food": "riceball",
+      "d2_party_done": true,
+      "d2_complete": true,
+      "ticket_T0001": "done",
+      "ticket_T0002": "progress",
+      "ticketread_T0001": true,
+      "ticketread_T0002": true,
+      "d3_complete": true,
+      "d4_complete": true,
+      "day": 13,
+      "period": "evening",
+      "place": "dorm_commons",
+      "met_mio": true,
+      "met_guard": true,
+      "met_kuroda": true,
+      "met_emi": true,
+      "met_kenji": true,
+      "met_mori": true,
+      "ongoing_workday": true,
+      "ongoing_tennis_day": false,
+      "ongoing_team_day": false,
+      "ongoing_art_day": true,
+      "ongoing_winter_day": false,
+      "ongoing_art_ready": true,
+      "ongoing_winter_ready": false,
+      "period_early": false,
+      "period_morning": false,
+      "period_lunch": false,
+      "period_afternoon": false,
+      "period_evening": true,
+      "club_art": true,
+      "art_first_page": true,
+      "art_first_day": 6,
+      "art_photo_seen": true,
+      "ms2_mori": true,
+      "bond_mori": 14,
+      "step_mori": 2,
+      "bondready_mori": 3,
+      "bond2_mori": true
+    }
+  },
+  "loaded": {
+    "rel": {
+      "v": 1,
+      "day": 13,
+      "p": {
+        "mio": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 13,
+          "weekGifts": 0,
+          "weekOf": 2,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        },
+        "guard": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 13,
+          "weekGifts": 0,
+          "weekOf": 2,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        },
+        "kuroda": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 13,
+          "weekGifts": 0,
+          "weekOf": 2,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        },
+        "emi": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 13,
+          "weekGifts": 0,
+          "weekOf": 2,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        },
+        "kenji": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 13,
+          "weekGifts": 0,
+          "weekOf": 2,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        },
+        "mori": {
+          "pts": 14,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 13,
+          "weekGifts": 0,
+          "weekOf": 2,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        }
+      },
+      "rel": {}
+    },
+    "save": {
+      "bonds": {
+        "v": 1,
+        "day": 13,
+        "p": {
+          "mio": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "guard": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "kuroda": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "emi": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "kenji": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "mori": {
+            "pts": 14,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 13,
+            "weekGifts": 0,
+            "weekOf": 2,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          }
+        },
+        "rel": {}
+      },
+      "moments": [],
+      "fired": [],
+      "ambient": []
+    },
+    "sim": {
+      "mio": 0,
+      "guard": 0,
+      "kuroda": 0,
+      "emi": 0,
+      "kenji": 0,
+      "mori": 14
+    }
+  },
+  "completed": {
+    "busy": false,
+    "place": "dorm_commons",
+    "period": "evening",
+    "flags": {
+      "gate_magic": true,
+      "dorm_room_known": true,
+      "going_home": true,
+      "lunch_mio": true,
+      "mio_warm": 2,
+      "d2_started": true,
+      "d2_station_seen": true,
+      "d2_checked": true,
+      "d2_ticket_done": true,
+      "d2_order_sensor": true,
+      "d2_brief_done": true,
+      "d2_shift_done": true,
+      "d2_met_kenji": true,
+      "d2_ate": true,
+      "d2_food": "riceball",
+      "d2_party_done": true,
+      "d2_complete": true,
+      "ticket_T0001": "done",
+      "ticket_T0002": "progress",
+      "ticketread_T0001": true,
+      "ticketread_T0002": true,
+      "d3_complete": true,
+      "d4_complete": true,
+      "day": 13,
+      "period": "evening",
+      "place": "dorm_commons",
+      "ongoing_workday": true,
+      "ongoing_tennis_day": false,
+      "ongoing_team_day": false,
+      "ongoing_art_day": true,
+      "ongoing_winter_day": false,
+      "ongoing_art_ready": true,
+      "ongoing_winter_ready": false,
+      "period_early": false,
+      "period_morning": false,
+      "period_lunch": false,
+      "period_afternoon": false,
+      "period_evening": true,
+      "club_art": true,
+      "art_first_page": true,
+      "art_first_day": 6,
+      "art_photo_seen": true,
+      "ms2_mori": true,
+      "bond_mori": 14,
+      "step_mori": 2,
+      "bondready_mori": 3,
+      "bond2_mori": true,
+      "met_mio": true,
+      "met_guard": true,
+      "met_kuroda": true,
+      "met_emi": true,
+      "met_kenji": true,
+      "met_mori": true,
+      "clubday_art": 13,
+      "clubprog_art": 1,
+      "art_action_completed": true
+    },
+    "recovery": null,
+    "execution": {
+      "onceDone": [],
+      "execution": null
+    },
+    "choices": [],
+    "contacts": [],
+    "art": {
+      "active": false,
+      "prior": null,
+      "drawing": "blank",
+      "held": [],
+      "playerDrawing": {
+        "kind": "blank",
+        "progress": 1
+      },
+      "cupLevels": [
+        0,
+        0
+      ],
+      "shot": {
+        "shot": null,
+        "home": null
+      },
+      "people": {
+        "eric": {
+          "visible": true,
+          "position": [
+            0,
+            0,
+            -1
+          ],
+          "rotation": [
+            0,
+            3.141592653589793,
+            0,
+            "XYZ"
+          ],
+          "seated": false,
+          "lookTarget": null,
+          "blob": null,
+          "pose": {}
+        },
+        "mori": {
+          "visible": true,
+          "position": [
+            1.3000000000000003,
+            0,
+            -1.45
+          ],
+          "rotation": [
+            0,
+            -2.999695598985629,
+            0,
+            "XYZ"
+          ],
+          "seated": false,
+          "lookTarget": null,
+          "blob": {
+            "visible": true,
+            "position": [
+              1.3000000000000003,
+              0.004,
+              -1.45
+            ],
+            "rotation": [
+              -1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ]
+          },
+          "pose": {
+            "hips": {
+              "visible": true,
+              "position": [
+                0,
+                0.32,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "torso": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "head": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            }
+          }
+        }
+      },
+      "props": {
+        "art-mori-paper": {
+          "visible": true,
+          "position": [
+            -0.6,
+            0.411,
+            -2.99
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-player-paper": {
+          "visible": true,
+          "position": [
+            0.3,
+            0.414,
+            -2.99
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-photograph": {
+          "visible": true,
+          "position": [
+            0.38,
+            0.419,
+            -2.35
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-pencil-0": {
+          "visible": true,
+          "position": [
+            -0.52,
+            0.425,
+            -2.94
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-pencil-1": {
+          "visible": true,
+          "position": [
+            0.38,
+            0.425,
+            -2.94
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teacup-0": {
+          "visible": true,
+          "position": [
+            -0.7,
+            0.455,
+            -2.69
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teacup-1": {
+          "visible": true,
+          "position": [
+            0.35,
+            0.455,
+            -2.69
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teapot": {
+          "visible": true,
+          "position": [
+            0.15,
+            0.49,
+            -2.99
+          ],
+          "rotation": [
+            0,
+            -1.5707963267948966,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-tea-stream": {
+          "visible": false,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        }
+      }
+    }
+  },
+  "continued": false,
+  "pass": true
+}

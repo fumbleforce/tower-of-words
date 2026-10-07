@@ -30,7 +30,7 @@ export const artNodes = {
     { choice: [
       { text: '{mitai}. Ask him to show you the jump.', if: 'know_mitai', go: 'ongoing_art_mitai' },
       { text: 'Point to the top of the ski jump.', go: 'ongoing_art_jump' },
-      { text: 'Take a pencil and sit beside him.', go: 'ongoing_art_first_page' },
+      { text: 'Watch him sketch the jump.', go: 'ongoing_art_first_page' },
       { text: 'Leave him to his drawing.', go: 'ongoing_art_leave' },
     ] },
   ],
@@ -63,7 +63,7 @@ export const artNodes = {
     { choice: [
       { text: 'Offer to pour the tea.', go: 'ongoing_art_pour' },
       { text: '{isshoni}. Ask him to draw beside you.', if: 'know_isshoni', go: 'ongoing_art_together' },
-      { text: 'Sit down and leave a pencil beside his page.', go: 'ongoing_art_together' },
+      { text: 'Leave a pencil beside his page.', go: 'ongoing_art_together' },
       { text: 'Leave the club for tonight.', go: 'ongoing_art_leave' },
     ] },
   ],

@@ -16,7 +16,11 @@ import { sofaActivity } from './room-activity.js';
 // club's room. In through the glazed door off the inner court's north-south walk, out the same way (the east coast,
 // which walks the dorm row and the court). It also loads with ?place=dorm_commons, inside the door. The camera looks
 // in from the south over the cut-down front wall: the whole room on a desktop, following Eric on a phone.
-export function commonsPlace(game) {
+export async function commonsPlace(game) {
+  const photograph = await new THREE.TextureLoader()
+    .loadAsync(new URL('../../assets/photos/mori-lillehammer.png', import.meta.url).href)
+    .catch(() => null);
+  if (photograph) photograph.colorSpace = THREE.SRGBColorSpace;
   const w = buildCommons();
   const cam = new RoomCam(w.camera);
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
@@ -125,7 +129,7 @@ export function commonsPlace(game) {
     tripOutTo: { east_coast: (g) => walkOut(g, cam, d.out, d.edge) },
   };
   const activity = sofaActivity(game, P, d3.people.kenji);
-  const art = createArtStage(game, P);
+  const art = createArtStage(game, P, { photograph, approved: !!photograph });
   P.artClub = art;
   P.leave = () => art.leave();
   // The continuing calendar can supply a placement without replacing the room or its Talk nodes.
