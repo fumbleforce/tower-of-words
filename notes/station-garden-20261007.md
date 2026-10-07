@@ -33,7 +33,7 @@ The independent composition critic scored the bounded garden slice 8/10 (A–H e
 
 Validation passed on the garden branch:
 
-- Full CPU check: 579 tests plus syntax, lint, formatting, module budgets, dependencies, story, language, bonds, Facts and story map.
+- Full CPU check: 579 tests before integration and 592 after rebasing onto the landed ferry/map changes, plus syntax, lint, formatting, module budgets, dependencies, story, language, bonds, Facts and story map.
 - Nine focused garden checks cover canonical navigation/capsule margins, excluded glass/platform space, moving tool meshes, hand contact, crowd/player clearance, bench occupancy and routine state transitions. Fourteen integration contract tests cover the explicit place registries and static imported story composition, including rejected unresolved/dynamic composition.
 - Full day test at 1366 and 390, with Carina on phone, without overrides. Existing train/forecourt/plaza/dorm performance baseline warnings remain; no baseline was raised for this change.
 - Full day-1 route suite: 37/37 routes and 32/32 authored choices.
