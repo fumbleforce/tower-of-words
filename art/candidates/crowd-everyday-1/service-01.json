@@ -1,0 +1,22 @@
+{
+  "id": "service-01",
+  "mode": "built-in imagegen",
+  "prompt": "Make a new everyday NPC in exactly the simple faceted 3D chibi style and proportions of the supplied approved crowd references. One adult shown head to shoes, turned three quarters toward image left, head looking the same way as the body, arms relaxed slightly away from the sides and empty hands. White background, soft neutral light, flat matte model texture, sturdy simple shapes and simple eyes painted flat on the face. An adult Japanese man in his forties with short closely cropped black hair and a broad sturdy build. A simple muted brick-red knee-length work apron over a cream short-sleeved shirt, dark slate trousers and black practical shoes. The apron lies flat with broad sturdy straps and no loose ties. No hat, glasses, badges, accessories, utensils, bags, text, props or extra subjects.",
+  "references": [
+    "art/parts/crowd-pilot-2/pics/a-e1.png",
+    "art/parts/crowd-pilot-1/pics/b-d1.png"
+  ],
+  "status": "rendered",
+  "seed": "not exposed",
+  "image": "art/parts/crowd-everyday-1/pics/service-01.png",
+  "meshy_credits": 0,
+  "model": "built-in imagegen; model/version and seed not exposed",
+  "generated_at": "2026-10-07T11:05:18.698806+00:00",
+  "review_image": "bible/shots/reviews/crowd-everyday-1/service-01.webp",
+  "source_sha256": "fa962c2dae3e5e8da6ef4a49428c6237ae3d3b6736e778191a0db56829b8d453",
+  "review_sha256": "6a6b30ffe6bed9262f576dc9928092a8c84986ede25fc79ca0eb5282071ac16a",
+  "reference_sha256": {
+    "art/parts/crowd-pilot-2/pics/a-e1.png": "ee4a9dc7c81c291d7f83081b0aac296db4d018152096c072749900453427f9f0",
+    "art/parts/crowd-pilot-1/pics/b-d1.png": "b7ec266b06ace94da44587cdc075721663bfce64657a7aa8de22a4c7ff467f60"
+  }
+}
