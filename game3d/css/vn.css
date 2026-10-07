@@ -22,7 +22,7 @@ body.reduce-motion #vnbar .vb.on svg { animation: none; }
 #talk.phone #vnbar { margin: -6px -8px 4px 12px; }
 /* phone: the row is the box's top right cell, beside the name (a row of its own over narration), never beside the text */
 body.phone #talk:not(.typing) { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
-body.phone #talk:not(.typing) > :not(#vnbar) { grid-column: 1 / -1; }
+body.phone #talk:not(.typing) > :where(:not(#vnbar)) { grid-column: 1 / -1; }
 body.phone #talk:not(.typing) > .who { grid-column: 1; grid-row: 1; margin-bottom: 0; }
 body.phone #talk:not(.typing) > .line { margin-top: 4px; }
 body.phone #vnbar { float: none; grid-column: 2; grid-row: 1; gap: 0; margin: -10px -6px -4px 6px; }
@@ -31,7 +31,9 @@ body.phone #vnbar .vb { min-width: 44px; height: 44px; padding: 0 9px; backgroun
 body.phone #vnbar .vb::before { inset: 0; }
 body.phone #vnbar .vb svg { width: 20px; height: 20px; }
 body.phone #vnbar .vb.on { background: rgba(111, 208, 198, .2); }
-body.phone #talk .who { min-width: 0; }
+body.phone #talk .who { min-width: 0; flex-direction: column; align-items: flex-start; gap: 0; }
+body.phone #talk .who > * { max-width: 100%; }
+body.phone #talk .who .nm { display: block; overflow-wrap: anywhere; }
 body.phone #talk .who .rl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* while Auto runs, the continue arrow is teal: the line will move on by itself */
 body.vn-auto #talk .more { border-top-color: var(--accent); }
