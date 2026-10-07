@@ -9,6 +9,7 @@ import { thumbStyle } from './portraits.js';
 import { el } from './dom.js';
 import { conversationMemory, rememberEntry, rememberedLines } from '../conversations/state.js';
 import { LOG_LIMIT, restoreLog, recordEntry, sameLine } from './backlog-records.js';
+import { earlierReading } from './backlog-comparison.js';
 
 const READ_KEY = 'amakawa-read';
 let items = [];
@@ -103,7 +104,7 @@ function itemHTML(e, i) {
   const origin = `<div class="who"><span class="rl">Day ${e.day}${e.period ? ' · ' + esc(e.period) : ''}</span></div>`;
   return `<li class="${e.name ? 'say' : 'narr'}${e.ov ? ' heard' : ''}${e.phone ? ' text' : ''}${e.seen ? ' seen' : ''}">
     ${thumb ? `<span class="th" style="${thumb}"></span>` : '<span class="th none"></span>'}
-    <div class="bd">${origin}${name}<div class="tx">${body}</div></div>
+    <div class="bd">${origin}${name}<div class="tx">${body}</div>${earlierReading(e, body)}</div>
     ${e.vk ? `<button type="button" class="rp" data-i="${i}" aria-label="Play this line again">${PLAY}</button>` : ''}
   </li>`;
 }
@@ -142,6 +143,7 @@ function build(sayWord) {
   });
   panel.addEventListener('click', (e) => {
     e.stopPropagation();
+    if (e.target.closest('.x')) return closeLog();
     if (e.target.closest('.memories')) {
       remembered = !remembered;
       render();
@@ -177,6 +179,22 @@ function build(sayWord) {
   document.body.append(panel);
 }
 export const logOpen = () => !!panel && !panel.hidden;
+export function focusLog(direction = 1) {
+  if (!logOpen()) return;
+  const controls = [...panel.querySelectorAll('button, summary')].filter((node) => node.getClientRects().length);
+  if (!controls.length) return;
+  const current = controls.indexOf(document.activeElement);
+  const index =
+    current < 0 ? (direction > 0 ? 0 : controls.length - 1) : (current + direction + controls.length) % controls.length;
+  const next = controls[index];
+  next.focus({ preventScroll: true });
+  next.scrollIntoView({ block: 'nearest' });
+}
+export function activateLog() {
+  const target = document.activeElement;
+  if (logOpen() && panel.contains(target) && target.matches('button, summary')) target.click();
+  else focusLog();
+}
 export function openLog({ sayWord, closed }) {
   if (!panel) build(sayWord);
   onClose = closed;

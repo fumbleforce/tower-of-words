@@ -27,12 +27,12 @@ const INTERJ = [
   'お',
   'ん',
 ];
-export function heardHTML(text, clear = []) {
+export function heardHTML(text, clear = [], vocabulary = known) {
   // {id} words in an overheard line are sharp and glossed only once he's been taught them (typed, learned or
   // offered); seeing a word glossed somewhere (the train announcement's 本社) doesn't teach it
   text = text.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
   const keep = [];
-  for (const id of known) {
+  for (const id of vocabulary) {
     const w = WORDS[id];
     if (!w) continue;
     for (const ja of [w.ja, ...(w.alias || [])]) keep.push({ ja, gl: `${w.ro}, ${w.en}`, known: true });
