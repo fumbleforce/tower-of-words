@@ -4,6 +4,7 @@
 export default {
   start: 'arrive',
   on: {
+    'talk:campus_shed':'to_campus','zone:campus_shed_exit':'to_campus','talk:campus_quarter':'to_campus','zone:campus_quarter_exit':'to_campus',
     'talk:sports_lane': 'to_sports',
     'zone:east_exit': 'to_sports',
     'talk:harbour': 'to_harbour',
@@ -18,6 +19,7 @@ export default {
   },
   goal: { sports_lane: 'true' },
   nodes: {
+    to_campus:[{do:'trip',to:'campus'}],
     arrive: [
       {
         if: 'going_home',

@@ -4,11 +4,11 @@ import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { eveningLight, EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
-import { inRect, POSES, TURN_X, TURN_Z, TURN_S } from '../scenes/office-quarter/plan.js';
+import { inRect, POSES, TURN_X, TURN_Z, TURN_S, CAMPUS_EXITS } from '../scenes/office-quarter/plan.js';
 import * as LAYOUT from '../scenes/island-layout.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
-import { walkOut, walkIn } from './edge-walk.js';
+import { walkOut, walkIn, walkOutNearest, viaOf } from './edge-walk.js';
 import { turningCam, followFit } from './turning-cam.js';
 
 // The office quarter (scenes/office-quarter.js): the sports lane walked on west from the sports ground, round the
@@ -42,6 +42,18 @@ export async function officeQuarterPlace(game) {
   const dk = (id) => w.doors.find((d) => d.id === id);
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
   const things = {
+    campus_shed: {
+      ...PLACE_DETAILS.office_quarter.things.campus_shed,
+      anchor: (v) => v.set(CAMPUS_EXITS.shed.lane[0], 1.1, CAMPUS_EXITS.shed.lane[1]),
+      spot: () => CAMPUS_EXITS.shed.lane,
+      face: () => CAMPUS_EXITS.shed.edge,
+    },
+    campus_quarter: {
+      ...PLACE_DETAILS.office_quarter.things.campus_quarter,
+      anchor: (v) => v.set(CAMPUS_EXITS.quarter.lane[0], 1.1, CAMPUS_EXITS.quarter.lane[1]),
+      spot: () => CAMPUS_EXITS.quarter.lane,
+      face: () => CAMPUS_EXITS.quarter.edge,
+    },
     // the way out (plan.js EXITS)
     sports_lane: {
       ...PLACE_DETAILS.office_quarter.things.sports_lane,
@@ -116,6 +128,8 @@ export async function officeQuarterPlace(game) {
     seats: {},
     people: {},
     zones: {
+      campus_shed_exit: (x, z) => inRect(x, z, CAMPUS_EXITS.shed.zone),
+      campus_quarter_exit: (x, z) => inRect(x, z, CAMPUS_EXITS.quarter.zone),
       east_exit: (x, z) => inRect(x, z, back.zone),
       west_exit: (x, z) => inRect(x, z, west.zone),
     },
@@ -158,10 +172,17 @@ export async function officeQuarterPlace(game) {
     // in from the sports ground round the gym's corner onto the street, walking west; from the harbour east along
     // the street; out the ways plan.js EXITS gives
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, -Math.PI / 2),
-    tripInFrom: { harbour: (g) => walkIn(g, cam, west.arrive, west.in, Math.PI / 2) },
-    tripOutTo: Object.fromEntries(
-      Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)]),
-    ),
+    tripInFrom: {
+      campus: (g) => {
+        const e = CAMPUS_EXITS[viaOf(g, 'quarter')] || CAMPUS_EXITS.quarter;
+        return walkIn(g, cam, e.arrive, e.in, Math.PI);
+      },
+      harbour: (g) => walkIn(g, cam, west.arrive, west.in, Math.PI / 2),
+    },
+    tripOutTo: {
+      campus: (g) => walkOutNearest(g, cam, CAMPUS_EXITS),
+      ...Object.fromEntries(Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)])),
+    },
   };
   return P;
 }

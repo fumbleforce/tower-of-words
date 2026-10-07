@@ -70,9 +70,8 @@ test('while something runs, a place that would go waits with its reason', async 
   assert.equal(b.east_lane.reason, REASON.busy);
 });
 
-test('day 3: the harbour is not open today; day 2 the sports ground neither', async () => {
-  assert.equal((await states(3, 'plaza', {})).s.harbour.state, 'closed');
-  assert.equal((await states(3, 'plaza', {})).s.harbour.reason, REASON.closed);
+test('day 3 harbour opens through campus; day 2 sports retains its gate', async () => {
+  assert.equal((await states(3, 'plaza', {})).s.harbour.state, 'go');
   assert.equal((await states(2, 'plaza', {})).s.sports.state, 'closed');
 });
 

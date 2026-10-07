@@ -5,6 +5,7 @@
 export default {
   start: 'arrive',
   on: {
+    'talk:campus':'to_campus','zone:campus_exit':'to_campus',
     'talk:office_street': 'to_offices',
     'zone:east_exit': 'to_offices',
     'talk:works_lane': 'to_works',
@@ -16,6 +17,7 @@ export default {
   },
   goal: { office_street: 'true' },
   nodes: {
+    to_campus:[{do:'trip',to:'campus'}],
     arrive: [
       {
         if: 'going_home',

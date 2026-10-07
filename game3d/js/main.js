@@ -32,6 +32,8 @@ import { Runner, flags } from './runner.js';
 import { trainPlace as train } from './places/train.js';
 import { lobbyPlace as gate } from './places/lobby.js';
 import { forecourtPlace as forecourt } from './places/forecourt.js';
+import { printShopPlace as print_shop } from './places/print-shop.js';
+import { campusPlace as campus } from './places/campus.js';
 import { canteenPlace as canteen } from './places/canteen.js';
 import { plazaPlace as plaza } from './places/plaza.js';
 import { officePlace as office } from './places/office.js';
@@ -72,6 +74,8 @@ const PLACES = {
   forecourt,
   plaza,
   canteen,
+  campus,
+  print_shop,
   office,
   dorm_court,
   dorms,
@@ -258,7 +262,6 @@ window.addEventListener(
   true,
 );
 
-// ---------- rendering ----------
 const view = createView(game, renderer, canvas, () => save(game)); // quality, post chain, size, render (perf/view.js)
 const { setComposer, resize, size, render } = view;
 function objsOf(m) {
@@ -355,10 +358,8 @@ installMetrics(game, () => view.quality); // F3 overlay and the fast test's per-
 const overrides = (p) => (p?.enabled ? p.normalMaterial || [p.depthMaterial, p.prepareMaskMaterial] : []);
 game.overrideMaterials = () => [view.post?.gtao, view.outline].flatMap(overrides);
 
-// ---------- things, markers, triggers ----------
 const { buildMarkers, use, standUp, held, holdNudge, say } = installInteractions(game);
 
-// ---------- input ----------
 const followCamera = installFollowCamera(game, canvas);
 const steer = installSteer(game, canvas); // hold on the floor to steer (movement/steer.js)
 installPointerInput(game, canvas, { use, standUp, held, holdNudge, steer, modelAt });
@@ -391,7 +392,6 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => game.walker && game.walker.keys.delete(e.code));
 window.addEventListener('blur', () => game.walker && game.walker.keys.clear());
 
-// ---------- hooks that work in every place ----------
 const nearSet = new Set(),
   zoneSet = new Set();
 const { prepare, enter, travel, startScene } = createPlaceLifecycle(game, {
@@ -414,7 +414,6 @@ installGesturesHooks(game, targets);
 installKotodamaHooks(game, { renderer, objsOf });
 installProgressionHooks(game, { travel });
 
-// ---------- loop ----------
 let lastT = performance.now();
 let frames = 0;
 // stills and frame sequences (?cap): advance game time exactly, independent of how slow the renderer is
@@ -514,7 +513,6 @@ function step(dt, drawn) {
 }
 game.step = step;
 
-// ---------- boot ----------
 async function boot() {
   game.runner = new Runner(game);
   installSim(game); // bonds: bond, bondStep, remember, fact, relate hooks (js/bonds/)

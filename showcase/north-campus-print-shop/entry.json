@@ -1,0 +1,77 @@
+{
+  "title": "North campus loop and print shop",
+  "date": "2026-10-07",
+  "by": "codex",
+  "caption": "A walkable loop behind head office and a usable print shop with a saved island directory. The far northern island and other building interiors remain unfinished.",
+  "sections": [
+    {
+      "title": "North campus foot loop",
+      "caption": "Walk behind head office through the office streets and along the west-coast connection.",
+      "images": [
+        {
+          "id": "campus-desktop",
+          "image": "bible/shots/showcase/north-campus-print-shop/campus-desktop.png",
+          "caption": "Approaching north campus from the forecourt."
+        },
+        {
+          "id": "print-door-phone",
+          "image": "bible/shots/showcase/north-campus-print-shop/print-door-phone.png",
+          "caption": "The print-shop door returns to the same physical footpath."
+        },
+        {
+          "id": "coast-link-desktop",
+          "image": "bible/shots/showcase/north-campus-print-shop/coast-link-desktop.png",
+          "caption": "A maintained coast-path edge and clear crossing; broader open lawns remain."
+        },
+        {
+          "id": "coast-link-phone",
+          "image": "bible/shots/showcase/north-campus-print-shop/coast-link-phone.png",
+          "caption": "A maintained coast-path edge and clear crossing; broader open lawns remain."
+        }
+      ]
+    },
+    {
+      "title": "Usable print shop",
+      "caption": "A furnished ground floor with presses, a proof counter, paper stock and a waiting chair.",
+      "images": [
+        {
+          "id": "proof-desktop",
+          "image": "bible/shots/showcase/north-campus-print-shop/proof-desktop.png",
+          "caption": "Proof counter and presses, reached along the room aisle."
+        },
+        {
+          "id": "room-evening-phone",
+          "image": "bible/shots/showcase/north-campus-print-shop/room-evening-phone.png",
+          "caption": "The same room with evening lighting."
+        }
+      ]
+    },
+    {
+      "title": "Print and keep the directory",
+      "caption": "Press the control, collect the output and read current venue locations. The saved paper can be reopened from the Bag.",
+      "images": [
+        {
+          "id": "button-desktop",
+          "image": "bible/shots/showcase/north-campus-print-shop/button-desktop.png",
+          "caption": "The player presses the copier control."
+        },
+        {
+          "id": "pickup-phone",
+          "image": "bible/shots/showcase/north-campus-print-shop/pickup-phone.png",
+          "caption": "Carina takes the paper from the output shelf."
+        },
+        {
+          "id": "directory-desktop",
+          "image": "bible/shots/showcase/north-campus-print-shop/directory-desktop.png",
+          "caption": "Street groups and bakery hours use the canonical place and service rules."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

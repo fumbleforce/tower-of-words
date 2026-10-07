@@ -11,6 +11,8 @@ export const PLACE_FILES = {
   forecourt: 'game3d/js/places/forecourt.js',
   plaza: 'game3d/js/places/plaza.js',
   canteen: 'game3d/js/places/canteen.js',
+  campus: 'game3d/js/places/campus.js',
+  print_shop: 'game3d/js/places/print-shop.js',
   office: 'game3d/js/places/office.js',
   dorm_court: 'game3d/js/places/dorm-court.js',
   dorms: 'game3d/js/places/dorms.js',
@@ -36,6 +38,8 @@ export const PLACE_NAMES = {
   forecourt: 'Forecourt',
   plaza: 'Fountain plaza',
   canteen: 'Canteen',
+  campus: 'North campus',
+  print_shop: 'Print shop',
   office: 'IT support, B2',
   dorm_court: 'Dorm courtyard',
   dorms: `${MC.possessive} room`,
@@ -74,9 +78,11 @@ export const NEXT = {
 // the dorm common room through its glazed door on the inner court, off the east coast's dorm row;
 // the karaoke box's front desk through its door off the arcade, and its booth up the stairs.
 export const TRIPS = {
-  forecourt: ['plaza', 'shotengai'],
+  forecourt: ['plaza', 'shotengai', 'campus'],
   plaza: ['forecourt', 'dorm_court', 'shotengai', 'east_lane', 'canteen'],
   canteen: ['plaza'],
+  campus: ['forecourt', 'office_quarter', 'harbour', 'print_shop'],
+  print_shop: ['campus'],
   office: ['forecourt'],
   shotengai: ['plaza', 'dorm_court', 'karaoke', 'forecourt'],
   izakaya: ['shotengai'],
@@ -89,8 +95,8 @@ export const TRIPS = {
   sports: ['east_lane', 'east_coast', 'office_quarter', 'pool', 'gym'],
   pool: ['sports'],
   gym: ['sports', 'pool'],
-  office_quarter: ['sports', 'harbour'],
-  harbour: ['office_quarter', 'works'],
+  office_quarter: ['sports', 'harbour', 'campus'],
+  harbour: ['office_quarter', 'works', 'campus'],
   works: ['harbour'],
 };
 // Day 2 has its own ways (game3d/story/day2/index.js TRIPS, both periods), and no NEXT line; so has day 3's test
@@ -108,6 +114,8 @@ export const STORY_FILES = [
   'forecourt',
   'plaza',
   'canteen',
+  'campus',
+  'print_shop',
   'office',
   'dorm_court',
   'dorms',

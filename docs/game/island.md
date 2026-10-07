@@ -28,13 +28,10 @@ Three streets run east-west: the lane (day 1's walk from head office to the dorm
 
 ## Streets and paths
 
-The planned ones (island-plan.js PLAN_PATHS). Built and backdrop paths are in island-layout.js.
+No streets remain in island-plan.js PLAN_PATHS. The shed street extension, quarter street and western back lane are now built in the north-campus loop (island-campus.js); built and backdrop paths are in island-layout.js.
 
 | Id | Kind | Runs |
 |---|---|---|
-| `shed_street_far` | Street | The shed street carried on north from behind the head office wing to the office street. |
-| `quarter_street` | Street | North from the cross street behind the tower (the tower's rear door) to the office street. |
-| `back_lane_west` | Street | The back lane carried west past the canteen's loading yard to the quarter street. |
 
 ## Places
 
@@ -58,7 +55,7 @@ One row per place. Where: the building ids in island-layout.js (or island-plan.j
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
 | `trading_office` | Amakawa Trading (天川商事) | `w1` | Four storeys at the harbour end of the office street: imports, exports, trade with the mainland. Its front is built and walked past in `office_quarter` ([places.md](places.md)), the door shut. | Door on the office street | Enter | Exchanging business cards (名刺): a name and a title, 部長, 課長. |
-| `print_shop` | Print shop (印刷所) | `w3` | Three storeys. Prints the island's signs, menus, forms and the company newsletter; presses on the ground floor. | Door on the shed street | Enter | Proofreading a sign or a menu to find the one wrong kana. |
+| `print_shop` | Print shop (印刷所) | `w3` | Ground floor built: self-service directory printer, production press, paper stock and proof counter. Upper floors remain shells. | East door off the shed street in North campus | Built | Proofreading a sign or a menu to find the one wrong kana. |
 | `foods_office` | Amakawa Foods (天川食品) | `m1` | Four storeys. The food division, which runs the canteen and stocks the shops; a test kitchen on the ground floor. Its front is built in `office_quarter`, the door shut. | Door on a walk north from the office street, on the shed street's line | Enter | Tasting and saying how it is: おいしい, 甘い, 辛い, しょっぱい. |
 | `electric_office` | Amakawa Electric (天川電機) | `m2` | Five storeys. Made most of the island's machines in the nineties and still keeps their manuals. Its front is built in `office_quarter`, the door shut. | Door on the office street | Enter | A manual or a machine plate: 電源, 入, 切, 注意. |
 | `logistics_office` | Amakawa Logistics (天川物流) | `m3` | Four storeys. Runs the supply quay, the ferry's freight and the cargo-bike deliveries round the island. Its front is built in `office_quarter`, the door shut. | Door on the office street | Enter | A delivery slip and counting boxes: 一箱, 二箱, 三箱. |

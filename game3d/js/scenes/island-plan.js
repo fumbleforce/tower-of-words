@@ -14,26 +14,7 @@ export const HALF_EDGE = pairs([-154, -134, -48, -134, -48, -112, 104, -112, 104
 
 // Planned streets (lane, 3 wide), walks (2 or 1.5), courts, piers. Every one on the grid, meeting the layout's
 // paths and each other square on.
-export const PLAN_PATHS = [
-  {
-    id: 'shed_street_far',
-    kind: 'lane',
-    rect: [-20.75, -52.5, -17.75, -27.4],
-    detail: 'The shed street (layout shed_street_north) carried on north to the office street.',
-  },
-  {
-    id: 'quarter_street',
-    kind: 'lane',
-    rect: [3, -52.5, 6, -18.1],
-    detail: 'North from the cross street behind the tower (the tower’s rear door) to the office street.',
-  },
-  {
-    id: 'back_lane_west',
-    kind: 'lane',
-    rect: [6, -33, 15.79, -30],
-    detail: 'The back lane carried west past the canteen’s loading yard to the quarter street.',
-  },
-];
+export const PLAN_PATHS = [];
 
 // Planned green, coarse.
 export const PLAN_GREEN = [

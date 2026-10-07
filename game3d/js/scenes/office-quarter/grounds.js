@@ -68,7 +68,7 @@ export function* streetSteps(pv, p, lights, [x0, x1]) {
 
 function* paving(pv) {
   laneField(pv, [Q[0], Q[1], S[3], P.QUARTER_END + 1.6], { along: 'z', origin: ORIGIN });
-  laneField(pv, [SHED[0], SHED[1], S[3], S[3] + 3], { along: 'z', origin: ORIGIN });
+  laneField(pv, [SHED[0], SHED[1], S[3], -48.8], { along: 'z', origin: ORIGIN });
   worksStreet(pv, null, [S[2] - 3, S[2]]); // the works' asphalt (works/grounds.js)
   walk(pv, [HW[0], HW[1], S[3], S[3] + 3], false);
   yield;
@@ -84,11 +84,10 @@ function* edges(p, signRoot) {
     if (sides.includes('e')) kerb(p, [r[1], S[3] + V], [r[1], z1], { off: 0.08 });
   };
   mouth(Q, P.QUARTER_END + 1.6, 'e');
-  mouth(SHED, S[3] + 3, 'we');
+  mouth(SHED, -48.8, 'we');
   // bollards across the two mouths
   for (const { a, b } of P.BOLLARDS) {
-    const n = Math.max(2, Math.round(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.66));
-    for (let i = 0; i <= n; i++) bollard(p, a[0] + ((b[0] - a[0]) * i) / n, a[1] + ((b[1] - a[1]) * i) / n);
+    for (const [x, z] of [a, b]) bollard(p, x, z);
   }
   fingerSign(signRoot, p, ...P.SIGNS.west, P.WEST_BOARDS);
   // a bed between the bank's north face and the verge, its hedge along the face

@@ -66,7 +66,7 @@ export const JUNCTION = [SHED_ST[0], SHED_ST[1], CROSS[2], CROSS[3]];
 // a few steps up the shed street he can walk, to the chained bollards that close it; they stand far enough in that
 // the court's trees never hide them from the camera
 export const BARRIER_Z = HZ - 3.3;
-export const SHED_WALK = [SHED_ST[0] + 0.35, SHED_ST[1] - 0.35, BARRIER_Z + 0.3, HZ + 0.1];
+export const SHED_WALK = [SHED_ST[0] + 0.35, SHED_ST[1] - 0.35, BARRIER_Z - 1.2, HZ + 0.1];
 export const WING_PLOT = [SHED_ST[1], SERVICE[0], CROSS[3], HZ];
 export const NORTH_BED = [SHED_ST[1] + 0.3, 5.5, HZ + 0.05, HZ + 1.15]; // the raised bed along the court's north edge
 // the lane, and the planted strips either side of it (the north one starts past the tower)
@@ -94,3 +94,11 @@ export const inRect = (x, z, [x0, x1, z0, z1]) => x > x0 && x < x1 && z > z0 && 
 export const NOOKS = [
   { id: 'forecourt_staff_gate', kit: 'gate', at: [7.4, -2.6], face: Math.PI, back: 1.3, half: 1.25, bike: 1 },
 ];
+
+// Shared pedestrian seam with the campus; both scenes use the forecourt coordinate frame.
+export const CAMPUS_EXIT = {
+  edge: [(SHED_ST[0] + SHED_ST[1]) / 2, BARRIER_Z + 0.5],
+  lane: [(SHED_ST[0] + SHED_ST[1]) / 2, BARRIER_Z + 1.7],
+  in: [(SHED_ST[0] + SHED_ST[1]) / 2, BARRIER_Z + 3],
+  zone: [SHED_WALK[0], SHED_WALK[1], BARRIER_Z - 1, BARRIER_Z + 1.9],
+};

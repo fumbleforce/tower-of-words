@@ -4,7 +4,7 @@ import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { eveningLight, EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
-import { inRect, POSES, TURN_X } from '../scenes/harbour/plan.js';
+import { inRect, POSES, TURN_X, CAMPUS_EXIT } from '../scenes/harbour/plan.js';
 import * as LAYOUT from '../scenes/island-layout.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
@@ -39,6 +39,12 @@ export async function harbourPlace(game) {
   const dk = (id) => w.doors.find((d) => d.id === id);
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
   const things = {
+    campus: {
+      ...PLACE_DETAILS.harbour.things.campus,
+      anchor: (v) => v.set(CAMPUS_EXIT.lane[0], 1.1, CAMPUS_EXIT.lane[1]),
+      spot: () => CAMPUS_EXIT.lane,
+      face: () => CAMPUS_EXIT.edge,
+    },
     // the way out (plan.js EXITS)
     office_street: {
       ...PLACE_DETAILS.harbour.things.office_street,
@@ -94,6 +100,7 @@ export async function harbourPlace(game) {
     seats: {},
     people: {},
     zones: {
+      campus_exit: (x, z) => inRect(x, z, CAMPUS_EXIT.zone),
       east_exit: (x, z) => inRect(x, z, back.zone),
       lane_exit: (x, z) => inRect(x, z, works.lane.zone),
       street_exit: (x, z) => inRect(x, z, works.street.zone),
@@ -138,12 +145,14 @@ export async function harbourPlace(game) {
     // works down the lane or the street, the way he left them, walking south; out up the one nearest
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, -Math.PI / 2),
     tripInFrom: {
+      campus: (g) => walkIn(g, cam, CAMPUS_EXIT.arrive, CAMPUS_EXIT.in, Math.PI),
       works: (g) => {
         const e = works[viaOf(g, 'lane')] || works.lane;
         return walkIn(g, cam, e.arrive, e.in, 0);
       },
     },
     tripOutTo: {
+      campus: (g) => walkOut(g, cam, CAMPUS_EXIT.lane, CAMPUS_EXIT.edge),
       office_quarter: (g) => walkOut(g, cam, back.lane, back.edge),
       works: (g) => walkOutNearest(g, cam, works),
     },

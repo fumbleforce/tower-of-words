@@ -69,6 +69,144 @@
     ]
   },
   {
+    "id_": "prop/campus/campus_bench",
+    "kind": "prop",
+    "name": "Garden bench",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.campus_bench",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Garden bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/forecourt",
+    "kind": "prop",
+    "name": "Head office",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.forecourt",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Head office'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/harbour",
+    "kind": "prop",
+    "name": "Harbour walk",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.harbour",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Harbour walk'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/office_quarter",
+    "kind": "prop",
+    "name": "Office street",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.office_quarter",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Office street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/office_shed",
+    "kind": "prop",
+    "name": "Office street",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.office_shed",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Office street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/print_shop",
+    "kind": "prop",
+    "name": "Print shop",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.print_shop",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Print shop'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/canteen/canteen_exit",
     "kind": "prop",
     "name": "Fountain plaza",
@@ -1058,6 +1196,29 @@
     ]
   },
   {
+    "id_": "prop/forecourt/campus",
+    "kind": "prop",
+    "name": "North campus",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.campus",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'North campus'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/forecourt/fallen_bicycle",
     "kind": "prop",
     "name": "Bicycle",
@@ -1496,6 +1657,29 @@
     ]
   },
   {
+    "id_": "prop/harbour/campus",
+    "kind": "prop",
+    "name": "North campus",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.campus",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'North campus'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/harbour/ferry_terminal",
     "kind": "prop",
     "name": "Ferry terminal",
@@ -1807,6 +1991,52 @@
     "place": "office_quarter",
     "used": [
       "Office street: tap target 'Bank'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/campus_quarter",
+    "kind": "prop",
+    "name": "North campus",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.campus_quarter",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'North campus'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/campus_shed",
+    "kind": "prop",
+    "name": "North campus",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.campus_shed",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'North campus'"
     ],
     "view": {
       "type": "room",
@@ -2420,6 +2650,75 @@
     "tags": [
       "in game",
       "thing small"
+    ]
+  },
+  {
+    "id_": "prop/print_shop/directory_printer",
+    "kind": "prop",
+    "name": "Island directory",
+    "paths": [
+      "game3d/js/places/print-shop.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "print-shop.js things.directory_printer",
+    "place": "print_shop",
+    "used": [
+      "Print shop: tap target 'Island directory'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "print-shop"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/print_shop/print_exit",
+    "kind": "prop",
+    "name": "North campus",
+    "paths": [
+      "game3d/js/places/print-shop.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "print-shop.js things.print_exit",
+    "place": "print_shop",
+    "used": [
+      "Print shop: tap target 'North campus'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "print-shop"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/print_shop/print_seat",
+    "kind": "prop",
+    "name": "Waiting chair",
+    "paths": [
+      "game3d/js/places/print-shop.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "print-shop.js things.print_seat",
+    "place": "print_shop",
+    "used": [
+      "Print shop: tap target 'Waiting chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "print-shop"
+    },
+    "tags": [
+      "in game",
+      "thing"
     ]
   },
   {

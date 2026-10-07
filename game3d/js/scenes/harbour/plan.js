@@ -334,3 +334,11 @@ export const BOUNDS = (() => {
   }
   return b;
 })();
+
+export const CAMPUS_EXIT = {
+  edge: pt([-41.6, -37]),
+  lane: pt([-41.6, -38.5]),
+  arrive: pt([-41.6, -37]),
+  in: pt([-41.6, -40]),
+  zone: rect([-42.6, -40.6, -38.8, -36.5]),
+};
