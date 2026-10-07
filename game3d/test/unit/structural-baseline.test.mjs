@@ -48,6 +48,11 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   for (const flag of ['d5_kenji_needs_intro', 'd5_mori_needs_intro', 'd3_emi_needs_intro']) expected.engine.exact[flag] = ['game3d/js/places/day5/place.js'];
   expected.engine.exact.d2_content_revision = ['game3d/js/saves/day2.js'];
   expected.engine.exact.place.push('game3d/js/saves/day2.js');
+  expected.engine.exact.bakery_action_complete = ['game3d/js/places/bakery/action.js'];
+  for (const flag of ['bakery_order_id', 'bakery_item', 'bakery_phase', 'bakery_cant_pay', 'bakery_paid_id', 'bakery_eaten_id', 'bakery_eat_id', 'bakery_eat_item', 'bakery_eat_phase']) expected.engine.exact[flag] = ['game3d/js/places/bakery/trade.js'];
+  expected.engine.events.bakery = {};
+  expected.engine.placeFile.bakery = 'game3d/js/places/bakery.js';
+  for (const flag of ['bakery_can_eat', 'bakery_has_curry', 'bakery_has_roll']) expected.engine.exact[flag] = ['game3d/js/places/bakery/stage.js'];
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {

@@ -3177,6 +3177,56 @@
   "clear": []
  },
  {
+  "key": "bakery-welcome",
+  "speaker": "bakery_clerk",
+  "text": "いらっしゃいませ。トレーはこちらです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "bakery-curry",
+  "speaker": "bakery_clerk",
+  "text": "カレーパン、お一つですね。百八十円です。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "bakery-roll",
+  "speaker": "bakery_clerk",
+  "text": "バターロール、お一つですね。百二十円です。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "bakery-thanks",
+  "speaker": "bakery_clerk",
+  "text": "ありがとうございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "bakery-seat",
+  "speaker": "bakery_clerk",
+  "text": "はい、そちらでどうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
   "key": "oh-1dltuqt",
   "speaker": "sales1",
   "text": "十時の会議、四番目の議題見た？",

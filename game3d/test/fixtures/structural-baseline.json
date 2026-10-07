@@ -273,6 +273,7 @@
     "dorms",
     "shotengai",
     "izakaya",
+    "bakery",
     "karaoke",
     "karaoke_booth",
     "east_lane",
@@ -518,6 +519,25 @@
     "shotengai:to_dorms",
     "izakaya:arrive",
     "izakaya:leave",
+    "bakery:arrive",
+    "bakery:leave",
+    "bakery:clerk",
+    "bakery:choose",
+    "bakery:curry",
+    "bakery:roll",
+    "bakery:checkout",
+    "bakery:pay",
+    "bakery:paid",
+    "bakery:take",
+    "bakery:eat_now",
+    "bakery:cancel",
+    "bakery:seat_ask",
+    "bakery:window",
+    "bakery:eat_curry",
+    "bakery:eat_roll",
+    "bakery:eat",
+    "bakery:stand",
+    "bakery:end",
     "karaoke:arrive",
     "karaoke:to_street",
     "karaoke:to_booth",
@@ -1341,6 +1361,217 @@
       "call": true
     },
     {
+      "from": "bakery:clerk",
+      "to": "bakery:choose",
+      "kind": "choice",
+      "labels": [
+        "Choose some bread."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:clerk",
+      "to": "bakery:seat_ask",
+      "kind": "choice",
+      "labels": [
+        "Point to the window seat."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:clerk",
+      "to": "bakery:end",
+      "kind": "choice",
+      "labels": [
+        "Keep looking."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:choose",
+      "to": "bakery:curry",
+      "kind": "choice",
+      "labels": [
+        "Take a curry bread. ¥180"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:choose",
+      "to": "bakery:roll",
+      "kind": "choice",
+      "labels": [
+        "Take a butter roll. ¥120"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:choose",
+      "to": "bakery:end",
+      "kind": "choice",
+      "labels": [
+        "Leave the bread."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:curry",
+      "to": "bakery:checkout",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "bakery:roll",
+      "to": "bakery:checkout",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "bakery:checkout",
+      "to": "bakery:pay",
+      "kind": "choice",
+      "labels": [
+        "Pay ¥180.",
+        "Pay ¥120."
+      ],
+      "cond": "(bakery_item == 'curry_bread')"
+    },
+    {
+      "from": "bakery:checkout",
+      "to": "bakery:cancel",
+      "kind": "choice",
+      "labels": [
+        "Put the bread back."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:pay",
+      "to": "bakery:cancel",
+      "kind": "go",
+      "labels": [],
+      "cond": "(bakery_cant_pay)"
+    },
+    {
+      "from": "bakery:pay",
+      "to": "bakery:paid",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "bakery:paid",
+      "to": "bakery:take",
+      "kind": "choice",
+      "labels": [
+        "Take the bag."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:paid",
+      "to": "bakery:eat_now",
+      "kind": "choice",
+      "labels": [
+        "Eat at the window."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:take",
+      "to": "bakery:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "bakery:eat_now",
+      "to": "bakery:eat",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "bakery:cancel",
+      "to": "bakery:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "bakery:seat_ask",
+      "to": "bakery:window",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "bakery:window",
+      "to": "bakery:eat_curry",
+      "kind": "choice",
+      "labels": [
+        "Eat a curry bread."
+      ],
+      "cond": "(bakery_has_curry)"
+    },
+    {
+      "from": "bakery:window",
+      "to": "bakery:eat_roll",
+      "kind": "choice",
+      "labels": [
+        "Eat a butter roll."
+      ],
+      "cond": "(bakery_has_roll)"
+    },
+    {
+      "from": "bakery:window",
+      "to": "bakery:end",
+      "kind": "choice",
+      "labels": [
+        "Sit for a while."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:window",
+      "to": "bakery:stand",
+      "kind": "choice",
+      "labels": [
+        "Get up."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "bakery:eat_curry",
+      "to": "bakery:eat",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "bakery:eat_roll",
+      "to": "bakery:eat",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "bakery:eat",
+      "to": "bakery:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "bakery:stand",
+      "to": "bakery:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
       "from": "forecourt:to_shotengai",
       "to": "shotengai:arrive",
       "kind": "trip",
@@ -1420,6 +1651,12 @@
     },
     {
       "from": "izakaya:leave",
+      "to": "shotengai:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "bakery:leave",
       "to": "shotengai:arrive",
       "kind": "trip",
       "labels": []
@@ -2125,6 +2362,14 @@
     "room_closing_seen",
     "dorm_room_known",
     "home_203",
-    "found_bakery_flyer"
+    "bakery_visited",
+    "found_bakery_flyer",
+    "bakery_action_complete",
+    "place",
+    "bakery_phase",
+    "bakery_item",
+    "bakery_cant_pay",
+    "bakery_has_curry",
+    "bakery_has_roll"
   ]
 }

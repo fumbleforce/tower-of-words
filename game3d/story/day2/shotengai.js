@@ -2,6 +2,7 @@ import { direction, shut, sayFallbacks, fallbackNodes } from './shared.js';
 export default {
   start: 'd2_arrive',
   on: {
+      'talk:bakery_door': 'd2_shut',
     'talk:office_lane': 'd2_to_forecourt', 'zone:office_exit': 'd2_to_forecourt',
     'talk:plaza_lane': 'd2_to_lane', 'zone:plaza_exit': 'd2_to_lane',
     'talk:bike_shop': 'd2_shut', 'talk:store': 'd2_shut',

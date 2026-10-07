@@ -38,6 +38,7 @@ import { officePlace as office } from './places/office.js';
 import { dormCourtPlace as dorm_court } from './places/dorm-court.js';
 import { dormsPlace as dorms } from './places/dorms.js';
 import { shotengaiPlace as shotengai } from './places/shotengai.js';
+import { bakeryPlace as bakery } from './places/bakery.js';
 import { izakayaPlace as izakaya } from './places/izakaya.js';
 import { karaokePlace as karaoke } from './places/karaoke.js';
 import { karaokeBoothPlace as karaoke_booth } from './places/karaoke-booth.js';
@@ -76,6 +77,7 @@ const PLACES = {
   dorms,
   shotengai,
   izakaya,
+  bakery,
   karaoke,
   karaoke_booth,
   east_lane,
@@ -220,7 +222,6 @@ game.onRecoveryError = (message) => {
   document.body.append(notice);
   notice.showModal();
 };
-// A tap advances a running action to its next line; Runner clears this when an input is shown.
 const HURRY = 6;
 game.hurry = false;
 game.setHurry = (on) => {
@@ -260,7 +261,6 @@ window.addEventListener(
 // ---------- rendering ----------
 const view = createView(game, renderer, canvas, () => save(game)); // quality, post chain, size, render (perf/view.js)
 const { setComposer, resize, size, render } = view;
-// the 3D objects that stand for a marker (people's bodies, a thing's obj or outline())
 function objsOf(m) {
   const P = game.place;
   if (!P || !m) return [];

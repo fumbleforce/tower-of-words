@@ -325,6 +325,10 @@ export function installInteractions(game) {
     const target = game.sayTarget;
     const item = picked || (await ui.giveMenu(target.label, sim.inv, ITEMS));
     if (!item || !sim.inv.includes(item)) return;
+    if (ITEMS[item]?.giftable === false) {
+      ui.toast('Eat your bread at the bakery window seat.');
+      return;
+    }
     // a refusal (keep: true on the trigger entry, e.g. a second gift) runs its lines but leaves the item in the bag
     if (giveItem({ runner: game.runner, flags, take }, item, target.id)) return;
     game.beat(() =>
@@ -339,7 +343,7 @@ export function installInteractions(game) {
   globalThis.document?.getElementById('bagBtn')?.addEventListener('click', () => {
     const to = !game.busy && giveTarget();
     const verb = document.body.classList.contains('phone') ? 'Tap' : 'Click';
-    note.textContent = to ? `${verb} a drink to give it to ${to.label}.` : 'Walk up to someone to give them something.';
+    note.textContent = to ? `${verb} an item to give it to ${to.label}.` : 'Walk up to someone to give them something.';
     bag.classList.toggle('can-give', !!to);
   });
   bag?.querySelector('ul').addEventListener('click', (e) => {

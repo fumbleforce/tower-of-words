@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { local as shopLocal } from '../scenes/shotengai/plan.js';
 import { southLinkFrame } from '../scenes/forecourt/south-link.js';
 import { shotengaiSteps } from '../scenes/shotengai.js';
 import { sliced } from '../perf/slice.js';
@@ -60,6 +61,16 @@ export async function shotengaiPlace(game) {
     },
     bakery: {
       ...PLACE_DETAILS.shotengai.things.bakery,
+      anchor: (v) => {
+        const [x, z] = shopLocal([45.35, 18.65]);
+        return v.set(x, 0.75, z);
+      },
+      spot: () => shopLocal([45.35, 19.25]),
+      face: () => shopLocal([45.35, 18.65]),
+      enabled: () => sim.day >= 2,
+    },
+    bakery_door: {
+      ...PLACE_DETAILS.shotengai.things.bakery_door,
       anchor: (v) => pin(v, 'bakery'),
       spot: () => dk('bakery').step,
       face: () => dk('bakery').local,
@@ -195,11 +206,13 @@ export async function shotengaiPlace(game) {
     tripOut: (g) => walkOut(g, cam, [w.edge[0], w.edge[1] - 1.6], w.edge),
     // the karaoke box: in at its door off the arcade, and back out of it onto the arcade
     tripInFrom: {
+      bakery: (g) => walkIn(g, cam, dk('bakery').local, dk('bakery').step, outOf('bakery')),
       forecourt: (g) => walkIn(g, cam, southLink.edge, southLink.inside, -Math.PI / 2),
       izakaya: (g) => walkIn(g, cam, dk('izakaya').local, dk('izakaya').step, outOf('izakaya')),
       karaoke: (g) => walkIn(g, cam, dk('karaoke').local, dk('karaoke').step, outOf('karaoke')),
     },
     tripOutTo: {
+      bakery: (g) => walkOut(g, cam, dk('bakery').step, dk('bakery').local),
       forecourt: (g) => walkOut(g, cam, southLink.lane, southLink.edge),
       izakaya: (g) => walkOut(g, cam, dk('izakaya').step, dk('izakaya').local),
       karaoke: (g) => walkOut(g, cam, dk('karaoke').step, dk('karaoke').local),

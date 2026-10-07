@@ -40,6 +40,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     dorms: { eric: 3 },
     shotengai: {},
     izakaya: {},
+    bakery: { bakery_clerk: 5 },
     karaoke: {},
     karaoke_booth: {},
     east_lane: {},

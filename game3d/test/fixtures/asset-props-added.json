@@ -1,5 +1,74 @@
 [
   {
+    "id_": "prop/bakery/bakery_exit",
+    "kind": "prop",
+    "name": "Shopping street",
+    "paths": [
+      "game3d/js/places/bakery.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "bakery.js things.bakery_exit",
+    "place": "bakery",
+    "used": [
+      "Bakery: tap target 'Shopping street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "bakery"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/bakery/bakery_seat",
+    "kind": "prop",
+    "name": "Window seat",
+    "paths": [
+      "game3d/js/places/bakery.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "bakery.js things.bakery_seat",
+    "place": "bakery",
+    "used": [
+      "Bakery: tap target 'Window seat'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "bakery"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/bakery/bread_rack",
+    "kind": "prop",
+    "name": "Bread trays",
+    "paths": [
+      "game3d/js/places/bakery.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "bakery.js things.bread_rack",
+    "place": "bakery",
+    "used": [
+      "Bakery: tap target 'Bread trays'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "bakery"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/canteen/canteen_exit",
     "kind": "prop",
     "name": "Fountain plaza",
@@ -2356,13 +2425,36 @@
   {
     "id_": "prop/shotengai/bakery",
     "kind": "prop",
-    "name": "Bakery",
+    "name": "Delivery note",
     "paths": [
       "game3d/js/places/shotengai.js"
     ],
     "status": "provisional",
     "status_from": "A named thing in the game (built in code)",
     "source": "shotengai.js things.bakery",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Delivery note'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/bakery_door",
+    "kind": "prop",
+    "name": "Bakery",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.bakery_door",
     "place": "shotengai",
     "used": [
       "Shop street: tap target 'Bakery'"

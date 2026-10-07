@@ -54,7 +54,7 @@ export async function travelStates(game) {
   const graph = waysGraph(byPlace, places, opts);
   // day 1: the same with work over, to tell "open after work" from "not now"
   const afterWork = day === 1 ? waysGraph(byPlace, places, { ...opts, cond: workOver }) : null;
-  return placeStates({ here, day, graph, afterWork, busy: busyReason(game), visited });
+  return placeStates({ here, day, period: sim.period, graph, afterWork, busy: busyReason(game), visited });
 }
 
 // Go there: true if the trip started

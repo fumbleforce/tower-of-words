@@ -1,3 +1,4 @@
+import { BAKERY_OPEN } from '../gameplay/shop-hours.js';
 // The ways out of a place that are open now (notes/minimap-plan.md; docs/game/systems.md, Fast travel): each of the
 // place's public `zone:` and `talk:` triggers, resolved with the current flags the way the runner resolves them
 // (runner.js entry), and the trip its node makes. Pure: a story, a condition function and the day in, ways out.
@@ -63,6 +64,7 @@ export function waysOut(from, story, { cond, day = 1, onceDone = null, transitio
     if (moves.length !== 1) continue;
     const m = moves[0];
     const to = m.do === 'next' ? NEXT[from] : m.to;
+    if (to === 'bakery' && (day < 3 || !cond(BAKERY_OPEN))) continue;
     if (!to || !canTravel(from, to, day)) continue;
     const scene =
       m.do === 'next' ||
