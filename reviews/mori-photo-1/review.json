@@ -1,33 +1,38 @@
 {
-  "title": "Mori’s travel photograph",
-  "date": "2026-10-07",
-  "by": "Codex",
-  "status": "open",
-  "issue": 301,
-  "multi": false,
-  "question": "Which print should Mori bring to art club?",
-  "options": [
-    {
-      "id": "a",
-      "label": "A · Photographic",
-      "image": "art/parts/mori-photo-1/a.png",
-      "note": "Original generated winter tourist print, inspired by the Lillehammer ski-jump venue. More photographic surface detail; aged print edge. Not a historical photograph."
-    },
-    {
-      "id": "b",
-      "label": "B · Game-world print",
-      "image": "art/parts/mori-photo-1/b.png",
-      "note": "Same composition with soft faceted trees and stone to match the game world. The jump profiles remain clear at small size. Original generated prop, not a documentary reconstruction."
-    }
-  ],
-  "links": [
-    {
-      "label": "Exact prompts and preserved output hashes",
-      "href": "reviews/mori-photo-1/prompts.json"
-    },
-    {
-      "label": "Staging and physical checks",
-      "href": "bible/#doc/art/candidates/mori-photo-1/staging.md"
-    }
-  ]
+ "title": "Mori’s travel photograph",
+ "date": "2026-10-07",
+ "by": "Codex",
+ "status": "decided",
+ "issue": 301,
+ "multi": false,
+ "question": "Which print should Mori bring to art club?",
+ "options": [
+  {
+   "id": "a",
+   "label": "A · Photographic",
+   "image": "art/parts/mori-photo-1/a.png",
+   "note": "Original generated winter tourist print, inspired by the Lillehammer ski-jump venue. More photographic surface detail; aged print edge. Not a historical photograph."
+  },
+  {
+   "id": "b",
+   "label": "B · Game-world print",
+   "image": "art/parts/mori-photo-1/b.png",
+   "note": "Same composition with soft faceted trees and stone to match the game world. The jump profiles remain clear at small size. Original generated prop, not a documentary reconstruction."
+  }
+ ],
+ "links": [
+  {
+   "label": "Exact prompts and preserved output hashes",
+   "href": "reviews/mori-photo-1/prompts.json"
+  },
+  {
+   "label": "Staging and physical checks",
+   "href": "bible/#doc/art/candidates/mori-photo-1/staging.md"
+  }
+ ],
+ "decided": [
+  "b"
+ ],
+ "decision": "b",
+ "decided_at": "2026-10-07T07:40:59+0200"
 }
