@@ -14,6 +14,7 @@ import { STEEL, rod } from '../outdoor/furniture.js';
 import { grass } from '../outdoor/planting.js';
 import { C } from './buildings.js';
 import * as P from './plan.js';
+import { sortingBay, stationDetails } from './service-details.js';
 
 const NO = { cast: false };
 const PIPES = [
@@ -228,16 +229,6 @@ function station(p, mesh) {
   p.box(STEEL.dark, 0.6, 0.12, 0.02, mx + 0.25, 3.55, mz, NO);
 }
 
-// the recycling centre's sorting bins along the street's east edge south of its door, each its colour
-function bins(p) {
-  const colors = ['#3f6178', '#5f7a6a', '#c6b252', '#8a4b44'];
-  colors.forEach((c, k) => {
-    const z = P.W2_COURT[3] + 0.9 + k * 0.85;
-    p.box(c, 0.7, 0.9, 0.7, P.STREET[1] + 0.55, 0, z);
-    p.box('#3e434d', 0.74, 0.06, 0.74, P.STREET[1] + 0.55, 0.9, z, NO);
-  });
-}
-
 // p: a Parts collector (casting); g: a cells' collector for the small things; mesh: a Parts for the chain-link (its
 // own see-through material); plain: the unlit signSet
 export function* propsSteps(p, g, mesh, plain) {
@@ -246,10 +237,11 @@ export function* propsSteps(p, g, mesh, plain) {
   yield;
   P.DRUMS.forEach((d, k) => drum(g, d, k));
   P.PALLETS.forEach((d, k) => pallet(g, d, k));
-  bins(g);
+  sortingBay(g, plain);
   yield;
   lot(p, mesh);
   corner(g, mesh, plain);
   station(g, mesh);
+  stationDetails(g, plain);
   yield;
 }

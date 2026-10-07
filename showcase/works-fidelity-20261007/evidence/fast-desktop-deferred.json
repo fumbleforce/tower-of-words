@@ -1,0 +1,20 @@
+{
+  "viewport": [
+    1366,
+    860
+  ],
+  "mc": null,
+  "cast": null,
+  "run": {},
+  "pass": false,
+  "verdict": "FAIL",
+  "errors": [
+    "fast-test: render deferred; browser GPU slots or exclusive GPU lock busy, an image or model job is ahead in the GPU queue (python3 tools/gpu_priority.py queue), or Jørgen's image gen dashboard has priority (gpu.priority)",
+    "route did not finish before the deadline",
+    "day-end checkpoint was not reached"
+  ],
+  "overlaps": 0,
+  "spins": 0,
+  "gait": 0,
+  "activeOverrides": []
+}
