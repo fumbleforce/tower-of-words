@@ -14,7 +14,7 @@ Independent critic: `game3d/shots/memory-comparison/validation/codex-memory336-r
 
 ## Validation and retained failures
 
-CPU check `/tmp/codex-memory336-cpu2.log`: 666 tests PASS before the one-line Close correction. Final commit and landing gate results are recorded separately in their logs.
+CPU check `/tmp/codex-memory336-cpu2.log`: 666 tests PASS before the one-line Close correction. After the Close correction, the final commit gate passed all 666 tests and checks (`/tmp/codex-memory336-commit-final.log`). Source commit `8e385a55110b` then passed the exact-commit landing gate and public title boots at 1366 × 860 and 390 × 844 with no errors (`/tmp/codex-memory336-land-final.log`). The worktree and task branch were retired.
 
 Strict native route regression:
 
