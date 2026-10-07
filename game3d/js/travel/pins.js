@@ -6,6 +6,8 @@ import { PLACE_NAMES } from '../places/definitions.js';
 export const PINS = {
   train: { at: [-28.6, -3.9] },
   gate: { at: [-14.45, 6.5] },
+  print_shop: { in: 'campus' },
+  campus: { at: [-19.25, -33] },
   forecourt: { at: [-6, -1] },
   office: { in: 'forecourt' },
   plaza: { at: [37.29, -2.75] },

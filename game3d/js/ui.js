@@ -1,3 +1,4 @@
+import { bagItemHTML } from './ui/bag-item.js';
 import { clockHTML, updateClock } from './ui/clock-button.js';
 export { PORTRAITS } from './ui/portrait-data.js';
 // HTML overlay: goal, words, the train's LED board, the talk panel, replies, fades, the end card.
@@ -539,9 +540,7 @@ export const ui = {
     b.hidden = !sim.inv.length;
     b.querySelector('.n').textContent = sim.inv.length;
     $('#bagPanel .yen').textContent = `¥${sim.yen} left`;
-    $('#bagPanel ul').innerHTML = sim.inv
-      .map((i) => `<li>${(this.items && this.items[i] && this.items[i].name) || i}</li>`)
-      .join('');
+    $('#bagPanel ul').innerHTML = sim.inv.map((id) => bagItemHTML(id, this.items?.[id])).join('');
   },
   setGiveTarget(name, on) {
     const g = $('#giveBtn');

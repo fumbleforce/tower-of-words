@@ -1,3 +1,4 @@
+import { campusRoutes } from '../campus-routes.js';
 // Day 3 story set. Physical integration and future-day reuse: README.md.
 import dorms from './dorms.js';
 import dorm_court from './dorm_court.js';
@@ -19,9 +20,10 @@ import office from './office.js';
 import bakery from '../bakery.js';
 export { WORDS } from './words.js';
 export const PERIODS = ['morning', 'lunch', 'afternoon', 'evening'];
-export const STORIES = {
-  bakery, forecourt, gate, train, office, dorms, dorm_court, east_lane, plaza, canteen, sports, pool, gym, east_coast, dorm_commons, shotengai, karaoke, karaoke_booth,
-};
+export const STORIES = campusRoutes({
+  bakery,
+  forecourt, gate, train, office, dorms, dorm_court, east_lane, plaza, canteen, sports, pool, gym, east_coast, dorm_commons, shotengai, karaoke, karaoke_booth,
+});
 export const OPEN_PLACES = Object.keys(STORIES);
 // every way a story file here walks, so the trip is allowed (places/definitions.js canTravel)
 export const TRIPS = Object.fromEntries(

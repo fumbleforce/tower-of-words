@@ -132,7 +132,7 @@ export function* forecourtSteps() {
   buildSouthLink(statics);
   yield;
   buildLane(statics, nav, lamps);
-  const north = yield* northSteps(statics, lamps);
+  const north = yield* northSteps(statics, lamps, { closed: false });
   const nooks = buildNooks(PL.NOOKS, statics, { lights: lamps }); // outdoor/nooks.js: props round each, its spot named
   for (const r of nooks.blocks) nav.block(...r);
   const lights = lamps.build(statics);

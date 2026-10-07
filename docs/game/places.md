@@ -98,6 +98,8 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `gate` | -14.45 | 6.5 | 0 | 1 | 0 | The room centred on the station building's footprint. |
 | `forecourt` | -13.95 | -0.65 | 0 | 1 | 0 | The gate room: its exit is the station door. |
 | `office` | 8.75 | -8.45 | 0 | 1 | -2 | Its lift under the forecourt's lift. |
+| `campus` | -13.95 | -0.65 | 0 | 1 | 0 | Head-office north grounds in the forecourt frame. |
+| `print_shop` | -24.3 | -43.3 | 270 | 1 | 0 | Existing w3 east door and ground-floor footprint. |
 | `canteen` | 33.885 | -20.5 | 0 | 1 | 0 | The ground-floor footprint, front edge centred in the existing canteen. |
 | `plaza` | 37.29 | -2.48 | 0 | 1 | 0 | Its fountain on the map's fountain, 2.4 south of it on the lane's axis. |
 | `dorm_court` | 79.84 | -1.3 | 90 | 1 | 0 | The open entrance court on the west side of the dorm blocks; its camera looks east at Eric's block. |
@@ -138,6 +140,8 @@ The game's map and the minimap (controls-and-ui.md, The map) show each outdoor p
 | `office` | | | `forecourt` |
 | `plaza` | 37.29 | -2.75 | |
 | `canteen` | | | `plaza` |
+| `campus` | -19.25 | -33 | |
+| `print_shop` | | | `campus` |
 | `dorm_court` | 79.84 | -1.3 | |
 | `dorms` | | | `dorm_court` |
 | `shotengai` | 30.3 | 20.1 | |
@@ -331,6 +335,7 @@ The bicycle aisle continues south on a 2.5 m paved path into the shopping street
 | `plaza_lane` | To the plaza | The east end of the lane along the tower's south face. |
 | `garden_bench` | Garden bench | The bench on the gravel court in the south garden, Tama asleep at one end. After work only. |
 | `fallen_bicycle` | Bicycle | Whichever bike in the bike court's west row is lying in the aisle. After work only, while one is down. |
+| `campus` | North campus | Open shed street north, into the loop behind head office. |
 
 ### Spots
 
@@ -355,7 +360,7 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Zones
 
-`lift_front`, `station_exit` (day 2: at the station's door, back into the security room), `plaza_lane` (the lane's east end along the tower's south face: walking into it starts the walk to the plaza), `shop_exit` (south end of the bicycle aisle), `reception_office` (inside the receptionist's office; nothing starts there yet)
+`campus_exit` (open shed street north), `lift_front`, `station_exit` (day 2: at the station's door, back into the security room), `plaza_lane` (the lane's east end along the tower's south face: walking into it starts the walk to the plaza), `shop_exit` (south end of the bicycle aisle), `reception_office` (inside the receptionist's office; nothing starts there yet)
 
 ### Who's there when
 
@@ -387,6 +392,7 @@ The crowd ([systems.md](systems.md), The crowd):
 
 | Nodes | When | What happens |
 |---|---|---|
+| `to_campus` | Use the north marker or walk beyond the wing | Enter the north-campus loop. |
 | `to_shotengai` | Walk south out of the bike court or use its travel marker | Walk into the shopping street’s west passage. |
 | `garden_bench`, `fallen_bicycle` | Optional interactions after work | [The walk home](stories/evening-walk.md) records these discoveries. |
 | `outside` | Arrive from the station, or up from B2 after work | The goal points to the head-office lift; after work, east along the lane to the dorms. |
@@ -1180,7 +1186,7 @@ No crowd.
 
 The fifth district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Office quarter"). It runs from the gym's corner, where the sports lane turns north by gym_link, west along the office street past the fronts of Amakawa Life, Logistics, Electric and Trading on its north side, with a walk north on the shed street's line to Amakawa Foods, a walk between Logistics and Life to the court before Amakawa Construction, and the bank's door a few steps down the quarter street. Eric comes in from the sports ground, west along the sports lane and round the corner, and from the harbour, east along the street (Getting between places); west past Amakawa Trading the street goes on into the harbour (`harbour`, below), which builds the street's west end with the same code. The gym is the sports ground's, built by the same code, and so is the corner: both chunks lay it, and the sports ground also builds the street in front of Amakawa Life and Construction.
 
-Walked: the sports lane from the gym's front west to its turn, gym_link north, and the office street from the corner west to just short of the harbour walk, where the harbour takes over; the forecourts in front of the four offices on the street, up to their doors; the walk north to Amakawa Foods' door; the walk north between Amakawa Logistics and Life and the court before Amakawa Construction's door; the quarter street's mouth south to a row of bollards past the bank's door. The shed street's mouth is laid a little way south with bollards across it, not walked; the harbour walk's mouth is the harbour's. Lawns, beds and the gym's surroundings are not walked.
+Walked: the sports lane from the gym's front west to its turn, gym_link north, and the office street from the corner west to just short of the harbour walk, where the harbour takes over; the forecourts in front of the four offices on the street, up to their doors; the walk north to Amakawa Foods' door; the walk north between Amakawa Logistics and Life and the court before Amakawa Construction's door; the quarter street's mouth south to a row of bollards past the bank's door. The shed street and quarter street now continue south into the north-campus loop; their centre lanes are open between edge bollards; the harbour walk's mouth is the harbour's. Lawns, beds and the gym's surroundings are not walked.
 
 The street, gym_link and the lane are the lanes' brick between pale borders, turning at squares of herringbone at the corner. On the street's south side a verge with a low hedge, post lamps behind its kerb, and two bays with a bench each looking over the street at the offices, and no trees there, so nothing stands between Eric and the camera; its north side is kerbed between the forecourts, with low beds. The forecourts are mid-grey slabs, with beds against the deeper ones either side of the door, and company bike racks at Amakawa Electric's and Logistics' outer ends. The walks are pale slabs between kerbs. Gravel runs along the gym's west wall at the corner, and a clipped hedge along the street's north kerb there, with a wood of cherries, maples and zelkovas behind it on the lawn between the offices and the gym. Belts of trees stand between and behind the blocks north of the street and set back on the lawns south of it, and a small wood on the quarter park. Finger signs: at the corner, Offices 事務所 and Bank 銀行 pointing west, Pool プール east; at the street's west end, Harbour 港 pointing on west, Gym 体育館 and Pool プール back east.
 
@@ -1765,3 +1771,76 @@ The shop street bakery occupies its existing bay-10 ground floor. Open from day 
 | `bakery_seat` | Window seat | Sit or eat the purchased bread |
 
 Spots: `bakery_in`, `bread_rack`, `checkout`, `window`. Seat: `bakery_seat`. Person: `bakery_clerk`, an existing generic apron body. Hook: `bakeryShop`, staged selection, checkout, bag collection and eating. No zones or secret nooks. The near wall is cut for overview and closes with the existing room-shell support for desktop follow.
+## North campus (`campus`)
+
+The shed street continues behind head office and the monorail wing, joins the office street at two mouths, and connects west to the harbour coast walk. These are continuous pedestrian paths with matched island coordinates at every crossing. Paving, kerbs, planted beds, trees, lamps, a resting bench and the existing bank and print-shop facades define the loop. The far northern island and the bank's interior remain unbuilt; this does not make every building enterable.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `forecourt` | Head office | South along the shed street. |
+| `office_quarter` | Office street | The quarter street's north mouth. |
+| `office_shed` | Office street | The shed street's north mouth. |
+| `harbour` | Harbour walk | North along the west coast path. |
+| `print_shop` | Print shop | The existing w3 east door. |
+| `campus_bench` | Garden bench | A resting place on the coast-side planted square. |
+
+### Spots
+
+`campus_in`, `print_door`
+
+### Seats
+
+`campus_bench`
+
+### Zones
+
+`forecourt_exit`, `office_quarter_exit`, `office_shed_exit`, `harbour_exit`
+
+### Who's there when
+
+No authored cast placement. Lamps brighten at evening and return to daytime materials in the morning.
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Enter | Ordinary control; no repeated introduction. |
+| `to_forecourt`, `to_offices`, `to_harbour`, `to_print` | Use a route | Walk through the matching physical seam. |
+| `sit` | Sit | Rest on the garden bench. |
+
+## Print shop (`print_shop`)
+
+A usable ground floor inside w3's existing footprint. A copier feeds and outputs a paper directory beside an illuminated proof counter, colour swatches, stock shelves and a two-drum press. The central aisle connects the east door, copier and waiting chair. Day/night lighting is reversible. Other floors remain shells; no invented clerk or dialogue is installed.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `print_exit` | North campus | Return through the east door. |
+| `directory_printer` | Island directory | Free useful paper listing current venue locations and adjacent streets. |
+| `print_seat` | Waiting chair | A saved seated position with a clear standing exit. |
+
+### Spots
+
+`directory`, `proof`, `press`
+
+### Seats
+
+`print_seat`
+
+### Zones
+
+None.
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Enter | Ordinary control. |
+| `directory`, `print`, `end` | Use the copier | Choose printing or Leave. The player presses the control, watches the feed/output, then picks up one persistent directory. Interrupted printing or pickup adds nothing. |
+| `sit` | Use the chair | Sit; Continue restores the real chair position. |
+| `exit` | Use the door | Walk outside the actual east door. |
+
+The directory stays in the Bag, whose Read button reopens three compact written pages. Names and parent locations come from the same canonical tables as the map. Bakery opening date and periods come from its enforced service rule; no other opening hours are invented.

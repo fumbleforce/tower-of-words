@@ -26,7 +26,7 @@ export const inRect = (x, z, [x0, x1, z0, z1], m = 0) => x > x0 + m && x < x1 - 
 const mid = (a, b) => (a + b) / 2;
 const box = ([x0, z0, x1, z1]) => [x0, x1, z0, z1];
 const path = (id) => box(LAYOUT.PATHS.find((p) => p.id === id).rect);
-const plan = (id) => box(LAYOUT.PLAN_PATHS.find((p) => p.id === id).rect);
+const plan = (id) => box([...LAYOUT.PATHS, ...LAYOUT.PLAN_PATHS].find((p) => p.id === id).rect);
 const building = (id) => LAYOUT.BUILDINGS.find((b) => b.id === id);
 
 export const STREET = path('office_street');
@@ -163,6 +163,7 @@ const I_WALKS = [
   ...LINK_WALKS,
   [WEST_END, STUB_X, STREET[2], STREET[3]],
   [QUARTER[0], QUARTER[1], STREET[3] - 0.1, QUARTER_END],
+  [SHED[0], SHED[1], STREET[3] - 0.1, -48.8],
   [FOODS_WALK[0], FOODS_WALK[1], FOODS_WALK[2] + 0.1, STREET[2] + 0.1],
   [CON_WALK[0], CON_WALK[1], CON_WALK[2], STREET[2] + 0.1],
   [CON_COURT[0], CON_COURT[1], CON_COURT[2] + 0.1, CON_COURT[3] + 0.1],
@@ -300,3 +301,19 @@ export const BOUNDS = (() => {
   }
   return b;
 })();
+
+export const CAMPUS_EXITS = Object.fromEntries(
+  [
+    ['shed', -19.25],
+    ['quarter', 4.5],
+  ].map(([id, x]) => [
+    id,
+    {
+      edge: pt([x, -49.5]),
+      lane: pt([x, -50.8]),
+      arrive: pt([x, -49.5]),
+      in: pt([x, -52.2]),
+      zone: rect([x - 1.4, x + 1.4, -51.1, -48.8]),
+    },
+  ]),
+);

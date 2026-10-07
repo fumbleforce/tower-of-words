@@ -47,3 +47,7 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
 | `day2/plaza.js` | `to_canteen`, `d2_arrive`, `d2_to_office`, `d2_to_lane`, `d2_to_shops`, `d2_fountain`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/east_coast.js` | `d2_arrive`, `d2_to_lane`, `d2_north_closed`, `d2_onsen`, `d2_lookout`, `d2_hamada`, `d2_see_word`, `d2_lookout_view`, `d2_hamada_idle`, `d2_hamada_again`, `d2_leave_lookout`, `d2_hamada_go`, `d2_hamada_food`, `d2_hamada_drink`, `d2_lookout_again`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/canteen.js` | `room_worker`, `room_water`, `room_trays`, `room_closing`, `room_worker_end`, `arrive`, `to_plaza`, `sit_w`, `sit_e` |
+
+### North-campus routes
+
+`day2/campus.js`, `day2/print_shop.js`, `day2/office_quarter.js` and `day2/harbour.js` reuse the physical routes without adding spoken scenes. The forecourt's `to_campus` enters the new loop. Campus uses `arrive`, `to_forecourt`, `to_offices`, `to_harbour`, `to_print`, `bench`; print shop uses `arrive`, `directory`, `print`, `end`, `sit`, `exit`. Office street uses `arrive`, `to_campus`, `to_harbour`, `shut`; harbour uses `arrive`, `to_campus`, `to_offices`, `shut`. Sports and works routes retain their day-2 closure. The free directory is a persistent readable item after a completed feed/output, with no new language lesson or quest.

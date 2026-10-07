@@ -41,13 +41,11 @@ const WEST_BELT = [[P.YARD[1] + 1.2, P.WORKS_STREET[0] - 1.2, S[2] - 13, S[2] - 
 // kerbed, bollards across
 function shedMouth(pv, p) {
   const [x0, x1] = O.SHED,
-    z1 = S[3] + 3;
+    z1 = -48.8;
   laneField(pv, [x0, x1, S[3], z1], { along: 'z', origin: ORIGIN });
   kerb(p, [x0, S[3] + 1.1], [x0, z1], { off: -0.08 });
   kerb(p, [x1, S[3] + 1.1], [x1, z1], { off: 0.08 });
-  const { a, b } = O.BOLLARDS[0],
-    n = Math.max(2, Math.round(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.66));
-  for (let i = 0; i <= n; i++) bollard(p, a[0] + ((b[0] - a[0]) * i) / n, a[1] + ((b[1] - a[1]) * i) / n);
+  for (const [x, z] of [O.BOLLARDS[0].a, O.BOLLARDS[0].b]) bollard(p, x, z);
 }
 
 // the street's west end and its east band, the works street's and the shed street's mouths, and the south side's

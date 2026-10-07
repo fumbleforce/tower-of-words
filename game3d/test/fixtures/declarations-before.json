@@ -160,6 +160,22 @@
     ]
   },
   "ITEMS": {
+    "curry_bread": {
+      "name": "Curry bread",
+      "price": 180,
+      "giftable": false
+    },
+    "butter_roll": {
+      "name": "Butter roll",
+      "price": 120,
+      "giftable": false
+    },
+    "island_directory": {
+      "name": "Island directory",
+      "price": 0,
+      "document": true,
+      "giftable": false
+    },
     "coffee": {
       "name": "Canned coffee",
       "price": 120
@@ -175,19 +191,92 @@
     "cornsoup": {
       "name": "Hot corn soup",
       "price": 130
-    },
-    "curry_bread": {
-      "name": "Curry bread",
-      "price": 180,
-      "giftable": false
-    },
-    "butter_roll": {
-      "name": "Butter roll",
-      "price": 120,
-      "giftable": false
     }
   },
   "places": {
+    "print_shop": {
+      "things": {
+        "print_exit": {
+          "label": "North campus",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "directory_printer": {
+          "label": "Island directory",
+          "kind": "thing",
+          "verb": "Print"
+        },
+        "print_seat": {
+          "label": "Waiting chair",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        }
+      },
+      "spots": [
+        "directory",
+        "proof",
+        "press"
+      ],
+      "seats": [
+        "print_seat"
+      ],
+      "zones": [],
+      "people": [],
+      "hooks": [
+        "printDirectory"
+      ]
+    },
+    "campus": {
+      "things": {
+        "forecourt": {
+          "label": "Head office",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_quarter": {
+          "label": "Office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_shed": {
+          "label": "Office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "harbour": {
+          "label": "Harbour walk",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "print_shop": {
+          "label": "Print shop",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "campus_bench": {
+          "label": "Garden bench",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        }
+      },
+      "spots": [
+        "campus_in",
+        "print_door"
+      ],
+      "seats": [
+        "campus_bench"
+      ],
+      "zones": [
+        "forecourt_exit",
+        "office_quarter_exit",
+        "office_shed_exit",
+        "harbour_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
     "train": {
       "things": {
         "aoi": {
@@ -523,6 +612,11 @@
     },
     "forecourt": {
       "things": {
+        "campus": {
+          "label": "North campus",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "station_exit": {
           "label": "Station",
           "kind": "thing"
@@ -595,6 +689,7 @@
         "garden_bench"
       ],
       "zones": [
+        "campus_exit",
         "lift_front",
         "station_exit",
         "plaza_lane",
@@ -789,6 +884,107 @@
       "hooks": [
         "partySetup",
         "partyFood"
+      ]
+    },
+    "izakaya": {
+      "things": {
+        "izakaya_exit": {
+          "label": "To the shop street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "party_seat": {
+          "label": "Your place at the table",
+          "kind": "thing",
+          "verb": "Sit"
+        },
+        "mori": {
+          "label": "Mr. Mori",
+          "kind": "person"
+        },
+        "mio": {
+          "label": "Mio",
+          "kind": "person"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
+        },
+        "emi": {
+          "label": "Emi",
+          "kind": "person"
+        }
+      },
+      "spots": [
+        "izakaya_in",
+        "party_group",
+        "party_food",
+        "party_mori",
+        "party_mio",
+        "party_kenji",
+        "party_emi",
+        "service_counter"
+      ],
+      "nooks": [],
+      "seats": [
+        "party_seat",
+        "party_mori",
+        "party_mio",
+        "party_kenji",
+        "party_emi"
+      ],
+      "zones": [
+        "izakaya_exit"
+      ],
+      "people": [
+        "mori",
+        "mio",
+        "kenji",
+        "emi"
+      ],
+      "hooks": [
+        "partySetup",
+        "partyFood"
+      ]
+    },
+    "bakery": {
+      "things": {
+        "bakery_exit": {
+          "label": "Shopping street",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "bread_rack": {
+          "label": "Bread trays",
+          "kind": "thing",
+          "verb": "Choose"
+        },
+        "bakery_clerk": {
+          "label": "Bakery clerk",
+          "kind": "person"
+        },
+        "bakery_seat": {
+          "label": "Window seat",
+          "kind": "thing",
+          "verb": "Sit"
+        }
+      },
+      "spots": [
+        "bakery_in",
+        "bread_rack",
+        "checkout",
+        "window"
+      ],
+      "seats": [
+        "bakery_seat"
+      ],
+      "people": [
+        "bakery_clerk"
+      ],
+      "zones": [],
+      "nooks": [],
+      "hooks": [
+        "bakeryShop"
       ]
     },
     "karaoke": {
@@ -1320,6 +1516,16 @@
     },
     "office_quarter": {
       "things": {
+        "campus_shed": {
+          "label": "North campus",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "campus_quarter": {
+          "label": "North campus",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "sports_lane": {
           "label": "To the gym and pool",
           "kind": "thing",
@@ -1377,6 +1583,8 @@
       ],
       "seats": [],
       "zones": [
+        "campus_shed_exit",
+        "campus_quarter_exit",
         "east_exit",
         "west_exit"
       ],
@@ -1385,6 +1593,11 @@
     },
     "harbour": {
       "things": {
+        "campus": {
+          "label": "North campus",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "office_street": {
           "label": "To the office street",
           "kind": "thing",
@@ -1424,6 +1637,7 @@
       ],
       "seats": [],
       "zones": [
+        "campus_exit",
         "east_exit",
         "lane_exit",
         "street_exit"
@@ -1603,8 +1817,56 @@
         "leaveRoom"
       ]
     },
+    "canteen": {
+      "things": {
+        "canteen_worker": {
+          "label": "Canteen worker",
+          "kind": "person"
+        },
+        "canteen_exit": {
+          "label": "Fountain plaza",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "canteen_seat_w": {
+          "label": "Dining chair",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        },
+        "canteen_seat_e": {
+          "label": "Dining chair",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        }
+      },
+      "spots": [
+        "canteen_in",
+        "meal_counter",
+        "water",
+        "tray_return"
+      ],
+      "seats": [
+        "canteen_seat_w",
+        "canteen_seat_e"
+      ],
+      "nooks": [],
+      "zones": [],
+      "people": [
+        "canteen_worker"
+      ],
+      "hooks": [
+        "roomWorker"
+      ]
+    },
     "plaza": {
       "things": {
+        "canteen_door": {
+          "label": "Canteen",
+          "kind": "thing",
+          "verb": "Go in"
+        },
         "office_lane": {
           "label": "To head office",
           "kind": "thing",
@@ -1655,11 +1917,6 @@
           "label": "Tama",
           "verb": "Pet",
           "kind": "person small"
-        },
-        "canteen_door": {
-          "label": "Canteen",
-          "kind": "thing",
-          "verb": "Go in"
         }
       },
       "spots": [
@@ -1934,150 +2191,6 @@
         "lunchSit",
         "lunchOver",
         "officeDay2"
-      ]
-    },
-    "canteen": {
-      "things": {
-        "canteen_worker": {
-          "label": "Canteen worker",
-          "kind": "person"
-        },
-        "canteen_exit": {
-          "label": "Fountain plaza",
-          "kind": "thing",
-          "verb": "Go out"
-        },
-        "canteen_seat_w": {
-          "label": "Dining chair",
-          "kind": "thing",
-          "verb": "Sit",
-          "pin": "near"
-        },
-        "canteen_seat_e": {
-          "label": "Dining chair",
-          "kind": "thing",
-          "verb": "Sit",
-          "pin": "near"
-        }
-      },
-      "spots": [
-        "canteen_in",
-        "meal_counter",
-        "water",
-        "tray_return"
-      ],
-      "seats": [
-        "canteen_seat_w",
-        "canteen_seat_e"
-      ],
-      "nooks": [],
-      "zones": [],
-      "people": [
-        "canteen_worker"
-      ],
-      "hooks": [
-        "roomWorker"
-      ]
-    },
-    "izakaya": {
-      "things": {
-        "izakaya_exit": {
-          "label": "To the shop street",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "party_seat": {
-          "label": "Your place at the table",
-          "kind": "thing",
-          "verb": "Sit"
-        },
-        "mori": {
-          "label": "Mr. Mori",
-          "kind": "person"
-        },
-        "mio": {
-          "label": "Mio",
-          "kind": "person"
-        },
-        "kenji": {
-          "label": "Kenji",
-          "kind": "person"
-        },
-        "emi": {
-          "label": "Emi",
-          "kind": "person"
-        }
-      },
-      "spots": [
-        "izakaya_in",
-        "party_group",
-        "party_food",
-        "party_mori",
-        "party_mio",
-        "party_kenji",
-        "party_emi",
-        "service_counter"
-      ],
-      "nooks": [],
-      "seats": [
-        "party_seat",
-        "party_mori",
-        "party_mio",
-        "party_kenji",
-        "party_emi"
-      ],
-      "zones": [
-        "izakaya_exit"
-      ],
-      "people": [
-        "mori",
-        "mio",
-        "kenji",
-        "emi"
-      ],
-      "hooks": [
-        "partySetup",
-        "partyFood"
-      ]
-    },
-    "bakery": {
-      "things": {
-        "bakery_exit": {
-          "label": "Shopping street",
-          "kind": "thing",
-          "verb": "Go out"
-        },
-        "bread_rack": {
-          "label": "Bread trays",
-          "kind": "thing",
-          "verb": "Choose"
-        },
-        "bakery_clerk": {
-          "label": "Bakery clerk",
-          "kind": "person"
-        },
-        "bakery_seat": {
-          "label": "Window seat",
-          "kind": "thing",
-          "verb": "Sit"
-        }
-      },
-      "spots": [
-        "bakery_in",
-        "bread_rack",
-        "checkout",
-        "window"
-      ],
-      "seats": [
-        "bakery_seat"
-      ],
-      "people": [
-        "bakery_clerk"
-      ],
-      "zones": [],
-      "nooks": [],
-      "hooks": [
-        "bakeryShop"
       ]
     }
   }

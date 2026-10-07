@@ -36,6 +36,8 @@ test('asset source data includes the actual words, cast, music, sounds and style
     plaza: { eric: 1, canteen_worker: 3 },
     canteen: { canteen_worker: 8, eric: 3 },
     office: { kenji: 17, mori: 18, mio: 46, eric: 5, emi: 3 },
+    campus: {},
+    print_shop: {},
     dorm_court: {},
     dorms: { eric: 3 },
     shotengai: {},

@@ -118,7 +118,9 @@
       "harbour": "game3d/js/places/harbour.js",
       "works": "game3d/js/places/works.js",
       "canteen": "game3d/js/places/canteen.js",
-      "izakaya": "game3d/js/places/izakaya.js"
+      "izakaya": "game3d/js/places/izakaya.js",
+      "campus": "game3d/js/places/campus.js",
+      "print_shop": "game3d/js/places/print-shop.js"
     },
     "events": {
       "train": {
@@ -147,7 +149,9 @@
         "sat_down": "sitDown"
       },
       "canteen": {},
-      "izakaya": {}
+      "izakaya": {},
+      "campus": {},
+      "print_shop": {}
     },
     "speakers": {
       "eric": {
@@ -269,6 +273,8 @@
     "office",
     "plaza",
     "canteen",
+    "campus",
+    "print_shop",
     "dorm_court",
     "dorms",
     "shotengai",
@@ -385,6 +391,7 @@
     "gate:tama_sumimasen",
     "gate:signin",
     "gate:poster",
+    "forecourt:to_campus",
     "forecourt:to_shotengai",
     "forecourt:garden_bench",
     "forecourt:fallen_bicycle",
@@ -500,6 +507,18 @@
     "canteen:to_plaza",
     "canteen:sit_w",
     "canteen:sit_e",
+    "campus:to_print",
+    "campus:arrive",
+    "campus:to_forecourt",
+    "campus:to_offices",
+    "campus:to_harbour",
+    "campus:sit",
+    "print_shop:arrive",
+    "print_shop:exit",
+    "print_shop:directory",
+    "print_shop:print",
+    "print_shop:sit",
+    "print_shop:end",
     "dorm_court:mailboxes",
     "dorm_court:arrive",
     "dorm_court:hall",
@@ -568,10 +587,12 @@
     "pool:to_sports",
     "gym:arrive",
     "gym:to_sports",
+    "office_quarter:to_campus",
     "office_quarter:arrive",
     "office_quarter:shut",
     "office_quarter:to_sports",
     "office_quarter:to_harbour",
+    "harbour:to_campus",
     "harbour:arrive",
     "harbour:shut",
     "harbour:to_offices",
@@ -1341,6 +1362,24 @@
       "cond": "(period == 'lunch')"
     },
     {
+      "from": "print_shop:directory",
+      "to": "print_shop:print",
+      "kind": "choice",
+      "labels": [
+        "Print the island directory (free)."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "print_shop:directory",
+      "to": "print_shop:end",
+      "kind": "choice",
+      "labels": [
+        "Leave."
+      ],
+      "cond": ""
+    },
+    {
       "from": "dorm_court:go_up",
       "to": "transitions:dorm_court_to_dorms",
       "kind": "next",
@@ -1572,6 +1611,12 @@
       "cond": ""
     },
     {
+      "from": "forecourt:to_campus",
+      "to": "campus:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "forecourt:to_shotengai",
       "to": "shotengai:arrive",
       "kind": "trip",
@@ -1622,6 +1667,36 @@
     {
       "from": "canteen:to_plaza",
       "to": "plaza:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "campus:to_print",
+      "to": "print_shop:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "campus:to_forecourt",
+      "to": "forecourt:outside",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "campus:to_offices",
+      "to": "office_quarter:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "campus:to_harbour",
+      "to": "harbour:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "print_shop:exit",
+      "to": "campus:arrive",
       "kind": "trip",
       "labels": []
     },
@@ -1776,6 +1851,12 @@
       "labels": []
     },
     {
+      "from": "office_quarter:to_campus",
+      "to": "campus:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "office_quarter:to_sports",
       "to": "sports:arrive",
       "kind": "trip",
@@ -1784,6 +1865,12 @@
     {
       "from": "office_quarter:to_harbour",
       "to": "harbour:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "harbour:to_campus",
+      "to": "campus:arrive",
       "kind": "trip",
       "labels": []
     },

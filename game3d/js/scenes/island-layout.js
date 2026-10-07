@@ -1,3 +1,4 @@
+import { CAMPUS_PATHS } from './island-campus.js';
 // The island in one shared frame: where each built place (chunk) sits, and the buildings, paths, green and coast
 // around the day-1 route, traced from the picked island map (reviews/island-map-4,
 // art/candidates/island-map-4/01-overview.png) and its straight-down version (art/island/island-map-4-topdown.png,
@@ -236,6 +237,7 @@ export const BUILDINGS = ROWS.map(([id, kind, storeys, floorH, wall, roof, windo
 // Every line runs along the grid and turns at right angles; a turn is a square of paving as wide as the line.
 // No roads, no cars.
 export const PATHS = [
+  ...CAMPUS_PATHS,
   {
     id: 'court',
     kind: 'court',

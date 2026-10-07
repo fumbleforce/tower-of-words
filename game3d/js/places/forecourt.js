@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { day3Place } from './day3/place.js';
-import { BIKES } from '../scenes/forecourt/plan.js';
+import { BIKES, CAMPUS_EXIT, inRect } from '../scenes/forecourt/plan.js';
 import { forecourtSteps } from '../scenes/forecourt.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
@@ -44,6 +44,12 @@ export async function forecourtPlace(game) {
   };
   const d4 = day3Place(game, 'forecourt', { root: w.root, K, ids: ['kuroda'] });
   const things = {
+    campus: {
+      ...PLACE_DETAILS.forecourt.things.campus,
+      anchor: (v) => v.set(CAMPUS_EXIT.lane[0], 1.1, CAMPUS_EXIT.lane[1]),
+      spot: () => CAMPUS_EXIT.lane,
+      face: () => CAMPUS_EXIT.edge,
+    },
     station_exit: {
       ...PLACE_DETAILS.forecourt.things.station_exit,
       anchor: (v) => v.set(w.stationExit[0], 1.3, w.stationExit[1]),
@@ -199,6 +205,7 @@ export async function forecourtPlace(game) {
     seats: { garden_bench: garden.seat },
     people: { kuro: w.kuro, tama: garden.person, kuroda: d4.people.kuroda },
     zones: {
+      campus_exit: (x, z) => inRect(x, z, CAMPUS_EXIT.zone),
       lift_front: (x, z) => Math.hypot(x - w.liftOut[0], z - w.liftOut[1]) < 0.42,
       // day 2: back in at the station's door (the walk to the platform)
       station_exit: (x, z) => Math.hypot(x - w.stationExit[0], z - w.stationExit[1]) < 0.45,
@@ -312,6 +319,7 @@ export async function forecourtPlace(game) {
     },
     // the walks to and from the fountain plaza (trips.js picks these by the other place's name)
     tripOutTo: {
+      campus: (g) => walkOut(g, cam, CAMPUS_EXIT.lane, CAMPUS_EXIT.edge),
       shotengai: (g) => walkOut(g, cam, w.southLink.lane, w.southLink.edge),
       plaza: (g) => walkOut(g, cam, w.plazaLane, w.plazaEdge),
       // day 2: back in at the station's door, the way he came out of it (tripIn backwards)
@@ -332,6 +340,7 @@ export async function forecourtPlace(game) {
       },
     },
     tripInFrom: {
+      campus: (g) => walkIn(g, cam, CAMPUS_EXIT.edge, CAMPUS_EXIT.in, 0),
       shotengai: (g) => walkIn(g, cam, w.southLink.edge, w.southLink.inside, Math.PI),
       plaza: (g) => walkIn(g, cam, w.plazaEdge, w.plazaIn, w.laneFacing),
     },

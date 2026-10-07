@@ -91,6 +91,7 @@ Eric starts with ¥1000. On day 1 the only shop is the B2 vending machine. A dri
 | `cornsoup` | Hot corn soup | ¥130 |
 | `curry_bread` | Curry bread | ¥180 |
 | `butter_roll` | Butter roll | ¥120 |
+| `island_directory` | Island directory | Free; readable saved document, not a gift |
 
 From day three, the bakery sells two breads during the morning, lunch and afternoon. A saved receipt makes each confirmed purchase charge once, including Continue during the handoff. The purchased bread can be eaten at its window seat; eating consumes one owned bread without gift or relationship effects. Bread is not offered through the drink-gift interactions.
 

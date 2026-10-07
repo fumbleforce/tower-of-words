@@ -6,6 +6,33 @@ import { SOUTH_HALF_DETAILS } from './catalog-south.js';
 import { OFFICE_DETAILS } from './catalog-office.js';
 // Labels and registration IDs shared by place factories and structural checks.
 export const PLACE_DETAILS = {
+  print_shop: {
+    things: {
+      print_exit: { label: 'North campus', kind: 'thing', verb: 'Go out' },
+      directory_printer: { label: 'Island directory', kind: 'thing', verb: 'Print' },
+      print_seat: { label: 'Waiting chair', kind: 'thing', verb: 'Sit', pin: 'near' },
+    },
+    spots: ['directory', 'proof', 'press'],
+    seats: ['print_seat'],
+    zones: [],
+    people: [],
+    hooks: ['printDirectory'],
+  },
+  campus: {
+    things: {
+      forecourt: { label: 'Head office', kind: 'thing', verb: 'Go' },
+      office_quarter: { label: 'Office street', kind: 'thing', verb: 'Go' },
+      office_shed: { label: 'Office street', kind: 'thing', verb: 'Go' },
+      harbour: { label: 'Harbour walk', kind: 'thing', verb: 'Go' },
+      print_shop: { label: 'Print shop', kind: 'thing', verb: 'Go in' },
+      campus_bench: { label: 'Garden bench', kind: 'thing', verb: 'Sit', pin: 'near' },
+    },
+    spots: ['campus_in', 'print_door'],
+    seats: ['campus_bench'],
+    zones: ['forecourt_exit', 'office_quarter_exit', 'office_shed_exit', 'harbour_exit'],
+    people: [],
+    hooks: [],
+  },
   train: TRAIN_DETAILS,
   gate: {
     things: {
@@ -136,6 +163,7 @@ export const PLACE_DETAILS = {
   },
   forecourt: {
     things: {
+      campus: { label: 'North campus', kind: 'thing', verb: 'Go' },
       station_exit: { label: 'Station', kind: 'thing' },
       office_entrance: { label: 'Head office', kind: 'thing' },
       lift: { label: 'Lift to B2', kind: 'thing' },
@@ -171,7 +199,7 @@ export const PLACE_DETAILS = {
       'lobby_umbrella',
     ],
     seats: ['garden_bench'],
-    zones: ['lift_front', 'station_exit', 'plaza_lane', 'shop_exit', 'reception_office'],
+    zones: ['campus_exit', 'lift_front', 'station_exit', 'plaza_lane', 'shop_exit', 'reception_office'],
     people: ['kuro', 'tama'],
     hooks: ['liftOpen', 'liftClose', 'gardenCat', 'bicycle'],
   },
