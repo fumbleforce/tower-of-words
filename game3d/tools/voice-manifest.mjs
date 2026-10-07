@@ -22,7 +22,7 @@ const { heardKey, lineKey } = await imp('tools/heardkey.mjs');
 const { STORY_FILES } = await imp('js/places/definitions.js');
 // the story as each protagonist sees it: {mc.name} and the other tokens filled in (js/mc.js)
 const { expandMc, isPlayer, ownClip, PROTAGONISTS, DEFAULT_MC } = await imp('js/mc.js');
-const { DAYS } = await imp('js/days.js');
+const { DAYS, CONTINUING_DAY } = await imp('js/days.js');
 const { NODES: FLAVOR_NODES, FINDS: FLAVOR_FINDS } = await imp('story/days3-5-finds.js');
 // day 2's new phrases (story/day2/words.js), until their clips exist and lang.js gives them a voice field
 const { WORDS: DAY2_WORDS } = await imp('story/day2/words.js');
@@ -34,7 +34,7 @@ const resolve = (t) => t.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id]
 
 // Each protagonist expands a private copy; nested imports can share cached story objects.
 export const storySets = () =>
-  Object.entries(DAYS).map(([day, d]) => ({
+  Object.entries({ ...DAYS, 6: CONTINUING_DAY }).map(([day, d]) => ({
     day: +day,
     files: (d.files || STORY_FILES).map((n) => {
       const f = path.join(root, 'story', d.dir + n + '.js');

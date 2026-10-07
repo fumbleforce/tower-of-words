@@ -298,6 +298,8 @@ Repeat meeting: station in the morning, dorm court in the evening. Later scenes 
 
 The name plate is the name above their lines; the label is the name over them in the world; the People panel is where people Eric has met are listed. "none" means there isn't one.
 
+Kuro, Aoi and Rei join the People panel when their authored introductions complete. Older saves with those introduction flags recover their cards and met status on load, preserving their existing points.
+
 Each People panel card has the name and one line about them, the same on every day, in every place and after a load (code: game3d/story/people.js, loaded with the game; #223).
 
 | Id | Name plate | Label over them | People panel |
@@ -309,8 +311,9 @@ Each People panel card has the name and one line about them, the same on every d
 | `emi` | Emi | Emi | Emi |
 | `guard` | Guard | Guard | The guard |
 | `kuroda` | Man from the train | Man from the train | Mr. Hamada |
-| `kuro` | Receptionist | Receptionist | none |
-| `aoi` | Aoi | Woman on her phone | none |
+| `kuro` | Receptionist | Receptionist | Kuro |
+| `aoi` | Aoi | Woman on her phone | Aoi |
+| `rei` | Tennis player, then Rei after her introduction | Tennis player, then Rei | Rei |
 | `tama` | none | Cat | none |
 | `canteen_worker` | Canteen worker | Canteen worker | none |
 | `attendant` | Attendant | Attendant | none |

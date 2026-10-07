@@ -2,6 +2,7 @@ import { TRIPS as DAY2_TRIPS } from '../../story/day2/index.js';
 import { TRIPS as DAY3_TRIPS } from '../../story/day3/index.js';
 import { TRIPS as DAY4_TRIPS } from '../../story/day4/index.js';
 import { TRIPS as DAY5_TRIPS } from '../../story/day5/index.js';
+import { TRIPS as ONGOING_TRIPS } from '../../story/ongoing/routes.js';
 import { MC } from '../mc.js';
 // Narrative place order and source references, consumed by the runtime and its checks.
 export const PLACE_FILES = {
@@ -96,7 +97,11 @@ export const TRIPS = {
 // skeleton (story/day3/index.js).
 export const DAY_TRIPS = { 2: DAY2_TRIPS, 3: DAY3_TRIPS, 4: DAY4_TRIPS, 5: DAY5_TRIPS };
 export const canTravel = (from, to, day = 1) =>
-  DAY_TRIPS[day] ? !!DAY_TRIPS[day][from]?.includes(to) : NEXT[from] === to || !!TRIPS[from]?.includes(to);
+  day > 5
+    ? !!ONGOING_TRIPS[from]?.includes(to)
+    : DAY_TRIPS[day]
+      ? !!DAY_TRIPS[day][from]?.includes(to)
+      : NEXT[from] === to || !!TRIPS[from]?.includes(to);
 export const STORY_FILES = [
   'train',
   'gate',

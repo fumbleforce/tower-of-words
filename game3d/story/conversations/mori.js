@@ -21,10 +21,11 @@ export default {
       ] },
       { do: 'cam', on: 'mori', zoom: 1.35 },
       { choice: [
-        { text: '{ikitai}… Norway?', go: 'conversation_mori_return', if: '!mori_return_asked' },
-        { text: 'Try “mitai”.', go: 'conversation_mori_see_word', if: 'mori_return_asked && !know_mitai' },
-        { text: '{mitai}. I’d like to see the photos.', go: 'conversation_mori_photos', if: 'mori_return_asked && know_mitai && !mori_photos_requested' },
-        { text: 'Ask whether he found the photos.', go: 'conversation_mori_photos_pending', if: 'mori_photos_requested' },
+        { text: '{ikitai}… Norway?', go: 'conversation_mori_return', if: '!mori_return_asked && !art_photo_seen && !ms2_mori && !ms3_mori' },
+        { text: 'Try “mitai”.', go: 'conversation_mori_see_word', if: 'mori_return_asked && !know_mitai && !art_photo_seen && !ms2_mori && !ms3_mori' },
+        { text: '{mitai}. I’d like to see the photos.', go: 'conversation_mori_photos', if: 'mori_return_asked && know_mitai && !mori_photos_requested && !art_photo_seen && !ms2_mori && !ms3_mori' },
+        { text: 'Ask whether he found the photos.', go: 'conversation_mori_photos_pending', if: 'mori_photos_requested && !art_photo_seen && !ms2_mori && !ms3_mori' },
+        { text: 'Ask about the drawing from his photograph.', go: 'conversation_mori_drawing', if: 'art_photo_seen || ms2_mori || ms3_mori' },
         { text: 'Let him get back to what he was doing.', go: 'conversation_mori_leave' },
       ] },
     ],
@@ -55,6 +56,15 @@ export default {
     conversation_mori_photos_pending: [
       { say: 'eric', emo: 'curious', text: 'フォト？' },
       { say: 'mori', overheard: true, emo: 'apologetic', text: 'すみません、まだです。' },
+      { do: 'cam', back: true },
+    ],
+    conversation_mori_drawing: [
+      { say: 'eric', emo: 'curious', text: 'How’s the drawing coming along?' },
+      { if: 'art_mori_started || ms3_mori', then: [
+        { say: 'mori', overheard: true, emo: 'warm', text: '少しずつですが。次に来た時、また見てください。' },
+      ], else: [
+        { say: 'mori', overheard: true, emo: 'sheepish', text: 'まだ、迷っていまして。次は、描き始めたいですね。' },
+      ] },
       { do: 'cam', back: true },
     ],
     conversation_mori_leave: [{ do: 'cam', back: true }],

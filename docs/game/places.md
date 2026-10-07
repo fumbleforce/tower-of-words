@@ -666,6 +666,8 @@ The camera looks in over the cut-down front wall: on a desktop the whole booth, 
 
 Dark walls and carpet, the door in the east wall open onto the corridor's warm light. On the north wall the screen, a song's title and lyrics lit on it, over a low cabinet with a speaker either side. Padded benches in a deep rose along the west wall, the east wall and the inside of the front wall round a low table: on it the song selector, a tablet in its docking cradle with a pink stylus on a cord, two microphones in their basket, a tambourine, the menu and two glasses. A small mirror ball hangs over the table; pink, cyan and blue lights.
 
+The booth has a third usable south bench and a 0.55 m table. Its `karaokeClub` physical stage seats Kenji west, Hamada east and the selected protagonist south; it shows the selector queue, a two-sided bakery receipt (¥380 / song 0718), and actual hand-held microphone pickup, keeping and passing. Props, actor poses and the held camera survive a saved scene; leaving cancels pending actions and restores their previous state. These hooks supply the continuing-week integration; no sung performance or completed karaoke milestone is claimed before an approved recording is integrated. The existing Monday selector repair retains its physical tablet anchor.
+
 ### Things
 
 | Id | Label | What it is |
@@ -684,7 +686,7 @@ None.
 
 ### Seats
 
-`booth_seat_w` (the bench along the west wall, facing the table), `booth_seat_e` (the bench along the east wall, facing it)
+`booth_seat_w` (the bench along the west wall, facing the table), `booth_seat_e` (the bench along the east wall, facing it), `booth_seat_s` (the south bench, facing the screen)
 
 ### Zones
 

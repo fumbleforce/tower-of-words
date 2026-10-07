@@ -1,3 +1,6 @@
+import { flags } from '../narrative/state.js';
+import { flagKeys } from '../narrative/engine-flags.js';
+const ACTION_KEYS = flagKeys('game3d/js/places/gym.js');
 import * as THREE from 'three';
 import { buildGym } from '../scenes/rooms/gym.js';
 import { RoomCam } from '../cam.js';
@@ -7,6 +10,7 @@ import { walkOut, walkIn } from './edge-walk.js';
 import { roomView, roomSave } from './room-view.js';
 import { day3Place } from './day3/place.js';
 import { gymDesk } from './day3/booking.js';
+import { createWinterStage } from './ongoing/winter-stage.js';
 import { MC } from '../mc.js';
 
 // The gym's ground floor (scenes/rooms/gym.js): the entrance lobby inside the main doors (the shoe lockers and the
@@ -101,7 +105,15 @@ export function gymPlace(game) {
     seats: { gym_bench_n: w.seats[1], gym_bench_s: w.seats[0] },
     people: { attendant: d3.people.attendant, mori: d3.people.mori, emi: d3.people.emi, kuro: d3.people.kuro },
     zones: {},
-    hooks: { bookingRepair: desk.hooks.bookingRepair, fanRepair: (a) => P.sunday.hooks.fanRepair(a) },
+    hooks: {
+      bookingRepair: desk.hooks.bookingRepair,
+      winterClub: async (a) => {
+        flags[ACTION_KEYS.winter_action_completed] = false;
+        const completed = await winter.act(a);
+        if (game.place === P) flags[ACTION_KEYS.winter_action_completed] = completed === true;
+      },
+      fanRepair: (a) => P.sunday.hooks.fanRepair(a),
+    },
     day3: (a) => d3.setup(P, a),
     kotodamaTargets: desk.kotodamaTargets,
     fit(aspect) {
@@ -113,11 +125,13 @@ export function gymPlace(game) {
     },
     update(dt) {
       d3.update(dt);
+      winter.update(dt);
     },
-    snapshotState: () => ({ ...save.snapshot(), booking: desk.snapshot() }),
+    snapshotState: () => ({ ...save.snapshot(), booking: desk.snapshot(), winterClub: winter.snapshot() }),
     restoreState(saved) {
       save.restore(saved);
       desk.load(saved.world?.booking);
+      winter.restore(saved.world?.winterClub);
     },
     // in through the main doors, walking north onto the tiles; out the same way
     tripIn: (g) => walkIn(g, cam, d.edge, d.in, Math.PI),
@@ -126,5 +140,8 @@ export function gymPlace(game) {
       pool: (g) => walkOut(g, cam, ch.out, ch.edge), // in at the protagonist's changing room's door
     },
   };
+  const winter = createWinterStage(game, P);
+  P.winterClub = winter;
+  P.leave = () => winter.leave();
   return P;
 }

@@ -20,7 +20,11 @@ const panel = (w, h, draw, px = 256) => {
   m.userData.noBatch = true;
   return m;
 };
-const ROWS = ['09:00  Tennis · court A', '13:00  Badminton', '16:00  Court B reservation', '18:00  Swimming club'];
+function rows() {
+  const weekday = (sim.day + 3) % 7;
+  const evening = weekday === 6 ? 'Swimming club' : weekday === 0 ? 'Tennis club' : 'Open practice';
+  return ['09:00  Tennis · court A', '13:00  Badminton', '16:00  Court B reservation', '18:00  ' + evening];
+}
 function screenDraw(state) {
   return (g, W, H) => {
     g.fillStyle = state === 'frozen' ? '#5a6470' : state === 'dark' ? '#07090c' : '#e9f1f6';
@@ -39,7 +43,7 @@ function screenDraw(state) {
     }
     g.fillText('Bookings  ' + dateOf(sim.day), W * 0.06, H * 0.06);
     g.font = `${Math.round(H / 11)}px sans-serif`;
-    ROWS.forEach((r, i) => g.fillText(r, W * 0.06, H * (0.26 + i * 0.17)));
+    rows().forEach((r, i) => g.fillText(r, W * 0.06, H * (0.26 + i * 0.17)));
   };
 }
 function sheetDraw(g, W, H) {
@@ -50,7 +54,7 @@ function sheetDraw(g, W, H) {
   g.font = `bold ${Math.round(H / 13)}px sans-serif`;
   g.fillText('Bookings · ' + dateOf(sim.day), W * 0.08, H * 0.06);
   g.font = `${Math.round(H / 17)}px sans-serif`;
-  ROWS.forEach((r, i) => {
+  rows().forEach((r, i) => {
     g.fillText(r, W * 0.08, H * (0.22 + i * 0.13));
     g.fillRect(W * 0.08, H * (0.31 + i * 0.13), W * 0.84, 1);
   });

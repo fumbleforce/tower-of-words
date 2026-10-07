@@ -1,3 +1,6 @@
+import { flags } from '../narrative/state.js';
+import { flagKeys } from '../narrative/engine-flags.js';
+const ACTION_KEYS = flagKeys('game3d/js/places/commons.js');
 import * as THREE from 'three';
 import { buildCommons } from '../scenes/rooms/commons.js';
 import { RoomCam } from '../cam.js';
@@ -6,6 +9,7 @@ import { PLACE_DETAILS } from './catalog.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { roomView, roomSave } from './room-view.js';
 import { day3Place } from './day3/place.js';
+import { createArtStage } from './ongoing/art-stage.js';
 import { sofaActivity } from './room-activity.js';
 
 // The dorm common room (scenes/rooms/commons.js): the ground floor of dorm_gallery on the inner court, the art
@@ -88,7 +92,15 @@ export function commonsPlace(game) {
     },
     people: { kenji: d3.people.kenji, mori: d3.people.mori, aoi: d3.people.aoi },
     zones: {},
-    hooks: { day5Commons: (a) => P.monday.hooks.day5Commons(a), roomSofa: (a) => activity.act(a) },
+    hooks: {
+      day5Commons: (a) => P.monday.hooks.day5Commons(a),
+      roomSofa: (a) => activity.act(a),
+      artClub: async (a) => {
+        flags[ACTION_KEYS.art_action_completed] = false;
+        const completed = await art.act(a);
+        if (game.place === P) flags[ACTION_KEYS.art_action_completed] = completed === true;
+      },
+    },
     day3: (a) => d3.setup(P, a),
     fit(aspect) {
       roomView(cam, w.bounds, aspect);
@@ -100,17 +112,22 @@ export function commonsPlace(game) {
     update(dt) {
       d3.update(dt);
       activity.update(dt);
+      art.update(dt);
     },
-    snapshotState: () => ({ ...save.snapshot(), roomActivity: activity.snapshot() }),
+    snapshotState: () => ({ ...save.snapshot(), roomActivity: activity.snapshot(), artClub: art.snapshot() }),
     restoreState(saved) {
       save.restore(saved);
       activity.restore(saved.world?.roomActivity);
+      art.restore(saved.world?.artClub);
     },
     // in through the glazed door, walking north; out the same way
     tripIn: (g) => walkIn(g, cam, d.edge, d.in, Math.PI),
     tripOutTo: { east_coast: (g) => walkOut(g, cam, d.out, d.edge) },
   };
   const activity = sofaActivity(game, P, d3.people.kenji);
+  const art = createArtStage(game, P);
+  P.artClub = art;
+  P.leave = () => art.leave();
   // The continuing calendar can supply a placement without replacing the room or its Talk nodes.
   P.roomResidents = {
     sync({ kenji } = {}) {

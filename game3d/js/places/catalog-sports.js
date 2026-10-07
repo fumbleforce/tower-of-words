@@ -77,5 +77,5 @@ export const GYM_DETAILS = {
   seats: ['gym_bench_n', 'gym_bench_s'],
   zones: [],
   people: ['attendant', 'mori', 'emi', 'kuro'],
-  hooks: ['bookingRepair'],
+  hooks: ['bookingRepair', 'winterClub'],
 };

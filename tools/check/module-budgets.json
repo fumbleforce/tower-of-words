@@ -94,7 +94,7 @@
     },
     "game3d/js/runner.js": {
       "lines": 483,
-      "bytes": 18465,
+      "bytes": 18437,
       "owner": "codex-tui",
       "review": "C-0076; 2026-09-30 one line passing a subtitled line's English (`en`) to the dialogue (issue #89); 2026-10-03 C-0378 day 2: load() reads the day's story set (days.js); 2026-10-04 C-0413 a scene starts with Eric walked out of any doorway (movement/doorways.js; the import on a blank line); 2026-10-05 #251: one import line, the story files expanded for the protagonist tokens at load, the player line clip in the protagonist voice (mc.js); 2026-10-05 per-protagonist clips: sayLine's two key blocks became one voice-keys.js lineClip call (ceiling lowered)",
       "reason": "Narrative execution, checkpoint replay and dialogue/audio dispatch remain after stage 2c; stage 3 reviews the presentation/audio boundary."

@@ -78,6 +78,23 @@ ENGINE_WRITES['game3d/js/places/bakery/stage.js'] = {
 };
 
 ENGINE_WRITES['game3d/js/places/bakery/action.js'] = { exact: ['bakery_action_complete'], prefix: [] };
+ENGINE_WRITES['game3d/js/places/ongoing/art-progress.js'] = { exact: ['art_first_day'], prefix: [] };
+
+ENGINE_WRITES['game3d/js/places/ongoing/index.js'] = {
+  exact: [
+    'ongoing_workday',
+    'ongoing_tennis_day',
+    'ongoing_team_day',
+    'ongoing_art_day',
+    'ongoing_art_ready',
+    'ongoing_winter_day',
+    'ongoing_winter_ready',
+  ],
+  prefix: [],
+};
+
+ENGINE_WRITES['game3d/js/places/gym.js'] = { exact: ['winter_action_completed'], prefix: [] };
+ENGINE_WRITES['game3d/js/places/commons.js'] = { exact: ['art_action_completed'], prefix: [] };
 
 export const KNOW_PREFIX = 'know_';
 export function flagKeys(owner) {

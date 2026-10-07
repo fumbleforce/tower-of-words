@@ -53,6 +53,10 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   expected.engine.events.bakery = {};
   expected.engine.placeFile.bakery = 'game3d/js/places/bakery.js';
   for (const flag of ['bakery_can_eat', 'bakery_has_curry', 'bakery_has_roll']) expected.engine.exact[flag] = ['game3d/js/places/bakery/stage.js'];
+  for (const key of ['ongoing_workday', 'ongoing_tennis_day', 'ongoing_team_day', 'ongoing_art_day', 'ongoing_art_ready', 'ongoing_winter_day', 'ongoing_winter_ready']) expected.engine.exact[key] = ['game3d/js/places/ongoing/index.js'];
+  expected.engine.exact.art_action_completed = ['game3d/js/places/commons.js'];
+  expected.engine.exact.winter_action_completed = ['game3d/js/places/gym.js'];
+  expected.engine.exact.art_first_day = ['game3d/js/places/ongoing/art-progress.js'];
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {

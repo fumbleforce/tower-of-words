@@ -204,7 +204,8 @@ export function installInteractions(game) {
   function talk(item, trigger) {
     const person = isPerson(game, item);
     if (game.place.people[item.id]) {
-      meet(game, item.id);
+      const introduction = sim.people[item.id]?.introduction;
+      if (!introduction || flags[introduction]) meet(game, item.id);
       ui.refreshPeople(sim.met.size);
     }
     // a thing whose only use now is a word (an empty talk node doesn't count): E opens the Say menu

@@ -14,7 +14,7 @@
     "crop": { "W": 648, "H": 768, "f": [219, 216, 429, 396] },
     "note": "art/approved/carina (Jørgen's carina-9-jorgen face; fitted to the cast framing by tools/portrait_fit.py, face box from art/approved/carina/crop.json)"
   },
-  "model": { "id": "carina", "dir": "characters/carina/", "height": 1.12, "chibi": "eric" },
+  "model": { "id": "carina", "dir": "characters/carina/", "height": 1.12, "extra": false, "chibi": "eric" },
   "voice": {
     "lines": "carina",
     "words": "carina",

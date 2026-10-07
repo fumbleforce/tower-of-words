@@ -17,12 +17,12 @@ Jørgen (2026-09-28): a day clock with periods, NPC schedules and NPC-to-NPC rel
 - Day 4 is Sunday 4 October, with the same four freely chosen periods and evening Sleep. Its story is game3d/story/day4/ and its cast schedule is places/day4/plan.js. Display and fan requests, carried Saturday jobs, ordinary visits and tennis are optional.
 - A free day's clock moves only when the player chooses ([days 3 to 5](../../notes/days3-5-outline.md), Routine and clock). At the desk in room 203 Eric sits in its chair and picks "Spend the rest of the morning here" (of lunch, of the afternoon), which moves to the next period, or "Rest until evening", which moves to the evening; both are always there before the evening. Clicking the HUD clock offers the same later periods from any place: one, two or three periods ahead, with the destination named. It cannot skip a conversation, active action or transition, move backward, or start the next day. Waiting updates schedules and light, then autosaves; jobs and money stay unchanged. A club session uses the evening without moving the clock. The place takes the new period's light at once.
 - Every period change sets the flags `period_early`, `period_morning`, `period_lunch`, `period_afternoon` and `period_evening`: only the current period's is true, the rest are false, so `period_lunch` clears when the afternoon starts. Loading a save, and a new day's start, set them from the saved period. Later days' optional scenes read them as show conditions; day 1 keeps its own `afternoon_on` and `evening_on`, which stay true once set.
-- Weekend Sleep and period names are built. A sixth period (night) and a complete playable week remain to build.
+- Evening Sleep continues beyond day 5 without a last day: the next morning uses the recurring week in `story/ongoing/`. Vocabulary, remembered remarks, introductions, jobs and bonds persist. The title selector still lists the five opening days. A sixth period (night) remains to build.
 
 ## Schedules
 
 - Each place's story file says where each person is in each period ([places.md](places.md), Who's there when). When the period changes, people walk to their new spot or leave.
-- A person's schedule across places, and their whole week, are to build (cast.md has the routines that are decided).
+- After the five opening days, `places/ongoing/plan.js` supplies a repeating Monday–Sunday schedule across places. Each scheduled person has one location per period. Waiting and Continue apply that same plan; ongoing repair work can keep its requester at the job. The bible's Recurring week timeline reads this plan and shows conditions and asset dependencies alongside each visit.
 
 ## The crowd
 
@@ -177,6 +177,7 @@ Clubs are social spaces, not minigames (Jørgen, 2026-10-03: "It's just a social
 - Joining: taking the club's slip on the notice board (below). Any number of clubs; nothing else is needed and there is no leaving.
 - A session: when Eric, a member, arrives at the club's place on its weekday in its period, the club's next session runs once that day, after the place's own start. The next session is the first special event due, else the next node in the club's list (the last repeats). It counts as he arrives: progress (sessions he has been to) goes up by one. Outside meeting time the place is open and quiet. A missed week costs nothing.
 - Members are roles or people (data/cast/roles.json, Protagonists), so another cast puts another person in the club.
+- From day 6, club attendance requires its physical stage to be ready. Saturday's winter gathering is in the gym with Kuro and Emi, rackets, a shuttle and a booking sheet; Sunday's tennis retains its playable court. Tuesday art awaits an approved photograph; Wednesday karaoke awaits an approved song and an integrated performance. Those two meetings do not consume attendance or grant their unfinished milestones. Their physical staging and candidate Reviews are preparation, not completed rewards.
 - Each club has its own special events (a node that runs once instead of the week's session, after enough visits and when its condition holds), markers (things in its places shown to members only) and finds (a find with `club: <id>` lies there for members only).
 - The People panel opens with the joined clubs: name, the next meeting ("Next: Saturday 3 Oct, evening · Outdoor pool") and the members Eric has met.
 - Membership, progress, the day of the last session and the events that ran are flags (FORMAT.md, Clubs), so the save, Continue and the next day keep them.

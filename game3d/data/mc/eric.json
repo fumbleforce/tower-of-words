@@ -13,7 +13,7 @@
     "crop": { "W": 648, "H": 768, "f": [116, 203, 340, 394] },
     "note": "crop: x and chin from the detector ([116, 171, 340, 394], eric-ink-2001 from reviews/style-align-1); the top kept 191 px above the chin, the old crop's face height, so he shows 25% bigger than the others, as approved (reviews/eric-portrait-final-3). 648 wide so his left shoulder (image right) ends inside the picture (reviews/eric-canvas-1)"
   },
-  "model": { "id": "eric", "dir": "eric/", "height": 1.2, "chibi": "eric" },
+  "model": { "id": "eric", "dir": "eric/", "height": 1.2, "extra": true, "chibi": "eric" },
   "voice": {
     "lines": "eric",
     "words": "eric",

@@ -7,6 +7,7 @@ import { STORIES as DAY2_STORIES } from '../story/day2/index.js';
 import { STORIES as DAY3_STORIES } from '../story/day3/index.js';
 import { STORIES as DAY4_STORIES } from '../story/day4/index.js';
 import { STORIES as DAY5_STORIES } from '../story/day5/index.js';
+import { ROUTES } from '../story/ongoing/routes.js';
 
 export const DAYS = {
   1: { dir: '', start: 'train', period: 'early' },
@@ -31,8 +32,11 @@ export const DAYS = {
   },
   5: { dir: 'day5/', start: 'dorms', period: 'morning', files: Object.keys(DAY5_STORIES) },
 };
-export const LAST_DAY = 5; // the last day a player plays on into; ?day=N starts any day in DAYS
-export const dayOf = (n) => DAYS[n] || DAYS[1];
+// The title offers the authored opening days. Saves can keep advancing afterwards.
+export const LAST_DAY = 5;
+export const CONTINUING_DAY = { dir: 'ongoing/', start: 'dorms', period: 'morning', files: Object.keys(ROUTES) };
+export const dayOf = (n) => DAYS[n] || (Number.isSafeInteger(n) && n > LAST_DAY ? CONTINUING_DAY : DAYS[1]);
+export const canStartNextDay = (n) => Number.isSafeInteger(n) && n >= 1 && n < Number.MAX_SAFE_INTEGER;
 // the story module path for a place on a day, relative to game3d/js/
 export const storyPath = (name, day = 1) => `../story/${dayOf(day).dir}${name}.js`;
 // the next day's opening save, made from the save the day ended on
@@ -132,4 +136,11 @@ export function sampleDayOneEnd(history = 'mio') {
     place: 'dorms',
     ended: true,
   };
+}
+
+// Entry links choose a starting point once; they must not force it again after Sleep.
+export function dayExitUrl(href) {
+  const url = new URL(href);
+  for (const key of ['day', 'history', 'place', 'skip', 'test', 'route', 'cap']) url.searchParams.delete(key);
+  return url.href;
 }

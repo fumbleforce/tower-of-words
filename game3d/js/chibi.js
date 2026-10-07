@@ -273,7 +273,11 @@ const fallback = (load) => (e) => {
 export const playerBody = () => {
   const m = MC.model,
     body = () =>
-      loadMeshy(m.id, { dir: new URL(`../assets/${m.dir || m.id + '/'}`, import.meta.url).href, height: m.height });
+      loadMeshy(m.id, {
+        dir: new URL(`../assets/${m.dir || m.id + '/'}`, import.meta.url).href,
+        height: m.height,
+        extra: m.extra !== false,
+      });
   return CHIBI_ON ? loadChibi(m.chibi).catch(fallback(body)) : body();
 };
 // ?mio=meshy2: the candidate from reviews/mio-meshy-2 (assets/characters/mio2/), for checking it in the real game

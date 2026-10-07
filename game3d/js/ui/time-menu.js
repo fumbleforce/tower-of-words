@@ -3,6 +3,7 @@
 import { sim, PERIODS, periodName, save } from '../sim.js';
 import { flags } from '../narrative/state.js';
 import { busyReason } from '../travel/go.js';
+import { clubArrival } from '../clubs/index.js';
 import { timeChoices } from './time-policy.js';
 
 export function installTimeMenu(game) {
@@ -24,7 +25,7 @@ export function installTimeMenu(game) {
       {
         day: sim.day,
         period: sim.period,
-        started: !!flags[`d${sim.day}_started`],
+        started: sim.day > 5 || !!flags[`d${sim.day}_started`],
         busy: busyReason(game),
         ended: game.ended,
       },
@@ -91,6 +92,10 @@ export function installTimeMenu(game) {
     await game.beat(async () => {
       game.hooks.period({ to: period });
       if (sim.day === 3) await game.hooks.day3Setup?.();
+      if (sim.day > 5) {
+        game.hooks.ongoingGoal?.();
+        clubArrival(game, game.place.name);
+      }
       save(game); // include the final schedule and props, after the period hook's first checkpoint
     });
   });

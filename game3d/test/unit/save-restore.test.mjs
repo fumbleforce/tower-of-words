@@ -68,6 +68,17 @@ test('day-three sample and saved history preserve known colleagues in story cond
   assert(S.sim.met.has('emi'));
 });
 
+test('a later-day place preview restores the same location into narrative conditions', async () => {
+  const { dayStartSave } = await import('../../js/continue.js');
+  const opening = dayStartSave(32, 'cold', 'gym');
+  S.restore(game, opening);
+  assert.equal(opening.place, 'gym');
+  assert.equal(opening.pendingStart, 'gym');
+  assert.equal(flags.place, 'gym');
+  assert.equal(S.sim.day, 32);
+  assert.equal(opening.world, null, 'a different room must not restore the bedroom staging');
+});
+
 test('actual Continue retains derived meeting flags after place restoration and before arrival story', async () => {
   const { createContinue } = await import('../../js/continue.js');
   const { sampleDayEnd, nextDaySave } = await import('../../js/days.js');
@@ -397,4 +408,34 @@ test('bond2_<id> is set when a person reaches step 2 and stays set', () => {
   for (const key of Object.keys(flags)) delete flags[key];
   S.restore(game, S.loadSave());
   assert.equal(flags.bond2_mio, true);
+});
+
+test('later cast introductions create persistent People cards without awarding repeat points', () => {
+  for (const id of ['kuro', 'aoi', 'rei']) {
+    assert.ok(S.sim.people[id], id + ' has a card');
+    S.meet(game, id);
+    assert.ok(S.sim.met.has(id));
+    assert.equal(flags['met_' + id], true);
+    const before = structuredClone(S.bonds.person(id));
+    S.meet(game, id);
+    assert.deepEqual(S.bonds.person(id), before);
+  }
+  S.save(game);
+  const saved = S.loadSave();
+  reset(); S.restore(game, saved);
+  for (const id of ['kuro', 'aoi', 'rei']) {
+    assert.ok(S.peopleData().some(person => person.id === id), id + ' survives Continue');
+    assert.equal(S.bonds.person(id).met, true);
+  }
+});
+
+test('legacy completed later-cast introductions recover met state and preserve points', () => {
+  S.restore(game, { v: 1, day: 12, period: 'morning', met: ['mio'], bonds: { kuro: 9, aoi: 5, rei: 7 },
+    flags: { d3_kuro_intro: true, d3_aoi_intro: true, d4_rei_intro: true } });
+  for (const [id, points] of Object.entries({ kuro: 9, aoi: 5, rei: 7 })) {
+    assert.ok(S.sim.met.has(id)); assert.equal(flags['met_' + id], true);
+    assert.equal(S.bonds.person(id).met, true); assert.equal(S.bonds.person(id).pts, points);
+  }
+  S.restore(game, { v: 1, day: 3, period: 'morning', met: ['mio'], flags: {} });
+  for (const id of ['kuro', 'aoi', 'rei']) assert.equal(S.sim.met.has(id), false, 'another save does not inherit an introduction');
 });
