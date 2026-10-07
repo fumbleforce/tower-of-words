@@ -1865,4 +1865,4 @@ A refrigerated rear case holds milk cartons, wrapped rice balls, milk tea and co
 | `konbini_clerk` | Shop clerk | Talk and pay |
 | `konbini_seat` | Window seat | Sit, drink purchased milk or eat a rice ball |
 
-Spots: `konbini_in`, `fridge`, `checkout`, `window`. Seat: `konbini_seat`. Person: `konbini_clerk`, an existing generic apron body using the approved sales2 voice. Hook: `konbiniShop`. No zones or secret nooks. The shop exits through the same doorway to shop street.
+Spots: `konbini_in`, `fridge`, `checkout`, `window`. Seat: `konbini_seat`. Person: `konbini_clerk`, an existing generic apron body using the approved sales2 voice. Hook: `konbiniShop`. No zones or secret nooks. The shop exits through the same doorway to shop street. Continuing weeks retain the same clerk, basket, receipts, perch and morning-through-evening opening rule.

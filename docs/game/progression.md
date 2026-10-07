@@ -70,7 +70,7 @@ The notice board is the one place to find what's on (built; its rules are in [sy
 
 ## Clubs
 
-A club is a social space for getting to know people. There are no minigames: a session is a scene with the club's people and a word or two of Japanese. Clubs meet on fixed evenings, one session a week each. The mechanism is built (who meets when and where, joining, sessions, progress: [systems.md](systems.md#clubs)); the sessions themselves are placeholders until Codex writes them.
+A club is a social space for getting to know people. There are no minigames: a session is a scene with the club's people and a word or two of Japanese. Clubs meet on fixed evenings, one session a week each. Membership, saved progress and the first swimming and tennis sessions are built; [systems.md](systems.md#clubs) records the playable meetings and remaining content. Art still requires its approved photograph, and karaoke its approved recording and integrated performance, before their meetings count.
 
 - Some of the cast belong to clubs, alongside new people with a reason to be there.
 - Each club has its own storylines and its own progression as Eric keeps going.
@@ -89,11 +89,11 @@ These come through the systems above rather than as systems of their own.
 Per system, short. Paths are in game3d/.
 
 - Tickets: the app and saved queue are built. Later it needs tickets arriving by day or condition, a ticket that points to a place and a thing (a goal pin, as goals do now), and closing a ticket as a story condition (a flag, which `if:` in FORMAT.md already reads).
-- Free periods and the week: today js/days.js plays one fixed story set per day (day 3 is a test skeleton for the clubs, [systems.md](systems.md#the-clock), with the room-203 chair's period choices built). It needs a day built from conditions: which storylines are due, the week's weekdays and weekend, and a way for the player to end a period by choosing an activity (the clock still moves only on a choice, never on a timer). A sixth period (night) is already listed as to build in systems.md. Schedules across places and the week (to build in systems.md) are needed here.
+- Free periods and the week: the five opening days and a continuing week are built, with player-chosen period changes, recurring resident schedules and Sleep advancing the calendar while preserving progress. Current rules are in [The clock](systems.md#the-clock) and [Schedules](systems.md#schedules). Further authored events and a separate night period remain future work.
 - Events: a small scheduler that, when a period starts, offers eligible story and relationship events from conditions on day, flags and bond steps, keeping deferred events pending for a later eligible meeting. js/bonds/gates.js already holds the scene gates for steps 3 to 5, and js/story.js runs the nodes.
 - Notice board: built ([systems.md](systems.md#notice-board)).
-- Clubs: built ([systems.md](systems.md#clubs)): a schedule per club, membership as a flag, a progress count, and its own events, markers and finds. Its sessions need writing (Codex).
-- Pay: Eric has ¥1000 and the vending machine ([systems.md](systems.md), Gifts). Closing a ticket adds its pay to the wallet. Room upgrades need shop counters (the konbini, bakery and liquor shop are fronts only) and buying more than drinks.
+- Clubs: the mechanism and playable sessions are documented in [Clubs](systems.md#clubs). Further session stories remain content work; the art photograph and karaoke performance dependencies above still gate their unfinished meetings.
+- Pay: Eric has ¥1000 and the vending machine ([systems.md](systems.md), Gifts). Closing a ticket adds its pay to the wallet. The bakery and konbini now have working food counters and saved purchases; the liquor shop remains a frontage. These food purchases are separate from the planned room-upgrade shop.
 - Room upgrades: room 203 (js/places/dorms.js) needs slots where an item can be placed, the item list in data, and the room's state in the save (the save already keeps flags and the Bag).
 - Home visits: an interior per home. Reuse one dorm-room layout with different furniture where it fits; each home is entered only on invitation (a flag from a relationship event).
 - Sub-stories: storyline files as now ([stories/](README.md#storylines)), each with its trigger, plus the People panel showing where a thread stands without giving away what comes next.

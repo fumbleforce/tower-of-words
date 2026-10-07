@@ -2,7 +2,7 @@
 
 Days after the five opening days use this story set. Evening Sleep advances the calendar indefinitely, preserving knowledge, introductions, remembered remarks, relationships and repair progress. The title's day selector still offers the five authored opening days.
 
-`places/ongoing/plan.js` gives residents one location per period across a recurring Monday–Sunday week. The bible's Recurring week view reads that actual plan, including conditions. Ordinary visits, personal conversation topics and unfinished repair requests remain available; completed repairs cannot pay again. Time advances by player choice.
+`places/ongoing/plan.js` gives residents one location per period across a recurring Monday–Sunday week. The bible's Recurring week view reads that actual plan, including conditions. Ordinary visits, personal conversation topics and unfinished repair requests remain available; completed repairs cannot pay again. Time advances by player choice. The konbini retains its full grocery service and saved receipts, open from morning through evening; the native door and map share the same hours.
 
 Saturday's winter meeting has a visible badminton activity with Kuro and Emi. The player can play, watch, talk or leave. Emi's booking-sheet milestone requires its physical handover and her turn to finish. Sunday's tennis can introduce the players if the first Sunday was missed. Return visits preserve introductions and avoid repeating one-time relationship rewards. Vocabulary supports optional replies and remembered connections without imposing a lesson quota.
 

@@ -144,7 +144,9 @@ export const ROUTES = {
     ]
   },
   "bakery": { "shotengai": ["talk:bakery_exit"] },
+  "konbini": { "shotengai": ["talk:konbini_exit"] },
   "shotengai": {
+    "konbini": ["talk:store_door"],
     "bakery": ["talk:bakery_door"],
     "forecourt": [
       "talk:office_lane",
