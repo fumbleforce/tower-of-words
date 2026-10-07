@@ -1,7 +1,7 @@
 {
   "title": "Street-style trial: playable work in progress",
   "date": "2026-10-07",
-  "updated": "2026-10-07T08:03:35.108760+00:00",
+  "updated": "2026-10-07T08:46:31.945100+00:00",
   "by": "Codex",
   "status": "open",
   "issue": 321,
@@ -9,16 +9,16 @@
   "question": "What should change next in this street-style trial?",
   "media": [
     {
-      "image": "bible/shots/reviews/diorama-street-1/bevel23-1366/arrival.webp",
-      "caption": "Current native 3D street trial. Work in progress, with the playable link below; this is not a generated concept image."
+      "image": "bible/shots/reviews/diorama-street-1/court29-1366/garden.webp",
+      "caption": "Latest native garden: fuller crowns and hedges, taller grass, office glazing. Work in progress."
     },
     {
-      "image": "bible/shots/reviews/diorama-street-1/bevel23-1366/garden.webp",
-      "caption": "Current planted garden and street lighting."
+      "image": "bible/shots/reviews/diorama-street-1/court29-1366/street.webp",
+      "caption": "Station brickwork, slimmer window surrounds and metallic roof casings."
     },
     {
-      "image": "bible/shots/reviews/diorama-street-1/round21-390/street.webp",
-      "caption": "Phone view from round21. Latest independent review remains below the finish bar; building and vegetation detail are still being refined."
+      "image": "bible/shots/reviews/diorama-street-1/court29-390/street.webp",
+      "caption": "Same update on phone. Final visual acceptance remains pending."
     }
   ],
   "options": [
@@ -320,6 +320,104 @@
         "bible/shots/reviews/diorama-street-1/bevel23-1366/garden.webp"
       ],
       "note": "Native game render, bevel23-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 465 calls, 1030018 all-pass triangles; desktop GPU, not mobile-device clearance."
+    },
+    {
+      "id": "canopy24-1366",
+      "label": "canopy24-1366",
+      "image": "bible/shots/reviews/diorama-street-1/canopy24-1366/arrival.webp",
+      "images": [
+        "bible/shots/reviews/diorama-street-1/canopy24-1366/bikes.webp",
+        "bible/shots/reviews/diorama-street-1/canopy24-1366/south.webp",
+        "bible/shots/reviews/diorama-street-1/canopy24-1366/street.webp",
+        "bible/shots/reviews/diorama-street-1/canopy24-1366/garden.webp"
+      ],
+      "note": "Native game render. Broader leaves, tighter clusters and dark inner leaf mass. Procedural seeds711/1207; no image model. Work in progress."
+    },
+    {
+      "id": "glazing25-1366",
+      "label": "glazing25-1366",
+      "image": "bible/shots/reviews/diorama-street-1/glazing25-1366/arrival.webp",
+      "images": [
+        "bible/shots/reviews/diorama-street-1/glazing25-1366/bikes.webp",
+        "bible/shots/reviews/diorama-street-1/glazing25-1366/south.webp",
+        "bible/shots/reviews/diorama-street-1/glazing25-1366/street.webp",
+        "bible/shots/reviews/diorama-street-1/glazing25-1366/garden.webp"
+      ],
+      "note": "Native game render. Slimmer station surrounds, no added crossbars, first sky-reflection material. Procedural seeds711/1207; no image model. Work in progress."
+    },
+    {
+      "id": "glass26-1366",
+      "label": "glass26-1366",
+      "image": "bible/shots/reviews/diorama-street-1/glass26-1366/arrival.webp",
+      "images": [
+        "bible/shots/reviews/diorama-street-1/glass26-1366/bikes.webp",
+        "bible/shots/reviews/diorama-street-1/glass26-1366/south.webp",
+        "bible/shots/reviews/diorama-street-1/glass26-1366/street.webp",
+        "bible/shots/reviews/diorama-street-1/glass26-1366/garden.webp"
+      ],
+      "note": "Native game render. Pane gradient and metallic station roof casings. Office glass still untreated in this attempt. Procedural seeds711/1207; no image model. Work in progress."
+    },
+    {
+      "id": "office27-1366",
+      "label": "office27-1366",
+      "image": "bible/shots/reviews/diorama-street-1/office27-1366/arrival.webp",
+      "images": [
+        "bible/shots/reviews/diorama-street-1/office27-1366/bikes.webp",
+        "bible/shots/reviews/diorama-street-1/office27-1366/south.webp",
+        "bible/shots/reviews/diorama-street-1/office27-1366/street.webp",
+        "bible/shots/reviews/diorama-street-1/office27-1366/garden.webp"
+      ],
+      "note": "Native game render. Taller varied grass; office glass remained untreated because its builder runs later. Procedural seeds711/1207; no image model. Work in progress."
+    },
+    {
+      "id": "office28-1366",
+      "label": "office28-1366",
+      "image": "bible/shots/reviews/diorama-street-1/office28-1366/arrival.webp",
+      "images": [
+        "bible/shots/reviews/diorama-street-1/office28-1366/bikes.webp",
+        "bible/shots/reviews/diorama-street-1/office28-1366/south.webp",
+        "bible/shots/reviews/diorama-street-1/office28-1366/street.webp",
+        "bible/shots/reviews/diorama-street-1/office28-1366/garden.webp"
+      ],
+      "note": "Native game render. Office glass treatment applied after the office builder; all named glazing handles checked in native report. Procedural seeds711/1207; no image model. Work in progress."
+    },
+    {
+      "id": "office28-390",
+      "label": "office28-390",
+      "image": "bible/shots/reviews/diorama-street-1/office28-390/arrival.webp",
+      "images": [
+        "bible/shots/reviews/diorama-street-1/office28-390/bikes.webp",
+        "bible/shots/reviews/diorama-street-1/office28-390/south.webp",
+        "bible/shots/reviews/diorama-street-1/office28-390/street.webp",
+        "bible/shots/reviews/diorama-street-1/office28-390/garden.webp",
+        "bible/shots/reviews/diorama-street-1/office28-390/station-return.webp"
+      ],
+      "note": "Native game render. Phone view and actual station return with updated planting, panes and trim. Procedural seeds711/1207; no image model. Work in progress."
+    },
+    {
+      "id": "court29-1366",
+      "label": "court29-1366",
+      "image": "bible/shots/reviews/diorama-street-1/court29-1366/arrival.webp",
+      "images": [
+        "bible/shots/reviews/diorama-street-1/court29-1366/bikes.webp",
+        "bible/shots/reviews/diorama-street-1/court29-1366/south.webp",
+        "bible/shots/reviews/diorama-street-1/court29-1366/street.webp",
+        "bible/shots/reviews/diorama-street-1/court29-1366/garden.webp"
+      ],
+      "note": "Native game render. Extend the same leaf treatment to the north court and station-return view. Procedural seeds711/1207. All named office/station panes use the new glazing. Work in progress; no image model."
+    },
+    {
+      "id": "court29-390",
+      "label": "court29-390",
+      "image": "bible/shots/reviews/diorama-street-1/court29-390/arrival.webp",
+      "images": [
+        "bible/shots/reviews/diorama-street-1/court29-390/bikes.webp",
+        "bible/shots/reviews/diorama-street-1/court29-390/south.webp",
+        "bible/shots/reviews/diorama-street-1/court29-390/street.webp",
+        "bible/shots/reviews/diorama-street-1/court29-390/garden.webp",
+        "bible/shots/reviews/diorama-street-1/court29-390/station-return.webp"
+      ],
+      "note": "Native game render. Extend the same leaf treatment to the north court and station-return view. Procedural seeds711/1207. All named office/station panes use the new glazing. Work in progress; no image model."
     }
   ],
   "links": [
