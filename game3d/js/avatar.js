@@ -1,8 +1,6 @@
-// Eric, the player: built with the same chibi() as everyone else, matched to the approved portrait
-// (proto2/cast-fixed/mc-it-guy-after.webp): short messy dark-blond hair, a short beard, clear glasses with
-// dark frames, grey hoodie under a navy blazer, blue lanyard, pale skin, slim.
-// Wrapped so the game can drive him like any avatar: setState('idle'|'walk'|'sit'), update(dt), sitAt(...).
+// Player bodies, animation and physical seat placement. Shared by cast and crowd Meshy loaders.
 import * as THREE from 'three';
+import { CHARACTER_SCALE } from './character-scale.js';
 import { chibi, sit, walkPose, HIP, TORSO_H, HEAD } from './train/people.js';
 import { hull } from './train/hull.js';
 import { V } from './train/kit.js';
@@ -270,6 +268,7 @@ export async function meshyFiles(id, { dir = CDIR + id + '/', extra = true } = {
 }
 // The person, at once, from files already loaded in loadMeshy's order (chibi.js makes several from one set).
 export function meshyFrom(id, [walk, run, idle, sitG, tex, phone, ...gj], { height = 1.2, stride, size, root } = {}) {
+  height *= CHARACTER_SCALE;
   tex.flipY = false;
   tex.colorSpace = THREE.SRGBColorSpace;
   const model = walk.scene;

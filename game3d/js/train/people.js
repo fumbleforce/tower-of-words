@@ -1,7 +1,6 @@
-// Chibi passengers and the player. Built like side/flat's Mio: every part is the convex hull
-// of hand-placed points (no dents, every face checked to point outward), rigid parts on pivots.
-// Simpler than Mio: a big round head, one hair mass, dark eyes with a highlight, no nose or mouth.
+// Code-built passengers and fallback cast, with rigid parts on posed pivots.
 import * as THREE from 'three';
+import { CHARACTER_SCALE } from '../character-scale.js';
 import { hull, beamHull, plate2, icoPoints } from './hull.js';
 import { V, rng } from './kit.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -356,7 +355,7 @@ function chestFront(shirt, tie, d = 0.18) {
 export function chibi(o) {
   const skin = o.skin || '#f6d9c6';
   const root = new THREE.Group();
-  root.scale.setScalar(o.scale ?? S);
+  root.scale.setScalar((o.scale ?? S) * CHARACTER_SCALE);
   const hips = new THREE.Group();
   hips.position.y = HIP;
   root.add(hips);

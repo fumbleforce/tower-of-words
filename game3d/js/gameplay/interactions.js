@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { CHARACTER_SCALE, characterHead } from '../character-scale.js';
 import { giveItem } from './gifts.js';
 import { approachSpot } from '../move.js';
 import { needsPractice } from '../mastery.js';
@@ -91,6 +92,17 @@ export function installInteractions(game) {
         item.nearOnly = () => !item.goal() && does() === 'near';
         // its only use right now is a word (the fan once he knows tomatte, the fridge): using it opens the Say menu
         item.sayOnly = () => does() === 'near' && !talks() && other();
+      }
+      const person = place.people[id] || (id === 'mio' ? game.mioNpc : null),
+        head = CHARACTER_SCALE !== 1 && characterHead(person);
+      if (head && !person.cat && !person.selfGait) {
+        const scale = new THREE.Vector3();
+        item.anchor = (v) => {
+          (characterHead(person) || person.root).getWorldPosition(v);
+          person.root.getWorldScale(scale);
+          v.y += 0.24 * (person.model ? CHARACTER_SCALE : 1) * scale.y;
+          return v;
+        };
       }
       game.markers.add(item);
     }
