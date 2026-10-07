@@ -1,0 +1,1127 @@
+{
+  "before": {
+    "sender": {
+      "v": 1,
+      "offered": true,
+      "awake": true,
+      "acknowledged": [
+        24,
+        26,
+        27
+      ],
+      "held": 25,
+      "attempts": [
+        {
+          "id": 1,
+          "rows": [
+            {
+              "id": "1:0",
+              "item": 24,
+              "status": "acknowledged"
+            },
+            {
+              "id": "1:1",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "1:2",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "rows": [
+            {
+              "id": "2:0",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "2:1",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "rows": [
+            {
+              "id": "3:0",
+              "item": 26,
+              "status": "started"
+            },
+            {
+              "id": "3:1",
+              "item": 26,
+              "status": "acknowledged"
+            },
+            {
+              "id": "3:2",
+              "item": 27,
+              "status": "started"
+            },
+            {
+              "id": "3:3",
+              "item": 27,
+              "status": "acknowledged"
+            }
+          ]
+        }
+      ],
+      "selected": [
+        "1:1",
+        "2:0"
+      ],
+      "pinned": {
+        "item": 25,
+        "rows": [
+          "1:1",
+          "2:0"
+        ]
+      },
+      "active": null,
+      "failures": 0
+    },
+    "flags": {
+      "sender_state": {
+        "v": 1,
+        "offered": true,
+        "awake": true,
+        "acknowledged": [
+          24,
+          26,
+          27
+        ],
+        "held": 25,
+        "attempts": [
+          {
+            "id": 1,
+            "rows": [
+              {
+                "id": "1:0",
+                "item": 24,
+                "status": "acknowledged"
+              },
+              {
+                "id": "1:1",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "1:2",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "rows": [
+              {
+                "id": "2:0",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "2:1",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "rows": [
+              {
+                "id": "3:0",
+                "item": 26,
+                "status": "started"
+              },
+              {
+                "id": "3:1",
+                "item": 26,
+                "status": "acknowledged"
+              },
+              {
+                "id": "3:2",
+                "item": 27,
+                "status": "started"
+              },
+              {
+                "id": "3:3",
+                "item": 27,
+                "status": "acknowledged"
+              }
+            ]
+          }
+        ],
+        "selected": [
+          "1:1",
+          "2:0"
+        ],
+        "pinned": {
+          "item": 25,
+          "rows": [
+            "1:1",
+            "2:0"
+          ]
+        },
+        "active": null,
+        "failures": 0
+      },
+      "sender_offered": true,
+      "sender_partial": true,
+      "sender_delivered": true,
+      "sender_compared": true
+    },
+    "offered": 3,
+    "monitors": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -2,
+        0.42,
+        -3.14,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        4.2,
+        0.5,
+        -1.3,
+        1
+      ]
+    ]
+  },
+  "after": {
+    "busy": false,
+    "period": "afternoon",
+    "flags": {
+      "gate_magic": true,
+      "dorm_room_known": true,
+      "going_home": true,
+      "lunch_mio": true,
+      "mio_warm": 2,
+      "d2_started": true,
+      "d2_station_seen": true,
+      "d2_checked": true,
+      "d2_ticket_done": true,
+      "d2_order_sensor": true,
+      "d2_brief_done": true,
+      "d2_shift_done": true,
+      "d2_met_kenji": true,
+      "d2_ate": true,
+      "d2_food": "riceball",
+      "d2_party_done": true,
+      "d2_complete": true,
+      "ticket_T0001": "done",
+      "ticket_T0002": "progress",
+      "ticketread_T0001": true,
+      "ticketread_T0002": true,
+      "d3_complete": true,
+      "d4_complete": true,
+      "day": 5,
+      "period": "afternoon",
+      "place": "office",
+      "machineOpen": true,
+      "mio_lunch_offer": 0,
+      "bond_mio": 14,
+      "step_mio": 3,
+      "bondready_mio": 0,
+      "bond2_mio": true,
+      "period_early": false,
+      "period_morning": false,
+      "period_lunch": false,
+      "period_afternoon": true,
+      "period_evening": false,
+      "sender_state": {
+        "v": 1,
+        "offered": true,
+        "awake": true,
+        "acknowledged": [
+          24,
+          26,
+          27
+        ],
+        "held": 25,
+        "attempts": [
+          {
+            "id": 1,
+            "rows": [
+              {
+                "id": "1:0",
+                "item": 24,
+                "status": "acknowledged"
+              },
+              {
+                "id": "1:1",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "1:2",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "rows": [
+              {
+                "id": "2:0",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "2:1",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "rows": [
+              {
+                "id": "3:0",
+                "item": 26,
+                "status": "started"
+              },
+              {
+                "id": "3:1",
+                "item": 26,
+                "status": "acknowledged"
+              },
+              {
+                "id": "3:2",
+                "item": 27,
+                "status": "started"
+              },
+              {
+                "id": "3:3",
+                "item": 27,
+                "status": "acknowledged"
+              }
+            ]
+          }
+        ],
+        "selected": [
+          "1:1",
+          "2:0"
+        ],
+        "pinned": {
+          "item": 25,
+          "rows": [
+            "1:1",
+            "2:0"
+          ]
+        },
+        "active": null,
+        "failures": 0
+      },
+      "sender_offered": true,
+      "sender_partial": true,
+      "sender_delivered": true,
+      "sender_compared": true,
+      "met_mio": true,
+      "met_guard": true,
+      "met_kuroda": true,
+      "met_emi": true,
+      "met_kenji": true,
+      "met_mori": true,
+      "ms3_mio": true,
+      "bond3_mio": true,
+      "rem_mio_milestone3": true,
+      "talked_mio": true
+    },
+    "points": 14,
+    "stage": {
+      "state": null,
+      "phase": "idle",
+      "day": 5,
+      "cableParked": true,
+      "props": {
+        "items": {
+          "food": {
+            "visible": true,
+            "position": [
+              5.95,
+              0.245,
+              -2.17
+            ],
+            "rotation": [
+              0,
+              -1.5707963267948966,
+              0,
+              "XYZ"
+            ],
+            "scale": [
+              1.35,
+              1.35,
+              1.35
+            ],
+            "parent": "root"
+          },
+          "sheet": {
+            "visible": false,
+            "position": [
+              5.12,
+              0.85,
+              -2.935
+            ],
+            "rotation": [
+              1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "parent": "root"
+          },
+          "pencil": {
+            "visible": true,
+            "position": [
+              0,
+              0.03,
+              -0.1
+            ],
+            "rotation": [
+              0,
+              1.5707963267948966,
+              0,
+              "XYZ"
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "parent": "sheet"
+          },
+          "cable": {
+            "visible": true,
+            "position": [
+              4.34,
+              0.225,
+              -2.09
+            ],
+            "rotation": [
+              1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "parent": "root"
+          },
+          "sticks": {
+            "visible": true,
+            "position": [
+              0.11,
+              0.034,
+              0
+            ],
+            "rotation": [
+              0,
+              0.2,
+              0,
+              "XYZ"
+            ],
+            "scale": [
+              0.7407407407407407,
+              0.7407407407407407,
+              0.7407407407407407
+            ],
+            "parent": "food"
+          }
+        },
+        "lid": true,
+        "mark": false,
+        "bite": false,
+        "visible": false
+      },
+      "hands": [],
+      "bow": 0
+    },
+    "contacts": [
+      {
+        "id": "checklist-support",
+        "gap": 0.03607537295837254,
+        "hand": [
+          4.439774566619893,
+          0.3397178279883409,
+          -2.1477122484718922
+        ],
+        "target": [
+          4.45,
+          0.31,
+          -2.13
+        ]
+      },
+      {
+        "id": "pencil-grip",
+        "gap": 0.00012048310679487514,
+        "hand": [
+          4.450010444413387,
+          0.34011061943288956,
+          -2.2300465879203135
+        ],
+        "target": [
+          4.45,
+          0.33999999999999997,
+          -2.23
+        ]
+      },
+      {
+        "id": "check-mark-hand",
+        "gap": 0.011963955541252989,
+        "hand": [
+          4.519087787302908,
+          0.39074265912317485,
+          -2.087777951016451
+        ],
+        "target": [
+          4.521,
+          0.3837323472786823,
+          -2.078273467725018
+        ]
+      },
+      {
+        "id": "pencil-tip-mark",
+        "gap": 0.011963955541252989,
+        "from": [
+          4.519087787302908,
+          0.3330103118444926,
+          -2.1695044832914325
+        ],
+        "to": [
+          4.521,
+          0.326,
+          -2.1599999999999997
+        ]
+      },
+      {
+        "id": "pencil-clip",
+        "gap": 0.00012040003848771859,
+        "hand": [
+          4.450010437424115,
+          0.34011054274743385,
+          -2.230046556744253
+        ],
+        "target": [
+          4.45,
+          0.33999999999999997,
+          -2.23
+        ]
+      },
+      {
+        "id": "marked-sheet-pickup",
+        "gap": 0.011589039347202918,
+        "hand": [
+          4.450766474964702,
+          0.3191950121030101,
+          -2.1370121395839643
+        ],
+        "target": [
+          4.45,
+          0.31,
+          -2.13
+        ]
+      },
+      {
+        "id": "sheet-return",
+        "gap": 0.03500469150806452,
+        "hand": [
+          5.585759027385673,
+          0.6671419059677746,
+          -1.8160219416845782
+        ],
+        "target": [
+          5.554704735221918,
+          0.6649947385074615,
+          -1.8000110379724106
+        ]
+      },
+      {
+        "id": "sheet-return-giver",
+        "gap": 0,
+        "hand": [
+          5.344548395455195,
+          0.664990843149949,
+          -1.8000181965109316
+        ],
+        "target": [
+          5.344548395455195,
+          0.664990843149949,
+          -1.8000181965109316
+        ]
+      },
+      {
+        "id": "sheet-return-taker",
+        "gap": 0.035961679800651784,
+        "hand": [
+          5.5863757698562875,
+          0.666804743112043,
+          -1.81666062481166
+        ],
+        "target": [
+          5.554548395455196,
+          0.664990843149949,
+          -1.8000181965109316
+        ]
+      }
+    ],
+    "proof": {
+      "lines": [
+        "Nothing’s blocking it.",
+        "It was clear. I marked the row.",
+        "Thanks. I actually got outside before lunch was over."
+      ],
+      "contactCount": 9,
+      "capture": null,
+      "done": false,
+      "errors": [],
+      "choices": [],
+      "routes": [
+        {
+          "phase": "return",
+          "at": [
+            4.998433555184086,
+            0,
+            0.5410062757821756
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3835969392815937
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.99859644754596,
+            0,
+            0.4067563747838252
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.31710686218379425
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998901301966634,
+            0,
+            0.15550655973159044
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989013019666338
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998931180733219,
+            0,
+            0.13088157787321286
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2989311807332191
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.999079512884281,
+            0,
+            0.008631667773315602
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3069204871157192
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.999388917370933,
+            0,
+            -0.2463681445185048
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.30661108262906733
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.999532699456015,
+            0,
+            -0.36486805737881645
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.30646730054398486
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.999686491685928,
+            0,
+            -0.49161796389799567
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.306313508314072
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.999840276519646,
+            0,
+            -0.6183617747452236
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3061597234803539
+        }
+      ],
+      "routeShots": [
+        "lift-return",
+        "door-return"
+      ]
+    },
+    "sender": {
+      "v": 1,
+      "offered": true,
+      "awake": true,
+      "acknowledged": [
+        24,
+        26,
+        27
+      ],
+      "held": 25,
+      "attempts": [
+        {
+          "id": 1,
+          "rows": [
+            {
+              "id": "1:0",
+              "item": 24,
+              "status": "acknowledged"
+            },
+            {
+              "id": "1:1",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "1:2",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "rows": [
+            {
+              "id": "2:0",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "2:1",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "rows": [
+            {
+              "id": "3:0",
+              "item": 26,
+              "status": "started"
+            },
+            {
+              "id": "3:1",
+              "item": 26,
+              "status": "acknowledged"
+            },
+            {
+              "id": "3:2",
+              "item": 27,
+              "status": "started"
+            },
+            {
+              "id": "3:3",
+              "item": 27,
+              "status": "acknowledged"
+            }
+          ]
+        }
+      ],
+      "selected": [
+        "1:1",
+        "2:0"
+      ],
+      "pinned": {
+        "item": 25,
+        "rows": [
+          "1:1",
+          "2:0"
+        ]
+      },
+      "active": null,
+      "failures": 0
+    },
+    "monitors": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -2,
+        0.42,
+        -3.14,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        4.2,
+        0.5,
+        -1.3,
+        1
+      ]
+    ]
+  },
+  "continued": true,
+  "errors": [],
+  "captures": [
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-layout.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-cable-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-cable-hook.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-line-1.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-line-2.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-sheet-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-sheet-handover.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-sheet-handover-taker.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-line-3.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-line-4.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-bento-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-door-out.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-lift-out.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-line-5.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-checklist-support.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-pencil-grip.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-pencil-tip-mark.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-start.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-line-1.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-checklist-support.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-pencil-grip.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-pencil-tip-mark.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-pencil-clip.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-lift-return.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-door-return.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-marked-sheet-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-sheet-return.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-sheet-return-taker.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-line-2.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-continued-line-3.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round26//1366-3-finished.png"
+  ]
+}

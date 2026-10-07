@@ -2,7 +2,7 @@
 // menu saving code remain real; rendering, audio, settings and input are stubbed.
 const modules = {
   'ui.js': `export const ui = new Proxy({}, { get: (_, key) => globalThis.__saveTestUI?.[key] || (() => {}) });
-    export const voice = async () => {}; export const sfx = () => {};
+    export const voice = async () => {}; export const sfx = () => {}; export const playMusic = () => {};
     export const setFace = () => {}; export const newScene = () => {}; export const PORTRAITS = {}; export const FACE = {};
     export const voiceThenBeat = async () => {}; export const unlockAudio = () => {};
     export const pauseAudio = () => {}; export const keyLabel = () => '';`,

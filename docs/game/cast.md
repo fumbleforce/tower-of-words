@@ -142,7 +142,7 @@ The B2 team is Eric, Mio, Mori and Kenji, with Emi as team lead. Goro is a late-
 
 ## Personal plots and bond milestones
 
-#226, to build. These are the current character plans requested on 2026-10-05, awaiting Claude's story read. They replace older walkthrough ideas for these people; none claims a runtime scene already exists. The [days 3–5 outline](../../notes/days3-5-outline.md) owns those days' shared scenes and period-by-period placements. This section owns each person's plot, club affiliation, repeat meeting and milestones. Future scene scripts should link back here rather than copy the plan into another document.
+#226, to build. These are the current character plans requested on 2026-10-05, awaiting Claude's story read. They replace older walkthrough ideas for these people; Only the explicitly built scenes below are playable; the remaining rows are plans. The [days 3–5 outline](../../notes/days3-5-outline.md) owns those days' shared scenes and period-by-period placements. This section owns each person's plot, club affiliation, repeat meeting and milestones. Future scene scripts should link back here rather than copy the plan into another document.
 
 Use [the existing bond rules](systems.md#bonds). Steps 0 and 1 describe the first meeting; step 2's moment is a possible expression of friendship, not another gate beyond its points. Steps 3–5 require the scenes below, in order, with the existing thresholds and daily cap. Their completion flags use the existing names `bond3_<id>`, `bond4_<id>` and `bond5_<id>`; the scene sets its flag only at the completed turn. These are proposed flags, not implemented ones. Step 2 has no scene: the engine sets `bond2_<id>` when the person reaches it ([systems.md](systems.md#bonds)). An early conversation or day-3 club visit cannot jump a step. Existing first meetings carry over; never make a known person introduce themselves again.
 
@@ -156,16 +156,18 @@ Eric is the player, so has no bond with himself. This covers all ten named non-p
 
 Route: B2 machine room, then the sea terrace; no club. She wants an afternoon away without leaving a fault for someone else. Her habit of carrying every failure onto her own list keeps her close to Eric at work and hard to meet elsewhere. Continue [Mio notices](stories/mio-notices.md); the shared reveal's witnesses and timing belong to the days 3–5 outline. Her route never investigates the magic's origin.
 
-Repeat meeting: weekday lunch in the machine room; after step 3 she also offers a Sunday afternoon at the sea terrace. Her sea-terrace scenes remain outdoors; home access is unnecessary.
+Built repeat meeting: weekday lunch in B2 from day five until step 3 is complete; later weekday lunches place her at an east-coast bench. Sunday terrace visits and steps 4–5 remain plans, with no new promise in the playable lunch scenes.
 
 | Step | Milestone and consequence |
 |---|---|
 | 0 | A woman on the train protecting her laptop and lunch bag. Eric has not introduced himself. |
 | 1 | Their train introduction, or a later B2 greeting if needed. She remembers whether he caught the bag. |
 | 2 | At lunch she leaves a space beside the server rack and lets him stay while she eats. Repeated gifts do not manufacture a new lunch scene. |
-| 3 | The server is working, but she has brought another diagnostic to lunch. Eric can offer to take the next ordinary check or ask her to eat first. She hands over the checklist and leaves the room for lunch; she has accepted help with something she normally guards. |
+| 3 | Built: the player can check the visible front intake while Mio goes out to eat. She hands over her checklist, returns for the marked row and accepts the help. This is one ordinary intake check, not a repair or resolution of the held sender record. |
 | 4 | On the terrace her work phone rings. The call is a routine request; Eric can wait while she redirects it or offer to head back with her. She redirects it herself and stays. Her later terrace visits stop opening with a server report. |
 | 5 | She invites him back with food from her mother and asks what he actually wants to do with their afternoon. They choose an outing as friends or explicitly call it a date. She brings enough for two on subsequent invitations. |
+
+The built step-2 and step-3 offers use B2’s ordinary Talk action at weekday lunch. “Another time” preserves the opportunity and the period. Step 2 uses the existing Friendly threshold; step 3 uses the existing Trusted readiness gate and does not require seeing step 2 first. Completion records its memory and moves to the afternoon once, without adding bond points. Continue replays the current scene from its saved entry staging; the completion, relationship gate and post-period world are saved together. Shared Chat remains available afterward.
 
 ### Mori: something he can leave unfinished
 

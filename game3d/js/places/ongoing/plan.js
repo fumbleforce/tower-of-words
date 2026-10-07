@@ -57,6 +57,7 @@ export function weeklyPlan(day) {
       ...(source.afternoon ? { afternoon: source.afternoon } : {}),
     });
   }
+  plan.office.mio.lunch = MONDAY.office.mio.lunch;
   at('forecourt', 'kuro', { morning: home, afternoon: home });
   at('plaza', 'aoi', MONDAY.plaza.aoi);
   at('shotengai', 'kenji', { lunch: { ...SATURDAY.shotengai.kenji.lunch, if: "ticket_T0008 == 'done'" } });
@@ -64,7 +65,7 @@ export function weeklyPlan(day) {
   at('shotengai', 'rei', MONDAY.shotengai.rei);
   at('shotengai', 'kuroda', { lunch: SATURDAY.shotengai.kuroda.lunch });
   at('east_coast', 'emi', { lunch: { seat: (P) => benchNear(P, [0, 0], { skip: 1 }) } });
-  at('east_coast', 'mio', { lunch: { seat: (P) => benchNear(P, [0, 0]) } });
+  at('east_coast', 'mio', MONDAY.east_coast.mio);
   at('dorm_commons', 'kenji', week === 5 || week === 3 ? {} : { evening: sofa });
   at('dorm_commons', 'mori', week === 2 ? { evening: table } : { lunch: table });
   at('east_coast', 'rei', MONDAY.east_coast.rei);

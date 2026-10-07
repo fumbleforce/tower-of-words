@@ -9,9 +9,11 @@ const { weeklyPlan } = await import('../../js/places/ongoing/plan.js');
 hook.deregister();
 
 const periods = ['morning', 'lunch', 'afternoon', 'evening'];
-function active(spec, period, signoff, selectorDone) {
+function active(spec, period, signoff, selectorDone, mioLunchDone = false) {
   if (!spec) return false;
-  if (Array.isArray(spec)) return spec.some(s => active(s, period, signoff, selectorDone));
+  if (Array.isArray(spec)) return spec.some(s => active(s, period, signoff, selectorDone, mioLunchDone));
+  if (spec.if === 'ms3_mio') return mioLunchDone;
+  if (spec.if === '!ms3_mio') return !mioLunchDone;
   if (spec.if === "period != 'evening'") return period !== 'evening';
   if (spec.if === '!d3_signoff_walk') return !signoff;
   if (spec.if === 'd3_signoff_walk') return signoff;
@@ -31,11 +33,11 @@ test('continuing calendar keeps actual weekdays across weeks and months', () => 
   assert.equal(isContinuing(6.5), false);
 });
 test('a recurring resident has one location in each period, including deferred station checks', () => {
-  for (let day = 6; day <= 40; day++) for (const period of periods) for (const signoff of [false, true]) for (const selectorDone of [false, true]) {
+  for (let day = 6; day <= 40; day++) for (const period of periods) for (const signoff of [false, true]) for (const selectorDone of [false, true]) for (const mioLunchDone of [false, true]) {
     const here = new Map();
     for (const [place, residents] of Object.entries(weeklyPlan(day)))
       for (const [who, per] of Object.entries(residents)) {
-        if (!active(per[period] ?? per['*'], period, signoff, selectorDone)) continue;
+        if (!active(per[period] ?? per['*'], period, signoff, selectorDone, mioLunchDone)) continue;
         assert.equal(here.has(who), false, `day ${day} ${period}: ${who} at ${here.get(who)} and ${place}`);
         here.set(who, place);
       }

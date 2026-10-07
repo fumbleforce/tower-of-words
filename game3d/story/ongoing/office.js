@@ -1,3 +1,4 @@
+import { nodes as mioLunchNodes } from '../milestones/mio.js';
 import source from '../day5/office.js';
 import { interactions, place } from './shared.js';
 const familiar = interactions(source, [
@@ -8,9 +9,10 @@ export default place('office', {
   on: {
     ...familiar.on,
     'talk:my_desk': 'ongoing_desk', 'talk:my_chair': 'ongoing_desk',
-    'talk:kenji': 'ongoing_kenji', 'talk:mio': 'ongoing_mio',
+    'talk:kenji': 'ongoing_kenji', 'talk:mio': [{ node: 'ms_mio_help', if: 'mio_lunch_offer == 3' }, { node: 'ms_mio_lunch', if: 'mio_lunch_offer == 2' }, 'ongoing_mio'],
   },
   nodes: {
+    ...mioLunchNodes,
     ...familiar.nodes,
     ongoing_desk: [
       { do: 'sitDown' }, { do: 'tickets' },

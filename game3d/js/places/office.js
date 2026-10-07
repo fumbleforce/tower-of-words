@@ -20,7 +20,11 @@ import { route } from './route.js';
 import { chairPusher } from './office-chair.js';
 import { isPlayer } from '../mc.js';
 import { officeArrival } from './office-arrival.js';
+import { MACHINE_LEAF } from './office-machine-door.js';
 import { attachSender } from '../investigations/sender/index.js';
+import { attachMioLunch } from './mio-lunch/index.js';
+import { LUNCH_TOP, LUNCH_SEATS as lunchSeats } from './mio-lunch/plan.js';
+import { lunchBento } from './mio-lunch/props.js';
 export async function officePlace(game) {
   const w = await sliced(officeSteps()); // in slices between frames: it's built while the forecourt is played
   const cam = new RoomCam({ elev: 51, fov: 24 });
@@ -476,11 +480,6 @@ export async function officePlace(game) {
   // was no food anywhere. Now lunchSit brings him to a set spot (a walk, then a snap if the walk hasn't made it in
   // time), seats him and his lunch partner, and puts a bento in each lap (Mio) or on the table (Mori). lunchOver
   // clears it all at the 14:00 cut and brings everyone back to the office floor for the afternoon beat.
-  const LUNCH_TOP = 0.24; // crate top, the same height as the office chairs, so the sit clip's feet meet the floor
-  const lunchSeats = {
-    eric: { x: 4.45, z: -2.3, ry: Math.PI / 2, walk: [4.75, -1.8] },
-    mio: { x: 5.95, z: -2.3, ry: -Math.PI / 2, walk: [5.95, -1.8] },
-  };
   // two crates of backup tapes in the machine room, between the rack row and the cart: the lunch seats
   for (const s of Object.values(lunchSeats)) {
     const c = new THREE.Group();
@@ -496,16 +495,7 @@ export async function officePlace(game) {
     w.nav.block(s.x - 0.23, s.x + 0.23, s.z - 0.18, s.z + 0.18);
   }
   function bento(color) {
-    const g = new THREE.Group();
-    g.add(rbox(0.19, 0.045, 0.13, color, { r: 0.012 })); // box
-    g.add(rbox(0.1, 0.012, 0.11, '#f3f1ea', { x: -0.035, y: 0.04, r: 0.004, cast: false })); // rice
-    g.add(rbox(0.022, 0.014, 0.022, '#c8424f', { x: -0.035, y: 0.047, r: 0.008, cast: false })); // umeboshi
-    g.add(rbox(0.06, 0.02, 0.045, '#e8c34a', { x: 0.05, y: 0.042, z: -0.025, r: 0.006, cast: false })); // tamagoyaki
-    g.add(rbox(0.06, 0.018, 0.045, '#5f9a4f', { x: 0.05, y: 0.041, z: 0.027, r: 0.006, cast: false })); // greens, pickles
-    const sticks = rbox(0.012, 0.008, 0.2, '#d9c7a0', { x: 0.11, y: 0.028, r: 0.003, cast: false });
-    sticks.rotation.y = 0.2;
-    g.add(sticks);
-    g.scale.setScalar(1.35);
+    const g = lunchBento(color);
     g.visible = false;
     w.root.add(g);
     return g;
@@ -735,10 +725,8 @@ export async function officePlace(game) {
       w.machineDoor.rotation.y = -st.mdoor * 1.5;
       w.nav.unblock('mdoor');
       w.nav.unblock('mdoorLeaf');
-      if (st.mdoorWant) {
-        w.nav.unblock('mdoor');
-        w.nav.blockTagged('mdoorLeaf', 5.22, 5.62, CN - 0.8, CN - 0.02);
-      } else w.nav.blockTagged('mdoor', 4.7, 5.5, CN - 0.2, CN + 0.12);
+      if (st.mdoorWant) w.nav.blockTagged('mdoorLeaf', ...MACHINE_LEAF);
+      else w.nav.blockTagged('mdoor', 4.7, 5.5, CN - 0.2, CN + 0.12);
       w.nav.unblock('chair');
       restoreObject(w.myChair, state.chair || initialChair);
       if (state.chairHome ?? (f.chairHome || f.chair_back)) {
@@ -747,6 +735,7 @@ export async function officePlace(game) {
       } else w.nav.blockTagged('chair', 5.2, 5.8, -1.6, -1.0);
       if (state.blockers)
         for (const [tag, rects] of Object.entries(state.blockers)) {
+          if (tag === 'mdoorLeaf') continue;
           w.nav.unblock(tag);
           rects.forEach((rect) => w.nav.blockTagged(tag, ...rect));
         }
@@ -909,6 +898,8 @@ export async function officePlace(game) {
     hooks: {
       day5Office: (a) => P.monday.hooks.day5Office(a),
       teamDrinks: (a) => P.monday.hooks.teamDrinks(a),
+      mioLunch: (a) => P.mioLunch.stage.run(a),
+      mioLunchComplete: (a) => P.mioLunch.complete(a),
       copier: async ({ state }) => {
         st.copier = state;
         if (state === 'run') {
@@ -961,7 +952,7 @@ export async function officePlace(game) {
         st.mdoorWant = state === 'open' ? 1 : 0;
         if (state === 'open') {
           w.nav.unblock('mdoor');
-          w.nav.blockTagged('mdoorLeaf', 5.22, 5.62, CN - 0.8, CN - 0.02);
+          w.nav.blockTagged('mdoorLeaf', ...MACHINE_LEAF);
           flags[ENGINE_KEYS.machineOpen] = true;
         } else {
           w.nav.unblock('mdoorLeaf');
@@ -1118,6 +1109,7 @@ export async function officePlace(game) {
   P.lunch = { food: lunchFood, state: lunchState }; // QA (tools/lunch-shots.mjs)
   day2.install(P);
   attachSender(game, P, w);
+  attachMioLunch(game, P);
   return P;
 }
 export const MIO_SEAT_Y = 0.0,

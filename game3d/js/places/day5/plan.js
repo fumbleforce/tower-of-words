@@ -15,7 +15,7 @@ export const PLANS = {
   office: {
     mio: {
       morning: { at: [5.1, -2.8], face: [5.5, -3.4] },
-      lunch: { at: [4.7, -2], face: [5.2, -2] },
+      lunch: { at: [4.7, -2], face: [5.2, -2], if: '!ms3_mio' },
       afternoon: { seat: 'mio_seat' },
       evening: { at: [-4.75, -1.3], face: [-6.2, 0.1] },
     },
@@ -53,7 +53,7 @@ export const PLANS = {
   },
   east_coast: {
     emi: {},
-    mio: {},
+    mio: { lunch: { seat: (P) => benchNear(P, [0, 0]), if: 'ms3_mio' } },
     kuroda: {},
     aoi: {},
     rei: { evening: { seat: (P) => benchNear(P, [0, 0]) } },
