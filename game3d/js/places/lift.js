@@ -28,7 +28,8 @@ import { CUT, planes, wallTop, cutaway, setCut, setCap } from './lift-cut.js';
 import { setDark, setAway, forgetLight } from './lift-light.js';
 import { indicatorMat, copMat } from './lift-displays.js';
 import { PLAYER_ID } from '../mc.js';
-import { turnInLift } from './lift-turn.js';
+import { turnInLift, waitFacingLift } from './lift-turn.js';
+import { stopGait } from '../movement/gait.js';
 
 // ---------- where the lift is in each place ----------
 // x: the door's centre; zBack: the back face of the wall the doors are in (the car starts here); zFront: just in
@@ -713,8 +714,7 @@ async function rideOut(g, L, slot) {
   await g.walkTo(L.site.out[0], L.site.out[1]);
   g.walker.locked = true;
   eric.scripted = true;
-  // the car comes up to 1 with the two from Sales already in it (they came up from the car park): the display over
-  // the doors shows it on its way from B1, a ding as it arrives, then the doors
+  stopGait(eric);
   setAway(L, 0);
   ride.on = true;
   ride.calling = true; // the car is on its way to him: the lobby stays
@@ -729,7 +729,7 @@ async function rideOut(g, L, slot) {
   L.riders[1].r.lookTarget = slotW(L, 'sales1');
   shootRide(L);
   elevTo(g, L, RIDE_ELEV, 1.4);
-  await g.wait(1100);
+  await waitFacingLift(g, L.site, anim, 1100);
   g.liftFloor = L.site.floor;
   ride.moving = false;
   ride.calling = false;
@@ -740,7 +740,6 @@ async function rideOut(g, L, slot) {
   L.car.want = 1;
   await g.wait(400);
   await doorsOpen(g, L);
-  eric.setState('walk');
   await glide(g, eric.root, [L.site.x, L.site.zFront + 0.05], 1.05);
   // across the threshold: the wall in front comes down and the lights outside go down
   const settle = Promise.all([
@@ -891,6 +890,7 @@ async function rideUp(g, L) {
   await g.walkTo(L.site.out[0], L.site.out[1]);
   g.walker.locked = true;
   eric.scripted = true;
+  stopGait(eric);
   setAway(L, 0);
   Object.assign(ride, { on: true, lit: new Set(), dir: 'up', pendingOpen: false, aboard: new Set(), with: [] });
   ride.floor = g.liftFloor = L.site.floor;
@@ -902,9 +902,8 @@ async function rideUp(g, L) {
   L.car.want = 1;
   shootRide(L);
   elevTo(g, L, RIDE_ELEV, 1.4);
-  await g.wait(700);
+  await waitFacingLift(g, L.site, anim, 700);
   await doorsOpen(g, L);
-  eric.setState('walk');
   await glide(g, eric.root, [L.site.x, L.site.zFront + 0.05], 1.05);
   const settle = Promise.all([
     anim(g, 0.7, (k) => setCut(L, lerp(wallTop(L.site) + 0.25, CUT, k))),
