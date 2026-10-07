@@ -280,12 +280,11 @@ export const playerBody = () => {
       });
   return CHIBI_ON ? loadChibi(m.chibi).catch(fallback(body)) : body();
 };
-// ?mio=meshy2: the candidate from reviews/mio-meshy-2 (assets/characters/mio2/), for checking it in the real game
-// until Jørgen picks; without it, her approved model
+// Review mio-meshy-2 selected mio-2. Keep the prior body available for comparison.
 export const mioBody = () => {
   const mio =
-    Q.get('mio') === 'meshy2'
-      ? () => loadMeshy('mio2', { dir: CDIR + 'mio2/', height: 1.12, extra: false })
-      : () => loadMio({ height: 1.12 });
+    Q.get('mio') === 'legacy'
+      ? () => loadMio({ height: 1.12 })
+      : () => loadMeshy('mio2', { dir: CDIR + 'mio2/', height: 1.12, extra: 'phone' });
   return CHIBI_ON ? loadChibi('mio').catch(fallback(mio)) : mio();
 };

@@ -122,11 +122,14 @@ export function mioLunchStage(game, P, state) {
     await perch(job, mio(), SEATS.eric);
     mio().pose.bow = 0.25;
     await job.wait(game.wait(350));
-    const arm = await hands.reach(job, mio(), hands.point(props.cable).toArray(), 'cable-pickup');
-    hands.grip(arm, props.cable);
+    // Hold the loop's rim; after turning it upright this is above the hook, not at its centre.
+    const grip = new THREE.Vector3(0, 0, -0.085);
+    const arm = await hands.reach(job, mio(), hands.point(props.cable, grip).toArray(), 'cable-pickup');
+    hands.grip(arm, props.cable, grip.toArray());
     await job.wait(hands.move(arm, [4.45, 0.52, -2.12]));
-    await job.wait(hands.move(arm, PLAN.cableHook));
     props.cable.rotation.x = Math.PI / 2;
+    const held = new THREE.Vector3(...PLAN.cableHook).add(grip.applyEuler(props.cable.rotation));
+    await job.wait(hands.move(arm, held.toArray()));
     await job.wait(game.wait(300));
     hands.contact(arm, 'cable-hook');
     await job.wait(game.wait(450));
@@ -199,8 +202,9 @@ export function mioLunchStage(game, P, state) {
   }
   async function leaveForLunch(job) {
     await perch(job, mio(), SEATS.mio);
-    const arm = await hands.reach(job, mio(), hands.point(props.food).toArray(), 'bento-pickup');
-    hands.grip(arm, props.food);
+    const grip = new THREE.Vector3(0, 0.025, 0.065); // the box's near side, above its bottom
+    const arm = await hands.reach(job, mio(), hands.point(props.food, grip).toArray(), 'bento-pickup');
+    hands.grip(arm, props.food, grip.toArray());
     arm.carry = true;
     await stand(job, mio(), SEATS.mio);
     frame('door');

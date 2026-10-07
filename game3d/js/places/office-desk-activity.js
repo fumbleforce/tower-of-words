@@ -1,8 +1,10 @@
 // A seated desk worker reads the monitor, types briefly, and notices someone approaching.
 // Upper-body offsets follow the mixer; its next update restores the clip pose.
 import * as THREE from 'three';
+import { seatedWork } from './seated-work.js';
 
-export function deskActivity(game, id = 'mio') {
+export function deskActivity(game, id = 'mio', desk = null) {
+  let hands = null;
   let rig = null,
     bones = {},
     weight = 0,
@@ -51,6 +53,11 @@ export function deskActivity(game, id = 'mio') {
     if (listening) return;
     // Three seconds of small alternating keystrokes, then a pause to read.
     const typing = !near && t % 5 < 3 ? 1 : 0;
+    if (desk?.userData.typing) {
+      hands ||= seatedWork(game, game.place.space);
+      hands(rig, desk, desk.userData.typing, weight, Math.max(0, Math.sin(t * 8)) * 0.003 * typing);
+      return;
+    }
     for (const [side, phase] of [
       ['Left', 0],
       ['Right', Math.PI],

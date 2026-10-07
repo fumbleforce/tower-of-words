@@ -3,11 +3,9 @@ import { flagKeys } from '../narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/places/train.js');
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './saved-people.js';
-// Place 1, the train. The car, its passengers and its motion come from side/train (copied into js/train/
-// unchanged); this file only recolours it to the muted palette (colours and light only), adds Mio as the
-// player, the company station with its platforms, the doors and the walk out to the covered walkway.
-// Every word said here comes from game3d/story/train.js (placeholder: story/placeholder/train.js).
+// Train car, passengers, arrival and platform. Dialogue lives in story/train.js.
 import * as THREE from 'three';
+import { trainLaptop } from './train-laptop.js';
 import { Pass } from 'three/addons/postprocessing/Pass.js';
 import { SimplexNoise } from 'three/addons/math/SimplexNoise.js';
 import { buildWorld, SPEED } from '../train/world.js';
@@ -215,23 +213,7 @@ export async function trainPlace(game) {
     car.root.add(b);
     rei.blob = b;
   }
-  const laptop = new THREE.Group();
-  {
-    // keyboard on the lap, hinge at the far edge, screen tilted back and facing the sitter (who faces +z... so -z)
-    const base = rbox(0.24, 0.015, 0.16, '#b9bec6', { r: 0.006 });
-    const kb = rbox(0.2, 0.004, 0.08, '#3a3f48', { y: 0.015, z: -0.02, r: 0.002, cast: false });
-    const hinge = new THREE.Group();
-    hinge.position.set(0, 0.015, 0.08);
-    hinge.rotation.x = 0.3;
-    const lid = rbox(0.24, 0.16, 0.012, '#c9ced6', { r: 0.006 });
-    lid.position.z = 0.006;
-    hinge.add(lid);
-    const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.21, 0.13), emissive('#cfe4ff', '#9fc8ff', 0.8));
-    scr.rotation.y = Math.PI;
-    scr.position.set(0, 0.08, -0.002);
-    hinge.add(scr);
-    laptop.add(base, kb, hinge);
-  }
+  const laptop = trainLaptop(game, car.root);
   const lap = rei.lap || rei.torso; // a Meshy Rei's stand-in torso is not drawn (cast3d.js meshyPerson)
   laptop.position.set(0, 0.02, 0.2);
   lap.add(laptop);
@@ -1136,6 +1118,7 @@ export async function trainPlace(game) {
     },
     update(dt, t) {
       finds.update(dt);
+      laptop.updateHands();
       // cut-away for the steep play camera, the closed car for shallow shots from outside (the title) and while it
       // pulls out of the station
       {
@@ -1448,6 +1431,7 @@ export async function trainPlace(game) {
     },
     snapshotState() {
       return {
+        mioBody: people.mio?.id || 'legacy',
         arrived: st.arrived,
         departed: !!st.departed,
         door: st.doorWant,
@@ -1601,6 +1585,8 @@ export async function trainPlace(game) {
           else if (r.blob.parent !== r.root) r.blob.position.set(q.position[0], 0.004, q.position[2]);
         }
       }
+      if (state.mioBody !== 'mio2' && people.mio?.id === 'mio2' && people.mio.seated)
+        laptop.migrateSeat(() => P.placeMio(people.mio));
       if ((!saved.world && f.on_platform) || st.departed) {
         game.player.root.position.set(spots.platform[0], 0, spots.platform[1]);
         game.walker.sync?.();
@@ -1616,7 +1602,6 @@ export async function trainPlace(game) {
     },
     onEnter: async () => {},
     leave: () => finds.dispose(), // the passengers' sounds and pictures stop with the place
-    // Mio takes the laptop woman's seat, laptop on her knees
     placeMio(m) {
       rei.root.visible = false;
       rei.blob.visible = false;
@@ -1627,6 +1612,7 @@ export async function trainPlace(game) {
       car.root.attach(laptop);
       laptop.position.set(2.1, SEAT_Y + (m.chibi ? 0.1 : 0.2), -(LZ - 0.24) + 0.3);
       laptop.rotation.set(0, 0, 0);
+      laptop.seatMio(m);
     },
     capState(s) {
       if (s.startsWith('dk')) {
