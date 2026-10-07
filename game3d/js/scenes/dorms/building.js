@@ -29,6 +29,7 @@ const {
   WIN,
   DOOR,
   DOORWAY,
+  DOORWAY_H,
   RETURN,
   SHARED_K,
   WEST_END,
@@ -113,7 +114,7 @@ export function walls(root) {
   root.add(
     wall('x', X0, X1, PART, LOW, 0.08, {
       ...o,
-      holes: [[DOORWAY[0], DOORWAY[1], 0, 1]],
+      holes: [[...DOORWAY, 0, DOORWAY_H]],
     }),
   );
   root.add(

@@ -168,16 +168,20 @@ export function genkan(kit, nav) {
   nav.block(sx0 - 0.02, BATH_X, sz0, NEAR);
 }
 
-// the room's sliding door: a frosted glass door pushed open along the wall, cut low with it
-export function slidingDoor(kit) {
-  const x1 = X1 - 0.01,
-    x0 = x1 - 0.66,
-    z = PART - 0.055;
-  kit.box('#6f757f', x1 - x0, LOW - 0.02, 0.03, (x0 + x1) / 2, 0, z, {
-    surf: 'paint',
-  });
-  kit.box('#b9c6ce', x1 - x0 - 0.1, LOW - 0.12, 0.034, (x0 + x1) / 2, 0.06, z, {
-    cast: false,
-  });
-  kit.box(C.frame, DOORWAY[1] - DOORWAY[0], 0.008, 0.06, (DOORWAY[0] + DOORWAY[1]) / 2, 0, PART, { cast: false });
+// Two telescoping frosted leaves park beside the wider opening, within the flat's right wall.
+// The overview cuts them at LOW; the follow enclosure fills in the same panels above that cut.
+export function slidingDoor(kit, bottom = 0, top = LOW) {
+  const width = (DOORWAY[1] - DOORWAY[0]) / 2 + 0.025;
+  for (const [i, x0] of [DOORWAY[1] + 0.02, X1 - 0.01 - width].entries()) {
+    const x = x0 + width / 2,
+      z = PART - 0.065 - i * 0.04;
+    kit.box('#6f757f', width, top - bottom, 0.03, x, bottom, z, {
+      surf: 'paint',
+    });
+    const glassBottom = Math.max(bottom, 0.06),
+      glassTop = top - (top === LOW ? 0 : 0.06);
+    kit.box('#b9c6ce', width - 0.08, glassTop - glassBottom, 0.034, x, glassBottom, z, { cast: false });
+  }
+  if (bottom === 0)
+    kit.box(C.frame, DOORWAY[1] - DOORWAY[0], 0.008, 0.06, (DOORWAY[0] + DOORWAY[1]) / 2, 0, PART, { cast: false });
 }
