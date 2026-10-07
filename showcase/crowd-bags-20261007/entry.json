@@ -1,0 +1,1772 @@
+{
+  "title": "Crowd bags held at the handle",
+  "date": "2026-10-07",
+  "updated": "2026-10-07T14:14:07.043415+00:00",
+  "by": "codex",
+  "caption": "Hand-held crowd bags meet the palm and move with it. Generated props fit their carrier and clear the paving at 85% and 100%. The optional shirt carrier sets its tote on the bench and takes it back on standing. Original faults and correction attempts remain available.",
+  "preview": "final-85-office-0-idle-front",
+  "sections": [
+    {
+      "title": "Current — selected 85% character size",
+      "caption": "Approved A/B and procedural casual/elder carriers. Final grip and prop fit, shown idle, walking and seated.",
+      "images": [
+        {
+          "id": "final-85-casual-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-0-idle-front.webp",
+          "caption": "Casual — groceries; standing; front view"
+        },
+        {
+          "id": "final-85-casual-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-0-idle-side.webp",
+          "caption": "Casual — groceries; standing; hand-side view"
+        },
+        {
+          "id": "final-85-casual-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-0-sit-front.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "final-85-casual-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-0-sit-side.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "final-85-casual-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-0-walk-front.webp",
+          "caption": "Casual — groceries; walking pose; front view"
+        },
+        {
+          "id": "final-85-casual-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-0-walk-side.webp",
+          "caption": "Casual — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "final-85-casual-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-2-idle-front.webp",
+          "caption": "Casual — tote; standing; front view"
+        },
+        {
+          "id": "final-85-casual-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-2-idle-side.webp",
+          "caption": "Casual — tote; standing; hand-side view"
+        },
+        {
+          "id": "final-85-casual-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-2-sit-front.webp",
+          "caption": "Casual — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "final-85-casual-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-2-sit-side.webp",
+          "caption": "Casual — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "final-85-casual-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-2-walk-front.webp",
+          "caption": "Casual — tote; walking pose; front view"
+        },
+        {
+          "id": "final-85-casual-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/casual-2-walk-side.webp",
+          "caption": "Casual — tote; walking pose; hand-side view"
+        },
+        {
+          "id": "final-85-elder-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/elder-1-idle-front.webp",
+          "caption": "Elder — groceries; standing; front view"
+        },
+        {
+          "id": "final-85-elder-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/elder-1-idle-side.webp",
+          "caption": "Elder — groceries; standing; hand-side view"
+        },
+        {
+          "id": "final-85-elder-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/elder-1-sit-front.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "final-85-elder-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/elder-1-sit-side.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "final-85-elder-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/elder-1-walk-front.webp",
+          "caption": "Elder — groceries; walking pose; front view"
+        },
+        {
+          "id": "final-85-elder-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/elder-1-walk-side.webp",
+          "caption": "Elder — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "final-85-office-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-0-idle-front.webp",
+          "caption": "Office A — briefcase; standing; front view"
+        },
+        {
+          "id": "final-85-office-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-0-idle-side.webp",
+          "caption": "Office A — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "final-85-office-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-0-sit-front.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "final-85-office-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-0-sit-side.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "final-85-office-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-0-walk-front.webp",
+          "caption": "Office A — briefcase; walking pose; front view"
+        },
+        {
+          "id": "final-85-office-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-0-walk-side.webp",
+          "caption": "Office A — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "final-85-office-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-1-idle-front.webp",
+          "caption": "Office B — briefcase; standing; front view"
+        },
+        {
+          "id": "final-85-office-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-1-idle-side.webp",
+          "caption": "Office B — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "final-85-office-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-1-sit-front.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "final-85-office-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-1-sit-side.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "final-85-office-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-1-walk-front.webp",
+          "caption": "Office B — briefcase; walking pose; front view"
+        },
+        {
+          "id": "final-85-office-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-1-walk-side.webp",
+          "caption": "Office B — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "final-85-office-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-2-idle-front.webp",
+          "caption": "Office A — tote; standing; front view"
+        },
+        {
+          "id": "final-85-office-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-2-idle-side.webp",
+          "caption": "Office A — tote; standing; hand-side view"
+        },
+        {
+          "id": "final-85-office-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-2-sit-front.webp",
+          "caption": "Office A — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "final-85-office-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-2-sit-side.webp",
+          "caption": "Office A — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "final-85-office-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-2-walk-front.webp",
+          "caption": "Office A — tote; walking pose; front view"
+        },
+        {
+          "id": "final-85-office-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/final-85/office-2-walk-side.webp",
+          "caption": "Office A — tote; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Current — 100% comparison",
+      "caption": "The same final mounting at the earlier character size.",
+      "images": [
+        {
+          "id": "candidate2-100-casual-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-0-idle-front.webp",
+          "caption": "Casual — groceries; standing; front view"
+        },
+        {
+          "id": "candidate2-100-casual-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-0-idle-side.webp",
+          "caption": "Casual — groceries; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-100-casual-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-0-sit-front.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-100-casual-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-0-sit-side.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-100-casual-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-0-walk-front.webp",
+          "caption": "Casual — groceries; walking pose; front view"
+        },
+        {
+          "id": "candidate2-100-casual-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-0-walk-side.webp",
+          "caption": "Casual — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate2-100-casual-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-2-idle-front.webp",
+          "caption": "Casual — tote; standing; front view"
+        },
+        {
+          "id": "candidate2-100-casual-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-2-idle-side.webp",
+          "caption": "Casual — tote; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-100-casual-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-2-sit-front.webp",
+          "caption": "Casual — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-100-casual-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-2-sit-side.webp",
+          "caption": "Casual — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-100-casual-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-2-walk-front.webp",
+          "caption": "Casual — tote; walking pose; front view"
+        },
+        {
+          "id": "candidate2-100-casual-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/casual-2-walk-side.webp",
+          "caption": "Casual — tote; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate2-100-elder-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/elder-1-idle-front.webp",
+          "caption": "Elder — groceries; standing; front view"
+        },
+        {
+          "id": "candidate2-100-elder-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/elder-1-idle-side.webp",
+          "caption": "Elder — groceries; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-100-elder-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/elder-1-sit-front.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-100-elder-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/elder-1-sit-side.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-100-elder-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/elder-1-walk-front.webp",
+          "caption": "Elder — groceries; walking pose; front view"
+        },
+        {
+          "id": "candidate2-100-elder-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/elder-1-walk-side.webp",
+          "caption": "Elder — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate2-100-office-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-0-idle-front.webp",
+          "caption": "Office A — briefcase; standing; front view"
+        },
+        {
+          "id": "candidate2-100-office-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-0-idle-side.webp",
+          "caption": "Office A — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-100-office-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-0-sit-front.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-100-office-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-0-sit-side.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-100-office-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-0-walk-front.webp",
+          "caption": "Office A — briefcase; walking pose; front view"
+        },
+        {
+          "id": "candidate2-100-office-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-0-walk-side.webp",
+          "caption": "Office A — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate2-100-office-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-1-idle-front.webp",
+          "caption": "Office B — briefcase; standing; front view"
+        },
+        {
+          "id": "candidate2-100-office-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-1-idle-side.webp",
+          "caption": "Office B — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-100-office-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-1-sit-front.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-100-office-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-1-sit-side.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-100-office-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-1-walk-front.webp",
+          "caption": "Office B — briefcase; walking pose; front view"
+        },
+        {
+          "id": "candidate2-100-office-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-1-walk-side.webp",
+          "caption": "Office B — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate2-100-office-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-2-idle-front.webp",
+          "caption": "Office A — tote; standing; front view"
+        },
+        {
+          "id": "candidate2-100-office-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-2-idle-side.webp",
+          "caption": "Office A — tote; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-100-office-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-2-sit-front.webp",
+          "caption": "Office A — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-100-office-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-2-sit-side.webp",
+          "caption": "Office A — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-100-office-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-2-walk-front.webp",
+          "caption": "Office A — tote; walking pose; front view"
+        },
+        {
+          "id": "candidate2-100-office-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-100/office-2-walk-side.webp",
+          "caption": "Office A — tote; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Current optional bodies — seated fix at 85%",
+      "caption": "The shirt carrier rests its tote on the bench and takes it back when standing. Other generated bodies retain their hand-held seated poses.",
+      "images": [
+        {
+          "id": "seatfix-85-casual-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-0-idle-front.webp",
+          "caption": "Casual — groceries; standing; front view"
+        },
+        {
+          "id": "seatfix-85-casual-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-0-idle-side.webp",
+          "caption": "Casual — groceries; standing; hand-side view"
+        },
+        {
+          "id": "seatfix-85-casual-0-restore-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-0-restore-front.webp",
+          "caption": "Casual — groceries; standing again after sitting; front view"
+        },
+        {
+          "id": "seatfix-85-casual-0-restore-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-0-restore-side.webp",
+          "caption": "Casual — groceries; standing again after sitting; hand-side view"
+        },
+        {
+          "id": "seatfix-85-casual-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-0-sit-front.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "seatfix-85-casual-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-0-sit-side.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "seatfix-85-casual-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-0-walk-front.webp",
+          "caption": "Casual — groceries; walking pose; front view"
+        },
+        {
+          "id": "seatfix-85-casual-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-0-walk-side.webp",
+          "caption": "Casual — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "seatfix-85-casual-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-2-idle-front.webp",
+          "caption": "Casual — tote; standing; front view"
+        },
+        {
+          "id": "seatfix-85-casual-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-2-idle-side.webp",
+          "caption": "Casual — tote; standing; hand-side view"
+        },
+        {
+          "id": "seatfix-85-casual-2-restore-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-2-restore-front.webp",
+          "caption": "Casual — tote; standing again after sitting; front view"
+        },
+        {
+          "id": "seatfix-85-casual-2-restore-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-2-restore-side.webp",
+          "caption": "Casual — tote; standing again after sitting; hand-side view"
+        },
+        {
+          "id": "seatfix-85-casual-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-2-sit-front.webp",
+          "caption": "Casual — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "seatfix-85-casual-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-2-sit-side.webp",
+          "caption": "Casual — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "seatfix-85-casual-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-2-walk-front.webp",
+          "caption": "Casual — tote; walking pose; front view"
+        },
+        {
+          "id": "seatfix-85-casual-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/casual-2-walk-side.webp",
+          "caption": "Casual — tote; walking pose; hand-side view"
+        },
+        {
+          "id": "seatfix-85-elder-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/elder-1-idle-front.webp",
+          "caption": "Elder — groceries; standing; front view"
+        },
+        {
+          "id": "seatfix-85-elder-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/elder-1-idle-side.webp",
+          "caption": "Elder — groceries; standing; hand-side view"
+        },
+        {
+          "id": "seatfix-85-elder-1-restore-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/elder-1-restore-front.webp",
+          "caption": "Elder — groceries; standing again after sitting; front view"
+        },
+        {
+          "id": "seatfix-85-elder-1-restore-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/elder-1-restore-side.webp",
+          "caption": "Elder — groceries; standing again after sitting; hand-side view"
+        },
+        {
+          "id": "seatfix-85-elder-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/elder-1-sit-front.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "seatfix-85-elder-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/elder-1-sit-side.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "seatfix-85-elder-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/elder-1-walk-front.webp",
+          "caption": "Elder — groceries; walking pose; front view"
+        },
+        {
+          "id": "seatfix-85-elder-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-85/elder-1-walk-side.webp",
+          "caption": "Elder — groceries; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Current optional bodies — seated fix at 100%",
+      "caption": "The same seated support and return-to-hand checks at the legacy size.",
+      "images": [
+        {
+          "id": "seatfix-100-casual-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-0-idle-front.webp",
+          "caption": "Casual — groceries; standing; front view"
+        },
+        {
+          "id": "seatfix-100-casual-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-0-idle-side.webp",
+          "caption": "Casual — groceries; standing; hand-side view"
+        },
+        {
+          "id": "seatfix-100-casual-0-restore-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-0-restore-front.webp",
+          "caption": "Casual — groceries; standing again after sitting; front view"
+        },
+        {
+          "id": "seatfix-100-casual-0-restore-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-0-restore-side.webp",
+          "caption": "Casual — groceries; standing again after sitting; hand-side view"
+        },
+        {
+          "id": "seatfix-100-casual-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-0-sit-front.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "seatfix-100-casual-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-0-sit-side.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "seatfix-100-casual-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-0-walk-front.webp",
+          "caption": "Casual — groceries; walking pose; front view"
+        },
+        {
+          "id": "seatfix-100-casual-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-0-walk-side.webp",
+          "caption": "Casual — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "seatfix-100-casual-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-2-idle-front.webp",
+          "caption": "Casual — tote; standing; front view"
+        },
+        {
+          "id": "seatfix-100-casual-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-2-idle-side.webp",
+          "caption": "Casual — tote; standing; hand-side view"
+        },
+        {
+          "id": "seatfix-100-casual-2-restore-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-2-restore-front.webp",
+          "caption": "Casual — tote; standing again after sitting; front view"
+        },
+        {
+          "id": "seatfix-100-casual-2-restore-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-2-restore-side.webp",
+          "caption": "Casual — tote; standing again after sitting; hand-side view"
+        },
+        {
+          "id": "seatfix-100-casual-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-2-sit-front.webp",
+          "caption": "Casual — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "seatfix-100-casual-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-2-sit-side.webp",
+          "caption": "Casual — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "seatfix-100-casual-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-2-walk-front.webp",
+          "caption": "Casual — tote; walking pose; front view"
+        },
+        {
+          "id": "seatfix-100-casual-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/casual-2-walk-side.webp",
+          "caption": "Casual — tote; walking pose; hand-side view"
+        },
+        {
+          "id": "seatfix-100-elder-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/elder-1-idle-front.webp",
+          "caption": "Elder — groceries; standing; front view"
+        },
+        {
+          "id": "seatfix-100-elder-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/elder-1-idle-side.webp",
+          "caption": "Elder — groceries; standing; hand-side view"
+        },
+        {
+          "id": "seatfix-100-elder-1-restore-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/elder-1-restore-front.webp",
+          "caption": "Elder — groceries; standing again after sitting; front view"
+        },
+        {
+          "id": "seatfix-100-elder-1-restore-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/elder-1-restore-side.webp",
+          "caption": "Elder — groceries; standing again after sitting; hand-side view"
+        },
+        {
+          "id": "seatfix-100-elder-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/elder-1-sit-front.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "seatfix-100-elder-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/elder-1-sit-side.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "seatfix-100-elder-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/elder-1-walk-front.webp",
+          "caption": "Elder — groceries; walking pose; front view"
+        },
+        {
+          "id": "seatfix-100-elder-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/seatfix-100/elder-1-walk-side.webp",
+          "caption": "Elder — groceries; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Approved assets unavailable — 85% fallback",
+      "caption": "Approved model requests deliberately return 404. Existing procedural office workers keep working with attached bags.",
+      "images": [
+        {
+          "id": "fallback-85-office-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-0-idle-front.webp",
+          "caption": "Procedural office variant 0 — briefcase; standing; front view"
+        },
+        {
+          "id": "fallback-85-office-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-0-idle-side.webp",
+          "caption": "Procedural office variant 0 — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "fallback-85-office-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-0-sit-front.webp",
+          "caption": "Procedural office variant 0 — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "fallback-85-office-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-0-sit-side.webp",
+          "caption": "Procedural office variant 0 — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "fallback-85-office-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-0-walk-front.webp",
+          "caption": "Procedural office variant 0 — briefcase; walking pose; front view"
+        },
+        {
+          "id": "fallback-85-office-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-0-walk-side.webp",
+          "caption": "Procedural office variant 0 — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "fallback-85-office-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-1-idle-front.webp",
+          "caption": "Procedural office variant 1 — briefcase; standing; front view"
+        },
+        {
+          "id": "fallback-85-office-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-1-idle-side.webp",
+          "caption": "Procedural office variant 1 — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "fallback-85-office-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-1-sit-front.webp",
+          "caption": "Procedural office variant 1 — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "fallback-85-office-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-1-sit-side.webp",
+          "caption": "Procedural office variant 1 — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "fallback-85-office-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-1-walk-front.webp",
+          "caption": "Procedural office variant 1 — briefcase; walking pose; front view"
+        },
+        {
+          "id": "fallback-85-office-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-1-walk-side.webp",
+          "caption": "Procedural office variant 1 — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "fallback-85-office-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-2-idle-front.webp",
+          "caption": "Procedural office variant 2 — tote; standing; front view"
+        },
+        {
+          "id": "fallback-85-office-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-2-idle-side.webp",
+          "caption": "Procedural office variant 2 — tote; standing; hand-side view"
+        },
+        {
+          "id": "fallback-85-office-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-2-sit-front.webp",
+          "caption": "Procedural office variant 2 — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "fallback-85-office-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-2-sit-side.webp",
+          "caption": "Procedural office variant 2 — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "fallback-85-office-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-2-walk-front.webp",
+          "caption": "Procedural office variant 2 — tote; walking pose; front view"
+        },
+        {
+          "id": "fallback-85-office-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-85/office-2-walk-side.webp",
+          "caption": "Procedural office variant 2 — tote; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Approved assets unavailable — 100% fallback",
+      "caption": "The same procedural office fallback at 100%.",
+      "images": [
+        {
+          "id": "fallback-100-office-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-0-idle-front.webp",
+          "caption": "Procedural office variant 0 — briefcase; standing; front view"
+        },
+        {
+          "id": "fallback-100-office-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-0-idle-side.webp",
+          "caption": "Procedural office variant 0 — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "fallback-100-office-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-0-sit-front.webp",
+          "caption": "Procedural office variant 0 — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "fallback-100-office-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-0-sit-side.webp",
+          "caption": "Procedural office variant 0 — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "fallback-100-office-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-0-walk-front.webp",
+          "caption": "Procedural office variant 0 — briefcase; walking pose; front view"
+        },
+        {
+          "id": "fallback-100-office-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-0-walk-side.webp",
+          "caption": "Procedural office variant 0 — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "fallback-100-office-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-1-idle-front.webp",
+          "caption": "Procedural office variant 1 — briefcase; standing; front view"
+        },
+        {
+          "id": "fallback-100-office-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-1-idle-side.webp",
+          "caption": "Procedural office variant 1 — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "fallback-100-office-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-1-sit-front.webp",
+          "caption": "Procedural office variant 1 — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "fallback-100-office-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-1-sit-side.webp",
+          "caption": "Procedural office variant 1 — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "fallback-100-office-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-1-walk-front.webp",
+          "caption": "Procedural office variant 1 — briefcase; walking pose; front view"
+        },
+        {
+          "id": "fallback-100-office-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-1-walk-side.webp",
+          "caption": "Procedural office variant 1 — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "fallback-100-office-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-2-idle-front.webp",
+          "caption": "Procedural office variant 2 — tote; standing; front view"
+        },
+        {
+          "id": "fallback-100-office-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-2-idle-side.webp",
+          "caption": "Procedural office variant 2 — tote; standing; hand-side view"
+        },
+        {
+          "id": "fallback-100-office-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-2-sit-front.webp",
+          "caption": "Procedural office variant 2 — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "fallback-100-office-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-2-sit-side.webp",
+          "caption": "Procedural office variant 2 — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "fallback-100-office-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-2-walk-front.webp",
+          "caption": "Procedural office variant 2 — tote; walking pose; front view"
+        },
+        {
+          "id": "fallback-100-office-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/fallback-100/office-2-walk-side.webp",
+          "caption": "Procedural office variant 2 — tote; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Attempt 2 — optional bodies at 85%",
+      "caption": "Not accepted: the shirt seated tote intersects the bench. Preserved for comparison with the seated fix.",
+      "images": [
+        {
+          "id": "generated-85-casual-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-0-idle-front.webp",
+          "caption": "Casual — groceries; standing; front view"
+        },
+        {
+          "id": "generated-85-casual-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-0-idle-side.webp",
+          "caption": "Casual — groceries; standing; hand-side view"
+        },
+        {
+          "id": "generated-85-casual-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-0-sit-front.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "generated-85-casual-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-0-sit-side.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "generated-85-casual-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-0-walk-front.webp",
+          "caption": "Casual — groceries; walking pose; front view"
+        },
+        {
+          "id": "generated-85-casual-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-0-walk-side.webp",
+          "caption": "Casual — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "generated-85-casual-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-2-idle-front.webp",
+          "caption": "Casual — tote; standing; front view"
+        },
+        {
+          "id": "generated-85-casual-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-2-idle-side.webp",
+          "caption": "Casual — tote; standing; hand-side view"
+        },
+        {
+          "id": "generated-85-casual-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-2-sit-front.webp",
+          "caption": "Casual — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "generated-85-casual-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-2-sit-side.webp",
+          "caption": "Casual — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "generated-85-casual-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-2-walk-front.webp",
+          "caption": "Casual — tote; walking pose; front view"
+        },
+        {
+          "id": "generated-85-casual-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/casual-2-walk-side.webp",
+          "caption": "Casual — tote; walking pose; hand-side view"
+        },
+        {
+          "id": "generated-85-elder-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/elder-1-idle-front.webp",
+          "caption": "Elder — groceries; standing; front view"
+        },
+        {
+          "id": "generated-85-elder-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/elder-1-idle-side.webp",
+          "caption": "Elder — groceries; standing; hand-side view"
+        },
+        {
+          "id": "generated-85-elder-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/elder-1-sit-front.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "generated-85-elder-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/elder-1-sit-side.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "generated-85-elder-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/elder-1-walk-front.webp",
+          "caption": "Elder — groceries; walking pose; front view"
+        },
+        {
+          "id": "generated-85-elder-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-85/elder-1-walk-side.webp",
+          "caption": "Elder — groceries; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Attempt 2 — optional bodies at 100%",
+      "caption": "Not accepted: the same seated shirt/bench intersection at 100%. Preserved for comparison.",
+      "images": [
+        {
+          "id": "generated-100-casual-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-0-idle-front.webp",
+          "caption": "Casual — groceries; standing; front view"
+        },
+        {
+          "id": "generated-100-casual-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-0-idle-side.webp",
+          "caption": "Casual — groceries; standing; hand-side view"
+        },
+        {
+          "id": "generated-100-casual-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-0-sit-front.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "generated-100-casual-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-0-sit-side.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "generated-100-casual-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-0-walk-front.webp",
+          "caption": "Casual — groceries; walking pose; front view"
+        },
+        {
+          "id": "generated-100-casual-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-0-walk-side.webp",
+          "caption": "Casual — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "generated-100-casual-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-2-idle-front.webp",
+          "caption": "Casual — tote; standing; front view"
+        },
+        {
+          "id": "generated-100-casual-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-2-idle-side.webp",
+          "caption": "Casual — tote; standing; hand-side view"
+        },
+        {
+          "id": "generated-100-casual-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-2-sit-front.webp",
+          "caption": "Casual — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "generated-100-casual-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-2-sit-side.webp",
+          "caption": "Casual — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "generated-100-casual-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-2-walk-front.webp",
+          "caption": "Casual — tote; walking pose; front view"
+        },
+        {
+          "id": "generated-100-casual-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/casual-2-walk-side.webp",
+          "caption": "Casual — tote; walking pose; hand-side view"
+        },
+        {
+          "id": "generated-100-elder-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/elder-1-idle-front.webp",
+          "caption": "Elder — groceries; standing; front view"
+        },
+        {
+          "id": "generated-100-elder-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/elder-1-idle-side.webp",
+          "caption": "Elder — groceries; standing; hand-side view"
+        },
+        {
+          "id": "generated-100-elder-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/elder-1-sit-front.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "generated-100-elder-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/elder-1-sit-side.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "generated-100-elder-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/elder-1-walk-front.webp",
+          "caption": "Elder — groceries; walking pose; front view"
+        },
+        {
+          "id": "generated-100-elder-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/generated-100/elder-1-walk-side.webp",
+          "caption": "Elder — groceries; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Before — original floating bags",
+      "caption": "Untouched source. Handles sit above the hands.",
+      "images": [
+        {
+          "id": "baseline-100-casual-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-0-idle-front.webp",
+          "caption": "Casual — groceries; standing; front view"
+        },
+        {
+          "id": "baseline-100-casual-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-0-idle-side.webp",
+          "caption": "Casual — groceries; standing; hand-side view"
+        },
+        {
+          "id": "baseline-100-casual-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-0-sit-front.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "baseline-100-casual-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-0-sit-side.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "baseline-100-casual-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-0-walk-front.webp",
+          "caption": "Casual — groceries; walking pose; front view"
+        },
+        {
+          "id": "baseline-100-casual-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-0-walk-side.webp",
+          "caption": "Casual — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "baseline-100-casual-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-2-idle-front.webp",
+          "caption": "Casual — tote; standing; front view"
+        },
+        {
+          "id": "baseline-100-casual-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-2-idle-side.webp",
+          "caption": "Casual — tote; standing; hand-side view"
+        },
+        {
+          "id": "baseline-100-casual-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-2-sit-front.webp",
+          "caption": "Casual — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "baseline-100-casual-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-2-sit-side.webp",
+          "caption": "Casual — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "baseline-100-casual-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-2-walk-front.webp",
+          "caption": "Casual — tote; walking pose; front view"
+        },
+        {
+          "id": "baseline-100-casual-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/casual-2-walk-side.webp",
+          "caption": "Casual — tote; walking pose; hand-side view"
+        },
+        {
+          "id": "baseline-100-elder-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/elder-1-idle-front.webp",
+          "caption": "Elder — groceries; standing; front view"
+        },
+        {
+          "id": "baseline-100-elder-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/elder-1-idle-side.webp",
+          "caption": "Elder — groceries; standing; hand-side view"
+        },
+        {
+          "id": "baseline-100-elder-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/elder-1-sit-front.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "baseline-100-elder-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/elder-1-sit-side.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "baseline-100-elder-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/elder-1-walk-front.webp",
+          "caption": "Elder — groceries; walking pose; front view"
+        },
+        {
+          "id": "baseline-100-elder-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/elder-1-walk-side.webp",
+          "caption": "Elder — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "baseline-100-office-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-0-idle-front.webp",
+          "caption": "Office A — briefcase; standing; front view"
+        },
+        {
+          "id": "baseline-100-office-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-0-idle-side.webp",
+          "caption": "Office A — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "baseline-100-office-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-0-sit-front.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "baseline-100-office-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-0-sit-side.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "baseline-100-office-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-0-walk-front.webp",
+          "caption": "Office A — briefcase; walking pose; front view"
+        },
+        {
+          "id": "baseline-100-office-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-0-walk-side.webp",
+          "caption": "Office A — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "baseline-100-office-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-1-idle-front.webp",
+          "caption": "Office B — briefcase; standing; front view"
+        },
+        {
+          "id": "baseline-100-office-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-1-idle-side.webp",
+          "caption": "Office B — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "baseline-100-office-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-1-sit-front.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "baseline-100-office-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-1-sit-side.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "baseline-100-office-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-1-walk-front.webp",
+          "caption": "Office B — briefcase; walking pose; front view"
+        },
+        {
+          "id": "baseline-100-office-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-1-walk-side.webp",
+          "caption": "Office B — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "baseline-100-office-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-2-idle-front.webp",
+          "caption": "Office A — tote; standing; front view"
+        },
+        {
+          "id": "baseline-100-office-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-2-idle-side.webp",
+          "caption": "Office A — tote; standing; hand-side view"
+        },
+        {
+          "id": "baseline-100-office-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-2-sit-front.webp",
+          "caption": "Office A — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "baseline-100-office-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-2-sit-side.webp",
+          "caption": "Office A — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "baseline-100-office-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-2-walk-front.webp",
+          "caption": "Office A — tote; walking pose; front view"
+        },
+        {
+          "id": "baseline-100-office-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/baseline-100/office-2-walk-side.webp",
+          "caption": "Office A — tote; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Attempt 1 — correct grip, oversized props at 100%",
+      "caption": "Not accepted: lowering the original prop into the hand exposed ground intersection on generated carriers.",
+      "images": [
+        {
+          "id": "candidate1-100-casual-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-0-idle-front.webp",
+          "caption": "Casual — groceries; standing; front view"
+        },
+        {
+          "id": "candidate1-100-casual-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-0-idle-side.webp",
+          "caption": "Casual — groceries; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-100-casual-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-0-sit-front.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-100-casual-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-0-sit-side.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-100-casual-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-0-walk-front.webp",
+          "caption": "Casual — groceries; walking pose; front view"
+        },
+        {
+          "id": "candidate1-100-casual-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-0-walk-side.webp",
+          "caption": "Casual — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate1-100-casual-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-2-idle-front.webp",
+          "caption": "Casual — tote; standing; front view"
+        },
+        {
+          "id": "candidate1-100-casual-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-2-idle-side.webp",
+          "caption": "Casual — tote; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-100-casual-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-2-sit-front.webp",
+          "caption": "Casual — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-100-casual-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-2-sit-side.webp",
+          "caption": "Casual — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-100-casual-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-2-walk-front.webp",
+          "caption": "Casual — tote; walking pose; front view"
+        },
+        {
+          "id": "candidate1-100-casual-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/casual-2-walk-side.webp",
+          "caption": "Casual — tote; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate1-100-elder-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/elder-1-idle-front.webp",
+          "caption": "Elder — groceries; standing; front view"
+        },
+        {
+          "id": "candidate1-100-elder-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/elder-1-idle-side.webp",
+          "caption": "Elder — groceries; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-100-elder-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/elder-1-sit-front.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-100-elder-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/elder-1-sit-side.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-100-elder-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/elder-1-walk-front.webp",
+          "caption": "Elder — groceries; walking pose; front view"
+        },
+        {
+          "id": "candidate1-100-elder-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/elder-1-walk-side.webp",
+          "caption": "Elder — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate1-100-office-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-0-idle-front.webp",
+          "caption": "Office A — briefcase; standing; front view"
+        },
+        {
+          "id": "candidate1-100-office-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-0-idle-side.webp",
+          "caption": "Office A — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-100-office-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-0-sit-front.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-100-office-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-0-sit-side.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-100-office-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-0-walk-front.webp",
+          "caption": "Office A — briefcase; walking pose; front view"
+        },
+        {
+          "id": "candidate1-100-office-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-0-walk-side.webp",
+          "caption": "Office A — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate1-100-office-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-1-idle-front.webp",
+          "caption": "Office B — briefcase; standing; front view"
+        },
+        {
+          "id": "candidate1-100-office-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-1-idle-side.webp",
+          "caption": "Office B — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-100-office-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-1-sit-front.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-100-office-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-1-sit-side.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-100-office-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-1-walk-front.webp",
+          "caption": "Office B — briefcase; walking pose; front view"
+        },
+        {
+          "id": "candidate1-100-office-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-1-walk-side.webp",
+          "caption": "Office B — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate1-100-office-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-2-idle-front.webp",
+          "caption": "Office A — tote; standing; front view"
+        },
+        {
+          "id": "candidate1-100-office-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-2-idle-side.webp",
+          "caption": "Office A — tote; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-100-office-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-2-sit-front.webp",
+          "caption": "Office A — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-100-office-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-2-sit-side.webp",
+          "caption": "Office A — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-100-office-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-2-walk-front.webp",
+          "caption": "Office A — tote; walking pose; front view"
+        },
+        {
+          "id": "candidate1-100-office-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-100/office-2-walk-side.webp",
+          "caption": "Office A — tote; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Attempt 1 — correct grip, oversized props at 85%",
+      "caption": "Not accepted: generated bags crossed the paving because their sizing did not follow the smaller carrier.",
+      "images": [
+        {
+          "id": "candidate1-85-casual-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-0-idle-front.webp",
+          "caption": "Casual — groceries; standing; front view"
+        },
+        {
+          "id": "candidate1-85-casual-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-0-idle-side.webp",
+          "caption": "Casual — groceries; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-85-casual-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-0-sit-front.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-85-casual-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-0-sit-side.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-85-casual-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-0-walk-front.webp",
+          "caption": "Casual — groceries; walking pose; front view"
+        },
+        {
+          "id": "candidate1-85-casual-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-0-walk-side.webp",
+          "caption": "Casual — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate1-85-casual-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-2-idle-front.webp",
+          "caption": "Casual — tote; standing; front view"
+        },
+        {
+          "id": "candidate1-85-casual-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-2-idle-side.webp",
+          "caption": "Casual — tote; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-85-casual-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-2-sit-front.webp",
+          "caption": "Casual — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-85-casual-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-2-sit-side.webp",
+          "caption": "Casual — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-85-casual-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-2-walk-front.webp",
+          "caption": "Casual — tote; walking pose; front view"
+        },
+        {
+          "id": "candidate1-85-casual-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/casual-2-walk-side.webp",
+          "caption": "Casual — tote; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate1-85-elder-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/elder-1-idle-front.webp",
+          "caption": "Elder — groceries; standing; front view"
+        },
+        {
+          "id": "candidate1-85-elder-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/elder-1-idle-side.webp",
+          "caption": "Elder — groceries; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-85-elder-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/elder-1-sit-front.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-85-elder-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/elder-1-sit-side.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-85-elder-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/elder-1-walk-front.webp",
+          "caption": "Elder — groceries; walking pose; front view"
+        },
+        {
+          "id": "candidate1-85-elder-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/elder-1-walk-side.webp",
+          "caption": "Elder — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate1-85-office-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-0-idle-front.webp",
+          "caption": "Office A — briefcase; standing; front view"
+        },
+        {
+          "id": "candidate1-85-office-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-0-idle-side.webp",
+          "caption": "Office A — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-85-office-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-0-sit-front.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-85-office-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-0-sit-side.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-85-office-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-0-walk-front.webp",
+          "caption": "Office A — briefcase; walking pose; front view"
+        },
+        {
+          "id": "candidate1-85-office-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-0-walk-side.webp",
+          "caption": "Office A — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate1-85-office-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-1-idle-front.webp",
+          "caption": "Office B — briefcase; standing; front view"
+        },
+        {
+          "id": "candidate1-85-office-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-1-idle-side.webp",
+          "caption": "Office B — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-85-office-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-1-sit-front.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-85-office-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-1-sit-side.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-85-office-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-1-walk-front.webp",
+          "caption": "Office B — briefcase; walking pose; front view"
+        },
+        {
+          "id": "candidate1-85-office-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-1-walk-side.webp",
+          "caption": "Office B — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate1-85-office-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-2-idle-front.webp",
+          "caption": "Office A — tote; standing; front view"
+        },
+        {
+          "id": "candidate1-85-office-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-2-idle-side.webp",
+          "caption": "Office A — tote; standing; hand-side view"
+        },
+        {
+          "id": "candidate1-85-office-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-2-sit-front.webp",
+          "caption": "Office A — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate1-85-office-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-2-sit-side.webp",
+          "caption": "Office A — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate1-85-office-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-2-walk-front.webp",
+          "caption": "Office A — tote; walking pose; front view"
+        },
+        {
+          "id": "candidate1-85-office-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate1-85/office-2-walk-side.webp",
+          "caption": "Office A — tote; walking pose; hand-side view"
+        }
+      ]
+    },
+    {
+      "title": "Attempt 2 — first fitted-prop closeups",
+      "caption": "Same final attachment and size fit, captured before the 180-frame gait assertions were added. Retained as an earlier capture pass.",
+      "images": [
+        {
+          "id": "candidate2-85-casual-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-0-idle-front.webp",
+          "caption": "Casual — groceries; standing; front view"
+        },
+        {
+          "id": "candidate2-85-casual-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-0-idle-side.webp",
+          "caption": "Casual — groceries; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-85-casual-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-0-sit-front.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-85-casual-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-0-sit-side.webp",
+          "caption": "Casual — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-85-casual-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-0-walk-front.webp",
+          "caption": "Casual — groceries; walking pose; front view"
+        },
+        {
+          "id": "candidate2-85-casual-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-0-walk-side.webp",
+          "caption": "Casual — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate2-85-casual-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-2-idle-front.webp",
+          "caption": "Casual — tote; standing; front view"
+        },
+        {
+          "id": "candidate2-85-casual-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-2-idle-side.webp",
+          "caption": "Casual — tote; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-85-casual-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-2-sit-front.webp",
+          "caption": "Casual — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-85-casual-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-2-sit-side.webp",
+          "caption": "Casual — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-85-casual-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-2-walk-front.webp",
+          "caption": "Casual — tote; walking pose; front view"
+        },
+        {
+          "id": "candidate2-85-casual-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/casual-2-walk-side.webp",
+          "caption": "Casual — tote; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate2-85-elder-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/elder-1-idle-front.webp",
+          "caption": "Elder — groceries; standing; front view"
+        },
+        {
+          "id": "candidate2-85-elder-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/elder-1-idle-side.webp",
+          "caption": "Elder — groceries; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-85-elder-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/elder-1-sit-front.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-85-elder-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/elder-1-sit-side.webp",
+          "caption": "Elder — groceries; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-85-elder-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/elder-1-walk-front.webp",
+          "caption": "Elder — groceries; walking pose; front view"
+        },
+        {
+          "id": "candidate2-85-elder-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/elder-1-walk-side.webp",
+          "caption": "Elder — groceries; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate2-85-office-0-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-0-idle-front.webp",
+          "caption": "Office A — briefcase; standing; front view"
+        },
+        {
+          "id": "candidate2-85-office-0-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-0-idle-side.webp",
+          "caption": "Office A — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-85-office-0-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-0-sit-front.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-85-office-0-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-0-sit-side.webp",
+          "caption": "Office A — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-85-office-0-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-0-walk-front.webp",
+          "caption": "Office A — briefcase; walking pose; front view"
+        },
+        {
+          "id": "candidate2-85-office-0-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-0-walk-side.webp",
+          "caption": "Office A — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate2-85-office-1-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-1-idle-front.webp",
+          "caption": "Office B — briefcase; standing; front view"
+        },
+        {
+          "id": "candidate2-85-office-1-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-1-idle-side.webp",
+          "caption": "Office B — briefcase; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-85-office-1-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-1-sit-front.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-85-office-1-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-1-sit-side.webp",
+          "caption": "Office B — briefcase; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-85-office-1-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-1-walk-front.webp",
+          "caption": "Office B — briefcase; walking pose; front view"
+        },
+        {
+          "id": "candidate2-85-office-1-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-1-walk-side.webp",
+          "caption": "Office B — briefcase; walking pose; hand-side view"
+        },
+        {
+          "id": "candidate2-85-office-2-idle-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-2-idle-front.webp",
+          "caption": "Office A — tote; standing; front view"
+        },
+        {
+          "id": "candidate2-85-office-2-idle-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-2-idle-side.webp",
+          "caption": "Office A — tote; standing; hand-side view"
+        },
+        {
+          "id": "candidate2-85-office-2-sit-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-2-sit-front.webp",
+          "caption": "Office A — tote; seated on the plaza bench; front view"
+        },
+        {
+          "id": "candidate2-85-office-2-sit-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-2-sit-side.webp",
+          "caption": "Office A — tote; seated on the plaza bench; hand-side view"
+        },
+        {
+          "id": "candidate2-85-office-2-walk-front",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-2-walk-front.webp",
+          "caption": "Office A — tote; walking pose; front view"
+        },
+        {
+          "id": "candidate2-85-office-2-walk-side",
+          "image": "bible/shots/showcase/crowd-bags-20261007/candidate2-85/office-2-walk-side.webp",
+          "caption": "Office A — tote; walking pose; hand-side view"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play at 85%",
+      "href": "game3d/?day=2&place=plaza&charscale=85"
+    },
+    {
+      "label": "Change and validation notes",
+      "href": "notes/crowd-bags-20261007.md"
+    }
+  ]
+}
