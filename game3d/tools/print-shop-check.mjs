@@ -4,8 +4,9 @@ import {scopedRoute} from '../../tools/bible/check-scope.mjs';
 import {withBrowserJob} from '../../tools/lib/browser-job.mjs';
 import {waitForGame} from '../test/support/wait-ready.mjs';
 const width=+(process.argv[2]||1366),height=width<600?844:860,phone=width<600;
+const day=+(process.env.DAY||1);
 const base=process.env.BASE||'.claude/worktrees/codex-north-campus/game3d';
-const out=new URL('../shots/north-campus/hands6/',import.meta.url).pathname;fs.mkdirSync(out,{recursive:true});
+const out=new URL(`../shots/north-campus/${process.env.OUT||'hands6'}/`,import.meta.url).pathname;fs.mkdirSync(out,{recursive:true});
 await withBrowserJob('print-shop-'+width,async browser=>{
  const context=await browser.newContext({viewport:{width,height},isMobile:phone,hasTouch:phone}),page=await context.newPage(),errors=[],checks=[];
  let closing=false;
@@ -33,7 +34,7 @@ await withBrowserJob('print-shop-'+width,async browser=>{
  }
 
  try{
-  await waitForGame(page,60000,()=>page.goto(`http://127.0.0.1:8771/${base}/index.html?place=print_shop&mc=${phone?'carina':'eric'}&q=0`),'play');
+  await waitForGame(page,60000,()=>page.goto(`http://127.0.0.1:8771/${base}/index.html?day=${day}&place=print_shop&mc=${phone?'carina':'eric'}&q=0`),'play');
   await page.waitForTimeout(800);await shot('room');
   await use('directory_printer');await choosePrint();
   await page.waitForFunction(()=>globalThis.__game.place.printService.state.phase==='pickup');
@@ -54,7 +55,7 @@ await withBrowserJob('print-shop-'+width,async browser=>{
   if(phone)await tap(page.locator('#qsaveBtn'));else await page.keyboard.press('F5');await page.waitForFunction(()=>/Quick saved/.test(globalThis.document.querySelector('#toast')?.textContent||''));
   await waitForGame(page,60000,()=>page.goto(`http://127.0.0.1:8771/${base}/index.html?q=0`),'title');await tap(page.locator('#title .mcont'));await waitForGame(page,60000,()=>tap(page.locator('.slot[data-id="quick"]')),'play');
   assert.ok(await page.evaluate(()=>globalThis.__game.player.seated&&globalThis.__game.sim.inv.includes('island_directory')));checks.push('Continue preserves chair and directory');await shot('continued');
-  await page.evaluate(async()=>{const {setPeriod}=await import('./js/sim.js');setPeriod('evening',globalThis.__game);});await page.waitForTimeout(500);await shot('evening');
+  await page.evaluate(()=>globalThis.__game.hooks.period({to:'evening'}));await page.waitForTimeout(500);await shot('evening');
   await use('print_exit');await page.waitForFunction(()=>globalThis.__game.place.name==='campus'&&!globalThis.__game.busy);await shot('exit');checks.push('native exit returns to actual east door');
   assert.deepEqual(errors,[]);fs.writeFileSync(out+width+'-report.json',JSON.stringify({checks,errors},null,2));console.log('PASS',checks);
  }catch(e){await shot('failure');console.log(errors);throw e;}finally{closing=true;await context.close();}

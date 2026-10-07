@@ -28,6 +28,7 @@ import { CUT, planes, wallTop, cutaway, setCut, setCap } from './lift-cut.js';
 import { setDark, setAway, forgetLight } from './lift-light.js';
 import { indicatorMat, copMat } from './lift-displays.js';
 import { PLAYER_ID } from '../mc.js';
+import { turnInLift } from './lift-turn.js';
 
 // ---------- where the lift is in each place ----------
 // x: the door's centre; zBack: the back face of the wall the doors are in (the car starts here); zFront: just in
@@ -558,13 +559,7 @@ function elevTo(game, L, deg, secs) {
 
 const slotW = (L, key) => [L.site.x + SLOTS[key][0], L.site.zBack + SLOTS[key][1]];
 function turnTo(game, root, ry, secs = 0.35) {
-  const a = root.rotation.y;
-  let d = ry - a;
-  d = Math.atan2(Math.sin(d), Math.cos(d));
-  return anim(game, secs, (k) => {
-    root.rotation.y = a + d * k;
-    if (game.walker && root === game.player.root) game.walker.facing = root.rotation.y;
-  });
+  return turnInLift(game, root, ry, anim, secs);
 }
 function placeRider(L, rd, key) {
   const r = rd.r,

@@ -50,8 +50,8 @@ test('each pedestrian seam has the identical island endpoint and arrivals land b
   assert.equal(P.inRect(...other.in,other.zone),false);
  }
 });
-test('opening days retain native campus routes and new story files exist at real loader paths',async()=>{
- for(let day=1;day<=5;day++)for(const [from,to,target]of [['forecourt','campus','campus'],['campus','office_quarter','office_shed'],['office_quarter','campus','campus_quarter'],['harbour','campus','campus'],['campus','print_shop','print_shop'],['print_shop','campus','print_exit']]){
+test('opening and continuing weeks retain native campus routes at real loader paths',async()=>{
+ for(const day of [1,2,3,4,5,6,17,32])for(const [from,to,target]of [['forecourt','campus','campus'],['campus','office_quarter','office_shed'],['office_quarter','campus','campus_quarter'],['harbour','campus','campus'],['campus','print_shop','print_shop'],['print_shop','campus','print_exit']]){
   const story=(await import(new URL('../../js/'+storyPath(from,day),import.meta.url))).default;
   const node=story.on['talk:'+target];assert.ok(node,`${day} ${from} ${target}`);
   assert.equal(story.nodes[node][0].to,to);assert.ok(canTravel(from,to,day));
