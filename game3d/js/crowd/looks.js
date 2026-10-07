@@ -2,7 +2,7 @@
 // makeBody owns only appearance and bags. Population, route planning and gait remain in the crowd controllers.
 import * as THREE from 'three';
 import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
-import { chibi, SKINS } from '../train/people.js';
+import { chibi, SKINS, S as PROP_SCALE } from '../train/people.js';
 import { hull } from '../train/hull.js';
 import { PEOPLE, HK } from '../cast.js';
 import { K } from '../scenes/office.js';
@@ -29,7 +29,7 @@ const boxPts = (w, h, d, y = 0) => {
   return out;
 };
 
-// bags hang from the hand (arm group, hand at y -0.255)
+// Bag geometry stays in the code-built prop units. The handle supplies its grip point.
 function briefcase() {
   const g = new THREE.Group();
   g.add(part(boxPts(0.24, 0.17, 0.07, -0.27), '#2c2f38'));
@@ -151,6 +151,83 @@ function elder(i) {
   });
 }
 
+// Palm center from the vertices weighted to the hand, rather than the wrist joint.
+// Measured only when creating a bag carrier; the resulting mount follows the bone.
+function palmAt(r) {
+  const hand = r.model.getObjectByName('LeftHand'),
+    box = new THREE.Box3(),
+    point = new THREE.Vector3();
+  r.root.updateMatrixWorld(true);
+  r.model.traverse((mesh) => {
+    if (!mesh.isSkinnedMesh) return;
+    const { position, skinIndex, skinWeight } = mesh.geometry.attributes;
+    if (!skinIndex || !skinWeight) return;
+    mesh.skeleton.update();
+    for (let i = 0; i < position.count; i++) {
+      let weight = 0;
+      for (let k = 0; k < 4; k++)
+        if (mesh.skeleton.bones[skinIndex.getComponent(i, k)] === hand) weight += skinWeight.getComponent(i, k);
+      if (weight < 0.7) continue;
+      mesh.getVertexPosition(i, point).applyMatrix4(mesh.matrixWorld);
+      box.expandByPoint(hand.worldToLocal(point));
+    }
+  });
+  return box.isEmpty() ? boneAt(r, 'LeftHand') : r.root.worldToLocal(hand.localToWorld(box.getCenter(point)));
+}
+function carryBag(r, bag, gen) {
+  bag.name = 'crowd-bag';
+  const handle = bag.children[1];
+  handle.geometry.computeBoundingBox();
+  const grip = handle.geometry.boundingBox.getCenter(new THREE.Vector3());
+  if (gen) {
+    const palm = palmAt(r);
+    // These props were drawn for longer procedural arms. Fit their furthest corner
+    // inside 60% of the standing hand's ground clearance, leaving room for its gait.
+    const bounds = new THREE.Box3().setFromObject(bag);
+    const reach = Math.max(bounds.min.distanceTo(grip), bounds.max.distanceTo(grip));
+    const fit = Math.min(1, (palm.y * 0.6) / (reach * PROP_SCALE));
+    bag.scale.setScalar(fit);
+    bag.position.copy(grip).multiplyScalar(-fit);
+    const mount = hold(r, bag, palm, 'LeftHand');
+    // This base rests its hands beside its hips in the native sit clip. Put its
+    // bag on the seat beside it instead of carrying it through the seat boards.
+    if (r.base === 'shirt') restBagOnSeat(r, mount, palm, bounds, grip, fit);
+  } else {
+    bag.position.sub(grip);
+    bag.position.add(r.arms[1].userData.hand.position);
+    r.arms[1].add(bag); // Keep the existing bag-arm gait damping.
+  }
+}
+
+function restBagOnSeat(r, mount, palm, bounds, grip, fit) {
+  const hand = mount.parent,
+    position = mount.position.clone(),
+    rotation = mount.quaternion.clone(),
+    scale = mount.scale.clone(),
+    sitAt = r.sitAt,
+    setState = r.setState;
+  r.sitAt = (x, seatTop, z, yaw) => {
+    sitAt(x, seatTop, z, yaw);
+    r.root.add(mount);
+    mount.quaternion.identity();
+    mount.scale.setScalar(PROP_SCALE);
+    mount.position.set(
+      palm.x + (bounds.max.x - bounds.min.x) * fit * PROP_SCALE * 0.7 + 0.025 / r.root.scale.x,
+      (seatTop - r.root.position.y) / r.root.scale.y - (bounds.min.y - grip.y) * fit * PROP_SCALE,
+      0,
+    );
+  };
+  r.setState = (name) => {
+    if (name !== 'sit' && mount.parent !== hand) {
+      hand.add(mount);
+      mount.position.copy(position);
+      mount.quaternion.copy(rotation);
+      mount.scale.copy(scale);
+    }
+    return setState(name);
+  };
+}
+
 // kind: office | casual | sport | elder. i picks the variant (clothes, hair, bag)
 export function makeBody(kind, i) {
   const gen = (kind === 'office' && approvedCrowd(i)) || (GEN_ON && crowdBody(kind, i));
@@ -168,9 +245,7 @@ export function makeBody(kind, i) {
   if ((kind === 'casual' && pick === 0) || (kind === 'elder' && pick === 1)) bag = groceries();
   if (kind === 'casual' && pick === 2) bag = tote(['#9db7c9', '#c9a98b', '#a9b88c'][i % 3]);
   const pack = kind === 'casual' && pick === 3 && backpack(['#e39a3b', '#4c6a8a', '#7a8f6a'][i % 3]);
-  // the hand-held bags hang from the arm group's top, a hand's length above the hand
-  if (bag && gen) hold(r, bag, boneAt(r, 'LeftHand').add(new THREE.Vector3(0, 0.255 * 1.15, 0)), 'LeftHand');
-  else if (bag) r.arms[1].add(bag);
+  if (bag) carryBag(r, bag, gen);
   if (pack && gen) hold(r, pack, boneAt(r, 'Spine').add(new THREE.Vector3(0, -0.03, 0.02)), 'Spine02');
   else if (pack) r.torso.add(pack);
   r.kind = kind;
