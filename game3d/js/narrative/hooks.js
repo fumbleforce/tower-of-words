@@ -45,5 +45,8 @@ export const GLOBAL_HOOKS = [
   'day3Setup',
   'day4Setup',
   'day5Setup',
+  'ongoingSetup',
+  'ongoingGoal',
+  'artVisit',
   'flavorFind',
 ];

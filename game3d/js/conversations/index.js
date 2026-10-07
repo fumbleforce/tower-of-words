@@ -5,6 +5,10 @@ import { expandMc } from '../mc.js';
 
 export function topicFor(who, memory = conversationMemory, words = known, met = false) {
   if (!met) return null;
+  if (who === 'kuroda')
+    return memory.ready('hamada_wednesday_booking', words)
+      ? { label: 'Ask about his karaoke booking', trigger: 'ask:kuroda-booking' }
+      : { label: 'Chat about his evenings', trigger: 'ask:kuroda' };
   if (who === 'kenji') return { label: 'Chat about the arcade', trigger: 'ask:kenji' };
   if (who !== 'mori') return null;
   return memory.ready('mori_return_norway', words)

@@ -44,3 +44,14 @@
 .tl-story-text { white-space:pre-line; }
 @media(max-width:1100px) { .tl-layout { grid-template-columns:1fr; } .tl-detail { border-left:0; border-top:1px solid var(--line); max-height:none; } .tl-chart { max-height:60vh; } .tl-empty { display:none; } }
 @media(max-width:600px) { .tl-toolbar { gap:10px; } .tl-tabs { width:100%; } .tl-tabs button { flex:1; padding:8px; font-size:12px; } .tl-toolbar label { flex:1; } .tl-toolbar input { min-width:0; width:100%; } .tl-search { width:100%; } .tl-chart { scroll-padding-left:112px; } .tl-grid { --tl-name:112px; } .tl-character { padding:14px 8px; } .tl-character>span { font-size:10px; } .tl-character b { font-size:13px; } .tl-key { gap:8px 14px; } .tl-count { width:100%; } .tl-detail { padding:18px; } }
+.tl-cell.week { padding:10px 8px; gap:6px; }
+.tl-cell.week .tl-beat { min-height:66px; padding:8px; border-style:solid; }
+.tl-cell.week .tl-status { margin-bottom:3px; text-transform:capitalize; }
+.tl-cell.week .tl-beat.pending { border-style:dashed; }
+.tl-meeting,.tl-condition { font-size:10px; margin-top:5px; color:var(--ink-2); }
+.tl-condition { font-weight:600; }
+.tl-dependency { border-left:3px solid var(--accent); padding:12px; background:var(--panel-2); margin:16px 0; font-size:13px; }
+.tl-dependency p { margin:8px 0; }
+.tl-dependency a { font-size:12px; }
+.tl-tabs button { min-height:44px; }
+@media(max-width:600px) { .tl-cell.week .tl-beat { min-height:72px; } }

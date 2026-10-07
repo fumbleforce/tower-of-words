@@ -23,7 +23,7 @@ export function selectorRepair(game, P) {
   }
   restore();
   function update(dt) {
-    if (sim.day !== 5 || stopped) return;
+    if (sim.day < 5 || stopped) return;
     phase += dt;
     row.position.z = at.z - 0.18 + (Math.floor(phase * 3) % 3) * 0.065;
   }

@@ -14,6 +14,7 @@ import { OPEN_PLACES as DAY2_OPEN } from '../../story/day2/index.js';
 import { OPEN_PLACES as DAY3_OPEN } from '../../story/day3/index.js';
 import { OPEN_PLACES as DAY5_OPEN } from '../../story/day5/index.js';
 import { OPEN_PLACES as DAY4_OPEN } from '../../story/day4/index.js';
+import { ROUTES } from '../../story/ongoing/routes.js';
 import { findRoute } from './route.js';
 import { isLift } from './ways.js';
 import { nameOf } from './pins.js';
@@ -21,7 +22,7 @@ import { nameOf } from './pins.js';
 const DAY1_OPEN = [...new Set([...Object.entries(NEXT).flat(), ...Object.entries(TRIPS).flat(2)])].filter(
   (id) => id !== 'bakery',
 );
-const OPEN = { 1: DAY1_OPEN, 2: DAY2_OPEN, 3: DAY3_OPEN, 4: DAY4_OPEN, 5: DAY5_OPEN };
+const OPEN = { 1: DAY1_OPEN, 2: DAY2_OPEN, 3: DAY3_OPEN, 4: DAY4_OPEN, 5: DAY5_OPEN, 6: Object.keys(ROUTES) };
 export const openToday = (day) => OPEN[day] || OPEN[Math.max(...Object.keys(OPEN).map(Number))];
 export function openEver(day) {
   const s = new Set();

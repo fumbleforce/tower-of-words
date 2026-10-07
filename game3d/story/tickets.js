@@ -39,6 +39,6 @@ export default {
   },
   'T-0008': {
     title: 'Karaoke selector skips past songs', from: 'kenji', pay: 2000,
-    text: 'The selector keeps going past the song I want. I am checking the upstairs booth on Monday at lunch.\n\nPlease get it to stay on one row. Another Monday is fine if you are busy.',
+    text: 'The selector keeps going past the song I want. I am checking the upstairs booth on weekdays at lunch.\n\nPlease get it to stay on one row. Another weekday is fine if you are busy.',
   },
 };

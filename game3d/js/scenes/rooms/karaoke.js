@@ -253,24 +253,29 @@ export function buildKaraokeBooth() {
     surf: 'fabric',
   });
   bench(R.x0 + 0.5, 0.7, -0.5, R.z1);
-  // the low table: the selector in its cradle, the microphones in their basket, a tambourine, the menu, two glasses
+  // the table: the selector in its cradle, the microphones in their basket, a tambourine, the menu, two glasses
   const tz = -1.9,
     tx = -0.5;
-  kit.box('#2a2630', 1.4, 0.26, 0.8, tx, 0, tz, { surf: 'laminate' });
-  kit.box('#3a3446', 1.44, 0.03, 0.84, tx, 0.26, tz, { surf: 'stone' });
+  kit.box('#2a2630', 1.4, 0.52, 0.8, tx, 0, tz, { surf: 'laminate' });
+  kit.box('#3a3446', 1.44, 0.03, 0.84, tx, 0.52, tz, { surf: 'stone' });
   nav.block(tx - 0.75, tx + 0.75, tz - 0.45, tz + 0.45);
-  const sel = songTerminal(kit, tx + 0.3, 0.29, tz + 0.12, 0);
-  kit.box('#2f3640', 0.28, 0.06, 0.16, tx - 0.35, 0.29, tz - 0.15, { surf: 'plastic' });
-  mic(kit, tx - 0.4, 0.37, tz - 0.18, 0.2);
-  mic(kit, tx - 0.32, 0.37, tz - 0.11, -0.15);
+  const sel = songTerminal(kit, tx + 0.3, 0.55, tz + 0.12, 0);
+  sel[1] = 0.69; // physical selector face; also the existing repair prop anchor
+  kit.box('#2f3640', 0.28, 0.06, 0.16, tx - 0.55, 0.55, tz - 0.1, { surf: 'plastic' });
+  const micKit = new Kit();
+  mic(micKit, tx - 0.67, 0.63, tz - 0.1, 0.2);
+  const restingMicrophone = new THREE.Group();
+  micKit.flush(restingMicrophone);
+  root.add(restingMicrophone);
+  mic(kit, tx - 0.58, 0.63, tz - 0.11, -0.15);
   kit.add(
     '#d9b24a',
-    new THREE.TorusGeometry(0.08, 0.02, 6, 14).rotateX(Math.PI / 2).translate(tx + 0.05, 0.31, tz - 0.22),
+    new THREE.TorusGeometry(0.08, 0.02, 6, 14).rotateX(Math.PI / 2).translate(tx + 0.05, 0.57, tz - 0.22),
     { surf: 'plastic' },
   );
-  kit.box('#f2d6e2', 0.22, 0.01, 0.3, tx - 0.05, 0.29, tz + 0.18, { ry: 0.25, surf: 'card' });
+  kit.box('#f2d6e2', 0.22, 0.01, 0.3, tx - 0.05, 0.55, tz + 0.18, { ry: 0.25, surf: 'card' });
   for (const gx of [tx + 0.58, tx - 0.62])
-    kit.cyl('#cfe3f0', 0.035, 0.03, 0.1, gx, 0.29, tz + 0.2, { seg: 10, surf: 'ceramic' });
+    kit.cyl('#cfe3f0', 0.035, 0.03, 0.1, gx, 0.55, tz + 0.2, { seg: 10, surf: 'ceramic' });
   // the mirror ball
   kit.cyl(C.steel, 0.005, 0.005, 0.3, -0.5, 1.1, -1.9, { seg: 4 });
   kit.add('#c9ccd1', new THREE.IcosahedronGeometry(0.1, 1).translate(-0.5, 1.05, -1.9), { surf: 'metal' });
@@ -303,6 +308,7 @@ export function buildKaraokeBooth() {
       in: [R.x1 - 0.95, (BD[0] + BD[1]) / 2 + 0.55],
       out: [R.x1 - 0.35, (BD[0] + BD[1]) / 2],
     },
+    restingMicrophone,
     selector: sel,
     screen,
     table: [tx, tz],
@@ -312,8 +318,9 @@ export function buildKaraokeBooth() {
       booth_screen: [0, R.z0 + 0.95],
     },
     seats: [
-      { x: R.x0 + 0.26, z: -1.6, top: 0.2, ry: Math.PI / 2 },
-      { x: R.x1 - 0.26, z: -2.6, top: 0.2, ry: -Math.PI / 2 },
+      { x: R.x0 + 0.26, z: -1.6, top: 0.2, ry: Math.PI / 2, out: [-1.58, -1.1] },
+      { x: R.x1 - 0.26, z: -2.6, top: 0.2, ry: -Math.PI / 2, out: [1.52, -2.5] },
+      { x: -0.55, z: -0.25, top: 0.2, ry: Math.PI, out: [-0.55, -0.95] },
     ],
     camera: { elev: 56, fov: 24 },
   };

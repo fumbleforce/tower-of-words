@@ -42,7 +42,7 @@ export function attachMonday(game, P, name) {
     const cover = prop(P, [0.07, 0.75, 0.72], '#476675', [x + 0.13, 1.25, z]);
     pieces.push({
       restore() {
-        cover.visible = sim.day === 5 && !!flags.d4_display_done;
+        cover.visible = sim.day >= 5 && !!flags.d4_display_done;
       },
     });
   }
@@ -77,6 +77,13 @@ export function attachMonday(game, P, name) {
   }
   const props = P.space.children.filter((child) => !before.has(child)).map((child) => [child, child.visible]);
   if (sim.day !== 5) for (const [child] of props) child.visible = false;
+  // Continuing days restore ongoing repairs and ordinary B2 props without
+  // showing Monday's dated art-club notice or replaying its gathering.
+  P.monday.restoreRoutine = () => {
+    if (!['forecourt', 'karaoke_booth', 'office', 'sports'].includes(name)) return;
+    for (const [child, visible] of props) child.visible = visible;
+    for (const piece of pieces) piece.restore?.();
+  };
   const snapshot = P.snapshotState,
     load = P.restoreState;
   P.snapshotState = function (...args) {
@@ -106,7 +113,7 @@ export function attachMonday(game, P, name) {
   const update = P.update;
   P.update = function (...args) {
     update?.apply(this, args);
-    if (sim.day === 5) {
+    if (sim.day >= 5) {
       shot.update();
       cast.update(args[0]);
       pieces.forEach((piece) => piece.update?.(args[0]));

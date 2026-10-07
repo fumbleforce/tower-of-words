@@ -19,6 +19,7 @@ import { expandMc } from '../mc.js';
 import { createClubs, memberFlag, WEEKDAY_NAMES } from './model.js';
 // imported up front: a place's story gets the session nodes as it loads
 import CLUBS from '../../story/clubs.js';
+import { clubStageReady } from './staging.js';
 
 expandMc(CLUBS);
 export const clubs = createClubs({ flags, cond, data: () => CLUBS, dateOf, periods: PERIODS, personFor });
@@ -50,7 +51,7 @@ export function withClubs(story) {
 
 export function clubArrival(game, place) {
   const due = clubs.due(place, sim.day, sim.period);
-  if (!due?.node || !game.story?.nodes?.[due.node]) return false;
+  if (!due?.node || !game.story?.nodes?.[due.node] || !clubStageReady(sim.day, due.id, game.place)) return false;
   clubs.attend(due.id, sim.day);
   save(game);
   if (game.busy) game.runner.enqueue(due.node);

@@ -846,6 +846,10 @@
           "label": "Screen",
           "kind": "thing"
         },
+        "kuroda": {
+          "label": "Man from the train",
+          "kind": "person"
+        },
         "kenji": {
           "label": "Kenji",
           "kind": "person"
@@ -859,14 +863,17 @@
       "nooks": [],
       "seats": [
         "booth_seat_w",
-        "booth_seat_e"
+        "booth_seat_e",
+        "booth_seat_s"
       ],
       "zones": [],
       "people": [
+        "kuroda",
         "kenji"
       ],
       "hooks": [
-        "selectorRepair"
+        "selectorRepair",
+        "karaokeClub"
       ]
     },
     "east_lane": {
@@ -897,7 +904,7 @@
           "verb": "Go"
         },
         "cafe": {
-          "label": "Café",
+          "label": "Caf\u00e9",
           "kind": "thing",
           "verb": "Go in"
         },
@@ -1081,7 +1088,8 @@
       ],
       "hooks": [
         "day5Commons",
-        "roomSofa"
+        "roomSofa",
+        "artClub"
       ]
     },
     "sports": {
@@ -1306,6 +1314,7 @@
       ],
       "hooks": [
         "bookingRepair",
+        "winterClub",
         "fanRepair"
       ]
     },

@@ -25,7 +25,7 @@ export function day3Place(game, name, { root, K = 1, ids = [] } = {}) {
       const plan = (sim.day === 5 ? MONDAY : isSunday() ? SUNDAY : PLANS)[name] || {};
       for (const id of Object.keys(plan)) if (!cast.people[id] && P.people[id]) cast.adopt(id, P.people[id]);
       applyPlan(cast, P, plan);
-      if (sim.day === 3) placeSigns(P, name);
+      if (sim.day >= 3) placeSigns(P, name);
       for (const f of extra) await f(a);
       if (sim.day === 5 || isSunday()) applyPlan(cast, P, plan);
     },

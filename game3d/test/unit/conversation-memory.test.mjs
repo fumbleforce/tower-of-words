@@ -4,7 +4,7 @@ import { createConversationMemory } from '../../js/conversations/memory.js';
 import { REMARKS } from '../../story/conversations/remarks.js';
 
 const id = 'mori_return_norway';
-const line = { who: 'mori', text: REMARKS[0].lines[0], source: { day: 2, period: 'evening', place: 'izakaya', node: 'd2_norway' } };
+const line = { who: 'mori', text: REMARKS.find(remark => remark.id === 'mori_return_norway').lines[0], source: { day: 2, period: 'evening', place: 'izakaya', node: 'd2_norway' } };
 test('learning later unlocks a heard remark without changing its original interpretation', () => {
   const memory = createConversationMemory(REMARKS), known = new Set(['ohayo']);
   memory.hear({ ...line, known });
@@ -67,4 +67,27 @@ test('remembered remarks retain only their original contextual glosses and voice
   memory.load(saved);
   assert.deepEqual(memory.entries()[0].clear, [{ ja: '1994年', en: '1994' }]);
   assert.equal(memory.entries()[0].voiceKey, 'oh-example');
+});
+
+for (const wordFirst of [false, true]) test(`Hamada's booking survives Continue with word learned ${wordFirst ? 'before' : 'after'} hearing it`, () => {
+  const id = 'hamada_wednesday_booking', remark = REMARKS.find(item => item.id === id);
+  const known = new Set(wordFirst ? ['yoyaku'] : []), memory = createConversationMemory(REMARKS);
+  const heard = { who: 'kuroda', text: remark.lines[0], source: { day: 8, period: 'evening', place: 'shotengai', node: 'conversation_hamada_evening' }, known };
+  assert.equal(memory.ready(id, known), false);
+  memory.hear({ ...heard, who: 'kenji' });
+  assert.equal(memory.has(id), false);
+  memory.hear(heard);
+  const saved = JSON.parse(JSON.stringify(memory.toJSON()));
+  const restored = createConversationMemory(REMARKS);
+  restored.load(saved);
+  assert.equal(restored.ready(id, known), wordFirst);
+  known.add('yoyaku');
+  assert.equal(restored.ready(id, known), true);
+  restored.revisit(id, known);
+  restored.hear({ ...heard, text: remark.lines[1], source: { day: 15 }, known });
+  const entry = restored.entries().find(item => item.id === id);
+  assert.equal(entry.source.day, 8);
+  assert.equal(entry.text, heard.text);
+  assert.equal(entry.understoodAtTime, wordFirst);
+  assert.equal(entry.revisited, true);
 });

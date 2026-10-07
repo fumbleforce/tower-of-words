@@ -19,6 +19,7 @@ import { installConversations, withConversations } from '../conversations/index.
 import { installClubs, withClubs, clubArrival } from '../clubs/index.js';
 import { installDay3 } from './day3/place.js';
 import { attachMonday, installDay5 } from './day5/place.js';
+import { attachOngoing, installOngoing } from './ongoing/index.js';
 import { attachSunday, installDay4 } from './day4/index.js';
 import { noteBenches } from './day3/seats.js';
 import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
@@ -65,6 +66,7 @@ export function createPlaceLifecycle(
   installDay3(game); // Saturday's people and scenes, the story's day3Setup (places/day3/)
   installDay4(game);
   installDay5(game);
+  installOngoing(game);
   installFlavorFinds(game);
   watchPlacePlugins(game);
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
@@ -76,6 +78,7 @@ export function createPlaceLifecycle(
         const place = await PLACES[name](game, story);
         attachSunday(game, place, name);
         attachMonday(game, place, name);
+        attachOngoing(game, place, name);
         assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
         place.name = name;
         noteBenches(place); // its benches' seats, before the draw-call pass merges them (places/day3/seats.js)

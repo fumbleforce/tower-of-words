@@ -6,6 +6,7 @@ import { K } from '../scenes/office.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { roomView, roomSave } from './room-view.js';
+import { createKaraokeStage } from './ongoing/karaoke-stage.js';
 
 // The karaoke box's booth upstairs (scenes/rooms/karaoke.js), up the stairs from the front desk (places/karaoke.js):
 // the screen, the benches round the low table, the song selector and the microphones. It loads with
@@ -16,7 +17,7 @@ export function karaokeBoothPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const d = w.door,
     save = roomSave(game, w.nav, d.in, cam);
-  const d3 = day3Place(game, 'karaoke_booth', { root: w.root, K, ids: ['kenji'] });
+  const d3 = day3Place(game, 'karaoke_booth', { root: w.root, K, ids: ['kenji', 'kuroda'] });
   const things = {
     booth_door: {
       ...PLACE_DETAILS.karaoke_booth.things.booth_door,
@@ -37,6 +38,7 @@ export function karaokeBoothPlace(game) {
       face: () => [w.screen[0], w.screen[2]],
       spot: () => w.spots.booth_screen,
     },
+    kuroda: { ...PLACE_DETAILS.karaoke_booth.things.kuroda, ...d3.thing('kuroda') },
     kenji: { ...PLACE_DETAILS.karaoke_booth.things.kenji, ...d3.thing('kenji') },
   };
   const P = {
@@ -56,10 +58,10 @@ export function karaokeBoothPlace(game) {
       booth_table: w.spots.booth_table,
       booth_screen: w.spots.booth_screen,
     },
-    seats: { booth_seat_w: w.seats[0], booth_seat_e: w.seats[1] },
-    people: { kenji: d3.people.kenji },
+    seats: { booth_seat_w: w.seats[0], booth_seat_e: w.seats[1], booth_seat_s: w.seats[2] },
+    people: { kuroda: d3.people.kuroda, kenji: d3.people.kenji },
     zones: {},
-    hooks: { selectorRepair: (a) => P.monday.hooks.selectorRepair(a) },
+    hooks: { selectorRepair: (a) => P.monday.hooks.selectorRepair(a), karaokeClub: (a) => P.karaokeClub.act(a) },
     fit(aspect) {
       roomView(cam, w.bounds, aspect);
     },
@@ -69,12 +71,32 @@ export function karaokeBoothPlace(game) {
     },
     update(dt) {
       d3.update(dt);
+      P.karaokeClub.update();
     },
-    snapshotState: save.snapshot,
-    restoreState: save.restore,
+    snapshotState: () => ({ ...save.snapshot(), karaokeClub: P.karaokeClub.snapshot() }),
+    restoreState(saved) {
+      save.restore(saved);
+      const old = saved.world?.player?.eric;
+      const seat =
+        old?.seated &&
+        Object.values(P.seats).find((s) => Math.hypot(s.x - old.position[0], s.z - old.position[2]) < 0.12);
+      if (seat) {
+        game.player.sitAt(seat.x, seat.top, seat.z, seat.ry);
+        game.player.seated = true;
+        game.player.seatOut = [...seat.out];
+        game.walker.sync();
+      } else if (old?.seated) {
+        game.player.seated = false;
+        game.player.setState?.('idle');
+        game.player.seatOut = null;
+      }
+      P.karaokeClub.restore(saved.world?.karaokeClub);
+    },
+    leave: () => P.karaokeClub.leave(),
     // in from the corridor at the top of the stairs through the booth's door, walking west; back out the same way
     tripIn: (g) => walkIn(g, cam, d.edge, d.in, -Math.PI / 2),
     tripOutTo: { karaoke: (g) => walkOut(g, cam, d.out, d.edge) },
   };
+  P.karaokeClub = createKaraokeStage(game, P, w);
   return P;
 }

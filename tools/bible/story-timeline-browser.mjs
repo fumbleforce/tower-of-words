@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { withBrowserJob } from '../lib/browser-job.mjs';
 import { blockedSource } from './check-scope.mjs';
-const base=process.env.BASE||'http://127.0.0.1:8776/';
-const out='bible/shots/story-timeline';fs.mkdirSync(out,{recursive:true});
+const base=process.env.BASE||'http://127.0.0.1:8771/';
+const out=process.env.OUT||'bible/shots/story-timeline-recurring';fs.mkdirSync(out,{recursive:true});
 await withBrowserJob('bible-story-timeline',async browser=>{
- for(const width of [2560,390]){
+ for(const width of [2560,1366,390]){
   const page=await browser.newPage({viewport:{width,height:width===390?844:1440}});
   const errors=[],blocked=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('**/*',r=>{if(blockedSource(r.request().url(),true)){blocked.push(r.request().url());return r.abort();}return r.continue();});
@@ -18,6 +18,7 @@ await withBrowserJob('bible-story-timeline',async browser=>{
   assert.match(await page.locator('.tl-detail').innerText(),/Script written/i);
   assert.equal(await page.evaluate(()=>globalThis.document.activeElement.dataset.beat),'mio:3');
   assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth<=globalThis.innerWidth),true);
+  await page.evaluate(()=>globalThis.scrollTo(0,0));
   await page.screenshot({path:`${out}/routes-${width}.png`,fullPage:true});
   await page.locator('[data-character]').selectOption('rei');
   assert.equal(await page.locator('.tl-character').count(),1);
@@ -32,13 +33,49 @@ await withBrowserJob('bible-story-timeline',async browser=>{
   await page.locator('[data-search]').fill('missing-character-zz');
   assert.match(await page.locator('.tl-no-results').innerText(),/No matching/);
   await page.locator('[data-search]').fill('');
+  await page.evaluate(()=>globalThis.scrollTo(0,0));
   await page.screenshot({path:`${out}/days-${width}.png`,fullPage:true});
   await page.goto(base+'bible/#story-timeline/routes/rei/rei%3A5');
   await page.locator('[data-beat="rei:5"].selected').waitFor();
   const visible = await page.locator('[data-beat="rei:5"]').evaluate(el => { const b=el.getBoundingClientRect(), f=el.closest('.tl-chart').getBoundingClientRect(), n=el.closest('.tl-grid').querySelector('.tl-character').getBoundingClientRect(); return b.left>=f.left+n.width && b.right<=f.right+1 && b.top>=f.top && b.bottom<=f.bottom+1; });
   assert.ok(visible,'deep-linked selected stage is visible within the timeline');
+  await page.locator('[data-mode="week"]').click();
+  assert.equal(await page.locator('.tl-column').count(),7);
+  await page.locator('[data-character]').selectOption('all');
+  assert.equal(await page.locator('.tl-character').count(),10);
+  assert.match(await page.locator('.tl-week-note').innerText(),/days 12–18/);
+  const pending = page.locator('[data-beat="mori:week:1:evening:dorm_commons"]');
+  await pending.click();
+  assert.match(await page.locator('.tl-detail').innerText(),/Asset review is still open/);
+  assert.equal(await page.locator('.tl-detail a[href="#review/mori-photo-1"]').count(),1);
+  assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth<=globalThis.innerWidth),true);
+  await page.evaluate(()=>globalThis.scrollTo(0,0));
+  await page.screenshot({path:`${out}/week-${width}.png`,fullPage:true});
+  await page.locator('[data-character]').selectOption('kenji');
+  const song = page.locator('[data-beat="kenji:week:2:evening:karaoke_booth"]');
+  await song.focus(); await page.keyboard.press('Enter');
+  assert.match(await page.locator('.tl-detail').innerText(),/complete visible performance/);
+  assert.equal(await page.locator('.tl-detail a[href="#review/karaoke-song-1"]').count(),1);
+  await page.evaluate(()=>globalThis.scrollTo(0,0));
+  await page.screenshot({path:`${out}/week-song-${width}.png`,fullPage:true});
+  await page.reload(); await page.locator('[data-beat="kenji:week:2:evening:karaoke_booth"].selected').waitFor();
+  assert.equal(await page.locator('.tl-character').count(),1);
+  assert.ok(await song.evaluate(el => {const b=el.getBoundingClientRect(),f=el.closest('.tl-chart').getBoundingClientRect(),n=el.closest('.tl-grid').querySelector('.tl-character').getBoundingClientRect();return b.left>=f.left+n.width&&b.right<=f.right+1;}));
+  await page.locator('[data-mode="days"]').click();
+  assert.equal(await page.locator('.tl-column').count(),5);
+  assert.equal(await page.locator('.tl-chart').evaluate(el=>el.scrollLeft),0);
+  if (width === 1366) {
+    await page.route('**/js/places/ongoing/plan.js', r => r.abort());
+    await page.goto(base+'bible/#story-timeline/week');
+    await page.reload();
+    await page.locator('.tl-week-note').waitFor();
+    assert.match(await page.locator('.tl-week-note').innerText(),/not available in this build/);
+    assert.equal(await page.locator('[data-beat]').count(),0);
+    await page.locator('[data-mode="routes"]').click();
+    assert.equal(await page.locator('[data-beat]').count(),60);
+  }
   assert.deepEqual(errors,[]);assert.deepEqual(blocked,[]);
   await page.close();
  }
 },{timeoutMs:285000});
-console.log('PASS timeline desktop/phone, filters, selection, keyboard and public-only source scope');
+console.log('PASS timeline desktop/phone, recurring schedule, dependencies, filters, selection, keyboard and public-only source scope');

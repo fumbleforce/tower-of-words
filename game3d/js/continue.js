@@ -29,6 +29,10 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
       await game.hooks.day5Setup();
       game.place.restoreState?.(saved);
     }
+    if (sim.day > 5) {
+      await game.hooks.ongoingSetup();
+      game.place.restoreState?.(saved);
+    }
     ui.refreshWords();
     ui.refreshPeople(sim.met.size);
     ui.refreshBag(sim);
@@ -69,5 +73,7 @@ export function dayStartSave(day, history = 'mio', place = null) {
   const prev = loadSave();
   const base = prev?.ended && prev.day === day - 1 ? prev : sampleDayEnd(day, history);
   const save = nextDaySave({ ...base, day: day - 1 });
-  return place && place !== save.place ? { ...save, place, pendingStart: place, world: null } : save;
+  return place && place !== save.place
+    ? { ...save, place, flags: { ...save.flags, place }, pendingStart: place, world: null }
+    : save;
 }

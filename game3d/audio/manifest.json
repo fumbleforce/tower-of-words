@@ -6220,7 +6220,7 @@
   "clear": [
    "テニス"
   ],
-  "emo": "polite"
+  "emo": "warm"
  },
  {
   "key": "ln-17i8000",
@@ -9695,6 +9695,1064 @@
   "emo": "curious"
  },
  {
+  "key": "ln-6abo5z",
+  "speaker": "eric",
+  "text": "Twice. It only stopped when I spoke.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-vj3tlo",
+  "speaker": "eric",
+  "text": "I need the guard to witness this. I’ll ask him at his desk.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1hpnao5",
+  "speaker": "eric",
+  "text": "I’ll catch reception on a weekday, when they can check a label with me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-172szo1",
+  "speaker": "eric",
+  "text": "They get together here on Friday after work.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1rpm8f9",
+  "speaker": "kenji",
+  "text": "On Friday we have drinks here after work. You want to come?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-8mg3u9",
+  "speaker": "kenji",
+  "text": "Maybe we go to game centre after. I must finish this first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-lnb207",
+  "speaker": "mio",
+  "text": "The list keeps anything you haven’t signed off. If someone’s out, try them another time. You don’t have to get it all done today.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-qvqjg4",
+  "speaker": "mio",
+  "text": "There’s a bench by the water, past the dorms. Usually nobody needs a printer fixed out there.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-jfngba",
+  "speaker": "eric",
+  "text": "I’ll leave my requests here, then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-v5a7h5",
+  "speaker": "mio",
+  "text": "Please do.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "oh-jjgjop",
+  "speaker": "aoi",
+  "text": "テニス、また来ますよね？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "テニス"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1i0yubb",
+  "speaker": "eric",
+  "text": "行きたい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-6st8kr",
+  "speaker": "aoi",
+  "text": "じゃあ、日曜日に！",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-ez5ep9",
+  "speaker": "eric",
+  "text": "Can you show me the courts on this?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1fua5wf",
+  "speaker": "aoi",
+  "text": "ここです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-u6kgis",
+  "speaker": "mio",
+  "text": "You found it. No requests, right?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1mtzor1",
+  "speaker": "mio",
+  "text": "Hey. I’m hiding out here for lunch.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-lr7yzd",
+  "speaker": "mio",
+  "text": "Hey. I thought I’d sit out here for a bit.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1axoo9i",
+  "speaker": "eric",
+  "text": "You don’t get bored sitting out here?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-wrrg8a",
+  "speaker": "mio",
+  "text": "I hear people talking all morning. This is quite nice.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-dncgjp",
+  "speaker": "mio",
+  "text": "I get enough people talking during the week. This is quite nice.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1hw438n",
+  "speaker": "eric",
+  "text": "And then I turn up.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-nyet91",
+  "speaker": "mio",
+  "text": "You can stay. I’ll tell you if you start sounding like the help desk.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-12ag9jf",
+  "speaker": "mio",
+  "text": "Sometimes. If I’m hungry I go through the shop street instead.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-d2xwwy",
+  "speaker": "eric",
+  "text": "So it depends how lunch went.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-oloezy",
+  "speaker": "mio",
+  "text": "Usually, yeah.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-8iwrrj",
+  "speaker": "rei",
+  "text": "Hello. I’m Rei. I’ve seen you around the office.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1qtbv85",
+  "speaker": "eric",
+  "text": "Eric. I’m on B2.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-8q3c74",
+  "speaker": "rei",
+  "text": "Come again on Sunday. We can change partners this time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-o53agm",
+  "speaker": "rei",
+  "text": "Sunday evening, by the gym. We have spare rackets if you want to try.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-14eyuqt",
+  "speaker": "eric",
+  "text": "Do you play during the week too?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-jm7ohi",
+  "speaker": "rei",
+  "text": "When I can find someone. Walking is easier to arrange.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-wnd0zk",
+  "speaker": "rei",
+  "text": "I go up to the courts, then back through the dorm street. It’s enough after sitting all day.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-3hk802",
+  "speaker": "eric",
+  "text": "I keep ending up back at the shops.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1fkq24e",
+  "speaker": "rei",
+  "text": "That’s a walk too. You just come home carrying more.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-1jmaqpg",
+  "speaker": "emi",
+  "text": "I’m having lunch before someone remembers where I am. Have you had yours?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-16yqtyl",
+  "speaker": "emi",
+  "text": "Saturday evenings in the gym. Kuro comes too. I need someone to make me leave the office.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-du4auf",
+  "speaker": "eric",
+  "text": "Does she come up and get you?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1vbhh0z",
+  "speaker": "emi",
+  "text": "She has done. I can’t pretend I’m out when she’s at reception.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-4ixho4",
+  "speaker": "eric",
+  "text": "I’ll check this with the Sunday players. They’ll know what’s going wrong.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-16hb9fa",
+  "speaker": "emi",
+  "text": "He’s given me the booking sheet. I should check who’s coming next week before we start.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1l0afpr",
+  "speaker": "emi",
+  "text": "We’ve got this end of the hall. Kuro’s showing me how to keep it low. Mine keeps going up towards the lights.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-ndoq16",
+  "speaker": "kuro",
+  "text": "ラケット、もう一本ありますよ。よかったら使ってください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-qliz7b",
+  "speaker": "emi",
+  "text": "This, actually. I haven’t even picked up a racket yet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "oh-ygq8rj",
+  "speaker": "emi",
+  "text": "すみません、これ、お願いしてもいいですか。私も少し打ちたいので。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-guamfy",
+  "speaker": "attendant",
+  "text": "はい、こちらで聞いておきます。どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-s1602m",
+  "speaker": "emi",
+  "text": "Thank you. Right, I’d like a turn before I find something else to do.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "oh-th2io9",
+  "speaker": "kuro",
+  "text": "ゆっくり打ちますね。まず、見ていてください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-wesb6v",
+  "speaker": "kuro",
+  "text": "大丈夫でしたか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1bkxngr",
+  "speaker": "eric",
+  "text": "大丈夫。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-jxavey",
+  "speaker": "eric",
+  "text": "もう一度？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1u3qion",
+  "speaker": "kuro",
+  "text": "はい。もう一度、ここから打ちますね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ],
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1wyfipz",
+  "speaker": "emi",
+  "text": "All right, my turn. Kuro, keep it about there again?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-fuzrmx",
+  "speaker": "emi",
+  "text": "Could we do that again? I think I know where to stand now.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-1tedlwv",
+  "speaker": "kuro",
+  "text": "Of course. Same place.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-d591qp",
+  "speaker": "eric",
+  "text": "Have you been swimming with the club for long?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-httfh0",
+  "speaker": "kuro",
+  "text": "島に来たときからです。前は一人で泳いでたんですけど、今はエミさんと。約束してると、仕事も切り上げやすくて。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-a7adra",
+  "speaker": "emi",
+  "text": "Since she moved here. She used to go alone, but now she gets me to come too. It gets us both out of the office.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-e2ojtb",
+  "speaker": "kuro",
+  "text": "忘れないように声をかけてって、言ったでしょう。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-1k1dpnf",
+  "speaker": "emi",
+  "text": "I did ask her to remind me. Just not in front of everybody.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-185x41c",
+  "speaker": "emi",
+  "text": "Eric! I was hoping you’d make it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-2u35qs",
+  "speaker": "kuro",
+  "text": "You came! I wasn’t sure if you’d remember.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-122sn4y",
+  "speaker": "eric",
+  "text": "You said after six. I thought I’d come and see.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1vpjfw2",
+  "speaker": "kuro",
+  "text": "And I still haven’t told you my name. I’m Kuro.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-1nigfzh",
+  "speaker": "kuro",
+  "text": "Good evening. No floor number tonight?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1imsd14",
+  "speaker": "eric",
+  "text": "I think I’m in the right place this time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1mqt7rp",
+  "speaker": "kuro",
+  "text": "I’m Kuro, by the way. We never got as far as names at the desk.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1a0cxzl",
+  "speaker": "kuro",
+  "text": "Good evening. I’m Kuro. I work at reception.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1mhwehw",
+  "speaker": "eric",
+  "text": "I’m Eric. Nice to meet you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1gi1cp1",
+  "speaker": "eric",
+  "text": "Are you shopping for tennis things?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-qg063j",
+  "speaker": "eric",
+  "text": "I should find out which of those cartons is milk.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-pfr78n",
+  "speaker": "rei",
+  "text": "I’m getting something before I go back. Have you found a place you like yet?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-xdldpg",
+  "speaker": "rei",
+  "text": "The curry bread, if it’s still warm. Kenji usually knows when it comes out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-tgy98v",
+  "speaker": "eric",
+  "text": "I’ll ask him.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1n9erfg",
+  "speaker": "eric",
+  "text": "Kenji checks the song selector here on weekdays at lunch. I’ll catch him then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-1bshmu1",
+  "speaker": "mori",
+  "text": "見つかりました。古いアルバムに挟まっていました。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "matte",
+    "まって"
+   ]
+  ],
+  "clear": [
+   "アルバム"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1rjcfsd",
+  "speaker": "mori",
+  "text": "これを見ていただけますか。ノルウェーの写真です。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ノルウェー"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-16m16my",
+  "speaker": "mori",
+  "text": "1994年です。リレハンメル。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "1994年",
+   "リレハンメル"
+  ],
+  "emo": "fond"
+ },
+ {
+  "key": "ln-ch5o48",
+  "speaker": "eric",
+  "text": "見たい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mitai",
+    "見たい"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-gzfnrx",
+  "speaker": "eric",
+  "text": "ここ？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-xwi15y",
+  "speaker": "eric",
+  "text": "From up there?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1hums87",
+  "speaker": "mori",
+  "text": "ええ、ここから。こう滑って……。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1uo6z4r",
+  "speaker": "eric",
+  "text": "I think I’d stay at the bottom.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "oh-e9o3jh",
+  "speaker": "mori",
+  "text": "あ、紙が足りなくなりました。もう少し、小さく描けばよかったですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-wvpcw7",
+  "speaker": "eric",
+  "text": "You can have mine. I haven’t started yet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1yv6cjg",
+  "speaker": "mori",
+  "text": "いえいえ、それは使ってください。こちらに、まだありますから。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-2ofkhd",
+  "speaker": "mori",
+  "text": "鉛筆、削っておきました。お茶も、今入れますね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-11644w4",
+  "speaker": "eric",
+  "text": "I can make the tea.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-yla6ws",
+  "speaker": "mori",
+  "text": "あ、では……お願いしてもいいですか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-1onwylw",
+  "speaker": "eric",
+  "text": "いっしょに？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-14klkit",
+  "speaker": "mori",
+  "text": "そうですね。お茶は、後でもいいですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "oh-ka18rz",
+  "speaker": "mori",
+  "text": "今度は、入りそうです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1i41pvk",
+  "speaker": "mori",
+  "text": "今日は、何を描きましょうか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1irskdr",
+  "speaker": "mori",
+  "text": "ここ、少し描き直したんです。どうでしょう。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-pktu66",
+  "speaker": "mori",
+  "text": "そのまま、ここに置いておきましょう。また続きが描けますから。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1bgt20f",
+  "speaker": "mori",
+  "text": "こんばんは。よかったら、どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1nd7hpt",
+  "speaker": "mori",
+  "text": "こんにちは。火曜日は、ここで描いています。よかったら、どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
   "key": "oh-10n1bre",
   "speaker": "mori",
   "text": "すみません。後で、少しお話ししましょう。",
@@ -9815,21 +10873,6 @@
   "slow": true
  },
  {
-  "key": "ln-ch5o48",
-  "speaker": "eric",
-  "text": "見たい。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [
-   [
-    "mitai",
-    "見たい"
-   ]
-  ],
-  "clear": [],
-  "emo": "warm"
- },
- {
   "key": "oh-hzy2dw",
   "speaker": "mori",
   "text": "探しておきます。見つかったら、声をかけますね。",
@@ -9863,6 +10906,36 @@
   ],
   "clear": [],
   "emo": "apologetic"
+ },
+ {
+  "key": "ln-84y376",
+  "speaker": "eric",
+  "text": "How’s the drawing coming along?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1pvea26",
+  "speaker": "mori",
+  "text": "少しずつですが。次に来た時、また見てください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-10utwjw",
+  "speaker": "mori",
+  "text": "まだ、迷っていまして。次は、描き始めたいですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
  },
  {
   "key": "ln-1bbxejr",
@@ -9966,6 +11039,212 @@
   "emo": "bright"
  },
  {
+  "key": "oh-f9o0nb",
+  "speaker": "kuroda",
+  "text": "すみません。浜田です。経理にいます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [
+   "浜田"
+  ],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-64bh2a",
+  "speaker": "eric",
+  "text": "I’m Eric, from IT support.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-i73gyf",
+  "speaker": "eric",
+  "text": "What do you do after work?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-ued968",
+  "speaker": "kuroda",
+  "text": "水曜日は、カラオケに行きます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "カラオケ"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1gc0we6",
+  "speaker": "eric",
+  "text": "Karaoke? At the place by the shops?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-12guzv0",
+  "speaker": "kuroda",
+  "text": "はい。水曜日の夜は、私が予約しています。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-ccg1e6",
+  "speaker": "eric",
+  "text": "Do you go to karaoke often?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-15658ft",
+  "speaker": "kuroda",
+  "text": "毎週、行っています。でも、いつも自分の曲まで時間が足りなくて。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "oh-q68yat",
+  "speaker": "kuroda",
+  "text": "水曜日の夜は、私が予約しています。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-7g4vo",
+  "speaker": "eric",
+  "text": "予約……カラオケ？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-10kc3gx",
+  "speaker": "kuroda",
+  "text": "はい。水曜日です。よかったら、一緒に。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1onx8o9",
+  "speaker": "eric",
+  "text": "いっしょに。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1yjs5fv",
+  "speaker": "eric",
+  "text": "I’ll look for you there.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-16bau44",
+  "speaker": "kuroda",
+  "text": "では、向こうで。歌わなくても、大丈夫ですから。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-rg06g8",
+  "speaker": "kuroda",
+  "text": "はい。ご都合のいい時に。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-145sevs",
+  "speaker": "eric",
+  "text": "Do you still have that song number?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1m80qg0",
+  "speaker": "kuroda",
+  "text": "はい。もう覚えました。でも、レシートは捨てられなくて。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "レシート"
+  ],
+  "emo": "warm"
+ },
+ {
   "key": "ln-1lvkziu",
   "speaker": "eric",
   "text": "I’d have missed that tray.",
@@ -10056,96 +11335,6 @@
   "words": [],
   "clear": [],
   "emo": "dry"
- },
- {
-  "key": "ln-185x41c",
-  "speaker": "emi",
-  "text": "Eric! I was hoping you’d make it.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "bright"
- },
- {
-  "key": "ln-2u35qs",
-  "speaker": "kuro",
-  "text": "You came! I wasn’t sure if you’d remember.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-122sn4y",
-  "speaker": "eric",
-  "text": "You said after six. I thought I’d come and see.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-1vpjfw2",
-  "speaker": "kuro",
-  "text": "And I still haven’t told you my name. I’m Kuro.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "amused"
- },
- {
-  "key": "ln-1nigfzh",
-  "speaker": "kuro",
-  "text": "Good evening. No floor number tonight?",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1imsd14",
-  "speaker": "eric",
-  "text": "I think I’m in the right place this time.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-1mqt7rp",
-  "speaker": "kuro",
-  "text": "I’m Kuro, by the way. We never got as far as names at the desk.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1a0cxzl",
-  "speaker": "kuro",
-  "text": "Good evening. I’m Kuro. I work at reception.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1mhwehw",
-  "speaker": "eric",
-  "text": "I’m Eric. Nice to meet you.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
  },
  {
   "key": "oh-181egj4",
@@ -13683,6 +14872,366 @@
   "emo": "curious"
  },
  {
+  "key": "ln-6abo5z-carina",
+  "speaker": "carina",
+  "text": "Twice. It only stopped when I spoke.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-vj3tlo-carina",
+  "speaker": "carina",
+  "text": "I need the guard to witness this. I’ll ask him at his desk.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1hpnao5-carina",
+  "speaker": "carina",
+  "text": "I’ll catch reception on a weekday, when they can check a label with me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-172szo1-carina",
+  "speaker": "carina",
+  "text": "They get together here on Friday after work.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-jfngba-carina",
+  "speaker": "carina",
+  "text": "I’ll leave my requests here, then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1i0yubb-carina",
+  "speaker": "carina",
+  "text": "行きたい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-ez5ep9-carina",
+  "speaker": "carina",
+  "text": "Can you show me the courts on this?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1axoo9i-carina",
+  "speaker": "carina",
+  "text": "You don’t get bored sitting out here?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1hw438n-carina",
+  "speaker": "carina",
+  "text": "And then I turn up.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-d2xwwy-carina",
+  "speaker": "carina",
+  "text": "So it depends how lunch went.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-19r6vcu-carina",
+  "speaker": "carina",
+  "text": "Carina. I’m on B2.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-14eyuqt-carina",
+  "speaker": "carina",
+  "text": "Do you play during the week too?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-3hk802-carina",
+  "speaker": "carina",
+  "text": "I keep ending up back at the shops.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-du4auf-carina",
+  "speaker": "carina",
+  "text": "Does she come up and get you?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-4ixho4-carina",
+  "speaker": "carina",
+  "text": "I’ll check this with the Sunday players. They’ll know what’s going wrong.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1bkxngr-carina",
+  "speaker": "carina",
+  "text": "大丈夫。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-jxavey-carina",
+  "speaker": "carina",
+  "text": "もう一度？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-d591qp-carina",
+  "speaker": "carina",
+  "text": "Have you been swimming with the club for long?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-t06jqz-carina",
+  "speaker": "emi",
+  "text": "Carina! I was hoping you’d make it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-122sn4y-carina",
+  "speaker": "carina",
+  "text": "You said after six. I thought I’d come and see.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1imsd14-carina",
+  "speaker": "carina",
+  "text": "I think I’m in the right place this time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1sdy7hr-carina",
+  "speaker": "carina",
+  "text": "I’m Carina. Nice to meet you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1gi1cp1-carina",
+  "speaker": "carina",
+  "text": "Are you shopping for tennis things?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-qg063j-carina",
+  "speaker": "carina",
+  "text": "I should find out which of those cartons is milk.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-tgy98v-carina",
+  "speaker": "carina",
+  "text": "I’ll ask him.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1n9erfg-carina",
+  "speaker": "carina",
+  "text": "Kenji checks the song selector here on weekdays at lunch. I’ll catch him then.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-ch5o48-carina",
+  "speaker": "carina",
+  "text": "見たい。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "mitai",
+    "見たい"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-gzfnrx-carina",
+  "speaker": "carina",
+  "text": "ここ？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-xwi15y-carina",
+  "speaker": "carina",
+  "text": "From up there?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1uo6z4r-carina",
+  "speaker": "carina",
+  "text": "I think I’d stay at the bottom.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-wvpcw7-carina",
+  "speaker": "carina",
+  "text": "You can have mine. I haven’t started yet.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-11644w4-carina",
+  "speaker": "carina",
+  "text": "I can make the tea.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1onwylw-carina",
+  "speaker": "carina",
+  "text": "いっしょに？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
   "key": "ln-1c9yqoz-carina",
   "speaker": "carina",
   "text": "ノルウェー？",
@@ -13718,25 +15267,20 @@
   "emo": "curious"
  },
  {
-  "key": "ln-ch5o48-carina",
-  "speaker": "carina",
-  "text": "見たい。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [
-   [
-    "mitai",
-    "見たい"
-   ]
-  ],
-  "clear": [],
-  "emo": "warm"
- },
- {
   "key": "ln-goskhb-carina",
   "speaker": "carina",
   "text": "フォト？",
   "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-84y376-carina",
+  "speaker": "carina",
+  "text": "How’s the drawing coming along?",
+  "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
@@ -13766,6 +15310,96 @@
   "key": "ln-1get0mo-carina",
   "speaker": "carina",
   "text": "Do you ever win anything on that crane game?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1cmwhs9-carina",
+  "speaker": "carina",
+  "text": "I’m Carina, from IT support.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-i73gyf-carina",
+  "speaker": "carina",
+  "text": "What do you do after work?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1gc0we6-carina",
+  "speaker": "carina",
+  "text": "Karaoke? At the place by the shops?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-ccg1e6-carina",
+  "speaker": "carina",
+  "text": "Do you go to karaoke often?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-7g4vo-carina",
+  "speaker": "carina",
+  "text": "予約……カラオケ？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "yoyaku",
+    "予約"
+   ]
+  ],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1onx8o9-carina",
+  "speaker": "carina",
+  "text": "いっしょに。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "isshoni",
+    "いっしょに"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1yjs5fv-carina",
+  "speaker": "carina",
+  "text": "I’ll look for you there.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-145sevs-carina",
+  "speaker": "carina",
+  "text": "Do you still have that song number?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -13851,46 +15485,6 @@
   "words": [],
   "clear": [],
   "emo": "dry"
- },
- {
-  "key": "ln-t06jqz-carina",
-  "speaker": "emi",
-  "text": "Carina! I was hoping you’d make it.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "bright"
- },
- {
-  "key": "ln-122sn4y-carina",
-  "speaker": "carina",
-  "text": "You said after six. I thought I’d come and see.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-1imsd14-carina",
-  "speaker": "carina",
-  "text": "I think I’m in the right place this time.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-1sdy7hr-carina",
-  "speaker": "carina",
-  "text": "I’m Carina. Nice to meet you.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "warm"
  },
  {
   "key": "ln-18o5dbe-carina",

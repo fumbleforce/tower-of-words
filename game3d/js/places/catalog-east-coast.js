@@ -51,5 +51,5 @@ export const DORM_COMMONS_DETAILS = {
   seats: ['commons_sofa'],
   zones: [],
   people: ['kenji'],
-  hooks: ['roomSofa'],
+  hooks: ['roomSofa', 'artClub'],
 };

@@ -1,3 +1,4 @@
+import { extendOngoingCatalog } from './ongoing/catalog.js';
 import { extendSundayCatalog } from './day4/catalog.js';
 import { extendMondayCatalog } from './day5/catalog.js';
 import { TRAIN_DETAILS } from './catalog-train.js';
@@ -309,3 +310,5 @@ extendSundayCatalog(PLACE_DETAILS);
 extendMondayCatalog(PLACE_DETAILS);
 
 export const SHARED_THINGS = { mio: { label: 'Mio', kind: 'person' } };
+
+extendOngoingCatalog(PLACE_DETAILS);

@@ -56,11 +56,11 @@ export class Runner {
         return null;
       }
     };
-    // the day's own story set (days.js); a later day has no placeholders and no transition lines of its own
+    // Later days have their own stories and no travel dialogue.
     const day = this.game.sim?.day || 1;
     // {mc.name} and the other protagonist tokens are filled in once, before anything reads the lines (mc.js)
-    if (day > 1)
-      return expandMc((await tryImport(storyPath(name, day))) || (name === 'transitions' ? {} : { nodes: {}, on: {} }));
+    if (day > 1 && name === 'transitions') return {};
+    if (day > 1) return expandMc((await tryImport(storyPath(name, day))) || { nodes: {}, on: {} });
     const s = (await tryImport(`../story/${name}.js`)) ||
       (await tryImport(`../story/placeholder/${name}.js`)) || { nodes: {}, on: {} };
     return expandMc(s);

@@ -14,7 +14,7 @@ const stories = new Map(); // `${day}:${place}` -> story, as runner.load gave it
 async function storiesFor(game, day) {
   const out = {};
   await Promise.all(
-    [...openToday(day), 'transitions'].map(async (p) => {
+    [...openToday(day), ...(day === 1 ? ['transitions'] : [])].map(async (p) => {
       const k = `${day}:${p}`;
       if (!stories.has(k)) {
         const s = await game.runner.load(p);

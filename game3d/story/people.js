@@ -12,5 +12,8 @@ export default {
     about: 'Newest on the team before you, 21. Keen to help, easily distracted. Borrowed your chair. Lives on melon soda.',
     color: '#9fb6d8',
   },
+  kuro: { name: 'Kuro', introduction: 'd3_kuro_intro', about: 'Receptionist at the head office. Goes to the swimming club with Emi.', color: '#c3a7d6' },
+  aoi: { name: 'Aoi', introduction: 'd3_aoi_intro', about: 'Another new hire. Learning her way around the island too.', color: '#e79fb0' },
+  rei: { name: 'Rei', introduction: 'd4_rei_intro', about: 'Works in Sales. Plays tennis on Sundays.', color: '#c9ced8' },
   emi: { name: 'Emi', about: 'Runs B2. Spent day one upstairs fighting for a parts budget.', color: '#c98a6b' },
 };

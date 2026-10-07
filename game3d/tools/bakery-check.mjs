@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { waitForGame } from '../test/support/wait-ready.mjs';
 const width = +(process.argv[2] || 1366), height = width < 700 ? 844 : 860, mc = process.argv[3] || 'eric';
-const base = `http://127.0.0.1:${process.env.PORT || 8794}/game3d`;
+const base = process.env.BASE_URL || `http://127.0.0.1:${process.env.PORT || 8794}/game3d`;
 const out = `game3d/shots/codex-bakery/${process.env.ROUND || 'acceptance'}`;
 fs.mkdirSync(out, { recursive: true });
 await withBrowserJob('bakery-native', async browser => {
