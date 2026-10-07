@@ -1,0 +1,81 @@
+{
+  "title": "Selected Mio in the game",
+  "date": "2026-10-07",
+  "by": "codex",
+  "caption": "The selected Mio model now uses her phone, sits with her laptop, types at her desk and completes lunch actions.",
+  "preview": "phone85",
+  "sections": [
+    {
+      "title": "Phone and seated work",
+      "caption": "Desktop at 85% size. Close views are diagnostic cameras; the gameplay camera is unchanged. Keyboard contact applies during idle work, while authored gestures keep control during dialogue.",
+      "images": [
+        {
+          "id": "phone85",
+          "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/phone-side.webp",
+          "caption": "Approved phone pose retargeted to the selected body."
+        },
+        {
+          "id": "laptop85",
+          "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/train-side.webp",
+          "caption": "Laptop supported on the seated thighs, hands on the keyboard."
+        },
+        {
+          "id": "office85",
+          "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/office-side.webp",
+          "caption": "Hands reach the desk keyboard."
+        },
+        {
+          "id": "laptop100",
+          "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/train-side.webp",
+          "caption": "Explicit 100% size on a 390-pixel viewport."
+        },
+        {
+          "id": "office100",
+          "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/office-side.webp",
+          "caption": "The same keyboard contact at 100%."
+        }
+      ]
+    },
+    {
+      "title": "Lunch contacts",
+      "caption": "Native actions paused before release, with a diagnostic view of the real contact. Both sizes pass; the lunch sequence and hand solver limits are unchanged.",
+      "images": [
+        {
+          "id": "cable85",
+          "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-cable-hook-held-detail.webp",
+          "caption": "85%: cable held by the rim above the hook."
+        },
+        {
+          "id": "bento85",
+          "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-bento-pickup-held-detail.webp",
+          "caption": "85%: hand reaches the box edge."
+        },
+        {
+          "id": "mouth85",
+          "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-bite-mouth.webp",
+          "caption": "85%: the food reaches the selected model’s mouth."
+        },
+        {
+          "id": "cable100",
+          "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-cable-hook-held-detail.webp",
+          "caption": "100%: native held cable contact on a phone viewport."
+        },
+        {
+          "id": "bento100",
+          "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-bento-pickup-held-detail.webp",
+          "caption": "100%: native bento pickup contact."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    },
+    {
+      "label": "Integration and validation",
+      "href": "notes/mio-default-20261007.md"
+    }
+  ]
+}

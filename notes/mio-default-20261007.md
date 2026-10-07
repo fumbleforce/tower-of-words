@@ -25,3 +25,11 @@ The first full source check passed all gates and 661 tests. Native default85 des
 Lunch step2 passes at 85 and 100 on both viewports. Step3 passes at 85 desktop and 100 phone. Actual Save/Continue during the bite passes at 85 phone. Named action captures from older probes sometimes arrive after contact or are occluded; the separate held-detail cable pickup/hook and bento pickup frames freeze the native action at its next wait before release. Their camera is diagnostic, and their geometry and pose are unchanged. The mouth frame shows food at the selected mesh's lip.
 
 Phone clip upload is content-addressed and HEAD-verified. Final evidence packaging and integrated default85 regression results accompany the Showcase entry.
+
+Independent review: [scoped PASS, 8/10](mio-default-review-20261007.md). The full legacy source snapshot is retained at game3d/shots/mio-default/legacy100-save-390/legacy-world.json. All failed attempts and diagnostics remain available.
+
+## Integrated source
+
+Source commit 3bc8df23 is rebased on 8e8d1c89 (85% default and window correction). The no-query native check at 390×844 passes train/office contacts, phone pose, sustained gait and saved-prop lifecycle. Strict full day-1 routes pass at 1366×860 Eric and 390×844 Carina, 73 seconds each, with no overrides. They reach train, gate, forecourt, office, plaza, dorm court and dorms. Existing performance baselines emit warnings; these route passes do not claim a performance improvement. Final packaging changes no runtime source.
+
+Raw native PNGs and reports are preserved under game3d/shots/mio-default/ and the mio335-* folders under game3d/shots/mio-lunch/ in the main workspace. Every capture, including failed attempts, has a lossless WebP backup under bible/shots/showcase/mio-default-20261007/. The exact source/output SHA-256 manifest is [mio-default-evidence-20261007.json](mio-default-evidence-20261007.json); all encoded pixels are compared before upload. Showcase uses only individually inspected final contact images.
