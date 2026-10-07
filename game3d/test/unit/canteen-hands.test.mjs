@@ -4,16 +4,18 @@ import {registerHooks} from 'node:module';
 registerHooks({resolve(s,c,n){if(s.endsWith('/move.js'))return {url:'data:text/javascript,'+encodeURIComponent('export const walkRig=()=>{throw Error("Unexpected walk")};export const faceRig=()=>{throw Error("Unexpected turn")};'),shortCircuit:true};if(s==='three')return n(new URL('../../vendor/three/three.module.js',import.meta.url).href,c);if(s.startsWith('three/addons/'))return n(new URL('../../vendor/'+s.slice(13),import.meta.url).href,c);return n(s,c);}});
 globalThis.location={search:''};
 const THREE=await import('three'),{PEOPLE}=await import('../../js/cast.js'),{K}=await import('../../js/scenes/office.js');
+const {CHARACTER_SCALE}=await import('../../js/character-scale.js');
 const {mealHands}=await import('../../js/places/canteen/meal-hands.js'),{mealTray}=await import('../../js/scenes/canteen/meals.js');
-const {COLLECTION}=await import('../../js/places/canteen/meal-props.js'),{STAFF_COUNTER_ROUTE}=await import('../../js/scenes/canteen/plan.js');
-test('actual procedural worker carries with uncrossed arms and keeps the same physical rear grip through delivery',async()=>{
- const P={space:new THREE.Group()},rig=PEOPLE.worker(25),tray=mealTray('curry');rig.root.scale.multiplyScalar(K);rig.root.position.set(STAFF_COUNTER_ROUTE.at(-1)[0],0,STAFF_COUNTER_ROUTE.at(-1)[1]);P.space.add(rig.root,tray.root);
+const {COLLECTION}=await import('../../js/places/canteen/meal-props.js'),{staffCounterRoute,SERVICE_END}=await import('../../js/scenes/canteen/plan.js');
+for(const size of [0.85, 1]) test(`at ${size}: actual procedural worker carries with uncrossed arms and keeps the same physical rear grip through delivery`,async()=>{
+ const P={space:new THREE.Group()},rig=PEOPLE.worker(25),tray=mealTray('curry');rig.root.scale.multiplyScalar(K*size/CHARACTER_SCALE);const radius=Math.max(0.24*rig.root.scale.x,0.24*K),route=staffCounterRoute(radius);rig.root.position.set(route.at(-1)[0],0,route.at(-1)[1]);P.space.add(rig.root,tray.root);
  let hands;const game={wait:async()=>hands.update(),tween:async(_seconds,fn)=>{for(let i=0;i<=20;i++){fn(i/20);hands.update();}}};hands=mealHands(game,P);
  const arm=rig.rig?.arms?.[1]||rig.arms[1],original=arm.quaternion.clone();hands.carry(rig,tray);
  const grip=hands.rigidCarryGrip(rig);assert.ok(grip.x>0&&grip.z<0,'procedural Right arm uses its own side and the rear tray edge');
  for(const contact of hands.carryContacts())assert.ok(contact.gap<.08,JSON.stringify(contact));
+ assert.ok(rig.root.position.z + radius < SERVICE_END.z-SERVICE_END.d/2, 'worker stays behind the service surface while reaching');
  const from=tray.root.position.clone().add(grip);hands.stopCarry();await hands.reach({wait:p=>p},rig,from.toArray(),{item:tray.root,grip:grip.toArray(),end:new THREE.Vector3(...COLLECTION).add(grip).toArray(),id:'handoff'});
- assert.ok(hands.contacts.every(c=>c.gap<.08),JSON.stringify(hands.contacts));assert.ok(tray.root.position.distanceTo(new THREE.Vector3(...COLLECTION))<1e-9);
+ assert.ok(hands.contacts.every(c=>c.gap<.025),JSON.stringify(hands.contacts));assert.ok(tray.root.position.distanceTo(new THREE.Vector3(...COLLECTION))<1e-9);
  hands.clear();assert.ok(arm.quaternion.angleTo(original)<1e-7,'exact original arm restored');
 });
 

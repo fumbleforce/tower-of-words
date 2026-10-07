@@ -1,0 +1,9 @@
+scale-default-390: GPU slot 2
+checked office {
+  seatId: 'my_seat',
+  top: 0.24,
+  hip: [ 0, 0.21736824489508216, -4.440892098500627e-16 ],
+  underside: 0.23052102395666202,
+  delta: -0.009478976043337972
+}
+PASS /home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/shots/character-scale/mio1-carina-390/

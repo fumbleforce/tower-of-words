@@ -1,0 +1,16 @@
+gait-check: waiting up to 60s for a browser GPU slot
+gait-check: GPU slot 1
+forecourt 390x844-chibi=0-charscale=85-legacy-scale-fix: 159 windows, 12 people in view, 12 walked; walked: kuro
+  eric: 13 walking windows, median ratio 1.14, bad 0
+  mio: 10 walking windows, median ratio 0.96, bad 1
+  crowd6: 24 walking windows, median ratio 1, bad 0
+  crowd13: 22 walking windows, median ratio 1, bad 0
+  crowd16: 4 walking windows, median ratio 1.01, bad 0
+  crowd12: 16 walking windows, median ratio 1.01, bad 1
+  crowd9: 13 walking windows, median ratio 1, bad 0
+  crowd7: 12 walking windows, median ratio 1, bad 1
+  crowd10: 1 walking windows, median ratio 1.02, bad 0
+  crowd5: 9 walking windows, median ratio 0.99, bad 0
+  crowd8: 6 walking windows, median ratio 1.01, bad 0
+  crowd4: 6 walking windows, median ratio 1, bad 0
+PASS 390x844-chibi=0-charscale=85-legacy-scale-fix game3d/shots/gait/390x844-chibi=0-charscale=85-legacy-scale-fix

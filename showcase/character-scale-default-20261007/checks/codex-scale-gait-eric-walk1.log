@@ -1,0 +1,13 @@
+gait-check: GPU slot 3
+forecourt 390x844-mc=eric-scale-default1: 76 windows, 10 people in view, 10 walked; walked: kuro
+  eric: 13 walking windows, median ratio 1.13, bad 0
+  mio: 7 walking windows, median ratio 0.95, bad 0
+  crowd6: 14 walking windows, median ratio 1, bad 0
+  crowd13: 14 walking windows, median ratio 1, bad 0
+  crowd16: 4 walking windows, median ratio 1.01, bad 0
+  crowd12: 8 walking windows, median ratio 1.02, bad 1
+  crowd9: 5 walking windows, median ratio 1, bad 0
+  crowd7: 5 walking windows, median ratio 1, bad 0
+  crowd10: 1 walking windows, median ratio 1.01, bad 0
+  crowd5: 1 walking windows, median ratio 1.22, bad 0
+PASS 390x844-mc=eric-scale-default1 game3d/shots/gait/390x844-mc=eric-scale-default1

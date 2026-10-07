@@ -5,12 +5,12 @@ import { scopedRoute } from '../../tools/bible/check-scope.mjs';
 import { waitForGame } from '../test/support/wait-ready.mjs';
 const width = +(process.argv[2] || 1366),
   height = width < 600 ? 844 : 860;
-const base = process.env.BASE || '.claude/worktrees/codex-character-scale-trial/game3d';
+const base = process.env.BASE || 'game3d';
 const out = new URL(`../shots/character-scale/${process.env.OUT || Date.now()}-${width}/`, import.meta.url).pathname;
 fs.mkdirSync(out, { recursive: true });
 const trialScale = process.env.SCALE || '85';
-assert.ok(['67', '85'].includes(trialScale), 'supported comparison scale');
-const ratio = +trialScale / 100;
+assert.ok(['67', '85', 'default'].includes(trialScale), 'supported comparison scale');
+const ratio = trialScale === 'default' ? 0.85 : +trialScale / 100;
 const report = { errors: [], cases: [] };
 await withBrowserJob(
   'character-scale-' + width,
@@ -44,7 +44,7 @@ await withBrowserJob(
             90000,
             () =>
               page.goto(
-                `http://127.0.0.1:8771/${base}/index.html?day=2&place=${place}&mc=${process.env.MC || 'eric'}&q=2&charscale=${scale}`,
+                `http://127.0.0.1:8771/${base}/index.html?day=2&place=${place}&mc=${process.env.MC || 'eric'}&q=2${scale === 'default' ? '' : '&charscale=' + scale}`,
               ),
             'play',
           );
@@ -116,7 +116,10 @@ await withBrowserJob(
               const { seatUnderside } = await import('./js/movement/sit-height.js');
               const r = g.player,
                 s = P.seats.canteen_seat_shared;
-              const local = seatUnderside('trial-probe-' + globalThis.location.search, r.model, r.root, r.sitHip);
+              let hips;
+              r.model.traverse((bone) => { if (bone.isBone && /hips/i.test(bone.name)) hips = bone; });
+              const hip = r.root.worldToLocal(hips.getWorldPosition(new T.Vector3()));
+              const local = seatUnderside('trial-probe-' + globalThis.location.search, r.model, r.root, hip);
               seat = {
                 top: s.top,
                 underside: r.root.position.y + local * r.root.scale.y,
@@ -134,11 +137,12 @@ await withBrowserJob(
               seat,
             };
           });
+          report.cases.push({ scale, ...state });
+          fs.writeFileSync(out + 'report.json', JSON.stringify(report, null, 2));
           assert.equal(state.place, place);
           assert.ok(state.player.meshy, 'approved Meshy player loaded');
           if (state.seat) assert.ok(Math.abs(state.seat.delta) < 0.03, `seat contact ${state.seat.delta}`);
           await page.screenshot({ path: `${out}${place}-${scale}.png` });
-          report.cases.push({ scale, ...state });
           if (place === 'canteen') {
             await page.evaluate(() => {
               const g = globalThis.__game,

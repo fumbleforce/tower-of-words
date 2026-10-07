@@ -2,9 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { characterScale, characterHead } from '../../js/character-scale.js';
 
-test('character scale is opt-in and rejects arbitrary values', () => {
-  for (const query of ['', '?day=2', '?charscale=0', '?charscale=100', '?charscale=0.67', '?charscale=no'])
-    assert.equal(characterScale(query), 1);
+test('approved character scale is the default and invalid queries cannot bypass it', () => {
+  for (const query of ['', '?day=2', '?charscale=0', '?charscale=0.67', '?charscale=no'])
+    assert.equal(characterScale(query), 0.85);
+  assert.equal(characterScale('?charscale=100'), 1);
   assert.equal(characterScale('?day=2&charscale=67&place=dorms'), 0.67);
   assert.equal(characterScale('?day=2&charscale=85&place=dorms'), 0.85);
 });

@@ -1,0 +1,22 @@
+(node:2707586) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/js/scenes/canteen/plan.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+canteen-meals-390: GPU slot 2
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: {"id":"payment-end","gap":0.08303803817754629,"hand":[4.013649709102975,0.67584268450005,-6.279707172393527],"target":[4.05,0.701,-6.35]}
+    at withBrowserJob.timeout (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/tools/canteen-meals-check.mjs:47:11)
+    at async withBrowserJob (file:///home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/tools/lib/browser-job.mjs:164:12)
+    at async file:///home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/tools/canteen-meals-check.mjs:9:1 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

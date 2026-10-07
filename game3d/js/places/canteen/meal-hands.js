@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { diningHands } from '../izakaya/hands.js';
+import { CHARACTER_SCALE } from '../../character-scale.js';
 
 // The second hand follows the opposite tray handle after the first arm has settled.
 // It does not update the mixer or spine again and cannot undo the first arm's pose.
@@ -38,11 +39,12 @@ export function mealHands(game, P) {
     if (carried) {
       const { rig, tray, a, b, grips, rigidArm } = carried,
         yaw = rig.root.rotation.y,
-        forward = rigidArm ? 0.52 : 0.28;
+        forward = rigidArm ? 0.52 : 0.28 * CHARACTER_SCALE;
       const centre = rig.root.position
         .clone()
         .add(new THREE.Vector3(Math.sin(yaw) * forward, 0.72, Math.cos(yaw) * forward));
-      centre.y = 0.72;
+      // Meshy arms carry at the selected body height; the worker has a separate rigid-arm pose.
+      centre.y = rigidArm ? 0.72 : 0.72 * CHARACTER_SCALE;
       tray.root.rotation.set(0, yaw, 0);
       const grip = grips[0].clone().applyEuler(tray.root.rotation);
       a.target.copy(P.space.localToWorld(centre.clone().add(grip)));

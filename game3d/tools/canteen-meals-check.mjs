@@ -4,7 +4,7 @@ import {COUNTER,SERVICE_END,R} from '../js/scenes/canteen/plan.js';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { scopedRoute } from '../../tools/bible/check-scope.mjs';
 const width=+(process.argv[2]||1366),height=width<700?844:860;
-const base=process.env.BASE||'.claude/worktrees/codex-canteen-meals/game3d';
+const base=process.env.BASE||'game3d';
 const out=new URL(`../shots/canteen-meals/${process.env.ROUND||'build1'}-${width}/`,import.meta.url);fs.mkdirSync(out,{recursive:true});
 await withBrowserJob('canteen-meals-'+width,async browser=>{
  const context=await browser.newContext({viewport:{width,height},hasTouch:width<700,isMobile:width<700}),page=await context.newPage();
@@ -13,13 +13,14 @@ await withBrowserJob('canteen-meals-'+width,async browser=>{
  await context.route('**/*',scopedRoute({publicOnly:true,isClosing:()=>closing,onFailure:s=>errors.push(s)}));
  await page.addInitScript(()=>globalThis.localStorage.setItem('amakawa-settings',JSON.stringify({privateMode:false,voiceOn:false,textSpeed:'instant'})));
  try{
- await page.goto(`http://127.0.0.1:8771/${base}/index.html?day=3&place=canteen&q=0&mc=${width<700?'carina':'eric'}`);
+ await page.goto(`http://127.0.0.1:8771/${base}/index.html?day=3&place=canteen&q=0&mc=${width<700?'carina':'eric'}${process.env.QS?'&'+process.env.QS:''}`);
  await page.waitForFunction(()=>globalThis.__game?.place?.canteenDining&&!globalThis.__game.busy,null,{timeout:45000});
  await page.evaluate(async()=>{await globalThis.__game.hooks.period({to:'lunch'});});
- await page.evaluate(()=>{
+ await page.evaluate(async()=>{
+   const {bodies}=await import('./js/movement/shared.js');
    globalThis.__canteenTrace=[];const g=globalThis.__game, update=g.place.update;
    g.place.update=function(...args){const value=update.apply(this,args);const r=this.people.canteen_worker;
-     globalThis.__canteenTrace.push({x:r.root.position.x,z:r.root.position.z,r:0.24*r.root.scale.x,phase:this.canteenPhase});return value;};
+     globalThis.__canteenTrace.push({x:r.root.position.x,z:r.root.position.z,r:Math.max(0.24*r.root.scale.x,bodies(g).find(body=>body.root===r.root)?.r||0),bodyR:bodies(g).find(body=>body.root===r.root)?.r,scriptR:0.24*r.root.scale.x,phase:this.canteenPhase});return value;};
  });
  await page.waitForTimeout(1200);await page.screenshot({path:new URL('room.png',out).pathname});
  if(process.argv.includes('--actions')||process.argv.includes('--delivery')||process.argv.includes('--water')) {
@@ -31,7 +32,19 @@ await withBrowserJob('canteen-meals-'+width,async browser=>{
      while(Date.now()<until){
        const phase=await page.evaluate(()=>({phase:globalThis.__game.place.canteenPhase,...globalThis.__canteenAction}));
        if(phase.error)throw Error(phase.error);
-       if((phase.phase?.includes('contact')||phase.phase==='water-fill')&&!captured.has(phase.phase)){captured.add(phase.phase);await page.screenshot({path:new URL(a.state+'-'+phase.phase+'.png',out).pathname});}
+       if((phase.phase?.includes('contact')||phase.phase==='water-fill')&&!captured.has(phase.phase)){captured.add(phase.phase);await page.screenshot({path:new URL(a.state+'-'+phase.phase+'.png',out).pathname});
+         if(process.argv.includes('--details')){
+           await page.evaluate(async()=>{const g=globalThis.__game,T=await import('three'),cam=g.place.camera;
+             globalThis.__canteenCamera={at:cam.position.clone(),q:cam.quaternion.clone(),fov:cam.fov,paused:g.paused,run:globalThis.__run};
+             g.paused=true;globalThis.__run=false;
+             const at=g.player.root.position.clone();at.y+=.7;at.z-=.1;
+             const target=g.place.space.localToWorld(at),offset=new T.Vector3(1.6,.45,.2).applyQuaternion(g.place.space.getWorldQuaternion(new T.Quaternion()));
+             cam.position.copy(target).add(offset);cam.lookAt(target);cam.fov=55;cam.updateProjectionMatrix();cam.updateMatrixWorld(true);
+           });
+           await page.waitForTimeout(100);await page.screenshot({path:new URL(a.state+'-'+phase.phase+'-detail.png',out).pathname});
+           await page.evaluate(()=>{const g=globalThis.__game,s=globalThis.__canteenCamera,c=g.place.camera;c.position.copy(s.at);c.quaternion.copy(s.q);c.fov=s.fov;c.updateProjectionMatrix();c.updateMatrixWorld(true);g.paused=s.paused;globalThis.__run=s.run;});
+         }
+       }
        if(phase.done)break;
        await page.waitForTimeout(80);
      }

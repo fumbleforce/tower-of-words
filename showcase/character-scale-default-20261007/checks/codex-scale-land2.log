@@ -1,0 +1,47 @@
+land: checking 1 commit(s) on main 256e4cf3: Codex: add opt-in 15 and 33 percent character size trials
+land: commit messages: PASS; 1 commits
+land: commit CPU: PASS; commit e219d05ef7b0; tree 67e1c7e4b478
+land: main is now e219d05e (1 commit(s) from wt/codex-character-scale-trial)
+land: game3d/ changed: the day test at both sizes should already have passed in the worktree (fast-qa skill)
+land: head-boot: GPU slot 2
+land: PASS head boot e219d05: title ready at 1366x860 and 390x844, no errors (2541 locked binaries)
+land: kept /home/jorgen/repo/japanese/.claude/worktrees/codex-character-scale-trial: it has git-ignored asset files that aren't links to the main checkout's, so removing it would lose them:
+  bible/shots/reviews/character-scale-1/carina8-390/dorms-100.webp
+  bible/shots/reviews/character-scale-1/carina8-390/dorms-67.webp
+  bible/shots/reviews/character-scale-1/crowd9-1366/forecourt-100.webp
+  bible/shots/reviews/character-scale-1/crowd9-1366/forecourt-67.webp
+  bible/shots/reviews/character-scale-1/interaction7-390/canteen-100.webp
+  bible/shots/reviews/character-scale-1/interaction7-390/canteen-67.webp
+  bible/shots/reviews/character-scale-1/interaction7-390/canteen-detail-100.webp
+  bible/shots/reviews/character-scale-1/interaction7-390/canteen-detail-67.webp
+  bible/shots/reviews/character-scale-1/interaction7-390/canteen-talk-100.webp
+  bible/shots/reviews/character-scale-1/interaction7-390/canteen-talk-67.webp
+  bible/shots/reviews/character-scale-1/round4-1366/canteen-100.webp
+  bible/shots/reviews/character-scale-1/round4-1366/canteen-67.webp
+  bible/shots/reviews/character-scale-1/round4-1366/dorms-100.webp
+  bible/shots/reviews/character-scale-1/round4-1366/dorms-67.webp
+  bible/shots/reviews/character-scale-1/round4-1366/forecourt-100.webp
+  bible/shots/reviews/character-scale-1/round4-1366/forecourt-67.webp
+  bible/shots/reviews/character-scale-1/round4-1366/plaza-100.webp
+  bible/shots/reviews/character-scale-1/round4-1366/plaza-67.webp
+  bible/shots/reviews/character-scale-1/round5-390/canteen-100.webp
+  bible/shots/reviews/character-scale-1/round5-390/canteen-67.webp
+  bible/shots/reviews/character-scale-1/round5-390/canteen-detail-100.webp
+  bible/shots/reviews/character-scale-1/round5-390/canteen-detail-67.webp
+  bible/shots/reviews/character-scale-1/round5-390/dorms-100.webp
+  bible/shots/reviews/character-scale-1/round5-390/dorms-67.webp
+  bible/shots/reviews/character-scale-1/round5-390/forecourt-100.webp
+  bible/shots/reviews/character-scale-1/round5-390/forecourt-67.webp
+  bible/shots/reviews/character-scale-1/round5-390/plaza-100.webp
+  bible/shots/reviews/character-scale-1/round5-390/plaza-67.webp
+  bible/shots/reviews/character-scale-1/round6-1366/canteen-100.webp
+  bible/shots/reviews/character-scale-1/round6-1366/canteen-67.webp
+  bible/shots/reviews/character-scale-1/round6-1366/canteen-detail-100.webp
+  bible/shots/reviews/character-scale-1/round6-1366/canteen-detail-67.webp
+  bible/shots/reviews/character-scale-1/round6-1366/dorms-100.webp
+  bible/shots/reviews/character-scale-1/round6-1366/dorms-67.webp
+  bible/shots/reviews/character-scale-1/round6-1366/forecourt-100.webp
+  bible/shots/reviews/character-scale-1/round6-1366/forecourt-67.webp
+  bible/shots/reviews/character-scale-1/round6-1366/plaza-100.webp
+  bible/shots/reviews/character-scale-1/round6-1366/plaza-67.webp
+land: move or sync them, then: git worktree remove --force /home/jorgen/repo/japanese/.claude/worktrees/codex-character-scale-trial && git branch -d wt/codex-character-scale-trial

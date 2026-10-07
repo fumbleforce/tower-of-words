@@ -35,3 +35,10 @@ export const STAFF_COUNTER_ROUTE = [
   [3.9, -7.095],
   [3.85, -7.095],
 ];
+
+// Stop behind the actual service edge, close enough for the current body to set down its tray.
+export function staffCounterRoute(radius) {
+  const route = STAFF_COUNTER_ROUTE.map((at) => [...at]);
+  route.at(-1)[1] = SERVICE_END.z - SERVICE_END.d / 2 - radius - 0.01;
+  return route;
+}
