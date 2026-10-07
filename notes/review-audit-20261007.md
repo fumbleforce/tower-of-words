@@ -1,8 +1,21 @@
 # Review follow through audit for 7 October 2026
 
-Six Review decisions or revisions still require work. The audit covers all 132 public Review items and reads every current saved response, including option comments: 107 items have responses. After correcting three statuses, 88 items are decided, 42 superseded and two open. A decided Review records a choice; its linked work issue can still be running, blocked or waiting to start.
+The initial audit found six Review decisions or revisions requiring follow-through. It covered all 132 public Review items then present and read every saved response, including option comments: 107 items had responses. After correcting three statuses, 88 items were decided, 42 superseded and two open. A decided Review records a choice; its linked work issue can still be running, blocked or waiting to start. The update below records what has since landed.
 
-## Work still required
+## Follow-through update
+
+The later check contains 133 public Reviews: 88 decided, 43 superseded and 2 open, with 107 saved responses. No public-site answers are waiting to import and the current list reports no unread public feedback. The inventory below preserves the earlier 132-item audit snapshot.
+
+- Character backgrounds round 1 is now superseded. All 23 rewritten proposals and the cold read are in [round 2](http://127.0.0.1:8771/bible/#review/character-backgrounds-2), landed in `910a2187`; #327 is waiting for Jørgen. They remain proposals.
+- The window correction landed in `36e5cc45`. #321 remains waiting for Jørgen's judgment of the optional street trial.
+- The selected 85% character default and required canteen contacts landed in `8e8d1c89`; #322 is complete. The related stale seating diagnostic was corrected under #323 without a runtime seating change.
+- The selected Mio default landed in source `3bc8df23`, with evidence `d92ea0c2`. #335 is complete after native phone, laptop, keyboard, lunch-contact and legacy-save checks, strict desktop/phone routes and landed title boots. The local build at this checkpoint is `1007-1423-d92ea0c2`.
+- Showcase bag feedback is fixed in `2cca1ef9` under #333: native/procedural grip anchors and supported seated totes, with all 336 attempts retained. Final CPU and landed title boots passed; new NPC model production remains a separate item.
+- The language-history follow-up landed in `8e385a55` under #336. Remembered remarks can compare current comprehension with their recorded original vocabulary. Native desktop/phone checks, 666 CPU tests and final title boots passed. An intermittent office gait failure from the initial full-route test remains open under #319; its successful repeat was retained alongside the failure.
+- #328 still awaits Meshy model-trial capacity for the three approved everyday crowd sources; source approval alone is not installed geometry. #320 still needs the corrected karaoke phrase and listening check.
+- The latest work check reports 33 stale items across teams. This is a broader work-tracker backlog, not 33 unread Review answers. Those issues were not silently marked complete or refreshed without action.
+
+## Findings at the initial audit
 
 | Review | Work | Current disposition |
 | --- | --- | --- |
