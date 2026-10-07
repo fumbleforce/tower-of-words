@@ -34,7 +34,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     gate: { worker_a: 1, worker_b: 1, commuter_1: 1, commuter_2: 1, commuter_3: 1, guard: 19, commuter: 2, eric: 4, gatev: 6, kuroda: 8, miotext: 1 },
     forecourt: { eric: 3, kuro: 8 },
     plaza: { eric: 1, canteen_worker: 3 },
-    canteen: { canteen_worker: 8, eric: 3 },
+    canteen: { canteen_worker: 12, eric: 23, canteen_shirt: 7, canteen_cardigan: 6, canteen_polo: 5 },
     office: { kenji: 17, mori: 18, mio: 46, eric: 5, emi: 3 },
     campus: {},
     print_shop: {},

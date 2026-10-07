@@ -147,6 +147,34 @@ ENGINE_WRITES['game3d/js/investigations/sender/index.js'] = {
   prefix: [],
 };
 
+ENGINE_WRITES['game3d/js/places/canteen/action.js'] = { exact: ['canteen_dining_complete'], prefix: [] };
+ENGINE_WRITES['game3d/js/places/canteen/meal-state.js'] = {
+  exact: [
+    'canteen_order_id',
+    'canteen_meal',
+    'canteen_meal_phase',
+    'canteen_meal_seat',
+    'canteen_paid_id',
+    'canteen_eaten_id',
+    'canteen_delivered_id',
+  ],
+  prefix: [],
+};
+ENGINE_WRITES['game3d/js/places/canteen/stage.js'] = {
+  exact: [
+    'canteen_staff_present',
+    'canteen_service_open',
+    'canteen_paid',
+    'canteen_outstanding',
+    'canteen_player_at_shared',
+    'canteen_curry_present',
+    'canteen_recommendation_ready',
+    'canteen_diner_busy',
+  ],
+  prefix: [],
+};
+ENGINE_WRITES['game3d/js/places/canteen/diners.js'] = { exact: ['canteen_container_closed'], prefix: [] };
+
 export const KNOW_PREFIX = 'know_';
 ENGINE_WRITES['game3d/js/places/station-garden/index.js'] = {
   exact: ['garden_worker_busy', 'garden_worker_done', 'garden_bench_free'],

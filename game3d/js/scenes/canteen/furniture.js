@@ -1,7 +1,6 @@
-import { TABLES, COUNTER, SEATS } from './plan.js';
+import { TABLES, COUNTER, SEATS, SERVICE_END } from './plan.js';
 const STEEL = '#7e898d',
-  TEAL = '#457b78',
-  WOOD = '#bd956d';
+  TEAL = '#457b78';
 export function chair(kit, x, z, ry) {
   kit.box(TEAL, 0.42, 0.045, 0.42, x, 0.295, z, { surf: 'plastic', ry });
   kit.box(TEAL, 0.42, 0.35, 0.045, x - Math.sin(ry) * 0.19, 0.34, z - Math.cos(ry) * 0.19, { surf: 'plastic', ry });
@@ -18,7 +17,7 @@ export function tray(kit, x, y, z, food = true) {
 }
 export function dining(kit, nav) {
   TABLES.forEach(({ x, z }, i) => {
-    kit.box(WOOD, 2.7, 0.07, 0.8, x, 0.53, z, { surf: 'laminate' });
+    kit.box(['#b7a07d', '#baa889', '#b9a181', '#b4a18b'][i % 4], 2.7, 0.07, 0.8, x, 0.53, z, { surf: 'laminate' });
     for (const dx of [-1.1, 1.1])
       for (const dz of [-0.26, 0.26]) kit.box(STEEL, 0.05, 0.53, 0.05, x + dx, 0, z + dz, { surf: 'metal' });
     nav.block(x - 1.42, x + 1.42, z - 0.48, z + 0.48);
@@ -29,10 +28,10 @@ export function dining(kit, nav) {
       }
     kit.box('#eee7d7', 0.16, 0.12, 0.12, x, 0.6, z, { surf: 'ceramic' });
     kit.box('#f7f3e8', 0.1, 0.08, 0.01, x, 0.68, z, { surf: 'paper' });
-    if (i % 2 === 0) tray(kit, x - 0.85, 0.6, z + 0.06);
+    if (i === 2 || i === 4) tray(kit, x - 0.85, 0.6, z + 0.06);
   });
   for (const seat of Object.values(SEATS)) {
-    chair(kit, seat.x, seat.z, seat.ry);
+    if (!seat.existing) chair(kit, seat.x, seat.z, seat.ry);
     nav.block(seat.x - 0.25, seat.x + 0.25, seat.z - 0.25, seat.z + 0.25);
   }
 }
@@ -53,6 +52,11 @@ export function service(kit, nav) {
   kit.cyl('#eee9df', 0.25, 0.25, 0.32, x + 3.65, h, z, { surf: 'plastic' });
   kit.box('#283b3f', 0.45, 0.3, 0.25, x + 5.0, h, z, { surf: 'monitor' });
   nav.block(x - w / 2 - 0.1, x + w / 2 + 0.1, z - d / 2, z + d / 2 + 0.35);
+  // A supported return at the service end lets short-armed staff and customers share the tray edge.
+  const end = SERVICE_END;
+  kit.box(STEEL, end.w, 0.025, end.d, end.x, end.top - 0.025, end.z, { surf: 'metal' });
+  for (const x of [3.0, 4.0]) kit.box(STEEL, 0.035, 0.658, 0.035, x, 0, -6.5, { surf: 'metal' });
+  nav.block(end.x - end.w / 2, end.x + end.w / 2, end.z - end.d / 2, end.z + end.d / 2);
   // Water dispenser and cups, separate from the hot-food queue.
   kit.box(TEAL, 1.3, 0.6, 0.65, 9.5, 0, -6.25, { surf: 'laminate' });
   kit.box('#abb8ba', 0.65, 0.6, 0.5, 9.3, 0.6, -6.25, { surf: 'metal' });

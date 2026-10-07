@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { Kit } from '../dorms/kit.js';
 import { shell, roomLights, roomNav } from '../rooms/shell.js';
 import { R, DOOR, SPOTS, SEATS } from './plan.js';
+import { canteenDetail } from './detail.js';
 import { dining, service } from './furniture.js';
 
 export function buildCanteen() {
@@ -17,7 +18,7 @@ export function buildCanteen() {
     color: '#e1dbcb',
     top: '#9d9b8f',
   });
-  kit.box('#d5c9af', R.x1 - R.x0, 0.12, -R.z0, 0, -0.12, R.z0 / 2, { surf: 'stone', cast: false });
+  kit.box('#d5c9af', R.x1 - R.x0, 0.12, -R.z0, 0, -0.12, R.z0 / 2, { surf: 'tile', cast: false });
   // Durable square floor tiles, a teal service strip and a recessed entry mat.
   for (let x = R.x0 + 0.75; x < R.x1; x += 0.75)
     kit.box('#bbb29d', 0.012, 0.003, -R.z0, x, 0, R.z0 / 2, { cast: false });
@@ -52,6 +53,7 @@ export function buildCanteen() {
       kit.cyl('#eee7d7', 0.15, 0.15, 0.025, x, 0.94 + i * 0.026, R.z0 + 0.25, { surf: 'ceramic' });
   dining(kit, nav);
   service(kit, nav);
+  canteenDetail(kit);
   // Keep the kitchen/service staff lane out of player navigation; it is visibly behind the counter.
   nav.block(R.x0, R.x1, R.z0, -6.55);
   const lamps = new THREE.Group();

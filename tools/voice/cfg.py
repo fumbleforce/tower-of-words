@@ -76,6 +76,7 @@ def speakers():
     sp['bun'] = sp['sales2']; sp['music'] = sp['kuro']; sp['stander'] = sp['reader']
     # the canteen worker closing the plaza terrace after work (evening discovery): a borrowed voice, not Kuro's
     sp['canteen_worker'] = sp['sales2']
+    sp['canteen_shirt'] = sp['sales1']; sp['canteen_cardigan'] = sp['sales2']; sp['canteen_polo'] = sp['reader']
     sp['bakery_clerk'] = sp['sales2']
     sp['konbini_clerk'] = sp['sales2']
     sp['ferry_staff'] = sp['sales2']; sp['ferry_reader'] = sp['sales1']; sp['ferry_traveller'] = sp['reader']
@@ -88,10 +89,10 @@ def speakers():
     return sp
 
 
-FEMALE = {'carina', 'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'bakery_clerk', 'konbini_clerk', 'ferry_staff', 'worker_a',
+FEMALE = {'carina', 'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'bakery_clerk', 'konbini_clerk', 'ferry_staff', 'worker_a', 'canteen_cardigan',
           'member', 'rei'}
 MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'stander', 'worker_b', 'ferry_reader', 'ferry_traveller',
-        'commuter_1', 'commuter_2', 'commuter_3', 'attendant'}
+        'commuter_1', 'commuter_2', 'commuter_3', 'attendant', 'canteen_shirt', 'canteen_polo'}
 # clones whose reference speaks English: their Japanese is made from the timbre alone (gen_takes.xvec)
 XVEC_JA = {'eric', 'carina'}
 LUFS = {'eric': -23.0, 'carina': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0,  # player thoughts quieter, recorded voices a little under the cast

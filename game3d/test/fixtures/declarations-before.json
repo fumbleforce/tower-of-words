@@ -1901,6 +1901,39 @@
     },
     "canteen": {
       "things": {
+        "canteen_shirt": {
+          "label": "Diner in a shirt",
+          "kind": "person"
+        },
+        "canteen_cardigan": {
+          "label": "Diner in a cardigan",
+          "kind": "person"
+        },
+        "canteen_polo": {
+          "label": "Diner with a water cup",
+          "kind": "person"
+        },
+        "canteen_water": {
+          "label": "Water dispenser",
+          "kind": "thing",
+          "verb": "Use"
+        },
+        "canteen_collection": {
+          "label": "My paid tray",
+          "kind": "thing",
+          "verb": "Collect"
+        },
+        "canteen_return": {
+          "label": "Tray return",
+          "kind": "thing",
+          "verb": "Return tray"
+        },
+        "canteen_seat_shared": {
+          "label": "Shared table chair",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        },
         "canteen_worker": {
           "label": "Canteen worker",
           "kind": "person"
@@ -1931,15 +1964,20 @@
       ],
       "seats": [
         "canteen_seat_w",
-        "canteen_seat_e"
+        "canteen_seat_e",
+        "canteen_seat_shared"
       ],
       "nooks": [],
       "zones": [],
       "people": [
-        "canteen_worker"
+        "canteen_worker",
+        "canteen_shirt",
+        "canteen_cardigan",
+        "canteen_polo"
       ],
       "hooks": [
-        "roomWorker"
+        "roomWorker",
+        "canteenDining"
       ]
     },
     "plaza": {

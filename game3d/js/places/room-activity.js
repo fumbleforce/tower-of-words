@@ -4,13 +4,13 @@ import { poolHandling } from './day3/pool-handling.js';
 import { actionShot } from './day4/shot.js';
 
 // Only the worker's arm and its own cloth move. The helper restores the mixer pose before every update.
-export function counterActivity(game, P, worker) {
+export function counterActivity(game, P, worker, { clothAt = [2.0, 0.677, -7.42] } = {}) {
   const hands = poolHandling(P.space, { codeArms: true }),
     shot = actionShot(P);
   const cloth = rbox(0.15, 0.018, 0.12, '#dfcba8');
   cloth.userData.noBatch = true;
   cloth.name = 'room-worker-cloth';
-  cloth.position.set(2.0, 0.677, -7.42);
+  cloth.position.set(...clothAt);
   P.space.add(cloth);
   const bin = rbox(0.16, 0.15, 0.13, '#d6ddd8');
   bin.position.set(2.9, 0.725, -7.08);
@@ -25,14 +25,14 @@ export function counterActivity(game, P, worker) {
     generation = 0;
   const rest = () => {
     hands.drop(worker);
-    cloth.position.set(2.0, 0.677, -7.42);
+    cloth.position.set(...clothAt);
   };
   function wipe(t) {
-    const x = 2.0 + Math.sin(t * 2.2) * 0.1;
-    hands.reach(worker, [x, 0.69, -7.42]);
+    const x = clothAt[0] + Math.sin(t * 2.2) * 0.1;
+    hands.reach(worker, [x, clothAt[1] + 0.013, clothAt[2]]);
     // The cloth follows the real wrist, so a failed reach is visible rather than a detached prop animation.
     hands.hold(worker, cloth, 0.012);
-    hands.reach(worker, [x, 0.69, -7.42]);
+    hands.reach(worker, [x, clothAt[1] + 0.013, clothAt[2]]);
     hands.update();
   }
   return {
@@ -66,7 +66,11 @@ export function counterActivity(game, P, worker) {
         rest();
       }
     },
-    update(dt) {
+    update(dt, suspended = false) {
+      if (suspended) {
+        if (!own) rest();
+        return;
+      }
       shot.update();
       cloth.visible = worker.root.visible;
       if (!worker.root.visible || game.busy) {
