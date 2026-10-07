@@ -1,6 +1,6 @@
 # Prototype notes
 
-These are proposals awaiting a choice in [game-additions-1](../../bible/#review/game-additions-1). None is implemented or established story. Issue [339](https://github.com/fumbleforce/tower-of-words/issues/339) tracks posting this round; a decision will create or update implementation work through the normal Review workflow.
+The proposals and selected option are in [game-additions-1](../../bible/#review/game-additions-1). None is implemented or established story. Issue [339](https://github.com/fumbleforce/tower-of-words/issues/339) now tracks the selected prototype; posting this round is complete.
 
 The five pitches were compared with the current [systems](../../docs/game/systems.md), [places](../../docs/game/places.md), [progression](../../docs/game/progression.md) and [language plan](../../docs/game/language-progression.md). Two independent drafts converged on the camera and physical command puzzle. Room furnishing was removed because it is already planned. Existing groceries, canteen meals, remembered remarks and club sessions are foundations, rather than new proposals in this round.
 
