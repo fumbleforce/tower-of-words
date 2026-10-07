@@ -1,9 +1,5 @@
-// What the ambient crowd looks like (crowd/index.js): the same chibi bodies as the lobby's office workers
-// (cast.js PEOPLE.worker, train/people.js chibi), in four kinds of clothes, some carrying a bag. Every part shares
-// one vertex-coloured material, so the draw-call pass (perf/batch.js) turns each person into one skinned draw.
-// The character models are still being decided: everything about a body is made here, by makeBody(kind, i), so a
-// later model only has to replace this file (the crowd only needs root, hips, torso, head, arms, legs and knees).
-// With the chibi look on, the bodies are the generic Meshy chibis (chibi-crowd.js), the bags on their hand bones.
+// Ambient office bodies use the two selected crowd models; other clothing kinds retain their existing variety.
+// makeBody owns only appearance and bags. Population, route planning and gait remain in the crowd controllers.
 import * as THREE from 'three';
 import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
 import { chibi, SKINS } from '../train/people.js';
@@ -11,6 +7,7 @@ import { hull } from '../train/hull.js';
 import { PEOPLE, HK } from '../cast.js';
 import { K } from '../scenes/office.js';
 import { GEN_ON, crowdBody, hold, boneAt } from '../chibi-crowd.js';
+import { approvedCrowd } from './approved-models.js';
 
 // the chibi parts' own material settings (train/people.js), so the bags merge into the same draw
 const mat = new THREE.MeshStandardMaterial({
@@ -156,7 +153,7 @@ function elder(i) {
 
 // kind: office | casual | sport | elder. i picks the variant (clothes, hair, bag)
 export function makeBody(kind, i) {
-  const gen = GEN_ON && crowdBody(kind, i);
+  const gen = (kind === 'office' && approvedCrowd(i)) || (GEN_ON && crowdBody(kind, i));
   let r = gen;
   if (gen) r.root.traverse((o) => o.isSkinnedMesh && fitSphere(o));
   else if (kind === 'office') r = PEOPLE.worker(i + 7);

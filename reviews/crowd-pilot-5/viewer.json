@@ -1,6 +1,6 @@
 {
   "title": "Crowd pilot 5: Meshy textures",
-  "blurb": "Actual Meshy-textured 3D candidates on the unchanged approved crowd meshes. Compare front and angles beside the cast, then walk, run and sit. Review candidates only; nothing has been installed.",
+  "blurb": "Jørgen selected a-image and b-image. Selected A is unchanged; B’s pale fringe patch is corrected on the original UV. Every earlier attempt remains available. Native mesh, weights and clips are preserved.",
   "rigs": {
     "kenji": {
       "id": "kenji",
@@ -56,6 +56,20 @@
       "label": "b-text: Meshy",
       "dir": "art/parts/crowd-pilot-5/game/b-text/",
       "idle": "art/parts/crowd-pilot-5/game/b-text/idle.json",
+      "height": 1.06
+    },
+    "a-selected": {
+      "id": "crowd-a",
+      "label": "A selected, unchanged",
+      "dir": "art/parts/crowd-selected-1/game/a/",
+      "idle": "art/parts/crowd-selected-1/game/a/idle.json",
+      "height": 1.09
+    },
+    "b-selected": {
+      "id": "crowd-b",
+      "label": "B selected, fringe correction",
+      "dir": "art/parts/crowd-selected-1/game/b/",
+      "idle": "art/parts/crowd-selected-1/game/b/idle.json",
       "height": 1.06
     }
   },
@@ -125,6 +139,54 @@
         }
       ],
       "gap": 0.85
+    },
+    "selected": {
+      "label": "Selected pair + corrected fringe",
+      "items": [
+        {
+          "rig": "a-selected"
+        },
+        {
+          "rig": "b-selected"
+        }
+      ],
+      "gap": 0.9
+    },
+    "hair": {
+      "label": "B original / fringe correction",
+      "items": [
+        {
+          "rig": "b-image"
+        },
+        {
+          "rig": "b-selected"
+        }
+      ],
+      "gap": 0.9
+    },
+    "selected-cast": {
+      "label": "Selected beside cast",
+      "items": [
+        {
+          "rig": "kenji"
+        },
+        {
+          "rig": "a-selected"
+        },
+        {
+          "rig": "kuro"
+        },
+        {
+          "rig": "aoi"
+        },
+        {
+          "rig": "b-selected"
+        },
+        {
+          "rig": "emi"
+        }
+      ],
+      "gap": 0.8
     }
   },
   "closeups": [
