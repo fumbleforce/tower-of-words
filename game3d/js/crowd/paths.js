@@ -226,6 +226,17 @@ function pull(g, pts) {
   return out;
 }
 
+// A temporary route grid for occupied scene space. Static routes and navigation stay untouched.
+export function occupiedGrid(g, circles) {
+  const dist = g.dist.slice();
+  for (let n = 0; n < dist.length; n++) {
+    if (!dist[n]) continue;
+    const [x, z] = centre(g, n);
+    for (const b of circles) dist[n] = Math.min(dist[n], Math.max(0, (Math.hypot(x - b.x, z - b.z) - b.r) / C));
+  }
+  return { ...g, dist, cache: new Map() };
+}
+
 export function routeBetween(g, a, b) {
   const key = a.join() + '>' + b.join();
   if (!g.cache.has(key)) {

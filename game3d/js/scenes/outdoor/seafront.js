@@ -41,7 +41,7 @@ const HUT = {
   trim: '#c9ccce',
 };
 
-const { LAMP_X, BENCH_X, FURNITURE_Z } = S;
+const { LAMP_X, BENCH_X, BENCH_Z, FURNITURE_Z } = S;
 
 // draws everything under `object` on the island map's layer only
 export function mapOnly(object, layer, tag) {
@@ -259,7 +259,7 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
     { pool: 1.1 },
   );
   BENCH_X.forEach((x, i) => {
-    const [lx, lz] = at(x, bz - 0.1);
+    const [lx, lz] = at(x, BENCH_Z - 0.1);
     // a pair back to back: one faces the sea, one the shops
     bench(p, lx, lz + 0.3, 0, { len: 1.8 });
     bench(p, lx, lz - 0.3, Math.PI, { len: 1.8 });
