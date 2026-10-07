@@ -7,6 +7,7 @@ export const PINS = {
   train: { at: [-28.6, -3.9] },
   gate: { at: [-14.45, 6.5] },
   print_shop: { in: 'campus' },
+  ferry_terminal: { in: 'harbour' },
   campus: { at: [-19.25, -33] },
   forecourt: { at: [-6, -1] },
   office: { in: 'forecourt' },

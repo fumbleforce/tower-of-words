@@ -77,6 +77,7 @@ def speakers():
     sp['canteen_worker'] = sp['sales2']
     sp['bakery_clerk'] = sp['sales2']
     sp['konbini_clerk'] = sp['sales2']
+    sp['ferry_staff'] = sp['sales2']; sp['ferry_reader'] = sp['sales1']; sp['ferry_traveller'] = sp['reader']
     # Background people use the approved body-matched contextual Talk presets.
     sp['worker_a'] = sp['sales2']; sp['worker_b'] = sp['reader']
     sp['commuter_1'] = sp['sales1']; sp['commuter_2'] = sp['reader']; sp['commuter_3'] = sp['kenji']
@@ -86,9 +87,9 @@ def speakers():
     return sp
 
 
-FEMALE = {'carina', 'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'bakery_clerk', 'konbini_clerk', 'worker_a',
+FEMALE = {'carina', 'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'bakery_clerk', 'konbini_clerk', 'ferry_staff', 'worker_a',
           'member', 'rei'}
-MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'stander', 'worker_b',
+MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'stander', 'worker_b', 'ferry_reader', 'ferry_traveller',
         'commuter_1', 'commuter_2', 'commuter_3', 'attendant'}
 # clones whose reference speaks English: their Japanese is made from the timbre alone (gen_takes.xvec)
 XVEC_JA = {'eric', 'carina'}

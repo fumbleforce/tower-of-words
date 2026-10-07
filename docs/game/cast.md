@@ -23,6 +23,9 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 | `tama` | Tama | A calico cat. |
 | `konbini_clerk` | Shop clerk | An unnamed adult at the konbini till; the existing generic apron body and approved sales2 voice. |
 | `bakery_clerk` | Bakery clerk | An unnamed adult serving bread in the shop street bakery; the existing generic apron body and approved sales2 voice. |
+| `ferry_staff` | Room attendant | An unnamed adult who keeps the harbour waiting room usable; existing generic body and approved sales2 voice. |
+| `ferry_reader` | Reader | An unnamed adult reading a leaflet by the harbour window; existing generic body and approved sales1 voice. |
+| `ferry_traveller` | Traveller | An unnamed adult resting with a bag, which he moves from a usable seat; existing generic body and approved reader voice. |
 | `canteen_worker` | Canteen worker | An unnamed adult who works at the indoor service counter and closes the canteen terrace after work. |
 | `attendant` | Attendant | The gym's attendant on day 3: the desk by day, the pool's floats at the club's evening. An office worker's body, a borrowed voice. |
 | `member` | Club member | A swimming club member on day 3's evening, with the equipment list; her goggles are on the pool's fence. An office worker's body, a borrowed voice. |

@@ -99,6 +99,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `forecourt` | -13.95 | -0.65 | 0 | 1 | 0 | The gate room: its exit is the station door. |
 | `office` | 8.75 | -8.45 | 0 | 1 | -2 | Its lift under the forecourt's lift. |
 | `campus` | -13.95 | -0.65 | 0 | 1 | 0 | Head-office north grounds in the forecourt frame. |
+| `ferry_terminal` | -112 | -100 | 0 | 1 | 0 | Existing terminal south door and waiting-room footprint. |
 | `print_shop` | -24.3 | -43.3 | 270 | 1 | 0 | Existing w3 east door and ground-floor footprint. |
 | `canteen` | 33.885 | -20.5 | 0 | 1 | 0 | The ground-floor footprint, front edge centred in the existing canteen. |
 | `plaza` | 37.29 | -2.48 | 0 | 1 | 0 | Its fountain on the map's fountain, 2.4 south of it on the lane's axis. |
@@ -143,6 +144,7 @@ The game's map and the minimap (controls-and-ui.md, The map) show each outdoor p
 | `canteen` | | | `plaza` |
 | `campus` | -19.25 | -33 | |
 | `print_shop` | | | `campus` |
+| `ferry_terminal` | | | `harbour` |
 | `dorm_court` | 79.84 | -1.3 | |
 | `dorms` | | | `dorm_court` |
 | `shotengai` | 30.3 | 20.1 | |
@@ -1298,7 +1300,7 @@ In the morning the sun is the plaza's; after work the lamps, the floodlights, th
 | `office_street` | To the office street | The street in front of Amakawa Trading, back to the office quarter. |
 | `works_lane` | To the old works | The works lane north out of the supply yard, on to the old works. |
 | `works_street` | To the works street | The works street north off the office street, on to the old works. |
-| `ferry_terminal` | Ferry terminal | The terminal's door on the landing. Go in: shut. |
+| `ferry_terminal` | Ferry terminal | The terminal's actual door on the landing. Opens the waiting room from early morning through evening. |
 | `harbour_office` | Harbour office | The harbour office's door on the yard's north edge. Go in: shut. |
 
 ### Spots
@@ -1866,3 +1868,15 @@ A refrigerated rear case holds milk cartons, wrapped rice balls, milk tea and co
 | `konbini_seat` | Window seat | Sit, drink purchased milk or eat a rice ball |
 
 Spots: `konbini_in`, `fridge`, `checkout`, `window`. Seat: `konbini_seat`. Person: `konbini_clerk`, an existing generic apron body using the approved sales2 voice. Hook: `konbiniShop`. No zones or secret nooks. The shop exits through the same doorway to shop street. Continuing weeks retain the same clerk, basket, receipts, perch and morning-through-evening opening rule.
+
+## Harbour waiting room (`ferry_terminal`)
+
+The ground floor inside the existing ferry-terminal footprint, entered through its actual south door from the harbour landing. It opens from early morning through evening. This is a sheltered local stop; there is no ticket purchase or departure schedule. The attendant is present in the morning, at lunch and in the afternoon; the service shutter closes at other periods. These hours are shared by ordinary door interaction and map travel.
+
+Two facing benches form the occupied western waiting area. Two further usable benches sit beside a luggage rack and the island-route board, leaving connected door, counter and seat approaches. The reader has a leaflet and looks toward the real ferry and quay, rebuilt from the exterior's canonical builders through the south windows. The traveller initially has his bag on the window seat; after he carries it to the floor beside his bench, that same seat becomes usable and stays free in saves. The other three player seats are available immediately. The service counter has a leaflet rack, fitted room-use notices, a bin, closed storage and modest ceiling lights. The front cutaway remains for ordinary overview navigation; the window shot shows the framed outlook.
+
+All three residents have ordinary first and repeat Talk. The attendant welcomes people to sit and points out where rubbish goes. The traveller moves his bag before offering the seat. The reader points toward the ship. Japanese remains heard speech with known words revealed, supported by the visible gestures; there are no compulsory lessons or new vocabulary records.
+
+While seated, existing Bag Read works. The terminal seat menu also offers owned bread, riceball and drinks using the existing item definitions. A visible bite or sip must complete before one inventory item is consumed; a saved receipt prevents a resumed action from consuming it twice. Leaving during an action cancels its continuation. This is a terminal seat affordance, not a universal Bag Eat command.
+
+The harbour, works and wider island still contain unentered shells. This room does not imply that the ferry journey or other harbour buildings are playable.

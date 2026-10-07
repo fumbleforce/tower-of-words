@@ -51,3 +51,11 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
 ### North-campus routes
 
 `day2/campus.js`, `day2/print_shop.js`, `day2/office_quarter.js` and `day2/harbour.js` reuse the physical routes without adding spoken scenes. The forecourt's `to_campus` enters the new loop. Campus uses `arrive`, `to_forecourt`, `to_offices`, `to_harbour`, `to_print`, `bench`; print shop uses `arrive`, `directory`, `print`, `end`, `sit`, `exit`. Office street uses `arrive`, `to_campus`, `to_harbour`, `shut`; harbour uses `arrive`, `to_campus`, `to_offices`, `shut`. Sports and works routes retain their day-2 closure. The free directory is a persistent readable item after a completed feed/output, with no new language lesson or quest.
+
+### Harbour waiting room
+
+`day2/harbour.js`: `terminal` checks the room opening periods and `to_terminal` uses the real harbour door.
+
+`day2/ferry_terminal.js` reuses the recurring local room story. Nodes: `arrive`, `leave`, `staff`, `staff_repeat`, `staff_menu`, `staff_thanks`, `food_ask`, `traveller`, `traveller_repeat`, `traveller_menu`, `rest`, `reader`, `reader_repeat`, `reader_menu`, `reader_sit`, `window_seat`, `quiet_seat`, `seat_menu`, `food_milk`, `food_riceball`, `food_curry_bread`, `food_butter_roll`, `food_coffee`, `food_tea`, `food_melon`, `food_cornsoup`, `eat_prepared`, `stand`, `end`. The attendant welcomes sitting and food; the traveller physically frees a seat; the reader points out the ship. The seat menu consumes only owned food after its visible action and preserves a replay-safe receipt. All dialogue remains optional; there are no lessons or ferry departures.
+
+Additional terminal seat nodes `landing_seat` and `notice_seat` use the same meal/reading affordance as `quiet_seat`, with no extra spoken lines.

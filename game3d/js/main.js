@@ -30,31 +30,7 @@ import { installProgressionHooks } from './narrative/hooks/progression.js';
 import { ui, unlockAudio } from './ui.js';
 import { known, SAYABLE } from './lang.js';
 import { Runner, flags } from './runner.js';
-import { trainPlace as train } from './places/train.js';
-import { lobbyPlace as gate } from './places/lobby.js';
-import { forecourtPlace as forecourt } from './places/forecourt.js';
-import { printShopPlace as print_shop } from './places/print-shop.js';
-import { campusPlace as campus } from './places/campus.js';
-import { canteenPlace as canteen } from './places/canteen.js';
-import { plazaPlace as plaza } from './places/plaza.js';
-import { officePlace as office } from './places/office.js';
-import { dormCourtPlace as dorm_court } from './places/dorm-court.js';
-import { dormsPlace as dorms } from './places/dorms.js';
-import { shotengaiPlace as shotengai } from './places/shotengai.js';
-import { bakeryPlace as bakery } from './places/bakery.js';
-import { konbiniPlace as konbini } from './places/konbini.js';
-import { izakayaPlace as izakaya } from './places/izakaya.js';
-import { karaokePlace as karaoke } from './places/karaoke.js';
-import { karaokeBoothPlace as karaoke_booth } from './places/karaoke-booth.js';
-import { eastLanePlace as east_lane } from './places/east-lane.js';
-import { eastCoastPlace as east_coast } from './places/east-coast.js';
-import { commonsPlace as dorm_commons } from './places/commons.js';
-import { sportsPlace as sports } from './places/sports.js';
-import { poolPlace as pool } from './places/pool.js';
-import { gymPlace as gym } from './places/gym.js';
-import { officeQuarterPlace as office_quarter } from './places/office-quarter.js';
-import { harbourPlace as harbour } from './places/harbour.js';
-import { worksPlace as works } from './places/works.js';
+import { PLACES } from './places/factories.js';
 import { snapshot as snapshotOf, crossfade } from './places/crossfade.js';
 import { installSim, sim, stepAmbient, save, loadSave, clearSave } from './sim.js';
 import { createContinue, dayStartSave } from './continue.js';
@@ -70,33 +46,7 @@ const canvas = document.getElementById('c');
 const renderer = createRenderer(canvas);
 ui.build();
 if (CAP) document.body.classList.add('cap');
-const PLACES = {
-  train,
-  gate,
-  forecourt,
-  plaza,
-  canteen,
-  campus,
-  print_shop,
-  office,
-  dorm_court,
-  dorms,
-  shotengai,
-  izakaya,
-  bakery,
-  konbini,
-  karaoke,
-  karaoke_booth,
-  east_lane,
-  east_coast,
-  dorm_commons,
-  sports,
-  pool,
-  gym,
-  office_quarter,
-  harbour,
-  works,
-};
+
 assertRegistered(Object.keys(PLACE_FILES), PLACES, 'place factories');
 
 export const game = {

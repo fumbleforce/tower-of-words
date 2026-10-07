@@ -1,3 +1,4 @@
+import { terminalOpen } from '../gameplay/terminal-hours.js';
 import { bakeryOpen, konbiniOpen } from '../gameplay/shop-hours.js';
 // Fast travel's rules (docs/game/systems.md, Fast travel): every place's state now, with its one-line reason.
 //   here     where Eric is
@@ -69,6 +70,11 @@ export function placeStates({
     if (!today.has(id)) {
       s.state = 'closed';
       s.reason = REASON.closed;
+      continue;
+    }
+    if (id === 'ferry_terminal' && !terminalOpen(day, period)) {
+      s.state = 'closed';
+      s.reason = 'Open from early morning through evening.';
       continue;
     }
     if (id === 'bakery' && !bakeryOpen(day, period)) {

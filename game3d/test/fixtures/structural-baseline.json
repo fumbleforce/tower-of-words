@@ -42,6 +42,24 @@
       ],
       "private_mode": [
         "game3d/js/settings.js"
+      ],
+      "ferry_action_complete": [
+        "game3d/js/places/ferry-terminal/action.js"
+      ],
+      "ferry_bag_moved": [
+        "game3d/js/places/ferry-terminal/activity.js"
+      ],
+      "ferry_food_id": [
+        "game3d/js/places/ferry-terminal/food-state.js"
+      ],
+      "ferry_food_item": [
+        "game3d/js/places/ferry-terminal/food-state.js"
+      ],
+      "ferry_food_phase": [
+        "game3d/js/places/ferry-terminal/food-state.js"
+      ],
+      "ferry_consumed_id": [
+        "game3d/js/places/ferry-terminal/food-state.js"
       ]
     },
     "prefix": {
@@ -95,6 +113,9 @@
       ],
       "found_": [
         "game3d/js/finds/index.js"
+      ],
+      "ferry_has_": [
+        "game3d/js/places/ferry-terminal/food-state.js"
       ]
     },
     "placeFile": {
@@ -120,7 +141,8 @@
       "canteen": "game3d/js/places/canteen.js",
       "izakaya": "game3d/js/places/izakaya.js",
       "campus": "game3d/js/places/campus.js",
-      "print_shop": "game3d/js/places/print-shop.js"
+      "print_shop": "game3d/js/places/print-shop.js",
+      "ferry_terminal": "game3d/js/places/ferry-terminal.js"
     },
     "events": {
       "train": {
@@ -151,7 +173,8 @@
       "canteen": {},
       "izakaya": {},
       "campus": {},
-      "print_shop": {}
+      "print_shop": {},
+      "ferry_terminal": {}
     },
     "speakers": {
       "eric": {
@@ -291,6 +314,7 @@
     "gym",
     "office_quarter",
     "harbour",
+    "ferry_terminal",
     "works"
   ],
   "nodes": [
@@ -623,12 +647,45 @@
     "office_quarter:shut",
     "office_quarter:to_sports",
     "office_quarter:to_harbour",
+    "harbour:to_terminal",
+    "harbour:terminal",
     "harbour:to_campus",
     "harbour:arrive",
     "harbour:shut",
     "harbour:to_offices",
     "harbour:to_works",
     "harbour:to_works_street",
+    "ferry_terminal:arrive",
+    "ferry_terminal:leave",
+    "ferry_terminal:staff",
+    "ferry_terminal:staff_repeat",
+    "ferry_terminal:staff_menu",
+    "ferry_terminal:staff_thanks",
+    "ferry_terminal:food_ask",
+    "ferry_terminal:traveller",
+    "ferry_terminal:traveller_repeat",
+    "ferry_terminal:traveller_menu",
+    "ferry_terminal:rest",
+    "ferry_terminal:reader",
+    "ferry_terminal:reader_repeat",
+    "ferry_terminal:reader_menu",
+    "ferry_terminal:reader_sit",
+    "ferry_terminal:window_seat",
+    "ferry_terminal:quiet_seat",
+    "ferry_terminal:seat_menu",
+    "ferry_terminal:food_milk",
+    "ferry_terminal:food_riceball",
+    "ferry_terminal:food_curry_bread",
+    "ferry_terminal:food_butter_roll",
+    "ferry_terminal:food_coffee",
+    "ferry_terminal:food_tea",
+    "ferry_terminal:food_melon",
+    "ferry_terminal:food_cornsoup",
+    "ferry_terminal:eat_prepared",
+    "ferry_terminal:stand",
+    "ferry_terminal:end",
+    "ferry_terminal:landing_seat",
+    "ferry_terminal:notice_seat",
     "works:arrive",
     "works:chained",
     "works:shut",
@@ -2086,6 +2143,362 @@
       "cond": ""
     },
     {
+      "from": "harbour:terminal",
+      "to": "harbour:to_terminal",
+      "kind": "go",
+      "labels": [],
+      "cond": "(period_early || period_morning || period_lunch || period_afternoon || period_evening)"
+    },
+    {
+      "from": "ferry_terminal:staff",
+      "to": "ferry_terminal:staff_repeat",
+      "kind": "go",
+      "labels": [],
+      "cond": "(ferry_staff_met)"
+    },
+    {
+      "from": "ferry_terminal:staff",
+      "to": "ferry_terminal:staff_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:staff_repeat",
+      "to": "ferry_terminal:staff_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:staff_menu",
+      "to": "ferry_terminal:food_ask",
+      "kind": "choice",
+      "labels": [
+        "Something to eat is okay?"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:staff_menu",
+      "to": "ferry_terminal:staff_thanks",
+      "kind": "choice",
+      "labels": [
+        "Thank you."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:staff_thanks",
+      "to": "ferry_terminal:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:food_ask",
+      "to": "ferry_terminal:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:traveller",
+      "to": "ferry_terminal:traveller_repeat",
+      "kind": "go",
+      "labels": [],
+      "cond": "(ferry_bag_moved)"
+    },
+    {
+      "from": "ferry_terminal:traveller",
+      "to": "ferry_terminal:traveller_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:traveller_repeat",
+      "to": "ferry_terminal:traveller_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:traveller_menu",
+      "to": "ferry_terminal:rest",
+      "kind": "choice",
+      "labels": [
+        "A long walk?"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:traveller_menu",
+      "to": "ferry_terminal:window_seat",
+      "kind": "choice",
+      "labels": [
+        "Take the window seat."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:traveller_menu",
+      "to": "ferry_terminal:end",
+      "kind": "choice",
+      "labels": [
+        "Leave him to rest."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:rest",
+      "to": "ferry_terminal:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:reader",
+      "to": "ferry_terminal:reader_repeat",
+      "kind": "go",
+      "labels": [],
+      "cond": "(ferry_reader_met)"
+    },
+    {
+      "from": "ferry_terminal:reader",
+      "to": "ferry_terminal:reader_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:reader_repeat",
+      "to": "ferry_terminal:reader_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:reader_menu",
+      "to": "ferry_terminal:reader_sit",
+      "kind": "choice",
+      "labels": [
+        "Mind if I sit?"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:reader_menu",
+      "to": "ferry_terminal:end",
+      "kind": "choice",
+      "labels": [
+        "I'll let you get back to it."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:reader_sit",
+      "to": "ferry_terminal:quiet_seat",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:window_seat",
+      "to": "ferry_terminal:traveller",
+      "kind": "go",
+      "labels": [],
+      "cond": "(!ferry_bag_moved)"
+    },
+    {
+      "from": "ferry_terminal:window_seat",
+      "to": "ferry_terminal:seat_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:quiet_seat",
+      "to": "ferry_terminal:seat_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:seat_menu",
+      "to": "ferry_terminal:food_milk",
+      "kind": "choice",
+      "labels": [
+        "Drink milk carton."
+      ],
+      "cond": "(ferry_has_milk)"
+    },
+    {
+      "from": "ferry_terminal:seat_menu",
+      "to": "ferry_terminal:food_riceball",
+      "kind": "choice",
+      "labels": [
+        "Eat salted rice ball."
+      ],
+      "cond": "(ferry_has_riceball)"
+    },
+    {
+      "from": "ferry_terminal:seat_menu",
+      "to": "ferry_terminal:food_curry_bread",
+      "kind": "choice",
+      "labels": [
+        "Eat curry bread."
+      ],
+      "cond": "(ferry_has_curry_bread)"
+    },
+    {
+      "from": "ferry_terminal:seat_menu",
+      "to": "ferry_terminal:food_butter_roll",
+      "kind": "choice",
+      "labels": [
+        "Eat butter roll."
+      ],
+      "cond": "(ferry_has_butter_roll)"
+    },
+    {
+      "from": "ferry_terminal:seat_menu",
+      "to": "ferry_terminal:food_coffee",
+      "kind": "choice",
+      "labels": [
+        "Drink canned coffee."
+      ],
+      "cond": "(ferry_has_coffee)"
+    },
+    {
+      "from": "ferry_terminal:seat_menu",
+      "to": "ferry_terminal:food_tea",
+      "kind": "choice",
+      "labels": [
+        "Drink royal milk tea."
+      ],
+      "cond": "(ferry_has_tea)"
+    },
+    {
+      "from": "ferry_terminal:seat_menu",
+      "to": "ferry_terminal:food_melon",
+      "kind": "choice",
+      "labels": [
+        "Drink melon soda."
+      ],
+      "cond": "(ferry_has_melon)"
+    },
+    {
+      "from": "ferry_terminal:seat_menu",
+      "to": "ferry_terminal:food_cornsoup",
+      "kind": "choice",
+      "labels": [
+        "Drink hot corn soup."
+      ],
+      "cond": "(ferry_has_cornsoup)"
+    },
+    {
+      "from": "ferry_terminal:seat_menu",
+      "to": "ferry_terminal:end",
+      "kind": "choice",
+      "labels": [
+        "Sit for a while."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:seat_menu",
+      "to": "ferry_terminal:stand",
+      "kind": "choice",
+      "labels": [
+        "Get up."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:food_milk",
+      "to": "ferry_terminal:eat_prepared",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:food_riceball",
+      "to": "ferry_terminal:eat_prepared",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:food_curry_bread",
+      "to": "ferry_terminal:eat_prepared",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:food_butter_roll",
+      "to": "ferry_terminal:eat_prepared",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:food_coffee",
+      "to": "ferry_terminal:eat_prepared",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:food_tea",
+      "to": "ferry_terminal:eat_prepared",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:food_melon",
+      "to": "ferry_terminal:eat_prepared",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:food_cornsoup",
+      "to": "ferry_terminal:eat_prepared",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:eat_prepared",
+      "to": "ferry_terminal:seat_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:stand",
+      "to": "ferry_terminal:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:landing_seat",
+      "to": "ferry_terminal:seat_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "ferry_terminal:notice_seat",
+      "to": "ferry_terminal:seat_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
       "from": "forecourt:to_campus",
       "to": "campus:arrive",
       "kind": "trip",
@@ -2350,6 +2763,12 @@
       "labels": []
     },
     {
+      "from": "harbour:to_terminal",
+      "to": "ferry_terminal:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "harbour:to_campus",
       "to": "campus:arrive",
       "kind": "trip",
@@ -2370,6 +2789,12 @@
     {
       "from": "harbour:to_works_street",
       "to": "works:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "ferry_terminal:leave",
+      "to": "harbour:arrive",
       "kind": "trip",
       "labels": []
     },
@@ -2932,6 +3357,8 @@
     "home_203",
     "bakery_visited",
     "konbini_visited",
+    "ferry_staff_met",
+    "ferry_reader_met",
     "found_bakery_flyer",
     "bakery_action_complete",
     "place",
@@ -2949,6 +3376,21 @@
     "konbini_selected_milk",
     "konbini_selected_riceball",
     "konbini_selected_tea",
-    "konbini_selected_coffee"
+    "konbini_selected_coffee",
+    "period_early",
+    "period_morning",
+    "period_lunch",
+    "period_afternoon",
+    "period_evening",
+    "ferry_action_complete",
+    "ferry_bag_moved",
+    "ferry_has_milk",
+    "ferry_has_riceball",
+    "ferry_has_curry_bread",
+    "ferry_has_butter_roll",
+    "ferry_has_coffee",
+    "ferry_has_tea",
+    "ferry_has_melon",
+    "ferry_has_cornsoup"
   ]
 }

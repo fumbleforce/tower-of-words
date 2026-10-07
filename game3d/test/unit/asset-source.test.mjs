@@ -53,6 +53,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     gym: {},
     office_quarter: {},
     harbour: {},
+    ferry_terminal: { eric: 16, ferry_reader: 4, ferry_staff: 4, ferry_traveller: 4 },
     works: {},
     transitions: { sales1: 2, sales2: 1 },
   });
@@ -73,6 +74,8 @@ test('the full public scanner registers parsed metadata and preserves existing i
     assert.ok(entries.get('music/calm')?.used.includes('Background loop in Train'));
     assert.match(entries.get('icon/word-matte')?.svg || '', /<path/);
     assert.equal(entries.get('style/world-1')?.name, 'World look 1: Soft cel');
+    assert.deepEqual(entries.get('room/ferry_terminal')?.view, { type: 'room', room: 'ferry_terminal' });
+    assert.equal(entries.get('prop/ferry_terminal/ferry_landing_seat')?.view.room, 'ferry-terminal');
   } finally { fs.rmSync(scratch, { recursive: true, force: true }); }
 });
 

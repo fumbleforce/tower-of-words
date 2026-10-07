@@ -16,6 +16,7 @@ export const PLACE_EVENTS = {
   },
   forecourt: { start: { id: 'start', source: 'engine' } },
   plaza: { start: { id: 'start', source: 'engine' } },
+  ferry_terminal: { start: { id: 'start', source: 'engine' } },
   print_shop: { start: { id: 'start', source: 'engine' } },
   campus: { start: { id: 'start', source: 'engine' } },
   canteen: { start: { id: 'start', source: 'engine' } },

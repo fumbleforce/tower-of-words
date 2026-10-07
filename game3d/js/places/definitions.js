@@ -30,6 +30,7 @@ export const PLACE_FILES = {
   gym: 'game3d/js/places/gym.js',
   office_quarter: 'game3d/js/places/office-quarter.js',
   harbour: 'game3d/js/places/harbour.js',
+  ferry_terminal: 'game3d/js/places/ferry-terminal.js',
   works: 'game3d/js/places/works.js',
 };
 // Place names for the save list and the end-of-day photos.
@@ -58,6 +59,7 @@ export const PLACE_NAMES = {
   gym: 'Gym',
   office_quarter: 'Office street',
   harbour: 'Harbour',
+  ferry_terminal: 'Ferry waiting room',
   works: 'Old works',
 };
 export const NEXT = {
@@ -99,7 +101,8 @@ export const TRIPS = {
   pool: ['sports'],
   gym: ['sports', 'pool'],
   office_quarter: ['sports', 'harbour', 'campus'],
-  harbour: ['office_quarter', 'works', 'campus'],
+  harbour: ['office_quarter', 'works', 'campus', 'ferry_terminal'],
+  ferry_terminal: ['harbour'],
   works: ['harbour'],
 };
 // Day 2 has its own ways (game3d/story/day2/index.js TRIPS, both periods), and no NEXT line; so has day 3's test
@@ -136,6 +139,7 @@ export const STORY_FILES = [
   'gym',
   'office_quarter',
   'harbour',
+  'ferry_terminal',
   'works',
   'transitions',
 ];

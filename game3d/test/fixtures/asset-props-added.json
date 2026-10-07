@@ -1196,6 +1196,121 @@
     ]
   },
   {
+    "id_": "prop/ferry_terminal/ferry_exit",
+    "kind": "prop",
+    "name": "Harbour",
+    "paths": [
+      "game3d/js/places/ferry-terminal.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "ferry-terminal.js things.ferry_exit",
+    "place": "ferry_terminal",
+    "used": [
+      "Ferry waiting room: tap target 'Harbour'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "ferry-terminal"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/ferry_terminal/ferry_landing_seat",
+    "kind": "prop",
+    "name": "Landing bench",
+    "paths": [
+      "game3d/js/places/ferry-terminal.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "ferry-terminal.js things.ferry_landing_seat",
+    "place": "ferry_terminal",
+    "used": [
+      "Ferry waiting room: tap target 'Landing bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "ferry-terminal"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/ferry_terminal/ferry_notice_seat",
+    "kind": "prop",
+    "name": "Waiting bench",
+    "paths": [
+      "game3d/js/places/ferry-terminal.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "ferry-terminal.js things.ferry_notice_seat",
+    "place": "ferry_terminal",
+    "used": [
+      "Ferry waiting room: tap target 'Waiting bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "ferry-terminal"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/ferry_terminal/ferry_quiet_seat",
+    "kind": "prop",
+    "name": "Quiet bench",
+    "paths": [
+      "game3d/js/places/ferry-terminal.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "ferry-terminal.js things.ferry_quiet_seat",
+    "place": "ferry_terminal",
+    "used": [
+      "Ferry waiting room: tap target 'Quiet bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "ferry-terminal"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/ferry_terminal/ferry_window_seat",
+    "kind": "prop",
+    "name": "Window bench",
+    "paths": [
+      "game3d/js/places/ferry-terminal.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "ferry-terminal.js things.ferry_window_seat",
+    "place": "ferry_terminal",
+    "used": [
+      "Ferry waiting room: tap target 'Window bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "ferry-terminal"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/forecourt/campus",
     "kind": "prop",
     "name": "North campus",
