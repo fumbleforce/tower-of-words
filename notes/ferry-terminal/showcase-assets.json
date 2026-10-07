@@ -1,0 +1,86 @@
+[
+  {
+    "path": "bible/shots/showcase/ferry-terminal-1/evening-desktop.png",
+    "sha256": "a8ed9db7267722fc462af2664464ee59fa37646bc62a909f58b5acb2b22b6401",
+    "size": 950858,
+    "type": "image/png"
+  },
+  {
+    "path": "bible/shots/showcase/ferry-terminal-1/staff-phone.png",
+    "sha256": "422629f93c89d8d7d0cceaf52e9013d416befe05a875ca136e6d63e36f071ad1",
+    "size": 206292,
+    "type": "image/png"
+  },
+  {
+    "path": "bible/shots/showcase/ferry-terminal-1/room-phone.png",
+    "sha256": "f632764d1172329e489bfcfe3297a42e2339cc8e8e84bee6608d8ea30394b7de",
+    "size": 285345,
+    "type": "image/png"
+  },
+  {
+    "path": "bible/shots/showcase/ferry-terminal-1/bag-desktop.png",
+    "sha256": "163a40363dc559a962d16b749e88831f2509a21e031a789a2a24079652c4c5df",
+    "size": 929240,
+    "type": "image/png"
+  },
+  {
+    "path": "bible/shots/showcase/ferry-terminal-1/milk-phone.png",
+    "sha256": "3002adff24721c7da0b400c5d5b98f1f0506d7d69ff7055db3c4f4da5320cf60",
+    "size": 275545,
+    "type": "image/png"
+  },
+  {
+    "path": "bible/shots/showcase/ferry-terminal-1/window-phone.png",
+    "sha256": "0163eef9e4de7a5daf0eaee7f45440b5adb20fb4e43358dcd8a241fbfb22b2d9",
+    "size": 220774,
+    "type": "image/png"
+  },
+  {
+    "path": "bible/shots/showcase/ferry-terminal-1/room-desktop.png",
+    "sha256": "8cc84de71da52c382186b3215bf2587f323e51657ce83f0ea7433e08d88047e1",
+    "size": 997097,
+    "type": "image/png"
+  },
+  {
+    "path": "bible/shots/showcase/ferry-terminal-1/east-phone.png",
+    "sha256": "46ef0aecac1ad92b7765fe6046611d76918f7e367b0e183bb6b91b733640c4d7",
+    "size": 289899,
+    "type": "image/png"
+  },
+  {
+    "path": "tools/assets/thumbs/3d-prop-ferry-terminal-ferry-exit.webp",
+    "sha256": "4784f6d879a9b5a3574b00ed87067847c20841a8eb4bf89a461baaa27f2b9d55",
+    "size": 11828,
+    "type": "image/webp"
+  },
+  {
+    "path": "tools/assets/thumbs/3d-prop-ferry-terminal-ferry-landing-seat.webp",
+    "sha256": "4784f6d879a9b5a3574b00ed87067847c20841a8eb4bf89a461baaa27f2b9d55",
+    "size": 11828,
+    "type": "image/webp"
+  },
+  {
+    "path": "tools/assets/thumbs/3d-prop-ferry-terminal-ferry-notice-seat.webp",
+    "sha256": "4784f6d879a9b5a3574b00ed87067847c20841a8eb4bf89a461baaa27f2b9d55",
+    "size": 11828,
+    "type": "image/webp"
+  },
+  {
+    "path": "tools/assets/thumbs/3d-prop-ferry-terminal-ferry-quiet-seat.webp",
+    "sha256": "4784f6d879a9b5a3574b00ed87067847c20841a8eb4bf89a461baaa27f2b9d55",
+    "size": 11828,
+    "type": "image/webp"
+  },
+  {
+    "path": "tools/assets/thumbs/3d-prop-ferry-terminal-ferry-window-seat.webp",
+    "sha256": "4784f6d879a9b5a3574b00ed87067847c20841a8eb4bf89a461baaa27f2b9d55",
+    "size": 11828,
+    "type": "image/webp"
+  },
+  {
+    "path": "tools/assets/thumbs/3d-room-ferry-terminal.webp",
+    "sha256": "4784f6d879a9b5a3574b00ed87067847c20841a8eb4bf89a461baaa27f2b9d55",
+    "size": 11828,
+    "type": "image/webp"
+  }
+]

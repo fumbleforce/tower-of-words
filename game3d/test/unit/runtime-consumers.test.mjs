@@ -59,7 +59,8 @@ test('real factory mutations fail CPU registration checks', () => {
   const mutations = [
     ['game3d/js/places/office.js', 'lunchSit:', 'lunchSit2:'],
     ['game3d/js/places/train.js', 'by_aoi:', 'missing_spot:'],
-    ['game3d/js/main.js', "lobbyPlace as gate } from './places/lobby.js'", "lobbyPlace as gate } from './places/forecourt.js'"],
+    ['game3d/js/places/factories.js', "lobbyPlace as gate } from './lobby.js'", "lobbyPlace as gate } from './forecourt.js'"],
+    ['game3d/js/main.js', "{ PLACES } from './places/factories.js'", "{ WRONG } from './places/factories.js'"],
     ['game3d/js/places/train.js', '...PLACE_DETAILS.train.things.cup', '...PLACE_DETAILS.train.things.rack'],
   ];
   for (const [file, before, after] of mutations) {
@@ -70,7 +71,7 @@ test('real factory mutations fail CPU registration checks', () => {
 
 test('factory checks and asset reads survive mechanical formatting', async () => {
   const files = {};
-  for (const file of [...Object.values(PLACE_FILES), 'game3d/js/main.js']) files[file] = await format(read(file), { parser: 'babel', printWidth: 120 });
+  for (const file of [...Object.values(PLACE_FILES), 'game3d/js/main.js', 'game3d/js/places/factories.js']) files[file] = await format(read(file), { parser: 'babel', printWidth: 120 });
   const formattedRead = file => files[file] ?? read(file);
   checkRegistrations(formattedRead);
   // Coordinate expression whitespace is immaterial to the Python numeric reader.

@@ -13,8 +13,7 @@ import { turningCam, followFit } from './turning-cam.js';
 
 // The harbour (scenes/harbour.js): the office street walked on west from the office quarter into the supply yard,
 // out on the supply pier and the ferry pier, across the ferry landing to the terminal's door and the harbour office's,
-// and south down the harbour walk; it also loads with ?place=harbour. The terminal and the harbour office are shut
-// for now (their doors say so). East along the street goes back to the office quarter; north up the works lane out
+// and south down the harbour walk; it also loads with ?place=harbour. The terminal opens as a local waiting room; the harbour office remains shut. East along the street goes back to the office quarter; north up the works lane out
 // of the yard, or up the works street off the office street, goes on to the old works.
 //
 // The camera keeps the office street's look on the street and down the harbour walk; as Eric comes off the street
@@ -145,6 +144,7 @@ export async function harbourPlace(game) {
     // works down the lane or the street, the way he left them, walking south; out up the one nearest
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, -Math.PI / 2),
     tripInFrom: {
+      ferry_terminal: (g) => walkIn(g, cam, dk('ferry_terminal').local, dk('ferry_terminal').step, 0),
       campus: (g) => walkIn(g, cam, CAMPUS_EXIT.arrive, CAMPUS_EXIT.in, Math.PI),
       works: (g) => {
         const e = works[viaOf(g, 'lane')] || works.lane;
@@ -152,6 +152,7 @@ export async function harbourPlace(game) {
       },
     },
     tripOutTo: {
+      ferry_terminal: (g) => walkOut(g, cam, dk('ferry_terminal').step, dk('ferry_terminal').local),
       campus: (g) => walkOut(g, cam, CAMPUS_EXIT.lane, CAMPUS_EXIT.edge),
       office_quarter: (g) => walkOut(g, cam, back.lane, back.edge),
       works: (g) => walkOutNearest(g, cam, works),

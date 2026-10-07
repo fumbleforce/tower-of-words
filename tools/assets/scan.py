@@ -517,6 +517,7 @@ anim('chibi-sit', None, 'Chibi sit and breathe (code)', ['game3d/js/train/people
 rounds = sorted([d for d in ls('game3d/shots') if re.search(r'/round-\d+$', d)], key=lambda d: int(d.rsplit('-', 1)[1]))
 latest = rounds[-1] if rounds else None
 ROOMS = [
+    ('ferry_terminal', 'Ferry waiting room', 'ferry_terminal', 'ferry_terminal.png', {'type': 'room', 'room': 'ferry_terminal'}, 'game3d/js/scenes/ferry-terminal/room.js buildFerryTerminal() and places/ferry-terminal.js'),
     ('train', 'Monorail carriage', 'train', 'train.png', {'type': 'room', 'room': 'train'}, 'game3d/js/train/car.js buildCar() and places/train.js'),
     ('platform', 'Honsha platform', 'train', 'platform.png', None, 'places/train.js (the arrival)'),
     ('gate', 'Station security room', 'gate', 'gate.png', {'type': 'room', 'room': 'lobby'}, 'game3d/js/scenes/lobby.js buildLobby() and places/lobby.js'),

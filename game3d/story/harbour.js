@@ -1,6 +1,5 @@
 // The harbour, walked from the office street's west end into the supply yard, out on the piers, across to the ferry
-// landing and down the harbour walk (docs/game/places.md). The terminal and the harbour office are shut for now and
-// say so. East along the street past the harbour walk goes back to the office street; up the works lane or the works
+// landing and down the harbour walk (docs/game/places.md). The terminal is a usable waiting room; the harbour office remains closed. East along the street past the harbour walk goes back to the office street; up the works lane or the works
 // street goes on to the old works.
 export default {
   start: 'arrive',
@@ -12,11 +11,13 @@ export default {
     'zone:lane_exit': 'to_works',
     'talk:works_street': 'to_works_street',
     'zone:street_exit': 'to_works_street',
-    'talk:ferry_terminal': 'shut',
+    'talk:ferry_terminal': 'terminal',
     'talk:harbour_office': 'shut',
   },
   goal: { office_street: 'true' },
   nodes: {
+    to_terminal:[{do:'trip',to:'ferry_terminal'}],
+    terminal:[{if:"period_early || period_morning || period_lunch || period_afternoon || period_evening",then:[{go:'to_terminal'}],else:['> The waiting room is closed.']}],
     to_campus:[{do:'trip',to:'campus'}],
     arrive: [
       {

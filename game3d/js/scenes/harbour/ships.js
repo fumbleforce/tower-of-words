@@ -125,7 +125,7 @@ function mooring(p, s, us, y, B, pier) {
 }
 
 // the ferry, along the ferry pier's west face
-function* ferry(sets, signs) {
+export function* ferrySteps(sets, signs) {
   const L = 26,
     B = 6.4,
     { SEA_Y } = P;
@@ -265,6 +265,6 @@ function* freighter(sets) {
 
 // sets: outdoor/block.js blockSets(); signs: a shop-signs.js signSet
 export function* shipsSteps(sets, signs) {
-  yield* ferry(sets, signs);
+  yield* ferrySteps(sets, signs);
   yield* freighter(sets);
 }

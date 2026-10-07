@@ -17157,5 +17157,405 @@
   "words": [],
   "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "ferry-staff-01",
+  "speaker": "ferry_staff",
+  "text": "こんにちは。どうぞ、中で休んでいってください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1p21yul",
+  "speaker": "eric",
+  "text": "Can I sit in here?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ferry-staff-02",
+  "speaker": "ferry_staff",
+  "text": "はい、どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ferry-staff-03",
+  "speaker": "ferry_staff",
+  "text": "こんにちは。どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1dsjv32",
+  "speaker": "eric",
+  "text": "Something to eat is okay?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ferry-staff-04",
+  "speaker": "ferry_staff",
+  "text": "ええ。ごみは、そちらにお願いします。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-mu14tv",
+  "speaker": "eric",
+  "text": "Okay. Thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-1cc2h4j",
+  "speaker": "eric",
+  "text": "Is anyone sitting here?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ferry-traveller-01",
+  "speaker": "ferry_traveller",
+  "text": "あ、ごめんなさい。今どけますね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ferry-traveller-02",
+  "speaker": "ferry_traveller",
+  "text": "どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ferry-traveller-03",
+  "speaker": "ferry_traveller",
+  "text": "あ、どうも。そこ、空いてますよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-afoxnl",
+  "speaker": "eric",
+  "text": "A long walk?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ferry-traveller-04",
+  "speaker": "ferry_traveller",
+  "text": "ちょっと休んでから、また歩きます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1jbp0l1",
+  "speaker": "eric",
+  "text": "Take your time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-16ixq6u",
+  "speaker": "eric",
+  "text": "すみません。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-3wqqfz",
+  "speaker": "eric",
+  "text": "Excuse me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ferry-reader-01",
+  "speaker": "ferry_reader",
+  "text": "あ、こんにちは。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "calm"
+ },
+ {
+  "key": "ln-1se51ph",
+  "speaker": "eric",
+  "text": "Sorry, I didn't mean to interrupt.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ferry-reader-02",
+  "speaker": "ferry_reader",
+  "text": "いえいえ。船を見てただけです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "calm"
+ },
+ {
+  "key": "ln-1t2xyg2",
+  "speaker": "eric",
+  "text": "Oh. That's a better view.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ferry-reader-03",
+  "speaker": "ferry_reader",
+  "text": "ここ、よく見えるんですよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "calm"
+ },
+ {
+  "key": "ln-62hdaz",
+  "speaker": "eric",
+  "text": "You've got a good spot.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-o1e9el",
+  "speaker": "eric",
+  "text": "Mind if I sit?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ferry-reader-04",
+  "speaker": "ferry_reader",
+  "text": "どうぞ。ここ、風が当たらないんです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [],
+  "emo": "calm"
+ },
+ {
+  "key": "ln-ve0d0k",
+  "speaker": "eric",
+  "text": "Good enough for me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-1p21yul-carina",
+  "speaker": "carina",
+  "text": "Can I sit in here?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-1dsjv32-carina",
+  "speaker": "carina",
+  "text": "Something to eat is okay?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-mu14tv-carina",
+  "speaker": "carina",
+  "text": "Okay. Thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-1cc2h4j-carina",
+  "speaker": "carina",
+  "text": "Is anyone sitting here?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-afoxnl-carina",
+  "speaker": "carina",
+  "text": "A long walk?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-1jbp0l1-carina",
+  "speaker": "carina",
+  "text": "Take your time.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-16ixq6u-carina",
+  "speaker": "carina",
+  "text": "すみません。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-3wqqfz-carina",
+  "speaker": "carina",
+  "text": "Excuse me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-1se51ph-carina",
+  "speaker": "carina",
+  "text": "Sorry, I didn't mean to interrupt.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-1t2xyg2-carina",
+  "speaker": "carina",
+  "text": "Oh. That's a better view.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-62hdaz-carina",
+  "speaker": "carina",
+  "text": "You've got a good spot.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-o1e9el-carina",
+  "speaker": "carina",
+  "text": "Mind if I sit?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-ve0d0k-carina",
+  "speaker": "carina",
+  "text": "Good enough for me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
  }
 ]

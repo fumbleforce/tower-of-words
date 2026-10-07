@@ -157,15 +157,33 @@ export function yardGround(pv, p) {
 
 // the ground: the yard, the landing, the piers' decks; kerbs where the landing meets the land. The works lane, its
 // mouth and on north, is the works' own paving (works/grounds.js laneViewSteps, scenes/harbour.js)
+export function landingPaving(pv) {
+  const r = P.LANDING;
+  pv.field(r, { pattern: 'grid', module: [0.9, 0.9], tones: GRANITE.pale, origin: [r[0], r[2]] });
+}
+export function pierPaving(pv, r) {
+  pv.field(r, { pattern: 'grid', module: [1.5, 2.0], tones: CONCRETE, vary: 0.04, gap: 0.03, origin: [r[0], r[2]] });
+}
+// The actual landing and ferry pier only, for the waiting-room windows. No yard, nav or lights.
+export function* ferryLandingSteps(pv, p) {
+  const r = P.LANDING,
+    f = P.FERRY_PIER;
+  landingPaving(pv);
+  pierPaving(pv, f);
+  edge(p, [r[0], r[2]], [r[0], r[3]]);
+  edge(p, [r[0], r[3]], [r[1], r[3]], { skip: [[f[0] - r[0], f[1] - r[0]]] });
+  pier(p, f);
+  yield;
+}
+
 function* ground(pv, p) {
   const Y = P.YARD,
     Ld = P.LANDING,
     T = P.TERMINAL;
   yardGround(pv, p);
   yield;
-  pv.field(Ld, { pattern: 'grid', module: [0.9, 0.9], tones: GRANITE.pale, origin: [Ld[0], Ld[2]] });
-  for (const r of [P.FERRY_PIER, P.SUPPLY_PIER])
-    pv.field(r, { pattern: 'grid', module: [1.5, 2.0], tones: CONCRETE, vary: 0.04, gap: 0.03, origin: [r[0], r[2]] });
+  landingPaving(pv);
+  for (const r of [P.FERRY_PIER, P.SUPPLY_PIER]) pierPaving(pv, r);
   yield;
   // the landing's north edge either side of the terminal and its east end north of the yard
   kerb(p, [Ld[0], Ld[2]], [Ld[1], Ld[2]], { off: 0.08, gaps: [[T[0], T[1]]] });

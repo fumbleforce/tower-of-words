@@ -1,0 +1,58 @@
+{
+  "title": "A harbour waiting room",
+  "date": "2026-10-07",
+  "by": "codex",
+  "caption": "A usable harbour shelter with seated residents, ordinary conversations, a ferry outlook and room-local food and reading.",
+  "images": [
+    {
+      "id": "room-desktop",
+      "image": "bible/shots/showcase/ferry-terminal-1/room-desktop.png",
+      "caption": "Waiting areas, reading table and clear walking routes."
+    },
+    {
+      "id": "room-phone",
+      "image": "bible/shots/showcase/ferry-terminal-1/room-phone.png",
+      "caption": "The occupied window benches at phone size."
+    },
+    {
+      "id": "east-phone",
+      "image": "bible/shots/showcase/ferry-terminal-1/east-phone.png",
+      "caption": "The eastern waiting seat, luggage shelf and service counter."
+    },
+    {
+      "id": "evening-desktop",
+      "image": "bible/shots/showcase/ferry-terminal-1/evening-desktop.png",
+      "caption": "Evening shelter with the service shutter closed."
+    },
+    {
+      "id": "staff-phone",
+      "image": "bible/shots/showcase/ferry-terminal-1/staff-phone.png",
+      "caption": "Ordinary Talk with the room attendant."
+    },
+    {
+      "id": "window-phone",
+      "image": "bible/shots/showcase/ferry-terminal-1/window-phone.png",
+      "caption": "The reader points out the ferry through the real harbour glazing."
+    },
+    {
+      "id": "bag-desktop",
+      "image": "bible/shots/showcase/ferry-terminal-1/bag-desktop.png",
+      "caption": "The traveller carries his bag off the usable window seat."
+    },
+    {
+      "id": "milk-phone",
+      "image": "bible/shots/showcase/ferry-terminal-1/milk-phone.png",
+      "caption": "A visible sip before consuming an owned drink."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    },
+    {
+      "label": "Implementation and retained review history",
+      "href": "notes/ferry-terminal/qa.md"
+    }
+  ]
+}

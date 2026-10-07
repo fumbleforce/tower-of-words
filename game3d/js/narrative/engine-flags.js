@@ -121,6 +121,13 @@ ENGINE_WRITES['game3d/js/places/konbini/trade.js'] = {
 };
 ENGINE_WRITES['game3d/js/places/konbini/action.js'] = { exact: ['konbini_action_complete'], prefix: [] };
 
+ENGINE_WRITES['game3d/js/places/ferry-terminal/action.js'] = { exact: ['ferry_action_complete'], prefix: [] };
+ENGINE_WRITES['game3d/js/places/ferry-terminal/activity.js'] = { exact: ['ferry_bag_moved'], prefix: [] };
+ENGINE_WRITES['game3d/js/places/ferry-terminal/food-state.js'] = {
+  exact: ['ferry_food_phase', 'ferry_food_item', 'ferry_food_id', 'ferry_consumed_id'],
+  prefix: ['ferry_has_'],
+};
+
 export const KNOW_PREFIX = 'know_';
 export function flagKeys(owner) {
   const spec = ENGINE_WRITES[owner];

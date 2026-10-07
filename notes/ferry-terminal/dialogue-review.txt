@@ -1,0 +1,59 @@
+# Ferry waiting room: cold-read draft for #308
+
+Scope: three ordinary adult residents using existing generic bodies and approved sales2 / reader / sales1 voices. No names, new timbres, trip purchase, invented timetable, lesson or quest. Japanese is heard speech without English subtitles. English glosses below are for source review only. Physical hooks must complete before the corresponding state changes.
+
+STAFF (sales2): working morning/lunch/afternoon. Brief and practical. A leaflet rack is on her counter; a room-use placard shows benches/food/no litter. Off duty the shutter is down, target disabled, room remains open.
+First Talk: staff lifts a slipped leaflet upright in its rack, looks at player.
+Staff: 「こんにちは。どうぞ、中で休んでいってください。」 [Hello. You're welcome to rest inside.]
+Player points to the actual benches before asking: “Can I sit in here?”
+Staff points at the actual benches, then open hands toward player.
+Staff: 「はい、どうぞ。」 [Yes, please do.]
+Choice: “Something to eat is okay?” / “Thank you.”
+Food reply: player mimes a bite/sip with their empty hand near their mouth. Staff points to the bench-side shelf and then the actual waste bin.
+Staff: 「ええ。ごみは、そちらにお願いします。」 [Yes. Please put your rubbish over there.]
+Player: “Okay. Thanks.”
+Repeat Talk: staff looks up from the rack.
+Staff: 「あちらが空いてますよ。」 [There is a free place over there.]
+(Only if an actual player seat is free; otherwise use the following line.)
+Staff: 「こんにちは。どうぞ。」 [Hello. Come in.]
+Choice: “Can I eat here?” [same physical explanation] / “Just taking a break.” [player line; staff nod]
+Busy response only during her own physical action: 「あ、少しお待ちください。」 [Ah, one moment, please.]
+
+TRAVELLER (reader): bag on the usable window seat, seated beside it. He is looking down at its open side pocket, checking his folded umbrella; no moving vessel or promised departure.
+First Talk:
+Player points at the bag/seat before asking: “Is anyone sitting here?”
+Traveller looks from player to bag.
+Traveller: 「あ、ごめんなさい。今どけますね。」 [Ah, sorry. I'll move it.]
+He stands, takes the actual bag by its handle, walks it to the end of the bench, puts it on the floor, and sits. Only successful placement sets bag_moved and enables the physical window seat.
+Traveller: 「どうぞ。」 [Please.]
+Player: “Thanks.”
+Repeat, bag already moved:
+Traveller: 「あ、どうも。そこ、空いてますよ。」 [Oh, hello. That seat is free.]
+Player: “Thanks.”
+Optional topic “A long walk?”
+Traveller pats/rubs his actual knee once, then points at the sheltered room rather than an unseen route.
+Traveller: 「ちょっと休んでから、また歩きます。」 [I'll walk some more after a little rest.]
+Player: “Take your time.”
+Busy response during bag handling: 「よいしょ。ちょっと待ってくださいね。」 [There we go. Just a moment.]
+
+READER (sales1): seated at rear bench with the visible island leaflet. Not a mysterious guide; choosing between looking at his leaflet and enjoying the real window.
+Idle: reader already glances over the leaflet toward the actual ferry. First Talk: optional already-known sumimasen opening (same action count) or “Excuse me.”; reader lowers leaflet onto lap and turns toward player.
+Reader: 「あ、こんにちは。」 [Oh, hello.]
+Player: “Sorry, I didn't mean to interrupt.”
+Reader waves off the apology, then points through the real front glazing toward the ferry.
+Reader: 「いえいえ。船を見てただけです。」 [No, no. I was just looking at the boat.]
+Player: “Oh. That's a better view.”
+Choice: “I'll let you get back to it.” / “Mind if I sit?”
+Sit branch: reader taps the actual free adjacent quiet seat; it is usable independently of the traveller's bag.
+Reader: 「どうぞ。ここ、風が当たらないんです。」 [Please. You don't get the wind here.]
+Player: “Good enough for me.”
+Repeat Talk: leaflet on lap, reader nods toward the same window.
+Reader: 「ここ、よく見えるんですよ。」 [You get a good view here.]
+Player: “You've got a good spot.”
+Busy response if actor's pointing/leaflet hook is still running: 「あ、はい。ちょっと待ってください。」 [Ah, yes. Just a moment.]
+
+Seat interaction: sit / stand and terminal-local food/drink menu using existing owned food only. Visible bite/sip completes before one inventory item is consumed. Bag Read remains the shared existing provider. No new narrated lines needed for eating. Day/period schedules do not imply an operating ferry timetable.
+
+Cold-player risks to review: staff food instruction must be carried by a visible bin-point, traveller's bag action must precede seat availability, reader's view must show canonical harbour geometry. No player line claims to translate an unheard Japanese sentence; reactions follow the visible actions and literal boat view.
+
+Revision after independent cold read: same-visit-neutral repeats, visible seat-point/food mime, no invented walking history, natural sheltered-seat phrase. The canonical initial bag is ON the player window seat; its completed location is the floor nook. Persist that flag and prop placement together.

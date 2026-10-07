@@ -22,12 +22,16 @@ export function checkRegistrations(read = file => fs.readFileSync(new URL('../..
     }
   }
   const main = parseModule(read('game3d/js/main.js'));
-  const imports = new Map(main.body.filter(node => node.type === 'ImportDeclaration').flatMap(node =>
-    node.specifiers.map(specifier => [specifier.local.name, { source: new URL(node.source.value, 'file:///game3d/js/main.js').pathname.slice(1),
+  const registryFile = 'game3d/js/places/factories.js';
+  const registryImport = main.body.find(node => node.type === 'ImportDeclaration' && node.source.value === './places/factories.js');
+  assert.ok(registryImport?.specifiers.some(s => s.local.name === 'PLACES' && s.imported?.name === 'PLACES'), 'main place factory import differs from explicit registry');
+  const registry = parseModule(read(registryFile));
+  const imports = new Map(registry.body.filter(node => node.type === 'ImportDeclaration').flatMap(node =>
+    node.specifiers.map(specifier => [specifier.local.name, { source: new URL(node.source.value, 'file:///' + registryFile).pathname.slice(1),
       imported: specifier.imported?.name }])));
-  const places = main.body.filter(node => node.type === 'VariableDeclaration').flatMap(node => node.declarations)
+  const places = registry.body.map(node => node.type === 'ExportNamedDeclaration' ? node.declaration : node).filter(node => node.type === 'VariableDeclaration').flatMap(node => node.declarations)
     .find(node => node.id.name === 'PLACES')?.init;
-  assert.equal(places?.type, 'ObjectExpression', 'main must register its place factories explicitly');
+  assert.equal(places?.type, 'ObjectExpression', 'place factories must remain an explicit constructor table');
   const bindings = Object.fromEntries(places.properties.map(property => {
     assert.equal(property.type, 'Property');
     assert.equal(property.computed, false);

@@ -207,7 +207,8 @@ const DETAILS = {
   dock_shed:
     'The supply quay’s warehouse on the yard’s north side, its roller doors to the yard (the harbour chunk builds it).',
   dock_hut: 'The foreman’s hut by the supply pier’s root (the harbour chunk builds it).',
-  ferry_terminal: 'The ferry waiting room and ticket window on the landing’s north side (the harbour chunk builds it).',
+  ferry_terminal:
+    'The usable ferry waiting room on the landing’s north side, with sheltered seats and a daytime room attendant.',
   // the old works (the works chunk builds them, scenes/works/buildings.js)
   nw_old: 'The old power plant: a tall concrete-framed hall, its door on the works lane (the works chunk builds it).',
   chimney: 'The power plant’s chimney at the works lane’s head, round, banded red and white at the top.',

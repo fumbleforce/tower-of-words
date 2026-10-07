@@ -1,0 +1,46 @@
+import assert from 'node:assert/strict';
+import { registerHooks } from 'node:module';
+import { test } from 'node:test';
+
+const hooks = registerHooks({
+  resolve(specifier, context, next) {
+    if (specifier === 'three')
+      return next(new URL('../../vendor/three/three.module.js', import.meta.url).href, context);
+    if (specifier.startsWith('three/addons/'))
+      return next(new URL('../../vendor/' + specifier.slice(13), import.meta.url).href, context);
+    return next(specifier, context);
+  },
+});
+Object.assign(globalThis, {
+  location: { search: '' },
+  window: {},
+  addEventListener() {},
+  innerWidth: 1366,
+  innerHeight: 860,
+  localStorage: { getItem: () => null, setItem() {} },
+  document: {
+    body: { classList: { contains: () => false, toggle() {} } },
+    documentElement: { style: { setProperty() {} } },
+  },
+});
+const ctx = new Proxy({measureText:t=>({width:String(t).length*8}), createRadialGradient:()=>({addColorStop(){}}), createLinearGradient:()=>({addColorStop(){}})}, {get:(o,k)=>o[k]||(()=>{})});
+globalThis.document.createElement = () => ({width:128,height:128,getContext:()=>ctx,style:{}});
+import { createHash } from 'node:crypto';
+const {shipsSteps}=await import('../../js/scenes/harbour/ships.js');
+const {quaySteps}=await import('../../js/scenes/harbour/quay.js');
+function fingerprint(ships,quay){
+ const hash=createHash('sha256'),record=(...args)=>hash.update(JSON.stringify(args));
+ const parts=name=>({box(...args){record(name,'box',args);},geo(color,g,options){record(name,'geo',color,options);for(const key of Object.keys(g.attributes)){record(key);hash.update(Buffer.from(g.attributes[key].array.buffer));}if(g.index)hash.update(Buffer.from(g.index.array.buffer));g.dispose();}});
+ for(const _ of ships({p:parts('ship'),glass:parts('glass'),lit:parts('lit')},{board:(...args)=>record('board',args)}))void _;
+ for(const _ of quay({field:(...args)=>record('paving',args)},parts('quay'),parts('water')))void _;
+ return hash.digest('hex');
+}
+const {execFileSync}=await import('node:child_process');
+async function prior(file){
+ const url=new URL('../../js/scenes/harbour/'+file,import.meta.url),rel='game3d/js/scenes/harbour/'+file;
+ let source=execFileSync('git',['show','HEAD:'+rel],{encoding:'utf8'});
+ source=source.replace(/from '(\.[^']+)'/g,(_,p)=>"from '"+new URL(p,url).href+"'");
+ return import('data:text/javascript,'+encodeURIComponent(source));
+}
+const before=fingerprint((await prior('ships.js')).shipsSteps,(await prior('quay.js')).quaySteps),after=fingerprint(shipsSteps,quaySteps);
+assert.equal(before,after);console.log('BASELINE_PARITY',before);hooks.deregister();

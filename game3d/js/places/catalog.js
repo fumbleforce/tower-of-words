@@ -6,6 +6,30 @@ import { SOUTH_HALF_DETAILS } from './catalog-south.js';
 import { OFFICE_DETAILS } from './catalog-office.js';
 // Labels and registration IDs shared by place factories and structural checks.
 export const PLACE_DETAILS = {
+  ferry_terminal: {
+    things: {
+      ferry_exit: { label: 'Harbour', kind: 'thing', verb: 'Go out' },
+      ferry_staff: { label: 'Room attendant', kind: 'person', verb: 'Talk' },
+      ferry_reader: { label: 'Reader', kind: 'person', verb: 'Talk' },
+      ferry_traveller: { label: 'Traveller', kind: 'person', verb: 'Talk' },
+      ferry_window_seat: { label: 'Window bench', kind: 'thing', verb: 'Sit', pin: 'near' },
+      ferry_quiet_seat: { label: 'Quiet bench', kind: 'thing', verb: 'Sit', pin: 'near' },
+      ferry_landing_seat: { label: 'Landing bench', kind: 'thing', verb: 'Sit', pin: 'near' },
+      ferry_notice_seat: { label: 'Waiting bench', kind: 'thing', verb: 'Sit', pin: 'near' },
+    },
+    spots: [
+      'ferry_in',
+      'ferry_counter',
+      'ferry_reader',
+      'ferry_traveller',
+      'ferry_luggage_corner',
+      'ferry_notice_recess',
+    ],
+    seats: ['ferry_window_seat', 'ferry_quiet_seat', 'ferry_landing_seat', 'ferry_notice_seat'],
+    zones: [],
+    people: ['ferry_staff', 'ferry_reader', 'ferry_traveller'],
+    hooks: ['ferryActivity'],
+  },
   print_shop: {
     things: {
       print_exit: { label: 'North campus', kind: 'thing', verb: 'Go out' },

@@ -198,7 +198,9 @@ export const ROUTES = {
       "zone:west_exit"
     ]
   },
+  "ferry_terminal": {"harbour":["talk:ferry_exit"]},
   "harbour": {
+    "ferry_terminal":["talk:ferry_terminal"],
     "campus": ["talk:campus", "zone:campus_exit"],
     "office_quarter": [
       "talk:office_street",

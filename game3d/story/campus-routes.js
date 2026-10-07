@@ -1,10 +1,11 @@
+import ferry_terminal from './ferry_terminal.js';
 import print_shop from './print_shop.js';
 import campus from './campus.js';
 import office_quarter from './office_quarter.js';
 import harbour from './harbour.js';
 // Opening-day stories keep their own dialogue; these completed pedestrian links are available on every day.
 export function campusRoutes(stories) {
- const out={office_quarter:campusDistrict('office_quarter',!!stories.sports),harbour:campusDistrict('harbour'),...stories,campus,print_shop};
+ const out={office_quarter:campusDistrict('office_quarter',!!stories.sports),harbour:campusDistrict('harbour'),...stories,campus,print_shop,ferry_terminal};
  for(const [place,targets] of Object.entries({forecourt:['campus'],office_quarter:['campus_shed','campus_quarter'],harbour:['campus']})) {
   const old=out[place],on={...old.on};
   for(const target of targets){on['talk:'+target]='to_campus';on['zone:'+target+'_exit']='to_campus';}
