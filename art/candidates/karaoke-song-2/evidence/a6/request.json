@@ -1,0 +1,44 @@
+{
+  "lyrics": "[verse]\n帰りの電車を一本見送って\nホームの端で電話をかけた\n話すことなんてないと思ってた\n\n[chorus]\nそっちは雨かと聞いただけ\n次の電車が来るまで話した\n明日も同じ時間にかけようか\n",
+  "style": "Japanese, warm mature male baritone vocal, restrained adult register, modest Japanese folk pop, clear Japanese diction, acoustic guitar, piano, soft bass and drums, intimate karaoke accompaniment, complete short verse and refrain, 100 bpm",
+  "seed": 207101,
+  "source": "karaoke-song-1-a-audio.json",
+  "candidate_only": true,
+  "changes": [
+    {
+      "before": "\"D\"D16|",
+      "after": "\"D\"D4E4F4D4|"
+    },
+    {
+      "before": "\"F#m7\"E2DE3DE3F4z2|",
+      "after": "\"F#m7\"E2DE3DE3F2F2z2|"
+    },
+    {
+      "before": "\"D\"F2EF3G2F2ED3D2|",
+      "after": "\"D\"F2EF3G2F2EDD2D2|"
+    },
+    {
+      "before": "\"D/F#\"A4F2E2D4z2A,2|",
+      "after": "\"D/F#\"A2A2F2E2D4z2A,2|"
+    },
+    {
+      "before": "\"A7sus4\"F6GFE4z4|",
+      "after": "\"A7sus4\"F3F3GFE4z4|"
+    },
+    {
+      "before": "\"D\"f6f2e2d2c2d2|",
+      "after": "\"D\"f2f2f2f2e2d2c2d2|"
+    },
+    {
+      "before": "\"F#m7\"c6A2A4z2A2|",
+      "after": "\"F#m7\"c3c3A2A4z2A2|"
+    },
+    {
+      "before": "\"G\"d4z2d2d4e2e2|",
+      "after": "\"G\"d2d2z2d2d2d2e2e2|"
+    }
+  ],
+  "reason": "Test added articulation for incomplete lyrics; bar durations unchanged.",
+  "vocal_note_onsets": 92,
+  "limitation": "Score-to-lyric mapping is inferred, not verified singing."
+}

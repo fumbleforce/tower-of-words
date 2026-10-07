@@ -1,0 +1,77 @@
+[
+  {
+    "take": "a2",
+    "verifiedHashes": 6,
+    "screen": {
+      "vocal_note_onsets": 81,
+      "lyric_morae": 91,
+      "minimum_onsets": 88,
+      "limitation": "Morae can share notes; this does not prove complete singing."
+    }
+  },
+  {
+    "take": "a3",
+    "verifiedHashes": 6,
+    "screen": {
+      "vocal_note_onsets": 82,
+      "lyric_morae": 91,
+      "minimum_onsets": 88,
+      "limitation": "Morae can share notes; this does not prove complete singing."
+    }
+  },
+  {
+    "take": "a4",
+    "verifiedHashes": 6,
+    "screen": {
+      "vocal_note_onsets": 80,
+      "lyric_morae": 91,
+      "minimum_onsets": 88,
+      "limitation": "Morae can share notes; this does not prove complete singing."
+    }
+  },
+  {
+    "take": "a5",
+    "verifiedHashes": 8,
+    "bars": 22,
+    "scoreSeconds": 52.8,
+    "audioSeconds": 51.6,
+    "mp3Seconds": "51.600000",
+    "rawBytes": 4791325,
+    "asrAudio": {
+      "seconds": 51.6,
+      "sample_rate": 48000,
+      "peak": 0.9951171875,
+      "clipped_samples": 0
+    }
+  },
+  {
+    "take": "a6",
+    "verifiedHashes": 8,
+    "bars": 22,
+    "scoreSeconds": 52.8,
+    "audioSeconds": 50.96,
+    "mp3Seconds": "50.960000",
+    "rawBytes": 4412694,
+    "asrAudio": {
+      "seconds": 50.96,
+      "sample_rate": 48000,
+      "peak": 0.8046875,
+      "clipped_samples": 0
+    }
+  },
+  {
+    "take": "a7",
+    "verifiedHashes": 8,
+    "bars": 22,
+    "scoreSeconds": 52.8,
+    "audioSeconds": 52.96,
+    "mp3Seconds": "52.960000",
+    "rawBytes": 4749449,
+    "asrAudio": {
+      "seconds": 52.96,
+      "sample_rate": 48000,
+      "peak": 0.999969482421875,
+      "clipped_samples": 4
+    }
+  }
+]

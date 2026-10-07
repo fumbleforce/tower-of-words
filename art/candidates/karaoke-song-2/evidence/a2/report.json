@@ -1,0 +1,36 @@
+{
+  "take": "a2",
+  "score": {
+    "prompt_id": "4475b544-a1dc-4434-98a9-015bf03be7a7",
+    "seconds": 72.04,
+    "status": {
+      "status_str": "success",
+      "completed": true,
+      "messages": [
+        [
+          "execution_start",
+          {
+            "prompt_id": "4475b544-a1dc-4434-98a9-015bf03be7a7",
+            "timestamp": 1791385502048
+          }
+        ],
+        [
+          "execution_cached",
+          {
+            "nodes": [],
+            "prompt_id": "4475b544-a1dc-4434-98a9-015bf03be7a7",
+            "timestamp": 1791385502054
+          }
+        ],
+        [
+          "execution_success",
+          {
+            "prompt_id": "4475b544-a1dc-4434-98a9-015bf03be7a7",
+            "timestamp": 1791385572702
+          }
+        ]
+      ]
+    }
+  },
+  "error": "Sparse score: 81 note onsets for 91 morae; retained without audio"
+}
