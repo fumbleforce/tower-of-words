@@ -85,6 +85,7 @@ Skills: story-sense, story-analysis, dialogue, scene-sequencing, key-moments, ch
 - Continuity: a scene stays in one place until an explicit transition. Backgrounds, who's present and the time of day match the dialogue.
 - Scenes must want something: a goal, an obstacle and a turn. Characters drive scenes; they don't just deliver information.
 - Every character has a distinct voice (word choice, sentence length, register); run the dialogue skill's voice checks.
+- Character depth comes from work history, ordinary life and past relationships, with the resulting skills, habits and contradictions discovered gradually through play; proposed history stays separate from established canon (Jørgen, 2026-10-07).
 - A story editor reviews the beats, not only the builder.
 
 ### Originality
