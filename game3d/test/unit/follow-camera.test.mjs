@@ -196,3 +196,39 @@ test('tight-space player visibility scales with the rig and restores before auth
   const follow=followCamera(game,place);follow.update();assert.ok(follow.distance<1.15*place.charScale);
   assert.equal(player.visible,false);assert.equal(wall.visible,true);follow.restore();assert.equal(player.visible,true);
 });
+
+test('close framing fades only the local actor, holds the boundary and disposes private materials', async () => {
+  const {playerFraming}=await import('../../js/camera/framing.js');
+  const root=new THREE.Group(), source=new THREE.MeshBasicMaterial({opacity:.8,alphaTest:.5});
+  source.onBeforeCompile=(shader)=>{shader.uniforms.characterTint={value:0.7};};
+  source.customProgramCacheKey=()=> 'character-tint';
+  const local=new THREE.Mesh(new THREE.BoxGeometry(),source), npc=new THREE.Mesh(local.geometry,source);
+  root.add(local); const framing=playerFraming(root);
+  framing.update(3,1,0);assert.equal(local.material,source);
+  framing.update(1.85,1,80);const copy=local.material;
+  assert.notEqual(copy,source);assert.equal(copy.opacity,.4);assert.equal(copy.transparent,true);
+  const shader={uniforms:{}};copy.onBeforeCompile(shader);
+  assert.equal(shader.uniforms.characterTint.value,.7);assert.equal(copy.customProgramCacheKey(),'character-tint');
+  assert.equal(copy.alphaTest,0);assert.equal(npc.material,source);assert.equal(source.opacity,.8);
+  framing.restore();assert.equal(local.material,source);assert.equal(root.visible,true);
+  framing.update(1.85,1,160);assert.equal(root.visible,false);
+  // Distance noise around the fade-in threshold cannot repeatedly expose the head.
+  for(const distance of [1.89,1.92,2.05,1.95]) framing.update(distance,1,240);
+  assert.equal(root.visible,false);
+  framing.update(2.2,1,320);assert.equal(root.visible,true);assert.equal(local.material,copy);assert.equal(copy.opacity,.4);
+  framing.update(2.2,1,400);assert.equal(local.material,source);
+  let disposed=0;copy.addEventListener('dispose',()=>disposed++);framing.reset();assert.equal(disposed,1);
+  assert.equal(source.transparent,false);assert.equal(source.depthWrite,true);assert.equal(source.alphaTest,.5);
+});
+test('compressed first frame, obstruction jumps, material arrays and authored invisibility restore safely', async () => {
+  const {playerFraming}=await import('../../js/camera/framing.js');
+  const root=new THREE.Group(), sources=[new THREE.MeshBasicMaterial(),new THREE.MeshBasicMaterial()];
+  const mesh=new THREE.Mesh(new THREE.BoxGeometry(),sources);root.add(mesh);
+  const framing=playerFraming(root);
+  framing.update(.6,1,0);assert.equal(root.visible,false);framing.restore();assert.equal(root.visible,true);
+  framing.update(3,1,80);assert.notEqual(mesh.material,sources);assert.equal(mesh.material.length,2);
+  framing.update(3,1,160);assert.equal(mesh.material,sources);
+  framing.update(.6,1,161);assert.equal(root.visible,false,'a wall jump cannot render a close head for a fade frame');
+  framing.restore();root.visible=false;framing.update(3,1,241);framing.restore();assert.equal(root.visible,false);
+  framing.reset();assert.equal(mesh.material,sources);assert.equal(root.visible,false);
+});
