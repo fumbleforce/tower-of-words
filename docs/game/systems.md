@@ -85,6 +85,8 @@ Eric starts with ¥1000. On day 1 the only shop is the B2 vending machine. A dri
 
 | Id | Name | Price |
 |---|---|---|
+| `milk` | Milk carton | ¥150 |
+| `riceball` | Salted rice ball | ¥130 |
 | `coffee` | Canned coffee | ¥120 |
 | `tea` | Royal milk tea | ¥130 |
 | `melon` | Melon soda | ¥130 |
@@ -231,3 +233,10 @@ Who the player is comes from a config file per protagonist, game3d/data/mc/<id>.
 - The save keeps `mc` (the protagonist's id) and `cast` (who fills each role). A save from before has neither and loads as Eric with the default cast.
 - Roles: game3d/data/cast/roles.json names each role's default person and whether someone else may fill it. Swappable: team_lead (Emi), receptionist (Kuro), new_hire (Aoi), sales (Rei), gate_guard (the guard). Fixed, with one default person: programmer (Mio), section_chief (Mori), engineer (Kenji). A cast set overrides some roles (only `default` exists); the game keeps the resolved map in the save, so a later data change never changes an old game. Story files still name people by id, and nothing on day 1 asks for a role yet; game3d/js/roles.js has the lookups for later steps. `?cast=<set or role=person,...>` (`?cast=sales=emi`, `?cast=default,team_lead=rei`) gives a new game, or a made save without a cast (`?day=2`), that cast; a fixed role refuses another person.
 - Testing another protagonist or cast: the fast test (`node game3d/tools/fast.mjs 390 844 --mc carina`) and the route runner (`npm run check:routes -- --mc carina`, the same for `check:routes:day2`) take `--mc <id>` and `--cast <spec>`, or `MC=` and `CAST=` in the environment, and fail when the game played someone else. `npm run check:mc` (game3d/tools/mc-check.mjs; Carina unless `--mc` says otherwise) starts a new game from the title, plays the train to the gate and checks the player's lines carry the protagonist's name, the save keeps `mc` and the cast, the player stays in frame on the train and on arriving at the gate, and the seat check passes for the player's body on the train's seats and the gate's bench, at 390x844 and 1366x860.
+
+
+## Konbini groceries
+
+From day three, the shop-street konbini sells milk cartons (¥150), salted rice balls (¥130), and the existing tea and coffee at their canonical inventory prices. A basket holds up to three different products. The player can remove an item, return the unpaid basket, or pay the till total; paying atomically records one receipt, debits yen and adds those items. Continue or a repeated collection does not charge again. Leaving during selection returns the unpaid basket and stops the authored checkout continuation. Paid items remain owned.
+
+Milk and rice balls can be consumed once at the shop's window perch, with no stat, gift or relationship effects. Their printed package labels can be inspected before buying and reread from the Bag while owned. A bite or sip commits removal only after the visible action; an interrupted approach or lift preserves the item for Continue. Existing tea and coffee keep their established gift behavior. The doorway, map destination and street closed card share the morning-through-evening hours.

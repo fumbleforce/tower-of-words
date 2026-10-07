@@ -160,6 +160,18 @@
     ]
   },
   "ITEMS": {
+    "milk": {
+      "name": "Milk carton",
+      "price": 150,
+      "giftable": false,
+      "document": true
+    },
+    "riceball": {
+      "name": "Salted rice ball",
+      "price": 130,
+      "giftable": false,
+      "document": true
+    },
     "curry_bread": {
       "name": "Curry bread",
       "price": 180,
@@ -790,15 +802,21 @@
           "verb": "Go in"
         },
         "store": {
-          "label": "Konbini",
+          "label": "Store window",
           "kind": "thing",
-          "verb": "Go in"
+          "verb": "Look",
+          "pin": "near"
         },
         "bakery": {
           "label": "Delivery note",
           "kind": "thing",
           "verb": "Read",
           "pin": "near"
+        },
+        "store_door": {
+          "label": "Konbini",
+          "kind": "thing",
+          "verb": "Go in"
         },
         "bakery_door": {
           "label": "Bakery",
@@ -987,6 +1005,46 @@
         "bakeryShop"
       ]
     },
+    "konbini": {
+      "things": {
+        "konbini_exit": {
+          "label": "Shopping street",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "fridge": {
+          "label": "Fridge",
+          "kind": "thing",
+          "verb": "Choose"
+        },
+        "konbini_clerk": {
+          "label": "Shop clerk",
+          "kind": "person"
+        },
+        "konbini_seat": {
+          "label": "Window seat",
+          "kind": "thing",
+          "verb": "Sit"
+        }
+      },
+      "spots": [
+        "konbini_in",
+        "fridge",
+        "checkout",
+        "window"
+      ],
+      "seats": [
+        "konbini_seat"
+      ],
+      "people": [
+        "konbini_clerk"
+      ],
+      "zones": [],
+      "nooks": [],
+      "hooks": [
+        "konbiniShop"
+      ]
+    },
     "karaoke": {
       "things": {
         "karaoke_door": {
@@ -1100,7 +1158,7 @@
           "verb": "Go"
         },
         "cafe": {
-          "label": "Caf\u00e9",
+          "label": "Café",
           "kind": "thing",
           "verb": "Go in"
         },

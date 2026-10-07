@@ -57,6 +57,10 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   expected.engine.exact.art_action_completed = ['game3d/js/places/commons.js'];
   expected.engine.exact.winter_action_completed = ['game3d/js/places/gym.js'];
   expected.engine.exact.art_first_day = ['game3d/js/places/ongoing/art-progress.js'];
+  expected.engine.events.konbini = {};
+  expected.engine.placeFile.konbini = 'game3d/js/places/konbini.js';
+  expected.engine.exact.konbini_action_complete = ['game3d/js/places/konbini/action.js'];
+  for(const flag of ["konbini_basket", "konbini_cant_pay", "konbini_consumed_id", "konbini_count", "konbini_food_id", "konbini_food_item", "konbini_food_phase", "konbini_full", "konbini_has_milk", "konbini_has_riceball", "konbini_order_id", "konbini_paid_id", "konbini_phase", "konbini_selected_coffee", "konbini_selected_milk", "konbini_selected_riceball", "konbini_selected_tea", "konbini_total"]) expected.engine.exact[flag] = ['game3d/js/places/konbini/trade.js'];
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {

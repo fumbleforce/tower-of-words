@@ -77,7 +77,7 @@ function door(p, signs, { id, at: [x, z], out }) {
     ry = out > 0 ? 0 : Math.PI;
   // the karaoke box opens (places/karaoke.js): its card is up only on day 2, when it is shut
   signs.card('準備中', 'CLOSED', 0.46, 0.3, card, ry, {
-    when: id === 'bakery' ? 'bakeryClosed' : id === 'karaoke' ? 'prep2' : 'prep',
+    when: id === 'store' ? 'konbiniClosed' : id === 'bakery' ? 'bakeryClosed' : id === 'karaoke' ? 'prep2' : 'prep',
     door: id,
   });
   // day 2 after work: closed today (the izakaya is booked instead: its card is on the noren, scenes/shotengai.js)

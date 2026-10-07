@@ -18,13 +18,14 @@ import gate from './gate.js';
 import train from './train.js';
 import office from './office.js';
 import bakery from '../bakery.js';
+import konbini from '../konbini.js';
 export { KOTODAMA } from './kotodama.js';
 export { WORDS } from './words.js';
 export { FINDS as FLAVOR_FINDS, NODES as FLAVOR_NODES } from '../days3-5-finds.js';
 export { SCENES as MILESTONES, NODES as MILESTONE_NODES } from '../milestones/index.js';
 export const PERIODS = ['morning', 'lunch', 'afternoon', 'evening'];
 export const STORIES = campusRoutes({
-  bakery,
+  konbini, bakery,
   forecourt, gate, train, office, dorms, dorm_court, east_lane, plaza, canteen, sports, pool, gym, east_coast, dorm_commons, shotengai, karaoke, karaoke_booth,
 });
 export const OPEN_PLACES = Object.keys(STORIES);

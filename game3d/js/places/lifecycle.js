@@ -33,6 +33,7 @@ import { installFlavorFinds, attachFlavorFinds } from '../flavor-finds/index.js'
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
 const BATCHED = new Set([
+  'konbini',
   'train',
   'gate',
   'office',

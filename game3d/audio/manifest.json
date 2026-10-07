@@ -3227,6 +3227,56 @@
   "emo": "polite"
  },
  {
+  "key": "konbini-welcome",
+  "speaker": "konbini_clerk",
+  "text": "いらっしゃいませ。かごはこちらです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "konbini-total",
+  "speaker": "konbini_clerk",
+  "text": "以上でよろしいですか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "konbini-bag",
+  "speaker": "konbini_clerk",
+  "text": "袋にお入れしますね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "konbini-thanks",
+  "speaker": "konbini_clerk",
+  "text": "ありがとうございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "konbini-seat",
+  "speaker": "konbini_clerk",
+  "text": "はい、そちらでどうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
   "key": "oh-1dltuqt",
   "speaker": "sales1",
   "text": "十時の会議、四番目の議題見た？",

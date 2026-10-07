@@ -1,11 +1,11 @@
-import { BAKERY_OPEN } from '../../js/gameplay/shop-hours.js';
+import { BAKERY_OPEN, KONBINI_OPEN } from '../../js/gameplay/shop-hours.js';
 import { place } from './shared.js';
 export default place(
   { forecourt: ['talk:office_lane', 'zone:office_exit'], plaza: ['talk:plaza_lane', 'zone:plaza_exit'], karaoke: ['talk:karaoke'] },
   {
     labels: { aoi: ['Aoi', 'd3_aoi_intro'], kuro: ['Kuro', 'd3_kuro_intro'], rei: 'Tennis player' },
     on: {
-      'talk:bakery_door': 'bakery_enter',
+      'talk:store_door': 'konbini_enter', 'talk:bakery_door': 'bakery_enter',
       'talk:bakery': 'd3_bakery', 'talk:store': 'd3_store', 'talk:bike_shop': 'd3_bike',
       'talk:game_centre': 'd3_arcade', 'talk:izakaya': 'd3_izakaya',
       'talk:mori': 'd3_mori_shopping', 'talk:kenji': 'd3_kenji', 'talk:kuroda': 'd3_hamada_bread',
@@ -13,10 +13,12 @@ export default place(
       'talk:party_seat': 'd3_bench',
     },
     nodes: {
+      konbini_enter: [{ if: KONBINI_OPEN, then: [{ go: 'konbini_open' }], else: ['> The shop is closed.'] }],
+      konbini_open: [{ do: 'trip', to: 'konbini' }],
       bakery_enter: [{ if: BAKERY_OPEN, then: [{ go: 'bakery_open' }], else: ['> The bakery is closed.'] }],
       bakery_open: [{ do: 'trip', to: 'bakery' }],
       d3_bakery: ['> The delivery card says orders for the dorms go to the manager’s window.'],
-      d3_store: [{ say: 'eric', emo: 'tired', text: 'I should find out which of those cartons is milk before Monday.' }],
+      d3_store: [{ if: 'konbini_visited', then: ['> Milk cartons · 150 yen'], else: [{ say: 'eric', emo: 'tired', text: 'I should find out which of those cartons is milk before Monday.' }] }],
       d3_bike: ['> A card on the repair stand says “Back tyre only. Front one is new.”'],
       d3_arcade: [{ say: 'eric', emo: 'curious', text: 'I can hear the same losing tune from both machines.' }],
       d3_izakaya: [{ say: 'eric', emo: 'warm', text: 'They’re cooking already. I should eat before I come past here hungry.' }],

@@ -15,6 +15,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const imp = (f) => import(pathToFileURL(path.join(root, f)).href);
+const { default: KONBINI } = await imp('story/konbini.js');
 const { default: CONVERSATIONS } = await imp('story/conversations/index.js');
 const { WORDS } = await imp('js/lang.js');
 const { heardKey, lineKey } = await imp('tools/heardkey.mjs');
@@ -41,6 +42,7 @@ export const storySets = () =>
       return { name: n, load: fs.existsSync(f) ? () => import(pathToFileURL(f).href + '?' + Math.random()).then((m) => m.default) : null };
     }),
   }))
+    .concat([{ day: 3, files: [{ name: 'konbini', load: async () => KONBINI }] }])
     .concat([{ day: 0, files: [{ name: 'conversations', load: async () => CONVERSATIONS }] }])
     // Optional in-place finds keep their first-day grouping for focused production.
     .concat([3, 4, 5].map(day => ({ day, files: [{ name: 'flavor-finds', load: async () => ({ nodes: Object.fromEntries(FLAVOR_FINDS.filter(f => f.from === day).map(f => [f.node, FLAVOR_NODES[f.node]])) }) }] })))

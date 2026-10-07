@@ -105,6 +105,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `dorm_court` | 79.84 | -1.3 | 90 | 1 | 0 | The open entrance court on the west side of the dorm blocks; its camera looks east at Eric's block. |
 | `dorms` | 85.49 | -1.79 | 90 | 1 | 1 | Eric's flat on 2F of his block, above the passage; its window faces the next block's west end, 1.2 out. The corridor runs to the stairs in the block's return. |
 | `shotengai` | 64.5 | 20.15 | 270 | 1 | 0 | The middle of the arcade's east mouth, between the two shop rows; its camera looks west down the arcade. |
+| `konbini` | 30.75 | 17.9 | 0 | 1 | 0 | North row bay 7, inside its existing south-facing door. |
 | `bakery` | 44.25 | 17.9 | 0 | 1 | 0 | North row bay 10, inside its existing south-facing door. |
 | `izakaya` | 68.6 | 17.9 | 0 | 1 | 0 | The existing izakaya ground floor, with its south-facing door on the shop walk. |
 | `karaoke` | 62.25 | 22.4 | 180 | 1 | 0 | The karaoke box's glass door off the arcade (south row, bay 14), inside. An interior, looked into from the door's side over its cut-down front wall. |
@@ -147,6 +148,7 @@ The game's map and the minimap (controls-and-ui.md, The map) show each outdoor p
 | `shotengai` | 30.3 | 20.1 | |
 | `izakaya` | | | `shotengai` |
 | `bakery` | | | `shotengai` |
+| `konbini` | | | `shotengai` |
 | `karaoke` | | | `shotengai` |
 | `karaoke_booth` | | | `karaoke` |
 | `east_lane` | 67.5 | -6.5 | |
@@ -517,7 +519,7 @@ The shops with a name have a sign board over their bays on the front, the kana l
 
 Three alleys, one bay wide and five bays apart, cut through the south row between planted beds, from the arcade to the promenade. A walk runs down the rows' west end past the arcade's west mouth to the promenade (its north half, on to the footpath behind the rows, isn't walked); at the east end a walk turns down from the shop walk past a planted bed with a zelkova to the promenade. The promenade runs behind the south row in pale slabs, with a dark course on every bay line and a darker band along the sea wall where lamps, back-to-back benches and bins stand, from the foot of the walk south of the station (not walked) to a lookout with a rail over the rocks. On each alley's axis a band of darker stone crosses it to a flight of stairs down the wall to a sand beach; each flight's head is chained off between two posts, so the beach is seen and not walked: shrubs and rocks at the wall's foot, three beach huts by its west return, a few striped umbrellas, boulders in groups at the water's edge, wet sand and foam along the shore. East of the beach the wall stands in the sea on armour rocks, as west of the station, with three black pines behind it. The plaza and the forecourt draw the same street, from its backs, as backdrop and on the island map.
 
-In the morning the sun comes from the east-south-east behind the camera's left shoulder; after work it is low in the west, ahead down the street, and the shopfronts' glass, the signs, the lanterns with pools of light under them, the promenade's lamps and the izakaya's door light are lit. The karaoke door opens onto its front desk (`karaoke`, below; shut on day 2), and the izakaya door opens for the department's day-2 welcome dinner. The bakery opens during daytime from day three; the remaining shops stay shut. It also loads directly with `?place=shotengai`, at the shop walk. Nobody is here yet.
+In the morning the sun comes from the east-south-east behind the camera's left shoulder; after work it is low in the west, ahead down the street, and the shopfronts' glass, the signs, the lanterns with pools of light under them, the promenade's lamps and the izakaya's door light are lit. The karaoke door opens onto its front desk (`karaoke`, below; shut on day 2), and the izakaya door opens for the department's day-2 welcome dinner. The bakery opens during daytime from day three; the konbini opens from morning through evening from day three. The remaining shops stay shut. It also loads directly with `?place=shotengai`, at the shop walk. Nobody is here yet.
 
 ### Day-2 party plan
 
@@ -1848,3 +1850,19 @@ None.
 | `exit` | Use the door | Walk outside the actual east door. |
 
 The directory stays in the Bag, whose Read button reopens three compact written pages. Names and parent locations come from the same canonical tables as the map. Bakery opening date and periods come from its enforced service rule; no other opening hours are invented.
+
+
+## Konbini (`konbini`)
+
+The combined konbini, 100-yen shop and drugstore has a usable ground floor inside its existing north-row bay 7. `store_door` enters from shop street from day three, morning through evening. Day-one, day-two and early-period door cards remain closed; the map uses the same hours. The separate `store` window interaction keeps its prior first-visit thoughts.
+
+A refrigerated rear case holds milk cartons, wrapped rice balls, milk tea and coffee. Its sliding panes open during selection; packages move into a basket on the west counter. The clerk stands behind the narrow till, clear of the public aisle. Shallow household shelves face the aisle, with stacked baskets, bags, floor joints, a toe grille, shelf prices and ceiling lights. The front-right stool and ledge use the actual street window. Overview cuts the near wall; desktop follow closes the room around its real doorway and glazing.
+
+| Thing | Label | Use |
+|---|---|---|
+| `konbini_exit` | Shopping street | Go out |
+| `fridge` | Fridge | Choose and return groceries; inspect milk/rice packaging |
+| `konbini_clerk` | Shop clerk | Talk and pay |
+| `konbini_seat` | Window seat | Sit, drink purchased milk or eat a rice ball |
+
+Spots: `konbini_in`, `fridge`, `checkout`, `window`. Seat: `konbini_seat`. Person: `konbini_clerk`, an existing generic apron body using the approved sales2 voice. Hook: `konbiniShop`. No zones or secret nooks. The shop exits through the same doorway to shop street.
