@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { withNativeBrowser } from '../../reviews/camera-plan-1/native-browser.mjs';
 import { scopedRoute } from '../../tools/bible/check-scope.mjs';
-const base = process.env.URL || 'http://127.0.0.1:8771/.claude/worktrees/codex-feedback-camera/game3d';
+const base = process.env.URL || 'http://127.0.0.1:8771/game3d';
 const out = process.env.OUT || new URL('../shots/feedback-camera/round1/', import.meta.url).pathname;
 fs.mkdirSync(out, { recursive: true });
 const reports = [], errors = [];
