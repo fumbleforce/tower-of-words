@@ -280,6 +280,7 @@
     "shotengai",
     "izakaya",
     "bakery",
+    "konbini",
     "karaoke",
     "karaoke_booth",
     "east_lane",
@@ -557,6 +558,36 @@
     "bakery:eat",
     "bakery:stand",
     "bakery:end",
+    "konbini:arrive",
+    "konbini:leave",
+    "konbini:clerk",
+    "konbini:browse",
+    "konbini:checkout",
+    "konbini:pay",
+    "konbini:paid",
+    "konbini:take",
+    "konbini:take_seat",
+    "konbini:cancel",
+    "konbini:seat_ask",
+    "konbini:window",
+    "konbini:stand",
+    "konbini:end",
+    "konbini:milk_menu",
+    "konbini:milk_add",
+    "konbini:milk_remove",
+    "konbini:milk_label",
+    "konbini:consume_milk",
+    "konbini:riceball_menu",
+    "konbini:riceball_add",
+    "konbini:riceball_remove",
+    "konbini:riceball_label",
+    "konbini:consume_riceball",
+    "konbini:tea_menu",
+    "konbini:tea_add",
+    "konbini:tea_remove",
+    "konbini:coffee_menu",
+    "konbini:coffee_add",
+    "konbini:coffee_remove",
     "karaoke:arrive",
     "karaoke:to_street",
     "karaoke:to_booth",
@@ -1611,6 +1642,450 @@
       "cond": ""
     },
     {
+      "from": "konbini:clerk",
+      "to": "konbini:browse",
+      "kind": "choice",
+      "labels": [
+        "Choose groceries."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:clerk",
+      "to": "konbini:seat_ask",
+      "kind": "choice",
+      "labels": [
+        "Point to the window seat."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:clerk",
+      "to": "konbini:end",
+      "kind": "choice",
+      "labels": [
+        "Keep looking."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:browse",
+      "to": "konbini:paid",
+      "kind": "go",
+      "labels": [],
+      "cond": "(konbini_phase == 'paid')"
+    },
+    {
+      "from": "konbini:browse",
+      "to": "konbini:milk_menu",
+      "kind": "choice",
+      "labels": [
+        "Milk carton."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:browse",
+      "to": "konbini:riceball_menu",
+      "kind": "choice",
+      "labels": [
+        "Salted rice ball."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:browse",
+      "to": "konbini:tea_menu",
+      "kind": "choice",
+      "labels": [
+        "Milk tea."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:browse",
+      "to": "konbini:coffee_menu",
+      "kind": "choice",
+      "labels": [
+        "Coffee."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:browse",
+      "to": "konbini:checkout",
+      "kind": "choice",
+      "labels": [
+        "Check out."
+      ],
+      "cond": "(konbini_count > 0)"
+    },
+    {
+      "from": "konbini:browse",
+      "to": "konbini:cancel",
+      "kind": "choice",
+      "labels": [
+        "Return the basket."
+      ],
+      "cond": "(konbini_count > 0)"
+    },
+    {
+      "from": "konbini:browse",
+      "to": "konbini:end",
+      "kind": "choice",
+      "labels": [
+        "Keep looking."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:checkout",
+      "to": "konbini:browse",
+      "kind": "go",
+      "labels": [],
+      "cond": "(konbini_count == 0)"
+    },
+    {
+      "from": "konbini:checkout",
+      "to": "konbini:pay",
+      "kind": "choice",
+      "labels": [
+        "Pay the total on the till."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:checkout",
+      "to": "konbini:browse",
+      "kind": "choice",
+      "labels": [
+        "Keep browsing."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:checkout",
+      "to": "konbini:cancel",
+      "kind": "choice",
+      "labels": [
+        "Put everything back."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:pay",
+      "to": "konbini:checkout",
+      "kind": "go",
+      "labels": [],
+      "cond": "(konbini_cant_pay)"
+    },
+    {
+      "from": "konbini:pay",
+      "to": "konbini:paid",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:paid",
+      "to": "konbini:take",
+      "kind": "choice",
+      "labels": [
+        "Take the bag."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:paid",
+      "to": "konbini:take_seat",
+      "kind": "choice",
+      "labels": [
+        "Take the bag to the window seat."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:take",
+      "to": "konbini:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:take_seat",
+      "to": "konbini:window",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:cancel",
+      "to": "konbini:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:seat_ask",
+      "to": "konbini:window",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:window",
+      "to": "konbini:consume_milk",
+      "kind": "choice",
+      "labels": [
+        "Drink a milk carton."
+      ],
+      "cond": "(konbini_has_milk)"
+    },
+    {
+      "from": "konbini:window",
+      "to": "konbini:consume_riceball",
+      "kind": "choice",
+      "labels": [
+        "Eat a rice ball."
+      ],
+      "cond": "(konbini_has_riceball)"
+    },
+    {
+      "from": "konbini:window",
+      "to": "konbini:end",
+      "kind": "choice",
+      "labels": [
+        "Sit for a while."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:window",
+      "to": "konbini:stand",
+      "kind": "choice",
+      "labels": [
+        "Get up."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:stand",
+      "to": "konbini:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:milk_menu",
+      "to": "konbini:milk_add",
+      "kind": "choice",
+      "labels": [
+        "Put it in the basket."
+      ],
+      "cond": "(!konbini_selected_milk && konbini_count < 3)"
+    },
+    {
+      "from": "konbini:milk_menu",
+      "to": "konbini:milk_remove",
+      "kind": "choice",
+      "labels": [
+        "Put it back."
+      ],
+      "cond": "(konbini_selected_milk)"
+    },
+    {
+      "from": "konbini:milk_menu",
+      "to": "konbini:milk_label",
+      "kind": "choice",
+      "labels": [
+        "Read the package."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:milk_menu",
+      "to": "konbini:browse",
+      "kind": "choice",
+      "labels": [
+        "Back to the fridge."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:milk_add",
+      "to": "konbini:browse",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:milk_remove",
+      "to": "konbini:browse",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:milk_label",
+      "to": "konbini:milk_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:consume_milk",
+      "to": "konbini:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:riceball_menu",
+      "to": "konbini:riceball_add",
+      "kind": "choice",
+      "labels": [
+        "Put it in the basket."
+      ],
+      "cond": "(!konbini_selected_riceball && konbini_count < 3)"
+    },
+    {
+      "from": "konbini:riceball_menu",
+      "to": "konbini:riceball_remove",
+      "kind": "choice",
+      "labels": [
+        "Put it back."
+      ],
+      "cond": "(konbini_selected_riceball)"
+    },
+    {
+      "from": "konbini:riceball_menu",
+      "to": "konbini:riceball_label",
+      "kind": "choice",
+      "labels": [
+        "Read the package."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:riceball_menu",
+      "to": "konbini:browse",
+      "kind": "choice",
+      "labels": [
+        "Back to the fridge."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:riceball_add",
+      "to": "konbini:browse",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:riceball_remove",
+      "to": "konbini:browse",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:riceball_label",
+      "to": "konbini:riceball_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:consume_riceball",
+      "to": "konbini:end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:tea_menu",
+      "to": "konbini:tea_add",
+      "kind": "choice",
+      "labels": [
+        "Put it in the basket."
+      ],
+      "cond": "(!konbini_selected_tea && konbini_count < 3)"
+    },
+    {
+      "from": "konbini:tea_menu",
+      "to": "konbini:tea_remove",
+      "kind": "choice",
+      "labels": [
+        "Put it back."
+      ],
+      "cond": "(konbini_selected_tea)"
+    },
+    {
+      "from": "konbini:tea_menu",
+      "to": "konbini:browse",
+      "kind": "choice",
+      "labels": [
+        "Back to the fridge."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:tea_add",
+      "to": "konbini:browse",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:tea_remove",
+      "to": "konbini:browse",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:coffee_menu",
+      "to": "konbini:coffee_add",
+      "kind": "choice",
+      "labels": [
+        "Put it in the basket."
+      ],
+      "cond": "(!konbini_selected_coffee && konbini_count < 3)"
+    },
+    {
+      "from": "konbini:coffee_menu",
+      "to": "konbini:coffee_remove",
+      "kind": "choice",
+      "labels": [
+        "Put it back."
+      ],
+      "cond": "(konbini_selected_coffee)"
+    },
+    {
+      "from": "konbini:coffee_menu",
+      "to": "konbini:browse",
+      "kind": "choice",
+      "labels": [
+        "Back to the fridge."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "konbini:coffee_add",
+      "to": "konbini:browse",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "konbini:coffee_remove",
+      "to": "konbini:browse",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
       "from": "forecourt:to_campus",
       "to": "campus:arrive",
       "kind": "trip",
@@ -1732,6 +2207,12 @@
     },
     {
       "from": "bakery:leave",
+      "to": "shotengai:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "konbini:leave",
       "to": "shotengai:arrive",
       "kind": "trip",
       "labels": []
@@ -2450,6 +2931,7 @@
     "dorm_room_known",
     "home_203",
     "bakery_visited",
+    "konbini_visited",
     "found_bakery_flyer",
     "bakery_action_complete",
     "place",
@@ -2457,6 +2939,16 @@
     "bakery_item",
     "bakery_cant_pay",
     "bakery_has_curry",
-    "bakery_has_roll"
+    "bakery_has_roll",
+    "konbini_action_complete",
+    "konbini_phase",
+    "konbini_count",
+    "konbini_cant_pay",
+    "konbini_has_milk",
+    "konbini_has_riceball",
+    "konbini_selected_milk",
+    "konbini_selected_riceball",
+    "konbini_selected_tea",
+    "konbini_selected_coffee"
   ]
 }

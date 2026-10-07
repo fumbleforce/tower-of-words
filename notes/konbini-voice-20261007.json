@@ -1,0 +1,197 @@
+{
+  "date": "2026-10-07",
+  "profile": "sales2",
+  "speaker": "konbini_clerk",
+  "newTakes": {
+    "konbini-welcome": {
+      "speaker": "konbini_clerk",
+      "lang": "ja",
+      "take": "s505",
+      "text": "いらっしゃいませ。かごはこちらです。",
+      "asr": "いらっしゃいませカゴはこちらです",
+      "cer": 0.0,
+      "cer_written": 0.133,
+      "f0": 243.8,
+      "sim": 0.952,
+      "p_ja": null,
+      "accent": null,
+      "forced": false,
+      "engine": "qwen",
+      "checks": {
+        "dur": 3.28,
+        "speech": 2.62,
+        "median_f0": 243.8,
+        "low160": 0.0,
+        "pitch_ok": true,
+        "asr": "いらっしゃいませカゴはこちらです",
+        "cer": 0.0,
+        "edits": 0,
+        "sim": 0.952,
+        "lufs": -16.2,
+        "short": false,
+        "dur_ok": true,
+        "read_ok": true,
+        "ok": true,
+        "cer_written": 0.133,
+        "mtime": 1791335567,
+        "text": "いらっしゃいませ。かごはこちらです。"
+      },
+      "mp3Sha256": "30c852cdade27165783e56fd3132e79c24c4eb5c4da2cbe72ae8c0a05e2ab271"
+    },
+    "konbini-total": {
+      "speaker": "konbini_clerk",
+      "lang": "ja",
+      "take": "s606",
+      "text": "以上でよろしいですか。",
+      "asr": "以上でよろしいですか。",
+      "cer": 0.0,
+      "cer_written": 0.0,
+      "f0": 265.8,
+      "sim": 0.928,
+      "p_ja": null,
+      "accent": null,
+      "forced": false,
+      "engine": "qwen",
+      "checks": {
+        "dur": 1.52,
+        "speech": 1.47,
+        "median_f0": 265.8,
+        "low160": 0.0,
+        "pitch_ok": true,
+        "asr": "以上でよろしいですか。",
+        "cer": 0.0,
+        "edits": 0,
+        "sim": 0.928,
+        "lufs": -16.7,
+        "short": false,
+        "dur_ok": true,
+        "read_ok": true,
+        "ok": true,
+        "cer_written": 0.0,
+        "mtime": 1791335569,
+        "text": "以上でよろしいですか。"
+      },
+      "mp3Sha256": "1747087f0a9eac567920fbe5679f28bb279ace2e3ebf16986dc7ee6074d9b073"
+    },
+    "konbini-bag": {
+      "speaker": "konbini_clerk",
+      "lang": "ja",
+      "take": "s404",
+      "text": "袋にお入れしますね。",
+      "asr": "袋にお入れしますね",
+      "cer": 0.0,
+      "cer_written": 0.0,
+      "f0": 239.6,
+      "sim": 0.958,
+      "p_ja": null,
+      "accent": null,
+      "forced": false,
+      "engine": "qwen",
+      "checks": {
+        "dur": 2.16,
+        "speech": 1.49,
+        "median_f0": 239.6,
+        "low160": 0.0,
+        "pitch_ok": true,
+        "asr": "袋にお入れしますね",
+        "cer": 0.0,
+        "edits": 0,
+        "sim": 0.958,
+        "lufs": -16.8,
+        "short": false,
+        "dur_ok": true,
+        "read_ok": true,
+        "ok": true,
+        "cer_written": 0.0,
+        "mtime": 1791335565,
+        "text": "袋にお入れしますね。"
+      },
+      "mp3Sha256": "5102e05c5805e34fe971631f6571ad65796856b1b77b9b1f52cde10640bce3d7"
+    }
+  },
+  "aliases": [
+    {
+      "key": "konbini-thanks",
+      "speaker": "konbini_clerk",
+      "sourceKey": "bakery-thanks",
+      "sourceSpeaker": "bakery_clerk",
+      "profile": "sales2",
+      "sha256": "07bc0fd0cc8359e2c7dd7bb15eebfdb54dbebd4b0e9469643d1d6acdf71f0ace",
+      "text": "ありがとうございます。",
+      "selectedTake": {
+        "speaker": "bakery_clerk",
+        "lang": "ja",
+        "take": "s404",
+        "text": "ありがとうございます。",
+        "asr": "ありがとうございます",
+        "cer": 0.0,
+        "cer_written": 0.0,
+        "f0": 218.4,
+        "sim": 0.979,
+        "p_ja": null,
+        "accent": null,
+        "forced": false,
+        "engine": "qwen"
+      }
+    },
+    {
+      "key": "konbini-seat",
+      "speaker": "konbini_clerk",
+      "sourceKey": "bakery-seat",
+      "sourceSpeaker": "bakery_clerk",
+      "profile": "sales2",
+      "sha256": "0c5d4b94b5aa533401432e932f2835ee2be6819763e510b67cc9b28fe4de4de7",
+      "text": "はい、そちらでどうぞ。",
+      "selectedTake": {
+        "speaker": "bakery_clerk",
+        "lang": "ja",
+        "take": "s606",
+        "text": "はい、そちらでどうぞ。",
+        "asr": "はいそちらでどうぞ",
+        "cer": 0.0,
+        "cer_written": 0.0,
+        "f0": 263.5,
+        "sim": 0.934,
+        "p_ja": null,
+        "accent": null,
+        "forced": false,
+        "engine": "qwen"
+      }
+    }
+  ],
+  "nativeExportCheck": {
+    "konbini-welcome": {
+      "pJa": 0.999,
+      "pEn": 0.001,
+      "transcript": "いらっしゃいませ。カゴはこちらです。"
+    },
+    "konbini-total": {
+      "pJa": 0.999,
+      "pEn": 0.001,
+      "transcript": "以上でよろしいですか。"
+    },
+    "konbini-bag": {
+      "pJa": 0.998,
+      "pEn": 0.001,
+      "transcript": "袋にお入れしますね"
+    },
+    "konbini-thanks": {
+      "pJa": 0.999,
+      "pEn": 0.001,
+      "transcript": "ありがとうございます"
+    },
+    "konbini-seat": {
+      "pJa": 0.999,
+      "pEn": 0.0,
+      "transcript": "はい、そちらでどうぞ。"
+    }
+  },
+  "fallback": [],
+  "baselinePreservation": {
+    "clips": 1542,
+    "index": 1608,
+    "spans": 132,
+    "spansByteIdentical": true
+  },
+  "workDirectory": "~/ai/game3d-voice/konbini-20261007"
+}

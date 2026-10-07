@@ -1979,6 +1979,75 @@
     ]
   },
   {
+    "id_": "prop/konbini/fridge",
+    "kind": "prop",
+    "name": "Fridge",
+    "paths": [
+      "game3d/js/places/konbini.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "konbini.js things.fridge",
+    "place": "konbini",
+    "used": [
+      "Konbini: tap target 'Fridge'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "konbini"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/konbini/konbini_exit",
+    "kind": "prop",
+    "name": "Shopping street",
+    "paths": [
+      "game3d/js/places/konbini.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "konbini.js things.konbini_exit",
+    "place": "konbini",
+    "used": [
+      "Konbini: tap target 'Shopping street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "konbini"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/konbini/konbini_seat",
+    "kind": "prop",
+    "name": "Window seat",
+    "paths": [
+      "game3d/js/places/konbini.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "konbini.js things.konbini_seat",
+    "place": "konbini",
+    "used": [
+      "Konbini: tap target 'Window seat'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "konbini"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/office_quarter/bank",
     "kind": "prop",
     "name": "Bank",
@@ -2931,13 +3000,36 @@
   {
     "id_": "prop/shotengai/store",
     "kind": "prop",
-    "name": "Konbini",
+    "name": "Store window",
     "paths": [
       "game3d/js/places/shotengai.js"
     ],
     "status": "provisional",
     "status_from": "A named thing in the game (built in code)",
     "source": "shotengai.js things.store",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Store window'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/store_door",
+    "kind": "prop",
+    "name": "Konbini",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.store_door",
     "place": "shotengai",
     "used": [
       "Shop street: tap target 'Konbini'"

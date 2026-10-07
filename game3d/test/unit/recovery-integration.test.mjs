@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { parse } from 'espree';
 import * as THREE from '../../vendor/three/three.module.js';
+import { showRecoveryNotice } from '../../js/ui/recovery-notice.js';
 import { restoreMet } from '../../js/saves/met.js';
 import { migrateDay2Save } from '../../js/saves/day2.js';
 import { needsLegacyOpening } from '../../js/narrative/legacy-opening.js';
@@ -132,8 +133,9 @@ test('the real recovery notice freezes updates and offers a working return to ti
   }, body: { append() {} } };
   const game = { saveEnabled: true, paused: false };
   let reloaded = false;
-  const fail = new Function('game', 'document', 'location', `return ${text(recovery)}`)(game, doc,
+  const showNotice = new Function('document', 'location', `return ${showRecoveryNotice.toString()}`)(doc,
     { reload: () => { reloaded = true; } });
+  const fail = new Function('game', 'showRecoveryNotice', `return ${text(recovery)}`)(game, showNotice);
   fail('Changed scene.');
   assert.equal(game.saveEnabled, false);
   assert.equal(game.paused, true);

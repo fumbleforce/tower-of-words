@@ -1,4 +1,4 @@
-import { bakeryOpen } from '../gameplay/shop-hours.js';
+import { bakeryOpen, konbiniOpen } from '../gameplay/shop-hours.js';
 // Fast travel's rules (docs/game/systems.md, Fast travel): every place's state now, with its one-line reason.
 //   here     where Eric is
 //   go       he can fast travel there now
@@ -20,7 +20,7 @@ import { isLift } from './ways.js';
 import { nameOf } from './pins.js';
 
 const DAY1_OPEN = [...new Set([...Object.entries(NEXT).flat(), ...Object.entries(TRIPS).flat(2)])].filter(
-  (id) => id !== 'bakery',
+  (id) => id !== 'bakery' && id !== 'konbini',
 );
 const OPEN = { 1: DAY1_OPEN, 2: DAY2_OPEN, 3: DAY3_OPEN, 4: DAY4_OPEN, 5: DAY5_OPEN, 6: Object.keys(ROUTES) };
 export const openToday = (day) => OPEN[day] || OPEN[Math.max(...Object.keys(OPEN).map(Number))];
@@ -74,6 +74,11 @@ export function placeStates({
     if (id === 'bakery' && !bakeryOpen(day, period)) {
       s.state = 'closed';
       s.reason = 'Open in the morning, at lunch and in the afternoon.';
+      continue;
+    }
+    if (id === 'konbini' && !konbiniOpen(day, period)) {
+      s.state = 'closed';
+      s.reason = 'Open from morning through evening.';
       continue;
     }
     const route = findRoute(graph, here, id);

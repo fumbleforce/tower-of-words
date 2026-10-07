@@ -96,6 +96,31 @@ ENGINE_WRITES['game3d/js/places/ongoing/index.js'] = {
 ENGINE_WRITES['game3d/js/places/gym.js'] = { exact: ['winter_action_completed'], prefix: [] };
 ENGINE_WRITES['game3d/js/places/commons.js'] = { exact: ['art_action_completed'], prefix: [] };
 
+ENGINE_WRITES['game3d/js/places/konbini/trade.js'] = {
+  exact: [
+    'konbini_basket',
+    'konbini_cant_pay',
+    'konbini_consumed_id',
+    'konbini_count',
+    'konbini_food_id',
+    'konbini_food_item',
+    'konbini_food_phase',
+    'konbini_full',
+    'konbini_has_milk',
+    'konbini_has_riceball',
+    'konbini_order_id',
+    'konbini_paid_id',
+    'konbini_phase',
+    'konbini_selected_coffee',
+    'konbini_selected_milk',
+    'konbini_selected_riceball',
+    'konbini_selected_tea',
+    'konbini_total',
+  ],
+  prefix: [],
+};
+ENGINE_WRITES['game3d/js/places/konbini/action.js'] = { exact: ['konbini_action_complete'], prefix: [] };
+
 export const KNOW_PREFIX = 'know_';
 export function flagKeys(owner) {
   const spec = ENGINE_WRITES[owner];

@@ -34,7 +34,10 @@ export function installItemDocuments(game) {
         await game.beat(() => readItemDocument(game, id));
       } finally {
         bag.hidden = wasHidden;
-        button.focus();
+        // Note advance runs on pointerdown; wait until its mouse focus default has finished.
+        requestAnimationFrame(() => {
+          if (!bag.hidden && !game.busy) bag.querySelector(`[data-read-item="${CSS.escape(id)}"]`)?.focus();
+        });
       }
     },
     true,

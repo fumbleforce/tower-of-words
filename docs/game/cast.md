@@ -21,6 +21,7 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 | `aoi` | Aoi | A new hire. |
 | `rei` | Rei | Sales. Not met on day 1. |
 | `tama` | Tama | A calico cat. |
+| `konbini_clerk` | Shop clerk | An unnamed adult at the konbini till; the existing generic apron body and approved sales2 voice. |
 | `bakery_clerk` | Bakery clerk | An unnamed adult serving bread in the shop street bakery; the existing generic apron body and approved sales2 voice. |
 | `canteen_worker` | Canteen worker | An unnamed adult who works at the indoor service counter and closes the canteen terrace after work. |
 | `attendant` | Attendant | The gym's attendant on day 3: the desk by day, the pool's floats at the club's evening. An office worker's body, a borrowed voice. |

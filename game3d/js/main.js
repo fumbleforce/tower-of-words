@@ -1,3 +1,4 @@
+import { showRecoveryNotice } from './ui/recovery-notice.js';
 import { title } from './ui/title.js';
 import { migrateForecourtSave } from './places/forecourt-save.js';
 import { createPlaceLifecycle } from './places/lifecycle.js';
@@ -41,6 +42,7 @@ import { dormCourtPlace as dorm_court } from './places/dorm-court.js';
 import { dormsPlace as dorms } from './places/dorms.js';
 import { shotengaiPlace as shotengai } from './places/shotengai.js';
 import { bakeryPlace as bakery } from './places/bakery.js';
+import { konbiniPlace as konbini } from './places/konbini.js';
 import { izakayaPlace as izakaya } from './places/izakaya.js';
 import { karaokePlace as karaoke } from './places/karaoke.js';
 import { karaokeBoothPlace as karaoke_booth } from './places/karaoke-booth.js';
@@ -82,6 +84,7 @@ const PLACES = {
   shotengai,
   izakaya,
   bakery,
+  konbini,
   karaoke,
   karaoke_booth,
   east_lane,
@@ -213,18 +216,7 @@ game.flagsRef = flags;
 game.onRecoveryError = (message) => {
   game.saveEnabled = false;
   game.paused = true;
-  const notice = document.createElement('dialog');
-  notice.className = 'save-recovery';
-  notice.setAttribute('role', 'alertdialog');
-  notice.setAttribute('aria-label', 'Unable to resume scene');
-  notice.textContent = `${message} Your last save is preserved. `;
-  const back = document.createElement('button');
-  back.textContent = 'Return to title';
-  back.addEventListener('click', () => location.reload());
-  notice.append(back);
-  notice.addEventListener('cancel', (event) => event.preventDefault());
-  document.body.append(notice);
-  notice.showModal();
+  showRecoveryNotice(message);
 };
 const HURRY = 6;
 game.hurry = false;

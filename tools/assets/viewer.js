@@ -158,6 +158,7 @@ async function room(view) {
   else if (view.room === 'plaza') { w = (await mod('scenes/plaza.js')).buildPlaza(); scene = w.scene; }
   else if (view.room === 'dorm-court') { w = (await mod('scenes/dorm-court.js')).buildDormCourt(); scene = w.scene; }
   else if (view.room === 'dorms') { w = (await mod('scenes/dorms.js')).buildDorms(); scene = w.scene; }
+  else if (view.room === 'konbini') { w = (await mod('scenes/konbini/room.js')).buildKonbini(); scene = w.scene; }
   else if (view.room === 'bakery') { w = (await mod('scenes/bakery/room.js')).buildBakery(); scene = w.scene; }
   else if (view.room === 'gym') { w = (await mod('scenes/rooms/gym.js')).buildGym(); scene = w.scene; }
   else if (view.room === 'sports') { w = (await mod('scenes/sports.js')).buildSports(); scene = w.scene; }
@@ -177,7 +178,7 @@ async function room(view) {
   // Frame the playable room, excluding backdrop geometry and floors staged elsewhere.
   const bounds = view.room === 'dorms'
     ? { ...w.bounds, z0: w.bounds.back, z1: w.bounds.near }
-    : ['gym', 'bakery'].includes(view.room) ? w.bounds : view.room === 'sports' ? w.nav : null;
+    : ['gym', 'bakery', 'konbini'].includes(view.room) ? w.bounds : view.room === 'sports' ? w.nav : null;
   return {
     scene, object: w.root, room: view.room, actions: [], play() {}, update() {},
     bounds,
