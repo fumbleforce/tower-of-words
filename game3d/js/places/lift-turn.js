@@ -18,3 +18,10 @@ export async function turnInLift(game, root, target, animate, minimumSeconds = 0
   });
   walker?.sync?.();
 }
+
+// Face the doorway while it opens, before moving across the threshold.
+export async function waitFacingLift(game, site, animate, milliseconds) {
+  const root = game.player.root,
+    target = Math.atan2(site.x - root.position.x, site.zFront + 0.05 - root.position.z);
+  await Promise.all([game.wait(milliseconds), turnInLift(game, root, target, animate)]);
+}
