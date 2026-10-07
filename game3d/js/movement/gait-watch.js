@@ -110,8 +110,22 @@ export function startGaitCheck(game) {
       seen.add(r);
       const rel = feetRel(r, feet);
       let k = track.get(r);
-      if (!k) {
-        track.set(r, (k = { id, at, rel, w: { t: 0, n: 0, root: 0, anim: 0, rootS: 0, footS: 0 }, bad: 0, ep: null }));
+      // Samples are parent-local. Entering a new carrier or place starts a new
+      // measurement frame; its coordinate offset is not distance walked.
+      if (!k || k.parent !== r.root.parent || k.space !== P.space) {
+        track.set(
+          r,
+          (k = {
+            id,
+            parent: r.root.parent,
+            space: P.space,
+            at,
+            rel,
+            w: { t: 0, n: 0, root: 0, anim: 0, rootS: 0, footS: 0 },
+            bad: 0,
+            ep: null,
+          }),
+        );
         continue;
       }
       const w = k.w,

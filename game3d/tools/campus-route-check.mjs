@@ -16,6 +16,11 @@ await withBrowserJob(`campus-route-${part}-${width}`,async browser=>{
 
  const tap=async l=>phone?l.tap():l.click();
  const shot=async name=>page.screenshot({path:out+width+'-'+name+'.png'});
+ const report=async()=>{
+  const motion=await page.evaluate(()=>({overlaps:globalThis.__moveCheck?.overlaps,spins:globalThis.__moveCheck?.spins,steps:globalThis.__moveCheck?.steps,gait:globalThis.__gaitCheck}));
+  fs.writeFileSync(out+width+'-report.json',JSON.stringify({checks,errors,motion},null,2));
+  return motion;
+ };
  async function go(id,to){
   const before=await page.evaluate(()=>globalThis.__game.place.name);
   await page.evaluate(async id=>{const g=globalThis.__game,t=g.place.things[id];if(!t)throw new Error('Missing target '+id);await g.walkTo(...t.spot());},id);
@@ -35,6 +40,6 @@ await withBrowserJob(`campus-route-${part}-${width}`,async browser=>{
   }else{
    await go('harbour','harbour');await go('campus','campus');if(part!=='link'){await go('forecourt','forecourt');await go('shop_lane','shotengai');}
   }
-  const motion=await page.evaluate(()=>({overlaps:globalThis.__moveCheck.overlaps,spins:globalThis.__moveCheck.spins,steps:globalThis.__moveCheck.steps,gait:globalThis.__gaitCheck}));assert.deepEqual(motion.overlaps,[]);assert.deepEqual(motion.spins,[]);assert.deepEqual(motion.gait.episodes,[]);assert.deepEqual(errors,[]);fs.writeFileSync(out+width+'-report.json',JSON.stringify({checks,errors,motion},null,2));console.log('PASS',checks);
- }catch(error){console.log('STATE',await page.evaluate(()=>{const g=globalThis.__game;return {place:g?.place?.name,busy:g?.busy,pos:g?.player?.root.position,things:Object.keys(g?.place?.things||{}),talk:globalThis.document.querySelector('#talk')?.textContent};}));await shot('failure');console.log(errors);throw error;}finally{closing=true;await context.close();}
+  const motion=await report();assert.deepEqual(motion.overlaps,[]);assert.deepEqual(motion.spins,[]);assert.deepEqual(motion.gait.episodes,[]);assert.deepEqual(errors,[]);console.log('PASS',checks);
+ }catch(error){await report();console.log('STATE',await page.evaluate(()=>{const g=globalThis.__game;return {place:g?.place?.name,busy:g?.busy,pos:g?.player?.root.position,things:Object.keys(g?.place?.things||{}),talk:globalThis.document.querySelector('#talk')?.textContent};}));await shot('failure');console.log(errors);throw error;}finally{closing=true;await context.close();}
 },{timeoutMs:280000});
