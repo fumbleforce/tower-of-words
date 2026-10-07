@@ -1,0 +1,9 @@
+[
+  {
+    "width": 1366,
+    "failure": "page.waitForFunction: TypeError: Cannot read properties of undefined (reading 'place')\n    at eval (eval at predicate (eval at evaluate (:311:30)), <anonymous>:1:25)\n    at predicate (eval at evaluate (:311:30), <anonymous>:7:27)\n    at next (eval at evaluate (:311:30), <anonymous>:29:33)\n    at eval (eval at evaluate (:311:30), <anonymous>:42:13)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at withBrowserJob.timeoutMs (/home/jorgen/repo/japanese/.claude/worktrees/codex-continue-goal/game3d/tools/continue-goal-check.mjs:45:18)\n    at async withBrowserJob (/home/jorgen/repo/japanese/.claude/worktrees/codex-continue-goal/tools/lib/browser-job.mjs:164:12)\n    at async file:///home/jorgen/repo/japanese/.claude/worktrees/codex-continue-goal/game3d/tools/continue-goal-check.mjs:12:1",
+    "errors": [
+      "Cannot read properties of undefined (reading 'place')"
+    ]
+  }
+]
