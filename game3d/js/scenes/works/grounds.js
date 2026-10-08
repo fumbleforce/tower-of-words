@@ -12,13 +12,14 @@
 import * as THREE from 'three';
 import { kerb, kerbRect } from '../outdoor/edges.js';
 import { lamps, fingerSign, STEEL, rod } from '../outdoor/furniture.js';
-import { pine, keyaki, sakura, ginkgo, maple, grass, hedge } from '../outdoor/planting.js';
+import { pine, keyaki, sakura, maple, grass, hedge } from '../outdoor/planting.js';
 import { hash2 } from '../outdoor/parts.js';
 import { belt } from '../dorm-court/cluster-yards.js';
 import { walk } from '../plaza/east-lane.js';
 import { CONCRETE } from '../harbour/quay.js';
 import { fence } from './props.js';
 import * as P from './plan.js';
+import { vergeSteps } from './verges.js';
 
 const WORN = ['#8b8984', '#84827d', '#918e88', '#7e7c77'];
 const ASPHALT = ['#5d6065', '#595c61', '#62656a'];
@@ -205,17 +206,16 @@ const LANE_BELTS = [
   [[-87.4, L[0] - 1.1, -105, -100.4], [pine, keyaki], 503, 2.8],
 ];
 
-function* trees(p) {
+function* trees(p, treeRoot) {
   for (const [r, kinds, seed, pitch] of [
     ...LANE_BELTS,
-    // behind the street's east side, south of the recycling centre
-    [[S[1] + 1.4, -40.5, -89.5, -64.5], [keyaki, ginkgo, sakura], 505, 3.2],
     // south of the research walk
     [[-45.4, -38.5, -101.4, -98.6], [maple, sakura], 507, 2.6],
     // the lawn west of the street's fence, set well back
     [[-61.5, S[0] - 4.6, -94, -71], [keyaki, pine, maple], 511, 3.4],
   ])
     yield* belt(p, r, kinds, { seed, pitch });
+  yield* vergeSteps(p, treeRoot);
   hedge(p, [-46.6, P.RWALK[3] + 0.6], [-35.6, P.RWALK[3] + 0.6], { w: 0.45, h: 0.5, seed: 513 });
   // weeds along the walls: the shed's and the gatehouse's fronts, the factory's, the hall's north face
   for (let k = 0; k < 18; k++) {
@@ -240,5 +240,5 @@ export function* groundsSteps(c, lights, signRoot, mesh) {
   yield* paving(c.paver, c.parts);
   yield* furniture(c.parts, lights, signRoot);
   yield* fences(c.parts, mesh);
-  yield* trees(c.parts);
+  yield* trees(c.parts, signRoot);
 }
