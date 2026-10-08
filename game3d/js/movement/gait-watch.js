@@ -85,6 +85,11 @@ export function startGaitCheck(game) {
     const seen = new Set();
     for (const [id, r, seated] of list) {
       if (!r?.root?.parent || seen.has(r)) continue;
+      // Flight has no planted foot. Reset on either clock so landing cannot bridge the hop.
+      if (r.air === true) {
+        track.delete(r);
+        continue;
+      }
       // walkPerson's callback moves and poses procedural rigs within main.step.
       // setGait schedules a separate pose update; walkRig and Meshy keep the drawn clock.
       const proceduralStep = typeof r._walk === 'function' && r.knees && !r.selfGait && !r.meshy && !r.setGait;
