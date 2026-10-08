@@ -1,0 +1,130 @@
+{
+  "title": "Gym equipment-store approach",
+  "date": "2026-10-08",
+  "by": "codex",
+  "caption": "The equipment-store destination moves out of the ball-cart blocker to the clear space just inside its open door. Original baseline and native return checks are retained.",
+  "preview": "store-correction-390-gym_store",
+  "sections": [
+    {
+      "title": "Current gym before the approach correction",
+      "caption": "Native walking views of the recovered gym. The store destination is inside the ball-cart blocker, so both runs stop about 0.473 m short; this is retained baseline evidence, not a route pass.",
+      "images": [
+        {
+          "id": "baseline-1366-arrival",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/1366-arrival.png",
+          "caption": "Desktop, 1366 × 860: arrival."
+        },
+        {
+          "id": "baseline-1366-gym_desk",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/1366-gym_desk.png",
+          "caption": "Desktop, 1366 × 860: desk."
+        },
+        {
+          "id": "baseline-1366-gym_lockers",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/1366-gym_lockers.png",
+          "caption": "Desktop, 1366 × 860: lockers."
+        },
+        {
+          "id": "baseline-1366-gym_court",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/1366-gym_court.png",
+          "caption": "Desktop, 1366 × 860: court."
+        },
+        {
+          "id": "baseline-1366-gym_store",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/1366-gym_store.png",
+          "caption": "Desktop, 1366 × 860: store."
+        },
+        {
+          "id": "baseline-1366-gym_benches",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/1366-gym_benches.png",
+          "caption": "Desktop, 1366 × 860: benches."
+        },
+        {
+          "id": "baseline-1366-gym_meeting",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/1366-gym_meeting.png",
+          "caption": "Desktop, 1366 × 860: meeting."
+        },
+        {
+          "id": "baseline-390-arrival",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/390-arrival.png",
+          "caption": "Phone, 390 × 844: arrival."
+        },
+        {
+          "id": "baseline-390-gym_desk",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/390-gym_desk.png",
+          "caption": "Phone, 390 × 844: desk."
+        },
+        {
+          "id": "baseline-390-gym_lockers",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/390-gym_lockers.png",
+          "caption": "Phone, 390 × 844: lockers."
+        },
+        {
+          "id": "baseline-390-gym_court",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/390-gym_court.png",
+          "caption": "Phone, 390 × 844: court."
+        },
+        {
+          "id": "baseline-390-gym_store",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/390-gym_store.png",
+          "caption": "Phone, 390 × 844: store."
+        },
+        {
+          "id": "baseline-390-gym_benches",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/390-gym_benches.png",
+          "caption": "Phone, 390 × 844: benches."
+        },
+        {
+          "id": "baseline-390-gym_meeting",
+          "image": "game3d/shots/gym-detail-audit-20261008/baseline/390-gym_meeting.png",
+          "caption": "Phone, 390 × 844: meeting."
+        }
+      ]
+    },
+    {
+      "title": "Clear doorway approach and return",
+      "caption": "The destination moves just inside the same open door, before the carts. Actual walking reaches within 0.028 m at both sizes and returns to the lobby; furniture and collision geometry are unchanged.",
+      "images": [
+        {
+          "id": "store-correction-1366-gym_store",
+          "image": "game3d/shots/gym-detail-audit-20261008/store-correction/1366-gym_store.png",
+          "caption": "Desktop, 1366 × 860: store."
+        },
+        {
+          "id": "store-correction-1366-gym_lobby",
+          "image": "game3d/shots/gym-detail-audit-20261008/store-correction/1366-gym_lobby.png",
+          "caption": "Desktop, 1366 × 860: lobby."
+        },
+        {
+          "id": "store-correction-390-gym_store",
+          "image": "game3d/shots/gym-detail-audit-20261008/store-correction/390-gym_store.png",
+          "caption": "Phone, 390 × 844: store."
+        },
+        {
+          "id": "store-correction-390-gym_lobby",
+          "image": "game3d/shots/gym-detail-audit-20261008/store-correction/390-gym_lobby.png",
+          "caption": "Phone, 390 × 844: lobby."
+        }
+      ]
+    },
+    {
+      "title": "Strict day-one route checks",
+      "caption": "Both required runs passed in 74 seconds with no movement overlaps or spins and no overrides. Focused store and lobby walking above verifies the changed location.",
+      "images": [
+        {
+          "id": "fast-2026-10-08T19-34-34-244Z-1433396-1366x860",
+          "image": "game3d/shots/fast/2026-10-08T19-34-34-244Z-1433396/1366x860.png",
+          "caption": "Strict day-one end state, desktop."
+        },
+        {
+          "id": "fast-2026-10-08T19-34-34-244Z-1433397-390x844",
+          "image": "game3d/shots/fast/2026-10-08T19-34-34-244Z-1433397/390x844.png",
+          "caption": "Strict day-one end state, phone."
+        }
+      ]
+    }
+  ],
+  "commit": [
+    "8463ed89"
+  ]
+}
