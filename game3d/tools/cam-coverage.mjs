@@ -1,6 +1,6 @@
 // Camera coverage: is Eric's whole body on screen wherever he can stand? For every place (and the train cruising and
 // stopped), it floods the walk grid from the place's start, stands him on every reachable spot (a grid of STRIDE m),
-// lets the camera settle, and checks his body's box against the frame with a margin, at phone, laptop and full HD
+// checks his body's box against the settled frame and each requested grid point with a margin, at phone, laptop and full HD
 // sizes. Scripted close-ups (conversations, the lift ride) are not sampled: nothing closes the camera in ?cap.
 //   node game3d/tools/cam-coverage.mjs                   all places, all sizes; exit 1 on any failure
 //   PLACES=office,plaza SIZES=390x844 node game3d/tools/cam-coverage.mjs
@@ -34,6 +34,7 @@ const variants = VARIANTS.filter((v) => !only || only.includes(v.name) || only.i
 
 // in the page: sample the reachable grid and return the spots where his body leaves the frame
 async function sample({ st, keepTags, start, close, stride, margin, settle }) {
+  const { sampleCameraFrames } = await import('./test/support/camera-coverage-sample.mjs');
   const g = globalThis.__game,
     P = g.place,
     nav = P.nav,
@@ -112,16 +113,8 @@ async function sample({ st, keepTags, start, close, stride, margin, settle }) {
     mx = 1 - (2 * margin) / W,
     my = 1 - (2 * margin) / H,
     fails = [];
-  for (const [x, z] of spots) {
-    root.position.set(x, root.position.y, z);
-    g.walker.sync?.();
-    g.walker.stop?.();
-    P.cam?.snap?.(root.position);
-    globalThis.__advance(settle);
-    root.position.x = x;
-    root.position.z = z;
-    root.updateMatrixWorld(true);
-    camera.updateMatrixWorld();
+  const displaced = [];
+  const measure = () => {
     let worst = 0,
       side = '';
     for (const c of corners) {
@@ -141,15 +134,48 @@ async function sample({ st, keepTags, start, close, stride, margin, settle }) {
         side = v.y < 0 ? 'bottom' : 'top';
       }
     }
-    if (worst > 0)
-      fails.push({
-        x: +x.toFixed(2),
-        z: +z.toFixed(2),
-        side,
-        px: Math.round((worst * (side === 'top' || side === 'bottom' ? H : W)) / 2),
+    return { worst, side };
+  };
+  for (const [x, z] of spots) {
+    const result = sampleCameraFrames({
+      root,
+      walker: g.walker,
+      camera,
+      cam: P.cam,
+      advance: globalThis.__advance,
+      x,
+      z,
+      settle,
+      measure,
+    });
+    if (result.displacement > 1e-9)
+      displaced.push({
+        requested: [x, z],
+        actual: result.actual,
+        distance: result.displacement,
       });
+    for (const { stage, worst, side, unverified } of result.frames)
+      if (worst > 0 || unverified)
+        fails.push({
+          x: +x.toFixed(2),
+          z: +z.toFixed(2),
+          stage,
+          actual: result.actual,
+          ...(unverified
+            ? { unverified }
+            : {
+                side,
+                px: Math.round((worst * (side === 'top' || side === 'bottom' ? H : W)) / 2),
+              }),
+        });
   }
-  return { n: spots.length, body: [lo.y, hi.y].map((y) => +y.toFixed(2)), fails };
+  return {
+    n: spots.length,
+    body: [lo.y, hi.y].map((y) => +y.toFixed(2)),
+    displaced,
+    maxDisplacement: displaced.reduce((max, spot) => Math.max(max, spot.distance), 0),
+    fails,
+  };
 }
 
 const results = [],
@@ -159,12 +185,18 @@ await withBrowserJob(
   async (browser) => {
     for (const [w, h] of sizes) {
       const phone = w < 700;
-      const context = await browser.newContext({ viewport: { width: w, height: h }, isMobile: phone, hasTouch: phone });
+      const context = await browser.newContext({
+        viewport: { width: w, height: h },
+        isMobile: phone,
+        hasTouch: phone,
+      });
       for (const vr of variants) {
         const page = await context.newPage();
         page.on('pageerror', (e) => errors.push(`${vr.name} ${w}x${h}: ${e.message}`));
         await page.goto(`http://127.0.0.1:8771/${base}/index.html?cap&q=0&place=${vr.place}`, { timeout: 60000 });
-        await page.waitForFunction(() => globalThis.__done, null, { timeout: 120000 });
+        await page.waitForFunction(() => globalThis.__done, null, {
+          timeout: 120000,
+        });
         const r = await page.evaluate(sample, {
           st: vr.st,
           keepTags: !!vr.keepTags,
@@ -177,11 +209,11 @@ await withBrowserJob(
         results.push({ place: vr.name, size: `${w}x${h}`, ...r });
         const f = r.fails;
         console.log(
-          `${vr.name.padEnd(14)} ${`${w}x${h}`.padEnd(10)} ${String(f.length).padStart(4)} / ${r.n} spots out of frame` +
+          `${vr.name.padEnd(14)} ${`${w}x${h}`.padEnd(10)} ${String(f.length).padStart(4)} / ${r.n} spots out of frame; ${r.displaced.length} displaced during settle` +
             (f.length
               ? `  e.g. ${f
                   .slice(0, 4)
-                  .map((s) => `(${s.x}, ${s.z}) ${s.side} ${s.px}px`)
+                  .map((s) => `(${s.x}, ${s.z}) ${s.stage}: ${s.unverified || `${s.side} ${s.px}px`}`)
                   .join(', ')}`
               : ''),
         );
