@@ -1,7 +1,7 @@
 // The old works' ground (works/plan.js), in the island frame:
 //   the lane: the supply yard's big concrete slabs carried on north (laid the same way as its mouth in the harbour,
 //   so the two meet), to the chimney's foot; the plant's apron the same
-//   the yard, the aprons and the corners: older concrete, worn and patched, cracks across it, weeds at the edges
+//   the yard, the aprons and the corners: older concrete, worn and patched, short edge fractures, weeds at the edges
 //   the works street: old asphalt with faded white edge lines and patches, kerbed, from the office street (the
 //   harbour and the office quarter lay its mouth with worksStreet too)
 //   the research walk and the two forecourts: the town's pale slabs, kerbed (newer than the works round them)
@@ -20,6 +20,7 @@ import { CONCRETE } from '../harbour/quay.js';
 import { fence } from './props.js';
 import * as P from './plan.js';
 import { vergeSteps } from './verges.js';
+import { laneBeds, yardSurface } from './yard-details.js';
 
 const WORN = ['#8b8984', '#84827d', '#918e88', '#7e7c77'];
 const ASPHALT = ['#5d6065', '#595c61', '#62656a'];
@@ -77,12 +78,12 @@ function cracks(p, [x0, x1, z0, z1], n, seed) {
       z = z0 + hash2(seed, i) * (z1 - z0),
       a = hash2(i, i + seed) * Math.PI * 2;
     for (let k = 0; k < 4; k++) {
-      const len = 0.4 + hash2(k, i + seed, 3) * 0.7,
+      const len = 0.16 + hash2(k, i + seed, 3) * 0.22,
         nx = Math.min(x1 - 0.05, Math.max(x0 + 0.05, x + Math.cos(a) * len)),
         nz = Math.min(z1 - 0.05, Math.max(z0 + 0.05, z + Math.sin(a) * len));
       const l = Math.hypot(nx - x, nz - z);
       if (l > 0.05)
-        p.box('#5e5d5a', 0.025, 0.012, l, (x + nx) / 2, 0, (z + nz) / 2, { ry: Math.atan2(nx - x, nz - z), ...NO });
+        p.box('#6d6c65', 0.018, 0.014, l, (x + nx) / 2, 0, (z + nz) / 2, { ry: Math.atan2(nx - x, nz - z), ...NO });
       [x, z] = [nx, nz];
       a += (hash2(k, i, seed) - 0.5) * 1.4;
     }
@@ -141,9 +142,10 @@ function* yardPaving(pv, p, laneTo = L[3] + 0.4) {
   kerb(p, [L[0], P.FOOT[2]], [L[0], P.PLANT_APRON[2]], { off: 0.08 });
   kerb(p, [L[1], Y[2]], [L[1], L[2]], { off: -0.08 });
   kerbRect(p, A, { sides: 's' });
-  cracks(p, [L[1], Y[1] - 4, Y[2], Y[3]], 16, 11);
-  cracks(p, [G[0], G[1], G[2], G[3]], 7, 23);
-  cracks(p, [A[0], A[1], A[2], A[3]], 7, 31);
+  yardSurface(pv, p);
+  cracks(p, [L[1], Y[1] - 4, Y[2], Y[2] + 0.7], 7, 11);
+  cracks(p, [G[0], G[1], G[2], G[2] + 0.8], 3, 23);
+  cracks(p, [A[0] + 3, A[1], A[3] - 0.6, A[3]], 3, 31);
   yield;
 }
 
@@ -207,8 +209,8 @@ const LANE_BELTS = [
 ];
 
 function* trees(p, treeRoot) {
+  yield* laneBeds(p, LANE_BELTS);
   for (const [r, kinds, seed, pitch] of [
-    ...LANE_BELTS,
     // south of the research walk
     [[-45.4, -38.5, -101.4, -98.6], [maple, sakura], 507, 2.6],
     // the lawn west of the street's fence, set well back
@@ -232,7 +234,7 @@ function* trees(p, treeRoot) {
 export function* laneViewSteps(c, lights) {
   yield* yardPaving(c.paver, c.parts, L[3]); // to the supply yard's edge, its slabs on
   lampsOf(c.parts, lights, 'arm', ([, z]) => z < Y[3] + 1);
-  for (const [r, kinds, seed, pitch] of LANE_BELTS) yield* belt(c.parts, r, kinds, { seed, pitch });
+  yield* laneBeds(c.parts, LANE_BELTS);
 }
 
 // c: cells (dorm-court/cells.js); lights: a lightSet; signRoot: the finger sign's boards; mesh: the chain-link's Parts

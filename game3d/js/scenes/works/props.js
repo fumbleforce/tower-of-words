@@ -123,13 +123,36 @@ function siding(p) {
 }
 
 // an oil drum, a pallet with an old crate, a plastic crate
-const drum = (p, [x, z], k) =>
-  p.geo(['#4e6f78', '#8a4b44', '#5f6a54'][k % 3], new THREE.CylinderGeometry(0.3, 0.3, 0.9, 10).translate(x, 0.45, z), {
-    surf: 'metal',
-  });
+function drum(p, [x, z], k) {
+  const tone = ['#4e6f78', '#8a4b44', '#5f6a54'][k % 3];
+  p.geo(tone, new THREE.CylinderGeometry(0.29, 0.29, 0.88, 14).translate(x, 0.45, z), { surf: 'metal' });
+  for (const y of [0.04, 0.28, 0.62, 0.89])
+    p.geo('#59605b', new THREE.TorusGeometry(0.29, 0.018, 4, 14).rotateX(Math.PI / 2).translate(x, y, z), NO);
+  p.geo('#788077', new THREE.CylinderGeometry(0.266, 0.266, 0.018, 14).translate(x, 0.89, z), NO);
+  for (const [dx, dz, r] of [
+    [0.15, 0.06, 0.038],
+    [-0.13, -0.06, 0.022],
+  ])
+    p.geo('#414c4d', new THREE.CylinderGeometry(r, r, 0.025, 8).translate(x + dx, 0.91, z + dz), NO);
+}
+
 function pallet(p, [x, z], k) {
-  p.box('#a8957a', 1.1, 0.14, 1.1, x, 0, z, NO);
-  if (k % 2 === 0) p.box('#8f8a80', 0.9, 0.5, 0.8, x, 0.14, z);
+  const wood = ['#9b927f', '#a79d88', '#8c8575'];
+  // Three runners leave two real fork openings. The footprint stays inside its existing nav blocker.
+  for (const dx of [-0.43, 0, 0.43]) p.box(wood[2], 0.13, 0.085, 1.1, x + dx, 0.025, z, NO);
+  for (let i = 0; i < 6; i++) p.box(wood[i % 3], 1.1, 0.045, 0.145, x, 0.11, z - 0.46 + i * 0.185, NO);
+  if (k % 2 !== 0) return;
+  // Planked transit crate with battens and steel straps, the old load's same size.
+  for (let i = 0; i < 5; i++) p.box('#8f8a80', 0.9, 0.086, 0.8, x, 0.155 + i * 0.091, z);
+  for (const dx of [-0.35, 0.35]) {
+    p.box('#aaa28e', 0.075, 0.49, 0.035, x + dx, 0.155, z + 0.417, NO);
+    p.box('#aaa28e', 0.075, 0.49, 0.035, x + dx, 0.155, z - 0.417, NO);
+  }
+  for (let i = 0; i < 5; i++) p.box(wood[i % 3], 0.17, 0.035, 0.8, x - 0.36 + i * 0.18, 0.61, z, NO);
+  for (const dx of [-0.24, 0.24]) {
+    p.box('#556164', 0.025, 0.013, 0.84, x + dx, 0.645, z, NO);
+    for (const dz of [-0.424, 0.424]) p.box('#556164', 0.025, 0.49, 0.012, x + dx, 0.155, z + dz, NO);
+  }
 }
 
 function lot(p, mesh) {
