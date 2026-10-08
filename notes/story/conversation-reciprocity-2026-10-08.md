@@ -55,9 +55,21 @@ The author's subsequent read retained short, complete speech and removed univers
 - Strict fast tests attempted at 390×844 and 1366×860. Both stop at the voice build gate with 40 missing new clips, before launching a browser. No warning/bypass environment setting was used. These are held authored lines, awaiting story review before generation.
 - Browser presentation and public Continue are not yet verified. The restored-frame unit test exercises the real Runner with rendering/audio boundaries stubbed. It does not replace the release browser test.
 
+## Independent review revision
+
+The [independent Codex review](conversation-reciprocity-independent.md) applies to the original `b0fe4f7c` candidate. Its source remains unchanged in this commit. This response is the author's account; reviewer verification is still pending.
+
+- Emi no longer invites a specific request or result that the menu cannot handle. Both follow-up openers ask how the remembered agreement feels. A new direct reply confirms that the player still wants it, alongside worry, revision and hello. The earlier request discussion now suggests asking the person to demonstrate and allows time for that; it promises no unimplemented ticket consultation.
+- Returning to the same worry reads `chat_emi_ask_first` before the original advice. Emi remembers the request and asks whether the player wants an answer. Accepting gets her answer; declining ends with acknowledgement. Neither changes the help preference or repeats the apology. Eric's worry now uses a short spoken question: “If I keep asking, won’t you think I can’t do this?”
+- Mio's return with no chosen preference offers “I think I know what I’d like now.” The changed-mind option only appears after an actual choice. Deferral and the Japanese-clue gates are unchanged.
+
+The focused test run now passes 27 tests, including three added cases: both Emi openers with a direct unchanged answer, returning to the same worry after serialized flags with both answer choices, and Mio choosing a first preference after deferral. The worry test runs the real Runner on both visits; memory and save remain unit-test boundaries, as the independent report explains. No public Continue claim is made.
+
+The updated strict voice manifest reports 44 missing clips. The original fast-test results above remain historical; no server was started or stopped for this revision. Claude story review, approved-reference voices and rendered validation still hold release.
+
 ## Complete branch text
 
-The following transcript preserves every line, condition and choice in both candidate conversation files. It is generated from their exported data for cold reading; camera hooks are included where relevant.
+Regenerated after the independent review revisions. Every line, condition and choice in both conversation files is included for the next cold read.
 
 ### mio
 
@@ -247,7 +259,8 @@ ELSE
 CHOICE
   [know_yasumi && chat_mio_break_understood] {yasumi}… Does your mother take her own advice? -> chat_mio_her_break
   Does your mother ask how you’re doing? -> chat_mio_mother_asks
-  I feel differently about it now. -> chat_mio_settling_choice
+  [!chat_mio_evenings] I think I know what I’d like now. -> chat_mio_settling_choice
+  [chat_mio_evenings] I feel differently about it now. -> chat_mio_settling_choice
   Just saying hello today. -> chat_mio_short_hello
 ```
 
@@ -477,8 +490,8 @@ emi: Good. And I’ll ask what you’ve checked before I tell anyone it’s fini
 
 ```text
 eric: I’m still learning what people are asking for.
-emi: Ask them to show you. If you still aren’t sure, bring the question to me before you start taking anything apart.
-emi: I can help with the request. You can still do the repair.
+emi: Ask them to show you. They know what they were doing when it stopped working.
+emi: I’d rather you asked again than guessed. We can allow time for that.
 {"set":{"chat_emi_work_help":"request","chat_emi_work_talked":true}}
 {"do":"remember","who":"emi","id":"work_agreement","text":"Talked about what each of you needs when handling requests."}
 IF !know_mouichido
@@ -493,23 +506,50 @@ ELSE
 
 ```text
 IF chat_emi_work_help == 'request'
-  emi: Is it a request you want to go over? You said that was the difficult part.
+  emi: You said understanding the requests was the hard part. How are you feeling about that now?
 ELSE
-  emi: Have you got a result for me, or are you still checking? Either is all right.
+  emi: You said you’d tell me even if something still wasn’t working. How do you feel about that now?
 CHOICE
-  I worry that asking makes me look unable to do the job. -> chat_emi_worry
+  If I keep asking, won’t you think I can’t do this? -> chat_emi_worry
+  I’m all right with it. I just wanted to check we still agree. -> chat_emi_still_agree
   I need a different sort of help now. -> chat_emi_work_choice
   Nothing to report. I just came to say hello. -> chat_emi_hello
+```
+
+#### chat_emi_still_agree
+
+```text
+eric: I’m all right with it. I just wanted to check we still agree.
+emi: Yes. I may still look worried. I’m usually thinking about what I’ve already told upstairs.
+{"go":"chat_emi_leave"}
 ```
 
 #### chat_emi_worry
 
 ```text
-eric: I worry that asking makes me look unable to do the job.
+eric: If I keep asking, won’t you think I can’t do this?
+IF chat_emi_ask_first
+  {"go":"chat_emi_worry_listen"}
 emi: You can tell me you didn’t understand someone. I need to know that before I send you off with another request.
 CHOICE
   Could you hear me out before giving me advice? -> chat_emi_ask_first
   I’ll try saying when I’m unsure. -> chat_emi_unsure
+```
+
+#### chat_emi_worry_listen
+
+```text
+emi: I remember. Do you want my answer this time?
+CHOICE
+  Yes, what do you think? -> chat_emi_worry_answer
+  No, I just needed to say it. -> chat_emi_heard
+```
+
+#### chat_emi_worry_answer
+
+```text
+emi: I think you’re checking before you promise something. I could do with doing that more often myself.
+{"go":"chat_emi_leave"}
 ```
 
 #### chat_emi_ask_first

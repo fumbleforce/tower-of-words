@@ -53,7 +53,7 @@ export default {
       { say: 'eric', emo: 'curious', text: 'What makes things easier for you at work?' },
       { say: 'emi', emo: 'casual', text: 'Tell me what you’ve actually checked. If something still fails, I’d rather hear that than promise upstairs that it’s fixed.' },
       { say: 'emi', emo: 'sheepish', text: 'I’m trying to stop making the promise first.' },
-      { say: 'emi', emo: 'curious', text: 'Is that workable, or do you need help with something first?'  },
+      { say: 'emi', emo: 'curious', text: 'Is that workable, or do you need help with something first?' },
       { go: 'chat_emi_work_choice' },
     ],
     chat_emi_work_choice: [
@@ -79,8 +79,8 @@ export default {
     ],
     chat_emi_language: [
       { say: 'eric', emo: 'hesitant', text: 'I’m still learning what people are asking for.' },
-      { say: 'emi', emo: 'warm', text: 'Ask them to show you. If you still aren’t sure, bring the question to me before you start taking anything apart.' },
-      { say: 'emi', emo: 'casual', text: 'I can help with the request. You can still do the repair.' },
+      { say: 'emi', emo: 'warm', text: 'Ask them to show you. They know what they were doing when it stopped working.' },
+      { say: 'emi', emo: 'casual', text: 'I’d rather you asked again than guessed. We can allow time for that.' },
       { set: { chat_emi_work_help: 'request', chat_emi_work_talked: true } },
       { do: 'remember', who: 'emi', id: 'work_agreement', text: 'Talked about what each of you needs when handling requests.' },
       { if: '!know_mouichido', then: [{ choice: [
@@ -90,27 +90,45 @@ export default {
     ],
     chat_emi_team_again: [
       { if: "chat_emi_work_help == 'request'", then: [
-        { say: 'emi', emo: 'curious', text: 'Is it a request you want to go over? You said that was the difficult part.' },
+        { say: 'emi', emo: 'curious', text: 'You said understanding the requests was the hard part. How are you feeling about that now?' },
       ], else: [
-        { say: 'emi', emo: 'curious', text: 'Have you got a result for me, or are you still checking? Either is all right.' },
+        { say: 'emi', emo: 'curious', text: 'You said you’d tell me even if something still wasn’t working. How do you feel about that now?' },
       ] },
       { choice: [
-        { text: 'I worry that asking makes me look unable to do the job.', go: 'chat_emi_worry' },
+        { text: 'If I keep asking, won’t you think I can’t do this?', go: 'chat_emi_worry' },
+        { text: 'I’m all right with it. I just wanted to check we still agree.', go: 'chat_emi_still_agree' },
         { text: 'I need a different sort of help now.', go: 'chat_emi_work_choice' },
         { text: 'Nothing to report. I just came to say hello.', go: 'chat_emi_hello' },
       ] },
     ],
+    chat_emi_still_agree: [
+      { say: 'eric', emo: 'casual', text: 'I’m all right with it. I just wanted to check we still agree.' },
+      { say: 'emi', emo: 'warm', text: 'Yes. I may still look worried. I’m usually thinking about what I’ve already told upstairs.' },
+      { go: 'chat_emi_leave' },
+    ],
     chat_emi_worry: [
-      { say: 'eric', emo: 'hesitant', text: 'I worry that asking makes me look unable to do the job.' },
+      { say: 'eric', emo: 'hesitant', text: 'If I keep asking, won’t you think I can’t do this?' },
+      { if: 'chat_emi_ask_first', then: [{ go: 'chat_emi_worry_listen' }] },
       { say: 'emi', emo: 'warm', text: 'You can tell me you didn’t understand someone. I need to know that before I send you off with another request.' },
       { choice: [
-        { text: 'Could you hear me out before giving me advice?' , go: 'chat_emi_ask_first' },
+        { text: 'Could you hear me out before giving me advice?', go: 'chat_emi_ask_first' },
         { text: 'I’ll try saying when I’m unsure.', go: 'chat_emi_unsure' },
       ] },
     ],
+    chat_emi_worry_listen: [
+      { say: 'emi', emo: 'warm', text: 'I remember. Do you want my answer this time?' },
+      { choice: [
+        { text: 'Yes, what do you think?', go: 'chat_emi_worry_answer' },
+        { text: 'No, I just needed to say it.', go: 'chat_emi_heard' },
+      ] },
+    ],
+    chat_emi_worry_answer: [
+      { say: 'emi', emo: 'warm', text: 'I think you’re checking before you promise something. I could do with doing that more often myself.' },
+      { go: 'chat_emi_leave' },
+    ],
     chat_emi_ask_first: [
-      { say: 'eric', emo: 'casual', text: 'Could you hear me out before giving me advice?'  },
-      { say: 'emi', emo: 'hesitant', text: 'Yes. Sorry, I went straight into sorting it out. Was there more you wanted to say?'  },
+      { say: 'eric', emo: 'casual', text: 'Could you hear me out before giving me advice?' },
+      { say: 'emi', emo: 'hesitant', text: 'Yes. Sorry, I went straight into sorting it out. Was there more you wanted to say?' },
       { set: 'chat_emi_ask_first' },
       { do: 'remember', who: 'emi', id: 'ask_first', text: 'Asked her to hear you out before offering advice.' },
       { choice: [

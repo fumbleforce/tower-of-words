@@ -110,7 +110,8 @@ export default {
       { choice: [
         { text: '{yasumi}… Does your mother take her own advice?', go: 'chat_mio_her_break', if: 'know_yasumi && chat_mio_break_understood' },
         { text: 'Does your mother ask how you’re doing?', go: 'chat_mio_mother_asks' },
-        { text: 'I feel differently about it now.', go: 'chat_mio_settling_choice' },
+        { text: 'I think I know what I’d like now.', go: 'chat_mio_settling_choice', if: '!chat_mio_evenings' },
+        { text: 'I feel differently about it now.', go: 'chat_mio_settling_choice', if: 'chat_mio_evenings' },
         { text: 'Just saying hello today.', go: 'chat_mio_short_hello' },
       ] },
     ],

@@ -104,14 +104,14 @@ test('Emi remembers practical help choices; revising them keeps the first histor
   assert.equal(again.memory.length, 1);
   assert.equal(again.memory[0].text, 'Talked about what each of you needs when handling requests.');
   const next = await play('emi', 'chat_emi_team_again', { state: again.state });
-  assert.ok(next.lines.some(line => line.text.includes('a request you want to go over')));
+  assert.ok(next.lines.some(line => line.text.includes('understanding the requests was the hard part')));
   assert.deepEqual(next.words, []);
 });
 
 test('Emi can hear a worry without treating it as consent to advice; her next hello acknowledges it', async () => {
   const worry = await play('emi', 'chat_emi_team_again', {
     state: { chat_emi_work_talked: true, chat_emi_work_help: 'request' },
-    picks: ['makes me look unable', 'hear me out', 'just wanted you to know'],
+    picks: ['won’t you think I can’t do this', 'hear me out', 'just wanted you to know'],
   });
   assert.equal(worry.state.chat_emi_ask_first, true);
   assert.ok(worry.memory.some(item => item.id === 'ask_first'));
@@ -150,4 +150,52 @@ test('new conversational nodes declare no unseen physical actions, subtitle bypa
     for (const child of Object.values(value)) if (typeof child === 'object') visit(child);
   };
   visit(stories);
+});
+
+
+test('both remembered work agreements ask about feelings and accept a direct unchanged answer', async () => {
+  for (const preference of ['request', 'results']) {
+    const result = await play('emi', 'chat_emi_team_again', {
+      state: { chat_emi_work_talked: true, chat_emi_work_help: preference }, picks: ['we still agree'],
+    });
+    assert.ok(result.lines[0].text.includes('feeling about that now') || result.lines[0].text.includes('feel about that now'));
+    assert.ok(result.lines.some(line => line.who === 'eric' && line.text.includes('we still agree')));
+    assert.ok(result.lines.some(line => line.who === 'emi' && line.text.startsWith('Yes.')));
+    assert.equal(result.state.chat_emi_work_help, preference);
+    assert.deepEqual(result.memory, []);
+    assert.ok(!result.hooks.some(hook => ['ticket', 'bond', 'type'].includes(hook.do)));
+  }
+});
+
+test('Emi hears the same worry differently after the saved boundary, and answers only when asked', async () => {
+  const first = await play('emi', 'chat_emi_team_again', {
+    state: { chat_emi_work_talked: true, chat_emi_work_help: 'results' },
+    picks: ['won’t you think I can’t do this', 'hear me out', 'just wanted you to know'],
+  });
+  const saved = JSON.parse(JSON.stringify({ state: first.state, memories: first.memory }));
+  for (const advice of [false, true]) {
+    const again = await play('emi', 'chat_emi', {
+      ...saved, picks: ['how work is going', 'won’t you think I can’t do this', advice ? 'what do you think' : 'just needed to say it'],
+    });
+    assert.ok(again.lines.some(line => line.text === 'I remember. Do you want my answer this time?'));
+    assert.ok(!again.lines.some(line => line.text.includes('You can tell me you didn’t understand')));
+    assert.ok(!again.lines.some(line => line.text.startsWith('Yes. Sorry,')));
+    assert.ok(!again.menus.some(menu => menu.some(label => label.includes('hear me out'))));
+    assert.equal(again.lines.some(line => line.text.includes('before you promise something')), advice);
+    assert.equal(again.state.chat_emi_work_help, 'results');
+    assert.deepEqual(again.memory, first.memory);
+  }
+});
+
+test('a deferred Mio answer can become a first preference without pretending it changed', async () => {
+  const deferred = await play('mio', 'chat_mio_settling');
+  assert.equal(deferred.state.chat_mio_evenings, undefined);
+  const again = await play('mio', 'chat_mio_settling_again', {
+    state: JSON.parse(JSON.stringify(deferred.state)), picks: ['what I’d like now', 'time to myself'],
+  });
+  assert.ok(!again.menus[0].some(label => label.includes('feel differently')));
+  assert.equal(again.state.chat_mio_evenings, 'quiet');
+  const next = await play('mio', 'chat_mio_settling_again', { state: again.state });
+  assert.ok(next.menus[0].some(label => label.includes('feel differently')));
+  assert.ok(!next.menus[0].some(label => label.includes('what I’d like now')));
 });
