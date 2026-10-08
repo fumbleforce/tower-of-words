@@ -6,6 +6,7 @@ import { cluster, bed } from '../outdoor/planting.js';
 import { lamps, bench, fingerSign } from '../outdoor/furniture.js';
 import { CAMPUS_PATHS } from '../island-campus.js';
 import { pt, BENCH, BEDS } from './plan.js';
+import { quarterGrounds } from './quarter-grounds.js';
 import { campusLandscape } from './landscape.js';
 import { campusServiceFront } from './service-front.js';
 
@@ -71,6 +72,7 @@ export function* campusGrounds(root, lights) {
     }
   }
   campusLandscape(parts);
+  quarterGrounds(parts, pt([0, 0]));
   campusServiceFront(parts);
   for (const box of BEDS) {
     const a = pt([box[0], box[2]]),

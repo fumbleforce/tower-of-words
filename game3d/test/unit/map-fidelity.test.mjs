@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { GREEN } from '../../js/scenes/island-layout.js';
 import { WEST_TREES } from '../../js/scenes/island-west.js';
 import { SOUTH_TREES } from '../../js/scenes/island-south.js';
+import { QUARTER_TREES } from '../../js/scenes/campus/quarter-plan.js';
+import { OFFICE_BELTS } from '../../js/scenes/office-quarter/planting-plan.js';
 import { CAMPUS_TREES } from '../../js/scenes/campus/landscape-plan.js';
 import { coverMarks, polygonContains, plantedTrees, officeRegions } from '../../js/ui/map/terrain.js';
 import { rectPts } from '../../js/ui/map/shapes.js';
@@ -10,7 +12,12 @@ import { scaleMetres, drawCartography } from '../../js/ui/map/cartography.js';
 import { toView, fromView } from '../../js/ui/map/base.js';
 
 test('map planting keeps exact world tree positions and irregular land cover inside its source regions', () => {
-  assert.deepEqual(plantedTrees, [...WEST_TREES, ...SOUTH_TREES, ...CAMPUS_TREES]);
+  assert.deepEqual(plantedTrees, [
+    ...WEST_TREES,
+    ...SOUTH_TREES,
+    ...CAMPUS_TREES,
+    ...QUARTER_TREES.filter((tree) => tree[4] !== 838),
+  ]);
   const marks = coverMarks();
   assert.deepEqual(marks, coverMarks(), 'redraws must not change the geography');
   assert.ok(marks.length > 80 && marks.length < 1000);
@@ -53,8 +60,12 @@ test('geographic captions yield to real destination labels and controls', () => 
   assert.deepEqual(painted, []);
 });
 
-test('office map beds use the unchanged real grounds belt rectangles', () => {
-  assert.equal(officeRegions.length, 10);
+test('office map beds retain the real belt rectangles outside the shared quarter beds', () => {
+  assert.equal(officeRegions.length, 9);
+  assert.deepEqual(
+    officeRegions.map((region) => region.rect),
+    OFFICE_BELTS.filter((belt) => belt[2] !== 119).map(([[x0, x1, z0, z1]]) => [x0, z0, x1, z1]),
+  );
   assert.deepEqual(officeRegions[0].rect, [-26.9, -67, -24.6, -57.7]);
   assert.deepEqual(officeRegions[8].rect, [7.5, -48.9, 30.5, -45.9]);
   assert.ok(
