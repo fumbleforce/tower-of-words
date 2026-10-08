@@ -655,7 +655,7 @@ class GTAOPass extends Pass {
 
 		scene.traverse( function ( object ) {
 
-			if ( ( object.isPoints || object.isLine || object.isLine2 ) && object.visible ) {
+			if ( ( object.isPoints || object.isLine || object.isLine2 || object.isSprite ) && object.visible ) {
 
 				object.visible = false;
 				cache.push( object );
