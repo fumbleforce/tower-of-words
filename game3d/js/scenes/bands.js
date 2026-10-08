@@ -15,7 +15,7 @@
 //                 trees over layered planting (dorm-court/cluster-yards.js belt), and walks [rect, kerb sides]
 //                 in the walks' pale slabs
 //   fronts        skyline boxes given a ground floor and a door (plaza/east-fronts.js): blocks [{ id, face, ground }]
-// Nothing in a band casts a shadow (the laid shadows of outdoor/shade.js stand in). Each band is one group, merged by
+// Distant bands do not cast shadows; quarterGrounds retains campus tree shadows at the walked seam. Each band is merged by
 // material on its own (one mesh per kind) and named, so the camera culls it whenever its exit is out of view.
 import * as THREE from 'three';
 import * as LAYOUT from './island-layout.js';
@@ -36,6 +36,7 @@ import { groundsSteps } from './sports/grounds.js';
 import { walkSteps, kerbWalks } from './east-coast/walk.js';
 import { planting as officeLawns } from './office-quarter/grounds.js';
 import { mergeStaticSteps } from './merge-static.js';
+import { quarterGrounds } from './campus/quarter-grounds.js';
 import { BANDS } from './bands-plan.js';
 
 export { BANDS };
@@ -64,6 +65,10 @@ export function bandIds(chunk) {
 
 // each builder: (band, island-frame group, out: { evening, update, cards } lists, the shared collectors)
 const BUILD = {
+  *quarterGrounds(b, isl, out, s) {
+    quarterGrounds(band(b.rects).parts(s.p));
+    yield;
+  },
   *eastLane(b, isl, out, s) {
     // the east lane's builders work in the plaza's frame; its lamps join the shared set, moved into the island's
     const pf = new THREE.Group();
@@ -108,12 +113,12 @@ const BUILD = {
       walk(pv, r);
       kerbRect(p, r, { sides });
     }
-    for (const [i, [r, kinds, pitch = 3.2]] of (b.belts || []).entries())
+    for (const [i, [r, kinds, pitch = 3.2, seed]] of (b.belts || []).entries())
       yield* belt(
         p,
         r,
         kinds.split(',').map((k) => TREES[k]),
-        { seed: (b.seed || 300) + i * 7, pitch, under: 1 },
+        { seed: seed ?? (b.seed || 300) + i * 7, pitch, under: 1 },
       );
   },
   *fronts(b, isl, out, s) {
@@ -143,9 +148,9 @@ function shared() {
     lights,
     signs,
     clipped: (clip) => ({ paver: clip.paver(pv), parts: clip.parts(p) }),
-    build(root, out) {
+    build(root, out, keepShadows = false) {
       pv.build(root);
-      for (const m of p.build(root)) m.castShadow = false;
+      for (const m of p.build(root)) if (!keepShadows) m.castShadow = false;
       out.evening.push(lightsOf(lights, root).evening);
       const sg = signs.build(root);
       out.evening.push(sg.evening);
@@ -174,7 +179,8 @@ export function* bandSteps(root, chunk) {
       t0 = tris();
     isl.add(g);
     yield* BUILD[b.by](b, g, out, s);
-    s.build(g, out);
+    // These shared trees keep their campus shadow policy across the walked seam.
+    s.build(g, out, b.by === 'quarterGrounds');
     // blocks' fronts stand tall and show from most of the place: they merge with the place's own meshes instead
     if (b.by !== 'fronts') {
       yield* mergeStaticSteps(g);

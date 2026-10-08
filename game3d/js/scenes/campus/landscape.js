@@ -14,7 +14,8 @@ function groundPatch(parts, poly, y, color, surf) {
   parts.geo(color, geo, { cast: false, surf });
 }
 export function campusLandscape(parts) {
-  for (const [kind, x, z, size, seed] of CAMPUS_TREES) TREES[kind](parts, ...pt([x, z]), size, seed);
+  for (const [kind, x, z, size, seed] of CAMPUS_TREES.filter((tree) => tree[4] !== 838))
+    TREES[kind](parts, ...pt([x, z]), size, seed);
   const lowCover = { geo: (color, geometry, options) => parts.geo(color, geometry, { ...options, cast: false }) };
   for (const garden of CAMPUS_GARDENS) {
     groundPatch(parts, garden.poly, 0.012, '#59614d', 'soil');

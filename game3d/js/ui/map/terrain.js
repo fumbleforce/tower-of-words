@@ -4,6 +4,7 @@ import { GREEN, MOWN } from '../../scenes/island-layout.js';
 import { WEST_TREES, WEST_BEDS } from '../../scenes/island-west.js';
 import { SOUTH_TREES, SOUTH_SHRUBS, UMBRELLAS, HUTS } from '../../scenes/island-south.js';
 import { OFFICE_BELTS } from '../../scenes/office-quarter/planting-plan.js';
+import { QUARTER_BEDS, QUARTER_TREES, BANK_FOUNDATIONS, BANK_APRON_DRAIN } from '../../scenes/campus/quarter-plan.js';
 import { rectPts, shape } from './shapes.js';
 import {
   CAMPUS_GARDENS,
@@ -12,7 +13,12 @@ import {
   PRINT_SERVICE_PAD,
 } from '../../scenes/campus/landscape-plan.js';
 
-export const plantedTrees = [...WEST_TREES, ...SOUTH_TREES, ...CAMPUS_TREES];
+export const plantedTrees = [
+  ...WEST_TREES,
+  ...SOUTH_TREES,
+  ...CAMPUS_TREES,
+  ...QUARTER_TREES.filter((tree) => tree[4] !== 838),
+];
 export function polygonContains(points, x, z) {
   let inside = false;
   for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
@@ -45,7 +51,7 @@ export function coverMarks(regions = GREEN) {
     return out;
   });
 }
-export const officeRegions = OFFICE_BELTS.map(([r], i) => ({
+export const officeRegions = OFFICE_BELTS.filter((belt) => belt[2] !== 119).map(([r], i) => ({
   id: `office-grove-${i}`,
   rect: [r[0], r[2], r[1], r[3]],
 }));
@@ -96,12 +102,13 @@ export function crown(ctx, x, z, size) {
 }
 export function drawPlanting(ctx, detail) {
   ctx.fillStyle = '#919787';
-  for (const garden of CAMPUS_GARDENS) {
+  for (const garden of [...CAMPUS_GARDENS, ...QUARTER_BEDS]) {
     shape(ctx, (x, z) => [x, z], garden.poly);
     ctx.fill();
   }
   ctx.fillStyle = '#c0bfb0';
-  for (const [x, z, x1, z1] of [...PRINT_FOUNDATIONS, PRINT_SERVICE_PAD]) ctx.fillRect(x, z, x1 - x, z1 - z);
+  for (const [x, z, x1, z1] of [...PRINT_FOUNDATIONS, PRINT_SERVICE_PAD, ...BANK_FOUNDATIONS, BANK_APRON_DRAIN])
+    ctx.fillRect(x, z, x1 - x, z1 - z);
   ctx.fillStyle = '#6f916c';
   for (const [x, z, x1, z1] of WEST_BEDS) ctx.fillRect(x, z, x1 - x, z1 - z);
   if (!detail) return;

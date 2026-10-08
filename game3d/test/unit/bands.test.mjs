@@ -28,8 +28,14 @@ test('a band clips paving to its rects on the field origin and keeps only geomet
     const pv = b.paver({ field: (r, o) => laid.push([r, o.origin]) });
     pv.field([-5, 25, 2, 4], { pattern: 'grid' });
     assert.deepEqual(laid, [
-      [[0, 10, 2, 4], [-5, 2]],
-      [[20, 25, 2, 4], [-5, 2]],
+      [
+        [0, 10, 2, 4],
+        [-5, 2],
+      ],
+      [
+        [20, 25, 2, 4],
+        [-5, 2],
+      ],
     ]);
     pv.field([12, 18, 0, 10], {});
     assert.equal(laid.length, 2, 'a field between the rects is not laid');
@@ -64,13 +70,30 @@ test('the bands table names real places, builders and blocks, and no band covers
     const { BANDS } = await import('../../js/scenes/bands-plan.js');
     const { CHUNKS, BUILDINGS } = await import('../../js/scenes/island-layout.js');
     const { BLOCKS } = await import('../../js/scenes/plaza/east-plan.js');
-    const builders = ['eastLane', 'sportsGrounds', 'coastWalk', 'westCoast', 'officeLawns', 'lawn', 'fronts'];
+    const builders = [
+      'eastLane',
+      'sportsGrounds',
+      'coastWalk',
+      'westCoast',
+      'officeLawns',
+      'lawn',
+      'fronts',
+      'quarterGrounds',
+    ];
     for (const [chunk, list] of Object.entries(BANDS)) {
       assert.ok(CHUNKS[chunk], `${chunk} is a place`);
       for (const b of list) {
         assert.ok(builders.includes(b.by), `${chunk}: ${b.by} is a builder`);
-        for (const id of b.skip || []) assert.ok(BLOCKS.some((k) => k.id === id), `${chunk}: ${id} is an east lane block`);
-        for (const k of b.blocks || []) assert.ok(BUILDINGS.some((x) => x.id === k.id), `${chunk}: ${k.id} is a building`);
+        for (const id of b.skip || [])
+          assert.ok(
+            BLOCKS.some((k) => k.id === id),
+            `${chunk}: ${id} is an east lane block`,
+          );
+        for (const k of b.blocks || [])
+          assert.ok(
+            BUILDINGS.some((x) => x.id === k.id),
+            `${chunk}: ${k.id} is a building`,
+          );
         const rects = b.rects || [];
         for (const [i, r] of rects.entries()) {
           assert.ok(r[0] < r[1] && r[2] < r[3], `${chunk} ${b.by}: rect ${i} is [x0, x1, z0, z1]`);

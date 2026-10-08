@@ -106,7 +106,7 @@ function* edges(p, signRoot) {
 export function* planting(p, [x0, x1] = [-Infinity, Infinity]) {
   const kinds = { keyaki, sakura, maple, pine, ginkgo };
   for (const [r, names, seed] of OFFICE_BELTS)
-    if (r[1] > x0 && r[0] < x1)
+    if (seed !== 119 && r[1] > x0 && r[0] < x1)
       yield* belt(
         p,
         r,

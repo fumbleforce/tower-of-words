@@ -1,9 +1,7 @@
 // The bands past each outdoor place's exits (#260), what builds each and where, in the island frame
 // ([x0, x1, z0, z1]); scenes/bands.js builds them (its header lists the builders). Rects of one band never overlap,
 // and never cover what the place lays itself. Each place's bands stay small (game3d/test/unit/bands-build.test.mjs).
-// the lawn between the bank and m6, south of the office street's own belts: the office quarter and the sports ground
-// (past its west end) both plant it
-const BANK_LAWN = [[3.6, 12.6, -45.4, -41], 'sakura,keyaki', 3.4];
+// The lawn at m6, south of the office street's own belts; bank planting is shared with campus.
 const M6_LAWN = [[24.4, 31, -45.4, -41], 'keyaki,pine', 3.4];
 
 export const BANDS = {
@@ -93,11 +91,15 @@ export const BANDS = {
     },
   ],
   office_quarter: [
+    { by: 'quarterGrounds', rects: [[-8, 13, -50.4, -28]] },
     // the lawns south of the office street, behind its own belts, between the bank, the print shop and m6
     {
       by: 'lawn',
       seed: 370,
-      belts: [[[-22, -17, -45.4, -40.6], 'maple,sakura', 3.4], BANK_LAWN, M6_LAWN],
+      belts: [
+        [[-22, -17, -45.4, -40.6], 'maple,sakura', 3.4],
+        [...M6_LAWN, 384],
+      ],
     },
   ],
 };
