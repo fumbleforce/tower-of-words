@@ -11,6 +11,8 @@
 import { STATION, DOOR_X } from '../station-exterior.js';
 import { T, at, DOOR_U } from '../head-office/frame.js';
 import { BUILDINGS, toLocal } from '../island-layout.js';
+import { CROSS, STREET_W } from './cross-plan.js';
+export { CROSS, STREET_W };
 
 export { STATION, DOOR_X };
 export const X0 = STATION.x0, // the station's west face: the court's west edge
@@ -58,9 +60,6 @@ const box = (id) => {
 };
 export const WING = box('head_office_wing'),
   E1 = box('office_e1');
-export const STREET_W = 3;
-const XZ = (E1[2] + E1[3]) / 2; // the cross street's axis
-export const CROSS = [X0, E1[0], XZ - STREET_W / 2, XZ + STREET_W / 2];
 export const SHED_ST = [X0, X0 + STREET_W, CROSS[2] - 4, HZ]; // it runs on north past the junction, out of view
 export const JUNCTION = [SHED_ST[0], SHED_ST[1], CROSS[2], CROSS[3]];
 // a few steps up the shed street he can walk, to the chained bollards that close it; they stand far enough in that

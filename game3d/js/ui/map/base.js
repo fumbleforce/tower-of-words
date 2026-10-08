@@ -2,10 +2,11 @@
 // green, paths and buildings straight from scenes/island-layout.js, with a shared coastal palette. The shapes are built once
 // as Path2D in island units and drawn through the view's transform, so a pan or a zoom is one redraw and nothing is
 // kept per zoom level. North (the grid's north, -z) is up.
+import { MAP_PATHS as PATHS } from './paths.js';
 import { drawLandCover, drawPlanting, drawSea, crown } from './terrain.js';
 import { drawGardens } from './gardens.js';
 import { mapFootprints, drawRoof, drawGroundLandmarks } from './landmarks.js';
-import { BUILDINGS, PATHS, GREEN, COAST, SAND, footprint } from '../../scenes/island-layout.js';
+import { BUILDINGS, GREEN, COAST, SAND, footprint } from '../../scenes/island-layout.js';
 
 export const INK = {
   sea: '#1b3a45',

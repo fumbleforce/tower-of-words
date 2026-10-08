@@ -37,6 +37,7 @@ import { walkSteps, kerbWalks } from './east-coast/walk.js';
 import { planting as officeLawns } from './office-quarter/grounds.js';
 import { mergeStaticSteps } from './merge-static.js';
 import { quarterGrounds } from './campus/quarter-grounds.js';
+import { southQuarterGrounds } from './forecourt/quarter-planting.js';
 import { BANDS } from './bands-plan.js';
 
 export { BANDS };
@@ -66,7 +67,9 @@ export function bandIds(chunk) {
 // each builder: (band, island-frame group, out: { evening, update, cards } lists, the shared collectors)
 const BUILD = {
   *quarterGrounds(b, isl, out, s) {
-    quarterGrounds(band(b.rects).parts(s.p));
+    const parts = band(b.rects).parts(s.p);
+    quarterGrounds(parts);
+    southQuarterGrounds(parts);
     yield;
   },
   *eastLane(b, isl, out, s) {

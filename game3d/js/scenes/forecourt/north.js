@@ -22,7 +22,9 @@ import { laneField, verge, LANE_BORDER } from '../outdoor/lane.js';
 import { keyaki, sakura, ginkgo, cluster, hedge, bed, gravel, treePit } from '../outdoor/planting.js';
 import { lamps, bollard, STEEL } from '../outdoor/furniture.js';
 import { blockSets, buildBlockSets, officeBlock, doorAt, BLOCK } from '../outdoor/block.js';
-import { BUILDINGS } from '../island-layout.js';
+import { BUILDINGS, CHUNKS } from '../island-layout.js';
+import { QUARTER_OPENING, JUNCTION_TREE } from './quarter-planting-plan.js';
+import { southQuarterGrounds, avenueTree } from './quarter-planting.js';
 import { TOWN } from '../town.js';
 import { bikeRow } from './details.js';
 import * as P from './plan.js';
@@ -105,7 +107,14 @@ function streets(p, q, set) {
   // the cross street: an avenue on the north verge; on the south the wing's hedge, then along the tower's pavement
   // ginkgos in tree pits at the same pitch, clear of the doors
   const xs = pitch(J[1], CROSS[1] - 1.5);
-  verge(q, [J[1], CROSS[2]], [CROSS[1] - 0.9, CROSS[2]], 'n', { trees: xs, seed: 9 });
+  const offset = CHUNKS.forecourt.at;
+  verge(q, [J[1], CROSS[2]], [CROSS[1] - 0.9, CROSS[2]], 'n', {
+    crossings: [QUARTER_OPENING.map((x) => x - offset[0])],
+    seed: 9,
+  });
+  xs.forEach((x, i) => {
+    if (63 + i !== JUNCTION_TREE[4]) avenueTree(q, x, CROSS[2] - 2.1, 1 + ((i + 9) % 3) * 0.04, 63 + i);
+  });
   verge(q, [J[1], CROSS[3]], [SERVICE[0], CROSS[3]], 's', { seed: 11 });
   kerb(q, [SERVICE[0], CROSS[3]], [CROSS[1], CROSS[3]], { off: 0.08 });
   const doors = [
@@ -233,11 +242,7 @@ function grove(p) {
     [ginkgo, 22.6, z0 - 0.8, 0.95],
   ];
   trees.forEach(([tree, x, z, s], i) => tree(p, x, z, s, i + 70));
-  for (const [x, z, s] of [
-    [3.8, z0 - 0.3, 1],
-    [19.6, z0 - 0.4, 2],
-  ])
-    cluster(p, x, z, { n: 4, r: 0.38, seed: s + 80 });
+  for (const [x, z, s] of [[3.8, z0 - 0.3, 1]]) cluster(p, x, z, { n: 4, r: 0.38, seed: s + 80 });
 }
 
 // office_e1 (outdoor/block.js) in the frame of the place that builds it, rect [x0, x1, z0, z1] there: its door in
@@ -260,6 +265,10 @@ export function* northSteps(root, set, { closed = true, planting = null } = {}) 
   const p = new Parts({ planting }),
     q = new Parts({ planting });
   streets(p, q, set);
+  southQuarterGrounds(
+    p,
+    CHUNKS.forecourt.at.map((v) => -v),
+  );
   yield;
   if (closed) barrier(p);
   wingGrounds(p);

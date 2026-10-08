@@ -3,12 +3,12 @@ import { TREES, mound, cluster, grass } from '../outdoor/planting.js';
 import { QUARTER_BEDS, QUARTER_TREES, BANK_FOUNDATIONS, BANK_APRON_DRAIN, quarterCover } from './quarter-plan.js';
 
 // One island-frame builder; campus supplies its translation, the office band uses the island frame.
-export function quarterGrounds(parts, offset = [0, 0]) {
+export function quarterBeds(parts, beds, offset = [0, 0]) {
   const p = {
     geo: (color, g, options) => parts.geo(color, g.translate(offset[0], 0, offset[1]), options),
     box: (color, w, h, d, x, y, z, options) => parts.box(color, w, h, d, x + offset[0], y, z + offset[1], options),
   };
-  for (const bed of QUARTER_BEDS) {
+  for (const bed of beds) {
     const shape = new THREE.Shape(bed.poly.map(([x, z]) => new THREE.Vector2(x, -z)));
     p.geo('#59614d', new THREE.ShapeGeometry(shape).rotateX(-Math.PI / 2).translate(0, 0.013, 0), {
       cast: false,
@@ -27,12 +27,12 @@ export function quarterGrounds(parts, offset = [0, 0]) {
       const low = { geo: (c, g, o) => p.geo(c, g, { ...o, cast: false }) };
       mound(low, x, z, r, ['#486447', '#4a6849', '#466548'][i % 3], {
         y: 0.018,
-        squash: 0.38 + (Math.sin(i * 19.3) + 1) * 0.16,
+        squash: bed.cover ? 0.68 + (Math.sin(i * 19.3) + 1) * 0.12 : 0.38 + (Math.sin(i * 19.3) + 1) * 0.16,
         turn: i * 2.39996,
       });
     });
-    bed.masses.forEach(([x, z, r], i) =>
-      cluster(p, x, z, {
+    bed.masses.forEach(([x, z, r, height = 1], i) =>
+      cluster(height === 1 ? p : { geo: (c, g, o) => p.geo(c, g.scale(1, height, 1), o) }, x, z, {
         n: 4,
         r: r * 0.72,
         spread: r * 0.46,
@@ -40,21 +40,32 @@ export function quarterGrounds(parts, offset = [0, 0]) {
         tones: ['#516747', '#687b51', '#5d724b'],
       }),
     );
-    bed.grasses.forEach(([x, z], i) => {
-      for (let j = 0; j < 5; j++) {
+    bed.grasses.forEach(([x, z, height = 0.3], i) => {
+      for (let j = 0; j < (bed.grassCount ?? 5); j++) {
         const a = j * 2.39996,
           d = Math.sqrt(j) * 0.07;
         grass(p, x + Math.cos(a) * d, z + Math.sin(a) * d, {
-          h: 0.3 + (j % 3) * 0.07,
+          h: height + (j % 3) * 0.07,
           seed: bed.seed + i * 7 + j,
           color: j % 2 ? '#7a8d61' : '#607b53',
         });
       }
     });
   }
+}
+
+export function quarterGrounds(parts, offset = [0, 0]) {
+  quarterBeds(parts, QUARTER_BEDS, offset);
+  const p = {
+    geo: (color, g, options) => parts.geo(color, g.translate(offset[0], 0, offset[1]), options),
+    box: (color, w, h, d, x, y, z, options) => parts.box(color, w, h, d, x + offset[0], y, z + offset[1], options),
+  };
   for (const [kind, x, z, size, seed] of QUARTER_TREES) TREES[kind](p, x, z, size, seed);
   for (const [x, z, x1, z1] of BANK_FOUNDATIONS) {
-    p.box('#919387', x1 - x, 0.026, z1 - z, (x + x1) / 2, 0.004, (z + z1) / 2, { cast: false, surf: 'gravel' });
+    p.box('#919387', x1 - x, 0.026, z1 - z, (x + x1) / 2, 0.004, (z + z1) / 2, {
+      cast: false,
+      surf: 'gravel',
+    });
     const alongX = x1 - x > z1 - z;
     p.box(
       '#85897c',
@@ -87,7 +98,11 @@ export function quarterGrounds(parts, offset = [0, 0]) {
   p.box('#747e7d', 9.6, 0.11, 0.055, -2.3, 0.005, -45.475, { cast: false });
   p.box('#747e7d', 0.055, 0.11, 4.8, -7.075, 0.005, -47.9, { cast: false });
   const [x, z, x1, z1] = BANK_APRON_DRAIN;
-  p.box('#394746', x1 - x, 0.018, z1 - z, (x + x1) / 2, 0.007, (z + z1) / 2, { cast: false });
+  p.box('#394746', x1 - x, 0.018, z1 - z, (x + x1) / 2, 0.007, (z + z1) / 2, {
+    cast: false,
+  });
   for (let xx = x + 0.035; xx < x1; xx += 0.075)
-    p.box('#747c73', 0.024, 0.013, z1 - z - 0.025, xx, 0.026, (z + z1) / 2, { cast: false });
+    p.box('#747c73', 0.024, 0.013, z1 - z - 0.025, xx, 0.026, (z + z1) / 2, {
+      cast: false,
+    });
 }

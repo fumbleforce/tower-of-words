@@ -5,6 +5,7 @@ import { WEST_TREES, WEST_BEDS } from '../../scenes/island-west.js';
 import { SOUTH_TREES, SOUTH_SHRUBS, UMBRELLAS, HUTS } from '../../scenes/island-south.js';
 import { OFFICE_BELTS } from '../../scenes/office-quarter/planting-plan.js';
 import { QUARTER_BEDS, QUARTER_TREES, BANK_FOUNDATIONS, BANK_APRON_DRAIN } from '../../scenes/campus/quarter-plan.js';
+import { SOUTH_QUARTER_BEDS, JUNCTION_TREE } from '../../scenes/forecourt/quarter-planting-plan.js';
 import { rectPts, shape } from './shapes.js';
 import {
   CAMPUS_GARDENS,
@@ -14,6 +15,7 @@ import {
 } from '../../scenes/campus/landscape-plan.js';
 
 export const plantedTrees = [
+  JUNCTION_TREE,
   ...WEST_TREES,
   ...SOUTH_TREES,
   ...CAMPUS_TREES,
@@ -102,7 +104,7 @@ export function crown(ctx, x, z, size) {
 }
 export function drawPlanting(ctx, detail) {
   ctx.fillStyle = '#919787';
-  for (const garden of [...CAMPUS_GARDENS, ...QUARTER_BEDS]) {
+  for (const garden of [...CAMPUS_GARDENS, ...QUARTER_BEDS, ...SOUTH_QUARTER_BEDS]) {
     shape(ctx, (x, z) => [x, z], garden.poly);
     ctx.fill();
   }

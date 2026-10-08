@@ -7,8 +7,11 @@ import { MORNING_GRADE, EVENING_GRADE } from '../scenes/town.js';
 import { PRINT_DOOR, PRINT_STEP, inRect } from '../scenes/campus/plan.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { walkIn, walkOut, walkOutNearest, viaOf } from './edge-walk.js';
-import { followFit, turningCam } from './turning-cam.js';
+import { followFit } from './turning-cam.js';
 import { canteenSave } from './canteen-state.js';
+import { campusCamera } from './campus-camera.js';
+
+const CAMPUS_EVENING = { ...EVENING_GRADE, charLift: 0.13 };
 
 export async function campusPlace(game) {
   const w = await sliced(campusSteps()),
@@ -16,10 +19,7 @@ export async function campusPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0),
     e = w.exits;
   const quarter = { shed: e.office_shed, quarter: e.office_quarter };
-  const turn = turningCam(cam, (x, z) => {
-    const close = 1 - THREE.MathUtils.smoothstep(Math.hypot(x - PRINT_STEP[0], z - PRINT_STEP[1]), 2, 8);
-    return { yaw: 0.22 + close * 0.85, elev: ((55 - close * 8) * Math.PI) / 180 };
-  });
+  const turn = campusCamera(cam);
   const save = canteenSave(game, w.nav, w.start, cam, w.seats);
   const seat = w.seats.campus_bench;
   const things = {
@@ -101,7 +101,7 @@ export async function campusPlace(game) {
     },
     onPeriod(period) {
       w.period(period);
-      P.grade = period === 'evening' ? EVENING_GRADE : MORNING_GRADE;
+      P.grade = period === 'evening' ? CAMPUS_EVENING : MORNING_GRADE;
     },
     snapshotState: save.snapshot,
     restoreState: save.restore,
