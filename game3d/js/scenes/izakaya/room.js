@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { Kit } from '../dorms/kit.js';
 import { shell, plankFloor, roomLights } from '../rooms/shell.js';
 import { R, DOOR, TABLE, SEATS, SPOTS, izakayaNav } from './plan.js';
+import { izakayaDetail } from './detail.js';
 import { signBoard } from '../plaza-buildings.js';
 export function buildIzakaya() {
   const scene = new THREE.Scene(),
@@ -9,16 +10,18 @@ export function buildIzakaya() {
     k = new Kit();
   scene.background = new THREE.Color('#293138');
   scene.add(root);
-  shell(root, R, { entryDoor: true, holes: { s: [[-0.65, 0.65, 0, R.near]] }, color: '#d8cbbb', top: '#786d61' });
+  shell(root, R, {
+    entryDoor: true,
+    holes: { s: [[-0.65, 0.65, 0, R.near]], w: [[-3.05, -1.55, 1, 1.7]], n: [[-1.05, 1.05, 0.94, 1.6]] },
+    color: '#d8cbbb',
+    top: '#786d61',
+  });
   plankFloor(k, R, { color: '#92745e', seam: '#78604f', w: 0.28 });
   // Shoe-on dining room: a tiled threshold and mat, with coats and umbrellas beside the entrance.
   k.box('#748082', 1.3, 0.012, 0.79, 0, 0, -0.39, { surf: 'stone' });
   k.box('#334c50', 1.02, 0.018, 0.47, 0, 0.012, -0.37, { surf: 'carpet' });
-  k.box('#536768', 0.3, 0.58, 0.57, 1.62, 0, -0.39, { surf: 'laminate' });
-  for (const x of [1.52, 1.65, 1.75]) k.cyl('#c8b69c', 0.012, 0.012, 0.8, x, 0.1, -0.32, { rz: 0.08 });
   // Low wall panelling, a glazed upper strip and a compact, lit kitchen service hatch.
   k.box('#435e5b', R.x1 - R.x0, 0.55, 0.035, 0, 0.03, R.z0 + 0.02, { surf: 'laminate' });
-  k.box('#293b3c', 2.1, 0.63, 0.08, 0, 0.94, R.z0 + 0.055, { surf: 'metal' });
   k.box('#a6b4ad', 2.13, 0.05, 0.38, 0, 0.87, R.z0 + 0.2, { surf: 'metal' });
   k.box('#777c75', 2.2, 0.13, 0.42, 0, 1.65, R.z0 + 0.22, { surf: 'metal' });
   for (const x of [-0.79, -0.44, 0.62])
@@ -32,7 +35,6 @@ export function buildIzakaya() {
   }
   for (const x of [R.x0 + 0.02, R.x1 - 0.02]) {
     k.box('#50645d', 0.03, 0.54, -R.z0, x, 0.04, R.z0 / 2, { surf: 'laminate' });
-    for (const z of [-3.5, -1.1]) k.box('#9e8367', 0.1, 0.1, 0.16, x, 1.6, z, { surf: 'laminate' });
   }
   // Five proper dining chairs; their backrests stay behind the actor, not through their knees.
   for (const s of Object.values(SEATS)) {
@@ -59,6 +61,7 @@ export function buildIzakaya() {
     panel.position.set(x, 1.86, R.z0 + 0.18);
     root.add(panel);
   }
+  izakayaDetail(k, R);
   k.flush(root);
   const sign = signBoard('居酒屋', 'IZAKAYA', 0.82, 0.25, '#3e6260');
   sign.position.set(0, 2.08, R.z0 + 0.085);
