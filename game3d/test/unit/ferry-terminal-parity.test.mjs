@@ -23,19 +23,68 @@ Object.assign(globalThis, {
     documentElement: { style: { setProperty() {} } },
   },
 });
-const ctx = new Proxy({measureText:t=>({width:String(t).length*8}), createRadialGradient:()=>({addColorStop(){}}), createLinearGradient:()=>({addColorStop(){}})}, {get:(o,k)=>o[k]||(()=>{})});
-globalThis.document.createElement = () => ({width:128,height:128,getContext:()=>ctx,style:{}});
+const ctx = new Proxy(
+  {
+    measureText: (t) => ({ width: String(t).length * 8 }),
+    createRadialGradient: () => ({ addColorStop() {} }),
+    createLinearGradient: () => ({ addColorStop() {} }),
+  },
+  { get: (o, k) => o[k] || (() => {}) },
+);
+globalThis.document.createElement = () => ({ width: 128, height: 128, getContext: () => ctx, style: {} });
 import { createHash } from 'node:crypto';
-const {shipsSteps}=await import('../../js/scenes/harbour/ships.js');
-const {quaySteps}=await import('../../js/scenes/harbour/quay.js');
-function fingerprint(ships,quay){
- const hash=createHash('sha256'),record=(...args)=>hash.update(JSON.stringify(args));
- const parts=name=>({box(...args){record(name,'box',args);},geo(color,g,options){record(name,'geo',color,options);for(const key of Object.keys(g.attributes)){record(key);hash.update(Buffer.from(g.attributes[key].array.buffer));}if(g.index)hash.update(Buffer.from(g.index.array.buffer));g.dispose();}});
- for(const _ of ships({p:parts('ship'),glass:parts('glass'),lit:parts('lit')},{board:(...args)=>record('board',args)}))void _;
- for(const _ of quay({field:(...args)=>record('paving',args)},parts('quay'),parts('water')))void _;
- return hash.digest('hex');
+const { shipsSteps } = await import('../../js/scenes/harbour/ships.js');
+const { quaySteps, ferryLandingSteps } = await import('../../js/scenes/harbour/quay.js');
+function capture(ships, quay) {
+  const rows = { ship: [], glass: [], lit: [], board: [], quay: [], water: [], paving: [] };
+  const record = (name, ...args) => rows[name].push(JSON.stringify(args));
+  const parts = (name) => ({
+    box(...args) {
+      record(name, 'box', args);
+    },
+    geo(color, geometry, options) {
+      const hash = createHash('sha256');
+      for (const key of Object.keys(geometry.attributes)) {
+        hash.update(key);
+        hash.update(Buffer.from(geometry.attributes[key].array.buffer));
+      }
+      if (geometry.index) hash.update(Buffer.from(geometry.index.array.buffer));
+      record(name, 'geo', color, options, hash.digest('hex'));
+      geometry.dispose();
+    },
+  });
+  if (ships)
+    for (const _ of ships(
+      { p: parts('ship'), glass: parts('glass'), lit: parts('lit') },
+      { board: (...args) => record('board', args) },
+    ))
+      void _;
+  for (const _ of quay({ field: (...args) => record('paving', args) }, parts('quay'), parts('water'))) void _;
+  return rows;
 }
-test('extracting the terminal window builders preserves every original outdoor ship/quay primitive and paving call',()=>{
- assert.equal(fingerprint(shipsSteps,quaySteps),'10e7462df371b698268c9792877f7d08d56cec0096ca59580da8d4727718164f');
+// These ship/water/paving fingerprints come from main aff7bc8d before the harbour detail pass.
+// Quay details may evolve, but the room must use exact canonical exterior primitives.
+const original = capture(shipsSteps, quaySteps);
+const digest = (...groups) => createHash('sha256').update(JSON.stringify(groups)).digest('hex');
+test('harbour details preserve original ship, water and paving construction', () => {
+  assert.equal(
+    digest(original.ship, original.glass, original.lit, original.board),
+    '275c9f69f65be42cf7b0374d90337656c43bc1d939bfe616db84553245564d0c',
+  );
+  assert.equal(digest(original.water), '390b7143034761676192bd7993c8868004a83322ea703bcdd46cd59c0d335695');
+  assert.equal(digest(original.paving), '591a05f98328ed1173e5caec8067ded1190d186c91830fd9cee0801dac861498');
 });
-process.on('exit',()=>hooks.deregister());
+
+test('every terminal quay primitive and paving call occurs unchanged in the harbour exterior', () => {
+  const terminal = capture(null, ferryLandingSteps);
+  for (const key of ['quay', 'paving']) {
+    const remaining = new Map();
+    for (const row of original[key]) remaining.set(row, (remaining.get(row) || 0) + 1);
+    assert.ok(terminal[key].length > 0, `nonempty terminal ${key}`);
+    for (const row of terminal[key]) {
+      assert.ok(remaining.get(row) > 0, `${key} primitive differs or is duplicated: ${row}`);
+      remaining.set(row, remaining.get(row) - 1);
+    }
+  }
+});
+process.on('exit', () => hooks.deregister());
