@@ -1,0 +1,459 @@
+{
+  "title": "Works lane and service yard",
+  "date": "2026-10-08",
+  "updated": "2026-10-08T01:36:14.063553+00:00",
+  "by": "codex",
+  "caption": "Connected lane planting, a fitted server-hall entrance, and detailed pallets, crates and drums in the loading yard.",
+  "commit": "1dfa200814c4d4ba2d21c1258c6c13a8c9340974",
+  "preview": "r2-1366-works-lane",
+  "sections": [
+    {
+      "title": "Initial grounds audit",
+      "caption": "Original inspection attempts. Some positions sat on path edges; the campus-east and north-court views were incorrectly placed. Corrected views follow.",
+      "images": [
+        {
+          "id": "audit-initial-1366-campus-east",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-campus-east.png",
+          "caption": "Desktop: campus east"
+        },
+        {
+          "id": "audit-initial-1366-campus-print",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-campus-print.png",
+          "caption": "Desktop: campus print"
+        },
+        {
+          "id": "audit-initial-1366-office_quarter-bank",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-office_quarter-bank.png",
+          "caption": "Desktop: office_quarter bank"
+        },
+        {
+          "id": "audit-initial-1366-office_quarter-north-court",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-office_quarter-north-court.png",
+          "caption": "Desktop: office_quarter north court"
+        },
+        {
+          "id": "audit-initial-1366-office_quarter-street-west",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-office_quarter-street-west.png",
+          "caption": "Desktop: office_quarter street west"
+        },
+        {
+          "id": "audit-initial-1366-sports-north-street",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-sports-north-street.png",
+          "caption": "Desktop: sports north street"
+        },
+        {
+          "id": "audit-initial-1366-sports-pool-north",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-sports-pool-north.png",
+          "caption": "Desktop: sports pool north"
+        },
+        {
+          "id": "audit-initial-1366-sports-west",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-sports-west.png",
+          "caption": "Desktop: sports west"
+        },
+        {
+          "id": "audit-initial-1366-works-factory",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-works-factory.png",
+          "caption": "Desktop: factory"
+        },
+        {
+          "id": "audit-initial-1366-works-lane",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-works-lane.png",
+          "caption": "Desktop: lane"
+        },
+        {
+          "id": "audit-initial-1366-works-north-street",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-works-north-street.png",
+          "caption": "Desktop: north street"
+        },
+        {
+          "id": "audit-initial-1366-works-plant",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-works-plant.png",
+          "caption": "Desktop: plant"
+        },
+        {
+          "id": "audit-initial-1366-works-recycling",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-works-recycling.png",
+          "caption": "Desktop: recycling"
+        },
+        {
+          "id": "audit-initial-1366-works-server",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-works-server.png",
+          "caption": "Desktop: server"
+        },
+        {
+          "id": "audit-initial-1366-works-south-verges",
+          "image": "game3d/shots/grounds260-audit-20261008/1366-works-south-verges.png",
+          "caption": "Desktop: south verges"
+        },
+        {
+          "id": "audit-initial-390-works-factory",
+          "image": "game3d/shots/grounds260-audit-20261008/390-works-factory.png",
+          "caption": "Phone: factory"
+        },
+        {
+          "id": "audit-initial-390-works-lane",
+          "image": "game3d/shots/grounds260-audit-20261008/390-works-lane.png",
+          "caption": "Phone: lane"
+        },
+        {
+          "id": "audit-initial-390-works-north-street",
+          "image": "game3d/shots/grounds260-audit-20261008/390-works-north-street.png",
+          "caption": "Phone: north street"
+        },
+        {
+          "id": "audit-initial-390-works-plant",
+          "image": "game3d/shots/grounds260-audit-20261008/390-works-plant.png",
+          "caption": "Phone: plant"
+        },
+        {
+          "id": "audit-initial-390-works-recycling",
+          "image": "game3d/shots/grounds260-audit-20261008/390-works-recycling.png",
+          "caption": "Phone: recycling"
+        },
+        {
+          "id": "audit-initial-390-works-server",
+          "image": "game3d/shots/grounds260-audit-20261008/390-works-server.png",
+          "caption": "Phone: server"
+        },
+        {
+          "id": "audit-initial-390-works-south-verges",
+          "image": "game3d/shots/grounds260-audit-20261008/390-works-south-verges.png",
+          "caption": "Phone: south verges"
+        }
+      ]
+    },
+    {
+      "title": "Corrected grounds audit",
+      "caption": "Walkable inspection positions using ordinary cameras. These views also record unfinished areas beyond this Works pass.",
+      "images": [
+        {
+          "id": "audit-corrected-1366-campus-east",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-campus-east.png",
+          "caption": "Desktop: campus east"
+        },
+        {
+          "id": "audit-corrected-1366-campus-print",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-campus-print.png",
+          "caption": "Desktop: campus print"
+        },
+        {
+          "id": "audit-corrected-1366-office_quarter-bank",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-office_quarter-bank.png",
+          "caption": "Desktop: office_quarter bank"
+        },
+        {
+          "id": "audit-corrected-1366-office_quarter-north-court",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-office_quarter-north-court.png",
+          "caption": "Desktop: office_quarter north court"
+        },
+        {
+          "id": "audit-corrected-1366-office_quarter-street-west",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-office_quarter-street-west.png",
+          "caption": "Desktop: office_quarter street west"
+        },
+        {
+          "id": "audit-corrected-1366-sports-north-street",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-sports-north-street.png",
+          "caption": "Desktop: sports north street"
+        },
+        {
+          "id": "audit-corrected-1366-sports-pool-north",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-sports-pool-north.png",
+          "caption": "Desktop: sports pool north"
+        },
+        {
+          "id": "audit-corrected-1366-sports-west",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-sports-west.png",
+          "caption": "Desktop: sports west"
+        },
+        {
+          "id": "audit-corrected-1366-works-factory",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-works-factory.png",
+          "caption": "Desktop: factory"
+        },
+        {
+          "id": "audit-corrected-1366-works-lane",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-works-lane.png",
+          "caption": "Desktop: lane"
+        },
+        {
+          "id": "audit-corrected-1366-works-north-street",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-works-north-street.png",
+          "caption": "Desktop: north street"
+        },
+        {
+          "id": "audit-corrected-1366-works-plant",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-works-plant.png",
+          "caption": "Desktop: plant"
+        },
+        {
+          "id": "audit-corrected-1366-works-recycling",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-works-recycling.png",
+          "caption": "Desktop: recycling"
+        },
+        {
+          "id": "audit-corrected-1366-works-server",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-works-server.png",
+          "caption": "Desktop: server"
+        },
+        {
+          "id": "audit-corrected-1366-works-south-verges",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/1366-works-south-verges.png",
+          "caption": "Desktop: south verges"
+        },
+        {
+          "id": "audit-corrected-390-works-factory",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/390-works-factory.png",
+          "caption": "Phone: factory"
+        },
+        {
+          "id": "audit-corrected-390-works-lane",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/390-works-lane.png",
+          "caption": "Phone: lane"
+        },
+        {
+          "id": "audit-corrected-390-works-north-street",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/390-works-north-street.png",
+          "caption": "Phone: north street"
+        },
+        {
+          "id": "audit-corrected-390-works-plant",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/390-works-plant.png",
+          "caption": "Phone: plant"
+        },
+        {
+          "id": "audit-corrected-390-works-recycling",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/390-works-recycling.png",
+          "caption": "Phone: recycling"
+        },
+        {
+          "id": "audit-corrected-390-works-server",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/390-works-server.png",
+          "caption": "Phone: server"
+        },
+        {
+          "id": "audit-corrected-390-works-south-verges",
+          "image": "game3d/shots/grounds260-audit-20261008/r2/390-works-south-verges.png",
+          "caption": "Phone: south verges"
+        }
+      ]
+    },
+    {
+      "title": "Works before the changes",
+      "caption": "Matched views of the lane, plant approach, factory loading area and server hall.",
+      "images": [
+        {
+          "id": "baseline-1366-works-factory",
+          "image": "game3d/shots/works-yard-20261008/baseline/1366-works-factory.png",
+          "caption": "Desktop: factory"
+        },
+        {
+          "id": "baseline-1366-works-lane",
+          "image": "game3d/shots/works-yard-20261008/baseline/1366-works-lane.png",
+          "caption": "Desktop: lane"
+        },
+        {
+          "id": "baseline-1366-works-plant",
+          "image": "game3d/shots/works-yard-20261008/baseline/1366-works-plant.png",
+          "caption": "Desktop: plant"
+        },
+        {
+          "id": "baseline-1366-works-server",
+          "image": "game3d/shots/works-yard-20261008/baseline/1366-works-server.png",
+          "caption": "Desktop: server"
+        },
+        {
+          "id": "baseline-390-works-factory",
+          "image": "game3d/shots/works-yard-20261008/baseline/390-works-factory.png",
+          "caption": "Phone: factory"
+        },
+        {
+          "id": "baseline-390-works-lane",
+          "image": "game3d/shots/works-yard-20261008/baseline/390-works-lane.png",
+          "caption": "Phone: lane"
+        },
+        {
+          "id": "baseline-390-works-plant",
+          "image": "game3d/shots/works-yard-20261008/baseline/390-works-plant.png",
+          "caption": "Phone: plant"
+        },
+        {
+          "id": "baseline-390-works-server",
+          "image": "game3d/shots/works-yard-20261008/baseline/390-works-server.png",
+          "caption": "Phone: server"
+        }
+      ]
+    },
+    {
+      "title": "First candidate, phone",
+      "caption": "First candidate views. The initial desktop job stopped before capturing because its build identifier differed.",
+      "images": [
+        {
+          "id": "r1-390-works-factory",
+          "image": "game3d/shots/works-yard-20261008/r1/390-works-factory.png",
+          "caption": "Phone: factory"
+        },
+        {
+          "id": "r1-390-works-lane",
+          "image": "game3d/shots/works-yard-20261008/r1/390-works-lane.png",
+          "caption": "Phone: lane"
+        },
+        {
+          "id": "r1-390-works-plant",
+          "image": "game3d/shots/works-yard-20261008/r1/390-works-plant.png",
+          "caption": "Phone: plant"
+        },
+        {
+          "id": "r1-390-works-server",
+          "image": "game3d/shots/works-yard-20261008/r1/390-works-server.png",
+          "caption": "Phone: server"
+        }
+      ]
+    },
+    {
+      "title": "First candidate, desktop",
+      "caption": "Desktop views after correcting the capture setup.",
+      "images": [
+        {
+          "id": "r1a-1366-works-factory",
+          "image": "game3d/shots/works-yard-20261008/r1a/1366-works-factory.png",
+          "caption": "Desktop: factory"
+        },
+        {
+          "id": "r1a-1366-works-lane",
+          "image": "game3d/shots/works-yard-20261008/r1a/1366-works-lane.png",
+          "caption": "Desktop: lane"
+        },
+        {
+          "id": "r1a-1366-works-plant",
+          "image": "game3d/shots/works-yard-20261008/r1a/1366-works-plant.png",
+          "caption": "Desktop: plant"
+        },
+        {
+          "id": "r1a-1366-works-server",
+          "image": "game3d/shots/works-yard-20261008/r1a/1366-works-server.png",
+          "caption": "Desktop: server"
+        }
+      ]
+    },
+    {
+      "title": "Revised details",
+      "caption": "Final ordinary views and initial close-ups. Loading close-ups incorrectly place Eric on the pallet; those two views are retained as rejected setup attempts.",
+      "images": [
+        {
+          "id": "r2-1366-works-factory",
+          "image": "game3d/shots/works-yard-20261008/r2/1366-works-factory.png",
+          "caption": "Desktop: factory"
+        },
+        {
+          "id": "r2-1366-works-lane",
+          "image": "game3d/shots/works-yard-20261008/r2/1366-works-lane.png",
+          "caption": "Desktop: lane"
+        },
+        {
+          "id": "r2-1366-works-loading-close-detail",
+          "image": "game3d/shots/works-yard-20261008/r2/1366-works-loading-close-detail.png",
+          "caption": "Desktop: loading close detail — rejected setup: character placed on pallet; corrected below (inspection camera)"
+        },
+        {
+          "id": "r2-1366-works-plant",
+          "image": "game3d/shots/works-yard-20261008/r2/1366-works-plant.png",
+          "caption": "Desktop: plant"
+        },
+        {
+          "id": "r2-1366-works-server-close-detail",
+          "image": "game3d/shots/works-yard-20261008/r2/1366-works-server-close-detail.png",
+          "caption": "Desktop: server close detail (inspection camera)"
+        },
+        {
+          "id": "r2-1366-works-server",
+          "image": "game3d/shots/works-yard-20261008/r2/1366-works-server.png",
+          "caption": "Desktop: server"
+        },
+        {
+          "id": "r2-390-works-factory",
+          "image": "game3d/shots/works-yard-20261008/r2/390-works-factory.png",
+          "caption": "Phone: factory"
+        },
+        {
+          "id": "r2-390-works-lane",
+          "image": "game3d/shots/works-yard-20261008/r2/390-works-lane.png",
+          "caption": "Phone: lane"
+        },
+        {
+          "id": "r2-390-works-loading-close-detail",
+          "image": "game3d/shots/works-yard-20261008/r2/390-works-loading-close-detail.png",
+          "caption": "Phone: loading close detail — rejected setup: character placed on pallet; corrected below (inspection camera)"
+        },
+        {
+          "id": "r2-390-works-plant",
+          "image": "game3d/shots/works-yard-20261008/r2/390-works-plant.png",
+          "caption": "Phone: plant"
+        },
+        {
+          "id": "r2-390-works-server-close-detail",
+          "image": "game3d/shots/works-yard-20261008/r2/390-works-server-close-detail.png",
+          "caption": "Phone: server close detail (inspection camera)"
+        },
+        {
+          "id": "r2-390-works-server",
+          "image": "game3d/shots/works-yard-20261008/r2/390-works-server.png",
+          "caption": "Phone: server"
+        }
+      ]
+    },
+    {
+      "title": "Corrected close-ups",
+      "caption": "Eric stands beside the loading props and in the server-hall approach. The camera is moved closer for inspection.",
+      "images": [
+        {
+          "id": "r3-1366-works-loading-close-detail",
+          "image": "game3d/shots/works-yard-20261008/r3-details/1366-works-loading-close-detail.png",
+          "caption": "Desktop: loading close detail (inspection camera)"
+        },
+        {
+          "id": "r3-1366-works-server-close-detail",
+          "image": "game3d/shots/works-yard-20261008/r3-details/1366-works-server-close-detail.png",
+          "caption": "Desktop: server close detail (inspection camera)"
+        },
+        {
+          "id": "r3-390-works-loading-close-detail",
+          "image": "game3d/shots/works-yard-20261008/r3-details/390-works-loading-close-detail.png",
+          "caption": "Phone: loading close detail (inspection camera)"
+        },
+        {
+          "id": "r3-390-works-server-close-detail",
+          "image": "game3d/shots/works-yard-20261008/r3-details/390-works-server-close-detail.png",
+          "caption": "Phone: server close detail (inspection camera)"
+        }
+      ]
+    },
+    {
+      "title": "Approaching from the harbour",
+      "caption": "The same connected lane planting appears before entering the Works.",
+      "images": [
+        {
+          "id": "harbour-1366-works-harbour-continuation",
+          "image": "game3d/shots/works-yard-20261008/harbour/1366-works-harbour-continuation.png",
+          "caption": "Desktop: harbour continuation"
+        },
+        {
+          "id": "harbour-390-works-harbour-continuation",
+          "image": "game3d/shots/works-yard-20261008/harbour/390-works-harbour-continuation.png",
+          "caption": "Phone: harbour continuation"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    },
+    {
+      "label": "Checks and capture notes",
+      "href": "game3d/shots/works-yard-20261008/manifest.json"
+    }
+  ]
+}
