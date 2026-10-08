@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { setPortraitAvoid, promptWaiting } from '../../ui/portraits.js';
+import { setCaptionAvoid } from '../../ui/caption-layout.js';
 import { pullBack } from '../../cam.js';
 
 // While a prompt waits on the player (a word to type, replies to pick), Eric and, during "Say it to ...", the thing he
@@ -61,6 +62,7 @@ export function installPromptView(game, { canvas }) {
       .filter(Boolean);
   };
   setPortraitAvoid(game.promptKeep);
+  setCaptionAvoid(game.promptKeep);
 
   // How far the camera pulls back for the prompt: the least that clears Eric and the target of the talk box, measured
   // on the shot before any pull, so it doesn't feed on itself as the camera moves.

@@ -53,7 +53,15 @@ async function watch(p, ms, clicks, log) {
   return worst;
 }
 async function talkToMio(p, log) {
-  const pt = await screenOf(p, 'mio');
+  // Use the visible pin: the old fixed world height could project into a seat as character models changed.
+  const pt = await p.evaluate(() => {
+    const marker = window.__game.markers.list.find(m => m.id === 'mio')?.el;
+    const rect = marker?.querySelector('.pin')?.getBoundingClientRect();
+    if (!rect?.width) throw new Error('Mio interaction pin is not visible');
+    const point = [rect.x + rect.width / 2, rect.y + rect.height / 2];
+    if (document.elementFromPoint(...point)?.closest('.mark') !== marker) throw new Error('Mio interaction pin is covered');
+    return point;
+  });
   log.push(`mio at ${pt.map(Math.round).join(',')}`);
   await p.mouse.click(pt[0], pt[1]);
   const until = Date.now() + 15000;
