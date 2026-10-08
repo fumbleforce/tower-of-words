@@ -1,0 +1,696 @@
+{
+  "title": "Bakery fixtures and working details",
+  "date": "2026-10-08",
+  "by": "codex",
+  "caption": "Supported bread shelves and pans, detailed oven controls, a tiled preparation wall, stock shelf brackets and counter joinery give the bakery a more complete working interior. All retained render attempts appear in capture order.",
+  "preview": "final-1366-eric-02-arrival",
+  "sections": [
+    {
+      "title": "Original bakery",
+      "caption": "Original room and existing interactions before the detail pass. Native pins and menus with scripted walking approaches. The original checker reused clerk filenames; every surviving original is retained.",
+      "images": [
+        {
+          "id": "baseline-390-carina-street-before",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-street-before.png",
+          "caption": "Phone Carina: Shop-street approach before entering"
+        },
+        {
+          "id": "baseline-1366-eric-street-before",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-street-before.png",
+          "caption": "Desktop Eric: Shop-street approach before entering"
+        },
+        {
+          "id": "baseline-390-carina-arrival",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-arrival.png",
+          "caption": "Phone Carina: Arrival through the bakery door"
+        },
+        {
+          "id": "baseline-1366-eric-arrival",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-arrival.png",
+          "caption": "Desktop Eric: Arrival through the bakery door"
+        },
+        {
+          "id": "baseline-1366-eric-motion-select",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-motion-select.png",
+          "caption": "Desktop Eric: Bread selection in progress"
+        },
+        {
+          "id": "baseline-390-carina-motion-select",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-motion-select.png",
+          "caption": "Phone Carina: Bread selection in progress"
+        },
+        {
+          "id": "baseline-1366-eric-motion-pay",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-motion-pay.png",
+          "caption": "Desktop Eric: Payment and bagging in progress"
+        },
+        {
+          "id": "baseline-390-carina-motion-pay",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-motion-pay.png",
+          "caption": "Phone Carina: Payment and bagging in progress"
+        },
+        {
+          "id": "baseline-1366-eric-paid",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-paid.png",
+          "caption": "Desktop Eric: Paid collection choices"
+        },
+        {
+          "id": "baseline-390-carina-paid",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-paid.png",
+          "caption": "Phone Carina: Paid collection choices"
+        },
+        {
+          "id": "baseline-1366-eric-paid-continue",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-paid-continue.png",
+          "caption": "Desktop Eric: Collection choices after title Continue"
+        },
+        {
+          "id": "baseline-390-carina-paid-continue",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-paid-continue.png",
+          "caption": "Phone Carina: Collection choices after title Continue"
+        },
+        {
+          "id": "baseline-390-carina-motion-take",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-motion-take.png",
+          "caption": "Phone Carina: Taking the paid bag"
+        },
+        {
+          "id": "baseline-1366-eric-motion-take",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-motion-take.png",
+          "caption": "Desktop Eric: Taking the paid bag"
+        },
+        {
+          "id": "baseline-390-carina-purchased",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-purchased.png",
+          "caption": "Phone Carina: Purchase completed"
+        },
+        {
+          "id": "baseline-1366-eric-purchased",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-purchased.png",
+          "caption": "Desktop Eric: Purchase completed"
+        },
+        {
+          "id": "baseline-390-carina-perch-continue",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-perch-continue.png",
+          "caption": "Phone Carina: Seated choices restored by title Continue"
+        },
+        {
+          "id": "baseline-1366-eric-perch-continue",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-perch-continue.png",
+          "caption": "Desktop Eric: Seated choices restored by title Continue"
+        },
+        {
+          "id": "baseline-390-carina-motion-eat",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-motion-eat.png",
+          "caption": "Phone Carina: Eating at the window ledge"
+        },
+        {
+          "id": "baseline-1366-eric-motion-eat",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-motion-eat.png",
+          "caption": "Desktop Eric: Eating at the window ledge"
+        },
+        {
+          "id": "baseline-390-carina-perch",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-perch.png",
+          "caption": "Phone Carina: Window ledge and chair clearance"
+        },
+        {
+          "id": "baseline-1366-eric-perch",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-perch.png",
+          "caption": "Desktop Eric: Window ledge and chair clearance"
+        },
+        {
+          "id": "baseline-390-carina-street-return",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-street-return.png",
+          "caption": "Phone Carina: Return through the door to shop street"
+        },
+        {
+          "id": "baseline-1366-eric-street-return",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-street-return.png",
+          "caption": "Desktop Eric: Return through the door to shop street"
+        },
+        {
+          "id": "baseline-390-carina-street-entry",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-street-entry.png",
+          "caption": "Phone Carina: Re-entering the bakery"
+        },
+        {
+          "id": "baseline-1366-eric-street-entry",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-street-entry.png",
+          "caption": "Desktop Eric: Re-entering the bakery"
+        },
+        {
+          "id": "baseline-390-carina-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/390-carina-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "baseline-1366-eric-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/baseline/1366-eric-clerk.png",
+          "caption": "Desktop Eric: Clerk conversation at the counter"
+        }
+      ]
+    },
+    {
+      "title": "First detail candidate",
+      "caption": "First candidate, superseded by cleaner display post ends and corrected cooling-tray and flour-sack contact with the worktop. Native pins and menus with scripted walking approaches. Evening close-ups use an injected period inside the room and do not demonstrate evening entry.",
+      "images": [
+        {
+          "id": "candidate-1-390-carina-01-street-before",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-01-street-before.png",
+          "caption": "Phone Carina: Shop-street approach before entering"
+        },
+        {
+          "id": "candidate-1-1366-eric-01-street-before",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-01-street-before.png",
+          "caption": "Desktop Eric: Shop-street approach before entering"
+        },
+        {
+          "id": "candidate-1-390-carina-02-arrival",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-02-arrival.png",
+          "caption": "Phone Carina: Arrival through the bakery door"
+        },
+        {
+          "id": "candidate-1-1366-eric-02-arrival",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-02-arrival.png",
+          "caption": "Desktop Eric: Arrival through the bakery door"
+        },
+        {
+          "id": "candidate-1-390-carina-03-morning-prep",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-03-morning-prep.png",
+          "caption": "Phone Carina: Morning: Preparation counter, oven and extraction grille"
+        },
+        {
+          "id": "candidate-1-1366-eric-03-morning-prep",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-03-morning-prep.png",
+          "caption": "Desktop Eric: Morning: Preparation counter, oven and extraction grille"
+        },
+        {
+          "id": "candidate-1-390-carina-04-morning-stock",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-04-morning-stock.png",
+          "caption": "Phone Carina: Morning: Reserved boxes, brackets and flour sacks"
+        },
+        {
+          "id": "candidate-1-390-carina-05-morning-display",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-05-morning-display.png",
+          "caption": "Phone Carina: Morning: Bread pans and supported display shelves"
+        },
+        {
+          "id": "candidate-1-1366-eric-04-morning-stock",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-04-morning-stock.png",
+          "caption": "Desktop Eric: Morning: Reserved boxes, brackets and flour sacks"
+        },
+        {
+          "id": "candidate-1-390-carina-06-morning-perch",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-06-morning-perch.png",
+          "caption": "Phone Carina: Morning: Window ledge and chair clearance"
+        },
+        {
+          "id": "candidate-1-1366-eric-05-morning-display",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-05-morning-display.png",
+          "caption": "Desktop Eric: Morning: Bread pans and supported display shelves"
+        },
+        {
+          "id": "candidate-1-390-carina-07-evening-prep",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-07-evening-prep.png",
+          "caption": "Phone Carina: Injected evening interior state: Preparation counter, oven and extraction grille"
+        },
+        {
+          "id": "candidate-1-1366-eric-06-morning-perch",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-06-morning-perch.png",
+          "caption": "Desktop Eric: Morning: Window ledge and chair clearance"
+        },
+        {
+          "id": "candidate-1-390-carina-08-evening-stock",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-08-evening-stock.png",
+          "caption": "Phone Carina: Injected evening interior state: Reserved boxes, brackets and flour sacks"
+        },
+        {
+          "id": "candidate-1-390-carina-09-evening-display",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-09-evening-display.png",
+          "caption": "Phone Carina: Injected evening interior state: Bread pans and supported display shelves"
+        },
+        {
+          "id": "candidate-1-1366-eric-07-evening-prep",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-07-evening-prep.png",
+          "caption": "Desktop Eric: Injected evening interior state: Preparation counter, oven and extraction grille"
+        },
+        {
+          "id": "candidate-1-390-carina-10-evening-perch",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-10-evening-perch.png",
+          "caption": "Phone Carina: Injected evening interior state: Window ledge and chair clearance"
+        },
+        {
+          "id": "candidate-1-1366-eric-08-evening-stock",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-08-evening-stock.png",
+          "caption": "Desktop Eric: Injected evening interior state: Reserved boxes, brackets and flour sacks"
+        },
+        {
+          "id": "candidate-1-1366-eric-09-evening-display",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-09-evening-display.png",
+          "caption": "Desktop Eric: Injected evening interior state: Bread pans and supported display shelves"
+        },
+        {
+          "id": "candidate-1-1366-eric-10-evening-perch",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-10-evening-perch.png",
+          "caption": "Desktop Eric: Injected evening interior state: Window ledge and chair clearance"
+        },
+        {
+          "id": "candidate-1-390-carina-11-motion-select",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-11-motion-select.png",
+          "caption": "Phone Carina: Bread selection in progress"
+        },
+        {
+          "id": "candidate-1-1366-eric-11-motion-select",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-11-motion-select.png",
+          "caption": "Desktop Eric: Bread selection in progress"
+        },
+        {
+          "id": "candidate-1-390-carina-12-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-12-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "candidate-1-390-carina-13-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-13-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "candidate-1-1366-eric-12-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-12-clerk.png",
+          "caption": "Desktop Eric: Clerk conversation at the counter"
+        },
+        {
+          "id": "candidate-1-390-carina-14-motion-pay",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-14-motion-pay.png",
+          "caption": "Phone Carina: Payment and bagging in progress"
+        },
+        {
+          "id": "candidate-1-1366-eric-13-motion-pay",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-13-motion-pay.png",
+          "caption": "Desktop Eric: Payment and bagging in progress"
+        },
+        {
+          "id": "candidate-1-390-carina-15-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-15-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "candidate-1-390-carina-16-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-16-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "candidate-1-1366-eric-14-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-14-clerk.png",
+          "caption": "Desktop Eric: Clerk conversation at the counter"
+        },
+        {
+          "id": "candidate-1-390-carina-17-paid",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-17-paid.png",
+          "caption": "Phone Carina: Paid collection choices"
+        },
+        {
+          "id": "candidate-1-1366-eric-15-paid",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-15-paid.png",
+          "caption": "Desktop Eric: Paid collection choices"
+        },
+        {
+          "id": "candidate-1-390-carina-18-paid-continue",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-18-paid-continue.png",
+          "caption": "Phone Carina: Collection choices after title Continue"
+        },
+        {
+          "id": "candidate-1-1366-eric-16-paid-continue",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-16-paid-continue.png",
+          "caption": "Desktop Eric: Collection choices after title Continue"
+        },
+        {
+          "id": "candidate-1-390-carina-19-motion-take",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-19-motion-take.png",
+          "caption": "Phone Carina: Taking the paid bag"
+        },
+        {
+          "id": "candidate-1-1366-eric-17-motion-take",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-17-motion-take.png",
+          "caption": "Desktop Eric: Taking the paid bag"
+        },
+        {
+          "id": "candidate-1-390-carina-20-purchased",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-20-purchased.png",
+          "caption": "Phone Carina: Purchase completed"
+        },
+        {
+          "id": "candidate-1-1366-eric-18-purchased",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-18-purchased.png",
+          "caption": "Desktop Eric: Purchase completed"
+        },
+        {
+          "id": "candidate-1-390-carina-21-perch-continue",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-21-perch-continue.png",
+          "caption": "Phone Carina: Seated choices restored by title Continue"
+        },
+        {
+          "id": "candidate-1-1366-eric-19-perch-continue",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-19-perch-continue.png",
+          "caption": "Desktop Eric: Seated choices restored by title Continue"
+        },
+        {
+          "id": "candidate-1-390-carina-22-motion-eat",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-22-motion-eat.png",
+          "caption": "Phone Carina: Eating at the window ledge"
+        },
+        {
+          "id": "candidate-1-390-carina-23-perch",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-23-perch.png",
+          "caption": "Phone Carina: Window ledge and chair clearance"
+        },
+        {
+          "id": "candidate-1-1366-eric-20-motion-eat",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-20-motion-eat.png",
+          "caption": "Desktop Eric: Eating at the window ledge"
+        },
+        {
+          "id": "candidate-1-1366-eric-21-perch",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-21-perch.png",
+          "caption": "Desktop Eric: Window ledge and chair clearance"
+        },
+        {
+          "id": "candidate-1-390-carina-24-street-return",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-24-street-return.png",
+          "caption": "Phone Carina: Return through the door to shop street"
+        },
+        {
+          "id": "candidate-1-1366-eric-22-street-return",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-22-street-return.png",
+          "caption": "Desktop Eric: Return through the door to shop street"
+        },
+        {
+          "id": "candidate-1-390-carina-25-street-entry",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-25-street-entry.png",
+          "caption": "Phone Carina: Re-entering the bakery"
+        },
+        {
+          "id": "candidate-1-1366-eric-23-street-entry",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-23-street-entry.png",
+          "caption": "Desktop Eric: Re-entering the bakery"
+        },
+        {
+          "id": "candidate-1-390-carina-26-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-26-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "candidate-1-390-carina-27-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/390-carina-27-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "candidate-1-1366-eric-24-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/candidate-1/1366-eric-24-clerk.png",
+          "caption": "Desktop Eric: Clerk conversation at the counter"
+        }
+      ]
+    },
+    {
+      "title": "Final bakery details",
+      "caption": "Final fixtures. Purchase, paid and seated title Continue, consumption, return and cancellation passed using actual pins and menus with scripted walking approaches. Evening close-ups use an injected period inside the room and do not demonstrate evening entry.",
+      "images": [
+        {
+          "id": "final-390-carina-01-street-before",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-01-street-before.png",
+          "caption": "Phone Carina: Shop-street approach before entering"
+        },
+        {
+          "id": "final-1366-eric-01-street-before",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-01-street-before.png",
+          "caption": "Desktop Eric: Shop-street approach before entering"
+        },
+        {
+          "id": "final-390-carina-02-arrival",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-02-arrival.png",
+          "caption": "Phone Carina: Arrival through the bakery door"
+        },
+        {
+          "id": "final-1366-eric-02-arrival",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-02-arrival.png",
+          "caption": "Desktop Eric: Arrival through the bakery door"
+        },
+        {
+          "id": "final-390-carina-03-morning-prep",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-03-morning-prep.png",
+          "caption": "Phone Carina: Morning: Preparation counter, oven and extraction grille"
+        },
+        {
+          "id": "final-1366-eric-03-morning-prep",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-03-morning-prep.png",
+          "caption": "Desktop Eric: Morning: Preparation counter, oven and extraction grille"
+        },
+        {
+          "id": "final-390-carina-04-morning-stock",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-04-morning-stock.png",
+          "caption": "Phone Carina: Morning: Reserved boxes, brackets and flour sacks"
+        },
+        {
+          "id": "final-1366-eric-04-morning-stock",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-04-morning-stock.png",
+          "caption": "Desktop Eric: Morning: Reserved boxes, brackets and flour sacks"
+        },
+        {
+          "id": "final-390-carina-05-morning-display",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-05-morning-display.png",
+          "caption": "Phone Carina: Morning: Bread pans and supported display shelves"
+        },
+        {
+          "id": "final-390-carina-06-morning-perch",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-06-morning-perch.png",
+          "caption": "Phone Carina: Morning: Window ledge and chair clearance"
+        },
+        {
+          "id": "final-1366-eric-05-morning-display",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-05-morning-display.png",
+          "caption": "Desktop Eric: Morning: Bread pans and supported display shelves"
+        },
+        {
+          "id": "final-390-carina-07-evening-prep",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-07-evening-prep.png",
+          "caption": "Phone Carina: Injected evening interior state: Preparation counter, oven and extraction grille"
+        },
+        {
+          "id": "final-1366-eric-06-morning-perch",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-06-morning-perch.png",
+          "caption": "Desktop Eric: Morning: Window ledge and chair clearance"
+        },
+        {
+          "id": "final-390-carina-08-evening-stock",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-08-evening-stock.png",
+          "caption": "Phone Carina: Injected evening interior state: Reserved boxes, brackets and flour sacks"
+        },
+        {
+          "id": "final-1366-eric-07-evening-prep",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-07-evening-prep.png",
+          "caption": "Desktop Eric: Injected evening interior state: Preparation counter, oven and extraction grille"
+        },
+        {
+          "id": "final-390-carina-09-evening-display",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-09-evening-display.png",
+          "caption": "Phone Carina: Injected evening interior state: Bread pans and supported display shelves"
+        },
+        {
+          "id": "final-1366-eric-08-evening-stock",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-08-evening-stock.png",
+          "caption": "Desktop Eric: Injected evening interior state: Reserved boxes, brackets and flour sacks"
+        },
+        {
+          "id": "final-390-carina-10-evening-perch",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-10-evening-perch.png",
+          "caption": "Phone Carina: Injected evening interior state: Window ledge and chair clearance"
+        },
+        {
+          "id": "final-1366-eric-09-evening-display",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-09-evening-display.png",
+          "caption": "Desktop Eric: Injected evening interior state: Bread pans and supported display shelves"
+        },
+        {
+          "id": "final-1366-eric-10-evening-perch",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-10-evening-perch.png",
+          "caption": "Desktop Eric: Injected evening interior state: Window ledge and chair clearance"
+        },
+        {
+          "id": "final-390-carina-11-motion-select",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-11-motion-select.png",
+          "caption": "Phone Carina: Bread selection in progress"
+        },
+        {
+          "id": "final-1366-eric-11-motion-select",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-11-motion-select.png",
+          "caption": "Desktop Eric: Bread selection in progress"
+        },
+        {
+          "id": "final-390-carina-12-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-12-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "final-390-carina-13-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-13-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "final-1366-eric-12-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-12-clerk.png",
+          "caption": "Desktop Eric: Clerk conversation at the counter"
+        },
+        {
+          "id": "final-390-carina-14-motion-pay",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-14-motion-pay.png",
+          "caption": "Phone Carina: Payment and bagging in progress"
+        },
+        {
+          "id": "final-1366-eric-13-motion-pay",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-13-motion-pay.png",
+          "caption": "Desktop Eric: Payment and bagging in progress"
+        },
+        {
+          "id": "final-390-carina-15-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-15-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "final-1366-eric-14-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-14-clerk.png",
+          "caption": "Desktop Eric: Clerk conversation at the counter"
+        },
+        {
+          "id": "final-390-carina-16-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-16-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "final-390-carina-17-paid",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-17-paid.png",
+          "caption": "Phone Carina: Paid collection choices"
+        },
+        {
+          "id": "final-1366-eric-15-paid",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-15-paid.png",
+          "caption": "Desktop Eric: Paid collection choices"
+        },
+        {
+          "id": "final-390-carina-18-paid-continue",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-18-paid-continue.png",
+          "caption": "Phone Carina: Collection choices after title Continue"
+        },
+        {
+          "id": "final-1366-eric-16-paid-continue",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-16-paid-continue.png",
+          "caption": "Desktop Eric: Collection choices after title Continue"
+        },
+        {
+          "id": "final-390-carina-19-motion-take",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-19-motion-take.png",
+          "caption": "Phone Carina: Taking the paid bag"
+        },
+        {
+          "id": "final-1366-eric-17-motion-take",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-17-motion-take.png",
+          "caption": "Desktop Eric: Taking the paid bag"
+        },
+        {
+          "id": "final-390-carina-20-purchased",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-20-purchased.png",
+          "caption": "Phone Carina: Purchase completed"
+        },
+        {
+          "id": "final-1366-eric-18-purchased",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-18-purchased.png",
+          "caption": "Desktop Eric: Purchase completed"
+        },
+        {
+          "id": "final-390-carina-21-perch-continue",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-21-perch-continue.png",
+          "caption": "Phone Carina: Seated choices restored by title Continue"
+        },
+        {
+          "id": "final-1366-eric-19-perch-continue",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-19-perch-continue.png",
+          "caption": "Desktop Eric: Seated choices restored by title Continue"
+        },
+        {
+          "id": "final-390-carina-22-motion-eat",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-22-motion-eat.png",
+          "caption": "Phone Carina: Eating at the window ledge"
+        },
+        {
+          "id": "final-1366-eric-20-motion-eat",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-20-motion-eat.png",
+          "caption": "Desktop Eric: Eating at the window ledge"
+        },
+        {
+          "id": "final-390-carina-23-perch",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-23-perch.png",
+          "caption": "Phone Carina: Window ledge and chair clearance"
+        },
+        {
+          "id": "final-1366-eric-21-perch",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-21-perch.png",
+          "caption": "Desktop Eric: Window ledge and chair clearance"
+        },
+        {
+          "id": "final-390-carina-24-street-return",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-24-street-return.png",
+          "caption": "Phone Carina: Return through the door to shop street"
+        },
+        {
+          "id": "final-1366-eric-22-street-return",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-22-street-return.png",
+          "caption": "Desktop Eric: Return through the door to shop street"
+        },
+        {
+          "id": "final-390-carina-25-street-entry",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-25-street-entry.png",
+          "caption": "Phone Carina: Re-entering the bakery"
+        },
+        {
+          "id": "final-1366-eric-23-street-entry",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-23-street-entry.png",
+          "caption": "Desktop Eric: Re-entering the bakery"
+        },
+        {
+          "id": "final-390-carina-26-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-26-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        },
+        {
+          "id": "final-1366-eric-24-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/final/1366-eric-24-clerk.png",
+          "caption": "Desktop Eric: Clerk conversation at the counter"
+        },
+        {
+          "id": "final-390-carina-27-clerk",
+          "image": "game3d/shots/bakery-detail-20261008/final/390-carina-27-clerk.png",
+          "caption": "Phone Carina: Clerk conversation at the counter"
+        }
+      ]
+    },
+    {
+      "title": "Strict day-one route",
+      "caption": "Strict day-one route passed in 73 seconds at both sizes without overrides. The first phone admission was GPU_DEFERRED and produced no image; its result and log remain in the evidence folder.",
+      "images": [
+        {
+          "id": "fast-2026-10-08T18-24-57-540Z-881698-1366x860",
+          "image": "game3d/shots/bakery-detail-20261008/fast/2026-10-08T18-24-57-540Z-881698/1366x860.png",
+          "caption": "Strict day-one completion screen: desktop"
+        },
+        {
+          "id": "fast-2026-10-08T18-27-43-406Z-894555-390x844",
+          "image": "game3d/shots/bakery-detail-20261008/fast/2026-10-08T18-27-43-406Z-894555/390x844.png",
+          "caption": "Strict day-one completion screen: phone"
+        }
+      ]
+    }
+  ],
+  "commit": [
+    "7ee6b495c3fee9131dd99795a737ddd150f7777b"
+  ]
+}
