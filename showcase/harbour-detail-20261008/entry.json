@@ -1,0 +1,414 @@
+{
+  "title": "Harbour loading frontage and quay fittings",
+  "date": "2026-10-08",
+  "by": "codex",
+  "caption": "The supply yard gains recessed roller doors, supported timber cargo, reflective hut glazing and attached quay hardware. The clear loading apron and original routes remain. All native baselines, iterations and supplemental detail frames are retained below.",
+  "preview": "attempt-2-1366-detail-warehouse",
+  "sections": [
+    {
+      "title": "Native baseline",
+      "caption": "Five actual walking destinations before the harbour pass.",
+      "images": [
+        {
+          "id": "baseline-1366-hut",
+          "image": "game3d/shots/harbour-detail-20261008/baseline/1366-hut.png",
+          "caption": "Hut. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "baseline-1366-landing",
+          "image": "game3d/shots/harbour-detail-20261008/baseline/1366-landing.png",
+          "caption": "Landing. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "baseline-1366-loads",
+          "image": "game3d/shots/harbour-detail-20261008/baseline/1366-loads.png",
+          "caption": "Loads. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "baseline-1366-quay",
+          "image": "game3d/shots/harbour-detail-20261008/baseline/1366-quay.png",
+          "caption": "Quay. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "baseline-1366-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/baseline/1366-warehouse.png",
+          "caption": "Warehouse. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "baseline-390-hut",
+          "image": "game3d/shots/harbour-detail-20261008/baseline/390-hut.png",
+          "caption": "Hut. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "baseline-390-landing",
+          "image": "game3d/shots/harbour-detail-20261008/baseline/390-landing.png",
+          "caption": "Landing. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "baseline-390-loads",
+          "image": "game3d/shots/harbour-detail-20261008/baseline/390-loads.png",
+          "caption": "Loads. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "baseline-390-quay",
+          "image": "game3d/shots/harbour-detail-20261008/baseline/390-quay.png",
+          "caption": "Quay. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "baseline-390-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/baseline/390-warehouse.png",
+          "caption": "Warehouse. Native walking camera. Phone, 390 \u00d7 844."
+        }
+      ]
+    },
+    {
+      "title": "First working-port pass",
+      "caption": "Initial frontage and mechanical detail. The hut still has the old opaque glow pane; pallet support/drain issues identified in independent source review were corrected next.",
+      "images": [
+        {
+          "id": "attempt-1-1366-hut",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-1/1366-hut.png",
+          "caption": "Hut. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-1-1366-landing",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-1/1366-landing.png",
+          "caption": "Landing. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-1-1366-loads",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-1/1366-loads.png",
+          "caption": "Loads. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-1-1366-quay",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-1/1366-quay.png",
+          "caption": "Quay. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-1-1366-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-1/1366-warehouse.png",
+          "caption": "Warehouse. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-1-390-hut",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-1/390-hut.png",
+          "caption": "Hut. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-1-390-landing",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-1/390-landing.png",
+          "caption": "Landing. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-1-390-loads",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-1/390-loads.png",
+          "caption": "Loads. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-1-390-quay",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-1/390-quay.png",
+          "caption": "Quay. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-1-390-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-1/390-warehouse.png",
+          "caption": "Warehouse. Native walking camera. Phone, 390 \u00d7 844."
+        }
+      ]
+    },
+    {
+      "title": "Recesses, glazing and supported cargo",
+      "caption": "Final scene source: native views and supplemental physical-contact closeups. Drain emitted once; crossed pallet boards and closed carton tier gaps; recessed reflective hut glazing.",
+      "images": [
+        {
+          "id": "attempt-2-1366-detail-hut",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/1366-detail-hut.png",
+          "caption": "Detail hut. Supplemental held camera after native walking. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-2-1366-detail-loads",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/1366-detail-loads.png",
+          "caption": "Detail loads. Supplemental held camera after native walking. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-2-1366-detail-quay",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/1366-detail-quay.png",
+          "caption": "Detail quay. Supplemental held camera after native walking. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-2-1366-detail-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/1366-detail-warehouse.png",
+          "caption": "Detail warehouse. Supplemental held camera after native walking. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-2-1366-hut",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/1366-hut.png",
+          "caption": "Hut. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-2-1366-landing",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/1366-landing.png",
+          "caption": "Landing. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-2-1366-loads",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/1366-loads.png",
+          "caption": "Loads. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-2-1366-quay",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/1366-quay.png",
+          "caption": "Quay. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-2-1366-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/1366-warehouse.png",
+          "caption": "Warehouse. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "attempt-2-390-detail-hut",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/390-detail-hut.png",
+          "caption": "Detail hut. Supplemental held camera after native walking. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-2-390-detail-loads",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/390-detail-loads.png",
+          "caption": "Detail loads. Supplemental held camera after native walking. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-2-390-detail-quay",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/390-detail-quay.png",
+          "caption": "Detail quay. Supplemental held camera after native walking. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-2-390-detail-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/390-detail-warehouse.png",
+          "caption": "Detail warehouse. Supplemental held camera after native walking. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-2-390-hut",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/390-hut.png",
+          "caption": "Hut. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-2-390-landing",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/390-landing.png",
+          "caption": "Landing. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-2-390-loads",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/390-loads.png",
+          "caption": "Loads. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-2-390-quay",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/390-quay.png",
+          "caption": "Quay. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "attempt-2-390-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/attempt-2/390-warehouse.png",
+          "caption": "Warehouse. Native walking camera. Phone, 390 \u00d7 844."
+        }
+      ]
+    },
+    {
+      "title": "First evening/shared harness attempt",
+      "caption": "Valid evening harbour views retained alongside failure screenshots. Shared fixture incorrectly requested missing day-3 Works story; harness corrected without scene edits.",
+      "images": [
+        {
+          "id": "final-evening-shared-1366-detail-hut",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared/1366-detail-hut.png",
+          "caption": "Evening detail hut. Supplemental held camera after native walking. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "final-evening-shared-1366-failure",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared/1366-failure.png",
+          "caption": "Failure. Retained harness failure: nonexistent day-3 Works story requested; no scene-source fault. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "final-evening-shared-1366-hut",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared/1366-hut.png",
+          "caption": "Evening hut. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "final-evening-shared-1366-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared/1366-warehouse.png",
+          "caption": "Evening warehouse. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "final-evening-shared-390-detail-hut",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared/390-detail-hut.png",
+          "caption": "Evening detail hut. Supplemental held camera after native walking. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "final-evening-shared-390-failure",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared/390-failure.png",
+          "caption": "Failure. Retained harness failure: nonexistent day-3 Works story requested; no scene-source fault. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "final-evening-shared-390-hut",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared/390-hut.png",
+          "caption": "Evening hut. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "final-evening-shared-390-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared/390-warehouse.png",
+          "caption": "Evening warehouse. Native walking camera. Phone, 390 \u00d7 844."
+        }
+      ]
+    },
+    {
+      "title": "Evening and ordinary neighboring views",
+      "caption": "Evening route passed with no overlap, spin or gait findings. Fresh day-6 loads show the ordinary Works street and authored ferry-window compositions; later supplemental views expose the shared details.",
+      "images": [
+        {
+          "id": "final-evening-shared-2-1366-detail-hut",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared-2/1366-detail-hut.png",
+          "caption": "Evening detail hut. Supplemental held camera after native walking. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "final-evening-shared-2-1366-hut",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared-2/1366-hut.png",
+          "caption": "Evening hut. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "final-evening-shared-2-1366-shared-terminal-window",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared-2/1366-shared-terminal-window.png",
+          "caption": "Shared terminal window. Existing authored terminal window frame after native walking. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "final-evening-shared-2-1366-shared-works",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared-2/1366-shared-works.png",
+          "caption": "Shared works. Native walking camera. Street join view; changed cargo is outside this frame. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "final-evening-shared-2-1366-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared-2/1366-warehouse.png",
+          "caption": "Evening warehouse. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "final-evening-shared-2-390-detail-hut",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared-2/390-detail-hut.png",
+          "caption": "Evening detail hut. Supplemental held camera after native walking. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "final-evening-shared-2-390-hut",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared-2/390-hut.png",
+          "caption": "Evening hut. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "final-evening-shared-2-390-shared-terminal-window",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared-2/390-shared-terminal-window.png",
+          "caption": "Shared terminal window. Existing authored terminal window frame after native walking. Bow/water dominate this existing phone framing; see later detail proof. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "final-evening-shared-2-390-shared-works",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared-2/390-shared-works.png",
+          "caption": "Shared works. Native walking camera. Street join view; changed cargo is outside this frame. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "final-evening-shared-2-390-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/final-evening-shared-2/390-warehouse.png",
+          "caption": "Evening warehouse. Native walking camera. Phone, 390 \u00d7 844."
+        }
+      ]
+    },
+    {
+      "title": "Matched performance baseline",
+      "caption": "Native q1 overview after actual walking. Baseline before the harbour pass; all 20 complete-frame counter samples are retained in reports.",
+      "images": [
+        {
+          "id": "perf-baseline-1366-quay",
+          "image": "game3d/shots/harbour-detail-20261008/perf-baseline/1366-quay.png",
+          "caption": "Quay. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "perf-baseline-1366-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/perf-baseline/1366-warehouse.png",
+          "caption": "Warehouse. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "perf-baseline-390-quay",
+          "image": "game3d/shots/harbour-detail-20261008/perf-baseline/390-quay.png",
+          "caption": "Quay. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "perf-baseline-390-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/perf-baseline/390-warehouse.png",
+          "caption": "Warehouse. Native walking camera. Phone, 390 \u00d7 844."
+        }
+      ]
+    },
+    {
+      "title": "Matched performance candidate",
+      "caption": "Same native q1 walked positions and counter method. Phone warehouse 52\u219261 calls, quay 46\u219255; no geometry ceiling changed.",
+      "images": [
+        {
+          "id": "perf-candidate-1366-quay",
+          "image": "game3d/shots/harbour-detail-20261008/perf-candidate/1366-quay.png",
+          "caption": "Quay. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "perf-candidate-1366-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/perf-candidate/1366-warehouse.png",
+          "caption": "Warehouse. Native walking camera. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "perf-candidate-390-quay",
+          "image": "game3d/shots/harbour-detail-20261008/perf-candidate/390-quay.png",
+          "caption": "Quay. Native walking camera. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "perf-candidate-390-warehouse",
+          "image": "game3d/shots/harbour-detail-20261008/perf-candidate/390-warehouse.png",
+          "caption": "Warehouse. Native walking camera. Phone, 390 \u00d7 844."
+        }
+      ]
+    },
+    {
+      "title": "Shared construction closeups",
+      "caption": "Held-camera supplements after native walks show the canonical Works cargo and ferry pier. The first terminal phone composition falls between mooring posts; retained before a tighter reframe.",
+      "images": [
+        {
+          "id": "shared-details-1366-ferry_terminal",
+          "image": "game3d/shots/harbour-detail-20261008/shared-details/1366-ferry_terminal.png",
+          "caption": "Ferry terminal. Supplemental held camera after native walking. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "shared-details-1366-works",
+          "image": "game3d/shots/harbour-detail-20261008/shared-details/1366-works.png",
+          "caption": "Works. Supplemental held camera after native walking. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "shared-details-390-ferry_terminal",
+          "image": "game3d/shots/harbour-detail-20261008/shared-details/390-ferry_terminal.png",
+          "caption": "Ferry terminal. Supplemental held camera after native walking. Phone, 390 \u00d7 844."
+        },
+        {
+          "id": "shared-details-390-works",
+          "image": "game3d/shots/harbour-detail-20261008/shared-details/390-works.png",
+          "caption": "Works. Supplemental held camera after native walking. Phone, 390 \u00d7 844."
+        }
+      ]
+    },
+    {
+      "title": "Shared mooring-foot contact",
+      "caption": "Tighter supplemental framing of the existing ferry-pier mooring post and its new bolted foot; same builder as the harbour exterior.",
+      "images": [
+        {
+          "id": "shared-terminal-detail-2-1366-ferry_terminal",
+          "image": "game3d/shots/harbour-detail-20261008/shared-terminal-detail-2/1366-ferry_terminal.png",
+          "caption": "Ferry terminal. Supplemental held camera after native walking. Desktop, 1366 \u00d7 860."
+        },
+        {
+          "id": "shared-terminal-detail-2-390-ferry_terminal",
+          "image": "game3d/shots/harbour-detail-20261008/shared-terminal-detail-2/390-ferry_terminal.png",
+          "caption": "Ferry terminal. Supplemental held camera after native walking. Phone, 390 \u00d7 844."
+        }
+      ]
+    }
+  ],
+  "commit": "5f97ad4a4926d510aa3d96bab9131c6e081ceb65"
+}
