@@ -4,6 +4,7 @@ import { settings, CPS } from '../settings.js';
 import { voice, stopVoice } from '../audio/core.js';
 import { showPortraits, resetPortraitSpeaker, clearPortraits } from './portraits.js';
 import { heardHTML, scramble, reveal, addPlayButtons, whileUnpaused } from './dialogue-text.js';
+import { installCaptionLayout } from './caption-layout.js';
 import { showDoorCard } from './door-card.js';
 import { lineId, wasRead, markRead, logLine, logToJSON, logLoad } from './backlog.js';
 import { vn, skipLine, autoLine, choiceShown } from './vn-controls.js';
@@ -214,6 +215,7 @@ export function createDialogue({ sfx }) {
     },
     // a line nobody has to tap (ambient moments); overheard Japanese is garbled as in the dialogue box
     caption(sp, text, { overheard, clear, en } = {}) {
+      installCaptionLayout();
       if (en) [text, overheard] = [en, false];
       const c = $('#caption');
       if (!text) {

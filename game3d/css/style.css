@@ -167,7 +167,7 @@ body.busy #sayBtn { display: none; }
 .cmd .rd, .chip.cmdchip .rd { color: #bfe9e3; font-size: 15px; margin-left: 4px; }
 .chip.cmdchip { min-height: 58px; width: auto; }
 .chip.cmdchip .c { display: flex; align-items: baseline; gap: 8px; }
-#caption { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); max-width: min(680px, calc(100vw - 32px)); padding: 9px 16px; border-radius: 12px; background: rgba(20, 23, 29, .82); font-size: 17px; text-align: center; }
+#caption { position: absolute; z-index: 2; left: 50%; bottom: var(--caption-bottom, 26px); transform: translateX(-50%); max-width: min(680px, calc(100vw - 32px)); padding: 9px 16px; border-radius: 12px; background: rgba(20, 23, 29, .82); font-size: 17px; text-align: center; }
 #caption[hidden] { display: none; }
 #caption .nm { font-weight: 700; margin-right: 8px; }
 #caption.in { animation: pop .3s ease; }
@@ -255,7 +255,7 @@ body.phone #hint { white-space: normal; text-align: center; width: max-content; 
 body.phone #muteBtn { bottom: 12px; right: 12px; }
 body.phone #sayBtn { right: 12px; bottom: 52px; width: 68px; height: 68px; }
 body.phone #sayMenu { right: 12px; left: 12px; width: auto; bottom: 52px; }
-body.phone #caption { bottom: 20px; font-size: 16px; }
+body.phone #caption { bottom: var(--caption-bottom, 20px); font-size: 16px; }
 body.phone .chip.cmdchip { flex: 1 1 100%; }
 body.phone #end .stars { grid-template-columns: 1fr; }
 body.phone #end ul.w { grid-template-columns: 1fr; }
