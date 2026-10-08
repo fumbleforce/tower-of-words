@@ -1095,7 +1095,7 @@ Small places off the floor, kept for later secrets, encounters and collectibles 
 
 | Id | Where | What's there | Could hold |
 |---|---|---|---|
-| `gym_store` | In the hall, inside the equipment store's open door. | The ball carts, the mats, the net posts and the shelf of bibs. | Something left in a cart; a ball with a name on it. |
+| `gym_store` | Just inside the equipment store's open door, before the ball carts. | The ball carts, the mats, the net posts and the shelf of bibs. | Something left in a cart; a ball with a name on it. |
 | `gym_lockers` | On the entrance's tiles, by the west shoe locker and the slipper rack. | Cubbies with a few pairs of shoes in them. | A shoe without its pair; a note in a cubby. |
 
 ### Seats
