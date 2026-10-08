@@ -20,6 +20,7 @@ const probe = (p) => p.evaluate(() => {
     talkOpen: !!t && !t.hidden,
     scene: !!(g?.busy || r?.frames?.length),
     triggers: (r?.frames || []).map((f) => f.trigger || ''),
+    seat: (r?.frames || []).some(f => f.trigger === 'zone:free_seat' && f.node === 'seat'),
     title: document.body.classList.contains('at-title') || document.body.classList.contains('title-leaving'),
   };
 });
@@ -67,7 +68,8 @@ async function talkToMio(p, log) {
   const until = Date.now() + 15000;
   while (Date.now() < until) {
     const s = await probe(p);
-    if (s.triggers.includes('talk:mio')) return true;
+    // Walking to Mio can cross her free-seat zone first, opening the same authored seating conversation.
+    if (s.triggers.includes('talk:mio') || (s.seat && s.talkOpen)) return true;
     await p.waitForTimeout(200);
   }
   return false;
