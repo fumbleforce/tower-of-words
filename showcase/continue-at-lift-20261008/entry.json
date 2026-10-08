@@ -1,0 +1,195 @@
+{
+  "title": "Continue at the lift",
+  "date": "2026-10-08",
+  "updated": "2026-10-08T00:54:12.655906+00:00",
+  "by": "codex",
+  "caption": "Continue now keeps you where you saved after leaving the B2 lift. Walk away and back to use it again.",
+  "preview": "native-candidate-eric-1366-continued",
+  "sections": [
+    {
+      "title": "Before the fix",
+      "caption": "The original failure, reproduced from an arrival autosave.",
+      "images": [
+        {
+          "id": "native-baseline-eric-1366-arrival",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-baseline-eric-1366/arrival.png",
+          "caption": "The saved landing after riding up from B2"
+        },
+        {
+          "id": "native-baseline-eric-1366-continued-bounced-office",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-baseline-eric-1366/continued-bounced-office.png",
+          "caption": "Continue wrongly sends Eric back to B2 without movement input"
+        }
+      ]
+    },
+    {
+      "title": "First check — Eric, desktop",
+      "caption": "Earlier successful route, retained before the older-save walking guard was added.",
+      "images": [
+        {
+          "id": "frozen1-native-candidate-eric-1366-arrival",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/frozen1/native-candidate-eric-1366/arrival.png",
+          "caption": "After riding up from B2"
+        },
+        {
+          "id": "frozen1-native-candidate-eric-1366-continued",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/frozen1/native-candidate-eric-1366/continued.png",
+          "caption": "Continue keeps the saved landing"
+        },
+        {
+          "id": "frozen1-native-candidate-eric-1366-outside-zone",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/frozen1/native-candidate-eric-1366/outside-zone.png",
+          "caption": "After walking away from the lift"
+        },
+        {
+          "id": "frozen1-native-candidate-eric-1366-outside-continued",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/frozen1/native-candidate-eric-1366/outside-continued.png",
+          "caption": "Continue keeps the position outside the lift area"
+        },
+        {
+          "id": "frozen1-native-candidate-eric-1366-reentered-office",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/frozen1/native-candidate-eric-1366/reentered-office.png",
+          "caption": "Walking back into the lift returns to B2; captured during the goal fade"
+        }
+      ]
+    },
+    {
+      "title": "First check — Carina, phone",
+      "caption": "Earlier successful route, retained before the older-save walking guard was added.",
+      "images": [
+        {
+          "id": "frozen1-native-candidate-carina-390-arrival",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/frozen1/native-candidate-carina-390/arrival.png",
+          "caption": "After riding up from B2"
+        },
+        {
+          "id": "frozen1-native-candidate-carina-390-continued",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/frozen1/native-candidate-carina-390/continued.png",
+          "caption": "Continue keeps the saved landing"
+        },
+        {
+          "id": "frozen1-native-candidate-carina-390-outside-zone",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/frozen1/native-candidate-carina-390/outside-zone.png",
+          "caption": "After walking away from the lift"
+        },
+        {
+          "id": "frozen1-native-candidate-carina-390-outside-continued",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/frozen1/native-candidate-carina-390/outside-continued.png",
+          "caption": "Continue keeps the position outside the lift area"
+        },
+        {
+          "id": "frozen1-native-candidate-carina-390-reentered-office",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/frozen1/native-candidate-carina-390/reentered-office.png",
+          "caption": "Walking back into the lift returns to B2; captured during the goal fade"
+        }
+      ]
+    },
+    {
+      "title": "Final check — Eric, desktop",
+      "caption": "Continue stays at the landing. Leaving and walking back still activates the lift.",
+      "images": [
+        {
+          "id": "native-candidate-eric-1366-arrival",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-eric-1366/arrival.png",
+          "caption": "After riding up from B2"
+        },
+        {
+          "id": "native-candidate-eric-1366-continued",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-eric-1366/continued.png",
+          "caption": "Continue keeps the saved landing"
+        },
+        {
+          "id": "native-candidate-eric-1366-outside-zone",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-eric-1366/outside-zone.png",
+          "caption": "After walking away from the lift"
+        },
+        {
+          "id": "native-candidate-eric-1366-outside-continued",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-eric-1366/outside-continued.png",
+          "caption": "Continue keeps the position outside the lift area"
+        },
+        {
+          "id": "native-candidate-eric-1366-reentered-office",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-eric-1366/reentered-office.png",
+          "caption": "Walking back into the lift returns to B2; captured during the goal fade"
+        }
+      ]
+    },
+    {
+      "title": "Final check — Carina, phone",
+      "caption": "Continue stays at the landing. Leaving and walking back still activates the lift.",
+      "images": [
+        {
+          "id": "native-candidate-carina-390-arrival",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-carina-390/arrival.png",
+          "caption": "After riding up from B2"
+        },
+        {
+          "id": "native-candidate-carina-390-continued",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-carina-390/continued.png",
+          "caption": "Continue keeps the saved landing"
+        },
+        {
+          "id": "native-candidate-carina-390-outside-zone",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-carina-390/outside-zone.png",
+          "caption": "After walking away from the lift"
+        },
+        {
+          "id": "native-candidate-carina-390-outside-continued",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-carina-390/outside-continued.png",
+          "caption": "Continue keeps the position outside the lift area"
+        },
+        {
+          "id": "native-candidate-carina-390-reentered-office",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-carina-390/reentered-office.png",
+          "caption": "Walking back into the lift returns to B2; captured during the goal fade"
+        }
+      ]
+    },
+    {
+      "title": "Older-save and pending-entry checks",
+      "caption": "Controlled save variations, kept separate from the normal route.",
+      "images": [
+        {
+          "id": "native-candidate-eric-1366-legacy-continued",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-eric-1366/legacy-continued.png",
+          "caption": "Older-save fixture: the arrival save with its new zone history field removed stays at the landing"
+        },
+        {
+          "id": "native-candidate-eric-1366-pending-trigger-office",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/native-candidate-eric-1366/pending-trigger-office.png",
+          "caption": "Pending-entry fixture: explicitly empty history still lets the lift activate"
+        }
+      ]
+    },
+    {
+      "title": "Settled office — Eric, desktop",
+      "caption": "Additional capture after the entry transition settles; earlier fade captures remain above.",
+      "images": [
+        {
+          "id": "settled-office-eric-1366-settled-office",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/settled-office-eric-1366/settled-office.png",
+          "caption": "The goal is fully visible after the office entry fade"
+        }
+      ]
+    },
+    {
+      "title": "Settled office — Carina, phone",
+      "caption": "Additional capture after the entry transition settles; earlier fade captures remain above.",
+      "images": [
+        {
+          "id": "settled-office-carina-390-settled-office",
+          "image": "game3d/shots/stale-runtime-audit-20261008/206-arrival/settled-office-carina-390/settled-office.png",
+          "caption": "The goal is fully visible after the office entry fade"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play locally",
+      "href": "game3d/"
+    }
+  ],
+  "commit": "97244c6b06723bfcba171d14443682fc5d1a7bdc"
+}
