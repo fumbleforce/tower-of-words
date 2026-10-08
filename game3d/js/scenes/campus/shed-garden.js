@@ -1,10 +1,12 @@
 import * as THREE from 'three';
 import { quarterBeds } from './quarter-grounds.js';
 import { SHED_GARDENS, SHED_RILLS, SHED_DRAINS } from './shed-garden-plan.js';
+import { northGarden } from './north-garden.js';
 
 // Campus, forecourt and the office street see the same planted ground.
 export function shedGarden(parts, offset = [0, 0]) {
   quarterBeds(parts, SHED_GARDENS, offset);
+  northGarden(parts, offset);
   const box = (color, w, h, d, x, y, z, o = {}) =>
     parts.box(color, w, h, d, x + offset[0], y, z + offset[1], {
       cast: false,
@@ -17,7 +19,7 @@ export function shedGarden(parts, offset = [0, 0]) {
     for (let zz = z + 0.1; zz < z1; zz += 0.16)
       for (let i = 0; i < 2; i++) {
         const phase = Math.abs(Math.sin(zz * 71 + i * 13));
-        const geo = new THREE.DodecahedronGeometry(0.043 + phase * 0.018, 0)
+        const geo = new THREE.OctahedronGeometry(0.043 + phase * 0.018, 0)
           .scale(1.2, 0.45, 0.8)
           .rotateY(zz)
           .translate(x + 0.07 + i * 0.15 + offset[0], 0.044, zz + offset[1]);

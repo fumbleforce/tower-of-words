@@ -7,6 +7,7 @@ import { OFFICE_BELTS } from '../../scenes/office-quarter/planting-plan.js';
 import { QUARTER_BEDS, QUARTER_TREES, BANK_FOUNDATIONS, BANK_APRON_DRAIN } from '../../scenes/campus/quarter-plan.js';
 import { SOUTH_QUARTER_BEDS, JUNCTION_TREE } from '../../scenes/forecourt/quarter-planting-plan.js';
 import { SHED_GARDENS } from '../../scenes/campus/shed-garden-plan.js';
+import { NORTH_GARDENS } from '../../scenes/campus/north-garden-plan.js';
 import { rectPts, shape } from './shapes.js';
 import {
   CAMPUS_GARDENS,
@@ -105,7 +106,7 @@ export function crown(ctx, x, z, size) {
 }
 export function drawPlanting(ctx, detail) {
   ctx.fillStyle = '#919787';
-  for (const garden of [...CAMPUS_GARDENS, ...QUARTER_BEDS, ...SOUTH_QUARTER_BEDS, ...SHED_GARDENS]) {
+  for (const garden of [...CAMPUS_GARDENS, ...QUARTER_BEDS, ...SOUTH_QUARTER_BEDS, ...SHED_GARDENS, ...NORTH_GARDENS]) {
     shape(ctx, (x, z) => [x, z], garden.poly);
     ctx.fill();
   }
