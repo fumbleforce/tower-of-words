@@ -27,6 +27,31 @@ export function commonsWindows(kit, R) {
   }
 }
 
+// The cabinet is hollow below the sink; four worktop slabs leave its opening uncovered.
+export function commonsCounter(kit, R) {
+  const z = R.z0 + 0.25;
+  const cabinet = '#c9c6bd',
+    top = '#b3b0a8',
+    steel = '#9aaeb6';
+  kit.box(cabinet, 2.2, 0.04, 0.5, 2.3, 0, z, { surf: 'laminate' });
+  for (const x of [1.22, 2.28, 3.38]) kit.box(cabinet, 0.04, 0.36, 0.5, x, 0.04, z, { surf: 'laminate' });
+  for (const side of [-1, 1]) kit.box(cabinet, 2.2, 0.36, 0.04, 2.3, 0.04, z + side * 0.23, { surf: 'laminate' });
+  // Opening x=1.48..1.92 and z=-.14...14 relative to the counter's middle.
+  kit.box(top, 0.3, 0.03, 0.54, 1.33, 0.4, z, { surf: 'stone' });
+  kit.box(top, 1.5, 0.03, 0.54, 2.67, 0.4, z, { surf: 'stone' });
+  for (const side of [-1, 1]) {
+    kit.box(top, 0.44, 0.03, 0.13, 1.7, 0.4, z + side * 0.205, { surf: 'stone' });
+    kit.box(steel, 0.024, 0.012, 0.32, 1.7 + side * 0.232, 0.43, z, { surf: 'metal' });
+    kit.box(steel, 0.44, 0.012, 0.024, 1.7, 0.43, z + side * 0.152, { surf: 'metal' });
+    kit.box(steel, 0.014, 0.1, 0.28, 1.7 + side * 0.213, 0.33, z, { surf: 'metal' });
+    kit.box(steel, 0.412, 0.1, 0.014, 1.7, 0.33, z + side * 0.133, { surf: 'metal' });
+  }
+  kit.box('#80959e', 0.44, 0.014, 0.28, 1.7, 0.316, z, { surf: 'metal' });
+  kit.cyl('#b5c4ca', 0.037, 0.037, 0.003, 1.7, 0.33, z, { seg: 16, surf: 'metal' });
+  kit.cyl('#40555d', 0.023, 0.023, 0.004, 1.7, 0.333, z, { seg: 12 });
+  for (const offset of [-0.01, 0.01]) kit.box(steel, 0.04, 0.003, 0.004, 1.7, 0.337, z + offset, { surf: 'metal' });
+}
+
 export function commonsDetails(kit, R, nav) {
   // Staggered board ends break the long floor strips without raising the walking surface.
   for (let row = 0, z = R.z0 + 0.12; z < R.z1; row++, z += 0.24)
@@ -73,14 +98,12 @@ function kitchenFixtures(kit, R) {
     kit.box('#e0e6df', 0.52, 0.27, 0.015, x, 0.98, z + 0.058, { surf: 'laminate' });
     kit.box(C.steel, 0.12, 0.012, 0.025, x, 1.01, z + 0.075, { surf: 'metal' });
   }
-  kit.box('#697b80', 0.36, 0.012, 0.23, 1.7, 0.435, z, { surf: 'metal' });
-  kit.box('#94adb5', 0.29, 0.003, 0.16, 1.7, 0.449, z, { surf: 'metal' });
   kit.box(C.steel, 0.018, 0.018, 0.13, 1.7, 0.603, z - 0.13, { surf: 'metal' });
   kit.box('#a3c9bc', 0.06, 0.12, 0.055, 1.34, 0.432, z - 0.06, { surf: 'plastic' });
   kit.box(C.pale, 0.055, 0.016, 0.02, 1.35, 0.554, z - 0.06);
   // A draining rack beside the sink, with two upright plates.
-  kit.box(C.steel, 0.22, 0.018, 0.31, 1.98, 0.434, z, { surf: 'metal' });
-  for (const x of [1.93, 2.02])
+  kit.box(C.steel, 0.12, 0.018, 0.31, 2.02, 0.434, z, { surf: 'metal' });
+  for (const x of [1.99, 2.05])
     kit.cyl(C.pale, 0.08, 0.08, 0.016, x, 0.51 - 0.008, z, { rz: Math.PI / 2, surf: 'ceramic' });
   // Kettle: a lid, short spout, open side handle and separate power base.
   const kx = 3.15,
@@ -112,11 +135,11 @@ function livingDetails(kit, R) {
   for (let i = 0; i < 4; i++) kit.box('#668b91', 0.35, 0.003, 0.016, -1.79, 0.336, -4.1 + i * 0.04, { surf: 'fabric' });
   // Residents' board games and albums fill the existing bookcase's spare spaces.
   for (const [y, z, color] of [
-    [0.035, -1.67, '#698c91'],
-    [0.335, -1.26, '#ad6965'],
-    [0.635, -1.36, '#627aa1'],
+    [0.035, -1.7, '#698c91'],
+    [0.335, -1.3, '#ad6965'],
+    [0.635, -1.4, '#627aa1'],
   ]) {
-    kit.box(color, 0.23, 0.07, 0.085, R.x0 + 0.2, y, z, { surf: 'card' });
+    kit.box(color, 0.23, 0.07, 0.07, R.x0 + 0.2, y, z, { surf: 'card' });
     kit.box(C.pale, 0.002, 0.018, 0.05, R.x0 + 0.317, y + 0.026, z);
   }
   // A small pair of potted cuttings sits on the sill above the TV.

@@ -12,7 +12,7 @@ import * as THREE from 'three';
 import { Kit } from '../dorms/kit.js';
 import { shell, plankFloor, roomLights, roomNav } from './shell.js';
 import { printer, pinboard } from './machines.js';
-import { COMMONS_WINDOWS, commonsWindows, commonsDetails } from './commons-detail.js';
+import { COMMONS_WINDOWS, commonsWindows, commonsDetails, commonsCounter } from './commons-detail.js';
 
 const C = {
   floor: '#c2c3b5',
@@ -23,7 +23,6 @@ const C = {
   top: '#d8cdb8',
   chair: '#6b8f7a',
   steel: '#8b919b',
-  counter: '#c9c6bd',
   fridge: '#e6e6e1',
 };
 export const R = { x0: -4.0, x1: 4.0, z0: -4.7, z1: 0, h: 1.5, near: 0.26, t: 0.14 };
@@ -241,9 +240,7 @@ function kitchen(kit, nav) {
   const z = R.z0 + 0.25,
     x0 = 1.2,
     x1 = R.x1;
-  kit.box(C.counter, 2.2, 0.4, 0.5, x0 + 1.1, 0, z, { surf: 'laminate' });
-  kit.box('#b3b0a8', 2.24, 0.03, 0.54, x0 + 1.1, 0.4, z, { surf: 'stone' });
-  kit.box('#9aa0aa', 0.5, 0.02, 0.34, x0 + 0.5, 0.415, z, { surf: 'metal' });
+  commonsCounter(kit, R);
   kit.cyl('#9aa0aa', 0.012, 0.012, 0.2, x0 + 0.5, 0.42, z - 0.18, { seg: 6, surf: 'metal' });
   for (const hx of [x0 + 1.3, x0 + 1.65]) kit.cyl('#2f333b', 0.12, 0.12, 0.012, hx, 0.43, z, { seg: 16 });
   kit.cyl('#e8e6df', 0.07, 0.08, 0.16, x0 + 1.95, 0.43, z - 0.06, { seg: 12, surf: 'plastic' });
