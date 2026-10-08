@@ -13,6 +13,7 @@ import * as THREE from 'three';
 import { Kit } from '../dorms/kit.js';
 import { shell, roomLights, roomNav } from './shell.js';
 import { terminal, songTerminal } from './machines.js';
+import { drinkDispenser, karaokeDeskDetail, boothBench, karaokeBoothDetail } from './karaoke-detail.js';
 
 const C = {
   floor: '#4a4258',
@@ -80,9 +81,7 @@ export function buildKaraokeDesk() {
     [0.5, '#3fa3a8'],
     [1.1, '#e0c35a'],
   ]) {
-    kit.box('#e6e6e1', 0.42, 0.55, 0.36, mx, 0.45, bz - 0.04, { r: 0.02, surf: 'plastic' });
-    kit.box(col, 0.36, 0.16, 0.01, mx, 0.78, bz + 0.145, { opts: { emissive: col, emissiveIntensity: 0.35 } });
-    kit.box('#2f3640', 0.24, 0.02, 0.12, mx, 0.5, bz + 0.12);
+    drinkDispenser(kit, mx, bz - 0.04, col);
   }
   for (let i = 0; i < 4; i++)
     kit.cyl('#cfe3f0', 0.04, 0.035, 0.1, 1.55 + (i % 2) * 0.09, 0.45 + Math.floor(i / 2) * 0.1, bz + 0.02, {
@@ -114,14 +113,12 @@ export function buildKaraokeDesk() {
       S.z1 - 0.14 - i * 0.28,
       { surf: 'carpet' },
     );
-  kit.box(C.steel, 0.04, 0.04, 2.0, S.x1 + 0.03, 0.55, S.z1 - 1.0, { rx: -0.42, surf: 'metal' });
-  for (const z of [S.z1 - 0.05, S.z0 + 0.5])
-    kit.box(C.steel, 0.03, 0.5 + (S.z1 - z) * 0.42, 0.03, S.x1 + 0.03, 0, z, { surf: 'metal' });
   kit.box(C.accent, 0.5, 0.18, 0.02, (S.x0 + S.x1) / 2, 1.2, R.z0 + 0.02, {
     opts: { emissive: C.accent, emissiveIntensity: 0.5 },
   });
   nav.block(S.x0, S.x1 + 0.1, S.z0, S.z1 - 0.5);
   kit.box('#4d4458', 1.0, 0.012, 0.5, 0, 0.003, -0.35, { surf: 'carpet', cast: false });
+  karaokeDeskDetail(kit, R, S);
   kit.flush(root);
   const sun = roomLights(
     scene,
@@ -239,7 +236,7 @@ export function buildKaraokeBooth() {
   nav.block(-1.45, 1.45, R.z0, R.z0 + 0.45);
   // the benches along the west and east walls, and along the front wall's inside
   const bench = (x0, x1, z0, z1) => {
-    kit.box(C.bench, x1 - x0, 0.2, z1 - z0, (x0 + x1) / 2, 0, (z0 + z1) / 2, { r: 0.03, surf: 'fabric' });
+    boothBench(kit, x0, x1, z0, z1);
     nav.block(x0, x1, z0, z1);
   };
   bench(R.x0, R.x0 + 0.5, R.z0 + 0.6, -0.1);
@@ -279,6 +276,7 @@ export function buildKaraokeBooth() {
   // the mirror ball
   kit.cyl(C.steel, 0.005, 0.005, 0.3, -0.5, 1.1, -1.9, { seg: 4 });
   kit.add('#c9ccd1', new THREE.IcosahedronGeometry(0.1, 1).translate(-0.5, 1.05, -1.9), { surf: 'metal' });
+  karaokeBoothDetail(kit, R, root);
   kit.flush(root);
   const sun = roomLights(
     scene,
