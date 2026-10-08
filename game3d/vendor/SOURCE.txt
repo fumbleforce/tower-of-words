@@ -1,2 +1,3 @@
 three r186 (0.186.1) examples/jsm addons. postprocessing/ and shaders/ fetched from cdn.jsdelivr.net/npm/three@0.186.1 on 2026-09-27; math/ConvexHull.js copied from side/flat/vendor; SimplexNoise, RoundedBoxGeometry and BufferGeometryUtils copied from side/hd2d/vendor/three/addons. MIT licence (see ../../hd2d/vendor/three/LICENSE).
 controls/OrbitControls.js fetched from cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/controls/ on 2026-10-04 for viewer.html. MIT licence.
+Local patch (2026-10-08, #239): GTAOPass excludes Sprites from its normal/depth pass with the existing visibility cache, so transparent steam does not contribute solid rectangles to ambient occlusion. Normal scene rendering still draws the Sprites.
