@@ -4,6 +4,7 @@ import { shell, roomLights } from '../rooms/shell.js';
 import { signBoard } from '../plaza-buildings.js';
 import { R, DOOR, SEAT, SPOTS, bakeryNav } from './plan.js';
 import { bread, tray, tongs } from './models.js';
+import { bakeryDetail } from './detail.js';
 export function buildBakery() {
   const scene = new THREE.Scene(),
     root = new THREE.Group(),
@@ -60,11 +61,11 @@ export function buildBakery() {
   k.box('#3e4e53', 1.06, 0.41, 0.025, -1.3, 0.15, -3.814, { surf: 'glass' });
   k.box('#c1cac3', 0.87, 0.028, 0.08, -1.3, 0.57, -3.77, { surf: 'metal' });
   for (let n = 0; n < 4; n++)
-    k.box('#899b99', 0.59, 0.033, 0.33, -1.25, 0.76 + n * 0.055, -4.04, {
+    k.box('#899b99', 0.59, 0.033, 0.33, -1.25, 0.74 + n * 0.055, -4.04, {
       surf: 'metal',
     });
   for (const x of [1.1, 1.55])
-    k.box('#e2d3b5', 0.33, 0.48, 0.27, x, 0.75, -4.09, {
+    k.box('#e2d3b5', 0.33, 0.48, 0.27, x, 0.74, -4.09, {
       surf: 'fabric',
       r: 0.04,
     });
@@ -116,6 +117,7 @@ export function buildBakery() {
   });
   enclosure.add(glazing);
   for (const x of [-1.35, 1.35]) k.box('#506966', 0.42, 0.06, 0.17, x, 2.11, -4.19, { surf: 'metal' });
+  bakeryDetail(k, R);
   k.flush(root);
   for (let i = 0; i < 4; i++) {
     const t = tray();
