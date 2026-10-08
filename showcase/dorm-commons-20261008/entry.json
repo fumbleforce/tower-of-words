@@ -1,0 +1,623 @@
+{
+  "title": "Dorm common-room detail",
+  "date": "2026-10-08",
+  "by": "codex",
+  "caption": "Window recesses, kitchen fixtures, shared storage and a fridge approach that matches the room. Art seats and walking routes remain usable.",
+  "commit": [
+    "37ad760c",
+    "2fc86b25"
+  ],
+  "preview": "sink-fix-1366-01-entry",
+  "sections": [
+    {
+      "title": "Final kitchen, shelves and windows — desktop",
+      "caption": "Revised basin and shelf spacing.",
+      "images": [
+        {
+          "id": "sink-books-q1-1366-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-books-q1-1366/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "sink-books-q1-1366-detail-books",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-books-q1-1366/detail-books.png",
+          "caption": "detail books"
+        },
+        {
+          "id": "sink-books-q1-1366-detail-kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-books-q1-1366/detail-kitchen.png",
+          "caption": "detail kitchen"
+        },
+        {
+          "id": "sink-books-q1-1366-detail-storage",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-books-q1-1366/detail-storage.png",
+          "caption": "detail storage"
+        },
+        {
+          "id": "sink-books-q1-1366-detail-windows",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-books-q1-1366/detail-windows.png",
+          "caption": "detail windows"
+        }
+      ]
+    },
+    {
+      "title": "Final kitchen, shelves and windows — phone",
+      "caption": "Revised basin and shelf spacing.",
+      "images": [
+        {
+          "id": "sink-books-q1-390-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-books-q1-390/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "sink-books-q1-390-detail-books",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-books-q1-390/detail-books.png",
+          "caption": "detail books"
+        },
+        {
+          "id": "sink-books-q1-390-detail-kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-books-q1-390/detail-kitchen.png",
+          "caption": "detail kitchen"
+        },
+        {
+          "id": "sink-books-q1-390-detail-storage",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-books-q1-390/detail-storage.png",
+          "caption": "detail storage"
+        },
+        {
+          "id": "sink-books-q1-390-detail-windows",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-books-q1-390/detail-windows.png",
+          "caption": "detail windows"
+        }
+      ]
+    },
+    {
+      "title": "Final room walk — desktop",
+      "caption": "Revised basin and shelf spacing.",
+      "images": [
+        {
+          "id": "sink-fix-1366-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "sink-fix-1366-02-commons_books",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/02-commons_books.png",
+          "caption": "02 commons_books"
+        },
+        {
+          "id": "sink-fix-1366-03-commons_sofa",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/03-commons_sofa.png",
+          "caption": "03 commons_sofa"
+        },
+        {
+          "id": "sink-fix-1366-04-commons_kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/04-commons_kitchen.png",
+          "caption": "04 commons_kitchen"
+        },
+        {
+          "id": "sink-fix-1366-05-commons_fridge",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/05-commons_fridge.png",
+          "caption": "05 commons_fridge"
+        },
+        {
+          "id": "sink-fix-1366-06-commons_rack",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/06-commons_rack.png",
+          "caption": "06 commons_rack"
+        },
+        {
+          "id": "sink-fix-1366-07-commons_board",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/07-commons_board.png",
+          "caption": "07 commons_board"
+        },
+        {
+          "id": "sink-fix-1366-08-commons_printer",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/08-commons_printer.png",
+          "caption": "08 commons_printer"
+        },
+        {
+          "id": "sink-fix-1366-09-commons_table",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/09-commons_table.png",
+          "caption": "09 commons_table"
+        },
+        {
+          "id": "sink-fix-1366-10-commons_in",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/10-commons_in.png",
+          "caption": "10 commons_in"
+        },
+        {
+          "id": "sink-fix-1366-11-art-seated",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/11-art-seated.png",
+          "caption": "11 art seated"
+        },
+        {
+          "id": "sink-fix-1366-detail-kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/detail-kitchen.png",
+          "caption": "detail kitchen"
+        },
+        {
+          "id": "sink-fix-1366-detail-storage",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/detail-storage.png",
+          "caption": "detail storage"
+        },
+        {
+          "id": "sink-fix-1366-detail-windows",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-1366/detail-windows.png",
+          "caption": "detail windows"
+        }
+      ]
+    },
+    {
+      "title": "Final room walk — phone",
+      "caption": "Revised basin and shelf spacing.",
+      "images": [
+        {
+          "id": "sink-fix-390-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "sink-fix-390-02-commons_books",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/02-commons_books.png",
+          "caption": "02 commons_books"
+        },
+        {
+          "id": "sink-fix-390-03-commons_sofa",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/03-commons_sofa.png",
+          "caption": "03 commons_sofa"
+        },
+        {
+          "id": "sink-fix-390-04-commons_kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/04-commons_kitchen.png",
+          "caption": "04 commons_kitchen"
+        },
+        {
+          "id": "sink-fix-390-05-commons_fridge",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/05-commons_fridge.png",
+          "caption": "05 commons_fridge"
+        },
+        {
+          "id": "sink-fix-390-06-commons_rack",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/06-commons_rack.png",
+          "caption": "06 commons_rack"
+        },
+        {
+          "id": "sink-fix-390-07-commons_board",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/07-commons_board.png",
+          "caption": "07 commons_board"
+        },
+        {
+          "id": "sink-fix-390-08-commons_printer",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/08-commons_printer.png",
+          "caption": "08 commons_printer"
+        },
+        {
+          "id": "sink-fix-390-09-commons_table",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/09-commons_table.png",
+          "caption": "09 commons_table"
+        },
+        {
+          "id": "sink-fix-390-10-commons_in",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/10-commons_in.png",
+          "caption": "10 commons_in"
+        },
+        {
+          "id": "sink-fix-390-11-art-seated",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/11-art-seated.png",
+          "caption": "11 art seated"
+        },
+        {
+          "id": "sink-fix-390-detail-kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/detail-kitchen.png",
+          "caption": "detail kitchen"
+        },
+        {
+          "id": "sink-fix-390-detail-storage",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/detail-storage.png",
+          "caption": "detail storage"
+        },
+        {
+          "id": "sink-fix-390-detail-windows",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-fix-390/detail-windows.png",
+          "caption": "detail windows"
+        }
+      ]
+    },
+    {
+      "title": "Recessed sink detail — desktop",
+      "caption": "Revised basin and shelf spacing.",
+      "images": [
+        {
+          "id": "sink-q1-1366-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-q1-1366/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "sink-q1-1366-detail-kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-q1-1366/detail-kitchen.png",
+          "caption": "detail kitchen"
+        },
+        {
+          "id": "sink-q1-1366-detail-storage",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-q1-1366/detail-storage.png",
+          "caption": "detail storage"
+        },
+        {
+          "id": "sink-q1-1366-detail-windows",
+          "image": "game3d/shots/commons-detail-20261008/candidate/sink-q1-1366/detail-windows.png",
+          "caption": "detail windows"
+        }
+      ]
+    },
+    {
+      "title": "Discarded camera angles — desktop",
+      "caption": "Rejected diagnostic framing: camera safety kept following the player.",
+      "images": [
+        {
+          "id": "closeups-1366-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-1366/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "closeups-1366-detail-kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-1366/detail-kitchen.png",
+          "caption": "detail kitchen"
+        },
+        {
+          "id": "closeups-1366-detail-storage",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-1366/detail-storage.png",
+          "caption": "detail storage"
+        },
+        {
+          "id": "closeups-1366-detail-windows",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-1366/detail-windows.png",
+          "caption": "detail windows"
+        }
+      ]
+    },
+    {
+      "title": "Discarded camera angles — phone",
+      "caption": "Rejected diagnostic framing: camera safety kept following the player.",
+      "images": [
+        {
+          "id": "closeups-390-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-390/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "closeups-390-detail-kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-390/detail-kitchen.png",
+          "caption": "detail kitchen"
+        },
+        {
+          "id": "closeups-390-detail-storage",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-390/detail-storage.png",
+          "caption": "detail storage"
+        },
+        {
+          "id": "closeups-390-detail-windows",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-390/detail-windows.png",
+          "caption": "detail windows"
+        }
+      ]
+    },
+    {
+      "title": "Earlier detail angles — desktop",
+      "caption": "Retained earlier attempt; revised basin and shelf spacing appear above.",
+      "images": [
+        {
+          "id": "closeups-corrected-1366-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-corrected-1366/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "closeups-corrected-1366-detail-kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-corrected-1366/detail-kitchen.png",
+          "caption": "detail kitchen"
+        },
+        {
+          "id": "closeups-corrected-1366-detail-storage",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-corrected-1366/detail-storage.png",
+          "caption": "detail storage"
+        },
+        {
+          "id": "closeups-corrected-1366-detail-windows",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-corrected-1366/detail-windows.png",
+          "caption": "detail windows"
+        }
+      ]
+    },
+    {
+      "title": "Earlier detail angles — phone",
+      "caption": "Retained earlier attempt; revised basin and shelf spacing appear above.",
+      "images": [
+        {
+          "id": "closeups-corrected-390-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-corrected-390/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "closeups-corrected-390-detail-kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-corrected-390/detail-kitchen.png",
+          "caption": "detail kitchen"
+        },
+        {
+          "id": "closeups-corrected-390-detail-storage",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-corrected-390/detail-storage.png",
+          "caption": "detail storage"
+        },
+        {
+          "id": "closeups-corrected-390-detail-windows",
+          "image": "game3d/shots/commons-detail-20261008/candidate/closeups-corrected-390/detail-windows.png",
+          "caption": "detail windows"
+        }
+      ]
+    },
+    {
+      "title": "Earlier room walk — desktop",
+      "caption": "Retained earlier attempt; revised basin and shelf spacing appear above.",
+      "images": [
+        {
+          "id": "final-1366-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "final-1366-02-commons_books",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/02-commons_books.png",
+          "caption": "02 commons_books"
+        },
+        {
+          "id": "final-1366-03-commons_sofa",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/03-commons_sofa.png",
+          "caption": "03 commons_sofa"
+        },
+        {
+          "id": "final-1366-04-commons_kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/04-commons_kitchen.png",
+          "caption": "04 commons_kitchen"
+        },
+        {
+          "id": "final-1366-05-commons_fridge",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/05-commons_fridge.png",
+          "caption": "05 commons_fridge"
+        },
+        {
+          "id": "final-1366-06-commons_rack",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/06-commons_rack.png",
+          "caption": "06 commons_rack"
+        },
+        {
+          "id": "final-1366-07-commons_board",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/07-commons_board.png",
+          "caption": "07 commons_board"
+        },
+        {
+          "id": "final-1366-08-commons_printer",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/08-commons_printer.png",
+          "caption": "08 commons_printer"
+        },
+        {
+          "id": "final-1366-09-commons_table",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/09-commons_table.png",
+          "caption": "09 commons_table"
+        },
+        {
+          "id": "final-1366-10-commons_in",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/10-commons_in.png",
+          "caption": "10 commons_in"
+        },
+        {
+          "id": "final-1366-11-art-seated",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-1366/11-art-seated.png",
+          "caption": "11 art seated"
+        }
+      ]
+    },
+    {
+      "title": "Earlier room walk — phone",
+      "caption": "Retained earlier attempt; revised basin and shelf spacing appear above.",
+      "images": [
+        {
+          "id": "final-390-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "final-390-02-commons_books",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/02-commons_books.png",
+          "caption": "02 commons_books"
+        },
+        {
+          "id": "final-390-03-commons_sofa",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/03-commons_sofa.png",
+          "caption": "03 commons_sofa"
+        },
+        {
+          "id": "final-390-04-commons_kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/04-commons_kitchen.png",
+          "caption": "04 commons_kitchen"
+        },
+        {
+          "id": "final-390-05-commons_fridge",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/05-commons_fridge.png",
+          "caption": "05 commons_fridge"
+        },
+        {
+          "id": "final-390-06-commons_rack",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/06-commons_rack.png",
+          "caption": "06 commons_rack"
+        },
+        {
+          "id": "final-390-07-commons_board",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/07-commons_board.png",
+          "caption": "07 commons_board"
+        },
+        {
+          "id": "final-390-08-commons_printer",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/08-commons_printer.png",
+          "caption": "08 commons_printer"
+        },
+        {
+          "id": "final-390-09-commons_table",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/09-commons_table.png",
+          "caption": "09 commons_table"
+        },
+        {
+          "id": "final-390-10-commons_in",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/10-commons_in.png",
+          "caption": "10 commons_in"
+        },
+        {
+          "id": "final-390-11-art-seated",
+          "image": "game3d/shots/commons-detail-20261008/candidate/final-390/11-art-seated.png",
+          "caption": "11 art seated"
+        }
+      ]
+    },
+    {
+      "title": "First attempt — desktop",
+      "caption": "Retained earlier attempt; revised basin and shelf spacing appear above.",
+      "images": [
+        {
+          "id": "first-1366-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "first-1366-02-commons_books",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/02-commons_books.png",
+          "caption": "02 commons_books"
+        },
+        {
+          "id": "first-1366-03-commons_sofa",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/03-commons_sofa.png",
+          "caption": "03 commons_sofa"
+        },
+        {
+          "id": "first-1366-04-commons_kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/04-commons_kitchen.png",
+          "caption": "04 commons_kitchen"
+        },
+        {
+          "id": "first-1366-05-commons_fridge",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/05-commons_fridge.png",
+          "caption": "05 commons_fridge"
+        },
+        {
+          "id": "first-1366-06-commons_rack",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/06-commons_rack.png",
+          "caption": "06 commons_rack"
+        },
+        {
+          "id": "first-1366-07-commons_board",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/07-commons_board.png",
+          "caption": "07 commons_board"
+        },
+        {
+          "id": "first-1366-08-commons_printer",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/08-commons_printer.png",
+          "caption": "08 commons_printer"
+        },
+        {
+          "id": "first-1366-09-commons_table",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/09-commons_table.png",
+          "caption": "09 commons_table"
+        },
+        {
+          "id": "first-1366-10-commons_in",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/10-commons_in.png",
+          "caption": "10 commons_in"
+        },
+        {
+          "id": "first-1366-11-art-seated",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-1366/11-art-seated.png",
+          "caption": "11 art seated"
+        }
+      ]
+    },
+    {
+      "title": "First attempt — phone",
+      "caption": "Retained earlier attempt; revised basin and shelf spacing appear above.",
+      "images": [
+        {
+          "id": "first-390-01-entry",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/01-entry.png",
+          "caption": "01 entry"
+        },
+        {
+          "id": "first-390-02-commons_books",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/02-commons_books.png",
+          "caption": "02 commons_books"
+        },
+        {
+          "id": "first-390-03-commons_sofa",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/03-commons_sofa.png",
+          "caption": "03 commons_sofa"
+        },
+        {
+          "id": "first-390-04-commons_kitchen",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/04-commons_kitchen.png",
+          "caption": "04 commons_kitchen"
+        },
+        {
+          "id": "first-390-05-commons_fridge",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/05-commons_fridge.png",
+          "caption": "05 commons_fridge"
+        },
+        {
+          "id": "first-390-06-commons_rack",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/06-commons_rack.png",
+          "caption": "06 commons_rack"
+        },
+        {
+          "id": "first-390-07-commons_board",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/07-commons_board.png",
+          "caption": "07 commons_board"
+        },
+        {
+          "id": "first-390-08-commons_printer",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/08-commons_printer.png",
+          "caption": "08 commons_printer"
+        },
+        {
+          "id": "first-390-09-commons_table",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/09-commons_table.png",
+          "caption": "09 commons_table"
+        },
+        {
+          "id": "first-390-10-commons_in",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/10-commons_in.png",
+          "caption": "10 commons_in"
+        },
+        {
+          "id": "first-390-11-art-seated",
+          "image": "game3d/shots/commons-detail-20261008/candidate/first-390/11-art-seated.png",
+          "caption": "11 art seated"
+        }
+      ]
+    },
+    {
+      "title": "baseline",
+      "caption": "Common room before this detail pass.",
+      "images": [
+        {
+          "id": "baseline-1366",
+          "image": "game3d/shots/commons-detail-20261008/baseline/1366.png",
+          "caption": "1366"
+        },
+        {
+          "id": "baseline-390",
+          "image": "game3d/shots/commons-detail-20261008/baseline/390.png",
+          "caption": "390"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Common room",
+      "href": "game3d/?day=3&place=dorm_commons"
+    }
+  ]
+}
