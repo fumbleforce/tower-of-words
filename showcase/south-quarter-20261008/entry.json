@@ -1,0 +1,1422 @@
+{
+  "title": "Southern quarter street and campus views",
+  "date": "2026-10-08",
+  "updated": "2026-10-08T05:37:09+02:00",
+  "by": "codex",
+  "caption": "New planting reaches the tower cross street, with a clear junction, matching map and camera views that keep Eric visible.",
+  "commit": "4b09eeb14a5d4fae9b062b7c8ed95aec9a479de1",
+  "sections": [
+    {
+      "title": "Southern quarter street",
+      "caption": "Planting continues from the back lane to the tower cross street. The street opening is clear, and its connecting path appears on the map.",
+      "images": [
+        {
+          "id": "3e651278e8c8ace6",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final-2560/2560-map-south-quarter.png",
+          "caption": "Wide desktop map south quarter"
+        },
+        {
+          "id": "603a28baa840a9e3",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final-2560/2560-overview-morning-junction.png",
+          "caption": "Wide desktop overview morning junction"
+        },
+        {
+          "id": "47159483273c36e5",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final-2560/2560-overview-morning-southend.png",
+          "caption": "Wide desktop overview morning southern opening"
+        }
+      ]
+    },
+    {
+      "title": "After work",
+      "caption": "Phone and desktop views after entering campus in the evening.",
+      "images": [
+        {
+          "id": "8d5e02d8e59a7c11",
+          "image": "game3d/shots/south-quarter-20261008/candidate-evening-entry-r4/1366-follow-evening-junction.png",
+          "caption": "Desktop third person evening junction"
+        },
+        {
+          "id": "486a984020808b91",
+          "image": "game3d/shots/south-quarter-20261008/candidate-evening-entry-r4/1366-follow-evening-southend.png",
+          "caption": "Desktop third person evening southern opening"
+        },
+        {
+          "id": "9c233893b6e5406b",
+          "image": "game3d/shots/south-quarter-20261008/candidate-evening-entry-r4/1366-overview-evening-junction.png",
+          "caption": "Desktop overview evening junction"
+        },
+        {
+          "id": "a1fa22c2fdbd338b",
+          "image": "game3d/shots/south-quarter-20261008/candidate-evening-entry-r4/1366-overview-evening-southend.png",
+          "caption": "Desktop overview evening southern opening"
+        },
+        {
+          "id": "fa9272afe9ce5d0f",
+          "image": "game3d/shots/south-quarter-20261008/candidate-evening-entry-r4/390-overview-evening-junction.png",
+          "caption": "Phone overview evening junction"
+        },
+        {
+          "id": "95e221c68730b3c0",
+          "image": "game3d/shots/south-quarter-20261008/candidate-evening-entry-r4/390-overview-evening-southend.png",
+          "caption": "Phone overview evening southern opening"
+        },
+        {
+          "id": "d23c18b3113d3837",
+          "image": "game3d/shots/south-quarter-20261008/candidate-evening-entry-r4-2560/2560-overview-evening-junction.png",
+          "caption": "Wide desktop overview evening junction"
+        },
+        {
+          "id": "f2a6db23f8be140b",
+          "image": "game3d/shots/south-quarter-20261008/candidate-evening-entry-r4-2560/2560-overview-evening-southend.png",
+          "caption": "Wide desktop overview evening southern opening"
+        }
+      ]
+    },
+    {
+      "title": "Phone and desktop",
+      "caption": "The same junction and southern opening in the overview and third-person views.",
+      "images": [
+        {
+          "id": "01b5935d5c031eeb",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/1366-follow-morning-junction.png",
+          "caption": "Desktop third person morning junction"
+        },
+        {
+          "id": "aa6185de88784718",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/1366-follow-morning-southend.png",
+          "caption": "Desktop third person morning southern opening"
+        },
+        {
+          "id": "73b9b797d640d7dd",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/1366-overview-morning-junction.png",
+          "caption": "Desktop overview morning junction"
+        },
+        {
+          "id": "2e18da4de17ec3a3",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/1366-overview-morning-southend.png",
+          "caption": "Desktop overview morning southern opening"
+        },
+        {
+          "id": "b0683e7d3ba0d2ba",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/390-overview-morning-junction.png",
+          "caption": "Phone overview morning junction"
+        },
+        {
+          "id": "4458b6082739da06",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/390-overview-morning-southend.png",
+          "caption": "Phone overview morning southern opening"
+        }
+      ]
+    },
+    {
+      "title": "Walking through the district",
+      "caption": "Office quarter, campus, the tower cross street and the forecourt, then back.",
+      "images": [
+        {
+          "id": "9cdcf9c95dcdaeed",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-back-lane.png",
+          "caption": "Desktop route back lane"
+        },
+        {
+          "id": "8e112b98480164b6",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-campus-arrival.png",
+          "caption": "Desktop route campus arrival"
+        },
+        {
+          "id": "297c8cda93503292",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-campus-east.png",
+          "caption": "Desktop route campus east"
+        },
+        {
+          "id": "66032094b200d950",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-campus-from-forecourt.png",
+          "caption": "Desktop route campus from forecourt"
+        },
+        {
+          "id": "a18226269f2b2702",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-cross-return.png",
+          "caption": "Desktop route cross return"
+        },
+        {
+          "id": "2b1f503bbc9434ca",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-cross-street.png",
+          "caption": "Desktop route cross street"
+        },
+        {
+          "id": "5a449af60bddb1a6",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-cross-west.png",
+          "caption": "Desktop route cross west"
+        },
+        {
+          "id": "e18abfaeeb7d16ac",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-forecourt-arrival.png",
+          "caption": "Desktop route forecourt arrival"
+        },
+        {
+          "id": "6278f4136bb43aab",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-junction.png",
+          "caption": "Desktop route junction"
+        },
+        {
+          "id": "cfa2ce5b7537b600",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-office-return.png",
+          "caption": "Desktop route office return"
+        },
+        {
+          "id": "211eb51c50d420f9",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-office-start.png",
+          "caption": "Desktop route office start"
+        },
+        {
+          "id": "4b6ae75139a9c4ef",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-south-end.png",
+          "caption": "Desktop route south end"
+        },
+        {
+          "id": "1813eb0a8db3aedb",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-south-junction.png",
+          "caption": "Desktop route south junction"
+        },
+        {
+          "id": "2a8fee83e84f68b9",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-1366/1366-route-south-mid.png",
+          "caption": "Desktop route south mid"
+        },
+        {
+          "id": "4b368ab812eccb27",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-back-lane.png",
+          "caption": "Phone route back lane"
+        },
+        {
+          "id": "848cd838c9773e32",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-campus-arrival.png",
+          "caption": "Phone route campus arrival"
+        },
+        {
+          "id": "545d59211971d405",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-campus-east.png",
+          "caption": "Phone route campus east"
+        },
+        {
+          "id": "42f49eacc96a7e93",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-campus-from-forecourt.png",
+          "caption": "Phone route campus from forecourt"
+        },
+        {
+          "id": "bb4a5b2b68df87c9",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-cross-return.png",
+          "caption": "Phone route cross return"
+        },
+        {
+          "id": "4f9253ecd5439576",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-cross-street.png",
+          "caption": "Phone route cross street"
+        },
+        {
+          "id": "4e77c4eba8c12f31",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-cross-west.png",
+          "caption": "Phone route cross west"
+        },
+        {
+          "id": "8824f140c9f025db",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-forecourt-arrival.png",
+          "caption": "Phone route forecourt arrival"
+        },
+        {
+          "id": "3e93fdab0d3bcdf7",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-junction.png",
+          "caption": "Phone route junction"
+        },
+        {
+          "id": "2b9e41c07becd5a1",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-office-return.png",
+          "caption": "Phone route office return"
+        },
+        {
+          "id": "f2c95f485bff3fa2",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-office-start.png",
+          "caption": "Phone route office start"
+        },
+        {
+          "id": "42940a26648b7767",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-south-end.png",
+          "caption": "Phone route south end"
+        },
+        {
+          "id": "d7a3a618fdbc777c",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-south-junction.png",
+          "caption": "Phone route south junction"
+        },
+        {
+          "id": "25135b5ddea03082",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-390/390-route-south-mid.png",
+          "caption": "Phone route south mid"
+        }
+      ]
+    },
+    {
+      "title": "Third-person route",
+      "caption": "Walking the same loop. At the wall the existing close-camera fade hides Eric; turning with Mouse look restores him.",
+      "images": [
+        {
+          "id": "1caab3bff9c3b501",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-back-lane.png",
+          "caption": "Desktop route third person back lane"
+        },
+        {
+          "id": "074e70b4707aa917",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-campus-arrival.png",
+          "caption": "Desktop route third person campus arrival"
+        },
+        {
+          "id": "c22cd77e84bce8a6",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-campus-east.png",
+          "caption": "Desktop route third person campus east"
+        },
+        {
+          "id": "a40ab4b322b3f481",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-campus-from-forecourt.png",
+          "caption": "Desktop route third person campus from forecourt"
+        },
+        {
+          "id": "12267f802092603a",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-cross-return-mouse-look.png",
+          "caption": "Desktop route third person cross return after turning the view"
+        },
+        {
+          "id": "c4da65d1592adb03",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-cross-return.png",
+          "caption": "Desktop route third person cross return"
+        },
+        {
+          "id": "47dc767439dba5d0",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-cross-street.png",
+          "caption": "Desktop route third person cross street"
+        },
+        {
+          "id": "438e1fbf8f24bb44",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-cross-west.png",
+          "caption": "Desktop route third person cross west"
+        },
+        {
+          "id": "e26b9e47da9cab29",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-forecourt-arrival.png",
+          "caption": "Desktop route third person forecourt arrival"
+        },
+        {
+          "id": "73e74f979df2c2b5",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-junction.png",
+          "caption": "Desktop route third person junction"
+        },
+        {
+          "id": "747866998af5b71f",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-office-return.png",
+          "caption": "Desktop route third person office return"
+        },
+        {
+          "id": "4dd30d88bfa99b53",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-office-start.png",
+          "caption": "Desktop route third person office start"
+        },
+        {
+          "id": "542bd139d20cd432",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-south-end.png",
+          "caption": "Desktop route third person south end"
+        },
+        {
+          "id": "30fabbbff2a9882a",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-south-junction.png",
+          "caption": "Desktop route third person south junction"
+        },
+        {
+          "id": "377cbcf922f84373",
+          "image": "game3d/shots/south-quarter-20261008/final-v2-follow/1366-route-follow-south-mid.png",
+          "caption": "Desktop route third person south mid"
+        }
+      ]
+    },
+    {
+      "title": "Continue from a save",
+      "caption": "Restoring the southern campus and western forecourt positions on phone and desktop. Immediate frames show the title crossfade; settled frames show the playable view.",
+      "images": [
+        {
+          "id": "7383040f1607e35f",
+          "image": "game3d/shots/south-quarter-20261008/candidate-continue-r1/1366-campus-continue-immediate.png",
+          "caption": "Desktop campus continue immediate"
+        },
+        {
+          "id": "357759762a90bc3f",
+          "image": "game3d/shots/south-quarter-20261008/candidate-continue-r1/1366-campus-continue-settled.png",
+          "caption": "Desktop campus continue settled"
+        },
+        {
+          "id": "29dd7378b33b7ee9",
+          "image": "game3d/shots/south-quarter-20261008/candidate-continue-r1/1366-forecourt-continue-immediate.png",
+          "caption": "Desktop forecourt continue immediate"
+        },
+        {
+          "id": "eaeb9f01290a7619",
+          "image": "game3d/shots/south-quarter-20261008/candidate-continue-r1/1366-forecourt-continue-settled.png",
+          "caption": "Desktop forecourt continue settled"
+        },
+        {
+          "id": "75ee4561509f232d",
+          "image": "game3d/shots/south-quarter-20261008/candidate-continue-r1/390-campus-continue-immediate.png",
+          "caption": "Phone campus continue immediate"
+        },
+        {
+          "id": "a33779fb81ae7956",
+          "image": "game3d/shots/south-quarter-20261008/candidate-continue-r1/390-campus-continue-settled.png",
+          "caption": "Phone campus continue settled"
+        },
+        {
+          "id": "e657346785274d10",
+          "image": "game3d/shots/south-quarter-20261008/candidate-continue-r1/390-forecourt-continue-immediate.png",
+          "caption": "Phone forecourt continue immediate"
+        },
+        {
+          "id": "a5a9a347aa690ee0",
+          "image": "game3d/shots/south-quarter-20261008/candidate-continue-r1/390-forecourt-continue-settled.png",
+          "caption": "Phone forecourt continue settled"
+        }
+      ]
+    },
+    {
+      "title": "Completed day test",
+      "caption": "The full first-day route passed at both sizes, including the lift return.",
+      "images": [
+        {
+          "id": "b54d5f1a50d421eb",
+          "image": "game3d/shots/south-quarter-20261008/fast-final/2026-10-08T03-18-56-513Z-1764499/390x844.png",
+          "caption": "Phonex844"
+        },
+        {
+          "id": "23fbb25dd5df311e",
+          "image": "game3d/shots/south-quarter-20261008/fast-final/2026-10-08T03-18-57-708Z-1764530/1366x860.png",
+          "caption": "Desktopx860"
+        }
+      ]
+    },
+    {
+      "title": "Earlier planting attempts",
+      "caption": "Retained attempts before the smaller clusters and wider soil gaps.",
+      "images": [
+        {
+          "id": "15a9eca562f72d3a",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/1366-follow-evening-junction.png",
+          "caption": "Desktop third person evening junction"
+        },
+        {
+          "id": "e288f8480c7926d8",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/1366-follow-evening-southend.png",
+          "caption": "Desktop third person evening southern opening"
+        },
+        {
+          "id": "f97aa2a7c6a91ccf",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/1366-follow-morning-junction.png",
+          "caption": "Desktop third person morning junction"
+        },
+        {
+          "id": "c4a79841389b5b75",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/1366-follow-morning-southend.png",
+          "caption": "Desktop third person morning southern opening"
+        },
+        {
+          "id": "1e2e01e736d35542",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/1366-overview-evening-junction.png",
+          "caption": "Desktop overview evening junction"
+        },
+        {
+          "id": "38fc40e0489e3c72",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/1366-overview-evening-southend.png",
+          "caption": "Desktop overview evening southern opening"
+        },
+        {
+          "id": "165411b05a368b09",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/1366-overview-morning-junction.png",
+          "caption": "Desktop overview morning junction"
+        },
+        {
+          "id": "f8881e5b3fb82e67",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/1366-overview-morning-southend.png",
+          "caption": "Desktop overview morning southern opening"
+        },
+        {
+          "id": "aaf9f0cf3fa01f0f",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/390-overview-evening-junction.png",
+          "caption": "Phone overview evening junction"
+        },
+        {
+          "id": "34a607c5c49193a3",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/390-overview-evening-southend.png",
+          "caption": "Phone overview evening southern opening"
+        },
+        {
+          "id": "5a2de98371408d4d",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/390-overview-morning-junction.png",
+          "caption": "Phone overview morning junction"
+        },
+        {
+          "id": "8ae3a3fed2b71be4",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r2/390-overview-morning-southend.png",
+          "caption": "Phone overview morning southern opening"
+        },
+        {
+          "id": "6be14c2fa109317d",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/1366-follow-evening-junction.png",
+          "caption": "Desktop third person evening junction"
+        },
+        {
+          "id": "5133f6e0439af731",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/1366-follow-evening-southend.png",
+          "caption": "Desktop third person evening southern opening"
+        },
+        {
+          "id": "e84ce914abf793af",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/1366-follow-morning-junction.png",
+          "caption": "Desktop third person morning junction"
+        },
+        {
+          "id": "1deae9b0b853befe",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/1366-follow-morning-southend.png",
+          "caption": "Desktop third person morning southern opening"
+        },
+        {
+          "id": "f31c5b9f8ec74ce3",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/1366-overview-evening-junction.png",
+          "caption": "Desktop overview evening junction"
+        },
+        {
+          "id": "ec00f7d82be86f99",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/1366-overview-evening-southend.png",
+          "caption": "Desktop overview evening southern opening"
+        },
+        {
+          "id": "ebfac987972a8465",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/1366-overview-morning-junction.png",
+          "caption": "Desktop overview morning junction"
+        },
+        {
+          "id": "f2905056517d1417",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/1366-overview-morning-southend.png",
+          "caption": "Desktop overview morning southern opening"
+        },
+        {
+          "id": "794d60a1f182dcce",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/390-overview-evening-junction.png",
+          "caption": "Phone overview evening junction"
+        },
+        {
+          "id": "c4610416c33e9d98",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/390-overview-evening-southend.png",
+          "caption": "Phone overview evening southern opening"
+        },
+        {
+          "id": "6bb3e46acd654def",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/390-overview-morning-junction.png",
+          "caption": "Phone overview morning junction"
+        },
+        {
+          "id": "ca5883ada62a175b",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r3/390-overview-morning-southend.png",
+          "caption": "Phone overview morning southern opening"
+        },
+        {
+          "id": "d281a7c548fc2f76",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r4-2560/2560-map-south-quarter.png",
+          "caption": "Wide desktop map south quarter"
+        },
+        {
+          "id": "6977ccc94ff08cd5",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r4-2560/2560-overview-evening-junction.png",
+          "caption": "Wide desktop overview evening junction"
+        },
+        {
+          "id": "50891e58c352aeac",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r4-2560/2560-overview-evening-southend.png",
+          "caption": "Wide desktop overview evening southern opening"
+        },
+        {
+          "id": "f09adb49937d0fd2",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r4-2560/2560-overview-morning-junction.png",
+          "caption": "Wide desktop overview morning junction"
+        },
+        {
+          "id": "b87463072b2308e9",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r4-2560/2560-overview-morning-southend.png",
+          "caption": "Wide desktop overview morning southern opening"
+        },
+        {
+          "id": "445c62515cd73689",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r5/1366-follow-morning-junction.png",
+          "caption": "Desktop third person morning junction"
+        },
+        {
+          "id": "9d444f5df2768837",
+          "image": "game3d/shots/south-quarter-20261008/candidate-r5/1366-follow-morning-southmid.png",
+          "caption": "Desktop third person morning middle of the southern beds"
+        }
+      ]
+    },
+    {
+      "title": "Earlier route checks",
+      "caption": "These attempts exposed the wing hiding Eric on the return route. The final route is above.",
+      "images": [
+        {
+          "id": "d0f7b56db42393a8",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-back-lane.png",
+          "caption": "Desktop route back lane"
+        },
+        {
+          "id": "bdedb6ad0c2a65ea",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-campus-arrival.png",
+          "caption": "Desktop route campus arrival"
+        },
+        {
+          "id": "bf0211af9c8c3ce1",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-campus-east.png",
+          "caption": "Desktop route campus east"
+        },
+        {
+          "id": "7d68322b97d2f65c",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-cross-return.png",
+          "caption": "Desktop route cross return"
+        },
+        {
+          "id": "cac06654df301118",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-cross-street.png",
+          "caption": "Desktop route cross street"
+        },
+        {
+          "id": "a91217d1e99bc0de",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-cross-west.png",
+          "caption": "Desktop route cross west"
+        },
+        {
+          "id": "56dcd050f9c432a4",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-junction.png",
+          "caption": "Desktop route junction"
+        },
+        {
+          "id": "001402f1e68a97ac",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-office-return.png",
+          "caption": "Desktop route office return"
+        },
+        {
+          "id": "ffc28bb65aea1d8a",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-office-start.png",
+          "caption": "Desktop route office start"
+        },
+        {
+          "id": "5fbae8e6901a94a2",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-south-end.png",
+          "caption": "Desktop route south end"
+        },
+        {
+          "id": "8367840e21e283e2",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-south-junction.png",
+          "caption": "Desktop route south junction"
+        },
+        {
+          "id": "bffdc45c026cf811",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r2-1366/1366-route-south-mid.png",
+          "caption": "Desktop route south mid"
+        },
+        {
+          "id": "2a357df843145017",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-back-lane.png",
+          "caption": "Phone route back lane"
+        },
+        {
+          "id": "05141a99bdae66d2",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-campus-arrival.png",
+          "caption": "Phone route campus arrival"
+        },
+        {
+          "id": "c9c2490229004b6a",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-campus-east.png",
+          "caption": "Phone route campus east"
+        },
+        {
+          "id": "e6c75860f8fcde93",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-cross-return.png",
+          "caption": "Phone route cross return"
+        },
+        {
+          "id": "bb667aa66119bb7d",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-cross-street.png",
+          "caption": "Phone route cross street"
+        },
+        {
+          "id": "8cadd114df3400ae",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-cross-west.png",
+          "caption": "Phone route cross west"
+        },
+        {
+          "id": "3789ded7f3d5e814",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-junction.png",
+          "caption": "Phone route junction"
+        },
+        {
+          "id": "25bca674a8146fd3",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-office-return.png",
+          "caption": "Phone route office return"
+        },
+        {
+          "id": "2e2479fb7dac108c",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-office-start.png",
+          "caption": "Phone route office start"
+        },
+        {
+          "id": "b051600b8050ee31",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-south-end.png",
+          "caption": "Phone route south end"
+        },
+        {
+          "id": "b7e8c00877a7a05d",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-south-junction.png",
+          "caption": "Phone route south junction"
+        },
+        {
+          "id": "16981a0931705ffe",
+          "image": "game3d/shots/south-quarter-20261008/camera-route-r3-390/390-route-south-mid.png",
+          "caption": "Phone route south mid"
+        },
+        {
+          "id": "a19c61668addbf83",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-back-lane.png",
+          "caption": "Desktop route back lane"
+        },
+        {
+          "id": "f22f833415989b5b",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-campus-arrival.png",
+          "caption": "Desktop route campus arrival"
+        },
+        {
+          "id": "a868e57a5ea24e57",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-campus-east.png",
+          "caption": "Desktop route campus east"
+        },
+        {
+          "id": "24e2e3687c16170e",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-campus-from-forecourt.png",
+          "caption": "Desktop route campus from forecourt"
+        },
+        {
+          "id": "e6111675b29784d1",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-cross-return.png",
+          "caption": "Desktop route cross return"
+        },
+        {
+          "id": "217daa517b177386",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-cross-street.png",
+          "caption": "Desktop route cross street"
+        },
+        {
+          "id": "1c2b8eef7da53993",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-cross-west.png",
+          "caption": "Desktop route cross west"
+        },
+        {
+          "id": "c5490d9bc3e43766",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-forecourt-arrival.png",
+          "caption": "Desktop route forecourt arrival"
+        },
+        {
+          "id": "7a9cee6c71047afd",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-junction.png",
+          "caption": "Desktop route junction"
+        },
+        {
+          "id": "bc1e8ae3e6f626cd",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-office-return.png",
+          "caption": "Desktop route office return"
+        },
+        {
+          "id": "1b824a4103a8efcf",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-office-start.png",
+          "caption": "Desktop route office start"
+        },
+        {
+          "id": "726162ebd2cf3e97",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-south-end.png",
+          "caption": "Desktop route south end"
+        },
+        {
+          "id": "579ac6e0e34abb27",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-south-junction.png",
+          "caption": "Desktop route south junction"
+        },
+        {
+          "id": "d9f903361d3f2ce1",
+          "image": "game3d/shots/south-quarter-20261008/final-route-1366/1366-route-south-mid.png",
+          "caption": "Desktop route south mid"
+        },
+        {
+          "id": "51ade807e85f66fd",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-back-lane.png",
+          "caption": "Phone route back lane"
+        },
+        {
+          "id": "c0c9646649fd8274",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-campus-arrival.png",
+          "caption": "Phone route campus arrival"
+        },
+        {
+          "id": "a80c5d780c560c3e",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-campus-east.png",
+          "caption": "Phone route campus east"
+        },
+        {
+          "id": "f613aec50d93dd9d",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-campus-from-forecourt.png",
+          "caption": "Phone route campus from forecourt"
+        },
+        {
+          "id": "66fd500a0680ed60",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-cross-return.png",
+          "caption": "Phone route cross return"
+        },
+        {
+          "id": "bd7660646e33fb89",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-cross-street.png",
+          "caption": "Phone route cross street"
+        },
+        {
+          "id": "322d591bcd5ab826",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-cross-west.png",
+          "caption": "Phone route cross west"
+        },
+        {
+          "id": "0f2c248eab31f647",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-forecourt-arrival.png",
+          "caption": "Phone route forecourt arrival"
+        },
+        {
+          "id": "698b257e7eade36a",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-junction.png",
+          "caption": "Phone route junction"
+        },
+        {
+          "id": "d5dcf1cfaefd52be",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-office-return.png",
+          "caption": "Phone route office return"
+        },
+        {
+          "id": "b0144d3f89e97a39",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-office-start.png",
+          "caption": "Phone route office start"
+        },
+        {
+          "id": "e46a880c63b5ffc9",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-south-end.png",
+          "caption": "Phone route south end"
+        },
+        {
+          "id": "42577810b8153eb3",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-south-junction.png",
+          "caption": "Phone route south junction"
+        },
+        {
+          "id": "b7ff7d719b32a99a",
+          "image": "game3d/shots/south-quarter-20261008/final-route-390/390-route-south-mid.png",
+          "caption": "Phone route south mid"
+        },
+        {
+          "id": "844ca017e4eb825d",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-back-lane.png",
+          "caption": "Desktop route third person back lane"
+        },
+        {
+          "id": "2282dce62ac98ea9",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-campus-arrival.png",
+          "caption": "Desktop route third person campus arrival"
+        },
+        {
+          "id": "b0f2dbf5f1661164",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-campus-east.png",
+          "caption": "Desktop route third person campus east"
+        },
+        {
+          "id": "d084e8eedc5496ad",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-campus-from-forecourt.png",
+          "caption": "Desktop route third person campus from forecourt"
+        },
+        {
+          "id": "92c3979e9213797e",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-cross-return.png",
+          "caption": "Desktop route third person cross return"
+        },
+        {
+          "id": "c927842e96064eb0",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-cross-street.png",
+          "caption": "Desktop route third person cross street"
+        },
+        {
+          "id": "26edad174e1eae94",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-cross-west.png",
+          "caption": "Desktop route third person cross west"
+        },
+        {
+          "id": "97854abf2c792e59",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-forecourt-arrival.png",
+          "caption": "Desktop route third person forecourt arrival"
+        },
+        {
+          "id": "79ba0329a951e213",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-junction.png",
+          "caption": "Desktop route third person junction"
+        },
+        {
+          "id": "6217b40e6b8d6e46",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-office-return.png",
+          "caption": "Desktop route third person office return"
+        },
+        {
+          "id": "eddd9d8298654274",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-office-start.png",
+          "caption": "Desktop route third person office start"
+        },
+        {
+          "id": "e4523d8ce7206279",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-south-end.png",
+          "caption": "Desktop route third person south end"
+        },
+        {
+          "id": "86ec3f2a3b030c46",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-south-junction.png",
+          "caption": "Desktop route third person south junction"
+        },
+        {
+          "id": "4f09ec58fc89417f",
+          "image": "game3d/shots/south-quarter-20261008/final-route-follow/1366-route-follow-south-mid.png",
+          "caption": "Desktop route third person south mid"
+        }
+      ]
+    },
+    {
+      "title": "Forecourt camera trials",
+      "caption": "Baseline and intermediate approaches, including the rejected tree-obscured southward step.",
+      "images": [
+        {
+          "id": "cdeb2777c75588c7",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-baseline-1366/arrival-busy-500.png",
+          "caption": "Arrival busy 500"
+        },
+        {
+          "id": "ae85807cc0a08a40",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-baseline-1366/arrival-control-3500.png",
+          "caption": "Arrival control 3500"
+        },
+        {
+          "id": "d6c405456ae0e728",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-baseline-1366/campus-walk-south.png",
+          "caption": "Campus walk south"
+        },
+        {
+          "id": "05a9dbe0e48b66e8",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-baseline-1366/lift-front.png",
+          "caption": "Lift front"
+        },
+        {
+          "id": "81399c3ecda98d2f",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-baseline-1366/office-entrance.png",
+          "caption": "Office entrance"
+        },
+        {
+          "id": "54c291e2929161ee",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-baseline-1366/station.png",
+          "caption": "Station"
+        },
+        {
+          "id": "536da1124f96a104",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-1366/arrival-busy-500.png",
+          "caption": "Arrival busy 500"
+        },
+        {
+          "id": "4e523d1d6720b7a1",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-1366/arrival-control-3500.png",
+          "caption": "Arrival control 3500"
+        },
+        {
+          "id": "0d50c251abc1e020",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-1366/campus-walk-south.png",
+          "caption": "Campus walk south"
+        },
+        {
+          "id": "1f4559f0097a847a",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-1366/lift-front.png",
+          "caption": "Lift front"
+        },
+        {
+          "id": "8ac1c203533332fe",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-1366/office-entrance.png",
+          "caption": "Office entrance"
+        },
+        {
+          "id": "60ebc40d00c10b4f",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-1366/station.png",
+          "caption": "Station"
+        },
+        {
+          "id": "410b3a65774960a7",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-390/arrival-busy-500.png",
+          "caption": "Arrival busy 500"
+        },
+        {
+          "id": "aefc6d402979e821",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-390/arrival-control-3500.png",
+          "caption": "Arrival control 3500"
+        },
+        {
+          "id": "faa618b78b95cb77",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-390/campus-walk-south.png",
+          "caption": "Campus walk south"
+        },
+        {
+          "id": "37d2f2ce0ace0d39",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-390/lift-front.png",
+          "caption": "Lift front"
+        },
+        {
+          "id": "9d8ebb7d5642dce7",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-390/office-entrance.png",
+          "caption": "Office entrance"
+        },
+        {
+          "id": "2fcee29adf8fd2e4",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-r1-390/station.png",
+          "caption": "Station"
+        },
+        {
+          "id": "9ce0a71a187098ab",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-1366/arrival-busy-500.png",
+          "caption": "Arrival busy 500"
+        },
+        {
+          "id": "6e4d05ea1b376539",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-1366/arrival-control-3500.png",
+          "caption": "Arrival control 3500"
+        },
+        {
+          "id": "9a4e3a1f83a20f59",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-1366/campus-walk-south.png",
+          "caption": "Campus walk south"
+        },
+        {
+          "id": "97a4486830c87993",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-1366/lift-front.png",
+          "caption": "Lift front"
+        },
+        {
+          "id": "8cb6407a577ad3df",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-1366/office-entrance.png",
+          "caption": "Office entrance"
+        },
+        {
+          "id": "c4641749e2580874",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-1366/station.png",
+          "caption": "Station"
+        },
+        {
+          "id": "9a8c3fa4599ab00a",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-390/arrival-busy-500.png",
+          "caption": "Arrival busy 500"
+        },
+        {
+          "id": "8f9e0622d671aa06",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-390/arrival-control-3500.png",
+          "caption": "Arrival control 3500"
+        },
+        {
+          "id": "923d4961dfa65b1d",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-390/campus-walk-south.png",
+          "caption": "Campus walk south"
+        },
+        {
+          "id": "a1b38d3ad444dc14",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-390/lift-front.png",
+          "caption": "Lift front"
+        },
+        {
+          "id": "7a6af2b51383aa58",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-390/office-entrance.png",
+          "caption": "Office entrance"
+        },
+        {
+          "id": "b3a01d4ca8a8c345",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-final-390/station.png",
+          "caption": "Station"
+        },
+        {
+          "id": "908885c6d18f8412",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-orbit-1366/arrival-busy-500.png",
+          "caption": "Arrival busy 500"
+        },
+        {
+          "id": "6d4e145600208bf2",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-orbit-1366/arrival-control-3500.png",
+          "caption": "Arrival control 3500"
+        },
+        {
+          "id": "7f966c52330acf34",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-orbit-1366/campus-walk-south.png",
+          "caption": "Campus walk south"
+        },
+        {
+          "id": "ed4ffa56642e174c",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-orbit-1366/lift-front.png",
+          "caption": "Lift front"
+        },
+        {
+          "id": "bfab6ee03f92e095",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-orbit-1366/office-entrance.png",
+          "caption": "Office entrance"
+        },
+        {
+          "id": "59ec56c7e7de831a",
+          "image": "game3d/shots/south-quarter-20261008/forecourt-camera-orbit-1366/station.png",
+          "caption": "Station"
+        }
+      ]
+    },
+    {
+      "title": "Before this change",
+      "caption": "The previous southern junction and camera views, followed by temporary camera probes.",
+      "images": [
+        {
+          "id": "eb7d388dc000b92e",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/1366-follow-evening-junction.png",
+          "caption": "Desktop third person evening junction"
+        },
+        {
+          "id": "ac795ed21077f92f",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/1366-follow-evening-southend.png",
+          "caption": "Desktop third person evening southern opening"
+        },
+        {
+          "id": "b859c17edc2e1f5c",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/1366-follow-morning-junction.png",
+          "caption": "Desktop third person morning junction"
+        },
+        {
+          "id": "099ae77f4e90c7ca",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/1366-follow-morning-southend.png",
+          "caption": "Desktop third person morning southern opening"
+        },
+        {
+          "id": "d0f07701a9eadf56",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/1366-overview-evening-junction.png",
+          "caption": "Desktop overview evening junction"
+        },
+        {
+          "id": "d7228c28002988cc",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/1366-overview-evening-southend.png",
+          "caption": "Desktop overview evening southern opening"
+        },
+        {
+          "id": "f76561a1cf267a38",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/1366-overview-morning-junction.png",
+          "caption": "Desktop overview morning junction"
+        },
+        {
+          "id": "142f02aa237d7831",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/1366-overview-morning-southend.png",
+          "caption": "Desktop overview morning southern opening"
+        },
+        {
+          "id": "54afb407fbc41dc8",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/390-overview-evening-junction.png",
+          "caption": "Phone overview evening junction"
+        },
+        {
+          "id": "4663e1db8ccf10b3",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/390-overview-evening-southend.png",
+          "caption": "Phone overview evening southern opening"
+        },
+        {
+          "id": "de151e16f0a60efe",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/390-overview-morning-junction.png",
+          "caption": "Phone overview morning junction"
+        },
+        {
+          "id": "ce424f4bba042be5",
+          "image": "game3d/shots/south-quarter-20261008/baseline/attempt-01/390-overview-morning-southend.png",
+          "caption": "Phone overview morning southern opening"
+        },
+        {
+          "id": "1d40cdb5b1a8e4a7",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-back-lane.png",
+          "caption": "Desktop route back lane"
+        },
+        {
+          "id": "609c2fa474226c28",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-campus-arrival.png",
+          "caption": "Desktop route campus arrival"
+        },
+        {
+          "id": "53b0e0d122a33df8",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-campus-east.png",
+          "caption": "Desktop route campus east"
+        },
+        {
+          "id": "bd88480c7f0893e7",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-cross-return.png",
+          "caption": "Desktop route cross return"
+        },
+        {
+          "id": "7317053affdfb882",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-cross-street.png",
+          "caption": "Desktop route cross street"
+        },
+        {
+          "id": "8986e29293e746fd",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-cross-west.png",
+          "caption": "Desktop route cross west"
+        },
+        {
+          "id": "629277c65f7f9de8",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-junction.png",
+          "caption": "Desktop route junction"
+        },
+        {
+          "id": "00e42f26a3f3be0e",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-office-return.png",
+          "caption": "Desktop route office return"
+        },
+        {
+          "id": "2a96c2e9bfde99fe",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-office-start.png",
+          "caption": "Desktop route office start"
+        },
+        {
+          "id": "3b1b7b3f7b490131",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-south-end.png",
+          "caption": "Desktop route south end"
+        },
+        {
+          "id": "4257b15dbca0e652",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-south-junction.png",
+          "caption": "Desktop route south junction"
+        },
+        {
+          "id": "8a7b4ca284af30db",
+          "image": "game3d/shots/south-quarter-20261008/route-baseline-1366/1366-route-south-mid.png",
+          "caption": "Desktop route south mid"
+        },
+        {
+          "id": "0039fddcd37d3435",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/1366-overview-morning-DIAGNOSTIC-east.png",
+          "caption": "Desktop overview morning DIAGNOSTIC east"
+        },
+        {
+          "id": "685336ff9187c3e8",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/1366-overview-morning-DIAGNOSTIC-north.png",
+          "caption": "Desktop overview morning DIAGNOSTIC north"
+        },
+        {
+          "id": "c09fe898ea1381a0",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/1366-overview-morning-DIAGNOSTIC-northeast.png",
+          "caption": "Desktop overview morning DIAGNOSTIC northeast"
+        },
+        {
+          "id": "e2914b7e65e80be1",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/1366-overview-morning-DIAGNOSTIC-west.png",
+          "caption": "Desktop overview morning DIAGNOSTIC west"
+        },
+        {
+          "id": "24cf196110542715",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/1366-overview-morning-native-z-21.png",
+          "caption": "Desktop overview morning native z 21"
+        },
+        {
+          "id": "8d893c7021369773",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/1366-overview-morning-native-z-23.png",
+          "caption": "Desktop overview morning native z 23"
+        },
+        {
+          "id": "2a21b00961e865f8",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/1366-overview-morning-native-z-25.png",
+          "caption": "Desktop overview morning native z 25"
+        },
+        {
+          "id": "1eef7bffa12f9f9d",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/1366-overview-morning-native-z-27.png",
+          "caption": "Desktop overview morning native z 27"
+        },
+        {
+          "id": "af8fbca08e4fd69e",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/1366-overview-morning-native-z-29.png",
+          "caption": "Desktop overview morning native z 29"
+        },
+        {
+          "id": "9ebc83c195447976",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/390-overview-morning-DIAGNOSTIC-east.png",
+          "caption": "Phone overview morning DIAGNOSTIC east"
+        },
+        {
+          "id": "296a5e3fe45729dd",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/390-overview-morning-DIAGNOSTIC-north.png",
+          "caption": "Phone overview morning DIAGNOSTIC north"
+        },
+        {
+          "id": "e5bcfd22358ad97b",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/390-overview-morning-DIAGNOSTIC-northeast.png",
+          "caption": "Phone overview morning DIAGNOSTIC northeast"
+        },
+        {
+          "id": "282380770ad52565",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/390-overview-morning-DIAGNOSTIC-west.png",
+          "caption": "Phone overview morning DIAGNOSTIC west"
+        },
+        {
+          "id": "67e02cbd719a6427",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/390-overview-morning-native-z-21.png",
+          "caption": "Phone overview morning native z 21"
+        },
+        {
+          "id": "ffd3085b897a352e",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/390-overview-morning-native-z-23.png",
+          "caption": "Phone overview morning native z 23"
+        },
+        {
+          "id": "0f76ed1a54e3b7f6",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/390-overview-morning-native-z-25.png",
+          "caption": "Phone overview morning native z 25"
+        },
+        {
+          "id": "436c97f95e113180",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/390-overview-morning-native-z-27.png",
+          "caption": "Phone overview morning native z 27"
+        },
+        {
+          "id": "0b1033b904709b1b",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-01/390-overview-morning-native-z-29.png",
+          "caption": "Phone overview morning native z 29"
+        },
+        {
+          "id": "b6b1281d684e82bd",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/1366-overview-morning-cross-east-DIAGNOSTIC-north.png",
+          "caption": "Desktop overview morning cross east DIAGNOSTIC north"
+        },
+        {
+          "id": "0a48df8294e5d93a",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/1366-overview-morning-cross-east-DIAGNOSTIC-northeast.png",
+          "caption": "Desktop overview morning cross east DIAGNOSTIC northeast"
+        },
+        {
+          "id": "592e7d51083c27df",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/1366-overview-morning-cross-east-native.png",
+          "caption": "Desktop overview morning cross east native"
+        },
+        {
+          "id": "bb9258b62a66c94b",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/1366-overview-morning-cross-west-DIAGNOSTIC-north.png",
+          "caption": "Desktop overview morning cross west DIAGNOSTIC north"
+        },
+        {
+          "id": "dba56b2d6a6128e6",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/1366-overview-morning-cross-west-DIAGNOSTIC-northeast.png",
+          "caption": "Desktop overview morning cross west DIAGNOSTIC northeast"
+        },
+        {
+          "id": "eedf8339b3b4330c",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/1366-overview-morning-cross-west-native.png",
+          "caption": "Desktop overview morning cross west native"
+        },
+        {
+          "id": "98e7bf6be9b4948b",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/390-overview-morning-cross-east-DIAGNOSTIC-north.png",
+          "caption": "Phone overview morning cross east DIAGNOSTIC north"
+        },
+        {
+          "id": "32ffcf5095ebfd33",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/390-overview-morning-cross-east-DIAGNOSTIC-northeast.png",
+          "caption": "Phone overview morning cross east DIAGNOSTIC northeast"
+        },
+        {
+          "id": "d547c01d1ffbb64f",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/390-overview-morning-cross-east-native.png",
+          "caption": "Phone overview morning cross east native"
+        },
+        {
+          "id": "dd13a808764b8079",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/390-overview-morning-cross-west-DIAGNOSTIC-north.png",
+          "caption": "Phone overview morning cross west DIAGNOSTIC north"
+        },
+        {
+          "id": "1cd7e0a96f65b9bb",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/390-overview-morning-cross-west-DIAGNOSTIC-northeast.png",
+          "caption": "Phone overview morning cross west DIAGNOSTIC northeast"
+        },
+        {
+          "id": "3ddc10562cf80481",
+          "image": "game3d/shots/south-quarter-20261008/diagnostic/attempt-02-cross/390-overview-morning-cross-west-native.png",
+          "caption": "Phone overview morning cross west native"
+        }
+      ]
+    },
+    {
+      "title": "Earlier evening capture setup",
+      "caption": "These captures changed the time in place and omitted the character lighting applied on entry. The corrected after-work views are above.",
+      "images": [
+        {
+          "id": "ddf7bee65e83d4fd",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/1366-follow-evening-junction.png",
+          "caption": "Desktop third person evening junction"
+        },
+        {
+          "id": "066535e772c49c18",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/1366-follow-evening-southend.png",
+          "caption": "Desktop third person evening southern opening"
+        },
+        {
+          "id": "56b1a2ab1822842e",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/1366-overview-evening-junction.png",
+          "caption": "Desktop overview evening junction"
+        },
+        {
+          "id": "d0273c15ef2b59c4",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/1366-overview-evening-southend.png",
+          "caption": "Desktop overview evening southern opening"
+        },
+        {
+          "id": "f93af73db4294619",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/390-overview-evening-junction.png",
+          "caption": "Phone overview evening junction"
+        },
+        {
+          "id": "d5655ed3a36c7b38",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final/390-overview-evening-southend.png",
+          "caption": "Phone overview evening southern opening"
+        },
+        {
+          "id": "00ac4f73e4426e26",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final-2560/2560-overview-evening-junction.png",
+          "caption": "Wide desktop overview evening junction"
+        },
+        {
+          "id": "ab4601b6e27be8d0",
+          "image": "game3d/shots/south-quarter-20261008/candidate-final-2560/2560-overview-evening-southend.png",
+          "caption": "Wide desktop overview evening southern opening"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    },
+    {
+      "label": "Visual review",
+      "href": "game3d/shots/south-quarter-20261008/visual-review-final.md"
+    },
+    {
+      "label": "Camera coverage",
+      "href": "game3d/shots/south-quarter-20261008/camera-coverage-report.txt"
+    }
+  ],
+  "preview": "47159483273c36e5"
+}
