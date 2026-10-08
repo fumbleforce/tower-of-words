@@ -1,0 +1,714 @@
+{
+  "title": "Bank-to-campus grounds",
+  "date": "2026-10-08",
+  "updated": "2026-10-08T04:36:05+02:00",
+  "by": "codex",
+  "caption": "Connected planting beds, bank foundation drainage and a clear street edge, with matching map outlines. Earlier attempts are included below.",
+  "commit": "bc7994d8f2a8cd6e8a04632aedd534db5fd23f46",
+  "preview": "candidate-final-1366-morning-campus-east",
+  "sections": [
+    {
+      "title": "Bank and campus grounds",
+      "caption": "Final views at desktop, phone and wide desktop sizes, with morning and evening lighting. Route views use the real crossing in both directions; foundation close-ups use diagnostic cameras. The wider southern lawns and existing pavement planting still need work.",
+      "images": [
+        {
+          "id": "candidate-final-1366-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-morning-campus-east.png",
+          "caption": "1366 morning campus east"
+        },
+        {
+          "id": "candidate-final-1366-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-morning-junction.png",
+          "caption": "1366 morning junction"
+        },
+        {
+          "id": "candidate-final-1366-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-evening-campus-east.png",
+          "caption": "1366 evening campus east"
+        },
+        {
+          "id": "candidate-final-1366-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-evening-junction.png",
+          "caption": "1366 evening junction"
+        },
+        {
+          "id": "candidate-final-1366-morning-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-morning-bank.png",
+          "caption": "1366 morning bank"
+        },
+        {
+          "id": "candidate-final-1366-evening-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-evening-bank.png",
+          "caption": "1366 evening bank"
+        },
+        {
+          "id": "candidate-final-390-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-morning-campus-east.png",
+          "caption": "390 morning campus east"
+        },
+        {
+          "id": "candidate-final-390-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-morning-junction.png",
+          "caption": "390 morning junction"
+        },
+        {
+          "id": "candidate-final-390-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-evening-campus-east.png",
+          "caption": "390 evening campus east"
+        },
+        {
+          "id": "candidate-final-390-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-evening-junction.png",
+          "caption": "390 evening junction"
+        },
+        {
+          "id": "candidate-final-390-morning-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-morning-bank.png",
+          "caption": "390 morning bank"
+        },
+        {
+          "id": "candidate-final-390-evening-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-evening-bank.png",
+          "caption": "390 evening bank"
+        },
+        {
+          "id": "candidate-final-2560-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/2560-morning-campus-east.png",
+          "caption": "2560 morning campus east"
+        },
+        {
+          "id": "candidate-final-2560-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/2560-morning-junction.png",
+          "caption": "2560 morning junction"
+        },
+        {
+          "id": "candidate-final-2560-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/2560-evening-campus-east.png",
+          "caption": "2560 evening campus east"
+        },
+        {
+          "id": "candidate-final-2560-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/2560-evening-junction.png",
+          "caption": "2560 evening junction"
+        },
+        {
+          "id": "candidate-final-2560-morning-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/2560-morning-bank.png",
+          "caption": "2560 morning bank"
+        },
+        {
+          "id": "candidate-final-2560-evening-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/2560-evening-bank.png",
+          "caption": "2560 evening bank"
+        },
+        {
+          "id": "candidate-final-1366-route-office-start",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-office-start.png",
+          "caption": "1366 route office start"
+        },
+        {
+          "id": "candidate-final-1366-route-campus-arrival",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-campus-arrival.png",
+          "caption": "1366 route campus arrival"
+        },
+        {
+          "id": "candidate-final-1366-route-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-campus-east.png",
+          "caption": "1366 route campus east"
+        },
+        {
+          "id": "candidate-final-1366-route-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-junction.png",
+          "caption": "1366 route junction"
+        },
+        {
+          "id": "candidate-final-1366-route-back-lane",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-back-lane.png",
+          "caption": "1366 route back lane"
+        },
+        {
+          "id": "candidate-final-1366-route-office-return",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-office-return.png",
+          "caption": "1366 route office return"
+        },
+        {
+          "id": "candidate-final-390-route-office-start",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-route-office-start.png",
+          "caption": "390 route office start"
+        },
+        {
+          "id": "candidate-final-390-route-campus-arrival",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-route-campus-arrival.png",
+          "caption": "390 route campus arrival"
+        },
+        {
+          "id": "candidate-final-390-route-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-route-campus-east.png",
+          "caption": "390 route campus east"
+        },
+        {
+          "id": "candidate-final-390-route-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-route-junction.png",
+          "caption": "390 route junction"
+        },
+        {
+          "id": "candidate-final-390-route-back-lane",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-route-back-lane.png",
+          "caption": "390 route back lane"
+        },
+        {
+          "id": "candidate-final-390-route-office-return",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/390-route-office-return.png",
+          "caption": "390 route office return"
+        },
+        {
+          "id": "candidate-final-1366-route-follow-office-start",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-follow-office-start.png",
+          "caption": "1366 route follow office start"
+        },
+        {
+          "id": "candidate-final-1366-route-follow-campus-arrival",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-follow-campus-arrival.png",
+          "caption": "1366 route follow campus arrival"
+        },
+        {
+          "id": "candidate-final-1366-route-follow-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-follow-campus-east.png",
+          "caption": "1366 route follow campus east"
+        },
+        {
+          "id": "candidate-final-1366-route-follow-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-follow-junction.png",
+          "caption": "1366 route follow junction"
+        },
+        {
+          "id": "candidate-final-1366-route-follow-back-lane",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-follow-back-lane.png",
+          "caption": "1366 route follow back lane"
+        },
+        {
+          "id": "candidate-final-1366-route-follow-office-return",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-route-follow-office-return.png",
+          "caption": "1366 route follow office return"
+        },
+        {
+          "id": "candidate-final-1366-morning-foundation-south-diagnostic",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-morning-foundation-south-diagnostic.png",
+          "caption": "1366 morning foundation south diagnostic"
+        },
+        {
+          "id": "candidate-final-1366-morning-foundation-west-diagnostic",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-morning-foundation-west-diagnostic.png",
+          "caption": "1366 morning foundation west diagnostic"
+        },
+        {
+          "id": "candidate-final-1366-evening-foundation-south-diagnostic",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-evening-foundation-south-diagnostic.png",
+          "caption": "1366 evening foundation south diagnostic"
+        },
+        {
+          "id": "candidate-final-1366-evening-foundation-west-diagnostic",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-evening-foundation-west-diagnostic.png",
+          "caption": "1366 evening foundation west diagnostic"
+        },
+        {
+          "id": "candidate-final-1366-map-quarter",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-final/1366-map-quarter.png",
+          "caption": "1366 map quarter"
+        }
+      ]
+    },
+    {
+      "title": "Before this pass",
+      "caption": "Matched views before the grounds changes, including the route across the boundary.",
+      "images": [
+        {
+          "id": "baseline-1366-morning-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-morning-bank.png",
+          "caption": "1366 morning bank"
+        },
+        {
+          "id": "baseline-1366-evening-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-evening-bank.png",
+          "caption": "1366 evening bank"
+        },
+        {
+          "id": "baseline-1366-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-morning-campus-east.png",
+          "caption": "1366 morning campus east"
+        },
+        {
+          "id": "baseline-1366-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-morning-junction.png",
+          "caption": "1366 morning junction"
+        },
+        {
+          "id": "baseline-1366-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-evening-campus-east.png",
+          "caption": "1366 evening campus east"
+        },
+        {
+          "id": "baseline-1366-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-evening-junction.png",
+          "caption": "1366 evening junction"
+        },
+        {
+          "id": "baseline-390-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-morning-campus-east.png",
+          "caption": "390 morning campus east"
+        },
+        {
+          "id": "baseline-390-morning-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-morning-bank.png",
+          "caption": "390 morning bank"
+        },
+        {
+          "id": "baseline-390-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-morning-junction.png",
+          "caption": "390 morning junction"
+        },
+        {
+          "id": "baseline-390-evening-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-evening-bank.png",
+          "caption": "390 evening bank"
+        },
+        {
+          "id": "baseline-390-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-evening-campus-east.png",
+          "caption": "390 evening campus east"
+        },
+        {
+          "id": "baseline-390-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-evening-junction.png",
+          "caption": "390 evening junction"
+        },
+        {
+          "id": "baseline-2560-morning-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/2560-morning-bank.png",
+          "caption": "2560 morning bank"
+        },
+        {
+          "id": "baseline-2560-evening-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/2560-evening-bank.png",
+          "caption": "2560 evening bank"
+        },
+        {
+          "id": "baseline-2560-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/2560-morning-campus-east.png",
+          "caption": "2560 morning campus east"
+        },
+        {
+          "id": "baseline-2560-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/2560-morning-junction.png",
+          "caption": "2560 morning junction"
+        },
+        {
+          "id": "baseline-2560-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/2560-evening-campus-east.png",
+          "caption": "2560 evening campus east"
+        },
+        {
+          "id": "baseline-2560-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/2560-evening-junction.png",
+          "caption": "2560 evening junction"
+        },
+        {
+          "id": "baseline-390-route-office-start",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-route-office-start.png",
+          "caption": "390 route office start"
+        },
+        {
+          "id": "baseline-1366-route-office-start",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-office-start.png",
+          "caption": "1366 route office start"
+        },
+        {
+          "id": "baseline-390-route-campus-arrival",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-route-campus-arrival.png",
+          "caption": "390 route campus arrival"
+        },
+        {
+          "id": "baseline-1366-route-campus-arrival",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-campus-arrival.png",
+          "caption": "1366 route campus arrival"
+        },
+        {
+          "id": "baseline-390-route-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-route-campus-east.png",
+          "caption": "390 route campus east"
+        },
+        {
+          "id": "baseline-1366-route-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-campus-east.png",
+          "caption": "1366 route campus east"
+        },
+        {
+          "id": "baseline-390-route-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-route-junction.png",
+          "caption": "390 route junction"
+        },
+        {
+          "id": "baseline-1366-route-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-junction.png",
+          "caption": "1366 route junction"
+        },
+        {
+          "id": "baseline-390-route-back-lane",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-route-back-lane.png",
+          "caption": "390 route back lane"
+        },
+        {
+          "id": "baseline-1366-route-back-lane",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-back-lane.png",
+          "caption": "1366 route back lane"
+        },
+        {
+          "id": "baseline-390-route-office-return",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/390-route-office-return.png",
+          "caption": "390 route office return"
+        },
+        {
+          "id": "baseline-1366-route-office-return",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-office-return.png",
+          "caption": "1366 route office return"
+        },
+        {
+          "id": "baseline-1366-route-follow-office-start",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-follow-office-start.png",
+          "caption": "1366 route follow office start"
+        },
+        {
+          "id": "baseline-1366-route-follow-campus-arrival",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-follow-campus-arrival.png",
+          "caption": "1366 route follow campus arrival"
+        },
+        {
+          "id": "baseline-1366-route-follow-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-follow-campus-east.png",
+          "caption": "1366 route follow campus east"
+        },
+        {
+          "id": "baseline-1366-route-follow-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-follow-junction.png",
+          "caption": "1366 route follow junction"
+        },
+        {
+          "id": "baseline-1366-route-follow-back-lane",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-follow-back-lane.png",
+          "caption": "1366 route follow back lane"
+        },
+        {
+          "id": "baseline-1366-route-follow-office-return",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/1366-route-follow-office-return.png",
+          "caption": "1366 route follow office return"
+        }
+      ]
+    },
+    {
+      "title": "Attempt 1",
+      "caption": "Rejected: repeated cover shapes and angular bed corners.",
+      "images": [
+        {
+          "id": "candidate-r1-1366-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r1/1366-morning-campus-east.png",
+          "caption": "1366 morning campus east"
+        },
+        {
+          "id": "candidate-r1-1366-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r1/1366-morning-junction.png",
+          "caption": "1366 morning junction"
+        },
+        {
+          "id": "candidate-r1-1366-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r1/1366-evening-campus-east.png",
+          "caption": "1366 evening campus east"
+        },
+        {
+          "id": "candidate-r1-1366-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r1/1366-evening-junction.png",
+          "caption": "1366 evening junction"
+        },
+        {
+          "id": "candidate-r1-1366-morning-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r1/1366-morning-bank.png",
+          "caption": "1366 morning bank"
+        },
+        {
+          "id": "candidate-r1-1366-evening-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r1/1366-evening-bank.png",
+          "caption": "1366 evening bank"
+        }
+      ]
+    },
+    {
+      "title": "Attempt 2",
+      "caption": "Rejected: lower cover still formed tiled rows.",
+      "images": [
+        {
+          "id": "candidate-r2-1366-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r2/1366-morning-campus-east.png",
+          "caption": "1366 morning campus east"
+        },
+        {
+          "id": "candidate-r2-1366-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r2/1366-morning-junction.png",
+          "caption": "1366 morning junction"
+        },
+        {
+          "id": "candidate-r2-1366-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r2/1366-evening-campus-east.png",
+          "caption": "1366 evening campus east"
+        },
+        {
+          "id": "candidate-r2-1366-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r2/1366-evening-junction.png",
+          "caption": "1366 evening junction"
+        },
+        {
+          "id": "candidate-r2-1366-morning-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r2/1366-morning-bank.png",
+          "caption": "1366 morning bank"
+        },
+        {
+          "id": "candidate-r2-1366-evening-bank",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r2/1366-evening-bank.png",
+          "caption": "1366 evening bank"
+        }
+      ]
+    },
+    {
+      "title": "Attempt 3",
+      "caption": "Rejected: rows were gone, but the individual shapes still looked like flat discs.",
+      "images": [
+        {
+          "id": "candidate-r3-1366-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r3/1366-morning-campus-east.png",
+          "caption": "1366 morning campus east"
+        },
+        {
+          "id": "candidate-r3-1366-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r3/1366-morning-junction.png",
+          "caption": "1366 morning junction"
+        },
+        {
+          "id": "candidate-r3-1366-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r3/1366-evening-campus-east.png",
+          "caption": "1366 evening campus east"
+        },
+        {
+          "id": "candidate-r3-1366-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r3/1366-evening-junction.png",
+          "caption": "1366 evening junction"
+        }
+      ]
+    },
+    {
+      "title": "Attempt 4",
+      "caption": "Rejected: continuous cover produced long triangular facets.",
+      "images": [
+        {
+          "id": "candidate-r4-1366-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r4/1366-morning-campus-east.png",
+          "caption": "1366 morning campus east"
+        },
+        {
+          "id": "candidate-r4-1366-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r4/1366-morning-junction.png",
+          "caption": "1366 morning junction"
+        },
+        {
+          "id": "candidate-r4-1366-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r4/1366-evening-campus-east.png",
+          "caption": "1366 evening campus east"
+        },
+        {
+          "id": "candidate-r4-1366-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r4/1366-evening-junction.png",
+          "caption": "1366 evening junction"
+        }
+      ]
+    },
+    {
+      "title": "Attempt 5",
+      "caption": "The faceted shrub kit restored volume and clear gaps around trees and the lamp. Final views above include the subsequent drain correction.",
+      "images": [
+        {
+          "id": "candidate-r5-1366-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r5/1366-morning-campus-east.png",
+          "caption": "1366 morning campus east"
+        },
+        {
+          "id": "candidate-r5-1366-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r5/1366-morning-junction.png",
+          "caption": "1366 morning junction"
+        },
+        {
+          "id": "candidate-r5-1366-evening-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r5/1366-evening-campus-east.png",
+          "caption": "1366 evening campus east"
+        },
+        {
+          "id": "candidate-r5-1366-evening-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/candidate-r5/1366-evening-junction.png",
+          "caption": "1366 evening junction"
+        }
+      ]
+    },
+    {
+      "title": "Capture diagnostics: wide view",
+      "caption": "Rejected capture setup: the test driver moved the player before the shot. These images do not establish a gameplay defect.",
+      "images": [
+        {
+          "id": "baseline-rejected2560-2560-morning-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/rejected2560/2560-morning-campus-east.png",
+          "caption": "2560 morning campus east"
+        },
+        {
+          "id": "baseline-rejected2560-2560-morning-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/rejected2560/2560-morning-junction.png",
+          "caption": "2560 morning junction"
+        }
+      ]
+    },
+    {
+      "title": "Capture diagnostics: first route attempt",
+      "caption": "Retained displaced-camera captures. Some initial files were overwritten during a failed housekeeping step; the evidence report records that gap.",
+      "images": [
+        {
+          "id": "baseline-diagnostic-route-autoplay-1366-route-campus-arrival",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay/1366-route-campus-arrival.png",
+          "caption": "1366 route campus arrival"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-1366-route-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay/1366-route-campus-east.png",
+          "caption": "1366 route campus east"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-1366-route-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay/1366-route-junction.png",
+          "caption": "1366 route junction"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-390-route-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay/390-route-campus-east.png",
+          "caption": "390 route campus east"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-1366-route-follow-office-start",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay/1366-route-follow-office-start.png",
+          "caption": "1366 route follow office start"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-1366-route-follow-office-return",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay/1366-route-follow-office-return.png",
+          "caption": "1366 route follow office return"
+        }
+      ]
+    },
+    {
+      "title": "Capture diagnostics: second route attempt",
+      "caption": "Retained route captures before the test driver was reliably held. The final route views above use the corrected capture setup.",
+      "images": [
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-1366-route-follow-campus-arrival",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/1366-route-follow-campus-arrival.png",
+          "caption": "1366 route follow campus arrival"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-1366-route-follow-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/1366-route-follow-campus-east.png",
+          "caption": "1366 route follow campus east"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-1366-route-follow-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/1366-route-follow-junction.png",
+          "caption": "1366 route follow junction"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-1366-route-follow-back-lane",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/1366-route-follow-back-lane.png",
+          "caption": "1366 route follow back lane"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-1366-route-office-start",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/1366-route-office-start.png",
+          "caption": "1366 route office start"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-390-route-office-start",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/390-route-office-start.png",
+          "caption": "390 route office start"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-1366-route-campus-arrival",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/1366-route-campus-arrival.png",
+          "caption": "1366 route campus arrival"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-390-route-campus-arrival",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/390-route-campus-arrival.png",
+          "caption": "390 route campus arrival"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-1366-route-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/1366-route-campus-east.png",
+          "caption": "1366 route campus east"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-390-route-campus-east",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/390-route-campus-east.png",
+          "caption": "390 route campus east"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-1366-route-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/1366-route-junction.png",
+          "caption": "1366 route junction"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-390-route-junction",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/390-route-junction.png",
+          "caption": "390 route junction"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-1366-route-back-lane",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/1366-route-back-lane.png",
+          "caption": "1366 route back lane"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-390-route-back-lane",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/390-route-back-lane.png",
+          "caption": "390 route back lane"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-390-route-office-return",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/390-route-office-return.png",
+          "caption": "390 route office return"
+        },
+        {
+          "id": "baseline-diagnostic-route-autoplay-r2-1366-route-office-return",
+          "image": "game3d/shots/quarter-grounds-20261008/baseline/diagnostic-route-autoplay-r2/1366-route-office-return.png",
+          "caption": "1366 route office return"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    },
+    {
+      "label": "Visual review and remaining grounds work",
+      "href": "game3d/shots/quarter-grounds-20261008/visual-review.md"
+    },
+    {
+      "label": "Capture settings and baseline limitations",
+      "href": "game3d/shots/quarter-grounds-20261008/baseline/findings.txt"
+    },
+    {
+      "label": "Source review",
+      "href": "game3d/shots/quarter-grounds-20261008/source-review.md"
+    }
+  ]
+}
