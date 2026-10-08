@@ -12,10 +12,11 @@ import * as THREE from 'three';
 import { Kit } from '../dorms/kit.js';
 import { shell, plankFloor, roomLights, roomNav } from './shell.js';
 import { printer, pinboard } from './machines.js';
+import { COMMONS_WINDOWS, commonsWindows, commonsDetails } from './commons-detail.js';
 
 const C = {
-  floor: '#b9a184',
-  seam: '#a88f71',
+  floor: '#c2c3b5',
+  seam: '#a7aea6',
   wall: '#e4dfd3',
   sofa: '#5d7d8c',
   wood: '#9c7b55',
@@ -24,7 +25,6 @@ const C = {
   steel: '#8b919b',
   counter: '#c9c6bd',
   fridge: '#e6e6e1',
-  sky: '#cfe2ec',
 };
 export const R = { x0: -4.0, x1: 4.0, z0: -4.7, z1: 0, h: 1.5, near: 0.26, t: 0.14 };
 export const DOOR = [-0.6, 0.6];
@@ -40,9 +40,13 @@ export function buildCommons() {
   scene.add(root);
   const kit = new Kit();
   const nav = roomNav(R);
-  shell(root, R, { holes: { s: [[DOOR[0], DOOR[1], 0, R.near]] }, color: C.wall });
+  shell(root, R, {
+    holes: { s: [[DOOR[0], DOOR[1], 0, R.near]], n: COMMONS_WINDOWS.map((x) => [x - 0.6, x + 0.6, 0.85, 1.35]) },
+    color: C.wall,
+    entryDoor: true,
+  });
   plankFloor(kit, R, { color: C.floor, seam: C.seam, w: 0.24, along: 'x' });
-  windows(kit);
+  commonsWindows(kit, R);
   const sofa = lounge(kit, nav);
   const table = work(kit, nav);
   const rack = dryingRack(kit, nav);
@@ -58,6 +62,7 @@ export function buildCommons() {
   kit.box('#5d6470', 0.04, 0.26, 0.04, DOOR[0], 0, R.z1 + 0.07);
   kit.box('#5d6470', 0.04, 0.26, 0.04, DOOR[1], 0, R.z1 + 0.07);
   kit.box('#4d5a63', 1.0, 0.012, 0.5, 0, 0.003, -0.35, { surf: 'carpet', cast: false });
+  commonsDetails(kit, R, nav);
   kit.flush(root);
   const sun = roomLights(
     scene,
@@ -92,19 +97,11 @@ export function buildCommons() {
       commons_kitchen: [2.4, R.z0 + 1.05],
       commons_rack: [RACK.x, RACK.z + 0.75],
       commons_books: [R.x0 + 0.75, -0.9],
-      commons_fridge: [3.0, R.z0 + 1.0],
+      commons_fridge: [0.87, R.z0 + 1.0],
     },
     seats: [sofa.seat],
     camera: { elev: 54, fov: 24 },
   };
-}
-
-// high windows in the north wall onto the back walk, sky beyond
-function windows(kit) {
-  for (const x of [-2.6, -0.9, 0.8]) {
-    kit.box('#5d6470', 1.2, 0.5, 0.04, x, 0.85, R.z0 + 0.02, { surf: 'frame' });
-    kit.box(C.sky, 1.1, 0.42, 0.045, x, 0.89, R.z0 + 0.02, { opts: { emissive: C.sky, emissiveIntensity: 0.5 } });
-  }
 }
 
 // the lounge: the TV on a low cabinet against the west wall, the sofa facing it across a low table with a remote and
