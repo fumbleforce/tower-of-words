@@ -1,5 +1,5 @@
 // The gym (gym, docs/game/island.md "Sports and baths"), seen from the sports lane and the pool walk and shut on
-// day 1: only its outside is built, nothing behind the door. In the island frame (sports/plan.js):
+// day 1. This module builds its exterior; rooms/gym.js builds the interior. In the island frame (sports/plan.js):
 //   the hall: pale concrete walls on a granite plinth, pilasters every bay down the long sides with a band of
 //   clerestory glass between them under the eaves, and a shallow barrel-vaulted roof (the layout's muted green)
 //   running north-south, overhanging, with a dark edge along its eaves and round its arched ends
@@ -14,6 +14,8 @@ import { STEEL } from '../outdoor/furniture.js';
 import { mound, bed, LEAF } from '../outdoor/planting.js';
 import { BLOCK } from '../outdoor/block.js';
 import * as P from './plan.js';
+import { gymShell, sportsGlass } from './gym-facade.js';
+import { arrivalGardens } from './arrival-gardens.js';
 
 const C = {
   wall: '#cfccc4',
@@ -42,7 +44,7 @@ const archY = (x) => YC + Math.sqrt(Math.max(0, R * R - (x - GX) ** 2));
 
 // a circular segment (the arch over a chord at height y0, `inset` in under it), a flat shape in the x-y plane on
 // the face at z, facing south (s 1) or north (s -1)
-function segment(x0, x1, y0, z, { inset = 0, s = 1 } = {}) {
+function segment(x0, x1, y0, z, { inset = 0, s = 1, opening = false } = {}) {
   const sh = new THREE.Shape();
   const n = 14;
   sh.moveTo(x0, y0);
@@ -51,6 +53,19 @@ function segment(x0, x1, y0, z, { inset = 0, s = 1 } = {}) {
     sh.lineTo(x, Math.max(y0, archY(x) - inset));
   }
   sh.lineTo(x1, y0);
+  if (opening) {
+    const hole = new THREE.Path(),
+      a = X0 + 2.2,
+      b = X1 - 2.2,
+      bottom = WALL_H + 0.15;
+    hole.moveTo(a, bottom);
+    hole.lineTo(b, bottom);
+    for (let i = n; i >= 0; i--) {
+      const x = a + ((b - a) * i) / n;
+      hole.lineTo(x, Math.max(bottom, archY(x) - 0.45));
+    }
+    sh.holes.push(hole);
+  }
   const g = new THREE.ShapeGeometry(sh);
   return s > 0 ? g.translate(0, 0, z) : g.rotateY(Math.PI).translate(2 * GX, 0, z);
 }
@@ -59,7 +74,7 @@ function hall(p, glow) {
   const cz = (Z0 + Z1) / 2,
     D = Z1 - Z0;
   p.box(C.plinth, W + 0.2, 0.3, D + 0.2, GX, 0, cz, { surf: 'concrete' });
-  p.box(C.wall, W, WALL_H - 0.3, D, GX, 0.3, cz, { surf: 'concrete' });
+  gymShell(p, C, WALL_H);
   // the long sides: pilasters every bay, the clerestory between them, a band over it
   const bays = Math.round(D / 3.2),
     bw = D / bays;
@@ -71,9 +86,9 @@ function hall(p, glow) {
     for (let i = 0; i < bays; i++) {
       const z0 = Z0 + i * bw + 0.3,
         z1 = Z0 + (i + 1) * bw - 0.3;
-      glow.push(new THREE.BoxGeometry(0.03, 1.0, z1 - z0).translate(x + s * 0.02, 3.35, (z0 + z1) / 2));
-      p.box(C.frame, 0.06, 0.06, z1 - z0, x + s * 0.04, 2.8, (z0 + z1) / 2);
-      for (let k = 1; k < 3; k++) p.box(C.frame, 0.05, 1.0, 0.04, x + s * 0.04, 2.85, z0 + ((z1 - z0) * k) / 3);
+      glow.push(new THREE.BoxGeometry(0.03, 1.0, z1 - z0).translate(x - s * 0.14, 3.35, (z0 + z1) / 2));
+      p.box(C.frame, 0.06, 0.06, z1 - z0, x - s * 0.04, 2.8, (z0 + z1) / 2);
+      for (let k = 1; k < 3; k++) p.box(C.frame, 0.05, 1.0, 0.04, x - s * 0.04, 2.85, z0 + ((z1 - z0) * k) / 3);
     }
     p.box(C.pilaster, 0.1, 0.25, D, x + s * 0.05, WALL_H - 0.25, cz);
   }
@@ -122,16 +137,33 @@ function ends(p, glow) {
     [Z0, -1],
     [Z1, 1],
   ]) {
-    p.geo(C.wall, segment(X0, X1, WALL_H - 0.01, z + s * 0.001, { s }), { surf: 'concrete' });
+    p.geo(C.wall, segment(X0, X1, WALL_H - 0.01, z + s * 0.001, { s, opening: s > 0 }), { surf: 'concrete' });
     if (s < 0) continue;
     const lx0 = X0 + 2.2,
       lx1 = X1 - 2.2;
-    glow.push(segment(lx0, lx1, WALL_H + 0.15, z + 0.02, { inset: 0.45 }));
+    glow.push(segment(lx0, lx1, WALL_H + 0.15, z - 0.14, { inset: 0.45 }));
+    const opening = [
+      [lx0, WALL_H + 0.15],
+      [lx1, WALL_H + 0.15],
+    ];
+    for (let i = 14; i >= 0; i--) {
+      const x = lx0 + ((lx1 - lx0) * i) / 14;
+      opening.push([x, Math.max(WALL_H + 0.15, archY(x) - 0.45)]);
+    }
+    const reveal = [];
+    opening.forEach(([x, y], i) => {
+      const [xx, yy] = opening[(i + 1) % opening.length];
+      reveal.push(x, y, z, xx, yy, z, xx, yy, z - 0.14, x, y, z, xx, yy, z - 0.14, x, y, z - 0.14);
+    });
+    const lining = new THREE.BufferGeometry();
+    lining.setAttribute('position', new THREE.Float32BufferAttribute(reveal, 3));
+    lining.computeVertexNormals();
+    p.geo(C.pilaster, lining, { surf: 'concrete' });
     for (let x = lx0; x <= lx1 + 0.01; x += (lx1 - lx0) / 8) {
       const top = archY(x) - 0.45;
-      if (top > WALL_H + 0.2) p.box(C.frame, 0.06, top - WALL_H - 0.15, 0.06, x, WALL_H + 0.15, z + 0.04);
+      if (top > WALL_H + 0.2) p.box(C.frame, 0.06, top - WALL_H - 0.15, 0.06, x, WALL_H + 0.15, z - 0.1);
     }
-    p.box(C.frame, lx1 - lx0, 0.07, 0.07, GX, WALL_H + 0.1, z + 0.04);
+    p.box(C.frame, lx1 - lx0, 0.07, 0.07, GX, WALL_H + 0.1, z - 0.1);
   }
 }
 
@@ -140,15 +172,16 @@ function entrance(p, glow, signs, lights) {
   const f = Z1 + 0.02,
     FW = 6.6, // the glass front's width
     DW = 1.0; // a door leaf
-  p.box(C.frame, FW + 0.2, 2.75, 0.1, GX, 0.25, f + 0.02); // the frame behind the glass
-  glow.push(new THREE.BoxGeometry(FW, 2.4, 0.02).translate(GX, 0.3 + 1.2, f + 0.09));
-  for (let i = 0; i <= 6; i++) p.box(C.frame, 0.07, 2.45, 0.07, GX - FW / 2 + (FW * i) / 6, 0.27, f + 0.11);
-  p.box(C.frame, FW, 0.08, 0.07, GX, 2.68, f + 0.11);
+  p.box(C.frame, FW + 0.2, 0.3, 0.1, GX, 2.7, f - 0.12);
+  for (const side of [-1, 1]) p.box(C.frame, 0.1, 2.4, 0.1, GX + side * 3.35, 0.3, f - 0.12);
+  glow.push(new THREE.BoxGeometry(FW, 2.4, 0.02).translate(GX, 0.3 + 1.2, f - 0.16));
+  for (let i = 0; i <= 6; i++) p.box(C.frame, 0.07, 2.45, 0.07, GX - FW / 2 + (FW * i) / 6, 0.27, f - 0.12);
+  p.box(C.frame, FW, 0.08, 0.07, GX, 2.68, f - 0.12);
   // two pairs of doors in the middle bays, steel pulls (inside: places/gym.js)
   for (const s of [-1, 1]) {
     const x = GX + s * DW;
-    p.box(STEEL.pale, 0.04, 0.5, 0.04, x - s * (DW - 0.12), 0.85, f + 0.16);
-    p.box(C.frame, 0.06, 2.1, 0.08, x, 0.27, f + 0.13);
+    p.box(STEEL.pale, 0.04, 0.5, 0.04, x - s * (DW - 0.12), 0.85, f - 0.06);
+    p.box(C.frame, 0.06, 2.1, 0.08, x, 0.27, f - 0.1);
   }
   // the step and the canopy on two posts, its board standing on the front edge
   p.box(BLOCK.plinth, FW + 0.6, 0.08, 0.9, GX, 0, f + 0.45, { surf: 'concrete' });
@@ -194,15 +227,19 @@ export function* gymSteps(root, p, signs, lights) {
   ends(p, glow);
   yield;
   entrance(p, glow, signs, lights);
-  const glass = new THREE.MeshStandardMaterial({
-    color: C.glass,
-    emissive: new THREE.Color('#ffd7a0'),
-    emissiveIntensity: 0,
-    roughness: 0.35,
-  });
+  arrivalGardens(p, { foundations: true });
+  const glass = sportsGlass();
   const g = glow.map((q) => (q.index ? q.toNonIndexed() : q));
-  for (const q of g)
-    for (const n of Object.keys(q.attributes)) if (n !== 'position' && n !== 'normal') q.deleteAttribute(n);
+  for (const q of g) {
+    q.computeBoundingBox();
+    const pos = q.attributes.position,
+      uv = new Float32Array(pos.count * 2);
+    const bottom = q.boundingBox.min.y,
+      height = q.boundingBox.max.y - bottom;
+    for (let i = 0; i < pos.count; i++) uv[i * 2 + 1] = (pos.getY(i) - bottom) / height;
+    q.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+    for (const n of Object.keys(q.attributes)) if (!['position', 'normal', 'uv'].includes(n)) q.deleteAttribute(n);
+  }
   const mesh = new THREE.Mesh(mergeGeometries(g), glass);
   g.forEach((q) => q.dispose());
   mesh.name = 'gym:glass';
@@ -210,7 +247,8 @@ export function* gymSteps(root, p, signs, lights) {
   yield;
   return {
     evening() {
-      glass.emissiveIntensity = 0.55;
+      glass.emissiveIntensity = 0.45;
+      glass.color.set('#806d56');
     },
   };
 }

@@ -56,7 +56,6 @@ export const BANDS = {
   east_lane: [
     // the sports lane's corner with the north street and the lawns past it, past the north street's top
     { by: 'sportsGrounds', rects: [[56, 84, -62, -46.5]] },
-    { by: 'lawn', seed: 330, belts: [[[72.6, 76, -40.6, -30.2], 'sakura,keyaki']] },
     {
       by: 'fronts',
       blocks: [

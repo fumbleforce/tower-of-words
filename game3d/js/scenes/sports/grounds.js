@@ -26,6 +26,7 @@ import { LANE as PLAZA_LANE } from '../plaza/plan.js';
 import * as LAYOUT from '../island-layout.js';
 import { LINK_E } from '../office-quarter/plan.js';
 import * as P from './plan.js';
+import { arrivalGardens } from './arrival-gardens.js';
 
 const PLAZA = LAYOUT.CHUNKS.plaza.at;
 const ORIGIN = [PLAZA_LANE.e[0] + PLAZA[0], PLAZA_LANE.e[2] + PLAZA[1]]; // the lane's brick runs on from the plaza's
@@ -155,6 +156,8 @@ function* planting(p, lights, signRoot) {
   yield* belt(p, [PW[1] + 1.6, NS[0] - 1.4, CW[3] + 1.4, LANE[2] - 1.0], [sakura, maple, pine], {
     seed: 45,
     pitch: 3.0,
+    soil: false,
+    under: 0,
   });
   yield* belt(p, [NS[1] + 2.4, RES[0] - 0.8, CW[3] + 1.4, LANE[2] - 0.6], [keyaki, sakura], { seed: 49, pitch: 3.2 });
   yield* belt(p, [GYM[0] + 1, GYM[1] - 3.2, PW[2] + 1, GYM[2] - 2.4], [pine, maple, keyaki], { seed: 53, pitch: 3.4 });
@@ -193,5 +196,7 @@ export function* groundsSteps(c, lights, signs, signRoot) {
   yield* paving(c.paver);
   yield* kerbs(c.parts);
   yield* planting(c.parts, lights, signRoot);
+  arrivalGardens(c.parts);
+  yield;
   residenceDoor(c.parts, signs, lights);
 }

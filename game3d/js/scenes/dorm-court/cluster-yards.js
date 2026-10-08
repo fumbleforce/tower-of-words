@@ -146,8 +146,8 @@ export function* endSquare(pv, p, lights, root) {
 // a wood along an edge: trees of the given kinds in turn, in staggered rows `pitch` apart (2.4) and a little off the
 // grid, over an understorey of ground cover thick with clipped mounds in mixed greens and sizes; no kerb, it runs out
 // into the lawn. under: mounds per step along it (2; 1 for a lighter wood seen from further off, scenes/bands.js)
-export function* belt(p, [x0, x1, z0, z1], kinds, { seed = 1, pitch = 2.4, under = 2 } = {}) {
-  bed(p, [x0 - 0.3, x1 + 0.3, z0 - 0.3, z1 + 0.3], { y: 0.03 }); // a little over its neighbours, so no lawn between
+export function* belt(p, [x0, x1, z0, z1], kinds, { seed = 1, pitch = 2.4, under = 2, soil = true } = {}) {
+  if (soil) bed(p, [x0 - 0.3, x1 + 0.3, z0 - 0.3, z1 + 0.3], { y: 0.03 }); // shared ground, unless the caller lays its own bed
   const alongX = x1 - x0 >= z1 - z0,
     [a0, a1] = alongX ? [x0, x1] : [z0, z1],
     [b0, b1] = alongX ? [z0, z1] : [x0, x1],

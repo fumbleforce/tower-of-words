@@ -23,6 +23,7 @@ import { STEEL } from '../outdoor/furniture.js';
 import { faces, faceAt, tOf } from '../outdoor/block.js';
 import { drain } from '../../perf/slice.js';
 import { facadeDrainage } from '../outdoor/facade-detail.js';
+import { northFront } from '../sports/north-front.js';
 
 const PLINTH = '#6c7178',
   FRAME = '#4f565f',
@@ -48,7 +49,8 @@ function onFace(add, F, u, y, o, w, h, t) {
 export const buildFronts = (...a) => drain(frontsSteps(...a));
 export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => false } = {}) {
   const glass = [],
-    litGlass = [];
+    litGlass = [],
+    sportsFronts = [];
   const box =
     (color, cast = true) =>
     (w, h, d, x, y, z) =>
@@ -69,7 +71,11 @@ export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => fals
       n = k.row.storeys,
       H = fh * n,
       wall = TOWN.walls[k.wall];
-    (casts(k) ? caster : p).box(wall, w, H, d, cx, 0, cz, { surf: k.ground === 'office' ? 'cladding' : 'plaster' });
+    const sports = k.id === 'r3' ? northFront(p, casts(k) ? caster : p, k, wall) : null;
+    if (sports) sportsFronts.push(sports);
+    else
+      (casts(k) ? caster : p).box(wall, w, H, d, cx, 0, cz, { surf: k.ground === 'office' ? 'cladding' : 'plaster' });
+    const blockPane = sports ? () => sports.pane : pane;
     facadeDrainage(p, k.rect, H);
     // plinth and floor bands, all round
     p.box(PLINTH, w + 0.06, 0.32, d + 0.06, cx, 0, cz, { cast: false, surf: 'concrete' });
@@ -83,6 +89,7 @@ export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => fals
         f === k.face ? k : k.also?.find((d) => d.face === f) && { ...k, ...k.also.find((d) => d.face === f) };
       const front = !!door;
       for (let s = front ? 1 : 0; s < n; s++) {
+        if (sports && s > 0) continue;
         const y = s * fh;
         if (s > 0 && k.balconies?.includes(f)) {
           balconyRow(F, y, { box, pane, seed: cx + cz + s });
@@ -105,11 +112,11 @@ export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => fals
           const u = step * (c + 0.5);
           // the shop's back and sides: small high windows on the ground floor
           const [wy, wh] = shop ? [y + 1.0, 0.55] : [y + 0.6, 0.85];
-          onFace(pane(hash2(u + cx, y + cz, c) < 0.3), F, u, wy, 0.02, 0.8, wh, 0.05);
+          onFace(blockPane(hash2(u + cx, y + cz, c) < 0.3), F, u, wy, 0.02, 0.8, wh, 0.05);
           onFace(box(SILL, false), F, u, wy - 0.07, 0.06, 0.92, 0.07, 0.12);
         }
       }
-      if (front) groundFloor(p, F, door, fh, { box, pane, lights });
+      if (front) groundFloor(p, F, door, fh, { box, pane: blockPane, lights });
       yield;
     }
 
@@ -155,10 +162,12 @@ export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => fals
   });
   return {
     meshes: (root) => {
+      sportsFronts.forEach((front) => front.meshes(root));
       if (glass.length) root.add(merged(glass, out, { cast: false }));
       if (litGlass.length) root.add(merged(litGlass, lit, { cast: false }));
     },
     evening() {
+      sportsFronts.forEach((front) => front.evening());
       lit.color.set('#e8c89a');
       lit.emissiveIntensity = 0.6;
     },

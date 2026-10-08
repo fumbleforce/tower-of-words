@@ -9,6 +9,7 @@ import { SOUTH_QUARTER_BEDS, JUNCTION_TREE } from '../../scenes/forecourt/quarte
 import { SHED_GARDENS } from '../../scenes/campus/shed-garden-plan.js';
 import { NORTH_GARDENS } from '../../scenes/campus/north-garden-plan.js';
 import { rectPts, shape } from './shapes.js';
+import { ARRIVAL_GARDENS } from '../../scenes/sports/arrival-garden-plan.js';
 import {
   CAMPUS_GARDENS,
   CAMPUS_TREES,
@@ -106,7 +107,14 @@ export function crown(ctx, x, z, size) {
 }
 export function drawPlanting(ctx, detail) {
   ctx.fillStyle = '#919787';
-  for (const garden of [...CAMPUS_GARDENS, ...QUARTER_BEDS, ...SOUTH_QUARTER_BEDS, ...SHED_GARDENS, ...NORTH_GARDENS]) {
+  for (const garden of [
+    ...CAMPUS_GARDENS,
+    ...QUARTER_BEDS,
+    ...SOUTH_QUARTER_BEDS,
+    ...SHED_GARDENS,
+    ...NORTH_GARDENS,
+    ...ARRIVAL_GARDENS,
+  ]) {
     shape(ctx, (x, z) => [x, z], garden.poly);
     ctx.fill();
   }
