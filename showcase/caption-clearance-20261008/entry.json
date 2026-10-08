@@ -1,0 +1,569 @@
+{
+  "title": "Captions beside conversations",
+  "date": "2026-10-08",
+  "by": "codex",
+  "caption": "Ambient captions stay clear of dialogue, portraits and the player, and remain readable above the phone backdrop. Earlier attempts and the native opening checks are included.",
+  "preview": "round4-phone-10-timed-overlap",
+  "sections": [
+    {
+      "title": "Original overlap",
+      "caption": "The ambient caption was behind the continuation prompt.",
+      "images": [
+        {
+          "id": "before",
+          "image": "game3d/shots/environment-rollout-20261008/cold-opening/desktop-03-talk-key.png",
+          "caption": "Original desktop overlap"
+        }
+      ]
+    },
+    {
+      "title": "First layout checks",
+      "caption": "Placeholder dialogue tests at three screen sizes. The largest desktop text size exposed player overlap.",
+      "images": [
+        {
+          "id": "round0-2560-ambient",
+          "image": "game3d/shots/caption-clearance-20261008/2560-ambient.png",
+          "caption": "Desktop 2560px: Caption on its own"
+        },
+        {
+          "id": "round0-2560-conversation",
+          "image": "game3d/shots/caption-clearance-20261008/2560-conversation.png",
+          "caption": "Desktop 2560px: Caption during dialogue"
+        },
+        {
+          "id": "round0-2560-choices",
+          "image": "game3d/shots/caption-clearance-20261008/2560-choices.png",
+          "caption": "Desktop 2560px: Caption above replies"
+        },
+        {
+          "id": "round0-2560-large-ui",
+          "image": "game3d/shots/caption-clearance-20261008/2560-large-ui.png",
+          "caption": "Desktop 2560px: Enlarged interface"
+        },
+        {
+          "id": "round0-2560-resized",
+          "image": "game3d/shots/caption-clearance-20261008/2560-resized.png",
+          "caption": "Desktop 2560px: Resized window"
+        },
+        {
+          "id": "round0-2560-closed",
+          "image": "game3d/shots/caption-clearance-20261008/2560-closed.png",
+          "caption": "Desktop 2560px: After the conversation closes"
+        },
+        {
+          "id": "round0-1366-ambient",
+          "image": "game3d/shots/caption-clearance-20261008/1366-ambient.png",
+          "caption": "Desktop 1366px: Caption on its own"
+        },
+        {
+          "id": "round0-1366-conversation",
+          "image": "game3d/shots/caption-clearance-20261008/1366-conversation.png",
+          "caption": "Desktop 1366px: Caption during dialogue"
+        },
+        {
+          "id": "round0-1366-choices",
+          "image": "game3d/shots/caption-clearance-20261008/1366-choices.png",
+          "caption": "Desktop 1366px: Caption above replies"
+        },
+        {
+          "id": "round0-1366-large-ui",
+          "image": "game3d/shots/caption-clearance-20261008/1366-large-ui.png",
+          "caption": "Desktop 1366px: Enlarged interface"
+        },
+        {
+          "id": "round0-1366-resized",
+          "image": "game3d/shots/caption-clearance-20261008/1366-resized.png",
+          "caption": "Desktop 1366px: Resized window"
+        },
+        {
+          "id": "round0-1366-closed",
+          "image": "game3d/shots/caption-clearance-20261008/1366-closed.png",
+          "caption": "Desktop 1366px: After the conversation closes"
+        },
+        {
+          "id": "round0-390-ambient",
+          "image": "game3d/shots/caption-clearance-20261008/390-ambient.png",
+          "caption": "Phone 390px: Caption on its own"
+        },
+        {
+          "id": "round0-390-conversation",
+          "image": "game3d/shots/caption-clearance-20261008/390-conversation.png",
+          "caption": "Phone 390px: Caption during dialogue"
+        },
+        {
+          "id": "round0-390-choices",
+          "image": "game3d/shots/caption-clearance-20261008/390-choices.png",
+          "caption": "Phone 390px: Caption above replies"
+        },
+        {
+          "id": "round0-390-large-ui",
+          "image": "game3d/shots/caption-clearance-20261008/390-large-ui.png",
+          "caption": "Phone 390px: Enlarged interface"
+        },
+        {
+          "id": "round0-390-resized",
+          "image": "game3d/shots/caption-clearance-20261008/390-resized.png",
+          "caption": "Phone 390px: Resized window"
+        },
+        {
+          "id": "round0-390-closed",
+          "image": "game3d/shots/caption-clearance-20261008/390-closed.png",
+          "caption": "Phone 390px: After the conversation closes"
+        }
+      ]
+    },
+    {
+      "title": "Portrait spacing",
+      "caption": "Longer placeholder captions test speaker changes. Player overlap remained at the largest desktop text size.",
+      "images": [
+        {
+          "id": "round1-2560-ambient",
+          "image": "game3d/shots/caption-clearance-20261008/round2/2560-ambient.png",
+          "caption": "Desktop 2560px: Caption on its own"
+        },
+        {
+          "id": "round1-2560-conversation",
+          "image": "game3d/shots/caption-clearance-20261008/round2/2560-conversation.png",
+          "caption": "Desktop 2560px: Caption during dialogue"
+        },
+        {
+          "id": "round1-2560-wide-player",
+          "image": "game3d/shots/caption-clearance-20261008/round2/2560-wide-player.png",
+          "caption": "Desktop 2560px: Long caption while the player speaks"
+        },
+        {
+          "id": "round1-2560-wide-switch",
+          "image": "game3d/shots/caption-clearance-20261008/round2/2560-wide-switch.png",
+          "caption": "Desktop 2560px: Long caption after a speaker change"
+        },
+        {
+          "id": "round1-2560-choices",
+          "image": "game3d/shots/caption-clearance-20261008/round2/2560-choices.png",
+          "caption": "Desktop 2560px: Caption above replies"
+        },
+        {
+          "id": "round1-2560-large-ui",
+          "image": "game3d/shots/caption-clearance-20261008/round2/2560-large-ui.png",
+          "caption": "Desktop 2560px: Enlarged interface"
+        },
+        {
+          "id": "round1-2560-resized",
+          "image": "game3d/shots/caption-clearance-20261008/round2/2560-resized.png",
+          "caption": "Desktop 2560px: Resized window"
+        },
+        {
+          "id": "round1-2560-closed",
+          "image": "game3d/shots/caption-clearance-20261008/round2/2560-closed.png",
+          "caption": "Desktop 2560px: After the conversation closes"
+        },
+        {
+          "id": "round1-1366-ambient",
+          "image": "game3d/shots/caption-clearance-20261008/round2/1366-ambient.png",
+          "caption": "Desktop 1366px: Caption on its own"
+        },
+        {
+          "id": "round1-1366-conversation",
+          "image": "game3d/shots/caption-clearance-20261008/round2/1366-conversation.png",
+          "caption": "Desktop 1366px: Caption during dialogue"
+        },
+        {
+          "id": "round1-1366-wide-player",
+          "image": "game3d/shots/caption-clearance-20261008/round2/1366-wide-player.png",
+          "caption": "Desktop 1366px: Long caption while the player speaks"
+        },
+        {
+          "id": "round1-1366-wide-switch",
+          "image": "game3d/shots/caption-clearance-20261008/round2/1366-wide-switch.png",
+          "caption": "Desktop 1366px: Long caption after a speaker change"
+        },
+        {
+          "id": "round1-1366-choices",
+          "image": "game3d/shots/caption-clearance-20261008/round2/1366-choices.png",
+          "caption": "Desktop 1366px: Caption above replies"
+        },
+        {
+          "id": "round1-1366-large-ui",
+          "image": "game3d/shots/caption-clearance-20261008/round2/1366-large-ui.png",
+          "caption": "Desktop 1366px: Enlarged interface"
+        },
+        {
+          "id": "round1-1366-resized",
+          "image": "game3d/shots/caption-clearance-20261008/round2/1366-resized.png",
+          "caption": "Desktop 1366px: Resized window"
+        },
+        {
+          "id": "round1-1366-closed",
+          "image": "game3d/shots/caption-clearance-20261008/round2/1366-closed.png",
+          "caption": "Desktop 1366px: After the conversation closes"
+        },
+        {
+          "id": "round1-390-ambient",
+          "image": "game3d/shots/caption-clearance-20261008/round2/390-ambient.png",
+          "caption": "Phone 390px: Caption on its own"
+        },
+        {
+          "id": "round1-390-conversation",
+          "image": "game3d/shots/caption-clearance-20261008/round2/390-conversation.png",
+          "caption": "Phone 390px: Caption during dialogue"
+        },
+        {
+          "id": "round1-390-wide-player",
+          "image": "game3d/shots/caption-clearance-20261008/round2/390-wide-player.png",
+          "caption": "Phone 390px: Long caption while the player speaks"
+        },
+        {
+          "id": "round1-390-wide-switch",
+          "image": "game3d/shots/caption-clearance-20261008/round2/390-wide-switch.png",
+          "caption": "Phone 390px: Long caption after a speaker change"
+        },
+        {
+          "id": "round1-390-choices",
+          "image": "game3d/shots/caption-clearance-20261008/round2/390-choices.png",
+          "caption": "Phone 390px: Caption above replies"
+        },
+        {
+          "id": "round1-390-large-ui",
+          "image": "game3d/shots/caption-clearance-20261008/round2/390-large-ui.png",
+          "caption": "Phone 390px: Enlarged interface"
+        },
+        {
+          "id": "round1-390-resized",
+          "image": "game3d/shots/caption-clearance-20261008/round2/390-resized.png",
+          "caption": "Phone 390px: Resized window"
+        },
+        {
+          "id": "round1-390-closed",
+          "image": "game3d/shots/caption-clearance-20261008/round2/390-closed.png",
+          "caption": "Phone 390px: After the conversation closes"
+        }
+      ]
+    },
+    {
+      "title": "Player clearance",
+      "caption": "Placeholder captions and choices clear the player at normal and enlarged text sizes, including window resizing.",
+      "images": [
+        {
+          "id": "round2-2560-ambient",
+          "image": "game3d/shots/caption-clearance-20261008/round3/2560-ambient.png",
+          "caption": "Desktop 2560px: Caption on its own"
+        },
+        {
+          "id": "round2-2560-conversation",
+          "image": "game3d/shots/caption-clearance-20261008/round3/2560-conversation.png",
+          "caption": "Desktop 2560px: Caption during dialogue"
+        },
+        {
+          "id": "round2-2560-wide-player",
+          "image": "game3d/shots/caption-clearance-20261008/round3/2560-wide-player.png",
+          "caption": "Desktop 2560px: Long caption while the player speaks"
+        },
+        {
+          "id": "round2-2560-wide-switch",
+          "image": "game3d/shots/caption-clearance-20261008/round3/2560-wide-switch.png",
+          "caption": "Desktop 2560px: Long caption after a speaker change"
+        },
+        {
+          "id": "round2-2560-choices",
+          "image": "game3d/shots/caption-clearance-20261008/round3/2560-choices.png",
+          "caption": "Desktop 2560px: Caption above replies"
+        },
+        {
+          "id": "round2-2560-large-ui",
+          "image": "game3d/shots/caption-clearance-20261008/round3/2560-large-ui.png",
+          "caption": "Desktop 2560px: Enlarged interface"
+        },
+        {
+          "id": "round2-2560-resized",
+          "image": "game3d/shots/caption-clearance-20261008/round3/2560-resized.png",
+          "caption": "Desktop 2560px: Resized window"
+        },
+        {
+          "id": "round2-2560-closed",
+          "image": "game3d/shots/caption-clearance-20261008/round3/2560-closed.png",
+          "caption": "Desktop 2560px: After the conversation closes"
+        },
+        {
+          "id": "round2-1366-ambient",
+          "image": "game3d/shots/caption-clearance-20261008/round3/1366-ambient.png",
+          "caption": "Desktop 1366px: Caption on its own"
+        },
+        {
+          "id": "round2-1366-conversation",
+          "image": "game3d/shots/caption-clearance-20261008/round3/1366-conversation.png",
+          "caption": "Desktop 1366px: Caption during dialogue"
+        },
+        {
+          "id": "round2-1366-wide-player",
+          "image": "game3d/shots/caption-clearance-20261008/round3/1366-wide-player.png",
+          "caption": "Desktop 1366px: Long caption while the player speaks"
+        },
+        {
+          "id": "round2-1366-wide-switch",
+          "image": "game3d/shots/caption-clearance-20261008/round3/1366-wide-switch.png",
+          "caption": "Desktop 1366px: Long caption after a speaker change"
+        },
+        {
+          "id": "round2-1366-choices",
+          "image": "game3d/shots/caption-clearance-20261008/round3/1366-choices.png",
+          "caption": "Desktop 1366px: Caption above replies"
+        },
+        {
+          "id": "round2-1366-large-ui",
+          "image": "game3d/shots/caption-clearance-20261008/round3/1366-large-ui.png",
+          "caption": "Desktop 1366px: Enlarged interface"
+        },
+        {
+          "id": "round2-1366-resized",
+          "image": "game3d/shots/caption-clearance-20261008/round3/1366-resized.png",
+          "caption": "Desktop 1366px: Resized window"
+        },
+        {
+          "id": "round2-1366-closed",
+          "image": "game3d/shots/caption-clearance-20261008/round3/1366-closed.png",
+          "caption": "Desktop 1366px: After the conversation closes"
+        },
+        {
+          "id": "round2-390-ambient",
+          "image": "game3d/shots/caption-clearance-20261008/round3/390-ambient.png",
+          "caption": "Phone 390px: Caption on its own"
+        },
+        {
+          "id": "round2-390-conversation",
+          "image": "game3d/shots/caption-clearance-20261008/round3/390-conversation.png",
+          "caption": "Phone 390px: Caption during dialogue"
+        },
+        {
+          "id": "round2-390-wide-player",
+          "image": "game3d/shots/caption-clearance-20261008/round3/390-wide-player.png",
+          "caption": "Phone 390px: Long caption while the player speaks"
+        },
+        {
+          "id": "round2-390-wide-switch",
+          "image": "game3d/shots/caption-clearance-20261008/round3/390-wide-switch.png",
+          "caption": "Phone 390px: Long caption after a speaker change"
+        },
+        {
+          "id": "round2-390-choices",
+          "image": "game3d/shots/caption-clearance-20261008/round3/390-choices.png",
+          "caption": "Phone 390px: Caption above replies"
+        },
+        {
+          "id": "round2-390-large-ui",
+          "image": "game3d/shots/caption-clearance-20261008/round3/390-large-ui.png",
+          "caption": "Phone 390px: Enlarged interface"
+        },
+        {
+          "id": "round2-390-resized",
+          "image": "game3d/shots/caption-clearance-20261008/round3/390-resized.png",
+          "caption": "Phone 390px: Resized window"
+        },
+        {
+          "id": "round2-390-closed",
+          "image": "game3d/shots/caption-clearance-20261008/round3/390-closed.png",
+          "caption": "Phone 390px: After the conversation closes"
+        }
+      ]
+    },
+    {
+      "title": "First native check",
+      "caption": "Actual opening play exposed a remaining phone issue: the dialogue gradient darkened the caption.",
+      "images": [
+        {
+          "id": "round3-desktop-00-title",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-00-title.png",
+          "caption": "desktop 00 title"
+        },
+        {
+          "id": "round3-desktop-01-arrival",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-01-arrival.png",
+          "caption": "desktop 01 arrival"
+        },
+        {
+          "id": "round3-desktop-02-headphones",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-02-headphones.png",
+          "caption": "desktop 02 headphones"
+        },
+        {
+          "id": "round3-desktop-03-caption-dialogue",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-03-caption-dialogue.png",
+          "caption": "desktop 03 caption dialogue"
+        },
+        {
+          "id": "round3-desktop-04-continued",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-04-continued.png",
+          "caption": "desktop 04 continued"
+        },
+        {
+          "id": "round3-desktop-05-free",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-05-free.png",
+          "caption": "desktop 05 free"
+        },
+        {
+          "id": "round3-desktop-06-mio-native-click",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-06-mio-native-click.png",
+          "caption": "desktop 06 mio native click"
+        },
+        {
+          "id": "round3-desktop-07-settings",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-07-settings.png",
+          "caption": "desktop 07 settings"
+        },
+        {
+          "id": "round3-desktop-08-ui-settings",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-08-ui-settings.png",
+          "caption": "desktop 08 ui settings"
+        },
+        {
+          "id": "round3-desktop-09-graphics-settings",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-09-graphics-settings.png",
+          "caption": "desktop 09 graphics settings"
+        },
+        {
+          "id": "round3-desktop-10-timed-overlap",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-10-timed-overlap.png",
+          "caption": "desktop 10 timed overlap"
+        },
+        {
+          "id": "round3-desktop-11-timed-settled",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-11-timed-settled.png",
+          "caption": "desktop 11 timed settled"
+        },
+        {
+          "id": "round3-desktop-12-native-continued",
+          "image": "game3d/shots/caption-clearance-20261008/native/desktop-12-native-continued.png",
+          "caption": "desktop 12 native continued"
+        },
+        {
+          "id": "round3-phone-00-title",
+          "image": "game3d/shots/caption-clearance-20261008/native/phone-00-title.png",
+          "caption": "phone 00 title"
+        },
+        {
+          "id": "round3-phone-10-timed-overlap",
+          "image": "game3d/shots/caption-clearance-20261008/native/phone-10-timed-overlap.png",
+          "caption": "phone 10 timed overlap"
+        },
+        {
+          "id": "round3-phone-11-timed-settled",
+          "image": "game3d/shots/caption-clearance-20261008/native/phone-11-timed-settled.png",
+          "caption": "phone 11 timed settled"
+        },
+        {
+          "id": "round3-phone-12-native-continued",
+          "image": "game3d/shots/caption-clearance-20261008/native/phone-12-native-continued.png",
+          "caption": "phone 12 native continued"
+        }
+      ]
+    },
+    {
+      "title": "Caption above the backdrop",
+      "caption": "Actual opening play after the backdrop correction. Captions and dialogue remain readable; keyboard and touch continuation work.",
+      "images": [
+        {
+          "id": "round4-desktop-00-title",
+          "image": "game3d/shots/caption-clearance-20261008/native/layer-fix/desktop-00-title.png",
+          "caption": "desktop 00 title"
+        },
+        {
+          "id": "round4-desktop-10-timed-overlap",
+          "image": "game3d/shots/caption-clearance-20261008/native/layer-fix/desktop-10-timed-overlap.png",
+          "caption": "desktop 10 timed overlap"
+        },
+        {
+          "id": "round4-desktop-11-timed-settled",
+          "image": "game3d/shots/caption-clearance-20261008/native/layer-fix/desktop-11-timed-settled.png",
+          "caption": "desktop 11 timed settled"
+        },
+        {
+          "id": "round4-desktop-12-native-continued",
+          "image": "game3d/shots/caption-clearance-20261008/native/layer-fix/desktop-12-native-continued.png",
+          "caption": "desktop 12 native continued"
+        },
+        {
+          "id": "round4-phone-00-title",
+          "image": "game3d/shots/caption-clearance-20261008/native/layer-fix/phone-00-title.png",
+          "caption": "phone 00 title"
+        },
+        {
+          "id": "round4-phone-10-timed-overlap",
+          "image": "game3d/shots/caption-clearance-20261008/native/layer-fix/phone-10-timed-overlap.png",
+          "caption": "phone 10 timed overlap"
+        },
+        {
+          "id": "round4-phone-11-timed-settled",
+          "image": "game3d/shots/caption-clearance-20261008/native/layer-fix/phone-11-timed-settled.png",
+          "caption": "phone 11 timed settled"
+        },
+        {
+          "id": "round4-phone-12-native-continued",
+          "image": "game3d/shots/caption-clearance-20261008/native/layer-fix/phone-12-native-continued.png",
+          "caption": "phone 12 native continued"
+        }
+      ]
+    },
+    {
+      "title": "Opening-check diagnosis",
+      "caption": "A visible click reaches the seating choice through its nearby-seat trigger.",
+      "images": [
+        {
+          "id": "native-trigger-diagnostic-desktop-00-title",
+          "image": "game3d/shots/caption-clearance-20261008/native/trigger-diagnostic/desktop-00-title.png",
+          "caption": "desktop 00 title"
+        },
+        {
+          "id": "native-trigger-diagnostic-desktop-01-arrival",
+          "image": "game3d/shots/caption-clearance-20261008/native/trigger-diagnostic/desktop-01-arrival.png",
+          "caption": "desktop 01 arrival"
+        },
+        {
+          "id": "native-trigger-diagnostic-desktop-02-click-result",
+          "image": "game3d/shots/caption-clearance-20261008/native/trigger-diagnostic/desktop-02-click-result.png",
+          "caption": "desktop 02 click result"
+        }
+      ]
+    },
+    {
+      "title": "Full-day checks",
+      "caption": "Completed route captures from the earlier and final caption checks.",
+      "images": [
+        {
+          "id": "fast-2026-10-08T17-40-06-436Z-550393-1366x860",
+          "image": "game3d/shots/caption-clearance-20261008/fast/2026-10-08T17-40-06-436Z-550393/1366x860.png",
+          "caption": "1366x860"
+        },
+        {
+          "id": "fast-2026-10-08T17-40-07-648Z-551266-390x844",
+          "image": "game3d/shots/caption-clearance-20261008/fast/2026-10-08T17-40-07-648Z-551266/390x844.png",
+          "caption": "390x844"
+        },
+        {
+          "id": "fast-2026-10-08T17-46-49-511Z-626187-1366x860",
+          "image": "game3d/shots/caption-clearance-20261008/fast/2026-10-08T17-46-49-511Z-626187/1366x860.png",
+          "caption": "1366x860"
+        },
+        {
+          "id": "fast-2026-10-08T17-46-50-725Z-627199-390x844",
+          "image": "game3d/shots/caption-clearance-20261008/fast/2026-10-08T17-46-50-725Z-627199/390x844.png",
+          "caption": "390x844"
+        },
+        {
+          "id": "fast-2026-10-08T17-53-38-625Z-687010-1366x860",
+          "image": "game3d/shots/caption-clearance-20261008/fast/2026-10-08T17-53-38-625Z-687010/1366x860.png",
+          "caption": "1366x860"
+        },
+        {
+          "id": "fast-2026-10-08T17-53-39-832Z-688027-390x844",
+          "image": "game3d/shots/caption-clearance-20261008/fast/2026-10-08T17-53-39-832Z-688027/390x844.png",
+          "caption": "390x844"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ],
+  "commit": "34df7eaa"
+}

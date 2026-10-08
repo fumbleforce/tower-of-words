@@ -1,0 +1,578 @@
+{
+  "title": "Izakaya fixtures and joinery",
+  "date": "2026-10-08",
+  "by": "codex",
+  "caption": "The izakaya now has a recessed serving hatch, stocked shelves, framed windows, cupboard joinery and entrance storage. Earlier attempts are included below.",
+  "preview": "review-fix-1366-eric-native-lunch-service",
+  "sections": [
+    {
+      "title": "Original room: first inspection: desktop",
+      "caption": "Original baseline; the arrival overlay and failed first harness reset are retained.",
+      "images": [
+        {
+          "id": "baseline-1366-eric-native-arrival",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline/1366-eric-native-arrival.png",
+          "caption": "Native arrival through the shop-street door"
+        },
+        {
+          "id": "baseline-1366-eric-native-lunch-service",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline/1366-eric-native-lunch-service.png",
+          "caption": "Lunch: Original serving area"
+        },
+        {
+          "id": "baseline-1366-eric-native-lunch-west",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline/1366-eric-native-lunch-west.png",
+          "caption": "Lunch: Original west wall and window"
+        },
+        {
+          "id": "baseline-1366-eric-native-lunch-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline/1366-eric-native-lunch-entry.png",
+          "caption": "Lunch: Original entrance"
+        },
+        {
+          "id": "baseline-1366-eric-native-evening-service",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline/1366-eric-native-evening-service.png",
+          "caption": "Evening: Original serving area"
+        },
+        {
+          "id": "baseline-1366-eric-native-evening-west",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline/1366-eric-native-evening-west.png",
+          "caption": "Evening: Original west wall and window"
+        },
+        {
+          "id": "baseline-1366-eric-native-evening-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline/1366-eric-native-evening-entry.png",
+          "caption": "Evening: Original entrance"
+        },
+        {
+          "id": "baseline-1366-eric-native-failure",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline/1366-eric-native-failure.png",
+          "caption": "Retained failed harness capture"
+        }
+      ]
+    },
+    {
+      "title": "Original room: clear detail views: desktop",
+      "caption": "Second baseline inspection after fixing the camera harness.",
+      "images": [
+        {
+          "id": "baseline-2-1366-eric-native-arrival",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline-2/1366-eric-native-arrival.png",
+          "caption": "Native arrival through the shop-street door"
+        },
+        {
+          "id": "baseline-2-1366-eric-native-lunch-service",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline-2/1366-eric-native-lunch-service.png",
+          "caption": "Lunch: Original serving area"
+        },
+        {
+          "id": "baseline-2-1366-eric-native-lunch-west",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline-2/1366-eric-native-lunch-west.png",
+          "caption": "Lunch: Original west wall and window"
+        },
+        {
+          "id": "baseline-2-1366-eric-native-lunch-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline-2/1366-eric-native-lunch-entry.png",
+          "caption": "Lunch: Original entrance"
+        },
+        {
+          "id": "baseline-2-1366-eric-native-evening-service",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline-2/1366-eric-native-evening-service.png",
+          "caption": "Evening: Original serving area"
+        },
+        {
+          "id": "baseline-2-1366-eric-native-evening-west",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline-2/1366-eric-native-evening-west.png",
+          "caption": "Evening: Original west wall and window"
+        },
+        {
+          "id": "baseline-2-1366-eric-native-evening-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/baseline-2/1366-eric-native-evening-entry.png",
+          "caption": "Evening: Original entrance"
+        }
+      ]
+    },
+    {
+      "title": "First fixture pass: superseded: desktop",
+      "caption": "Early hatch, window and shelf details. The desktop run still had a solid hatch infill and umbrella stand; the phone run reloaded during a correction. These mixed-source views are retained, not final evidence.",
+      "images": [
+        {
+          "id": "candidate-1-1366-eric-native-arrival",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-arrival.png",
+          "caption": "Native arrival through the shop-street door"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-lunch-service",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-lunch-service.png",
+          "caption": "Lunch: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-lunch-west",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-lunch-west.png",
+          "caption": "Lunch: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-lunch-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-lunch-entry.png",
+          "caption": "Lunch: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-evening-service",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-evening-service.png",
+          "caption": "Evening: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-evening-west",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-evening-west.png",
+          "caption": "Evening: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-evening-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-evening-entry.png",
+          "caption": "Evening: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-meal-conversation",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-meal-conversation.png",
+          "caption": "Native seated dinner conversation"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-food",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-food.png",
+          "caption": "Served meal and party seating"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-continued",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-continued.png",
+          "caption": "Saved meal restored through Continue"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-coda-conversation",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-coda-conversation.png",
+          "caption": "Mori and Emi conversation after the others leave"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-coda",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-coda.png",
+          "caption": "Departure state with Mori and Emi"
+        },
+        {
+          "id": "candidate-1-1366-eric-native-return",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/1366-eric-native-return.png",
+          "caption": "Native door exit back onto the shop street"
+        }
+      ]
+    },
+    {
+      "title": "First fixture pass: superseded: phone",
+      "caption": "Early hatch, window and shelf details. The desktop run still had a solid hatch infill and umbrella stand; the phone run reloaded during a correction. These mixed-source views are retained, not final evidence.",
+      "images": [
+        {
+          "id": "candidate-1-390-carina-native-arrival",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-arrival.png",
+          "caption": "Native arrival through the shop-street door"
+        },
+        {
+          "id": "candidate-1-390-carina-native-lunch-service",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-lunch-service.png",
+          "caption": "Lunch: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "candidate-1-390-carina-native-lunch-west",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-lunch-west.png",
+          "caption": "Lunch: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "candidate-1-390-carina-native-lunch-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-lunch-entry.png",
+          "caption": "Lunch: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "candidate-1-390-carina-native-evening-service",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-evening-service.png",
+          "caption": "Evening: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "candidate-1-390-carina-native-evening-west",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-evening-west.png",
+          "caption": "Evening: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "candidate-1-390-carina-native-evening-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-evening-entry.png",
+          "caption": "Evening: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "candidate-1-390-carina-native-meal-conversation",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-meal-conversation.png",
+          "caption": "Native seated dinner conversation"
+        },
+        {
+          "id": "candidate-1-390-carina-native-food",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-food.png",
+          "caption": "Served meal and party seating"
+        },
+        {
+          "id": "candidate-1-390-carina-native-continued",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-continued.png",
+          "caption": "Saved meal restored through Continue"
+        },
+        {
+          "id": "candidate-1-390-carina-native-coda-conversation",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-coda-conversation.png",
+          "caption": "Mori and Emi conversation after the others leave"
+        },
+        {
+          "id": "candidate-1-390-carina-native-coda",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-coda.png",
+          "caption": "Departure state with Mori and Emi"
+        },
+        {
+          "id": "candidate-1-390-carina-native-return",
+          "image": "game3d/shots/izakaya-detail-20261008/candidate-1/390-carina-native-return.png",
+          "caption": "Native door exit back onto the shop street"
+        }
+      ]
+    },
+    {
+      "title": "Recess and umbrella correction: superseded: desktop",
+      "caption": "Corrected hatch recess and hollow umbrella stand. Shelf supports and cup surfaces were refined afterward. The preceding candidate-2 desktop and this round’s phone attempt were GPU_DEFERRED and produced no images.",
+      "images": [
+        {
+          "id": "final-1366-eric-native-arrival",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-arrival.png",
+          "caption": "Native arrival through the shop-street door"
+        },
+        {
+          "id": "final-1366-eric-native-lunch-service",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-lunch-service.png",
+          "caption": "Lunch: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "final-1366-eric-native-lunch-west",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-lunch-west.png",
+          "caption": "Lunch: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "final-1366-eric-native-lunch-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-lunch-entry.png",
+          "caption": "Lunch: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "final-1366-eric-native-evening-service",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-evening-service.png",
+          "caption": "Evening: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "final-1366-eric-native-evening-west",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-evening-west.png",
+          "caption": "Evening: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "final-1366-eric-native-evening-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-evening-entry.png",
+          "caption": "Evening: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "final-1366-eric-native-meal-conversation",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-meal-conversation.png",
+          "caption": "Native seated dinner conversation"
+        },
+        {
+          "id": "final-1366-eric-native-food",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-food.png",
+          "caption": "Served meal and party seating"
+        },
+        {
+          "id": "final-1366-eric-native-continued",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-continued.png",
+          "caption": "Saved meal restored through Continue"
+        },
+        {
+          "id": "final-1366-eric-native-coda-conversation",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-coda-conversation.png",
+          "caption": "Mori and Emi conversation after the others leave"
+        },
+        {
+          "id": "final-1366-eric-native-coda",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-coda.png",
+          "caption": "Departure state with Mori and Emi"
+        },
+        {
+          "id": "final-1366-eric-native-return",
+          "image": "game3d/shots/izakaya-detail-20261008/final/1366-eric-native-return.png",
+          "caption": "Native door exit back onto the shop street"
+        }
+      ]
+    },
+    {
+      "title": "PASS: earlier-source desktop strict check",
+      "caption": "Full day route passed before the cup surface correction; retained as an earlier attempt.",
+      "images": [
+        {
+          "id": "fast-2026-10-08T17-34-08-390Z-457774-1366x860",
+          "image": "game3d/shots/izakaya-detail-20261008/fast/2026-10-08T17-34-08-390Z-457774/1366x860.png",
+          "caption": "1366x860"
+        }
+      ]
+    },
+    {
+      "title": "Shelf support correction: superseded: desktop",
+      "caption": "Shelves have wall-connected brackets; the close views exposed coplanar cup surfaces, fixed in the next round. This round’s phone attempt was GPU_DEFERRED and produced no images.",
+      "images": [
+        {
+          "id": "final-2-1366-eric-native-arrival",
+          "image": "game3d/shots/izakaya-detail-20261008/final-2/1366-eric-native-arrival.png",
+          "caption": "Native arrival through the shop-street door"
+        },
+        {
+          "id": "final-2-1366-eric-native-lunch-service",
+          "image": "game3d/shots/izakaya-detail-20261008/final-2/1366-eric-native-lunch-service.png",
+          "caption": "Lunch: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "final-2-1366-eric-native-lunch-west",
+          "image": "game3d/shots/izakaya-detail-20261008/final-2/1366-eric-native-lunch-west.png",
+          "caption": "Lunch: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "final-2-1366-eric-native-lunch-east",
+          "image": "game3d/shots/izakaya-detail-20261008/final-2/1366-eric-native-lunch-east.png",
+          "caption": "Lunch: Supported east-wall bottle and cup shelves"
+        },
+        {
+          "id": "final-2-1366-eric-native-lunch-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/final-2/1366-eric-native-lunch-entry.png",
+          "caption": "Lunch: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "final-2-1366-eric-native-evening-service",
+          "image": "game3d/shots/izakaya-detail-20261008/final-2/1366-eric-native-evening-service.png",
+          "caption": "Evening: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "final-2-1366-eric-native-evening-west",
+          "image": "game3d/shots/izakaya-detail-20261008/final-2/1366-eric-native-evening-west.png",
+          "caption": "Evening: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "final-2-1366-eric-native-evening-east",
+          "image": "game3d/shots/izakaya-detail-20261008/final-2/1366-eric-native-evening-east.png",
+          "caption": "Evening: Supported east-wall bottle and cup shelves"
+        },
+        {
+          "id": "final-2-1366-eric-native-evening-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/final-2/1366-eric-native-evening-entry.png",
+          "caption": "Evening: Entrance mat and hollow umbrella stand"
+        }
+      ]
+    },
+    {
+      "title": "PASS: earlier-source phone strict check",
+      "caption": "Full day route passed before the cup surface correction. Its preceding phone attempt was GPU_DEFERRED and produced no render.",
+      "images": [
+        {
+          "id": "fast-2026-10-08T17-36-01-502Z-477670-390x844",
+          "image": "game3d/shots/izakaya-detail-20261008/fast/2026-10-08T17-36-01-502Z-477670/390x844.png",
+          "caption": "390x844"
+        }
+      ]
+    },
+    {
+      "title": "Final fixtures and native dining route: desktop",
+      "caption": "Final source: cup surface flicker corrected. Native entry, dining, save/Continue, departure and door exit passed at both sizes. Day and evening close views inspected in their original captures.",
+      "images": [
+        {
+          "id": "review-fix-1366-eric-native-arrival",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-arrival.png",
+          "caption": "Native arrival through the shop-street door"
+        },
+        {
+          "id": "review-fix-1366-eric-native-lunch-service",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-lunch-service.png",
+          "caption": "Lunch: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "review-fix-1366-eric-native-lunch-west",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-lunch-west.png",
+          "caption": "Lunch: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "review-fix-1366-eric-native-lunch-east",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-lunch-east.png",
+          "caption": "Lunch: Supported east-wall bottle and cup shelves"
+        },
+        {
+          "id": "review-fix-1366-eric-native-lunch-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-lunch-entry.png",
+          "caption": "Lunch: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "review-fix-1366-eric-native-evening-service",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-evening-service.png",
+          "caption": "Evening: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "review-fix-1366-eric-native-evening-west",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-evening-west.png",
+          "caption": "Evening: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "review-fix-1366-eric-native-evening-east",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-evening-east.png",
+          "caption": "Evening: Supported east-wall bottle and cup shelves"
+        },
+        {
+          "id": "review-fix-1366-eric-native-evening-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-evening-entry.png",
+          "caption": "Evening: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "review-fix-1366-eric-native-meal-conversation",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-meal-conversation.png",
+          "caption": "Native seated dinner conversation"
+        },
+        {
+          "id": "review-fix-1366-eric-native-food",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-food.png",
+          "caption": "Served meal and party seating"
+        },
+        {
+          "id": "review-fix-1366-eric-native-continued",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-continued.png",
+          "caption": "Saved meal restored through Continue"
+        },
+        {
+          "id": "review-fix-1366-eric-native-coda-conversation",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-coda-conversation.png",
+          "caption": "Mori and Emi conversation after the others leave"
+        },
+        {
+          "id": "review-fix-1366-eric-native-coda",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-coda.png",
+          "caption": "Departure state with Mori and Emi"
+        },
+        {
+          "id": "review-fix-1366-eric-native-return",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/1366-eric-native-return.png",
+          "caption": "Native door exit back onto the shop street"
+        }
+      ]
+    },
+    {
+      "title": "Final fixtures and native dining route: phone",
+      "caption": "Final source: cup surface flicker corrected. Native entry, dining, save/Continue, departure and door exit passed at both sizes. Day and evening close views inspected in their original captures.",
+      "images": [
+        {
+          "id": "review-fix-390-carina-native-arrival",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-arrival.png",
+          "caption": "Native arrival through the shop-street door"
+        },
+        {
+          "id": "review-fix-390-carina-native-lunch-service",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-lunch-service.png",
+          "caption": "Lunch: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "review-fix-390-carina-native-lunch-west",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-lunch-west.png",
+          "caption": "Lunch: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "review-fix-390-carina-native-lunch-east",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-lunch-east.png",
+          "caption": "Lunch: Supported east-wall bottle and cup shelves"
+        },
+        {
+          "id": "review-fix-390-carina-native-lunch-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-lunch-entry.png",
+          "caption": "Lunch: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "review-fix-390-carina-native-evening-service",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-evening-service.png",
+          "caption": "Evening: Recessed service hatch, cupboards, tray and towels"
+        },
+        {
+          "id": "review-fix-390-carina-native-evening-west",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-evening-west.png",
+          "caption": "Evening: West window, panel joinery and entry apron"
+        },
+        {
+          "id": "review-fix-390-carina-native-evening-east",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-evening-east.png",
+          "caption": "Evening: Supported east-wall bottle and cup shelves"
+        },
+        {
+          "id": "review-fix-390-carina-native-evening-entry",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-evening-entry.png",
+          "caption": "Evening: Entrance mat and hollow umbrella stand"
+        },
+        {
+          "id": "review-fix-390-carina-native-meal-conversation",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-meal-conversation.png",
+          "caption": "Native seated dinner conversation"
+        },
+        {
+          "id": "review-fix-390-carina-native-food",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-food.png",
+          "caption": "Served meal and party seating"
+        },
+        {
+          "id": "review-fix-390-carina-native-continued",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-continued.png",
+          "caption": "Saved meal restored through Continue"
+        },
+        {
+          "id": "review-fix-390-carina-native-coda-conversation",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-coda-conversation.png",
+          "caption": "Mori and Emi conversation after the others leave"
+        },
+        {
+          "id": "review-fix-390-carina-native-coda",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-coda.png",
+          "caption": "Departure state with Mori and Emi"
+        },
+        {
+          "id": "review-fix-390-carina-native-return",
+          "image": "game3d/shots/izakaya-detail-20261008/review-fix/390-carina-native-return.png",
+          "caption": "Native door exit back onto the shop street"
+        }
+      ]
+    },
+    {
+      "title": "FAIL: final-source desktop train gait",
+      "caption": "The route completed, but strict gait checking detected Tama sliding in the train for three seconds. This failure is retained; the unchanged-source repeat passed.",
+      "images": [
+        {
+          "id": "fast-2026-10-08T17-38-59-929Z-518167-1366x860",
+          "image": "game3d/shots/izakaya-detail-20261008/fast/2026-10-08T17-38-59-929Z-518167/1366x860.png",
+          "caption": "1366x860"
+        }
+      ]
+    },
+    {
+      "title": "PASS: final-source phone strict check",
+      "caption": "Full day route passed at 390 × 844 with no overrides.",
+      "images": [
+        {
+          "id": "fast-2026-10-08T17-39-53-342Z-548168-390x844",
+          "image": "game3d/shots/izakaya-detail-20261008/fast/2026-10-08T17-39-53-342Z-548168/390x844.png",
+          "caption": "390x844"
+        }
+      ]
+    },
+    {
+      "title": "PASS: final-source desktop repeat",
+      "caption": "Unchanged source passed the full strict route at 1366 × 860 with no overrides and no gait failure.",
+      "images": [
+        {
+          "id": "fast-2026-10-08T17-42-57-703Z-587888-1366x860",
+          "image": "game3d/shots/izakaya-detail-20261008/fast/2026-10-08T17-42-57-703Z-587888/1366x860.png",
+          "caption": "1366x860"
+        }
+      ]
+    }
+  ],
+  "commit": "09701c96"
+}
