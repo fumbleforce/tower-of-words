@@ -8,6 +8,7 @@ import {
   BANK_APRON_DRAIN,
   quarterCover,
 } from '../../js/scenes/campus/quarter-plan.js';
+import { SOUTH_QUARTER_BEDS } from '../../js/scenes/forecourt/quarter-planting-plan.js';
 import { CAMPUS_PATHS } from '../../js/scenes/island-campus.js';
 import { insideGarden, CAMPUS_TREES } from '../../js/scenes/campus/landscape-plan.js';
 import { BUILDINGS, CHUNKS } from '../../js/scenes/island-layout.js';
@@ -17,9 +18,9 @@ import { plantedTrees, officeRegions, drawPlanting } from '../../js/ui/map/terra
 
 const inPath = (x, z) => CAMPUS_PATHS.some(({ rect: [a, b, c, d] }) => x >= a && x <= c && z >= b && z <= d);
 test('quarter planting and bank drainage stay outside the canonical paths', () => {
-  for (const bed of QUARTER_BEDS) {
+  for (const bed of [...QUARTER_BEDS, ...SOUTH_QUARTER_BEDS]) {
     for (let x = -8; x <= 13; x += 0.08)
-      for (let z = -51; z <= -28; z += 0.08)
+      for (let z = -51; z <= -18.1; z += 0.08)
         if (insideGarden(bed.poly, x, z)) {
           assert.equal(inPath(x, z), false, `${bed.id} intersects path at ${x},${z}`);
           assert.equal(
@@ -84,7 +85,7 @@ test('map draws the physical bed and drainage footprints', () => {
     },
   };
   drawPlanting(ctx, false);
-  for (const bed of QUARTER_BEDS)
+  for (const bed of [...QUARTER_BEDS, ...SOUTH_QUARTER_BEDS])
     assert(
       paths.some((p) => JSON.stringify(p) === JSON.stringify(bed.poly)),
       bed.id,
@@ -117,6 +118,7 @@ test('shared geometry matches after chunk translation and preserves original bel
   });
   try {
     const { quarterGrounds } = await import('../../js/scenes/campus/quarter-grounds.js');
+    const { southQuarterGrounds } = await import('../../js/scenes/forecourt/quarter-planting.js');
     const { belt } = await import('../../js/scenes/dorm-court/cluster-yards.js');
     const { sakura } = await import('../../js/scenes/outdoor/planting.js');
     const noop = { geo() {}, box() {} },
@@ -160,6 +162,7 @@ test('shared geometry matches after chunk translation and preserves original bel
       parts = new Parts(),
       offset = CHUNKS.campus.at.map((v) => -v);
     quarterGrounds(parts, offset);
+    southQuarterGrounds(parts, offset);
     parts.build(campus);
     const office = new THREE.Group();
     for (const _ of bandSteps(office, 'office_quarter')) void _;
@@ -186,12 +189,25 @@ test('shared geometry matches after chunk translation and preserves original bel
     assert.equal(a.length, b.length);
     for (let i = 0; i < a.length; i++) {
       assert.deepEqual(
-        { surf: a[i].surf, cast: a[i].cast, receive: a[i].receive, colors: a[i].colors },
-        { surf: b[i].surf, cast: b[i].cast, receive: b[i].receive, colors: b[i].colors },
+        {
+          surf: a[i].surf,
+          cast: a[i].cast,
+          receive: a[i].receive,
+          colors: a[i].colors,
+        },
+        {
+          surf: b[i].surf,
+          cast: b[i].cast,
+          receive: b[i].receive,
+          colors: b[i].colors,
+        },
       );
       assert.equal(a[i].positions.length, b[i].positions.length);
       a[i].positions.forEach((v, j) =>
-        assert(Math.abs(v - b[i].positions[j]) < 0.00001, `chunk geometry differs at ${i}/${j}`),
+        assert(
+          Math.abs(v - b[i].positions[j]) < 0.00001,
+          `chunk geometry differs at ${i}/${j}: ${v} vs ${b[i].positions[j]}`,
+        ),
       );
     }
   } finally {

@@ -17,6 +17,7 @@ import { snapshotPeople, restorePeople } from './saved-people.js';
 import { idle } from '../cast.js';
 import { gardenCat } from './garden-cat.js';
 import { fallenBikes } from './fallen-bikes.js';
+import { attachForecourtFraming } from './forecourt-camera.js';
 
 // the phone's view out of the station: looking east, lower, a little further out, Eric low in the frame
 const EAST = { elev: 33, zoom: 1.36, lead: -6.3 };
@@ -171,7 +172,9 @@ export async function forecourtPlace(game) {
     cam.fitDist = north.dist * L(1, east.zoom, s);
     cam.lead = L(north.lead, east.lead, s);
   };
+  const frameCampus = attachForecourtFraming(cam, () => phone, dioramaTrial);
   const steer = (p, dt) => {
+    frameCampus(p);
     const jump = !turnAt || Math.hypot(p.x - turnAt[0], p.z - turnAt[1]) > 0.8;
     turnAt = [p.x, p.z];
     if (!phone) return;

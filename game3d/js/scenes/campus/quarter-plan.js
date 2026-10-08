@@ -79,24 +79,10 @@ const beds = [
       [7, -38.5, 0.65],
     ],
   },
-  {
-    id: 'quarter-junction',
-    seed: 963,
-    poly: [
-      [6.35, -29.65],
-      [9.9, -29.65],
-      [9.2, -28.5],
-      [7.6, -28.2],
-      [6.35, -28.65],
-    ],
-    masses: [[8.65, -29.05, 0.4]],
-    grasses: [[7.2, -29.1]],
-    gaps: [],
-  },
 ];
 
 // Small rounded corners retain the straight street edge and all authored clearances.
-function roundCorners(poly) {
+export function roundCorners(poly) {
   return poly.flatMap((b, i) => {
     const a = poly[(i + poly.length - 1) % poly.length],
       c = poly[(i + 1) % poly.length];
@@ -112,10 +98,14 @@ function roundCorners(poly) {
     ]);
   });
 }
-export const QUARTER_BEDS = beds.map((bed) => ({ ...bed, poly: roundCorners(bed.poly) }));
+export const QUARTER_BEDS = beds.map((bed) => ({
+  ...bed,
+  poly: roundCorners(bed.poly),
+}));
 
 // Seeded overlapping cover has no planted rows; every full radius remains within its soil outline.
 export function quarterCover(bed) {
+  const cover = bed.cover || {};
   let state = bed.seed;
   const random = () => (state = (Math.imul(state, 1664525) + 1013904223) >>> 0) / 4294967296;
   const xs = bed.poly.map((p) => p[0]),
@@ -128,8 +118,9 @@ export function quarterCover(bed) {
   for (let i = 0; i < w * h * 30; i++) {
     const x = x0 + random() * w,
       z = z0 + random() * h,
-      r = 0.4 + random() * 0.23;
-    if (points.some((p) => Math.hypot(x - p.x, z - p.z) < 0.55)) continue;
+      r = (cover.radius ?? 0.4) + random() * (cover.variation ?? 0.23);
+    if (points.some((p) => Math.hypot(x - p.x, z - p.z) < (cover.spacing ?? 0.55))) continue;
+    if (cover.drifts && !cover.drifts.some(([a, b, rx, rz]) => ((x - a) / rx) ** 2 + ((z - b) / rz) ** 2 < 1)) continue;
     if (bed.gaps.some(([a, b, c]) => Math.hypot(x - a, z - b) < c + r * 1.04)) continue;
     if (
       !insideGarden(bed.poly, x, z) ||

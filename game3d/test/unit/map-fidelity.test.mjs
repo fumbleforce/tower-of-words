@@ -1,3 +1,4 @@
+import { JUNCTION_TREE } from '../../js/scenes/forecourt/quarter-planting-plan.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { GREEN } from '../../js/scenes/island-layout.js';
@@ -13,6 +14,7 @@ import { toView, fromView } from '../../js/ui/map/base.js';
 
 test('map planting keeps exact world tree positions and irregular land cover inside its source regions', () => {
   assert.deepEqual(plantedTrees, [
+    JUNCTION_TREE,
     ...WEST_TREES,
     ...SOUTH_TREES,
     ...CAMPUS_TREES,
