@@ -1762,7 +1762,7 @@ This completes one ground-floor interior. The training centre, clinic, unassigne
 
 ## Izakaya (`izakaya`)
 
-The dining room fits the existing 4 × 4.5 game-unit building footprint at the east end of the shop street. A tiled threshold and entry mat open onto a shoes-on dining room with five upholstered chairs, a timber table, warm wall lights, low green wall panelling and a compact kitchen service hatch. Coats and umbrellas have space beside the entry. The aisle runs along the east side of the table; each chair has a tested free approach and a route back to the door. No invisible shoe removal or separate unbuilt room is implied.
+The dining room fits the existing 4 × 4.5 game-unit building footprint at the east end of the shop street. A tiled threshold and entry mat open onto a shoes-on dining room with five upholstered chairs, a timber table, warm wall lights, low green wall panelling and a compact kitchen service hatch. The service hatch has a recessed tiled back, stocked bottle and cup shelf, framed opening and stacked plates. The counter has separate cupboard fronts and pulls, a serving tray and folded towels. A recessed west window has a sliding frame, sill and rolled blind; an east wall rack holds more cups and bottles above the clear aisle. Timber rails and battens finish the low panelling, and staggered end joints break up the floorboards. Entry hooks carry an apron; the umbrella stand has a drip tray and handled umbrellas. The aisle runs along the east side of the table; each chair has a tested free approach and a route back to the door. No invisible shoe removal or separate unbuilt room is implied.
 
 ### Things
 
