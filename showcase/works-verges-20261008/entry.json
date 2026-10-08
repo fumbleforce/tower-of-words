@@ -1,0 +1,885 @@
+{
+  "title": "Works street planting",
+  "date": "2026-10-08",
+  "by": "codex",
+  "caption": "Fuller foliage and tree shadows along the Works street south of the recycling centre, with connected low planting and three beds beside the west fence. Original views and every attempt are included. The rest of Works remains in progress.",
+  "sections": [
+    {
+      "title": "Original planting: first route",
+      "images": [
+        {
+          "id": "baseline-r1-1366-south-start",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/1366-south-start.png",
+          "caption": "1366 south start"
+        },
+        {
+          "id": "baseline-r1-1366-north-66",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/1366-north-66.png",
+          "caption": "1366 north 66"
+        },
+        {
+          "id": "baseline-r1-1366-north-76",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/1366-north-76.png",
+          "caption": "1366 north 76"
+        },
+        {
+          "id": "baseline-r1-390-south-start",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/390-south-start.png",
+          "caption": "390 south start"
+        },
+        {
+          "id": "baseline-r1-390-north-66",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/390-north-66.png",
+          "caption": "390 north 66"
+        },
+        {
+          "id": "baseline-r1-1366-north-86",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/1366-north-86.png",
+          "caption": "1366 north 86"
+        },
+        {
+          "id": "baseline-r1-1366-north-91",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/1366-north-91.png",
+          "caption": "1366 north 91"
+        },
+        {
+          "id": "baseline-r1-390-north-76",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/390-north-76.png",
+          "caption": "390 north 76"
+        },
+        {
+          "id": "baseline-r1-1366-return-86",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/1366-return-86.png",
+          "caption": "1366 return 86"
+        },
+        {
+          "id": "baseline-r1-390-north-86",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/390-north-86.png",
+          "caption": "390 north 86"
+        },
+        {
+          "id": "baseline-r1-1366-return-76",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/1366-return-76.png",
+          "caption": "1366 return 76"
+        },
+        {
+          "id": "baseline-r1-390-north-91",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/390-north-91.png",
+          "caption": "390 north 91"
+        },
+        {
+          "id": "baseline-r1-390-failure",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/390-failure.png",
+          "caption": "390 failure"
+        },
+        {
+          "id": "baseline-r1-1366-return-66",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/1366-return-66.png",
+          "caption": "1366 return 66"
+        },
+        {
+          "id": "baseline-r1-1366-return-61",
+          "image": "game3d/shots/works-verges-20261008/baseline-r1/1366-return-61.png",
+          "caption": "1366 return 61"
+        }
+      ],
+      "caption": "Original public-mode Works views with the ordinary player camera. Captures include the route and matching performance positions."
+    },
+    {
+      "title": "Original planting: phone return route",
+      "images": [
+        {
+          "id": "baseline-r2-390-south-start",
+          "image": "game3d/shots/works-verges-20261008/baseline-r2/390-south-start.png",
+          "caption": "390 south start"
+        },
+        {
+          "id": "baseline-r2-390-north-66",
+          "image": "game3d/shots/works-verges-20261008/baseline-r2/390-north-66.png",
+          "caption": "390 north 66"
+        },
+        {
+          "id": "baseline-r2-390-north-76",
+          "image": "game3d/shots/works-verges-20261008/baseline-r2/390-north-76.png",
+          "caption": "390 north 76"
+        },
+        {
+          "id": "baseline-r2-390-north-86",
+          "image": "game3d/shots/works-verges-20261008/baseline-r2/390-north-86.png",
+          "caption": "390 north 86"
+        },
+        {
+          "id": "baseline-r2-390-north-91",
+          "image": "game3d/shots/works-verges-20261008/baseline-r2/390-north-91.png",
+          "caption": "390 north 91"
+        },
+        {
+          "id": "baseline-r2-390-return-86",
+          "image": "game3d/shots/works-verges-20261008/baseline-r2/390-return-86.png",
+          "caption": "390 return 86"
+        },
+        {
+          "id": "baseline-r2-390-return-76",
+          "image": "game3d/shots/works-verges-20261008/baseline-r2/390-return-76.png",
+          "caption": "390 return 76"
+        },
+        {
+          "id": "baseline-r2-390-return-66",
+          "image": "game3d/shots/works-verges-20261008/baseline-r2/390-return-66.png",
+          "caption": "390 return 66"
+        },
+        {
+          "id": "baseline-r2-390-return-61",
+          "image": "game3d/shots/works-verges-20261008/baseline-r2/390-return-61.png",
+          "caption": "390 return 61"
+        }
+      ],
+      "caption": "Original public-mode Works views with the ordinary player camera. Captures include the route and matching performance positions."
+    },
+    {
+      "title": "Original planting: matched performance views",
+      "images": [
+        {
+          "id": "baseline-perf-1366-perf-66",
+          "image": "game3d/shots/works-verges-20261008/baseline-perf/1366-perf-66.png",
+          "caption": "1366 perf 66"
+        },
+        {
+          "id": "baseline-perf-1366-perf-76",
+          "image": "game3d/shots/works-verges-20261008/baseline-perf/1366-perf-76.png",
+          "caption": "1366 perf 76"
+        },
+        {
+          "id": "baseline-perf-1366-perf-86",
+          "image": "game3d/shots/works-verges-20261008/baseline-perf/1366-perf-86.png",
+          "caption": "1366 perf 86"
+        },
+        {
+          "id": "baseline-perf-390-perf-66",
+          "image": "game3d/shots/works-verges-20261008/baseline-perf/390-perf-66.png",
+          "caption": "390 perf 66"
+        },
+        {
+          "id": "baseline-perf-390-perf-76",
+          "image": "game3d/shots/works-verges-20261008/baseline-perf/390-perf-76.png",
+          "caption": "390 perf 76"
+        },
+        {
+          "id": "baseline-perf-390-perf-86",
+          "image": "game3d/shots/works-verges-20261008/baseline-perf/390-perf-86.png",
+          "caption": "390 perf 86"
+        }
+      ],
+      "caption": "Original public-mode Works views with the ordinary player camera. Captures include the route and matching performance positions."
+    },
+    {
+      "title": "Attempt 1: asset setup failed",
+      "images": [
+        {
+          "id": "candidate-r1-1366-failure",
+          "image": "game3d/shots/works-verges-20261008/candidate-r1/1366-failure.png",
+          "caption": "1366 failure"
+        }
+      ],
+      "caption": "Rejected setup attempt: the worktree lacked a locked public asset and did not boot. This failure frame is retained."
+    },
+    {
+      "title": "Attempt 2: bare mulch and separate mounds",
+      "images": [
+        {
+          "id": "candidate-r2-1366-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/1366-south-start.png",
+          "caption": "1366 south start"
+        },
+        {
+          "id": "candidate-r2-1366-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/1366-north-66.png",
+          "caption": "1366 north 66"
+        },
+        {
+          "id": "candidate-r2-1366-north-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/1366-north-76.png",
+          "caption": "1366 north 76"
+        },
+        {
+          "id": "candidate-r2-1366-north-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/1366-north-86.png",
+          "caption": "1366 north 86"
+        },
+        {
+          "id": "candidate-r2-1366-north-91",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/1366-north-91.png",
+          "caption": "1366 north 91"
+        },
+        {
+          "id": "candidate-r2-1366-return-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/1366-return-86.png",
+          "caption": "1366 return 86"
+        },
+        {
+          "id": "candidate-r2-390-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/390-south-start.png",
+          "caption": "390 south start"
+        },
+        {
+          "id": "candidate-r2-390-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/390-north-66.png",
+          "caption": "390 north 66"
+        },
+        {
+          "id": "candidate-r2-1366-return-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/1366-return-76.png",
+          "caption": "1366 return 76"
+        },
+        {
+          "id": "candidate-r2-390-north-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/390-north-76.png",
+          "caption": "390 north 76"
+        },
+        {
+          "id": "candidate-r2-1366-return-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/1366-return-66.png",
+          "caption": "1366 return 66"
+        },
+        {
+          "id": "candidate-r2-1366-return-61",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/1366-return-61.png",
+          "caption": "1366 return 61"
+        },
+        {
+          "id": "candidate-r2-390-north-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/390-north-86.png",
+          "caption": "390 north 86"
+        },
+        {
+          "id": "candidate-r2-390-north-91",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/390-north-91.png",
+          "caption": "390 north 91"
+        },
+        {
+          "id": "candidate-r2-390-return-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/390-return-86.png",
+          "caption": "390 return 86"
+        },
+        {
+          "id": "candidate-r2-390-return-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/390-return-76.png",
+          "caption": "390 return 76"
+        },
+        {
+          "id": "candidate-r2-390-return-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/390-return-66.png",
+          "caption": "390 return 66"
+        },
+        {
+          "id": "candidate-r2-390-return-61",
+          "image": "game3d/shots/works-verges-20261008/candidate-r2/390-return-61.png",
+          "caption": "390 return 61"
+        }
+      ],
+      "caption": "Rejected: exposed mulch and separated shrub mounds. Normal walking routes completed at both sizes."
+    },
+    {
+      "title": "Attempt 3: overly even ground detail",
+      "images": [
+        {
+          "id": "candidate-r3-1366-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/1366-south-start.png",
+          "caption": "1366 south start"
+        },
+        {
+          "id": "candidate-r3-390-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/390-south-start.png",
+          "caption": "390 south start"
+        },
+        {
+          "id": "candidate-r3-1366-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/1366-north-66.png",
+          "caption": "1366 north 66"
+        },
+        {
+          "id": "candidate-r3-390-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/390-north-66.png",
+          "caption": "390 north 66"
+        },
+        {
+          "id": "candidate-r3-1366-north-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/1366-north-76.png",
+          "caption": "1366 north 76"
+        },
+        {
+          "id": "candidate-r3-390-north-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/390-north-76.png",
+          "caption": "390 north 76"
+        },
+        {
+          "id": "candidate-r3-1366-north-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/1366-north-86.png",
+          "caption": "1366 north 86"
+        },
+        {
+          "id": "candidate-r3-390-north-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/390-north-86.png",
+          "caption": "390 north 86"
+        },
+        {
+          "id": "candidate-r3-1366-north-91",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/1366-north-91.png",
+          "caption": "1366 north 91"
+        },
+        {
+          "id": "candidate-r3-390-north-91",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/390-north-91.png",
+          "caption": "390 north 91"
+        },
+        {
+          "id": "candidate-r3-1366-return-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/1366-return-86.png",
+          "caption": "1366 return 86"
+        },
+        {
+          "id": "candidate-r3-390-return-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/390-return-86.png",
+          "caption": "390 return 86"
+        },
+        {
+          "id": "candidate-r3-1366-return-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/1366-return-76.png",
+          "caption": "1366 return 76"
+        },
+        {
+          "id": "candidate-r3-390-return-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/390-return-76.png",
+          "caption": "390 return 76"
+        },
+        {
+          "id": "candidate-r3-1366-return-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/1366-return-66.png",
+          "caption": "1366 return 66"
+        },
+        {
+          "id": "candidate-r3-1366-return-61",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/1366-return-61.png",
+          "caption": "1366 return 61"
+        },
+        {
+          "id": "candidate-r3-390-return-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/390-return-66.png",
+          "caption": "390 return 66"
+        },
+        {
+          "id": "candidate-r3-390-return-61",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/390-return-61.png",
+          "caption": "390 return 61"
+        },
+        {
+          "id": "candidate-r3-perf-1366-perf-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/perf/1366-perf-66.png",
+          "caption": "perf · 1366 perf 66"
+        },
+        {
+          "id": "candidate-r3-perf-390-perf-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/perf/390-perf-66.png",
+          "caption": "perf · 390 perf 66"
+        },
+        {
+          "id": "candidate-r3-perf-1366-perf-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/perf/1366-perf-76.png",
+          "caption": "perf · 1366 perf 76"
+        },
+        {
+          "id": "candidate-r3-perf-390-perf-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/perf/390-perf-76.png",
+          "caption": "perf · 390 perf 76"
+        },
+        {
+          "id": "candidate-r3-perf-1366-perf-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/perf/1366-perf-86.png",
+          "caption": "perf · 1366 perf 86"
+        },
+        {
+          "id": "candidate-r3-perf-390-perf-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r3/perf/390-perf-86.png",
+          "caption": "perf · 390 perf 86"
+        }
+      ],
+      "caption": "Rejected: ground detail was too even and tree crowns remained angular. Matched performance views are included."
+    },
+    {
+      "title": "Attempt 4: smooth crowns",
+      "images": [
+        {
+          "id": "candidate-r4-1366-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-south-start.png",
+          "caption": "1366 south start"
+        },
+        {
+          "id": "candidate-r4-390-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-south-start.png",
+          "caption": "390 south start"
+        },
+        {
+          "id": "candidate-r4-1366-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-north-66.png",
+          "caption": "1366 north 66"
+        },
+        {
+          "id": "candidate-r4-390-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-north-66.png",
+          "caption": "390 north 66"
+        },
+        {
+          "id": "candidate-r4-1366-north-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-north-76.png",
+          "caption": "1366 north 76"
+        },
+        {
+          "id": "candidate-r4-390-north-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-north-76.png",
+          "caption": "390 north 76"
+        },
+        {
+          "id": "candidate-r4-1366-north-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-north-86.png",
+          "caption": "1366 north 86"
+        },
+        {
+          "id": "candidate-r4-390-north-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-north-86.png",
+          "caption": "390 north 86"
+        },
+        {
+          "id": "candidate-r4-1366-north-91",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-north-91.png",
+          "caption": "1366 north 91"
+        },
+        {
+          "id": "candidate-r4-390-north-91",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-north-91.png",
+          "caption": "390 north 91"
+        },
+        {
+          "id": "candidate-r4-1366-return-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-return-86.png",
+          "caption": "1366 return 86"
+        },
+        {
+          "id": "candidate-r4-390-return-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-return-86.png",
+          "caption": "390 return 86"
+        },
+        {
+          "id": "candidate-r4-1366-return-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-return-76.png",
+          "caption": "1366 return 76"
+        },
+        {
+          "id": "candidate-r4-390-return-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-return-76.png",
+          "caption": "390 return 76"
+        },
+        {
+          "id": "candidate-r4-1366-return-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-return-66.png",
+          "caption": "1366 return 66"
+        },
+        {
+          "id": "candidate-r4-1366-return-61",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-return-61.png",
+          "caption": "1366 return 61"
+        },
+        {
+          "id": "candidate-r4-390-return-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-return-66.png",
+          "caption": "390 return 66"
+        },
+        {
+          "id": "candidate-r4-1366-evening-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-evening-66.png",
+          "caption": "1366 evening 66"
+        },
+        {
+          "id": "candidate-r4-390-return-61",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-return-61.png",
+          "caption": "390 return 61"
+        },
+        {
+          "id": "candidate-r4-390-evening-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-evening-66.png",
+          "caption": "390 evening 66"
+        },
+        {
+          "id": "candidate-r4-1366-evening-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-evening-76.png",
+          "caption": "1366 evening 76"
+        },
+        {
+          "id": "candidate-r4-390-evening-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-evening-76.png",
+          "caption": "390 evening 76"
+        },
+        {
+          "id": "candidate-r4-1366-evening-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/1366-evening-86.png",
+          "caption": "1366 evening 86"
+        },
+        {
+          "id": "candidate-r4-390-evening-86",
+          "image": "game3d/shots/works-verges-20261008/candidate-r4/390-evening-86.png",
+          "caption": "390 evening 86"
+        }
+      ],
+      "caption": "Rejected: the smoother crown envelopes looked like solid cushions. Includes morning and evening routes."
+    },
+    {
+      "title": "Attempt 5: sparse pointed leaves",
+      "images": [
+        {
+          "id": "candidate-r5-1366-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r5/1366-south-start.png",
+          "caption": "1366 south start"
+        },
+        {
+          "id": "candidate-r5-390-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r5/390-south-start.png",
+          "caption": "390 south start"
+        },
+        {
+          "id": "candidate-r5-1366-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r5/1366-north-66.png",
+          "caption": "1366 north 66"
+        },
+        {
+          "id": "candidate-r5-390-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r5/390-north-66.png",
+          "caption": "390 north 66"
+        },
+        {
+          "id": "candidate-r5-1366-north-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r5/1366-north-76.png",
+          "caption": "1366 north 76"
+        }
+      ],
+      "caption": "Rejected: sparse pointed leaves decorated broad bare crown faces."
+    },
+    {
+      "title": "Attempt 6: tree shadows restored, foliage still sparse",
+      "images": [
+        {
+          "id": "candidate-r6-1366-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r6/1366-south-start.png",
+          "caption": "1366 south start"
+        },
+        {
+          "id": "candidate-r6-390-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r6/390-south-start.png",
+          "caption": "390 south start"
+        },
+        {
+          "id": "candidate-r6-1366-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r6/1366-north-66.png",
+          "caption": "1366 north 66"
+        },
+        {
+          "id": "candidate-r6-390-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r6/390-north-66.png",
+          "caption": "390 north 66"
+        },
+        {
+          "id": "candidate-r6-1366-north-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r6/1366-north-76.png",
+          "caption": "1366 north 76"
+        }
+      ],
+      "caption": "Rejected: real tree shadows restored grounding, but broad crown faces and sparse low planting remained."
+    },
+    {
+      "title": "Attempt 7: overlapping broad foliage",
+      "images": [
+        {
+          "id": "candidate-r7-390-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r7/390-south-start.png",
+          "caption": "390 south start"
+        },
+        {
+          "id": "candidate-r7-1366-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r7/1366-south-start.png",
+          "caption": "1366 south start"
+        },
+        {
+          "id": "candidate-r7-390-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r7/390-north-66.png",
+          "caption": "390 north 66"
+        },
+        {
+          "id": "candidate-r7-1366-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r7/1366-north-66.png",
+          "caption": "1366 north 66"
+        },
+        {
+          "id": "candidate-r7-1366-north-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r7/1366-north-76.png",
+          "caption": "1366 north 76"
+        }
+      ],
+      "caption": "Rejected: tree and west shrub surfaces improved, but the east underplant still exposed plain polygon masses."
+    },
+    {
+      "title": "Attempt 8: east shrub foliage",
+      "images": [
+        {
+          "id": "candidate-r8-390-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r8/390-south-start.png",
+          "caption": "390 south start"
+        },
+        {
+          "id": "candidate-r8-1366-south-start",
+          "image": "game3d/shots/works-verges-20261008/candidate-r8/1366-south-start.png",
+          "caption": "1366 south start"
+        },
+        {
+          "id": "candidate-r8-390-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r8/390-north-66.png",
+          "caption": "390 north 66"
+        },
+        {
+          "id": "candidate-r8-1366-north-66",
+          "image": "game3d/shots/works-verges-20261008/candidate-r8/1366-north-66.png",
+          "caption": "1366 north 66"
+        },
+        {
+          "id": "candidate-r8-1366-north-76",
+          "image": "game3d/shots/works-verges-20261008/candidate-r8/1366-north-76.png",
+          "caption": "1366 north 76"
+        }
+      ],
+      "caption": "East shrubs receive the same broad foliage surfaces. These are the first representative views, before the full final route checks."
+    },
+    {
+      "title": "Final route: morning, return and evening",
+      "caption": "The reviewed planting on current main, with the ordinary player camera at both sizes. The street remains clear; evening images retain the existing lighting.",
+      "images": [
+        {
+          "id": "final-390-south-start",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-south-start.png",
+          "caption": "Phone south start"
+        },
+        {
+          "id": "final-1366-south-start",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-south-start.png",
+          "caption": "Desktop south start"
+        },
+        {
+          "id": "final-390-north-66",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-north-66.png",
+          "caption": "Phone north 66"
+        },
+        {
+          "id": "final-1366-north-66",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-north-66.png",
+          "caption": "Desktop north 66"
+        },
+        {
+          "id": "final-390-north-76",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-north-76.png",
+          "caption": "Phone north 76"
+        },
+        {
+          "id": "final-1366-north-76",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-north-76.png",
+          "caption": "Desktop north 76"
+        },
+        {
+          "id": "final-390-north-86",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-north-86.png",
+          "caption": "Phone north 86"
+        },
+        {
+          "id": "final-1366-north-86",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-north-86.png",
+          "caption": "Desktop north 86"
+        },
+        {
+          "id": "final-390-north-91",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-north-91.png",
+          "caption": "Phone north 91"
+        },
+        {
+          "id": "final-1366-north-91",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-north-91.png",
+          "caption": "Desktop north 91"
+        },
+        {
+          "id": "final-390-return-86",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-return-86.png",
+          "caption": "Phone return 86"
+        },
+        {
+          "id": "final-1366-return-86",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-return-86.png",
+          "caption": "Desktop return 86"
+        },
+        {
+          "id": "final-1366-return-76",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-return-76.png",
+          "caption": "Desktop return 76"
+        },
+        {
+          "id": "final-390-return-76",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-return-76.png",
+          "caption": "Phone return 76"
+        },
+        {
+          "id": "final-1366-return-66",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-return-66.png",
+          "caption": "Desktop return 66"
+        },
+        {
+          "id": "final-1366-return-61",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-return-61.png",
+          "caption": "Desktop return 61"
+        },
+        {
+          "id": "final-390-return-66",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-return-66.png",
+          "caption": "Phone return 66"
+        },
+        {
+          "id": "final-1366-evening-66",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-evening-66.png",
+          "caption": "Desktop evening 66"
+        },
+        {
+          "id": "final-390-return-61",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-return-61.png",
+          "caption": "Phone return 61"
+        },
+        {
+          "id": "final-390-evening-66",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-evening-66.png",
+          "caption": "Phone evening 66"
+        },
+        {
+          "id": "final-1366-evening-76",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-evening-76.png",
+          "caption": "Desktop evening 76"
+        },
+        {
+          "id": "final-390-evening-76",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-evening-76.png",
+          "caption": "Phone evening 76"
+        },
+        {
+          "id": "final-1366-evening-86",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/1366-evening-86.png",
+          "caption": "Desktop evening 86"
+        },
+        {
+          "id": "final-390-evening-86",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/390-evening-86.png",
+          "caption": "Phone evening 86"
+        }
+      ]
+    },
+    {
+      "title": "Matched checks: current main baseline",
+      "caption": "Same ordinary camera, quality and positions for the default Works arrival and three street points. These are measurement captures; the arrival area is outside the planting changes.",
+      "images": [
+        {
+          "id": "perf-baseline-1366-perf-default-arrival",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-baseline/1366-perf-default-arrival.png",
+          "caption": "Desktop perf default arrival"
+        },
+        {
+          "id": "perf-baseline-1366-perf-66",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-baseline/1366-perf-66.png",
+          "caption": "Desktop perf 66"
+        },
+        {
+          "id": "perf-baseline-1366-perf-76",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-baseline/1366-perf-76.png",
+          "caption": "Desktop perf 76"
+        },
+        {
+          "id": "perf-baseline-1366-perf-86",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-baseline/1366-perf-86.png",
+          "caption": "Desktop perf 86"
+        },
+        {
+          "id": "perf-baseline-390-perf-default-arrival",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-baseline/390-perf-default-arrival.png",
+          "caption": "Phone perf default arrival"
+        },
+        {
+          "id": "perf-baseline-390-perf-66",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-baseline/390-perf-66.png",
+          "caption": "Phone perf 66"
+        },
+        {
+          "id": "perf-baseline-390-perf-76",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-baseline/390-perf-76.png",
+          "caption": "Phone perf 76"
+        },
+        {
+          "id": "perf-baseline-390-perf-86",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-baseline/390-perf-86.png",
+          "caption": "Phone perf 86"
+        }
+      ]
+    },
+    {
+      "title": "Matched checks: final planting",
+      "caption": "Same ordinary camera, quality and positions for the default Works arrival and three street points. These are measurement captures; the arrival area is outside the planting changes.",
+      "images": [
+        {
+          "id": "perf-candidate-1366-perf-default-arrival",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-candidate/1366-perf-default-arrival.png",
+          "caption": "Desktop perf default arrival"
+        },
+        {
+          "id": "perf-candidate-1366-perf-66",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-candidate/1366-perf-66.png",
+          "caption": "Desktop perf 66"
+        },
+        {
+          "id": "perf-candidate-1366-perf-76",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-candidate/1366-perf-76.png",
+          "caption": "Desktop perf 76"
+        },
+        {
+          "id": "perf-candidate-1366-perf-86",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-candidate/1366-perf-86.png",
+          "caption": "Desktop perf 86"
+        },
+        {
+          "id": "perf-candidate-390-perf-default-arrival",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-candidate/390-perf-default-arrival.png",
+          "caption": "Phone perf default arrival"
+        },
+        {
+          "id": "perf-candidate-390-perf-66",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-candidate/390-perf-66.png",
+          "caption": "Phone perf 66"
+        },
+        {
+          "id": "perf-candidate-390-perf-76",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-candidate/390-perf-76.png",
+          "caption": "Phone perf 76"
+        },
+        {
+          "id": "perf-candidate-390-perf-86",
+          "image": "game3d/shots/works-verges-20261008/integrated-r8/perf-candidate/390-perf-86.png",
+          "caption": "Phone perf 86"
+        }
+      ]
+    }
+  ],
+  "preview": "final-1366-north-76",
+  "links": [
+    {
+      "label": "Visit Works",
+      "href": "game3d/?place=works"
+    }
+  ],
+  "commit": "df84fa38f26d08bf348cf289ca99735eb3349995"
+}
