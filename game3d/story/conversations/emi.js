@@ -10,7 +10,8 @@ export default {
       { choice: [
         { text: 'What made you join the swimming club?', go: 'chat_emi_club', if: '!chat_emi_club_known' },
         { text: 'Are you getting much time to join in?', go: 'chat_emi_turn', if: 'chat_emi_club_known' },
-        { text: 'What makes things easier for you at work?', go: 'chat_emi_team' },
+        { text: 'What makes things easier for you at work?', go: 'chat_emi_team', if: '!chat_emi_work_talked' },
+        { text: 'Can we talk about how work is going?', go: 'chat_emi_team_again', if: 'chat_emi_work_talked' },
         { text: 'How do I ask someone to say it again?', go: 'chat_emi_repeat_word', if: '!know_mouichido' },
         { text: 'I’ll let you get on.', go: 'chat_emi_leave' },
       ] },
@@ -52,6 +53,10 @@ export default {
       { say: 'eric', emo: 'curious', text: 'What makes things easier for you at work?' },
       { say: 'emi', emo: 'casual', text: 'Tell me what you’ve actually checked. If something still fails, I’d rather hear that than promise upstairs that it’s fixed.' },
       { say: 'emi', emo: 'sheepish', text: 'I’m trying to stop making the promise first.' },
+      { say: 'emi', emo: 'curious', text: 'Is that workable, or do you need help with something first?'  },
+      { go: 'chat_emi_work_choice' },
+    ],
+    chat_emi_work_choice: [
       { choice: [
         { text: '{daijoubu}. I’ll tell you if I’m stuck.', go: 'chat_emi_ok', if: 'know_daijoubu' },
         { text: 'I’ll bring you the result, even if it’s bad.', go: 'chat_emi_result' },
@@ -67,15 +72,80 @@ export default {
       { go: 'chat_emi_result_reply' },
     ],
     chat_emi_result_reply: [
-      { say: 'emi', emo: 'warm', text: 'Good. It gives me something I can explain, at least.' },
+      { say: 'emi', emo: 'warm', text: 'Good. And I’ll ask what you’ve checked before I tell anyone it’s finished.' },
+      { set: { chat_emi_work_help: 'results', chat_emi_work_talked: true } },
+      { do: 'remember', who: 'emi', id: 'work_agreement', text: 'Talked about what each of you needs when handling requests.' },
       { go: 'chat_emi_leave' },
     ],
     chat_emi_language: [
-      { say: 'emi', emo: 'warm', text: 'Ask them to show you. And you can ask again. You’re allowed to take a moment.' },
+      { say: 'eric', emo: 'hesitant', text: 'I’m still learning what people are asking for.' },
+      { say: 'emi', emo: 'warm', text: 'Ask them to show you. If you still aren’t sure, bring the question to me before you start taking anything apart.' },
+      { say: 'emi', emo: 'casual', text: 'I can help with the request. You can still do the repair.' },
+      { set: { chat_emi_work_help: 'request', chat_emi_work_talked: true } },
+      { do: 'remember', who: 'emi', id: 'work_agreement', text: 'Talked about what each of you needs when handling requests.' },
       { if: '!know_mouichido', then: [{ choice: [
         { text: 'How do I ask them to say it again?', go: 'chat_emi_repeat_word' },
         { text: 'Thanks. I’ll try that.', go: 'chat_emi_leave' },
       ] }], else: [{ go: 'chat_emi_leave' }] },
+    ],
+    chat_emi_team_again: [
+      { if: "chat_emi_work_help == 'request'", then: [
+        { say: 'emi', emo: 'curious', text: 'Is it a request you want to go over? You said that was the difficult part.' },
+      ], else: [
+        { say: 'emi', emo: 'curious', text: 'Have you got a result for me, or are you still checking? Either is all right.' },
+      ] },
+      { choice: [
+        { text: 'I worry that asking makes me look unable to do the job.', go: 'chat_emi_worry' },
+        { text: 'I need a different sort of help now.', go: 'chat_emi_work_choice' },
+        { text: 'Nothing to report. I just came to say hello.', go: 'chat_emi_hello' },
+      ] },
+    ],
+    chat_emi_worry: [
+      { say: 'eric', emo: 'hesitant', text: 'I worry that asking makes me look unable to do the job.' },
+      { say: 'emi', emo: 'warm', text: 'You can tell me you didn’t understand someone. I need to know that before I send you off with another request.' },
+      { choice: [
+        { text: 'Could you hear me out before giving me advice?' , go: 'chat_emi_ask_first' },
+        { text: 'I’ll try saying when I’m unsure.', go: 'chat_emi_unsure' },
+      ] },
+    ],
+    chat_emi_ask_first: [
+      { say: 'eric', emo: 'casual', text: 'Could you hear me out before giving me advice?'  },
+      { say: 'emi', emo: 'hesitant', text: 'Yes. Sorry, I went straight into sorting it out. Was there more you wanted to say?'  },
+      { set: 'chat_emi_ask_first' },
+      { do: 'remember', who: 'emi', id: 'ask_first', text: 'Asked her to hear you out before offering advice.' },
+      { choice: [
+        { text: 'That was it. I just wanted you to know.', go: 'chat_emi_heard' },
+        { text: 'I could use help understanding the requests.', go: 'chat_emi_language' },
+      ] },
+    ],
+    chat_emi_heard: [
+      { say: 'emi', emo: 'warm', text: 'All right. Thanks for telling me.' }, { go: 'chat_emi_leave' },
+    ],
+    chat_emi_unsure: [
+      { say: 'emi', emo: 'warm', text: 'Please do. I may need a moment to change what I was going to tell upstairs.' },
+      { say: 'emi', emo: 'sheepish', text: 'That doesn’t mean I wish you’d kept quiet.' },
+      { go: 'chat_emi_leave' },
+    ],
+    chat_emi_hello: [
+      { if: 'chat_emi_ask_first', then: [
+        { say: 'emi', emo: 'warm', text: 'Hello. I was about to offer advice again. I’ll let you tell me what you came over for.' },
+      ], else: [
+        { say: 'emi', emo: 'sheepish', text: 'Oh, hello. Sorry, you came over and I went straight to work.' },
+      ] },
+      { choice: [
+        { text: 'How are you doing?', go: 'chat_emi_herself' },
+        { text: 'I’ll see you later.', go: 'chat_emi_leave' },
+      ] },
+    ],
+    chat_emi_herself: [
+      { say: 'eric', emo: 'warm', text: 'How are you doing?' },
+      { say: 'emi', emo: 'casual', text: 'All right, thanks. I was about to tell you how the requests were going.' },
+      { if: 'chat_emi_club_known', then: [
+        { say: 'emi', emo: 'warm', text: 'I do want to keep going to the club. It helps having something else to talk about with Kuro.' },
+      ], else: [
+        { say: 'emi', emo: 'warm', text: 'Kuro keeps asking me that as well. She usually gets a better answer if we’re away from work.' },
+      ] },
+      { go: 'chat_emi_leave' },
     ],
     chat_emi_repeat_word: [
       { say: 'emi', emo: 'slow', slow: true, text: '{mouichido}. Once more.' },

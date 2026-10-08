@@ -21,6 +21,7 @@ const menu = (understood = false) => [
       { text: '{yasumi}… Was your mother telling you to take a break?', go: 'chat_mio_break', if: '!chat_mio_break_understood' },
       { text: 'Does your mother still ask about your weekends?', go: 'chat_mio_break_again', if: 'chat_mio_break_understood' },
     ] : []),
+    { text: 'About settling in here...', go: 'chat_mio_settling_again', if: 'chat_mio_home || chat_mio_checkin_offered' },
     { text: 'I’ll let you get on.', go: 'chat_mio_leave' },
   ] },
 ];
@@ -48,7 +49,88 @@ export default {
       { say: 'mio', emo: 'casual', text: 'Then, when I leave, I get the same thing every time.' },
       { say: 'mio', overheard: true, emo: 'fond', text: '休みの日ぐらい、仕事を忘れなさい。' },
       { say: 'mio', emo: 'casual', text: 'She has opinions about my weekends, also.' },
-      { set: 'chat_mio_home' }, { go: 'chat_mio_leave' },
+      { set: 'chat_mio_home' }, { go: 'chat_mio_settling' },
+    ],
+    chat_mio_settling: [
+      { say: 'mio', emo: 'curious', text: 'How about you? After work, I mean. Is it okay here?' },
+      { set: 'chat_mio_checkin_offered' },
+      { go: 'chat_mio_settling_choice' },
+    ],
+    chat_mio_settling_choice: [{ choice: [
+      { text: 'I like having some time to myself.', go: 'chat_mio_quiet_evening' },
+      { text: 'I’d like to talk more. I keep losing the words.', go: 'chat_mio_try_evening' },
+      { text: 'I’m still working that out.', go: 'chat_mio_not_sure' },
+    ] }],
+    chat_mio_quiet_evening: [
+      { say: 'eric', emo: 'casual', text: 'I like having some time to myself.' },
+      { say: 'mio', emo: 'warm', text: 'Mm. You spend all day trying to understand everybody. I wouldn’t want to do that in English.' },
+      { say: 'mio', emo: 'casual', text: 'We can leave it there if you like. I only wanted to ask.' },
+      { set: { chat_mio_evenings: 'quiet' } }, { go: 'chat_mio_settling_memory' },
+    ],
+    chat_mio_try_evening: [
+      { say: 'eric', emo: 'hesitant', text: 'I’d like to talk more. I keep losing the words.' },
+      { say: 'mio', emo: 'casual', text: 'Oh. I keep answering in English because it’s faster. You can tell me to wait, you know.' },
+      { choice: [
+        { text: 'Give me a moment before you help.', go: 'chat_mio_wait_for_me' },
+        { text: 'English is fine. I just wanted to say it.', go: 'chat_mio_english_fine' },
+      ] },
+    ],
+    chat_mio_wait_for_me: [
+      { say: 'mio', emo: 'warm', text: 'Okay. Go on, then.' },
+      { set: { chat_mio_evenings: 'try' } },
+      { do: 'remember', who: 'mio', id: 'settling_in', text: 'Asked how life here felt after work, and listened to what you wanted.' },
+      { go: 'chat_mio_return_questions' },
+    ],
+    chat_mio_english_fine: [
+      { say: 'mio', emo: 'casual', text: 'Okay. We can just talk, then.' },
+      { set: { chat_mio_evenings: 'english' } }, { go: 'chat_mio_settling_memory' },
+    ],
+    chat_mio_not_sure: [
+      { say: 'mio', emo: 'casual', text: 'Fair enough. You don’t have to give me an answer now.' },
+      { go: 'chat_mio_leave' },
+    ],
+    chat_mio_settling_memory: [
+      { do: 'remember', who: 'mio', id: 'settling_in', text: 'Asked how life here felt after work, and listened to what you wanted.' },
+      { go: 'chat_mio_leave' },
+    ],
+    chat_mio_settling_again: [
+      { if: '!chat_mio_checkin_offered', then: [{ go: 'chat_mio_settling' }] },
+      { if: "chat_mio_evenings == 'quiet'", then: [
+        { say: 'mio', emo: 'warm', text: 'You said you liked some time to yourself. Do you want company today, or just a quick hello?' },
+      ], else: [{ if: "chat_mio_evenings == 'try'", then: [
+        { say: 'mio', emo: 'casual', text: 'You wanted a moment to find the words. Okay, I’m listening.' },
+      ], else: [{ if: "chat_mio_evenings == 'english'", then: [
+        { say: 'mio', emo: 'warm', text: 'We can use English. What did you want to talk about?' },
+      ], else: [
+        { say: 'mio', emo: 'curious', text: 'Have you figured out what you want to do after work?' },
+      ] }] }] },
+      { go: 'chat_mio_return_questions' },
+    ],
+    chat_mio_return_questions: [
+      { choice: [
+        { text: '{yasumi}… Does your mother take her own advice?', go: 'chat_mio_her_break', if: 'know_yasumi && chat_mio_break_understood' },
+        { text: 'Does your mother ask how you’re doing?', go: 'chat_mio_mother_asks' },
+        { text: 'I feel differently about it now.', go: 'chat_mio_settling_choice' },
+        { text: 'Just saying hello today.', go: 'chat_mio_short_hello' },
+      ] },
+    ],
+    chat_mio_her_break: [
+      { if: 'know_yasumi', then: [
+        { say: 'eric', emo: 'curious', text: '{yasumi}… Does your mother take her own advice?' },
+      ], else: [
+        { say: 'eric', emo: 'curious', text: 'Does your mother take her own advice about resting?' },
+      ] },
+      { say: 'mio', emo: 'amused', text: 'She’s packing food while she tells me. I’ve tried pointing that out.' },
+      { say: 'mio', emo: 'fond', text: 'Then she asks if I don’t want it. So I take the food.' },
+      { go: 'chat_mio_leave' },
+    ],
+    chat_mio_mother_asks: [
+      { say: 'eric', emo: 'curious', text: 'Does your mother ask how you’re doing?' },
+      { say: 'mio', emo: 'casual', text: 'Yes, and I say it’s fine. Then she asks what I’ve eaten, and I have to give an actual answer.' },
+      { go: 'chat_mio_leave' },
+    ],
+    chat_mio_short_hello: [
+      { say: 'mio', emo: 'warm', text: 'Hi, then. See you around.' }, { go: 'chat_mio_leave' },
     ],
     chat_mio_food_again: [
       { say: 'eric', emo: 'curious', text: 'Does your mother still send food back with you?' },
