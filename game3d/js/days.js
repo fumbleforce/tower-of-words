@@ -52,6 +52,7 @@ export function nextDaySave(prev) {
     flags,
     pendingStart: D.start,
     transition: null,
+    zones: null,
     ended: false,
     runner: { onceDone: [] },
     world: { inside: true }, // a day starts in Eric's room (places/dorms.js restoreState)

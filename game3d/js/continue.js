@@ -39,6 +39,7 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
     ui.goal(saved.ui?.goal || '');
     ui.sideGoal(saved.ui?.sideGoal || '');
     game.hold = saved.ui?.hold || null;
+    game.restoreZones?.(saved);
     game.busy = false;
     game.saveEnabled = true;
     const transition = saved.transition;
@@ -74,6 +75,6 @@ export function dayStartSave(day, history = 'mio', place = null) {
   const base = prev?.ended && prev.day === day - 1 ? prev : sampleDayEnd(day, history);
   const save = nextDaySave({ ...base, day: day - 1 });
   return place && place !== save.place
-    ? { ...save, place, flags: { ...save.flags, place }, pendingStart: place, world: null }
+    ? { ...save, place, flags: { ...save.flags, place }, pendingStart: place, world: null, zones: null }
     : save;
 }

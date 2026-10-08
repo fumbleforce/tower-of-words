@@ -20,6 +20,7 @@ import { visitedList, loadVisited } from './travel/visited.js';
 import { newCast } from './roles.js';
 import { markPeriod } from './period-flags.js';
 import { restoreMet } from './saves/met.js';
+import { snapshotPlace } from './saves/zones.js';
 
 expandMc(PEOPLE); // the protagonist's tokens in the People cards (mc.js)
 
@@ -486,9 +487,7 @@ export function save(game) {
       data.ui = { goal: ui.goalText, sideGoal: ui.sideText || '', ...(game.hold ? { hold: game.hold } : {}) };
     if (game.runner?.snapshot) data.runner = game.runner.snapshot();
     else if (game.runner?.onceDone) data.runner = { onceDone: [...game.runner.onceDone] };
-    if (game.place?.snapshotState) data.world = game.place.snapshotState();
-    if (game.transition) data.transition = { ...game.transition };
-    data.pendingStart = game.pendingStart || null;
+    Object.assign(data, snapshotPlace(game));
     if (game.ended) data.ended = true;
     data.log = ui.logJSON?.(); // the backlog (ui/backlog.js)
     data.mc = MC.id; // who plays this game (mc.js), and who fills each role (roles.js)
