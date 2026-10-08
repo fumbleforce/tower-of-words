@@ -1,0 +1,831 @@
+{
+  "title": "Sports frontage and shared north-street gardens",
+  "date": "2026-10-08",
+  "by": "codex",
+  "caption": "The gym and north-street office have recessed reflective glazing, grounded planting and clear approaches. Shared views retain the original trees and use the same beds. All design and capture attempts remain visible below. The existing desktop day-three pool gait failure is tracked separately in work issue #350.",
+  "commit": "143378d1f5dfd742e65e81d8b305f791ba847c98",
+  "preview": "final-10-1366-arrival",
+  "sections": [
+    {
+      "title": "Native outdoor audit",
+      "caption": "Sports, harbour and east-coast comparisons before choosing the sports frontage. Original native camera and actual walking routes.",
+      "images": [
+        {
+          "id": "baseline-1366-sports-arrival",
+          "image": "game3d/shots/outside-audit-20261008/baseline/1366-sports-arrival.png",
+          "caption": "Sports arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "baseline-1366-sports-gym",
+          "image": "game3d/shots/outside-audit-20261008/baseline/1366-sports-gym.png",
+          "caption": "Sports gym. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "baseline-1366-sports-pool",
+          "image": "game3d/shots/outside-audit-20261008/baseline/1366-sports-pool.png",
+          "caption": "Sports pool. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "baseline-1366-harbour-arrival",
+          "image": "game3d/shots/outside-audit-20261008/baseline/1366-harbour-arrival.png",
+          "caption": "Harbour arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "baseline-390-sports-arrival",
+          "image": "game3d/shots/outside-audit-20261008/baseline/390-sports-arrival.png",
+          "caption": "Sports arrival. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "baseline-1366-harbour-quay",
+          "image": "game3d/shots/outside-audit-20261008/baseline/1366-harbour-quay.png",
+          "caption": "Harbour quay. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "baseline-390-sports-gym",
+          "image": "game3d/shots/outside-audit-20261008/baseline/390-sports-gym.png",
+          "caption": "Sports gym. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "baseline-390-sports-pool",
+          "image": "game3d/shots/outside-audit-20261008/baseline/390-sports-pool.png",
+          "caption": "Sports pool. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "baseline-390-harbour-arrival",
+          "image": "game3d/shots/outside-audit-20261008/baseline/390-harbour-arrival.png",
+          "caption": "Harbour arrival. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "baseline-1366-harbour-landing",
+          "image": "game3d/shots/outside-audit-20261008/baseline/1366-harbour-landing.png",
+          "caption": "Harbour landing. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "baseline-1366-east_coast-arrival",
+          "image": "game3d/shots/outside-audit-20261008/baseline/1366-east_coast-arrival.png",
+          "caption": "East coast arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "baseline-390-harbour-quay",
+          "image": "game3d/shots/outside-audit-20261008/baseline/390-harbour-quay.png",
+          "caption": "Harbour quay. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "baseline-1366-east_coast-coast",
+          "image": "game3d/shots/outside-audit-20261008/baseline/1366-east_coast-coast.png",
+          "caption": "East coast coast. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "baseline-390-harbour-landing",
+          "image": "game3d/shots/outside-audit-20261008/baseline/390-harbour-landing.png",
+          "caption": "Harbour landing. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "baseline-390-east_coast-arrival",
+          "image": "game3d/shots/outside-audit-20261008/baseline/390-east_coast-arrival.png",
+          "caption": "East coast arrival. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "baseline-1366-east_coast-turn",
+          "image": "game3d/shots/outside-audit-20261008/baseline/1366-east_coast-turn.png",
+          "caption": "East coast turn. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "baseline-390-east_coast-coast",
+          "image": "game3d/shots/outside-audit-20261008/baseline/390-east_coast-coast.png",
+          "caption": "East coast coast. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "baseline-390-east_coast-turn",
+          "image": "game3d/shots/outside-audit-20261008/baseline/390-east_coast-turn.png",
+          "caption": "East coast turn. Native walking camera. Phone, 390 × 844."
+        }
+      ]
+    },
+    {
+      "title": "First frontage assembly",
+      "caption": "Physical openings introduced; the flat cyan glass and tall uniform groundcover were rejected in review.",
+      "images": [
+        {
+          "id": "attempt-1-1366-sports-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-1/1366-sports-arrival.png",
+          "caption": "Sports arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-1-390-sports-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-1/390-sports-arrival.png",
+          "caption": "Sports arrival. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "attempt-1-1366-sports-office",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-1/1366-sports-office.png",
+          "caption": "Sports office. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-1-390-sports-office",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-1/390-sports-office.png",
+          "caption": "Sports office. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "attempt-1-1366-sports-gym",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-1/1366-sports-gym.png",
+          "caption": "Sports gym. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-1-390-sports-gym",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-1/390-sports-gym.png",
+          "caption": "Sports gym. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "attempt-1-1366-sports-pool",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-1/1366-sports-pool.png",
+          "caption": "Sports pool. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-1-390-sports-pool",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-1/390-sports-pool.png",
+          "caption": "Sports pool. Native walking camera. Phone, 390 × 844."
+        }
+      ]
+    },
+    {
+      "title": "Reflection material trial",
+      "caption": "Intermediate glass response and lower planting; retained for comparison.",
+      "images": [
+        {
+          "id": "attempt-2-1366-sports-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-2/1366-sports-arrival.png",
+          "caption": "Sports arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-2-1366-sports-office",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-2/1366-sports-office.png",
+          "caption": "Sports office. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-2-1366-sports-gym",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-2/1366-sports-gym.png",
+          "caption": "Sports gym. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-2-1366-sports-pool",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-2/1366-sports-pool.png",
+          "caption": "Sports pool. Native walking camera. Desktop, 1366 × 860."
+        }
+      ]
+    },
+    {
+      "title": "Reflection and cover refinement",
+      "caption": "Intermediate material and planting composition.",
+      "images": [
+        {
+          "id": "attempt-3-1366-sports-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-3/1366-sports-arrival.png",
+          "caption": "Sports arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-3-1366-sports-office",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-3/1366-sports-office.png",
+          "caption": "Sports office. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-3-1366-sports-gym",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-3/1366-sports-gym.png",
+          "caption": "Sports gym. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-3-1366-sports-pool",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-3/1366-sports-pool.png",
+          "caption": "Sports pool. Native walking camera. Desktop, 1366 × 860."
+        }
+      ]
+    },
+    {
+      "title": "Local reflected horizon",
+      "caption": "A quiet reflected sky and ground gradient replaces blank glass; planting remains under review.",
+      "images": [
+        {
+          "id": "attempt-4-1366-sports-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-4/1366-sports-arrival.png",
+          "caption": "Sports arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-4-1366-sports-office",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-4/1366-sports-office.png",
+          "caption": "Sports office. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-4-1366-sports-gym",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-4/1366-sports-gym.png",
+          "caption": "Sports gym. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-4-1366-sports-pool",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-4/1366-sports-pool.png",
+          "caption": "Sports pool. Native walking camera. Desktop, 1366 × 860."
+        }
+      ]
+    },
+    {
+      "title": "Pane-scale reflection and quieter cover",
+      "caption": "Correct per-pane UVs make the reflected horizon readable; grouped shrubs and lower cover are being refined.",
+      "images": [
+        {
+          "id": "attempt-5-1366-sports-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-5/1366-sports-arrival.png",
+          "caption": "Sports arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-5-1366-sports-office",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-5/1366-sports-office.png",
+          "caption": "Sports office. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-5-1366-sports-gym",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-5/1366-sports-gym.png",
+          "caption": "Sports gym. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "attempt-5-1366-sports-pool",
+          "image": "game3d/shots/sports-frontage-20261008/attempt-5/1366-sports-pool.png",
+          "caption": "Sports pool. Native walking camera. Desktop, 1366 × 860."
+        }
+      ]
+    },
+    {
+      "title": "Native routes, first harness attempt",
+      "caption": "Improved facade and planting. The route failed at an unreachable bench destination; phone also stopped short at a transient pool crowd. Failure originals retained.",
+      "images": [
+        {
+          "id": "round-6-1366-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/1366-arrival.png",
+          "caption": "Arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-6-1366-office",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/1366-office.png",
+          "caption": "Office. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-6-1366-turn",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/1366-turn.png",
+          "caption": "Turn. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-6-390-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/390-arrival.png",
+          "caption": "Arrival. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-6-390-office",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/390-office.png",
+          "caption": "Office. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-6-1366-gym",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/1366-gym.png",
+          "caption": "Gym. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-6-390-turn",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/390-turn.png",
+          "caption": "Turn. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-6-1366-west",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/1366-west.png",
+          "caption": "West. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-6-390-gym",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/390-gym.png",
+          "caption": "Gym. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-6-390-west",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/390-west.png",
+          "caption": "West. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-6-1366-clerestory",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/1366-clerestory.png",
+          "caption": "Clerestory. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-6-1366-pool",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/1366-pool.png",
+          "caption": "Pool. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-6-1366-failure",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/1366-failure.png",
+          "caption": "Retained failed route capture; destination/harness failure, not accepted final proof. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-6-390-clerestory",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/390-clerestory.png",
+          "caption": "Clerestory. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-6-390-failure",
+          "image": "game3d/shots/sports-frontage-20261008/round-6/390-failure.png",
+          "caption": "Retained failed route capture; destination/harness failure, not accepted final proof. Phone, 390 × 844."
+        }
+      ]
+    },
+    {
+      "title": "Native routes, revised bench destination",
+      "caption": "The revised bench target remained outside the authored walking rectangles. The harness was corrected to use the adjacent courts walk; movement thresholds were not relaxed.",
+      "images": [
+        {
+          "id": "round-7-1366-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/1366-arrival.png",
+          "caption": "Arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-7-390-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/390-arrival.png",
+          "caption": "Arrival. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-7-1366-office",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/1366-office.png",
+          "caption": "Office. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-7-390-office",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/390-office.png",
+          "caption": "Office. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-7-1366-turn",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/1366-turn.png",
+          "caption": "Turn. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-7-390-turn",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/390-turn.png",
+          "caption": "Turn. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-7-1366-gym",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/1366-gym.png",
+          "caption": "Gym. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-7-390-gym",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/390-gym.png",
+          "caption": "Gym. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-7-1366-west",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/1366-west.png",
+          "caption": "West. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-7-390-west",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/390-west.png",
+          "caption": "West. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-7-1366-clerestory",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/1366-clerestory.png",
+          "caption": "Clerestory. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-7-390-clerestory",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/390-clerestory.png",
+          "caption": "Clerestory. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-7-1366-pool",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/1366-pool.png",
+          "caption": "Pool. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-7-390-pool",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/390-pool.png",
+          "caption": "Pool. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-7-1366-failure",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/1366-failure.png",
+          "caption": "Retained failed route capture; destination/harness failure, not accepted final proof. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-7-390-failure",
+          "image": "game3d/shots/sports-frontage-20261008/round-7/390-failure.png",
+          "caption": "Retained failed route capture; destination/harness failure, not accepted final proof. Phone, 390 × 844."
+        }
+      ]
+    },
+    {
+      "title": "Grounded soil and day/evening inspection",
+      "caption": "Routes completed, but an unsupported evening-to-morning hook changed the HUD without restoring the materials. Images labelled morning-restored and the subsequent detail views show evening materials. The old corner-bed border and shared street mismatch remained under review.",
+      "images": [
+        {
+          "id": "round-8-1366-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-arrival.png",
+          "caption": "Arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-1366-office",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-office.png",
+          "caption": "Office. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-1366-turn",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-turn.png",
+          "caption": "Turn. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-1366-gym",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-gym.png",
+          "caption": "Gym. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-1366-west",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-west.png",
+          "caption": "West. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-390-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-arrival.png",
+          "caption": "Arrival. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-390-office",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-office.png",
+          "caption": "Office. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-390-turn",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-turn.png",
+          "caption": "Turn. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-1366-clerestory",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-clerestory.png",
+          "caption": "Clerestory. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-1366-pool",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-pool.png",
+          "caption": "Pool. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-1366-bench",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-bench.png",
+          "caption": "Bench. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-390-gym",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-gym.png",
+          "caption": "Gym. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-390-west",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-west.png",
+          "caption": "West. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-1366-gym-evening",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-gym-evening.png",
+          "caption": "Gym evening. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-390-clerestory",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-clerestory.png",
+          "caption": "Clerestory. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-1366-office-evening",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-office-evening.png",
+          "caption": "Office evening. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-390-pool",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-pool.png",
+          "caption": "Pool. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-1366-turn-evening",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-turn-evening.png",
+          "caption": "Turn evening. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-390-bench",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-bench.png",
+          "caption": "Bench. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-1366-office-morning-restored",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-office-morning-restored.png",
+          "caption": "Office morning restored. Native walking camera. Harness label is misleading: evening materials remain despite Morning HUD; this does not prove morning restoration. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-1366-map",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-map.png",
+          "caption": "Map. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-1366-detail-office",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-detail-office.png",
+          "caption": "Detail office. Supplemental oblique camera inspection, not the native walking camera. Harness label is misleading: evening materials remain despite Morning HUD; this does not prove morning restoration. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-1366-detail-gym",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-detail-gym.png",
+          "caption": "Detail gym. Supplemental oblique camera inspection, not the native walking camera. Harness label is misleading: evening materials remain despite Morning HUD; this does not prove morning restoration. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-1366-detail-clerestory",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-detail-clerestory.png",
+          "caption": "Detail clerestory. Supplemental oblique camera inspection, not the native walking camera. Harness label is misleading: evening materials remain despite Morning HUD; this does not prove morning restoration. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-390-gym-evening",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-gym-evening.png",
+          "caption": "Gym evening. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-1366-neighbor-east-lane",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/1366-neighbor-east-lane.png",
+          "caption": "Neighbor east lane. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "round-8-390-office-evening",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-office-evening.png",
+          "caption": "Office evening. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-390-turn-evening",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-turn-evening.png",
+          "caption": "Turn evening. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-390-office-morning-restored",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-office-morning-restored.png",
+          "caption": "Office morning restored. Native walking camera. Harness label is misleading: evening materials remain despite Morning HUD; this does not prove morning restoration. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-390-map",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-map.png",
+          "caption": "Map. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-390-detail-office",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-detail-office.png",
+          "caption": "Detail office. Supplemental oblique camera inspection, not the native walking camera. Harness label is misleading: evening materials remain despite Morning HUD; this does not prove morning restoration. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-390-detail-gym",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-detail-gym.png",
+          "caption": "Detail gym. Supplemental oblique camera inspection, not the native walking camera. Harness label is misleading: evening materials remain despite Morning HUD; this does not prove morning restoration. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-390-detail-clerestory",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-detail-clerestory.png",
+          "caption": "Detail clerestory. Supplemental oblique camera inspection, not the native walking camera. Harness label is misleading: evening materials remain despite Morning HUD; this does not prove morning restoration. Phone, 390 × 844."
+        },
+        {
+          "id": "round-8-390-neighbor-east-lane",
+          "image": "game3d/shots/sports-frontage-20261008/round-8/390-neighbor-east-lane.png",
+          "caption": "Neighbor east lane. Native walking camera. Phone, 390 × 844."
+        }
+      ]
+    },
+    {
+      "title": "Fresh morning, grounded perimeter and gym joins",
+      "caption": "Fresh-load morning details demonstrate physical recesses. The old corner-bed underlay is removed and gym foundation planting is shared with office quarter. The east-lane view exposed the remaining r3 garden mismatch, corrected in the next round.",
+      "images": [
+        {
+          "id": "final-9-1366-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-arrival.png",
+          "caption": "Arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-arrival.png",
+          "caption": "Arrival. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-office",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-office.png",
+          "caption": "Office. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-office",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-office.png",
+          "caption": "Office. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-turn",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-turn.png",
+          "caption": "Turn. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-turn",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-turn.png",
+          "caption": "Turn. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-bench",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-bench.png",
+          "caption": "Bench. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-bench",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-bench.png",
+          "caption": "Bench. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-gym",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-gym.png",
+          "caption": "Gym. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-gym",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-gym.png",
+          "caption": "Gym. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-detail-office",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-detail-office.png",
+          "caption": "Detail office. Supplemental oblique camera inspection, not the native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-detail-office",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-detail-office.png",
+          "caption": "Detail office. Supplemental oblique camera inspection, not the native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-detail-gym",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-detail-gym.png",
+          "caption": "Detail gym. Supplemental oblique camera inspection, not the native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-detail-gym",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-detail-gym.png",
+          "caption": "Detail gym. Supplemental oblique camera inspection, not the native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-390-detail-clerestory",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-detail-clerestory.png",
+          "caption": "Detail clerestory. Supplemental oblique camera inspection, not the native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-detail-clerestory",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-detail-clerestory.png",
+          "caption": "Detail clerestory. Supplemental oblique camera inspection, not the native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-gym-evening",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-gym-evening.png",
+          "caption": "Gym evening. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-gym-evening",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-gym-evening.png",
+          "caption": "Gym evening. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-turn-evening",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-turn-evening.png",
+          "caption": "Turn evening. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-turn-evening",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-turn-evening.png",
+          "caption": "Turn evening. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-office-evening",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-office-evening.png",
+          "caption": "Office evening. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-390-map",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-map.png",
+          "caption": "Map. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-office-evening",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-office-evening.png",
+          "caption": "Office evening. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-1366-map",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-map.png",
+          "caption": "Map. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-neighbor-east-lane",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-neighbor-east-lane.png",
+          "caption": "Neighbor east lane. Native walking camera. This revealed the office bed mismatch corrected in round 10. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-neighbor-east-lane",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-neighbor-east-lane.png",
+          "caption": "Neighbor east lane. Native walking camera. This revealed the office bed mismatch corrected in round 10. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-9-390-neighbor-office-quarter",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/390-neighbor-office-quarter.png",
+          "caption": "Neighbor office quarter. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-9-1366-neighbor-office-quarter",
+          "image": "game3d/shots/sports-frontage-20261008/final-9/1366-neighbor-office-quarter.png",
+          "caption": "Neighbor office quarter. Native walking camera. Desktop, 1366 × 860."
+        }
+      ]
+    },
+    {
+      "title": "Final shared gardens and native paths",
+      "caption": "The office beds and original three trees now belong to the shared frontage, matching sports and east lane. Both native routes completed with no console errors, overlaps, spins or gait episodes. The gym and oblique facade details from round 9 are unchanged.",
+      "images": [
+        {
+          "id": "final-10-1366-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/1366-arrival.png",
+          "caption": "Arrival. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-10-390-arrival",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/390-arrival.png",
+          "caption": "Arrival. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-10-1366-office",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/1366-office.png",
+          "caption": "Office. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-10-390-office",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/390-office.png",
+          "caption": "Office. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-10-1366-turn",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/1366-turn.png",
+          "caption": "Turn. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-10-390-turn",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/390-turn.png",
+          "caption": "Turn. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-10-1366-bench",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/1366-bench.png",
+          "caption": "Bench. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-10-390-bench",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/390-bench.png",
+          "caption": "Bench. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-10-390-office-evening",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/390-office-evening.png",
+          "caption": "Office evening. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-10-1366-office-evening",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/1366-office-evening.png",
+          "caption": "Office evening. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-10-390-map",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/390-map.png",
+          "caption": "Map. Phone, 390 × 844."
+        },
+        {
+          "id": "final-10-1366-map",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/1366-map.png",
+          "caption": "Map. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-10-390-neighbor-east-lane",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/390-neighbor-east-lane.png",
+          "caption": "Neighbor east lane. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-10-1366-neighbor-east-lane",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/1366-neighbor-east-lane.png",
+          "caption": "Neighbor east lane. Native walking camera. Desktop, 1366 × 860."
+        },
+        {
+          "id": "final-10-390-neighbor-office-quarter",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/390-neighbor-office-quarter.png",
+          "caption": "Neighbor office quarter. Native walking camera. Phone, 390 × 844."
+        },
+        {
+          "id": "final-10-1366-neighbor-office-quarter",
+          "image": "game3d/shots/sports-frontage-20261008/final-10/1366-neighbor-office-quarter.png",
+          "caption": "Neighbor office quarter. Native walking camera. Desktop, 1366 × 860."
+        }
+      ]
+    }
+  ]
+}
