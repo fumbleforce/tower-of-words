@@ -78,7 +78,7 @@ export function* harbourSteps() {
     mesh = new Parts(); // the works' chain-link, its own see-through set
   yield* rowSteps(sets, c.paver, c.parts, signs, lights, P.BAND_BLOCKS);
   yield* quaySteps(c.paver, c.parts, water);
-  yield* yardSteps(p, c.parts, lights, signs);
+  const yard = yield* yardSteps(p, c.parts, lights, signs);
   const coast = placeIn(new THREE.Group(), CHUNK);
   yield* groundsSteps(c, lights, isl, coast);
   yield* laneViewSteps(c, lights);
@@ -120,6 +120,7 @@ export function* harbourSteps() {
     exits: P.EXITS,
     doors: P.DOORS,
     evening() {
+      yard.evening();
       nooks.evening();
       shadows.evening();
       lit.evening();

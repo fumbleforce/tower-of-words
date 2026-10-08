@@ -15,6 +15,7 @@ import { kerb } from '../outdoor/edges.js';
 import { SEA } from '../skyline.js';
 import { QUAY_LINE } from '../island-harbour.js';
 import * as P from './plan.js';
+import { bittFoot, fenderFixings, ladderReturns, copingJoints, apronDrain } from './quay-details.js';
 
 const C = {
   wall: '#7b7f84',
@@ -51,10 +52,13 @@ function edge(p, a, b, { skip = [], ladders = true, line = true, foot = SEA_Y - 
     box(p, C.wall, at(m, -0.25), d, len + 0.5, 0.5, foot, -0.12, NO_CAST);
     // (its top 5 mm over the 0.04 of what meets it along the edge, so the two never lie level)
     box(p, C.coping, at(m, -0.38), d, len + 0.04, 0.84, -0.12, 0.045, NO_CAST);
+    copingJoints(p, at, d, u0, u1);
     box(p, C.foam, at(m, 0.3), d, len, 0.36, SEA_Y + 0.002, SEA_Y + 0.008, NO_CAST);
     if (line) box(p, C.line, at(m, -1.05), d, Math.max(0.2, len - 0.8), 0.12, 0.004, 0.012, NO_CAST);
-    for (let f = u0 + 1.2; f < u1 - 0.6; f += 4.4)
+    for (let f = u0 + 1.2; f < u1 - 0.6; f += 4.4) {
       box(p, C.fender, at(f, 0.1), d, 0.55, 0.2, SEA_Y + 0.05, -0.14, NO_CAST);
+      fenderFixings(p, at, d, f, SEA_Y);
+    }
     for (
       let f = u0 + 0.8;
       f < u1 - 0.4;
@@ -67,11 +71,13 @@ function edge(p, a, b, { skip = [], ladders = true, line = true, foot = SEA_Y - 
 }
 // a mooring bitt: a short dark post with a wider cap
 function bitt(p, x, z) {
+  bittFoot(p, x, z);
   p.geo(C.bitt, new THREE.CylinderGeometry(0.15, 0.18, 0.32, 8).translate(x, 0.2, z), NO_CAST);
   p.geo(C.bitt, new THREE.CylinderGeometry(0.22, 0.2, 0.07, 8).translate(x, 0.39, z), NO_CAST);
 }
 // a ladder down the quay's face to the water: two rails and rungs, its rails bent over the coping
 function ladder(p, [x, z], d) {
+  ladderReturns(p, [x, z], d, SEA_Y);
   for (const s of [-0.22, 0.22]) {
     const [rx, rz] = [x + d[0] * s, z + d[1] * s];
     p.box(STEEL.mid, 0.05, -SEA_Y + 0.55, 0.05, rx, SEA_Y - 0.1, rz, NO_CAST);
@@ -124,6 +130,7 @@ function* quays(p) {
 // works lane) and its east edge north of the street (the works lay it too, seen from the works street's mouth,
 // harbour/grounds.js worksViewSteps)
 export function yardGround(pv, p) {
+  apronDrain(p, P.SHED);
   const Y = P.YARD,
     O = P.OFFICE,
     W = P.WORKS_LANE;
