@@ -17,6 +17,7 @@ import { frontDoor } from '../outdoor/block-style.js';
 import { STEEL, rod } from '../outdoor/furniture.js';
 import { fittings } from '../office-quarter/row.js';
 import * as P from './plan.js';
+import { hallFittings } from './yard-details.js';
 
 export const C = {
   base: '#8c8d8c',
@@ -336,6 +337,7 @@ function* hall(p, sets, signs, lights) {
     onFace(sets.lit, '#b9d3e3', F.n, t - 0.34, t + 0.34, 2.05, 2.55, 0.03, 0.04, NO);
     onFace(p, '#3f4b55', F.n, t - 0.34, t + 0.34, 2.05, 2.55, 0.025, 0.03, NO);
   }
+  hallFittings(p);
   // condensers and a duct on the roof
   for (let k = 0; k < 3; k++) {
     const x = x0 + 2.2 + k * 2.6;
