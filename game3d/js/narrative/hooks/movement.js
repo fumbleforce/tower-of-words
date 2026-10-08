@@ -61,6 +61,7 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
       place: game.place.name,
       flags: { ...flags },
       world: game.place.snapshotState?.(),
+      zones: game.snapshotZones?.(),
       ui: { goal: ui.goalText || '', sideGoal: ui.sideText || '', hold: game.hold || null },
       camera: close ? { ...close, ...(close.target ? { target: close.target.toArray() } : {}) } : null,
     };
@@ -69,6 +70,7 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
     if (staging.place !== game.place.name) throw new Error('Scene staging belongs to another place');
     game.walker.stop();
     game.place.restoreState?.({ flags: staging.flags, world: staging.world, runner: { execution: true } });
+    game.restoreZones?.(staging, { legacy: false });
     if (staging.ui) {
       ui.goal(staging.ui.goal);
       ui.sideGoal(staging.ui.sideGoal);

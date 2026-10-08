@@ -29,6 +29,7 @@ import { liftPeople } from '../look/char-lift.js';
 import { keepPublic } from '../travel/ways.js';
 import { noteVisit } from '../travel/visited.js';
 import { installFlavorFinds, attachFlavorFinds } from '../flavor-finds/index.js';
+import { snapshotZones, restoreZones, suppressArrivalZones } from '../gameplay/zones.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -60,6 +61,8 @@ export function createPlaceLifecycle(
   { PLACES, setComposer, resize, size, buildMarkers, nearSet, zoneSet, snapshot, crossfade },
 ) {
   const ui = game.ui;
+  game.snapshotZones = () => snapshotZones(game, zoneSet);
+  game.restoreZones = (saved, options) => restoreZones(game, zoneSet, saved, options);
   installFinds(game); // the photos and papers Eric picks up (finds/index.js)
   installTickets(game); // the repair tickets and their app on Eric's computers (tickets/index.js)
   installConversations(game);
@@ -185,9 +188,9 @@ export function createPlaceLifecycle(
     syncFinds(place); // prints already picked up stay gone, also after a load
     buildMarkers(place);
     ui.goal('');
-    if (persist) save(game);
     nearSet.clear();
     zoneSet.clear();
+    if (persist) save(game);
     return place;
   }
 
@@ -229,10 +232,7 @@ export function createPlaceLifecycle(
     await trips.arrive(game, game.place, slot);
     // a later day: a way out he arrives standing in (B2's lift, back up at the forecourt) waits until he steps out of
     // it and back in, so a trip never turns straight round
-    if (sim.day > 1) {
-      const p = game.player.root.position;
-      for (const [z, inside] of Object.entries(game.place.zones || {})) if (inside(p.x, p.z)) zoneSet.add(z);
-    }
+    if (sim.day > 1) suppressArrivalZones(game, zoneSet);
     document.body.classList.remove('busy', 'trip');
     game.busy = false;
     game.walker.locked = false;

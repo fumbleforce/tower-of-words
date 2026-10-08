@@ -34,6 +34,7 @@ import { PLACES } from './places/factories.js';
 import { snapshot as snapshotOf, crossfade } from './places/crossfade.js';
 import { installSim, sim, stepAmbient, save, loadSave, clearSave } from './sim.js';
 import { createContinue, dayStartSave } from './continue.js';
+import { stepZones } from './gameplay/zones.js';
 import { installViewer } from './plugins.js';
 import { installHud } from './ui/hud.js';
 import { installFollowCamera } from './camera/index.js';
@@ -415,15 +416,7 @@ function step(dt, drawn) {
   // nearest usable thing, the Say target and near: triggers (gameplay/targeting.js); then the zones
   let { near, st } = scanTargets(game, nearSet);
   const mp = mio.root.position;
-  for (const [z, fn] of Object.entries(place.zones || {})) {
-    const inz = fn(mp.x, mp.z);
-    // A zone fires once per visit. Entry during a scene or before its condition becomes true
-    // remains pending until the trigger can run, even if the player stays inside.
-    if (inz && !zoneSet.has(z) && !game.busy && game.runner.has('zone:' + z)) {
-      zoneSet.add(z);
-      game.runner.trigger('zone:' + z);
-    } else if (!inz) zoneSet.delete(z);
-  }
+  stepZones(game, zoneSet);
   // a target the player chose (Tab / Next in the action menu) holds while it's usable and within 1.7 m
   const lk = game.targetLock;
   if (lk) {
