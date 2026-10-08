@@ -27,7 +27,9 @@ export function quarterBeds(parts, beds, offset = [0, 0]) {
       const low = { geo: (c, g, o) => p.geo(c, g, { ...o, cast: false }) };
       mound(low, x, z, r, ['#486447', '#4a6849', '#466548'][i % 3], {
         y: 0.018,
-        squash: bed.cover ? 0.68 + (Math.sin(i * 19.3) + 1) * 0.12 : 0.38 + (Math.sin(i * 19.3) + 1) * 0.16,
+        squash:
+          bed.cover?.squash ??
+          (bed.cover ? 0.68 + (Math.sin(i * 19.3) + 1) * 0.12 : 0.38 + (Math.sin(i * 19.3) + 1) * 0.16),
         turn: i * 2.39996,
       });
     });

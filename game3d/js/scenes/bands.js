@@ -38,6 +38,7 @@ import { planting as officeLawns } from './office-quarter/grounds.js';
 import { mergeStaticSteps } from './merge-static.js';
 import { quarterGrounds } from './campus/quarter-grounds.js';
 import { southQuarterGrounds } from './forecourt/quarter-planting.js';
+import { shedGarden } from './campus/shed-garden.js';
 import { BANDS } from './bands-plan.js';
 
 export { BANDS };
@@ -66,6 +67,10 @@ export function bandIds(chunk) {
 
 // each builder: (band, island-frame group, out: { evening, update, cards } lists, the shared collectors)
 const BUILD = {
+  *shedGarden(b, isl, out, s) {
+    shedGarden(band(b.rects).parts(s.p));
+    yield;
+  },
   *quarterGrounds(b, isl, out, s) {
     const parts = band(b.rects).parts(s.p);
     quarterGrounds(parts);
@@ -183,7 +188,7 @@ export function* bandSteps(root, chunk) {
     isl.add(g);
     yield* BUILD[b.by](b, g, out, s);
     // These shared trees keep their campus shadow policy across the walked seam.
-    s.build(g, out, b.by === 'quarterGrounds');
+    s.build(g, out, b.by === 'quarterGrounds' || b.by === 'shedGarden');
     // blocks' fronts stand tall and show from most of the place: they merge with the place's own meshes instead
     if (b.by !== 'fronts') {
       yield* mergeStaticSteps(g);

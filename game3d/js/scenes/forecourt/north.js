@@ -25,6 +25,7 @@ import { blockSets, buildBlockSets, officeBlock, doorAt, BLOCK } from '../outdoo
 import { BUILDINGS, CHUNKS } from '../island-layout.js';
 import { QUARTER_OPENING, JUNCTION_TREE } from './quarter-planting-plan.js';
 import { southQuarterGrounds, avenueTree } from './quarter-planting.js';
+import { shedGarden } from '../campus/shed-garden.js';
 import { TOWN } from '../town.js';
 import { bikeRow } from './details.js';
 import * as P from './plan.js';
@@ -265,6 +266,10 @@ export function* northSteps(root, set, { closed = true, planting = null } = {}) 
   const p = new Parts({ planting }),
     q = new Parts({ planting });
   streets(p, q, set);
+  shedGarden(
+    p,
+    CHUNKS.forecourt.at.map((v) => -v),
+  );
   southQuarterGrounds(
     p,
     CHUNKS.forecourt.at.map((v) => -v),

@@ -92,6 +92,7 @@ export const BANDS = {
   ],
   office_quarter: [
     { by: 'quarterGrounds', rects: [[-8, 13, -50.4, -19.25]] },
+    { by: 'shedGarden', rects: [[-30, -4.4, -44.5, -28.2]] },
     // the lawns south of the office street, behind its own belts, between the bank, the print shop and m6
     {
       by: 'lawn',
