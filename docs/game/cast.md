@@ -10,7 +10,7 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 
 | Id | Name | Who they are |
 |---|---|---|
-| `eric` | Eric | The player. IT support engineer on a support contract, based on B2. He is 37, with a lot of work experience (Jørgen, 2026-10-09). |
+| `eric` | Eric | The player. IT support engineer on a support contract, based on B2. |
 | `mio` | Mio | B2's programmer. |
 | `mori` | Mr. Mori | On the B2 team; used to be a manager. |
 | `kenji` | Kenji | B2's newest engineer before Eric. |
@@ -56,7 +56,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 ### Eric (`eric`)
 
 - The default protagonist. Carina can play instead: a woman with the same bio and job, bisexual. The stable story id `eric` means the player whichever protagonist is chosen. Identity and asset selections come from game3d/data/mc/; see [Protagonists](systems.md#protagonists) for configuration and voice status.
-- The player. From Norway. Age not decided (old prompts said 34 or 29).
+- The player. From Norway. Age 37, with a lot of work experience (Jørgen, 2026-10-09).
 - Work: IT support on B2, on a support contract to keep Amakawa's ancient systems running ([setting.md](setting.md)). Repair requests will take him all over the island.
 - Home: moving to the island on day 1; his things were sent ahead. A company dorm room, the worst one, facing a concrete wall a couple of metres away (decided for the VN version, 2026-09-25): room 203 on 2F (built as `dorms`, [places.md](places.md)).
 - Speaks English, and barely any Japanese: "arigatō" is about it. He can greet everyone from day 1 and learns greetings and simple phrases quickly; more Japanese opens up the other people (Jørgen, 2026-09-28). Tired, polite and dry.
@@ -65,7 +65,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Mio (`mio`)
 
-- Age 25. B2's programmer. Of the people Eric works beside, the only one with English (loose, learned from work and the internet).
+- Age 30 (Jørgen, 2026-10-09). B2's programmer. Of the people Eric works beside, the only one with English (loose, learned from work and the internet).
 - Home: on the island. Her mother lives on the mainland; Mio stays over sometimes and comes back on the monorail with a bag of her mother's pickles ("My mother thinks island has no food").
 - Routine: looks after B2's old servers in the machine room, where she also eats lunch because "it's quiet, and nobody talks to me there". Hates bowing; that's why she's on B2. Anything reported broken goes on her list.
 - Mio is an asocial gamer. She values her privacy and alone time. A few people are exceptions (Jørgen, 2026-10-09). She is dry, busy and low on energy. On the train she reluctantly gets Eric up to speed. She will not let a teammate embarrass B2 through lack of preparation. She calls him 外人 as she would say "the new guy". Mori corrects her to 外国の方.
