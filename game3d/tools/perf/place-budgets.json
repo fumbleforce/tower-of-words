@@ -22,22 +22,6 @@
   },
   "allowance": { "loadMs": 0.15 },
   "places": {
-    "bakery": {
-      "phone": {
-        "calls": { "max": 288, "issue": 374 }
-      },
-      "desktop": {
-        "calls": { "max": 534, "issue": 374 }
-      }
-    },
-    "canteen": {
-      "phone": {
-        "calls": { "max": 330, "issue": 374 }
-      },
-      "desktop": {
-        "calls": { "max": 848, "issue": 374 }
-      }
-    },
     "dorm_commons": {
       "phone": {
         "texMB": { "max": 138, "issue": 373 }
@@ -55,14 +39,6 @@
       "phone": {
         "geoMB": { "max": 71, "issue": 374 },
         "texMB": { "max": 119, "issue": 373 }
-      }
-    },
-    "ferry_terminal": {
-      "phone": {
-        "calls": { "max": 230, "issue": 374 }
-      },
-      "desktop": {
-        "calls": { "max": 545, "issue": 374 }
       }
     },
     "forecourt": {

@@ -58,6 +58,9 @@ const BATCHED = new Set([
   'office_quarter',
   'harbour',
   'works',
+  'canteen',
+  'bakery',
+  'ferry_terminal',
 ]);
 
 export function createPlaceLifecycle(
