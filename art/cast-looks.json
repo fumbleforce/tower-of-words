@@ -1,0 +1,154 @@
+{
+ "about": "Prompt words for every cast member's look: the one source for every image tool (tools/cast_looks.py reads it; the image gen dashboard, tools/production.py and the round scripts take their character looks from there, never from their own strings). Entries with cast_md are copied from that person's Look line in docs/game/cast.md (age from the same section) and checked against the approved portrait; node tools/facts/cast-looks.mjs fails when they disagree, and --stamp <id> records that an entry was re-checked after its cast.md line changed. Entries without cast_md are not in cast.md (reward-scene cast); this file is their home. Build lines and negatives follow art/PROMPTS.md (Cast prompt lines).",
+ "cast": [
+  {
+   "id": "eric", "checked": "dde566e3", "cast_md": "eric", "name": "Eric", "gender": "male", "age": 37, "who": "Nordic man", "skin": "fair pale skin",
+   "hair": "dark-blond hair, same colour all over, tied in a short ponytail at the back", "eyes": "blue eyes",
+   "glasses": "silver rectangular glasses with clear lenses", "extra": "light stubble",
+   "build": "slim average build", "signature": "", "outfit": "a grey hoodie under a navy blazer",
+   "short": "Eric, 37, Nordic man, dark-blond ponytail, stubble, silver glasses",
+   "negative": "undercut, shaved sides, two-tone hair, (rim light, red rim light, red outline, backlighting:1.4)",
+   "portrait": "art/approved/mc/eric-eric-ink-2001-neutral.webp", "aliases": ["Nordic man", "Scandinavian man"]
+  },
+  {
+   "id": "carina", "checked": "a1a18def", "cast_md": "eric", "look_line": "Carina's look", "name": "Carina", "gender": "female", "age": 37, "who": "woman", "skin": "fair skin",
+   "hair": "a golden blonde bob with dark roots, parted to one side", "eyes": "teal eyes",
+   "glasses": "", "extra": "small black stud earrings",
+   "build": "slim with soft curves", "signature": "", "outfit": "a black ribbed long-sleeved top and mid-grey trousers",
+   "short": "Carina, 37, fair skin, golden blonde bob with dark roots, teal eyes",
+   "negative": "glasses", "portrait": "art/approved/carina/carina-neutral.webp"
+  },
+  {
+   "id": "mio", "checked": "e35ef4f1", "cast_md": "mio", "name": "Mio", "gender": "female", "age": 30, "who": "woman", "skin": "pale skin",
+   "hair": "very dark green hair bordering on black in a messy loose bun with bangs, bright green underneath showing at the ends and nape",
+   "eyes": "light tan eyes", "glasses": "thin-framed taupe-grey glasses with clear lenses", "extra": "",
+   "build": "slim with soft curves", "signature": "big headphones around her neck",
+   "outfit": "a dark green oversized hoodie and a lanyard with an ID card",
+   "short": "Mio, 30, pale skin, dark green-black hair with bright green underneath, glasses",
+   "negative": "teal hair, hair streaks, tan, tanned skin, sunglasses, tinted glasses",
+   "portrait": "art/approved/mio/mio-after.webp"
+  },
+  {
+   "id": "mori", "checked": "cf8c266e", "cast_md": "mori", "name": "Mr. Mori", "gender": "male", "age": 58, "who": "Japanese man", "skin": "",
+   "hair": "neatly combed grey hair", "eyes": "", "glasses": "", "extra": "a lined, kind face",
+   "build": "slim", "signature": "", "outfit": "a dark grey suit, a white shirt and a navy tie",
+   "short": "Mr. Mori, 58, neatly combed grey hair, dark grey suit",
+   "negative": "", "portrait": "art/approved/mori/mori-mori-new-713-neutral.webp", "aliases": ["Mori"]
+  },
+  {
+   "id": "kenji", "checked": "768278b0", "cast_md": "kenji", "name": "Kenji", "gender": "male", "age": 21, "who": "young Japanese man", "skin": "",
+   "hair": "short messy black bedhead hair", "eyes": "dark eyes", "glasses": "", "extra": "a round, friendly face",
+   "build": "soft pudgy build", "signature": "", "outfit": "a white short-sleeved shirt, a dark tie and a lanyard",
+   "short": "Kenji, 21, black bedhead hair, round face, white shirt and tie",
+   "negative": "", "portrait": "art/approved/kenji/kenji-kenji-ink-2001-neutral.webp"
+  },
+  {
+   "id": "emi", "checked": "b7717cfa", "cast_md": "emi", "name": "Emi", "gender": "female", "age": 32, "who": "woman", "skin": "fair skin",
+   "hair": "a reddish auburn shoulder-length bob with side-swept bangs", "eyes": "warm brown eyes",
+   "glasses": "brown tortoiseshell glasses with clear lenses", "extra": "",
+   "build": "curvy", "signature": "", "outfit": "a charcoal blazer over a cream blouse",
+   "short": "Emi, 32, fair skin, auburn bob, tortoiseshell glasses",
+   "negative": "sunglasses, tinted glasses", "portrait": "art/approved/emi/emi-emi-base-2001-neutral.webp"
+  },
+  {
+   "id": "ishibashi", "checked": "f05fbffc", "cast_md": "guard", "name": "Mr. Ishibashi", "gender": "male", "age": 64, "who": "Japanese man", "skin": "",
+   "hair": "bald", "eyes": "", "glasses": "glasses with clear lenses", "extra": "a thin white moustache and bushy white eyebrows",
+   "build": "wiry", "signature": "", "outfit": "a navy security uniform; his name plate, shoulder patch and collar pin carry no letters",
+   "short": "Mr. Ishibashi, 64, bald, white moustache, glasses, navy security uniform",
+   "negative": "text, letters", "portrait": "art/approved/ishibashi/guard-guard-ink-2001-neutral.webp", "aliases": ["Ishibashi"]
+  },
+  {
+   "id": "hamada", "checked": "bc2d4eb4", "cast_md": "kuroda", "name": "Mr. Hamada", "gender": "male", "age": 54, "who": "Japanese man", "skin": "",
+   "hair": "short black hair going grey at the temples", "eyes": "", "glasses": "", "extra": "a thin, tired face",
+   "build": "thin", "signature": "", "outfit": "a navy suit and tie",
+   "short": "Mr. Hamada, 54, thin tired face, black hair grey at the temples, navy suit",
+   "negative": "", "portrait": "art/approved/hamada/kuroda-hamada-new-743-neutral.webp", "aliases": ["Hamada"]
+  },
+  {
+   "id": "kuro", "checked": "5899850f", "cast_md": "kuro", "name": "Kuro", "gender": "female", "age": 38, "who": "woman", "skin": "pale skin",
+   "hair": "black hair in a high bun held with two hair sticks, a blunt fringe and long side locks with a blue streak",
+   "eyes": "grey eyes", "glasses": "black-framed glasses with clear lenses", "extra": "dark eyeliner and dark lipstick",
+   "build": "slender with long legs", "signature": "", "outfit": "a black suit over a dark blouse",
+   "short": "Kuro, 38, pale skin, black bun with hair sticks, black glasses with clear lenses, dark lipstick",
+   "negative": "sunglasses, tinted eyewear", "portrait": "art/approved/kuro/kuro-after.webp"
+  },
+  {
+   "id": "aoi", "checked": "9903e92e", "cast_md": "aoi", "name": "Aoi", "gender": "female", "age": 24, "who": "mature female", "skin": "fair skin",
+   "hair": "a shoulder-length bright pink bob with dark roots and teal underneath", "eyes": "violet eyes", "glasses": "", "extra": "",
+   "build": "slim with small B-cup breasts, not flat", "signature": "",
+   "outfit": "a green varsity jacket with a pink star patch over a white top, a lanyard",
+   "short": "Aoi, 24, fair skin, pink bob with dark roots and teal underneath",
+   "negative": "", "portrait": "art/approved/aoi/aoi-aoi-base-2001-neutral.webp"
+  },
+  {
+   "id": "rei", "checked": "4be7111e", "cast_md": "rei", "name": "Rei", "gender": "female", "age": 41, "who": "woman", "skin": "fair skin",
+   "hair": "long silver-grey hair in a high ponytail with long side bangs", "eyes": "steel-grey eyes", "glasses": "",
+   "extra": "sharp eyeliner and gold hoop earrings",
+   "build": "tall and curvy", "signature": "", "outfit": "a light grey suit over a black high-neck top",
+   "short": "Rei, 41, fair skin, silver ponytail, steel-grey eyes, gold hoops",
+   "negative": "tan, tanned skin", "portrait": "art/approved/rei/rei-after.webp"
+  },
+  {
+   "id": "kaori", "cast_md": null, "name": "Kaori", "gender": "female", "age": 44, "who": "mature female", "skin": "tanned brown skin",
+   "hair": "short messy grey hair with one teal streak", "eyes": "", "glasses": "", "extra": "",
+   "build": "tall, slender, lean with soft curves", "signature": "a floral tattoo on her right forearm",
+   "outfit": "a white chef's jacket and a black apron",
+   "short": "Kaori, 44, tall, tanned, short grey hair with a teal streak",
+   "negative": "fat, obese, plump, chubby, thick waist, belly, muscular, muscles, abs, bodybuilder, veins, broad shoulders",
+   "portrait": "art/approved/kaori/kaori-after.webp"
+  },
+  {
+   "id": "yuzuki", "cast_md": null, "name": "Yuzuki", "gender": "female", "age": 31, "who": "woman", "skin": "fair skin",
+   "hair": "long honey-blonde hair in a low ponytail over her left shoulder", "eyes": "blue-violet eyes", "glasses": "",
+   "extra": "a small mole on her chin and silver hoop earrings",
+   "build": "lean with medium breasts", "signature": "", "outfit": "a mustard-yellow corduroy blazer over a cream turtleneck",
+   "short": "Yuzuki, 31, fair skin, honey-blonde ponytail, silver hoops",
+   "negative": "", "portrait": "art/approved/yuzuki/yuzuki-e-after.webp"
+  },
+  {
+   "id": "tsubasa", "cast_md": null, "name": "Tsubasa", "gender": "female", "age": 27, "who": "mature female runner", "skin": "lightly tanned skin",
+   "hair": "short light-brown hair in a tiny ponytail with two blue hair clips", "eyes": "", "glasses": "", "extra": "",
+   "build": "slim runner's build with small breasts", "signature": "", "outfit": "a navy track jacket",
+   "short": "Tsubasa, 27, lightly tanned, short light-brown hair with blue clips",
+   "negative": "chubby, thick waist, belly, muscular, muscles, abs, bodybuilder, veins, broad shoulders",
+   "portrait": "art/approved/tsubasa/lfl-tsubasa-facing-1.webp"
+  },
+  {
+   "id": "kanae", "cast_md": null, "name": "Kanae", "gender": "female", "age": 30, "who": "woman", "skin": "fair skin",
+   "hair": "a messy bright blonde wolf cut with bangs over one eye", "eyes": "yellow eyes", "glasses": "", "extra": "a black choker",
+   "build": "slim", "signature": "", "outfit": "an orange jacket over a grey hoodie, a film camera",
+   "short": "Kanae, 30, fair skin, bright blonde wolf cut, black choker",
+   "negative": "", "portrait": "art/approved/kanae/kanae-after.webp"
+  },
+  {
+   "id": "sumi", "cast_md": null, "name": "Sumi", "gender": "female", "age": 24, "who": "mature female office worker", "skin": "fair skin",
+   "hair": "dark brown hair in two short low pigtails, straight-cut bangs", "eyes": "brown eyes", "glasses": "", "extra": "red lipstick",
+   "build": "petite with medium breasts", "signature": "", "outfit": "a red knit vest over a cream shirt and brown trousers",
+   "short": "Sumi, 24, fair skin, brown pigtails",
+   "negative": "", "portrait": "art/approved/sumi/sumi-after.webp"
+  },
+  {
+   "id": "saki", "cast_md": null, "name": "Saki", "gender": "female", "age": 28, "who": "woman", "skin": "fair skin",
+   "hair": "a glossy jet-black chin-length bob with a severe straight fringe", "eyes": "dark red eyes", "glasses": "",
+   "extra": "a beauty mark under her left eye",
+   "build": "slender", "signature": "", "outfit": "a burgundy three-piece suit with a green vest and a tie",
+   "short": "Saki, 28, fair skin, black bob with a straight fringe and a beauty mark",
+   "negative": "", "portrait": "art/approved/saki/saki-after.webp"
+  },
+  {
+   "id": "nanami", "cast_md": null, "name": "Nanami", "gender": "female", "age": 29, "who": "woman", "skin": "fair skin",
+   "hair": "mocha-brown hair in a neat low bun with a pencil through it", "eyes": "brown eyes", "glasses": "", "extra": "",
+   "build": "tall and athletic", "signature": "", "outfit": "a dusty-pink vest and skirt over a white blouse",
+   "short": "Nanami, 29, fair skin, tall, mocha-brown bun",
+   "negative": "", "portrait": "art/approved/nanami/nanami-g-after.webp"
+  },
+  {
+   "id": "kiyoko", "cast_md": null, "name": "Kiyoko", "gender": "female", "age": 56,
+   "age_words": "an elegant 56-year-old mature female, an older woman with fine wrinkles at her eyes", "who": "", "skin": "",
+   "hair": "a razor-sharp silver bob", "eyes": "", "glasses": "", "extra": "dark red lipstick",
+   "build": "slim", "signature": "", "outfit": "a camel coat dress",
+   "short": "Kiyoko, 50s, silver bob, dark red lipstick",
+   "negative": "witch, hag, elderly, very old", "portrait": "art/approved/kiyoko/kiyoko-camel-after.webp"
+  }
+ ]
+}

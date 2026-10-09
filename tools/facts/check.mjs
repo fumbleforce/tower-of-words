@@ -6,7 +6,7 @@
 //
 // Areas: cast.md (people, names on screen, likes, portraits), places.md (things, spots, zones, who is there when,
 // small moments, creatures, nooks), words.md (every word), systems.md (the drinks), stories/*.md (cast, nodes, words taught, flags),
-// and every story node belonging to a storyline or a place's small moments.
+// and every story node belonging to a storyline or a place's small moments; art/cast-looks.json against cast.md (cast-looks.mjs).
 // Rows or items marked "(to build)" or "(to remove)" are decided but not done yet: while the game still differs
 // they're listed as pending and don't fail the check; once the game matches, the check asks for the mark to go.
 // Exit code 1 and a list of differences on drift; "facts check: ok" otherwise.
@@ -21,6 +21,7 @@ import { CROWD } from '../../game3d/js/crowd/data.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
+import { checkLooks, checkTools } from './cast-looks.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const G = (p) => path.join(ROOT, 'game3d', p);
@@ -535,7 +536,7 @@ if (DUMP) {
   console.log('\nWords taught (type steps):'); for (const [sf, N] of Object.entries(game.nodes)) for (const [n, v] of Object.entries(N)) for (const t of v.types) console.log(`  ${t.word} from ${t.from} in ${sf} ${n}`);
   process.exit(0);
 }
-for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['nooks', checkNooks], ['creatures', checkCreatures], ['crowd', checkCrowd], ['trips', checkTrips], ['island', checkIsland], ['island plan', checkIslandPlan], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
+for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['nooks', checkNooks], ['creatures', checkCreatures], ['crowd', checkCrowd], ['trips', checkTrips], ['island', checkIsland], ['island plan', checkIslandPlan], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories], ['cast looks', () => { checkLooks(bad); checkTools(bad); }]]) {
   try { fn(game); } catch (e) { bad(area, e.message); }
 }
 if (pending.length) { console.log(`\nPending (decided, not done yet):`); for (const p of pending) console.log('  ' + p); }
