@@ -15,7 +15,8 @@ process.on('exit', () => srv.kill());
 await new Promise((r) => setTimeout(r, 700));
 
 const SIZES = { desktop: { width: 1440, height: 1000 }, phone: { width: 390, height: 844, isMobile: true, deviceScaleFactor: 2 } };
-const PAGES = { list: 'assets', piece: 'asset/outdoor/furniture/bench', building: 'asset/outdoor/block/officeBlock' };
+const PAGES = { list: 'assets', piece: 'asset/outdoor/furniture/bench', building: 'asset/outdoor/block/officeBlock',
+  faceted: 'asset/outdoor/planting/keyaki', street: 'asset/diorama/planting/streetPlanting' };
 await withBrowserJob('asset-library-shots', async (browser) => {
   for (const [size, vp] of Object.entries(SIZES)) {
     const { isMobile, deviceScaleFactor, ...viewport } = vp;
@@ -28,7 +29,10 @@ await withBrowserJob('asset-library-shots', async (browser) => {
       await page.waitForTimeout(800);
       const file = path.join(OUT, `${name}-${size}.png`);
       await page.screenshot({ path: file, fullPage: name === 'list' ? false : true });
-      if (name === 'list') await page.screenshot({ path: path.join(OUT, `${name}-${size}-full.png`), fullPage: true });
+      if (name === 'list') {
+        await page.screenshot({ path: path.join(OUT, `${name}-${size}-full.png`), fullPage: true });
+        await page.locator('#alooks').screenshot({ path: path.join(OUT, `looks-${size}.png`) }); // street style and faceted
+      }
       console.log(file);
     }
     if (errs.length) console.log('page errors:', errs.join('\n'));

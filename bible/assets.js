@@ -4,7 +4,7 @@
 // tools/assets/render3d.mjs. Local bible only: the public site has no source to read.
 
 let DATA = null, R = '../';
-const F = { family: '', place: '', q: '', dupes: false };
+const F = { family: '', place: '', q: '', dupes: false, look: '' };
 
 const thumbOf = (v) => v && v.thumb;
 const lineLink = (esc, file, line, text) => `<a class="src" href="#src/${esc(file)}:${line}">${esc(text || `${file.replace(/^game3d\/js\//, '')}:${line}`)}</a>`;
@@ -17,6 +17,18 @@ async function load(ROOT) {
   DATA.dupeById = new Map(DATA.dupes.map((d) => [d.id, d]));
   return DATA;
 }
+
+// street style or old faceted (tools/assets/kit.json looks): the tag on a card
+const LOOKS = {
+  street: ['live', 'Street style'],
+  covered: ['legacy', 'Faceted, street in forecourt'],
+  missing: ['draft', 'Faceted, no street version'],
+};
+const lookKey = (p) => (p.look === 'street' ? 'street' : p.look === 'faceted' ? (p.street ? 'covered' : 'missing') : '');
+const lookTag = (esc, p) => {
+  const k = lookKey(p);
+  return k ? `<span class="st ${LOOKS[k][0]}">${esc(LOOKS[k][1])}</span>` : '';
+};
 
 function swatches(esc, pal) {
   return `<div class="aswatch">${Object.entries(pal).map(([k, c]) => `<span title="${esc(k)} ${esc(c)}"><i style="background:${esc(c)}"></i>${esc(k)}</span>`).join('')}</div>`;
@@ -32,7 +44,7 @@ function card(esc, e) {
     <div class="aph">${ph}${v.length > 1 ? `<span class="avn">${v.length} variants</span>` : ''}</div>
     <div class="abody"><b>${esc(e.name)}</b><code>${esc(p.name)}</code>
       <span class="ameta">${n ? `${n} place${n > 1 ? 's' : ''}` : p.usedSelf ? 'only in its own file' : '<span class="st rejected">unused</span>'}
-      ${p.dupes.length ? '<span class="st review">built elsewhere too</span>' : ''}</span></div></a>`;
+      ${lookTag(esc, p)}${p.dupes.length ? '<span class="st review">built elsewhere too</span>' : ''}</span></div></a>`;
 }
 
 function dupeBlock(esc, d, open = false) {
@@ -49,6 +61,7 @@ function listHtml(esc) {
     if (F.family && p.family !== F.family) return false;
     if (F.place && !p.places.includes(F.place)) return false;
     if (F.dupes && !p.dupes.length) return false;
+    if (F.look && lookKey(p) !== F.look && !(F.look === 'faceted' && p.look === 'faceted')) return false;
     if (F.q) {
       const hay = `${e.name} ${p.name} ${e.paths.join(' ')} ${p.doc} ${p.places.join(' ')}`.toLowerCase();
       if (!F.q.toLowerCase().split(/\s+/).every((w) => hay.includes(w))) return false;
@@ -56,7 +69,8 @@ function listHtml(esc) {
     return true;
   });
   const groups = fams.map(([id, label, about]) => {
-    const list = shown.filter((e) => e.piece.family === id);
+    // pieces with a picture first, so a family opens on what it looks like
+    const list = shown.filter((e) => e.piece.family === id).sort((a, b) => !!thumbOf(b.variants?.[0]) - !!thumbOf(a.variants?.[0]));
     return list.length ? `<section class="afam" id="fam-${esc(id)}"><h2>${esc(label)} <span class="muted">(${list.length})</span></h2><p class="muted small">${esc(about)}</p>
       <div class="agrid">${list.map((e) => card(esc, e)).join('')}</div></section>` : '';
   }).join('');
@@ -69,7 +83,26 @@ function filtersHtml(esc) {
   return `<div class="afilters">${btn('', 'All')}${DATA.families.map(([id, label]) => btn(id, label)).join('')}</div>
     <div class="afilters arow"><input type="search" data-af="q" placeholder="Search pieces" value="${esc(F.q)}" aria-label="Search pieces">
       <select data-af="place" aria-label="Used in place"><option value="">Used anywhere</option>${places.map((p) => `<option${F.place === p ? ' selected' : ''}>${esc(p)}</option>`).join('')}</select>
+      <select data-af="look" aria-label="Look">${[['', 'Any look'], ['street', 'Street style'], ['faceted', 'Old faceted'], ['missing', 'Faceted, no street version']].map(([v, l]) => `<option value="${v}"${F.look === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>
       <label class="acheck"><input type="checkbox" data-af="dupes"${F.dupes ? ' checked' : ''}> Built elsewhere too</label></div>`;
+}
+
+// what the street style has and lacks, family by family: the next kit stage's list (notes/outdoor-plan.md, step 2)
+function coverageHtml(esc) {
+  const link = (e) => `<a href="#asset/${esc(e.piece.id)}">${esc(e.name)}</a>`;
+  const shown = (list) => (list.length ? list.map(link).join(', ') : '<span class="muted">none</span>');
+  const rows = DATA.families.map(([id, label]) => {
+    const of = (k) => DATA.pieces.filter((e) => e.piece.family === id && lookKey(e.piece) === k);
+    const [street, covered, missing] = ['street', 'covered', 'missing'].map(of);
+    if (!street.length && !covered.length && !missing.length) return '';
+    // data-h: the column's name, shown above each cell when the table stacks on a phone
+    return `<tr><th scope="row">${esc(label)}</th><td data-h="Street style">${shown(street)}</td><td data-h="Faceted, street version in forecourt only">${shown(covered)}</td><td data-h="Faceted, no street version yet">${shown(missing)}</td></tr>`;
+  }).join('');
+  const n = (k) => DATA.pieces.filter((e) => lookKey(e.piece) === k).length;
+  const fenced = DATA.pieces.filter((e) => e.piece.look === 'street' && e.piece.scope).length;
+  const phone = DATA.pieces.filter((e) => e.piece.look === 'street' && e.piece.phone).length;
+  return `<p class="muted small">The street style is the only outdoor look (<a href="#doc/notes/outdoor-plan.md">notes/outdoor-plan.md</a>), but so far it is built for the forecourt only. ${n('street')} pieces are street style; ${fenced} of them are tied to the forecourt, its station or the head office as written, and ${phone} say how they get lighter on a phone. ${n('covered')} old faceted pieces have a street version that only runs in the forecourt, and ${n('missing')} have none yet. That last column is what the kit still has to build, each with a lighter phone version.</p>
+    <div class="acover"><table class="t"><thead><tr><th>Family</th><th>Street style</th><th>Faceted, street version in forecourt only</th><th>Faceted, no street version yet</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
 function pageList(esc) {
@@ -79,8 +112,10 @@ function pageList(esc) {
   return `<h1>Asset library</h1>
     <p class="lede">The world pieces the game builds in code: benches, lamps, trees, kerbs, paving, roofs, doors and the rest, with where each one is used. Look here before building something new. If a piece is close, use it or add a variant to it rather than copying it into a scene.</p>
     <p class="small muted">${DATA.pieces.length} pieces, ${nv} variants shown. Read from the source when ./start ran (${esc(DATA.generated.replace('T', ' ').slice(0, 16))}). Which files count as the kit, and the variants: <a href="#src/tools/assets/kit.json">tools/assets/kit.json</a>. Portraits, voices and art are in the <a href="${R}tools/assets/">asset gallery</a>.</p>
-    <nav class="toc"><a href="#" data-jump="apieces">Pieces</a><a href="#" data-jump="adupes">Built more than once (${DATA.dupes.length})</a></nav>
+    ${(DATA.stale || []).length ? `<div class="warnbox"><b>tools/assets/kit.json is out of date</b> (a piece was renamed or moved):<ul>${DATA.stale.map((s) => `<li>${esc(s)}</li>`).join('')}</ul></div>` : ''}
+    <nav class="toc"><a href="#" data-jump="apieces">Pieces</a><a href="#" data-jump="alooks">Street style and faceted</a><a href="#" data-jump="adupes">Built more than once (${DATA.dupes.length})</a></nav>
     <div id="apieces"><h2>Pieces</h2>${filtersHtml(esc)}<div id="alist">${listHtml(esc)}</div></div>
+    <div id="alooks"><h2>Street style and faceted</h2>${coverageHtml(esc)}</div>
     <div id="adupes"><h2>Built more than once</h2>
     <p class="muted small">From the world kit audit (<a href="#doc/notes/architecture/world-kit.md">notes/architecture/world-kit.md</a>): ${DATA.dupes.length} kinds of thing built in more than one place, about ${lines} lines that merging would remove. The pieces they should merge into are marked "built elsewhere too". Open one to see every copy.</p>
     <div class="adupes">${dupes.map((d) => dupeBlock(esc, d)).join('')}</div></div>`;
@@ -106,11 +141,26 @@ function pagePiece(esc, id) {
         <p class="small">Defined at ${lineLink(esc, file, p.line, `${file}:${p.line}`)}</p>
         ${p.also.length ? `<p class="small">Also: ${p.also.map((a) => `<code>${esc(a.name)}</code> ${lineLink(esc, a.file, a.line)}`).join(', ')}</p>` : ''}
         ${p.doc ? `<p class="adoc">${esc(p.doc)}</p>` : ''}
+        ${lookBlock(esc, p)}
         ${p.dupes.length ? `<h3>Built elsewhere too</h3>${p.dupes.map((d) => dupeBlock(esc, DATA.dupeById.get(d), true)).join('')}` : ''}
-        <h3>Used in ${p.places.length ? `<span class="muted">(${p.used.length} lines in ${p.places.length} places)</span>` : ''}</h3>
+        <h3>Used in ${p.places.length ? `<span class="muted">(${p.used.length} line${p.used.length > 1 ? 's' : ''} in ${p.places.length} place${p.places.length > 1 ? 's' : ''})</span>` : ''}</h3>
         ${p.used.length ? `<div class="aused">${Object.entries(byPlace).sort().map(([pl, us]) => `<div><b>${esc(pl)}</b><span>${us.map((u) => lineLink(esc, u.file, u.line, `${u.file.split('/').at(-1)}:${u.line}`)).join(' ')}</span></div>`).join('')}</div>`
           : `<p>${p.usedSelf ? `Only inside its own file (${p.usedSelf} times).` : 'Nothing uses it.'}</p>`}
       </div></div>`;
+}
+
+function lookBlock(esc, p) {
+  if (p.look === 'street') {
+    return `<h3>Look ${lookTag(esc, p)}</h3><ul class="alook">
+      <li>${p.scope ? `Only works in one place as written: ${esc(p.scope)}.` : 'Not tied to one place.'}</li>
+      ${p.note ? `<li>${esc(p.note[0].toUpperCase() + p.note.slice(1))}.</li>` : ''}
+      <li>Phone: ${p.phone ? `${esc(p.phone).replace(/`([^`]+)`/g, '<code>$1</code>')}.` : 'no lighter phone version yet.'}</li></ul>`;
+  }
+  if (p.look !== 'faceted') return '';
+  const by = p.street && DATA.byId.get(p.street.id);
+  return `<h3>Look ${lookTag(esc, p)}</h3><ul class="alook">${by
+    ? `<li>Street version: <a href="#asset/${esc(by.piece.id)}">${esc(by.name)}</a>, ${esc(p.street.note)}.</li>`
+    : '<li>No street-style version yet. The world kit (#367) has to build one, with a lighter phone version.</li>'}</ul>`;
 }
 
 // mount the page into el; arg is '' for the list or a piece id

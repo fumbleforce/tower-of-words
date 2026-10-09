@@ -2,17 +2,28 @@
   "title": "Asset library in the bible",
   "date": "2026-10-09",
   "by": "claude-agent:kit",
-  "caption": "A new Asset library page in the local bible lists the 132 world pieces the game builds in code. Each one has pictures of its variants, every file and line that uses it, and how to call it. A second list shows the 22 kinds of thing the audit found built in more than one place. Open it at http://127.0.0.1:8771/bible/#assets.",
-  "result": ["list-desktop", "piece-desktop", "list-phone", "piece-phone"],
+  "caption": "A new Asset library page in the local bible lists the 162 world pieces the game builds in code. Each one has pictures of its variants, every file and line that uses it, and how to call it. Each outdoor piece is marked street style or old faceted, and one table shows what the street style still lacks, family by family. A second list shows the 22 kinds of thing the audit found built in more than one place. Open it at http://127.0.0.1:8771/bible/#assets.",
+  "result": ["list-desktop", "looks-desktop", "street-desktop", "faceted-phone"],
   "sections": [
     {
       "title": "The library",
-      "caption": "Pieces are grouped by family: building parts, street furniture, planting, ground, lighting, materials, interior props and helpers. You can filter by family or by place, or show only the pieces that are also built elsewhere.",
+      "caption": "Pieces are grouped by family: building parts, street furniture, planting, ground, lighting, materials, interior props and helpers. You can filter by family, by place or by look, or show only the pieces that are also built elsewhere.",
       "images": [
         { "id": "list-desktop", "image": "game3d/shots/asset-library-20261009/list-desktop.webp", "caption": "Top of the page, desktop" },
         { "id": "list-desktop-full", "image": "game3d/shots/asset-library-20261009/list-desktop-full.webp", "caption": "The whole list, desktop" },
-        { "id": "list-phone", "image": "game3d/shots/asset-library-20261009/list-phone.webp", "caption": "Top of the page, phone" },
-        { "id": "list-phone-full", "image": "game3d/shots/asset-library-20261009/list-phone-full.webp", "caption": "The whole list, phone" }
+        { "id": "list-phone", "image": "game3d/shots/asset-library-20261009/list-phone.webp", "caption": "Top of the page, phone" }
+      ]
+    },
+    {
+      "title": "Street style and faceted",
+      "caption": "The street style only exists for the forecourt so far. 24 pieces are street style. 16 old faceted pieces have a street version that only runs in the forecourt, and 41 have none yet; that column is what the world kit builds next, each with a lighter phone version. A street piece's page says where it works and how it gets lighter on a phone, and a faceted piece's page links its street version if it has one.",
+      "images": [
+        { "id": "looks-desktop", "image": "game3d/shots/asset-library-20261009/looks-desktop.webp", "caption": "What the street style has and lacks, desktop" },
+        { "id": "looks-phone", "image": "game3d/shots/asset-library-20261009/looks-phone.webp", "caption": "The same table, phone" },
+        { "id": "street-desktop", "image": "game3d/shots/asset-library-20261009/street-desktop.webp", "caption": "Street trees and hedges: each species, a hedge, and the phone versions" },
+        { "id": "street-phone", "image": "game3d/shots/asset-library-20261009/street-phone.webp", "caption": "Street trees and hedges, phone" },
+        { "id": "faceted-desktop", "image": "game3d/shots/asset-library-20261009/faceted-desktop.webp", "caption": "The old faceted keyaki, linking its street version, desktop" },
+        { "id": "faceted-phone", "image": "game3d/shots/asset-library-20261009/faceted-phone.webp", "caption": "The old faceted keyaki, phone" }
       ]
     },
     {
