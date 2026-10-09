@@ -1,0 +1,29 @@
+{
+ "sent": "2026-10-09T16:26:57+0200",
+ "picked": [],
+ "options": {
+  "title-2": {
+   "star": false,
+   "reject": true,
+   "comment": "heavy string instruments makes it sound like an epic ballad, not a fit, but good quality"
+  },
+  "title-4": {
+   "star": false,
+   "reject": true,
+   "comment": "same, too much of a victorian era drama"
+  },
+  "morning-11": {
+   "star": false,
+   "reject": true,
+   "comment": "\"full bodied\" might be overoptimizing from what I commented. "
+  },
+  "morning-13": {
+   "star": false,
+   "reject": true,
+   "comment": "too much going on"
+  }
+ },
+ "comment": "my comments apply to most of them, you must very the prompts more. dont give me so many at once, max 5. These are all too similar",
+ "read": false,
+ "history": []
+}
