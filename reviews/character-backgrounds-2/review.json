@@ -2,7 +2,7 @@
   "title": "Character backgrounds: rewritten full cast",
   "date": "2026-10-07",
   "by": "Codex character-backgrounds",
-  "status": "open",
+  "status": "superseded",
   "question": "Rewritten background proposals, with the full reader below. Which histories should stay, and what still needs changing?",
   "multi": true,
   "options": [
@@ -145,6 +145,10 @@
     }
   ],
   "links": [
+    {
+      "label": "Read the current short bios",
+      "href": "reviews/character-backgrounds-3/index.html"
+    },
     {
       "label": "Read all backgrounds and the coverage inventory",
       "href": "reviews/character-backgrounds-2/index.html"

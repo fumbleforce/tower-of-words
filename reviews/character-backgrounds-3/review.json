@@ -1,0 +1,56 @@
+{
+  "title": "Short character bios",
+  "date": "2026-10-09",
+  "by": "Codex character-backgrounds",
+  "status": "open",
+  "question": "These short bios follow your character directions. Which proposed details should change?",
+  "multi": true,
+  "options": [
+    {
+      "id": "mio",
+      "label": "mio · Mio",
+      "note": "Mio prefers games to small talk. She wants to finish her work and have the rest of the day to herself. She gets annoyed when people interrupt her. She has little patience for someone who keeps talking after she has stopped answering. Read the short bio through the Mio reader link in the links above.",
+      "image": "game3d/assets/portraits/mio-neutral.webp"
+    },
+    {
+      "id": "kenji",
+      "label": "kenji · Kenji",
+      "note": "Kenji means well and gets confused easily. He wants to help. He sometimes says yes before he understands what he has been asked to do. He often looks as though he has missed part of the conversation. When he rushes to help, he knocks things over. Read the short bio through the Kenji reader link in the links above.",
+      "image": "game3d/assets/portraits/kenji-neutral.webp"
+    },
+    {
+      "id": "kuro",
+      "label": "kuro · Kuro",
+      "note": "Kuro is used to getting her way. She flirts openly and enjoys making people flustered. If she fancies someone, she will ask them out. She will probably choose where they are going too. Read the short bio through the Kuro reader link in the links above.",
+      "image": "game3d/assets/portraits/kuro-neutral.webp"
+    },
+    {
+      "id": "rei",
+      "label": "rei · Rei",
+      "note": "Rei takes charge before anyone asks her to. She makes a plan and expects people to follow it. She is brusque with strangers and can be abrasive with people she knows. She gets impatient when someone hesitates. Read the short bio through the Rei reader link in the links above.",
+      "image": "game3d/assets/portraits/rei-neutral.webp"
+    }
+  ],
+  "links": [
+    {
+      "label": "Read all backgrounds and the coverage inventory",
+      "href": "reviews/character-backgrounds-3/index.html"
+    },
+    {
+      "label": "Mio bio",
+      "href": "reviews/character-backgrounds-3/index.html#mio"
+    },
+    {
+      "label": "Kenji bio",
+      "href": "reviews/character-backgrounds-3/index.html#kenji"
+    },
+    {
+      "label": "Kuro bio",
+      "href": "reviews/character-backgrounds-3/index.html#kuro"
+    },
+    {
+      "label": "Rei bio",
+      "href": "reviews/character-backgrounds-3/index.html#rei"
+    }
+  ]
+}
