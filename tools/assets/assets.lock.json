@@ -2717,6 +2717,8 @@
   "art/refs/monorail-bay-ref.webp": {"size": 433430, "sha256": "7cf959ba498f82795a3f83542437f9d9ee69d09d8d205bc4f4ba8bfc362f7c06", "type": "image/webp"},
   "art/refs/monorail-bay-ref3.png": {"size": 2259414, "sha256": "84382aa8657036880cefb9e7db60724a74f2c03e764d2ad5856a0f343461bd8e", "type": "image/png"},
   "art/refs/monorail-interior-ref.webp": {"size": 262648, "sha256": "ff14470056beb9de72f23692347e8e65e1b6299cdf02cb54faa178c94a737bca", "type": "image/webp"},
+  "art/refs/monorail/jorgen-straddle-20261009.png": {"size": 819485, "sha256": "848818f666aa71d33717100f87fbf0d9220f8700c3e647a3752c064e2abd4dac", "type": "image/png"},
+  "art/refs/monorail/jorgen-suggestion-20261009.png": {"size": 1139643, "sha256": "bd2e30e183e5c30ab4f8e3be2d0362f632fd44b68f7e81eb1a1322b95ca822a2", "type": "image/png"},
   "art/refs/style-target-kuro-pose-s202.webp": {"size": 111784, "sha256": "266d3d453e2a6d09f1f0f6690aa4cfaf93e4dbab41d9c37ef7084fe90b04eec1", "type": "image/webp"},
   "bible/shots/character_mc-1366.png": {"size": 1372911, "sha256": "8553f7916586ffd586e2a94bcd8bb4c307520e88b213c4f091c0d0a7b6cf9646", "type": "image/png"},
   "bible/shots/character_mc-390.png": {"size": 1347327, "sha256": "69d1eebdcf6b7125db6c9d444c42af4cb53894fee171994e779f47d477850485", "type": "image/png"},
