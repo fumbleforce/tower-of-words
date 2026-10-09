@@ -38,6 +38,8 @@ export function carryOfficeParcel(rig) {
   const at = (bone, out) => rig.root.worldToLocal(bone.getWorldPosition(out));
   rig.root.updateMatrixWorld(true);
   const restSpine = at(spine, new THREE.Vector3());
+  // Hold high enough for the bent forearm to stay beneath the carton as well as the palm.
+  const carryHeight = restSpine.y - 0.04 * k;
   const upper = at(arm, point).distanceTo(at(elbow, shoulder));
   const lower = at(elbow, point).distanceTo(at(hand, shoulder));
   const handRotation = hand.getWorldQuaternion(new THREE.Quaternion());
@@ -69,7 +71,7 @@ export function carryOfficeParcel(rig) {
       if (handWeight < 0.6 && bodyWeight < 0.5) continue;
       mesh.getVertexPosition(i, point).applyMatrix4(mesh.matrixWorld);
       rig.root.worldToLocal(point);
-      if (bodyWeight >= 0.5 && Math.abs(point.y - (restSpine.y - 0.095 * k)) < size.y) front = Math.max(front, point.z);
+      if (bodyWeight >= 0.5 && Math.abs(point.y - carryHeight) < size.y) front = Math.max(front, point.z);
       if (handWeight >= 0.6) {
         palmVertices.push([mesh, i]);
         palm.expandByPoint(point.sub(wrist).applyQuaternion(handRotation).applyQuaternion(palmUp));
@@ -78,7 +80,7 @@ export function carryOfficeParcel(rig) {
   });
   const support = palm.getCenter(new THREE.Vector3());
   support.y = palm.max.y;
-  const center = new THREE.Vector3(0.105 * k, restSpine.y - 0.095 * k, front + size.z / 2 + 0.009 * k);
+  const center = new THREE.Vector3(0.105 * k, carryHeight, front + size.z / 2 + 0.009 * k);
   const aim = (bone, child, target) => {
     at(bone, from);
     at(child, direction).sub(from).normalize();
