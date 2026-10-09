@@ -1,0 +1,3044 @@
+{
+ "character": "kuro",
+ "ref": "game3d/assets/portraits/kuro-neutral.webp",
+ "face_box_game": [
+  630,
+  1048,
+  [
+   254,
+   325,
+   452,
+   525
+  ]
+ ],
+ "ref_face_detected": [
+  257.0,
+  322.0,
+  450.0,
+  526.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf-d70-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    323.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     391.0
+    ],
+    [
+     409.0,
+     407.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.5,
+     4.2,
+     628.3,
+     1041.9
+    ],
+    "eyes": 0.006,
+    "tilt": 1.2,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.024,
+    "ssim": 0.748
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf-d70-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     329.0,
+     388.5
+    ],
+    [
+     409.0,
+     403.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     4.2,
+     627.8,
+     1041.9
+    ],
+    "eyes": -0.01,
+    "tilt": 0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.028,
+    "ssim": 0.843
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf-d70-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    324.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     391.0
+    ],
+    [
+     409.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.015,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 133,
+    "hair_top_ref": 138,
+    "crop": [
+     5.7,
+     6.7,
+     626.4,
+     1039.3
+    ],
+    "eyes": -0.002,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.023,
+    "ssim": 0.75
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt-d70-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     389.5
+    ],
+    [
+     408.0,
+     406.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     4.2,
+     627.8,
+     1041.9
+    ],
+    "eyes": -0.001,
+    "tilt": 1.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.852
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt-d70-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    322.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.0,
+     388.0
+    ],
+    [
+     408.5,
+     402.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     2.2,
+     1.6,
+     629.1,
+     1044.4
+    ],
+    "eyes": -0.01,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.019,
+    "ssim": 0.855
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt-d70-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    324.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     391.0
+    ],
+    [
+     408.5,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.015,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 133,
+    "hair_top_ref": 138,
+    "crop": [
+     5.7,
+     6.7,
+     626.4,
+     1039.3
+    ],
+    "eyes": -0.002,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.023,
+    "ssim": 0.75
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp-d70-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    260.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     389.0
+    ],
+    [
+     408.0,
+     405.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.5,
+     4.2,
+     628.3,
+     1041.9
+    ],
+    "eyes": -0.005,
+    "tilt": 1.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.748
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp-d70-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    322.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.0,
+     389.0
+    ],
+    [
+     408.5,
+     403.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     2.2,
+     1.6,
+     629.1,
+     1044.4
+    ],
+    "eyes": -0.007,
+    "tilt": -0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.023,
+    "ssim": 0.858
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp-d70-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.5
+    ],
+    [
+     408.0,
+     405.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     4.2,
+     627.8,
+     1041.9
+    ],
+    "eyes": -0.001,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.865
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc-d70-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    322.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     389.5
+    ],
+    [
+     409.0,
+     404.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     2.2,
+     1.6,
+     629.1,
+     1044.4
+    ],
+    "eyes": -0.002,
+    "tilt": 0.2,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.022,
+    "ssim": 0.86
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc-d70-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    321.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     389.0
+    ],
+    [
+     409.0,
+     404.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.0,
+    "top": 0.001,
+    "bottom_short": 0.0,
+    "hair_top_game": 139,
+    "hair_top_ref": 138,
+    "crop": [
+     0.0,
+     -1.0,
+     630.0,
+     1047.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.033,
+    "ssim": 0.856
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc-d70-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    324.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.5,
+     390.0
+    ],
+    [
+     409.0,
+     406.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0932
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.015,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 133,
+    "hair_top_ref": 138,
+    "crop": [
+     5.7,
+     6.7,
+     626.4,
+     1039.3
+    ],
+    "eyes": -0.003,
+    "tilt": 1.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.02,
+    "ssim": 0.748
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf-d55-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    322.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.0
+    ],
+    [
+     409.0,
+     404.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     2.2,
+     1.6,
+     629.1,
+     1044.4
+    ],
+    "eyes": -0.002,
+    "tilt": -0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.016,
+    "ssim": 0.883
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf-d55-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     390.5
+    ],
+    [
+     409.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     4.2,
+     627.3,
+     1041.9
+    ],
+    "eyes": -0.0,
+    "tilt": 0.2,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.026,
+    "ssim": 0.87
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf-d55-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     391.0
+    ],
+    [
+     408.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0932
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     4.2,
+     627.3,
+     1041.9
+    ],
+    "eyes": 0.001,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.88
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt-d55-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    322.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.0
+    ],
+    [
+     408.0,
+     404.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     2.2,
+     1.6,
+     629.1,
+     1044.4
+    ],
+    "eyes": -0.001,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.884
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt-d55-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.0
+    ],
+    [
+     408.5,
+     405.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     4.2,
+     627.8,
+     1041.9
+    ],
+    "eyes": -0.003,
+    "tilt": 0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.874
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt-d55-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     390.5
+    ],
+    [
+     408.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0932
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     4.2,
+     627.3,
+     1041.9
+    ],
+    "eyes": -0.0,
+    "tilt": 0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.882
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp-d55-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    322.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     326.5,
+     389.5
+    ],
+    [
+     407.5,
+     404.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     1.7,
+     1.6,
+     628.6,
+     1044.4
+    ],
+    "eyes": -0.003,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.935
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp-d55-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     390.0
+    ],
+    [
+     408.5,
+     404.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     4.2,
+     627.3,
+     1041.9
+    ],
+    "eyes": -0.004,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.023,
+    "ssim": 0.87
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp-d55-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     326.5,
+     391.0
+    ],
+    [
+     408.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0932
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     4.2,
+     627.8,
+     1041.9
+    ],
+    "eyes": 0.001,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.882
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc-d55-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     389.0
+    ],
+    [
+     408.5,
+     404.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     4.2,
+     627.8,
+     1041.9
+    ],
+    "eyes": -0.007,
+    "tilt": 0.2,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.874
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc-d55-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.5
+    ],
+    [
+     408.5,
+     404.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     4.2,
+     627.3,
+     1041.9
+    ],
+    "eyes": -0.004,
+    "tilt": -0.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.024,
+    "ssim": 0.866
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc-d55-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.5
+    ],
+    [
+     408.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     4.2,
+     627.8,
+     1041.9
+    ],
+    "eyes": -0.0,
+    "tilt": 0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.878
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf3-d70-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    323.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     391.0
+    ],
+    [
+     408.5,
+     407.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.5,
+     4.2,
+     628.3,
+     1041.9
+    ],
+    "eyes": 0.005,
+    "tilt": 0.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.016,
+    "ssim": 0.745
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf3-d70-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    322.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.5,
+     389.0
+    ],
+    [
+     409.0,
+     403.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     2.7,
+     1.6,
+     629.6,
+     1044.4
+    ],
+    "eyes": -0.007,
+    "tilt": -0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.786
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf3-d70-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    324.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     391.0
+    ],
+    [
+     408.5,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.015,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 133,
+    "hair_top_ref": 138,
+    "crop": [
+     6.2,
+     6.7,
+     626.9,
+     1039.3
+    ],
+    "eyes": -0.002,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.02,
+    "ssim": 0.725
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt3-d70-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.0,
+     390.0
+    ],
+    [
+     408.0,
+     407.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     4.2,
+     627.8,
+     1041.9
+    ],
+    "eyes": 0.002,
+    "tilt": 1.8,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.856
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt3-d70-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    322.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     389.0
+    ],
+    [
+     408.5,
+     402.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     1.7,
+     1.6,
+     628.6,
+     1044.4
+    ],
+    "eyes": -0.008,
+    "tilt": -0.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.911
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt3-d70-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    324.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.5
+    ],
+    [
+     408.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.015,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 133,
+    "hair_top_ref": 138,
+    "crop": [
+     5.7,
+     6.7,
+     626.4,
+     1039.3
+    ],
+    "eyes": -0.003,
+    "tilt": 0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.75
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp3-d70-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    260.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.0
+    ],
+    [
+     408.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.5,
+     4.2,
+     628.3,
+     1041.9
+    ],
+    "eyes": -0.001,
+    "tilt": 0.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.747
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp3-d70-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    321.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.0,
+     389.0
+    ],
+    [
+     409.0,
+     402.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.0,
+    "top": 0.001,
+    "bottom_short": 0.0,
+    "hair_top_game": 139,
+    "hair_top_ref": 138,
+    "crop": [
+     0.0,
+     -1.0,
+     630.0,
+     1047.0
+    ],
+    "eyes": -0.005,
+    "tilt": -0.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.866
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp3-d70-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.5
+    ],
+    [
+     408.0,
+     405.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     4.2,
+     627.3,
+     1041.9
+    ],
+    "eyes": -0.001,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.865
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc3-d70-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    322.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     389.0
+    ],
+    [
+     409.0,
+     405.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     2.2,
+     1.6,
+     629.1,
+     1044.4
+    ],
+    "eyes": -0.002,
+    "tilt": 0.8,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.856
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc3-d70-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    321.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.0,
+     389.5
+    ],
+    [
+     408.5,
+     403.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.0,
+    "top": 0.001,
+    "bottom_short": 0.0,
+    "hair_top_game": 139,
+    "hair_top_ref": 138,
+    "crop": [
+     0.0,
+     -1.0,
+     630.0,
+     1047.0
+    ],
+    "eyes": -0.001,
+    "tilt": -0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.028,
+    "ssim": 0.856
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc3-d70-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.5,
+     389.5
+    ],
+    [
+     409.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     4.2,
+     627.3,
+     1041.9
+    ],
+    "eyes": -0.003,
+    "tilt": 1.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.857
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf3-d70-1-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    323.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     391.0
+    ],
+    [
+     408.5,
+     407.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.5,
+     4.2,
+     628.3,
+     1041.9
+    ],
+    "eyes": 0.005,
+    "tilt": 0.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.745
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf3-d70-2-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    322.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.5,
+     389.0
+    ],
+    [
+     409.0,
+     403.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     2.7,
+     1.6,
+     629.6,
+     1044.4
+    ],
+    "eyes": -0.007,
+    "tilt": -0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.019,
+    "ssim": 0.786
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kf3-d70-3-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    324.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     391.0
+    ],
+    [
+     408.5,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.015,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 133,
+    "hair_top_ref": 138,
+    "crop": [
+     6.2,
+     6.7,
+     626.9,
+     1039.3
+    ],
+    "eyes": -0.002,
+    "tilt": -0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.725
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt3-d70-1-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    450.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.0,
+     390.0
+    ],
+    [
+     408.0,
+     407.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     4.2,
+     627.8,
+     1041.9
+    ],
+    "eyes": 0.002,
+    "tilt": 1.8,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.856
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt3-d70-2-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    321.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     389.0
+    ],
+    [
+     408.5,
+     402.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.0,
+    "top": 0.001,
+    "bottom_short": 0.0,
+    "hair_top_game": 139,
+    "hair_top_ref": 138,
+    "crop": [
+     0.0,
+     -1.0,
+     630.0,
+     1047.0
+    ],
+    "eyes": -0.005,
+    "tilt": -0.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.868
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kt3-d70-3-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    324.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.5
+    ],
+    [
+     408.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.015,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 133,
+    "hair_top_ref": 138,
+    "crop": [
+     5.7,
+     6.7,
+     626.4,
+     1039.3
+    ],
+    "eyes": -0.003,
+    "tilt": 0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.02,
+    "ssim": 0.75
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp3-d70-1-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.0
+    ],
+    [
+     408.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     4.0,
+     4.2,
+     627.8,
+     1041.9
+    ],
+    "eyes": -0.001,
+    "tilt": 0.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.855
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp3-d70-2-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    321.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.0,
+     389.5
+    ],
+    [
+     409.0,
+     402.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.0,
+    "top": 0.001,
+    "bottom_short": 0.0,
+    "hair_top_game": 139,
+    "hair_top_ref": 138,
+    "crop": [
+     0.0,
+     -1.0,
+     630.0,
+     1047.0
+    ],
+    "eyes": -0.004,
+    "tilt": -1.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.866
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kp3-d70-3-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.5,
+     390.5
+    ],
+    [
+     408.0,
+     405.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     4.2,
+     627.3,
+     1041.9
+    ],
+    "eyes": -0.001,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.016,
+    "ssim": 0.865
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc3-d70-1-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    259.0,
+    322.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     327.0,
+     389.0
+    ],
+    [
+     408.5,
+     405.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.005,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 137,
+    "hair_top_ref": 138,
+    "crop": [
+     2.2,
+     1.6,
+     629.1,
+     1044.4
+    ],
+    "eyes": -0.002,
+    "tilt": 0.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.856
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc3-d70-2-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    321.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.0,
+     389.5
+    ],
+    [
+     408.5,
+     403.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0934
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.0,
+    "top": 0.001,
+    "bottom_short": 0.0,
+    "hair_top_game": 139,
+    "hair_top_ref": 138,
+    "crop": [
+     0.0,
+     -1.0,
+     630.0,
+     1047.0
+    ],
+    "eyes": -0.001,
+    "tilt": -0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.029,
+    "ssim": 0.856
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/kc3-d70-3-lip-game.webp",
+   "kind": "cut-out",
+   "size": [
+    630,
+    1048
+   ],
+   "face": [
+    258.0,
+    323.0,
+    449.0,
+    525.0
+   ],
+   "eyes": [
+    [
+     328.5,
+     389.5
+    ],
+    [
+     409.0,
+     405.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0933
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuro"
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 656,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.01,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 135,
+    "hair_top_ref": 138,
+    "crop": [
+     3.5,
+     4.2,
+     627.3,
+     1041.9
+    ],
+    "eyes": -0.003,
+    "tilt": 1.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.857
+   },
+   "status": "fail"
+  }
+ ]
+}
