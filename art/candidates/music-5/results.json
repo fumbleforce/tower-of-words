@@ -1,0 +1,497 @@
+{
+ "day-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Acoustic guitar finger-picking with light hand percussion (shaker, soft caj\u00f3n) and a little glockenspiel now and then, bright and easy, a sunny afternoon outside. 98 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.",
+  "seed": 6811,
+  "source_s": 155.6,
+  "listen": {
+   "key": "D major",
+   "key_fit": 0.91,
+   "tempo": 103.4,
+   "quiet_s": 2,
+   "level_spread_db": 5.6,
+   "hiss": 0.1791,
+   "peak": 0.993,
+   "good": 0.194,
+   "vocals": -0.186,
+   "noise": -0.028,
+   "cheap": 0.064,
+   "odd": 0.034,
+   "like_refs": 0.566,
+   "worst_vocals": [
+    -0.126,
+    150
+   ],
+   "worst_noise": [
+    0.022,
+    20
+   ],
+   "worst_cheap": [
+    0.109,
+    140
+   ],
+   "worst_odd": [
+    0.123,
+    150
+   ]
+  },
+  "vocal_db": -37.1,
+  "vocal_windows_pct": 1.6,
+  "loop_from_s": 0.04,
+  "loop_to_s": 149.14,
+  "loop_s": 149.1,
+  "loop_start": 1.0,
+  "loop_end": 150.098896,
+  "seam_dist": 0.716,
+  "seam": {
+   "level_jump_db": 3.58,
+   "level_jump_p99_elsewhere": 8.89,
+   "flux_at_seam": 29.2,
+   "flux_p99_elsewhere": 407.5,
+   "flux_median": 27.3,
+   "sample_step_at_seam": 0.0046,
+   "sample_step_p999_elsewhere": 0.0495
+  },
+  "source_lufs": -12.2
+ },
+ "day-2": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Acoustic guitar finger-picking with light hand percussion (shaker, soft caj\u00f3n) and a little glockenspiel now and then, bright and easy, a sunny afternoon outside. 98 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.",
+  "seed": 6812,
+  "source_s": 144.4,
+  "listen": {
+   "key": "C major",
+   "key_fit": 0.89,
+   "tempo": 103.4,
+   "quiet_s": 3,
+   "level_spread_db": 6.6,
+   "hiss": 0.1857,
+   "peak": 1.0,
+   "good": 0.244,
+   "vocals": -0.16,
+   "noise": -0.006,
+   "cheap": 0.121,
+   "odd": 0.033,
+   "like_refs": 0.599,
+   "worst_vocals": [
+    -0.107,
+    90
+   ],
+   "worst_noise": [
+    0.043,
+    130
+   ],
+   "worst_cheap": [
+    0.287,
+    90
+   ],
+   "worst_odd": [
+    0.083,
+    10
+   ]
+  },
+  "vocal_db": -39.6,
+  "vocal_windows_pct": 2.1,
+  "loop_from_s": 25.93,
+  "loop_to_s": 120.55,
+  "loop_s": 94.6,
+  "loop_start": 1.0,
+  "loop_end": 95.615333,
+  "seam_dist": 0.372,
+  "seam": {
+   "level_jump_db": 0.98,
+   "level_jump_p99_elsewhere": 12.36,
+   "flux_at_seam": 46.5,
+   "flux_p99_elsewhere": 627.5,
+   "flux_median": 47.4,
+   "sample_step_at_seam": 0.0049,
+   "sample_step_p999_elsewhere": 0.0992
+  },
+  "source_lufs": -11.5
+ },
+ "evening-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Mellow Japanese city pop instrumental: round electric bass, soft Rhodes keys, clean guitar chords and a laid-back drum groove, the feeling of streetlights coming on. 92 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.",
+  "seed": 6911,
+  "source_s": 147.9,
+  "listen": {
+   "key": "Ab major",
+   "key_fit": 0.64,
+   "tempo": 92.3,
+   "quiet_s": 3,
+   "level_spread_db": 12.6,
+   "hiss": 0.209,
+   "peak": 0.984,
+   "good": 0.121,
+   "vocals": -0.107,
+   "noise": -0.082,
+   "cheap": 0.036,
+   "odd": -0.057,
+   "like_refs": 0.581,
+   "worst_vocals": [
+    -0.062,
+    100
+   ],
+   "worst_noise": [
+    -0.02,
+    40
+   ],
+   "worst_cheap": [
+    0.203,
+    0
+   ],
+   "worst_odd": [
+    -0.011,
+    40
+   ]
+  },
+  "vocal_db": -32.9,
+  "vocal_windows_pct": 2.7,
+  "loop_from_s": 12.28,
+  "loop_to_s": 137.63,
+  "loop_s": 125.4,
+  "loop_start": 1.0,
+  "loop_end": 126.351417,
+  "seam_dist": 0.465,
+  "seam": {
+   "level_jump_db": 2.07,
+   "level_jump_p99_elsewhere": 15.16,
+   "flux_at_seam": 82.9,
+   "flux_p99_elsewhere": 398.9,
+   "flux_median": 29.6,
+   "sample_step_at_seam": 0.0016,
+   "sample_step_p999_elsewhere": 0.037
+  },
+  "source_lufs": -12.5
+ },
+ "evening-2": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Mellow Japanese city pop instrumental: round electric bass, soft Rhodes keys, clean guitar chords and a laid-back drum groove, the feeling of streetlights coming on. 92 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.",
+  "seed": 6912,
+  "source_s": 158.7,
+  "listen": {
+   "key": "E minor",
+   "key_fit": 0.71,
+   "tempo": 92.3,
+   "quiet_s": 2,
+   "level_spread_db": 9.7,
+   "hiss": 0.1992,
+   "peak": 0.99,
+   "good": 0.168,
+   "vocals": -0.141,
+   "noise": -0.086,
+   "cheap": 0.111,
+   "odd": -0.037,
+   "like_refs": 0.539,
+   "worst_vocals": [
+    -0.048,
+    60
+   ],
+   "worst_noise": [
+    -0.03,
+    100
+   ],
+   "worst_cheap": [
+    0.228,
+    100
+   ],
+   "worst_odd": [
+    0.067,
+    100
+   ]
+  },
+  "vocal_db": -32.1,
+  "vocal_windows_pct": 1.9,
+  "loop_from_s": 11.42,
+  "loop_to_s": 136.64,
+  "loop_s": 125.2,
+  "loop_start": 1.0,
+  "loop_end": 126.215104,
+  "seam_dist": 0.397,
+  "seam": {
+   "level_jump_db": 7.7,
+   "level_jump_p99_elsewhere": 13.63,
+   "flux_at_seam": 238.0,
+   "flux_p99_elsewhere": 346.0,
+   "flux_median": 34.9,
+   "sample_step_at_seam": 0.0061,
+   "sample_step_p999_elsewhere": 0.0358
+  },
+  "source_lufs": -12.3
+ },
+ "office-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Lo-fi hip hop beat with a dusty soft drum loop and mellow electric piano chords, a little vinyl warmth, steady and unobtrusive, good for working. 80 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.",
+  "seed": 7011,
+  "source_s": 151.7,
+  "listen": {
+   "key": "Eb major",
+   "key_fit": 0.74,
+   "tempo": 80.7,
+   "quiet_s": 5,
+   "level_spread_db": 18.7,
+   "hiss": 0.2212,
+   "peak": 1.0,
+   "good": 0.164,
+   "vocals": 0.003,
+   "noise": -0.045,
+   "cheap": -0.013,
+   "odd": -0.032,
+   "like_refs": 0.485,
+   "worst_vocals": [
+    0.054,
+    70
+   ],
+   "worst_noise": [
+    -0.001,
+    110
+   ],
+   "worst_cheap": [
+    0.051,
+    0
+   ],
+   "worst_odd": [
+    0.005,
+    10
+   ]
+  },
+  "vocal_db": -32.4,
+  "vocal_windows_pct": 5.6,
+  "loop_from_s": 11.91,
+  "loop_to_s": 133.4,
+  "loop_s": 121.5,
+  "loop_start": 1.0,
+  "loop_end": 122.481437,
+  "seam_dist": 0.443,
+  "seam": {
+   "level_jump_db": 5.92,
+   "level_jump_p99_elsewhere": 23.65,
+   "flux_at_seam": 431.0,
+   "flux_p99_elsewhere": 540.1,
+   "flux_median": 21.0,
+   "sample_step_at_seam": 0.0006,
+   "sample_step_p999_elsewhere": 0.0595
+  },
+  "source_lufs": -12.4
+ },
+ "office-2": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Lo-fi hip hop beat with a dusty soft drum loop and mellow electric piano chords, a little vinyl warmth, steady and unobtrusive, good for working. 80 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.",
+  "seed": 7012,
+  "source_s": 152.6,
+  "listen": {
+   "key": "Ab minor",
+   "key_fit": 0.89,
+   "tempo": 161.5,
+   "quiet_s": 3,
+   "level_spread_db": 20.7,
+   "hiss": 0.2001,
+   "peak": 0.996,
+   "good": 0.167,
+   "vocals": 0.0,
+   "noise": -0.033,
+   "cheap": 0.007,
+   "odd": -0.022,
+   "like_refs": 0.522,
+   "worst_vocals": [
+    0.046,
+    80
+   ],
+   "worst_noise": [
+    0.059,
+    140
+   ],
+   "worst_cheap": [
+    0.088,
+    0
+   ],
+   "worst_odd": [
+    0.038,
+    140
+   ]
+  },
+  "vocal_db": -32.3,
+  "vocal_windows_pct": 3.6,
+  "loop_from_s": 17.61,
+  "loop_to_s": 122.98,
+  "loop_s": 105.4,
+  "loop_start": 1.0,
+  "loop_end": 106.365813,
+  "seam_dist": 0.191,
+  "seam": {
+   "level_jump_db": 3.66,
+   "level_jump_p99_elsewhere": 17.01,
+   "flux_at_seam": 34.7,
+   "flux_p99_elsewhere": 419.6,
+   "flux_median": 28.6,
+   "sample_step_at_seam": 0.0025,
+   "sample_step_p999_elsewhere": 0.0429
+  },
+  "source_lufs": -12.6
+ },
+ "shops-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Small jazz combo: brushed snare, upright bass and a light piano or vibraphone, a friendly easy swing, like a caf\u00e9 on a shopping street. 110 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.",
+  "seed": 7111,
+  "source_s": 154.0,
+  "listen": {
+   "key": "Eb major",
+   "key_fit": 0.89,
+   "tempo": 112.3,
+   "quiet_s": 2,
+   "level_spread_db": 4.6,
+   "hiss": 0.2186,
+   "peak": 1.0,
+   "good": 0.214,
+   "vocals": -0.234,
+   "noise": -0.078,
+   "cheap": 0.198,
+   "odd": 0.037,
+   "like_refs": 0.457,
+   "worst_vocals": [
+    -0.172,
+    20
+   ],
+   "worst_noise": [
+    -0.026,
+    90
+   ],
+   "worst_cheap": [
+    0.28,
+    70
+   ],
+   "worst_odd": [
+    0.078,
+    10
+   ]
+  },
+  "vocal_db": -33.6,
+  "vocal_windows_pct": 1.6,
+  "loop_from_s": 24.23,
+  "loop_to_s": 128.96,
+  "loop_s": 104.7,
+  "loop_start": 1.0,
+  "loop_end": 105.727125,
+  "seam_dist": 0.211,
+  "seam": {
+   "level_jump_db": 14.47,
+   "level_jump_p99_elsewhere": 12.1,
+   "flux_at_seam": 30.3,
+   "flux_p99_elsewhere": 510.0,
+   "flux_median": 30.3,
+   "sample_step_at_seam": 0.0019,
+   "sample_step_p999_elsewhere": 0.0701
+  },
+  "source_lufs": -12.5
+ },
+ "title-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Light solo piano with a soft warm synth pad underneath, a simple quiet melody with space between the notes, like a calm menu screen. 76 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.",
+  "seed": 6711,
+  "source_s": 153.3,
+  "listen": {
+   "key": "Eb major",
+   "key_fit": 0.78,
+   "tempo": 76.0,
+   "quiet_s": 3,
+   "level_spread_db": 11.2,
+   "hiss": 0.2332,
+   "peak": 0.981,
+   "good": 0.229,
+   "vocals": -0.116,
+   "noise": -0.062,
+   "cheap": 0.075,
+   "odd": -0.003,
+   "like_refs": 0.52,
+   "worst_vocals": [
+    -0.031,
+    40
+   ],
+   "worst_noise": [
+    0.008,
+    40
+   ],
+   "worst_cheap": [
+    0.141,
+    140
+   ],
+   "worst_odd": [
+    0.059,
+    60
+   ]
+  },
+  "vocal_db": -34.7,
+  "vocal_windows_pct": 2.0,
+  "loop_from_s": 29.47,
+  "loop_to_s": 131.87,
+  "loop_s": 102.4,
+  "loop_start": 1.0,
+  "loop_end": 103.400021,
+  "seam_dist": 0.324,
+  "seam": {
+   "level_jump_db": 3.83,
+   "level_jump_p99_elsewhere": 7.99,
+   "flux_at_seam": 31.0,
+   "flux_p99_elsewhere": 345.2,
+   "flux_median": 27.1,
+   "sample_step_at_seam": 0.0035,
+   "sample_step_p999_elsewhere": 0.0271
+  },
+  "source_lufs": -11.6
+ },
+ "title-2": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Light solo piano with a soft warm synth pad underneath, a simple quiet melody with space between the notes, like a calm menu screen. 76 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.",
+  "seed": 6712,
+  "source_s": 152.5,
+  "listen": {
+   "key": "C major",
+   "key_fit": 0.91,
+   "tempo": 152.0,
+   "quiet_s": 3,
+   "level_spread_db": 9.1,
+   "hiss": 0.1841,
+   "peak": 0.982,
+   "good": 0.357,
+   "vocals": -0.018,
+   "noise": -0.085,
+   "cheap": 0.17,
+   "odd": 0.075,
+   "like_refs": 0.364,
+   "worst_vocals": [
+    0.025,
+    50
+   ],
+   "worst_noise": [
+    -0.059,
+    20
+   ],
+   "worst_cheap": [
+    0.203,
+    140
+   ],
+   "worst_odd": [
+    0.103,
+    60
+   ]
+  },
+  "vocal_db": -48.8,
+  "vocal_windows_pct": 1.6,
+  "loop_from_s": 0.11,
+  "loop_to_s": 139.06,
+  "loop_s": 139.0,
+  "loop_start": 1.0,
+  "loop_end": 139.953146,
+  "seam_dist": 0.252,
+  "seam": {
+   "level_jump_db": 5.43,
+   "level_jump_p99_elsewhere": 7.61,
+   "flux_at_seam": 142.9,
+   "flux_p99_elsewhere": 72.2,
+   "flux_median": 15.3,
+   "sample_step_at_seam": 0.008,
+   "sample_step_p999_elsewhere": 0.0241
+  },
+  "source_lufs": -11.8
+ }
+}

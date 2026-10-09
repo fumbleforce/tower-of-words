@@ -6,15 +6,16 @@ half the piece, skipping the ending Lyria writes; seam score up to 0.45 accepted
 Writes, in art/candidates/music-4/: <piece>.mp3 (the loop once through and its first 15 s again, for the Review item), <piece>-loop.mp3 (the
 game file: the body with 1 s of itself wrapped around each end) and results.json (all numbers, the seam check).
 
-    ~/ai/sd/venv/bin/python tools/music_round4_post.py [piece ...]
+    [MUSIC_ROUND=5] ~/ai/sd/venv/bin/python tools/music_round4_post.py [piece ...]
 """
 import io, json, os, re, subprocess, sys
 import numpy as np, soundfile as sf
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import make_loop, music_listen, music_round4
+import make_loop, music_listen
 
-RAW = music_round4.RAW
-OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'art/candidates/music-4')
+ROUND = os.environ.get('MUSIC_ROUND', '4')  # MUSIC_ROUND=5 for round 5 (tools/music_round5.py)
+RAW = os.path.expanduser(f'~/ai/music-raw/r{ROUND}')
+OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), f'art/candidates/music-{ROUND}')
 SR = make_loop.SR
 
 
@@ -38,7 +39,7 @@ def mp3(y, path, q):
 def vocals(path):
     # Demucs runs in its own venv (~/ai/sep); tools/vocal_check.py prints one JSON line per file
     # vocal_check caches Demucs stems by file name, so give it a name no earlier round used
-    link = os.path.expanduser(f'~/.cache/music371/r4v/r4-{os.path.basename(path)}')
+    link = os.path.expanduser(f'~/.cache/music371/r{ROUND}v/r{ROUND}-{os.path.basename(path)}')
     os.makedirs(os.path.dirname(link), exist_ok=True)
     if not os.path.exists(link):
         os.symlink(path, link)
