@@ -3,6 +3,7 @@
 // benches by the windows and the cart of volleyballs, the winter meeting corner. Each laid into the room's Kit, each
 // blocking its footprint on the walk grid.
 import * as THREE from 'three';
+import { gymWindows, ballCart, equipmentShelf, gymMats } from './gym-fixtures.js';
 import { C, R, GLASS_Z, BLOCK, STORE, BENCHES, BENCH_LEN, COURT, MEETING } from './gym-plan.js';
 
 // the lines on the hall's floor: the badminton court across the north part in green, its net up; the red boundary
@@ -53,8 +54,8 @@ export function courtLines(kit, nav) {
   line(C.red, bx0 - x0, 0.05, (x0 + bx0) / 2, zs);
 }
 
-// the hall's wainscot of boards to 0.8 and its rail, the high windows over it on the west, north and east walls (sky
-// beyond), the lobby's plain walls; the basketball goal and the clock on the north wall
+// The hall's wainscot and rail, high frosted windows on the west, north and east walls,
+// the lobby's plain walls, and the basketball goal and clock on the north wall.
 export function hallWalls(kit) {
   const { x0, x1, z0 } = R,
     wh = 0.8,
@@ -65,16 +66,7 @@ export function hallWalls(kit) {
   kit.box('#7a5f3c', x1 - x0, 0.04, 0.05, 0, wh, z0 + 0.025);
   kit.box('#7a5f3c', 0.05, 0.04, hz - z0, x0 + 0.025, wh, (z0 + hz) / 2);
   kit.box('#7a5f3c', 0.05, 0.04, BLOCK.z0 - z0, x1 - 0.025, wh, (z0 + BLOCK.z0) / 2);
-  // the windows: down the west wall and the east wall's hall part, along the north wall
-  const win = (x, z, along) => {
-    const [w, d] = along === 'z' ? [0.04, 1.26] : [1.26, 0.04];
-    const [w2, d2] = along === 'z' ? [0.045, 1.18] : [1.18, 0.045];
-    kit.box('#5d6470', w, 0.62, d, x, 1.32, z, { surf: 'frame' });
-    kit.box(C.sky, w2, 0.54, d2, x, 1.36, z, { opts: { emissive: C.sky, emissiveIntensity: 0.55 } });
-  };
-  for (let z = z0 + 1.5; z < hz - 0.8; z += 1.7) win(x0 + 0.02, z, 'z');
-  for (let z = z0 + 1.5; z < BLOCK.z0 - 0.8; z += 1.7) win(x1 - 0.02, z, 'z');
-  for (const x of [-5.6, -3.9, 1.7, 3.4]) win(x, z0 + 0.02, 'x');
+  gymWindows(kit);
   // the goal over the court's middle: a white backboard with its red square, the orange ring, on a bracket
   const gx = COURT.x;
   kit.box('#f2f2ee', 1.1, 0.66, 0.04, gx, 1.35, z0 + 0.45, { surf: 'plastic' });
@@ -119,33 +111,11 @@ export function store(kit, nav) {
   nav.block(x0, door[0], z1 - t, z1 + t);
   nav.block(door[1], x1 + t, z1 - t, z1 + t);
   nav.block(x1 - t, x1 + t + 0.02, z0, z1);
-  const cart = (cx, cz, ball, n) => {
-    kit.box(C.steel, 0.5, 0.04, 0.5, cx, 0.05, cz, { surf: 'metal' });
-    for (const [dx, dz] of [
-      [-0.24, -0.24],
-      [0.24, -0.24],
-      [-0.24, 0.24],
-      [0.24, 0.24],
-    ])
-      kit.box(C.steel, 0.025, 0.55, 0.025, cx + dx, 0.05, cz + dz, { surf: 'metal' });
-    for (let i = 0; i < n; i++)
-      kit.add(
-        ball,
-        new THREE.IcosahedronGeometry(0.1, 1).translate(
-          cx - 0.13 + (i % 3) * 0.13,
-          0.19 + Math.floor(i / 9) * 0.16,
-          cz - 0.13 + (Math.floor(i / 3) % 3) * 0.13,
-        ),
-      );
-  };
-  cart(-8.75, -11.4, '#d8743a', 14);
-  cart(-7.95, -11.4, '#ece9df', 11);
-  for (let i = 0; i < 5; i++)
-    kit.box(i % 2 ? '#3e6aa8' : '#365f98', 0.7, 0.08, 1.0, -8.85, i * 0.08, -12.35, { surf: 'fabric' });
+  ballCart(kit, -8.75, -11.4, '#d8743a', 14);
+  ballCart(kit, -7.95, -11.4, '#ece9df', 11);
+  gymMats(kit);
   for (let i = 0; i < 3; i++) kit.box(C.steel, 1.2, 0.05, 0.05, -7.5, 0, -12.75 + i * 0.09, { surf: 'metal' });
-  kit.box('#8e949e', 0.3, 0.5, 0.9, -6.9, 0, -11.9, { surf: 'metal' });
-  for (let i = 0; i < 3; i++)
-    kit.box(['#e8c34a', '#3f8f6a', '#b5463c'][i], 0.22, 0.06, 0.24, -6.9, 0.5, -12.15 + i * 0.26, { surf: 'fabric' });
+  equipmentShelf(kit);
   nav.block(-9.1, -7.6, -11.75, -11.05); // the carts
   nav.block(R.x0, -8.4, -12.9, -11.8); // the mats
   nav.block(-8.15, -6.85, -12.95, -12.5); // the posts
@@ -165,23 +135,7 @@ export function benches(kit, nav) {
   }
   const cx = -3.4,
     cz = -6.1;
-  kit.box(C.steel, 0.5, 0.04, 0.5, cx, 0.05, cz, { surf: 'metal' });
-  for (const [dx, dz] of [
-    [-0.24, -0.24],
-    [0.24, -0.24],
-    [-0.24, 0.24],
-    [0.24, 0.24],
-  ])
-    kit.box(C.steel, 0.025, 0.55, 0.025, cx + dx, 0.05, cz + dz, { surf: 'metal' });
-  for (let i = 0; i < 9; i++)
-    kit.add(
-      '#ece9df',
-      new THREE.IcosahedronGeometry(0.1, 1).translate(
-        cx - 0.13 + (i % 3) * 0.13,
-        0.19,
-        cz - 0.13 + Math.floor(i / 3) * 0.13,
-      ),
-    );
+  ballCart(kit, cx, cz, '#ece9df', 9);
   nav.block(cx - 0.3, cx + 0.3, cz - 0.3, cz + 0.3);
 }
 

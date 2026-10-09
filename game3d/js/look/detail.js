@@ -507,7 +507,6 @@ export function cables(DESK, wallZ, towerXZ) {
   return g;
 }
 
-// ---------- shelf: folded lips on each shelf, cross bracing at the back, binders with ring holes and labels ----------
 // ---------- shelf: posts, folded lips on each shelf, cross bracing at the back; binders with ring holes and labels,
 // or boxes or paper as in props.js ----------
 export function shelf(w = 0.9, h = 1.1, d = 0.36, { fill = 'binders', seed = 1 } = {}) {
@@ -537,7 +536,7 @@ export function shelf(w = 0.9, h = 1.1, d = 0.36, { fill = 'binders', seed = 1 }
     const y = 0.06 + (i * (h - 0.1)) / (levels - 1);
     g.add(cbox(w - 0.02, 0.02, d, '#a3a9b2', { y, r: 0.006 }));
     g.add(cbox(w - 0.02, 0.035, 0.012, '#a3a9b2', { y: y - 0.015, z: d / 2 - 0.004, r: 0.004, cast: false })); // folded lip
-    if (i === levels - 1) continue;
+    if (i === levels - 1 || fill === 'none') continue;
     const gap = (h - 0.1) / (levels - 1) - 0.05;
     if (fill === 'box') {
       let x = -w / 2 + 0.08;

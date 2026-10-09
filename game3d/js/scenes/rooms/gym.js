@@ -27,6 +27,7 @@ import { shell, plankFloor, roomLights, roomNav } from './shell.js';
 import { pinboard } from './machines.js';
 import { entrance, reception, lobby } from './gym-lobby.js';
 import { courtLines, hallWalls, store, benches, meeting } from './gym-hall.js';
+import { gymWindowHoles } from './gym-fixtures.js';
 import {
   C,
   R,
@@ -55,7 +56,7 @@ export function buildGym() {
   const kit = new Kit(),
     signs = signSet();
   const nav = roomNav(R);
-  shell(root, R, { holes: { s: [[DOOR[0], DOOR[1], 0, R.near]] }, color: C.wall });
+  shell(root, R, { holes: { ...gymWindowHoles(), s: [[DOOR[0], DOOR[1], 0, R.near]] }, color: C.wall });
   plankFloor(kit, R, { color: C.maple, seam: C.seam, w: 0.2, along: 'z' });
   courtLines(kit, nav);
   hallWalls(kit);
