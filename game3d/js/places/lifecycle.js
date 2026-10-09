@@ -8,7 +8,8 @@ import { lookSteps } from '../look/index.js';
 import { farViewSteps } from '../look/sky.js';
 import { sliced, setUrgent, nextFrame } from '../perf/slice.js';
 import { optimizePlace } from '../perf/batch.js';
-import { lightenForPhone, phoneBatch, phoneLighter } from '../perf/phone.js';
+import { lightenForPhone, phoneBatch, phoneLighter, phoneTiles } from '../perf/phone.js';
+import { setTiling } from '../perf/tile-geometry.js';
 import { warmPlace } from '../perf/warm.js';
 import { SmoothWalker } from '../move.js';
 import { playMusic } from '../ui.js';
@@ -84,6 +85,7 @@ export function createPlaceLifecycle(
         const story = await game.runner.load(name);
         // the Blender-built trees, hedges and benches (scenes/outdoor/plant-models.js), lighter on a phone
         await loadPlantModels({ lighter: phoneLighter() });
+        setTiling(phoneTiles()); // how finely big merged meshes are cut (perf/tile-geometry.js)
         const place = await PLACES[name](game, story);
         attachSunday(game, place, name);
         attachMonday(game, place, name);

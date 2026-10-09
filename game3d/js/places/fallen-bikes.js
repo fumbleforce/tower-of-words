@@ -28,7 +28,8 @@ export function fallenBikes(game, root, nav, { rackLight } = {}) {
   const frame = new THREE.Group(); // the row's own frame: places along x, the aisle toward -z
   frame.rotation.y = row.turn;
   frame.position.set(row.x, 0, row.z);
-  frame.userData.noBatch = true; // they move: the draw-call pass leaves them alone (perf/batch.js)
+  // the draw-call pass (perf/batch.js) merges them with the parked bikes while they stand still, and lets a bike go back
+  // to drawing itself the moment it moves; the one lying in the aisle is outlined, so it always draws itself
   root.add(frame);
   const make = (i) => {
     const holder = new THREE.Group(),

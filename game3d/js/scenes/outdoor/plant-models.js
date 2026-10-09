@@ -41,6 +41,10 @@ export function setPlantModels(p) {
 export const plantModels = () => parts;
 // the smallest bush mass worth its triangles (radius): on a phone only the big crowns and shrubs get one
 export const bushFrom = () => (lean ? 0.6 : 0.3);
+// Shadows from lighter stand-ins (perf/shadow-proxy.js). Everywhere a model's lighter copy (the same shape in about
+// half the triangles) casts its shadow; on a phone, where the shadow map's draw is a third of the frame and its soft
+// edge hides more, simpler shapes do: shadowStandIns() says whether to use them.
+export const shadowStandIns = () => lean;
 
 const _m = new THREE.Matrix4(),
   _q = new THREE.Quaternion(),
@@ -58,6 +62,13 @@ const pose = ([x, y, z], scale, ry) =>
 // `at`; null without the models.
 export function plantGeometry(name, at = [0, 0, 0], scale = 1, ry = 0) {
   const p = (lean && parts?.[name + '_lo']) || parts?.[name];
+  return p ? p.geometry.clone().applyMatrix4(pose(at, scale, ry)) : null;
+}
+
+// The lighter copy of a node in the same pose, for its shadow; null where it is drawn with the lighter copy already
+// (a phone) or has none.
+export function plantShadow(name, at = [0, 0, 0], scale = 1, ry = 0) {
+  const p = !lean && parts?.[name + '_lo'];
   return p ? p.geometry.clone().applyMatrix4(pose(at, scale, ry)) : null;
 }
 
@@ -95,18 +106,36 @@ export function hedgeGeometries(a, b, { w = 0.5, h = 0.55, y = 0, seed = 1 } = {
     const name = 'hedge_' + 'abc'[Math.floor(q() * 3)];
     const ry = (alongX ? 0 : Math.PI / 2) + (q() < 0.5 ? Math.PI : 0);
     const at = alongX ? [c, y, a[1]] : [a[0], y, c];
-    out.push({ geometry: plantGeometry(name, at, [hi - lo, hh / 0.6, w / 0.5], ry), i });
+    const scale = [hi - lo, hh / 0.6, w / 0.5];
+    // its shadow: the lighter copy, or on a phone the plant's block (the models reach about 1.1 of their length and
+    // 0.95 of the width)
+    const [bl, bw] = [(hi - lo) * 1.1, w * 0.92];
+    const shadow = lean
+      ? new THREE.BoxGeometry(alongX ? bl : bw, hh, alongX ? bw : bl).translate(at[0], y + hh / 2, at[2])
+      : plantShadow(name, at, scale, ry);
+    out.push({ geometry: plantGeometry(name, at, scale, ry), shadow, i });
   }
   return out;
 }
 
 // The park bench in its own frame (x along the seat, the sitter looking along +z, standing on y = 0), len long:
-// { iron, wood } geometries, or null without the models. The end frames stand 0.12 in from each end.
+// { iron, wood } geometries (and on a phone ironShadow, woodShadow: stand-ins for their shadows), or null without the
+// models. The end frames stand 0.12 in from each end.
 export function benchGeometries(len, back = true) {
   const end = parts?.[back ? 'bench_end' : 'bench_end_low'],
     seat = parts?.[back ? 'bench_seat' : 'bench_seat_low'];
   if (!end || !seat) return null;
   const u = len / 2 - 0.12;
   const iron = mergeGeometries([-u, u].map((x) => end.geometry.clone().translate(x, 0, 0)));
-  return { iron, wood: seat.geometry.clone().scale(len, 1, 1) };
+  const out = { iron, wood: seat.geometry.clone().scale(len, 1, 1) };
+  // the shadows' stand-ins on a phone: a slab for each end, the seat and the back
+  if (lean) {
+    const box = (w, h, d, x, y, z) => new THREE.BoxGeometry(w, h, d).translate(x, y + h / 2, z);
+    const hb = back ? 0.795 : 0.346;
+    out.ironShadow = mergeGeometries([-u, u].map((x) => box(0.064, hb, 0.5, x, 0, -0.04)));
+    out.woodShadow = back
+      ? mergeGeometries([box(len, 0.05, 0.44, 0, 0.29, -0.03), box(len, 0.34, 0.06, 0, 0.43, -0.28)])
+      : box(len, 0.05, 0.37, 0, 0.29, 0.01);
+  }
+  return out;
 }

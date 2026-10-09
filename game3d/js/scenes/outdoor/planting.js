@@ -10,7 +10,16 @@
 import * as THREE from 'three';
 import { roundedBox } from '../../perf/rounded-box.js';
 import { rng } from './parts.js';
-import { plantGeometry, plantTips, trunkName, bushName, bushFrom, hedgeGeometries } from './plant-models.js';
+import {
+  plantGeometry,
+  plantTips,
+  trunkName,
+  bushName,
+  bushFrom,
+  hedgeGeometries,
+  shadowStandIns,
+  plantShadow,
+} from './plant-models.js';
 
 export const LEAF = {
   deep: '#43603f',
@@ -47,16 +56,25 @@ const leafy = (color) => (_tone.set(color), _tone.g > _tone.r * 1.04 && _tone.g 
 // a crown blob: a mass of leaf clumps (outdoor/plant-models.js bushes, 80 triangles), or a faceted ball (a
 // dodecahedron: round enough in a cluster, 36 triangles) for the small ones, where the clumps wouldn't show, and
 // without the models; scaled to (sx, sy, sz), turned so no two look the same
+// A leafy blob's shadow comes from an icosahedron of about its size (20 triangles; perf/shadow-proxy.js): a faceted
+// ball casts much the same shadow as the dodecahedron, and on a phone (outdoor/plant-models.js shadowStandIns) the
+// shadow's soft edge doesn't show a mass's clumps either.
 function blob(p, x, y, z, r, color, { sx = 1, sy = 1, sz = 1, turn = 0 } = {}) {
+  const leaf = leafy(color);
   const mass =
-    r >= bushFrom() &&
-    leafy(color) &&
-    plantGeometry(bushName(turn + x + z), [x, y, z], [r * sx, r * sy, r * sz], turn * 2.3);
-  if (mass) return p.geo(color, mass, { surf: 'foliage', shade: true });
+    r >= bushFrom() && leaf && plantGeometry(bushName(turn + x + z), [x, y, z], [r * sx, r * sy, r * sz], turn * 2.3);
+  // the masses reach about 0.8 of r, the faceted balls r
+  const ball = (k, dy = 0) => new THREE.IcosahedronGeometry(r * k, 0).scale(sx, sy, sz).translate(x, y + dy, z);
+  if (mass)
+    return p.geo(color, mass, {
+      surf: 'foliage',
+      shade: true,
+      shadow: shadowStandIns() ? ball(0.82, 0.05 * r * sy) : null,
+    });
   const g = new THREE.DodecahedronGeometry(r * 1.04, 0);
   g.rotateY(turn).rotateX(turn * 0.7);
   g.scale(sx, sy, sz);
-  p.geo(color, g.translate(x, y, z), { surf: 'foliage' });
+  p.geo(color, g.translate(x, y, z), { surf: 'foliage', shadow: leaf ? ball(1.02) : null });
 }
 
 // A tree from its Blender-built trunk (outdoor/plant-models.js): root flare, taper, branch junctions and bark, turned
@@ -67,7 +85,7 @@ function grown(p, species, x, z, s, seed, bark, crown) {
     ry = seed * 2.39996;
   const trunk = plantGeometry(name, [x, 0, z], s, ry);
   if (!trunk) return false;
-  p.geo(bark, trunk, { surf: 'bark', shade: true });
+  p.geo(bark, trunk, { surf: 'bark', shade: true, shadow: plantShadow(name, [x, 0, z], s, ry) });
   plantTips(name, [x, 0, z], s, ry).forEach(([tx, ty, tz, k], i) => crown(tx, ty, tz, k, i));
   return true;
 }
@@ -254,7 +272,12 @@ export function hedge(p, a, b, { w = 0.5, h = 0.55, y = 0, tones = [LEAF.deep, L
   const plants = hedgeGeometries(a, b, { w, h, y, seed });
   if (plants) {
     // one green for the run: the plants' own clumps vary it, so neighbours don't show as blocks of two tones
-    for (const { geometry } of plants) p.geo(tones[seed % tones.length], geometry, { surf: 'foliage', shade: true });
+    for (const { geometry, shadow } of plants)
+      p.geo(tones[seed % tones.length], geometry, {
+        surf: 'foliage',
+        shade: true,
+        shadow,
+      });
     return;
   }
   const alongX = Math.abs(b[0] - a[0]) >= Math.abs(b[1] - a[1]);

@@ -25,6 +25,7 @@
 import * as THREE from 'three';
 import { drain } from './slice.js';
 import { split } from './batch-split.js';
+import { shadowGeometry } from './shadow-proxy.js';
 import { makeTwin, dropTwin } from './batch-twin.js';
 import { rigSnap, skinOf, skinned, fitBounds, looseSnap, looseSame } from './batch-rig.js';
 import { matKey, hasTex, plainData, matSnap, matSame, nodeSnap, nodeSame, srcSnap, srcSame } from './batch-snap.js';
@@ -61,6 +62,11 @@ export function optimizePlace(place, opt = {}) {
   // TRIS triangles, so the parts off screen still get culled; shadow-only batches only split by triangles
   const SPAN = +(Q.get('span') || opt.span || 3),
     TRIS = +(Q.get('tris') || opt.tris || 6000),
+    // groups that cast shadows may be cut differently (opt.cast: { span, tris }; the phone's, perf/phone.js): their
+    // meshes are copied into batches whatever the cut (the shadow-only batch needs the visible one), while merging
+    // meshes that cast none costs a copy that drawing them one by one doesn't
+    CSPAN = opt.cast?.span ?? SPAN,
+    CTRIS = opt.cast?.tris ?? TRIS,
     STRIS = 20000,
     LIGHT = +(Q.get('light') || 1500);
   // the ink look (style study) tells materials apart by colour; baking colours into one material would lose those lines
@@ -199,6 +205,20 @@ export function optimizePlace(place, opt = {}) {
     walk(scene, false, false);
     return out;
   }
+  // userData that tells batches apart. Once the look has run (look/index.js), what a mesh is made of rides in its
+  // vertices (aLook), so meshes of different surfaces in one material can share a batch: those that cast a shadow
+  // (copied into batches anyway, for the shadow-only batch) and small ones, not the rest (each would be held twice)
+  const userKey = (u, cast) => JSON.stringify(u.lookDone && cast ? { ...u, surf: undefined, tile: undefined } : u);
+  // a mesh's centre in its batch's space and its triangles, for split()
+  function centre(o, anchor) {
+    if (!o.geometry.boundingSphere) o.geometry.computeBoundingSphere();
+    relMatrix(o, anchor, _cm);
+    _cv.copy(o.geometry.boundingSphere.center).applyMatrix4(_cm);
+    const g = o.geometry;
+    return { x: _cv.x, y: _cv.y, z: _cv.z, t: (g.index ? g.index.count : g.attributes.position.count) / 3 };
+  }
+  const _cm = new THREE.Matrix4(),
+    _cv = new THREE.Vector3();
   // where a mesh sits relative to the group its batch would hang under (so a swaying train car still counts as still)
   // From the local transforms of the nodes in between, not the world matrices: those are only as fresh as the last
   // render or whatever called getWorldPosition since (which updates a node's parents, not its children), so between
@@ -452,15 +472,17 @@ export function optimizePlace(place, opt = {}) {
         o.receiveShadow,
         o.renderOrder,
         o.frustumCulled,
-        JSON.stringify(o.userData),
+        userKey(o.userData, sh || where.get(o).t <= LIGHT),
       ].join('|');
       let gr = groups.get(key);
       if (!gr) groups.set(key, (gr = { anchor, rig, bake, uv, nrm, mat: m, list: [], cast: o.castShadow && !sh }));
       gr.list.push(o);
     }
     // the merging itself is queued and done a few milliseconds at a time (see pump), so it never holds up a frame
-    for (const gr0 of groups.values())
-      for (const list of split(gr0.list, gr0.mat.transparent ? Math.min(SPAN, 2) : SPAN, TRIS, where, LIGHT)) {
+    for (const gr0 of groups.values()) {
+      const casts = gr0.list.some(soloCaster);
+      const span = gr0.mat.transparent ? Math.min(SPAN, 2) : casts ? CSPAN : SPAN;
+      for (const list of split(gr0.list, span, casts ? CTRIS : TRIS, where, LIGHT)) {
         // a mesh with nothing to merge with still casts its shadow through a shadow-only batch (the shadow pass draws
         // depth only, so any material goes); it draws itself from a batch of one
         if (list.length < 2 && !soloCaster(list[0])) continue;
@@ -485,6 +507,7 @@ export function optimizePlace(place, opt = {}) {
               build({ anchor: gr.anchor, shadow: true, side, list: part });
         });
       }
+    }
     jobs.push(consolidate);
     // forget meshes that left the scene (a rebuilt shell) and weren't merged
     if (!all) for (const [o, r] of info) if (r.state !== 'batched' && !seen.has(o) && !o.parent) info.delete(o);
@@ -505,17 +528,11 @@ export function optimizePlace(place, opt = {}) {
       if (list.length < 2) continue;
       const srcs = [];
       for (const b of list) for (const o of b.parts.keys()) srcs.push(o);
-      const where = new Map();
-      for (const o of srcs)
-        where.set(o, {
-          x: 0,
-          y: 0,
-          z: 0,
-          t: (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count) / 3,
-        });
       const anchor = list[0].mesh.parent,
         side = list[0].side;
       if (!anchor) continue;
+      const where = new Map();
+      for (const o of srcs) where.set(o, centre(o, anchor));
       for (const b of list) b.fresh = false;
       // one job per new batch, and the old ones go only after the last is built
       for (const part of split(srcs, 1e9, STRIS, where, LIGHT))
@@ -582,8 +599,10 @@ export function optimizePlace(place, opt = {}) {
       nrm = !shadow && gr.nrm;
     let nv = 0,
       ni = 0;
+    // a shadow-only batch draws each mesh's shadow stand-in where it has one (perf/shadow-proxy.js)
+    const geoOf = shadow ? shadowGeometry : (o) => o.geometry;
     for (const o of list) {
-      const g = o.geometry;
+      const g = geoOf(o);
       nv += g.attributes.position.count;
       ni += g.index ? g.index.count : g.attributes.position.count;
     }
@@ -602,7 +621,7 @@ export function optimizePlace(place, opt = {}) {
       i0 = 0;
     const parts = [];
     for (const o of list) {
-      const g = o.geometry,
+      const g = geoOf(o),
         P = g.attributes.position,
         N = g.attributes.normal,
         U = g.attributes.uv,

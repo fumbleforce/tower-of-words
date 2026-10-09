@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { mat } from '../../props.js';
 import { lightPool } from '../../places/life.js';
+import { setShadowGeometry, positions } from '../../perf/shadow-proxy.js';
 
 // a small seeded random in [0, 1): the same seed gives the same planting every build
 export function rng(seed = 1) {
@@ -32,12 +33,25 @@ export class Parts {
   // alpha: one opacity per vertex (a set whose geometry all has it draws with vertex alpha: the surf's fading edge)
   // shade: the geometry's own colours are multipliers on `color` (0.5 = as given; the Blender-built planting and bench,
   // outdoor/plant-models.js); such a geometry may come without normals, and gets flat ones here.
-  geo(color, g, { cast = true, surf = null, opts = null, alpha = null, shade = false } = {}) {
+  // shadow: a lighter geometry in the same place to cast its shadow instead (perf/shadow-proxy.js)
+  geo(color, g, { cast = true, surf = null, opts = null, alpha = null, shade = false, shadow = null } = {}) {
     const key = `${cast}|${surf}|${opts ? JSON.stringify(opts) : ''}|${!!alpha}`;
-    // one attribute set for all: position, normal, colour (and uv, zeroed, so everything merges)
+    // one attribute set for all: position, normal, colour (and uv, zeroed, so everything merges; dropped in build)
     if (alpha && alpha.length !== g.attributes.position.count)
       throw new Error('Parts.geo: alpha must have one value per vertex');
-    if (!this.sets.has(key)) this.sets.set(key, { cast, surf, opts, list: [] });
+    if (!this.sets.has(key))
+      this.sets.set(key, {
+        cast,
+        surf,
+        opts,
+        list: [],
+        shadows: [],
+        proxied: false,
+      });
+    const set = this.sets.get(key);
+    // each piece's shadow stand-in, or null where the piece casts its own
+    set.shadows.push(cast && shadow ? positions(shadow) : null);
+    if (cast && shadow) set.proxied = true;
     if (g.index) {
       if (alpha) alpha = Array.from(g.index.array, (i) => alpha[i]);
       g = g.toNonIndexed();
@@ -55,7 +69,7 @@ export class Parts {
     }
     g.setAttribute('color', new THREE.Float32BufferAttribute(col, k));
     g.setAttribute('uv', new THREE.Float32BufferAttribute(new Float32Array(n * 2), 2));
-    this.sets.get(key).list.push(g);
+    set.list.push(g);
     return this;
   }
   box(color, w, h, d, x, y, z, { ry = 0, ...o } = {}) {
@@ -67,8 +81,11 @@ export class Parts {
     const out = [];
     // the benches' seats (furniture.js bench()), in root's frame, for the ambient crowd (crowd/still.js)
     if (this.seats) (root.userData.seats ||= []).push(...this.seats.splice(0));
-    for (const { cast, surf, opts, list } of this.sets.values()) {
+    for (const { cast, surf, opts, list, shadows, proxied } of this.sets.values()) {
       const m = new THREE.Mesh(mergeGeometries(list), mat('#ffffff', { vertexColors: true, ...(opts || {}) }));
+      // the zero uv held for merging goes, unless a builder wrote its own (diorama/root-bed.js's leaf cards)
+      if (m.geometry.attributes.uv.array.every((v) => v === 0)) m.geometry.deleteAttribute('uv');
+      if (proxied && cast) setShadowGeometry(m, mergeGeometries(shadows.map((p, i) => p || positions(list[i]))));
       list.forEach((g) => g.dispose());
       m.castShadow = cast;
       m.receiveShadow = true;

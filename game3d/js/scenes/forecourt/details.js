@@ -2,6 +2,8 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { PAL, mat, rbox, sh, textTexture, plane, JP_FONT, emissive } from '../../props.js';
+import { shadowStandIns } from '../outdoor/plant-models.js';
+import { setShadowGeometry, positions } from '../../perf/shadow-proxy.js';
 
 export function boxes(parts, color) {
   const geometries = parts.map(([w, h, d, x, y, z]) => new THREE.BoxGeometry(w, h, d).translate(x, y + h / 2, z));
@@ -40,10 +42,16 @@ export function planter(length) {
   return group;
 }
 
+// a tube from a to b, open-ended: its ends sit in a joint or a wheel, or are a centimetre or two across
+// (on a phone its shadow comes from a three-sided one: a tube this thin is a texel or two in the shadow map)
 function bar(a, b, radius, color) {
   const from = new THREE.Vector3(...a),
     to = new THREE.Vector3(...b);
-  const mesh = sh(new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, from.distanceTo(to), 6), mat(color)));
+  const mesh = sh(
+    new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, from.distanceTo(to), 6, 1, true), mat(color)),
+  );
+  if (shadowStandIns())
+    setShadowGeometry(mesh, positions(new THREE.CylinderGeometry(radius, radius, from.distanceTo(to), 3, 1, true)));
   mesh.position.copy(from).add(to).multiplyScalar(0.5);
   mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), to.sub(from).normalize());
   return mesh;
@@ -55,6 +63,7 @@ export function bicycle(color, { basket = false, child = false } = {}) {
   // The two triangular frame sections and a small rack distinguish parked bikes at game scale.
   for (const x of [-0.38, 0.38]) {
     const wheel = sh(new THREE.Mesh(new THREE.TorusGeometry(0.25, 0.028, 4, 12), mat(PAL.charcoal)));
+    if (shadowStandIns()) setShadowGeometry(wheel, positions(new THREE.TorusGeometry(0.25, 0.028, 3, 8)));
     wheel.position.set(x, 0.28, 0);
     group.add(wheel);
     if (x > 0) group.userData.front = wheel; // spun about its axle (z) when the bike is wheeled
