@@ -19,13 +19,13 @@
    "negative": "glasses", "portrait": "art/approved/carina/carina-neutral.webp"
   },
   {
-   "id": "mio", "checked": "e35ef4f1", "cast_md": "mio", "name": "Mio", "gender": "female", "age": 30, "who": "woman", "skin": "pale skin",
-   "hair": "very dark green hair bordering on black in a messy loose bun with bangs, bright green underneath showing at the ends and nape",
+   "id": "mio", "checked": "efb1e1f4", "cast_md": "mio", "name": "Mio", "gender": "female", "age": 30, "who": "woman", "skin": "pale skin",
+   "hair": "very dark green hair bordering on black in a messy loose bun with bangs, mint-jade green underneath (#1ACC98, a cool blue-green, not lime) showing at the ends and nape",
    "eyes": "light tan eyes", "glasses": "thin-framed taupe-grey glasses with clear lenses", "extra": "",
    "build": "slim with soft curves", "signature": "big headphones around her neck",
    "outfit": "a dark green oversized hoodie and a lanyard with an ID card",
    "short": "Mio, 30, pale skin, dark green-black hair with bright green underneath, glasses",
-   "negative": "teal hair, hair streaks, tan, tanned skin, sunglasses, tinted glasses",
+   "negative": "teal hair, hair streaks, lime hair, yellow-green hair, neon green hair, tan, tanned skin, sunglasses, tinted glasses, duckface, pouting, puckered lips",
    "portrait": "art/approved/mio/mio-after.webp"
   },
   {
