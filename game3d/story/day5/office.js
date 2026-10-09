@@ -33,7 +33,7 @@ export default place({ forecourt: ['talk:lift'] }, {
         { say: 'kenji', emo: 'bright', overheard: true, text: '6時から、ここで飲み会です。', clear: ['6'] },
         { say: 'kenji', emo: 'bright', text: 'Mori-san, Mio-san also. {mc.name}-san... come?' },
         { say: 'eric', emo: 'curious', text: 'From the machine?' },
-        { say: 'kenji', emo: 'warm', text: 'Yes. Me... buy. Only us. OK?' },
+        { say: 'kenji', emo: 'warm', text: 'Yes. Me... I pay. Only us. Okay?' },
         { set: 'd5_invited' }, { set: 'd5_invited_in_person' }, { do: 'save' },
       ], else: [{ say: 'kenji', emo: 'casual', text: 'Six... here.' }] },
     ],
