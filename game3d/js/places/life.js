@@ -2,47 +2,9 @@
 // drifting in window light, steam from a kettle, screens that flicker and scroll, and clock hands that move.
 // Everything here is cheap (a few draw calls each) so it stays on in the low quality tier.
 import * as THREE from 'three';
-import { DECAL } from '../look/decal.js';
 
-// ---------- light pools: a soft additive disc on the floor ----------
-let _poolTex;
-function poolTex() {
-  if (_poolTex) return _poolTex;
-  const c = document.createElement('canvas');
-  c.width = c.height = 128;
-  const g = c.getContext('2d');
-  const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
-  gr.addColorStop(0, 'rgba(255,255,255,1)');
-  gr.addColorStop(0.35, 'rgba(255,255,255,0.55)');
-  gr.addColorStop(0.7, 'rgba(255,255,255,0.14)');
-  gr.addColorStop(1, 'rgba(255,255,255,0)');
-  g.fillStyle = gr;
-  g.fillRect(0, 0, 128, 128);
-  _poolTex = new THREE.CanvasTexture(c);
-  _poolTex.colorSpace = THREE.SRGBColorSpace;
-  return _poolTex;
-}
-// r: radius in metres; k: strength; sx/sz stretch it (a strip lamp throws an oval)
-export function lightPool(x, z, r = 1.1, { color = '#ffcf94', k = 0.32, sx = 1, sz = 1, y = 0.006 } = {}) {
-  const m = new THREE.Mesh(
-    new THREE.PlaneGeometry(2 * r * sx, 2 * r * sz),
-    new THREE.MeshBasicMaterial({
-      map: poolTex(),
-      color: new THREE.Color(color).multiplyScalar(k),
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-      toneMapped: true,
-      ...DECAL,
-    }),
-  );
-  m.rotation.x = -Math.PI / 2;
-  m.position.set(x, y, z);
-  m.renderOrder = 1;
-  m.userData.noAO = true;
-  m.userData.stackable = true; // light adds up the same in any order: the draw-call pass may merge them (perf/batch.js)
-  return m;
-}
+// ---------- light pools: kit/core/pool.js (one home, below the places)
+export { lightPool } from '../kit/core/pool.js';
 
 // ---------- dust motes in a box of light ----------
 // box: [x0, x1, y0, y1, z0, z1] in the parent's space. dir: the slow drift.
@@ -126,7 +88,13 @@ export function steam({ n = 6, rise = 0.45, size = 0.12, opacity = 0.35, period 
   const puffs = [];
   for (let i = 0; i < n; i++) {
     const s = new THREE.Sprite(
-      new THREE.SpriteMaterial({ map: puffTex(), color: '#f4f6f8', transparent: true, depthWrite: false, opacity: 0 }),
+      new THREE.SpriteMaterial({
+        map: puffTex(),
+        color: '#f4f6f8',
+        transparent: true,
+        depthWrite: false,
+        opacity: 0,
+      }),
     );
     s.userData.o = i / n;
     s.renderOrder = 3;

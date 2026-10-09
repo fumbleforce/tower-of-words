@@ -8,6 +8,7 @@ import { LOOK } from './look/flags.js';
 import { DECAL } from './look/decal.js';
 import * as D from './look/detail.js';
 import { crtHousing } from './look/crt.js';
+import { mat } from './kit/core/mat.js';
 
 // every lit monitor built here flickers and scrolls; the active place calls liveScreens.update(t)
 export const liveScreens = new Screens();
@@ -54,12 +55,8 @@ export const PAL = {
   tileBlue: '#8fa0b3',
 };
 
-const mats = new Map();
-export function mat(color, opts = {}) {
-  const key = color + JSON.stringify(opts);
-  if (!mats.has(key)) mats.set(key, new THREE.MeshStandardMaterial({ color, roughness: 0.8, metalness: 0, ...opts }));
-  return mats.get(key);
-}
+// the material cache lives in the world kit (kit/core/mat.js); every props.js user keeps importing it from here
+export { mat };
 export function emissive(color, glow, k = 1.6) {
   return mat(color, { emissive: new THREE.Color(glow), emissiveIntensity: k });
 }
