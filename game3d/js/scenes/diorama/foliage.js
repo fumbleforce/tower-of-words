@@ -4,7 +4,10 @@ import { addCanopyCore, leafCluster } from './canopy.js';
 import { rng } from '../outdoor/parts.js';
 
 // Sample the actual crowns and hedge surfaces. Their silhouettes, clearances and tree locations stay put.
-export function dressFoliage(root, { budget = 55000, tileSize = 4, leafShadows = true, leafScale = 1, sun } = {}) {
+export function dressFoliage(
+  root,
+  { budget = 55000, tileSize = 4, leafShadows = true, leafScale = 1, sun, phone = false } = {},
+) {
   root.updateWorldMatrix(true, true);
   const q = rng(711),
     samples = [],
@@ -113,7 +116,7 @@ export function dressFoliage(root, { budget = 55000, tileSize = 4, leafShadows =
       });
     }
   }
-  addCanopyCore(root, faces, sun);
+  addCanopyCore(root, faces, sun, phone);
   const material = new THREE.MeshStandardMaterial({
     color: '#ffffff',
     map: leafCluster(),

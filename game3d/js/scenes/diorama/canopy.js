@@ -37,7 +37,7 @@ export function leafCluster() {
   return texture;
 }
 
-export function addCanopyCore(root, faces, sun) {
+export function addCanopyCore(root, faces, sun, phone = false) {
   // A recessed, dark leaf mass closes the gaps between the outer leaves.
   // The outer leaves still define its silhouette and catch the sunlight.
   const coreGeometry = new THREE.BufferGeometry();
@@ -54,11 +54,16 @@ export function addCanopyCore(root, faces, sun) {
     }
   coreGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
   coreGeometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
-  const core = new THREE.Mesh(
-    mergeVertices(coreGeometry),
-    new THREE.MeshStandardMaterial({ color: '#365020', roughness: 1 }),
-  );
+  // a phone's: coarser, corners snapped to a 0.2 m grid (the place budgets, coordinator 2026-10-09)
+  let shape = coreGeometry;
+  if (phone) {
+    shape = clustered(coreGeometry, 0.2);
+    shape.computeVertexNormals();
+  }
+  const core = new THREE.Mesh(mergeVertices(shape), new THREE.MeshStandardMaterial({ color: '#365020', roughness: 1 }));
+  if (phone) core.geometry.computeVertexNormals();
   coreGeometry.dispose();
+  if (shape !== coreGeometry) shape.dispose();
   // its shadow from a lighter stand-in on the shadow-only layer (perf/shadow-proxy.js): every crown, corners snapped to
   // a 0.45 m grid; the core itself casts none.
   const whole = new THREE.BufferGeometry();

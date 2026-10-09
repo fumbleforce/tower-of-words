@@ -101,7 +101,8 @@ export function streetMaterial(original, kind) {
   return material;
 }
 
-export function finishStreet(root) {
+// phone: soil, mulch, metal and cladding keep the shared materials they were built with (one draw less each)
+export function finishStreet(root, phone = false) {
   const cache = new Map(),
     environment = streetReflections();
   root.traverse((o) => {
@@ -147,7 +148,8 @@ export function finishStreet(root) {
         'soil',
         'mulch',
         'mulch-cover',
-      ].includes(surface)
+      ].includes(surface) ||
+      (phone && ['soil', 'mulch', 'metal', 'cladding'].includes(surface))
     )
       return;
     o.geometry.computeBoundingBox();
