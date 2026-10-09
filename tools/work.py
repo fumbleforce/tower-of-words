@@ -28,7 +28,8 @@ once with a link, and stores the number in review.json as `issue`; a later decis
 comments on the issue and reopens it. `stale` (also printed by `tools/review.py list`, the answers hook and after
 each commit) flags: a decided review without an issue; a review that changed after its issue's last update; a closed
 issue whose review is open again; todo, running or blocked issues untouched for 12 h; a decided review whose issues
-are all still todo an hour after the decision; parked issues untouched for 24 h. The stale clock is the time this
+are all still todo an hour after the decision; a waiting-jorgen issue with no open Review item (he only checks
+the Review queue). Parked issues are postponed ideas and are never flagged. The stale clock is the time this
 tool last changed the issue (`touch` resets it), so a comment alone doesn't hide a stall.
 
 The repo is public: every title, body and comment is refused if it names private paths (island/private, reward
@@ -52,7 +53,7 @@ BIBLE_URL = 'https://fumbleforce.github.io/tower-of-words/bible/'  # the public 
 OLD_LISTS = '9391af4'  # the commit that still has notes/production-requests.md and TODO.md's open lists
 CACHE = '/tmp/claude-1000/work-issues.json'
 CACHE_SECONDS = 60
-ACTIVE_HOURS, DECISION_HOURS, PARKED_HOURS = 12, 1, 24
+ACTIVE_HOURS, DECISION_HOURS = 12, 1
 
 KINDS = ('decision-followup', 'request', 'task', 'parked', 'check-for-jorgen')
 STATES = ('todo', 'running', 'blocked', 'parked', 'waiting-jorgen', 'done', 'dropped')
@@ -345,6 +346,7 @@ def stale(at=None, all_items=None):
         by_id[key] = {'id': key, 'title': title, 'owner': owner, 'reasons': [reason], 'hours': hours, 'url': url}
         out.append(by_id[key])
 
+    asked = set()  # issues with an open Review item: the only place Jørgen is asked anything
     for rid, r, fb in review_items():
         st = r.get('status', 'open')
         links = linked(all_items, rid, r)
@@ -363,6 +365,7 @@ def stale(at=None, all_items=None):
                 if ch and up and ch > up:
                     flag(i['id'], i['title'], i['owner'], f'Review {rid} changed after the issue was last updated', (at - ch).total_seconds() / 3600, i['url'])
         elif st == 'open':
+            asked.update(i['id'] for i in links)
             for i in links:
                 if not i['open']:
                     flag(i['id'], i['title'], i['owner'], f'closed, but Review {rid} is open again', 0, i['url'])
@@ -370,8 +373,10 @@ def stale(at=None, all_items=None):
         h = hours_since(i['updated'], at)
         if i['state'] in ('todo', 'running', 'blocked') and h >= ACTIVE_HOURS:
             flag(i['id'], i['title'], i['owner'], f'{i["state"]}, untouched for {age(h)}', h, i['url'])
-        elif i['state'] == 'parked' and h >= PARKED_HOURS:
-            flag(i['id'], i['title'], i['owner'], f'parked for {age(h)}', h, i['url'])
+        elif i['state'] == 'waiting-jorgen' and i['id'] not in asked:
+            # Jørgen only checks the Review queue (2026-10-09): waiting on him without an open Review item is invisible to him.
+            flag(i['id'], i['title'], i['owner'], 'waiting for Jørgen, but no open Review item asks him', h, i['url'])
+        # Parked items are postponed ideas, not stuck work (Jørgen, 2026-10-09), so they are never flagged.
     return sorted(out, key=lambda s: -s['hours'])
 
 
