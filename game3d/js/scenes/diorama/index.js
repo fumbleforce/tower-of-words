@@ -9,6 +9,7 @@ import { meadowDetail } from './meadow.js';
 import { dressFoliage } from './foliage.js';
 import { softenStation } from './architecture.js';
 import { detailController } from './quality.js';
+import { southLinkFrame } from '../forecourt/south-link.js';
 export { finishOffice } from './architecture.js';
 // phone: the phone's lighter build (perf/phone.js phoneLighter), a coarser crown core and fewer street finishes
 export function dressStreet(root, scene, sun, station, nav, phone = false) {
@@ -16,8 +17,22 @@ export function dressStreet(root, scene, sun, station, nav, phone = false) {
   const softened = softenStation(root);
   const details = streetDetails(root, station, environment);
   // leaves in 10 m tiles: fewer draws, each still culled (the place budgets, game3d/tools/perf/place-budgets.json)
-  const leaves = dressFoliage(root, { budget: 32000, tileSize: 10, leafShadows: false, leafScale: 1.5, sun, phone });
-  const meadow = meadowDetail(root, nav, { budget: 6500, shadows: false });
+  const leaves = dressFoliage(root, {
+    budget: 32000,
+    tileSize: 10,
+    leafShadows: false,
+    leafScale: 1.5,
+    sun,
+    phone,
+    bounds: [-8, 33, -13, 19],
+    focus: [3, 28, 0, 16],
+  });
+  const meadow = meadowDetail(root, nav, {
+    budget: 6500,
+    shadows: false,
+    bounds: [3, 27, -0.5, 16],
+    avoid: southLinkFrame('forecourt').walk,
+  });
   scene.traverse((o) => {
     if (o.isHemisphereLight) {
       o.color.set('#c8dcf0');

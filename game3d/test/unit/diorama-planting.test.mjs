@@ -32,14 +32,27 @@ const digest = (p) => {
   }
   return hash.digest('hex');
 };
-test('default and declined strategies leave every species and hedge geometry identical', () => {
+test('a builder without its own planting plants the street style (ISLAND_PLANTING)', () => {
   const ordinary = new Parts(),
+    street = new Parts({ planting: streetPlanting() }),
     declined = new Parts({ planting: { tree: () => false, hedge: () => false } });
-  for (const p of [ordinary, declined]) {
+  for (const p of [ordinary, street, declined]) {
     for (const build of Object.values(TREES)) build(p, 16, 5, 0.9, 7);
     hedge(p, [8, 3], [12, 3], { w: 0.5, h: 0.55, y: 0.1 });
   }
-  assert.equal(digest(ordinary), digest(declined));
+  assert.equal(digest(ordinary), digest(street));
+  assert.notEqual(digest(ordinary), digest(declined));
+  assert.ok([...ordinary.sets.values()].some((set) => set.surf === 'diorama-tree'));
+});
+test('bounds keep the street planting to its area', () => {
+  const strategy = streetPlanting({ bounds: [0, 10, 0, 10] }),
+    p = new Parts({ planting: strategy });
+  TREES.keyaki(p, 5, 5, 1, 2);
+  TREES.keyaki(p, 25, 5, 1, 3);
+  assert.deepEqual(
+    strategy.records.map((r) => r.x),
+    [5],
+  );
 });
 test('trial descriptors replace old bark and crowns once, preserving root and hedge gap positions', () => {
   const strategy = streetPlanting(),

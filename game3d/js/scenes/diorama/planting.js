@@ -2,9 +2,7 @@ import * as THREE from 'three';
 import { rng } from '../outdoor/parts.js';
 import { clippedHedge } from './planting-shapes.js';
 import { rootBed } from './root-bed.js';
-import { plantGeometry, plantTips, trunkName, hedgeGeometries } from '../outdoor/plant-models.js';
-
-const inside = (x, z) => x >= -8 && x <= 33 && z >= -13 && z <= 19;
+import { plantGeometry, plantTips, trunkName, hedgeGeometries, lighterPlanting } from '../outdoor/plant-models.js';
 
 function branch(p, from, to, radius, tip) {
   const a = new THREE.Vector3(...from),
@@ -19,8 +17,16 @@ function branch(p, from, to, radius, tip) {
 }
 
 // Semantic replacement happens before Parts merges bark and leaves. Returning true suppresses the old plant.
-export function streetPlanting({ cover = true } = {}) {
-  const records = [];
+// The street style's trees and hedges are the island's (Jørgen 2026-10-09, on the old crowns over the new trunks: "do
+// you mean these disconnected brown sticks that are supposed to be trees?"): outdoor/planting.js hands every tree and
+// hedge to ISLAND_PLANTING when a builder brings no planting of its own, and the place's leaves, crown core and meadow
+// are laid over them after it is built (diorama/vegetation.js).
+// bounds: [x0, x1, z0, z1], only plants inside it (others build the code shapes); cover: the leaf cards over the bed
+// soil (a function is asked per tree); records: false keeps no list of what was planted
+export function streetPlanting({ cover = true, bounds = null, records: keep = true } = {}) {
+  const records = [],
+    inside = (x, z) => !bounds || (x >= bounds[0] && x <= bounds[1] && z >= bounds[2] && z <= bounds[3]),
+    note = (r) => keep && records.push(r);
   return {
     records,
     tree(p, plant) {
@@ -29,14 +35,17 @@ export function streetPlanting({ cover = true } = {}) {
       const name = trunkName(species, seed),
         ry = seed * 2.39996;
       const modelled = !!plantGeometry(name);
-      const baseY = rootBed(p, x, z, s, seed, { codeTrunk: !modelled, cover });
+      const baseY = rootBed(p, x, z, s, seed, {
+        codeTrunk: !modelled,
+        cover: typeof cover === 'function' ? cover() : cover,
+      });
       if (modelled) {
-        // the Blender-built trunk (outdoor/plant-models.js), a crown mass at the end of each main limb
-        records.push({ kind: 'tree', ...plant, baseY });
+        // the Blender-built trunk (outdoor/plant-models.js), a crown mass round the end of every limb: each limb's tip
+        // sits in the lower part of its crown, so no limb ends below one
+        note({ kind: 'tree', ...plant, baseY });
         p.geo('#77644b', plantGeometry(name, [x, baseY - 0.01, z], s, ry), { surf: 'bark', shade: true });
         const spread = species === 'ginkgo' ? 0.47 : species === 'sakura' ? 0.86 : 0.74;
         for (const [cx, cy, cz, k] of plantTips(name, [x, baseY, z], s, ry)) {
-          if (k < 0.8 && species !== 'ginkgo') continue; // the twigs reach into a neighbouring crown
           const geometry = new THREE.IcosahedronGeometry(1, 0);
           geometry.scale(
             spread * 0.86 * k * s,
@@ -49,7 +58,7 @@ export function streetPlanting({ cover = true } = {}) {
         }
         return true;
       }
-      records.push({ kind: 'tree', ...plant, baseY });
+      note({ kind: 'tree', ...plant, baseY });
       const q = rng(seed + 415),
         narrow = species === 'ginkgo',
         pine = species === 'pine';
@@ -78,7 +87,7 @@ export function streetPlanting({ cover = true } = {}) {
     hedge(p, hedge) {
       const { a, b, w, h, y } = hedge;
       if (!inside((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)) return false;
-      records.push({ kind: 'hedge', ...hedge });
+      note({ kind: 'hedge', ...hedge });
       const plants = hedgeGeometries(a, b, hedge);
       if (plants) {
         for (const { geometry } of plants) p.geo('#3f633b', geometry, { surf: 'diorama-hedge', shade: true });
@@ -93,3 +102,7 @@ export function streetPlanting({ cover = true } = {}) {
     },
   };
 }
+
+// The island's planting for every builder without its own (outdoor/planting.js): no bounds, no records, and with the
+// phone's lighter models no leaf cards over the bed soil, as in the forecourt.
+export const ISLAND_PLANTING = streetPlanting({ cover: () => !lighterPlanting(), records: false });

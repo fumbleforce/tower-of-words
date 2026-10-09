@@ -35,6 +35,7 @@ import { installFlavorFinds, attachFlavorFinds } from '../flavor-finds/index.js'
 import { snapshotZones, restoreZones, suppressArrivalZones } from '../gameplay/zones.js';
 import { loadPlantModels } from '../scenes/outdoor/plant-models.js';
 import { loadStationModel, STATION_PLACES } from '../scenes/station-model.js';
+import { dressVegetation } from '../scenes/diorama/vegetation.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -92,6 +93,16 @@ export function createPlaceLifecycle(
         if (STATION_PLACES.has(name)) await loadStationModel({ lighter: phoneLighter() }); // Honsha station's outside (scenes/station-model.js)
         setTiling(phoneTiles()); // how finely big merged meshes are cut (perf/tile-geometry.js)
         const place = await PLACES[name](game, story);
+        // the forecourt's leaves, crown core and meadow over the place's street planting (scenes/diorama/vegetation.js)
+        await nextFrame();
+        const vegetation = dressVegetation(place, name, { phone: phoneLighter() });
+        if (vegetation) {
+          const update = place.update;
+          place.update = function (...args) {
+            vegetation();
+            return update?.apply(this, args);
+          };
+        }
         attachSunday(game, place, name);
         attachMonday(game, place, name);
         attachOngoing(game, place, name);

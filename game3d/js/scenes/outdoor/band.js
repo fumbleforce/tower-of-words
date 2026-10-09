@@ -56,6 +56,7 @@ export function band(rects, { pad = 0 } = {}) {
     },
     parts(p) {
       const out = {
+        sets: p.sets, // what the street planting's root beds read (diorama/root-bed.js)
         geo(color, g, o) {
           if (geoHits(g)) p.geo(color, g, o);
           else g.dispose();

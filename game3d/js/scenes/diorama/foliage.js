@@ -3,10 +3,29 @@ import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
 import { addCanopyCore, leafCluster } from './canopy.js';
 import { rng } from '../outdoor/parts.js';
 
+const within = (r, x, z) => !r || (x >= r[0] && x <= r[1] && z >= r[2] && z <= r[3]);
+
 // Sample the actual crowns and hedge surfaces. Their silhouettes, clearances and tree locations stay put.
+// bounds: [x0, x1, z0, z1] in root's frame, the crowns dressed (everything when null), up to maxY; focus: where the
+// leaf cards gather (2.5 times as dense as elsewhere; evenly when null), and none outside cardBounds (when given: the
+// crowns there get the core alone, far from where the camera goes); leaves: false lays the crown core alone (a
+// phone, which never shows the cards); skip(o): meshes left as they are (a part another pass has dressed already)
 export function dressFoliage(
   root,
-  { budget = 55000, tileSize = 4, leafShadows = true, leafScale = 1, sun, phone = false } = {},
+  {
+    budget = 55000,
+    tileSize = 4,
+    leafShadows = true,
+    leafScale = 1,
+    sun,
+    phone = false,
+    bounds = null,
+    focus = null,
+    maxY = 6,
+    cardBounds = null,
+    leaves: cards = true,
+    skip = null,
+  } = {},
 ) {
   root.updateWorldMatrix(true, true);
   const q = rng(711),
@@ -26,7 +45,8 @@ export function dressFoliage(
       !o.isMesh ||
       !['foliage', 'diorama-tree', 'diorama-hedge'].includes(o.userData.surf) ||
       !o.visible ||
-      !o.layers.isEnabled(0)
+      !o.layers.isEnabled(0) ||
+      skip?.(o)
     )
       return;
     const g = o.geometry,
@@ -44,7 +64,7 @@ export function dressFoliage(
         .add(b)
         .add(c)
         .multiplyScalar(1 / 3);
-      const inside = center.x >= -8 && center.x <= 33 && center.z >= -13 && center.z <= 19 && center.y <= 6;
+      const inside = within(bounds, center.x, center.z) && center.y <= maxY;
       const canopy = center.y > 0.12 && (Math.max(a.y, b.y, c.y) - Math.min(a.y, b.y, c.y) > 0.025 || center.y > 0.38);
       if (!inside || !canopy) {
         keep.push(index ? index.getX(i) : i, index ? index.getX(i + 1) : i + 1, index ? index.getX(i + 2) : i + 2);
@@ -64,7 +84,8 @@ export function dressFoliage(
         kind: o.userData.surf,
         weight:
           (normal.y < -0.25 ? 0.1 : normal.y > 0.4 ? 1.35 : 1) *
-          (center.x > 3 && center.x < 28 && center.z > 0 && center.z < 16 ? 2.5 : 0.8),
+          (!focus ? 1 : within(focus, center.x, center.z) ? 2.5 : 0.8) *
+          (within(cardBounds, center.x, center.z) ? 1 : 0),
       });
     }
     if (!keep.length) {
@@ -80,7 +101,7 @@ export function dressFoliage(
   });
   for (const mesh of remove) mesh.removeFromParent();
   // Distribute the budget across all eligible crowns, rather than exhausting it on the first mesh.
-  const density = Math.min(210, budget / faces.reduce((sum, f) => sum + f.area * f.weight, 0));
+  const density = cards ? Math.min(210, budget / faces.reduce((sum, f) => sum + f.area * f.weight, 0)) : 0;
   for (const f of faces) {
     for (let j = 0, count = Math.floor(f.area * f.weight * density + q()); j < count; j++) {
       const u = Math.sqrt(q()),

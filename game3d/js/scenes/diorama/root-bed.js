@@ -4,7 +4,8 @@ import * as THREE from 'three';
 // bed must meet that surface, while a lawn tree stays at lawn height.
 function groundAt(p, x, z) {
   let height = 0.015;
-  for (const set of p.sets.values()) {
+  // a collector that passes its pieces on (a cell or band wrapper) holds no sets to read
+  for (const set of p.sets?.values() || []) {
     if (!['soil', 'grass', 'foliage'].includes(set.surf)) continue;
     for (const geometry of set.list) {
       geometry.computeBoundingBox();
@@ -29,7 +30,8 @@ export function rootBed(p, x, z, scale, seed, { codeTrunk = true, cover = true }
   ring.rotateX(-Math.PI / 2).translate(x, y + 0.027, z);
   p.geo('#80745f', ring, { cast: false, surf: 'stone' });
   if (codeTrunk) rootFlare(p, x, y, z, scale, seed);
-  if (cover) groundCover(p, x, y, z, radius, scale, seed);
+  // the cover's leaf cards need their uvs set in the collector's own set (below)
+  if (cover && p.sets) groundCover(p, x, y, z, radius, scale, seed);
   return y;
 }
 
@@ -104,6 +106,7 @@ function groundCover(p, x, y, z, radius, scale, seed) {
   p.geo('#678740', groundcover, { cast: false, surf: 'mulch-cover' });
   // Parts normalises geometry attributes; these cards need the same leaf atlas UVs as the crowns.
   const set = [...p.sets.values()].find((set) => set.surf === 'mulch-cover');
+  if (!set) return; // a wrapper that left it out (a band outside its area)
   const cards = set.list.at(-1),
     uv = cards.attributes.uv;
   const corners = [

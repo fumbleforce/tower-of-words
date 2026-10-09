@@ -20,6 +20,7 @@ import {
   shadowStandIns,
   plantShadow,
 } from './plant-models.js';
+import { ISLAND_PLANTING } from '../diorama/planting.js';
 
 export const LEAF = {
   deep: '#43603f',
@@ -37,6 +38,9 @@ export const LEAF = {
   mulch: '#57504a',
 };
 const GREENS = [LEAF.mid, LEAF.fresh, LEAF.deep, LEAF.light];
+// every tree goes to the builder's planting, or the island's street planting (diorama/planting.js); the species
+// below build their own shapes only when it declines
+const plantedStreet = (p, plant) => (p.planting ?? ISLAND_PLANTING).tree(p, plant);
 
 // a trunk or branch: a tapered cylinder from a to b ([x, y, z])
 function limb(p, a, b, r0, r1, color = LEAF.bark) {
@@ -92,7 +96,7 @@ function grown(p, species, x, z, s, seed, bark, crown) {
 
 // zelkova: a clear trunk, three limbs opening into a vase, a broad crown of five blobs and a top
 export function keyaki(p, x, z, s = 1, seed = 1) {
-  if (p.planting?.tree(p, { species: 'keyaki', x, z, scale: s, seed })) return;
+  if (plantedStreet(p, { species: 'keyaki', x, z, scale: s, seed })) return;
   const tone = (i) => GREENS[(seed + i) % 4];
   if (
     grown(p, 'keyaki', x, z, s, seed, LEAF.barkGrey, (tx, ty, tz, k, i) =>
@@ -124,7 +128,7 @@ export function keyaki(p, x, z, s = 1, seed = 1) {
 
 // cherry: a short leaning trunk and two limbs, a wide low crown of flattened blobs, one turning early
 export function sakura(p, x, z, s = 1, seed = 1) {
-  if (p.planting?.tree(p, { species: 'sakura', x, z, scale: s, seed })) return;
+  if (plantedStreet(p, { species: 'sakura', x, z, scale: s, seed })) return;
   if (
     grown(p, 'sakura', x, z, s, seed, '#5a524d', (tx, ty, tz, k, i) =>
       blob(
@@ -158,7 +162,7 @@ export function sakura(p, x, z, s = 1, seed = 1) {
 
 // black pine, clipped: a trunk that bends twice and flat cloud pads on short branches
 export function pine(p, x, z, s = 1, seed = 1) {
-  if (p.planting?.tree(p, { species: 'pine', x, z, scale: s, seed })) return;
+  if (plantedStreet(p, { species: 'pine', x, z, scale: s, seed })) return;
   if (
     grown(p, 'pine', x, z, s, seed, '#4f4945', (tx, ty, tz, k, i) =>
       blob(p, tx, ty + 0.05 * s, tz, 0.42 * k * s, i % 2 ? LEAF.pine : '#44604f', { sy: 0.38, turn: seed + i * 2.1 }),
@@ -194,7 +198,7 @@ export function pine(p, x, z, s = 1, seed = 1) {
 
 // ginkgo: a straight trunk and a tall narrow crown, yellow-green in October
 export function ginkgo(p, x, z, s = 1, seed = 1) {
-  if (p.planting?.tree(p, { species: 'ginkgo', x, z, scale: s, seed })) return;
+  if (plantedStreet(p, { species: 'ginkgo', x, z, scale: s, seed })) return;
   const yellow = seed % 3 ? LEAF.ginkgo : '#76844a';
   if (
     grown(p, 'ginkgo', x, z, s, seed, LEAF.barkGrey, (tx, ty, tz, k, i) =>
@@ -214,7 +218,7 @@ export function ginkgo(p, x, z, s = 1, seed = 1) {
 
 // maple: three thin stems and a small crown; one blob turning
 export function maple(p, x, z, s = 1, seed = 1) {
-  if (p.planting?.tree(p, { species: 'maple', x, z, scale: s, seed })) return;
+  if (plantedStreet(p, { species: 'maple', x, z, scale: s, seed })) return;
   if (
     grown(p, 'maple', x, z, s, seed, '#57504a', (tx, ty, tz, k, i) =>
       blob(p, tx, ty + 0.06 * s, tz, 0.34 * k * s, i === 1 ? LEAF.rust : [LEAF.fresh, LEAF.light, LEAF.mid][i % 3], {
@@ -267,7 +271,7 @@ export function cluster(p, x, z, { n = 4, r = 0.4, spread = 0.55, seed = 1, tone
 }
 // a clipped hedge from a to b (axis-aligned), in segments that differ a little in height and tone
 export function hedge(p, a, b, { w = 0.5, h = 0.55, y = 0, tones = [LEAF.deep, LEAF.mid], seg = 1.1, seed = 1 } = {}) {
-  if (p.planting?.hedge(p, { a, b, w, h, y, seed })) return;
+  if ((p.planting ?? ISLAND_PLANTING).hedge(p, { a, b, w, h, y, seed })) return;
   // the Blender-built hedge plants (outdoor/plant-models.js): irregular leaf clumps over a clipped block
   const plants = hedgeGeometries(a, b, { w, h, y, seed });
   if (plants) {
