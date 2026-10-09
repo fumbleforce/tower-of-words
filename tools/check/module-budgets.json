@@ -16,8 +16,8 @@
       "reason": "Existing mixed character factories, appearance data and rig setup. Split factory families during the later character/module boundary review; avoid splitting coupled rig construction merely to hit a line target."
     },
     "game3d/js/look/detail.js": {
-      "lines": 665,
-      "bytes": 26656,
+      "lines": 664,
+      "bytes": 26554,
       "owner": "codex-tui",
       "review": "C-0071; 2026-10-05 #240 the desk's pedestals PED wide (props.js); #248 the open desk option (one pedestal, no front panel); 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered; 2026-10-09 #373 the skin loads through perf/skin-tex.js, one import line",
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
