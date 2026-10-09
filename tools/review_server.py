@@ -210,6 +210,10 @@ class Handler(SimpleHTTPRequestHandler):
                 return self._json(200, {'items': None, 'stale': [], 'repo': work.REPO_URL, 'error': str(e)[:300]})
         if path == '/game3d/build.json' or path.endswith('/game3d/build.json'):
             stamp_build(path)
+        if path in ('/private', '/private/'):
+            # the local hub with the private pages (island/private/bible/hub.html; local server only, never published)
+            self.send_response(302); self.send_header('Location', '/island/private/bible/hub.html'); self.end_headers()
+            return
         if path == '/api/plugins':
             # the local plugin names, so the game asks only for files that exist (no 404 per place)
             folder = os.path.join(ROOT, 'island', 'private', 'plugins')
@@ -281,6 +285,46 @@ class Handler(SimpleHTTPRequestHandler):
         if kind == 'review' and not private:
             threading.Thread(target=review_changed, args=(rid,), daemon=True).start()
         return self._json(200, {'ok': True, 'sent': sent})
+
+    def send_head(self):
+        # Byte ranges, so audio and video can be seeked (http.server answers every Range request with the whole file,
+        # and the browser then can't skip ahead in a song; Jørgen, 2026-10-09).
+        self._range = None
+        m = re.fullmatch(r'bytes=(\d*)-(\d*)', self.headers.get('Range', '').strip())
+        path = self.translate_path(self.path)
+        if not m or not os.path.isfile(path) or (not m.group(1) and not m.group(2)):
+            return super().send_head()
+        size = os.path.getsize(path)
+        if m.group(1):
+            start, end = int(m.group(1)), min(int(m.group(2) or size - 1), size - 1)
+        else:
+            start, end = max(size - int(m.group(2)), 0), size - 1
+        if start >= size or start > end:
+            self.send_response(416)
+            self.send_header('Content-Range', f'bytes */{size}')
+            self.end_headers()
+            return None
+        f = open(path, 'rb')
+        f.seek(start)
+        self._range = end - start + 1
+        self.send_response(206)
+        self.send_header('Content-Type', self.guess_type(path))
+        self.send_header('Content-Range', f'bytes {start}-{end}/{size}')
+        self.send_header('Content-Length', str(self._range))
+        self.send_header('Accept-Ranges', 'bytes')
+        self.end_headers()
+        return f
+
+    def copyfile(self, source, outputfile):
+        left = getattr(self, '_range', None)
+        if left is None:
+            return super().copyfile(source, outputfile)
+        while left > 0:
+            chunk = source.read(min(65536, left))
+            if not chunk:
+                break
+            outputfile.write(chunk)
+            left -= len(chunk)
 
     def end_headers(self):
         # Everything here changes while the page is open (reviews, game modules, local plugins), and without this
