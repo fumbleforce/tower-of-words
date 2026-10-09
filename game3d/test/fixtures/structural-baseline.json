@@ -43,6 +43,9 @@
       "private_mode": [
         "game3d/js/settings.js"
       ],
+      "skill_checks": [
+        "game3d/js/settings.js"
+      ],
       "ferry_action_complete": [
         "game3d/js/places/ferry-terminal/action.js"
       ],

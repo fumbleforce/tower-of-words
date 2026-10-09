@@ -63,7 +63,7 @@ ENGINE_WRITES['game3d/js/clubs/model.js'] = {
   prefix: ['club_', 'clubprog_', 'clubday_', 'clubev_'],
 };
 ENGINE_WRITES['game3d/js/ui.js'] = { exact: ['say_tip'], prefix: [] };
-ENGINE_WRITES['game3d/js/settings.js'] = { exact: ['private_mode'], prefix: [] };
+ENGINE_WRITES['game3d/js/settings.js'] = { exact: ['private_mode', 'skill_checks'], prefix: [] };
 
 ENGINE_WRITES['game3d/js/saves/day2.js'] = { exact: ['d2_content_revision', 'place'], prefix: [] };
 

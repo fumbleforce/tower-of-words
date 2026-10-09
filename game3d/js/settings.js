@@ -82,6 +82,7 @@ function load() {
 export const settings = load();
 window.__settings = settings;
 flags.private_mode = !!settings.privateMode;
+flags.skill_checks = !settings.skipChecks; // the save keeps both choices of the new-game screen (ui/new-game.js)
 
 const subs = new Set();
 export function onSettings(fn) {
@@ -92,6 +93,7 @@ export function setSetting(key, value) {
   if (!(key in DEFAULTS) || settings[key] === value) return;
   settings[key] = value;
   if (key === 'privateMode') flags.private_mode = !!value;
+  if (key === 'skipChecks') flags.skill_checks = !value;
   try {
     localStorage.setItem(KEY, JSON.stringify(settings));
   } catch {
