@@ -379,6 +379,7 @@ Gifts on day 1 are drinks from the vending machine ([systems.md](systems.md), Gi
 | `guard` | none | none | polite | none |
 | `kuroda` | none | none | polite | guard (owes) |
 | `kuro` | none | none | polite | none |
+| `rei` | none | none | polite | none |
 | `emi` | none | none | none | none |
 
 ## Portraits
