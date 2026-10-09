@@ -10,7 +10,7 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 
 | Id | Name | Who they are |
 |---|---|---|
-| `eric` | Eric | The player. IT support engineer on a support contract, based on B2. |
+| `eric` | Eric | The player. IT support engineer on a support contract, based on B2. He is 37, with a lot of work experience (Jørgen, 2026-10-09). |
 | `mio` | Mio | B2's programmer. |
 | `mori` | Mr. Mori | On the B2 team; used to be a manager. |
 | `kenji` | Kenji | B2's newest engineer before Eric. |
