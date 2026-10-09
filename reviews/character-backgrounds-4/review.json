@@ -54,7 +54,7 @@
   }
  ],
  "updated": "2026-10-09T11:32:36+02:00",
- "decision": "Approved as the foundation: \"Very good, this is a solid foundation to build on. MAKE SURE this approach is consistently applied going forward, both for bio writing and prose in general (avoiding slop writing)\". Next: one Claude agent per character (#368).",
- "decided_at": "2026-10-09T12:15:21+0200",
+ "decision": "Jørgen accepted the four revised bios as a solid foundation and asked that this approach be applied consistently to future bios and prose. His full wording is in the feedback. Character-agent follow-up is coordinated by Claude under #368.",
+ "decided_at": "2026-10-09T12:17:03+0200",
  "issue": 327
 }
