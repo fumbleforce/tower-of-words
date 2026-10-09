@@ -23,6 +23,7 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 
 - GPU through its lock (tools/gpu_priority.py), one model at a time, unload when done. RAM is tight: one headless browser at a time, nothing big in /tmp.
 - At most 6 renders per setting change, one change at a time.
+- **The same fault twice in a row means change the method or stop** (Jørgen 2026-10-10: "wasting SO many cycles on the SAME issue, lime hair ... making 50x the same picture without learning anything"). If a fault survives two setting changes, don't reroll: (1) check the wording against the approved portrait's actual colours (sample them; e.g. Mio's underlayer is #1ACC98 mint-jade, which the words "bright green" turn into lime), (2) fix it deterministically (a targeted inpaint or a masked hue shift on the hair, the way Kuro's lip colour was fixed), or (3) stop and report what you tried. Never a third pass on the same fault with the same method.
 - **Every attempt gets a verdict** in the dashboard: `python3 tools/verdict.py <image> --reject "<one line>"` or `--keep`. Jørgen reads them in the History viewer.
 - Check every candidate at full size beside the approved portraits. Reject only what is clearly off; don't fail a picture on differences too small to judge reliably.
 
