@@ -240,6 +240,7 @@ import { meshyGait, codeStride, clipAction, clipActions, holdNow } from './movem
 import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR } from './mio.js';
 import { loadRelaxedIdle } from './relaxed-idle.js';
 import { seatUnderside, sitRootY } from './movement/sit-height.js';
+import { loadSkin } from './perf/skin-tex.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
 export const loadEric = (o = {}) => loadMeshy('eric', { dir: EDIR, height: 1.2, ...o });
 // one-shot gesture clips from Meshy's library (bow, wave, shrug, nod), retargeted onto each rig as JSON
@@ -262,7 +263,7 @@ export async function meshyFiles(id, { dir = CDIR + id + '/', extra = true } = {
     load(dir + 'run.glb' + ver()),
     loadRelaxedIdle(id, ver()),
     load(dir + 'sit.glb' + ver()),
-    new THREE.TextureLoader().loadAsync(dir + 'base.webp' + ver()),
+    loadSkin(dir + 'base.webp' + ver()),
     ...['phone', ...GESTURES].map((f) => (extra === true || extra === f) && json(CDIR + id + '/' + f + '.json')),
   ]);
 }

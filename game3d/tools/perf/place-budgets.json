@@ -22,67 +22,31 @@
   },
   "allowance": { "loadMs": 0.15 },
   "places": {
-    "dorm_commons": {
-      "phone": {
-        "texMB": { "max": 138, "issue": 373 }
-      }
-    },
     "east_coast": {
-      "phone": {
-        "texMB": { "max": 222, "issue": 373 }
-      },
       "desktop": {
         "texMB": { "max": 222, "issue": 373 }
       }
     },
     "east_lane": {
       "phone": {
-        "geoMB": { "max": 71, "issue": 374 },
-        "texMB": { "max": 119, "issue": 373 }
+        "geoMB": { "max": 71, "issue": 374 }
       }
     },
     "forecourt": {
       "phone": {
         "calls": { "max": 212, "issue": 374, "reason": "street style on phone, within 5% (coordinator, 2026-10-09)" },
         "tris": { "max": 330000, "issue": 374, "reason": "street style on phone, within 5% (coordinator, 2026-10-09)" },
-        "geoMB": { "max": 94, "issue": 372 },
-        "texMB": { "max": 170, "issue": 373 }
+        "geoMB": { "max": 94, "issue": 372 }
       },
       "desktop": {
         "calls": { "max": 547, "issue": 374, "reason": "street style detail for the desktop follow camera (coordinator, 2026-10-09)" },
         "tris": { "max": 921000, "issue": 374, "reason": "street style detail for the desktop follow camera (coordinator, 2026-10-09)" }
       }
     },
-    "gate": {
-      "phone": {
-        "texMB": { "max": 196, "issue": 373 }
-      }
-    },
-    "gym": {
-      "phone": {
-        "texMB": { "max": 124, "issue": 373 }
-      }
-    },
-    "harbour": {
-      "phone": {
-        "texMB": { "max": 107, "issue": 373 }
-      }
-    },
-    "izakaya": {
-      "phone": {
-        "texMB": { "max": 119, "issue": 373 }
-      }
-    },
-    "karaoke_booth": {
-      "phone": {
-        "texMB": { "max": 104, "issue": 373 }
-      }
-    },
     "office": {
       "phone": {
         "calls": { "max": 215, "issue": 374 },
         "geoMB": { "max": 129, "issue": 374 },
-        "texMB": { "max": 234, "issue": 373 },
         "loadMs": { "max": 8800, "issue": 374 }
       },
       "desktop": {
@@ -92,42 +56,20 @@
         "texMB": { "max": 234, "issue": 373 }
       }
     },
-    "office_quarter": {
-      "phone": {
-        "texMB": { "max": 115, "issue": 373 }
-      }
-    },
     "plaza": {
       "phone": {
-        "geoMB": { "max": 97, "issue": 374 },
-        "texMB": { "max": 141, "issue": 373 }
+        "geoMB": { "max": 97, "issue": 374 }
       },
       "desktop": {
         "tris": { "max": 908000, "issue": 374 }
       }
     },
-    "pool": {
-      "phone": {
-        "texMB": { "max": 124, "issue": 373 }
-      }
-    },
     "shotengai": {
       "phone": {
-        "texMB": { "max": 258, "issue": 373 },
         "geoMB": { "max": 71, "issue": 374 }
       },
       "desktop": {
         "texMB": { "max": 258, "issue": 373 }
-      }
-    },
-    "sports": {
-      "phone": {
-        "texMB": { "max": 144, "issue": 373 }
-      }
-    },
-    "train": {
-      "phone": {
-        "texMB": { "max": 155, "issue": 373 }
       }
     }
   }
