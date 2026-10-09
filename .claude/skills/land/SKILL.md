@@ -24,6 +24,7 @@ Each writing agent works in its own git worktree on its own branch, and one scri
    - refuses if the worktree has uncommitted or untracked files,
    - rebases the branch on main (a conflicting rebase is aborted and refused),
    - checks the rebased commit: a valid Facts line on every new commit and `npm run check` on that commit's own tree in a throwaway copy (the commit's own tools/check/commit-cpu.mjs, about 15 s),
+   - if the branch changes game3d/, measures every place against its budget (game3d/tools/perf/place-budget.mjs, about 3.5 minutes; notes/PERF.md, "Place budgets") and refuses if one goes over,
    - fast-forwards main in the main checkout (waiting while a commit there holds the index), and if main moved during the checks, rebases and checks again, up to three rounds,
    - removes the worktree and deletes the branch. `--keep` leaves them; remove them as soon as you can (collab/PROTOCOL.md, Sharing the repo; `tools/worktree.sh gone` lists what's safe).
 
@@ -34,5 +35,6 @@ It prints `land: main is now <sha>` and `removed ...` when done. Nothing is push
 - Uncommitted or untracked files: commit your own, delete scratch files, and land again.
 - Rebase conflicts: it lists the files. Run `git rebase main` in the worktree yourself and resolve conflicts in your own files only; if a conflict is in another agent's file, stop and report it.
 - Commit checks failed: the output shows the failing check (log path included). Fix, commit, land again. main is unchanged.
+- A place is over its budget: the output names the place, the tier, the number and the budget. Bring it down, or, if it has to go over for now, add a known exception with an issue in game3d/tools/perf/place-budgets.json (notes/PERF.md, "Place budgets"). To rerun just that place: `node game3d/tools/perf/place-budget.mjs --places <place>`.
 - main could not fast-forward in the main checkout: someone has unsaved edits in a file your branch changes. Don't touch them; report the files.
 - Kept the worktree because of new asset files: they're git-ignored, so the commit doesn't carry them. Sync or move them as the asset storage notes say, then remove the worktree as printed.

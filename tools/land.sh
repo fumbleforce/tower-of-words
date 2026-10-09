@@ -8,7 +8,9 @@
 #   gone is taken over).
 # - Refuses if the worktree has uncommitted or untracked changes, if the rebase conflicts (it is aborted, nothing
 #   changes), if the commit checks fail (tools/check/commit-cpu.mjs: a Facts line on every new commit, and
-#   `npm run check` on the rebased commit's own tree), or if main moves during the checks three times in a row.
+#   `npm run check` on the rebased commit's own tree), if game3d/ changed and a place goes over its budget
+#   (game3d/tools/perf/place-budget.mjs, about 3.5 minutes, run in the worktree; deferred with a warning when the
+#   machine or GPU is busy), or if main moves during the checks three times in a row.
 # - main moves with `git merge --ff-only` in the main checkout, which only touches the files the branch changed and
 #   refuses rather than overwrite someone's unsaved edit there (it waits while a commit there holds the index).
 #   Nothing is pushed.
@@ -137,6 +139,22 @@ Rebase it yourself in $wt (resolve only your own files), then land again."
   (cd "$wt" && node "$checker" "$commit" --since "$base") > "$LAND_LOG" 2>&1 \
     || { tail -40 "$LAND_LOG" >&2; refuse "the commit checks failed on $(g rev-parse --short "$commit") (full log: $LAND_LOG); main is unchanged"; }
   grep -E '^(commit messages|commit CPU):' "$LAND_LOG" | sed 's/^/land: /'
+  # Place budgets (#372): every place measured from fixed cameras, refused when one goes over. Only when the branch
+  # changes game3d/, and once per game3d tree (a rebase over commits that don't touch game3d/ keeps the result).
+  budgeter="$wt/game3d/tools/perf/place-budget.mjs"
+  if [[ -f "$budgeter" ]] && ! g diff --quiet "$base" "$commit" -- game3d/ \
+     && [[ "$(g rev-parse "$commit:game3d")" != "${budget_tree:-}" ]]; then
+    [[ -n "$temp_wt" ]] && "$main/tools/worktree.sh" setup "$wt" >/dev/null 2>&1  # the assets the game loads
+    say "measuring every place against its budget (game3d/tools/perf/place-budget.mjs)"
+    (cd "$wt" && node "$budgeter") > "$LAND_LOG.budget" 2>&1; budget=$?
+    grep -E '^(PASS|FAIL|DEFERRED|warning|note)|^  ' "$LAND_LOG.budget" | sed 's/^/land: /'
+    if (( budget == 75 )); then
+      say "WARNING: the place budgets were deferred (machine or GPU busy), so $(g rev-parse --short "$commit") is unmeasured; run: node game3d/tools/perf/place-budget.mjs"
+    elif (( budget != 0 )); then
+      refuse "a place is over its budget on $(g rev-parse --short "$commit") (above; the full table: $LAND_LOG.budget); main is unchanged"
+    fi
+    budget_tree=$(g rev-parse "$commit:game3d")
+  fi
   if fast_forward; then landed="$commit"; break; fi
   (( attempt < 3 )) && say "main moved during the checks; rebasing and checking again"
 done

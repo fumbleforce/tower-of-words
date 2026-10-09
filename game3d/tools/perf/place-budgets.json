@@ -1,0 +1,157 @@
+{
+  "about": "Budgets per place and quality tier for game3d/tools/perf/place-budget.mjs (#372). Why these numbers, and how to add an exception: notes/PERF.md, Place budgets.",
+  "tiers": {
+    "phone": {
+      "viewport": [390, 844],
+      "touch": true,
+      "q": 1,
+      "cpu": 4,
+      "cameras": ["overview"]
+    },
+    "desktop": {
+      "viewport": [1366, 860],
+      "touch": false,
+      "q": 2,
+      "cpu": 1,
+      "cameras": ["overview", "follow"]
+    }
+  },
+  "budgets": {
+    "phone": { "calls": 200, "tris": 300000, "geoMB": 64, "texMB": 96, "loadMs": 6000 },
+    "desktop": { "calls": 500, "tris": 800000, "geoMB": 128, "texMB": 192, "loadMs": 4000 }
+  },
+  "allowance": { "loadMs": 0.15 },
+  "places": {
+    "bakery": {
+      "phone": {
+        "calls": { "max": 288, "issue": 374 }
+      },
+      "desktop": {
+        "calls": { "max": 534, "issue": 374 }
+      }
+    },
+    "canteen": {
+      "phone": {
+        "calls": { "max": 330, "issue": 374 }
+      },
+      "desktop": {
+        "calls": { "max": 848, "issue": 374 }
+      }
+    },
+    "dorm_commons": {
+      "phone": {
+        "texMB": { "max": 138, "issue": 373 }
+      }
+    },
+    "east_coast": {
+      "phone": {
+        "texMB": { "max": 222, "issue": 373 }
+      },
+      "desktop": {
+        "texMB": { "max": 222, "issue": 373 }
+      }
+    },
+    "east_lane": {
+      "phone": {
+        "geoMB": { "max": 78, "issue": 374 },
+        "texMB": { "max": 119, "issue": 373 }
+      }
+    },
+    "ferry_terminal": {
+      "phone": {
+        "calls": { "max": 230, "issue": 374 }
+      },
+      "desktop": {
+        "calls": { "max": 545, "issue": 374 }
+      }
+    },
+    "forecourt": {
+      "phone": {
+        "calls": { "max": 224, "issue": 372 },
+        "tris": { "max": 427000, "issue": 372 },
+        "geoMB": { "max": 100, "issue": 372 },
+        "texMB": { "max": 170, "issue": 373 }
+      },
+      "desktop": {
+        "calls": { "max": 551, "issue": 372 },
+        "tris": { "max": 883000, "issue": 372 }
+      }
+    },
+    "gate": {
+      "phone": {
+        "texMB": { "max": 149, "issue": 373 }
+      }
+    },
+    "gym": {
+      "phone": {
+        "texMB": { "max": 124, "issue": 373 }
+      }
+    },
+    "harbour": {
+      "phone": {
+        "texMB": { "max": 107, "issue": 373 }
+      }
+    },
+    "izakaya": {
+      "phone": {
+        "texMB": { "max": 119, "issue": 373 }
+      }
+    },
+    "karaoke_booth": {
+      "phone": {
+        "texMB": { "max": 104, "issue": 373 }
+      }
+    },
+    "office": {
+      "phone": {
+        "calls": { "max": 215, "issue": 374 },
+        "geoMB": { "max": 129, "issue": 374 },
+        "texMB": { "max": 187, "issue": 373 },
+        "loadMs": { "max": 8800, "issue": 374 }
+      },
+      "desktop": {
+        "calls": { "max": 825, "issue": 374 },
+        "tris": { "max": 1019000, "issue": 374 },
+        "geoMB": { "max": 137, "issue": 374 }
+      }
+    },
+    "office_quarter": {
+      "phone": {
+        "texMB": { "max": 115, "issue": 373 }
+      }
+    },
+    "plaza": {
+      "phone": {
+        "geoMB": { "max": 107, "issue": 374 },
+        "texMB": { "max": 141, "issue": 373 }
+      },
+      "desktop": {
+        "tris": { "max": 977000, "issue": 374 }
+      }
+    },
+    "pool": {
+      "phone": {
+        "texMB": { "max": 124, "issue": 373 }
+      }
+    },
+    "shotengai": {
+      "phone": {
+        "texMB": { "max": 258, "issue": 373 },
+        "geoMB": { "max": 71, "issue": 374 }
+      },
+      "desktop": {
+        "texMB": { "max": 258, "issue": 373 }
+      }
+    },
+    "sports": {
+      "phone": {
+        "texMB": { "max": 144, "issue": 373 }
+      }
+    },
+    "train": {
+      "phone": {
+        "texMB": { "max": 155, "issue": 373 }
+      }
+    }
+  }
+}
