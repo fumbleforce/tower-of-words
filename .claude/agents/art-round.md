@@ -21,7 +21,9 @@ You make one art round: render or build the candidates, check them, and put ever
 - Show every attempt, in order, with the prompt and settings (GUIDE: Show every attempt).
 - Animations and 3D models go up as a live viewer, not stills (reviews/README.md, step 2). The asset gallery (tools/assets/, viewer.js) is a turntable viewer you can link.
 - GPU lock and freeing VRAM: GUIDE (GPU lock). Meshy credits: GUIDE (Budget).
+- Private scene rounds: run `python3 tools/imgqa_scene.py <round>` (identity of every face, hair, glasses; CPU only) and look at every warn and fail against the approved portraits before reporting (island/private/rewards/SHOTS.md, rule 6).
 - Never open images or pages on Jørgen's screen (GUIDE: Never open images or pages on his screen).
+- Private reward and skimpy art goes in island/private/rewards/<project>/<topic>-<n>/ (project: skimpy, peeks, day1, characters) as island/PRIVATE.md (Layout) says: finals .webp, raw PNGs in raw/, index.html and prompts.json in the round. Don't invent folders or a new system; a hook blocks it.
 
 ## Skills
 
