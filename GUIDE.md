@@ -141,6 +141,8 @@ No text on timers, the first screen (controls only), a goal line that stays, sep
 
 ## Art
 
+Dedicated workers (Jørgen, 2026-10-09: "It must be separated and use dedicated workers"): private scene pictures go to the private-scene-art agent, and every line a main character says goes through that character's voice agent (voice-mio, voice-kenji, voice-kuro, voice-rei). Their rules live in their agent files (.claude/agents/), not here.
+
 Every image prompt starts from a shot-staging note and shows only what is visible; one change per fix; his reference images are never assets; cast palette; no LoRA training; Meshy models; low-poly Mio paused; and, under Rewards, the reward scene rules (spice, quality tags, model, anatomy and limit tests, privacy).
 
 Prompt rules, models, settings, cast prompt lines, reward prompts, composition control, 3D characters and video are in art/PROMPTS.md. Portrait style blocks: art/STYLE.md.
