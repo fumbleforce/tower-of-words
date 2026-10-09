@@ -32,18 +32,23 @@ const RUST = new THREE.Color('#8c4f2e');
 function skinShader(material, tex) {
   if (tex) Object.assign(material, { map: tex, roughness: 1 });
   material.onBeforeCompile = (s) => {
-    // the vertex colour, then rust over it
+    // the vertex colour (its alpha put back), then rust over it. The includes stay, so later patches (look/) can
+    // still hook them.
     const rust = tex ? '\ndiffuseColor.rgb = mix( diffuseColor.rgb, rustColor * wear.r * 1.25, wear.g );' : '';
     let f = s.fragmentShader.replace(
       '#include <color_fragment>',
-      '#if defined( USE_COLOR_ALPHA )\ndiffuseColor.rgb *= vColor.rgb;\nfloat metalClass = vColor.a;\n#else\n#include <color_fragment>\nfloat metalClass = 1.0;\n#endif' +
+      'float alphaBeforeColor = diffuseColor.a;\n#include <color_fragment>\n#ifdef USE_COLOR_ALPHA\n' +
+        'float metalClass = vColor.a;\ndiffuseColor.a = alphaBeforeColor;\n#else\nfloat metalClass = 1.0;\n#endif' +
         rust,
     );
     if (tex) {
       s.uniforms.rustColor = { value: RUST };
       f = ('uniform vec3 rustColor;\n' + f)
         .replace('#include <map_fragment>', 'vec4 wear = texture2D( map, vMapUv );\ndiffuseColor.rgb *= wear.r * 1.25;')
-        .replace('#include <roughnessmap_fragment>', 'float roughnessFactor = roughness * wear.b;');
+        .replace(
+          '#include <roughnessmap_fragment>',
+          '#include <roughnessmap_fragment>\nroughnessFactor = roughness * wear.b;',
+        );
     }
     s.fragmentShader = f.replace(
       '#include <metalnessmap_fragment>',
