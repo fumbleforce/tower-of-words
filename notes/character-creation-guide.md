@@ -74,14 +74,15 @@ Amakawa is a company island with old machinery and understated fantasy. Its resi
 
 About 250 to 450 words should usually be enough for a major recurring character. This is a working limit for this project. A minor character may need much less.
 
-1. Describe the person in a few plain sentences. Say what spending time with them is like.
-2. Say what they want. Include something that could make them act against another person's wishes.
-3. Explain what they are good at. Give the player a reason to want their help or company.
-4. Name a weakness and describe what they do because of it. Someone should bear the cost.
-5. Include only the history that helps us understand their current behaviour. Leave the rest open.
-6. Describe their relationships with two other characters. Give each person something they want from the other.
-7. Explain how the player can get along with them or fall out with them.
-8. Suggest a few different encounters. Keep the person recognisable across them.
+1. Describe the person and their appearance. Say what spending time with them is like.
+2. Give them a concrete background. Include the experiences that still affect their choices.
+3. Say where and how they live. Describe interests specifically enough to distinguish them from someone with the same hobby.
+4. Say what they want, including an ambition or desire that could put them at odds with someone else.
+5. Explain what they are good at and where they struggle. Show what their weaknesses cost them or other people.
+6. Include a relevant physical limitation or condition when it belongs to this person. Nobody needs a diagnosis to make a brief complete.
+7. Keep relationships brief and relevant to the subject. Put comparisons across the cast and proposed encounters in separate design notes.
+
+These points guide the draft. They are not headings to fill mechanically. Write connected paragraphs with varied sentence openings. A list of observed habits needs the life behind it: where the person came from, what occupies them now and what they hope will change. This follows Jørgen's feedback on the third bio round, 9 October.
 
 A brief does not need a tragic past. It does not need a secret. It does need enough detail to help a writer decide what the character would actually do.
 

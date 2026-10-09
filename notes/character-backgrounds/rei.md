@@ -1,17 +1,17 @@
 # Rei
 
-Rei takes charge before anyone asks her to. She makes a plan and expects people to follow it. She is brusque with strangers and can be abrasive with people she knows. She gets impatient when someone hesitates.
+Rei takes charge of a confused group within minutes, usually without asking. At forty-one, she has little patience for people who need time to answer. Anyone who questions an instruction can expect an argument in front of everyone else.
 
-She works in Sales and likes a serious game of tennis. She wants to win. Her confidence can get a hesitant group moving. She will make a difficult decision while everyone else is still arguing.
+A silver-grey ponytail, steel-grey eyes and a carefully fitted light suit make her easy to recognise across the office. Even at rest, Rei sits upright. On court, that composure gives way to hard serves and audible complaints. An old right ankle injury aches after long matches. She sometimes hides the limp rather than let a partner suggest stopping.
 
-She is also a poor loser. Being proved wrong in front of others makes her defensive. She might keep pushing a bad plan because changing it would mean admitting a mistake. She can blame a partner for failing to follow instructions that were wrong in the first place.
+Rei grew up on Amakawa, where her mother worked in payroll and her father maintained the lifts. After school, she joined the company in order processing and worked her way into Sales. Several former classmates still work nearby. She knows their old nicknames and sometimes uses one in a meeting, even when it embarrasses them.
 
-She mistakes hesitation for incompetence. She can dismiss Kenji before hearing the useful part of his answer. She is bad at asking for help. People sometimes stop offering it because they are tired of being ordered around.
+Before meeting a customer, Rei reads their previous orders and prepares for the objections they usually raise. Her conversational English is useful with overseas clients, though a joke she cannot follow can make her unnecessarily cold. A management post is her next aim. She resents competing with people hired from elsewhere who barely know the company. Having worked nowhere else, she tends to dismiss their experience too quickly.
 
-Rei respects someone who can do what they claim. She can also resent needing them. She likes a capable partner. She gets angry when that partner ignores her instructions.
+Her island apartment is close to the sports grounds. A large dining table is usually covered in work, with one corner cleared for dinner. Tennis is a serious interest. Rei keeps scores from club matches and studies recordings of her serve. Outside sport, she enjoys historical crime novels and dislikes being interrupted before the solution. Holidays are often postponed because leaving a customer to someone else feels risky.
 
-Kuro wants to choose what happens between people. Rei wants to decide how the job gets done. They can clash even when they want the same result.
+When Rei loses, she can spend the evening explaining whose fault it was. Even after noticing a flaw in her plan, she may keep insisting that people follow it. Asking for help usually sounds like assigning a job. She respects a capable partner, but gets angry when that partner expects an equal say.
 
 ## Source and status
 
-Jørgen specified a brusque, abrasive leader with strong weaknesses on 9 October. The weaknesses above are proposals. Her job remains Sales. Her established facts and current route are in [cast.md](../../docs/game/cast.md#rei-rei).
+Proposed bio for Review round 4. Her age, Sales job, languages and appearance are established in [cast.md](../../docs/game/cast.md#rei-rei). Jørgen specified her personality on 9 October. Tennis belongs to her existing character plans. The island childhood, parents, early job, apartment, reading, injury and management ambition are new proposals. These details have not been added to the game.

@@ -91,7 +91,7 @@ Skills: story-sense, story-analysis, dialogue, scene-sequencing, key-moments, ch
 - Scenes must want something: a goal, an obstacle and a turn. Characters drive scenes; they don't just deliver information.
 - Every character has a distinct voice (word choice, sentence length, register); run the dialogue skill's voice checks.
 - Character depth comes from work history, ordinary life and past relationships, with the resulting skills, habits and contradictions discovered gradually through play; proposed history stays separate from established canon (Jørgen, 2026-10-07).
-- Character briefs should fit about one page. Aim for memorable people with strong contrasts across the cast. Give them distinct desires, weaknesses and reactions to the player. Do not make everyone agreeable or give everyone mundane goals. Dragon Age: Origins and Mass Effect are the references (Jørgen, 2026-10-09). Method and examples: [character creation guide](notes/character-creation-guide.md).
+- Character briefs should fit about one page. Include concrete background, appearance, home, interests and ambitions, with conditions where relevant. Use varied sentence openings and keep other characters' bios out of the subject's own. Give the cast distinct desires, weaknesses and reactions to the player. Do not make everyone agreeable or give everyone mundane goals. Dragon Age: Origins and Mass Effect are the references (Jørgen, 2026-10-09). Method and examples: [character creation guide](notes/character-creation-guide.md).
 - A story editor reviews the beats, not only the builder.
 
 ### Originality

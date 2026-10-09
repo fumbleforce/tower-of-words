@@ -1,17 +1,17 @@
 # Kenji
 
-Kenji means well and gets confused easily. He wants to help. He sometimes says yes before he understands what he has been asked to do. He often looks as though he has missed part of the conversation. When he rushes to help, he knocks things over.
+Kenji is twenty-one and two months into his first job on B2. A request usually gets an eager yes before he has understood it. By the time he realises something is wrong, asking again feels embarrassing. His attempts to catch up can leave him carrying the wrong equipment to the wrong floor.
 
-He is the youngest engineer on B2. He speaks casual Japanese and tries to use his small amount of English. He likes Mori. Mio makes him nervous when she is impatient with him.
+Kenji has an open smile, untidy black hair and a tie he rarely gets straight on the first try. With his soft, pudgy build, he tends to misjudge gaps between chairs. He drinks melon soda throughout the day. After spilling one in the machine room, he is no longer allowed inside.
 
-He is easy to push around. Rei can leave him trying to follow instructions he does not understand. Kuro can talk him into a favour before he has considered saying no. He might promise both of them the same afternoon.
+Until this job, home was his parents' flat above their small bicycle shop on the mainland. His father could explain a repair three times without getting angry. Customers were less patient. Kenji liked working in the back, where he could finish one thing before someone asked for another. A vocational computing course led to the island job. Leaving home was his idea, although his mother still phones to ask whether he has washed his shirts.
 
-He can make things worse by hiding a small mistake. He hopes to fix it before anyone notices. Sometimes he only succeeds in delaying the moment when someone else has to help.
+His dorm room contains half-built plastic spacecraft, carefully sorted parts and a laundry pile beside the bed. Old science-fiction television is a subject he can talk about without checking whether he has the right answer. Building the models takes him ages. Following a printed sequence is easier than keeping up with several people talking at once.
 
-Kenji is kinder than several of the people around him. He will stay with someone who is struggling. He does not need to prove that he knows more than they do. His company can be a relief after an argument with Rei or an impatient answer from Mio.
+Kenji wants to become an engineer who can be sent out on a job alone. His first large purchase would be a proper workbench for his room. For now, a small failure can frighten him into saying that everything is fine. Colleagues have had to stay late finishing jobs he said were done. He apologises readily and dreads being trusted with less the next morning.
 
-He does better when someone gives him time to ask questions. He remembers people who explain things without making him feel stupid. He may still ask them the same question twice.
+People who let him ask basic questions get his loyalty. Kenji will sit through a slow explanation and offer the same patience in return. Refusing a favour is much harder, especially when someone sounds disappointed in him.
 
 ## Source and status
 
-Jørgen described Kenji as a mild, confused lamb who is somewhat clumsy on 9 October. The details above are a proposed description of that personality. His established facts and current route are in [cast.md](../../docs/game/cast.md#kenji-kenji).
+Proposed bio for Review round 4. His age, time on B2, appearance, melon soda habit and limited English are established in [cast.md](../../docs/game/cast.md#kenji-kenji). Jørgen specified his personality on 9 October. The family shop, training, dorm room, model-making and career ambition are new proposals. The machine-room ban is established, but the soda spill offered as its cause is new. These details have not been added to the game.
