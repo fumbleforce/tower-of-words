@@ -4,7 +4,7 @@ Proposed scenes, not in the game. Kuro's Japanese is overheard and blurred, with
 
 ## Words this needs
 
-None of these exist in [words.md](../../../docs/game/words.md) yet. Each row is its own lesson, and all of them come before part 2.
+None of these exist in [words.md](../../../docs/game/words.md) yet. Each row is its own lesson, and all of them come before part 2. Jørgen approved these teaching spots on character-voices-2.
 
 | Word | Proposed id | Where it is taught first |
 |---|---|---|

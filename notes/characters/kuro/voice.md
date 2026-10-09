@@ -24,9 +24,13 @@ Touch follows interest and place. When she is interested she touches his arm or 
 
 She wants to be wanted and to choose what happens next: the restaurant, the time, the second drink. She wants her clothes noticed, and she asks if he has noticed when he hasn't said anything. She avoids talk about money and who pays, and she avoids asking for permission. She never says she is lonely or that she likes someone. She says what they will do on Friday instead.
 
-## What knocks her off balance
+## Compliments, and what throws her
 
-Three things throw her. One is a direct question back ("あなたは？"). Another is a plain, specific compliment on her suit with no flirting in it. The third is someone who says no calmly and leaves. She goes quiet for a moment, answers in her reception voice as if he were a visitor, and then takes back control by setting a time or a place.
+Kuro is confident most of the time. A direct question back ("あなたは？") doesn't throw her. She answers it and asks the next one.
+
+Compliments flatter her a lot. Most people treat her as a stiff receptionist, part of the furniture by the door, or they are too intimidated by her looks to say anything. When Eric notices the cut of her suit or says she looks good, she enjoys it openly. She thanks him, holds the look and asks what else he noticed.
+
+What does throw her is someone who says no calmly and leaves. She goes quiet for a moment, answers in her reception voice as if he were a visitor, and then takes back control by setting a time or a place.
 
 ## Under stress
 
