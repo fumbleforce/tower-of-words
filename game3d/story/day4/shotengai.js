@@ -56,19 +56,12 @@ export default withStationGarden(
           {
             if: 'd3_kuro_intro',
             then: [
-              {
-                say: 'kuro',
-                name: 'Kuro',
-                emo: 'polite',
-                text: 'I came for washing powder. I have to keep saying it or I’ll get home without it.',
-              },
+              { say: 'kuro', name: 'Kuro', overheard: true, emo: 'amused', text: '洗剤、洗剤……' },
+              { say: 'kuro', name: 'Kuro', overheard: true, emo: 'dry', text: '言ってないと忘れるんです。' },
             ],
             else: [
-              {
-                say: 'kuro',
-                emo: 'polite',
-                text: 'I came for washing powder. I have to keep saying it or I’ll get home without it.',
-              },
+              { say: 'kuro', overheard: true, emo: 'amused', text: '洗剤、洗剤……' },
+              { say: 'kuro', overheard: true, emo: 'dry', text: '言ってないと忘れるんです。' },
             ],
           },
         ],

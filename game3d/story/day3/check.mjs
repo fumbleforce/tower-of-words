@@ -219,7 +219,7 @@ for (const route of poolChoices) for (const finish of ['club_swimming_sit', 'clu
   assert(!p.hooks.some(h => h.do === 'bondStep'));
   if (route.includes('club_swimming_watch') || route.includes('club_swimming_deck')) assert(!p.flags.d3_player_swims);
   assert.equal(p.hooks.filter(h => h.do === 'poolSession' && h.state === 'length').length, 1);
-  assert.equal(p.lines.some(s => s.includes('Was that pace all right?')), !!p.flags.d3_player_swims);
+  assert.equal(p.lines.some(s => s.includes('速かった？')), !!p.flags.d3_player_swims);
   assert(p.dialogue.filter(s => s.say === 'kuro' && s.name === 'Receptionist').length > 0);
   assert(p.dialogue.filter(s => s.say === 'kuro' && s.name === 'Kuro').length > 0);
   p.record(`Pool: ${route.join(', ')}, ${finish}, known people ${known}`);
@@ -251,8 +251,8 @@ for (const joined of [false, true]) {
 for (const known of [false, true]) for (const named of [false, true]) {
   for (const [where, node] of [['shotengai', 'd3_kuro_lunch'], ['pool', 'd3_kuro_pool']]) {
     const p = new Play(where, { kuro_reception_seen: known, d3_kuro_intro: named }); p.run(node);
-    assert(p.dialogue.every(s => s.name === (named ? 'Kuro' : 'Receptionist')));
-    assert(p.dialogue.every(s => !s.en), 'Kuro uses short English with the player');
+    assert(p.dialogue.filter(s => s.say === 'kuro').every(s => s.name === (named ? 'Kuro' : 'Receptionist')));
+    assert(p.dialogue.every(s => !s.en), 'Kuro never gets English subtitles with the player');
     p.record(`Kuro ${where}: reception ${known}, introduced ${named}`);
   }
 }
@@ -300,10 +300,10 @@ for (const history of [{ met_emi: true }, { d2_brief_done: true }, { fact_emi_te
 {
   const p = new Play('pool', { met_emi: true, d2_kuro_weekend_seen: true });
   p.run('club_swimming_intro');
-  assert(p.lines.some(s => s.includes('You said after six.')));
-  assert(p.lines.some(s => s.includes('I’m Kuro.')));
+  assert(p.lines.some(s => s.includes('You pointed me at the club yesterday.')));
+  assert(p.lines.some(s => s.includes('玖路です。')));
   p.run('club_swimming_intro');
-  assert.equal(p.lines.filter(s => s.includes('You said after six.')).length, 1);
+  assert.equal(p.lines.filter(s => s.includes('You pointed me at the club yesterday.')).length, 1);
   p.record('Kuro: previous day’s invitation remembered');
 }
 for (const route of poolChoices) {

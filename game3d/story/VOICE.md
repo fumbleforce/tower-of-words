@@ -43,7 +43,7 @@ Who each person is (age, job, what they speak) is in docs/game/cast.md. This she
 
 **Mr. Hamada**. Japanese only, apologises constantly, talks to machines like animals.
 
-**Kuro**. Her personality is in [cast.md](../../docs/game/cast.md#kuro-kuro). She speaks slowly in a low voice. She flirts openly and looks straight at the person she wants. She can ask someone out without hiding behind a joke. She is polite to visitors at work. Her English is limited to short practical exchanges.
+**Kuro**. Her personality is in [cast.md](../../docs/game/cast.md#kuro-kuro), and her full voice sheet, approved by Jørgen, is [notes/characters/kuro/voice.md](../../notes/characters/kuro/voice.md). She speaks Japanese, slowly and in a low voice, and expects anyone on the island to make an effort. Someone who only speaks English gets a few cool front-desk phrases. When Eric tries some Japanese she warms up, repeats the word and points at what she means. She is confident and direct, flirts openly and looks straight at the person she wants, and she still treats Eric as her equal. She asks someone out only in Japanese, so she waits until he can follow a time, a number of people and “you and me”.
 
 **Aoi**. She wants to take part and is tired of being handed the basket or a form. Her [assignment and language](../../docs/game/cast.md#aoi-aoi) stay in the cast sheet.
 

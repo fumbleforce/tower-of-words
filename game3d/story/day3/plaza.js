@@ -56,6 +56,12 @@ export default place(
         { do: 'gesture', who: 'aoi', kind: 'point', to: 'noticeboard' },
         { say: 'aoi', name: 'Aoi', overheard: true, emo: 'bright', text: 'プール、今夜が最後ですよ！', clear: ['プール'] },
         { say: 'eric', emo: 'curious', text: 'The pool? I’ll have a look at the poster.' },
+        { if: '!know_rokuji', then: [
+          { say: 'aoi', name: 'Aoi', overheard: true, emo: 'bright', text: '18時……{rokuji}からです。', clear: ['18'] },
+          { say: 'aoi', name: 'Aoi', emo: 'slow', slow: true, text: '{rokuji}。' },
+          { do: 'type', word: 'rokuji', from: 'aoi', prompt: 'The club slip says 18:00. Try six o’clock: rokuji.' },
+          { say: 'eric', emo: 'warm', text: '{rokuji}. Six this evening, then.' },
+        ] },
         { say: 'aoi', name: 'Aoi', overheard: true, emo: 'bright', text: '私は、テニスの靴を買ってきます。', clear: ['テニス'] },
         { do: 'boardVisit', state: 'leave' }, { do: 'cam', back: true }, { do: 'save' },
       ],

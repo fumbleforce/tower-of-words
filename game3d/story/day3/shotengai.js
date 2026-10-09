@@ -1,6 +1,17 @@
 import { withStationGarden } from '../conversations/station-worker.js';
 import { BAKERY_OPEN, KONBINI_OPEN } from '../../js/gameplay/shop-hours.js';
 import { place } from './shared.js';
+// Kuro asks the bakery counter for a table for two and teaches futari; named once Eric knows her name
+const futari = (named) => [
+  { do: 'look', who: 'kuro', at: 'bakery' },
+  { say: 'kuro', ...named, overheard: true, emo: 'amused', text: 'すみません、{futari}です。' },
+  '> To the counter, she holds up two fingers: one for her, one for you.',
+  { do: 'look', who: 'kuro', at: 'eric' },
+  { say: 'kuro', ...named, emo: 'slow', slow: true, text: '{futari}。' },
+  { do: 'type', word: 'futari', from: 'kuro', prompt: 'Two people, her and you. Try futari.' },
+  { say: 'eric', emo: 'warm', text: '{futari}. I wasn’t going to argue.' },
+  { do: 'gesture', who: 'kuro', kind: 'point', to: 'bakery' },
+];
 export default withStationGarden(
   place(
     {
@@ -99,18 +110,31 @@ export default withStationGarden(
                   {
                     say: 'kuro',
                     name: 'Kuro',
+                    overheard: true,
                     emo: 'teasing',
-                    text: 'Hello. It’s strange without a counter between us, isn’t it?',
+                    text: 'こんにちは。カウンターがないと、変な感じですね。',
+                    clear: [{ ja: 'カウンター', ro: 'kauntā', en: 'counter' }],
                   },
                 ],
                 else: [
-                  { say: 'kuro', emo: 'teasing', text: 'Hello. It’s strange without a counter between us, isn’t it?' },
+                  {
+                    say: 'kuro',
+                    overheard: true,
+                    emo: 'teasing',
+                    text: 'こんにちは。カウンターがないと、変な感じですね。',
+                    clear: [{ ja: 'カウンター', ro: 'kauntā', en: 'counter' }],
+                  },
                 ],
               },
             ],
-            else: [{ say: 'kuro', emo: 'polite', text: 'Hello. Are you waiting to order?' }],
+            else: [
+              { say: 'kuro', overheard: true, emo: 'polite', text: '並んでますか？' },
+              { do: 'gesture', who: 'kuro', kind: 'point', to: 'bakery' },
+            ],
           },
+          { if: '!know_futari', then: [{ call: 'd3_kuro_futari' }] },
         ],
+        d3_kuro_futari: [{ if: 'd3_kuro_intro', then: futari({ name: 'Kuro' }), else: futari({}) }],
         d3_rei_lunch: [{ say: 'rei', emo: 'casual', text: 'Could I reach past you? My drink’s there.' }],
         d3_bench: [
           {
