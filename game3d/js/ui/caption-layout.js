@@ -4,6 +4,19 @@ let avoidBoxes = () => [];
 export function setCaptionAvoid(fn) {
   avoidBoxes = fn;
 }
+// Prefer a free row above the UI. If a close-up fills that space, keep the caption readable beside the UI.
+export function captionTop(box, uiTop, viewportHeight, keepBoxes) {
+  const gap = 12;
+  const preferred = Math.max(gap, Math.min(uiTop - gap - box.height, viewportHeight - gap - box.height));
+  let top = preferred;
+  for (const keep of [...keepBoxes].sort((a, b) => b.y0 - a.y0)) {
+    if (box.left < keep.x1 && box.right > keep.x0 && top < keep.y1 && top + box.height > keep.y0) {
+      top = keep.y0 - gap - box.height;
+      if (top < gap) return preferred;
+    }
+  }
+  return top;
+}
 export function installCaptionLayout() {
   if (installed) return;
   installed = true;
@@ -28,14 +41,9 @@ export function installCaptionLayout() {
       const right = Math.max(bounds.right, stageBox.left + portrait.offsetLeft + portrait.offsetWidth);
       if (right > box.left && left < box.right) top = Math.min(top, bounds.top, stageBox.top + portrait.offsetTop);
     }
-    // Large reply lists can lift the caption into the player's head. Reuse the prompt's projected character bounds.
-    for (const keep of avoidBoxes().sort((a, b) => b.y0 - a.y0)) {
-      if (box.left < keep.x1 && box.right > keep.x0 && top - 12 > keep.y0 && top - 12 - box.height < keep.y1) {
-        top = keep.y0;
-      }
-    }
+    const y = captionTop(box, top, innerHeight, avoidBoxes());
     const zoom = parseFloat(getComputedStyle(caption).zoom) || 1;
-    const bottom = `${(innerHeight - top + 12) / zoom}px`;
+    const bottom = `${(innerHeight - y - box.height) / zoom}px`;
     if (caption.style.getPropertyValue('--caption-bottom') !== bottom) {
       caption.style.setProperty('--caption-bottom', bottom);
     }

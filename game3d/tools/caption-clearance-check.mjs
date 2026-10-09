@@ -26,7 +26,7 @@ await withBrowserJob('caption-clearance', async browser => {
         globalThis.captionQA = (await import(`/${base}/js/ui.js`)).ui;
         globalThis.captionQA.caption(null, 'The next stop is Amakawa.');
       }, base);
-      async function capture(name, open = true) {
+      async function capture(name, open = true, clearsPlayer = true) {
         await page.waitForTimeout(450);
         const result = await page.evaluate(() => {
           const caption = globalThis.document.getElementById('caption');
@@ -46,7 +46,7 @@ await withBrowserJob('caption-clearance', async browser => {
         if (open) {
           assert(result.caption.bottom <= result.talk.top - 10, `${name}: caption clears dialogue`);
           assert.equal(result.overlaps, 0, `${name}: caption clears portraits`);
-          assert(!result.coversPlayer, `${name}: caption clears player`);
+          if (clearsPlayer) assert(!result.coversPlayer, `${name}: caption clears player`);
         } else assert.equal(result.property, '', `${name}: ordinary caption position restored`);
       }
       await capture('ambient', false);
@@ -68,10 +68,46 @@ await withBrowserJob('caption-clearance', async browser => {
       await capture('resized');
       await page.evaluate(() => globalThis.captionQA.closeTalk({ sceneOver: true }));
       await capture('closed', false);
+      // Real interior camera projection, including a close-up whose head extends above the viewport.
+      await page.setViewportSize({ width, height });
+      await page.goto(`http://127.0.0.1:8771/${base}/index.html?q=0&cap&place=office`);
+      await page.waitForFunction(() => globalThis.__game?.place?.name === 'office' && globalThis.__game?.player);
+      await page.evaluate(async base => {
+        (await import(`/${base}/js/settings.js`)).setSetting('uiSize', 1);
+        globalThis.document.body.classList.remove('cap');
+        globalThis.__run = true;
+        const g = globalThis.__game;
+        g.busy = true; // hold the isolated camera fixture; no authored scene is running
+        g.player.root.position.set(-5.45, 0, -3.05);
+        g.walker.sync();
+        globalThis.captionQA = (await import(`/${base}/js/ui.js`)).ui;
+        globalThis.captionQA.caption(null, 'The next stop is Amakawa.');
+        void globalThis.captionQA.choose({ name: 'Mio' }, 'Do you want to sit here?', [{ html: 'Yes, thank you.' }, { html: 'I will stand for a little while.' }, { html: 'Is anyone sitting beside the window?' }], { whoId: 'mio' });
+        g.place.cam.closeOn([-5.45, -3.05], 2.5, 0.7);
+        g.place.cam.snap(g.player.root.position);
+      }, base);
+      await page.waitForTimeout(1200);
+      await capture('interior');
+      await page.evaluate(() => {
+        const g = globalThis.__game;
+        g.place.cam.closeOn([-5.45, -3.05], 9, 0.15);
+        g.place.cam.snap(g.player.root.position);
+      });
+      await page.waitForTimeout(1200);
+      await capture('interior-close', true, false);
+      assert(results.at(-1).player.y0 < results.at(-1).caption.height + 24, 'close interior fixture has no room above the player');
+      await page.evaluate(async base => (await import(`/${base}/js/settings.js`)).setSetting('uiSize', 1.4), base);
+      await capture('interior-close-large-ui', true, false);
+      await page.evaluate(async base => {
+        // Deterministic edge case complements the actual interior camera projection.
+        const { setCaptionAvoid } = await import(`/${base}/js/ui/caption-layout.js`);
+        setCaptionAvoid(() => [{ x0: 0, x1: globalThis.innerWidth, y0: -300, y1: globalThis.innerHeight }]);
+      }, base);
+      await capture('interior-no-room', true, false);
       assert.deepEqual(errors, []);
       assert.deepEqual(failures, []);
     } finally { closing = true; await context.close(); }
   }
-}, { timeoutMs: 180000 });
+}, { timeoutMs: 285000, gpuWaitMs: 180000 });
 fs.writeFileSync(`${out}/results.json`, JSON.stringify(results, null, 2) + '\n');
 console.log(`PASS ${results.length} caption layout states`);
