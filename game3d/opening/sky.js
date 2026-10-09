@@ -5,6 +5,21 @@ import * as THREE from 'three';
 
 export const SUN = new THREE.Vector3(1, 0.15, -0.14).normalize(); // low in the east, just over the island
 
+
+// The opening renders with a logarithmic depth buffer (op.js): the island's places lay paving a couple of
+// centimetres over their ground, which an ordinary depth buffer can't tell apart from hundreds of metres away. A
+// custom shader writes the same depth as three's own materials through these chunks.
+export function logDepth(material) {
+  const v = material.vertexShader,
+    f = material.fragmentShader;
+  const vEnd = v.lastIndexOf('}');
+  material.vertexShader = '#include <common>\n#include <logdepthbuf_pars_vertex>\n' + v.slice(0, vEnd) + '  #include <logdepthbuf_vertex>\n' + v.slice(vEnd);
+  const fMain = f.indexOf('void main() {') + 'void main() {'.length;
+  material.fragmentShader = f.replace('precision highp float;', 'precision highp float;\n#include <logdepthbuf_pars_fragment>').replace('void main() {', 'void main() {\n  #include <logdepthbuf_fragment>');
+  void fMain;
+  return material;
+}
+
 const col = (h) => new THREE.Color(h);
 export const SKY_UNIFORMS = () => ({
   uSun: { value: SUN.clone() },
@@ -160,10 +175,10 @@ void main() {
 
 export function buildSea(uniforms, y) {
   const u = { ...uniforms, uDeep: { value: col('#0a4486') }, uShallow: { value: col('#2a78bf') }, uGlitter: { value: 1 } };
-  const m = new THREE.ShaderMaterial({ vertexShader: SEA_VERT, fragmentShader: SEA_FRAG, uniforms: u });
+  const m = logDepth(new THREE.ShaderMaterial({ vertexShader: SEA_VERT, fragmentShader: SEA_FRAG, uniforms: u }));
   const s = new THREE.Mesh(new THREE.PlaneGeometry(30000, 30000, 1, 1), m);
   s.rotation.x = -Math.PI / 2;
-  s.position.y = y;
+  s.position.y = y - 0.12; // just under the coast's own surf and rocks (scenes/outdoor/coast.js), so they never fight
   s.frustumCulled = false;
   return s;
 }
@@ -232,11 +247,11 @@ void main() {
 }`;
 
 export function buildingMaterial(uniforms) {
-  return new THREE.ShaderMaterial({
+  return logDepth(new THREE.ShaderMaterial({
     vertexShader: BLD_VERT,
     fragmentShader: BLD_FRAG,
     uniforms: { ...uniforms, uHazeK: { value: 0.0003 } },
-  });
+  }));
 }
 
 // Plain solid things in the distance (hills, land, the mainland) with flat light and the haze.
@@ -265,11 +280,11 @@ void main() {
   gl_FragColor = vec4(c, 1.0);
 }`;
 export function solidMaterial(uniforms, color, hazeK = 0.0003) {
-  return new THREE.ShaderMaterial({
+  return logDepth(new THREE.ShaderMaterial({
     vertexShader: SOLID_VERT,
     fragmentShader: SOLID_FRAG,
     uniforms: { ...uniforms, uColor: { value: col(color) }, uHazeK: { value: hazeK } },
-  });
+  }));
 }
 
 // The same flat-lit haze look per instance, with each instance's colour in aTint (trees, rooftop units).
@@ -284,9 +299,9 @@ void main() {
   gl_Position = projectionMatrix * viewMatrix * w;
 }`;
 export function solidInstancedMaterial(uniforms, hazeK = 0.0003) {
-  return new THREE.ShaderMaterial({
+  return logDepth(new THREE.ShaderMaterial({
     vertexShader: SOLIDI_VERT,
     fragmentShader: SOLID_FRAG.replace('uniform vec3 uColor;', 'varying vec3 vTint;').replace('vec3 c = uColor *', 'vec3 c = vTint *').replace('varying vec3 vW, vN;', 'varying vec3 vW, vN;'),
     uniforms: { ...uniforms, uHazeK: { value: hazeK } },
-  });
+  }));
 }

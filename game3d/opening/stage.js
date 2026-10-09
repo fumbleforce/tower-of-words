@@ -5,8 +5,7 @@
 import * as THREE from 'three';
 import { loadMonorail, monorailParts } from '../js/train/models.js';
 import { buildCar, buildBellows, LX, T, LZ, WIN, SEAT_Y } from '../js/train/car.js';
-import { loadEric } from '../js/avatar.js';
-import { loadMio } from '../js/mio.js';
+import { playerBody, mioBody } from '../js/chibi.js';
 import { SUN, SKY_UNIFORMS, buildSky, buildSea } from './sky.js';
 import { buildIsland } from './island.js';
 import { buildLobby } from '../js/scenes/lobby.js';
@@ -143,7 +142,7 @@ export async function buildStage(renderer) {
     await Promise.all(
       list.map(async ([key, car, x]) => {
         try {
-          const p = key === 'eric' ? await loadEric({ extra: false }) : await loadMio();
+          const p = key === 'eric' ? await playerBody() : await mioBody(); // the bodies the game boots with (chibi.js)
           p.sitAt(x, SEAT_Y, -(LZ - 0.24) + 0.02, 0);
           p.update(0);
           cars[car].root.add(p.root);
@@ -157,7 +156,7 @@ export async function buildStage(renderer) {
   }
 
   // ---------- the island: the game's own (island.js) ----------
-  const isl = buildIsland(uniforms, { joinX: ISLAND_X, seaY: SEA_Y });
+  const isl = await buildIsland(uniforms, { joinX: ISLAND_X, seaY: SEA_Y });
   scene.add(isl.group, isl.ridge);
 
   // ---------- Honsha's station sign, hung under the platform shed's roof over the platform ----------
@@ -245,6 +244,14 @@ export async function buildStage(renderer) {
     // aim the camera: position, look-at point, vertical fov, optional roll (radians)
     look(pos, at, fov = 40, roll = 0) {
       camera.position.set(...pos);
+      // depth precision: the near plane follows how far away the subject is (a close window or a distant island)
+      const d = Math.hypot(pos[0] - at[0], pos[1] - at[1], pos[2] - at[2]);
+      const near = Math.min(4, Math.max(0.05, d * 0.012));
+      if (Math.abs(camera.near - near) > 1e-4) {
+        camera.near = near;
+        camera.far = Math.min(25000, Math.max(9000, near * 5000));
+        camera.updateProjectionMatrix();
+      }
       camera.up.set(Math.sin(roll), Math.cos(roll), 0);
       camera.lookAt(...at);
       if (roll) camera.rotateZ(roll);

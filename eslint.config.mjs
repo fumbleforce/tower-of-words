@@ -43,7 +43,7 @@ export default [
     'game3d/tools/hud-shots.mjs', 'game3d/tools/day4-shots.mjs', 'game3d/tools/flavor-finds-check.mjs',
       'game3d/tools/day5-shots.mjs', 'game3d/tools/mc-shots.mjs', 'game3d/tools/mc-check.mjs','game3d/tools/saves-check.mjs', 'game3d/tools/people-check.mjs', 'game3d/tools/tickets-check.mjs', 'game3d/tools/map-shots.mjs', 'game3d/tools/map-travel-check.mjs', 'game3d/tools/pins-outline-shots.mjs', 'game3d/tools/pin-tap-check.mjs', 'game3d/tools/pin-tip-check.mjs', 'game3d/tools/pin-count.mjs', 'game3d/tools/lift-door-shots.mjs', 'game3d/tools/look-bench.mjs', 'game3d/tools/train-door-shots.mjs',
     'game3d/tools/look-extra-shots.mjs', 'game3d/tools/look-shots.mjs', 'game3d/tools/lunch-shots.mjs', 'game3d/tools/seat-check.mjs',
-    'game3d/tools/opening-frames.mjs', 'game3d/tools/opening-render.mjs', 'game3d/tools/perf.mjs', 'game3d/tools/perf/*.mjs', 'game3d/tools/title-idle.mjs',
+    'game3d/tools/opening-frames.mjs', 'game3d/tools/opening-render.mjs', 'game3d/tools/opening-flicker.mjs', 'game3d/tools/perf.mjs', 'game3d/tools/perf/*.mjs', 'game3d/tools/title-idle.mjs',
     'game3d/tools/play.mjs', 'game3d/tools/printer-shots.mjs', 'game3d/tools/shell-shots.mjs',
     'game3d/tools/shoot.mjs', 'game3d/tools/showcase-shots.mjs', 'game3d/tools/soft-collision.mjs',
     'game3d/tools/speech/*.mjs', 'game3d/tools/style-perf.mjs', 'game3d/tools/style-shots.mjs',
