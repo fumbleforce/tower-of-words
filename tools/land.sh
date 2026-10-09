@@ -12,6 +12,9 @@
 # - main moves with `git merge --ff-only` in the main checkout, which only touches the files the branch changed and
 #   refuses rather than overwrite someone's unsaved edit there (it waits while a commit there holds the index).
 #   Nothing is pushed.
+# - After fast-forwarding, verify the landed lock's bytes in main and copy missing or previously locked bytes
+#   from the task. Conflicting main assets are preserved. A failure keeps the worktree and branch, including a
+#   temporary worktree, and reports that main has already moved.
 # - Afterwards the worktree is removed and the branch deleted (--keep leaves both). If the worktree holds new real
 #   files under the asset roots (git-ignored, so not in the commit), it is kept and they are listed.
 # - The day test is not run here: if game3d/ changed it must already have passed in the worktree (fast-qa skill).
@@ -49,7 +52,7 @@ else
 fi
 [[ "$branch" != main ]] || refuse "that is main itself"
 main_wt=$(worktree_of main)   # usually the main checkout; empty if main isn't checked out anywhere
-temp_wt=""
+temp_wt=""; preserve_wt=0
 
 # ---------------------------------------------------------------- the lock
 me="land.sh pid=$$ branch=$branch started=$(date +%H:%M:%S)"
@@ -67,7 +70,7 @@ until mkdir "$LOCK" 2>/dev/null; do
 done
 echo "$me" > "$LOCK/owner"
 cleanup() {
-  [[ -n "$temp_wt" ]] && g worktree remove --force "$temp_wt" >/dev/null 2>&1
+  [[ -n "$temp_wt" && "$preserve_wt" == 0 ]] && g worktree remove --force "$temp_wt" >/dev/null 2>&1
   [[ "$(cat "$LOCK/owner" 2>/dev/null)" == "$me" ]] && rm -rf "$LOCK"
 }
 trap cleanup EXIT
@@ -139,6 +142,19 @@ Rebase it yourself in $wt (resolve only your own files), then land again."
 done
 [[ -n "$landed" ]] || refuse "main moved during the checks three times; try again"
 [[ "$landed" == "$base" ]] || say "main is now $(g rev-parse --short main) ($count commit(s) from $branch)"
+# Main must be able to supply its next staged CPU snapshot without this worktree. Read the immutable landed
+# lock, not an agent's working copy of it. Preserve even temporary worktrees if this handoff or boot fails.
+preserve_wt=1
+asset_main="${main_wt:-$main}"
+asset_helper="$wt/tools/check/landed-assets.mjs"
+[[ -f "$asset_helper" ]] || asset_helper="$script_dir/check/landed-assets.mjs"
+if ! node "$asset_helper" "$asset_main" "$wt" "$base" "$landed"; then
+  refuse "main already holds $(g rev-parse --short "$landed"), but its locked assets are not ready (details above).
+Kept $wt and branch $branch. Conflicting main assets were not overwritten.
+Resolve the listed missing or conflicting bytes, then verify with:
+node \"$asset_helper\" \"$asset_main\" \"$wt\" \"$base\" \"$landed\"
+Land again only after that passes."
+fi
 if g diff --quiet "$base" "$landed" -- game3d/; then :; else
   say "game3d/ changed: the day test at both sizes should already have passed in the worktree (fast-qa skill)"
   # Does what main now holds boot? Main has already moved in one step, so a failure can't leave it half-landed; it
