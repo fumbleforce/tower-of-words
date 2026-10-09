@@ -1,17 +1,17 @@
 # Mio
 
-Mio prefers games to small talk. She wants to finish her work and have the rest of the day to herself. She gets annoyed when people interrupt her. She has little patience for someone who keeps talking after she has stopped answering.
+Mio is twenty-five and would happily spend a free weekend without speaking to anyone. Games occupy most of that time. An unsolicited visit gets a worse reception than a message she can answer later. At work, interruptions earn a long look over her glasses and sometimes a needlessly sharp answer.
 
-She works as B2's programmer and looks after the old servers. She knows what she is doing. She can also be rude to someone who knows less. Kenji sometimes gets a sarcastic answer when he needs an explanation.
+Mio has pale skin, light tan eyes and dark green hair with brighter green underneath. She keeps her hoodie on even in the office and often looks tired. A difficult game can keep her awake until three, especially after a loss she thinks she could have avoided.
 
-Privacy matters to her. She does not want people looking over her shoulder or asking what she is doing all evening. Being alone is often exactly what she wants.
+Growing up on the mainland, Mio shared a small bedroom with her younger sister. Their mother expected the door to stay open. Moving to the island gave her a room she could shut and a working day that ended. Her mother still sends food home with her after visits. Mio complains about carrying it, then eats it for the rest of the week.
 
-There are exceptions. She likes Mori. She has a few people she makes time for. She might invite one of them into a game she usually plays alone. She can enjoy sitting beside someone without feeling any need to talk.
+The room has a narrow bed and a desk almost entirely occupied by two monitors. Visitors get the folding chair. Most evenings go to turn-based strategy games or old dungeon crawlers, often with the sound off. Online, under a name nobody at work knows, she is argumentative and surprisingly talkative.
 
-She talks more about games she likes. She argues about bad decisions and gets absorbed in difficult problems. She can forget that the person beside her wanted a short answer.
+Mio learned English through games, forums and her programming work on B2. She prefers maintaining the old servers to dealing with visitors upstairs and would dislike a promotion that put her in meetings. Her private ambition is to release a small tactics game. The combat works, but she keeps rewriting it and has shown nobody the unfinished art. When someone walks behind her desk at home, she closes the project.
 
-Getting close to Mio takes patience. She does not reward someone for pestering her into going out. An invitation from her means she wants that person's company. It does not mean she wants company every night.
+A few people get invited into this life. Mio will spend an evening helping someone through a game, then want the next evening alone. When a friend needs more attention than she wants to give, she sometimes leaves their message unanswered for days. By the time she replies, she expects to carry on where they left off. Being asked for an apology catches her unprepared.
 
 ## Source and status
 
-Jørgen specified an asocial gamer who values privacy and alone time on 9 October. He allowed a few exceptions. The details above are a proposed description of that personality. Her established facts and current route are in [cast.md](../../docs/game/cast.md#mio-mio). No new history is established here.
+Proposed bio for Review round 4. Her age, B2 job, languages, appearance, island residence and mainland mother are established in [cast.md](../../docs/game/cast.md#mio-mio). Jørgen specified her personality on 9 October. The sister, childhood home, room details, particular games and personal project are new proposals. These details have not been added to the game.
