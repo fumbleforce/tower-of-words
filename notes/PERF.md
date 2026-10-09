@@ -740,7 +740,7 @@ The budgets:
 
 The phone calls, triangles and load are the phone budgets at the top of this file. The rest had no target before this, so these are starting values. iOS Safari allows a page about 224 to 384 MB of canvas and WebGL memory (notes/research/world-chunking.md), and 64 + 96 MB per place lets the place on screen and the next one prepared fit together. The desktop numbers are for a laptop with integrated graphics, not this machine's 3080: about two and a half times the phone's calls and triangles, and double its memory.
 
-Known exceptions: a place that is over today has its own higher ceiling for that number in `places`, with the issue that will bring it down. The ceiling is about 5% over what was measured (25% for load times), and the place may not go past it. When a place gets back under the budget, the check prints a note asking for its exception to be removed. Exceptions recorded on 2026-10-09: the forecourt's phone calls, triangles and geometry and its desktop calls and triangles (#372, stage 2; the planting in e47b108e took its phone triangles from about 368k to 406k); character skins at 2048x2048 that put most places over the texture budget (#373; the approved office-role models in 98609f13 took the gate to 187 MB and the office to 222 MB, which is also over the desktop budget); and the canteen, bakery, ferry terminal and office over on calls, the office, plaza, east lane and shop street over on geometry, the office and plaza over on desktop triangles, and the office's load (#374).
+Known exceptions: a place that is over today has its own higher ceiling for that number in `places`, with the issue that will bring it down. The ceiling is about 5% over what was measured (25% for load times), and the place may not go past it. When a place gets back under the budget, the check prints a note asking for its exception to be removed. Exceptions recorded on 2026-10-09: the forecourt's phone geometry (#372; its calls and triangles came under budget in stage 2, below); character skins at 2048x2048 that put most places over the texture budget (#373; the approved office-role models in 98609f13 took the gate to 187 MB and the office to 222 MB, which is also over the desktop budget); and the canteen, bakery, ferry terminal and office over on calls, the office, plaza, east lane and shop street over on geometry, the office and plaza over on desktop triangles, and the office's load (#374).
 
 To change a budget or add an exception, edit place-budgets.json in the same commit as the change that needs it, and say why in the commit message. An exception needs an issue (the unit test checks it).
 
@@ -776,3 +776,25 @@ Measured on 2026-10-09 on main e47b108e (with the new planting) plus this tool, 
 | works | 46 | 80k | 47 | 57 | 3.6 | 175 | 376k | 93 |
 
 The desktop texture MB are the phone's, except sports (159). Shotengai and the east coast are also over the desktop texture budget (#373). Outdoors the desktop holds up to 19 MB more geometry than the phone (plaza 120 MB, forecourt 112 MB), and the office (130 MB) is over the desktop geometry budget (#374). Desktop loads were 0.8 to 2.1 s, all under 4 s.
+
+### Stage 2: the forecourt under the phone's calls and triangles (#372, 2026-10-09)
+
+Most of what the phone drew was out of view. A place's build merges everything of one material into one mesh (scenes/merge-static.js, outdoor/parts.js), so the forecourt's trees were one 40k-triangle mesh, drawn in full by the camera and again by the shadow map while about a tenth of it was on screen; its paving, beds and the shop street's seafront the same. On the phone's overview about 60k triangles were in view out of 240k drawn by the camera. What changed, all geometry, nothing in how a place is lit:
+
+- Cut into pieces (js/perf/tile-geometry.js, called by mergeStatic): a merged mesh over its limit is cut by where its triangles lie. What casts a shadow goes in 8 m squares on the phone (sets over 2,000 triangles) and pieces of 8,000 triangles on the desktop; the draw-call pass merges those pieces back near each other into batches of 8,000 on the phone (`phoneBatch` cast), which costs no memory since a caster is copied into a batch for its shadow anyway. What casts none goes in pieces of 4,000 (phone) or 8,000 (desktop) that draw themselves: batched, they'd be held twice.
+- Shadows from stand-ins (js/perf/shadow-proxy.js): the shadow-only batches draw a lighter geometry where a mesh has one. Everywhere: the trunks' and hedges' own lighter copies (the `_lo` nodes), icosahedra for the faceted shrub balls. On the phone also: icosahedra for the leaf masses, a block per hedge plant, slabs for the benches, and three-sided tubes and coarser wheels for the parked bikes. The shadow filter's soft edge hides the difference; the before/after pictures are in Showcase perf-forecourt-20261009.
+- Consolidated shadow batches are cut by where their meshes are (they all counted as at the origin, so a shadow batch spread over the whole place and was never culled).
+- Batches merge meshes of different surfaces once the look has run (what a mesh is made of rides in its vertices): for shadow casters and meshes under 1,500 triangles only, for the same memory reason.
+- No zero texture coordinates on untextured merged meshes (Parts and mergeStatic held 8 bytes a vertex for nothing).
+- The seafront and the shop street's west end in the forecourt are no longer named (named meshes are never merged or batched, so each drew whole from every camera); the bike frame tubes are open-ended; the leaning bike in the bike court batches while it stands still.
+
+| | phone calls | phone tris | phone geo MB | desktop calls | desktop tris | desktop geo MB |
+|---|--:|--:|--:|--:|--:|--:|
+| forecourt before | 211 | 397k | 92.7 | 522 | 843k | 111.5 |
+| forecourt after | 192 | 287k | 89.3 | 464 | 786k | 107.5 |
+| plaza before | 73 | 265k | 101 | 371 | 955k | 122.6 |
+| plaza after | 73 | 152k | 92 | 433 | 865k | 113.3 |
+| east lane before | 68 | 178k | 73.9 | 299 | 731k | 89.2 |
+| east lane after | 71 | 121k | 67.7 | 323 | 614k | 83.1 |
+
+Before is main a3c0a22d (with the far view of c43e2815), measured on the same machine the same hour. The campus went from 57 to 103 phone draws and from 132k to 65k triangles. The forecourt's phone geometry is still over its budget (64 MB): about 30 MB of it is the hidden source meshes the draw-call pass keeps to fall back on, never drawn; that is the next step of #372.

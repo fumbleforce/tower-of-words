@@ -41,10 +41,18 @@ const on = () => isPhone() && !new URLSearchParams(location.search).has('fullpho
 // whether this is the phone's lighter build (the Blender-built planting's lighter copies, scenes/outdoor/plant-models.js)
 export const phoneLighter = on;
 
-// Bigger batches on the phone: the draw-call pass cuts batches at 3 m or 6,000 triangles so what's off screen is
-// culled; on a phone each draw costs more than the triangles, so 6 m and 12,000 (the office: 267 to 242 draws a
-// frame, 242k to 269k triangles, in the fast test). Nothing changes in how it looks.
-export const phoneBatch = () => (on() ? { span: 6, tris: 12000 } : {});
+// Batches on the phone: the draw-call pass cuts batches at 3 m or 6,000 triangles so what's off screen is culled; on
+// a phone each draw costs more than the triangles, so 6 m and 12,000 (the office: 267 to 242 draws a frame, 242k to
+// 269k triangles, in the fast test). What casts a shadow is cut by triangles alone, at 8,000: those batches hold the
+// big merged meshes' 8 m pieces (phoneTiles), and their meshes are copied into a batch however they're cut.
+// Nothing changes in how it looks.
+export const phoneBatch = () => (on() ? { span: 6, tris: 12000, cast: { span: Infinity, tris: 8000 } } : {});
+
+// Big merged meshes cut finer on the phone (perf/tile-geometry.js): its overview looks down at a small part of an
+// outdoor place, so what casts a shadow is cut in 8 m squares (sets over 2,000 triangles) and what doesn't in pieces
+// of 4,000 triangles, and most of a court's trees and paving stop drawing (#372: the forecourt 213 to 192 draws a
+// frame, 398k to 287k triangles). The desktop's third-person camera sees far: pieces of 8,000 keep its draws down.
+export const phoneTiles = () => (on() ? { cell: 8, max: 2000, rest: 4000 } : {});
 
 // The medium tier on a phone (what 'auto' picks there, settings.js): no ambient occlusion. GTAO draws the whole scene
 // a second time for its normals, which about doubled the phone's draw calls at medium (office 218 to 448 a frame).

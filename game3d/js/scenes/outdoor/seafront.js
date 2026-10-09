@@ -43,13 +43,14 @@ const HUT = {
 
 const { LAMP_X, BENCH_X, BENCH_Z, FURNITURE_Z } = S;
 
-// draws everything under `object` on the island map's layer only
+// draws everything under `object` on the island map's layer only; with no layer it stays in the place's view as it is,
+// and the place's merge pass and draw-call pass take it like the rest (named, they drew it whole from every camera)
 export function mapOnly(object, layer, tag) {
+  if (layer == null) return;
   let i = 0;
   object.traverse((m) => {
     if (!m.isMesh) return;
     m.name ||= `${tag}:${i++}`; // named: the place's merge pass leaves it as it is
-    if (layer == null) return;
     m.layers.set(layer);
     m.userData.noBatch = true;
   });

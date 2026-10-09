@@ -131,11 +131,12 @@ export function bench(p, x, z, facing = 0, { len = 1.6, back = true } = {}) {
   // the Blender-built park bench (outdoor/plant-models.js): cast-iron ends with armrests, shaped timber slats
   const model = benchGeometries(len, back);
   if (model) {
-    for (const [color, g] of [
-      [IRON, model.iron],
-      [TIMBER, model.wood],
+    const put = (g) => g?.rotateY(facing).translate(x, 0, z);
+    for (const [color, g, shadow] of [
+      [IRON, model.iron, model.ironShadow],
+      [TIMBER, model.wood, model.woodShadow],
     ])
-      p.geo(color, g.rotateY(facing).translate(x, 0, z), { shade: true }); // in the collector's plain set, as before: no extra draws
+      p.geo(color, put(g), { shade: true, shadow: put(shadow) }); // in the collector's plain set, as before: no extra draws
     return;
   }
   const c = Math.cos(facing),

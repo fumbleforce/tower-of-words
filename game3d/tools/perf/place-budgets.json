@@ -53,7 +53,7 @@
     },
     "east_lane": {
       "phone": {
-        "geoMB": { "max": 78, "issue": 374 },
+        "geoMB": { "max": 71, "issue": 374 },
         "texMB": { "max": 119, "issue": 373 }
       }
     },
@@ -67,14 +67,8 @@
     },
     "forecourt": {
       "phone": {
-        "calls": { "max": 224, "issue": 372 },
-        "tris": { "max": 427000, "issue": 372 },
-        "geoMB": { "max": 100, "issue": 372 },
+        "geoMB": { "max": 94, "issue": 372 },
         "texMB": { "max": 170, "issue": 373 }
-      },
-      "desktop": {
-        "calls": { "max": 551, "issue": 372 },
-        "tris": { "max": 883000, "issue": 372 }
       }
     },
     "gate": {
@@ -123,11 +117,11 @@
     },
     "plaza": {
       "phone": {
-        "geoMB": { "max": 107, "issue": 374 },
+        "geoMB": { "max": 97, "issue": 374 },
         "texMB": { "max": 141, "issue": 373 }
       },
       "desktop": {
-        "tris": { "max": 977000, "issue": 374 }
+        "tris": { "max": 908000, "issue": 374 }
       }
     },
     "pool": {
