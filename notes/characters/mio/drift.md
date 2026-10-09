@@ -2,15 +2,14 @@
 
 These are existing lines in game3d/story/ that don't match [voice.md](voice.md). Each row gives the file and node, the line number on 2026-10-09, the current text and a rewrite. The rewrites keep what each line does in the scene (the hint, the instruction, the flag it leads to). Lines not listed here are fine as they are. Nothing here has been applied yet.
 
-The problems fall into four groups. Some later lines use British phrasing that Mio, who learned English from games and forums, doesn't use ("quite", "Mum", "playing up"). Some talk to Eric like a junior or a student, though he is 37 with years in the job and the engineer Mio asked for. Three day 1 lines need small changes for the new canon about her job. Some state a feeling outright. A few are tidy closers that sound written.
+The problems fall into four groups. Some later lines use British phrasing that Mio, who learned English from games and forums, doesn't use ("quite", "Mum", "playing up"). Some talk to Eric like a junior or a student, though he is 37 with years in the job and the engineer Mio asked for. Two day 1 lines need small changes for the new canon about her job. Some state a feeling outright. A few are tidy closers that sound written.
 
 ## Day 1
 
 | Where | Now | Rewrite | Why |
 |---|---|---|---|
-| train.js `sit` (186) | Ahh, you're the support contract? Mori-san said a {gaijin} is coming to help with the old machines. Amakawa never replaces anything, so, um... some of them are older than me. | Ahh, you're the hardware person? Mori-san keeps saying the {gaijin} is coming... I'm the one who asked for you, actually. Amakawa never replaces anything, so, um... some of the machines are older than me. | She forwarded the request for a hardware engineer herself (cast.md, 2026-10-09). Hearing about him only from Mori contradicts that. The line still sets up {gaijin}. |
 | office.js `mio_opens` (233) | Okay, okay, I'm coming... Come in, but don't touch anything, okay? Especially the cables. | Okay, okay, I'm coming... Come in. You're the hardware person, so, okay, but ask me before you touch anything. They're weird in ways that aren't written down. | Eric is the experienced engineer she asked for. She still guards the machines she kept alive. |
-| office.js `mio_b2` (370) | And the company won't buy new ones, ever. So now they pay you to babysit them with me. | And the company won't buy new ones, ever. I'm a programmer, actually, I just ended up knowing them. So I asked for somebody who really knows. That's you, I guess. | He is the help she asked for, not a babysitter beside her. |
+| office.js `mio_b2` (370) | And the company won't buy new ones, ever. So now they pay you to babysit them with me. | And the company won't buy new ones, ever. I'm a programmer, actually, I just ended up knowing them. So now you're here, and maybe I can write code again. | He is the engineer B2 needed, not a babysitter beside her. That she asked for him stays hidden until a later reveal. |
 
 ## Day 2
 
