@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { execFileSync, spawn } from 'node:child_process';
 import { isolatedGitEnvironment } from './git-environment.mjs';
@@ -108,7 +107,10 @@ export async function withGitSnapshot(cwd, tree, use, { env = process.env, timeo
   const cleanEnv = isolatedGitEnvironment(env);
   const format = git(cwd, ['rev-parse', '--show-object-format'], env).trim();
   assert(['sha1', 'sha256'].includes(format), 'Unsupported Git object format');
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), `codex-git-snapshot-${process.pid}-`));
+  // On disk under the shared .git, not the system temp folder: /tmp is RAM on this machine and each snapshot is several GB.
+  const base = path.join(git(cwd, ['rev-parse', '--path-format=absolute', '--git-common-dir'], env).trim(), 'snapshots');
+  fs.mkdirSync(base, { recursive: true });
+  const directory = fs.mkdtempSync(path.join(base, `git-snapshot-${process.pid}-`));
   try {
     await writeBlobs(cwd, directory, entries, env, timeoutMs, signal);
     // Separate metadata lets checks query tracked paths without reading the shared index.
