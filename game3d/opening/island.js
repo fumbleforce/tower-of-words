@@ -28,6 +28,8 @@ import { rng } from './paint.js';
 import { loadPlantModels } from '../js/scenes/outdoor/plant-models.js';
 import { loadStationModel } from '../js/scenes/station-model.js';
 import { applyLook } from '../js/look/index.js';
+import { ANIME, TRICKS } from '../js/look/anime/flags.js';
+import { SUN } from './sky.js';
 
 export const WALL = 1.5; // the island's ground above the bay
 export const DECK = 2.5; // the platforms (the car's floor) above the ground, scenes/station-shed.js
@@ -46,6 +48,16 @@ const PLACES = [
 // (the near ring of a place's skyline, its neighbours' walls, roofs and windows, stays: the far model is cut away there)
 const BACKDROP = /^(skyline:(far|lit-far|lit|ground|tall)|far:|shops:far)/; // lit: the evening windows
 const Q = typeof location !== 'undefined' ? new URLSearchParams(location.search) : new URLSearchParams();
+// the game's anime look (look/anime/, #383: toon light, paint, leaf dapple, soft crowns, the fountain's water; the
+// outlines are the compositor's) fully on in the opening (Jørgen 2026-10-10); ?anime=0 shows it without
+export const ANIME_ON = Q.get('anime') !== '0';
+if (ANIME_ON) {
+  for (const t of TRICKS) ANIME[t] = true;
+  ANIME.on = true;
+}
+// the opening's sun for the anime look's light and leaf shade (look/anime/index.js sunDir reads a place's sun)
+const OUR_SUN = { position: SUN.clone().multiplyScalar(100), target: { position: new THREE.Vector3() } };
+export const ANIME_PERIOD = 'morning';
 const DEBUG_STRIP = Q.has('strip');
 const NO_CUT = Q.get('cut') === '0'; // ?cut=0: every place's ground draws everywhere (to compare)
 const NO_SURF = Q.get('surf') === '0'; // ?surf=0: the look without its surface patterns (to find a shimmer)
@@ -176,6 +188,7 @@ function ownGround(m, place, OWN) {
 }
 
 export async function buildIsland(uniforms, { joinX, seaY }) {
+  let songT = 0;
   // the game's Blender-built trees, hedges and benches, which the place builders use when they're loaded
   await loadPlantModels({ lighter: false });
   await loadStationModel({ lighter: false }); // Honsha station, built in Blender (scenes/station-model.js)
@@ -208,7 +221,9 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
     }
     // the game's look on its materials: surface patterns, soft baked light, small modelled detail (look/index.js)
     try {
-      applyLook({ scene: w.scene, sun: w.sun, people: {}, floorY: 0 }, null, NO_SURF ? { surf: false } : {});
+      w.lookPlace = { scene: w.scene, sun: w.sun, people: {}, floorY: 0 };
+      applyLook(w.lookPlace, null, NO_SURF ? { surf: false } : {});
+      w.lookPlace.sun = OUR_SUN;
     } catch (e) {
       console.warn('opening: look', name, e);
     }
@@ -251,7 +266,9 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
         if (foreign(ctr.x, ctr.z)) drop.push(o);
         // ground (low meshes: lawns, roads with their kerbs, slabs, tiles) draws only where this place owns the
         // island: one mesh can cover its own place and the neighbour's
-        else if (box.max.y < 0.3 && !NO_CUT) {
+        // (only plain materials: a shader material's clone copies its uniforms, which cut the anime water off its
+        // shared colours and clock)
+        else if (box.max.y < 0.3 && !NO_CUT && !o.userData.noLook && [].concat(o.material).every((m) => m && !m.isShaderMaterial)) {
           const pi = names.indexOf(name);
           o.material = Array.isArray(o.material) ? o.material.map((m) => ownGround(m, pi, OWN)) : ownGround(o.material, pi, OWN);
         }
@@ -312,6 +329,14 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
       }
     });
     placed[name] = w;
+    // the anime water's shaders need the logarithmic depth the opening renders with (sky.js logDepth)
+    root.traverse((o) => o.name === 'anime:water' && o.material?.isShaderMaterial && logDepth(o.material));
+    // the anime water's clock is the song's, not the wall clock (look/anime/water.js sets uTime from performance.now):
+    // a frame of the opening is the same every time it is rendered
+    root.traverse((o) => {
+      const u = o.material?.uniforms?.uTime;
+      if (u && o.onBeforeRender !== THREE.Object3D.prototype.onBeforeRender) o.onBeforeRender = () => (u.value = songT);
+    });
     areas.push(areaOf(name));
   }
   const inBuilt = (x, z) => areas.some((ar) => inPoly(ar, x, z));
@@ -521,5 +546,20 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
     // a point in a place's own frame (the frame its builder and game3d/tools/*-views.json use), in the world
     inPlace: (name, x, z, y = 0) => toWorld(...LAYOUT.toIsland(name, x, z), y * LAYOUT.CHUNKS[name].scale),
   };
-  return { group, ridge, anchors, placed };
+  // the anime look's leaf shade and light live in one shared uniform set, pointed at one place at a time (its canopy
+  // map): the place whose ground the camera looks at
+  let focused = null;
+  const toIsl = new THREE.Matrix4().copy(isl.matrixWorld).invert();
+  const focus = (worldAt) => {
+    if (!ANIME_ON) return false;
+    const p = worldAt.clone().applyMatrix4(toIsl);
+    const i = Math.floor(p.x - G.x0),
+      j = Math.floor(p.z - G.z0);
+    const name = i >= 0 && j >= 0 && i < G.n && j < G.n ? names[grid[j * G.n + i]] : owner(walks, p.x, p.z);
+    if (name === focused || !placed[name]?.lookPlace?.onPeriod) return false;
+    focused = name;
+    placed[name].lookPlace.onPeriod(ANIME_PERIOD);
+    return true;
+  };
+  return { group, ridge, anchors, placed, focus, setTime: (T) => (songT = T), unfocus: () => (focused = null) };
 }

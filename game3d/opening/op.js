@@ -13,6 +13,7 @@ import { loadPortraits, loadOptional, W, H, clamp } from './paint.js';
 import { CAST } from './cast.js';
 import { END, beat, BEAT } from './timeline.js';
 import { SHOTS } from './shots/index.js';
+import { ANIME_ON } from './island.js';
 import { drawLyrics } from './subtitles.js';
 
 const qs = new URLSearchParams(location.search);
@@ -128,6 +129,9 @@ function renderShot(shot, which, T) {
   const has2 = !!shot.draw;
   if (has2) {
     const g = slot.c2.g;
+    // a clean context for every shot: a clip or save another shot's drawing left behind would make clearRect clear
+    // only part of the canvas, and the last shot would show through (the ID card over the station)
+    if (g.reset) g.reset();
     g.setTransform(1, 0, 0, 1, 0, 0);
     g.clearRect(0, 0, rtW, rtH);
     g.setTransform(rtW / W, 0, 0, rtH / H, 0, 0);
@@ -142,7 +146,7 @@ function renderShot(shot, which, T) {
     const sp = stage.sunOnScreen();
     if (a > 0 && sp) flare = [sp[0], sp[1], a];
   }
-  comp.bind(which, { has3, has2, bloom: shot.bloom, exposure: shot.exposure, flare });
+  comp.bind(which, { has3, has2, bloom: shot.bloom, exposure: shot.exposure, flare, far: stage.camera.far, ink: ANIME_ON ? (shot.ink ?? 1) : 0 });
 }
 
 function frame(T) {

@@ -34,6 +34,8 @@ uniform vec3 uFlareA, uFlareB;
 uniform float uShafts;
 uniform sampler2D uOv;
 uniform float uHasOv;
+uniform sampler2D uDA, uDB;  // the slots' depth (logarithmic, the renderer's logarithmicDepthBuffer)
+uniform float uFarA, uFarB, uInkA, uInkB, uInkW;
 
 vec3 aces(vec3 x) {
   // Narkowicz's fit of the ACES curve
@@ -79,10 +81,30 @@ vec3 shafts(sampler2D t, vec2 uv, vec3 f) {
   }
   return acc / 28.0 * f.z * 2.4;
 }
+// the anime look's outlines (the game's look/anime/edges.js, here on the opening's logarithmic depth): on a flat
+// surface 1/z changes linearly across the screen, so its second difference marks silhouettes (a big jump, near
+// side) and creases (a small one); the line is a darker, slightly more saturated shade of the colour under it,
+// thinning out with distance
+float izL(sampler2D d, vec2 uv, float far) { return 1.0 / max(exp2(texture(d, uv).r * log2(far + 1.0)) - 1.0, 1e-4); }
+vec3 inked(vec3 col, sampler2D d, vec2 uv, float far, float strength) {
+  if (strength <= 0.0 || texture(d, uv).r >= 1.0) return col;
+  float c = izL(d, uv, far), z = 1.0 / c;
+  vec2 o = uInkW / uRes;
+  float l = izL(d, uv - vec2(o.x, 0.0), far), r = izL(d, uv + vec2(o.x, 0.0), far);
+  float b = izL(d, uv - vec2(0.0, o.y), far), t = izL(d, uv + vec2(0.0, o.y), far);
+  float sx = (2.0 * c - l - r) / c, sy = (2.0 * c - b - t) / c;
+  float near = max(max(sx, sy), 0.0), turn = max(abs(sx), abs(sy));
+  float sil = smoothstep(0.02, 0.04, near);
+  float crease = smoothstep(0.004, 0.008, turn) * 0.7;
+  float a = max(sil, crease) * strength * (1.0 - smoothstep(28.0, 70.0, z));
+  float lum = dot(col, vec3(0.2126, 0.7152, 0.0722));
+  vec3 ink = max(mix(vec3(lum), col, 1.35), 0.0) * 0.32;
+  return mix(col, ink, a);
+}
 vec3 layerA(vec2 uv) {
   vec3 c = vec3(0.0);
   if (uHasA3 > 0.5) {
-    vec3 h = texture(uA3, uv).rgb;
+    vec3 h = inked(texture(uA3, uv).rgb, uDA, uv, uFarA, uInkA);
     vec3 bl = textureLod(uA3, uv, 3.0).rgb * 0.3 + textureLod(uA3, uv, 5.0).rgb * 0.4 + textureLod(uA3, uv, 6.5).rgb * 0.3;
     c = aces((h + max(bl - 0.9, 0.0) * uBloomA + shafts(uA3, uv, uFlareA)) * uExpA);
     c += flare(uv, uFlareA);
@@ -93,7 +115,7 @@ vec3 layerA(vec2 uv) {
 vec3 layerB(vec2 uv) {
   vec3 c = vec3(0.0);
   if (uHasB3 > 0.5) {
-    vec3 h = texture(uB3, uv).rgb;
+    vec3 h = inked(texture(uB3, uv).rgb, uDB, uv, uFarB, uInkB);
     vec3 bl = textureLod(uB3, uv, 3.0).rgb * 0.3 + textureLod(uB3, uv, 5.0).rgb * 0.4 + textureLod(uB3, uv, 6.5).rgb * 0.3;
     c = aces((h + max(bl - 0.9, 0.0) * uBloomB + shafts(uB3, uv, uFlareB)) * uExpB);
     c += flare(uv, uFlareB);
@@ -222,6 +244,7 @@ export function makeCompositor(renderer, rtW, rtH) {
       magFilter: THREE.LinearFilter,
     });
     rt.texture.generateMipmaps = true;
+    rt.depthTexture = new THREE.DepthTexture(rtW, rtH, THREE.FloatType); // read by the outlines
     return rt;
   };
   const mkCV = () => {
@@ -233,7 +256,9 @@ export function makeCompositor(renderer, rtW, rtH) {
     tex.premultiplyAlpha = true;
     tex.generateMipmaps = false;
     tex.minFilter = THREE.LinearFilter;
-    return { cv, g: cv.getContext('2d'), tex };
+    // willReadFrequently keeps the canvas in memory: an accelerated canvas could hand WebGL a stale picture (the ID
+    // card showed over the station in a sequential render until the canvas was read back)
+    return { cv, g: cv.getContext('2d', { willReadFrequently: true }), tex };
   };
   const slots = [0, 1].map(() => ({ rt: mkRT(), c2: mkCV() }));
   const overlay = mkCV();
@@ -253,6 +278,9 @@ export function makeCompositor(renderer, rtW, rtH) {
     uFlareA: { value: new THREE.Vector3() }, uFlareB: { value: new THREE.Vector3() },
     uOv: { value: null }, uHasOv: { value: 0 },
     uShafts: { value: NO_SHAFTS ? 0 : 1 },
+    uDA: { value: blank }, uDB: { value: blank }, uFarA: { value: 10000 }, uFarB: { value: 10000 },
+    uInkA: { value: 0 }, uInkB: { value: 0 },
+    uInkW: { value: Math.min(3, Math.max(1.2, rtH / 560)) }, // the line's width in pixels, as the game's
   };
   const mat = new THREE.ShaderMaterial({ vertexShader: VERT, fragmentShader: FRAG, uniforms, glslVersion: THREE.GLSL3, depthTest: false, depthWrite: false });
   const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat);
@@ -271,7 +299,7 @@ export function makeCompositor(renderer, rtW, rtH) {
       uniforms.uOv.value = has ? overlay.tex : blank;
       if (has) overlay.tex.needsUpdate = true;
     },
-    // which: 0 or 1; state: { has3, has2, bloom, exposure }
+    // which: 0 or 1; state: { has3, has2, bloom, exposure, flare, far (the camera's, for the depth), ink (outlines 0..1) }
     bind(which, state) {
       const s = slots[which];
       const L = which === 0 ? 'A' : 'B';
@@ -281,6 +309,9 @@ export function makeCompositor(renderer, rtW, rtH) {
       uniforms[`uHas${L}2`].value = state.has2 ? 1 : 0;
       uniforms[`uBloom${L}`].value = state.bloom ?? 0.6;
       uniforms[`uExp${L}`].value = state.exposure ?? 0.9;
+      uniforms[`uD${L}`].value = state.has3 ? s.rt.depthTexture : blank;
+      uniforms[`uFar${L}`].value = state.far ?? 10000;
+      uniforms[`uInk${L}`].value = state.has3 ? (state.ink ?? 0) : 0;
       const f = state.flare;
       uniforms[`uFlare${L}`].value.set(f ? f[0] : 0, f ? f[1] : 0, f ? f[2] : 0);
       if (state.has2) s.c2.tex.needsUpdate = true;
