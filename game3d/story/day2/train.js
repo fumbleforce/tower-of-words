@@ -20,7 +20,7 @@ export default {
         { set: 'd2_station_seen' },
         { if: 'd2_mio_here', then: [
           { say: 'mio', emo: 'tired', text: 'Morning. We can use this one while it’s between runs.' },
-          { say: 'mio', emo: 'low', text: 'I told them it was the sensor, so, um... I’d quite like it to be the sensor.' },
+          { say: 'mio', emo: 'low', text: 'I told them it was the sensor, so, um... it’s the sensor. I hope.' },
         ], else: [
           { say: 'miotext', text: 'that car is between runs, you can test it' },
           { say: 'miotext', text: 'emi can order a sensor if you confirm it’s broken' },

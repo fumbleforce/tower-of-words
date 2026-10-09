@@ -29,7 +29,7 @@ export default place('office', {
     ],
     ongoing_mio: [
       { if: 'period_evening && ongoing_team_day', then: [{ go: 'd5_drinks' }] },
-      { say: 'mio', emo: 'casual', text: 'I’ve nearly finished this. If the printer’s playing up, Kenji is right beside it.' },
+      { say: 'mio', emo: 'casual', text: 'I’m almost done with this. If it’s the printer, Kenji is right there, so...' },
       { choice: [
         { text: 'Ask about the open requests.', go: 'ongoing_mio_requests' },
         { text: 'Ask where she goes for lunch.', go: 'ongoing_mio_lunch' },
@@ -37,13 +37,13 @@ export default place('office', {
       ] },
     ],
     ongoing_mio_requests: [
-      { say: 'mio', emo: 'casual', text: 'The list keeps anything you haven’t signed off. If someone’s out, try them another time. You don’t have to get it all done today.' },
+      { say: 'mio', emo: 'casual', text: 'Anything you haven’t signed off stays on the list. If somebody’s not there, just go another time. Some of mine are from March.' },
       { do: 'tickets' }, { go: 'ongoing_mio_leave' },
     ],
     ongoing_mio_lunch: [
       { say: 'mio', emo: 'warm', text: 'There’s a bench by the water, past the dorms. Usually nobody needs a printer fixed out there.' },
       { say: 'eric', emo: 'warm', text: 'I’ll leave my requests here, then.' },
-      { say: 'mio', emo: 'amused', text: 'Please do.' },
+      { say: 'mio', emo: 'amused', text: 'Yeah, do that. Your phone also.' },
       { do: 'remember', who: 'mio', id: 'coast_lunch', text: 'Told you where she likes to sit for lunch.' },
       { go: 'ongoing_mio_leave' },
     ],

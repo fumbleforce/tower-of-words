@@ -37,7 +37,7 @@ export default {
       ] },
     ],
     chat_mio_home_nice: [
-      { say: 'mio', emo: 'warm', text: 'It is. I still have to carry it all on the train, though.' },
+      { say: 'mio', emo: 'dry', text: 'Mm, for one day it’s nice. Then I carry it all home on the train like a delivery guy.' },
       { go: 'chat_mio_home_quote' },
     ],
     chat_mio_home_shops: [
@@ -58,7 +58,7 @@ export default {
     chat_mio_lunch: [
       { say: 'eric', emo: 'curious', text: 'Do you ever eat away from the servers?' },
       { if: 'ms3_mio', then: [
-        { say: 'mio', emo: 'warm', text: 'More than I used to. The bench by the water is quite good, when it’s not windy.' },
+        { say: 'mio', emo: 'warm', text: 'More than before. The bench by the water is pretty good, when it’s not windy.' },
       ], else: [
         { say: 'mio', emo: 'casual', text: 'I mean to. Then I come down to check one thing, and I’ve brought my lunch with me anyway.' },
       ] },
@@ -74,7 +74,7 @@ export default {
       { go: 'chat_mio_leave' },
     ],
     chat_mio_quiet: [
-      { say: 'mio', emo: 'warm', text: 'Mm. You can hear the trains from there, but you don’t have to be on one.' },
+      { say: 'mio', emo: 'casual', text: 'Mm. It’s quiet, mostly. Sometimes a train goes past and that’s it.' },
       { go: 'chat_mio_leave' },
     ],
     chat_mio_break: [
@@ -91,7 +91,7 @@ export default {
       ] },
     ],
     chat_mio_guess: [
-      { say: 'mio', emo: 'warm', text: 'That was a good guess. Just ask if you’re not sure, okay?' },
+      { say: 'mio', emo: 'amused', text: 'Mm, that’s basically it. Not bad.' },
       { go: 'chat_mio_break_memory' },
     ],
     chat_mio_mother_right: [

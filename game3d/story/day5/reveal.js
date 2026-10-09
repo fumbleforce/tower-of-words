@@ -35,7 +35,7 @@ export const revealNodes = {
   ],
   d5_delivery_prepare: [
     { if: '!know_dashite', then: [{ call: 'd5_printer_lesson' }] },
-    { say: 'mio', emo: 'casual', text: 'Try Kenji’s melon soda first. I’ll help you say who it’s for.' },
+    { say: 'mio', emo: 'casual', text: 'Do Kenji’s melon soda first. He’s been looking at that machine since six.' },
     { do: 'teamDrinks', state: 'guidedDelivery' },
   ],
   d5_first_reactions: [
@@ -49,8 +49,8 @@ export const revealNodes = {
     ] },
     { do: 'look', who: 'mori', at: 'eric' },
     { say: 'mori', overheard: true, emo: 'puzzled', text: '本当に、何も触っていませんね……。' },
-    { say: 'mio', emo: 'low', text: 'He saw you weren’t touching it. I know, Mori-san. I’ve seen it and I still don’t understand.' },
-    { say: 'mio', emo: 'low', text: 'Can we keep this here for now? Please don’t tell anyone upstairs.' },
+    { say: 'mio', emo: 'low', text: 'He says you didn’t touch anything. I know, Mori-san... I’ve seen it like five times now and I still don’t get it.' },
+    { say: 'mio', emo: 'low', text: 'Can this stay in B2? If upstairs hears about it, it goes on some list, and then it’s my list.' },
     { say: 'kenji', emo: 'low', text: 'Okay. I won’t tell them.' },
     { do: 'face', who: 'mio', to: 'mori' }, { do: 'cam', on: 'mori', zoom: 2.2 },
     { say: 'mio', overheard: true, emo: 'low', text: '森さん、このことは、まだ他の人に話さないでください。', clear: ['森'] },
@@ -93,7 +93,7 @@ export const revealNodes = {
     { say: 'mio', overheard: true, emo: 'casual', text: '森さん、依頼書を一枚、出してもらえますか。', clear: ['森'] },
     { say: 'mori', overheard: true, emo: 'polite', text: 'はい。{dashite}……と。' },
     { do: 'teamDrinks', state: 'printLesson' },
-    { say: 'mio', emo: 'casual', text: 'He said {dashite}. It means “give it out”. That sheet’s finished, so it’s safe to practise now.' },
+    { say: 'mio', emo: 'casual', text: 'He said {dashite}, like “give it out”. The sheet’s done already, so you can try it without printing forty more.' },
     { say: 'mori', emo: 'slow', slow: true, text: '{dashite}。' },
     { do: 'type', word: 'dashite', from: 'mori', prompt: 'Practise after the completed print: dashite.' }, { do: 'save' },
   ],
