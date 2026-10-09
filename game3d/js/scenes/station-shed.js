@@ -17,7 +17,7 @@ const SHED = (() => {
   return { c: [(wx + ex) / 2, (nz + sz) / 2], L: sz - nz, half: 3.6 };
 })();
 const DECK = 2.5, // platform level (the monorail car's floor)
-  BEAM_TOP = 2.0,
+  BEAM_TOP = DECK - 0.16, // the beam just under the car floor, as on the ride (train/world.js BEAM_TOP)
   EAVE = 4.3;
 
 function shed(root) {

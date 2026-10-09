@@ -12,7 +12,7 @@ Units are metres in the game's own frame (+y up, the car runs along +x, its plat
 export_yup off so the game reads the coordinates as written. The car's numbers are the ones in game3d/js/train/car.js
 (LX, LZ, T, RI, HF, WIN, DOORWAYS) and world.js (BEAM_TOP, SEA_Y); keep them in step. Nodes, each one mesh:
   car_skin    the closed car's outer skin, roof and roof units (the play camera's cut-away car never shows it)
-  car_under   the navy skirt and the floor's underside, under every car in every framing
+  car_under   the navy skirt, which straddles the beam (#359), its channel and guide wheels, under every car in every framing
   bellows     the accordion gangway between two cars, centred on x = 0
   beam        one 9.5 m segment of the beam from x = 0 (its joint) to 9.5, top at y = 0
   pillar      the column, collar, hammerhead and bearings, in the world's heights (the beam's foot at BEAM_TOP - 0.96)
@@ -35,7 +35,7 @@ WINS = {1: [(-0.86, 1.32), (0.86, 1.32)], -1: [(-2.65, 0.96), (-0.86, 1.32), (0.
 WIN_Y0, WIN_Y1, WIN_R = 0.42, 1.24, 0.05
 DOOR_X, DOOR_W, DOOR_SILL, DOOR_TOP, DOOR_GAP = 2.65, 0.9, 0.035, 1.22, 0.025
 DOORS = [(x - DOOR_W / 2, x + DOOR_W / 2) for x in (-DOOR_X, DOOR_X)]
-BEAM_TOP, SEA_Y = -0.62, -17.0
+BEAM_TOP, SEA_Y = -0.16, -17.0  # the car rides low on the beam (#359): its skirt hangs 0.5 down either side
 HX, HZ, RP = LX + T, LZ + T, RI + T  # the skin's outer half length, half width and plan corner radius
 TOP = HF + 0.11  # roof top
 SKIN = 0.055  # skin thickness (inner face meets the code-built inner wall at LZ + 0.045)
@@ -55,7 +55,7 @@ C = {
     'unit': hexc('#b9c0c8'), 'louvre': hexc('#363c45'), 'slat': hexc('#8e96a1'),
     'rub': hexc('#5d6878'), 'under': hexc('#1b1f26'), 'bel': hexc('#30353d'), 'belEdge': hexc('#4a505a'),
     'concrete': hexc('#9a9d9f'), 'concreteTop': hexc('#a7a9aa'), 'rust': hexc('#7b5640'), 'joint': hexc('#3a3e44'),
-    'plate': hexc('#5f656d'), 'pad': hexc('#2c2f34'), 'algae': hexc('#4f5a52'), 'footc': hexc('#83888b'),
+    'plate': hexc('#5f656d'), 'tyre': hexc('#1a1c20'), 'hub': hexc('#4b515a'), 'pad': hexc('#2c2f34'), 'algae': hexc('#4f5a52'), 'footc': hexc('#83888b'),
 }
 
 
@@ -415,13 +415,29 @@ def apply_loc(ob):
 
 
 # ---- the skirt ----
+# A straddle car (#359, Jørgen: "monorail carts also hug the side of the rail a bit, not just float on top of it"): the
+# skirt comes down past the beam's top on both sides, with a channel along its underside that the beam runs in, and a
+# guide-wheel housing either side of the beam at each bogie, its wheel against the beam's side.
+SKIRT_Y0, SKIRT_Y1 = -0.66, 0.03  # the skirt's bottom edge (BEAM_TOP - 0.5) and its top, just over the floor
+SLOT, SLOT_TOP = 0.47, -0.13  # the channel's half width (the beam's 0.42 and a gap) and its roof, over the beam's top
+BOGIES = (-2.75, 2.75)  # where the bogies run, each with a guide wheel either side of the beam, fore and aft
+
+
 def build_under():
-    Y0, Y1 = -0.66, 0.03
-    sk = rounded_box('car_under', HX + 0.008, HZ + 0.008, Y0, Y1, RP + 0.008, r_bot=0.1, seg=8,
-                     open_top=True, open_bottom=True)
+    Y0, Y1 = SKIRT_Y0, SKIRT_Y1
+    sk = rounded_box('car_under', HX + 0.008, HZ + 0.008, Y0, Y1, RP + 0.008, r_bot=0.1, seg=5)
+    slot = prism('slot', [(-SLOT, Y0 - 0.5), (SLOT, Y0 - 0.5), (SLOT, SLOT_TOP), (-SLOT, SLOT_TOP)], 'x',
+                 -HX - 1, HX + 1)
+    boolean_cut(sk, [slot])
+    bm = bmesh.new()
+    bm.from_mesh(sk.data)
+    bmesh.ops.delete(bm, geom=[f for f in bm.faces if f.normal.y > 0.99 and f.calc_center_median().y > Y1 - 1e-4],
+                     context='FACES')
+    bm.to_mesh(sk.data)
+    bm.free()
     solidify(sk, 0.035)
     seams = [-3.0, -1.5, 0.0, 1.5, 3.0]
-    xs = set(round(-HX + 0.5 * i, 4) for i in range(int(2 * HX / 0.5) + 1))
+    xs = set(round(-HX + 1.0 * i, 4) for i in range(int(2 * HX / 1.0) + 1))
     for s in seams:
         xs |= {s - 0.006, s + 0.006}
     def outside(f):
@@ -429,7 +445,7 @@ def build_under():
         return plan_sd(c.x, c.z) > -0.02 and abs(f.normal.y) < 0.6
 
     bisect(sk, [((x, 0, 0), (1, 0, 0)) for x in sorted(xs) if abs(x) < HX - 1e-3], outside)
-    bisect(sk, [((0, y, 0), (0, 1, 0)) for y in (-0.13, -0.095, -0.3, -0.45)], outside)
+    bisect(sk, [((0, y, 0), (0, 1, 0)) for y in (-0.13, -0.095, -0.3)], outside)
 
     def col(c, n, p):
         sd = plan_sd(c.x, c.z)
@@ -445,9 +461,25 @@ def build_under():
         return mul(C['navy'], k)
 
     paint(sk, col)
-    plate = prism('plate', rrect(0, 0, 2 * HX - 0.1, 2 * HZ - 0.1, RP - 0.05, 8), 'y', -0.12, -0.08)
-    paint(plate, lambda c, n, p: C['under'])
-    return join([sk, plate], 'car_under')
+    parts = [sk]
+    # the guide wheels: a housing hung from the skirt's underside either side of the beam, and under it two rubber
+    # wheels on upright axles that run on the beam's side, clear of its foot (the flange from BEAM_TOP - 0.7)
+    WR, WY0, WY1 = 0.13, Y0 - 0.17, Y0 - 0.1
+    for bx in BOGIES:
+        for sz in (-1, 1):
+            h = rounded_box('housing', 0.5, 0.15, Y0 - 0.1, Y0 + 0.02, 0.04, seg=2, open_top=True)
+            h.location = (bx, 0, sz * (SLOT + 0.15))
+            apply_loc(h)
+            paint(h, lambda c, n, p: mul(C['under'], 1.25) if n.y < 0.75 else C['under'])
+            parts.append(h)
+            for dx in (-0.3, 0.3):
+                N = 8
+                zc = sz * (0.42 + WR + 0.004)
+                w = prism('wheel', [(bx + dx + WR * math.cos(2 * math.pi * k / N), zc + WR * math.sin(2 * math.pi * k / N))
+                                    for k in range(N)], 'y', WY0, WY1)
+                paint(w, lambda c, n, p: C['tyre'] if abs(n.y) < 0.5 else C['hub'])
+                parts.append(w)
+    return join(parts, 'car_under')
 
 
 # ---- the bellows ----
