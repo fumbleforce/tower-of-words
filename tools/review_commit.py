@@ -20,7 +20,7 @@ _LOCK = threading.Lock()  # the review server saves from several threads; one gi
 def _git(root, *args):
     # HEAD_BOOT=0: skip the post-commit boot and stale checks; a json-only commit has nothing for them
     try:
-        return subprocess.run(['git', *args], cwd=root, capture_output=True, text=True, timeout=180,
+        return subprocess.run(['git', *args], cwd=root, capture_output=True, text=True, errors='replace', timeout=180,
                               env=dict(os.environ, HEAD_BOOT='0'))
     except (OSError, subprocess.TimeoutExpired) as e:
         return subprocess.CompletedProcess(args, 1, '', str(e))
