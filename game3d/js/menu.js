@@ -16,6 +16,8 @@ import { startOnboarding, resetOnboarding } from './onboard.js';
 import { PLACE_NAMES } from './places/definitions.js';
 import { installGoalArrow } from './ui/goal-arrow.js';
 import { addDayPicker } from './ui/title-days.js';
+import { openingButton } from './ui/opening.js';
+import { $, el } from './ui/dom.js';
 import { poseTitleCamera, releaseTitleCamera, flightAt } from './ui/title-camera.js';
 import { snapshot, crossfade } from './places/crossfade.js';
 import { settingsView } from './ui/settings-view.js';
@@ -27,13 +29,6 @@ const Q = new URLSearchParams(location.search);
 const TEST = Q.get('test') === 'fast',
   CAP = Q.has('cap'),
   SHELL = Q.get('shell');
-const $ = (s, r = document) => r.querySelector(s);
-const el = (tag, cls, html) => {
-  const e = document.createElement(tag);
-  if (cls) e.className = cls;
-  if (html != null) e.innerHTML = html;
-  return e;
-};
 const game = () => window.__game;
 const shell = (window.__shell = { photos: {}, PLACE_NAMES });
 
@@ -155,10 +150,8 @@ function buildTitle() {
   const go = t.querySelector('.go');
   go.dataset.first = '';
   const mc = el('button', 'mcont', '<span class="l">Continue</span><span class="s"></span>');
-  mc.type = 'button';
   const ms = el('button', 'msettings', 'Settings');
-  ms.type = 'button';
-  menu.append(go, mc, ms);
+  menu.append(go, mc, ms, openingButton());
   inner.querySelector('.btns')?.remove();
   inner.querySelector('.keys')?.remove();
   inner.append(menu);
@@ -497,7 +490,6 @@ function addPauseChip() {
     '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/><circle cx="12" cy="12" r="6.4"/></svg>',
   );
   b.id = 'pauseBtn';
-  b.type = 'button';
   b.setAttribute('aria-label', 'Menu and settings');
   b.onclick = (e) => {
     e.stopPropagation();

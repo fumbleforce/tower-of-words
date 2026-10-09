@@ -84,8 +84,8 @@ rm -f "$G/js/shell-qa.js"
 GIT_DIR=$(git rev-parse --absolute-git-dir) python3 "$G/tools/stamp.py" | sed 's/^/build: /'
 rm -rf "$G/tools" "$G/design" "$G/ref" "$G/shots"
 find "$G" -name '*.md' -delete
-# assets: keep only the folders the code loads from (assets/<folder>/ written in js/), drop loose files
-USED=$(grep -rhoE "assets/[A-Za-z0-9_-]+/" "$G/js" | sort -u | sed 's#assets/##; s#/##')
+# assets: keep only the folders the code loads from (assets/<folder>/ written in js/ or opening/), drop loose files
+USED=$(grep -rhoE "assets/[A-Za-z0-9_-]+/" "$G/js" "$G/opening" | sort -u | sed 's#assets/##; s#/##')
 for d in "$G"/assets/*; do n=$(basename "$d"); if [ -d "$d" ]; then echo "$USED" | grep -qx "$n" || rm -rf "$d"; else rm -f "$d"; fi; done
 find "$G/assets" \( -name 'check*.png' -o -name 'check*.html' -o -name '*.blend' \) -delete 2>/dev/null || true
 for x in $EXTRA; do git archive HEAD "$x" | tar -x -C "$STAGE"; done
