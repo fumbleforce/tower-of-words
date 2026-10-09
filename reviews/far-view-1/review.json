@@ -2,7 +2,7 @@
  "title": "Far view test: sky, haze and a model of the whole island",
  "date": "2026-10-09",
  "by": "claude-agent:farview",
- "status": "open",
+ "status": "decided",
  "question": "Should this far view go to every outdoor place, or what should change first?",
  "multi": false,
  "media": [
@@ -104,5 +104,8 @@
    "label": "Harbour as it is now, to compare",
    "href": "game3d/?place=harbour"
   }
- ]
+ ],
+ "decision": "Roll out as a first step: \"Works well as a first step. Still a lot of exterior areas that are just not built for this yet that seem super empty, but that is for pass 2\". Pass 2 is #375.",
+ "decided_at": "2026-10-09T13:21:26+0200",
+ "issue": 375
 }
