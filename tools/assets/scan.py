@@ -549,6 +549,73 @@ if _kit.returncode:   # the library goes empty rather than stopping ./start
     print('kit-source.mjs failed; the Asset library is empty this time:', _kit.stderr.strip().splitlines()[-1:])
 KIT_DATA = json.loads(_kit.stdout) if not _kit.returncode else {'families': [], 'pieces': [], 'dupes': [], 'stale': ['kit-source.mjs failed']}
 FAMILY = {f: label for f, label, _ in KIT_DATA['families']}
+# each kit piece's triangles and draws at each detail level (kit-costs.mjs builds them in Node)
+_costs = subprocess.run(['node', 'tools/assets/kit-costs.mjs'], cwd=ROOT, capture_output=True, text=True, timeout=60)
+if _costs.returncode:
+    print('kit-costs.mjs failed; no detail level costs this time:', _costs.stderr.strip().splitlines()[-1:])
+KIT_COSTS = json.loads(_costs.stdout) if not _costs.returncode else {'levels': [], 'fidelity': [], 'pieces': {}}
+
+
+def kit_touched(pieces):
+    """Who last worked on each piece and when: the newest commit among the lines from the piece's own line to the
+    next piece's in the same file (git blame, once per file), passing over repo-wide mechanical passes (formatting,
+    moves). Who: Claude or Codex from the commit's message (the commit says which team made it,
+    collab/PROTOCOL.md), else its author."""
+    by_file = {}
+    for pc in pieces:
+        by_file.setdefault(pc['file'], []).append(pc)
+    shas, out = {}, {}
+    for file, pcs in by_file.items():
+        b = subprocess.run(['git', 'blame', '--line-porcelain', '--', file], cwd=ROOT, capture_output=True, text=True)
+        if b.returncode:
+            continue
+        lines, cur = [], None
+        for ln in b.stdout.splitlines():
+            if re.match(r'^[0-9a-f]{40} ', ln):
+                cur = {'sha': ln[:40]}
+            elif ln.startswith('committer-time ') and cur is not None:
+                cur['t'] = int(ln.split()[1])
+            elif ln.startswith('\t') and cur is not None:
+                lines.append(cur)
+                cur = None
+        starts = sorted(pc['line'] for pc in pcs)
+        for pc in pcs:
+            end = next((x for x in starts if x > pc['line']), len(lines) + 1)
+            # lines not yet committed (an all-zero sha) are left out: the log below refuses it
+            span = {x['sha']: x['t'] for x in lines[pc['line'] - 1:end - 1] if 't' in x and x['sha'].strip('0')}
+            if span:
+                out[pc['key']] = sorted(span, key=span.get, reverse=True)
+                for sha in span:
+                    shas[sha] = None
+    if shas:
+        log = subprocess.run(['git', 'log', '--no-walk', '--format=%H%x1f%cs%x1f%an%x1f%s%x1f%b%x1e', *shas], cwd=ROOT,
+                             capture_output=True, text=True)
+        for rec in log.stdout.split('\x1e'):
+            parts = rec.strip().split('\x1f')
+            if len(parts) < 5:
+                continue
+            sha, when, author, subject, body = parts
+            text = subject + '\n' + body
+            team = 'Claude' if re.search(r'^Claude\b|Co-Authored-By: Claude|claude-', text) else \
+                'Codex' if re.search(r'codex', text, re.I) else 'Grok' if re.search(r'\bgrok\b', text, re.I) else author
+            agent = re.search(r'claude-agent:[\w-]+|codex-[\w:-]+', text)
+            shas[sha] = {'when': when, 'by': team + (f' ({agent.group(0)})' if agent else ''), 'commit': sha[:8], 'subject': subject[:120],
+                         'mechanical': bool(re.search(r'formatting|mechanical|prettier|\bmove[sd]?\b|re-?export', subject, re.I))}
+    picked = {}
+    for k, newest_first in out.items():
+        info = [shas[x] for x in newest_first if shas.get(x)]
+        best = next((x for x in info if not x['mechanical']), info[0] if info else None)
+        if best:
+            picked[k] = {kk: vv for kk, vv in best.items() if kk != 'mechanical'}
+    return picked
+
+
+KIT_TOUCHED = kit_touched(KIT_DATA['pieces']) if os.path.isdir(os.path.join(ROOT, '.git')) or os.path.isfile(os.path.join(ROOT, '.git')) else {}
+for pc in KIT_DATA['pieces']:
+    if pc.get('kit') and pc['kit']['id'] in KIT_COSTS['pieces']:
+        pc['levels'] = KIT_COSTS['pieces'][pc['kit']['id']]['variants']
+    if pc['key'] in KIT_TOUCHED:
+        pc['touched'] = KIT_TOUCHED[pc['key']]
 for pc in KIT_DATA['pieces']:
     places = ', '.join(PLACES.get(x.replace('-', '_'), x) for x in pc['places'])
     e = add(f"piece/{pc['id']}", 'piece', pc['label'], [pc['file']], 'provisional',
@@ -557,9 +624,10 @@ for pc in KIT_DATA['pieces']:
             view=pc['variants'][0]['view'] if pc['variants'] else {'type': 'code'}, tags=['kit', FAMILY[pc['family']]])
     if e:
         e['piece'] = {k: pc[k] for k in ('id', 'family', 'name', 'line', 'kind', 'call', 'doc', 'palette', 'used', 'usedSelf', 'places', 'also', 'dupes',
-                                          'look', 'scope', 'note', 'phone', 'street') if k in pc}
+                                          'look', 'scope', 'note', 'phone', 'street', 'kit', 'fidelity', 'levels', 'touched') if pc.get(k) is not None}
         e['variants'] = [{'name': v['name'], 'view': v['view']} for v in pc['variants']]
-KIT_INFO = {'families': KIT_DATA['families'], 'looks': KIT_DATA.get('looks', []), 'dupes': KIT_DATA['dupes'], 'stale': KIT_DATA['stale']}
+KIT_INFO = {'families': KIT_DATA['families'], 'looks': KIT_DATA.get('looks', []), 'dupes': KIT_DATA['dupes'], 'stale': KIT_DATA['stale'],
+            'fidelity': KIT_COSTS['fidelity'], 'levels': KIT_COSTS['levels']}
 
 # ------------------------------------------------------------------ audio
 manifest = []

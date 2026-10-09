@@ -32,6 +32,7 @@ await withBrowserJob('asset-library-shots', async (browser) => {
       if (name === 'list') {
         await page.screenshot({ path: path.join(OUT, `${name}-${size}-full.png`), fullPage: true });
         await page.locator('#alooks').screenshot({ path: path.join(OUT, `looks-${size}.png`) }); // street style and faceted
+        await page.locator('#afid').screenshot({ path: path.join(OUT, `fidelity-${size}.png`) }); // what still needs love
       }
       console.log(file);
     }
