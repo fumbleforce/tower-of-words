@@ -586,7 +586,7 @@ body.reloading::after { content: ""; position: fixed; inset: 0; z-index: 50; bac
 #title .cont { display: none !important; }
 #title.out { opacity: 0; }
 /* the anime opening, played from the title (js/ui/opening.js) */
-#opening { position: fixed; inset: 0; z-index: 60; background: #000; transition: opacity .45s ease; }
+#opening { position: fixed; inset: 0; z-index: 60; background: #000; transition: opacity .9s ease; }
 #opening iframe { display: block; width: 100%; height: 100%; border: 0; }
 #opening.out { opacity: 0; pointer-events: none; }
 #title .inner, #title .grade { transition: opacity .7s ease, transform .9s cubic-bezier(.3, 0, .2, 1); }
