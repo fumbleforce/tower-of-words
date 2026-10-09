@@ -1607,7 +1607,7 @@ None.
 
 ### Zones
 
-`hall` (inside the doors), `passage` (the passage's mouth), `street_exit` (day 2: out on the lane past the gate)
+`hall` (inside the doors), `passage` (the passage's mouth), `street_exit` (day 2: out on the lane past the gate; Eric can walk out through the gate himself on any day whose story leads out that way, and on day 1 the court ends at the gate)
 
 ### Who's there when
 

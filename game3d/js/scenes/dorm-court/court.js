@@ -303,6 +303,10 @@ export function* courtSteps(root, nav, set) {
   yield;
   p.build(root);
   root.add(set.bedPools);
-  // the gate is open, but the court ends there on day 1: he came in that way
-  block(GATE[0], GATE[1], SB[2], SB[3] + 0.1);
+  // the court ends along the front bed, except at the gate; the gate's way onto the lane is a tagged block, opened
+  // on a day whose story leads out through it (places/dorm-court.js). On day 1 he only came in that way.
+  const edge = P.NEAR - 0.05;
+  block(nav.x0, GATE[0], edge, P.OUT_Z);
+  block(GATE[1], nav.x1, edge, P.OUT_Z);
+  nav.blockTagged('street_gate', GATE[0], GATE[1], edge, P.OUT_Z);
 }

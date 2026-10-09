@@ -97,6 +97,7 @@ export async function dormCourtPlace(game) {
     return { spot: () => spot, face: () => at, look: DORM_LOOKS[id] };
   }
   const b = w.bounds;
+  let gateOpen = false;
   const P = {
     scene: w.scene,
     camera: cam.camera,
@@ -170,12 +171,20 @@ export async function dormCourtPlace(game) {
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
     update(dt) {
+      // the gate onto the lane is walkable while the day's story leads out that way (day 2 on: to the east lane)
+      const out = game.runner.has('zone:street_exit');
+      if (out !== gateOpen) {
+        gateOpen = out;
+        w.nav[out ? 'open' : 'shut']('street_gate');
+      }
       bath.update(dt);
       d3.update(dt);
     },
     leave() {
       bath.leave();
       w.nav.shut('passage');
+      w.nav.shut('street_gate');
+      gateOpen = false;
     },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }), mailbox: { ...mbState } };

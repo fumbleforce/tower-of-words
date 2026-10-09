@@ -66,6 +66,10 @@ export const STREET = [-16, 16, 3.8, 6.8];
 export const GATE = [DOOR_LEG[0] - 0.1, DOOR_LEG[1] + 0.1]; // the opening's x range
 export const LINK = [DOOR_LEG[0], DOOR_LEG[1], AZ + h, STREET[2]];
 export const PIERS = [GATE[0] - 0.25, GATE[1] + 0.25]; // the gate piers' x, in the bed's ends
+// how far onto the lane the walk grid reaches: only through the gate, and only on a day whose story leads out that
+// way (places/dorm-court.js opens the gate's tagged block); past the street_exit zone's line, so walking out ends
+// in the trip to the east lane
+export const OUT_Z = STREET[2] + 1.1;
 // the garden: west of the laundry, from the block to the front bed, walled on the court side
 export const GARDEN = [-16, GARDEN_X, BLOCK_Z + 0.05, SOUTH_BED[3]];
 // the bench beside the cherry, facing the court, and the sign stone by the hall
