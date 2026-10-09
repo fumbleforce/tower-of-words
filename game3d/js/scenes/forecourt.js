@@ -153,7 +153,7 @@ export function* forecourtSteps() {
   yield;
   const { sky, front } = yield* town(statics, planting);
   // the street style: its materials, the station's softened walls, the paving detail, leaves and meadow, its daylight
-  const streetEnvironment = dressStreet(statics, scene, sun, station, nav);
+  const streetEnvironment = dressStreet(statics, scene, sun, station, nav, phoneLighter());
   light.takeLook('day');
   yield* mergeStaticSteps(statics);
   const ho = yield* headOfficeSteps(root, nav);

@@ -67,8 +67,14 @@
     },
     "forecourt": {
       "phone": {
+        "calls": { "max": 212, "issue": 374, "reason": "street style on phone, within 5% (coordinator, 2026-10-09)" },
+        "tris": { "max": 330000, "issue": 374, "reason": "street style on phone, within 5% (coordinator, 2026-10-09)" },
         "geoMB": { "max": 94, "issue": 372 },
         "texMB": { "max": 170, "issue": 373 }
+      },
+      "desktop": {
+        "calls": { "max": 547, "issue": 374, "reason": "street style detail for the desktop follow camera (coordinator, 2026-10-09)" },
+        "tris": { "max": 921000, "issue": 374, "reason": "street style detail for the desktop follow camera (coordinator, 2026-10-09)" }
       }
     },
     "gate": {

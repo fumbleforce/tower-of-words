@@ -10,12 +10,13 @@ import { dressFoliage } from './foliage.js';
 import { softenStation } from './architecture.js';
 import { detailController } from './quality.js';
 export { finishOffice } from './architecture.js';
-export function dressStreet(root, scene, sun, station, nav) {
-  const environment = finishStreet(root);
+// phone: the phone's lighter build (perf/phone.js phoneLighter), a coarser crown core and fewer street finishes
+export function dressStreet(root, scene, sun, station, nav, phone = false) {
+  const environment = finishStreet(root, phone);
   const softened = softenStation(root);
   const details = streetDetails(root, station, environment);
   // leaves in 10 m tiles: fewer draws, each still culled (the place budgets, game3d/tools/perf/place-budgets.json)
-  const leaves = dressFoliage(root, { budget: 32000, tileSize: 10, leafShadows: false, leafScale: 1.5, sun });
+  const leaves = dressFoliage(root, { budget: 32000, tileSize: 10, leafShadows: false, leafScale: 1.5, sun, phone });
   const meadow = meadowDetail(root, nav, { budget: 6500, shadows: false });
   scene.traverse((o) => {
     if (o.isHemisphereLight) {
