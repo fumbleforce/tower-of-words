@@ -32,7 +32,7 @@
    "images": [
     "art/candidates/opening-window-2/model/t23.50.webp"
    ],
-   "note": "The game's Meshy models of Eric and Mio, seated with their sit pose. Mio's sit pose bows her head, so mostly her hair shows over the bench."
+   "note": "Fixed 21:15: the first upload showed the pictures here by mistake (rendered with the wrong setting). These are the game's Meshy models of Eric and Mio, seated with their sit pose. Mio's sit pose bows her head, so mostly her hair shows over the bench."
   }
  ],
  "links": [
@@ -44,5 +44,6 @@
    "label": "Play the opening (model)",
    "href": "game3d/opening/?win=model"
   }
- ]
+ ],
+ "updated": "2026-10-09T21:15:00+0200"
 }
