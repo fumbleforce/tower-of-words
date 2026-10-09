@@ -113,16 +113,23 @@ export function piece(decl) {
         p.geo(k.c(color, opts), toWorld(g), opts);
         return k;
       },
-      // a box standing on y (its bottom), centred at (u, v); round: a rounded box of that radius (none on a phone)
+      // a box standing on y (its bottom), centred at (u, v); round: the radius of its rounded edges
       box(color, w, h, d, u, yy, v, { ry: turnBox = 0, round = 0, ...opts } = {}) {
-        const rr = level === 'phone' ? 0 : Math.min(round, w / 2 - 0.001, h / 2 - 0.001, d / 2 - 0.001);
-        const g = rr > 0 ? roundedBox(w, h, d, level === 'high' ? 3 : 2, rr) : new THREE.BoxGeometry(w, h, d);
+        // rounded edges cost triangles: none on the phone, a single bevel at the standard level and only on boxes big
+        // enough for it to show, a rounder edge at high
+        const small = Math.min(w, h, d) < 0.05 && level !== 'high';
+        const rr = level === 'phone' || small ? 0 : Math.min(round, w / 2 - 0.001, h / 2 - 0.001, d / 2 - 0.001);
+        const g = rr > 0 ? roundedBox(w, h, d, level === 'high' ? 2 : 1, rr) : new THREE.BoxGeometry(w, h, d);
         if (turnBox) g.rotateY(turnBox);
         return k.geo(color, g.translate(u, yy + h / 2, v), opts);
       },
       // an upright cylinder standing on y; n round segments at the standard level
       cyl(color, rTop, rBottom, h, u, yy, v, { n = 10, ...opts } = {}) {
-        return k.geo(color, new THREE.CylinderGeometry(rTop, rBottom, h, k.seg(n)).translate(u, yy + h / 2, v), opts);
+        return k.geo(
+          color,
+          new THREE.CylinderGeometry(rTop, rBottom, h, k.seg(n, Math.min(n, 6))).translate(u, yy + h / 2, v),
+          opts,
+        );
       },
       // a round bar from a to b ([u, y, v])
       bar(color, a, b, radius, { n = 8, ...opts } = {}) {
