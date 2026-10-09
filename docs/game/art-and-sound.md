@@ -85,4 +85,4 @@ The anime portraits beside the dialogue box. The faces each person has are in [c
 - A phone buzzing, a bag's zip and a clean electric guitar played by a learner, heard through a phone speaker or a lifted headphone, are synthesised the same way (tools/feel/pluck.py).
 - Outdoors, where there are birds and animals ([places.md](places.md), Birds and small animals): tree sparrows chirping and a light wind by day, bell crickets and field crickets after work, made offline by tools/feel/nature.py; the forecourt keeps the station's air under them. A flock of pigeons scattering near Eric is heard as a clatter of wings. A stray cat Eric pets purrs, a soft pulsing rumble made in the game (sfx.js `purr`), not a recording. Crows and gulls make no sound yet (to build).
 - No footsteps (Jørgen).
-- The opening theme is "Mastered: softer" (art/approved/music/opening.mp3); game3d doesn't use it yet.
+- The opening theme is "Mastered: softer" (art/approved/music/opening.mp3). The game's opening plays its first 70 s with a 4 s fade from 66 s (game3d/audio/music/opening.mp3; [controls-and-ui.md](controls-and-ui.md), Opening).

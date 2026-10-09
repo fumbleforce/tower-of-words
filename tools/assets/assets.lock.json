@@ -16095,6 +16095,8 @@
   "game3d/fonts/op-barlow-sb.woff2": {"size": 13732, "sha256": "e76f9a3f999230b95b2c26f5a3e26bf3cb1737e9ad1b094a11be716f8006b704", "type": "font/woff2"},
   "game3d/fonts/op-barlow-xb.woff2": {"size": 14096, "sha256": "c788ba150d5300c3f8702d0ed5e3985a36e008f930799b6b42a2e252250a6fc5", "type": "font/woff2"},
   "game3d/fonts/op-dela.woff2": {"size": 31488, "sha256": "ffe188cc59d057ec0aa7798356c23041a93b5214eda3d3ec188deaa8e003f949", "type": "font/woff2"},
+  "game3d/fonts/op-zkg-black.woff2": {"size": 28588, "sha256": "cad66da4bb257fc16de686ab9130ec6d1fd89d04e3fac1b447b94763b8f3adcd", "type": "font/woff2"},
+  "game3d/fonts/op-zkg-sub.woff2": {"size": 29284, "sha256": "68e4eb59cf82775a267dba49da7000258c36c886c0cec7a050d2fdecd18090c6", "type": "font/woff2"},
   "game3d/fonts/zkg-bold.woff2": {"size": 18064, "sha256": "386216addf242e912f1cd4b100c8ce4a9430f7d061be61649cd722260cdc4623", "type": "font/woff2"},
   "game3d/fonts/zkg-medium.woff2": {"size": 17972, "sha256": "666fa1301b00ae3a5deb5815f782112d1fa6016bd70b0843f9aefd8213d0af24", "type": "font/woff2"},
   "game3d/shots/club-before/courts-gate-desk.png": {"size": 895512, "sha256": "47b26e2dcd5834608613a3ce7e194b58ddb35b0d77623507157bccfcf2f75de4", "type": "image/png"},
