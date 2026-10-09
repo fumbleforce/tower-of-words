@@ -1,0 +1,286 @@
+{
+  "title": "Far island model: plan buildings only where the plan has them, trees on trunks",
+  "date": "2026-10-09",
+  "by": "claude-agent:farview",
+  "caption": "After Jørgen's screenshot outside the dorm: the far model now leaves out anything that would stand on a place's own ground, street or buildings, starts past where the haze begins, and every far tree stands on a trunk. The dorm courtyard no longer lays a lawn over the east lane, so the buildings across the street stand by their own walks, and the house that stood on the court's street is gone.",
+  "result": [
+    "door-after",
+    "trees-after",
+    "dorm-top-after",
+    "plaza-west-after"
+  ],
+  "sections": [
+    {
+      "title": "Outside Eric's dorm",
+      "caption": "Jørgen's screenshot spot, before and after.",
+      "images": [
+        {
+          "id": "door-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/door-before.webp",
+          "caption": "Before: just outside the dorm door, looking out through the gate (Jørgen's view), desktop follow camera, day 2 morning"
+        },
+        {
+          "id": "door-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/door-after.webp",
+          "caption": "After: the same spot and camera"
+        },
+        {
+          "id": "trees-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/trees-before.webp",
+          "caption": "Before, close-up: the far trees, crowns floating over the ground"
+        },
+        {
+          "id": "trees-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/trees-after.webp",
+          "caption": "After, close-up: each far tree on a trunk, past where the haze starts"
+        },
+        {
+          "id": "dorm-top-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/dorm-top-before.webp",
+          "caption": "Before, from above (far model tinted red): the court's own lawn ran 40 units out and hid the plan's streets"
+        },
+        {
+          "id": "dorm-top-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/dorm-top-after.webp",
+          "caption": "After, from above: past the court's street the island plan shows, its buildings by their own walks"
+        }
+      ]
+    },
+    {
+      "title": "Dorm courtyard",
+      "caption": "The four facings from the start spot, before and after.",
+      "images": [
+        {
+          "id": "dorm-court-north-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/dorm-court-north-before.webp",
+          "caption": "Before: start spot, follow camera facing north, desktop, day 2 morning"
+        },
+        {
+          "id": "dorm-court-north-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/dorm-court-north-after.webp",
+          "caption": "After: start spot, follow camera facing north, desktop, day 2 morning"
+        },
+        {
+          "id": "dorm-court-east-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/dorm-court-east-before.webp",
+          "caption": "Before: start spot, follow camera facing east, desktop, day 2 morning"
+        },
+        {
+          "id": "dorm-court-east-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/dorm-court-east-after.webp",
+          "caption": "After: start spot, follow camera facing east, desktop, day 2 morning"
+        },
+        {
+          "id": "dorm-court-south-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/dorm-court-south-before.webp",
+          "caption": "Before: start spot, follow camera facing south, desktop, day 2 morning"
+        },
+        {
+          "id": "dorm-court-south-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/dorm-court-south-after.webp",
+          "caption": "After: start spot, follow camera facing south, desktop, day 2 morning"
+        },
+        {
+          "id": "dorm-court-west-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/dorm-court-west-before.webp",
+          "caption": "Before: start spot, follow camera facing west, desktop, day 2 morning"
+        },
+        {
+          "id": "dorm-court-west-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/dorm-court-west-after.webp",
+          "caption": "After: start spot, follow camera facing west, desktop, day 2 morning"
+        }
+      ]
+    },
+    {
+      "title": "Fountain plaza",
+      "caption": "The four facings from the start spot, before and after.",
+      "images": [
+        {
+          "id": "plaza-north-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/plaza-north-before.webp",
+          "caption": "Before: start spot, follow camera facing north, desktop, day 2 morning"
+        },
+        {
+          "id": "plaza-north-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/plaza-north-after.webp",
+          "caption": "After: start spot, follow camera facing north, desktop, day 2 morning"
+        },
+        {
+          "id": "plaza-east-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/plaza-east-before.webp",
+          "caption": "Before: start spot, follow camera facing east, desktop, day 2 morning"
+        },
+        {
+          "id": "plaza-east-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/plaza-east-after.webp",
+          "caption": "After: start spot, follow camera facing east, desktop, day 2 morning"
+        },
+        {
+          "id": "plaza-south-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/plaza-south-before.webp",
+          "caption": "Before: start spot, follow camera facing south, desktop, day 2 morning"
+        },
+        {
+          "id": "plaza-south-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/plaza-south-after.webp",
+          "caption": "After: start spot, follow camera facing south, desktop, day 2 morning"
+        },
+        {
+          "id": "plaza-west-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/plaza-west-before.webp",
+          "caption": "Before: start spot, follow camera facing west, desktop, day 2 morning"
+        },
+        {
+          "id": "plaza-west-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/plaza-west-after.webp",
+          "caption": "After: start spot, follow camera facing west, desktop, day 2 morning"
+        }
+      ]
+    },
+    {
+      "title": "Sports lane",
+      "caption": "The four facings from the start spot, before and after.",
+      "images": [
+        {
+          "id": "sports-north-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/sports-north-before.webp",
+          "caption": "Before: start spot, follow camera facing north, desktop, day 2 morning"
+        },
+        {
+          "id": "sports-north-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/sports-north-after.webp",
+          "caption": "After: start spot, follow camera facing north, desktop, day 2 morning"
+        },
+        {
+          "id": "sports-east-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/sports-east-before.webp",
+          "caption": "Before: start spot, follow camera facing east, desktop, day 2 morning"
+        },
+        {
+          "id": "sports-east-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/sports-east-after.webp",
+          "caption": "After: start spot, follow camera facing east, desktop, day 2 morning"
+        },
+        {
+          "id": "sports-south-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/sports-south-before.webp",
+          "caption": "Before: start spot, follow camera facing south, desktop, day 2 morning"
+        },
+        {
+          "id": "sports-south-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/sports-south-after.webp",
+          "caption": "After: start spot, follow camera facing south, desktop, day 2 morning"
+        },
+        {
+          "id": "sports-west-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/sports-west-before.webp",
+          "caption": "Before: start spot, follow camera facing west, desktop, day 2 morning"
+        },
+        {
+          "id": "sports-west-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/sports-west-after.webp",
+          "caption": "After: start spot, follow camera facing west, desktop, day 2 morning"
+        }
+      ]
+    },
+    {
+      "title": "North campus",
+      "caption": "The four facings from the start spot, before and after.",
+      "images": [
+        {
+          "id": "campus-north-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/campus-north-before.webp",
+          "caption": "Before: start spot, follow camera facing north, desktop, day 2 morning"
+        },
+        {
+          "id": "campus-north-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/campus-north-after.webp",
+          "caption": "After: start spot, follow camera facing north, desktop, day 2 morning"
+        },
+        {
+          "id": "campus-east-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/campus-east-before.webp",
+          "caption": "Before: start spot, follow camera facing east, desktop, day 2 morning"
+        },
+        {
+          "id": "campus-east-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/campus-east-after.webp",
+          "caption": "After: start spot, follow camera facing east, desktop, day 2 morning"
+        },
+        {
+          "id": "campus-south-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/campus-south-before.webp",
+          "caption": "Before: start spot, follow camera facing south, desktop, day 2 morning"
+        },
+        {
+          "id": "campus-south-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/campus-south-after.webp",
+          "caption": "After: start spot, follow camera facing south, desktop, day 2 morning"
+        },
+        {
+          "id": "campus-west-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/campus-west-before.webp",
+          "caption": "Before: start spot, follow camera facing west, desktop, day 2 morning"
+        },
+        {
+          "id": "campus-west-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/campus-west-after.webp",
+          "caption": "After: start spot, follow camera facing west, desktop, day 2 morning"
+        }
+      ]
+    },
+    {
+      "title": "Harbour",
+      "caption": "The four facings from the start spot, before and after.",
+      "images": [
+        {
+          "id": "harbour-north-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/harbour-north-before.webp",
+          "caption": "Before: start spot, follow camera facing north, desktop, day 2 morning"
+        },
+        {
+          "id": "harbour-north-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/harbour-north-after.webp",
+          "caption": "After: start spot, follow camera facing north, desktop, day 2 morning"
+        },
+        {
+          "id": "harbour-east-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/harbour-east-before.webp",
+          "caption": "Before: start spot, follow camera facing east, desktop, day 2 morning"
+        },
+        {
+          "id": "harbour-east-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/harbour-east-after.webp",
+          "caption": "After: start spot, follow camera facing east, desktop, day 2 morning"
+        },
+        {
+          "id": "harbour-south-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/harbour-south-before.webp",
+          "caption": "Before: start spot, follow camera facing south, desktop, day 2 morning"
+        },
+        {
+          "id": "harbour-south-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/harbour-south-after.webp",
+          "caption": "After: start spot, follow camera facing south, desktop, day 2 morning"
+        },
+        {
+          "id": "harbour-west-before",
+          "image": "bible/shots/showcase/far-model-fix-20261009/harbour-west-before.webp",
+          "caption": "Before: start spot, follow camera facing west, desktop, day 2 morning"
+        },
+        {
+          "id": "harbour-west-after",
+          "image": "bible/shots/showcase/far-model-fix-20261009/harbour-west-after.webp",
+          "caption": "After: start spot, follow camera facing west, desktop, day 2 morning"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play it",
+      "href": "game3d/"
+    }
+  ]
+}

@@ -1,15 +1,22 @@
-// One low-detail model of the whole island for the far view (look/far-flag.js): every building in the
-// island layout at its full height with window rows, the land and the sea past the skyline's square, and clumps of
-// trees on the layout's green and over the north half (the park and the shrine headland, docs/game/island.md), so a
-// place's street ends in the next districts and the hills instead of a flat plain. One vertex-coloured mesh (one
-// draw call), plus the lit windows after work. It leaves out what the place and its skyline already build near it
-// (the skyline ground's userData.farModel: skip ids, the near radius round the walk box).
+// One low-detail model of the whole island for the far view (look/far-flag.js): the island plan's buildings
+// (island-layout.js BUILDINGS) at their footprints, turns and full heights with window rows, the land and the sea past
+// the skyline's square, and trees on the layout's green and over the north half (the park and the shrine headland,
+// docs/game/island.md), so a place's street ends in the next districts and the hills instead of a flat plain. One
+// vertex-coloured mesh (one draw call), plus the lit windows after work.
+// It leaves out what the place builds itself: the skyline's skip ids and near ring (the skyline ground's
+// userData.farModel), and anything standing on the place's own ground, buildings or planting (`own`, look/sky.js
+// probes the built place), so no plan building lands on a lawn, street or building the place laid out differently.
+// Every tree stands on a trunk from below the ground.
 //
-//   const far = yield* farModelSteps(info, LAYOUT)    // { mesh, lit, stats }, in the chunk's own frame
+//   const far = yield* farModelSteps(info, LAYOUT, opts)   // { mesh, lit, stats }, in the chunk's own frame
+//   opts.own(x, z): true where the place has built something of its own at that point (chunk frame)
+//   opts.buildFrom, opts.treesFrom: how far from the walk box the buildings and the trees begin (past the near ring)
+//   opts.sideTo: how far out a tree's crown gets its second mass
 //
 // The tree spots are worked out once for the island and shared by every place.
 import * as THREE from 'three';
 import { mat } from '../props.js';
+import { LEAF } from './outdoor/planting.js';
 import { TOWN } from './town.js';
 import { coastLand } from './island-west.js';
 import { HALF_EDGE } from './island-plan.js';
@@ -55,8 +62,9 @@ function treeSpots(L) {
     spots.push({
       x,
       z,
-      r: (1.1 + hash(key + 'r') * 0.9) * big,
+      r: (1.1 + hash(key + 'r') * 0.9) * big, // the crown's radius
       c: Math.floor(hash(key + 'c') * GREENS.length),
+      s: hash(key + 's'),
     });
   };
   // on the green: a jittered grid, a third of it left open as lawn
@@ -85,30 +93,67 @@ function treeSpots(L) {
   return spots;
 }
 
-// a tree: a twenty-faced canopy sitting almost on the ground, flat-shaded, at (x, z) in the chunk's frame (no trunk:
-// past the near ring a trunk read as a dark stick under each tree)
+// a tree in the street trees' shape (outdoor/planting.js keyaki, seen from far): a grey trunk from under the far land up
+// into a broad crown of two flattened twenty-faced blobs, flat-shaded, at (x, z) in the chunk's frame; r is the crown's
+// radius. The trunk starts below LAND_Y so it meets whichever ground lies over it (the far land or the skyline's).
 const CANOPY = new THREE.IcosahedronGeometry(1, 0).toNonIndexed();
-function tree(b, x, z, r, color) {
-  const cy = 0.5 + r * 1.25;
-  const P = CANOPY.attributes.position,
-    tmp = new THREE.Vector3(),
-    tri = [new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()];
+const TRUNK = new THREE.CylinderGeometry(0.62, 1, 1, 5, 1, true).translate(0, 0.5, 0).toNonIndexed();
+const BARK = new THREE.Color(LEAF.barkGrey);
+function put(b, geo, [sx, sy, sz], [x, y, z], color, turn = 0) {
+  const P = geo.attributes.position,
+    cs = Math.cos(turn),
+    sn = Math.sin(turn),
+    tri = [new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()],
+    e1 = new THREE.Vector3(),
+    e2 = new THREE.Vector3();
   for (let i = 0; i < P.count; i += 3) {
-    for (let k = 0; k < 3; k++) tri[k].fromBufferAttribute(P, i + k).multiply(tmp.set(r, r * 1.25, r));
-    const n = new THREE.Vector3()
-      .subVectors(tri[1], tri[0])
-      .cross(new THREE.Vector3().subVectors(tri[2], tri[0]))
-      .normalize();
+    for (let k = 0; k < 3; k++) {
+      const v = tri[k].fromBufferAttribute(P, i + k);
+      v.set(v.x * sx, v.y * sy, v.z * sz);
+      v.set(v.x * cs - v.z * sn, v.y, v.x * sn + v.z * cs);
+    }
+    const n = e1.subVectors(tri[1], tri[0]).cross(e2.subVectors(tri[2], tri[0])).normalize();
     for (const v of tri) {
-      b.pos.push(x + v.x, cy + v.y, z + v.z);
+      b.pos.push(x + v.x, y + v.y, z + v.z);
       b.nor.push(n.x, n.y, n.z);
       b.col.push(color.r, color.g, color.b);
     }
   }
 }
+function tree(b, x, z, r, color, seed, side) {
+  const trunkTop = 0.95 * r,
+    cy = trunkTop + 0.62 * r,
+    turn = seed * 6.283;
+  put(b, TRUNK, [0.12 * r, trunkTop - LAND_Y + 0.2 * r, 0.12 * r], [x, LAND_Y, z], BARK, turn);
+  put(b, CANOPY, [r, 0.72 * r, r], [x, cy, z], color, turn);
+  // a second, smaller mass to one side, so the crown reads as a tree's and not a ball (not past opts.sideTo, where the haze hides it)
+  if (!side) return;
+  const a = turn * 1.7;
+  put(
+    b,
+    CANOPY,
+    [0.68 * r, 0.55 * r, 0.68 * r],
+    [x + Math.cos(a) * 0.55 * r, cy + 0.42 * r, z + Math.sin(a) * 0.55 * r],
+    color,
+    turn + 1,
+  );
+}
+
+// points spread over a footprint (a three by three grid inside it): where the place's own ground is probed
+function samples(poly) {
+  const [x0, x1, z0, z1] = bbox(poly),
+    out = [];
+  for (const u of [0.1, 0.5, 0.9])
+    for (const v of [0.1, 0.5, 0.9]) {
+      const x = x0 + (x1 - x0) * u,
+        z = z0 + (z1 - z0) * v;
+      if (inside(poly, x, z)) out.push([x, z]);
+    }
+  return out;
+}
 
 // ---------- one place's far model ----------
-export function* farModelSteps(info, L) {
+export function* farModelSteps(info, L, { own = () => false, buildFrom = 0, treesFrom = 0, sideTo = Infinity } = {}) {
   const { chunk, near, box, skip } = info,
     skipIds = new Set(skip);
   const local = (p) => {
@@ -148,7 +193,7 @@ export function* farModelSteps(info, L) {
     if (!shape) continue;
     const poly = ccw(shape.map(local)),
       [x0, x1, z0, z1] = bbox(poly);
-    if (off(x0, x1, z0, z1) <= near) continue;
+    if (off(x0, x1, z0, z1) <= Math.max(near, buildFrom) || samples(poly).some(([x, z]) => own(x, z))) continue;
     nb++;
     const fh = b.floorH || FLOOR_H,
       s = { kind: b.windows || 'flat', storeys: b.storeys || 2, fh },
@@ -165,8 +210,9 @@ export function* farModelSteps(info, L) {
   let nt = 0;
   for (const t of treeSpots(L)) {
     const [x, z] = local([t.x, t.z]);
-    if (off(x, x, z, z) <= near) continue;
-    tree(B, x, z, t.r, GREENS[t.c]);
+    const d = off(x, x, z, z);
+    if (d <= Math.max(near, treesFrom) || own(x, z)) continue;
+    tree(B, x, z, t.r, GREENS[t.c], t.s, d < sideTo);
     nt++;
   }
   yield;

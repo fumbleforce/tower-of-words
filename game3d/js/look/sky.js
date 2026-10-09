@@ -21,6 +21,9 @@ import { FAR_VIEW, farFollow } from './far-flag.js';
 export const FOG_NEAR = 30,
   FOG_FAR = 140,
   PITCH_MIN = -0.12;
+// where the far model begins, from the walk box: its buildings just past where the haze starts, its trees where the
+// haze has softened their low-poly crowns, and a crown's second mass only as far as it shows
+const FAR_FROM = { buildFrom: FOG_NEAR + 4, treesFrom: FOG_NEAR + 16, sideTo: 80 };
 // the mainland, across the bay to the west-south-west in the island's frame (the monorail comes in from it)
 const MAINLAND = [-0.92, 0.38];
 
@@ -92,6 +95,41 @@ function skyNow(place, period) {
   return { sky: L.sky, sun: L.sun[2], glow: !!L.glow };
 }
 
+// ---------- what the place built itself ----------
+// own(x, z) in the frame of `frame` (the skyline's parent, the chunk's frame): true where a ray straight down meets
+// any of the place's own meshes (its ground, paving, buildings, planting, bands) above OWN_Y, so the far model leaves
+// that spot to the place. A place's base land laid under the skyline's ground (the harbour's) doesn't count: the
+// skyline's paths show over it. Nor do the skyline's and the far view's meshes, or a sky dome or a sea far wider than
+// a place. Only meshes whose box covers the point are cast against.
+const WIDE = 300,
+  OWN_Y = -0.1; // the skyline's ground lies at -0.2 to -0.12 (scenes/skyline.js), a place's own at 0 or above
+function ownGround(scene, frame) {
+  scene.updateMatrixWorld(true);
+  const list = [];
+  scene.traverse((o) => {
+    if (!o.isMesh || o.isSkinnedMesh || /^(skyline|far):/.test(o.name) || o.userData.farView) return;
+    const box = new THREE.Box3().setFromObject(o);
+    if (box.isEmpty() || box.max.x - box.min.x > WIDE || box.max.z - box.min.z > WIDE) return;
+    list.push([o, box]);
+  });
+  const ray = new THREE.Raycaster(),
+    p = new THREE.Vector3(),
+    down = new THREE.Vector3(0, -1, 0),
+    hits = [];
+  return (x, z) => {
+    frame.localToWorld(p.set(x, 0, z));
+    const under = list.filter(([, b]) => p.x >= b.min.x && p.x <= b.max.x && p.z >= b.min.z && p.z <= b.max.z);
+    if (!under.length) return false;
+    ray.set(p.set(p.x, 1e3, p.z), down);
+    for (const [o] of under) {
+      hits.length = 0;
+      o.raycast(ray, hits);
+      if (hits.some((h) => frame.worldToLocal(h.point).y > OWN_Y)) return true;
+    }
+    return false;
+  };
+}
+
 // ---------- install on one place ----------
 export function* farViewSteps(game, place, name, period) {
   if (!FAR_VIEW) return;
@@ -102,7 +140,10 @@ export function* farViewSteps(game, place, name, period) {
   });
   if (!ground) return; // no skyline here: not an outdoor place
   const info = ground.userData.farModel;
-  const far = farFollow() ? yield* farModelSteps(info, LAYOUT) : { stats: null }; // none on a phone (far-flag.js)
+  // none on a phone (far-flag.js); nothing of it right at the place's edge, where the follow camera would see it close
+  const far = farFollow()
+    ? yield* farModelSteps(info, LAYOUT, { own: ownGround(scene, ground.parent), ...FAR_FROM })
+    : { stats: null };
   for (const m of [far.mesh, far.lit]) if (m) ground.parent.add(m);
   // which way the mainland lies in this chunk's frame
   const o = LAYOUT.toLocal(info.chunk, 0, 0),
