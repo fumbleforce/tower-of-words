@@ -1,0 +1,55 @@
+{
+  "rollout": {
+    "variants": ["0", "1"],
+    "periods": ["morning", "evening"],
+    "sizes": ["desktop", "phone"],
+    "places": [
+      {
+        "place": "plaza",
+        "views": [
+          { "id": "fountain", "cam": "follow", "at": [0.4, 6.1], "face": 3.1416, "pitch": 0.08 },
+          { "id": "fountain-close", "cam": "follow", "at": [1.2, 4.9], "face": 3.39, "pitch": 0.35 },
+          { "id": "talk", "cam": "follow", "at": [4, 3], "near": "person", "pitch": 0.22 },
+          { "id": "overview", "cam": "overview", "at": [0.4, 6.1] }
+        ]
+      },
+      {
+        "place": "forecourt",
+        "views": [
+          { "id": "path-east", "cam": "follow", "face": 1.5708 },
+          { "id": "head-office", "cam": "follow", "face": 3.1416 },
+          { "id": "garden-west", "cam": "follow", "face": -1.5708 },
+          { "id": "station", "cam": "follow", "at": [-6, 4], "face": -2.4, "pitch": 0.0 },
+          { "id": "shed", "cam": "follow", "at": [-6, -3], "face": -1.5708, "pitch": -0.1 },
+          { "id": "overview", "cam": "overview" }
+        ]
+      },
+      {
+        "place": "shotengai",
+        "views": [
+          { "id": "street", "cam": "follow", "face": 3.1416 },
+          { "id": "overview", "cam": "overview" }
+        ]
+      },
+      { "place": "train", "views": [{ "id": "car", "cam": "overview" }] },
+      { "place": "canteen", "views": [{ "id": "room", "cam": "overview" }] },
+      { "place": "office", "views": [{ "id": "room", "cam": "overview" }] }
+    ]
+  },
+  "fountain": {
+    "variants": ["1"],
+    "periods": ["morning"],
+    "sizes": ["desktop", "phone"],
+    "places": [
+      {
+        "place": "plaza",
+        "views": [
+          { "id": "fountain", "cam": "follow", "at": [0.4, 6.1], "face": 3.1416, "pitch": 0.08 },
+          { "id": "fountain-close", "cam": "follow", "at": [1.2, 4.9], "face": 3.39, "pitch": 0.35 },
+          { "id": "fountain-side", "cam": "follow", "at": [5.6, 0.2], "face": -1.5708, "pitch": 0.02 },
+          { "id": "overview", "cam": "overview", "at": [0.4, 6.1] }
+        ]
+      }
+    ]
+  }
+}
