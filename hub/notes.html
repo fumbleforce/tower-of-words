@@ -58,7 +58,7 @@
   }
   (async () => {
     // The repo root serves index.html, so its docs are listed by name.
-    nav.insertAdjacentHTML('beforeend', '<h4>Working docs</h4>');
+    nav.insertAdjacentHTML('beforeend', '<a class="hub" href="../">← Hub</a><h4>Working docs</h4>');
     for (const f of ['GUIDE.md', 'TODO.md', 'README.md']) {
       const a = document.createElement('a');
       a.textContent = f.replace(/\.md$/, ''); a.href = '#' + new URL('../' + f, location.href).pathname;
@@ -81,7 +81,7 @@
     }
     const pick = () => {
       const p = decodeURIComponent(location.hash.slice(1));
-      const link = [...nav.querySelectorAll('a')].find(a => a.hash.slice(1) === p) || nav.querySelector('a');
+      const link = [...nav.querySelectorAll('a[href^="#"]')].find(a => a.hash.slice(1) === p) || nav.querySelector('a[href^="#"]');
       if (link) open(link.hash.slice(1), link);
     };
     addEventListener('hashchange', pick);
