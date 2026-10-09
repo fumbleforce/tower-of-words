@@ -1113,12 +1113,12 @@ export async function trainPlace(game) {
     update(dt, t) {
       finds.update(dt);
       laptop.updateHands();
-      // cut-away for the steep play camera, the closed car for shallow shots from outside (the title) and while it
-      // pulls out of the station
+      // cut-away for the steep play camera; the closed car for the title, follow camera (#381) and departure
       {
         camera.getWorldDirection(_camDir);
         const elev = (Math.asin(Math.max(-1, Math.min(1, -_camDir.y))) * 180) / Math.PI;
-        const want = st.leaving ? 1 : 1 - THREE.MathUtils.smoothstep(elev, CLOSE_LO, CLOSE_HI);
+        const want =
+          st.leaving || game.followCamera?.active ? 1 : 1 - THREE.MathUtils.smoothstep(elev, CLOSE_LO, CLOSE_HI);
         st.closedK =
           st.closedK === undefined ? want : st.closedK + (want - st.closedK) * Math.min(1, dt * (st.leaving ? 2.5 : 6));
         car.setClosed(st.closedK);
