@@ -11,7 +11,7 @@ export const PORTRAITS = {
   kuroda: ['neutral', 'sleepy', 'panicked'],
   guard: ['neutral', 'stern', 'amused'],
   emi: ['neutral'],
-  rei: ['neutral'],
+  rei: ['neutral', 'scolding', 'cold', 'smug', 'offguard'],
 };
 // Text messages on Eric's phone (speakers with `phone: true`) show the sender's portrait, as spoken lines do, with
 // this face unless the line names one of theirs (Jørgen, 2026-10-04: "when showing mios message, should have her

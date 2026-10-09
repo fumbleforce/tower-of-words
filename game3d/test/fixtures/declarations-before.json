@@ -156,7 +156,11 @@
       "neutral"
     ],
     "rei": [
-      "neutral"
+      "neutral",
+      "scolding",
+      "cold",
+      "smug",
+      "offguard"
     ]
   },
   "ITEMS": {
