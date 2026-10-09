@@ -1,7 +1,7 @@
 // Focused diagnostic regression: run with node, no browser or GPU needed.
 import assert from 'node:assert/strict';
-import * as THREE from '../vendor/three/three.module.js';
-import { legClearance } from './crowd-bag-clearance.mjs';
+import * as THREE from '../../vendor/three/three.module.js';
+import { legClearance } from '../../tools/crowd-bag-clearance.mjs';
 const root = new THREE.Group(),
   bag = new THREE.Group(),
   leg = new THREE.Group();

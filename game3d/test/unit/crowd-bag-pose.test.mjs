@@ -1,14 +1,14 @@
 // Regression for poses changed inside onBeforeRender, after scene matrix preparation.
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import * as THREE from "../vendor/three/three.module.js";
+import * as THREE from "../../vendor/three/three.module.js";
 const source = fs.readFileSync(
-  new URL("../js/crowd/bag-pose.js", import.meta.url),
+  new URL("../../js/crowd/bag-pose.js", import.meta.url),
   "utf8",
 );
 const moduleText = source.replace(
   "from 'three'",
-  `from '${new URL("../vendor/three/three.module.js", import.meta.url).href}'`,
+  `from '${new URL("../../vendor/three/three.module.js", import.meta.url).href}'`,
 );
 const { bagPose } = await import(
   "data:text/javascript;base64," + Buffer.from(moduleText).toString("base64")
