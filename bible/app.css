@@ -49,6 +49,9 @@ button { font: inherit; color: inherit; }
 /* layout */
 .shell { display: grid; grid-template-columns: var(--nav-w) minmax(0, 1fr); min-height: 100dvh; }
 .nav { position: sticky; top: 0; height: 100dvh; overflow-y: auto; border-right: 1px solid var(--line); background: var(--panel); padding: 18px 14px 24px; display: flex; flex-direction: column; gap: 14px; }
+.hublink { display: inline-block; padding: 2px 6px 8px; color: var(--ink-3); font-size: 13px; text-decoration: none; }
+.hublink:hover { color: var(--ink); }
+.topbar .hublink { padding: 0 10px 0 0; }
 .brand { display: flex; align-items: baseline; gap: 8px; padding: 0 6px; }
 .brand b { font-size: 17px; letter-spacing: -.01em; }
 .brand span { color: var(--ink-3); font-size: 13px; }

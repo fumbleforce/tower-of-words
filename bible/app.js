@@ -10,6 +10,8 @@
 // prefilled GitHub issue instead of posting to the local server; tools/review.py pull imports it.
 const ROOT = window.BIBLE_ROOT || '../';
 const REMOTE = !!window.BIBLE_REMOTE || /\.github\.io$/.test(location.hostname);
+// The hub is only on the local server; the public site has no hub to go back to.
+if (REMOTE) document.querySelectorAll('.hublink').forEach((a) => a.remove());
 const REPO_URL = 'https://github.com/fumbleforce/tower-of-words';
 const PRIVATE_URL = window.BIBLE_PRIVATE || null;
 const DATA_URL = window.BIBLE_DATA || 'data.json';
