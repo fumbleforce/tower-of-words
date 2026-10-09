@@ -30,15 +30,23 @@ vec3 pCladding(vec3 c){
   return c * shade * seam * (1.0 + (pn(p * 7.0) - 0.5) * 0.035 * paa(p, 7.0));
 }
 
-// Small overlapping leaves over a broader canopy, while retaining its modelled facets.
+// Leaves at scattered points (the nearest of the jittered neighbours), each turned and shaded its own way, so no
+// row or grid shows (issue #362: the hedges' old offset rows read as a pattern).
 vec3 pFoliage(vec3 c){
   vec2 p = pplane(vPW, vPN);
-  vec2 q = p * 7.0 + vec2(pn(p * 1.3), pn(p * 1.7 + 6.2)) * 4.0;
-  q.x += floor(q.y) * 0.5;
-  vec2 cell = floor(q), f = fract(q) - 0.5;
-  float r = ph(cell + 2.3);
-  f.x += f.y * (r - 0.5);
-  float leaf = 1.0 - smoothstep(0.19, 0.37 + length(fwidth(q)), length(f * vec2(1.0, 1.7)));
+  vec2 q = p * 7.0 + vec2(pn(p * 1.3), pn(p * 1.7 + 6.2)) * 1.5;
+  vec2 cell = floor(q);
+  float best = 9.0, r = 0.5;
+  for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {
+    vec2 o = cell + vec2(float(i), float(j));
+    float h = ph(o + 2.3), k = ph(o + 9.7);
+    vec2 d = q - o - vec2(h, k);
+    float a = h * 6.2832;
+    d = mat2(cos(a), -sin(a), sin(a), cos(a)) * d;
+    float e = length(d * vec2(1.0, 1.7)) / (0.8 + 0.4 * k);
+    if (e < best) { best = e; r = h; }
+  }
+  float leaf = 1.0 - smoothstep(0.22, 0.42 + length(fwidth(q)), best);
   float resolved = paa(p, 7.0) * uDetail;
   float cluster = (pfbm(p * 2.1) - 0.5) * 0.30;
   float leaves = ((leaf - 0.22) * 0.22 + (r - 0.5) * 0.12) * resolved;

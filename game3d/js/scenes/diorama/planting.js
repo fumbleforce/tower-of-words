@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { rng } from '../outdoor/parts.js';
 import { clippedHedge } from './planting-shapes.js';
 import { rootBed } from './root-bed.js';
+import { plantGeometry, plantTips, trunkName, hedgeGeometries } from '../outdoor/plant-models.js';
 
 const inside = (x, z) => x >= -8 && x <= 33 && z >= -13 && z <= 19;
 
@@ -25,7 +26,29 @@ export function trialPlanting() {
     tree(p, plant) {
       const { species, x, z, scale: s, seed } = plant;
       if (!inside(x, z)) return false;
-      const baseY = rootBed(p, x, z, s, seed);
+      const name = trunkName(species, seed),
+        ry = seed * 2.39996;
+      const modelled = !!plantGeometry(name);
+      const baseY = rootBed(p, x, z, s, seed, { codeTrunk: !modelled });
+      if (modelled) {
+        // the Blender-built trunk (outdoor/plant-models.js), a crown mass at the end of each main limb
+        records.push({ kind: 'tree', ...plant, baseY });
+        p.geo('#77644b', plantGeometry(name, [x, baseY - 0.01, z], s, ry), { surf: 'bark', shade: true });
+        const spread = species === 'ginkgo' ? 0.47 : species === 'sakura' ? 0.86 : 0.74;
+        for (const [cx, cy, cz, k] of plantTips(name, [x, baseY, z], s, ry)) {
+          if (k < 0.8 && species !== 'ginkgo') continue; // the twigs reach into a neighbouring crown
+          const geometry = new THREE.IcosahedronGeometry(1, 0);
+          geometry.scale(
+            spread * 0.86 * k * s,
+            (species === 'pine' ? 0.22 : 0.36) * Math.max(0.8, k) * s,
+            spread * 0.86 * k * s,
+          );
+          geometry.rotateY(seed * 0.7 + cx);
+          geometry.translate(cx, cy + 0.16 * s, cz);
+          p.geo('#557b38', geometry, { surf: 'diorama-tree' });
+        }
+        return true;
+      }
       records.push({ kind: 'tree', ...plant, baseY });
       const q = rng(seed + 415),
         narrow = species === 'ginkgo',
@@ -56,6 +79,11 @@ export function trialPlanting() {
       const { a, b, w, h, y } = hedge;
       if (!inside((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)) return false;
       records.push({ kind: 'hedge', ...hedge });
+      const plants = hedgeGeometries(a, b, hedge);
+      if (plants) {
+        for (const { geometry } of plants) p.geo('#3f633b', geometry, { surf: 'diorama-hedge', shade: true });
+        return true;
+      }
       const alongX = Math.abs(b[0] - a[0]) >= Math.abs(b[1] - a[1]);
       const length = Math.hypot(b[0] - a[0], b[1] - a[1]);
       const geometry = clippedHedge(alongX ? length : w, h, alongX ? w : length);

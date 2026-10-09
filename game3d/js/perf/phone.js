@@ -38,6 +38,8 @@ const LIGHTER = {
 };
 
 const on = () => isPhone() && !new URLSearchParams(location.search).has('fullphone');
+// whether this is the phone's lighter build (the Blender-built planting's lighter copies, scenes/outdoor/plant-models.js)
+export const phoneLighter = on;
 
 // Bigger batches on the phone: the draw-call pass cuts batches at 3 m or 6,000 triangles so what's off screen is
 // culled; on a phone each draw costs more than the triangles, so 6 m and 12,000 (the office: 267 to 242 draws a

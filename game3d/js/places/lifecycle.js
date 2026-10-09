@@ -8,7 +8,7 @@ import { lookSteps } from '../look/index.js';
 import { farViewSteps } from '../look/sky.js';
 import { sliced, setUrgent, nextFrame } from '../perf/slice.js';
 import { optimizePlace } from '../perf/batch.js';
-import { lightenForPhone, phoneBatch } from '../perf/phone.js';
+import { lightenForPhone, phoneBatch, phoneLighter } from '../perf/phone.js';
 import { warmPlace } from '../perf/warm.js';
 import { SmoothWalker } from '../move.js';
 import { playMusic } from '../ui.js';
@@ -31,6 +31,7 @@ import { keepPublic } from '../travel/ways.js';
 import { noteVisit } from '../travel/visited.js';
 import { installFlavorFinds, attachFlavorFinds } from '../flavor-finds/index.js';
 import { snapshotZones, restoreZones, suppressArrivalZones } from '../gameplay/zones.js';
+import { loadPlantModels } from '../scenes/outdoor/plant-models.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -80,6 +81,8 @@ export function createPlaceLifecycle(
     if (!game.prepared[name])
       game.prepared[name] = (async () => {
         const story = await game.runner.load(name);
+        // the Blender-built trees, hedges and benches (scenes/outdoor/plant-models.js), lighter on a phone
+        await loadPlantModels({ lighter: phoneLighter() });
         const place = await PLACES[name](game, story);
         attachSunday(game, place, name);
         attachMonday(game, place, name);
