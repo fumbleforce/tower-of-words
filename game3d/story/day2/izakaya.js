@@ -47,7 +47,8 @@ export default {
       { if: 'lunch_mio', then: [{ say: 'mio', emo: 'casual', text: 'Hey. I left that end for you.' }],
         else: [{ say: 'mio', emo: 'dry', text: 'You found us, then. There’s room at the end.' }] },
       { say: 'emi', emo: 'bright', text: 'I made it. Sorry, I had to wait for someone to stop talking.' },
-      { say: 'kenji', emo: 'bright', text: 'You like chicken? Mori-san ordered vegetables also.' },
+      { say: 'kenji', emo: 'polite', text: '{mc.name_jp}さん、焼き鳥、どうぞ。', overheard: true },
+      { say: 'kenji', emo: 'bright', text: 'Chicken. Vegetable also... Mori-san.' },
       { do: 'partyFood', state: 'open' },
       { say: 'mori', overheard: true, emo: 'sheepish', text: '少し多かったですかね。' },
       { say: 'mio', emo: 'dry', text: 'He’s asking if he ordered too much. We haven’t even started yet.' },
@@ -142,7 +143,9 @@ export default {
       { say: 'eric', emo: 'warm', text: 'I’m going to head back. Thank you for tonight.' },
       { say: 'mori', overheard: true, emo: 'warm', text: '気をつけて。おやすみなさい。' },
       { say: 'mio', emo: 'tired', text: 'Night. I think my washing can wait until tomorrow also.' },
-      { say: 'kenji', emo: 'bright', text: 'Yes! See you Monday, {mc.name}. Computer game also, maybe?' },
+      { say: 'kenji', emo: 'polite', text: 'お疲れさまでした！', overheard: true },
+      { do: 'bow', who: 'kenji' },
+      { say: 'kenji', emo: 'bright', text: 'Monday... see you, {mc.name}-san. Game also... maybe?' },
       { do: 'stand', who: 'eric' }, { set: 'd2_party_done' }, { set: 'going_home' },
       { do: 'partySetup', state: 'pack' },
       { do: 'goal', text: 'Head home when you’re ready. Your room is 203.', at: 'izakaya_exit' }, { do: 'save' },
@@ -158,7 +161,7 @@ export default {
       { do: 'type', word: 'nomitai', from: 'kenji', prompt: 'Kenji has the tea ready. Say “I want to drink” as you take your cup.' },
       { do: 'partyFood', state: 'drink', drink: 'tea' }, { go: 'd2_party_free' },
     ],
-    d2_no_drink: [{ say: 'kenji', emo: 'bright', text: 'Okay. Tea is here, if you want.' }],
+    d2_no_drink: [{ say: 'kenji', emo: 'polite', text: 'お茶もありますよ。', overheard: true }],
     d2_more_drink: [
       { if: 'd2_ate && !d2_party_done', then: [
         { say: 'kenji', emo: 'bright', text: 'Yes! Here.' }, { do: 'partyFood', state: 'drink', drink: 'tea' },
@@ -189,7 +192,7 @@ export default {
       { text: 'Ask about his trip to Norway.', go: 'd2_norway' },
       { text: 'Let him eat.', go: 'd2_party_free' },
     ] }],
-    d2_kenji_wait: [{ say: 'kenji', emo: 'bright', text: 'Food is there. This way!' }],
+    d2_kenji_wait: [{ say: 'kenji', emo: 'polite', text: 'こちらです。', overheard: true }],
     d2_mio_wait: [{ say: 'mio', emo: 'tired', text: 'There’s a seat beside me, if you’re staying.'  }],
     d2_mori_wait: [{ say: 'mori', overheard: true, emo: 'warm', text: 'こちらへどうぞ。' }],
     d2_mori_rest: [

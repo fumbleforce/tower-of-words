@@ -33,7 +33,7 @@ Who each person is (age, job, what they speak) is in docs/game/cast.md. This she
 
 **Eric** (the player). Tired, polite, dry. Says little; his lines are short but whole sentences ("The copier's fixed." not "Fixed."). Choice texts are things he'd actually say.
 
-**Kenji**. His personality is in [cast.md](../../docs/game/cast.md#kenji-kenji). He speaks casual Japanese. He hesitates when he is confused. He sometimes agrees before he understands what someone wants. His English is limited to what he learned at school. He points or uses his hands when he cannot find a word. He is often funny without meaning to be.
+**Kenji**. His personality is in [cast.md](../../docs/game/cast.md#kenji-kenji), and his full voice sheet, approved by Jørgen, is [notes/characters/kenji/voice.md](../../notes/characters/kenji/voice.md). Eric is 37 and Kenji sees him as his senpai, so with Eric he speaks simple, polite Japanese (です and ます) and bows a little too deeply. He hesitates when he is confused. He sometimes agrees before he understands what someone wants. His English is a few school words used without grammar, never a full sentence. He points or uses his hands when he cannot find a word. He is often funny without meaning to be.
 
 **Emi**. Quick and complete sentences, talks like she's between two meetings. Brightness over worry: she says the good news first and the problem as an aside ("I got it. Well. I may have told them...").
 

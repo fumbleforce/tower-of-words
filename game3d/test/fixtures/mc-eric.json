@@ -1,17 +1,17 @@
 {
- "about": "What the game showed for Eric before the protagonist config (#251), captured from the code and story at 13f71f23. game3d/test/unit/mc-identity.test.mjs checks that Eric still gets exactly this. Day-2 dinner moved indoors in the quality rebuild; removed English replacement subtitle and moved identity lines to izakaya.js.",
+ "about": "What the game showed for Eric before the protagonist config (#251), captured from the code and story at 13f71f23. game3d/test/unit/mc-identity.test.mjs checks that Eric still gets exactly this. Day-2 dinner moved indoors in the quality rebuild; removed English replacement subtitle and moved identity lines to izakaya.js. Kenji's lines follow his voice sheet (#368): polite Japanese to his senpai.",
  "story": {
   "game3d/story/day2/index.js": [
-   "Eric! After work. Food. Welcome food!",
-   "Eric! This way. Mori-san is there.",
-   "Yes! See you Monday, Eric. Computer game also, maybe?",
+   "エリックさん、今日、歓迎会です。",
+   "あ、エリックさん！こちらです。",
+   "Monday... see you, Eric-san. Game also... maybe?",
    "エリックさんは、どちらがいいですか。"
   ],
   "game3d/story/day2/office.js": [
-   "Eric! After work. Food. Welcome food!"
+   "エリックさん、今日、歓迎会です。"
   ],
   "game3d/story/day2/shotengai.js": [
-   "Eric! This way. Mori-san is there."
+   "あ、エリックさん！こちらです。"
   ],
   "game3d/story/dorm_court.js": [
    "> エリック · erikku · Eric"
@@ -21,7 +21,7 @@
   ],
   "game3d/story/office.js": [
    "Eric",
-   "Eric-san? I am Kenji! Two months here, so now I am not the newest. Ah, sorry, your chair... I borrowed it. Mine is broken.",
+   "エリックさんですか？ケンジです。よろしくお願いします。",
    "Okay, I'm going home. Um... Eric?",
    "You must be Eric. Emi, I run this lot. Sorry I wasn't about, I've been upstairs since seven begging for money."
   ],
@@ -34,7 +34,7 @@
    "“I'm Eric.”"
   ],
   "game3d/story/day2/izakaya.js": [
-   "Yes! See you Monday, Eric. Computer game also, maybe?",
+   "Monday... see you, Eric-san. Game also... maybe?",
    "エリックさんは、どちらがいいですか。"
   ]
  },

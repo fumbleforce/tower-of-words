@@ -5,7 +5,8 @@ export const karaokeNodes = {
     { do: 'karaokeClub', state: 'start' },
     { call: 'conversation_hamada_name' },
     { if: 'karaoke_first_song_heard', then: [{ go: 'ongoing_karaoke_return' }] },
-    { say: 'kenji', emo: 'warm', text: 'Come in. You can sit here. I found some songs.' },
+    { say: 'kenji', emo: 'warm', overheard: true, text: 'どうぞ。ここ、どうぞ。' },
+    { say: 'kenji', emo: 'bright', text: 'Song... many!' },
     { do: 'karaokeClub', state: 'queue' },
     { say: 'kuroda', overheard: true, emo: 'polite', text: '私のは、後でも大丈夫ですよ。' },
     { say: 'eric', emo: 'curious', text: 'Did you choose one as well?' },
@@ -28,7 +29,8 @@ export const karaokeNodes = {
   ],
   ongoing_karaoke_make_room: [
     { say: 'eric', emo: 'warm', text: 'Could we put his one next? You’ve got a few in there.' },
-    { say: 'kenji', emo: 'sheepish', text: 'Ah, all mine. Sorry. I put in too many.' },
+    { say: 'kenji', emo: 'sheepish', text: 'Ah... all, mine. Sorry.' },
+    { say: 'kenji', emo: 'sheepish', overheard: true, text: '入れすぎました。' },
     { do: 'karaokeClub', state: 'clearQueueExtras' },
     { go: 'ongoing_karaoke_offer_turn' },
   ],
@@ -37,7 +39,7 @@ export const karaokeNodes = {
     { say: 'kuroda', overheard: true, emo: 'hesitant', text: 'いいんですか。では、一曲だけ。' },
     { do: 'karaokeClub', state: 'clearQueueExtras' },
     { do: 'karaokeClub', state: 'takeMicrophone', who: 'kuroda' },
-    { say: 'kenji', emo: 'warm', text: 'One song? You can do more. I wanted three.' },
+    { say: 'kenji', emo: 'warm', overheard: true, text: '一曲だけですか？もっとどうぞ。' },
     { go: 'ongoing_karaoke_song' },
   ],
   ongoing_karaoke_song: [
@@ -45,7 +47,7 @@ export const karaokeNodes = {
     { set: 'karaoke_first_song_heard' },
     { do: 'karaokeClub', state: 'group' },
     { say: 'kuroda', overheard: true, emo: 'warm', text: '最後まで歌えたの、久しぶりです。' },
-    { say: 'kenji', emo: 'warm', text: 'Keep the microphone. What song next?' },
+    { say: 'kenji', emo: 'warm', overheard: true, text: 'マイク、どうぞ。次、何にしますか？', clear: [{ ja: 'マイク', ro: 'maiku', en: 'microphone' }] },
     { do: 'karaokeClub', state: 'keepMicrophone', who: 'kuroda' },
     { if: 'bondready_kuroda == 3 && !ms3_kuroda', then: [
       { set: 'ms3_kuroda' }, { do: 'bondStep', who: 'kuroda', to: 3 },
@@ -64,7 +66,7 @@ export const karaokeNodes = {
   ongoing_karaoke_booking: [
     { say: 'eric', emo: 'curious', text: 'Do you book this room every week?' },
     { say: 'kuroda', overheard: true, emo: 'polite', text: 'はい。水曜日の夜は、私が予約しています。' },
-    { say: 'kenji', emo: 'warm', text: 'He books it. Then he comes to get me. I forget.' },
+    { say: 'kenji', emo: 'sheepish', text: 'Hamada-san... book. Me... forget. He come, get me.' },
     { go: 'ongoing_karaoke_after' },
   ],
   ongoing_karaoke_again: [
@@ -76,7 +78,8 @@ export const karaokeNodes = {
     { go: 'ongoing_karaoke_leave' },
   ],
   ongoing_karaoke_return: [
-    { say: 'kenji', emo: 'warm', text: 'You came! Same seat?' },
+    { say: 'kenji', emo: 'bright', overheard: true, text: 'あ、{mc.name_jp}さん！' },
+    { say: 'kenji', emo: 'bright', text: 'Same... seat?' },
     { say: 'kuroda', overheard: true, emo: 'warm', text: '今日は、先に入れておきました。' },
     { do: 'karaokeClub', state: 'selectNumber' },
     { choice: [

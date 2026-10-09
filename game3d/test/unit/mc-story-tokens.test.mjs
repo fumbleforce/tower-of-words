@@ -25,7 +25,7 @@ test('Carina introduces herself by name and keeps the saved train reply node', (
 
 test('colleagues, paper labels and the mailbox use the chosen protagonist', () => {
   const c = forMc(office, 'carina'), e = forMc(office, 'eric');
-  assert.ok(c.nodes.kenji_first.some(step => step.text?.startsWith('Carina-san?')));
+  assert.ok(c.nodes.kenji_first.some(step => step.text?.startsWith('カリーナさんですか？')));
   assert.ok(c.nodes.emi_drops_in.some(step => step.text?.startsWith('You must be Carina.')));
   assert.ok(strings(c.nodes.ending).includes("Okay, I'm going home. Um... Carina?"));
   for (const node of ['lunch_end', 'end_ticket', 'desk_look', 'inout_board']) {
@@ -52,10 +52,10 @@ test('public day 1–5 scene text contains no Eric identity when Carina plays', 
 test('newly personalized lines have Carina keys and retain their original NPC speakers', async () => {
   const { carina } = await voiceLines();
   const expected = {
-    'ln-yzzqmx-carina': 'mio', 'ln-2o5x1j-carina': 'kenji',
+    'ln-yzzqmx-carina': 'mio', 'oh-71y3vl-carina': 'kenji',
     'ln-754za5-carina': 'emi', 'ln-bv1y2f-carina': 'mio',
-    'ln-r98ztf-carina': 'kenji', 'ln-1i72sjc-carina': 'kenji',
-    'oh-18g7z40-carina': 'mori', 'ln-p60qe1-carina': 'kenji',
+    'oh-1hosskg-carina': 'kenji', 'oh-ydb8oh-carina': 'kenji',
+    'oh-18g7z40-carina': 'mori', 'ln-1h1rd59-carina': 'kenji',
   };
   for (const [key, speaker] of Object.entries(expected)) {
     const entry = carina.find(line => line.key === key);

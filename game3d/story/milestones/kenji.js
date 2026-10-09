@@ -6,28 +6,33 @@ export const scenes = [
 ];
 export const nodes = {
   ...offer('ms_kenji_opening', "step_kenji >= 2 && !ms2_kenji", [
-    { say: 'kenji', emo: 'hesitant', text: 'Can you listen to the start? I check it for Wednesday.' },
+    { say: 'kenji', emo: 'hesitant', overheard: true, text: '{mc.name_jp}さん、ちょっと聞いてもらえますか。' },
+    { say: 'kenji', emo: 'hesitant', text: 'Wednesday... song. Listen, please?' },
   ], 'Listen for the rest of lunch.', [{ set: 'ms_kenji_daytime' }, { go: 'ms_kenji_try' }]),
   ...offer('ms_kenji_opening_evening', 'step_kenji >= 2 && !ms2_kenji', [
-    { say: 'kenji', emo: 'hesitant', text: 'I start too high here. Can you listen?'  },
+    { say: 'kenji', emo: 'hesitant', text: 'Too high... me.' },
+    { say: 'kenji', emo: 'hesitant', overheard: true, text: '聞いてもらえますか。' },
   ], 'Listen to Kenji try the opening.', [{ unset: 'ms_kenji_daytime' }, { go: 'ms_kenji_try' }]),
   ms_kenji_try: [
     { do: 'milestone', who: 'kenji', state: 'wrongKey' },
-    { say: 'kenji', emo: 'sheepish', text: 'I start too high again. Wait, I try lower.' },
+    { say: 'kenji', emo: 'sheepish', overheard: true, text: 'あ、また高い…' },
+    { say: 'kenji', emo: 'sheepish', text: 'Again. Lower.' },
     { do: 'milestone', who: 'kenji', state: 'rightKey' },
     { say: 'eric', emo: 'warm', text: 'That sounded easier.' },
-    { say: 'kenji', emo: 'warm', text: 'Yes. I can breathe now.' },
+    { say: 'kenji', emo: 'warm', overheard: true, text: 'はい。楽になりました。' },
+    { say: 'kenji', emo: 'warm', text: 'OK now.' },
     ...finish('kenji', 2, 'Listened while he found the opening key.', 'ms_kenji_daytime'),
   ],
   ...offer('ms_kenji_queue', 'bondready_kenji == 3 && !ms3_kenji', [
     { do: 'milestone', who: 'kenji', state: 'queue' },
     { say: 'member', overheard: true, emo: 'polite', text: '私の曲、まだ入っていますか。' },
-    { say: 'kenji', emo: 'puzzled', text: 'Where is her song? Can you see it?' },
+    { say: 'kenji', emo: 'puzzled', overheard: true, text: 'あれ？あの人の曲…' },
+    { say: 'kenji', emo: 'puzzled', text: 'Her song... where?' },
   ], 'Look at the queue with Kenji.', [
     { choice: [{ text: 'I can’t see their song in there.', go: 'ms_kenji_missing' }, { text: 'Want a hand putting the queue back?', go: 'ms_kenji_restore' }] },
   ]),
-  ms_kenji_missing: [{ say: 'kenji', emo: 'sheepish', text: 'Ah. These are all mine. I kept adding.' }, { go: 'ms_kenji_delete' }],
-  ms_kenji_restore: [{ say: 'kenji', emo: 'sheepish', text: 'Yes. Wait, I remove mine first.' }, { go: 'ms_kenji_delete' }],
+  ms_kenji_missing: [{ say: 'kenji', emo: 'sheepish', text: 'Ah... all, mine.' }, { say: 'kenji', emo: 'sheepish', overheard: true, text: '入れすぎました。{sumimasen}。' }, { go: 'ms_kenji_delete' }],
+  ms_kenji_restore: [{ say: 'kenji', emo: 'sheepish', overheard: true, text: 'はい！僕のを先に消します。' }, { say: 'kenji', emo: 'sheepish', text: 'Mine... delete.' }, { go: 'ms_kenji_delete' }],
   ms_kenji_delete: [
     { do: 'milestone', who: 'kenji', state: 'deleteExtras' },
     { say: 'kenji', overheard: true, emo: 'polite', text: 'すみません。もう一度、選んでもらえますか。' },

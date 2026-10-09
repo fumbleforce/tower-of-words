@@ -13,7 +13,7 @@ The afternoon's small social move: buy a drink at the B2 vending machine and giv
 3. Giving:
    - Mio and a black coffee: "Oh, black. Nice, thank you." She drinks half without looking away from her screen. Anything else is "a bit sweet for me".
    - Mori and corn soup: ちょうど飲みたかった, and later a cup of tea turns up next to Eric's keyboard. Anything else he puts on his desk, square to the edge, and leaves.
-   - Kenji and melon soda: マジで？神！ "Now I owe you, I fix anything for you. Well... I try." Anything else he doesn't open.
+   - Kenji and melon soda: えっ、いいんですか？, a thank-you and a bow, then 今度、何か手伝います and "I help. ...I try." Anything else he doesn't open.
 4. A second drink for the same person: "They've already had one from you." It stays in the Bag.
 
 ## Choices and flags

@@ -4,7 +4,8 @@ export default {
   nodes: {
     conversation_kenji: [
       { if: "place == 'office' && period_morning", then: [
-        { say: 'kenji', emo: 'apologetic', text: 'Sorry, work first. Later, okay?' },
+        { say: 'kenji', emo: 'apologetic', overheard: true, text: '{sumimasen}、今、仕事中で…あとでいいですか？' },
+        { do: 'bow', who: 'kenji', depth: 'small' },
         { end: true },
       ] },
       { do: 'cam', on: 'kenji', zoom: 1.35 },
@@ -17,7 +18,8 @@ export default {
     ],
     conversation_kenji_arcade: [
       { say: 'eric', emo: 'curious', text: 'Where do you go after work?' },
-      { say: 'kenji', emo: 'bright', text: 'Game centre. Crane game is... expensive for me.' },
+      { say: 'kenji', emo: 'bright', overheard: true, text: 'ゲームセンターです。', clear: [{ ja: 'ゲームセンター', ro: 'gēmu sentā', en: 'game centre' }] },
+      { say: 'kenji', emo: 'sheepish', text: 'Crane game... money, gone.' },
       { say: 'eric', emo: 'curious', text: 'Is that near the shops?' },
       { say: 'kenji', emo: 'bright', text: 'Yes! Shopping street. {ikitai}? Is “want go”.' },
       { set: 'kenji_arcade_talked' },

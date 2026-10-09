@@ -21,12 +21,14 @@ export default withStationGarden({
   nodes: {
     d2_arrive: [{ do: 'partySetup' }, ...direction('office_lane', 'office_lane', 'izakaya', 'plaza_lane')],
     d2_meet_kenji: [
-      { say: 'kenji', emo: 'bright', text: '{mc.name}! This way. Mori-san is there.' },
+      { say: 'kenji', emo: 'bright', text: 'あ、{mc.name_jp}さん！こちらです。', overheard: true },
+      { do: 'gesture', who: 'kenji', kind: 'point', to: 'izakaya' },
+      { say: 'kenji', emo: 'bright', text: 'Mori-san... inside.' },
       { set: 'd2_met_kenji' },
       { do: 'goal', text: 'Join the department inside the izakaya.', at: 'izakaya' },
       { do: 'save' },
     ],
-    d2_kenji_wait: [{ say: 'kenji', emo: 'bright', text: 'Mori-san has table. Come in!' }],
+    d2_kenji_wait: [{ say: 'kenji', voice: 'kenji-douzo', emo: 'polite', text: 'どうぞ、どうぞ。', overheard: true }, { say: 'kenji', emo: 'bright', text: 'Mori-san... table.' }],
     d2_izakaya: [{ if: 'd2_shift_done', then: [{ set: 'd2_met_kenji' }, { do: 'trip', to: 'izakaya' }], else: shut }],
     d2_to_forecourt: [{ do: 'trip', to: 'forecourt' }],
     d2_to_lane: [{ do: 'trip', to: 'east_lane' }],

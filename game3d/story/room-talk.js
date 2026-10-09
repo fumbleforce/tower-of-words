@@ -3,11 +3,12 @@ export const sofaNodes = {
   room_kenji: [
     { do: 'roomSofa', state: 'frame' },
     { if: '!room_tv_hello', then: [
-      { say: 'kenji', emo: 'bright', text: '{mc.name}! Sit, sit. This is replay. I know winner.' },
+      { say: 'kenji', emo: 'bright', text: 'あ、{mc.name_jp}さん！どうぞ、座ってください。', overheard: true },
+      { say: 'kenji', emo: 'bright', text: 'Replay. I know... winner.' },
       { say: 'eric', emo: 'dry', text: 'Don’t tell me, then.' },
       { say: 'kenji', emo: 'sheepish', text: 'Okay. I am quiet.' },
       { set: 'room_tv_hello' },
-    ], else: [{ say: 'kenji', emo: 'warm', text: 'Ah, {mc.name}. TV again. My room is... small.' }] },
+    ], else: [{ say: 'kenji', emo: 'warm', text: 'Ah, {mc.name}-san. TV... again. My room, small.' }] },
     { choice: [
       { text: '“You watch even when you know the result?”', go: 'room_replay' },
       { text: '“How’s work going?”', go: 'room_work' },
@@ -18,7 +19,8 @@ export const sofaNodes = {
     { if: 'room_replay_seen', then: [
       { say: 'kenji', emo: 'sheepish', text: 'Same match. Still good!' },
     ], else: [
-      { say: 'kenji', emo: 'bright', text: 'Yes! Last point is very good. Look, look.' },
+      { say: 'kenji', emo: 'bright', text: '最後、すごいです。見てください。', overheard: true },
+      { say: 'kenji', emo: 'bright', text: 'Last point... very good.' },
       { do: 'roomSofa', state: 'watch' },
       { say: 'eric', emo: 'dry', text: 'You nearly told me again.' },
       { say: 'kenji', emo: 'sheepish', text: 'Ah. Sorry!' },
