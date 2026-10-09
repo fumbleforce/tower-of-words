@@ -82,7 +82,7 @@ About 250 to 450 words should usually be enough for a major recurring character.
 6. Include a relevant physical limitation or condition when it belongs to this person. Nobody needs a diagnosis to make a brief complete.
 7. Keep relationships brief and relevant to the subject. Put comparisons across the cast and proposed encounters in separate design notes.
 
-These points guide the draft. They are not headings to fill mechanically. Write connected paragraphs with varied sentence openings. A list of observed habits needs the life behind it: where the person came from, what occupies them now and what they hope will change. This follows Jørgen's feedback on the third bio round, 9 October.
+These points guide the draft. They are not headings to fill mechanically. Write connected paragraphs and allow enough space to explain what happened. Repeating a name or pronoun is fine when it reads naturally. Vary the paragraph structure without forcing an unusual subject into each sentence. Follow the [plain-writing rules](../GUIDE.md#plain-writing) when revising. A list of observed habits needs the life behind it: where the person came from, what occupies them now and what they hope will change. This follows Jørgen's feedback on the third bio round, 9 October.
 
 A brief does not need a tragic past. It does not need a secret. It does need enough detail to help a writer decide what the character would actually do.
 
