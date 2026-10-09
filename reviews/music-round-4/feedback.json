@@ -24,6 +24,6 @@
   }
  },
  "comment": "my comments apply to most of them, you must very the prompts more. dont give me so many at once, max 5. These are all too similar",
- "read": false,
+ "read": true,
  "history": []
 }
