@@ -2714,6 +2714,7 @@
   "art/refs/diorama-trial-20261007/reference-2.png": {"size": 2811858, "sha256": "af18111f919e8b017bf80fef0684161e98d7c427dd34d3476e4e5680a4bc9364", "type": "image/png"},
   "art/refs/diorama-trial-20261007/reference-3.png": {"size": 3210562, "sha256": "336cddd2753026f5b81b64466c8dbb21db1baa44d453cb6fd8660e69d1d55b73", "type": "image/png"},
   "art/refs/diorama-trial-20261007/reference-4-garden.png": {"size": 3210562, "sha256": "336cddd2753026f5b81b64466c8dbb21db1baa44d453cb6fd8660e69d1d55b73", "type": "image/png"},
+  "art/refs/grounds/jorgen-blob-beds-20261009.png": {"size": 1203645, "sha256": "ee6b787ebfe9adbeebafdc197f2041283e679fc63c0229482e5a972516639f0f", "type": "image/png"},
   "art/refs/grounds/jorgen-garden-hedges-20261009.png": {"size": 1860727, "sha256": "e2ec20b1751e063eec78baabd21015335e47cca5835fddc823f6a89b3f3bf082", "type": "image/png"},
   "art/refs/grounds/jorgen-garden-steps-20261009.png": {"size": 1305716, "sha256": "bbc48c66096503518bb5d401d2b31055f6f731bc63bd9d6dd7d091cfee502b66", "type": "image/png"},
   "art/refs/monorail-bay-ref.webp": {"size": 433430, "sha256": "7cf959ba498f82795a3f83542437f9d9ee69d09d8d205bc4f4ba8bfc362f7c06", "type": "image/webp"},
