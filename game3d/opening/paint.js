@@ -110,9 +110,20 @@ export function faded(name, from = 0.62) {
   return c;
 }
 // the portrait grown by r pixels (of the image) in every direction, filled with a colour: a sticker outline
+// r is rounded to half a pixel and the cache keeps the most recent few dozen, so a portrait that grows every frame
+// (a slow push in) doesn't leave a new canvas behind each frame
+const OUTLINES_KEPT = 48;
 export function outline(name, color, r) {
+  r = Math.max(0.5, Math.round(r * 2) / 2);
   const key = `o|${name}|${color}|${r}`;
-  if (derived.has(key)) return derived.get(key);
+  if (derived.has(key)) {
+    const c = derived.get(key);
+    derived.delete(key); // most recent last
+    derived.set(key, c);
+    return c;
+  }
+  const outlines = [...derived.keys()].filter((k) => k.startsWith('o|'));
+  if (outlines.length >= OUTLINES_KEPT) derived.delete(outlines[0]);
   const im = IMG[name];
   const p = Math.ceil(r) + 2;
   const c = canvasOf(im.width + 2 * p, im.height + 2 * p),

@@ -117,8 +117,8 @@ export const VERSE = [
     },
     draw() {
     },
-    flare: () => 0.7,
-    exposure: 0.8,
+    flare: () => 0.5,
+    exposure: 0.72,
   },
   {
     // Mio, a window along, on her phone; she looks up on the beat.
