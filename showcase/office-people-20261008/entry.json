@@ -2,12 +2,12 @@
   "title": "Approved office people at the station and in the lift",
   "date": "2026-10-08",
   "by": "codex",
-  "caption": "The two stationary station workers, three commuters and lift Sales pair use the approved office models. Native queue gestures and the carried parcel follow their skeletons. Other background categories are the next part of this work.",
-  "preview": "neutral-native-390-ride-2",
+  "caption": "The station workers, commuters and lift Sales pair use the approved office models. The parcel carrier holds a smaller taped carton on his left hand and forearm, with his right hand free.",
+  "preview": "raised-parcel-phone-through",
   "sections": [
     {
       "title": "Original procedural workers",
-      "caption": "Before replacement, held station introduction.",
+      "caption": "Before replacement, held station introduction. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "baseline-1366-gate-0",
@@ -48,7 +48,7 @@
     },
     {
       "title": "First office-body integration",
-      "caption": "Before the native head/spine adapter and parcel correction.",
+      "caption": "Before the native head/spine adapter and parcel correction. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "candidate-1-1366-gate-0",
@@ -89,7 +89,7 @@
     },
     {
       "title": "First detail cameras",
-      "caption": "Phone targets are cropped; these captures are retained as failed framing attempts. Lift states are frozen diagnostic fixtures.",
+      "caption": "Phone targets are cropped; these captures are retained as failed framing attempts. Lift states are frozen diagnostic fixtures. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "probe-2-1366-lift-inside",
@@ -155,7 +155,7 @@
     },
     {
       "title": "Actual station and lift route",
-      "caption": "Both native viewports: all seven approved roles, queue, ticket tap, gate passage and completed lift ride. Before the parcel grip correction.",
+      "caption": "Both native viewports: all seven approved roles, queue, ticket tap, gate passage and completed lift ride. Before the parcel grip correction. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "route-1-1366-arrived-office",
@@ -281,7 +281,7 @@
     },
     {
       "title": "Phone closeups: first framing",
-      "caption": "Diagnostic held cameras. Parcel penetration and stationary overlap exposed; lift states are frozen fixtures.",
+      "caption": "Diagnostic held cameras. Parcel penetration and stationary overlap exposed; lift states are frozen fixtures. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "probe-3-390-lift-inside-fixture-detail",
@@ -312,7 +312,7 @@
     },
     {
       "title": "Phone oblique closeups",
-      "caption": "Parcel penetration confirmed. Stationary view hits a wall; retained failed framing. Lift states are frozen fixtures.",
+      "caption": "Parcel penetration confirmed. Stationary view hits a wall; retained failed framing. Lift states are frozen fixtures. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "probe-4-390-lift-inside-fixture-detail",
@@ -359,7 +359,7 @@
     },
     {
       "title": "Corrected parcel contact",
-      "caption": "The box stays level and meets the native hand at its rear rim. Oblique diagnostic camera. The unrelated stationary view is still obstructed; lift states are frozen fixtures.",
+      "caption": "The box stays level and meets the native hand at its rear rim. Oblique diagnostic camera. The unrelated stationary view is still obstructed; lift states are frozen fixtures. This earlier parcel version was rejected after the user reported its size and body intersection. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "parcel-1-390-lift-inside-fixture-detail",
@@ -390,7 +390,7 @@
     },
     {
       "title": "Corrected parcel in actual motion",
-      "caption": "Diagnostic camera tracks the parcel carrier through the ordinary automated station route. Doorway and tap views are partly occluded; queue and passage show contact clearly. Later lift views use the native camera.",
+      "caption": "Diagnostic camera tracks the parcel carrier through the ordinary automated station route. Doorway and tap views are partly occluded; queue and passage show contact clearly. Later lift views use the native camera. This earlier parcel version was rejected after the user reported its size and body intersection. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "parcel-motion-1-390-arrived-office",
@@ -466,7 +466,7 @@
     },
     {
       "title": "Restart verification on preserved source",
-      "caption": "Phone 390 × 844. The tracked checker followed the station queue and completed the lift ride on the preserved implementation before rebasing.",
+      "caption": "Phone 390 × 844. The tracked checker followed the station queue and completed the lift ride on the preserved implementation before rebasing. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "resume-preserved-390-gate-native",
@@ -554,7 +554,7 @@
     },
     {
       "title": "Native route before queue-neutral correction",
-      "caption": "Phone 390 × 844 on the rebased implementation. The check verified the selected models and finite poses for all seven roles. Commuters passed through the gate, and the player completed the lift ride to B2. A later source review found that queued commuters kept their shoulders raised after the gate opened. These captures predate that correction.",
+      "caption": "Phone 390 × 844 on the rebased implementation. The check verified the selected models and finite poses for all seven roles. Commuters passed through the gate, and the player completed the lift ride to B2. A later source review found that queued commuters kept their shoulders raised after the gate opened. These captures predate that correction. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "resume-native-390-gate-native",
@@ -631,7 +631,7 @@
     },
     {
       "title": "Corrected station and lift route",
-      "caption": "Phone 390 × 844 after correcting the queue shoulders. The checker verified all seven selected bodies and finite poses, the commuters passed through the gate, and the player completed the lift ride to B2.",
+      "caption": "Phone 390 × 844 after correcting the queue shoulders. The checker verified all seven selected bodies and finite poses, the commuters passed through the gate, and the player completed the lift ride to B2. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "neutral-native-390-gate-native",
@@ -697,7 +697,7 @@
     },
     {
       "title": "Corrected queue and parcel close-up",
-      "caption": "Actual phone route with a diagnostic camera following the carrier in the station. The entrance and tapping views are partly obscured. The queue and passage views show the hand and level parcel. The lift uses the native camera.",
+      "caption": "Actual phone route with a diagnostic camera following the carrier in the station. The entrance and tapping views are partly obscured. The queue and passage views show the hand and level parcel. The lift uses the native camera. This earlier parcel version was rejected after the user reported its size and body intersection. The parcel hold in these earlier captures is superseded.",
       "images": [
         {
           "id": "neutral-parcel-390-gate-native",
@@ -727,7 +727,7 @@
         {
           "id": "neutral-parcel-390-gate-through",
           "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-gate-through.png",
-          "caption": "gate through. Diagnostic carrier camera."
+          "caption": "Before, rejected by Jørgen: \"what, why is he clipping into this massive ice cream box?\" The prior visual acceptance is superseded."
         },
         {
           "id": "neutral-parcel-390-ride-1",
@@ -792,6 +792,432 @@
           "caption": "Phone 390 × 844, final day screen."
         }
       ]
+    },
+    {
+      "title": "Superseded: parcel correction: phone route",
+      "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. All route originals are retained. Measured body clearance and palm support passed. Walking, queue and through views passed visual review. These captures do not establish reader contact.",
+      "images": [
+        {
+          "id": "parcel-correction-390-gate-native",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-gate-native.png",
+          "caption": "Station lobby. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-gate-in",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-gate-in.png",
+          "caption": "Entering the station lobby. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-gate-toqueue",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-gate-toqueue.png",
+          "caption": "Approaching the queue. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-gate-queue",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-gate-queue.png",
+          "caption": "Waiting at the gate. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-gate-tap",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-gate-tap.png",
+          "caption": "Reaching toward the reader. Phone view. The original camera hides the supporting hand. The close views below show the same route phase."
+        },
+        {
+          "id": "parcel-correction-phone-through",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-gate-through.png",
+          "caption": "Walking through the gate. Phone view. The corrected carton uses the same carrier-relative camera as the rejected frame. The route was captured at a different stride and position."
+        },
+        {
+          "id": "parcel-correction-390-ride-B2",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-ride-B2.png",
+          "caption": "In the lift at basement 2. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-ride-B1",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-ride-B1.png",
+          "caption": "In the lift at basement 1. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-ride-1",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-ride-1.png",
+          "caption": "In the lift at floor 1. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-ride-2",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-ride-2.png",
+          "caption": "In the lift at floor 2. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-ride-3",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-ride-3.png",
+          "caption": "In the lift at floor 3. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-ride-4",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-ride-4.png",
+          "caption": "In the lift at floor 4. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-ride-5",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-ride-5.png",
+          "caption": "In the lift at floor 5. Phone view."
+        },
+        {
+          "id": "parcel-correction-390-arrived-office",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-phone-1/390-arrived-office.png",
+          "caption": "Arriving at the office. Phone view."
+        }
+      ]
+    },
+    {
+      "title": "Superseded: parcel correction: desktop route",
+      "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. All route originals are retained. Measured body clearance and palm support passed. Walking, queue and through views passed visual review. These captures do not establish reader contact.",
+      "images": [
+        {
+          "id": "parcel-correction-1366-gate-native",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-gate-native.png",
+          "caption": "Station lobby. Desktop view."
+        },
+        {
+          "id": "parcel-correction-1366-gate-in",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-gate-in.png",
+          "caption": "Entering the station lobby. Desktop view. Glass hides the carrier. The phone route provides the readable arrival view."
+        },
+        {
+          "id": "parcel-correction-1366-gate-toqueue",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-gate-toqueue.png",
+          "caption": "Approaching the queue. Desktop view."
+        },
+        {
+          "id": "parcel-correction-1366-gate-queue",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-gate-queue.png",
+          "caption": "Waiting at the gate. Desktop view."
+        },
+        {
+          "id": "parcel-correction-1366-gate-tap",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-gate-tap.png",
+          "caption": "Reaching toward the reader. Desktop view. The original camera hides the supporting hand. The close views below show the same route phase."
+        },
+        {
+          "id": "parcel-correction-1366-gate-through",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-gate-through.png",
+          "caption": "Walking through the gate. Desktop view. The corrected carton uses the same carrier-relative camera as the rejected frame. The route was captured at a different stride and position."
+        },
+        {
+          "id": "parcel-correction-1366-ride-B2",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-ride-B2.png",
+          "caption": "In the lift at basement 2. Desktop view."
+        },
+        {
+          "id": "parcel-correction-1366-ride-B1",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-ride-B1.png",
+          "caption": "In the lift at basement 1. Desktop view."
+        },
+        {
+          "id": "parcel-correction-1366-ride-1",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-ride-1.png",
+          "caption": "In the lift at floor 1. Desktop view."
+        },
+        {
+          "id": "parcel-correction-1366-ride-2",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-ride-2.png",
+          "caption": "In the lift at floor 2. Desktop view."
+        },
+        {
+          "id": "parcel-correction-1366-ride-3",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-ride-3.png",
+          "caption": "In the lift at floor 3. Desktop view."
+        },
+        {
+          "id": "parcel-correction-1366-ride-4",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-ride-4.png",
+          "caption": "In the lift at floor 4. Desktop view."
+        },
+        {
+          "id": "parcel-correction-1366-ride-5",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-ride-5.png",
+          "caption": "In the lift at floor 5. Desktop view."
+        },
+        {
+          "id": "parcel-correction-1366-arrived-office",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/native-desktop-1/1366-arrived-office.png",
+          "caption": "Arriving at the office. Desktop view."
+        }
+      ]
+    },
+    {
+      "title": "Superseded: first supplemental tap views",
+      "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. These four camera attempts did not expose the supporting hand clearly enough. They remain here as rejected framing attempts. The commuter was frozen during the actual tap phase.",
+      "images": [
+        {
+          "id": "parcel-tap-first-original",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/tap-phone-1/390-tap-original.png",
+          "caption": "Phone, original view. Support remains obscured."
+        },
+        {
+          "id": "parcel-tap-first-left",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/tap-phone-1/390-tap-left.png",
+          "caption": "Phone, view from the carrier's left. Support remains obscured."
+        },
+        {
+          "id": "parcel-tap-first-left-rear",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/tap-phone-1/390-tap-left-rear.png",
+          "caption": "Phone, view from the carrier's left and behind. Support remains obscured."
+        },
+        {
+          "id": "parcel-tap-first-right",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/tap-phone-1/390-tap-right.png",
+          "caption": "Phone, view from the carrier's right. Support remains obscured."
+        }
+      ]
+    },
+    {
+      "title": "Superseded: close tap views",
+      "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. The dialogue finished through normal UI before capture. Each viewport froze an actual tap pose. Only the camera moved between its two views. The left-side views show the hand beneath the carton and a bent forearm, with no visible torso or leg penetration. Reader contact remains unverified.",
+      "images": [
+        {
+          "id": "parcel-correction-390-tap-close-left-front",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/tap-close-2/390-tap-close-left-front.png",
+          "caption": "Phone, close view from the carrier's left and front. The gate rail partly obscures the supporting hand."
+        },
+        {
+          "id": "parcel-correction-390-tap-close-left",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/tap-close-2/390-tap-close-left.png",
+          "caption": "Phone, close view from the carrier's left. The left hand and forearm support the carton. The legs and torso remain clear."
+        },
+        {
+          "id": "parcel-correction-1366-tap-close-left-front",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/tap-close-2/1366-tap-close-left-front.png",
+          "caption": "Desktop, close view from the carrier's left and front. The gate rail partly obscures the supporting hand."
+        },
+        {
+          "id": "parcel-correction-1366-tap-close-left",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/tap-close-2/1366-tap-close-left.png",
+          "caption": "Desktop, close view from the carrier's left. The left hand and forearm support the carton. The legs and torso remain clear."
+        }
+      ]
+    },
+    {
+      "title": "Superseded: parcel correction: desktop day check",
+      "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. The strict day check passed without page errors, overlaps, spins or long gait failures. Complete logs retain performance warnings and the earlier deferred desktop attempt.",
+      "images": [
+        {
+          "id": "parcel-correction-strict-1366",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/strict-desktop-2-passed/1366x860.png",
+          "caption": "Desktop: the completed day."
+        }
+      ]
+    },
+    {
+      "title": "Superseded: parcel correction: phone day check",
+      "caption": "The lower hold in this attempt let forearm faces cross the carton. The raised hold below replaces it. The strict day check passed without page errors, overlaps, spins or long gait failures. Three short gait episodes remain in the phone report. Complete logs retain performance warnings and the earlier deferred desktop attempt.",
+      "images": [
+        {
+          "id": "parcel-correction-strict-390",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/strict-phone-1-passed/390x844.png",
+          "caption": "Phone: the completed day."
+        }
+      ]
+    },
+    {
+      "title": "Raised parcel hold: phone route",
+      "caption": "The higher hold keeps the forearm beneath the carton. Walking, waiting and passing through the gate show the corrected carry. Lift and office frames retain the rest of the route for context.",
+      "images": [
+        {
+          "id": "raised-parcel-390-gate-native",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-gate-native.png",
+          "caption": "Station lobby. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-gate-in",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-gate-in.png",
+          "caption": "Entering the station lobby. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-gate-toqueue",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-gate-toqueue.png",
+          "caption": "Approaching the queue. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-gate-queue",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-gate-queue.png",
+          "caption": "Waiting at the gate. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-gate-tap",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-gate-tap.png",
+          "caption": "Reaching toward the reader. Phone view. The gate hides the supporting hand. Close views below show the hold during the tap."
+        },
+        {
+          "id": "raised-parcel-phone-through",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-gate-through.png",
+          "caption": "Walking through the gate. Phone view. The same camera framing as the rejected picture shows the smaller carton supported clear of the carrier's body. The stride and position differ between captures."
+        },
+        {
+          "id": "raised-parcel-390-ride-B2",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-ride-B2.png",
+          "caption": "In the lift at basement 2. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-ride-B1",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-ride-B1.png",
+          "caption": "In the lift at basement 1. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-ride-1",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-ride-1.png",
+          "caption": "In the lift at floor 1. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-ride-2",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-ride-2.png",
+          "caption": "In the lift at floor 2. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-ride-3",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-ride-3.png",
+          "caption": "In the lift at floor 3. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-ride-4",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-ride-4.png",
+          "caption": "In the lift at floor 4. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-ride-5",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-ride-5.png",
+          "caption": "In the lift at floor 5. Phone view."
+        },
+        {
+          "id": "raised-parcel-390-arrived-office",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-phone-1/390-arrived-office.png",
+          "caption": "Arriving at the office. Phone view."
+        }
+      ]
+    },
+    {
+      "title": "Raised parcel hold: desktop route",
+      "caption": "The higher hold keeps the forearm beneath the carton. Walking, waiting and passing through the gate show the corrected carry. Lift and office frames retain the rest of the route for context.",
+      "images": [
+        {
+          "id": "raised-parcel-1366-gate-native",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-gate-native.png",
+          "caption": "Station lobby. Desktop view."
+        },
+        {
+          "id": "raised-parcel-1366-gate-in",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-gate-in.png",
+          "caption": "Entering the station lobby. Desktop view. Glass partly hides the carrier."
+        },
+        {
+          "id": "raised-parcel-1366-gate-toqueue",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-gate-toqueue.png",
+          "caption": "Approaching the queue. Desktop view. The sign hides the carton. The phone view shows this part of the approach."
+        },
+        {
+          "id": "raised-parcel-1366-gate-queue",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-gate-queue.png",
+          "caption": "Waiting at the gate. Desktop view."
+        },
+        {
+          "id": "raised-parcel-1366-gate-tap",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-gate-tap.png",
+          "caption": "Reaching toward the reader. Desktop view. The gate hides the supporting hand. Close views below show the hold during the tap."
+        },
+        {
+          "id": "raised-parcel-1366-gate-through",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-gate-through.png",
+          "caption": "Walking through the gate. Desktop view. The same camera framing as the rejected picture shows the smaller carton supported clear of the carrier's body. The stride and position differ between captures."
+        },
+        {
+          "id": "raised-parcel-1366-ride-B2",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-ride-B2.png",
+          "caption": "In the lift at basement 2. Desktop view."
+        },
+        {
+          "id": "raised-parcel-1366-ride-B1",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-ride-B1.png",
+          "caption": "In the lift at basement 1. Desktop view."
+        },
+        {
+          "id": "raised-parcel-1366-ride-1",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-ride-1.png",
+          "caption": "In the lift at floor 1. Desktop view."
+        },
+        {
+          "id": "raised-parcel-1366-ride-2",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-ride-2.png",
+          "caption": "In the lift at floor 2. Desktop view."
+        },
+        {
+          "id": "raised-parcel-1366-ride-3",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-ride-3.png",
+          "caption": "In the lift at floor 3. Desktop view."
+        },
+        {
+          "id": "raised-parcel-1366-ride-4",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-ride-4.png",
+          "caption": "In the lift at floor 4. Desktop view."
+        },
+        {
+          "id": "raised-parcel-1366-ride-5",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-ride-5.png",
+          "caption": "In the lift at floor 5. Desktop view."
+        },
+        {
+          "id": "raised-parcel-1366-arrived-office",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-native-desktop-1/1366-arrived-office.png",
+          "caption": "Arriving at the office. Desktop view."
+        }
+      ]
+    },
+    {
+      "title": "Raised parcel hold at the reader",
+      "caption": "The left hand supports the carton and the bent forearm stays underneath it. These are actual tap poses held still for two camera views. The right arm remains free, but these pictures do not establish contact with the reader. The phone menu covers the lower legs; the route pictures show them.",
+      "images": [
+        {
+          "id": "raised-parcel-390-tap-close-left-front",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-tap-phone-1/390-tap-close-left-front.png",
+          "caption": "Phone: a close view from the carrier's left and front."
+        },
+        {
+          "id": "raised-parcel-390-tap-close-left",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-tap-phone-1/390-tap-close-left.png",
+          "caption": "Phone: a close view from the carrier's left. The hand supports the carton, with the bent forearm below it."
+        },
+        {
+          "id": "raised-parcel-1366-tap-close-left-front",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-tap-desktop-1/1366-tap-close-left-front.png",
+          "caption": "Desktop: a close view from the carrier's left and front."
+        },
+        {
+          "id": "raised-parcel-1366-tap-close-left",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-tap-desktop-1/1366-tap-close-left.png",
+          "caption": "Desktop: a close view from the carrier's left. The hand supports the carton, with the bent forearm below it."
+        }
+      ]
+    },
+    {
+      "title": "Raised parcel hold: desktop day check",
+      "caption": "The strict day check passed without page errors, overlaps, spins or long gait failures. The report retains 7 short gait warnings and performance warnings.",
+      "images": [
+        {
+          "id": "raised-parcel-strict-1366",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-strict-desktop-1/1366x860.png",
+          "caption": "Desktop: the completed day."
+        }
+      ]
+    },
+    {
+      "title": "Raised parcel hold: phone day check",
+      "caption": "The strict day check passed without page errors, overlaps, spins or long gait failures. The report retains 1 short gait warning and performance warnings.",
+      "images": [
+        {
+          "id": "raised-parcel-strict-390",
+          "image": "game3d/shots/office-people-20261008/parcel-correction-20261009/raised-strict-phone-1/390x844.png",
+          "caption": "Phone: the completed day."
+        }
+      ]
     }
   ],
   "links": [
@@ -806,16 +1232,23 @@
     {
       "label": "Verification record",
       "href": "game3d/shots/office-people-20261008/resume-20261009/verification.json"
+    },
+    {
+      "label": "Parcel correction checks and retained attempts",
+      "href": "game3d/shots/office-people-20261008/parcel-correction-20261009/status.json"
     }
   ],
   "result": [
-    "neutral-native-390-ride-2",
     "neutral-parcel-390-gate-through",
-    "probe-5-390-stationary-detail"
+    "raised-parcel-phone-through",
+    "raised-parcel-390-tap-close-left",
+    "raised-parcel-1366-tap-close-left"
   ],
   "commit": [
-    "68e81b2f",
-    "8e94a4de"
+    "d78bb594",
+    "04b2d287",
+    "6903a16e",
+    "29720865"
   ],
-  "updated": "2026-10-09T12:58:04+02:00"
+  "updated": "2026-10-09T13:20:50.620825+00:00"
 }
