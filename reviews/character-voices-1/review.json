@@ -1,0 +1,79 @@
+{
+ "title": "Character voices: Mio, Kenji, Kuro and Rei",
+ "date": "2026-10-09",
+ "by": "Claude, one writing agent per character",
+ "status": "open",
+ "context": [
+  "These are voice sheets for Mio, Kenji, Kuro and Rei. Each one says how the character talks and comes with one short sample scene, and a separate agent wrote each character from the bios you approved in character-backgrounds-4.",
+  "Nothing here is in the game yet, and new story scenes are on hold until you have judged these.",
+  "Each sheet you approve becomes the reference that every future line for that character is checked against, and after that the existing game lines that don't fit get a pass."
+ ],
+ "ask": "For each character, pick the card to approve the sheet as it is, pick it and write a comment to approve it with your changes, or reject it to have it redone. The two questions on each card can be answered in its comment box.",
+ "question": "These are voice sheets for Mio, Kenji, Kuro and Rei. Each one says how the character talks and comes with one short sample scene, and a separate agent wrote each character from the bios you approved in character-backgrounds-4. Nothing here is in the game yet, and new story scenes are on hold until you have judged these. Each sheet you approve becomes the reference that every future line for that character is checked against, and after that the existing game lines that don't fit get a pass. For each character, pick the card to approve the sheet as it is, pick it and write a comment to approve it with your changes, or reject it to have it redone. The two questions on each card can be answered in its comment box.",
+ "multi": true,
+ "options": [
+  {
+   "id": "mio",
+   "label": "mio",
+   "image": "game3d/assets/portraits/mio-neutral.webp",
+   "questions": [
+    "By day 3 she admits she is making a game, without showing it to Eric. Is that too fast for someone this private?",
+    "With senior staff she gives a small nod and says あ、どうも instead of bowing. Is that the right level of politeness?"
+   ],
+   "note": "1) By day 3 she admits she is making a game, without showing it to Eric. Is that too fast for someone this private? 2) With senior staff she gives a small nod and says あ、どうも instead of bowing. Is that the right level of politeness?"
+  },
+  {
+   "id": "kenji",
+   "label": "kenji",
+   "image": "game3d/assets/portraits/kenji-neutral.webp",
+   "questions": [
+    "The sheet makes him quieter than his current lines (\"Sit, sit!\", \"Welcome food!\" and a lot of exclamation marks), and it flags \"Machine room. Chair. Cat.\" as too clipped. Do you agree, so that his existing lines get a pass?",
+    "He practises his school English on Eric. Should more of his lines be in Japanese instead, with English only for words he actually knows?"
+   ],
+   "note": "1) The sheet makes him quieter than his current lines (\"Sit, sit!\", \"Welcome food!\" and a lot of exclamation marks), and it flags \"Machine room. Chair. Cat.\" as too clipped. Do you agree, so that his existing lines get a pass? 2) He practises his school English on Eric. Should more of his lines be in Japanese instead, with English only for words he actually knows?"
+  },
+  {
+   "id": "kuro",
+   "label": "kuro",
+   "image": "game3d/assets/portraits/kuro-neutral.webp",
+   "questions": [
+    "She uses hotel front-desk English and bends it to her own use (\"Six o'clock. Two people. You and me.\"). Is that too much English for her?",
+    "She touches Eric without asking, and if he ignores her message she turns cold and fully polite the next morning. Is that the level of \"aggressively flirtatious and domineering\" you meant, or is it too much or too little?"
+   ],
+   "note": "1) She uses hotel front-desk English and bends it to her own use (\"Six o'clock. Two people. You and me.\"). Is that too much English for her? 2) She touches Eric without asking, and if he ignores her message she turns cold and fully polite the next morning. Is that the level of \"aggressively flirtatious and domineering\" you meant, or is it too much or too little?"
+  },
+  {
+   "id": "rei",
+   "label": "rei",
+   "image": "game3d/assets/portraits/rei-neutral.webp",
+   "questions": [
+    "She starts her orders with \"You can...\", so they sound polite but are still commands. Is that abrasive enough, or too soft and repetitive?",
+    "Later she gives Eric a nickname, and she admits her mistakes only to him, days afterwards and in passing. Do you want that arc, or would you rather decide it yourself?"
+   ],
+   "info": "For your information: in the current game Rei misses \"my train\", which breaks the rule that nobody commutes on the island. That line gets fixed in the pass.",
+   "note": "1) She starts her orders with \"You can...\", so they sound polite but are still commands. Is that abrasive enough, or too soft and repetitive? 2) Later she gives Eric a nickname, and she admits her mistakes only to him, days afterwards and in passing. Do you want that arc, or would you rather decide it yourself? For your information: in the current game Rei misses \"my train\", which breaks the rule that nobody commutes on the island. That line gets fixed in the pass."
+  }
+ ],
+ "links": [
+  {
+   "label": "Read all four voice sheets and sample scenes",
+   "href": "reviews/character-voices-1/index.html"
+  },
+  {
+   "label": "mio",
+   "href": "reviews/character-voices-1/index.html#mio"
+  },
+  {
+   "label": "kenji",
+   "href": "reviews/character-voices-1/index.html#kenji"
+  },
+  {
+   "label": "kuro",
+   "href": "reviews/character-voices-1/index.html#kuro"
+  },
+  {
+   "label": "rei",
+   "href": "reviews/character-voices-1/index.html#rei"
+  }
+ ]
+}
