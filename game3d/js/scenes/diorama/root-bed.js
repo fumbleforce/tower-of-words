@@ -18,7 +18,8 @@ function groundAt(p, x, z) {
 }
 
 // codeTrunk: also lay the code-built root flare (off when the Blender-built trunk brings its own roots)
-export function rootBed(p, x, z, scale, seed, { codeTrunk = true } = {}) {
+// cover: the leaf cards over the soil (none on a phone, scenes/forecourt.js)
+export function rootBed(p, x, z, scale, seed, { codeTrunk = true, cover = true } = {}) {
   const y = groundAt(p, x, z),
     radius = 0.43 * scale;
   const soil = new THREE.CylinderGeometry(radius, radius * 1.04, 0.025, 12);
@@ -28,7 +29,7 @@ export function rootBed(p, x, z, scale, seed, { codeTrunk = true } = {}) {
   ring.rotateX(-Math.PI / 2).translate(x, y + 0.027, z);
   p.geo('#80745f', ring, { cast: false, surf: 'stone' });
   if (codeTrunk) rootFlare(p, x, y, z, scale, seed);
-  groundCover(p, x, y, z, radius, scale, seed);
+  if (cover) groundCover(p, x, y, z, radius, scale, seed);
   return y;
 }
 

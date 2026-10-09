@@ -39,6 +39,7 @@ import { keyaki, sakura, cluster } from './outdoor/planting.js';
 import * as PL from './forecourt/plan.js';
 import { buildNooks } from './outdoor/nooks.js';
 import { streetPlanting } from './diorama/planting.js';
+import { phoneLighter } from '../perf/phone.js';
 import { dressStreet, finishWindows, finishOffice } from './diorama/index.js';
 
 const { STATION, DOOR_X, X0, SE, ZN, HZ, HO_X, COURT, BIKES, GARDEN, LANE, LANE_Z, STRIP_S, STRIP_N, SERVICE, TE } = PL;
@@ -130,7 +131,9 @@ export function* forecourtSteps() {
   nav.blockTagged('station_door', DOORWAY[0], DOORWAY[1], ZN + 0.2, DOORWAY[3]);
   // everything that never moves goes in one group, merged by material at the end; the trees and hedges are the street
   // style's (scenes/diorama/planting.js), which the shared builders hand each plant to
-  const planting = streetPlanting();
+  // no leaf cards over the bed soil on a phone: its high overview barely shows them (coordinator, 2026-10-09, the
+  // place budgets)
+  const planting = streetPlanting({ cover: !phoneLighter() });
   const statics = new THREE.Group();
   statics.userData.dioramaPlanting = planting.records;
   root.add(statics);

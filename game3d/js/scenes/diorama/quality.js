@@ -32,6 +32,9 @@ export function detailController(root) {
       mesh.count = Math.min(full, Math.round(full * (leaf ? leaves / 32000 : grass / 6500)));
       // the crowns and hedges under them cast the shadow; leaf cards and grass blades would draw the place again
       mesh.castShadow = false;
+      // none on a phone: its high overview barely shows them (coordinator, 2026-10-09, the place budgets)
+      mesh.visible = !phone;
+      if (phone) continue;
       if (leaf) leafCount += mesh.count;
       else if (mesh.name === 'diorama-meadow') grassCount += mesh.count;
     }

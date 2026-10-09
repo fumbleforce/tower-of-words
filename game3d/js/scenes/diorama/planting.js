@@ -19,7 +19,7 @@ function branch(p, from, to, radius, tip) {
 }
 
 // Semantic replacement happens before Parts merges bark and leaves. Returning true suppresses the old plant.
-export function streetPlanting() {
+export function streetPlanting({ cover = true } = {}) {
   const records = [];
   return {
     records,
@@ -29,7 +29,7 @@ export function streetPlanting() {
       const name = trunkName(species, seed),
         ry = seed * 2.39996;
       const modelled = !!plantGeometry(name);
-      const baseY = rootBed(p, x, z, s, seed, { codeTrunk: !modelled });
+      const baseY = rootBed(p, x, z, s, seed, { codeTrunk: !modelled, cover });
       if (modelled) {
         // the Blender-built trunk (outdoor/plant-models.js), a crown mass at the end of each main limb
         records.push({ kind: 'tree', ...plant, baseY });
