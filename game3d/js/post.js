@@ -330,7 +330,7 @@ export function makePost(renderer, place, tier = 2) {
     gbuf = new GBufferPass(scene, camera);
     composer.addPass(gbuf);
   }
-  for (const p of animePasses(place)) composer.addPass(p); // the anime trial's outlines, ?anime= (look/anime/)
+  for (const p of animePasses(place)) composer.addPass(p); // the anime look's outlines (look/anime/)
   const gtao = new GTAOPass(scene, camera, 4, 4);
   gtao.updateGtaoMaterial({
     radius: 0.55,

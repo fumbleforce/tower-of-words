@@ -1,23 +1,28 @@
-// The fountain's water for the anime trial (#383), built over the plaza's fountain (scenes/plaza/fountain.js) without
-// changing it: the trial takes its transparent water (the surfaces, curtains, foam and ripple rings) out of the
-// fountain's group and puts three meshes in their place, each one draw call with its own small shader:
+// The fountain's water in the anime look (#383), built over the plaza's fountain (scenes/plaza/fountain.js) without
+// changing it: its transparent water (the surfaces, curtains, foam and ripple rings) comes out of the fountain's
+// group and three meshes take their place, each one draw call with its own small shader:
 //   surface   the basin and both bowls: turquoise by depth (deeper toward the column), the sky at a glancing view,
 //             ripple rings running out from where the water lands, a band of foam there, a pale line along the rim
 //             and sparkles that come and go
-//   ribbons   the falling water as streams, each a ribbon turned to the camera along an arc from a bowl's lip, with
-//             streaks running down it
-//   splashes  rings spreading where each stream lands, round a patch of white water
+//   jets      the falling water: each jet one continuous tube along an arc, from just outside a bowl's lip (clear
+//             of the stone) down into the water below, with streaks running down it. Tubes look whole from any
+//             side, where camera-facing ribbons broke into pieces seen from above (Jørgen on anime-look-1: "discrete
+//             streams that clip through the fountain")
+//   splashes  rings spreading where each jet lands, round a patch of white water
 // Colours per phase of the day: look/anime/periods.js. Returns { set(look), stats } or null without a fountain.
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 // the fountain's measures (scenes/plaza/fountain.js): the rim's width, the basin's water level, the bowls
 const RIM_W = 0.42,
   WATER = 0.34;
-// each stream: [count, width, from (r, y), bend (r, y), lands (r, y), splash size, turn]
+// each jet: [count, tube radius, from (r, y), bend (r, y), lands (r, y), splash size, turn]. The lower bowl's lip is
+// at r 1.56, y 1.42 to 1.54; the upper's at r 0.82, y 2.22 to 2.31; the finial's tip at y 2.66. Each jet starts a
+// tube's radius clear of them and lands inside the water below (basin to r 3.88, lower bowl to 1.46, upper to 0.74).
 const STREAMS = [
-  [12, 0.17, [1.55, 1.53], [1.86, 1.5], [1.98, WATER], 0.34, 0],
-  [8, 0.12, [0.81, 2.31], [1.0, 2.3], [1.1, 1.5], 0.28, 0.2],
-  [5, 0.06, [0.03, 2.64], [0.16, 3.3], [0.52, 2.28], 0.16, 0.5],
+  [12, 0.055, [1.64, 1.6], [1.92, 1.58], [2.02, WATER], 0.34, 0],
+  [8, 0.04, [0.88, 2.36], [1.05, 2.35], [1.14, 1.5], 0.26, 0.2],
+  [5, 0.025, [0.0, 2.72], [0.18, 3.25], [0.5, 2.28], 0.15, 0.5],
 ];
 // each water surface: radius, height, the column's radius in it, where the falling water lands on it
 const SURFACES = (IN) => [
@@ -68,23 +73,23 @@ void main(){
   gl_FragColor = vec4(col * uLight, a);
 }`;
 
-const RIBBON_VERT = `
-attribute vec3 aT; attribute vec3 aS; attribute float aHW; varying vec3 vS;
+const JET_VERT = `
+varying vec2 vUv; varying float vF;
 void main(){
+  vUv = uv;
   vec4 w = modelMatrix * vec4(position, 1.0);
-  vec3 t = normalize(mat3(modelMatrix) * aT);
-  vec3 side = normalize(cross(t, cameraPosition - w.xyz));
-  w.xyz += side * aS.x * aHW;
-  vS = aS; gl_Position = projectionMatrix * viewMatrix * w; }`;
-const RIBBON_FRAG = `${COMMON}
-varying vec3 vS;
+  vec3 n = normalize(mat3(modelMatrix) * normal);
+  vF = 1.0 - abs(dot(n, normalize(cameraPosition - w.xyz))); // 0 facing the camera, 1 at the tube's edges
+  gl_Position = projectionMatrix * viewMatrix * w; }`;
+const JET_FRAG = `${COMMON}
+varying vec2 vUv; varying float vF;
 void main(){
-  float across = vS.x, u = vS.y;
-  float core = 1.0 - smoothstep(0.25, 1.0, abs(across));
-  float streak = wN(vec2(across * 2.5 + vS.z * 40.0, u * 4.5 - uTime * 2.6));
-  float a = core * (0.5 + 0.5 * smoothstep(0.25, 0.8, streak)) * smoothstep(0.0, 0.06, u);
-  vec3 col = mix(uShallow * 1.25, uFoam, 0.45 + 0.55 * streak);
-  gl_FragColor = vec4(col * uLight, a * 0.9);
+  float u = vUv.x; // along the jet, 0 at the lip
+  float streak = wN(vec2(vUv.y * 6.0, u * 6.0 - uTime * 2.8));
+  // whole along its length: the streaks change its brightness, never cut it
+  float a = (0.55 + 0.35 * vF) * (0.8 + 0.2 * streak) * smoothstep(0.0, 0.04, u);
+  vec3 col = mix(uShallow * 1.25, uFoam, 0.4 + 0.45 * streak + 0.15 * vF);
+  gl_FragColor = vec4(col * uLight, a);
 }`;
 
 const SPLASH_VERT = `
@@ -122,47 +127,24 @@ function arc(a, p0, p1, p2, u, out) {
   return out.set(Math.cos(a) * r, y, Math.sin(a) * r);
 }
 
-function ribbons() {
-  const pos = [],
-    tan = [],
-    s = [],
-    hw = [],
-    index = [],
-    p = new THREE.Vector3(),
-    q = new THREE.Vector3(),
-    SEG = 12;
-  let seed = 0;
-  for (const [n, w, p0, p1, p2, , turn] of STREAMS)
+function jets() {
+  const parts = [],
+    a0 = new THREE.Vector3(),
+    a2 = new THREE.Vector3();
+  for (const [n, radius, p0, p1, p2, , turn] of STREAMS)
     for (let i = 0; i < n; i++) {
-      const a = ((i + turn) / n) * Math.PI * 2,
-        first = pos.length / 3;
-      seed += 0.137;
-      for (let j = 0; j <= SEG; j++) {
-        const u = j / SEG;
-        arc(a, p0, p1, p2, u, p);
-        arc(a, p0, p1, p2, Math.min(1, u + 0.02), q);
-        if (u >= 1) arc(a, p0, p1, p2, 0.98, q).sub(p).negate().add(p);
-        q.sub(p).normalize();
-        const width = w * (1 + u * 0.6); // the stream spreads as it falls
-        for (const side of [-1, 1]) {
-          pos.push(p.x, p.y, p.z);
-          tan.push(q.x, q.y, q.z);
-          s.push(side, u, seed);
-          hw.push(width * 0.5);
-        }
-        if (j < SEG) {
-          const k = first + j * 2;
-          index.push(k, k + 1, k + 2, k + 1, k + 3, k + 2);
-        }
-      }
+      const a = ((i + turn) / n) * Math.PI * 2;
+      const curve = new THREE.QuadraticBezierCurve3(
+        arc(a, p0, p1, p2, 0, a0.clone()),
+        new THREE.Vector3(Math.cos(a) * p1[0], p1[1], Math.sin(a) * p1[0]),
+        arc(a, p0, p1, p2, 1, a2.clone()),
+      );
+      const g = new THREE.TubeGeometry(curve, 14, radius, 6, false);
+      g.deleteAttribute('tangent');
+      parts.push(g);
     }
-  // aT: the arc's direction; aS: (side, along, the stream's seed); aHW: half the width
-  const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
-  g.setAttribute('aT', new THREE.Float32BufferAttribute(tan, 3));
-  g.setAttribute('aS', new THREE.Float32BufferAttribute(s, 3));
-  g.setAttribute('aHW', new THREE.Float32BufferAttribute(hw, 1));
-  g.setIndex(index);
+  const g = mergeGeometries(parts);
+  for (const p of parts) p.dispose();
   return g;
 }
 
@@ -243,10 +225,7 @@ export function animeFountain(scene, basin) {
     uFoam: { value: new THREE.Color() },
   };
   const surface = new THREE.Mesh(surfaces(basin - RIM_W), material(SURFACE_VERT, SURFACE_FRAG, U));
-  const streams = new THREE.Mesh(
-    ribbons(),
-    material(RIBBON_VERT, RIBBON_FRAG, U, { side: THREE.DoubleSide, blending: THREE.NormalBlending }),
-  );
+  const streams = new THREE.Mesh(jets(), material(JET_VERT, JET_FRAG, U));
   const splash = new THREE.Mesh(splashes(), material(SPLASH_VERT, SPLASH_FRAG, U));
   surface.renderOrder = 1;
   splash.renderOrder = 2;
@@ -255,7 +234,6 @@ export function animeFountain(scene, basin) {
   for (const m of [surface, streams, splash]) {
     m.name = 'anime:water';
     m.userData.noLook = m.userData.noInk = m.userData.noAO = true;
-    m.frustumCulled = m !== streams; // the ribbons widen in the shader, past their box
     group.add(m);
   }
   surface.onBeforeRender = () => (U.uTime.value = (performance.now() - t0) / 1000);

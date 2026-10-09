@@ -5,7 +5,7 @@
 // triangles (whole frames, every pass, the median of five) and the frame's time on this machine (from the frame's
 // start until the GPU has finished it, forced with a one-pixel read, the median of 40 frames).
 //   node game3d/tools/anime-shots.mjs
-//   VARIANTS="0;toon;outline;dapple;paint;water;crowns;1" (the ?anime= values) · PERIODS=morning,evening
+//   VARIANTS="0;toon;outline;paint;water;1" (the ?anime= values) · PERIODS=morning,evening
 //   SIZES=phone,desktop · OUT=<folder under game3d/shots/anime/> · URL=<another server's game3d>
 import fs from 'node:fs';
 import path from 'node:path';
@@ -21,7 +21,7 @@ if (!process.env.URL) {
   server = await serveFolder(root);
 }
 const base = process.env.URL || `${server.url}/game3d`;
-const variants = (process.env.VARIANTS || '0;toon;outline;dapple;paint;water;crowns;1').split(';');
+const variants = (process.env.VARIANTS || '0;toon;outline;paint;water;1').split(';');
 const periods = (process.env.PERIODS || 'morning,evening').split(',');
 const sizes = (process.env.SIZES || 'phone,desktop').split(',');
 const out = new URL(

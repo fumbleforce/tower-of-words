@@ -1,9 +1,8 @@
-// The anime trial's material patch (#383; look/anime/flags.js): one onBeforeCompile chained onto each lit material, on
+// The anime look's material patch (#383; look/anime/flags.js): one onBeforeCompile chained onto each lit material, on
 // top of the world look's own patch (look/procedural.js), so nothing is swapped and the draw-call pass keeps its
-// batches. Which tricks it carries is fixed by the URL, so each is a define:
+// batches. Which parts it carries is fixed for the page (?anime=), so each is a define:
 //   ANIME_TOON    the sun's light in three tones (dark, a middle band past a soft terminator, full), the shadow and
 //                 ambient side tinted cool and a little more saturated instead of greyed, the lit side warmer
-//   ANIME_DAPPLE  under tree crowns the sun's shadow becomes leaf shade with light spots (look/anime/canopy.js map)
 //   ANIME_PAINT   walls and stone a little darker at the foot and lighter up top, and a low-contrast colour drift
 //                 across stone, paving and walls
 // Every value lives in one uniform set (U) that the period drives (look/anime/periods.js), so a change of the time of
@@ -22,14 +21,9 @@ export const U = {
   uAMidAt: { value: 0.32 }, // N.L where full sun begins
   uAHard: { value: 0.35 }, // cast shadow edges: 0 as rendered, 1 crisp
   uAPaint: { value: 1 },
-  uADapple: { value: 0 }, // 0 until a place has a canopy map
-  uACanopy: { value: null },
-  uACanBox: { value: new THREE.Vector4(0, 0, 1, 1) }, // the map's x, z origin and its size in metres
-  uACanTop: { value: 2.2 }, // receivers above this get no leaf shade (the crowns' own tops)
-  uASunDir: { value: new THREE.Vector3(0.8, 0.52, -0.3).normalize() }, // toward the sun
 };
 
-const DEFS = { toon: 'ANIME_TOON', dapple: 'ANIME_DAPPLE', paint: 'ANIME_PAINT' };
+const DEFS = { toon: 'ANIME_TOON', paint: 'ANIME_PAINT' };
 export const wanted = () => Object.keys(DEFS).some((k) => ANIME[k]);
 
 const VERT_PARS = 'varying vec3 vAW; varying vec3 vAN; varying float vAK;\n';
@@ -44,8 +38,7 @@ const vertMain = (look) => `
 `;
 
 const FRAG_PARS = `
-uniform vec3 uAShade, uALit, uASunDir; uniform float uASat, uASatAll, uATerm, uASoft, uAMid, uAMidAt, uAHard, uAPaint;
-uniform float uADapple, uACanTop; uniform sampler2D uACanopy; uniform vec4 uACanBox;
+uniform vec3 uAShade, uALit; uniform float uASat, uASatAll, uATerm, uASoft, uAMid, uAMidAt, uAHard, uAPaint;
 varying vec3 vAW; varying vec3 vAN; varying float vAK;
 float aH(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
 float aN(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
@@ -62,28 +55,18 @@ void aToonDir(inout IncidentLight L, vec3 n){
 }
 float aShadow(float s){
   s = mix(s, smoothstep(0.3, 0.7, s), uAHard);
-#ifdef ANIME_DAPPLE
-  if (uADapple > 0.0 && vAW.y < uACanTop && !aKind(18.0)) {
-    vec2 q = vAW.xz - uASunDir.xz * (vAW.y / max(uASunDir.y, 0.15));
-    vec2 uv = (q - uACanBox.xy) / uACanBox.zw;
-    float m = texture2D(uACanopy, clamp(uv, 0.0, 1.0)).r;
-    float e = aN(q * 1.7) * 0.6 + aN(q * 4.6 + 2.0) * 0.4;
-    float mask = smoothstep(0.42, 0.62, m + (e - 0.5) * 0.5);
-    float spots = smoothstep(0.68, 0.74, aN(q * 2.2 + 3.1)) + 0.8 * smoothstep(0.72, 0.78, aN(q * 5.3 + 9.2));
-    s = mix(s, clamp(spots, 0.0, 1.0), mask * uADapple);
-  }
-#endif
   return s;
 }
 `;
 
 function lightsChunk() {
-  let c = THREE.ShaderChunk.lights_fragment_begin;
+  const c = THREE.ShaderChunk.lights_fragment_begin;
+  if (!ANIME.toon) return c;
   const a = c.indexOf('#if ( NUM_DIR_LIGHTS > 0 )'),
     b = c.indexOf('#endif', c.indexOf('#pragma unroll_loop_end', a));
   let dir = c.slice(a, b);
   dir = dir.replace(/\? (getShadow\(.*?\)) : 1\.0;/, '? aShadow( $1 ) : 1.0;');
-  if (ANIME.toon) dir = dir.replace('RE_Direct(', 'aToonDir( directLight, geometryNormal );\n\t\tRE_Direct(');
+  dir = dir.replace('RE_Direct(', 'aToonDir( directLight, geometryNormal );\n\t\tRE_Direct(');
   return c.slice(0, a) + dir + c.slice(b);
 }
 
@@ -147,7 +130,7 @@ export function patchAnime(m) {
         .replace('#include <opaque_fragment>', FRAG_OUT + '#include <opaque_fragment>');
   };
   m.customProgramCacheKey = function () {
-    return (had ? prevKey.call(this) : '') + '|anime:' + defs.length;
+    return (had ? prevKey.call(this) : '') + '|anime:' + defs.replace(/\W+/g, '.');
   };
   m.needsUpdate = true;
   return true;
