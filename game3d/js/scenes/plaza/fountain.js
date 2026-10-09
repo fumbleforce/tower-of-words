@@ -3,7 +3,7 @@
 // small jet on top whose bowls spill in thin curtains. The water moves: light glints drift over the surface, the
 // curtains fall, rings spread where they land. After dark the floor is lit from under the water, so the coins keep
 // their shine. The no-coins sign is set into the rim's outer face, on the curve, a little east of the south axis
-// (where Eric stands to look, it stays in view). Returns { update(t), evening() }.
+// (where Eric stands to look, it stays in view). Returns { update(t), glows }.
 import * as THREE from 'three';
 import { mat, textTexture, JP_FONT } from '../../props.js';
 import { merged } from '../plaza-buildings.js';
@@ -266,12 +266,13 @@ export function fountain(root, x, z, R) {
   root.add(group);
 
   return {
-    evening() {
-      floorMat.emissiveIntensity = 0.35;
-      silver.emissiveIntensity = 0.32;
-      brass.emissiveIntensity = 0.3;
-      water.emissiveIntensity = 0.5;
-    },
+    // after dark, lit from under the water (kit/light/glow.js)
+    glows: [
+      { mat: floorMat, night: { emissiveIntensity: 0.35 } },
+      { mat: silver, night: { emissiveIntensity: 0.32 } },
+      { mat: brass, night: { emissiveIntensity: 0.3 } },
+      { mat: water, night: { emissiveIntensity: 0.5 } },
+    ],
     update(t) {
       glints.rotation = t * 0.035;
       glints.offset.set(Math.sin(t * 0.37) * 0.015, Math.cos(t * 0.29) * 0.015);

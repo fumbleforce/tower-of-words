@@ -11,7 +11,7 @@
 //                                                            trying that door shows the card on screen (ui/door-card.js)
 //   signs.drawn(draw, w, h, [x, y, z], ry);                  any face: draw(ctx, W, H) paints its cell (a drinks
 //                                                            machine's front)
-//   const s = signs.build(group); s.evening();
+//   const s = signs.build(group); s.glows: what lights up after dark (kit/light/glow.js); s.evening() switches them on
 //   s.show(day, period)                                      the signs with a `when` (door-cards.js WHEN) shown
 //                                                            or hidden for that day and time; the others always show
 import * as THREE from 'three';
@@ -19,6 +19,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { JP_FONT } from '../props.js';
 import { DECAL } from '../look/decal.js';
 import { WHEN, registerDoorCard } from './door-cards.js';
+import { lightUp } from '../kit/light/glow.js';
 
 const PX = 160, // pixels per unit of sign
   ATLAS_W = 2048,
@@ -171,12 +172,11 @@ export function signSet() {
         meshes.set(when, m);
       }
       const mesh = meshes.get(undefined) || null;
+      const glows = [{ mat: material, night: { emissiveIntensity: 0.6 } }];
       return {
         mesh,
-        glows: [{ mat: material, night: { emissiveIntensity: 0.6 } }],
-        evening() {
-          material.emissiveIntensity = 0.6;
-        },
+        glows,
+        evening: () => lightUp(glows),
         show(day, period) {
           for (const [when, m] of meshes) if (when) m.visible = WHEN[when](day, period);
         },

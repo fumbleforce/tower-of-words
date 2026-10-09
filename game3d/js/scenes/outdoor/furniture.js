@@ -19,6 +19,7 @@ import * as THREE from 'three';
 import { textTexture, plane, JP_FONT } from '../../props.js';
 import { pools } from './parts.js';
 import { benchGeometries } from './plant-models.js';
+import { lightUp } from '../../kit/light/glow.js';
 
 export const STEEL = { dark: '#3e434d', mid: '#5b616b', pale: '#9aa0aa' };
 const WOOD = '#9b958c',
@@ -58,14 +59,7 @@ export function lightSet() {
         { mat: glow, night: { emissiveIntensity: 2.6, color: '#fff3dc' } },
         { pool: poolMesh, night: 0.42 },
       ];
-      return {
-        glows,
-        evening() {
-          glow.emissiveIntensity = 2.6;
-          glow.color.set('#fff3dc');
-          poolMesh.userData.set(0.42);
-        },
-      };
+      return { glows, evening: () => lightUp(glows) };
     },
   };
 }

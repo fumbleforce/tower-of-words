@@ -3,7 +3,7 @@ import { eastLaneChunkSteps } from '../scenes/east-lane.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { eveningLight, eveningGrade, MORNING_GRADE } from '../scenes/town.js';
+import { lightPlace } from '../kit/light/rig.js';
 import { inRect } from '../scenes/east-lane/plan.js';
 import { sim } from '../sim.js';
 import { PLACE_DETAILS } from './catalog.js';
@@ -109,11 +109,11 @@ export async function eastLanePlace(game) {
     space: w.root,
     nav: w.nav,
     sun: w.sun,
+    light: w.light, // the light for every period (scenes/east-lane.js, kit/light/)
     charScale: K,
     start: w.in,
     startFacing: Math.PI / 2,
     music: 'calm',
-    grade: MORNING_GRADE,
     things,
     spots: {
       plaza_entry: w.in,
@@ -155,13 +155,9 @@ export async function eastLanePlace(game) {
         game.prepare?.('sports');
       if (sim.period === 'evening' && near('dorm_court', 6) && !game.prepared.dorm_court) game.prepare?.('dorm_court');
     },
+    // what a period changes here besides the light (the rig's)
     onPeriod(period) {
       w.cards(sim.day, period); // the shops' door cards for the day and the time (scenes/shop-signs.js WHEN)
-      if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
-      eveningLight(w.scene, sim.day);
-      w.evening();
-      w.follow(game.player.root.position.x, game.player.root.position.z);
-      P.grade = eveningGrade(sim.day);
     },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }) };
@@ -190,5 +186,6 @@ export async function eastLanePlace(game) {
       Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)]),
     ),
   };
+  lightPlace(P, sim.period, sim.day);
   return P;
 }

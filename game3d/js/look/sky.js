@@ -86,7 +86,7 @@ function paintSky(sky, sunDir, landDir) {
 // what the sky shows now: the rig's word where the place has one, else the period table for the period
 function skyNow(place, period) {
   const st = place.light?.state;
-  if (st?.sky) return { sky: st.sky, sun: st.sun.dir, glow: st.glow };
+  if (st?.sky) return { sky: st.sky, sun: st.skyDir || st.sun.dir, glow: st.glow };
   const p = period(),
     L = lookFor(OUTDOOR, phaseOf(p), 1, p);
   return { sky: L.sky, sun: L.sun[2], glow: !!L.glow };

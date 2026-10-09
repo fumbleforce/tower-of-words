@@ -36,5 +36,78 @@
     "day": 2,
     "steps": ["evening", "morning"],
     "views": [{ "id": "room" }]
+  },
+  "plaza-morning": {
+    "place": "plaza",
+    "day": 1,
+    "steps": ["evening", "morning", "evening"],
+    "views": [{ "id": "lane", "at": [-7.8, -0.27] }, { "id": "fountain", "at": [0, 4.8] }]
+  },
+  "plaza-evening": {
+    "place": "plaza",
+    "day": 1,
+    "start": "evening",
+    "views": [{ "id": "lane", "at": [-7.8, -0.27] }, { "id": "fountain", "at": [0, 4.8] }]
+  },
+  "plaza-day2": {
+    "place": "plaza",
+    "day": 2,
+    "steps": ["evening", "morning"],
+    "views": [{ "id": "lane", "at": [-7.8, -0.27] }, { "id": "fountain", "at": [0, 4.8] }]
+  },
+  "shotengai-morning": {
+    "place": "shotengai",
+    "day": 1,
+    "steps": ["evening", "morning", "evening"],
+    "views": [{ "id": "walk" }]
+  },
+  "shotengai-evening": {
+    "place": "shotengai",
+    "day": 1,
+    "start": "evening",
+    "views": [{ "id": "walk" }]
+  },
+  "shotengai-day2": {
+    "place": "shotengai",
+    "day": 2,
+    "steps": ["evening", "morning"],
+    "views": [{ "id": "walk" }]
+  },
+  "east-lane-morning": {
+    "place": "east_lane",
+    "day": 1,
+    "steps": ["evening", "morning", "evening"],
+    "views": [{ "id": "lane" }]
+  },
+  "east-lane-evening": {
+    "place": "east_lane",
+    "day": 1,
+    "start": "evening",
+    "views": [{ "id": "lane" }]
+  },
+  "east-lane-day2": {
+    "place": "east_lane",
+    "day": 2,
+    "steps": ["evening", "morning"],
+    "views": [{ "id": "lane" }]
+  },
+  "dorm-court-day1": {
+    "place": "dorm_court",
+    "day": 1,
+    "steps": ["morning", "evening"],
+    "views": [{ "id": "court" }]
+  },
+  "dorm-court-day2": {
+    "place": "dorm_court",
+    "day": 2,
+    "start": "morning",
+    "steps": ["evening", "morning"],
+    "views": [{ "id": "court" }]
+  },
+  "dorm-court-day2-evening": {
+    "place": "dorm_court",
+    "day": 2,
+    "start": "evening",
+    "views": [{ "id": "court" }]
   }
 }

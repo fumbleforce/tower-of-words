@@ -6,6 +6,7 @@
 //   rig.glow.add(...lamps.glows, ...station.glows);          what lights up at night
 //   place.light = rig;                                        lifecycle and the clock call lightPlace()
 //   rig.listen((s) => sky.set(s));                            a sky or fog layer follows the period
+//   rig.follow(x, z)                                          the shadow box round Eric, on a long chunk
 //
 // spec: looks (a set from looks.js), period (the one it is built in, default morning), grade ({ day, dusk } patches on the look's grade for this place), phaseOf (period, day) ->
 // phase (a place's own rule), shadow ({ size, box, near, far, bias, normalBias, radius } or false), sunDist,
@@ -56,7 +57,7 @@ export function lightRig(scene, spec) {
     state: null,
     before: null,
     grades, // this place's own grade patches per phase
-    // the sun's direction now (toward the sun): for a shadow box that follows Eric (town.js sunFollow)
+    // the sun's direction now (toward the sun)
     sunDir: dir,
     apply(period, day = 1) {
       const phase = phaseOf(period, day);
@@ -84,6 +85,7 @@ export function lightRig(scene, spec) {
         glow: !!L.glow,
         grade: g,
         sky: L.sky || null, // outdoors: the sky behind (look/sky.js follows it)
+        skyDir: L.skyDir || null, // where the sky's glow is, if not where this place's sun shines from
       };
       for (const fn of listeners) fn(rig.state);
       return g;
@@ -91,6 +93,12 @@ export function lightRig(scene, spec) {
     // the sun stands sunDist out along its direction from where it aims (its target may follow Eric)
     placeSun() {
       sun.position.copy(sun.target.position).addScaledVector(dir, sunDist);
+    },
+    // a place too big for one shadow box (spec.shadow.box round Eric): the box follows him in steps of 2, so the
+    // shadows don't crawl as he walks
+    follow(x, z) {
+      sun.target.position.set(Math.round(x / 2) * 2, 0, Math.round(z / 2) * 2);
+      rig.placeSun();
     },
     // the lights as they stand now become this place's look for a phase (a place that dresses the light by hand, the
     // street style in scenes/diorama/), so going back to that phase gives the same picture

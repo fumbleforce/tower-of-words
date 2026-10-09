@@ -9,7 +9,8 @@
 //   officeBlock(sets, rect, { storeys, fh, gf, wall, doors: [{ face: 'w', at, w, porch }], seed })
 //     and the style options for a building that is more than an office (the clinic): upper, glazed, stair, roof,
 //     a door's canopy and platform (outdoor/block-style.js)
-//   const { lit } = buildBlockSets(sets, root);      lit starts hidden; lit.visible = true in the evening
+//   const { lit, glows } = buildBlockSets(sets, root);   lit starts hidden and shows after dark: glows, for a
+//                                                        place's light rig (kit/light/glow.js)
 // The palette and face maths are in outdoor/block-face.js, the style options' parts in outdoor/block-style.js.
 // rect [x0, x1, z0, z1] on the grid. Faces: n (z0), s (z1), w (x0), e (x1); a door's `at` is its middle along
 // the face (x on n and s, z on w and e), and doorAt(rect, face, at) gives the middle of the bay nearest it.
@@ -36,7 +37,7 @@ export function buildBlockSets({ p, glass, lit }, root) {
     litMesh.castShadow = false;
     litMesh.visible = false;
   }
-  return { lit: litMesh };
+  return { lit: litMesh, glows: litMesh ? [{ show: litMesh }] : [] };
 }
 const glassMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.45, metalness: 0.05 });
 const litMat = new THREE.MeshStandardMaterial({

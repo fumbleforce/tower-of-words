@@ -1,0 +1,457 @@
+{
+  "title": "Light and time of day, stage 2: the walk home",
+  "date": "2026-10-09",
+  "by": "claude-agent:lighting",
+  "caption": "Stage 2 of #370. The fountain plaza, the shop street, the east lane and the dorm courtyard now take their light from the same period table as the forecourt. They look as before in each period, and now go back to morning when the clock does. The dorm courtyard no longer shows a day sky over a dusk court.",
+  "result": [
+    "plaza-after-back-to-morning-desk",
+    "east-after-back-to-morning-desk",
+    "court2-after-back-to-morning-phone",
+    "plaza-after-after-work-again-phone"
+  ],
+  "preview": "plaza-after-back-to-morning-desk",
+  "sections": [
+    {
+      "title": "Fountain plaza, day 1: the clock forward and back",
+      "caption": "Same camera at the fountain. Before, moving the clock back to morning left the dusk, the lamps and the lit basin on. Now each step changes the light, and after work looks as it did.",
+      "images": [
+        {
+          "id": "plaza-before-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-before-morning-desk.webp",
+          "caption": "Before: morning, desktop"
+        },
+        {
+          "id": "plaza-before-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-before-after-work-desk.webp",
+          "caption": "Before: after work, desktop"
+        },
+        {
+          "id": "plaza-before-back-to-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-before-back-to-morning-desk.webp",
+          "caption": "Before: back to morning, desktop"
+        },
+        {
+          "id": "plaza-before-after-work-again-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-before-after-work-again-desk.webp",
+          "caption": "Before: after work again, desktop"
+        },
+        {
+          "id": "plaza-after-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-after-morning-desk.webp",
+          "caption": "After: morning, desktop"
+        },
+        {
+          "id": "plaza-after-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-after-after-work-desk.webp",
+          "caption": "After: after work, desktop"
+        },
+        {
+          "id": "plaza-after-back-to-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-after-back-to-morning-desk.webp",
+          "caption": "After: back to morning, desktop"
+        },
+        {
+          "id": "plaza-after-after-work-again-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-after-after-work-again-desk.webp",
+          "caption": "After: after work again, desktop"
+        },
+        {
+          "id": "plaza-before-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-before-morning-phone.webp",
+          "caption": "Before: morning, phone"
+        },
+        {
+          "id": "plaza-before-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-before-after-work-phone.webp",
+          "caption": "Before: after work, phone"
+        },
+        {
+          "id": "plaza-before-back-to-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-before-back-to-morning-phone.webp",
+          "caption": "Before: back to morning, phone"
+        },
+        {
+          "id": "plaza-before-after-work-again-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-before-after-work-again-phone.webp",
+          "caption": "Before: after work again, phone"
+        },
+        {
+          "id": "plaza-after-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-after-morning-phone.webp",
+          "caption": "After: morning, phone"
+        },
+        {
+          "id": "plaza-after-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-after-after-work-phone.webp",
+          "caption": "After: after work, phone"
+        },
+        {
+          "id": "plaza-after-back-to-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-after-back-to-morning-phone.webp",
+          "caption": "After: back to morning, phone"
+        },
+        {
+          "id": "plaza-after-after-work-again-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-after-after-work-again-phone.webp",
+          "caption": "After: after work again, phone"
+        }
+      ]
+    },
+    {
+      "title": "Fountain plaza entered after work",
+      "caption": "Entered at dusk on day 1: the same light as before.",
+      "images": [
+        {
+          "id": "plaza-before-plaza-evening-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-before-plaza-evening-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "plaza-after-plaza-evening-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-after-plaza-evening-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "plaza-before-plaza-evening-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-before-plaza-evening-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "plaza-after-plaza-evening-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza-after-plaza-evening-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "Fountain plaza, day 2",
+      "caption": "Day 2's brighter dusk with the plaza's own pools and grade, as before; back to morning now works.",
+      "images": [
+        {
+          "id": "plaza2-before-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza2-before-after-work-desk.webp",
+          "caption": "Before: after work, desktop"
+        },
+        {
+          "id": "plaza2-before-back-to-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza2-before-back-to-morning-desk.webp",
+          "caption": "Before: back to morning, desktop"
+        },
+        {
+          "id": "plaza2-after-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza2-after-after-work-desk.webp",
+          "caption": "After: after work, desktop"
+        },
+        {
+          "id": "plaza2-after-back-to-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza2-after-back-to-morning-desk.webp",
+          "caption": "After: back to morning, desktop"
+        },
+        {
+          "id": "plaza2-before-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza2-before-after-work-phone.webp",
+          "caption": "Before: after work, phone"
+        },
+        {
+          "id": "plaza2-before-back-to-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza2-before-back-to-morning-phone.webp",
+          "caption": "Before: back to morning, phone"
+        },
+        {
+          "id": "plaza2-after-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza2-after-after-work-phone.webp",
+          "caption": "After: after work, phone"
+        },
+        {
+          "id": "plaza2-after-back-to-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/plaza2-after-back-to-morning-phone.webp",
+          "caption": "After: back to morning, phone"
+        }
+      ]
+    },
+    {
+      "title": "Shop street, day 1: the clock forward and back",
+      "caption": "The shop street could already go back to morning; it now does it through the same system, and the pictures match.",
+      "images": [
+        {
+          "id": "shop-before-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-before-morning-desk.webp",
+          "caption": "Before: morning, desktop"
+        },
+        {
+          "id": "shop-before-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-before-after-work-desk.webp",
+          "caption": "Before: after work, desktop"
+        },
+        {
+          "id": "shop-before-back-to-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-before-back-to-morning-desk.webp",
+          "caption": "Before: back to morning, desktop"
+        },
+        {
+          "id": "shop-before-after-work-again-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-before-after-work-again-desk.webp",
+          "caption": "Before: after work again, desktop"
+        },
+        {
+          "id": "shop-after-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-after-morning-desk.webp",
+          "caption": "After: morning, desktop"
+        },
+        {
+          "id": "shop-after-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-after-after-work-desk.webp",
+          "caption": "After: after work, desktop"
+        },
+        {
+          "id": "shop-after-back-to-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-after-back-to-morning-desk.webp",
+          "caption": "After: back to morning, desktop"
+        },
+        {
+          "id": "shop-after-after-work-again-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-after-after-work-again-desk.webp",
+          "caption": "After: after work again, desktop"
+        },
+        {
+          "id": "shop-before-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-before-morning-phone.webp",
+          "caption": "Before: morning, phone"
+        },
+        {
+          "id": "shop-before-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-before-after-work-phone.webp",
+          "caption": "Before: after work, phone"
+        },
+        {
+          "id": "shop-before-back-to-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-before-back-to-morning-phone.webp",
+          "caption": "Before: back to morning, phone"
+        },
+        {
+          "id": "shop-before-after-work-again-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-before-after-work-again-phone.webp",
+          "caption": "Before: after work again, phone"
+        },
+        {
+          "id": "shop-after-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-after-morning-phone.webp",
+          "caption": "After: morning, phone"
+        },
+        {
+          "id": "shop-after-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-after-after-work-phone.webp",
+          "caption": "After: after work, phone"
+        },
+        {
+          "id": "shop-after-back-to-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-after-back-to-morning-phone.webp",
+          "caption": "After: back to morning, phone"
+        },
+        {
+          "id": "shop-after-after-work-again-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/shop-after-after-work-again-phone.webp",
+          "caption": "After: after work again, phone"
+        }
+      ]
+    },
+    {
+      "title": "East lane, day 1: the clock forward and back",
+      "caption": "Before, the dusk stayed when the clock went back. Now it goes back to morning.",
+      "images": [
+        {
+          "id": "east-before-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-before-morning-desk.webp",
+          "caption": "Before: morning, desktop"
+        },
+        {
+          "id": "east-before-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-before-after-work-desk.webp",
+          "caption": "Before: after work, desktop"
+        },
+        {
+          "id": "east-before-back-to-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-before-back-to-morning-desk.webp",
+          "caption": "Before: back to morning, desktop"
+        },
+        {
+          "id": "east-before-after-work-again-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-before-after-work-again-desk.webp",
+          "caption": "Before: after work again, desktop"
+        },
+        {
+          "id": "east-after-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-after-morning-desk.webp",
+          "caption": "After: morning, desktop"
+        },
+        {
+          "id": "east-after-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-after-after-work-desk.webp",
+          "caption": "After: after work, desktop"
+        },
+        {
+          "id": "east-after-back-to-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-after-back-to-morning-desk.webp",
+          "caption": "After: back to morning, desktop"
+        },
+        {
+          "id": "east-after-after-work-again-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-after-after-work-again-desk.webp",
+          "caption": "After: after work again, desktop"
+        },
+        {
+          "id": "east-before-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-before-morning-phone.webp",
+          "caption": "Before: morning, phone"
+        },
+        {
+          "id": "east-before-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-before-after-work-phone.webp",
+          "caption": "Before: after work, phone"
+        },
+        {
+          "id": "east-before-back-to-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-before-back-to-morning-phone.webp",
+          "caption": "Before: back to morning, phone"
+        },
+        {
+          "id": "east-before-after-work-again-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-before-after-work-again-phone.webp",
+          "caption": "Before: after work again, phone"
+        },
+        {
+          "id": "east-after-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-after-morning-phone.webp",
+          "caption": "After: morning, phone"
+        },
+        {
+          "id": "east-after-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-after-after-work-phone.webp",
+          "caption": "After: after work, phone"
+        },
+        {
+          "id": "east-after-back-to-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-after-back-to-morning-phone.webp",
+          "caption": "After: back to morning, phone"
+        },
+        {
+          "id": "east-after-after-work-again-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/east-after-after-work-again-phone.webp",
+          "caption": "After: after work again, phone"
+        }
+      ]
+    },
+    {
+      "title": "Dorm courtyard, day 2: the clock forward and back",
+      "caption": "The bug: back to morning, the court stayed lit for dusk under a day sky. Now it goes back to morning. After work it now has the court's own dusk (the one you see on the walk home), not the town's.",
+      "images": [
+        {
+          "id": "court2-before-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-before-morning-desk.webp",
+          "caption": "Before: morning, desktop"
+        },
+        {
+          "id": "court2-before-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-before-after-work-desk.webp",
+          "caption": "Before: after work, desktop"
+        },
+        {
+          "id": "court2-before-back-to-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-before-back-to-morning-desk.webp",
+          "caption": "Before: back to morning, desktop"
+        },
+        {
+          "id": "court2-after-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-after-morning-desk.webp",
+          "caption": "After: morning, desktop"
+        },
+        {
+          "id": "court2-after-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-after-after-work-desk.webp",
+          "caption": "After: after work, desktop"
+        },
+        {
+          "id": "court2-after-back-to-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-after-back-to-morning-desk.webp",
+          "caption": "After: back to morning, desktop"
+        },
+        {
+          "id": "court2-before-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-before-morning-phone.webp",
+          "caption": "Before: morning, phone"
+        },
+        {
+          "id": "court2-before-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-before-after-work-phone.webp",
+          "caption": "Before: after work, phone"
+        },
+        {
+          "id": "court2-before-back-to-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-before-back-to-morning-phone.webp",
+          "caption": "Before: back to morning, phone"
+        },
+        {
+          "id": "court2-after-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-after-morning-phone.webp",
+          "caption": "After: morning, phone"
+        },
+        {
+          "id": "court2-after-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-after-after-work-phone.webp",
+          "caption": "After: after work, phone"
+        },
+        {
+          "id": "court2-after-back-to-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/court2-after-back-to-morning-phone.webp",
+          "caption": "After: back to morning, phone"
+        }
+      ]
+    },
+    {
+      "title": "Dorm courtyard, day 1",
+      "caption": "On day 1 Eric is only here after work, so the court stays at dusk, as his room does; the sky now stays at dusk with it.",
+      "images": [
+        {
+          "id": "court1-before-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/court1-before-after-work-desk.webp",
+          "caption": "Before: after work, desktop"
+        },
+        {
+          "id": "court1-before-clock-at-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/court1-before-clock-at-morning-desk.webp",
+          "caption": "Before: clock at morning, desktop"
+        },
+        {
+          "id": "court1-after-after-work-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/court1-after-after-work-desk.webp",
+          "caption": "After: after work, desktop"
+        },
+        {
+          "id": "court1-after-clock-at-morning-desk",
+          "image": "bible/shots/showcase/lighting-2-20261009/court1-after-clock-at-morning-desk.webp",
+          "caption": "After: clock at morning, desktop"
+        },
+        {
+          "id": "court1-before-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/court1-before-after-work-phone.webp",
+          "caption": "Before: after work, phone"
+        },
+        {
+          "id": "court1-before-clock-at-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/court1-before-clock-at-morning-phone.webp",
+          "caption": "Before: clock at morning, phone"
+        },
+        {
+          "id": "court1-after-after-work-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/court1-after-after-work-phone.webp",
+          "caption": "After: after work, phone"
+        },
+        {
+          "id": "court1-after-clock-at-morning-phone",
+          "image": "bible/shots/showcase/lighting-2-20261009/court1-after-clock-at-morning-phone.webp",
+          "caption": "After: clock at morning, phone"
+        }
+      ]
+    }
+  ]
+}

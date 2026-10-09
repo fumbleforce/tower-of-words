@@ -8,11 +8,14 @@
 // notice board and the terrace in plaza/furniture.js, the fountain in plaza/fountain.js, the canteen and the shop
 // street in plaza-buildings.js, the east lane on to the dorm street (backdrop) in plaza/east-lane.js, the back lane
 // behind the canteen with the clinic (backdrop) in plaza/north-lane.js. Everything else
-// comes from the layout through buildSkyline. Palette and light are the forecourt's; after work the lamps, the lights
-// round the basin, the canteen, the shops and the town's windows light up.
+// comes from the layout through buildSkyline. Palette and light are the forecourt's: the period table's (kit/light/
+// looks.js PLAZA) through the plaza's light rig; after dark the lamps, the lights round the basin, the canteen, the
+// shops and the town's windows light up (each builder's glows).
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
-import { outdoorLight, TOWN } from './town.js';
+import { TOWN } from './town.js';
+import { lightRig } from '../kit/light/rig.js';
+import { PLAZA } from '../kit/light/looks.js';
 import * as LAYOUT from './island-layout.js';
 import { skylineSteps } from './skyline.js';
 import { drain } from '../perf/slice.js';
@@ -71,12 +74,11 @@ export function* plazaSteps() {
     scene = new THREE.Scene();
   scene.background = new THREE.Color(TOWN.roof);
   scene.add(root);
-  const sun = outdoorLight(scene);
   // the plaza is wider than the forecourt: the sun's shadow box covers the walkable part and the canteen front
-  Object.assign(sun.shadow.camera, { left: -21, right: 21, top: 21, bottom: -21, far: 90 });
-  sun.shadow.camera.updateProjectionMatrix();
+  const light = lightRig(scene, { looks: PLAZA, shadow: { box: 21, far: 90 } }),
+    sun = light.sun;
   sun.target.position.set(1, 0, -3);
-  sun.position.add(sun.target.position);
+  light.placeSun();
 
   // walkable: the circle (never the basin), the lanes, the link, the terrace (through the gap in its wall), the
   // cross walk up to the training centre's door and down to the south walk's start
@@ -106,7 +108,7 @@ export function* plazaSteps() {
   const p = new Parts(),
     lights = lightSet();
   yield* greenSteps(p);
-  const uplit = buildLamps(lights, p, nav, root);
+  const uplit = buildLamps(lights, p, nav, root); // the flush lights' lenses round the basin
   yield;
   buildBenches(p, nav);
   const board = buildNoticeBoard(p, nav);
@@ -152,6 +154,20 @@ export function* plazaSteps() {
   const cluster = placeIn(new THREE.Group(), CHUNK);
   root.add(cluster);
   const dorms = yield* clusterSteps(cluster, { plaza: true });
+  // what lights up after dark
+  light.glow.add(
+    lit.glows,
+    uplit,
+    hall.glows,
+    water.glows,
+    street.glows,
+    east.glows,
+    north.glows,
+    dorms.glows,
+    front.glows,
+    sky.glows,
+    nooks.glows,
+  );
   yield;
 
   // the points the place uses; the lane's ends are where the walks to the forecourt and the dorms start
@@ -160,6 +176,7 @@ export function* plazaSteps() {
     root,
     scene,
     sun,
+    light,
     nav,
     fountain: F,
     fountainEdge: [F[0], F[1] + BASIN + 0.6],
@@ -194,20 +211,6 @@ export function* plazaSteps() {
       water.update(t);
       north.update(sun);
       east.update(sun);
-    },
-    evening() {
-      lit.evening();
-      uplit();
-      hall.glass.emissiveIntensity = 0.45;
-      water.evening();
-      street.glass.emissiveIntensity = 0.55;
-      street.signs.evening();
-      east.evening();
-      north.evening();
-      dorms.evening();
-      front.evening();
-      sky.onPeriod('evening');
-      nooks.evening();
     },
     cards: (day, period) => east.cards(day, period),
     skyline: sky.stats,

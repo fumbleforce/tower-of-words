@@ -10,7 +10,9 @@
 // place). Evening: the shops' glass and signs, the lanterns and the promenade's lamps light up.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
-import { outdoorLight, TOWN, groundPatches } from './town.js';
+import { TOWN, groundPatches } from './town.js';
+import { lightRig } from '../kit/light/rig.js';
+import { SHOTENGAI } from '../kit/light/looks.js';
 import * as LAYOUT from './island-layout.js';
 import { skylineSteps } from './skyline.js';
 import { drain } from '../perf/slice.js';
@@ -32,18 +34,11 @@ import { shopDoor } from './plaza/east-shops.js';
 import { faceAt } from './outdoor/block.js';
 import { bandSteps } from './bands.js';
 import { bikeCourtBackdrop } from './forecourt/court.js';
-import { daylightState } from './station-garden/daylight.js';
 import { gardenSteps } from './station-garden/build.js';
 import { BOUNDS as GARDEN_BOUNDS } from './station-garden/plan.js';
 import { buildSouthLink } from './forecourt/south-link.js';
 
 const { CHUNK, local, rect, inRect } = P;
-// the sun, in the chunk's frame (local north is island west): mornings from the east-south-east over the camera's
-// left shoulder; after work low in the west, ahead down the street
-export const SUN_DIR = {
-  morning: new THREE.Vector3(-0.45, 0.62, 0.64).normalize(),
-  evening: new THREE.Vector3(0.18, 0.3, -0.94).normalize(),
-};
 
 export const buildShotengai = () => drain(shotengaiSteps());
 export function* shotengaiSteps() {
@@ -51,17 +46,11 @@ export function* shotengaiSteps() {
     scene = new THREE.Scene();
   scene.background = new THREE.Color(TOWN.roof);
   scene.add(root);
-  const sun = outdoorLight(scene);
-  // the street is long: the sun's shadow box follows Eric (follow() below), a square round him
-  Object.assign(sun.shadow.camera, { left: -16, right: 16, top: 16, bottom: -16, far: 80 });
-  sun.shadow.camera.updateProjectionMatrix();
-  let sunDir = SUN_DIR.morning;
-  const follow = (x, z) => {
-    const sx = Math.round(x / 2) * 2,
-      sz = Math.round(z / 2) * 2; // in steps, so the shadows don't crawl as he walks
-    sun.target.position.set(sx, 0, sz);
-    sun.position.copy(sun.target.position).addScaledVector(sunDir, 40);
-  };
+  // the light for every period from the period table, its sun turned with the chunk (kit/light/looks.js SHOTENGAI);
+  // the street is long: the sun's shadow box, a square round Eric, follows him (light.follow)
+  const light = lightRig(scene, { looks: SHOTENGAI, shadow: { box: 16, far: 80 }, sunDist: 40 }),
+    sun = light.sun,
+    follow = light.follow;
   follow(...local(P.IN));
 
   // walkable: the streets (plan.js WALKS) and the step out onto the dorm street; never a post, the promenade's
@@ -149,9 +138,19 @@ export function* shotengaiSteps() {
   for (const r of nooks.blocks) nav.block(...r);
   yield* mergeStaticSteps(root);
   yield* nav.buildSteps();
-
-  const restoreDaylight = daylightState(scene);
-  let night = false;
+  // what lights up after dark
+  light.glow.add(
+    bands.glows,
+    nooks.glows,
+    lit.glows,
+    eastLit.glows,
+    front.glows,
+    fronts.glows,
+    street.glows,
+    doorCards.glows,
+    curtainCard.glows,
+    sky.glows,
+  );
   const edgeZ = local(P.EDGE)[1];
   const alleys = P.ALLEYS.map(rect);
   return {
@@ -160,6 +159,7 @@ export function* shotengaiSteps() {
     root,
     scene,
     sun,
+    light,
     nav,
     follow,
     arcadeRoof: street.arcade, // the glass, ribs and ridge: the place fades them while he walks under them
@@ -176,27 +176,6 @@ export function* shotengaiSteps() {
     face: Math.PI, // walking in: west, local north
     doors: P.DOORS.map((d) => ({ ...d, local: local(d.at), step: local([d.at[0], d.at[1] + d.out * 0.85]) })),
     camera: { elev: 40, fov: 24 }, // a little lower than the plaza's, to see the shopfronts under the awnings
-    morning() {
-      if (!night) return;
-      night = false;
-      restoreDaylight();
-      sunDir = SUN_DIR.morning;
-    },
-    evening() {
-      night = true;
-      bands.evening();
-      nooks.evening();
-      sunDir = SUN_DIR.evening;
-      lit.evening();
-      eastLit.evening();
-      front.evening();
-      fronts.evening();
-      street.glass.emissiveIntensity = 0.55;
-      street.signs.evening();
-      doorCards.evening();
-      curtainCard.evening();
-      sky.onPeriod('evening');
-    },
     // the door cards for the day and the time (shop-signs.js WHEN)
     cards(day, period) {
       doorCards.show(day, period);

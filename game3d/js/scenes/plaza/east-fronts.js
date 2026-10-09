@@ -22,6 +22,7 @@ import { hash2 } from '../outdoor/parts.js';
 import { STEEL } from '../outdoor/furniture.js';
 import { faces, faceAt, tOf } from '../outdoor/block.js';
 import { drain } from '../../perf/slice.js';
+import { lightUp } from '../../kit/light/glow.js';
 import { facadeDrainage } from '../outdoor/facade-detail.js';
 import { northFront } from '../sports/north-front.js';
 
@@ -160,17 +161,19 @@ export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => fals
     emissive: new THREE.Color('#ffc98a'),
     emissiveIntensity: 0,
   });
+  const glows = [
+    { mat: lit, night: { color: '#e8c89a', emissiveIntensity: 0.6 } },
+    ...sportsFronts.flatMap((front) => front.glows),
+  ];
   return {
     meshes: (root) => {
       sportsFronts.forEach((front) => front.meshes(root));
       if (glass.length) root.add(merged(glass, out, { cast: false }));
       if (litGlass.length) root.add(merged(litGlass, lit, { cast: false }));
     },
-    evening() {
-      sportsFronts.forEach((front) => front.evening());
-      lit.color.set('#e8c89a');
-      lit.emissiveIntensity = 0.6;
-    },
+    // the lit windows after dark (kit/light/glow.js); evening() for a place not yet on a light rig
+    glows,
+    evening: () => lightUp(glows),
   };
 }
 

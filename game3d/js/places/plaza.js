@@ -5,7 +5,7 @@ import { BASIN } from '../scenes/plaza/plan.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { eveningLight, eveningGrade, MORNING_GRADE } from '../scenes/town.js';
+import { lightPlace } from '../kit/light/rig.js';
 import { sim } from '../sim.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
@@ -117,11 +117,11 @@ export async function plazaPlace(game) {
     space: w.root,
     nav: w.nav,
     sun: w.sun,
+    light: w.light, // the light for every period (scenes/plaza.js, kit/light/)
     charScale: K,
     start: w.arriveIn,
     startFacing: w.arriveFace,
     music: 'calm',
-    grade: MORNING_GRADE,
     things,
     spots,
     seats: {},
@@ -185,13 +185,10 @@ export async function plazaPlace(game) {
       // heading east before work is over: the lane goes on into the east lane
       if (sim.period !== 'evening' && p.x > w.eastX - 6 && !game.prepared.east_lane) game.prepare?.('east_lane');
     },
+    // what a period changes here besides the light (the rig's)
     onPeriod(period) {
       w.cards(sim.day, period); // the shops' door cards for the day and the time (scenes/shop-signs.js WHEN)
       canteen.sync(); // on every entry: the terrace open, or closing after work
-      if (period !== 'evening' || P.grade === eveningGrade(sim.day, 'plaza')) return;
-      eveningLight(w.scene, sim.day, { pool: 1.5 });
-      w.evening();
-      P.grade = eveningGrade(sim.day, 'plaza');
     },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }), canteen: canteen.snapshot() };
@@ -220,5 +217,6 @@ export async function plazaPlace(game) {
       east_lane: (g) => walkIn(g, cam, w.dormEdge, w.dormExit, -Math.PI / 2),
     },
   };
+  lightPlace(P, sim.period, sim.day);
   return P;
 }

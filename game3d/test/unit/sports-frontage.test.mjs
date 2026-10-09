@@ -30,6 +30,7 @@ const { Parts } = await import('../../js/scenes/outdoor/parts.js');
 const { arrivalGardens } = await import('../../js/scenes/sports/arrival-gardens.js');
 const { gymShell } = await import('../../js/scenes/sports/gym-facade.js');
 const { northFront } = await import('../../js/scenes/sports/north-front.js');
+const { lightUp } = await import('../../js/kit/light/glow.js');
 const P = await import('../../js/scenes/sports/plan.js');
 const { BUILDINGS } = await import('../../js/scenes/island-layout.js');
 const { BLOCKS } = await import('../../js/scenes/plaza/east-plan.js');
@@ -103,7 +104,7 @@ test('r3 recesses exist on every upper face, independent of shared chunk origin'
   const root = new THREE.Group();
   front.meshes(root);
   assert.equal(root.children.length, 1);
-  front.evening();
+  lightUp(front.glows);
   assert.equal(root.children[0].material.color.getHexString(), '806d56');
   geometries(p).forEach((g) => g.dispose());
 });

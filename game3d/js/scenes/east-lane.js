@@ -12,7 +12,9 @@
 // Evening: the shops' signs, the blocks' glass and the lamps light up.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
-import { outdoorLight, sunFollow, TOWN } from './town.js';
+import { TOWN } from './town.js';
+import { lightRig } from '../kit/light/rig.js';
+import { OUTDOOR } from '../kit/light/looks.js';
 import * as LAYOUT from './island-layout.js';
 import { skylineSteps } from './skyline.js';
 import { drain } from '../perf/slice.js';
@@ -44,9 +46,11 @@ export function* eastLaneChunkSteps() {
     scene = new THREE.Scene();
   scene.background = new THREE.Color(TOWN.roof);
   scene.add(root);
-  const sun = outdoorLight(scene);
-  const shadows = sunFollow(sun); // the district is long: the sun's shadow box follows Eric
-  const follow = shadows.follow;
+  // the light for every period from the period table (kit/light/); the district is long: the sun's shadow box, a
+  // square round Eric, follows him (light.follow)
+  const light = lightRig(scene, { looks: OUTDOOR, shadow: { box: 16, far: 80 }, sunDist: 40 }),
+    sun = light.sun,
+    follow = light.follow;
   follow(...P.IN);
 
   // walkable: the streets and walks (plan.js WALKS), never what stands on them
@@ -104,12 +108,15 @@ export function* eastLaneChunkSteps() {
   root.add(cluster);
   const dorms = yield* clusterSteps(cluster, { plaza: true });
   yield* nav.buildSteps();
+  // what lights up after dark
+  light.glow.add(bands.glows, nooks.glows, lit.glows, east.glows, north.glows, dorms.glows, street.glows, sky.glows);
 
   return {
     nooks: nooks.spots,
     root,
     scene,
     sun,
+    light,
     nav,
     follow,
     in: P.IN,
@@ -122,18 +129,6 @@ export function* eastLaneChunkSteps() {
       north.update(sun);
       bands.update(sun);
       east.update(sun);
-    },
-    evening() {
-      bands.evening();
-      nooks.evening();
-      shadows.evening();
-      lit.evening();
-      east.evening();
-      north.evening();
-      dorms.evening();
-      street.glass.emissiveIntensity = 0.55;
-      street.signs.evening();
-      sky.onPeriod('evening');
     },
     cards: (day, period) => (east.cards(day, period), bands.cards(day, period)),
     skyline: sky.stats,

@@ -63,10 +63,7 @@ export const EVENING_GRADE_2 = {
   vignette: 0.22,
   charLift: 0.13,
 };
-// a place whose open paving takes more of the sky than the streets do gets its exposure eased back (the plaza)
-const EVENING_GRADE_2_BY = { plaza: { ...EVENING_GRADE_2, exposure: 1.08 } };
-export const eveningGrade = (day = 1, place) =>
-  day === 2 ? EVENING_GRADE_2_BY[place] || EVENING_GRADE_2 : EVENING_GRADE;
+export const eveningGrade = (day = 1) => (day === 2 ? EVENING_GRADE_2 : EVENING_GRADE);
 // the evening's lights per day. pool: the gain on the street lamps' pools (outdoor/furniture.js lightSet), up on
 // day 2 so they hold against its brighter dusk
 export const EVENING_LIGHT = {
@@ -104,6 +101,53 @@ export const OUTDOOR = {
     glow: true,
     sky: SKY.dusk,
     days: { 2: duskLook(2, EVENING_GRADE_2) },
+  },
+};
+
+// the same set with the sun from other directions per phase, on every day's look too: a chunk turned on the island
+export function sunFrom(looks, dirs) {
+  const turn = (L, d) => (L.sun ? { ...L, sun: [L.sun[0], L.sun[1], d] } : L);
+  const out = {};
+  for (const [phase, L] of Object.entries(looks)) {
+    const d = dirs[phase];
+    out[phase] = d ? turn(L, d) : L;
+    if (d && L.days) out[phase].days = Object.fromEntries(Object.entries(L.days).map(([day, v]) => [day, turn(v, d)]));
+  }
+  return out;
+}
+
+// the fountain plaza: day 2's dusk with its many overlapping lamp pools turned down a little (1.5 for the streets'
+// 2) and its exposure eased back, as its open paving takes more of the sky than the streets do
+export const PLAZA = {
+  ...OUTDOOR,
+  dusk: {
+    ...OUTDOOR.dusk,
+    days: { 2: { ...OUTDOOR.dusk.days[2], pool: 1.5, grade: { ...EVENING_GRADE_2, exposure: 1.08 } } },
+  },
+};
+
+// the shop street (scenes/shotengai.js): its chunk is turned, local north is island west. Mornings the sun comes
+// from the east-south-east over the camera's left shoulder; after work low in the west, ahead down the street
+export const SHOTENGAI = sunFrom(OUTDOOR, { day: [-0.45, 0.62, 0.64], dusk: [0.18, 0.3, -0.94] });
+
+// the dorm courtyard (scenes/dorm-court.js): it lies in the blocks' morning shade, so by day more of the sky's light
+// reads as day; after work, dusk after the sun has gone behind the blocks: a cool sky over everything, the last warm
+// light from the west high enough that the blocks' shadows stay short (the sky's glow stays where the town's dusk
+// sun is: skyDir), a soft fill from the camera side. The lamps, windows and machines do the rest. bg: the background
+// where there is no sky picture (?far=0)
+export const DORM_COURT = {
+  day: { ...OUTDOOR.day, hemi: [OUTDOOR.day.hemi[0], OUTDOOR.day.hemi[1], 2.3], bg: '#5d636c' },
+  dusk: {
+    hemi: ['#a4b0cf', '#565862', 1.4],
+    sun: ['#ffbf94', 1.05, [-0.62, 0.68, 0.39]],
+    fill: ['#bcc8f0', 0.5],
+    pool: 1,
+    grade: EVENING_GRADE,
+    glow: true,
+    sky: SKY.dusk,
+    skyDir: SUN.evening,
+    bg: '#2b3342',
+    days: { 2: { grade: EVENING_GRADE_2 } },
   },
 };
 

@@ -35,6 +35,7 @@ import {
 import { standIn } from './cluster-standin.js';
 import * as P from './plan.js';
 import * as C from './cluster-plan.js';
+import { lightUp } from '../../kit/light/glow.js';
 
 const { ROW, NS, EW, LINK, BACK, ENTRY, COURT, SQUARE, PLANTER, AXIS_X, AXIS_Z } = C;
 const edge = (pv, rect, module) => pv.field(rect, { pattern: 'grid', module, tones: GRANITE.edge, h: 0.007 });
@@ -194,7 +195,8 @@ function lawn(group) {
 
 // builds it all into `group`, in the island frame; plaza: also the stand-ins for the courtyard and Eric's block.
 // A generator that yields between parts (every few trees in the woods, every block front, every cell's meshes), so
-// the place can build it in slices of a few ms (js/perf/slice.js) while the plaza plays; returns the evening switch.
+// the place can build it in slices of a few ms (js/perf/slice.js) while the plaza plays; returns what lights up after
+// dark (glows; evening() for a place not yet on a light rig).
 export function* clusterSteps(group, { plaza = false } = {}) {
   group.name = 'dorm-cluster';
   const { parts: p, paver: pv } = cells(XCUTS, [0, 10]),
@@ -228,12 +230,8 @@ export function* clusterSteps(group, { plaza = false } = {}) {
   const lit = lights.build(group);
   // no shadows on it either: the courtyard's shadow box ends a little way into the row, and its edge would show
   group.traverse((m) => m.isMesh && (m.receiveShadow = false));
-  return {
-    evening() {
-      fronts.evening();
-      lit.evening();
-    },
-  };
+  const glows = [...fronts.glows, ...lit.glows]; // what lights up after dark (kit/light/glow.js)
+  return { glows, evening: () => lightUp(glows) };
 }
 
 // the group's place in a chunk's frame: island (x, z) to the chunk's local, turned by the chunk's turn

@@ -336,7 +336,8 @@ function* planting(p, lights, sh) {
   lamps(lights, p, [[LANE.e[1] + 0.6, LANE.e[3] + 0.35]], { pool: 1.7, poolShift: [0, -0.9] });
 }
 
-// builds it all into the plaza: p, the plaza's Parts collector; lights, its light set. Returns the evening switch.
+// builds it all into the plaza: p, the plaza's Parts collector; lights, its light set. Returns what lights up after
+// dark (glows).
 // A generator that yields between parts (every few trees, every face and roof), for building in slices
 // (js/perf/slice.js).
 // Almost all of it lies outside the sun's shadow box (scenes/plaza.js), so it goes into its own collector that casts
@@ -385,10 +386,7 @@ export function* eastLaneSteps(root, p, lights, { clip = null, skip = [] } = {})
   yield;
   const shadows = sh.build(root);
   return {
-    evening() {
-      fronts.evening();
-      shopSigns.evening();
-    },
+    glows: [...fronts.glows, ...shopSigns.glows], // what lights up after dark (kit/light/glow.js)
     cards: (day, period) => shopSigns.show(day, period), // the shops' door cards (shop-signs.js WHEN)
     update: (sun) => shadows.follow(sun.position),
   };

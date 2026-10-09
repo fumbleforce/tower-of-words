@@ -10,7 +10,7 @@ Each place lit itself. Seven places built their own sky light and sun, lit windo
 
 Three small files in game3d/js/kit/light/, below places/ and scenes/ (kit code imports neither).
 
-**The period table** (looks.js). The day clock's periods are early, morning, lunch, afternoon and evening (sim.js). Each falls in a phase: the first four are `day`, evening is `dusk`. A phase has a look: the sky and ground light, the sun's colour, strength and direction, the fill light, the colour grade, and whether things glow. A look can have values for a later day on top (day 2's lifted dusk). There are two sets so far: OUTDOOR (all the outdoor chunks) and DORM (Eric's building). Every light value for a period lives here and nowhere else. Adding a night later is one line in the phase map and one look per set.
+**The period table** (looks.js). The day clock's periods are early, morning, lunch, afternoon and evening (sim.js). Each falls in a phase: the first four are `day`, evening is `dusk`. A phase has a look: the sky and ground light, the sun's colour, strength and direction, the fill light, the colour grade, and whether things glow. A look can have values for a later day on top (day 2's lifted dusk). The sets: OUTDOOR (the outdoor chunks), its patched copies for the places with their own light (PLAZA, SHOTENGAI, DORM_COURT; stage 2 below) and DORM (Eric's building). Every light value for a period lives here and nowhere else. Adding a night later is one line in the phase map and one look per set.
 
 **The rig** (rig.js). Each place has one rig. It builds the place's sky light, sun and fill, and `apply(period, day)` sets all of them from the table, moves the sun, sets the background if the look has one, switches the glows and returns the grade. It works the same in both directions, so the clock can go forward and back. A place can patch its grade per phase (the street trial does), take its hand-dressed daylight as its own look, and say which phase a period is for it (the dorm on day 1 is always dusk, as Eric is only there after work).
 
@@ -30,6 +30,15 @@ Every outdoor place has a sky and distance haze (game3d/js/look/sky.js; `?far=0`
 
 Builders that other places still use keep their old `evening()` and `onPeriod` beside the new `glows`, so nothing else changed.
 
+## Stage 2: the walk home
+
+- The plaza, the shop street, the east lane and the dorm courtyard are on the rig. Their `onPeriod` light bodies, their `evening()` switches and the shop street's `daylightState` snapshot (station-garden/daylight.js) are gone; their `onPeriod` keeps only the door cards and the canteen terrace.
+- Their own light is in the period table: `PLAZA` (day 2's pools at 1.5 and its eased exposure), `SHOTENGAI` (`sunFrom(OUTDOOR, ...)`: the town's light with the sun turned with the chunk) and `DORM_COURT` (more sky by day in the blocks' shade; its own dusk with the sun high enough for short shadows, `skyDir` keeping the sky's glow where the town's dusk sun is, a background colour per period for `?far=0`). Like Eric's building, the court is always at dusk on day 1.
+- `rig.follow(x, z)` is the shadow box that follows Eric on a long chunk (the shop street, the east lane), replacing their own follow code; the sun's direction comes from the table, so a period change turns it.
+- Every shared builder these places use returns a `glows` list: the lamp sets, the shop signs and door cards, block.js's lit windows, the east lane's fronts and signs, the back lane and the clinic, the dorm cluster, the canteen and shop street glass, the fountain, the basin's flush lights, the bands past the exits, the sports hall's recessed glass. Where an unmoved place still calls a builder's `evening()`, that is `lightUp(glows)` (glow.js), so the night values are written once.
+- The dorm court's bug: built at dusk, setting the clock to morning gave a day sky over a court lit for dusk, because nothing turned it back. Now the sky, the lights and the glows all come from the same `apply()`.
+- Captures: game3d/tools/light-views.json (plaza-*, shotengai-*, east-lane-*, dorm-court-*); the Showcase entry lighting-2-20261009.
+
 ## Next
 
-Move the other places onto the rig, a few at a time, each with before and after pictures: the plaza, the shop street, the east lane and the dorm court first (the walk home), then the rest. Each removes one `onPeriod` light body and one more lit-window mechanism (block.js's hidden lit mesh, emissive glass raised at evening, the private period checks, door-cards.js's own table). Then the interiors that still build their own lights (the office, the station lobby, the train). When the last place is moved, eveningLight and outdoorLight in scenes/town.js go.
+The rest of the outdoor places (the east coast, the sports district and pool, the harbour, the works, the office quarter, the campus, the station garden), each with before and after pictures, removing one `onPeriod` light body and one `evening()` each. Then the interiors that still build their own lights (the office, the station lobby, the train). When the last place is moved, eveningLight, outdoorLight and sunFollow in scenes/town.js and every builder's `evening()` go.
