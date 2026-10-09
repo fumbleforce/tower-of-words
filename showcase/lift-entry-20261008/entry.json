@@ -1,6 +1,7 @@
 {
   "title": "Stop and turn before entering the lift",
   "date": "2026-10-08",
+  "result": ["eric-lift-facing-1-facing-door", "eric-lift-facing-1-entry-walking", "carina-lift-facing-1-entry-walking"],
   "by": "codex",
   "caption": "Both protagonists stop and face the opening before walking into the lift. Earlier rejected attempts remain below. This corrects the lift approach; other movement findings remain open.",
   "preview": "eric-lift-facing-1-entry-walking",

@@ -7,7 +7,7 @@
 //   BIBLE_BASE=http://127.0.0.1:8779/ node tools/bible/check.mjs    (a worktree served on another port)
 //
 // Showcase entries (showcase/<id>/entry.json) are checked too: each renders, every image path resolves and image
-// ids are unique within the entry. The Work page (GitHub issues through the server) must render.
+// ids are unique within the entry, and entries from 2026-10-09 on name 1-4 `result` pictures. The Work page (GitHub issues through the server) must render.
 //
 // --public-only checks the public site without accessing private sources.
 // The public site on GitHub Pages (remote mode: only Review, Showcase and Work):
@@ -54,6 +54,11 @@ for (const id of showcaseIds) {
     if (!im.image || !(await head(new URL(im.image, BASE).href))) bad.push(`showcase/${id}: image ${im.image} does not resolve`);
   }
   for (const k of ['title', 'date', 'by', 'caption']) if (!e[k]) bad.push(`showcase/${id}: no ${k}`);
+  // `result` (showcase/README.md): 1-4 ids of the final pictures, required from 2026-10-09
+  const result = [].concat(e.result || []);
+  if (result.length > 4) bad.push(`showcase/${id}: result has ${result.length} pictures, at most 4`);
+  for (const r of result) if (!seen.has(r)) bad.push(`showcase/${id}: result id "${r}" is not an image in the entry`);
+  if (!result.length && String(e.date || '') >= '2026-10-09') bad.push(`showcase/${id}: no result (the final pictures, showcase/README.md)`);
 }
 
 // the story map's loader must read every story file (bible/story-graph.js, tools/bible/story-map-check.mjs)

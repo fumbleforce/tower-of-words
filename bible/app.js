@@ -840,9 +840,20 @@ function reviewClick(e) {
 // Finished visible work, newest first: showcase/<id>/entry.json (format: showcase/README.md). Jørgen can flag and
 // comment on an entry and on each image, and Send saves showcase/<id>/feedback.json. No picks: decisions go in Review.
 const showcaseSections = (e) => [...((e.images || []).length ? [{ images: e.images }] : []), ...(e.sections || [])];
-function showcaseImage(im, v) {
+// The final shipped look (entry.json `result`, 1-4 image ids) opens first and is never folded; entries without one
+// show their preview picture there instead. Those images leave their section grids, so each has one comment box.
+function showcaseResult(e) {
+  const images = showcaseSections(e).flatMap(sec => sec.images || []);
+  const byId = (id) => images.find(im => im.id === id);
+  const result = [].concat(e.result || []).map(byId).filter(Boolean);
+  if (result.length) return { images: result, final: true };
+  const preview = byId(e.preview) || images[0];
+  return { images: preview ? [preview] : [], final: false };
+}
+function showcaseImage(im, v, where) {
   return `<div class="ropt scimg${v.flag ? ' flagged' : ''}" data-item="${esc(im.id)}">
     <div class="rimg">${img(im.image, im.caption || im.id)}</div>
+    ${where ? `<div class="scwhere">${esc(where)}</div>` : ''}
     ${im.caption ? `<div class="rlab"><span>${inline(im.caption)}</span></div>` : ''}
     <div class="racts"><button type="button" class="rflag" data-act="flag" aria-pressed="${!!v.flag}">${v.flag ? '⚑ Flagged' : '⚑ Flag'}</button></div>
     <textarea class="rcom" data-act="comment" rows="2" placeholder="Comment on this picture" aria-label="Comment on ${esc(im.caption || im.id)}">${esc(v.comment || '')}</textarea>
@@ -853,10 +864,14 @@ function showcaseEntry(e, solo) {
   const H = solo ? 'h1' : 'h2';
   const commits = [].concat(e.commit || []);
   const sections = showcaseSections(e), images = sections.flatMap(sec => sec.images || []);
-  const preview = images.find(im => im.id === e.preview) || images[0];
+  const result = showcaseResult(e), inResult = new Set(result.images.map(im => im.id));
+  const preview = images.find(im => im.id === e.preview) || result.images[0];
+  const rest = sections.map(sec => ({ ...sec, images: (sec.images || []).filter(im => !inResult.has(im.id)) })).filter(sec => sec.images.length);
   const details = `scdetails-${e.id}`;
   const count = `${images.length} picture${images.length === 1 ? '' : 's'}${sections.length > 1 ? ` in ${sections.length} sections` : ''}`;
   const activity = e.activity ? new Date(e.activity).toISOString().replace('T', ' ').slice(0, 16) + ' UTC' : '';
+  const sectionOf = (im) => (sections.find(sec => (sec.images || []).includes(im)) || {}).title;
+  const item = (im, where) => showcaseImage(im, (d.items || {})[im.id] || {}, where);
   return `<article class="scentry${solo ? ' expanded' : ''}" data-showcase="${esc(e.id)}" data-lbg>
     <div class="scsummary">
       ${preview ? `<button type="button" class="scpreview" data-act="expand" aria-expanded="${!!solo}" aria-controls="${esc(details)}" aria-label="${solo ? 'Hide' : 'Show'} details for ${esc(e.title)}"><img src="${esc(url(preview.image))}" alt="${esc(preview.caption || e.title)}" loading="lazy"></button>` : ''}
@@ -868,10 +883,13 @@ function showcaseEntry(e, solo) {
       </div>
     </div>
     <div class="scdetails" id="${esc(details)}"${solo ? '' : ' hidden'}>
+    ${result.images.length ? `<section class="scresult${result.final ? '' : ' fallback'}"><h3 class="scresult-h">${result.final ? 'Result' : 'Preview'}</h3>
+      <div class="scresult-grid${result.images.length === 1 ? ' one' : ''}">${result.images.map(im => item(im, sectionOf(im))).join('')}</div></section>` : ''}
     <div class="pill-row"><span class="pill">by ${esc(e.by || '')}</span>${commits.map((c) => `<span class="pill mono" title="${esc(c)}">${esc(String(c).slice(0, 7))}</span>`).join('')}</div>
     ${(e.links || []).length ? `<p class="small">${e.links.map((l) => `<a href="${esc(/^https?:|^#/.test(l.href) ? l.href : ROOT + l.href)}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}
-    ${showcaseSections(e).map((sec) => `<details class="scsec"><summary><span>${esc(sec.title || 'Pictures')}</span><span class="muted small">${(sec.images || []).length} picture${(sec.images || []).length === 1 ? '' : 's'}</span></summary>${sec.caption ? `<p class="muted">${inline(sec.caption)}</p>` : ''}
-      <div class="ropts">${(sec.images || []).map((im) => showcaseImage(im, (d.items || {})[im.id] || {})).join('')}</div></details>`).join('')}
+    ${rest.length ? `<h3 class="screst-h">${result.final ? 'Before/after and attempts' : 'All pictures'}</h3>` : ''}
+    ${rest.map((sec) => `<details class="scsec"><summary><span>${esc(sec.title || 'Pictures')}</span><span class="muted small">${sec.images.length} picture${sec.images.length === 1 ? '' : 's'}</span></summary>${sec.caption ? `<p class="muted">${inline(sec.caption)}</p>` : ''}
+      <div class="ropts">${sec.images.map(im => item(im)).join('')}</div></details>`).join('')}
     <div class="scall"><div class="racts"><button type="button" class="rflag" data-act="flag" aria-pressed="${!!d.flag}">${d.flag ? '⚑ Flagged' : '⚑ Flag the whole entry'}</button></div>
       <textarea class="rcom overall" data-act="overall" rows="3" placeholder="Anything about ${esc(e.title)} as a whole" aria-label="Comment on the whole entry">${esc(d.comment || '')}</textarea></div>
     <div class="rsend"><button type="button" class="rsendbtn" data-act="send">Send</button><span class="rstate muted small" aria-live="polite">${sentLine(fb)}</span></div>

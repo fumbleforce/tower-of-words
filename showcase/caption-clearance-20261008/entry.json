@@ -1,6 +1,7 @@
 {
   "title": "Captions beside conversations",
   "date": "2026-10-08",
+  "result": ["round4-desktop-10-timed-overlap", "round4-phone-10-timed-overlap"],
   "by": "codex",
   "caption": "Ambient captions stay clear of dialogue, portraits and the player, and remain readable above the phone backdrop. Earlier attempts and the native opening checks are included.",
   "preview": "round4-phone-10-timed-overlap",

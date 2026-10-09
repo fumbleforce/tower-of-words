@@ -1,6 +1,7 @@
 {
   "title": "Dorm common-room detail",
   "date": "2026-10-08",
+  "result": ["sink-fix-1366-01-entry", "sink-fix-1366-04-commons_kitchen", "sink-fix-1366-02-commons_books", "sink-fix-1366-03-commons_sofa"],
   "by": "codex",
   "caption": "Window recesses, kitchen fixtures, shared storage and a fridge approach that matches the room. Art seats and walking routes remain usable.",
   "commit": [

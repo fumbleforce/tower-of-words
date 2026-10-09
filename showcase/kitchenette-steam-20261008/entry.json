@@ -1,6 +1,7 @@
 {
   "title": "Soft steam in the B2 kitchenette",
   "date": "2026-10-08",
+  "result": ["candidate-20261008-day2-1366-q2-kitchen-close", "candidate-20261008-day2-1366-q2-overview"],
   "updated": "2026-10-08T01:08:06.687995+00:00",
   "by": "codex",
   "caption": "Steam above the kettle, coffee maker and cup now stays soft when ambient occlusion is enabled.",

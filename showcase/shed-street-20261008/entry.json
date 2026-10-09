@@ -1,6 +1,7 @@
 {
   "title": "Shed-street planting",
   "date": "2026-10-08",
+  "result": ["round2-1366-south", "round2-1366-north", "round2-1366-middle", "round2-1366-rest-evening"],
   "by": "codex",
   "caption": "Connected planting along the shed street, with the existing trees and clear paths. The northern approach and some phone views still need work.",
   "commit": "6e3023f9",
