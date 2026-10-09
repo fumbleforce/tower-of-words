@@ -144,7 +144,12 @@ export async function buildStage(renderer) {
         try {
           const p = key === 'eric' ? await playerBody() : await mioBody(); // the bodies the game boots with (chibi.js)
           p.sitAt(x, SEAT_Y, -(LZ - 0.24) + 0.02, 0);
-          p.update(0);
+          // Mio on her phone (the game's phone layer and prop), stepped until the pose is fully in
+          if (key === 'mio' && p.phone) {
+            p.phone('look');
+            for (let i = 0; i < 60; i++) p.update(1 / 30);
+            p.placePhone?.();
+          } else p.update(0);
           cars[car].root.add(p.root);
           models[key] = p;
         } catch (e) {

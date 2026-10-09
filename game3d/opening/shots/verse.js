@@ -155,7 +155,7 @@ export const VERSE = [
       const look = lt >= beat(58) - beat(56);
       const m = S.riders.mio;
       if (!m) {
-        // the 3D Mio: on the beat she lifts her head from her phone and looks out at us
+        // the 3D Mio: looking down at her phone, then on the beat she lifts her head and looks out at us
         const mio = S.models.mio;
         if (mio) {
           if (!mio.userData) mio.userData = {};
@@ -163,8 +163,9 @@ export const VERSE = [
           const hb = mio.userData.head;
           if (hb) {
             hb.userData.base ??= hb.quaternion.clone();
-            const k2 = ease.out3(clamp((lt - (beat(58) - beat(56))) / 0.25));
-            hb.quaternion.copy(hb.userData.base).multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(-0.45 * k2, 0.25 * k2, 0)));
+            // bowed over the phone (+x tips the head forward on this rig), then up to look straight out at us
+            const k2 = ease.out3(clamp((lt - (beat(58) - beat(56))) / 0.3));
+            hb.quaternion.copy(hb.userData.base).multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(lerp(0.42, -0.04, k2), 0.22 * k2, 0)));
           }
         }
         windowShot(S, T, lt, 2, -0.86, { dist: 2.8 });
