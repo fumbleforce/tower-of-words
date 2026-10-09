@@ -3,14 +3,19 @@
 // and a browser close that hangs (Chromium is killed after CLOSE_GRACE_MS). If this
 // process is SIGKILLed instead, the next job to acquire reclaims its slot and kills
 // its Chromium (browser-gpu-slots.mjs).
+// A long GPU job (the opening video) passes gpuLock: '<name>' to hold the exclusive
+// gpu.lock under that name (tools/gpu_priority.py, rank render) instead of a slot.
 import fs from 'node:fs';
 import os from 'node:os';
 import { randomUUID } from 'node:crypto';
+import { execFileSync, spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import { enqueueGpuTicket, processStart, tryAcquireBrowserGpuSlot } from './browser-gpu-slots.mjs';
 
 const ROOT = '/tmp/claude-1000';
 const CLOSE_GRACE_MS = 10000;
+const GPU_PRIORITY = fileURLToPath(new URL('../gpu_priority.py', import.meta.url));
 
 function childPids(parent) {
   const pids = [];
@@ -35,14 +40,14 @@ function clearDeadMarkers() {
 }
 
 export async function withBrowserJob(name, run, {
-  timeoutMs = 285000, loadWaitMs = 60000, loadPollMs = 5000, gpuWaitMs = 60000,
+  timeoutMs = 285000, loadWaitMs = 60000, loadPollMs = 5000, gpuWaitMs = 60000, gpuLock = null,
 } = {}) {
   if (!Number.isFinite(timeoutMs) || timeoutMs <= 0 || !Number.isFinite(loadWaitMs) || loadWaitMs < 0
     || !Number.isFinite(loadPollMs) || loadPollMs <= 0
     || !Number.isFinite(gpuWaitMs) || gpuWaitMs < 0) throw new Error('Invalid browser job time limits');
   const started = Date.now();
   const owner = `${name} pid=${process.pid} ${randomUUID()}`, locks = [];
-  let safeToRelease = true, gpuSlot, browserPid = null, gpuTicket = null;
+  let safeToRelease = true, gpuSlot, browserPid = null, gpuTicket = null, lockWaiter = null, lockHeld = false;
   // Kill Chromium's process group (Playwright starts it detached) when a close hangs
   // or the process is going away; after that the locks are safe to drop.
   const killBrowser = () => {
@@ -69,6 +74,12 @@ export async function withBrowserJob(name, run, {
     if (!safeToRelease) killBrowser();
     if (gpuSlot && !gpuSlot.release()) return false;
     gpuSlot = null;
+    if (lockWaiter?.exitCode === null) lockWaiter.kill('SIGKILL');
+    lockWaiter = null;
+    if (lockHeld) {
+      try { execFileSync('python3', [GPU_PRIORITY, 'release', gpuLock], { stdio: 'ignore' }); } catch { /* not ours any more */ }
+      lockHeld = false;
+    }
     for (const path of locks) {
       try {
         if (fs.readFileSync(path + '/owner', 'utf8') === owner) fs.rmSync(path, { recursive: true });
@@ -122,7 +133,19 @@ export async function withBrowserJob(name, run, {
     clearDeadMarkers();
     acquire(`${ROOT}/browser.lock.${process.pid}`);
     const gpu = process.env.GL !== 'soft';
-    if (gpu) {
+    if (gpu && gpuLock) {
+      const wait = Math.max(1, Math.min(started + timeoutMs, Date.now() + gpuWaitMs) - Date.now());
+      console.log(`${name}: waiting up to ${Math.round(wait / 1000)}s for the exclusive GPU lock as ${gpuLock}`);
+      lockHeld = true; // release() is a no-op unless gpu.lock names us
+      lockWaiter = spawn('python3', [GPU_PRIORITY, 'acquire', gpuLock, '--rank', 'render', '--pid', String(process.pid),
+        '--timeout', String(Math.ceil(wait / 1000))], { stdio: ['ignore', 'inherit', 'inherit'] });
+      const waiter = lockWaiter;
+      const code = await Promise.race([deadline, cancelled, new Promise((resolve, reject) => {
+        waiter.on('error', reject);
+        waiter.on('exit', resolve);
+      })]);
+      if (code !== 0) throw Object.assign(new Error(`${name}: render deferred; the exclusive GPU lock stayed busy (python3 tools/gpu_priority.py queue)`), { code: 'GPU_DEFERRED' });
+    } else if (gpu) {
       const gpuUntil = Math.min(started + timeoutMs, Date.now() + gpuWaitMs);
       let waitingForGpu = false;
       // A place in the GPU queue (tools/gpu_priority.py), dropped once a slot is ours or on any exit.
@@ -145,7 +168,7 @@ export async function withBrowserJob(name, run, {
     const args = gpu
       ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu']
       : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
-    console.log(`${name}: ${gpu ? `GPU slot ${gpuSlot.slot + 1}` : 'software GL (explicit GL=soft)'}`);
+    console.log(`${name}: ${!gpu ? 'software GL (explicit GL=soft)' : gpuSlot ? `GPU slot ${gpuSlot.slot + 1}` : `exclusive GPU lock as ${gpuLock}`}`);
     safeToRelease = false;
     const before = new Set(childPids(process.pid));
     try {
