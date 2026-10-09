@@ -11,10 +11,9 @@ export function forecourtWestClamp(p, phone) {
   return base + (-6.8 - base) * campusApproach(p);
 }
 
-export function attachForecourtFraming(cam, isPhone, isTrial) {
+export function attachForecourtFraming(cam, isPhone) {
   let orbit = false;
   const frame = (p) => {
-    if (isTrial()) return;
     if (cam.clamp) cam.clamp[0] = forecourtWestClamp(p, isPhone());
     // A slight view from the west clears the courtyard tree as he steps off the street.
     const approach = campusApproach(p);

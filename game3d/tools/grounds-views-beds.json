@@ -2,7 +2,6 @@
   "campus": {
     "place": "campus",
     "day": 3,
-    "diorama": false,
     "views": [
       { "id": "cp-bench", "at": [-24, -31] },
       { "id": "cp-path", "at": [-5.3, -30] },

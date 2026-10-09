@@ -5,7 +5,7 @@ import { varyPanes } from './glazing.js';
 import { leafCluster } from './canopy.js';
 
 // A world-space finish keeps the existing paving and building geometry aligned at seams.
-// These materials belong only to the opt-in street trial.
+// The street style's own copies: the shared materials the other outdoor places use stay as they are.
 export function streetMaterial(original, kind) {
   const material = original.clone();
   material.userData = { ...original.userData, noLook: true };
@@ -180,7 +180,7 @@ export function finishWindows(root, environment) {
     if (!o.isMesh || Array.isArray(o.material) || o.isSkinnedMesh || o.material.map) return;
     if (o.material.color?.getHexString() !== '8c9dad' && !/^ho:.*glass/i.test(o.name) && o.name !== 'station:glass')
       return;
-    // Building callbacks retain the source for evening light. Clone the trial appearance so
+    // Building callbacks retain the source for evening light. Clone the street appearance so
     // cached materials used by other places remain untouched; forward only its light state.
     const source = o.material,
       daylight = source.color.clone(),

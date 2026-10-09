@@ -2,7 +2,7 @@
 // with the walk grid laid over them, and walks into an edge (where does he stop, against what is drawn there).
 //   node game3d/tools/grounds-shots.mjs <width> <spec.json>[#key] [out]
 // The matched before/after views for stage 1 are game3d/tools/grounds-views.json#forecourt and #campus.
-// spec: { place, day, diorama, views: [{ id, at: [x, z], face?, top?: { c: [x, z], h, r }, push?: [dx, dz] }] }
+// spec: { place, day, views: [{ id, at: [x, z], face?, top?: { c: [x, z], h, r }, push?: [dx, dz] }] }
 //   at     where Eric stands (set directly, then the game's own camera snaps to him)
 //   face   the direction he faces, radians (his back to the camera is the default)
 //   top    an overhead view centred on c, `h` high, with the walk grid of radius r drawn over the ground (green free,
@@ -59,8 +59,7 @@ await withBrowserJob(
         90000,
         () =>
           page.goto(
-            `http://127.0.0.1:8771/${base}/index.html?day=${spec.day || 2}&place=${spec.place}&mc=eric&q=2` +
-              (spec.diorama ? '&diorama=1' : ''),
+            `http://127.0.0.1:8771/${base}/index.html?day=${spec.day || 2}&place=${spec.place}&mc=eric&q=2`,
           ),
         'play',
       );

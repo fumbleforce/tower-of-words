@@ -18,7 +18,7 @@ Object.assign(globalThis, {
 });
 const { Parts } = await import('../../js/scenes/outdoor/parts.js');
 const { TREES, hedge } = await import('../../js/scenes/outdoor/planting.js');
-const { trialPlanting } = await import('../../js/scenes/diorama/planting.js');
+const { streetPlanting } = await import('../../js/scenes/diorama/planting.js');
 const { clippedHedge } = await import('../../js/scenes/diorama/planting-shapes.js');
 const digest = (p) => {
   const hash = createHash('sha256');
@@ -42,7 +42,7 @@ test('default and declined strategies leave every species and hedge geometry ide
   assert.equal(digest(ordinary), digest(declined));
 });
 test('trial descriptors replace old bark and crowns once, preserving root and hedge gap positions', () => {
-  const strategy = trialPlanting(),
+  const strategy = streetPlanting(),
     p = new Parts({ planting: strategy });
   TREES.sakura(p, 16.7, 4.8, 0.85, 3);
   hedge(p, [8, 3], [10, 3], { w: 0.5, h: 0.55 });
@@ -144,7 +144,7 @@ test('pane variation keeps source UVs and geometry intact while choosing multipl
 
 test('tree base meets raised cover and groundcover leaves face upward', async () => {
   const { bed } = await import('../../js/scenes/outdoor/planting.js');
-  const strategy = trialPlanting(),
+  const strategy = streetPlanting(),
     p = new Parts({ planting: strategy });
   bed(p, [15, 18, 3, 7], { y: 0.3 });
   TREES.sakura(p, 16.7, 4.8, 0.85, 3);

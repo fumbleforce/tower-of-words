@@ -38,7 +38,7 @@ Three things are named or placed in a way that hides what they are. `train/kit.j
 
 ### Experiments that sit beside the kit
 
-- scenes/diorama/ (1,393 lines) is the street-style trial behind `?diorama=1`, forecourt only (diorama/index.js:11). It has its own trees, hedges, meadow, leaf canopy, world-space materials and reflections. Its review, diorama-street-1, is superseded and its answers carry into #362.
+- scenes/diorama/ (about 1,400 lines) is the street style, the only outdoor look since #321 (Review street-style-default-1), so far built for the forecourt only. It has its own trees, hedges, meadow, leaf canopy, world-space materials and reflections; the kit is where it becomes reusable (notes/outdoor-plan.md).
 - game3d/js/showcase/ (trim.js 411, decals.js 564, room.js, main.js) is the standalone trim-sheet test page, game3d/showcase.html. The game does not import it.
 - scenes/works/verges.js, verge-foliage.js and verge-plan.js (about 320 lines) are a second foliage style used only at the works and its yard.
 
@@ -68,7 +68,7 @@ Rough line counts are what would go if each family were merged into one paramete
 ### Planting and ground (about 220 lines, more if the works style folds in)
 
 - A tree in a mulch ring is written three times (plaza/east-lane.js:60, forecourt/quarter-planting.js:17, outdoor/lane.js:70). `shrubBed` exists twice, nearly identical (plaza/east-lane.js:256, dorm-court/cluster-yards.js:29). The works has its own leaf-card trees and bushes (works/verges.js:77 and :114).
-- The diorama trial is a third tree and hedge implementation (diorama/planting.js, planting-shapes.js, foliage.js, canopy.js, meadow.js, root-bed.js, about 650 lines).
+- The street style (scenes/diorama/) is a third tree and hedge implementation (diorama/planting.js, planting-shapes.js, foliage.js, canopy.js, meadow.js, root-bed.js, about 650 lines).
 - Paving has three generators: the main `paver()`, town.js `pavingRects` :103 (one caller), and props.js `tileFloor` for interiors. Flat ground comes from both skyline.js:295 and town.js `groundPatches` :28.
 - Small helpers copied between neighbouring places: `walk()` is byte-identical in plaza/east-lane.js:66 and dorm-court/cluster.js:55, and `const edge = ...` appears in four files.
 
@@ -92,7 +92,7 @@ Rough line counts are what would go if each family were merged into one paramete
 
 **Lighting.** town.js holds the shared outdoor light, but seven places build their own hemisphere and sun (dorm-court.js:127, dorms.js:50, office.js:607, lobby.js:337 as a copy of `outdoorLight` with other numbers, places/train.js:80, train/screen-scenes.js:38, viewer/stage.js:21). The monorail's metal reflects a sky drawn for the train's sun direction (train/models.js:64), which no other place uses, and the farview lane is about to add a real sky and fog. If reflections, sky and sun don't come from one per-period description, metal and glass will reflect a sky the player can't see.
 
-**Two finishing passes.** look/ patches materials by surface kind after a place is built. The diorama trial runs a second, separate pass that clones materials and marks them `noLook` (diorama/materials.js:9-12). Two systems now decide what a surface looks like.
+**Two finishing passes.** look/ patches materials by surface kind after a place is built. The street style runs a second, separate pass that clones materials and marks them `noLook` (diorama/materials.js:9-12). Two systems now decide what a surface looks like.
 
 ## 4. Proposed structure
 
@@ -178,6 +178,6 @@ Lanes in flight: claude-agent:grounds (walk-ground, kerbs, forecourt and campus 
 
 **Stage 6. Time of day.** kit/light: the period grades from town.js, room light from rooms/shell.js, a glow registry fed by pieces, and one `applyPeriod` that also restores daylight. Replace the six lit-window mechanisms and the 28 `onPeriod` bodies place by place. **Codex review**: this touches places/lifecycle.js and the save-relevant period handling.
 
-**Stage 7. Retire or harvest the experiments.** Decide with Jørgen what the street trial (scenes/diorama/) and the trim-sheet page (game3d/js/showcase/) should leave behind. Whatever he liked becomes a variant or a material in the kit. The rest goes to legacy/. The works foliage style is either folded into planting as a variant or kept as a deliberate second look and declared as one. This is up to 2,800 lines.
+**Stage 7. Retire or harvest the experiments.** The street style (scenes/diorama/) is the look the kit is built from (Jørgen chose it, #321); decide with Jørgen what the trim-sheet page (game3d/js/showcase/) should leave behind. Whatever he liked becomes a variant or a material in the kit. The rest goes to legacy/. The works foliage style is either folded into planting as a variant or kept as a deliberate second look and declared as one. This is up to 2,800 lines.
 
 Each stage is useful on its own. After stage 1, every later merge shows up on the library page: several cards that look alike become one card with more "used in" rows.

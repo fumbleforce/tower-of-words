@@ -23,7 +23,7 @@ const TIPPED = 'evening_bike_tipped',
 const ease = (k) => k * k * (3 - 2 * k);
 const STAND = -0.09; // leaning a little on its stand (bicycle() leans every parked bike the same)
 
-export function fallenBikes(game, root, nav, { rackLight } = {}) {
+export function fallenBikes(game, root, nav) {
   const { row, step, fallen, leaning } = LOOSE_BIKES;
   const frame = new THREE.Group(); // the row's own frame: places along x, the aisle toward -z
   frame.rotation.y = row.turn;
@@ -51,7 +51,11 @@ export function fallenBikes(game, root, nav, { rackLight } = {}) {
   const diffuser = rbox(0.02, 0.11, 0.52, '#e2e8eb', { x: SE + 0.16, y: 2.35, z: 6.4 });
   diffuser.material = diffuser.material.clone();
   root.add(diffuser);
-  const light = rackLight ? rackLight(root) : new THREE.PointLight('#dae4ee', 0, 8, 2);
+  // aimed down and away from the facade: a bare point washes out the glazing and the roof edge near it before enough
+  // light reaches the aisle
+  const light = new THREE.SpotLight('#dae4ee', 0, 8, Math.PI / 3, 0.65, 2);
+  light.target.position.set(SE + 3, 0, 6.4);
+  root.add(light.target);
   light.position.set(SE + 0.55, 2.3, 6.4);
   root.add(light);
   const upright = (i) => ({ x: i * step, z: 0, y: 0, yaw: slotYaw(i, row.seed), roll: STAND });

@@ -19,7 +19,7 @@ function branch(p, from, to, radius, tip) {
 }
 
 // Semantic replacement happens before Parts merges bark and leaves. Returning true suppresses the old plant.
-export function trialPlanting() {
+export function streetPlanting() {
   const records = [];
   return {
     records,

@@ -1,3 +1,6 @@
+// The street style, the game's outdoor look (Review street-style-default-1, #321): materials, softened station walls,
+// paving detail, leaf clusters, meadow and daylight dressed over the forecourt (scenes/forecourt.js). The other outdoor
+// places don't have it yet; the world kit (#367, notes/outdoor-plan.md) takes it to them.
 import * as THREE from 'three';
 import { streetDetails } from './details.js';
 import { finishStreet } from './materials.js';
@@ -8,7 +11,6 @@ import { softenStation } from './architecture.js';
 import { detailController } from './quality.js';
 import { splitStreetSurfaces } from './spatial.js';
 export { finishOffice } from './architecture.js';
-export const dioramaTrial = () => new URLSearchParams(location.search).get('diorama') === '1';
 export function dressStreet(root, scene, sun, station, nav) {
   const environment = finishStreet(root);
   const softened = softenStation(root);
@@ -37,7 +39,7 @@ export function dressStreet(root, scene, sun, station, nav) {
   root.userData.dioramaDetail();
   return environment;
 }
-export const DIORAMA_GRADE = {
+export const STREET_GRADE = {
   exposure: 1.02,
   temp: 0.025,
   sat: 1.04,

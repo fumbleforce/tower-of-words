@@ -1,5 +1,4 @@
-import { rackLight } from '../scenes/diorama/light.js';
-import { dioramaTrial, DIORAMA_GRADE } from '../scenes/diorama/index.js';
+import { STREET_GRADE } from '../scenes/diorama/index.js';
 import * as THREE from 'three';
 import { day3Place } from './day3/place.js';
 import { BIKES, CAMPUS_EXIT, inRect } from '../scenes/forecourt/plan.js';
@@ -28,7 +27,7 @@ export async function forecourtPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   // after work: Tama on the garden bench, and the fallen bicycle in the bike court
   const garden = gardenCat(game, w.root),
-    bikes = fallenBikes(game, w.root, w.nav, dioramaTrial() ? { rackLight } : undefined);
+    bikes = fallenBikes(game, w.root, w.nav);
   const spots = {
     station_exit: w.start,
     office_entrance: w.officeEntrance,
@@ -156,11 +155,6 @@ export async function forecourtPlace(game) {
     turnAt = null;
   const setTurn = (k) => {
     turn = k;
-    if (dioramaTrial()) {
-      cam.yaw = 0.35;
-      cam.elev = THREE.MathUtils.degToRad(48);
-      return;
-    }
     if (!phone || !north.dist) {
       if (cam.yaw) [cam.yaw, cam.elev] = [north.yaw, north.elev]; // back from a phone turn (the window was resized)
       return;
@@ -172,7 +166,7 @@ export async function forecourtPlace(game) {
     cam.fitDist = north.dist * L(1, east.zoom, s);
     cam.lead = L(north.lead, east.lead, s);
   };
-  const frameCampus = attachForecourtFraming(cam, () => phone, dioramaTrial);
+  const frameCampus = attachForecourtFraming(cam, () => phone);
   const steer = (p, dt) => {
     frameCampus(p);
     const jump = !turnAt || Math.hypot(p.x - turnAt[0], p.z - turnAt[1]) > 0.8;
@@ -195,7 +189,7 @@ export async function forecourtPlace(game) {
     sun: w.sun,
     light: w.light,
     charScale: K,
-    start: dioramaTrial() ? [9.7, 9.8] : w.start,
+    start: w.start,
     startFacing: Math.PI,
     music: 'calm',
     things,
@@ -232,22 +226,6 @@ export async function forecourtPlace(game) {
       const k = turn;
       phone = false;
       setTurn(0);
-      if (dioramaTrial()) {
-        cam.elev = THREE.MathUtils.degToRad(48);
-        cam.yaw = 0.35;
-        const span = aspect < 1 ? 2.6 : 5.7;
-        cam.fit(
-          aspect,
-          [
-            new THREE.Vector3(-span, 0, -span * 0.66),
-            new THREE.Vector3(span, 0, span * 0.66),
-            new THREE.Vector3(0, 3, 0),
-          ],
-          new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-1, 32, -12, 14], lead: -0.7 },
-        );
-        return;
-      }
       if (aspect >= 1) {
         cam.fit(
           aspect,
@@ -370,7 +348,7 @@ export async function forecourtPlace(game) {
   };
   // the lift caches the light it dims from: a change of period makes it forget, so the next ride dims the new one
   w.light.before = () => relightLift(P);
-  if (dioramaTrial()) w.light.grades.day = DIORAMA_GRADE; // the street trial's own grade by day
+  w.light.grades.day = STREET_GRADE; // the street style's own grade by day (scenes/diorama/)
   lightPlace(P, sim.period, sim.day);
   return P;
 }

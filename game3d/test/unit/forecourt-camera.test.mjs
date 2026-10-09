@@ -43,11 +43,7 @@ test('arrival and restored-save snaps update the clamp before camera framing', (
       seen = this.clamp[0];
     },
   };
-  const frame = attachForecourtFraming(
-    cam,
-    () => false,
-    () => false,
-  );
+  const frame = attachForecourtFraming(cam, () => false);
   cam.snap({ x: -5.3, z: -3.9 });
   assert.equal(seen, -6.8);
   // Lift rides snap their already-authored camera without a player position.
@@ -55,22 +51,11 @@ test('arrival and restored-save snaps update the clamp before camera framing', (
   assert.equal(seen, -6.8);
   frame({ x: 12.3, z: -2.85 });
   assert.equal(cam.clamp[0], 5.2);
-  const trial = { clamp: [-1, 32, -12, 14], snap() {} };
-  attachForecourtFraming(
-    trial,
-    () => true,
-    () => true,
-  )({ x: -5.3, z: -3.9 });
-  assert.equal(trial.clamp[0], -1);
 });
 
 test('the western orbit clears the courtyard tree and leaves other camera directions alone', () => {
   const cam = { clamp: [5.2, 26, -11.4, 12], yaw: 0.2, snap() {} };
-  const frame = attachForecourtFraming(
-    cam,
-    () => false,
-    () => false,
-  );
+  const frame = attachForecourtFraming(cam, () => false);
   frame({ x: 12.3, z: -2.85 });
   assert.equal(cam.yaw, 0.2);
   frame({ x: -5.3, z: -2.3 });
@@ -78,10 +63,6 @@ test('the western orbit clears the courtyard tree and leaves other camera direct
   frame({ x: -1.5, z: 1.15 });
   assert(Math.abs(cam.yaw) === 0);
   const phone = { clamp: [-1, 30, -12.4, 12], yaw: -1.2, snap() {} };
-  attachForecourtFraming(
-    phone,
-    () => true,
-    () => false,
-  )({ x: -5.3, z: -2.3 });
+  attachForecourtFraming(phone, () => true)({ x: -5.3, z: -2.3 });
   assert.equal(phone.yaw, -1.2);
 });
