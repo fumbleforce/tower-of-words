@@ -50,6 +50,7 @@ const CASES = process.env.CASES
           ['forecourt', true, [12.25, -2.85]],
           ['forecourt', false, [12.25, -2.85]], // the head office door
           ['forecourt', false, [11.9, -6.5]], // in the lobby
+          ['forecourt', false, [17.25, -11.7]], // at the lifts: the door and lift frames (Jørgen, 2026-10-10)
           ['plaza', false, [0, 6]],
           ['plaza', true, [0, 6]],
           ['dorm_court', true, 'dorm_entry'],

@@ -108,7 +108,7 @@ export const doorway = piece({
     // the lamp
     if (o.lamp === 'wall') {
       const u = w / 2 + 0.38,
-        y = h - 0.05;
+        y = h - 0.06; // (its cap 1 cm under the top of a slim canopy it reaches into, not level with it)
       k.box(STEEL.dark, 0.1, 0.16, 0.04, u, y, 0.02); // the plate
       k.box(STEEL.dark, 0.03, 0.03, 0.12, u, y + 0.1, 0.08);
       k.box(STEEL.dark, 0.16, 0.03, 0.16, u, y + 0.27, 0.17);
@@ -138,7 +138,8 @@ function canopy(k, o, h, w, r) {
     out = o.out,
     y = h + 0.2;
   if (o.canopy === 'deep') {
-    k.box(TRIM.canopy, cw, 0.07, out, 0, y, out / 2, { surf: 'metal' });
+    // (the slab stops a centimetre inside its dark front and ends: in their planes it flickered)
+    k.box(TRIM.canopy, cw - 0.02, 0.07, out - 0.01, 0, y, (out - 0.01) / 2, { surf: 'metal' });
     k.box(TRIM.fascia, cw, 0.36, 0.08, 0, y - 0.12, out - 0.04, { round: 0.01 });
     for (const s of [-1, 1]) k.box(TRIM.fascia, 0.08, 0.36, out, (s * (cw - 0.08)) / 2, y - 0.12, out / 2);
     if (!k.phone)
@@ -161,10 +162,11 @@ function canopy(k, o, h, w, r) {
       col = o.canopy === 'porch' ? '#55595d' : o.leaf === TIMBER.dark ? '#5b5f63' : STEEL.mid;
     const g = new THREE.BoxGeometry(cw, 0.05, out / Math.cos(pitch)).rotateX(pitch).translate(0, y + 0.14, out / 2);
     k.geo(col, g, { surf: 'roof' });
-    k.box(TIMBER.pale, cw, 0.06, 0.06, 0, y - 0.03, 0.03, { round: 0.01 }); // its ledger on the wall
+    // its ledger on the wall and the porch's beam stop a centimetre in from the roof's ends (level with them they flickered)
+    k.box(TIMBER.pale, cw - 0.02, 0.06, 0.06, 0, y - 0.03, 0.03, { round: 0.01 });
     if (o.canopy === 'porch') {
       for (const s of [-1, 1]) k.box(TIMBER.mid, 0.12, y, 0.12, s * (cw / 2 - 0.08), 0, out - 0.08, { round: 0.01 });
-      k.box(TIMBER.mid, cw, 0.1, 0.1, 0, y - 0.06, out - 0.08, { round: 0.01 });
+      k.box(TIMBER.mid, cw - 0.02, 0.1, 0.1, 0, y - 0.06, out - 0.08, { round: 0.01 });
     } else {
       for (const s of [-1, 1]) {
         const u = s * (cw / 2 - 0.06);
