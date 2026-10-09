@@ -67,6 +67,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 - Age 30 (Jørgen, 2026-10-09). B2's programmer. Of the people Eric works beside, the only one with English (loose, learned from work and the internet).
 - Home: on the island. Her mother lives on the mainland; Mio stays over sometimes and comes back on the monorail with a bag of her mother's pickles ("My mother thinks island has no food").
+- Job: hired as a programmer, never meant to work on the servers. Nobody else on B2 knew anything about the old machines, so she became the de facto expert. She forwarded the request for a dedicated hardware engineer to Emi, and it went up the chain until the company brought Eric to the island (Jørgen, 2026-10-09).
 - Routine: looks after B2's old servers in the machine room, where she also eats lunch because "it's quiet, and nobody talks to me there". Hates bowing; that's why she's on B2. Anything reported broken goes on her list.
 - Mio is an asocial gamer. She values her privacy and alone time. A few people are exceptions (Jørgen, 2026-10-09). She is dry, busy and low on energy. On the train she reluctantly gets Eric up to speed. She will not let a teammate embarrass B2 through lack of preparation. She calls him 外人 as she would say "the new guy". Mori corrects her to 外国の方.
 - Knows: Mori (likes him), Kenji (barred him from the machine room).
