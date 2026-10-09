@@ -397,7 +397,7 @@ The faces each person can show beside the text box: `game3d/assets/portraits/<id
 | `kuroda` | neutral, sleepy, panicked |
 | `kuro` | neutral |
 | `aoi` | neutral |
-| `rei` | neutral |
+| `rei` | neutral, scolding, cold, smug, offguard |
 
 Mio's `phone` face is her looking down at her phone, a dialogue portrait of its own (Jørgen asked for it instead of a timed phone icon). Approved 2026-09-29 (reviews/mio-phone-5).
 

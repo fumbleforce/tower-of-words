@@ -66,7 +66,7 @@ export const tennisNodes = {
     { set: 'd4_watched_rei' },
     { say: 'rei', name: 'Rei', emo: 'casual', text: 'Turn sideways first. Then bring the racket back, and when you toss the ball...' },
     { say: 'eric', emo: 'hesitant', text: 'Hang on, where should my feet be?' },
-    { say: 'rei', name: 'Rei', emo: 'curt', text: 'Watch my feet, then. And don’t talk until I’ve finished the serve.' },
+    { say: 'rei', name: 'Rei', emo: 'curt', face: 'scolding', text: 'Watch my feet, then. And don’t talk until I’ve finished the serve.' },
     { do: 'tennisSession', state: 'serve' },
     { do: 'gesture', who: 'aoi', kind: 'point', to: 'rei' },
     { say: 'aoi', name: 'Aoi', overheard: true, emo: 'curious', text: '私も、やってみていいですか。' },

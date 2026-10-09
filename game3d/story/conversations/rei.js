@@ -56,12 +56,12 @@ export default {
     ],
     chat_rei_more: [
       { say: 'eric', emo: 'warm', text: 'I’d ask again.' },
-      { say: 'rei', name: 'Rei', emo: 'amused', text: 'Then you’ll be asking someone else. Once I’ve lost twice, I’m going home to read.' },
+      { say: 'rei', name: 'Rei', emo: 'amused', face: 'smug', text: 'Then you’ll be asking someone else. Once I’ve lost twice, I’m going home to read.' },
       { set: 'chat_rei_more_games' }, { set: { chat_rei_one_game: false } }, { go: 'chat_rei_leave' },
     ],
     chat_rei_one: [
       { say: 'eric', emo: 'casual', text: 'One game is enough.' },
-      { say: 'rei', name: 'Rei', emo: 'curt', text: 'Then don’t partner me. I’ll remember you said that.' },
+      { say: 'rei', name: 'Rei', emo: 'curt', face: 'cold', text: 'Then don’t partner me. I’ll remember you said that.' },
       { set: 'chat_rei_one_game' }, { set: { chat_rei_more_games: false } }, { go: 'chat_rei_leave' },
     ],
     chat_rei_preference_repeat: [

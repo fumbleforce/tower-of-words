@@ -69,20 +69,20 @@ export default {
 
     // Rei expects polite Japanese, and scolds sloppiness
     register_rei_casual_1: [
-      { say: 'rei', emo: 'stern', face: 'neutral', overheard: true, text: '{sumimasen}けど、その言い方は失礼ですよ。' },
-      { say: 'rei', emo: 'curt', face: 'neutral', text: 'You can talk like that to your own juniors if you want. I’m not one of them, so be polite with me.' },
+      { say: 'rei', emo: 'stern', face: 'scolding', overheard: true, text: '{sumimasen}けど、その言い方は失礼ですよ。' },
+      { say: 'rei', emo: 'curt', face: 'scolding', text: 'You can talk like that to your own juniors if you want. I’m not one of them, so be polite with me.' },
     ],
     register_rei_casual_2: [
-      { say: 'rei', emo: 'curt', face: 'neutral', text: 'You’re doing it again. I give you the orders, not the other way round.' },
+      { say: 'rei', emo: 'curt', face: 'scolding', text: 'You’re doing it again. I give you the orders, not the other way round.' },
       { do: 'gesture', who: 'rei', kind: 'point', to: 'eric' },
     ],
     register_rei_casual_3: [
-      { say: 'rei', emo: 'stern', face: 'neutral', overheard: true, text: '{mouichido}。ちゃんと言いなさい。' },
+      { say: 'rei', emo: 'stern', face: 'scolding', overheard: true, text: '{mouichido}。ちゃんと言いなさい。' },
       { do: 'gesture', who: 'rei', kind: 'point', to: 'eric' },
     ],
     register_rei_right_1: [
       { do: 'bow', who: 'rei', depth: 'small' },
-      { say: 'rei', emo: 'dry', face: 'neutral', text: 'You say that one properly, at least.' },
+      { say: 'rei', emo: 'dry', face: 'smug', text: 'You say that one properly, at least.' },
     ],
     register_rei_right_2: [
       { say: 'rei', emo: 'amused', face: 'neutral', text: 'There, we’ve both been polite. Now, what do you want?' },
