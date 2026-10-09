@@ -615,7 +615,7 @@ export function buildPassengers(LZ, SEAT_Y) {
   });
   sit(reader);
   armsHold(reader, -1.05, 0.55);
-  add(reader, 2.55, near);
+  add(reader, 1.32, near);
   const bk = book();
   bk.position.set(0, 0.05, 0.2);
   bk.rotation.x = 0.75;
@@ -759,7 +759,7 @@ export function buildPassengers(LZ, SEAT_Y) {
   };
   list.push(stander);
 
-  // 6. near side, seen from behind: woman with a bun
+  // 6. near side, from behind: woman with a bun
   const bunW = chibi({
     skin: SKINS[0],
     top: '#f5f2ec',
@@ -772,7 +772,7 @@ export function buildPassengers(LZ, SEAT_Y) {
   });
   sit(bunW);
   armsHold(bunW, -1.1, 0.5);
-  add(bunW, -2.5, near);
+  add(bunW, -0.75, near);
   const ph3 = phone();
   ph3.position.set(0, 0.07, 0.2);
   ph3.rotation.x = 0.9;

@@ -214,13 +214,15 @@ The monorail has one period, early morning.
 | `mio` | Far bench, right, with her laptop and lunchbox on the seat beside her; nobody else sits on that half of the bench. | – |
 | `aoi` | Far bench, left, on the phone. | – |
 | `kuroda` | Far bench, far left, asleep. | – |
-| `reader` | Near bench, right, seen from behind, reading. | – |
-| `music` | Near bench, cap and headphones, nodding. | – |
-| `bun` | Near bench, left, seen from behind. | – |
+| `reader` | Near bench, right half, seen from behind, reading. | – |
+| `music` | Near bench, right half, by the gap, in headphones, nodding. | – |
+| `bun` | Near bench, left half, by the gap, seen from behind. | – |
 | `stander` | Hidden following the rejected silhouette. | – |
 | `tama` | Far bench, washing. | – |
 | `rei` | Hidden (her seat is Mio's now). | – |
 | `guard` | Day 3 only: on the platform beside the tester on a morning visit before the sign-off; walks back along the platform after it. Label "Guard". | – |
+
+The reader, the girl with headphones and the woman with a bun are the approved office crowd bodies ([art-and-sound.md](art-and-sound.md)), sitting on the near benches clear of the doorways.
 
 ### Small moments
 
