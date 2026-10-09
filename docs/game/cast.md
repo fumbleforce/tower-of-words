@@ -86,7 +86,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 - Age 21. Two months on the team, the newest before Eric. Kenji is mild, confused and somewhat clumsy (Jørgen, 2026-10-09). He is keen to help and easily distracted.
 - Routine: lives on melon soda. His chair broke, so he borrowed Eric's and left it in the machine room.
-- Speaks casual Japanese, and a little school English he likes to practise.
+- Speaks casual Japanese with peers; with Eric, his senpai, he stays polite (です/ます, {mc.name_jp}さん) until Eric tells him to relax (approved voice sheet notes/characters/kenji/voice.md, Jørgen 2026-10-09). His English is a few school words.
 - Knows: Mori (likes him), Mio (owes her).
 - Look: about 21, inexperienced, eager, easily distracted; varied looks but grounded, a junior IT support guy in work clothes (Jørgen, 2026-09-28). Approved portrait: h4, black bedhead hair with an open smile (reviews/kenji-concept-3), redrawn toward Mio and Kuro as kenji-ink-2001 (reviews/style-align-1): soft pudgy build, white short-sleeved shirt, dark tie, empty hands. Round 1 (hobby costumes) was rejected as "way out of whacko land... he is at work".
 
