@@ -9,7 +9,7 @@ const STATUS_NOTE = {
   approved: 'Jørgen picked it', provisional: 'In the game, not approved yet', candidate: 'Waiting for a pick',
   legacy: 'From an earlier version', rejected: 'Not picked or turned down',
 };
-const is3d = (v) => ['meshy', 'mio', 'glb', 'chibi', 'kit', 'room'].includes(v && v.type);
+const is3d = (v) => ['meshy', 'mio', 'glb', 'chibi', 'piece', 'room'].includes(v && v.type);
 
 let D, all = [], shown = [];
 const F = { status: new Set(), kind: new Set(), who: '', place: '', q: '', sort: 'kind' };

@@ -1,0 +1,30 @@
+{
+  "title": "Asset library in the bible",
+  "date": "2026-10-09",
+  "by": "claude-agent:kit",
+  "caption": "A new Asset library page in the local bible lists the 132 world pieces the game builds in code. Each one has pictures of its variants, every file and line that uses it, and how to call it. A second list shows the 22 kinds of thing the audit found built in more than one place. Open it at http://127.0.0.1:8771/bible/#assets.",
+  "result": ["list-desktop", "piece-desktop", "list-phone", "piece-phone"],
+  "sections": [
+    {
+      "title": "The library",
+      "caption": "Pieces are grouped by family: building parts, street furniture, planting, ground, lighting, materials, interior props and helpers. You can filter by family or by place, or show only the pieces that are also built elsewhere.",
+      "images": [
+        { "id": "list-desktop", "image": "game3d/shots/asset-library-20261009/list-desktop.webp", "caption": "Top of the page, desktop" },
+        { "id": "list-desktop-full", "image": "game3d/shots/asset-library-20261009/list-desktop-full.webp", "caption": "The whole list, desktop" },
+        { "id": "list-phone", "image": "game3d/shots/asset-library-20261009/list-phone.webp", "caption": "Top of the page, phone" },
+        { "id": "list-phone-full", "image": "game3d/shots/asset-library-20261009/list-phone-full.webp", "caption": "The whole list, phone" }
+      ]
+    },
+    {
+      "title": "One piece",
+      "caption": "A piece's page shows its variants, how to call it, the copies the audit found elsewhere, and every place that uses it, with links to the lines.",
+      "images": [
+        { "id": "piece-desktop", "image": "game3d/shots/asset-library-20261009/piece-desktop.webp", "caption": "Park bench, desktop" },
+        { "id": "piece-phone", "image": "game3d/shots/asset-library-20261009/piece-phone.webp", "caption": "Park bench, phone" },
+        { "id": "building-desktop", "image": "game3d/shots/asset-library-20261009/building-desktop.webp", "caption": "Office block, desktop" },
+        { "id": "building-phone", "image": "game3d/shots/asset-library-20261009/building-phone.webp", "caption": "Office block, phone" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Open the Asset library", "href": "bible/#assets" }]
+}
