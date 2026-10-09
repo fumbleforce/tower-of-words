@@ -44,7 +44,7 @@ test('office queue head and shoulder offsets reach real bones without accumulati
   const rest = head.quaternion.clone();
   bridgeOfficePose(rig);
   rig.head.rotation.set(0.3, 0.4, 0);
-  rig.torso.position.y = -0.012;
+  rig.torso.position.y = 0.008;
   const expected = rest.clone().multiply(rig.head.quaternion);
   for (let i = 0; i < 120; i++) rig.update(1 / 60);
   assert.ok(head.quaternion.angleTo(expected) < 1e-7);
@@ -52,7 +52,7 @@ test('office queue head and shoulder offsets reach real bones without accumulati
   assert.equal(spine.position.x, 1);
   assert.equal(spine.position.z, 3);
   rig.head.rotation.set(0, 0, 0);
-  rig.torso.position.y = 0;
+  rig.torso.position.y = 0.02;
   rig.update(1 / 60);
   assert.ok(head.quaternion.angleTo(rest) < 1e-7);
   assert.equal(spine.position.y, 2);
@@ -68,14 +68,33 @@ test('office offsets follow the latest native animation pose and restore on rele
   };
   bridgeOfficePose(rig);
   rig.head.rotation.set(0.2, 0, 0);
-  rig.torso.position.y = -0.01;
+  rig.torso.position.y = 0.01;
   for (let i = 0; i < 10; i++) rig.update(1 / 60);
   const native = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0.1, 0));
   assert.ok(head.quaternion.angleTo(native.multiply(rig.head.quaternion)) < 1e-7);
   assert.ok(Math.abs(spine.position.y - (2.1 - S)) < 1e-9);
   rig.head.rotation.set(0, 0, 0);
-  rig.torso.position.y = 0;
+  rig.torso.position.y = 0.02;
   rig.update(1 / 60);
   assert.ok(head.quaternion.angleTo(new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0.11, 0))) < 1e-7);
   assert.equal(spine.position.y, 2.11);
+});
+
+test('production queue rest, peak sigh and gate-open reset preserve the native spine baseline', () => {
+  const { rig, spine } = fixture();
+  const native = spine.position.clone();
+  bridgeOfficePose(rig);
+
+  // lobby-commuters writes 0.02 at rest and 0.008 at the peak of its sigh.
+  assert.equal(rig.torso.position.y, 0.02);
+  rig.update(1 / 60);
+  assert.deepEqual(spine.position.toArray(), native.toArray(), 'idle before queue');
+
+  rig.torso.position.y = 0.008;
+  for (let i = 0; i < 120; i++) rig.update(1 / 60);
+  assert.ok(Math.abs(spine.position.y - (native.y - (0.012 * S) / 0.01)) < 1e-9, 'shoulders drop');
+
+  rig.torso.position.y = 0.02; // Production gate-open reset, retained while walking away.
+  for (let i = 0; i < 120; i++) rig.update(1 / 60);
+  assert.deepEqual(spine.position.toArray(), native.toArray(), 'native pose after queue');
 });

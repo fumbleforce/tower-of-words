@@ -4,6 +4,9 @@ import { S } from '../train/people.js';
 // The station queue writes to the old rig's head and torso controls. Apply those
 // offsets after native animation, restoring the preceding frame before sampling.
 export function bridgeOfficePose(rig) {
+  // Match the procedural torso's neutral value used by lobby-commuters.
+  const torsoRest = 0.02;
+  rig.torso.position.y = torsoRest;
   const head = rig.model.getObjectByName('Head');
   const spine = rig.model.getObjectByName('Spine');
   const headPose = head.quaternion.clone();
@@ -22,7 +25,7 @@ export function bridgeOfficePose(rig) {
     headPose.copy(head.quaternion);
     spinePose.copy(spine.position);
     head.quaternion.multiply(rig.head.quaternion);
-    spine.position.y += rig.torso.position.y * units;
+    spine.position.y += (rig.torso.position.y - torsoRest) * units;
     rig.model.updateMatrixWorld(true);
     applied = true;
   };
