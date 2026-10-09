@@ -38,6 +38,7 @@ const PRICE = {
   'google/veo-3-fast': () => 1.2,
   'bytedance/seedance-1-pro': () => 0.6,
   'google/lyria-2': () => 0.12,
+  'google/lyria-3-pro': () => 0.08, // one file up to 3 min
   'meta/musicgen': () => 0.1,
   '851-labs/background-remover': () => 0.002,
   'minimax/speech-2.6-hd': i => Math.max(0.002, (i.text || '').length * 0.0001),

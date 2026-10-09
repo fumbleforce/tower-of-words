@@ -1,0 +1,2367 @@
+{
+ "evening-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is evening music after work: nostalgic, warm, wistful, a sunset after work. Instruments: Rhodes electric piano, acoustic guitar, warm strings, soft brushed drums, bass. F major, 88 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the Rhodes electric piano, the ensemble soft underneath. [0:30 - 1:00] the clean electric guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse Rhodes electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5911,
+  "source_s": 158.5,
+  "listen": {
+   "key": "Ab major",
+   "key_fit": 0.81,
+   "tempo": 89.1,
+   "quiet_s": 3,
+   "level_spread_db": 10.1,
+   "hiss": 0.1528,
+   "peak": 1.0,
+   "good": 0.239,
+   "vocals": -0.116,
+   "noise": -0.15,
+   "cheap": 0.138,
+   "odd": 0.002,
+   "like_refs": 0.663,
+   "worst_vocals": [
+    -0.038,
+    110
+   ],
+   "worst_noise": [
+    -0.092,
+    120
+   ],
+   "worst_cheap": [
+    0.225,
+    0
+   ],
+   "worst_odd": [
+    0.034,
+    150
+   ]
+  },
+  "vocal_db": -28.8,
+  "vocal_windows_pct": 3.2,
+  "loop_from_s": 0.09,
+  "loop_to_s": 148.35,
+  "loop_s": 148.3,
+  "loop_start": 1.0,
+  "loop_end": 149.26625,
+  "seam_dist": 0.621,
+  "seam": {
+   "level_jump_db": 0.47,
+   "level_jump_p99_elsewhere": 7.43,
+   "flux_at_seam": 51.3,
+   "flux_p99_elsewhere": 302.2,
+   "flux_median": 51.1,
+   "sample_step_at_seam": 0.01,
+   "sample_step_p999_elsewhere": 0.0413
+  },
+  "source_lufs": -12.0
+ },
+ "evening-2": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is evening music after work: nostalgic, warm, wistful, a sunset after work. Instruments: Rhodes electric piano, acoustic guitar, warm strings, soft brushed drums, bass. F major, 88 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the Rhodes electric piano, the ensemble soft underneath. [0:30 - 1:00] the clean electric guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse Rhodes electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5912,
+  "source_s": 160.8,
+  "listen": {
+   "key": "C minor",
+   "key_fit": 0.72,
+   "tempo": 89.1,
+   "quiet_s": 5,
+   "level_spread_db": 8.5,
+   "hiss": 0.168,
+   "peak": 1.0,
+   "good": 0.22,
+   "vocals": -0.153,
+   "noise": -0.143,
+   "cheap": 0.15,
+   "odd": -0.011,
+   "like_refs": 0.651,
+   "worst_vocals": [
+    -0.044,
+    130
+   ],
+   "worst_noise": [
+    -0.086,
+    130
+   ],
+   "worst_cheap": [
+    0.191,
+    130
+   ],
+   "worst_odd": [
+    0.107,
+    150
+   ]
+  },
+  "vocal_db": -39.1,
+  "vocal_windows_pct": 3.7,
+  "loop_from_s": 14.58,
+  "loop_to_s": 141.24,
+  "loop_s": 126.7,
+  "loop_start": 1.0,
+  "loop_end": 127.658417,
+  "seam_dist": 0.795,
+  "seam": {
+   "level_jump_db": 1.34,
+   "level_jump_p99_elsewhere": 7.51,
+   "flux_at_seam": 63.2,
+   "flux_p99_elsewhere": 378.2,
+   "flux_median": 56.1,
+   "sample_step_at_seam": 0.0042,
+   "sample_step_p999_elsewhere": 0.0559
+  },
+  "source_lufs": -11.4
+ },
+ "evening-3": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is evening music after work: nostalgic, warm, wistful, a sunset after work. Instruments: Rhodes electric piano, acoustic guitar, warm strings, soft brushed drums, bass. F major, 88 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the Rhodes electric piano, the ensemble soft underneath. [0:30 - 1:00] the clean electric guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse Rhodes electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5913,
+  "source_s": 160.9,
+  "listen": {
+   "key": "D minor",
+   "key_fit": 0.89,
+   "tempo": 89.1,
+   "quiet_s": 3,
+   "level_spread_db": 10.2,
+   "hiss": 0.1796,
+   "peak": 0.991,
+   "good": 0.243,
+   "vocals": -0.159,
+   "noise": -0.131,
+   "cheap": 0.166,
+   "odd": 0.015,
+   "like_refs": 0.674,
+   "worst_vocals": [
+    -0.038,
+    110
+   ],
+   "worst_noise": [
+    -0.067,
+    120
+   ],
+   "worst_cheap": [
+    0.259,
+    130
+   ],
+   "worst_odd": [
+    0.091,
+    150
+   ]
+  },
+  "vocal_db": -35.7,
+  "vocal_windows_pct": 2.5,
+  "loop_from_s": 1.29,
+  "loop_to_s": 129.74,
+  "loop_s": 128.4,
+  "loop_start": 1.0,
+  "loop_end": 129.449667,
+  "seam_dist": 0.636,
+  "seam": {
+   "level_jump_db": 1.01,
+   "level_jump_p99_elsewhere": 6.14,
+   "flux_at_seam": 89.0,
+   "flux_p99_elsewhere": 244.6,
+   "flux_median": 55.1,
+   "sample_step_at_seam": 0.0101,
+   "sample_step_p999_elsewhere": 0.0407
+  },
+  "source_lufs": -11.5
+ },
+ "evening-4": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is evening music after work: nostalgic, warm, wistful, a sunset after work. Instruments: Rhodes electric piano, acoustic guitar, warm strings, soft brushed drums, bass. F major, 88 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the Rhodes electric piano, the ensemble soft underneath. [0:30 - 1:00] the clean electric guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse Rhodes electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5914,
+  "source_s": 158.6,
+  "listen": {
+   "key": "D major",
+   "key_fit": 0.86,
+   "tempo": 89.1,
+   "quiet_s": 3,
+   "level_spread_db": 9.8,
+   "hiss": 0.1652,
+   "peak": 0.991,
+   "good": 0.271,
+   "vocals": -0.119,
+   "noise": -0.115,
+   "cheap": 0.159,
+   "odd": 0.026,
+   "like_refs": 0.686,
+   "worst_vocals": [
+    -0.034,
+    110
+   ],
+   "worst_noise": [
+    -0.043,
+    0
+   ],
+   "worst_cheap": [
+    0.325,
+    80
+   ],
+   "worst_odd": [
+    0.094,
+    0
+   ]
+  },
+  "vocal_db": -36.8,
+  "vocal_windows_pct": 2.2,
+  "loop_from_s": 12.06,
+  "loop_to_s": 132.06,
+  "loop_s": 120.0,
+  "loop_start": 1.0,
+  "loop_end": 120.999375,
+  "seam_dist": 0.336,
+  "seam": {
+   "level_jump_db": 7.15,
+   "level_jump_p99_elsewhere": 6.92,
+   "flux_at_seam": 223.5,
+   "flux_p99_elsewhere": 253.2,
+   "flux_median": 45.1,
+   "sample_step_at_seam": 0.0215,
+   "sample_step_p999_elsewhere": 0.0396
+  },
+  "source_lufs": -11.8
+ },
+ "harbour-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music for a small seaside harbour: airy, breezy, open, boats and gulls. Instruments: acoustic guitar, piano, string section, soft drums, bass. B-flat major, 90 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the acoustic guitar, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse acoustic guitar, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6311,
+  "source_s": 160.4,
+  "listen": {
+   "key": "A major",
+   "key_fit": 0.89,
+   "tempo": 89.1,
+   "quiet_s": 2,
+   "level_spread_db": 10.6,
+   "hiss": 0.1619,
+   "peak": 0.987,
+   "good": 0.276,
+   "vocals": -0.178,
+   "noise": -0.176,
+   "cheap": 0.124,
+   "odd": 0.053,
+   "like_refs": 0.636,
+   "worst_vocals": [
+    -0.109,
+    100
+   ],
+   "worst_noise": [
+    -0.111,
+    140
+   ],
+   "worst_cheap": [
+    0.206,
+    130
+   ],
+   "worst_odd": [
+    0.151,
+    150
+   ]
+  },
+  "vocal_db": -38.8,
+  "vocal_windows_pct": 1.6,
+  "loop_from_s": 15.84,
+  "loop_to_s": 145.17,
+  "loop_s": 129.3,
+  "loop_start": 1.0,
+  "loop_end": 130.331333,
+  "seam_dist": 0.541,
+  "seam": {
+   "level_jump_db": 3.37,
+   "level_jump_p99_elsewhere": 7.07,
+   "flux_at_seam": 73.9,
+   "flux_p99_elsewhere": 198.3,
+   "flux_median": 54.1,
+   "sample_step_at_seam": 0.0184,
+   "sample_step_p999_elsewhere": 0.0496
+  },
+  "source_lufs": -11.0
+ },
+ "harbour-2": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music for a small seaside harbour: airy, breezy, open, boats and gulls. Instruments: acoustic guitar, piano, string section, soft drums, bass. B-flat major, 90 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the acoustic guitar, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse acoustic guitar, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6312,
+  "source_s": 161.8,
+  "listen": {
+   "key": "D minor",
+   "key_fit": 0.74,
+   "tempo": 89.1,
+   "quiet_s": 3,
+   "level_spread_db": 8.0,
+   "hiss": 0.1779,
+   "peak": 0.986,
+   "good": 0.275,
+   "vocals": -0.155,
+   "noise": -0.163,
+   "cheap": 0.134,
+   "odd": 0.022,
+   "like_refs": 0.668,
+   "worst_vocals": [
+    -0.067,
+    110
+   ],
+   "worst_noise": [
+    -0.091,
+    90
+   ],
+   "worst_cheap": [
+    0.235,
+    150
+   ],
+   "worst_odd": [
+    0.119,
+    60
+   ]
+  },
+  "vocal_db": -35.2,
+  "vocal_windows_pct": 2.2,
+  "loop_from_s": 21.19,
+  "loop_to_s": 147.86,
+  "loop_s": 126.7,
+  "loop_start": 1.0,
+  "loop_end": 127.667563,
+  "seam_dist": 0.656,
+  "seam": {
+   "level_jump_db": 2.13,
+   "level_jump_p99_elsewhere": 6.54,
+   "flux_at_seam": 77.7,
+   "flux_p99_elsewhere": 266.4,
+   "flux_median": 62.4,
+   "sample_step_at_seam": 0.0029,
+   "sample_step_p999_elsewhere": 0.0429
+  },
+  "source_lufs": -11.5
+ },
+ "harbour-3": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music for a small seaside harbour: airy, breezy, open, boats and gulls. Instruments: acoustic guitar, piano, string section, soft drums, bass. B-flat major, 90 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the acoustic guitar, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse acoustic guitar, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6313,
+  "source_s": 160.1,
+  "listen": {
+   "key": "C# major",
+   "key_fit": 0.9,
+   "tempo": 89.1,
+   "quiet_s": 4,
+   "level_spread_db": 7.6,
+   "hiss": 0.1797,
+   "peak": 0.984,
+   "good": 0.244,
+   "vocals": -0.167,
+   "noise": -0.189,
+   "cheap": 0.12,
+   "odd": 0.041,
+   "like_refs": 0.635,
+   "worst_vocals": [
+    -0.092,
+    20
+   ],
+   "worst_noise": [
+    -0.125,
+    10
+   ],
+   "worst_cheap": [
+    0.196,
+    150
+   ],
+   "worst_odd": [
+    0.113,
+    130
+   ]
+  },
+  "vocal_db": -28.0,
+  "vocal_windows_pct": 4.4,
+  "loop_from_s": 28.48,
+  "loop_to_s": 150.88,
+  "loop_s": 122.4,
+  "loop_start": 1.0,
+  "loop_end": 123.402083,
+  "seam_dist": 0.395,
+  "seam": {
+   "level_jump_db": 0.35,
+   "level_jump_p99_elsewhere": 7.56,
+   "flux_at_seam": 41.2,
+   "flux_p99_elsewhere": 206.0,
+   "flux_median": 48.3,
+   "sample_step_at_seam": 0.0052,
+   "sample_step_p999_elsewhere": 0.0376
+  },
+  "source_lufs": -11.7
+ },
+ "harbour-4": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music for a small seaside harbour: airy, breezy, open, boats and gulls. Instruments: acoustic guitar, piano, string section, soft drums, bass. B-flat major, 90 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the acoustic guitar, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse acoustic guitar, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6314,
+  "source_s": 162.2,
+  "listen": {
+   "key": "C# major",
+   "key_fit": 0.9,
+   "tempo": 117.5,
+   "quiet_s": 3,
+   "level_spread_db": 11.3,
+   "hiss": 0.1658,
+   "peak": 0.995,
+   "good": 0.239,
+   "vocals": -0.162,
+   "noise": -0.16,
+   "cheap": 0.136,
+   "odd": 0.026,
+   "like_refs": 0.658,
+   "worst_vocals": [
+    -0.072,
+    150
+   ],
+   "worst_noise": [
+    -0.08,
+    110
+   ],
+   "worst_cheap": [
+    0.211,
+    100
+   ],
+   "worst_odd": [
+    0.144,
+    150
+   ]
+  },
+  "vocal_db": -37.9,
+  "vocal_windows_pct": 1.9,
+  "loop_from_s": 3.58,
+  "loop_to_s": 147.73,
+  "loop_s": 144.1,
+  "loop_start": 1.0,
+  "loop_end": 145.144792,
+  "seam_dist": 0.591,
+  "seam": {
+   "level_jump_db": 1.61,
+   "level_jump_p99_elsewhere": 7.93,
+   "flux_at_seam": 43.1,
+   "flux_p99_elsewhere": 271.7,
+   "flux_median": 52.0,
+   "sample_step_at_seam": 0.0045,
+   "sample_step_p999_elsewhere": 0.0432
+  },
+  "source_lufs": -11.5
+ },
+ "morning-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is morning and work-day music outdoors: bright, fresh, cheerful but calm, a sunny morning walk to work. Instruments: piano, acoustic guitar, light strings, glockenspiel, soft drums, bass. G major, 100 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the acoustic guitar over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5811,
+  "source_s": 161.0,
+  "listen": {
+   "key": "D major",
+   "key_fit": 0.86,
+   "tempo": 107.7,
+   "quiet_s": 3,
+   "level_spread_db": 9.9,
+   "hiss": 0.1562,
+   "peak": 1.0,
+   "good": 0.268,
+   "vocals": -0.142,
+   "noise": -0.15,
+   "cheap": 0.143,
+   "odd": 0.022,
+   "like_refs": 0.684,
+   "worst_vocals": [
+    -0.085,
+    150
+   ],
+   "worst_noise": [
+    -0.102,
+    80
+   ],
+   "worst_cheap": [
+    0.253,
+    150
+   ],
+   "worst_odd": [
+    0.076,
+    80
+   ]
+  },
+  "vocal_db": -34.1,
+  "vocal_windows_pct": 2.5,
+  "loop_from_s": 31.14,
+  "loop_to_s": 150.27,
+  "loop_s": 119.1,
+  "loop_start": 1.0,
+  "loop_end": 120.137458,
+  "seam_dist": 0.429,
+  "seam": {
+   "level_jump_db": 0.46,
+   "level_jump_p99_elsewhere": 7.4,
+   "flux_at_seam": 56.4,
+   "flux_p99_elsewhere": 312.3,
+   "flux_median": 59.1,
+   "sample_step_at_seam": 0.0041,
+   "sample_step_p999_elsewhere": 0.0456
+  },
+  "source_lufs": -11.4
+ },
+ "morning-3": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is morning and work-day music outdoors: bright, fresh, cheerful but calm, a sunny morning walk to work. Instruments: piano, acoustic guitar, light strings, glockenspiel, soft drums, bass. G major, 100 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the acoustic guitar over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5813,
+  "source_s": 161.3,
+  "listen": {
+   "key": "F major",
+   "key_fit": 0.84,
+   "tempo": 103.4,
+   "quiet_s": 3,
+   "level_spread_db": 10.8,
+   "hiss": 0.1618,
+   "peak": 0.995,
+   "good": 0.274,
+   "vocals": -0.133,
+   "noise": -0.146,
+   "cheap": 0.148,
+   "odd": 0.007,
+   "like_refs": 0.678,
+   "worst_vocals": [
+    -0.058,
+    140
+   ],
+   "worst_noise": [
+    -0.085,
+    150
+   ],
+   "worst_cheap": [
+    0.193,
+    130
+   ],
+   "worst_odd": [
+    0.083,
+    150
+   ]
+  },
+  "vocal_db": -29.0,
+  "vocal_windows_pct": 2.8,
+  "loop_from_s": 32.76,
+  "loop_to_s": 147.74,
+  "loop_s": 115.0,
+  "loop_start": 1.0,
+  "loop_end": 115.987625,
+  "seam_dist": 0.399,
+  "seam": {
+   "level_jump_db": 2.7,
+   "level_jump_p99_elsewhere": 5.86,
+   "flux_at_seam": 106.5,
+   "flux_p99_elsewhere": 248.6,
+   "flux_median": 58.4,
+   "sample_step_at_seam": 0.0029,
+   "sample_step_p999_elsewhere": 0.043
+  },
+  "source_lufs": -11.3
+ },
+ "morning-4": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is morning and work-day music outdoors: bright, fresh, cheerful but calm, a sunny morning walk to work. Instruments: piano, acoustic guitar, light strings, glockenspiel, soft drums, bass. G major, 100 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the acoustic guitar over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5814,
+  "source_s": 162.1,
+  "listen": {
+   "key": "D major",
+   "key_fit": 0.92,
+   "tempo": 103.4,
+   "quiet_s": 4,
+   "level_spread_db": 11.4,
+   "hiss": 0.1636,
+   "peak": 0.991,
+   "good": 0.264,
+   "vocals": -0.141,
+   "noise": -0.152,
+   "cheap": 0.142,
+   "odd": 0.046,
+   "like_refs": 0.656,
+   "worst_vocals": [
+    -0.074,
+    70
+   ],
+   "worst_noise": [
+    -0.088,
+    70
+   ],
+   "worst_cheap": [
+    0.233,
+    150
+   ],
+   "worst_odd": [
+    0.103,
+    120
+   ]
+  },
+  "vocal_db": -39.9,
+  "vocal_windows_pct": 2.5,
+  "loop_from_s": 48.07,
+  "loop_to_s": 149.18,
+  "loop_s": 101.1,
+  "loop_start": 1.0,
+  "loop_end": 102.102437,
+  "seam_dist": 0.514,
+  "seam": {
+   "level_jump_db": 0.74,
+   "level_jump_p99_elsewhere": 8.13,
+   "flux_at_seam": 73.6,
+   "flux_p99_elsewhere": 224.9,
+   "flux_median": 58.8,
+   "sample_step_at_seam": 0.0071,
+   "sample_step_p999_elsewhere": 0.0476
+  },
+  "source_lufs": -11.3
+ },
+ "morning-5": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is morning and work-day music outdoors: bright, fresh, cheerful but calm, a sunny morning walk to work. Instruments: piano, acoustic guitar, light strings, glockenspiel, soft drums, bass. G major, 100 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the acoustic guitar over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5815,
+  "source_s": 159.0,
+  "listen": {
+   "key": "B major",
+   "key_fit": 0.91,
+   "tempo": 99.4,
+   "quiet_s": 4,
+   "level_spread_db": 14.1,
+   "hiss": 0.173,
+   "peak": 1.0,
+   "good": 0.248,
+   "vocals": -0.166,
+   "noise": -0.165,
+   "cheap": 0.143,
+   "odd": -0.027,
+   "like_refs": 0.68,
+   "worst_vocals": [
+    -0.047,
+    140
+   ],
+   "worst_noise": [
+    -0.109,
+    140
+   ],
+   "worst_cheap": [
+    0.18,
+    150
+   ],
+   "worst_odd": [
+    0.024,
+    140
+   ]
+  },
+  "vocal_db": -34.5,
+  "vocal_windows_pct": 3.8,
+  "loop_from_s": 10.06,
+  "loop_to_s": 151.76,
+  "loop_s": 141.7,
+  "loop_start": 1.0,
+  "loop_end": 142.704563,
+  "seam_dist": 0.679,
+  "seam": {
+   "level_jump_db": 0.99,
+   "level_jump_p99_elsewhere": 6.69,
+   "flux_at_seam": 29.5,
+   "flux_p99_elsewhere": 361.2,
+   "flux_median": 65.2,
+   "sample_step_at_seam": 0.0029,
+   "sample_step_p999_elsewhere": 0.063
+  },
+  "source_lufs": -11.3
+ },
+ "night-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is late-evening music at the dorms: quiet, intimate, peaceful, a relaxed jazz ballad. Instruments: piano, upright bass, brushed drums, soft strings, vibraphone. E-flat major, 72 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the vibraphone take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the soft strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6011,
+  "source_s": 161.1,
+  "listen": {
+   "key": "F# major",
+   "key_fit": 0.96,
+   "tempo": 143.6,
+   "quiet_s": 2,
+   "level_spread_db": 10.5,
+   "hiss": 0.186,
+   "peak": 0.998,
+   "good": 0.256,
+   "vocals": -0.123,
+   "noise": -0.114,
+   "cheap": 0.172,
+   "odd": 0.024,
+   "like_refs": 0.619,
+   "worst_vocals": [
+    -0.051,
+    70
+   ],
+   "worst_noise": [
+    -0.047,
+    90
+   ],
+   "worst_cheap": [
+    0.228,
+    140
+   ],
+   "worst_odd": [
+    0.064,
+    40
+   ]
+  },
+  "vocal_db": -37.5,
+  "vocal_windows_pct": 1.6,
+  "loop_from_s": 31.78,
+  "loop_to_s": 151.93,
+  "loop_s": 120.2,
+  "loop_start": 1.0,
+  "loop_end": 121.153042,
+  "seam_dist": 0.488,
+  "seam": {
+   "level_jump_db": 2.1,
+   "level_jump_p99_elsewhere": 8.82,
+   "flux_at_seam": 43.1,
+   "flux_p99_elsewhere": 229.1,
+   "flux_median": 50.7,
+   "sample_step_at_seam": 0.0102,
+   "sample_step_p999_elsewhere": 0.0398
+  },
+  "source_lufs": -11.5
+ },
+ "night-2": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is late-evening music at the dorms: quiet, intimate, peaceful, a relaxed jazz ballad. Instruments: piano, upright bass, brushed drums, soft strings, vibraphone. E-flat major, 72 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the vibraphone take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the soft strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6012,
+  "source_s": 166.7,
+  "listen": {
+   "key": "E major",
+   "key_fit": 0.9,
+   "tempo": 152.0,
+   "quiet_s": 2,
+   "level_spread_db": 13.4,
+   "hiss": 0.1758,
+   "peak": 0.991,
+   "good": 0.282,
+   "vocals": -0.128,
+   "noise": -0.095,
+   "cheap": 0.153,
+   "odd": 0.06,
+   "like_refs": 0.618,
+   "worst_vocals": [
+    -0.061,
+    90
+   ],
+   "worst_noise": [
+    -0.019,
+    10
+   ],
+   "worst_cheap": [
+    0.198,
+    0
+   ],
+   "worst_odd": [
+    0.12,
+    140
+   ]
+  },
+  "vocal_db": -35.1,
+  "vocal_windows_pct": 2.1,
+  "loop_from_s": 26.43,
+  "loop_to_s": 159.77,
+  "loop_s": 133.3,
+  "loop_start": 1.0,
+  "loop_end": 134.333333,
+  "seam_dist": 0.549,
+  "seam": {
+   "level_jump_db": 1.0,
+   "level_jump_p99_elsewhere": 9.41,
+   "flux_at_seam": 34.6,
+   "flux_p99_elsewhere": 201.4,
+   "flux_median": 49.1,
+   "sample_step_at_seam": 0.0015,
+   "sample_step_p999_elsewhere": 0.0418
+  },
+  "source_lufs": -11.7
+ },
+ "night-3": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is late-evening music at the dorms: quiet, intimate, peaceful, a relaxed jazz ballad. Instruments: piano, upright bass, brushed drums, soft strings, vibraphone. E-flat major, 72 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the vibraphone take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the soft strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6013,
+  "source_s": 161.0,
+  "listen": {
+   "key": "A major",
+   "key_fit": 0.86,
+   "tempo": 152.0,
+   "quiet_s": 5,
+   "level_spread_db": 15.6,
+   "hiss": 0.201,
+   "peak": 1.0,
+   "good": 0.272,
+   "vocals": -0.145,
+   "noise": -0.138,
+   "cheap": 0.125,
+   "odd": 0.048,
+   "like_refs": 0.659,
+   "worst_vocals": [
+    -0.07,
+    130
+   ],
+   "worst_noise": [
+    -0.034,
+    20
+   ],
+   "worst_cheap": [
+    0.225,
+    130
+   ],
+   "worst_odd": [
+    0.125,
+    30
+   ]
+  },
+  "vocal_db": -36.5,
+  "vocal_windows_pct": 3.1,
+  "loop_from_s": 33.0,
+  "loop_to_s": 154.86,
+  "loop_s": 121.9,
+  "loop_start": 1.0,
+  "loop_end": 122.854042,
+  "seam_dist": 0.56,
+  "seam": {
+   "level_jump_db": 0.74,
+   "level_jump_p99_elsewhere": 6.26,
+   "flux_at_seam": 28.2,
+   "flux_p99_elsewhere": 159.9,
+   "flux_median": 49.9,
+   "sample_step_at_seam": 0.0025,
+   "sample_step_p999_elsewhere": 0.0453
+  },
+  "source_lufs": -11.0
+ },
+ "night-4": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is late-evening music at the dorms: quiet, intimate, peaceful, a relaxed jazz ballad. Instruments: piano, upright bass, brushed drums, soft strings, vibraphone. E-flat major, 72 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the vibraphone take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the soft strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6014,
+  "source_s": 161.0,
+  "listen": {
+   "key": "Ab major",
+   "key_fit": 0.86,
+   "tempo": 143.6,
+   "quiet_s": 2,
+   "level_spread_db": 13.7,
+   "hiss": 0.1829,
+   "peak": 1.0,
+   "good": 0.267,
+   "vocals": -0.116,
+   "noise": -0.066,
+   "cheap": 0.195,
+   "odd": 0.045,
+   "like_refs": 0.629,
+   "worst_vocals": [
+    -0.019,
+    140
+   ],
+   "worst_noise": [
+    0.038,
+    10
+   ],
+   "worst_cheap": [
+    0.259,
+    150
+   ],
+   "worst_odd": [
+    0.109,
+    150
+   ]
+  },
+  "vocal_db": -34.7,
+  "vocal_windows_pct": 2.5,
+  "loop_from_s": 12.92,
+  "loop_to_s": 155.49,
+  "loop_s": 142.6,
+  "loop_start": 1.0,
+  "loop_end": 143.576479,
+  "seam_dist": 0.695,
+  "seam": {
+   "level_jump_db": 0.96,
+   "level_jump_p99_elsewhere": 7.89,
+   "flux_at_seam": 21.5,
+   "flux_p99_elsewhere": 277.1,
+   "flux_median": 46.1,
+   "sample_step_at_seam": 0.003,
+   "sample_step_p999_elsewhere": 0.0507
+  },
+  "source_lufs": -12.1
+ },
+ "office-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music inside the office: focused, light, steady, a busy but friendly office. Instruments: electric piano, marimba, soft drums, bass, light strings. C major, 96 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the electric piano, the ensemble soft underneath. [0:30 - 1:00] the marimba take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6111,
+  "source_s": 159.6,
+  "listen": {
+   "key": "D major",
+   "key_fit": 0.93,
+   "tempo": 152.0,
+   "quiet_s": 2,
+   "level_spread_db": 11.6,
+   "hiss": 0.1736,
+   "peak": 1.0,
+   "good": 0.215,
+   "vocals": -0.152,
+   "noise": -0.138,
+   "cheap": 0.2,
+   "odd": -0.036,
+   "like_refs": 0.681,
+   "worst_vocals": [
+    -0.038,
+    100
+   ],
+   "worst_noise": [
+    -0.032,
+    20
+   ],
+   "worst_cheap": [
+    0.233,
+    80
+   ],
+   "worst_odd": [
+    0.034,
+    20
+   ]
+  },
+  "vocal_db": -35.0,
+  "vocal_windows_pct": 1.9,
+  "loop_from_s": 31.02,
+  "loop_to_s": 151.02,
+  "loop_s": 120.0,
+  "loop_start": 1.0,
+  "loop_end": 121.000604,
+  "seam_dist": 0.387,
+  "seam": {
+   "level_jump_db": 11.64,
+   "level_jump_p99_elsewhere": 8.71,
+   "flux_at_seam": 255.3,
+   "flux_p99_elsewhere": 356.6,
+   "flux_median": 66.5,
+   "sample_step_at_seam": 0.0046,
+   "sample_step_p999_elsewhere": 0.0524
+  },
+  "source_lufs": -11.4
+ },
+ "office-2": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music inside the office: focused, light, steady, a busy but friendly office. Instruments: electric piano, marimba, soft drums, bass, light strings. C major, 96 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the electric piano, the ensemble soft underneath. [0:30 - 1:00] the marimba take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6112,
+  "source_s": 162.5,
+  "listen": {
+   "key": "F# major",
+   "key_fit": 0.9,
+   "tempo": 152.0,
+   "quiet_s": 5,
+   "level_spread_db": 10.4,
+   "hiss": 0.1643,
+   "peak": 0.995,
+   "good": 0.245,
+   "vocals": -0.128,
+   "noise": -0.122,
+   "cheap": 0.188,
+   "odd": -0.002,
+   "like_refs": 0.679,
+   "worst_vocals": [
+    -0.041,
+    110
+   ],
+   "worst_noise": [
+    -0.026,
+    10
+   ],
+   "worst_cheap": [
+    0.233,
+    140
+   ],
+   "worst_odd": [
+    0.049,
+    10
+   ]
+  },
+  "vocal_db": -23.6,
+  "vocal_windows_pct": 4.6,
+  "loop_from_s": 30.43,
+  "loop_to_s": 151.72,
+  "loop_s": 121.3,
+  "loop_start": 1.0,
+  "loop_end": 122.286,
+  "seam_dist": 0.507,
+  "seam": {
+   "level_jump_db": 0.54,
+   "level_jump_p99_elsewhere": 7.81,
+   "flux_at_seam": 95.9,
+   "flux_p99_elsewhere": 294.9,
+   "flux_median": 59.4,
+   "sample_step_at_seam": 0.0083,
+   "sample_step_p999_elsewhere": 0.0391
+  },
+  "source_lufs": -11.2
+ },
+ "office-3": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music inside the office: focused, light, steady, a busy but friendly office. Instruments: electric piano, marimba, soft drums, bass, light strings. C major, 96 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the electric piano, the ensemble soft underneath. [0:30 - 1:00] the marimba take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6113,
+  "source_s": 159.6,
+  "listen": {
+   "key": "C major",
+   "key_fit": 0.93,
+   "tempo": 152.0,
+   "quiet_s": 2,
+   "level_spread_db": 8.3,
+   "hiss": 0.1761,
+   "peak": 0.999,
+   "good": 0.256,
+   "vocals": -0.132,
+   "noise": -0.125,
+   "cheap": 0.195,
+   "odd": -0.034,
+   "like_refs": 0.697,
+   "worst_vocals": [
+    -0.041,
+    100
+   ],
+   "worst_noise": [
+    -0.053,
+    70
+   ],
+   "worst_cheap": [
+    0.234,
+    20
+   ],
+   "worst_odd": [
+    0.136,
+    150
+   ]
+  },
+  "vocal_db": -34.6,
+  "vocal_windows_pct": 1.6,
+  "loop_from_s": 38.06,
+  "loop_to_s": 134.06,
+  "loop_s": 96.0,
+  "loop_start": 1.0,
+  "loop_end": 96.999979,
+  "seam_dist": 0.429,
+  "seam": {
+   "level_jump_db": 1.98,
+   "level_jump_p99_elsewhere": 7.91,
+   "flux_at_seam": 403.9,
+   "flux_p99_elsewhere": 364.6,
+   "flux_median": 58.9,
+   "sample_step_at_seam": 0.0301,
+   "sample_step_p999_elsewhere": 0.0492
+  },
+  "source_lufs": -12.0
+ },
+ "office-4": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music inside the office: focused, light, steady, a busy but friendly office. Instruments: electric piano, marimba, soft drums, bass, light strings. C major, 96 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the electric piano, the ensemble soft underneath. [0:30 - 1:00] the marimba take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6114,
+  "source_s": 160.4,
+  "listen": {
+   "key": "Bb major",
+   "key_fit": 0.8,
+   "tempo": 152.0,
+   "quiet_s": 7,
+   "level_spread_db": 10.6,
+   "hiss": 0.1862,
+   "peak": 0.997,
+   "good": 0.246,
+   "vocals": -0.141,
+   "noise": -0.125,
+   "cheap": 0.213,
+   "odd": -0.029,
+   "like_refs": 0.687,
+   "worst_vocals": [
+    -0.073,
+    130
+   ],
+   "worst_noise": [
+    -0.067,
+    70
+   ],
+   "worst_cheap": [
+    0.25,
+    70
+   ],
+   "worst_odd": [
+    0.1,
+    150
+   ]
+  },
+  "vocal_db": -34.3,
+  "vocal_windows_pct": 5.3,
+  "loop_from_s": 10.58,
+  "loop_to_s": 124.27,
+  "loop_s": 113.7,
+  "loop_start": 1.0,
+  "loop_end": 114.684104,
+  "seam_dist": 0.385,
+  "seam": {
+   "level_jump_db": 1.22,
+   "level_jump_p99_elsewhere": 7.28,
+   "flux_at_seam": 59.5,
+   "flux_p99_elsewhere": 334.0,
+   "flux_median": 61.8,
+   "sample_step_at_seam": 0.0102,
+   "sample_step_p999_elsewhere": 0.049
+  },
+  "source_lufs": -11.6
+ },
+ "shops-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music for a covered shopping street: cheerful, bustling, friendly. Instruments: acoustic guitar, marimba, piano, bass, light drums, hand claps. A major, 108 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the marimba, the ensemble soft underneath. [0:30 - 1:00] the acoustic guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse marimba, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the piano over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6211,
+  "source_s": 161.5,
+  "listen": {
+   "key": "G major",
+   "key_fit": 0.83,
+   "tempo": 112.3,
+   "quiet_s": 3,
+   "level_spread_db": 8.1,
+   "hiss": 0.2034,
+   "peak": 1.0,
+   "good": 0.217,
+   "vocals": -0.187,
+   "noise": -0.101,
+   "cheap": 0.128,
+   "odd": 0.008,
+   "like_refs": 0.654,
+   "worst_vocals": [
+    -0.117,
+    80
+   ],
+   "worst_noise": [
+    -0.03,
+    20
+   ],
+   "worst_cheap": [
+    0.181,
+    150
+   ],
+   "worst_odd": [
+    0.094,
+    20
+   ]
+  },
+  "vocal_db": -34.3,
+  "vocal_windows_pct": 2.2,
+  "loop_from_s": 31.66,
+  "loop_to_s": 153.84,
+  "loop_s": 122.2,
+  "loop_start": 1.0,
+  "loop_end": 123.181521,
+  "seam_dist": 0.343,
+  "seam": {
+   "level_jump_db": 7.25,
+   "level_jump_p99_elsewhere": 10.18,
+   "flux_at_seam": 59.6,
+   "flux_p99_elsewhere": 400.7,
+   "flux_median": 50.0,
+   "sample_step_at_seam": 0.0024,
+   "sample_step_p999_elsewhere": 0.053
+  },
+  "source_lufs": -12.1
+ },
+ "shops-2": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music for a covered shopping street: cheerful, bustling, friendly. Instruments: acoustic guitar, marimba, piano, bass, light drums, hand claps. A major, 108 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the marimba, the ensemble soft underneath. [0:30 - 1:00] the acoustic guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse marimba, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the piano over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6212,
+  "source_s": 161.8,
+  "listen": {
+   "key": "D minor",
+   "key_fit": 0.74,
+   "tempo": 103.4,
+   "quiet_s": 4,
+   "level_spread_db": 13.1,
+   "hiss": 0.1878,
+   "peak": 1.0,
+   "good": 0.234,
+   "vocals": -0.183,
+   "noise": -0.131,
+   "cheap": 0.165,
+   "odd": 0.006,
+   "like_refs": 0.629,
+   "worst_vocals": [
+    -0.018,
+    80
+   ],
+   "worst_noise": [
+    -0.036,
+    50
+   ],
+   "worst_cheap": [
+    0.334,
+    150
+   ],
+   "worst_odd": [
+    0.069,
+    10
+   ]
+  },
+  "vocal_db": -34.7,
+  "vocal_windows_pct": 2.5,
+  "loop_from_s": 35.74,
+  "loop_to_s": 150.71,
+  "loop_s": 115.0,
+  "loop_start": 1.0,
+  "loop_end": 115.961896,
+  "seam_dist": 0.59,
+  "seam": {
+   "level_jump_db": 3.85,
+   "level_jump_p99_elsewhere": 9.65,
+   "flux_at_seam": 283.8,
+   "flux_p99_elsewhere": 416.1,
+   "flux_median": 78.7,
+   "sample_step_at_seam": 0.0185,
+   "sample_step_p999_elsewhere": 0.0705
+  },
+  "source_lufs": -11.6
+ },
+ "shops-3": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music for a covered shopping street: cheerful, bustling, friendly. Instruments: acoustic guitar, marimba, piano, bass, light drums, hand claps. A major, 108 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the marimba, the ensemble soft underneath. [0:30 - 1:00] the acoustic guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse marimba, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the piano over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6213,
+  "source_s": 159.7,
+  "listen": {
+   "key": "G major",
+   "key_fit": 0.89,
+   "tempo": 103.4,
+   "quiet_s": 3,
+   "level_spread_db": 14.4,
+   "hiss": 0.1713,
+   "peak": 1.0,
+   "good": 0.2,
+   "vocals": -0.222,
+   "noise": -0.121,
+   "cheap": 0.107,
+   "odd": 0.01,
+   "like_refs": 0.618,
+   "worst_vocals": [
+    -0.13,
+    140
+   ],
+   "worst_noise": [
+    -0.057,
+    140
+   ],
+   "worst_cheap": [
+    0.158,
+    150
+   ],
+   "worst_odd": [
+    0.072,
+    40
+   ]
+  },
+  "vocal_db": -31.0,
+  "vocal_windows_pct": 2.5,
+  "loop_from_s": 42.3,
+  "loop_to_s": 152.3,
+  "loop_s": 110.0,
+  "loop_start": 1.0,
+  "loop_end": 111.00025,
+  "seam_dist": 0.242,
+  "seam": {
+   "level_jump_db": 9.1,
+   "level_jump_p99_elsewhere": 8.58,
+   "flux_at_seam": 113.8,
+   "flux_p99_elsewhere": 352.4,
+   "flux_median": 79.7,
+   "sample_step_at_seam": 0.0074,
+   "sample_step_p999_elsewhere": 0.0686
+  },
+  "source_lufs": -11.2
+ },
+ "shops-4": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music for a covered shopping street: cheerful, bustling, friendly. Instruments: acoustic guitar, marimba, piano, bass, light drums, hand claps. A major, 108 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the marimba, the ensemble soft underneath. [0:30 - 1:00] the acoustic guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse marimba, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the piano over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 6214,
+  "source_s": 160.0,
+  "listen": {
+   "key": "C# major",
+   "key_fit": 0.91,
+   "tempo": 103.4,
+   "quiet_s": 3,
+   "level_spread_db": 11.8,
+   "hiss": 0.1683,
+   "peak": 0.997,
+   "good": 0.225,
+   "vocals": -0.196,
+   "noise": -0.118,
+   "cheap": 0.158,
+   "odd": 0.003,
+   "like_refs": 0.651,
+   "worst_vocals": [
+    -0.053,
+    110
+   ],
+   "worst_noise": [
+    0.003,
+    130
+   ],
+   "worst_cheap": [
+    0.198,
+    0
+   ],
+   "worst_odd": [
+    0.036,
+    70
+   ]
+  },
+  "vocal_db": -28.8,
+  "vocal_windows_pct": 2.8,
+  "loop_from_s": 14.97,
+  "loop_to_s": 138.39,
+  "loop_s": 123.4,
+  "loop_start": 1.0,
+  "loop_end": 124.424,
+  "seam_dist": 0.375,
+  "seam": {
+   "level_jump_db": 3.61,
+   "level_jump_p99_elsewhere": 8.12,
+   "flux_at_seam": 262.3,
+   "flux_p99_elsewhere": 363.8,
+   "flux_median": 57.5,
+   "sample_step_at_seam": 0.0428,
+   "sample_step_p999_elsewhere": 0.0509
+  },
+  "source_lufs": -11.9
+ },
+ "title-1": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is the title menu theme: hopeful, gentle, sweeping, a new start on an island at sunrise. Instruments: piano, string section, soft synth pad, light harp. D major, 84 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the violins take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the cello over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5711,
+  "source_s": 161.6,
+  "listen": {
+   "key": "A major",
+   "key_fit": 0.78,
+   "tempo": 161.5,
+   "quiet_s": 4,
+   "level_spread_db": 8.2,
+   "hiss": 0.1362,
+   "peak": 0.992,
+   "good": 0.284,
+   "vocals": -0.105,
+   "noise": -0.122,
+   "cheap": 0.112,
+   "odd": 0.086,
+   "like_refs": 0.586,
+   "worst_vocals": [
+    -0.05,
+    140
+   ],
+   "worst_noise": [
+    -0.079,
+    10
+   ],
+   "worst_cheap": [
+    0.19,
+    140
+   ],
+   "worst_odd": [
+    0.191,
+    100
+   ]
+  },
+  "vocal_db": -24.9,
+  "vocal_windows_pct": 5.0,
+  "loop_from_s": 42.86,
+  "loop_to_s": 140.0,
+  "loop_s": 97.1,
+  "loop_start": 1.0,
+  "loop_end": 98.144521,
+  "seam_dist": 0.417,
+  "seam": {
+   "level_jump_db": 0.92,
+   "level_jump_p99_elsewhere": 5.99,
+   "flux_at_seam": 92.2,
+   "flux_p99_elsewhere": 207.9,
+   "flux_median": 55.0,
+   "sample_step_at_seam": 0.0143,
+   "sample_step_p999_elsewhere": 0.0469
+  },
+  "source_lufs": -11.4
+ },
+ "title-2": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is the title menu theme: hopeful, gentle, sweeping, a new start on an island at sunrise. Instruments: piano, string section, soft synth pad, light harp. D major, 84 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the violins take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the cello over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5712,
+  "source_s": 161.5,
+  "listen": {
+   "key": "C major",
+   "key_fit": 0.97,
+   "tempo": 161.5,
+   "quiet_s": 4,
+   "level_spread_db": 9.2,
+   "hiss": 0.1308,
+   "peak": 0.984,
+   "good": 0.317,
+   "vocals": -0.089,
+   "noise": -0.104,
+   "cheap": 0.136,
+   "odd": 0.092,
+   "like_refs": 0.606,
+   "worst_vocals": [
+    -0.029,
+    150
+   ],
+   "worst_noise": [
+    -0.057,
+    120
+   ],
+   "worst_cheap": [
+    0.212,
+    50
+   ],
+   "worst_odd": [
+    0.16,
+    70
+   ]
+  },
+  "vocal_db": -24.1,
+  "vocal_windows_pct": 3.7,
+  "loop_from_s": 39.61,
+  "loop_to_s": 147.61,
+  "loop_s": 108.0,
+  "loop_start": 1.0,
+  "loop_end": 109.003771,
+  "seam_dist": 0.448,
+  "seam": {
+   "level_jump_db": 2.29,
+   "level_jump_p99_elsewhere": 5.72,
+   "flux_at_seam": 42.1,
+   "flux_p99_elsewhere": 119.4,
+   "flux_median": 53.8,
+   "sample_step_at_seam": 0.0015,
+   "sample_step_p999_elsewhere": 0.0425
+  },
+  "source_lufs": -11.0
+ },
+ "title-3": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is the title menu theme: hopeful, gentle, sweeping, a new start on an island at sunrise. Instruments: piano, string section, soft synth pad, light harp. D major, 84 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the violins take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the cello over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5713,
+  "source_s": 129.3,
+  "listen": {
+   "key": "D major",
+   "key_fit": 0.89,
+   "tempo": 161.5,
+   "quiet_s": 4,
+   "level_spread_db": 12.2,
+   "hiss": 0.1336,
+   "peak": 0.999,
+   "good": 0.289,
+   "vocals": -0.09,
+   "noise": -0.1,
+   "cheap": 0.095,
+   "odd": 0.106,
+   "like_refs": 0.568,
+   "worst_vocals": [
+    -0.008,
+    100
+   ],
+   "worst_noise": [
+    -0.049,
+    110
+   ],
+   "worst_cheap": [
+    0.187,
+    50
+   ],
+   "worst_odd": [
+    0.156,
+    110
+   ]
+  },
+  "vocal_db": -30.9,
+  "vocal_windows_pct": 2.7,
+  "loop_from_s": 2.41,
+  "loop_to_s": 107.43,
+  "loop_s": 105.0,
+  "loop_start": 1.0,
+  "loop_end": 106.023667,
+  "seam_dist": 0.612,
+  "seam": {
+   "level_jump_db": 0.24,
+   "level_jump_p99_elsewhere": 5.33,
+   "flux_at_seam": 103.7,
+   "flux_p99_elsewhere": 170.4,
+   "flux_median": 61.7,
+   "sample_step_at_seam": 0.0185,
+   "sample_step_p999_elsewhere": 0.0485
+  },
+  "source_lufs": -11.0
+ },
+ "title-4": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is the title menu theme: hopeful, gentle, sweeping, a new start on an island at sunrise. Instruments: piano, string section, soft synth pad, light harp. D major, 84 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the violins take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the cello over the main chords. [2:00 - 2:40] the main melody returns with the whole ensemble, then eases back to the opening texture with no fade-out and no final ending chord, so the piece can loop.",
+  "seed": 5714,
+  "source_s": 162.1,
+  "listen": {
+   "key": "D major",
+   "key_fit": 0.86,
+   "tempo": 161.5,
+   "quiet_s": 5,
+   "level_spread_db": 10.3,
+   "hiss": 0.1464,
+   "peak": 0.975,
+   "good": 0.293,
+   "vocals": -0.099,
+   "noise": -0.105,
+   "cheap": 0.131,
+   "odd": 0.064,
+   "like_refs": 0.618,
+   "worst_vocals": [
+    -0.041,
+    100
+   ],
+   "worst_noise": [
+    -0.047,
+    90
+   ],
+   "worst_cheap": [
+    0.207,
+    150
+   ],
+   "worst_odd": [
+    0.144,
+    70
+   ]
+  },
+  "vocal_db": -32.0,
+  "vocal_windows_pct": 3.4,
+  "loop_from_s": 25.64,
+  "loop_to_s": 156.14,
+  "loop_s": 130.5,
+  "loop_start": 1.0,
+  "loop_end": 131.501438,
+  "seam_dist": 0.442,
+  "seam": {
+   "level_jump_db": 2.81,
+   "level_jump_p99_elsewhere": 6.41,
+   "flux_at_seam": 80.7,
+   "flux_p99_elsewhere": 147.6,
+   "flux_median": 64.7,
+   "sample_step_at_seam": 0.0081,
+   "sample_step_p999_elsewhere": 0.0488
+  },
+  "source_lufs": -11.0
+ },
+ "evening-11": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is evening music after work: nostalgic, warm, wistful, a sunset after work. Instruments: Rhodes electric piano, acoustic guitar, warm strings, soft brushed drums, bass. F major, 88 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the Rhodes electric piano, the ensemble soft underneath. [0:30 - 1:00] the clean electric guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse Rhodes electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 5921,
+  "source_s": 167.1,
+  "listen": {
+   "key": "F# major",
+   "key_fit": 0.91,
+   "tempo": 89.1,
+   "quiet_s": 4,
+   "level_spread_db": 12.0,
+   "hiss": 0.1714,
+   "peak": 0.988,
+   "good": 0.208,
+   "vocals": -0.171,
+   "noise": -0.141,
+   "cheap": 0.154,
+   "odd": -0.035,
+   "like_refs": 0.659,
+   "worst_vocals": [
+    -0.094,
+    130
+   ],
+   "worst_noise": [
+    -0.076,
+    140
+   ],
+   "worst_cheap": [
+    0.227,
+    140
+   ],
+   "worst_odd": [
+    0.074,
+    70
+   ]
+  },
+  "vocal_db": -36.3,
+  "vocal_windows_pct": 2.4,
+  "loop_from_s": 14.38,
+  "loop_to_s": 141.04,
+  "loop_s": 126.7,
+  "loop_start": 1.0,
+  "loop_end": 127.661708,
+  "seam_dist": 0.6,
+  "seam": {
+   "level_jump_db": 6.89,
+   "level_jump_p99_elsewhere": 6.41,
+   "flux_at_seam": 63.6,
+   "flux_p99_elsewhere": 302.9,
+   "flux_median": 50.3,
+   "sample_step_at_seam": 0.006,
+   "sample_step_p999_elsewhere": 0.0402
+  },
+  "source_lufs": -11.6
+ },
+ "evening-12": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is evening music after work: nostalgic, warm, wistful, a sunset after work. Instruments: Rhodes electric piano, acoustic guitar, warm strings, soft brushed drums, bass. F major, 88 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the Rhodes electric piano, the ensemble soft underneath. [0:30 - 1:00] the clean electric guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse Rhodes electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 5922,
+  "source_s": 171.8,
+  "listen": {
+   "key": "C major",
+   "key_fit": 0.87,
+   "tempo": 117.5,
+   "quiet_s": 3,
+   "level_spread_db": 12.2,
+   "hiss": 0.1935,
+   "peak": 1.0,
+   "good": 0.235,
+   "vocals": -0.152,
+   "noise": -0.123,
+   "cheap": 0.149,
+   "odd": 0.015,
+   "like_refs": 0.659,
+   "worst_vocals": [
+    -0.062,
+    110
+   ],
+   "worst_noise": [
+    -0.049,
+    10
+   ],
+   "worst_cheap": [
+    0.299,
+    160
+   ],
+   "worst_odd": [
+    0.118,
+    80
+   ]
+  },
+  "vocal_db": -29.1,
+  "vocal_windows_pct": 2.3,
+  "loop_from_s": 1.12,
+  "loop_to_s": 153.11,
+  "loop_s": 152.0,
+  "loop_start": 1.0,
+  "loop_end": 152.991417,
+  "seam_dist": 0.499,
+  "seam": {
+   "level_jump_db": 2.12,
+   "level_jump_p99_elsewhere": 6.76,
+   "flux_at_seam": 176.4,
+   "flux_p99_elsewhere": 266.3,
+   "flux_median": 52.9,
+   "sample_step_at_seam": 0.0109,
+   "sample_step_p999_elsewhere": 0.045
+  },
+  "source_lufs": -11.6
+ },
+ "evening-13": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is evening music after work: nostalgic, warm, wistful, a sunset after work. Instruments: Rhodes electric piano, acoustic guitar, warm strings, soft brushed drums, bass. F major, 88 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the Rhodes electric piano, the ensemble soft underneath. [0:30 - 1:00] the clean electric guitar take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse Rhodes electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 5923,
+  "source_s": 170.0,
+  "listen": {
+   "key": "Bb major",
+   "key_fit": 0.84,
+   "tempo": 89.1,
+   "quiet_s": 3,
+   "level_spread_db": 13.1,
+   "hiss": 0.1848,
+   "peak": 0.997,
+   "good": 0.246,
+   "vocals": -0.136,
+   "noise": -0.132,
+   "cheap": 0.176,
+   "odd": -0.016,
+   "like_refs": 0.696,
+   "worst_vocals": [
+    -0.057,
+    60
+   ],
+   "worst_noise": [
+    -0.058,
+    70
+   ],
+   "worst_cheap": [
+    0.256,
+    70
+   ],
+   "worst_odd": [
+    0.069,
+    20
+   ]
+  },
+  "vocal_db": -33.1,
+  "vocal_windows_pct": 2.6,
+  "loop_from_s": 10.41,
+  "loop_to_s": 143.75,
+  "loop_s": 133.3,
+  "loop_start": 1.0,
+  "loop_end": 134.334583,
+  "seam_dist": 0.422,
+  "seam": {
+   "level_jump_db": 6.44,
+   "level_jump_p99_elsewhere": 8.39,
+   "flux_at_seam": 60.9,
+   "flux_p99_elsewhere": 294.6,
+   "flux_median": 53.4,
+   "sample_step_at_seam": 0.0016,
+   "sample_step_p999_elsewhere": 0.0439
+  },
+  "source_lufs": -11.4
+ },
+ "harbour-11": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music for a small seaside harbour: airy, breezy, open, boats and gulls. Instruments: acoustic guitar, piano, string section, soft drums, bass. B-flat major, 90 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the acoustic guitar, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse acoustic guitar, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 6321,
+  "source_s": 170.3,
+  "listen": {
+   "key": "C major",
+   "key_fit": 0.91,
+   "tempo": 89.1,
+   "quiet_s": 5,
+   "level_spread_db": 10.9,
+   "hiss": 0.1594,
+   "peak": 0.983,
+   "good": 0.284,
+   "vocals": -0.143,
+   "noise": -0.181,
+   "cheap": 0.099,
+   "odd": 0.057,
+   "like_refs": 0.659,
+   "worst_vocals": [
+    -0.056,
+    40
+   ],
+   "worst_noise": [
+    -0.112,
+    150
+   ],
+   "worst_cheap": [
+    0.178,
+    100
+   ],
+   "worst_odd": [
+    0.162,
+    150
+   ]
+  },
+  "vocal_db": -38.6,
+  "vocal_windows_pct": 2.4,
+  "loop_from_s": 10.7,
+  "loop_to_s": 140.04,
+  "loop_s": 129.3,
+  "loop_start": 1.0,
+  "loop_end": 130.338417,
+  "seam_dist": 0.578,
+  "seam": {
+   "level_jump_db": 0.74,
+   "level_jump_p99_elsewhere": 5.81,
+   "flux_at_seam": 82.8,
+   "flux_p99_elsewhere": 170.3,
+   "flux_median": 53.6,
+   "sample_step_at_seam": 0.0324,
+   "sample_step_p999_elsewhere": 0.0397
+  },
+  "source_lufs": -11.3
+ },
+ "harbour-12": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music for a small seaside harbour: airy, breezy, open, boats and gulls. Instruments: acoustic guitar, piano, string section, soft drums, bass. B-flat major, 90 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the acoustic guitar, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse acoustic guitar, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 6322,
+  "source_s": 169.1,
+  "listen": {
+   "key": "E major",
+   "key_fit": 0.92,
+   "tempo": 89.1,
+   "quiet_s": 3,
+   "level_spread_db": 10.6,
+   "hiss": 0.166,
+   "peak": 0.984,
+   "good": 0.267,
+   "vocals": -0.155,
+   "noise": -0.179,
+   "cheap": 0.131,
+   "odd": 0.017,
+   "like_refs": 0.7,
+   "worst_vocals": [
+    -0.055,
+    90
+   ],
+   "worst_noise": [
+    -0.125,
+    60
+   ],
+   "worst_cheap": [
+    0.188,
+    120
+   ],
+   "worst_odd": [
+    0.085,
+    10
+   ]
+  },
+  "vocal_db": -37.1,
+  "vocal_windows_pct": 1.8,
+  "loop_from_s": 0.12,
+  "loop_to_s": 149.45,
+  "loop_s": 149.3,
+  "loop_start": 1.0,
+  "loop_end": 150.333333,
+  "seam_dist": 0.396,
+  "seam": {
+   "level_jump_db": 4.17,
+   "level_jump_p99_elsewhere": 6.69,
+   "flux_at_seam": 69.8,
+   "flux_p99_elsewhere": 279.3,
+   "flux_median": 58.0,
+   "sample_step_at_seam": 0.0018,
+   "sample_step_p999_elsewhere": 0.0433
+  },
+  "source_lufs": -11.3
+ },
+ "morning-11": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is morning and work-day music outdoors: bright, fresh, cheerful but calm, a sunny morning walk to work. Instruments: piano, acoustic guitar, light strings, glockenspiel, soft drums, bass. G major, 100 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the acoustic guitar over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 5821,
+  "source_s": 167.8,
+  "listen": {
+   "key": "C# major",
+   "key_fit": 0.9,
+   "tempo": 103.4,
+   "quiet_s": 3,
+   "level_spread_db": 11.5,
+   "hiss": 0.1499,
+   "peak": 0.994,
+   "good": 0.26,
+   "vocals": -0.141,
+   "noise": -0.153,
+   "cheap": 0.152,
+   "odd": 0.041,
+   "like_refs": 0.649,
+   "worst_vocals": [
+    -0.068,
+    140
+   ],
+   "worst_noise": [
+    -0.082,
+    160
+   ],
+   "worst_cheap": [
+    0.235,
+    0
+   ],
+   "worst_odd": [
+    0.164,
+    80
+   ]
+  },
+  "vocal_db": -34.4,
+  "vocal_windows_pct": 1.5,
+  "loop_from_s": 3.4,
+  "loop_to_s": 153.14,
+  "loop_s": 149.7,
+  "loop_start": 1.0,
+  "loop_end": 150.738083,
+  "seam_dist": 0.329,
+  "seam": {
+   "level_jump_db": 2.83,
+   "level_jump_p99_elsewhere": 6.93,
+   "flux_at_seam": 14.7,
+   "flux_p99_elsewhere": 197.4,
+   "flux_median": 49.8,
+   "sample_step_at_seam": 0.0004,
+   "sample_step_p999_elsewhere": 0.0406
+  },
+  "source_lufs": -11.4
+ },
+ "morning-12": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is morning and work-day music outdoors: bright, fresh, cheerful but calm, a sunny morning walk to work. Instruments: piano, acoustic guitar, light strings, glockenspiel, soft drums, bass. G major, 100 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the acoustic guitar over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 5822,
+  "source_s": 168.9,
+  "listen": {
+   "key": "A major",
+   "key_fit": 0.9,
+   "tempo": 103.4,
+   "quiet_s": 2,
+   "level_spread_db": 12.1,
+   "hiss": 0.1743,
+   "peak": 1.0,
+   "good": 0.245,
+   "vocals": -0.177,
+   "noise": -0.173,
+   "cheap": 0.159,
+   "odd": -0.03,
+   "like_refs": 0.702,
+   "worst_vocals": [
+    -0.088,
+    120
+   ],
+   "worst_noise": [
+    -0.075,
+    10
+   ],
+   "worst_cheap": [
+    0.211,
+    0
+   ],
+   "worst_odd": [
+    0.109,
+    160
+   ]
+  },
+  "vocal_db": -36.9,
+  "vocal_windows_pct": 1.8,
+  "loop_from_s": 28.49,
+  "loop_to_s": 130.64,
+  "loop_s": 102.2,
+  "loop_start": 1.0,
+  "loop_end": 103.153833,
+  "seam_dist": 0.434,
+  "seam": {
+   "level_jump_db": 1.99,
+   "level_jump_p99_elsewhere": 8.34,
+   "flux_at_seam": 87.8,
+   "flux_p99_elsewhere": 361.0,
+   "flux_median": 57.5,
+   "sample_step_at_seam": 0.0091,
+   "sample_step_p999_elsewhere": 0.0482
+  },
+  "source_lufs": -11.4
+ },
+ "morning-13": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is morning and work-day music outdoors: bright, fresh, cheerful but calm, a sunny morning walk to work. Instruments: piano, acoustic guitar, light strings, glockenspiel, soft drums, bass. G major, 100 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the flute take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the acoustic guitar over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 5823,
+  "source_s": 167.7,
+  "listen": {
+   "key": "A major",
+   "key_fit": 0.85,
+   "tempo": 103.4,
+   "quiet_s": 4,
+   "level_spread_db": 11.4,
+   "hiss": 0.1589,
+   "peak": 0.996,
+   "good": 0.229,
+   "vocals": -0.184,
+   "noise": -0.187,
+   "cheap": 0.155,
+   "odd": -0.034,
+   "like_refs": 0.692,
+   "worst_vocals": [
+    -0.102,
+    60
+   ],
+   "worst_noise": [
+    -0.125,
+    40
+   ],
+   "worst_cheap": [
+    0.219,
+    0
+   ],
+   "worst_odd": [
+    0.019,
+    130
+   ]
+  },
+  "vocal_db": -31.2,
+  "vocal_windows_pct": 3.0,
+  "loop_from_s": 17.83,
+  "loop_to_s": 132.12,
+  "loop_s": 114.3,
+  "loop_start": 1.0,
+  "loop_end": 115.287042,
+  "seam_dist": 0.445,
+  "seam": {
+   "level_jump_db": 2.76,
+   "level_jump_p99_elsewhere": 8.67,
+   "flux_at_seam": 131.0,
+   "flux_p99_elsewhere": 315.2,
+   "flux_median": 60.3,
+   "sample_step_at_seam": 0.0104,
+   "sample_step_p999_elsewhere": 0.0517
+  },
+  "source_lufs": -11.6
+ },
+ "night-11": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is late-evening music at the dorms: quiet, intimate, peaceful, a relaxed jazz ballad. Instruments: piano, upright bass, brushed drums, soft strings, vibraphone. E-flat major, 72 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the vibraphone take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the soft strings over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 6021,
+  "source_s": 168.3,
+  "listen": {
+   "key": "A major",
+   "key_fit": 0.95,
+   "tempo": 143.6,
+   "quiet_s": 4,
+   "level_spread_db": 14.2,
+   "hiss": 0.167,
+   "peak": 0.996,
+   "good": 0.293,
+   "vocals": -0.102,
+   "noise": -0.146,
+   "cheap": 0.152,
+   "odd": 0.039,
+   "like_refs": 0.643,
+   "worst_vocals": [
+    -0.029,
+    130
+   ],
+   "worst_noise": [
+    -0.081,
+    100
+   ],
+   "worst_cheap": [
+    0.195,
+    120
+   ],
+   "worst_odd": [
+    0.074,
+    140
+   ]
+  },
+  "vocal_db": -35.8,
+  "vocal_windows_pct": 2.4,
+  "loop_from_s": 4.98,
+  "loop_to_s": 147.72,
+  "loop_s": 142.7,
+  "loop_start": 1.0,
+  "loop_end": 143.736854,
+  "seam_dist": 0.312,
+  "seam": {
+   "level_jump_db": 1.06,
+   "level_jump_p99_elsewhere": 7.04,
+   "flux_at_seam": 67.4,
+   "flux_p99_elsewhere": 209.9,
+   "flux_median": 54.7,
+   "sample_step_at_seam": 0.0054,
+   "sample_step_p999_elsewhere": 0.0451
+  },
+  "source_lufs": -11.3
+ },
+ "night-12": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is late-evening music at the dorms: quiet, intimate, peaceful, a relaxed jazz ballad. Instruments: piano, upright bass, brushed drums, soft strings, vibraphone. E-flat major, 72 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the vibraphone take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the soft strings over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 6022,
+  "source_s": 168.6,
+  "listen": {
+   "key": "Eb major",
+   "key_fit": 0.91,
+   "tempo": 143.6,
+   "quiet_s": 3,
+   "level_spread_db": 9.3,
+   "hiss": 0.1663,
+   "peak": 0.996,
+   "good": 0.269,
+   "vocals": -0.144,
+   "noise": -0.123,
+   "cheap": 0.188,
+   "odd": 0.026,
+   "like_refs": 0.616,
+   "worst_vocals": [
+    -0.046,
+    140
+   ],
+   "worst_noise": [
+    -0.045,
+    90
+   ],
+   "worst_cheap": [
+    0.244,
+    10
+   ],
+   "worst_odd": [
+    0.098,
+    70
+   ]
+  },
+  "vocal_db": -31.7,
+  "vocal_windows_pct": 2.7,
+  "loop_from_s": 14.23,
+  "loop_to_s": 145.58,
+  "loop_s": 131.4,
+  "loop_start": 1.0,
+  "loop_end": 132.352771,
+  "seam_dist": 0.62,
+  "seam": {
+   "level_jump_db": 3.02,
+   "level_jump_p99_elsewhere": 7.23,
+   "flux_at_seam": 70.1,
+   "flux_p99_elsewhere": 250.3,
+   "flux_median": 50.8,
+   "sample_step_at_seam": 0.0055,
+   "sample_step_p999_elsewhere": 0.0389
+  },
+  "source_lufs": -11.6
+ },
+ "night-13": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is late-evening music at the dorms: quiet, intimate, peaceful, a relaxed jazz ballad. Instruments: piano, upright bass, brushed drums, soft strings, vibraphone. E-flat major, 72 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the vibraphone take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the soft strings over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 6023,
+  "source_s": 167.0,
+  "listen": {
+   "key": "C major",
+   "key_fit": 0.92,
+   "tempo": 152.0,
+   "quiet_s": 3,
+   "level_spread_db": 16.2,
+   "hiss": 0.1695,
+   "peak": 0.996,
+   "good": 0.303,
+   "vocals": -0.13,
+   "noise": -0.115,
+   "cheap": 0.145,
+   "odd": 0.043,
+   "like_refs": 0.636,
+   "worst_vocals": [
+    -0.068,
+    90
+   ],
+   "worst_noise": [
+    -0.043,
+    60
+   ],
+   "worst_cheap": [
+    0.193,
+    120
+   ],
+   "worst_odd": [
+    0.078,
+    110
+   ]
+  },
+  "vocal_db": -33.1,
+  "vocal_windows_pct": 3.6,
+  "loop_from_s": 7.22,
+  "loop_to_s": 146.17,
+  "loop_s": 138.9,
+  "loop_start": 1.0,
+  "loop_end": 139.944854,
+  "seam_dist": 0.394,
+  "seam": {
+   "level_jump_db": 8.77,
+   "level_jump_p99_elsewhere": 7.9,
+   "flux_at_seam": 87.3,
+   "flux_p99_elsewhere": 186.7,
+   "flux_median": 43.8,
+   "sample_step_at_seam": 0.0005,
+   "sample_step_p999_elsewhere": 0.0392
+  },
+  "source_lufs": -11.6
+ },
+ "office-11": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music inside the office: focused, light, steady, a busy but friendly office. Instruments: electric piano, marimba, soft drums, bass, light strings. C major, 96 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the electric piano, the ensemble soft underneath. [0:30 - 1:00] the marimba take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 6121,
+  "source_s": 168.3,
+  "listen": {
+   "key": "C major",
+   "key_fit": 0.94,
+   "tempo": 152.0,
+   "quiet_s": 4,
+   "level_spread_db": 10.3,
+   "hiss": 0.1709,
+   "peak": 1.0,
+   "good": 0.254,
+   "vocals": -0.173,
+   "noise": -0.116,
+   "cheap": 0.186,
+   "odd": 0.033,
+   "like_refs": 0.642,
+   "worst_vocals": [
+    -0.103,
+    90
+   ],
+   "worst_noise": [
+    -0.054,
+    70
+   ],
+   "worst_cheap": [
+    0.252,
+    70
+   ],
+   "worst_odd": [
+    0.084,
+    90
+   ]
+  },
+  "vocal_db": -37.2,
+  "vocal_windows_pct": 2.4,
+  "loop_from_s": 1.65,
+  "loop_to_s": 144.93,
+  "loop_s": 143.3,
+  "loop_start": 1.0,
+  "loop_end": 144.278792,
+  "seam_dist": 0.8,
+  "seam": {
+   "level_jump_db": 0.53,
+   "level_jump_p99_elsewhere": 7.44,
+   "flux_at_seam": 386.8,
+   "flux_p99_elsewhere": 321.6,
+   "flux_median": 46.4,
+   "sample_step_at_seam": 0.028,
+   "sample_step_p999_elsewhere": 0.0525
+  },
+  "source_lufs": -11.8
+ },
+ "office-12": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is music inside the office: focused, light, steady, a busy but friendly office. Instruments: electric piano, marimba, soft drums, bass, light strings. C major, 96 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the electric piano, the ensemble soft underneath. [0:30 - 1:00] the marimba take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse electric piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the strings over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 6122,
+  "source_s": 169.2,
+  "listen": {
+   "key": "C# major",
+   "key_fit": 0.85,
+   "tempo": 99.4,
+   "quiet_s": 5,
+   "level_spread_db": 11.0,
+   "hiss": 0.1838,
+   "peak": 1.0,
+   "good": 0.258,
+   "vocals": -0.12,
+   "noise": -0.102,
+   "cheap": 0.186,
+   "odd": -0.024,
+   "like_refs": 0.671,
+   "worst_vocals": [
+    -0.05,
+    100
+   ],
+   "worst_noise": [
+    -0.051,
+    140
+   ],
+   "worst_cheap": [
+    0.241,
+    60
+   ],
+   "worst_odd": [
+    0.05,
+    60
+   ]
+  },
+  "vocal_db": -35.7,
+  "vocal_windows_pct": 4.4,
+  "loop_from_s": 37.08,
+  "loop_to_s": 135.08,
+  "loop_s": 98.0,
+  "loop_start": 1.0,
+  "loop_end": 99.0,
+  "seam_dist": 0.332,
+  "seam": {
+   "level_jump_db": 1.36,
+   "level_jump_p99_elsewhere": 5.63,
+   "flux_at_seam": 328.5,
+   "flux_p99_elsewhere": 362.5,
+   "flux_median": 66.7,
+   "sample_step_at_seam": 0.0152,
+   "sample_step_p999_elsewhere": 0.0488
+  },
+  "source_lufs": -11.4
+ },
+ "title-11": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is the title menu theme: hopeful, gentle, sweeping, a new start on an island at sunrise. Instruments: piano, string section, soft synth pad, light harp. D major, 84 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the violins take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the cello over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 5721,
+  "source_s": 167.7,
+  "listen": {
+   "key": "B major",
+   "key_fit": 0.94,
+   "tempo": 161.5,
+   "quiet_s": 4,
+   "level_spread_db": 10.5,
+   "hiss": 0.1266,
+   "peak": 0.978,
+   "good": 0.314,
+   "vocals": -0.104,
+   "noise": -0.107,
+   "cheap": 0.138,
+   "odd": 0.082,
+   "like_refs": 0.634,
+   "worst_vocals": [
+    -0.035,
+    0
+   ],
+   "worst_noise": [
+    -0.063,
+    140
+   ],
+   "worst_cheap": [
+    0.221,
+    50
+   ],
+   "worst_odd": [
+    0.157,
+    20
+   ]
+  },
+  "vocal_db": -21.4,
+  "vocal_windows_pct": 7.2,
+  "loop_from_s": 8.51,
+  "loop_to_s": 137.08,
+  "loop_s": 128.6,
+  "loop_start": 1.0,
+  "loop_end": 129.571833,
+  "seam_dist": 0.419,
+  "seam": {
+   "level_jump_db": 1.2,
+   "level_jump_p99_elsewhere": 5.58,
+   "flux_at_seam": 73.2,
+   "flux_p99_elsewhere": 127.1,
+   "flux_median": 50.2,
+   "sample_step_at_seam": 0.0193,
+   "sample_step_p999_elsewhere": 0.0478
+  },
+  "source_lufs": -11.5
+ },
+ "title-12": {
+  "model": "google/lyria-3-pro",
+  "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack with a memorable lead melody and rich chords, polished studio recording. No vocals, no singing, no choir, no humming. This is the title menu theme: hopeful, gentle, sweeping, a new start on an island at sunrise. Instruments: piano, string section, soft synth pad, light harp. D major, 84 BPM, 4/4, one steady tempo and key throughout. Structure: [0:00 - 0:30] the main melody, played simply on the piano, the ensemble soft underneath. [0:30 - 1:00] the violins take the same melody, fuller accompaniment. [1:00 - 1:30] a calmer interlude: sparse piano, the melody in fragments over new chords. [1:30 - 2:00] a counter-melody on the cello over the main chords. [2:00 - 2:30] the main melody returns with the whole ensemble. [2:30 - 2:50] exactly the same as 0:00 - 0:20 again, the opening repeated note for note, with no fade-out and no ending, so the piece loops back to its start.",
+  "seed": 5722,
+  "source_s": 170.1,
+  "listen": {
+   "key": "D major",
+   "key_fit": 0.9,
+   "tempo": 112.3,
+   "quiet_s": 3,
+   "level_spread_db": 12.5,
+   "hiss": 0.1624,
+   "peak": 1.0,
+   "good": 0.293,
+   "vocals": -0.103,
+   "noise": -0.116,
+   "cheap": 0.108,
+   "odd": 0.052,
+   "like_refs": 0.655,
+   "worst_vocals": [
+    -0.013,
+    160
+   ],
+   "worst_noise": [
+    -0.044,
+    130
+   ],
+   "worst_cheap": [
+    0.212,
+    160
+   ],
+   "worst_odd": [
+    0.162,
+    160
+   ]
+  },
+  "vocal_db": -15.4,
+  "vocal_windows_pct": 10.9,
+  "loop_from_s": 39.0,
+  "loop_to_s": 124.06,
+  "loop_s": 85.1,
+  "loop_start": 1.0,
+  "loop_end": 86.059021,
+  "seam_dist": 0.245,
+  "seam": {
+   "level_jump_db": 1.6,
+   "level_jump_p99_elsewhere": 6.99,
+   "flux_at_seam": 88.9,
+   "flux_p99_elsewhere": 225.9,
+   "flux_median": 61.6,
+   "sample_step_at_seam": 0.0258,
+   "sample_step_p999_elsewhere": 0.053
+  },
+  "source_lufs": -11.1
+ }
+}
