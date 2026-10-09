@@ -27,6 +27,7 @@ export async function buildPiece(view) {
 }
 
 async function call(view, root) {
+  if (view.kit) return kitPiece(view, root);
   const phone = view.street === 'phone';
   await (await mod('scenes/outdoor/plant-models.js')).loadPlantModels({ lighter: phone });
   const m = await mod(view.file);
@@ -64,6 +65,49 @@ async function call(view, root) {
   if (made.$set && !made.$set.lit.length) made.$set.lit.push([0, 0, 0.55]);
   if (made.$set) made.$set.build(root);
   if (made.$kit) made.$kit.flush(root);
+  if (view.street) await streetPass(root, phone);
+}
+
+// a world kit piece (game3d/js/kit/, view.kit: { variant, seeds, level }): placed into a collector and built the way a
+// place builds it (kit/core/build.js buildKit), several seeds side by side when asked, on a plain wall when the piece
+// goes on one (its declaration's preview.wall), then the street finish
+// how the library shows a piece: its declaration's preview, per variant when it is a function of the variant
+const previewOf = (d, variant) => (typeof d.preview === 'function' ? d.preview(variant) : d.preview) || {};
+
+async function kitPiece(view, root) {
+  const phone = view.street === 'phone';
+  const place = (await mod(view.file))[view.fn];
+  if (typeof place !== 'function' || !place.decl) throw new Error(`${view.file} has no kit piece ${view.fn}`);
+  const { Parts } = await mod('kit/core/parts.js');
+  const { buildKit } = await mod('kit/core/build.js');
+  const { variant, seeds = [1], level = phone ? 'phone' : 'standard' } = view.kit;
+  const d = place.decl, groups = [];
+  for (const seed of seeds) {
+    const p = new Parts(), g = new THREE.Group();
+    const y = previewOf(d, variant).y ?? 0;
+    place(p, d.run ? { from: [-1.5, 0], to: [1.5, 0], variant, seed, level } : { at: [0, 0], y, variant, seed, level });
+    buildKit(p, g);
+    g.updateMatrixWorld(true);
+    groups.push([g, new THREE.Box3().setFromObject(g)]);
+  }
+  // side by side along x, a little apart, centred
+  const gap = 0.35, width = groups.reduce((a, [, b]) => a + b.max.x - b.min.x, 0) + gap * (groups.length - 1);
+  let x = -width / 2;
+  for (const [g, b] of groups) {
+    g.position.x = x - b.min.x;
+    x += b.max.x - b.min.x + gap;
+    root.add(g);
+  }
+  const wallSize = previewOf(d, variant).wall;
+  if (wallSize) {
+    const [ww, wh] = wallSize, w = Math.max(ww, width + 0.8);
+    const wall = new THREE.Mesh(new THREE.BoxGeometry(w, wh, 0.3), new THREE.MeshStandardMaterial({ color: '#c9c3b8', roughness: 0.9 }));
+    wall.position.set(0, wh / 2, -0.15);
+    root.add(wall);
+    const ground = new THREE.Mesh(new THREE.BoxGeometry(w, 0.02, 1.6), new THREE.MeshStandardMaterial({ color: '#8e8a86', roughness: 0.95 }));
+    ground.position.set(0, -0.01, 0.8);
+    root.add(ground);
+  }
   if (view.street) await streetPass(root, phone);
 }
 
