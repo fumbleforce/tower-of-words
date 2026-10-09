@@ -273,6 +273,42 @@ for (const [name, g] of [
       [],
     ));
 
+// beds belong to the place's structure (Jørgen, 2026-10-09: "areas like this must be avoided, where the plants are
+// contained in these oddly shaped areas"): every bed in the campus and forecourt is a rectangle standing behind a kerb
+// of the real ground, or no bed at all (its plants loose on the lawn)
+const { CAMPUS_GARDENS } = await import('../../js/scenes/campus/landscape-plan.js');
+const { QUARTER_BEDS } = await import('../../js/scenes/campus/quarter-plan.js');
+const { NORTH_GARDENS } = await import('../../js/scenes/campus/north-garden-plan.js');
+const { SHED_GARDENS } = await import('../../js/scenes/campus/shed-garden-plan.js');
+const { SOUTH_QUARTER_BEDS } = await import('../../js/scenes/forecourt/quarter-planting-plan.js');
+const { CHUNKS } = await import('../../js/scenes/island-chunks.js');
+test('every bed is a strip behind a kerb of the ground, or plants loose on the lawn', () => {
+  const g = CG.ground(),
+    [ax, az] = CHUNKS.campus.at;
+  const beds = [...CAMPUS_GARDENS, ...QUARTER_BEDS, ...NORTH_GARDENS, ...SHED_GARDENS, ...SOUTH_QUARTER_BEDS];
+  assert.ok(beds.some((b) => !b.loose));
+  for (const bed of beds) {
+    if (bed.loose) {
+      assert.deepEqual([bed.masses, bed.grasses], [[], []], bed.id);
+      continue;
+    }
+    const [x0, x1, z0, z1] = bed.strip.map((v, i) => v - (i < 2 ? ax : az));
+    assert.equal(bed.poly.length, 4, bed.id);
+    // one of its long sides lies a kerb's width from a drawn kerb along the ground's edge
+    const kerbAt = (out, line, a, b) =>
+      g.edges.some(
+        (e) => e.kind === 'kerb' && e.out === out && Math.abs(e.line - line) < 1e-3 && e.s0 < b - 0.5 && e.s1 > a + 0.5,
+      );
+    assert.ok(
+      kerbAt('e', x0 - 0.16, z0, z1) ||
+        kerbAt('w', x1 + 0.16, z0, z1) ||
+        kerbAt('s', z0 - 0.16, x0, x1) ||
+        kerbAt('n', z1 + 0.16, x0, x1),
+      `${bed.id} stands behind no kerb`,
+    );
+  }
+});
+
 test('campus: every exit, the print door and the bench stay reachable on the new ground', () => {
   const w = buildCampus();
   const staffDoor = [FP.STAFF_PATH[1] - 0.3, FP.WING_DOOR.at],

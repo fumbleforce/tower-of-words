@@ -1,3 +1,5 @@
+import { alignBeds } from '../outdoor/bed-layout.js';
+import { BED_WALKS } from './bed-walks.js';
 // Island coordinates, shared by the physical grounds and map. Existing trees keep their positions/seeds.
 export const CAMPUS_TREES = [
   ['pine', -37.3, -40.2, 1.1, 830],
@@ -114,25 +116,15 @@ function plantedOutline(points) {
     });
   return points;
 }
-export const CAMPUS_GARDENS = gardens.map((g) => ({ ...g, poly: plantedOutline(g.poly) }));
+// lined up with the paths, or loose on the lawn (outdoor/bed-layout.js)
+export const CAMPUS_GARDENS = alignBeds(
+  gardens.map((g) => ({ ...g, poly: plantedOutline(g.poly) })),
+  BED_WALKS,
+);
 export const PRINT_SERVICE_PAD = [-31, -40.99, -25.95, -39.72];
 export const SERVICE_PAD_TOP = 0.025;
 
-// These are real level paving extensions at the doorway; no fictional map-only roads.
-export const PRINT_APRONS = [
-  {
-    id: 'print_arrival_n',
-    kind: 'plaza',
-    rect: [-24.3, -45.25, -21.6, -44.1],
-    detail: 'Level north side of the print-shop entrance apron.',
-  },
-  {
-    id: 'print_arrival_s',
-    kind: 'plaza',
-    rect: [-24.3, -42.5, -21.6, -41.05],
-    detail: 'Level south side of the print-shop entrance apron.',
-  },
-];
+export { PRINT_APRONS } from './aprons.js';
 export const PRINT_FOUNDATIONS = [
   [-34, -45.7, -24.3, -45.22],
   [-34, -41.38, -24.3, -40.82],
@@ -154,7 +146,7 @@ export function insideGarden(poly, x, z) {
 }
 // A few authored masses, joined by lower overlapping cover instead of isolated equally sized bushes.
 export function gardenPlants(garden) {
-  return garden.masses.map(([x, z, r]) => ({ x, z, r }));
+  return [...garden.masses, ...(garden.looseMasses || [])].map(([x, z, r]) => ({ x, z, r }));
 }
 export function gardenCover(garden) {
   let state = garden.seed;

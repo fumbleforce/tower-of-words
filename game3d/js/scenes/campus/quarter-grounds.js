@@ -9,6 +9,8 @@ export function quarterBeds(parts, beds, offset = [0, 0]) {
     box: (color, w, h, d, x, y, z, options) => parts.box(color, w, h, d, x + offset[0], y, z + offset[1], options),
   };
   for (const bed of beds) {
+    plants(p, bed);
+    if (bed.loose) continue; // plants on the lawn, no bed (outdoor/bed-layout.js)
     const shape = new THREE.Shape(bed.poly.map(([x, z]) => new THREE.Vector2(x, -z)));
     p.geo('#59614d', new THREE.ShapeGeometry(shape).rotateX(-Math.PI / 2).translate(0, 0.013, 0), {
       cast: false,
@@ -33,27 +35,31 @@ export function quarterBeds(parts, beds, offset = [0, 0]) {
         turn: i * 2.39996,
       });
     });
-    bed.masses.forEach(([x, z, r, height = 1], i) =>
-      cluster(height === 1 ? p : { geo: (c, g, o) => p.geo(c, g.scale(1, height, 1), o) }, x, z, {
-        n: 4,
-        r: r * 0.72,
-        spread: r * 0.46,
-        seed: bed.seed + i,
-        tones: ['#516747', '#687b51', '#5d724b'],
-      }),
-    );
-    bed.grasses.forEach(([x, z, height = 0.3], i) => {
-      for (let j = 0; j < (bed.grassCount ?? 5); j++) {
-        const a = j * 2.39996,
-          d = Math.sqrt(j) * 0.07;
-        grass(p, x + Math.cos(a) * d, z + Math.sin(a) * d, {
-          h: height + (j % 3) * 0.07,
-          seed: bed.seed + i * 7 + j,
-          color: j % 2 ? '#7a8d61' : '#607b53',
-        });
-      }
-    });
   }
+}
+
+// a bed's shrubs and grasses, in its strip and loose on the lawn beside it
+function plants(p, bed) {
+  [...bed.masses, ...(bed.looseMasses || [])].forEach(([x, z, r, height = 1], i) =>
+    cluster(height === 1 ? p : { geo: (c, g, o) => p.geo(c, g.scale(1, height, 1), o) }, x, z, {
+      n: 4,
+      r: r * 0.72,
+      spread: r * 0.46,
+      seed: bed.seed + i,
+      tones: ['#516747', '#687b51', '#5d724b'],
+    }),
+  );
+  [...bed.grasses, ...(bed.looseGrasses || [])].forEach(([x, z, height = 0.3], i) => {
+    for (let j = 0; j < (bed.grassCount ?? 5); j++) {
+      const a = j * 2.39996,
+        d = Math.sqrt(j) * 0.07;
+      grass(p, x + Math.cos(a) * d, z + Math.sin(a) * d, {
+        h: height + (j % 3) * 0.07,
+        seed: bed.seed + i * 7 + j,
+        color: j % 2 ? '#7a8d61' : '#607b53',
+      });
+    }
+  });
 }
 
 export function quarterGrounds(parts, offset = [0, 0]) {

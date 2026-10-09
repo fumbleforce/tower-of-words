@@ -1,5 +1,7 @@
 // Island coordinates shared by both sides of the quarter-street seam and the map.
 import { CAMPUS_TREES, insideGarden } from './landscape-plan.js';
+import { alignBeds } from '../outdoor/bed-layout.js';
+import { BED_WALKS } from './bed-walks.js';
 export const QUARTER_TREES = [
   ['maple', -1.64, -42.05, 1.14, 119],
   ['sakura', -2.18, -39.05, 0.9, 120],
@@ -98,10 +100,10 @@ export function roundCorners(poly) {
     ]);
   });
 }
-export const QUARTER_BEDS = beds.map((bed) => ({
-  ...bed,
-  poly: roundCorners(bed.poly),
-}));
+export const QUARTER_BEDS = alignBeds(
+  beds.map((bed) => ({ ...bed, poly: roundCorners(bed.poly) })),
+  BED_WALKS,
+);
 
 // Seeded overlapping cover has no planted rows; every full radius remains within its soil outline.
 export function quarterCover(bed) {

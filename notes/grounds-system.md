@@ -17,6 +17,8 @@ He walks on paving and gravel. Lawn and planting are never walkable. Wherever wa
 
 Where two walkable areas meet (a path joining a court) there is no kerb. Planted beds sit flush with the lawn, one footprint each, with no raised face.
 
+Beds belong to the structure (Jørgen, 2026-10-09: "areas like this must be avoided, where the plants are contained in these oddly shaped areas, it looks bad"). `game3d/js/scenes/outdoor/bed-layout.js` turns each planned bed into a straight strip, at most 1.5 deep, behind the kerb of the path it borders; plants further out stand loose on the lawn, and a bed with no path beside it is only loose plants. The walk-ground test checks every bed is such a strip or loose.
+
 ## How it is built
 
 - `game3d/js/movement/walk-ground.js` (no Three.js): a place lists its walkable rectangles, the buildings it can walk into, the ground it shows but can't reach (backdrop) and its barriers (`building`, `wall`, `gate`, `open`). It works out the outline of the union once: contains(x, z), the edges with what lies beyond each, and the non-walkable ground as rectangles. `applyGround(nav, ground)` blocks those rectangles on the walk grid, which keeps his whole radius off them, as it does off furniture.

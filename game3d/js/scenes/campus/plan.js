@@ -1,6 +1,7 @@
 import * as L from '../island-layout.js';
 import * as F from '../forecourt/plan.js';
 import { CAMPUS_PATHS } from '../island-campus.js';
+import { COAST_WALKS } from './bed-walks.js';
 export const CHUNK = 'campus';
 const AT = L.CHUNKS.campus.at;
 export const pt = ([x, z]) => [x - AT[0], z - AT[1]];
@@ -16,8 +17,7 @@ export const WALKS = [
   F.CROSS,
   F.STAFF_PATH, // to the wing's staff door
   F.SHELTER_FLOOR, // the bike shelter's floor and its path (its bikes: F.SHELTER_BIKES)
-  rect([-42.6, -40.6, -39, -25.4]),
-  rect([-40.6, -20.75, -27.4, -25.4]),
+  ...COAST_WALKS.map(rect),
 ];
 const exit = (edge, lane, arrive, inside, zone) => ({
   edge: pt(edge),

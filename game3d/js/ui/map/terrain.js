@@ -115,6 +115,7 @@ export function drawPlanting(ctx, detail) {
     ...NORTH_GARDENS,
     ...ARRIVAL_GARDENS,
   ]) {
+    if (garden.loose) continue; // plants loose on the lawn, no bed (scenes/outdoor/bed-layout.js)
     shape(ctx, (x, z) => [x, z], garden.poly);
     ctx.fill();
   }

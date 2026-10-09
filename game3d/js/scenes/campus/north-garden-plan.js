@@ -1,7 +1,9 @@
 import { roundCorners } from './quarter-plan.js';
+import { alignBeds } from '../outdoor/bed-layout.js';
+import { BED_WALKS } from './bed-walks.js';
 
 // The print-shop approach remains open; the lamp has its own unplanted pocket.
-export const NORTH_GARDENS = [
+const northGardens = [
   {
     id: 'print-north-border',
     seed: 991,
@@ -64,3 +66,5 @@ export const NORTH_GARDENS = [
     cover: { radius: 0.5, variation: 0.16, spacing: 0.78 },
   },
 ].map((bed) => ({ ...bed, poly: roundCorners(bed.poly) }));
+// lined up with the paths, or loose on the lawn (outdoor/bed-layout.js)
+export const NORTH_GARDENS = alignBeds(northGardens, BED_WALKS);

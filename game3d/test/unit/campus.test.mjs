@@ -121,7 +121,7 @@ test('both new print apron wings are real reachable paving beside the original d
   }
 });
 test('physical garden boundary and map boundary use the exact same shared polygon', () => {
-  const garden = CAMPUS_GARDENS[0],
+  const garden = CAMPUS_GARDENS.find((g) => !g.loose), // a strip bed (loose gardens have no bed to draw)
     original = garden.poly[0][0];
   garden.poly[0][0] = original + 0.123; // A layout edit must reach both consumers without a parallel map edit.
   try {
@@ -189,8 +189,9 @@ test('the actual print-stock hardstanding supports the trolley and keeps equipme
     assert.equal(w.nav.free(box.x+box.width*dx,box.z+box.depth*dz),false,`${box.color} intrudes into a public path`);
 });
 test('the low planted layer overlaps into groups while keeping its edges within the shared outline', () => {
- for(const garden of CAMPUS_GARDENS){
-  const cover=gardenCover(garden);assert.ok(cover.length>8,garden.id);
+ // strip beds along their paths (outdoor/bed-layout.js); loose gardens have no low layer
+ for(const garden of CAMPUS_GARDENS.filter(g=>!g.loose)){
+  const cover=gardenCover(garden);assert.ok(cover.length>=3,garden.id);
   assert.ok(cover.filter(a=>cover.some(b=>a!==b&&Math.hypot(a.x-b.x,a.z-b.z)<a.r+b.r)).length>cover.length*.9);
   for(const p of cover)for(let i=0;i<8;i++)assert.ok(insideGarden(garden.poly,p.x+Math.cos(i*Math.PI/4)*p.r,p.z+Math.sin(i*Math.PI/4)*p.r));
  }
