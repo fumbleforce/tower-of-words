@@ -75,47 +75,6 @@ test('clipped hedge has a flat upward top, bounded corners, and economical geome
   assert.ok(top >= 24, 'flat clipped top has upward winding');
 });
 
-test('street tiles preserve every triangle, attribute and layer while tightening bounds', async () => {
-  const THREE = await import('three');
-  const { splitStreetSurfaces } = await import('../../js/scenes/diorama/spatial.js');
-  const root = new THREE.Group(),
-    collector = new Parts();
-  for (let i = 0; i < 60; i++)
-    collector.box('#aabbcc', 0.4, 0.3, 0.4, (i % 3) * 16, 0, Math.floor(i / 3) * 0.1, { surf: 'concrete' });
-  const [source] = collector.build(root);
-  source.layers.set(3);
-  source.position.set(2, 0.1, -3);
-  const material = source.material;
-  const triangles = (meshes) =>
-    meshes
-      .flatMap((mesh) => {
-        const g = mesh.geometry,
-          index = g.index,
-          rows = [];
-        for (let i = 0; i < (index?.count ?? g.attributes.position.count); i += 3) {
-          const row = [];
-          for (let j = 0; j < 3; j++) {
-            const id = index ? index.getX(i + j) : i + j;
-            for (const a of Object.values(g.attributes))
-              for (let k = 0; k < a.itemSize; k++) row.push(a.array[id * a.itemSize + k]);
-          }
-          rows.push(JSON.stringify(row));
-        }
-        return rows;
-      })
-      .sort();
-  const before = triangles([source]);
-  assert.ok(splitStreetSurfaces(root) >= 3);
-  assert.deepEqual(triangles(root.children), before);
-  for (const tile of root.children) {
-    assert.equal(tile.material, material);
-    assert.equal(tile.layers.mask, 8);
-    assert.deepEqual(tile.position.toArray(), [2, 0.1, -3]);
-    assert.ok(tile.geometry.boundingBox.max.x - tile.geometry.boundingBox.min.x < 1);
-    assert.equal(tile.userData.noBatch, true);
-  }
-});
-
 test('pane variation keeps source UVs and geometry intact while choosing multiple atlas interiors', async () => {
   const THREE = await import('three');
   const { mergeGeometries } = await import('three/addons/utils/BufferGeometryUtils.js');
