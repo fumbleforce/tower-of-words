@@ -12,7 +12,7 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 
 1. **Staging note per shot**, saved in the round folder: positions, heights, who touches what, camera height and angle, and an **In frame** list (which people, which body parts, face yes or no, which clothes, what of the room).
 2. **Describe only what is in frame** ("You must ONLY describe what is directly shown in the desired shot"). No face, hair, eye or glasses words when the face is out of frame; a person who isn't in frame isn't in the prompt. Check every prompt with `python3 tools/prompt_check.py <staging.json> <prompts.json>` before rendering.
-3. **Looks come from art/cast-looks.json** through `tools/cast_looks.py` (take only the parts that are in frame). Never write a character's look from memory ("her look is CLEARLY defined"). Mio: very dark green hair bordering on black, messy loose bun with bangs, bright green underneath; Aoi: small, B-cup, not flat; ages as in docs/game/cast.md.
+3. **Looks come from art/cast-looks.json** through `tools/cast_looks.py` (take only the parts that are in frame). Never write a character's look from memory ("her look is CLEARLY defined"). Mio: very dark green hair bordering on black, messy loose bun with bangs, bright green underneath; Aoi: small, B-cup, not flat (judge only clearly wrong sizes: flat, or clearly large; B versus C is too fine to call, so it passes. Jørgen 2026-10-09: "we should let these minimal things pass to be able to progress"); ages as in docs/game/cast.md.
 4. **Identity reference** (Anima IP-Adapter on the approved portrait): about 0.35 to 0.4, only on shots where the face is in frame. Higher copies the portrait's flat colouring and plain background ("looking more like simple cartoon characters").
 5. **Style and quality**: the full reward quality tags, matched to the encounter pictures he picked (island/private/rewards/encounters/). Never "anime screenshot, anime coloring, 2d, cel shading, clean lineart"; they flatten the picture.
 6. **Room**: a short phrase that matches the game's place ("basement underground copy room" for B2, which has no windows), plus at most one or two cues. Light words like "soft light" drag in a window; leave them out indoors and put "window" in the negative for windowless rooms. Long item lists over-prompt. "Clean" goes in the negative only as no dirt or handprints.
@@ -24,7 +24,7 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 - GPU through its lock (tools/gpu_priority.py), one model at a time, unload when done. RAM is tight: one headless browser at a time, nothing big in /tmp.
 - At most 6 renders per setting change, one change at a time.
 - **Every attempt gets a verdict** in the dashboard: `python3 tools/verdict.py <image> --reject "<one line>"` or `--keep`. Jørgen reads them in the History viewer.
-- Check every candidate at full size beside the approved portraits.
+- Check every candidate at full size beside the approved portraits. Reject only what is clearly off; don't fail a picture on differences too small to judge reliably.
 
 ## Reporting
 
