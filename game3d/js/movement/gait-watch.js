@@ -28,9 +28,14 @@ const _v = new THREE.Vector3(),
   _m = new THREE.Matrix4(),
   _sp = new THREE.Sphere();
 
+const footCache = new WeakMap();
+
 // the two feet (a Meshy rig's foot bones, a code-built person's shoes); null if it has none
 function feetOf(r) {
-  if (r._gaitFeet !== undefined) return r._gaitFeet;
+  const c = r.rig?.knees ? r.rig : r;
+  const body = r.feet?.length === 2 ? r.feet : r.model || c.knees;
+  const cached = footCache.get(r);
+  if (cached && cached.body === body) return cached.feet;
   let f = null;
   if (r.feet?.length === 2)
     f = r.feet; // the cat's front paws (creatures/cat.js)
@@ -41,9 +46,10 @@ function feetOf(r) {
     });
     if (bones.length === 2) f = bones;
   } else {
-    const c = r.rig?.knees ? r.rig : r;
     if (c.knees?.length === 2) f = c.knees.map((k) => k.children[k.children.length - 1]);
   }
+  // Clothing can replace the skeleton while keeping the actor and movement root.
+  footCache.set(r, { body, feet: f });
   return (r._gaitFeet = f);
 }
 
@@ -120,13 +126,14 @@ export function startGaitCheck(game) {
       const rel = feetRel(r, feet);
       let k = track.get(r);
       // Samples are parent-local. Entering a new carrier or place starts a new
-      // measurement frame; its coordinate offset is not distance walked.
-      if (!k || k.parent !== r.root.parent || k.space !== P.space || k.clock !== clock) {
+      // measurement frame; neither its coordinate offset nor a new skeleton is a stride.
+      if (!k || k.parent !== r.root.parent || k.space !== P.space || k.clock !== clock || k.feet !== feet) {
         track.set(
           r,
           (k = {
             id,
             clock,
+            feet,
             t,
             parent: r.root.parent,
             space: P.space,
