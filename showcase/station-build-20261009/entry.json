@@ -1,0 +1,215 @@
+{
+  "title": "Honsha station built properly, from every side",
+  "date": "2026-10-09",
+  "by": "claude-agent:station",
+  "caption": "The station and its platform shed are now one Blender model, finished on every side. The station has brick walls on a stone plinth, stone corners and bands, a window with a sill, head and steel frame in every opening, canopies over the exit and the glass front, and a roof with its plant, rails and the name board. The shed has one track down the middle with a platform on each side, matching what you see from the train. It has a curved roof on columns, a glazed back wall on the sea side, a railing on the town side, a glazed north end with buffers, and stairs down to the covered walkway. The station still fades when it hides Eric.",
+  "preview": "after-final-above-sw-desk",
+  "result": [
+    "after-final-above-sw-desk",
+    "after-final-behind-desk",
+    "after-final-low-court-nw-desk",
+    "after-final-low-south-west-desk",
+    "after-play-court-desk",
+    "after-play-court-phone"
+  ],
+  "sections": [
+    {
+      "title": "Seen from the sea, from behind and from above",
+      "caption": "These are the sides the play camera never showed, which had been left unfinished.",
+      "images": [
+        {
+          "id": "before-sea-desk",
+          "image": "bible/shots/showcase/station-build-20261009/before-sea-desk.webp",
+          "caption": "Before, from the sea"
+        },
+        {
+          "id": "after-sea-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-sea-desk.webp",
+          "caption": "After, from the sea"
+        },
+        {
+          "id": "before-behind-desk",
+          "image": "bible/shots/showcase/station-build-20261009/before-behind-desk.webp",
+          "caption": "Before, from behind"
+        },
+        {
+          "id": "after-final-behind-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-final-behind-desk.webp",
+          "caption": "After, from behind"
+        },
+        {
+          "id": "before-above-sw-desk",
+          "image": "bible/shots/showcase/station-build-20261009/before-above-sw-desk.webp",
+          "caption": "Before, from above"
+        },
+        {
+          "id": "after-final-above-sw-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-final-above-sw-desk.webp",
+          "caption": "After, from above"
+        },
+        {
+          "id": "before-sea-phone",
+          "image": "bible/shots/showcase/station-build-20261009/before-sea-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-sea-phone",
+          "image": "bible/shots/showcase/station-build-20261009/after-sea-phone.webp",
+          "caption": "After, phone"
+        },
+        {
+          "id": "before-behind-phone",
+          "image": "bible/shots/showcase/station-build-20261009/before-behind-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-behind-phone",
+          "image": "bible/shots/showcase/station-build-20261009/after-behind-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "Walking round it at eye height",
+      "images": [
+        {
+          "id": "before-low-court-nw-desk",
+          "image": "bible/shots/showcase/station-build-20261009/before-low-court-nw-desk.webp",
+          "caption": "Before, from the court"
+        },
+        {
+          "id": "after-final-low-court-nw-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-final-low-court-nw-desk.webp",
+          "caption": "After, from the court"
+        },
+        {
+          "id": "after-low-north-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-low-north-desk.webp",
+          "caption": "After, the exit and staff door"
+        },
+        {
+          "id": "after-low-east-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-low-east-desk.webp",
+          "caption": "After, the east wall over the bikes"
+        },
+        {
+          "id": "before-low-south-desk",
+          "image": "bible/shots/showcase/station-build-20261009/before-low-south-desk.webp",
+          "caption": "Before, the south front"
+        },
+        {
+          "id": "after-low-south-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-low-south-desk.webp",
+          "caption": "After, the south front and walkway"
+        },
+        {
+          "id": "before-low-south-west-desk",
+          "image": "bible/shots/showcase/station-build-20261009/before-low-south-west-desk.webp",
+          "caption": "Before, the shed's south end"
+        },
+        {
+          "id": "after-final-low-south-west-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-final-low-south-west-desk.webp",
+          "caption": "After, the stairs and the walkway"
+        },
+        {
+          "id": "before-low-west-desk",
+          "image": "bible/shots/showcase/station-build-20261009/before-low-west-desk.webp",
+          "caption": "Before, the shed from the coast"
+        },
+        {
+          "id": "after-final-low-west-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-final-low-west-desk.webp",
+          "caption": "After, the back wall"
+        },
+        {
+          "id": "before-low-shed-north-desk",
+          "image": "bible/shots/showcase/station-build-20261009/before-low-shed-north-desk.webp",
+          "caption": "Before, the shed's north end"
+        },
+        {
+          "id": "after-final-low-shed-north-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-final-low-shed-north-desk.webp",
+          "caption": "After, the glazed north end and buffers"
+        },
+        {
+          "id": "after-follow-court-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-follow-court-desk.webp",
+          "caption": "After, the follow camera on the court"
+        },
+        {
+          "id": "before-low-south-west-phone",
+          "image": "bible/shots/showcase/station-build-20261009/before-low-south-west-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-low-south-west-phone",
+          "image": "bible/shots/showcase/station-build-20261009/after-low-south-west-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "The play camera",
+      "caption": "On the court the station stands whole at the bottom left. At its door it fades, and the security room shows as a cut-away as before.",
+      "images": [
+        {
+          "id": "before-play-court-desk",
+          "image": "bible/shots/showcase/station-build-20261009/before-play-court-desk.webp",
+          "caption": "Before"
+        },
+        {
+          "id": "after-play-court-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-play-court-desk.webp",
+          "caption": "After"
+        },
+        {
+          "id": "before-play-door-desk",
+          "image": "bible/shots/showcase/station-build-20261009/before-play-door-desk.webp",
+          "caption": "Before, at the door"
+        },
+        {
+          "id": "after-play-door-desk",
+          "image": "bible/shots/showcase/station-build-20261009/after-play-door-desk.webp",
+          "caption": "After, at the door"
+        },
+        {
+          "id": "before-play-court-phone",
+          "image": "bible/shots/showcase/station-build-20261009/before-play-court-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-play-court-phone",
+          "image": "bible/shots/showcase/station-build-20261009/after-play-court-phone.webp",
+          "caption": "After, phone"
+        },
+        {
+          "id": "before-play-door-phone",
+          "image": "bible/shots/showcase/station-build-20261009/before-play-door-phone.webp",
+          "caption": "Before, phone at the door"
+        },
+        {
+          "id": "after-play-door-phone",
+          "image": "bible/shots/showcase/station-build-20261009/after-play-door-phone.webp",
+          "caption": "After, phone at the door"
+        }
+      ]
+    },
+    {
+      "title": "The train arriving",
+      "caption": "The game's arrival shows the train's own platforms from above. That view is unchanged, and the shed now has the same layout.",
+      "images": [
+        {
+          "id": "arrival-9-desk",
+          "image": "bible/shots/showcase/station-build-20261009/arrival-9-desk.webp",
+          "caption": "Stopped at the platform"
+        },
+        {
+          "id": "arrival-9-phone",
+          "image": "bible/shots/showcase/station-build-20261009/arrival-9-phone.webp",
+          "caption": "Phone"
+        }
+      ]
+    }
+  ]
+}
