@@ -3,7 +3,9 @@
 //   const view = createView(game, renderer, canvas, save); view.setComposer(place); view.render(); view.outline
 import * as THREE from 'three';
 import { Q } from '../engine.js';
-import { makePost } from '../post.js';
+import { makePost, GRADE } from '../post.js';
+import { styleGrade, currentStyle } from '../style/index.js';
+import { liftPeople } from '../look/char-lift.js';
 import { OutlinePass } from './outline.js';
 import { sizeOnlyWhenOn } from './phone.js';
 import { installGlGuard, lighterAfterLoss, onResizeFrame, validSize, disposePost } from './gl-guard.js';
@@ -102,5 +104,11 @@ export function createView(game, renderer, canvas, save) {
       applyQuality();
     }
   });
+  // a change of period while in a place (kit/light/ lightPlace): its new grade and the people's lift, live
+  game.regrade = () => {
+    if (!view.post || !view.place) return;
+    view.post.setGrade(styleGrade({ ...GRADE, ...(view.place.grade || {}) }, currentStyle()));
+    liftPeople(game, view.place);
+  };
   return Object.assign(view, { setComposer, applyQuality, resize, size, render });
 }

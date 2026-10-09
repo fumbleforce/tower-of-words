@@ -15,6 +15,7 @@ import { boxes } from './forecourt/details.js';
 import { POOL_Y } from './outdoor/parts.js';
 import { hall, hallFares, ROOM } from './station-hall.js';
 import { FARES } from './station-fittings.js';
+import { glowSet } from '../kit/light/glow.js';
 import { buildShed, coveredWalk } from './station-shed.js';
 
 // the station's outline in the forecourt's frame: the gate room's walls (lobby.js X 6.3, Z 4.5, centred on the
@@ -117,7 +118,7 @@ function stationSign() {
   return s;
 }
 
-// the station block. Returns { update(pos, dt), onPeriod(p) }
+// the station block. Returns { update(pos, dt), glows, onPeriod(p) }
 function block(root) {
   // What stays when the rest fades: the security room as a cut-away. The north wall, between Eric and the camera,
   // is cut low; the side walls stay the ground storey's full height from STEP back (clear of the line from Eric
@@ -267,12 +268,12 @@ function block(root) {
     (n, i) => (meshes[i].name = n),
   );
   meshes[1].material = mat('#8c9dad', { roughness: 0.45, metalness: 0.05 });
-  const glowing = [meshes[1], litGlass];
-  const daylight = glowing.map(({ material: m }) => ({
-    color: m.color.clone(),
-    emissive: m.emissive.clone(),
-    intensity: m.emissiveIntensity,
+  // the station is open late: its windows glow after work (for a light rig, kit/light/glow.js)
+  const glows = [meshes[1], litGlass].map(({ material: m }) => ({
+    mat: m,
+    night: { color: '#c9b596', emissive: '#ffc98a', emissiveIntensity: 0.45 },
   }));
+  const glowing = glowSet().add(glows);
   for (const m of meshes) root.add(m);
   root.add(sign);
   const occ = {};
@@ -334,27 +335,15 @@ function block(root) {
       last = [pos.x, pos.z];
       updateOccluders(occ, pos, jump ? Infinity : dt);
     },
+    glows,
+    // for a place without a light rig (the station garden's)
     onPeriod(period) {
-      if (period !== 'evening') {
-        glowing.forEach(({ material: m }, i) => {
-          m.color.copy(daylight[i].color);
-          m.emissive.copy(daylight[i].emissive);
-          m.emissiveIntensity = daylight[i].intensity;
-        });
-        return;
-      }
-      // the station is open late: its windows glow
-      for (const { material: m } of glowing) {
-        m.color.set('#c9b596');
-        m.emissive = new THREE.Color('#ffc98a');
-        m.emissiveIntensity = 0.45;
-        m.needsUpdate = true;
-      }
+      glowing.set(period === 'evening');
     },
   };
 }
 
-// the station, the shed, the beam and the walkway; returns the station's handle ({ update(pos, dt, dir), onPeriod })
+// the station, the shed, the beam and the walkway; returns the station's handle ({ update(pos, dt, dir), glows, onPeriod })
 export function buildStation(root, { covered = false } = {}) {
   const station = block(root);
   // the shed's roof fades while the camera looks east over it (the phone's view out of the station)

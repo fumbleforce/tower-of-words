@@ -42,28 +42,21 @@ import { kitchenette, bath, genkan, slidingDoor } from './dorms/entry.js';
 import { buildLevels, corridorNav, stairSpots } from './dorms/levels.js';
 import { SHARED } from './dorms/shared.js';
 import { dormEnclosures } from './dorms/enclosure.js';
-
-const BG = '#1b1f26';
+import { lightRig } from '../kit/light/rig.js';
+import { DORM, phaseOf } from '../kit/light/looks.js';
 
 function lights(scene, root, { lamp, desk, screen, seat, kitchen, stair }) {
-  // dusk: a dim cool sky, a low cool key for the shadows
-  scene.add(new THREE.HemisphereLight('#8e9cb6', '#3a3f4b', 1.05));
-  const sun = new THREE.DirectionalLight('#b8c6e0', 0.55);
-  sun.position.copy(new THREE.Vector3(-0.3, 1, 0.55).normalize().multiplyScalar(20));
-  sun.castShadow = true;
-  sun.shadow.mapSize.set(1024, 1024);
-  Object.assign(sun.shadow.camera, {
-    left: -4,
-    right: 4,
-    top: 4,
-    bottom: -4,
-    near: 5,
-    far: 40,
+  // the sky through the windows and a low key for the shadows, dusk after work and daylight on a later morning, from
+  // the period table (kit/light/looks.js DORM); built at dusk. Day 1 is only ever here after work.
+  const rig = lightRig(scene, {
+    looks: DORM,
+    period: 'evening',
+    phaseOf: (period, day) => (day > 1 ? phaseOf(period) : 'dusk'),
+    shadow: { size: 1024, box: 4, near: 5, far: 40 },
+    sunDist: 20,
+    fill: false,
   });
-  sun.shadow.bias = -0.0006;
-  sun.shadow.normalBias = 0.03;
-  sun.shadow.radius = 4;
-  scene.add(sun, sun.target);
+  const sun = rig.sun;
   // the ceiling light (on the ceiling the camera looks through): an even warm light that reaches the walls
   const ceiling = new THREE.PointLight('#ffdcb0', 2.1, 4.2, 1.1);
   ceiling.position.set(0, H + 0.1, (BACK + PART) / 2);
@@ -109,13 +102,13 @@ function lights(scene, root, { lamp, desk, screen, seat, kitchen, stair }) {
   root.add(shared);
   // the other floors move these about rather than have lights of their own (places/dorms.js), so the count, and
   // with it every material's shader, stays the same on every floor
-  return { sun, ceiling, desklamp, hood, corridor, out, stair: stairLight, shared };
+  return { rig, sun, ceiling, desklamp, hood, corridor, out, stair: stairLight, shared };
 }
 
 export function buildDorms() {
   const root = new THREE.Group(),
     scene = new THREE.Scene();
-  scene.background = new THREE.Color(BG);
+  scene.background = new THREE.Color(DORM.dusk.bg); // the rig sets it per period
   scene.add(root);
   const kit = new Kit();
   // the walk, one grid for every floor (dorms/levels.js): on 2F the flat, the corridor from the end wall to the
@@ -168,6 +161,7 @@ export function buildDorms() {
     root,
     scene,
     sun: lit.sun,
+    light: lit.rig,
     lights: lit,
     nav,
     levels, // the kitchen, 3F and the roof (dorms/levels.js)

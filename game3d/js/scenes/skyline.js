@@ -3,6 +3,7 @@
 //
 //   const sky = buildSkyline(root, 'plaza', { layout, evening })      // or yield* skylineSteps(...) in a builder
 //   place.onPeriod = (p) => sky.onPeriod(p)                            // lit windows after work
+//   rig.glow.add(sky.glows)                                            // or the place's light rig does it
 //
 // Near ring (a building within `near` units of the chunk): walls with window rows on the faces the camera or the
 // chunk sees, a parapet, a few roof plant boxes, balcony slabs on dorms and fins on offices. Merged by colour: one
@@ -303,7 +304,11 @@ export function* skylineSteps(
       far: nFar,
       tier: q,
     },
-    // lights come on after work and stay on (a place is entered with the period it was built in, then later ones)
+    // the lit windows, for a place's light rig (kit/light/glow.js), which also turns them off again by day (the far
+    // ring's lit windows under ?far=1 are look/sky.js's)
+    glows: lit ? [{ show: lit }] : [],
+    // without a rig: lights come on after work and stay on (a place is entered with the period it was built in,
+    // then later ones)
     onPeriod(period) {
       if (period !== 'evening') return;
       if (lit) lit.visible = true;

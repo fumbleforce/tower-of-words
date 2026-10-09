@@ -9,8 +9,8 @@ import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { glide } from '../move.js';
-import { eveningLight, eveningGrade } from '../scenes/town.js';
 import { sim } from '../sim.js';
+import { lightPlace } from '../kit/light/rig.js';
 import { relightLift } from './lift.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
@@ -193,23 +193,11 @@ export async function forecourtPlace(game) {
     space: w.root,
     nav: w.nav,
     sun: w.sun,
+    light: w.light,
     charScale: K,
     start: dioramaTrial() ? [9.7, 9.8] : w.start,
     startFacing: Math.PI,
     music: 'calm',
-    grade: {
-      exposure: 1.04,
-      temp: 0.025,
-      sat: 0.78,
-      contrast: 1.04,
-      lift: [0.012, 0.012, 0.018],
-      shadowTint: [-0.008, -0.002, 0.02],
-      highTint: [0.022, 0.01, -0.014],
-      vignette: 0.2,
-      bloom: 0.3,
-      bloomThreshold: 0.82,
-      focusBand: 0.3,
-    },
     things,
     spots,
     seats: { garden_bench: garden.seat },
@@ -307,18 +295,10 @@ export async function forecourtPlace(game) {
       if (e.z > 8 && !game.prepared.shotengai) game.prepare?.('shotengai');
       if (e.x > 20 && e.z > w.hoDoor[1] && !game.prepared.plaza) game.prepare?.('plaza');
     },
-    onPeriod(period) {
+    // the light for each period is the rig's (scenes/forecourt.js, kit/light/); this is what else a period changes
+    onPeriod() {
       garden.sync(); // on every entry: who is out after work, and what the story left moved
       bikes.sync();
-      if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
-      relightLift(P);
-      eveningLight(w.scene, sim.day);
-      if (dioramaTrial()) w.sun.position.add(w.sun.target.position);
-      w.headOffice.onPeriod(period);
-      w.station.onPeriod(period);
-      w.sky?.onPeriod(period);
-      w.lightsOn();
-      P.grade = eveningGrade(sim.day);
     },
     leave() {
       w.nav.shut('station_door');
@@ -388,8 +368,9 @@ export async function forecourtPlace(game) {
       cam.release();
     },
   };
-  if (dioramaTrial()) {
-    P.grade = { ...P.grade, ...DIORAMA_GRADE };
-  }
+  // the lift caches the light it dims from: a change of period makes it forget, so the next ride dims the new one
+  w.light.before = () => relightLift(P);
+  if (dioramaTrial()) w.light.grades.day = DIORAMA_GRADE; // the street trial's own grade by day
+  lightPlace(P, sim.period, sim.day);
   return P;
 }

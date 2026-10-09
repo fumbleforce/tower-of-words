@@ -4,6 +4,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { mat } from '../props.js';
+import { SUN, EVENING_LIGHT, OUTDOOR } from '../kit/light/looks.js';
 
 // the island palette for background buildings: the security room's greys, a little warmer or cooler per block
 export const TOWN = {
@@ -135,61 +136,9 @@ export function pavingRects(rects, tile, { color = '#8e8a86', seam = '#7f7b77', 
 // stone paving with its seams as one mesh (tileFloor in props.js makes a mesh per seam line, too many outdoors)
 export const paving = (x0, x1, z0, z1, tile, opts) => pavingRects([[x0, x1, z0, z1]], tile, opts);
 
-// where the sun shines from, morning (outdoorLight) and after work (eveningLight); outdoor/shade.js lays the
-// shadows outside a place's shadow box along the same directions
-export const SUN = { morning: [0.8, 0.52, -0.3], evening: [-0.85, 0.34, 0.25] };
+// the period table's outdoor values (kit/light/looks.js), here for the places that still light themselves
+export { SUN, MORNING_GRADE, EVENING_GRADE, EVENING_GRADE_2, eveningGrade } from '../kit/light/looks.js';
 
-// the morning's grade on the outdoor chunks (the plaza, the shop street, the east lane)
-export const MORNING_GRADE = {
-  exposure: 1.04,
-  temp: 0.025,
-  sat: 0.78,
-  contrast: 1.04,
-  lift: [0.012, 0.012, 0.018],
-  shadowTint: [-0.008, -0.002, 0.02],
-  highTint: [0.022, 0.01, -0.014],
-  vignette: 0.2,
-  bloom: 0.3,
-  bloomThreshold: 0.82,
-  focusBand: 0.3,
-};
-// after work: dusk on a chunk built with outdoorLight (and the dorm courtyard's own lights), so the walk home is in
-// one light: a dim blue sky, the last of the sun low and orange from the west, lamps and windows glowing
-export const EVENING_GRADE = {
-  exposure: 0.98,
-  temp: -0.02,
-  sat: 0.78,
-  contrast: 1.06,
-  lift: [0.008, 0.01, 0.026],
-  shadowTint: [-0.016, 0, 0.036],
-  highTint: [0.03, 0.012, -0.016],
-  vignette: 0.3,
-  bloom: 0.42,
-  bloomThreshold: 0.72,
-  focusBand: 0.3,
-};
-// day 2's after work (story/day2/): the same dusk lifted, so faces and paths read on a phone screen, the lamps still
-// warm and the sky still dusk; day 1's evening stays as it is. charLift: the people's own colours added back a little
-// with a rim of sky light (look/char-lift.js), so dark clothes keep their shape against the dusk
-export const EVENING_GRADE_2 = {
-  ...EVENING_GRADE,
-  exposure: 1.18,
-  sat: 0.86,
-  contrast: 1.04,
-  lift: [0.01, 0.012, 0.03],
-  vignette: 0.22,
-  charLift: 0.13,
-};
-// a place whose open paving takes more of the sky than the streets do gets its exposure eased back (the plaza)
-const EVENING_GRADE_2_BY = { plaza: { ...EVENING_GRADE_2, exposure: 1.08 } };
-export const eveningGrade = (day = 1, place) =>
-  day === 2 ? EVENING_GRADE_2_BY[place] || EVENING_GRADE_2 : EVENING_GRADE;
-// pool: the gain on the street lamps' pools (outdoor/furniture.js lightSet), up on day 2 so they hold against its
-// brighter dusk
-const EVENING_LIGHT = {
-  1: { sky: ['#8d9bb8', '#454850', 1.2], sun: ['#ffa56e', 1.45], fill: ['#b4c2ee', 0.4], pool: 1 },
-  2: { sky: ['#8fa2d4', '#5c5e6a', 1.75], sun: ['#ffa062', 2.1], fill: ['#c4cff4', 1.35], pool: 2 },
-};
 // pool: a place's own gain on its lamps' pools instead of the day's (the plaza's are many and overlap)
 export function eveningLight(scene, day = 1, { pool } = {}) {
   const L = EVENING_LIGHT[day] || EVENING_LIGHT[1];
@@ -231,8 +180,9 @@ export function sunFollow(sun, r = 16) {
 
 // the security room's light, outdoors: cool sky, a warm low morning sun from the east, a soft fill from the camera
 export function outdoorLight(scene) {
-  scene.add(new THREE.HemisphereLight('#b7c1d2', '#6a625c', 1.7));
-  const sun = new THREE.DirectionalLight('#ffc990', 3.2);
+  const D = OUTDOOR.day;
+  scene.add(new THREE.HemisphereLight(...D.hemi));
+  const sun = new THREE.DirectionalLight(D.sun[0], D.sun[1]);
   sun.position.copy(new THREE.Vector3(...SUN.morning).normalize().multiplyScalar(30));
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
@@ -241,7 +191,7 @@ export function outdoorLight(scene) {
   sun.shadow.normalBias = 0.03;
   sun.shadow.radius = 4;
   scene.add(sun, sun.target);
-  const fill = new THREE.DirectionalLight('#dfe7ff', 0.6);
+  const fill = new THREE.DirectionalLight(...D.fill);
   fill.position.set(0.3, 1, 0.9);
   scene.add(fill);
   return sun;

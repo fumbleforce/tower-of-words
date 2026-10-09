@@ -1,0 +1,40 @@
+{
+  "forecourt-morning": {
+    "place": "forecourt",
+    "day": 1,
+    "steps": ["evening", "morning", "evening"],
+    "views": [
+      { "id": "court", "at": [3, -0.3] },
+      { "id": "court-east", "at": [16, 1.5] },
+      { "id": "lane", "at": [27, -1.4] }
+    ]
+  },
+  "forecourt-evening": {
+    "place": "forecourt",
+    "day": 1,
+    "start": "evening",
+    "views": [
+      { "id": "court", "at": [3, -0.3] },
+      { "id": "court-east", "at": [16, 1.5] },
+      { "id": "lane", "at": [27, -1.4] }
+    ]
+  },
+  "forecourt-day2": {
+    "place": "forecourt",
+    "day": 2,
+    "steps": ["evening", "morning"],
+    "views": [{ "id": "court-east", "at": [16, 1.5] }]
+  },
+  "dorms-day1-evening": {
+    "place": "dorms",
+    "day": 1,
+    "start": "evening",
+    "views": [{ "id": "room" }]
+  },
+  "dorms-day2": {
+    "place": "dorms",
+    "day": 2,
+    "steps": ["evening", "morning"],
+    "views": [{ "id": "room" }]
+  }
+}

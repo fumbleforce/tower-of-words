@@ -15,7 +15,9 @@ import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { applyGround } from '../movement/walk-ground.js';
 import { ground, WALK_AREA, DOORWAY } from './forecourt/ground.js';
-import { outdoorLight, groundPatches, farTrees, TOWN } from './town.js';
+import { groundPatches, farTrees, TOWN } from './town.js';
+import { lightRig } from '../kit/light/rig.js';
+import { OUTDOOR } from '../kit/light/looks.js';
 import { headOfficeSteps } from './head-office.js';
 import { T } from './head-office/frame.js';
 import { buildStation } from './station-exterior.js';
@@ -111,7 +113,9 @@ export function* forecourtSteps() {
     scene = new THREE.Scene();
   scene.background = new THREE.Color('#5d636c');
   scene.add(root);
-  const sun = outdoorLight(scene);
+  // the light for every period comes from the period table (kit/light/): the rig, and what glows at night below
+  const light = lightRig(scene, { looks: OUTDOOR }),
+    sun = light.sun;
 
   // walkable ground, one list for the walk grid and the kerbs (forecourt/ground.js): the court, the bike court, the
   // lane and its bench bays, the garden's gravel way and court, and the shed street up to where the campus trip
@@ -145,6 +149,7 @@ export function* forecourtSteps() {
   yield;
   const { sky, front } = yield* town(statics, planting);
   const trialEnvironment = dioramaTrial() ? dressStreet(statics, scene, sun, station, nav) : null;
+  if (trialEnvironment) light.takeLook('day'); // the street trial's own daylight
   yield* mergeStaticSteps(statics);
   const ho = yield* headOfficeSteps(root, nav);
   if (trialEnvironment) {
@@ -152,11 +157,15 @@ export function* forecourtSteps() {
     finishWindows(root, trialEnvironment);
   }
   const lift = ho.landing;
+  // after work the lamps, the lit windows and the station and tower glass glow
+  light.glow.add(lights.glows, front.glows, nooks.glows, ho.glows, station.glows, sky.glows);
+  if (north.lit) light.glow.add({ show: north.lit });
   let previousTime = null;
   return {
     root,
     scene,
     sun,
+    light,
     nav,
     southLink,
     stationExit: [DOOR_X, ZN + 0.35],
@@ -187,13 +196,6 @@ export function* forecourtSteps() {
     nooks: nooks.spots,
     doorX: DOOR_X,
     hoDoor: [HO_X, T.o[1]],
-    // after work the lamps come on
-    lightsOn() {
-      lights.evening();
-      front.evening();
-      nooks.evening();
-      if (north.lit) north.lit.visible = true; // the windows lit after work
-    },
     update(t, dt) {
       statics.userData.dioramaDetail?.();
       const elapsed = dt ?? (previousTime == null ? 1 / 60 : t - previousTime);
