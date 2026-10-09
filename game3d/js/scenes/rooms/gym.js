@@ -114,7 +114,7 @@ export function buildGym() {
       gym_benches: [R.x0 + 1.3, -7.4],
       gym_meeting: [MEETING.x0 - 0.6, -10.8],
       gym_court: [COURT.x + 1.6, COURT.z + 0.4],
-      gym_store: [(STORE.door[0] + STORE.door[1]) / 2, STORE.z1 - 0.2],
+      gym_store: [STORE.door[0] + 0.4, STORE.z1 - 0.2],
       gym_lockers: entry.lockers,
     },
     seats: BENCHES.map(([x, z]) => ({ x: x + 0.02, z, top: 0.24, ry: Math.PI / 2 })),
