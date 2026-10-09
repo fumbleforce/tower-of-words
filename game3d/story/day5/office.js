@@ -15,7 +15,8 @@ export default place({ forecourt: ['talk:lift'] }, {
       { say: 'emi', emo: 'casual', text: 'I’ll be upstairs this afternoon. Kenji knows how to reach me if you need anything.' },
     ],
     d5_kenji_name: [{ if: '!met_kenji || d5_kenji_needs_intro', then: [
-      { say: 'kenji', emo: 'bright', text: 'I’m Kenji. I work here too, just over there.' },
+      { say: 'kenji', emo: 'bright', overheard: true, text: 'ケンジです。よろしくお願いします。' },
+      { do: 'bow', who: 'kenji' }, { do: 'gesture', who: 'kenji', kind: 'point' },
       { say: 'eric', emo: 'warm', text: 'I’m {mc.name}. Good to meet you.' },
       { do: 'meet', who: 'kenji' }, { unset: 'd5_kenji_needs_intro' },
     ] }],
@@ -29,11 +30,12 @@ export default place({ forecourt: ['talk:lift'] }, {
       { call: 'd5_kenji_name' },
       { if: "period == 'evening'", then: [{ go: 'd5_drinks' }] },
       { if: '!d5_invited_in_person', then: [
-        { say: 'kenji', emo: 'bright', text: 'We have drinks here after six. Will you come? Mori-san and Mio-san also.' },
+        { say: 'kenji', emo: 'bright', overheard: true, text: '6時から、ここで飲み会です。', clear: ['6'] },
+        { say: 'kenji', emo: 'bright', text: 'Mori-san, Mio-san also. {mc.name}-san... come?' },
         { say: 'eric', emo: 'curious', text: 'From the machine?' },
-        { say: 'kenji', emo: 'warm', text: 'Yes, I’m buying. But only for us, okay?' },
+        { say: 'kenji', emo: 'warm', text: 'Yes. Me... buy. Only us. OK?' },
         { set: 'd5_invited' }, { set: 'd5_invited_in_person' }, { do: 'save' },
-      ], else: [{ say: 'kenji', emo: 'casual', text: 'We’ll be here after six.' }] },
+      ], else: [{ say: 'kenji', emo: 'casual', text: 'Six... here.' }] },
     ],
     d5_mori: [
       { call: 'd5_mori_name' },

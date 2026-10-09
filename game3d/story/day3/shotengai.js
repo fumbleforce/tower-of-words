@@ -60,7 +60,7 @@ export default withStationGarden(
         d3_kenji: [
           {
             if: "period == 'afternoon'",
-            then: [{ say: 'kenji', emo: 'sheepish', text: 'I only look. If I play, lunch money... gone.' }],
+            then: [{ say: 'kenji', emo: 'sheepish', text: 'I only look. Play... lunch money, gone.' }],
             else: [{ say: 'kenji', emo: 'bright', text: 'This bread is curry. Inside! Careful, very hot.' }],
           },
         ],

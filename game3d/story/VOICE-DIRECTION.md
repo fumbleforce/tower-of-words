@@ -17,7 +17,7 @@ Every voiced line in the story files carries an `emo` tag, for example `{ say: '
 | mio | Woman of thirty, low and slightly husky, unhurried, speaking English as a second language with a light Japanese accent. | dry |
 | eric | Tired man in his thirties, quiet and polite, no accent. | tired |
 | mori | Man of about sixty, soft and formal Japanese, kind. | polite |
-| kenji | Young man of about twenty-one, eager and quick, casual Japanese; his English is halting, he laughs at it and gets carried away. | bright |
+| kenji | Young man of about twenty-one, soft and mild, a little too quick when he wants to help, polite Japanese to his seniors; his English is a few halting school words. | bright |
 | guard | Man in his sixties, clipped, correct Japanese, a security guard. | polite |
 | kuroda (Hamada) | Man in his fifties, flustered, apologising, breathless. | flustered |
 | emi | Woman in her thirties, native British English, quick and confident, always slightly in a meeting. | bright |

@@ -8,7 +8,8 @@ export default place(
     nodes: {
       ...sofaNodes,
       d3_tv: [
-        { say: 'kenji', emo: 'bright', text: '{mc.name}! Sit, sit. This is replay. I know winner.' },
+        { say: 'kenji', emo: 'bright', text: 'あ、{mc.name_jp}さん！どうぞ、座ってください。', overheard: true },
+        { say: 'kenji', emo: 'bright', text: 'Replay. I know... winner.' },
         { say: 'eric', emo: 'dry', text: 'Don’t tell me, then.' },
         { say: 'kenji', emo: 'sheepish', text: 'Okay. I am quiet.' },
       ],

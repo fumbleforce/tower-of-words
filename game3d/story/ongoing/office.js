@@ -21,10 +21,12 @@ export default place('office', {
     ongoing_kenji: [
       { call: 'd5_kenji_name' },
       { if: 'period_evening && ongoing_team_day', then: [{ go: 'd5_drinks' }] },
-      { say: 'kenji', emo: 'warm', text: 'On Friday we have drinks here after work. You want to come?' },
+      { say: 'kenji', emo: 'warm', overheard: true, text: '金曜日、ここで飲み会です。' },
+      { say: 'kenji', emo: 'warm', text: 'Friday... drink. {mc.name}-san, come?' },
       { do: 'gesture', who: 'kenji', kind: 'point', to: 'vending' },
       { if: 'kenji_arcade_talked', then: [
-        { say: 'kenji', emo: 'warm', text: 'Maybe we go to game centre after. I must finish this first.' },
+        { say: 'kenji', emo: 'warm', text: 'After... game centre? Maybe.' },
+        { say: 'kenji', emo: 'polite', overheard: true, text: 'これ、先に終わらせます。' },
       ] },
     ],
     ongoing_mio: [

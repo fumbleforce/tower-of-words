@@ -22,7 +22,7 @@ export const CAST = {
   },
   kenji: {
     likes: ['melon'],
-    register: 'casual', // "かたっ！おはよう、でいいよ"
+    register: 'casual', // Eric is his senpai, so plain Japanese to him is fine
     rel: { mori: 'likes', mio: 'owes' }, // asks Mori about the new guy; Mio has barred him from the machine room
   },
   guard: { register: 'polite' },

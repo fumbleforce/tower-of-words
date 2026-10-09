@@ -34,13 +34,10 @@ export default withStationGarden(
         d4_kenji: [
           {
             if: "period == 'evening'",
-            then: [{ say: 'kenji', emo: 'sheepish', text: 'I won a game! I go home now, before I lose again.' }],
+            then: [{ say: 'kenji', emo: 'sheepish', text: 'Game... I win!' }, { say: 'kenji', emo: 'sheepish', overheard: true, text: 'もう帰ります。また負けるから。' }],
             else: [
-              {
-                say: 'kenji',
-                emo: 'bright',
-                text: 'I bought curry bread again. Yesterday it was too hot, so today I wait.',
-              },
+              { say: 'kenji', emo: 'bright', overheard: true, text: 'またカレーパンです。', clear: ['カレーパン'] },
+              { say: 'kenji', emo: 'bright', text: 'Yesterday... hot! Today, wait.' },
             ],
           },
         ],
