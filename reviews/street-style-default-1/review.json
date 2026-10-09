@@ -1,0 +1,21 @@
+{
+ "title": "Make the street style the game's default look?",
+ "date": "2026-10-09",
+ "by": "claude-main",
+ "status": "open",
+ "multi": false,
+ "question": "The game has two outdoor looks side by side. The street style (the leafy trees, textured hedges, brickwork and broad window panels you see with ?diorama=1 in the address) is a trial; the default is the older faceted look. Today's new trees, bushes and benches only show properly in the street style, which is why you didn't see them at first, and every outdoor fix has to be made twice while both exist. Should the street style become the only look? After your pick: a builder switches it on for everyone, removes the old look's code once the running outdoor jobs have landed, and posts before/after pictures in the Showcase.",
+ "options": [
+  {
+   "id": "street-default",
+   "label": "Yes: street style becomes the only look",
+   "note": "Recommended. One look to improve from now on; the new plants, the distance view and the lighting system each only need doing once. Compare first: http://127.0.0.1:8771/game3d/?diorama=1 against http://127.0.0.1:8771/game3d/"
+  },
+  {
+   "id": "keep-both",
+   "label": "Keep both for now",
+   "note": "No change; outdoor work keeps being done twice and the default look keeps lagging behind."
+  }
+ ],
+ "issue": 321
+}
