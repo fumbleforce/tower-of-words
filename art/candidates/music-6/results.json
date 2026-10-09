@@ -1,0 +1,582 @@
+{
+ "day-1": {
+  "model": "YuE2 3B bf16 + instrumental AR LoRA (v3abc), mode full",
+  "tags": "cheerful, 124 BPM, bright acoustic guitar strumming, piano, crisp pop drums, glockenspiel, sunny, light, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+  "structure": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+  "seed": 9811,
+  "max_s": 150,
+  "render_s": 88,
+  "source_s": 135.0,
+  "listen": {
+   "key": "F major",
+   "key_fit": 0.95,
+   "tempo": 123.0,
+   "quiet_s": 0,
+   "level_spread_db": 2.0,
+   "hiss": 0.2057,
+   "peak": 0.989,
+   "good": 0.255,
+   "vocals": -0.058,
+   "noise": -0.062,
+   "cheap": 0.186,
+   "odd": -0.05,
+   "like_refs": 0.687,
+   "worst_vocals": [
+    -0.033,
+    60
+   ],
+   "worst_noise": [
+    -0.03,
+    0
+   ],
+   "worst_cheap": [
+    0.262,
+    0
+   ],
+   "worst_odd": [
+    -0.018,
+    60
+   ]
+  },
+  "vocal_db": -66.4,
+  "vocal_windows_pct": 0.0,
+  "loop_from_s": 1.17,
+  "loop_to_s": 118.77,
+  "loop_s": 117.6,
+  "loop_start": 1.0,
+  "loop_end": 118.596875,
+  "seam_dist": 0.345,
+  "seam": {
+   "level_jump_db": 3.07,
+   "level_jump_p99_elsewhere": 11.39,
+   "flux_at_seam": 94.4,
+   "flux_p99_elsewhere": 639.2,
+   "flux_median": 81.4,
+   "sample_step_at_seam": 0.0098,
+   "sample_step_p999_elsewhere": 0.09
+  },
+  "source_lufs": -11.6
+ },
+ "day-2": {
+  "model": "YuE2 3B bf16 + instrumental AR LoRA (v3abc) + NAR joint v9, mode full",
+  "tags": "cheerful, 124 BPM, bright acoustic guitar strumming, piano, crisp pop drums, glockenspiel, sunny, light, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+  "structure": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+  "seed": 9812,
+  "max_s": 150,
+  "render_s": 97,
+  "source_s": 144.7,
+  "listen": {
+   "key": "G major",
+   "key_fit": 0.95,
+   "tempo": 123.0,
+   "quiet_s": 0,
+   "level_spread_db": 11.2,
+   "hiss": 0.1861,
+   "peak": 1.0,
+   "good": 0.279,
+   "vocals": -0.049,
+   "noise": -0.073,
+   "cheap": 0.175,
+   "odd": 0.001,
+   "like_refs": 0.728,
+   "worst_vocals": [
+    -0.002,
+    80
+   ],
+   "worst_noise": [
+    -0.005,
+    100
+   ],
+   "worst_cheap": [
+    0.331,
+    0
+   ],
+   "worst_odd": [
+    0.109,
+    110
+   ]
+  },
+  "vocal_db": -3.3,
+  "vocal_windows_pct": 41.9,
+  "loop_from_s": 0.66,
+  "loop_to_s": 115.86,
+  "loop_s": 115.2,
+  "loop_start": 1.0,
+  "loop_end": 116.193729,
+  "seam_dist": 0.371,
+  "seam": {
+   "level_jump_db": 1.43,
+   "level_jump_p99_elsewhere": 11.9,
+   "flux_at_seam": 23.4,
+   "flux_p99_elsewhere": 565.6,
+   "flux_median": 100.7,
+   "sample_step_at_seam": 0.0042,
+   "sample_step_p999_elsewhere": 0.1613
+  },
+  "source_lufs": -10.8
+ },
+ "evening-1": {
+  "model": "YuE2 3B bf16 + instrumental AR LoRA (v3abc), mode full",
+  "tags": "Japanese city pop, 104 BPM, clean electric guitar, Rhodes electric piano, slap bass, tight drums, warm, nostalgic, sunset, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+  "structure": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+  "seed": 9911,
+  "max_s": 150,
+  "render_s": 107,
+  "source_s": 150.0,
+  "listen": {
+   "key": "B minor",
+   "key_fit": 0.87,
+   "tempo": 103.4,
+   "quiet_s": 0,
+   "level_spread_db": 2.9,
+   "hiss": 0.2204,
+   "peak": 1.0,
+   "good": 0.258,
+   "vocals": -0.043,
+   "noise": -0.05,
+   "cheap": 0.115,
+   "odd": -0.022,
+   "like_refs": 0.671,
+   "worst_vocals": [
+    -0.003,
+    70
+   ],
+   "worst_noise": [
+    -0.016,
+    50
+   ],
+   "worst_cheap": [
+    0.253,
+    0
+   ],
+   "worst_odd": [
+    0.05,
+    70
+   ]
+  },
+  "vocal_db": -45.4,
+  "vocal_windows_pct": 0.0,
+  "loop_from_s": 3.0,
+  "loop_to_s": 125.56,
+  "loop_s": 122.6,
+  "loop_start": 1.0,
+  "loop_end": 123.562229,
+  "seam_dist": 0.349,
+  "seam": {
+   "level_jump_db": 2.23,
+   "level_jump_p99_elsewhere": 13.75,
+   "flux_at_seam": 624.3,
+   "flux_p99_elsewhere": 704.5,
+   "flux_median": 81.2,
+   "sample_step_at_seam": 0.049,
+   "sample_step_p999_elsewhere": 0.106
+  },
+  "source_lufs": -11.6
+ },
+ "evening-2": {
+  "model": "YuE2 3B bf16 + instrumental AR LoRA (v3abc) + NAR joint v9, mode full",
+  "tags": "Japanese city pop, 104 BPM, clean electric guitar, Rhodes electric piano, slap bass, tight drums, warm, nostalgic, sunset, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+  "structure": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+  "seed": 9912,
+  "max_s": 150,
+  "render_s": 100,
+  "source_s": 148.8,
+  "listen": {
+   "key": "D major",
+   "key_fit": 0.71,
+   "tempo": 103.4,
+   "quiet_s": 0,
+   "level_spread_db": 3.9,
+   "hiss": 0.225,
+   "peak": 1.0,
+   "good": 0.255,
+   "vocals": -0.06,
+   "noise": -0.022,
+   "cheap": 0.139,
+   "odd": 0.039,
+   "like_refs": 0.651,
+   "worst_vocals": [
+    -0.017,
+    120
+   ],
+   "worst_noise": [
+    0.047,
+    10
+   ],
+   "worst_cheap": [
+    0.302,
+    130
+   ],
+   "worst_odd": [
+    0.08,
+    70
+   ]
+  },
+  "vocal_db": -60.4,
+  "vocal_windows_pct": 0.0,
+  "loop_from_s": 2.21,
+  "loop_to_s": 122.63,
+  "loop_s": 120.4,
+  "loop_start": 1.0,
+  "loop_end": 121.41875,
+  "seam_dist": 0.409,
+  "seam": {
+   "level_jump_db": 18.27,
+   "level_jump_p99_elsewhere": 16.93,
+   "flux_at_seam": 233.2,
+   "flux_p99_elsewhere": 888.6,
+   "flux_median": 50.0,
+   "sample_step_at_seam": 0.0008,
+   "sample_step_p999_elsewhere": 0.1018
+  },
+  "source_lufs": -12.2
+ },
+ "title-1": {
+  "model": "YuE2 3B bf16 + instrumental AR LoRA (v3abc), mode full",
+  "tags": "anime opening theme, J-pop rock, 140 BPM, driving electric guitars, punchy drums, bright piano, hopeful, energetic, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+  "structure": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+  "seed": 9711,
+  "max_s": 150,
+  "render_s": 107,
+  "source_s": 150.0,
+  "listen": {
+   "key": "Eb major",
+   "key_fit": 0.89,
+   "tempo": 143.6,
+   "quiet_s": 0,
+   "level_spread_db": 8.4,
+   "hiss": 0.2045,
+   "peak": 1.0,
+   "good": 0.255,
+   "vocals": -0.001,
+   "noise": -0.001,
+   "cheap": 0.164,
+   "odd": 0.053,
+   "like_refs": 0.695,
+   "worst_vocals": [
+    0.052,
+    20
+   ],
+   "worst_noise": [
+    0.014,
+    40
+   ],
+   "worst_cheap": [
+    0.23,
+    140
+   ],
+   "worst_odd": [
+    0.08,
+    40
+   ]
+  },
+  "vocal_db": -57.0,
+  "vocal_windows_pct": 0.0,
+  "loop_from_s": 9.53,
+  "loop_to_s": 146.66,
+  "loop_s": 137.1,
+  "loop_start": 1.0,
+  "loop_end": 138.1315,
+  "seam_dist": 0.287,
+  "seam": {
+   "level_jump_db": 0.84,
+   "level_jump_p99_elsewhere": 14.81,
+   "flux_at_seam": 107.3,
+   "flux_p99_elsewhere": 553.0,
+   "flux_median": 106.8,
+   "sample_step_at_seam": 0.0074,
+   "sample_step_p999_elsewhere": 0.0871
+  },
+  "source_lufs": -12.6
+ },
+ "title-2": {
+  "model": "YuE2 3B bf16 + instrumental AR LoRA (v3abc) + NAR joint v9, mode full",
+  "tags": "anime opening theme, J-pop rock, 140 BPM, driving electric guitars, punchy drums, bright piano, hopeful, energetic, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+  "structure": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+  "seed": 9712,
+  "max_s": 150,
+  "render_s": 100,
+  "source_s": 150.0,
+  "listen": {
+   "key": "F# minor",
+   "key_fit": 0.69,
+   "tempo": 143.6,
+   "quiet_s": 0,
+   "level_spread_db": 4.1,
+   "hiss": 0.1863,
+   "peak": 1.0,
+   "good": 0.23,
+   "vocals": 0.024,
+   "noise": 0.01,
+   "cheap": 0.066,
+   "odd": 0.095,
+   "like_refs": 0.67,
+   "worst_vocals": [
+    0.069,
+    60
+   ],
+   "worst_noise": [
+    0.035,
+    110
+   ],
+   "worst_cheap": [
+    0.162,
+    70
+   ],
+   "worst_odd": [
+    0.114,
+    100
+   ]
+  },
+  "vocal_db": -44.8,
+  "vocal_windows_pct": 0.0,
+  "loop_from_s": 10.95,
+  "loop_to_s": 146.8,
+  "loop_s": 135.8,
+  "loop_start": 1.0,
+  "loop_end": 136.844521,
+  "seam_dist": 0.377,
+  "seam": {
+   "level_jump_db": 3.1,
+   "level_jump_p99_elsewhere": 7.63,
+   "flux_at_seam": 187.9,
+   "flux_p99_elsewhere": 369.1,
+   "flux_median": 110.7,
+   "sample_step_at_seam": 0.0061,
+   "sample_step_p999_elsewhere": 0.0583
+  },
+  "source_lufs": -11.8
+ },
+ "office-1": {
+  "model": "YuE2 3B bf16 + instrumental AR LoRA (v3abc), mode full",
+  "tags": "J-fusion, 116 BPM, funky clean electric guitar, synth bass, tight drums, electric piano, focused, steady groove, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+  "structure": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+  "seed": 10011,
+  "max_s": 150,
+  "render_s": 109,
+  "source_s": 150.0,
+  "listen": {
+   "key": "C major",
+   "key_fit": 0.9,
+   "tempo": 112.3,
+   "quiet_s": 0,
+   "level_spread_db": 1.7,
+   "hiss": 0.1621,
+   "peak": 1.0,
+   "good": 0.105,
+   "vocals": -0.131,
+   "noise": -0.073,
+   "cheap": 0.105,
+   "odd": -0.066,
+   "like_refs": 0.626,
+   "worst_vocals": [
+    -0.084,
+    110
+   ],
+   "worst_noise": [
+    -0.04,
+    10
+   ],
+   "worst_cheap": [
+    0.291,
+    140
+   ],
+   "worst_odd": [
+    0.059,
+    140
+   ]
+  },
+  "vocal_db": -59.2,
+  "vocal_windows_pct": 0.0,
+  "loop_from_s": 1.47,
+  "loop_to_s": 133.15,
+  "loop_s": 131.7,
+  "loop_start": 1.0,
+  "loop_end": 132.680688,
+  "seam_dist": 0.583,
+  "seam": {
+   "level_jump_db": 3.95,
+   "level_jump_p99_elsewhere": 16.74,
+   "flux_at_seam": 261.0,
+   "flux_p99_elsewhere": 581.4,
+   "flux_median": 53.6,
+   "sample_step_at_seam": 0.0041,
+   "sample_step_p999_elsewhere": 0.075
+  },
+  "source_lufs": -12.3
+ },
+ "office-2": {
+  "model": "YuE2 3B bf16 + instrumental AR LoRA (v3abc) + NAR joint v9, mode full",
+  "tags": "J-fusion, 116 BPM, funky clean electric guitar, synth bass, tight drums, electric piano, focused, steady groove, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+  "structure": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+  "seed": 10012,
+  "max_s": 150,
+  "render_s": 136,
+  "source_s": 150.0,
+  "listen": {
+   "key": "G minor",
+   "key_fit": 0.59,
+   "tempo": 117.5,
+   "quiet_s": 0,
+   "level_spread_db": 0.7,
+   "hiss": 0.2022,
+   "peak": 1.0,
+   "good": 0.251,
+   "vocals": -0.016,
+   "noise": 0.013,
+   "cheap": 0.148,
+   "odd": 0.087,
+   "like_refs": 0.599,
+   "worst_vocals": [
+    -0.002,
+    30
+   ],
+   "worst_noise": [
+    0.035,
+    50
+   ],
+   "worst_cheap": [
+    0.172,
+    100
+   ],
+   "worst_odd": [
+    0.104,
+    50
+   ]
+  },
+  "vocal_db": -62.5,
+  "vocal_windows_pct": 0.0,
+  "loop_from_s": 1.99,
+  "loop_to_s": 143.23,
+  "loop_s": 141.2,
+  "loop_start": 1.0,
+  "loop_end": 142.2335,
+  "seam_dist": 0.316,
+  "seam": {
+   "level_jump_db": 7.35,
+   "level_jump_p99_elsewhere": 15.48,
+   "flux_at_seam": 110.7,
+   "flux_p99_elsewhere": 924.9,
+   "flux_median": 110.1,
+   "sample_step_at_seam": 0.0173,
+   "sample_step_p999_elsewhere": 0.19
+  },
+  "source_lufs": -12.0
+ },
+ "shops-1": {
+  "model": "YuE2 3B bf16 + instrumental AR LoRA (v3abc), mode full",
+  "tags": "upbeat, 132 BPM, brass section, bouncy bass, handclaps, piano, punchy drums, playful, lively, busy street, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+  "structure": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+  "seed": 10111,
+  "max_s": 150,
+  "render_s": 116,
+  "source_s": 125.7,
+  "listen": {
+   "key": "F major",
+   "key_fit": 0.81,
+   "tempo": 136.0,
+   "quiet_s": 0,
+   "level_spread_db": 4.2,
+   "hiss": 0.1695,
+   "peak": 0.999,
+   "good": 0.281,
+   "vocals": -0.004,
+   "noise": -0.051,
+   "cheap": 0.192,
+   "odd": 0.063,
+   "like_refs": 0.629,
+   "worst_vocals": [
+    0.022,
+    30
+   ],
+   "worst_noise": [
+    -0.024,
+    100
+   ],
+   "worst_cheap": [
+    0.292,
+    80
+   ],
+   "worst_odd": [
+    0.097,
+    100
+   ]
+  },
+  "vocal_db": -40.9,
+  "vocal_windows_pct": 0.0,
+  "loop_from_s": 7.62,
+  "loop_to_s": 116.34,
+  "loop_s": 108.7,
+  "loop_start": 1.0,
+  "loop_end": 109.722,
+  "seam_dist": 0.394,
+  "seam": {
+   "level_jump_db": 2.94,
+   "level_jump_p99_elsewhere": 8.2,
+   "flux_at_seam": 130.0,
+   "flux_p99_elsewhere": 697.1,
+   "flux_median": 103.3,
+   "sample_step_at_seam": 0.0475,
+   "sample_step_p999_elsewhere": 0.1248
+  },
+  "source_lufs": -12.8
+ },
+ "shops-2": {
+  "model": "YuE2 3B bf16 + instrumental AR LoRA (v3abc) + NAR joint v9, mode full",
+  "tags": "upbeat, 132 BPM, brass section, bouncy bass, handclaps, piano, punchy drums, playful, lively, busy street, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix",
+  "structure": "[intro]\n[verse]\n[chorus]\n[verse]\n[chorus]\n[bridge]\n[chorus]\n[outro]",
+  "seed": 10112,
+  "max_s": 150,
+  "render_s": 124,
+  "source_s": 145.5,
+  "listen": {
+   "key": "Ab minor",
+   "key_fit": 0.53,
+   "tempo": 136.0,
+   "quiet_s": 0,
+   "level_spread_db": 3.7,
+   "hiss": 0.1774,
+   "peak": 0.902,
+   "good": 0.262,
+   "vocals": -0.071,
+   "noise": -0.074,
+   "cheap": 0.272,
+   "odd": -0.056,
+   "like_refs": 0.717,
+   "worst_vocals": [
+    0.03,
+    130
+   ],
+   "worst_noise": [
+    -0.014,
+    70
+   ],
+   "worst_cheap": [
+    0.333,
+    110
+   ],
+   "worst_odd": [
+    0.042,
+    130
+   ]
+  },
+  "vocal_db": -61.4,
+  "vocal_windows_pct": 0.0,
+  "loop_from_s": 12.18,
+  "loop_to_s": 126.81,
+  "loop_s": 114.6,
+  "loop_start": 1.0,
+  "loop_end": 115.625042,
+  "seam_dist": 0.447,
+  "seam": {
+   "level_jump_db": 3.03,
+   "level_jump_p99_elsewhere": 14.71,
+   "flux_at_seam": 191.3,
+   "flux_p99_elsewhere": 539.5,
+   "flux_median": 96.9,
+   "sample_step_at_seam": 0.0007,
+   "sample_step_p999_elsewhere": 0.071
+  },
+  "source_lufs": -11.9
+ }
+}
