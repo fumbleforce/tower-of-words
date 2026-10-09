@@ -21,6 +21,7 @@ import { lobbyCommuters } from './lobby-commuters.js';
 import { gateBackground } from './background-people.js';
 import { lobbyDay2 } from './lobby-day2.js';
 import { stationMonitor } from './day3/monitor.js';
+import { addOfficeWorker, prepareOfficeWorkers } from '../crowd/office-workers.js';
 
 export const withList = (slot) =>
   (slot.with || []).filter((e) => typeof e === 'string' || cond(e.if)).map((e) => (typeof e === 'string' ? e : e.who));
@@ -32,6 +33,7 @@ import { isPlayer } from '../mc.js';
 export { glide }; // smooth start, turn and stop; never touches the player's facing
 
 export async function lobbyPlace(game) {
+  await prepareOfficeWorkers();
   const w = await sliced(lobbySteps()); // in slices between frames: it's built while the train is played
   const { BZ, X, Z } = w;
   const cam = new RoomCam({ elev: 46, fov: 24 });
@@ -71,21 +73,10 @@ export async function lobbyPlace(game) {
   const { list: commuters, step: stepCommuters, clearDoor } = lobbyCommuters(game, w, st, { readerFlash, openFor });
 
   // background people who aren't going anywhere yet
-  const extras = [];
-  for (const [k, x, z, ry] of [
+  const extras = [
     [4, -3.0, -2.9, 0.9],
     [2, -2.45, -2.6, -2.2],
-  ]) {
-    const r = PEOPLE.worker(k);
-    r.root.scale.multiplyScalar(K);
-    r.root.position.set(x, 0, z);
-    r.root.rotation.y = ry;
-    w.root.add(r.root);
-    const b = blob(0.5, 0.35);
-    b.position.set(x, 0.004, z);
-    w.root.add(b);
-    extras.push(r);
-  }
+  ].map(([seed, x, z, yaw]) => addOfficeWorker(w.root, seed, K, [x, z, yaw]));
   // ---- gate ----
   function readerFlash(i, state, quiet) {
     w.readers[i].userData.set(state === 'green' ? 'ok' : state === 'red' ? 'no' : 'idle');

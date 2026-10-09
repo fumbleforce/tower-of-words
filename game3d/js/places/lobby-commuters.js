@@ -1,8 +1,9 @@
 // The gate's commuters: three office workers who walk in, tap a reader, pass the arch and leave by the door at the
 // back (the station's outdoor exit, where the lift used to be). A small crowd, so the story's people stand out.
-import { PEOPLE, HIP } from '../cast.js';
+import { HIP } from '../cast.js';
+import { officeWorker } from '../crowd/office-workers.js';
 import { blob } from '../engine.js';
-import { rbox } from '../props.js';
+import { carryOfficeParcel } from '../crowd/office-parcel.js';
 import { queueStep, turnToward } from '../move.js';
 import { K } from '../scenes/office.js';
 import { stepGait, stopGait } from '../movement/gait.js';
@@ -12,13 +13,9 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
   const { BZ, Z } = w;
   const commuters = [];
   [0, 2, 5].forEach((k, i) => {
-    const r = PEOPLE.worker(k);
+    const r = officeWorker(k);
     r.root.scale.multiplyScalar(K);
-    if (i === 2) {
-      const box = rbox(0.2, 0.12, 0.2, '#f4efe6', { y: -0.3, z: 0.05, r: 0.01 });
-      box.add(rbox(0.21, 0.02, 0.05, '#d9534f', { y: 0.11, r: 0.004 }));
-      r.arms[1].add(box);
-    }
+    if (i === 2) carryOfficeParcel(r);
     w.root.add(r.root);
     r.root.visible = false;
     const b = blob(0.5, 0.35);
@@ -89,7 +86,7 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
       r.head.rotation.y = Math.sin(c.t * 0.4 + c.qi) * 0.4;
       r.torso.position.y = 0.02 - Math.max(0, Math.sin(c.t * 0.9 + c.qi * 2) - 0.96) * 0.3;
       if (st.gateOpen) {
-        r.arms[1].rotation.x = 0;
+        r.arms[1].rotation.set(0, 0, 0);
         r.head.rotation.set(0, 0, 0);
         r.torso.position.y = 0.02;
         c.stage = 'in';
@@ -100,7 +97,7 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
     if (c.stage === 'tap') {
       if (st.jam) {
         if (c.t > 1.5) {
-          r.arms[0].rotation.x = 0;
+          r.arms[0].rotation.set(0, 0, 0);
           c.stage = 'back';
         }
         return;
@@ -110,7 +107,7 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
         openFor(1.6);
       }
       if (c.t > 0.7) {
-        r.arms[0].rotation.x = 0;
+        r.arms[0].rotation.set(0, 0, 0);
         c.stage = 'through';
         c.path = [
           [c.side * 0.2, BZ + 0.2],

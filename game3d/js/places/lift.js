@@ -16,9 +16,9 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { textTexture, JP_FONT } from '../props.js';
-import { PEOPLE, idle } from '../cast.js';
+import { idle } from '../cast.js';
+import { addOfficeWorker, prepareOfficeWorkers } from '../crowd/office-workers.js';
 import { walkPerson } from '../story.js';
-import { blob } from '../engine.js';
 import { ui, sfx } from '../ui.js';
 import { lightPool } from './life.js';
 import { glide, withList } from './lobby.js';
@@ -404,9 +404,10 @@ async function doorsOpen(game, L, at = 0.96) {
 const cars = new Map(); // place -> lift
 let looping = false;
 
-export function attachLift(game, place) {
+export async function attachLift(game, place) {
   const site = place.liftSite || SITES[place.name];
   if (!site || cars.has(place)) return;
+  await prepareOfficeWorkers();
   game.renderer.localClippingEnabled = true;
   hookDoors(game);
   const car = buildCar(site);
@@ -415,10 +416,9 @@ export function attachLift(game, place) {
   const dims = { half: W / 2 + T, back: ZF - T };
   const { hide, cutCap } = cutaway(place, car.g, site, dims, DW);
 
-  // riders: the Sales pair (chibi office workers), hidden until the ride
+  // The Sales pair stays hidden until the ride.
   const riders = RIDERS.map((d) => {
-    const r = PEOPLE.worker(d.worker);
-    r.root.scale.multiplyScalar(K);
+    const r = addOfficeWorker(place.space, d.worker, K);
     r.root.visible = false;
     // At the forecourt the car stands under the head office's upper floors, where the sun never reaches: their sun
     // shadow can't show (0 pixels changed with it off, notes/PERF.md), and drawing it was about 44 draws a frame of
@@ -427,10 +427,8 @@ export function attachLift(game, place) {
       r.root.traverse((o) => {
         if (o.isMesh) o.castShadow = false;
       });
-    const b = blob(0.5, 0.35);
+    const b = r.blob;
     b.visible = false;
-    r.blob = b;
-    place.space.add(r.root, b);
     place.people[d.id] = r;
     return { ...d, r };
   });

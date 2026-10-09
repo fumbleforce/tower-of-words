@@ -51,15 +51,15 @@
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {
-      "lines": 1012,
-      "bytes": 37575,
+      "lines": 1010,
+      "bytes": 37552,
       "owner": "codex-tui",
       "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md); 2026-09-30 forecourt riders cast no sun shadow (notes/PERF.md, evening draw calls); 2026-09-30 displays and ride light split out (lift-displays.js, lift-light.js; issue #102); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 #259: the cutaway (clip box, cut, cap) moved out to lift-cut.js (ceiling lowered); 2026-10-07 #307: bounded lift turn extracted into lift-turn.js (ceiling lowered)",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
     },
     "game3d/js/places/lobby.js": {
-      "lines": 702,
-      "bytes": 25299,
+      "lines": 693,
+      "bytes": 25192,
       "owner": "codex-tui",
       "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; C-0210 background people as things (explicit registrations, the rest in places/background-people.js); 2026-10-03 C-0378 day 2: the day-2 ways out spread into the registries and lobbyDay2 installed (places/lobby-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 #227: the guard's monitor as a named thing (guard_monitor) and its place from the builder; 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-05 the gate bench seat at a cushion front edge (feedback 2026-10-05_192459); 2026-10-05 #262: the spots gate_lockers and gate_staff_door (two lines)",
       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
