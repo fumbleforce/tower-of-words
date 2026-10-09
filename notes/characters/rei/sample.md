@@ -8,26 +8,26 @@ If this replaced the current day-3 lines, she would give her name here, so `d4_r
 
 ---
 
-`[talk:rei]` A serve goes long and rolls to the bench. Rei turns and sees Eric.
+`[talk:rei]` A serve goes long and rolls under the bench. Rei turns and sees Eric.
 
-**rei** (overheard, clear ボール): すみません！そのボール、取ってください。
-  (Excuse me! Get that ball, please.)
+**rei** (overheard, clear ボール): すみません、そのボール、取ってください。
+  (Excuse me, get that ball for me.)
 `[rei points at the ball under the bench]`
 
 **eric:** This one?
 
-**rei** (overheard): はい。こっちに投げてください。
-  (Yes. Throw it over here.)
+**rei** (overheard): はい、それ。こっちに投げて。
+  (Yes, that one. Throw it here.)
 `[rei beckons. Eric throws it. It lands short and rolls the rest of the way to her.]`
 
-**rei:** All right. You're the new IT man from B2, aren't you? Half of Sales was talking about you on Thursday.
+**rei:** You throw like an IT man. You're the new one from B2, aren't you? Half of Sales was talking about you on Thursday.
 
-**rei:** You can stand at the T over there and tell me if these go in. I only need in or out from you. I don't need a commentary.
+**rei:** Go and stand over there, at the T, and tell me if these go in. I just want in or out from you.
 
 **eric:** The what?
 
-**rei:** The T. Where the two lines meet, by your left foot. Yes, there.
-`[rei walks back to the baseline before he answers]`
+**rei:** The T. Where the lines meet, by your left foot. There. Don't move from there.
+`[rei walks back to the baseline before he can answer]`
 
 **rei** (overheard): もう一度。
   (Once more.)
@@ -35,15 +35,15 @@ If this replaced the current day-3 lines, she would give her name here, so `d4_r
 
 **eric:** In.
 
-**rei:** Yes, I saw. That's two in out of eleven today, so don't get excited.
+**rei:** I know, I saw it. That's two in out of eleven, so don't look so pleased.
 
 `[serve: long]`
 
 **eric:** That one was out. It was long.
 
-**rei:** It was on the line. You were watching me and not the ball, I saw your head move.
+**rei:** It was on the line. You were watching me instead of the ball. I saw your head move.
 
-**rei:** I changed my toss this week. It goes higher now, so it takes a few serves to get the timing right. Watch the ball this time.
+**rei:** I changed my toss this week, and it's going to take a few serves to get the timing. Watch the ball this time, not me.
 
 `[serve: long]`
 > She lands badly on her right foot and shifts off it.
@@ -57,7 +57,7 @@ If this replaced the current day-3 lines, she would give her name here, so `d4_r
 
 **eric:** Out. That's two long in a row.
 
-**rei:** Then I'm rushing it. The toss is right. I checked it on the recordings all week, and I'm not going back to the old one the day before a match. Stay there, I've still got half a basket.
+**rei:** Then I'm rushing it. The toss is fine. I'm not changing it back the day before a match, so stay where you are, I've still got half a basket.
 
 **ankle**
 
@@ -67,27 +67,27 @@ If this replaced the current day-3 lines, she would give her name here, so `d4_r
   (I'm fine.)
 `[rei puts her right foot down carefully and walks two steps without limping]`
 
-**rei:** If my ankle needs looking at, there's a clinic for that. You're here to watch the line.
+**rei:** I didn't ask you to look at my ankle. Watch the line.
 
 **kind**
 
 **eric:** In. Just about.
 
-**rei:** No, it wasn't. I saw it land from here. If you're going to stand there, call it properly.
+**rei:** It was out and you know it. If you're going to stand there, call it properly.
 
 **eric:** I don't remember agreeing to stand here.
 
-**rei:** You're standing there, aren't you?
+**rei:** And yet there you are.
 
 **all branches**
 
 `[rei walks to the basket, slowly, and spends a moment choosing a ball]`
 
-**rei:** That's enough for today. Thank you. I'm Rei, from Sales.
+**rei:** That's enough for today. I'm Rei, from Sales.
 
-**rei:** The club plays here tomorrow evening and we're always short of people. You can come if you want a game. Bring shoes you can actually run in.
+**rei:** The club plays here tomorrow evening. Come at six and bring shoes you can actually run in. I'll find you something to do.
 
-`[if kind]` **rei:** And call the lines honestly, or don't call them.
+`[if kind]` **rei:** And tomorrow you call the lines honestly.
 
 `[rei turns back to the baseline. Set d3_rei_call = out / ankle / kind, and d4_rei_intro.]`
 
@@ -99,6 +99,6 @@ If this replaced the current day-3 lines, she would give her name here, so `d4_r
 
 The flag only changes Rei's first line on day 4.
 
-- `out`: "I'm keeping the new toss. I'll have the timing by tonight." She tells him before he has said anything.
-- `ankle`: She steps onto court without looking at him and tells Aoi, not Eric, where to stand.
-- `kind`: "Are you calling honestly today?" before anything else.
+- `out`: "I'm keeping the new toss, so you're calling my serves again tonight."
+- `ankle`: She doesn't look at him. She tells Aoi where to stand first, then him.
+- `kind`: "Are you going to call them honestly today?"
