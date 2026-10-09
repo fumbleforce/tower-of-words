@@ -52,7 +52,7 @@ export const MOMENTS = {
     ohayo_mori: { remember: [['mori', 'ohayo', 'You answered his introduction with おはようございます.']] },
     ohayo_kenji: {
       bond: [['kenji', 'greet', 1, 'greeted him']],
-      fact: [['kenji', 'plain_ohayo', 'Says plain おはよう is fine with him.']],
+      fact: [['kenji', 'deep_bow', 'Bows deeper than you do when you greet him.']],
     },
     yoroshiku_kenji: { bond: [['kenji', 'greet', 1, 'greeted him']] },
     ohayo_mio: { fact: [['mio', 'too_polite', 'Finds おはようございます too polite from you.']] },
