@@ -140,7 +140,8 @@ void main() {
   vec3 c = mix(body, sky * vec3(0.8, 0.88, 1.0), fres * 0.7);
   // the sun's path: a warm sheen plus glitter points that change on twos
   float sp = max(dot(r, uSun), 0.0);
-  c += uWarm * (pow(sp, 60.0) * 0.5 + pow(sp, 400.0) * 1.5);
+  vec3 sheen = mix(uWarm, vec3(1.0), 0.65); // nearly white, so its bloom doesn't fringe orange round dark pillars
+  c += sheen * (pow(sp, 60.0) * 0.5 + pow(sp, 400.0) * 1.5);
   // glitter on the sun's path: points that swell and fade smoothly, each on its own slow cycle
   vec2 q = vW.xz * vec2(0.7, 1.6);
   vec2 cell = floor(q);
