@@ -4,7 +4,7 @@
 
 const P = [
   { id: 'eric', name: 'ERIC', kana: 'エリック', job: 'IT SUPPORT · B2', pics: ['eric-neutral', 'eric-surprised'], bg: '#1b2b4f', ac: '#6fd0c6', ink: '#ffffff' },
-  { id: 'carina', name: 'CARINA', kana: 'カリーナ', job: 'IT SUPPORT · B2', pics: ['carina-neutral'], bg: '#27324a', ac: '#ffcf5a', ink: '#ffffff' },
+  { id: 'carina', name: 'CARINA', kana: 'カリーナ', job: 'IT SUPPORT · B2', pics: ['carina-neutral', 'carina-surprised'], bg: '#27324a', ac: '#ffcf5a', ink: '#ffffff' },
   { id: 'mio', name: 'MIO', kana: 'ミオ', job: 'PROGRAMMER · B2', pics: ['mio-smile', 'mio-neutral', 'mio-phone', 'mio-deadpan', 'mio-surprised'], bg: '#0f3a3c', ac: '#34e0b0', ink: '#ffffff' },
   { id: 'kenji', name: 'KENJI', kana: 'ケンジ', job: 'ENGINEER · B2', pics: ['kenji-grin', 'kenji-sheepish', 'kenji-neutral'], bg: '#3f9be8', ac: '#ffffff', ink: '#ffffff' },
   { id: 'mori', name: 'MR. MORI', kana: 'モリ', job: 'B2 TEAM', pics: ['mori-smile', 'mori-flustered', 'mori-neutral'], bg: '#3c4c6e', ac: '#a9e07f', ink: '#ffffff' },
