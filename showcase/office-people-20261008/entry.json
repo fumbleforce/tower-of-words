@@ -2,7 +2,7 @@
   "title": "Approved office people at the station and in the lift",
   "date": "2026-10-08",
   "by": "codex",
-  "caption": "The two stationary station workers, three commuters and lift Sales pair use the approved office models. Native queue gestures and the carried parcel follow their skeletons. Other background categories remain a separate task.",
+  "caption": "The two stationary station workers, three commuters and lift Sales pair use the approved office models. Native queue gestures and the carried parcel follow their skeletons. Other background categories are the next part of this work.",
   "preview": "neutral-native-390-ride-2",
   "sections": [
     {
@@ -781,6 +781,17 @@
           "caption": "Desktop 1366 × 860, final day screen."
         }
       ]
+    },
+    {
+      "title": "Corrected phone day check",
+      "caption": "The strict phone check passed after the queue-neutral correction: no overlap, spin or long gait episode; one short episode remains in the report. The earlier deferred attempt is retained in the verification record.",
+      "images": [
+        {
+          "id": "neutral-strict-390-passed",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-strict-390-passed/390x844.png",
+          "caption": "Phone 390 × 844, final day screen."
+        }
+      ]
     }
   ],
   "links": [
@@ -793,7 +804,7 @@
       "href": "https://github.com/fumbleforce/tower-of-words/issues/353"
     },
     {
-      "label": "Verification record (final phone check pending)",
+      "label": "Verification record",
       "href": "game3d/shots/office-people-20261008/resume-20261009/verification.json"
     }
   ],
@@ -806,5 +817,5 @@
     "68e81b2f",
     "8e94a4de"
   ],
-  "updated": "2026-10-09T12:44:57+02:00"
+  "updated": "2026-10-09T12:58:04+02:00"
 }
