@@ -74,8 +74,8 @@ test('office planting preserves geometry, colours and normals outside the shared
   }
   const actual = receipt(p),
     expected = receipt(reference);
-  assert.equal(actual.geometries, 951);
-  assert.equal(actual.vertices, 92844);
-  assert.equal(actual.hash, '7bb23010788277c1a262f6ba465d17d02f0e8b799226432c8c7a4202bb6751bd');
+  assert.equal(actual.geometries, 1098);
+  assert.equal(actual.vertices, 106728);
+  assert.equal(actual.hash, 'ecf637678271ed30bea162d9a3f805ecaa249e8a8ed1c217cf9282d6a87a7866');
   assert.deepEqual(actual, expected);
 });

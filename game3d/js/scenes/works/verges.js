@@ -73,29 +73,10 @@ function cover(p, points, roots = []) {
     }
 }
 
-// Keep the species' original branch centres and complete crown envelope; bark passes through untouched.
+// The species' street-style tree (diorama/planting.js ISLAND_PLANTING): its trunk, a crown round each limb's end and its
+// root bed, leaves laid over once the place is built (diorama/vegetation.js).
 function fullTree(p, [kind, x, z, scale, seed]) {
-  const bounds = new THREE.Box3(),
-    parts = [];
-  let crown = 0;
-  TREES[kind](
-    {
-      geo(color, g, options) {
-        if (options?.surf !== 'foliage') return p.geo(color, g, options);
-        g.computeBoundingBox();
-        bounds.union(g.boundingBox);
-        const center = g.boundingBox.getCenter(new THREE.Vector3()),
-          size = g.boundingBox.getSize(new THREE.Vector3()).multiplyScalar(0.5);
-        parts.push(...leafMass(color, center, size, seed + crown++ * 71));
-        g.dispose();
-      },
-    },
-    x,
-    z,
-    scale,
-    seed,
-  );
-  for (const { color, geometry } of fitFoliage(parts, bounds)) p.geo(color, geometry, { surf: 'foliage' });
+  TREES[kind](p, x, z, scale, seed);
 }
 
 function rootLeaves(p, [, x, z, , seed]) {

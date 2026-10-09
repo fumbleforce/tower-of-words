@@ -137,8 +137,10 @@ test('planted trees, hedges and ground cover retain distinct batched leaf, bark 
   bed(p, [3, 6, 1, 2]);
   const meshes = p.build(root);
   const roles = new Set(meshes.map((m) => m.userData.surf));
-  for (const role of ['foliage', 'bark', 'soil']) assert.ok(roles.has(role), role);
-  assert.ok(meshes.length <= 4, 'planting remains a small set of shared surface batches');
+  // the street style's crowns and hedges (diorama/planting.js ISLAND_PLANTING), its root bed's mulch, stone ring and
+  // leaf cover
+  for (const role of ['diorama-tree', 'diorama-hedge', 'bark', 'soil']) assert.ok(roles.has(role), role);
+  assert.ok(meshes.length <= 8, 'planting remains a small set of shared surface batches');
   for (const mesh of meshes) {
     mesh.geometry.computeBoundingBox();
     assert.ok(Number.isFinite(mesh.geometry.boundingBox.max.y));

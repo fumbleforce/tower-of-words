@@ -1,11 +1,35 @@
 import * as THREE from 'three';
-import { southLinkFrame } from '../forecourt/south-link.js';
 import { rng } from '../outdoor/parts.js';
 
-export function meadowDetail(root, nav, { budget = 10000, shadows = true } = {}) {
-  const trees = (root.userData.dioramaPlanting || []).filter((plant) => plant.kind === 'tree');
-  const nearRoot = (p) =>
-    trees.reduce((near, tree) => Math.min(near, Math.hypot(p.x - tree.x, p.z - tree.z) / tree.scale), Infinity);
+// Grass blades and a few flowers over the lawn and the planted ground inside bounds ([x0, x1, z0, z1] in root's
+// frame), thicker in a ring round each tree's roots; avoid: [x0, x1, z0] a path's strip south of z0 left bare;
+// trees: [{ x, z, scale }] (the forecourt's planting records by default); skip(o): ground left as it is
+export function meadowDetail(
+  root,
+  nav,
+  { budget = 10000, shadows = true, bounds, avoid = null, trees = null, skip = null } = {},
+) {
+  trees ??= (root.userData.dioramaPlanting || []).filter((plant) => plant.kind === 'tree');
+  const [x0, x1, z0, z1] = bounds;
+  // the trees in 4 m cells: a blade looks only at its own cell and the ones round it (the ring and the flowers reach
+  // about two tree sizes)
+  const cells = new Map(),
+    cellOf = (x, z) => Math.floor(x / 4) + ':' + Math.floor(z / 4);
+  for (const tree of trees) {
+    const k = cellOf(tree.x, tree.z);
+    if (!cells.has(k)) cells.set(k, []);
+    cells.get(k).push(tree);
+  }
+  const nearRoot = (p) => {
+    let near = Infinity;
+    const cx = Math.floor(p.x / 4),
+      cz = Math.floor(p.z / 4);
+    for (let i = -1; i <= 1; i++)
+      for (let j = -1; j <= 1; j++)
+        for (const tree of cells.get(cx + i + ':' + (cz + j)) || [])
+          near = Math.min(near, Math.hypot(p.x - tree.x, p.z - tree.z) / tree.scale);
+    return near;
+  };
   const q = rng(1207),
     spots = [],
     faces = [],
@@ -15,7 +39,14 @@ export function meadowDetail(root, nav, { budget = 10000, shadows = true } = {})
     c = new THREE.Vector3(),
     normal = new THREE.Vector3();
   root.traverse((o) => {
-    if (!o.isMesh || !o.visible || !o.layers.isEnabled(0) || !['foliage', 'grass', 'soil'].includes(o.userData.surf))
+    if (
+      !o.isMesh ||
+      !o.visible ||
+      !o.layers.isEnabled(0) ||
+      !['foliage', 'grass', 'soil'].includes(o.userData.surf) ||
+      o.userData.crownCore ||
+      skip?.(o)
+    )
       return;
     const g = o.geometry,
       p = g.attributes.position,
@@ -26,10 +57,10 @@ export function meadowDetail(root, nav, { budget = 10000, shadows = true } = {})
       b.fromBufferAttribute(p, index ? index.getX(i + 1) : i + 1).applyMatrix4(t);
       c.fromBufferAttribute(p, index ? index.getX(i + 2) : i + 2).applyMatrix4(t);
       if (
-        Math.max(a.x, b.x, c.x) < 3 ||
-        Math.min(a.x, b.x, c.x) > 27 ||
-        Math.max(a.z, b.z, c.z) < -0.5 ||
-        Math.min(a.z, b.z, c.z) > 16 ||
+        Math.max(a.x, b.x, c.x) < x0 ||
+        Math.min(a.x, b.x, c.x) > x1 ||
+        Math.max(a.z, b.z, c.z) < z0 ||
+        Math.min(a.z, b.z, c.z) > z1 ||
         (a.y + b.y + c.y) / 3 > 0.43
       )
         continue;
@@ -40,7 +71,6 @@ export function meadowDetail(root, nav, { budget = 10000, shadows = true } = {})
       faces.push({ a: a.clone(), b: b.clone(), c: c.clone(), area });
     }
   });
-  const path = southLinkFrame('forecourt').walk;
   let accepted = 0;
   for (const f of faces)
     for (let j = 0, count = Math.floor(f.area * 240 + q()); j < count; j++) {
@@ -51,9 +81,9 @@ export function meadowDetail(root, nav, { budget = 10000, shadows = true } = {})
         .multiplyScalar(1 - u)
         .addScaledVector(f.b, u * (1 - v))
         .addScaledVector(f.c, u * v);
-      if (p.x < 3 || p.x > 27 || p.z < -0.5 || p.z > 16) continue;
-      if (p.x > path[0] && p.x < path[1] && p.z > path[2]) continue;
-      if (p.y <= 0.04 && nav.extra(p.x, p.z)) continue;
+      if (p.x < x0 || p.x > x1 || p.z < z0 || p.z > z1) continue;
+      if (avoid && p.x > avoid[0] && p.x < avoid[1] && p.z > avoid[2]) continue;
+      if (p.y <= 0.04 && nav?.extra?.(p.x, p.z)) continue;
       const patch = Math.sin(p.x * 2.1 + Math.cos(p.z * 1.3)) + Math.cos(p.z * 2.3 - Math.sin(p.x * 1.5));
       const ring = Math.exp(-Math.pow((nearRoot(p) - 0.8) / 0.45, 2));
       if (patch < -0.95 || q() > 0.18 + 0.82 * ring) continue;

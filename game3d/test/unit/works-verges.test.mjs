@@ -67,7 +67,7 @@ test('Works verge keeps the original belt tree identities and every trunk/branch
       .map(({ geometry }) => geometry.attributes.position.array);
   const a = bark(before),
     b = bark(candidate);
-  assert.equal(a.length, 23);
+  assert.equal(a.length, 40); // the street-style trees (diorama/planting.js), code-built without the models here
   assert.equal(b.length, a.length);
   a.forEach((vertices, i) => {
     assert.equal(vertices.length, b[i].length);
@@ -111,7 +111,7 @@ test('soil and connected cover have separate supported surfaces, with open trunk
   });
   assert.deepEqual(
     new Set(candidate.geometries.map(({ options }) => options.surf)),
-    new Set(['soil', 'foliage', 'bark']),
+    new Set(['soil', 'foliage', 'bark', 'diorama-tree', 'mulch', 'stone']),
   );
 });
 
@@ -119,16 +119,17 @@ test('foreground trees build once in the island frame with actual shadows, outsi
   const ground = collector(),
     island = new THREE.Group();
   for (const step of vergeSteps(ground, island)) void step;
-  assert.equal(island.children.length, 2, 'bark and foliage merge into their existing material classes');
+  // bark, crowns, and the root beds' mulch, stone ring and leaf cover
+  assert.equal(island.children.length, 5, 'bark and foliage merge into their existing material classes');
   const before = collector(),
     originalCrowns = new THREE.Box3();
   for (const [kind, x, z, scale, seed] of EAST_TREES) ({ keyaki, ginkgo, sakura })[kind](before, x, z, scale, seed);
   for (const { geometry, options } of before.geometries)
-    if (options.surf === 'foliage') {
+    if (options.surf === 'diorama-tree') {
       geometry.computeBoundingBox();
       originalCrowns.union(geometry.boundingBox);
     }
-  const crowns = island.children.find((mesh) => mesh.userData.surf === 'foliage');
+  const crowns = island.children.find((mesh) => mesh.userData.surf === 'diorama-tree');
   crowns.geometry.computeBoundingBox();
   for (const end of ['min', 'max'])
     for (const axis of ['x', 'y', 'z'])
@@ -140,7 +141,8 @@ test('foreground trees build once in the island frame with actual shadows, outsi
   assert(ground.geometries.every(({ options }) => options.surf !== 'bark'));
   for (const mesh of island.children) {
     assert(mesh.isMesh);
-    assert(mesh.castShadow && mesh.receiveShadow);
+    assert(mesh.receiveShadow);
+    if (['bark', 'diorama-tree'].includes(mesh.userData.surf)) assert(mesh.castShadow);
     assert.deepEqual(mesh.position.toArray(), [0, 0, 0]);
     mesh.geometry.computeBoundingBox();
     assert(mesh.geometry.boundingBox.min.x > -46 && mesh.geometry.boundingBox.max.x < -40);

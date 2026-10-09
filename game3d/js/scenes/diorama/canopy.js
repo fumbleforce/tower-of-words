@@ -68,11 +68,14 @@ export function addCanopyCore(root, faces, sun, phone = false) {
   // a 0.45 m grid; the core itself casts none.
   const whole = new THREE.BufferGeometry();
   whole.setAttribute('position', new THREE.Float32BufferAttribute(all, 3));
-  root.add(shadowOnly(clustered(whole, 0.45), 'diorama-crown-shadow', sun));
+  if (sun) root.add(shadowOnly(clustered(whole, 0.45), 'diorama-crown-shadow', sun));
   whole.dispose();
 
   core.name = 'diorama-foliage-interior';
   core.userData.noLook = core.material.userData.noLook = true;
+  // what it is made of, for passes that look for the leaf masses (the anime trial's soft crowns); the meadow skips it
+  core.userData.surf = 'foliage';
+  core.userData.crownCore = true;
   core.material.onBeforeCompile = (shader) => {
     shader.vertexShader = shader.vertexShader.replace(
       '#include <common>',

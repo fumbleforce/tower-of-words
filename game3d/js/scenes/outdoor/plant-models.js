@@ -45,6 +45,8 @@ export const bushFrom = () => (lean ? 0.6 : 0.3);
 // half the triangles) casts its shadow; on a phone, where the shadow map's draw is a third of the frame and its soft
 // edge hides more, simpler shapes do: shadowStandIns() says whether to use them.
 export const shadowStandIns = () => lean;
+// whether the phone's lighter copies were asked for (loadPlantModels)
+export const lighterPlanting = () => lean;
 
 const _m = new THREE.Matrix4(),
   _q = new THREE.Quaternion(),

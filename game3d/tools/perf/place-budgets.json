@@ -61,7 +61,7 @@
         "geoMB": { "max": 97, "issue": 374 }
       },
       "desktop": {
-        "tris": { "max": 908000, "issue": 374 }
+        "tris": { "max": 966000, "issue": 374, "reason": "full forecourt vegetation on desktop, Jørgen 2026-10-09" }
       }
     },
     "shotengai": {
