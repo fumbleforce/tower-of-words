@@ -1,13 +1,16 @@
 // Honsha station from outside, at the forecourt (scenes/forecourt.js): the two-storey block over the security room's
 // footprint (island-layout.js BUILDINGS station; scenes/lobby.js inside), the platform shed along the west coast with
 // the monorail beam on piers, and the covered walkway from the shed to the station's glass front.
-// The camera looks north over the station at Eric on the court, so everything above the cut-low wall height is one
+// The station's outside is the Blender model (scenes/station-model.js, tools/station/station.py, #382): every face
+// finished from the ground to the parapet, the roof with its plant and the name, the shed complete; the code-built
+// outside below stands in when the model can't be loaded.
+// The camera looks north over the station at Eric on the court, so the whole outside is one
 // occluder (scenes/occluders.js): it fades while the station stands between him and the camera (just outside its
 // north door) and stands whole again as he walks east, so the station is at the bottom left when he reaches the head
 // office. On a phone the camera looks east past it from the door (places/forecourt.js), so it stays whole there and
 // the platform shed's roof fades instead.
 import * as THREE from 'three';
-import { PAL, mat, textTexture, plane, JP_FONT } from '../props.js';
+import { PAL, mat } from '../props.js';
 import { lightPool } from '../places/life.js';
 import { addOccluder, updateOccluders } from './occluders.js';
 import { BUILDINGS, footprint, toLocal } from './island-layout.js';
@@ -17,6 +20,7 @@ import { hall, hallFares, ROOM } from './station-hall.js';
 import { FARES } from './station-fittings.js';
 import { glowSet } from '../kit/light/glow.js';
 import { buildShed, coveredWalk } from './station-shed.js';
+import { stationModel, stationLighter, stationMesh, stationGlass, stationSign } from './station-model.js';
 
 // the station's outline in the forecourt's frame: the gate room's walls (lobby.js X 6.3, Z 4.5, centred on the
 // forecourt's (-0.5, 7.15)); its north face is the court's south edge
@@ -37,6 +41,7 @@ export const DOOR_X = CX - 1, // the exit (the gate room's back-wall opening at 
   H2 = 3.8,
   TOPH = 4.1, // parapet top
   T = 0.18, // wall thickness
+  SIGN_X = DOOR_X + 1.6, // the name's board on the roof
   STEP = ZN + 2.45; // where the side walls rise from the cut to the full ground storey (past the first window)
 // ground-floor windows on the side walls (room z -3.4..-2.2, -1..0.2, 1.4..2.6) and the glass front (room x ±2.4)
 const SIDE_WIN = [
@@ -96,90 +101,10 @@ function glazing(glass, frame, axis, rects, at, side, { mull = 1.2, trim = null 
   }
 }
 
-function stationSign() {
-  const tex = textTexture(
-    (ctx, w, h) => {
-      ctx.fillStyle = '#3f4650';
-      ctx.fillRect(0, 0, w, h);
-      ctx.fillStyle = '#e8e9e6';
-      ctx.textBaseline = 'middle';
-      ctx.textAlign = 'right';
-      ctx.font = '700 88px ' + JP_FONT;
-      ctx.fillText('本社駅', w * 0.44, h / 2 + 4);
-      ctx.textAlign = 'left';
-      ctx.font = '600 54px sans-serif';
-      ctx.fillText('HONSHA STATION', w * 0.48, h / 2 + 4);
-    },
-    1024,
-    128,
-  );
-  const s = plane(4.4, 0.55, tex);
-  s.name = 'station:sign';
-  return s;
-}
-
-// the station block. Returns { update(pos, dt), glows, onPeriod(p) }
-function block(root) {
-  // What stays when the rest fades: the security room as a cut-away. The north wall, between Eric and the camera,
-  // is cut low; the side walls stay the ground storey's full height from STEP back (clear of the line from Eric
-  // to the camera anywhere by the north face) and are cut low in front of it; the south wall stays full height.
-  // Every cut top gets a pale cap, as on every cut wall in the office; the walls' inner faces are the room's own.
-  const low = [],
-    lining = [],
-    stayGlass = [],
-    stayFrame = [],
-    stayTrim = [];
-  const northHoles = [
-    [DOOR_X - 0.85, DOOR_X + 0.85, 0, 1.75],
-    [STAFF_X - 0.45, STAFF_X + 0.45, 1.35, 2], // the staff door: its leaf stands in the low wall
-  ];
+// The code-built outside, without the model: what fades (walls above the cut, the upper storey, parapet, roof, the
+// exit canopy, windows and the sign)
+function codeOutside() {
   const sideGround = SIDE_WIN.map(([a, b]) => [a, b, 0.3, 1.6]);
-  const front = [[FRONT[0], FRONT[1], 0, 1.75]];
-  // the room's colour on a wall's inner face: a thin lining just inside it
-  const inner = (axis, a0, a1, at, y1, holes) => {
-    const L = [];
-    wallRun(L, axis, a0, a1, at, 0, y1, holes);
-    const k = (axis === 'x' ? (at < CZ ? 1 : -1) : at < CX ? 1 : -1) * (T / 2 + 0.016);
-    for (const [w, h, d, x, y, z] of L)
-      lining.push(axis === 'x' ? [w, h, 0.03, x, y, z + k] : [0.03, h, d, x + k, y, z]);
-  };
-  wallRun(low, 'x', X0, X1, ZN + T / 2, 0, LOW, northHoles);
-  inner('x', X0 + T, X1 - T, ZN + T / 2, LOW, northHoles);
-  wallRun(low, 'x', X0, X1, ZS - T / 2, 0, H1, front);
-  inner('x', X0 + T, X1 - T, ZS - T / 2, H1, front);
-  glazing(stayGlass, stayFrame, 'x', [[FRONT[0], FRONT[1], LOW, 1.75]], ZS - T / 2, 1);
-  for (const [x, side] of [
-    [X0 + T / 2, -1],
-    [X1 - T / 2, 1],
-  ]) {
-    const back = sideGround.filter(([a]) => a >= STEP);
-    wallRun(low, 'z', ZN + T, STEP, x, 0, LOW, sideGround);
-    wallRun(low, 'z', STEP, ZS - T, x, 0, H1, back);
-    inner('z', ZN + T, STEP, x, LOW, sideGround);
-    inner('z', STEP, ZS - T, x, H1, back);
-    glazing(stayGlass, stayFrame, 'z', back, x, side, { trim: stayTrim });
-  }
-  root.add(boxes(low, '#8a8f96'), boxes(lining, PAL.wall), boxes(stayFrame, '#5b616b'), boxes(stayTrim, '#b3b9c0'));
-  const litGlass = boxes(stayGlass, '#8c9dad');
-  litGlass.material = mat('#8c9dad', {
-    roughness: 0.45,
-    metalness: 0.05,
-  }).clone(); // its own: it glows after dark
-  root.add(litGlass);
-  const tops = [...low, ...lining].filter((b) => [LOW, H1].some((h) => Math.abs(b[4] + b[1] - h) < 1e-3));
-  root.add(
-    boxes(
-      tops.map(([w, h, d, x, y, z]) => [w + 0.01, 0.014, d + 0.01, x, y + h, z]),
-      PAL.wallTop,
-    ),
-  );
-  root.add(boxes([[0.86, LOW, 0.06, STAFF_X, 0, ZN + 0.02]], PAL.door));
-  root.add(lightPool(DOOR_X, ZN - 0.7, 0.9, { k: 0.28, y: POOL_Y }));
-  hall(root, CX, ZN + ROOM.Z);
-  const fares = hallFares(root, CX, ZN + ROOM.Z);
-  fares.position.z += T; // the room's back wall is inside the station's north wall here
-
-  // what fades: walls above the cut, the upper storey, parapet, roof, the exit canopy, windows and the sign
   const wall = [],
     glass = [],
     frame = [],
@@ -255,7 +180,7 @@ function block(root) {
   frame.push([0.9, 1.35 - LOW, 0.05, STAFF_X, LOW, ZN + 0.01]);
   // the name on the roof's south edge, facing the camera, on two posts
   const sign = stationSign();
-  sign.position.set(DOOR_X + 1.6, TOPH + 0.45, ZS - 0.4);
+  sign.position.set(SIGN_X, TOPH + 0.45, ZS - 0.4);
   for (const s of [-1, 1]) frame.push([0.08, 0.5, 0.08, sign.position.x + s * 2.0, TOPH, ZS - 0.44]);
   const meshes = [
     boxes(wall, '#8a8f96'),
@@ -268,14 +193,99 @@ function block(root) {
     (n, i) => (meshes[i].name = n),
   );
   meshes[1].material = mat('#8c9dad', { roughness: 0.45, metalness: 0.05 });
-  // the station is open late: its windows glow after work (for a light rig, kit/light/glow.js)
-  const glows = [meshes[1], litGlass].map(({ material: m }) => ({
-    mat: m,
-    night: { color: '#c9b596', emissive: '#ffc98a', emissiveIntensity: 0.45 },
-  }));
-  const glowing = glowSet().add(glows);
+  return { meshes, glass: meshes[1], signs: [sign] };
+}
+
+// The model's outside: walls, stone, metal (and its small detail, not on a phone), the panes, and the name on both
+// faces of its board on the roof's south edge
+function modelOutside() {
+  const meshes = ['st_walls', 'st_stone', 'st_metal', ...(stationLighter() ? [] : ['st_fine'])].map((n) =>
+    stationMesh(n),
+  );
+  const glass = stationGlass('st_glass');
+  const signs = [stationSign(), stationSign()];
+  signs[0].position.set(SIGN_X, 4.55, ZS - 0.37);
+  signs[1].position.set(SIGN_X, 4.55, ZS - 0.47);
+  signs[1].rotation.y = Math.PI;
+  return { meshes: [...meshes, glass], glass, signs, model: true };
+}
+
+// the station block. Returns { update(pos, dt), glows, onPeriod(p) }
+function block(root) {
+  // What stays when the rest fades: the security room as a cut-away. The north wall, between Eric and the camera,
+  // is cut low; the side walls stay the ground storey's full height from STEP back (clear of the line from Eric
+  // to the camera anywhere by the north face) and are cut low in front of it; the south wall stays full height.
+  // Every cut top gets a pale cap, as on every cut wall in the office; the walls' inner faces are the room's own.
+  const low = [],
+    lining = [],
+    stayGlass = [],
+    stayFrame = [],
+    stayTrim = [];
+  const northHoles = [
+    [DOOR_X - 0.85, DOOR_X + 0.85, 0, 1.75],
+    [STAFF_X - 0.45, STAFF_X + 0.45, 1.35, 2], // the staff door: its leaf stands in the low wall
+  ];
+  const sideGround = SIDE_WIN.map(([a, b]) => [a, b, 0.3, 1.6]);
+  const front = [[FRONT[0], FRONT[1], 0, 1.75]];
+  // the room's colour on a wall's inner face: a thin lining just inside it
+  const inner = (axis, a0, a1, at, y1, holes) => {
+    const L = [];
+    wallRun(L, axis, a0, a1, at, 0, y1, holes);
+    const k = (axis === 'x' ? (at < CZ ? 1 : -1) : at < CX ? 1 : -1) * (T / 2 + 0.016);
+    for (const [w, h, d, x, y, z] of L)
+      lining.push(axis === 'x' ? [w, h, 0.03, x, y, z + k] : [0.03, h, d, x + k, y, z]);
+  };
+  wallRun(low, 'x', X0, X1, ZN + T / 2, 0, LOW, northHoles);
+  inner('x', X0 + T, X1 - T, ZN + T / 2, LOW, northHoles);
+  wallRun(low, 'x', X0, X1, ZS - T / 2, 0, H1, front);
+  inner('x', X0 + T, X1 - T, ZS - T / 2, H1, front);
+  glazing(stayGlass, stayFrame, 'x', [[FRONT[0], FRONT[1], LOW, 1.75]], ZS - T / 2, 1);
+  for (const [x, side] of [
+    [X0 + T / 2, -1],
+    [X1 - T / 2, 1],
+  ]) {
+    const back = sideGround.filter(([a]) => a >= STEP);
+    wallRun(low, 'z', ZN + T, STEP, x, 0, LOW, sideGround);
+    wallRun(low, 'z', STEP, ZS - T, x, 0, H1, back);
+    inner('z', ZN + T, STEP, x, LOW, sideGround);
+    inner('z', STEP, ZS - T, x, H1, back);
+    glazing(stayGlass, stayFrame, 'z', back, x, side, { trim: stayTrim });
+  }
+  // the cut-away's walls (with the model, shown only while the outside fades: it stands whole round them)
+  const stay = [
+    boxes(low, '#8a8f96'),
+    boxes(lining, PAL.wall),
+    boxes(stayFrame, '#5b616b'),
+    boxes(stayTrim, '#b3b9c0'),
+  ];
+  root.add(...stay);
+  const litGlass = boxes(stayGlass, '#8c9dad');
+  litGlass.material = mat('#8c9dad', {
+    roughness: 0.45,
+    metalness: 0.05,
+  }).clone(); // its own: it glows after dark
+  root.add(litGlass);
+  stay.push(litGlass);
+  const tops = [...low, ...lining].filter((b) => [LOW, H1].some((h) => Math.abs(b[4] + b[1] - h) < 1e-3));
+  stay.push(
+    boxes(
+      tops.map(([w, h, d, x, y, z]) => [w + 0.01, 0.014, d + 0.01, x, y + h, z]),
+      PAL.wallTop,
+    ),
+    boxes([[0.86, LOW, 0.06, STAFF_X, 0, ZN + 0.02]], PAL.door),
+  );
+  root.add(...stay.slice(-2));
+  root.add(lightPool(DOOR_X, ZN - 0.7, 0.9, { k: 0.28, y: POOL_Y }));
+  hall(root, CX, ZN + ROOM.Z);
+  const fares = hallFares(root, CX, ZN + ROOM.Z);
+  fares.position.z += T; // the room's back wall is inside the station's north wall here
+
+  // the outside, all of it fading: the model's (station-model.js), or the code-built one
+  const outside = stationModel() ? modelOutside() : codeOutside();
+  const meshes = outside.meshes,
+    sign = outside.signs;
   for (const m of meshes) root.add(m);
-  root.add(sign);
+  root.add(...sign);
   const occ = {};
   // Eric hidden by the station: the line from his feet up to the camera runs through the block (a margin for his
   // width), or he stands in the door. `view` is the direction toward the camera; the forecourt's usual one looks
@@ -310,7 +320,23 @@ function block(root) {
     [0, TOPH],
     [ZN - 0.3, ZS],
   ]);
-  addOccluder(occ, [...meshes, sign], hides, { name: 'station' });
+  const facade = addOccluder(occ, [...meshes, ...sign], hides, {
+    name: 'station',
+  });
+  // the station is open late: its windows glow after work (for a light rig, kit/light/glow.js); registered after the
+  // occluder has given the glass its own material
+  const glows = [outside.glass, litGlass].map(({ material: m }) => ({
+    mat: m,
+    night: { color: '#c9b596', emissive: '#ffc98a', emissiveIntensity: 0.45 },
+  }));
+  const glowing = glowSet().add(glows);
+  if (outside.model)
+    stay.forEach((m, i) => {
+      m.name = 'station:cut' + i; // kept apart from the merged statics (scenes/merge-static.js), so it can hide
+      m.userData.noBatch = true;
+    });
+  const cutAway = (k) => outside.model && stay.forEach((m) => (m.visible = k < 0.999));
+  cutAway(facade.k);
   // the fare machines stand against the cut north wall: they fade too while they would hide any of him
   const fx = fares.position.x;
   const faresHide = through(
@@ -334,6 +360,7 @@ function block(root) {
       const jump = !last || Math.hypot(pos.x - last[0], pos.z - last[1]) > 0.8;
       last = [pos.x, pos.z];
       updateOccluders(occ, pos, jump ? Infinity : dt);
+      cutAway(facade.k);
     },
     glows,
     // for a place without a light rig (the station garden's)
