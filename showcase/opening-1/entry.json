@@ -1,0 +1,172 @@
+{
+ "title": "Anime opening, first full cut",
+ "date": "2026-10-09",
+ "by": "claude-main",
+ "caption": "A 70-second opening to the opening theme, made in code and fading out at 1:10. It is in the title menu as Opening, and also plays on its own at game3d/opening/.",
+ "commit": [
+  "5c6fc400",
+  "a6251477"
+ ],
+ "result": [
+  "op-041-0",
+  "op-064-0",
+  "op-014-0",
+  "op-066-6"
+ ],
+ "sections": [
+  {
+   "title": "Intro (0:00 to 0:12)",
+   "caption": "Morning over the bay, the train crossing toward the island, then under, beside and above it as the band comes in. The title lands on the bar.",
+   "images": [
+    {
+     "id": "op-002-5",
+     "image": "bible/shots/showcase/opening-1/t002.5.webp",
+     "caption": "The sky tilts down to the island at sunrise"
+    },
+    {
+     "id": "op-004-8",
+     "image": "bible/shots/showcase/opening-1/t004.8.webp",
+     "caption": "The train crossing the bay"
+    },
+    {
+     "id": "op-006-6",
+     "image": "bible/shots/showcase/opening-1/t006.6.webp",
+     "caption": "Under the beam as the band comes in"
+    },
+    {
+     "id": "op-011-0",
+     "image": "bible/shots/showcase/opening-1/t011.0.webp",
+     "caption": "The title over the train"
+    }
+   ]
+  },
+  {
+   "title": "Verse (0:12 to 0:38)",
+   "caption": "Following the lyric: the morning monorail, the town shining across the water, the ID card, Honsha, the gate and the guard. The window seats use the new pictures from Review opening-window-1, which are still waiting for your pick.",
+   "images": [
+    {
+     "id": "op-014-0",
+     "image": "bible/shots/showcase/opening-1/t014.0.webp",
+     "caption": "Eric at the window (candidate picture)"
+    },
+    {
+     "id": "op-017-5",
+     "image": "bible/shots/showcase/opening-1/t017.5.webp",
+     "caption": "The island from the window"
+    },
+    {
+     "id": "op-020-5",
+     "image": "bible/shots/showcase/opening-1/t020.5.webp",
+     "caption": "Low over the water toward head office"
+    },
+    {
+     "id": "op-024-2",
+     "image": "bible/shots/showcase/opening-1/t024.2.webp",
+     "caption": "Mio looks up from her phone (candidate picture)"
+    },
+    {
+     "id": "op-026-0",
+     "image": "bible/shots/showcase/opening-1/t026.0.webp",
+     "caption": "The ID card"
+    },
+    {
+     "id": "op-030-6",
+     "image": "bible/shots/showcase/opening-1/t030.6.webp",
+     "caption": "Honsha station"
+    },
+    {
+     "id": "op-033-0",
+     "image": "bible/shots/showcase/opening-1/t033.0.webp",
+     "caption": "The gate opens"
+    },
+    {
+     "id": "op-034-8",
+     "image": "bible/shots/showcase/opening-1/t034.8.webp",
+     "caption": "The guard's good morning"
+    }
+   ]
+  },
+  {
+   "title": "Chorus (0:38 to 1:04)",
+   "caption": "The band stops for はじめ, then the island seen whole from above as the chorus comes in. Then the roll call: Eric or Carina, kotodama, Mio, the B2 team on 「てつだって」, the island people, a run of faces, and everyone together.",
+   "images": [
+    {
+     "id": "op-038-3",
+     "image": "bible/shots/showcase/opening-1/t038.3.webp",
+     "caption": "The stop before the chorus"
+    },
+    {
+     "id": "op-041-0",
+     "image": "bible/shots/showcase/opening-1/t041.0.webp",
+     "caption": "The island, whole"
+    },
+    {
+     "id": "op-042-9",
+     "image": "bible/shots/showcase/opening-1/t042.9.webp",
+     "caption": "Eric"
+    },
+    {
+     "id": "op-046-6",
+     "image": "bible/shots/showcase/opening-1/t046.6.webp",
+     "caption": "Words become magic"
+    },
+    {
+     "id": "op-049-5",
+     "image": "bible/shots/showcase/opening-1/t049.5.webp",
+     "caption": "Mio"
+    },
+    {
+     "id": "op-053-2",
+     "image": "bible/shots/showcase/opening-1/t053.2.webp",
+     "caption": "Kenji, Mr. Mori and Emi"
+    },
+    {
+     "id": "op-055-4",
+     "image": "bible/shots/showcase/opening-1/t055.4.webp",
+     "caption": "Kuro, Aoi and Rei"
+    },
+    {
+     "id": "op-056-6",
+     "image": "bible/shots/showcase/opening-1/t056.6.webp",
+     "caption": "Mr. Hamada wakes up"
+    },
+    {
+     "id": "op-057-8",
+     "image": "bible/shots/showcase/opening-1/t057.8.webp",
+     "caption": "Round the running train"
+    },
+    {
+     "id": "op-059-0",
+     "image": "bible/shots/showcase/opening-1/t059.0.webp",
+     "caption": "Faces on the beat"
+    },
+    {
+     "id": "op-064-0",
+     "image": "bible/shots/showcase/opening-1/t064.0.webp",
+     "caption": "Everyone together"
+    }
+   ]
+  },
+  {
+   "title": "Title (1:04 to 1:10)",
+   "caption": "The title over the train as the interlude starts and the music fades.",
+   "images": [
+    {
+     "id": "op-066-6",
+     "image": "bible/shots/showcase/opening-1/t066.6.webp",
+     "caption": "The end title"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it (on this machine)",
+   "href": "game3d/opening/"
+  },
+  {
+   "label": "The 1080p video (on this machine)",
+   "href": "game3d/shots/opening-film/full-v2/amakawa-opening-v2-1080p.mp4"
+  }
+ ]
+}
