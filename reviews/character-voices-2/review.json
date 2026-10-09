@@ -2,7 +2,7 @@
  "title": "Character voices, round 2: Mio, Kenji, Kuro and Rei",
  "date": "2026-10-09",
  "by": "Claude, one writing agent per character",
- "status": "open",
+ "status": "decided",
  "context": [
   "This is round 2 of the voice sheets for Mio, Kenji, Kuro and Rei. All four were revised from your notes on round 1, and each card says what changed and quotes the note it came from.",
   "Nothing here is in the game yet.",
@@ -81,5 +81,8 @@
    "label": "Round 1 and your answers",
    "href": "#review/character-voices-1"
   }
- ]
+ ],
+ "decision": "Approved with his comments worked in (\"if you work in current comments that should be enough\"); applied to the game in ff3d9187 (#368).",
+ "decided_at": "2026-10-09T19:02:24+0200",
+ "issue": 368
 }
