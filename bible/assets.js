@@ -4,7 +4,7 @@
 // tools/assets/render3d.mjs. Local bible only: the public site has no source to read.
 
 let DATA = null, R = '../';
-const F = { family: '', place: '', q: '', dupes: false, look: '' };
+const F = { family: '', place: '', q: '', dupes: false, look: '', fid: '', sort: '' };
 
 const thumbOf = (v) => v && v.thumb;
 const lineLink = (esc, file, line, text) => `<a class="src" href="#src/${esc(file)}:${line}">${esc(text || `${file.replace(/^game3d\/js\//, '')}:${line}`)}</a>`;
@@ -30,6 +30,23 @@ const lookTag = (esc, p) => {
   return k ? `<span class="st ${LOOKS[k][0]}">${esc(LOOKS[k][1])}</span>` : '';
 };
 
+// fidelity: how much love a piece has had (game3d/js/kit/core/detail.js FIDELITY; first estimates in kit.json)
+const FID_ST = { placeholder: 'rejected', basic: 'draft', finished: 'live', hero: 'approved' };
+const FID_ORDER = { placeholder: 0, basic: 1, finished: 2, hero: 3 };
+const fidOf = (p) => p.fidelity?.level || '';
+const fidName = (l) => (DATA.fidelity.find(([id]) => id === l) || [l, l])[1];
+const fidTag = (esc, p) => {
+  const l = fidOf(p);
+  if (!l) return '';
+  const about = (DATA.fidelity.find(([id]) => id === l) || [])[2] || '';
+  return `<span class="st ${FID_ST[l] || ''}" title="${esc(`${about}${p.fidelity.estimate ? ' (a first estimate)' : ''}`)}">${esc(fidName(l))}</span>`;
+};
+const SORTS = {
+  needs: (a, b) => (FID_ORDER[fidOf(a.piece)] ?? 9) - (FID_ORDER[fidOf(b.piece)] ?? 9) || b.piece.used.length - a.piece.used.length,
+  used: (a, b) => b.piece.used.length - a.piece.used.length,
+  recent: (a, b) => String(b.piece.touched?.when || '').localeCompare(String(a.piece.touched?.when || '')),
+};
+
 function swatches(esc, pal) {
   return `<div class="aswatch">${Object.entries(pal).map(([k, c]) => `<span title="${esc(k)} ${esc(c)}"><i style="background:${esc(c)}"></i>${esc(k)}</span>`).join('')}</div>`;
 }
@@ -44,7 +61,7 @@ function card(esc, e) {
     <div class="aph">${ph}${v.length > 1 ? `<span class="avn">${v.length} variants</span>` : ''}</div>
     <div class="abody"><b>${esc(e.name)}</b><code>${esc(p.name)}</code>
       <span class="ameta">${n ? `${n} place${n > 1 ? 's' : ''}` : p.usedSelf ? 'only in its own file' : '<span class="st rejected">unused</span>'}
-      ${lookTag(esc, p)}${p.dupes.length ? '<span class="st review">built elsewhere too</span>' : ''}</span></div></a>`;
+      ${fidTag(esc, p)}${lookTag(esc, p)}${p.dupes.length ? '<span class="st review">built elsewhere too</span>' : ''}</span></div></a>`;
 }
 
 function dupeBlock(esc, d, open = false) {
@@ -61,6 +78,7 @@ function listHtml(esc) {
     if (F.family && p.family !== F.family) return false;
     if (F.place && !p.places.includes(F.place)) return false;
     if (F.dupes && !p.dupes.length) return false;
+    if (F.fid && fidOf(p) !== F.fid) return false;
     if (F.look && lookKey(p) !== F.look && !(F.look === 'faceted' && p.look === 'faceted')) return false;
     if (F.q) {
       const hay = `${e.name} ${p.name} ${e.paths.join(' ')} ${p.doc} ${p.places.join(' ')}`.toLowerCase();
@@ -70,7 +88,7 @@ function listHtml(esc) {
   });
   const groups = fams.map(([id, label, about]) => {
     // pieces with a picture first, so a family opens on what it looks like
-    const list = shown.filter((e) => e.piece.family === id).sort((a, b) => !!thumbOf(b.variants?.[0]) - !!thumbOf(a.variants?.[0]));
+    const list = shown.filter((e) => e.piece.family === id).sort(SORTS[F.sort] || ((a, b) => !!thumbOf(b.variants?.[0]) - !!thumbOf(a.variants?.[0])));
     return list.length ? `<section class="afam" id="fam-${esc(id)}"><h2>${esc(label)} <span class="muted">(${list.length})</span></h2><p class="muted small">${esc(about)}</p>
       <div class="agrid">${list.map((e) => card(esc, e)).join('')}</div></section>` : '';
   }).join('');
@@ -84,6 +102,8 @@ function filtersHtml(esc) {
     <div class="afilters arow"><input type="search" data-af="q" placeholder="Search pieces" value="${esc(F.q)}" aria-label="Search pieces">
       <select data-af="place" aria-label="Used in place"><option value="">Used anywhere</option>${places.map((p) => `<option${F.place === p ? ' selected' : ''}>${esc(p)}</option>`).join('')}</select>
       <select data-af="look" aria-label="Look">${[['', 'Any look'], ['street', 'Street style'], ['faceted', 'Old faceted'], ['missing', 'Faceted, no street version']].map(([v, l]) => `<option value="${v}"${F.look === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>
+      <select data-af="fid" aria-label="Fidelity"><option value="">Any fidelity</option>${DATA.fidelity.map(([v, l]) => `<option value="${v}"${F.fid === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>
+      <select data-af="sort" aria-label="Sort">${[['', 'Pictures first'], ['needs', 'Needs love first'], ['used', 'Most used first'], ['recent', 'Last worked on first']].map(([v, l]) => `<option value="${v}"${F.sort === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>
       <label class="acheck"><input type="checkbox" data-af="dupes"${F.dupes ? ' checked' : ''}> Built elsewhere too</label></div>`;
 }
 
@@ -113,8 +133,9 @@ function pageList(esc) {
     <p class="lede">The world pieces the game builds in code: benches, lamps, trees, kerbs, paving, roofs, doors and the rest, with where each one is used. Look here before building something new. If a piece is close, use it or add a variant to it rather than copying it into a scene.</p>
     <p class="small muted">${DATA.pieces.length} pieces, ${nv} variants shown. Read from the source when ./start ran (${esc(DATA.generated.replace('T', ' ').slice(0, 16))}). Which files count as the kit, and the variants: <a href="#src/tools/assets/kit.json">tools/assets/kit.json</a>. Portraits, voices and art are in the <a href="${R}tools/assets/">asset gallery</a>.</p>
     ${(DATA.stale || []).length ? `<div class="warnbox"><b>tools/assets/kit.json is out of date</b> (a piece was renamed or moved):<ul>${DATA.stale.map((s) => `<li>${esc(s)}</li>`).join('')}</ul></div>` : ''}
-    <nav class="toc"><a href="#" data-jump="apieces">Pieces</a><a href="#" data-jump="alooks">Street style and faceted</a><a href="#" data-jump="adupes">Built more than once (${DATA.dupes.length})</a></nav>
+    <nav class="toc"><a href="#" data-jump="apieces">Pieces</a><a href="#" data-jump="afid">Fidelity</a><a href="#" data-jump="alooks">Street style and faceted</a><a href="#" data-jump="adupes">Built more than once (${DATA.dupes.length})</a></nav>
     <div id="apieces"><h2>Pieces</h2>${filtersHtml(esc)}<div id="alist">${listHtml(esc)}</div></div>
+    <div id="afid"><h2>Fidelity: what still needs love</h2>${fidelityHtml(esc)}</div>
     <div id="alooks"><h2>Street style and faceted</h2>${coverageHtml(esc)}</div>
     <div id="adupes"><h2>Built more than once</h2>
     <p class="muted small">From the world kit audit (<a href="#doc/notes/architecture/world-kit.md">notes/architecture/world-kit.md</a>): ${DATA.dupes.length} kinds of thing built in more than one place, about ${lines} lines that merging would remove. The pieces they should merge into are marked "built elsewhere too". Open one to see every copy.</p>
@@ -141,12 +162,42 @@ function pagePiece(esc, id) {
         <p class="small">Defined at ${lineLink(esc, file, p.line, `${file}:${p.line}`)}</p>
         ${p.also.length ? `<p class="small">Also: ${p.also.map((a) => `<code>${esc(a.name)}</code> ${lineLink(esc, a.file, a.line)}`).join(', ')}</p>` : ''}
         ${p.doc ? `<p class="adoc">${esc(p.doc)}</p>` : ''}
+        ${fidelityBlock(esc, p)}
+        ${levelsBlock(esc, p)}
         ${lookBlock(esc, p)}
         ${p.dupes.length ? `<h3>Built elsewhere too</h3>${p.dupes.map((d) => dupeBlock(esc, DATA.dupeById.get(d), true)).join('')}` : ''}
         <h3>Used in ${p.places.length ? `<span class="muted">(${p.used.length} line${p.used.length > 1 ? 's' : ''} in ${p.places.length} place${p.places.length > 1 ? 's' : ''})</span>` : ''}</h3>
         ${p.used.length ? `<div class="aused">${Object.entries(byPlace).sort().map(([pl, us]) => `<div><b>${esc(pl)}</b><span>${us.map((u) => lineLink(esc, u.file, u.line, `${u.file.split('/').at(-1)}:${u.line}`)).join(' ')}</span></div>`).join('')}</div>`
           : `<p>${p.usedSelf ? `Only inside its own file (${p.usedSelf} times).` : 'Nothing uses it.'}</p>`}
       </div></div>`;
+}
+
+// the levels, what each means, how many pieces are at each, and the most used pieces still at the bottom two
+function fidelityHtml(esc) {
+  const seen = DATA.pieces.filter((e) => fidOf(e.piece));
+  const n = (l) => seen.filter((e) => fidOf(e.piece) === l).length;
+  const low = seen.filter((e) => FID_ORDER[fidOf(e.piece)] <= 1).sort(SORTS.used).slice(0, 16);
+  return `<p class="muted small">How much love each piece has had. New kit pieces say it in their declaration; the rest are a first estimate (from the thumbnails, street style or faceted, Blender or code, and age) in <a href="#src/tools/assets/kit.json">tools/assets/kit.json</a>, to correct when a piece is reworked. Helpers, materials, data and light rigs have none: they are not pieces you see. Filter or sort the pieces by it above.</p>
+    <div class="acover"><table class="t"><thead><tr><th>Level</th><th>What it means</th><th>Pieces</th></tr></thead><tbody>${DATA.fidelity.map(([id, label, about]) => `<tr><th scope="row"><span class="st ${FID_ST[id]}">${esc(label)}</span></th><td data-h="What it means">${esc(about)}</td><td data-h="Pieces">${n(id)}</td></tr>`).join('')}</tbody></table></div>
+    <p class="small"><b>Most used, least love:</b> ${low.map((e) => `<a href="#asset/${esc(e.piece.id)}">${esc(e.name)}</a> <span class="muted">(${esc(fidName(fidOf(e.piece)).toLowerCase())}, ${e.piece.used.length} uses)</span>`).join(', ')}</p>`;
+}
+
+function fidelityBlock(esc, p) {
+  const t = p.touched;
+  if (!fidOf(p) && !t) return '';
+  const about = (DATA.fidelity.find(([id]) => id === fidOf(p)) || [])[2] || '';
+  return `<h3>Fidelity ${fidTag(esc, p)}</h3><ul class="alook">
+    ${fidOf(p) ? `<li>${esc(about)}${p.fidelity.estimate ? ' <span class="muted">A first estimate, in tools/assets/kit.json.</span>' : ''}</li>` : ''}
+    ${t ? `<li>Last worked on ${esc(t.when)} by ${esc(t.by)}: <span class="muted">${esc(t.subject)}</span> <code>${esc(t.commit)}</code></li>` : ''}</ul>`;
+}
+
+// a kit piece's cost at each detail level (game3d/js/kit/core/detail.js; tools/assets/kit-costs.mjs)
+function levelsBlock(esc, p) {
+  if (!p.levels) return '';
+  const lv = DATA.levels.map(([l]) => l);
+  const rows = Object.entries(p.levels).map(([v, c]) => `<tr><th scope="row">${esc(v)}</th>${lv.map((l) => `<td data-h="${esc(l)}">${c[l] ? `${c[l].tris.toLocaleString('en')} tris, ${c[l].draws} draw${c[l].draws === 1 ? '' : 's'}` : ''}</td>`).join('')}</tr>`).join('');
+  return `<h3>Detail levels</h3><p class="muted small">The game picks the level from the quality setting and the place's budget, and one lower far from the walks (<code>levelFor</code> in game3d/js/kit/core/detail.js). ${DATA.levels.map(([l, a]) => `<b>${esc(l)}</b>: ${esc(a)}`).join(' ')} Draws are what the piece adds alone; a place merges the same kind of surface across all its pieces.</p>
+    <div class="acover"><table class="t"><thead><tr><th>Variant</th>${lv.map((l) => `<th>${esc(l)}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
 function lookBlock(esc, p) {

@@ -27,6 +27,20 @@ function palette(node) {
   return flat.length && flat.every(([, c]) => typeof c === 'string' && COLOR.test(c)) ? Object.fromEntries(flat) : null;
 }
 
+// a world kit piece (game3d/js/kit/core/piece.js): `piece({ id, label, family, fidelity, use, variants, run, ... })`.
+// What can be read without running it: the static fields and the variants' names.
+const DECL = ['id', 'label', 'family', 'fidelity', 'use', 'run', 'preview'];
+function pieceDecl(init) {
+  if (init?.type !== 'CallExpression' || init.callee.name !== 'piece' || init.arguments[0]?.type !== 'ObjectExpression') return null;
+  const out = { variants: ['default'] };
+  for (const pr of init.arguments[0].properties) {
+    const k = pr.key?.name ?? pr.key?.value;
+    if (k === 'variants' && pr.value.type === 'ObjectExpression') out.variants = pr.value.properties.map((v) => v.key.name ?? v.key.value);
+    else if (DECL.includes(k)) { try { out[k] = staticValue(pr.value); } catch { /* not static: left out */ } }
+  }
+  return out.id ? out : null;
+}
+
 export function kitSourceData(read, files, kitFiles) {
   const src = new Map(files.map((f) => [f, read(f)]));
   const asts = new Map();
@@ -70,7 +84,8 @@ export function kitSourceData(read, files, kitFiles) {
             if (v.id.type !== 'Identifier') continue;
             const init = v.init;
             const fn = init && /FunctionExpression$/.test(init.type) ? init : null;
-            own[v.id.name] = { kind: fn ? 'function' : 'const', node: n, fn, init };
+            const decl = pieceDecl(init);
+            own[v.id.name] = { kind: decl ? 'piece' : fn ? 'function' : 'const', node: n, fn, init, decl };
           }
         }
       }
@@ -96,6 +111,7 @@ export function kitSourceData(read, files, kitFiles) {
         params: d.fn ? paramsOf(f, d.fn) : null,
         doc: docOf(f, d.node).slice(0, 600),
         palette: d.kind === 'const' && d.init?.type === 'ObjectExpression' ? palette(d.init) : null,
+        decl: d.decl || null,
         used: [],
       };
     }
@@ -193,10 +209,30 @@ function lookOf(looks, key, s, c, family) {
   if (c.note) out.note = c.note;
   if (look === 'street') {
     const args = [...new Set((s.params || '').match(PHONE_ARG) || [])];
-    out.phone = c.phone || (args.length ? `takes ${args.map((a) => `\`${a}\``).join(', ')} for the phone's lighter build` : null);
+    out.phone = c.phone || (s.decl ? 'builds at the phone, standard and high detail levels (game3d/js/kit/core/detail.js), costs below'
+      : args.length ? `takes ${args.map((a) => `\`${a}\``).join(', ')} for the phone's lighter build` : null);
   }
   if (look === 'faceted' && c.street) out.street = { key: c.street[0], note: c.street[1] };
   return out;
+}
+
+// a kit piece's views for the library: one per variant, in the street style, a row of three seeds of the first
+// variant so the seeded variation shows, and the first variant at the phone's detail level (tools/assets/kit-view.js
+// builds them)
+function kitViews(decl) {
+  const views = decl.variants.map((v) => ({ name: v, street: 'full', kit: { variant: v } }));
+  views.push({ name: `${decl.variants[0]}, three seeds`, street: 'full', kit: { variant: decl.variants[0], seeds: [11, 12, 13] } });
+  views.push({ name: `${decl.variants[0]}, phone level`, street: 'phone', kit: { variant: decl.variants[0], level: 'phone' } });
+  return views;
+}
+
+// fidelity: how much love a piece has had (kit/core/detail.js FIDELITY). A kit piece says it in its declaration;
+// the others have a first estimate in kit.json `fidelity.pieces` (marked as an estimate on the page). Helpers,
+// materials, rigs and data have none.
+function fidelityOf(fid, key, s) {
+  if (s.decl?.fidelity) return { fidelity: { level: s.decl.fidelity } };
+  const set = fid?.pieces?.[key];
+  return set ? { fidelity: { level: set, estimate: true } } : {};
 }
 
 export function kitLibrary(read, files, catalog) {
@@ -213,18 +249,21 @@ export function kitLibrary(read, files, catalog) {
     if (!kitFiles.includes(file) && !extra.has(key)) continue;
     if (catalog.skip.includes(key) || catalog.fold[key]) continue;
     const c = catalog.pieces[key] || {};
-    const family = c.family || extra.get(key) || catalog.files[file];
-    const auto = defaultArgs(s, family);
-    const variants = (c.variants || (auto ? [{ name: 'default', args: auto }] : [])).map((v) => {
+    const family = c.family || s.decl?.family || extra.get(key) || catalog.files[file];
+    const auto = s.decl ? null : defaultArgs(s, family);
+    const variants = (c.variants || (s.decl ? kitViews(s.decl) : auto ? [{ name: 'default', args: auto }] : [])).map((v) => {
       const [vfile, vfn] = (v.call || key).split('#');
       const view = { type: 'piece', file: vfile, fn: vfn };
-      for (const k of ['args', 'then', 'nook', 'surface', 'color', 'street']) if (v[k] !== undefined) view[k] = v[k];
+      for (const k of ['args', 'then', 'nook', 'surface', 'color', 'street', 'kit']) if (v[k] !== undefined) view[k] = v[k];
       return { name: v.name, view };
     });
     const piece = {
-      id: slug(key), key, name: s.name, label: c.label || s.name, family, file: s.file, line: s.line, kind: s.kind,
-      call: s.kind === 'const' ? s.name : `${s.kind === 'class' ? 'new ' : ''}${s.name}(${s.params ?? ''})`,
-      doc: s.doc, palette: s.palette, variants, used: s.used.filter((u) => u.file !== s.file),
+      id: slug(key), key, name: s.name, label: c.label || s.decl?.label || s.name, family, file: s.file, line: s.line, kind: s.kind,
+      call: s.decl ? s.decl.use || `${s.name}(p, { at: [x, z], face, variant })`
+        : s.kind === 'const' ? s.name : `${s.kind === 'class' ? 'new ' : ''}${s.name}(${s.params ?? ''})`,
+      kit: s.decl ? { id: s.decl.id, run: !!s.decl.run, variants: s.decl.variants } : null,
+      ...fidelityOf(catalog.fidelity, key, s),
+      doc: s.doc, palette: s.palette, variants, used: s.used.filter((u) => u.file !== s.file && u.file !== JS + 'kit/index.js'), // the registry lists, it doesn't use
       usedSelf: s.used.filter((u) => u.file === s.file).length, places: [], also: [], dupes: [],
       ...lookOf(catalog.looks, key, s, c, family),
     };
@@ -249,6 +288,9 @@ export function kitLibrary(read, files, catalog) {
   }
   for (const key of Object.keys(catalog.pieces)) {
     if (!byKey[key] && !catalog.fold[key]) stale.push(`pieces: ${key} is not an export of a kit file`);
+  }
+  for (const key of Object.keys(catalog.fidelity?.pieces || {})) {
+    if (!byKey[key]) stale.push(`fidelity: ${key} is not a listed piece`);
   }
   // the audit's families of things built more than once; a copy's line follows its function when it has a name
   const dupes = catalog.dupes.map((d) => {

@@ -145,6 +145,13 @@ export const bench = piece({
 
 The hand-placed feel belongs to the places. Each place keeps its plan file (the existing *-plan.js pattern) and chooses a palette, a few variants and some one-off dressing: a bike left against this fence, a sign with this shop's name. Shared pieces carry the craft once, and each place adds its own detail on top.
 
+### Detail levels and fidelity
+
+Jørgen, 2026-10-09: "it becomes quite clear in the asset library which models have gotten love and attention, and which ones have not. we should include some metadata on the fidelity level here, maybe even retain multiple levels depending on use-case, performance settings etc, if the higher quality version is harder to render."
+
+- Detail levels. Every kit piece builds at three levels: phone, standard and high (game3d/js/kit/core/detail.js, which says what each one drops or adds). The phone level keeps the shape and colours and drops the small fittings and round segments. High adds rounder edges and the small things you only see up close. A place picks the level once with `levelFor({ phone, tier, tight, far })`. It passes in what it already knows: perf/phone.js `phoneLighter()`, the quality tier from perf/view.js, and whether it is over its place budget (game3d/tools/perf/place-budgets.json). It asks one level lower for pieces far from the walks. The Asset library shows each variant's triangles and draws at each level (tools/assets/kit-costs.mjs builds them in Node).
+- Fidelity. Every piece you can see has a fidelity level: placeholder, basic, finished or hero (detail.js `FIDELITY` gives a line on each). A kit piece declares its level. The older pieces got a first estimate on 2026-10-09 in tools/assets/kit.json `fidelity`, judged from their thumbnails, street style or faceted, Blender or code, and age. Whoever reworks a piece corrects its entry. The library shows who last worked on each piece and when, from git blame over the piece's own lines with formatting passes skipped. It can filter and sort by fidelity and lists the most used pieces with the least love. Helpers, materials, data and light rigs have no level, because they aren't pieces you see.
+
 ### How a place composes
 
 A place's plan lists what stands where, by piece id and variant. Its builder walks that list into one `Parts` collector, hands every returned `blocks` to walk-ground and the walk grid, every `spots` to the place's targets and seats, and every `glow` to the light registry. On a period change the place calls one `applyPeriod(period)`, which sets the grade and sun, the sky environment, lamps, lit windows and glass. That replaces the 28 hand-written `onPeriod` bodies and lets every place go back to daylight.
