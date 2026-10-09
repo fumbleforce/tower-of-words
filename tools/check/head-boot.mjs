@@ -7,11 +7,11 @@
 // uncommitted edits in any checkout can't hide or cause a failure. Takes 5 to 30 s.
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
-import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { withBrowserJob } from '../lib/browser-job.mjs';
 import { openGame } from '../../game3d/test/support/open-game.mjs';
+import { serveFolder } from '../lib/static-server.mjs';
 
 const args = process.argv.slice(2);
 const record = args.includes('--record');
@@ -21,10 +21,6 @@ const commit = git('rev-parse', '--verify', (args.find(a => !a.startsWith('--'))
 const short = commit.slice(0, 7);
 const commonDir = git('rev-parse', '--path-format=absolute', '--git-common-dir');
 const main = path.dirname(commonDir);
-const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json',
-  '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg',
-  '.glb': 'model/gltf-binary', '.mp3': 'audio/mpeg', '.ogg': 'audio/ogg', '.woff2': 'font/woff2', '.wasm': 'application/wasm' };
-
 // Missing on GitHub Pages too, and the game copes: the local review server's API, the favicon, and a
 // private-mode plugin. plugins.js fetches that file and keeps the public game when it is not there.
 const OPTIONAL = /^\/(api\/|favicon\.ico$|island\/private\/plugins\/)/;
@@ -52,18 +48,8 @@ try {
   if (missing.length) say(`note: ${missing.length} locked binaries are not on this disk (sync.py pull game3d): ${missing.slice(0, 3).join(', ')}`);
 
   // 2. a private static server for that folder
-  server = http.createServer((req, res) => {
-    const rel = decodeURIComponent(new URL(req.url, 'http://x').pathname);
-    const file = path.join(site, path.normalize(rel).replace(/^(\.\.[/\\])+/, ''));
-    fs.stat(file, (err, st) => {
-      if (err || !st.isFile() || !file.startsWith(site + path.sep)) { res.writeHead(404); res.end(); return; }
-      res.writeHead(200, { 'content-type': TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream',
-        'content-length': st.size, 'cache-control': 'no-store' });
-      fs.createReadStream(file).pipe(res);
-    });
-  });
-  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
-  const url = `http://127.0.0.1:${server.address().port}/game3d/index.html?q=0`;
+  server = await serveFolder(site);
+  const url = `${server.url}/game3d/index.html?q=0`;
 
   // 3. the title screen at both sizes
   const problems = [];

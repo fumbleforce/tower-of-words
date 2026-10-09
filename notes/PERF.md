@@ -716,3 +716,63 @@ blocker. Reproducible checks are `node --test game3d/test/unit/instance-bounds.t
 `AFTER=.claude/worktrees/<name>/game3d node game3d/tools/perf/creature-parity.mjs`, and the scene probe
 command in that tool's header. Captured reports, route logs and comparison sheets from this run are
 preserved outside the disposable worktree at `/tmp/perf-237-evidence/`.
+
+## Place budgets (#372, 2026-10-09)
+
+`node game3d/tools/perf/place-budget.mjs` opens every place on its own (all 26 in `PLACE_FILES`, indoor and outdoor), measures it, and fails when a number goes over its budget. tools/land.sh runs it before main moves on any branch that changes game3d/, and refuses the landing with the place, the tier, the number and the budget. It takes about 3.5 minutes on a quiet machine. `--places forecourt,plaza` and `--tiers phone` narrow a run, and `--json <file>` keeps every camera's numbers. The rules are in place-budget-lib.mjs, with unit tests in test/unit/place-budget.test.mjs.
+
+What it measures, per place and tier (game3d/tools/perf/place-budgets.json, `tiers`):
+
+- phone: 390x844 with touch, medium tier (q1, what phones run), overview camera. Load is timed with the CPU throttled 4x, as the phone budget above assumes.
+- desktop: 1366x860, high tier (q2), the overview camera and the third-person camera at its lowest pitch, turned eight ways from the start spot. The worst view counts. The mouse look goes through a pointer lock faked for that page only, because a headless browser can't take a real one.
+- draw calls and triangles: whole frames (every pass), the median of four frames per view.
+- geometry and texture MB: every geometry and texture the place's scene reaches, each counted once, textures as uncompressed RGBA with mipmaps. Shadow maps and post-processing targets depend on the screen and are left out.
+- load: from navigation until the place has drawn its first frames, in the `?place=<name>&cap` start (no story, no next place being prepared).
+
+The places are opened through a private server of the checkout the tool is in, so a worktree is measured exactly as it is. One place is open at a time, each in its own browser context that is closed before the next place opens, to keep memory down. A place over budget is measured once more and the lower numbers count, so a crowd walking into view doesn't fail a landing. A load time gets a 15% allowance for run-to-run noise (`allowance`), and when the machine's load average goes over 16 during the run a load over budget is only a warning. The check uses a browser GPU slot like the fast test. If the machine or the slots stay busy, it exits 75 and land.sh lands with a warning, as it does for the boot check.
+
+The budgets:
+
+| | draw calls | triangles | geometry MB | texture MB | load |
+|---|--:|--:|--:|--:|--:|
+| phone | 200 | 300k | 64 | 96 | 6 s at CPU 4x |
+| desktop | 500 | 800k | 128 | 192 | 4 s |
+
+The phone calls, triangles and load are the phone budgets at the top of this file. The rest had no target before this, so these are starting values. iOS Safari allows a page about 224 to 384 MB of canvas and WebGL memory (notes/research/world-chunking.md), and 64 + 96 MB per place lets the place on screen and the next one prepared fit together. The desktop numbers are for a laptop with integrated graphics, not this machine's 3080: about two and a half times the phone's calls and triangles, and double its memory.
+
+Known exceptions: a place that is over today has its own higher ceiling for that number in `places`, with the issue that will bring it down. The ceiling is about 5% over what was measured (25% for load times), and the place may not go past it. When a place gets back under the budget, the check prints a note asking for its exception to be removed. Exceptions recorded on 2026-10-09: the forecourt's phone calls, triangles and geometry and its desktop calls and triangles (#372, stage 2; the planting in e47b108e took its phone triangles from about 368k to 406k); character skins at 2048x2048 that put most places over the texture budget (#373); and the canteen, bakery, ferry terminal and office over on calls, the office, plaza, east lane and shop street over on geometry, the office and plaza over on desktop triangles, and the office's load (#374).
+
+To change a budget or add an exception, edit place-budgets.json in the same commit as the change that needs it, and say why in the commit message. An exception needs an issue (the unit test checks it).
+
+Measured on 2026-10-09 on main e47b108e (with the new planting) plus this tool, on the RTX 3080. The load times are from a quiet run just before the planting landed; the run with the planting had a load average of 32, which stretched every load. The desktop calls and triangles are the worst of nine views; the last column is the overview camera alone. `*` marks a number over budget that has a known exception.
+
+| place | phone calls | phone tris | phone geo MB | phone tex MB | phone load s | desktop calls | desktop tris | desktop overview calls |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|
+| train | 149 | 147k | 64 | 147 * | 4.9 | 327 | 288k | 296 |
+| gate | 101 | 127k | 27 | 142 * | 3.6 | 249 | 214k | 249 |
+| forecourt | 213 * | 406k * | 95 * | 162 * | 6.1 | 524 * | 841k * | 504 |
+| plaza | 73 | 266k | 101 * | 134 * | 6.2 | 369 | 930k * | 207 |
+| canteen | 314 * | 43k | 5 | 48 | 2.1 | 807 * | 92k | 807 |
+| campus | 57 | 132k | 23 | 49 | 2.8 | 144 | 311k | 112 |
+| print_shop | 133 | 16k | 2 | 50 | 2.1 | 234 | 27k | 225 |
+| office | 204 * | 256k | 123 * | 177 * | 7.0 * | 782 * | 970k * | 766 |
+| dorm_court | 83 | 102k | 44 | 74 | 4.5 | 217 | 375k | 210 |
+| dorms | 52 | 65k | 33 | 50 | 2.9 | 238 | 184k | 202 |
+| shotengai | 91 | 223k | 67 * | 246 * | 6.0 | 413 | 550k | 173 |
+| izakaya | 149 | 21k | 4 | 113 * | 2.2 | 247 | 34k | 236 |
+| bakery | 274 * | 46k | 7 | 50 | 2.0 | 508 * | 94k | 508 |
+| konbini | 139 | 181k | 31 | 54 | 3.0 | 306 | 274k | 249 |
+| karaoke | 36 | 13k | 2 | 70 | 2.1 | 83 | 22k | 67 |
+| karaoke_booth | 51 | 13k | 3 | 99 * | 2.2 | 97 | 22k | 87 |
+| east_lane | 68 | 178k | 74 * | 113 * | 5.3 | 293 | 692k | 167 |
+| east_coast | 68 | 86k | 64 | 211 * | 5.8 | 362 | 576k | 150 |
+| dorm_commons | 50 | 20k | 6 | 130 * | 4.8 | 151 | 38k | 99 |
+| sports | 68 | 124k | 48 | 136 * | 5.6 | 243 | 409k | 161 |
+| pool | 49 | 88k | 43 | 118 * | 4.2 | 227 | 405k | 112 |
+| gym | 60 | 32k | 7 | 118 * | 2.6 | 153 | 55k | 139 |
+| office_quarter | 53 | 96k | 38 | 109 * | 4.2 | 223 | 407k | 135 |
+| harbour | 57 | 118k | 51 | 102 * | 5.0 | 240 | 372k | 143 |
+| ferry_terminal | 219 * | 38k | 7 | 62 | 2.2 | 519 * | 84k | 519 |
+| works | 46 | 80k | 47 | 57 | 3.6 | 175 | 376k | 93 |
+
+The desktop texture MB are the phone's, except sports (159). Shotengai and the east coast are also over the desktop texture budget (#373). Outdoors the desktop holds up to 19 MB more geometry than the phone (plaza 120 MB, forecourt 112 MB), and the office (130 MB) is over the desktop geometry budget (#374). Desktop loads were 0.8 to 2.1 s, all under 4 s.
