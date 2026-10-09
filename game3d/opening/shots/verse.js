@@ -281,7 +281,7 @@ export const VERSE = [
   },
   {
     // Honsha: under the game's own platform shed (scenes/station-shed.js, built on the island), the train runs in
-    // along the platform and stops by the station sign; the camera stands on the platform looking down it.
+    // along the platform and stops under the shed; the camera stands raised at the shed's south end.
     id: 'station',
     t: [bar(18) + 0.4, beat(77.8)],
     in: { type: 'whip', d: 0.3, at: 0.5 },

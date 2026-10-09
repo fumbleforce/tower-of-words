@@ -164,42 +164,7 @@ export async function buildStage(renderer) {
   const isl = await buildIsland(uniforms, { joinX: ISLAND_X, seaY: SEA_Y });
   scene.add(isl.group, isl.ridge);
 
-  // ---------- Honsha's station sign, hung under the platform shed's roof over the platform ----------
-  {
-    const cv = document.createElement('canvas');
-    cv.width = 1024;
-    cv.height = 384;
-    const g = cv.getContext('2d');
-    g.fillStyle = '#f7f8fa';
-    g.fillRect(0, 0, 1024, 384);
-    g.fillStyle = '#1b2b4f';
-    g.fillRect(0, 300, 1024, 84);
-    g.fillStyle = '#6fd0c6';
-    g.fillRect(0, 292, 1024, 10);
-    g.fillStyle = '#1b2b4f';
-    g.textAlign = 'center';
-    g.font = '64px "OP Dela"';
-    g.fillText('ほんしゃ', 512, 92);
-    g.font = '150px "OP Dela"';
-    g.fillText('本社', 512, 250);
-    g.fillStyle = '#ffffff';
-    g.font = '700 46px "Zen Kaku Gothic New"';
-    g.fillText('HONSHA  ·  Head Office', 512, 358);
-    const tex = new THREE.CanvasTexture(cv);
-    tex.colorSpace = THREE.SRGBColorSpace;
-    tex.anisotropy = 8;
-    const A = isl.anchors;
-    // over the platform beside the beam (island x -30.8), a third of the way down the shed, facing north up it
-    const P = A.toWorld(-28.2, -2, 2.5 + 2.55);
-    const north = A.toWorld(-28.2, -3, 2.5 + 2.55).sub(P);
-    const sign = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 0.82), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false, side: THREE.DoubleSide }));
-    sign.position.copy(P);
-    sign.lookAt(P.clone().add(north));
-    const back = new THREE.Mesh(new THREE.BoxGeometry(2.26, 0.88, 0.05), new THREE.MeshStandardMaterial({ color: '#5f6f86', roughness: 0.5, metalness: 0.4 }));
-    back.position.copy(P).addScaledVector(north, 0.03);
-    back.quaternion.copy(sign.quaternion);
-    scene.add(sign, back);
-  }
+  // (Honsha's name boards come with the station itself: station.glb, scenes/station-model.js)
 
   const sets = {};
   let active = scene;

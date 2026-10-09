@@ -47,6 +47,7 @@ const PLACES = [
 const BACKDROP = /^(skyline:(far|lit-far|lit|ground|tall)|far:|shops:far)/; // lit: the evening windows
 const Q = typeof location !== 'undefined' ? new URLSearchParams(location.search) : new URLSearchParams();
 const DEBUG_STRIP = Q.has('strip');
+const NO_CUT = Q.get('cut') === '0'; // ?cut=0: every place's ground draws everywhere (to compare)
 const NO_SURF = Q.get('surf') === '0'; // ?surf=0: the look without its surface patterns (to find a shimmer)
 
 // The far model's colours, lifted into the morning, lit, and hazed like the bay
@@ -123,6 +124,57 @@ function inside(poly, x, z) {
   return c;
 }
 
+// which place a spot of ground belongs to: the place whose walked area is nearest (0 inside it; the first place in
+// PLACES when areas overlap). Each place keeps only its own ground, so no two places' lawns, roads or slabs ever lie
+// over each other (Jørgen 2026-10-09: grass and a road over the fountain's tiles)
+function owner(walks, x, z) {
+  let best = null,
+    bestD = Infinity;
+  for (const [n, poly] of Object.entries(walks)) {
+    let d = 0;
+    if (!inside(poly, x, z)) {
+      d = Infinity;
+      for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+        const [ax, az] = poly[j],
+          [bx, bz] = poly[i];
+        const ex = bx - ax,
+          ez = bz - az;
+        const t = Math.max(0, Math.min(1, ((x - ax) * ex + (z - az) * ez) / (ex * ex + ez * ez)));
+        d = Math.min(d, Math.hypot(ax + ex * t - x, az + ez * t - z));
+      }
+    }
+    if (d < bestD) [best, bestD] = [n, d];
+  }
+  return best;
+}
+
+// Each place's ground draws only where that place owns the island (owner above): the material reads the ownership
+// map (a texture, one texel per square metre of the island) at the pixel's island position and drops what belongs to
+// another place. The meshes stay as the game built them (cutting their geometry broke the street style's shading)
+function ownGround(m, place, OWN) {
+  const k = m.clone();
+  const prev = m.onBeforeCompile,
+    prevKey = m.customProgramCacheKey?.bind(m);
+  k.onBeforeCompile = function (sh, r) {
+    prev.call(this, sh, r);
+    sh.uniforms.uOwn = OWN.uOwn;
+    sh.uniforms.uIsl = OWN.uIsl;
+    sh.vertexShader = sh.vertexShader
+      .replace('#include <common>', '#include <common>\nvarying vec3 vOwnW;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvOwnW = (modelMatrix * vec4(transformed, 1.0)).xyz;');
+    sh.fragmentShader = sh.fragmentShader
+      .replace('#include <common>', '#include <common>\nvarying vec3 vOwnW; uniform sampler2D uOwn; uniform mat4 uIsl;')
+      .replace(
+        '#include <clipping_planes_fragment>',
+        `#include <clipping_planes_fragment>
+        vec2 ownUv = ((uIsl * vec4(vOwnW, 1.0)).xz - vec2(${OWN.x0.toFixed(1)}, ${OWN.z0.toFixed(1)})) / ${OWN.n.toFixed(1)};
+        if (all(greaterThanEqual(ownUv, vec2(0.0))) && all(lessThan(ownUv, vec2(1.0))) && abs(texture2D(uOwn, ownUv).r * 255.0 - ${place + 1}.0) > 0.5) discard;`,
+      );
+  };
+  k.customProgramCacheKey = () => (prevKey ? prevKey() : '') + '-own' + place;
+  return k;
+}
+
 export async function buildIsland(uniforms, { joinX, seaY }) {
   // the game's Blender-built trees, hedges and benches, which the place builders use when they're loaded
   await loadPlantModels({ lighter: false });
@@ -136,7 +188,17 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
   const ringPts = [];
   const seenMeshes = new Map(); // name|count|instances -> boxes seen
   const walks = Object.fromEntries(PLACES.map(([n]) => [n, walkOf(n)]));
+  // who owns each square metre of the island (owner above), worked out once: the ground cut asks it a lot
+  const names = Object.keys(walks);
+  const G = { x0: -200, z0: -200, n: 400 };
+  const grid = new Int8Array(G.n * G.n);
+  for (let j = 0; j < G.n; j++) for (let i = 0; i < G.n; i++) grid[j * G.n + i] = names.indexOf(owner(walks, G.x0 + i + 0.5, G.z0 + j + 0.5));
+  const ownTex = new THREE.DataTexture(Uint8Array.from(grid, (v) => v + 1), G.n, G.n, THREE.RedFormat, THREE.UnsignedByteType);
+  ownTex.magFilter = ownTex.minFilter = THREE.NearestFilter;
+  ownTex.needsUpdate = true;
+  const OWN = { uOwn: { value: ownTex }, uIsl: { value: new THREE.Matrix4() }, ...G }; // uIsl: world to island, set below
   for (const [name, build] of PLACES) {
+    if (DEBUG_STRIP) console.info('opening strip place', name, Math.round(performance.now()));
     let w;
     try {
       w = build();
@@ -187,6 +249,12 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
       } else if (o.isMesh) {
         box.setFromObject(o).getCenter(ctr);
         if (foreign(ctr.x, ctr.z)) drop.push(o);
+        // ground (low meshes: lawns, roads with their kerbs, slabs, tiles) draws only where this place owns the
+        // island: one mesh can cover its own place and the neighbour's
+        else if (box.max.y < 0.3 && !NO_CUT) {
+          const pi = names.indexOf(name);
+          o.material = Array.isArray(o.material) ? o.material.map((m) => ownGround(m, pi, OWN)) : ownGround(o.material, pi, OWN);
+        }
       }
     });
     if (DEBUG_STRIP) console.info('opening strip', name, 'stand-ins in other places:', hidden, 'instances');
@@ -229,26 +297,6 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
     holder.position.y = areas.length * 0.0005;
     holder.position.z += areas.length * 0.0005;
     holder.updateMatrixWorld(true);
-    // a place's ground reaching beyond its own walked area (its lawn or slab under the neighbours) goes down 4 cm
-    // and 5 mm more per place, so in a neighbour's area the neighbour's own ground, paving and tiles always lie on
-    // top, and two places' sunk lawns never lie within 5 mm of each other
-    const own = walks[name];
-    const corner = new THREE.Vector3();
-    root.traverse((o) => {
-      if (!o.isMesh || o.isInstancedMesh) return;
-      const bb = new THREE.Box3().setFromObject(o);
-      if (bb.max.y - bb.min.y > 0.05) return;
-      const reaches = [
-        [bb.min.x, bb.min.z],
-        [bb.max.x, bb.min.z],
-        [bb.max.x, bb.max.z],
-        [bb.min.x, bb.max.z],
-      ].some(([x, z]) => !inside(own, x, z)); // boxes are in the island frame here (isl joins the world group later)
-      if (!reaches) return;
-      const lift = o.parent.getWorldScale(corner).y;
-      o.position.y -= (0.04 + areas.length * 0.005) / lift;
-      o.updateMatrixWorld(true);
-    });
     if (DEBUG_STRIP && repeats.length) console.info('opening repeats', name, repeats.length, repeats.slice(0, 12).map((o) => o.name || '(unnamed)').join(' | '));
     // where the near ring stands, in the island frame: those buildings come out of the far model below
     // (every place's own buildings count, not only its near ring: some stand outside the place's area, where the
@@ -431,6 +479,7 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
   group.updateMatrix();
   group.add(isl);
   group.updateMatrixWorld(true);
+  OWN.uIsl.value.copy(isl.matrixWorld).invert();
   const toWorld = (x, z, y = 0) => new THREE.Vector3(x, y, z).applyMatrix4(group.matrix);
 
   // far hills on the horizon past the island, soft in the haze
