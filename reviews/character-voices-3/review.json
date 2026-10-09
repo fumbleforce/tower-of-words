@@ -1,0 +1,56 @@
+{
+ "title": "Character voices, round 3: Aoi and Emi",
+ "date": "2026-10-09",
+ "by": "Claude, voice-sheet agent",
+ "status": "open",
+ "context": [
+  "These are voice sheets for Aoi and Emi, written the same way as the four you approved in character-voices-2 for Mio, Kenji, Kuro and Rei. Each card has the sheet (how she talks, what she wants, how she treats Eric at first and later, example lines), a short sample scene on day 3, and the existing game lines that don't fit her, with rewrites.",
+  "Nothing here is in the game yet.",
+  "After your answer, each sheet becomes the reference for every future line of that character, and the lines to rewrite get applied to the game and re-voiced."
+ ],
+ "ask": "For each character, pick the card to approve the sheet as it is, pick it and write a comment to approve it with your changes, or reject it to have it redone. Answer the numbered questions in the card's comment box.",
+ "multi": true,
+ "options": [
+  {
+   "id": "aoi",
+   "label": "aoi",
+   "image": "game3d/assets/portraits/aoi-neutral.webp",
+   "who": "24, new hire in Facilities on room bookings, Japanese only, tennis beginner. The woman on the train who didn't want the basement.",
+   "questions": [
+    "Most of her current lines are polite and a little timid. The sheet keeps her polite with Eric at first, because he is 13 years older and a stranger, and puts her cheek in what she does: the wink, keeping the racket, jokes about B2 being in the basement. She switches to casual Japanese with him once they have played tennis together. Is that cheeky enough, or should she be bolder from the first meeting?",
+    "She has no English (cast.md), and the sheet keeps it that way apart from tennis loanwords like ナイス and サービス. Should she try a few English words on Eric for fun? Default: no, so she doesn't sound like Kenji."
+   ],
+   "note": "Questions: 1) Most of her current lines are polite and a little timid. The sheet keeps her polite with Eric at first, because he is 13 years older and a stranger, and puts her cheek in what she does: the wink, keeping the racket, jokes about B2 being in the basement. She switches to casual Japanese with him once they have played tennis together. Is that cheeky enough, or should she be bolder from the first meeting? 2) She has no English (cast.md), and the sheet keeps it that way apart from tennis loanwords like ナイス and サービス. Should she try a few English words on Eric for fun? Default: no, so she doesn't sound like Kenji."
+  },
+  {
+   "id": "emi",
+   "label": "emi",
+   "image": "game3d/assets/portraits/emi-neutral.webp",
+   "who": "32, B2's team lead, native British English. She argued Mio's request for an engineer up the chain and promised head office ten years of uptime \"with the right contractor\".",
+   "questions": [
+    "The sheet makes her Japanese fluent and correct, polite at work, and gives her a British accent only in the voice clips. Is that right, or should her Japanese sound more effortful?",
+    "When someone speaks Japanese to Eric, she translates the first time, with a bit of comment, and leaves the next line for him to try. Is that her, or should she just translate whenever she is there?"
+   ],
+   "note": "Questions: 1) The sheet makes her Japanese fluent and correct, polite at work, and gives her a British accent only in the voice clips. Is that right, or should her Japanese sound more effortful? 2) When someone speaks Japanese to Eric, she translates the first time, with a bit of comment, and leaves the next line for him to try. Is that her, or should she just translate whenever she is there?"
+  }
+ ],
+ "links": [
+  {
+   "label": "Read both voice sheets, sample scenes and lines to rewrite",
+   "href": "reviews/character-voices-3/index.html"
+  },
+  {
+   "label": "aoi",
+   "href": "reviews/character-voices-3/index.html#aoi"
+  },
+  {
+   "label": "emi",
+   "href": "reviews/character-voices-3/index.html#emi"
+  },
+  {
+   "label": "Round 2 (Mio, Kenji, Kuro, Rei) and your answers",
+   "href": "#review/character-voices-2"
+  }
+ ],
+ "question": "These are voice sheets for Aoi and Emi, written the same way as the four you approved in character-voices-2 for Mio, Kenji, Kuro and Rei. Each card has the sheet (how she talks, what she wants, how she treats Eric at first and later, example lines), a short sample scene on day 3, and the existing game lines that don't fit her, with rewrites. Nothing here is in the game yet. After your answer, each sheet becomes the reference for every future line of that character, and the lines to rewrite get applied to the game and re-voiced. For each character, pick the card to approve the sheet as it is, pick it and write a comment to approve it with your changes, or reject it to have it redone. Answer the numbered questions in the card's comment box."
+}
