@@ -97,16 +97,44 @@ if (fs.existsSync(glb)) {
     });
 }
 
-test('train door sets: frame posts, lamps and thresholds stay out of the doorways, the leaves fill them', async () => {
+test('train door sets: pockets, header, lamps and thresholds stay out of the doorways, the leaves fill them', async () => {
   const { buildDoorSets } = await import('../../js/train/doors.js');
   const doors = buildDoorSets();
   assert.deepEqual(crossings(doors.group), []);
   assert.equal(doors.leaves.length, 2 * DOORWAYS.length);
   for (const d of DOORWAYS) {
-    const leaves = doors.leaves.filter((l) => Math.abs(l.x0 - d.x) < DOORWAYS[0].x1 - DOORWAYS[0].x0);
+    const leaves = doors.leaves.filter((l) => l.d === d);
     const bb = new THREE.Box3();
     for (const l of leaves) bb.expandByObject(l.g);
     assert.ok(bb.min.x <= d.x0 + 0.01 && bb.max.x >= d.x1 - 0.01, `leaves span door at x ${d.x}`);
     assert.ok(bb.min.y <= d.y0 + 0.01 && bb.max.y >= d.y1 - 0.01, `leaves fill door at x ${d.x} top to bottom`);
+  }
+});
+
+// Jørgen, 2026-10-09: the doors "slide into the windows and outside the cart when opening ... they should have the
+// space to slide". At every point of the open/close cycle each leaf stays inside the wall's thickness, on the straight
+// wall short of the rounded corners, inside its own opening and pockets, and clear of every near-side window.
+test('train door leaves slide inside the wall into their pockets, never across a window or out of the car', async () => {
+  const { buildDoorSets, slideLeaves, pocketEnd } = await import('../../js/train/doors.js');
+  const { WIN, LX, RI } = await import('../../js/train/car.js');
+  const doors = buildDoorSets();
+  const box = (g) => (doors.group.updateMatrixWorld(true), new THREE.Box3().setFromObject(g));
+  for (let i = 0; i <= 40; i++) {
+    const k = i / 40;
+    slideLeaves(doors.leaves, k);
+    for (const { g, d, s } of doors.leaves) {
+      const bb = box(g),
+        at = `door at x ${d.x}, leaf ${s}, k ${k}`;
+      assert.ok(bb.min.z >= LZ - 0.013 && bb.max.z <= LZ + T, `${at}: inside the wall`);
+      assert.ok(bb.min.x >= -(LX - RI) && bb.max.x <= LX - RI, `${at}: on the straight wall`);
+      assert.ok(bb.min.x >= pocketEnd(d, -1) - 1e-6 && bb.max.x <= pocketEnd(d, 1) + 1e-6, `${at}: in its pockets`);
+      for (const [x, w] of WIN.near)
+        assert.ok(bb.max.x < x - w / 2 - 0.05 || bb.min.x > x + w / 2 + 0.05, `${at}: clear of the window at x ${x}`);
+    }
+  }
+  slideLeaves(doors.leaves, 1);
+  for (const { g, d } of doors.leaves) {
+    const bb = box(g);
+    assert.ok(bb.max.x <= d.x0 + 0.02 || bb.min.x >= d.x1 - 0.02, `open, the leaves leave the door at x ${d.x} clear`);
   }
 });

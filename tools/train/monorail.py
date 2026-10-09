@@ -30,8 +30,10 @@ OUT = os.path.abspath(argv[0] if argv else 'game3d/assets/train/monorail.glb')
 
 # ---- car.js / world.js numbers ----
 LX, LZ, T, RI, HF = 4.0, 1.2, 0.1, 0.34, 1.45
-WIN_XS, WIN_W, WIN_Y0, WIN_Y1, WIN_R = [-2.28, -1.0, 1.0, 2.28], 1.0, 0.44, 1.22, 0.09
-DOOR_X, DOOR_W, DOOR_SILL, DOOR_TOP, DOOR_GAP = 3.25, 0.68, 0.035, 1.22, 0.025
+# windows (x, width) by the side's sign of z (#361: large, flush-glazed, slim frames; car.js WIN)
+WINS = {1: [(-0.86, 1.32), (0.86, 1.32)], -1: [(-2.65, 0.96), (-0.86, 1.32), (0.86, 1.32), (2.65, 0.96)]}
+WIN_Y0, WIN_Y1, WIN_R = 0.42, 1.24, 0.05
+DOOR_X, DOOR_W, DOOR_SILL, DOOR_TOP, DOOR_GAP = 2.65, 0.9, 0.035, 1.22, 0.025
 DOORS = [(x - DOOR_W / 2, x + DOOR_W / 2) for x in (-DOOR_X, DOOR_X)]
 BEAM_TOP, SEA_Y = -0.62, -17.0
 HX, HZ, RP = LX + T, LZ + T, RI + T  # the skin's outer half length, half width and plan corner radius
@@ -50,7 +52,7 @@ def hexc(h):
 C = {
     'steel': hexc('#b3bac3'), 'roof': hexc('#a2a9b2'), 'seam': hexc('#565e69'), 'navy': hexc('#2b3b58'),
     'navyDark': hexc('#212c42'), 'gutter': hexc('#59616c'), 'frame': hexc('#1d2129'), 'inner': hexc('#bdbab5'),
-    'surround': hexc('#262f42'), 'unit': hexc('#b9c0c8'), 'louvre': hexc('#363c45'), 'slat': hexc('#8e96a1'),
+    'unit': hexc('#b9c0c8'), 'louvre': hexc('#363c45'), 'slat': hexc('#8e96a1'),
     'rub': hexc('#5d6878'), 'under': hexc('#1b1f26'), 'bel': hexc('#30353d'), 'belEdge': hexc('#4a505a'),
     'concrete': hexc('#9a9d9f'), 'concreteTop': hexc('#a7a9aa'), 'rust': hexc('#7b5640'), 'joint': hexc('#3a3e44'),
     'plate': hexc('#5f656d'), 'pad': hexc('#2c2f34'), 'algae': hexc('#4f5a52'), 'footc': hexc('#83888b'),
@@ -244,14 +246,15 @@ def srgb_to_lin(c):
 
 
 # ---- the car's skin ----
-SEAMS_X = [-3.78, -1.64, 0.0, 1.64, 3.78]  # vertical panel lines between windows and by the ends
+# vertical panel lines: the middle, and either end of each door module (the doors' pockets, game3d/js/train/doors.js),
+# which on the far side fall between the windows
+SEAMS_X = [-3.6, -1.7, 0.0, 1.7, 3.6]
 ROOF_SEAMS = [-3.2, -1.1, 1.1, 3.2]  # roof panel joints, across the roof clear of its units
 SEAM_Y = 1.31  # horizontal panel line over the windows
 STRIPE = (0.355, 0.4)  # thin navy line under the windows
 GUTTER = (1.395, 1.415)  # the rain gutter where the roof turns down
 DRIPS = sorted(random.uniform(-3.9, 3.9) for _ in range(9))
 DRIP_LEN = {x: random.uniform(0.18, 0.75) for x in DRIPS}
-WIN_STREAKS = [x + s * (WIN_W / 2 - 0.08) for x in WIN_XS for s in (-1, 1)]
 
 
 def plan_sd(x, z):
@@ -267,12 +270,6 @@ def plan_grad(x, z):
     gz = plan_sd(x, z + e) - plan_sd(x, z - e)
     l = math.hypot(gx, gz) or 1
     return gx / l, gz / l
-
-
-def door_band(x, y, z):
-    if z < 0:
-        return False
-    return any(x0 - 0.065 < x < x1 + 0.065 for x0, x1 in DOORS) and y < DOOR_TOP + 0.065
 
 
 def metal(c):
@@ -311,8 +308,6 @@ def skin_colour(c, n, p):
         return metal(C['gutter'])
     if y > GUTTER[1]:  # the roof's rounded shoulder
         return metal(mul(C['roof'], 1.02))
-    if door_band(c.x, y, c.z):
-        return paint_(C['surround'])
     if STRIPE[0] < y < STRIPE[1]:
         return paint_(C['navy'])
     seam = abs(y - SEAM_Y) < 0.006 or (abs(c.z) > HZ - 0.05 and any(abs(c.x - s) < 0.006 for s in SEAMS_X))
@@ -326,8 +321,8 @@ def build_skin():
     solidify(body, SKIN)
     cutters = []
     for side in (-1, 1):
-        for x in WIN_XS:
-            cutters.append(prism('w', rrect(x, (WIN_Y0 + WIN_Y1) / 2, WIN_W, WIN_Y1 - WIN_Y0, WIN_R),
+        for x, w in WINS[side]:
+            cutters.append(prism('w', rrect(x, (WIN_Y0 + WIN_Y1) / 2, w, WIN_Y1 - WIN_Y0, WIN_R),
                                  'z', side * (HZ - 0.3), side * (HZ + 0.3)))
     for x0, x1 in DOORS:
         x0, x1 = x0 - DOOR_GAP, x1 + DOOR_GAP
@@ -337,16 +332,14 @@ def build_skin():
         cutters.append(prism('g', rrect(0, (0.035 + 1.24) / 2, 0.8, 1.24 - 0.035, 0.07), 'x',
                              side * (HX - 0.3), side * (HX + 0.3)))
     boolean_cut(body, cutters)
-    # cut lines for the colours' crisp bands (stripe, seams, gutter, door surrounds), on the outer faces only; the
+    # cut lines for the colours' crisp bands (stripe, seams, gutter), on the outer faces only; the
     # weathering is in the wear texture, so no grid for it
     xs = set()
     for s in SEAMS_X:
         xs |= {s - 0.006, s + 0.006}
     for s in ROOF_SEAMS:
         xs |= {s - 0.007, s + 0.007}
-    for x0, x1 in DOORS:
-        xs |= {x0 - 0.065, x1 + 0.065}
-    ys = {STRIPE[0], STRIPE[1], GUTTER[0], GUTTER[1], SEAM_Y - 0.006, SEAM_Y + 0.006, DOOR_TOP + 0.065}
+    ys = {STRIPE[0], STRIPE[1], GUTTER[0], GUTTER[1], SEAM_Y - 0.006, SEAM_Y + 0.006}
 
     def outer(f):
         c = f.calc_center_median()
@@ -366,13 +359,14 @@ def build_skin():
     wear.unwrap(body, lambda c, n: skin_part(c, n))
     parts = [body]
 
-    # window frames: a thick dark gasket, a little proud of the skin, reaching into the opening
+    # window frames: flush glazing (#361), a slim dark gasket round the glass, level with the skin (the glass, car.js
+    # buildGlass, sits just inside it)
     for side in (-1, 1):
-        for x in WIN_XS:
-            cy, w, h = (WIN_Y0 + WIN_Y1) / 2, WIN_W, WIN_Y1 - WIN_Y0
-            o = rrect(x, cy, w + 0.07, h + 0.07, WIN_R + 0.035, 3)
-            i = rrect(x, cy, w - 0.07, h - 0.07, WIN_R - 0.03, 3)
-            d0, d1 = (HZ - 0.05, HZ + 0.009) if side > 0 else (-HZ - 0.009, -HZ + 0.05)
+        for x, w in WINS[side]:
+            cy, h = (WIN_Y0 + WIN_Y1) / 2, WIN_Y1 - WIN_Y0
+            o = rrect(x, cy, w + 0.016, h + 0.016, WIN_R + 0.008, 3)
+            i = rrect(x, cy, w - 0.036, h - 0.036, WIN_R - 0.018, 3)
+            d0, d1 = (HZ - 0.03, HZ + 0.002) if side > 0 else (-HZ - 0.002, -HZ + 0.03)
             fr = prism('frame', o, 'z', d0, d1, inner=i)
             paint(fr, lambda c, n, p: paint_(C['frame']))
             wear.patch(fr, 'matte')

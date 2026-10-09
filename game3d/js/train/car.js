@@ -6,29 +6,46 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { hull, icoPoints } from './hull.js';
 import { V } from './kit.js';
 import { strapMeshes } from './straps.js';
-import { monorailMesh, monorailParts } from './models.js';
+import { monorailMesh, monorailParts, skyEnv } from './models.js';
+import { doorLeaf } from './door-leaf.js';
 
 export const LX = 4.0; // inner half length
 export const LZ = 1.2; // inner half width
 export const T = 0.1; // wall thickness
-const RI = 0.34; // inner corner radius (plan)
+export const RI = 0.34; // inner corner radius (plan)
 export const HF = 1.45; // full wall height
 const RACK_Y = 1.28,
   RACK_D = 0.3; // luggage shelf top (just above the window frames) and depth
 export const SEAT_Y = 0.22; // seat cushion top
 export const BENCH_D = 0.4;
 export const RAIL_Y = 1.42;
-// game3d: windows a little narrower and the outer ones moved in, so the doorway and the windows never share wall
-// (overlapping holes broke the wall's triangulation on phones, where this wall is full height: no windows)
-export const WIN = { xs: [-2.28, -1.0, 1.0, 2.28], w: 1.0 };
+// Windows [x, width] (#361: large, flush-glazed, slim frames), y0..y1 high with corner radius r. The near side has two,
+// between the door pockets, which they never touch (train/doors.js); the far side, with no doors, two more opposite them.
+export const WIN = {
+  y0: 0.42,
+  y1: 1.24,
+  r: 0.05,
+  near: [
+    [-0.86, 1.32],
+    [0.86, 1.32],
+  ],
+  far: [
+    [-2.65, 0.96],
+    [-0.86, 1.32],
+    [0.86, 1.32],
+    [2.65, 0.96],
+  ],
+};
+const wins = (side) => (side > 0 ? WIN.near : WIN.far);
 export const BENCHES = [
   [-3.05, -0.42],
   [0.42, 3.05],
 ];
-// game3d: the doors moved in from 3.52 so the doorway sits wholly on the straight wall, clear of the rounded
-// corner piece (which the doorway used to cut into); the near benches end short of them
-export const DOOR_X = 3.25,
-  DOOR_W = 0.68,
+// #361: biparting doors 0.9 wide, each leaf sliding into a pocket in the wall either side, so the door sits far
+// enough in for the outer pocket to end on the straight wall, short of the rounded corner; the near benches end
+// short of the inner pocket
+export const DOOR_X = 2.65,
+  DOOR_W = 0.9,
   DOOR_SILL = 0.035,
   DOOR_TOP = 1.22;
 // The platform-side doorways' clear openings: the one definition the walls, stripes, frames and leaves are all
@@ -250,8 +267,6 @@ function buildShell(mode, { nearLeaves = mode === 'closed', skin = false } = {})
   });
   const straightX = 2 * (LX - RI),
     straightZ = 2 * (LZ - RI);
-  const winTop = (h) => Math.min(h - 0.19, 1.22);
-  const winBot = (h) => (h < HF ? 0.34 : 0.44);
 
   // long walls
   for (const side of [-1, 1]) {
@@ -260,8 +275,7 @@ function buildShell(mode, { nearLeaves = mode === 'closed', skin = false } = {})
     const hA = Math.min(h, H.xn),
       hB = Math.min(h, H.xp);
     const holes = [];
-    const wt = winTop(h);
-    if (h > 0.8) for (const x of WIN.xs) holes.push([x - WIN.w / 2, winBot(h), x + WIN.w / 2, wt, 0.09]);
+    if (h > 0.8) for (const [x, w] of wins(side)) holes.push([x - w / 2, WIN.y0, x + w / 2, WIN.y1, WIN.r]);
     const doors = side > 0 ? DOORWAYS.map((d) => [d.x0 - DOOR_GAP, d.y0 - 0.02, d.x1 + DOOR_GAP, d.y1 + DOOR_GAP]) : [];
     const shape = wallShape(straightX, h, hA, hB, holes, 0.7, doors);
     for (const [m, d0, d1] of [
@@ -281,17 +295,13 @@ function buildShell(mode, { nearLeaves = mode === 'closed', skin = false } = {})
     }
     // window frames on the inside of the far wall and the outside of the near wall
     if (h > 0.8 && !(skin && side > 0))
-      for (const x of WIN.xs) {
+      for (const [x, w] of wins(side)) {
         const fr = new THREE.Mesh(
-          new THREE.ExtrudeGeometry(
-            ringShape(x - WIN.w / 2, winBot(h), x + WIN.w / 2, wt, 0.09, 0.045),
-            EXT(0.025, 0.012),
-          ),
+          new THREE.ExtrudeGeometry(ringShape(x - w / 2, WIN.y0, x + w / 2, WIN.y1, WIN.r, 0.022), EXT(0.016, 0.006)),
           frame,
         );
         fr.position.z = side < 0 ? -LZ + 0.0 : LZ + T;
         g.add(shadowOn(fr, false, true));
-        // lamps between windows high on the wall
       }
     if (h >= HF && !(mode === 'land' && side < 0)) {
       for (const x of [-3.32, -1.78, 0, 1.78, 3.32]) {
@@ -302,7 +312,7 @@ function buildShell(mode, { nearLeaves = mode === 'closed', skin = false } = {})
     } else {
       // small warm lamps on the outside of the cut wall, like marker lights
       for (const x of [-3.32, -1.78, 0, 1.78, 3.32]) {
-        if (Math.abs(Math.abs(x) - DOOR_X) < 0.5) continue;
+        if (Math.abs(Math.abs(x) - DOOR_X) < DOOR_W + 0.1) continue; // the door modules (train/doors.js)
         const lamp = new THREE.Mesh(new RoundedBoxGeometry(0.22, 0.09, 0.03, 2, 0.012), lampM);
         lamp.position.set(x, h - 0.19, side * (LZ + T + 0.012));
         g.add(lamp);
@@ -395,44 +405,14 @@ function buildShell(mode, { nearLeaves = mode === 'closed', skin = false } = {})
       }
     }
 
-  // near-side door leaves (sliding doors), with tall windows
+  // near-side door leaves, shut in the wall (the closed cars; the play car's slide, train/doors.js)
   if (nearLeaves)
-    for (const dx of [-DOOR_X, DOOR_X]) {
-      const h = DOOR_TOP - DOOR_SILL;
+    for (const dx of [-DOOR_X, DOOR_X])
       for (const k of [-1, 1]) {
-        const s = new THREE.Shape();
-        rrectPath(s, 0, 0, DOOR_W / 2 - 0.01, h, 0.04);
-        if (h > 0.7) s.holes.push(rrectPath(new THREE.Path(), 0.08, 0.5, DOOR_W / 2 - 0.09, h - 0.1, 0.05));
-        // the platform doors' colours (train/doors.js)
-        const m = new THREE.Mesh(
-          new THREE.ExtrudeGeometry(s, EXT(0.035, 0.01)),
-          skin ? mat('doorOut', '#56698a', { roughness: 0.6 }) : mat('door', COL.door),
-        );
-        m.position.set(dx + (k < 0 ? -DOOR_W / 2 + 0.005 : 0.005), DOOR_SILL, LZ + 0.03);
-        m.userData.doorLeaf = true;
-        g.add(shadowOn(m, false, true));
-        if (skin) {
-          const edge = new THREE.Mesh(
-            new RoundedBoxGeometry(0.03, h - 0.04, 0.02, 1, 0.008),
-            mat('doorEdge', '#e0b83a'),
-          );
-          edge.position.set(dx + k * 0.02, DOOR_SILL + h / 2, LZ + 0.09);
-          edge.userData.doorLeaf = true;
-          g.add(edge);
-        }
+        const leaf = doorLeaf(DOOR_W / 2 + 0.02, DOOR_TOP - DOOR_SILL - 0.003, -k);
+        leaf.position.set(dx + (k * (DOOR_W / 2 + 0.02)) / 2, DOOR_SILL + 0.002, LZ + T - 0.035);
+        g.add(leaf);
       }
-      if (skin) {
-        const lamp = new THREE.Mesh(
-          new RoundedBoxGeometry(0.26, 0.05, 0.03, 1, 0.01),
-          mat('doorLamp', '#ffcf8a', {
-            emissive: new THREE.Color('#ffb24a'),
-            emissiveIntensity: 1.8,
-          }),
-        );
-        lamp.position.set(dx, DOOR_TOP + 0.075, LZ + T + 0.012);
-        g.add(lamp);
-      }
-    }
   return g;
 }
 
@@ -445,10 +425,12 @@ function buildShadowProxy() {
     colorWrite: false,
     depthWrite: false,
   });
-  const holesLong = WIN.xs.map((x) => [x - WIN.w / 2, 0.44, x + WIN.w / 2, 1.22, 0.09]);
   for (const side of [-1, 1]) {
-    const holes =
-      side > 0 ? [...holesLong, ...[-DOOR_X, DOOR_X].map((dx) => [dx - 0.16, 0.55, dx + 0.16, 1.1, 0.05])] : holesLong;
+    // the windows, and on the door side the leaves' windows
+    const holes = wins(side).map(([x, w]) => [x - w / 2, WIN.y0, x + w / 2, WIN.y1, WIN.r]);
+    if (side > 0)
+      for (const dx of [-DOOR_X, DOOR_X])
+        for (const k of [-1, 1]) holes.push([dx + k * 0.24 - 0.15, 0.55, dx + k * 0.24 + 0.15, 1.08, 0.03]);
     const s = wallShape(2 * (LX + T), HF + 0.05, HF + 0.05, HF + 0.05, holes);
     const mesh = new THREE.Mesh(new THREE.ExtrudeGeometry(s, { depth: T, bevelEnabled: false }), m);
     mesh.position.z = side < 0 ? -LZ - T : LZ;
@@ -730,7 +712,8 @@ function buildGlass({ lit = false } = {}) {
   g.name = 'glass';
   const gm = new THREE.MeshStandardMaterial({
     color: lit ? '#7a6f62' : '#5f7892',
-    roughness: 0.15,
+    roughness: 0.12,
+    envMap: lit ? null : skyEnv(),
     metalness: lit ? 0.1 : 0.35,
     transparent: true,
     opacity: lit ? 0.9 : 0.6,
@@ -739,9 +722,10 @@ function buildGlass({ lit = false } = {}) {
   });
   gm.userData.base = 0.6;
   for (const sz of [-1, 1])
-    for (const x of WIN.xs) {
-      const pane = new THREE.Mesh(new THREE.PlaneGeometry(WIN.w - 0.02, 1.22 - 0.44 - 0.02), gm);
-      pane.position.set(x, (1.22 + 0.44) / 2, sz * (LZ + T * 0.55));
+    for (const [x, w] of wins(sz)) {
+      // flush glazing: the pane sits just inside the skin's outer face
+      const pane = new THREE.Mesh(new THREE.PlaneGeometry(w - 0.02, WIN.y1 - WIN.y0 - 0.02), gm);
+      pane.position.set(x, (WIN.y1 + WIN.y0) / 2, sz * (LZ + T - 0.008));
       if (sz < 0) pane.rotation.y = Math.PI;
       pane.renderOrder = 2;
       g.add(pane);
@@ -884,7 +868,7 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
     // grab poles either side of the doors
     for (const dx of [-DOOR_X, DOOR_X])
       for (const k of [-1, 1])
-        benchHolder.add(pole([dx + k * 0.5, 0, LZ - 0.12], [dx + k * 0.5, RAIL_Y, LZ - 0.12], 0.02, metal));
+        benchHolder.add(pole(...[0, RAIL_Y].map((y) => [dx + k * (DOOR_W / 2 + 0.08), y, LZ - 0.12]), 0.02, metal));
     // bags up on the far rack
     if (md === 'land') {
       const bz = -(LZ - RACK_D / 2 - 0.01);
