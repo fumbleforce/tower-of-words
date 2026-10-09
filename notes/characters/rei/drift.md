@@ -1,6 +1,6 @@
 # Rei drift list
 
-These are the Rei lines in game3d/story/ that break [voice.md](voice.md), checked on 2026-10-09 after Jørgen's notes on character-voices-1: Rei bosses Eric openly, treats him as a subordinate she plays with, is ruthless at work, and softens only slowly. Eric is 37 with a lot of experience, and she bosses him anyway. Nothing in game3d/ has been changed.
+These are the Rei lines in game3d/story/ that break [voice.md](voice.md), checked on 2026-10-09 after Jørgen's notes on character-voices-1: Rei bosses Eric openly, treats him as a subordinate she plays with, is ruthless at work, and softens only slowly. She manages a team in Sales and ranks above Eric, without being his supervisor. She never shows or admits her weaknesses. Eric is 37 with a lot of experience, and she bosses him anyway. Nothing in game3d/ has been changed.
 
 B means she offers or asks where she would tell him ("You can...", "Would you like..."). S means she apologises or goes sheepish. C means the line breaks the setting canon. F means the line is flat and has no edge.
 
@@ -47,7 +47,7 @@ Lines not listed are fine as they are, such as her serve demonstration's first l
 
 | Id | Line | Why | Current | Rewrite |
 |---|---|---|---|---|
-| `reiIntroduction` (ongoing/east_coast.js) | 7 | F | Hello. I’m Rei. I’ve seen you around the office. | "You’re the new one from B2. I’m Rei, from Sales. I’ve seen you wandering around the office." |
+| `reiIntroduction` (ongoing/east_coast.js) | 7 | F | Hello. I’m Rei. I’ve seen you around the office. | "You’re the new one from B2. I’m Rei. I run one of the teams in Sales. I’ve seen you wandering around the office." |
 | `ongoing_rei_practice` (ongoing/east_coast.js) | 55 | B | Come again on Sunday. We can change partners this time. | "Come on Sunday. You’re playing with me this time, so don’t be late." |
 | `ongoing_rei_practice` (ongoing/east_coast.js) | 56 | B | Sunday evening, by the gym. We have spare rackets if you want to try. | "Sunday evening, by the gym, at six. There’s a spare racket, so you’ve got no excuse." |
 | `ongoing_rei_practice` (ongoing/east_coast.js) | 58 | F | When I can find someone. Walking is easier to arrange. | "When I can find someone good enough. Most of Sales can’t play, so I walk instead." |
@@ -62,9 +62,9 @@ Lines not listed are fine as they are, such as her serve demonstration's first l
 | `chat_rei_game_question` | 50 | S | Yes. I’ve lost the second game too. Then I go home. | "Yes. If I lose that one as well, I tell my partner why it was their fault, and then I go home." |
 | `chat_rei_more` | 59 | F | You might have to find somebody else. I do have to go home eventually. | "Then you’ll be asking someone else. Once I’ve lost twice, I’m going home to read." |
 | `chat_rei_one` | 64 | F | All right. I’ll remember that. | "Then don’t partner me. I’ll remember you said that." |
-| `chat_rei_calls` | 83 | C | Sometimes a customer calls just as I’m leaving. If I answer, I miss my train. | "They call just as I’m leaving the office. I always answer, because if I don’t, someone else in Sales will, and then he’s their customer." Nobody commutes on the island. |
-| `chat_rei_answer` | 92 | F | Usually. Some of them only call when something has actually gone wrong. | "Always. I’ve never let one go to somebody else, and I’m not starting now." |
-| `chat_rei_ring` | 97 | C, S | I’ve tried that. Then I spend the train ride wondering what happened. | "I tried that once. I spent the whole evening wondering who’d picked it up instead." |
+| `chat_rei_calls` | 83 | C | Sometimes a customer calls just as I’m leaving. If I answer, I miss my train. | "They call just as I’m leaving the office, and I always answer. My team can’t handle them yet." Nobody commutes on the island. |
+| `chat_rei_answer` | 92 | F | Usually. Some of them only call when something has actually gone wrong. | "Always. If I don’t, they ring someone on my team, and then I have to fix it in the morning." |
+| `chat_rei_ring` | 97 | C, S | I’ve tried that. Then I spend the train ride wondering what happened. | "I tried that once. The next morning I had to undo whatever my team had promised him." |
 | `chat_rei_calls_again` | 101 | F | I try to call them before I leave now. It doesn’t always work. | "I call them all before I leave now, so they’ve got no reason to call me." |
 
 ## Bond milestones (milestones/rei.js and aoi.js)

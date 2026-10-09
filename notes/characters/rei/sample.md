@@ -20,7 +20,7 @@ If this replaced the current day-3 lines, she would give her name here, so `d4_r
   (Yes, that one. Throw it here.)
 `[rei beckons. Eric throws it. It lands short and rolls the rest of the way to her.]`
 
-**rei:** You throw like an IT man. You're the new one from B2, aren't you? Half of Sales was talking about you on Thursday.
+**rei:** You throw like an IT man. You're the new one from B2, aren't you? My team was talking about you on Thursday.
 
 **rei:** Go and stand over there, at the T, and tell me if these go in. I just want in or out from you.
 
@@ -43,7 +43,7 @@ If this replaced the current day-3 lines, she would give her name here, so `d4_r
 
 **rei:** It was on the line. You were watching me instead of the ball. I saw your head move.
 
-**rei:** I changed my toss this week, and it's going to take a few serves to get the timing. Watch the ball this time, not me.
+**rei:** I've changed my toss, and it's a better toss. Watch the ball this time, not me.
 
 `[serve: long]`
 > She lands badly on her right foot and shifts off it.
@@ -57,7 +57,7 @@ If this replaced the current day-3 lines, she would give her name here, so `d4_r
 
 **eric:** Out. That's two long in a row.
 
-**rei:** Then I'm rushing it. The toss is fine. I'm not changing it back the day before a match, so stay where you are, I've still got half a basket.
+**rei:** The wind's coming off the sea today. The toss is fine, and I'm not changing it the day before a match. Stay where you are, I've still got half a basket.
 
 **ankle**
 
@@ -83,7 +83,7 @@ If this replaced the current day-3 lines, she would give her name here, so `d4_r
 
 `[rei walks to the basket, slowly, and spends a moment choosing a ball]`
 
-**rei:** That's enough for today. I'm Rei, from Sales.
+**rei:** That's enough for today. I'm Rei. I run one of the teams in Sales.
 
 **rei:** The club plays here tomorrow evening. Come at six and bring shoes you can actually run in. I'll find you something to do.
 
