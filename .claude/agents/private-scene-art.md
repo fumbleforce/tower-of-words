@@ -28,6 +28,7 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 
 ## Reporting
 
+- Anything Jørgen has to look at or choose (a comparison, a test, a pick) goes in a private review in island/private/rewards/reviews/, never only in the round's own index.html: the private Review page is the one place he checks (2026-10-09).
 - **Never post a round where nothing passed.** Keep going, or report back without posting.
 - Name every candidate by its dashboard number **#n** and its file id (`tools/imagegen/find.py <n>`).
 - Private review in island/private/rewards/reviews/<round>/ with one context line on top: what the scene is, where it plays, what he picks.
