@@ -328,7 +328,7 @@ function buildCar(site) {
   if (site.wallH > 1.8) {
     hallInd = indicatorMat();
     const hz = site.zFront - site.zBack;
-    g.add(box(0.36, 0.14, 0.02, M('#23262c'), 0, 1.6, hz - 0.01, 0.01, false));
+    g.add(box(0.36, 0.14, 0.02, M('#23262c'), 0, 1.6, hz - 6e-3, 0.01, false));
     const p = new THREE.Mesh(new THREE.PlaneGeometry(0.32, 0.11), hallInd);
     p.position.set(0, 1.67, hz + 0.012);
     g.add(p);
