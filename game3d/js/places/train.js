@@ -28,6 +28,7 @@ import {
   mat as carMat,
 } from '../train/car.js';
 import { buildDoorSets, lampShut, lampOpen } from '../train/doors.js';
+import { loadMonorail } from '../train/models.js';
 import { swingStraps } from '../train/straps.js';
 import { buildPassengers, sit, armsHold } from '../train/people.js';
 import { makeCat } from '../creatures/cat.js';
@@ -71,6 +72,7 @@ Object.assign(COL, {
 });
 
 export async function trainPlace(game) {
+  await loadMonorail(); // the Blender-built outside (train/models.js); the code-built one stands in if it fails
   const scene = new THREE.Scene();
   scene.background = new THREE.Color('#3f5a6b');
 

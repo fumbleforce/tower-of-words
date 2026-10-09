@@ -72,10 +72,10 @@
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/train.js": {
-      "lines": 1729,
-      "bytes": 63517,
+      "lines": 1731,
+      "bytes": 63681,
       "owner": "codex-tui",
-      "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md); 2026-10-01 issue #145: car.cab in perfMovers, saved car parts restored only from the same build (notes/PERF.md); 2026-10-01 issue #144: the run in's speed moved to train/island.js with the island it shows; 2026-10-01 issue #156: WALK_X (the walkway out at the platform's south end) and the window's open-bay condition (#166); 2026-10-03 C-0378 day 2: the standing car, tester and walk in registered and installed (places/train-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 door_zone out on the platform, and the doorways (movement/doorways.js); 2026-10-05 C-0441 Aoi's Meshy model in her seat, and a walkRig way off the train for a Meshy passenger in alight; 2026-10-05 C-0444 the seat swaps moved to cast3d.js inSeat (Aoi, and Hamada dozing); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Rei's Meshy model: her laptop and the cup she holds hang on `lap` (cast3d.js meshyPerson's anchor over a seated Meshy person's hips, or the code-built torso), one line; 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered",
+      "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md); 2026-10-01 issue #145: car.cab in perfMovers, saved car parts restored only from the same build (notes/PERF.md); 2026-10-01 issue #144: the run in's speed moved to train/island.js with the island it shows; 2026-10-01 issue #156: WALK_X (the walkway out at the platform's south end) and the window's open-bay condition (#166); 2026-10-03 C-0378 day 2: the standing car, tester and walk in registered and installed (places/train-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 door_zone out on the platform, and the doorways (movement/doorways.js); 2026-10-05 C-0441 Aoi's Meshy model in her seat, and a walkRig way off the train for a Meshy passenger in alight; 2026-10-05 C-0444 the seat swaps moved to cast3d.js inSeat (Aoi, and Hamada dozing); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Rei's Meshy model: her laptop and the cup she holds hang on `lap` (cast3d.js meshyPerson's anchor over a seated Meshy person's hips, or the code-built torso), one line; 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #355: two lines await the Blender-built monorail outside (train/models.js) before the car is built",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/post.js": {
@@ -149,10 +149,10 @@
       "reason": "Existing speech recognition model/worker lifecycle, microphone capture, result handling and UI feedback. A focused speech-service split must characterize cancellation and capture cleanup; matching already lives in speech-match.js."
     },
     "game3d/js/train/car.js": {
-      "lines": 1009,
-      "bytes": 36744,
+      "lines": 1000,
+      "bytes": 36625,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-01 issue #145: the car build under one cab group for the departure (notes/PERF.md)",
+      "review": "C-0071; 2026-10-01 issue #145: the car build under one cab group for the departure (notes/PERF.md); 2026-10-09 #355: the Blender-built skin, skirt and bellows (train/models.js) with the code-made outside kept as the fallback; the unused buildNeighbour removed, ceiling lowered",
       "reason": "Existing complete carriage geometry combines seating, doors, windows and structural surfaces. Stage 5 room-builder review will extract these geometry responsibilities with visual checks."
     },
     "game3d/js/train/kit.js": {

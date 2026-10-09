@@ -6,6 +6,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { hull, icoPoints } from './hull.js';
 import { V } from './kit.js';
 import { strapMeshes } from './straps.js';
+import { monorailMesh, monorailParts } from './models.js';
 
 export const LX = 4.0; // inner half length
 export const LZ = 1.2; // inner half width
@@ -64,7 +65,14 @@ export const COL = {
 
 const mats = {};
 export function mat(name, color, opts = {}) {
-  if (!mats[name]) mats[name] = new THREE.MeshStandardMaterial({ name, color, roughness: 0.78, metalness: 0, ...opts });
+  if (!mats[name])
+    mats[name] = new THREE.MeshStandardMaterial({
+      name,
+      color,
+      roughness: 0.78,
+      metalness: 0,
+      ...opts,
+    });
   return mats[name];
 }
 
@@ -227,7 +235,8 @@ function posterTexture(kind) {
 // mode 'closed': every wall full height (the car seen from outside), with near-side door leaves unless
 // `nearLeaves: false`; the cut-away car has none (the train place hangs its own sliding leaves, train/doors.js).
 // Every doorway is cut to its full DOORWAYS opening in every mode.
-function buildShell(mode, { nearLeaves = mode === 'closed' } = {}) {
+// skin: the Blender skin (models.js) is the outside, so only the inner walls are built.
+function buildShell(mode, { nearLeaves = mode === 'closed', skin = false } = {}) {
   const g = new THREE.Group();
   g.name = 'shell';
   const low = mode === 'land' ? { zp: 0.62, xn: HF } : mode === 'closed' ? { zp: HF, xn: HF } : { zp: HF, xn: 0.86 };
@@ -235,7 +244,10 @@ function buildShell(mode, { nearLeaves = mode === 'closed' } = {}) {
   const inner = mat('inner', COL.inner),
     shell = mat('shell', COL.shell, { roughness: 0.55 }),
     frame = mat('frame', COL.frame, { roughness: 0.5 });
-  const lampM = mat('lamp', COL.lamp, { emissive: new THREE.Color('#ffd08a'), emissiveIntensity: 2.4 });
+  const lampM = mat('lamp', COL.lamp, {
+    emissive: new THREE.Color('#ffd08a'),
+    emissiveIntensity: 2.4,
+  });
   const straightX = 2 * (LX - RI),
     straightZ = 2 * (LZ - RI);
   const winTop = (h) => Math.min(h - 0.19, 1.22);
@@ -256,6 +268,7 @@ function buildShell(mode, { nearLeaves = mode === 'closed' } = {}) {
       [inner, 0, 0.045],
       [shell, 0.045, T],
     ]) {
+      if (skin && m === shell) continue;
       const geo = new THREE.ExtrudeGeometry(shape, EXT(d1 - d0 - 0.01));
       const mesh = new THREE.Mesh(geo, m);
       // extrusion goes along +z; far wall: interior skin nearest the inside
@@ -267,7 +280,7 @@ function buildShell(mode, { nearLeaves = mode === 'closed' } = {}) {
       g.add(shadowOn(mesh, false, true));
     }
     // window frames on the inside of the far wall and the outside of the near wall
-    if (h > 0.8)
+    if (h > 0.8 && !(skin && side > 0))
       for (const x of WIN.xs) {
         const fr = new THREE.Mesh(
           new THREE.ExtrudeGeometry(
@@ -308,6 +321,7 @@ function buildShell(mode, { nearLeaves = mode === 'closed' } = {}) {
       [inner, 0, 0.045],
       [shell, 0.045, T],
     ]) {
+      if (skin && m === shell) continue;
       const geo = new THREE.ExtrudeGeometry(shape, EXT(d1 - d0 - 0.01));
       const mesh = new THREE.Mesh(geo, m);
       // +x wall: rotate so u -> -z and the extrusion runs toward +x
@@ -346,7 +360,10 @@ function buildShell(mode, { nearLeaves = mode === 'closed' } = {}) {
         if ((z > 0 ? hA : hB) < HF) continue; // that end of the wall steps down to the cut line; a poster there would hang in the air
         const p = new THREE.Mesh(
           new THREE.PlaneGeometry(0.34, 0.45),
-          new THREE.MeshStandardMaterial({ map: posterTexture((k + (side > 0 ? 1 : 0)) % 2), roughness: 0.7 }),
+          new THREE.MeshStandardMaterial({
+            map: posterTexture((k + (side > 0 ? 1 : 0)) % 2),
+            roughness: 0.7,
+          }),
         );
         p.rotation.y = side > 0 ? -Math.PI / 2 : Math.PI / 2;
         p.position.set(side * (LX - 0.004), 0.95, z);
@@ -370,6 +387,7 @@ function buildShell(mode, { nearLeaves = mode === 'closed' } = {}) {
         [inner, RI, RI + 0.045],
         [shell, RI + 0.045, RI + T],
       ]) {
+        if (skin && m === shell) continue;
         const geo = placePlan(new THREE.ExtrudeGeometry(cornerShape(cx, cz, sx, sz, r0, r1), EXT(h - 0.036)));
         const mesh = new THREE.Mesh(geo, m);
         mesh.position.y = 0.018;
@@ -385,10 +403,34 @@ function buildShell(mode, { nearLeaves = mode === 'closed' } = {}) {
         const s = new THREE.Shape();
         rrectPath(s, 0, 0, DOOR_W / 2 - 0.01, h, 0.04);
         if (h > 0.7) s.holes.push(rrectPath(new THREE.Path(), 0.08, 0.5, DOOR_W / 2 - 0.09, h - 0.1, 0.05));
-        const m = new THREE.Mesh(new THREE.ExtrudeGeometry(s, EXT(0.035, 0.01)), mat('door', COL.door));
+        // the platform doors' colours (train/doors.js)
+        const m = new THREE.Mesh(
+          new THREE.ExtrudeGeometry(s, EXT(0.035, 0.01)),
+          skin ? mat('doorOut', '#56698a', { roughness: 0.6 }) : mat('door', COL.door),
+        );
         m.position.set(dx + (k < 0 ? -DOOR_W / 2 + 0.005 : 0.005), DOOR_SILL, LZ + 0.03);
         m.userData.doorLeaf = true;
         g.add(shadowOn(m, false, true));
+        if (skin) {
+          const edge = new THREE.Mesh(
+            new RoundedBoxGeometry(0.03, h - 0.04, 0.02, 1, 0.008),
+            mat('doorEdge', '#e0b83a'),
+          );
+          edge.position.set(dx + k * 0.02, DOOR_SILL + h / 2, LZ + 0.09);
+          edge.userData.doorLeaf = true;
+          g.add(edge);
+        }
+      }
+      if (skin) {
+        const lamp = new THREE.Mesh(
+          new RoundedBoxGeometry(0.26, 0.05, 0.03, 1, 0.01),
+          mat('doorLamp', '#ffcf8a', {
+            emissive: new THREE.Color('#ffb24a'),
+            emissiveIntensity: 1.8,
+          }),
+        );
+        lamp.position.set(dx, DOOR_TOP + 0.075, LZ + T + 0.012);
+        g.add(lamp);
       }
     }
   return g;
@@ -398,7 +440,11 @@ function buildShell(mode, { nearLeaves = mode === 'closed' } = {}) {
 // through the windows as patches on the floor even though the camera sees a roofless car.
 function buildShadowProxy() {
   const g = new THREE.Group();
-  const m = new THREE.MeshBasicMaterial({ color: '#000', colorWrite: false, depthWrite: false });
+  const m = new THREE.MeshBasicMaterial({
+    color: '#000',
+    colorWrite: false,
+    depthWrite: false,
+  });
   const holesLong = WIN.xs.map((x) => [x - WIN.w / 2, 0.44, x + WIN.w / 2, 1.22, 0.09]);
   for (const side of [-1, 1]) {
     const holes =
@@ -496,7 +542,14 @@ function rackAndRail(x0, x1, side, straps, rack) {
     const piv = new THREE.Group();
     piv.position.set(x, RAIL_Y, zr);
     g.add(piv);
-    straps.push({ piv, ph: (straps.length * 2.39) % 6.28, a: 0, v: 0, b: 0, w: 0 });
+    straps.push({
+      piv,
+      ph: (straps.length * 2.39) % 6.28,
+      a: 0,
+      v: 0,
+      b: 0,
+      w: 0,
+    });
   }
   if (rack) {
     // luggage rack: an open rod shelf on wall brackets (Jørgen wanted a real shelf, not floating bags), kept open
@@ -538,7 +591,11 @@ function plant() {
   g.add(shadowOn(pot), shadowOn(soil));
   const leaves = new THREE.Group();
   leaves.position.y = 0.24;
-  const leafM = new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.75 });
+  const leafM = new THREE.MeshStandardMaterial({
+    vertexColors: true,
+    flatShading: true,
+    roughness: 0.75,
+  });
   const L = [
     [0, 0.26, 0, 0.13, '#5da35a'],
     [0.1, 0.17, 0.06, 0.1, '#6fb865'],
@@ -667,16 +724,18 @@ function buildRoof() {
   }
   return g;
 }
-function buildGlass() {
+// lit: an empty car's windows glow warm (the neighbours)
+function buildGlass({ lit = false } = {}) {
   const g = new THREE.Group();
   g.name = 'glass';
   const gm = new THREE.MeshStandardMaterial({
-    color: '#5f7892',
+    color: lit ? '#7a6f62' : '#5f7892',
     roughness: 0.15,
-    metalness: 0.35,
+    metalness: lit ? 0.1 : 0.35,
     transparent: true,
-    opacity: 0.6,
+    opacity: lit ? 0.9 : 0.6,
     depthWrite: false,
+    ...(lit ? { emissive: new THREE.Color('#ffc88a'), emissiveIntensity: 0.55 } : {}),
   });
   gm.userData.base = 0.6;
   for (const sz of [-1, 1])
@@ -704,35 +763,55 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
   const nodders = []; // things that nod a little with the motion: {obj, k}
 
   // floor and the body below it
+  const skin = !!monorailParts();
+  // with the skin the floor's corners are round (a square one pokes through)
   const floor = new THREE.Mesh(
-    new RoundedBoxGeometry(2 * LX + 0.06, 0.08, 2 * LZ + 0.06, 2, 0.03),
+    skin
+      ? placePlan(
+          new THREE.ExtrudeGeometry(planRRect(LX + 0.03, LZ + 0.03, RI + 0.03), { depth: 0.08, bevelEnabled: false }),
+        )
+      : new RoundedBoxGeometry(2 * LX + 0.06, 0.08, 2 * LZ + 0.06, 2, 0.03),
     mat('floor', COL.floor, { roughness: 0.85 }),
   );
-  floor.position.y = -0.04;
+  floor.position.y = skin ? -0.08 : -0.04;
   floor.name = 'floor';
   cab.add(shadowOn(floor, false, true));
 
-  const body = new THREE.Mesh(
-    placePlan(
-      new THREE.ExtrudeGeometry(planRRect(LX + T, LZ + T, RI + T), {
-        depth: 0.42,
-        bevelEnabled: true,
-        bevelThickness: 0.1,
-        bevelSize: 0.06,
-        bevelSegments: 3,
-        curveSegments: 10,
-      }),
-    ),
-    mat('shellDark', COL.shellDark, { roughness: 0.6 }),
-  );
-  body.position.y = -0.46 - 0.12; // bevels grow the extrusion by 0.1 at each end; keep its top under the floor
-  cab.add(shadowOn(body, false, true));
+  // the body under the floor: the Blender-built navy skirt (models.js), or the older code-made body and bogies
+  if (skin) cab.add(monorailMesh('car_under'));
+  else {
+    const body = new THREE.Mesh(
+      placePlan(
+        new THREE.ExtrudeGeometry(planRRect(LX + T, LZ + T, RI + T), {
+          depth: 0.42,
+          bevelEnabled: true,
+          bevelThickness: 0.1,
+          bevelSize: 0.06,
+          bevelSegments: 3,
+          curveSegments: 10,
+        }),
+      ),
+      mat('shellDark', COL.shellDark, { roughness: 0.6 }),
+    );
+    body.position.y = -0.46 - 0.12; // bevels grow the extrusion by 0.1 at each end; keep its top under the floor
+    cab.add(shadowOn(body, false, true));
+    // bogie housings straddling the beam
+    for (const x of [-2.6, 2.6]) {
+      const b = new THREE.Mesh(
+        new RoundedBoxGeometry(1.5, 0.3, 1.0, 3, 0.1),
+        mat('bogie', '#8e97a3', { roughness: 0.7 }),
+      );
+      b.position.set(x, -0.56, 0);
+      cab.add(b);
+    }
+  }
+  // the stripe; with the skin, the thin navy line under the windows
   const stripeShape = planRRect(LX + T + 0.012, LZ + T + 0.012, RI + T + 0.012);
   stripeShape.holes.push(planRRect(LX + T - 0.02, LZ + T - 0.02, RI + T - 0.02));
   const stripe = new THREE.Mesh(
     placePlan(
       new THREE.ExtrudeGeometry(stripeShape, {
-        depth: 0.05,
+        depth: skin ? 0.03 : 0.05,
         bevelEnabled: true,
         bevelThickness: 0.01,
         bevelSize: 0.008,
@@ -740,39 +819,34 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
         curveSegments: 10,
       }),
     ),
-    mat('stripe', COL.stripe, { roughness: 0.5 }),
+    mat(skin ? 'stripeNavy' : 'stripe', skin ? '#2b3b58' : COL.stripe, { roughness: 0.5 }),
   );
-  stripe.position.y = 0.3;
-  cab.add(cutDoorways(stripe, 0.29, 0.07, stripe.material));
+  stripe.position.y = skin ? 0.365 : 0.3;
+  cab.add(cutDoorways(stripe, skin ? 0.355 : 0.29, skin ? 0.05 : 0.07, stripe.material));
   cab.add(shadowOn(stripe, false, true));
-  const stripe2 = new THREE.Mesh(stripe.geometry.clone(), stripe.material);
-  stripe2.position.y = -0.02;
-  stripe2.scale.y = 0.6;
-  cab.add(cutDoorways(stripe2, -0.03, 0.042, stripe.material));
-  cab.add(stripe2);
-  // bogie housings straddling the beam
-  for (const x of [-2.6, 2.6]) {
-    const b = new THREE.Mesh(
-      new RoundedBoxGeometry(1.5, 0.3, 1.0, 3, 0.1),
-      mat('bogie', '#8e97a3', { roughness: 0.7 }),
-    );
-    b.position.set(x, -0.56, 0);
-    cab.add(b);
+  if (!skin) {
+    const stripe2 = new THREE.Mesh(stripe.geometry.clone(), stripe.material);
+    stripe2.position.y = -0.02;
+    stripe2.scale.y = 0.6;
+    cab.add(cutDoorways(stripe2, -0.03, 0.042, stripe.material));
+    cab.add(stripe2);
   }
 
   const shellHolder = new THREE.Group();
   cab.add(shellHolder);
-  let shell = buildShell(mode);
+  let shell = buildShell(mode, { skin: skin && mode === 'closed' });
   shellHolder.add(shell);
   // the closed overlay: its own material copies, so it can fade without touching the cut shell
   let closed = null;
   const fadeMats = [];
+  // the outside: the Blender skin with its roof units, or the older code-built walls and roof
+  const outside = () => (skin ? monorailMesh('car_skin') : buildRoof());
   if (mode === 'closed') {
-    cab.add(buildRoof(), buildGlass());
+    cab.add(outside(), buildGlass({ lit: !furnished }));
   } else {
     closed = new THREE.Group();
     closed.name = 'closed';
-    closed.add(buildShell('closed', { nearLeaves: false }), buildRoof(), buildGlass());
+    closed.add(buildShell('closed', { nearLeaves: false, skin }), outside(), buildGlass());
     const lampM = mat('lamp', COL.lamp);
     closed.traverse((o) => {
       if (!o.isMesh) return;
@@ -910,94 +984,11 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
   };
 }
 
-// Neighbouring car: a closed body with a roof, a touch darker and greyer, seen only at the frame edge.
-export function buildNeighbour(side) {
-  const g = new THREE.Group();
-  const bodyM = mat('nb-body', '#98a3b0', { roughness: 0.7 });
-  const roofM = mat('nb-roof', '#8793a1', { roughness: 0.8 });
-  const winM = mat('nb-win', '#4f6784', { roughness: 0.3 });
-  const L = LX + T,
-    W = LZ + T;
-  const body = new THREE.Mesh(
-    placePlan(
-      new THREE.ExtrudeGeometry(planRRect(L, W, RI + T), {
-        depth: 1.72,
-        bevelEnabled: true,
-        bevelThickness: 0.16,
-        bevelSize: 0.08,
-        bevelSegments: 4,
-        curveSegments: 10,
-      }),
-    ),
-    bodyM,
-  );
-  body.position.y = -0.46;
-  g.add(shadowOn(body));
-  const roof = new THREE.Mesh(
-    placePlan(
-      new THREE.ExtrudeGeometry(planRRect(L - 0.22, W - 0.22, RI), {
-        depth: 0.08,
-        bevelEnabled: true,
-        bevelThickness: 0.05,
-        bevelSize: 0.05,
-        bevelSegments: 3,
-        curveSegments: 10,
-      }),
-    ),
-    roofM,
-  );
-  roof.position.y = 1.39;
-  g.add(shadowOn(roof));
-  for (const x of [-2.2, 0, 2.2]) {
-    const v = new THREE.Mesh(new RoundedBoxGeometry(0.9, 0.1, 0.8, 2, 0.04), roofM);
-    v.position.set(x, 1.5, 0);
-    g.add(shadowOn(v));
-  }
-  // windows on both long sides and the gangway end
-  for (const sz of [-1, 1])
-    for (const x of WIN.xs) {
-      const w = new THREE.Mesh(new RoundedBoxGeometry(WIN.w, 0.56, 0.04, 2, 0.06), winM);
-      w.position.set(x, 0.84, sz * (W + 0.07));
-      g.add(w);
-    }
-  const stripe = new THREE.Mesh(
-    placePlan(
-      new THREE.ExtrudeGeometry(
-        (() => {
-          const s = planRRect(L + 0.1, W + 0.1, RI + T + 0.1);
-          s.holes.push(planRRect(L - 0.02, W - 0.02, RI + T - 0.02));
-          return s;
-        })(),
-        { depth: 0.05, bevelEnabled: false, curveSegments: 10 },
-      ),
-    ),
-    mat('nb-stripe', '#56779c', { roughness: 0.6 }),
-  );
-  stripe.position.y = 0.3;
-  g.add(stripe);
-  // gangway end facing our car: a dark door with a small window
-  const door = new THREE.Mesh(
-    new RoundedBoxGeometry(0.05, 1.2, 0.8, 2, 0.05),
-    mat('nb-door', '#6d7784', { roughness: 0.7 }),
-  );
-  door.position.set(-side * (L + 0.12), 0.62, 0);
-  const endWin = new THREE.Mesh(new RoundedBoxGeometry(0.04, 0.42, 0.44, 2, 0.06), winM);
-  endWin.position.set(-side * (L + 0.15), 0.9, 0);
-  g.add(door, endWin);
-  for (const x of [-2.6, 2.6]) {
-    const b = new THREE.Mesh(
-      new RoundedBoxGeometry(1.5, 0.3, 1.0, 3, 0.1),
-      mat('bogie', '#8e97a3', { roughness: 0.7 }),
-    );
-    b.position.set(x, -0.56, 0);
-    g.add(b);
-  }
-  return g;
-}
-
 // Gangway bellows between two cars: soft ribs.
 export function buildBellows() {
   const g = new THREE.Group();
+  const accordion = monorailMesh('bellows', { cast: true });
+  if (accordion) return g.add(accordion);
   const m1 = mat('bel1', '#7d8795', { roughness: 0.9 }),
     m2 = mat('bel2', '#8f99a6', { roughness: 0.9 });
   for (let i = 0; i < 5; i++) {
