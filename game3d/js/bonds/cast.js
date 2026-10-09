@@ -31,6 +31,7 @@ export const CAST = {
     rel: { guard: 'owes' }, // late through the gate every morning; the guard gets him through
   },
   kuro: { register: 'polite' },
+  rei: { register: 'polite' }, // senior to him, and a stranger when they meet
   emi: {},
 };
 

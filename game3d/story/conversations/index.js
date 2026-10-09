@@ -8,4 +8,5 @@ import REI from './rei.js';
 import HAMADA from './hamada.js';
 import MORI from './mori.js';
 import KENJI from './kenji.js';
-export default { on: { ...SENDER.on, ...MORI.on, ...KENJI.on, ...HAMADA.on, ...MIO.on, ...EMI.on, ...GUARD.on, ...KURO.on, ...AOI.on, ...REI.on }, nodes: { ...SENDER.nodes, ...MORI.nodes, ...KENJI.nodes, ...HAMADA.nodes, ...MIO.nodes, ...EMI.nodes, ...GUARD.nodes, ...KURO.nodes, ...AOI.nodes, ...REI.nodes } };
+import REGISTER from './register.js';
+export default { on: { ...SENDER.on, ...MORI.on, ...KENJI.on, ...HAMADA.on, ...MIO.on, ...EMI.on, ...GUARD.on, ...KURO.on, ...AOI.on, ...REI.on, ...REGISTER.on }, nodes: { ...SENDER.nodes, ...MORI.nodes, ...KENJI.nodes, ...HAMADA.nodes, ...MIO.nodes, ...EMI.nodes, ...GUARD.nodes, ...KURO.nodes, ...AOI.nodes, ...REI.nodes, ...REGISTER.nodes } };

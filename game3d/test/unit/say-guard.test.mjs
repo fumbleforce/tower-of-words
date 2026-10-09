@@ -14,6 +14,7 @@ const stubs = {
   '../lang.js': "export const WORDS = { ohayou: { voice: 'ohayou', ja: 'おはよう' } }; export const known = new Set(['ohayou']); export const SAYABLE = ['ohayou'];",
   '../story.js': "export const defaultReaction = () => 'nothing';",
   '../narrative/state.js': 'export const flags = {}; export const cond = () => true;',
+  './register-reactions.js': 'export const registerReaction = () => null; export const registerDue = () => false;',
   '../sim.js': 'export const sim = { met: new Set(), inv: [], people: { mio: {} } }; export const ITEMS = {}; export const meet = () => {}; export const take = () => {}; export const peopleHTML = () => "";',
 };
 registerHooks({

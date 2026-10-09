@@ -14557,6 +14557,295 @@
   "emo": "casual"
  },
  {
+  "key": "ln-ezgdpz",
+  "speaker": "mio",
+  "text": "You sound like someone from upstairs when you talk like that. I get enough of that in the lift, so... with me just talk normal, okay?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-t83gm7",
+  "speaker": "mio",
+  "text": "You still do the polite thing with me, huh. Okay, whatever, it's kind of your thing now. Just don't bow at me also, okay?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "teasing"
+ },
+ {
+  "key": "ln-7niv5r",
+  "speaker": "mio",
+  "text": "Mm, okay, that's how people actually say it. Not bad.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-qsknpn",
+  "speaker": "mio",
+  "text": "Mm. ...Oh, you said it normal that time. Okay.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "oh-kxucu",
+  "speaker": "kenji",
+  "text": "えっ、僕に、ですか？…あ、すみません！",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "flustered"
+ },
+ {
+  "key": "ln-1mcxp3u",
+  "speaker": "kenji",
+  "text": "For me? So polite... thank you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "oh-18b922i",
+  "speaker": "kenji",
+  "text": "また…。じゃあ僕、やっぱり先輩ですか？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "teasing"
+ },
+ {
+  "key": "ln-1ae2sww",
+  "speaker": "kenji",
+  "text": "Me, boss? ...Joke, joke.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "laugh"
+ },
+ {
+  "key": "oh-9moo30",
+  "speaker": "kenji",
+  "text": "はい、はい。エリックさんは、いつもこれですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "ln-1cg9ruz",
+  "speaker": "kenji",
+  "text": "Polite... Norway style?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1rfg6of",
+  "speaker": "kenji",
+  "text": "はい、はい！…なんか今の、チームっぽいです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "チーム"
+  ],
+  "emo": "bright"
+ },
+ {
+  "key": "oh-1tiyyuf",
+  "speaker": "kenji",
+  "text": "はい、すぐ！",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-o4w7bw",
+  "speaker": "kenji",
+  "text": "Mio-san also... like this.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "laugh"
+ },
+ {
+  "key": "oh-1taj04z",
+  "speaker": "kuro",
+  "text": "ちゃんと言ってくれるんですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1fd1hvv",
+  "speaker": "kuro",
+  "text": "ノルウェーでも、そんなに丁寧なんですか。それとも、ここでだけ？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
+  "clear": [
+   "ノルウェー"
+  ],
+  "emo": "teasing"
+ },
+ {
+  "key": "oh-1ymovpi",
+  "speaker": "kuro",
+  "text": "発音、きれいになりましたね。誰に習ったんですか。……私以外に。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "watashi",
+    "私"
+   ]
+  ],
+  "clear": [],
+  "emo": "teasing"
+ },
+ {
+  "key": "oh-v8bm51",
+  "speaker": "kuro",
+  "text": "頼むときは、すみませんから、ですよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-mshfqu",
+  "speaker": "kuro",
+  "text": "待ってください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "matte",
+    "待って"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-6ivunz",
+  "speaker": "kuro",
+  "text": "ね？「ください」があると、待てるでしょう。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "oh-1y95v3o",
+  "speaker": "rei",
+  "text": "すみませんけど、その言い方は失礼ですよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "stern"
+ },
+ {
+  "key": "ln-k8g705",
+  "speaker": "rei",
+  "text": "You can talk like that to your own juniors if you want. I’m not one of them, so be polite with me.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curt"
+ },
+ {
+  "key": "ln-1rvq7ie",
+  "speaker": "rei",
+  "text": "You’re doing it again. I give you the orders, not the other way round.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curt"
+ },
+ {
+  "key": "oh-1yfuqxe",
+  "speaker": "rei",
+  "text": "もう一度。ちゃんと言いなさい。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "mouichido",
+    "もう一度"
+   ]
+  ],
+  "clear": [],
+  "emo": "stern"
+ },
+ {
+  "key": "ln-156225h",
+  "speaker": "rei",
+  "text": "You say that one properly, at least.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-kn3sdq",
+  "speaker": "rei",
+  "text": "There, we’ve both been polite. Now, what do you want?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
   "key": "ln-1lvkziu",
   "speaker": "eric",
   "text": "I’d have missed that tray.",
@@ -19804,6 +20093,16 @@
   "words": [],
   "clear": [],
   "emo": "casual"
+ },
+ {
+  "key": "oh-1b5x5h-carina",
+  "speaker": "kenji",
+  "text": "はい、はい。カリーナさんは、いつもこれですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
  },
  {
   "key": "ln-1lvkziu-carina",

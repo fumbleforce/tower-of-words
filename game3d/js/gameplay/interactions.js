@@ -13,6 +13,7 @@ import { isPerson, idleTalk } from './idle-talk.js';
 import { installDoorCards } from '../ui/door-card.js';
 import { PLAYER_ID } from '../mc.js';
 import { travelOf } from './pin-kinds.js';
+import { registerReaction, registerDue } from './register-reactions.js';
 
 export function installInteractions(game) {
   const ui = game.ui;
@@ -252,7 +253,7 @@ export function installInteractions(game) {
   function saysSomething(item) {
     if (!item || !SAYABLE.some((w) => known.has(w))) return false;
     const hook = (w) => game.runner.has(`say:${w}:${item.id}`) || game.runner.has(`say:${w}:*`);
-    return SAYABLE.some((w) => known.has(w) && hook(w)) || !canUse(item);
+    return SAYABLE.some((w) => known.has(w) && hook(w)) || !canUse(item) || registerDue(game, item.id);
   }
   // whether the target's menu has a Say row: a word does something there (or the Say tip is up), and while the
   // train teaches Say, only at the goal (the cat)
@@ -291,7 +292,10 @@ export function installInteractions(game) {
     if (needsPractice(id) && !globalThis.__settings?.skipChecks) {
       const ok = await ui.typePrompt(
         id,
-        { who: null, text: target ? `Say it to ${sayName(target)}.` : 'Say it.' },
+        {
+          who: null,
+          text: target ? `Say it to ${sayName(target)}.` : 'Say it.',
+        },
         { cancel: true },
       );
       ui.closeTalk();
@@ -303,17 +307,20 @@ export function installInteractions(game) {
     game.mioSays(id);
     // Eric finishes his word before anyone answers
     await voiceThenBeat(spoken, 300);
-    if (key && game.runner.has(key)) {
-      game.found.add(key);
-      game.runner.trigger(key);
+    // then, now and then, how they took the way he said it (register-reactions.js), after their answer
+    const any = `say:${id}:*`,
+      by = key && game.runner.has(key) ? key : game.runner.has(any) ? any : null;
+    const answer = by && game.runner.resolve?.(by, { peek: true });
+    const react = target && isPerson(game, target) ? registerReaction(game, target.id, id, answer) : null;
+    if (by) {
+      if (by === key) game.found.add(key);
+      if (game.runner.trigger(by) && react) game.queue.push(react);
       return;
     }
-    if (game.runner.has(`say:${id}:*`)) {
-      game.runner.trigger(`say:${id}:*`);
-      return;
-    }
+    // with no answer of their own, their reaction to how he said it is the answer
     game.beat(async () => {
-      if (target) await ui.say(null, defaultReaction(target, id));
+      if (react) await react();
+      else if (target) await ui.say(null, defaultReaction(target, id));
       else await ui.say(null, `You say ${WORDS[id].ja} to nobody in particular. Nobody in particular does anything.`);
     });
   }

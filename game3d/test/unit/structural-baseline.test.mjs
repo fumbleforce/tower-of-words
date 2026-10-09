@@ -44,6 +44,7 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   expected.engine.prefix.met_ = ['game3d/js/sim.js', 'game3d/js/saves/met.js'];
   expected.engine.prefix.bond2_ = ['game3d/js/sim.js'];
   expected.engine.prefix.period_ = ['game3d/js/period-flags.js'];
+  expected.engine.prefix.regreact_ = ['game3d/js/gameplay/register-reactions.js']; // #369 register reactions
   // Monday adds declared delivery returns and pre-Talk introduction state.
   for (const event of ['kotodama_first', 'kotodama_cancel', 'kotodama_exit']) expected.engine.events.office[event] = 'teamDrinks';
   for (const flag of ['d5_delivery_seen', 'd5_last_recipient']) expected.engine.exact[flag] = ['game3d/js/places/day5/delivery-state.js'];

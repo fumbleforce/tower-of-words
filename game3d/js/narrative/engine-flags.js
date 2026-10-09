@@ -53,6 +53,7 @@ ENGINE_WRITES['game3d/js/places/day5/place.js'] = {
 
 ENGINE_WRITES['game3d/js/saves/met.js'] = { exact: [], prefix: ['met_'] };
 
+ENGINE_WRITES['game3d/js/gameplay/register-reactions.js'] = { exact: [], prefix: ['regreact_'] };
 ENGINE_WRITES['game3d/js/period-flags.js'] = { exact: [], prefix: ['period_'] };
 ENGINE_WRITES['game3d/js/gameplay/gifts.js'] = { exact: [], prefix: ['gave_'] };
 ENGINE_WRITES['game3d/js/finds/index.js'] = { exact: [], prefix: ['found_'] };
