@@ -5,7 +5,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { monorailParts } from './models.js';
 
 export const SEA_Y = -17; // sea level, far below the car floor (y = 0)
-export const BEAM_TOP = -0.62; // top of the straddle beam
+export const BEAM_TOP = -0.16; // top of the straddle beam: the car rides low on it, its skirt down either side (#359)
 export const SPEED = 9; // world units per second
 export const PILLAR_GAP = 19; // distance between pillars
 export const BEAM2_Z = -7.5; // the parallel line for trains going the other way
