@@ -1,7 +1,8 @@
 // Frames of the anime opening (game3d/opening/), frame-exact, through window.OP.frame(T).
 //   node game3d/tools/opening-render.mjs stills 0.5,4,8.2 [outdir]        PNG stills at those song times
 //   node game3d/tools/opening-render.mjs video [outdir] [fps] [from] [to]  every frame, then an MP4 with the music
-// Width with W=1280 (default 1920). Output defaults to game3d/shots/opening-film/<time>/.
+// Width with W=1280 (default 1920); extra page options with Q (Q=win=small). Output defaults to
+// game3d/shots/opening-film/<time>/.
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -19,7 +20,7 @@ async function openPage(browser) {
   const errs = [];
   page.on('pageerror', (e) => errs.push(e.message));
   page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') errs.push(m.text()); });
-  await page.goto(`${BASE}?capture&still&w=${RW}`, { waitUntil: 'load' });
+  await page.goto(`${BASE}?capture&still&w=${RW}${process.env.Q ? '&' + process.env.Q : ''}`, { waitUntil: 'load' });
   await page.waitForFunction(() => window.OP, null, { timeout: 60000 });
   await page.evaluate(() => window.OP.ready);
   return { page, errs };

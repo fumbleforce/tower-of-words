@@ -8,11 +8,26 @@ import { SUN } from '../sky.js';
 import { idCard, gateLane } from '../props2d.js';
 import { card, cardBack, nameBlock } from '../cards.js';
 import { CAST } from '../cast.js';
-import { ISLAND_X, STATION_X, PITCH } from '../stage.js';
+import { ISLAND_X, PITCH, beamY, BEAM_TOP } from '../stage.js';
 
 const sunFar = SUN.clone().multiplyScalar(6000);
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const TRAIN_V = 26; // m/s along the line in the running shots
+const WIN_MODE = new URLSearchParams(location.search).get('win') || 'small';
+// the rush over the water toward the island before the stop, and the held frame of its end: [x, y, z] ranges of the
+// camera and of where it looks (the reveal starts from the same frame; chorus.js REVEAL_FROM)
+export const RUSH = [
+  [
+    [ISLAND_X - 360, ISLAND_X - 150],
+    [-13.5, -12],
+    [70, 120],
+  ],
+  [
+    [ISLAND_X + 60, ISLAND_X + 90],
+    [6, 4],
+    [-20, -24],
+  ],
+];
 
 // soft pillar shadows passing over the frame, one per pillar the train passes
 function pillarShadows(g, T, alpha = 0.22) {
@@ -47,7 +62,7 @@ function glassSweep(g, lt, speed = 0.45, alpha = 0.18) {
 
 // the camera running outside a window of car `car` at x (car-local), looking back in at it
 function windowShot(S, T, lt, car, wx, { dist = 3.2, drift = 0.6, h = 0.86 } = {}) {
-  const x = 200 + T * TRAIN_V;
+  const x = 120 + T * 18; // still on the level stretch, before the line comes down to the island
   S.setTrain(x);
   const cxw = x + (car - 1) * PITCH + wx;
   const p = lt;
@@ -60,11 +75,21 @@ export const VERSE = [
     id: 'eric-window',
     t: [HIT.verse - 0.2, beat(40)],
     in: { type: 'whip', d: 0.34, at: 0.5 },
-    setup(S) {
-      // the window-seat pictures when they're there (just inside the glass, in front of the bench back), else the
-      // base portraits
-      S.seat('eric', IMG['win-eric'] || IMG['eric-neutral'], 1, -0.86, IMG['win-eric'] ? { h: 1.25, y: -0.04, z: 1.235 } : { h: 1.42, y: -0.02 });
-      S.seat('mio', IMG['win-mio-phone'] || IMG['mio-phone'], 2, -0.86, IMG['win-mio-phone'] ? { h: 1.15, y: 0.17, z: 1.235 } : { h: 1.36, y: 0.0 });
+    // Who sits at the windows (?win=): 'model', the game's 3D Eric and Mio on the far bench; 'small', the
+    // window-seat pictures at a passenger's size on that bench; 'big', the pictures close to the glass (first cut).
+    async setup(S) {
+      const how = WIN_MODE;
+      if (how === 'model') {
+        const m = await S.seatModels([
+          ['eric', 1, -1.25],
+          ['mio', 2, -1.75],
+        ]);
+        if (m.eric && m.mio) return;
+      }
+      const far = { z: -(0.96), y: 0.12 };
+      const big = how === 'big';
+      S.seat('eric', IMG['win-eric'] || IMG['eric-neutral'], 1, big ? -0.86 : -1.25, big ? { h: 1.25, y: -0.04, z: 1.235 } : { h: 0.92, ...far });
+      S.seat('mio', IMG['win-mio-phone'] || IMG['mio-phone'], 2, big ? -0.86 : -1.75, big ? { h: 1.15, y: 0.17, z: 1.235 } : { h: 0.86, ...far });
     },
     scene3d(S, lt, T) {
       windowShot(S, T, lt, 1, -0.86, { dist: 3.0 });
@@ -83,7 +108,8 @@ export const VERSE = [
       const x = 660 + lt * TRAIN_V;
       S.setTrain(x - 400); // out of this view
       const yaw = 0.38 - lt * 0.02;
-      S.look([x, 1.3, 1.4], [x + Math.cos(yaw) * 100, 1.3 - 2.6, Math.sin(-yaw) * -100], 34);
+      const y = beamY(x) - BEAM_TOP + 1.3; // at a passenger's eye height as the line comes down
+      S.look([x, y, 1.4], [x + Math.cos(yaw) * 100, y - 2.6, Math.sin(-yaw) * -100], 34);
     },
     draw(g, lt, T, S) {
       // the window frame we look through
@@ -128,6 +154,10 @@ export const VERSE = [
     scene3d(S, lt, T) {
       const look = lt >= beat(58) - beat(56);
       const m = S.riders.mio;
+      if (!m) {
+        windowShot(S, T, lt, 2, -0.86, { dist: 2.8 });
+        return;
+      }
       const phone = IMG['win-mio-phone'] || IMG['mio-phone'];
       const want = look ? IMG['win-mio-look'] || (IMG['win-mio-phone'] ? phone : IMG['mio-deadpan']) : phone;
       if (m.material.map.image !== want) {
@@ -187,55 +217,68 @@ export const VERSE = [
     },
   },
   {
-    // Honsha: the train pulls in under the canopy, the station sign in front.
+    // Honsha: under the game's own platform shed (scenes/station-shed.js, built on the island), the train runs in
+    // along the platform and stops by the station sign; the camera stands on the platform looking down it.
     id: 'station',
     t: [bar(18) + 0.4, beat(77.8)],
     in: { type: 'whip', d: 0.3, at: 0.5 },
-    scene3d(S, lt, T) {
-      // the train brakes to a stop by the sign
-      const stopX = STATION_X - 22;
-      const dur = 1.7;
+    scene3d(S, lt) {
+      const A = S.anchors;
+      const dur = 1.75;
       const u = clamp(lt / dur);
-      const v0 = 30;
-      const x = stopX - (v0 * dur) / 2 * (1 - u) ** 2;
-      S.setTrain(x);
-      S.station.visible = true;
-      const sx = S.station.userData.signX;
-      S.look([sx + 9 - lt * 0.6, 2.0, 4.6], [sx - 12, 1.6, 0.6], 38);
+      const back = 44 * (1 - u) ** 2; // braking: distance still to run
+      // the beam inside the shed runs north along island x -30.8; the train stops with its middle at z 1.5
+      const at = A.toWorld(-30.8, 1.5 + back, 2.5);
+      const ahead = A.toWorld(-30.8, 0.5 + back, 2.5).sub(at);
+      S.setTrainPose(at, ahead);
+      // raised at the shed's south end, east of the platform: the blue roof, the platform and the town beyond, and
+      // the train running in past us up the beam
+      const eye = A.toWorld(-21.5 - lt * 0.4, 27 - lt * 0.6, 7.5 - lt * 0.3); // toWorld(x, z, height)
+      const look = A.toWorld(-30, 2, 3.2);
+      S.look(eye.toArray(), look.toArray(), 44);
     },
     draw(g, lt) {
-      // a little bump of motion lines while it brakes
-      streaks(g, lt, { color: 'rgba(255,255,255,0.35)', count: 16, y0: 420, y1: 760, alpha: 0.5 * (1 - k(lt, 0.6, 1.5)), speed: 2600 });
+      streaks(g, lt, { color: 'rgba(255,255,255,0.3)', count: 14, y0: 380, y1: 820, alpha: 0.45 * (1 - k(lt, 0.5, 1.6)), speed: 2600 });
     },
+    exposure: 1.05,
   },
   {
-    // 今日からここで: the card on the gate reader, a teal ring, the flaps swing open.
+    // 今日からここで: the game's own security gate (scenes/lobby.js). His card on the reader, the lights go green,
+    // the glass flaps swing open and we go through.
     id: 'gate',
     t: [beat(77.8), bar(21) - 0.02],
     in: { type: 'dots', d: 0.45, at: 0.5, param: [0.4, 70] },
-    draw(g, lt, T) {
+    scene3d(S, lt) {
+      const w = S.set('lobby');
       const tap = beat(79) - beat(77.8);
-      const open = k(lt, tap + 0.4, tap + 0.95, ease.inOut2);
-      const push = k(lt, tap + 0.7, 2.2, ease.in2);
-      const lane = gateLane(g, { open, push, ring: clamp((lt - tap) / 0.7), lit: lt > tap ? 1 : 0 });
-      // the card swoops in and taps the reader
+      const open = k(lt, tap + 0.25, tap + 0.85, ease.inOut2);
+      w.arch.userData.set?.(lt > tap ? 'ok' : 'idle');
+      w.arch.userData.flaps?.(open);
+      const push = k(lt, tap + 0.6, 2.25, ease.in2);
+      // low by the right-hand reader, then through the lane toward the exit
+      S.look([lerp(0.55, 0.0, push), lerp(1.0, 1.15, push), lerp(1.55, -2.2, push)], [lerp(0.85, 0.0, k(lt, 0, tap + 0.6)), 0.85, -2.6], 50);
+    },
+    draw(g, lt, T, S) {
+      const tap = beat(79) - beat(77.8);
+      // where the reader's top is on screen
+      const rp = toFrame(S.camera, V(0.93, 0.98, -0.55)) || [W * 0.7, H * 0.6];
       const e = ease.out5(clamp(lt / tap));
       const bob = lt > tap ? Math.exp(-(lt - tap) / 0.12) * 14 : 0;
-      const [rx, ry] = lane.reader;
+      const leave = k(lt, tap + 0.35, tap + 0.8, ease.in2);
       g.save();
-      // the card rides the same push down the lane as the gate
-      const z = 1 + push * 0.9;
-      g.translate(W * 0.52, H * 0.42);
-      g.scale(z, z);
-      g.translate(-W * 0.52, -H * 0.42);
-      g.translate(lerp(rx + 800, rx + 20, e), lerp(ry - 520, ry - 70, e) - bob);
+      g.translate(lerp(rp[0] + 520, rp[0] - 10, e), lerp(rp[1] - 420, rp[1] - 30, e) - bob + leave * 700);
       g.rotate(lerp(0.5, -0.1, e));
-      g.scale(0.4, 0.4);
+      g.scale(0.36, 0.36);
       idCard(g, {});
       g.restore();
-      if (lt > tap) typeIn(g, 'ピッ', rx + 250, ry - 260, lt - tap, { font: FONT.jp, size: 130, color: '#ffffff', stroke: '#1b2b4f', strokeW: 22, stagger: 0.05, from: 2 });
+      if (lt > tap) {
+        const t2 = lt - tap;
+        glint(g, rp[0], rp[1] - 10, 120 * Math.exp(-t2 / 0.25), '#c9ffe6', 1);
+        typeIn(g, 'ピッ', rp[0] + 180, rp[1] - 210, t2, { font: FONT.jp, size: 120, color: '#ffffff', stroke: '#1b2b4f', strokeW: 20, stagger: 0.05, from: 2 });
+      }
     },
-    fx: (lt) => ({ flash: 0.3 * Math.exp(-Math.max(0, lt - (beat(79) - beat(77.8))) / 0.08) * (lt > beat(79) - beat(77.8) ? 1 : 0), flashColor: '#c9fff6' }),
+    fx: (lt) => ({ flash: 0.25 * Math.exp(-Math.max(0, lt - (beat(79) - beat(77.8))) / 0.08) * (lt > beat(79) - beat(77.8) ? 1 : 0), flashColor: '#c9fff0' }),
+    exposure: 1.15,
   },
   {
     // 働くよ: the guard at his desk, as every morning: おはようございます.
@@ -297,34 +340,39 @@ export const VERSE = [
     },
   },
   {
-    // the last beats before the stop: Eric rises out of white
-    id: 'rise',
+    // the last bar before the stop: low and fast over the water toward the island, the sun behind head office
+    id: 'rush',
     t: [beat(91), HIT.stop],
     in: { type: 'flash', d: 0.2, at: 0.5 },
-    draw(g, lt) {
-      vgrad(g, [
-        [0, '#ffffff'],
-        [1, '#e3f4ff'],
-      ]);
-      sunburst(g, W / 2, H * 0.9, 30, lt * 0.3, 'rgba(111,208,198,0.18)', 0.5);
-      const e = ease.out5(clamp(lt / 0.5));
-      drawPortrait(g, 'eric-neutral', W / 2, H + 60 + (1 - e) * 300, 1000, { fill: '#1b2b4f', stroke: '#6fd0c6', strokeW: 8 });
+    scene3d(S, lt) {
+      S.setTrain(-5000);
+      const p = ease.out3(clamp(lt / (HIT.stop - beat(91))));
+      const [from, to] = RUSH;
+      S.look(from.map((v, i) => lerp(v[0], v[1], p)), to.map((v, i) => lerp(v[0], v[1], p)), lerp(42, 36, p));
     },
+    draw(g, lt) {
+      speedLines(g, W / 2, H * 0.45, lt, { color: 'rgba(255,255,255,0.4)', count: 36, inner: 560, width: 12 });
+    },
+    flare: () => 0.6,
   },
   {
-    // The band stops. White, still, the singer alone: はじめ...
+    // The band stops. The picture stops with it, washed pale like a held frame, and she sings alone: はじめ...
     id: 'stop',
     t: [HIT.stop, HIT.chorus],
-    draw(g, lt) {
-      vgrad(g, [
-        [0, '#fdfefe'],
-        [1, '#eaf6ff'],
-      ]);
-      halftone(g, 'rgba(111,208,198,0.18)', 30, -0.4, (x, y) => clamp(1 - y / H + 0.1), null);
-      drawPortrait(g, 'eric-neutral', W * 0.68, H + 40, 1000 + lt * 30, { stroke: '#ffffff', strokeW: 10, shadow: { dx: 24, dy: 0, color: '#6fd0c6' } });
-      typeIn(g, 'はじめ', 200, 560, lt - 0.0, { font: FONT.jp, size: 190, color: '#1b2b4f', stagger: 0.28, dur: 0.3, from: 1.4 });
+    scene3d(S) {
+      S.setTrain(-5000);
+      const [from, to] = RUSH;
+      S.look(from.map((v) => v[1]), to.map((v) => v[1]), 36);
     },
-    fx: () => ({ grain: 0.02, vignette: 0.15 }),
+    draw(g, lt) {
+      // the held frame: a pale wash and a halftone, like a still in a printed page
+      g.fillStyle = 'rgba(246,250,255,0.62)';
+      g.fillRect(0, 0, W, H);
+      halftone(g, 'rgba(27,43,79,0.12)', 22, -0.4, (x, y) => clamp(0.15 + (y / H) * 0.5), null);
+      typeIn(g, 'はじめ', W / 2, 520, lt, { font: FONT.jp, size: 210, align: 'center', color: '#1b2b4f', stagger: 0.28, dur: 0.3, from: 1.4, shadow: { color: 'rgba(111,208,198,0.9)', dx: 10, dy: 10 } });
+    },
+    fx: () => ({ grain: 0.02, vignette: 0.12 }),
+    exposure: 1.1,
   },
 ];
 

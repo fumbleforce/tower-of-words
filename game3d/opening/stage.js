@@ -4,15 +4,24 @@
 // Shots move the train and the camera; nothing here keeps time of its own.
 import * as THREE from 'three';
 import { loadMonorail, monorailParts } from '../js/train/models.js';
-import { buildCar, buildBellows, LX, T, LZ, WIN } from '../js/train/car.js';
+import { buildCar, buildBellows, LX, T, LZ, WIN, SEAT_Y } from '../js/train/car.js';
+import { loadEric } from '../js/avatar.js';
+import { loadMio } from '../js/mio.js';
 import { SUN, SKY_UNIFORMS, buildSky, buildSea } from './sky.js';
 import { buildIsland } from './island.js';
+import { buildLobby } from '../js/scenes/lobby.js';
+import { buildOffice } from '../js/scenes/office.js';
 
 export const SEA_Y = -17; // as in the game: the sea far below the car floor
 export const BEAM_TOP = -0.16;
 export const PITCH = 2 * (LX + T) + 0.52; // car to car, as the train place spaces its neighbours
 export const ISLAND_X = 900; // where the straight line meets the island's curve (island.js)
-export const STATION_X = 300; // the platform set for the arrival shot, shown only in that shot
+// the beam's top along the line: level across the bay, down 13 over the last 300 to the island's beam
+const ISL_BEAM = SEA_Y + 1.5 + 2.5 - 0.16; // island ground + platform deck - 0.16 (scenes/station-shed.js)
+export function beamY(x) {
+  const t = Math.min(1, Math.max(0, (x - (ISLAND_X - 300)) / 300));
+  return BEAM_TOP + (ISL_BEAM - BEAM_TOP) * t * t * (3 - 2 * t);
+}
 
 export async function buildStage(renderer) {
   await loadMonorail();
@@ -29,26 +38,51 @@ export async function buildStage(renderer) {
   scene.add(hemi);
 
   // ---------- the guideway ----------
+  // Two lines across the bay, high on their pillars; near the island they come down (5 %) to the island's beam,
+  // which the forecourt builds curving into the platform shed (island.js), and the far line swings in to join
+  // the near one. beamY(x): the beam's top along the near line.
   const M = monorailParts();
   const line = new THREE.Group();
   scene.add(line);
   const X0 = -1600,
     SEG = 9.5;
-  const nSeg = Math.ceil((ISLAND_X - X0) / SEG);
-  for (const z of [0, -7.5]) {
+  const smooth = (a, b, x) => {
+    const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
+    return t * t * (3 - 2 * t);
+  };
+  const lineDefs = [
+    { z: () => 0, end: ISLAND_X },
+    { z: (x) => -7.5 * (1 - smooth(ISLAND_X - 420, ISLAND_X - 90, x)), end: ISLAND_X - 90 },
+  ];
+  const m4 = new THREE.Matrix4(),
+    q4 = new THREE.Quaternion(),
+    e4 = new THREE.Euler(),
+    one = new THREE.Vector3(1, 1, 1);
+  for (const L of lineDefs) {
+    const nSeg = Math.ceil((L.end - X0) / SEG);
     const beams = new THREE.InstancedMesh(M.beam.geometry, M.beam.material, nSeg);
-    const m4 = new THREE.Matrix4();
-    for (let i = 0; i < nSeg; i++) beams.setMatrixAt(i, m4.makeTranslation(X0 + i * SEG, BEAM_TOP, z));
+    for (let i = 0; i < nSeg; i++) {
+      const x0 = X0 + i * SEG,
+        x1 = x0 + SEG;
+      const y0 = beamY(x0),
+        y1 = beamY(x1),
+        z0 = L.z(x0),
+        z1 = L.z(x1);
+      e4.set(0, -Math.atan2(z1 - z0, SEG), Math.atan2(y1 - y0, SEG), 'YZX');
+      q4.setFromEuler(e4);
+      beams.setMatrixAt(i, m4.compose(new THREE.Vector3(x0, y0, z0), q4, one));
+    }
     beams.frustumCulled = false;
     line.add(beams);
     const gap = 19;
-    const nP = Math.ceil((ISLAND_X - 4 - X0) / gap);
+    const nP = Math.ceil((L.end - 4 - X0) / gap);
     const pil = new THREE.InstancedMesh(M.pillar.geometry, M.pillar.material, nP);
     const foot = new THREE.InstancedMesh(M.foot.geometry, M.foot.material, nP);
     for (let i = 0; i < nP; i++) {
       const x = X0 + 6 + i * gap;
-      pil.setMatrixAt(i, m4.makeTranslation(x, 0, z)); // the pillar's top meets the beam's underside at y = 0, as in the game
-      foot.setMatrixAt(i, m4.makeTranslation(x, SEA_Y + 0.1, z));
+      // the pillar's top meets the beam's underside when its origin is 0.16 above the beam's top, as in the game
+      pil.setMatrixAt(i, m4.makeTranslation(x, beamY(x) - BEAM_TOP, L.z(x)));
+      foot.setMatrixAt(i, m4.makeTranslation(x, SEA_Y + 0.1, L.z(x)));
     }
     pil.frustumCulled = foot.frustumCulled = false;
     line.add(pil, foot);
@@ -102,46 +136,32 @@ export async function buildStage(renderer) {
     riders[key] = m;
     return m;
   }
+  // the game's own 3D Eric and Mio, seated on the far bench of a car facing the near windows (as the train place seats
+  // its passengers: z = -(LZ - 0.24), facing +z). Loaded on request; a failed load leaves the pictures in place.
+  const models = {};
+  async function seatModels(list) {
+    await Promise.all(
+      list.map(async ([key, car, x]) => {
+        try {
+          const p = key === 'eric' ? await loadEric({ extra: false }) : await loadMio();
+          p.sitAt(x, SEAT_Y, -(LZ - 0.24) + 0.02, 0);
+          p.update(0);
+          cars[car].root.add(p.root);
+          models[key] = p;
+        } catch (e) {
+          console.warn('opening: 3D', key, e);
+        }
+      }),
+    );
+    return models;
+  }
 
   // ---------- the island: the game's own (island.js) ----------
   const isl = buildIsland(uniforms, { joinX: ISLAND_X, seaY: SEA_Y });
-  scene.add(isl.group, isl.curve, isl.ridge);
+  scene.add(isl.group, isl.ridge);
 
-  // ---------- Honsha station: the platform where the line ends ----------
-  const station = new THREE.Group();
-  scene.add(station);
+  // ---------- Honsha's station sign, hung under the platform shed's roof over the platform ----------
   {
-    const conc = new THREE.MeshStandardMaterial({ color: '#c9ced6', roughness: 0.9 });
-    const roof = new THREE.MeshStandardMaterial({ color: '#eef1f4', roughness: 0.6, emissive: new THREE.Color('#c9d6e4'), emissiveIntensity: 0.55 });
-    const steel = new THREE.MeshStandardMaterial({ color: '#5f6f86', roughness: 0.5, metalness: 0.4 });
-    const tactile = new THREE.MeshStandardMaterial({ color: '#f2c94c', roughness: 0.8 });
-    const glass = new THREE.MeshStandardMaterial({ color: '#a8c6dc', roughness: 0.1, metalness: 0.2, transparent: true, opacity: 0.45 });
-    const x0 = STATION_X - 90,
-      x1 = STATION_X + 4,
-      len = x1 - x0,
-      xm = (x0 + x1) / 2;
-    for (const sz of [1, -1]) {
-      const deck = new THREE.Mesh(new THREE.BoxGeometry(len, 12, 5.2), conc);
-      deck.position.set(xm, -6.02, sz * (1.55 + 2.6));
-      const strip = new THREE.Mesh(new THREE.BoxGeometry(len, 0.03, 0.3), tactile);
-      strip.position.set(xm, 0.0, sz * 2.25);
-      station.add(deck, strip);
-    }
-    const canopy = new THREE.Mesh(new THREE.BoxGeometry(len, 0.25, 14), roof);
-    canopy.position.set(xm, 4.4, 0);
-    station.add(canopy);
-    for (let x = x0 + 6; x < x1; x += 10)
-      for (const sz of [1, -1]) {
-        const c = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 4.4, 12), steel);
-        c.position.set(x, 2.2, sz * 5.2);
-        station.add(c);
-      }
-    for (const sz of [1, -1]) {
-      const wall = new THREE.Mesh(new THREE.BoxGeometry(len, 3.6, 0.08), glass);
-      wall.position.set(xm, 1.8, sz * 6.7);
-      station.add(wall);
-    }
-    // the hanging station sign, square to the platform so arriving eyes read it
     const cv = document.createElement('canvas');
     cv.width = 1024;
     cv.height = 384;
@@ -164,20 +184,21 @@ export async function buildStage(renderer) {
     const tex = new THREE.CanvasTexture(cv);
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.anisotropy = 8;
-    const sign = new THREE.Mesh(new THREE.PlaneGeometry(3.2, 1.2), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false }));
-    sign.rotation.y = Math.PI / 2;
-    sign.position.set(STATION_X - 34, 3.3, 3.7);
-    const back = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.3, 3.3), steel);
-    back.position.set(STATION_X - 34.05, 3.3, 3.7);
-    for (const dz of [-1.2, 1.2]) {
-      const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.5, 6), steel);
-      rod.position.set(STATION_X - 34.05, 4.15, 3.7 + dz);
-      station.add(rod);
-    }
-    station.add(sign, back);
-    station.userData.signX = STATION_X - 34;
-    station.visible = false; // the arrival shot shows it (stage.reset hides it again)
+    const A = isl.anchors;
+    // over the platform beside the beam (island x -30.8), a third of the way down the shed, facing north up it
+    const P = A.toWorld(-28.2, -2, 2.5 + 2.55);
+    const north = A.toWorld(-28.2, -3, 2.5 + 2.55).sub(P);
+    const sign = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 0.82), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false, side: THREE.DoubleSide }));
+    sign.position.copy(P);
+    sign.lookAt(P.clone().add(north));
+    const back = new THREE.Mesh(new THREE.BoxGeometry(2.26, 0.88, 0.05), new THREE.MeshStandardMaterial({ color: '#5f6f86', roughness: 0.5, metalness: 0.4 }));
+    back.position.copy(P).addScaledVector(north, 0.03);
+    back.quaternion.copy(sign.quaternion);
+    scene.add(sign, back);
   }
+
+  const sets = {};
+  let active = scene;
 
   // ---------- camera ----------
   const camera = new THREE.PerspectiveCamera(40, 16 / 9, 0.1, 20000);
@@ -191,16 +212,35 @@ export async function buildStage(renderer) {
     riders,
     seat,
     riderTex,
-    station,
+    models,
+    seatModels,
     anchors: isl.anchors,
-    // before each shot: the optional set pieces hidden
+    // before each shot: the optional set pieces hidden, the bay as the scene
     reset() {
-      station.visible = false;
+      active = scene;
+      train.rotation.set(0, 0, 0);
+    },
+    // the game's indoor places as sets of their own (built once, on first use): 'lobby' (the station's security
+    // room and gate, scenes/lobby.js) and 'office' (B2, scenes/office.js). Returns the place's world object.
+    set(name) {
+      if (!sets[name]) {
+        const w = name === 'lobby' ? buildLobby() : buildOffice();
+        sets[name] = w;
+      }
+      active = sets[name].scene;
+      return sets[name];
+    },
+    // the train standing anywhere: its middle car's floor centre at pos, running along dir (x, z)
+    setTrainPose(pos, dir) {
+      train.position.copy(pos);
+      train.rotation.set(0, -Math.atan2(dir.z, dir.x), 0);
     },
     sun,
     // the train's middle car centre at x (y follows the beam)
     setTrain(x) {
-      train.position.set(x, 0, 0);
+      const y = beamY(x) - BEAM_TOP;
+      train.position.set(x, y, 0);
+      train.rotation.set(0, 0, Math.atan2(beamY(x + 4) - beamY(x - 4), 8));
     },
     // aim the camera: position, look-at point, vertical fov, optional roll (radians)
     look(pos, at, fov = 40, roll = 0) {
@@ -222,9 +262,13 @@ export async function buildStage(renderer) {
     render(T, rt) {
       uniforms.uTime.value = T;
       renderer.setRenderTarget(rt);
-      renderer.setClearColor(0x000000, 1);
+      renderer.setClearColor(active === scene ? 0x000000 : 0x1a2030, 1);
       renderer.clear();
-      renderer.render(scene, camera);
+      if (active !== scene) {
+        const w = Object.values(sets).find((x) => x.scene === active);
+        w?.update?.(T);
+      }
+      renderer.render(active, camera);
     },
   };
 }
