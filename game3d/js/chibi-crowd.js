@@ -136,7 +136,7 @@ export function boneAt(m, name) {
 // once a scene turns them, lead them (the upper arm turned so the hand goes where the stand-in's hand is).
 const DOWN = new THREE.Vector3(0, -1, 0),
   ARM = 0.255; // the code-built hand, down the arm
-function proxyParts(m) {
+export function proxyParts(m) {
   m.update(0);
   m.torso = new THREE.Group();
   hold(m, m.torso, boneAt(m, 'Spine'), 'Spine');

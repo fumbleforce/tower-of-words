@@ -1,0 +1,483 @@
+{
+  "title": "Approved office people at the station and in the lift",
+  "date": "2026-10-08",
+  "by": "codex",
+  "caption": "The two stationary station workers, three commuters and lift Sales pair use the approved office models. Native queue gestures and the carried parcel follow their skeletons. Other background categories remain a separate task.",
+  "preview": "route-1-1366-ride-2",
+  "sections": [
+    {
+      "title": "Original procedural workers",
+      "caption": "Before replacement, held station introduction.",
+      "images": [
+        {
+          "id": "baseline-1366-gate-0",
+          "image": "game3d/shots/office-people-20261008/baseline/1366-gate-0.png",
+          "caption": "Desktop, 1366 × 860: gate 0."
+        },
+        {
+          "id": "baseline-1366-gate-1",
+          "image": "game3d/shots/office-people-20261008/baseline/1366-gate-1.png",
+          "caption": "Desktop, 1366 × 860: gate 1."
+        },
+        {
+          "id": "baseline-1366-gate-2",
+          "image": "game3d/shots/office-people-20261008/baseline/1366-gate-2.png",
+          "caption": "Desktop, 1366 × 860: gate 2."
+        },
+        {
+          "id": "baseline-1366-gate-3",
+          "image": "game3d/shots/office-people-20261008/baseline/1366-gate-3.png",
+          "caption": "Desktop, 1366 × 860: gate 3."
+        },
+        {
+          "id": "baseline-1366-gate-4",
+          "image": "game3d/shots/office-people-20261008/baseline/1366-gate-4.png",
+          "caption": "Desktop, 1366 × 860: gate 4."
+        },
+        {
+          "id": "baseline-1366-gate-5",
+          "image": "game3d/shots/office-people-20261008/baseline/1366-gate-5.png",
+          "caption": "Desktop, 1366 × 860: gate 5."
+        },
+        {
+          "id": "baseline-1366-gate-6",
+          "image": "game3d/shots/office-people-20261008/baseline/1366-gate-6.png",
+          "caption": "Desktop, 1366 × 860: gate 6."
+        }
+      ]
+    },
+    {
+      "title": "First office-body integration",
+      "caption": "Before the native head/spine adapter and parcel correction.",
+      "images": [
+        {
+          "id": "candidate-1-1366-gate-0",
+          "image": "game3d/shots/office-people-20261008/candidate-1/1366-gate-0.png",
+          "caption": "Desktop, 1366 × 860: gate 0."
+        },
+        {
+          "id": "candidate-1-1366-gate-1",
+          "image": "game3d/shots/office-people-20261008/candidate-1/1366-gate-1.png",
+          "caption": "Desktop, 1366 × 860: gate 1."
+        },
+        {
+          "id": "candidate-1-1366-gate-2",
+          "image": "game3d/shots/office-people-20261008/candidate-1/1366-gate-2.png",
+          "caption": "Desktop, 1366 × 860: gate 2."
+        },
+        {
+          "id": "candidate-1-1366-gate-3",
+          "image": "game3d/shots/office-people-20261008/candidate-1/1366-gate-3.png",
+          "caption": "Desktop, 1366 × 860: gate 3."
+        },
+        {
+          "id": "candidate-1-1366-gate-4",
+          "image": "game3d/shots/office-people-20261008/candidate-1/1366-gate-4.png",
+          "caption": "Desktop, 1366 × 860: gate 4."
+        },
+        {
+          "id": "candidate-1-1366-gate-5",
+          "image": "game3d/shots/office-people-20261008/candidate-1/1366-gate-5.png",
+          "caption": "Desktop, 1366 × 860: gate 5."
+        },
+        {
+          "id": "candidate-1-1366-gate-6",
+          "image": "game3d/shots/office-people-20261008/candidate-1/1366-gate-6.png",
+          "caption": "Desktop, 1366 × 860: gate 6."
+        }
+      ]
+    },
+    {
+      "title": "First detail cameras",
+      "caption": "Phone targets are cropped; these captures are retained as failed framing attempts. Lift states are frozen diagnostic fixtures.",
+      "images": [
+        {
+          "id": "probe-2-1366-lift-inside",
+          "image": "game3d/shots/office-people-20261008/probe-2/1366-lift-inside.png",
+          "caption": "Desktop, 1366 × 860: lift inside."
+        },
+        {
+          "id": "probe-2-1366-lift-open",
+          "image": "game3d/shots/office-people-20261008/probe-2/1366-lift-open.png",
+          "caption": "Desktop, 1366 × 860: lift open."
+        },
+        {
+          "id": "probe-2-1366-lift-stop5",
+          "image": "game3d/shots/office-people-20261008/probe-2/1366-lift-stop5.png",
+          "caption": "Desktop, 1366 × 860: lift stop5."
+        },
+        {
+          "id": "probe-2-1366-parcel-queue-detail",
+          "image": "game3d/shots/office-people-20261008/probe-2/1366-parcel-queue-detail.png",
+          "caption": "Desktop, 1366 × 860: parcel queue detail."
+        },
+        {
+          "id": "probe-2-1366-queue-native",
+          "image": "game3d/shots/office-people-20261008/probe-2/1366-queue-native.png",
+          "caption": "Desktop, 1366 × 860: queue native."
+        },
+        {
+          "id": "probe-2-1366-stationary-detail",
+          "image": "game3d/shots/office-people-20261008/probe-2/1366-stationary-detail.png",
+          "caption": "Desktop, 1366 × 860: stationary detail."
+        },
+        {
+          "id": "probe-2-390-lift-inside",
+          "image": "game3d/shots/office-people-20261008/probe-2/390-lift-inside.png",
+          "caption": "Phone, 390 × 844: lift inside."
+        },
+        {
+          "id": "probe-2-390-lift-open",
+          "image": "game3d/shots/office-people-20261008/probe-2/390-lift-open.png",
+          "caption": "Phone, 390 × 844: lift open."
+        },
+        {
+          "id": "probe-2-390-lift-stop5",
+          "image": "game3d/shots/office-people-20261008/probe-2/390-lift-stop5.png",
+          "caption": "Phone, 390 × 844: lift stop5."
+        },
+        {
+          "id": "probe-2-390-parcel-queue-detail",
+          "image": "game3d/shots/office-people-20261008/probe-2/390-parcel-queue-detail.png",
+          "caption": "Phone, 390 × 844: parcel queue detail."
+        },
+        {
+          "id": "probe-2-390-queue-native",
+          "image": "game3d/shots/office-people-20261008/probe-2/390-queue-native.png",
+          "caption": "Phone, 390 × 844: queue native."
+        },
+        {
+          "id": "probe-2-390-stationary-detail",
+          "image": "game3d/shots/office-people-20261008/probe-2/390-stationary-detail.png",
+          "caption": "Phone, 390 × 844: stationary detail."
+        }
+      ]
+    },
+    {
+      "title": "Actual station and lift route",
+      "caption": "Both native viewports: all seven approved roles, queue, ticket tap, gate passage and completed lift ride. Before the parcel grip correction.",
+      "images": [
+        {
+          "id": "route-1-1366-arrived-office",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-arrived-office.png",
+          "caption": "Desktop, 1366 × 860: arrived office."
+        },
+        {
+          "id": "route-1-1366-gate-native",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-gate-native.png",
+          "caption": "Desktop, 1366 × 860: gate native."
+        },
+        {
+          "id": "route-1-1366-gate-queue",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-gate-queue.png",
+          "caption": "Desktop, 1366 × 860: gate queue."
+        },
+        {
+          "id": "route-1-1366-gate-tap",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-gate-tap.png",
+          "caption": "Desktop, 1366 × 860: gate tap."
+        },
+        {
+          "id": "route-1-1366-gate-through",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-gate-through.png",
+          "caption": "Desktop, 1366 × 860: gate through."
+        },
+        {
+          "id": "route-1-1366-ride-1",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-ride-1.png",
+          "caption": "Desktop, 1366 × 860: ride 1."
+        },
+        {
+          "id": "route-1-1366-ride-2",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-ride-2.png",
+          "caption": "Desktop, 1366 × 860: ride 2."
+        },
+        {
+          "id": "route-1-1366-ride-3",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-ride-3.png",
+          "caption": "Desktop, 1366 × 860: ride 3."
+        },
+        {
+          "id": "route-1-1366-ride-4",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-ride-4.png",
+          "caption": "Desktop, 1366 × 860: ride 4."
+        },
+        {
+          "id": "route-1-1366-ride-5",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-ride-5.png",
+          "caption": "Desktop, 1366 × 860: ride 5."
+        },
+        {
+          "id": "route-1-1366-ride-B1",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-ride-B1.png",
+          "caption": "Desktop, 1366 × 860: ride B1."
+        },
+        {
+          "id": "route-1-1366-ride-B2",
+          "image": "game3d/shots/office-people-20261008/route-1/1366-ride-B2.png",
+          "caption": "Desktop, 1366 × 860: ride B2."
+        },
+        {
+          "id": "route-1-390-arrived-office",
+          "image": "game3d/shots/office-people-20261008/route-1/390-arrived-office.png",
+          "caption": "Phone, 390 × 844: arrived office."
+        },
+        {
+          "id": "route-1-390-gate-native",
+          "image": "game3d/shots/office-people-20261008/route-1/390-gate-native.png",
+          "caption": "Phone, 390 × 844: gate native."
+        },
+        {
+          "id": "route-1-390-gate-queue",
+          "image": "game3d/shots/office-people-20261008/route-1/390-gate-queue.png",
+          "caption": "Phone, 390 × 844: gate queue."
+        },
+        {
+          "id": "route-1-390-gate-tap",
+          "image": "game3d/shots/office-people-20261008/route-1/390-gate-tap.png",
+          "caption": "Phone, 390 × 844: gate tap."
+        },
+        {
+          "id": "route-1-390-gate-through",
+          "image": "game3d/shots/office-people-20261008/route-1/390-gate-through.png",
+          "caption": "Phone, 390 × 844: gate through."
+        },
+        {
+          "id": "route-1-390-ride-1",
+          "image": "game3d/shots/office-people-20261008/route-1/390-ride-1.png",
+          "caption": "Phone, 390 × 844: ride 1."
+        },
+        {
+          "id": "route-1-390-ride-2",
+          "image": "game3d/shots/office-people-20261008/route-1/390-ride-2.png",
+          "caption": "Phone, 390 × 844: ride 2."
+        },
+        {
+          "id": "route-1-390-ride-3",
+          "image": "game3d/shots/office-people-20261008/route-1/390-ride-3.png",
+          "caption": "Phone, 390 × 844: ride 3."
+        },
+        {
+          "id": "route-1-390-ride-4",
+          "image": "game3d/shots/office-people-20261008/route-1/390-ride-4.png",
+          "caption": "Phone, 390 × 844: ride 4."
+        },
+        {
+          "id": "route-1-390-ride-5",
+          "image": "game3d/shots/office-people-20261008/route-1/390-ride-5.png",
+          "caption": "Phone, 390 × 844: ride 5."
+        },
+        {
+          "id": "route-1-390-ride-B1",
+          "image": "game3d/shots/office-people-20261008/route-1/390-ride-B1.png",
+          "caption": "Phone, 390 × 844: ride B1."
+        },
+        {
+          "id": "route-1-390-ride-B2",
+          "image": "game3d/shots/office-people-20261008/route-1/390-ride-B2.png",
+          "caption": "Phone, 390 × 844: ride B2."
+        }
+      ]
+    },
+    {
+      "title": "Phone closeups: first framing",
+      "caption": "Diagnostic held cameras. Parcel penetration and stationary overlap exposed; lift states are frozen fixtures.",
+      "images": [
+        {
+          "id": "probe-3-390-lift-inside-fixture-detail",
+          "image": "game3d/shots/office-people-20261008/probe-3/390-lift-inside-fixture-detail.png",
+          "caption": "Phone, 390 × 844: lift inside fixture detail."
+        },
+        {
+          "id": "probe-3-390-lift-stop5-fixture-detail",
+          "image": "game3d/shots/office-people-20261008/probe-3/390-lift-stop5-fixture-detail.png",
+          "caption": "Phone, 390 × 844: lift stop5 fixture detail."
+        },
+        {
+          "id": "probe-3-390-parcel-queue-detail",
+          "image": "game3d/shots/office-people-20261008/probe-3/390-parcel-queue-detail.png",
+          "caption": "Phone, 390 × 844: parcel queue detail."
+        },
+        {
+          "id": "probe-3-390-queue-native",
+          "image": "game3d/shots/office-people-20261008/probe-3/390-queue-native.png",
+          "caption": "Phone, 390 × 844: queue native."
+        },
+        {
+          "id": "probe-3-390-stationary-detail",
+          "image": "game3d/shots/office-people-20261008/probe-3/390-stationary-detail.png",
+          "caption": "Phone, 390 × 844: stationary detail."
+        }
+      ]
+    },
+    {
+      "title": "Phone oblique closeups",
+      "caption": "Parcel penetration confirmed. Stationary view hits a wall; retained failed framing. Lift states are frozen fixtures.",
+      "images": [
+        {
+          "id": "probe-4-390-lift-inside-fixture-detail",
+          "image": "game3d/shots/office-people-20261008/probe-4/390-lift-inside-fixture-detail.png",
+          "caption": "Phone, 390 × 844: lift inside fixture detail."
+        },
+        {
+          "id": "probe-4-390-lift-stop5-fixture-detail",
+          "image": "game3d/shots/office-people-20261008/probe-4/390-lift-stop5-fixture-detail.png",
+          "caption": "Phone, 390 × 844: lift stop5 fixture detail."
+        },
+        {
+          "id": "probe-4-390-parcel-queue-detail",
+          "image": "game3d/shots/office-people-20261008/probe-4/390-parcel-queue-detail.png",
+          "caption": "Phone, 390 × 844: parcel queue detail."
+        },
+        {
+          "id": "probe-4-390-queue-native",
+          "image": "game3d/shots/office-people-20261008/probe-4/390-queue-native.png",
+          "caption": "Phone, 390 × 844: queue native."
+        },
+        {
+          "id": "probe-4-390-stationary-detail",
+          "image": "game3d/shots/office-people-20261008/probe-4/390-stationary-detail.png",
+          "caption": "Phone, 390 × 844: stationary detail."
+        }
+      ]
+    },
+    {
+      "title": "Stationary pair: corrected phone view",
+      "caption": "Native queue followed by a diagnostic held camera showing both stationary roles.",
+      "images": [
+        {
+          "id": "probe-5-390-queue-native",
+          "image": "game3d/shots/office-people-20261008/probe-5/390-queue-native.png",
+          "caption": "Phone, 390 × 844: queue native."
+        },
+        {
+          "id": "probe-5-390-stationary-detail",
+          "image": "game3d/shots/office-people-20261008/probe-5/390-stationary-detail.png",
+          "caption": "Phone, 390 × 844: stationary detail."
+        }
+      ]
+    },
+    {
+      "title": "Corrected parcel contact",
+      "caption": "The box stays level and meets the native hand at its rear rim. Oblique diagnostic camera. The unrelated stationary view is still obstructed; lift states are frozen fixtures.",
+      "images": [
+        {
+          "id": "parcel-1-390-lift-inside-fixture-detail",
+          "image": "game3d/shots/office-people-20261008/parcel-1/390-lift-inside-fixture-detail.png",
+          "caption": "Phone, 390 × 844: lift inside fixture detail."
+        },
+        {
+          "id": "parcel-1-390-lift-stop5-fixture-detail",
+          "image": "game3d/shots/office-people-20261008/parcel-1/390-lift-stop5-fixture-detail.png",
+          "caption": "Phone, 390 × 844: lift stop5 fixture detail."
+        },
+        {
+          "id": "parcel-1-390-parcel-queue-detail",
+          "image": "game3d/shots/office-people-20261008/parcel-1/390-parcel-queue-detail.png",
+          "caption": "Phone, 390 × 844: parcel queue detail."
+        },
+        {
+          "id": "parcel-1-390-queue-native",
+          "image": "game3d/shots/office-people-20261008/parcel-1/390-queue-native.png",
+          "caption": "Phone, 390 × 844: queue native."
+        },
+        {
+          "id": "parcel-1-390-stationary-detail",
+          "image": "game3d/shots/office-people-20261008/parcel-1/390-stationary-detail.png",
+          "caption": "Phone, 390 × 844: stationary detail."
+        }
+      ]
+    },
+    {
+      "title": "Corrected parcel in actual motion",
+      "caption": "Diagnostic camera tracks the parcel carrier through the ordinary automated station route. Doorway and tap views are partly occluded; queue and passage show contact clearly. Later lift views use the native camera.",
+      "images": [
+        {
+          "id": "parcel-motion-1-390-arrived-office",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-arrived-office.png",
+          "caption": "Phone, 390 × 844: arrived office."
+        },
+        {
+          "id": "parcel-motion-1-390-gate-in",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-gate-in.png",
+          "caption": "Phone, 390 × 844: gate in."
+        },
+        {
+          "id": "parcel-motion-1-390-gate-native",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-gate-native.png",
+          "caption": "Phone, 390 × 844: gate native."
+        },
+        {
+          "id": "parcel-motion-1-390-gate-queue",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-gate-queue.png",
+          "caption": "Phone, 390 × 844: gate queue."
+        },
+        {
+          "id": "parcel-motion-1-390-gate-tap",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-gate-tap.png",
+          "caption": "Phone, 390 × 844: gate tap."
+        },
+        {
+          "id": "parcel-motion-1-390-gate-through",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-gate-through.png",
+          "caption": "Phone, 390 × 844: gate through."
+        },
+        {
+          "id": "parcel-motion-1-390-gate-toqueue",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-gate-toqueue.png",
+          "caption": "Phone, 390 × 844: gate toqueue."
+        },
+        {
+          "id": "parcel-motion-1-390-ride-1",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-ride-1.png",
+          "caption": "Phone, 390 × 844: ride 1."
+        },
+        {
+          "id": "parcel-motion-1-390-ride-2",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-ride-2.png",
+          "caption": "Phone, 390 × 844: ride 2."
+        },
+        {
+          "id": "parcel-motion-1-390-ride-3",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-ride-3.png",
+          "caption": "Phone, 390 × 844: ride 3."
+        },
+        {
+          "id": "parcel-motion-1-390-ride-4",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-ride-4.png",
+          "caption": "Phone, 390 × 844: ride 4."
+        },
+        {
+          "id": "parcel-motion-1-390-ride-5",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-ride-5.png",
+          "caption": "Phone, 390 × 844: ride 5."
+        },
+        {
+          "id": "parcel-motion-1-390-ride-B1",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-ride-B1.png",
+          "caption": "Phone, 390 × 844: ride B1."
+        },
+        {
+          "id": "parcel-motion-1-390-ride-B2",
+          "image": "game3d/shots/office-people-20261008/parcel-motion-1/390-ride-B2.png",
+          "caption": "Phone, 390 × 844: ride B2."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play the station",
+      "href": "game3d/?day=1&place=gate"
+    },
+    {
+      "label": "Office replacement work",
+      "href": "https://github.com/fumbleforce/tower-of-words/issues/353"
+    }
+  ],
+  "result": [
+    "route-1-1366-ride-2",
+    "probe-5-390-stationary-detail",
+    "parcel-1-390-parcel-queue-detail"
+  ]
+}

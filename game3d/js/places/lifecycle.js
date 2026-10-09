@@ -95,7 +95,7 @@ export function createPlaceLifecycle(
         keepPublic(story); // its ways out as the public story wrote them, for fast travel (travel/ways.js)
         await installPlacePlugin(name, { game, story, place });
         await nextFrame();
-        attachLift(game, place); // walk-in lift (places/lift.js)
+        await attachLift(game, place); // walk-in lift (places/lift.js)
         await nextFrame();
         await attachCrowd(game, place, name); // the outdoor places' passers-by, before the draw-call pass (crowd/)
         await sliced(farViewSteps(game, place, name, () => sim.period)); // ?far=1: sky, haze, far model (look/sky.js)
