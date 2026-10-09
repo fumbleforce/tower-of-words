@@ -18,11 +18,17 @@ export function campusLandscape(parts) {
     TREES[kind](parts, ...pt([x, z]), size, seed);
   const lowCover = { geo: (color, geometry, options) => parts.geo(color, geometry, { ...options, cast: false }) };
   for (const garden of CAMPUS_GARDENS) {
-    groundPatch(parts, garden.poly, 0.012, '#59614d', 'soil');
-    const cover = gardenCover(garden);
-    cover.forEach(({ x, z, r }, i) =>
-      mound(lowCover, ...pt([x, z]), r, ['#586d49', '#5d704c', '#61754d'][i % 3], { y: 0.012, squash: 0.12, turn: i }),
-    );
+    // a strip along its path gets its soil and low cover; a loose garden is plants on the lawn (outdoor/bed-layout.js)
+    if (!garden.loose) {
+      groundPatch(parts, garden.poly, 0.012, '#59614d', 'soil');
+      gardenCover(garden).forEach(({ x, z, r }, i) =>
+        mound(lowCover, ...pt([x, z]), r, ['#586d49', '#5d704c', '#61754d'][i % 3], {
+          y: 0.012,
+          squash: 0.12,
+          turn: i,
+        }),
+      );
+    }
     const plants = gardenPlants(garden);
     plants.forEach(({ x, z, r }, i) =>
       cluster(parts, ...pt([x, z]), {
@@ -34,7 +40,7 @@ export function campusLandscape(parts) {
       }),
     );
     // Small upright drifts break the low mat; these are plants, not another layer of rounded shrubs.
-    garden.grasses.forEach(([x, z], i) => {
+    [...garden.grasses, ...garden.looseGrasses].forEach(([x, z], i) => {
       for (let j = 0; j < 7; j++) {
         const a = j * 2.39996,
           d = j ? 0.08 + Math.sqrt(j) * 0.055 : 0;
@@ -47,7 +53,7 @@ export function campusLandscape(parts) {
     });
     // Flat rain-washed stones sit within the bed, not as obstacles in the path.
     for (const [i, p] of plants.entries())
-      if (i === 1) {
+      if (i === 1 && !garden.loose) {
         const [x, z] = pt([p.x + 0.12, p.z]);
         const g = new THREE.DodecahedronGeometry(0.15, 0).scale(1.45, 0.32, 0.8).rotateY(i).translate(x, 0.035, z);
         parts.geo('#929285', g, { cast: false });

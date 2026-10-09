@@ -1,5 +1,7 @@
 // Island-frame grounds between the shed street and the existing campus trees.
 import { roundCorners } from './quarter-plan.js';
+import { alignBeds } from '../outdoor/bed-layout.js';
+import { BED_WALKS } from './bed-walks.js';
 
 const beds = [
   {
@@ -147,10 +149,10 @@ const beds = [
     cover: { radius: 0.4, variation: 0.16, spacing: 0.59, squash: 0.23 },
   },
 ];
-export const SHED_GARDENS = beds.map((bed) => ({
-  ...bed,
-  poly: roundCorners(bed.poly),
-}));
+export const SHED_GARDENS = alignBeds(
+  beds.map((bed) => ({ ...bed, poly: roundCorners(bed.poly) })),
+  BED_WALKS,
+);
 // Gravel follows the street-side bed; gaps around the lamp stay at lawn level.
 export const SHED_RILLS = [
   [-17.02, -40.6, -16.68, -38.4],

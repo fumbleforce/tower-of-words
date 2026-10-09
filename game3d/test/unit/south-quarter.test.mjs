@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { registerHooks } from 'node:module';
 import { test } from 'node:test';
 import { SOUTH_QUARTER_BEDS, JUNCTION_TREE, JUNCTION_SHRUB } from '../../js/scenes/forecourt/quarter-planting-plan.js';
-import { insideGarden } from '../../js/scenes/campus/landscape-plan.js';
 import { plantedTrees } from '../../js/ui/map/terrain.js';
+import { BED_WALKS } from '../../js/scenes/campus/bed-walks.js';
 
 test('southern beds contain relocated roots and retain the lamp pocket', () => {
   assert.deepEqual(JUNCTION_TREE, ['keyaki', 0.65, -23.1, 1.08, 68]);
@@ -15,11 +15,13 @@ test('southern beds contain relocated roots and retain the lamp pocket', () => {
     spread: 0.55,
     seed: 82,
   });
+  // the relocated tree and shrub stand on the lawn beside the beds, which are strips along the street now
+  // (outdoor/bed-layout.js); they stay off the street
   for (const [x, z] of [
     [0.65, -23.1],
     [8.4, -26.8],
   ])
-    assert(SOUTH_QUARTER_BEDS.some((bed) => insideGarden(bed.poly, x, z)));
+    assert(!BED_WALKS.some(([x0, x1, z0, z1]) => x > x0 && x < x1 && z > z0 && z < z1));
   assert(SOUTH_QUARTER_BEDS[1].gaps.some(([x, z, r]) => x === 7 && z === -24.3 && r >= 0.65));
   assert.deepEqual(
     plantedTrees.filter((tree) => tree[4] === 68),

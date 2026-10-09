@@ -46,7 +46,7 @@ function collect(build) {
 }
 test('shed garden physical geometry stays outside every campus path and building', () => {
   const { triangles, verts } = collect((p) => shedGarden(p, P.pt([0, 0])));
-  assert.ok(triangles > 10000 && triangles < 17000, `${triangles} triangles`);
+  assert.ok(triangles > 6000 && triangles < 17000, `${triangles} triangles`);
   for (const [x, , z] of verts) {
     assert.ok(!P.WALKS.some((r) => P.inRect(x, z, r)), `path intrusion ${x},${z}`);
     assert.ok(!P.SOLIDS.some((r) => P.inRect(x, z, r)), `building intrusion ${x},${z}`);
@@ -75,7 +75,8 @@ test('shed garden map uses every physical planted outline', () => {
   );
   drawPlanting(ctx, false);
   const model = collect((p) => shedGarden(p));
-  for (const bed of SHED_GARDENS)
+  for (const bed of SHED_GARDENS.filter((b) => !b.loose))
+    // loose groves are plants on the lawn, with no outline
     for (const [x, z] of bed.poly) {
       assert.ok(
         paths.some((path) => path.some((v) => v[0] === x && v[1] === z)),
@@ -88,10 +89,10 @@ test('shed garden map uses every physical planted outline', () => {
     }
 });
 test('shed understory is deterministic and keeps its full cover footprint within beds', () => {
-  for (const bed of SHED_GARDENS) {
+  for (const bed of SHED_GARDENS.filter((b) => !b.loose)) {
     const plants = quarterCover(bed);
     assert.deepEqual(plants, quarterCover(bed));
-    assert.ok(plants.length > 10, bed.id);
+    assert.ok(plants.length >= 3, bed.id);
     for (const p of plants)
       for (let i = 0; i < 16; i++)
         assert.ok(

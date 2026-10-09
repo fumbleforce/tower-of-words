@@ -2,15 +2,61 @@
   "title": "Walkable ground: one kerb wherever walking ends (forecourt and campus)",
   "date": "2026-10-09",
   "by": "claude-agent:grounds",
-  "caption": "Stage 1 of #362. The walk grid and the kerbs now come from one list of walkable ground, so he stops exactly at a kerb, a wall, a building or a gate, never at an invisible line. Beds lie flush with the lawn. Forecourt and campus only; the other places follow after you have seen this.",
+  "caption": "Stage 1 of #362. The walk grid and the kerbs now come from one list of walkable ground, so he stops exactly at a kerb, a wall, a building or a gate, never at an invisible line. Beds lie flush with the lawn. Forecourt and campus only; the other places follow after you have seen this. Beds are straight strips along the paths, or plants loose on the lawn; no blob-shaped beds.",
   "preview": "after-garden-desk",
   "result": [
     "after-garden-desk",
     "after-garden-default",
-    "after-campus-bench",
+    "after-beds-bench",
     "after-gravel-edge-phone"
   ],
   "sections": [
+    {
+      "title": "Campus: beds follow the paths, no blob-shaped beds",
+      "caption": "Your screenshot was the campus bench court. Every curved bed in the campus is now a straight strip along the path or court it borders, behind its kerb; plants that stood further out stand loose on the lawn.",
+      "images": [
+        {
+          "id": "before-beds-bench",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-beds-bench.webp",
+          "caption": "Bench court, before"
+        },
+        {
+          "id": "after-beds-bench",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-beds-bench.webp",
+          "caption": "Bench court, after"
+        },
+        {
+          "id": "before-beds-print",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-beds-print.webp",
+          "caption": "Print shop path, before"
+        },
+        {
+          "id": "after-beds-print",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-beds-print.webp",
+          "caption": "Print shop path, after"
+        },
+        {
+          "id": "before-beds-quarter",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-beds-quarter.webp",
+          "caption": "Quarter street, before"
+        },
+        {
+          "id": "after-beds-quarter",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-beds-quarter.webp",
+          "caption": "Quarter street, after"
+        },
+        {
+          "id": "before-beds-top",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-beds-top.webp",
+          "caption": "Campus garden from above, before"
+        },
+        {
+          "id": "after-beds-top",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-beds-top.webp",
+          "caption": "Campus garden from above, after"
+        }
+      ]
+    },
     {
       "title": "Forecourt: the garden court from the lane (Jørgen's view)",
       "caption": "Street-style look, same spot and camera. The stepped plots and the double kerb in the lawn are gone; a kerbed gravel path joins the lane to the court.",

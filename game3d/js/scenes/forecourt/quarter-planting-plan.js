@@ -1,5 +1,7 @@
 // Island coordinates for the quarter street's southern beds and the cross-street opening.
 import { roundCorners } from '../campus/quarter-plan.js';
+import { alignBeds } from '../outdoor/bed-layout.js';
+import { BED_WALKS } from '../campus/bed-walks.js';
 export const QUARTER_OPENING = [3, 6];
 export const JUNCTION_TREE = ['keyaki', 0.65, -23.1, 1.08, 68];
 export const JUNCTION_SHRUB = {
@@ -10,7 +12,7 @@ export const JUNCTION_SHRUB = {
   spread: 0.55,
   seed: 82,
 };
-export const SOUTH_QUARTER_BEDS = [
+const southQuarterBeds = [
   {
     id: 'quarter-south-west',
     seed: 964,
@@ -96,3 +98,5 @@ export const SOUTH_QUARTER_BEDS = [
     ],
   },
 ].map((bed) => ({ ...bed, poly: roundCorners(bed.poly) }));
+// lined up with the paths, or loose on the lawn (outdoor/bed-layout.js)
+export const SOUTH_QUARTER_BEDS = alignBeds(southQuarterBeds, BED_WALKS);

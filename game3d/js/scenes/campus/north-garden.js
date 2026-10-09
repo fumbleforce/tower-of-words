@@ -42,46 +42,8 @@ export function northGarden(parts, offset = [0, 0]) {
       { cast, surf: 'foliage' },
     );
   for (const bed of NORTH_GARDENS) {
-    const shape = new THREE.Shape(bed.poly.map(([x, z]) => new THREE.Vector2(x, -z)));
-    p.geo('#59614d', new THREE.ShapeGeometry(shape).rotateX(-Math.PI / 2).translate(0, 0.013, 0), {
-      cast: false,
-      surf: 'soil',
-    });
-    const rim = [];
-    bed.poly.forEach(([x, z], i) => {
-      const [xx, zz] = bed.poly[(i + 1) % bed.poly.length],
-        length = Math.hypot(xx - x, zz - z),
-        dx = ((zz - z) / length) * 0.028,
-        dz = ((x - xx) / length) * 0.028;
-      rim.push(
-        x - dx,
-        0.038,
-        z - dz,
-        xx - dx,
-        0.038,
-        zz - dz,
-        xx + dx,
-        0.038,
-        zz + dz,
-        x - dx,
-        0.038,
-        z - dz,
-        xx + dx,
-        0.038,
-        zz + dz,
-        x + dx,
-        0.038,
-        z + dz,
-      );
-    });
-    const edge = new THREE.BufferGeometry();
-    edge.setAttribute('position', new THREE.Float32BufferAttribute(rim, 3));
-    edge.computeVertexNormals();
-    p.geo('#85897c', edge, { cast: false });
-    quarterCover(bed).forEach(({ x, z, r }, i) =>
-      leaf(x, z, r, 0.07, ['#486447', '#4a6849', '#466548'][i % 3], i * 2.39996, false),
-    );
-    bed.masses.forEach(([x, z, r], i) => {
+    if (!bed.loose) soilAndCover(p, leaf, bed);
+    [...bed.masses, ...bed.looseMasses].forEach(([x, z, r], i) => {
       for (let j = 0; j < 3; j++) {
         const turn = i * 2.39996 + j * 2.1,
           spread = r * 0.28;
@@ -96,7 +58,7 @@ export function northGarden(parts, offset = [0, 0]) {
         );
       }
     });
-    bed.grasses.forEach(([x, z], i) => {
+    [...bed.grasses, ...bed.looseGrasses].forEach(([x, z], i) => {
       for (let j = 0; j < 2; j++)
         grass(p, x + j * 0.12, z - j * 0.1, {
           h: 0.4 + j * 0.12,
@@ -104,4 +66,47 @@ export function northGarden(parts, offset = [0, 0]) {
         });
     });
   }
+}
+
+// a strip bed's soil, its flat mowing edge and its low cover (outdoor/bed-layout.js)
+function soilAndCover(p, leaf, bed) {
+  const shape = new THREE.Shape(bed.poly.map(([x, z]) => new THREE.Vector2(x, -z)));
+  p.geo('#59614d', new THREE.ShapeGeometry(shape).rotateX(-Math.PI / 2).translate(0, 0.013, 0), {
+    cast: false,
+    surf: 'soil',
+  });
+  const rim = [];
+  bed.poly.forEach(([x, z], i) => {
+    const [xx, zz] = bed.poly[(i + 1) % bed.poly.length],
+      length = Math.hypot(xx - x, zz - z),
+      dx = ((zz - z) / length) * 0.028,
+      dz = ((x - xx) / length) * 0.028;
+    rim.push(
+      x - dx,
+      0.038,
+      z - dz,
+      xx - dx,
+      0.038,
+      zz - dz,
+      xx + dx,
+      0.038,
+      zz + dz,
+      x - dx,
+      0.038,
+      z - dz,
+      xx + dx,
+      0.038,
+      zz + dz,
+      x + dx,
+      0.038,
+      z + dz,
+    );
+  });
+  const edge = new THREE.BufferGeometry();
+  edge.setAttribute('position', new THREE.Float32BufferAttribute(rim, 3));
+  edge.computeVertexNormals();
+  p.geo('#85897c', edge, { cast: false });
+  quarterCover(bed).forEach(({ x, z, r }, i) =>
+    leaf(x, z, r, 0.07, ['#486447', '#4a6849', '#466548'][i % 3], i * 2.39996, false),
+  );
 }

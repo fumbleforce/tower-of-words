@@ -1,4 +1,4 @@
-import { PRINT_APRONS } from './campus/landscape-plan.js';
+import { PRINT_APRONS } from './campus/aprons.js';
 
 // Built campus connections; the same footprints drive map paving and physical navigation.
 export const CAMPUS_PATHS = [
