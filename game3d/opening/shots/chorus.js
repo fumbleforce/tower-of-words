@@ -296,23 +296,53 @@ export const CHORUS = [
     },
     fx: (lt) => (lt > 0.8 ? { shake: [Math.sin(lt * 90) * 0.004 * Math.exp(-(lt - 0.8) / 0.15), 0] } : null),
   },
-  // 世界が少し 動き出す: the world starts to move. The island's own places, one per beat, as the game builds them.
+  // 世界が少し 動き出す: the world starts to move. One beat each: the monorail on its beam, then the island's places
+  // in their newest look (the forecourt garden, head office over the forecourt, the plaza fountain).
   ...[
-    // [id, camera island [x, y, z], looks at, fov, drift]
-    ['place-fountain', [37.3, 8.5, 13.5], [37.3, 0.4, -2.75], 50, [-1.5, -0.4, 0]],
-    ['place-harbour', [-78, 9, -58], [-110, 1, -95], 50, [0, 0, -3]],
-    ['place-street', [70, 4.5, 34], [52, 2, 18], 48, [-2, 0, 0]],
-    ['place-office', [-2, 5, 14], [3, 9, -9], 54, [0, 1.5, 0]],
-  ].map(([id, pos, at, fov, drift], i) => ({
+    [
+      'place-monorail',
+      (S, lt) => {
+        // low beside the middle car on the level stretch, the train sliding past above the camera
+        const x = 260 + lt * 18;
+        S.setTrain(x);
+        return [[x + 11 - lt * 7, -3.4, 12.5], [x - 1, -1.4, 0], 38];
+      },
+    ],
+    [
+      'place-garden',
+      (S, lt) => {
+        const A = S.anchors;
+        const at = A.inPlace('forecourt', 23, 4.5, 0.5);
+        const yaw = 0.5 + lt * 0.35,
+          el = 0.82,
+          d = 19 - lt * 3;
+        return [[at.x + Math.sin(yaw) * Math.cos(el) * d, at.y + Math.sin(el) * d, at.z + Math.cos(yaw) * Math.cos(el) * d], at.toArray(), 44];
+      },
+    ],
+    [
+      'place-hq',
+      (S, lt) => {
+        // across the forecourt at the head office's south front (its footprint's z = -4.25), rising a little
+        const A = S.anchors;
+        return [A.toWorld(8.3 - lt * 3, 18 - lt * 3, 7 + lt * 1.5).toArray(), A.toWorld(3.3, -4.25, 8).toArray(), 48];
+      },
+    ],
+    [
+      'place-fountain',
+      (S, lt) => {
+        const A = S.anchors;
+        const p = lt / 0.4;
+        return [A.toWorld(37.3 - 1.5 * p, 13.5, 8.5 - 0.4 * p).toArray(), A.toWorld(37.3, -2.75, 0.4).toArray(), 50];
+      },
+    ],
+  ].map(([id, frame], i) => ({
     id,
     t: [B(141 + i), B(142 + i)],
     in: i === 0 ? { type: 'zoom', d: 0.3, at: 0.5 } : { type: 'cut' },
     scene3d(S, lt) {
-      S.setTrain(-5000);
-      const A = S.anchors;
-      const p = lt / 0.4;
-      const P = A.toWorld(pos[0] + drift[0] * p, pos[2] + drift[2] * p, pos[1] + drift[1] * p);
-      S.look(P.toArray(), A.toWorld(at[0], at[2], at[1]).toArray(), fov);
+      if (id !== 'place-monorail') S.setTrain(-5000);
+      const [pos, at, fov] = frame(S, lt);
+      S.look(pos, at, fov);
     },
     draw(g, lt) {
       speedLines(g, W / 2, H / 2, lt, { color: 'rgba(255,255,255,0.22)', count: 26, inner: 760, width: 10 });
