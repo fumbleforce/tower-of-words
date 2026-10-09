@@ -68,7 +68,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 - Age 25. B2's programmer. Of the people Eric works beside, the only one with English (loose, learned from work and the internet).
 - Home: on the island. Her mother lives on the mainland; Mio stays over sometimes and comes back on the monorail with a bag of her mother's pickles ("My mother thinks island has no food").
 - Routine: looks after B2's old servers in the machine room, where she also eats lunch because "it's quiet, and nobody talks to me there". Hates bowing; that's why she's on B2. Anything reported broken goes on her list.
-- Dry, low on energy, busy. Doesn't love strangers and keeps them at a distance, but won't let a teammate walk in unprepared and embarrass B2. On the train she's a little reluctant but gets Eric up to speed (Jørgen). She calls him 外人 consistently, the way you'd say "the new guy"; Mori corrects her to 外国の方.
+- Mio is an asocial gamer. She values her privacy and alone time. A few people are exceptions (Jørgen, 2026-10-09). She is dry, busy and low on energy. On the train she reluctantly gets Eric up to speed. She will not let a teammate embarrass B2 through lack of preparation. She calls him 外人 as she would say "the new guy". Mori corrects her to 外国の方.
 - Knows: Mori (likes him), Kenji (barred him from the machine room).
 - Look: approved portrait art/approved/mio/mio-after.webp. Hair dark green bordering on black, with lighter green underneath, as in the portrait (Jørgen). Eyes light tan, not brown; every expression keeps her exact glasses. Skin pale; she doesn't sunbathe (Jørgen, 2026-10-02: "she should not have a tan, she doesnt sunbathe, pretty pale"). 3D: Jørgen's Meshy model; game colours hair #13292f, underside and streaks #20a081, hoodie sampled from the portrait (approved, "yes this is sweet", commit df8f2f7). A remake made the way Kuro, Aoi and Emi were (Jørgen, 2026-10-05: "her design is falling behind in quality, it is not as accurate as the others") waits for his pick in reviews/mio-meshy-2 and loads only with `?mio=meshy2`.
 
@@ -82,7 +82,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Kenji (`kenji`)
 
-- Age 21. Two months on the team, the newest before Eric. Keen to help and easily distracted.
+- Age 21. Two months on the team, the newest before Eric. Kenji is mild, confused and somewhat clumsy (Jørgen, 2026-10-09). He is keen to help and easily distracted.
 - Routine: lives on melon soda. His chair broke, so he borrowed Eric's and left it in the machine room.
 - Speaks casual Japanese, and a little school English he likes to practise.
 - Knows: Mori (likes him), Mio (owes her).
@@ -113,6 +113,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Kuro (`kuro`)
 
+- Kuro is aggressively flirtatious and domineering (Jørgen, 2026-10-09). Her low, unhurried delivery does not soften that personality.
 - Age 38 (Jørgen, 2026-10-05). The receptionist in the head office lobby, behind the reception counter by the door (moved there from the station's visitor counter; Jørgen, 2026-09-30: "Then kuro should be there rather than at security"). Her name is written 玖路 and reads like 黒, black. Polite Japanese.
 - She can handle a short reception exchange in English. Her first-day conversation is in [places.md](places.md#small-moments-2), with delivery in `story/VOICE.md` (Jørgen, 2026-10-04: "Kuro should have some more dialogue than good morning on the first day, maybe a tiny bit flirtatious").
 - Look: approved portrait art/approved/kuro/kuro-after.webp, extended down to the waist as kuro-body-c-s11 (reviews/kuro-body-1) and shown 15% smaller than the others' framing, since at the same face height she looked "15% too large / zoomed in" (Jørgen, 2026-10-01). Clear-lensed glasses, never tinted. In the 3D world, Jørgen's approved Meshy model kuro-3 (reviews/kuro-meshy-orig-3, 2026-10-04: "Yes, very good"): black hair in a high bun with long side locks and a blunt fringe, dark eyes, a black trouser suit; no glasses or hair sticks on the model ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
@@ -125,6 +126,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Rei (`rei`)
 
+- Rei is a brusque, abrasive leader with strong weaknesses (Jørgen, 2026-10-09). Her established job remains Sales.
 - Age 41 (Jørgen, 2026-10-05). Sales. Built in the game (figures on the train, at the gate and in the office) but hidden all day and in no storyline. Her first authored meeting is planned at tennis (#226, to build).
 - Language (#226): native Japanese; conversational English used with overseas customers. She can make plans, explain a practical problem and tease in short complete sentences. Idioms and abstract conversation take effort. She knows English tennis jargon better than Eric does, so a failed explanation is about the jargon, not his inability to understand any English. She can demonstrate or rephrase; she is not another general translator.
 - Look: dialogue portrait rei-i65-2102 (reviews/rei-portrait-1, Jørgen: "65-2102"), an img2img of art/approved/rei/rei-after.webp with a sly confident look: silver-grey high ponytail, steel-grey eyes, gold hoops, light grey suit over a black high-neck top. Extended down to the waist with Jørgen's pick a-s11 (reviews/rei-body-1), its seam blended as attempt b did, which is the file b-s11.
@@ -153,6 +155,8 @@ The women below each have a friendship ending and an optional romantic invitatio
 Eric is the player, so has no bond with himself. This covers all ten named non-player characters in Everyone. Unnamed workers/passengers, voice aliases, removed speakers and undeveloped wider-cast placeholders such as Goro and Kanae do not gain invented routes here.
 
 ### Mio: leaving a working server alone
+
+Revision needed under #357. The built scenes below remain an account of the game. The unbuilt plan predates her current personality in [People](#mio-mio). Rewrite it before adding scenes. Her desire for privacy and time to play games must matter.
 
 Route: B2 machine room, then the sea terrace; no club. She wants an afternoon away without leaving a fault for someone else. Her habit of carrying every failure onto her own list keeps her close to Eric at work and hard to meet elsewhere. Continue [Mio notices](stories/mio-notices.md); the shared reveal's witnesses and timing belong to the days 3–5 outline. Her route never investigates the magic's origin.
 
@@ -246,6 +250,8 @@ Repeat meeting: Wednesday evening karaoke. He shares the venue with Kenji, but h
 
 ### Kuro: being recognised away from the counter
 
+Superseded proposal under #357. This route predates her current personality in [People](#kuro-kuro). Do not build these milestones. Rewrite them around her aggressive flirting and desire to take charge.
+
 Route: swimming club, with reception as first contact. She wants an evening where people remember what she enjoys without asking her to find somebody or hold a bag. Her even courtesy stays; trust means letting Eric hear a direct preference without wrapping it as a service offer.
 
 Repeat meeting: Saturday club, pool in season and gym in winter. She attends as a member and does not become the club's receptionist. Her short English exchanges remain within the language limits in her People entry.
@@ -275,6 +281,8 @@ Repeat meeting: Sunday evening tennis; weekday lunch at the plaza for short work
 | 5 | She books a slot because she wants to play and invites Eric first. He can accept as her regular practice friend or ask to go out afterwards as a date. Her next invitation names something she wants, with no assigned errand attached. |
 
 ### Rei: playing a game she could lose
+
+Superseded proposal under #357. This route predates her current personality in [People](#rei-rei). Do not build these milestones. Rewrite them around her abrasive leadership and weaknesses that persist beyond the first disagreement.
 
 Route: tennis club and the sea terrace. She enjoys competitive doubles and wants a partner who can disagree with her. At work she can steer an uncertain conversation toward an easy yes; on court she does the same by explaining every shot until the other person stops choosing.
 

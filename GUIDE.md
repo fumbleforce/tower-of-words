@@ -53,7 +53,12 @@ Plain writing (humanizer), how dialogue must sound (spoken, no AI voice, no expo
 
 ### Plain writing
 
-- All UI text, docs and replies: plain and human. Use the humanizer skill (~/.agents/skills/humanizer). No slogans, no em dashes, no "not X but Y", no filler taglines.
+- All UI text, docs and replies: plain and human. Use the humanizer skill (~/.agents/skills/humanizer). Write full, concise, natural sentences. Avoid sentences that stack several clauses. No semicolons, em dashes, slogans, "not X but Y" or filler taglines (Jørgen, 2026-10-09).
+- **Mandatory before sending or saving prose:** Read every new paragraph for natural language. Rewrite anything you would not comfortably say to another person. Passing a punctuation check is not enough. Jørgen must not have to remind us of this again (2026-10-09).
+- Describe what people want, say and do in ordinary words. Name the person doing it. Avoid abstract phrases about responses, interactions, dynamics and behaviour when a direct sentence would say what happened.
+- Rejected: "An interruption can get a blunt answer." Write: "Mio gets annoyed when people interrupt her." Rejected: "Gaming can hold her attention and draw out a more involved response." Write: "She talks more when the subject is a game she likes."
+- A character bio describes a person. Do not fill it with instructions such as "Let that cause trouble", "Her weakness has consequences" or "Closeness may make an admission possible". Say what the person actually does. Keep author instructions in the writing guide.
+- Keep sentences complete and concise. Do not replace long sentences with choppy fragments. Remove stock phrases and unnecessary explanations. Keep the character's personality intact during this pass.
 
 ### Dialogue quality
 
@@ -86,6 +91,7 @@ Skills: story-sense, story-analysis, dialogue, scene-sequencing, key-moments, ch
 - Scenes must want something: a goal, an obstacle and a turn. Characters drive scenes; they don't just deliver information.
 - Every character has a distinct voice (word choice, sentence length, register); run the dialogue skill's voice checks.
 - Character depth comes from work history, ordinary life and past relationships, with the resulting skills, habits and contradictions discovered gradually through play; proposed history stays separate from established canon (Jørgen, 2026-10-07).
+- Character briefs should fit about one page. Aim for memorable people with strong contrasts across the cast. Give them distinct desires, weaknesses and reactions to the player. Do not make everyone agreeable or give everyone mundane goals. Dragon Age: Origins and Mass Effect are the references (Jørgen, 2026-10-09). Method and examples: [character creation guide](notes/character-creation-guide.md).
 - A story editor reviews the beats, not only the builder.
 
 ### Originality
