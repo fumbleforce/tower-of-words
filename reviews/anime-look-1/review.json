@@ -2,7 +2,7 @@
  "title": "Anime look trial: six shader tricks at the plaza fountain",
  "date": "2026-10-09",
  "by": "claude-agent:anime-look",
- "status": "open",
+ "status": "decided",
  "question": "Which of the six tricks should we keep, and should the look go to every place?",
  "multi": true,
  "media": [
@@ -92,17 +92,63 @@
   }
  ],
  "options": [
-  {"id": "toon", "label": "toon", "image": "reviews/anime-look-1/trick-toon.webp", "note": "Three-tone light, cool shade, warm lit side. Left now, right ?anime=toon. About +0.5 ms on a phone."},
-  {"id": "outline", "label": "outline", "image": "reviews/anime-look-1/trick-outline.webp", "note": "Coloured edge lines. Left now, right ?anime=outline. About +1 ms on a phone."},
-  {"id": "dapple", "label": "dapple", "image": "reviews/anime-look-1/trick-dapple.webp", "note": "Leaf shade with sun spots under crowns. Left now, right ?anime=dapple. No measurable cost."},
-  {"id": "paint", "label": "paint", "image": "reviews/anime-look-1/trick-paint.webp", "note": "Darker feet, lighter tops, faint colour drift on stone and paving. Left now, right ?anime=paint. About +1 ms on a phone."},
-  {"id": "water", "label": "water", "image": "reviews/anime-look-1/trick-water.webp", "note": "Stylised fountain water with streams and splash rings. Left now, right ?anime=water. About +1 ms on a phone."},
-  {"id": "crowns", "label": "crowns", "image": "reviews/anime-look-1/trick-crowns.webp", "note": "Soft clump shading on crowns and hedges. Left now, right ?anime=crowns. No cost while playing."},
-  {"id": "rollout", "label": "rollout: make the kept tricks the default everywhere", "note": "Pick this as well if the tricks you keep should become the game's look in every place, not only a flag."}
+  {
+   "id": "toon",
+   "label": "toon",
+   "image": "reviews/anime-look-1/trick-toon.webp",
+   "note": "Three-tone light, cool shade, warm lit side. Left now, right ?anime=toon. About +0.5 ms on a phone."
+  },
+  {
+   "id": "outline",
+   "label": "outline",
+   "image": "reviews/anime-look-1/trick-outline.webp",
+   "note": "Coloured edge lines. Left now, right ?anime=outline. About +1 ms on a phone."
+  },
+  {
+   "id": "dapple",
+   "label": "dapple",
+   "image": "reviews/anime-look-1/trick-dapple.webp",
+   "note": "Leaf shade with sun spots under crowns. Left now, right ?anime=dapple. No measurable cost."
+  },
+  {
+   "id": "paint",
+   "label": "paint",
+   "image": "reviews/anime-look-1/trick-paint.webp",
+   "note": "Darker feet, lighter tops, faint colour drift on stone and paving. Left now, right ?anime=paint. About +1 ms on a phone."
+  },
+  {
+   "id": "water",
+   "label": "water",
+   "image": "reviews/anime-look-1/trick-water.webp",
+   "note": "Stylised fountain water with streams and splash rings. Left now, right ?anime=water. About +1 ms on a phone."
+  },
+  {
+   "id": "crowns",
+   "label": "crowns",
+   "image": "reviews/anime-look-1/trick-crowns.webp",
+   "note": "Soft clump shading on crowns and hedges. Left now, right ?anime=crowns. No cost while playing."
+  },
+  {
+   "id": "rollout",
+   "label": "rollout: make the kept tricks the default everywhere",
+   "note": "Pick this as well if the tricks you keep should become the game's look in every place, not only a flag."
+  }
  ],
  "links": [
-  {"label": "All six in the game at the plaza", "href": "game3d/index.html?place=plaza&anime=1"},
-  {"label": "The game now at the plaza (for comparison)", "href": "game3d/index.html?place=plaza"},
-  {"label": "Only toon and outline", "href": "game3d/index.html?place=plaza&anime=toon,outline"}
- ]
+  {
+   "label": "All six in the game at the plaza",
+   "href": "game3d/index.html?place=plaza&anime=1"
+  },
+  {
+   "label": "The game now at the plaza (for comparison)",
+   "href": "game3d/index.html?place=plaza"
+  },
+  {
+   "label": "Only toon and outline",
+   "href": "game3d/index.html?place=plaza&anime=toon,outline"
+  }
+ ],
+ "decision": "rollout, \"just fix the fountain\"; toon kept; dapple and crowns dropped",
+ "decided_at": "2026-10-10T01:50:34+0200",
+ "issue": 402
 }
