@@ -1,5 +1,5 @@
 {
- "total": 48.7438,
+ "total": 49.4638,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -8352,6 +8352,69 @@
    "est": 0.08,
    "out": "../../ai/music-raw/r4/morning-13.mp3",
    "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T14:46:25.185Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../../../../ai/music-raw/r5/title-1.mp3",
+   "prompt": "Light solo piano with a soft warm synth pad underneath, a simple quiet melody with space between the notes, like a calm "
+  },
+  {
+   "t": "2026-10-09T14:46:47.570Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../../../../ai/music-raw/r5/title-2.mp3",
+   "prompt": "Light solo piano with a soft warm synth pad underneath, a simple quiet melody with space between the notes, like a calm "
+  },
+  {
+   "t": "2026-10-09T14:47:27.725Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../../../../ai/music-raw/r5/day-1.mp3",
+   "prompt": "Acoustic guitar finger-picking with light hand percussion (shaker, soft cajón) and a little glockenspiel now and then, b"
+  },
+  {
+   "t": "2026-10-09T14:47:50.284Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../../../../ai/music-raw/r5/day-2.mp3",
+   "prompt": "Acoustic guitar finger-picking with light hand percussion (shaker, soft cajón) and a little glockenspiel now and then, b"
+  },
+  {
+   "t": "2026-10-09T14:48:15.470Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../../../../ai/music-raw/r5/evening-1.mp3",
+   "prompt": "Mellow Japanese city pop instrumental: round electric bass, soft Rhodes keys, clean guitar chords and a laid-back drum g"
+  },
+  {
+   "t": "2026-10-09T14:48:39.435Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../../../../ai/music-raw/r5/evening-2.mp3",
+   "prompt": "Mellow Japanese city pop instrumental: round electric bass, soft Rhodes keys, clean guitar chords and a laid-back drum g"
+  },
+  {
+   "t": "2026-10-09T14:49:18.795Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../../../../ai/music-raw/r5/office-1.mp3",
+   "prompt": "Lo-fi hip hop beat with a dusty soft drum loop and mellow electric piano chords, a little vinyl warmth, steady and unobt"
+  },
+  {
+   "t": "2026-10-09T14:49:59.954Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../../../../ai/music-raw/r5/office-2.mp3",
+   "prompt": "Lo-fi hip hop beat with a dusty soft drum loop and mellow electric piano chords, a little vinyl warmth, steady and unobt"
+  },
+  {
+   "t": "2026-10-09T14:50:35.856Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../../../../ai/music-raw/r5/shops-1.mp3",
+   "prompt": "Small jazz combo: brushed snare, upright bass and a light piano or vibraphone, a friendly easy swing, like a café on a s"
   }
  ]
 }

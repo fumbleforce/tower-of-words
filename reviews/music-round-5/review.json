@@ -1,0 +1,64 @@
+{
+ "title": "Background music, round 3: five relaxed pieces with different bands",
+ "date": "2026-10-09",
+ "by": "claude-agent:music",
+ "status": "open",
+ "context": [
+  "This is background music for the game, round 3 of the new tracks. Nobody has listened to these before you. I can't hear audio, so I only checked them by measurement.",
+  "You said round 4 was good quality but too epic and orchestral, too busy, and too similar from track to track. So each piece here has its own small band and its own prompt, and every prompt asks for relaxed, sparse everyday background with no strings section, nothing dramatic and no build-up.",
+  "There are five pieces, one each for the uses that matter most: the title menu, outdoors during the day, the evening, the office and the shop street. Each card's note says what the band is, where it would play and what plays there today. Each card is the loop the game would play (1:35 to 2:19), then the first 15 seconds of the repeat so you can hear the loop point.",
+  "I made nine pieces, two for each use (one for the shop street failed), and kept the one per use that measured best: no singing, a loop point where the music matches, and a steady beat across it. The four I left out stay on this machine.",
+  "Nothing here is in the game. Pick the ones that fit and reject the rest, and say what is wrong with any you reject. Your picks replace the current loops in those places."
+ ],
+ "ask": "Which of these five fit the game as background music? Pick the ones you want and reject the others.",
+ "question": "This is background music for the game, round 3 of the new tracks. Nobody has listened to these before you. I can't hear audio, so I only checked them by measurement. You said round 4 was good quality but too epic and orchestral, too busy, and too similar from track to track. So each piece here has its own small band and its own prompt, and every prompt asks for relaxed, sparse everyday background with no strings section, nothing dramatic and no build-up. There are five pieces, one each for the uses that matter most: the title menu, outdoors during the day, the evening, the office and the shop street. Each card's note says what the band is, where it would play and what plays there today. Each card is the loop the game would play (1:35 to 2:19), then the first 15 seconds of the repeat so you can hear the loop point. I made nine pieces, two for each use (one for the shop street failed), and kept the one per use that measured best: no singing, a loop point where the music matches, and a steady beat across it. The four I left out stay on this machine. Nothing here is in the game. Pick the ones that fit and reject the rest, and say what is wrong with any you reject. Your picks replace the current loops in those places. Which of these five fit the game as background music? Pick the ones you want and reject the others.",
+ "multi": true,
+ "media": [
+  {
+   "audio": "game3d/audio/music/calm.mp3",
+   "caption": "For comparison: today's calm loop, which plays on the title menu and almost everywhere else."
+  }
+ ],
+ "options": [
+  {
+   "id": "title-2",
+   "label": "title-2",
+   "audio": "art/candidates/music-5/title-2.mp3",
+   "note": "Title menu: Light solo piano over a soft synth pad. Plays on the title menu. Today the title plays the calm train loop. Loops every 2:19. The card plays the loop once, then the first 15 seconds of the repeat. Lyria 3 Pro, seed 6712. Prompt: \"Light solo piano with a soft warm synth pad underneath, a simple quiet melody with space between the notes, like a calm menu screen. 76 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.\" Measured: vocal stem -48.8 dB of the mix (today's loops: about -32), loop-point match 0.252 (0.1 means the music repeats itself), beat steady across the loop point."
+  },
+  {
+   "id": "day-2",
+   "label": "day-2",
+   "audio": "art/candidates/music-5/day-2.mp3",
+   "note": "Day, outdoors: Acoustic guitar with light hand percussion. Plays outdoors during the day: the forecourt, the plaza and the other outdoor places. Today they play the calm train loop. Loops every 1:35. The card plays the loop once, then the first 15 seconds of the repeat. Lyria 3 Pro, seed 6812. Prompt: \"Acoustic guitar finger-picking with light hand percussion (shaker, soft cajón) and a little glockenspiel now and then, bright and easy, a sunny afternoon outside. 98 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.\" Measured: vocal stem -39.6 dB of the mix (today's loops: about -32), loop-point match 0.372 (0.1 means the music repeats itself), beat steady across the loop point."
+  },
+  {
+   "id": "evening-2",
+   "label": "evening-2",
+   "audio": "art/candidates/music-5/evening-2.mp3",
+   "note": "Evening: City pop: electric bass, Rhodes keys, clean guitar and a soft drum groove. Plays everywhere after work. Today the evening plays the night loop. Loops every 2:05. The card plays the loop once, then the first 15 seconds of the repeat. Lyria 3 Pro, seed 6912. Prompt: \"Mellow Japanese city pop instrumental: round electric bass, soft Rhodes keys, clean guitar chords and a laid-back drum groove, the feeling of streetlights coming on. 92 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.\" Measured: vocal stem -32.1 dB of the mix (today's loops: about -32), loop-point match 0.397 (0.1 means the music repeats itself), beat steady across the loop point."
+  },
+  {
+   "id": "office-2",
+   "label": "office-2",
+   "audio": "art/candidates/music-5/office-2.mp3",
+   "note": "Office: A lo-fi beat with electric piano. Plays inside the office while Eric works. Today this is the office loop. Loops every 1:45. The card plays the loop once, then the first 15 seconds of the repeat. Lyria 3 Pro, seed 7012. Prompt: \"Lo-fi hip hop beat with a dusty soft drum loop and mellow electric piano chords, a little vinyl warmth, steady and unobtrusive, good for working. 80 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.\" Measured: vocal stem -32.3 dB of the mix (today's loops: about -32), loop-point match 0.191 (0.1 means the music repeats itself), beat steady across the loop point."
+  },
+  {
+   "id": "shops-1",
+   "label": "shops-1",
+   "audio": "art/candidates/music-5/shops-1.mp3",
+   "note": "Shop street: A small jazz combo: brushed drums, upright bass and piano or vibraphone. Plays on the shop street and in the shops off it. Today it plays the calm train loop. Loops every 1:45. The card plays the loop once, then the first 15 seconds of the repeat. Lyria 3 Pro, seed 7111. Prompt: \"Small jazz combo: brushed snare, upright bass and a light piano or vibraphone, a friendly easy swing, like a café on a shopping street. 110 BPM. Relaxed everyday background music for a slice-of-life video game, instrumental only, no vocals. Sparse, unhurried and easy to listen to for a long time. No strings section, no orchestra, nothing epic or dramatic, no big build-up or climax. About two and a half minutes with small gentle changes, and no ending: it keeps the same calm level to the end so it can loop.\" Measured: vocal stem -33.6 dB of the mix (today's loops: about -32), loop-point match 0.211 (0.1 means the music repeats itself), beat steady across the loop point."
+  }
+ ],
+ "links": [
+  {
+   "label": "Work issue #371",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/371"
+  },
+  {
+   "label": "Round 2 (rejected as too epic and too similar): music-round-4",
+   "href": "#review/music-round-4"
+  }
+ ]
+}
