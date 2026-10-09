@@ -243,6 +243,12 @@ export async function buildStage(renderer) {
     },
     // aim the camera: position, look-at point, vertical fov, optional roll (radians)
     look(pos, at, fov = 40, roll = 0) {
+      // the flicker check nudges the camera a hair (tools/opening-flicker.mjs, window.OP.jitter)
+      const j = window.OP?.jitter;
+      if (j) {
+        pos = pos.map((v, i) => v + j[i]);
+        at = at.map((v, i) => v + j[i]);
+      }
       camera.position.set(...pos);
       // depth precision: the near plane follows how far away the subject is (a close window or a distant island)
       const d = Math.hypot(pos[0] - at[0], pos[1] - at[1], pos[2] - at[2]);

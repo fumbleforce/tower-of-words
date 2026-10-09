@@ -3,6 +3,7 @@
 // T - 1/60, T and T + 1/60 and flags pixels whose middle frame is far from the mean of its neighbours (a temporal
 // second difference). Writes a heat map per time and prints the flagged share of the frame.
 //   node game3d/tools/opening-flicker.mjs 4.8,20.5,41.8 [outdir]     (W=960 default; GL=soft when the GPU is busy)
+//   JITTER=1 ...   instead: the same moment twice with the camera moved 2 mm, so only depth fighting shows
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -17,6 +18,7 @@ await withBrowserJob('opening-flicker', async (browser) => {
   const page = await browser.newPage({ viewport: { width: RW, height: Math.round((RW * 9) / 16) } });
   await page.goto(`http://127.0.0.1:8771/game3d/opening/index.html?capture&still&w=${RW}`);
   await page.waitForFunction(() => window.OP && window.OP.stage, null, { timeout: 180000 });
+  if (process.env.JITTER) await page.evaluate(() => (window.__jitterMode = true));
   for (const T of times) {
     const r = await page.evaluate(async (T) => {
       const c = document.getElementById('op');
@@ -29,9 +31,19 @@ await withBrowserJob('opening-flicker', async (browser) => {
         g.drawImage(c, 0, 0);
         return g.getImageData(0, 0, k.width, k.height);
       };
-      const a = await grab(T - 1 / 60),
-        b = await grab(T),
+      // JITTER: the same moment twice, the camera moved 2 mm: only depth fighting changes (no motion at all)
+      let a, b, d;
+      if (window.__jitterMode) {
+        window.OP.jitter = null;
+        b = await grab(T);
+        window.OP.jitter = [0.002, 0.0013, 0.0017];
+        a = d = await grab(T);
+        window.OP.jitter = null;
+      } else {
+        a = await grab(T - 1 / 60);
+        b = await grab(T);
         d = await grab(T + 1 / 60);
+      }
       const n = b.width * b.height;
       const heat = new ImageData(b.width, b.height);
       let flagged = 0;
