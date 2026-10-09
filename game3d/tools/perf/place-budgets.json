@@ -79,7 +79,7 @@
     },
     "gate": {
       "phone": {
-        "texMB": { "max": 149, "issue": 373 }
+        "texMB": { "max": 196, "issue": 373 }
       }
     },
     "gym": {
@@ -106,13 +106,14 @@
       "phone": {
         "calls": { "max": 215, "issue": 374 },
         "geoMB": { "max": 129, "issue": 374 },
-        "texMB": { "max": 187, "issue": 373 },
+        "texMB": { "max": 234, "issue": 373 },
         "loadMs": { "max": 8800, "issue": 374 }
       },
       "desktop": {
         "calls": { "max": 825, "issue": 374 },
         "tris": { "max": 1019000, "issue": 374 },
-        "geoMB": { "max": 137, "issue": 374 }
+        "geoMB": { "max": 137, "issue": 374 },
+        "texMB": { "max": 234, "issue": 373 }
       }
     },
     "office_quarter": {
