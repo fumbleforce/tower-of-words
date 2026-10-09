@@ -64,6 +64,10 @@
       a.textContent = f.replace(/\.md$/, ''); a.href = '#' + new URL('../' + f, location.href).pathname;
       nav.appendChild(a);
     }
+    // Each notes/ subfolder gets its own group after Notes (research/, architecture/, ...); the logs stay out.
+    const skip = new Set(['walkthrough/', 'feedback-log/', 'feedback-game/']);
+    const subs = (await list('../notes/', /^[^/]+\/$/)).filter(d => !skip.has(d));
+    groups.splice(1, 0, ...subs.map(d => [`Notes: ${d.slice(0, -1)}`, `../notes/${d}`, /\.md$/]));
     for (const [title, dir, re] of groups) {
       const files = await list(dir, re);
       if (!files.length) continue;
