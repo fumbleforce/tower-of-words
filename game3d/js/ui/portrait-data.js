@@ -20,3 +20,22 @@ export const TEXT_PORTRAITS = {
   miotext: ['mio', 'phone'],
   reitext: ['rei', 'neutral'],
 };
+// Which way each portrait set faces in its source pictures: 'left' or 'right' (the viewer's) or 'front'. In a
+// conversation the protagonist stands on the left facing right and the other speaker on the right facing left, both
+// turned towards the text (Jørgen, 2026-10-09: "put MC on the left, facing towards the chat, with opposing character
+// on the right facing left to the chat"), so a portrait facing away from the text is shown mirrored (ui/portraits.js).
+// Every set here mirrors cleanly: no lettering on the clothes (the guard's plate and patch are blank) and nothing
+// one-sided that the cast notes depend on. A missing entry counts as 'front' and is never mirrored.
+export const FACING = {
+  eric: 'left',
+  carina: 'left',
+  mio: 'left',
+  aoi: 'left',
+  kenji: 'left',
+  rei: 'left',
+  kuro: 'right',
+  guard: 'right',
+  mori: 'front',
+  kuroda: 'front',
+  emi: 'front',
+};

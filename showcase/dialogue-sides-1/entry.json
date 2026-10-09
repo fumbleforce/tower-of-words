@@ -1,0 +1,184 @@
+{
+  "title": "Dialogue: player on the left, the other person on the right",
+  "date": "2026-10-09",
+  "by": "claude-agent:dialogue-layout",
+  "caption": "In conversations the player (Eric or Carina) now stands on the left facing right and the other person on the right facing left, both turned towards the text. Portraits drawn facing the other way are mirrored.",
+  "result": [
+    "eric-desk-kuro",
+    "eric-desk-mio-mc-speaks",
+    "carina-desk-mio-mc-speaks",
+    "eric-phone-mio-mc-speaks"
+  ],
+  "sections": [
+    {
+      "title": "Eric with each person, desktop",
+      "caption": "Eric on the left, the other speaker on the right. Eric, Kuro and the guard are mirrored so they face the text.",
+      "images": [
+        {
+          "id": "eric-desk-mio-mc-speaks",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/mio-mc-speaks.webp",
+          "caption": "Eric speaking to Mio, desktop"
+        },
+        {
+          "id": "eric-desk-mio",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/mio.webp",
+          "caption": "Mio speaking, Eric listening, desktop"
+        },
+        {
+          "id": "eric-desk-kenji",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/kenji.webp",
+          "caption": "Kenji speaking, Eric listening, desktop"
+        },
+        {
+          "id": "eric-desk-kuro",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/kuro.webp",
+          "caption": "Kuro speaking, Eric listening, desktop"
+        },
+        {
+          "id": "eric-desk-rei",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/rei.webp",
+          "caption": "Rei speaking, Eric listening, desktop"
+        },
+        {
+          "id": "eric-desk-mori",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/mori.webp",
+          "caption": "Mori speaking, Eric listening, desktop"
+        },
+        {
+          "id": "eric-desk-aoi",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/aoi.webp",
+          "caption": "Aoi speaking, Eric listening, desktop"
+        },
+        {
+          "id": "eric-desk-emi",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/emi.webp",
+          "caption": "Emi speaking, Eric listening, desktop"
+        },
+        {
+          "id": "eric-desk-guard",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/guard.webp",
+          "caption": "Guard speaking, Eric listening, desktop"
+        },
+        {
+          "id": "eric-desk-kuroda",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/kuroda.webp",
+          "caption": "Kuroda speaking, Eric listening, desktop"
+        }
+      ]
+    },
+    {
+      "title": "Eric with each person, phone",
+      "caption": "On a phone only the speaker shows, on their own side.",
+      "images": [
+        {
+          "id": "eric-phone-mio-mc-speaks",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/mio-mc-speaks.webp",
+          "caption": "Eric speaking, phone"
+        },
+        {
+          "id": "eric-phone-mio",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/mio.webp",
+          "caption": "Mio speaking, phone"
+        },
+        {
+          "id": "eric-phone-kenji",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/kenji.webp",
+          "caption": "Kenji speaking, phone"
+        },
+        {
+          "id": "eric-phone-kuro",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/kuro.webp",
+          "caption": "Kuro speaking, phone"
+        },
+        {
+          "id": "eric-phone-rei",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/rei.webp",
+          "caption": "Rei speaking, phone"
+        },
+        {
+          "id": "eric-phone-mori",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/mori.webp",
+          "caption": "Mori speaking, phone"
+        },
+        {
+          "id": "eric-phone-aoi",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/aoi.webp",
+          "caption": "Aoi speaking, phone"
+        },
+        {
+          "id": "eric-phone-emi",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/emi.webp",
+          "caption": "Emi speaking, phone"
+        },
+        {
+          "id": "eric-phone-guard",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/guard.webp",
+          "caption": "Guard speaking, phone"
+        },
+        {
+          "id": "eric-phone-kuroda",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/kuroda.webp",
+          "caption": "Kuroda speaking, phone"
+        }
+      ]
+    },
+    {
+      "title": "Three people",
+      "caption": "One slot each side: whoever spoke last besides the player holds the right.",
+      "images": [
+        {
+          "id": "eric-desk-three-kenji",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/three-kenji.webp",
+          "caption": "Mio, Eric, then Kenji: Kenji takes the right"
+        },
+        {
+          "id": "eric-desk-three-mio",
+          "image": "game3d/shots/dialogue-sides/eric-1366x860/three-mio.webp",
+          "caption": "Mio speaks again and takes the right back"
+        },
+        {
+          "id": "eric-phone-three-kenji",
+          "image": "game3d/shots/dialogue-sides/eric-390x844/three-kenji.webp",
+          "caption": "Three people, phone"
+        }
+      ]
+    },
+    {
+      "title": "Carina as the player",
+      "caption": "Carina takes the left the same way, mirrored to face right.",
+      "images": [
+        {
+          "id": "carina-desk-mio-mc-speaks",
+          "image": "game3d/shots/dialogue-sides/carina-1366x860/mio-mc-speaks.webp",
+          "caption": "Carina speaking to Mio, desktop"
+        },
+        {
+          "id": "carina-desk-kuro",
+          "image": "game3d/shots/dialogue-sides/carina-1366x860/kuro.webp",
+          "caption": "Kuro speaking, Carina listening, desktop"
+        },
+        {
+          "id": "carina-desk-kenji",
+          "image": "game3d/shots/dialogue-sides/carina-1366x860/kenji.webp",
+          "caption": "Kenji speaking, Carina listening, desktop"
+        },
+        {
+          "id": "carina-phone-mio-mc-speaks",
+          "image": "game3d/shots/dialogue-sides/carina-390x844/mio-mc-speaks.webp",
+          "caption": "Carina speaking, phone"
+        },
+        {
+          "id": "carina-phone-mio",
+          "image": "game3d/shots/dialogue-sides/carina-390x844/mio.webp",
+          "caption": "Mio speaking, phone"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play it",
+      "href": "game3d/"
+    }
+  ]
+}

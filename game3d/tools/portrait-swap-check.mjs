@@ -31,10 +31,10 @@ await withBrowserJob('portrait-swap', async (b) => {
   await p.waitForFunction(() => window.__shellReady, null, { timeout: 120000 });
   await p.evaluate(() => {
     window.__game.runner.trigger = () => false;
-    // what each frame shows on the speaker's side (left on desktop and phone)
+    // what each frame shows on the other speaker's side (the right, on desktop and phone)
     window.__por = () => {
       const S = document.querySelector('#stage'),
-        L = S.querySelector('.por.left'),
+        L = S.querySelector('.por.right'),
         img = L.querySelector('img');
       const shown = !S.hidden && !L.hidden && +getComputedStyle(L).opacity > 0.02;
       return {
