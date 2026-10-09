@@ -1,5 +1,5 @@
 {
- "total": 43.2638,
+ "total": 48.7438,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -7932,6 +7932,426 @@
    "task": "01a10e22-e671-7632-8417-54c1932748af",
    "out": "art/parts/crowd-pilot-2/meshy/a-sit",
    "prompt": "crowd-pilot-2 a-sit"
+  },
+  {
+   "t": "2026-10-09T12:05:19.636Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/title-a2.wav",
+   "prompt": "Second section, a variation: the violins takes the same melody with fuller accompaniment. hopeful, gentle, sweeping, a n"
+  },
+  {
+   "t": "2026-10-09T12:05:19.692Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/title-a1.wav",
+   "prompt": "Opening section: the main melody played simply by the piano over the piano, string section, soft synth pad, light harp. "
+  },
+  {
+   "t": "2026-10-09T12:05:47.874Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/title-a3.wav",
+   "prompt": "Middle section, a calmer interlude: sparse piano and soft chords, the melody fragmented and reharmonised. hopeful, gentl"
+  },
+  {
+   "t": "2026-10-09T12:06:00.007Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/title-a4.wav",
+   "prompt": "Final section: the main melody returns on the piano with the whole ensemble, full and warm. hopeful, gentle, sweeping, a"
+  },
+  {
+   "t": "2026-10-09T12:07:48.614Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/test-seed-title-2.wav",
+   "prompt": "Second section, a variation: the violins takes the same melody with fuller accompaniment. hopeful, gentle, sweeping, a n"
+  },
+  {
+   "t": "2026-10-09T12:08:17.242Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/test-seed-title-3.wav",
+   "prompt": "Middle section, a calmer interlude: sparse piano and soft chords, the melody fragmented and reharmonised. hopeful, gentl"
+  },
+  {
+   "t": "2026-10-09T12:08:43.369Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/test-seed-title-4.wav",
+   "prompt": "Final section: the main melody returns on the piano with the whole ensemble, full and warm. hopeful, gentle, sweeping, a"
+  },
+  {
+   "t": "2026-10-09T12:09:53.374Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/title-a5.wav",
+   "prompt": "Bridge section: the violins plays a new counter-melody over the same chords, a gentle build. hopeful, gentle, sweeping, "
+  },
+  {
+   "t": "2026-10-09T12:10:13.488Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/title-a6.wav",
+   "prompt": "Variation: the main melody on the piano, light and lilting, with rhythmic accompaniment. hopeful, gentle, sweeping, a ne"
+  },
+  {
+   "t": "2026-10-09T12:10:19.920Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/title-b1.wav",
+   "prompt": "Opening section: the main melody played simply by the piano, the rest of the ensemble softly underneath. hopeful, gentle"
+  },
+  {
+   "t": "2026-10-09T12:10:40.534Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/title-b2.wav",
+   "prompt": "Second section, a variation: the violins take the same melody with fuller accompaniment. hopeful, gentle, sweeping, a ne"
+  },
+  {
+   "t": "2026-10-09T12:10:49.979Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/title-b3.wav",
+   "prompt": "Middle section, a calmer interlude: sparse piano and soft chords, the melody fragmented and reharmonised. hopeful, gentl"
+  },
+  {
+   "t": "2026-10-09T12:11:08.072Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/title-b4.wav",
+   "prompt": "Final section: the main melody returns on the piano with the whole ensemble, full and warm. hopeful, gentle, sweeping, a"
+  },
+  {
+   "t": "2026-10-09T12:11:15.872Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/morning-a1.wav",
+   "prompt": "Opening section: the main melody played simply by the piano, the rest of the ensemble softly underneath. bright, fresh, "
+  },
+  {
+   "t": "2026-10-09T12:11:34.409Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/morning-a2.wav",
+   "prompt": "Second section, a variation: the flute take the same melody with fuller accompaniment. bright, fresh, cheerful but calm,"
+  },
+  {
+   "t": "2026-10-09T12:11:59.227Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/morning-a3.wav",
+   "prompt": "Middle section, a calmer interlude: sparse piano and soft chords, the melody fragmented and reharmonised. bright, fresh,"
+  },
+  {
+   "t": "2026-10-09T12:12:01.640Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "../../ai/music-raw/r4/morning-a4.wav",
+   "prompt": "Final section: the main melody returns on the piano with the whole ensemble, full and warm. bright, fresh, cheerful but "
+  },
+  {
+   "t": "2026-10-09T12:14:03.603Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/title-1.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:14:55.251Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/title-3.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:15:04.247Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/title-2.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:15:23.299Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/title-4.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:15:27.218Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/morning-1.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:15:52.719Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/morning-4.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:15:57.279Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/morning-3.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:16:22.271Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/evening-1.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:16:26.050Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/evening-2.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:16:47.431Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/evening-3.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:17:04.443Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/evening-4.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:17:13.171Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/night-1.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:17:43.580Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/night-3.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:17:46.653Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/night-2.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:18:07.357Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/night-4.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:18:14.672Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/office-1.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:18:30.640Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/office-2.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:18:50.700Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/office-3.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:18:59.205Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/office-4.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:19:11.904Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/shops-1.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:19:24.937Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/shops-2.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:19:40.921Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/shops-3.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:20:01.462Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/shops-4.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:20:11.022Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/harbour-1.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:20:22.611Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/harbour-2.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:20:38.942Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/harbour-3.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:21:02.042Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/harbour-4.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:21:37.046Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/morning-5.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:51:32.446Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/title-12.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:51:50.943Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/title-11.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:51:57.583Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/office-11.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:52:15.019Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/office-12.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:53:45.477Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/night-12.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:53:46.593Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/night-11.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:54:26.329Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/evening-11.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:54:26.404Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/night-13.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:54:58.016Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/evening-13.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:55:06.087Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/evening-12.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:55:30.933Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/harbour-12.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:55:42.936Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/harbour-11.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:56:14.679Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/morning-11.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:56:25.412Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/morning-12.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
+  },
+  {
+   "t": "2026-10-09T12:56:42.249Z",
+   "model": "google/lyria-3-pro",
+   "est": 0.08,
+   "out": "../../ai/music-raw/r4/morning-13.mp3",
+   "prompt": "Instrumental background music for a cozy Japanese slice-of-life anime game. Warm, melodic, full-bodied anime soundtrack "
   }
  ]
 }
