@@ -1,3 +1,17 @@
 # Aoi
 
-[Cast](../../docs/game/cast.md#aoi-aoi): 24, new hire, Japanese only. Facilities scheduling and initial training-centre work are the current assignment plan. Her phone remark about avoiding the basement is briefly awkward when she meets the player. Her [tennis route](../../docs/game/cast.md#aoi-choosing-an-assignment-she-can-stand-behind) concerns making a usable booking and defending the beginner time she promised.
+Aoi is twenty-four and joined the company this autumn, six months after the April graduates. She talks quickly and a little too loudly, and she often says what she is thinking before deciding whether she ought to. Usually she follows it with a joke at the other person's expense and a wink. It annoys her to be treated as the newest person in the room, even though she usually is.
+
+Aoi has violet eyes and a pink bob that she dyed herself the weekend her job offer arrived. The teal underneath was her attempt to fix the first try, and her dark roots are already showing. Outside work she nearly always wears a green varsity jacket with a pink star patch, bought second-hand as a student. She is short-sighted and wears daily contact lenses. When she runs out, she squints at notice boards rather than wear her old glasses in public.
+
+Aoi grew up on the mainland in a flat on a large housing estate, the youngest of three. Her brother and sister decided most things, and she was the one left to carry the shopping. At university she studied tourism and belonged to a tennis circle that met more often for drinks than for tennis. Mostly she carried the ball basket and booked the restaurants.
+
+More than thirty companies turned her down, so she spent the half-year after graduating at the front desk of a karaoke chain, giving out rooms. She was good at it and liked knowing which rooms were free. Amakawa took her in its small autumn intake and put her in Facilities, booking meeting rooms. Asking her seniors a basic question frightens her. She rehearses it under her breath, then says it too fast and sometimes has to ask again.
+
+Aoi lives in a single room in the new hires' dorm, facing east for the morning sun. Boxes from the move are still stacked by the door beside her new tennis shoes. She does not cook and lives on konbini rice balls and canteen lunches. In the evenings she lies on the floor watching manzai clips on her phone or video-calling her university friends. She has not read a book for pleasure since school and sees no reason to start.
+
+At the tennis club Aoi wants to get onto the court and play instead of carrying the basket again. At work she hopes to run the bookings for the island's big events, such as the summer festival stage, within a few years. So far she has made three meeting-room bookings, and one clashed with another department's. She told nobody and moved her own meeting instead. Older colleagues sometimes hear her jokes and miss the wink. She also borrows things easily, keeps them longer than she should and is honestly surprised when the owner asks for them back.
+
+## Source and status
+
+Proposed bio for Review round 5. Her age, autumn start, Facilities assignment, training centre, Japanese only, appearance, tennis and the phone call about the basement are established in [cast.md](../../docs/game/cast.md#aoi-aoi). Jørgen described her as cheeky. Her tennis route is in [cast.md](../../docs/game/cast.md#aoi-choosing-an-assignment-she-can-stand-behind). The family, university circle, karaoke job, dorm room, eyesight, event ambition and the clashing booking are new proposals. These details have not been added to the game.
