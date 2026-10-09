@@ -13,6 +13,7 @@ import { warmPlace } from '../perf/warm.js';
 import { SmoothWalker } from '../move.js';
 import { playMusic } from '../ui.js';
 import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save, periodName } from '../sim.js';
+import { lightPlace } from '../kit/light/rig.js';
 import * as trips from '../trips.js';
 import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
 import { installTickets } from '../tickets/index.js';
@@ -173,6 +174,7 @@ export function createPlaceLifecycle(
     game.player.root.rotation.y = game.walker.facing;
     const [sx, sz] = place.start;
     game.player.root.position.set(sx, place.floorY ?? 0, sz);
+    lightPlace(place, sim.period, sim.day); // the period's light, where the place has a light rig (kit/light/)
     place.onPeriod?.(sim.period); // a chunk built in the morning, entered after work, takes the evening light
     place.onDay?.(sim.day); // what a day changes in a place (day 2's closed streets: places/closure.js)
     setComposer(place);

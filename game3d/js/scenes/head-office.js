@@ -186,17 +186,12 @@ export function* headOfficeSteps(root, nav) {
       updateOccluders(occ, pos, jump ? Infinity : dt);
       feature.signs.visible = featureOcc.k > 0.5;
     },
-    // after work, about a third of the bays are lit
-    onPeriod(period) {
-      if (period !== 'evening') return;
-      for (const m of [litM, fading[1]?.material]) {
-        if (!m) continue;
-        m.color.set('#cdb48f');
-        m.emissive = new THREE.Color('#ffc98a');
-        m.emissiveIntensity = 0.5;
-        m.needsUpdate = true;
-      }
-      lobbyGlass.material.emissiveIntensity = 0.55;
-    },
+    // after work about a third of the bays are lit, and the atrium glows (for the place's light rig, kit/light/)
+    glows: [
+      ...[litM, fading[1]?.material].map(
+        (m) => m && { mat: m, night: { color: '#cdb48f', emissive: '#ffc98a', emissiveIntensity: 0.5 } },
+      ),
+      { mat: lobbyGlass.material, night: { emissiveIntensity: 0.55 } },
+    ],
   };
 }

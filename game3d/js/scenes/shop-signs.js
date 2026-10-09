@@ -112,7 +112,7 @@ export function signSet() {
       add('drawn', { draw }, w, h, at, [ry]);
     },
     build(root) {
-      if (!items.length) return { mesh: null, evening() {}, show() {} };
+      if (!items.length) return { mesh: null, glows: [], evening() {}, show() {} };
       // shelf-pack the cells: each sign w x h units at PX pixels a unit
       let x = 0,
         y = 0,
@@ -173,6 +173,7 @@ export function signSet() {
       const mesh = meshes.get(undefined) || null;
       return {
         mesh,
+        glows: [{ mat: material, night: { emissiveIntensity: 0.6 } }],
         evening() {
           material.emissiveIntensity = 0.6;
         },

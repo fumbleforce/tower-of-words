@@ -3,6 +3,7 @@ import { voice, voiceThenBeat, playMusic } from '../../ui.js';
 import { sim, setPeriod, meet, buy, take, save, PERIODS } from '../../sim.js';
 import { NEXT, canTravel } from '../../places/definitions.js';
 import { showEnd } from '../../end.js';
+import { lightPlace } from '../../kit/light/rig.js';
 import { flags } from '../state.js';
 import { flagKeys } from '../engine-flags.js';
 import { settings } from '../../settings.js';
@@ -47,7 +48,8 @@ export function installProgressionHooks(game, { travel }) {
     const p = to === 'next' ? PERIODS[PERIODS.indexOf(sim.period) + 1] : to;
     if (!p) return; // after work there is no next period: Sleep moves the day on
     setPeriod(p, game);
-    game.place?.onPeriod?.(p); // the place's light for the new period (outdoors, the room's window)
+    if (lightPlace(game.place, p, sim.day)) game.regrade?.(); // the period's light and grade, live (kit/light/)
+    game.place?.onPeriod?.(p); // what else the new period changes there (and the light, where no rig does it)
     if (p === 'evening') playMusic('night');
     if (sim.day === 4) game.place?.day4Period?.();
     if (sim.day === 5) game.place?.day5Period?.();

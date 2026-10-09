@@ -4,7 +4,8 @@
 // bins beside benches, bollards across an opening.
 //   const lights = lightSet(); lamps(lights, p, points, { kind })   lamps; lights.build(root, { poolY }) makes every
 //                                           lit part and every light pool of a place one mesh each (the pools poolY
-//                                           over the ground, if the paving is raised); .evening() turns them up
+//                                           over the ground, if the paving is raised); .evening() turns them up,
+//                                           .glows lists them for a light rig (kit/light/glow.js)
 //   bench(p, x, z, facing, { len, back })   a park bench: timber slats on cast-iron ends with armrests (stone legs
 //                                           without the models); facing: the way a sitter looks (radians)
 //   bins(p, x, z, facing)                   the sorted pair (cans and bottles, burnables) every Japanese street has
@@ -52,7 +53,13 @@ export function lightSet() {
       const poolMesh = pools(lit, 1, { k: 0.16, y: poolY });
       poolMesh.userData.lampPool = true; // the street lamps' pools: eveningLight sets their gain for the day
       root.add(poolMesh);
+      // glows: for a place's light rig (kit/light/glow.js); evening() for places that still light themselves
+      const glows = [
+        { mat: glow, night: { emissiveIntensity: 2.6, color: '#fff3dc' } },
+        { pool: poolMesh, night: 0.42 },
+      ];
       return {
+        glows,
         evening() {
           glow.emissiveIntensity = 2.6;
           glow.color.set('#fff3dc');

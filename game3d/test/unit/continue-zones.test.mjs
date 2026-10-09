@@ -79,7 +79,7 @@ function fixture() {
     new Function('game', 'ui', 'flags', 'THREE', assignment)(game, ui, flags, THREE);
   }
   const deps = { game, ui, sim: S.sim, cancelSavedWalk, SHARED_THINGS: {}, document: globalThis.document, noteVisit: noop,
-    SmoothWalker: Walker, setComposer: noop, liftPeople: noop, resize: noop, absorb: S.absorb, PERIOD_ORDER: S.PERIODS,
+    SmoothWalker: Walker, setComposer: noop, liftPeople: noop, lightPlace: noop, resize: noop, absorb: S.absorb, PERIOD_ORDER: S.PERIODS,
     applySchedule: noop, periodName: S.periodName, playMusic: noop, MUSIC: {}, syncFinds: noop, buildMarkers: noop,
     save: S.save, nearSet: new Set(), zoneSet: consumed, withConversations: s => s, withClubs: s => s,
     prepare: async name => ({ place: places[name] }), eventTrigger, clubArrival: noop };

@@ -1,54 +1,9 @@
-// The dorm building's camera and light (places/dorms.js): one framing a floor, picked by where Eric is. On a corridor
+// The dorm building's camera (places/dorms.js): one framing a floor, picked by where Eric is. On a corridor
 // floor the corridor's view, following him along it; on the roof the whole depth of the roof; in his flat the whole
-// flat in one still frame (cam.fit() with the building's bounds at the floor's x). And the morning or dusk light.
+// flat in one still frame (cam.fit() with the building's bounds at the floor's x). Its light by period is the
+// light rig's (scenes/dorms.js, kit/light/looks.js DORM).
 import * as THREE from 'three';
 import { WEST_END, LEVEL_DX } from '../scenes/dorms/layout.js';
-
-export const NIGHT_GRADE = {
-  exposure: 1.0,
-  temp: -0.02,
-  sat: 0.74,
-  contrast: 1.05,
-  lift: [0.01, 0.012, 0.022],
-  shadowTint: [-0.01, 0, 0.025],
-  highTint: [0.02, 0.008, -0.012],
-  vignette: 0.26,
-  bloom: 0.32,
-  bloomThreshold: 0.8,
-  focusBand: 0.3,
-};
-const DAY_GRADE = { ...NIGHT_GRADE, exposure: 1.06, temp: 0.01, sat: 0.8, vignette: 0.22 };
-// the morning and the evening in the building (places/dorms.js onPeriod): setGrade takes the colour grade
-export function dormDaylight(w, setGrade) {
-  // the morning (day 2 starts here): daylight from the sky in place of dusk, the same lamps on. Each light's dusk
-  // values are kept, for after work.
-  const dusk = [];
-  w.scene.traverse((o) => {
-    if (o.isHemisphereLight || o.isDirectionalLight)
-      dusk.push({ o, color: o.color.clone(), ground: o.groundColor?.clone(), k: o.intensity });
-  });
-  const dayBg = new THREE.Color('#39414e'),
-    duskBg = w.scene.background.clone();
-  function daylight(day) {
-    for (const { o, color, ground, k } of dusk) {
-      if (!day) {
-        o.color.copy(color);
-        if (ground) o.groundColor.copy(ground);
-        o.intensity = k;
-      } else if (o.isHemisphereLight) {
-        o.color.set('#d6e0ee');
-        o.groundColor.set('#6f6a62');
-        o.intensity = 1.55;
-      } else if (o.castShadow) {
-        o.color.set('#fff0dc');
-        o.intensity = 0.95;
-      }
-    }
-    w.scene.background.copy(day ? dayBg : duskBg);
-    setGrade(day ? DAY_GRADE : NIGHT_GRADE);
-  }
-  return daylight;
-}
 
 // st: the place's state (inside, level)
 export function dormView(cam, w, st) {

@@ -7,9 +7,10 @@ import { sfx } from '../ui.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { sim } from '../sim.js';
+import { lightPlace } from '../kit/light/rig.js';
 import { PLAYER_ID } from '../mc.js';
 import { dormFloors } from './dorm-floors.js';
-import { dormView, dormDaylight, NIGHT_GRADE } from './dorm-view.js';
+import { dormView } from './dorm-view.js';
 import { STAIR, WEST_END, LEVEL_DX } from '../scenes/dorms/layout.js';
 
 // Eric's floor and his room, and the rest of the building he can walk (docs/game/places.md, Eric's dorm building).
@@ -164,7 +165,6 @@ export function dormsPlace(game) {
     front.visible = back;
     for (const m of ms) ((m.opacity = 1), (m.transparent = false));
   }
-  const daylight = dormDaylight(w, (grade) => (P.grade = grade));
   function setInside() {
     st.inside = true;
     w.front.visible = false;
@@ -206,8 +206,7 @@ export function dormsPlace(game) {
     defaultPeriod: 'evening',
     photoReady: () => st.inside && !st.entering, // the end card's "Eric's room" is the room, not the corridor (#92)
     music: 'night', // after work; in the morning (day 2) the calm loop (places/lifecycle.js)
-    grade: NIGHT_GRADE,
-    onPeriod: (period) => daylight(sim.day > 1 && period !== 'evening'), // (day 1 is only ever here after work)
+    light: w.light, // the sky through the windows, dusk or daylight, and the grade (scenes/dorms.js, kit/light/)
     things,
     spots,
     seats: { desk_chair: w.deskChair },
@@ -385,5 +384,6 @@ export function dormsPlace(game) {
       unscript(g);
     },
   };
+  lightPlace(P, sim.period, sim.day);
   return P;
 }

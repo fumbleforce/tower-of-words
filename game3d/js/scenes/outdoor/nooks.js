@@ -17,7 +17,8 @@
 //   buildNooks(list, root, { p, lights, signs })   the props into Parts p, lantern glow into the lightSet, faces
 //                                          and cards into the signSet, each the place's own when given (in the
 //                                          place's frame) or the nooks' own, built into root; returns { blocks: rects
-//                                          to keep Eric off, spots: { id: [x, z] }, evening() }
+//                                          to keep Eric off, spots: { id: [x, z] }, evening(), glows: the nooks'
+//                                          own lanterns and signs, for a light rig (kit/light/glow.js) }
 // Kits (outdoor/nook-kits.js, outdoor/nook-yards.js):
 //   vending   drinks machines side by side against the back, the sorted bins beside them
 //   shrine    a roadside hokora on a stone plinth behind a small red torii, two stone lanterns, an offering box,
@@ -125,6 +126,7 @@ export function buildNooks(list, root, sets = {}) {
       lit?.evening();
       sg?.evening();
     },
+    glows: [...(lit?.glows || []), ...(sg?.glows || [])],
   };
 }
 
