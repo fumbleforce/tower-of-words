@@ -41,8 +41,11 @@ const PLACES = [
 ];
 // what a place builds of the rest of the island around it (its backdrop), taken out so the places don't overlap
 // (the near ring of a place's skyline, its neighbours' walls, roofs and windows, stays: the far model is cut away there)
-const BACKDROP = /^(skyline:(far|lit-far|ground|tall)|far:|shops:far)/;
-const DEBUG_STRIP = typeof location !== 'undefined' && new URLSearchParams(location.search).has('strip');
+const BACKDROP = /^(skyline:(far|lit-far|lit|ground|tall)|far:|shops:far)/; // lit: the evening windows
+const RING = /^skyline:(walls|roofs|windows|bands)/;
+const Q = typeof location !== 'undefined' ? new URLSearchParams(location.search) : new URLSearchParams();
+const DEBUG_STRIP = Q.has('strip');
+const NO_SURF = Q.get('surf') === '0'; // ?surf=0: the look without its surface patterns (to find a shimmer)
 
 // The far model's colours, lifted into the morning, lit, and hazed like the bay
 const FAR_VERT = /* glsl */ `
@@ -104,6 +107,7 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
   // ---------- the places, as the game builds them ----------
   const areas = [];
   const placed = {};
+  const ringPts = [];
   for (const [name, build] of PLACES) {
     let w;
     try {
@@ -114,7 +118,7 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
     }
     // the game's look on its materials: surface patterns, soft baked light, small modelled detail (look/index.js)
     try {
-      applyLook({ scene: w.scene, sun: w.sun, people: {}, floorY: 0 });
+      applyLook({ scene: w.scene, sun: w.sun, people: {}, floorY: 0 }, null, NO_SURF ? { surf: false } : {});
     } catch (e) {
       console.warn('opening: look', name, e);
     }
@@ -147,10 +151,38 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
     holder.scale.setScalar(c.scale);
     holder.add(root);
     isl.add(holder);
+    // where the near ring stands, in the island frame: those buildings come out of the far model below
+    holder.updateMatrixWorld(true);
+    root.traverse((o) => {
+      if (!o.isMesh || !RING.test(o.name || '')) return;
+      const p = o.geometry.attributes.position,
+        v = new THREE.Vector3();
+      for (let i = 0; i < p.count; i += 3) {
+        v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
+        ringPts.push([v.x, v.z]);
+      }
+    });
     placed[name] = w;
     areas.push(areaOf(name));
   }
   const inBuilt = (x, z) => areas.some((ar) => inPoly(ar, x, z));
+  // the layout's buildings a near ring already shows (any of its points on the footprint)
+  const ringed = LAYOUT.BUILDINGS.map((bb) => LAYOUT.footprint(bb)).filter((f) => {
+    const xs = f.map((q) => q[0]),
+      zs = f.map((q) => q[1]);
+    const x0 = Math.min(...xs) - 0.4,
+      x1 = Math.max(...xs) + 0.4,
+      z0 = Math.min(...zs) - 0.4,
+      z1 = Math.max(...zs) + 0.4;
+    return ringPts.some(([x, z]) => x > x0 && x < x1 && z > z0 && z < z1);
+  });
+  // walls lie on the outline, so the test is the footprint's box with a little margin (the grid's buildings are boxes)
+  const ringBoxes = ringed.map((f) => {
+    const xs = f.map((q) => q[0]),
+      zs = f.map((q) => q[1]);
+    return [Math.min(...xs) - 0.5, Math.max(...xs) + 0.5, Math.min(...zs) - 0.5, Math.max(...zs) + 0.5];
+  });
+  const inRinged = (x, z) => ringBoxes.some(([x0, x1, z0, z1]) => x > x0 && x < x1 && z > z0 && z < z1);
 
   // ---------- the far model between them ----------
   {
@@ -174,7 +206,7 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
       }
       const cx = (P[t] + P[t + 3] + P[t + 6]) / 3,
         cz = (P[t + 2] + P[t + 5] + P[t + 8]) / 3;
-      if (!inBuilt(cx, cz)) keep.push(t);
+      if (!inBuilt(cx, cz) && !inRinged(cx, cz)) keep.push(t);
     }
     const pick = (A) => {
       const out = new Float32Array(keep.length * 9);

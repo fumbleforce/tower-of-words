@@ -5,6 +5,11 @@
 import * as THREE from 'three';
 
 // transition kinds (shots name them in `in: { type }`)
+// ?shafts=0, ?grain=0: those passes off (to find a shimmer)
+const QS = typeof location !== 'undefined' ? new URLSearchParams(location.search) : new URLSearchParams();
+const NO_SHAFTS = QS.get('shafts') === '0',
+  NO_GRAIN = QS.get('grain') === '0';
+
 export const TR = { cut: 0, fade: 1, wipe: 2, iris: 3, blinds: 4, dots: 5, whip: 6, zoom: 7, flash: 8 };
 
 const VERT = /* glsl */ `
@@ -26,6 +31,7 @@ uniform float uTime, uFlash, uChroma, uFade, uZoom, uBloomA, uBloomB, uExpA, uEx
 uniform vec3 uFlashColor;
 uniform vec2 uShake;
 uniform vec3 uFlareA, uFlareB;
+uniform float uShafts;
 uniform sampler2D uOv;
 uniform float uHasOv;
 
@@ -59,7 +65,7 @@ vec3 flare(vec2 uv, vec3 f) {
 }
 // light shafts from the sun at f.xy: bright sky smeared toward the sun, strength f.z
 vec3 shafts(sampler2D t, vec2 uv, vec3 f) {
-  if (f.z <= 0.001) return vec3(0.0);
+  if (f.z <= 0.001 || uShafts < 0.5) return vec3(0.0);
   vec2 d = (f.xy - uv) / 28.0;
   vec2 p = uv;
   vec3 acc = vec3(0.0);
@@ -246,6 +252,7 @@ export function makeCompositor(renderer, rtW, rtH) {
     uGrain: { value: 0.035 }, uVignette: { value: 0.35 },
     uFlareA: { value: new THREE.Vector3() }, uFlareB: { value: new THREE.Vector3() },
     uOv: { value: null }, uHasOv: { value: 0 },
+    uShafts: { value: NO_SHAFTS ? 0 : 1 },
   };
   const mat = new THREE.ShaderMaterial({ vertexShader: VERT, fragmentShader: FRAG, uniforms, glslVersion: THREE.GLSL3, depthTest: false, depthWrite: false });
   const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat);
@@ -292,7 +299,7 @@ export function makeCompositor(renderer, rtW, rtH) {
       uniforms.uFade.value = fx.fade || 0;
       uniforms.uZoom.value = fx.zoom || 1;
       uniforms.uShake.value.set(...(fx.shake || [0, 0]));
-      uniforms.uGrain.value = fx.grain ?? 0.035;
+      uniforms.uGrain.value = NO_GRAIN ? 0 : fx.grain ?? 0.035;
       uniforms.uVignette.value = fx.vignette ?? 0.35;
       renderer.setRenderTarget(null);
       renderer.render(scene, cam);
