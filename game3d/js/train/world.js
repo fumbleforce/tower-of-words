@@ -2,6 +2,7 @@
 // The train stands still in the world and the world moves past it (sea texture scroll, pillars).
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { monorailParts } from './models.js';
 
 export const SEA_Y = -17; // sea level, far below the car floor (y = 0)
 export const BEAM_TOP = -0.62; // top of the straddle beam
@@ -190,17 +191,50 @@ export function buildWorld(scene, { sunDir }) {
   sea.userData.noAO = true;
   root.add(sea);
 
+  // The Blender-built beam segments, pillars and feet (models.js), when they loaded; else the older code-made ones
+  const M = monorailParts();
   // Concrete beam: one long rounded box. Joint plates slide along it to show speed.
   const concrete = new THREE.MeshStandardMaterial({ color: '#8b939e', roughness: 0.92 });
   const concreteDark = new THREE.MeshStandardMaterial({ color: '#737c88', roughness: 0.95 });
   const beam = new THREE.Mesh(new RoundedBoxGeometry(160, 0.9, 0.62, 3, 0.1), concrete);
   beam.position.set(0, BEAM_TOP - 0.45, 0);
   beam.receiveShadow = true;
-  root.add(beam);
   // the parallel guideway for trains going the other way, further off
   const beam2 = beam.clone();
   beam2.position.z = BEAM2_Z;
-  root.add(beam2);
+  if (!M) root.add(beam, beam2);
+  // Blender beam: 9.5 m segments, each with its joint at its start, that slide along under the train (update) and
+  // stop at the line's end (placeEnd); one instanced mesh per line
+  const SEG = 9.5,
+    NSEG = 12;
+  const segs = M
+    ? [0, BEAM2_Z].map((z) => {
+        const im = new THREE.InstancedMesh(M.beam.geometry, M.beam.material, NSEG);
+        im.receiveShadow = true;
+        im.frustumCulled = false;
+        im.userData.noBatch = true; // moves every frame: never merged (js/perf/batch.js)
+        im.userData.z = z;
+        root.add(im);
+        return im;
+      })
+    : [];
+  const _m = new THREE.Matrix4(),
+    _p = new THREE.Vector3(),
+    _q = new THREE.Quaternion(),
+    _s = new THREE.Vector3();
+  function placeSegs(scroll) {
+    const span = SEG * NSEG;
+    for (const im of segs) {
+      for (let i = 0; i < NSEG; i++) {
+        const x0 = ((((i * SEG - scroll) % span) + span) % span) - span / 2;
+        const k = Math.max(0, Math.min(1, (end - x0) / SEG));
+        _p.set(x0, BEAM_TOP, im.userData.z);
+        _s.set(Math.max(k, 1e-4), k > 0 ? 1 : 1e-4, 1);
+        im.setMatrixAt(i, _m.compose(_p, _q, _s));
+      }
+      im.instanceMatrix.needsUpdate = true;
+    }
+  }
 
   // where the line ends (setRide): the beams stop at a buffer block; past it no pillars or joints
   let end = Infinity;
@@ -230,7 +264,7 @@ export function buildWorld(scene, { sunDir }) {
   }
 
   const joints = new THREE.Group();
-  root.add(joints);
+  if (!M) root.add(joints);
   const jointGeo = new THREE.BoxGeometry(0.05, 0.92, 0.64);
   const JN = 16,
     JGAP = 9.5;
@@ -247,19 +281,25 @@ export function buildWorld(scene, { sunDir }) {
   const pillars = [],
     feet = [];
   const colH = BEAM_TOP - 0.9 - 0.45 - (SEA_Y - 1);
+  // Blender pillar: column, collar, hammerhead and bearings in one mesh, in the world's heights; its foot apart
+  const mono = (name) => {
+    const m = new THREE.Mesh(M[name].geometry, M[name].material);
+    m.name = name;
+    return m;
+  };
   const colGeo = new THREE.CylinderGeometry(0.36, 0.46, colH, 10, 1);
   const capGeo = new RoundedBoxGeometry(1.1, 0.5, 1.5, 3, 0.12);
   const footGeo = new THREE.CylinderGeometry(0.72, 0.8, 0.8, 12, 1);
   for (let i = 0; i < NP; i++) {
     const g = new THREE.Group(),
       base = new THREE.Group();
-    const col = new THREE.Mesh(colGeo, concrete);
-    col.position.y = SEA_Y - 1 + colH / 2;
+    const col = M ? mono('pillar') : new THREE.Mesh(colGeo, concrete);
+    if (!M) col.position.y = SEA_Y - 1 + colH / 2;
     const cap = new THREE.Mesh(capGeo, concrete);
     cap.position.y = BEAM_TOP - 0.9 - 0.2;
-    const foot = new THREE.Mesh(footGeo, concreteDark);
+    const foot = M ? mono('foot') : new THREE.Mesh(footGeo, concreteDark);
     foot.position.y = SEA_Y + 0.1;
-    for (const m of [col, cap, foot]) {
+    for (const m of M ? [col, foot] : [col, cap, foot]) {
       m.castShadow = false;
       m.receiveShadow = false;
       const c2 = m.clone();
@@ -287,6 +327,7 @@ export function buildWorld(scene, { sunDir }) {
       pillars[i].visible = x < end - 0.8;
       u.uPillarX.value[i] = x;
     }
+    if (M) placeSegs(scroll);
     const jspan = JGAP * JN;
     joints.children.forEach((j, idx) => {
       const i = idx;

@@ -72,6 +72,31 @@ for (const mode of ['land', 'port', 'closed'])
     assert.deepEqual(crossings(car.root), []);
   });
 
+// the same with the Blender-built outside (train/models.js, game3d/assets/train/monorail.glb) when the asset is here
+const glb = new URL('../../assets/train/monorail.glb', import.meta.url);
+const fs = await import('node:fs');
+if (fs.existsSync(glb)) {
+  const { GLTFLoader } = await import('../../vendor/loaders/GLTFLoader.js');
+  const { partsFrom, setMonorail } = await import('../../js/train/models.js');
+  const buf = fs.readFileSync(glb);
+  const gltf = await new GLTFLoader().parseAsync(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength), '');
+  const parts = partsFrom(gltf.scene);
+  test('monorail.glb has every part the car and the world use', () => assert.ok(parts));
+  for (const mode of ['land', 'port', 'closed'])
+    test(`train car with the Blender outside (${mode}): no part of the body crosses a doorway`, () => {
+      setMonorail(parts);
+      try {
+        const car = buildCar(mode);
+        if (car.setClosed) car.setClosed(1);
+        assert.ok(car.root.getObjectByName('car_under'), 'the skirt is on');
+        if (mode === 'closed') assert.ok(car.root.getObjectByName('car_skin'), 'the skin is on');
+        assert.deepEqual(crossings(car.root), []);
+      } finally {
+        setMonorail(null);
+      }
+    });
+}
+
 test('train door sets: frame posts, lamps and thresholds stay out of the doorways, the leaves fill them', async () => {
   const { buildDoorSets } = await import('../../js/train/doors.js');
   const doors = buildDoorSets();

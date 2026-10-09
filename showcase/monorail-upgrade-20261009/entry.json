@@ -1,0 +1,243 @@
+{
+  "title": "Monorail outside, rebuilt to your reference",
+  "date": "2026-10-09",
+  "by": "claude-agent:monorail",
+  "caption": "The cars, beam and pillars are now one Blender model made after art/refs/monorail/jorgen-suggestion-20261009.png: weathered stainless with panel lines, a navy skirt and line, dark window frames, roof units, bellows, a chunky beam and rust-streaked pillars. The interior, the doors and play are unchanged.",
+  "preview": "after-cruise-out-bay-desk",
+  "sections": [
+    {
+      "title": "Over the bay, from above the platform side",
+      "caption": "Before and after, desktop and phone.",
+      "images": [
+        {
+          "id": "before-cruise-out-bay-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-cruise-out-bay-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "after-cruise-out-bay-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-cruise-out-bay-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "before-cruise-out-bay-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-cruise-out-bay-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-cruise-out-bay-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-cruise-out-bay-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "Close on the car side: frames, panel lines, streaks, roof unit, door lamp",
+      "caption": "Before and after, desktop and phone.",
+      "images": [
+        {
+          "id": "before-cruise-out-close-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-cruise-out-close-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "after-cruise-out-close-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-cruise-out-close-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "before-cruise-out-close-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-cruise-out-close-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-cruise-out-close-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-cruise-out-close-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "Level with the cars",
+      "caption": "Before and after, desktop and phone.",
+      "images": [
+        {
+          "id": "before-cruise-out-low-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-cruise-out-low-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "after-cruise-out-low-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-cruise-out-low-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "before-cruise-out-low-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-cruise-out-low-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-cruise-out-low-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-cruise-out-low-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "From below: navy skirt, beam flange, joints and rust",
+      "caption": "Before and after, desktop and phone.",
+      "images": [
+        {
+          "id": "before-cruise-out-under-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-cruise-out-under-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "after-cruise-out-under-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-cruise-out-under-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "before-cruise-out-under-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-cruise-out-under-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-cruise-out-under-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-cruise-out-under-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "The car end, skirt and bellows",
+      "caption": "After only; this view was added during the work.",
+      "images": [
+        {
+          "id": "after-cruise-out-corner-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-cruise-out-corner-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "after-cruise-out-corner-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-cruise-out-corner-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "At Honsha platform, doors open",
+      "caption": "Before and after, desktop and phone.",
+      "images": [
+        {
+          "id": "before-platform-out-bay-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-platform-out-bay-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "after-platform-out-bay-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-platform-out-bay-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "before-platform-out-bay-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-platform-out-bay-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-platform-out-bay-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-platform-out-bay-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "The play camera (cut-away car) on the bay",
+      "caption": "Before and after, desktop and phone.",
+      "images": [
+        {
+          "id": "before-play-cruise-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-play-cruise-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "after-play-cruise-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-play-cruise-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "before-play-cruise-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-play-cruise-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-play-cruise-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-play-cruise-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "The play camera at the platform",
+      "caption": "Before and after, desktop and phone.",
+      "images": [
+        {
+          "id": "before-play-platform-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-play-platform-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "after-play-platform-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-play-platform-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "before-play-platform-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-play-platform-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-play-platform-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-play-platform-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "Departure framing: the closed car from above",
+      "caption": "Before and after, desktop and phone.",
+      "images": [
+        {
+          "id": "before-play-departure-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-play-departure-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "after-play-departure-desk",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-play-departure-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "before-play-departure-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/before-play-departure-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-play-departure-phone",
+          "image": "bible/shots/showcase/monorail-upgrade-20261009/after-play-departure-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play it (the train is the first place)",
+      "href": "game3d/"
+    },
+    {
+      "label": "Issue #355",
+      "href": "https://github.com/fumbleforce/tower-of-words/issues/355"
+    }
+  ]
+}
