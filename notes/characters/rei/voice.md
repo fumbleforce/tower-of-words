@@ -60,8 +60,4 @@ Later she starts calling on him first. She sends him errands she could do hersel
 
 ## Existing lines that drift from this
 
-Flags for whoever next rewrites them. They predate the 9 October bio and the 37-year-old Eric.
-
-- game3d/story/conversations/rei.js has her missing "my train" because of customer calls. Nobody commutes on the island, so this contradicts the setting.
-- The same file and day4/tennis.js lean on `sheepish` and "Sorry, I'm getting ahead." She can slow down for a beginner, but she wouldn't apologise.
-- Her day-3 and day-4 lines put orders as offers ("You can watch from the bench", "You can use the spare racket"). They are too mild for her now. She would just tell him.
+The Rei lines already in game3d/story/ that don't fit this sheet, including the "my train" line that breaks the no-commute canon, are listed with rewrites in [drift.md](drift.md).
