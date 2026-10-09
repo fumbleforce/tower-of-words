@@ -1,0 +1,104 @@
+# Rei: sample scene
+
+A voice sample, not wired into the game. Day 3 (Saturday), afternoon, at the tennis courts (`sports`), where the outline already has Rei practising serves alone with the ball basket beside her. Her label is still "Tennis player". About 1 to 2 minutes.
+
+Words Eric may know by now and will hear sharp: すみません (day 1), もう一度 and 大丈夫 (day 2). ボール is cleared for the line as a loanword. Everything else she says in Japanese is blurred, and he gets it from her pointing and from what happens. The English meaning in brackets is for the reader only.
+
+If this replaced the current day-3 lines, she would give her name here, so `d4_rei_intro` would be set at the end and day 4 would skip her introduction.
+
+---
+
+`[talk:rei]` A serve goes long and rolls to the bench. Rei turns and sees Eric.
+
+**rei** (overheard, clear ボール): すみません！そのボール、取ってください。
+  (Excuse me! Get that ball, please.)
+`[rei points at the ball under the bench]`
+
+**eric:** This one?
+
+**rei** (overheard): はい。こっちに投げてください。
+  (Yes. Throw it over here.)
+`[rei beckons. Eric throws it. It lands short and rolls the rest of the way to her.]`
+
+**rei:** All right. You're the new IT man from B2, aren't you? Half of Sales was talking about you on Thursday.
+
+**rei:** You can stand at the T over there and tell me if these go in. I only need in or out from you. I don't need a commentary.
+
+**eric:** The what?
+
+**rei:** The T. Where the two lines meet, by your left foot. Yes, there.
+`[rei walks back to the baseline before he answers]`
+
+**rei** (overheard): もう一度。
+  (Once more.)
+`[serve: in]`
+
+**eric:** In.
+
+**rei:** Yes, I saw. That's two in out of eleven today, so don't get excited.
+
+`[serve: long]`
+
+**eric:** That one was out. It was long.
+
+**rei:** It was on the line. You were watching me and not the ball, I saw your head move.
+
+**rei:** I changed my toss this week. It goes higher now, so it takes a few serves to get the timing right. Watch the ball this time.
+
+`[serve: long]`
+> She lands badly on her right foot and shifts off it.
+
+**choice**
+- "Out. That's two long in a row." → `out`
+- "Is your ankle all right?" → `ankle`
+- "In. Just about." → `kind`
+
+**out**
+
+**eric:** Out. That's two long in a row.
+
+**rei:** Then I'm rushing it. The toss is right. I checked it on the recordings all week, and I'm not going back to the old one the day before a match. Stay there, I've still got half a basket.
+
+**ankle**
+
+**eric:** Is your ankle all right?
+
+**rei** (overheard): 大丈夫です。
+  (I'm fine.)
+`[rei puts her right foot down carefully and walks two steps without limping]`
+
+**rei:** If my ankle needs looking at, there's a clinic for that. You're here to watch the line.
+
+**kind**
+
+**eric:** In. Just about.
+
+**rei:** No, it wasn't. I saw it land from here. If you're going to stand there, call it properly.
+
+**eric:** I don't remember agreeing to stand here.
+
+**rei:** You're standing there, aren't you?
+
+**all branches**
+
+`[rei walks to the basket, slowly, and spends a moment choosing a ball]`
+
+**rei:** That's enough for today. Thank you. I'm Rei, from Sales.
+
+**rei:** The club plays here tomorrow evening and we're always short of people. You can come if you want a game. Bring shoes you can actually run in.
+
+`[if kind]` **rei:** And call the lines honestly, or don't call them.
+
+`[rei turns back to the baseline. Set d3_rei_call = out / ankle / kind, and d4_rei_intro.]`
+
+**rei** (overheard): もう一度。
+
+---
+
+## What the choice changes
+
+The flag only changes Rei's first line on day 4.
+
+- `out`: "I'm keeping the new toss. I'll have the timing by tonight." She tells him before he has said anything.
+- `ankle`: She steps onto court without looking at him and tells Aoi, not Eric, where to stand.
+- `kind`: "Are you calling honestly today?" before anything else.
