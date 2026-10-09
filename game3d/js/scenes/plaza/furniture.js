@@ -64,7 +64,7 @@ function uplights(set, p, root) {
     lenses.push(new THREE.CylinderGeometry(0.075, 0.075, 0.02, 12).translate(x, 0.025, z));
     set.lit.push([...polar(a, UPLIGHT_R + 1.3), 2.2]);
   }
-  // its own material, not a shared one from mat(), since the evening changes it
+  // its own material, not a shared one from mat(), since the night changes it
   const glass = new THREE.MeshStandardMaterial({
     color: '#5d626b',
     roughness: 0.3,
@@ -72,13 +72,10 @@ function uplights(set, p, root) {
     emissiveIntensity: 0,
   });
   root.add(merged(lenses, glass, { cast: false }));
-  return () => {
-    glass.color.set('#fff3dc');
-    glass.emissiveIntensity = 2.4;
-  };
+  return [{ mat: glass, night: { color: '#fff3dc', emissiveIntensity: 2.4 } }]; // lit after dark (kit/light/glow.js)
 }
 
-// the lamps and the flush lights; returns what turns the flush lights' lenses on (the pools come on with the set)
+// the lamps and the flush lights; returns the flush lights' lenses' glows (the pools come on with the set)
 export function buildLamps(set, p, nav, root) {
   for (const [x, z, shift, pool] of lampPoints()) {
     lamps(set, p, [[x, z]], { kind: 'post', pool, poolShift: shift });

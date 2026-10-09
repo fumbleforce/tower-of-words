@@ -3,7 +3,8 @@ import { dormCourtSteps } from '../scenes/dorm-court.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { eveningGrade, MORNING_GRADE } from '../scenes/town.js';
+import { lightPlace } from '../kit/light/rig.js';
+import { phaseOf } from '../kit/light/looks.js';
 import { sim } from '../sim.js';
 import { walkIn, walkOut } from './edge-walk.js';
 import { dormBath } from './dorm-bath.js';
@@ -23,9 +24,9 @@ const BOARD = [HALL[1] - 0.1, BACK_Z], // the hall's notice board, and the manag
 const FLAP_OPEN = -1.9, // mailbox 203's flap swung open
   MAIL_ZOOM = 6; // the camera close on it, the number, the tape and the flyer readable on a phone
 export async function dormCourtPlace(game) {
-  // in slices between frames: it's built while the plaza is played; in the morning light when entered before work (day 2)
-  const morning = sim.day > 1 && sim.period !== 'evening';
-  const w = await sliced(dormCourtSteps({ morning }));
+  // in slices between frames: it's built while the plaza is played. Its light follows the clock (kit/light/), but on
+  // day 1 Eric is only here after work, so day 1 is always dusk, as in his dorm building (scenes/dorms.js)
+  const w = await sliced(dormCourtSteps({ phaseOf: (period, day) => (day > 1 ? phaseOf(period) : 'dusk') }));
   const cam = new RoomCam(w.camera);
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const bath = dormBath(game);
@@ -103,17 +104,12 @@ export async function dormCourtPlace(game) {
     space: w.root,
     nav: w.nav,
     sun: w.sun,
+    light: w.light, // the light for every period (scenes/dorm-court.js, kit/light/)
     charScale: K,
     start: w.start,
     startFacing: Math.PI, // north, up the door axis from the gate
     defaultPeriod: 'evening',
     music: 'night',
-    grade: morning ? MORNING_GRADE : eveningGrade(sim.day),
-    onPeriod(period) {
-      if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
-      w.evening(sim.day);
-      P.grade = eveningGrade(sim.day);
-    },
     things,
     findProps: { bakery_flyer: mb.flyer }, // what taking the flyer hides (finds/index.js)
     spots,
@@ -244,5 +240,6 @@ export async function dormCourtPlace(game) {
       eric.setState('idle');
     },
   };
+  lightPlace(P, sim.period, sim.day);
   return P;
 }

@@ -2,7 +2,8 @@
 // rectangles, in the island frame ([x0, x1, z0, z1]); the table is bands-plan.js. A place builds its bands into its
 // root before the static merge and leaves the blocks they build out of its skyline:
 //   const bands = yield* bandSteps(root, CHUNK);
-//   skyline skip: [...bands.ids]; evening(): bands.evening(); update(): bands.update(sun); cards: bands.cards(day, period)
+//   skyline skip: [...bands.ids]; rig.glow.add(bands.glows) (or bands.evening()); update(): bands.update(sun);
+//   cards: bands.cards(day, period)
 // Each band is { by, rects, ... }; by names the builder:
 //   eastLane      plaza/east-lane.js: the lane's streets, walks, park, planting, lamps and small blocks' fronts
 //                 (skip: the blocks the place builds itself)
@@ -40,6 +41,7 @@ import { quarterGrounds } from './campus/quarter-grounds.js';
 import { southQuarterGrounds } from './forecourt/quarter-planting.js';
 import { shedGarden } from './campus/shed-garden.js';
 import { BANDS } from './bands-plan.js';
+import { lightUp } from '../kit/light/glow.js';
 
 export { BANDS };
 const PLAZA = LAYOUT.CHUNKS.plaza.at;
@@ -50,7 +52,7 @@ const at = (x, z) => [x, z];
 
 // a light set built, if it has any lamps (an empty one has nothing to merge)
 const lightsOf = (set, root) =>
-  set.lit.length || set.glowParts.length ? set.build(root, { poolY: 0.03 }) : { evening() {} };
+  set.lit.length || set.glowParts.length ? set.build(root, { poolY: 0.03 }) : { glows: [] };
 
 // the blocks a place's bands build, for its skyline's skip list
 export function bandIds(chunk) {
@@ -65,7 +67,7 @@ export function bandIds(chunk) {
   return ids;
 }
 
-// each builder: (band, island-frame group, out: { evening, update, cards } lists, the shared collectors)
+// each builder: (band, island-frame group, out: { glows, update, cards } lists, the shared collectors)
 const BUILD = {
   *shedGarden(b, isl, out, s) {
     shedGarden(band(b.rects).parts(s.p));
@@ -89,7 +91,7 @@ const BUILD = {
       };
     const clip = band(b.rects).shift(-dx, -dz);
     const east = yield* eastLaneSteps(pf, null, lights, { clip, skip: b.skip || [] });
-    out.evening.push(east.evening);
+    out.glows.push(...east.glows);
     out.update.push(east.update);
     out.cards.push(east.cards);
   },
@@ -140,7 +142,7 @@ const BUILD = {
     const fronts = yield* frontsSteps(s.p, s.lights, blocks, { caster: walls, casts: () => true });
     fronts.meshes(isl);
     walls.build(isl);
-    out.evening.push(fronts.evening);
+    out.glows.push(...fronts.glows);
   },
 };
 
@@ -159,9 +161,9 @@ function shared() {
     build(root, out, keepShadows = false) {
       pv.build(root);
       for (const m of p.build(root)) if (!keepShadows) m.castShadow = false;
-      out.evening.push(lightsOf(lights, root).evening);
+      out.glows.push(...lightsOf(lights, root).glows);
       const sg = signs.build(root);
-      out.evening.push(sg.evening);
+      out.glows.push(...sg.glows);
       out.cards.push(sg.show);
     },
   };
@@ -171,7 +173,7 @@ export function* bandSteps(root, chunk) {
   const isl = placeIn(new THREE.Group(), chunk);
   isl.name = 'bands';
   root.add(isl);
-  const out = { evening: [], update: [], cards: [] },
+  const out = { glows: [], update: [], cards: [] },
     stats = [];
   // triangles in the bands' group (before the place's merge), for the stats
   const tris = () => {
@@ -201,7 +203,8 @@ export function* bandSteps(root, chunk) {
   return {
     stats,
     ids: bandIds(chunk),
-    evening: () => out.evening.forEach((f) => f()),
+    glows: out.glows, // what lights up after dark (kit/light/glow.js)
+    evening: () => lightUp(out.glows),
     update: (sun) => out.update.forEach((f) => f(sun)),
     cards: (day, period) => out.cards.forEach((f) => f(day, period)),
   };

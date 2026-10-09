@@ -27,6 +27,7 @@ import { tree, walk } from './east-lane.js';
 import { yardGround, yardSteps } from './north-yard.js';
 import { clinicGround, clinicSteps } from './north-clinic.js';
 import * as N from './north-plan.js';
+import { lightUp } from '../../kit/light/glow.js';
 
 const { BACK, APRON, E2_WALK, GROVE_WALK, SQUARE, VERGE, CLINIC, CANTEEN } = N;
 const VB = BACK[2] - VERGE; // the north verge's back
@@ -151,9 +152,9 @@ function* planting(q, lights, sh) {
   }
 }
 
-// builds it all into the plaza: lights, the plaza's light set. Returns the evening switch, and update(sun), which
-// keeps the laid shadows on the side the sun is on. A generator that yields between parts, for building in slices
-// (js/perf/slice.js).
+// builds it all into the plaza: lights, the plaza's light set. Returns what lights up after dark (glows; evening()
+// for a place not yet on a light rig), and update(sun), which keeps the laid shadows on the side the sun is on. A
+// generator that yields between parts, for building in slices (js/perf/slice.js).
 export function* northLaneSteps(root, lights) {
   yield* ground(root);
   const q = new Parts(),
@@ -173,18 +174,16 @@ export function* northLaneSteps(root, lights) {
   yield;
   const group = new THREE.Group(); // everything here, so none of it casts
   root.add(group);
-  const { lit } = buildBlockSets(sets, group);
+  const blocks = buildBlockSets(sets, group);
   yield;
   q.build(group);
   group.traverse((m) => (m.castShadow = false));
   yield;
   const shadows = sh.build(root);
+  const glows = [...blocks.glows, ...fronts.glows, ...cl.glows]; // what lights up after dark (kit/light/glow.js)
   return {
-    evening() {
-      if (lit) lit.visible = true;
-      fronts.evening();
-      cl.evening();
-    },
+    glows,
+    evening: () => lightUp(glows),
     update(sun) {
       shadows.follow(sun.position);
     },

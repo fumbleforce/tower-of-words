@@ -9,6 +9,8 @@
 //                                                              night, times the look's pool gain
 //   { set(night, look) }                                       anything else: called with the switch and the look
 // The same material registered twice is recorded once, so a shared material keeps its true daytime values.
+//   lightUp(entries)                                           the same list switched on once, for a builder's
+//                                                              evening() where a place has no rig yet
 
 const KEYS = ['color', 'emissive', 'emissiveIntensity'];
 const copyOf = (v) => (v && v.clone ? v.clone() : v);
@@ -18,6 +20,18 @@ function assign(m, key, v) {
     if (typeof v === 'object' && v.isColor) m[key].copy(v);
     else m[key].set(v);
   } else m[key] = v;
+}
+
+// a builder's evening() for the places not yet on a rig: its glows switched on once from the same list, so the night
+// values live in one place. A pool keeps the gain the place gave it (town.js eveningLight)
+export function lightUp(entries) {
+  for (const e of entries.flat()) {
+    if (!e) continue;
+    if (e.mat) for (const k of KEYS) assign(e.mat, k, e.night[k]);
+    else if (e.show) e.show.visible = true;
+    else if (e.pool) e.pool.userData.set(e.night);
+    else if (e.set) e.set(true, {});
+  }
 }
 
 export function glowSet() {

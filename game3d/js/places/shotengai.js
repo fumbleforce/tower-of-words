@@ -6,7 +6,7 @@ import { shotengaiSteps } from '../scenes/shotengai.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { eveningLight, eveningGrade, MORNING_GRADE } from '../scenes/town.js';
+import { lightPlace } from '../kit/light/rig.js';
 import { sim } from '../sim.js';
 import { addOccluder, updateOccluders, footprint } from '../scenes/occluders.js';
 import { PLACE_DETAILS } from './catalog.js';
@@ -133,11 +133,11 @@ export async function shotengaiPlace(game) {
     space: w.root,
     nav: w.nav,
     sun: w.sun,
+    light: w.light, // the light for every period (scenes/shotengai.js, kit/light/)
     charScale: K,
     start: w.in,
     startFacing: w.face,
     music: 'calm',
-    grade: MORNING_GRADE,
     things,
     spots: {
       station_garden: garden.spots.station_garden,
@@ -217,17 +217,9 @@ export async function shotengaiPlace(game) {
       const want = w.steep(p.x, p.z) ? STEEP : flat;
       cam.elev += (want - cam.elev) * Math.min(1, dt * 3);
     },
+    // what a period changes here besides the light (the rig's)
     onPeriod(period) {
-      if (period !== 'evening') {
-        w.morning();
-        P.grade = MORNING_GRADE;
-      }
       w.cards(sim.day, period); // the shops' door cards for the day and the time (scenes/shop-signs.js WHEN)
-      if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
-      eveningLight(w.scene, sim.day);
-      w.evening();
-      w.follow(game.player.root.position.x, game.player.root.position.z);
-      P.grade = eveningGrade(sim.day);
     },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }) };
@@ -271,5 +263,6 @@ export async function shotengaiPlace(game) {
   addOccluder(P, w.arcadeRoof, footprint(w.arcade[0] - 0.2, w.arcade[1] + 0.2, az0 - 0.5, az1 + 0.5), {
     name: 'arcade',
   });
+  lightPlace(P, sim.period, sim.day);
   return P;
 }

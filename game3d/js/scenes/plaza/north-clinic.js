@@ -215,7 +215,7 @@ function sheet() {
 }
 
 // the block, its entrance and signs; the cross on the stair crown and the roof cross for the map. Returns the meshes
-// that stay apart from the merge (the cross and the names, both lit after work) and the evening switch. A generator
+// that stay apart from the merge (the cross and the names, both lit after work) and what lights up after dark (glows). A generator
 // that yields between parts, for building in slices (js/perf/slice.js).
 export function* clinicSteps(sets, q, lights, sh) {
   const { doors, top } = yield* officeBlockSteps(sets, CLINIC, {
@@ -286,10 +286,10 @@ export function* clinicSteps(sets, q, lights, sh) {
   names.name = 'clinic:names';
   return {
     meshes: [cross, names],
-    evening() {
-      sign.emissive.set('#7fd39a');
-      sign.emissiveIntensity = 1.1;
-      names.material.emissiveIntensity = 1.3;
-    },
+    // after dark (kit/light/glow.js)
+    glows: [
+      { mat: sign, night: { emissive: '#7fd39a', emissiveIntensity: 1.1 } },
+      { mat: names.material, night: { emissiveIntensity: 1.3 } },
+    ],
   };
 }

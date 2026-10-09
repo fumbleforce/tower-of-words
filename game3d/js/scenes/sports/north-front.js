@@ -95,9 +95,7 @@ export function northFront(parts, wallParts, k, wall) {
       mesh.name = 'sports:r3-recessed-glass';
       root.add(mesh);
     },
-    evening() {
-      material.emissiveIntensity = 0.36;
-      material.color.set('#806d56');
-    },
+    // after dark the glass is lit from inside (kit/light/glow.js)
+    glows: [{ mat: material, night: { emissiveIntensity: 0.36, color: '#806d56' } }],
   };
 }

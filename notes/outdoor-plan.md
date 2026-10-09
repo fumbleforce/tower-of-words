@@ -15,4 +15,4 @@ One programme for everything outside (Jørgen, 2026-10-09: "Lets not keep 2 mode
 
 ## Done so far
 
-Ground system stage 1 (forecourt, campus), planting models, lighting stage 1 (forecourt, Eric's dorm), far view in every outdoor place, place budgets.
+Ground system stage 1 (forecourt, campus), planting models, lighting stages 1 and 2 (forecourt, Eric's dorm; the plaza, shop street, east lane and dorm courtyard), far view in every outdoor place, place budgets.

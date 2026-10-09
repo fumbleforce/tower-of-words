@@ -1,7 +1,7 @@
 // The fountain plaza's own buildings, placed and sized from the island layout (scenes/island-layout.js): the
 // two-storey canteen on the plaza's north side, and the covered shop street (shotengai) south of the lane, two
 // rows of two-storey shops facing each other under one arcade roof. Everything is merged per material; the lit
-// glass is its own material so the evening can turn it on.
+// glass is its own material so it can light up after dark (each builder's glows, kit/light/glow.js).
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { PAL, mat, textTexture, plane, JP_FONT } from '../props.js';
@@ -154,7 +154,7 @@ export function* canteenSteps(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) 
   // standing on the door canopy's front edge
   sign.position.set(dx, 2.3, S + 1.08);
   root.add(sign);
-  return { glass };
+  return { glass, glows: [{ mat: glass, night: { emissiveIntensity: 0.45 } }] }; // lit after dark (kit/light/glow.js)
 }
 
 // The shop street: two rows along a line from `a` (the north row's north-west corner) in direction `dir`, each
@@ -165,9 +165,9 @@ export function* canteenSteps(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) 
 // the storey. shops: the named shops (island-south.js SHOPS): a sign board on the front over their bays and a
 // projecting sign over the arcade at their door bay, all in one mesh (shop-signs.js).
 // farLayer: the camera layer for the arcade's roof and the south row's roofs, which no camera of the backdrop's
-// places sees (the island map's: they cost nothing in play). Returned: the lit glass, the group, the signs and the
-// arcade roof's meshes (its glass, ribs and ridge; the gutters stay with the rows), for a place that walks under
-// it to fade (scenes/occluders.js).
+// places sees (the island map's: they cost nothing in play). Returned: the lit glass, what lights up after dark
+// (glows), the group, the signs and the arcade roof's meshes (its glass, ribs and ridge; the gutters stay with the
+// rows), for a place that walks under it to fade (scenes/occluders.js).
 // shopStreetSteps is the same as a generator that yields after every building and between the meshes, for a place
 // built in slices (js/perf/slice.js)
 export const shopStreet = (...a) => drain(shopStreetSteps(...a));
@@ -342,5 +342,7 @@ export function* shopStreetSteps(
   arcade.forEach(onFar('arcade'));
   yield;
   const lit = signs.build(g);
-  return { glass, group: g, signs: lit, arcade };
+  // after dark the shops' glass and signs light up (kit/light/glow.js)
+  const glows = [{ mat: glass, night: { emissiveIntensity: 0.55 } }, ...lit.glows];
+  return { glass, glows, group: g, signs: lit, arcade };
 }

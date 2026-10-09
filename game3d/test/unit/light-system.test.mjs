@@ -16,8 +16,10 @@ const hooks = registerHooks({
 process.on('exit', () => hooks.deregister());
 
 const THREE = await import('../../vendor/three/three.module.js');
-const { PHASE, phaseOf, lookFor, OUTDOOR, DORM, EVENING_GRADE_2, SKY } = await import('../../js/kit/light/looks.js');
-const { glowSet } = await import('../../js/kit/light/glow.js');
+const { PHASE, phaseOf, lookFor, OUTDOOR, DORM, PLAZA, SHOTENGAI, DORM_COURT, EVENING_GRADE_2, SKY, SUN } = await import(
+  '../../js/kit/light/looks.js'
+);
+const { glowSet, lightUp } = await import('../../js/kit/light/glow.js');
 const { lightRig, lightPlace } = await import('../../js/kit/light/rig.js');
 
 // the periods the day clock has (sim.js PERIODS), read from its source so the table can't fall behind it
@@ -53,7 +55,7 @@ function poolMesh(k = 0.16) {
 test('every period of the day clock has a phase and every look set covers it', () => {
   for (const p of PERIODS) {
     assert.ok(PHASE[p], `period ${p} has no phase`);
-    for (const looks of [OUTDOOR, DORM]) assert.ok(looks[phaseOf(p)], `no ${phaseOf(p)} look`);
+    for (const looks of [OUTDOOR, DORM, PLAZA, SHOTENGAI, DORM_COURT]) assert.ok(looks[phaseOf(p)], `no ${phaseOf(p)} look`);
   }
   assert.equal(phaseOf('evening'), 'dusk');
   assert.equal(phaseOf('early'), 'day');
@@ -175,4 +177,57 @@ test('the outdoor sky comes from the period table: the early sky, the day sky an
   rig.listen((s) => seen.push(s.sky));
   for (const p of ['early', 'evening', 'morning']) rig.apply(p);
   assert.deepEqual(seen, [SKY.day, SKY.early, SKY.dusk, SKY.day]);
+});
+
+test("the walk home's places keep their own light: the plaza's day 2 pools, the shop street's sun, the court's dusk", () => {
+  const plaza2 = lookFor(PLAZA, 'dusk', 2);
+  assert.equal(plaza2.pool, 1.5);
+  assert.equal(plaza2.grade.exposure, 1.08);
+  assert.deepEqual(plaza2.hemi, lookFor(OUTDOOR, 'dusk', 2).hemi);
+  assert.equal(lookFor(PLAZA, 'dusk', 1).pool, 1);
+  // the shop street's sun is turned with its chunk on every day; the rest is the town's
+  assert.deepEqual(lookFor(SHOTENGAI, 'dusk', 2).sun[2], [0.18, 0.3, -0.94]);
+  assert.deepEqual(lookFor(SHOTENGAI, 'day', 1, 'early').sun[2], [-0.45, 0.62, 0.64]);
+  assert.deepEqual(lookFor(SHOTENGAI, 'dusk', 2).hemi, lookFor(OUTDOOR, 'dusk', 2).hemi);
+  assert.deepEqual(lookFor(SHOTENGAI, 'day', 1, 'early').sky, SKY.early);
+  // the court: its own dusk, its sky's glow where the town's dusk sun is, its background per period
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(DORM_COURT.day.bg);
+  const rig = lightRig(scene, { looks: DORM_COURT });
+  const grade = rig.apply('evening', 2);
+  assert.equal(rig.state.skyDir, SUN.evening);
+  assert.equal(grade.exposure, EVENING_GRADE_2.exposure);
+  assert.equal(scene.background.getHexString(), '2b3342');
+  rig.apply('morning', 2);
+  assert.equal(rig.state.skyDir, null);
+  assert.equal(rig.hemi.intensity, 2.3);
+  assert.equal(scene.background.getHexString(), '5d636c');
+});
+
+test("a builder's evening() for a place without a rig switches on the same glows, keeping the pool's gain", () => {
+  const m = new THREE.MeshStandardMaterial({ color: '#445566', emissiveIntensity: 0 }),
+    pane = new THREE.Mesh(),
+    pool = poolMesh();
+  pane.visible = false;
+  pool.userData.gain = 2;
+  lightUp([[{ mat: m, night: { color: '#e8c89a', emissiveIntensity: 0.6 } }], { show: pane }, { pool, night: 0.42 }]);
+  assert.equal(m.color.getHexString(), new THREE.Color('#e8c89a').getHexString());
+  assert.equal(m.emissiveIntensity, 0.6);
+  assert.equal(pane.visible, true);
+  assert.equal(pool.userData.k, 0.42);
+  assert.equal(pool.userData.gain, 2);
+});
+
+test("a long chunk's shadow box follows Eric in steps and keeps the period's sun direction", () => {
+  const scene = new THREE.Scene();
+  const rig = lightRig(scene, { looks: SHOTENGAI, shadow: { box: 16, far: 80 }, sunDist: 40 });
+  rig.follow(10.9, -3.2);
+  assert.deepEqual(rig.sun.target.position.toArray(), [10, 0, -4]);
+  const dir = () => rig.sun.position.clone().sub(rig.sun.target.position);
+  assert.ok(Math.abs(dir().length() - 40) < 1e-9);
+  rig.apply('evening');
+  assert.deepEqual(rig.sun.target.position.toArray(), [10, 0, -4]);
+  const want = new THREE.Vector3(0.18, 0.3, -0.94).normalize();
+  assert.ok(dir().normalize().distanceTo(want) < 1e-9);
+  assert.equal(rig.sun.shadow.camera.right, 16);
 });
