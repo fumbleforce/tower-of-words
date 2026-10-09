@@ -26,7 +26,7 @@ export const nodes = {
   ms_aoi_asks: [
     { do: 'milestone', who: 'aoi', state: 'askClub' },
     { say: 'aoi', overheard: true, name: 'Aoi', emo: 'polite', text: '最初の三十分は、初心者が使ってもいいですか。' },
-    { say: 'rei', name: 'Rei', emo: 'warm', text: 'Thirty minutes for beginners? Yes, put that on the booking so everyone can see it.' },
+    { say: 'rei', name: 'Rei', emo: 'curt', text: 'Thirty minutes for beginners, then doubles. Write it on the booking so nobody argues with me about it later.' },
     { do: 'milestone', who: 'aoi', state: 'makeBooking' },
     ...finish('aoi', 3, 'Stayed while she booked a beginner portion of the court time.'),
   ],

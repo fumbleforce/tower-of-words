@@ -10,7 +10,7 @@ Sunday 4 October. Story, voices and physical integration are implemented; Sunday
 
 Mio's morning messages name the court display and gym fan requests before the player goes out. The room's desk advances one period or rests until evening; the bed offers Sleep in the evening regardless of work or club progress. Saturday's unfinished requests retain their progress and hours.
 
-The tennis club meets on Sunday evening. Rei introduces herself and offers two spare rackets. Aoi can practise with the player on a separate practice court while Rei waits for her doubles game. The player can practise with Aoi or watch Rei demonstrate a serve. Either path gives Aoi a turn before Rei goes back to doubles. A drink afterwards is optional. Leaving early preserves the invitation.
+The tennis club meets on Sunday evening. Rei introduces herself and tells the player and Aoi to take a spare racket each. She manages a team in Sales, ranks above Eric and treats him as a junior she can order about. Aoi can practise with the player on a separate practice court while Rei waits for her doubles game. The player can practise with Aoi or watch Rei demonstrate a serve. Either path gives Aoi a turn before Rei goes back to doubles. A drink afterwards is optional. Leaving early preserves the invitation.
 
 At the court, Rei demonstrates one press adding two points. The player reseats the button cap; Rei checks a single increment. At the gym desk, the attendant asks for help with the stalled fan before either the lever or a known command starts it. A full oscillation precedes his confirmation. Each completed request pays once. Neither repair advances time or closes its venue.
 

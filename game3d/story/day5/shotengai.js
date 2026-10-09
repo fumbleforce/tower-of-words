@@ -31,10 +31,10 @@ export default withStationGarden(
                 say: 'rei',
                 name: 'Rei',
                 emo: 'casual',
-                text: 'I’m taking lunch back today. Somebody moved the afternoon meeting forward.',
+                text: 'I’m eating at my desk today. Somebody moved the afternoon meeting forward without asking me, and I’m going to find out who.',
               },
             ],
-            else: [{ say: 'rei', emo: 'polite', text: 'Excuse me, can I get past?' }],
+            else: [{ say: 'rei', overheard: true, emo: 'curt', text: 'すみません、通ります。' }],
           },
         ],
         d5_hamada: [

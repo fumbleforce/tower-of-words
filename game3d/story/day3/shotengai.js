@@ -135,7 +135,7 @@ export default withStationGarden(
           { if: '!know_futari', then: [{ call: 'd3_kuro_futari' }] },
         ],
         d3_kuro_futari: [{ if: 'd3_kuro_intro', then: futari({ name: 'Kuro' }), else: futari({}) }],
-        d3_rei_lunch: [{ say: 'rei', emo: 'casual', text: 'Could I reach past you? My drink’s there.' }],
+        d3_rei_lunch: [{ say: 'rei', overheard: true, emo: 'curt', text: 'すみません、そこ、どいてください。' }, { do: 'gesture', who: 'rei', kind: 'point', to: 'eric' }],
         d3_bench: [
           {
             if: 'd2_party_done',

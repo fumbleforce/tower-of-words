@@ -1,7 +1,7 @@
 // Merged into sports only. Global club entries call these local scene nodes.
 export const tennisNodes = {
   d4_rei_name: [{ if: '!d4_rei_intro', then: [
-    { say: 'rei', emo: 'casual', text: 'I’m Rei. Are you here to play, or about the display?' },
+    { say: 'rei', emo: 'casual', text: 'I’m Rei. Are you here to play, or have you finally come about the display?' },
     { say: 'eric', emo: 'warm', text: 'I’m {mc.name}, from B2. I thought I’d have a look.' },
     { do: 'meet', who: 'rei' }, { set: 'd4_rei_intro' }, { do: 'save' },
   ] }],
@@ -18,16 +18,16 @@ export const tennisNodes = {
     { call: 'd4_rei_name' }, { call: 'd4_aoi_name' },
     { if: 'know_yoyaku', then: [
       { say: 'eric', emo: 'curious', text: 'Do we have a {yoyaku} for this court?' },
-      { say: 'rei', name: 'Rei', emo: 'casual', text: 'Yes, until they finish their game. Have you brought a racket?' },
-    ], else: [{ say: 'rei', name: 'Rei', emo: 'casual', text: 'We’ve got the practice court until they finish. Have you brought a racket?' }] },
+      { say: 'rei', name: 'Rei', emo: 'casual', text: 'Yes, until they finish their game. Where’s your racket? You haven’t brought one, have you?' },
+    ], else: [{ say: 'rei', name: 'Rei', emo: 'casual', text: 'We’ve got the practice court until they finish. Where’s your racket? You haven’t brought one, have you?' }] },
     { do: 'tennisSession', state: 'racket' },
     { say: 'aoi', name: 'Aoi', overheard: true, emo: 'hesitant', text: '私も、ラケットを借りていいですか。', clear: ['ラケット'] },
-    { say: 'rei', name: 'Rei', emo: 'warm', text: 'You can both borrow one. Aoi, you can put the basket down.' },
+    { say: 'rei', name: 'Rei', emo: 'curt', text: 'Take one each from the bag. Aoi, put the basket down, you didn’t come here to carry it.' },
     { do: 'gesture', who: 'rei', kind: 'point', to: 'ball_basket' },
     { do: 'tennisSession', state: 'basketDown' },
     { do: 'gesture', who: 'aoi', kind: 'beckon', to: 'eric' },
     { say: 'aoi', name: 'Aoi', overheard: true, emo: 'polite', text: '{isshoni}、やりませんか。' },
-    { say: 'rei', name: 'Rei', emo: 'casual', text: 'She’s asking you to play with her. You can have a go together.' },
+    { say: 'rei', name: 'Rei', emo: 'casual', text: 'She wants you to play with her. Go on, the two of you, over there.' },
     { if: '!know_isshoni', then: [{ choice: [
       { text: 'Ask which word means “together”.', go: 'd4_together' },
       { text: 'Take a racket.', go: 'd4_tennis_choose' },
@@ -50,7 +50,7 @@ export const tennisNodes = {
     { say: 'eric', emo: 'hesitant', text: '{isshoni}... {ikitai}.' },
     { do: 'gesture', who: 'aoi', kind: 'beckon', to: 'eric' },
     { say: 'aoi', name: 'Aoi', overheard: true, emo: 'warm', text: 'はい、あっちに行きましょう。' },
-    { say: 'rei', name: 'Rei', emo: 'casual', text: 'You want to go over together? Yes, that court is free.' },
+    { say: 'rei', name: 'Rei', emo: 'casual', text: 'Yes, go over together, that court’s free. Don’t hit anything into ours.' },
     { set: 'd4_invitation_said' }, { go: 'd4_tennis_choose' },
   ],
   d4_aoi_rally: [
@@ -66,16 +66,16 @@ export const tennisNodes = {
     { set: 'd4_watched_rei' },
     { say: 'rei', name: 'Rei', emo: 'casual', text: 'Turn sideways first. Then bring the racket back, and when you toss the ball...' },
     { say: 'eric', emo: 'hesitant', text: 'Hang on, where should my feet be?' },
-    { say: 'rei', name: 'Rei', emo: 'sheepish', text: 'Sorry, I’m getting ahead. Watch my feet for this one.' },
+    { say: 'rei', name: 'Rei', emo: 'curt', text: 'Watch my feet, then. And don’t talk until I’ve finished the serve.' },
     { do: 'tennisSession', state: 'serve' },
     { do: 'gesture', who: 'aoi', kind: 'point', to: 'rei' },
     { say: 'aoi', name: 'Aoi', overheard: true, emo: 'curious', text: '私も、やってみていいですか。' },
-    { say: 'rei', name: 'Rei', emo: 'warm', text: 'Your turn, Aoi. I’ll move back.' },
+    { say: 'rei', name: 'Rei', emo: 'casual', text: 'Your turn, Aoi. Do exactly what I did, feet first.' },
     { do: 'tennisSession', state: 'aoiTurn' }, { go: 'd4_tennis_finish' },
   ],
   d4_tennis_finish: [
     { set: 'd4_tennis_done' },
-    { say: 'rei', name: 'Rei', emo: 'casual', text: 'They’ve finished. I’m going over for doubles. Keep the spare, Aoi, I’ve got mine.' },
+    { say: 'rei', name: 'Rei', emo: 'casual', text: 'They’ve finished, so I’m going over for doubles. Keep the spare, Aoi, and bring it back next Sunday.' },
     { do: 'tennisSession', state: 'doubles' },
     { do: 'gesture', who: 'aoi', kind: 'point', to: 'bench_ball' },
     { say: 'aoi', name: 'Aoi', overheard: true, emo: 'warm', text: 'ちょっと、休みませんか。' },
@@ -96,7 +96,7 @@ export const tennisNodes = {
   ],
   d4_tennis_leave: [{ do: 'tennisSession', state: 'free' }, { do: 'cam', back: true }, { do: 'save' }],
   d4_tennis_repeat: [
-    { say: 'rei', name: 'Rei', emo: 'warm', text: 'We can fit you in after this game. Aoi’s over there if you want to warm up.' },
+    { say: 'rei', name: 'Rei', emo: 'curt', text: 'You’re playing after this game. Go and warm up with Aoi until then.' },
     { choice: [{ text: 'Hit a few balls with Aoi.', go: 'd4_tennis_repeat_play' }, { text: 'Watch from the bench.', go: 'd4_tennis_leave' }] },
   ],
   d4_tennis_repeat_play: [{ do: 'tennisSession', state: 'repeat' }, { go: 'd4_tennis_leave' }],

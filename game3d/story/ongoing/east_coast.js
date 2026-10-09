@@ -4,7 +4,7 @@ const familiar = interactions(source, ['talk:onsen', 'talk:lookout']);
 export const reiIntroduction = [
   { if: 'met_rei', then: [{ set: 'd4_rei_intro' }] },
   { if: '!met_rei && !d4_rei_intro', then: [
-    { say: 'rei', emo: 'polite', text: 'Hello. I’m Rei. I’ve seen you around the office.' },
+    { say: 'rei', emo: 'casual', text: 'You’re the new one from B2. I’m Rei. I run one of the teams in Sales. I’ve seen you wandering around the office.' },
     { say: 'eric', emo: 'warm', text: '{mc.name}. I’m on B2.' },
     { do: 'meet', who: 'rei' }, { set: 'd4_rei_intro' },
   ] },
@@ -52,10 +52,10 @@ export default place('east_coast', {
     ],
     ongoing_rei_practice: [
       { if: 'd4_tennis_done', then: [
-        { say: 'rei', name: 'Rei', emo: 'warm', text: 'Come again on Sunday. We can change partners this time.' },
-      ], else: [{ say: 'rei', name: 'Rei', emo: 'casual', text: 'Sunday evening, by the gym. We have spare rackets if you want to try.' }] },
+        { say: 'rei', name: 'Rei', emo: 'casual', text: 'Come on Sunday. You’re playing with me this time, so don’t be late.' },
+      ], else: [{ say: 'rei', name: 'Rei', emo: 'casual', text: 'Sunday evening, by the gym, at six. There’s a spare racket, so you’ve got no excuse.' }] },
       { say: 'eric', emo: 'curious', text: 'Do you play during the week too?' },
-      { say: 'rei', name: 'Rei', emo: 'casual', text: 'When I can find someone. Walking is easier to arrange.' },
+      { say: 'rei', name: 'Rei', emo: 'casual', text: 'When I can find someone good enough. Most of Sales can’t play, so I walk instead.' },
       { go: 'ongoing_coast_leave' },
     ],
     ongoing_rei_walk: [
