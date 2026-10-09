@@ -67,7 +67,7 @@ if (mode === 'stills') {
     ff.stdin.end();
     await new Promise((r) => ff.on('close', r));
     if (errs.length) console.log('PAGE ERRORS:\n' + [...new Set(errs)].join('\n'));
-  }, { timeoutMs: 3600000, gpuWaitMs: 900000 });
+  }, { timeoutMs: 3600000, gpuWaitMs: 900000, loadWaitMs: 1800000 });
   console.log(mp4);
 } else {
   console.log('modes: stills <t,t,...> [out] | video [out] [fps] [from] [to]');
