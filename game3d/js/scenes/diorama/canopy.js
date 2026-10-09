@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
+import { shadowOnly, clustered } from '../../perf/shadow-proxy.js';
 
 export function leafCluster() {
   const canvas = document.createElement('canvas');
@@ -36,14 +37,18 @@ export function leafCluster() {
   return texture;
 }
 
-export function addCanopyCore(root, faces) {
+export function addCanopyCore(root, faces, sun) {
   // A recessed, dark leaf mass closes the gaps between the outer leaves.
   // The outer leaves still define its silhouette and catch the sunlight.
   const coreGeometry = new THREE.BufferGeometry();
   const vertices = [],
-    normals = [];
+    normals = [],
+    all = [];
   for (const face of faces)
     for (const p of [face.a, face.b, face.c]) {
+      all.push(p.x, p.y, p.z);
+      // the undersides face the ground, which no camera here looks up from: they only cast (below)
+      if (face.n.y < -0.5) continue;
       vertices.push(p.x, p.y, p.z);
       normals.push(face.n.x, face.n.y, face.n.z);
     }
@@ -54,6 +59,12 @@ export function addCanopyCore(root, faces) {
     new THREE.MeshStandardMaterial({ color: '#365020', roughness: 1 }),
   );
   coreGeometry.dispose();
+  // its shadow from a lighter stand-in on the shadow-only layer (perf/shadow-proxy.js): every crown, corners snapped to
+  // a 0.45 m grid; the core itself casts none.
+  const whole = new THREE.BufferGeometry();
+  whole.setAttribute('position', new THREE.Float32BufferAttribute(all, 3));
+  root.add(shadowOnly(clustered(whole, 0.45), 'diorama-crown-shadow', sun));
+  whole.dispose();
 
   core.name = 'diorama-foliage-interior';
   core.userData.noLook = core.material.userData.noLook = true;
@@ -122,6 +133,7 @@ export function addCanopyCore(root, faces) {
     );
   };
   core.material.customProgramCacheKey = () => 'diorama-leaf-interior-v2';
-  core.castShadow = core.receiveShadow = true;
+  core.castShadow = false;
+  core.receiveShadow = true;
   root.add(core);
 }

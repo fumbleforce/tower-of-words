@@ -15,7 +15,7 @@ export function dressStreet(root, scene, sun, station, nav) {
   const softened = softenStation(root);
   const details = streetDetails(root, station, environment);
   // leaves in 10 m tiles: fewer draws, each still culled (the place budgets, game3d/tools/perf/place-budgets.json)
-  const leaves = dressFoliage(root, { budget: 32000, tileSize: 10, leafShadows: false, leafScale: 1.5 });
+  const leaves = dressFoliage(root, { budget: 32000, tileSize: 10, leafShadows: false, leafScale: 1.5, sun });
   const meadow = meadowDetail(root, nav, { budget: 6500, shadows: false });
   scene.traverse((o) => {
     if (o.isHemisphereLight) {
