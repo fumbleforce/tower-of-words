@@ -51,7 +51,7 @@ def hexc(h):
 
 C = {
     'steel': hexc('#b3bac3'), 'roof': hexc('#a2a9b2'), 'seam': hexc('#565e69'), 'navy': hexc('#2b3b58'),
-    'navyDark': hexc('#212c42'), 'gutter': hexc('#59616c'), 'frame': hexc('#1d2129'), 'inner': hexc('#bdbab5'),
+    'navyDark': hexc('#212c42'), 'gutter': hexc('#59616c'), 'frame': hexc('#1d2129'), 'inner': hexc('#f2e9dc'),
     'unit': hexc('#b9c0c8'), 'louvre': hexc('#363c45'), 'slat': hexc('#8e96a1'),
     'rub': hexc('#5d6878'), 'under': hexc('#1b1f26'), 'bel': hexc('#30353d'), 'belEdge': hexc('#4a505a'),
     'concrete': hexc('#9a9d9f'), 'concreteTop': hexc('#a7a9aa'), 'rust': hexc('#7b5640'), 'joint': hexc('#3a3e44'),
@@ -285,7 +285,7 @@ def skin_part(c, n):
     gx, gz = plan_grad(c.x, c.z)
     if n.y > 0.75:
         return 'roof'
-    if plan_sd(c.x, c.z) < -SKIN + 0.012 or n.y < -0.75:  # inside faces, the ceiling, the bottom rim
+    if plan_sd(c.x, c.z) < -SKIN + 0.012 or n.y < -0.1:  # inside faces, the ceiling and its curve into the walls, the bottom rim
         return 'inner'
     if n.x * gx + n.z * gz < 0.6 and c.y < TOP - 0.2:  # reveals of the window, door and gangway openings
         return 'reveal'
