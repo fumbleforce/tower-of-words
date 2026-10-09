@@ -3,7 +3,7 @@
 // same picture. The music is the clock while it plays.
 //   opening/index.html            plays after a tap (browsers need one for sound); Esc/Skip ends it
 //   ?t=41.2&still                 one frame at 41.2 s, no sound (for checks)
-//   ?debug                        time, bar and shot id in the corner, arrow keys scrub
+//   ?debug                        time, bar and shot id in the corner; Space pauses, arrow keys scrub (Shift: finer)
 //   ?embed                        inside the game: posts {opening: 'done'} to the parent when it ends or is skipped
 import * as THREE from 'three';
 import { makeCompositor } from './compositor.js';
@@ -29,7 +29,7 @@ const canvas = document.getElementById('op');
 const phone = Math.min(innerWidth, innerHeight) < 600 || /Android|iPhone/i.test(navigator.userAgent);
 const rtW = qs.has('w') ? +qs.get('w') : phone ? 1280 : 1920;
 const rtH = Math.round((rtW * 9) / 16);
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, preserveDrawingBuffer: qs.has('capture'), powerPreference: 'high-performance' });
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, preserveDrawingBuffer: qs.has('capture'), powerPreference: 'high-performance', logarithmicDepthBuffer: true });
 renderer.setPixelRatio(1);
 renderer.autoClear = false;
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace; // the compositor writes sRGB itself
@@ -304,6 +304,12 @@ if (STILL) {
   addEventListener('keydown', (e) => {
     if (e.key === 'Escape') finish();
     else if ((e.key === 'Enter' || e.key === ' ') && !playing && !ended) play();
+    else if (DEBUG && e.key === ' ' && playing) {
+      // pause and go on, to look at a moment closely
+      if (audio.paused) audio.play().catch(() => {});
+      else audio.pause();
+      e.preventDefault();
+    }
     else if (DEBUG && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
       const d = (e.key === 'ArrowRight' ? 1 : -1) * (e.shiftKey ? BEAT / 4 : BEAT);
       if (playing) audio.currentTime = clamp(audio.currentTime + d, 0, END);

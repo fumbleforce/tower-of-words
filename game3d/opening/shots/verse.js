@@ -13,7 +13,7 @@ import { ISLAND_X, PITCH, beamY, BEAM_TOP } from '../stage.js';
 const sunFar = SUN.clone().multiplyScalar(6000);
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const TRAIN_V = 26; // m/s along the line in the running shots
-const WIN_MODE = new URLSearchParams(location.search).get('win') || 'small';
+const WIN_MODE = new URLSearchParams(location.search).get('win') || 'model'; // Review opening-window-2: the 3D models
 // the rush over the water toward the island before the stop, and the held frame of its end: [x, y, z] ranges of the
 // camera and of where it looks (the reveal starts from the same frame; chorus.js REVEAL_FROM)
 export const RUSH = [
@@ -155,6 +155,18 @@ export const VERSE = [
       const look = lt >= beat(58) - beat(56);
       const m = S.riders.mio;
       if (!m) {
+        // the 3D Mio: on the beat she lifts her head from her phone and looks out at us
+        const mio = S.models.mio;
+        if (mio) {
+          if (!mio.userData) mio.userData = {};
+          if (!mio.userData.head) mio.model.traverse((o) => o.isBone && /^Head$/i.test(o.name) && (mio.userData.head = o));
+          const hb = mio.userData.head;
+          if (hb) {
+            hb.userData.base ??= hb.quaternion.clone();
+            const k2 = ease.out3(clamp((lt - (beat(58) - beat(56))) / 0.25));
+            hb.quaternion.copy(hb.userData.base).multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(-0.45 * k2, 0.25 * k2, 0)));
+          }
+        }
         windowShot(S, T, lt, 2, -0.86, { dist: 2.8 });
         return;
       }

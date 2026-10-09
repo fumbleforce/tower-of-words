@@ -22,8 +22,10 @@ import { buildEastCoast } from '../js/scenes/east-coast.js';
 import { buildOfficeQuarter } from '../js/scenes/office-quarter.js';
 import { buildHarbour } from '../js/scenes/harbour.js';
 import { buildWorks } from '../js/scenes/works.js';
-import { SKY_GLSL, solidMaterial, solidInstancedMaterial } from './sky.js';
+import { SKY_GLSL, solidMaterial, solidInstancedMaterial, logDepth } from './sky.js';
 import { rng } from './paint.js';
+import { loadPlantModels } from '../js/scenes/outdoor/plant-models.js';
+import { applyLook } from '../js/look/index.js';
 
 export const WALL = 1.5; // the island's ground above the bay
 export const DECK = 2.5; // the platforms (the car's floor) above the ground, scenes/station-shed.js
@@ -38,7 +40,9 @@ const PLACES = [
   ['works', buildWorks],
 ];
 // what a place builds of the rest of the island around it (its backdrop), taken out so the places don't overlap
-const BACKDROP = /^(skyline:|far:|shops:far)/;
+// (the near ring of a place's skyline, its neighbours' walls, roofs and windows, stays: the far model is cut away there)
+const BACKDROP = /^(skyline:(far|lit-far|ground|tall)|far:|shops:far)/;
+const DEBUG_STRIP = typeof location !== 'undefined' && new URLSearchParams(location.search).has('strip');
 
 // The far model's colours, lifted into the morning, lit, and hazed like the bay
 const FAR_VERT = /* glsl */ `
@@ -91,7 +95,9 @@ function areaOf(name) {
   ].map(([x, z]) => LAYOUT.toIsland(name, x, z));
 }
 
-export function buildIsland(uniforms, { joinX, seaY }) {
+export async function buildIsland(uniforms, { joinX, seaY }) {
+  // the game's Blender-built trees, hedges and benches, which the place builders use when they're loaded
+  await loadPlantModels({ lighter: false });
   const isl = new THREE.Group(); // the island frame: x east, z south, y 0 the ground
   const groundY = seaY + WALL;
 
@@ -105,6 +111,12 @@ export function buildIsland(uniforms, { joinX, seaY }) {
     } catch (e) {
       console.warn('opening: place', name, e);
       continue;
+    }
+    // the game's look on its materials: surface patterns, soft baked light, small modelled detail (look/index.js)
+    try {
+      applyLook({ scene: w.scene, sun: w.sun, people: {}, floorY: 0 });
+    } catch (e) {
+      console.warn('opening: look', name, e);
     }
     const root = w.root;
     const drop = [];
@@ -121,6 +133,7 @@ export function buildIsland(uniforms, { joinX, seaY }) {
       if (o.isLight && !o.isPointLight) drop.push(o); // the places' own suns; the bay's light is ours
     });
     for (const o of drop) o.parent?.remove(o);
+    if (DEBUG_STRIP) console.info('opening strip', name, drop.filter((o) => !o.isLight).map((o) => `${o.name || '(unnamed)'} ${o.material?.type || ''} ${new THREE.Box3().setFromObject(o).getSize(new THREE.Vector3()).toArray().map(Math.round).join('x')}`).join(' | '));
     root.traverse((o) => {
       if (o.isMesh) {
         o.castShadow = false;
@@ -174,7 +187,7 @@ export function buildIsland(uniforms, { joinX, seaY }) {
     g2.setAttribute('color', new THREE.BufferAttribute(pick(C), 3));
     far.geometry = g2;
     far.position.y = -0.06; // a hair below the places' ground, so their paving and grass always win
-    far.material = new THREE.ShaderMaterial({ vertexShader: FAR_VERT, fragmentShader: FAR_FRAG, uniforms: { ...uniforms, uHazeK: { value: 0.00014 } }, vertexColors: true });
+    far.material = logDepth(new THREE.ShaderMaterial({ vertexShader: FAR_VERT, fragmentShader: FAR_FRAG, uniforms: { ...uniforms, uHazeK: { value: 0.00014 } }, vertexColors: true }));
     isl.add(far);
   }
 
