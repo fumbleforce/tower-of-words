@@ -439,4 +439,5 @@ def main():
     print('wrote', OUT / 'index.html')
 
 
-main()
+if __name__ == '__main__':
+    main()
