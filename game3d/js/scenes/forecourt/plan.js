@@ -65,7 +65,8 @@ export const JUNCTION = [SHED_ST[0], SHED_ST[1], CROSS[2], CROSS[3]];
 // a few steps up the shed street he can walk, to the chained bollards that close it; they stand far enough in that
 // the court's trees never hide them from the camera
 export const BARRIER_Z = HZ - 3.3;
-export const SHED_WALK = [SHED_ST[0] + 0.35, SHED_ST[1] - 0.35, BARRIER_Z - 1.2, HZ + 0.1];
+// the shed street he walks, its full width, from the court to a step past the bollards (where the campus trip starts)
+export const SHED_WALK = [SHED_ST[0], SHED_ST[1], BARRIER_Z - 1.2, HZ];
 export const WING_PLOT = [SHED_ST[1], SERVICE[0], CROSS[3], HZ];
 export const NORTH_BED = [SHED_ST[1] + 0.3, 5.5, HZ + 0.05, HZ + 1.15]; // the raised bed along the court's north edge
 // the lane, and the planted strips either side of it (the north one starts past the tower)

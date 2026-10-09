@@ -2,11 +2,11 @@
 // to the gateposts, planted as gardens rather than bands: drifts of planting of different depths, each in layers
 // (low domes and grass tufts in front, mixed clusters in the middle, big clipped mounds at the back) over ground
 // cover the lawn runs up to, a few specimen trees standing free on the lawn, rocks set in threes, a hedge that steps
-// in and out at the back, and on the south side a way in: stepping stones from a gap in the lane's hedge to a raked
+// in and out at the back, and on the south side a way in: a gravel path from a gap in the lane's hedge to a raked
 // gravel court with a bench and a stone lantern (forecourt/plan.js GARDEN_PATH, GARDEN_COURT; he can walk both).
 // Nothing tall stands within 3 of where he can walk on its south side, so no crown hides him. Behind both gardens a
 // looser belt of trees runs on past the gateposts toward the plaza.
-import { kerbRect } from '../outdoor/edges.js';
+import { BED_FLUSH } from '../outdoor/walk-edges.js';
 import {
   keyaki,
   sakura,
@@ -25,9 +25,8 @@ import { bench, stoneLantern } from '../outdoor/furniture.js';
 import { rng } from '../outdoor/parts.js';
 import * as P from './plan.js';
 
-const { STRIP_S: S, STRIP_N: N, LE, TE, GATE_X, PATH_X, GARDEN_PATH: GP, GARDEN_COURT: GC, GARDEN_BENCH } = P;
+const { STRIP_S: S, STRIP_N: N, LE, TE, GATE_X, GARDEN_PATH: GP, GARDEN_COURT: GC, GARDEN_BENCH } = P;
 const X1 = GATE_X - 0.3; // the gardens end at the gateposts' line
-const STONE = ['#9d9c95', '#8f8e88', '#a6a49c'];
 const ROCK = ['#8a8983', '#7f7e79', '#94928b'];
 const TONES = [LEAF.mid, LEAF.fresh, LEAF.deep, LEAF.light, LEAF.olive];
 
@@ -43,20 +42,21 @@ export function rocks(p, x, z, r = 0.34, seed = 1) {
 }
 
 // A drift of planting over a rectangle, in three layers by depth from its front (the side he sees it from) to its
-// back, each at its own loose rhythm, over ground cover whose edge steps in and out. back: the side the tall layer
-// is on ('n' or 's'); skip: x ranges left empty (a path).
-export function drift(p, [x0, x1, z0, z1], { back = 's', seed = 1, y = 0.06, skip = [] } = {}) {
+// back, each at its own loose rhythm, straight on the lawn (a slab of ground cover under it showed as a step or an
+// odd plot in the grass). back: the side the tall layer is on ('n' or 's'); skip: x ranges left empty (a path); y:
+// the ground it stands on, a raised bed's soil getting one bed of ground cover under the planting.
+export function drift(p, [x0, x1, z0, z1], { back = 's', seed = 1, y = BED_FLUSH, skip = [] } = {}) {
   const q = rng(seed + 29),
     d = z1 - z0;
   const at = (t) => (back === 's' ? z0 + d * t : z1 - d * t); // t: 0 at the front, 1 at the back
-  const w = x1 - x0;
-  [
-    [x0, x1, 0.05, 0.95],
-    [x0 + w * q() * 0.3, x1 - w * q() * 0.3, 0, 1],
-  ].forEach(([a, b, t0, t1], i) => {
-    const [c, e] = [at(t0), at(t1)];
-    bed(p, [a, b, Math.min(c, e), Math.max(c, e)], { y: y + i * 0.005 });
-  });
+  (q(), q()); // (the second slab's draws, kept so every plant stands where it did)
+  // on a raised bed's soil a bed of ground cover under the planting; on the lawn none, so no plot shows in the grass
+  let from = x0;
+  if (y > BED_FLUSH)
+    for (const [a, b] of [...skip].sort((u, v) => u[0] - v[0]).concat([[x1, x1]])) {
+      if (Math.min(a, x1) - from > 0.3) bed(p, [from, Math.min(a, x1), z0, z1], { y });
+      from = Math.max(from, b);
+    }
   const free = (x) => x > x0 + 0.2 && x < x1 - 0.2 && !skip.some(([a, b]) => x > a - 0.3 && x < b + 0.3);
   const tone = () => (q() < 0.12 ? LEAF.rust : TONES[Math.floor(q() * TONES.length)]); // one turning early
   // the back: big mounds, touching, a little up and down, evergreen
@@ -76,18 +76,12 @@ export function drift(p, [x0, x1, z0, z1], { back = 's', seed = 1, y = 0.06, ski
     if (free(x)) mound(p, x, at(0.15 + q() * 0.08), 0.18 + q() * 0.08, tone(), { y });
 }
 
-// the way in and the gravel court: the stones cross the verge (lane.js leaves the gaps), the court has a pale kerb,
-// a bench on its north side looking into the garden and the lantern in its south-west corner
+// the way in and the gravel court: one raked gravel path from the lane through the verge to the court, both
+// walkable and edged by the ground's kerbs (forecourt/ground.js); a bench on the court's north side looking into
+// the garden and the lantern in its south-west corner
 function court(p, set, block) {
-  const q = rng(4);
-  for (let z = GP[2] + 1.35; z < GC[2] - 0.2; z += 0.58)
-    p.box(STONE[Math.floor(q() * 3)], 0.5 + q() * 0.1, 0.05, 0.4, PATH_X + (q() - 0.5) * 0.16, 0.05, z, {
-      ry: (q() - 0.5) * 0.25,
-      cast: false,
-      surf: 'concrete',
-    });
-  kerbRect(p, GC, { gaps: { n: [[GP[0], GP[1]]] } });
-  gravel(p, [GC[0] + 0.16, GC[1] - 0.16, GC[2] + 0.16, GC[3] - 0.16], { y: 0.03 });
+  gravel(p, GP, { y: 0.012 });
+  gravel(p, GC, { y: 0.012 });
   const B = GARDEN_BENCH;
   bench(p, B.x, B.z, 0, { len: B.len });
   block(B.x - 0.8, B.x + 0.8, GC[2], GC[2] + 0.75);

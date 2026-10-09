@@ -27,7 +27,8 @@ export function southLinkFrame(place) {
   };
 }
 
-export function buildSouthLink(root) {
+// kerbs: false where the place's ground draws the link's edges (forecourt/ground.js)
+export function buildSouthLink(root, { kerbs = true } = {}) {
   const {
     rect: [x0, z0, x1, z1],
   } = OFFICE_SOUTH_LINK;
@@ -41,7 +42,7 @@ export function buildSouthLink(root) {
     tones: GRANITE.pale,
     origin: a,
   });
-  for (const x of [a[0], b[0]]) kerb(p, [x, a[1]], [x, b[1]], { w: 0.12 });
+  if (kerbs) for (const x of [a[0], b[0]]) kerb(p, [x, a[1]], [x, b[1]], { w: 0.12 });
   pv.build(root);
   p.build(root);
 }
