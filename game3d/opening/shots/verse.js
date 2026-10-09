@@ -290,14 +290,15 @@ export const VERSE = [
       const dur = 1.75;
       const u = clamp(lt / dur);
       const back = 44 * (1 - u) ** 2; // braking: distance still to run
-      // the beam inside the shed runs north along island x -30.8; the train stops with its middle at z 1.5
-      const at = A.toWorld(-30.8, 1.5 + back, 2.5);
-      const ahead = A.toWorld(-30.8, 0.5 + back, 2.5).sub(at);
+      // the beam inside the shed runs north along island x -28.6, the shed's middle (island-layout.js, the monorail
+      // line since the station's Blender rebuild); the train stops with its middle at z 1.5
+      const at = A.toWorld(-28.6, 1.5 + back, 2.5);
+      const ahead = A.toWorld(-28.6, 0.5 + back, 2.5).sub(at);
       S.setTrainPose(at, ahead);
       // raised at the shed's south end, east of the platform: the blue roof, the platform and the town beyond, and
       // the train running in past us up the beam
-      const eye = A.toWorld(-21.5 - lt * 0.4, 27 - lt * 0.6, 7.5 - lt * 0.3); // toWorld(x, z, height)
-      const look = A.toWorld(-30, 2, 3.2);
+      const eye = A.toWorld(-21.5 - lt * 0.4, 31 - lt * 0.6, 10.5 - lt * 0.3); // toWorld(x, z, height); over the walkway roofs
+      const look = A.toWorld(-27.8, 2, 3.2);
       S.look(eye.toArray(), look.toArray(), 44);
     },
     draw(g, lt) {
