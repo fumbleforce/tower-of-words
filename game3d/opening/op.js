@@ -5,6 +5,7 @@
 //   ?t=41.2&still                 one frame at 41.2 s, no sound (for checks)
 //   ?debug                        time, bar and shot id in the corner; Space pauses, arrow keys scrub (Shift: finer)
 //   ?embed                        inside the game: posts {opening: 'done'} to the parent when it ends or is skipped
+//   ?gate                         with ?embed: waits for its Play button (the game's first visit, before any tap)
 import * as THREE from 'three';
 import { makeCompositor } from './compositor.js';
 import { buildStage } from './stage.js';
@@ -18,6 +19,7 @@ const qs = new URLSearchParams(location.search);
 const STILL = qs.has('still') || qs.has('capture');
 const DEBUG = qs.has('debug');
 const EMBED = qs.has('embed');
+if (qs.has('gate')) document.body.classList.add('gate');
 let lyricsOn = qs.get('lyrics') !== '0';
 try {
   if (!qs.has('lyrics') && localStorage.getItem('opening.lyrics') === '0') lyricsOn = false;
@@ -316,5 +318,6 @@ if (STILL) {
       else tOffset = clamp(tOffset + d, 0, END);
     }
   });
-  if (EMBED || qs.has('autoplay')) play();
+  // inside the game the opening starts at once, unless it waits for its Play button (the first visit, ?gate)
+  if ((EMBED && !qs.has('gate')) || qs.has('autoplay')) play();
 }

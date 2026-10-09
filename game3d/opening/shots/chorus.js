@@ -399,11 +399,21 @@ export const CHORUS = [
     id: 'title',
     t: [HIT.logo, END + 0.01],
     in: { type: 'flash', d: 0.2, at: 0.5 },
+    // It ends by pushing in on the monorail to the game's own title framing (js/ui/title-camera.js TITLE_POSE land:
+    // looking at [-2.6, -0.9, 0.6] off the middle car, 16 away, 24 degrees up, 30 round, fov 30), so the black at
+    // the end opens straight onto the title screen's view of the same train.
     scene3d(S, lt) {
-      const x = 680 + lt * 18;
+      const x = 360 + lt * 18; // on the level stretch, high over the bay as on the title
       S.setTrain(x);
-      const cx = 668 + lt * 6;
-      S.look([cx, -10, 88], [cx + 90, 9, -40], 32);
+      const p = ease.inOut3(clamp((lt - 1.5) / 3.9));
+      const el = (24 * Math.PI) / 180,
+        yaw = (30 * Math.PI) / 180,
+        d = 16;
+      const t = [x - 2.6, -0.9, 0.6];
+      const pose = [t[0] + Math.sin(yaw) * Math.cos(el) * d, t[1] + Math.sin(el) * d, t[2] + Math.cos(yaw) * Math.cos(el) * d];
+      const wide = [x - 12, -10, 88],
+        wideAt = [x + 78, 9, -40];
+      S.look(wide.map((v, i) => lerp(v, pose[i], p)), wideAt.map((v, i) => lerp(v, t[i], p)), lerp(32, 30, p));
     },
     draw(g, lt) {
       const gr = g.createLinearGradient(0, 0, 0, H);
@@ -411,10 +421,10 @@ export const CHORUS = [
       gr.addColorStop(0.5, 'rgba(10,20,50,0.0)');
       g.fillStyle = gr;
       g.fillRect(0, 0, W, H);
-      drawLogo(g, lt, { size: 160, y: 380, shine: clamp((lt - 1.4) / 0.8) });
+      drawLogo(g, lt, { size: 160, y: 380, shine: clamp((lt - 1.4) / 0.8), out: ease.in2(clamp((lt - 2.0) / 1.0)) });
       gulls(g, [0, 1, 2].map((i) => ({ x: 1300 + i * 60 - lt * 40, y: 560 + (i % 2) * 22, s: 12, ph: i * 2 })), lt, 'rgba(30,44,80,0.7)');
     },
-    flare: () => 0.85,
+    flare: (lt) => 0.85 * (1 - clamp((lt - 1.5) / 3)),
     fx: (lt) => ({ zoom: 1 + 0.03 * Math.exp(-lt / 0.3) }),
   },
 ];

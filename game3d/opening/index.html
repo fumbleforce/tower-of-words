@@ -20,7 +20,7 @@
   #bar button { padding: 9px 16px; border: 0; border-radius: 999px; background: rgba(14, 18, 28, .55); color: rgba(238, 240, 244, .9); font: inherit; font-size: 15px; cursor: pointer; }
   #bar button:hover, #bar button:focus-visible { background: rgba(14, 18, 28, .85); outline: none; }
   #lyrics[aria-pressed="false"] { color: rgba(238, 240, 244, .55); }
-  body.playing #bar, body:not(.still) #bar:focus-within { opacity: .75; }
+  body.playing #bar, body.gate #bar, body:not(.still) #bar:focus-within { opacity: .75; }
   body.playing #bar:hover, body.playing #bar:focus-within { opacity: 1; }
   body.still #bar, body.still #start, body.done #bar { display: none; }
   #dbg { position: fixed; left: 10px; top: 8px; font: 600 13px/1 ui-monospace, monospace; color: #fff; background: rgba(0, 0, 0, .55); padding: 6px 8px; border-radius: 6px; pointer-events: none; }
