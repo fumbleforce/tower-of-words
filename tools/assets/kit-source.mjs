@@ -177,6 +177,28 @@ function defaultArgs(piece, family) {
   return null;
 }
 
+// street style or old faceted (kit.json `looks`): the file's look unless the piece sets its own; a faceted file's
+// helpers and materials are not marked. A street piece says whether it has a lighter phone version (kit.json
+// `phone`, else a phone, lighter, cover or budget parameter); a faceted one what the street style has for it.
+const PHONE_ARG = /\b(phone|lighter|cover|budget)\b/g;
+function lookOf(looks, key, s, c, family) {
+  if (!looks) return {};
+  const file = key.split('#')[0];
+  const fromFile = Object.entries(looks.files).find(([f]) => (f.endsWith('/') ? file.startsWith(f) : file === f))?.[1];
+  let look = c.look || fromFile || null;
+  if (look === 'faceted' && !c.look && (['helpers', 'materials'].includes(family) || s.kind === 'const')) look = null;
+  if (!look || look === 'none') return {};
+  const out = { look };
+  if (c.scope) out.scope = c.scope;
+  if (c.note) out.note = c.note;
+  if (look === 'street') {
+    const args = [...new Set((s.params || '').match(PHONE_ARG) || [])];
+    out.phone = c.phone || (args.length ? `takes ${args.map((a) => `\`${a}\``).join(', ')} for the phone's lighter build` : null);
+  }
+  if (look === 'faceted' && c.street) out.street = { key: c.street[0], note: c.street[1] };
+  return out;
+}
+
 export function kitLibrary(read, files, catalog) {
   const kitFiles = Object.keys(catalog.files);
   const extraFiles = [...new Set(catalog.extra.map(([f]) => f))];
@@ -184,6 +206,8 @@ export function kitLibrary(read, files, catalog) {
   const extra = new Map(catalog.extra.map(([f, n, fam]) => [`${f}#${n}`, fam]));
   const pieces = [];
   const byKey = {};
+  // kit.json lines the source no longer matches (a piece renamed or moved): reported, never fatal, so ./start runs
+  const stale = [];
   for (const [key, s] of Object.entries(src)) {
     const file = key.split('#')[0];
     if (!kitFiles.includes(file) && !extra.has(key)) continue;
@@ -194,7 +218,7 @@ export function kitLibrary(read, files, catalog) {
     const variants = (c.variants || (auto ? [{ name: 'default', args: auto }] : [])).map((v) => {
       const [vfile, vfn] = (v.call || key).split('#');
       const view = { type: 'piece', file: vfile, fn: vfn };
-      for (const k of ['args', 'then', 'nook', 'surface', 'color']) if (v[k] !== undefined) view[k] = v[k];
+      for (const k of ['args', 'then', 'nook', 'surface', 'color', 'street']) if (v[k] !== undefined) view[k] = v[k];
       return { name: v.name, view };
     });
     const piece = {
@@ -202,13 +226,14 @@ export function kitLibrary(read, files, catalog) {
       call: s.kind === 'const' ? s.name : `${s.kind === 'class' ? 'new ' : ''}${s.name}(${s.params ?? ''})`,
       doc: s.doc, palette: s.palette, variants, used: s.used.filter((u) => u.file !== s.file),
       usedSelf: s.used.filter((u) => u.file === s.file).length, places: [], also: [], dupes: [],
+      ...lookOf(catalog.looks, key, s, c, family),
     };
     pieces.push(piece);
     byKey[key] = piece;
   }
   for (const [from, to] of Object.entries(catalog.fold)) {
     const s = src[from], piece = byKey[to];
-    if (!s || !piece) throw new Error(`tools/assets/kit.json fold: ${!s ? from : to} is not an export`);
+    if (!s || !piece) { stale.push(`fold: ${!s ? from : to} is not an export of a kit file`); continue; }
     piece.also.push({ name: s.name, file: s.file, line: s.line, call: `${s.name}(${s.params ?? ''})` });
     for (const u of s.used) if (u.file !== s.file && u.file !== piece.file) piece.used.push(u);
   }
@@ -223,35 +248,43 @@ export function kitLibrary(read, files, catalog) {
     }
   }
   for (const key of Object.keys(catalog.pieces)) {
-    if (!byKey[key] && !catalog.fold[key]) throw new Error(`tools/assets/kit.json: ${key} is not an export of a kit file`);
+    if (!byKey[key] && !catalog.fold[key]) stale.push(`pieces: ${key} is not an export of a kit file`);
   }
   // the audit's families of things built more than once; a copy's line follows its function when it has a name
   const dupes = catalog.dupes.map((d) => {
     for (const k of d.shared) {
-      if (!byKey[k]) throw new Error(`tools/assets/kit.json dupes ${d.id}: ${k} is not a listed piece`);
-      byKey[k].dupes.push(d.id);
+      if (byKey[k]) byKey[k].dupes.push(d.id);
+      else stale.push(`dupes ${d.id}: ${k} is not a listed piece`);
     }
     const copies = d.copies.map(([f, line, fn, note]) => {
       const file = JS + f, text = read(file);
-      if (!text) throw new Error(`tools/assets/kit.json dupes ${d.id}: no file ${file}`);
+      if (!text) stale.push(`dupes ${d.id}: no file ${file}`);
       if (fn) {
         const at = text.split('\n').findIndex((l) => new RegExp(`(function\\*?\\s+${fn}\\b|\\b(const|let)\\s+${fn}\\s*=)`).test(l));
         if (at >= 0) line = at + 1;
       }
       return { file, line, fn, note, place: placeOf(file) };
     });
-    return { id: d.id, title: d.title, lines: d.lines, shared: d.shared.map((k) => byKey[k].id), copies };
+    return { id: d.id, title: d.title, lines: d.lines, shared: d.shared.filter((k) => byKey[k]).map((k) => byKey[k].id), copies };
   });
+  for (const p of pieces) {
+    if (!p.street) continue;
+    if (byKey[p.street.key]) p.street.id = byKey[p.street.key].id;
+    else stale.push(`street ${p.key}: ${p.street.key} is not a listed piece`);
+    delete p.street.key;
+  }
   for (const p of pieces) {
     p.used.sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line);
     p.places = [...new Set(p.used.map((u) => placeOf(u.file)))].sort();
   }
-  return { families: catalog.families, pieces, dupes };
+  return { families: catalog.families, looks: catalog.looks?.kinds || [], pieces, dupes, stale };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const root = new URL('../../', import.meta.url);
   const read = (f) => { try { return fs.readFileSync(new URL(f, root), 'utf8'); } catch { return ''; } };
   const files = fs.readdirSync(new URL(JS, root), { recursive: true }).filter((f) => f.endsWith('.js')).map((f) => JS + f).sort();
-  console.log(JSON.stringify(kitLibrary(read, files, JSON.parse(read('tools/assets/kit.json')))));
+  const lib = kitLibrary(read, files, JSON.parse(read('tools/assets/kit.json')));
+  for (const s of lib.stale) console.error('tools/assets/kit.json is out of date:', s);
+  console.log(JSON.stringify(lib));
 }

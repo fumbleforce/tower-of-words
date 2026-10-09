@@ -31,7 +31,49 @@
     "look/procedural.js": "materials",
     "scenes/outdoor/parts.js": "helpers",
     "scenes/dorms/kit.js": "helpers",
-    "train/kit.js": "helpers"
+    "train/kit.js": "helpers",
+    "scenes/outdoor/walk-edges.js": "ground",
+    "scenes/outdoor/plant-models.js": "planting",
+    "scenes/diorama/planting.js": "planting",
+    "scenes/diorama/root-bed.js": "planting",
+    "scenes/diorama/planting-shapes.js": "planting",
+    "scenes/diorama/foliage.js": "planting",
+    "scenes/diorama/canopy.js": "planting",
+    "scenes/diorama/meadow.js": "planting",
+    "scenes/diorama/materials.js": "materials",
+    "scenes/diorama/reflections.js": "materials",
+    "scenes/diorama/glazing.js": "building",
+    "scenes/diorama/architecture.js": "building",
+    "scenes/diorama/details.js": "street",
+    "scenes/diorama/index.js": "helpers",
+    "scenes/diorama/quality.js": "helpers",
+    "kit/light/looks.js": "lighting",
+    "kit/light/rig.js": "lighting",
+    "kit/light/glow.js": "lighting"
+  },
+  "looks": {
+    "about": "Which outdoor pieces are built in the street style and which are the older faceted ones (notes/outdoor-plan.md, step 2). A file's look applies to its pieces; a piece can set its own `look` (none for a rig or a light, not a piece you see). A faceted piece's `street` names what the street style has for it so far ([piece, note]); a faceted piece with none is what the kit still has to build. Helpers and materials of the faceted files are not marked. `scope` says where a street piece only works today (fenced to a place), `note` anything else worth knowing; `phone` overrides what the page says about its lighter phone version (otherwise read from a phone, lighter, cover or budget parameter).",
+    "kinds": [
+      ["street", "Street style", "Built in the street style, the only outdoor look (Review street-style-default-1, #321): scenes/diorama/ and the Blender planting models. Today it dresses the forecourt only."],
+      ["faceted", "Old faceted", "The older flat-shaded pieces every other outdoor place is still built from. The kit replaces them with street-style pieces (#367)."]
+    ],
+    "files": {
+      "scenes/diorama/": "street",
+      "scenes/outdoor/plant-models.js": "street",
+      "scenes/outdoor/furniture.js": "faceted",
+      "scenes/outdoor/nook-kits.js": "faceted",
+      "scenes/outdoor/nook-yards.js": "faceted",
+      "scenes/outdoor/vending-face.js": "faceted",
+      "scenes/outdoor/planting.js": "faceted",
+      "scenes/outdoor/edges.js": "faceted",
+      "scenes/outdoor/walk-edges.js": "faceted",
+      "scenes/outdoor/paving.js": "faceted",
+      "scenes/outdoor/block.js": "faceted",
+      "scenes/outdoor/block-style.js": "faceted",
+      "scenes/dorm-court/roofs.js": "faceted",
+      "scenes/plaza-buildings.js": "faceted",
+      "scenes/town.js": "faceted"
+    }
   },
   "skip": [
     "props.js#liveScreens", "props.js#PED", "props.js#JP_FONT", "props.js#shadowProxy",
@@ -43,7 +85,14 @@
     "scenes/outdoor/block-face.js#vOf", "scenes/outdoor/block-face.js#bayOf",
     "train/kit.js#ringXZ", "train/kit.js#aloft", "train/kit.js#oring", "train/kit.js#cbox", "train/kit.js#washer", "train/kit.js#plate", "train/kit.js#flat",
     "look/detail.js#switchPlate", "look/detail.js#socket", "look/detail.js#pins", "look/detail.js#clockRim", "look/detail.js#cables",
-    "scenes/rooms/shell.js#roomNav"
+    "scenes/rooms/shell.js#roomNav",
+    "scenes/outdoor/walk-edges.js#WALK_KERB", "scenes/outdoor/walk-edges.js#BED_FLUSH",
+    "scenes/outdoor/plant-models.js#setPlantModels", "scenes/outdoor/plant-models.js#plantModels", "scenes/outdoor/plant-models.js#bushFrom",
+    "scenes/outdoor/plant-models.js#shadowStandIns", "scenes/outdoor/plant-models.js#plantShadow", "scenes/outdoor/plant-models.js#plantTips",
+    "scenes/outdoor/plant-models.js#trunkName", "scenes/outdoor/plant-models.js#bushName",
+    "kit/light/looks.js#PHASE", "kit/light/looks.js#phaseOf", "kit/light/looks.js#lookFor", "kit/light/looks.js#SUN",
+    "kit/light/looks.js#MORNING_GRADE", "kit/light/looks.js#EVENING_GRADE", "kit/light/looks.js#EVENING_GRADE_2", "kit/light/looks.js#EVENING_LIGHT",
+    "kit/light/looks.js#DORM_NIGHT_GRADE"
   ],
   "fold": {
     "props.js#plainPlant": "props.js#plant",
@@ -74,7 +123,7 @@
     ["train/people.js", "book", "interior"]
   ],
   "pieces": {
-    "scenes/outdoor/furniture.js#bench": { "label": "Park bench", "variants": [
+    "scenes/outdoor/furniture.js#bench": { "label": "Park bench", "phone": "one Blender model, no lighter copy yet", "look": "street", "note": "Blender-modelled (outdoor/plant-models.js); the same bench in every place", "variants": [
       { "name": "with back", "args": ["$p", 0, 0, 0] },
       { "name": "no back", "args": ["$p", 0, 0, 0, { "back": false }] },
       { "name": "long", "args": ["$p", 0, 0, 0, { "len": 2.4 }] } ] },
@@ -93,7 +142,7 @@
       { "name": "post", "args": ["$set", "$p", [[0, 0]]] },
       { "name": "arm", "args": ["$set", "$p", [[0, 0]], { "kind": "arm" }] },
       { "name": "lantern", "args": ["$set", "$p", [[0, 0]], { "kind": "lantern", "y": 0 }] } ] },
-    "scenes/outdoor/furniture.js#lightSet": { "label": "Lamp light set", "family": "lighting" },
+    "scenes/outdoor/furniture.js#lightSet": { "label": "Lamp light set", "look": "none", "family": "lighting" },
     "scenes/outdoor/furniture.js#stoneLantern": { "label": "Stone lantern", "family": "lighting", "variants": [
       { "name": "lantern", "args": ["$p", "$set", 0, 0] } ] },
     "scenes/outdoor/furniture.js#STEEL": { "label": "Steel palette", "family": "materials" },
@@ -115,40 +164,40 @@
     "scenes/outdoor/vending-face.js#drinksFace": { "label": "Drinks machine front (second copy)" },
     "scenes/shop-signs.js#signSet": { "label": "Sign set (cards and drawn faces)", "family": "helpers" },
 
-    "scenes/outdoor/planting.js#keyaki": { "label": "Tree: keyaki (zelkova)", "variants": [
+    "scenes/outdoor/planting.js#keyaki": { "label": "Tree: keyaki (zelkova)", "street": ["scenes/diorama/planting.js#streetPlanting", "a leaf-clustered crown on the Blender trunk, in a rooted soil bed; forecourt only"], "variants": [
       { "name": "seed 1", "args": ["$p", 0, 0, 1, 1] }, { "name": "seed 2", "args": ["$p", 0, 0, 1, 2] }, { "name": "seed 3", "args": ["$p", 0, 0, 1, 3] } ] },
-    "scenes/outdoor/planting.js#sakura": { "label": "Tree: sakura", "variants": [
+    "scenes/outdoor/planting.js#sakura": { "label": "Tree: sakura", "street": ["scenes/diorama/planting.js#streetPlanting", "a leaf-clustered crown on the Blender trunk, in a rooted soil bed; forecourt only"], "variants": [
       { "name": "seed 1", "args": ["$p", 0, 0, 1, 1] }, { "name": "seed 2", "args": ["$p", 0, 0, 1, 2] }, { "name": "seed 3", "args": ["$p", 0, 0, 1, 3] } ] },
-    "scenes/outdoor/planting.js#pine": { "label": "Tree: pine", "variants": [
+    "scenes/outdoor/planting.js#pine": { "label": "Tree: pine", "street": ["scenes/diorama/planting.js#streetPlanting", "a leaf-clustered crown on the Blender trunk, in a rooted soil bed; forecourt only"], "variants": [
       { "name": "seed 1", "args": ["$p", 0, 0, 1, 1] }, { "name": "seed 2", "args": ["$p", 0, 0, 1, 2] }, { "name": "seed 3", "args": ["$p", 0, 0, 1, 3] } ] },
-    "scenes/outdoor/planting.js#ginkgo": { "label": "Tree: ginkgo", "variants": [
+    "scenes/outdoor/planting.js#ginkgo": { "label": "Tree: ginkgo", "street": ["scenes/diorama/planting.js#streetPlanting", "a leaf-clustered crown on the Blender trunk, in a rooted soil bed; forecourt only"], "variants": [
       { "name": "seed 1", "args": ["$p", 0, 0, 1, 1] }, { "name": "seed 2", "args": ["$p", 0, 0, 1, 2] }, { "name": "seed 3", "args": ["$p", 0, 0, 1, 3] } ] },
-    "scenes/outdoor/planting.js#maple": { "label": "Tree: maple", "variants": [
+    "scenes/outdoor/planting.js#maple": { "label": "Tree: maple", "street": ["scenes/diorama/planting.js#streetPlanting", "a leaf-clustered crown on the Blender trunk, in a rooted soil bed; forecourt only"], "variants": [
       { "name": "seed 1", "args": ["$p", 0, 0, 1, 1] }, { "name": "seed 2", "args": ["$p", 0, 0, 1, 2] }, { "name": "seed 3", "args": ["$p", 0, 0, 1, 3] } ] },
     "scenes/outdoor/planting.js#TREES": { "label": "Tree species table", "family": "helpers" },
-    "scenes/outdoor/planting.js#mound": { "label": "Shrub mound", "variants": [
+    "scenes/outdoor/planting.js#mound": { "label": "Shrub mound", "street": ["scenes/diorama/foliage.js#dressFoliage", "only leaf clusters laid over the old shape; forecourt only"], "variants": [
       { "name": "small", "args": ["$p", 0, 0, 0.35] }, { "name": "large", "args": ["$p", 0, 0, 0.7] } ] },
-    "scenes/outdoor/planting.js#cluster": { "label": "Shrub cluster", "variants": [
+    "scenes/outdoor/planting.js#cluster": { "label": "Shrub cluster", "street": ["scenes/diorama/foliage.js#dressFoliage", "only leaf clusters laid over the old shapes; forecourt only"], "variants": [
       { "name": "seed 1", "args": ["$p", 0, 0, { "seed": 1 }] }, { "name": "seed 2", "args": ["$p", 0, 0, { "seed": 2 }] }, { "name": "big", "args": ["$p", 0, 0, { "n": 7, "r": 0.5, "spread": 0.9, "seed": 3 }] } ] },
-    "scenes/outdoor/planting.js#hedge": { "label": "Clipped hedge", "variants": [
+    "scenes/outdoor/planting.js#hedge": { "label": "Clipped hedge", "street": ["scenes/diorama/planting.js#streetPlanting", "the Blender hedge plants under leaf clusters; forecourt only"], "variants": [
       { "name": "low", "args": ["$p", [-1.5, 0], [1.5, 0]] }, { "name": "tall", "args": ["$p", [-1.5, 0], [1.5, 0], { "h": 1.1, "w": 0.6 }] } ] },
     "scenes/outdoor/planting.js#grass": { "label": "Grass tuft" },
-    "scenes/outdoor/planting.js#bed": { "label": "Planting bed", "family": "ground", "variants": [
+    "scenes/outdoor/planting.js#bed": { "label": "Planting bed", "street": ["scenes/diorama/materials.js#finishStreet", "only the street soil and mulch finish and leaf-card cover; forecourt only"], "family": "ground", "variants": [
       { "name": "covered", "args": ["$p", [-1, 1, -0.6, 0.6]] }, { "name": "bare soil", "args": ["$p", [-1, 1, -0.6, 0.6], { "cover": false }] } ] },
     "scenes/outdoor/planting.js#treePit": { "label": "Tree pit grate", "family": "ground" },
     "scenes/outdoor/planting.js#gravel": { "label": "Raked gravel", "family": "ground" },
     "scenes/outdoor/planting.js#planter": { "label": "Stone planter" },
     "scenes/outdoor/planting.js#LEAF": { "label": "Leaf palette", "family": "materials" },
 
-    "scenes/outdoor/edges.js#kerb": { "label": "Kerb", "variants": [
+    "scenes/outdoor/edges.js#kerb": { "label": "Kerb", "street": ["scenes/diorama/materials.js#finishStreet", "only the street stone finish; forecourt only"], "variants": [
       { "name": "plain", "args": ["$p", [-1.5, 0], [1.5, 0]] }, { "name": "with a gap", "args": ["$p", [-1.5, 0], [1.5, 0], { "gaps": [[1.1, 1.9]] }] } ] },
-    "scenes/outdoor/edges.js#kerbRect": { "label": "Kerbs round a rectangle" },
+    "scenes/outdoor/edges.js#kerbRect": { "label": "Kerbs round a rectangle", "street": ["scenes/diorama/materials.js#finishStreet", "only the street stone finish; forecourt only"] },
     "scenes/outdoor/edges.js#lowWall": { "label": "Low wall", "variants": [
       { "name": "plain", "args": ["$p", [-1.5, 0], [1.5, 0]] }, { "name": "taller", "args": ["$p", [-1.5, 0], [1.5, 0], { "h": 0.7 }] } ] },
     "scenes/outdoor/edges.js#wallRect": { "label": "Low walls round a rectangle" },
     "scenes/outdoor/edges.js#ramp": { "label": "Ramp", "variants": [ { "name": "1 in 12", "args": ["$p", [-1.5, 0], [1.5, 0], 1.2, 0.25] } ] },
     "scenes/outdoor/edges.js#KERB": { "label": "Kerb palette", "family": "materials" },
-    "scenes/outdoor/paving.js#paver": { "label": "Paving fields", "variants": [
+    "scenes/outdoor/paving.js#paver": { "label": "Paving fields", "street": ["scenes/diorama/materials.js#finishStreet", "only the street paving finish over the same fields; forecourt only"], "variants": [
       { "name": "running bond", "args": [], "then": [["field", [[-1.5, 1.5, -1, 1], { "pattern": "bond", "module": [0.6, 0.3] }]], ["build", ["$root"]]] },
       { "name": "herringbone", "args": [], "then": [["field", [[-1.5, 1.5, -1, 1], { "pattern": "herringbone", "module": [0.4, 0.2] }]], ["build", ["$root"]]] },
       { "name": "with border and tactile line", "args": [], "then": [["field", [[-1.5, 1.5, -1, 1], { "pattern": "grid", "module": [0.45, 0.45] }]], ["border", [[-1.5, 1.5, -1, 1], { "w": 0.3 }]], ["tactile", [[[-1.2, 0], [1.2, 0]]]], ["build", ["$root"]]] } ] },
@@ -158,13 +207,13 @@
       { "name": "plain office", "args": ["$sets", [-5, 5, -3, 3], { "storeys": 3, "doors": [{ "face": "s", "at": 0, "w": 1.8 }] }] },
       { "name": "clinic style", "args": ["$sets", [-5, 5, -3, 3], { "storeys": 3, "upper": "punched", "glazed": "s", "roof": "plant", "doors": [{ "face": "s", "at": 0, "w": 1.8, "canopy": { "out": 1.6, "side": 0.8 } }] }] } ] },
     "scenes/outdoor/block.js#buildBlockSets": { "label": "Block collectors (opaque, glass, lit)", "family": "helpers" },
-    "scenes/outdoor/block.js#doorAt": { "label": "Door bay finder", "family": "helpers" },
-    "scenes/outdoor/block-style.js#glassFront": { "label": "Glass shop front", "variants": [ { "name": "one bay", "args": ["$sets", "$face", 0.4, 3.6] } ] },
+    "scenes/outdoor/block-face.js#doorAt": { "label": "Door bay finder" },
+    "scenes/outdoor/block-style.js#glassFront": { "label": "Glass shop front", "street": ["scenes/diorama/materials.js#finishWindows", "only the glass: varied recessed panes with reflections; forecourt only"], "variants": [ { "name": "one bay", "args": ["$sets", "$face", 0.4, 3.6] } ] },
     "scenes/outdoor/block-style.js#copedParapet": { "label": "Coped parapet", "variants": [ { "name": "parapet", "args": ["$p", "$face", 1.2, "#8a8f96"] } ] },
-    "scenes/outdoor/block-style.js#punched": { "label": "Punched window", "variants": [
+    "scenes/outdoor/block-style.js#punched": { "label": "Punched window", "street": ["scenes/diorama/materials.js#finishWindows", "only the glass: varied recessed panes with reflections; forecourt only"], "variants": [
       { "name": "clear", "args": ["$sets", "$face", 1.2, 2.8, 0.9, 2.1, false, false] },
       { "name": "frosted", "args": ["$sets", "$face", 1.2, 2.8, 0.9, 2.1, false, true] } ] },
-    "scenes/outdoor/block-style.js#stairBay": { "label": "Glazed stair bay", "variants": [ { "name": "3 storeys", "args": ["$sets", "$face", [1.4, 2.6], 2.4, 8.4, 2, 4, "#8a8f96"] } ] },
+    "scenes/outdoor/block-style.js#stairBay": { "label": "Glazed stair bay", "street": ["scenes/diorama/materials.js#finishWindows", "only the glass: varied recessed panes with reflections; forecourt only"], "variants": [ { "name": "3 storeys", "args": ["$sets", "$face", [1.4, 2.6], 2.4, 8.4, 2, 4, "#8a8f96"] } ] },
     "scenes/outdoor/block-style.js#roofPlant": { "label": "Roof plant", "variants": [ { "name": "tank and condensers", "args": ["$p", [-4, 4, -3, 3], 0, "#8a8f96"] } ] },
     "scenes/outdoor/block-style.js#frontDoor": { "label": "Front door and canopy", "variants": [
       { "name": "door", "args": ["$sets", "$face", { "t": 2, "w": 1.6 }] },
@@ -188,15 +237,57 @@
     "scenes/town.js#pavingRects": { "label": "Tiled paving (town)", "family": "ground", "variants": [ { "name": "one court", "args": [[[-1.5, 1.5, -1, 1]], 0.5] } ] },
     "scenes/town.js#paving": { "label": "Tiled paving, one rectangle (town)", "family": "ground" },
     "scenes/town.js#TOWN": { "label": "Town palette", "family": "materials" },
-    "scenes/town.js#eveningGrade": { "label": "Evening colour grade", "family": "lighting" },
-    "scenes/town.js#eveningLight": { "label": "Evening light", "family": "lighting" },
-    "scenes/town.js#sunFollow": { "label": "Sun that follows the camera", "family": "lighting" },
-    "scenes/town.js#outdoorLight": { "label": "Outdoor light rig", "family": "lighting" },
+    "scenes/town.js#eveningLight": { "label": "Evening light", "look": "none", "family": "lighting" },
+    "scenes/town.js#sunFollow": { "label": "Sun that follows the camera", "look": "none", "family": "lighting" },
+    "scenes/town.js#outdoorLight": { "label": "Outdoor light rig", "look": "none", "family": "lighting" },
     "scenes/rooms/shell.js#shell": { "label": "Room shell (four walls)", "variants": [
       { "name": "room", "args": ["$root", { "x0": -2, "x1": 2, "z0": -1.5, "z1": 1.5, "h": 2.4, "near": 0.5, "t": 0.12 }] } ] },
     "scenes/rooms/shell.js#plankFloor": { "label": "Plank floor", "family": "ground", "variants": [
       { "name": "planks", "args": ["$kit", { "x0": -1.5, "x1": 1.5, "z0": -1, "z1": 1 }, { "color": "#a07a55", "seam": "#7d5d40" }] } ] },
     "scenes/rooms/shell.js#roomLights": { "label": "Room light rig", "family": "lighting" },
+
+    "scenes/diorama/planting.js#streetPlanting": { "label": "Street trees and hedges", "scope": "fenced to the forecourt's ground (x -8 to 33, z -13 to 19); anywhere else it does nothing", "variants": [
+      { "name": "keyaki", "call": "scenes/outdoor/planting.js#keyaki", "args": ["$p", 0, 0, 1, 1], "street": "full" },
+      { "name": "keyaki, phone", "call": "scenes/outdoor/planting.js#keyaki", "args": ["$p", 0, 0, 1, 1], "street": "phone" },
+      { "name": "sakura", "call": "scenes/outdoor/planting.js#sakura", "args": ["$p", 0, 0, 1, 1], "street": "full" },
+      { "name": "pine", "call": "scenes/outdoor/planting.js#pine", "args": ["$p", 0, 0, 1, 1], "street": "full" },
+      { "name": "ginkgo", "call": "scenes/outdoor/planting.js#ginkgo", "args": ["$p", 0, 0, 1, 1], "street": "full" },
+      { "name": "maple", "call": "scenes/outdoor/planting.js#maple", "args": ["$p", 0, 0, 1, 1], "street": "full" },
+      { "name": "hedge", "call": "scenes/outdoor/planting.js#hedge", "args": ["$p", [-1.5, 0], [1.5, 0]], "street": "full" },
+      { "name": "hedge, phone", "call": "scenes/outdoor/planting.js#hedge", "args": ["$p", [-1.5, 0], [1.5, 0]], "street": "phone" } ] },
+    "scenes/diorama/root-bed.js#rootBed": { "label": "Rooted soil bed", "variants": [
+      { "name": "with cover", "args": ["$p", 0, 0, 1, 1], "street": "full" },
+      { "name": "phone, no cover", "args": ["$p", 0, 0, 1, 1, { "cover": false }], "street": "phone" } ] },
+    "scenes/diorama/planting-shapes.js#clippedHedge": { "label": "Clipped hedge block", "variants": [
+      { "name": "3 m run", "args": [3, 0.6, 0.5], "color": "#3f633b" } ] },
+    "scenes/diorama/foliage.js#dressFoliage": { "label": "Leaf clusters over crowns and hedges", "scope": "fenced to the forecourt's ground (x -8 to 33, z -13 to 19); anywhere else it does nothing" },
+    "scenes/diorama/canopy.js#leafCluster": { "label": "Leaf card texture", "phone": "one small shared texture; the same on a phone", "family": "materials" },
+    "scenes/diorama/canopy.js#addCanopyCore": { "label": "Crown core under the leaves" },
+    "scenes/diorama/meadow.js#meadowDetail": { "label": "Meadow grass and flowers", "family": "ground", "scope": "forecourt only: it reads the forecourt's south link and the street trees it planted" },
+    "scenes/diorama/materials.js#streetMaterial": { "label": "Street surface material", "phone": "finishStreet keeps soil, mulch, metal and cladding on their shared materials on a phone" },
+    "scenes/diorama/materials.js#finishStreet": { "label": "Street finish for a place", "note": "works on any place's surfaces; its brick and stone trim colours are the forecourt station's" },
+    "scenes/diorama/materials.js#finishWindows": { "label": "Street windows for a place", "family": "building", "note": "any glass in the shared window colour, the head office glass and the station glass" },
+    "scenes/diorama/reflections.js#streetReflections": { "label": "Street reflection map", "phone": "drawn once and shared; the same on a phone" },
+    "scenes/diorama/reflections.js#windowPane": { "label": "Window interior atlas", "phone": "drawn once and shared; the same on a phone" },
+    "scenes/diorama/glazing.js#varyPanes": { "label": "Varied window panes", "scope": "the head office lobby panes are split on its own frame (head-office/frame.js)" },
+    "scenes/diorama/architecture.js#softenStation": { "label": "Softened station trim", "scope": "the station only" },
+    "scenes/diorama/architecture.js#finishOffice": { "label": "Head office panels", "scope": "the head office only" },
+    "scenes/diorama/details.js#streetDetails": { "label": "Station wall fittings", "scope": "fixed to the station's east wall" },
+    "scenes/diorama/index.js#dressStreet": { "label": "Street style for a whole place", "scope": "the forecourt: its sun, shadow box and leaf and grass budgets are set for it" },
+    "scenes/diorama/index.js#STREET_GRADE": { "label": "Street colour grade", "phone": "a colour grade; the same on a phone", "family": "lighting" },
+    "scenes/diorama/quality.js#detailController": { "label": "Street detail by quality and screen", "phone": "this is the phone switch: no leaf cards or grass on a phone, the coarse crown core" },
+    "scenes/outdoor/plant-models.js#loadPlantModels": { "label": "Load the planting models", "family": "helpers" },
+    "scenes/outdoor/plant-models.js#plantGeometry": { "label": "A planting model's geometry", "phone": "gives the lighter _lo copies after loadPlantModels({ lighter: true })", "family": "helpers" },
+    "scenes/outdoor/plant-models.js#hedgeGeometries": { "label": "Hedge plants (Blender)", "phone": "gives the lighter _lo plants after loadPlantModels({ lighter: true })" },
+    "scenes/outdoor/plant-models.js#benchGeometries": { "label": "Bench ends and slats (Blender)", "phone": "one Blender model, no lighter copy yet", "family": "street" },
+    "scenes/outdoor/walk-edges.js#walkEdges": { "label": "Kerbs from the walkable ground", "street": ["scenes/diorama/materials.js#finishStreet", "only the street stone finish on its kerbs; forecourt only"] },
+    "kit/light/rig.js#lightRig": { "label": "Place light rig" },
+    "kit/light/rig.js#lightPlace": { "label": "Light a place for a period" },
+    "kit/light/glow.js#glowSet": { "label": "Night glow registry" },
+    "kit/light/looks.js#OUTDOOR": { "label": "Outdoor looks by period" },
+    "kit/light/looks.js#DORM": { "label": "Dorm looks by period" },
+    "kit/light/looks.js#SKY": { "label": "Sky colours by period" },
+    "kit/light/looks.js#eveningGrade": { "label": "Evening colour grade" },
 
     "props.js#plant": { "label": "Potted plant", "family": "planting", "variants": [
       { "name": "plain", "call": "props.js#plainPlant", "args": [] },
@@ -381,7 +472,7 @@
         ["scenes/plaza/furniture.js", 179, "", "umbrella canopy"],
         ["scenes/outdoor/seafront.js", 86, "", "umbrella canopy"] ] },
     { "id": "trees", "title": "Trees and shrub beds", "lines": 220,
-      "shared": ["scenes/outdoor/planting.js#keyaki", "scenes/outdoor/planting.js#treePit", "scenes/outdoor/planting.js#cluster", "scenes/outdoor/planting.js#bed"],
+      "shared": ["scenes/diorama/planting.js#streetPlanting", "scenes/outdoor/planting.js#keyaki", "scenes/outdoor/planting.js#treePit", "scenes/outdoor/planting.js#cluster", "scenes/outdoor/planting.js#bed"],
       "copies": [
         ["scenes/plaza/east-lane.js", 60, "", "tree in a mulch ring"],
         ["scenes/forecourt/quarter-planting.js", 17, "", "tree in a mulch ring"],
@@ -390,7 +481,6 @@
         ["scenes/dorm-court/cluster-yards.js", 29, "shrubBed", "shrubBed, nearly identical"],
         ["scenes/works/verges.js", 77, "", "leaf-card trees"],
         ["scenes/works/verges.js", 114, "", "leaf-card bushes"],
-        ["scenes/diorama/planting.js", 1, "", "the street-style trial's trees and hedges (about 650 lines)"],
         ["scenes/forecourt/details.js", 177, "tree", "unused"],
         ["scenes/forecourt/details.js", 30, "planter", "unused"] ] },
     { "id": "paving", "title": "Paving and flat ground", "lines": 80,

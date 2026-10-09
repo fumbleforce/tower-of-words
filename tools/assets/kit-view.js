@@ -3,6 +3,9 @@
 // filled. Tokens in args: $p a Parts collector, $sets blockSets(), $face the south face of a 4 x 2 block, $set a
 // lightSet(), $root the preview group, $kit a dorms Kit. `then` calls methods on what the builder returns;
 // `nook` builds one nook kit through outdoor/nooks.js; `surface` shows one of look/'s surface kinds on a block.
+// The Blender planting models are loaded first, as the game does (places/lifecycle.js). `street` ('full' or
+// 'phone') builds in the street style the way the forecourt does: its planting on $p, then the street finish and
+// the leaf clusters over what was built; 'phone' with the phone's lighter models and no leaf or cover cards.
 import * as THREE from 'three';
 
 const G = new URL('../../game3d/js/', import.meta.url).href;
@@ -24,13 +27,19 @@ export async function buildPiece(view) {
 }
 
 async function call(view, root) {
+  const phone = view.street === 'phone';
+  await (await mod('scenes/outdoor/plant-models.js')).loadPlantModels({ lighter: phone });
   const m = await mod(view.file);
   const fn = m[view.fn];
   if (typeof fn !== 'function') throw new Error(`${view.file} has no function ${view.fn}`);
   const made = {};
   const need = async (k) => {
     if (made[k]) return made[k];
-    if (k === '$p') { const { Parts } = await mod('scenes/outdoor/parts.js'); made[k] = new Parts(); }
+    if (k === '$p') {
+      const { Parts } = await mod('scenes/outdoor/parts.js');
+      made[k] = new Parts();
+      if (view.street) made[k].planting = (await mod('scenes/diorama/planting.js')).streetPlanting({ cover: !phone });
+    }
     if (k === '$sets' || k === '$face') made.$sets ||= (await mod('scenes/outdoor/block.js')).blockSets();
     if (k === '$face') { const { faces } = await mod('scenes/outdoor/block-face.js'); made[k] = faces([-2, 2, -1, 1]).s; }
     if (k === '$set') made[k] = (await mod('scenes/outdoor/furniture.js')).lightSet();
@@ -48,12 +57,28 @@ async function call(view, root) {
   if (out && typeof out.next === 'function') for (let s = out.next(); !s.done; s = out.next()) out = s.value;
   for (const [method, margs] of view.then || []) out[method](...(await many(margs)));
   if (out && out.isObject3D && !out.parent) root.add(out);
+  if (out && out.isBufferGeometry) root.add(new THREE.Mesh(out, new THREE.MeshStandardMaterial({ color: view.color || '#8a8f96', roughness: 0.85 })));
   if (made.$p) made.$p.build(root);
   if (made.$sets) (await mod('scenes/outdoor/block.js')).buildBlockSets(made.$sets, root);
   // a stone lantern lights no pool of its own; the places that use it add one (outdoor/nooks.js)
   if (made.$set && !made.$set.lit.length) made.$set.lit.push([0, 0, 0.55]);
   if (made.$set) made.$set.build(root);
   if (made.$kit) made.$kit.flush(root);
+  if (view.street) await streetPass(root, phone);
+}
+
+// the forecourt's street dressing over one piece (diorama/index.js dressStreet, without its place light): the street
+// finish, the leaf clusters, and the phone switch (diorama/quality.js: no leaf cards on a phone, the coarse core)
+async function streetPass(root, phone) {
+  root.updateMatrixWorld(true);
+  (await mod('scenes/diorama/materials.js')).finishStreet(root, phone);
+  const sun = new THREE.DirectionalLight();
+  (await mod('scenes/diorama/foliage.js')).dressFoliage(root, { budget: 32000, tileSize: 10, leafShadows: false, leafScale: 1.5, sun, phone });
+  root.traverse((o) => {
+    if (o.isInstancedMesh && /^diorama-leaves-/.test(o.name)) o.visible = !phone;
+    if (o.userData.dioramaGeometry) o.geometry = o.userData.dioramaGeometry[phone ? 'low' : 'high'];
+    if (o.name === 'diorama-crown-shadow') o.visible = false;
+  });
 }
 
 async function nook(n, root) {

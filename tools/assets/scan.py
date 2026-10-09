@@ -541,8 +541,13 @@ for rid, name, place, shot, view, src in ROOMS:
 # the world kit: every exported builder in the kit files (tools/assets/kit.json lists the files and how to show each
 # piece; kit-source.mjs reads the source), with its variants, where it is used (through the imports) and what the
 # audit found built twice. The bible's Asset library (bible/assets.js) reads these entries and the top-level `kit`.
-KIT_DATA = json.loads(subprocess.run(['node', 'tools/assets/kit-source.mjs'], cwd=ROOT, check=True, capture_output=True,
-                                     text=True, timeout=60).stdout)
+_kit = subprocess.run(['node', 'tools/assets/kit-source.mjs'], cwd=ROOT, capture_output=True, text=True, timeout=60)
+for _line in _kit.stderr.splitlines():
+    if 'kit.json is out of date' in _line:
+        print(_line)
+if _kit.returncode:   # the library goes empty rather than stopping ./start
+    print('kit-source.mjs failed; the Asset library is empty this time:', _kit.stderr.strip().splitlines()[-1:])
+KIT_DATA = json.loads(_kit.stdout) if not _kit.returncode else {'families': [], 'pieces': [], 'dupes': [], 'stale': ['kit-source.mjs failed']}
 FAMILY = {f: label for f, label, _ in KIT_DATA['families']}
 for pc in KIT_DATA['pieces']:
     places = ', '.join(PLACES.get(x.replace('-', '_'), x) for x in pc['places'])
@@ -551,9 +556,10 @@ for pc in KIT_DATA['pieces']:
             source=f"{pc['file']}:{pc['line']} {pc['call']}", used=[f'Used in {places}'] if places else [],
             view=pc['variants'][0]['view'] if pc['variants'] else {'type': 'code'}, tags=['kit', FAMILY[pc['family']]])
     if e:
-        e['piece'] = {k: pc[k] for k in ('id', 'family', 'name', 'line', 'kind', 'call', 'doc', 'palette', 'used', 'usedSelf', 'places', 'also', 'dupes')}
+        e['piece'] = {k: pc[k] for k in ('id', 'family', 'name', 'line', 'kind', 'call', 'doc', 'palette', 'used', 'usedSelf', 'places', 'also', 'dupes',
+                                          'look', 'scope', 'note', 'phone', 'street') if k in pc}
         e['variants'] = [{'name': v['name'], 'view': v['view']} for v in pc['variants']]
-KIT_INFO = {'families': KIT_DATA['families'], 'dupes': KIT_DATA['dupes']}
+KIT_INFO = {'families': KIT_DATA['families'], 'looks': KIT_DATA.get('looks', []), 'dupes': KIT_DATA['dupes'], 'stale': KIT_DATA['stale']}
 
 # ------------------------------------------------------------------ audio
 manifest = []
