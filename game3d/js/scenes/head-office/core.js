@@ -18,6 +18,8 @@ import { signMesh } from './signs.js';
 const DOOR_H = 1.72; // the office door's opening
 const LIFT_H = 1.45, // the lift doorways (the B2 car's as places/lift.js builds its landing)
   STAIR_H = 1.55;
+// how far a door frame stands off the opening's faces it lines (docs/game/art-and-sound.md: at least a millimetre)
+const GAP = 0.003;
 
 // the feature wall: stone, the office door's opening, the light slot, and its signs; returns its meshes (for the fade)
 export function featureWall(g) {
@@ -33,10 +35,11 @@ export function featureWall(g) {
       [d1, BU[4]],
     ])
       k.flat(C.bank, a, b, y - 0.012, y + 0.012, FW - 0.008, FW);
-  // the office door: a dark frame round the opening and a stone sill
-  k.B(C.trim, d0 - 0.06, d0, 0, DOOR_H + 0.06, FW - 0.03, BACK);
-  k.B(C.trim, d1, d1 + 0.06, 0, DOOR_H + 0.06, FW - 0.03, BACK);
-  k.B(C.trim, d0, d1, DOOR_H, DOOR_H + 0.06, FW - 0.03, FW + 0.05);
+  // the office door: a dark frame round the opening and a stone sill. The frame lines the opening's stone faces
+  // GAP proud of them (into the opening, under the head, past the wall's back), never in their plane (it flickered)
+  k.B(C.trim, d0 - 0.06, d0 + GAP, 0, DOOR_H + 0.06, FW - 0.03, BACK + GAP);
+  k.B(C.trim, d1 - GAP, d1 + 0.06, 0, DOOR_H + 0.06, FW - 0.03, BACK + GAP);
+  k.B(C.trim, d0 + GAP, d1 - GAP, DOOR_H - GAP, DOOR_H + 0.06, FW - 0.03, FW + 0.05);
   // the light slot along its top, washing the stone
   k.glow(0.3, BU[4] - 0.12, AH - 0.2, AH - 0.14, FW - 0.02, FW);
   const meshes = k.build(g);
@@ -115,11 +118,12 @@ export function core(root, g) {
   return { doorway };
 }
 
-// a brushed steel frame round an opening u0..u1, h high, standing proud of the wall's face
+// a brushed steel frame round an opening u0..u1, h high, standing proud of the wall's face; its insides GAP into
+// the opening, out of the plane of the wall's own faces there
 function frame(k, u0, u1, h) {
-  k.gloss(C.steelDark, u0 - 0.07, u0, 0, h + 0.07, LN - 0.03, LN + 0.06);
-  k.gloss(C.steelDark, u1, u1 + 0.07, 0, h + 0.07, LN - 0.03, LN + 0.06);
-  k.gloss(C.steelDark, u0, u1, h, h + 0.07, LN - 0.03, LN + 0.06);
+  k.gloss(C.steelDark, u0 - 0.07, u0 + GAP, 0, h + 0.07, LN - 0.03, LN + 0.06);
+  k.gloss(C.steelDark, u1 - GAP, u1 + 0.07, 0, h + 0.07, LN - 0.03, LN + 0.06);
+  k.gloss(C.steelDark, u0 + GAP, u1 - GAP, h - GAP, h + 0.07, LN - 0.03, LN + 0.06);
   k.B(C.steelDark, u0 - 0.02, u1 + 0.02, 0, 0.014, LN - 0.1, LN + 0.06, { cast: false }); // the sill
 }
 
@@ -132,9 +136,10 @@ export function liftLanding(root) {
   // its steel frame, the sill and the call button (they go down with the wall while he rides)
   const dark = mat(C.steelDark, { roughness: 0.35, metalness: 0.3 });
   // (inside the lift's cut box: no more than 1.5 cm proud of the wall's face, places/lift-cut.js)
-  group.add(rbox(1.38, 0.07, 0.07, C.steelDark, { y: LIFT_H, z: -0.03, seg: 1, m: dark }));
+  // (its insides GAP into the doorway and under its head: in the plane of the wall's faces there they flickered)
+  group.add(rbox(1.38, 0.07, 0.07, C.steelDark, { y: LIFT_H - GAP, z: -0.03, seg: 1, m: dark }));
   for (const s of [-1, 1])
-    group.add(rbox(0.07, LIFT_H, 0.07, C.steelDark, { x: s * 0.655, z: -0.03, seg: 1, m: dark }));
+    group.add(rbox(0.07, LIFT_H, 0.07, C.steelDark, { x: s * (0.655 - GAP), z: -0.03, seg: 1, m: dark }));
   group.add(rbox(1.28, 0.012, 0.24, C.steelDark, { y: 0.003, seg: 1, r: 0.003 }));
   group.add(rbox(0.06, 0.16, 0.025, C.steelDark, { x: 0.88, y: 0.62, z: -0.01, seg: 1, m: dark }));
   const leaves = [-1, 1].map((s) => {
