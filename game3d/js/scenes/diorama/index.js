@@ -9,15 +9,14 @@ import { meadowDetail } from './meadow.js';
 import { dressFoliage } from './foliage.js';
 import { softenStation } from './architecture.js';
 import { detailController } from './quality.js';
-import { splitStreetSurfaces } from './spatial.js';
 export { finishOffice } from './architecture.js';
 export function dressStreet(root, scene, sun, station, nav) {
   const environment = finishStreet(root);
   const softened = softenStation(root);
   const details = streetDetails(root, station, environment);
-  const leaves = dressFoliage(root, { budget: 32000, tileSize: 5, leafShadows: false, leafScale: 1.5 });
+  // leaves in 10 m tiles: fewer draws, each still culled (the place budgets, game3d/tools/perf/place-budgets.json)
+  const leaves = dressFoliage(root, { budget: 32000, tileSize: 10, leafShadows: false, leafScale: 1.5 });
   const meadow = meadowDetail(root, nav, { budget: 6500, shadows: false });
-  const surfaceTiles = splitStreetSurfaces(root);
   scene.traverse((o) => {
     if (o.isHemisphereLight) {
       o.color.set('#c8dcf0');
@@ -34,7 +33,7 @@ export function dressStreet(root, scene, sun, station, nav) {
   sun.shadow.bias = -0.00045;
   sun.shadow.normalBias = 0.012;
   sun.shadow.radius = 2;
-  root.userData.diorama = { leaves, meadow, details, softened, surfaceTiles };
+  root.userData.diorama = { leaves, meadow, details, softened };
   root.userData.dioramaDetail = detailController(root);
   root.userData.dioramaDetail();
   return environment;

@@ -6,7 +6,10 @@ export function detailController(root) {
     meshes = [],
     geometry = [];
   root.traverse((mesh) => {
-    if (mesh.isInstancedMesh && /^diorama-(leaves-|meadow)/.test(mesh.name)) meshes.push({ mesh, full: mesh.count });
+    if (mesh.isInstancedMesh && /^diorama-(leaves-|meadow)/.test(mesh.name)) {
+      meshes.push({ mesh, full: mesh.count });
+      mesh.userData.noAO = true; // leaf cards and grass blades stay out of the AO's own pass (perf/gtao.js)
+    }
     if (mesh.userData.dioramaGeometry) geometry.push(mesh);
   });
   let previous = '';
@@ -20,14 +23,15 @@ export function detailController(root) {
     const key = `${tier}:${phone}`;
     if (key === previous) return;
     previous = key;
-    const leaves = (phone ? [4000, 10000, 18000] : [12000, 22000, 32000])[tier] ?? 4000;
-    const grass = (phone ? [1000, 2000, 4000] : [2500, 4500, 6500])[tier] ?? 1000;
+    const leaves = (phone ? [4000, 6000, 18000] : [12000, 22000, 32000])[tier] ?? 4000;
+    const grass = (phone ? [1000, 1200, 4000] : [2500, 4500, 6500])[tier] ?? 1000;
     let leafCount = 0,
       grassCount = 0;
     for (const { mesh, full } of meshes) {
       const leaf = mesh.name.startsWith('diorama-leaves-');
       mesh.count = Math.min(full, Math.round(full * (leaf ? leaves / 32000 : grass / 6500)));
-      mesh.castShadow = !phone && tier === 2 && !mesh.name.endsWith('flowers');
+      // the crowns and hedges under them cast the shadow; leaf cards and grass blades would draw the place again
+      mesh.castShadow = false;
       if (leaf) leafCount += mesh.count;
       else if (mesh.name === 'diorama-meadow') grassCount += mesh.count;
     }
