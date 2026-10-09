@@ -108,6 +108,7 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
   const areas = [];
   const placed = {};
   const ringPts = [];
+  const seenMeshes = new Set();
   for (const [name, build] of PLACES) {
     let w;
     try {
@@ -151,8 +152,21 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
     holder.scale.setScalar(c.scale);
     holder.add(root);
     isl.add(holder);
-    // where the near ring stands, in the island frame: those buildings come out of the far model below
+    // a piece another place built already (the station and its shed come with more than one place): keep one copy,
+    // two identical meshes in one spot flicker against each other
     holder.updateMatrixWorld(true);
+    const repeats = [];
+    root.traverse((o) => {
+      if (!o.isMesh) return;
+      const bb = new THREE.Box3().setFromObject(o);
+      const r = (v) => v.toArray().map((x) => Math.round(x * 20)).join(',');
+      const key = `${o.name}|${o.geometry.attributes.position?.count}|${o.isInstancedMesh ? o.count : 1}|${r(bb.min)}|${r(bb.max)}`;
+      if (seenMeshes.has(key)) repeats.push(o);
+      else seenMeshes.add(key);
+    });
+    for (const o of repeats) o.parent?.remove(o);
+    if (DEBUG_STRIP && repeats.length) console.info('opening repeats', name, repeats.length, repeats.slice(0, 12).map((o) => o.name || '(unnamed)').join(' | '));
+    // where the near ring stands, in the island frame: those buildings come out of the far model below
     root.traverse((o) => {
       if (!o.isMesh || !RING.test(o.name || '')) return;
       const p = o.geometry.attributes.position,
