@@ -740,7 +740,7 @@ The budgets:
 
 The phone calls, triangles and load are the phone budgets at the top of this file. The rest had no target before this, so these are starting values. iOS Safari allows a page about 224 to 384 MB of canvas and WebGL memory (notes/research/world-chunking.md), and 64 + 96 MB per place lets the place on screen and the next one prepared fit together. The desktop numbers are for a laptop with integrated graphics, not this machine's 3080: about two and a half times the phone's calls and triangles, and double its memory.
 
-Known exceptions: a place that is over today has its own higher ceiling for that number in `places`, with the issue that will bring it down. The ceiling is about 5% over what was measured (25% for load times), and the place may not go past it. When a place gets back under the budget, the check prints a note asking for its exception to be removed. Exceptions recorded on 2026-10-09: the forecourt's phone geometry (#372; its calls and triangles came under budget in stage 2, below); character skins at 2048x2048 that put most places over the texture budget (#373; the approved office-role models in 98609f13 took the gate to 187 MB and the office to 222 MB, which is also over the desktop budget); and the canteen, bakery, ferry terminal and office over on calls, the office, plaza, east lane and shop street over on geometry, the office and plaza over on desktop triangles, and the office's load (#374).
+Known exceptions: a place that is over today has its own higher ceiling for that number in `places`, with the issue that will bring it down. The ceiling is about 5% over what was measured (25% for load times), and the place may not go past it. When a place gets back under the budget, the check prints a note asking for its exception to be removed. Exceptions recorded on 2026-10-09: the forecourt's phone geometry (#372; its calls and triangles came under budget in stage 2, below); character skins at 2048x2048 that put most places over the texture budget (#373; the approved office-role models in 98609f13 took the gate to 187 MB and the office to 222 MB, which is also over the desktop budget); and the office over on calls (the canteen, bakery and ferry terminal came under in stage 3, below), the office, plaza, east lane and shop street over on geometry, the office and plaza over on desktop triangles, and the office's load (#374).
 
 To change a budget or add an exception, edit place-budgets.json in the same commit as the change that needs it, and say why in the commit message. An exception needs an issue (the unit test checks it).
 
@@ -798,3 +798,16 @@ Most of what the phone drew was out of view. A place's build merges everything o
 | east lane after | 71 | 121k | 67.7 | 323 | 614k | 83.1 |
 
 Before is main a3c0a22d (with the far view of c43e2815), measured on the same machine the same hour. The campus went from 57 to 103 phone draws and from 132k to 65k triangles. The forecourt's phone geometry is still over its budget (64 MB): about 30 MB of it is the hidden source meshes the draw-call pass keeps to fall back on, never drawn; that is the next step of #372.
+
+### Stage 3: the interiors under the budgets (#374, 2026-10-09)
+
+The canteen, bakery and ferry terminal never ran the draw-call pass: they were missing from `BATCHED` in places/lifecycle.js, so every colour of their kit-built rooms (scenes/dorms/kit.js makes one mesh per colour and surface) and every part of their props and people drew on its own, each again for the shadow map. They run it now, with the phone's batch sizes like every other place. Same paused frame, pass off (as before) and on: mean difference 0.001 to 0.005/255, under 0.01% of pixels off by more than 8/255 (z-fighting speckle). Geometry grows by the merged copies (canteen 5.3 to 9.6 MB, bakery 6.9 to 12.3, ferry terminal 6.4 to 9.8); their exceptions are gone.
+
+| | phone calls | phone tris | desktop calls | desktop tris |
+|---|--:|--:|--:|--:|
+| canteen before | 314 | 43k | 807 | 92k |
+| canteen after | 80 | 48k | 252 | 92k |
+| bakery before | 274 | 46k | 508 | 94k |
+| bakery after | 44 | 56k | 146 | 96k |
+| ferry terminal before | 219 | 38k | 517 | 84k |
+| ferry terminal after | 57 | 42k | 216 | 88k |
