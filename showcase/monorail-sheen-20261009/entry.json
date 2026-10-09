@@ -5,26 +5,10 @@
   "caption": "The car's stainless now looks like brushed metal. It picks up the sky, the warm horizon and the sea, and it has grime, drips, thin rust runs and rubbed edges baked in Blender. Shape, colours, interior, doors and play are the same as before.",
   "preview": "after-close-desk",
   "result": [
-    {
-      "id": "result-close-desk",
-      "image": "bible/shots/showcase/monorail-sheen-20261009/after-close-desk.webp",
-      "caption": "Close on the car side, desktop"
-    },
-    {
-      "id": "result-corner-desk",
-      "image": "bible/shots/showcase/monorail-sheen-20261009/after-corner-desk.webp",
-      "caption": "Car ends and bellows, desktop"
-    },
-    {
-      "id": "result-under-desk",
-      "image": "bible/shots/showcase/monorail-sheen-20261009/after-under-desk.webp",
-      "caption": "From below, desktop"
-    },
-    {
-      "id": "result-corner-phone",
-      "image": "bible/shots/showcase/monorail-sheen-20261009/after-corner-phone.webp",
-      "caption": "Car ends, phone"
-    }
+    "after-close-desk",
+    "after-corner-desk",
+    "after-under-desk",
+    "after-corner-phone"
   ],
   "sections": [
     {
