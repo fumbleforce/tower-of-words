@@ -4,9 +4,12 @@
     python3 tools/collab/post.py to-codex release "claude-agent:grounds" --body "landed 9f0d985f and releases ..."
 
 Prints the id it used. The prefix comes from the inbox: to-codex/to-grok take C- (Claude writes there)."""
-import argparse, datetime, fcntl, pathlib, re, sys
+import argparse, datetime, fcntl, pathlib, re, subprocess, sys
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
+# The inboxes live in the main checkout only (git-ignored), so resolve it from the shared .git even when run in a worktree.
+_here = pathlib.Path(__file__).resolve().parents[2]
+ROOT = pathlib.Path(subprocess.run(['git', '-C', str(_here), 'rev-parse', '--path-format=absolute', '--git-common-dir'],
+                                   capture_output=True, text=True, check=True).stdout.strip()).parent
 PREFIX = {'to-codex': 'C', 'to-grok': 'C'}
 
 def main():
