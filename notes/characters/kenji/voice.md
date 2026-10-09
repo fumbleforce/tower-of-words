@@ -1,72 +1,79 @@
 # Kenji's voice
 
-Who he is lives in his [bio](../../character-backgrounds/kenji.md) and [cast.md](../../../docs/game/cast.md#kenji-kenji). This page is how to write him. Jørgen's direction: "kenji is a mild confused lamb, somewhat clumsy." He is funny because of what happens to him, never because he is slow. He follows fine once someone explains properly, but he rarely asks.
+Who he is lives in his [bio](../../character-backgrounds/kenji.md) and [cast.md](../../../docs/game/cast.md#kenji-kenji). This page is how to write him. Jørgen's direction: "kenji is a mild confused lamb, somewhat clumsy." Kenji is twenty-one with two months on B2. Eric is 37 and has years of work behind him, so Kenji sees him as a senpai from the first morning. Kenji is funny because of what happens to him, never because he is slow. He follows well once someone explains properly, but he rarely asks.
 
 ## How he talks
 
-Kenji speaks softly and a little too quickly when he wants to be helpful, then slows down when he realises he has lost the thread. He builds a sentence one piece at a time, adds the detail he has just remembered, and sometimes never reaches the end. He is mild. He sounds pleased rather than excited, and an exclamation mark should be rare. Most of the current lines ("Sit, sit!", "Welcome food!") are brighter than he is now.
+Kenji speaks softly and a little too quickly when he wants to be useful, then slows down when he realises he has lost the thread. He is mild. He sounds pleased rather than excited, and exclamation marks should be rare.
 
-In Japanese he is casual with Eric and anyone his age, and uses 僕, never 俺. With Mori and Emi he switches to careful です and ます, which comes out stiff, and he sometimes slips back into casual halfway through and corrects himself. His fillers are えっと and あれ？. When he is trying to remember something he says it out loud with っけ (何階だっけ). When a senior gives him an instruction he says はい, はい before they have finished.
+With Eric he speaks simple, polite Japanese: です and ます, short sentences, and a lot of words Eric can catch. He uses loanwords whenever there is one (プリンター, メロンソーダ, カラオケ, ゲームセンター) and words Eric has learned (すみません, 大丈夫, もう一度). He points, holds up fingers and shows the thing he means. He calls Eric {mc.name_jp}さん in Japanese and {mc.name}-san in English, and when he needs help, 先輩 sometimes slips out. He bows a little too deeply. With Mori and Emi his Japanese gets even more careful and stiff. Only with people his own age, or later with Eric once Eric has told him to relax, does he drop into casual speech. He calls himself 僕 throughout, never 俺.
 
-His English is what he kept from school. He uses the present tense for everything ("Yesterday I go"), drops "is" and articles, and builds the sentence noun by noun ("Paper. For the printer upstairs. Third floor, I think."). When a word is missing he goes back to the noun he has and points at the thing. He likes practising on Eric and ends a sentence with "right?" to check it landed. Keep his broken English loose and running on. A row of single nouns as a punchline ("Machine room. Chair. Cat.") is the clipped rhythm the guide bans, even when a learner says it.
+His fillers are えっと and あれ？. When he is trying to remember something he says it out loud with っけ (何階だっけ). When a senior gives him an instruction he says はい、はい before they have finished.
 
-He apologises quickly and quietly: ごめん to Eric, すみません to seniors, "sorry" in English, and usually only once, because he is already trying to fix whatever it was.
+His English is weak. He has a few school words (yes, sorry, thank you, okay, chair, paper, song, very) and the names of things he likes. He uses them without grammar ("Mori-san say. I say yes, yes."), and after two or three words he gives up and goes back to Japanese or points. He likes to try an English word on Eric and watch whether it worked. Never give him a full English sentence with tense, articles and a clause. A few English words should sit next to a Japanese line and a gesture, and they shouldn't be lined up as a punchline.
+
+He apologises quickly and quietly. He says すみません to Eric and bows, and usually only once, because he is already trying to fix whatever it was.
 
 ## What he wants and avoids
 
-He wants to be sent out on a job alone and trusted with it, and one day to own a proper workbench. He wants people to keep asking him to help.
+He wants to be sent out on a job alone and trusted with it, and one day to own a proper workbench. He wants Eric to think he is useful.
 
 He avoids asking the same question twice, telling anyone a job went wrong, and saying no to anyone who sounds disappointed. He gets lost when several people talk at once.
 
-Things that steady him are one instruction at a time, something written down, someone showing him with their hands, and a melon soda in his hand. The old space programmes he builds models from steady him too. On that subject his sentences get longer and surer, because he knows he isn't wrong.
+Things that steady him are one instruction at a time, something written down, someone showing him with their hands, and a melon soda in his hand. The old space programmes he builds models from steady him too. On that subject he talks longer and with more confidence, because he knows he isn't wrong.
 
 ## His tells under stress
 
-- He says 大丈夫 or "it's okay" too fast, before anyone asked. Eric learns 大丈夫 on day 2, so the player can start to hear this.
+- He says 大丈夫です too fast, before anyone asked. Eric learns 大丈夫 on day 2, so the player can start to hear this.
 - He repeats the last word someone said, as if holding on to it.
-- He agrees with whoever spoke last.
+- He agrees with whoever spoke last, and with Eric before anyone.
 - His hands get busy. He straightens his tie, which still ends up crooked, or tightens his grip on whatever he is carrying.
 - He moves too quickly in a tight space and catches a chair or a doorframe.
 
 ## Eric, at first and later
 
-At first Eric is a relief. He is the first person on B2 who is newer than Kenji, and the first who understands less Japanese than he does. Kenji plays the senior gently and offers what he is sure of, like where the good tape is or which vending machine has melon soda. For the same reason he hides his mistakes from Eric more than from anyone, because Eric is the one person he can look capable in front of.
+At first Kenji is a little in awe of Eric. Eric is older, foreign and experienced, the kind of engineer Kenji wants to be. Kenji bows, carries things for him, asks before touching anything on his desk, and keeps checking whether Eric approves ("大丈夫ですか？"). He is also too shy to waste a senpai's time, so he brings Eric problems late, when they are already bigger. He hides his mistakes from Eric more than from anyone, because Eric's opinion matters most to him.
 
-Later he tells Eric first when something has gone wrong, and asks him to come along while he asks again. Further on he can say no to Eric, kindly and with a reason, and he starts to notice when Eric is nodding along without understanding, because he knows the look.
+Later he comes to Eric first, before the problem grows. He shows Eric a job and asks him to check it, and asks him to come along while he asks Mori again. He still adds さん to Eric's name, but his Japanese loosens. Further on he can say no to Eric, kindly and with a reason, and that is the biggest step he takes.
 
 ## Example lines
 
-B2, day 1. Mori has just given him a long instruction in polite Japanese.
-> 「あ、はい、はい。…はい。」 Then, quietly, to Eric: "He says something with paper. I go and look."
+Each line has its setting and, in brackets, what it means for whoever is reading this sheet. In the game the Japanese stays blurred except for known words and loanwords.
 
-Day 2, at his desk. Eric asks whether the floor-4 printer job is done.
-> "Yes, it's okay, it prints now. It prints one page and then it stops, but... one page is printing. So."
+Day 1 at B2. Mori has just given him a long instruction in polite Japanese.
+> 「はい、はい。…はい。」 He turns to Eric and lowers his voice. "Paper... something. I look."
 
-At the vending machine, can in hand.
-> "My mother calls every Sunday. The first question is always shirts, did you wash. I say yes. Then I wash them, so after, it's true."
+Day 1. Eric greets him with おはようございます.
+> 「あ、おはようございます！」 He bows, deeper than Eric did.
+
+Day 2 at his desk. Eric asks whether the floor-4 printer job is done.
+> 「大丈夫です、大丈夫です。」 He holds up one finger. "One paper... OK. Then, stop." (It's fine. It printed one page and then stopped.)
+
+At the vending machine with a can.
+> 「母が毎週、電話するんです。」 He mimes a phone, then plucks at his shirt. "Mother... shirt. Wash? I say yes." (My mother phones every week and asks whether I've washed my shirts. I say yes.)
 
 In the dorm commons, a half-built model ship on the table.
-> "This one is from the second series. In the second series the ship has four engines, not three, so I wait before I glue this part. Many people make it with three. It's wrong."
+> 「これ、二期の船です。エンジンは四つ。」 He taps each engine. "Four. Not three. Many people, three. Wrong." (This is the ship from the second series. It has four engines, and lots of people build it with three.)
 
 Two clubs have both asked him for six o'clock.
-> 「大丈夫です、大丈夫です。両方できます。」 To Eric, after: "Both say six. That is... the same six, right?"
+> 「大丈夫です、両方できます。」 Then, to Eric, holding up six fingers twice: "Six... six. Same six?"
 
 Later, standing by Eric's desk with a cable in his hand.
-> "I said it was finished. It is not finished. Can you look before I tell Mio-san?"
+> 「すみません、先輩…終わってないです。ミオさんに言う前に、見てもらえますか。」 (Sorry, senpai, it isn't finished. Could you look at it before I tell Mio?)
 
 Later still, when Eric asks him to come along to something.
-> "Sorry, today I can't. I said yes to Mori-san first, and this time I want to finish one thing properly."
+> 「すみません、今日は無理です。森さんに先に約束したので。」 He bows. "Sorry. Mori-san... first." (Sorry, I can't today. I promised Mori first.)
 
 ## Lines he would not say
 
-> "Mistakes are just lessons, right?"
+> "I'm afraid I misunderstood what Mori-san wanted, so I'll check with him."
 
-He has no distance from his mistakes yet. This is a fortune-cookie line, and it lets him off a hook he is still on.
+The English is far past his level, and checking with Mori right away is the one thing he can't make himself do.
+
+> 「かたっ！おはよう、でいいよ。」 ("So stiff! Just say ohayō.")
+
+He would never correct a senpai for being too polite. That is a peer or a senior talking down.
 
 > "I'm so stupid, I always ruin everything!"
 
 He is embarrassed and says sorry once. Loud self-pity is the over-the-top anime reaction Jørgen dislikes, and it turns him into a joke.
-
-> "I'm afraid I misunderstood what Mori-san wanted, so I'll check with him."
-
-The English is far past his level, and checking with Mori right away is exactly what he can't make himself do.
