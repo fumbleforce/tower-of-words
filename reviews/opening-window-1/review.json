@@ -3,7 +3,7 @@
  "date": "2026-10-09",
  "updated": "2026-10-09T18:30:00+0200",
  "by": "art-round agent (opening-window-1)",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Which picture should go behind the train window for each of the three shots (Eric looking out, Mio on her phone, Mio looking up at us)?",
  "media": [
@@ -218,5 +218,8 @@
    "id": "redo",
    "label": "Redo it (say what to change)"
   }
- ]
+ ],
+ "decision": "Jørgen: \"your pick, they all look the same to me\". Then Review opening-window-2 chose the game's 3D models for the window seats, so these pictures stay unused.",
+ "decided_at": "2026-10-09T21:04:39+0200",
+ "issue": 378
 }
