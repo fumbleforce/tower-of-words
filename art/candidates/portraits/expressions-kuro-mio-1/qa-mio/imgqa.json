@@ -1,0 +1,860 @@
+{
+ "character": "mio",
+ "ref": "game3d/assets/portraits/mio-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   192,
+   214,
+   361,
+   383
+  ]
+ ],
+ "ref_face_detected": [
+  192.0,
+  214.0,
+  361.0,
+  383.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/ma-d70-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    192.0,
+    215.0,
+    361.0,
+    383.0
+   ],
+   "eyes": [
+    [
+     229.0,
+     287.5
+    ],
+    [
+     302.0,
+     271.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 0.999,
+    "worst": 0.981,
+    "worst_part": "her right lens bottom",
+    "dE": 0.5,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 0.981,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 12,
+    "holes_px": 3361,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 94,
+    "hair_top_ref": 96,
+    "crop": [
+     1.6,
+     2.3,
+     595.1,
+     765.7
+    ],
+    "eyes": -0.01,
+    "tilt": -0.2,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.882
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/ma-d70-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193.0,
+    214.0,
+    361.0,
+    383.0
+   ],
+   "eyes": [
+    [
+     229.0,
+     287.5
+    ],
+    [
+     304.5,
+     272.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.2,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 12,
+    "holes_px": 3361,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 96,
+    "hair_top_ref": 96,
+    "crop": [
+     0.5,
+     0.0,
+     597.5,
+     768.0
+    ],
+    "eyes": -0.001,
+    "tilt": 1.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.879
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/ma-d70-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193.0,
+    215.0,
+    361.0,
+    382.0
+   ],
+   "eyes": [
+    [
+     229.5,
+     288.0
+    ],
+    [
+     304.5,
+     272.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.4,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 12,
+    "holes_px": 3361,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 93,
+    "hair_top_ref": 96,
+    "crop": [
+     3.8,
+     3.5,
+     593.7,
+     762.4
+    ],
+    "eyes": -0.001,
+    "tilt": 0.8,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.005,
+    "ssim": 0.854
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/ma-d55-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193.0,
+    215.0,
+    360.0,
+    383.0
+   ],
+   "eyes": [
+    [
+     229.5,
+     288.0
+    ],
+    [
+     304.5,
+     272.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 12,
+    "holes_px": 3361,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 94,
+    "hair_top_ref": 96,
+    "crop": [
+     1.6,
+     2.3,
+     595.1,
+     765.7
+    ],
+    "eyes": -0.005,
+    "tilt": 0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.008,
+    "ssim": 0.913
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/ma-d55-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    192.0,
+    214.0,
+    361.0,
+    383.0
+   ],
+   "eyes": [
+    [
+     229.5,
+     287.5
+    ],
+    [
+     304.5,
+     272.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.2,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 12,
+    "holes_px": 3361,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 96,
+    "hair_top_ref": 96,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": -0.001,
+    "tilt": 1.2,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.005,
+    "ssim": 0.959
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/ma-d55-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193.0,
+    215.0,
+    360.0,
+    382.0
+   ],
+   "eyes": [
+    [
+     229.5,
+     288.0
+    ],
+    [
+     304.5,
+     272.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.4,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 12,
+    "holes_px": 3361,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 93,
+    "hair_top_ref": 96,
+    "crop": [
+     3.3,
+     3.5,
+     593.2,
+     762.4
+    ],
+    "eyes": -0.001,
+    "tilt": 0.8,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.813
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/ma3-d70-1-game.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    192.0,
+    215.0,
+    361.0,
+    383.0
+   ],
+   "eyes": [
+    [
+     228.0,
+     287.5
+    ],
+    [
+     302.5,
+     271.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 12,
+    "holes_px": 3361,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 94,
+    "hair_top_ref": 96,
+    "crop": [
+     1.6,
+     2.3,
+     595.1,
+     765.7
+    ],
+    "eyes": -0.01,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.005,
+    "ssim": 0.895
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/ma3-d70-2-game.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193.0,
+    214.0,
+    361.0,
+    383.0
+   ],
+   "eyes": [
+    [
+     229.0,
+     288.0
+    ],
+    [
+     304.5,
+     272.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 12,
+    "holes_px": 3361,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 96,
+    "hair_top_ref": 96,
+    "crop": [
+     0.5,
+     0.0,
+     597.5,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.003,
+    "ssim": 0.893
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/expressions-kuro-mio-1/ma3-d70-3-game.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193.0,
+    215.0,
+    361.0,
+    382.0
+   ],
+   "eyes": [
+    [
+     228.5,
+     288.0
+    ],
+    [
+     304.0,
+     272.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 0.999,
+    "worst": 0.996,
+    "worst_part": "her right lens inner",
+    "dE": 0.5,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 0.996,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 12,
+    "holes_px": 3361,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 255,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 93,
+    "hair_top_ref": 96,
+    "crop": [
+     3.8,
+     3.5,
+     593.7,
+     762.4
+    ],
+    "eyes": -0.003,
+    "tilt": 0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.006,
+    "ssim": 0.869
+   },
+   "status": "pass"
+  }
+ ]
+}
