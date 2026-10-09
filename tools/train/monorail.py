@@ -1,8 +1,10 @@
 """The monorail's outside, modelled in Blender (issue #355, Jørgen's reference art/refs/monorail/jorgen-suggestion-20261009.png):
 the car's stainless skin with its roof units, the navy skirt, the gangway bellows, one segment of the straddle beam,
 and a pillar with its foot. Plain geometry with one colour per face corner (stainless, navy, dark frames, panel lines)
-and the weathering (streaks under the windows and the roof edge, grime low down, rust under the beam joints and the
-bearings) painted into the same colour attribute: no textures.
+and the weathering of the skirt, beam and pillars (grime low down, rust under the beam joints and the bearings)
+painted into the same colour attribute. The car skin's weathering is a baked texture instead (issue #356,
+tools/train/monorail_wear.py, written next to the GLB as monorail-wear.webp), and the skin's colour alpha says which
+faces are bare stainless.
 
   python3 tools/gpu_priority.py run monorail --rank render -- blender -b --factory-startup -P tools/train/monorail.py -- game3d/assets/train/monorail.glb [where to save the .blend]
 
@@ -18,6 +20,10 @@ export_yup off so the game reads the coordinates as written. The car's numbers a
 """
 import bpy, bmesh, math, os, random, sys
 from mathutils import Vector
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import monorail_wear as wear  # noqa: E402  the car skin's baked wear texture
+wear.K = globals()  # the car's numbers below, read when the skin is unwrapped and baked
 
 argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 OUT = os.path.abspath(argv[0] if argv else 'game3d/assets/train/monorail.glb')
@@ -211,7 +217,8 @@ def bisect(ob, planes, pick=None):
 
 
 def paint(ob, colour_of, smooth_angle=35):
-    """One colour per face corner: colour_of(face_centre, face_normal, corner_position) -> rgb (sRGB).
+    """One colour per face corner: colour_of(face_centre, face_normal, corner_position) -> rgb (sRGB), or rgba where
+    the alpha is the car skin's metal class (1 bare stainless, 0 paint and rubber; train/models.js reads it).
     Faces are smooth with sharp edges over smooth_angle degrees."""
     bm = bmesh.new()
     bm.from_mesh(ob.data)
@@ -222,8 +229,9 @@ def paint(ob, colour_of, smooth_angle=35):
         f.smooth = True
         c, n = f.calc_center_median(), f.normal
         for lp in f.loops:
-            r, g, b = colour_of(c, n, lp.vert.co)
-            lp[cl] = (srgb_to_lin(r), srgb_to_lin(g), srgb_to_lin(b), 1.0)
+            col = colour_of(c, n, lp.vert.co)
+            r, g, b = col[:3]
+            lp[cl] = (srgb_to_lin(r), srgb_to_lin(g), srgb_to_lin(b), col[3] if len(col) > 3 else 1.0)
     for e in bm.edges:
         if len(e.link_faces) == 2 and e.calc_face_angle(0) > lim:
             e.smooth = False
@@ -261,57 +269,56 @@ def plan_grad(x, z):
     return gx / l, gz / l
 
 
-def weather_side(p):
-    """Darkening factor for the car's sides at a point: streaks under the window corners and from the roof edge,
-    grime low down, a faint mottle."""
-    x, y, z = p.x, p.y, p.z
-    d = 0.0
-    if y < WIN_Y0 + 0.01:
-        for xs in WIN_STREAKS:
-            k = math.exp(-((x - xs) / 0.03) ** 2)
-            if k > 0.01:
-                d += 0.2 * k * max(0.0, 1 - (WIN_Y0 - y) / 0.36)
-    for xd in DRIPS:
-        k = math.exp(-((x - xd) / 0.028) ** 2)
-        if k > 0.01:
-            d += 0.15 * k * max(0.0, 1 - (GUTTER[0] - y) / DRIP_LEN[xd]) * (1 if y < GUTTER[0] else 0)
-    d += 0.1 * max(0.0, 1 - y / 0.22)  # road dust low on the body
-    d += 0.06 * (fbm(x * 0.9 + (3 if z > 0 else 0), y * 2.2, 3) - 0.5)
-    return max(0.72, 1 - d)
-
-
 def door_band(x, y, z):
     if z < 0:
         return False
     return any(x0 - 0.065 < x < x1 + 0.065 for x0, x1 in DOORS) and y < DOOR_TOP + 0.065
 
 
-def skin_colour(c, n, p):
-    sd = plan_sd(c.x, c.z)
+def metal(c):
+    return (*c, 1.0)
+
+
+def paint_(c):
+    return (*c, 0.0)
+
+
+def skin_part(c, n):
+    """Which part of the skin a face is: 'roof', 'side' (the outer walls), 'inner' or 'reveal'."""
     gx, gz = plan_grad(c.x, c.z)
-    horiz = n.x * gx + n.z * gz
-    if n.y > 0.75:  # roof
+    if n.y > 0.75:
+        return 'roof'
+    if plan_sd(c.x, c.z) < -SKIN + 0.012 or n.y < -0.75:  # inside faces, the ceiling, the bottom rim
+        return 'inner'
+    if n.x * gx + n.z * gz < 0.6 and c.y < TOP - 0.2:  # reveals of the window, door and gangway openings
+        return 'reveal'
+    return 'side'
+
+
+def skin_colour(c, n, p):
+    """Flat colours only; the weathering is in the baked wear texture (monorail_wear.py)."""
+    part = skin_part(c, n)
+    if part == 'roof':
         if any(abs(c.x - s) < 0.007 for s in ROOF_SEAMS):
-            return mul(C['seam'], 1.1)
-        k = 1 - 0.09 * (fbm(p.x * 0.6, p.z * 1.4, 11) - 0.5) - 0.06 * max(0.0, 1 - abs(p.z) / 0.4)
-        return mul(C['roof'], k)
-    if sd < -SKIN + 0.012 or n.y < -0.75:  # inside faces, the ceiling, the bottom rim
-        return C['inner']
-    if horiz < 0.6 and c.y < TOP - 0.2:  # reveals of the window, door and gangway openings
-        return C['frame']
+            return metal(mul(C['seam'], 1.1))
+        return metal(C['roof'])
+    if part == 'inner':
+        return paint_(C['inner'])
+    if part == 'reveal':
+        return paint_(C['frame'])
     y = c.y
     if GUTTER[0] < y < GUTTER[1]:
-        return C['gutter']
+        return metal(C['gutter'])
     if y > GUTTER[1]:  # the roof's rounded shoulder
-        return mul(C['roof'], 1.02)
+        return metal(mul(C['roof'], 1.02))
     if door_band(c.x, y, c.z):
-        return C['surround']
+        return paint_(C['surround'])
     if STRIPE[0] < y < STRIPE[1]:
-        return mul(C['navy'], 0.95 + 0.1 * fbm(p.x, 1, 5))
+        return paint_(C['navy'])
     seam = abs(y - SEAM_Y) < 0.006 or (abs(c.z) > HZ - 0.05 and any(abs(c.x - s) < 0.006 for s in SEAMS_X))
     if seam:
-        return C['seam']
-    return mul(C['steel'], weather_side(p))
+        return metal(C['seam'])
+    return metal(C['steel'])
 
 
 def build_skin():
@@ -330,43 +337,33 @@ def build_skin():
         cutters.append(prism('g', rrect(0, (0.035 + 1.24) / 2, 0.8, 1.24 - 0.035, 0.07), 'x',
                              side * (HX - 0.3), side * (HX + 0.3)))
     boolean_cut(body, cutters)
-    # cut lines for the colours: crisp bands (stripe, seams, gutter, door surrounds) and a grid fine enough for the
-    # weathering, on the outer faces only
-    xs = set(round(-HX + 0.82 * i, 4) for i in range(int(2 * HX / 0.82) + 1))
+    # cut lines for the colours' crisp bands (stripe, seams, gutter, door surrounds), on the outer faces only; the
+    # weathering is in the wear texture, so no grid for it
+    xs = set()
     for s in SEAMS_X:
         xs |= {s - 0.006, s + 0.006}
     for s in ROOF_SEAMS:
         xs |= {s - 0.007, s + 0.007}
     for x0, x1 in DOORS:
         xs |= {x0 - 0.065, x1 + 0.065}
-    for xs_ in WIN_STREAKS:
-        xs |= {xs_ - 0.04, xs_, xs_ + 0.04}
-    for xd in DRIPS:
-        xs |= {xd - 0.035, xd, xd + 0.035}
-    ys = {STRIPE[0], STRIPE[1], GUTTER[0], GUTTER[1], SEAM_Y - 0.006, SEAM_Y + 0.006, DOOR_TOP + 0.065, 0.06, 0.12, 0.22}
-    ys_far = set(ys)
-    xs_far = {x for s in SEAMS_X for x in (s - 0.006, s + 0.006)} | {x for s in WIN_STREAKS for x in (s - 0.04, s, s + 0.04)}
-    ys |= {0.7, 1.0}
+    ys = {STRIPE[0], STRIPE[1], GUTTER[0], GUTTER[1], SEAM_Y - 0.006, SEAM_Y + 0.006, DOOR_TOP + 0.065}
 
     def outer(f):
         c = f.calc_center_median()
         return plan_sd(c.x, c.z) > -0.02 and abs(f.normal.y) < 0.75 and c.y < GUTTER[1] + 0.01
 
-    def roof(f):
-        return f.normal.y > 0.75
+    def outer_or_roof(f):
+        return outer(f) or f.normal.y > 0.75
 
-    def near(f):  # the platform side, the ends and the roof: what the cameras see; the far side gets the lines only
-        return (outer(f) or roof(f)) and f.calc_center_median().z > -HZ + 0.4
+    def end(f):  # the ends' outer faces, split at z = 0 where the wear texture's two side strips meet
+        c = f.calc_center_median()
+        return plan_sd(c.x, c.z) > -0.02 and abs(c.x) > HX - RP and f.normal.y < 0.75
 
-    def far(f):
-        return outer(f) and f.calc_center_median().z <= -HZ + 0.4
-
-    bisect(body, [((x, 0, 0), (1, 0, 0)) for x in sorted(xs) if abs(x) < HX - 1e-3], near)
-    bisect(body, [((x, 0, 0), (1, 0, 0)) for x in sorted(xs_far) if abs(x) < HX - 1e-3], far)
-    bisect(body, [((0, y, 0), (0, 1, 0)) for y in sorted(ys)], lambda f: outer(f) and not far(f))
-    bisect(body, [((0, y, 0), (0, 1, 0)) for y in sorted(ys_far)], far)
-    bisect(body, [((0, 0, z), (0, 0, 1)) for z in (-0.9, -0.45, 0.45, 0.9)], roof)
+    bisect(body, [((x, 0, 0), (1, 0, 0)) for x in sorted(xs) if abs(x) < HX - 1e-3], outer_or_roof)
+    bisect(body, [((0, y, 0), (0, 1, 0)) for y in sorted(ys)], outer)
+    bisect(body, [((0, 0, 0), (0, 0, 1))], end)
     paint(body, skin_colour)
+    wear.unwrap(body, lambda c, n: skin_part(c, n))
     parts = [body]
 
     # window frames: a thick dark gasket, a little proud of the skin, reaching into the opening
@@ -377,7 +374,8 @@ def build_skin():
             i = rrect(x, cy, w - 0.07, h - 0.07, WIN_R - 0.03, 3)
             d0, d1 = (HZ - 0.05, HZ + 0.009) if side > 0 else (-HZ - 0.009, -HZ + 0.05)
             fr = prism('frame', o, 'z', d0, d1, inner=i)
-            paint(fr, lambda c, n, p: C['frame'])
+            paint(fr, lambda c, n, p: paint_(C['frame']))
+            wear.patch(fr, 'matte')
             parts.append(fr)
     # roof units: two air-conditioning housings with louvred tops and grilles on their sides
     for x in (-2.15, 2.15):
@@ -386,27 +384,31 @@ def build_skin():
 
         def unit_col(c, n, p, x=x):
             if abs(n.y) < 0.5 and TOP + 0.04 < c.y < TOP + 0.1 and abs(c.x - x) < 0.6:
-                return C['louvre']  # side grille band
-            return mul(C['unit'], 1 - 0.05 * (fbm(p.x * 2, p.z * 2, 21) - 0.5))
+                return paint_(C['louvre'])  # side grille band
+            return metal(mul(C['unit'], 1 - 0.05 * (fbm(p.x * 2, p.z * 2, 21) - 0.5)))
 
         u.location.x = x
         apply_loc(u)
         paint(u, unit_col)
+        wear.patch(u, 'metal')
         parts.append(u)
         lv = prism('louvre', rrect(x, 0, 1.06, 0.66, 0.04), 'y', TOP + 0.13, TOP + 0.155)
-        paint(lv, lambda c, n, p: C['louvre'])
+        paint(lv, lambda c, n, p: paint_(C['louvre']))
+        wear.patch(lv, 'matte')
         parts.append(lv)
         for k in range(8):
             sx = x - 0.45 + k * (0.9 / 7)
             sl = prism('slat', rrect(sx, 0, 0.045, 0.6, 0.01), 'y', TOP + 0.13, TOP + 0.17)
-            paint(sl, lambda c, n, p: C['slat'])
+            paint(sl, lambda c, n, p: metal(C['slat']))
+            wear.patch(sl, 'metal')
             parts.append(sl)
     # small vents fore and aft on the roof's centre line
     for x in (-3.55, 0.0, 3.55):
         v = rounded_box('vent', 0.22, 0.16, TOP - 0.02, TOP + 0.06, 0.04, r_top=0.02, seg=2)
         v.location.x = x
         apply_loc(v)
-        paint(v, lambda c, n, p: C['louvre'] if abs(n.y) < 0.5 else C['unit'])
+        paint(v, lambda c, n, p: paint_(C['louvre']) if abs(n.y) < 0.5 else metal(C['unit']))
+        wear.patch(v, 'metal')
         parts.append(v)
     return join(parts, 'car_skin')
 
@@ -668,6 +670,7 @@ def material():
 
 def main():
     nodes = [build_skin(), build_under(), build_bellows(), build_beam(), build_pillar(), build_foot()]
+    wear.bake(nodes[0], nodes[1:2], nodes[2:], os.path.join(os.path.dirname(OUT), 'monorail-wear.webp'))
     m = material()
     for ob in nodes:
         ob.data.materials.clear()
@@ -681,7 +684,7 @@ def main():
             bpy.data.objects.remove(o)
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     bpy.ops.export_scene.gltf(filepath=OUT, export_format='GLB', export_yup=False, export_apply=True,
-                              export_vertex_color='MATERIAL', export_normals=True, export_texcoords=False,
+                              export_vertex_color='MATERIAL', export_normals=True, export_texcoords=True,
                               export_materials='EXPORT', use_selection=False)
     byte_colours(OUT)
     if len(argv) > 1:

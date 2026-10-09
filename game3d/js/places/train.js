@@ -28,7 +28,7 @@ import {
   mat as carMat,
 } from '../train/car.js';
 import { buildDoorSets, lampShut, lampOpen } from '../train/doors.js';
-import { loadMonorail } from '../train/models.js';
+import { loadMonorail, SUN_DIR } from '../train/models.js';
 import { swingStraps } from '../train/straps.js';
 import { buildPassengers, sit, armsHold } from '../train/people.js';
 import { makeCat } from '../creatures/cat.js';
@@ -77,7 +77,6 @@ export async function trainPlace(game) {
   scene.background = new THREE.Color('#3f5a6b');
 
   // light: a slightly dimmer, cooler car with warm low sun through the far windows
-  const SUN_DIR = new THREE.Vector3(-0.45, 0.62, -0.75).normalize();
   scene.add(new THREE.HemisphereLight('#c3ccd8', '#8a8078', 1.9));
   const sun = new THREE.DirectionalLight('#ffc98f', 5.6);
   sun.position.copy(SUN_DIR).multiplyScalar(22);
