@@ -17,7 +17,7 @@ function fixture(t, initial = { [ASSET]: 'old locked bytes' }) {
   t.after(() => fs.rmSync(base, { recursive: true, force: true }));
   const main = path.join(base, 'main'), task = path.join(base, 'task');
   fs.mkdirSync(main);
-  const env = { ...isolatedGitEnvironment(), LAND_TEST_LOCK: path.join(base, 'land.lock'), LAND_WAIT: '0' };
+  const env = { ...isolatedGitEnvironment(), LAND_LOCK: path.join(base, 'land.lock'), LAND_WAIT: '0' };
   const git = (cwd, ...args) => execFileSync('git', args, { cwd, env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
   const write = (root, file, text) => {
     fs.mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
@@ -27,10 +27,9 @@ function fixture(t, initial = { [ASSET]: 'old locked bytes' }) {
   git(main, 'config', 'user.name', 'Fixture');
   git(main, 'config', 'user.email', 'fixture@example.invalid');
   git(main, 'config', 'core.hooksPath', '/dev/null');
-  const script = fs.readFileSync(new URL('../../../tools/land.sh', import.meta.url), 'utf8');
-  // A fixture must never acquire the operational repository's landing lock.
-  assert(script.includes('LOCK=/tmp/claude-1000/land.lock'));
-  write(main, 'tools/land.sh', script.replace('LOCK=/tmp/claude-1000/land.lock', 'LOCK="$LAND_TEST_LOCK"'));
+  // The land tool itself; LAND_LOCK keeps the fixture off the operational repository's landing lock.
+  for (const file of ['land.sh', 'land/land.mjs', 'land/runner.mjs', 'land/queue.mjs', 'land/impact.mjs'])
+    write(main, `tools/${file}`, fs.readFileSync(new URL(`../../../tools/${file}`, import.meta.url), 'utf8'));
   write(main, 'tools/check/landed-assets.mjs', fs.readFileSync(new URL('../../../tools/check/landed-assets.mjs', import.meta.url), 'utf8'));
   const lock = (root, files) => write(root, LOCK, JSON.stringify({ files: Object.fromEntries(
     Object.entries(files).map(([file, text]) => [file, record(text)]),
@@ -91,7 +90,7 @@ test('landing verifies task copies and fails loudly after landing if main has un
   assert.equal(fs.readFileSync(path.join(main, 'notes/change.md'), 'utf8'), 'Candidate documentation.\n');
   assert(fs.existsSync(task));
   assert.equal(git(main, 'rev-parse', 'task'), candidate);
-  assert(!fs.existsSync(env.LAND_TEST_LOCK));
+  assert(!fs.existsSync(env.LAND_LOCK));
 });
 
 test('new, missing and changed locked bytes survive source removal and the next staged CPU check', async t => {
