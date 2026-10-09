@@ -2,7 +2,7 @@
  "title": "Background music: longer pieces for each part of the day and the island",
  "date": "2026-10-09",
  "by": "claude-agent:music",
- "status": "open",
+ "status": "decided",
  "context": [
   "This is background music for the game. Today the game has four short loops of about 30 seconds each, and one of them (the calm train loop) plays almost everywhere: the title menu, the train and nearly every outdoor place and shop. That is the loop that repeats so often.",
   "The seam you heard on the title menu is fixed in the game already (commit 8f9654b7): the loops no longer jump at the point where they start over. These new pieces are the second part of the job.",
@@ -194,5 +194,8 @@
    "label": "Work issue #371",
    "href": "https://github.com/fumbleforce/tower-of-words/issues/371"
   }
- ]
+ ],
+ "decision": "All 28 rejected: \"all of these sound godawful, like a kindergarden level quality compared to the original full bodied melodic intro melody. totally unusable\". Local ACE-Step is out; next round uses Lyria 2 (the source of the current tracks), sections joined into 2-3 min loops.",
+ "decided_at": "2026-10-09T14:02:57+0200",
+ "issue": 371
 }
