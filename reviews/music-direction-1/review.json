@@ -2,14 +2,35 @@
  "title": "Music: what to build the next tracks from",
  "date": "2026-10-09",
  "by": "claude-main",
- "status": "open",
+ "status": "decided",
  "multi": false,
  "question": "You asked what made the current music sound better than the new rounds. The full-bodied intro is the opening theme: a complete song with vocals, made locally with YuE2 and mastered (art/approved/music/opening.mp3). The background loops, including the menu's 'calm', are short 30-second Lyria 2 clips. Rounds 3 to 5 tried to reach the opening theme's fullness with short instrumental loops (local ACE-Step, then Lyria 3 Pro), and fell short. Your round-5 picks (evening-2, office-2, shops-1) are kept as fallbacks. Which direction for the next round? Budget: about $14 left on Replicate; options 1 and 2 run locally at no cost.",
  "options": [
-  {"id": "from-opening", "label": "Build from the opening theme", "note": "Recommended. Take the opening theme's melody and sound: its instrumental with the vocals removed (Demucs) for the title, plus instrumental variations of it made with YuE2 (the instrumental add-on that stops the singing) for day, evening, office and shops. In September the best local result was YuE2 with the voice removed. Local, no cost; at most 5 pieces."},
-  {"id": "yue2-new", "label": "New YuE2 instrumentals in the opening's style", "note": "Same model and style tags as the opening theme, but new pieces rather than variations of its melody. Local, no cost; at most 5 pieces."},
-  {"id": "lyria-more", "label": "Keep trying Lyria 3 Pro with new prompts", "note": "About $0.10 a piece. Rounds 4 and 5 used this; quality was fine but the pieces didn't land."},
-  {"id": "use-fallbacks", "label": "Use the round-5 fallbacks for now", "note": "Put evening-2, office-2 and shops-1 in the game now, and leave the title and day music as they are."}
+  {
+   "id": "from-opening",
+   "label": "Build from the opening theme",
+   "note": "Recommended. Take the opening theme's melody and sound: its instrumental with the vocals removed (Demucs) for the title, plus instrumental variations of it made with YuE2 (the instrumental add-on that stops the singing) for day, evening, office and shops. In September the best local result was YuE2 with the voice removed. Local, no cost; at most 5 pieces."
+  },
+  {
+   "id": "yue2-new",
+   "label": "New YuE2 instrumentals in the opening's style",
+   "note": "Same model and style tags as the opening theme, but new pieces rather than variations of its melody. Local, no cost; at most 5 pieces."
+  },
+  {
+   "id": "lyria-more",
+   "label": "Keep trying Lyria 3 Pro with new prompts",
+   "note": "About $0.10 a piece. Rounds 4 and 5 used this; quality was fine but the pieces didn't land."
+  },
+  {
+   "id": "use-fallbacks",
+   "label": "Use the round-5 fallbacks for now",
+   "note": "Put evening-2, office-2 and shops-1 in the game now, and leave the title and day music as they are."
+  }
  ],
- "issue": 371
+ "issue": 371,
+ "decided": [
+  "yue2-new"
+ ],
+ "decision": "New YuE2 instrumentals in the opening's style (yue2-new); round 6 posted as music-round-6",
+ "decided_at": "2026-10-10T00:53:10+0200"
 }
