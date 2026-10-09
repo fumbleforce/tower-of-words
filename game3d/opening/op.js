@@ -248,6 +248,7 @@ ui.lyrics.addEventListener('click', () => {
 });
 async function play() {
   await ready;
+  if (ended) return; // skipped while it was loading
   ui.start.hidden = true;
   document.body.classList.add('playing');
   audio.currentTime = tOffset;
@@ -256,6 +257,11 @@ async function play() {
   } catch (e) {
     console.warn('audio', e);
     // no sound allowed: run on the wall clock
+  }
+  if (ended) {
+    // skipped while the sound was starting
+    audio.pause();
+    return;
   }
   playing = true;
   t0wall = performance.now();

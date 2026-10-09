@@ -119,7 +119,14 @@ export function buildIsland(uniforms, { joinX, seaY }) {
       }
     }
     const ico = new THREE.DodecahedronGeometry(1, 0);
-    const im = new THREE.InstancedMesh(ico, solidMaterial(uniforms, '#8c96a3', 0.00014), rocks.length);
+    const rockTint = new Float32Array(rocks.length * 3);
+    const greys = ['#8c96a3', '#7f8a98', '#99a2ad'].map((h) => new THREE.Color(h));
+    rocks.forEach((rk, i) => {
+      const c = greys[i % 3];
+      rockTint.set([c.r, c.g, c.b], i * 3);
+    });
+    ico.setAttribute('aTint', new THREE.InstancedBufferAttribute(rockTint, 3));
+    const im = new THREE.InstancedMesh(ico, solidInstancedMaterial(uniforms, 0.00014), rocks.length);
     const m4 = new THREE.Matrix4(),
       q = new THREE.Quaternion(),
       e = new THREE.Euler();
