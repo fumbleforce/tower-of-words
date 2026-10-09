@@ -24,7 +24,7 @@
   }
  },
  "comment": "if you work in current comments that should be enough",
- "read": false,
+ "read": true,
  "history": [
   {
    "sent": "2026-10-09T15:08:55+0200",
