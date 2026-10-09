@@ -2,7 +2,7 @@
  "title": "Background music: longer pieces for each part of the day and the island",
  "date": "2026-10-09",
  "by": "claude-agent:music",
- "status": "decided",
+ "status": "superseded",
  "context": [
   "This is background music for the game. Today the game has four short loops of about 30 seconds each, and one of them (the calm train loop) plays almost everywhere: the title menu, the train and nearly every outdoor place and shop. That is the loop that repeats so often.",
   "The seam you heard on the title menu is fixed in the game already (commit 8f9654b7): the loops no longer jump at the point where they start over. These new pieces are the second part of the job.",
