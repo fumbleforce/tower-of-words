@@ -57,6 +57,20 @@ export async function loadPortraits(names) {
   );
 }
 
+// Pictures made for the opening itself (the window seats); missing ones are simply left out and the shot falls
+// back to the portrait.
+export async function loadOptional(map) {
+  await Promise.all(
+    Object.entries(map).map(async ([key, file]) => {
+      try {
+        IMG[key] = await loadImg(new URL(`../assets/opening/${file}`, import.meta.url).href);
+      } catch {
+        /* not made yet */
+      }
+    }),
+  );
+}
+
 // Derived versions of a portrait, made once and kept: a flat silhouette in a colour, and an outline ring.
 const derived = new Map();
 function canvasOf(w, h) {

@@ -8,7 +8,7 @@
 import * as THREE from 'three';
 import { makeCompositor } from './compositor.js';
 import { buildStage } from './stage.js';
-import { loadPortraits, W, H, clamp } from './paint.js';
+import { loadPortraits, loadOptional, W, H, clamp } from './paint.js';
 import { CAST } from './cast.js';
 import { END, beat, BEAT } from './timeline.js';
 import { SHOTS } from './shots/index.js';
@@ -76,7 +76,11 @@ async function loadFonts() {
 let stage = null,
   shots = [];
 const ready = (async () => {
-  await Promise.all([loadFonts(), loadPortraits(CAST.portraits())]);
+  await Promise.all([
+    loadFonts(),
+    loadPortraits(CAST.portraits()),
+    loadOptional({ 'win-eric': 'window/eric-window.webp', 'win-mio-phone': 'window/mio-window-phone.webp', 'win-mio-look': 'window/mio-window-look.webp' }),
+  ]);
   stage = await buildStage(renderer);
   shots = SHOTS.map((s) => ({ ...s }));
   for (const s of shots) s.setup?.(stage);

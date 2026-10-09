@@ -67,7 +67,8 @@ vec3 shafts(sampler2D t, vec2 uv, vec3 f) {
   for (int i = 0; i < 28; i++) {
     p += d;
     vec3 c = textureLod(t, clamp(p, 0.0, 1.0), 2.0).rgb;
-    acc += max(c - 0.8, 0.0) * w;
+    float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
+    acc += vec3(1.0, 0.94, 0.84) * max(l - 0.95, 0.0) * w;
     w *= 0.95;
   }
   return acc / 28.0 * f.z * 2.4;

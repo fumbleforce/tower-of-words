@@ -61,8 +61,10 @@ export const VERSE = [
     t: [HIT.verse - 0.2, beat(40)],
     in: { type: 'whip', d: 0.34, at: 0.5 },
     setup(S) {
-      S.seat('eric', IMG['eric-neutral'], 1, -0.86, { h: 1.42, y: -0.02 });
-      S.seat('mio', IMG['mio-phone'], 2, -0.86, { h: 1.36, y: 0.0 });
+      // the window-seat pictures when they're there (just inside the glass, in front of the bench back), else the
+      // base portraits
+      S.seat('eric', IMG['win-eric'] || IMG['eric-neutral'], 1, -0.86, IMG['win-eric'] ? { h: 1.25, y: -0.04, z: 1.235 } : { h: 1.42, y: -0.02 });
+      S.seat('mio', IMG['win-mio-phone'] || IMG['mio-phone'], 2, -0.86, IMG['win-mio-phone'] ? { h: 1.15, y: 0.17, z: 1.235 } : { h: 1.36, y: 0.0 });
     },
     scene3d(S, lt, T) {
       windowShot(S, T, lt, 1, -0.86, { dist: 3.0 });
@@ -80,8 +82,8 @@ export const VERSE = [
     scene3d(S, lt, T) {
       const x = 660 + lt * TRAIN_V;
       S.setTrain(x - 400); // out of this view
-      const yaw = 0.42 - lt * 0.03;
-      S.look([x, 1.0, 1.1], [x + Math.cos(yaw) * 100, 1.0 - 2.2, Math.sin(-yaw) * -100], 34);
+      const yaw = 0.38 - lt * 0.02;
+      S.look([x, 1.3, 1.4], [x + Math.cos(yaw) * 100, 1.3 - 2.6, Math.sin(-yaw) * -100], 34);
     },
     draw(g, lt, T, S) {
       // the window frame we look through
@@ -126,7 +128,8 @@ export const VERSE = [
     scene3d(S, lt, T) {
       const look = lt >= beat(58) - beat(56);
       const m = S.riders.mio;
-      const want = look ? IMG['mio-deadpan'] : IMG['mio-phone'];
+      const phone = IMG['win-mio-phone'] || IMG['mio-phone'];
+      const want = look ? IMG['win-mio-look'] || (IMG['win-mio-phone'] ? phone : IMG['mio-deadpan']) : phone;
       if (m.material.map.image !== want) {
         m.material.map = S.riderTex(want);
       }
