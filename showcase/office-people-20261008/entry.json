@@ -3,7 +3,7 @@
   "date": "2026-10-08",
   "by": "codex",
   "caption": "The two stationary station workers, three commuters and lift Sales pair use the approved office models. Native queue gestures and the carried parcel follow their skeletons. Other background categories remain a separate task.",
-  "preview": "route-1-1366-ride-2",
+  "preview": "neutral-native-390-ride-2",
   "sections": [
     {
       "title": "Original procedural workers",
@@ -463,6 +463,324 @@
           "caption": "Phone, 390 × 844: ride B2."
         }
       ]
+    },
+    {
+      "title": "Restart verification on preserved source",
+      "caption": "Phone 390 × 844. The tracked checker followed the station queue and completed the lift ride on the preserved implementation before rebasing.",
+      "images": [
+        {
+          "id": "resume-preserved-390-gate-native",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-gate-native.png",
+          "caption": "gate native. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-gate-queue",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-gate-queue.png",
+          "caption": "gate queue. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-gate-tap",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-gate-tap.png",
+          "caption": "gate tap. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-gate-through",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-gate-through.png",
+          "caption": "gate through. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-ride-1",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-ride-1.png",
+          "caption": "ride 1. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-ride-2",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-ride-2.png",
+          "caption": "ride 2. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-ride-3",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-ride-3.png",
+          "caption": "ride 3. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-ride-4",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-ride-4.png",
+          "caption": "ride 4. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-ride-5",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-ride-5.png",
+          "caption": "ride 5. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-ride-B1",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-ride-B1.png",
+          "caption": "ride B1. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-ride-B2",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-ride-B2.png",
+          "caption": "ride B2. Native player camera."
+        },
+        {
+          "id": "resume-preserved-390-arrived-office",
+          "image": "game3d/shots/office-people-20261008/resume-preserved-390/390-arrived-office.png",
+          "caption": "arrived office. Native player camera."
+        }
+      ]
+    },
+    {
+      "title": "Rebased full-day desktop check",
+      "caption": "The day completed with no overlap or spin errors. Strict movement checks failed on four ambient or named people outside the seven replacement roles. This attempt is retained for comparison with the unchanged baseline.",
+      "images": [
+        {
+          "id": "resume-strict-1366-failed",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/strict-1366-failed/1366x860.png",
+          "caption": "Desktop 1366 × 860, final day screen from the failed strict movement check."
+        }
+      ]
+    },
+    {
+      "title": "Rebased full-day phone check",
+      "caption": "The strict phone check completed the day with no movement or page errors.",
+      "images": [
+        {
+          "id": "resume-strict-390-passed",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/strict-390-passed/390x844.png",
+          "caption": "Phone 390 × 844, final day screen."
+        }
+      ]
+    },
+    {
+      "title": "Native route before queue-neutral correction",
+      "caption": "Phone 390 × 844 on the rebased implementation. The check verified the selected models and finite poses for all seven roles. Commuters passed through the gate, and the player completed the lift ride to B2. A later source review found that queued commuters kept their shoulders raised after the gate opened. These captures predate that correction.",
+      "images": [
+        {
+          "id": "resume-native-390-gate-native",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-gate-native.png",
+          "caption": "gate native. Native player camera."
+        },
+        {
+          "id": "resume-native-390-gate-queue",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-gate-queue.png",
+          "caption": "gate queue. Native player camera."
+        },
+        {
+          "id": "resume-native-390-gate-tap",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-gate-tap.png",
+          "caption": "gate tap. Native player camera."
+        },
+        {
+          "id": "resume-native-390-gate-through",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-gate-through.png",
+          "caption": "gate through. Native player camera."
+        },
+        {
+          "id": "resume-native-390-ride-1",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-ride-1.png",
+          "caption": "ride 1. Native player camera."
+        },
+        {
+          "id": "resume-native-390-ride-2",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-ride-2.png",
+          "caption": "ride 2. Native player camera."
+        },
+        {
+          "id": "resume-native-390-ride-3",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-ride-3.png",
+          "caption": "ride 3. Native player camera."
+        },
+        {
+          "id": "resume-native-390-ride-4",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-ride-4.png",
+          "caption": "ride 4. Native player camera."
+        },
+        {
+          "id": "resume-native-390-ride-5",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-ride-5.png",
+          "caption": "ride 5. Native player camera."
+        },
+        {
+          "id": "resume-native-390-ride-B1",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-ride-B1.png",
+          "caption": "ride B1. Native player camera."
+        },
+        {
+          "id": "resume-native-390-ride-B2",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-ride-B2.png",
+          "caption": "ride B2. Native player camera."
+        },
+        {
+          "id": "resume-native-390-arrived-office",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/native-390/390-arrived-office.png",
+          "caption": "arrived office. Native player camera."
+        }
+      ]
+    },
+    {
+      "title": "Unchanged desktop baseline comparison",
+      "caption": "The same strict day test passed on commit 8325fae4 without this office change. It did not reproduce the four movement episodes from the earlier candidate run. Those intermittent episodes remain with issue #319.",
+      "images": [
+        {
+          "id": "resume-baseline-1366-passed",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/baseline-1366-passed/1366x860.png",
+          "caption": "Desktop 1366 × 860, unchanged baseline final day screen."
+        }
+      ]
+    },
+    {
+      "title": "Corrected station and lift route",
+      "caption": "Phone 390 × 844 after correcting the queue shoulders. The checker verified all seven selected bodies and finite poses, the commuters passed through the gate, and the player completed the lift ride to B2.",
+      "images": [
+        {
+          "id": "neutral-native-390-gate-native",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-gate-native.png",
+          "caption": "gate native. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-gate-queue",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-gate-queue.png",
+          "caption": "gate queue. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-gate-tap",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-gate-tap.png",
+          "caption": "gate tap. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-gate-through",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-gate-through.png",
+          "caption": "gate through. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-ride-1",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-ride-1.png",
+          "caption": "ride 1. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-ride-2",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-ride-2.png",
+          "caption": "ride 2. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-ride-3",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-ride-3.png",
+          "caption": "ride 3. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-ride-4",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-ride-4.png",
+          "caption": "ride 4. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-ride-5",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-ride-5.png",
+          "caption": "ride 5. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-ride-B1",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-ride-B1.png",
+          "caption": "ride B1. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-ride-B2",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-ride-B2.png",
+          "caption": "ride B2. Native player camera."
+        },
+        {
+          "id": "neutral-native-390-arrived-office",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-native-390/390-arrived-office.png",
+          "caption": "arrived office. Native player camera."
+        }
+      ]
+    },
+    {
+      "title": "Corrected queue and parcel close-up",
+      "caption": "Actual phone route with a diagnostic camera following the carrier in the station. The entrance and tapping views are partly obscured. The queue and passage views show the hand and level parcel. The lift uses the native camera.",
+      "images": [
+        {
+          "id": "neutral-parcel-390-gate-native",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-gate-native.png",
+          "caption": "gate native. Native player camera."
+        },
+        {
+          "id": "neutral-parcel-390-gate-in",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-gate-in.png",
+          "caption": "gate in. Diagnostic carrier camera."
+        },
+        {
+          "id": "neutral-parcel-390-gate-toqueue",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-gate-toqueue.png",
+          "caption": "gate toqueue. Diagnostic carrier camera."
+        },
+        {
+          "id": "neutral-parcel-390-gate-queue",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-gate-queue.png",
+          "caption": "gate queue. Diagnostic carrier camera."
+        },
+        {
+          "id": "neutral-parcel-390-gate-tap",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-gate-tap.png",
+          "caption": "gate tap. Diagnostic carrier camera."
+        },
+        {
+          "id": "neutral-parcel-390-gate-through",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-gate-through.png",
+          "caption": "gate through. Diagnostic carrier camera."
+        },
+        {
+          "id": "neutral-parcel-390-ride-1",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-ride-1.png",
+          "caption": "ride 1. Native player camera."
+        },
+        {
+          "id": "neutral-parcel-390-ride-2",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-ride-2.png",
+          "caption": "ride 2. Native player camera."
+        },
+        {
+          "id": "neutral-parcel-390-ride-3",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-ride-3.png",
+          "caption": "ride 3. Native player camera."
+        },
+        {
+          "id": "neutral-parcel-390-ride-4",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-ride-4.png",
+          "caption": "ride 4. Native player camera."
+        },
+        {
+          "id": "neutral-parcel-390-ride-5",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-ride-5.png",
+          "caption": "ride 5. Native player camera."
+        },
+        {
+          "id": "neutral-parcel-390-ride-B1",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-ride-B1.png",
+          "caption": "ride B1. Native player camera."
+        },
+        {
+          "id": "neutral-parcel-390-ride-B2",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-ride-B2.png",
+          "caption": "ride B2. Native player camera."
+        },
+        {
+          "id": "neutral-parcel-390-arrived-office",
+          "image": "game3d/shots/office-people-20261008/neutral-parcel-390-1/390-arrived-office.png",
+          "caption": "arrived office. Native player camera."
+        }
+      ]
+    },
+    {
+      "title": "Corrected desktop day check",
+      "caption": "The strict desktop check passed after the queue-neutral correction. No overlap, spin or gait episode was reported. The earlier intermittent movement failures are retained above.",
+      "images": [
+        {
+          "id": "neutral-strict-1366-passed",
+          "image": "game3d/shots/office-people-20261008/resume-20261009/neutral-strict-1366-passed/1366x860.png",
+          "caption": "Desktop 1366 × 860, final day screen."
+        }
+      ]
     }
   ],
   "links": [
@@ -473,11 +791,20 @@
     {
       "label": "Office replacement work",
       "href": "https://github.com/fumbleforce/tower-of-words/issues/353"
+    },
+    {
+      "label": "Verification record (final phone check pending)",
+      "href": "game3d/shots/office-people-20261008/resume-20261009/verification.json"
     }
   ],
   "result": [
-    "route-1-1366-ride-2",
-    "probe-5-390-stationary-detail",
-    "parcel-1-390-parcel-queue-detail"
-  ]
+    "neutral-native-390-ride-2",
+    "neutral-parcel-390-gate-through",
+    "probe-5-390-stationary-detail"
+  ],
+  "commit": [
+    "68e81b2f",
+    "8e94a4de"
+  ],
+  "updated": "2026-10-09T12:44:57+02:00"
 }
