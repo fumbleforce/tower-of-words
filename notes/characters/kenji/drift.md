@@ -12,7 +12,7 @@ Lines not listed are fine as they are. Most are already broken school English ("
 
 | Id | Why | Current | Rewrite |
 |---|---|---|---|
-| `kenji_first` | E, J | {mc.name}-san? I am Kenji! Two months here, so now I am not the newest. Ah, sorry, your chair... I borrowed it. Mine is broken. | 「{mc.name_jp}さんですか？ケンジです。よろしくお願いします。」 [bow] "Ah... chair. Your chair. Sorry. My chair, broken." |
+| `kenji_first` | E | {mc.name}-san? I am Kenji! Two months here, so now I am not the newest. Ah, sorry, your chair... I borrowed it. Mine is broken. | 「{mc.name_jp}さんですか？ケンジです。よろしくお願いします。」 [bow] 「僕、二ヶ月です。だから…僕が先輩？」 [grins, holds up two fingers, then bows quickly] 「冗談です、冗談です。」 "Joke. Sorry." Then: "Ah... chair. Your chair. Sorry. My chair, broken." The joke stays (Jørgen, character-voices-2) as a respectful tease. He laughs at the idea of being senior to Eric and takes it back at once. |
 | `kenji_first` | E | I bring it back for you! It's in machine room, with the cat. Norway has the big forest cats, right? I see on YouTube, they are so big, like... | [point at the machine-room door] "Chair... there. Cat also." Then, brightening: "Norway... big cat? YouTube! Very big..." [hands wide] |
 | `kenji_first` | E | ...Ah, no. Mio-san says I can't go in machine room anymore. Sorry! You go? | 「あ…でも僕、機械室はダメなんです。」 "Mio-san... no. Me, no." 「すみません、{mc.name_jp}さん、お願いします。」 [small bow] |
 | `kenji_again` | E | Chair is okay? If you need anything, I help! Cables, printer, um... I know where is the good tape. My English is very little, but. | 「椅子、大丈夫ですか？」 [points at the drawer] "Tape... good tape, here. I know." "English... very little. Sorry." |
