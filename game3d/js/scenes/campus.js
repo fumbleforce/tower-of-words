@@ -1,5 +1,9 @@
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
+import { applyGround } from '../movement/walk-ground.js';
+import { ground, WALK_AREA } from './campus/ground.js';
+import { walkEdges } from './outdoor/walk-edges.js';
+import { Parts } from './outdoor/parts.js';
 import { outdoorLight, eveningLight, SUN, TOWN } from './town.js';
 import { lightSet } from './outdoor/furniture.js';
 import { northSteps } from './forecourt/north.js';
@@ -21,12 +25,17 @@ export function* campusSteps() {
   scene.add(root);
   const sun = outdoorLight(scene),
     lights = lightSet();
-  const nav = new Nav(P.BOUNDS[0] - 0.3, P.BOUNDS[1] + 0.3, P.BOUNDS[2] - 0.3, P.BOUNDS[3] + 0.3, 0.14);
-  nav.extra = (x, z) => P.WALKS.some((r) => P.inRect(x, z, r)) && !P.SOLIDS.some((r) => P.inRect(x, z, r));
+  // one walkable ground for the walk grid and the kerbs (campus/ground.js)
+  const nav = new Nav(...WALK_AREA, 0.14),
+    walkable = ground();
+  applyGround(nav, walkable);
   for (const r of P.BEDS) nav.block(...P.rect(r));
   nav.block(P.BENCH.x - 1.02, P.BENCH.x + 1.02, P.BENCH.z - 0.34, P.BENCH.z + 0.34);
   const north = yield* northSteps(root, lights, { closed: false });
   yield* campusGrounds(root, lights);
+  const edges = new Parts();
+  walkEdges(edges, walkable);
+  edges.build(root);
   const fronts = campusFronts(root);
   const coast = new THREE.Group();
   root.add(coast);

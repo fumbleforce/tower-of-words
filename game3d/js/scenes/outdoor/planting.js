@@ -213,10 +213,18 @@ export function grass(p, x, z, { h = 0.45, color = '#6d7a58', seed = 1 } = {}) {
 export function bed(p, [x0, x1, z0, z1], { y = 0.1, cover = true, soil = LEAF.mulch, coverTone = LEAF.cover } = {}) {
   p.box(soil, x1 - x0, 0.04, z1 - z0, (x0 + x1) / 2, y - 0.04, (z0 + z1) / 2, { cast: false, surf: 'soil' });
   if (cover) {
-    const i = 0.12;
+    // a bed flush with the lawn (outdoor/walk-edges.js BED_FLUSH) has a thin cover and no dark rim of soil, which both
+    // read as a step or a gap in the lawn
+    const flush = y < 0.02,
+      i = flush ? 0.03 : 0.12,
+      h = flush ? 0.03 : 0.09;
     p.geo(
       coverTone,
-      roundedBox(x1 - x0 - 2 * i, 0.09, z1 - z0 - 2 * i, 1, 0.04).translate((x0 + x1) / 2, y + 0.02, (z0 + z1) / 2),
+      roundedBox(x1 - x0 - 2 * i, h, z1 - z0 - 2 * i, 1, flush ? 0.012 : 0.04).translate(
+        (x0 + x1) / 2,
+        y + h / 2 - 0.025,
+        (z0 + z1) / 2,
+      ),
       {
         cast: false,
         surf: 'foliage',

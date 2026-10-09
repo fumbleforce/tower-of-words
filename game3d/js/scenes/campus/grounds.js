@@ -1,7 +1,7 @@
 import { Parts } from '../outdoor/parts.js';
 import { paver, GRANITE } from '../outdoor/paving.js';
 import { laneField } from '../outdoor/lane.js';
-import { kerb } from '../outdoor/edges.js';
+import { BED_FLUSH } from '../outdoor/walk-edges.js';
 import { cluster, bed } from '../outdoor/planting.js';
 import { lamps, bench, fingerSign } from '../outdoor/furniture.js';
 import { CAMPUS_PATHS } from '../island-campus.js';
@@ -23,14 +23,14 @@ export function* campusGrounds(root, lights) {
   }
   // An open coast connection; its walls and trees are shared with the existing coast builder.
   for (const r of [
-    [-42.6, -40.6, -39, -27.4],
+    [-42.6, -40.6, -39, -25.4], // to the cross path's far side, so their corner is paved too
     [-40.6, -20.75, -27.4, -25.4],
   ]) {
     const a = pt([r[0], r[2]]),
       b = pt([r[1], r[3]]);
     pv.field([a[0], b[0], a[1], b[1]], { pattern: 'bond', module: [0.6, 0.3], tones: GRANITE.pale });
   }
-  // A low planted verge follows the coast path, entirely outside its navigable edge.
+  // A low planted verge follows the coast path, outside its kerb.
   // The cross street at -27.4 remains open; long soil runs are broken by rainwater grates.
   for (const [z0, z1] of [
     [-38.8, -36.6],
@@ -38,9 +38,8 @@ export function* campusGrounds(root, lights) {
     [-31.8, -27.65],
   ]) {
     const a = pt([-43.65, z0]),
-      b = pt([-42.82, z1]);
-    bed(parts, [a[0], b[0], a[1], b[1]], { y: 0.035, cover: false, soil: '#625f49' });
-    kerb(parts, pt([-42.73, z0]), pt([-42.73, z1]), { w: 0.14, h: 0.06 });
+      b = pt([-42.76, z1]); // up to the path's kerb
+    bed(parts, [a[0], b[0], a[1], b[1]], { y: BED_FLUSH, cover: false, soil: '#625f49' });
     for (let z = z0 + 0.3, i = 0; z < z1 - 0.2; z += 0.55, i++) {
       const q = pt([-43.23 + (i % 2 ? 0.13 : -0.13), z]);
       cluster(parts, q[0], q[1], {
@@ -58,19 +57,7 @@ export function* campusGrounds(root, lights) {
     for (let i = 0; i < 5; i++)
       parts.box('#747c73', 0.53, 0.018, 0.018, q[0], 0.038, q[1] - 0.12 + i * 0.06, { cast: false });
   }
-  // Drainage/kerbs flank the new roads, with breaks at cross streets and the print-shop entrance.
-  for (const [x, z0, z1, skip] of [
-    [-20.75, -52.5, -27.4, [[-44.3, -42.3]]],
-    [-17.75, -52.5, -27.4, []],
-    [3, -45.5, -18.1, []],
-    [6, -45.5, -18.1, [[-33, -30]]],
-  ]) {
-    let from = z0;
-    for (const [a, b] of [...skip, [z1, z1]]) {
-      if (a > from) kerb(parts, pt([x, from]), pt([x, a]), { off: x === -20.75 || x === 3 ? -0.08 : 0.08 });
-      from = b;
-    }
-  }
+  // the paths' kerbs are the ground's (campus/ground.js), drawn by scenes/campus.js
   campusLandscape(parts);
   quarterGrounds(parts, pt([0, 0]));
   campusServiceFront(parts);

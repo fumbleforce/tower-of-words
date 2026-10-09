@@ -7,6 +7,7 @@
 import { Parts, along, pair } from '../outdoor/parts.js';
 import { paver, GRANITE } from '../outdoor/paving.js';
 import { kerb, kerbRect, wallRect } from '../outdoor/edges.js';
+import { walkEdges } from '../outdoor/walk-edges.js';
 import { keyaki, sakura, pine, maple, ginkgo, cluster, hedge, grass, bed, treePit, LEAF } from '../outdoor/planting.js';
 import { lamps, bench, bins, bollard, STEEL } from '../outdoor/furniture.js';
 import { textTexture, plane, JP_FONT } from '../../props.js';
@@ -15,7 +16,7 @@ import { serviceYard } from './service.js';
 import { drift } from './gardens.js';
 import * as P from './plan.js';
 
-const { X0, SE, ZN, HZ, HO_X, LE, AZ, BW, LEG, BIKES, GARDEN, NORTH_BED: NB, DOOR_X } = P;
+const { X0, SE, ZN, HZ, HO_X, AZ, BW, LEG, BIKES, GARDEN, NORTH_BED: NB, DOOR_X } = P;
 
 // the walk: its three legs of dark granite, the soldier border round its outline, the guide line on its axis
 function walk(pv) {
@@ -65,14 +66,10 @@ export function bikeCourtBackdrop(root) {
   p.build(root);
 }
 
-// the kerbs where paving meets grass or a bed
+// the service yard's own kerbs where its paving meets the wing's lawn, behind its gate (forecourt/service.js); the
+// court's edges are the ground's (forecourt/ground.js)
 function edges(p) {
-  kerbRect(p, P.COURT, { sides: 'w' });
-  kerb(p, [P.SHED_ST[1], HZ], [5.95, HZ], { off: -0.08 }); // the court's north edge, from the shed street's mouth to
-  // the service lane
-  kerbRect(p, P.SERVICE, { sides: 'wn' }); // the service yard (forecourt/service.js)
-  kerb(p, [BIKES[0], BIKES[3]], [BIKES[1], BIKES[3]], { gaps: [[8.45, 10.95]] }); // south passage to the shops
-  kerb(p, [LE, P.LANE[3]], [LE, ZN], { off: -0.08 }); // the court's east edge south of the lane
+  kerbRect(p, P.SERVICE, { sides: 'wn' });
 }
 
 // the raised bed along the north edge: a low stone wall, a hedge at its back, zelkovas at an even pitch, shrubs
@@ -87,7 +84,6 @@ function northBed(p, block) {
     const x = (trees[i].x + trees[i + 1].x) / 2;
     cluster(p, x, NB[3] - 0.45, { n: 3, r: 0.26, spread: 0.36, seed: i + 5, y: 0.33 });
   }
-  block(NB[0] - 0.1, NB[1] + 0.1, NB[2], NB[3] + 0.1);
   // benches under the first and third trees' crowns, facing south over the court
   for (const t of [trees[0], trees[2]]) {
     bench(p, t.x, NB[3] + 0.42, 0, { len: 1.6 });
@@ -157,29 +153,26 @@ function bikes(root, p, block) {
   block(SE, SE + 0.8, 5.5, 7.3);
 }
 
-// the garden east of the bike court: a raised bed with a cherry, a maple and a ginkgo, shrubs and grasses under them
-function garden(p, block) {
-  const g = [GARDEN[0] + 0.05, GARDEN[1], GARDEN[2] + 0.05, GARDEN[3]];
+// the garden east of the bike court: a lawn at the ground's level behind a low wall where it meets the court and
+// the bike court (the ground's barrier there), open to the garden beyond on its other sides; a cherry, a maple and a
+// ginkgo, shrubs and grasses under them, and layered planting along the wall and its far edge
+function garden(p) {
+  const g = GARDEN;
   wallRect(p, g, { sides: 'nw' });
-  kerbRect(p, g, { sides: 'se' });
-  bed(p, [g[0] + 0.22, g[1] - 0.1, g[2] + 0.22, g[3] - 0.1], { y: 0.3 });
-  const y = 0.3;
   sakura(p, 16.7, 4.8, 0.85, 3);
   maple(p, 15.5, 7.4, 1.0, 2);
   ginkgo(p, 17.6, 8.9, 1.05, 4);
-  cluster(p, 15.2, 3.7, { n: 4, r: 0.36, seed: 2, y });
-  cluster(p, 17.9, 6.6, { n: 5, r: 0.4, seed: 7, y });
-  cluster(p, 16.2, 9.6, { n: 3, r: 0.3, seed: 4, y });
+  cluster(p, 15.2, 3.7, { n: 4, r: 0.36, seed: 2 });
+  cluster(p, 17.9, 6.6, { n: 5, r: 0.4, seed: 7 });
+  cluster(p, 16.2, 9.6, { n: 3, r: 0.3, seed: 4 });
   for (const [x, z, s] of [
     [14.9, 5.6, 1],
     [18.3, 3.6, 2],
     [16.9, 7.9, 3],
   ])
     grass(p, x, z, { seed: s });
-  // layered planting along its wall and its far edge (forecourt/gardens.js), as in the gardens along the lane
-  drift(p, [g[0] + 0.3, g[1] - 0.15, g[2] + 0.3, g[2] + 1.5], { back: 'n', seed: 21, y });
-  drift(p, [g[0] + 0.3, g[1] - 0.15, g[3] - 1.4, g[3] - 0.15], { seed: 22, y });
-  block(g[0], g[1], g[2], g[3]);
+  drift(p, [g[0] + 0.3, g[1] - 0.25, g[2] + 0.3, g[2] + 1.5], { back: 'n', seed: 21 });
+  drift(p, [g[0] + 0.3, g[1] - 0.25, g[3] - 1.4, g[3] - 0.25], { seed: 22 });
 }
 
 // the lamps: two staggered lines either side of the walk's long leg, pitch 6, and one at the bike court's opening
@@ -232,16 +225,19 @@ function wayfinding(root, p, block) {
   block(x - 0.2, x + 0.2, z - 0.2, z + 0.2);
 }
 
-export function buildCourt(root, nav, set, planting = null) {
+// ground: the forecourt's walkable ground (forecourt/ground.js), whose kerbs are laid with the court's own parts so
+// they merge with them
+export function buildCourt(root, nav, set, planting = null, ground = null) {
   const block = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
   paving(root);
   const p = new Parts({ planting });
   edges(p);
+  if (ground) walkEdges(p, ground);
   northBed(p, block);
   westSquare(p, block);
   door(p, block);
   bikes(root, p, block);
-  garden(p, block);
+  garden(p);
   lights(set, p, block);
   wayfinding(root, p, block);
   serviceYard(root, p);

@@ -1,0 +1,180 @@
+{
+  "title": "Walkable ground: one kerb wherever walking ends (forecourt and campus)",
+  "date": "2026-10-09",
+  "by": "claude-agent:grounds",
+  "caption": "Stage 1 of #362. The walk grid and the kerbs now come from one list of walkable ground, so he stops exactly at a kerb, a wall, a building or a gate, never at an invisible line. Beds lie flush with the lawn. Forecourt and campus only; the other places follow after you have seen this.",
+  "preview": "after-garden-desk",
+  "result": [
+    "after-garden-desk",
+    "after-garden-default",
+    "after-campus-bench",
+    "after-gravel-edge-phone"
+  ],
+  "sections": [
+    {
+      "title": "Forecourt: the garden court from the lane (Jørgen's view)",
+      "caption": "Street-style look, same spot and camera. The stepped plots and the double kerb in the lawn are gone; a kerbed gravel path joins the lane to the court.",
+      "images": [
+        {
+          "id": "before-garden-desk",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-garden-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "after-garden-desk",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-garden-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "before-garden-phone",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-garden-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-garden-phone",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-garden-phone.webp",
+          "caption": "After, phone"
+        },
+        {
+          "id": "before-garden-default",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-garden-default.webp",
+          "caption": "Before, default look"
+        },
+        {
+          "id": "after-garden-default",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-garden-default.webp",
+          "caption": "After, default look"
+        }
+      ]
+    },
+    {
+      "title": "Walking into the edge",
+      "caption": "He walks south across the gravel court until he stops. Before, his body ran over the edge; now his feet stop at the kerb.",
+      "images": [
+        {
+          "id": "before-gravel-edge-desk",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-gravel-edge-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "after-gravel-edge-desk",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-gravel-edge-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "after-gravel-edge-phone",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-gravel-edge-phone.webp",
+          "caption": "After, phone"
+        },
+        {
+          "id": "before-campus-edge",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-campus-edge.webp",
+          "caption": "Campus bench court, before: stopped on bare lawn edge"
+        },
+        {
+          "id": "after-campus-edge",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-campus-edge.webp",
+          "caption": "Campus bench court, after: stopped at the kerb"
+        }
+      ]
+    },
+    {
+      "title": "Forecourt: lane and court",
+      "caption": "The lane's bench bay is paved and walkable with a kerb round it; the north strip lost its extra kerbs; the garden east of the bikes is lawn behind a low wall.",
+      "images": [
+        {
+          "id": "before-lane-desk",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-lane-desk.webp",
+          "caption": "Lane, before"
+        },
+        {
+          "id": "after-lane-desk",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-lane-desk.webp",
+          "caption": "Lane, after"
+        },
+        {
+          "id": "before-court-east",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-court-east.webp",
+          "caption": "Court east, before"
+        },
+        {
+          "id": "after-court-east",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-court-east.webp",
+          "caption": "Court east, after"
+        }
+      ]
+    },
+    {
+      "title": "Campus garden",
+      "caption": "Every path and the bench court now has a kerb where it meets lawn; before, most of these edges were invisible walls.",
+      "images": [
+        {
+          "id": "before-campus-bench",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-campus-bench.webp",
+          "caption": "Bench court, before"
+        },
+        {
+          "id": "after-campus-bench",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-campus-bench.webp",
+          "caption": "Bench court, after"
+        },
+        {
+          "id": "before-campus-bench-phone",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-campus-bench-phone.webp",
+          "caption": "Bench court, before, phone"
+        },
+        {
+          "id": "after-campus-bench-phone",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-campus-bench-phone.webp",
+          "caption": "Bench court, after, phone"
+        },
+        {
+          "id": "before-campus-path",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-campus-path.webp",
+          "caption": "Path, before"
+        },
+        {
+          "id": "after-campus-path",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-campus-path.webp",
+          "caption": "Path, after"
+        }
+      ]
+    },
+    {
+      "title": "Where he can walk, from above",
+      "caption": "Green is where his centre can stand, red where it can't. The red band is his radius inside each kerb.",
+      "images": [
+        {
+          "id": "top-garden-before",
+          "image": "bible/shots/showcase/grounds-system-20261009/top-garden-before.webp",
+          "caption": "Forecourt garden, before"
+        },
+        {
+          "id": "top-garden-after",
+          "image": "bible/shots/showcase/grounds-system-20261009/top-garden-after.webp",
+          "caption": "Forecourt garden, after"
+        },
+        {
+          "id": "top-campus-before",
+          "image": "bible/shots/showcase/grounds-system-20261009/top-campus-before.webp",
+          "caption": "Campus garden, before"
+        },
+        {
+          "id": "top-campus-after",
+          "image": "bible/shots/showcase/grounds-system-20261009/top-campus-after.webp",
+          "caption": "Campus garden, after"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "How it works",
+      "href": "notes/grounds-system.md"
+    },
+    {
+      "label": "Play it (street style)",
+      "href": "game3d/index.html?day=2&place=forecourt&diorama=1"
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+// The walkable-ground system (movement/walk-ground.js, notes/grounds-system.md): the outline of a union of
+// rectangles, the walk grid that comes from it, and the two places built on it (forecourt, campus).
+import assert from 'node:assert/strict';
+import { registerHooks } from 'node:module';
+import { test } from 'node:test';
+
+const hooks = registerHooks({
+  resolve(specifier, context, next) {
+    if (specifier === 'three')
+      return next(new URL('../../vendor/three/three.module.js', import.meta.url).href, context);
+    if (specifier.startsWith('three/addons/'))
+      return next(new URL('../../vendor/' + specifier.slice(13), import.meta.url).href, context);
+    return next(specifier, context);
+  },
+});
+process.on('exit', () => hooks.deregister());
+Object.assign(globalThis, {
+  location: { search: '' },
+  window: {},
+  addEventListener() {},
+  innerWidth: 1366,
+  innerHeight: 860,
+  localStorage: { getItem: () => null, setItem() {} },
+  document: {
+    body: { classList: { contains: () => false, toggle() {} } },
+    documentElement: { style: { setProperty() {} } },
+  },
+});
+const ctx = new Proxy(
+  {
+    measureText: (t) => ({ width: String(t).length * 8 }),
+    createRadialGradient: () => ({ addColorStop() {} }),
+    createLinearGradient: () => ({ addColorStop() {} }),
+  },
+  { get: (o, k) => o[k] || (() => {}) },
+);
+globalThis.document.createElement = () => ({
+  width: 128,
+  height: 128,
+  getContext: () => ctx,
+  style: {},
+});
+
+const { walkGround, applyGround } = await import('../../js/movement/walk-ground.js');
+const { Nav } = await import('../../js/movement/navigation.js');
+const { walkEdges } = await import('../../js/scenes/outdoor/walk-edges.js');
+
+const len = (e) => e.s1 - e.s0;
+const B = [-10, 10, -10, 10];
+
+test('an L of two overlapping rectangles has one outline and no edge where they join', () => {
+  const g = walkGround({
+    walk: [
+      [0, 4, 0, 2],
+      [0, 2, 0, 5],
+      [1, 3, 1, 1.5],
+    ],
+    bounds: B,
+  });
+  assert.equal(g.edges.length, 6);
+  assert.ok(g.edges.every((e) => e.kind === 'kerb'));
+  const total = g.edges.reduce((s, e) => s + len(e), 0);
+  assert.equal(total, 4 + 2 + 2 + 3 + 2 + 5);
+  assert.ok(g.contains(1, 1) && g.contains(1, 4) && !g.contains(3, 4));
+  // the inside corner at (2, 2) and the outside ones
+  const top = g.edges.find((e) => e.out === 's' && e.line === 2);
+  assert.equal(g.corner(top, 'a'), 'inside');
+  assert.equal(g.corner(top, 'b'), 'outside');
+});
+
+test('a T junction joins with no edge across the path mouth', () => {
+  const g = walkGround({
+    walk: [
+      [0, 10, 0, 2],
+      [4, 6, 2, 8],
+    ],
+    bounds: B.map((v) => v * 2),
+  });
+  assert.ok(!g.edges.some((e) => e.out === 's' && e.line === 2 && e.s0 < 5 && e.s1 > 5));
+  assert.deepEqual(
+    g.edges.filter((e) => e.out === 's' && e.line === 2).map((e) => [e.s0, e.s1]),
+    [
+      [0, 4],
+      [6, 10],
+    ],
+  );
+});
+
+test('a cut makes a hole whose outline is the barrier named over it', () => {
+  const g = walkGround({
+    walk: [[0, 10, 0, 10]],
+    cut: [[4, 6, 4, 6]],
+    barriers: [{ kind: 'building', rect: [4, 6, 4, 6] }],
+    bounds: [-1, 11, -1, 11],
+  });
+  const hole = g.edges.filter((e) => e.kind === 'building');
+  assert.equal(hole.length, 4);
+  assert.ok(!g.contains(5, 5) && g.contains(3, 5));
+});
+
+test('the edge kind changes where the barrier beyond it changes, and past the bounds it is open', () => {
+  const g = walkGround({
+    walk: [[0, 10, 0, 2]],
+    barriers: [{ kind: 'wall', rect: [3, 5, 2, 4] }],
+    bounds: [-1, 8, -1, 3],
+  });
+  const south = g.edges.filter((e) => e.out === 's').map((e) => [e.s0, e.s1, e.kind]);
+  assert.deepEqual(south, [
+    [0, 3, 'kerb'],
+    [3, 5, 'wall'],
+    [5, 10, 'kerb'],
+  ]);
+  // the walk grid stops at the bounds (x 8) where the drawn walk runs on: an open stop, nothing drawn there
+  assert.ok(g.stops.some((e) => e.out === 'e' && e.line === 8 && e.kind === 'open'));
+  assert.ok(!g.edges.some((e) => e.line === 8));
+});
+
+test('a stop with walkable-looking ground beyond it and nothing named there is a seam', () => {
+  const g = walkGround({
+    walk: [[0, 4, 0, 2]],
+    backdrop: [[4, 8, 0, 2]],
+    bounds: B,
+  });
+  assert.ok(g.stops.some((e) => e.kind === 'seam' && e.line === 4));
+  const named = walkGround({
+    walk: [[0, 4, 0, 2]],
+    backdrop: [[4, 8, 0, 2]],
+    barriers: [{ kind: 'gate', rect: [4, 8, 0, 2] }],
+    bounds: B,
+  });
+  assert.ok(!named.stops.some((e) => e.kind === 'seam'));
+});
+
+test('the blockers are exactly the ground inside the bounds that is not walkable', () => {
+  const g = walkGround({
+    walk: [
+      [0, 4, 0, 2],
+      [1, 2, 2, 6],
+    ],
+    cut: [[3, 3.5, 0.5, 1]],
+    bounds: [-2, 6, -2, 7],
+  });
+  const rects = g.blockers();
+  const blocked = (x, z) => rects.some(([a, b, c, d]) => x > a && x < b && z > c && z < d);
+  for (let x = -1.95; x < 6; x += 0.1)
+    for (let z = -1.95; z < 7; z += 0.1) assert.equal(blocked(x, z), !g.contains(x, z), `${x} ${z}`);
+  assert.ok(rects.length < 12, `${rects.length} rectangles`);
+});
+
+test('on the walk grid his whole body stops at the drawn edge, not just his centre', () => {
+  const nav = new Nav(-2, 6, -2, 4, 0.1);
+  applyGround(nav, walkGround({ walk: [[0, 4, 0, 2]], bounds: [-2, 6, -2, 4] }));
+  assert.ok(nav.free(2, 2 - nav.R - 0.01));
+  assert.ok(!nav.free(2, 2 - nav.R + 0.01));
+  // walking south into the edge: he stops a radius short of it
+  let [x, z] = [2, 1];
+  for (let i = 0; i < 100; i++) [x, z] = nav.collide(x, z + 0.03, x, z);
+  assert.ok(Math.abs(z - (2 - nav.R)) < 0.035, `stopped at ${z}`);
+});
+
+test('kerbs lie wholly beyond the walk and meet at corners without overlapping', () => {
+  const boxes = [];
+  const p = { box: (color, w, h, d, x, y, z) => boxes.push({ w, d, x, z, h }) };
+  const g = walkGround({
+    walk: [
+      [0, 4, 0, 2],
+      [0, 2, 0, 5],
+    ],
+    bounds: B,
+  });
+  walkEdges(p, g);
+  const bodies = boxes.filter((b) => b.h > 0.05);
+  for (const b of bodies)
+    for (const [px, pz] of [
+      [b.x, b.z],
+      [b.x - b.w / 2 + 0.01, b.z],
+      [b.x + b.w / 2 - 0.01, b.z],
+    ])
+      assert.ok(!g.contains(px, pz), `kerb on the walk at ${px} ${pz}`);
+  const area = (b) => b.w * b.d;
+  const overlap = (a, b) =>
+    Math.max(0, Math.min(a.x + a.w / 2, b.x + b.w / 2) - Math.max(a.x - a.w / 2, b.x - b.w / 2)) *
+    Math.max(0, Math.min(a.z + a.d / 2, b.z + b.d / 2) - Math.max(a.z - a.d / 2, b.z - b.d / 2));
+  for (let i = 0; i < bodies.length; i++)
+    for (let j = i + 1; j < bodies.length; j++) assert.ok(overlap(bodies[i], bodies[j]) < 1e-9);
+  // the outline's length plus its four outside corners (one less inside corner each way), all covered
+  const w = 0.16,
+    perimeter = 4 + 2 + 2 + 3 + 2 + 5;
+  const covered = bodies.reduce((s, b) => s + area(b), 0);
+  assert.ok(Math.abs(covered - (perimeter * w + 5 * w * w - w * w)) < 1e-6, `${covered}`);
+});
+
+// ----- the places -----
+const { buildCampus } = await import('../../js/scenes/campus.js');
+const CP = await import('../../js/scenes/campus/plan.js');
+const FG = await import('../../js/scenes/forecourt/ground.js');
+const CG = await import('../../js/scenes/campus/ground.js');
+const FP = await import('../../js/scenes/forecourt/plan.js');
+
+for (const [name, g] of [
+  ['forecourt', FG.ground()],
+  ['campus', CG.ground()],
+]) {
+  test(`${name}: every place the walk grid stops him shows why (a kerb or a named barrier, never a seam)`, () => {
+    const seams = g.stops.filter((e) => e.kind === 'seam');
+    assert.deepEqual(seams, []);
+    // and every stop on a kerb has a drawn kerb on the same line covering it
+    for (const s of g.stops.filter((e) => e.kind === 'kerb')) {
+      const covered = g.edges
+        .filter((e) => e.kind === 'kerb' && e.out === s.out && Math.abs(e.line - s.line) < 1e-6)
+        .reduce((t, e) => t + Math.max(0, Math.min(e.s1, s.s1) - Math.max(e.s0, s.s0)), 0);
+      assert.ok(Math.abs(covered - len(s)) < 1e-6, `${name} stop ${s.out} ${s.line} ${s.s0}..${s.s1} undrawn`);
+    }
+  });
+}
+
+test('campus: every exit, the print door and the bench stay reachable on the new ground', () => {
+  const w = buildCampus();
+  for (const p of [...Object.values(CP.EXITS).flatMap((e) => [e.lane, e.in]), CP.PRINT_STEP, CP.BENCH.out]) {
+    assert.ok(w.nav.free(...p), `blocked ${p}`);
+    assert.ok(w.nav.path(...CP.IN, ...p)?.length, `unreachable ${p}`);
+  }
+});
+
+// the forecourt's whole scene needs the cast and the head office (browser only: game3d/tools/grounds-shots.mjs and
+// the day test); its ground alone is checked here
+test('forecourt: the ground reaches the garden court, the bench bays, the shed street and every trip', () => {
+  const nav = applyGround(new Nav(...FG.WALK_AREA, 0.1), FG.ground());
+  const from = [FP.DOOR_X, FP.ZN - 1.5];
+  const targets = {
+    gravelCourt: [FP.GARDEN_COURT[0] + 1.6, FP.GARDEN_COURT[2] + 1.2],
+    gravelWay: [(FP.GARDEN_PATH[0] + FP.GARDEN_PATH[1]) / 2, FP.STRIP_S[3]],
+    bay: [FG.BAY_X[0] - 0.6, FG.BAYS[0][2] + 0.22],
+    campus: FP.CAMPUS_EXIT.lane,
+    plaza: [29.4, FP.LANE_Z],
+    serviceGate: [7.5, FP.HZ - 0.05],
+    bikes: [10, 7.5],
+  };
+  for (const [id, p] of Object.entries(targets)) {
+    assert.ok(nav.free(...p), `${id} blocked ${p}`);
+    assert.ok(nav.path(...from, ...p)?.length, `${id} unreachable ${p}`);
+  }
+  // lawn beside the gravel court and past the court's east edge stays off limits
+  assert.equal(nav.free(FP.GARDEN_COURT[1] + 0.3, FP.GARDEN_COURT[2] + 1), false);
+  assert.equal(nav.free(FP.LE + 0.3, 1.5), false);
+});

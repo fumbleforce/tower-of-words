@@ -13,6 +13,8 @@ import { dioramaTrial, dressStreet, finishWindows, finishOffice } from './dioram
 // (scenes/skyline.js). No cars.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
+import { applyGround } from '../movement/walk-ground.js';
+import { ground, WALK_AREA, DOORWAY } from './forecourt/ground.js';
 import { outdoorLight, groundPatches, farTrees, TOWN } from './town.js';
 import { headOfficeSteps } from './head-office.js';
 import { T } from './head-office/frame.js';
@@ -38,8 +40,6 @@ import * as PL from './forecourt/plan.js';
 import { buildNooks } from './outdoor/nooks.js';
 
 const { STATION, DOOR_X, X0, SE, ZN, HZ, HO_X, COURT, BIKES, GARDEN, LANE, LANE_Z, STRIP_S, STRIP_N, SERVICE, TE } = PL;
-// the nav grid: court, bikes, lane (up to where the plaza trip starts), lobby
-const WALK = [X0 + 0.2, PL.LANE_WALK, HZ - 9.8, 12.75]; // north to the tower's north wall (the lobby's back rooms)
 const lanePt = (x) => [x, LANE_Z];
 
 // beyond the court: lawns round the paving, a few trees near it in small groups (the lane's gardens are in
@@ -53,6 +53,7 @@ function* town(root, planting) {
     [TE, 60, -30, STRIP_N[2], G], // east of the tower, north of the lane
     [LANE[0], 60, STRIP_S[3], 16, G], // south of the lane
     [SE, GARDEN[1], BIKES[3], 16, G], // south of the bike court and the garden
+    [GARDEN[0], GARDEN[1], ZN, BIKES[3], G], // the garden east of the bike court, behind its low wall
     [STATION.x0, SE, STATION.zS, 16, G], // south of the station, round the walkway
     [COURT[1], 60, LANE[3], STRIP_S[3], G], // under the lane's south strip
   ]);
@@ -112,18 +113,17 @@ export function* forecourtSteps() {
   scene.add(root);
   const sun = outdoorLight(scene);
 
-  const nav = new Nav(...WALK, 0.1);
-  // walkable: the court, the bike court, the lane, the garden's way in and gravel court, and the shed street up to
-  // its chained bollards; inside the tower the head office decides (its lobby)
-  const tower = [T.o[0], T.o[0] + T.W, T.o[1] - T.D, T.o[1]];
-  // and the station's doorway, shut to him by a tagged block from a step in (he still reaches its zone): only day
-  // 2's walk back in to the platform goes through it (places/forecourt.js opens it for that walk, so he waits for
-  // the gate room on floor)
-  const doorway = [DOOR_X - 0.55, DOOR_X + 0.55, ZN - 0.1, ZN + 1.4];
+  // walkable ground, one list for the walk grid and the kerbs (forecourt/ground.js): the court, the bike court, the
+  // lane and its bench bays, the garden's gravel way and court, and the shed street up to where the campus trip
+  // starts; inside the tower the head office decides (its lobby)
+  const nav = new Nav(...WALK_AREA, 0.1),
+    walkable = ground();
+  applyGround(nav, walkable);
+  // the station's doorway, shut to him by a tagged block from a step in (he still reaches its zone): only day 2's
+  // walk back in to the platform goes through it (places/forecourt.js opens it for that walk, so he waits for the
+  // gate room on floor)
   const southLink = southLinkFrame('forecourt');
-  const walkable = [southLink.walk, COURT, BIKES, LANE, PL.GARDEN_PATH, PL.GARDEN_COURT, PL.SHED_WALK, tower, doorway];
-  nav.extra = (x, z) => walkable.some((r) => PL.inRect(x, z, r));
-  nav.blockTagged('station_door', doorway[0], doorway[1], ZN + 0.2, doorway[3]);
+  nav.blockTagged('station_door', DOORWAY[0], DOORWAY[1], ZN + 0.2, DOORWAY[3]);
   // everything that never moves goes in one group, merged by material at the end
   const planting = dioramaTrial() ? trialPlanting() : null;
   const statics = new THREE.Group();
@@ -132,8 +132,8 @@ export function* forecourtSteps() {
   const station = buildStation(statics);
   yield;
   const lamps = lightSet(); // every lamp's lantern and pool, one mesh each
-  buildCourt(statics, nav, lamps, planting);
-  buildSouthLink(statics);
+  buildCourt(statics, nav, lamps, planting, walkable);
+  buildSouthLink(statics, { kerbs: false });
   yield;
   buildLane(statics, nav, lamps, planting);
   const north = yield* northSteps(statics, lamps, { closed: false, planting });

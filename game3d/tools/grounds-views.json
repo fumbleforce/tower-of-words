@@ -1,0 +1,119 @@
+{
+  "forecourt": {
+    "place": "forecourt",
+    "day": 2,
+    "diorama": true,
+    "views": [
+      {
+        "id": "fc-garden-court",
+        "at": [23.0, 5.0]
+      },
+      {
+        "id": "fc-court-east",
+        "at": [16, 1.5]
+      },
+      {
+        "id": "fc-lane-bay",
+        "at": [27, -1.4]
+      },
+      {
+        "id": "fc-shed-street",
+        "at": [-5.3, -4.3]
+      },
+      {
+        "id": "fc-top-garden",
+        "at": [23.0, 5.0],
+        "top": {
+          "c": [21, 3],
+          "h": 26,
+          "r": 9
+        }
+      },
+      {
+        "id": "fc-top-court",
+        "at": [3, -0.3],
+        "top": {
+          "c": [4, -1],
+          "h": 34,
+          "r": 12
+        }
+      },
+      {
+        "id": "fc-push-gravel-south",
+        "at": [23.6, 4.8],
+        "push": [0, 1]
+      },
+      {
+        "id": "fc-push-court-east",
+        "at": [17.6, 1.6],
+        "push": [1, 0]
+      },
+      {
+        "id": "fc-push-lane-south",
+        "at": [25, -1.6],
+        "push": [0, 1]
+      }
+    ]
+  },
+  "campus": {
+    "place": "campus",
+    "day": 3,
+    "diorama": false,
+    "views": [
+      {
+        "id": "cp-bench",
+        "at": [-24, -31]
+      },
+      {
+        "id": "cp-path",
+        "at": [-5.3, -30]
+      },
+      {
+        "id": "cp-shed-street",
+        "at": [-5.3, -12]
+      },
+      {
+        "id": "cp-top-garden",
+        "at": [-24, -31],
+        "top": {
+          "c": [-17, -32],
+          "h": 38,
+          "r": 13
+        }
+      },
+      {
+        "id": "cp-push-bench-south",
+        "at": [-23, -30],
+        "push": [0, 1]
+      },
+      {
+        "id": "cp-push-path-east",
+        "at": [-4.5, -35],
+        "push": [1, 0]
+      }
+    ]
+  },
+  "forecourtLegacy": {
+    "place": "forecourt",
+    "day": 2,
+    "diorama": false,
+    "views": [
+      {
+        "id": "fc-garden-court",
+        "at": [23.0, 5.0]
+      },
+      {
+        "id": "fc-court-east",
+        "at": [16, 1.5]
+      },
+      {
+        "id": "fc-lane-bay",
+        "at": [27, -1.4]
+      },
+      {
+        "id": "fc-shed-street",
+        "at": [-5.3, -4.3]
+      }
+    ]
+  }
+}

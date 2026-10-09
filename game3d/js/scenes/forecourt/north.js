@@ -102,9 +102,14 @@ function streets(p, q, set) {
   ];
   // the shed street: west verge the whole way; on the east, the wing's plot (with the ways through to the staff
   // door and the bike shelter) and north of the junction
-  verge(p, [SH[0], HZ], [SH[0], SH[2]], 'w', { trees: pitch(SH[2], HZ - 0.6), seed: 3 });
-  verge(p, [SH[1], HZ], [SH[1], J[3]], 'e', { crossings: ways, trees: pitch(J[3], HZ - 0.6, ways), seed: 5 });
-  verge(q, [SH[1], J[2]], [SH[1], SH[2]], 'e', { trees: pitch(SH[2], J[2]), seed: 7 });
+  verge(p, [SH[0], HZ], [SH[0], SH[2]], 'w', { trees: pitch(SH[2], HZ - 0.6), seed: 3, ground: true });
+  verge(p, [SH[1], HZ], [SH[1], J[3]], 'e', {
+    crossings: ways,
+    trees: pitch(J[3], HZ - 0.6, ways),
+    seed: 5,
+    ground: true,
+  });
+  verge(q, [SH[1], J[2]], [SH[1], SH[2]], 'e', { trees: pitch(SH[2], J[2]), seed: 7, ground: true });
   // the cross street: an avenue on the north verge; on the south the wing's hedge, then along the tower's pavement
   // ginkgos in tree pits at the same pitch, clear of the doors
   const xs = pitch(J[1], CROSS[1] - 1.5);
@@ -112,12 +117,12 @@ function streets(p, q, set) {
   verge(q, [J[1], CROSS[2]], [CROSS[1] - 0.9, CROSS[2]], 'n', {
     crossings: [QUARTER_OPENING.map((x) => x - offset[0])],
     seed: 9,
+    ground: true,
   });
   xs.forEach((x, i) => {
     if (63 + i !== JUNCTION_TREE[4]) avenueTree(q, x, CROSS[2] - 2.1, 1 + ((i + 9) % 3) * 0.04, 63 + i);
   });
-  verge(q, [J[1], CROSS[3]], [SERVICE[0], CROSS[3]], 's', { seed: 11 });
-  kerb(q, [SERVICE[0], CROSS[3]], [CROSS[1], CROSS[3]], { off: 0.08 });
+  verge(q, [J[1], CROSS[3]], [SERVICE[0], CROSS[3]], 's', { seed: 11, ground: true });
   const doors = [
     [SERVICE[0], SERVICE[1] - 1.2],
     [REAR_X - 1.4, REAR_X + 1.4],

@@ -8,6 +8,7 @@
 import * as THREE from 'three';
 import { GRANITE } from './paving.js';
 import { kerb } from './edges.js';
+import { BED_FLUSH } from './walk-edges.js';
 import { keyaki, hedge, bed, LEAF } from './planting.js';
 
 export const LANE_BORDER = 0.25; // the soldier border along each edge
@@ -35,34 +36,37 @@ export function laneField(pv, [x0, x1, z0, z1], { along = 'x', origin = [x0, z0]
 // a ring of mulch, 2.1 from the edge at the given positions along it
 // crossings: [from, to] along the edge where a path runs straight through the verge: both kerbs open, no bed or
 // hedge, and a kerb down each side of the opening
-export function verge(p, a, b, side, { bays = [], crossings = [], trees = [], seed = 1 } = {}) {
+// ground: the place's walkable ground (movement/walk-ground.js) draws the lane's edge, so the verge lays no kerbs of
+// its own and its beds lie flush with the lawn
+export function verge(p, a, b, side, { bays = [], crossings = [], trees = [], seed = 1, ground = false } = {}) {
   const alongX = Math.abs(b[0] - a[0]) > Math.abs(b[1] - a[1]);
   const sgn = side === 's' || side === 'e' ? 1 : -1;
   const at = (t, o) => (alongX ? [t, a[1] + sgn * o] : [a[0] + sgn * o, t]);
   const [t0, t1] = alongX ? [Math.min(a[0], b[0]), Math.max(a[0], b[0])] : [Math.min(a[1], b[1]), Math.max(a[1], b[1])];
   const line = (o) => [at(t0, o), at(t1, o)];
-  kerb(p, ...line(0), { off: sgn * 0.08, gaps: [...bays, ...crossings] });
-  kerb(p, ...line(1.1), { off: -sgn * 0.08, gaps: crossings });
-  for (const [c0, c1] of crossings)
-    for (const [t, o] of [
-      [c0, -0.08],
-      [c1, 0.08],
-    ])
-      kerb(p, at(t, 0.16), at(t, 1.1 - 0.16), { off: o });
+  if (!ground) {
+    kerb(p, ...line(0), { off: sgn * 0.08, gaps: [...bays, ...crossings] });
+    kerb(p, ...line(1.1), { off: -sgn * 0.08, gaps: crossings });
+    for (const [c0, c1] of crossings)
+      for (const [t, o] of [
+        [c0, -0.08],
+        [c1, 0.08],
+      ])
+        kerb(p, at(t, 0.16), at(t, 1.1 - 0.16), { off: o });
+  }
+  const y = ground ? BED_FLUSH : 0.06;
   const cuts = [t0, ...[...bays, ...crossings].sort((u, v) => u[0] - v[0]).flat(), t1];
   for (let i = 0; i + 1 < cuts.length; i += 2) {
     const [s0, s1] = [cuts[i], cuts[i + 1]];
     if (s1 - s0 < 0.4) continue;
     const [p0, p1] = [at(s0 + 0.1, 0.12), at(s1 - 0.1, 1.1 - 0.12)];
-    bed(p, [Math.min(p0[0], p1[0]), Math.max(p0[0], p1[0]), Math.min(p0[1], p1[1]), Math.max(p0[1], p1[1])], {
-      y: 0.06,
-    });
+    bed(p, [Math.min(p0[0], p1[0]), Math.max(p0[0], p1[0]), Math.min(p0[1], p1[1]), Math.max(p0[1], p1[1])], { y });
     hedge(p, at(s0 + 0.15, 1.1 - 0.36), at(s1 - 0.15, 1.1 - 0.36), { w: 0.4, h: 0.42, seed: seed + i });
   }
   for (const [s0, s1] of bays) {
     const [p0, p1] = [at(s0, 0.9), at(s1, 1.1 - 0.12)];
     bed(p, [Math.min(p0[0], p1[0]), Math.max(p0[0], p1[0]), Math.min(p0[1], p1[1]), Math.max(p0[1], p1[1])], {
-      y: 0.06,
+      y,
       cover: false,
     });
   }
