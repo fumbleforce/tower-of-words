@@ -13,10 +13,10 @@ export function logDepth(material) {
   const v = material.vertexShader,
     f = material.fragmentShader;
   const vEnd = v.lastIndexOf('}');
-  material.vertexShader = '#include <common>\n#include <logdepthbuf_pars_vertex>\n' + v.slice(0, vEnd) + '  #include <logdepthbuf_vertex>\n' + v.slice(vEnd);
-  const fMain = f.indexOf('void main() {') + 'void main() {'.length;
-  material.fragmentShader = f.replace('precision highp float;', 'precision highp float;\n#include <logdepthbuf_pars_fragment>').replace('void main() {', 'void main() {\n  #include <logdepthbuf_fragment>');
-  void fMain;
+  const common = v.includes('#include <common>') ? '' : '#include <common>\n';
+  material.vertexShader = common + '#include <logdepthbuf_pars_vertex>\n' + v.slice(0, vEnd) + '\n  #include <logdepthbuf_vertex>\n' + v.slice(vEnd);
+  material.fragmentShader = '#include <logdepthbuf_pars_fragment>\n' + f.replace(/void\s+main\s*\(\s*\)\s*\{/, (m) => m + '\n  #include <logdepthbuf_fragment>');
+  material.needsUpdate = true;
   return material;
 }
 

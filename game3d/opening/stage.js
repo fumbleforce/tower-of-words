@@ -7,7 +7,9 @@ import { loadMonorail, monorailParts } from '../js/train/models.js';
 import { buildCar, buildBellows, LX, T, LZ, WIN, SEAT_Y } from '../js/train/car.js';
 import { playerBody, mioBody } from '../js/chibi.js';
 import { SUN, SKY_UNIFORMS, buildSky, buildSea } from './sky.js';
-import { buildIsland } from './island.js';
+import { buildIsland, ANIME_ON, ANIME_PERIOD } from './island.js';
+import { applyLook } from '../js/look/index.js';
+import { patchAll } from '../js/look/anime/shade.js';
 import { buildLobby } from '../js/scenes/lobby.js';
 import { buildOffice } from '../js/scenes/office.js';
 
@@ -152,6 +154,7 @@ export async function buildStage(renderer) {
           } else p.update(0);
           cars[car].root.add(p.root);
           models[key] = p;
+          if (ANIME_ON) patchAll(p.root); // the anime look's light on the riders too
         } catch (e) {
           console.warn('opening: 3D', key, e);
         }
@@ -163,11 +166,13 @@ export async function buildStage(renderer) {
   // ---------- the island: the game's own (island.js) ----------
   const isl = await buildIsland(uniforms, { joinX: ISLAND_X, seaY: SEA_Y });
   scene.add(isl.group, isl.ridge);
+  if (ANIME_ON) patchAll(train); // the anime look's light on the cars (the places have it from their look, island.js)
 
   // (Honsha's name boards come with the station itself: station.glb, scenes/station-model.js)
 
   const sets = {};
-  let active = scene;
+  let active = scene,
+    animeOwner = null; // the set holding the anime look's shared light (null: the island, island.js focus)
 
   // ---------- camera ----------
   const camera = new THREE.PerspectiveCamera(40, 16 / 9, 0.1, 20000);
@@ -194,9 +199,17 @@ export async function buildStage(renderer) {
     set(name) {
       if (!sets[name]) {
         const w = name === 'lobby' ? buildLobby() : buildOffice();
+        // the game's look on the set, as the game gives a place on entry (places/lifecycle.js), anime look included
+        w.lookPlace = { scene: w.scene, sun: w.sun, people: {}, floorY: 0 };
+        applyLook(w.lookPlace);
         sets[name] = w;
       }
       active = sets[name].scene;
+      if (ANIME_ON && animeOwner !== name) {
+        sets[name].lookPlace.onPeriod?.(ANIME_PERIOD); // the shared anime light is this set's now
+        animeOwner = name;
+        isl.unfocus();
+      }
       return sets[name];
     },
     // the train standing anywhere: its middle car's floor centre at pos, running along dir (x, z)
@@ -235,6 +248,7 @@ export async function buildStage(renderer) {
         camera.fov = fov;
         camera.updateProjectionMatrix();
       }
+      if (active === scene && isl.focus(new THREE.Vector3(...at))) animeOwner = null; // the leaf shade follows the place in view
     },
     // the sun's place on screen in uv (0..1, y up), or null when it is behind the camera
     sunOnScreen() {
@@ -244,6 +258,7 @@ export async function buildStage(renderer) {
     },
     render(T, rt) {
       uniforms.uTime.value = T;
+      isl.setTime(T);
       renderer.setRenderTarget(rt);
       renderer.setClearColor(active === scene ? 0x000000 : 0x1a2030, 1);
       renderer.clear();
