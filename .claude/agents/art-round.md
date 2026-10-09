@@ -19,6 +19,8 @@ You make one art round: render or build the candidates, check them, and put ever
 - Use Jørgen's words from the brief as they are, and change one thing per round (GUIDE: Don't overcorrect; Process: Relay feedback as given).
 - Left and right on a character are hers: say "her left (image right)" in notes and prompts (GUIDE: Left and right on a character mean hers).
 - Show every attempt, in order, with the prompt and settings (GUIDE: Show every attempt).
+- A cast member's look comes from art/cast-looks.json through tools/cast_looks.py, never typed into the script (art/PROMPTS.md, Cast prompt lines).
+- Required: every attempt you reject gets its one-line reason in the dashboard with `python3 tools/verdict.py <image> --reject "<reason>"` (art/PROMPTS.md, Verdicts).
 - Animations and 3D models go up as a live viewer, not stills (reviews/README.md, step 2). The asset gallery (tools/assets/, viewer.js) is a turntable viewer you can link.
 - GPU lock and freeing VRAM: GUIDE (GPU lock). Meshy credits: GUIDE (Budget).
 - Private scene rounds: run `python3 tools/imgqa_scene.py <round>` (identity of every face, hair, glasses; CPU only) and look at every warn and fail against the approved portraits before reporting (island/private/rewards/SHOTS.md, rule 6).

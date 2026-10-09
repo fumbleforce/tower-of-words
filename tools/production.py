@@ -6,6 +6,7 @@ import sys, os, json, time
 sys.path.insert(0, os.path.dirname(__file__))
 import comfy
 import framecheck
+import cast_looks as L  # every cast look comes from art/cast-looks.json
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 OUT = os.path.join(ROOT, 'art', 'production')
@@ -20,22 +21,21 @@ N = ('worst quality, low quality, early, old, score_1, score_2, score_3, artist 
 NO_PEOPLE_N = N + ', people, person, 1girl, 1boy, crowd, character'
 FRAME = ('waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), '
          'plain light grey background, soft even studio light')
-MC = ('a 29-year-old Nordic man, messy sandy-blond hair, light blond eyebrows, fair pale skin, blue eyes, slim average build, no blush, '
-      'white shirt with rolled sleeves, company lanyard')
+MC = L.line('eric')
 
 # ---------------- A: new characters ----------------
 NEW = {
-    'saki': ('1girl', 'Saki, a 28-year-old woman who heads the company legal department: sleek platinum-blonde bob, a beauty mark under her left eye, sharp grey eyes, narrow refined face, black turtleneck dress, thin gold necklace, holding a leather folder in her left hand, arms loosely crossed',
+    'saki': ('1girl', L.line('saki'),
              {'base': 'a dangerous, amused smile', 'smile': 'a dangerous, amused smile', 'cold': 'cold appraising stare', 'laugh': 'quiet laugh behind her hand', 'annoyed': 'annoyed narrowed eyes, lips pressed together'}),
     'luna': ('1girl', 'Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face',
              {'base': 'bored sly half-smile', 'smile': 'bored sly half-smile', 'bored': 'bored, chin resting on her hand, half-lidded eyes', 'intrigued': 'intrigued raised eyebrow, leaning forward', 'surprised': 'surprised, glasses slipping down her nose'}),
     'ren': ('1girl', 'Dr. Ren Kagami, a 35-year-old woman who runs the robotics lab: wild untamed dark curls held back with welding goggles on her forehead, a smudge of oil on one cheek, stained white lab coat over a black tank top, a sleek metal prosthetic right arm she built herself',
             {'base': 'wide manic grin showing teeth', 'grin': 'wide manic grin showing teeth', 'focused': 'intensely focused, tongue poking out, squinting', 'excited': 'excited, sparkling eyes, both hands raised', 'deadpan': 'flat deadpan stare, unimpressed'}),
-    'kiyoko': ('1girl', 'Kiyoko Madarame, a 56-year-old woman who leads an internal political faction: long elegant face, razor-sharp silver bob, dark red lipstick, black dress with a fur stole over her shoulders, holding a closed black folding fan in her right hand, mature older woman',
+    'kiyoko': ('1girl', L.line('kiyoko'),
                {'base': 'calculating half-lidded eyes and a faint smile', 'smile': 'calculating half-lidded eyes and a faint smile', 'stern': 'stern, disapproving', 'amused': 'amused, fan held to her lips', 'cold': 'icy stare'}),
     'oguri': ('1boy', 'Oguri, a 33-year-old man, an ex-boxer who runs the company gym: broad square face, crooked broken nose, short buzzed hair, tattooed forearms, grey tank top under an open black track jacket, holding knitting needles with a half-finished pink scarf in both hands',
               {'base': 'soft kind eyes, gentle concentration', 'gentle': 'soft kind eyes, gentle smile', 'focused': 'concentrating hard on his knitting', 'laugh': 'big hearty laugh', 'embarrassed': 'embarrassed, scratching the back of his head'}),
-    'nanami': ('1girl', 'Nanami, a 29-year-old company security officer: tall and athletic, neat side-swept short black hair, navy company security uniform with a radio clipped to her chest, a clipboard held in her left hand, round face with a strong brow',
+    'nanami': ('1girl', L.line('nanami'),
                {'base': 'serious expression with a faint blush', 'serious': 'serious, professional', 'blush': 'flustered, cheeks turning red, looking away', 'smile': 'small shy smile', 'stern': 'stern, one hand raised to stop you'}),
     'mc': ('1boy', f'the main character: {MC}, black backpack over one shoulder',
            {'base': 'friendly, slightly nervous smile', 'neutral': 'calm neutral expression', 'smile': 'friendly open smile', 'nervous': 'nervous, sweat drop, awkward smile', 'magic': 'focused and secretive, eyes glowing faint cyan, one hand slightly raised, faint cyan light around his fingers'}),
@@ -43,21 +43,21 @@ NEW = {
 
 # ---------------- B: existing cast expression sets (designs from slice_assets / days25_assets) ----------------
 CAST = {
-    'mio': ('1girl', 'Mio, a 25-year-old woman: messy black hair with green underneath in a loose bun, glasses with clear lenses, oversized black hoodie, headphones around her neck, company lanyard',
+    'mio': ('1girl', L.line('mio'),
             {'bored': 'bored deadpan expression, half-lidded eyes', 'smirk': 'small teasing smirk', 'suspicious': 'narrowed eyes, suspicious look', 'surprised': 'surprised, eyes wide behind her glasses', 'soft': 'soft, rare genuine smile, faint blush'}),
-    'rei': ('1girl', 'Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones',
+    'rei': ('1girl', L.line('rei'),
             {'cold': 'cold unimpressed stare, chin raised', 'smirk': 'thin knowing smile, looking down at the viewer', 'confused': 'confused, blinking', 'angry': 'sharp angry glare', 'soft': 'caught off guard, a small real smile'}),
-    'aoi': ('1girl', 'Aoi, a 22-year-old graduate intern: shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a crop top, company lanyard, cheeky energetic face',
+    'aoi': ('1girl', L.line('aoi'),
             {'grin': 'big cheeky grin, one eye winking', 'panic': 'panicked wide eyes, hands raised, sweat drop', 'crying': 'teary eyes, trembling lip', 'pout': 'pouting, arms crossed', 'excited': 'excited, fists pumped'}),
-    'yuzuki': ('1girl', 'Yuzuki, a 31-year-old company PR spokeswoman: glossy wavy chestnut hair, elegant makeup, pearl earrings, fitted cream blouse, mature face with high cheekbones',
+    'yuzuki': ('1girl', L.line('yuzuki'),
                {'smile': 'flawless practised smile', 'serious': 'serious focused expression', 'tired': 'tired eyes, weary faint smile', 'laugh': 'real unguarded laugh', 'surprised': 'surprised, hand to her chest'}),
-    'kaori': ('1girl', 'Kaori, a 44-year-old canteen head chef: tall, short grey-streaked hair, white chef jacket with rolled sleeves, faded tattoo on her forearm, towel over her shoulder',
+    'kaori': ('1girl', L.line('kaori'),
               {'smile': 'calm amused smile', 'stern': 'stern, arms crossed', 'laugh': 'dry laugh', 'wink': 'knowing wink', 'tired': 'tired after the lunch rush'}),
     'goro': ('1boy', 'Goro, a 61-year-old gentle retired engineer: thick round glasses with clear lenses, white stubble, beige cardigan over a checked shirt, gardening gloves',
              {'smile': 'warm crinkly-eyed smile', 'thinking': 'thoughtful, hand on chin', 'sad': 'quiet sad look', 'laugh': 'delighted laugh', 'surprised': 'surprised, eyebrows up'}),
     'jun': ('1boy', 'Jun, a 40-year-old bartender: long black hair tied back, a scar through one eyebrow, black waistcoat over a white shirt with rolled sleeves',
             {'neutral': 'calm knowing half-smile', 'smile': 'warm smile', 'serious': 'serious, quiet', 'amused': 'amused, one eyebrow raised', 'listening': 'listening, head slightly tilted'}),
-    'ishibashi': ('1boy', 'The gate guard Ishibashi, a wiry Japanese man in his sixties: neat grey pencil moustache, bushy eyebrows, glasses with clear lenses on a chain, navy security uniform and peaked cap, arms folded',
+    'ishibashi': ('1boy', L.line('ishibashi'),
                   {'neutral': 'flat unimpressed expression', 'suspicious': 'squinting suspiciously over his glasses', 'angry': 'angry shout', 'surprised': 'startled, eyes wide', 'approving': 'grudging approving nod'}),
 }
 
@@ -91,12 +91,12 @@ LIGHT = {
 }
 
 # ---------------- D: story scenes ----------------
-MIO = 'Mio: a 25-year-old woman, messy black hair with green underneath in a loose bun, glasses with clear lenses, oversized black hoodie'
-EMI = 'Emi: a 32-year-old woman, auburn shoulder-length bob with side-swept bangs, brown tortoiseshell glasses with clear lenses, cream blouse and charcoal pencil skirt, curvy'
-REI = 'Rei: a 26-year-old woman, long silver-grey hair in a high ponytail, steel-grey eyes, gold hoop earrings, tailored white suit over a black shirt'
-AOI = 'Aoi: a 22-year-old woman, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a crop top'
-YUZ = 'Yuzuki: a 31-year-old woman, glossy wavy chestnut hair, pearl earrings, fitted cream blouse'
-ISH = 'Ishibashi: a wiry old security guard, grey pencil moustache, glasses on a chain, navy uniform and peaked cap'
+MIO = L.line('mio', sep=': ')
+EMI = L.line('emi', sep=': ')
+REI = L.line('rei', sep=': ')
+AOI = L.line('aoi', sep=': ')
+YUZ = L.line('yuzuki', sep=': ')
+ISH = L.line('ishibashi', sep=': ')
 SCENES = {
     'copier_crisis': ('1boy, 1girl', f'main character: {MC}, one hand raised toward the copier, lips moving as he whispers, faint cyan light around his fingers; {AOI}, standing beside him holding a stack of jammed paper in both hands, staring at the copier in disbelief; a big grey office copier suddenly printing at full speed, pages flying out; medium shot, the copier in the centre, the main character on the left, Aoi on the right, a cramped copy room, fluorescent light, dominant grey, broad cool white, sparse cyan magic accents'),
     'meeting_late': ('1boy, 1girl, multiple boys', f'main character: {MC}, standing in the open doorway holding a stack of papers, frozen; {EMI}, sitting at the table, turning to look at him; five office workers seated around a white table, all turning their heads toward the door; wide shot from inside the room toward the door, a small meeting room with a whiteboard, cool daylight, dominant white and steel grey, sparse green accents'),
