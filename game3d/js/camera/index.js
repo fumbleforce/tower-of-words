@@ -75,6 +75,7 @@ export function installFollowCamera(game, canvas) {
     get active() {
       return active;
     },
+    aim: (yaw, pitch) => lens?.aim(yaw, pitch), // shot tools (follow.js)
     get captured() {
       return controls.locked;
     },
