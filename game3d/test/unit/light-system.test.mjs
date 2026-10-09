@@ -16,7 +16,7 @@ const hooks = registerHooks({
 process.on('exit', () => hooks.deregister());
 
 const THREE = await import('../../vendor/three/three.module.js');
-const { PHASE, phaseOf, lookFor, OUTDOOR, DORM, EVENING_GRADE_2 } = await import('../../js/kit/light/looks.js');
+const { PHASE, phaseOf, lookFor, OUTDOOR, DORM, EVENING_GRADE_2, SKY } = await import('../../js/kit/light/looks.js');
 const { glowSet } = await import('../../js/kit/light/glow.js');
 const { lightRig, lightPlace } = await import('../../js/kit/light/rig.js');
 
@@ -163,4 +163,16 @@ test("a place's grade patch and a hand-dressed daylight stay through period chan
   assert.equal(rig.apply('morning').exposure, 1.5);
   assert.equal(snapshot(rig, scene).replace(/"sun":\[[^\]]*\]/, ''), first.replace(/"sun":\[[^\]]*\]/, ''));
   assert.equal(rig.sun.intensity, 2.9);
+});
+
+test('the outdoor sky comes from the period table: the early sky, the day sky and the dusk sky, through the rig', () => {
+  assert.equal(lookFor(OUTDOOR, phaseOf('early'), 1, 'early').sky, SKY.early);
+  for (const p of ['morning', 'lunch', 'afternoon']) assert.equal(lookFor(OUTDOOR, phaseOf(p), 1, p).sky, SKY.day);
+  assert.equal(lookFor(OUTDOOR, 'dusk', 2, 'evening').sky, SKY.dusk);
+  const scene = new THREE.Scene(),
+    rig = lightRig(scene, { looks: OUTDOOR });
+  const seen = [];
+  rig.listen((s) => seen.push(s.sky));
+  for (const p of ['early', 'evening', 'morning']) rig.apply(p);
+  assert.deepEqual(seen, [SKY.day, SKY.early, SKY.dusk, SKY.day]);
 });

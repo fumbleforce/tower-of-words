@@ -43,7 +43,7 @@ await withBrowserJob(
         await page
           .waitForFunction(() => globalThis.__done, null, { timeout: 120000 })
           .catch(() => errors.push(`${name}: timeout`));
-        if (eve) await page.evaluate(() => globalThis.__game.place.onPeriod?.('evening'));
+        if (eve) await page.evaluate(() => globalThis.__game.hooks.period({ to: 'evening' })); // the clock's own change (kit/light/)
         if (lift) await page.evaluate((s) => globalThis.__lift?.state(s), lift);
         if (look)
           await page.evaluate(

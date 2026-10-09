@@ -1,71 +1,26 @@
-// The far view (?far=1, look/far-flag.js): a sky in place of the flat grey background, haze that thickens with
-// distance in the sky's horizon colour, and the island's far model (scenes/far-model.js), all following the time of
-// day. The haze, the far model and the skyline's full-height buildings are for the follow camera only; the overview
-// keeps what it had, with the sky behind it. Installed by the place lifecycle for any place the flag names, after
-// the place is built, so nothing in the place itself changes.
+// The far view (#365; look/far-flag.js switches it off with ?far=0): a sky in place of the flat grey background, haze
+// that thickens with distance in the sky's horizon colour, and the island's far model (scenes/far-model.js). The
+// haze, the far model and the skyline's full-height buildings are for the follow camera only; the overview keeps
+// what it had, with the sky behind it. Installed by the place lifecycle on every outdoor place (any place with a
+// skyline), after the place is built, so nothing in the place itself changes.
 //
 //   await sliced(farViewSteps(game, place, name, () => sim.period))
 //   place.farView: { far, pitchMin }   the follow camera's far plane and lowest pitch (camera/follow.js)
 //
-// The fog stays on the scene in both camera modes (pushed out of reach in the overview), so switching never
-// recompiles a shader.
+// This file only draws. What the sky looks like in each period is the period table's (kit/light/looks.js SKY, a
+// look's `sky`): a place with a light rig hands it over on every change (rig.listen), and a place not yet on a rig
+// looks its period up in the same table. The fog stays on the scene in both camera modes (pushed out of reach in
+// the overview), so switching never recompiles a shader.
 import * as THREE from 'three';
 import * as LAYOUT from '../scenes/island-layout.js';
-import { SUN } from '../scenes/town.js';
+import { OUTDOOR, phaseOf, lookFor } from '../kit/light/looks.js';
 import { farModelSteps } from '../scenes/far-model.js';
-import { farWanted } from './far-flag.js';
+import { FAR_VIEW, farFollow } from './far-flag.js';
 
 // haze: clear to FOG_NEAR, the horizon colour at FOG_FAR; the camera draws a little past it
 export const FOG_NEAR = 30,
   FOG_FAR = 140,
   PITCH_MIN = -0.12;
-// The only input is the period (a getter, read each frame) mapped to one of these colour sets, so a shared
-// time-of-day system (#370) can feed or replace SKIES and SKY_OF without touching the rest.
-// the sky by time of day (sRGB): zenith, the sky a third of the way up, the horizon (also the haze), the glow
-// round the sun and how strong it is, the mainland's hills on the horizon
-export const SKIES = {
-  morning: {
-    zenith: '#6c8fbb',
-    mid: '#9cb3cb',
-    horizon: '#c4c8c8',
-    glow: '#f6d6a8',
-    glowK: 0.5,
-    land: '#98a1a8',
-  },
-  day: {
-    zenith: '#5f89ba',
-    mid: '#93b0cd',
-    horizon: '#bccad4',
-    glow: '#fbeccd',
-    glowK: 0.3,
-    land: '#93a2ad',
-  },
-  evening: {
-    zenith: '#3f4f7a',
-    mid: '#7b809f',
-    horizon: '#b2a0a6',
-    glow: '#ff9d5e',
-    glowK: 0.85,
-    land: '#7f7a8a',
-  },
-  night: {
-    zenith: '#0e1324',
-    mid: '#1c2338',
-    horizon: '#2e3448',
-    glow: '#4a5272',
-    glowK: 0.2,
-    land: '#1f2433',
-  },
-};
-// the game's periods (sim.js PERIODS) onto the four skies
-export const SKY_OF = {
-  early: 'morning',
-  morning: 'day',
-  lunch: 'day',
-  afternoon: 'day',
-  evening: 'evening',
-  night: 'night',
-};
 // the mainland, across the bay to the west-south-west in the island's frame (the monorail comes in from it)
 const MAINLAND = [-0.92, 0.38];
 
@@ -128,19 +83,28 @@ function paintSky(sky, sunDir, landDir) {
   return tex;
 }
 
+// what the sky shows now: the rig's word where the place has one, else the period table for the period
+function skyNow(place, period) {
+  const st = place.light?.state;
+  if (st?.sky) return { sky: st.sky, sun: st.sun.dir, glow: st.glow };
+  const p = period(),
+    L = lookFor(OUTDOOR, phaseOf(p), 1, p);
+  return { sky: L.sky, sun: L.sun[2], glow: !!L.glow };
+}
+
 // ---------- install on one place ----------
 export function* farViewSteps(game, place, name, period) {
-  if (!farWanted(name)) return;
+  if (!FAR_VIEW) return;
   const scene = place.scene;
   let ground = null;
   scene.traverse((o) => {
     if (o.userData.farModel) ground = o;
   });
-  if (!ground) return; // no skyline here: nothing to fit round
+  if (!ground) return; // no skyline here: not an outdoor place
   const info = ground.userData.farModel;
-  const far = yield* farModelSteps(info, LAYOUT);
+  const far = farFollow() ? yield* farModelSteps(info, LAYOUT) : { stats: null }; // none on a phone (far-flag.js)
   for (const m of [far.mesh, far.lit]) if (m) ground.parent.add(m);
-  // which way the sun and the mainland lie in this chunk's frame
+  // which way the mainland lies in this chunk's frame
   const o = LAYOUT.toLocal(info.chunk, 0, 0),
     m = LAYOUT.toLocal(info.chunk, MAINLAND[0], MAINLAND[1]),
     landDir = [m[0] - o[0], m[1] - o[1]];
@@ -148,27 +112,27 @@ export function* farViewSteps(game, place, name, period) {
   scene.traverse((x) => {
     if (x.userData.farView) tagged.push(x);
   });
-  scene.fog = new THREE.Fog(SKIES.day.horizon, 1e4, 2e4);
+  scene.fog = new THREE.Fog(OUTDOOR.day.sky.horizon, 1e4, 2e4);
   let shown = null,
+    shownSun = null,
+    lit = false,
     follow = null;
   function sync() {
-    const id = SKY_OF[period()] || 'day';
-    if (id !== shown) {
-      shown = id;
-      const sky = SKIES[id],
-        sun = new THREE.Vector3(...(id === 'evening' || id === 'night' ? SUN.evening : SUN.morning)).normalize();
+    const now = skyNow(place, period);
+    if (now.sky !== shown || now.sun !== shownSun) {
+      shown = now.sky;
+      shownSun = now.sun;
       if (scene.background?.isTexture) scene.background.dispose();
-      scene.background = paintSky(sky, sun, landDir);
-      scene.fog.color.set(sky.horizon);
-      follow = null; // the lit windows follow the period below
+      scene.background = paintSky(now.sky, new THREE.Vector3(...now.sun).normalize(), landDir);
+      scene.fog.color.set(now.sky.horizon);
     }
-    const now = !!game.followCamera?.active && game.place === place;
-    if (now === follow) return;
-    follow = now;
-    const lit = shown === 'evening' || shown === 'night';
-    for (const x of tagged) x.visible = (x.userData.farView === 'follow') === now && (!x.userData.farLit || lit);
-    scene.fog.near = now ? FOG_NEAR : 1e4;
-    scene.fog.far = now ? FOG_FAR : 2e4;
+    const cam = !!game.followCamera?.active && game.place === place;
+    if (cam === follow && now.glow === lit) return;
+    follow = cam;
+    lit = now.glow;
+    for (const x of tagged) x.visible = (x.userData.farView === 'follow') === cam && (!x.userData.farLit || lit);
+    scene.fog.near = cam ? FOG_NEAR : 1e4;
+    scene.fog.far = cam ? FOG_FAR : 2e4;
   }
   const before = scene.onBeforeRender;
   scene.onBeforeRender = function (...a) {

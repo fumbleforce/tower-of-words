@@ -60,7 +60,7 @@ export function lightRig(scene, spec) {
     sunDir: dir,
     apply(period, day = 1) {
       const phase = phaseOf(period, day);
-      const L = lookFor(looks, phase, day);
+      const L = lookFor(looks, phase, day, period);
       rig.before?.(period, phase);
       hemi.color.set(L.hemi[0]);
       hemi.groundColor.set(L.hemi[1]);
@@ -83,6 +83,7 @@ export function lightRig(scene, spec) {
         sun: { dir: dir.toArray(), color: L.sun[0], intensity: L.sun[1] },
         glow: !!L.glow,
         grade: g,
+        sky: L.sky || null, // outdoors: the sky behind (look/sky.js follows it)
       };
       for (const fn of listeners) fn(rig.state);
       return g;

@@ -104,8 +104,16 @@ export function setCut(L, h) {
 export function setCap(L, k) {
   const cap = L.car.cap;
   if (!cap) return;
-  cap.material.color.set(L.site.capColor ?? L.place.scene.background ?? '#000');
+  cap.material.color.set(L.site.capColor ?? backdrop(L.place.scene) ?? '#000');
   cap.material.opacity = k;
   cap.visible = k > 0.01;
   L.cap = k;
+}
+
+// one colour that stands for a place's background: the colour itself, or behind a sky picture (look/sky.js) the
+// haze's colour, which the sky meets at the horizon; null with neither
+export function backdrop(scene) {
+  const bg = scene.background;
+  if (bg?.isColor) return bg;
+  return bg && scene.fog ? scene.fog.color : null;
 }

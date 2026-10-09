@@ -18,9 +18,9 @@ Three small files in game3d/js/kit/light/, below places/ and scenes/ (kit code i
 
 **Places declare; they don't light.** A place sets `light: rig` and adds its glows. On entry the lifecycle calls `lightPlace(place, period, day)` before the post chain is built; when the clock moves (the story's `period` hook) the same call runs and the grade and the people's evening lift update live. `onPeriod` stays for what else a period changes (who is out after work, the fallen bike), not for light.
 
-## For the sky and fog (#365)
+## The sky and haze (#365)
 
-The farview lane landed a sky and distance haze per time of day behind `?far=1` (game3d/js/look/sky.js). It reads the period through a getter and keeps its own colours (SKIES, SKY_OF). The next step moves those colours into the period table and has the sky follow the rig: `place.light.listen((s) => ...)` is called now and on every change with `{ period, phase, day, sun: { dir, color, intensity }, glow, grade }`. Then the sky, the sun and the reflections on glass and metal all come from one description and can't drift apart. Until then the far ring's lit windows (skyline.js `litF`) stay with look/sky.js.
+Every outdoor place has a sky and distance haze (game3d/js/look/sky.js; `?far=0` switches it off). Its colours are in the period table: each outdoor look has a `sky` (looks.js SKY), and a look can carry a period's own values under `periods` (the early morning's sky), which `lookFor(looks, phase, day, period)` puts on top. The rig hands the sky over in its state (`rig.state.sky`, with the sun's direction), so on a place with a rig the sky, the haze, the sun and the lights all change in the same `apply()`. A place not yet on a rig has look/sky.js look its period up in the same table. look/sky.js only paints. The far ring's lit windows (skyline.js `litF`) and the far model's lit windows still switch with the look's `glow` in look/sky.js.
 
 ## Stage 1 (this change)
 
