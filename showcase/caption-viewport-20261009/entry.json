@@ -1,0 +1,211 @@
+{
+  "title": "Captions stay on screen in close views",
+  "date": "2026-10-09",
+  "by": "codex",
+  "caption": "Captions stay above the conversation when a close view leaves no room above the player. These layout checks use existing train text in the office.",
+  "preview": "1366-interior-close",
+  "result": [
+    "1366-interior-close",
+    "390-interior-close"
+  ],
+  "sections": [
+    {
+      "title": "Office layout checks",
+      "caption": "Layout fixtures reuse train dialogue to test caption placement. These are not story scenes.",
+      "images": [
+        {
+          "id": "1366-interior",
+          "image": "game3d/shots/caption-recovery-20261009/1366-interior.png",
+          "caption": "Office overview, 1366px"
+        },
+        {
+          "id": "1366-interior-close",
+          "image": "game3d/shots/caption-recovery-20261009/1366-interior-close.png",
+          "caption": "Close office view, 1366px"
+        },
+        {
+          "id": "1366-interior-close-large-ui",
+          "image": "game3d/shots/caption-recovery-20261009/1366-interior-close-large-ui.png",
+          "caption": "Close office view with larger UI, 1366px"
+        },
+        {
+          "id": "1366-interior-no-room",
+          "image": "game3d/shots/caption-recovery-20261009/1366-interior-no-room.png",
+          "caption": "Diagnostic with no free caption row, 1366px"
+        },
+        {
+          "id": "390-interior",
+          "image": "game3d/shots/caption-recovery-20261009/390-interior.png",
+          "caption": "Office overview, 390px"
+        },
+        {
+          "id": "390-interior-close",
+          "image": "game3d/shots/caption-recovery-20261009/390-interior-close.png",
+          "caption": "Close office view, 390px"
+        },
+        {
+          "id": "390-interior-close-large-ui",
+          "image": "game3d/shots/caption-recovery-20261009/390-interior-close-large-ui.png",
+          "caption": "Close office view with larger UI, 390px"
+        },
+        {
+          "id": "390-interior-no-room",
+          "image": "game3d/shots/caption-recovery-20261009/390-interior-no-room.png",
+          "caption": "Diagnostic with no free caption row, 390px"
+        },
+        {
+          "id": "2560-interior",
+          "image": "game3d/shots/caption-recovery-20261009/2560-interior.png",
+          "caption": "Office overview, 2560px"
+        },
+        {
+          "id": "2560-interior-close",
+          "image": "game3d/shots/caption-recovery-20261009/2560-interior-close.png",
+          "caption": "Close office view, 2560px"
+        },
+        {
+          "id": "2560-interior-close-large-ui",
+          "image": "game3d/shots/caption-recovery-20261009/2560-interior-close-large-ui.png",
+          "caption": "Close office view with larger UI, 2560px"
+        },
+        {
+          "id": "2560-interior-no-room",
+          "image": "game3d/shots/caption-recovery-20261009/2560-interior-no-room.png",
+          "caption": "Diagnostic with no free caption row, 2560px"
+        }
+      ]
+    },
+    {
+      "title": "Train layout checks",
+      "caption": "Layout fixtures reuse train dialogue to test caption placement. These are not story scenes.",
+      "images": [
+        {
+          "id": "1366-ambient",
+          "image": "game3d/shots/caption-recovery-20261009/1366-ambient.png",
+          "caption": "Caption alone, 1366px"
+        },
+        {
+          "id": "1366-conversation",
+          "image": "game3d/shots/caption-recovery-20261009/1366-conversation.png",
+          "caption": "Caption during dialogue, 1366px"
+        },
+        {
+          "id": "1366-wide-player",
+          "image": "game3d/shots/caption-recovery-20261009/1366-wide-player.png",
+          "caption": "Long caption while Eric speaks, 1366px"
+        },
+        {
+          "id": "1366-wide-switch",
+          "image": "game3d/shots/caption-recovery-20261009/1366-wide-switch.png",
+          "caption": "Long caption after a speaker change, 1366px"
+        },
+        {
+          "id": "1366-choices",
+          "image": "game3d/shots/caption-recovery-20261009/1366-choices.png",
+          "caption": "Caption above replies, 1366px"
+        },
+        {
+          "id": "1366-large-ui",
+          "image": "game3d/shots/caption-recovery-20261009/1366-large-ui.png",
+          "caption": "Larger UI, 1366px"
+        },
+        {
+          "id": "1366-resized",
+          "image": "game3d/shots/caption-recovery-20261009/1366-resized.png",
+          "caption": "Resized window, 1366px"
+        },
+        {
+          "id": "1366-closed",
+          "image": "game3d/shots/caption-recovery-20261009/1366-closed.png",
+          "caption": "Conversation closed, 1366px"
+        },
+        {
+          "id": "390-ambient",
+          "image": "game3d/shots/caption-recovery-20261009/390-ambient.png",
+          "caption": "Caption alone, 390px"
+        },
+        {
+          "id": "390-conversation",
+          "image": "game3d/shots/caption-recovery-20261009/390-conversation.png",
+          "caption": "Caption during dialogue, 390px"
+        },
+        {
+          "id": "390-wide-player",
+          "image": "game3d/shots/caption-recovery-20261009/390-wide-player.png",
+          "caption": "Long caption while Eric speaks, 390px"
+        },
+        {
+          "id": "390-wide-switch",
+          "image": "game3d/shots/caption-recovery-20261009/390-wide-switch.png",
+          "caption": "Long caption after a speaker change, 390px"
+        },
+        {
+          "id": "390-choices",
+          "image": "game3d/shots/caption-recovery-20261009/390-choices.png",
+          "caption": "Caption above replies, 390px"
+        },
+        {
+          "id": "390-large-ui",
+          "image": "game3d/shots/caption-recovery-20261009/390-large-ui.png",
+          "caption": "Larger UI, 390px"
+        },
+        {
+          "id": "390-resized",
+          "image": "game3d/shots/caption-recovery-20261009/390-resized.png",
+          "caption": "Resized window, 390px"
+        },
+        {
+          "id": "390-closed",
+          "image": "game3d/shots/caption-recovery-20261009/390-closed.png",
+          "caption": "Conversation closed, 390px"
+        },
+        {
+          "id": "2560-ambient",
+          "image": "game3d/shots/caption-recovery-20261009/2560-ambient.png",
+          "caption": "Caption alone, 2560px"
+        },
+        {
+          "id": "2560-conversation",
+          "image": "game3d/shots/caption-recovery-20261009/2560-conversation.png",
+          "caption": "Caption during dialogue, 2560px"
+        },
+        {
+          "id": "2560-wide-player",
+          "image": "game3d/shots/caption-recovery-20261009/2560-wide-player.png",
+          "caption": "Long caption while Eric speaks, 2560px"
+        },
+        {
+          "id": "2560-wide-switch",
+          "image": "game3d/shots/caption-recovery-20261009/2560-wide-switch.png",
+          "caption": "Long caption after a speaker change, 2560px"
+        },
+        {
+          "id": "2560-choices",
+          "image": "game3d/shots/caption-recovery-20261009/2560-choices.png",
+          "caption": "Caption above replies, 2560px"
+        },
+        {
+          "id": "2560-large-ui",
+          "image": "game3d/shots/caption-recovery-20261009/2560-large-ui.png",
+          "caption": "Larger UI, 2560px"
+        },
+        {
+          "id": "2560-resized",
+          "image": "game3d/shots/caption-recovery-20261009/2560-resized.png",
+          "caption": "Resized window, 2560px"
+        },
+        {
+          "id": "2560-closed",
+          "image": "game3d/shots/caption-recovery-20261009/2560-closed.png",
+          "caption": "Conversation closed, 2560px"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}
