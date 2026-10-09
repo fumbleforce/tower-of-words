@@ -15,7 +15,7 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 3. **Looks come from art/cast-looks.json** through `tools/cast_looks.py` (take only the parts that are in frame). Never write a character's look from memory ("her look is CLEARLY defined"). Mio: very dark green hair bordering on black, messy loose bun with bangs, bright green underneath; Aoi: small, B-cup, not flat; ages as in docs/game/cast.md.
 4. **Identity reference** (Anima IP-Adapter on the approved portrait): about 0.35 to 0.4, only on shots where the face is in frame. Higher copies the portrait's flat colouring and plain background ("looking more like simple cartoon characters").
 5. **Style and quality**: the full reward quality tags, matched to the encounter pictures he picked (island/private/rewards/encounters/). Never "anime screenshot, anime coloring, 2d, cel shading, clean lineart"; they flatten the picture.
-6. **Room**: a short phrase that matches the game's place ("cluttered office copy room"), plus at most one or two cues. Long item lists over-prompt. "Clean" goes in the negative only as no dirt or handprints.
+6. **Room**: a short phrase that matches the game's place ("basement underground copy room" for B2, which has no windows), plus at most one or two cues. Light words like "soft light" drag in a window; leave them out indoors and put "window" in the negative for windowless rooms. Long item lists over-prompt. "Clean" goes in the negative only as no dirt or handprints.
 7. **Skimpy only**: reward pictures exist for skimpy mode only; outfits follow the approved skimpy sets (island/private/rewards/skimpy/). Anything the script says about clothes (a top riding up) must be visible.
 8. **One pass per picture**: no stitched halves, no pasted faces.
 
