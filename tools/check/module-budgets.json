@@ -79,10 +79,10 @@
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/post.js": {
-      "lines": 437,
-      "bytes": 16905,
+      "lines": 439,
+      "bytes": 17070,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 issue #78: one import and one line for the phone medium tier (js/perf/phone.js); 2026-10-01 issue #82: the composer target keeps its depth as a texture for the outline (js/perf/outline.js)",
+      "review": "C-0071; 2026-09-30 issue #78: one import and one line for the phone medium tier (js/perf/phone.js); 2026-10-01 issue #82: the composer target keeps its depth as a texture for the outline (js/perf/outline.js); 2026-10-09 #383: one import and one line for the anime trial's outline pass (look/anime/, only with ?anime=)",
       "reason": "Existing post-processing pipeline and shader text; keep shader contents intact."
     },
     "game3d/js/props.js": {

@@ -14,6 +14,7 @@ import { bakeLightSteps, SOFT, HARD } from './bake.js';
 import { drain, busyTime } from '../perf/slice.js';
 import { PAL } from '../props.js';
 import { settings, onSettings, qualityTier } from '../settings.js';
+import { ANIME, animeSteps } from './anime/index.js';
 
 export { LOOK };
 const Q = new URLSearchParams(location.search);
@@ -191,5 +192,6 @@ function* lookWork(place, game, opt) {
   let n = 0;
   for (const m of mats) if (patchMaterial(m)) n++;
   place.look = { meshes: list.length, materials: mats.size, patched: n, bake: bk, ms: 0 };
+  if (ANIME.on) place.look.anime = yield* animeSteps(place, game); // the anime trial, ?anime= (look/anime/)
   return place.look;
 }

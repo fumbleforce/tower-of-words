@@ -17,6 +17,7 @@ import { currentStyle, styleGrade, PALETTE } from './style/index.js';
 import { patchScene, setToon, U as TOON_U } from './style/toon.js';
 import { GBufferPass, InkPass } from './style/ink.js';
 import { phoneTier } from './perf/phone.js';
+import { animePasses } from './look/anime/index.js';
 
 // Neutral defaults. Values are in display space unless noted.
 export const GRADE = {
@@ -329,6 +330,7 @@ export function makePost(renderer, place, tier = 2) {
     gbuf = new GBufferPass(scene, camera);
     composer.addPass(gbuf);
   }
+  for (const p of animePasses(place)) composer.addPass(p); // the anime trial's outlines, ?anime= (look/anime/)
   const gtao = new GTAOPass(scene, camera, 4, 4);
   gtao.updateGtaoMaterial({
     radius: 0.55,
