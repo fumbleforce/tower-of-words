@@ -280,8 +280,9 @@ export const PATHS = [
     id: 'beam',
     kind: 'beam',
     w: 2,
-    line: pairs([-73.4, 41.8, -45, 31.5, -37, 28.5, -32.5, 25.5, -30.8, 22, -30.8, 14]),
-    detail: 'The monorail beam, raised on piers, curving in from the west-south-west into the shed’s south end.',
+    line: pairs([-73.4, 41.8, -45, 31.5, -37, 28.5, -32, 26, -29.3, 22.5, -28.6, 18.5, -28.6, 14]),
+    detail:
+      'The monorail beam, raised on piers, curving in from the west-south-west into the middle of the shed’s south end (the car’s line, CHUNKS.train); the other way’s beam runs beside it on the inside of the curve.',
   },
 ];
 

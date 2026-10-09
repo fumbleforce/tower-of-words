@@ -34,6 +34,7 @@ import { noteVisit } from '../travel/visited.js';
 import { installFlavorFinds, attachFlavorFinds } from '../flavor-finds/index.js';
 import { snapshotZones, restoreZones, suppressArrivalZones } from '../gameplay/zones.js';
 import { loadPlantModels } from '../scenes/outdoor/plant-models.js';
+import { loadStationModel, STATION_PLACES } from '../scenes/station-model.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -88,6 +89,7 @@ export function createPlaceLifecycle(
         const story = await game.runner.load(name);
         // the Blender-built trees, hedges and benches (scenes/outdoor/plant-models.js), lighter on a phone
         await loadPlantModels({ lighter: phoneLighter() });
+        if (STATION_PLACES.has(name)) await loadStationModel({ lighter: phoneLighter() }); // Honsha station's outside (scenes/station-model.js)
         setTiling(phoneTiles()); // how finely big merged meshes are cut (perf/tile-geometry.js)
         const place = await PLACES[name](game, story);
         attachSunday(game, place, name);
