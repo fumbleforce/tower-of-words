@@ -3,6 +3,7 @@
 // T - 1/60, T and T + 1/60 and flags pixels whose middle frame is far from the mean of its neighbours (a temporal
 // second difference). Writes a heat map per time and prints the flagged share of the frame.
 //   node game3d/tools/opening-flicker.mjs 4.8,20.5,41.8 [outdir]     (W=960 default; GL=soft when the GPU is busy)
+//   Q=surf=0 adds page options (as opening-render.mjs)
 //   JITTER=1 ...   instead: the same moment twice with the camera moved 2 mm, so only depth fighting shows
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
@@ -16,7 +17,7 @@ const RW = +(process.env.W || 960);
 const times = list.split(',').map(Number);
 await withBrowserJob('opening-flicker', async (browser) => {
   const page = await browser.newPage({ viewport: { width: RW, height: Math.round((RW * 9) / 16) } });
-  await page.goto(`http://127.0.0.1:8771/game3d/opening/index.html?capture&still&w=${RW}`);
+  await page.goto(`http://127.0.0.1:8771/game3d/opening/index.html?capture&still&w=${RW}${process.env.Q ? '&' + process.env.Q : ''}`);
   await page.waitForFunction(() => window.OP && window.OP.stage, null, { timeout: 180000 });
   if (process.env.JITTER) await page.evaluate(() => (window.__jitterMode = true));
   for (const T of times) {

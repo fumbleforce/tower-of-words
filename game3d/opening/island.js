@@ -26,6 +26,7 @@ import { buildSports } from '../js/scenes/sports.js';
 import { SKY_GLSL, solidMaterial, solidInstancedMaterial, logDepth } from './sky.js';
 import { rng } from './paint.js';
 import { loadPlantModels } from '../js/scenes/outdoor/plant-models.js';
+import { loadStationModel } from '../js/scenes/station-model.js';
 import { applyLook } from '../js/look/index.js';
 
 export const WALL = 1.5; // the island's ground above the bay
@@ -125,6 +126,7 @@ function inside(poly, x, z) {
 export async function buildIsland(uniforms, { joinX, seaY }) {
   // the game's Blender-built trees, hedges and benches, which the place builders use when they're loaded
   await loadPlantModels({ lighter: false });
+  await loadStationModel({ lighter: false }); // Honsha station, built in Blender (scenes/station-model.js)
   const isl = new THREE.Group(); // the island frame: x east, z south, y 0 the ground
   const groundY = seaY + WALL;
 
@@ -198,8 +200,7 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
     });
     const c = LAYOUT.CHUNKS[name];
     const holder = new THREE.Group();
-    // each place a few millimetres above the last: where two places lay ground over the same spot (the station's
-    // and its neighbour's grass), the later one always lies on top instead of the two fighting
+    holder.name = 'place:' + name;
     holder.position.set(c.at[0], 0, c.at[1]);
     holder.rotation.y = (-c.turn * Math.PI) / 180;
     holder.scale.setScalar(c.scale);
@@ -220,12 +221,34 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
       else list.push(box);
     });
     for (const o of repeats) o.parent?.remove(o);
-    // the step comes after the copies are found (their boxes must match): each place 6 mm up and 6 mm across in
-    // both directions from the last, so a wall or a lawn two places both build never lies in exactly one plane
-    holder.position.x += areas.length * 0.006;
-    holder.position.y = areas.length * 0.006;
-    holder.position.z += areas.length * 0.006;
+    // the step comes after the copies are found (their boxes must match): each place half a millimetre up and
+    // across from the last, so a wall or a lawn two places both build never lies in exactly one plane. Kept well
+    // under the game's own layer spacing (paving 6 mm over the ground, tiles 22-26 mm): a 6 mm step put the plaza's
+    // slab exactly on the forecourt's paving, and later places' lawns over the fountain's tiles (Jørgen 2026-10-09)
+    holder.position.x += areas.length * 0.0005;
+    holder.position.y = areas.length * 0.0005;
+    holder.position.z += areas.length * 0.0005;
     holder.updateMatrixWorld(true);
+    // a place's ground reaching beyond its own walked area (its lawn or slab under the neighbours) goes down 4 cm
+    // and 5 mm more per place, so in a neighbour's area the neighbour's own ground, paving and tiles always lie on
+    // top, and two places' sunk lawns never lie within 5 mm of each other
+    const own = walks[name];
+    const corner = new THREE.Vector3();
+    root.traverse((o) => {
+      if (!o.isMesh || o.isInstancedMesh) return;
+      const bb = new THREE.Box3().setFromObject(o);
+      if (bb.max.y - bb.min.y > 0.05) return;
+      const reaches = [
+        [bb.min.x, bb.min.z],
+        [bb.max.x, bb.min.z],
+        [bb.max.x, bb.max.z],
+        [bb.min.x, bb.max.z],
+      ].some(([x, z]) => !inside(own, x, z)); // boxes are in the island frame here (isl joins the world group later)
+      if (!reaches) return;
+      const lift = o.parent.getWorldScale(corner).y;
+      o.position.y -= (0.04 + areas.length * 0.005) / lift;
+      o.updateMatrixWorld(true);
+    });
     if (DEBUG_STRIP && repeats.length) console.info('opening repeats', name, repeats.length, repeats.slice(0, 12).map((o) => o.name || '(unnamed)').join(' | '));
     // where the near ring stands, in the island frame: those buildings come out of the far model below
     // (every place's own buildings count, not only its near ring: some stand outside the place's area, where the
