@@ -1,0 +1,52 @@
+{
+  "title": "Monorail passengers on the approved crowd bodies",
+  "date": "2026-10-09",
+  "by": "claude-agent:train-people",
+  "caption": "The man with a book, the girl with headphones and the woman with a bun now use the approved office bodies A and B, seated on the near benches instead of in the doorways.",
+  "result": ["car-desk", "car-phone", "arrival-desk", "music-close-desk"],
+  "sections": [
+    {
+      "title": "Day 1 on the train",
+      "caption": "The car as the day starts, and the arrival at Honsha, on desktop and phone.",
+      "images": [
+        {"id": "car-desk", "image": "game3d/shots/train-people-20261009/car-desk.webp", "caption": "In the car, desktop"},
+        {"id": "car-phone", "image": "game3d/shots/train-people-20261009/car-phone.webp", "caption": "In the car, phone"},
+        {"id": "arrival-desk", "image": "game3d/shots/train-people-20261009/arrival-desk.webp", "caption": "Arrival, desktop"},
+        {"id": "arrival-phone", "image": "game3d/shots/train-people-20261009/arrival-phone.webp", "caption": "Arrival, phone"}
+      ]
+    },
+    {
+      "title": "Close-ups",
+      "caption": "Each passenger from the aisle. The book and phones sit in their hands and the headphones on her head. The bodies wear a smaller copy of their skin on the train to keep it inside its texture budget.",
+      "images": [
+        {"id": "reader-close-desk", "image": "game3d/shots/train-people-20261009/reader-close-desk.webp", "caption": "Man with a book (A), desktop"},
+        {"id": "music-close-desk", "image": "game3d/shots/train-people-20261009/music-close-desk.webp", "caption": "Girl with headphones (B), desktop"},
+        {"id": "bun-close-desk", "image": "game3d/shots/train-people-20261009/bun-close-desk.webp", "caption": "Woman with a bun (B), desktop"},
+        {"id": "reader-close-phone", "image": "game3d/shots/train-people-20261009/reader-close-phone.webp", "caption": "Man with a book, phone"},
+        {"id": "music-close-phone", "image": "game3d/shots/train-people-20261009/music-close-phone.webp", "caption": "Girl with headphones, phone"},
+        {"id": "bun-close-phone", "image": "game3d/shots/train-people-20261009/bun-close-phone.webp", "caption": "Woman with a bun, phone"}
+      ]
+    },
+    {
+      "title": "Their small moments still work",
+      "caption": "The video on her phone, the printout beside his book and the shopping bag, run through the real interaction.",
+      "images": [
+        {"id": "music-find-desk", "image": "game3d/shots/train-people-20261009/music-find-desk.webp", "caption": "Her guitar video, desktop"},
+        {"id": "reader-find-desk", "image": "game3d/shots/train-people-20261009/reader-find-desk.webp", "caption": "His printout, desktop"},
+        {"id": "bun-find-desk", "image": "game3d/shots/train-people-20261009/bun-find-desk.webp", "caption": "The shopping bag, desktop"},
+        {"id": "music-find-phone", "image": "game3d/shots/train-people-20261009/music-find-phone.webp", "caption": "Her guitar video, phone"}
+      ]
+    },
+    {
+      "title": "Before",
+      "caption": "The code-built placeholders, two of them sitting in the doorways past the shortened benches.",
+      "images": [
+        {"id": "before-car-desk", "image": "game3d/shots/train-people-20261009/before-car-desk.webp", "caption": "Before, desktop"},
+        {"id": "before-car-phone", "image": "game3d/shots/train-people-20261009/before-car-phone.webp", "caption": "Before, phone"},
+        {"id": "before-arrival-desk", "image": "game3d/shots/train-people-20261009/before-arrival-desk.webp", "caption": "Before, arrival desktop"},
+        {"id": "before-arrival-phone", "image": "game3d/shots/train-people-20261009/before-arrival-phone.webp", "caption": "Before, arrival phone"}
+      ]
+    }
+  ],
+  "links": [{"label": "Play it", "href": "game3d/"}]
+}

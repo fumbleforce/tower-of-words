@@ -35,6 +35,7 @@ import { makeCat } from '../creatures/cat.js';
 import { moveTrainCat } from './train-cat.js';
 import { PEOPLE } from '../cast.js';
 import { inSeat, dozing } from '../cast3d.js';
+import { prepareTrainPassengers } from '../chibi-passengers.js';
 import { Nav, blob } from '../engine.js';
 import { ui, sfx } from '../ui.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
@@ -73,6 +74,7 @@ Object.assign(COL, {
 
 export async function trainPlace(game) {
   await loadMonorail(); // the Blender-built outside (train/models.js); the code-built one stands in if it fails
+  await prepareTrainPassengers(); // their approved bodies
   const scene = new THREE.Scene();
   scene.background = new THREE.Color('#3f5a6b');
 
@@ -170,9 +172,9 @@ export async function trainPlace(game) {
     ['brief', '#5b4336', -2.12, -1, 0.1],
     ['tote', '#b88563', -1.3, -1, -0.2],
     ['tote', '#2f3446', -1.88, 1, 0.3],
-    ['brief', '#6b4a36', 1.86, 1, -0.1],
+    ['brief', '#6b4a36', 2.7, -1, -0.1],
     ['pack', '#3f4656', -1.3, 1, 0.15],
-    ['tote', '#7a6a5a', 1.4, 1, -0.2],
+    ['tote', '#7a6a5a', 1.92, 1, -0.2],
   ];
   const bagObjs = [];
   for (const [k, c, x, side, ry] of bags) {
@@ -790,7 +792,7 @@ export async function trainPlace(game) {
     seat_aoi: { x: -1.25, z: -(LZ - 0.24), side: -1, bag: 1, top: SEAT_Y, ry: 0 },
     seat_far_r: { x: 1.58, z: -(LZ - 0.24), side: -1, props: true, top: SEAT_Y, ry: 0 },
     seat_near_l: { x: -1.3, z: LZ - 0.24, side: 1, bag: 4, top: SEAT_Y, ry: Math.PI },
-    seat_near_r: { x: 1.4, z: LZ - 0.24, side: 1, bag: 5, top: SEAT_Y, ry: Math.PI },
+    seat_near_r: { x: 1.92, z: LZ - 0.24, side: 1, bag: 5, top: SEAT_Y, ry: Math.PI },
     seat_mio: { x: 2.1, z: -(LZ - 0.24), side: -1, top: SEAT_Y, ry: 0 },
   };
   const spots = {
@@ -850,7 +852,7 @@ export async function trainPlace(game) {
       ...at(-2.55, -0.3, -2.55, -1.0),
       enabled: () => kuroda.root.visible && !kuroda._walk,
     },
-    reader: { ...PLACE_DETAILS.train.things.reader, anchor: rigAnchor(reader), ...at(2.55, 0.35, 2.55, 1.0) },
+    reader: { ...PLACE_DETAILS.train.things.reader, anchor: rigAnchor(reader), ...at(1.32, 0.35, 1.32, 1.0) },
     music: { ...PLACE_DETAILS.train.things.music, anchor: rigAnchor(music), ...at(0.75, 0.35, 0.75, 1.0) },
     rei: {
       ...PLACE_DETAILS.train.things.rei,
@@ -864,7 +866,7 @@ export async function trainPlace(game) {
       ...at(1.6, -0.3, 1.6, -1.0),
       noMarker: true,
     },
-    bun: { ...PLACE_DETAILS.train.things.bun, anchor: rigAnchor(bun), ...at(-2.5, 0.35, -2.5, 1.0) },
+    bun: { ...PLACE_DETAILS.train.things.bun, anchor: rigAnchor(bun), ...at(-0.75, 0.35, -0.75, 1.0) },
     tama: {
       ...PLACE_DETAILS.train.things.tama,
       anchor: carPt(-0.85, 0.5, -(LZ - 0.24)),
@@ -1281,6 +1283,7 @@ export async function trainPlace(game) {
                 // Aoi (cast3d.js) walks by walkRig; the story's own walk may still be running, and its end would clear
                 // a walk started here: let it finish, then the same way off
                 for (let i = 0; i < 100 && r._walk; i++) await game.wait(100);
+                if (r.seated) standUp(r); // a seated crowd body gets up first
                 for (const q of [
                   [dx, LZ - 0.4],
                   [dx, LZ + 1.0],
