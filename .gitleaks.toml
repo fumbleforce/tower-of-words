@@ -69,12 +69,13 @@ path = '''(?:^|/)\.env(?:\.[\w-]+)?$'''
 description = "Example env files and vendored third-party code (minified libraries trip the generic rule)"
 paths = ['''(?:^|/)\.env\.(?:example|sample)$''', '''(?:^|/)node_modules/''', '''(?:^|/)game3d/vendor/''']
 
-# Voice clip ids such as "key": "gate-commuter-1-wait" in game3d/audio/manifest.json and notes/voice-*.json look
+# Voice clip ids such as "key": "gate-commuter-1-wait" or "oh-vjt3q4-canteen_shirt" in game3d/audio/manifest.json,
+# notes/voice-*.json and Showcase voice evidence look
 # like generic API keys to gitleaks. Only hyphenated lowercase word ids on a "key" line are allowed; a real key
 # (mixed case, long random runs) still fails; both the path and the id pattern must match (condition AND).
 [[allowlists]]
 description = "voice clip ids"
 condition = "AND"
 regexTarget = "match"
-regexes = ['''key":\s*"[a-z]+(?:-[a-z0-9]{1,12}){1,6}"''']
-paths = ['''(?:^|/)game3d/audio/[^/]+\.json$''', '''(?:^|/)notes/voice-[^/]+\.json$''', '''(?:^|/)tools/voice/[^/]+\.json$''']
+regexes = ['''key":\s*"[a-z]+(?:-[a-z0-9_]{1,16}){1,6}"''']
+paths = ['''(?:^|/)game3d/audio/[^/]+\.json$''', '''(?:^|/)notes/voice-[^/]+\.json$''', '''(?:^|/)tools/voice/[^/]+\.json$''', '''(?:^|/)showcase/[^/]+/voice-evidence/[^/]+\.json$''']
