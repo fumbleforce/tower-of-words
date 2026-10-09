@@ -91,7 +91,7 @@ export function* dormCourtSteps({ morning = false } = {}) {
   const evening = (day = 1) => {
     if (dusk) return;
     dusk = true;
-    scene.background.set(SKY);
+    if (scene.background?.isColor) scene.background.set(SKY); // a sky picture follows the period itself
     eveningLight(scene, day); // the town's dusk, as on the other chunks built in the morning
     lit.evening();
     dorms.evening();

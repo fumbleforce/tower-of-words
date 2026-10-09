@@ -1,19 +1,21 @@
 // The period table: what each period of the day looks like, in one place (notes/lighting-system.md). A period
 // (sim.js PERIODS) falls in a phase, and a phase has a look: the sky and ground light, the sun's direction and
-// colour, the fill, the colour grade (post.js GRADE) and whether lamps and lit windows glow. The ?far=1 sky's
-// colours are still look/sky.js SKIES, to move here next. Places pick a set of looks (OUTDOOR, DORM) and may patch
-// it; they never write their own light values per period. Plain data: no three.js here.
+// colour, the fill, the colour grade (post.js GRADE), whether lamps and lit windows glow, and outdoors the sky
+// behind it all (look/sky.js paints it). Places pick a set of looks (OUTDOOR, DORM) and may patch it; they never
+// write their own light values per period. Plain data: no three.js here.
 //
-//   phaseOf(period)                      'day' or 'dusk'
-//   lookFor(looks, phase, day)           one phase's look, with a later day's own values on top (`days`)
+//   phaseOf(period)                         'day' or 'dusk'
+//   lookFor(looks, phase, day, period)      one phase's look, with a later day's own values on top (`days`) and a
+//                                           period's own on top of those (`periods`: the early morning's sky)
 
 // every period the days use, and its phase. A new period (a night) is one line here and one look per set.
 export const PHASE = { early: 'day', morning: 'day', lunch: 'day', afternoon: 'day', evening: 'dusk' };
 export const phaseOf = (period) => PHASE[period] || 'day';
 
-export function lookFor(looks, phase, day = 1) {
-  const L = looks[phase] || looks.day;
-  return L.days?.[day] ? { ...L, ...L.days[day] } : L;
+export function lookFor(looks, phase, day = 1, period) {
+  let L = looks[phase] || looks.day;
+  if (L.days?.[day]) L = { ...L, ...L.days[day] };
+  return L.periods?.[period] ? { ...L, ...L.periods[period] } : L;
 }
 
 // where the sun shines from, morning and after work; outdoor/shade.js lays the shadows outside a place's shadow
@@ -72,8 +74,17 @@ export const EVENING_LIGHT = {
   2: { sky: ['#8fa2d4', '#5c5e6a', 1.75], sun: ['#ffa062', 2.1], fill: ['#c4cff4', 1.35], pool: 2 },
 };
 
+// the sky outdoors (sRGB; look/sky.js paints it, and the far view's haze takes the horizon's colour): zenith, the
+// sky a third of the way up, the horizon, the glow round the sun and how strong it is, the mainland's hills on the
+// horizon. early: the low morning sun before work; day: the rest of the working day; dusk: after work
+export const SKY = {
+  early: { zenith: '#6c8fbb', mid: '#9cb3cb', horizon: '#c4c8c8', glow: '#f6d6a8', glowK: 0.5, land: '#98a1a8' },
+  day: { zenith: '#5f89ba', mid: '#93b0cd', horizon: '#bccad4', glow: '#fbeccd', glowK: 0.3, land: '#93a2ad' },
+  dusk: { zenith: '#3f4f7a', mid: '#7b809f', horizon: '#b2a0a6', glow: '#ff9d5e', glowK: 0.85, land: '#7f7a8a' },
+};
+
 // outdoors. hemi: [sky, ground, intensity]; sun: [colour, intensity, direction]; fill: [colour, intensity];
-// glow: lamps, lit windows and signs on; pool: the lamps' pool gain
+// glow: lamps, lit windows and signs on; pool: the lamps' pool gain; sky: the sky behind (SKY)
 const duskLook = (day, grade) => {
   const L = EVENING_LIGHT[day];
   return { hemi: L.sky, sun: [...L.sun, SUN.evening], fill: L.fill, pool: L.pool, grade };
@@ -85,10 +96,13 @@ export const OUTDOOR = {
     fill: ['#dfe7ff', 0.6],
     grade: MORNING_GRADE,
     glow: false,
+    sky: SKY.day,
+    periods: { early: { sky: SKY.early } },
   },
   dusk: {
     ...duskLook(1, EVENING_GRADE),
     glow: true,
+    sky: SKY.dusk,
     days: { 2: duskLook(2, EVENING_GRADE_2) },
   },
 };

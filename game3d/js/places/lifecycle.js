@@ -99,7 +99,7 @@ export function createPlaceLifecycle(
         await attachLift(game, place); // walk-in lift (places/lift.js)
         await nextFrame();
         await attachCrowd(game, place, name); // the outdoor places' passers-by, before the draw-call pass (crowd/)
-        await sliced(farViewSteps(game, place, name, () => sim.period)); // ?far=1: sky, haze, far model (look/sky.js)
+        await sliced(farViewSteps(game, place, name, () => sim.period)); // the far view: sky, haze, far model (look/sky.js)
         // surface patterns, baked light (look/index.js); materials patched in place, in slices between frames so the
         // place being played doesn't stall (js/perf/slice.js)
         await sliced(lookSteps(place, game));

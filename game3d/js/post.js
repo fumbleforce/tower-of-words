@@ -11,7 +11,7 @@
 import * as THREE from 'three';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { GTAOPass } from './perf/gtao.js';
 import { Pass, FullScreenQuad } from 'three/addons/postprocessing/Pass.js';
 import { currentStyle, styleGrade, PALETTE } from './style/index.js';
 import { patchScene, setToon, U as TOON_U } from './style/toon.js';

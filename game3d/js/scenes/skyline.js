@@ -25,7 +25,7 @@ import * as THREE from 'three';
 import { mat } from '../props.js';
 import { drain } from '../perf/slice.js';
 import { TOWN } from './town.js';
-import { farWanted } from '../look/far-flag.js';
+import { FAR_VIEW, farFollow } from '../look/far-flag.js';
 import {
   tierNow,
   pt,
@@ -108,10 +108,11 @@ export function* skylineSteps(
     litAll = bucket(),
     bands = bucket(),
     farB = bucket(true);
-  // ?far=1 (look/far-flag.js): the follow camera gets the far model (far-model.js) in place of the far ring, and the
-  // buildings the occlusion rule cuts down get their missing floors in `tall`; litFar keeps the far ring's lit
-  // windows with it. nearIds: what this ring builds, so the far model leaves it out.
-  const farMode = farWanted(chunkId),
+  // the far view (look/far-flag.js; off with ?far=0), where the follow camera can come on: it gets the far model
+  // (far-model.js) in place of the far ring, and the buildings the occlusion rule cuts down get their missing floors in `tall`; litFar keeps
+  // the far ring's lit windows with it. nearIds: what this ring builds, so the far model leaves it out.
+  const onIsland = FAR_VIEW && !!chunk.at, // a place's chunk on the island; the train's ride view is not one
+    farMode = onIsland && farFollow(),
     tall = bucket(true),
     litFar = farMode ? bucket() : litAll,
     nearIds = new Set();
@@ -266,8 +267,8 @@ export function* skylineSteps(
   const allTris = [...wallsNear.values(), roofNear, winNear, bands, farB, gb, litAll].reduce((s, b) => s + tris(b), 0);
   if (meshes.length > MAX_MESHES || allTris > MAX_TRIS)
     console.warn(`skyline ${chunkId}: ${meshes.length} meshes, ${Math.round(allTris)} triangles, over its budget`);
-  // ?far=1: which camera sees what (look/sky.js shows `follow` and hides `overview` while the follow camera is on);
-  // the ground carries what the far model needs to fit round this ring
+  // the far view: which camera sees what (look/sky.js shows `follow` and hides `overview` while the follow camera is
+  // on); the ground carries what the sky and the far model need to fit round this ring
   let litF = null;
   if (farMode) {
     if (farMesh) farMesh.userData.farView = 'overview';
@@ -285,15 +286,15 @@ export function* skylineSteps(
       litF.userData.farLit = true;
       litF.visible = !!evening;
     }
-    if (ground)
-      ground.userData.farModel = {
-        chunk: chunkId,
-        near,
-        centre: [cx, cz],
-        box: W ? bbox(W) : [-6, 6, -6, 3],
-        skip: [...skipIds, ...nearIds],
-      };
   }
+  if (onIsland && ground)
+    ground.userData.farModel = {
+      chunk: chunkId,
+      near,
+      centre: [cx, cz],
+      box: W ? bbox(W) : [-6, 6, -6, 3],
+      skip: [...skipIds, ...nearIds],
+    };
   return {
     meshes,
     lit,
@@ -305,7 +306,7 @@ export function* skylineSteps(
       tier: q,
     },
     // the lit windows, for a place's light rig (kit/light/glow.js), which also turns them off again by day (the far
-    // ring's lit windows under ?far=1 are look/sky.js's)
+    // ring's lit windows under the far view are look/sky.js's)
     glows: lit ? [{ show: lit }] : [],
     // without a rig: lights come on after work and stay on (a place is entered with the period it was built in,
     // then later ones)
@@ -317,7 +318,7 @@ export function* skylineSteps(
   };
 }
 
-// ?far=1: a building the occlusion rule cut down, from where the cut left it to its full height (walls, roof,
+// the far view: a building the occlusion rule cut down, from where the cut left it to its full height (walls, roof,
 // parapet and the missing floors' windows in one vertex-coloured bucket), for the follow camera only
 function upperFloors(b, poly, es, s, id, wallHex) {
   const y0 = s.from * s.fh,

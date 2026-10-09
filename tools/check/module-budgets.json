@@ -80,7 +80,7 @@
     },
     "game3d/js/post.js": {
       "lines": 437,
-      "bytes": 16930,
+      "bytes": 16905,
       "owner": "codex-tui",
       "review": "C-0071; 2026-09-30 issue #78: one import and one line for the phone medium tier (js/perf/phone.js); 2026-10-01 issue #82: the composer target keeps its depth as a texture for the outline (js/perf/outline.js)",
       "reason": "Existing post-processing pipeline and shader text; keep shader contents intact."

@@ -1,4 +1,4 @@
-// One low-detail model of the whole island for the far view (?far=1, look/far-flag.js): every building in the
+// One low-detail model of the whole island for the far view (look/far-flag.js): every building in the
 // island layout at its full height with window rows, the land and the sea past the skyline's square, and clumps of
 // trees on the layout's green and over the north half (the park and the shrine headland, docs/game/island.md), so a
 // place's street ends in the next districts and the hills instead of a flat plain. One vertex-coloured mesh (one
@@ -177,6 +177,7 @@ export function* farModelSteps(info, L) {
     m.castShadow = false;
     m.receiveShadow = false;
     m.userData.noLook = true;
+    m.userData.noAO = true; // past the haze's start, where contact shadows don't show (post.js leaves it out)
     m.userData.farView = 'follow';
   }
   if (litMesh) litMesh.userData.farLit = true; // after work only (look/sky.js)

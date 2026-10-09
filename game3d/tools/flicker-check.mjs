@@ -86,7 +86,7 @@ await withBrowserJob('flicker-check', async (browser) => {
     await p.evaluate(
       ([eve, at]) => {
         const G = globalThis.__game;
-        if (eve) G.place.onPeriod?.('evening');
+        if (eve) G.hooks.period({ to: 'evening' }); // the clock's own change: light, sky and what else the period changes
         if (!at) return; // where the place starts him
         const s = typeof at === 'string' ? G.place.spots[at] : at;
         const [x, z] = typeof s === 'function' ? s() : s;

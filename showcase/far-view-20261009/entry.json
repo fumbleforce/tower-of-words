@@ -1,0 +1,165 @@
+{
+  "title": "The far view is on in every outdoor place",
+  "date": "2026-10-09",
+  "by": "claude-agent:farview",
+  "caption": "Every outdoor place now has the sky, the haze and the far island model from far-view-1. You no longer need ?far=1; ?far=0 turns it off to compare. The sky's colours now come from the same period table as the rest of the light, so they change with it. The island model is drawn once a frame instead of twice, and phones don't build it. The empty ground in some places is for pass 2 (#375).",
+  "preview": "plaza-evening-after-west",
+  "result": [
+    "plaza-evening-after-west",
+    "sports-morning-after-north",
+    "east-coast-evening-after-west",
+    "dorm-court-evening-after-west"
+  ],
+  "sections": [
+    {
+      "title": "The plaza",
+      "images": [
+        {
+          "id": "plaza-morning-before-north",
+          "image": "bible/shots/showcase/far-view-20261009/plaza-morning-before-north.webp",
+          "caption": "Before: morning, desktop, follow camera facing north"
+        },
+        {
+          "id": "plaza-morning-after-north",
+          "image": "bible/shots/showcase/far-view-20261009/plaza-morning-after-north.webp",
+          "caption": "After: morning, desktop, follow camera facing north"
+        },
+        {
+          "id": "plaza-evening-before-west",
+          "image": "bible/shots/showcase/far-view-20261009/plaza-evening-before-west.webp",
+          "caption": "Before: after work, desktop, follow camera facing west"
+        },
+        {
+          "id": "plaza-evening-after-west",
+          "image": "bible/shots/showcase/far-view-20261009/plaza-evening-after-west.webp",
+          "caption": "After: after work, desktop, follow camera facing west"
+        },
+        {
+          "id": "plaza-morning-before-phone",
+          "image": "bible/shots/showcase/far-view-20261009/plaza-morning-before-phone.webp",
+          "caption": "Before: morning, phone overview"
+        },
+        {
+          "id": "plaza-morning-after-phone",
+          "image": "bible/shots/showcase/far-view-20261009/plaza-morning-after-phone.webp",
+          "caption": "After: morning, phone overview"
+        }
+      ],
+      "caption": "Same spot and camera, the far view off and on."
+    },
+    {
+      "title": "The east coast",
+      "images": [
+        {
+          "id": "east-coast-morning-before-east",
+          "image": "bible/shots/showcase/far-view-20261009/east_coast-morning-before-east.webp",
+          "caption": "Before: morning, desktop, follow camera facing east"
+        },
+        {
+          "id": "east-coast-morning-after-east",
+          "image": "bible/shots/showcase/far-view-20261009/east_coast-morning-after-east.webp",
+          "caption": "After: morning, desktop, follow camera facing east"
+        },
+        {
+          "id": "east-coast-evening-before-west",
+          "image": "bible/shots/showcase/far-view-20261009/east_coast-evening-before-west.webp",
+          "caption": "Before: after work, desktop, follow camera facing west"
+        },
+        {
+          "id": "east-coast-evening-after-west",
+          "image": "bible/shots/showcase/far-view-20261009/east_coast-evening-after-west.webp",
+          "caption": "After: after work, desktop, follow camera facing west"
+        },
+        {
+          "id": "east-coast-morning-before-phone",
+          "image": "bible/shots/showcase/far-view-20261009/east_coast-morning-before-phone.webp",
+          "caption": "Before: morning, phone overview"
+        },
+        {
+          "id": "east-coast-morning-after-phone",
+          "image": "bible/shots/showcase/far-view-20261009/east_coast-morning-after-phone.webp",
+          "caption": "After: morning, phone overview"
+        }
+      ],
+      "caption": "Same spot and camera, the far view off and on."
+    },
+    {
+      "title": "The sports street",
+      "images": [
+        {
+          "id": "sports-morning-before-north",
+          "image": "bible/shots/showcase/far-view-20261009/sports-morning-before-north.webp",
+          "caption": "Before: morning, desktop, follow camera facing north"
+        },
+        {
+          "id": "sports-morning-after-north",
+          "image": "bible/shots/showcase/far-view-20261009/sports-morning-after-north.webp",
+          "caption": "After: morning, desktop, follow camera facing north"
+        },
+        {
+          "id": "sports-evening-before-south",
+          "image": "bible/shots/showcase/far-view-20261009/sports-evening-before-south.webp",
+          "caption": "Before: after work, desktop, follow camera facing south"
+        },
+        {
+          "id": "sports-evening-after-south",
+          "image": "bible/shots/showcase/far-view-20261009/sports-evening-after-south.webp",
+          "caption": "After: after work, desktop, follow camera facing south"
+        },
+        {
+          "id": "sports-morning-before-phone",
+          "image": "bible/shots/showcase/far-view-20261009/sports-morning-before-phone.webp",
+          "caption": "Before: morning, phone overview"
+        },
+        {
+          "id": "sports-morning-after-phone",
+          "image": "bible/shots/showcase/far-view-20261009/sports-morning-after-phone.webp",
+          "caption": "After: morning, phone overview"
+        }
+      ],
+      "caption": "Same spot and camera, the far view off and on. The empty ground past the street is for the second pass (#375)."
+    },
+    {
+      "title": "The dorm court",
+      "images": [
+        {
+          "id": "dorm-court-evening-before-west",
+          "image": "bible/shots/showcase/far-view-20261009/dorm_court-evening-before-west.webp",
+          "caption": "Before: after work, desktop, follow camera facing west"
+        },
+        {
+          "id": "dorm-court-evening-after-west",
+          "image": "bible/shots/showcase/far-view-20261009/dorm_court-evening-after-west.webp",
+          "caption": "After: after work, desktop, follow camera facing west"
+        },
+        {
+          "id": "dorm-court-evening-before-south",
+          "image": "bible/shots/showcase/far-view-20261009/dorm_court-evening-before-south.webp",
+          "caption": "Before: after work, desktop, follow camera facing south"
+        },
+        {
+          "id": "dorm-court-evening-after-south",
+          "image": "bible/shots/showcase/far-view-20261009/dorm_court-evening-after-south.webp",
+          "caption": "After: after work, desktop, follow camera facing south"
+        },
+        {
+          "id": "dorm-court-evening-before-phone",
+          "image": "bible/shots/showcase/far-view-20261009/dorm_court-evening-before-phone.webp",
+          "caption": "Before: after work, phone overview"
+        },
+        {
+          "id": "dorm-court-evening-after-phone",
+          "image": "bible/shots/showcase/far-view-20261009/dorm_court-evening-after-phone.webp",
+          "caption": "After: after work, phone overview"
+        }
+      ],
+      "caption": "Eric only comes here after work on day 1, so both views are at dusk."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play it",
+      "href": "game3d/"
+    }
+  ]
+}

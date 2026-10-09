@@ -123,7 +123,7 @@ export function followCamera(game, place) {
       camera.position.copy(desired);
       camera.fov = 50;
       camera.near = 0.04;
-      // ?far=1 (look/sky.js): the far plane just past where the haze is whole, so the island's edge never shows
+      // the far view (look/sky.js): the far plane just past where the haze is whole, so the island's edge never shows
       if (place.farView) camera.far = place.farView.far;
       camera.updateProjectionMatrix();
       camera.lookAt(target);

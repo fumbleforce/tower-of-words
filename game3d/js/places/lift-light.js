@@ -1,11 +1,12 @@
 // The light round the lift car during a ride (places/lift.js): the dim while he boards (setDark), and the dark once
 // the car has left the place's floor (setAway), when everything outside the car goes out of the frame.
 import * as THREE from 'three';
-import { wallTop } from './lift-cut.js';
+import { wallTop, backdrop } from './lift-cut.js';
 
 const DARK = 0.4; // how much of a place's own light stays on during the ride (dimmed, not black: QA round 1)
 const DARK_BG = new THREE.Color('#14171d'),
-  BG_K = 0.45; // the background goes this far toward DARK_BG
+  BG_K = 0.45, // the background goes this far toward DARK_BG
+  SKY_DARK = 0.1; // a sky picture (look/sky.js) can't be blended to a colour: it is dimmed to this much instead
 const lerp = (a, b, k) => a + (b - a) * k;
 
 // light and background: k 0 = the place as built, 1 = the ride's dim
@@ -16,7 +17,9 @@ export function setDark(L, k) {
     sc.traverse((o) => {
       if (o.isLight && !isOurs(L, o)) L.base.push([o, o.intensity]);
     });
-    L.bg = sc.background ? sc.background.clone() : null;
+    // a background colour is blended toward the ride's dark; a sky picture is dimmed, and the haze with it
+    L.bg = sc.background?.isColor ? sc.background.clone() : null;
+    L.sky = sc.background?.isTexture ? { k: sc.backgroundIntensity, fog: sc.fog?.color.clone() } : null;
   }
   for (const [o, i] of L.base) o.intensity = i * lerp(1, DARK, k);
   // the additive light pools on the floors (life.js) are painted light: they dim with the rest
@@ -28,7 +31,12 @@ export function setDark(L, k) {
     });
   }
   for (const [m, a] of L.pools) m.opacity = a * lerp(1, DARK, k);
-  if (L.bg) sc.background = L.bg.clone().lerp(DARK_BG, lerp(k * BG_K, 1, L.away));
+  const t = lerp(k * BG_K, 1, L.away || 0);
+  if (L.bg) sc.background = L.bg.clone().lerp(DARK_BG, t);
+  if (L.sky) {
+    sc.backgroundIntensity = L.sky.k * lerp(1, SKY_DARK, t);
+    if (L.sky.fog) sc.fog.color.copy(L.sky.fog).lerp(DARK_BG, t);
+  }
   L.dark = k;
 }
 // k 0 = the car at this place's floor, 1 = away from it: a shroud in the ride's background colour closes over the
@@ -56,7 +64,7 @@ export function setAway(L, k) {
   m.visible = k > 0;
   if (!m.visible) return;
   m.material.opacity = k;
-  m.material.color.copy(L.place.scene.background || DARK_BG);
+  m.material.color.copy(backdrop(L.place.scene) || DARK_BG);
   // the hole: the car's box (and the landing's floor) seen from the camera, where the lines of sight cross the shroud
   const { site, box, car } = L,
     h = Math.max(wallTop(site), box.top) + 0.06, // over the place's tallest wall round the car

@@ -1,9 +1,8 @@
-// The far view trial (#365, notes/research/world-chunking.md): with ?far=1 in the URL, the outdoor places listed here
-// get a sky and haze that follow the time of day (look/sky.js), one low-detail model of the whole island past their
-// own buildings (scenes/far-model.js) and the skyline's cut-down buildings at full height, all for the follow camera.
-// Without the flag nothing changes. Rolling it out is adding a place to FAR_PLACES (or every outdoor place); nothing
-// in the place itself needs to change.
-const Q = new URLSearchParams(globalThis.location?.search || '');
-export const FAR_PLACES = new Set(['works', 'shotengai', 'harbour']);
-const on = Q.get('far') === '1';
-export const farWanted = (name) => on && FAR_PLACES.has(name);
+// The far view (#365, notes/research/world-chunking.md): every outdoor place gets a sky and haze that follow the time
+// of day (look/sky.js), one low-detail model of the whole island past its own buildings (scenes/far-model.js) and the
+// skyline's cut-down buildings at full height for the follow camera. On by default; `?far=0` in the URL switches it
+// off, to compare with the flat grey background it replaced.
+export const FAR_VIEW = new URLSearchParams(globalThis.location?.search || '').get('far') !== '0';
+// the far model and the skyline's full-height buildings are for the follow camera only, which a touch screen never
+// has (camera/policy.js): a phone gets the sky and haze without them and keeps their memory
+export const farFollow = () => FAR_VIEW && !globalThis.matchMedia?.('(pointer: coarse)').matches;
