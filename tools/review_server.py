@@ -211,8 +211,8 @@ class Handler(SimpleHTTPRequestHandler):
         if path == '/game3d/build.json' or path.endswith('/game3d/build.json'):
             stamp_build(path)
         if path in ('/private', '/private/'):
-            # the local hub with the private pages (island/private/bible/hub.html; local server only, never published)
-            self.send_response(302); self.send_header('Location', '/island/private/bible/hub.html'); self.end_headers()
+            # the local hub with the private pages (the private bible home, which carries the shared private menu; local server only, never published)
+            self.send_response(302); self.send_header('Location', '/island/private/bible/'); self.end_headers()
             return
         if path == '/api/plugins':
             # the local plugin names, so the game asks only for files that exist (no 404 per place)
