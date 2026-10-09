@@ -65,7 +65,7 @@ export default withStationGarden(
           say: 'rei',
           name: 'Rei',
           emo: 'casual',
-          text: 'I’m getting something before I go back. Have you found a place you like yet?',
+          text: 'I’m getting something to eat at my desk. Have you found anywhere decent yet, or are you still living on konbini food?',
         },
         {
           choice: [
