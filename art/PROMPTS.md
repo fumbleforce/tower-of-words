@@ -215,6 +215,8 @@ These were in GUIDE.md until the guide diet and are copied here as they were. GU
 
 ### Verdicts
 
+Every dashboard picture has a permanent number (#n, on its tile; tools/imagegen/find.py <n> looks it up). Name candidates by #n in reviews and reports so Jørgen can refer to them in chat (2026-10-09).
+
 Every attempt an agent rejects gets a one-line reason in the image gen dashboard, where Jørgen reads it in the History viewer's reject-reason field (Jørgen, 2026-10-09: "the verdict should be in the reject reason field here in the imagegen history viewer"). Renders saved by tools/comfy.py `run()` are logged there already; after looking at each one, run `python3 tools/verdict.py <image> --reject "<what is wrong, one line>"` (or `--keep "<why>"` for the ones that stay). The same reason goes on the round's page.
 
 ### Portraits, expressions and cutouts
