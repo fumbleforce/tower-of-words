@@ -4,6 +4,7 @@ import { CHARACTER_SCALE } from './character-scale.js';
 import { loadRelaxedIdle } from './relaxed-idle.js';
 import { makeGait, holdNow } from './movement/gait.js';
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
+import { loadSkin } from './perf/skin-tex.js';
 
 const DIR = new URL('../assets/mio/', import.meta.url).href;
 export const V = () => '?v=' + encodeURIComponent(window.BUILD || '');
@@ -580,7 +581,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     load(DIR + 'run.glb' + V()),
     load(DIR + 'sit.glb' + V()),
     fetch(DIR + 'base-clean.json' + V()).then((r) => r.json()),
-    new THREE.TextureLoader().loadAsync(DIR + 'base-clean.webp' + V()),
+    loadSkin(DIR + 'base-clean.webp' + V()),
     loadRelaxedIdle('mio', V()),
   ]);
   const phoneJson = await fetch(CDIR + 'mio/phone.json' + V())

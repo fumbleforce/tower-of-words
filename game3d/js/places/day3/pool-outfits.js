@@ -6,6 +6,7 @@ import { meshyFrom } from '../../avatar.js';
 import { meshyPerson } from '../../cast3d.js';
 import { MC } from '../../mc.js';
 import { poolOutfitGround } from './pool-outfit-ground.js';
+import { loadSkin } from '../../perf/skin-tex.js';
 import { poolOutfitSlot } from './pool-outfit-slot.js';
 const HEIGHTS = { eric: 1.2, carina: 1.12, emi: 1.09, kuro: 1.12 };
 const pending = new Map();
@@ -25,7 +26,7 @@ function load(id) {
         gltf.loadAsync(dir + 'run.glb'),
         clip('idle'),
         clip('sit').then((c) => ({ animations: [c] })),
-        new THREE.TextureLoader().loadAsync(dir + 'base.webp'),
+        loadSkin(dir + 'base.webp'),
       ])
         .then((parts) => {
           parts.size = new THREE.Box3().setFromObject(parts[0].scene).getSize(new THREE.Vector3()).y;

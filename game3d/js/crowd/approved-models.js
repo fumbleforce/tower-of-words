@@ -5,6 +5,7 @@ import { GLTFLoader } from '../../vendor/loaders/GLTFLoader.js';
 import { clone } from '../../vendor/utils/SkeletonUtils.js';
 import { meshyFrom } from '../avatar.js';
 import { meshyPerson } from '../cast3d.js';
+import { loadSkin } from '../perf/skin-tex.js';
 
 const HEIGHTS = [1.09, 1.06];
 const files = [];
@@ -23,7 +24,7 @@ export function prepareApprovedCrowd() {
             return THREE.AnimationClip.parse(await r.json());
           }),
           loader.loadAsync(dir + 'sit.glb'),
-          new THREE.TextureLoader().loadAsync(dir + 'base.webp'),
+          loadSkin(dir + 'base.webp', { small: true }),
         ]);
         parts.size = new THREE.Box3().setFromObject(parts[0].scene).getSize(new THREE.Vector3()).y;
         files[i] = parts;

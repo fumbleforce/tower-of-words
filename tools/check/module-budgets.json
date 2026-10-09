@@ -2,10 +2,10 @@
   "defaultLines": 400,
   "exceptions": {
     "game3d/js/avatar.js": {
-      "lines": 474,
-      "bytes": 15498,
+      "lines": 475,
+      "bytes": 15518,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones); 2026-10-05 C-0441 meshyFiles split out of loadMeshy, so cast3d.js makes a copy of Kuro, Aoi and Emi for each place; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow); 2026-10-05 seat height (feedback 2026-10-05_192459): sitAt puts the measured underside on the seat top (movement/sit-height.js); X-0747 optional pool-owned root retains actor identity, exact byte ceiling lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered",
+      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones); 2026-10-05 C-0441 meshyFiles split out of loadMeshy, so cast3d.js makes a copy of Kuro, Aoi and Emi for each place; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow); 2026-10-05 seat height (feedback 2026-10-05_192459): sitAt puts the measured underside on the seat top (movement/sit-height.js); X-0747 optional pool-owned root retains actor identity, exact byte ceiling lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered; 2026-10-09 #373 the skin loads through perf/skin-tex.js, one import line",
       "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."
     },
     "game3d/js/cast.js": {
@@ -19,7 +19,7 @@
       "lines": 665,
       "bytes": 26656,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-05 #240 the desk's pedestals PED wide (props.js); #248 the open desk option (one pedestal, no front panel); 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered",
+      "review": "C-0071; 2026-10-05 #240 the desk's pedestals PED wide (props.js); #248 the open desk option (one pedestal, no front panel); 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered; 2026-10-09 #373 the skin loads through perf/skin-tex.js, one import line",
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
@@ -37,10 +37,10 @@
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
     },
     "game3d/js/mio.js": {
-      "lines": 820,
-      "bytes": 29279,
+      "lines": 821,
+      "bytes": 29299,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow)",
+      "review": "C-0071; 2026-10-05 #240 sitAt goes straight into the seated frame (movement/gait.js holdNow); 2026-10-09 #373 the skin loads through perf/skin-tex.js, one import line",
       "reason": "Existing procedural character and animation implementation; changes require character review."
     },
     "game3d/js/perf/batch.js": {
@@ -68,7 +68,7 @@
       "lines": 1116,
       "bytes": 40631,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; 2026-10-03 C-0378 day 2: the officeDay2 hook registered and installed (places/office-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 copy_room and machine_room zones a step past their doors, and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Emi stays in her office on day 1 evening: the emi_door and emi_desk spots, and her shadow follows her; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced; 2026-10-07 #314: shared lunch food/seat definitions extracted, owned later-lunch adapter installed; ceiling lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered",
+      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; 2026-10-03 C-0378 day 2: the officeDay2 hook registered and installed (places/office-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 copy_room and machine_room zones a step past their doors, and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 Emi stays in her office on day 1 evening: the emi_door and emi_desk spots, and her shadow follows her; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced; 2026-10-07 #314: shared lunch food/seat definitions extracted, owned later-lunch adapter installed; ceiling lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered; 2026-10-09 #373 the skin loads through perf/skin-tex.js, one import line",
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/train.js": {
@@ -89,7 +89,7 @@
       "lines": 537,
       "bytes": 19685,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112); 2026-10-05 #240 PED, the desks' narrower drawer pedestals, so seated knees fit between them; #248 desk({ open }), Emi's desk open underneath with two legs; 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered",
+      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112); 2026-10-05 #240 PED, the desks' narrower drawer pedestals, so seated knees fit between them; #248 desk({ open }), Emi's desk open underneath with two legs; 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered; 2026-10-09 #373 the skin loads through perf/skin-tex.js, one import line",
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {
