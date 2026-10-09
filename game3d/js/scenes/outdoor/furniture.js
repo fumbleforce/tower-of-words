@@ -5,7 +5,8 @@
 //   const lights = lightSet(); lamps(lights, p, points, { kind })   lamps; lights.build(root, { poolY }) makes every
 //                                           lit part and every light pool of a place one mesh each (the pools poolY
 //                                           over the ground, if the paving is raised); .evening() turns them up
-//   bench(p, x, z, facing, { len, back })   slatted, on two stone legs; facing: the way a sitter looks (radians)
+//   bench(p, x, z, facing, { len, back })   a park bench: timber slats on cast-iron ends with armrests (stone legs
+//                                           without the models); facing: the way a sitter looks (radians)
 //   bins(p, x, z, facing)                   the sorted pair (cans and bottles, burnables) every Japanese street has
 //   bollard(p, x, z)                        stone, with a steel cap
 //   stoneLantern(p, set, x, z, y)           a garden's stone lantern, its fire box lit with the lamps
@@ -16,10 +17,13 @@
 import * as THREE from 'three';
 import { textTexture, plane, JP_FONT } from '../../props.js';
 import { pools } from './parts.js';
+import { benchGeometries } from './plant-models.js';
 
 export const STEEL = { dark: '#3e434d', mid: '#5b616b', pale: '#9aa0aa' };
 const WOOD = '#9b958c',
-  STONE = '#8b8d90';
+  STONE = '#8b8d90',
+  IRON = '#3a4441', // the park bench's cast-iron ends
+  TIMBER = '#9c8b77'; // and its slats
 
 // the lamps' lit parts share one material of their own, so the evening can turn them up without touching the
 // lamps of other places
@@ -117,6 +121,16 @@ function mergeFlat(list) {
 // a bench: facing is the way the sitter looks (0 = +z, south; Math.PI = north)
 export function bench(p, x, z, facing = 0, { len = 1.6, back = true } = {}) {
   (p.seats ||= []).push({ x, z, facing, len }); // where people can sit (Parts.build hands it on; crowd/still.js)
+  // the Blender-built park bench (outdoor/plant-models.js): cast-iron ends with armrests, shaped timber slats
+  const model = benchGeometries(len, back);
+  if (model) {
+    for (const [color, g] of [
+      [IRON, model.iron],
+      [TIMBER, model.wood],
+    ])
+      p.geo(color, g.rotateY(facing).translate(x, 0, z), { shade: true }); // in the collector's plain set, as before: no extra draws
+    return;
+  }
   const c = Math.cos(facing),
     s = Math.sin(facing);
   // local (u across the seat, v toward where the sitter looks) to world

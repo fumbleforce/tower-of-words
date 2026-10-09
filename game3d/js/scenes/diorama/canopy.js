@@ -71,13 +71,29 @@ export function addCanopyCore(root, faces) {
       `#include <common>
       varying vec3 vCrown; varying vec3 vCrownNormal;
       float crownHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+      float crownNoise(vec2 p){
+        vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+        return mix(mix(crownHash(i),crownHash(i+vec2(1,0)),f.x),mix(crownHash(i+vec2(0,1)),crownHash(i+vec2(1,1)),f.x),f.y);
+      }
+      // Leaves scattered at random points (the nearest of the jittered neighbours), each its own size, turn and
+      // shade, under soft clumps of light and shadow: no row or grid to pick out (issue #362).
+      float crownLayer(vec2 p){
+        vec2 cell=floor(p);float best=9.,tone=.5,lit=0.;
+        for(int j=-1;j<=1;j++)for(int i=-1;i<=1;i++){
+          vec2 c=cell+vec2(i,j);float h=crownHash(c),k=crownHash(c+17.3);
+          vec2 d=p-(c+vec2(h,k));float a=h*6.28318;
+          d=mat2(cos(a),-sin(a),sin(a),cos(a))*d;
+          float e=length(d/vec2(.62,.36))/(.75+.5*k);
+          if(e<best){best=e;tone=h;lit=d.y;}
+        }
+        float leaf=1.-smoothstep(.55,1.,best);
+        return leaf*(.25+.45*tone)+lit*.12;
+      }
       float crownLeaves(vec2 p){
-        vec2 grid=p*10.,cell=floor(grid),uv=fract(grid)-.5;
-        float seed=crownHash(cell),angle=seed*6.28318;
-        uv=mat2(cos(angle),-sin(angle),sin(angle),cos(angle))*uv;
-        float edge=length(uv/vec2(.58,.34));
-        float leaf=1.-smoothstep(.76,1.05,edge);
-        return .42+leaf*(.35+.35*seed)+.18*uv.y;
+        vec2 q=mat2(.8,-.6,.6,.8)*p;
+        float leaves=max(crownLayer(p*9.),crownLayer(q*13.+5.1)*.85);
+        float clump=crownNoise(p*2.3)*.6+crownNoise(q*5.1)*.4;
+        return .4+leaves*.8+(clump-.5)*.42;
       }
     `,
     );
@@ -105,7 +121,7 @@ export function addCanopyCore(root, faces) {
     `,
     );
   };
-  core.material.customProgramCacheKey = () => 'diorama-leaf-interior-v1';
+  core.material.customProgramCacheKey = () => 'diorama-leaf-interior-v2';
   core.castShadow = core.receiveShadow = true;
   root.add(core);
 }

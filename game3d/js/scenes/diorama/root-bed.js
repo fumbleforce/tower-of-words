@@ -17,7 +17,8 @@ function groundAt(p, x, z) {
   return height;
 }
 
-export function rootBed(p, x, z, scale, seed) {
+// codeTrunk: also lay the code-built root flare (off when the Blender-built trunk brings its own roots)
+export function rootBed(p, x, z, scale, seed, { codeTrunk = true } = {}) {
   const y = groundAt(p, x, z),
     radius = 0.43 * scale;
   const soil = new THREE.CylinderGeometry(radius, radius * 1.04, 0.025, 12);
@@ -26,6 +27,12 @@ export function rootBed(p, x, z, scale, seed) {
   const ring = new THREE.RingGeometry(radius, radius + 0.055 * scale, 12);
   ring.rotateX(-Math.PI / 2).translate(x, y + 0.027, z);
   p.geo('#80745f', ring, { cast: false, surf: 'stone' });
+  if (codeTrunk) rootFlare(p, x, y, z, scale, seed);
+  groundCover(p, x, y, z, radius, scale, seed);
+  return y;
+}
+
+function rootFlare(p, x, y, z, scale, seed) {
   const vertices = [],
     indices = [];
   const rings = [
@@ -53,6 +60,9 @@ export function rootBed(p, x, z, scale, seed) {
   flare.setIndex(indices);
   flare.computeVertexNormals();
   p.geo('#77644b', flare, { surf: 'bark' });
+}
+
+function groundCover(p, x, y, z, radius, scale, seed) {
   const cover = [],
     coverIndices = [];
   for (let clump = 0; clump < 6; clump++) {
@@ -104,5 +114,4 @@ export function rootBed(p, x, z, scale, seed) {
     [0, 1],
   ];
   for (let i = 0; i < uv.count; i++) uv.setXY(i, ...corners[i % 6]);
-  return y;
 }

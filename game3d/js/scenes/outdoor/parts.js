@@ -30,7 +30,9 @@ export class Parts {
     this.sets = new Map();
   }
   // alpha: one opacity per vertex (a set whose geometry all has it draws with vertex alpha: the surf's fading edge)
-  geo(color, g, { cast = true, surf = null, opts = null, alpha = null } = {}) {
+  // shade: the geometry's own colours are multipliers on `color` (0.5 = as given; the Blender-built planting and bench,
+  // outdoor/plant-models.js); such a geometry may come without normals, and gets flat ones here.
+  geo(color, g, { cast = true, surf = null, opts = null, alpha = null, shade = false } = {}) {
     const key = `${cast}|${surf}|${opts ? JSON.stringify(opts) : ''}|${!!alpha}`;
     // one attribute set for all: position, normal, colour (and uv, zeroed, so everything merges)
     if (alpha && alpha.length !== g.attributes.position.count)
@@ -40,12 +42,17 @@ export class Parts {
       if (alpha) alpha = Array.from(g.index.array, (i) => alpha[i]);
       g = g.toNonIndexed();
     }
+    if (!g.attributes.normal) g.computeVertexNormals();
+    const tint = shade ? g.attributes.color : null;
     for (const n of Object.keys(g.attributes)) if (n !== 'position' && n !== 'normal') g.deleteAttribute(n);
     const n = g.attributes.position.count;
     _c.set(color);
     const k = alpha ? 4 : 3,
       col = new Float32Array(n * k);
-    for (let i = 0; i < n; i++) col.set(alpha ? [_c.r, _c.g, _c.b, alpha[i]] : [_c.r, _c.g, _c.b], i * k);
+    for (let i = 0; i < n; i++) {
+      const [r, gg, b] = tint ? [2 * tint.getX(i), 2 * tint.getY(i), 2 * tint.getZ(i)] : [1, 1, 1];
+      col.set(alpha ? [_c.r * r, _c.g * gg, _c.b * b, alpha[i]] : [_c.r * r, _c.g * gg, _c.b * b], i * k);
+    }
     g.setAttribute('color', new THREE.Float32BufferAttribute(col, k));
     g.setAttribute('uv', new THREE.Float32BufferAttribute(new Float32Array(n * 2), 2));
     this.sets.get(key).list.push(g);

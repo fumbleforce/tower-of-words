@@ -10,6 +10,7 @@
 import * as THREE from 'three';
 import { roundedBox } from '../../perf/rounded-box.js';
 import { rng } from './parts.js';
+import { plantGeometry, plantTips, trunkName, bushName, bushFrom, hedgeGeometries } from './plant-models.js';
 
 export const LEAF = {
   deep: '#43603f',
@@ -39,18 +40,48 @@ function limb(p, a, b, r0, r1, color = LEAF.bark) {
   );
   p.geo(color, g.translate(...a), { surf: 'bark' });
 }
-// a crown blob: a faceted ball (a dodecahedron: round enough in a cluster, 36 triangles) scaled to (sx, sy, sz),
-// turned so no two show the same facets
+// leaves are green; mound() also lays the rocks of a garden (forecourt/gardens.js rock()), which stay faceted stone
+const _tone = new THREE.Color();
+const leafy = (color) => (_tone.set(color), _tone.g > _tone.r * 1.04 && _tone.g > _tone.b);
+
+// a crown blob: a mass of leaf clumps (outdoor/plant-models.js bushes, 80 triangles), or a faceted ball (a
+// dodecahedron: round enough in a cluster, 36 triangles) for the small ones, where the clumps wouldn't show, and
+// without the models; scaled to (sx, sy, sz), turned so no two look the same
 function blob(p, x, y, z, r, color, { sx = 1, sy = 1, sz = 1, turn = 0 } = {}) {
+  const mass =
+    r >= bushFrom() &&
+    leafy(color) &&
+    plantGeometry(bushName(turn + x + z), [x, y, z], [r * sx, r * sy, r * sz], turn * 2.3);
+  if (mass) return p.geo(color, mass, { surf: 'foliage', shade: true });
   const g = new THREE.DodecahedronGeometry(r * 1.04, 0);
   g.rotateY(turn).rotateX(turn * 0.7);
   g.scale(sx, sy, sz);
   p.geo(color, g.translate(x, y, z), { surf: 'foliage' });
 }
 
+// A tree from its Blender-built trunk (outdoor/plant-models.js): root flare, taper, branch junctions and bark, turned
+// by its seed, with crown(x, y, z, k, i) called at the end of each limb (k: the crown's relative size). False without
+// the models, and the species below build their older code-made tree.
+function grown(p, species, x, z, s, seed, bark, crown) {
+  const name = trunkName(species, seed),
+    ry = seed * 2.39996;
+  const trunk = plantGeometry(name, [x, 0, z], s, ry);
+  if (!trunk) return false;
+  p.geo(bark, trunk, { surf: 'bark', shade: true });
+  plantTips(name, [x, 0, z], s, ry).forEach(([tx, ty, tz, k], i) => crown(tx, ty, tz, k, i));
+  return true;
+}
+
 // zelkova: a clear trunk, three limbs opening into a vase, a broad crown of five blobs and a top
 export function keyaki(p, x, z, s = 1, seed = 1) {
   if (p.planting?.tree(p, { species: 'keyaki', x, z, scale: s, seed })) return;
+  const tone = (i) => GREENS[(seed + i) % 4];
+  if (
+    grown(p, 'keyaki', x, z, s, seed, LEAF.barkGrey, (tx, ty, tz, k, i) =>
+      blob(p, tx, ty + 0.14 * s, tz, 0.5 * k * s, tone(i % 2), { sy: 0.74, turn: seed + i * 1.7 }),
+    )
+  )
+    return;
   const r = rng(seed),
     h = 1.15 * s;
   limb(p, [x, 0, z], [x, h, z], 0.1 * s, 0.075 * s, LEAF.barkGrey);
@@ -76,6 +107,23 @@ export function keyaki(p, x, z, s = 1, seed = 1) {
 // cherry: a short leaning trunk and two limbs, a wide low crown of flattened blobs, one turning early
 export function sakura(p, x, z, s = 1, seed = 1) {
   if (p.planting?.tree(p, { species: 'sakura', x, z, scale: s, seed })) return;
+  if (
+    grown(p, 'sakura', x, z, s, seed, '#5a524d', (tx, ty, tz, k, i) =>
+      blob(
+        p,
+        tx,
+        ty + 0.1 * s,
+        tz,
+        0.5 * k * s,
+        i === 3 && seed % 2 ? LEAF.olive : [LEAF.fresh, LEAF.light, LEAF.mid][i % 3],
+        {
+          sy: 0.55,
+          turn: seed + i * 1.3,
+        },
+      ),
+    )
+  )
+    return;
   const r = rng(seed + 11),
     lean = (r() - 0.5) * 0.3 * s;
   const top = [x + lean, 0.8 * s, z];
@@ -93,6 +141,12 @@ export function sakura(p, x, z, s = 1, seed = 1) {
 // black pine, clipped: a trunk that bends twice and flat cloud pads on short branches
 export function pine(p, x, z, s = 1, seed = 1) {
   if (p.planting?.tree(p, { species: 'pine', x, z, scale: s, seed })) return;
+  if (
+    grown(p, 'pine', x, z, s, seed, '#4f4945', (tx, ty, tz, k, i) =>
+      blob(p, tx, ty + 0.05 * s, tz, 0.42 * k * s, i % 2 ? LEAF.pine : '#44604f', { sy: 0.38, turn: seed + i * 2.1 }),
+    )
+  )
+    return;
   const r = rng(seed + 23);
   const pts = [
     [x, 0, z],
@@ -123,6 +177,13 @@ export function pine(p, x, z, s = 1, seed = 1) {
 // ginkgo: a straight trunk and a tall narrow crown, yellow-green in October
 export function ginkgo(p, x, z, s = 1, seed = 1) {
   if (p.planting?.tree(p, { species: 'ginkgo', x, z, scale: s, seed })) return;
+  const yellow = seed % 3 ? LEAF.ginkgo : '#76844a';
+  if (
+    grown(p, 'ginkgo', x, z, s, seed, LEAF.barkGrey, (tx, ty, tz, k, i) =>
+      blob(p, tx, ty, tz, 0.46 * k * s, yellow, { sy: 1.05, turn: seed + i }),
+    )
+  )
+    return;
   limb(p, [x, 0, z], [x, 1.4 * s, z], 0.08 * s, 0.05 * s, LEAF.barkGrey);
   const tone = seed % 3 ? LEAF.ginkgo : '#76844a';
   [
@@ -136,6 +197,15 @@ export function ginkgo(p, x, z, s = 1, seed = 1) {
 // maple: three thin stems and a small crown; one blob turning
 export function maple(p, x, z, s = 1, seed = 1) {
   if (p.planting?.tree(p, { species: 'maple', x, z, scale: s, seed })) return;
+  if (
+    grown(p, 'maple', x, z, s, seed, '#57504a', (tx, ty, tz, k, i) =>
+      blob(p, tx, ty + 0.06 * s, tz, 0.34 * k * s, i === 1 ? LEAF.rust : [LEAF.fresh, LEAF.light, LEAF.mid][i % 3], {
+        sy: 0.7,
+        turn: seed + i,
+      }),
+    )
+  )
+    return;
   const r = rng(seed + 41);
   for (let i = 0; i < 3; i++) {
     const a = (i / 3) * Math.PI * 2 + seed;
@@ -180,6 +250,13 @@ export function cluster(p, x, z, { n = 4, r = 0.4, spread = 0.55, seed = 1, tone
 // a clipped hedge from a to b (axis-aligned), in segments that differ a little in height and tone
 export function hedge(p, a, b, { w = 0.5, h = 0.55, y = 0, tones = [LEAF.deep, LEAF.mid], seg = 1.1, seed = 1 } = {}) {
   if (p.planting?.hedge(p, { a, b, w, h, y, seed })) return;
+  // the Blender-built hedge plants (outdoor/plant-models.js): irregular leaf clumps over a clipped block
+  const plants = hedgeGeometries(a, b, { w, h, y, seed });
+  if (plants) {
+    // one green for the run: the plants' own clumps vary it, so neighbours don't show as blocks of two tones
+    for (const { geometry } of plants) p.geo(tones[seed % tones.length], geometry, { surf: 'foliage', shade: true });
+    return;
+  }
   const alongX = Math.abs(b[0] - a[0]) >= Math.abs(b[1] - a[1]);
   const L = alongX ? Math.abs(b[0] - a[0]) : Math.abs(b[1] - a[1]);
   const n = Math.max(1, Math.round(L / seg)),
