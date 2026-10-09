@@ -5,6 +5,7 @@ import { NEXT } from './definitions.js';
 import { cancelSavedWalk } from './saved-people.js';
 import { attachLift } from './lift.js';
 import { lookSteps } from '../look/index.js';
+import { farViewSteps } from '../look/sky.js';
 import { sliced, setUrgent, nextFrame } from '../perf/slice.js';
 import { optimizePlace } from '../perf/batch.js';
 import { lightenForPhone, phoneBatch } from '../perf/phone.js';
@@ -94,6 +95,7 @@ export function createPlaceLifecycle(
         attachLift(game, place); // walk-in lift (places/lift.js)
         await nextFrame();
         await attachCrowd(game, place, name); // the outdoor places' passers-by, before the draw-call pass (crowd/)
+        await sliced(farViewSteps(game, place, name, () => sim.period)); // ?far=1: sky, haze, far model (look/sky.js)
         // surface patterns, baked light (look/index.js); materials patched in place, in slices between frames so the
         // place being played doesn't stall (js/perf/slice.js)
         await sliced(lookSteps(place, game));
@@ -161,7 +163,9 @@ export function createPlaceLifecycle(
     game.player.scripted = false;
     game.player.setState('idle');
     game.player.root.visible = true;
-    game.walker = new SmoothWalker(game.player.root, place.nav, { speed: 1.43 });
+    game.walker = new SmoothWalker(game.player.root, place.nav, {
+      speed: 1.43,
+    });
     game.walker.facing = place.startFacing ?? Math.PI;
     game.player.root.rotation.y = game.walker.facing;
     const [sx, sz] = place.start;

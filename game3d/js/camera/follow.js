@@ -55,7 +55,13 @@ export function followCamera(game, place) {
     },
     look(dx, dy) {
       yaw -= dx * 0.003;
-      pitch = THREE.MathUtils.clamp(pitch + dy * 0.001875, -0.18, 0.65);
+      pitch = THREE.MathUtils.clamp(pitch + dy * 0.001875, place.farView?.pitchMin ?? -0.18, 0.65);
+    },
+    // shot tools: a set view (yaw as from look(); pitch clamped as look() clamps it)
+    aim(y, p) {
+      yaw = y;
+      pitch = p;
+      api.look(0, 0);
     },
     restore() {
       if (authored) {
@@ -63,6 +69,7 @@ export function followCamera(game, place) {
         camera.quaternion.copy(authored.quaternion);
         camera.fov = authored.fov;
         camera.near = authored.near;
+        camera.far = authored.far;
         camera.updateProjectionMatrix();
         camera.updateMatrixWorld();
         authored = null;
@@ -82,6 +89,7 @@ export function followCamera(game, place) {
         quaternion: camera.quaternion.clone(),
         fov: camera.fov,
         near: camera.near,
+        far: camera.far,
       };
       player.getWorldPosition(feet);
       forward.set(Math.sin(yaw), 0, Math.cos(yaw));
@@ -115,6 +123,8 @@ export function followCamera(game, place) {
       camera.position.copy(desired);
       camera.fov = 50;
       camera.near = 0.04;
+      // ?far=1 (look/sky.js): the far plane just past where the haze is whole, so the island's edge never shows
+      if (place.farView) camera.far = place.farView.far;
       camera.updateProjectionMatrix();
       camera.lookAt(target);
       camera.updateMatrixWorld();
