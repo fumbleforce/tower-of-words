@@ -126,7 +126,7 @@ No text on timers, the first screen (controls only), a goal line that stays, sep
 - Avoid default AI aesthetics: brown, gold, serif, glows, eyebrow labels. Use the design-taste-frontend and game-ui-design skills.
 - Third-person camera is desktop only (Jørgen, 2026-10-06: "lets drop phone support for this 3rd person view altogether"); the existing phone overview remains supported. For its controls: "try gta style", after rejecting the free-camera feel.
 - Desktop and phone get separate layouts; check both with screenshots. Every part of the interface matches one design language (the "you reply" box failed this twice).
-- World style (Jørgen, 2026-09-27): flat-shaded simple 3D (docs/game/art-and-sound.md). Never mention or propose paper, cardboard, cut-out or pop-up styles in any form ("you always do and I hate it").
+- World style (Jørgen, 2026-09-27; 2026-10-10): simple 3D with anime toon lighting (two or three tones, cool shadows), adopted from the anime-look trial ("rollout ... just fix the fountain"; docs/game/art-and-sound.md). Never mention or propose paper, cardboard, cut-out or pop-up styles in any form ("you always do and I hate it").
 - New props built with game3d/js/props.js get the world look from game3d/js/look/ (surface patterns, soft baked light, small modelled detail).
 - Places must not look empty or like a cheap RPG (Jørgen, 2026-09-26: "avoid the classic low quality RPG traps"). The trap list from the pixel era is in notes/map-design.md.
 - Buildings need usable entrances and interiors, and outdoor surfaces need material detail (Jørgen, 2026-10-06: "separately many buildings seem to lack interiors? Like the cantina, and the buildings look quite plain. the outside environment is quite dull and untextured as well").
