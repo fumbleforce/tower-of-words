@@ -87,7 +87,9 @@ function names() {
 }
 // Committed files in tools/, plus the image gen dashboard's code (tools/imagegen/, kept out of git) where it is on disk.
 function toolFiles() {
-  const tracked = spawnSync('git', ['ls-files', '-z', 'tools'], { cwd: ROOT, encoding: 'utf8' }).stdout.split('\0');
+  const git = spawnSync('git', ['ls-files', '-z', 'tools'], { cwd: ROOT, encoding: 'utf8' });
+  const tracked = git.status === 0 ? git.stdout.split('\0')   // outside a checkout (a commit check's snapshot): every file
+    : fs.readdirSync(path.join(ROOT, 'tools'), { recursive: true }).map((f) => `tools/${f}`).filter((f) => !/node_modules|__pycache__/.test(f));
   const imagegen = fs.existsSync(path.join(ROOT, 'tools/imagegen'))
     ? fs.readdirSync(path.join(ROOT, 'tools/imagegen')).map((f) => `tools/imagegen/${f}`) : [];
   return [...new Set([...tracked, ...imagegen])].filter((f) => /\.(py|mjs|js|sh)$/.test(f) && !/\/testdata\//.test(f) && !OWN.has(f)
