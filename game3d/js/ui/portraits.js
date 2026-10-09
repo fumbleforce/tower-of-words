@@ -1,4 +1,4 @@
-import { PORTRAITS, TEXT_PORTRAITS } from './portrait-data.js';
+import { PORTRAITS, TEXT_PORTRAITS, FACING } from './portrait-data.js';
 import { portraitSource } from '../plugins.js';
 import { $ } from './dom.js';
 import { onKeyboard } from './keyboard-fit.js';
@@ -191,18 +191,22 @@ export function showPortraits(t, whoId, face) {
     el.hidden = false;
     el.classList.toggle('listen', !!listen);
   };
+  // The protagonist stands on the left, the person they talk with on the right (Jørgen, 2026-10-09: "put MC on the
+  // left, facing towards the chat, with opposing character on the right facing left to the chat"). One slot each: in a
+  // scene with three or more speakers, whoever spoke last besides the protagonist holds the right. Phone: the speaker
+  // only, on their own side.
   const phone = document.body.classList.contains('phone');
   if (whoId === ME) {
-    set(R, ME, face, false);
-    if (!phone && lastNpc && PORTRAITS[lastNpc]) set(L, lastNpc, undefined, true);
-    else L.hidden = true;
+    set(L, ME, face, false);
+    if (!phone && lastNpc && PORTRAITS[lastNpc]) set(R, lastNpc, undefined, true);
+    else R.hidden = true;
   } else {
     lastNpc = whoId;
-    set(L, whoId, face, false);
-    if (!phone && PORTRAITS[whoId]) set(R, ME, undefined, true);
-    else R.hidden = true;
+    set(R, whoId, face, false);
+    if (!phone && PORTRAITS[whoId]) set(L, ME, undefined, true);
+    else L.hidden = true;
   }
-  if (!PORTRAITS[whoId]) L.hidden = true;
+  if (!PORTRAITS[whoId]) R.hidden = true;
   layoutStage();
 }
 // Place each portrait from its face box: face height F on screen, chin at the same height for everyone, the body
@@ -236,17 +240,18 @@ export function layoutStage() {
   const taken = [];
   // where a portrait goes at size k, and the box its body covers (about 1.4 face widths each side of the face, from
   // the top of the hair, about half a face above the face box, down to the cut)
-  const place = (d, left, k) => {
+  // `mirror`: the picture is shown flipped, so its face sits mirrored across the image
+  const place = (d, left, k, mirror) => {
     const F = F0 * k,
       s = (F * (d.size || 1)) / (d.f[3] - d.f[1]),
-      cx = (d.f[0] + d.f[2]) / 2,
+      cx = mirror ? d.W - (d.f[0] + d.f[2]) / 2 : (d.f[0] + d.f[2]) / 2,
       fw = (d.f[2] - d.f[0]) * s;
     let top = base - cutK * F - d.f[3] * s;
     // a picture that ends within a few px of the cut (Kuro at size 0.85 ends 3 px short at 1366x860) is set down onto
     // it, so it ends hard like the others; only one that ends visibly early (Eric) keeps the faded edge below
     const gap = base - (top + d.H * s);
     if (gap > 0 && gap <= 6) top += gap;
-    const fx = phone ? vw * (left ? 0.2 : 0.8) : vw * (left ? 0.16 : 0.86);
+    const fx = phone ? vw * (left ? 0.2 : 0.8) : vw * (left ? 0.14 : 0.84);
     // phone: slide the picture in so all of it stays on screen (Eric's 648-wide image ran 48 px past the right edge at
     // 390 wide); the face size stays the same
     const x = phone ? Math.max(0, Math.min(vw - d.W * s, fx - cx * s)) : fx - cx * s;
@@ -260,7 +265,10 @@ export function layoutStage() {
     const d = FACE[el.dataset.who];
     if (!d || el.hidden) continue;
     const left = el.classList.contains('left');
-    const at = (w) => place(d, w.flip ? !left : left, w.k);
+    // every portrait faces the text: on the left facing right, on the right facing left (FACING, ui/portrait-data.js)
+    const facing = FACING[el.dataset.who] || 'front';
+    const turn = (onLeft) => facing === (onLeft ? 'left' : 'right');
+    const at = (w) => place(d, w.flip ? !left : left, w.k, turn(w.flip ? !left : left));
     let way = 0;
     if (lastKeep) {
       // keep this prompt's way while it stays clear, so the picture doesn't jump about as the camera moves
@@ -270,7 +278,9 @@ export function layoutStage() {
     }
     el._way = lastKeep ? way : undefined;
     el.classList.toggle('aside', way === OFF);
-    const { s, x, top, body } = at(WAYS[way === OFF ? 0 : way]);
+    const w = WAYS[way === OFF ? 0 : way];
+    el.classList.toggle('mirror', turn(w.flip ? !left : left));
+    const { s, x, top, body } = at(w);
     if (way !== OFF) taken.push(body);
     el._body = way === OFF ? null : body; // for tools/prompt-shots.mjs
     el.style.width = d.W * s + 'px';

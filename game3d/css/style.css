@@ -499,6 +499,11 @@ body[data-place="office"] { --tint-top: 205, 226, 255; --tint-low: 22, 30, 44; }
 #stage .por .grade { background: linear-gradient(180deg, rgba(var(--tint-top), .16) 0%, rgba(var(--tint-top), 0) 30%, rgba(var(--tint-low), 0) 46%, rgba(var(--tint-low), .8) 88%); mix-blend-mode: multiply; }
 #stage .por .rim { background: linear-gradient(100deg, rgba(var(--tint-top), .22) 0%, rgba(var(--tint-top), 0) 22%); mix-blend-mode: screen; }
 #stage .por.right .rim { background: linear-gradient(260deg, rgba(var(--tint-top), .2) 0%, rgba(var(--tint-top), 0) 22%); }
+/* a portrait facing away from the text is shown mirrored (FACING in js/ui/portrait-data.js); the rim light stays on
+   the outer edge, so its gradient is turned the other way before the flip */
+#stage .por.mirror > img, #stage .por.mirror > .grade, #stage .por.mirror > .rim { scale: -1 1; }
+#stage .por.left.mirror .rim { background: linear-gradient(260deg, rgba(var(--tint-top), .22) 0%, rgba(var(--tint-top), 0) 22%); }
+#stage .por.right.mirror .rim { background: linear-gradient(100deg, rgba(var(--tint-top), .2) 0%, rgba(var(--tint-top), 0) 22%); }
 /* a cut-out that ends above the cut (Eric's) dissolves into the dark instead of showing an edge */
 #stage .por.short { -webkit-mask: linear-gradient(to top, transparent 0, #000 70px); mask: linear-gradient(to top, transparent 0, #000 70px); }
 #stage .por.listen { filter: brightness(.4) saturate(.5); transform: scale(.94); }
@@ -510,7 +515,7 @@ body[data-place="office"] { --tint-top: 205, 226, 255; --tint-low: 22, 30, 44; }
 @keyframes breathe { 50% { transform: scaleY(1.006); } }
 @keyframes hop { 0%, 100% { translate: 0 0; } 35% { translate: 0 -14px; } 65% { translate: 0 2px; } }
 
-#talk, #talk.in { position: absolute; left: 33%; right: 27%; bottom: 36px; width: auto; transform: none; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; z-index: 2;
+#talk, #talk.in { position: absolute; left: 27%; right: 33%; bottom: 36px; width: auto; transform: none; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; z-index: 2;
   text-shadow: 0 1px 2px rgba(0,0,0,.75), 0 0 18px rgba(var(--night), .9); }
 #talk.in { animation: riseT .22s ease-out; }
 @keyframes riseT { from { translate: 0 26px; opacity: 0; } }
@@ -530,7 +535,7 @@ body[data-place="office"] { --tint-top: 205, 226, 255; --tint-low: 22, 30, 44; }
 #talk.phone .who { align-items: center; }
 #talk.phone .rl { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-dim); font-size: 13px; }
 #talk.phone .rl::before { content: ""; display: inline-block; width: 8px; height: 13px; border: 2px solid var(--accent); border-radius: 3px; }
-@media (max-width: 1100px) { #talk, #talk.in { left: 30%; right: 22%; } }
+@media (max-width: 1100px) { #talk, #talk.in { left: 22%; right: 30%; } }
 
 body.phone #stage .focus { background: linear-gradient(to top, var(--band-grey) 0, var(--band-grey) var(--band, 180px), rgba(29, 34, 43, .55) calc(var(--band, 180px) + 26px), rgba(var(--night), 0) calc(var(--band, 180px) + 120px)); }
 body.phone #stage .por .grade { background: linear-gradient(180deg, rgba(var(--tint-top), .14) 0%, rgba(var(--tint-top), 0) 30%, rgba(var(--tint-low), 0) 50%, rgba(var(--tint-low), .55) 96%); }
