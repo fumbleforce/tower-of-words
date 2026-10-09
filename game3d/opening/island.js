@@ -22,6 +22,7 @@ import { buildEastCoast } from '../js/scenes/east-coast.js';
 import { buildOfficeQuarter } from '../js/scenes/office-quarter.js';
 import { buildHarbour } from '../js/scenes/harbour.js';
 import { buildWorks } from '../js/scenes/works.js';
+import { buildSports } from '../js/scenes/sports.js';
 import { SKY_GLSL, solidMaterial, solidInstancedMaterial, logDepth } from './sky.js';
 import { rng } from './paint.js';
 import { loadPlantModels } from '../js/scenes/outdoor/plant-models.js';
@@ -38,6 +39,7 @@ const PLACES = [
   ['office_quarter', buildOfficeQuarter],
   ['harbour', buildHarbour],
   ['works', buildWorks],
+  ['sports', buildSports], // the pool, the courts and the gym's corner
 ];
 // what a place builds of the rest of the island around it (its backdrop), taken out so the places don't overlap
 // (the near ring of a place's skyline, its neighbours' walls, roofs and windows, stays: the far model is cut away there)

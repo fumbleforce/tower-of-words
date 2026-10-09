@@ -305,7 +305,7 @@ export const VERSE = [
       if (t2 > 0) {
         const e = ease.land(clamp(t2 / 0.35));
         g.save();
-        g.translate(1010, 300);
+        g.translate(640, 300); // left of his face, the tail pointing to him
         g.scale(e, e);
         g.fillStyle = '#ffffff';
         g.beginPath();

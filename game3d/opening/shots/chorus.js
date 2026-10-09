@@ -5,7 +5,7 @@
 import * as THREE from 'three';
 import { HIT, bar, beat, pulse, END } from '../timeline.js';
 import { k, ease, clamp, lerp, glint, speedLines, toFrame, text, typeIn, drawPortrait, vgrad, soft, sunburst, halftone, stripes, gulls, rng, FONT, W, H, IMG } from '../paint.js';
-import { card, panelCard, shade } from '../cards.js';
+import { card, panelCard } from '../cards.js';
 import { CAST } from '../cast.js';
 import { drawLogo } from '../logo.js';
 import { ISLAND_X } from '../stage.js';
@@ -296,8 +296,9 @@ export const CHORUS = [
     },
     fx: (lt) => (lt > 0.8 ? { shake: [Math.sin(lt * 90) * 0.004 * Math.exp(-(lt - 0.8) / 0.15), 0] } : null),
   },
-  // 世界が少し 動き出す: the world starts to move. One beat each: the monorail on its beam, then the island's places
-  // in their newest look (the forecourt garden, head office over the forecourt, the plaza fountain).
+  // 世界が少し 動き出す: the world starts to move. A beat and a half each, up to the gap: the monorail on its beam, then
+  // the island's places in their newest look (the forecourt garden, head office over the forecourt, the plaza
+  // fountain, the pool, the gym). The cast is not repeated here: the lineup after the gap shows them all.
   ...[
     [
       'place-monorail',
@@ -335,9 +336,29 @@ export const CHORUS = [
         return [A.toWorld(37.3 - 1.5 * p, 13.5, 8.5 - 0.4 * p).toArray(), A.toWorld(37.3, -2.75, 0.4).toArray(), 50];
       },
     ],
+    [
+      'place-pool',
+      (S, lt) => {
+        // high over the pool deck (the pool place's view, sports ground frame), turning slowly
+        const A = S.anchors;
+        const at = A.inPlace('pool', 9, -20, 0);
+        const yaw = -0.5 + lt * 0.25,
+          el = 0.78,
+          d = 30 - lt * 3;
+        return [[at.x + Math.sin(yaw) * Math.cos(el) * d, at.y + Math.sin(el) * d, at.z + Math.cos(yaw) * Math.cos(el) * d], at.toArray(), 46];
+      },
+    ],
+    [
+      'place-gym',
+      (S, lt) => {
+        // up at the gym's arched roof from in front of its main doors (island_layout gym, doors on z = -50.9)
+        const A = S.anchors;
+        return [A.toWorld(54 - lt * 3, -34 - lt * 2, 4 + lt).toArray(), A.toWorld(47, -60, 7).toArray(), 50];
+      },
+    ],
   ].map(([id, frame], i) => ({
     id,
-    t: [B(141 + i), B(142 + i)],
+    t: [B(141 + i * 1.5), B(142.5 + i * 1.5)],
     in: i === 0 ? { type: 'zoom', d: 0.3, at: 0.5 } : { type: 'cut' },
     scene3d(S, lt) {
       if (id !== 'place-monorail') S.setTrain(-5000);
@@ -349,26 +370,6 @@ export const CHORUS = [
     },
     fx: (lt) => ({ zoom: 1 + 0.05 * Math.exp(-lt / 0.1) }),
     exposure: 1.05,
-  })),
-  // the faces, one per beat
-  ...[
-    ['mio', 'mio-surprised', 1],
-    ['kenji', 'kenji-sheepish', -1],
-    ['mori', 'mori-flustered', 1],
-    ['emi', 'emi-neutral', -1],
-    ['guard', 'guard-amused', 1],
-  ].map(([id, pic, dir], i) => ({
-    id: `face-${id}`,
-    t: [B(145 + i), B(146 + i)],
-    in: i === 0 ? { type: 'whip', d: 0.24, at: 0.5 } : { type: 'cut' },
-    draw(g, lt) {
-      const p = CAST.get(id);
-      g.fillStyle = i % 2 ? p.ac : p.bg;
-      g.fillRect(0, 0, W, H);
-      sunburst(g, W / 2, H * 0.55, 20, lt * 0.6 * dir, i % 2 ? shade(p.ac, -0.12) : shade(p.bg, 0.1), 0.5);
-      const e = ease.out5(clamp(lt / 0.18));
-      drawPortrait(g, pic, W / 2 + (1 - e) * 300 * dir, H + 260, 1500 * (p.scale || 1), { stroke: '#ffffff', strokeW: 12 });
-    },
   })),
   {
     // a breath: the frame closes to black on the gap
