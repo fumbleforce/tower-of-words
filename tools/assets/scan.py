@@ -56,6 +56,7 @@ KINDS = {
     'model': '3D models',
     'animation': 'Animations',
     'prop': 'Props',
+    'piece': 'World pieces (kit)',
     'room': 'Rooms',
     'voice': 'Voice clips',
     'voice-ref': 'Voice references',
@@ -537,17 +538,22 @@ for rid, name, place, shot, view, src in ROOMS:
         source=src, place=place, used=[f'Place: {PLACES[place]}'], view=view or ({'type': 'image', 'src': sp} if sp else {}),
         thumb_from=sp if not view else None, note=f'Latest critic shot: {sp}' if sp else None, tags=['in game'])
 
-# the reusable prop kit (props.js and friends): builders any place can call
-KIT = [('plant', 'Potted plant', 'props.js'), ('bench', 'Bench', 'props.js'), ('wallLamp', 'Wall lamp', 'props.js'), ('lampPost', 'Lamp post', 'props.js'),
-       ('door', 'Door', 'props.js'), ('officeChair', 'Office chair', 'props.js'), ('monitor', 'Monitor', 'props.js'), ('desk', 'Desk with clutter', 'props.js'),
-       ('filingCabinet', 'Filing cabinet', 'props.js'), ('shelf', 'Shelf with boxes', 'props.js'), ('pinboard', 'Pinboard', 'props.js'), ('clock', 'Wall clock', 'props.js'),
-       ('briefcase', 'Briefcase', 'cast.js'), ('mug', 'Mug', 'cast.js'), ('phone', 'Phone', 'train/people.js'), ('book', 'Book', 'train/people.js')]
-for fn, label, mod in KIT:
-    if fn not in RUNTIME['source']['exportedFunctions'][f'game3d/js/{mod}']:
-        continue
-    users = RUNTIME['source']['sceneCalls'].get(fn, [])
-    add(f'prop/kit/{fn}', 'prop', f'{label} (kit)', [f'game3d/js/{mod}'], 'provisional', 'Reusable builder in the game code; never put to Jørgen on its own',
-        source=f'{mod} {fn}()', used=[f"Built in {', '.join(PLACES.get(u, u) for u in users)}"] if users else [], view={'type': 'kit', 'fn': fn}, tags=['kit', 'code-built'])
+# the world kit: every exported builder in the kit files (tools/assets/kit.json lists the files and how to show each
+# piece; kit-source.mjs reads the source), with its variants, where it is used (through the imports) and what the
+# audit found built twice. The bible's Asset library (bible/assets.js) reads these entries and the top-level `kit`.
+KIT_DATA = json.loads(subprocess.run(['node', 'tools/assets/kit-source.mjs'], cwd=ROOT, check=True, capture_output=True,
+                                     text=True, timeout=60).stdout)
+FAMILY = {f: label for f, label, _ in KIT_DATA['families']}
+for pc in KIT_DATA['pieces']:
+    places = ', '.join(PLACES.get(x.replace('-', '_'), x) for x in pc['places'])
+    e = add(f"piece/{pc['id']}", 'piece', pc['label'], [pc['file']], 'provisional',
+            'Reusable builder in the game code; never put to Jørgen on its own',
+            source=f"{pc['file']}:{pc['line']} {pc['call']}", used=[f'Used in {places}'] if places else [],
+            view=pc['variants'][0]['view'] if pc['variants'] else {'type': 'code'}, tags=['kit', FAMILY[pc['family']]])
+    if e:
+        e['piece'] = {k: pc[k] for k in ('id', 'family', 'name', 'line', 'kind', 'call', 'doc', 'palette', 'used', 'usedSelf', 'places', 'also', 'dupes')}
+        e['variants'] = [{'name': v['name'], 'view': v['view']} for v in pc['variants']]
+KIT_INFO = {'families': KIT_DATA['families'], 'dupes': KIT_DATA['dupes']}
 
 # ------------------------------------------------------------------ audio
 manifest = []
@@ -755,7 +761,7 @@ def private(p):
 
 for e in list(A.values()):
     e['paths'] = [p for p in e['paths'] if not private(p)]
-    if not e['paths'] and not e.get('svg') and e['view'].get('type') not in ('chibi', 'kit'):
+    if not e['paths'] and not e.get('svg') and e['view'].get('type') not in ('chibi', 'piece', 'code'):
         del A[e['id']]
 
 
@@ -801,7 +807,15 @@ def make_thumbs(entries, do=True):
                     made += 1
             if exists(dst):
                 e['thumb'] = dst
-        elif v.get('type') in ('meshy', 'mio', 'glb', 'chibi', 'kit', 'room'):
+        elif v.get('type') in ('piece', 'code'):
+            # one thumbnail per variant; the entry's own is the first variant's
+            base = f"{THUMBS}/3d-{re.sub(r'[^a-z0-9]+', '-', e['id'].lower())}"
+            for i, var in enumerate(e.get('variants', [])):
+                var['thumb3d'] = f'{base}-{i}.webp'
+                var['thumb'] = var['thumb3d'] if exists(var['thumb3d']) else None
+            if e.get('variants'):
+                e['thumb3d'], e['thumb'] = e['variants'][0]['thumb3d'], e['variants'][0]['thumb']
+        elif v.get('type') in ('meshy', 'mio', 'glb', 'chibi', 'room'):
             dst = f"{THUMBS}/3d-{re.sub(r'[^a-z0-9]+', '-', e['id'].lower())}.webp"
             e['thumb3d'] = dst
             if exists(dst):
@@ -827,12 +841,19 @@ def main():
         'names': {w: NAMES.get(w, w) for w in who},
         'reviews': {k: {'title': r.get('title'), 'status': r.get('status')} for k, r in REVIEWS.items()},
         'counts': counts,
+        'kit': KIT_INFO,
         'assets': entries,
     }
     tmp = OUT + '.tmp'
     with open(tmp, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=0, separators=(',', ':'))
     os.replace(tmp, OUT)
+    # the world pieces alone, for the bible's Asset library (bible/assets.js), which shouldn't load every voice clip
+    kit = {'generated': data['generated'], **KIT_INFO, 'pieces': [e for e in entries if e['kind'] == 'piece']}
+    kit_out = os.path.join(os.path.dirname(OUT), 'kit-library.json')   # beside assets.json (a test writes both to a scratch folder)
+    with open(kit_out + '.tmp', 'w', encoding='utf-8') as f:
+        json.dump(kit, f, ensure_ascii=False, separators=(',', ':'))
+    os.replace(kit_out + '.tmp', kit_out)
     stale3d = sum(1 for e in entries if e.get('thumb3d') and not e.get('thumb'))
     missing = [(e['id'], p) for e in entries for p in e['paths'] + ([e['thumb']] if e.get('thumb') else []) if not exists(p)]
     print(f"{len(entries)} assets ({', '.join(f'{k} {v}' for k, v in counts['kind'].items())}); "

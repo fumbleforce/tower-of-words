@@ -69,7 +69,7 @@ test('the full public scanner registers parsed metadata and preserves existing i
     assert.equal(result.status, 0, result.stderr || result.stdout);
     const entries = new Map(JSON.parse(fs.readFileSync(output, 'utf8')).assets.map(entry => [entry.id, entry]));
     assert.equal(entries.get('icon/say-a-word-c34e06')?.name, 'Say a word');
-    assert.ok(entries.get('prop/kit/bench')?.used.length > 0);
+    assert.ok(entries.get('piece/props/bench')?.used.length > 0 && entries.get('piece/outdoor/furniture/bench')?.used.length > 0);
     assert.ok(entries.get('model/chibi-rei')?.used.includes('B2 office'));
     assert.ok(entries.get('music/calm')?.used.includes('Background loop in Train'));
     assert.match(entries.get('icon/word-matte')?.svg || '', /<path/);

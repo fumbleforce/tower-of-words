@@ -25,6 +25,7 @@ In your own git worktree, never in the main checkout: this agent type starts in 
 - Scenes: GUIDE (Fewest steps, Say what happened). Scope: only what the intro day plays (GUIDE: Scope).
 - Headless browsers and the GPU: GUIDE (Headless browser runs, GPU lock). Never open pages on Jørgen's screen (GUIDE: Never open images or pages on his screen).
 - Look at close-ups of the exact thing you changed, on desktop and phone, before calling it done.
+- World pieces: look in the Asset library first, and add a variant to an existing piece rather than copy one (GUIDE: World pieces).
 
 ## Skills
 

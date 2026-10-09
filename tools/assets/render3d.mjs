@@ -1,5 +1,5 @@
 // 3D thumbnails for the asset gallery: every entry in tools/assets/assets.json with a 3D view (Meshy models,
-// animations, code-built chibis, the prop kit, rooms and the props in them) rendered by the game's own code in one
+// animations, code-built chibis, every variant of the world pieces, rooms and the props in them) rendered by the game's own code in one
 // headless browser run. Only missing or stale thumbnails are rendered (a thumbnail is stale when a file the entry
 // lists is newer than it), so a second run is quick.
 //   node tools/assets/render3d.mjs            render what is missing or stale, then refresh assets.json
@@ -16,7 +16,13 @@ const ALL = process.argv.includes('--all');
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/assets/assets.json'), 'utf8'));
 const mtime = (p) => { try { return fs.statSync(path.join(ROOT, p)).mtimeMs; } catch { return 0; } };
 const ONLY = (process.argv.find((a) => a.startsWith('--only=')) || '').slice(7);
-const todo = data.assets.filter((e) => e.thumb3d && (!ONLY || ONLY.split(',').some((o) => e.id.includes(o))) && (ALL || ONLY || !mtime(e.thumb3d) || e.paths.some((p) => mtime(p) > mtime(e.thumb3d))));
+// a world piece has one thumbnail per variant; its variants come from tools/assets/kit.json, so a variant is also
+// redrawn when its arguments change (the last drawn ones are kept in thumbs/pieces.json)
+const DRAWN = path.join(ROOT, 'tools/assets/thumbs/pieces.json');
+const drawn = (() => { try { return JSON.parse(fs.readFileSync(DRAWN, 'utf8')); } catch { return {}; } })();
+const items = data.assets.flatMap((e) => (e.variants ? e.variants.map((v, i) => ({ id: `${e.id}#${i}`, view: v.view, thumb3d: v.thumb3d, paths: e.paths, piece: true })) : [e]));
+const todo = items.filter((e) => e.thumb3d && (!ONLY || ONLY.split(',').some((o) => e.id.includes(o))) && (ALL || ONLY || !mtime(e.thumb3d)
+  || e.paths.some((p) => mtime(p) > mtime(e.thumb3d)) || (e.piece && drawn[e.thumb3d] !== JSON.stringify(e.view))));
 if (!todo.length) { console.log('3D thumbnails: all current'); process.exit(0); }
 // rooms first, so each room is built once and its props reuse it
 todo.sort((a, b) => (a.view.type === 'room' ? 0 : 1) - (b.view.type === 'room' ? 0 : 1) || String(a.view.room).localeCompare(String(b.view.room)));
@@ -48,6 +54,7 @@ for (const e of todo) {
   try {
     const url = await Promise.race([p.evaluate((v) => window.renderThumb(v), e.view), new Promise((_, no) => setTimeout(() => no(new Error('timed out after 90 s')), 90000))]);
     fs.writeFileSync(path.join(ROOT, e.thumb3d), Buffer.from(url.split(',')[1], 'base64'));
+    if (e.piece) { drawn[e.thumb3d] = JSON.stringify(e.view); fs.writeFileSync(DRAWN, JSON.stringify(drawn)); }
     ok++;
     if (ok % 10 === 0) console.log(`${ok}/${todo.length} (${((Date.now() - t0) / 1000).toFixed(0)} s)`);
   } catch (err) { bad++; console.log('FAILED', e.id, String(err.message || err).split('\n')[0]); }

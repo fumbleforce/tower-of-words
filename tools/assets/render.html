@@ -26,7 +26,8 @@ window.renderThumb = async (view) => {
   }
   stage.show(b);
   stage.auto = false;
-  if (!b.scene) { stage.yaw = 0.45; stage.place(); }
+  // world pieces from a little above, so paving, kerbs and beds read too
+  if (!b.scene) { stage.yaw = 0.45; if (view.type === 'piece') stage.pitch = 0.5; stage.place(); }
   // let the pose settle: walks mid-stride, gestures near their peak
   const t = view.gesture ? 1.3 : view.play === 'walk' || view.play === 'run' ? 0.45 : 0.2;
   for (let i = 0; i < Math.round(t * 30); i++) b.update(1 / 30);

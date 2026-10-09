@@ -220,7 +220,7 @@ function wordLabel(id) {
 const REMOTE_NAV = [['review', 'Review'], ['showcase', 'Showcase'], ['work', 'Work']];
 const NAV = [
   ['review', 'Review'], ['showcase', 'Showcase'], ['work', 'Work'], ['home', 'Home'], ['characters', 'Characters'], ['places', 'Places'], ['place-map', 'Places diagram'], ['story', 'Stories'], ['story-timeline', 'Story timelines'], ['story-map', 'Story map'],
-  ['words', 'Words and commands'], ['rules', 'Rules and decisions'], ['art', 'Art and style'], ['audio', 'Audio'],
+  ['words', 'Words and commands'], ['rules', 'Rules and decisions'], ['art', 'Art and style'], ['assets', 'Asset library'], ['audio', 'Audio'],
   ['reviews', 'Review pages'], ['questions', 'Open questions'], ['sources', 'Sources'],
 ];
 
@@ -247,6 +247,7 @@ function pageHome() {
     ['words', 'Words and commands', 'Every Japanese word in the game, from docs/game/words.md', L.docWords.length],
     ['rules', 'Rules and decisions', 'Quoted live from GUIDE.md', D.rules.reduce((a, g) => a + g.quotes.length, 0)],
     ['art', 'Art and style', 'Models, the 3D workflow, what not to do', ''],
+    ['assets', 'Asset library', 'The world pieces built in code, where each is used, and what is built twice', ''],
     ['audio', 'Audio', 'Music and voices', D.audio.tracks.length + (L ? L.voiceRefs.length : 0)],
     ['reviews', 'Review pages', `${D.reviews.filter((r) => r.group === 'current').length} current, the rest legacy`, D.reviews.length],
     ['questions', 'Open questions', `${Q.conflicts.length} conflicts between files`, openQuestions().length],
@@ -1020,6 +1021,9 @@ async function route() {
     case 'character': html = pageCharacter(arg); break;
     case 'places': html = pagePlaces(); break;
     case 'story': html = arg ? await pageStoryline(arg) : pageStory(); break;
+    case 'assets': case 'asset': html = '<div class="page alib" id="alib"><h1>Asset library</h1><p class="muted">Reading the kit…</p></div>';
+      after = async () => { const el = $('#alib'); try { await (await import(new URL('assets.js', HERE).href)).mount(el, { ROOT, esc, arg: head === 'asset' ? arg : '' }); } catch (e) { el.innerHTML = `<h1>Asset library</h1><p>The library didn't load: ${esc(e.message)}</p>`; } };
+      break;
     case 'place-map': html = `<div class="page pmap" id="pmap"><h1>Places diagram</h1><p class="muted">Reading places.md…</p></div>`;
       after = async () => {
         const opts = { arg, here: HERE, liveTag, url, img, doc: L.files['docs/game/places.md'] || '', md: (t) => atBase('docs/game/places.md', () => md(t)), link: (p) => `<a href="#doc/${esc(p)}">${esc(p)}</a>` };
@@ -1047,7 +1051,7 @@ async function route() {
   }
   $('#main').innerHTML = remoteLinks(html);
   if (after) await after();
-  const navKey = { character: 'characters', doc: 'story', src: '' }[head] ?? head;
+  const navKey = { character: 'characters', doc: 'story', src: '', asset: 'assets' }[head] ?? head;
   if (head === 'review' || head === 'showcase' || head === 'work') renderNav();
   document.querySelectorAll('.nav li a').forEach((a) => a.classList.toggle('on', a.dataset.r === navKey || a.dataset.r === h));
   $('.nav').classList.remove('open');

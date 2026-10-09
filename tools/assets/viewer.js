@@ -1,7 +1,7 @@
 // 3D previews for the asset gallery and its thumbnail renderer. Everything is built by the game's own code
 // (game3d/js), so a preview shows exactly what the game shows: the Meshy models through their loaders, the
-// code-built chibis through cast.js and train/people.js, the prop kit through props.js, and whole rooms through
-// the scene builders. The page needs an import map for 'three' and 'three/addons/' (see index.html).
+// code-built chibis through cast.js and train/people.js, the world pieces through their own builders (kit-view.js,
+// variants from tools/assets/kit.json), and whole rooms through the scene builders. The page needs an import map for 'three' and 'three/addons/' (see index.html).
 import * as THREE from 'three';
 
 const G = new URL('../../game3d/js/', import.meta.url).href;
@@ -16,7 +16,7 @@ export async function buildAsset(view) {
     case 'mio': return figure(await (await mod('mio.js')).loadMio({ height: view.height || 1.12 }), view);
     case 'glb': return glb(view);
     case 'chibi': return chibi(view);
-    case 'kit': return kit(view);
+    case 'piece': return (await import('./kit-view.js')).buildPiece(view);
     case 'room': return room(view);
     default: throw new Error('no 3D view for ' + view.type);
   }
@@ -135,18 +135,6 @@ async function chibi(view) {
       if (mode === 'walk') { ph += dt * 9.5; ppl.walkPose(r, ph, 1); } else if (r.torso) { r.torso.scale.y = 1 + 0.012 * Math.sin(t * 1.7); }
     },
   };
-}
-
-// one builder from the prop kit
-async function kit(view) {
-  const files = { briefcase: 'cast.js', mug: 'cast.js', phone: 'train/people.js', book: 'train/people.js' };
-  const m = await mod(files[view.fn] || 'props.js');
-  const o = m[view.fn]();
-  const g = new THREE.Group(); g.add(o);
-  o.traverse((x) => { if (x.isMesh) { x.castShadow = true; x.receiveShadow = true; } });
-  const box = new THREE.Box3().setFromObject(o);
-  o.position.y -= box.min.y;                  // stand it on the floor, whatever its own origin
-  return { object: g, actions: [], play() {}, update() {} };
 }
 
 // a whole room from the game's scene builder; `anchor` and `spot` aim the camera at one named thing
