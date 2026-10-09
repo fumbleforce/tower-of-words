@@ -10,7 +10,7 @@ She does not read everyone correctly. She can mistake politeness for interest. R
 
 Her directness can be fun. Nobody has to spend weeks guessing whether she is interested. A swim together might become a challenge. Dinner might become an argument they both enjoy. She teases her friends and likes dragging them into plans they would never make themselves.
 
-Rei is unlikely to let Kuro make every decision. Kenji might agree before he has thought it through. Mio might simply refuse to go. She is used to persuading people. She has less patience for someone who keeps her guessing.
+Rei is unlikely to let Kuro make every decision. Kenji might agree before he has thought it through. Mio might simply refuse to go. Kuro is used to persuading people. She has less patience for someone who keeps her guessing.
 
 ## Source and status
 
