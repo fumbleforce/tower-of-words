@@ -2,7 +2,7 @@
  "title": "Opening window seats: the game's 3D models or small pictures",
  "date": "2026-10-09",
  "by": "claude-main",
- "status": "open",
+ "status": "decided",
  "multi": false,
  "question": "Which way should Eric and Mio sit at the train windows in the opening?",
  "media": [
@@ -45,5 +45,8 @@
    "href": "game3d/opening/?win=model"
   }
  ],
- "updated": "2026-10-09T21:15:00+0200"
+ "updated": "2026-10-09T21:15:00+0200",
+ "decision": "model: the game's 3D Eric and Mio in the wagons (Jørgen: \"the meshy characters in the wagons makes aLOT more sense. but you are using the old meshy model for Mio\"); Mio now uses the current mio2 body",
+ "decided_at": "2026-10-09T21:04:33+0200",
+ "issue": 380
 }

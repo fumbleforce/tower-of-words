@@ -2,7 +2,7 @@
  "title": "Background music, round 2: full pieces for each part of the day and the island",
  "date": "2026-10-09",
  "by": "claude-agent:music",
- "status": "open",
+ "status": "superseded",
  "context": [
   "This is background music for the game, the second round of new tracks. You rejected all 28 pieces in music-round-3 as far below the original title melody, so the local music model is out.",
   "These pieces come from Lyria 3 Pro, the newer version of the Google model that made the game's current tracks (the calm, lively, office and night loops). Lyria 2 only makes 30-second clips. Lyria 3 Pro writes a whole piece of about two and a half minutes. I asked each piece for the melody, a variation on a second instrument, a quieter interlude, a counter-melody, and the melody again with everyone playing.",
