@@ -14126,7 +14126,7 @@
   "game3d/assets/portraits/rei-neutral.webp": {"size": 110442, "sha256": "8ffa36c6c4c14d2c238624d70f12269d3c969c61c1fc0988e531499e0faab971", "type": "image/webp"},
   "game3d/assets/station/station.glb": {"size": 857852, "sha256": "b1655ebb9284b4a219390ec9d89e9c07ad7a45e4aced6e7bfcd0d0d40ccd2d58", "type": "model/gltf-binary"},
   "game3d/assets/train/monorail-wear.webp": {"size": 38280, "sha256": "b562be74872bd818502ee8593209c29d5f9f4f44c74f6a75e81c3ca806578341", "type": "image/webp"},
-  "game3d/assets/train/monorail.glb": {"size": 398544, "sha256": "b03c116b9c461302eebdfc8c5dfe90263fefb3f3f1ea5291c13f2b476aeaf613", "type": "model/gltf-binary"},
+  "game3d/assets/train/monorail.glb": {"size": 398544, "sha256": "93c7b60d7825417101d7fe1bbc6cdaf39f50d450a98127532387adc73a73880f", "type": "model/gltf-binary"},
   "game3d/audio/amb/bed_birds.mp3": {"size": 270673, "sha256": "7d62424d2393e83a00475336396ff6b8e527a58148e37887591812f5d874ca8a", "type": "audio/mpeg"},
   "game3d/audio/amb/bed_insects.mp3": {"size": 270673, "sha256": "916b399c8ce9c4354750e9547f551fb54673360839b8275138c17f24704bc77d", "type": "audio/mpeg"},
   "game3d/audio/amb/bed_lift.mp3": {"size": 90689, "sha256": "77da3d77b7cff19dae4dcfd69be44b7eb376e8650b5626a2c6b0e63ac1f63184", "type": "audio/mpeg"},
