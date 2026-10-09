@@ -1,3 +1,7 @@
+// The forecourt in the street style (scenes/diorama/, the game's outdoor look): every station and office pane gets the
+// street glazing, the walk round the bike court and the garden reaches its spots, the rack lamp lights only after work.
+// Frames, draw numbers and report.json in game3d/shots/street-style/<time>-<width>/.
+//   node game3d/tools/street-style-check.mjs [width]   (TRIP=1 the trip to the gate and back, PROBE=1, RAY=1 extra probes)
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
@@ -6,13 +10,12 @@ import { waitForGame } from '../test/support/wait-ready.mjs';
 const width = +(process.argv[2] || 1366),
   height = +(process.env.HEIGHT || (width < 600 ? 844 : 860));
 const base = process.env.BASE || 'game3d',
-  trial = process.env.TRIAL || '1',
   quality = +(process.env.Q || '2');
-const out = new URL(`../shots/diorama-street/${process.env.OUT || Date.now()}-${width}/`, import.meta.url).pathname;
+const out = new URL(`../shots/street-style/${process.env.OUT || Date.now()}-${width}/`, import.meta.url).pathname;
 fs.mkdirSync(out, { recursive: true });
 const report = { errors: [], frames: [] };
 await withBrowserJob(
-  'diorama-street-' + width,
+  'street-style-' + width,
   async (browser) => {
     const context = await browser.newContext({
         viewport: { width, height },
@@ -52,30 +55,11 @@ await withBrowserJob(
         90000,
         () =>
           page.goto(
-            `http://127.0.0.1:8771/${base}/index.html?day=2&place=forecourt&mc=eric&q=${quality}&perf&diorama=${trial}`,
+            `http://127.0.0.1:8771/${base}/index.html?day=2&place=forecourt&mc=eric&q=${quality}&perf`,
           ),
         'play',
       );
       await page.waitForFunction(() => !globalThis.__game.busy);
-      if (trial === '0' && width >= 600) {
-        await page.evaluate(async () => {
-          const T = await import('three'),
-            g = globalThis.__game,
-            cam = g.place.cam;
-          // Only match the camera for the material/performance comparison; retain stock scene and grade.
-          cam.elev = T.MathUtils.degToRad(48);
-          cam.yaw = 0.35;
-          cam.fit(
-            globalThis.innerWidth / globalThis.innerHeight,
-            [new T.Vector3(-5.7, 0, -5.7 * 0.66), new T.Vector3(5.7, 0, 5.7 * 0.66), new T.Vector3(0, 3, 0)],
-            new T.Vector3(),
-            { follow: true, clamp: [-1, 32, -12, 14], lead: -0.7 },
-          );
-          await g.walkTo(9.7, 9.8);
-          cam.snap(g.player.root.position);
-        });
-        report.matchedDesktopCamera = true;
-      }
       report.setup = await page.evaluate(async () => {
         const P = await import('./js/scenes/forecourt/plan.js'),
           g = globalThis.__game;
@@ -102,13 +86,11 @@ await withBrowserJob(
           glazing,
         };
       });
-      if (trial === '1') {
-        const panes = report.setup.glazing.filter((p) => p.name !== 'station:roof');
-        assert(
-          panes.length >= 3 && panes.every((p) => p.env && p.map),
-          'All station and office panes receive the trial glazing',
-        );
-      }
+      const panes = report.setup.glazing.filter((p) => p.name !== 'station:roof');
+      assert(
+        panes.length >= 3 && panes.every((p) => p.env && p.map),
+        'All station and office panes receive the street glazing',
+      );
       if (process.env.PROBE) {
         await page.waitForTimeout(1200);
         report.probe = await page.evaluate(async () => {
@@ -170,10 +152,6 @@ await withBrowserJob(
         });
         assert.equal(report.stationReturn.place, 'forecourt');
         assert.equal(report.stationReturn.shadowType, 1);
-        if (trial === '1') {
-          assert.equal(report.stationReturn.yaw, 0.35);
-          assert.ok(Math.abs(report.stationReturn.elev - (48 * Math.PI) / 180) < 1e-8);
-        }
         await page.screenshot({ path: out + 'station-return.png' });
         await page.evaluate(() => globalThis.__game.walkTo(9.7, 9.8));
       }
@@ -292,4 +270,4 @@ await withBrowserJob(
   },
   { timeoutMs: 280000 },
 );
-console.log('DIORAMA', report.pass, out);
+console.log('STREET STYLE', report.pass ? 'PASS' : 'FAIL', out);

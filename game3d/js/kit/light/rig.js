@@ -92,8 +92,8 @@ export function lightRig(scene, spec) {
     placeSun() {
       sun.position.copy(sun.target.position).addScaledVector(dir, sunDist);
     },
-    // the lights as they stand now become this place's look for a phase (a trial that dresses the light by hand,
-    // scenes/diorama/), so going back to that phase gives the same picture
+    // the lights as they stand now become this place's look for a phase (a place that dresses the light by hand, the
+    // street style in scenes/diorama/), so going back to that phase gives the same picture
     takeLook(phase) {
       const hex = (c) => '#' + c.getHexString();
       const at = sun.position.clone().sub(sun.target.position);

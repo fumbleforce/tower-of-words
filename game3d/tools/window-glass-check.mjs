@@ -79,7 +79,7 @@ await withNativeBrowser("window-glass-" + width, async (browser, native) => {
       90000,
       () =>
         page.goto(
-          `http://127.0.0.1:8771/${base}/?day=2&place=forecourt&diorama=1&q=${width < 600 ? 1 : 2}&perf`,
+          `http://127.0.0.1:8771/${base}/?day=2&place=forecourt&q=${width < 600 ? 1 : 2}&perf`,
         ),
       "play",
     );

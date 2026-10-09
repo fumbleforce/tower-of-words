@@ -4,7 +4,7 @@
 // and then after work (the clock's own change, game.hooks.period). Logs draw calls and triangles for every frame (all
 // passes, one frame, the median of five samples) to report.json. Serves the tree this file is in unless URL is given.
 //   node game3d/tools/far-view-shots.mjs [place ...]
-//   PERIODS=morning (only the morning) · QS=&diorama=1 (more of the URL) · URL=http://127.0.0.1:8771/game3d (another server) · OUT=<folder>
+//   PERIODS=morning (only the morning) · QS=&day=2 (more of the URL) · URL=http://127.0.0.1:8771/game3d (another server) · OUT=<folder>
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
