@@ -1,0 +1,35 @@
+{
+  "title": "World kit: the first street-style pieces, and fidelity in the Asset library",
+  "date": "2026-10-09",
+  "by": "claude-agent:kit",
+  "caption": "Ten street-style pieces now live in the kit, each declared once with a few variants: windows, doors with canopies, fences and rails, lamps, bins, bollards, bike racks, signs, planters and tree pits. Every copy picks up a small seeded difference in tone, wear and scale. Each piece builds at a phone, standard and high detail level, and reports the ground it blocks, where you can sit or go in, and what lights up at night. No place uses them yet. Each place switches over in its own pass. The Asset library now gives every piece a fidelity level and shows who last worked on it, and the kit pieces list their cost at each detail level. These pictures are renders from the library, not from the game.",
+  "result": ["building", "street", "planting", "fidelity"],
+  "sections": [
+    {
+      "title": "The new pieces, every variant",
+      "caption": "Rendered with the game's own code and the street finish. Windows and doors sit on a plain wall, because they go on a building's face.",
+      "images": [
+        { "id": "building", "image": "bible/shots/showcase/world-kit-20261009/building.webp", "caption": "Doors with canopies and windows" },
+        { "id": "street", "image": "bible/shots/showcase/world-kit-20261009/street.webp", "caption": "Fences and rails, bins, bollards, bike racks and signs" },
+        { "id": "lamps", "image": "bible/shots/showcase/world-kit-20261009/lamps.webp", "caption": "Lamps, each with its pool of light" },
+        { "id": "planting", "image": "bible/shots/showcase/world-kit-20261009/planting.webp", "caption": "Planters and tree pits. A pit leaves room for the place's own tree." }
+      ]
+    },
+    {
+      "title": "Variation and the phone",
+      "caption": "Three copies of each piece side by side with different seeds, and the same piece at the phone's detail level.",
+      "images": [
+        { "id": "seeds", "image": "bible/shots/showcase/world-kit-20261009/seeds.webp", "caption": "Three seeds of each piece" },
+        { "id": "phone", "image": "bible/shots/showcase/world-kit-20261009/phone.webp", "caption": "The phone level" }
+      ]
+    },
+    {
+      "title": "Fidelity in the Asset library",
+      "caption": "Every piece you can see has a level (placeholder, basic, finished, hero). The older pieces have a first estimate. The list shows the most used pieces with the least love, and the page filters and sorts by fidelity.",
+      "images": [
+        { "id": "fidelity", "image": "bible/shots/showcase/world-kit-20261009/fidelity.webp", "caption": "The fidelity section of the Asset library" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Asset library", "href": "bible/#assets" }]
+}
