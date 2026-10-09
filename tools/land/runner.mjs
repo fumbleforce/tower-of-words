@@ -189,9 +189,13 @@ export function createRunner({ main, mainWt, paths, logBase }) {
   const checkBudget = async (chain, base, tip) => {
     const budgeter = path.join(cand, 'game3d/tools/perf/place-budget.mjs');
     if (!fs.existsSync(budgeter) || !git('diff', '--quiet', base, tip, '--', 'game3d/').code) return { ok: true };
-    const impact = gitImpact(main), places = impact.placesAt(tip), passes = cache().budget || {};
-    const { measure, reused } = planPlaces(places, passes, tip, impact.impact);
-    if (Object.keys(reused).length) say(chain, `place budgets: ${Object.keys(reused).length} place(s) reuse an earlier pass (nothing in this land can move them): ${Object.keys(reused).join(', ')}`);
+    // Only the places this land can move: the others draw exactly what main draws, so it can't take them over.
+    const impact = gitImpact(main), places = impact.placesAt(tip), moved = impact.impact(base, tip);
+    const movable = moved === 'all' ? places : places.filter(place => moved.has(place));
+    if (!movable.length) { say(chain, 'place budgets: nothing in this land can move a place (impact.mjs); not measured'); return { ok: true }; }
+    const { measure, reused } = planPlaces(movable, cache().budget || {}, tip, impact.impact);
+    if (movable.length < places.length) say(chain, `place budgets: ${places.length - movable.length} of ${places.length} places can't move in this land; not measured`);
+    if (Object.keys(reused).length) say(chain, `place budgets: ${Object.keys(reused).join(', ')} reuse an earlier pass (nothing since then can move them)`);
     if (!measure.length) return { ok: true };
     say(chain, `measuring ${measure.length === places.length ? 'every place' : measure.join(', ')} against its budget (game3d/tools/perf/place-budget.mjs)`);
     const started = Date.now(), log = `${logBase}.budget-${short(tip)}`;
