@@ -274,8 +274,13 @@ export function createRunner({ main, mainWt, paths, logBase }) {
     if (e.keep && !e.temp) { keepBranch(); return finish(e, 0, [`kept ${e.wt} and ${e.branch} (--keep)`]); }
     let roots = [];
     try { roots = JSON.parse(fs.readFileSync(path.join(e.wt, 'tools/assets/sync.json'), 'utf8')).roots; } catch { /* none */ }
+    // A copy of a file the landed lock holds at those bytes (tools/worktree.sh fetches some from R2) is in main now:
+    // the asset handoff checked every locked file there.
+    let locked = {};
+    try { locked = JSON.parse(git('show', `${e.commit}:tools/assets/assets.lock.json`).out).files; } catch { /* no lock */ }
     const fresh = roots.length ? run('git', ['ls-files', '-z', '--others', '--ignored', '--exclude-standard', '--', ...roots], e.wt).out
-      .split('\0').filter(rel => rel && !rel.includes('__pycache__') && !fs.lstatSync(path.join(e.wt, rel)).isSymbolicLink()) : [];
+      .split('\0').filter(rel => rel && !rel.includes('__pycache__') && !fs.lstatSync(path.join(e.wt, rel)).isSymbolicLink())
+      .filter(rel => locked[rel]?.sha256 !== sha256(path.join(e.wt, rel))) : [];
     if (fresh.length && !e.temp) {
       keepBranch();
       return finish(e, 0, [`kept ${e.wt}: it has git-ignored asset files that aren't links to the main checkout's, so removing it would lose them:`,
