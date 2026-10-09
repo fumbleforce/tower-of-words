@@ -134,7 +134,7 @@ No text on timers, the first screen (controls only), a goal line that stays, sep
 - Every area gets nooks (Jørgen, 2026-10-02: "in all areas, make sure to carve out nooks, interesting props, locations where we could place secrets, encounters, collectibles etc."). Each place lists its nooks with stable ids in docs/game/places.md, so story and secrets can be placed there later.
 - The island is well populated (Jørgen, 2026-10-02: "we must make the island feel more alive, there should be plenty of people about ... dependent on the time of day ofc. and small creatures, birds etc"). Outdoor places have ambient crowds that follow the time of day, plus birds and small animals.
 - Review pages: every option has its unique id as the card heading (e.g. sales-8301) so he can name his pick; large responsive grids (images at least about 480 to 520 px, not 2 per row), a lightbox with arrow keys, and the full prompt under each title. Each item says in its first line what the options are (pictures, renders of real 3D models, a playable build) and where to try the real thing (Jørgen, 2026-10-04: "it does not explain, are these just images or are these actual models?").
-- Showcase browsing (Jørgen, 2026-10-07): one preview and highlights per collapsed entry, expandable sub-items, latest additions and updates first.
+- Showcase browsing (Jørgen, 2026-10-07): one preview and highlights per collapsed entry, expandable sub-items, latest additions and updates first. An opened entry shows what was implemented first (Jørgen, 2026-10-09: "I have no idea which one of the entries are actually relevant"): the `result` pictures, [showcase/README.md](showcase/README.md).
 
 ## Art
 

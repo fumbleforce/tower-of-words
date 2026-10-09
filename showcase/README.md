@@ -15,6 +15,7 @@ The Showcase log in the world bible (http://127.0.0.1:8771/bible/#showcase) is w
   "by": "claude-agent:town-places",
   "caption": "One plain line: what is new and where to see it.",
   "commit": "abc1234",
+  "result": ["forecourt-arrive-desk"],
   "sections": [
     {"title": "Station forecourt", "caption": "One plain line.",
      "images": [{"id": "forecourt-arrive-desk", "image": "game3d/shots/town/forecourt-desk.webp", "caption": "Arriving, desktop"}]}
@@ -23,14 +24,15 @@ The Showcase log in the world bible (http://127.0.0.1:8771/bible/#showcase) is w
 }
 ```
 
+- `result` is required: 1 to 4 image ids of the final implemented pictures, the look that shipped. No befores, variants or failed attempts; those go in the sections below. An opened entry shows the result pictures first, large and unfolded, with the other sections folded under "Before/after and attempts". Each result picture stays in its section in entry.json but is shown only once, in the result.
 - `commit` is optional and may be a list of commits. `links` is optional; a relative `href` is from the repo root.
 - An entry without sections can use a top-level `images` list of the same image objects instead (or as well; those show first).
 - Image `id`s must be unique within the entry: his feedback is keyed by them.
 - Paths are relative to the repo root.
 
-4. Check it: `node tools/bible/check.mjs` renders every entry and fails on an image path that doesn't resolve or a repeated image id.
+4. Check it: `node tools/bible/check.mjs` renders every entry and fails on an image path that doesn't resolve, a repeated image id, or (for entries dated 2026-10-09 or later) a missing `result` or a result id that isn't an image in the entry.
 
-Entries start collapsed with the title, caption and one preview; Show details opens the section list, links and feedback; each section expands to its full image set. A direct entry link opens its details. Set optional `preview` to an image id to choose the summary picture; otherwise it uses the first image. All images remain in their original order inside the entry.
+Entries start collapsed with the title, caption and one preview; Show details opens the result, links, the section list and feedback; each section expands to its full image set. A direct entry link opens its details. Set optional `preview` to an image id to choose the summary picture; otherwise it uses the first result picture. Older entries without `result` show their preview picture at the top instead. All images remain in their original order inside the entry.
 
 Entries are listed newest first by their latest content timestamp, with id as a stable tie-breaker. `date` remains the authored date label. An optional ISO 8601 `updated` timestamp (including time zone) records a new round. `tools/bible/showcase_dates.py` derives historical times from the latest Git commit touching each public `entry.json`; feedback never bumps an entry. The local review server also uses the actual modification time for uncommitted entry changes. `./start` refreshes the static fallback, and public-site staging rebuilds it from committed HEAD. For a plain static server after editing entries, run `python3 tools/bible/showcase_dates.py --local`.
 

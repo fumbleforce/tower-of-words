@@ -1,6 +1,7 @@
 {
   "title": "Gym equipment-store approach",
   "date": "2026-10-08",
+  "result": ["store-correction-1366-gym_store", "store-correction-390-gym_store"],
   "by": "codex",
   "caption": "The equipment-store destination moves out of the ball-cart blocker to the clear space just inside its open door. Original baseline and native return checks are retained.",
   "preview": "store-correction-390-gym_store",

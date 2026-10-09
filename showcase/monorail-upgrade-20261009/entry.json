@@ -1,6 +1,7 @@
 {
   "title": "Monorail outside, rebuilt to your reference",
   "date": "2026-10-09",
+  "result": ["after-cruise-out-bay-desk", "after-cruise-out-close-desk", "after-cruise-out-low-desk", "after-cruise-out-under-desk"],
   "by": "claude-agent:monorail",
   "caption": "The cars, beam and pillars are now one Blender model made after art/refs/monorail/jorgen-suggestion-20261009.png: weathered stainless with panel lines, a navy skirt and line, dark window frames, roof units, bellows, a chunky beam and rust-streaked pillars. The interior, the doors and play are unchanged.",
   "preview": "after-cruise-out-bay-desk",

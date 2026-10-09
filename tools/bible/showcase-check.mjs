@@ -73,7 +73,7 @@ await withBrowserJob('showcase-browse', async browser => {
       await page.goto(base + 'bible/#showcase/pool-swimwear-20261007');
       await page.waitForFunction(() => document.querySelectorAll('.scentry').length === 1 && document.querySelector('.sctoggle')?.getAttribute('aria-expanded') === 'true');
       await page.locator('.scsec').first().locator('summary').click();
-      assert.equal(await page.locator('[data-act="comment"]').first().inputValue(), 'Draft retained after collapsing');
+      assert.equal(await page.locator('.scsec').first().locator('[data-act="comment"]').first().inputValue(), 'Draft retained after collapsing');
       assert.ok(await page.locator('.rsendbtn').isVisible());
       await page.goto(base + 'bible/#review');
       await page.waitForFunction(() => document.body.dataset.ready === '1' && !document.querySelector('.sctoggle'));
