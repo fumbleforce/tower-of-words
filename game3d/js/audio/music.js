@@ -6,14 +6,25 @@ import('../ambience.js').then((module) => {
 });
 
 // ---------- music ----------
-// Lyria loops (audio/music/*.mp3), one per place. Each loop is played as overlapping copies with a 2 s crossfade
-// so the seam never clicks; places crossfade over 2.5 s; voices duck the music while someone talks.
+// Loops (audio/music/*.mp3), one per place, cut by tools/make_loop.py. Each file is the loop body with a second of
+// itself wrapped around both ends, and audio/music/loops.json gives the body's start and end in seconds. One
+// AudioBufferSourceNode loops that region sample-accurately, so there is no timer at the seam (a hidden tab can't
+// delay it) and an MP3 decoder that keeps or drops the encoder delay still joins continuous audio. A track missing
+// from loops.json loops the whole file. Places crossfade over 2.5 s; voices duck the music while someone talks.
 const MUSIC_VOL = 0.2,
   DUCK = 0.4;
-const music = { name: null, bus: null, duck: null, bufs: {}, cur: null, timer: 0 };
+const music = { name: null, bus: null, duck: null, bufs: {}, cur: null };
+const asset = (file) => new URL(`../../audio/music/${file}?v=${window.BUILD || ''}`, import.meta.url);
+let loops = null;
+function loopPoints() {
+  loops ??= fetch(asset('loops.json'))
+    .then((r) => (r.ok ? r.json() : {}))
+    .catch(() => ({}));
+  return loops;
+}
 async function musicBuf(name) {
   if (!music.bufs[name])
-    music.bufs[name] = fetch(new URL(`../../audio/music/${name}.mp3?v=${window.BUILD || ''}`, import.meta.url))
+    music.bufs[name] = fetch(asset(`${name}.mp3`))
       .then((r) => r.arrayBuffer())
       .then((b) => ac().decodeAudioData(b));
   return music.bufs[name];
@@ -32,50 +43,36 @@ export async function playMusic(name) {
   const t = c.currentTime;
   if (music.cur) {
     const old = music.cur;
-    old.stopped = true;
-    clearTimeout(old.timer);
     old.g.gain.cancelScheduledValues(t);
     old.g.gain.setValueAtTime(old.g.gain.value, t);
     old.g.gain.linearRampToValueAtTime(0, t + 2.5);
-    for (const s of old.srcs) s.stop(t + 2.6);
+    old.src.stop(t + 2.6);
     music.cur = null;
   }
   if (!name) return;
-  let buf;
+  let buf, pts;
   try {
-    buf = await musicBuf(name);
+    [buf, pts] = await Promise.all([musicBuf(name), loopPoints()]);
   } catch {
     return;
   }
   if (music.name !== name) return;
   const g = c.createGain();
   g.connect(music.bus);
-  const track = { g, srcs: [], stopped: false, timer: 0 };
-  music.cur = track;
-  const X = 2,
-    start = c.currentTime + 0.05;
+  const src = c.createBufferSource();
+  src.buffer = buf;
+  src.loop = true;
+  const p = pts[name];
+  if (p && p.end > p.start && p.end <= buf.duration) {
+    src.loopStart = p.start;
+    src.loopEnd = p.end;
+  }
+  src.connect(g);
+  const start = c.currentTime + 0.05;
   g.gain.setValueAtTime(0, start);
   g.gain.linearRampToValueAtTime(1, start + 2.5);
-  const play = (at, fadeIn) => {
-    if (track.stopped) return;
-    const s = c.createBufferSource(),
-      sg = c.createGain();
-    s.buffer = buf;
-    s.connect(sg);
-    sg.connect(g);
-    const end = at + buf.duration;
-    sg.gain.setValueAtTime(fadeIn ? 0 : 1, at);
-    if (fadeIn) sg.gain.linearRampToValueAtTime(1, at + X);
-    sg.gain.setValueAtTime(1, end - X);
-    sg.gain.linearRampToValueAtTime(0, end);
-    s.start(at);
-    s.stop(end + 0.05);
-    track.srcs.push(s);
-    if (track.srcs.length > 3) track.srcs.shift();
-    const next = end - X;
-    track.timer = setTimeout(() => play(next, true), Math.max(0, (next - c.currentTime - 1) * 1000));
-  };
-  play(start, false);
+  src.start(start, src.loopStart);
+  music.cur = { g, src };
 }
 // voices duck the music
 let duckN = 0;
