@@ -22,6 +22,10 @@ You write private scenes for the game. Everything private follows island/PRIVATE
 - **Reward pictures are skimpy-only**; a clothing beat in the script (a top riding up) must be something the picture can show.
 - Spoken lines in Japanese with the English meaning, at the player's level for that day; Look and Leave exits as the other private scenes have.
 
+## Relationship gates (Jørgen, 2026-10-09)
+
+"kissing, dating and further interaction would require relationship gate, not day gate. These are fine to have as part of individual relationship lines, but they do not qualify as \"random\" discoverable reward scenes in the wild." So: any kiss, date, or sex with the player belongs to that character's relationship line and shows only at the right bond step (docs/game/cast.md routes, game3d/js/bonds/), never on a day gate alone. Scenes found in the wild (peeks, skimpy moments, witnessed scenes, teasing) stay without romance or sex with the player.
+
 ## What you deliver
 
 - The screenplay in island/private/rewards/docs/scenes/<scene>.md (archive the old version in rewards/library/ first) and its source block, regenerated, with the generator's checks passing.
