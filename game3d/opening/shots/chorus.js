@@ -2,16 +2,14 @@
 // the one who plays (Eric, or Carina), the words that become magic (kotodama), Mio, B2's team on 「てつだって」, the
 // people of the island, a run of faces as the world starts to move, everyone together on the held note, and the
 // title over the train as the interlude starts and the music fades.
-import * as THREE from 'three';
 import { HIT, bar, beat, pulse, END } from '../timeline.js';
-import { k, ease, clamp, lerp, glint, speedLines, toFrame, text, typeIn, drawPortrait, vgrad, soft, sunburst, halftone, stripes, gulls, rng, FONT, W, H, IMG } from '../paint.js';
+import { k, ease, clamp, lerp, glint, speedLines, text, typeIn, drawPortrait, vgrad, soft, sunburst, halftone, stripes, gulls, rng, FONT, W, H, IMG } from '../paint.js';
 import { card, panelCard } from '../cards.js';
 import { CAST } from '../cast.js';
 import { drawLogo } from '../logo.js';
 import { ISLAND_X } from '../stage.js';
-import { RUSH } from './verse.js';
+import { RUSH, hajime, heldWash } from './verse.js';
 
-const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const B = (n) => beat(n); // beat numbers: the chorus slam is beat 96, a bar is 4 beats
 
 // a run of rising kana, the kotodama particles
@@ -70,15 +68,28 @@ function panels(n, slant = 160, gap = 0) {
   return out;
 }
 
+// B2's copy room painting (assets/opening/copyroom.webp, 1600 x 1095), covering the frame and pushed in toward the
+// copier's lid as p goes 0 to 1 (never uncovering an edge). Returns m(x, y): a point of the painting on the frame
+function copyRoom(g, p) {
+  const s = lerp(1.2, 1.416, p);
+  const ax = lerp(948, 960, p),
+    ay = lerp(627, 648, p);
+  const m = (x, y) => [ax + (x - 790) * s, ay + (y - 620) * s];
+  g.fillStyle = '#1c2622';
+  g.fillRect(0, 0, W, H);
+  if (IMG.copyroom) g.drawImage(IMG.copyroom, ...m(0, 0), 1600 * s, 1095 * s);
+  return { m, s };
+}
+
 export const CHORUS = [
   {
     // はじめまして, 新しい街: the band slams in on the island. The camera rises off the water as the train runs in.
     id: 'reveal',
-    t: [HIT.chorus, bar(26)],
-    in: { type: 'flash', d: 0.18, at: 0.5 },
+    t: [HIT.chorus, B(102)], // two beats shorter so Carina's card gets them (Jørgen 2026-10-09)
+    in: { type: 'cut' }, // the same frame as the stop: the wash lifts and the word finishes, one scene
     scene3d(S, lt) {
       // from the held frame (verse.js RUSH) up to the island seen whole from the south-west, as on the island map
-      const p = ease.inOut3(clamp(lt / 3.2));
+      const p = ease.inOut3(clamp(lt / 2.4));
       S.setTrain(ISLAND_X - 300 + lt * 22);
       const m = S.anchors.mid;
       const from = RUSH[0].map((v) => v[1]),
@@ -88,15 +99,11 @@ export const CHORUS = [
       S.look(from.map((v, i) => lerp(v, to[i], p)), fromAt.map((v, i) => lerp(v, toAt[i], p)), lerp(36, 40, p));
     },
     draw(g, lt, T, S) {
-      // the greeting lands with the band, then lifts away
+      // the held frame's wash lifts as the band comes back; まして finishes the word in place, then it all lifts away
+      const wash = 1 - k(lt, 0, 0.45, ease.out3);
+      if (wash > 0) heldWash(g, wash);
       const a = 1 - k(lt, 1.2, 1.7);
-      if (a > 0) {
-        g.save();
-        g.globalAlpha = a;
-        const y = 300 - k(lt, 1.2, 1.7) * 40;
-        typeIn(g, 'はじめまして', W / 2, y, lt + 0.6, { font: FONT.jp, size: 170, align: 'center', color: '#ffffff', stroke: '#1b2b4f', strokeW: 26, stagger: 0.07, from: 1.5 });
-        g.restore();
-      }
+      if (a > 0) hajime(g, 99, lt, { y: 520 - k(lt, 1.2, 1.7, ease.in2) * 60, alpha: a });
       gulls(g, [0, 1, 2, 3, 4].map((i) => ({ x: 400 + i * 90 + lt * 70, y: 260 + (i % 2) * 40 - lt * 20, s: 16, ph: i })), lt, 'rgba(30,44,80,0.8)');
     },
     flare: () => 0.9,
@@ -105,7 +112,7 @@ export const CHORUS = [
   {
     // The one who plays: Eric...
     id: 'hero-eric',
-    t: [bar(26), B(107)],
+    t: [B(102), B(105)],
     in: { type: 'wipe', d: 0.3, at: 0.5, param: [-2.6, 0.01, 0.04], band: '#6fd0c6' },
     draw(g, lt, T) {
       card(g, lt, 'eric', { pic: 'eric-neutral', side: 'right', nameAt: 0.25 });
@@ -115,43 +122,44 @@ export const CHORUS = [
   {
     // ...or Carina, the same job and the same island
     id: 'hero-carina',
-    t: [B(107), B(109)],
+    t: [B(105), B(109)], // four beats: as long a look as Eric gets, and a little more
     in: { type: 'whip', d: 0.24, at: 0.5 },
     draw(g, lt) {
-      card(g, lt, 'carina', { pic: 'carina-neutral', side: 'left', nameAt: 0.12, enter: 0.25 });
+      card(g, lt, 'carina', { pic: 'carina-neutral', swap: [0.9, 'carina-surprised'], side: 'left', nameAt: 0.12, enter: 0.25 });
+      speedLines(g, W * 0.34, H * 0.45, lt, { color: 'rgba(255,255,255,0.18)', count: 40, inner: 520, width: 10 });
     },
   },
   {
-    // 言葉が僕の 魔法になる: words become his magic. In B2's copy room (the game's own, scenes/office.js) the word card
-    // for うごいて comes up as the game teaches it (the word, how it's read, what it means), its kana fly into the old
-    // copier, and the copier shimmers teal and wakes; then まほう.
+    // 言葉が僕の 魔法になる: words become his magic. In B2's copy room, from inside (its approved painting,
+    // art/approved/copyroom, Jørgen 2026-10-09: the 3D room was seen over the kitchen wall and too rough), the word
+    // card for うごいて comes up as the game teaches it (the word, how it's read, what it means), its kana fly into the
+    // old copier, and the copier shimmers teal and wakes; then まほう.
     id: 'kotodama',
     t: [B(109), B(120)],
     in: { type: 'iris', d: 0.4, at: 0.5, param: [0.5, 0.45, 0.03], band: '#6fd0c6' },
-    scene3d(S, lt, T) {
-      const w = S.set('office');
-      const c = w.copier.position;
-      const p = ease.inOut2(clamp(lt / 4.4));
-      // the copier wakes when the word reaches it: its body glows teal, flickers, then settles
+    draw(g, lt, T) {
+      // the painting, pushing in slowly toward the copier
+      const { m, s } = copyRoom(g, ease.inOut2(clamp(lt / 4.4)));
+      const target = m(790, 615); // the copier's lid
+      // the copier wakes when the word reaches it: a teal glow that flickers then settles, and its screen stays lit
       const hit = T - 45.6;
-      const glow = hit > 0 ? Math.exp(-hit / 0.9) * (0.6 + 0.4 * Math.sin(hit * 30) ** 2) : 0;
-      w.copier.traverse((o) => {
-        if (!o.isMesh) return;
-        if (!o.userData.opBase) {
-          o.material = o.material.clone();
-          o.userData.opBase = true;
-        }
-        if (o.material.emissive) {
-          o.material.emissive.set('#36e0c8');
-          o.material.emissiveIntensity = glow * 1.4;
-        }
-      });
-      S.look([c.x + lerp(1.1, 0.7, p), lerp(1.25, 1.1, p), c.z + lerp(2.2, 1.6, p)], [c.x, 0.62, c.z], lerp(46, 40, p));
-    },
-    draw(g, lt, T, S) {
-      const w = S.set('office');
-      const cp = w.copier.position;
-      const target = toFrame(S.camera, V(cp.x, 0.7, cp.z)) || [W / 2, H / 2];
+      if (hit > 0) {
+        const glow = Math.exp(-hit / 0.9) * (0.6 + 0.4 * Math.sin(hit * 30) ** 2);
+        g.save();
+        g.globalCompositeOperation = 'lighter';
+        const [cx, cy] = m(820, 700);
+        const gr = g.createRadialGradient(cx, cy, 0, cx, cy, 420 * s);
+        gr.addColorStop(0, `rgba(54,224,200,${0.55 * glow})`);
+        gr.addColorStop(1, 'rgba(54,224,200,0)');
+        g.fillStyle = gr;
+        g.fillRect(0, 0, W, H);
+        const [sx, sy] = m(620, 488);
+        g.fillStyle = `rgba(111,240,214,${0.35 + 0.5 * glow})`;
+        g.beginPath();
+        g.roundRect(sx, sy, 260 * s, 44 * s, 6 * s);
+        g.fill();
+        g.restore();
+      }
       // the word card, as the game shows a new word: the word, its reading, its meaning
       const t1 = T - 44.25;
       const fly = clamp((T - 45.1) / 0.5);
@@ -191,7 +199,6 @@ export const CHORUS = [
         });
       }
       // the copier answers: rings from it, and pages flying out
-      const hit = T - 45.6;
       ripples(g, target[0], target[1], hit, { n: 3, gap: 0.25, speed: 900 });
       if (hit > 0) {
         const r = rng(13);
@@ -224,7 +231,6 @@ export const CHORUS = [
       }
     },
     fx: (lt, T) => ({ flash: 0.4 * Math.exp(-Math.max(0, T - 45.6) / 0.12) * (T > 45.6 ? 1 : 0), flashColor: '#bffff3' }),
-    exposure: 1.2,
   },
   {
     // Mio: B2's programmer, unimpressed, then not quite
@@ -339,13 +345,14 @@ export const CHORUS = [
     [
       'place-pool',
       (S, lt) => {
-        // high over the pool deck (the pool place's view, sports ground frame), turning slowly
+        // close over the pool, the water filling the frame (Jørgen 2026-10-09: closer, so the unfinished ground behind
+        // it stays out of the picture), turning slowly
         const A = S.anchors;
         const at = A.inPlace('pool', 9, -20, 0);
         const yaw = -0.5 + lt * 0.25,
-          el = 0.78,
-          d = 30 - lt * 3;
-        return [[at.x + Math.sin(yaw) * Math.cos(el) * d, at.y + Math.sin(el) * d, at.z + Math.cos(yaw) * Math.cos(el) * d], at.toArray(), 46];
+          el = 1.0,
+          d = 14 - lt * 1.5;
+        return [[at.x + Math.sin(yaw) * Math.cos(el) * d, at.y + Math.sin(el) * d, at.z + Math.cos(yaw) * Math.cos(el) * d], at.toArray(), 40];
       },
     ],
     [

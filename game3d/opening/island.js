@@ -99,6 +99,29 @@ function areaOf(name) {
   ].map(([x, z]) => LAYOUT.toIsland(name, x, z));
 }
 
+// a place's walked area on the island (CHUNKS[].walk, else its view): what it builds there is its own; what it builds
+// inside another place's walked area is its stand-in for that neighbour (low pads, placeholder trees), dropped here
+// because the neighbour builds the real thing (Jørgen 2026-10-09: grey plates over the forecourt garden)
+function walkOf(name) {
+  const c = LAYOUT.CHUNKS[name];
+  const [x0, x1, z0, z1] = c.walk || c.view;
+  return [
+    [x0, z0],
+    [x1, z0],
+    [x1, z1],
+    [x0, z1],
+  ].map(([x, z]) => LAYOUT.toIsland(name, x, z));
+}
+function inside(poly, x, z) {
+  let c = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [xi, zi] = poly[i],
+      [xj, zj] = poly[j];
+    if (zi > z !== zj > z && x < ((xj - xi) * (z - zi)) / (zj - zi) + xi) c = !c;
+  }
+  return c;
+}
+
 export async function buildIsland(uniforms, { joinX, seaY }) {
   // the game's Blender-built trees, hedges and benches, which the place builders use when they're loaded
   await loadPlantModels({ lighter: false });
@@ -110,6 +133,7 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
   const placed = {};
   const ringPts = [];
   const seenMeshes = new Map(); // name|count|instances -> boxes seen
+  const walks = Object.fromEntries(PLACES.map(([n]) => [n, walkOf(n)]));
   for (const [name, build] of PLACES) {
     let w;
     try {
@@ -138,6 +162,32 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
       }
       if (o.isLight && !o.isPointLight) drop.push(o); // the places' own suns; the bay's light is ours
     });
+    const foreign = (x, z) => {
+      const [ix, iz] = LAYOUT.toIsland(name, x, z);
+      return !inside(walks[name], ix, iz) && PLACES.some(([n]) => n !== name && inside(walks[n], ix, iz));
+    };
+    const ctr = new THREE.Vector3(),
+      m4 = new THREE.Matrix4(),
+      zero = new THREE.Matrix4().makeScale(0, 0, 0);
+    let hidden = 0;
+    root.traverse((o) => {
+      if (drop.includes(o) || o.isLight) return;
+      if (o.isInstancedMesh) {
+        for (let i = 0; i < o.count; i++) {
+          o.getMatrixAt(i, m4);
+          ctr.setFromMatrixPosition(m4.premultiply(o.matrixWorld));
+          if (foreign(ctr.x, ctr.z)) {
+            o.setMatrixAt(i, zero);
+            hidden++;
+          }
+        }
+        o.instanceMatrix.needsUpdate = true;
+      } else if (o.isMesh) {
+        box.setFromObject(o).getCenter(ctr);
+        if (foreign(ctr.x, ctr.z)) drop.push(o);
+      }
+    });
+    if (DEBUG_STRIP) console.info('opening strip', name, 'stand-ins in other places:', hidden, 'instances');
     for (const o of drop) o.parent?.remove(o);
     if (DEBUG_STRIP) console.info('opening strip', name, drop.filter((o) => !o.isLight).map((o) => `${o.name || '(unnamed)'} ${o.material?.type || ''} ${new THREE.Box3().setFromObject(o).getSize(new THREE.Vector3()).toArray().map(Math.round).join('x')}`).join(' | '));
     root.traverse((o) => {

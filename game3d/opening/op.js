@@ -81,7 +81,7 @@ const ready = (async () => {
   await Promise.all([
     loadFonts(),
     loadPortraits(CAST.portraits()),
-    loadOptional({ 'win-eric': 'window/eric-window.webp', 'win-mio-phone': 'window/mio-window-phone.webp', 'win-mio-look': 'window/mio-window-look.webp' }),
+    loadOptional({ copyroom: 'copyroom.webp', 'win-eric': 'window/eric-window.webp', 'win-mio-phone': 'window/mio-window-phone.webp', 'win-mio-look': 'window/mio-window-look.webp' }),
   ]);
   stage = await buildStage(renderer);
   shots = SHOTS.map((s) => ({ ...s }));

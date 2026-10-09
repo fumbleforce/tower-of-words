@@ -6,6 +6,7 @@ import { HIT, bar, beat, pulse, onTwos } from '../timeline.js';
 import { k, ease, clamp, lerp, glint, streaks, speedLines, toFrame, flare, text, typeIn, drawPortrait, vgrad, soft, sunburst, halftone, rng, FONT, W, H, IMG } from '../paint.js';
 import { SUN } from '../sky.js';
 import { idCard, gateLane } from '../props2d.js';
+import { EXIT_X } from '../../js/scenes/station-fittings.js';
 import { card, cardBack, nameBlock } from '../cards.js';
 import { CAST } from '../cast.js';
 import { ISLAND_X, PITCH, beamY, BEAM_TOP } from '../stage.js';
@@ -28,6 +29,25 @@ export const RUSH = [
     [-20, -24],
   ],
 ];
+
+// はじめまして as one word across the stop and the reveal: はじめ types in on the held frame where the whole word will
+// stand, and on the slam まして finishes it in place (chorus.js reveal). held, rest: each part's typing time (<= 0: not yet)
+const HAJIME = { font: FONT.jp, size: 190, color: '#1b2b4f', stroke: '#ffffff', strokeW: 16, stagger: 0.28, dur: 0.3, from: 1.4, shadow: { color: 'rgba(111,208,198,0.9)', dx: 10, dy: 10 } };
+export function hajime(g, held, rest, { y = 520, alpha = 1 } = {}) {
+  g.save();
+  g.font = `${HAJIME.size}px ${HAJIME.font}`;
+  const [a, b] = ['はじめ', 'まして'].map((str) => [...str].reduce((w, c) => w + g.measureText(c).width, 0));
+  g.restore();
+  const x = W / 2 - (a + b) / 2;
+  typeIn(g, 'はじめ', x, y, held, { ...HAJIME, alpha });
+  if (rest > 0) typeIn(g, 'まして', x + a, y, rest, { ...HAJIME, stagger: 0.07, from: 1.6, alpha });
+}
+// the held frame's pale wash and halftone (the stop, and lifting off at the start of the reveal)
+export function heldWash(g, a = 1) {
+  g.fillStyle = `rgba(246,250,255,${0.62 * a})`;
+  g.fillRect(0, 0, W, H);
+  halftone(g, `rgba(27,43,79,${0.12 * a})`, 22, -0.4, (x, y) => clamp(0.15 + (y / H) * 0.5), null);
+}
 
 // soft pillar shadows passing over the frame, one per pillar the train passes
 function pillarShadows(g, T, alpha = 0.22) {
@@ -67,6 +87,36 @@ function windowShot(S, T, lt, car, wx, { dist = 3.2, drift = 0.6, h = 0.86 } = {
   const cxw = x + (car - 1) * PITCH + wx;
   const p = lt;
   S.look([cxw + 1.2 - p * 0.12 * drift, h + 0.1, 1.3 + dist], [cxw - 0.1 - p * 0.05, h, 0], 30, 0.02);
+}
+
+// the gate shot, after Ishibashi's card (Jørgen 2026-10-09: his card before the gate, not after the doors open):
+// its span, when the card touches the reader (on a beat), and its length
+const GATE = [beat(81.8), bar(22)];
+const GATE_TAP = beat(83) - GATE[0];
+const GATE_END = GATE[1] - GATE[0];
+// the station exit's doors for the gate shot: two glass leaves in the lobby's exit frame (station-fittings.js
+// exitFrame, 1.2 wide and 1.44 high at EXIT_X in the back wall) and the bright morning beyond. Added to the opening's
+// own copy of the lobby, once; returns open(k), 0 shut to 1 slid behind the wall
+function exitDoors(w) {
+  if (w.openExit) return w.openExit;
+  const z = -4.5; // the back wall (scenes/lobby.js Z)
+  const frame = new THREE.MeshStandardMaterial({ color: '#5a606a', roughness: 0.5, metalness: 0.3 });
+  const glass = new THREE.MeshStandardMaterial({ color: '#bcd3dc', roughness: 0.1, metalness: 0.1, transparent: true, opacity: 0.45 });
+  const leaves = [-1, 1].map((side) => {
+    const g = new THREE.Group();
+    g.add(new THREE.Mesh(new THREE.BoxGeometry(0.6, 1.4, 0.04), frame));
+    const pane = new THREE.Mesh(new THREE.BoxGeometry(0.5, 1.26, 0.045), glass);
+    g.add(pane);
+    g.position.set(EXIT_X + side * 0.3, 0.7, z + 0.02);
+    g.userData.side = side;
+    w.root.add(g);
+    return g;
+  });
+  const light = new THREE.Mesh(new THREE.PlaneGeometry(3, 2.2), new THREE.MeshBasicMaterial({ color: '#fff4dc', toneMapped: false }));
+  light.position.set(EXIT_X, 0.9, z - 1.4);
+  w.root.add(light);
+  w.openExit = (o) => leaves.forEach((g) => (g.position.x = EXIT_X + g.userData.side * (0.3 + 0.62 * o)));
+  return w.openExit;
 }
 
 export const VERSE = [
@@ -256,47 +306,9 @@ export const VERSE = [
     exposure: 1.05,
   },
   {
-    // 今日からここで: the game's own security gate (scenes/lobby.js). His card on the reader, the lights go green,
-    // the glass flaps swing open and we go through.
-    id: 'gate',
-    t: [beat(77.8), bar(21) - 0.02],
-    in: { type: 'dots', d: 0.45, at: 0.5, param: [0.4, 70] },
-    scene3d(S, lt) {
-      const w = S.set('lobby');
-      const tap = beat(79) - beat(77.8);
-      const open = k(lt, tap + 0.25, tap + 0.85, ease.inOut2);
-      w.arch.userData.set?.(lt > tap ? 'ok' : 'idle');
-      w.arch.userData.flaps?.(open);
-      const push = k(lt, tap + 0.6, 2.25, ease.in2);
-      // low by the right-hand reader, then through the lane toward the exit
-      S.look([lerp(0.55, 0.0, push), lerp(1.0, 1.15, push), lerp(1.55, -2.2, push)], [lerp(0.85, 0.0, k(lt, 0, tap + 0.6)), 0.85, -2.6], 50);
-    },
-    draw(g, lt, T, S) {
-      const tap = beat(79) - beat(77.8);
-      // where the reader's top is on screen
-      const rp = toFrame(S.camera, V(0.93, 0.98, -0.55)) || [W * 0.7, H * 0.6];
-      const e = ease.out5(clamp(lt / tap));
-      const bob = lt > tap ? Math.exp(-(lt - tap) / 0.12) * 14 : 0;
-      const leave = k(lt, tap + 0.35, tap + 0.8, ease.in2);
-      g.save();
-      g.translate(lerp(rp[0] + 520, rp[0] - 10, e), lerp(rp[1] - 420, rp[1] - 30, e) - bob + leave * 700);
-      g.rotate(lerp(0.5, -0.1, e));
-      g.scale(0.36, 0.36);
-      idCard(g, {});
-      g.restore();
-      if (lt > tap) {
-        const t2 = lt - tap;
-        glint(g, rp[0], rp[1] - 10, 120 * Math.exp(-t2 / 0.25), '#c9ffe6', 1);
-        typeIn(g, 'ピッ', rp[0] + 180, rp[1] - 210, t2, { font: FONT.jp, size: 120, color: '#ffffff', stroke: '#1b2b4f', strokeW: 20, stagger: 0.05, from: 2 });
-      }
-    },
-    fx: (lt) => ({ flash: 0.25 * Math.exp(-Math.max(0, lt - (beat(79) - beat(77.8))) / 0.08) * (lt > beat(79) - beat(77.8) ? 1 : 0), flashColor: '#c9fff0' }),
-    exposure: 1.15,
-  },
-  {
-    // 働くよ: the guard at his desk, as every morning: おはようございます.
+    // the guard at his desk, as every morning: おはようございます. Then his gate.
     id: 'guard',
-    t: [bar(21) - 0.02, bar(22)],
+    t: [beat(77.8), GATE[0]],
     in: { type: 'wipe', d: 0.3, at: 0.5, param: [0, 0.01, 0.03], band: '#ffd84a' },
     draw(g, lt) {
       card(g, lt, 'guard', { pic: 'guard-stern', swap: [0.8, 'guard-amused'], side: 'right', nameAt: 0.35 });
@@ -322,10 +334,60 @@ export const VERSE = [
     },
   },
   {
+    // 今日からここで: the game's own security gate (scenes/lobby.js). His card on the reader, the lights go green,
+    // the glass flaps swing open and we go through.
+    id: 'gate',
+    t: GATE,
+    in: { type: 'dots', d: 0.45, at: 0.5, param: [0.4, 70] },
+    scene3d(S, lt) {
+      const w = S.set('lobby');
+      const tap = GATE_TAP;
+      const open = k(lt, tap + 0.25, tap + 0.85, ease.inOut2);
+      w.arch.userData.set?.(lt > tap ? 'ok' : 'idle');
+      w.arch.userData.flaps?.(open);
+      // low by the right-hand reader, then through the lane and on to the station exit, whose doors slide open
+      // onto the morning outside (the light floods in and carries into the next shot)
+      const push = k(lt, tap + 0.6, GATE_END, ease.inOut2);
+      const turn = k(lt, tap + 0.3, tap + 1.3, ease.inOut2);
+      exitDoors(w)(k(lt, GATE_END - 0.9, GATE_END - 0.2, ease.inOut2));
+      S.look(
+        [lerp(0.55, EXIT_X + 0.05, push), lerp(1.0, 0.95, push), lerp(1.55, -3.0, push)],
+        [lerp(0.85, EXIT_X, turn), lerp(0.85, 0.9, turn), lerp(-2.6, -9, turn)],
+        50,
+      );
+    },
+    draw(g, lt, T, S) {
+      const tap = GATE_TAP;
+      // where the reader's top is on screen
+      const rp = toFrame(S.camera, V(0.93, 0.98, -0.55)) || [W * 0.7, H * 0.6];
+      const e = ease.out5(clamp(lt / tap));
+      const bob = lt > tap ? Math.exp(-(lt - tap) / 0.12) * 14 : 0;
+      const leave = k(lt, tap + 0.35, tap + 0.8, ease.in2);
+      g.save();
+      g.translate(lerp(rp[0] + 520, rp[0] - 10, e), lerp(rp[1] - 420, rp[1] - 30, e) - bob + leave * 700);
+      g.rotate(lerp(0.5, -0.1, e));
+      g.scale(0.36, 0.36);
+      idCard(g, {});
+      g.restore();
+      if (lt > tap) {
+        const t2 = lt - tap;
+        glint(g, rp[0], rp[1] - 10, 120 * Math.exp(-t2 / 0.25), '#c9ffe6', 1);
+        if (t2 < 0.8) typeIn(g, 'ピッ', rp[0] + 180, rp[1] - 210, t2, { font: FONT.jp, size: 120, color: '#ffffff', stroke: '#1b2b4f', strokeW: 20, stagger: 0.05, from: 2, alpha: 1 - k(t2, 0.5, 0.8) });
+      }
+    },
+    fx: (lt) => {
+      const tap = GATE_TAP;
+      const beep = lt > tap ? 0.25 * Math.exp(-(lt - tap) / 0.08) : 0;
+      const outside = 0.85 * k(lt, GATE_END - 0.45, GATE_END, ease.in2); // the doorway's light filling the frame
+      return beep > outside ? { flash: beep, flashColor: '#c9fff0' } : { flash: outside, flashColor: '#fff6e4' };
+    },
+    exposure: 1.15,
+  },
+  {
     // Build: the tower climbs into the sun; Eric looks up; Mio looks up; white.
     id: 'tower',
     t: [bar(22), beat(89)],
-    in: { type: 'zoom', d: 0.3, at: 0.5 },
+    in: { type: 'flash', d: 0.3, at: 0.35 }, // out of the station exit's light (the gate shot)
     scene3d(S, lt) {
       S.setTrain(-500);
       const hq = S.anchors.hq;
@@ -379,10 +441,8 @@ export const VERSE = [
     },
     draw(g, lt) {
       // the held frame: a pale wash and a halftone, like a still in a printed page
-      g.fillStyle = 'rgba(246,250,255,0.62)';
-      g.fillRect(0, 0, W, H);
-      halftone(g, 'rgba(27,43,79,0.12)', 22, -0.4, (x, y) => clamp(0.15 + (y / H) * 0.5), null);
-      typeIn(g, 'はじめ', W / 2, 520, lt, { font: FONT.jp, size: 210, align: 'center', color: '#1b2b4f', stagger: 0.28, dur: 0.3, from: 1.4, shadow: { color: 'rgba(111,208,198,0.9)', dx: 10, dy: 10 } });
+      heldWash(g);
+      hajime(g, lt, 0);
     },
     fx: () => ({ grain: 0.02, vignette: 0.12 }),
     exposure: 1.1,
