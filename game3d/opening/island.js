@@ -42,7 +42,6 @@ const PLACES = [
 // what a place builds of the rest of the island around it (its backdrop), taken out so the places don't overlap
 // (the near ring of a place's skyline, its neighbours' walls, roofs and windows, stays: the far model is cut away there)
 const BACKDROP = /^(skyline:(far|lit-far|lit|ground|tall)|far:|shops:far)/; // lit: the evening windows
-const RING = /^skyline:(walls|roofs|windows|bands)/;
 const Q = typeof location !== 'undefined' ? new URLSearchParams(location.search) : new URLSearchParams();
 const DEBUG_STRIP = Q.has('strip');
 const NO_SURF = Q.get('surf') === '0'; // ?surf=0: the look without its surface patterns (to find a shimmer)
@@ -108,7 +107,7 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
   const areas = [];
   const placed = {};
   const ringPts = [];
-  const seenMeshes = new Set();
+  const seenMeshes = new Map(); // name|count|instances -> boxes seen
   for (const [name, build] of PLACES) {
     let w;
     try {
@@ -147,6 +146,8 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
     });
     const c = LAYOUT.CHUNKS[name];
     const holder = new THREE.Group();
+    // each place a few millimetres above the last: where two places lay ground over the same spot (the station's
+    // and its neighbour's grass), the later one always lies on top instead of the two fighting
     holder.position.set(c.at[0], 0, c.at[1]);
     holder.rotation.y = (-c.turn * Math.PI) / 180;
     holder.scale.setScalar(c.scale);
@@ -159,35 +160,46 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
     root.traverse((o) => {
       if (!o.isMesh) return;
       const bb = new THREE.Box3().setFromObject(o);
-      const r = (v) => v.toArray().map((x) => Math.round(x * 20)).join(',');
-      const key = `${o.name}|${o.geometry.attributes.position?.count}|${o.isInstancedMesh ? o.count : 1}|${r(bb.min)}|${r(bb.max)}`;
-      if (seenMeshes.has(key)) repeats.push(o);
-      else seenMeshes.add(key);
+      // same name, vertex count and instance count, and a box within 5 cm (places built turned differ by float noise)
+      const key = `${o.name}|${o.geometry.attributes.position?.count}|${o.isInstancedMesh ? o.count : 1}`;
+      const box = [...bb.min.toArray(), ...bb.max.toArray()];
+      const list = seenMeshes.get(key) || seenMeshes.set(key, []).get(key);
+      if (list.some((q) => q.every((v, i) => Math.abs(v - box[i]) < 0.05))) repeats.push(o);
+      else list.push(box);
     });
     for (const o of repeats) o.parent?.remove(o);
+    // the step comes after the copies are found (their boxes must match): each place 6 mm up and 6 mm across in
+    // both directions from the last, so a wall or a lawn two places both build never lies in exactly one plane
+    holder.position.x += areas.length * 0.006;
+    holder.position.y = areas.length * 0.006;
+    holder.position.z += areas.length * 0.006;
+    holder.updateMatrixWorld(true);
     if (DEBUG_STRIP && repeats.length) console.info('opening repeats', name, repeats.length, repeats.slice(0, 12).map((o) => o.name || '(unnamed)').join(' | '));
     // where the near ring stands, in the island frame: those buildings come out of the far model below
+    // (every place's own buildings count, not only its near ring: some stand outside the place's area, where the
+    // far model would otherwise draw them a second time)
     root.traverse((o) => {
-      if (!o.isMesh || !RING.test(o.name || '')) return;
+      if (!o.isMesh || o.isInstancedMesh) return;
       const p = o.geometry.attributes.position,
         v = new THREE.Vector3();
-      for (let i = 0; i < p.count; i += 3) {
+      const step = Math.max(3, Math.floor(p.count / 3000)); // a sample is enough to find the footprints it stands on
+      for (let i = 0; i < p.count; i += step) {
         v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
-        ringPts.push([v.x, v.z]);
+        if (v.y > 1.2) ringPts.push([v.x, v.z]); // walls and roofs, not the ground, lamps or benches
       }
     });
     placed[name] = w;
     areas.push(areaOf(name));
   }
   const inBuilt = (x, z) => areas.some((ar) => inPoly(ar, x, z));
-  // the layout's buildings a near ring already shows (any of its points on the footprint)
+  // the layout's buildings a place already shows (some of its wall or roof points well inside the footprint)
   const ringed = LAYOUT.BUILDINGS.map((bb) => LAYOUT.footprint(bb)).filter((f) => {
     const xs = f.map((q) => q[0]),
       zs = f.map((q) => q[1]);
-    const x0 = Math.min(...xs) - 0.4,
-      x1 = Math.max(...xs) + 0.4,
-      z0 = Math.min(...zs) - 0.4,
-      z1 = Math.max(...zs) + 0.4;
+    const x0 = Math.min(...xs) + 0.3,
+      x1 = Math.max(...xs) - 0.3,
+      z0 = Math.min(...zs) + 0.3,
+      z1 = Math.max(...zs) - 0.3;
     return ringPts.some(([x, z]) => x > x0 && x < x1 && z > z0 && z < z1);
   });
   // walls lie on the outline, so the test is the footprint's box with a little margin (the grid's buildings are boxes)
