@@ -394,6 +394,8 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
     mid: toWorld(10, -70, 0),
     groundY,
     toWorld,
+    // a point in a place's own frame (the frame its builder and game3d/tools/*-views.json use), in the world
+    inPlace: (name, x, z, y = 0) => toWorld(...LAYOUT.toIsland(name, x, z), y * LAYOUT.CHUNKS[name].scale),
   };
   return { group, ridge, anchors, placed };
 }
