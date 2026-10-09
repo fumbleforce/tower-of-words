@@ -1,0 +1,177 @@
+{
+ "title": "Everyday people: first 3D models (casual woman, older man, apron worker)",
+ "date": "2026-10-09",
+ "by": "Claude (art round, #328)",
+ "status": "open",
+ "issue": 328,
+ "question": "These are real rigged 3D models, not pictures: background people for the island who are still code-built placeholders. The casual woman and the older man would walk the paths and plazas; the apron worker would stand at shop and canteen counters. Each was made from the source picture you approved in crowd-everyday-1, twice, with the same Meshy settings, rig, walk, run, sit and idle as the office pair A and B now in the game. Which ones should go in? Pick any; after your pick Codex puts the picked ones in the game. Nothing is in the game yet.",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/row-front.webp",
+   "caption": "Real rigged 3D models, all six beside the approved office man A (left) and office woman B (right), the same viewer, light and camera as crowd pilot 5. Idle. Open the live viewer (first link) to turn them and play walk, run and sit."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/row-34.webp",
+   "caption": "The same row at three-quarter."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/source.webp",
+   "caption": "The three source pictures you approved in crowd-everyday-1 (\"looks ok\"). Each went to Meshy twice, unchanged."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/shapes.webp",
+   "caption": "Step 1, every attempt: Meshy's own previews of the six untextured shapes (front, left, right). Two rolls per picture, same settings; Meshy gave a different shape each time."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/casual-turn.webp",
+   "caption": "casual: front, three-quarter, side and back, beside B. Idle (the approved relaxed idle baked on each rig)."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/casual-faces.webp",
+   "caption": "casual: faces at one camera distance, B on top, then roll 1 and roll 2; front, then turned each way."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/casual-motion.webp",
+   "caption": "casual: sit (Meshy's Chair_Sit_Idle_F on the viewer's see-through block), then the walk from the side, 0.15 s apart."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/older-turn.webp",
+   "caption": "older: front, three-quarter, side and back, beside A. Idle (the approved relaxed idle baked on each rig)."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/older-faces.webp",
+   "caption": "older: faces at one camera distance, A on top, then roll 1 and roll 2; front, then turned each way."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/older-motion.webp",
+   "caption": "older: sit (Meshy's Chair_Sit_Idle_F on the viewer's see-through block), then the walk from the side, 0.15 s apart."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/service-turn.webp",
+   "caption": "service: front, three-quarter, side and back, beside A. Idle (the approved relaxed idle baked on each rig)."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/service-faces.webp",
+   "caption": "service: faces at one camera distance, A on top, then roll 1 and roll 2; front, then turned each way."
+  },
+  {
+   "image": "art/parts/crowd-everyday-2/sheets/service-motion.webp",
+   "caption": "service: sit (Meshy's Chair_Sit_Idle_F on the viewer's see-through block), then the walk from the side, 0.15 s apart."
+  }
+ ],
+ "options": [
+  {
+   "id": "casual-1",
+   "label": "casual-1",
+   "image": "art/parts/crowd-everyday-2/sheets/casual-1-body.webp",
+   "images": [
+    "art/parts/crowd-everyday-2/sheets/casual-1-face-front.webp",
+    "art/parts/crowd-everyday-2/sheets/casual-1-face-left.webp",
+    "art/parts/crowd-everyday-2/sheets/casual-1-face-right.webp"
+   ],
+   "note": "Shape roll 1. Clean face, bob and sweatshirt read as the picture. No faults found in the turn, walk or sit. 1,107 triangles (A has 1,114, B 1,099). Source picture casual-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  },
+  {
+   "id": "casual-2",
+   "label": "casual-2",
+   "image": "art/parts/crowd-everyday-2/sheets/casual-2-body.webp",
+   "images": [
+    "art/parts/crowd-everyday-2/sheets/casual-2-face-front.webp",
+    "art/parts/crowd-everyday-2/sheets/casual-2-face-left.webp",
+    "art/parts/crowd-everyday-2/sheets/casual-2-face-right.webp"
+   ],
+   "note": "Shape roll 2: fuller bob, the hair lower on the cheeks. A small pale fleck where the hair meets the cheek, visible when she turns. 1,124 triangles (A has 1,114, B 1,099). Source picture casual-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  },
+  {
+   "id": "older-1",
+   "label": "older-1",
+   "image": "art/parts/crowd-everyday-2/sheets/older-1-body.webp",
+   "images": [
+    "art/parts/crowd-everyday-2/sheets/older-1-face-front.webp",
+    "art/parts/crowd-everyday-2/sheets/older-1-face-left.webp",
+    "art/parts/crowd-everyday-2/sheets/older-1-face-right.webp"
+   ],
+   "note": "Shape roll 1. Grey hair, grey brows and painted forehead and cheek lines. No faults found in the turn, walk or sit. 1,091 triangles (A has 1,114, B 1,099). Source picture older-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  },
+  {
+   "id": "older-2",
+   "label": "older-2",
+   "image": "art/parts/crowd-everyday-2/sheets/older-2-body.webp",
+   "images": [
+    "art/parts/crowd-everyday-2/sheets/older-2-face-front.webp",
+    "art/parts/crowd-everyday-2/sheets/older-2-face-left.webp",
+    "art/parts/crowd-everyday-2/sheets/older-2-face-right.webp"
+   ],
+   "note": "Shape roll 2: rounder head, the same face paint. No faults found in the turn, walk or sit. 1,091 triangles (A has 1,114, B 1,099). Source picture older-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  },
+  {
+   "id": "service-1",
+   "label": "service-1",
+   "image": "art/parts/crowd-everyday-2/sheets/service-1-body.webp",
+   "images": [
+    "art/parts/crowd-everyday-2/sheets/service-1-face-front.webp",
+    "art/parts/crowd-everyday-2/sheets/service-1-face-left.webp",
+    "art/parts/crowd-everyday-2/sheets/service-1-face-right.webp"
+   ],
+   "note": "Shape roll 1. Clean face and apron from the front. Fault: a skin-coloured patch on his back between the apron straps (from behind). 1,121 triangles (A has 1,114, B 1,099). Source picture service-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  },
+  {
+   "id": "service-2",
+   "label": "service-2",
+   "image": "art/parts/crowd-everyday-2/sheets/service-2-body.webp",
+   "images": [
+    "art/parts/crowd-everyday-2/sheets/service-2-face-front.webp",
+    "art/parts/crowd-everyday-2/sheets/service-2-face-left.webp",
+    "art/parts/crowd-everyday-2/sheets/service-2-face-right.webp"
+   ],
+   "note": "Shape roll 2. Faults: Meshy made his eyes as two loose pieces in front of the face (the round-1 office man problem), so the face got almost no texture space; white smears on the apron bib; in the idle his arms stick out forward and twist. The walk is fine. 1,073 triangles (A has 1,114, B 1,099). Source picture service-01. Meshy image-to-3D: meshy-t2 smart topology, 1,050 polygons, A-pose, no texture (5 credits); Meshy retexture styled from the source picture: meshy-7, our face-first UVs kept, 2k, no PBR (the settings that made the selected a-image and b-image) (10); Meshy auto-rig at 1.1 m with its walk and run (5); Chair_Sit_Idle_F (3)."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D viewer: all six beside A and B (turn, walk, run, sit)",
+   "href": "reviews/crowd-everyday-2/viewer.html?s=pair"
+  },
+  {
+   "label": "Exact Meshy requests, source hashes and credits (138 used)",
+   "href": "reviews/crowd-everyday-2/credits.json"
+  },
+  {
+   "label": "Your source-picture decision",
+   "href": "bible/#review/crowd-everyday-1"
+  }
+ ],
+ "viewer_files": [
+  "art/parts/crowd-everyday-2/game/casual-1/base.webp",
+  "art/parts/crowd-everyday-2/game/casual-1/walk.glb",
+  "art/parts/crowd-everyday-2/game/casual-1/run.glb",
+  "art/parts/crowd-everyday-2/game/casual-1/sit.glb",
+  "art/parts/crowd-everyday-2/game/casual-1/idle.json",
+  "art/parts/crowd-everyday-2/game/casual-2/base.webp",
+  "art/parts/crowd-everyday-2/game/casual-2/walk.glb",
+  "art/parts/crowd-everyday-2/game/casual-2/run.glb",
+  "art/parts/crowd-everyday-2/game/casual-2/sit.glb",
+  "art/parts/crowd-everyday-2/game/casual-2/idle.json",
+  "art/parts/crowd-everyday-2/game/older-1/base.webp",
+  "art/parts/crowd-everyday-2/game/older-1/walk.glb",
+  "art/parts/crowd-everyday-2/game/older-1/run.glb",
+  "art/parts/crowd-everyday-2/game/older-1/sit.glb",
+  "art/parts/crowd-everyday-2/game/older-1/idle.json",
+  "art/parts/crowd-everyday-2/game/older-2/base.webp",
+  "art/parts/crowd-everyday-2/game/older-2/walk.glb",
+  "art/parts/crowd-everyday-2/game/older-2/run.glb",
+  "art/parts/crowd-everyday-2/game/older-2/sit.glb",
+  "art/parts/crowd-everyday-2/game/older-2/idle.json",
+  "art/parts/crowd-everyday-2/game/service-1/base.webp",
+  "art/parts/crowd-everyday-2/game/service-1/walk.glb",
+  "art/parts/crowd-everyday-2/game/service-1/run.glb",
+  "art/parts/crowd-everyday-2/game/service-1/sit.glb",
+  "art/parts/crowd-everyday-2/game/service-1/idle.json",
+  "art/parts/crowd-everyday-2/game/service-2/base.webp",
+  "art/parts/crowd-everyday-2/game/service-2/walk.glb",
+  "art/parts/crowd-everyday-2/game/service-2/run.glb",
+  "art/parts/crowd-everyday-2/game/service-2/sit.glb",
+  "art/parts/crowd-everyday-2/game/service-2/idle.json"
+ ]
+}
