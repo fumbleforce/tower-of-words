@@ -20,7 +20,7 @@ The skyline also has a rule meant for the old camera that looks down from the so
 
 ## What the third-person camera shows
 
-Screenshots at 1366x860, follow camera at its lowest pitch, from each place's start spot, turned four ways. They're in the scratchpad, `bible/shots/research/world-chunking/` (the edge shots and the fog/sky before-after; the per-place sheets and raw numbers stayed in the research session's scratchpad):
+Screenshots at 1366x860, follow camera at its lowest pitch, from each place's start spot, turned four ways. They're in `bible/shots/research/world-chunking/` (the edge shots and the fog/sky before-after; the per-place sheets and raw numbers stayed in the research session's scratchpad):
 
 - `bible/shots/research/world-chunking/works-paving-ends.png`: the works yard's paving runs out into a bare plain and grey sky.
 - `bible/shots/research/world-chunking/shotengai-grass-to-grey.png`: past the shop street's west end, flat grass meets a grey sky with no horizon, and the blocks are stubs.
