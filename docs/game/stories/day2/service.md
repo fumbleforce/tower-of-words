@@ -14,7 +14,7 @@ The player can report the passing sensor or keep Mio's earlier sensor explanatio
 
 Emi asks what the player can maintain and accepts a cautious answer. Kenji invites the whole department to the izakaya; Emi joins after her meeting. At the desk, the player can browse requests without advancing time. Mori's old copier request reveals why an apparently stale queue matters: removing jammed paper never solved the underlying fault. Choosing to review the requests with him spends the afternoon; getting up preserves it. The computer remains usable after work.
 
-Mio has separate work and weekend topics, including a lunch-history-sensitive pickles callback. After both topics she needs to finish her work. Kuro has work and day-off topics at reception, direct known-word replies, and an invitation to swim tomorrow after six on both experienced and beginner branches. Her personal name still belongs to the day-3 introduction.
+Mio has separate work and weekend topics, including a lunch-history-sensitive pickles callback. After both topics she needs to finish her work. Kuro speaks Japanese at reception and expects Eric to try some. She has work and day-off topics, direct known-word replies, and on both swimmer and beginner branches she points him to the club for tomorrow, with no time named yet. In the evening, once he knows watashi, she greets him with お疲れさまです. An English answer gets a cool “Good evening.” A Japanese one gets her warm side: she brushes the dust off his sleeve, and she teaches anata. Her personal name still belongs to the day-3 introduction.
 
 ## State
 
@@ -27,6 +27,8 @@ Mio has separate work and weekend topics, including a lunch-history-sensitive pi
 | `mouichido` | `mio` | `d2_check` |
 | `daijoubu` | `mio` | `d2_submit` |
 | `yasumi` | `kuro` | `d2_kuro_work` |
+| `watashi` | `kuro` | `d2_kuro_work` |
+| `anata` | `kuro` | `d2_kuro_eve_effort` |
 
 Mouichido and daijoubu are part of the station route. Yasumi is learned through the optional reception conversation. Pronunciation models and typed attempts use the chosen protagonist's clips. Japanese speech remains blurred except for known words, names and loanwords; there are no English replacement subtitles.
 
@@ -36,5 +38,5 @@ Mouichido and daijoubu are part of the station route. Yasumi is learned through 
 |---|---|
 | `day2/train.js` | `d2_platform`, `d2_check`, `d2_report`, `d2_voice_test`, `d2_order_sensor`, `d2_keep_sensor`, `d2_submit`, `d2_checked_again`, `d2_mio_before`, `d2_mio_after`, `d2_mio_idle`, `d2_to_gate`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/gate.js` | `d2_gate`, `d2_guard_report`, `d2_guard_ok`, `d2_guard_sent`, `d2_guard`, `d2_guard_idle`, `d2_reader`, `d2_cat`, `d2_guard_food`, `d2_guard_drink`, `d2_cat_food`, `d2_cat_drink`, `d2_to_platform`, `d2_to_forecourt`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
-| `day2/forecourt.js` | `d2_to_shotengai`, `d2_kuro_talk`, `d2_kuro_topics`, `d2_kuro_greet`, `d2_kuro_work`, `d2_kuro_weekend`, `d2_kuro_swimmer`, `d2_kuro_beginner`, `d2_kuro_ok`, `d2_kuro_end`, `d2_arrive`, `d2_to_station`, `d2_to_office`, `d2_to_plaza`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
+| `day2/forecourt.js` | `d2_to_shotengai`, `d2_kuro_talk`, `d2_kuro_topics`, `d2_kuro_greet`, `d2_kuro_work`, `d2_kuro_weekend`, `d2_kuro_swimmer`, `d2_kuro_beginner`, `d2_kuro_ok`, `d2_kuro_evening`, `d2_kuro_eve_english`, `d2_kuro_eve_effort`, `d2_kuro_end`, `d2_arrive`, `d2_to_station`, `d2_to_office`, `d2_to_plaza`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/office.js` | `d2_office`, `d2_brief`, `d2_assess`, `d2_limits`, `d2_invitation`, `d2_work`, `d2_leave_desk`, `d2_notes`, `d2_review_requests`, `d2_emi_waiting`, `d2_emi_later`, `d2_desk_wait`, `d2_desk_later`, `d2_mio_work`, `d2_mio_job`, `d2_mio_weekend`, `d2_mio_idle_work`, `d2_social_end`, `d2_mori_work`, `d2_kenji_work`, `d2_kenji_invite_again`, `d2_leave`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |

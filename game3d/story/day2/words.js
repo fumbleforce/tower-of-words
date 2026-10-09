@@ -9,6 +9,9 @@ export const WORDS = {
   nomitai: { ja: '飲みたい', alias: ['のみたい'], ro: 'nomitai', en: 'I want to drink', phrase: true, voice: 'eric-nomitai' },
   mitai: { ja: '見たい', alias: ['みたい'], ro: 'mitai', en: 'I want to see', phrase: true, voice: 'eric-mitai' },
   ikitai: { ja: '行きたい', alias: ['いきたい'], ro: 'ikitai', en: 'I want to go', phrase: true, voice: 'eric-ikitai' },
+  // Kuro's words for herself and Eric (reception, day 2 morning and evening); typed, not said to anyone from the menu
+  watashi: { ja: '私', alias: ['わたし'], ro: 'watashi', en: 'I, me', voice: 'eric-watashi' },
+  anata: { ja: 'あなた', ro: 'anata', en: 'you', voice: 'eric-anata' },
 };
 export const BASE = {
   tabetai: { form: 'tai', ja: '食べる', ro: 'taberu', en: 'to eat' },

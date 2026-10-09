@@ -40,6 +40,10 @@ Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say t
 | `tsugiwa` | つぎは | tsugi wa | next | word |
 | `otsukare` | お疲れさまです | otsukaresama desu | the everyday hello at work | word |
 | `kotodama` | 言霊 | kotodama | words with power in them | word |
+| `watashi` | 私 | watashi | I, me | word |
+| `anata` | あなた | anata | you | word |
+| `rokuji` | 六時 | rokuji | six o’clock | word |
+| `futari` | 二人 | futari | two people | word |
 | `kenmei` | 件名 | kenmei | subject (of a ticket or an email) | label |
 | `iraisha` | 依頼者 | iraisha | the person who asked | label |
 | `jotai` | 状態 | jōtai | status, state | label |
@@ -79,7 +83,7 @@ Day one offers the following words; its lunch routes teach different commands. W
 
 ## Taught on day 2
 
-The [day-2 set](../../game3d/story/day2/README.md) keeps nine contextual phrases in story/day2/words.js. The station teaches mouichido and daijoubu for repeating the test and reporting its result. The meal teaches tabetai for the chosen food. Kanpai at the toast and oishii in a later compliment are optional. Optional conversations teach yasumi at reception, nomitai over tea, mitai at the telescope and ikitai with Mori. Exact teachers and nodes live in the [day-2 stories](stories/day2/README.md).
+The [day-2 set](../../game3d/story/day2/README.md) keeps nine contextual phrases in story/day2/words.js. The station teaches mouichido and daijoubu for repeating the test and reporting its result. The meal teaches tabetai for the chosen food. Kanpai at the toast and oishii in a later compliment are optional. Optional conversations teach yasumi at reception, nomitai over tea, mitai at the telescope and ikitai with Mori. Kuro also teaches watashi (I, me) at reception in the same talk as yasumi, and anata (you) at reception in the evening, but only when Eric answers her お疲れさまです in Japanese. Both are typed and understood, never said from the Say menu. They prepare her later invitation, which she will only make in Japanese once Eric can follow a time, a number of people and “you and me” (Jørgen, character-voices-2). Exact teachers and nodes live in the [day-2 stories](stories/day2/README.md).
 
 The **-tai form** expresses what the speaker wants to do. The Words panel pairs 食べたい with 食べる, 飲みたい with 飲む, 見たい with 見る, and 行きたい with 行く. Every new phrase starts unknown and is learned through typing. These phrases address people; none commands a machine. The protagonist's pronunciation key is declared in each word record and remapped for the chosen protagonist; clickable replay remains Mio's slow word clip.
 
@@ -87,7 +91,7 @@ The **-tai form** expresses what the speaker wants to do. The Words panel pairs 
 
 The [day-3 set](../../game3d/story/day3/README.md) adds `gamen` (screen) and `yoyaku` (booking) through separate repair requests, with a typed model before using each in the request and result. The printer's existing `dashite` lesson follows the completed ordinary print. These are the three new words on the core repair route; learning does not itself produce magic.
 
-`koko` remains optional at the map (`d3_map`, `d3_koko_word`). At the swimming club, asking how to say you will swim teaches `oyogu`, then follows the choice into the water. Swimming, helping, watching and leaving all work without this lesson. Watching can reuse already-known `mitai`. The contextual pool and pace glosses do not mark words learned.
+`koko` remains optional at the map (`d3_map`, `d3_koko_word`). Two more optional words prepare Kuro’s invitation: Aoi reads the swimming slip’s 18時 out as `rokuji` (six o’clock) at the board (`d3_aoi_name`), and Kuro asks for a table for `futari` (two people) at the shotengai bakery counter at lunch (`d3_kuro_futari`). Like watashi and anata they are typed and understood, never said from the Say menu. At the swimming club, asking how to say you will swim teaches `oyogu`, then follows the choice into the water. Swimming, helping, watching and leaving all work without this lesson. Watching can reuse already-known `mitai`. The contextual pool and pace glosses do not mark words learned.
 
 Known `gamen` returns during the court display inspection (`d4_display`) and at the karaoke screen (`d5_screen`); `yoyaku` returns in the tennis reservation conversation (`d4_tennis_offer`). A later pool talk (`d3_kuro_pool`) reuses `oyogu`. Unknown-word branches retain ordinary English. `dashite` prepares the later guided vending request, with a completed-printer catch-up if it was missed. These scene locations describe current authored opportunities, not limits on when vocabulary can matter.
 

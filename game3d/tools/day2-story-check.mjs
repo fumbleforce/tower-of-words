@@ -253,7 +253,9 @@ for (const topic of ['d2_norway', 'd2_quiet', 'd2_after_work']) for (const food 
   p.fire('talk:emi', [warm ? 'd2_limits' : 'd2_assess']);
   assert(p.lines.some(s => s.includes(order ? 'put the order through' : 'keep the money')), 'Report was not read');
   p.fire(meetFirst ? 'talk:my_chair' : 'talk:my_desk', ['d2_notes', 'd2_review_requests']); assert(p.flags.d2_shift_done); assert.equal(p.flags.period, 'evening');
-  p.move('forecourt'); p.move('plaza'); p.move('shotengai');
+  p.move('forecourt');
+  if (extra) { p.fire('talk:kuro', ['d2_kuro_eve_effort']); assert(p.flags.know_anata && p.flags.kuro_tried_japanese); }
+  p.move('plaza'); p.move('shotengai');
   if (meetFirst) p.fire('talk:kenji');
   p.fire('talk:izakaya');
   p.fire('talk:party_seat', [extra ? 'd2_toast_word' : 'd2_toast', { go: 'd2_take_food', food }, topic]);

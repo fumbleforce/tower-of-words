@@ -21,7 +21,7 @@ Every voiced line in the story files carries an `emo` tag, for example `{ say: '
 | guard | Man in his sixties, clipped, correct Japanese, a security guard. | polite |
 | kuroda (Hamada) | Man in his fifties, flustered, apologising, breathless. | flustered |
 | emi | Woman in her thirties, native British English, quick and confident, always slightly in a meeting. | bright |
-| kuro | Woman of 38, receptionist, relaxed, warm, low and unhurried. | polite |
+| kuro | Woman of 38, receptionist, confident and direct, low and unhurried, polite Japanese with an edge to it. | polite |
 | aoi | Young woman, bright, on the phone. | bright |
 | ann | Station announcer, even and clear. | announcer |
 | gatev | The gate's recorded voice. | machine |

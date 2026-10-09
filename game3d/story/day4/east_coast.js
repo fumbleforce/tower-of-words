@@ -9,8 +9,8 @@ export default place({ east_lane: ['talk:dorm_street', 'zone:row_exit'], sports:
       { say: 'mio', emo: 'dry', text: 'There was when I left home. It keeps falling out.' }, { set: 'd4_mio_lunch_seen' },
     ], else: [{ say: 'mio', emo: 'casual', text: 'I’m staying until I finish this, but the wind keeps taking the, um... the lettuce.' }] }],
     d4_kuro: [{ if: 'd3_kuro_intro', then: [
-      { say: 'kuro', name: 'Kuro', emo: 'warm', text: 'Hello, {mc.name}. There’s less wind at this end.' },
-    ], else: [{ say: 'kuro', emo: 'polite', text: 'Hello. This end is a bit more sheltered, if you want to sit.' }] }],
+      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'warm', text: '{mc.name_jp}さん。ここ、風が弱いですよ。' },
+    ], else: [{ say: 'kuro', overheard: true, emo: 'polite', text: 'こんにちは。ここ、どうぞ。' }, { do: 'gesture', who: 'kuro', kind: 'point' }] }],
     d4_emi: [...emiHello, { say: 'emi', emo: 'casual', text: 'I’m taking the long way home. If I go straight back I’ll open my work bag.' }],
     d4_cat: [{ say: 'eric', emo: 'warm', text: 'I’ll leave you the warm bit.' }],
     d4_onsen: ['> The boiler repair notice is still on the door.'],

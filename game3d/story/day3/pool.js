@@ -23,10 +23,10 @@ export default place(
           { say: 'eric', emo: 'warm', text: 'Not tonight. I’ll stay here a bit longer.' }, { end: true },
         ] },
         { if: 'd3_kuro_intro', then: [
-        { say: 'kuro', name: 'Kuro', emo: 'teasing', text: 'Enjoy it while it lasts. Next week it’s the gym, and nobody has told me how we swim in a gym.' },
+        { say: 'kuro', name: 'Kuro', overheard: true, emo: 'teasing', text: 'プール、今日で最後ですよ。来週はジムで。', clear: [{ ja: 'プール', ro: 'pūru', en: 'pool' }, { ja: 'ジム', ro: 'jimu', en: 'gym' }] },
       ], else: [{ if: 'kuro_reception_seen', then: [
-        { say: 'kuro', emo: 'polite', text: 'Good evening. You found the pool too.' },
-      ], else: [{ say: 'kuro', emo: 'polite', text: 'Good evening. Are you here for the swimming club?' }] }] }],
+        { say: 'kuro', overheard: true, emo: 'amused', text: 'こんばんは。来たんですね。' },
+      ], else: [{ say: 'kuro', overheard: true, emo: 'polite', text: 'こんばんは。クラブですか？', clear: [{ ja: 'クラブ', ro: 'kurabu', en: 'club' }] }] }] }],
       d3_pool_attendant: [
         { if: "period == 'evening'", then: [
           { if: 'club_swimming', then: [

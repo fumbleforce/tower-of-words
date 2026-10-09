@@ -68,7 +68,7 @@ export const winterNodes = {
     { do: 'winterClub', state: 'emiTurn' }, { if: '!winter_action_completed', then: [{ end: true }] },
     { do: 'winterClub', state: 'group' }, { if: '!winter_action_completed', then: [{ end: true }] },
     { say: 'emi', emo: 'amused', text: 'Could we do that again? I think I know where to stand now.' },
-    { say: 'kuro', name: 'Kuro', emo: 'warm', text: 'Of course. Same place.' },
+    { say: 'kuro', name: 'Kuro', overheard: true, emo: 'warm', text: 'はい、同じところで。' },
     { do: 'winterClub', state: 'repeat' }, { if: '!winter_action_completed', then: [{ end: true }] },
     { go: 'ongoing_winter_done' },
   ],
