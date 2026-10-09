@@ -26,6 +26,10 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 - **Every attempt gets a verdict** in the dashboard: `python3 tools/verdict.py <image> --reject "<one line>"` or `--keep`. Jørgen reads them in the History viewer.
 - Check every candidate at full size beside the approved portraits. Reject only what is clearly off; don't fail a picture on differences too small to judge reliably.
 
+## Voicing
+
+- The private voice tool reuses old takes stored under the same line id (~/ai/private-voice/work/raw/<id>/). Before re-voicing a line whose text changed, move its old takes out (e.g. to work/stale/), or the check passes old audio for the old text.
+
 ## Reporting
 
 - Anything Jørgen has to look at or choose (a comparison, a test, a pick) goes in a private review in island/private/rewards/reviews/, never only in the round's own index.html: the private Review page is the one place he checks (2026-10-09).
