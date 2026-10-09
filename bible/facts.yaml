@@ -237,7 +237,7 @@ characters:
     portrait_status: approved
     decisions:
       - {q: "legacy/notes/GUIDE-history.md ~ Rei, Mio, Aoi and Kaori = the RDBT versions", s: approved}
-      - {q: "art/PROMPTS.md ~ Aoi: slim with small breasts #1", s: approved}
+      - {q: "art/PROMPTS.md ~ Aoi: slim with small B-cup breasts, not flat #1", s: approved}
     images:
       - [art/approved/aoi/aoi-aoi-base-2001-neutral.webp, "Aoi: neutral (reviews/style-align-1 or npc-base-1 pick aoi-base-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
       - [art/approved/aoi/aoi-after.webp, "gallery B-aoi (RDBT) with headroom, the design aoi-base-2001 was redrawn from", approved]
