@@ -1,0 +1,57 @@
+{
+ "title": "Character bios, round 5: Aoi and Emi",
+ "date": "2026-10-09",
+ "by": "Claude, bios agent",
+ "status": "open",
+ "updated": "2026-10-09T23:59:00+0200",
+ "context": [
+  "You asked for Aoi's and Emi's bios before their voice sheets, so these come first. They are written the same way as the four you approved in character-backgrounds-4: background, looks, home, interests and ambitions, with nothing about other characters.",
+  "Nothing here is in the game yet. Each bio ends with a note on what is already established and what is new.",
+  "After your answer, their voice sheets (character-voices-3) are redone from the approved bios."
+ ],
+ "ask": "For each card, pick it to approve the bio as it is, pick it and comment to approve it with changes, or reject it to have it rewritten. Answer the numbered questions in the card's comment box.",
+ "multi": true,
+ "options": [
+  {
+   "id": "aoi",
+   "label": "aoi · Aoi",
+   "image": "game3d/assets/portraits/aoi-neutral.webp",
+   "who": "24, new hire in Facilities on room bookings, Japanese only, tennis beginner. The youngest of three, turned down by thirty companies, now in the new hires' dorm and hoping to run the island's event bookings one day.",
+   "questions": [
+    "Her background explains why she joined in autumn: more than thirty companies turned her down, and she spent half a year at a karaoke front desk before Amakawa's autumn intake. Keep that, or should she be an ordinary graduate who is simply new? Default: keep it.",
+    "She was in a university tennis circle for four years and hardly played, so she knows how a club works but is still a beginner. Or should she never have held a racket before this Sunday? Default: the circle."
+   ],
+   "note": "Questions: 1) Her background explains why she joined in autumn: more than thirty companies turned her down, and she spent half a year at a karaoke front desk before Amakawa's autumn intake. Keep that, or should she be an ordinary graduate who is simply new? Default: keep it. 2) She was in a university tennis circle for four years and hardly played, so she knows how a club works but is still a beginner. Or should she never have held a racket before this Sunday? Default: the circle."
+  },
+  {
+   "id": "emi",
+   "label": "emi · Emi",
+   "image": "game3d/assets/portraits/emi-neutral.webp",
+   "who": "32, B2's team lead, native British English. Grew up in Reading, came to Amakawa as a translator, swims to keep her shoulders loose and wants a department head's job upstairs.",
+   "questions": [
+    "Her name and her fluent Japanese come from a Japanese mother and an English father, and she grew up in Reading. The other way is two British parents, Emi short for Emily, and Japanese learned at university and at work. Which one? Default: the Japanese mother.",
+    "She wants a department head's job upstairs within five years, and the ten-year promise was partly for her own career. Does that ambition suit her, or should she want to stay on B2? Default: keep the ambition."
+   ],
+   "note": "Questions: 1) Her name and her fluent Japanese come from a Japanese mother and an English father, and she grew up in Reading. The other way is two British parents, Emi short for Emily, and Japanese learned at university and at work. Which one? Default: the Japanese mother. 2) She wants a department head's job upstairs within five years, and the ten-year promise was partly for her own career. Does that ambition suit her, or should she want to stay on B2? Default: keep the ambition."
+  }
+ ],
+ "links": [
+  {
+   "label": "Read both bios",
+   "href": "reviews/character-backgrounds-5/index.html"
+  },
+  {
+   "label": "Aoi bio",
+   "href": "reviews/character-backgrounds-5/index.html#aoi"
+  },
+  {
+   "label": "Emi bio",
+   "href": "reviews/character-backgrounds-5/index.html#emi"
+  },
+  {
+   "label": "Round 4 (Mio, Kenji, Kuro, Rei)",
+   "href": "reviews/character-backgrounds-4/index.html"
+  }
+ ],
+ "question": "You asked for Aoi's and Emi's bios before their voice sheets, so these come first. They are written the same way as the four you approved in character-backgrounds-4: background, looks, home, interests and ambitions, with nothing about other characters. Nothing here is in the game yet. Each bio ends with a note on what is already established and what is new. After your answer, their voice sheets (character-voices-3) are redone from the approved bios. For each card, pick it to approve the bio as it is, pick it and comment to approve it with changes, or reject it to have it rewritten. Answer the numbered questions in the card's comment box."
+}
