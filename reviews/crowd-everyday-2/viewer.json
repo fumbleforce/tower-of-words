@@ -1,0 +1,149 @@
+{
+ "title": "Everyday people: Meshy models (crowd-everyday-2)",
+ "blurb": "Real rigged 3D models of the three source pictures you approved in crowd-everyday-1, two Meshy shapes each, beside the approved office pair A and B for scale. Same Meshy settings, rig, walk, run, sit and relaxed idle as A and B. Nothing here is in the game.",
+ "rigs": {
+  "office-a": {
+   "id": "crowd-a",
+   "label": "Office man A (approved, in game)",
+   "dir": "game3d/assets/characters/crowd-a/",
+   "idle": "game3d/assets/characters/crowd-a/idle.json",
+   "height": 1.09
+  },
+  "office-b": {
+   "id": "crowd-b",
+   "label": "Office woman B (approved, in game)",
+   "dir": "game3d/assets/characters/crowd-b/",
+   "idle": "game3d/assets/characters/crowd-b/idle.json",
+   "height": 1.06
+  },
+  "casual-1": {
+   "id": "ce2-casual-1",
+   "label": "casual-1",
+   "dir": "art/parts/crowd-everyday-2/game/casual-1/",
+   "idle": "art/parts/crowd-everyday-2/game/casual-1/idle.json",
+   "height": 1.06
+  },
+  "casual-2": {
+   "id": "ce2-casual-2",
+   "label": "casual-2",
+   "dir": "art/parts/crowd-everyday-2/game/casual-2/",
+   "idle": "art/parts/crowd-everyday-2/game/casual-2/idle.json",
+   "height": 1.06
+  },
+  "older-1": {
+   "id": "ce2-older-1",
+   "label": "older-1",
+   "dir": "art/parts/crowd-everyday-2/game/older-1/",
+   "idle": "art/parts/crowd-everyday-2/game/older-1/idle.json",
+   "height": 1.09
+  },
+  "older-2": {
+   "id": "ce2-older-2",
+   "label": "older-2",
+   "dir": "art/parts/crowd-everyday-2/game/older-2/",
+   "idle": "art/parts/crowd-everyday-2/game/older-2/idle.json",
+   "height": 1.09
+  },
+  "service-1": {
+   "id": "ce2-service-1",
+   "label": "service-1",
+   "dir": "art/parts/crowd-everyday-2/game/service-1/",
+   "idle": "art/parts/crowd-everyday-2/game/service-1/idle.json",
+   "height": 1.09
+  },
+  "service-2": {
+   "id": "ce2-service-2",
+   "label": "service-2",
+   "dir": "art/parts/crowd-everyday-2/game/service-2/",
+   "idle": "art/parts/crowd-everyday-2/game/service-2/idle.json",
+   "height": 1.09
+  }
+ },
+ "scenes": {
+  "pair": {
+   "label": "All six beside the approved pair",
+   "items": [
+    {
+     "rig": "office-a"
+    },
+    {
+     "rig": "casual-1"
+    },
+    {
+     "rig": "casual-2"
+    },
+    {
+     "rig": "older-1"
+    },
+    {
+     "rig": "older-2"
+    },
+    {
+     "rig": "service-1"
+    },
+    {
+     "rig": "service-2"
+    },
+    {
+     "rig": "office-b"
+    }
+   ],
+   "gap": 0.8
+  },
+  "casual": {
+   "label": "Casual woman",
+   "items": [
+    {
+     "rig": "office-b"
+    },
+    {
+     "rig": "casual-1"
+    },
+    {
+     "rig": "casual-2"
+    }
+   ],
+   "gap": 0.9
+  },
+  "older": {
+   "label": "Older man",
+   "items": [
+    {
+     "rig": "office-a"
+    },
+    {
+     "rig": "older-1"
+    },
+    {
+     "rig": "older-2"
+    }
+   ],
+   "gap": 0.9
+  },
+  "service": {
+   "label": "Apron worker",
+   "items": [
+    {
+     "rig": "office-a"
+    },
+    {
+     "rig": "service-1"
+    },
+    {
+     "rig": "service-2"
+    }
+   ],
+   "gap": 0.9
+  }
+ },
+ "closeups": [
+  "casual-1",
+  "casual-2",
+  "older-1",
+  "older-2",
+  "service-1",
+  "service-2",
+  "office-a",
+  "office-b"
+ ]
+}

@@ -1,0 +1,428 @@
+[
+ {
+  "task": "01a12054-b65f-71ab-a063-8dac715fcd5b",
+  "step": "shape",
+  "candidate": "casual-1",
+  "settings": {
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "target_polycount": 1050,
+   "should_texture": false,
+   "pose_mode": "a-pose",
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true
+  },
+  "submitted_at": 1791543786.776829,
+  "image": "art/parts/crowd-everyday-1/pics/casual-01.png",
+  "image_sha256": "7933884e471fdbc3753011cbc4a8b28c4c8a3298b4c1d3911d3ce65ee4b312f2",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1970
+ },
+ {
+  "task": "01a12067-ff98-7025-bbbb-c809fc012ab9",
+  "step": "retex",
+  "candidate": "casual-1",
+  "settings": {
+   "ai_model": "meshy-7",
+   "enable_original_uv": true,
+   "enable_pbr": false,
+   "texture_resolution": "2k",
+   "target_formats": [
+    "glb"
+   ]
+  },
+  "submitted_at": 1791545050.1385915,
+  "model": "art/parts/crowd-everyday-2/meshy/casual-1-uv.glb",
+  "model_sha256": "34dfece9dd42c2287d813eb10ff14bbd567d2a5eed8f0e1727d9de06f5d5dc3f",
+  "image": "art/parts/crowd-everyday-1/pics/casual-01.png",
+  "image_sha256": "7933884e471fdbc3753011cbc4a8b28c4c8a3298b4c1d3911d3ce65ee4b312f2",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 1910
+ },
+ {
+  "task": "01a12068-9cfd-7549-b899-ecd2b5fcadb8",
+  "step": "rig",
+  "candidate": "casual-1",
+  "settings": {
+   "input_task_id": "01a12067-ff98-7025-bbbb-c809fc012ab9",
+   "height_meters": 1.1
+  },
+  "submitted_at": 1791545097.8946297,
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1880
+ },
+ {
+  "task": "01a12069-1e19-7415-8b19-18707bf87c62",
+  "step": "sit",
+  "candidate": "casual-1",
+  "settings": {
+   "rig_task_id": "01a12068-9cfd-7549-b899-ecd2b5fcadb8",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "submitted_at": 1791545122.4968512,
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 1865
+ },
+ {
+  "task": "01a12054-b5b6-72a8-86d1-f9a8a6c1d4c2",
+  "step": "shape",
+  "candidate": "casual-2",
+  "settings": {
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "target_polycount": 1050,
+   "should_texture": false,
+   "pose_mode": "a-pose",
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true
+  },
+  "submitted_at": 1791543786.6176283,
+  "image": "art/parts/crowd-everyday-1/pics/casual-01.png",
+  "image_sha256": "7933884e471fdbc3753011cbc4a8b28c4c8a3298b4c1d3911d3ce65ee4b312f2",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1970
+ },
+ {
+  "task": "01a12067-ff95-72b1-9c16-085e2de74964",
+  "step": "retex",
+  "candidate": "casual-2",
+  "settings": {
+   "ai_model": "meshy-7",
+   "enable_original_uv": true,
+   "enable_pbr": false,
+   "texture_resolution": "2k",
+   "target_formats": [
+    "glb"
+   ]
+  },
+  "submitted_at": 1791545050.1592507,
+  "model": "art/parts/crowd-everyday-2/meshy/casual-2-uv.glb",
+  "model_sha256": "d5b6235736fad53ead9a14d8ae8c2ed3a7d3968fb8e3b01c07d69463dc579594",
+  "image": "art/parts/crowd-everyday-1/pics/casual-01.png",
+  "image_sha256": "7933884e471fdbc3753011cbc4a8b28c4c8a3298b4c1d3911d3ce65ee4b312f2",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 1910
+ },
+ {
+  "task": "01a12068-9cf8-75a2-a8d5-16f07fff1c40",
+  "step": "rig",
+  "candidate": "casual-2",
+  "settings": {
+   "input_task_id": "01a12067-ff95-72b1-9c16-085e2de74964",
+   "height_meters": 1.1
+  },
+  "submitted_at": 1791545094.3741915,
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1880
+ },
+ {
+  "task": "01a12069-1e59-743c-85ee-17e184105a3d",
+  "step": "sit",
+  "candidate": "casual-2",
+  "settings": {
+   "rig_task_id": "01a12068-9cf8-75a2-a8d5-16f07fff1c40",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "submitted_at": 1791545122.549469,
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 1865
+ },
+ {
+  "task": "01a12054-b5bd-76bf-8d5f-647f0c2b1c0d",
+  "step": "shape",
+  "candidate": "older-1",
+  "settings": {
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "target_polycount": 1050,
+   "should_texture": false,
+   "pose_mode": "a-pose",
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true
+  },
+  "submitted_at": 1791543786.644889,
+  "image": "art/parts/crowd-everyday-1/pics/older-01.png",
+  "image_sha256": "331391089a9c090b4834159e0eec070e8d5f14cd141dbbdd8bf8ae2186bfe953",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1970
+ },
+ {
+  "task": "01a12067-ff96-756a-8e9b-b163b6201466",
+  "step": "retex",
+  "candidate": "older-1",
+  "settings": {
+   "ai_model": "meshy-7",
+   "enable_original_uv": true,
+   "enable_pbr": false,
+   "texture_resolution": "2k",
+   "target_formats": [
+    "glb"
+   ]
+  },
+  "submitted_at": 1791545050.166891,
+  "model": "art/parts/crowd-everyday-2/meshy/older-1-uv.glb",
+  "model_sha256": "e65c59804063e548860cbcd8ae78500e71aea3ad6188e364a63c8b0ca7cf1c8a",
+  "image": "art/parts/crowd-everyday-1/pics/older-01.png",
+  "image_sha256": "331391089a9c090b4834159e0eec070e8d5f14cd141dbbdd8bf8ae2186bfe953",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 1910
+ },
+ {
+  "task": "01a12068-9d07-7299-98e4-af7f6127fae7",
+  "step": "rig",
+  "candidate": "older-1",
+  "settings": {
+   "input_task_id": "01a12067-ff96-756a-8e9b-b163b6201466",
+   "height_meters": 1.1
+  },
+  "submitted_at": 1791545094.4161704,
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1880
+ },
+ {
+  "task": "01a12069-1e9b-72b0-8c37-5a502ad42597",
+  "step": "sit",
+  "candidate": "older-1",
+  "settings": {
+   "rig_task_id": "01a12068-9d07-7299-98e4-af7f6127fae7",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "submitted_at": 1791545122.6883771,
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 1865
+ },
+ {
+  "task": "01a12054-b5c5-71a2-9f2a-83a3413918fa",
+  "step": "shape",
+  "candidate": "older-2",
+  "settings": {
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "target_polycount": 1050,
+   "should_texture": false,
+   "pose_mode": "a-pose",
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true
+  },
+  "submitted_at": 1791543786.808061,
+  "image": "art/parts/crowd-everyday-1/pics/older-01.png",
+  "image_sha256": "331391089a9c090b4834159e0eec070e8d5f14cd141dbbdd8bf8ae2186bfe953",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1970
+ },
+ {
+  "task": "01a12067-ffa0-75e8-85c7-247e0cbf4603",
+  "step": "retex",
+  "candidate": "older-2",
+  "settings": {
+   "ai_model": "meshy-7",
+   "enable_original_uv": true,
+   "enable_pbr": false,
+   "texture_resolution": "2k",
+   "target_formats": [
+    "glb"
+   ]
+  },
+  "submitted_at": 1791545050.1377797,
+  "model": "art/parts/crowd-everyday-2/meshy/older-2-uv.glb",
+  "model_sha256": "6369978d13cb8e59c4acbba05a4b0aa2af572f4acc27b9284c9e2f595f1c8175",
+  "image": "art/parts/crowd-everyday-1/pics/older-01.png",
+  "image_sha256": "331391089a9c090b4834159e0eec070e8d5f14cd141dbbdd8bf8ae2186bfe953",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 1910
+ },
+ {
+  "task": "01a12068-9cfa-75a9-9197-5b772b28edcd",
+  "step": "rig",
+  "candidate": "older-2",
+  "settings": {
+   "input_task_id": "01a12067-ffa0-75e8-85c7-247e0cbf4603",
+   "height_meters": 1.1
+  },
+  "submitted_at": 1791545097.9468548,
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1880
+ },
+ {
+  "task": "01a12069-1e80-70e9-afce-dac63088d387",
+  "step": "sit",
+  "candidate": "older-2",
+  "settings": {
+   "rig_task_id": "01a12068-9cfa-75a9-9197-5b772b28edcd",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "submitted_at": 1791545122.6098893,
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 1865
+ },
+ {
+  "task": "01a12054-b5ba-7246-9580-f6e4206489d3",
+  "step": "shape",
+  "candidate": "service-1",
+  "settings": {
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "target_polycount": 1050,
+   "should_texture": false,
+   "pose_mode": "a-pose",
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true
+  },
+  "submitted_at": 1791543786.456102,
+  "image": "art/parts/crowd-everyday-1/pics/service-01.png",
+  "image_sha256": "fa962c2dae3e5e8da6ef4a49428c6237ae3d3b6736e778191a0db56829b8d453",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1970
+ },
+ {
+  "task": "01a12067-ff97-751e-8f9e-e4e40a5645b4",
+  "step": "retex",
+  "candidate": "service-1",
+  "settings": {
+   "ai_model": "meshy-7",
+   "enable_original_uv": true,
+   "enable_pbr": false,
+   "texture_resolution": "2k",
+   "target_formats": [
+    "glb"
+   ]
+  },
+  "submitted_at": 1791545050.1138585,
+  "model": "art/parts/crowd-everyday-2/meshy/service-1-uv.glb",
+  "model_sha256": "59a91e5d1276997b113c467e6768dda1565536009f9e931311e04122e4dc7f47",
+  "image": "art/parts/crowd-everyday-1/pics/service-01.png",
+  "image_sha256": "fa962c2dae3e5e8da6ef4a49428c6237ae3d3b6736e778191a0db56829b8d453",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 1910
+ },
+ {
+  "task": "01a12068-9cf9-753e-bd2c-ab234f34bbf8",
+  "step": "rig",
+  "candidate": "service-1",
+  "settings": {
+   "input_task_id": "01a12067-ff97-751e-8f9e-e4e40a5645b4",
+   "height_meters": 1.1
+  },
+  "submitted_at": 1791545092.0533698,
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1865
+ },
+ {
+  "task": "01a12069-83bf-7457-b49c-085452ede70b",
+  "step": "sit",
+  "candidate": "service-1",
+  "settings": {
+   "rig_task_id": "01a12068-9cf9-753e-bd2c-ab234f34bbf8",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "submitted_at": 1791545148.6152146,
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 1862
+ },
+ {
+  "task": "01a12054-b655-764b-8ccf-956abb1553cb",
+  "step": "shape",
+  "candidate": "service-2",
+  "settings": {
+   "ai_model": "meshy-t2",
+   "model_type": "smart-topology",
+   "target_polycount": 1050,
+   "should_texture": false,
+   "pose_mode": "a-pose",
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true
+  },
+  "submitted_at": 1791543786.4841008,
+  "image": "art/parts/crowd-everyday-1/pics/service-01.png",
+  "image_sha256": "fa962c2dae3e5e8da6ef4a49428c6237ae3d3b6736e778191a0db56829b8d453",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1970
+ },
+ {
+  "task": "01a12067-ff98-75b8-8ad2-f2059b59cf22",
+  "step": "retex",
+  "candidate": "service-2",
+  "settings": {
+   "ai_model": "meshy-7",
+   "enable_original_uv": true,
+   "enable_pbr": false,
+   "texture_resolution": "2k",
+   "target_formats": [
+    "glb"
+   ]
+  },
+  "submitted_at": 1791545050.134179,
+  "model": "art/parts/crowd-everyday-2/meshy/service-2-uv.glb",
+  "model_sha256": "a8fcc97299896e6f766cd232d07362fb5eec5ac5957eaa9e6c347763242c385a",
+  "image": "art/parts/crowd-everyday-1/pics/service-01.png",
+  "image_sha256": "fa962c2dae3e5e8da6ef4a49428c6237ae3d3b6736e778191a0db56829b8d453",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 1910
+ },
+ {
+  "task": "01a12068-9cf5-71e9-94e5-64f90cf5be7a",
+  "step": "rig",
+  "candidate": "service-2",
+  "settings": {
+   "input_task_id": "01a12067-ff98-75b8-8ad2-f2059b59cf22",
+   "height_meters": 1.1
+  },
+  "submitted_at": 1791545092.078968,
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 1880
+ },
+ {
+  "task": "01a12069-2000-77a6-a81a-ae9971cbfbb8",
+  "step": "sit",
+  "candidate": "service-2",
+  "settings": {
+   "rig_task_id": "01a12068-9cf5-71e9-94e5-64f90cf5be7a",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "submitted_at": 1791545123.0132475,
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 1865
+ }
+]
