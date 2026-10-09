@@ -1,0 +1,198 @@
+{
+ "title": "Background music: longer pieces for each part of the day and the island",
+ "date": "2026-10-09",
+ "by": "claude-agent:music",
+ "status": "open",
+ "context": [
+  "This is background music for the game. Today the game has four short loops of about 30 seconds each, and one of them (the calm train loop) plays almost everywhere: the title menu, the train and nearly every outdoor place and shop. That is the loop that repeats so often.",
+  "The seam you heard on the title menu is fixed in the game already (commit 8f9654b7): the loops no longer jump at the point where they start over. These new pieces are the second part of the job.",
+  "Here are 28 new instrumental pieces, four takes for each of seven uses: the title menu, the morning and work day outdoors, the evening, the night, inside the office, the shop street and the harbour. Each card name starts with its use (title-1 to title-4, morning-1 to morning-4, and so on), and its note says where it would play. Each piece plays for about two to two and a half minutes before it repeats, three to five times longer than today's loops.",
+  "All of them were asked for in one shared style: a soft acoustic ensemble for a cozy slice-of-life game, with piano, guitar, strings, light percussion and no vocals. Each use asks for its own mood and instruments on top of that. They were made locally with ACE-Step 1.5, a newer music model than the ones you judged in September, and each card is the piece as the game would loop it, set to the same loudness. A few have problems, and their notes say what they are.",
+  "Nothing here is in the game yet. Pick the take you like for each use, or reject all four for a use if none of them fit. Once you've picked, the chosen takes replace the old loops in those places and the uses you rejected get a new round. If the style as a whole is wrong, say so in the overall comment and the next round tries a different one."
+ ],
+ "ask": "Pick one take for each use you like (for example title-2, office-1), reject the uses where nothing fits, and say in the overall comment if the style itself is wrong.",
+ "question": "This is background music for the game. Today the game has four short loops of about 30 seconds each, and one of them (the calm train loop) plays almost everywhere: the title menu, the train and nearly every outdoor place and shop. That is the loop that repeats so often. The seam you heard on the title menu is fixed in the game already (commit 8f9654b7): the loops no longer jump at the point where they start over. These new pieces are the second part of the job. Here are 28 new instrumental pieces, four takes for each of seven uses: the title menu, the morning and work day outdoors, the evening, the night, inside the office, the shop street and the harbour. Each card name starts with its use (title-1 to title-4, morning-1 to morning-4, and so on), and its note says where it would play. Each piece plays for about two to two and a half minutes before it repeats, three to five times longer than today's loops. All of them were asked for in one shared style: a soft acoustic ensemble for a cozy slice-of-life game, with piano, guitar, strings, light percussion and no vocals. Each use asks for its own mood and instruments on top of that. They were made locally with ACE-Step 1.5, a newer music model than the ones you judged in September, and each card is the piece as the game would loop it, set to the same loudness. A few have problems, and their notes say what they are. Nothing here is in the game yet. Pick the take you like for each use, or reject all four for a use if none of them fit. Once you've picked, the chosen takes replace the old loops in those places and the uses you rejected get a new round. If the style as a whole is wrong, say so in the overall comment and the next round tries a different one. Pick one take for each use you like (for example title-2, office-1), reject the uses where nothing fits, and say in the overall comment if the style itself is wrong.",
+ "multi": true,
+ "media": [
+  {
+   "audio": "game3d/audio/music/calm.mp3",
+   "caption": "For comparison: today's calm loop, the one that plays on the title menu and almost everywhere else (about 29 seconds, now with its seam fixed)."
+  }
+ ],
+ "options": [
+  {
+   "id": "title-1",
+   "label": "title-1",
+   "audio": "art/candidates/music-3/title-1.mp3",
+   "note": "Title menu, take 1. Plays on the title menu, before you start or load a game. Today the title plays the train loop (calm). Plays for 2:29 before it repeats. No problems measured. Made 1 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3711, 80 BPM, D major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, gentle hopeful theme, felt piano melody over soft string pad and nylon guitar arpeggios, light celesta, slow build, unhurried\". Lyrics field: [Instrumental]. Vocal check -58.2 dB (Lyria loops: about -32). Seam score 0.17 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "title-2",
+   "label": "title-2",
+   "audio": "art/candidates/music-3/title-2.mp3",
+   "note": "Title menu, take 2. Plays on the title menu, before you start or load a game. Today the title plays the train loop (calm). Plays for 2:37 before it repeats. Problem: the end doesn't match the start well (seam score 0.782), so its loop point would need another cut before it goes in. Made 6 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3712, 80 BPM, D major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, gentle hopeful theme, felt piano melody over soft string pad and nylon guitar arpeggios, light celesta, slow build, unhurried\". Lyrics field: [Instrumental]. Vocal check -58.6 dB (Lyria loops: about -32). Seam score 0.782 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "title-3",
+   "label": "title-3",
+   "audio": "art/candidates/music-3/title-3.mp3",
+   "note": "Title menu, take 3. Plays on the title menu, before you start or load a game. Today the title plays the train loop (calm). Plays for 1:49 before it repeats. Problem: the end doesn't match the start well (seam score 0.513), so its loop point would need another cut before it goes in. Made 7 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3713, 80 BPM, D major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, gentle hopeful theme, felt piano melody over soft string pad and nylon guitar arpeggios, light celesta, slow build, unhurried\". Lyrics field: [Instrumental]. Vocal check -58.0 dB (Lyria loops: about -32). Seam score 0.513 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "title-4",
+   "label": "title-4",
+   "audio": "art/candidates/music-3/title-4.mp3",
+   "note": "Title menu, take 4. Plays on the title menu, before you start or load a game. Today the title plays the train loop (calm). Plays for 2:37 before it repeats. Problem: it has about 19 seconds of near silence at the start and again in the middle. Made 8 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3714, 80 BPM, D major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, gentle hopeful theme, felt piano melody over soft string pad and nylon guitar arpeggios, light celesta, slow build, unhurried\". Lyrics field: [Instrumental]. Vocal check -55.6 dB (Lyria loops: about -32). Seam score 0.189 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "morning-1",
+   "label": "morning-1",
+   "audio": "art/candidates/music-3/morning-1.mp3",
+   "note": "Morning and work day, take 1. Plays outdoors in the morning and during the work day: the forecourt, plaza, shop street and the other outdoor places. Today almost every place plays the same train loop (calm). Plays for 2:36 before it repeats. Problem: the end doesn't match the start well (seam score 0.692), so its loop point would need another cut before it goes in. Made 2 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3811, 96 BPM, G major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, bright fresh morning, pizzicato strings, nylon guitar, glockenspiel, flute melody, soft shaker, light and cheerful but calm\". Lyrics field: [Instrumental]. Vocal check -53.9 dB (Lyria loops: about -32). Seam score 0.692 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "morning-2",
+   "label": "morning-2",
+   "audio": "art/candidates/music-3/morning-2.mp3",
+   "note": "Morning and work day, take 2. Plays outdoors in the morning and during the work day: the forecourt, plaza, shop street and the other outdoor places. Today almost every place plays the same train loop (calm). Plays for 2:22 before it repeats. Problem: it may have a faint hummed or sung bit (vocal check flags 16.1% of the time). Made 9 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3812, 96 BPM, G major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, bright fresh morning, pizzicato strings, nylon guitar, glockenspiel, flute melody, soft shaker, light and cheerful but calm\". Lyrics field: [Instrumental]. Vocal check -43.3 dB (Lyria loops: about -32). Seam score 0.209 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "morning-3",
+   "label": "morning-3",
+   "audio": "art/candidates/music-3/morning-3.mp3",
+   "note": "Morning and work day, take 3. Plays outdoors in the morning and during the work day: the forecourt, plaza, shop street and the other outdoor places. Today almost every place plays the same train loop (calm). Plays for 2:20 before it repeats. Problem: the end doesn't match the start well (seam score 0.884), so its loop point would need another cut before it goes in. Made 10 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3813, 96 BPM, G major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, bright fresh morning, pizzicato strings, nylon guitar, glockenspiel, flute melody, soft shaker, light and cheerful but calm\". Lyrics field: [Instrumental]. Vocal check -46.2 dB (Lyria loops: about -32). Seam score 0.884 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "morning-4",
+   "label": "morning-4",
+   "audio": "art/candidates/music-3/morning-4.mp3",
+   "note": "Morning and work day, take 4. Plays outdoors in the morning and during the work day: the forecourt, plaza, shop street and the other outdoor places. Today almost every place plays the same train loop (calm). Plays for 2:34 before it repeats. No problems measured. Made 11 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3814, 96 BPM, G major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, bright fresh morning, pizzicato strings, nylon guitar, glockenspiel, flute melody, soft shaker, light and cheerful but calm\". Lyrics field: [Instrumental]. Vocal check -62.8 dB (Lyria loops: about -32). Seam score 0.241 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "evening-1",
+   "label": "evening-1",
+   "audio": "art/candidates/music-3/evening-1.mp3",
+   "note": "Evening, take 1. Plays everywhere after work, in the evening. Today the evening plays the night loop. Plays for 2:16 before it repeats. Problem: it has a singing voice in it (vocal check -12 dB), so it breaks the no-vocals rule. Also, the end doesn't match the start well (seam score 0.476), so its loop point would need another cut before it goes in. Made 3 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3911, 84 BPM, F major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, warm sunset mood, Rhodes electric piano, nylon guitar, soft upright bass, brushed drums, relaxed and wistful\". Lyrics field: [Instrumental]. Vocal check -11.7 dB (Lyria loops: about -32). Seam score 0.476 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "evening-2",
+   "label": "evening-2",
+   "audio": "art/candidates/music-3/evening-2.mp3",
+   "note": "Evening, take 2. Plays everywhere after work, in the evening. Today the evening plays the night loop. Plays for 2:20 before it repeats. Problem: the end doesn't match the start well (seam score 0.543), so its loop point would need another cut before it goes in. Made 12 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3912, 84 BPM, F major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, warm sunset mood, Rhodes electric piano, nylon guitar, soft upright bass, brushed drums, relaxed and wistful\". Lyrics field: [Instrumental]. Vocal check -53.0 dB (Lyria loops: about -32). Seam score 0.543 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "evening-3",
+   "label": "evening-3",
+   "audio": "art/candidates/music-3/evening-3.mp3",
+   "note": "Evening, take 3. Plays everywhere after work, in the evening. Today the evening plays the night loop. Plays for 2:19 before it repeats. No problems measured. Made 13 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3913, 84 BPM, F major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, warm sunset mood, Rhodes electric piano, nylon guitar, soft upright bass, brushed drums, relaxed and wistful\". Lyrics field: [Instrumental]. Vocal check -47.1 dB (Lyria loops: about -32). Seam score 0.446 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "evening-4",
+   "label": "evening-4",
+   "audio": "art/candidates/music-3/evening-4.mp3",
+   "note": "Evening, take 4. Plays everywhere after work, in the evening. Today the evening plays the night loop. Plays for 2:17 before it repeats. Problem: the end doesn't match the start well (seam score 0.479), so its loop point would need another cut before it goes in. Made 14 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 3914, 84 BPM, F major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, warm sunset mood, Rhodes electric piano, nylon guitar, soft upright bass, brushed drums, relaxed and wistful\". Lyrics field: [Instrumental]. Vocal check -45.9 dB (Lyria loops: about -32). Seam score 0.479 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "night-1",
+   "label": "night-1",
+   "audio": "art/candidates/music-3/night-1.mp3",
+   "note": "Night, take 1. Plays at the dorms late in the day: the dorm courtyard and the rooms. Today this is the night loop, which also plays everywhere in the evening. Plays for 2:32 before it repeats. No problems measured. Made 4 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4011, 68 BPM, Eb major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, quiet late night, soft felt piano, warm pads, upright bass, very sparse, sleepy and peaceful\". Lyrics field: [Instrumental]. Vocal check -45.0 dB (Lyria loops: about -32). Seam score 0.244 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "night-2",
+   "label": "night-2",
+   "audio": "art/candidates/music-3/night-2.mp3",
+   "note": "Night, take 2. Plays at the dorms late in the day: the dorm courtyard and the rooms. Today this is the night loop, which also plays everywhere in the evening. Plays for 2:07 before it repeats. No problems measured. Made 15 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4012, 68 BPM, Eb major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, quiet late night, soft felt piano, warm pads, upright bass, very sparse, sleepy and peaceful\". Lyrics field: [Instrumental]. Vocal check -46.4 dB (Lyria loops: about -32). Seam score 0.234 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "night-3",
+   "label": "night-3",
+   "audio": "art/candidates/music-3/night-3.mp3",
+   "note": "Night, take 3. Plays at the dorms late in the day: the dorm courtyard and the rooms. Today this is the night loop, which also plays everywhere in the evening. Plays for 2:00 before it repeats. No problems measured. Made 16 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4013, 68 BPM, Eb major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, quiet late night, soft felt piano, warm pads, upright bass, very sparse, sleepy and peaceful\". Lyrics field: [Instrumental]. Vocal check -45.6 dB (Lyria loops: about -32). Seam score 0.246 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "night-4",
+   "label": "night-4",
+   "audio": "art/candidates/music-3/night-4.mp3",
+   "note": "Night, take 4. Plays at the dorms late in the day: the dorm courtyard and the rooms. Today this is the night loop, which also plays everywhere in the evening. Plays for 2:21 before it repeats. No problems measured. Made 17 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4014, 68 BPM, Eb major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, quiet late night, soft felt piano, warm pads, upright bass, very sparse, sleepy and peaceful\". Lyrics field: [Instrumental]. Vocal check -45.9 dB (Lyria loops: about -32). Seam score 0.258 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "office-1",
+   "label": "office-1",
+   "audio": "art/candidates/music-3/office-1.mp3",
+   "note": "Office, take 1. Plays inside the office while Eric works. Today this is the office loop. Plays for 2:05 before it repeats. No problems measured. Made 5 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4111, 100 BPM, C major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, focused and light, marimba, soft electric piano, muted plucked guitar, gentle bass, light percussion, steady and tidy\". Lyrics field: [Instrumental]. Vocal check -56.1 dB (Lyria loops: about -32). Seam score 0.071 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "office-2",
+   "label": "office-2",
+   "audio": "art/candidates/music-3/office-2.mp3",
+   "note": "Office, take 2. Plays inside the office while Eric works. Today this is the office loop. Plays for 2:35 before it repeats. Problem: the end doesn't match the start well (seam score 0.808), so its loop point would need another cut before it goes in. Made 18 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4112, 100 BPM, C major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, focused and light, marimba, soft electric piano, muted plucked guitar, gentle bass, light percussion, steady and tidy\". Lyrics field: [Instrumental]. Vocal check -44.7 dB (Lyria loops: about -32). Seam score 0.808 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "office-3",
+   "label": "office-3",
+   "audio": "art/candidates/music-3/office-3.mp3",
+   "note": "Office, take 3. Plays inside the office while Eric works. Today this is the office loop. Plays for 2:24 before it repeats. No problems measured. Made 19 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4113, 100 BPM, C major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, focused and light, marimba, soft electric piano, muted plucked guitar, gentle bass, light percussion, steady and tidy\". Lyrics field: [Instrumental]. Vocal check -43.3 dB (Lyria loops: about -32). Seam score 0.276 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "office-4",
+   "label": "office-4",
+   "audio": "art/candidates/music-3/office-4.mp3",
+   "note": "Office, take 4. Plays inside the office while Eric works. Today this is the office loop. Plays for 2:34 before it repeats. No problems measured. Made 20 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4114, 100 BPM, C major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, focused and light, marimba, soft electric piano, muted plucked guitar, gentle bass, light percussion, steady and tidy\". Lyrics field: [Instrumental]. Vocal check -45.9 dB (Lyria loops: about -32). Seam score 0.308 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "shops-1",
+   "label": "shops-1",
+   "audio": "art/candidates/music-3/shops-1.mp3",
+   "note": "Shop street, take 1. Plays on the shop street and seafront (shotengai), and in the shops off it. Today it plays the train loop (calm). Plays for 2:21 before it repeats. No problems measured. Made 21 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4211, 104 BPM, A major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, friendly bustling street, acoustic guitar strumming, ukulele, xylophone, accordion, light hand percussion, playful but soft\". Lyrics field: [Instrumental]. Vocal check -46.9 dB (Lyria loops: about -32). Seam score 0.293 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "shops-2",
+   "label": "shops-2",
+   "audio": "art/candidates/music-3/shops-2.mp3",
+   "note": "Shop street, take 2. Plays on the shop street and seafront (shotengai), and in the shops off it. Today it plays the train loop (calm). Plays for 2:05 before it repeats. Problem: the end doesn't match the start well (seam score 0.746), so its loop point would need another cut before it goes in. Made 22 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4212, 104 BPM, A major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, friendly bustling street, acoustic guitar strumming, ukulele, xylophone, accordion, light hand percussion, playful but soft\". Lyrics field: [Instrumental]. Vocal check -48.8 dB (Lyria loops: about -32). Seam score 0.746 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "shops-3",
+   "label": "shops-3",
+   "audio": "art/candidates/music-3/shops-3.mp3",
+   "note": "Shop street, take 3. Plays on the shop street and seafront (shotengai), and in the shops off it. Today it plays the train loop (calm). Plays for 2:09 before it repeats. No problems measured. Made 23 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4213, 104 BPM, A major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, friendly bustling street, acoustic guitar strumming, ukulele, xylophone, accordion, light hand percussion, playful but soft\". Lyrics field: [Instrumental]. Vocal check -59.1 dB (Lyria loops: about -32). Seam score 0.244 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "shops-4",
+   "label": "shops-4",
+   "audio": "art/candidates/music-3/shops-4.mp3",
+   "note": "Shop street, take 4. Plays on the shop street and seafront (shotengai), and in the shops off it. Today it plays the train loop (calm). Plays for 2:31 before it repeats. No problems measured. Made 24 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4214, 104 BPM, A major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, friendly bustling street, acoustic guitar strumming, ukulele, xylophone, accordion, light hand percussion, playful but soft\". Lyrics field: [Instrumental]. Vocal check -46.5 dB (Lyria loops: about -32). Seam score 0.363 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "harbour-1",
+   "label": "harbour-1",
+   "audio": "art/candidates/music-3/harbour-1.mp3",
+   "note": "Harbour, take 1. Plays at the harbour. Today it plays the train loop (calm). Plays for 2:24 before it repeats. No problems measured. Made 25 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4311, 88 BPM, D major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, breezy seaside, acoustic guitar, airy flute melody, soft strings, gentle waves of chords, open and spacious\". Lyrics field: [Instrumental]. Vocal check -50.4 dB (Lyria loops: about -32). Seam score 0.185 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "harbour-2",
+   "label": "harbour-2",
+   "audio": "art/candidates/music-3/harbour-2.mp3",
+   "note": "Harbour, take 2. Plays at the harbour. Today it plays the train loop (calm). Plays for 1:42 before it repeats. No problems measured. Made 26 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4312, 88 BPM, D major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, breezy seaside, acoustic guitar, airy flute melody, soft strings, gentle waves of chords, open and spacious\". Lyrics field: [Instrumental]. Vocal check -45.4 dB (Lyria loops: about -32). Seam score 0.175 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "harbour-3",
+   "label": "harbour-3",
+   "audio": "art/candidates/music-3/harbour-3.mp3",
+   "note": "Harbour, take 3. Plays at the harbour. Today it plays the train loop (calm). Plays for 2:20 before it repeats. No problems measured. Made 27 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4313, 88 BPM, D major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, breezy seaside, acoustic guitar, airy flute melody, soft strings, gentle waves of chords, open and spacious\". Lyrics field: [Instrumental]. Vocal check -54.3 dB (Lyria loops: about -32). Seam score 0.275 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  },
+  {
+   "id": "harbour-4",
+   "label": "harbour-4",
+   "audio": "art/candidates/music-3/harbour-4.mp3",
+   "note": "Harbour, take 4. Plays at the harbour. Today it plays the train loop (calm). Plays for 2:07 before it repeats. Problem: the end doesn't match the start well (seam score 0.651), so its loop point would need another cut before it goes in. Made 28 of 28. ACE-Step 1.5 turbo, local, 8 steps, seed 4314, 88 BPM, D major. Prompt: \"instrumental background music for a cozy Japanese slice-of-life game, no vocals, warm acoustic ensemble, soft dynamics, gentle and unobtrusive, clean warm mix, high quality recording, breezy seaside, acoustic guitar, airy flute melody, soft strings, gentle waves of chords, open and spacious\". Lyrics field: [Instrumental]. Vocal check -55.4 dB (Lyria loops: about -32). Seam score 0.651 (0.1 means the music repeats itself; two unrelated passages score about 0.9)."
+  }
+ ],
+ "links": [
+  {
+   "label": "Work issue #371",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/371"
+  }
+ ]
+}
