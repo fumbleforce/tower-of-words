@@ -45,7 +45,7 @@ export default place({ forecourt: ['talk:lift'] }, {
       ], else: [{ do: 'day5Office', state: 'tea' }, { say: 'mori', overheard: true, emo: 'warm', text: 'お茶を入れました。よかったら、どうぞ。' }, { say: 'eric', emo: 'warm', text: 'Yes please, I’d like some.' }] },
     ],
     d5_mio: [{ if: "period == 'evening'", then: [{ go: 'd5_drinks' }], else: [
-      { if: "period == 'lunch'", then: [{ say: 'mio', emo: 'casual', text: 'Kenji’s over at karaoke, so it’s quiet. I’m trying to eat before anyone comes looking for me.' }], else: [{ say: 'mio', emo: 'casual', text: 'I’ve nearly finished this. If the printer’s playing up, Kenji is right beside it.' }] },
+      { if: "period == 'lunch'", then: [{ say: 'mio', emo: 'casual', text: 'Kenji’s over at karaoke, so it’s quiet. I’m trying to eat before anyone comes looking for me.' }], else: [{ say: 'mio', emo: 'casual', text: 'I’m almost done with this. If it’s the printer, Kenji is right there, so...' }] },
     ] }],
     d5_copier: [{ say: 'eric', emo: 'warm', text: 'Somebody’s put a full box of paper beside it. That should save a few trips.' }],
     d5_cat: [{ say: 'eric', emo: 'warm', text: 'That chair was taken before either of us got here, wasn’t it?' }],

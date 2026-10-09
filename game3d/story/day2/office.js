@@ -101,7 +101,7 @@ export default {
     d2_mio_work: [
       { if: 'sender_delivered', then: [{ go: 'sender_later' }] },
       { if: 'd2_mio_job_talked && d2_mio_weekend_talked', then: [
-        { say: 'mio', emo: 'tired', text: 'I need to catch this before it restarts again. Can we talk at dinner?' },
+        { say: 'mio', emo: 'curt', text: 'Not now, I have to catch this before it restarts again. At dinner, maybe?' },
       ], else: [{ choice: [
         { text: 'What are you working on?', if: '!d2_mio_job_talked', go: 'd2_mio_job' },
         { text: 'Do you usually stay on the island at weekends?', if: '!d2_mio_weekend_talked', go: 'd2_mio_weekend' },
@@ -112,7 +112,7 @@ export default {
       { if: 'sender_delivered', then: [{ go: 'sender_later' }] },
       { say: 'mio', emo: 'tired', text: 'The thing that sends everyone’s timesheets. It keeps restarting before I can get the log off it.' },
       { say: 'eric', emo: 'curious', text: 'Do they know it’s doing that?' },
-      { say: 'mio', emo: 'dry', text: 'They know when payroll rings me. I’d like to get it first today.' },
+      { say: 'mio', emo: 'dry', text: 'Payroll always rings me before I even know it’s broken. Today I want to find it first.' },
       { set: 'd2_mio_job_talked' }, { go: 'd2_social_end' },
     ],
     d2_mio_weekend: [

@@ -34,7 +34,7 @@ export const KOTODAMA = {
     firstLeave: 'Leave the demonstration.', afterFirstLeave: 'Finish with that first drink.',
     continue: 'Try a few more deliveries.', finish: 'Back to B2.',
     // Expand with the active protagonist before passing to common/jp markup or clip-key generation.
-    launchedMio: { say: 'mio', emo: 'dry', text: '{mc.name}, please put me down.' },
+    launchedMio: { say: 'mio', emo: 'dry', text: 'Okay, no. {mc.name}, put me down.' },
   },
   // Days 3/4 offer command use and a separate printer lesson only; no unexplained game launch there.
   preparations: [

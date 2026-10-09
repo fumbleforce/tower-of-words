@@ -19,7 +19,7 @@ export default place('east_coast', {
       { if: 'rem_mio_coast_lunch', then: [
         { say: 'mio', emo: 'warm', text: 'You found it. No requests, right?' },
       ], else: [{ if: 'period_lunch', then: [{ say: 'mio', emo: 'warm', text: 'Hey. I’m hiding out here for lunch.' }],
-        else: [{ say: 'mio', emo: 'warm', text: 'Hey. I thought I’d sit out here for a bit.' }] }] },
+        else: [{ say: 'mio', emo: 'warm', text: 'Ah, hi. I’m just sitting, it’s not a work thing.' }] }] },
       { choice: [
         { text: 'Ask whether she minds the quiet.', go: 'ongoing_mio_quiet' },
         { text: 'Ask about coming here after work.', go: 'ongoing_mio_evening' },
@@ -28,8 +28,8 @@ export default place('east_coast', {
     ],
     ongoing_mio_quiet: [
       { say: 'eric', emo: 'curious', text: 'You don’t get bored sitting out here?' },
-      { if: 'ongoing_workday', then: [{ say: 'mio', emo: 'casual', text: 'I hear people talking all morning. This is quite nice.' }],
-        else: [{ say: 'mio', emo: 'casual', text: 'I get enough people talking during the week. This is quite nice.' }] },
+      { if: 'ongoing_workday', then: [{ say: 'mio', emo: 'casual', text: 'All morning somebody is talking at me. Out here it’s just the water, so...' }],
+        else: [{ say: 'mio', emo: 'casual', text: 'All week somebody is talking at me. Out here it’s just the water, so...' }] },
       { say: 'eric', emo: 'sheepish', text: 'And then I turn up.' },
       { say: 'mio', emo: 'amused', text: 'You can stay. I’ll tell you if you start sounding like the help desk.' },
       { do: 'bond', who: 'mio', source: 'talk', why: 'talked during her break by the water' },

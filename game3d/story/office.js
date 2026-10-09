@@ -230,7 +230,7 @@ export default {
     mio_opens: [
       { do: 'walk', who: 'mio', to: [4.45, -0.55] }, // just inside the door, clear of its leaf
       { do: 'machineDoor', state: 'open' },
-      { say: 'mio', emo: 'hurried', text: "Okay, okay, I'm coming... Come in, but don't touch anything, okay? Especially the cables." },
+      { say: 'mio', emo: 'hurried', text: "Okay, okay, I'm coming... Come in. You're the hardware person, so, okay, but ask me before you touch anything. They're weird in ways that aren't written down." },
       { set: 'machine_open' },
       { do: 'walk', who: 'mio', to: 'racks', wait: false },
       { call: 'machine_walk_in' },
@@ -367,7 +367,7 @@ export default {
     mio_b2: [
       { say: 'mio', face: 'tired', emo: 'tired', text: "Upstairs you have to bow to everybody all day, it's so tiring. Down here it's just me and the servers." },
       { say: 'mio', face: 'smile', emo: 'fond', text: "They're from the nineties. If I don't watch them, they just... die." },
-      { say: 'mio', face: 'deadpan', emo: 'dry', text: "And the company won't buy new ones, ever. So now they pay you to babysit them with me." },
+      { say: 'mio', face: 'deadpan', emo: 'dry', text: "And the company won't buy new ones, ever. I'm a programmer, actually, I just ended up knowing them. So now you're here, and maybe I can write code again." },
       { go: 'mio_lunch_end' },
     ],
     mio_doors: [

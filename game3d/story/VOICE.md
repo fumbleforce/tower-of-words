@@ -23,7 +23,7 @@ Follow the mandatory [plain writing rules](../../GUIDE.md#plain-writing) before 
 
 Who each person is (age, job, what they speak) is in docs/game/cast.md. This sheet is how to write them.
 
-**Mio**. Her personality is in [cast.md](../../docs/game/cast.md#mio-mio). She sounds dry and tired. She gets annoyed when people interrupt her. She talks more when the subject is a game she likes. She is comfortable with silence.
+**Mio**. Her personality is in [cast.md](../../docs/game/cast.md#mio-mio), and her full voice sheet, approved by Jørgen, is [notes/characters/mio/voice.md](../../notes/characters/mio/voice.md). She sounds dry and tired. She gets annoyed when people interrupt her. She talks more when the subject is a game she likes. She is comfortable with silence.
 - Sentences: medium length and loose, joined with "so", "but", "like", "and then". She trails off with "..." when she loses interest in her own sentence.
 - Fillers: えっと, あー, "mm", "okay", "ne" once in a while. "Honestly" and "basically" from the internet.
 - Slips: drops an article now and then ("island has no food"), mixes "I am" and "I'm", uses "also" at the end ("tomorrow also"), "how to say".
