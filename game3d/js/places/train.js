@@ -27,7 +27,7 @@ import {
   COL,
   mat as carMat,
 } from '../train/car.js';
-import { buildDoorSets, lampShut, lampOpen } from '../train/doors.js';
+import { buildDoorSets, slideLeaves, lampShut, lampOpen } from '../train/doors.js';
 import { loadMonorail, SUN_DIR } from '../train/models.js';
 import { swingStraps } from '../train/straps.js';
 import { buildPassengers, sit, armsHold } from '../train/people.js';
@@ -169,8 +169,8 @@ export async function trainPlace(game) {
   const bags = [
     ['brief', '#5b4336', -2.12, -1, 0.1],
     ['tote', '#b88563', -1.3, -1, -0.2],
-    ['tote', '#2f3446', -2.08, 1, 0.3],
-    ['brief', '#6b4a36', 2.12, 1, -0.1],
+    ['tote', '#2f3446', -1.88, 1, 0.3],
+    ['brief', '#6b4a36', 1.86, 1, -0.1],
     ['pack', '#3f4656', -1.3, 1, 0.15],
     ['tote', '#7a6a5a', 1.4, 1, -0.2],
   ];
@@ -324,11 +324,11 @@ export async function trainPlace(game) {
           h.rotation.y = w2 * s * 0.7;
           a.add(h);
         }
-        a.position.set(dx + k * 0.45, 0.002, s * (edge + 0.95));
+        a.position.set(dx + k * (DOOR_W / 2 + 0.1), 0.002, s * (edge + 0.95));
         station.add(a);
         station.add(
           rbox(0.5, 0.004, 0.05, '#aeb2b8', {
-            x: dx + k * 0.45,
+            x: dx + k * (DOOR_W / 2 + 0.1),
             y: 0.002,
             z: s * (edge + 1.45),
             r: 0.001,
@@ -766,14 +766,7 @@ export async function trainPlace(game) {
   const DOOR_SHOT = [-2.85, 0.62];
   function setDoors(k) {
     if (st.departing) return;
-    for (const d of myLeaves) {
-      const toC = -Math.sign(d.x0),
-        out = THREE.MathUtils.smoothstep(k, 0, 0.16),
-        slide = Math.max(0, (k - 0.16) / 0.84);
-      d.g.position.z = d.zShut + out * (d.zSlide - d.zShut);
-      d.g.position.x = d.x0 + toC * slide * (d.far ? DOOR_W - 0.01 : DOOR_W / 2 - 0.005);
-      d.g.visible = true;
-    }
+    slideLeaves(myLeaves, k);
     for (const l of doorLamps) l.material = k > 0.3 ? lampOpen : lampShut;
     for (const m of doorSpill) m.material.color.set('#ffe0b0').multiplyScalar(0.4 * k);
   }

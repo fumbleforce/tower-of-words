@@ -5,7 +5,7 @@ and z < 0), the roof seen from above, and two flat patches for the small parts (
 the roof units and vents in 'metal'). Cycles bakes the skin's position, normal and ambient occlusion (with the skirt
 as an occluder) into float images; the wear is then drawn per texel from those: soft grime under the windows and in
 the seams, dark drips from the gutter, road dust low down, clear rust streaks running down from the panel joints and
-the door frames, light edge wear on the rounded shoulder and corners, and a brushed grain along the car.
+the door openings, light edge wear on the rounded shoulder and corners, and a brushed grain along the car.
 
 The texture is data, not colour (train/models.js reads it in its shader): R the shade (x 1.25: 0.8 leaves the vertex
 colour as it is), G the rust amount, B the roughness. Whether a face is bare metal is in the vertex colour's alpha.
@@ -121,7 +121,7 @@ def blur(a, r=2):
 def side_wear(x, y, z, ao):
     """Shade, rust and roughness on the outer walls."""
     rng = random.Random(356)
-    WIN_XS, WIN_W, WIN_Y0 = K['WIN_XS'], K['WIN_W'], K['WIN_Y0']
+    WINS, WIN_Y0 = K['WINS'], K['WIN_Y0']
     G0, G1 = K['GUTTER']
     HX, HZ, RP = K['HX'], K['HZ'], K['RP']
     flat = np.abs(z) > HZ - 0.06  # the long walls, not the ends
@@ -139,16 +139,16 @@ def side_wear(x, y, z, ao):
     shade += 0.025 * (hair - 0.5) + 0.05 * (fbm(x * 0.8, y * 2.2, 3) - 0.5)
     g = np.zeros_like(x)
     for sgn, m in sides.items():
-        for wx in WIN_XS:  # grime washing down from each sill, and darker runs from its corners
-            below = (WIN_Y0 - 0.035) - y
+        for wx, ww in WINS[sgn]:  # grime washing down from each sill, and darker runs from its corners
+            below = (WIN_Y0 - 0.02) - y
             dn = (below > 0) & m
-            inx = smooth(WIN_W / 2 + 0.04, WIN_W / 2 - 0.06, np.abs(x - wx))
+            inx = smooth(ww / 2 + 0.04, ww / 2 - 0.06, np.abs(x - wx))
             g += dn * inx * np.exp(-np.maximum(below, 0) / 0.14) * 0.13
-            for _ in range(6):
-                xs, L, w, a = wx + rng.uniform(-0.44, 0.44), rng.uniform(0.1, 0.42), rng.uniform(0.008, 0.02), rng.uniform(0.1, 0.24)
+            for _ in range(int(6 * ww)):
+                xs, L, w, a = wx + rng.uniform(-0.44, 0.44) * ww, rng.uniform(0.1, 0.42), rng.uniform(0.008, 0.02), rng.uniform(0.1, 0.24)
                 g += dn * a * np.exp(-((x - xs) / w) ** 2) * np.clip(1 - below / L, 0, 1)
             for s in (-1, 1):
-                xs = wx + s * (WIN_W / 2 - 0.07)
+                xs = wx + s * (ww / 2 - 0.07)
                 g += dn * 0.28 * np.exp(-((x - xs) / 0.02) ** 2) * np.clip(1 - below / rng.uniform(0.3, 0.44), 0, 1)
         for xd in K['DRIPS']:  # drips from the gutter
             below = G0 - y
@@ -167,9 +167,9 @@ def side_wear(x, y, z, ao):
                 origins.append((sgn, s + rng.uniform(-0.01, 0.01), K['SEAM_Y'] - 0.008, rng.uniform(0.3, 0.9), rng.uniform(0.6, 0.9)))
             if rng.random() < 0.4:
                 origins.append((sgn, s + rng.uniform(-0.02, 0.02), G0 - 0.005, rng.uniform(0.2, 0.5), rng.uniform(0.5, 0.75)))
-    for x0, x1 in K['DOORS']:
-        for xs in (x0 - 0.075, x1 + 0.075):
-            origins.append((1, xs, K['DOOR_TOP'] + 0.06, rng.uniform(0.35, 0.8), rng.uniform(0.65, 0.9)))
+    for x0, x1 in K['DOORS']:  # the door openings' top corners
+        for xs in (x0 - 0.035, x1 + 0.035):
+            origins.append((1, xs, K['DOOR_TOP'] + 0.04, rng.uniform(0.25, 0.6), rng.uniform(0.5, 0.75)))
     for sgn, xs, y0, L, a in origins:
         m = sides[sgn] & (y < y0 + 0.03) & (np.abs(x - xs) < 0.08)
         if not m.any():
@@ -188,8 +188,7 @@ def side_wear(x, y, z, ao):
     e = np.clip(e, 0, 1) * smooth(0.42, 0.68, fbm(x * 5, y * 5 + z * 5, 9))
     shade += 0.14 * e - g
     rough += 0.5 * g - 0.18 * e
-    painted = ((K['STRIPE'][0] < y) & (y < K['STRIPE'][1])) | ((z > 0) & (y < K['DOOR_TOP'] + 0.065)
-                                                               & np.any([(x > x0 - 0.065) & (x < x1 + 0.065) for x0, x1 in K['DOORS']], axis=0))
+    painted = (K['STRIPE'][0] < y) & (y < K['STRIPE'][1])
     rough = np.where(painted, 0.42 + 0.4 * g, rough)
     shade *= 0.45 + 0.55 * ao
     return shade, np.clip(rust, 0, 1), rough
