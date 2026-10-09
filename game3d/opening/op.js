@@ -83,7 +83,7 @@ const ready = (async () => {
   ]);
   stage = await buildStage(renderer);
   shots = SHOTS.map((s) => ({ ...s }));
-  for (const s of shots) s.setup?.(stage);
+  for (const s of shots) await s.setup?.(stage);
   // compile every shader up front so the first play doesn't hitch
   renderer.compile(stage.scene, stage.camera);
 })();

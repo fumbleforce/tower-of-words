@@ -9,6 +9,7 @@ import { card, panelCard, shade } from '../cards.js';
 import { CAST } from '../cast.js';
 import { drawLogo } from '../logo.js';
 import { ISLAND_X } from '../stage.js';
+import { RUSH } from './verse.js';
 
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const B = (n) => beat(n); // beat numbers: the chorus slam is beat 96, a bar is 4 beats
@@ -76,13 +77,15 @@ export const CHORUS = [
     t: [HIT.chorus, bar(26)],
     in: { type: 'flash', d: 0.18, at: 0.5 },
     scene3d(S, lt) {
-      // from low over the water up to the island seen whole from the south-west, as on the island map
+      // from the held frame (verse.js RUSH) up to the island seen whole from the south-west, as on the island map
       const p = ease.inOut3(clamp(lt / 3.2));
-      S.setTrain(ISLAND_X - 240 + lt * 30);
+      S.setTrain(ISLAND_X - 300 + lt * 22);
       const m = S.anchors.mid;
-      const from = [ISLAND_X - 140, -12, 150],
-        to = [m.x - 260, 230, m.z + 470];
-      S.look(from.map((v, i) => lerp(v, to[i], p)), [lerp(S.anchors.hq.x, m.x, p), lerp(14, -10, p), lerp(S.anchors.hq.z, m.z, p)], lerp(34, 38, p));
+      const from = RUSH[0].map((v) => v[1]),
+        fromAt = RUSH[1].map((v) => v[1]);
+      const to = [m.x - 200, 150, m.z + 300],
+        toAt = [m.x, -16, m.z - 10];
+      S.look(from.map((v, i) => lerp(v, to[i], p)), fromAt.map((v, i) => lerp(v, toAt[i], p)), lerp(36, 40, p));
     },
     draw(g, lt, T, S) {
       // the greeting lands with the band, then lifts away
@@ -119,49 +122,109 @@ export const CHORUS = [
     },
   },
   {
-    // 言葉が僕の 魔法になる: words become his magic. Kana rise around him; ことば, then まほう, ripple out.
+    // 言葉が僕の 魔法になる: words become his magic. In B2's copy room (the game's own, scenes/office.js) the word card
+    // for うごいて comes up as the game teaches it (the word, how it's read, what it means), its kana fly into the old
+    // copier, and the copier shimmers teal and wakes; then まほう.
     id: 'kotodama',
     t: [B(109), B(120)],
     in: { type: 'iris', d: 0.4, at: 0.5, param: [0.5, 0.45, 0.03], band: '#6fd0c6' },
-    draw(g, lt, T) {
-      vgrad(g, [
-        [0, '#0a1630'],
-        [0.6, '#0d2c44'],
-        [1, '#11475a'],
-      ]);
-      kanaRain(g, lt, { count: 46 });
-      // the word lights his face from below
-      const glowA = 0.5 + 0.5 * k(lt, 0.2, 1.2);
-      soft(g, W * 0.5, H * 0.95, 900, 'rgba(111,208,198,0.5)', glowA);
-      drawPortrait(g, 'eric-neutral', W * 0.5, H + 240, 980, { fill: '#0d2238', mix: 0.55, stroke: '#6fd0c6', strokeW: 6 });
-      // ことば at 44.4, then まほう at 46.4, each with rings
-      const t1 = T - 44.3,
-        t2 = T - 46.35;
-      ripples(g, W * 0.5, H * 0.24, t1, { n: 3, gap: 0.3, speed: 1000 });
-      ripples(g, W * 0.5, H * 0.24, t2, { n: 5, gap: 0.22, speed: 1300, color: '255,255,255' });
-      if (t1 > 0 && t2 < 0.1) {
+    scene3d(S, lt, T) {
+      const w = S.set('office');
+      const c = w.copier.position;
+      const p = ease.inOut2(clamp(lt / 4.4));
+      // the copier wakes when the word reaches it: its body glows teal, flickers, then settles
+      const hit = T - 45.6;
+      const glow = hit > 0 ? Math.exp(-hit / 0.9) * (0.6 + 0.4 * Math.sin(hit * 30) ** 2) : 0;
+      w.copier.traverse((o) => {
+        if (!o.isMesh) return;
+        if (!o.userData.opBase) {
+          o.material = o.material.clone();
+          o.userData.opBase = true;
+        }
+        if (o.material.emissive) {
+          o.material.emissive.set('#36e0c8');
+          o.material.emissiveIntensity = glow * 1.4;
+        }
+      });
+      S.look([c.x + lerp(1.1, 0.7, p), lerp(1.25, 1.1, p), c.z + lerp(2.2, 1.6, p)], [c.x, 0.62, c.z], lerp(46, 40, p));
+    },
+    draw(g, lt, T, S) {
+      const w = S.set('office');
+      const cp = w.copier.position;
+      const target = toFrame(S.camera, V(cp.x, 0.7, cp.z)) || [W / 2, H / 2];
+      // the word card, as the game shows a new word: the word, its reading, its meaning
+      const t1 = T - 44.25;
+      const fly = clamp((T - 45.1) / 0.5);
+      if (t1 > 0 && fly < 1) {
+        const e = ease.land(clamp(t1 / 0.35));
         g.save();
-        g.globalAlpha = 1 - clamp(t2 / 0.1);
-        typeIn(g, 'ことば', W / 2, H * 0.3, t1, { font: FONT.jp, size: 200, align: 'center', color: '#e9fffb', stagger: 0.16, from: 1.6 });
+        g.globalAlpha = 1 - fly;
+        g.translate(W * 0.3, H * 0.34);
+        g.scale(e, e);
+        g.fillStyle = 'rgba(14,22,44,0.88)';
+        g.beginPath();
+        g.roundRect(-300, -150, 600, 300, 26);
+        g.fill();
+        g.strokeStyle = '#6fd0c6';
+        g.lineWidth = 4;
+        g.stroke();
+        text(g, 'NEW WORD', -260, -100, { font: FONT.mid, size: 30, color: '#6fd0c6', tracking: 0.2 });
+        text(g, 'うごいて', 0, 30, { font: FONT.jp, size: 130, align: 'center', color: '#ffffff' });
+        text(g, 'ugoite', 0, 85, { font: FONT.mid, size: 40, align: 'center', color: '#a9c4d8', tracking: 0.1 });
+        text(g, '“move!” · ask a machine', 0, 128, { font: FONT.mid, size: 30, align: 'center', color: '#dfe9f2' });
         g.restore();
       }
+      // the kana fly from the card into the copier, glowing
+      if (fly > 0) {
+        [...'うごいて'].forEach((ch, i) => {
+          const tt = clamp((T - 45.1 - i * 0.08) / 0.55);
+          if (tt <= 0 || tt >= 1) return;
+          const e = ease.in2(tt);
+          const x = lerp(W * 0.3 - 150 + i * 100, target[0], e),
+            y = lerp(H * 0.36, target[1], e) - Math.sin(e * Math.PI) * 120;
+          const size = 110 * (1 - e * 0.6);
+          g.save();
+          g.filter = 'blur(10px)';
+          text(g, ch, x, y, { font: FONT.jp, size, align: 'center', color: '#6fd0c6' });
+          g.restore();
+          text(g, ch, x, y, { font: FONT.jp, size, align: 'center', color: '#ffffff' });
+        });
+      }
+      // the copier answers: rings from it, and pages flying out
+      const hit = T - 45.6;
+      ripples(g, target[0], target[1], hit, { n: 3, gap: 0.25, speed: 900 });
+      if (hit > 0) {
+        const r = rng(13);
+        for (let i = 0; i < 9; i++) {
+          const ph = hit - i * 0.12;
+          const dx = (r() - 0.3) * 900,
+            dy = -200 - r() * 300,
+            spin = 3 + r() * 4;
+          if (ph <= 0 || ph > 1.6) continue;
+          g.save();
+          g.translate(target[0] + dx * ph, target[1] + dy * ph + 600 * ph * ph);
+          g.rotate(ph * spin);
+          g.fillStyle = '#ffffff';
+          g.fillRect(-36, -48, 72, 96);
+          g.fillStyle = 'rgba(27,43,79,0.25)';
+          for (let l = 0; l < 5; l++) g.fillRect(-26, -34 + l * 14, 52, 4);
+          g.restore();
+        }
+      }
+      // まほう: the word for magic, over it all
+      const t2 = T - 46.35;
       if (t2 > 0) {
         const e = ease.land(clamp(t2 / 0.35));
         g.save();
         g.translate(W / 2, H * 0.3 - 70);
         g.scale(lerp(1.8, 1, e), lerp(1.8, 1, e));
-        glowText(g, 'まほう', 0, 70, { font: FONT.jp, size: 230, align: 'center', color: '#ffffff', glow: '#6fd0c6' });
+        glowText(g, 'まほう', 0, 70, { font: FONT.jp, size: 210, align: 'center', color: '#ffffff', glow: '#6fd0c6' });
         g.restore();
-        // a burst of glints
-        const r = rng(9);
-        for (let i = 0; i < 12; i++) {
-          const a = r() * Math.PI * 2,
-            d = 200 + t2 * (300 + r() * 500);
-          glint(g, W / 2 + Math.cos(a) * d, H * 0.26 + Math.sin(a) * d * 0.6, 40 * Math.max(0, 1 - t2 / 1.4), '#ffffff', 1, a);
-        }
+        text(g, 'mahō · magic', W / 2, H * 0.3 + 80, { font: FONT.mid, size: 40, align: 'center', color: '#e6fffb', alpha: clamp((t2 - 0.2) / 0.3), tracking: 0.12 });
       }
     },
-    fx: (lt, T) => ({ flash: 0.5 * Math.exp(-Math.max(0, T - 46.35) / 0.1) * (T > 46.35 ? 1 : 0), flashColor: '#bffff3' }),
+    fx: (lt, T) => ({ flash: 0.4 * Math.exp(-Math.max(0, T - 45.6) / 0.12) * (T > 45.6 ? 1 : 0), flashColor: '#bffff3' }),
+    exposure: 1.2,
   },
   {
     // Mio: B2's programmer, unimpressed, then not quite
@@ -205,7 +268,7 @@ export const CHORUS = [
   {
     // The island's people: Kuro at reception, Aoi the new hire, Rei from Sales; then Mr. Hamada, asleep, then not
     id: 'island',
-    t: [B(133), B(139)],
+    t: [B(133), B(137.5)],
     in: { type: 'dots', d: 0.4, at: 0.5, param: [0.5, 80] },
     draw(g, lt) {
       g.fillStyle = '#ffffff';
@@ -213,8 +276,8 @@ export const CHORUS = [
       const P = panels(3, -220, 4);
       const who = [
         ['kuro', 'kuro-neutral', 0],
-        ['aoi', 'aoi-neutral', 0.8],
-        ['rei', 'rei-neutral', 1.6],
+        ['aoi', 'aoi-neutral', 0.6],
+        ['rei', 'rei-neutral', 1.2],
       ];
       who.forEach(([id, pic, at], i) => {
         const t = lt - at;
@@ -225,33 +288,38 @@ export const CHORUS = [
   {
     // Mr. Hamada, asleep as always, wakes with a start on the beat
     id: 'hamada',
-    t: [B(139), B(141)],
+    t: [B(137.5), B(141)],
     in: { type: 'whip', d: 0.22, at: 0.5 },
     draw(g, lt) {
-      card(g, lt, 'kuroda', { pic: 'kuroda-sleepy', swap: [0.4, 'kuroda-panicked'], side: 'right', nameAt: 0.1, enter: 0.22 });
-      if (lt > 0.4) typeIn(g, '!?', 1560, 330, lt - 0.4, { font: FONT.jp, size: 170, color: '#ffffff', stroke: '#22356c', strokeW: 24, from: 2.2 });
+      card(g, lt, 'kuroda', { pic: 'kuroda-sleepy', swap: [0.8, 'kuroda-panicked'], side: 'right', nameAt: 0.15, enter: 0.3 });
+      if (lt > 0.8) typeIn(g, '!?', 1560, 330, lt - 0.8, { font: FONT.jp, size: 170, color: '#ffffff', stroke: '#22356c', strokeW: 24, from: 2.2 });
     },
-    fx: (lt) => (lt > 0.4 ? { shake: [Math.sin(lt * 90) * 0.004 * Math.exp(-(lt - 0.4) / 0.15), 0] } : null),
+    fx: (lt) => (lt > 0.8 ? { shake: [Math.sin(lt * 90) * 0.004 * Math.exp(-(lt - 0.8) / 0.15), 0] } : null),
   },
-  {
-    // 世界が少し 動き出す: the world starts to move. A big swing round the island as the train comes in.
-    id: 'world',
-    t: [B(141), B(145)],
-    in: { type: 'zoom', d: 0.3, at: 0.5 },
-    // 世界が少し 動き出す: the camera swings round the running train, the island bright behind it
+  // 世界が少し 動き出す: the world starts to move. The island's own places, one per beat, as the game builds them.
+  ...[
+    // [id, camera island [x, y, z], looks at, fov, drift]
+    ['place-fountain', [37.3, 8.5, 13.5], [37.3, 0.4, -2.75], 50, [-1.5, -0.4, 0]],
+    ['place-harbour', [-78, 9, -58], [-110, 1, -95], 50, [0, 0, -3]],
+    ['place-street', [70, 4.5, 34], [52, 2, 18], 48, [-2, 0, 0]],
+    ['place-office', [-2, 5, 14], [3, 9, -9], 54, [0, 1.5, 0]],
+  ].map(([id, pos, at, fov, drift], i) => ({
+    id,
+    t: [B(141 + i), B(142 + i)],
+    in: i === 0 ? { type: 'zoom', d: 0.3, at: 0.5 } : { type: 'cut' },
     scene3d(S, lt) {
-      const p = ease.inOut2(lt / 1.6);
-      const x = ISLAND_X - 160 + lt * 30;
-      S.setTrain(x);
-      const ang = lerp(-2.2, -0.55, p),
-        r = lerp(16, 13, p);
-      S.look([x + Math.cos(ang) * r, lerp(2.5, 5.5, p), -Math.sin(ang) * r], [x + 3, 1.0, 0], 44, lerp(-0.08, 0.04, p));
+      S.setTrain(-5000);
+      const A = S.anchors;
+      const p = lt / 0.4;
+      const P = A.toWorld(pos[0] + drift[0] * p, pos[2] + drift[2] * p, pos[1] + drift[1] * p);
+      S.look(P.toArray(), A.toWorld(at[0], at[2], at[1]).toArray(), fov);
     },
     draw(g, lt) {
-      speedLines(g, W / 2, H / 2, lt, { color: 'rgba(255,255,255,0.35)', count: 30, inner: 700, width: 12 });
+      speedLines(g, W / 2, H / 2, lt, { color: 'rgba(255,255,255,0.22)', count: 26, inner: 760, width: 10 });
     },
-    flare: () => 0.8,
-  },
+    fx: (lt) => ({ zoom: 1 + 0.05 * Math.exp(-lt / 0.1) }),
+    exposure: 1.05,
+  })),
   // the faces, one per beat
   ...[
     ['mio', 'mio-surprised', 1],

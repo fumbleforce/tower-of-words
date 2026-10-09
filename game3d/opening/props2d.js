@@ -44,10 +44,11 @@ export function idCard(g, { shine = -1, photo = 'eric-neutral', name = 'ERIC', k
     g.save();
     rrect(g, px, py, pw, ph, 16);
     g.clip();
-    // head and shoulders: the top 62% of the portrait, centred
-    const sh = im.height * 0.62,
+    // head and shoulders, framed on the face (Eric's sits left of the picture's middle, his ponytail to its right)
+    const sh = im.height * 0.7,
       sw = sh * (pw / ph);
-    g.drawImage(im, (im.width - sw) / 2, 0, sw, sh, px, py, pw, ph);
+    const cx = im.width * (photo.startsWith('eric') ? 0.47 : 0.5);
+    g.drawImage(im, Math.max(0, Math.min(im.width - sw, cx - sw / 2)), im.height * 0.01, sw, sh, px, py, pw, ph);
     g.restore();
   }
   // words
