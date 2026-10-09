@@ -15,6 +15,7 @@ const jobs = {
   opening: ['tools/check/opening-browser.mjs'],
   'staging-platform': ['tools/check/staging-browser.mjs', 'platform'],
   'staging-arrival': ['tools/check/staging-browser.mjs', 'arrival'],
+  'dorm-gate': ['tools/check/dorm-gate-browser.mjs'],
 };
 const requested = process.argv.slice(2);
 const selected = requested.length ? requested : Object.keys(jobs);

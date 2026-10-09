@@ -51,7 +51,7 @@ export function* dormCourtSteps({ phaseOf } = {}) {
   const light = lightRig(scene, { looks: DORM_COURT, phaseOf, shadow: { box: 13, normalBias: 0.06 } }),
     sun = light.sun;
 
-  const nav = new Nav(WEST + 0.1, EAST - 0.2, BACK_Z - 1.2, NEAR - 0.05, 0.1);
+  const nav = new Nav(WEST + 0.1, EAST - 0.2, BACK_Z - 1.2, PL.OUT_Z, 0.1); // the court, and the way out through the gate (dorm-court/court.js)
   const block = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
   // under everything: the town's paving under the court and its street, out past the frame's edges; grass past the
   // street, and under the dorm cluster east of the block and south of the row (dorm-court/cluster.js)
