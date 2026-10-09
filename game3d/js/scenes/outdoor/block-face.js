@@ -36,3 +36,13 @@ export function onFace(set, color, f, t0, t1, y0, y1, o0, o1, opts) {
 export const tOf = (f, v) => (f.d[0] ? (v - f.a[0]) / f.d[0] : (v - f.a[1]) / f.d[1]);
 export const vOf = (f, t) => (f.d[0] ? f.a[0] + f.d[0] * t : f.a[1] + f.d[1] * t);
 export const bayOf = (L) => L / Math.max(1, Math.round(L / BAY));
+
+const snap = (f, at) => {
+  const bw = bayOf(f.L);
+  return (Math.min(Math.round(f.L / bw) - 1, Math.max(0, Math.floor(tOf(f, at) / bw))) + 0.5) * bw;
+};
+// the middle of the bay nearest `at` on a face, in world x or z, and the width of a door that fills it
+export function doorAt(rect, face, at) {
+  const f = faces(rect)[face];
+  return { at: vOf(f, snap(f, at)), w: bayOf(f.L) - 0.36 };
+}

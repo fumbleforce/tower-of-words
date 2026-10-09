@@ -14,6 +14,7 @@ import { coastLand } from './island-west.js';
 import { skylineSteps } from './skyline.js';
 import * as LAYOUT from './island-layout.js';
 import * as P from './campus/plan.js';
+import { SHELTER_BIKES } from './forecourt/plan.js';
 import { mergeStaticSteps } from './merge-static.js';
 import { drain } from '../perf/slice.js';
 
@@ -31,6 +32,7 @@ export function* campusSteps() {
   applyGround(nav, walkable);
   for (const r of P.BEDS) nav.block(...P.rect(r));
   nav.block(P.BENCH.x - 1.02, P.BENCH.x + 1.02, P.BENCH.z - 0.34, P.BENCH.z + 0.34);
+  nav.block(...SHELTER_BIKES); // the staff bike shelter's parked bikes and posts (forecourt/north.js)
   const north = yield* northSteps(root, lights, { closed: false });
   yield* campusGrounds(root, lights);
   const edges = new Parts();

@@ -14,6 +14,8 @@ export const WALKS = [
   ...paths,
   [F.SHED_ST[0], F.SHED_ST[1], F.SHED_ST[2], F.BARRIER_Z + 1.5],
   F.CROSS,
+  F.STAFF_PATH, // to the wing's staff door
+  F.SHELTER_FLOOR, // the bike shelter's floor and its path (its bikes: F.SHELTER_BIKES)
   rect([-42.6, -40.6, -39, -25.4]),
   rect([-40.6, -20.75, -27.4, -25.4]),
 ];
