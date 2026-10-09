@@ -56,6 +56,10 @@ function measure(rig) {
     );
   });
   const point = new THREE.Vector3();
+  // Check the full box, conservatively including its rounded corners. A face
+  // can cross it even when all three vertices lie outside the carton.
+  const triangle = new THREE.Triangle();
+  const triangleIntersections = [];
   let bodyInside = 0,
     armInside = 0,
     supportGap = Infinity,
@@ -65,6 +69,7 @@ function measure(rig) {
     if (!mesh.isSkinnedMesh) return;
     mesh.skeleton.update();
     const { position, skinIndex, skinWeight } = mesh.geometry.attributes;
+    const vertices = [];
     for (let i = 0; i < position.count; i++) {
       let body = 0,
         arm = 0,
@@ -77,6 +82,8 @@ function measure(rig) {
         if (name === 'LeftHand') hand += w;
       }
       mesh.getVertexPosition(i, point).applyMatrix4(mesh.matrixWorld).applyMatrix4(inverse);
+      assert.ok(point.toArray().every(Number.isFinite), 'native carry vertices stay finite');
+      vertices.push(point.clone());
       if (body > 0.5) bodyGap = Math.min(bodyGap, box.distanceToPoint(point));
       if (box.containsPoint(point)) {
         if (body > 0.5) bodyInside++;
@@ -88,12 +95,18 @@ function measure(rig) {
       if (hand > 0.6 && point.x > box.min.x && point.x < box.max.x && point.z > box.min.z && point.z < box.max.z)
         supportGap = Math.min(supportGap, box.min.y - point.y);
     }
+    const index = mesh.geometry.index;
+    for (let i = 0; i < (index ? index.count : vertices.length); i += 3) {
+      triangle.set(...[0, 1, 2].map((j) => vertices[index ? index.getX(i + j) : i + j]));
+      if (box.intersectsTriangle(triangle)) triangleIntersections.push({ mesh: mesh.name, triangle: i / 3 });
+    }
   });
   return {
     bodyInside,
     armInside,
     supportGap,
     bodyGap,
+    triangleIntersections,
     intersections: intersections.slice(0, 5),
     size: box.getSize(new THREE.Vector3()).toArray(),
   };
@@ -111,11 +124,11 @@ test('native carrier supports a small parcel without body or arm intersection th
     rig.torso.position.y = phase === 'queue' ? 0.008 : 0.02;
     for (let frame = 0; frame < 120; frame++) {
       rig.update(1 / 60);
-      if (frame % 20) continue;
       const m = measure(rig);
       assert.equal(m.bodyInside, 0, `${phase}/${frame} torso and legs ${JSON.stringify(m)}`);
       assert.ok(m.bodyGap > 0.005, `${phase}/${frame} torso/leg clearance ${JSON.stringify(m)}`);
       assert.equal(m.armInside, 0, `${phase}/${frame} carrying arm ${JSON.stringify(m)}`);
+      assert.deepEqual(m.triangleIntersections, [], `${phase}/${frame} native faces cross the carton`);
       assert.ok(m.supportGap >= 0 && m.supportGap < 0.005, `${phase}/${frame} palm support ${JSON.stringify(m)}`);
       assert.ok(m.size[0] < 0.18 && m.size[1] < 0.09 && m.size[2] < 0.11, 'small shallow parcel');
     }
