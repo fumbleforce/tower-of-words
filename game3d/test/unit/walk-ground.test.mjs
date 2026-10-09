@@ -214,9 +214,76 @@ for (const [name, g] of [
   });
 }
 
+// a path (a walk at least 3 long, 0.6 to 3.2 wide) whose end is wholly a kerb, with no other walk touching it within
+// a width of that end, leads nowhere: it must reach a door, a building, another walk or a trip's start
+const deadEnds = (g) =>
+  g.walk.flatMap((r) => {
+    const [x0, x1, z0, z1] = r,
+      alongX = x1 - x0 >= z1 - z0,
+      [len, wid] = alongX ? [x1 - x0, z1 - z0] : [z1 - z0, x1 - x0];
+    if (len < 3 || wid > 3.2 || wid < 0.6) return [];
+    const ends = alongX
+      ? [
+          ['w', x0, [x0, x0 + wid, z0, z1]],
+          ['e', x1, [x1 - wid, x1, z0, z1]],
+        ]
+      : [
+          ['n', z0, [x0, x1, z0, z0 + wid]],
+          ['s', z1, [x0, x1, z1 - wid, z1]],
+        ];
+    const touches = ([a, b, c, d]) =>
+      g.walk.some((o) => o !== r && o[0] <= b + 1e-6 && o[1] >= a - 1e-6 && o[2] <= d + 1e-6 && o[3] >= c - 1e-6);
+    return ends
+      .filter(([out, line, strip]) => {
+        if (touches(strip)) return false;
+        const [a, b] = alongX ? [z0, z1] : [x0, x1];
+        const kerbed = g.edges
+          .filter((e) => e.out === out && e.kind === 'kerb' && Math.abs(e.line - line) < 1e-6)
+          .reduce((t, e) => t + Math.max(0, Math.min(e.s1, b) - Math.max(e.s0, a)), 0);
+        return kerbed > b - a - 1e-6;
+      })
+      .map(([out]) => `${r.map((v) => +v.toFixed(2))} ${out}`);
+  });
+test('a path that ends in a kerb is flagged, one that turns or meets another walk is not', () => {
+  const g = walkGround({
+    walk: [
+      [0, 10, 0, 3],
+      [4, 6, 3, 9],
+      [10, 12, 0, 8],
+    ],
+    bounds: [-5, 15, -5, 15],
+  });
+  assert.deepEqual(deadEnds(g), ['0,10,0,3 w', '4,6,3,9 s', '10,12,0,8 s']);
+});
+// known ends, each with what is there
+const KNOWN_ENDS = {
+  // the bike shelter's floor runs under its roof to the shelter's closed end; its bikes fill it (forecourt/north.js)
+  [`${FP.SHELTER_FLOOR.map((v) => +v.toFixed(2))} e`]: 'the shelter',
+  // the campus's east path meets the office quarter's paving at the chunk's edge, with no trip there yet (#362 stage 2
+  // looks at the seams between places)
+  '19.95,29.74,-32.35,-29.35 e': 'the chunk edge',
+};
+for (const [name, g] of [
+  ['forecourt', FG.ground()],
+  ['campus', CG.ground()],
+])
+  test(`${name}: no path ends in a kerb with nothing at its end`, () =>
+    assert.deepEqual(
+      deadEnds(g).filter((e) => !KNOWN_ENDS[e]),
+      [],
+    ));
+
 test('campus: every exit, the print door and the bench stay reachable on the new ground', () => {
   const w = buildCampus();
-  for (const p of [...Object.values(CP.EXITS).flatMap((e) => [e.lane, e.in]), CP.PRINT_STEP, CP.BENCH.out]) {
+  const staffDoor = [FP.STAFF_PATH[1] - 0.3, FP.WING_DOOR.at],
+    shelter = [FP.SHELTER_PATH[1] - 0.35, (FP.SHELTER[2] + FP.SHELTER[3]) / 2];
+  for (const p of [
+    ...Object.values(CP.EXITS).flatMap((e) => [e.lane, e.in]),
+    CP.PRINT_STEP,
+    CP.BENCH.out,
+    staffDoor,
+    shelter,
+  ]) {
     assert.ok(w.nav.free(...p), `blocked ${p}`);
     assert.ok(w.nav.path(...CP.IN, ...p)?.length, `unreachable ${p}`);
   }

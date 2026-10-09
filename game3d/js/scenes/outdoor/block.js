@@ -16,7 +16,7 @@
 import * as THREE from 'three';
 import { Parts, hash2 } from './parts.js';
 import { STEEL } from './furniture.js';
-import { BLOCK, faces, onFace, tOf, vOf, bayOf } from './block-face.js';
+import { BLOCK, faces, onFace, tOf, bayOf } from './block-face.js';
 import { drain } from '../../perf/slice.js';
 import { STYLE, glassFront, copedParapet, punched, stairBay, roofPlant, frontDoor } from './block-style.js';
 import { facadeDrainage } from './facade-detail.js';
@@ -45,15 +45,7 @@ const litMat = new THREE.MeshStandardMaterial({
   emissiveIntensity: 0.9,
 });
 
-const snap = (f, at) => {
-  const bw = bayOf(f.L);
-  return (Math.min(Math.round(f.L / bw) - 1, Math.max(0, Math.floor(tOf(f, at) / bw))) + 0.5) * bw;
-};
-// the middle of the bay nearest `at` on a face, in world x or z, and the width of a door that fills it
-export function doorAt(rect, face, at) {
-  const f = faces(rect)[face];
-  return { at: vOf(f, snap(f, at)), w: bayOf(f.L) - 0.36 };
-}
+export { doorAt } from './block-face.js'; // (pure, so a plan can place a path to a door)
 
 // officeBlockSteps is the same as a generator that yields after every face, for a place built in slices
 // (js/perf/slice.js)

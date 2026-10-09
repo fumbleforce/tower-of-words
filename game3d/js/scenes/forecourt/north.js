@@ -32,13 +32,10 @@ import * as P from './plan.js';
 
 const { HZ, TE, TN, SERVICE, WING, E1, CROSS, SHED_ST: SH, JUNCTION: J, WING_PLOT, BARRIER_Z } = P;
 const layoutOf = (id) => BUILDINGS.find((b) => b.id === id);
-const WING_DOOR = doorAt(WING, 'w', (WING[2] + WING[3]) / 2), // its middle bay, past the chains
-  YARD_DOOR = doorAt(WING, 'e', WING[2] + 1.2);
-const PATH = [SH[1], WING[0], WING_DOOR.at - 0.8, WING_DOOR.at + 0.8]; // the staff door's path, 1.6 wide
+const YARD_DOOR = doorAt(WING, 'e', WING[2] + 1.2);
+// the staff door, its path and the bike shelter's are the plan's (forecourt/plan.js), so they are walkable ground
+const { WING_DOOR, STAFF_PATH: PATH, SHELTER, SHELTER_PATH } = P;
 const AV = 4; // the avenues' pitch, as on the lane
-// the staff bike shelter behind the wing, and its path from the shed street
-const SHELTER = [WING[0] + 0.6, WING[1] - 0.6, WING[2] - 1.7, WING[2] - 0.4];
-const SHELTER_PATH = [SH[1], SHELTER[0] - 0.1, SHELTER[2] + 0.05, SHELTER[3] - 0.05];
 const REAR_X = (SERVICE[1] + TE) / 2 + 2.5; // the tower's rear door
 
 function paving(root) {

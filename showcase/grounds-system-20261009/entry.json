@@ -165,6 +165,42 @@
           "caption": "Campus garden, after"
         }
       ]
+    },
+    {
+      "title": "Campus: the paths to the wing's staff door and bike shelter",
+      "caption": "Both paths had a kerb across their mouths. Now they are walkable to the door and to the shelter's bikes. Walking toward each: before he stopped at the street's kerb (or went round to the cross street); now he reaches them.",
+      "images": [
+        {
+          "id": "before-wing-paths",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-wing-paths.webp",
+          "caption": "From the shed street, before"
+        },
+        {
+          "id": "after-wing-paths",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-wing-paths.webp",
+          "caption": "From the shed street, after"
+        },
+        {
+          "id": "before-wing-shelter",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-wing-shelter.webp",
+          "caption": "Walking to the shelter, before"
+        },
+        {
+          "id": "after-wing-shelter",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-wing-shelter.webp",
+          "caption": "Walking to the shelter, after"
+        },
+        {
+          "id": "before-wing-top",
+          "image": "bible/shots/showcase/grounds-system-20261009/before-wing-top.webp",
+          "caption": "Where he can walk, before"
+        },
+        {
+          "id": "after-wing-top",
+          "image": "bible/shots/showcase/grounds-system-20261009/after-wing-top.webp",
+          "caption": "Where he can walk, after"
+        }
+      ]
     }
   ],
   "links": [

@@ -7,6 +7,7 @@
 //   face   the direction he faces, radians (his back to the camera is the default)
 //   top    an overhead view centred on c, `h` high, with the walk grid of radius r drawn over the ground (green free,
 //          red blocked), instead of the game's camera
+//   walk   [x, z]: a scripted walk there (game.walkTo), reporting where he ends
 //   push   walk him from `at` in that direction for 1.5 s, holding the key, and report where he stopped
 // BASE=.claude/worktrees/<name>/game3d tests a worktree.
 import fs from 'node:fs';
@@ -120,6 +121,14 @@ await withBrowserJob(
         }, v);
         await page.waitForTimeout(v.top ? 500 : 1200);
         let pushed = null;
+        // walk: a scripted walk toward a point (the game's own path finding), for where the screen-relative keys turn
+        // with the camera; reports where he ended
+        if (v.walk) {
+          const from = await page.evaluate(() => globalThis.__game.walker.body.position.toArray());
+          await page.evaluate((p) => globalThis.__game.walkTo(...p), v.walk);
+          await page.waitForTimeout(500);
+          pushed = { from, to: await page.evaluate(() => globalThis.__game.walker.body.position.toArray()) };
+        }
         if (v.push) {
           // keys move him in screen directions; the overhead cameras look north, so up is -z
           const key =

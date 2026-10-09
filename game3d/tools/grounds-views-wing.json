@@ -1,0 +1,13 @@
+{
+  "campus": {
+    "place": "campus",
+    "day": 3,
+    "diorama": false,
+    "views": [
+      { "id": "cp-wing-paths", "at": [-5.3, -10.2] },
+      { "id": "cp-walk-staff-door", "at": [-5.3, -8.95], "walk": [-0.2, -8.95] },
+      { "id": "cp-walk-shelter", "at": [-5.3, -12.3], "walk": [0.4, -12.3] },
+      { "id": "cp-top-wing", "at": [-5.3, -10.2], "top": { "c": [0, -10], "h": 22, "r": 7 } }
+    ]
+  }
+}

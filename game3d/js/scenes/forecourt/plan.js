@@ -12,6 +12,7 @@ import { STATION, DOOR_X } from '../station-exterior.js';
 import { T, at, DOOR_U } from '../head-office/frame.js';
 import { BUILDINGS, toLocal } from '../island-layout.js';
 import { CROSS, STREET_W } from './cross-plan.js';
+import { doorAt } from '../outdoor/block-face.js';
 export { CROSS, STREET_W };
 
 export { STATION, DOOR_X };
@@ -68,6 +69,15 @@ export const BARRIER_Z = HZ - 3.3;
 // the shed street he walks, its full width, from the court to a step past the bollards (where the campus trip starts)
 export const SHED_WALK = [SHED_ST[0], SHED_ST[1], BARRIER_Z - 1.2, HZ];
 export const WING_PLOT = [SHED_ST[1], SERVICE[0], CROSS[3], HZ];
+// the wing's staff door (its west face's middle bay, past the chains) and its path from the shed street, 1.6 wide;
+// the staff bike shelter on the lawn behind the wing, its paved floor and the path to it (forecourt/north.js). All
+// walkable from the campus (campus/plan.js WALKS); the shelter's bikes stand in SHELTER_BIKES.
+export const WING_DOOR = doorAt(WING, 'w', (WING[2] + WING[3]) / 2);
+export const STAFF_PATH = [SHED_ST[1], WING[0], WING_DOOR.at - 0.8, WING_DOOR.at + 0.8];
+export const SHELTER = [WING[0] + 0.6, WING[1] - 0.6, WING[2] - 1.7, WING[2] - 0.4];
+export const SHELTER_PATH = [SHED_ST[1], SHELTER[0] - 0.1, SHELTER[2], SHELTER[3]];
+export const SHELTER_FLOOR = [SHELTER_PATH[0], SHELTER[1], SHELTER[2], SHELTER[3]];
+export const SHELTER_BIKES = [SHELTER[0] - 0.05, SHELTER[1] + 0.05, SHELTER[2], SHELTER[3]];
 export const NORTH_BED = [SHED_ST[1] + 0.3, 5.5, HZ + 0.05, HZ + 1.15]; // the raised bed along the court's north edge
 // the lane, and the planted strips either side of it (the north one starts past the tower)
 export const LANE = [LE, 52, HZ, HZ + 3];
