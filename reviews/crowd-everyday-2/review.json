@@ -2,7 +2,7 @@
  "title": "Everyday people: first 3D models (casual woman, older man, apron worker)",
  "date": "2026-10-09",
  "by": "Claude (art round, #328)",
- "status": "open",
+ "status": "decided",
  "issue": 328,
  "question": "These are real rigged 3D models, not pictures: background people for the island who are still code-built placeholders. The casual woman and the older man would walk the paths and plazas; the apron worker would stand at shop and canteen counters. Each was made from the source picture you approved in crowd-everyday-1, twice, with the same Meshy settings, rig, walk, run, sit and idle as the office pair A and B now in the game. Which ones should go in? Pick any; after your pick Codex puts the picked ones in the game. Nothing is in the game yet.",
  "multi": true,
@@ -173,5 +173,12 @@
   "art/parts/crowd-everyday-2/game/service-2/run.glb",
   "art/parts/crowd-everyday-2/game/service-2/sit.glb",
   "art/parts/crowd-everyday-2/game/service-2/idle.json"
- ]
+ ],
+ "decided": [
+  "casual-1",
+  "older-1",
+  "service-1"
+ ],
+ "decision": "Picked casual-1, older-1, service-1; service-2 rejected (\"super deformed, unusable\"). Codex integrates under #353.",
+ "decided_at": "2026-10-09T14:19:02+0200"
 }
