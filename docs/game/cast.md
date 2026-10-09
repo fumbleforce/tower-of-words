@@ -127,7 +127,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Rei (`rei`)
 
-- Rei is a brusque, abrasive leader with strong weaknesses (Jørgen, 2026-10-09). Her established job remains Sales.
+- Rei is a brusque, abrasive leader with strong weaknesses, which she never discloses or shows openly (Jørgen, 2026-10-09). She holds a management role in Sales, not head of sales yet; she ranks above Eric in the hierarchy without being his direct supervisor (Jørgen, 2026-10-09).
 - Age 41 (Jørgen, 2026-10-05). Sales. Built in the game (figures on the train, at the gate and in the office) but hidden all day and in no storyline. Her first authored meeting is planned at tennis (#226, to build).
 - Language (#226): native Japanese; conversational English used with overseas customers. She can make plans, explain a practical problem and tease in short complete sentences. Idioms and abstract conversation take effort. She knows English tennis jargon better than Eric does, so a failed explanation is about the jargon, not his inability to understand any English. She can demonstrate or rephrase; she is not another general translator.
 - Look: dialogue portrait rei-i65-2102 (reviews/rei-portrait-1, Jørgen: "65-2102"), an img2img of art/approved/rei/rei-after.webp with a sly confident look: silver-grey high ponytail, steel-grey eyes, gold hoops, light grey suit over a black high-neck top. Extended down to the waist with Jørgen's pick a-s11 (reviews/rei-body-1), its seam blended as attempt b did, which is the file b-s11.
