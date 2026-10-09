@@ -14,7 +14,7 @@ Every voiced line in the story files carries an `emo` tag, for example `{ say: '
 
 | Speaker | Base line for the instruction | Default |
 |---|---|---|
-| mio | Young woman, low and slightly husky, unhurried, speaking English as a second language with a light Japanese accent. | dry |
+| mio | Woman of thirty, low and slightly husky, unhurried, speaking English as a second language with a light Japanese accent. | dry |
 | eric | Tired man in his thirties, quiet and polite, no accent. | tired |
 | mori | Man of about sixty, soft and formal Japanese, kind. | polite |
 | kenji | Young man of about twenty-one, eager and quick, casual Japanese; his English is halting, he laughs at it and gets carried away. | bright |

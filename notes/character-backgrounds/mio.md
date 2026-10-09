@@ -1,6 +1,6 @@
 # Mio
 
-Mio is twenty-five and spends most of her free time playing games. She likes being alone and can happily go a whole weekend without speaking to anyone. She dislikes people turning up unannounced and prefers them to send a message, even if she takes a while to reply. At work, she gets annoyed when people interrupt her and is sometimes rude to them.
+Mio is thirty and spends most of her free time playing games. She likes being alone and can happily go a whole weekend without speaking to anyone. She dislikes people turning up unannounced and prefers them to send a message, even if she takes a while to reply. At work, she gets annoyed when people interrupt her and is sometimes rude to them.
 
 Mio has pale skin, light tan eyes and dark green hair with brighter green underneath. She keeps her hoodie on even in the office and often looks tired. She sometimes stays up playing until three, especially after losing a game she thinks she should have won.
 
