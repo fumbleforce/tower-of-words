@@ -131,6 +131,17 @@ export async function installViewer(query, ctx) {
   });
 }
 
+// A local plugin that isn't a place (newgame.js: rows for the new-game screen, ui/new-game.js), whatever private mode
+// is. Never asked for off a local host, so the published site makes no request for it. Null when it isn't there.
+export async function localPlugin(name) {
+  if (!LOCAL_HOST.test(location.hostname) || !PLACE.test(name)) return null;
+  try {
+    return await loadPlugin(name);
+  } catch {
+    return null;
+  }
+}
+
 let portraitFn = null;
 let bootPromise = null;
 
