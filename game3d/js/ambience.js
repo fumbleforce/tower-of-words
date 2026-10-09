@@ -10,7 +10,10 @@
 //   outdoors  sparrows and a light wind by day, crickets after work (and the forecourt keeps the station's air);
 //           a flock of pigeons scattering near Eric is heard (creatureCall)
 // Beds loop as overlapping copies with an equal-power crossfade, so the seam never shows (MP3 padding included).
+// All gain automation goes through audio/automation.js, and update() catches and logs: no audio error can stop the
+// frame loop (#273).
 import { ctx, running, bus, load, isMuted, onDip, titleQuiet } from './sfx.js';
+import { scheduleCopy, rampTo, dipTo, guard } from './audio/automation.js';
 
 const BEDS = {
   train: 'bed_train',
@@ -50,33 +53,27 @@ function out() {
   return duckG;
 }
 function ramp(v, secs) {
-  const g = out(),
-    t = g.context.currentTime;
-  g.gain.cancelScheduledValues(t);
-  g.gain.setValueAtTime(g.gain.value, t);
-  g.gain.linearRampToValueAtTime(v, t + secs);
+  const g = out();
+  rampTo(g.gain, g.context.currentTime, v, secs);
 }
 // voices: on / off calls nest (every on needs an off)
 export function duck(on) {
   duckN = Math.max(0, duckN + (on ? 1 : -1));
   if (!running() || performance.now() < dipUntil) return;
-  ramp(duckN ? DUCK : 1, duckN ? 0.15 : 0.6);
+  guard('ambience duck', () => ramp(duckN ? DUCK : 1, duckN ? 0.15 : 0.6));
 }
 // a short dip to `level`: in over a s, held, back over r s
 onDip((level, a, hold, r) => {
   if (!running()) return;
-  const g = out(),
-    t = g.context.currentTime,
-    back = duckN ? DUCK : 1;
+  const ok = guard('ambience dip', () => {
+    const g = out();
+    return dipTo(g.gain, g.context.currentTime, level, a, hold, r, duckN ? DUCK : 1);
+  });
+  if (!ok) return;
   dipUntil = performance.now() + (a + hold + r) * 1000;
-  g.gain.cancelScheduledValues(t);
-  g.gain.setValueAtTime(g.gain.value, t);
-  g.gain.linearRampToValueAtTime(Math.min(back, level), t + a);
-  g.gain.setValueAtTime(Math.min(back, level), t + a + hold);
-  g.gain.linearRampToValueAtTime(back, t + a + hold + r);
   setTimeout(
     () => {
-      if (performance.now() >= dipUntil - 20) ramp(duckN ? DUCK : 1, 0.3);
+      if (performance.now() >= dipUntil - 20) guard('ambience dip end', () => ramp(duckN ? DUCK : 1, 0.3));
     },
     (a + hold + r) * 1000 + 30,
   );
@@ -117,37 +114,30 @@ async function run(name) {
     return;
   }
   const c = ctx();
-  const curve = (up) => {
-    const n = 64,
-      a = new Float32Array(n);
-    for (let i = 0; i < n; i++) {
-      const x = i / (n - 1);
-      a[i] = up ? Math.sin((x * Math.PI) / 2) : Math.cos((x * Math.PI) / 2);
-    }
-    return a;
-  };
+  // each copy fades out over its last XF s while the next fades in; a timer that fires late starts the next copy
+  // now instead (scheduleCopy keeps its fades from overlapping)
   const play = (at, fadeIn) => {
     if (!b.running) return;
+    // start a little into the file on the first copy, so two places never start on the same bar of noise
+    const offset = fadeIn ? 0 : Math.random() * Math.max(0, buf.duration - XF * 2 - 1);
     const s = c.createBufferSource(),
       sg = c.createGain();
     s.buffer = buf;
     s.connect(sg);
     sg.connect(b.g);
-    const end = at + buf.duration;
-    if (fadeIn) {
-      sg.gain.setValueAtTime(0, at);
-      sg.gain.setValueCurveAtTime(curve(true), at, XF);
-    } else sg.gain.setValueAtTime(1, at);
-    sg.gain.setValueCurveAtTime(curve(false), end - XF, XF);
-    // start a little into the file on the first copy, so two places never start on the same bar of noise
-    s.start(at, fadeIn ? 0 : Math.random() * Math.max(0, buf.duration - XF * 2 - 1));
-    s.stop(end + 0.05);
+    const t = scheduleCopy(sg.gain, { now: c.currentTime, at, dur: buf.duration, offset, xf: XF, fadeIn });
+    if (!t) return;
+    s.start(t.at, offset);
+    s.stop(t.end + 0.05);
     b.srcs.push(s);
     if (b.srcs.length > 3) b.srcs.shift();
-    const next = end - XF;
-    b.timer = setTimeout(() => play(next, true), Math.max(0, (next - c.currentTime - 1) * 1000));
+    const next = t.outAt;
+    b.timer = setTimeout(
+      () => guard('ambience bed', () => play(next, true)),
+      Math.max(0, (next - c.currentTime - 1) * 1000),
+    );
   };
-  play(c.currentTime + 0.05, false);
+  guard('ambience bed', () => play(c.currentTime + 0.05, false));
 }
 function stop(name) {
   const b = beds[name];
@@ -268,6 +258,8 @@ export function update(game, dt) {
   if (isMuted() || !game || !game.place) return;
   // nothing starts before the first tap unlocks audio (sfx.ctx() is created by then)
   if (!running()) return;
-  mix(dt, scene(game));
-  events(game, dt);
+  guard('ambience update', () => {
+    mix(dt, scene(game));
+    events(game, dt);
+  });
 }
