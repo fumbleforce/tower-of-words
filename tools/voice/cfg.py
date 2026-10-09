@@ -83,9 +83,8 @@ def speakers():
     # Background people use the approved body-matched contextual Talk presets.
     sp['worker_a'] = sp['sales2']; sp['worker_b'] = sp['reader']
     sp['commuter_1'] = sp['sales1']; sp['commuter_2'] = sp['reader']; sp['commuter_3'] = sp['kenji']
-    # day 3 (story/day3/): the gym's attendant and the swimming club's member, borrowed voices; Rei (Sales) borrows the
-    # woman from Sales' until she has a voice of her own
-    sp['attendant'] = sp['sales1']; sp['member'] = sp['aoi']; sp['rei'] = sp['sales2']
+    # day 3 (story/day3/): the gym's attendant and the swimming club's member, borrowed voices; Rei (Sales) has her own voice (below)
+    sp['attendant'] = sp['sales1']; sp['member'] = sp['aoi']; sp['rei'] = ref('rei-design')  # Review rei-voice-1, d (2026-10-09)
     return sp
 
 
@@ -96,7 +95,7 @@ MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commute
 # clones whose reference speaks English: their Japanese is made from the timbre alone (gen_takes.xvec)
 XVEC_JA = {'eric', 'carina'}
 LUFS = {'eric': -23.0, 'carina': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0,  # player thoughts quieter, recorded voices a little under the cast
-        'kuro': -20.0}  # Kuro's husky voice: "bit loud" at -18 (Review kuro-voice-2)
+        'kuro': -20.0, 'rei': -20.0}  # Kuro's husky voice: "bit loud" at -18 (Review kuro-voice-2)
 LUFS_DEFAULT = -18.0
 
 # what the TTS reads instead of the written line (numbers, letters); the check still compares against the written line

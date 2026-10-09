@@ -2,7 +2,7 @@
  "title": "Rei's voice",
  "date": "2026-10-09",
  "by": "voice agent",
- "status": "open",
+ "status": "decided",
  "multi": false,
  "question": "Which of these is Rei?",
  "media": [
@@ -162,5 +162,11 @@
    "audio": "art/candidates/rei-voice-1/p-ja1.mp3",
    "note": "The Rei voice from the old prototype (a MiniMax preset, \"ColdQueen\"), cloned the same way, for comparison. Reference pitch about 226 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 606, ja2 606, English 505, 大丈夫です 404 with English 606."
   }
- ]
+ ],
+ "decided": [
+  "d"
+ ],
+ "decision": "d: cool and smooth, dry amusement. Installed as tools/voice-refs/rei-design (cfg.py), all her lines re-voiced.",
+ "decided_at": "2026-10-09T23:32:31+0200",
+ "issue": 257
 }
