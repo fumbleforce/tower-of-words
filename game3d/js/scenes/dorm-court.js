@@ -25,6 +25,7 @@ import { lightSet } from './outdoor/furniture.js';
 import { skylineSteps } from './skyline.js';
 import { drain } from '../perf/slice.js';
 import * as layout from './island-layout.js';
+import { coastLand } from './island-west.js';
 import { groundPatches, TOWN } from './town.js';
 import { lightRig } from '../kit/light/rig.js';
 import { DORM_COURT } from '../kit/light/looks.js';
@@ -53,14 +54,15 @@ export function* dormCourtSteps({ phaseOf } = {}) {
 
   const nav = new Nav(WEST + 0.1, EAST - 0.2, BACK_Z - 1.2, PL.OUT_Z, 0.1); // the court, and the way out through the gate (dorm-court/court.js)
   const block = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
-  // under everything: the town's paving under the court and its street, out past the frame's edges; grass past the
-  // street, and under the dorm cluster east of the block and south of the row (dorm-court/cluster.js)
+  // under everything: the town's paving under the court and its street, and grass under the dorm cluster east of
+  // the block and south of the row (dorm-court/cluster.js). Past the street's far side and its ends the skyline's
+  // ground shows the island plan (the east lane's walks, the pocket park, the north street), so the buildings over
+  // there stand by their own streets and not on an open lawn (#365, Jørgen 2026-10-09).
   const BACK = -8.45; // dorm_1's east face, the cluster's side
   groundPatches(root, [
-    [-40, PL.ROW_X, BACK, PL.STREET[3], TOWN.paving],
+    [PL.STREET[0], PL.ROW_X, BACK, PL.STREET[3], TOWN.paving],
     [-40, 40, -60, BACK, TOWN.grass],
     [PL.ROW_X, 40, BACK, PL.STREET[3], TOWN.grass],
-    [-40, 40, PL.STREET[3], 40, TOWN.grass],
   ]);
   const mailbox = hall(root, nav);
   yield;
@@ -88,7 +90,13 @@ export function* dormCourtSteps({ phaseOf } = {}) {
   const dorms = yield* clusterSteps(cluster);
   yield;
   // the town around, from the island layout; Eric's block and the cluster are built above
-  const sky = yield* skylineSteps(root, 'dorm_court', { layout, skip: ['dorm_1', ...CLUSTER_IDS] });
+  // r9 (the director's house) stands where the court's street runs on past the dorm street's end: left out here
+  const sky = yield* skylineSteps(root, 'dorm_court', {
+    layout,
+    skip: ['dorm_1', 'r9', ...CLUSTER_IDS],
+    land: coastLand(layout.COAST.line),
+    landColor: TOWN.grass,
+  });
   light.glow.add(lit.glows, dorms.glows, sky.glows); // what lights up after dark
   return {
     root,
