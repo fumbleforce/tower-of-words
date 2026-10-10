@@ -102,9 +102,23 @@ def _queue_and_fetch(j, wf, out_path, timeout=900):
     raise TimeoutError('no result after 15 minutes')
 
 
+def start_image(wf, start):
+    """img2img: the picture in start['image'] (scaled to the job's size) replaces the empty latent, and the sampler
+    keeps start['denoise'] of the way from it (low = small changes)."""
+    name = comfy.upload(consist.as_png(consist.resolve(start['image'])))
+    w, h = wf['6']['inputs']['width'], wf['6']['inputs']['height']
+    wf['S1'] = {'class_type': 'LoadImage', 'inputs': {'image': name}}
+    wf['S2'] = {'class_type': 'ImageScale', 'inputs': {'image': ['S1', 0], 'upscale_method': 'lanczos', 'width': w, 'height': h, 'crop': 'center'}}
+    wf['6'] = {'class_type': 'VAEEncode', 'inputs': {'pixels': ['S2', 0], 'vae': ['3', 0]}}
+    wf['7']['inputs']['denoise'] = start['denoise']
+    return wf
+
+
 def run_job(j):
     wf = comfy.anima(j['positive'], j['negative'], model=j['model_file'], w=j['w'], h=j['h'], steps=j['steps'], cfg=j['cfg'],
                      sampler=j['sampler'], scheduler=j['scheduler'], seed=j['seed'])
+    if j.get('start'):
+        start_image(wf, j['start'])
     wf['9']['inputs']['filename_prefix'] = 'imagegen/' + j['run_id']
     ipa = j.get('ipa')
     if ipa:
@@ -151,7 +165,7 @@ def run_job(j):
 def log_entry(j):
     keep = ('id', 'n', 'run_id', 'idx', 'status', 'error', 'file', 'thumb', 'seed', 'model_file', 'w', 'h', 'steps', 'cfg', 'sampler',
             'scheduler', 'positive', 'negative', 'overridden', 'presets', 'rating', 'scene_text', 'characters', 'compose', 'elapsed',
-            'ipa', 'repaint', 'raw_file')
+            'ipa', 'repaint', 'raw_file', 'start')
     e = {k: j.get(k) for k in keep}
     e['at'] = store.now()
     e.update(star=False, fav=False, reject=False, reject_reason='', note='')
@@ -202,7 +216,20 @@ def _clean_repaint(x):
     return dict(ref=x['ref'], denoise=max(0.1, min(1.0, float(x.get('denoise', 0.65)))), prompt=x['prompt'], method='lllite-head-repaint')
 
 
-def new_run(body):
+def _clean_start(x, private):
+    """An img2img start: a repo-relative picture (island/private/ ones only in private mode) and how far to move from it."""
+    if not x or not x.get('image'):
+        return None
+    rel = str(x['image'])
+    if rel.startswith('island/private/') and not private:
+        raise ValueError('that start picture opens in private mode only')
+    path = consist.resolve(rel)
+    if path.startswith(store.OFF_LIMITS + os.sep):
+        raise ValueError('not allowed')
+    return dict(image=rel, denoise=max(0.05, min(1.0, float(x.get('denoise', 0.35)))), method='img2img')
+
+
+def new_run(body, private=False):
     run_id = 'r' + time.strftime('%y%m%d-%H%M%S') + '-' + uuid.uuid4().hex[:3]
     count = max(1, min(8, int(body.get('count', 1))))
     if body.get('seeds'):
@@ -217,6 +244,7 @@ def new_run(body):
         raise ValueError(f'model file not found: {model_file}')
     chars = body.get('characters') or []
     tag = '-'.join(c for c in chars)[:40] or 'scene'
+    start = _clean_start(body.get('start'), private)
     jobs = []
     for i, s in enumerate(seeds):
         jobs.append(dict(
@@ -226,7 +254,7 @@ def new_run(body):
             sampler=body.get('sampler', 'euler_ancestral'), scheduler=body.get('scheduler', 'normal'),
             presets=body.get('presets', {}), rating=body.get('rating'), scene_text=body.get('scene_text', ''),
             characters=chars, compose=body.get('compose', {}), created=time.time(),
-            ipa=_clean_ipa(body.get('ipa')), repaint=_clean_repaint(body.get('repaint'))))
+            ipa=_clean_ipa(body.get('ipa')), repaint=_clean_repaint(body.get('repaint')), start=start))
     with JOBS_LOCK:
         JOBS.extend(jobs)
         del JOBS[:-400]
@@ -238,7 +266,7 @@ def new_run(body):
 def public_job(j):
     return {k: j.get(k) for k in ('id', 'n', 'run_id', 'idx', 'status', 'progress', 'seed', 'file', 'thumb', 'error', 'w', 'h', 'elapsed',
                                   'positive', 'negative', 'overridden', 'compose', 'model_file', 'star', 'fav', 'reject', 'reject_reason', 'note',
-                                  'presets', 'characters', 'rating', 'deleted', 'ipa', 'repaint', 'raw_file', 'phase')}
+                                  'presets', 'characters', 'rating', 'deleted', 'ipa', 'repaint', 'raw_file', 'phase', 'start')}
 
 
 # ---------------------------------------------------------------- delete, trash, portraits
@@ -403,9 +431,9 @@ def history(q, private=False):
         out.append(dict(run_id=rid, at=f['at'], characters=f.get('characters'), scene_text=f.get('scene_text'), model_file=f.get('model_file'), rating=f.get('rating'),
                         presets=f.get('presets'), positive=f.get('positive'), negative=f.get('negative'), overridden=f.get('overridden'),
                         compose=f.get('compose'), w=f.get('w'), h=f.get('h'),
-                        ipa=f.get('ipa'), repaint=f.get('repaint'), **{k: f.get(k) for k in AGENT_FIELDS},
+                        ipa=f.get('ipa'), repaint=f.get('repaint'), start=f.get('start'), **{k: f.get(k) for k in AGENT_FIELDS},
                         renders=[{k: r.get(k) for k in ('id', 'n', 'file', 'thumb', 'seed', 'star', 'fav', 'reject', 'reject_reason', 'note',
-                                                         'positive', 'negative', 'w', 'h', 'model_file', 'at', 'ipa', 'repaint', 'raw_file') + AGENT_FIELDS} for r in rs]))
+                                                         'positive', 'negative', 'w', 'h', 'model_file', 'at', 'ipa', 'repaint', 'raw_file', 'start', 'compose') + AGENT_FIELDS} for r in rs]))
     out.sort(key=lambda x: x['at'], reverse=True)
     if q.get('before'):  # paging for the History view's infinite scroll: only runs older than the last one shown
         out = [x for x in out if x['at'] < q['before']]
@@ -588,7 +616,7 @@ class H(BaseHTTPRequestHandler):
                     r = session.start()
                     if not r.get('ok'):
                         return self._send(409, r)
-                run_id, jobs = new_run(b)
+                run_id, jobs = new_run(b, self._private())
                 return self._send(200, dict(run_id=run_id, jobs=[public_job(j) for j in jobs]))
             if p == '/api/cancel':
                 with JOBS_LOCK:

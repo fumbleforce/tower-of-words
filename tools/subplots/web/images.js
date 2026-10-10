@@ -74,6 +74,7 @@ export function installImages(getScene, changed) {
     if (!c) { host.innerHTML = '<p class="hint">Choose a scene first.</p>'; return; }
     const slot = slots().find(s => s.id === activeSlot);
     const picked = selectedImage(activeSlot);
+    if (presets && !c.sourceChecked && !c.edited && (picked || slot?.available)) loadSource(activeSlot);
     const cast = c.characters.map(id => preset('character', id)).filter(Boolean);
     const oneCharacter = cast.length === 1 && !c.man;
     const refPath = c.reference || (oneCharacter ? cast[0].data.portrait : '');
@@ -105,17 +106,27 @@ export function installImages(getScene, changed) {
       <h4>Exclude from the picture</h4><div class="chips">${active('negative').map(p => chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}"`)).join('')}</div>
       <label>Anything else to avoid?<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
       ${c.rating !== 'safe' ? check('hard', 'Hard scene: leave out the standing soft-scene exclusions', c.hard) : '<p class="hint">Mature and Adult pictures always exclude visible nipples, visible genitals and an uncovered crotch, unless marked as a hard scene.</p>'}
-      <label>Notes for steps outside the prompt<textarea data-compose="details" rows="2" placeholder="Start image and strength, inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></section>`;
+      <label>Notes for steps outside the prompt<textarea data-compose="details" rows="2" placeholder="Inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></section>`;
     const go = `<div class="image-go"><button id="generate" class="primary" ${presets ? '' : 'disabled'} title="Uses your existing image-generation queue. Choose a result from the Picture library to add it to this shot.">Generate ${+c.count > 1 ? c.count + ' pictures' : 'a picture'}</button></div>`;
+    const o = c.original;
+    const smallChanges = o?.start ? '<button data-small-changes title="Start from this shot’s picture with the same seed and change it a little (img2img, low strength).">Small changes to this picture</button>' : '';
+    const original = o && o.positive == null ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3>${smallChanges}</div><p class="hint">There is no record of how this picture was made. Describe it above, or start from it.</p></section>`
+      : o ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3>${smallChanges}</div>
+      <p class="hint">${esc(['Seed ' + (o.seed ?? '?'), o.model_file, o.w && o.h ? o.w + '×' + o.h : '', o.steps ? o.steps + ' steps' : '', o.cfg ? 'CFG ' + o.cfg : '', o.sampler].filter(Boolean).join(' · '))}. From ${esc(o.how || 'the picture')}.</p>
+      <label>Prompt<textarea data-original="positive" rows="3">${esc(c.override?.positive ?? o.positive ?? '')}</textarea></label>
+      <label>Negative<textarea data-original="negative" rows="2">${esc(c.override?.negative ?? o.negative ?? '')}</textarea></label>
+      ${c.override ? '<p class="hint">Generate uses this prompt as it stands. Changing a block above builds a new prompt instead.</p>' : '<button data-use-original>Use the original prompt</button>'}</section>` : '';
+    const start = c.start?.image ? `<section class="image-section image-start"><h3>Start from a picture</h3><p class="hint">${esc(c.start.image.split('/').pop())}: the new picture keeps this one and changes it by the strength below (0.2 to 0.4 is a small change).</p>
+      <div class="two">${number('startDenoise', 'Change strength', c.start.denoise, 0.05, 1, 0.05)}<button data-clear-start>Start from noise instead</button></div></section>` : '';
     const prompt = `<section class="image-section"><h3>Generated prompt</h3><p id="assembled" class="hint prompt-box"></p>${c.override ? '<p class="hint">This picture uses a prompt copied from history.</p><button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</section>`;
     // The full-screen composer (index.html) has a stage between the controls and the library: the picture, Generate
     // and every generation setting in view at once. Without one (a narrow panel) it all runs down one column.
     const stage = $('#composePreview');
     if (stage) {
       host.innerHTML = people + direction + consistency;
-      stage.innerHTML = current.replace('<div class="image-current-row">', '<div class="image-current-row">' + go) + settings + prompt;
+      stage.innerHTML = current.replace('<div class="image-current-row">', '<div class="image-current-row">' + go) + start + original + settings + prompt;
       if ($('#composeFor')) $('#composeFor').textContent = getScene().metadata.title || getScene().title || '';
-    } else host.innerHTML = current + people + direction + consistency + settings + go + prompt;
+    } else host.innerHTML = current + start + original + people + direction + consistency + settings + go + prompt;
     bindComposition();
     updatePrompt();
     renderReferenceChoices();
@@ -123,7 +134,7 @@ export function installImages(getScene, changed) {
   }
   function edit(mutator, repaint = true) {
     const c = compose(); if (!c) return;
-    mutator(c); changed();
+    mutator(c); c.edited = true; changed();
     if (repaint) render(); else updatePrompt();
   }
   function toggleList(c, key, id) { c[key] = c[key].includes(id) ? c[key].filter(x => x !== id) : [...c[key], id]; }
@@ -133,6 +144,7 @@ export function installImages(getScene, changed) {
       el.oninput = () => {
         const name = el.dataset.compose;
         if (name === 'imageSlot') { activeSlot = el.value; render(); return; }
+        if (name === 'startDenoise') { edit(c => { c.start.denoise = +el.value; }, false); return; }
         if (name === 'scenePreset') {
           const p = preset('scene', el.value); if (!p) return;
           edit(c => { c.scene = p.data.text || ''; c.sceneRefs = [p.id]; if (p.data.rating) c.rating = p.data.rating; c.override = null; }); return;
@@ -162,6 +174,17 @@ export function installImages(getScene, changed) {
       notice('Guessed ' + (found.join(', ') || 'nothing') + ' from the prompt; the rest is in the free text.');
     }));
     bind('[data-reset-prompt]', () => edit(c => { c.override = null; }));
+    host.querySelectorAll('[data-original]').forEach(el => el.oninput = () => edit(c => {
+      c.override = {positive: $('[data-original="positive"]', host).value, negative: $('[data-original="negative"]', host).value};
+    }, false));
+    bind('[data-use-original]', () => edit(c => { c.override = {positive: c.original.positive, negative: c.original.negative || ''}; }));
+    bind('[data-small-changes]', () => edit(c => {
+      const o = c.original;
+      Object.assign(c, {start: {image: o.start, denoise: 0.35}, seedMode: 'fixed', seed: o.seed ?? c.seed, count: 1, width: o.w || c.width, height: o.h || c.height});
+      if (!o.blocks) c.override ||= {positive: o.positive, negative: o.negative || ''};
+      notice('Starts from this picture with the same seed. Change the prompt a little, then Generate.');
+    }));
+    bind('[data-clear-start]', () => edit(c => { delete c.start; }));
     bind('#generate', guarded(generate));
   }
   async function loadReferences() {
@@ -254,21 +277,54 @@ export function installImages(getScene, changed) {
     changed(); render(); announceImage(); notice('Picture selected for this shot. Save the scene to use it in the story.');
   }
   function announceImage() { globalThis.dispatchEvent(new CustomEvent('subplot-image-changed', {detail: {slotId: activeSlot}})); }
-  function reuseImage(j) {
+  // A shot's picture opens with what made it (Jørgen, 2026-10-11: "when opening to re-gen a picture for a scene, we
+  // need the fields filled out, and if the "format" is not fully compatible, we need at least the prompt to be filled"):
+  // the editor's server finds the render (api.py picture_source), its blocks fill the composer, and the original
+  // prompt and settings are always kept beside them.
+  const sourcesLoading = new Set();
+  async function loadSource(slotId) {
+    const scene = getScene(); const key = scene.id + '|' + slotId;
+    if (sourcesLoading.has(key)) return; sourcesLoading.add(key);
+    try {
+      const r = await api('picture-source?' + new URLSearchParams({id: scene.id, slot: slotId}));
+      const c = scene.metadata.compositions?.[slotId || 'scene'];
+      if (getScene() !== scene || !c || c.sourceChecked || c.edited) return;
+      if (r.job) fillFromJob(r.job, {how: r.how, start: r.start?.image || '', slot: slotId, quiet: true});
+      else { c.sourceChecked = true; if (r.start?.image) c.original = {how: 'no record of how it was made', start: r.start.image}; render(); }
+    } catch (e) { notice(e.message, true); }
+    finally { sourcesLoading.delete(key); }
+  }
+  const hasBlocks = compose => !!compose && ['characters', 'chars', 'cameras', 'cams'].some(k => compose[k]?.length) || !!compose?.scene;
+  // One way to open a picture's settings, for "Reuse settings" and for a shot's own picture: its blocks when it has
+  // them, else Fill from prompt; the original prompt and settings ride along either way.
+  function fillFromJob(j, {how = '', start = '', slot = activeSlot, quiet = false} = {}) {
     const s = getScene(); if (!s) return;
-    const current = compose();
-    const c = normalizeComposition(j.compose || {});
-    for (const type of ['model', 'style', 'framing']) c[type] = j.presets?.[type]?.id || c[type] || current[type];
-    if (!c.characters.length) c.characters = (j.characters || []).filter(id => preset('character', id));
-    c.model = active('model').find(p => p.data.file === j.model_file)?.id || c.model;
-    Object.assign(c, {imageSlot: activeSlot, seedMode: 'fixed', seed: j.seed, count: 1, width: j.w, height: j.h,
-      steps: j.steps || c.steps, cfg: j.cfg || c.cfg,
-      source: j.compose?.characters?.length || j.compose?.chars?.length ? null : {positive: j.positive, negative: j.negative || '', model_file: j.model_file, w: j.w, h: j.h, characters: j.characters, seed: j.seed, steps: j.steps, cfg: j.cfg},
-      override: {positive: j.positive, negative: j.negative || ''}});
+    const current = compose() || normalizeComposition();
+    const blocks = hasBlocks(j.compose);
+    let c;
+    if (blocks) {
+      c = normalizeComposition(j.compose);
+      for (const type of ['model', 'style', 'framing']) c[type] = j.presets?.[type]?.id || c[type] || current[type];
+      if (!c.characters.length) c.characters = (j.characters || []).filter(id => preset('character', id));
+    } else c = guessComposition(j, presets || {}).composition;
+    c.model = active('model').find(p => p.data.file === j.model_file)?.id || c.model || current.model;
+    Object.assign(c, {imageSlot: slot, seedMode: 'fixed', seed: j.seed, count: 1, width: j.w, height: j.h,
+      steps: j.steps || c.steps, cfg: j.cfg || c.cfg, sampler: j.sampler || undefined, scheduler: j.scheduler || undefined,
+      castInitialized: true, sourceChecked: true, edited: false,
+      original: {positive: j.positive || '', negative: j.negative || '', seed: j.seed, model_file: j.model_file, w: j.w, h: j.h,
+        steps: j.steps, cfg: j.cfg, sampler: j.sampler, how: how || (j.n ? 'picture #' + j.n : 'the picture'), start: start || (j.file ? 'island/private/imagegen/outputs/' + j.file : ''), blocks},
+      override: blocks ? null : {positive: j.positive || '', negative: j.negative || ''}});
     if (j.ipa) Object.assign(c, {reference: j.ipa.ref, referenceOn: true, referenceStrength: j.ipa.strength, referenceCutout: j.ipa.cutout});
     if (j.repaint) Object.assign(c, {reference: j.repaint.ref, faceFix: true, faceStrength: j.repaint.denoise});
-    s.metadata.compositions[activeSlot || 'scene'] = c;
-    changed(); render(); notice('Picture settings loaded. Change the direction or generate another version.');
+    if (j.start?.image) c.start = {image: j.start.image, denoise: j.start.denoise};
+    applyDefaults(c, presets || {});
+    s.metadata.compositions[slot || 'scene'] = c;
+    if (!quiet) changed();
+    render();
+  }
+  function reuseImage(j) {
+    fillFromJob(j);
+    notice('Picture settings loaded. Change the direction or generate another version.');
   }
   function focus(slotId) {
     compose();

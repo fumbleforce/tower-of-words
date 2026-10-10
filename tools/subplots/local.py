@@ -25,20 +25,21 @@ def locate_images(data,root):
                 break
     return data
 
-def picture_rounds(data, root, rewards):
-    """The round folders the scene's live pictures came from: the folder under the rewards area that holds a
-    byte-identical copy of each picture (live.mjs promote copies a round's file). Size first, then a hash, so only
-    same-sized files are read. The owner's own folder is outside the rewards area and never looked at."""
+def picture_copies(data, root, rewards):
+    """{image id: [round files]}: for each of the scene's live pictures, the byte-identical files under the rewards
+    area (live.mjs promote copies a round's file), repo-relative. Size first, then a hash, so only same-sized files
+    are read. The owner's own folder is outside the rewards area and never looked at."""
     wanted = {}
     for image in data.get('images', []):
         if not image.get('available') or not image.get('url'):
             continue
         path = (root / image['url'].lstrip('/')).resolve()
         if path.is_file() and not path.is_relative_to(rewards):
-            wanted.setdefault(path.stat().st_size, set()).add(hashlib.sha256(path.read_bytes()).hexdigest())
-    rounds = set()
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            wanted.setdefault(path.stat().st_size, {}).setdefault(digest, []).append(image.get('id'))
+    found = {}
     if not wanted or not rewards.is_dir():
-        return []
+        return found
     for folder, dirs, files in os.walk(rewards):
         dirs[:] = [d for d in dirs if d not in ('tools', 'docs', 'node_modules') and not d.startswith('.')]
         for name in files:
@@ -49,10 +50,20 @@ def picture_rounds(data, root, rewards):
                 size = file.stat().st_size
             except OSError:
                 continue
-            if size in wanted and hashlib.sha256(file.read_bytes()).hexdigest() in wanted[size]:
-                parts = file.relative_to(rewards).parts
-                if len(parts) >= 3:
-                    rounds.add(str((rewards / parts[0] / parts[1]).relative_to(root)))
+            if size in wanted:
+                ids = wanted[size].get(hashlib.sha256(file.read_bytes()).hexdigest())
+                for image_id in ids or []:
+                    found.setdefault(image_id, []).append(str(file.relative_to(root)))
+    return found
+
+def picture_rounds(data, root, rewards, copies=None):
+    """The round folders the scene's live pictures came from (rewards/<project>/<round>)."""
+    rounds = set()
+    for files in (picture_copies(data, root, rewards) if copies is None else copies).values():
+        for rel in files:
+            parts = (root / rel).relative_to(rewards).parts
+            if len(parts) >= 3:
+                rounds.add(str((rewards / parts[0] / parts[1]).relative_to(root)))
     return sorted(rounds)
 
 def scene_status(config, config_path, root, state, recipes):
@@ -176,7 +187,9 @@ def run(config_path, request):
     if action == 'pictures':
         data = read()
         rewards = Path(config.get('rewards') or Path(config_path).resolve().parent.parent).resolve()
-        return {'rounds': picture_rounds(data, root, rewards), 'scene': data.get('scene', ''),
+        copies = picture_copies(data, root, rewards)
+        return {'rounds': picture_rounds(data, root, rewards, copies), 'copies': copies, 'scene': data.get('scene', ''),
+                'images': [{k: i.get(k) for k in ('id', 'file', 'url', 'available', 'storage')} for i in data.get('images', [])],
                 'files': [i.get('file', '') for i in data.get('images', [])], 'metadata': data.get('metadata', {})}
     if action == 'history':
         version=request.get('version','')
