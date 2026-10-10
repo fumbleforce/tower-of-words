@@ -5,8 +5,8 @@
  "status": "open",
  "context": [
   "The full audit is notes/licenses.md (#424). Code, fonts, RDBT pictures, Qwen3-TTS voices and Stable Audio ambience are fine to ship with credits. Every voice in the game is synthetic; no real person's recording is used.",
-  "Three things block selling the game, though a free release is fine for them: the opening theme and the night loop are YuE2 music (the model is CC BY-NC 4.0, and whether that reaches the music is unsettled); the five Photos collectibles and some scenery come from One Obsession, whose Civitai page doesn't allow selling images; and 36 short voice clips were made with edge-tts, an unofficial Microsoft endpoint with no licence at all.",
-  "The edge-tts clips are a risk even for a free release, so I'd re-voice them with the Qwen3 clones either way (the 36 files are listed in the audit, item 2). They're mostly greetings and short commands from the announcer, Aoi, Emi, the guard, Kenji, Kuroda, Mio, Mori, Sota and Yui.",
+  "Two things block selling the game, though a free release is fine for them: the opening theme and the night loop are YuE2 music (the model is CC BY-NC 4.0, and whether that reaches the music is unsettled), and the five Photos collectibles and some scenery come from One Obsession, whose Civitai page doesn't allow selling images.",
+  "The audit also found 36 old clips made with edge-tts, an unofficial Microsoft service with no licence. The game no longer plays them; they were retired today and the release leaves them out, so nothing to decide there.",
   "Still unclear: the MiniMax-derived voice references (Emi, the announcer), Lyria's output terms, and about 121 older clips whose engine wasn't recorded."
  ],
  "question": "Will the desktop release be free or paid, and which fixes should I start now?",
@@ -21,11 +21,6 @@
    "id": "paid",
    "label": "paid",
    "note": "Make it sellable: replace the opening theme and night loop with Lyria, regenerate the Photos and scenery with RDBT, settle the unclear items."
-  },
-  {
-   "id": "revoice-edge",
-   "label": "revoice-edge",
-   "note": "Re-voice the 36 edge-tts clips with the Qwen3 clones now (recommended either way). You'd hear the new clips in a Review item before they ship."
   },
   {
    "id": "remake-minimax",
