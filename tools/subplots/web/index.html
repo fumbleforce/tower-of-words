@@ -62,8 +62,8 @@
 <div id="pop" class="pop" hidden></div>
 <dialog id="previewDialog" class="preview-dialog" aria-label="Scene preview"></dialog>
 <dialog id="composeDialog" class="compose-dialog" aria-label="Compose a new picture">
-  <div class="compose-head"><h2>Compose a new picture</h2><span id="imageStatus" class="quiet"></span><button id="closeCompose">Done</button></div>
-  <div class="compose-body"><div id="composition"></div><div id="renders"></div></div>
+  <div class="compose-head"><h2>Compose a new picture <span id="composeFor" class="compose-for"></span></h2><span id="imageStatus" class="quiet"></span><button id="closeCompose">Done</button></div>
+  <div class="compose-body"><div id="composition" class="compose-col"></div><div id="composePreview" class="compose-col compose-stage"></div><div id="renders" class="compose-col compose-library"></div></div>
 </dialog>
 <script type="module" src="app.js"></script>
 </body>

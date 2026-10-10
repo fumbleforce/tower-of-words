@@ -126,4 +126,14 @@ class LocalRecipes(unittest.TestCase):
         self.assertFalse((audio/'line.mp3').exists());self.assertEqual(json.loads((audio/'index.json').read_text()),[])
         self.assertEqual(len(result['warnings']),1)
 
+class PictureRounds(unittest.TestCase):
+    def test_round_found_by_an_identical_copy(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);rewards=root/'island/private/rewards';live=root/'island/private/game/encounters'
+            (rewards/'peeks/bench-2/raw').mkdir(parents=True);(rewards/'peeks/other-1').mkdir(parents=True);live.mkdir(parents=True)
+            (live/'bench-2.webp').write_bytes(b'picture');(rewards/'peeks/bench-2/raw/r1-1234.webp').write_bytes(b'picture')
+            (rewards/'peeks/other-1/r1.webp').write_bytes(b'pictuRe')  # same size, other picture
+            data={'images':[{'available':True,'url':'/island/private/game/encounters/bench-2.webp'},{'available':False,'url':'/island/private/game/x.webp'}]}
+            self.assertEqual(local.picture_rounds(data,root,rewards),['island/private/rewards/peeks/bench-2'])
+
 if __name__=='__main__':unittest.main()

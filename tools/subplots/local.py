@@ -25,6 +25,36 @@ def locate_images(data,root):
                 break
     return data
 
+def picture_rounds(data, root, rewards):
+    """The round folders the scene's live pictures came from: the folder under the rewards area that holds a
+    byte-identical copy of each picture (live.mjs promote copies a round's file). Size first, then a hash, so only
+    same-sized files are read. The owner's own folder is outside the rewards area and never looked at."""
+    wanted = {}
+    for image in data.get('images', []):
+        if not image.get('available') or not image.get('url'):
+            continue
+        path = (root / image['url'].lstrip('/')).resolve()
+        if path.is_file() and not path.is_relative_to(rewards):
+            wanted.setdefault(path.stat().st_size, set()).add(hashlib.sha256(path.read_bytes()).hexdigest())
+    rounds = set()
+    if not wanted or not rewards.is_dir():
+        return []
+    for folder, dirs, files in os.walk(rewards):
+        dirs[:] = [d for d in dirs if d not in ('tools', 'docs', 'node_modules') and not d.startswith('.')]
+        for name in files:
+            if not name.endswith(('.webp', '.png')):
+                continue
+            file = Path(folder) / name
+            try:
+                size = file.stat().st_size
+            except OSError:
+                continue
+            if size in wanted and hashlib.sha256(file.read_bytes()).hexdigest() in wanted[size]:
+                parts = file.relative_to(rewards).parts
+                if len(parts) >= 3:
+                    rounds.add(str((rewards / parts[0] / parts[1]).relative_to(root)))
+    return sorted(rounds)
+
 def invalidate_voice(config, selected, backups, root, recovery):
     """Retire stale takes after dialogue changes; never play old speech over new text."""
     manifest=selected.get('voiceManifest')
@@ -85,6 +115,11 @@ def run(config_path, request):
         return data
     if action == 'read':
         return read()
+    if action == 'pictures':
+        data = read()
+        rewards = Path(config.get('rewards') or Path(config_path).resolve().parent.parent).resolve()
+        return {'rounds': picture_rounds(data, root, rewards), 'scene': data.get('scene', ''),
+                'files': [i.get('file', '') for i in data.get('images', [])], 'metadata': data.get('metadata', {})}
     if action == 'history':
         version=request.get('version','')
         if not version.endswith('.json') or '/' in version or '\\' in version:

@@ -72,6 +72,15 @@ const privateParts = {
 const privateRows = [privateRow, ...Object.values(privateParts).map(({ id, node, title, count }) => ({ ...privateRow, id, node, title, count }))];
 
 const wait = ms => new Promise(r => setTimeout(r, ms));
+// image generator presets in realistic numbers, so the full-screen composer is checked with a full cast
+const named = (n, prefix, data = i => ({})) => Array.from({ length: n }, (_, i) => ({ id: `${prefix}${i}`, v: 1, data: { name: `${prefix[0].toUpperCase()}${prefix.slice(1)} ${i + 1}`, ...data(i) } }));
+const presets = {
+  character: named(20, 'person', i => ({ portrait: 'art/fixture.webp', outfit: i < 2 ? 'a coat' : '' })), camera: named(12, 'camera', () => ({ prompt: 'camera' })),
+  negative: named(8, 'avoid', i => ({ text: 'x', default: i < 2 })), model: named(2, 'model', () => ({ file: 'fixture.safetensors' })),
+  style: named(3, 'style'), framing: named(3, 'frame', () => ({ w: 896, h: 1152 })), scene: named(4, 'direction', () => ({ text: 'Reading' })),
+};
+// the runs the server matches to a scene (api.py scene_runs), as the editor asks for them
+const sceneRuns = { runs: [{ run_id: 'old', at: '2026-10-09T10:00:00', round: 'island/private/rewards/peeks/bath-2', positive: 'steam', characters: ['mio'], renders: [{ id: 'r-41', n: 41, file: 'x.png', thumb: 'x.png' }] }] };
 // what a part of the page shows, with the words in its text boxes
 const textOf = loc => loc.evaluate(el => el.innerText + '\n' + [...el.querySelectorAll('textarea, input')].map(x => x.value).join('\n'));
 try {
@@ -109,9 +118,11 @@ try {
       await page.route('**/api/subplots/image/**', r => {
         const u = new URL(r.request().url());
         if (u.pathname.endsWith('/history')) return r.fulfill({ json: [{ at: '2026-10-10T10:00:00', positive: 'steam', renders: [{ id: 'r-41', n: 41, file: 'x.png', thumb: 'x.png' }] }] });
-        if (u.pathname.includes('/thumb/') || u.pathname.includes('/out/')) return r.fulfill({ path: portraitFile });
-        return r.fulfill({ json: {} });
+        if (u.pathname.includes('/thumb/') || u.pathname.includes('/out/') || u.pathname.includes('/repo/')) return r.fulfill({ path: portraitFile });
+        if (u.pathname.endsWith('/presets')) return r.fulfill({ json: presets });
+        return r.fulfill({ json: [] });
       });
+      await page.route('**/api/subplots/pictures?*', r => r.fulfill({ json: sceneRuns }));
       await page.goto(base + '/tools/subplots/web/');
 
       // open from the list; labels say what goes where
@@ -233,6 +244,8 @@ try {
       await page.locator('.path-bar [data-arm=else]').click();
       await page.locator('.path-section .beat [data-field=main]').fill('You walk on, quickly.');
       await page.locator('.beat.k-picture .change').click();
+      // "This scene" lists the scene's own pictures, from its rounds (Jørgen: "No pictures generated for this scene yet")
+      assert.equal(await page.locator('#tabPicture [data-scene]').getAttribute('aria-pressed'), 'true');
       await page.locator('.history-grid button').first().click();
       await page.locator('.beat.k-picture.selected img').waitFor();
       assert.match(await page.locator('.pic-facts').innerText(), /New pick #41/);
@@ -241,6 +254,23 @@ try {
       assert.ok(Math.abs(fit.h / fit.w - fit.ratio) < 0.02, `picture keeps its shape ${JSON.stringify(fit)}`);
       assert.ok(fit.w > fit.box - 30, `picture fills the column ${JSON.stringify(fit)}`);
       await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-private-${width}.png`) });
+      // the composer fills the screen; its controls and settings fit without scrolling, at 1366 x 768 too
+      if (width < 2000) await page.setViewportSize({ width, height: 768 });
+      await page.locator('#tabPicture [data-compose]').click();
+      await page.locator('#composePreview #generate').waitFor();
+      await page.locator('#renders .render-card').first().waitFor();
+      const cols = await page.evaluate(() => ({
+        dialog: [globalThis.document.getElementById('composeDialog').offsetWidth, globalThis.document.getElementById('composeDialog').offsetHeight, globalThis.innerWidth, globalThis.innerHeight],
+        cols: ['composition', 'composePreview'].map(id => { const el = globalThis.document.getElementById(id); return [id, el.clientHeight, el.scrollHeight]; }),
+      }));
+      assert.deepEqual(cols.dialog.slice(0, 2), cols.dialog.slice(2), 'the composer fills the screen');
+      for (const [id, client, scroll] of cols.cols) assert.ok(scroll <= client + 2, `${id} fits without scrolling: ${client} < ${scroll}`);
+      for (const name of ['model', 'seed', 'steps', 'cfg', 'width', 'height', 'referenceStrength', 'faceStrength']) assert.ok(await page.locator(`[data-compose=${name}]`).isVisible(), name + ' in view');
+      assert.equal(await page.locator('[data-library=scene]').getAttribute('aria-pressed'), 'true');
+      assert.equal(await page.locator('#renders .render-card').count(), 1);
+      await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-${width}.png`) });
+      await page.locator('#closeCompose').click();
+      if (width < 2000) await page.setViewportSize({ width, height: 860 });
       await page.locator('#save').click();
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
       assert.deepEqual(privateSaves.sort(), ['local:fixture:bath:leave', 'local:fixture:bath:start'], 'only the edited parts are saved');
@@ -249,7 +279,7 @@ try {
       assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth > globalThis.innerWidth), false);
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(`PASS ${width}: open, labels, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, full-height pictures`);
+      console.log(`PASS ${width}: open, labels, list stays put, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits`);
     }
   }, { timeoutMs: 150000, gpuWaitMs: 60000 });
 } finally {
