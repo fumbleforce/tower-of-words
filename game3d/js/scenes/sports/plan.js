@@ -105,12 +105,17 @@ export const LAMPS = [
 ];
 export const STREET_LAMPS = E.STREET_LAMPS.map(fromPlaza).filter(([, z]) => z < BACK[2] + 1);
 export const BAYS = [64, 71].map((x) => [x - 1.1, x + 1.1, COURTS_WALK[3], COURTS_WALK[3] + 1.4]); // a bench in each, facing north
+export const BAY_WALKS = BAYS.map(rect); // walked into, up to the bench (sports/ground.js)
+const BAY_BENCHES = BAYS.map(([x0, x1, , z1]) => [(x0 + x1) / 2 - 0.85, (x0 + x1) / 2 + 0.85, z1 - 0.75, z1]);
 export const SIGNS = {
   corner: [NS[1] - 0.3, LANE[2] - 0.45], // the lane's corner with the north street, pointing west to the gym and pool
   courts: [COURTS_WALK[0] + 0.7, COURTS_WALK[3] + 0.45], // the courts walk's start, pointing east to the onsen
 };
 const post = ([x, z], r = 0.16) => [x - r, x + r, z - r, z + r];
-export const FURNITURE = [...STREET_LAMPS, ...O.LINK_LAMPS, O.SIGNS.corner].map((p) => post(p)).map(rect);
+export const FURNITURE = [
+  ...[...STREET_LAMPS, ...O.LINK_LAMPS, O.SIGNS.corner].map((p) => post(p)),
+  ...BAY_BENCHES,
+].map(rect);
 
 // the shut doors: the gym's on its south face, the pool pavilion's on its west face (local), and where Eric stands to
 // try each (step)

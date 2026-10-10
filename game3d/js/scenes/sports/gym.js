@@ -16,6 +16,7 @@ import { BLOCK } from '../outdoor/block.js';
 import * as P from './plan.js';
 import { gymShell, sportsGlass } from './gym-facade.js';
 import { arrivalGardens } from './arrival-gardens.js';
+import { BED_FLUSH } from '../outdoor/walk-edges.js';
 
 const C = {
   wall: '#cfccc4',
@@ -202,7 +203,7 @@ function entrance(p, glow, signs, lights) {
     [X0 + 0.3, ax0 - 0.15],
     [ax1 + 0.15, X1 - 0.3],
   ]) {
-    bed(p, [b0, b1, Z1 + 0.15, P.LANE[2] - 0.12], { y: 0.06 });
+    bed(p, [b0, b1, Z1 + 0.15, P.LANE[2] - 0.16], { y: BED_FLUSH }); // flush, behind the lane's kerb
     for (let x = b0 + 0.45, i = 0; x < b1 - 0.3; x += 0.75, i++)
       mound(
         p,
@@ -211,7 +212,7 @@ function entrance(p, glow, signs, lights) {
         0.3 + (i % 3) * 0.05,
         [LEAF.deep, LEAF.mid, LEAF.fresh][i % 3],
         {
-          y: 0.06,
+          y: BED_FLUSH,
         },
       );
   }
