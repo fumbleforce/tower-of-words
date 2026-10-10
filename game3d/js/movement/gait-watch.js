@@ -96,9 +96,10 @@ export function startGaitCheck(game) {
         track.delete(r);
         continue;
       }
-      // walkPerson's callback moves and poses procedural rigs within main.step.
+      // walkPerson callbacks and ambient crowd stride() pose procedural rigs within main.step.
       // setGait schedules a separate pose update; walkRig and Meshy keep the drawn clock.
-      const proceduralStep = typeof r._walk === 'function' && r.knees && !r.selfGait && !r.meshy && !r.setGait;
+      const proceduralStep =
+        (typeof r._walk === 'function' || r.ambient) && r.knees && !r.selfGait && !r.meshy && !r.setGait;
       const cadence = proceduralStep || (r === game.player && !r.scripted && !r._walk) ? 'step' : 'drawn';
       if (cadence !== clock) {
         seen.add(r);

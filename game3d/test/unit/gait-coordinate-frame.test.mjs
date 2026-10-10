@@ -242,6 +242,30 @@ test('procedural step sampling still detects movement that outruns the recorded 
   assert.ok(f.report.episodes.some((e) => e.kind === 'slide' && e.windows >= 4));
 });
 
+test('procedural ambient crowd measures completed steps even with a boolean walking flag', () => {
+  const f = replayReader({ ambient: true, _walk: true });
+  assert.ok(f.report.windows >= 8);
+  assert.deepEqual(f.report.episodes, []);
+  assert.ok(f.report.people.reader.ratio.every((r) => r > 1 && r < 1.3));
+});
+
+test('ambient procedural sampling still catches real sliding and frozen feet', () => {
+  const tooFast = replayReader({ ambient: true, _walk: true }, 4);
+  assert.ok(tooFast.report.episodes.some((e) => e.kind === 'slide' && e.windows >= 4));
+  const f = fixture();
+  Object.assign(f.game.player, { ambient: true, _walk: true });
+  for (let i = 0; i < 240; i++) f.sample(i / 60, 1, 0.1);
+  assert.ok(f.report.episodes.some((e) => e.kind === 'slide' && e.windows >= 4));
+});
+
+test('ambient independently animated rigs retain the drawn clock', () => {
+  for (const other of [{ meshy: true }, { setGait() {} }, { selfGait: true }, { knees: null }]) {
+    const f = replayReader({ ambient: true, _walk: true, ...other });
+    assert.equal(f.report.people.reader.windows, 8);
+    assert.ok(f.report.episodes.some((e) => e.kind === 'slide' && e.windows === 3));
+  }
+});
+
 test('independently posed and unsupported callback rigs retain their drawn-frame cadence', () => {
   for (const movement of [
     { _walk() {}, meshy: true },
