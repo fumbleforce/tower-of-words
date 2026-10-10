@@ -7,7 +7,7 @@ Images
 Character portraits, expressions and backgrounds were made with AI image tools and then edited by the team.
 Images made with RDBT [Anima] by reakaakasky (Civitai). Built on Anima by CircleStone Labs, a derivative of NVIDIA Cosmos-Predict2.
 Image control patches: Anima-LLLite by kohya-ss. Upscaling: Real-ESRGAN (BSD-3-Clause). Cut-outs: anime-segmentation by SkyTNT (Apache-2.0).
-[CHECK] Scenery and the Photos collectibles: One Obsession by maxfeifei8 (Civitai).
+[CHECK] Four of the Photos collectibles (cat, cherry, pigeons, fireworks): One Obsession by maxfeifei8 (Civitai).
 One travel print was made with OpenAI image generation.
 
 3D characters and animation
@@ -18,7 +18,7 @@ World pieces, rooms, props, extra characters and many gestures are built in code
 Voices
 Every voice is synthetic. No real person was recorded or imitated.
 Voices were designed from written descriptions and produced with Qwen3-TTS (Alibaba Cloud Qwen team, Apache-2.0) and Irodori-TTS by Aratako (MIT).
-[CHECK] A few station and building announcement voices were first made with MiniMax Speech.
+[CHECK] Emi's voice and two announcer clips come from voice references first made with MiniMax Speech.
 
 Music and sound
 Background music made with Google Lyria. Audio carries a SynthID watermark. [CHECK]
