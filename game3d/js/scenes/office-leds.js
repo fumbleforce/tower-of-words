@@ -38,3 +38,12 @@ export function ledLights(root) {
     },
   };
 }
+
+// The alarm is one more status light on a rack's front (top, left): dark red until the alarm goes off.
+export const ALARM_OFF = '#4a2626',
+  ALARM_ON = '#ff3b2e';
+export function alarmLight() {
+  const a = new THREE.Mesh(new THREE.PlaneGeometry(0.04, 0.03), new THREE.MeshBasicMaterial({ color: ALARM_OFF }));
+  a.position.set(-0.15, 1.24, 0.36);
+  return a;
+}
