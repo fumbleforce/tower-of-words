@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { userView } from './camera/user-view.js';
 
 // Fixed high three-quarter view like the references. On a wide screen the whole place fits; on a phone the
 // camera stays closer and follows the player, clamped to the place. closeOn() eases in on a spot for a
@@ -203,15 +204,14 @@ export class RoomCam {
     this.pull = 1; // pullBack() factor while a prompt waits (prompt-view.js)
     this.shot = null; // the shot before the pull
   }
+  // the place's direction plus the player's own turn (camera/user-view.js; zero while a story camera has the shot)
   get dir() {
-    return new THREE.Vector3(
-      Math.sin(this.yaw) * Math.cos(this.elev),
-      Math.sin(this.elev),
-      Math.cos(this.yaw) * Math.cos(this.elev),
-    );
+    const yaw = this.yaw + userView.dyaw,
+      elev = THREE.MathUtils.clamp(this.elev + userView.dpitch, 0.2, 1.45);
+    return new THREE.Vector3(Math.sin(yaw) * Math.cos(elev), Math.sin(elev), Math.cos(yaw) * Math.cos(elev));
   }
   place() {
-    const d = this.dist * (1 - 0.05 * this.nudgeK);
+    const d = this.dist * (1 - 0.05 * this.nudgeK) * userView.f;
     this.camera.position.copy(this.target).addScaledVector(this.dir, d);
     this.camera.lookAt(this.target);
     this.camera.updateMatrixWorld();
