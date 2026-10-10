@@ -28,6 +28,7 @@ Every surface in the shipped game files (game3d/ without tests, tools, shots, do
 | Settings panel Private section ("Adult scenes on this device") | js/ui/settings-view.js | gated: five sections |
 | Private pins: heart icons, neutral tooltip unless private mode | js/gameplay/pin-kinds.js (`isOptionalPin`, pinTip), js/ui/pin-tip.js (`optionalOn`, tipOf), js/engine.js (setIcon) | gated: never a private pin |
 | A reply's heart icon in a choice | js/ui/pin-tip.js choiceIcon, used by js/runner.js | gated: draws nothing |
+| Interact options a plugin adds with a heart | js/gameplay/interact-menu.js extraOptions (via `optionalOn`) | gated: rows with an icon are left out |
 | Day-5 staging state named `private` | js/places/day5/office.js, story/day5/reveal.js | renamed `closedDoor` (all builds) |
 | Wording in a check message ("reward") | story/days3-5-finds-check.mjs | reworded (all builds) |
 | Clip resolver hook for plugin audio | js/audio/core.js setClipResolver | neutral name, kept; nothing calls it |
