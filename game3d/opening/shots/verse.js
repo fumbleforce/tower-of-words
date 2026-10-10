@@ -388,7 +388,7 @@ export const VERSE = [
     // Build: the tower climbs into the sun; Eric looks up; Mio looks up; white.
     id: 'tower',
     t: [bar(22), beat(89)],
-    in: { type: 'flash', d: 0.3, at: 0.35 }, // out of the station exit's light (the gate shot)
+    in: { type: 'flash', d: 0.14, at: 0.4 }, // out of the station exit's light (the gate shot); short, so the one-beat tower reads
     scene3d(S, lt) {
       S.setTrain(-500);
       const hq = S.anchors.hq;

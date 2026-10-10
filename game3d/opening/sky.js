@@ -51,10 +51,13 @@ vec3 skyBase(vec3 d, bool disc) {
   return c * uSkyGain;
 }
 float h21(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+// the cell index wraps every 256 cells before it is hashed: far out (the bay runs to x 1000 and the finer octaves
+// multiply that) h21's fract(p * 456.21) ran out of float precision and the sea and clouds broke into square patches
+float hw(vec2 i) { return h21(mod(i, 256.0)); }
 float vnoise(vec2 p) {
   vec2 i = floor(p), f = fract(p);
   vec2 u = f * f * (3.0 - 2.0 * f);
-  return mix(mix(h21(i), h21(i + vec2(1, 0)), u.x), mix(h21(i + vec2(0, 1)), h21(i + vec2(1, 1)), u.x), u.y);
+  return mix(mix(hw(i), hw(i + vec2(1, 0)), u.x), mix(hw(i + vec2(0, 1)), hw(i + vec2(1, 1)), u.x), u.y);
 }
 float fbm(vec2 p) {
   float s = 0.0, a = 0.5;

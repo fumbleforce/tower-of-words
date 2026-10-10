@@ -33,6 +33,20 @@ function paintLogo(g, t, o) {
   g.restore();
   let x = cx - total / 2;
   const shade = { color: 'rgba(14,18,28,0.35)', dx: 0, dy: size * 0.05 };
+  // a soft navy halo behind the word, so the white letters hold on a pale morning sky
+  const ha = clamp(t / 0.4) * (1 - out);
+  if (ha > 0) {
+    g.save();
+    g.translate(cx, cy - size * 0.2);
+    g.scale(1, (size * 1.5) / (total * 0.62));
+    const gr = g.createRadialGradient(0, 0, 0, 0, 0, total * 0.62);
+    gr.addColorStop(0, `rgba(12,28,60,${0.42 * ha})`);
+    gr.addColorStop(0.55, `rgba(12,28,60,${0.22 * ha})`);
+    gr.addColorStop(1, 'rgba(12,28,60,0)');
+    g.fillStyle = gr;
+    g.fillRect(-total, -total, total * 2, total * 2);
+    g.restore();
+  }
   // the letters land one after another, each from a little above and larger
   [...WORD].forEach((c, i) => {
     const lt = t - i * 0.045;
@@ -44,7 +58,7 @@ function paintLogo(g, t, o) {
       g.save();
       g.translate(x + widths[i] / 2, y - size * 0.36);
       g.scale(s, s);
-      text(g, c, 0, size * 0.36, { font: '"Zen Kaku Gothic New", sans-serif', weight: 700, size, align: 'center', color: '#f6f8fb', alpha: clamp(lt / 0.06) * (1 - out), shadow: shade });
+      text(g, c, 0, size * 0.36, { font: '"Zen Kaku Gothic New", sans-serif', weight: 700, size, align: 'center', color: '#f6f8fb', stroke: 'rgba(16,32,66,0.6)', strokeW: size * 0.05, alpha: clamp(lt / 0.06) * (1 - out), shadow: shade });
       g.restore();
     }
     x += widths[i] + track;
