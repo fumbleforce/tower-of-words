@@ -22,10 +22,9 @@ import { benchGeometries } from './plant-models.js';
 import { lightUp } from '../../kit/light/glow.js';
 
 export const STEEL = { dark: '#3e434d', mid: '#5b616b', pale: '#9aa0aa' };
-// what the steel is (kit/materials/metal.js): painted posts, lamp heads, sign boards and bin housings; bare steel
-// rails, hoops and caps. Both reflect the place's sky; each is one mesh per place, like any other set.
-export const PAINTED = { opts: { finish: 'painted' } },
-  BARE = { opts: { finish: 'brushed' } };
+// the street's steel is painted (kit/materials/metal.js): posts, lamp heads, sign boards, bin housings, rails, rack
+// hoops and caps reflect the place's sky. All of it, shadow or not, is one set in each Parts collector it is in.
+export const PAINTED = { opts: { finish: 'painted' } };
 const WOOD = '#9b958c',
   STONE = '#8b8d90',
   IRON = '#3a4441', // the park bench's cast-iron ends
@@ -177,7 +176,7 @@ export function bins(p, x, z, facing = 0) {
 
 export function bollard(p, x, z) {
   p.geo(STONE, new THREE.CylinderGeometry(0.08, 0.09, 0.5, 8).translate(x, 0.25, z));
-  p.geo(STEEL.pale, new THREE.CylinderGeometry(0.085, 0.085, 0.05, 8).translate(x, 0.44, z), BARE);
+  p.geo(STEEL.pale, new THREE.CylinderGeometry(0.085, 0.085, 0.05, 8).translate(x, 0.44, z), PAINTED);
 }
 
 // a finger sign: boards [{ text, sub, dir }] one above another, pointing east (dir 1) or west (-1); `turn` spins
@@ -251,7 +250,7 @@ export function rod(p, color, a, b, r = 0.02, { cast = false, opts = null } = {}
 // a handrail along points [x, z, floorY]: steel posts at every point and every 1.3 between, from the floor up; a
 // round rail 0.85 over the floor and a lower one at 0.62, as on every Japanese ramp
 export function handrail(p, pts, { color = STEEL.mid } = {}) {
-  const post = (x, z, y) => p.box(STEEL.mid, 0.045, 0.85, 0.045, x, y, z, { cast: false, ...BARE });
+  const post = (x, z, y) => p.box(STEEL.mid, 0.045, 0.85, 0.045, x, y, z, PAINTED);
   for (let i = 0; i + 1 < pts.length; i++) {
     const [ax, az, ay] = pts[i],
       [bx, bz, by] = pts[i + 1];
@@ -259,7 +258,7 @@ export function handrail(p, pts, { color = STEEL.mid } = {}) {
       [0.85, 0.04],
       [0.62, 0.03],
     ])
-      rod(p, color, [ax, ay + hh, az], [bx, by + hh, bz], r, BARE);
+      rod(p, color, [ax, ay + hh, az], [bx, by + hh, bz], r, { cast: true, ...PAINTED });
     const n = Math.max(1, Math.ceil(Math.hypot(bx - ax, bz - az) / 1.3));
     for (let k = 0; k < n; k++) {
       const u = k / n;
@@ -279,12 +278,12 @@ export function bikeRack(p, a, b, { n = 3 } = {}) {
   const L = Math.hypot(b[0] - a[0], b[1] - a[1]),
     [mx, mz] = at(0.5),
     out = [];
-  p.box(STEEL.dark, alongX ? L : 0.06, 0.03, alongX ? 0.06 : L, mx, 0, mz, { cast: false, ...PAINTED });
+  p.box(STEEL.dark, alongX ? L : 0.06, 0.03, alongX ? 0.06 : L, mx, 0, mz, PAINTED);
   for (let i = 0; i < n; i++) {
     const [x, z] = at((i + 0.25) / n);
     for (const d of [-0.3, 0.3])
-      p.box(STEEL.pale, 0.04, 0.55, 0.04, x + (alongX ? 0 : d), 0, z + (alongX ? d : 0), { cast: false, ...BARE });
-    p.box(STEEL.pale, alongX ? 0.04 : 0.64, 0.04, alongX ? 0.64 : 0.04, x, 0.53, z, { cast: false, ...BARE });
+      p.box(STEEL.pale, 0.04, 0.55, 0.04, x + (alongX ? 0 : d), 0, z + (alongX ? d : 0), PAINTED);
+    p.box(STEEL.pale, alongX ? 0.04 : 0.64, 0.04, alongX ? 0.64 : 0.04, x, 0.53, z, PAINTED);
     out.push(at((i + 0.62) / n));
   }
   return out;
