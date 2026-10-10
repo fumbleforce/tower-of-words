@@ -293,6 +293,14 @@ export class Markers {
           m.el.setAttribute('aria-label', tipOf(m).text);
         }
       }
+      if (m.verbIf) {
+        // the verb follows the story (pin-kinds.js verbIf): the tag and the label say the current one
+        const t = tipOf(m);
+        if (m.el.querySelector('.vb').textContent !== t.verb) {
+          m.el.querySelector('.vb').textContent = t.verb;
+          m.el.setAttribute('aria-label', t.text);
+        }
+      }
       if (m.icon) setIcon(m);
       m.el.classList.toggle('near', near === m);
       const isGoal = !!(m.goal && m.goal());
