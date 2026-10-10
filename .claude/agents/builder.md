@@ -38,3 +38,5 @@ In your own git worktree, never in the main checkout: this agent type starts in 
 GUIDE: Definition of done. For you that also means the day test passes at both sizes if game3d/ changed, the docs/game/ file is updated in the same commit when what the game is changed, and tools/land.sh has landed your branch on main.
 
 - **Clean up before you report:** stop every background command and waiting loop you started (no `until`/`while pgrep` loops left behind), and release any GPU lock you hold. A loop left running keeps you listed as working and clutters the machine (Jørgen 2026-10-10: "you should be cleaning up as you go").
+
+- **Live files (2026-10-10, #419):** a new private plugin file or live picture goes through `node tools/assets/live.mjs promote|register`; `node tools/assets/live.mjs check --local` must pass before you report.

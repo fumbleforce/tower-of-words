@@ -52,3 +52,5 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 - Report in a few plain lines, without describing image contents.
 
 - **Clean up before you report:** stop every background command and waiting loop you started (no `until`/`while pgrep` loops left behind), and release any GPU lock you hold. A loop left running keeps you listed as working and clutters the machine (Jørgen 2026-10-10: "you should be cleaning up as you go").
+
+- **Live files (2026-10-10, #419):** a new private plugin file or live picture goes through `node tools/assets/live.mjs promote|register`; `node tools/assets/live.mjs check --local` must pass before you report.
