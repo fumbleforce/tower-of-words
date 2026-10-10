@@ -63,7 +63,11 @@ function takeLock() {
 const dropLock = () => { if (owner() === me) fs.rmSync(LOCK, { recursive: true, force: true }); };
 
 // ---------------------------------------------------------------- join, then run batches or wait for ours
-const joined = join(paths, { branch, wt, keep: flags.includes('--keep'), priority: flags.includes('--priority') });
+// An agent's worktree (.claude/worktrees/agent-*) stays after landing: the agent's shell lives in it, and removing it
+// leaves that shell dead before the agent can report. The coordinator removes it when the agent hands back.
+const inside = /[\/]\.claude[\/]worktrees[\/]agent-/.test(wt || '');
+if (inside && !flags.includes('--keep')) say(`${wt} is an agent's worktree, so it stays after landing (as with --keep)`);
+const joined = join(paths, { branch, wt, keep: flags.includes('--keep') || inside, priority: flags.includes('--priority') });
 if (joined.busy) refuse(`${branch} is already in the land queue (land.sh pid ${joined.busy.pid}); wait for that one`);
 const id = joined.entry.id;
 let printed = 0;
