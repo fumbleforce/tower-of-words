@@ -36,7 +36,7 @@ export default {
 
   nodes: {
     lobby_in: [
-      { do: 'goal', text: 'Say good morning to the guard.' },
+      { do: 'goal', text: 'Say good morning to the guard in Japanese.' },
       { say: 'guard', overheard: true, emo: 'polite', text: '{ohayo}。' },
       'eric: Hi. Um... good morning?',
       { choice: [

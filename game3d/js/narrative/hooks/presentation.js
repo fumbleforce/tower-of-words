@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { sfx, voice, setFace, faceForEmote } from '../../ui.js';
+import { sfx, voice, setFace, faceForEmote, keyLabel } from '../../ui.js';
 import { goalAt } from './goal-at.js';
 import { installPromptView } from './prompt-view.js';
 const EMOTE_SVG = {
@@ -24,9 +24,19 @@ export function installPresentationHooks(game, { rigOf, isPlayer, posOf, canvas,
     pinAt(text ? at : null);
     return ui.goal(text);
   };
+  // what: 'say' is the first Say tip; 'say-here' says how to say a word to the goal, worded for the input in use
+  // (Q on desktop, the person and Say on the phone), and stays like any hint until the goal moves on
   H.hint = ({ text, what }) => {
     if (what === 'say') ui.introSay(text);
-    else ui.hint(text, 5000);
+    else if (what === 'say-here') {
+      const touch = document.body.classList.contains('phone') || matchMedia('(pointer: coarse)').matches;
+      const key = keyLabel(globalThis.__settings?.keySay || 'KeyQ');
+      ui.hint(
+        touch
+          ? 'Tap him, then <b>Say a word</b>.'
+          : `Stand by him and press <span class="k">${key}</span> to say a word.`,
+      );
+    } else ui.hint(text, 5000);
   };
   H.wait = ({ ms }) => game.wait(ms);
   H.hold = ({ who }) => {

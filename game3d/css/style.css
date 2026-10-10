@@ -124,11 +124,6 @@ ruby rt { font-size: .5em; color: var(--gl); font-weight: 500; }
 #talk .chips.menu .chip .c { flex: 1; }
 #talk .chips.menu .chip .tag { margin-left: 12px; padding: 2px 8px; border-radius: 999px; background: rgba(111, 208, 198, .16); color: var(--accent); font-size: 12px; font-weight: 700; }
 #talk .chips.menu .chip.leave { color: var(--ink-dim); }
-/* a private scene's option (private mode only): the pin's heart, purple for soft, red for hard (css/marks.css) */
-#talk .chips.menu .chip .heart-mark { display: inline-grid; place-items: center; width: 20px; height: 20px; margin-right: 8px; vertical-align: -3px; }
-#talk .chips.menu .chip .heart-mark svg { width: 20px; height: 20px; }
-#talk .chips.menu .chip .heart-mark.heart-soft svg { fill: #c9a0ff; }
-#talk .chips.menu .chip .heart-mark.heart-hard svg { fill: #ff5468; }
 #talk .chips .chip:focus { outline: none; }
 #talk .chips .chip:focus-visible, #talk .chips.menu .chip:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
 

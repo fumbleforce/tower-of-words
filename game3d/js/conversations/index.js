@@ -45,8 +45,10 @@ export function withConversations(story) {
 }
 export function installConversations(game) {
   installSenderHook(game, flags);
+  // no Chat with Mio on the monorail, nor with the guard before Eric has said good morning (Jørgen, 2026-10-10: "do
+  // also remove chat option from mio on the monorail"; at the guard, "remove the chat option also", #394)
   game.topicFor = (who) =>
-    who === 'mio' && game.place?.name === 'train'
+    (who === 'mio' && game.place?.name === 'train') || (who === 'guard' && !flags.greeted_guard)
       ? null
       : topicFor(who, conversationMemory, known, game.sim?.met.has(who));
 }
