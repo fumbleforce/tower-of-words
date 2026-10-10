@@ -78,17 +78,33 @@ async function loadFonts() {
 
 let stage = null,
   shots = [];
+// the loading screen (index.html #load): a bar and a line saying what is being built. Building the island takes a
+// while and holds the page, so every step lets it paint first
+const loadUI = { box: document.getElementById('load'), bar: document.getElementById('load-bar'), say: document.getElementById('load-say') };
+const paint = () => new Promise((r) => requestAnimationFrame(() => setTimeout(r, 0)));
+function progress(f, label) {
+  if (!loadUI.box) return;
+  loadUI.bar.style.transform = `scaleX(${clamp(f, 0, 1).toFixed(3)})`;
+  if (label) loadUI.say.textContent = label;
+}
 const ready = (async () => {
+  progress(0.01, 'Loading the cast');
   await Promise.all([
     loadFonts(),
     loadPortraits(CAST.portraits()),
     loadOptional({ copyroom: 'copyroom.webp', 'win-eric': 'window/eric-window.webp', 'win-mio-phone': 'window/mio-window-phone.webp', 'win-mio-look': 'window/mio-window-look.webp' }),
   ]);
-  stage = await buildStage(renderer);
+  await paint();
+  stage = await buildStage(renderer, (f, label) => progress(0.05 + f * 0.8, label));
+  progress(0.86, 'Seating the passengers');
+  await paint();
   shots = SHOTS.map((s) => ({ ...s }));
   for (const s of shots) await s.setup?.(stage);
+  progress(0.93, 'Warming up');
+  await paint();
   // compile every shader up front so the first play doesn't hitch
   renderer.compile(stage.scene, stage.camera);
+  progress(1, 'Ready');
 })();
 
 // ---------- which shots are live at T ----------
@@ -300,6 +316,7 @@ if (STILL) {
   });
 } else {
   ready.then(() => {
+    document.body.classList.add('loaded');
     ui.start.disabled = false;
     ui.start.classList.add('ready');
     frame(tOffset);

@@ -14524,6 +14524,7 @@
   "game3d/assets/opening/copyroom.webp": {"size": 103752, "sha256": "0e0ba61a3b27bd157da4c8b9dc29a5414a8afd3364a1127fa677c5ff60e4b7af", "type": "image/webp"},
   "game3d/assets/opening/portraits/aoi-neutral.webp": {"size": 218826, "sha256": "e8305072c3af711cd216def35f80999864d81b93ed25141bb197778fd2f34ec7", "type": "image/webp"},
   "game3d/assets/opening/portraits/carina-neutral.webp": {"size": 260348, "sha256": "7934c3166337471464d1b92362ee846eac6a10a2deec9673e755e26fd50cda2b", "type": "image/webp"},
+  "game3d/assets/opening/portraits/carina-surprised.webp": {"size": 193586, "sha256": "a864ce6a55888ca330121535ea84886dc485d0acbd0c3ac55914f1a212692686", "type": "image/webp"},
   "game3d/assets/opening/portraits/emi-neutral.webp": {"size": 159438, "sha256": "d4a8c940bf00d0c648c39e87b03060cea42a315c42a771180c2382824fd7eb1b", "type": "image/webp"},
   "game3d/assets/opening/portraits/eric-neutral.webp": {"size": 210700, "sha256": "c8ea0b77ee4d734c70f3c983ab5e714bba430df2349fb5280c6905da5431c677", "type": "image/webp"},
   "game3d/assets/opening/portraits/eric-surprised.webp": {"size": 211720, "sha256": "9d2e0c74128d889b50dbde1db1f76fd4eabe193553d7dbd83599397c59ce76d0", "type": "image/webp"},

@@ -24,7 +24,9 @@ export function beamY(x) {
   return BEAM_TOP + (ISL_BEAM - BEAM_TOP) * t * t * (3 - 2 * t);
 }
 
-export async function buildStage(renderer) {
+// onProgress(fraction 0..1, label): the loading screen (op.js)
+export async function buildStage(renderer, onProgress = null) {
+  onProgress?.(0, 'Loading the monorail');
   await loadMonorail();
   const scene = new THREE.Scene();
   const uniforms = SKY_UNIFORMS();
@@ -171,7 +173,9 @@ export async function buildStage(renderer) {
   }
 
   // ---------- the island: the game's own (island.js) ----------
-  const isl = await buildIsland(uniforms, { joinX: ISLAND_X, seaY: SEA_Y });
+  onProgress?.(0.08, 'Building the island');
+  const isl = await buildIsland(uniforms, { joinX: ISLAND_X, seaY: SEA_Y, onProgress: (f, label) => onProgress?.(0.08 + f * 0.86, label) });
+  onProgress?.(0.94, 'Finishing the island');
   scene.add(isl.group, isl.ridge);
   if (ANIME_ON) patchAll(train); // the anime look's light on the cars (the places have it from their look, island.js)
 

@@ -208,7 +208,9 @@ function ownGround(m, place, OWN, strict = null) {
   return k;
 }
 
-export async function buildIsland(uniforms, { joinX, seaY }) {
+// what the loading screen calls each place while it is built
+const PLACE_NAMES = { forecourt: 'the station forecourt', plaza: 'the fountain plaza', shotengai: 'the shop street', east_lane: 'the east lane', east_coast: 'the east coast', office_quarter: 'the office quarter', harbour: 'the harbour', works: 'the works', sports: 'the sports ground' };
+export async function buildIsland(uniforms, { joinX, seaY, onProgress = null }) {
   let songT = 0;
   // the game's Blender-built trees, hedges and benches, which the place builders use when they're loaded
   await loadPlantModels({ lighter: false });
@@ -234,6 +236,9 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
   const disc = LAYOUT.PATHS.find((p) => p.id === 'fountain_plaza').circle;
   const OWN = { uOwn: { value: ownTex }, uIsl: { value: new THREE.Matrix4() }, disc: [disc[0], disc[1], disc[2] - 0.05], ...G }; // uIsl: world to island, set below
   for (const [name, build] of PLACES) {
+    // the loading screen: which place, and a moment for the page to paint it (each place builds in one long go)
+    onProgress?.(PLACES.findIndex(([n]) => n === name) / PLACES.length, `Building ${PLACE_NAMES[name] || name}`);
+    await new Promise((r) => setTimeout(r, 0));
     if (DEBUG_STRIP) console.info('opening strip place', name, Math.round(performance.now()));
     let w;
     try {
