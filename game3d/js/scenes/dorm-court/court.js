@@ -13,7 +13,6 @@ import { kerb, kerbRect, lowWall, wallRect } from '../outdoor/edges.js';
 import { laneField, verge } from '../outdoor/lane.js';
 import { keyaki, sakura, maple, cluster, hedge, grass, bed, mound, gravel as rake, LEAF } from '../outdoor/planting.js';
 import { lamps, bench, bins, stoneLantern } from '../outdoor/furniture.js';
-import { monument } from '../forecourt/details.js';
 import * as P from './plan.js';
 
 const { WALK, DOOR_LEG, LINK, GATE, BW, LAUNDRY, SENTO, RETURN_X, RETURN_Z, SHELTER, SOUTH_BED: SB, STREET } = P;
@@ -222,8 +221,7 @@ function garden(p, block) {
   block(G[0], G[1] + 0.05, G[2], G[3]);
 }
 
-// the beds either side of the door leg, kerbed and low so the hall behind stays in view: azaleas and grasses; the
-// 社員寮 stone stands on the paving past the east one, in front of the sento's corner
+// the beds either side of the door leg, kerbed and low so the hall behind stays in view: azaleas and grasses
 function doorBeds(root, p, block) {
   for (const [i, r] of P.DOOR_BEDS.entries()) {
     kerbRect(p, r, { sides: 'swe' });
@@ -234,11 +232,6 @@ function doorBeds(root, p, block) {
     mound(p, cx + 0.2, r[2] + 0.45, 0.22, i ? LEAF.mid : PALE_LEAF, { y: 0.08 });
     grass(p, i ? r[1] - 0.3 : r[0] + 0.3, r[3] - 0.3, { h: 0.35, seed: 3 + i * 3, color: STRAW });
   }
-  const [x, z] = P.STONE;
-  const stone = monument('社員寮', 'STAFF DORM', 0.85);
-  stone.position.set(x, 0, z);
-  root.add(stone);
-  block(x - 0.5, x + 0.5, z - 0.2, z + 0.2);
 }
 
 // the front bed's bay in the south-east corner, walled like it: low shrubs only, so nothing stands between the

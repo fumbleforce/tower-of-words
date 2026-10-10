@@ -19,7 +19,7 @@ import { DORM_LOOKS } from '../../story/dorm-building.js';
 // The dorm courtyard, on the walk home after work; it also loads with ?place=dorm_court.
 // Eric walks in through the hall doors himself; the trip out starts at the passage at the back of the hall and
 // goes up the stairs to his floor (dorms).
-const BOARD = [HALL[1] - 0.1, BACK_Z], // the hall's notice board, and the manager's window
+const BOARD = [HALL[1] - 0.27, BACK_Z], // the hall's notice board, and the manager's window
   DESK = [(MANAGER[0] + MANAGER[1]) / 2, BACK_Z];
 const FLAP_OPEN = -1.9, // mailbox 203's flap swung open
   MAIL_ZOOM = 6; // the camera close on it, the number, the tape and the flyer readable on a phone

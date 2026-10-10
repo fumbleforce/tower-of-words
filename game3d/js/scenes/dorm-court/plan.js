@@ -72,9 +72,8 @@ export const PIERS = [GATE[0] - 0.25, GATE[1] + 0.25]; // the gate piers' x, in 
 export const OUT_Z = STREET[2] + 1.1;
 // the garden: west of the laundry, from the block to the front bed, walled on the court side
 export const GARDEN = [-16, GARDEN_X, BLOCK_Z + 0.05, SOUTH_BED[3]];
-// the bench beside the cherry, facing the court, and the sign stone by the hall
+// the bench beside the cherry, facing the court
 export const BENCH = [-2.9, 2.2];
-export const STONE = [2.72, -0.68];
 // the lamps: tall ones on the north side of the walk (so they never stand between the camera and Eric), by the
 // drinks machines and on the walk's axis in the garden, where the walk ends; the gate's lanterns, the shelter's
 // light and the sento's door light the rest. Low bollard lights along the front bed's wall.

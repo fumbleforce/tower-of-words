@@ -111,7 +111,8 @@ export function laundry(root, nav, { x0, x1, z, west, back }) {
     [ww + 0.1, 0.06, 0.08, wc, 1.45, z + 0.2],
     [ww + 0.1, 0.06, 0.08, wc, 0.1, z + 0.2],
   ];
-  for (let i = 0; i < 3; i++) frame.push([0.05, 1.35, 0.06, wx0 + i * (ww / 2), 0.1, z + 0.2]);
+  // mullions at the ends and in the gaps between the washers, never in front of one
+  for (const x of [wx0, wx0 + 0.575, wx0 + 1.125, wx1]) frame.push([0.05, 1.35, 0.06, x, 0.1, z + 0.2]);
   put(p, frame, PAL.trim);
   // a glass door at its east end
   root.add(rbox(0.6, 1.5, 0.05, '#7e929c', { x: x1 - 0.55, z: z + 0.02, seg: 1, r: 0.01, cast: false }));
