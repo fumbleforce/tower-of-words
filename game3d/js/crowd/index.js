@@ -20,7 +20,7 @@
 import * as THREE from 'three';
 import { CROWD } from './data.js';
 import { makeBody } from './looks.js';
-import { prepareApprovedCrowd } from './approved-models.js';
+import { prepareCrowdBodies } from '../chibi-crowd.js';
 import { coarseGrid, routeBetween, snapFree, clearAt } from './paths.js';
 import { walkStep, stride, idleLife, stalled, gliding } from './motion.js';
 import { placeStill, stillSpots } from './still.js';
@@ -111,7 +111,7 @@ export async function attachCrowd(game, place, name) {
   for (const k of KINDS) for (let i = 0; i < Math.round(want[k]); i++) kinds.push(k);
   while (kinds.length < size) kinds.push(kinds.length % 2 ? 'casual' : 'office');
   kinds.length = size;
-  if (kinds.includes('office')) await prepareApprovedCrowd();
+  await prepareCrowdBodies(kinds);
   const seed = hashName(name);
   const pool = [];
   for (let i = 0; i < size; i++) {

@@ -24,7 +24,7 @@
   "places": {
     "east_coast": {
       "desktop": {
-        "texMB": { "max": 222, "issue": 373 }
+        "texMB": { "max": 230, "issue": 373, "reason": "the everyday crowd bodies (#353): the casual-1 and older-1 skins at 1024, measured 225.6 against main's 214.4" }
       }
     },
     "forecourt": {
@@ -49,7 +49,7 @@
     },
     "shotengai": {
       "desktop": {
-        "texMB": { "max": 258, "issue": 373 }
+        "texMB": { "max": 266, "issue": 373, "reason": "the everyday crowd bodies (#353): the casual-1 and older-1 skins at 1024, measured 260.0 against main's 248.8" }
       }
     }
   }

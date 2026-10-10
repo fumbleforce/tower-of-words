@@ -1,0 +1,45 @@
+{
+  "title": "The last placeholder walkers replaced by the approved crowd bodies",
+  "date": "2026-10-10",
+  "by": "claude-agent:everyday-crowd",
+  "caption": "Casual, sporty and older walkers, the shop and canteen staff, the canteen diners and the train's reader and girl with headphones now use the approved bodies from everyday people 2 (casual-1, older-1, service-1) and the office pair A and B. Every head keeps its hair seen from above; the crowd's numbers are unchanged (#412 takes those).",
+  "result": ["forecourt-desk", "forecourt-phone", "heads-shotengai", "canteen-diners"],
+  "sections": [
+    {
+      "title": "Early morning on the forecourt",
+      "caption": "The camera from Jørgen's note, with the crowd moving, on desktop and phone.",
+      "images": [
+        {"id": "forecourt-desk", "image": "game3d/shots/everyday-crowd-353/forecourt-desk.webp", "caption": "Forecourt, desktop"},
+        {"id": "forecourt-desk-2", "image": "game3d/shots/everyday-crowd-353/forecourt-desk-2.webp", "caption": "A few seconds later, desktop"},
+        {"id": "forecourt-phone", "image": "game3d/shots/everyday-crowd-353/forecourt-phone.webp", "caption": "Forecourt, phone"}
+      ]
+    },
+    {
+      "title": "Heads from above",
+      "caption": "Every walker on the forecourt and in the shopping street seen from above, as the game's camera sees them: full hair on every body and colour (office A and B, the casual woman, the older man), and the apron worker at the bakery.",
+      "images": [
+        {"id": "heads-forecourt", "image": "game3d/shots/everyday-crowd-353/heads-forecourt.webp", "caption": "Forecourt walkers, desktop and phone"},
+        {"id": "heads-shotengai", "image": "game3d/shots/everyday-crowd-353/heads-shotengai.webp", "caption": "Shopping street walkers: office, casual and older"},
+        {"id": "bakery-clerk-top", "image": "game3d/shots/everyday-crowd-353/bakery-clerk-top.webp", "caption": "The bakery's apron worker"}
+      ]
+    },
+    {
+      "title": "Seated people",
+      "caption": "The canteen worker and three diners, and the train's reader, girl with headphones and woman with a bun, with their book, phones and headphones.",
+      "images": [
+        {"id": "canteen-diners", "image": "game3d/shots/everyday-crowd-353/canteen-diners.webp", "caption": "Canteen diners (A, B, older man) and the room"},
+        {"id": "train-passengers", "image": "game3d/shots/everyday-crowd-353/train-passengers.webp", "caption": "Train passengers, phone"},
+        {"id": "shotengai-desk", "image": "game3d/shots/everyday-crowd-353/shotengai-desk.webp", "caption": "Shopping street, desktop"}
+      ]
+    },
+    {
+      "title": "Before",
+      "caption": "The same forecourt camera on main before this change.",
+      "images": [
+        {"id": "before-forecourt-desk", "image": "game3d/shots/everyday-crowd-353/before-forecourt-desk.webp", "caption": "Before, desktop"},
+        {"id": "before-forecourt-desk-2", "image": "game3d/shots/everyday-crowd-353/before-forecourt-desk-2.webp", "caption": "Before, a few seconds later"}
+      ]
+    }
+  ],
+  "links": [{"label": "Play it", "href": "game3d/"}]
+}

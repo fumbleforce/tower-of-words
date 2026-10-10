@@ -9,9 +9,11 @@ const smaller = (url, size) => url.replace(/(\.webp)(\?.*)?$/, `-${size}$1$2`);
 
 // The file for this skin on this screen: `small` marks people who are only seen small (the crowd). phone.js reads
 // the page's settings when it loads, so it is imported here and not at the top (unit tests load this without a page).
-export async function skinUrl(url, { small = false } = {}) {
+// `desktop`: a smaller copy for desktop too (the everyday crowd bodies take the 1024 one, crowd/approved-models.js).
+export async function skinUrl(url, { small = false, desktop = null } = {}) {
   const { phoneLighter } = await import('./phone.js');
-  return phoneLighter() ? smaller(url, small ? 512 : 1024) : url;
+  if (phoneLighter()) return smaller(url, small ? 512 : 1024);
+  return desktop ? smaller(url, desktop) : url;
 }
 
 // The skin's texture (shared), falling back to the full file if a smaller copy is missing.

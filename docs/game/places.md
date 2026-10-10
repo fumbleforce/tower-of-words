@@ -222,7 +222,7 @@ The monorail has one period, early morning.
 | `rei` | Hidden (her seat is Mio's now). | – |
 | `guard` | Day 3 only: on the platform beside the tester on a morning visit before the sign-off; walks back along the platform after it. Label "Guard". | – |
 
-The reader, the girl with headphones and the woman with a bun are the approved office crowd bodies ([art-and-sound.md](art-and-sound.md)), sitting on the near benches clear of the doorways.
+The reader, the girl with headphones and the woman with a bun are approved crowd bodies, the older man, the casual woman and office woman B ([art-and-sound.md](art-and-sound.md)), sitting on the near benches clear of the doorways.
 
 ### Small moments
 

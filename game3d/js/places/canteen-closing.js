@@ -16,7 +16,7 @@ import { TERRACE_TABLES as T, chairAt, chairBlock, terraceChair, STACKED_Y } fro
 import { flags } from '../narrative/state.js';
 import { route } from './route.js';
 import { hold, lean } from './eric-hold.js';
-import { GEN_ON, generic } from '../chibi-crowd.js';
+import { generic } from '../chibi-crowd.js';
 
 // the story's flag once he has helped (story/plaza.js canteen_table): a plaza built later that evening starts from it
 const HELPED = 'evening_canteen_helped';
@@ -33,9 +33,8 @@ export function canteenClosing(game, root, nav, chairs) {
   theirs.name = 'evening:chair-second';
   root.add(his, theirs);
   his.userData.noBatch = theirs.userData.noBatch = true; // they move: the draw-call pass leaves them alone
-  // the worker: a background worker in white, with the canteen's apron (with the chibi look, the generic in an apron,
-  // the apron in the canteen's colour)
-  const chibi = GEN_ON && generic('apron', 25, { proxy: true, tint: { top: AWNING.canvas } });
+  // The selected apron worker wears the canteen's colour.
+  const chibi = generic('apron', 25, { proxy: true, tint: { top: AWNING.canvas } });
   const r = chibi || PEOPLE.worker(25);
   r.root.scale.multiplyScalar(K);
   if (!chibi) r.torso.add(rbox(0.25, 0.3, 0.02, AWNING.canvas, { y: -0.15, z: 0.105, r: 0.008, seg: 1 }));
