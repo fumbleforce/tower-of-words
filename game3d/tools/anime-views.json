@@ -51,5 +51,21 @@
         ]
       }
     ]
+  },
+  "fountain-water": {
+    "variants": ["0", "1"],
+    "periods": ["morning"],
+    "sizes": ["desktop", "phone"],
+    "places": [
+      {
+        "place": "plaza",
+        "views": [
+          { "id": "fountain", "cam": "follow", "at": [0.4, 6.1], "face": 3.1416, "pitch": 0.08 },
+          { "id": "fountain-close", "cam": "follow", "at": [1.2, 4.9], "face": 3.39, "pitch": 0.35 },
+          { "id": "fountain-side", "cam": "follow", "at": [5.6, 0.2], "face": -1.5708, "pitch": 0.02 },
+          { "id": "overview", "cam": "overview", "at": [0.4, 6.1] }
+        ]
+      }
+    ]
   }
 }
