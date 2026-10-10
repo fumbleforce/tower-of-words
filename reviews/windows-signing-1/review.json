@@ -2,7 +2,7 @@
  "title": "Windows signing: which route",
  "date": "2026-10-10",
  "by": "Claude (signing research agent)",
- "status": "open",
+ "status": "decided",
  "issue": 434,
  "context": [
   "Your question: \"can I go to my windows, and sign there?\" Yes. The build stays here; you copy the finished installer and portable exe to your Windows PC, sign them there with Microsoft's signtool, and copy them back. You still need a certificate from a seller: only that quiets SmartScreen, and since 2023 its key must sit on a USB card or a cloud service. On Windows, Certum becomes an option: its cloud certificate (SimplySign) is a Windows app that acts as a card reader, which had no Linux route here. Resellers list it at about 116 USD a year on a 3-year term; Certum's own shop sells a set with a physical card from 379 EUR. Whether Certum issues the Standard certificate to an individual in Norway, and the exact 2026 price, I check before you buy.",
@@ -35,5 +35,7 @@
    "note": "Ship unsigned for now and decide on signing when a release is close."
   }
  ],
- "updated": "2026-10-10T18:00:00+0200"
+ "updated": "2026-10-10T18:00:00+0200",
+ "decision": "later: skip signing for now, ship unsigned like other indie adult games (Jørgen: \"Yes, skip then\")",
+ "decided_at": "2026-10-10T19:12:16+0200"
 }
