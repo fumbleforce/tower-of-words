@@ -1,5 +1,5 @@
 {
-  "title": "Anime opening, sixth cut",
+  "title": "Anime opening, seventh cut",
   "date": "2026-10-09",
   "by": "claude-main",
   "caption": "The 70-second opening to the opening theme, made in code, now in the game's anime look with the rebuilt station. In the title menu as Opening, and on its own at game3d/opening/.",
@@ -9,7 +9,8 @@
     "0cae61b6",
     "af2eb480",
     "e8261beca",
-    "1aa53f732"
+    "1aa53f732",
+    "4418b1b83"
   ],
   "result": [
     "v5-031-0",
@@ -19,8 +20,8 @@
   ],
   "sections": [
     {
-      "title": "Sixth cut (2026-10-10): fixes from a critic pass",
-      "caption": "The sea and clouds smooth far out, 「てつだって」 off the faces, the one-beat tower readable, a stronger title, the riders lit from inside the cars, the ID card moving with the bars, the aerial drifting.",
+      "title": "Sixth and seventh cuts (2026-10-10): fixes from a critic pass",
+      "caption": "The sea and clouds smooth far out, 「てつだって」 off the faces, the one-beat tower readable, a stronger title, the riders lit from inside the cars, the ID card moving with the bars, the aerial drifting. Seventh cut: the window view frames the whole island, and the anime look follows the game (toon, outline, paint, fountain water).",
       "images": [
         {
           "id": "v6-014-5",
@@ -41,6 +42,11 @@
           "id": "v6-065-5",
           "image": "bible/shots/showcase/opening-1/v6-t065.5.webp",
           "caption": "The title, stronger on the sky"
+        },
+        {
+          "id": "v7-017-3",
+          "image": "bible/shots/showcase/opening-1/v7-t017.3.webp",
+          "caption": "The window view, the island whole"
         }
       ]
     },
@@ -266,9 +272,9 @@
       "href": "game3d/opening/"
     },
     {
-      "label": "The 1080p video, sixth cut (on this machine)",
-      "href": "game3d/shots/opening-film/full-v6/opening-1920.mp4"
+      "label": "The 1080p video, seventh cut (on this machine)",
+      "href": "game3d/shots/opening-film/full-v7/opening-1920.mp4"
     }
   ],
-  "updated": "2026-10-10T02:45:11+02:00"
+  "updated": "2026-10-10T04:26:37+02:00"
 }
