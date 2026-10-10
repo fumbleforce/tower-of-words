@@ -77,6 +77,12 @@ export default {
     kuroda: 'jammed && !gate_through_way',
     lift: 'gate_through',
   },
+  // Interact on him opens Say while the greeting is the goal (Jørgen, 2026-10-10: after an English good morning "the E
+  // disappears ... really need that Q. indicator ... Maybe even remove the E option form him"; #394)
+  sayFirst: {
+    guard: '!greeted_guard && !guard_asked && !(jammed && !gate_through_way)',
+    desk: '!greeted_guard && !guard_asked && !(jammed && !gate_through_way)',
+  },
   labels: { signin: 'Visitor book', guard: 'Guard', bench_r: 'Bench', kuroda: 'Man from the train' },
 
   nodes: {
@@ -102,7 +108,8 @@ export default {
     ],
     // ------------------------------------------------------------------ in the door: the guard greets people, so Eric sees how it's done
     lobby_in: [
-      { do: 'goal', text: 'Say good morning to the guard.' },
+      { do: 'goal', text: 'Say good morning to the guard in Japanese.' },
+      { do: 'hint', what: 'say-here' },
       { do: 'face', who: 'guard', to: 'gate' },
       { say: 'guard', voice: 'guard-greeting-ohayo', overheard: true, emo: 'polite', text: '{ohayo}。' },
       { do: 'face', who: 'guard', to: 'desk' },

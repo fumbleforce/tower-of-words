@@ -15,7 +15,7 @@
 // None of them: Interact does what it always did. One: it is done straight away, no menu. Two or more: a menu in the
 // dialogue box with Leave at the end. The rules: docs/game/controls-and-ui.md, Interact and its options.
 import { flags, cond } from '../narrative/state.js';
-import { HEART, privateOn } from '../ui/pin-tip.js';
+import { choiceIcon, privateOn } from '../ui/pin-tip.js';
 
 // --- the API for other code -------------------------------------------------------------------------------------
 // addInteractOptions(provider) registers a function (item, game) => option | option[] | null, asked each time Interact
@@ -144,10 +144,7 @@ export function runInteract(game, item, plan) {
   }
   const chips = [
     ...rows.map((r) => ({
-      html:
-        (r.icon ? `<span class="heart-mark ${r.icon}">${HEART}</span>` : '') +
-        esc(r.label) +
-        (r.story ? '<span class="tag">Story</span>' : ''),
+      html: choiceIcon(r.icon) + esc(r.label) + (r.story ? '<span class="tag">Story</span>' : ''),
       cls: r.cls,
     })),
     { html: 'Leave', cls: 'leave' },

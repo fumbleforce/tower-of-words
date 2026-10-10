@@ -219,8 +219,9 @@ export function installInteractions(game) {
       if (!introduction || flags[introduction]) meet(game, item.id);
       ui.refreshPeople(sim.met.size);
     }
-    // a thing whose only use now is a word (an empty talk node doesn't count): E opens the Say menu
-    if (item.sayOnly?.()) return void say();
+    // a thing whose only use now is a word (an empty talk node doesn't count), or a person the story wants a word
+    // for (its sayFirst, the guard's good morning): E opens the Say menu
+    if (item.sayOnly?.() || sayFirst(item)) return void say();
     if (plan && runInteract(game, item, plan)) return;
     if (game.runner.trigger(trigger || 'talk:' + item.id)) return;
     if (item.act) {
@@ -239,6 +240,10 @@ export function installInteractions(game) {
     if (extraOptions(game, item).length) return true; // an option other code added (interact-menu.js)
     const n = game.runner.resolve('talk:' + item.id, { peek: true });
     return !!n && (game.story.nodes?.[n]?.length ?? 1) > 0;
+  }
+  function sayFirst(item) {
+    const c = game.story?.sayFirst?.[item.id];
+    return !!c && cond(c) && SAYABLE.some((w) => known.has(w));
   }
   function canUse(item) {
     return !!(isPerson(game, item) || talksNow(item));

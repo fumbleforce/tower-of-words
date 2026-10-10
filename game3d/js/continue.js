@@ -1,7 +1,7 @@
 // Continue: a save played on from where it was (the title's Continue, a loaded slot, a new day's opening save made
 // by days.js). Rebuild the saved place directly; arrival cinematics and opening scenes belong to new visits.
 import { sim, restore, save, loadSave } from './sim.js';
-import { flags } from './narrative/state.js';
+import { flags, cond } from './narrative/state.js';
 import { canTravel } from './places/definitions.js';
 import { needsLegacyOpening } from './narrative/legacy-opening.js';
 import { showEnd } from './end.js';
@@ -38,6 +38,10 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
     ui.refreshPeople(sim.met.size);
     ui.refreshBag(sim);
     restoreGoal(game, saved);
+    // a goal that wants a word (the story's sayFirst, the guard's good morning) brings its how-to hint back (#394)
+    const goals = game.story?.goal || {};
+    if (Object.entries(game.story?.sayFirst || {}).some(([id, c]) => cond(c) && goals[id] && cond(goals[id])))
+      game.hooks.hint({ what: 'say-here' });
     ui.sideGoal(saved.ui?.sideGoal || '');
     game.hold = saved.ui?.hold || null;
     game.restoreZones?.(saved);

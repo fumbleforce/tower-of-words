@@ -3,27 +3,86 @@
   "date": "2026-10-10",
   "by": "claude-main/talk-merge",
   "caption": "Talk and Chat are one action now, Interact, on E or a tap. When someone has story to move on and things to chat about, Interact opens one menu: the story option first in teal with a Story tag, then the chat topics, then Leave. With only one option it just happens. E now shows on the pin and in the menu wherever Q does.",
-  "result": ["copier-menu-desk", "copier-menu-phone", "copier-act-desk"],
+  "result": [
+    "copier-menu-desk",
+    "copier-menu-phone",
+    "copier-act-desk",
+    "guard-desk"
+  ],
   "sections": [
     {
       "title": "Mio, day 1, the copier fixed",
       "caption": "The moment from your report. E opens the menu with the story row focused, and E again tells her.",
       "images": [
-        { "id": "copier-menu-desk", "image": "bible/shots/showcase/interact-menu-1/1366-copier-interact.webp", "caption": "Interact's menu, desktop" },
-        { "id": "copier-menu-phone", "image": "bible/shots/showcase/interact-menu-1/390-copier-interact.webp", "caption": "Interact's menu, phone" },
-        { "id": "copier-act-desk", "image": "bible/shots/showcase/interact-menu-1/1366-copier-actmenu.webp", "caption": "A click on Mio: Interact with E, Say with Q, and E beside the pin" },
-        { "id": "copier-act-phone", "image": "bible/shots/showcase/interact-menu-1/390-copier-actmenu.webp", "caption": "A tap on Mio, phone" }
+        {
+          "id": "copier-menu-desk",
+          "image": "bible/shots/showcase/interact-menu-1/1366-copier-interact.webp",
+          "caption": "Interact's menu, desktop"
+        },
+        {
+          "id": "copier-menu-phone",
+          "image": "bible/shots/showcase/interact-menu-1/390-copier-interact.webp",
+          "caption": "Interact's menu, phone"
+        },
+        {
+          "id": "copier-act-desk",
+          "image": "bible/shots/showcase/interact-menu-1/1366-copier-actmenu.webp",
+          "caption": "A click on Mio: Interact with E, Say with Q, and E beside the pin"
+        },
+        {
+          "id": "copier-act-phone",
+          "image": "bible/shots/showcase/interact-menu-1/390-copier-actmenu.webp",
+          "caption": "A tap on Mio, phone"
+        }
       ]
     },
     {
       "title": "One option: no menu",
       "caption": "Kenji before you have met him has only his story, so it starts at once. Mori on day 2 has only chat topics, so Interact goes straight into them.",
       "images": [
-        { "id": "kenji-story-only", "image": "bible/shots/showcase/interact-menu-1/1366-kenji-interact.webp", "caption": "Kenji, day 1: straight into the story" },
-        { "id": "mori-topics-desk", "image": "bible/shots/showcase/interact-menu-1/1366-mori-interact.webp", "caption": "Mori, day 2: straight into the topic" },
-        { "id": "mori-topics-phone", "image": "bible/shots/showcase/interact-menu-1/390-mori-interact.webp", "caption": "Mori, day 2, phone" }
+        {
+          "id": "kenji-story-only",
+          "image": "bible/shots/showcase/interact-menu-1/1366-kenji-interact.webp",
+          "caption": "Kenji, day 1: straight into the story"
+        },
+        {
+          "id": "mori-topics-desk",
+          "image": "bible/shots/showcase/interact-menu-1/1366-mori-interact.webp",
+          "caption": "Mori, day 2: straight into the topic"
+        },
+        {
+          "id": "mori-topics-phone",
+          "image": "bible/shots/showcase/interact-menu-1/390-mori-interact.webp",
+          "caption": "Mori, day 2, phone"
+        }
+      ]
+    },
+    {
+      "title": "The guard at the gate, before the good morning",
+      "caption": "The goal says Japanese and a hint under it says how, also after Continue. Interact on him opens Say, and he has no Chat until you have greeted him.",
+      "images": [
+        {
+          "id": "guard-desk",
+          "image": "bible/shots/showcase/interact-menu-1/1366-guard-actmenu.webp",
+          "caption": "Desktop: the goal, the Q hint, and his menu"
+        },
+        {
+          "id": "guard-phone",
+          "image": "bible/shots/showcase/interact-menu-1/390-guard-actmenu.webp",
+          "caption": "Phone"
+        },
+        {
+          "id": "guard-say",
+          "image": "bible/shots/showcase/interact-menu-1/1366-guard-say.webp",
+          "caption": "Interact on him opens Say"
+        }
       ]
     }
   ],
-  "links": [{ "label": "Play it", "href": "game3d/" }]
+  "links": [
+    {
+      "label": "Play it",
+      "href": "game3d/"
+    }
+  ]
 }

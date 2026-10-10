@@ -3,6 +3,8 @@
 //           highlighted and focused, E again runs the beat (Jørgen's report: "neither has the E key")
 //   kenji   day 1, Kenji not met yet: the story beat alone runs straight away, no menu
 //   mori    day 2 afternoon: Mori has topics only, E goes straight into them
+//   guard   day 1 at the gate, not greeted yet, from Continue: the goal says Japanese, the how-to hint is up, the guard
+//           has no Chat, and E (or the menu's Interact) opens the Say menu (#394)
 // Usage: node game3d/tools/interact-menu-check.mjs [width] [scenarios,...]  (BASE=<worktree>/game3d for a worktree)
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -19,6 +21,7 @@ const DAY1 = { greeted_mori: true, lead_done: true, kenji_intro: true, knocked: 
 const SCENES = {
   copier: { day: 1, period: 'morning', met: ['mio', 'mori', 'kenji'], flags: { ...DAY1, got_ticket: true, copier_done: true }, who: 'mio', goal: 'Tell Mio the copier is fixed.' },
   kenji: { day: 1, period: 'morning', met: ['mio', 'mori'], flags: { greeted_mori: true, lead_done: true }, who: 'kenji' },
+  guard: { day: 1, period: 'morning', place: 'gate', met: ['mio'], flags: {}, who: 'guard', goal: 'Say good morning to the guard in Japanese.' },
   mori: {
     day: 2,
     period: 'afternoon',
@@ -32,8 +35,8 @@ await withBrowserJob('interact-menu-check', async (browser) => {
   for (const name of process.argv[3]?.split(',') || Object.keys(SCENES)) {
     const s = SCENES[name];
     const saved = {
-      v: 1, day: s.day, mc, place: 'office', period: s.period, known: ['ohayo'], met: s.met,
-      flags: { day: s.day, place: 'office', period: s.period, ['period_' + s.period]: true, ...s.flags },
+      v: 1, day: s.day, mc, place: s.place || 'office', period: s.period, known: ['ohayo'], met: s.met,
+      flags: { day: s.day, place: s.place || 'office', period: s.period, ['period_' + s.period]: true, ...s.flags },
       seen: [], inv: ['card'], yen: 3000, ui: { goal: s.goal || '' },
     };
     const opened = await openGame(browser, {
@@ -72,12 +75,36 @@ await withBrowserJob('interact-menu-check', async (browser) => {
       await page.waitForTimeout(300);
       const acts = await page.evaluate(() => [...document.querySelectorAll('#actMenu .act')].map((b) => b.textContent.trim()));
       await page.screenshot({ path: `${out}${width}-${name}-actmenu.png` });
+      if (name === 'guard') {
+        const hud = await page.evaluate(() => ({
+          goal: window.__game.ui.goalText,
+          hint: document.querySelector('#hint:not([hidden]) .hx')?.textContent || '',
+        }));
+        assert.match(hud.goal, /in Japanese/);
+        assert.match(hud.hint, phone ? /Say a word/ : /press Q/);
+        assert.deepEqual(plan.topics, [], 'no Chat with the guard before the greeting');
+        assert.ok(acts.some((a) => a.includes('Interact')) && acts.some((a) => a.includes('Say a word')));
+        // the menu's Interact row (a click or tap) opens Say
+        if (phone) await page.locator('#actMenu .act.use').tap();
+        else await page.locator('#actMenu .act.use').click();
+        await page.waitForFunction(() => !document.querySelector('#sayMenu').hidden, null, { timeout: 8000 });
+        await page.screenshot({ path: `${out}${width}-${name}-say.png` });
+        await page.locator('#sayMenu .cancel').click();
+        await page.waitForFunction(() => document.querySelector('#sayMenu').hidden);
+      }
       await page.evaluate(() => window.__game.ui.closeActs());
       await page.waitForTimeout(150);
       // Interact: E on desktop, the Interact row on the phone
       if (phone) await page.evaluate((who) => window.__game.use(window.__game.markers.list.find((m) => m.id === who), { direct: true }), s.who);
       else await page.keyboard.press('KeyE');
-      await page.waitForFunction(() => document.querySelector('#talk .chip:not([disabled])') || window.__game.runner.frames?.length, null, { timeout: 15000 });
+      await page.waitForFunction(
+        () =>
+          document.querySelector('#talk .chip:not([disabled])') ||
+          window.__game.runner.frames?.length ||
+          !document.querySelector('#sayMenu').hidden,
+        null,
+        { timeout: 15000 },
+      );
       await page.waitForTimeout(900);
       const menu = await page.evaluate(() => ({
         rows: [...document.querySelectorAll('#talk .chips.menu .chip')].map((b) => ({ cls: b.className, text: b.textContent })),
@@ -101,6 +128,9 @@ await withBrowserJob('interact-menu-check', async (browser) => {
         assert.ok(plan.story && !plan.topics.length);
         assert.equal(menu.rows.length, 0, 'no menu for a story beat alone');
         await page.waitForFunction(() => window.__game.runner.trace?.includes('kenji_first'), null, { timeout: 15000 });
+      } else if (name === 'guard') {
+        assert.equal(menu.rows.length, 0);
+        assert.ok(await page.evaluate(() => !document.querySelector('#sayMenu').hidden), 'E opens Say');
       } else if (name === 'mori') {
         assert.ok(!plan.story && plan.topics.length);
         assert.equal(menu.rows.length, 0, 'topics alone go straight in');

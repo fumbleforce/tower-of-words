@@ -116,7 +116,7 @@ test('added options join the menu; a heart row shows only in private mode', asyn
       shown.map((c) => c.cls),
       ['story', 'extra', 'extra', 'leave'],
     );
-    assert.match(shown[1].html, /heart-mark heart-soft/);
+    assert.match(shown[1].html, /class="heart".*#c9a0ff/);
   } finally {
     remove();
     delete globalThis.__settings;

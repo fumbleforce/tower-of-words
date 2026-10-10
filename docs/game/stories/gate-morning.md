@@ -8,8 +8,8 @@ The station security room before nine. Mr. Ishibashi, the guard, is strict about
 
 ## Beats
 
-1. Eric comes in through the glass doors. The guard says おはようございます to people coming in for work, and they say it back, so Eric sees how it's done. Goal: say good morning to the guard.
-2. Talking to him in English gets nothing; he doesn't look up. おはようございます (or よろしくおねがいします, which amuses him) gets a greeting and card request in one line, a bow back, and a point toward the card reader.
+1. Eric comes in through the glass doors. The guard says おはようございます to people coming in for work, and they say it back, so Eric sees how it's done. Goal: say good morning to the guard in Japanese, with a hint under it that stays until he has: press Q by him on desktop, tap him and Say a word on the phone. Until then Interact (E, a click or tap) on the guard opens the Say menu, and he has no Chat (Jørgen, 2026-10-10: "really need that Q. indicator, and specify that you say good morning in Japanese. Maybe even remove the E option form him, and remove the chat option also", #394).
+2. おはようございます (or よろしくおねがいします, which amuses him) gets a greeting and card request in one line, a bow back, and a point toward the card reader.
 3. The card is red. The gate's voice asks him to see staff. The guard beckons him over: it's a new card, registration starts at nine (politely, with an apology, if Eric greeted him first; sternly if not). He holds up nine fingers and points at the bench. Eric: "Right, Mio did say nine." Eric waits on the bench, and the jam starts.
 4. Once through, the station exit. Eric crosses the forecourt to the separate head-office lift ([places.md](../places.md), Getting between places).
 
