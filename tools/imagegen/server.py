@@ -11,11 +11,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, '..'))
 import comfy  # noqa: E402  (tools/comfy.py)
-import store, gpu, consist, privacy  # noqa: E402
+import store, gpu, consist, privacy, huefix  # noqa: E402
 
 PORT = int(os.environ.get('IMAGEGEN_PORT', 8772))
 WEB = os.path.join(HERE, 'web')
 MODELS_DIR = os.path.expanduser('~/ai/ComfyUI/models/diffusion_models')
+LORAS_DIR = os.path.expanduser('~/ai/ComfyUI/models/loras')
+CONTROL_DIR = os.path.expanduser('~/ai/ComfyUI/models/controlnet')
+NOT_ANIMA_LORA = ('wan', 'yue', 'lightx2v')
+MASKS = os.path.join(store.ROOT, 'masks')
 NOT_ANIMA = ('wan', 'causal', 'pixal3d', 'trellis', 'dasiwa', 'put_')
 ALWAYS_NEG = 'child, loli'
 DASH_LOG = os.path.join(store.ROOT, 'dashboard.log')
@@ -104,21 +108,43 @@ def _queue_and_fetch(j, wf, out_path, timeout=900):
 
 def start_image(wf, start):
     """img2img: the picture in start['image'] (scaled to the job's size) replaces the empty latent, and the sampler
-    keeps start['denoise'] of the way from it (low = small changes)."""
+    keeps start['denoise'] of the way from it (low = small changes). With start['mask'] (white = repaint) it is an
+    inpaint: only the masked part is noised, and the rest of the start picture is pasted back over the result."""
     name = comfy.upload(consist.as_png(consist.resolve(start['image'])))
     w, h = wf['6']['inputs']['width'], wf['6']['inputs']['height']
     wf['S1'] = {'class_type': 'LoadImage', 'inputs': {'image': name}}
     wf['S2'] = {'class_type': 'ImageScale', 'inputs': {'image': ['S1', 0], 'upscale_method': 'lanczos', 'width': w, 'height': h, 'crop': 'center'}}
     wf['6'] = {'class_type': 'VAEEncode', 'inputs': {'pixels': ['S2', 0], 'vae': ['3', 0]}}
     wf['7']['inputs']['denoise'] = start['denoise']
+    if start.get('mask'):
+        wf['M1'] = {'class_type': 'LoadImage', 'inputs': {'image': comfy.upload(consist.as_png(consist.resolve(start['mask'])))}}
+        wf['M2'] = {'class_type': 'ImageScale', 'inputs': {'image': ['M1', 0], 'upscale_method': 'bilinear', 'width': w, 'height': h, 'crop': 'center'}}
+        wf['M3'] = {'class_type': 'ImageToMask', 'inputs': {'image': ['M2', 0], 'channel': 'red'}}
+        wf['M4'] = {'class_type': 'SetLatentNoiseMask', 'inputs': {'samples': ['6', 0], 'mask': ['M3', 0]}}
+        wf['7']['inputs']['latent_image'] = ['M4', 0]
+        wf['M5'] = {'class_type': 'ImageCompositeMasked', 'inputs': {'destination': ['S2', 0], 'source': ['8', 0], 'x': 0, 'y': 0,
+                                                                   'resize_source': False, 'mask': ['M3', 0]}}
+        wf['9']['inputs']['images'] = ['M5', 0]
+    return wf
+
+
+def control_image(wf, control):
+    """A guide picture through an Anima LLLite control (lineart, depth, scribble, any): its shapes steer the render."""
+    wf['CP'] = {'class_type': 'ModelPatchLoader', 'inputs': {'name': control['file']}}
+    wf['CI'] = {'class_type': 'LoadImage', 'inputs': {'image': comfy.upload(consist.as_png(consist.resolve(control['image'])))}}
+    wf['CA'] = {'class_type': 'AnimaLLLiteApply', 'inputs': {'model': wf['7']['inputs']['model'], 'model_patch': ['CP', 0], 'image': ['CI', 0],
+                                                            'strength': control['strength'], 'start_percent': 0.0, 'end_percent': control['end']}}
+    wf['7']['inputs']['model'] = ['CA', 0]
     return wf
 
 
 def run_job(j):
     wf = comfy.anima(j['positive'], j['negative'], model=j['model_file'], w=j['w'], h=j['h'], steps=j['steps'], cfg=j['cfg'],
-                     sampler=j['sampler'], scheduler=j['scheduler'], seed=j['seed'])
+                     sampler=j['sampler'], scheduler=j['scheduler'], seed=j['seed'], loras=[(x['file'], x['weight']) for x in j.get('loras') or []])
     if j.get('start'):
         start_image(wf, j['start'])
+    if j.get('control'):
+        control_image(wf, j['control'])
     wf['9']['inputs']['filename_prefix'] = 'imagegen/' + j['run_id']
     ipa = j.get('ipa')
     if ipa:
@@ -156,6 +182,15 @@ def run_job(j):
             j['raw_file'] = None
             j['repaint'] = dict(rp, skipped=str(e)[:200])
             log(f"repaint skipped for {j['id']}: {e}")
+    if j.get('huefix'):
+        # the colour fix last; the unfixed render stays as raw_file
+        from PIL import Image
+        if not j.get('raw_file'):
+            j['raw_file'] = rel[:-4] + '-raw.png'
+            Image.open(out).save(os.path.join(store.OUTPUTS, j['raw_file']))
+        img, report = huefix.fix(Image.open(out), j['huefix'])
+        img.save(out)
+        j['huefix_report'] = report
     j['file'] = rel
     j['thumb'] = make_thumb(out, rel)
     j['phase'] = 'done'
@@ -165,7 +200,7 @@ def run_job(j):
 def log_entry(j):
     keep = ('id', 'n', 'run_id', 'idx', 'status', 'error', 'file', 'thumb', 'seed', 'model_file', 'w', 'h', 'steps', 'cfg', 'sampler',
             'scheduler', 'positive', 'negative', 'overridden', 'presets', 'rating', 'scene_text', 'characters', 'compose', 'elapsed',
-            'ipa', 'repaint', 'raw_file', 'start')
+            'ipa', 'repaint', 'raw_file', 'start', 'loras', 'control', 'huefix')
     e = {k: j.get(k) for k in keep}
     e['at'] = store.now()
     e.update(star=False, fav=False, reject=False, reject_reason='', note='')
@@ -216,17 +251,56 @@ def _clean_repaint(x):
     return dict(ref=x['ref'], denoise=max(0.1, min(1.0, float(x.get('denoise', 0.65)))), prompt=x['prompt'], method='lllite-head-repaint')
 
 
-def _clean_start(x, private):
-    """An img2img start: a repo-relative picture (island/private/ ones only in private mode) and how far to move from it."""
+def _picture(rel, private):
+    """A picture a job may read: repo-relative, island/private/ ones only in private mode, never Jørgen's own folder."""
+    rel = str(rel)
+    if rel.startswith('island/private/') and not private:
+        raise ValueError('that picture opens in private mode only')
+    if consist.resolve(rel).startswith(store.OFF_LIMITS + os.sep):
+        raise ValueError('not allowed')
+    return rel
+
+
+def save_mask(data_url, run_id):
+    """A mask drawn in the composer (a PNG data URL, white = repaint) saved under masks/; returns its stored path."""
+    import base64
+    raw = base64.b64decode(str(data_url).split(',', 1)[-1])
+    if len(raw) > 20 * 1024 * 1024 or not raw.startswith(b'\x89PNG'):
+        raise ValueError('the mask must be a PNG')
+    os.makedirs(MASKS, exist_ok=True)
+    with open(os.path.join(MASKS, run_id + '.png'), 'wb') as f:
+        f.write(raw)
+    return f'island/private/imagegen/masks/{run_id}.png'
+
+
+def _clean_start(x, private, run_id=''):
+    """An img2img start: a picture and how far to move from it; with a mask, an inpaint of the masked part."""
     if not x or not x.get('image'):
         return None
-    rel = str(x['image'])
-    if rel.startswith('island/private/') and not private:
-        raise ValueError('that start picture opens in private mode only')
-    path = consist.resolve(rel)
-    if path.startswith(store.OFF_LIMITS + os.sep):
-        raise ValueError('not allowed')
-    return dict(image=rel, denoise=max(0.05, min(1.0, float(x.get('denoise', 0.35)))), method='img2img')
+    out = dict(image=_picture(x['image'], private), denoise=max(0.05, min(1.0, float(x.get('denoise', 0.35)))), method='img2img')
+    mask = x.get('mask')
+    if mask:
+        out.update(mask=save_mask(mask, run_id) if str(mask).startswith('data:') else _picture(mask, private), method='inpaint')
+    return out
+
+
+def _clean_loras(xs):
+    have = set(lora_files())
+    out = []
+    for x in xs or []:
+        if x.get('file') not in have:
+            raise ValueError(f"LoRA not found: {x.get('file')}")
+        out.append(dict(file=x['file'], weight=max(-2.0, min(2.0, float(x.get('weight', 0.8))))))
+    return out[:4]
+
+
+def _clean_control(x, private):
+    if not x or not x.get('image') or not x.get('file'):
+        return None
+    if x['file'] not in {c['file'] for c in control_files()}:
+        raise ValueError(f"control model not found: {x['file']}")
+    return dict(image=_picture(x['image'], private), file=x['file'], strength=max(0.0, min(2.0, float(x.get('strength', 0.7)))),
+                end=max(0.05, min(1.0, float(x.get('end', 0.8)))))
 
 
 def new_run(body, private=False):
@@ -244,7 +318,10 @@ def new_run(body, private=False):
         raise ValueError(f'model file not found: {model_file}')
     chars = body.get('characters') or []
     tag = '-'.join(c for c in chars)[:40] or 'scene'
-    start = _clean_start(body.get('start'), private)
+    start = _clean_start(body.get('start'), private, run_id)
+    if start and start.get('mask') and isinstance(body.get('compose'), dict) and isinstance(body['compose'].get('start'), dict):
+        body['compose']['start'] = dict(body['compose']['start'], mask=start['mask'])  # the record keeps the path, not the drawing
+    loras, control, fixes = _clean_loras(body.get('loras')), _clean_control(body.get('control'), private), huefix.clean(body.get('huefix'))
     jobs = []
     for i, s in enumerate(seeds):
         jobs.append(dict(
@@ -254,7 +331,8 @@ def new_run(body, private=False):
             sampler=body.get('sampler', 'euler_ancestral'), scheduler=body.get('scheduler', 'normal'),
             presets=body.get('presets', {}), rating=body.get('rating'), scene_text=body.get('scene_text', ''),
             characters=chars, compose=body.get('compose', {}), created=time.time(),
-            ipa=_clean_ipa(body.get('ipa')), repaint=_clean_repaint(body.get('repaint')), start=start))
+            ipa=_clean_ipa(body.get('ipa')), repaint=_clean_repaint(body.get('repaint')), start=start,
+            loras=loras, control=control, huefix=fixes))
     with JOBS_LOCK:
         JOBS.extend(jobs)
         del JOBS[:-400]
@@ -266,7 +344,7 @@ def new_run(body, private=False):
 def public_job(j):
     return {k: j.get(k) for k in ('id', 'n', 'run_id', 'idx', 'status', 'progress', 'seed', 'file', 'thumb', 'error', 'w', 'h', 'elapsed',
                                   'positive', 'negative', 'overridden', 'compose', 'model_file', 'star', 'fav', 'reject', 'reject_reason', 'note',
-                                  'presets', 'characters', 'rating', 'deleted', 'ipa', 'repaint', 'raw_file', 'phase', 'start')}
+                                  'presets', 'characters', 'rating', 'deleted', 'ipa', 'repaint', 'raw_file', 'phase', 'start', 'loras', 'control', 'huefix')}
 
 
 # ---------------------------------------------------------------- delete, trash, portraits
@@ -431,9 +509,9 @@ def history(q, private=False):
         out.append(dict(run_id=rid, at=f['at'], characters=f.get('characters'), scene_text=f.get('scene_text'), model_file=f.get('model_file'), rating=f.get('rating'),
                         presets=f.get('presets'), positive=f.get('positive'), negative=f.get('negative'), overridden=f.get('overridden'),
                         compose=f.get('compose'), w=f.get('w'), h=f.get('h'),
-                        ipa=f.get('ipa'), repaint=f.get('repaint'), start=f.get('start'), **{k: f.get(k) for k in AGENT_FIELDS},
+                        ipa=f.get('ipa'), repaint=f.get('repaint'), start=f.get('start'), loras=f.get('loras'), control=f.get('control'), huefix=f.get('huefix'), **{k: f.get(k) for k in AGENT_FIELDS},
                         renders=[{k: r.get(k) for k in ('id', 'n', 'file', 'thumb', 'seed', 'star', 'fav', 'reject', 'reject_reason', 'note',
-                                                         'positive', 'negative', 'w', 'h', 'model_file', 'at', 'ipa', 'repaint', 'raw_file', 'start', 'compose') + AGENT_FIELDS} for r in rs]))
+                                                         'positive', 'negative', 'w', 'h', 'model_file', 'at', 'ipa', 'repaint', 'raw_file', 'start', 'loras', 'control', 'huefix', 'compose') + AGENT_FIELDS} for r in rs]))
     out.sort(key=lambda x: x['at'], reverse=True)
     if q.get('before'):  # paging for the History view's infinite scroll: only runs older than the last one shown
         out = [x for x in out if x['at'] < q['before']]
@@ -443,10 +521,10 @@ def history(q, private=False):
 
 def _refs(r):
     p = r.get('presets') or {}
-    for key, typ in (('characters', 'character'), ('cameras', 'camera'), ('negatives', 'negative'), ('scenes', 'scene')):
+    for key, typ in (('characters', 'character'), ('cameras', 'camera'), ('negatives', 'negative'), ('scenes', 'scene'), ('outfits', 'outfit')):
         for x in p.get(key) or []:
             yield typ, x
-    for key, typ in (('man', 'character'), ('style', 'style'), ('framing', 'framing'), ('model', 'model')):
+    for key, typ in (('man', 'character'), ('style', 'style'), ('framing', 'framing'), ('model', 'model'), ('pose', 'pose'), ('location', 'location'), ('light', 'light')):
         if p.get(key):
             yield typ, p[key]
 
@@ -494,6 +572,22 @@ def tuning(typ, pid, private=False):
     for g in out:
         g['items'] = sorted(g['items'], key=lambda i: i['at'], reverse=True)[:24]
     return out
+
+
+def lora_files():
+    try:
+        return sorted(f for f in os.listdir(LORAS_DIR) if f.endswith('.safetensors') and not f.lower().startswith(NOT_ANIMA_LORA))
+    except OSError:
+        return []
+
+
+def control_files():
+    """The Anima LLLite controls on disk: [{file, kind}] (lineart, depth, scribble, any-test-like, inpainting)."""
+    try:
+        names = sorted(f for f in os.listdir(CONTROL_DIR) if f.startswith('anima-lllite-') and f.endswith('.safetensors'))
+    except OSError:
+        return []
+    return [dict(file=f, kind=re.sub(r'-(v?\d+)$', '', f[len('anima-lllite-'):-len('.safetensors')])) for f in names]
 
 
 def model_files():
@@ -589,6 +683,12 @@ class H(BaseHTTPRequestHandler):
             if p.startswith('/api/tuning/'):
                 _, _, _, typ, pid = p.split('/')
                 return self._send(200, tuning(typ, pid, self._private()))
+            if p == '/api/mode':
+                return self._send(200, {'private': self._private()})
+            if p == '/api/loras':
+                return self._send(200, lora_files())
+            if p == '/api/controls':
+                return self._send(200, control_files())
             if p == '/api/models/files':
                 return self._send(200, model_files())
             return self._send(404, {'error': 'not found'})

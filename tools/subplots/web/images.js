@@ -1,7 +1,9 @@
 const {setInterval, clearInterval, document, URLSearchParams, CustomEvent} = globalThis;
 import {$, esc, api, guarded, notice} from './common.js';
 import {guessComposition} from './image-guess.js';
-import {DIRECTIONS, applyDefaults, normalizeComposition, assembleComposition, portraitUrl} from './image-compose.js';
+import {DIRECTION_KINDS, applyDefaults, normalizeComposition, assembleComposition, portraitUrl} from './image-compose.js';
+import {blockId} from '../../imagegen/web/blocks.js';
+import {openBlockEditor} from './block-editor.js';
 
 const options = (items, value) => items.map(item => {
   const id = item.id ?? item;
@@ -11,10 +13,13 @@ const field = (name, title, items, value, empty = 'No preference') => `<label>${
 const check = (name, title, value, disabled = false) => `<label class="image-check"><input data-compose="${name}" type="checkbox" ${value ? 'checked' : ''} ${disabled ? 'disabled' : ''}>${esc(title)}</label>`;
 const number = (name, title, value, min, max, step = 1, placeholder = '') => `<label>${esc(title)}<input data-compose="${name}" type="number" min="${min}" max="${max}" step="${step}" value="${esc(value ?? '')}" placeholder="${esc(placeholder)}"></label>`;
 const chip = (label, selected, data) => `<button type="button" ${data} aria-pressed="${!!selected}">${esc(label)}</button>`;
+const NEW = '__new__';
+// A block picker: the block's entries, "+ New…" to add one right here, and Edit for the chosen one (block-editor.js).
+const pickerHtml = (name, kind, title, items, value, empty = 'No preference') => `<label>${esc(title)}<span class="block-pick"><select data-compose="${name}" data-kind="${kind}">${empty === null ? '' : `<option value="">${esc(empty)}</option>`}${options(items, value)}<option value="${NEW}">+ New…</option></select><button type="button" class="small ghost" data-edit-block="${kind}" data-edit-field="${name}" title="Edit, retire or restore an older version">Edit</button></span></label>`;
 const asset = (kind, path) => '/api/subplots/image/' + kind + '/' + String(path).split('/').map(encodeURIComponent).join('/');
 
 export function installImages(getScene, changed) {
-  let presets = null, jobs = [], runs = [], poll = null, pendingConnect = null;
+  let presets = null, jobs = [], runs = [], poll = null, pendingConnect = null, privateMode = false, modelFiles = [];
   let historyScope = 'scene', historyCharacter = '', historyStar = false, historyEnd = false, historyBusy = false;
   let selected = [], referenceChoices = [], referenceOwner = '', activeScene = '', activeSlot = '', loadingHistory = 0;
   // "This scene": the runs the editor's server matches to the scene (api.py scene_runs), loaded once per scene
@@ -67,6 +72,22 @@ export function installImages(getScene, changed) {
     if ($('#assembled')) $('#assembled').textContent = body.positive;
     if ($('#imageRatingNote')) $('#imageRatingNote').textContent = body.rating === compose()?.rating ? '' : 'The selected character preset limits this image to ' + body.rating + '.';
   }
+  function outfitPicker(c, p) {
+    const pick = c.outfit[p.id];
+    const value = pick === true ? 'usual' : typeof pick === 'string' ? pick : '';
+    const items = [...(p.data.outfit ? [{id: 'usual', label: 'Usual: ' + p.data.outfit}] : []),
+      ...active('outfit').filter(o => !o.data.character || o.data.character === p.id).map(o => ({id: o.id, label: o.data.name}))];
+    return `<div class="image-outfit"><label>${esc(p.data.name)}’s outfit<span class="block-pick"><select data-outfit-for="${esc(p.id)}"><option value="">No outfit words</option>${options(items, value)}<option value="${NEW}">+ New outfit…</option></select><button type="button" class="small ghost" data-edit-person="${esc(p.id)}" title="Edit ${esc(p.data.name)}’s look">Edit ${esc(p.data.name)}</button></span></label></div>`;
+  }
+  // Open the block editor; afterwards the blocks reload and `apply` puts the new or edited block in this picture.
+  function openBlock(kind, {id = null, from, prefill, apply} = {}) {
+    return openBlockEditor({kind, id, from, prefill, presets, privateMode, files: modelFiles, portraitUrl,
+      onDone: guarded(async newId => {
+        presets = await api('image/api/presets');
+        if (apply) edit(c => apply(c, newId)); else render();
+        notice(id ? 'Saved. Every scene uses the new version.' : 'Added. It is in every scene’s pickers now.');
+      })}).catch(e => notice(e.message, true));
+  }
   function render() {
     const host = $('#composition');
     if (!host) return;
@@ -88,22 +109,25 @@ export function installImages(getScene, changed) {
         ${picked&&!picked.applied ? '<p class="hint">Replacement selected. Save the scene to use it in the story.</p><button data-clear-image>Keep the current story image</button>' : ''}</div>
       </div>`;
     const people = `<section class="image-section"><h3>People in the picture</h3><div class="image-cast">${active('character').filter(p => !p.data.generic).map(p => `<button type="button" data-char="${esc(p.id)}" aria-pressed="${c.characters.includes(p.id)}" title="${esc(p.data.name || p.id)}">${portraitUrl(p.data.portrait) ? `<img loading="lazy" src="${esc(portraitUrl(p.data.portrait))}" alt="">` : `<span class="image-person-placeholder">${esc((p.data.name||p.id).slice(0,1))}</span>`}<span>${esc(p.data.name || p.id)}</span></button>`).join('') || '<p class="hint">Your image-generation character presets appear here when connected.</p>'}</div>
-      <div class="chips">${active('character').some(p => p.data.generic) ? chip('Include an unnamed person', c.man, 'data-toggle="man"') : ''}${cast.filter(p => p.data.outfit).map(p => chip(p.data.name + '’s usual outfit', c.outfit[p.id], `data-outfit="${esc(p.id)}"`)).join('')}${cast.length + (c.man ? 1 : 0) > 1 ? chip('Short descriptions for a group', c.useShort, 'data-toggle="useShort"') : ''}</div></section>`;
-    const direction = `<section class="image-section"><div class="section-head"><h3>Direct the shot</h3>${field('scenePreset', 'Saved scene direction', presetOptions('scene'), '', 'Choose a saved direction…')}</div>
-      <div class="four">${field('pose', 'Pose', DIRECTIONS.pose, c.pose)}${field('angle', 'Camera angle', DIRECTIONS.angle, c.angle)}${field('environment', 'Environment', DIRECTIONS.environment, c.environment)}${field('light', 'Light', DIRECTIONS.light, c.light)}</div>
+      <div class="chips">${active('character').some(p => p.data.generic) ? chip('Include an unnamed person', c.man, 'data-toggle="man"') : ''}${cast.length + (c.man ? 1 : 0) > 1 ? chip('Short descriptions for a group', c.useShort, 'data-toggle="useShort"') : ''}<button type="button" data-new-block="character">+ New person</button></div>
+      ${cast.length ? `<div class="image-outfits">${cast.map(p => outfitPicker(c, p)).join('')}</div>` : ''}</section>`;
+    const blockValue = (kind, value) => blockId(presets, kind, value) || value || '';
+    const blockItems = (kind, value) => { const items = presetOptions(kind); return value && !items.some(i => i.id === value) ? [...items, {id: value, label: value + ' (words only)'}] : items; };
+    const direction = `<section class="image-section"><div class="section-head"><h3>Direct the shot</h3>${pickerHtml('scenePreset', 'scene', 'Saved scene direction', presetOptions('scene'), c.sceneRefs?.[0] || '', 'Choose a saved direction…')}</div>
+      <div class="three">${DIRECTION_KINDS.map(([name, kind, title]) => pickerHtml(name, kind, title, blockItems(kind, blockValue(kind, c[name])), blockValue(kind, c[name]))).join('')}</div>${c.angle ? `<p class="hint">Older camera angle kept: ${esc(c.angle)} <button type="button" class="link" data-clear-angle>Remove</button></p>` : ''}
       <label>What happens in this picture?<textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>
       <label>More details for the prompt<textarea data-compose="extra" rows="1" placeholder="Specifics the blocks above don't cover: props, clothes, a mood.">${esc(c.extra || '')}</textarea></label>
-      <h4>Camera and composition</h4><div class="chips">${active('camera').map(p => chip(p.data.name, c.cameras.includes(p.id), `data-camera="${esc(p.id)}"`)).join('')}</div>
-      <div class="three">${field('framing', 'Picture shape', presetOptions('framing'), c.framing, null)}${field('style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p></section>`;
+      <h4>Camera and composition</h4><div class="chips">${active('camera').map(p => chip(p.data.name, c.cameras.includes(p.id), `data-camera="${esc(p.id)}" title="${esc(p.data.prompt)}"`)).join('')}<button type="button" data-new-block="camera">+ New</button><button type="button" data-edit-block="camera" data-edit-list="cameras">Edit…</button></div>
+      <div class="three">${pickerHtml('framing', 'framing', 'Picture shape', presetOptions('framing'), c.framing, null)}${pickerHtml('style', 'style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p></section>`;
     const consistency = `<section class="image-section"><h3>Keep the character consistent</h3><div class="image-consistency">
       ${oneCharacter ? `<div class="image-reference">${portraitUrl(refPath) ? `<img src="${esc(portraitUrl(refPath))}" alt="Character reference">` : ''}<div><strong>${esc(c.reference ? 'Selected reference' : cast[0].data.name + '’s portrait')}</strong><button data-pick-reference>Choose a reference picture</button>${c.reference ? '<button data-reset-reference>Use character portrait</button>' : ''}</div></div>` : '<p class="hint">Choose one character to use a portrait reference or face correction.</p>'}
       <div class="image-strengths">${check('referenceOn', 'Use the reference', c.referenceOn, !oneCharacter || !refPath)}${number('referenceStrength', 'Strength', c.referenceStrength, 0, 2, 0.05)}
       ${check('faceFix', 'Correct the face after', c.faceFix, !oneCharacter || !refPath)}${number('faceStrength', 'Strength', c.faceStrength, 0.1, 1, 0.05)}
       ${check('referenceCutout', 'Remove the portrait background', c.referenceCutout, !oneCharacter)}</div></div><div id="imageReferenceChoices"></div></section>`;
     const settings = `<section class="image-section"><h3>Generation settings</h3>
-      <div class="settings-grid">${field('model', 'Model', presetOptions('model'), c.model, null)}${number('count', 'Pictures', c.count, 1, 8)}${field('seedMode', 'Variation', [{id: 'random', label: 'New variations'}, {id: 'fixed', label: 'Repeat a seed'}], c.seedMode, null)}${number('seed', 'Seed', c.seed, 0, 9007199254740991)}
+      <div class="settings-grid">${pickerHtml('model', 'model', 'Model', presetOptions('model'), c.model, null)}${number('count', 'Pictures', c.count, 1, 8)}${field('seedMode', 'Variation', [{id: 'random', label: 'New variations'}, {id: 'fixed', label: 'Repeat a seed'}], c.seedMode, null)}${number('seed', 'Seed', c.seed, 0, 9007199254740991)}
       ${number('steps', 'Steps', c.steps, 1, 100, 1, md.steps || 30)}${number('cfg', 'Prompt strength', c.cfg, 0.1, 30, 0.1, md.cfg || 5)}${number('width', 'Width', c.width, 256, 2048, 64, fr.w || 1152)}${number('height', 'Height', c.height, 256, 2048, 64, fr.h || 896)}</div>
-      <h4>Exclude from the picture</h4><div class="chips">${active('negative').map(p => chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}"`)).join('')}</div>
+      <h4>Exclude from the picture</h4><div class="chips">${active('negative').map(p => chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}" title="${esc(p.data.text)}"`)).join('')}<button type="button" data-new-block="negative">+ New</button><button type="button" data-edit-block="negative" data-edit-list="negatives">Edit…</button></div>
       <label>Anything else to avoid?<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
       ${c.rating !== 'safe' ? check('hard', 'Hard scene: leave out the standing soft-scene exclusions', c.hard) : '<p class="hint">Mature and Adult pictures always exclude visible nipples, visible genitals and an uncovered crotch, unless marked as a hard scene.</p>'}
       <label>Notes for steps outside the prompt<textarea data-compose="details" rows="2" placeholder="Inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></section>`;
@@ -145,6 +169,15 @@ export function installImages(getScene, changed) {
         const name = el.dataset.compose;
         if (name === 'imageSlot') { activeSlot = el.value; render(); return; }
         if (name === 'startDenoise') { edit(c => { c.start.denoise = +el.value; }, false); return; }
+        if (el.value === NEW) {
+          const kind = el.dataset.kind, current = c => name === 'scenePreset' ? c.sceneRefs?.[0] : c[name];
+          el.value = '';
+          render();
+          const from = blockId(presets, kind, current(compose()));
+          if (name === 'scenePreset') openBlock('scene', {from: '', prefill: {text: compose().scene, rating: compose().rating}, apply: (c, id) => { c.sceneRefs = [id]; }});
+          else openBlock(kind, {from: from || undefined, apply: (c, id) => { c[name] = id; c.override = null; if (name === 'framing') { delete c.width; delete c.height; } }});
+          return;
+        }
         if (name === 'scenePreset') {
           const p = preset('scene', el.value); if (!p) return;
           edit(c => { c.scene = p.data.text || ''; c.sceneRefs = [p.id]; if (p.data.rating) c.rating = p.data.rating; c.override = null; }); return;
@@ -160,7 +193,34 @@ export function installImages(getScene, changed) {
     host.querySelectorAll('[data-camera]').forEach(b => b.onclick = () => edit(c => { toggleList(c, 'cameras', b.dataset.camera); c.override = null; }));
     host.querySelectorAll('[data-negative]').forEach(b => b.onclick = () => edit(c => { toggleList(c, 'negatives', b.dataset.negative); c.override = null; }));
     host.querySelectorAll('[data-toggle]').forEach(b => b.onclick = () => edit(c => { c[b.dataset.toggle] = !c[b.dataset.toggle]; c.override = null; }));
-    host.querySelectorAll('[data-outfit]').forEach(b => b.onclick = () => edit(c => { c.outfit[b.dataset.outfit] = !c.outfit[b.dataset.outfit]; c.override = null; }));
+    host.querySelectorAll('[data-outfit-for]').forEach(el => el.onchange = () => {
+      const who = el.dataset.outfitFor;
+      if (el.value === NEW) {
+        const pick = compose().outfit[who];
+        const person = preset('character', who);
+        render();
+        openBlock('outfit', {from: typeof pick === 'string' ? pick : '', prefill: {character: who, text: typeof pick === 'string' ? '' : person?.data.outfit || ''},
+          apply: (c, id) => { c.outfit[who] = id; c.override = null; }});
+        return;
+      }
+      edit(c => { c.outfit[who] = el.value === 'usual' ? true : el.value || false; c.override = null; });
+    });
+    host.querySelectorAll('[data-edit-person]').forEach(b => b.onclick = () => openBlock('character', {id: b.dataset.editPerson}));
+    host.querySelectorAll('[data-new-block]').forEach(b => b.onclick = () => {
+      const kind = b.dataset.newBlock;
+      const add = {character: (c, id) => { c.characters = [...c.characters, id]; }, camera: (c, id) => { c.cameras = [...c.cameras, id]; }, negative: (c, id) => { c.negatives = [...(c.negatives || []), id]; }}[kind];
+      const c = compose();
+      const from = kind === 'character' ? c.characters[0] : kind === 'camera' ? c.cameras.at(-1) : (c.negatives || []).at(-1);
+      openBlock(kind, {from: from || undefined, apply: (cc, id) => { add(cc, id); cc.override = null; }});
+    });
+    host.querySelectorAll('[data-edit-block]').forEach(b => b.onclick = () => {
+      const kind = b.dataset.editBlock, c = compose();
+      const value = b.dataset.editList ? (c[b.dataset.editList] || [])[0] : b.dataset.editField === 'scenePreset' ? c.sceneRefs?.[0] : blockId(presets, kind, c[b.dataset.editField]);
+      const id = value || active(kind)[0]?.id;
+      if (!id) return openBlock(kind, {});
+      openBlock(kind, {id});
+    });
+    host.querySelectorAll('[data-clear-angle]').forEach(b => b.onclick = () => edit(c => { c.angle = ''; }));
     const bind = (selector, fn) => { const el = $(selector, host); if (el) el.onclick = fn; };
     bind('[data-clear-image]', () => { const s = getScene(); if (s.metadata.images) delete s.metadata.images[activeSlot]; if (s.metadata.image?.slot === activeSlot) delete s.metadata.image; changed(); render(); announceImage(); });
     bind('[data-reset-reference]', () => edit(c => { c.reference = ''; }));
@@ -204,7 +264,7 @@ export function installImages(getScene, changed) {
     pendingConnect = (async () => {
       $('#imageStatus').textContent = 'Loading your image presets…';
       try {
-        presets = await api('image/api/presets');
+        [presets, {private: privateMode}, modelFiles] = await Promise.all([api('image/api/presets'), api('image/api/mode').catch(() => ({private: false})), api('image/api/models/files').catch(() => [])]);
         if ($('#loadPresets')) $('#loadPresets').textContent = 'Refresh presets';
         $('#imageStatus').textContent = 'Connected to your image-generation service.';
         render(); await Promise.all([loadHistory(), refresh()]);

@@ -1,5 +1,6 @@
-'use strict';
-/* Image gen dashboard front end. No build step. Talks to server.py on the same origin. */
+/* Image gen dashboard front end. No build step. Talks to server.py on the same origin. Block kinds, their fields and
+   the prompt diff are shared with the scene editor's composer (blocks.js). */
+import { KINDS, RATINGS, fieldsHtml as sharedFieldsHtml, getp, setp, wordDiff, blank } from './blocks.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -36,7 +37,7 @@ const store = {
 
 /* ------------------------------------------------------------ presets */
 let P = {};
-const TYPES = [['character', 'Characters'], ['style', 'Styles'], ['negative', 'Negatives'], ['framing', 'Framings'], ['camera', 'Cameras'], ['scene', 'Scenes'], ['model', 'Models']];
+const TYPES = KINDS.map(([t, label]) => [t, label]);
 const byId = (t, id) => (P[t] || []).find(x => x.id === id);
 const live = t => (P[t] || []).filter(x => !x.archived);
 const ref = (t, id) => { const p = byId(t, id); return p ? { id, v: p.v } : null; };
@@ -53,7 +54,6 @@ const DEFAULT = {
 let st = Object.assign(clone(DEFAULT), store.get('compose', {}));
 st.ipa = Object.assign(clone(DEFAULT.ipa), st.ipa || {}); st.fix = Object.assign(clone(DEFAULT.fix), st.fix || {});
 const save = () => store.set('compose', st);
-const RATINGS = ['safe', 'sensitive', 'nsfw'];
 
 function activeNegs() {
   if (!st.negs) st.negs = live('negative').filter(n => n.data.default).map(n => n.id);
@@ -651,19 +651,6 @@ function renderTray() {
   $('#cmpGo').onclick = openCompare;
   $('#cmpClear').onclick = () => { pins = []; renderTray(); renderRuns(); };
 }
-function wordDiff(a, b) {
-  // words of b, marked against a: <ins> for words not in a, then <del> for words of a missing in b
-  const A = (a || '').split(/\s+/), B = (b || '').split(/\s+/);
-  const n = A.length, m = B.length, L = Array.from({ length: n + 1 }, () => new Uint16Array(m + 1));
-  for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) L[i][j] = A[i] === B[j] ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
-  let i = 0, j = 0; const out = [];
-  while (i < n || j < m) {
-    if (i < n && j < m && A[i] === B[j]) { out.push(esc(B[j])); i++; j++; }
-    else if (j < m && (i >= n || L[i][j + 1] >= L[i + 1][j])) { out.push(`<ins>${esc(B[j])}</ins>`); j++; }
-    else { out.push(`<del>${esc(A[i])}</del>`); i++; }
-  }
-  return out.join(' ');
-}
 function openCompare() {
   const base = pins[0];
   $('#compare').hidden = false;
@@ -773,30 +760,13 @@ function wireHistory() {
 }
 
 /* ------------------------------------------------------------ presets editor */
-const FIELDS = {
-  character: [['name', 'Name'], ['gender', 'Gender', 'select', ['female', 'male']], ['portrait', 'Portrait', 'portrait'], ['age', 'Age wording', 2],
-    ['look', 'Look: hair, eyes, face', 3], ['signature', 'Signature details', 2], ['build', 'Build line', 1], ['rating_cap', 'Rating cap', 'select', ['', 'safe', 'sensitive']],
-    ['outfit', 'Default outfit (a toggle in Compose)', 2], ['short', 'Short form, used in group shots', 2], ['negative', 'Her negatives', 2], ['notes', 'Notes', 3]],
-  style: [['name', 'Name'], ['quality', 'Quality tags', 2], ['anchors', 'Style anchors', 2], ['suffix', 'Ends with', 1], ['negative', 'Extra negative', 2],
-    ['defaults.rating', 'Default rating', 'select', ['', ...RATINGS]], ['defaults.framing', 'Default framing', 'ref', 'framing'],
-    ['defaults.model', 'Default model', 'ref', 'model'], ['defaults.negatives', 'Default negative sets', 'negs'], ['notes', 'Notes', 3]],
-  negative: [['name', 'Name'], ['text', 'Negative text', 3], ['default', 'On by default', 'check'], ['notes', 'Notes', 2]],
-  framing: [['name', 'Name'], ['w', 'Width', 'num'], ['h', 'Height', 'num'], ['prompt', 'Added to the prompt (optional)', 2], ['notes', 'Notes', 2]],
-  camera: [['name', 'Name'], ['prompt', 'Added to the prompt', 2], ['notes', 'Notes', 2]],
-  scene: [['name', 'Name'], ['text', 'Scene text', 5], ['rating', 'Rating it sets', 'select', ['', ...RATINGS]], ['notes', 'Notes', 2]],
-  model: [['name', 'Name'], ['file', 'File', 'file'], ['steps', 'Steps', 'num'], ['cfg', 'CFG', 'num'], ['sampler', 'Sampler', 1], ['scheduler', 'Scheduler', 1], ['notes', 'Notes', 3]],
-};
-const PAIRS = { character: [['name', 'gender'], ['build', 'rating_cap']], framing: [['w', 'h']], model: [['steps', 'cfg'], ['sampler', 'scheduler']],
-  style: [['defaults.rating', 'defaults.framing']], scene: [['name', 'rating']] };
-function fieldsHtml(type, draft = PE.draft) {
-  const F = FIELDS[type], pairs = PAIRS[type] || [], skip = new Set(pairs.map(p => p[1]));
-  return F.filter(f => !skip.has(f[0])).map(f => {
-    const pr = pairs.find(p => p[0] === f[0]);
-    return pr ? `<div class="f2">${fieldHtml(f, draft)}${fieldHtml(F.find(x => x[0] === pr[1]), draft)}</div>` : fieldHtml(f, draft);
-  }).join('');
-}
-const getp = (o, path) => path.split('.').reduce((a, k) => (a == null ? a : a[k]), o);
-function setp(o, path, v) { const ks = path.split('.'); let a = o; ks.slice(0, -1).forEach(k => { a[k] = a[k] || {}; a = a[k]; }); a[ks.at(-1)] = v; }
+const portraitField = (key, v, label) => `<div class="portfield"><div class="lbl">${label}</div><div class="row gap8">
+    ${v ? `<img class="pthumb" src="${esc(portraitUrl(v))}" alt="">` : `<div class="pthumb noport"><i class="ph ph-user"></i></div>`}
+    <div class="col"><div class="row gap8 wrap"><button class="btn sm" data-pickport="1"><i class="ph ph-images"></i> Choose</button>
+    <label class="btn sm upl"><i class="ph ph-upload-simple"></i> Upload<input type="file" accept="image/png,image/webp,image/jpeg" data-upport="1" hidden></label></div>
+    <div class="hint mono mt4 path">${esc(v || 'no portrait')}</div></div></div></div>`;
+const fieldCtx = () => ({ live, files: PE.files, portrait: portraitField, chip });
+function fieldsHtml(type, draft = PE.draft) { return sharedFieldsHtml(type, draft, fieldCtx()); }
 let PE = { type: store.get('ptype', 'character'), id: null, rec: null, draft: null, diffV: null, files: [] };
 function renderPList() {
   $('#ptypes').innerHTML = TYPES.map(([t, l]) => chip(l, t === PE.type, `data-ptype="${t}"`)).join('');
@@ -804,7 +774,7 @@ function renderPList() {
   if (!PE.id || !byId(PE.type, PE.id)) PE.id = items[0]?.id || null;
   $('#pitems').innerHTML = items.map(p => `<button class="pitem${p.id === PE.id ? ' on' : ''}" data-pid="${esc(p.id)}">
     ${PE.type === 'character' ? (p.data.portrait ? `<img src="${esc(portraitUrl(p.data.portrait))}" alt="">` : `<i class="ph ph-user noimg"></i>`) : ''}
-    <span>${esc(p.data.name)}${p.archived ? ' (archived)' : ''}</span>${p.claude_note ? '<span class="dot" title="Has a note to Claude"><i class="ph-fill ph-chat-circle"></i></span>' : ''}<small>v${p.v}</small></button>`).join('');
+    <span>${esc(p.data.name)}${p.archived ? ' (archived)' : ''}${p.private ? ' · private' : ''}</span>${p.claude_note ? '<span class="dot" title="Has a note to Claude"><i class="ph-fill ph-chat-circle"></i></span>' : ''}<small>v${p.v}</small></button>`).join('');
   $('#pSelMobile').innerHTML = items.map(p => `<option value="${esc(p.id)}" ${p.id === PE.id ? 'selected' : ''}>${esc(p.data.name)} (v${p.v})</option>`).join('');
 }
 function peDirty() { return !!(PE.rec && PE.draft && (JSON.stringify(PE.draft) !== JSON.stringify(PE.rec.versions.at(-1).data) || (PE.note ?? '') !== (PE.rec.claude_note || ''))); }
@@ -815,23 +785,6 @@ async function openPreset(id, force) {
   PE.rec = await api(`/api/preset/${PE.type}/${id}`);
   PE.draft = clone(PE.rec.versions.at(-1).data); PE.note = PE.rec.claude_note || '';
   renderPEditor(); loadTuning();
-}
-function fieldHtml([key, label, kind, opts], draft = PE.draft) {
-  const v = getp(draft, key);
-  if (kind === 'portrait') return `<div class="portfield"><div class="lbl">${label}</div><div class="row gap8">
-    ${v ? `<img class="pthumb" src="${esc(portraitUrl(v))}" alt="">` : `<div class="pthumb noport"><i class="ph ph-user"></i></div>`}
-    <div class="col"><div class="row gap8 wrap"><button class="btn sm" data-pickport="1"><i class="ph ph-images"></i> Choose</button>
-    <label class="btn sm upl"><i class="ph ph-upload-simple"></i> Upload<input type="file" accept="image/png,image/webp,image/jpeg" data-upport="1" hidden></label></div>
-    <div class="hint mono mt4 path">${esc(v || 'no portrait')}</div></div></div></div>`;
-  const id = 'pf-' + key.replace('.', '-');
-  if (kind === 'select') return `<label>${label}<select id="${id}" data-f="${key}">${opts.map(o => `<option value="${o}" ${o === (v || '') ? 'selected' : ''}>${o || 'none'}</option>`).join('')}</select></label>`;
-  if (kind === 'ref') return `<label>${label}<select id="${id}" data-f="${key}"><option value="">none</option>${live(opts).map(o => `<option value="${esc(o.id)}" ${o.id === v ? 'selected' : ''}>${esc(o.data.name)}</option>`).join('')}</select></label>`;
-  if (kind === 'file') return `<label>${label}<select id="${id}" data-f="${key}">${[...new Set([v, ...PE.files])].filter(Boolean).map(f => `<option ${f === v ? 'selected' : ''}>${esc(f)}</option>`).join('')}</select></label>`;
-  if (kind === 'check') return `<label class="check"><input type="checkbox" data-f="${key}" ${v ? 'checked' : ''}> ${label}</label>`;
-  if (kind === 'num') return `<label>${label}<input type="number" step="any" class="mono" data-f="${key}" data-num="1" value="${esc(v ?? '')}"></label>`;
-  if (kind === 'negs') return `<div><div class="lbl">${label}</div><div class="chips">${live('negative').map(n => chip(n.data.name, (v || []).includes(n.id), `data-negf="${esc(n.id)}"`)).join('')}</div></div>`;
-  if (typeof kind === 'number' && kind > 1) return `<label>${label}<textarea rows="${kind}" data-f="${key}">${esc(v ?? '')}</textarea></label>`;
-  return `<label>${label}<input type="text" data-f="${key}" value="${esc(v ?? '')}"></label>`;
 }
 function renderPEditor() {
   const rec = PE.rec; const cur = rec.versions.at(-1);
@@ -890,12 +843,9 @@ function wirePresets() {
   $('#pitems').onclick = e => { const b = e.target.closest('[data-pid]'); if (b) openPreset(b.dataset.pid); };
   $('#pSelMobile').onchange = e => openPreset(e.target.value);
   $('#pNew').onclick = async () => {
-    const blank = {}; FIELDS[PE.type].forEach(([k, , kind]) => setp(blank, k, kind === 'num' ? 0 : kind === 'check' ? false : kind === 'negs' ? [] : ''));
-    if (PE.type === 'character') blank.gender = 'female';
-    if (PE.type === 'model') Object.assign(blank, { steps: 30, cfg: 5, sampler: 'euler_ancestral', scheduler: 'normal', file: PE.files[0] || '' });
-    if (PE.type === 'framing') Object.assign(blank, { w: 896, h: 1152 });
-    blank.name = 'New ' + TYPES.find(t => t[0] === PE.type)[1].replace(/s$/, '').toLowerCase();
-    const rec = await api(`/api/preset/${PE.type}/new/create`, { name: blank.name, data: blank });
+    const data = blank(PE.type, PE.files);
+    data.name = 'New ' + TYPES.find(t => t[0] === PE.type)[1].replace(/s$/, '').toLowerCase();
+    const rec = await api(`/api/preset/${PE.type}/new/create`, { name: data.name, data });
     await loadPresets(); refreshAll(); openPreset(rec.id);
   };
   const ed = $('#peditor');

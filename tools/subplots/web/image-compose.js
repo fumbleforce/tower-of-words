@@ -1,11 +1,9 @@
-// Uses the existing image dashboard's preset records and request format.
+// Uses the existing image dashboard's preset records and request format. Pose, setting (`environment`) and light are
+// blocks like the rest (kinds pose, location, light in blocks.js); a composition keeps the block's id, and an older
+// one that kept the words themselves still reads (blockText).
 const {structuredClone} = globalThis;
-export const DIRECTIONS = {
-  pose: ['Standing naturally', 'Seated', 'Walking', 'Leaning against a wall', 'Reaching for an object', 'Turning toward someone', 'Looking over a shoulder', 'Crouching', 'Lying down'],
-  angle: ['Eye level', 'Low angle', 'High angle', 'Overhead', 'Side profile', 'Over the shoulder'],
-  environment: ['Office reception', 'Office interior', 'Station platform', 'Street', 'Café', 'Apartment', 'Garden', 'Swimming pool', 'Gym', 'Bathhouse'],
-  light: ['Soft daylight', 'Morning light', 'Overcast daylight', 'Warm indoor light', 'Evening light', 'Night lighting'],
-};
+import {blockText, blockId} from '../../imagegen/web/blocks.js';
+export const DIRECTION_KINDS = [['pose', 'pose', 'Pose'], ['environment', 'location', 'Setting'], ['light', 'light', 'Light']];
 export const DEFAULT_COMPOSITION = {
   characters: [], outfit: {}, useShort: true, cameras: [], sceneRefs: [], negatives: null,
   rating: 'safe', count: 1, seedMode: 'random', seed: '', scene: '', pose: '', angle: '', environment: '', light: '',
@@ -57,19 +55,25 @@ export function assembleComposition(c, presets, subplotId) {
   const countGender = gender => chars.filter(p => (p.data.gender || 'female') === gender).length;
   const countTag = (n, single) => n ? n + single + (n > 1 ? 's' : '') : '';
   const cast = [countTag(countGender('female'), 'girl'), countTag(countGender('male'), 'boy')].filter(Boolean).join(', ');
+  const outfitOf = p => {
+    const pick = c.outfit[p.id];
+    const words = pick === true ? p.data.outfit : typeof pick === 'string' ? byId('outfit', pick)?.data.text : '';
+    return words ? 'wearing ' + words.replace(/^wearing\s+/i, '') : '';
+  };
   const blocks = chars.map(p => {
     const d = p.data;
-    const outfit = c.outfit[p.id] && d.outfit ? 'wearing ' + d.outfit : '';
+    const outfit = outfitOf(p);
     if (chars.length > 1 && c.useShort && d.short) return [d.short, outfit].filter(Boolean).join(', ');
     return [d.generic ? '' : d.name, d.age, d.look, d.signature, d.build, outfit].filter(Boolean).join(', ');
   });
-  const direction = [c.scene, c.pose, c.angle, c.environment, c.light].filter(Boolean).join('. ');
+  const direction = [c.scene, blockText(presets, 'pose', c.pose), c.angle, blockText(presets, 'location', c.environment), blockText(presets, 'light', c.light)].filter(Boolean).join('. ');
   const head = [style.quality, rating, cast, style.anchors].filter(Boolean).join(', ');
   const positive = smartJoin([head, blocks.join('; '), direction, c.cameras.map(id => byId('camera', id)?.data.prompt).filter(Boolean).join(', '), byId('framing', c.framing)?.data.prompt, c.extra, style.suffix]);
   const negatives = c.negatives || (presets.negative || []).filter(p => !p.archived && p.data.default).map(p => p.id);
   const soft = rating !== 'safe' && !c.hard;
   const withSoft = text => soft ? dedupe([text, SOFT_NEGATIVE]) : text;
-  const negative = withSoft(dedupe([...negatives.map(id => byId('negative', id)?.data.text), c.styleNegOff ? '' : style.negative, ...chars.filter(p => !c.charNegOff?.[p.id]).map(p => p.data.negative), c.negative, 'child, loli']));
+  const outfitNegs = chars.map(p => typeof c.outfit[p.id] === 'string' ? byId('outfit', c.outfit[p.id])?.data.negative : '');
+  const negative = withSoft(dedupe([...negatives.map(id => byId('negative', id)?.data.text), c.styleNegOff ? '' : style.negative, ...chars.filter(p => !c.charNegOff?.[p.id]).map(p => p.data.negative), ...outfitNegs, c.negative, 'child, loli']));
   const md = byId('model', c.model)?.data || {};
   const fr = byId('framing', c.framing)?.data || {};
   const ref = (type, id) => { const p = byId(type, id); return p ? {id: p.id, v: p.v} : null; };
@@ -88,7 +92,9 @@ export function assembleComposition(c, presets, subplotId) {
     start: c.start?.image ? {image: c.start.image, denoise: +c.start.denoise || 0.35} : null,
     presets: {characters: c.characters.map(id => ref('character', id)).filter(Boolean), man: generic ? ref('character', generic.id) : null,
       model: ref('model', c.model), style: ref('style', c.style), framing: ref('framing', c.framing),
-      cameras: c.cameras.map(id => ref('camera', id)).filter(Boolean), scenes: c.sceneRefs.map(id => ref('scene', id)).filter(Boolean), negatives: negatives.map(id => ref('negative', id)).filter(Boolean)},
+      cameras: c.cameras.map(id => ref('camera', id)).filter(Boolean), scenes: c.sceneRefs.map(id => ref('scene', id)).filter(Boolean), negatives: negatives.map(id => ref('negative', id)).filter(Boolean),
+      pose: ref('pose', blockId(presets, 'pose', c.pose)), location: ref('location', blockId(presets, 'location', c.environment)), light: ref('light', blockId(presets, 'light', c.light)),
+      outfits: Object.values(c.outfit).filter(v => typeof v === 'string').map(id => ref('outfit', id)).filter(Boolean)},
     ipa: canReference && c.referenceOn ? {ref: portrait, strength: +c.referenceStrength, cutout: !!c.referenceCutout} : null,
     repaint: canReference && c.faceFix ? {ref: portrait, denoise: +c.faceStrength, prompt: repaintPrompt} : null,
     autostart: true,
