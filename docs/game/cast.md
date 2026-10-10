@@ -389,17 +389,17 @@ The faces each person can show beside the text box: `game3d/assets/portraits/<id
 | Id | Faces |
 |---|---|
 | `eric` | neutral, surprised, tired |
-| `mio` | neutral, smile, deadpan, surprised, embarrassed, tired, phone |
+| `mio` | neutral, smile, deadpan, surprised, embarrassed, tired, phone, annoyed |
 | `mori` | neutral, smile, flustered |
 | `kenji` | neutral, grin, sheepish |
 | `emi` | neutral |
 | `guard` | neutral, stern, amused |
 | `kuroda` | neutral, sleepy, panicked |
-| `kuro` | neutral |
+| `kuro` | neutral, flirtatious, teasing, pleased, polite |
 | `aoi` | neutral |
 | `rei` | neutral, scolding, cold, smug, offguard |
 
-Mio's `phone` face is her looking down at her phone, a dialogue portrait of its own (Jørgen asked for it instead of a timed phone icon). Approved 2026-09-29 (reviews/mio-phone-5).
+Kuro's `polite` is her cool front-desk manner (the counter greeting on day 1 and when he goes home), `teasing` for her gentle ribbing, `pleased` for being thanked or flattered; `flirtatious` has no scene yet and is there for writers. Mio's `annoyed` is mildly annoyed, not angry (used when she is interrupted mid-fix). Mio's `phone` face is her looking down at her phone, a dialogue portrait of its own (Jørgen asked for it instead of a timed phone icon). Approved 2026-09-29 (reviews/mio-phone-5).
 
 ## In the code, in no storyline
 

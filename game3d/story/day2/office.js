@@ -103,7 +103,7 @@ export default {
     d2_mio_work: [
       { if: 'sender_delivered', then: [{ go: 'sender_later' }] },
       { if: 'd2_mio_job_talked && d2_mio_weekend_talked', then: [
-        { say: 'mio', emo: 'curt', text: 'Not now, I have to catch this before it restarts again. At dinner, maybe?' },
+        { say: 'mio', face: 'annoyed', emo: 'curt', text: 'Not now, I have to catch this before it restarts again. At dinner, maybe?' },
       ], else: [{ choice: [
         { text: 'What are you working on?', if: '!d2_mio_job_talked', go: 'd2_mio_job' },
         { text: 'Do you usually stay on the island at weekends?', if: '!d2_mio_weekend_talked', go: 'd2_mio_weekend' },

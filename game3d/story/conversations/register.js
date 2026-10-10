@@ -50,11 +50,11 @@ export default {
       { do: 'emote', who: 'kuro', kind: '♪' },
     ],
     register_kuro_right_2: [
-      { say: 'kuro', emo: 'teasing', overheard: true, text: 'ノルウェーでも、そんなに丁寧なんですか。それとも、{koko}でだけ？', clear: [{ ja: 'ノルウェー', ro: 'noruwē', en: 'Norway' }] },
+      { say: 'kuro', face: 'teasing', emo: 'teasing', overheard: true, text: 'ノルウェーでも、そんなに丁寧なんですか。それとも、{koko}でだけ？', clear: [{ ja: 'ノルウェー', ro: 'noruwē', en: 'Norway' }] },
       { do: 'gesture', who: 'kuro', kind: 'point', to: 'eric' },
     ],
     register_kuro_right_3: [
-      { say: 'kuro', emo: 'teasing', overheard: true, text: '発音、きれいになりましたね。誰に習ったんですか。……{watashi}以外に。' },
+      { say: 'kuro', face: 'teasing', emo: 'teasing', overheard: true, text: '発音、きれいになりましたね。誰に習ったんですか。……{watashi}以外に。' },
       '> Her fingers rest on your sleeve for a moment.',
     ],
     register_kuro_casual_1: [
