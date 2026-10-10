@@ -13,7 +13,8 @@ function display(monitor) {
     map: texture,
     toneMapped: false,
   });
-  monitor.userData.noBatch = true;
+  // only the screen redraws; the housing around it can still batch (perf/batch.js)
+  screen.userData.noBatch = true;
   return { canvas, texture, screen };
 }
 function base(g, title) {
@@ -57,13 +58,13 @@ export function senderProps(world) {
   );
   const remote = display(deskMonitor);
   const retained = display(world.senderMonitor);
-  world.senderCart.userData.noBatch = true;
   const control = rbox(0.07, 0.024, 0.045, '#87a1bb', {
     x: 0.16,
     y: 0.504,
     z: 0.15,
     r: 0.006,
   });
+  control.userData.noBatch = true;
   world.senderCart.add(control);
   const cable = new THREE.CatmullRomCurve3([
     new THREE.Vector3(4.2, 0.54, -1.45),

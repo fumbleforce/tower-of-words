@@ -44,10 +44,10 @@
       "reason": "Existing procedural character and animation implementation; changes require character review."
     },
     "game3d/js/perf/batch.js": {
-      "lines": 1054,
-      "bytes": 44204,
+      "lines": 1076,
+      "bytes": 45165,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-09-30 busy() for the shader warm-up (notes/PERF.md); 2026-09-30 people's torsos batched under from the start (notes/PERF.md, evening draw calls); 2026-10-01 issue #82: outlined meshes draw from twins of their batches (js/perf/batch-twin.js, notes/PERF.md); 2026-10-01 issue #137: place.perfMovers and hidden moving groups batched from the first scan (notes/PERF.md); 2026-10-01 issue #136: people merge into skinned batches, their joints as bones (js/perf/batch-rig.js, notes/PERF.md); 2026-10-01 issue #145: place.extras and place.crowd as skinned batches, forOutline while toggled off (notes/PERF.md); 2026-10-01 issue #155: people's batches refit their culling spheres each frame (js/perf/batch-rig.js fitBounds, notes/PERF.md); 2026-10-09 issue #372: shadow-only batches from shadow stand-ins (js/perf/shadow-proxy.js), consolidated shadow batches cut by where their meshes are, the cut per shadow-casting group (notes/PERF.md, Place budgets)",
+      "review": "C-0071; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-09-30 busy() for the shader warm-up (notes/PERF.md); 2026-09-30 people's torsos batched under from the start (notes/PERF.md, evening draw calls); 2026-10-01 issue #82: outlined meshes draw from twins of their batches (js/perf/batch-twin.js, notes/PERF.md); 2026-10-01 issue #137: place.perfMovers and hidden moving groups batched from the first scan (notes/PERF.md); 2026-10-01 issue #136: people merge into skinned batches, their joints as bones (js/perf/batch-rig.js, notes/PERF.md); 2026-10-01 issue #145: place.extras and place.crowd as skinned batches, forOutline while toggled off (notes/PERF.md); 2026-10-01 issue #155: people's batches refit their culling spheres each frame (js/perf/batch-rig.js fitBounds, notes/PERF.md); 2026-10-09 issue #372: shadow-only batches from shadow stand-ins (js/perf/shadow-proxy.js), consolidated shadow batches cut by where their meshes are, the cut per shadow-casting group (notes/PERF.md, Place budgets); 2026-10-10 issue #374: merged meshes' GPU copies let go (js/perf/batch-free.js), groups marked perfAnchor batched under themselves while hidden, the phone's shadow casters snapped (notes/PERF.md, Stage 3)",
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {

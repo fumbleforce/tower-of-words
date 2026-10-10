@@ -9,8 +9,21 @@ const proxies = new WeakMap();
 
 export const setShadowGeometry = (mesh, geometry) => (geometry ? proxies.set(mesh, geometry) : proxies.delete(mesh));
 export const shadowProxy = (mesh) => proxies.get(mesh) || null;
-// the geometry a mesh's shadow is drawn from
-export const shadowGeometry = (mesh) => proxies.get(mesh) || mesh.geometry;
+// the geometry a mesh's shadow is drawn from: its own stand-in, a plain box for a rounded one (perf/rounded-box.js), or
+// its own geometry
+export const shadowGeometry = (mesh) => proxies.get(mesh) || boxFor(mesh.geometry) || mesh.geometry;
+const boxes = new Map();
+function boxFor(g) {
+  const s = g.userData.shadowBox;
+  if (!s) return null;
+  const key = s.join('|');
+  let b = boxes.get(key);
+  if (!b) {
+    if (boxes.size > 500) boxes.clear();
+    boxes.set(key, (b = positions(new THREE.BoxGeometry(s[0], s[1], s[2]))));
+  }
+  return b;
+}
 // a geometry's triangles as a non-indexed position-only copy (what a shadow needs)
 export function positions(g) {
   const out = new THREE.BufferGeometry();
@@ -53,4 +66,20 @@ export function clustered(g, cell) {
   const r = new THREE.BufferGeometry();
   r.setAttribute('position', new THREE.Float32BufferAttribute(out, 3));
   return r;
+}
+
+// A caster's shadow geometry snapped to `cell` metres (clustered), kept per geometry when that drops a fifth or more of
+// its triangles; with cell 0 (or little to gain) the geometry itself. For a cell under the shadow map's texel the
+// shadow is the same (perf/phone.js batchSizes).
+const snapped = new WeakMap();
+export function snappedShadow(g, cell) {
+  if (!cell) return g;
+  let s = snapped.get(g);
+  if (s === undefined) {
+    const n = (g.index ? g.index.count : g.attributes.position.count) / 3;
+    s = n >= 24 ? clustered(g.index ? g.toNonIndexed() : g, cell) : null;
+    if (s && s.attributes.position.count / 3 > n * 0.8) s = null;
+    snapped.set(g, s);
+  }
+  return s || g;
 }
