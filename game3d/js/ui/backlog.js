@@ -4,13 +4,14 @@
 // Read state: which lines have been on screen before, by line id, kept in the browser across saves; Skip uses it.
 import { lineHTML, known } from '../lang.js';
 import { stopVoice, voice } from '../audio/core.js';
-import { heardHTML, addPlayButtons } from './dialogue-text.js';
+import { heardHTML, mixedHTML, addPlayButtons } from './dialogue-text.js';
 import { thumbStyle } from './portraits.js';
 import { el } from './dom.js';
 import { storage } from '../storage.js';
 import { conversationMemory, rememberEntry, rememberedLines } from '../conversations/state.js';
 import { LOG_LIMIT, restoreLog, recordEntry, sameLine } from './backlog-records.js';
 import { earlierReading } from './backlog-comparison.js';
+import { presentLine } from '../narrative/heard-line.js';
 
 const READ_KEY = 'amakawa-read';
 let items = [];
@@ -91,12 +92,18 @@ function itemHTML(e, i) {
   if (e.k === 'pick')
     return `<li class="pick${e.seen ? ' seen' : ''}"><span class="tag">You chose</span><span class="c">${e.html}</span></li>`;
   const thumb = e.who ? thumbStyle(e.who, e.face) : '';
-  const body = e.ov ? heardHTML(e.text, e.clear) : lineHTML(e.en || e.text);
+  // the text box's rule (narrative/heard-line.js), so a line saved before it can't come back subtitled
+  const {
+    heard: ov,
+    mixed,
+    en,
+  } = e.who ? presentLine(e.who, e.text, { overheard: e.ov, en: e.en }) : { heard: e.ov, en: e.en };
+  const body = ov ? heardHTML(e.text, e.clear) : mixed ? mixedHTML(e.text, e.clear) : lineHTML(en || e.text);
   const name = e.name
-    ? `<div class="who"><span class="nm" style="--c:${e.color || '#8fa3c0'}">${esc(e.name)}</span>${e.phone ? '<span class="rl txt">message</span>' : e.role ? `<span class="rl">${esc(e.role)}</span>` : ''}${e.en ? '<span class="rl">in Japanese</span>' : ''}</div>`
+    ? `<div class="who"><span class="nm" style="--c:${e.color || '#8fa3c0'}">${esc(e.name)}</span>${e.phone ? '<span class="rl txt">message</span>' : e.role ? `<span class="rl">${esc(e.role)}</span>` : ''}${en ? '<span class="rl">in Japanese</span>' : ''}</div>`
     : '';
   const origin = `<div class="who"><span class="rl">Day ${e.day}${e.period ? ' · ' + esc(e.period) : ''}</span></div>`;
-  return `<li class="${e.name ? 'say' : 'narr'}${e.ov ? ' heard' : ''}${e.phone ? ' text' : ''}${e.seen ? ' seen' : ''}">
+  return `<li class="${e.name ? 'say' : 'narr'}${ov ? ' heard' : ''}${e.phone ? ' text' : ''}${e.seen ? ' seen' : ''}">
     ${thumb ? `<span class="th" style="${thumb}"></span>` : '<span class="th none"></span>'}
     <div class="bd">${origin}${name}<div class="tx">${body}</div>${earlierReading(e, body)}</div>
     ${e.vk ? `<button type="button" class="rp" data-i="${i}" aria-label="Play this line again">${PLAY}</button>` : ''}

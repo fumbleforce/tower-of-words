@@ -119,11 +119,11 @@ The Say menu speaks the chosen phrase or command to whoever or whatever is neare
 
 ## Overheard Japanese
 
-Lines Eric can't follow are shown as soft, shifting stand-in characters, with only the words he knows, people's names ([words.md](words.md)) and the loanwords a line makes clear readable. Their voice plays muffled; the known words come out clear in it (Jørgen: known words clear in the voice, unknown speech much more sound-blurred; "the text blur is good as it is"). Sounds like あっ or えっ stay readable; real words like はい or うん blur until taught. The point is that Japanese beyond his level looks and sounds like gibberish on purpose.
+Anyone's Japanese but Eric's own goes through the blur, whether the story marked the line or not, in public scenes and private ones alike (Jørgen, 2026-10-10: "I should not be understanding what kuro says when she talks japanese, a consistent failure many places in dialogue, you keep forgetting the blur"). No English meaning shows for it: no subtitle, no gloss of a word he hasn't learned. When someone speaks English with a Japanese word dropped in (Mio), the English reads as written and only the Japanese follows the blur. Narration never translates a blurred line; it says what he can read from tone and gesture. Lines Eric can't follow are shown as soft, shifting stand-in characters, with only the words he knows, people's names ([words.md](words.md)), arigatō (the one word he arrives with) and the loanwords a line makes clear readable. Once he learns a word, older lines in the backlog show it clear. Their voice plays muffled; the known words come out clear in it (Jørgen: known words clear in the voice, unknown speech much more sound-blurred; "the text blur is good as it is"). Sounds like あっ or えっ stay readable; real words like はい or うん blur until taught. The point is that Japanese beyond his level looks and sounds like gibberish on purpose.
 
 ## Subtitled Japanese
 
-Some Japanese is subtitled instead of overheard: its voice plays clear, in Japanese, and the English shows as the line, with "in Japanese" by the speaker's name. The Japanese itself isn't shown and nothing in it becomes known. For the small moments where the player should follow what someone says although Eric can't (the train passengers).
+The one exception to the blur: an ambient caption of two other people talking (never Eric) can show its English, with "in Japanese" by the speaker's name. Nothing in it becomes known. Eric's own Japanese lines show their English too, since he knows what he's saying. In the text box no one else's line is ever subtitled.
 
 ## Kotodama effects
 

@@ -3,7 +3,7 @@ import { lineHTML } from '../lang.js';
 import { settings, CPS } from '../settings.js';
 import { voice, stopVoice } from '../audio/core.js';
 import { showPortraits, resetPortraitSpeaker, clearPortraits } from './portraits.js';
-import { heardHTML, scramble, reveal, addPlayButtons, whileUnpaused } from './dialogue-text.js';
+import { heardHTML, mixedHTML, scramble, reveal, addPlayButtons, whileUnpaused } from './dialogue-text.js';
 import { installCaptionLayout } from './caption-layout.js';
 import { showDoorCard } from './door-card.js';
 import { lineId, wasRead, markRead, logLine, logToJSON, logLoad } from './backlog.js';
@@ -19,7 +19,7 @@ export function createDialogue({ sfx }) {
     // Show a line and wait for a tap. speaker: {name, role, color} or null for narration.
     // en: Japanese spoken (the voice clip is of `text`) with this English as its subtitle, unmuffled (runner `en`)
     // card: HTML shown under the line (a skipped typing prompt's word, narrative/hooks/progression.js)
-    say(speaker, text, { voiceKey, auto, overheard, clear, whoId, face, en, card = '' } = {}) {
+    say(speaker, text, { voiceKey, auto, overheard, mixed, clear, whoId, face, en, card = '' } = {}) {
       if (en) overheard = false;
       return new Promise((res) => {
         const t = $('#talk');
@@ -35,7 +35,8 @@ export function createDialogue({ sfx }) {
           ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}${en ? '<span class="subtag">in Japanese</span>' : ''}`
           : '';
         const lineEl = t.querySelector('.line');
-        lineEl.innerHTML = (overheard ? heardHTML(text, clear) : lineHTML(en || text)) + card;
+        lineEl.innerHTML =
+          (overheard ? heardHTML(text, clear) : mixed ? mixedHTML(text, clear) : lineHTML(en || text)) + card;
         if (!overheard) addPlayButtons(lineEl);
         t.querySelector('.chips').innerHTML = '';
         const more = t.querySelector('.more');
@@ -239,7 +240,7 @@ export function createDialogue({ sfx }) {
       });
     },
     // a line nobody has to tap (ambient moments); overheard Japanese is garbled as in the dialogue box
-    caption(sp, text, { overheard, clear, en } = {}) {
+    caption(sp, text, { overheard, mixed, clear, en } = {}) {
       installCaptionLayout();
       if (en) [text, overheard] = [en, false];
       const c = $('#caption');
@@ -251,7 +252,7 @@ export function createDialogue({ sfx }) {
       c.querySelector('.nm').innerHTML = sp ? sp.name : '';
       c.querySelector('.nm').style.color = sp ? sp.color || '' : '';
       const tx = c.querySelector('.tx');
-      tx.innerHTML = overheard ? heardHTML(text, clear) : lineHTML(text);
+      tx.innerHTML = overheard ? heardHTML(text, clear) : mixed ? mixedHTML(text, clear) : lineHTML(text);
       if (overheard) scramble(tx);
       c.classList.remove('in');
       void c.offsetWidth;

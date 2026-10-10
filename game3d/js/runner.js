@@ -3,6 +3,7 @@ import { flagKeys } from './narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/runner.js');
 import { DEFAULT_SPEAKERS } from './narrative/speakers.js';
 import { MC, PLAYER_ID, expandMc } from './mc.js';
+import { presentLine } from './narrative/heard-line.js';
 import { storyPath } from './days.js';
 // Runs the story files (game3d/story/*.js, format in game3d/story/FORMAT.md) against a place.
 import { voiceThenBeat } from './ui.js';
@@ -334,18 +335,12 @@ export class Runner {
   async sayLine(who, text, voiceKey, name, s = {}) {
     const sp = name ? { ...this.speaker(who), name, role: '' } : this.speaker(who);
     this.game.talkingTo = who;
-    voiceKey ||= lineClip(who, text, s.overheard); // the protagonist's own clip, the shared one, or none
+    const { heard: overheard, mixed, en } = presentLine(who, text, s);
+    voiceKey ||= lineClip(who, text, s.overheard, overheard);
     if (voiceKey && s.overheard && !audioKeys.has(voiceKey)) voiceKey = null;
     this.game.setHurry?.(false);
-    const shown = ui.say(sp, text, {
-      voiceKey,
-      overheard: !!s.overheard,
-      clear: s.clear,
-      whoId: who,
-      face: s.face,
-      en: s.en,
-    });
-    if (s.overheard && window.__test) recordHeard(text, voiceKey);
+    const shown = ui.say(sp, text, { voiceKey, overheard, mixed, clear: s.clear, whoId: who, face: s.face, en });
+    if (overheard && window.__test) recordHeard(text, voiceKey);
     await shown;
     return null;
   }

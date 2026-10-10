@@ -134,7 +134,7 @@ export default {
       { go: 'club_swimming_join' },
     ],
     club_swimming_slow: [
-      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'warm', text: 'ゆっくりで、いいですよ。', clear: [{ ja: 'ゆっくり', ro: 'yukkuri', en: 'slowly' }] },
+      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'warm', text: 'ゆっくりで、いいですよ。' },
       { say: 'emi', emo: 'warm', text: 'Take it slowly, she says. I could do with remembering that myself.' },
       { say: 'eric', emo: 'warm', text: 'I may need a moment at the other end.' },
     ],
