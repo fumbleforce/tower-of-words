@@ -1,0 +1,11 @@
+{
+  "name": "amakawa-desktop-build",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Build tools for the Amakawa desktop app (node desktop/build.mjs). The app's own package.json is written per flavor by build.mjs.",
+  "type": "module",
+  "devDependencies": {
+    "electron": "44.7.0",
+    "electron-builder": "26.15.3"
+  }
+}
