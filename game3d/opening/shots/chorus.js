@@ -399,7 +399,7 @@ export const CHORUS = [
     // Everyone together on the held note, lit up one after another
     id: 'lineup',
     t: [HIT.post, HIT.logo],
-    in: { type: 'flash', d: 0.16, at: 0.3 },
+    in: { type: 'cut' }, // straight out of the black gap (a flash from black passed through a muddy grey)
     draw(g, lt) {
       vgrad(g, [
         [0, '#2c67cf'],
