@@ -29,18 +29,15 @@
     },
     "forecourt": {
       "phone": {
-        "calls": { "max": 242, "issue": 374, "reason": "measured 230 on main e8261bec with #374 stage 3 (the ambient crowd's carried bags, the lift cut-away and named station casters draw alone), within 5%" },
+        "calls": { "max": 237, "issue": 374, "reason": "measured 226 on main c4c2097c with #374 stage 3: the approved crowd bodies (#353) draw one by one with their carried bags, about 10 more than the old crowd; within 5%" },
         "tris": { "max": 330000, "issue": 374, "reason": "street style on phone, within 5% (coordinator, 2026-10-09)" }
       },
       "desktop": {
         "calls": { "max": 547, "issue": 374, "reason": "street style detail for the desktop follow camera (coordinator, 2026-10-09)" },
-        "tris": { "max": 921000, "issue": 374, "reason": "street style detail for the desktop follow camera (coordinator, 2026-10-09)" }
+        "tris": { "max": 978000, "issue": 374, "reason": "full forecourt vegetation on desktop (Jørgen 2026-10-09; 5f4c2b4d's leaf cards round the forecourt's edge): measured 931k, within 5%" }
       }
     },
     "office": {
-      "phone": {
-        "loadMs": { "max": 8800, "issue": 374 }
-      },
       "desktop": {
         "texMB": { "max": 234, "issue": 373 }
       }

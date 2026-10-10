@@ -1,7 +1,7 @@
 // Ambient office bodies use the two selected crowd models; other clothing kinds retain their existing variety.
 // makeBody owns only appearance and bags. Population, route planning and gait remain in the crowd controllers.
 import * as THREE from 'three';
-import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
+import { toCreasedNormals, mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { chibi, SKINS, S as PROP_SCALE } from '../train/people.js';
 import { hull } from '../train/hull.js';
 import { PEOPLE, HK } from '../cast.js';
@@ -181,6 +181,19 @@ function palmAt(r) {
   const grip = fingers.filter((p) => p.y <= bottom);
   return grip.reduce((sum, p) => sum.add(p), point.set(0, 0, 0)).divideScalar(grip.length);
 }
+// A bag's parts share one material (vertex colours), so they draw as one mesh: a carried prop on a hand bone draws
+// on its own every frame, and twice on the desktop (its AO pass), #374. The parts stay in the bag, hidden, as the
+// carry checks read them (children[0] the body, children[1] the handle; tools/crowd-bag-check.mjs).
+function oneMesh(bag) {
+  const parts = bag.children.filter((o) => o.isMesh && o.material === mat);
+  if (parts.length < 2) return;
+  const geometry = mergeGeometries(parts.map((o) => (o.updateMatrix(), o.geometry.clone().applyMatrix4(o.matrix))));
+  if (!geometry) return;
+  const one = new THREE.Mesh(geometry, mat);
+  one.castShadow = one.receiveShadow = true;
+  for (const o of parts) o.visible = false;
+  bag.add(one);
+}
 function carryBag(r, bag) {
   bag.name = 'crowd-bag';
   // The broad face runs beside the leg, with the long ends along the walking direction.
@@ -188,6 +201,7 @@ function carryBag(r, bag) {
   const handle = bag.children[1];
   handle.geometry.computeBoundingBox();
   const grip = handle.geometry.boundingBox.getCenter(new THREE.Vector3());
+  oneMesh(bag);
   if (r.meshy) {
     const palm = palmAt(r);
     // These props were drawn for longer procedural arms. Fit their furthest corner
