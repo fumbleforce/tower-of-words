@@ -1,6 +1,7 @@
 const {setInterval, clearInterval, document, URLSearchParams, CustomEvent} = globalThis;
 import {$, esc, api, guarded, notice} from './common.js';
-import {DIRECTIONS, normalizeComposition, assembleComposition, portraitUrl} from './image-compose.js';
+import {guessComposition} from './image-guess.js';
+import {DIRECTIONS, applyDefaults, normalizeComposition, assembleComposition, portraitUrl} from './image-compose.js';
 
 const options = (items, value) => items.map(item => {
   const id = item.id ?? item;
@@ -42,8 +43,7 @@ export function installImages(getScene, changed) {
       c.imageSlot = activeSlot;
     }
     if (presets) {
-      for (const type of ['model', 'style', 'framing']) if (!c[type]) c[type] = active(type)[0]?.id || '';
-      if (c.negatives === null) c.negatives = active('negative').filter(p => p.data.default).map(p => p.id);
+      applyDefaults(c, presets);
       if (!c.castInitialized) {
         const speakers = new Set();
         const visit = value => {
@@ -91,6 +91,7 @@ export function installImages(getScene, changed) {
     const direction = `<section class="image-section"><div class="section-head"><h3>Direct the shot</h3>${field('scenePreset', 'Saved scene direction', presetOptions('scene'), '', 'Choose a saved direction…')}</div>
       <div class="four">${field('pose', 'Pose', DIRECTIONS.pose, c.pose)}${field('angle', 'Camera angle', DIRECTIONS.angle, c.angle)}${field('environment', 'Environment', DIRECTIONS.environment, c.environment)}${field('light', 'Light', DIRECTIONS.light, c.light)}</div>
       <label>What happens in this picture?<textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>
+      <label>More details for the prompt<textarea data-compose="extra" rows="1" placeholder="Specifics the blocks above don't cover: props, clothes, a mood.">${esc(c.extra || '')}</textarea></label>
       <h4>Camera and composition</h4><div class="chips">${active('camera').map(p => chip(p.data.name, c.cameras.includes(p.id), `data-camera="${esc(p.id)}"`)).join('')}</div>
       <div class="three">${field('framing', 'Picture shape', presetOptions('framing'), c.framing, null)}${field('style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p></section>`;
     const consistency = `<section class="image-section"><h3>Keep the character consistent</h3><div class="image-consistency">
@@ -102,9 +103,11 @@ export function installImages(getScene, changed) {
       <div class="settings-grid">${field('model', 'Model', presetOptions('model'), c.model, null)}${number('count', 'Pictures', c.count, 1, 8)}${field('seedMode', 'Variation', [{id: 'random', label: 'New variations'}, {id: 'fixed', label: 'Repeat a seed'}], c.seedMode, null)}${number('seed', 'Seed', c.seed, 0, 9007199254740991)}
       ${number('steps', 'Steps', c.steps, 1, 100, 1, md.steps || 30)}${number('cfg', 'Prompt strength', c.cfg, 0.1, 30, 0.1, md.cfg || 5)}${number('width', 'Width', c.width, 256, 2048, 64, fr.w || 1152)}${number('height', 'Height', c.height, 256, 2048, 64, fr.h || 896)}</div>
       <h4>Exclude from the picture</h4><div class="chips">${active('negative').map(p => chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}"`)).join('')}</div>
-      <label>Anything else to avoid?<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label></section>`;
+      <label>Anything else to avoid?<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
+      ${c.rating !== 'safe' ? check('hard', 'Hard scene: leave out the standing soft-scene exclusions', c.hard) : '<p class="hint">Mature and Adult pictures always exclude visible nipples, visible genitals and an uncovered crotch, unless marked as a hard scene.</p>'}
+      <label>Notes for steps outside the prompt<textarea data-compose="details" rows="2" placeholder="Start image and strength, inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></section>`;
     const go = `<div class="image-go"><button id="generate" class="primary" ${presets ? '' : 'disabled'} title="Uses your existing image-generation queue. Choose a result from the Picture library to add it to this shot.">Generate ${+c.count > 1 ? c.count + ' pictures' : 'a picture'}</button></div>`;
-    const prompt = `<section class="image-section"><h3>Generated prompt</h3><p id="assembled" class="hint prompt-box"></p>${c.override ? '<p class="hint">This picture uses a prompt copied from history.</p><button data-reset-prompt>Build the prompt from these controls</button>' : ''}</section>`;
+    const prompt = `<section class="image-section"><h3>Generated prompt</h3><p id="assembled" class="hint prompt-box"></p>${c.override ? '<p class="hint">This picture uses a prompt copied from history.</p><button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</section>`;
     // The full-screen composer (index.html) has a stage between the controls and the library: the picture, Generate
     // and every generation setting in view at once. Without one (a narrow panel) it all runs down one column.
     const stage = $('#composePreview');
@@ -138,7 +141,7 @@ export function installImages(getScene, changed) {
           c[name] = el.type === 'checkbox' ? el.checked : el.value;
           if (name === 'framing') { delete c.width; delete c.height; }
           c.override = null;
-        }, ['model', 'count', 'referenceOn', 'faceFix'].includes(name));
+        }, ['model', 'count', 'referenceOn', 'faceFix', 'rating'].includes(name));
       };
     });
     host.querySelectorAll('[data-char]').forEach(b => b.onclick = () => edit(c => { toggleList(c, 'characters', b.dataset.char); c.reference = ''; c.override = null; }));
@@ -150,6 +153,14 @@ export function installImages(getScene, changed) {
     bind('[data-clear-image]', () => { const s = getScene(); if (s.metadata.images) delete s.metadata.images[activeSlot]; if (s.metadata.image?.slot === activeSlot) delete s.metadata.image; changed(); render(); announceImage(); });
     bind('[data-reset-reference]', () => edit(c => { c.reference = ''; }));
     bind('[data-pick-reference]', guarded(loadReferences));
+    bind('[data-fill-prompt]', () => edit(c => {
+      const {composition, found} = guessComposition(c.source, presets || {});
+      const keep = {imageSlot: c.imageSlot, source: c.source, subplotId: c.subplotId};
+      for (const k of Object.keys(c)) delete c[k];
+      Object.assign(c, composition, keep, {override: null, castInitialized: true});
+      applyDefaults(c, presets || {});
+      notice('Guessed ' + (found.join(', ') || 'nothing') + ' from the prompt; the rest is in the free text.');
+    }));
     bind('[data-reset-prompt]', () => edit(c => { c.override = null; }));
     bind('#generate', guarded(generate));
   }
@@ -251,7 +262,9 @@ export function installImages(getScene, changed) {
     if (!c.characters.length) c.characters = (j.characters || []).filter(id => preset('character', id));
     c.model = active('model').find(p => p.data.file === j.model_file)?.id || c.model;
     Object.assign(c, {imageSlot: activeSlot, seedMode: 'fixed', seed: j.seed, count: 1, width: j.w, height: j.h,
-      steps: j.steps || c.steps, cfg: j.cfg || c.cfg, override: {positive: j.positive, negative: j.negative || ''}});
+      steps: j.steps || c.steps, cfg: j.cfg || c.cfg,
+      source: j.compose?.characters?.length || j.compose?.chars?.length ? null : {positive: j.positive, negative: j.negative || '', model_file: j.model_file, w: j.w, h: j.h, characters: j.characters, seed: j.seed, steps: j.steps, cfg: j.cfg},
+      override: {positive: j.positive, negative: j.negative || ''}});
     if (j.ipa) Object.assign(c, {reference: j.ipa.ref, referenceOn: true, referenceStrength: j.ipa.strength, referenceCutout: j.ipa.cutout});
     if (j.repaint) Object.assign(c, {reference: j.repaint.ref, faceFix: true, faceStrength: j.repaint.denoise});
     s.metadata.compositions[activeSlot || 'scene'] = c;
