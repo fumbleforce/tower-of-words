@@ -227,7 +227,7 @@ export class Markers {
     const glyph = pinGlyph(item);
     el.classList.add('g-' + glyph);
     const t = tipOf(item);
-    el.innerHTML = `<span class="pin" aria-hidden="true">${PIN_GLYPHS[glyph]}</span><span class="tag"><span class="vb">${t.verb}</span><span class="nm">${item.label}</span><span class="key">E</span></span><span class="stem" aria-hidden="true"></span>`;
+    el.innerHTML = `<span class="pin" aria-hidden="true">${PIN_GLYPHS[glyph]}</span><span class="tag"><span class="vb">${t.verb}</span><span class="nm">${item.label}</span><span class="key">E</span></span><span class="keyq" aria-hidden="true"></span><span class="stem" aria-hidden="true"></span>`;
     el.setAttribute('aria-label', t.text);
     if (item.icon) el.querySelector('.pin').insertAdjacentHTML('beforeend', HEART);
     this.layer.appendChild(el);

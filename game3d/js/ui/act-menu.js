@@ -43,6 +43,14 @@ export function actMenu({ keyLabel, settings }) {
       const obw = window.__onboard;
       // the E key cap on the pin in reach, on desktop, until E has been used five times (onboard.js counts uses)
       document.body.classList.toggle('teach-e', !!(target && obw && (obw.uses || 0) < 5));
+      // the Say key on the other side of the pin from E: Q on the left when a word does something at the target in reach
+      for (const m of g.markers ? g.markers.list : []) {
+        const on = !!(target && m === target && show && g.sayTarget === target && g.sayRow(target));
+        if (m.el.classList.contains('sayq') !== on) {
+          m.el.classList.toggle('sayq', on);
+          m.el.querySelector('.keyq').textContent = keyLabel(settings.keySay || 'KeyQ');
+        }
+      }
       if (this.actFor && (blocked || this.actFor !== target)) this.actFor = null;
       if (!target || !this.actFor || (obw && obw.active && !obw.moved)) {
         if (!act.hidden) act.hidden = true;
