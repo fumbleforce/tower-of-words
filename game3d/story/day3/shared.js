@@ -17,6 +17,8 @@ export const emiIntroduction = [
 ];
 export const emiHello = [{ if: emiNeedsIntro, then: emiIntroduction,
   else: [{ unset: 'd3_emi_needs_intro' }] }];
+// Emi's swimming club, learned wherever she says it (her Chat about the club needs it: conversations/needs.js)
+export const emiClubFact = { do: 'fact', who: 'emi', id: 'swimming_club', text: 'In the swimming club. It meets on Saturday evenings.' };
 export const repairQueue = [
   { do: 'ticket', add: 'T-0003' },
   { do: 'ticket', add: 'T-0004' },

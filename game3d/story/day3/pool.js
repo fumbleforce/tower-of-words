@@ -1,4 +1,4 @@
-import { place, goal, emiHello } from './shared.js';
+import { place, goal, emiHello, emiClubFact } from './shared.js';
 export default place(
   { sports: ['talk:changing_room'] },
   {
@@ -14,7 +14,7 @@ export default place(
     show: { pool_goggles: "period == 'evening' && club_swimming && !d3_goggles_returned" },
     nodes: {
       d3_arrive: [{ do: 'day3Setup' }, ...goal('changing_room')],
-      d3_emi_pool: [...emiHello, { if: 'd3_swim_done', then: [
+      d3_emi_pool: [...emiHello, emiClubFact, { if: 'd3_swim_done', then: [
         { say: 'emi', emo: 'warm', text: 'I’m staying a bit longer. I’ve only just got comfortable.' },
       ], else: [{ say: 'emi', emo: 'bright', text: 'Come and join us if you like. The club slips are on the plaza board.' }] }],
       d3_kuro_pool: [

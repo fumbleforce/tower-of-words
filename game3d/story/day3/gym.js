@@ -1,4 +1,4 @@
-import { place, goal, emiHello } from './shared.js';
+import { place, goal, emiHello, emiClubFact } from './shared.js';
 // The gym's reception counter, in the entrance lobby: the booking terminal on the counter, the printer behind it.
 // Eric comes for T-0004, which Mio's morning text and his request list told him about (dorms.js d3_room).
 export default place(
@@ -136,6 +136,7 @@ export default place(
       ],
       d3_emi: [...emiHello,
         { say: 'emi', emo: 'bright', text: 'I’m here for the pool keys. We’ve got one last swim outdoors tonight.' },
+        emiClubFact,
         { if: 'club_swimming', then: [
           { say: 'emi', emo: 'bright', text: 'See you at the pool, then. You don’t have to swim, you can sit by the water.' },
         ], else: [{ say: 'emi', emo: 'casual', text: 'Take a slip at the plaza if you fancy it. You don’t have to swim, you can sit by the water.' }] },

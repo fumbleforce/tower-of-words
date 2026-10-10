@@ -11,7 +11,7 @@ export default {
       { do: 'cam', on: 'kenji', zoom: 1.35 },
       { choice: [
         { text: 'Where do you go after work?', go: 'conversation_kenji_arcade', if: '!kenji_arcade_talked' },
-        { text: 'Ask about the crane game.', go: 'conversation_kenji_crane', if: 'kenji_arcade_talked' },
+        { text: 'Ask about the crane game.', go: 'conversation_kenji_crane', needs: ['kenji.arcade'] },
         { text: 'How do you say “I want to go”?', go: 'conversation_kenji_go_word', if: 'kenji_arcade_talked && !know_ikitai' },
         { text: 'Let him get back to what he was doing.', go: 'conversation_kenji_leave' },
       ] },

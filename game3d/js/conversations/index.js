@@ -5,6 +5,7 @@ import { known } from '../lang.js';
 import { expandMc } from '../mc.js';
 import { flags } from '../narrative/state.js';
 import PEOPLE from '../../story/people.js';
+import { applyNeeds, knows } from './needs.js';
 
 const EVERYDAY = {
   mio: ['mio_mother_weekends', 'ask:mio-break'],
@@ -28,7 +29,11 @@ export function topicFor(who, memory = conversationMemory, words = known, met = 
     return memory.ready('hamada_wednesday_booking', words)
       ? { label: 'Ask about his karaoke booking', trigger: 'ask:kuroda-booking' }
       : { label: 'Chat about his evenings', trigger: 'ask:kuroda' };
-  if (who === 'kenji') return { label: 'Chat about the arcade', trigger: 'ask:kenji' };
+  if (who === 'kenji')
+    return {
+      label: knows('kenji.arcade', introductions) ? 'Chat about the arcade' : 'Chat with Kenji',
+      trigger: 'ask:kenji',
+    };
   if (who !== 'mori') return null;
   return memory.ready('mori_return_norway', words)
     ? { label: 'Ask about Norway', trigger: 'ask:mori' }
@@ -36,7 +41,7 @@ export function topicFor(who, memory = conversationMemory, words = known, met = 
 }
 export function withConversations(story) {
   const shared = expandMc(structuredClone(CONVERSATIONS));
-  return { ...story, on: { ...shared.on, ...story.on }, nodes: { ...shared.nodes, ...story.nodes } };
+  return { ...story, on: { ...shared.on, ...story.on }, nodes: { ...applyNeeds(shared.nodes), ...story.nodes } };
 }
 export function installConversations(game) {
   installSenderHook(game, flags);

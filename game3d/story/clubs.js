@@ -1,4 +1,4 @@
-import { emiNeedsIntro, emiIntroduction } from './day3/shared.js';
+import { emiNeedsIntro, emiIntroduction, emiClubFact } from './day3/shared.js';
 // The clubs and the single events on the plaza's notice board (docs/game/progression.md, Clubs; systems.md, Clubs
 // and Notice board). The engine (js/clubs/) reads this file: the board's posters, joining by taking a slip, and
 // which session node runs when Eric, a member, arrives at a club's place while it meets. The contract is in
@@ -89,6 +89,7 @@ export default {
         { unset: 'd3_emi_needs_intro' },
         { say: 'emi', emo: 'bright', text: '{mc.name}! I was hoping you’d make it.' },
       ] },
+      emiClubFact,
       { if: '!d3_kuro_intro', then: [
         { do: 'cam', on: 'kuro', zoom: 1.2 },
         { if: 'd2_kuro_weekend_seen && day == 3', then: [
