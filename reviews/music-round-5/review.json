@@ -2,7 +2,7 @@
  "title": "Background music, round 3: five relaxed pieces with different bands",
  "date": "2026-10-09",
  "by": "claude-agent:music",
- "status": "open",
+ "status": "superseded",
  "context": [
   "This is background music for the game, round 3 of the new tracks. Nobody has listened to these before you. I can't hear audio, so I only checked them by measurement.",
   "You said round 4 was good quality but too epic and orchestral, too busy, and too similar from track to track. So each piece here has its own small band and its own prompt, and every prompt asks for relaxed, sparse everyday background with no strings section, nothing dramatic and no build-up.",
@@ -60,5 +60,6 @@
    "label": "Round 2 (rejected as too epic and too similar): music-round-4",
    "href": "#review/music-round-4"
   }
- ]
+ ],
+ "decision": "Superseded by music-round-6, decided 2026-10-10."
 }
