@@ -1,0 +1,322 @@
+{
+ "about": "Example blocks for a fresh checkout. The live blocks are local configuration (tools/imagegen/config/, git-ignored); store.py seeds them from here once. Cast characters come from art/cast-looks.json (tools/cast_looks.py).",
+ "presets": [
+  {
+   "id": "background",
+   "type": "style",
+   "data": {
+    "name": "Background, house style",
+    "quality": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic",
+    "anchors": "anime screenshot, anime coloring, 2d, cel shading",
+    "suffix": "",
+    "negative": "3d, realistic, photorealistic, chubby",
+    "defaults": {
+     "rating": "safe",
+     "framing": "landscape",
+     "model": "rdbt",
+     "negatives": [
+      "base",
+      "drift",
+      "text"
+     ]
+    },
+    "notes": "art/PROMPTS.md and GUIDE: style anchors for rooms and scenes next to the approved locations; RDBT for rooms. Describe only what is visible, a few plain sentences, one idea each. Leave colour and light words out of the style part."
+   }
+  },
+  {
+   "id": "scenery",
+   "type": "style",
+   "data": {
+    "name": "Scenery, One Obsession playbook",
+    "quality": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic",
+    "anchors": "anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery",
+    "suffix": "",
+    "negative": "3d, realistic, photorealistic",
+    "defaults": {
+     "rating": "safe",
+     "framing": "landscape",
+     "model": "oneobsession",
+     "negatives": [
+      "base",
+      "drift",
+      "text"
+     ]
+    },
+    "notes": "art/PROMPTS.md Local playbook: One Obsession for open scenery (RDBT turns sea, sky and cities into flat poster art). Template: anchors, what is in the picture, light and time, palette \"dominant X, broad Y, sparse Z accents\", one line of what must not appear."
+   }
+  },
+  {
+   "id": "base",
+   "type": "negative",
+   "data": {
+    "name": "Base quality",
+    "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, sharp fingernails, claws",
+    "default": true,
+    "notes": "The round-27/28 negative without the limits."
+   }
+  },
+  {
+   "id": "heavy",
+   "type": "negative",
+   "data": {
+    "name": "Body: heavy",
+    "text": "fat, obese, plump",
+    "default": true,
+    "notes": "Round 28 NEG; RDBT pushes chests and hips large on everyone."
+   }
+  },
+  {
+   "id": "muscle",
+   "type": "negative",
+   "data": {
+    "name": "Body: muscular",
+    "text": "muscular, bodybuilder",
+    "default": false,
+    "notes": ""
+   }
+  },
+  {
+   "id": "drift",
+   "type": "negative",
+   "data": {
+    "name": "Style drift",
+    "text": "western cartoon, comic book, flat vector, thick outlines, poster art, pop art",
+    "default": false,
+    "notes": "GUIDE: renders can slide into a flat, heavy-outlined Western cartoon look."
+   }
+  },
+  {
+   "id": "text",
+   "type": "negative",
+   "data": {
+    "name": "Text and signs",
+    "text": "text, watermark, signature, letters",
+    "default": false,
+    "notes": "Signs and labels come out as nonsense text."
+   }
+  },
+  {
+   "id": "portrait",
+   "type": "framing",
+   "data": {
+    "name": "Portrait",
+    "w": 896,
+    "h": 1152,
+    "prompt": "",
+    "notes": "GUIDE: head, hair and raised hands inside the frame with room above; \"waist-up portrait\" makes the model fill the canvas and cut the hair."
+   }
+  },
+  {
+   "id": "landscape",
+   "type": "framing",
+   "data": {
+    "name": "Landscape",
+    "w": 1216,
+    "h": 832,
+    "prompt": "",
+    "notes": "Local playbook size for scenes and backgrounds."
+   }
+  },
+  {
+   "id": "square",
+   "type": "framing",
+   "data": {
+    "name": "Square",
+    "w": 1024,
+    "h": 1024,
+    "prompt": "",
+    "notes": ""
+   }
+  },
+  {
+   "id": "above",
+   "type": "camera",
+   "data": {
+    "name": "From above",
+    "prompt": "seen from above",
+    "notes": ""
+   }
+  },
+  {
+   "id": "below",
+   "type": "camera",
+   "data": {
+    "name": "From below",
+    "prompt": "seen from low below",
+    "notes": ""
+   }
+  },
+  {
+   "id": "behind",
+   "type": "camera",
+   "data": {
+    "name": "From behind",
+    "prompt": "seen from behind",
+    "notes": ""
+   }
+  },
+  {
+   "id": "shoulder",
+   "type": "camera",
+   "data": {
+    "name": "Over the shoulder",
+    "prompt": "looking back over her shoulder at the viewer",
+    "notes": ""
+   }
+  },
+  {
+   "id": "side",
+   "type": "camera",
+   "data": {
+    "name": "Side view",
+    "prompt": "side view",
+    "notes": ""
+   }
+  },
+  {
+   "id": "close",
+   "type": "camera",
+   "data": {
+    "name": "Close-up",
+    "prompt": "close-up",
+    "notes": ""
+   }
+  },
+  {
+   "id": "wide",
+   "type": "camera",
+   "data": {
+    "name": "Full body",
+    "prompt": "full body, wide shot",
+    "notes": ""
+   }
+  },
+  {
+   "id": "dutch",
+   "type": "camera",
+   "data": {
+    "name": "Dutch angle",
+    "prompt": "tilted dutch angle",
+    "notes": ""
+   }
+  },
+  {
+   "id": "pov",
+   "type": "camera",
+   "data": {
+    "name": "Point of view",
+    "prompt": "pov",
+    "notes": ""
+   }
+  },
+  {
+   "id": "viewer",
+   "type": "camera",
+   "data": {
+    "name": "Looking at viewer",
+    "prompt": "looking at the viewer",
+    "notes": ""
+   }
+  },
+  {
+   "id": "selfie",
+   "type": "camera",
+   "data": {
+    "name": "Selfie",
+    "prompt": "selfie, seen from the raised phone above",
+    "notes": ""
+   }
+  },
+  {
+   "id": "rdbt",
+   "type": "model",
+   "data": {
+    "name": "RDBT Anima",
+    "file": "rdbtAnima.safetensors",
+    "steps": 30,
+    "cfg": 5.0,
+    "sampler": "euler_ancestral",
+    "scheduler": "normal",
+    "notes": "House model. Best for characters, simple and medium scenes, and rooms. Turns open scenery into flat poster art. Euler A, 30 steps, CFG 5."
+   }
+  },
+  {
+   "id": "oneobsession",
+   "type": "model",
+   "data": {
+    "name": "One Obsession Anima",
+    "file": "oneObsessionAnima.safetensors",
+    "steps": 30,
+    "cfg": 5.0,
+    "sampler": "euler_ancestral",
+    "scheduler": "normal",
+    "notes": "Open scenery and logic in hard scenes (the swim and volleyball retries)."
+   }
+  },
+  {
+   "id": "nova",
+   "type": "model",
+   "data": {
+    "name": "Nova Anime AM v5",
+    "file": "novaAnimeAM_v5.safetensors",
+    "steps": 30,
+    "cfg": 5.0,
+    "sampler": "euler_ancestral",
+    "scheduler": "normal",
+    "notes": "Passed nothing on the background reference prompt."
+   }
+  },
+  {
+   "id": "janima",
+   "type": "model",
+   "data": {
+    "name": "JANIMA",
+    "file": "janima.safetensors",
+    "steps": 30,
+    "cfg": 5.0,
+    "sampler": "euler_ancestral",
+    "scheduler": "normal",
+    "notes": "Style and groups (GUIDE). Passed nothing on the background reference prompt."
+   }
+  },
+  {
+   "id": "aesthetic",
+   "type": "model",
+   "data": {
+    "name": "Anima Aesthetic",
+    "file": "animaAesthetic.safetensors",
+    "steps": 30,
+    "cfg": 5.0,
+    "sampler": "euler_ancestral",
+    "scheduler": "normal",
+    "notes": "Passed nothing on the background reference prompt."
+   }
+  },
+  {
+   "id": "yume",
+   "type": "model",
+   "data": {
+    "name": "Anima Yume",
+    "file": "animaYume.safetensors",
+    "steps": 30,
+    "cfg": 5.0,
+    "sampler": "euler_ancestral",
+    "scheduler": "normal",
+    "notes": "Passed nothing on the background reference prompt."
+   }
+  },
+  {
+   "id": "miaomiao",
+   "type": "model",
+   "data": {
+    "name": "Miaomiao Anima",
+    "file": "miaomiaoAnima.safetensors",
+    "steps": 30,
+    "cfg": 5.0,
+    "sampler": "euler_ancestral",
+    "scheduler": "normal",
+    "notes": "Passed nothing on the background reference prompt."
+   }
+  }
+ ]
+}
