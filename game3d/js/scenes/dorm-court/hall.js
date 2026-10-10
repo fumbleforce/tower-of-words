@@ -268,14 +268,15 @@ export function hall(root, nav) {
   const mailbox = mailbox203(root);
   managerWindow(root);
   nav.block(MANAGER[0] - 0.1, MANAGER[1] + 0.1, BACK_Z, BACK_Z + 0.25);
-  // the notice board, right of the passage
-  root.add(rbox(0.7, 0.5, 0.04, '#c9c6bd', { x: x1 - 0.1, y: 0.7, z: BACK_Z + 0.12, r: 0.01, cast: false }));
+  // the notice board, right of the passage: narrow, between the passage's jamb and the side wall, clear of the opening
+  const nx = x1 - 0.27;
+  root.add(rbox(0.26, 0.5, 0.04, '#c9c6bd', { x: nx, y: 0.7, z: BACK_Z + 0.12, r: 0.01, cast: false }));
   root.add(
     boxes(
       [
-        [0.18, 0.24, 0.01, x1 - 0.3, 0.8, BACK_Z + 0.145],
-        [0.2, 0.14, 0.01, x1 - 0.02, 0.9, BACK_Z + 0.145],
-        [0.16, 0.2, 0.01, x1 + 0.1, 0.74, BACK_Z + 0.145],
+        [0.1, 0.22, 0.01, nx - 0.06, 0.8, BACK_Z + 0.145],
+        [0.1, 0.14, 0.01, nx + 0.06, 0.92, BACK_Z + 0.145],
+        [0.09, 0.16, 0.01, nx + 0.06, 0.74, BACK_Z + 0.145],
       ],
       PAL.paper,
     ),
