@@ -42,25 +42,50 @@ export const stationModel = () => parts;
 export const stationLighter = () => lean;
 
 // How each node looks: its street-style surface (diorama/materials.js finishStreet), roughness and metalness; glass
-// is made separately (stationGlass)
+// is made separately (stationGlass). bounce: the light thrown up off the sunlit platforms and paving (below).
 const LOOK = {
   st_walls: { surf: 'cladding', roughness: 0.9 },
   st_stone: { surf: 'stone', roughness: 0.85 },
   st_metal: { paint: true, roughness: 0.55, metalness: 0.25 },
   st_fine: { surf: 'metal', roughness: 0.5, metalness: 0.3 },
   sh_concrete: { surf: 'concrete', roughness: 0.9 },
-  sh_metal: { paint: true, roughness: 0.5, metalness: 0.3 },
+  sh_metal: { paint: true, roughness: 0.4, metalness: 0.15, bounce: 0.42 },
   sh_fine: { surf: 'metal', roughness: 0.5, metalness: 0.3 },
-  sh_roof: { paint: true, roughness: 0.45, metalness: 0.35 },
-  wk_roof: { paint: true, roughness: 0.45, metalness: 0.35 },
+  sh_roof: { paint: true, roughness: 0.4, metalness: 0.15, bounce: 0.3 },
+  wk_roof: { paint: true, roughness: 0.4, metalness: 0.15, bounce: 0.3 },
 };
 const mats = {};
+
+// Light thrown up off the sunlit platforms and paving onto the shed's soffit, the walkway's roof and the steel in
+// their shade, which the sky's ground light alone leaves near black: the surface's own colour added back, in full on
+// faces looking down, near half on upright ones, none on faces looking up (in the sun already).
+function bounce(material, k) {
+  material.userData.bounce = k;
+  material.onBeforeCompile = (s) => {
+    s.uniforms.uBounce = { value: k };
+    s.fragmentShader =
+      'uniform float uBounce;\n' +
+      s.fragmentShader.replace(
+        '#include <emissivemap_fragment>',
+        `#include <emissivemap_fragment>
+        totalEmissiveRadiance += diffuseColor.rgb * uBounce *
+          clamp(0.45 - 0.55 * inverseTransformDirection(normal, viewMatrix).y, 0.0, 1.0);`,
+      );
+  };
+  material.customProgramCacheKey = () => 'station-bounce-' + k;
+}
+// clone() leaves out the shader patch: a mesh whose material was copied (the fades, scenes/occluders.js) gets it back
+export function keepBounce(mesh) {
+  const m = mesh?.material,
+    k = m?.userData.bounce;
+  if (k && m.onBeforeCompile === THREE.Material.prototype.onBeforeCompile) bounce(m, k);
+}
 
 // A mesh of a node (null without the model), named `name`.
 export function stationMesh(node, name = 'station:' + node, { cast = true, recv = true } = {}) {
   const g = parts?.[node];
   if (!g) return null;
-  const { surf, paint, ...look } = LOOK[node];
+  const { surf, paint, bounce: lift, ...look } = LOOK[node];
   // painted steel keeps its colours and a soft sky sheen (the monorail's, train/models.js), outside the street finish
   mats[node] ??= new THREE.MeshStandardMaterial({
     name: node,
@@ -70,6 +95,7 @@ export function stationMesh(node, name = 'station:' + node, { cast = true, recv 
     ...(paint ? { envMap: skyEnv(), envMapIntensity: 0.45 } : {}),
   });
   if (paint) mats[node].userData.noLook = true;
+  if (lift && !mats[node].userData.bounce) bounce(mats[node], lift);
   const m = new THREE.Mesh(g, mats[node]);
   m.name = name;
   if (surf) m.userData.surf = surf;
@@ -127,7 +153,8 @@ function panes(node) {
 
 // The station's windows: the colour the street style knows as window glass (diorama/materials.js finishWindows), and
 // its own material, which glows after work (kit/light/glow.js). The shed's glazing is plain glass that reflects the
-// monorail's sky (train/models.js skyEnv).
+// monorail's sky (train/models.js skyEnv) and lets the shed show through, so its north end and back wall read as
+// glass from outside rather than as dark slabs in their shade.
 export function stationGlass(node) {
   if (!parts?.[node]) return null;
   const shed = node !== 'st_glass';
@@ -138,6 +165,9 @@ export function stationGlass(node) {
         metalness: 0.2,
         envMap: skyEnv(),
         envMapIntensity: 1.1,
+        transparent: true,
+        opacity: 0.5,
+        depthWrite: false,
       })
     : mat('#8c9dad', { roughness: 0.45, metalness: 0.05 }).clone();
   const m = new THREE.Mesh(shed ? parts[node] : panes(node), material);

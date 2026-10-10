@@ -26,13 +26,15 @@ with them (scenes/station-model.js):
   st_glass   the window panes, one quad each (the game makes each a pane of its own)
   st_fine    small roof and wall detail: fan grilles, louvres, railings, the hatch door (not on a phone)
   sh_concrete  the track beam and the other way's beam in the shed, the portal frames, the platforms with their
-             coping, edge line, tactile strip and paving, the stairs and their side walls, the landings
-  sh_metal   roof columns, the back wall's panels and mullions, the east railing, the north gable's frame, the
-             buffers, the stair handrails, the walkway's posts, the sign frames
+             coping, edge line, tactile strip and paving, the stairs (waist, treads, nosings, warning rows) and their
+             side walls with coping, the landings, the tactile guide path along the walkway
+  sh_metal   roof columns, the back wall's panels and mullions, the east railing, the north gable's panels and
+             mullions, the platform clock, the buffers, the stair handrails, the walkway's posts, the sign frames
+             (the shed's steel is the world kit's pale steel, game3d/js/kit/core/palette.js STEEL)
   sh_roof    the curved roof: skin, standing seams, ribs, purlins, gutters and end fascias (fades on a phone)
   sh_glass   the back wall's and the north gable's glazing, the walkway's wind screen
   sh_fine    benches, bins, light fittings, the gable's transoms (not on a phone)
-  wk_roof    the covered walkway's roofs (an occluder in the station garden)
+  wk_roof    the covered walkway's roofs and their down-lights (an occluder in the station garden)
   ap_beam    one metre of the approach beam along +z from z = 0, its top at y = 0
   ap_head    an approach pier's hammerhead and bearings, its top at y = 0 (under the beam)
   ap_col     an approach pier's column, one unit high from y = 0 (the game stretches it)
@@ -88,9 +90,12 @@ C = {k: hexc(v) for k, v in dict(
     canopy='#4f5863', ceiling='#d9d6cf',
     concrete='#a3a6a6', concreteTop='#b0b2b1', concreteDark='#8b8f90', paving='#9a9c9b', pavingB='#a7a8a5',
     coping='#c4c4bd', line='#ecebe4', tactile='#c9a443', tactileDark='#b08f36', edge='#5b6068', joint='#555a60',
-    roofTop='#56697d', roofSeam='#6b7f93', roofUnder='#c8ccd0', rib='#7d8792', gutter='#47525e', column='#68727e',
-    panel='#9aa3ad', rail='#5d6570', buffer='#c2463c', bufferPad='#2a2d31', wood='#8a6a4c', bin='#4f6f9a',
+    roofTop='#7f8e9d', roofSeam='#98a6b4', roofUnder='#d4d7da', rib='#7d8792', gutter='#47525e', column='#68727e',
+    panel='#b4bbc3', panelB='#a7afb8', tread='#c3c1b9', riser='#a3a49f', nosing='#4e5258', kerb='#8b8c88', rail='#5d6570', buffer='#c2463c', bufferPad='#2a2d31', wood='#8a6a4c', bin='#4f6f9a',
     lamp='#e9ecef', walkStone='#8e8a86', post='#5b636e', sign='#2c3a55',
+    # the shed's and the walkway's painted steel, in the world kit's steels (game3d/js/kit/core/palette.js STEEL.pale
+    # for the structure; a step and two steps darker for rails and trim), so the shed reads light, as built
+    shSteel='#9aa0aa', shRail='#8c929c', shTrim='#7a818b', clockFace='#f1f0ea', clockHand='#2b2f35',
 ).items()}
 
 
@@ -188,7 +193,20 @@ class Mesh:
             b = [P(u, v, d1) for u, v in outline]
             self.face(a if flip else a[::-1], col)
             self.face(b[::-1] if flip else b, col)
-        self.fix(n + 2 if caps else n)
+        self.outward(n + 2 if caps else n)
+
+    def outward(self, k):
+        """Point the last k faces away from their middle (a convex piece). Every face has its own corners, so
+        recalc_face_normals can't tell inside from outside and left some caps facing in (culled, so the stairs' side
+        walls showed only their edges)."""
+        self.bm.faces.ensure_lookup_table()
+        fs = list(self.bm.faces)[-k:]
+        cs = [f.calc_center_median() for f in fs]
+        mid = sum(cs, cs[0].copy() * 0) / len(cs)
+        for f, c in zip(fs, cs):
+            f.normal_update()
+            if f.normal.dot(c - mid) < 0:
+                f.normal_flip()
 
     def cyl(self, cx, cz, r, y0, y1, n, col, r1=None, caps=(False, True)):
         r1 = r if r1 is None else r1
@@ -202,7 +220,7 @@ class Mesh:
         if caps[0]:
             self.face([(cx + r * math.cos(2 * math.pi * k / n), y0, cz + r * math.sin(2 * math.pi * k / n)) for k in range(n)], col)
         if caps[0] and caps[1]:
-            self.fix(n + 2)
+            self.outward(n + 2)
 
     def hcyl_z(self, cx, cy, r, z0, z1, n, col):
         """A cylinder lying along z."""
@@ -580,16 +598,17 @@ def shed():
         for v in PORTALS + [END_V]:
             u = COL_U if v != END_V else 3.75
             col_top = arch_y(u) - 0.32
-            met.cyl(U(s * u), Vz(v), 0.1, DECK, col_top, 10, C['column'], r1=0.085)
-            met.box(U(s * u) - 0.17, U(s * u) + 0.17, DECK, DECK + 0.03, Vz(v) - 0.17, Vz(v) + 0.17, C['frame'])
+            met.cyl(U(s * u), Vz(v), 0.1, DECK, col_top, 8, C['shSteel'], r1=0.085)
+            met.box(U(s * u) - 0.17, U(s * u) + 0.17, DECK, DECK + 0.03, Vz(v) - 0.17, Vz(v) + 0.17, C['shTrim'])
             # a splayed bracket up to the rib
-            met.box(U(s * u) - 0.05, U(s * u) + 0.05, col_top - 0.25, col_top + 0.02, Vz(v) - 0.05, Vz(v) + 0.05, C['column'])
+            met.box(U(s * u) - 0.05, U(s * u) + 0.05, col_top - 0.25, col_top + 0.02, Vz(v) - 0.05, Vz(v) + 0.05, C['shSteel'])
     back_wall(met, gl, fine)
     railing(met, fine)
     gable(met, gl, fine)
     shed_roof(rf)
     furniture(met, fine)
     walkway(met, gl)
+    guide_line(con)
     return [con.done(), met.done(), rf.done(), gl.done(), fine.done()]
 
 
@@ -609,12 +628,12 @@ def pier(m, x, z):
 def buffer(met, fine, u, v0):
     """A buffer stop on the beam's north end: a steel frame with a red and white face and a dark pad."""
     x = U(u)
-    met.box(x - 0.45, x + 0.45, BEAM_TOP, BEAM_TOP + 0.65, Vz(v0) - 0.15, Vz(v0) + 0.25, C['frame'])
+    met.box(x - 0.45, x + 0.45, BEAM_TOP, BEAM_TOP + 0.65, Vz(v0) - 0.15, Vz(v0) + 0.25, C['shTrim'])
     met.box(x - 0.5, x + 0.5, BEAM_TOP + 0.15, BEAM_TOP + 0.55, Vz(v0) + 0.25, Vz(v0) + 0.31,
             lambda p, n: C['buffer'] if int((p[0] - x + 0.5) / 0.2) % 2 == 0 else C['line'])
     fine.box(x - 0.2, x + 0.2, BEAM_TOP + 0.25, BEAM_TOP + 0.45, Vz(v0) + 0.31, Vz(v0) + 0.45, C['bufferPad'])
     for s in (-1, 1):  # the struts back down to the beam
-        met.box(x + s * 0.35 - 0.04, x + s * 0.35 + 0.04, BEAM_TOP, BEAM_TOP + 0.5, Vz(v0) - 0.6, Vz(v0) - 0.15, C['frame'])
+        met.box(x + s * 0.35 - 0.04, x + s * 0.35 + 0.04, BEAM_TOP, BEAM_TOP + 0.5, Vz(v0) - 0.6, Vz(v0) - 0.15, C['shTrim'])
 
 
 def platform(con, met, fine, s):
@@ -666,28 +685,43 @@ def platform(con, met, fine, s):
 
 
 def stairs(con, met, s):
+    """A flight from a platform's south end down to the walkway: a concrete waist with a straight soffit under it, pale
+    stone treads with a dark anti-slip nosing and plain risers, a tactile warning row at the head and at the foot,
+    and a side wall either side with a stone coping and a steel handrail on short posts."""
     u0, u1 = sorted((s * STAIR_U[0], s * STAIR_U[1]))
     va, vb = STAIR
     n = 10
     rise, run = DECK / n, (vb - va) / n
-    # the flight: each step a block down to the soffit line
-    for i in range(n):
+    slope = rise / run
+    # the waist: a slab under the steps, its soffit parallel to the pitch, down to the ground
+    toe = va + (DECK - 0.45) / slope
+    waist = [(Vz(va), DECK - 0.45), (Vz(va), DECK - rise), (Vz(vb - run), 0.0), (Vz(toe), 0.0)]
+    con.prism(waist[::-1], 'x', U(u0), U(u1), lambda p: grime(C['concrete'], p, 0.08, 31))
+    # the steps on it: tread, riser and the nosing strip along the tread's front edge
+    for i in range(n - 1):
         top = DECK - (i + 1) * rise
         v0, v1 = va + i * run, va + (i + 1) * run
-        bottom = max(0.0, top - 0.3 - run * 0.75)
-        con.box(U(u0), U(u1), bottom, top, Vz(v0), Vz(v1), lambda p, nn, i=i: C['coping'] if nn == '+y' and p[2] > Vz(va + (i + 1) * run) - 0.05 else C['concreteTop'] if nn == '+y' else C['concrete'])
-        con.box(U(u0), U(u1), top - 0.001, top + 0.004, Vz(v1) - 0.05, Vz(v1), C['tactile'] if i == 0 else C['coping'])
-    # side walls: a sloped upstand on either side, from the platform's level down to the landing
+        con.box(U(u0), U(u1), top - rise, top, Vz(v0), Vz(v1),
+                lambda p, nn: C['tread'] if nn == '+y' else C['riser'] if nn == '+z' else C['concrete'],
+                skip=('-y', '-x', '+x', '-z'))  # the sides are in the side walls, the back under the step above
+        con.box(U(u0), U(u1), top, top + 0.006, Vz(v1) - 0.06, Vz(v1), C['nosing'], skip=('-y', '-x', '+x', '-z'))  # the edge you step down over
+    # tactile warning rows: on the platform before the top step, and on the landing past the foot
+    for v0, v1, y in ((va - 0.36, va - 0.06, DECK), (vb + 0.1, vb + 0.4, 0.014)):
+        con.box(U(u0) + 0.05, U(u1) - 0.05, y, y + 0.012, Vz(v0), Vz(v1), C['tactile'], skip=('-y',))
+    # side walls: a sloped upstand on either side, from the platform's level down to the landing, a stone coping on
+    # its top and the handrail over it
     for w0, w1 in ((u0 - 0.12, u0), (u1, u1 + 0.12)):
         prof = [(Vz(va), DECK - 0.45), (Vz(vb), 0.0), (Vz(vb), 0.95), (Vz(va), DECK + 0.95)]
         con.prism([(z, y) for z, y in prof], 'x', U(w0), U(w1), lambda p: grime(C['concrete'], p, 0.1, 23))
-        # the handrail along its top
+        cap = [(Vz(va) - 0.03, DECK + 0.94), (Vz(vb) + 0.03, 0.94), (Vz(vb) + 0.03, 1.0), (Vz(va) - 0.03, DECK + 1.0)]
+        con.prism(cap, 'x', U(w0) - 0.025, U(w1) + 0.025, C['coping'])
         hx = U((w0 + w1) / 2)
-        for k in range(8):
-            t0, t1 = k / 8, (k + 1) / 8
-            za, zb = Vz(va + (vb - va) * t0), Vz(va + (vb - va) * t1)
-            ya, yb = DECK + 1.0 - (DECK) * t0, DECK + 1.0 - DECK * t1
-            met.box(hx - 0.03, hx + 0.03, min(ya, yb), max(ya, yb) + 0.05, za, zb, C['rail'])
+        rail = [(Vz(va), DECK + 1.12), (Vz(vb), 1.12), (Vz(vb), 1.17), (Vz(va), DECK + 1.17)]  # one straight bar
+        met.prism(rail, 'x', hx - 0.03, hx + 0.03, C['shRail'])
+        for k in range(1, 4):  # the rail's posts on the coping
+            t = k / 4
+            zz, yy = Vz(va + (vb - va) * t), DECK + 1.0 - DECK * t
+            met.box(hx - 0.018, hx + 0.018, yy, yy + 0.13, zz - 0.018, zz + 0.018, C['shRail'])
     # the landing at the foot, paved like the walkway, joining it
     a, b = (U(min(u0, u1) - 0.25), U(max(u0, u1) + 0.25))
     if s < 0:
@@ -704,14 +738,14 @@ def back_wall(met, gl, fine):
     while v < V1 - 1e-6:
         v1 = min(V1, v + 1.2)
         met.box(U(u) - 0.08, U(u), DECK, 3.3, Vz(v), Vz(v1), lambda p, n, i=i: mul(C['panel'], 0.97 if i % 2 else 1.03))
-        met.box(U(u) - 0.1, U(u) + 0.02, 3.3, 3.36, Vz(v), Vz(v1), C['frame'])
+        met.box(U(u) - 0.1, U(u) + 0.02, 3.3, 3.36, Vz(v), Vz(v1), C['shTrim'])
         gl.quad_x(U(u) - 0.05, Vz(v) + 0.03, Vz(v1) - 0.03, 3.36, top, -1, C['glass'], uv=True)
         gl.quad_x(U(u) - 0.03, Vz(v) + 0.03, Vz(v1) - 0.03, 3.36, top, 1, mul(C['glass'], 0.8), uv=True)
-        met.box(U(u) - 0.09, U(u) + 0.01, 3.36, top, Vz(v1) - 0.03, Vz(v1) + 0.03, C['frame'])
-        fine.box(U(u) - 0.09, U(u) + 0.01, 4.1, 4.14, Vz(v), Vz(v1), C['frame'])
+        met.box(U(u) - 0.09, U(u) + 0.01, 3.36, top, Vz(v1) - 0.03, Vz(v1) + 0.03, C['shTrim'])
+        fine.box(U(u) - 0.09, U(u) + 0.01, 4.1, 4.14, Vz(v), Vz(v1), C['shTrim'])
         v = v1
         i += 1
-    met.box(U(u) - 0.1, U(u) + 0.02, top, top + 0.08, Vz(V0), Vz(V1), C['frame'])
+    met.box(U(u) - 0.1, U(u) + 0.02, top, top + 0.08, Vz(V0), Vz(V1), C['shTrim'])
     # the slab's outer face below, a dark drip line
     met.box(U(u) - 0.1, U(u) - 0.08, DECK - 0.45, DECK, Vz(V0), Vz(V1), C['panel'])
 
@@ -721,37 +755,76 @@ def railing(met, fine):
     x = U(PW)
     v = V0
     while v <= V1 + 1e-6:
-        met.box(x - 0.08, x - 0.02, DECK, DECK + 1.05, Vz(v) - 0.03, Vz(v) + 0.03, C['rail'])
+        met.box(x - 0.08, x - 0.02, DECK, DECK + 1.05, Vz(v) - 0.03, Vz(v) + 0.03, C['shRail'])
         v += 1.2
-    met.box(x - 0.1, x, DECK + 1.02, DECK + 1.08, Vz(V0), Vz(V1), C['rail'])
+    met.box(x - 0.1, x, DECK + 1.02, DECK + 1.08, Vz(V0), Vz(V1), C['shRail'])
     for y in (DECK + 0.4, DECK + 0.72):
-        fine.box(x - 0.07, x - 0.03, y, y + 0.03, Vz(V0), Vz(V1), C['rail'])
-    met.box(x - 0.07, x - 0.02, DECK, DECK + 0.12, Vz(V0), Vz(V1), C['rail'])
+        fine.box(x - 0.07, x - 0.03, y, y + 0.03, Vz(V0), Vz(V1), C['shRail'])
+    met.box(x - 0.07, x - 0.02, DECK, DECK + 0.12, Vz(V0), Vz(V1), C['shRail'])
     met.box(x - 0.02, x + 0.0, DECK - 0.45, DECK, Vz(V0), Vz(V1), C['panel'])
     # across the platforms' south ends, either side of the stairwell
     for s in (-1, 1):
         for a, b in ((EDGE + 0.3, STAIR_U[0] - 0.12), (STAIR_U[1] + 0.12, PW)):
             u0, u1 = sorted((s * a, s * b))
-            met.box(U(u0), U(u1), DECK + 1.02, DECK + 1.08, Vz(V1) - 0.06, Vz(V1), C['rail'])
-            met.box(U(u0), U(u1), DECK + 0.5, DECK + 0.53, Vz(V1) - 0.05, Vz(V1) - 0.01, C['rail'])
+            met.box(U(u0), U(u1), DECK + 1.02, DECK + 1.08, Vz(V1) - 0.06, Vz(V1), C['shRail'])
+            met.box(U(u0), U(u1), DECK + 0.5, DECK + 0.53, Vz(V1) - 0.05, Vz(V1) - 0.01, C['shRail'])
             for uu in (u0, u1):
-                met.box(U(uu) - 0.03, U(uu) + 0.03, DECK, DECK + 1.05, Vz(V1) - 0.06, Vz(V1), C['rail'])
+                met.box(U(uu) - 0.03, U(uu) + 0.03, DECK, DECK + 1.05, Vz(V1) - 0.06, Vz(V1), C['shRail'])
 
 
 def gable(met, gl, fine):
-    """The north end: a panelled dado across the platforms and the track, glazing up under the roof's arch."""
+    """The north end: a dado of pale panels across the platforms and the track, one panel to each bay of the glazing
+    above it, steel cover strips carrying the mullions down to the foot, glazing up under the roof's arch, and the
+    platform clock hung from the first rib over the track, a face to each side."""
     z = Vz(V0)
     us = [-PW + 0.8 * k for k in range(11)]  # -4 .. 4
-    met.box(U(-PW), U(PW), DECK - 0.45 - 0.6, 3.1, z - 0.1, z, lambda p, n: mul(C['panel'], 1.0))
-    met.box(U(-PW), U(PW), 3.1, 3.16, z - 0.12, z + 0.02, C['frame'])
+    foot = DECK - 0.45 - 0.6
+    for k, (a, b) in enumerate(zip(us, us[1:])):
+        met.box(U(a), U(b), foot + 0.1, 3.1, z - 0.1, z, C['panel'] if k % 2 == 0 else C['panelB'], skip=('-x', '+x', '-y', '+y'))
+    met.box(U(-PW), U(PW), foot, foot + 0.1, z - 0.13, z + 0.03, C['shTrim'])  # the foot rail
+    met.box(U(-PW), U(PW), 3.1, 3.16, z - 0.13, z + 0.03, C['shTrim'])  # the sill under the glazing
     for a, b in zip(us, us[1:]):
         top = arch_y(max(abs(a), abs(b))) - 0.14
         gl.quad_z(z - 0.06, U(a) + 0.03, U(b) - 0.03, 3.16, top, -1, C['glass'], uv=True)
         gl.quad_z(z - 0.04, U(a) + 0.03, U(b) - 0.03, 3.16, top, 1, mul(C['glass'], 0.8), uv=True)
-        fine.box(U(a), U(b), 4.05, 4.09, z - 0.09, z - 0.01, C['frame'])
-    for a in us:
+        fine.box(U(a), U(b), 4.05, 4.09, z - 0.11, z + 0.01, C['shSteel'])
+    for a in us:  # the mullions, proud of the glass on both faces, run down the dado as cover strips
         top = arch_y(abs(a)) - 0.1
-        met.box(U(a) - 0.03, U(a) + 0.03, 3.16, top, z - 0.1, z, C['frame'])
+        met.box(U(a) - 0.035, U(a) + 0.035, foot, top, z - 0.14, z + 0.04, C['shSteel'])
+    clock(met, U(0), Vz(PORTALS[0]), 4.55)
+
+
+def clock(met, x, z, y, r=0.3):
+    """A round platform clock, a face to the north and one to the south, hung on two rods from the rib above, its
+    hands at ten past ten."""
+    n = 16
+    met.hcyl_z(x, y, r, z - 0.07, z + 0.07, n, C['shTrim'])  # the case's rim
+    for zz, d in ((z - 0.07, -1), (z + 0.07, 1)):
+        ring = [(x + r * math.cos(2 * math.pi * k / n), y + r * math.sin(2 * math.pi * k / n), zz) for k in range(n)]
+        face = [(px, py, zz + 0.002 * d) for px, py, _ in ring]
+        inner = [(x + (px - x) * 0.86, y + (py - y) * 0.86, zz + 0.003 * d) for px, py, _ in ring]
+        met.face(ring[::-1] if d < 0 else ring, C['shTrim'])
+        met.face(inner[::-1] if d < 0 else inner, C['clockFace'])
+        # twelve marks, and the hands: the hour hand toward ten, the minute hand toward two
+        for k in range(12):
+            a = 2 * math.pi * k / 12
+            c, s_ = math.cos(a), math.sin(a)
+            l0, l1, w = (0.66, 0.8, 0.022) if k % 3 else (0.6, 0.8, 0.03)
+            pts = [(x + r * (c * l0 - s_ * w), y + r * (s_ * l0 + c * w)), (x + r * (c * l1 - s_ * w), y + r * (s_ * l1 + c * w)),
+                   (x + r * (c * l1 + s_ * w), y + r * (s_ * l1 - c * w)), (x + r * (c * l0 + s_ * w), y + r * (s_ * l0 - c * w))]
+            q = [(px, py, zz + 0.005 * d) for px, py in pts]
+            met.face(q if d < 0 else q[::-1], C['clockHand'])
+        # seen from the north, east is on the viewer's left, so the angles mirror
+        for ang, ln, w in ((math.radians(30 if d < 0 else 150), 0.5, 0.035),
+                           (math.radians(150 if d < 0 else 30), 0.74, 0.024)):
+            c, s_ = math.cos(ang), math.sin(ang)
+            pts = [(x - r * 0.1 * c - r * w * s_, y - r * 0.1 * s_ + r * w * c), (x + r * ln * c - r * w * s_, y + r * ln * s_ + r * w * c),
+                   (x + r * ln * c + r * w * s_, y + r * ln * s_ - r * w * c), (x - r * 0.1 * c + r * w * s_, y - r * 0.1 * s_ - r * w * c)]
+            q = [(px, py, zz + 0.007 * d) for px, py in pts]
+            met.face(q if d < 0 else q[::-1], C['clockHand'])
+    top = arch_y(0) - 0.1 - 0.2
+    for dx in (-0.12, 0.12):
+        met.box(x + dx - 0.015, x + dx + 0.015, y + r - 0.02, top, z - 0.015, z + 0.015, C['shTrim'])
 
 
 def shed_roof(rf):
@@ -768,7 +841,7 @@ def shed_roof(rf):
         rf.face([(U(a), ya - th, za), (U(b), yb - th, za), (U(b), yb - th, zb), (U(a), ya - th, zb)], C['roofUnder'])
         for z, sgn in ((za, -1), (zb, 1)):  # the ends of the skin
             q = [(U(a), ya - th, z), (U(a), ya, z), (U(b), yb, z), (U(b), yb - th, z)]
-            rf.face(q if sgn < 0 else q[::-1], C['gutter'])
+            rf.face(q if sgn < 0 else q[::-1], C['shTrim'])
         # standing seams on the top at every other line
         if k % 2 == 1:
             rf.box(U(b) - 0.02, U(b) + 0.02, yb - 0.01, yb + 0.05, za, zb, C['roofSeam'])
@@ -778,10 +851,10 @@ def shed_roof(rf):
             a, b = us[k], us[k + 1]
             ya, yb = arch_y(a) - th, arch_y(b) - th
             q = [(U(a), ya - 0.3, z), (U(b), yb - 0.3, z), (U(b), yb, z), (U(a), ya, z)]
-            rf.face(q if d < 0 else q[::-1], C['gutter'])
+            rf.face(q if d < 0 else q[::-1], C['shTrim'])
             q2 = [(U(a), ya - 0.3, z + 0.12 * d), (U(a), ya, z + 0.12 * d), (U(b), yb, z + 0.12 * d), (U(b), yb - 0.3, z + 0.12 * d)]
-            rf.face(q2 if d < 0 else q2[::-1], C['rib'])
-            rf.face([(U(a), ya - 0.3, z), (U(a), ya - 0.3, z + 0.12 * d), (U(b), yb - 0.3, z + 0.12 * d), (U(b), yb - 0.3, z)][::(-1 if d > 0 else 1)], C['rib'])
+            rf.face(q2 if d < 0 else q2[::-1], C['shSteel'])
+            rf.face([(U(a), ya - 0.3, z), (U(a), ya - 0.3, z + 0.12 * d), (U(b), yb - 0.3, z + 0.12 * d), (U(b), yb - 0.3, z)][::(-1 if d > 0 else 1)], C['shSteel'])
     # ribs over every column line: a curved steel section under the skin
     for v in PORTALS + [END_V]:
         z = Vz(v)
@@ -790,19 +863,19 @@ def shed_roof(rf):
             ya, yb = arch_y(a) - th, arch_y(b) - th
             for zz, sgn in ((z - 0.05, -1), (z + 0.05, 1)):
                 q = [(U(a), ya - 0.2, zz), (U(b), yb - 0.2, zz), (U(b), yb, zz), (U(a), ya, zz)]
-                rf.face(q[::-1] if sgn < 0 else q, C['rib'])
-            rf.face([(U(a), ya - 0.2, z - 0.05), (U(a), ya - 0.2, z + 0.05), (U(b), yb - 0.2, z + 0.05), (U(b), yb - 0.2, z - 0.05)][::-1], C['rib'])
+                rf.face(q[::-1] if sgn < 0 else q, C['shSteel'])
+            rf.face([(U(a), ya - 0.2, z - 0.05), (U(a), ya - 0.2, z + 0.05), (U(b), yb - 0.2, z + 0.05), (U(b), yb - 0.2, z - 0.05)][::-1], C['shSteel'])
     # purlins along the roof
     for u in (-3.2, -1.7, 0.0, 1.7, 3.2):
         y = arch_y(u) - th
-        rf.box(U(u) - 0.05, U(u) + 0.05, y - 0.13, y, za + 0.15, zb - 0.15, C['rib'])
+        rf.box(U(u) - 0.05, U(u) + 0.05, y - 0.13, y, za + 0.15, zb - 0.15, C['shSteel'])
     # the gutters along both eaves, with a downpipe at every other column
     for s in (-1, 1):
         x = U(s * EAVE_U)
         y = arch_y(EAVE_U)
-        rf.box(x - 0.09, x + 0.09, y - 0.22, y - 0.04, za, zb, C['gutter'])
+        rf.box(x - 0.09, x + 0.09, y - 0.22, y - 0.04, za, zb, C['shTrim'])
         for v in PORTALS[::2]:
-            rf.cyl(x, Vz(v) + 0.25, 0.04, 0.0, y - 0.2, 6, C['gutter'])
+            rf.cyl(x, Vz(v) + 0.25, 0.04, 0.0, y - 0.2, 6, C['shTrim'])
 
 
 def furniture(met, fine):
@@ -817,14 +890,14 @@ def furniture(met, fine):
         # light fittings: long boxes under the roof over each platform
         for v in PORTALS[:-1]:
             y = arch_y(2.6) - 0.1 - 0.35
-            fine.box(U(s * 2.6) - 0.08, U(s * 2.6) + 0.08, y, y + 0.08, Vz(v + 1.2), Vz(v + 3.6), C['frame'])
+            fine.box(U(s * 2.6) - 0.08, U(s * 2.6) + 0.08, y, y + 0.08, Vz(v + 1.2), Vz(v + 3.6), C['shTrim'])
             fine.box(U(s * 2.6) - 0.06, U(s * 2.6) + 0.06, y - 0.01, y, Vz(v + 1.25), Vz(v + 3.55), C['lamp'])
             for vv in (v + 1.4, v + 3.4):
-                fine.box(U(s * 2.6) - 0.01, U(s * 2.6) + 0.01, y + 0.08, arch_y(2.6) - 0.1, Vz(vv) - 0.01, Vz(vv) + 0.01, C['frame'])
+                fine.box(U(s * 2.6) - 0.01, U(s * 2.6) + 0.01, y + 0.08, arch_y(2.6) - 0.1, Vz(vv) - 0.01, Vz(vv) + 0.01, C['shTrim'])
         # the name board's frame: two posts and a board facing the track (the name is the game's texture)
         x = U(s * 3.0)
         for dv in (-1.1, 1.1):
-            met.box(x - 0.04, x + 0.04, DECK, DECK + 1.75, Vz(2.0 + dv) - 0.04, Vz(2.0 + dv) + 0.04, C['post'])
+            met.box(x - 0.04, x + 0.04, DECK, DECK + 1.75, Vz(2.0 + dv) - 0.04, Vz(2.0 + dv) + 0.04, C['shSteel'])
         met.box(x - 0.03, x + 0.03, DECK + 1.25, DECK + 1.57, Vz(2.0) - 1.12, Vz(2.0) + 1.12, C['sign'])
 
 
@@ -832,12 +905,12 @@ def bench(fine, u, v, s):
     """A platform bench along the shed, its back to the outer wall, facing the track."""
     x = U(u)
     for dv in (-0.45, 0.45):
-        fine.box(x - 0.18, x + 0.18, DECK, DECK + 0.32, Vz(v + dv) - 0.025, Vz(v + dv) + 0.025, C['rail'])
+        fine.box(x - 0.18, x + 0.18, DECK, DECK + 0.32, Vz(v + dv) - 0.025, Vz(v + dv) + 0.025, C['shRail'])
     fine.box(x - 0.2, x + 0.2, DECK + 0.32, DECK + 0.37, Vz(v) - 0.55, Vz(v) + 0.55, C['wood'])
     bx = x + s * 0.2
     fine.box(bx - 0.03, bx + 0.03, DECK + 0.4, DECK + 0.72, Vz(v) - 0.55, Vz(v) + 0.55, C['wood'])
     for dv in (-0.45, 0.45):
-        fine.box(bx - 0.02, bx + 0.02, DECK + 0.3, DECK + 0.72, Vz(v + dv) - 0.02, Vz(v + dv) + 0.02, C['rail'])
+        fine.box(bx - 0.02, bx + 0.02, DECK + 0.3, DECK + 0.72, Vz(v + dv) - 0.02, Vz(v + dv) + 0.02, C['shRail'])
 
 
 def walkway(met, gl):
@@ -854,28 +927,41 @@ def walkway(met, gl):
         (U(-STAIR_U[1] - 0.4), U(-0.75), Vz(STAIR[1]) - 0.5, ez1 + 0.2),  # over the west stair's foot, west of the beam
     ]
     for a, b, c, d in pieces:
-        rf.box(a, b, y0, y1, c, d, lambda p, n: C['roofTop'] if n == '+y' else C['roofUnder'] if n == '-y' else C['gutter'])
+        rf.box(a, b, y0, y1, c, d, lambda p, n: C['roofTop'] if n == '+y' else C['roofUnder'] if n == '-y' else C['shTrim'])
         # a fascia round the edges
         for (p0, p1, q0, q1) in ((a, b, c, c + 0.04), (a, b, d - 0.04, d), (a, a + 0.04, c, d), (b - 0.04, b, c, d)):
-            rf.box(p0, p1, y0 - 0.1, y1 + 0.02, q0, q1, C['gutter'])
+            rf.box(p0, p1, y0 - 0.1, y1 + 0.02, q0, q1, C['shTrim'])
+        # down-lights along the middle of the soffit, every 2.5 or so, lengthwise along the run: a lit face in a trim
+        lit = lambda p, n: C['lamp'] if n == '-y' else C['shTrim']
+        along_x = b - a > d - c
+        L = (b - a) if along_x else (d - c)
+        k = max(1, round(L / 2.5))
+        for i in range(k):
+            t = (i + 0.5) / k
+            if along_x:
+                x, zc = a + (b - a) * t, (c + d) / 2
+                rf.box(x - 0.3, x + 0.3, y0 - 0.03, y0, zc - 0.07, zc + 0.07, lit, skip=('+y',))
+            else:
+                xc, z = (a + b) / 2, c + (d - c) * t
+                rf.box(xc - 0.07, xc + 0.07, y0 - 0.03, y0, z - 0.3, z + 0.3, lit, skip=('+y',))
     # posts: along both sides of each run, every 2.5
     def posts(xa, xb, z, step=2.5):
         n = max(1, round((xb - xa) / step))
         for k in range(n + 1):
             x = xa + (xb - xa) * k / n
-            met.cyl(x, z, 0.05, 0.0, y0 - 0.1, 8, C['post'])
-            met.box(x - 0.08, x + 0.08, 0.0, 0.02, z - 0.08, z + 0.08, C['frame'])
+            met.cyl(x, z, 0.05, 0.0, y0 - 0.1, 6, C['shSteel'])
+            met.box(x - 0.08, x + 0.08, 0.0, 0.02, z - 0.08, z + 0.08, C['shTrim'], skip=('-y',))
     posts(U(STAIR_U[1] + 0.5), nx0 - 0.3, ez0 - 0.05)
-    met.cyl(ex1 + 0.05, ez0 - 0.05, 0.05, 0.0, y0 - 0.1, 8, C['post'])
+    met.cyl(ex1 + 0.05, ez0 - 0.05, 0.05, 0.0, y0 - 0.1, 6, C['shSteel'])
     posts(U(STAIR_U[1] + 0.3), ex1 - 0.05, ez1 + 0.05)
     for x in (nx0 - 0.05, nx1 + 0.05):
         n = max(1, round((ez0 - 0.3 - (ZS + 1.9)) / 2.5))
         for k in range(n + 1):
             z = ZS + 1.9 + (ez0 - 0.3 - ZS - 1.9) * k / n
-            met.cyl(x, z, 0.05, 0.0, y0 - 0.1, 8, C['post'])
+            met.cyl(x, z, 0.05, 0.0, y0 - 0.1, 6, C['shSteel'])
     for x, z in ((U(-STAIR_U[1] - 0.3), ez1 + 0.05), (U(-0.95), ez1 + 0.05), (U(-STAIR_U[1] - 0.3), Vz(STAIR[1]) - 0.3),
                  (U(1.4), ez1 + 0.05), (U(STAIR_U[1] + 0.3), Vz(STAIR[1]) - 0.3)):
-        met.cyl(x, z, 0.05, 0.0, y0 - 0.1, 8, C['post'])
+        met.cyl(x, z, 0.05, 0.0, y0 - 0.1, 6, C['shSteel'])
     # the wind screen along the east run's south side: glass in a frame, below a rail
     za = ez1 + 0.05
     x = U(STAIR_U[1] + 0.3)
@@ -883,10 +969,36 @@ def walkway(met, gl):
         xb = min(ex1 - 0.05, x + 1.25)
         gl.quad_z(za, x + 0.04, xb - 0.04, 0.12, 1.0, 1, C['glass'], uv=True)
         gl.quad_z(za - 0.01, x + 0.04, xb - 0.04, 0.12, 1.0, -1, mul(C['glass'], 0.85), uv=True)
-        met.box(x, xb, 1.0, 1.04, za - 0.03, za + 0.03, C['frame'])
-        met.box(x, xb, 0.08, 0.12, za - 0.03, za + 0.03, C['frame'])
+        met.box(x, xb, 1.0, 1.04, za - 0.03, za + 0.03, C['shTrim'])
+        met.box(x, xb, 0.08, 0.12, za - 0.03, za + 0.03, C['shTrim'])
         x = xb
     return rf.done()
+
+
+def guide_line(con):
+    """The yellow tactile guide path (ribbed blocks 0.3 wide, as the security room's own line inside) from the warning
+    row at the east stair's foot (the arrival platform's) along the middle of the walkway to the station's glass doors."""
+    ex0, ex1, ez0, ez1 = WALK[0]
+    nx0, nx1, nz0, nz1 = WALK[1]
+    zc, xc = (ez0 + ez1) / 2, (nx0 + nx1) / 2
+    y, w = 0.0, 0.15
+    runs = [
+        (U(2.7) - w, U(2.7) + w, Vz(STAIR[1]) + 0.4, zc - w),  # from the east stair's foot down to the line
+        (U(2.7) - w, xc + w, zc - w, zc + w),  # along the walkway
+        (xc - w, xc + w, ZS + 0.25, zc - w),  # north to the doors
+    ]
+    for x0, x1, z0, z1 in runs:
+        con.box(x0, x1, y, y + 0.016, z0, z1, C['tactileDark'], skip=('-y',))
+        # the raised bars along the direction of travel
+        along_x = x1 - x0 > z1 - z0
+        for k in range(4):
+            t = (k + 0.5) / 4
+            if along_x:
+                zz = z0 + (z1 - z0) * t
+                con.box(x0 + 0.02, x1 - 0.02, y + 0.016, y + 0.024, zz - 0.016, zz + 0.016, C['tactile'], skip=('-y',))
+            else:
+                xx = x0 + (x1 - x0) * t
+                con.box(xx - 0.016, xx + 0.016, y + 0.016, y + 0.024, z0 + 0.02, z1 - 0.02, C['tactile'], skip=('-y',))
 
 
 # ---- the approach pieces ----
