@@ -38,6 +38,8 @@ At first Kenji is a little in awe of Eric. Eric is older, foreign and experience
 
 Later he comes to Eric first, before the problem grows. He shows Eric a job and asks him to check it, and asks him to come along while he asks Mori again. He still adds さん to Eric's name, but he moves to casual Japanese with him (Jørgen confirmed this on 2026-10-09). He drops です and ます and says うん instead of はい, and he still checks with Eric before he does anything that matters. Further on he can say no to Eric, kindly and with a reason, and that is the biggest step he takes.
 
+Before bond step 5 he may fill in a karaoke request with Eric's name on it, but he never hands it in himself. At step 5 he asks Eric out loud to join a song.
+
 ## Example lines
 
 Each line has its setting and, in brackets, what it means for whoever is reading this sheet. In the game the Japanese stays blurred except for known words and loanwords.
