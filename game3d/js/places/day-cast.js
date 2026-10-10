@@ -2,20 +2,29 @@
 // makes their bodies once with dayCast() and registers each explicitly (people.<id>: cast.people.<id>, things.<id>:
 // { ...PLACE_DETAILS.<place>.things.<id>, ...cast.thing(id) }); the day's setup hook (places/day3/) then puts each
 // where the day's plan has them for the period, or hides them. Tama is a cat (creatures/cat.js); the attendant and the
-// club member are office workers' bodies (cast.js PEOPLE.worker); everyone else is the cast's own.
+// club member wear the approved office bodies A and B (crowd/roles.js), or the code-built office workers' (cast.js
+// PEOPLE.worker) if those didn't load; everyone else is the cast's own.
 // A person the place already has (day 1's guard at his desk, day 2's Mori) comes in through `have`: their body is
 // the place's, home(id) puts them back where the place keeps them, and only the place registers them.
 //   dayCast(game, { root, K, ids, have }) -> { people, thing(id), adopt, put, seat, home, hide, hideAll, shown, update }
 import { PEOPLE, idle } from '../cast.js';
+import { roleBody } from '../chibi-crowd.js';
+import { smallSkin } from '../chibi-passengers.js';
 import { blob } from '../engine.js';
 import { makeCat } from '../creatures/cat.js';
 import { benchSit, standPose } from '../crowd/motion.js';
 
 // the two without a cast body of their own: the gym's attendant (short dark hair, grey top) and the club member
 const BODY = {
-  attendant: () => PEOPLE.worker(5),
-  member: () => PEOPLE.worker(1),
+  attendant: () => approved('attendant', 5) || PEOPLE.worker(5),
+  member: () => approved('member', 1) || PEOPLE.worker(1),
 };
+// seen small, as the train's passengers: a 1024 copy of the skin on desktop, 512 on a phone
+function approved(role, i) {
+  const r = roleBody(role, i, { proxy: true });
+  if (r) smallSkin(r.model);
+  return r;
+}
 const CAT_SIZE = 1.15 * 0.9; // her size on Eric's chair in the office (places/garden-cat.js), times the place's scale
 
 export function dayCast(game, { root, K = 1, ids = [], have = {} }) {

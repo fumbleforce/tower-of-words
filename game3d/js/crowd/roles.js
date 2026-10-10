@@ -19,4 +19,12 @@ export const EVERYDAY_ROLES = {
   reader: { body: 'older-1', fallback: 'a', places: ['train'] },
   music: { body: 'casual-1', fallback: 'b', places: ['train'] },
   bun: { body: 'b', places: ['train'] },
+  // the train's man with a bag (hidden since Jørgen read the dark standing man as a burglar; places/train.js) in A's
+  // grey suit, standing
+  stander: { body: 'a', places: ['train'] },
+  // the station garden's grounds worker (places/station-garden/), older-1 in a work jacket
+  grounds: { body: 'older-1', places: ['shotengai'] },
+  // day 3's gym attendant and swimming club member (places/day-cast.js): office workers' bodies, as before
+  attendant: { body: 'a', places: ['gym', 'pool'] },
+  member: { body: 'b', places: ['pool', 'sports'] },
 };

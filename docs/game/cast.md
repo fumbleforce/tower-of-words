@@ -27,12 +27,12 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 | `ferry_reader` | Reader | An unnamed adult reading a leaflet by the harbour window; existing generic body and approved sales1 voice. |
 | `ferry_traveller` | Traveller | An unnamed adult resting with a bag, which he moves from a usable seat; existing generic body and approved reader voice. |
 | `canteen_worker` | Canteen worker | An unnamed adult who works at the indoor service counter and closes the canteen terrace after work. |
-| `station_worker` | Grounds worker | An unnamed adult tending the station south garden by day; the existing grey worker body and borrowed reader voice. |
+| `station_worker` | Grounds worker | An unnamed older adult tending the station south garden by day, in an olive work jacket; borrowed reader voice. |
 | `canteen_shirt` | Diner in a shirt | The existing seated adult at the west table, with a work badge and curry; approved sales1 voice. |
 | `canteen_cardigan` | Diner in a cardigan | The existing adult with her own rice container and a canteen side dish; approved sales2 voice. |
 | `canteen_polo` | Diner with a water cup | The existing adult at the east table, taking an indoor break; approved reader voice. |
-| `attendant` | Attendant | The gym's attendant on day 3: the desk by day, the pool's floats at the club's evening. An office worker's body, a borrowed voice. |
-| `member` | Club member | A swimming club member on day 3's evening, with the equipment list; her goggles are on the pool's fence. An office worker's body, a borrowed voice. |
+| `attendant` | Attendant | The gym's attendant on day 3: the desk by day, the pool's floats at the club's evening. Office man A's body, a borrowed voice. |
+| `member` | Club member | A swimming club member on day 3's evening, with the equipment list; her goggles are on the pool's fence. Office woman B's body, a borrowed voice. |
 | `bun` | Woman with a bun | A monorail passenger. |
 | `music` | Girl with headphones | A monorail passenger. |
 | `stander` | Man with a bag | A monorail passenger. |

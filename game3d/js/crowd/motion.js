@@ -187,7 +187,7 @@ export function stalled(w, dt) {
 // cover (movement/gait.js stepGait: standing while held up or given way to); a code-built jogger by its own swing
 export function stride(w, dt, visible) {
   const r = w.r,
-    run = w.kind === 'jog';
+    run = w.gait === 'jog';
   if (!run || r.meshy) {
     if (!visible) return;
     stepGait(r, w.moved * dt, dt, { run });

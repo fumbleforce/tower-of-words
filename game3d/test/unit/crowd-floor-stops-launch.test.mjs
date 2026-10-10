@@ -144,3 +144,38 @@ test('someone new along a street appears out of view, where they actually stand 
     }
   assert.ok(launched > 20, `too few launches to judge (${launched})`);
 });
+
+test('a walker keeps the clothes it was made in when it sets off; the walk goes in its own field (#328)', () => {
+  // launch used to write the flow's walk (jog, stroll) over body.kind, so later jogger picks and the period's mix
+  // read 'jog' or 'walk' instead of office, casual, elder or sport
+  const nav = new M.Nav(-6, 6, -20, 10);
+  const g = M.coarseGrid(nav);
+  const ends = { a: { at: [0, 0] }, b: { at: [0, 5] } };
+  const routes = new Map([['a>b', M.routeBetween(g, [0, 0], [0, 5])]]);
+  let s = 4242;
+  const R = () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
+  const kinds = ['office', 'casual', 'elder', 'sport', 'sport'];
+  const pool = kinds.map((kind) => ({ state: 'off', kind, r: rig(0, -50, true) }));
+  const game = { player: rig(5, 8) };
+  const st = {
+    spec: { flows: [['a', 'b', 1, 'jog'], ['a', 'b', 1, 'stroll']], who: { office: 1, casual: 1, elder: 1, sport: 1 } },
+    counts: { walk: 3 },
+    R,
+  };
+  const L = M.launcher({ game, g, K: 1, ends, routes, pool, inView: () => false, st });
+  let launched = 0;
+  for (let i = 0; i < 40; i++) {
+    if (L.launch(true)) launched++;
+    for (const b of pool.filter((b) => b.state === 'walk')) {
+      assert.ok(['jog', 'stroll'].includes(b.gait), `walk style ${b.gait}`);
+      if (b.gait === 'jog') assert.equal(b.kind, 'sport', 'only the sport bodies jog');
+      b.state = 'off';
+    }
+  }
+  assert.ok(launched > 10, `too few launches (${launched})`);
+  assert.deepEqual(
+    pool.map((b) => b.kind),
+    kinds,
+    'every body keeps its clothes',
+  );
+});
