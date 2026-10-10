@@ -1,0 +1,47 @@
+/* Image direction controls share the editor's palette and form controls. */
+#images { min-width: 0; }
+#composition, #renders { min-width: 0; }
+.image-current { display: grid; gap: 10px; padding-bottom: 18px; }
+.image-current > a { display: block; overflow: hidden; border-radius: 10px; background: #dce4e7; }
+.image-current .selected-image { display: block; width: 100%; max-height: 330px; margin: 0; object-fit: contain; }
+.image-current strong { font-size: 14px; }
+.image-empty { display: grid; place-items: center; min-height: 130px; padding: 20px; background: #e7edf0; color: #526875; text-align: center; border-radius: 10px; }
+.image-section { padding: 18px 0; border-top: 1px solid #d8e1e6; }
+.image-section h3 { margin: 0 0 14px; font-size: 15px; }
+.image-section h4 { margin: 16px 0 10px; font-size: 13px; font-weight: 600; }
+.image-section > summary { margin-bottom: 14px; cursor: pointer; font-weight: 600; font-size: 14px; }
+.image-section .two { align-items: start; }
+.image-section .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 14px; }
+.image-section .chips button { padding: 7px 10px; font-size: 12px; line-height: 1.35; white-space: normal; text-align: left; }
+.image-section button[aria-pressed="true"] { border-color: #3d827a; color: #174f49; background: #e4f2ee; }
+.image-cast { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 8px; }
+.image-cast > button { display: grid; grid-template-rows: 84px auto; gap: 0; padding: 0; min-width: 0; overflow: hidden; border-radius: 9px; }
+.image-cast img { width: 100%; height: 84px; object-fit: cover; object-position: center 25%; background: #e8eef0; }
+.image-cast button > span:last-child { padding: 7px 3px; overflow-wrap: anywhere; font-size: 12px; }
+.image-person-placeholder { display: grid; place-items: center; background: #dce5e9; color: #6e8794; font-size: 34px; }
+.image-check { display: flex !important; flex-direction: row; align-items: center; gap: 9px; min-height: 32px; }
+.image-check input { flex: 0 0 auto; width: 16px; height: 16px; margin: 0; }
+.image-reference { display: flex; align-items: center; gap: 12px; margin: 10px 0 15px; }
+.image-reference > img { width: 76px; height: 88px; object-fit: cover; border-radius: 8px; }
+.image-reference > div { display: grid; gap: 8px; min-width: 0; }
+.image-reference strong { font-size: 13px; }
+.image-reference button { font-size: 12px; padding: 6px 9px; }
+.image-reference-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-height: 320px; gap: 7px; overflow-y: auto; margin: 12px 0; }
+.image-reference-grid button { padding: 0; overflow: hidden; }
+.image-reference-grid img { width: 100%; height: 105px; display: block; object-fit: cover; }
+#generate { width: 100%; padding: 12px; }
+#assembled { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+.image-library .pane-title { align-items: center; margin-bottom: 10px; }
+.image-library .pane-title h3 { margin: 0; }
+.image-library .segmented { margin-bottom: 14px; }
+.image-library .segmented button { white-space: normal; }
+.image-library .render-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+.image-library .render-card { display: flex; flex-direction: column; gap: 7px; min-width: 0; padding: 8px; border: 1px solid #d8e1e6; border-radius: 9px; background: #fff; }
+.image-library .render-card img { display: block; width: 100%; height: 136px; object-fit: contain; background: #e9eff1; border-radius: 5px; }
+.image-library .render-card small { font-size: 11px; color: #536976; overflow-wrap: anywhere; }
+.image-library .render-card button { font-size: 12px; padding: 7px; white-space: normal; }
+.image-library [data-more-images] { width: 100%; margin-top: 14px; }
+@media (max-width: 600px) {
+  .image-cast { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .image-section .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

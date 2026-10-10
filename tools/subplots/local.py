@@ -12,6 +12,19 @@ from api import atomic, read_json
 
 HERE = Path(__file__).resolve().parent
 
+def locate_images(data,root):
+    """Check only files explicitly referenced by this recipe; never discover user content."""
+    for image in data.get('images',[]):
+        relative=image.get('file','')
+        image['available']=False
+        for area,label in [('game','live'),('rewards','archive')]:
+            base=(root/'island/private'/area).resolve()
+            path=(base/relative).resolve()
+            if path.is_relative_to(base) and path.is_file():
+                image.update(available=True,storage=label,url='/'+str(path.relative_to(root)))
+                break
+    return data
+
 def invalidate_voice(config, selected, backups, root, recovery):
     """Retire stale takes after dialogue changes; never play old speech over new text."""
     manifest=selected.get('voiceManifest')
@@ -63,7 +76,7 @@ def run(config_path, request):
         raise ValueError('Unknown recipe source')
     folder = state / hashlib.sha256(scene_id.encode()).hexdigest()
     def read():
-        data = recipes({'action':'read','id':scene_id})
+        data = locate_images(recipes({'action':'read','id':scene_id}),root)
         data['metadata'] = read_json(folder/'metadata.json',{})
         data['sourceRevision'] = data['revision']
         data['revision'] = hashlib.sha256((data['sourceRevision']+json.dumps(data['metadata'],sort_keys=True)).encode()).hexdigest()
@@ -95,12 +108,19 @@ def run(config_path, request):
             prior=read_json(folder/'history'/restore,None)
             if not prior:raise ValueError('The revision is unavailable')
             body['restoreImages']=prior.get('images',[])
-        selected_image=request.get('metadata',{}).get('image')
-        promote=None
-        if selected_image and selected_image!=(prior.get('metadata',{}).get('image') if restore else current['metadata'].get('image')):
-            if not selected_image.get('slot'):
-                raise ValueError('Choose which existing scene image to replace, then select the render again.')
-            # Resolve only dashboard render outputs; no arbitrary file copy or user-owned folder traversal.
+        metadata=request.get('metadata',{})
+        previous=prior.get('metadata',{}) if restore else current['metadata']
+        selections=dict(metadata.get('images',{}))
+        legacy=metadata.get('image')
+        if legacy and legacy!=previous.get('image'):
+            selections.setdefault(legacy.get('slot',''),legacy)
+        promotions=[]
+        replacements=[]
+        for slot,selected_image in selections.items():
+            if selected_image==previous.get('images',{}).get(slot):
+                continue
+            if not slot:
+                raise ValueError('Choose which scene image to replace first.')
             relative=selected_image.get('file','')
             outputs=Path(config['imageOutputs']).resolve()
             source=(outputs/relative).resolve()
@@ -109,9 +129,22 @@ def run(config_path, request):
             token=hashlib.sha256(source.read_bytes()).hexdigest()[:20]
             filename='editor-'+token+'.webp'
             target=Path(config['imageLive'])/filename
-            body['imageReplacement']={'slot':selected_image['slot'],'file':'encounters/'+filename}
-            promote=(source,target,token)
+            replacements.append({'slot':slot,'file':'encounters/'+filename})
+            promotions.append((source,target,token))
+        if replacements:
+            body['imageReplacements']=replacements
         prepared=recipes(body)
+        remap=prepared.get('imageRemap')
+        if remap is not None:
+            metadata=json.loads(json.dumps(metadata))
+            for field in ('images','compositions'):
+                if field not in metadata:continue
+                metadata[field]={remap.get(key,key):{**value,**({'slot':remap[key]} if field=='images' and key in remap else {}),**({'imageSlot':remap[key]} if field=='compositions' and key in remap else {})} for key,value in metadata[field].items() if key in remap or key=='scene'}
+            for value in metadata.get('images',{}).values():value['applied']=True
+            if metadata.get('image',{}).get('slot') in remap:
+                metadata['image']['slot']=remap[metadata['image']['slot']]
+            elif 'image' in metadata:
+                del metadata['image']
         if action=='validate':return {'ok':True}
         source_file=Path(selected['file'])
         if source_file.read_text()!=prepared['source']:
@@ -120,8 +153,8 @@ def run(config_path, request):
         backups={str(source_file):source_file.read_bytes()}
         for file in selected['outputs'] + config.get('extraBackups', []) + [str(folder/'metadata.json')]:
             p=Path(file);backups[file]=p.read_bytes() if p.exists() else None
-        if promote:
-            target=promote[1];backups[str(target)]=target.read_bytes() if target.exists() else None
+        for _,target,_ in promotions:
+            backups[str(target)]=target.read_bytes() if target.exists() else None
         atomic(folder/'history'/(version+'.json'),json.dumps(current,ensure_ascii=False))
         # Keep a recovery record before touching the recipe or derived files.
         recovery=folder/'recovery'/version
@@ -130,9 +163,8 @@ def run(config_path, request):
                 recovery.mkdir(parents=True,exist_ok=True);(recovery/str(i)).write_bytes(content)
         atomic(recovery/'files.json',json.dumps(list(backups)))
         try:
-            if promote:
+            for image,target,token in promotions:
                 from PIL import Image
-                image,target,token=promote
                 generated=Path(config['generated'])/(token+'.webp');generated.parent.mkdir(parents=True,exist_ok=True)
                 if not generated.exists():
                     with Image.open(image) as im:im.convert('RGB').save(generated,'WEBP',quality=95)
@@ -142,8 +174,12 @@ def run(config_path, request):
             atomic(source_file,prepared['changed'])
             result=subprocess.run(selected['build'],cwd=root,capture_output=True,text=True,timeout=60)
             if result.returncode:raise ValueError('Scene rebuild failed. The source has been restored. '+result.stderr[-400:])
+            for command in config.get('checks',[]) + selected.get('checks',[]):
+                result=subprocess.run(command,cwd=root,capture_output=True,text=True,timeout=60)
+                if result.returncode:
+                    raise ValueError('Scene validation failed. The source has been restored. '+(result.stderr or result.stdout)[-400:])
             retired = invalidate_voice(config, selected, backups, root, recovery)
-            atomic(folder/'metadata.json',json.dumps(request.get('metadata',{}),ensure_ascii=False))
+            atomic(folder/'metadata.json',json.dumps(metadata,ensure_ascii=False))
         except Exception:
             for file,content in backups.items():
                 p=Path(file)

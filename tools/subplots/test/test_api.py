@@ -56,6 +56,28 @@ class Saves(unittest.TestCase):
             api.dispatch('save',{**old,'steps':['a: Changed']})
         self.assertEqual(self.file.read_text(),source)
 
+    def test_authoring_cache_refreshes_when_story_source_changes(self):
+        with patch.object(api.subprocess, 'run', wraps=api.subprocess.run) as run:
+            first = api.dispatch('authoring', {})
+            second = api.dispatch('authoring', {})
+            self.assertEqual(run.call_count, 1)
+            self.assertEqual(first, second)
+            self.file.write_text("export default {nodes:{new_scene:[]}};")
+            updated = api.dispatch('authoring', {})
+            self.assertEqual(run.call_count, 2)
+            self.assertEqual(updated['nodes'][0]['title'], 'New scene')
+
+    def test_image_reference_proxy_rejects_escape_before_contacting_service(self):
+        paths = ['/repo/island/private/rewards/library/fixture-1/image.png', '/repo/../forbidden.png',
+                 '/repo/./island/private/rewards/library/fixture-1/image.png',
+                 '/repo/%2e%2e/forbidden.png', '/repo/%252e%252e/forbidden.png',
+                 '/priv/portraits/../forbidden.png']
+        with patch.object(api.urllib.request, 'urlopen') as request:
+            for path in paths:
+                with self.subTest(path=path), self.assertRaises(ValueError):
+                    api.image_proxy(None, path)
+            request.assert_not_called()
+
     def test_private_adapter_never_runs_in_qa(self):
         with self.assertRaisesRegex(ValueError,'not configured'):api.dispatch('catalog',{'scope':'local'})
 

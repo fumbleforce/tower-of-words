@@ -11,6 +11,7 @@ config = {
     'imageOutputs': str(base/'imagegen/outputs'), 'imageLive': str(base/'game/encounters'),
     'generated': str(rewards/'library/subplot-editor-1'), 'round': 'library/subplot-editor-1',
     'audioRoot': str(base/'audio'),
+    'checks': [['node',str(rewards/'tools'/name)] for name in ('blur-check.mjs','normal-entry-check.mjs')],
     'extraBackups': [str(base/'audio/index.json'), str(base/'game/live.json')],
     'sources': [
         {'key':'opening','label':'Opening encounters','file':str(rewards/'tools/day1-scenes.src.mjs'),
