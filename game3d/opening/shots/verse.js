@@ -115,7 +115,7 @@ function exitDoors(w) {
   });
   // outside: a bright morning, sky over a warm horizon over pale paving (it blooms into the next shot's flash)
   const cv = document.createElement('canvas');
-  cv.width = 8;
+  cv.width = 256;
   cv.height = 256;
   const cg = cv.getContext('2d'),
     gr = cg.createLinearGradient(0, 0, 0, 256);
@@ -125,7 +125,11 @@ function exitDoors(w) {
   gr.addColorStop(0.68, '#f1ede3');
   gr.addColorStop(1, '#c9c2b2');
   cg.fillStyle = gr;
-  cg.fillRect(0, 0, 8, 256);
+  cg.fillRect(0, 0, 256, 256);
+  // the plaza's buildings on the horizon, pale in the morning haze
+  cg.fillStyle = '#b7c9dc';
+  for (const [x, w, h] of [[8, 34, 30], [46, 22, 52], [72, 40, 22], [118, 26, 64], [148, 46, 34], [200, 30, 46], [234, 20, 26]])
+    cg.fillRect(x, 148 - h, w, h);
   const sky = new THREE.CanvasTexture(cv);
   sky.colorSpace = THREE.SRGBColorSpace;
   // the doorway (1.44 high) shows sky in its upper half and the bright paving below the horizon
@@ -215,6 +219,7 @@ export const VERSE = [
     },
     flare: () => 0.5,
     exposure: 0.72,
+    bloom: 0.2, // the sun's path on the sea held down so the water reads blue, not white glare (critic on the eighth cut)
   },
   {
     // Mio, a window along, on her phone; she looks up on the beat.
@@ -380,8 +385,8 @@ export const VERSE = [
       const turn = k(lt, tap + 0.3, tap + 1.3, ease.inOut2);
       exitDoors(w)(k(lt, GATE_END - 0.9, GATE_END - 0.2, ease.inOut2));
       S.look(
-        [lerp(0.55, EXIT_X + 0.05, push), lerp(1.0, 0.95, push), lerp(1.55, -3.0, push)],
-        [lerp(0.85, EXIT_X, turn), lerp(0.85, 0.9, turn), lerp(-2.6, -9, turn)],
+        [lerp(0.55, EXIT_X + 0.05, push), lerp(0.94, 0.95, push), lerp(1.55, -3.0, push)],
+        [lerp(0.85, EXIT_X, turn), lerp(0.74, 0.9, turn), lerp(-2.6, -9, turn)], // framed low: less bare wall above the gate
         50,
       );
     },
