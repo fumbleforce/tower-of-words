@@ -2,7 +2,7 @@
 // The train stands still in the world and the world moves past it (sea texture scroll, pillars).
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { monorailParts } from './models.js';
+import { monorailParts, TRAIN_SKY } from './models.js';
 
 export const SEA_Y = -17; // sea level, far below the car floor (y = 0)
 export const BEAM_TOP = -0.16; // top of the straddle beam: the car rides low on it, its skirt down either side (#359)
@@ -156,6 +156,7 @@ void main(){
 export function buildWorld(scene, { sunDir }) {
   const root = new THREE.Group();
   scene.add(root);
+  scene.userData.reflection = TRAIN_SKY; // what the car's steel and glass reflect out here (kit/materials/env.js)
 
   const lin = (h) => new THREE.Color(h);
   const sea = new THREE.Mesh(

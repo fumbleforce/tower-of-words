@@ -1,0 +1,41 @@
+{
+  "train": {
+    "place": "train",
+    "periods": ["morning"],
+    "views": [
+      { "id": "neighbour", "cam": [12.5, 2.6, 6.5], "look": [8.8, 1.2, 0] },
+      { "id": "doors", "cam": [2.5, 2.2, 6], "look": [1.5, 1.0, 1.2] }
+    ]
+  },
+  "forecourt": {
+    "place": "forecourt",
+    "at": [24, 2],
+    "views": [
+      { "id": "station-north", "cam": [1, 1.7, -4], "look": [-1, 2, 6] },
+      { "id": "station-east", "cam": [12, 1.7, 7], "look": [0, 2, 7] },
+      { "id": "lamps", "cam": [7.5, 1.6, -4.5], "look": [3, 1.4, 1] }
+    ]
+  },
+  "sports": {
+    "place": "sports",
+    "views": [
+      { "id": "gym-glass", "cam": [6, 2.2, 12], "look": [-6, 3, 2] },
+      { "id": "r3-glass", "cam": [9, 1.8, 13.5], "look": [16, 2.5, 14.4] }
+    ]
+  },
+  "harbour": {
+    "place": "harbour",
+    "at": [14, 36],
+    "views": [
+      { "id": "hut", "cam": [8.5, 1.9, 34], "look": [5.7, 1.5, 29.5] },
+      { "id": "rack", "cam": [10.8, 1.6, 31.4], "look": [7.6, 0.5, 28.3] }
+    ]
+  },
+  "dorm-court": {
+    "place": "dorm_court",
+    "views": [
+      { "id": "vending", "cam": [-2.6, 1.7, 2.2], "look": [-4.5, 1.0, -1.5] },
+      { "id": "lamp", "cam": [-1.8, 1.8, 1.8], "look": [-3.9, 1.6, -0.65] }
+    ]
+  }
+}

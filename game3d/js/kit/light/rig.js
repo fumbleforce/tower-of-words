@@ -15,6 +15,7 @@
 import * as THREE from 'three';
 import { phaseOf as defaultPhase, lookFor } from './looks.js';
 import { glowSet } from './glow.js';
+import { reflectPlace } from '../materials/env.js';
 
 const SHADOW = { size: 2048, box: 12, near: 5, far: 70, bias: -0.0006, normalBias: 0.03, radius: 4 };
 
@@ -126,9 +127,10 @@ export function lightRig(scene, spec) {
 }
 
 // a place's light for a period: its rig sets everything and its grade becomes the place's (the post chain reads
-// place.grade). A place without a rig keeps its own onPeriod (not yet moved; notes/lighting-system.md).
+// place.grade). A place without a rig keeps its own onPeriod (not yet moved; notes/lighting-system.md). Either way
+// metal and glass reflect this place's sky for the period (kit/materials/env.js).
 export function lightPlace(place, period, day) {
-  if (!place?.light) return false;
-  place.grade = place.light.apply(period, day);
-  return true;
+  if (place?.light) place.grade = place.light.apply(period, day);
+  reflectPlace(place, period, day);
+  return !!place?.light;
 }
