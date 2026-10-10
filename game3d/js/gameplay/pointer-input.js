@@ -16,11 +16,13 @@ export function installPointerInput(game, canvas, { use, standUp, held, holdNudg
     raycaster.setFromCamera(ndc(e), game.place.camera);
     const hitM = modelAt(raycaster);
     if (hitM) {
+      game.lastPick = { id: hitM.id, by: 'model' };
       use(hitM);
       return;
     }
     const who = pickPerson(game, e.clientX, e.clientY, canvas);
     if (who) {
+      game.lastPick = { id: who.id, by: 'person' };
       use(who);
       return;
     }
@@ -41,9 +43,11 @@ export function installPointerInput(game, canvas, { use, standUp, held, holdNudg
       }
     }
     if (best) {
+      game.lastPick = { id: best.id, by: 'near' };
       use(best);
       return;
     }
+    game.lastPick = { id: null, by: 'floor' };
     raycaster.setFromCamera(ndc(e), game.place.camera);
     const p = game.place.pick(raycaster);
     if (held()) {

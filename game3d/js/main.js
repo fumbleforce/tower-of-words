@@ -39,6 +39,7 @@ import { installViewer } from './plugins.js';
 import { installHud } from './ui/hud.js';
 import { installFollowCamera } from './camera/index.js';
 import { installPointerInput } from './gameplay/pointer-input.js';
+import { installPicking, pickablesOf } from './gameplay/pick-volumes.js';
 
 const CAP = Q.has('cap');
 const TEST = Q.get('test') === 'fast';
@@ -210,8 +211,12 @@ const { setComposer, resize, size, render } = view;
 function objsOf(m) {
   const P = game.place;
   if (!P || !m) return [];
+  const more = pickablesOf(game, m.id); // what a plugin made pickable for it (pick-volumes.js makePickable)
   const r = P.people && P.people[m.id];
-  if (r && r.root && r.root.visible) return [r.root];
+  if (r && r.root && r.root.visible) return [r.root, ...more];
+  return [...ownObjs(P, m), ...more];
+}
+function ownObjs(P, m) {
   const t = P.things && P.things[m.id];
   if (t && t.outline) return [].concat(t.outline()).filter(Boolean);
   if (t && t.obj) return [t.obj];
@@ -253,23 +258,9 @@ canvas.addEventListener('pointermove', (e) => {
   game.hover = best;
   canvas.style.cursor = best ? 'pointer' : '';
 });
-// Hover and click use the nearest model hit, so a cat wins over the seat underneath.
-function modelAt(ray) {
-  ray.layers.enable(31); // Original interactive meshes remain pickable when batched.
-  let best = null,
-    bd = 1e9;
-  for (const m of game.markers.list) {
-    if (!m.enabled()) continue;
-    for (const o of objsOf(m)) {
-      const hit = ray.intersectObject(o, true)[0];
-      if (hit && hit.distance < bd) {
-        bd = hit.distance;
-        best = m;
-      }
-    }
-  }
-  return best;
-}
+// Hover and click: the target's meshes as drawn, then its pick volume (a person's body box, a doorway's opening):
+// gameplay/pick-volumes.js
+const { modelAt } = installPicking(game, objsOf);
 let outlineKey = '';
 // the title screen is up (no outline, no hover)
 const titleUp = () => {

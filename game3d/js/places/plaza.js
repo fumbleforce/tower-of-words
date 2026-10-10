@@ -96,6 +96,7 @@ export async function plazaPlace(game) {
       anchor: (v) => v.set(w.board.at[0], w.board.top + 0.35, w.board.at[1]),
       spot: () => [w.board.at[0], w.board.at[1] - 0.85],
       face: () => w.board.at,
+      pickBox: { w: 1.8, h: 1.95 }, // the whole board takes clicks: it is merged into the plaza (gameplay/pick-volumes.js)
       enabled: () => hasNotices('plaza_board'),
       act: () => readNotices(game, 'plaza_board'),
     },
