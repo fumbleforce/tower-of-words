@@ -194,3 +194,12 @@ export function describe(step, name = id => id, nodeTitle = id => id) {
   return (map[d] || (() => `Scene action: ${d}`))();
 }
 const flags = v => (typeof v === 'string' ? v : Object.entries(v).map(([k, x]) => (x === true ? k : `${k} = ${x}`)).join(', ')).replaceAll('_', ' ');
+
+// A key from a beat's content, for things that point at a beat (comments): the same beat gives the same key wherever
+// it moves. The adapters' bookkeeping ($recipe, $staging) is left out.
+export function beatKey(step) {
+  const text = JSON.stringify(step, (k, v) => (k.startsWith('$') ? undefined : v)) || '';
+  let h = 0x811c9dc5;
+  for (let i = 0; i < text.length; i++) h = Math.imul(h ^ text.charCodeAt(i), 0x01000193) >>> 0;
+  return h.toString(16).padStart(8, '0');
+}
