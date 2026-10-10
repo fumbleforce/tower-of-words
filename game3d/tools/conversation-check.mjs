@@ -41,11 +41,15 @@ async function topic(page, who) {
     g.walker.goTo(...spot);
   }, who);
   await page.waitForFunction(() => !window.__game.walker.path);
+  // Interact (gameplay/interact-menu.js): with a story beat too it opens the menu and the topic row is picked there,
+  // without one the topic runs straight away.
   await page.evaluate(who => {
     const g = window.__game, item = g.markers.list.find(m => m.id === who);
-    g.targetLock = item; g.near = item; g.ui.openActs(item);
+    g.targetLock = item; g.near = item; g.use(item, { direct: true });
   }, who);
-  await page.locator('#actMenu .topic').click();
+  await page.waitForTimeout(400);
+  const row = page.locator('#talk .chips.menu .chip.topic:not([disabled])');
+  if (await row.count()) { await page.waitForTimeout(950); await row.first().click(); }
 }
 await withBrowserJob('persistent-conversations', async browser => {
   for (const order of (process.argv[3]?.split(',') || ['heard-first', 'word-first', 'busy'])) {

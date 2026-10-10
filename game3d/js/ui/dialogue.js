@@ -134,7 +134,7 @@ export function createDialogue({ sfx }) {
       });
     },
     // Show a line with reply chips; resolves with the chip index. chips: [{html}]
-    choose(speaker, text, chips, { voiceKey, glow = -1, keepLine = false, whoId } = {}) {
+    choose(speaker, text, chips, { voiceKey, glow = -1, keepLine = false, whoId, focus = -1, log = true } = {}) {
       return new Promise((res) => {
         const t = $('#talk');
         if (!keepLine || whoId) showPortraits(t, speaker ? whoId : null);
@@ -166,6 +166,7 @@ export function createDialogue({ sfx }) {
         t.querySelector('.more').hidden = true;
         const box = t.querySelector('.chips');
         box.innerHTML = '';
+        box.classList.toggle('menu', focus >= 0);
         const shown = performance.now(); // a tap that revealed the chips must not also pick one
         // phone: the replies come up where the thumb was tapping the lines on, so they take taps only after a moment,
         // dimmed until then (cold playtest 2026-09-30: the next tap picked "Just nod" by accident)
@@ -188,7 +189,8 @@ export function createDialogue({ sfx }) {
             });
             b.classList.add('picked');
             stopVoice();
-            logLine({ k: 'pick', html: c.html });
+            if (log) logLine({ k: 'pick', html: c.html });
+            removeEventListener('keydown', keys, true);
             res(i);
           };
           box.appendChild(b);
@@ -196,6 +198,28 @@ export function createDialogue({ sfx }) {
         });
         this._chipKeys = btns;
         this._advance = null;
+        // a menu (Interact's options, gameplay/interact-menu.js): one row starts focused, so Space, Enter or E picks
+        // it, and the arrow keys move between rows
+        function keys(e) {
+          if (!btns.length || btns[0].disabled || !btns[0].isConnected)
+            return removeEventListener('keydown', keys, true);
+          const at = btns.indexOf(document.activeElement);
+          if (/^Arrow(Up|Down|Left|Right)$/.test(e.code)) {
+            e.preventDefault();
+            e.stopPropagation();
+            const d = /Up|Left/.test(e.code) ? -1 : 1;
+            btns[(at < 0 ? Math.max(0, focus) : at + d + btns.length) % btns.length].focus();
+          } else if (/^(Space|Enter|KeyE)$/.test(e.code) && at >= 0 && !e.repeat) {
+            e.preventDefault();
+            e.stopPropagation();
+            btns[at].click();
+          }
+        }
+        if (focus >= 0 && btns[focus]) {
+          addEventListener('keydown', keys, true);
+          if (!document.body.classList.contains('phone'))
+            setTimeout(() => btns[focus].isConnected && btns[focus].focus({ preventScroll: true }), 0);
+        }
         if (this.auto)
           setTimeout(() => {
             const i = Math.min(btns.length - 1, this.autoPick ? this.autoPick(chips) : 0);
@@ -204,6 +228,7 @@ export function createDialogue({ sfx }) {
             });
             this._chipKeys = null;
             stopVoice();
+            removeEventListener('keydown', keys, true);
             res(i);
           }, 15);
         t.classList.remove('in');

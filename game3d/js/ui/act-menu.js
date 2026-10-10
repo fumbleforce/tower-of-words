@@ -1,4 +1,4 @@
-// The action menu beside the current target (Talk, Look, Pet... on E; Say a word on Q; Next on Tab), mixed into
+// The action menu beside the current target (Interact on E, or a way out's verb; Say a word on Q; Next on Tab), mixed into
 // the ui object (ui.js). The rules it follows: docs/game/controls-and-ui.md, The HUD.
 import { $ } from './dom.js';
 import { thingBox, elBox } from './screen-box.js';
@@ -41,11 +41,14 @@ export function actMenu({ keyLabel, settings }) {
       // only the target in reach (notes/ONBOARDING.md rule 4): never something across the room
       const target = g.near;
       const obw = window.__onboard;
-      // the E key cap on the pin in reach, on desktop, until E has been used five times (onboard.js counts uses)
-      document.body.classList.toggle('teach-e', !!(target && obw && (obw.uses || 0) < 5));
       // the Say key on the other side of the pin from E: Q on the left when a word does something at the target in reach
+      const sayAtTarget = !!(target && show && g.sayTarget === target && g.sayRow(target));
+      // the E key cap on the pin in reach, on desktop, until E has been used five times (onboard.js counts uses), and
+      // always while Q shows beside it: a pin with only Q read as if E did nothing there (Jørgen, 2026-10-10, on Mio
+      // and the copier: "neither has the E key")
+      document.body.classList.toggle('teach-e', !!(target && obw && ((obw.uses || 0) < 5 || sayAtTarget)));
       for (const m of g.markers ? g.markers.list : []) {
-        const on = !!(target && m === target && show && g.sayTarget === target && g.sayRow(target));
+        const on = !!(target && m === target && sayAtTarget);
         if (m.el.classList.contains('sayq') !== on) {
           m.el.classList.toggle('sayq', on);
           m.el.querySelector('.keyq').textContent = keyLabel(settings.keySay || 'KeyQ');
@@ -60,42 +63,37 @@ export function actMenu({ keyLabel, settings }) {
       const ob = window.__onboard || {};
       const phone = document.body.classList.contains('phone');
       // the same verb and name as the pin's tooltip (gameplay/pin-kinds.js pinTip; neutral for a private pin in public play)
-      const { verb, name } = tipOf(target);
+      const { act: verb, name } = tipOf(target);
       // Say shows for this target when a word does something here; the first time only at the goal (the cat)
       const sayHere = show && g.sayTarget === target && g.sayRow(target);
-      const topic = g.topicFor?.(target.id);
       const canUse = !g.canUse || g.canUse(target);
-      const uses = ob.uses || 0;
       const cyc = !ob.active && this.cycleInfo && this.cycleInfo.n > 1 ? this.cycleInfo : null;
       const key = [
         target.id,
         verb,
         name,
         sayHere,
-        topic?.label,
         canUse,
         cyc ? cyc.i + '/' + cyc.n : '',
         phone,
         settings.keySay,
-        Math.min(uses, 5),
         ob.sayUsed ? 1 : 0,
       ].join('|');
       if (key !== this._actKey) {
         this._actKey = key;
         // Jørgen: "the interaction box is also not very pretty". The name on top, then one row per action: a key cap
         // and the action in one type style. The action row always names its action (Jørgen, 2026-09-30, on a box that
-        // had dropped it and showed only the name: "interaction windows but no actions"); the key cap goes after five
-        // uses. Phone rows have no key caps. On desktop a row without a key still gets an empty cap cell, so every
-        // label starts in the same column (issue #398); the CSS sizes that column to the widest key.
+        // had dropped it and showed only the name: "interaction windows but no actions"). Every row keeps its key cap: the
+        // action row's E went after five uses while Say kept its Q, and a menu showing only Q read as if E did nothing
+        // (Jørgen, 2026-10-10, Mio and the copier: "neither has the E key"). Phone rows have no key caps. On desktop a
+        // row without a key still gets an empty cap cell, so every label starts in the same column (issue #398); the
+        // CSS sizes that column to the widest key.
         const k = (c) => (phone ? '' : `<span class="k${c ? '' : ' none'}">${c}</span>`);
         const head = name ? `<div class="hd">${name}</div>` : '';
-        const useFace = `${k(uses < 5 ? 'E' : '')}<span class="lb">${verb}</span>`;
+        const useFace = `${k('E')}<span class="lb">${verb}</span>`;
         act.innerHTML =
           head +
           (canUse ? `<button type="button" class="act use">${useFace}</button>` : '') +
-          (topic
-            ? `<button type="button" class="act topic">${k('')}<span class="lb">${topic.label}</span></button>`
-            : '') +
           (sayHere
             ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="lb">Say a word</span></button>`
             : '') +
@@ -105,10 +103,6 @@ export function actMenu({ keyLabel, settings }) {
         act.querySelector('.use')?.addEventListener('click', (e) => {
           e.stopPropagation();
           g.use(g.near || target);
-        });
-        act.querySelector('.topic')?.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (g.near === target && g.topicFor?.(target.id)) g.use(target, { trigger: topic.trigger });
         });
         act.querySelector('.say')?.addEventListener('click', (e) => {
           e.stopPropagation();

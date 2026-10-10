@@ -112,9 +112,9 @@ test('every pin the story uses to change place is a way out', async () => {
 
 test('the tooltip says the verb and what it is', () => {
   const tip = (pin) => pinTip(pin).text;
-  assert.equal(tip(pinFor('office', 'vending')), 'Look: Vending machine');
-  assert.equal(tip({ id: 'mori', label: 'Mr. Mori', kind: 'person' }), 'Talk: Mr. Mori');
-  assert.equal(tip(pinFor('gate', 'tama')), 'Pet: Tama');
+  assert.equal(tip(pinFor('office', 'vending')), 'Interact: Vending machine');
+  assert.equal(tip({ id: 'mori', label: 'Mr. Mori', kind: 'person' }), 'Interact: Mr. Mori');
+  assert.equal(tip(pinFor('gate', 'tama')), 'Interact: Tama');
   assert.equal(tip(pinFor('plaza', 'office_lane')), 'Go to head office');
   assert.equal(tip(pinFor('plaza', 'shop_walk')), 'Go to the shop street');
   assert.equal(tip(pinFor('karaoke', 'karaoke_door')), 'Go out to the shop street');
@@ -125,19 +125,22 @@ test('the tooltip says the verb and what it is', () => {
   assert.equal(pinTip(pinFor('forecourt', 'lift')).verb, 'Take the lift');
   assert.equal(pinTip(pinFor('dorm_court', 'stairs')).verb, 'Take the stairs');
   assert.equal(pinTip(pinFor('office', 'vending')).verb, 'Look');
+  // E is Interact on people and things, a way out's own verb on those
+  assert.equal(pinTip(pinFor('office', 'vending')).act, 'Interact');
+  assert.equal(pinTip(pinFor('forecourt', 'lift')).act, 'Take the lift');
 });
 
 test('a private pin says nothing private while private mode is off', () => {
   const heart = { id: 'x', label: 'A private label', kind: 'thing small', verb: 'Look', icon: 'heart-soft' };
   assert.ok(isPrivatePin(heart));
-  assert.deepEqual(pinTip(heart, { privateMode: false }), { verb: 'Look', name: '', text: 'Look' });
-  assert.deepEqual(pinTip({ ...heart, icon: () => 'heart-hard' }, { privateMode: false }).text, 'Look');
-  assert.deepEqual(pinTip({ ...heart, icon: undefined, private: true }, { privateMode: false }).text, 'Look');
-  assert.equal(pinTip({ ...heart, tip: 'A private tip' }).text, 'Look');
-  // a person keeps their public name and Talk
-  assert.equal(pinTip({ id: 'kuro', label: 'Receptionist', kind: 'person', icon: 'heart-soft' }).text, 'Talk: Receptionist');
+  assert.deepEqual(pinTip(heart, { privateMode: false }), { act: 'Interact', verb: 'Look', name: '', text: 'Interact' });
+  assert.deepEqual(pinTip({ ...heart, icon: () => 'heart-hard' }, { privateMode: false }).text, 'Interact');
+  assert.deepEqual(pinTip({ ...heart, icon: undefined, private: true }, { privateMode: false }).text, 'Interact');
+  assert.equal(pinTip({ ...heart, tip: 'A private tip' }).text, 'Interact');
+  // a person keeps their public name
+  assert.equal(pinTip({ id: 'kuro', label: 'Receptionist', kind: 'person', icon: 'heart-soft' }).text, 'Interact: Receptionist');
   // private mode on: the plugin's own label
-  assert.equal(pinTip(heart, { privateMode: true }).text, 'Look: A private label');
+  assert.equal(pinTip(heart, { privateMode: true }).text, 'Interact: A private label');
   // a plugin's icon function that gives nothing is a public pin
   assert.equal(isPrivatePin({ ...heart, icon: () => '' }), false);
 });

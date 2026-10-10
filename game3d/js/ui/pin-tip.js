@@ -140,7 +140,8 @@ export function createPinTip(layer, markers, { thingBox, elBox }) {
       if (t.text !== shown) {
         shown = t.text;
         // the verb in the menu's teal, then the rest: "Look" ": Vending machine", "Go" " to the plaza"
-        const head = t.text.startsWith(t.verb) ? t.verb : '';
+        const lead = t.act || t.verb,
+          head = t.text.startsWith(lead) ? lead : '';
         vb.textContent = head;
         rest.textContent = t.text.slice(head.length);
       }

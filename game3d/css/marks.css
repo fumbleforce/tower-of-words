@@ -69,7 +69,7 @@ body.reduce-motion #marks .mark.goal .pin::after { animation: none; transform: s
 }
 @keyframes markbob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 body.reduce-motion #marks .mark.near::after { animation: none; }
-/* desktop, until E has been used five times: the E key at the corner of the pin in reach (the action menu opens only
+/* desktop, until E has been used five times and whenever Q shows too: the E key at the corner of the pin in reach (the action menu opens only
    when asked for, so this is where E is taught; ui.js sets body.teach-e) */
 /* Jørgen, 2026-10-04: "the E button indicator is almost to small to read". A real key cap: 24 px at --ui 1 and growing
    with the interface size, a light face with a dark rim and a dark bold letter, so it reads on the pale floors and the
