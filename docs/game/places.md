@@ -950,7 +950,7 @@ None.
 
 ### Who's there when
 
-Day 3 evening and day 4 morning: Kenji on the sofa watching a visible silent sports replay. Ordinary Talk offers replay and work topics, with shorter responses after each has been heard. His arcade conversation is recalled only if it actually happened. The Sunday remote-under-him action plays once before he sits again. The player approaches the free floor beside the occupied sofa end. No additional vocabulary lesson is required. Later recurring-calendar placement remains a separate dependency.
+Day 3 evening and day 4 morning: Kenji on the sofa watching a visible silent sports replay. Ordinary Talk offers replay and work topics, with shorter responses after each has been heard. His arcade conversation is recalled only if it actually happened. The Sunday remote-under-him action plays once before he sits again. The player approaches the free floor beside the occupied sofa end. No additional vocabulary lesson is required. In the recurring weeks he is on the sofa on weekday evenings except Wednesday and Friday; on Thursday evenings he stands at the long table instead (his Talk then offers the work topic only), and on Friday evenings he is at the kitchenette counter in B2 until the drinks scene gathers him by the lift.
 
 | Id | Usually | Schedule |
 |---|---|---|

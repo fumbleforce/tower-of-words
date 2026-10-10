@@ -60,6 +60,19 @@ test('club hosts return on their weekday without the introductory date', () => {
   }
 });
 
+test('Kenji works at the long table on Thursday evenings and in the kitchenette on Friday evenings', () => {
+  for (const day of [8, 15, 36]) {
+    assert.equal(weekdayOf(day), 4);
+    const plan = weeklyPlan(day);
+    assert.ok(plan.dorm_commons.kenji.evening.at && !plan.dorm_commons.kenji.evening.seat);
+    assert.ok(plan.dorm_commons.mori.lunch && !plan.dorm_commons.mori.evening, 'Mori has the table at lunch only');
+  }
+  for (const day of [9, 16, 37]) {
+    assert.equal(weekdayOf(day), 5);
+    const k = weeklyPlan(day).office.kenji.evening;
+    assert.deepEqual(k.at, [1.2, 3.3]);
+  }
+});
 test('all continuing destinations connect to home, including the western island and B2', async () => {
   const { TRIPS } = await import('../../story/ongoing/routes.js');
   for (const start of Object.keys(TRIPS)) {
