@@ -34,7 +34,8 @@ await withBrowserJob('saves-check', async (b) => {
   const errs = [];
   p.on('pageerror', (e) => errs.push(e.message));
   const shot = (n) => p.screenshot({ path: path.join(out, n + '.png') });
-  // free to act: the place is in, nothing scripted, no line up (lines move on with Space, or a tap on the phone)
+  // free to act: the place is in, nothing scripted, no line up (lines move on with Space, or a tap on the phone) and
+  // no ticket app open (day 2 opens it on Mio's station request; Close shuts it and the story goes on)
   const look = () =>
     p.evaluate(() => {
       const g = window.__game;
@@ -44,11 +45,13 @@ await withBrowserJob('saves-check', async (b) => {
         talking: !!g?.ui?.talking,
         line: (document.querySelector('#talk')?.hidden ? '' : document.querySelector('#talk .line')?.textContent || '').trim(),
         choice: !!document.querySelector('#talk .chips button'),
+        tickets: !!document.querySelector('#ticketsApp:not([hidden])'),
       };
     });
   const advance = async () => {
     const s = await look();
-    if (s.choice) await p.locator('#talk .chips button').first().click();
+    if (s.tickets) await p.locator('#ticketsApp .tk-close').click();
+    else if (s.choice) await p.locator('#talk .chips button').first().click();
     else if (s.talking) {
       if (phone) {
         const r = await p.locator('#talk').boundingBox();
@@ -99,9 +102,13 @@ await withBrowserJob('saves-check', async (b) => {
   const mid = await look();
   if (mid.talking) {
     const first = mid.line;
-    await advance();
-    await p.waitForTimeout(400);
+    // on to a later line, so the load has something to rewind (a line can ignore input for a moment as it comes in)
+    for (let i = 0; i < 12 && (await look()).line === first; i++) {
+      await advance();
+      await p.waitForTimeout(250);
+    }
     const at = (await look()).line;
+    check(at && at !== first, 'the conversation moved past its first line before the quick save');
     const toast = await quickSave();
     check(/Quick saved/.test(toast) && /conversation again from the beginning/.test(toast), `mid-conversation quick save says what loading does ("${toast}")`);
     await shot('1-quick-saved-mid-talk');
@@ -235,13 +242,24 @@ await withBrowserJob('saves-check', async (b) => {
   );
   check(!off.length, `every HUD chip is on screen with the HUD full${off.length ? ': off ' + off.join(',') : ''}`);
   await shot('10-hud-full');
-  // the public build has no feedback button: there the full HUD is one row
+  // the public build has no feedback button: there the full HUD is one row on desktop; the phone's wraps to two since
+  // Menu and Quick save carry their names (#345). Chips of different heights (the clock) share a row when they overlap.
   await p.evaluate(() => document.querySelector('#feedbackBtn')?.setAttribute('hidden', ''));
   await p.waitForTimeout(200);
-  const rows = await p.evaluate(
-    () => new Set([...document.querySelectorAll('#hud > :not([hidden])')].map((e) => e.getBoundingClientRect()).filter((r) => r.width).map((r) => Math.round(r.top))).size,
-  );
-  check(rows === 1, `without the local feedback button the full HUD is one row (${rows})`);
+  const rows = await p.evaluate(() => {
+    const rs = [...document.querySelectorAll('#hud > :not([hidden])')].map((e) => e.getBoundingClientRect()).filter((r) => r.width);
+    let n = 0;
+    let bottom = -Infinity;
+    for (const r of rs.sort((a, b) => a.top - b.top)) {
+      if (r.top >= bottom - 1) {
+        n++;
+        bottom = r.bottom;
+      } else bottom = Math.max(bottom, r.bottom);
+    }
+    return n;
+  });
+  const most = phone ? 2 : 1;
+  check(rows <= most, `without the local feedback button the full HUD is at most ${most} row${most > 1 ? 's' : ''} (${rows})`);
   await shot('11-hud-full-public');
   check(!errs.length, `no page errors${errs.length ? ': ' + errs.slice(0, 3).join(' | ') : ''}`);
   await ctx.close();
