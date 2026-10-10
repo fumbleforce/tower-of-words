@@ -1,0 +1,48 @@
+{
+  "title": "Words panel, rebuilt",
+  "date": "2026-10-10",
+  "by": "claude-agent:words-panel",
+  "caption": "The Words chip now opens a panel that fits the screen at every size, with the list scrolling inside it. Words are grouped by day or by kind. A search box filters as you type in Japanese, kana, rōmaji or English. Tap a word to hear Mio say it. Each word shows its kana, its reading, its meaning and where you learned it, and words you could say to whoever is in reach right now are marked. Only words you have learned are listed. Play pauses while the panel is open.",
+  "result": ["desk-day5", "phone-day1", "wide-search", "desk-day1"],
+  "sections": [
+    {
+      "title": "Day 1 on the monorail, beside the cat",
+      "caption": "Eight words from day 1. Good morning and wait would both do something to the cat right now, so their rows say so.",
+      "images": [
+        { "id": "desk-day1", "image": "bible/shots/showcase/words-panel-1/desk-day1.webp", "caption": "Desktop, 1366 × 860" },
+        { "id": "wide-day1", "image": "bible/shots/showcase/words-panel-1/wide-day1.webp", "caption": "2560 × 1440" },
+        { "id": "phone-day1", "image": "bible/shots/showcase/words-panel-1/phone-day1.webp", "caption": "Phone, 390 × 844" }
+      ]
+    },
+    {
+      "title": "A week of words on day 5, by day",
+      "caption": "Today comes first. Words learned today are marked New today.",
+      "images": [
+        { "id": "desk-day5", "image": "bible/shots/showcase/words-panel-1/desk-day5.webp", "caption": "Desktop" },
+        { "id": "wide-day5", "image": "bible/shots/showcase/words-panel-1/wide-day5.webp", "caption": "2560 × 1440" },
+        { "id": "phone-day5", "image": "bible/shots/showcase/words-panel-1/phone-day5.webp", "caption": "Phone" }
+      ]
+    },
+    {
+      "title": "The same words by kind",
+      "caption": "Phrases, commands, words you understand, and the ticket app's labels, each with a line on what they are. The second picture is the bottom of the list.",
+      "images": [
+        { "id": "desk-kind", "image": "bible/shots/showcase/words-panel-1/desk-day5-kind.webp", "caption": "Desktop" },
+        { "id": "desk-kind-end", "image": "bible/shots/showcase/words-panel-1/desk-day5-kind-end.webp", "caption": "Desktop, scrolled to the end" },
+        { "id": "wide-kind", "image": "bible/shots/showcase/words-panel-1/wide-day5-kind.webp", "caption": "2560 × 1440" },
+        { "id": "phone-kind", "image": "bible/shots/showcase/words-panel-1/phone-day5-kind.webp", "caption": "Phone" },
+        { "id": "phone-kind-end", "image": "bible/shots/showcase/words-panel-1/phone-day5-kind-end.webp", "caption": "Phone, scrolled to the end" }
+      ]
+    },
+    {
+      "title": "Searching",
+      "caption": "Typing \"to\" leaves the five words that match it.",
+      "images": [
+        { "id": "desk-search", "image": "bible/shots/showcase/words-panel-1/desk-search.webp", "caption": "Desktop" },
+        { "id": "wide-search", "image": "bible/shots/showcase/words-panel-1/wide-search.webp", "caption": "2560 × 1440" },
+        { "id": "phone-search", "image": "bible/shots/showcase/words-panel-1/phone-search.webp", "caption": "Phone" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Play it", "href": "game3d/" }]
+}

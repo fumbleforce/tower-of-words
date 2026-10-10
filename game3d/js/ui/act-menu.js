@@ -33,7 +33,7 @@ export function actMenu({ keyLabel, settings }) {
       }
       const blocked =
         !$('#sayMenu').hidden ||
-        !$('#cmdsPanel').hidden ||
+        !!document.querySelector('#words:not([hidden])') ||
         [...document.querySelectorAll('.panel')].some((p) => !p.hidden) ||
         document.body.classList.contains('busy') ||
         document.body.classList.contains('trip') ||

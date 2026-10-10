@@ -6,54 +6,54 @@ Elsewhere: which storyline teaches a word, and who teaches it, is in that storyl
 
 ## Words
 
-Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say to people; a `command` is a word he can say to make a machine do something (kotodama); a `word` is shown with its gloss but can't be said; a `label` is one of the ticket system's screen labels (Labels on the ticket system, below).
+Checked against game3d/js/lang.js. Kana is the word in kana where it is written with kanji (a `kana` spelling in lang.js, or its first kana alias); the Words panel shows it under the word. Kind: a `phrase` is a greeting Eric can say to people; a `command` is a word he can say to make a machine do something (kotodama); a `word` is shown with its gloss but can't be said; a `label` is one of the ticket system's screen labels (Labels on the ticket system, below).
 
-| Id | Japanese | Reading | Meaning | Kind |
-|---|---|---|---|---|
-| `ohayo` | おはようございます | ohayō gozaimasu | good morning | phrase |
-| `yoroshiku` | よろしくおねがいします | yoroshiku onegaishimasu | nice to meet you | phrase |
-| `sumimasen` | すみません | sumimasen | excuse me, sorry | phrase |
-| `mada` | まだ | mada | still; not yet | phrase |
-| `yasumi` | 休み | yasumi | a break; a day off | phrase |
-| `kanpai` | 乾杯 | kanpai | cheers | phrase |
-| `oishii` | おいしい | oishii | delicious | phrase |
-| `mouichido` | もう一度 | mou ichido | once more | phrase |
-| `daijoubu` | 大丈夫 | daijoubu | okay; all right | phrase |
-| `tabetai` | 食べたい | tabetai | I want to eat | phrase |
-| `nomitai` | 飲みたい | nomitai | I want to drink | phrase |
-| `mitai` | 見たい | mitai | I want to see | phrase |
-| `ikitai` | 行きたい | ikitai | I want to go | phrase |
-| `isshoni` | いっしょに | isshoni | together | phrase |
-| `koko` | ここ | koko | here | phrase |
-| `gamen` | 画面 | gamen | screen | phrase |
-| `yoyaku` | 予約 | yoyaku | booking | phrase |
-| `oyogu` | 泳ぐ | oyogu | swim | phrase |
-| `matte` | 待って | matte | wait | command |
-| `akete` | 開けて | akete | open | command |
-| `ugoite` | 動いて | ugoite | work, move | command |
-| `tomatte` | 止まって | tomatte | stop | command |
-| `irete` | 入れて | irete | pour, make (tea) | command |
-| `kite` | 来て | kite | come | command |
-| `dashite` | 出して | dashite | give it out | command |
-| `gaijin` | 外人 | gaijin | foreigner | word |
-| `honsha` | 本社 | honsha | head office | word |
-| `tsugiwa` | つぎは | tsugi wa | next | word |
-| `otsukare` | お疲れさまです | otsukaresama desu | the everyday hello at work | word |
-| `kotodama` | 言霊 | kotodama | words with power in them | word |
-| `watashi` | 私 | watashi | I, me | word |
-| `anata` | あなた | anata | you | word |
-| `rokuji` | 六時 | rokuji | six o’clock | word |
-| `futari` | 二人 | futari | two people | word |
-| `kenmei` | 件名 | kenmei | subject (of a ticket or an email) | label |
-| `iraisha` | 依頼者 | iraisha | the person who asked | label |
-| `jotai` | 状態 | jōtai | status, state | label |
-| `mitaio` | 未対応 | mitaiō | not started yet | label |
-| `taiochu` | 対応中 | taiōchū | being worked on | label |
-| `kanryo` | 完了 | kanryō | done, finished | label |
-| `hoshu` | 報酬 | hōshū | pay, a fee | label |
-| `tanto` | 担当する | tantō suru | to take something on as your job | label |
-| `modoru` | 戻る | modoru | to go back | label |
-| `tojiru` | 閉じる | tojiru | to close | label |
+| Id | Japanese | Kana | Reading | Meaning | Kind |
+|---|---|---|---|---|---|
+| `ohayo` | おはようございます |  | ohayō gozaimasu | good morning | phrase |
+| `yoroshiku` | よろしくおねがいします |  | yoroshiku onegaishimasu | nice to meet you | phrase |
+| `sumimasen` | すみません |  | sumimasen | excuse me, sorry | phrase |
+| `mada` | まだ |  | mada | still; not yet | phrase |
+| `yasumi` | 休み | やすみ | yasumi | a break; a day off | phrase |
+| `kanpai` | 乾杯 | かんぱい | kanpai | cheers | phrase |
+| `oishii` | おいしい |  | oishii | delicious | phrase |
+| `mouichido` | もう一度 | もういちど | mou ichido | once more | phrase |
+| `daijoubu` | 大丈夫 | だいじょうぶ | daijoubu | okay; all right | phrase |
+| `tabetai` | 食べたい | たべたい | tabetai | I want to eat | phrase |
+| `nomitai` | 飲みたい | のみたい | nomitai | I want to drink | phrase |
+| `mitai` | 見たい | みたい | mitai | I want to see | phrase |
+| `ikitai` | 行きたい | いきたい | ikitai | I want to go | phrase |
+| `isshoni` | いっしょに |  | isshoni | together | phrase |
+| `koko` | ここ |  | koko | here | phrase |
+| `gamen` | 画面 | がめん | gamen | screen | phrase |
+| `yoyaku` | 予約 | よやく | yoyaku | booking | phrase |
+| `oyogu` | 泳ぐ | およぐ | oyogu | swim | phrase |
+| `matte` | 待って | まって | matte | wait | command |
+| `akete` | 開けて | あけて | akete | open | command |
+| `ugoite` | 動いて | うごいて | ugoite | work, move | command |
+| `tomatte` | 止まって | とまって | tomatte | stop | command |
+| `irete` | 入れて | いれて | irete | pour, make (tea) | command |
+| `kite` | 来て | きて | kite | come | command |
+| `dashite` | 出して | だして | dashite | give it out | command |
+| `gaijin` | 外人 | がいじん | gaijin | foreigner | word |
+| `honsha` | 本社 | ほんしゃ | honsha | head office | word |
+| `tsugiwa` | つぎは |  | tsugi wa | next | word |
+| `otsukare` | お疲れさまです | おつかれさまです | otsukaresama desu | the everyday hello at work | word |
+| `kotodama` | 言霊 | ことだま | kotodama | words with power in them | word |
+| `watashi` | 私 | わたし | watashi | I, me | word |
+| `anata` | あなた |  | anata | you | word |
+| `rokuji` | 六時 | ろくじ | rokuji | six o’clock | word |
+| `futari` | 二人 | ふたり | futari | two people | word |
+| `kenmei` | 件名 | けんめい | kenmei | subject (of a ticket or an email) | label |
+| `iraisha` | 依頼者 | いらいしゃ | iraisha | the person who asked | label |
+| `jotai` | 状態 | じょうたい | jōtai | status, state | label |
+| `mitaio` | 未対応 | みたいおう | mitaiō | not started yet | label |
+| `taiochu` | 対応中 | たいおうちゅう | taiōchū | being worked on | label |
+| `kanryo` | 完了 | かんりょう | kanryō | done, finished | label |
+| `hoshu` | 報酬 | ほうしゅう | hōshū | pay, a fee | label |
+| `tanto` | 担当する | たんとうする | tantō suru | to take something on as your job | label |
+| `modoru` | 戻る | もどる | modoru | to go back | label |
+| `tojiru` | 閉じる | とじる | tojiru | to close | label |
 
 Verbs are met in their -te form, the form for asking someone to do something. The Words panel shows each with its dictionary form (待って matte is the -te form of 待つ matsu) and a short note on what -te does (Jørgen: "it is never explained in the word menu what the -te ending is").
 
@@ -97,6 +97,6 @@ Known `gamen` returns during the court display inspection (`d4_display`) and at 
 
 ## Labels on the ticket system
 
-The ticket app ([controls-and-ui.md](controls-and-ui.md)) labels its columns, fields, statuses and buttons in Japanese (Jørgen, 2026-10-03: "Some japanese here, and learnable"): 件名, 依頼者 and 状態 over the list and down the ticket's form, 報酬 by the pay, the statuses 未対応, 対応中 and 完了, and the buttons 担当する, 戻る and 閉じる. They are kept in game3d/js/tickets/words.js, which lang.js adds to its words. Each label shows its reading over it in small type and its short English after it (件名 Subject), every time. Tapping or clicking a label teaches its word, and using a button teaches the button's; a line at the foot of the page says "New word in your Words: 件名 kenmei, subject (of a ticket or an email)", the Words chip pops and the word joins the Words panel's Words list. Until one is known, that line says "Tap a Japanese label to learn it." (desktop: "Click"). A known label loses its dotted underline. None of them is needed to use the app or to move the story, none can be said, and none has a voice clip yet.
+The ticket app ([controls-and-ui.md](controls-and-ui.md)) labels its columns, fields, statuses and buttons in Japanese (Jørgen, 2026-10-03: "Some japanese here, and learnable"): 件名, 依頼者 and 状態 over the list and down the ticket's form, 報酬 by the pay, the statuses 未対応, 対応中 and 完了, and the buttons 担当する, 戻る and 閉じる. They are kept in game3d/js/tickets/words.js, which lang.js adds to its words. Each label shows its reading over it in small type and its short English after it (件名 Subject), every time. Tapping or clicking a label teaches its word, and using a button teaches the button's; a line at the foot of the page says "New word in your Words: 件名 kenmei, subject (of a ticket or an email)", the Words chip pops and the word joins the Words panel (under Ticket app when it lists by kind). Until one is known, that line says "Tap a Japanese label to learn it." (desktop: "Click"). A known label loses its dotted underline. None of them is needed to use the app or to move the story, none can be said, and none has a voice clip yet.
 
 The optional [sender investigation](stories/investigations/sender.md) teaches `mada` only through Mio’s offered typing practice. Hearing Mori or inspecting records never learns it. Learning before or after his exact remembered remark opens the same tentative interpretation, including after the physical solve.

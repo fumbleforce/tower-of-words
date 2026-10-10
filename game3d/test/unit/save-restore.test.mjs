@@ -168,8 +168,10 @@ function seed() {
   return S.loadSave();
 }
 test('whole simulation save restores words, inventory, flags, relationships and one-shot state', () => {
-  const { visited, ...saved } = seed();
+  const { visited, learned, ...saved } = seed();
   assert.ok(Array.isArray(visited), 'the places he has been to (#261, travel/visited.js)');
+  // when each word was learned (the Words panel); words a day-1 save knew without a record count as day 1's
+  assert.deepEqual(learned, { ugoite: { day: 1 }, ohayo: { day: 1 } });
   assert.deepEqual(saved, { ...savedBaseline, goalDestination: null, pendingStart: null, mc: 'eric', cast: defaultCast() },
     'legacy values plus explicit completed-opening marker, and the protagonist and cast (#251)');
   // Eric's save is byte for byte the one from before protagonists, with mc and cast added at the end
@@ -177,7 +179,7 @@ test('whole simulation save restores words, inventory, flags, relationships and 
   assert.deepEqual([mc, cast], ['eric', defaultCast()]);
   assert.equal(localStorage.getItem('amakawa-day1-save'),
     JSON.stringify(before).slice(0, -1) + ',"mc":"eric","cast":' + JSON.stringify(defaultCast()) + '}');
-  assert.deepEqual(Object.keys(before).filter((k) => k !== 'visited'), Object.keys({ ...savedBaseline, goalDestination: null, pendingStart: null }).filter((k) => k in before));
+  assert.deepEqual(Object.keys(before).filter((k) => k !== 'visited' && k !== 'learned'), Object.keys({ ...savedBaseline, goalDestination: null, pendingStart: null }).filter((k) => k in before));
   assert.deepEqual(saved.known, ['ugoite', 'ohayo']);
   assert.deepEqual(saved.inv, ['coffee', 'tea']);
   assert.equal(saved.yen, 750);
@@ -195,7 +197,7 @@ test('whole simulation save restores words, inventory, flags, relationships and 
   assert.equal(S.rememberedBy('mio', 'held_doors'), true);
   assert.equal(S.bonds.relation('mio', 'mori'), 'owes');
   S.save(game);
-  assert.deepEqual(S.loadSave(), { ...saved, visited }, 'entire v1 save survives a round trip');
+  assert.deepEqual(S.loadSave(), { ...saved, visited, learned }, 'entire v1 save survives a round trip');
 });
 test('legacy commute saves migrate periods and numeric bonds without clearing existing flags or words', () => {
   flags.existing = 9; known.add('ohayo'); seen.add('ohayo'); game.found.add('existing');

@@ -98,6 +98,7 @@ function sampleDayTwoEnd(one, report) {
     day: 2,
     flags,
     known: [...one.known, 'tabetai'],
+    learned: { ...one.learned, tabetai: { day: 2 } },
     yen: one.yen + 3000,
     ended: true,
   };
@@ -120,6 +121,7 @@ export function sampleDayOneEnd(history = 'mio') {
     period: 'evening',
     flags,
     known,
+    learned: Object.fromEntries(known.map((id) => [id, { day: 1 }])),
     seen: [],
     found: [],
     taught: {
