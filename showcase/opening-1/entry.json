@@ -1,5 +1,5 @@
 {
-  "title": "Anime opening, seventh cut",
+  "title": "Anime opening, eighth cut",
   "date": "2026-10-09",
   "by": "claude-main",
   "caption": "The 70-second opening to the opening theme, made in code, now in the game's anime look with the rebuilt station. In the title menu as Opening, and on its own at game3d/opening/.",
@@ -10,7 +10,8 @@
     "af2eb480",
     "e8261beca",
     "1aa53f732",
-    "4418b1b83"
+    "4418b1b83",
+    "f77db8f37"
   ],
   "result": [
     "v5-031-0",
@@ -19,6 +20,27 @@
     "v5-063-0"
   ],
   "sections": [
+    {
+      "title": "Eighth cut (2026-10-10): a second critic pass (7/10)",
+      "caption": "The chorus slam in colour, the gate without the blocky guard figure, daylight through the exit doors (they slide into the wall), the pool from a lower angle, Aoi fading out like the others.",
+      "images": [
+        {
+          "id": "v8-035-3",
+          "image": "bible/shots/showcase/opening-1/v8-t035.3.webp",
+          "caption": "Daylight through the exit"
+        },
+        {
+          "id": "v8-039-4",
+          "image": "bible/shots/showcase/opening-1/v8-t039.4.webp",
+          "caption": "はじめまして lands on colour"
+        },
+        {
+          "id": "v8-059-5",
+          "image": "bible/shots/showcase/opening-1/v8-t059.5.webp",
+          "caption": "The pool, with depth"
+        }
+      ]
+    },
     {
       "title": "Sixth and seventh cuts (2026-10-10): fixes from a critic pass",
       "caption": "The sea and clouds smooth far out, 「てつだって」 off the faces, the one-beat tower readable, a stronger title, the riders lit from inside the cars, the ID card moving with the bars, the aerial drifting. Seventh cut: the window view frames the whole island, and the anime look follows the game (toon, outline, paint, fountain water).",
@@ -272,9 +294,9 @@
       "href": "game3d/opening/"
     },
     {
-      "label": "The 1080p video, seventh cut (on this machine)",
-      "href": "game3d/shots/opening-film/full-v7/opening-1920.mp4"
+      "label": "The 1080p video, eighth cut (on this machine)",
+      "href": "game3d/shots/opening-film/full-v8/opening-1920.mp4"
     }
   ],
-  "updated": "2026-10-10T04:26:37+02:00"
+  "updated": "2026-10-10T05:00:55+02:00"
 }
