@@ -69,6 +69,7 @@ Points come from:
 | An authored moment | 1 | once each |
 
 - At most 3 points per person per day. Points never go down.
+- Rei's steps come sooner: 4 points for step 2, 10 for step 3 and 16 for step 4. She leads her line, and at the usual thresholds it was too slow (Jørgen, 2026-10-10: "progression is too slow when she is the one in control"). Why and how her line uses them: [her route](../../notes/characters/rei/route.md).
 - The People panel shows each met person's step as hearts with a line on where things stand, never the points or what the next step needs ([controls-and-ui.md](controls-and-ui.md), People).
 - Reaching step 2 sets the flag `bond2_<id>` (`bond2_mio`), which stays true. Steps 3 to 5 are the scenes' own flags ([cast.md](cast.md), Personal plots and bond milestones).
 - While a step's scene hasn't played, points stop at its threshold, so nobody can be ground past it. Day 1 only reaches steps 1 and 2; the scenes for steps 3 to 5 are to build.

@@ -73,13 +73,13 @@ cast.md marks this Rei route as superseded and says not to build it. These rewri
 
 | Id | Line | Why | Current | Rewrite |
 |---|---|---|---|---|
-| `ms_rei_remembers` (milestones/rei.js) | 8 | B | Want to try the serve yourself? I’ll keep the explanation shorter. | "You’re serving today. I’ll keep the explanation short, so pay attention." |
-| `ms_rei_remembers` (milestones/rei.js) | 9 | B | You were hitting with Aoi. Would you like me to send you a few this time? | "Last week you hit with Aoi. Today you’re hitting with me, so stand over there." |
-| `ms_rei_remembers` (milestones/rei.js) | 9 | B | What would you like to try? We’ve got some space now. | "We’ve got the court for twenty minutes. Serves first, then I’ll feed you some forehands." |
-| `ms_rei_remembers` (milestones/rei.js) | 13 | B | Try another serve. I’ll watch where you throw the ball. | "Serve again, and throw the ball up in front of you this time. I’m watching." |
+| `ms_rei_remembers` (milestones/rei.js) | 8 | B | Want to try the serve yourself? I’ll keep the explanation shorter. | "You watched me serve last week, so today you’re serving. Stand behind the line and listen, because I’m only explaining it once." |
+| `ms_rei_remembers` (milestones/rei.js) | 9 | B | You were hitting with Aoi. Would you like me to send you a few this time? | "You hit with Aoi last week. Today you’re hitting with me, so go and stand over there." |
+| `ms_rei_remembers` (milestones/rei.js) | 9 | B | What would you like to try? We’ve got some space now. | "We’ve got the court for twenty minutes, so you’re serving first, and then I’ll feed you some forehands." |
+| `ms_rei_remembers` (milestones/rei.js) | 13 | B | Try another serve. I’ll watch where you throw the ball. | "Serve again, and throw the ball higher this time, out in front of you. That’s two in out of five." |
 | `ms_rei_remembers` (milestones/rei.js) | 13 | B | Try that again. I’ll put the next ball in the same place. | "Do that again. I’m putting the next one in the same place until you hit it properly." |
 | `ms_rei_half` (milestones/rei.js) | 17 | B | Come on my side for doubles. I’ll take the left. | "You’re on my side for doubles. I’m taking the left, you’ve got the right, and don’t drift into the middle." |
-| `ms_rei_try_again` (milestones/rei.js) | 23 | S | Yes. I got there before I thought about it. | "Fine, have another one. You were too slow, so I took it." |
-| `ms_rei_your_half` (milestones/rei.js) | 24 | S | All right. I’ll stay over here. | "Your half, then. Let’s see what you do with it." |
+| `ms_rei_try_again` (milestones/rei.js) | 23 | S | Yes. I got there before I thought about it. | "You were too slow, so I took it. Same ball again, and this time get there before I do." |
+| `ms_rei_your_half` (milestones/rei.js) | 24 | S | All right. I’ll stay over here. | "That’s what I told you at the start. Your half is yours, so stop waiting for me and hit it." |
 | `ms_rei_waits` (milestones/rei.js) | 27 | F | Where did you want the next one? Closer to the middle? | "Where do you want the next one? Tell me now, I’m not going to guess." |
 | `ms_aoi_asks` (milestones/aoi.js) | 29 | F | Thirty minutes for beginners? Yes, put that on the booking so everyone can see it. | "Thirty minutes for beginners, then doubles. Write it on the booking so nobody argues with me about it later." |
