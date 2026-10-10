@@ -7,10 +7,12 @@
 //                                     in its south side, standing open, with テニスコート on a board by its walk,
 //                                     facing west along the courts walk (signs: a shop-signs.js signSet); by the west
 //                                     court's net the players' bench, the ball basket and the score display
-//                                     (court-plan.js: the west court is walked)
+//                                     (court-plan.js: the west court is walked), the floodlight masts and the
+//                                     gate's notice
 import * as THREE from 'three';
 import { STEEL, bench } from '../outdoor/furniture.js';
-import { COURTS, L, W, CXS, CZ, GATE_X, BENCH, BENCH_LEN, BASKET, DISPLAY } from './court-plan.js';
+import { COURTS, L, W, CXS, CZ, GATE_X, BENCH, BENCH_LEN, BASKET, DISPLAY, MASTS } from './court-plan.js';
+import { lamp } from '../../kit/street/lamp.js';
 
 export const COURTS_GATE = { x: GATE_X, w: 1.4 }; // between its posts, in the south fence
 const MESH = '#3a4148';
@@ -114,7 +116,9 @@ function courtside(p) {
     p.box(i < 2 ? '#c9473f' : '#3e7bb8', 0.03, 0.05, 0.08, dx + 0.07, 1.04, dz - 0.21 + i * 0.14, { cast: false });
 }
 
-export function courts(p, signs) {
+// lights: a Parts collector built with kit/core/build.js buildKit, for the floodlights' lit heads (scenes/sports.js);
+// without one the masts stand with their heads dark (the east coast's view of the courts)
+export function courts(p, signs, { lights = null } = {}) {
   const [x0, x1, z0, z1] = COURTS,
     cz = CZ;
   p.box('#5f7d74', x1 - x0, 0.03, z1 - z0, (x0 + x1) / 2, 0, cz);
@@ -148,4 +152,18 @@ export function courts(p, signs) {
   p.box('#2b3a40', 0.04, 0.48, 1.74, sx + 0.03, 1.21, sz);
   for (const s of [-1, 1]) p.box(STEEL.dark, 0.06, 1.2, 0.06, sx + 0.06, 0, sz + s * 0.8);
   signs.board('テニスコート', 'TENNIS COURTS', '#2f5d57', 1.7, 0.44, [sx, 1.45, sz], -Math.PI / 2);
+  // the gate's notice, on its east gatepost facing the gate walk: the lights go off at nine
+  p.box(STEEL.dark, 0.5, 0.32, 0.02, g.x + g.w / 2 + 0.05, 1.3, z1 + 0.06, { cast: false });
+  signs.board(
+    'しょうとう 21:00',
+    'LIGHTS OFF 21:00',
+    '#2b3a40',
+    0.46,
+    0.28,
+    [g.x + g.w / 2 + 0.05, 1.46, z1 + 0.075],
+    0,
+  );
+  // the floodlight masts (court-plan.js MASTS)
+  for (const [x, z, face, lit] of MASTS)
+    lamp(lit && lights ? lights : p, { at: [x, z], face, variant: 'flood', lit: lit && !!lights, pole: STEEL.mid });
 }
