@@ -18,7 +18,7 @@ Each writing agent works in its own git worktree on its own branch, and one scri
 ## Land
 
 1. In the worktree, commit everything the task changed (GUIDE: Definition of done; every commit needs its `Facts:` line). Nobody else's edits are in your tree, so `git add` of your files is enough.
-2. If game3d/ changed, the day test must pass at both sizes in the worktree first (fast-qa skill). land.sh doesn't run the browser.
+2. If game3d/ changed, the day test must pass at both sizes in the worktree first (fast-qa skill). A day test that says "render deferred" has not run: retry it with a longer `GPU_WAIT` (fast-qa skill) rather than landing without it. land.sh doesn't run the browser.
 3. `tools/land.sh <branch or worktree path> [--keep] [--priority]` (from anywhere; code in tools/land/). Landing goes through one queue (#389):
    - It refuses at once if the worktree has uncommitted or untracked files, then joins the queue (`.git/land-queue/`). The queue lands in the order branches joined; `--priority` puts a branch first. Use it only for work Jørgen is waiting on.
    - Whichever land holds the land lock (`/tmp/claude-1000/land.lock`, the lock older copies of land.sh take too) lands everything waiting as one batch, up to six branches. The others print `waiting for the land lock`, then their own lines as the batch runs, and exit with their own result. A waiting land gives up after an hour (`LAND_WAIT`, seconds).

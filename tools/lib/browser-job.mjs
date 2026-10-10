@@ -39,6 +39,15 @@ function clearDeadMarkers() {
   }
 }
 
+// GPU_WAIT (seconds in the GPU queue before the job defers; env GPU_WAIT, else defaultSeconds) as withBrowserJob
+// options: the wait is added to the job's own time limit (jobMs), so a busy GPU (voice or image batches) costs
+// waiting time, not a deferred test.
+export function gpuWaitOptions(defaultSeconds, jobMs) {
+  const seconds = process.env.GPU_WAIT === undefined || process.env.GPU_WAIT === '' ? defaultSeconds : +process.env.GPU_WAIT;
+  if (!Number.isFinite(seconds) || seconds < 0) throw new Error(`GPU_WAIT must be a number of seconds, not ${process.env.GPU_WAIT}`);
+  return { gpuWaitMs: seconds * 1000, timeoutMs: seconds * 1000 + jobMs };
+}
+
 export async function withBrowserJob(name, run, {
   timeoutMs = 285000, loadWaitMs = 60000, loadPollMs = 5000, gpuWaitMs = 60000, gpuLock = null,
 } = {}) {

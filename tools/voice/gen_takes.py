@@ -10,7 +10,7 @@ or with exit 75 when Jørgen's image gen dashboard asks for the GPU (cfg.must_yi
 Run with the Qwen venv: ~/ai/tts/qwen/venv/bin/python (run.sh does)."""
 import json, os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from cfg import RAW, ALT, XVEC_JA, QWEN, load, units, missing, speakers, lock_ok, must_yield, spoken, setup
+from cfg import RAW, ALT, XVEC_JA, QWEN, load, units, missing, speakers, lock_ok, must_yield, give_turn, spoken, setup
 seeds = [int(x) for x in sys.argv[1].split(',')]
 arg = sys.argv[2] if len(sys.argv) > 2 and not sys.argv[2].startswith('--') else ''
 keys = set(arg.split(',')) if arg else set(missing())
@@ -65,6 +65,7 @@ for (sp, lang), es in todo.items():
             if must_yield():
                 print("stopping for Jørgen's image gen dashboard (gpu.priority); takes so far are on disk", flush=True)
                 sys.exit(75)
+            give_turn()  # a waiting day test gets a turn between batches
             if not lock_ok():
                 sys.exit('lock lost, stopping')
             texts = [spoken(alt[e['key']]) if use_alt else e['tts'] for e in b]

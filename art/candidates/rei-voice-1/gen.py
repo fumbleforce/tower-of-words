@@ -19,6 +19,7 @@ def stop():
     if gpu_priority.should_stop('rei-voice-1'):
         print('yield for the dashboard', flush=True)
         sys.exit(75)
+    gpu_priority.let_browsers_in('rei-voice-1', 'voice')  # a waiting day test gets a turn
 
 
 def free_comfy():

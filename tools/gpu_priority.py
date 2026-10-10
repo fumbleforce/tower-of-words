@@ -33,6 +33,13 @@ Shell:  python3 tools/gpu_priority.py queue         the queue: rank, owner, wait
         python3 tools/gpu_priority.py live          exit 0 and say who while the priority is live, else exit 1
         python3 tools/gpu_priority.py reclaim       free a gpu.lock left by browser jobs that died
         python3 tools/gpu_priority.py stop <name>   exit 0 if the job holding the lock as <name> must stop now
+        python3 tools/gpu_priority.py turn <name> [--rank R]   give waiting browser tests a turn (see below), then take the lock again
+Browser turns: a long holder (a voice batch, a render loop) keeps gpu.lock between its items, and the ranks put voices
+before browser tests, so a day test could wait for the whole batch. Between two items the holder calls
+let_browsers_in(): once it has held the lock for TURN_AFTER seconds and a browser ticket waits, it releases the lock,
+waits until those tickets have their slots (at most TURN_MAX seconds), and queues again at its own rank. The ranks do
+not change. tools/voice/gen_takes.py, tools/comfy.py (before every workflow, for a hold()) and the candidate voice
+generators call it.
 Python: with gpu_priority.hold('carina-faces-3', 'carina-image'): ...   (or acquire() and release())"""
 import contextlib, json, os, shutil, subprocess, sys, time, uuid
 
@@ -329,15 +336,58 @@ def release(owner, root=None):
     return False
 
 
+_HELD = {}  # owner -> rank, for the locks this process took with hold(); let_browsers_in() looks here
+
+
 @contextlib.contextmanager
 def hold(owner, rank='render', timeout=None, root=None, log=print):
     """with hold('carina-faces-3', 'carina-image'): ...  waits its turn, holds gpu.lock, releases on any exit."""
     if not acquire(owner, rank, timeout=timeout, root=root, log=log):
         raise TimeoutError(f'{owner}: no GPU within {timeout} s')
+    _HELD[owner] = rank
     try:
         yield
     finally:
+        _HELD.pop(owner, None)
         release(owner, root)
+
+
+TURN_AFTER = 120  # seconds a holder keeps the lock before it lets waiting browser tests in
+TURN_MAX = 600    # the longest a holder waits for them: a test is capped at 5 minutes, plus its start
+
+
+def waiting_browsers(root=None):
+    """The live browser tickets in the queue."""
+    return [t for t in read_queue(root) if t['live'] and t.get('kind') == 'browser']
+
+
+def let_browsers_in(owner=None, rank=None, root=None, after=None, limit=None, poll=POLL, log=print):
+    """Call between two items of a long GPU job. If `owner` has held gpu.lock for `after` seconds (TURN_AFTER) and
+    browser tests wait, release the lock, wait until those tickets have their slots (at most `limit` seconds,
+    TURN_MAX), then queue again at `rank` and return once the lock is ours. True if a turn was given. Without owner it
+    covers the locks this process took with hold(). Does nothing while the lock is not held as owner, or nobody waits."""
+    if owner is None:
+        return any([let_browsers_in(o, r, root, after, limit, poll, log) for o, r in list(_HELD.items())])
+    after = TURN_AFTER if after is None else after
+    limit = TURN_MAX if limit is None else limit
+    rank = rank or _HELD.get(owner) or 'render'
+    if lock_owner(root) != owner:
+        return False
+    held_for = time.time() - os.path.getmtime(_path('gpu.lock', root))
+    if held_for < after:
+        return False
+    waiting = {t['path'] for t in waiting_browsers(root)}
+    if not waiting:
+        return False
+    if log:
+        log(f'{owner}: {len(waiting)} browser test(s) waiting after {_ago(held_for)}; giving them a turn ({time.strftime("%H:%M:%S")})')
+    release(owner, root)
+    t0 = time.time()
+    while time.time() - t0 < limit and waiting & {t['path'] for t in waiting_browsers(root)}:
+        time.sleep(poll)
+    if not acquire(owner, rank, root=root, log=log):
+        raise TimeoutError(f'{owner}: no GPU again after giving browser tests a turn')
+    return True
 
 
 def _ago(seconds):
@@ -424,6 +474,9 @@ def main(argv):
     if cmd == 'reclaim':
         reclaim()
         return 0
+    if cmd == 'turn' and len(argv) > 2:
+        opts = dict(zip(argv[3::2], argv[4::2]))
+        return 0 if let_browsers_in(argv[2], opts.get('--rank'), after=0) else 1
     if cmd == 'stop' and len(argv) > 2:
         return 0 if should_stop(argv[2]) else 1
     print(__doc__)

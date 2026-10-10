@@ -11,7 +11,7 @@
 //                   fewer, a margin for phone GPUs (each halving of near costs one bit)
 //   QS='&nobatch'   added to the query (nobatch: every mesh drawn on its own, no perf batching)
 //   flats-check.mjs finds the same faults from the geometry, for a whole place at once
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
 
 const [out = 'game3d/shots/flicker', W = '1366', H = '860'] = process.argv.slice(2);
@@ -62,8 +62,7 @@ const CASES = process.env.CASES
 const only = process.env.ONLY?.split(',');
 if (only) CASES.splice(0, CASES.length, ...CASES.filter(([pl]) => only.includes(pl)));
 // GPU_WAIT=600: wait up to that many seconds for a GPU slot (default 60) when the machine is busy
-const gpuWait = +(process.env.GPU_WAIT || 60) * 1000,
-  WAIT = { gpuWaitMs: gpuWait, timeoutMs: gpuWait + 285000 };
+const WAIT = gpuWaitOptions(60, 285000);
 const fails = [];
 await withBrowserJob('flicker-check', async (browser) => {
   const phone = +W < 700;

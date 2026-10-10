@@ -11,7 +11,7 @@ const url = new URL('../../tools/fast.mjs', import.meta.url);
 const source = fs.readFileSync(url, 'utf8');
 const reporting = source.slice(source.indexOf("const [W = '1366'"))
   .replaceAll('import.meta.url', JSON.stringify(url.href));
-async function report({ lateError, lifecycleError, deferred = false } = {}) {
+async function report({ lateError, lifecycleError, deferred = false, code = 'LOAD_DEFERRED' } = {}) {
   const pageErrors = [], writes = [], logs = [];
   const process = { argv: ['node', 'fast.mjs'], env: {}, pid: 42 };
   const page = {
@@ -20,12 +20,12 @@ async function report({ lateError, lifecycleError, deferred = false } = {}) {
     screenshot: async () => { if (lateError) pageErrors.push(lateError); },
   };
   await vm.runInNewContext(`(async () => { ${reporting} })()`, {
-    process, Date, URL, path, fileURLToPath, fastResult, writePerf: () => [], who: { rest: [], query: '' }, // fast.mjs's --mc/--cast, none
+    process, Date, URL, path, fileURLToPath, fastResult, gpuWaitOptions: () => ({}), writePerf: () => [], who: { rest: [], query: '' }, // fast.mjs's --mc/--cast, none
     fs: { mkdirSync() {}, writeFileSync: (file, data) => writes.push(JSON.parse(data)) },
     console: { log: (...args) => logs.push(args.join(' ')) },
     openGame: async () => ({ page, errors: pageErrors }),
     withBrowserJob: async (_name, callback) => {
-      if (deferred) throw Object.assign(new Error('machine busy'), { code: 'LOAD_DEFERRED' });
+      if (deferred) throw Object.assign(new Error('machine busy'), { code });
       await callback({});
       if (lifecycleError) throw new Error(lifecycleError);
     },
@@ -56,4 +56,9 @@ test('completed lifecycle reports one passing result', async () => {
   const { result, exit } = await report();
   assert.equal(exit, 0);
   assert.equal(result.verdict, 'PASS');
+});
+test('a GPU that stayed busy is deferred (exit 75), never a failure or a pass', async () => {
+  const { result, exit } = await report({ deferred: true, code: 'GPU_DEFERRED' });
+  assert.equal(exit, 75);
+  assert.equal(result.verdict, 'DEFERRED');
 });
