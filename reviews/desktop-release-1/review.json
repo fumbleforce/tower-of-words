@@ -2,7 +2,7 @@
  "title": "Desktop release: name and signing",
  "date": "2026-10-10",
  "by": "Claude (desktop-shell agent)",
- "status": "open",
+ "status": "decided",
  "issue": 434,
  "context": [
   "The desktop app builds for Linux, Windows and Mac in two versions. On Linux both play to the first goal from the encrypted pack. The Windows installer runs under Wine, and the Mac zips (Apple Silicon and Intel) are built but have not run on a real Mac yet. How to build: docs/desktop-release.md.",
@@ -12,10 +12,32 @@
  "question": "Should we ship unsigned for now or get signing, and is Amakawa Complete the right name for the second version?",
  "multi": true,
  "options": [
-  {"id": "unsigned", "label": "unsigned", "note": "Ship unsigned for now; players click past the warning. Decide on signing later."},
-  {"id": "sign-windows", "label": "sign-windows", "note": "Get a Windows code-signing certificate."},
-  {"id": "sign-mac", "label": "sign-mac", "note": "Get an Apple Developer account and notarize the Mac build."},
-  {"id": "name-complete", "label": "name-complete", "note": "Call the second version Amakawa Complete (write another name in the comment if not)."}
+  {
+   "id": "unsigned",
+   "label": "unsigned",
+   "note": "Ship unsigned for now; players click past the warning. Decide on signing later."
+  },
+  {
+   "id": "sign-windows",
+   "label": "sign-windows",
+   "note": "Get a Windows code-signing certificate."
+  },
+  {
+   "id": "sign-mac",
+   "label": "sign-mac",
+   "note": "Get an Apple Developer account and notarize the Mac build."
+  },
+  {
+   "id": "name-complete",
+   "label": "name-complete",
+   "note": "Call the second version Amakawa Complete (write another name in the comment if not)."
+  }
  ],
- "ask": "In the comment: do you have a Windows PC or a Mac we can test the builds on, or should I find another way?"
+ "ask": "In the comment: do you have a Windows PC or a Mac we can test the builds on, or should I find another way?",
+ "decided": [
+  "sign-windows",
+  "name-complete"
+ ],
+ "decision": "sign-windows and name-complete picked; sign-mac rejected; note on the name: \"amakawa_0.1\"",
+ "decided_at": "2026-10-10T15:24:53+0200"
 }
