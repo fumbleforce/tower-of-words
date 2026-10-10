@@ -173,6 +173,62 @@ def image_history():
         HISTORY_CACHE[key] = (time.time(), rows)
     return rows
 
+JOB_FIELDS = ('id', 'n', 'run_id', 'at', 'file', 'thumb', 'positive', 'negative', 'seed', 'steps', 'cfg', 'sampler', 'scheduler',
+              'model_file', 'w', 'h', 'compose', 'ipa', 'repaint', 'start', 'characters', 'rating', 'out_path', 'owner', 'source')
+
+def round_prompt(rel, stem):
+    """A round's own record of one picture (prompts*.json beside it or above raw/), as a job: prompt, seed, size."""
+    folder = (ROOT / rel).parent
+    for base in (folder, folder.parent):
+        for file in sorted(base.glob('prompts*.json')):
+            data = read_json(file, None)
+            items = data if isinstance(data, list) else [dict(v, id=k) for k, v in data.items() if isinstance(v, dict)] if isinstance(data, dict) else []
+            for item in items:
+                if isinstance(item, dict) and (item.get('id') or item.get('key')) == stem and item.get('prompt'):
+                    size = item.get('size') or [item.get('w'), item.get('h')]
+                    settings = str(item.get('settings') or '')
+                    steps = re.search(r'(\d+) steps', settings)
+                    cfg = re.search(r'CFG ([\d.]+)', settings)
+                    return {'positive': item['prompt'], 'negative': item.get('negative') or item.get('neg') or '', 'seed': item.get('seed'),
+                            'w': size[0], 'h': size[1], 'steps': int(steps.group(1)) if steps else None,
+                            'cfg': float(cfg.group(1)) if cfg else None, 'settings': settings, 'record': str(file.relative_to(ROOT))}
+    return None
+
+def picture_source(scene_id, slot_id):
+    """Where a shot's current picture came from, so the composer can open it filled in: the render picked for it in
+    the editor, else the image generator's record of the round file the live picture is a byte copy of (the latest
+    render of that name in that round), else the round's prompts file. Read-only."""
+    if scene_id.startswith('public:'):
+        found = {'metadata': read_json(slot(scene_id) / 'metadata.json', {})}
+    else:
+        found = local_provider({'action': 'pictures', 'id': scene_id})
+    meta = found.get('metadata') or {}
+    picked = (meta.get('images') or {}).get(slot_id) or (meta.get('image') if (meta.get('image') or {}).get('slot') == slot_id else None)
+    image = next((i for i in found.get('images') or [] if i.get('id') == slot_id), None)
+    renders = [{**{k: run.get(k) for k in JOB_FIELDS}, **{k: v for k, v in r.items() if v is not None}} for run in image_history() for r in run.get('renders') or []]
+    pick = lambda rows: {k: rows[-1].get(k) for k in JOB_FIELDS} if rows else None
+    out = {'job': None, 'how': '', 'start': None, 'copies': (found.get('copies') or {}).get(slot_id, [])}
+    if picked and picked.get('id'):
+        out['job'] = pick([r for r in renders if r.get('id') == picked['id']])
+        out['how'] = 'the picture picked for this shot'
+        if out['job'] and out['job'].get('file'):
+            out['start'] = {'image': 'island/private/imagegen/outputs/' + out['job']['file']}
+    if image and image.get('available') and image.get('url'):
+        out['start'] = out['start'] or {'image': image['url'].lstrip('/')}
+        for rel in out['copies'] if not out['job'] else []:
+            stem = posixpath.splitext(posixpath.basename(rel))[0]
+            folder = posixpath.dirname(rel)
+            rows = sorted((r for r in renders if r.get('out_path') and posixpath.splitext(posixpath.basename(r['out_path']))[0] == stem
+                           and posixpath.dirname(r['out_path']) in (folder, folder + '/raw')), key=lambda r: r.get('at') or '')
+            if rows:
+                out.update(job=pick(rows), how='the image generator’s record of ' + rel)
+                break
+            record = round_prompt(rel, stem)
+            if record:
+                out.update(job=record, how='the round’s prompt record for ' + rel)
+                break
+    return out
+
 def comments(body):
     """Comments on beats, kept by comments.mjs (its header says where). Private scenes' stay in island/private/."""
     r = subprocess.run(['node', str(HERE / 'comments.mjs'), '--json'], input=json.dumps(body), text=True, capture_output=True, timeout=20,
@@ -222,6 +278,8 @@ def dispatch(action, body):
         with LOCK:
             STATUS_CACHE.clear()
             return comments({**body, 'by': 'jorgen'})
+    if action == 'picture-source':
+        return picture_source(body.get('id', ''), body.get('slot', ''))
     if action == 'pictures':
         scene_id = body.get('id', '')
         found = local_provider({'action': 'pictures', 'id': scene_id}) if scene_id and not scene_id.startswith('public:') else {}
@@ -378,7 +436,7 @@ def handle(handler):
             suffix = '/' + action[6:] + ('?' + url.query if url.query else '')
             image_proxy(handler, suffix, body if handler.command == 'POST' else None)
         else:
-            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'pictures', 'comments', 'status')):
+            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'pictures', 'picture-source', 'comments', 'status')):
                 raise ValueError('Unsupported request method')
             # Outside private mode (tools/review_server.py, /private) only public scenes are read or written
             if callable(mode) and not mode():

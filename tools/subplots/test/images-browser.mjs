@@ -9,7 +9,7 @@ const port = 8797;
 const base = `http://127.0.0.1:${port}`;
 const server = spawn('python3', ['tools/review_server.py', String(port)], {env: {...process.env, SUBPLOTS_ROOT: root, SUBPLOTS_PUBLIC_ONLY: '1'}, stdio: 'ignore'});
 const picture = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240"><rect width="400" height="240" fill="#dae4ed"/><circle cx="200" cy="80" r="30" fill="#86a5bd"/><path d="M150 210v-65q50-60 100 0v65" fill="#567c98"/></svg>');
-const fixture = {id:'fixture:scene',steps:[{say:'alice',text:'Hello.'}],images:[{id:'one',label:'First shot',url:picture},{id:'two',label:'Second shot',url:picture}],metadata:{}};
+const fixture = {id:'fixture:scene',steps:[{say:'alice',text:'Hello.'}],images:[{id:'one',label:'First shot',url:picture},{id:'two',label:'Second shot',url:picture},{id:'three',label:'Third shot',url:picture,available:true}],metadata:{}};
 const presets = {character:[{id:'alice',v:1,data:{name:'Alice',gender:'female',outfit:'blue coat',portrait:'art/fixture.webp'}}],model:[{id:'local',v:1,data:{name:'Local model',file:'fixture.safetensors'}}],style:[{id:'paint',v:1,data:{name:'Painted',quality:'illustration'}}],framing:[{id:'wide',v:1,data:{name:'Wide',w:1200,h:800}}],camera:[{id:'near',v:1,data:{name:'Close',prompt:'close camera'}},{id:'left',v:1,data:{name:'From left',prompt:'left camera'}}],scene:[{id:'reading',v:1,data:{name:'Reading',text:'Reading a letter'}}],negative:[]};
 const html = `<html><head><link rel="stylesheet" href="/tools/subplots/web/editor.css"><link rel="stylesheet" href="/tools/subplots/web/images.css"></head><body><div id="notice" role="status" hidden></div><main style="max-width:450px;margin:auto;padding:16px"><button data-inspect="images">Images</button><section id="images" hidden><button id="loadPresets">Connect</button><p id="imageStatus"></p><div id="composition"></div><div id="renders"></div></section></main><script type="module">import {installImages} from '/tools/subplots/web/images.js';window.fixture=${JSON.stringify(fixture)};window.edits=0;document.querySelector('[data-inspect]').onclick=()=>document.querySelector('#images').hidden=false;window.editor=installImages(()=>window.fixture,()=>window.edits++);window.editor.render();</script></body></html>`;
 try {
@@ -19,6 +19,8 @@ try {
     const errors = [], generated = [];
     page.on('pageerror', e => errors.push(e.message));
     await page.route('**/island/private/**', route => route.abort());
+    await page.route('**/api/subplots/picture-source**', route => route.fulfill({json:{how:'the fixture round', start:{image:'art/fixture.webp'},
+      job:{positive:'Original words, close camera', negative:'bad hands', seed:77, model_file:'fixture.safetensors', w:1200, h:800, steps:28, cfg:4}}}));
     await page.route('**/image-harness', route => route.fulfill({contentType:'text/html',body:html}));
     await page.route('**/api/subplots/image/**', async route => {
       const u = new URL(route.request().url());
@@ -52,10 +54,24 @@ try {
     assert.deepEqual(await page.evaluate(()=>Object.keys(fixture.metadata.images)),['one','two']);
     await page.locator('[data-reuse]').click();
     assert.equal(await page.locator('[data-compose=seed]').inputValue(),'8');
-    assert.equal(await page.locator('[data-compose=scene]').inputValue(),'');
+    // no blocks on that picture: Fill from prompt puts its words in the free text, and the original prompt stays as is
+    assert.equal(await page.locator('[data-compose=scene]').inputValue(),'A previous picture.');
+    assert.equal(await page.locator('[data-original=positive]').inputValue(),'A previous picture.');
     assert.match(await page.locator('#assembled').textContent(),/A previous picture/);
     await page.locator('[data-compose=angle]').selectOption('High angle');
-    assert.doesNotMatch(await page.locator('#assembled').textContent(),/A previous picture/);
+    assert.match(await page.locator('#assembled').textContent(),/High angle/);
+    // a shot's own picture opens filled in from its source, and "Small changes" starts from it with the same seed
+    await page.evaluate(()=>globalThis.editor.focus('three'));
+    await page.waitForFunction(()=>globalThis.document.querySelector('[data-original=positive]')?.value === 'Original words, close camera');
+    assert.equal(await page.locator('[data-compose=seed]').inputValue(),'77');
+    assert.equal(await page.evaluate(()=>[...globalThis.document.querySelectorAll('[data-camera]')].filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.camera).join()),'near');
+    await page.locator('[data-small-changes]').click();
+    await page.locator('[data-compose=startDenoise]').waitFor();
+    await page.locator('#generate').click();
+    assert.equal(generated.length,2);
+    assert.deepEqual(generated[1].start,{image:'art/fixture.webp',denoise:0.35});
+    assert.equal(generated[1].seed,77);
+    assert.equal(generated[1].positive,'Original words, close camera');
     assert.deepEqual(errors,[]);
     fs.mkdirSync('/tmp/codex-subplot-image-editor',{recursive:true});
     await page.screenshot({path:'/tmp/codex-subplot-image-editor/550.png',fullPage:true});
@@ -63,6 +79,6 @@ try {
     assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth > globalThis.innerWidth),false);
     await page.screenshot({path:'/tmp/codex-subplot-image-editor/390.png',fullPage:true});
     await page.close();
-    console.log('PASS image editor: auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse, 390px layout.');
+    console.log('PASS image editor: auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, a shot opened from its source with Small changes, 390px layout.');
   }, {timeoutMs:60000,gpuWaitMs:60000});
 } finally {server.kill('SIGTERM');fs.rmSync(root,{recursive:true,force:true});}
