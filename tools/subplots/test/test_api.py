@@ -81,4 +81,26 @@ class Saves(unittest.TestCase):
     def test_private_adapter_never_runs_in_qa(self):
         with self.assertRaisesRegex(ValueError,'not configured'):api.dispatch('catalog',{'scope':'local'})
 
+class ScenePictures(unittest.TestCase):
+    def test_keys_shared_by_a_scene_and_its_rounds(self):
+        self.assertEqual(api.picture_key('encounters/d1-copier-s02c.webp'), 'copier')
+        self.assertEqual(api.picture_key('island/private/rewards/day1/copier-2'), 'copier')
+        self.assertEqual(api.picture_key('peeks/mio-bench-3'), 'mio-bench')
+        self.assertEqual(api.picture_key('encounters/d1-gate-search-s01-sk.webp'), 'gate-search')
+        self.assertEqual(api.picture_key('d1'), '')
+
+    def test_runs_matched_from_rounds_names_picks_and_the_composer(self):
+        runs = [
+            {'run_id': 'a', 'round': 'island/private/rewards/peeks/emi-office-11', 'renders': [{'id': 'a1'}]},
+            {'run_id': 'b', 'round': 'island/private/rewards/peeks/emi-office-13', 'renders': [{'id': 'b1'}]},
+            {'run_id': 'c', 'round': 'island/private/rewards/days/aoi-counter-1', 'renders': [{'id': 'c1'}]},
+            {'run_id': 'd', 'round': None, 'compose': {'subplotId': 'local:x:emi_look:start'}, 'renders': [{'id': 'd1'}]},
+            {'run_id': 'e', 'round': None, 'renders': [{'id': 'e1'}]},
+            {'run_id': 'f', 'round': None, 'renders': [{'id': 'f1'}]},
+        ]
+        found = {'rounds': ['island/private/rewards/peeks/emi-office-11'], 'scene': 'emi_look', 'files': ['encounters/emi-look-1.webp'],
+                 'metadata': {'images': {'image:0': {'id': 'e1'}}}}
+        got = [r['run_id'] for r in api.scene_runs('local:x:emi_look:start', runs, found)]
+        self.assertEqual(got, ['a', 'b', 'd', 'e'])
+
 if __name__=='__main__':unittest.main()

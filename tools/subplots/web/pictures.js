@@ -18,7 +18,7 @@ export function pictureFor(step, sc = S.scene) {
   return { url, changed: !!pending, slot, file: image?.file || '', chosen };
 }
 
-let filter = { character: '', star: false }, runs = [], loading = false, offline = '', end = false, composer = null, loadedFor = null;
+let filter = { scene: true, character: '', star: false }, runs = [], loading = false, offline = '', end = false, composer = null, loadedFor = null;
 
 // Everyone who speaks in the scene, for the history filter.
 function cast() {
@@ -82,19 +82,20 @@ export function renderPictureTab(installComposer) {
   };
   const chips = tab.querySelector('[data-chips]');
   const people = cast();
-  chips.innerHTML = [['', 'Anyone'], ...people.map(id => [id, personName(id)])].map(([id, label]) =>
+  chips.innerHTML = `<button data-scene aria-pressed="${filter.scene}" title="Made for this scene, or in the picture rounds its pictures came from">This scene</button>` + [['', 'Anyone'], ...people.map(id => [id, personName(id)])].map(([id, label]) =>
     `<button data-who="${esc(id)}" aria-pressed="${filter.character === id}">${portrait(id) ? `<img src="${esc(portrait(id))}" alt="">` : ''}${esc(label)}</button>`).join('')
     + `<button data-star aria-pressed="${filter.star}">★ Starred</button>`;
   chips.querySelectorAll('[data-who]').forEach(b => { b.onclick = () => { filter.character = b.dataset.who; runs = []; renderPictureTab(installComposer); }; });
   chips.querySelector('[data-star]').onclick = () => { filter.star = !filter.star; runs = []; renderPictureTab(installComposer); };
+  chips.querySelector('[data-scene]').onclick = () => { filter.scene = !filter.scene; runs = []; renderPictureTab(installComposer); };
   paintHistory(tab.querySelector('[data-history]'), doc, pic, installComposer);
-  if (loadedFor !== JSON.stringify(filter) && !loading && !offline) loadHistory(false, installComposer);
+  if (loadedFor !== JSON.stringify({ ...filter, id: doc.id }) && !loading && !offline) loadHistory(false, installComposer, doc.id);
 }
 
 function paintHistory(box, doc, pic, installComposer) {
   if (offline) { box.innerHTML = `<p class="warn-text">${esc(offline)}</p><button data-retry>Try again</button>`; box.querySelector('[data-retry]').onclick = () => { offline = ''; loadHistory(false, installComposer); }; return; }
   const renders = runs.flatMap(r => (r.renders || []).map(x => ({ ...x, run: r }))).filter(x => x.file && !x.reject);
-  if (!renders.length) { box.innerHTML = `<p class="quiet">${loading ? 'Loading pictures…' : 'No pictures match.'}</p>`; return; }
+  if (!renders.length) { box.innerHTML = `<p class="quiet">${loading ? 'Loading pictures…' : filter.scene ? 'No pictures for this scene yet. Turn off “This scene” to see every picture.' : 'No pictures match.'}</p>`; return; }
   box.innerHTML = `<div class="history-grid">${renders.map((r, i) => `<button data-r="${i}" class="${pic.chosen?.id === r.id ? 'on' : ''}" title="${esc((r.run.positive || '').slice(0, 300))}"><img src="${esc(asset('thumb', r.thumb || r.file))}" alt="" loading="lazy"><span>#${esc(r.n ?? '')}${r.star || r.fav ? ' ★' : ''}</span></button>`).join('')}</div>${end ? '' : '<button data-more class="ghost">Show older pictures</button>'}`;
   box.querySelectorAll('[data-r]').forEach(b => {
     b.onclick = () => {
@@ -108,9 +109,23 @@ function paintHistory(box, doc, pic, installComposer) {
   box.querySelector('[data-more]')?.addEventListener('click', () => loadHistory(true, installComposer));
 }
 
-async function loadHistory(more, installComposer) {
+async function loadHistory(more, installComposer, id = docFor(S.selected)?.id) {
   loading = true;
-  loadedFor = JSON.stringify(filter);
+  loadedFor = JSON.stringify({ ...filter, id });
+  if (filter.scene && id) {
+    // the scene's own pictures and their alternates (api.py scene_runs), then the chips' filters
+    try {
+      const d = await api('pictures?id=' + encodeURIComponent(id));
+      runs = (d.runs || []).filter(r => (!filter.character || r.characters?.includes(filter.character)) && (!filter.star || r.renders?.some(x => x.star || x.fav)));
+      end = true;
+    } catch (e) {
+      offline = /offline|503/i.test(e.message) ? 'The image generator is not running. Start it with tools/imagegen/run.sh, then try again.' : e.message;
+    } finally {
+      loading = false;
+      if (document.querySelector('[data-tab=picture][aria-selected=true]')) renderPictureTab(installComposer);
+    }
+    return;
+  }
   const q = new URLSearchParams({ limit: '48', who: 'all' });
   if (filter.character) q.set('character', filter.character);
   if (filter.star) q.set('star', '1');

@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import posixpath
+import re
 import subprocess
 import tempfile
 import threading
@@ -120,9 +121,59 @@ def catalog_all():
     result['scenes'] = [label(s) for s in result['scenes']]
     return result
 
+def picture_key(name):
+    """A name reduced to what a scene and its rounds share: 'd1-copier-s02c.webp' and 'day1/copier-2' both give
+    'copier', 'peeks/mio-bench-3' gives 'mio-bench'."""
+    key = posixpath.basename(str(name or '')).lower().replace('_', '-')
+    key = re.sub(r'\.(webp|png|jpe?g)$', '', key)
+    key = re.sub(r'^d\d+-', '', key)
+    for pattern in (r'-sk$', r'-s\d+[a-z]?$', r'-\d+$'):
+        key = re.sub(pattern, '', key)
+    return key if len(key) >= 4 else ''
+
+def scene_runs(scene_id, runs, found):
+    """The image generator's runs that belong to a scene, derived from what exists (no records are changed): made
+    from the editor's composer for it, picked for it, from a round folder one of its live pictures came from, or from
+    a round named after the scene or its pictures (copier-2 for d1-copier; mio-bench-1..3 for mio-bench-3)."""
+    rounds = set(found.get('rounds') or [])
+    keys = {picture_key(found.get('scene'))} | {picture_key(f) for f in found.get('files') or []} | {picture_key(r) for r in rounds}
+    keys.discard('')
+    picked = {v.get('id') for v in ((found.get('metadata') or {}).get('images') or {}).values() if isinstance(v, dict)}
+    out = []
+    for run in runs:
+        renders = run.get('renders') or []
+        mine = (run.get('compose') or {}).get('subplotId') == scene_id or any((r.get('compose') or {}).get('subplotId') == scene_id for r in renders)
+        mine = mine or any(r.get('id') in picked for r in renders)
+        mine = mine or (run.get('round') in rounds) or (run.get('round') and picture_key(run['round']) in keys)
+        if mine:
+            out.append(run)
+    return out
+
+HISTORY_CACHE = {}
+def image_history():
+    """Every run the image generator knows, cached for half a minute (a scene's library filters it)."""
+    with LOCK:
+        at, rows = HISTORY_CACHE.get('all', (0, None))
+        if rows is not None and time.time() - at < 30:
+            return rows
+    try:
+        with urllib.request.urlopen('http://127.0.0.1:8772/api/history?limit=1000000&who=all', timeout=30) as r:
+            rows = json.loads(r.read(200 * 1024 * 1024))
+    except (urllib.error.URLError, OSError):
+        raise ValueError('Image generation is offline. Start tools/imagegen/run.sh, then retry.') from None
+    with LOCK:
+        HISTORY_CACHE['all'] = (time.time(), rows)
+    return rows
+
 def dispatch(action, body):
     if action == 'authoring':
         return authoring_catalog()
+    if action == 'pictures':
+        scene_id = body.get('id', '')
+        found = local_provider({'action': 'pictures', 'id': scene_id}) if scene_id and not scene_id.startswith('public:') else {}
+        if scene_id.startswith('public:'):
+            found = {'metadata': read_json(slot(scene_id) / 'metadata.json', {})}
+        return {'runs': scene_runs(scene_id, image_history(), found), 'rounds': found.get('rounds', [])}
     scene_id = body.get('id', '')
     if not isinstance(scene_id, str):
         raise ValueError('Invalid scene id')
@@ -249,7 +300,7 @@ def handle(handler):
             suffix = '/' + action[6:] + ('?' + url.query if url.query else '')
             image_proxy(handler, suffix, body if handler.command == 'POST' else None)
         else:
-            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring')):
+            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'pictures')):
                 raise ValueError('Unsupported request method')
             handler._json(200, dispatch(action, body))
     except (ValueError, OSError, subprocess.SubprocessError) as e:

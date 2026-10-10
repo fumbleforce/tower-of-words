@@ -16,6 +16,8 @@ export function installImages(getScene, changed) {
   let presets = null, jobs = [], runs = [], poll = null, pendingConnect = null;
   let historyScope = 'scene', historyCharacter = '', historyStar = false, historyEnd = false, historyBusy = false;
   let selected = [], referenceChoices = [], referenceOwner = '', activeScene = '', activeSlot = '', loadingHistory = 0;
+  // "This scene": the runs the editor's server matches to the scene (api.py scene_runs), loaded once per scene
+  let sceneRuns = null, sceneRunsFor = '';
   const active = type => (presets?.[type] || []).filter(p => !p.archived);
   const preset = (type, id) => (presets?.[type] || []).find(p => p.id === id);
   const presetOptions = type => active(type).map(p => ({id: p.id, label: p.data.name || p.data.title || p.id}));
@@ -78,40 +80,39 @@ export function installImages(getScene, changed) {
     const md = preset('model', c.model)?.data || {};
     const imageTitle = slot ? 'Shot ' + (slots().indexOf(slot) + 1) : 'Scene image';
     const previewUrl = picked?.url || (slot?.available === false ? '' : slot?.url);
-    host.innerHTML = `
-      <p class="hint image-scene-name">${esc(getScene().metadata.title||getScene().title)}</p><div class="image-current">${previewUrl ? `<a href="${esc(previewUrl)}" target="_blank" rel="noopener"><img class="selected-image" src="${esc(previewUrl)}" alt="${esc(imageTitle)}"></a>` : `<div class="image-empty">${slot ? 'This shot’s picture is unavailable. Generate a replacement or choose one from the picture library below.' : 'Choose a shot in the storyboard to replace its image.'}</div>`}
-        ${slots().length > 1 ? field('imageSlot', 'Image in this scene', slots().map((s, i) => ({id: s.id, label: 'Shot ' + (i + 1)})), activeSlot, null) : `<strong>${esc(imageTitle)}</strong>`}
+    const fr = preset('framing', c.framing)?.data || {};
+    const current = `<div class="image-current"><p class="hint image-scene-name">${esc(getScene().metadata.title||getScene().title)}</p>${previewUrl ? `<a href="${esc(previewUrl)}" target="_blank" rel="noopener"><img class="selected-image" src="${esc(previewUrl)}" alt="${esc(imageTitle)}"></a>` : `<div class="image-empty">${slot ? 'This shot’s picture is unavailable. Generate a replacement or choose one from the picture library.' : 'Choose a shot in the storyboard to replace its image.'}</div>`}
+        <div class="image-current-row">${slots().length > 1 ? field('imageSlot', 'Image in this scene', slots().map((s, i) => ({id: s.id, label: 'Shot ' + (i + 1)})), activeSlot, null) : `<strong>${esc(imageTitle)}</strong>`}
         ${slot?.storage === 'archive' && !picked ? '<p class="hint">Showing the earlier picture from the archive.</p>' : ''}
-        ${picked&&!picked.applied ? '<p class="hint">Replacement selected. Save the scene to use it in the story.</p><button data-clear-image>Keep the current story image</button>' : ''}
-      </div>
-      <section class="image-section"><h3>People in the picture</h3><div class="image-cast">${active('character').filter(p => !p.data.generic).map(p => `<button type="button" data-char="${esc(p.id)}" aria-pressed="${c.characters.includes(p.id)}">${portraitUrl(p.data.portrait) ? `<img loading="lazy" src="${esc(portraitUrl(p.data.portrait))}" alt="">` : '<span class="image-person-placeholder">${esc((p.data.name||p.id).slice(0,1))}</span>'}<span>${esc(p.data.name || p.id)}</span></button>`).join('') || '<p class="hint">Your image-generation character presets appear here when connected.</p>'}</div>
-      <div class="chips">${active('character').some(p => p.data.generic) ? chip('Include an unnamed person', c.man, 'data-toggle="man"') : ''}${cast.filter(p => p.data.outfit).map(p => chip(p.data.name + '’s usual outfit', c.outfit[p.id], `data-outfit="${esc(p.id)}"`)).join('')}${cast.length + (c.man ? 1 : 0) > 1 ? chip('Short descriptions for a group', c.useShort, 'data-toggle="useShort"') : ''}</div></section>
-      <section class="image-section"><h3>Direct the shot</h3>
-      ${field('scenePreset', 'Saved scene direction', presetOptions('scene'), '', 'Choose a saved direction…')}
-      <div class="two">${field('pose', 'Pose', DIRECTIONS.pose, c.pose)}${field('angle', 'Camera angle', DIRECTIONS.angle, c.angle)}</div>
-      <div class="two">${field('environment', 'Environment', DIRECTIONS.environment, c.environment)}${field('light', 'Light', DIRECTIONS.light, c.light)}</div>
-      <label>What happens in this picture?<textarea data-compose="scene" rows="4" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>
+        ${picked&&!picked.applied ? '<p class="hint">Replacement selected. Save the scene to use it in the story.</p><button data-clear-image>Keep the current story image</button>' : ''}</div>
+      </div>`;
+    const people = `<section class="image-section"><h3>People in the picture</h3><div class="image-cast">${active('character').filter(p => !p.data.generic).map(p => `<button type="button" data-char="${esc(p.id)}" aria-pressed="${c.characters.includes(p.id)}" title="${esc(p.data.name || p.id)}">${portraitUrl(p.data.portrait) ? `<img loading="lazy" src="${esc(portraitUrl(p.data.portrait))}" alt="">` : `<span class="image-person-placeholder">${esc((p.data.name||p.id).slice(0,1))}</span>`}<span>${esc(p.data.name || p.id)}</span></button>`).join('') || '<p class="hint">Your image-generation character presets appear here when connected.</p>'}</div>
+      <div class="chips">${active('character').some(p => p.data.generic) ? chip('Include an unnamed person', c.man, 'data-toggle="man"') : ''}${cast.filter(p => p.data.outfit).map(p => chip(p.data.name + '’s usual outfit', c.outfit[p.id], `data-outfit="${esc(p.id)}"`)).join('')}${cast.length + (c.man ? 1 : 0) > 1 ? chip('Short descriptions for a group', c.useShort, 'data-toggle="useShort"') : ''}</div></section>`;
+    const direction = `<section class="image-section"><div class="section-head"><h3>Direct the shot</h3>${field('scenePreset', 'Saved scene direction', presetOptions('scene'), '', 'Choose a saved direction…')}</div>
+      <div class="four">${field('pose', 'Pose', DIRECTIONS.pose, c.pose)}${field('angle', 'Camera angle', DIRECTIONS.angle, c.angle)}${field('environment', 'Environment', DIRECTIONS.environment, c.environment)}${field('light', 'Light', DIRECTIONS.light, c.light)}</div>
+      <label>What happens in this picture?<textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>
       <h4>Camera and composition</h4><div class="chips">${active('camera').map(p => chip(p.data.name, c.cameras.includes(p.id), `data-camera="${esc(p.id)}"`)).join('')}</div>
-      <div class="two">${field('framing', 'Picture shape', presetOptions('framing'), c.framing, null)}${field('style', 'Art style', presetOptions('style'), c.style, null)}</div>
-      ${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}<p id="imageRatingNote" class="hint"></p></section>
-      <details class="image-section"><summary>Keep the character consistent</summary>
-      ${oneCharacter ? `<div class="image-reference">${portraitUrl(refPath) ? `<img src="${esc(portraitUrl(refPath))}" alt="Character reference">` : ''}<div><strong>${esc(c.reference ? 'Selected reference' : cast[0].data.name + '’s portrait')}</strong><button data-pick-reference>Choose a reference picture</button>${c.reference ? '<button data-reset-reference>Use character portrait</button>' : ''}</div></div><div id="imageReferenceChoices"></div>` : '<p class="hint">Choose one character to use a portrait reference or face correction.</p>'}
-      ${check('referenceOn', 'Use the reference while generating', c.referenceOn, !oneCharacter || !refPath)}
-      ${number('referenceStrength', 'Reference strength', c.referenceStrength, 0, 2, 0.05)}
-      ${check('referenceCutout', 'Remove the portrait background', c.referenceCutout, !oneCharacter)}
-      ${check('faceFix', 'Correct the face after generating', c.faceFix, !oneCharacter || !refPath)}
-      ${number('faceStrength', 'Face correction strength', c.faceStrength, 0.1, 1, 0.05)}</details>
-      <details class="image-section"><summary>Generation settings</summary>
-      ${field('model', 'Model', presetOptions('model'), c.model, null)}
-      <div class="two">${number('count', 'Number of pictures', c.count, 1, 8)}${field('seedMode', 'Variation', [{id: 'random', label: 'New variations'}, {id: 'fixed', label: 'Repeat a seed'}], c.seedMode, null)}</div>
-      ${number('seed', 'Seed', c.seed, 0, 9007199254740991)}
-      <div class="two">${number('steps', 'Steps', c.steps, 1, 100, 1, md.steps || 30)}${number('cfg', 'Prompt strength', c.cfg, 0.1, 30, 0.1, md.cfg || 5)}</div>
+      <div class="three">${field('framing', 'Picture shape', presetOptions('framing'), c.framing, null)}${field('style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p></section>`;
+    const consistency = `<section class="image-section"><h3>Keep the character consistent</h3><div class="image-consistency">
+      ${oneCharacter ? `<div class="image-reference">${portraitUrl(refPath) ? `<img src="${esc(portraitUrl(refPath))}" alt="Character reference">` : ''}<div><strong>${esc(c.reference ? 'Selected reference' : cast[0].data.name + '’s portrait')}</strong><button data-pick-reference>Choose a reference picture</button>${c.reference ? '<button data-reset-reference>Use character portrait</button>' : ''}</div></div>` : '<p class="hint">Choose one character to use a portrait reference or face correction.</p>'}
+      <div class="image-strengths">${check('referenceOn', 'Use the reference', c.referenceOn, !oneCharacter || !refPath)}${number('referenceStrength', 'Strength', c.referenceStrength, 0, 2, 0.05)}
+      ${check('faceFix', 'Correct the face after', c.faceFix, !oneCharacter || !refPath)}${number('faceStrength', 'Strength', c.faceStrength, 0.1, 1, 0.05)}
+      ${check('referenceCutout', 'Remove the portrait background', c.referenceCutout, !oneCharacter)}</div></div><div id="imageReferenceChoices"></div></section>`;
+    const settings = `<section class="image-section"><h3>Generation settings</h3>
+      <div class="settings-grid">${field('model', 'Model', presetOptions('model'), c.model, null)}${number('count', 'Pictures', c.count, 1, 8)}${field('seedMode', 'Variation', [{id: 'random', label: 'New variations'}, {id: 'fixed', label: 'Repeat a seed'}], c.seedMode, null)}${number('seed', 'Seed', c.seed, 0, 9007199254740991)}
+      ${number('steps', 'Steps', c.steps, 1, 100, 1, md.steps || 30)}${number('cfg', 'Prompt strength', c.cfg, 0.1, 30, 0.1, md.cfg || 5)}${number('width', 'Width', c.width, 256, 2048, 64, fr.w || 1152)}${number('height', 'Height', c.height, 256, 2048, 64, fr.h || 896)}</div>
       <h4>Exclude from the picture</h4><div class="chips">${active('negative').map(p => chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}"`)).join('')}</div>
-      <label>Anything else to avoid?<textarea data-compose="negative" rows="2">${esc(c.negative || '')}</textarea></label>
-      </details>
-      <button id="generate" class="primary" ${presets ? '' : 'disabled'}>Generate ${+c.count > 1 ? c.count + ' pictures' : 'a picture'}</button>
-      <p class="hint">Uses your existing image-generation queue. Choose a result from the Picture library to add it to this shot.</p>
-      <details class="image-section"><summary>Generated prompt</summary><p id="assembled" class="hint"></p>${c.override ? '<p class="hint">This picture uses a prompt copied from history.</p><button data-reset-prompt>Build the prompt from these controls</button>' : ''}</details>`;
+      <label>Anything else to avoid?<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label></section>`;
+    const go = `<div class="image-go"><button id="generate" class="primary" ${presets ? '' : 'disabled'} title="Uses your existing image-generation queue. Choose a result from the Picture library to add it to this shot.">Generate ${+c.count > 1 ? c.count + ' pictures' : 'a picture'}</button></div>`;
+    const prompt = `<section class="image-section"><h3>Generated prompt</h3><p id="assembled" class="hint prompt-box"></p>${c.override ? '<p class="hint">This picture uses a prompt copied from history.</p><button data-reset-prompt>Build the prompt from these controls</button>' : ''}</section>`;
+    // The full-screen composer (index.html) has a stage between the controls and the library: the picture, Generate
+    // and every generation setting in view at once. Without one (a narrow panel) it all runs down one column.
+    const stage = $('#composePreview');
+    if (stage) {
+      host.innerHTML = people + direction + consistency;
+      stage.innerHTML = current.replace('<div class="image-current-row">', '<div class="image-current-row">' + go) + settings + prompt;
+      if ($('#composeFor')) $('#composeFor').textContent = getScene().metadata.title || getScene().title || '';
+    } else host.innerHTML = current + people + direction + consistency + settings + go + prompt;
     bindComposition();
     updatePrompt();
     renderReferenceChoices();
@@ -124,7 +125,7 @@ export function installImages(getScene, changed) {
   }
   function toggleList(c, key, id) { c[key] = c[key].includes(id) ? c[key].filter(x => x !== id) : [...c[key], id]; }
   function bindComposition() {
-    const host = $('#composition');
+    const host = $('#composePreview') ? $('#composition').parentElement : $('#composition');
     host.querySelectorAll('[data-compose]').forEach(el => {
       el.oninput = () => {
         const name = el.dataset.compose;
@@ -204,23 +205,33 @@ export function installImages(getScene, changed) {
       runs = more ? [...runs, ...rows] : rows; historyEnd = rows.length < 100;
     } finally { if (request === loadingHistory) { historyBusy = false; renderJobs(); } }
   }
+  async function loadScenePictures() {
+    const id = getScene()?.id; if (!id) return;
+    sceneRunsFor = id; sceneRuns = null;
+    try { const d = await api('pictures?id=' + encodeURIComponent(id)); if (sceneRunsFor === id) sceneRuns = d.runs || []; }
+    catch (e) { if (sceneRunsFor === id) sceneRuns = []; notice(e.message, true); }
+    renderJobs();
+  }
   function renderJobs() {
     const host = $('#renders'); if (!host) return;
     if (!getScene()) { host.replaceChildren(); return; }
-    const all = new Map(runs.flatMap(run => (run.renders || []).map(j => [j.id, {...run, ...j, status: 'done'}])));
-    for (const job of jobs) all.set(job.id, {...all.get(job.id), ...job});
-    selected = [...all.values()].filter(j => !j.deleted && (historyScope !== 'scene' || j.compose?.subplotId === getScene().id)
+    const sceneScope = historyScope === 'scene';
+    if (sceneScope && sceneRunsFor !== getScene().id) { loadScenePictures(); }
+    const ownRuns = new Set((sceneRuns || []).map(r => r.run_id));
+    const all = new Map((sceneScope ? sceneRuns || [] : runs).flatMap(run => (run.renders || []).map(j => [j.id, {...run, ...j, status: 'done'}])));
+    for (const job of jobs) if (!sceneScope || all.has(job.id) || job.compose?.subplotId === getScene().id || ownRuns.has(job.run_id)) all.set(job.id, {...all.get(job.id), ...job});
+    selected = [...all.values()].filter(j => !j.deleted
       && (!historyCharacter || j.characters?.includes(historyCharacter)) && (!historyStar || j.star || j.fav))
       .sort((a, b) => (b.at || '9999').localeCompare(a.at || '9999'));
-    host.innerHTML = `<section class="image-section image-library"><div class="pane-title"><h3>Picture library</h3><button data-refresh-images>Refresh</button></div>
+    host.innerHTML = `<section class="image-section image-library"><div class="pane-title"><h3>Picture library</h3><button data-refresh-images>Refresh</button></div><p class="hint library-hint">New pictures appear here. “Use for this shot” puts one in the scene.</p>
       <div class="segmented"><button data-library="scene" aria-pressed="${historyScope === 'scene'}">This scene</button><button data-library="all" aria-pressed="${historyScope === 'all'}">All generated pictures</button></div>
       <div class="two"><label>Character<select id="imageHistoryCharacter"><option value="">Anyone</option>${options(presetOptions('character'), historyCharacter)}</select></label><label class="image-check"><input id="imageHistoryStar" type="checkbox" ${historyStar ? 'checked' : ''}>Starred pictures</label></div>
-      ${selected.length ? '<div class="render-grid">' + selected.map((j, i) => `<article class="render-card">${j.thumb || j.file ? `<a href="${esc(j.file ? asset('out', j.file) : asset('thumb', j.thumb))}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(j.thumb ? asset('thumb', j.thumb) : asset('out', j.file))}" alt="Generated picture ${i + 1}"></a>` : ''}<small>${esc(j.status === 'done' ? j.at?.slice(0, 10) || 'Ready' : j.status)}${j.status === 'running' ? ` · ${Math.round((j.progress || 0) * 100)}%` : ''}${j.star || j.fav ? ' · ★' : ''}</small>${j.error ? `<small>${esc(j.error)}</small>` : ''}${j.file ? `<button data-use="${i}" ${activeSlot ? '' : 'disabled'}>Use for this shot</button>` : ''}${j.positive ? `<button data-reuse="${i}">Reuse settings</button>` : ''}</article>`).join('') + '</div>' : `<p class="hint">${historyScope === 'scene' ? 'No pictures generated for this scene yet. Browse all generated pictures to use an existing one.' : 'No pictures match these filters.'}</p>`}
-      ${!historyEnd ? `<button data-more-images ${historyBusy ? 'disabled' : ''}>${historyBusy ? 'Loading…' : 'Load older pictures'}</button>` : ''}</section>`;
+      ${selected.length ? '<div class="render-grid">' + selected.map((j, i) => `<article class="render-card">${j.thumb || j.file ? `<a href="${esc(j.file ? asset('out', j.file) : asset('thumb', j.thumb))}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(j.thumb ? asset('thumb', j.thumb) : asset('out', j.file))}" alt="Generated picture ${i + 1}"></a>` : ''}<small>${esc(j.status === 'done' ? j.at?.slice(0, 10) || 'Ready' : j.status)}${j.status === 'running' ? ` · ${Math.round((j.progress || 0) * 100)}%` : ''}${j.star || j.fav ? ' · ★' : ''}</small>${j.error ? `<small>${esc(j.error)}</small>` : ''}${j.file ? `<button data-use="${i}" ${activeSlot ? '' : 'disabled'}>Use for this shot</button>` : ''}${j.positive ? `<button data-reuse="${i}">Reuse settings</button>` : ''}</article>`).join('') + '</div>' : `<p class="hint">${sceneScope && !sceneRuns ? 'Finding this scene’s pictures…' : historyScope === 'scene' ? 'No pictures for this scene yet, from the editor or from its picture rounds. Browse all generated pictures to use an existing one.' : 'No pictures match these filters.'}</p>`}
+      ${!historyEnd && !sceneScope ? `<button data-more-images ${historyBusy ? 'disabled' : ''}>${historyBusy ? 'Loading…' : 'Load older pictures'}</button>` : ''}</section>`;
     host.querySelectorAll('[data-library]').forEach(b => b.onclick = () => { historyScope = b.dataset.library; renderJobs(); });
     $('#imageHistoryCharacter').onchange = guarded(async e => { historyCharacter = e.target.value; await loadHistory(); });
     $('#imageHistoryStar').onchange = guarded(async e => { historyStar = e.target.checked; await loadHistory(); });
-    $('[data-refresh-images]', host).onclick = guarded(async () => { await Promise.all([loadHistory(), refresh()]); });
+    $('[data-refresh-images]', host).onclick = guarded(async () => { sceneRunsFor = ''; await Promise.all([loadHistory(), refresh()]); });
     const more = $('[data-more-images]', host); if (more) more.onclick = guarded(() => loadHistory(true));
     host.querySelectorAll('[data-use]').forEach(b => b.onclick = () => useImage(selected[+b.dataset.use]));
     host.querySelectorAll('[data-reuse]').forEach(b => b.onclick = () => reuseImage(selected[+b.dataset.reuse]));
