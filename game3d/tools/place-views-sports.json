@@ -1,0 +1,26 @@
+{
+  "sports": {
+    "place": "sports",
+    "day": 2,
+    "spots": [
+      { "id": "street", "at": [11.07, 16.9] },
+      { "id": "corner", "at": [8, 9.5] },
+      { "id": "apron", "at": [-11, 9.3] },
+      { "id": "link", "at": [-23.7, 5] },
+      { "id": "poolwalk", "at": [0, -12] },
+      { "id": "pavilion", "at": [0, -30] },
+      { "id": "courtswalk", "at": [22, 0] },
+      { "id": "court", "at": [25, -10] }
+    ]
+  },
+  "sports-evening": {
+    "place": "sports",
+    "day": 2,
+    "period": "evening",
+    "spots": [
+      { "id": "court", "at": [25, -10] },
+      { "id": "courtswalk", "at": [22, 0] },
+      { "id": "gate", "at": [31.3, 1.5] }
+    ]
+  }
+}
