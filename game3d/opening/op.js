@@ -15,18 +15,10 @@ import { END, beat, BEAT } from './timeline.js';
 import { SHOTS } from './shots/index.js';
 import { ANIME_ON } from './island.js';
 import { drawLyrics } from './subtitles.js';
+import { qs, EMBED, loadFonts, progress, paint, lyricsButton, fit16x9 } from './page.js';
 
-const qs = new URLSearchParams(location.search);
 const STILL = qs.has('still') || qs.has('capture');
 const DEBUG = qs.has('debug');
-const EMBED = qs.has('embed');
-if (qs.has('gate')) document.body.classList.add('gate');
-let lyricsOn = qs.get('lyrics') !== '0';
-try {
-  if (!qs.has('lyrics') && localStorage.getItem('opening.lyrics') === '0') lyricsOn = false;
-} catch (e) {
-  /* storage blocked: lyrics stay on */
-}
 
 const canvas = document.getElementById('op');
 const phone = Math.min(innerWidth, innerHeight) < 600 || /Android|iPhone/i.test(navigator.userAgent);
@@ -38,55 +30,17 @@ renderer.autoClear = false;
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace; // the compositor writes sRGB itself
 renderer.toneMapping = THREE.NoToneMapping;
 
-function fit() {
-  // 16:9 inside the window, letterboxed
-  const vw = innerWidth,
-    vh = innerHeight;
-  const s = Math.min(vw / 16, vh / 9);
-  const w = Math.floor(16 * s),
-    h = Math.floor(9 * s);
-  canvas.style.width = w + 'px';
-  canvas.style.height = h + 'px';
-  renderer.setSize(qs.has('capture') ? rtW : Math.min(rtW, Math.round(w * devicePixelRatio)), qs.has('capture') ? rtH : Math.min(rtH, Math.round(h * devicePixelRatio)), false);
-}
-fit();
-addEventListener('resize', fit);
+fit16x9([canvas], (w, h) =>
+  renderer.setSize(qs.has('capture') ? rtW : Math.min(rtW, Math.round(w * devicePixelRatio)), qs.has('capture') ? rtH : Math.min(rtH, Math.round(h * devicePixelRatio)), false),
+);
 
 const comp = makeCompositor(renderer, rtW, rtH);
 
-async function loadFonts() {
-  const f = [
-    ['OP Dela', '../fonts/op-dela.woff2'],
-    ['OP Barlow XB', '../fonts/op-barlow-xb.woff2'],
-    ['OP Barlow SB', '../fonts/op-barlow-sb.woff2'],
-    ['Zen Kaku Gothic New', '../fonts/zkg-bold.woff2', { weight: '700' }],
-    ['OP Sub', '../fonts/op-zkg-sub.woff2', { weight: '700' }],
-    ['OP Sub', '../fonts/op-zkg-black.woff2', { weight: '900' }],
-    ['Zen Kaku Gothic New', '../fonts/zkg-medium.woff2', { weight: '500' }],
-  ];
-  await Promise.all(
-    f.map(async ([name, url, desc]) => {
-      try {
-        const ff = new globalThis.FontFace(name, `url(${new URL(url, import.meta.url).href})`, desc);
-        document.fonts.add(await ff.load());
-      } catch (e) {
-        console.warn('font', name, e);
-      }
-    }),
-  );
-}
 
 let stage = null,
   shots = [];
-// the loading screen (index.html #load): a bar and a line saying what is being built. Building the island takes a
-// while and holds the page, so every step lets it paint first
-const loadUI = { box: document.getElementById('load'), bar: document.getElementById('load-bar'), say: document.getElementById('load-say') };
-const paint = () => new Promise((r) => requestAnimationFrame(() => setTimeout(r, 0)));
-function progress(f, label) {
-  if (!loadUI.box) return;
-  loadUI.bar.style.transform = `scaleX(${clamp(f, 0, 1).toFixed(3)})`;
-  if (label) loadUI.say.textContent = label;
-}
+// the loading screen (page.js progress): building the island takes a while and holds the page, so every step lets
+// it paint first
 const ready = (async () => {
   progress(0.01, 'Loading the cast');
   await Promise.all([
@@ -189,7 +143,7 @@ function frame(T) {
   fx.fade = Math.max(fx.fade, 1 - clamp(T / 0.9), clamp((T - (END - 2.6)) / 2.6) ** 1.4);
   // the lyrics on the overlay
   let lyr = false;
-  if (lyricsOn) {
+  if (lyricsOn()) {
     const og = comp.overlay.g;
     og.setTransform(1, 0, 0, 1, 0, 0);
     og.clearRect(0, 0, rtW, rtH);
@@ -253,19 +207,7 @@ const ui = {
   skip: document.getElementById('skip'),
   lyrics: document.getElementById('lyrics'),
 };
-function showLyricsState() {
-  ui.lyrics.setAttribute('aria-pressed', String(lyricsOn));
-  ui.lyrics.textContent = lyricsOn ? 'Lyrics on' : 'Lyrics off';
-}
-showLyricsState();
-ui.lyrics.addEventListener('click', () => {
-  lyricsOn = !lyricsOn;
-  try {
-    localStorage.setItem('opening.lyrics', lyricsOn ? '1' : '0');
-  } catch (e) {
-    /* storage blocked: the choice lasts this visit */
-  }
-  showLyricsState();
+const lyricsOn = lyricsButton(ui.lyrics, () => {
   if (!playing) frame(tOffset);
 });
 async function play() {
