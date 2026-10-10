@@ -5,9 +5,8 @@
 // the book, the phones and the headphones. Office woman B already wears her hair in a bun. Called by
 // trainDiscoveries before it reads their parts. If a body fails to load, the code-built passenger stays.
 import * as THREE from 'three';
-import { approvedCrowd, prepareApprovedCrowd } from './crowd/approved-models.js';
 import { EVERYDAY_ROLES } from './crowd/roles.js';
-import { proxyParts } from './chibi-crowd.js';
+import { proxyParts, roleBody, preparePlacePeople } from './chibi-crowd.js';
 import { bridgeOfficePose } from './crowd/office-pose.js';
 import { phoneLighter } from './perf/phone.js';
 
@@ -18,13 +17,9 @@ const POSE = {
   music: { arms: [-0.95, 0.45], scale: 0.96 },
   bun: { arms: [-1.1, 0.5] },
 };
-// the native bodies installed on main, by the loader's index
-const INDEX = { a: 0, b: 1 };
-const bodyFor = ({ body, fallback }) =>
-  (body in INDEX && approvedCrowd(INDEX[body])) || (fallback in INDEX && approvedCrowd(INDEX[fallback])) || null;
 const IN_HAND = new THREE.Vector3(0, 0.03, 0.05); // code-built units (train/people.js S), on the torso
 
-export const prepareTrainPassengers = () => prepareApprovedCrowd();
+export const prepareTrainPassengers = () => preparePlacePeople('train');
 
 // The car already holds the named cast's full-size skins, so its passengers wear a smaller copy of their body's skin
 // (1024 on desktop, 512 on a phone), one per body, to keep the train inside its texture budget (#373).
@@ -61,7 +56,7 @@ export function chibiPassengers(people) {
   for (const [id, role] of Object.entries(POSE)) {
     const r = people[id];
     if (!r || r.meshy || !EVERYDAY_ROLES[id]) continue;
-    const n = bodyFor(EVERYDAY_ROLES[id]);
+    const n = roleBody(id);
     if (!n) continue;
     const old = { root: r.root, torso: r.torso, head: r.head, headK: r.headK, arms: r.arms };
     // the props: groups on the torso (the book, a phone), the headphones on the head

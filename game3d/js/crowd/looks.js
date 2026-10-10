@@ -6,7 +6,7 @@ import { chibi, SKINS, S as PROP_SCALE } from '../train/people.js';
 import { hull } from '../train/hull.js';
 import { PEOPLE, HK } from '../cast.js';
 import { K } from '../scenes/office.js';
-import { GEN_ON, crowdBody, hold, boneAt } from '../chibi-crowd.js';
+import { crowdBody, hold, boneAt } from '../chibi-crowd.js';
 import { approvedCrowd } from './approved-models.js';
 import { bagPose } from './bag-pose.js';
 
@@ -233,7 +233,7 @@ function carryBag(r, bag) {
 
 // kind: office | casual | sport | elder. i picks the variant (clothes, hair, bag)
 export function makeBody(kind, i) {
-  const gen = (kind === 'office' && approvedCrowd(i)) || (GEN_ON && crowdBody(kind, i));
+  const gen = (kind === 'office' && approvedCrowd(i)) || crowdBody(kind, i);
   let r = gen;
   if (gen) r.root.traverse((o) => o.isSkinnedMesh && fitSphere(o));
   else if (kind === 'office') r = PEOPLE.worker(i + 7);

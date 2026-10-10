@@ -37,6 +37,7 @@ import { snapshotZones, restoreZones, suppressArrivalZones } from '../gameplay/z
 import { loadPlantModels } from '../scenes/outdoor/plant-models.js';
 import { loadStationModel, STATION_PLACES } from '../scenes/station-model.js';
 import { dressVegetation } from '../scenes/diorama/vegetation.js';
+import { preparePlacePeople } from '../chibi-crowd.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -93,6 +94,7 @@ export function createPlaceLifecycle(
         await loadPlantModels({ lighter: phoneLighter() });
         if (STATION_PLACES.has(name)) await loadStationModel({ lighter: phoneLighter() }); // Honsha station's outside (scenes/station-model.js)
         setTiling(phoneTiles()); // how finely big merged meshes are cut (perf/tile-geometry.js)
+        await preparePlacePeople(name); // the everyday bodies this place's staff and passengers wear (crowd/roles.js)
         const place = await PLACES[name](game, story);
         // the forecourt's leaves, crown core and meadow over the place's street planting (scenes/diorama/vegetation.js)
         await nextFrame();

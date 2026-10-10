@@ -1,9 +1,6 @@
-// The generic islanders as Meshy chibis (Review chibi-crowd-1; Jørgen, 2026-10-03: "All the people milling about
-// should have their own simple chibis that are unremarkable, but look all right."). With the chibi look on (chibi.js)
-// the ambient crowd (crowd/looks.js), the background office workers (cast.js PEOPLE.worker: the gate, the lift, the
-// canteen) and the train's unnamed passengers (chibi-passengers.js) take these bodies instead of the code-built ones.
-// Eight bases, made once each; every copy wears its own colours (chibi.js tint) and stands a little taller or shorter,
-// so a crowd of twenty has no twins. All copies of a base share its mesh, textures and clips.
+// Shared crowd roles and clothing variants. Review crowd-everyday-2 selects the
+// casual woman, older man and apron worker. Other generic roles use the switchable
+// chibi bodies. Each body shares meshes, textures and clips across its actors.
 //
 //   generic(base, i, { proxy, height, tint, into })   a person, variant i of a base (or these colours); proxy: parts the
 //                                         scenes can hang props on and move
@@ -14,6 +11,9 @@ import { CHIBI_ON, chibiFiles, chibiFrom } from './chibi.js';
 import { meshyPerson } from './cast3d.js';
 import { PEOPLE } from './cast.js';
 import { S as CODE } from './train/people.js';
+import { approvedCrowd, prepareApprovedCrowd } from './crowd/approved-models.js';
+import { EVERYDAY_ROLES } from './crowd/roles.js';
+export { EVERYDAY_ROLES } from './crowd/roles.js';
 
 // base: standing height (tools/characters/chibi-bake.mjs has the same) and the colours each region comes in, the
 // first as made (null). The suit's trousers go with its jacket.
@@ -74,6 +74,37 @@ const KIND = {
   elder: ['polo', 'cardigan'],
   sport: ['hoodie'],
 };
+
+const roleKeys = (role) => (role ? [role.body, role.fallback].filter(Boolean) : []);
+
+export function prepareCrowdBodies(kinds) {
+  const keys = kinds.includes('office') ? ['a', 'b'] : [];
+  for (const kind of kinds) keys.push(...roleKeys(EVERYDAY_ROLES[kind]));
+  return prepareApprovedCrowd(keys);
+}
+
+export function preparePlacePeople(place) {
+  return prepareApprovedCrowd(
+    Object.values(EVERYDAY_ROLES)
+      .filter((role) => role.places?.includes(place))
+      .flatMap(roleKeys),
+  );
+}
+
+// A prepared role keeps its native body, or its selected fallback if that body failed to load.
+// Props and seat placement remain with the caller. into preserves the caller's person object.
+export function roleBody(role, i = 0, opt = {}) {
+  let native;
+  for (const key of roleKeys(EVERYDAY_ROLES[role])) {
+    native = approvedCrowd(key, { tint: opt.tint, height: opt.height });
+    if (native) break;
+  }
+  if (!native) return null;
+  const m = opt.into ? Object.defineProperties(opt.into, Object.getOwnPropertyDescriptors(native)) : native;
+  Object.assign(m, { chibi: true, role, ph: i * 1.37 });
+  if (opt.proxy) proxyParts(m);
+  return m;
+}
 
 // a variant's colours: i counts through every mix of the base's hair, top and bottom once before any comes back (the
 // top changes from each i to the next, then the hair, then the bottom), so people made one after another, and the
@@ -198,6 +229,13 @@ export function proxyParts(m) {
 // variant i of a base, as a person; null when its files didn't load
 // (opt.into: an existing person object that becomes this body, keeping its other fields: chibi-passengers.js)
 export function generic(base, i = 0, opt = {}) {
+  if (GEN[base]) {
+    const native = roleBody(base, i, { ...opt, tint: opt.tint || variant(base, i) });
+    if (native) {
+      native.base = base;
+      return native;
+    }
+  }
   const f = PRE[base];
   if (!f) return null;
   const tint = opt.tint || variant(base, i);
@@ -216,7 +254,13 @@ export function generic(base, i = 0, opt = {}) {
 // a crowd body (crowd/looks.js scales it and hangs its bag)
 export function crowdBody(kind, i) {
   const list = KIND[kind] || KIND.casual;
-  return generic(list[i % list.length], i);
+  const base = list[((i % list.length) + list.length) % list.length];
+  const native = roleBody(kind, i, { tint: variant(base, i) });
+  if (native) {
+    native.base = base;
+    return native;
+  }
+  return GEN_ON ? generic(base, i) : null;
 }
 
 // The background office workers (the gate's, the lift's Sales pair, the canteen's): every third a woman, as the
