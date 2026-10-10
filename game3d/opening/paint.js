@@ -100,8 +100,13 @@ export function faded(name, from = 0.62) {
   const c = canvasOf(im.width, im.height),
     g = c.getContext('2d');
   g.drawImage(im, 0, 0);
+  // fade to the figure's own lowest row, not the picture's: a portrait with empty space below the figure (Aoi's ends
+  // at the hips) otherwise kept a hard edge where the figure stops
+  const d = g.getImageData(0, 0, im.width, im.height).data;
+  let bottom = im.height;
+  find: for (let y = im.height - 1; y > 0; y--) for (let x = 0; x < im.width; x += 2) if (d[(y * im.width + x) * 4 + 3] > 24) { bottom = y + 1; break find; }
   g.globalCompositeOperation = 'destination-out';
-  const gr = g.createLinearGradient(0, im.height * from, 0, im.height);
+  const gr = g.createLinearGradient(0, bottom * from, 0, bottom);
   gr.addColorStop(0, 'rgba(0,0,0,0)');
   gr.addColorStop(1, 'rgba(0,0,0,1)');
   g.fillStyle = gr;
