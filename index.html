@@ -1,42 +1,7 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta name="robots" content="noindex, nofollow">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Amakawa hub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root { --bg: #14181f; --card: #1b2029; --line: #2a313d; --text: #dfe3ea; --dim: #8f98a8; --teal: #3fc1b0; }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 Geist, system-ui, sans-serif; }
-  main { max-width: 760px; margin: 0 auto; padding: 48px 16px; }
-  h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
-  p.sub { color: var(--dim); margin: 0 0 28px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-  a.card { display: block; padding: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; color: var(--text); text-decoration: none; }
-  a.card:hover { border-color: var(--teal); }
-  a.card b { display: block; font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-  a.card span { color: var(--dim); font-size: 14px; }
-  .note { color: var(--dim); font-size: 13px; margin-top: 24px; }
-</style>
-</head>
-<body>
-<main>
-  <h1>Amakawa</h1>
-  <p class="sub">Local hub. Each link opens in its own tab.</p>
-  <div class="grid">
-    <a class="card" href="game3d/" target="amakawa-game"><b>Game</b><span>The day-1 build (game3d)</span></a>
-    <a class="card" href="bible/" target="amakawa-bible"><b>Bible</b><span>Cast, places, rules and review pages</span></a>
-    <a class="card" href="tools/assets/" target="amakawa-assets"><b>Assets</b><span>Every model, portrait, sound and prop, with its status</span></a>
-    <a class="card" href="hub/notes.html" target="amakawa-notes"><b>Notes</b><span>GUIDE, TODO, design docs, walkthroughs, story</span></a>
-    <a class="card" href="tools/subplots/web/" target="amakawa-subplots"><b>Subplot editor</b><span>Dialogue, encounter conditions, revisions and images</span></a>
-    <a class="card" href="http://127.0.0.1:8772/" target="amakawa-imagegen"><b>Image gen</b><span>The dashboard (tools/imagegen/run.sh first)</span></a>
-    <a class="card" href="https://fumbleforce.github.io/tower-of-words/game3d/" target="amakawa-live"><b>Live build</b><span>The pushed game on GitHub Pages</span></a>
-  </div>
-  <p class="note">Tabs are reused, so clicking a card again brings its tab back instead of opening another.</p>
-</main>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow">
+<title>Amakawa bible</title>
+<!-- The root opens the bible; every tool is in the bar at its top (tools/nav/nav.js, notes/tools/README.md). -->
+<meta http-equiv="refresh" content="0; url=bible/">
+<script>location.replace('bible/' + location.hash)</script>
+</head><body><a href="bible/">Amakawa bible</a></body></html>

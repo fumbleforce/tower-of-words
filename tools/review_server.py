@@ -17,6 +17,8 @@ notes/feedback-game/<time>/ with text.md, shot.png (git-ignored) and context.jso
 notes/feedback-log/ file. GET /api/feedback answers {"ok": true} so the game knows it can show the button.
 Both refuse anything not from this machine.
 
+GET /api/nav-private.js answers the private entries of the shared tool menu (tools/nav/nav.js), or an empty script.
+
 GET .../game3d/build.json (the main checkout's or a worktree's) first runs that game3d's tools/stamp.py --if-stale:
 build.json is generated and never committed, so it is written when missing or when HEAD or the module list changed.
 """
@@ -217,6 +219,8 @@ class Handler(SimpleHTTPRequestHandler):
             # the local hub with the private pages (the private bible home, which carries the shared private menu; local server only, never published)
             self.send_response(302); self.send_header('Location', '/island/private/bible/'); self.end_headers()
             return
+        if path == '/api/nav-private.js':
+            return self._nav_private()
         if path == '/api/plugins':
             # the local plugin names, so the game asks only for files that exist (no 404 per place)
             folder = os.path.join(ROOT, 'island', 'private', 'plugins')
@@ -224,6 +228,22 @@ class Handler(SimpleHTTPRequestHandler):
                 return self._json(404, {'error': 'no plugins'})
             return self._json(200, sorted(f[:-3] for f in os.listdir(folder) if f.endswith('.js')))
         return super().do_GET()
+
+    def _nav_private(self):
+        """GET /api/nav-private.js: the private entries of the shared tool menu (tools/nav/nav.js). It answers 200 either
+        way, so a page never logs a 404: the private menu file when it exists here and the request is local, else a
+        script that does nothing. SUBPLOTS_PUBLIC_ONLY=1 (the browser tests) always gets the empty one."""
+        body = b'/* no private pages on this machine */\n'
+        f = os.path.join(ROOT, 'island', 'private', 'bible', 'nav.js')
+        if self._local() and os.path.isfile(f) and os.environ.get('SUBPLOTS_PUBLIC_ONLY') != '1':
+            with open(f, 'rb') as fh:
+                body = fh.read()
+        self.send_response(200)
+        self.send_header('Content-Type', 'text/javascript; charset=utf-8')
+        self.send_header('Content-Length', str(len(body)))
+        self.send_header('Cache-Control', 'no-store')
+        self.end_headers()
+        self.wfile.write(body)
 
     def _feedback(self):
         if not self._local():
