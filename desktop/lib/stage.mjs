@@ -3,21 +3,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { releaseFiles } from './files-stub.mjs';
 
 export const PRIVATE_ROOT = ['island', 'private'].join('/') + '/';
 
-// [{src, dest}] from tools/release/files.mjs (#419), or the stand-in until it lands
+// [{src, dest}] from tools/release/files.mjs (#419; it names the full flavor 'adult'). It exits 1, and so does the build,
+// when a listed file is missing or a shipped module imports a file the list doesn't hold.
 export function fileList(root, flavor) {
-  const tool = path.join(root, 'tools/release/files.mjs');
-  let list;
-  if (fs.existsSync(tool)) {
-    const out = execFileSync(process.execPath, [tool, '--json', '--flavor', flavor], { cwd: root, maxBuffer: 1 << 28 });
-    list = JSON.parse(out.toString('utf8'));
-  } else {
-    console.log('files: tools/release/files.mjs not on this checkout yet, using desktop/lib/files-stub.mjs');
-    list = releaseFiles({ root, flavor });
-  }
+  const out = execFileSync(process.execPath, [path.join(root, 'tools/release/files.mjs'), '--json', '--flavor', flavor === 'full' ? 'adult' : flavor], {
+    cwd: root,
+    maxBuffer: 1 << 28,
+    stdio: ['ignore', 'pipe', 'inherit'],
+  });
+  const list = JSON.parse(out.toString('utf8'));
   for (const f of list) {
     const src = path.isAbsolute(f.src) ? f.src : path.join(root, f.src);
     f.src = src;
