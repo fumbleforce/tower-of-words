@@ -3,7 +3,8 @@
 // reasons are in notes/asset-lifecycle.md.
 //
 //   node tools/assets/live.mjs check [--local] [--quiet]   the registry against the disk and the game's references
-//                                                          (public half in npm run check; --local adds the local-only one)
+//                                                          (public half in npm run check through game3d/test/unit/live-assets.test.mjs;
+//                                                          --local adds the local-only one)
 //   node tools/assets/live.mjs promote <src> <dest> --round <round> [--review <id>] [--replace] [--note <text>]
 //   node tools/assets/live.mjs register <live path> --round <round> [--review <id>] [--note <text>]
 //                                                          a file or folder a build script made in place (a Blender

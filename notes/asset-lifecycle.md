@@ -48,7 +48,7 @@ node tools/assets/live.mjs register <live path>... --round <round or build> [--r
 
 ## The check
 
-`node tools/assets/live.mjs check [--local]` (the public half runs in `npm run check`) fails when:
+`node tools/assets/live.mjs check [--local]` fails when (the public half runs in `npm run check` as game3d/test/unit/live-assets.test.mjs):
 
 1. a file in a live folder is in no unit (and is not a `source` file);
 2. a registered file is missing on disk;
