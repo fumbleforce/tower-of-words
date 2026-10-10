@@ -94,47 +94,17 @@ export function containerHardware(p, x, z, w, d, y, h) {
   }
 }
 
-let paneOptions;
+// the hut's window: the shared glass (kit/materials/), reflecting the quay's sky with its horizon at the pane's
+// middle (1.55 up), so the reflection runs from sky to ground across it as the camera moves
+const paneOptions = {
+  finish: 'glass',
+  metalness: 0.78,
+  roughness: 0.13,
+  envK: 1.1,
+  horizon: ['y', 1.55, 1.5],
+  userData: { noLook: true },
+};
 export function hutPane(p, x, z) {
-  if (!paneOptions) {
-    const images = Array.from({ length: 6 }, (_, face) => {
-      const c = document.createElement('canvas');
-      c.width = c.height = 32;
-      const ctx = c.getContext('2d'),
-        g = ctx.createLinearGradient(0, 0, 32, 32);
-      g.addColorStop(0, face === 3 ? '#607477' : '#9fb7c1');
-      g.addColorStop(0.48, '#cfddd9');
-      g.addColorStop(1, '#577478');
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, 32, 32);
-      return c;
-    });
-    const envMap = new THREE.CubeTexture(images);
-    envMap.colorSpace = THREE.SRGBColorSpace;
-    envMap.needsUpdate = true;
-    paneOptions = {
-      metalness: 0.78,
-      roughness: 0.13,
-      envMap,
-      envMapIntensity: 1.1,
-      userData: { noLook: true },
-      onBeforeCompile(shader) {
-        shader.vertexShader =
-          'varying float vDockPaneY;\n' +
-          shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvDockPaneY = position.y;');
-        shader.fragmentShader =
-          'varying float vDockPaneY;\n' +
-          shader.fragmentShader.replace(
-            '#include <envmap_physical_pars_fragment>',
-            THREE.ShaderChunk.envmap_physical_pars_fragment.replace(
-              'reflectVec = transformDirectionByInverseViewMatrix( reflectVec, viewMatrix );',
-              'reflectVec = transformDirectionByInverseViewMatrix( reflectVec, viewMatrix );\nreflectVec = normalize(reflectVec + vec3(0.0,(vDockPaneY-1.55)*1.5,0.0));',
-            ),
-          );
-      },
-      customProgramCacheKey: () => 'harbour-hut-glass-v1',
-    };
-  }
   p.geo('#b9ccd0', new THREE.PlaneGeometry(1.48, 0.78).translate(x, 1.55, z - 0.12), {
     cast: false,
     opts: paneOptions,

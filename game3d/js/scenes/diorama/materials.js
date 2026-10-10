@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { STATION } from '../station-exterior.js';
-import { streetReflections, windowPane } from './reflections.js';
+import { windowPane } from './reflections.js';
+import { skyEnv } from '../../kit/materials/env.js';
 import { varyPanes } from './glazing.js';
 import { leafCluster } from './canopy.js';
 
@@ -104,7 +105,7 @@ export function streetMaterial(original, kind) {
 // phone: soil, mulch, metal and cladding keep the shared materials they were built with (one draw less each)
 export function finishStreet(root, phone = false) {
   const cache = new Map(),
-    environment = streetReflections();
+    environment = skyEnv(); // the shared reflection of the place's sky and street (kit/materials/env.js)
   root.traverse((o) => {
     if (!o.isMesh || o.isSkinnedMesh || o.isInstancedMesh || Array.isArray(o.material) || o.material.map) return;
     const originalColor = o.material.color.getHexString();

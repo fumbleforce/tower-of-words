@@ -1,61 +1,22 @@
 import * as THREE from 'three';
 import * as P from './plan.js';
+import { mat } from '../../kit/core/mat.js';
 
-// Opaque glazing closes a real recess. A quiet sky/ground environment gives moving
-// highlights without inventing rooms, furniture or buildings behind every pane.
+// Opaque glazing closes a real recess. It reflects the place's sky and street (kit/materials/, the shared glass),
+// with a local horizon on each pane: the pane's height shifts the reflected horizon, so the steep near-orthographic
+// street camera still sees sky-to-ground bands move instead of one tint. Its own material: the evening lights it.
 export function sportsGlass() {
-  const images = Array.from({ length: 6 }, (_, face) => {
-    const canvas = document.createElement('canvas');
-    canvas.width = canvas.height = 64;
-    const ctx = canvas.getContext('2d');
-    const gradient = ctx.createLinearGradient(0, 0, 64, 64);
-    // Large soft bands continue beyond each window instead of stamping an object
-    // into every pane. Their contrast survives the steep native street camera.
-    const tones =
-      face === 2
-        ? ['#b5ced6', '#e0e6df', '#9fbecb']
-        : face === 3
-          ? ['#617f83', '#a5bcb7', '#465d60']
-          : ['#718f9e', '#d1dedb', '#536e70'];
-    gradient.addColorStop(0, tones[0]);
-    gradient.addColorStop(0.38, tones[0]);
-    gradient.addColorStop(0.48, tones[1]);
-    gradient.addColorStop(0.65, tones[2]);
-    gradient.addColorStop(1, tones[2]);
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 64, 64);
-    return canvas;
-  });
-  const envMap = new THREE.CubeTexture(images);
-  envMap.colorSpace = THREE.SRGBColorSpace;
-  envMap.needsUpdate = true;
-  const material = new THREE.MeshStandardMaterial({
-    color: '#b9cbd0',
+  const material = mat.own('#b9cbd0', {
+    finish: 'glass',
     roughness: 0.09,
     metalness: 0.82,
-    envMap,
-    envMapIntensity: 1.2,
+    envK: 1.2,
+    horizon: ['uv', 0.5, 1.4],
     side: THREE.DoubleSide,
     emissive: '#ffd7a0',
     emissiveIntensity: 0,
   });
   material.userData.noLook = true;
-  // A shallow local probe: the pane height shifts the reflected horizon.
-  // This keeps a readable sky-to-ground response at the native near-orthographic
-  // camera, where an infinitely distant environment otherwise becomes one tint.
-  material.onBeforeCompile = (shader) => {
-    shader.vertexShader =
-      'varying float vSportsGlassY;\n' +
-      shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvSportsGlassY = uv.y;');
-    const environment = THREE.ShaderChunk.envmap_physical_pars_fragment.replace(
-      'reflectVec = transformDirectionByInverseViewMatrix( reflectVec, viewMatrix );',
-      'reflectVec = transformDirectionByInverseViewMatrix( reflectVec, viewMatrix );\nreflectVec = normalize(reflectVec + vec3(0.0, (vSportsGlassY - 0.5) * 1.4, 0.0));',
-    );
-    shader.fragmentShader =
-      'varying float vSportsGlassY;\n' +
-      shader.fragmentShader.replace('#include <envmap_physical_pars_fragment>', environment);
-  };
-  material.customProgramCacheKey = () => 'sports-glass-local-horizon-v2';
   return material;
 }
 
