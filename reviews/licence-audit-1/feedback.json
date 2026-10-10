@@ -12,6 +12,6 @@
   }
  },
  "comment": "explain which assets are ",
- "read": false,
+ "read": true,
  "history": []
 }
