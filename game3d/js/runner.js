@@ -9,6 +9,7 @@ import { voiceThenBeat } from './ui.js';
 import { ui, voice, sfx, setFace, newScene } from './ui.js';
 import { WORDS, learn, known, cmdHTML, lineHTML, SAYABLE } from './lang.js';
 import { recordHeard } from './narrative/heard-record.js';
+import { choiceIcon } from './ui/pin-tip.js';
 import { walkClear } from './movement/doorways.js';
 import { flags, cond } from './narrative/state.js';
 export { flags, cond } from './narrative/state.js';
@@ -368,7 +369,7 @@ export class Runner {
       const pick = await ui.choose(
         who,
         text,
-        opts.map((o) => ({ html: lineHTML(o.text) })),
+        opts.map((o) => ({ html: choiceIcon(o.icon) + lineHTML(o.text) })),
         { keepLine: !s.prompt, whoId },
       );
       selected = s.choice.indexOf(opts[pick]);

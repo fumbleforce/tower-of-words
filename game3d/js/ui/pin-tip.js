@@ -30,6 +30,16 @@ export const HEART =
 
 // private mode from window.__settings (settings.js), so engine.js, which walker tests load in Node, doesn't need it
 export const privateOn = () => !!globalThis.__settings?.privateMode;
+// the same heart in front of a reply a local plugin marked as a private scene's (a choice option's `icon`, runner.js):
+// purple for soft, red for hard, as on the pins (css/marks.css). Private mode only; any other name draws nothing.
+const HEART_FILL = { 'heart-soft': '#c9a0ff', 'heart-hard': '#ff5468' };
+export const choiceIcon = (name) =>
+  privateOn() && HEART_FILL[name]
+    ? HEART.replace(
+        'class="heart"',
+        `class="heart" style="width:1em;height:1em;fill:${HEART_FILL[name]};vertical-align:-0.14em;margin-right:0.35em"`,
+      )
+    : '';
 export const tipOf = (item) => pinTip(item, { privateMode: privateOn(), flags });
 
 const LONG_PRESS = 450; // ms held still on a pin before its tooltip shows (a phone's long press)
