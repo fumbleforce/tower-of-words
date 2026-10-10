@@ -10,6 +10,8 @@ Jørgen, at the guard's desk on day 1 (notes/feedback-game/2026-10-10_111104): "
 - Flat lines with nothing behind them removed: the security room posters ("PEOPLE. IDEAS. PROGRESS."), and the train's poster, straps, luggage rack and bags (already unmarked).
 - The label printer is never a target: Kuro's day-5 and later label request starts by talking to her.
 - Kept: talk lines that are a joke, a hint or a lead (the visitor book's TAMA, the covered desk, the paw prints on the office stairs, the in/out board with Eric's name, the fountain's coins, Eric's thoughts in his room), the closed doors' 準備中 cards, and every thing with its own word joke (the fan, the kettle, the coffee machine, the clock).
+- Kept but unsure, for Jørgen to judge in play: the dorm's look lines (notice boards, kitchen, manager's window, laundry, drinks machine, roof), which are close-only flavour; and day 2's word fallbacks (`say:tabetai:*` and the other want-words in story/day2/shared.js), which add a Say row with a generic line from Eric to every target while those words are being practised.
+- Checked after the change with `LIST=1 node game3d/tools/menu-day-check.mjs` (and `DAY=2`): day 1 75 selectable things, day 2 81, no faults, no thing selectable for a generic word alone.
 
 ## What changed
 
