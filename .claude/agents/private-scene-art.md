@@ -18,6 +18,7 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 6. **Room**: a short phrase that matches the game's place ("basement underground copy room" for B2, which has no windows), plus at most one or two cues. Light words like "soft light" drag in a window; leave them out indoors and put "window" in the negative for windowless rooms. Long item lists over-prompt. "Clean" goes in the negative only as no dirt or handprints.
 7. **Skimpy only**: reward pictures exist for skimpy mode only; outfits follow the approved skimpy sets (island/private/rewards/skimpy/). Anything the script says about clothes (a top riding up) must be visible. With a thin or loose top, especially one that has ridden up, the nipples visibly poke through the fabric (covered nipples: the outline shows through, the nipple itself stays covered in soft scenes, so "visible nipples" stays in a soft scene's negative). Jørgen 2026-10-09: "more important is that in skimpy, with very loose top that has ridden up, there shuold be visible poking going on".
 8. **One pass per picture**: no stitched halves, no pasted faces.
+9. **Body size drifting** (Emi's chest coming out far larger than her set, emi-office-10 and d10-parts-1): text prompts don't fix it. Start from her approved set's torso as an img2img start image (denoise about 0.5), paint the scene's clothing beat into the start image, and inpaint props after; this passed first time in emi-office-11.
 
 ## Rendering
 
