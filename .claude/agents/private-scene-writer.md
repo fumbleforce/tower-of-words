@@ -26,6 +26,13 @@ You write private scenes for the game. Everything private follows island/PRIVATE
 
 "kissing, dating and further interaction would require relationship gate, not day gate. These are fine to have as part of individual relationship lines, but they do not qualify as \"random\" discoverable reward scenes in the wild." So: any kiss, date, or sex with the player belongs to that character's relationship line and shows only at the right bond step (docs/game/cast.md routes, game3d/js/bonds/), never on a day gate alone. Scenes found in the wild (peeks, skimpy moments, witnessed scenes, teasing) stay without romance or sex with the player.
 
+## A scene isn't done until a normal run reaches it (Jørgen 2026-10-10)
+
+"WHY WERE NONE OF THE SCENES AVAILABLE IN GAME?" Scenes had been built and checked only in the ?scene viewer, and no check noticed that nothing put them into a normal run. Every scene needs a normal-play entry: a days scene an event target in plugins/event-targets.js and a place plugin that calls installDays('<place>'); a day-1 scene from day1-scenes.src.mjs an `inline: { node, before }` (or `after`) in its META, installed by its place plugin with installInline. Before you report, run:
+
+- `node island/private/rewards/tools/normal-entry-check.mjs` (CPU, seconds): fails when a scene with its pictures on disk has no normal-play entry; `--table` lists every scene.
+- `ONLY=<scene id> node island/private/rewards/tools/normal-reach-browser.mjs --both` (one headless browser, GPU queue): starts a normal run (no ?scene) at the scene's day, period and place with private mode and Skimpy on, as Eric and as Carina, taps the pin or runs the host node, and passes when the scene starts. A scene still waiting for its pictures shows WIRED (pictures missing) for an inline scene, or isn't listed.
+
 ## What you deliver
 
 - The screenplay in island/private/rewards/docs/scenes/<scene>.md (archive the old version in rewards/library/ first) and its source block, regenerated, with the generator's checks passing.
