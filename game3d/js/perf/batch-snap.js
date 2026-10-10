@@ -86,10 +86,13 @@ export function matKey(m, withColor) {
   if (withColor) k.push(col(m.color));
   return JSON.stringify(k);
 }
-export const hasTex = (m) => TEX.some((t) => m[t]);
-// a material whose userData says nothing but that the look patched it (look/procedural.js) can have its colour baked
+// a texture read through the mesh's uv (not the sky reflection, read by direction: kit/materials/env.js)
+const UV_TEX = TEX.filter((t) => t !== 'envMap');
+export const hasTex = (m) => UV_TEX.some((t) => m[t]);
+// a material whose userData says nothing but that the look patched it (look/procedural.js) or its finish
+// (kit/materials/metal.js) can have its colour baked
 // into vertex colours: the patch works on diffuseColor after the vertex colours are in, so the numbers are the same
-export const plainData = (m) => Object.keys(m.userData).every((k) => k === 'look');
+export const plainData = (m) => Object.keys(m.userData).every((k) => k === 'look' || k === 'finish');
 // what the watch compares every frame (a change sends the mesh back to drawing itself); no allocations per frame
 export function matSnap(m) {
   const c = m.color,
