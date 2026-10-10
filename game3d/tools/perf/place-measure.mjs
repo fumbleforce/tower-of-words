@@ -49,6 +49,8 @@ export function sceneMemory() {
   };
   scene.traverse(o => {
     const geo = o.geometry;
+    // a mesh the draw-call pass merged, whose own GPU copy it let go (js/perf/batch.js, freeHidden): its batch counts
+    if (geo?.userData?.perfFreed && o.layers.mask === 1 << 31) return;
     if (geo && !seenGeo.has(geo)) {
       seenGeo.add(geo); geometries++;
       for (const a of Object.values(geo.attributes || {})) addAttr(a);

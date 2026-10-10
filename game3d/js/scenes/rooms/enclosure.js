@@ -10,12 +10,12 @@ export function roomEnclosure(root, R, { color = '#ddd9d0', ceiling = '#d4d5d2' 
   full.visible = false;
   full.userData.followEnclosure = { height: R.h };
   full.userData.noLook = true; // Hidden walls must not change the overview's baked occlusion.
+  full.userData.perfAnchor = true; // merged under this group by the draw-call pass, so they show and hide with it
   const materials = new Map();
   root.add(full);
   const put = (object, surface = 'plaster') => {
     object.traverse((o) => {
       if (o.isMesh) {
-        o.userData.noBatch = true;
         o.castShadow = false;
         const material = o.material;
         if (!materials.has(material)) {

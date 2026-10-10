@@ -27,16 +27,10 @@
         "texMB": { "max": 222, "issue": 373 }
       }
     },
-    "east_lane": {
-      "phone": {
-        "geoMB": { "max": 71, "issue": 374 }
-      }
-    },
     "forecourt": {
       "phone": {
-        "calls": { "max": 212, "issue": 374, "reason": "street style on phone, within 5% (coordinator, 2026-10-09)" },
-        "tris": { "max": 330000, "issue": 374, "reason": "street style on phone, within 5% (coordinator, 2026-10-09)" },
-        "geoMB": { "max": 94, "issue": 372 }
+        "calls": { "max": 242, "issue": 374, "reason": "measured 230 on main e8261bec with #374 stage 3 (the ambient crowd's carried bags, the lift cut-away and named station casters draw alone), within 5%" },
+        "tris": { "max": 330000, "issue": 374, "reason": "street style on phone, within 5% (coordinator, 2026-10-09)" }
       },
       "desktop": {
         "calls": { "max": 547, "issue": 374, "reason": "street style detail for the desktop follow camera (coordinator, 2026-10-09)" },
@@ -45,29 +39,18 @@
     },
     "office": {
       "phone": {
-        "calls": { "max": 215, "issue": 374 },
-        "geoMB": { "max": 129, "issue": 374 },
         "loadMs": { "max": 8800, "issue": 374 }
       },
       "desktop": {
-        "calls": { "max": 825, "issue": 374 },
-        "tris": { "max": 1019000, "issue": 374 },
-        "geoMB": { "max": 137, "issue": 374 },
         "texMB": { "max": 234, "issue": 373 }
       }
     },
     "plaza": {
-      "phone": {
-        "geoMB": { "max": 97, "issue": 374 }
-      },
       "desktop": {
         "tris": { "max": 966000, "issue": 374, "reason": "full forecourt vegetation on desktop, Jørgen 2026-10-09" }
       }
     },
     "shotengai": {
-      "phone": {
-        "geoMB": { "max": 71, "issue": 374 }
-      },
       "desktop": {
         "texMB": { "max": 258, "issue": 373 }
       }

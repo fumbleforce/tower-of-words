@@ -25,8 +25,9 @@
 import * as THREE from 'three';
 import { drain } from './slice.js';
 import { split } from './batch-split.js';
-import { shadowGeometry } from './shadow-proxy.js';
+import { shadowGeometry, snappedShadow } from './shadow-proxy.js';
 import { makeTwin, dropTwin } from './batch-twin.js';
+import { freeMerged, unfree } from './batch-free.js';
 import { rigSnap, skinOf, skinned, fitBounds, looseSnap, looseSame } from './batch-rig.js';
 import { matKey, hasTex, plainData, matSnap, matSame, nodeSnap, nodeSame, srcSnap, srcSame } from './batch-snap.js';
 
@@ -68,7 +69,8 @@ export function optimizePlace(place, opt = {}) {
     CSPAN = opt.cast?.span ?? SPAN,
     CTRIS = opt.cast?.tris ?? TRIS,
     STRIS = 20000,
-    LIGHT = +(Q.get('light') || 1500);
+    LIGHT = +(Q.get('light') || 1500),
+    SCELL = opt.shadowCell || 0;
   // the ink look (style study) tells materials apart by colour; baking colours into one material would lose those lines
   const style = +(Q.get('style') || 0);
   const bakeOK = !(opt.noBake || Q.has('nobake') || style > 0);
@@ -395,6 +397,9 @@ export function optimizePlace(place, opt = {}) {
       }
       const o = stack.pop();
       if (ex.has(o) || o.isBone || o.userData.perfBatch || o.userData.noBatch || coplanar.has(o)) continue;
+      // a group shown and hidden as a whole (userData.perfAnchor: the follow camera's walls and ceiling,
+      // scenes/rooms/enclosure.js) keeps its batches under it, built while it is hidden, so they show and hide with it
+      if (o.userData.perfAnchor) movers.add(o);
       // hidden subtrees wait until they show, but for a hidden group that moves (the train's station, shown as it pulls
       // in): its batches hang under it and hide with it
       // (and a hidden person: their batches hang under them, ready when they show)
@@ -509,6 +514,7 @@ export function optimizePlace(place, opt = {}) {
       }
     }
     jobs.push(consolidate);
+    jobs.push(freeHidden);
     // forget meshes that left the scene (a rebuilt shell) and weren't merged
     if (!all) for (const [o, r] of info) if (r.state !== 'batched' && !seen.has(o) && !o.parent) info.delete(o);
     stats.scanMs = (stats.scanMs || 0) + performance.now() - t0;
@@ -544,6 +550,13 @@ export function optimizePlace(place, opt = {}) {
         for (const b of list) if (batches.has(b)) dropBatch(b);
       });
     }
+  }
+  // the merged meshes' own GPU copies go once nothing drawn shares them (perf/batch-free.js)
+  let freedAt = -1;
+  function freeHidden() {
+    if (stats.merged === freedAt || dead) return;
+    freedAt = stats.merged;
+    freeMerged(scene, live, HIDDEN);
   }
   function dropBatch(b) {
     if (twins.has(b)) twinsStale = true;
@@ -600,7 +613,8 @@ export function optimizePlace(place, opt = {}) {
     let nv = 0,
       ni = 0;
     // a shadow-only batch draws each mesh's shadow stand-in where it has one (perf/shadow-proxy.js)
-    const geoOf = shadow ? shadowGeometry : (o) => o.geometry;
+    // (on a phone snapped to a grid finer than its shadow map's texels, opt.shadowCell: what collapses is dropped)
+    const geoOf = shadow ? (o) => snappedShadow(shadowGeometry(o), SCELL) : (o) => o.geometry;
     for (const o of list) {
       const g = geoOf(o);
       nv += g.attributes.position.count;
@@ -828,6 +842,7 @@ export function optimizePlace(place, opt = {}) {
       }
     }
     o.layers.mask = r.mask;
+    unfree(o);
     live.delete(o);
     if (lifted.delete(o)) twinsStale = true;
     for (const n of r.nodes) {
@@ -1002,7 +1017,12 @@ export function optimizePlace(place, opt = {}) {
     shown = on;
     for (const b of batches) b.mesh.visible = on;
     for (const t of twins.values()) t.visible = on;
-    for (const [o, r] of info) if (r.state === 'batched') o.layers.mask = on ? HIDDEN : r.mask;
+    for (const [o, r] of info)
+      if (r.state === 'batched') {
+        o.layers.mask = on ? HIDDEN : r.mask;
+        if (!on) unfree(o);
+      }
+    if (on) ((freedAt = -1), freeHidden());
   }
   // one batch off (its meshes drawn on their own) or back on: the day check uses it to find which batch differs
   function toggleBatch(b, on) {
@@ -1010,8 +1030,10 @@ export function optimizePlace(place, opt = {}) {
     if (twins.has(b)) twins.get(b).visible = on;
     for (const o of b.parts.keys()) {
       const r = info.get(o);
-      if (r && r.state === 'batched' && !b.shadow) o.layers.mask = on ? HIDDEN : r.mask;
-      else if (r && b.shadow && !on) {
+      if (r && r.state === 'batched' && !b.shadow) {
+        o.layers.mask = on ? HIDDEN : r.mask;
+        if (!on) unfree(o);
+      } else if (r && b.shadow && !on) {
         /* shadow-only: its meshes cast through their own batch */
       }
     }

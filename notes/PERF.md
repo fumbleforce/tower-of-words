@@ -740,7 +740,7 @@ The budgets:
 
 The phone calls, triangles and load are the phone budgets at the top of this file. The rest had no target before this, so these are starting values. iOS Safari allows a page about 224 to 384 MB of canvas and WebGL memory (notes/research/world-chunking.md), and 64 + 96 MB per place lets the place on screen and the next one prepared fit together. The desktop numbers are for a laptop with integrated graphics, not this machine's 3080: about two and a half times the phone's calls and triangles, and double its memory.
 
-Known exceptions: a place that is over today has its own higher ceiling for that number in `places`, with the issue that will bring it down. The ceiling is about 5% over what was measured (25% for load times), and the place may not go past it. When a place gets back under the budget, the check prints a note asking for its exception to be removed. Exceptions recorded on 2026-10-09: the forecourt's phone geometry (#372; its calls and triangles came under budget in stage 2, below); character skins at 2048x2048 that put most places over the texture budget (#373; the approved office-role models in 98609f13 took the gate to 187 MB and the office to 222 MB; the phone's came down in stage 4, below, the desktop's of shop street, east coast and office remain); and the office over on calls (the canteen, bakery and ferry terminal came under in stage 3, below), the office, plaza, east lane and shop street over on geometry, the office and plaza over on desktop triangles, and the office's load (#374).
+Known exceptions: a place that is over today has its own higher ceiling for that number in `places`, with the issue that will bring it down. The ceiling is about 5% over what was measured (25% for load times), and the place may not go past it. When a place gets back under the budget, the check prints a note asking for its exception to be removed. Exceptions recorded on 2026-10-09: the forecourt's phone geometry (#372; its calls and triangles came under budget in stage 2, below); character skins at 2048x2048 that put most places over the texture budget (#373; the approved office-role models in 98609f13 took the gate to 187 MB and the office to 222 MB; the phone's came down in stage 4, below, the desktop's of shop street, east coast and office remain); and, for #374, the plaza's desktop triangles, the forecourt's phone calls and triangles, and the office's load. The canteen, bakery and ferry terminal's calls, the office's calls, triangles and geometry, and the phone geometry of the forecourt, plaza (57 MB), east lane (40) and shop street (39) came under in stage 3, and those exceptions are gone.
 
 To change a budget or add an exception, edit place-budgets.json in the same commit as the change that needs it, and say why in the commit message. An exception needs an issue (the unit test checks it).
 
@@ -811,6 +811,24 @@ The canteen, bakery and ferry terminal never ran the draw-call pass: they were m
 | bakery after | 44 | 56k | 146 | 96k |
 | ferry terminal before | 219 | 38k | 517 | 84k |
 | ferry terminal after | 57 | 42k | 216 | 88k |
+
+The office, and what it took that every place now has (measured on main e8261bec plus this work; the worst of the place budget check's views; the phone table above was the overview alone):
+
+- The two sender monitors (investigations/sender/props.js) marked their whole group `noBatch` for a canvas screen, so both CRTs, 38 parts each, drew alone. Only the screens are `noBatch` now, and the cart only its button.
+- A merged mesh's own GPU copy is let go once nothing drawn shares its geometry (js/perf/batch-free.js, called after each scan); the arrays stay for raycasts and re-merging, and three.js uploads them again if the mesh ever draws itself. The place budget check counts what is on the GPU: a merged mesh whose copy went (`geometry.userData.perfFreed`) is left out, its batch counted. This was about half of every batched place's geometry (the office 122 to 59 MB on the phone, the forecourt 89 to 49).
+- Rounded boxes (perf/rounded-box.js) cast their shadows through a plain box of their size (shadow-proxy.js `shadowGeometry`): the office's shadow-only batches went from 181k to 43k triangles. A small rounded box (under 0.6 m) whose radius is under 1.5 mm, which the callers' clamping makes of every thin part, is a plain box (12 triangles instead of 108 to 588). Long ones keep their rounding, because the baked light lives on their vertices (a 13.6 m floor strip went 20/255 lighter as a plain box).
+- Interiors (a place `in` another in travel/pins.js) batch on the desktop as on the phone, 6 m or 12,000 triangles: from the overview or the third-person camera most of a room is in view, so the finer cut only cost draws (office overview 582 to 478).
+- The third-person camera's walls and ceiling (scenes/rooms/enclosure.js, hidden in the overview) were `noBatch`, 60 draws twice over (the desktop's AO pass draws everything again). Its group is a `perfAnchor` now: the pass treats it like a moving group and batches its meshes under it while hidden, so they show and hide with it (office third person 536 to 450).
+- On the phone the shadow-only batches draw their casters snapped to a 2 cm grid (shadow-proxy.js `snappedShadow`, kept where it saves a fifth), below the shadow map's 1.2 cm texels and its blur; what collapses never showed in a shadow (the forecourt's shadow batches 78k to 60k triangles).
+
+| | phone calls | phone tris | phone geo MB | desktop calls | desktop tris | desktop geo MB |
+|---|--:|--:|--:|--:|--:|--:|
+| office before | 203 | 256k | 122.4 | 780 | 970k | 129.2 |
+| office after | 165 | 245k | 59.2 | 494 | 783k | 60.3 |
+| forecourt before | 230 | 339k | 89 | | | |
+| forecourt after | 230 | 320k | 49 | | | |
+
+Before and after from the same views (phone overview, desktop overview and two third-person facings, the office and the canteen, two page loads of each): differences are within what two loads of the same build differ by (repeated props get a random tint per load, look/bake.js, and the screens animate), and close-ups of the walls, desks, CRTs and the third-person walls and ceiling show no change. The office's phone load (7.2 s at CPU 4x) wasn't measured again on a quiet machine; its exception stays. The forecourt's phone calls stay over: of its 230 a frame, the ambient crowd's carried bags draw alone (a prop on a hand bone, with its own pose callback), as do the lift cut-away's clipped parts and the station's and head office's named meshes and their shadows; its ceiling is 242 until those are taken on.
 
 ### Stage 4: character skins by tier (#373, 2026-10-09)
 

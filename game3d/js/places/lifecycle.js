@@ -8,7 +8,7 @@ import { lookSteps } from '../look/index.js';
 import { farViewSteps } from '../look/sky.js';
 import { sliced, setUrgent, nextFrame } from '../perf/slice.js';
 import { optimizePlace } from '../perf/batch.js';
-import { lightenForPhone, phoneBatch, phoneLighter, phoneTiles } from '../perf/phone.js';
+import { lightenForPhone, batchSizes, phoneLighter, phoneTiles } from '../perf/phone.js';
 import { setTiling } from '../perf/tile-geometry.js';
 import { warmPlace } from '../perf/warm.js';
 import { SmoothWalker } from '../move.js';
@@ -30,6 +30,7 @@ import { installCreatures } from '../creatures/index.js';
 import { attachCrowd } from '../crowd/index.js';
 import { liftPeople } from '../look/char-lift.js';
 import { keepPublic } from '../travel/ways.js';
+import { PINS } from '../travel/pins.js';
 import { noteVisit } from '../travel/visited.js';
 import { installFlavorFinds, attachFlavorFinds } from '../flavor-finds/index.js';
 import { snapshotZones, restoreZones, suppressArrivalZones } from '../gameplay/zones.js';
@@ -126,7 +127,7 @@ export function createPlaceLifecycle(
         // what will be shown, not what entering would rebuild
         const [w, h] = size();
         place.layout?.(w / h);
-        if (BATCHED.has(name)) optimizePlace(place, { game, ...phoneBatch() });
+        if (BATCHED.has(name)) optimizePlace(place, { game, ...batchSizes(!!PINS[name]?.in) });
         installCreatures(game, place, name); // birds and small animals outdoors (creatures/index.js), after the batching
         await nextFrame(); // the pass's first scan and the finds' floor raycasts each take a frame's time on a phone
         await sliced(findSpotSteps(game, place)); // after the draw-call pass, so each print stays its own mesh to hide

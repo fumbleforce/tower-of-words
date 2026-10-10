@@ -45,8 +45,18 @@ export const phoneLighter = on;
 // a phone each draw costs more than the triangles, so 6 m and 12,000 (the office: 267 to 242 draws a frame, 242k to
 // 269k triangles, in the fast test). What casts a shadow is cut by triangles alone, at 8,000: those batches hold the
 // big merged meshes' 8 m pieces (phoneTiles), and their meshes are copied into a batch however they're cut.
-// Nothing changes in how it looks.
-export const phoneBatch = () => (on() ? { span: 6, tris: 12000, cast: { span: Infinity, tris: 8000 } } : {});
+// Nothing changes in how it looks. An interior (room) gets the same on the desktop: from its overview or the
+// third-person camera most of a room is in view, so the finer cut culled little and cost draws (#374: the office's
+// desktop overview 582 to about 470 a frame, the same triangles).
+// On the phone the shadow-only batches also draw their casters snapped to a 2 cm grid (perf/shadow-proxy.js
+// snappedShadow): its shadow map's texels are bigger than that, so what collapses (bevels, small rounded corners, thin
+// rods) never showed in a shadow (#374: the forecourt's shadow-only batches 78k to 60k triangles a frame).
+export const batchSizes = (room = false) =>
+  on()
+    ? { span: 6, tris: 12000, cast: { span: Infinity, tris: 8000 }, shadowCell: 0.02 }
+    : room
+      ? { span: 6, tris: 12000, cast: { span: Infinity, tris: 8000 } }
+      : {};
 
 // Big merged meshes cut finer on the phone (perf/tile-geometry.js): its overview looks down at a small part of an
 // outdoor place, so what casts a shadow is cut in 8 m squares (sets over 2,000 triangles) and what doesn't in pieces
