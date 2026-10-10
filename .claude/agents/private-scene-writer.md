@@ -9,7 +9,7 @@ You write private scenes for the game. Everything private follows island/PRIVATE
 ## Read first
 
 1. island/private/rewards/docs/queue.md (the ranked list) and the end of collab/private.md (Jørgen's latest rules and verdicts).
-2. The character's approved voice sheet notes/characters/<name>/voice.md and docs/game/cast.md (age, job, look, home). Every line a main character says follows her or his voice sheet; for Mio, Kenji, Kuro and Rei, run your lines past that character's voice agent (subagent_type voice-<name>) before you finish.
+2. The character's approved voice sheet notes/characters/<name>/voice.md and docs/game/cast.md (age, job, look, home). Every line a main character says follows her or his voice sheet; you can't start subagents, so write against the sheet and list the new lines per character in your report; the coordinator runs each voice-<name> pass before voicing.
 3. The place in the game where the scene plays (docs/game/places.md, the place's scene file), and the scene sources (rewards/tools/day1-scenes.src.mjs, days-scenes.src.mjs) and plugins it plugs into.
 4. Use the rpg-scenes skill (it covers private fanservice scenes) and the humanizer skill on narration.
 
