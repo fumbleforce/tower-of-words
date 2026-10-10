@@ -191,3 +191,22 @@
   .compose-dialog .image-empty { min-height: 34vh; }
   .compose-dialog .image-library .render-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+/* a 768 px tall laptop: the left column (people, direction, consistency) still fits without scrolling */
+@media (max-height: 800px) {
+  .compose-dialog .image-section { padding: 6px 0; }
+  .compose-dialog .image-cast > button { grid-template-rows: 30px auto; }
+  .compose-dialog .image-cast img, .compose-dialog .image-person-placeholder { height: 30px; }
+  .compose-dialog .image-section h4 { margin: 5px 0 4px; }
+  .compose-dialog .image-section .chips { margin: 4px 0 5px; }
+  .compose-dialog .image-section label { gap: 2px; }
+  .compose-dialog .image-current .selected-image { max-height: 15vh; }
+  .compose-dialog .image-empty { min-height: 14vh; }
+  .compose-dialog .image-section textarea { min-height: 0; }
+  .compose-dialog textarea[data-compose=details] { height: 32px; }
+  .compose-dialog .image-section .hint { margin: 2px 0; font-size: 11px; line-height: 1.35; }
+}
+/* library cards: six tiny buttons in a row were cramped at laptop width; three per row, readable */
+@media (max-width: 1500px) {
+  .lib-tools { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+  .image-library .lib-tools button { min-height: 26px; padding: 0 4px; font-size: 12px; }
+}
