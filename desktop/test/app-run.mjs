@@ -51,10 +51,12 @@ export async function withApp({ exe, cdp = false, gl = 'soft', configDir = null,
       /* gone */
     }
     try {
-      xvfb.kill('SIGKILL');
+      xvfb.kill('SIGTERM'); // Xvfb removes its own lock on TERM; ours are removed below in case it can't
     } catch {
       /* gone */
     }
+    const n = display.slice(1);
+    for (const f of [`/tmp/.X${n}-lock`, `/tmp/.X11-unix/X${n}`]) fs.rmSync(f, { force: true });
     slot?.release();
     if (!configDir) fs.rmSync(config, { recursive: true, force: true });
   };

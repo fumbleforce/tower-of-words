@@ -273,6 +273,64 @@ export const scenarios = {
     return { pass: all.length > 0, rows: all };
   },
 
+  // save files (dev build, real clicks): a new game, the pause menu's Save into slot 1, then the window closed at
+  // once (the app's own quit). Run continue1 next with the same --keep-config.
+  async save1(ctx, { out }) {
+    const page = await ctx.page();
+    const click = async (sel, frame = page) => {
+      const loc = frame.locator(sel).first();
+      await loc.waitFor({ state: 'visible', timeout: 60000 });
+      const b = await loc.boundingBox();
+      ctx.click(Math.round(b.x + b.width / 2), Math.round(b.y + b.height / 2));
+      await sleep(500);
+    };
+    await passGate(ctx, page);
+    const frameEl = await page.waitForSelector('#opening iframe', { timeout: 30000 }).catch(() => null);
+    if (frameEl) {
+      const frame = await frameEl.contentFrame();
+      await frame.waitForSelector('#start.ready', { timeout: 90000 });
+      await click('#skip', frame);
+      await page.waitForSelector('#opening', { state: 'detached', timeout: 15000 });
+    }
+    await waitTitle(page);
+    await click('#title .go');
+    await click('.ng-start');
+    await page.waitForFunction(() => window.__game?.walker && window.__game.place?.name === 'train' && !document.body.classList.contains('at-title'), null, { timeout: 60000 });
+    await sleep(2000);
+    await click('#pauseBtn');
+    await click('#pause .save');
+    await click('.slot[data-id="1"]');
+    await sleep(300);
+    ctx.shot(path.join(out, 'saved.png'));
+    await page.evaluate(() => window.close()).catch(() => {});
+    const code = await Promise.race([ctx.exited, sleep(10000).then(() => 'still running')]);
+    return { pass: code !== 'still running', exit: code };
+  },
+
+  // the title's Continue after save1: slot 1 is offered and loads the train
+  async continue1(ctx, { out }) {
+    const page = await ctx.page();
+    const click = async (sel) => {
+      const loc = page.locator(sel).first();
+      await loc.waitFor({ state: 'visible', timeout: 60000 });
+      const b = await loc.boundingBox();
+      ctx.click(Math.round(b.x + b.width / 2), Math.round(b.y + b.height / 2));
+      await sleep(600);
+    };
+    await passGate(ctx, page);
+    await waitTitle(page);
+    await sleep(800);
+    ctx.shot(path.join(out, 'title.png'));
+    await click('#title .mcont');
+    ctx.shot(path.join(out, 'continue.png'));
+    if (await page.locator('.slot[data-id="1"]').isVisible().catch(() => false)) await click('.slot[data-id="1"]');
+    await page.waitForFunction(() => window.__game?.walker && !document.body.classList.contains('at-title'), null, { timeout: 60000 });
+    await sleep(1500);
+    ctx.shot(path.join(out, 'loaded.png'));
+    const place = await page.evaluate(() => window.__game.place?.name);
+    return { pass: place === 'train', place };
+  },
+
   // cold start and the first place (dev build): launch to the title, then New game's Start to a player who can walk
   async timing(ctx) {
     const page = await ctx.page();
