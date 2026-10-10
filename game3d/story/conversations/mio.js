@@ -16,7 +16,7 @@ const menu = (understood = false) => [
     ...senderQuestions,
     { text: 'Do you go back to the mainland much?', go: 'chat_mio_mainland', if: '!chat_mio_home' },
     { text: 'Does your mother still send food back with you?', go: 'chat_mio_food_again', if: 'chat_mio_home' },
-    { text: 'Do you ever eat away from the servers?', go: 'chat_mio_lunch' },
+    { text: 'Do you ever eat away from the servers?', go: 'chat_mio_lunch', needs: ['mio.lunch_spot'] },
     ...(understood ? [
       { text: '{yasumi}… Was your mother telling you to take a break?', go: 'chat_mio_break', if: '!chat_mio_break_understood' },
       { text: 'Does your mother still ask about your weekends?', go: 'chat_mio_break_again', if: 'chat_mio_break_understood' },

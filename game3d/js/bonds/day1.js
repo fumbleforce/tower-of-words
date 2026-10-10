@@ -69,6 +69,7 @@ export const MOMENTS = {
     ticket_done: { remember: [['mio', 'copier', 'You fixed the copier three companies gave up on.']] },
 
     // ---------- lunch, the one choice
+    lunch_start: { fact: [['mio', 'lunch_spot', 'Eats her lunch in the machine room, where it’s quiet.']] },
     mio_lunch_end: { remember: [['mio', 'lunch', 'You had lunch with her in the machine room.']] },
     mio_b2: {
       fact: [['mio', 'why_b2', 'Works in B2 so she doesn’t have to bow all day. Looks after the old machines.']],
