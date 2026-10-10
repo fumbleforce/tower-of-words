@@ -2,7 +2,7 @@
  "title": "Background music, round 6: new YuE2 pieces in the opening theme's style",
  "date": "2026-10-10",
  "by": "claude-agent:music",
- "status": "open",
+ "status": "decided",
  "context": [
   "Round 6 of the background music, the direction you picked in music-direction-1: new YuE2 instrumentals in the opening theme's style. Nobody has listened to these before you. I can't hear audio, so I only checked them by measurement.",
   "Same model as the opening theme (YuE2, run locally, no cost) and the opening's style tags (anime J-pop, melodic bass, sparkling synths, catchy melody), minus the vocal ones. Each piece is a new piece, not a variation of the opening's melody, with its own band and mood. The opening was sung; to keep these instrumental I used the instrumental add-on for YuE2, which needs the full-precision model, so the sound may differ a little from the opening.",
@@ -70,5 +70,10 @@
    "href": "#review/music-round-5"
   }
  ],
- "issue": 371
+ "issue": 371,
+ "decided": [
+  "evening-1"
+ ],
+ "decision": "Picked evening-1 (pretty cool). title-1: start not great, too repetitive, bit too fast. day-1: super repetitive. office-2 rejected (double notes on top of each other, too intense). shops-1 rejected (clown show).",
+ "decided_at": "2026-10-10T11:00:57+0200"
 }
