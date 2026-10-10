@@ -14,6 +14,11 @@ export function existingAudioContext() {
   return actx;
 }
 let voiceSpans = null;
+// A local plugin's own clips (setClipResolver) may bring the known-word times for them: { key: [[t0, t1, wordId]] }.
+const extraSpans = {};
+export function addVoiceSpans(map) {
+  Object.assign(extraSpans, map);
+}
 fetch(new URL('../../audio/spans.json?v=' + (window.BUILD || ''), import.meta.url))
   .then((r) => (r.ok ? r.json() : null))
   .then((j) => {
@@ -224,7 +229,7 @@ function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen, done 
       // clear spans, merged where they touch or overlap: two words back to back (すみません、すみません) used to
       // schedule clashing ramps, and the second word stayed muffled
       const spans = [];
-      for (const [s, e] of ((voiceSpans && voiceSpans[key]) || [])
+      for (const [s, e] of ((voiceSpans && voiceSpans[key]) || extraSpans[key] || [])
         .filter(([, , id]) => id === 'clear' || known.has(id))
         .map(([s, e]) => [s, e])
         .sort((a, b) => a[0] - b[0])) {
