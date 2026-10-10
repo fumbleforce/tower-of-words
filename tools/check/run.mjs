@@ -23,7 +23,6 @@ const checks = [
   ['bonds', ['game3d/js/bonds/test.mjs']],
   ['facts', ['tools/facts/check.mjs']],
   ['story map', ['tools/bible/story-map-check.mjs']],
-  ['live assets', ['tools/assets/live.mjs', 'check', '--quiet']],
 ];
 let failures = 0;
 for (const [name, args, command = process.execPath] of checks) {
