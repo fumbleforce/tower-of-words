@@ -9,8 +9,19 @@ export const DIRECTIONS = {
 export const DEFAULT_COMPOSITION = {
   characters: [], outfit: {}, useShort: true, cameras: [], sceneRefs: [], negatives: null,
   rating: 'safe', count: 1, seedMode: 'random', seed: '', scene: '', pose: '', angle: '', environment: '', light: '',
+  extra: '', details: '', hard: false,
   reference: '', referenceOn: false, referenceStrength: 0.6, referenceCutout: false, faceFix: false, faceStrength: 0.65,
 };
+// The negative every Mature or Adult picture must carry unless the scene is marked hard (CLAUDE.md, soft reward scenes).
+export const SOFT_NEGATIVE = 'visible nipples, visible genitals, uncovered crotch, frontal explicit view, explicit sexual action, transparent unobstructed body';
+// What an empty composition gets from the presets: the first model, style and framing, and the default negatives.
+// The composer and the recipe command (tools/subplots/compose.mjs) both call this, so a recipe means what the editor shows.
+export function applyDefaults(c, presets) {
+  const active = type => (presets?.[type] || []).filter(p => !p.archived);
+  for (const type of ['model', 'style', 'framing']) if (!c[type]) c[type] = active(type)[0]?.id || '';
+  if (c.negatives === null) c.negatives = active('negative').filter(p => p.data.default).map(p => p.id);
+  return c;
+}
 export function normalizeComposition(value = {}) {
   const c = {...structuredClone(DEFAULT_COMPOSITION), ...value};
   c.characters = value.characters || value.chars || [];
@@ -54,9 +65,11 @@ export function assembleComposition(c, presets, subplotId) {
   });
   const direction = [c.scene, c.pose, c.angle, c.environment, c.light].filter(Boolean).join('. ');
   const head = [style.quality, rating, cast, style.anchors].filter(Boolean).join(', ');
-  const positive = smartJoin([head, blocks.join('; '), direction, c.cameras.map(id => byId('camera', id)?.data.prompt).filter(Boolean).join(', '), byId('framing', c.framing)?.data.prompt, style.suffix]);
+  const positive = smartJoin([head, blocks.join('; '), direction, c.cameras.map(id => byId('camera', id)?.data.prompt).filter(Boolean).join(', '), byId('framing', c.framing)?.data.prompt, c.extra, style.suffix]);
   const negatives = c.negatives || (presets.negative || []).filter(p => !p.archived && p.data.default).map(p => p.id);
-  const negative = dedupe([...negatives.map(id => byId('negative', id)?.data.text), c.styleNegOff ? '' : style.negative, ...chars.filter(p => !c.charNegOff?.[p.id]).map(p => p.data.negative), c.negative, 'child, loli']);
+  const soft = rating !== 'safe' && !c.hard;
+  const withSoft = text => soft ? dedupe([text, SOFT_NEGATIVE]) : text;
+  const negative = withSoft(dedupe([...negatives.map(id => byId('negative', id)?.data.text), c.styleNegOff ? '' : style.negative, ...chars.filter(p => !c.charNegOff?.[p.id]).map(p => p.data.negative), c.negative, 'child, loli']));
   const md = byId('model', c.model)?.data || {};
   const fr = byId('framing', c.framing)?.data || {};
   const ref = (type, id) => { const p = byId(type, id); return p ? {id: p.id, v: p.v} : null; };
@@ -66,7 +79,7 @@ export function assembleComposition(c, presets, subplotId) {
   const repaintPrompt = smartJoin([style.quality, rating, 'Two panels side by side showing the same person, a close-up of their head.', 'Both panels show the same face, hairstyle, hair colour and eyes.', [own.name, own.age, own.look, own.signature].filter(Boolean).join(', ')]);
   return {
     positive: (typeof c.override === 'string' ? c.override : c.override?.positive)?.trim() || positive,
-    negative: c.override?.negative ?? negative, overridden: !!c.override,
+    negative: c.override?.negative != null ? withSoft(c.override.negative) : negative, overridden: !!c.override,
     model_file: md.file, steps: +c.steps || md.steps || 30, cfg: +c.cfg || md.cfg || 5,
     sampler: c.sampler || md.sampler || 'euler_ancestral', scheduler: c.scheduler || md.scheduler || 'normal',
     w: +c.width || fr.w || 1152, h: +c.height || fr.h || 896, count: Math.min(8, Math.max(1, +c.count || 1)),
