@@ -5,6 +5,7 @@ import json, time, urllib.request, urllib.parse, os, random, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gpu_priority  # noqa: E402
+from assets.live_roots import refuse_live  # noqa: E402  (renders never go straight into a live folder)
 
 HOST = 'http://127.0.0.1:8188'
 
@@ -158,6 +159,7 @@ def log_render(workflow, out_path, elapsed=None):
 
 def run(workflow, out_path, timeout=900):
     """Queue a workflow, wait for it, save the first output image to out_path."""
+    refuse_live(out_path)
     yield_to_dashboard()
     gpu_priority.let_browsers_in()  # a waiting browser test gets a turn between two renders
     pid = _post('/prompt', {'prompt': workflow})['prompt_id']
@@ -236,6 +238,7 @@ def causal_forcing_i2v(image_name, prompt, negative=WAN_NEG, w=480, h=832, lengt
 def run_video(workflow, out_mp4, fps, timeout=3600):
     """Queue a video workflow; assemble the saved frames into out_mp4 with ffmpeg. Returns seconds taken."""
     import subprocess, tempfile
+    refuse_live(out_mp4)
     t0 = time.time()
     yield_to_dashboard()
     pid = _post('/prompt', {'prompt': workflow})['prompt_id']
