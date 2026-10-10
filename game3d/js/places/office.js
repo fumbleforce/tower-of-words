@@ -4,6 +4,7 @@ const ENGINE_KEYS = flagKeys('game3d/js/places/office.js');
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './saved-people.js';
 import * as THREE from 'three';
+import { ALARM_ON, ALARM_OFF } from '../scenes/office-leds.js';
 import { officeSteps, K, CN, CS, DOORWAYS, EMI } from '../scenes/office.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
@@ -79,13 +80,6 @@ export async function officePlace(game) {
   );
   steam.position.set(1.45, 0.75, CS + 0.36);
   w.root.add(steam);
-  const alarm = new THREE.Mesh(
-    new THREE.SphereGeometry(0.05, 10, 8),
-    new THREE.MeshBasicMaterial({ color: '#ff5a4a' }),
-  );
-  alarm.position.set(5.2, 1.4, -3.3);
-  alarm.visible = false;
-  w.root.add(alarm);
   const dS1 = w.dS(1),
     dS0 = w.dS(0);
   // Mori's bow stays clear of the lift doors and the player's arrival point.
@@ -848,12 +842,12 @@ export async function officePlace(game) {
         steam.scale.setScalar(1 + (1.6 - st.steam));
       } else steam.material.opacity = 0;
       if (st.alarm) {
-        alarm.visible = Math.sin(t * 10) > 0;
+        w.root.userData.alarmLed.material.color.set(Math.sin(t * 10) > 0 ? ALARM_ON : ALARM_OFF);
         if (Math.floor(t * 2) !== st.beepT) {
           st.beepT = Math.floor(t * 2);
           sfx('beep');
         }
-      } else alarm.visible = false;
+      } else w.root.userData.alarmLed.material.color.set(ALARM_OFF);
       if (aoi.root.visible && !aoi._walk) idle(aoi, t);
       st.liftK += (st.liftWant - st.liftK) * Math.min(1, dt * 4);
       w.openLift(st.liftK);

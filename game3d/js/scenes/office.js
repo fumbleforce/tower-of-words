@@ -28,7 +28,7 @@ import { PEOPLE, sit, armsHold, idle, mug } from '../cast.js';
 import { makeCat } from '../creatures/cat.js';
 import { blob, Nav } from '../engine.js';
 import { lightPool, steam, dust, clockHands, groundShadows } from '../places/life.js';
-import { ledLights } from './office-leds.js';
+import { ledLights, alarmLight } from './office-leds.js';
 import { liveScreens } from '../props.js';
 import { drain } from '../perf/slice.js';
 import { emiOffice, emiOfficeBlocks, EMI_X, EMI_DOOR } from './office-emi.js';
@@ -353,7 +353,7 @@ function waterCooler() {
   g.add(sh(b));
   return g;
 }
-function rack() {
+function rack(alarm) {
   const g = new THREE.Group();
   g.add(
     rbox(0.6, 1.3, 0.7, '#434954', { r: 0.02 }),
@@ -370,6 +370,7 @@ function rack() {
     led.position.set(0.18 - (i % 2) * 0.05, 0.16 + i * 0.125, 0.36);
     g.add(led);
   }
+  if (alarm) g.add((g.userData.alarmLed = alarmLight()));
   return g;
 }
 function fridge() {
@@ -1065,9 +1066,10 @@ export function* officeSteps() {
     yield;
   }
   for (let i = 0; i < 3; i++) {
-    const r = rack();
+    const r = rack(i === 1);
     r.position.set(4.4 + i * 0.72, 0, -3.3);
     root.add(r);
+    if (i === 1) root.userData.alarmLed = r.userData.alarmLed;
     yield;
   }
   const ac = acUnit();
