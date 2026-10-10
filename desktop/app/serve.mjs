@@ -3,7 +3,7 @@
 // every origin-relative path the game asks for works unchanged.
 //
 // Pure: takes a Request, returns a Response, knows nothing of Electron (desktop/test/serve.test.mjs runs it in Node).
-//   source   has(path) / stat(path) -> {size} / stream(path, {start, end}) -> web ReadableStream (end inclusive)
+//   source   has / stat(path) -> {size} / read(path) -> Promise<Buffer> / stream(path, {start, end}) -> ReadableStream (end inclusive)
 //   extra    optional: handle(pathname, request) -> Response | null, asked first (the full flavor's own routes)
 //   ready    optional: () => false while no content may be read (a start page is still open); content gets 403
 // Anything else under /api/ gets a quiet 404, as do missing files and paths outside the content.
@@ -134,7 +134,7 @@ export function createHandler({ source, extra = null, ready = () => true }) {
     const type = mimeOf(path);
     const headers = { 'Content-Type': type, 'Accept-Ranges': 'bytes', 'Cache-Control': 'no-cache' };
     const head = request.method === 'HEAD';
-    if (type.startsWith('text/html')) return htmlResponse(source.read(path).toString('utf8'), { head });
+    if (type.startsWith('text/html')) return htmlResponse((await source.read(path)).toString('utf8'), { head });
     const range = parseRange(request.headers.get('range'), size);
     if (range === false) {
       return new Response(null, { status: 416, headers: { ...headers, 'Content-Range': `bytes */${size}` } });
@@ -147,7 +147,7 @@ export function createHandler({ source, extra = null, ready = () => true }) {
     headers['Content-Length'] = String(size);
     if (size === 0) return new Response(head ? null : '', { status: 200, headers });
     // small files (modules, story, JSON, most pictures) in one read: a stream per file costs more than it saves
-    if (size <= SMALL) return new Response(head ? null : source.read(path), { status: 200, headers });
+    if (size <= SMALL) return new Response(head ? null : await source.read(path), { status: 200, headers });
     return new Response(head ? null : source.stream(path, { start: 0, end: size - 1 }), { status: 200, headers });
   };
 }
