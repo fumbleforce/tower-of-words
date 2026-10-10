@@ -139,9 +139,6 @@ function inside(poly, x, z) {
 // which place a spot of ground belongs to: the place whose walked area is nearest (0 inside it; the first place in
 // PLACES when areas overlap). Each place keeps only its own ground, so no two places' lawns, roads or slabs ever lie
 // over each other (Jørgen 2026-10-09: grass and a road over the fountain's tiles)
-// a place whose designed ground reaches past its walked area claims that much more: the plaza's paved circle and its
-// outer ring run a metre or two past its walk (Jørgen 2026-10-10: grass in steps over the fountain's tiles)
-const REACH = { plaza: 3 };
 function owner(walks, x, z) {
   let best = null,
     bestD = Infinity;
@@ -158,7 +155,6 @@ function owner(walks, x, z) {
         d = Math.min(d, Math.hypot(ax + ex * t - x, az + ez * t - z));
       }
     }
-    d = Math.max(0, d - (REACH[n] || 0));
     if (d < bestD) [best, bestD] = [n, d];
   }
   return best;
@@ -167,8 +163,27 @@ function owner(walks, x, z) {
 // Each place's ground draws only where that place owns the island (owner above): the material reads the ownership
 // map (a texture, one texel per square metre of the island) at the pixel's island position and drops what belongs to
 // another place. The meshes stay as the game built them (cutting their geometry broke the street style's shading)
-function ownGround(m, place, OWN) {
+// green: the mesh is lawn, turf, soil or a low bed. Green never draws on the plaza's paved circle (Jørgen 2026-10-10,
+// five cuts running: a lawn layer cut the outer rings of stones into steps), whichever place laid it
+const isGreen = (m) => {
+  const key = m.customProgramCacheKey?.() || '';
+  if (/street-(grass|foliage|soil|mulch)/.test(key)) return true;
+  const c = m.color;
+  return !!c && c.g > c.r * 1.05 && c.g > c.b * 1.05 && !m.map;
+};
+// strict: the walked area's four corners (island frame) when the mesh is centred in another place: then only its parts
+// inside its own place's walked area draw (the plaza's paving in a merged piece with a stand-in for the forecourt's
+// lane: the paving stays, the stand-in goes)
+function ownGround(m, place, OWN, strict = null) {
   const k = m.clone();
+  const green = isGreen(m);
+  const quad = strict
+    ? `{ vec2 q = (uIsl * vec4(vOwnW, 1.0)).xz; vec2 c[4] = vec2[4](${strict.map(([x, z]) => `vec2(${x.toFixed(3)}, ${z.toFixed(3)})`).join(', ')});
+        float sg = 0.0; bool out_ = false;
+        for (int i = 0; i < 4; i++) { vec2 a = c[i], b = c[(i + 1) % 4]; float cr = (b.x - a.x) * (q.y - a.y) - (b.y - a.y) * (q.x - a.x);
+          if (sg == 0.0) sg = sign(cr); else if (sign(cr) != sg && abs(cr) > 1e-4) out_ = true; }
+        if (out_) discard; }`
+    : '';
   const prev = m.onBeforeCompile,
     prevKey = m.customProgramCacheKey?.bind(m);
   k.onBeforeCompile = function (sh, r) {
@@ -184,10 +199,12 @@ function ownGround(m, place, OWN) {
         '#include <clipping_planes_fragment>',
         `#include <clipping_planes_fragment>
         vec2 ownUv = ((uIsl * vec4(vOwnW, 1.0)).xz - vec2(${OWN.x0.toFixed(1)}, ${OWN.z0.toFixed(1)})) / ${OWN.n.toFixed(1)};
-        if (all(greaterThanEqual(ownUv, vec2(0.0))) && all(lessThan(ownUv, vec2(1.0))) && abs(texture2D(uOwn, ownUv).r * 255.0 - ${place + 1}.0) > 0.5) discard;`,
+        if (all(greaterThanEqual(ownUv, vec2(0.0))) && all(lessThan(ownUv, vec2(1.0))) && abs(texture2D(uOwn, ownUv).r * 255.0 - ${place + 1}.0) > 0.5) discard;
+        ${quad}
+        ${green ? `if (distance((uIsl * vec4(vOwnW, 1.0)).xz, vec2(${OWN.disc[0].toFixed(3)}, ${OWN.disc[1].toFixed(3)})) < ${OWN.disc[2].toFixed(3)}) discard;` : ''}`,
       );
   };
-  k.customProgramCacheKey = () => (prevKey ? prevKey() : '') + '-own' + place;
+  k.customProgramCacheKey = () => (prevKey ? prevKey() : '') + '-own' + place + (green ? 'g' : '') + (strict ? 's' : '');
   return k;
 }
 
@@ -213,7 +230,9 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
   const ownTex = new THREE.DataTexture(Uint8Array.from(grid, (v) => v + 1), G.n, G.n, THREE.RedFormat, THREE.UnsignedByteType);
   ownTex.magFilter = ownTex.minFilter = THREE.NearestFilter;
   ownTex.needsUpdate = true;
-  const OWN = { uOwn: { value: ownTex }, uIsl: { value: new THREE.Matrix4() }, ...G }; // uIsl: world to island, set below
+  // the plaza's paved circle in the island frame (island-layout.js PATHS fountain_plaza), less its border's width
+  const disc = LAYOUT.PATHS.find((p) => p.id === 'fountain_plaza').circle;
+  const OWN = { uOwn: { value: ownTex }, uIsl: { value: new THREE.Matrix4() }, disc: [disc[0], disc[1], disc[2] - 0.05], ...G }; // uIsl: world to island, set below
   for (const [name, build] of PLACES) {
     if (DEBUG_STRIP) console.info('opening strip place', name, Math.round(performance.now()));
     let w;
@@ -267,16 +286,21 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
         o.instanceMatrix.needsUpdate = true;
       } else if (o.isMesh) {
         box.setFromObject(o).getCenter(ctr);
-        if (foreign(ctr.x, ctr.z)) drop.push(o);
+        const maskable = box.max.y - box.min.y < 6 && !NO_CUT && !o.userData.noLook && [].concat(o.material).every((m) => m && !m.isShaderMaterial);
+        // a whole mesh goes only when the pixel mask below can't take it: judged by its box's centre, a merged ground
+        // piece that holds part of the plaza's circle and a lane running on into the next place was dropped whole,
+        // the circle's stones with it (Jørgen 2026-10-10: grass in steps on the paving, five cuts running)
+        if (!maskable && foreign(ctr.x, ctr.z)) drop.push(o);
         // ground (low meshes: lawns, roads with their kerbs, slabs, tiles) draws only where this place owns the
         // island: one mesh can cover its own place and the neighbour's
         // (only plain materials: a shader material's clone copies its uniforms, which cut the anime water off its
         // shared colours and clock)
         // and so are the short things it sets around them (merged tree crowns, street lamps, benches; under 6 m, not
         // the buildings): the forecourt's crowns hung over the plaza without their trunks, its lamps stood on the tiles
-        else if (box.max.y - box.min.y < 6 && !NO_CUT && !o.userData.noLook && [].concat(o.material).every((m) => m && !m.isShaderMaterial)) {
+        else if (maskable) {
           const pi = names.indexOf(name);
-          o.material = Array.isArray(o.material) ? o.material.map((m) => ownGround(m, pi, OWN)) : ownGround(o.material, pi, OWN);
+          const strict = foreign(ctr.x, ctr.z) ? walks[name] : null;
+          o.material = Array.isArray(o.material) ? o.material.map((m) => ownGround(m, pi, OWN, strict)) : ownGround(o.material, pi, OWN, strict);
         }
       }
     });
@@ -308,8 +332,14 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
       const key = `${o.name}|${o.geometry.attributes.position?.count}|${o.isInstancedMesh ? o.count : 1}`;
       const box = [...bb.min.toArray(), ...bb.max.toArray()];
       const list = seenMeshes.get(key) || seenMeshes.set(key, []).get(key);
-      if (list.some((q) => q.every((v, i) => Math.abs(v - box[i]) < 0.05))) repeats.push(o);
-      else list.push(box);
+      const q = list.find((e) => e.box.every((v, i) => Math.abs(v - box[i]) < 0.05));
+      if (!q) list.push({ box, o, place: name });
+      // keep the copy of the place that owns the spot: the other one is masked off there (ownGround), and keeping
+      // the first copy left both gone, the plaza's paving in steps where the forecourt had built it too
+      else if (q.place !== name && owner(walks, (box[0] + box[3]) / 2, (box[2] + box[5]) / 2) === name) {
+        q.o.parent?.remove(q.o);
+        Object.assign(q, { o, place: name });
+      } else repeats.push(o);
     });
     for (const o of repeats) o.parent?.remove(o);
     // the step comes after the copies are found (their boxes must match): each place half a millimetre up and
