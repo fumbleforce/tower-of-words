@@ -1,0 +1,80 @@
+# Scene editor: design and stages
+
+Jørgen asked for this on 2026-10-10. The editor should let an author make whole scenes, or edit ours, the way a professional content tool does. It has to be easy to use and hide how the scenes are stored. Images are edited in place, with history and regeneration, and names, places and looks come from the bible. Every save keeps a revision. His words are in notes/feedback-log/. This page holds the design and the stage plan. How to run the editor and how its adapters work is in [tools/subplots/README.md](../../tools/subplots/README.md).
+
+The URL is http://127.0.0.1:8771/tools/subplots/web/ (start the server with `./start`). It works only on this computer.
+
+## Codex's version (judged 2026-10-10)
+
+The backend is sound and stays. That covers the revision store, the conflict checks, the local adapter with its backups, rebuild and checks, the image service proxy and the bible catalog (`authoring.mjs`). The page itself did not work as an editor:
+
+- It listed 1,090 code nodes ("D2 Limits", "Arrive") in one flat list. It had no labels for public and private content and no idea of where a scene sits in the story.
+- Every beat was a large form card with two dropdowns and two text boxes. A 37-beat scene ran to about 30 screens, so nobody could read it as a scene.
+- Beats could only be moved with ↑ ↓ buttons, one place at a time.
+- Undo threw away every change since the scene was opened. There was no redo.
+- Each line had a "spoken language" dropdown, and the other language was kept in hidden editor metadata. The author could not tell what the game would actually show.
+- The preview was a plain text dialog, not the game's dialogue style.
+- Saving a public scene rewrote the whole node with quoted keys (`{"say": "mio", ...}`), so a one-word fix showed up as a diff on every line.
+- The front end was written as dense one-line code that is hard to maintain.
+
+## Layout
+
+Desktop is three columns plus a top bar. Phone is out of scope for an authoring tool, but the page still works at 1366 px.
+
+```
+┌ Scene editor · Office › Lunch with Mio   [PUBLIC GAME · game3d/story/office.js]   ↶ ↷  Preview  Play in game  Save ┐
+├──────────────┬──────────────────────────────────────────────────┬──────────────────────────────┤
+│ Scenes       │ Timeline                                         │ Inspector                    │
+│ [search]     │ ⠿ 01 Narration  She shuts the door…              │  Beat · Picture · Placement  │
+│ All Pub Priv │ ⠿ 02 Mio   Page thirty already…                  │  · Revisions                 │
+│ ─ Office ─   │            もう三十枚目。…                        │                              │
+│  Lunch  PUB  │ ⠿ 03 [ picture, 16:9, Replace · History ]        │  (the selected beat's         │
+│ ─ Day 1 ─    │ ⠿ 04 Eric  おねがい、しました                      │   details, or the picture's   │
+│  Copier PRIV │ ⠿ 05 Choice  ▸ Sit down  ▸ Leave                  │   history, or where the       │
+│              │    + add beat                                    │   scene plays)                │
+└──────────────┴──────────────────────────────────────────────────┴──────────────────────────────┘
+```
+
+- **Scene list.** It is grouped by area (place, day or private source), searchable, and filtered by All, Public game or Private. Each row carries a tag, PUBLIC or PRIVATE · ADULT, and the beat count. Stage 3 replaces the flat groups with a story map.
+- **Timeline.** One compact row per beat: a drag handle, the beat number, a coloured type marker, the speaker's portrait and name, and the text edited in place. Japanese and English sit together on one line, in the order the game shows them. Pictures appear in the timeline at their real aspect ratio. Choices show their options as chips, and branches indent their beats. A "+" between rows adds narration, a line, a choice or a picture there. Rows drag to a new position, and Alt+↑ or Alt+↓ moves the selected row.
+- **Inspector.** Beat: speaker, delivery, face, branch conditions, shot framing. Picture: the current image, Replace from the image gen history (filtered to the scene's cast), and Compose new, which is the existing composer. Stage 2 adds edit and inpaint. Placement: where and when the scene plays, as condition pickers, and the notes. Revisions: every save with its time, Restore and Compare.
+- **Preview.** Plays the scene in a box styled like the game's dialogue: the picture full-bleed, the speaker's name in their colour, the subtitle line in the game font, Japanese in peach, and choices as buttons. **Play in game** opens `?scene=<id>` for a private scene, or the place for a public one, in a new tab.
+- **Labels.** Jørgen, 2026-10-10: "this is private mode eligible so no restrictions, just labelling on what goes where". Public and private scenes sit side by side. Every scene, picture and source path is labelled with its audience (public game, or private and adult) and the file it lives in.
+
+## Hiding the source behind forms
+
+The author never sees code. A beat is one of narration, line, choice, picture, branch, jump, word or direction. Each one is a form built from the step objects in game3d/story/FORMAT.md. A step the editor cannot express is still shown, in plain words ("Camera moves in on Mio"), and it can be moved and deleted. It keeps its exact source text, so nothing is lost on save. The private recipe helpers (`duo`, `cw`, `pic`, `gap` and the rest) are decoded the same way by the recipe adapter.
+
+## One adapter, revisions and undo
+
+- Every read and write goes through `/api/subplots/*` (tools/subplots/api.py). Public story modules are read by `source.mjs`, which parses them without running them. The private recipe sources are read through the provider command that `island/private/rewards/tools/subplot-editor.json` configures. The public repo holds only the generic adapters.
+- A save checks the source's revision hash, so an outside change gives a conflict and never an overwrite. The previous scene goes into Revisions first. A private save also backs up the generated files and rebuilds them. If the rebuild or a check fails, everything is restored.
+- Public saves are minimal edits. A beat that did not change keeps its exact source text, moved beats keep theirs, and only new or edited beats are written, in the house style (`'mio: text'`, unquoted keys, single quotes).
+- Undo and redo work in the browser over every edit since opening, with Ctrl+Z and Ctrl+Shift+Z. A save can be taken back by restoring the revision before it and saving again. That is one click in Revisions.
+
+## Pickers from the bible
+
+Speakers come from docs/game/cast.md, with portraits from game3d/js/ui/portrait-data.js and colours from narrative/speakers.js. Places come from places/definitions.js and docs/game/places.md. Times of day come from sim.js. Flags and their values are collected from every story condition. Words come from lang.js. Deliveries are the voice direction tags. All of them come from `/api/subplots/authoring`, which caches until a source changes. Free text is only for the words people say, narration, and choice labels. A value that is not in the bible yet (a new flag) can be typed in and gets a "new" marker.
+
+## Checks on save
+
+| Check | Public | Private |
+|---|---|---|
+| Parse and syntax of the written file | yes | yes |
+| Generator rebuild (`*.src.mjs` writes sequences, plugins, line lists) | none | yes, restored on failure |
+| `story-check.mjs` (unknown ids, missing nodes, bad conditions) | stage 2 | none |
+| Reachability (`normal-entry-check`, then `normal-reach-browser` on request) | none | entry check now, browser on request |
+| Blur check | none | yes |
+| Voice manifest (changed lines go back to "needs voice", stale clips retired) | stage 2 | yes |
+
+A failed check shows in plain words next to the beat it concerns.
+
+## Stages
+
+Each stage ships on its own.
+
+1. **Core editing loop (now).** Open any scene, public or private, labelled. Edit narration and lines inline, add beats, change the speaker from a picker, and drag beats into a new order. See each picture in place and replace it from the image gen history. Undo and redo. Save with a revision. Preview in the game's dialogue style, or Play in game in one click. Minimal public saves.
+2. **Pictures.** Regenerate a picture from its own settings, edit and inpaint (mask a region and repaint it through the dashboard's repaint path), compare versions side by side, and add a picture beat with a new composition. GPU work goes only through the image gen queue, with ComfyUI's VRAM capped so the browser keeps headroom. story-check and the voice manifest run on public saves.
+3. **Story map and placement.** A map of scenes per area and day with the routes between them (talk, event, choice and jump). Drag a scene's entry onto a place and time. Restrictions (day, period, flags, once only) become one sentence that reads like English. New scenes are made from a template.
+4. **Video.** Turn a picture into a short loop (image to video) on the local queue, preview it in place, and promote it through `tools/assets/live.mjs`.
+5. **Polish.** Compare any two revisions side by side, comments for Jørgen on beats, and a whole-scene reading mode for writers.
