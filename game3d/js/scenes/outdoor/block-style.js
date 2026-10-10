@@ -15,7 +15,7 @@
 //                      from the face, 1 in 12, with handrails both sides
 // officeBlock returns { top, doors: [{ f, t, w, canopy: { c0, c1, out, y, h } | null }] }, for a place's signs.
 import * as THREE from 'three';
-import { STEEL, PAINTED, BARE, handrail } from './furniture.js';
+import { STEEL, PAINTED, handrail } from './furniture.js';
 import { ramp as rampSlab } from './edges.js';
 import { BLOCK, onFace, faceAt, tOf } from './block-face.js';
 
@@ -138,8 +138,8 @@ export function roofPlant(p, [x0, x1, z0, z1], top, wall, sx) {
   units(ux0, Math.max(2, Math.floor((x1 - 0.6 - ux0) / 0.85)));
   if (sx && sx[0] - 0.35 - 1.7 > x0 + 3.2) units(sx[0] - 0.35 - 1.7, 2);
   for (const x of [x0 + 1.0, x0 + 2.6]) {
-    p.geo(DUCT, new THREE.CylinderGeometry(0.08, 0.08, 0.4, 8).translate(x, top + 0.2, z0 + 0.9), BARE);
-    p.geo(DUCT, new THREE.CylinderGeometry(0.17, 0.11, 0.09, 8).translate(x, top + 0.44, z0 + 0.9), BARE);
+    p.geo(DUCT, new THREE.CylinderGeometry(0.08, 0.08, 0.4, 8).translate(x, top + 0.2, z0 + 0.9), PAINTED);
+    p.geo(DUCT, new THREE.CylinderGeometry(0.17, 0.11, 0.09, 8).translate(x, top + 0.44, z0 + 0.9), PAINTED);
   }
 }
 
