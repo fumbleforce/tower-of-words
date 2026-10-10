@@ -3,8 +3,8 @@
 // the render through tools/assets/live.mjs). Composing a new picture opens the existing composer (images.js).
 const { document, URLSearchParams } = globalThis;
 import { esc, api } from './common.js';
-import { S, edit, select, checkpoint } from './store.js';
-import { kindOf, speakerOf, stepAt } from './model.js';
+import { S, edit, select, checkpoint, stepOf, docFor } from './store.js';
+import { kindOf, speakerOf } from './model.js';
 import { personName, portrait, person } from './names.js';
 
 const asset = (kind, path) => '/api/subplots/image/' + kind + '/' + String(path).split('/').map(encodeURIComponent).join('/');
@@ -48,7 +48,7 @@ export function renderPictureTab(installComposer) {
   const tab = document.getElementById('tabPicture');
   const scene = S.scene;
   if (!scene) { tab.innerHTML = '<p class="quiet pad">Open a scene first.</p>'; return; }
-  const step = S.selected ? stepAt(scene.steps, S.selected) : null;
+  const step = S.selected ? stepOf(S.selected) : null;
   if (kindOf(step) !== 'picture') {
     const pics = allPictures();
     tab.innerHTML = pics.length
@@ -60,7 +60,8 @@ export function renderPictureTab(installComposer) {
     tab.querySelectorAll('[data-i]').forEach(b => { b.onclick = () => select(pics[+b.dataset.i].path, { tab: 'picture' }); });
     return;
   }
-  const path = S.selected, pic = pictureFor(step);
+  // a picture in a part a choice leads to belongs to that part
+  const path = S.selected, doc = docFor(path), pic = pictureFor(step, doc);
   const private_ = scene.audience === 'private';
   tab.innerHTML = `
     <figure class="pic-large ${pic.url ? '' : 'missing'}">${pic.url ? `<img src="${esc(pic.url)}" alt="">` : '<div class="missing-box"><strong>No picture yet</strong></div>'}</figure>
@@ -72,7 +73,7 @@ export function renderPictureTab(installComposer) {
     <h3>From the image generator</h3>
     <div class="chips" data-chips></div>
     <div class="history" data-history></div>`;
-  tab.querySelector('[data-keep]')?.addEventListener('click', () => edit(s => { delete s.metadata.images[pic.slot]; }));
+  tab.querySelector('[data-keep]')?.addEventListener('click', () => edit(() => { delete doc.metadata.images[pic.slot]; }));
   tab.querySelector('[data-compose]').onclick = () => {
     checkpoint();
     if (!composer) composer = installComposer();
@@ -86,11 +87,11 @@ export function renderPictureTab(installComposer) {
     + `<button data-star aria-pressed="${filter.star}">★ Starred</button>`;
   chips.querySelectorAll('[data-who]').forEach(b => { b.onclick = () => { filter.character = b.dataset.who; runs = []; renderPictureTab(installComposer); }; });
   chips.querySelector('[data-star]').onclick = () => { filter.star = !filter.star; runs = []; renderPictureTab(installComposer); };
-  paintHistory(tab.querySelector('[data-history]'), path, pic, installComposer);
+  paintHistory(tab.querySelector('[data-history]'), doc, pic, installComposer);
   if (loadedFor !== JSON.stringify(filter) && !loading && !offline) loadHistory(false, installComposer);
 }
 
-function paintHistory(box, path, pic, installComposer) {
+function paintHistory(box, doc, pic, installComposer) {
   if (offline) { box.innerHTML = `<p class="warn-text">${esc(offline)}</p><button data-retry>Try again</button>`; box.querySelector('[data-retry]').onclick = () => { offline = ''; loadHistory(false, installComposer); }; return; }
   const renders = runs.flatMap(r => (r.renders || []).map(x => ({ ...x, run: r }))).filter(x => x.file && !x.reject);
   if (!renders.length) { box.innerHTML = `<p class="quiet">${loading ? 'Loading pictures…' : 'No pictures match.'}</p>`; return; }
@@ -98,9 +99,9 @@ function paintHistory(box, path, pic, installComposer) {
   box.querySelectorAll('[data-r]').forEach(b => {
     b.onclick = () => {
       const r = renders[+b.dataset.r];
-      edit(s => {
-        s.metadata.images ||= {};
-        s.metadata.images[pic.slot] = { slot: pic.slot, id: r.id, n: r.n, url: asset('out', r.file), file: r.file, seed: r.seed, positive: r.positive || r.run.positive };
+      edit(() => {
+        doc.metadata.images ||= {};
+        doc.metadata.images[pic.slot] = { slot: pic.slot, id: r.id, n: r.n, url: asset('out', r.file), file: r.file, seed: r.seed, positive: r.positive || r.run.positive };
       });
     };
   });

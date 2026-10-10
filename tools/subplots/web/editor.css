@@ -163,12 +163,42 @@ textarea[lang=ja], .text-second:lang(ja) { color: var(--jp); }
 .options > button { justify-self: start; margin-left: 24px; }
 
 .arm { margin: 4px 0 0 8px; padding-left: 10px; border-left: 2px solid var(--line2); }
+.arm-empty { display: flex; align-items: center; gap: 10px; padding: 2px 0 2px 18px; font-size: 13px; }
+
+/* the reading path (paths.js): the picked option, the part it leads to, where the ways meet again */
+.path-bar { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: -22px -28px 14px; padding: 10px 28px; background: rgba(18, 21, 27, .94); border-bottom: 1px solid var(--line); backdrop-filter: blur(6px); }
+.path-label { margin-right: 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); }
+.path-pick { min-height: 26px; padding: 0 6px; border: 0; background: none; color: var(--accent); font-size: 13px; max-width: 260px; }
+.path-pick span:last-child { overflow: hidden; text-overflow: ellipsis; }
+.path-pick .sep { color: var(--faint); }
+.arm-switch { display: inline-flex; align-items: center; gap: 6px; margin-left: 10px; font-size: 12.5px; color: var(--dim); }
+.seg.mini { display: inline-grid; padding: 2px; gap: 2px; }
+.seg.mini button { min-height: 22px; padding: 0 10px; font-size: 12px; }
+.seg.mini button[aria-pressed=true] { background: var(--accent-soft); color: var(--accent); }
+.kind-head .arm-switch { margin-left: auto; }
+.arm-why { margin-left: auto; font-size: 12px; color: var(--accent); }
+.option-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 8px 6px; }
+.option-tabs button { flex-direction: column; align-items: flex-start; gap: 0; min-height: 34px; max-width: 100%; padding: 4px 14px; border-radius: 999px; background: transparent; color: var(--dim); white-space: normal; text-align: left; }
+.option-tabs button[aria-pressed=true] { background: var(--accent-soft); border-color: rgba(111, 208, 198, .6); color: var(--ink); font-weight: 700; }
+.option-tabs button[aria-pressed=true] .opt-text::before { content: "↓ "; color: var(--accent); }
+.option-tabs small { font-size: 11px; font-weight: 500; color: var(--faint); }
+.beat.k-choice > .body > .option { padding: 0 8px; }
+.add-option { justify-self: start; width: auto; margin: 4px 0 0 32px; }
+.path-section { position: relative; margin: 8px 0 6px; padding: 0 0 6px 12px; border-left: 3px solid rgba(111, 208, 198, .55); }
+.path-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 8px 10px; margin: 0 0 4px -12px; border-radius: 0 var(--r) var(--r) 0; background: var(--accent-soft); color: var(--ink); }
+.path-head strong { color: var(--accent); }
+.path-head .quiet { font-size: 12.5px; }
+.path-arrow { color: var(--accent); font-weight: 700; }
+.path-note { margin: 8px 0 8px 52px; padding: 8px 12px; border: 1px dashed var(--line2); border-radius: var(--r); color: var(--dim); font-size: 13px; }
+.rejoin { display: flex; align-items: center; gap: 10px; margin: 2px 0 6px 52px; color: var(--faint); font-size: 12px; }
+.rejoin::before { content: ""; width: 18px; height: 10px; border-left: 2px solid var(--line2); border-bottom: 2px solid var(--line2); border-bottom-left-radius: 8px; margin-top: -8px; }
 .arm-label { padding: 2px 0 0 8px; font-size: 11.5px; font-weight: 700; color: var(--faint); text-transform: uppercase; letter-spacing: .04em; }
 .beats-empty { margin: 6px 0; padding: 12px; border: 1px dashed var(--line2); border-radius: var(--r); color: var(--faint); font-size: 12.5px; text-align: center; }
 .beats-empty.drop-into { border-color: var(--accent); color: var(--accent); }
 
-.pic { position: relative; margin: 2px 0 0 8px; max-width: 560px; border-radius: var(--r); overflow: hidden; background: #0b0d11; border: 1px solid var(--line); }
-.pic img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+/* the whole picture, at the column's width (Jørgen 2026-10-10: "show images full height in the feed") */
+.pic { position: relative; margin: 2px 0 0 8px; border-radius: var(--r); overflow: hidden; background: #0b0d11; border: 1px solid var(--line); }
+.pic img { display: block; width: 100%; height: auto; }
 .pic figcaption { position: absolute; inset: auto 0 0 0; display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 8px; background: linear-gradient(transparent, rgba(8, 10, 14, .78)); opacity: 0; transition: opacity .12s; }
 .beat:hover .pic figcaption, .beat.selected .pic figcaption, .pic.changed figcaption { opacity: 1; }
 .pic figcaption .tag { margin-right: auto; }
