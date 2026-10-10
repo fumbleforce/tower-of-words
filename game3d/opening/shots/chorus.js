@@ -94,8 +94,9 @@ export const CHORUS = [
       const m = S.anchors.mid;
       const from = RUSH[0].map((v) => v[1]),
         fromAt = RUSH[1].map((v) => v[1]);
-      const to = [m.x - 200, 150, m.z + 300],
-        toAt = [m.x, -16, m.z - 10];
+      // the end pose keeps drifting round the island, so the aerial never settles into a still
+      const to = [m.x - 200 + lt * 26, 150 - lt * 6, m.z + 300 - lt * 14],
+        toAt = [m.x + lt * 4, -16, m.z - 10];
       S.look(from.map((v, i) => lerp(v, to[i], p)), fromAt.map((v, i) => lerp(v, toAt[i], p)), lerp(36, 40, p));
     },
     draw(g, lt, T, S) {
