@@ -59,12 +59,15 @@ def read_json(path, default):
 def local_provider(body):
     # Explicit local integration only. No directory discovery and no user-owned data access.
     command = os.environ.get('SUBPLOTS_PROVIDER')
+    default_config = ROOT / 'island/private/rewards/tools/subplot-editor.json'
+    if not command and default_config.is_file():
+        command = json.dumps(['python3', str(HERE / 'local.py'), str(default_config)])
     if not command or os.environ.get('SUBPLOTS_PUBLIC_ONLY') == '1':
         raise ValueError('The local scene adapter is not configured. Public stories are available.')
     cmd = json.loads(command)
     if not isinstance(cmd, list) or not cmd or not all(isinstance(x, str) for x in cmd):
         raise ValueError('SUBPLOTS_PROVIDER must be a JSON command array')
-    result = subprocess.run(cmd, input=json.dumps(body), capture_output=True, text=True, cwd=ROOT, timeout=30)
+    result = subprocess.run(cmd, input=json.dumps(body), capture_output=True, text=True, cwd=ROOT, timeout=300)
     data = json.loads(result.stdout)
     if result.returncode or data.get('error'):
         raise ValueError(data.get('error', 'Local scene adapter failed'))
@@ -72,6 +75,8 @@ def local_provider(body):
 
 def dispatch(action, body):
     scene_id = body.get('id', '')
+    if not isinstance(scene_id, str):
+        raise ValueError('Invalid scene id')
     if body.get('scope') == 'local' or (scene_id and not scene_id.startswith('public:')):
         return local_provider({**body, 'action': action})
     if action == 'catalog':

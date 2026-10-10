@@ -48,3 +48,14 @@ test('reject a symlink escaping the public story root',t=>{
   fs.symlinkSync(path.join(f.root,'outside.js'),path.join(f.root,'game3d/story/escape.js'));
   assert.throws(()=>run(f.root,{action:'read',id:'public:game3d/story/escape.js#hello'}),/outside/);
 });
+test('interleaved routes keep their original first-match priority',t=>{
+ const f=fixture(t,"export default {on:{talk:[{node:'hello',if:'first',custom:true},{node:'other',if:'middle'},{node:'hello',if:'last'}]},nodes:{hello:[],other:[]}}");
+ const s=run(f.root,{action:'read',id:f.id});s.entries[0].condition='updated';
+ const p=run(f.root,{...s,action:'prepare'});
+ assert.ok(p.changed.indexOf('updated')<p.changed.indexOf('middle'));assert.ok(p.changed.indexOf('middle')<p.changed.indexOf('last'));assert.match(p.changed,/"custom": true/);
+});
+test('edited dialogue drops its outdated explicit voice reference',t=>{
+ const f=fixture(t,"export default {nodes:{hello:[{say:'a',text:'Old',voice:'old-take',face:'smile'}]}}");
+ const s=run(f.root,{action:'read',id:f.id});s.steps[0].text='New';
+ const p=run(f.root,{...s,action:'prepare'});assert.doesNotMatch(p.changed,/old-take/);assert.match(p.changed,/smile/);
+});

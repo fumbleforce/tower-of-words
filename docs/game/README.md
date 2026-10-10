@@ -58,6 +58,7 @@ The inboxes (collab/to-codex.md, collab/to-claude.md) and dated notes record mes
 | Image and video prompts: models, settings, cast prompt lines, reward prompts, composition control, the Meshy 3D workflow | [art/PROMPTS.md](../../art/PROMPTS.md) |
 | Portrait style blocks | [art/STYLE.md](../../art/STYLE.md) |
 | Voice, TTS and music methods and tests | [art/SOUND.md](../../art/SOUND.md) |
+| Manual scene editing, conditions, revisions and image composition | [tools/subplots/README.md](../../tools/subplots/README.md) |
 | How a story file is written: nodes, hooks, sim data, `{word}` marks | [game3d/story/FORMAT.md](../../game3d/story/FORMAT.md) |
 | How each character talks on the page, and their voice settings | [game3d/story/VOICE.md](../../game3d/story/VOICE.md), [VOICE-DIRECTION.md](../../game3d/story/VOICE-DIRECTION.md) |
 | What is private and where it goes | [island/PRIVATE.md](../../island/PRIVATE.md) |
