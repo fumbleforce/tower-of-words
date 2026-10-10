@@ -331,6 +331,16 @@ def review_feedback(rid):
 
 
 # ---------------------------------------------------------------- stale and out of sync
+def last_commit_hours(num, at):
+    """Hours since the newest commit on any branch whose message names #num, or None if none does."""
+    try:
+        out = subprocess.run(['git', 'log', '--all', '-1', '--format=%cI', '-E', f'--grep=#{num}([^0-9]|$)'],
+                             capture_output=True, text=True, timeout=20).stdout.strip()
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    return hours_since(out, at) if out else None
+
+
 def stale(at=None, all_items=None):
     """Everything stuck or out of sync, oldest first: dicts with id (issue number or review:<id>), title, owner,
     reasons, hours, url."""
@@ -373,6 +383,13 @@ def stale(at=None, all_items=None):
         h = hours_since(i['updated'], at)
         if i['state'] in ('todo', 'running', 'blocked') and h >= ACTIVE_HOURS:
             flag(i['id'], i['title'], i['owner'], f'{i["state"]}, untouched for {age(h)}', h, i['url'])
+        elif i['state'] == 'running':
+            # A progress note is not progress (Jørgen 2026-10-10): a running issue needs a commit that names it.
+            c = last_commit_hours(i['id'], at)
+            since = c if c is not None else hours_since(i.get('created'), at)
+            if since >= ACTIVE_HOURS:
+                what = f'no commit naming #{i["id"]} for {age(since)}' if c is not None else f'no commit naming #{i["id"]} since it opened {age(since)} ago'
+                flag(i['id'], i['title'], i['owner'], f'running, {what}', since, i['url'])
         elif i['state'] == 'waiting-jorgen' and i['id'] not in asked:
             # Jørgen only checks the Review queue (2026-10-09): waiting on him without an open Review item is invisible to him.
             flag(i['id'], i['title'], i['owner'], 'waiting for Jørgen, but no open Review item asks him', h, i['url'])
