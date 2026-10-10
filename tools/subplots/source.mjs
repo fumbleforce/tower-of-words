@@ -68,8 +68,9 @@ function routeChanges(on, node, rows) {
       if(r.condition)replacement.if=r.condition; if(r.once)replacement.once=true;
       return replacement;
     });
-    const kept = list.filter(v => v !== node && v?.node !== node);
-    kept.splice(Math.min(matching,kept.length),0,...replacements);
+    let at=0;
+    const kept=list.flatMap(v=>v===node||v?.node===node?(at<replacements.length?[replacements[at++]]:[]):[v]);
+    kept.push(...replacements.slice(at));
     if (!kept.length) delete next[event]; else next[event] = kept.length === 1 ? kept[0] : kept;
   }
   for (const event of new Set(rows.map(r=>r.event))) {
@@ -91,11 +92,20 @@ function validateSteps(steps) {
   });
   check(steps);
 }
+function removeStaleVoice(steps, original) {
+  const voices=new Map();
+  const signature=s=>JSON.stringify([s.say,s.text,s.emo]);
+  const walk=(xs,visit)=>{for(const s of xs||[]){if(!s||typeof s!=='object')continue;visit(s);for(const k of ['then','else'])if(Array.isArray(s[k]))walk(s[k],visit);}};
+  walk(original,s=>{if(s.voice&&s.say)voices.set(s.voice,signature(s));});
+  const next=structuredClone(steps);
+  walk(next,s=>{if(s.voice&&s.say&&voices.has(s.voice)&&voices.get(s.voice)!==signature(s))delete s.voice;});
+  return next;
+}
 function proposed(root, data) {
   const {scene:s,resolved,source} = target(root,data.id);
   if (data.revision !== hash(source)) throw Error('CONFLICT: This story changed outside the editor. Reload it before saving.');
   let raw = data.raw;
-  if (data.steps !== null && data.steps !== undefined) { validateSteps(data.steps); raw = JSON.stringify(data.steps,null,2); }
+  if (data.steps !== null && data.steps !== undefined) { validateSteps(data.steps); raw = JSON.stringify(removeStaleVoice(data.steps,s.steps),null,2); }
   if (typeof raw !== 'string' || raw.length > 500000) throw Error('Missing or oversized scene');
   const expression = parseSource(`const steps = (${raw});`).body[0]?.declarations?.[0]?.init;
   if (!expression || !['ArrayExpression','CallExpression','Identifier','MemberExpression','ConditionalExpression'].includes(expression.type)) throw Error('A scene expression must produce a sequence of steps');

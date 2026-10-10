@@ -21,12 +21,45 @@ try{
    await page.locator('#notes').fill('Check the office staging.');
    await page.locator('#draft').click();await page.getByRole('status').filter({hasText:'Draft saved.'}).waitFor();
    assert.ok(fs.readFileSync(path.join(root,'game3d/story/office.js'),'utf8').includes('ten minutes'));
-   await page.locator('#save').click();await page.getByRole('status').filter({hasText:'Saved to the story'}).waitFor();
+   await page.route('**/api/subplots/save',async route=>{await new Promise(r=>setTimeout(r,350));await route.continue();});
+   await page.locator('#save').click();
+   assert.equal(await page.locator('.workspace').evaluate(el=>el.inert),true);
+   assert.equal(await page.locator('#draft').isDisabled(),true);
+   await page.getByRole('status').filter({hasText:'Saved to the story'}).waitFor();
+   await page.unroute('**/api/subplots/save');
+   await page.locator('[data-view=source]').click();
+   const raw=JSON.parse(await page.locator('#rawSource').inputValue());raw[1].text='Changed in Source';
+   await page.locator('#rawSource').fill(JSON.stringify(raw));
+   await page.locator('[data-view=sequence]').click();
+   assert.equal(await page.locator('[data-field=text]').nth(1).inputValue(),'Changed in Source');
+   await page.locator('[data-field=emo]').nth(1).fill('curious');
+   await page.locator('[data-view=source]').click();
+   assert.equal(JSON.parse(await page.locator('#rawSource').inputValue())[1].text,'Changed in Source');
+   await page.locator('[data-view=sequence]').click();
    assert.ok(fs.readFileSync(path.join(root,'game3d/story/office.js'),'utf8').includes('at nine'));
    await page.locator('#preview').click();await page.locator('#previewDialog').waitFor({state:'visible'});
    assert.match(await page.locator('#previewBody').innerText(),/at nine/);await page.locator('#closePreview').click();
    await page.locator('[data-view=history]').click();assert.ok(await page.locator('.revision').count());
    await page.locator('[data-view=sequence]').click();
+   let generation=null;
+   const presets={character:[{id:'colleague',v:1,data:{name:'Colleague',look:'brown hair',rating_cap:'safe'}}],style:[{id:'paint',v:1,data:{name:'Painted',quality:'detailed illustration'}}],model:[{id:'local',v:1,data:{name:'Local model',file:'fixture.safetensors'}}],framing:[{id:'wide',v:1,data:{name:'Wide',w:1152,h:896}}],camera:[],negative:[]};
+   await page.route('**/api/subplots/image/**',async route=>{
+    const u=new URL(route.request().url());let response={};
+    if(u.pathname.endsWith('/presets'))response=presets;
+    else if(u.pathname.endsWith('/jobs')||u.pathname.endsWith('/history'))response=[];
+    else if(u.pathname.endsWith('/generate')){generation=route.request().postDataJSON();response={run_id:'fixture',jobs:[]};}
+    await route.fulfill({json:response});
+   });
+   await page.locator('[data-inspect=images]').click();await page.locator('#loadPresets').click();
+   await page.locator('[data-char=colleague]').click();
+   await page.locator('[data-compose=pose]').selectOption('Seated at a table');
+   await page.locator('[data-compose=environment]').selectOption('Office interior');
+   await page.locator('[data-compose=angle]').selectOption('High angle');
+   await page.locator('#generate').click();
+   await page.getByRole('status').filter({hasText:'Image job queued'}).waitFor();
+   assert.ok(generation);assert.match(generation.positive,/Seated at a table/);assert.match(generation.positive,/High angle/);assert.match(generation.positive,/Office interior/);assert.equal(generation.compose.subplotId,'public:game3d/story/office.js#welcome');
+   await page.locator('#draft').click();
+
    assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth>globalThis.innerWidth),false);
    assert.deepEqual(errors,[]);
    fs.mkdirSync('/tmp/codex-subplot-shots',{recursive:true});await page.screenshot({path:`/tmp/codex-subplot-shots/${width}.png`,fullPage:true});

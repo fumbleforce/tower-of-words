@@ -1,0 +1,27 @@
+{
+  "title": "Subplot editor",
+  "date": "2026-10-10",
+  "by": "codex",
+  "caption": "Edit dialogue, encounter conditions and image composition from the local hub. These captures use sample scenes.",
+  "result": [
+    "desktop"
+  ],
+  "images": [
+    {
+      "id": "desktop",
+      "image": "game3d/shots/subplot-editor/1366.png",
+      "caption": "Desktop editor with sample dialogue and image controls."
+    },
+    {
+      "id": "phone",
+      "image": "game3d/shots/subplot-editor/390.png",
+      "caption": "The same editor on a phone-sized screen."
+    }
+  ],
+  "links": [
+    {
+      "label": "Open the local editor",
+      "href": "http://127.0.0.1:8771/tools/subplots/web/"
+    }
+  ]
+}
