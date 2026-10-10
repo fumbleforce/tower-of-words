@@ -317,6 +317,249 @@
     "scheduler": "normal",
     "notes": "Passed nothing on the background reference prompt."
    }
+  },
+  {
+   "id": "standing-naturally",
+   "type": "pose",
+   "data": {
+    "name": "Standing naturally",
+    "text": "Standing naturally",
+    "notes": ""
+   }
+  },
+  {
+   "id": "seated",
+   "type": "pose",
+   "data": {
+    "name": "Seated",
+    "text": "Seated",
+    "notes": ""
+   }
+  },
+  {
+   "id": "walking",
+   "type": "pose",
+   "data": {
+    "name": "Walking",
+    "text": "Walking",
+    "notes": ""
+   }
+  },
+  {
+   "id": "leaning-against-a-wall",
+   "type": "pose",
+   "data": {
+    "name": "Leaning against a wall",
+    "text": "Leaning against a wall",
+    "notes": ""
+   }
+  },
+  {
+   "id": "reaching-for-an-object",
+   "type": "pose",
+   "data": {
+    "name": "Reaching for an object",
+    "text": "Reaching for an object",
+    "notes": ""
+   }
+  },
+  {
+   "id": "turning-toward-someone",
+   "type": "pose",
+   "data": {
+    "name": "Turning toward someone",
+    "text": "Turning toward someone",
+    "notes": ""
+   }
+  },
+  {
+   "id": "looking-over-a-shoulder",
+   "type": "pose",
+   "data": {
+    "name": "Looking over a shoulder",
+    "text": "Looking over a shoulder",
+    "notes": ""
+   }
+  },
+  {
+   "id": "crouching",
+   "type": "pose",
+   "data": {
+    "name": "Crouching",
+    "text": "Crouching",
+    "notes": ""
+   }
+  },
+  {
+   "id": "lying-down",
+   "type": "pose",
+   "data": {
+    "name": "Lying down",
+    "text": "Lying down",
+    "notes": ""
+   }
+  },
+  {
+   "id": "office-reception",
+   "type": "location",
+   "data": {
+    "name": "Office reception",
+    "text": "Office reception",
+    "notes": ""
+   }
+  },
+  {
+   "id": "office-interior",
+   "type": "location",
+   "data": {
+    "name": "Office interior",
+    "text": "Office interior",
+    "notes": ""
+   }
+  },
+  {
+   "id": "station-platform",
+   "type": "location",
+   "data": {
+    "name": "Station platform",
+    "text": "Station platform",
+    "notes": ""
+   }
+  },
+  {
+   "id": "street",
+   "type": "location",
+   "data": {
+    "name": "Street",
+    "text": "Street",
+    "notes": ""
+   }
+  },
+  {
+   "id": "caf",
+   "type": "location",
+   "data": {
+    "name": "Café",
+    "text": "Café",
+    "notes": ""
+   }
+  },
+  {
+   "id": "apartment",
+   "type": "location",
+   "data": {
+    "name": "Apartment",
+    "text": "Apartment",
+    "notes": ""
+   }
+  },
+  {
+   "id": "garden",
+   "type": "location",
+   "data": {
+    "name": "Garden",
+    "text": "Garden",
+    "notes": ""
+   }
+  },
+  {
+   "id": "swimming-pool",
+   "type": "location",
+   "data": {
+    "name": "Swimming pool",
+    "text": "Swimming pool",
+    "notes": ""
+   }
+  },
+  {
+   "id": "gym",
+   "type": "location",
+   "data": {
+    "name": "Gym",
+    "text": "Gym",
+    "notes": ""
+   }
+  },
+  {
+   "id": "bathhouse",
+   "type": "location",
+   "data": {
+    "name": "Bathhouse",
+    "text": "Bathhouse",
+    "notes": ""
+   }
+  },
+  {
+   "id": "soft-daylight",
+   "type": "light",
+   "data": {
+    "name": "Soft daylight",
+    "text": "Soft daylight",
+    "notes": ""
+   }
+  },
+  {
+   "id": "morning-light",
+   "type": "light",
+   "data": {
+    "name": "Morning light",
+    "text": "Morning light",
+    "notes": ""
+   }
+  },
+  {
+   "id": "overcast-daylight",
+   "type": "light",
+   "data": {
+    "name": "Overcast daylight",
+    "text": "Overcast daylight",
+    "notes": ""
+   }
+  },
+  {
+   "id": "warm-indoor-light",
+   "type": "light",
+   "data": {
+    "name": "Warm indoor light",
+    "text": "Warm indoor light",
+    "notes": ""
+   }
+  },
+  {
+   "id": "evening-light",
+   "type": "light",
+   "data": {
+    "name": "Evening light",
+    "text": "Evening light",
+    "notes": ""
+   }
+  },
+  {
+   "id": "night-lighting",
+   "type": "light",
+   "data": {
+    "name": "Night lighting",
+    "text": "Night lighting",
+    "notes": ""
+   }
+  },
+  {
+   "id": "eye-level",
+   "type": "camera",
+   "data": {
+    "name": "Eye level",
+    "prompt": "eye level shot",
+    "notes": ""
+   }
+  },
+  {
+   "id": "overhead",
+   "type": "camera",
+   "data": {
+    "name": "Overhead",
+    "prompt": "overhead shot, from directly above",
+    "notes": ""
+   }
   }
  ]
 }

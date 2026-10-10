@@ -49,6 +49,12 @@ export function guessComposition(job, presets) {
   if (framing) { c.framing = framing.id; take(tokens(framing.data.prompt)); found.push('picture shape'); }
   if (job.w && job.h && !(framing && framing.data.w === job.w && framing.data.h === job.h)) Object.assign(c, {width: job.w, height: job.h});
 
+  // pose, setting and light blocks whose words are all in the prompt
+  for (const [field, kind, label] of [['pose', 'pose', 'pose'], ['environment', 'location', 'setting'], ['light', 'light', 'light']]) {
+    const hit = list(kind).find(p => p.data.text && has(p.data.text));
+    if (hit) { c[field] = hit.id; take(tokens(hit.data.text)); found.push(label); }
+  }
+
   // the rest of the positive prompt is the scene's free text
   c.scene = positive.filter(t => !used.has(key(t))).join(', ');
 

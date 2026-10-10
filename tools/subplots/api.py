@@ -149,6 +149,7 @@ def scene_runs(scene_id, runs, found):
             out.append(run)
     return out
 
+IMAGE_SERVICE = os.environ.get('IMAGEGEN_URL', 'http://127.0.0.1:8772')  # the image gen dashboard (tools/imagegen)
 HISTORY_CACHE = {}
 REQUEST = threading.local()  # .private: this request came in private mode (the image service then shows private renders)
 
@@ -164,7 +165,7 @@ def image_history():
         if rows is not None and time.time() - at < 30:
             return rows
     try:
-        req = urllib.request.Request('http://127.0.0.1:8772/api/history?limit=1000000&who=all', headers=image_headers())
+        req = urllib.request.Request(IMAGE_SERVICE + '/api/history?limit=1000000&who=all', headers=image_headers())
         with urllib.request.urlopen(req, timeout=30) as r:
             rows = json.loads(r.read(200 * 1024 * 1024))
     except (urllib.error.URLError, OSError):
@@ -353,18 +354,23 @@ def dispatch(action, body):
         (slot(scene_id) / 'draft.json').unlink(missing_ok=True)
         return dispatch('read', {'id': scene_id})
 
+# What the composer may ask the image service (tools/imagegen/server.py): its own reads, and the writes the original
+# dashboard makes (generate, ratings, delete and restore, trash, blocks with their versions).
+_ID = r'[A-Za-z0-9_.-]+'
+IMAGE_READS = re.compile(r'/api/(presets|jobs|state|history|portraits|mode|loras|controls|trash|models/files|preset/' + _ID + '/' + _ID
+                         + '|tuning/' + _ID + '/' + _ID + r')|/(thumb|out|priv/portraits|repo|trashthumb|agentsrc)/.+')
+IMAGE_WRITES = re.compile(r'/api/(generate|cancel|trash/empty|render/' + _ID + '(/delete|/restore)?|run/' + _ID + '/delete|preset/'
+                          + _ID + '/' + _ID + '(/create|/restore|/note|/archive|/private)?)')
+
 def image_proxy(handler, suffix, body=None):
     parsed = urllib.parse.urlsplit(suffix)
-    allowed = {'/api/presets', '/api/jobs', '/api/state', '/api/generate', '/api/history', '/api/portraits'}
-    if parsed.path not in allowed and not (body is None and parsed.path.startswith(('/thumb/', '/out/', '/priv/portraits/', '/repo/'))):
-        raise ValueError('Unsupported image service operation')
-    if body is not None and parsed.path != '/api/generate':
-        raise ValueError('Unsupported image service write')
+    if not IMAGE_READS.fullmatch(parsed.path) if body is None else not IMAGE_WRITES.fullmatch(parsed.path):
+        raise ValueError('Unsupported image service ' + ('operation' if body is None else 'write'))
     decoded_path = urllib.parse.unquote(parsed.path)
     if '..' in decoded_path or '\\' in decoded_path or '%' in decoded_path or posixpath.normpath(decoded_path).startswith('/repo/island/private'):
         raise ValueError('Invalid image path')
     data = None if body is None else json.dumps(body).encode()
-    req = urllib.request.Request('http://127.0.0.1:8772' + suffix, data=data,
+    req = urllib.request.Request(IMAGE_SERVICE + suffix, data=data,
                                  headers={'Content-Type': 'application/json', **image_headers()})
     try:
         with urllib.request.urlopen(req, timeout=15) as response:

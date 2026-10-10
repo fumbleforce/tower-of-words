@@ -25,7 +25,7 @@ EXAMPLE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'example-conf
 OUTPUTS = os.path.join(ROOT, 'outputs')
 THUMBS = os.path.join(ROOT, 'thumbs')
 LOG = os.path.join(ROOT, 'log.jsonl')
-TYPES = ('character', 'outfit', 'style', 'negative', 'framing', 'camera', 'location', 'pose', 'scene', 'model', 'snippet')
+TYPES = ('character', 'outfit', 'style', 'negative', 'framing', 'camera', 'location', 'pose', 'light', 'scene', 'model')  # web/blocks.js KINDS
 
 # Presets and log lines saved before the 2026-09-28 cleanup point at the old places: approved portraits are now copied
 # to art/approved/<id>/, and proto2/, side/, mvp/, game/ and island/ (except island/private) moved to legacy/.
