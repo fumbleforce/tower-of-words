@@ -16480,7 +16480,7 @@
   "game3d/audio/mori-ohayo.mp3": {"size": 15356, "sha256": "cf13f4fe4070ea16e30290770f2efd206dc5de5015b4d350b21a7c173f229e98", "type": "audio/mpeg"},
   "game3d/audio/music/calm.mp3": {"size": 898604, "sha256": "700432649f21292cdbcb97ab02a5b9e227cc6ae80afd44614b27594ca4641dc4", "type": "audio/mpeg"},
   "game3d/audio/music/lively.mp3": {"size": 709964, "sha256": "46f0491bb079b20ce17d11c0f015e8c79a99e8d9841616cbd208c2895d730792", "type": "audio/mpeg"},
-  "game3d/audio/music/night.mp3": {"size": 687596, "sha256": "77bb7fb69100c22198771f18402e68c3b984477ddd7e1242530b0cc019fc65ad", "type": "audio/mpeg"},
+  "game3d/audio/music/night.mp3": {"size": 3981932, "sha256": "603505d62f9ba6dd0485342a9d5a91c50dbc285c66458000175a8ea0742556f4", "type": "audio/mpeg"},
   "game3d/audio/music/office.mp3": {"size": 855212, "sha256": "bbc3d5bb844848566eef0b6a1453a521a460506e0dc88e5784af61b68ba79b4b", "type": "audio/mpeg"},
   "game3d/audio/music/opening.mp3": {"size": 1685371, "sha256": "530f6f85d46e604ee528b0489abb14fbf240c8046b96d0d7d631308dde109f76", "type": "audio/mpeg"},
   "game3d/audio/oh-105shjd.mp3": {"size": 21548, "sha256": "62b1a99a26db925eb10a139d3189ae6558f6c70bd79dff1c7774467d02703df7", "type": "audio/mpeg"},
