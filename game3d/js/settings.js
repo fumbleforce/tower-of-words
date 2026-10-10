@@ -4,6 +4,7 @@
 //   window.__settings is the same object, for modules that don't import this one.
 //   A 'amakawa:settings' event fires on window after every change (detail: { key, value, settings }).
 
+import './full.js';
 import { flags } from './narrative/state.js';
 import { storage } from './storage.js';
 
@@ -48,7 +49,8 @@ export const DEFAULTS = {
   masteryUses: 3, // how many times a word is typed or said before Say sends it with one click
   skipChecks: false, // a word's typing prompt is a line showing the word, passed without typing (narrative/hooks/progression.js)
   perfOverlay: false, // the performance numbers overlay (F3; js/perf/metrics.js)
-  privateMode: !phoneDefault, // adult scenes. Off on a phone until turned on (GUIDE, Rewards and privacy).
+  // full builds only (js/full.js): adult scenes. Off on a phone until turned on (GUIDE, Rewards and privacy).
+  ...(__FULL__ ? { privateMode: !phoneDefault } : {}),
 };
 // characters per second for each text speed (0 = all at once)
 export const CPS = { slow: 28, normal: 55, fast: 110, instant: 0 };
@@ -78,7 +80,7 @@ function load() {
 }
 export const settings = load();
 window.__settings = settings;
-flags.private_mode = !!settings.privateMode;
+if (__FULL__) flags.private_mode = !!settings.privateMode;
 flags.skill_checks = !settings.skipChecks; // the save keeps both choices of the new-game screen (ui/new-game.js)
 
 const subs = new Set();
@@ -89,7 +91,7 @@ export function onSettings(fn) {
 export function setSetting(key, value) {
   if (!(key in DEFAULTS) || settings[key] === value) return;
   settings[key] = value;
-  if (key === 'privateMode') flags.private_mode = !!value;
+  if (__FULL__ && key === 'privateMode') flags.private_mode = !!value;
   if (key === 'skipChecks') flags.skill_checks = !value;
   storage.set(KEY, settings);
   apply();
@@ -102,10 +104,10 @@ export function setSetting(key, value) {
   }
   window.dispatchEvent(new CustomEvent('amakawa:settings', { detail: { key, value, settings } }));
 }
-// private mode on for this page only, not saved (the local scene viewer, plugins.js installViewer)
-export function forcePrivateMode() {
-  settings.privateMode = true;
-  flags.private_mode = true;
+// a setting changed for this page only, not saved and not announced (the local scene viewer, plugins.js installViewer)
+export function forceSetting(key, value) {
+  settings[key] = value;
+  if (__FULL__ && key === 'privateMode') flags.private_mode = !!value;
 }
 export function resetSettings() {
   for (const k of Object.keys(DEFAULTS)) setSetting(k, DEFAULTS[k]);

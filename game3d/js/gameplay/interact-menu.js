@@ -15,7 +15,7 @@
 // None of them: Interact does what it always did. One: it is done straight away, no menu. Two or more: a menu in the
 // dialogue box with Leave at the end. The rules: docs/game/controls-and-ui.md, Interact and its options.
 import { flags, cond } from '../narrative/state.js';
-import { choiceIcon, privateOn } from '../ui/pin-tip.js';
+import { choiceIcon, optionalOn } from '../ui/pin-tip.js';
 
 // --- the API for other code -------------------------------------------------------------------------------------
 // addInteractOptions(provider) registers a function (item, game) => option | option[] | null, asked each time Interact
@@ -47,7 +47,7 @@ export function extraOptions(game, item) {
       console.error(e);
       continue;
     }
-    for (const o of [r].flat()) if (o && o.label && (!o.icon || privateOn())) out.push(o);
+    for (const o of [r].flat()) if (o && o.label && (!o.icon || optionalOn())) out.push(o);
   }
   return out.sort((a, b) => (a.order || 0) - (b.order || 0));
 }

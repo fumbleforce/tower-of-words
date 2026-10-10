@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { markerGoal } from './ui/marker-goal.js';
 import { DECAL } from './look/decal.js';
 import { iconName, pinGlyph } from './gameplay/pin-kinds.js';
-import { createPinTip, tipOf, privateOn, PIN_GLYPHS, HEART } from './ui/pin-tip.js';
+import { createPinTip, tipOf, optionalOn, PIN_GLYPHS, HEART } from './ui/pin-tip.js';
 import { thingBox, elBox } from './ui/screen-box.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
@@ -207,7 +207,7 @@ const NEAR_PIN = 2.5; // m from Eric to the spot in front of it
 // ''), and the pin takes the class icon-<name> (css/marks.css), in private mode only. Only the name is known here;
 // local plugins supply it.
 function setIcon(m) {
-  const name = privateOn() ? iconName(m) : '';
+  const name = optionalOn() ? iconName(m) : '';
   if (name === m._ic) return;
   if (m._ic) m.el.classList.remove('icon-' + m._ic);
   if (name) m.el.classList.add('icon-' + name);

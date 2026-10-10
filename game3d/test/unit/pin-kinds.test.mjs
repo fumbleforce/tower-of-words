@@ -10,7 +10,7 @@ import {
   travelOf,
   pinGlyph,
   pinTip,
-  isPrivatePin,
+  isOptionalPin,
 } from '../../js/gameplay/pin-kinds.js';
 const hooks = registerHooks({
   resolve(specifier, context, next) {
@@ -132,7 +132,7 @@ test('the tooltip says the verb and what it is', () => {
 
 test('a private pin says nothing private while private mode is off', () => {
   const heart = { id: 'x', label: 'A private label', kind: 'thing small', verb: 'Look', icon: 'heart-soft' };
-  assert.ok(isPrivatePin(heart));
+  assert.ok(isOptionalPin(heart));
   assert.deepEqual(pinTip(heart, { privateMode: false }), { act: 'Interact', verb: 'Look', name: '', text: 'Interact' });
   assert.deepEqual(pinTip({ ...heart, icon: () => 'heart-hard' }, { privateMode: false }).text, 'Interact');
   assert.deepEqual(pinTip({ ...heart, icon: undefined, private: true }, { privateMode: false }).text, 'Interact');
@@ -142,5 +142,5 @@ test('a private pin says nothing private while private mode is off', () => {
   // private mode on: the plugin's own label
   assert.equal(pinTip(heart, { privateMode: true }).text, 'Interact: A private label');
   // a plugin's icon function that gives nothing is a public pin
-  assert.equal(isPrivatePin({ ...heart, icon: () => '' }), false);
+  assert.equal(isOptionalPin({ ...heart, icon: () => '' }), false);
 });

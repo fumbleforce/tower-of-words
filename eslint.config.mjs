@@ -24,6 +24,8 @@ export default [
     'bible/**/*.js', 'tools/assets/*.js', 'tools/creator/**/*.js', 'tools/imagegen/web/*.js',
     'tools/characters/parts/viewer.js'],
     languageOptions: { globals: browser } },
+  // the build flavor flag, set by game3d/js/full.js (tools/release/flavor.mjs defines it false in the vanilla build)
+  { files: ['game3d/js/**/*.{js,mjs}', 'game3d/story/**/*.{js,mjs}'], languageOptions: { globals: { __FULL__: 'readonly' } } },
   { files: ['**/*.mjs'], ignores: ['game3d/js/**', 'game3d/story/**', 'game3d/test/support/behavior-trace.mjs'],
     languageOptions: { globals: node } },
   // These two pre-existing tools live beneath js/ until the tooling move.

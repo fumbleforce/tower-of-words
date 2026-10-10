@@ -14,7 +14,7 @@ await withBrowserJob('day5-staging', async browser => {
     ['office', 'afternoon', 'day5Office', ['soup', 'tea']],
     ['plaza', 'lunch', 'day5Setup', ['aoiLunch']],
     ['dorm_commons', 'lunch', 'day5Commons', ['paper']],
-    ['office', 'evening', 'teamDrinks', ['gather', 'aside', 'private', 'phoneAway', 'clear', 'printLesson', 'deliveryPose', 'ordinaryServe', 'free']],
+    ['office', 'evening', 'teamDrinks', ['gather', 'aside', 'closedDoor', 'phoneAway', 'clear', 'printLesson', 'deliveryPose', 'ordinaryServe', 'free']],
     ['dorm_commons', 'evening', 'day5Commons', ['seat', 'sit', 'sketch']],
   ]) {
     if (process.env.ONLY && !process.env.ONLY.split(',').includes(place + ':' + period)) continue;

@@ -4,6 +4,7 @@
 //   const view = settingsView({ openLayer, closeLayer, trap }); view.open(); view.captureKey(e) in the key handler
 // Keys: Tab moves through everything, Up and Down go from row to row (and tab to tab on the rail), Left and Right
 // change the focused choice, slider or switch, PageUp and PageDown change section, Esc closes (menu.js).
+import '../full.js';
 import { settings, setSetting, onSettings, qualityTier } from '../settings.js';
 import { sfx, keyLabel } from '../ui.js';
 import { browserSpeechAvailable, prepareVoice } from '../speech.js';
@@ -133,11 +134,16 @@ const SECTIONS = [
       ),
     ],
   ],
-  [
-    'private',
-    'Private',
-    [sw('privateMode', 'Private mode', 'Adult scenes on this device. Off on a phone until you turn this on.')],
-  ],
+  // full builds only (js/full.js)
+  ...(__FULL__
+    ? [
+        [
+          'private',
+          'Private',
+          [sw('privateMode', 'Private mode', 'Adult scenes on this device. Off on a phone until you turn this on.')],
+        ],
+      ]
+    : []),
 ];
 const RESERVED = /^(Escape|Tab|Enter|Space|Key[WASDE]|Arrow\w+|Digit\d|Shift\w*|Control\w*|Alt\w*|Meta\w*)$/;
 const X = '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
