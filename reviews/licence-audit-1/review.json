@@ -2,7 +2,7 @@
  "title": "Licence audit for the desktop release",
  "date": "2026-10-10",
  "by": "Claude (licence-audit agent)",
- "status": "open",
+ "status": "decided",
  "context": [
   "The full audit is notes/licenses.md (#424). Code, fonts, RDBT pictures, Qwen3-TTS voices and Stable Audio ambience are fine to ship with credits. Every voice in the game is synthetic; no real person's recording is used.",
   "Two things block selling the game, though a free release is fine for them: the opening theme and the night loop are YuE2 music (the model is CC BY-NC 4.0, and whether that reaches the music is unsettled), and the five Photos collectibles and some scenery come from One Obsession, whose Civitai page doesn't allow selling images.",
@@ -29,5 +29,11 @@
   }
  ],
  "ask": "Pick free or paid, plus any fixes to start. In the comment: was the Meshy account on a paid plan when the 3D models were made (free-plan models need a Meshy credit line)?",
- "issue": 424
+ "issue": 424,
+ "decided": [
+  "free",
+  "paid"
+ ],
+ "decision": "free now; paid later: \"for later, list out what needs remaking\"; \"explain which assets are\"",
+ "decided_at": "2026-10-10T15:27:50+0200"
 }
