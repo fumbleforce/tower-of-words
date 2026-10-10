@@ -40,5 +40,8 @@ export function withConversations(story) {
 }
 export function installConversations(game) {
   installSenderHook(game, flags);
-  game.topicFor = (who) => topicFor(who, conversationMemory, known, game.sim?.met.has(who));
+  game.topicFor = (who) =>
+    who === 'mio' && game.place?.name === 'train'
+      ? null
+      : topicFor(who, conversationMemory, known, game.sim?.met.has(who));
 }
