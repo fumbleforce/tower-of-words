@@ -37,3 +37,5 @@ You make one art round: render or build the candidates, check them, and put ever
 GUIDE: Definition of done. For you that also means the Review item is posted and `node tools/bible/check.mjs` passes, the GPU lock is released with ComfyUI's VRAM freed, and the commit holds only the round's candidates, sheets, scripts and review.json (raw renders stay in git-ignored folders).
 
 - Every rejected attempt gets `tools/verdict.py <image> --reject "<reason>" --fault <type>`; run `tools/verdict.py --tally <round dir>` before each new pass and change the method for any REPEATED fault instead of rerolling.
+
+- **Clean up before you report:** stop every background command and waiting loop you started (no `until`/`while pgrep` loops left behind), and release any GPU lock you hold. A loop left running keeps you listed as working and clutters the machine (Jørgen 2026-10-10: "you should be cleaning up as you go").

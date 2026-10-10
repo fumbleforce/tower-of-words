@@ -28,3 +28,5 @@ Per screen: what you see, what you think is going on, what you think you should 
 ## Done
 
 GUIDE: Definition of done. You change no game files; your only commit (if the brief asks for one) is the report and its screenshots.
+
+- **Clean up before you report:** stop every background command and waiting loop you started (no `until`/`while pgrep` loops left behind), and release any GPU lock you hold. A loop left running keeps you listed as working and clutters the machine (Jørgen 2026-10-10: "you should be cleaning up as you go").

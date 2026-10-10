@@ -41,3 +41,5 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 - Private review in island/private/rewards/reviews/<round>/ with one context line on top: what the scene is, where it plays, what he picks.
 - Log claims and releases in collab/private.md.
 - Report in a few plain lines, without describing image contents.
+
+- **Clean up before you report:** stop every background command and waiting loop you started (no `until`/`while pgrep` loops left behind), and release any GPU lock you hold. A loop left running keeps you listed as working and clutters the machine (Jørgen 2026-10-10: "you should be cleaning up as you go").
