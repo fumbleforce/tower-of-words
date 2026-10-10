@@ -161,10 +161,15 @@ export function createRunner({ main, mainWt, paths, logBase }) {
     if (setup) run(setup, ['setup', cand], cand);
     let lock;
     try { lock = JSON.parse(fs.readFileSync(path.join(cand, 'tools/assets/assets.lock.json'), 'utf8')).files; } catch { return; }
+    // A real file here (not one of setup's links, which it keeps current) is a copy left by an earlier batch:
+    // if its bytes no longer match the lock it is replaced, an unchanged one is left alone.
+    let earlier = [];
+    try { earlier = JSON.parse(fs.readFileSync(copiesFile, 'utf8')); } catch { /* none */ }
     const copies = [];
     for (const [rel, entry] of Object.entries(lock)) {
       const target = path.join(cand, rel);
-      if (fs.existsSync(target) || rel.split('/').some(p => ['..', 'private', '.git'].includes(p))) continue;
+      if (fs.existsSync(target) && !(!fs.lstatSync(target).isSymbolicLink() && sha256(target) !== entry.sha256)) continue;
+      if (rel.split('/').some(p => ['..', 'private', '.git'].includes(p))) continue;
       for (const e of chain) {
         let real;
         try { real = fs.realpathSync(path.join(e.wt, rel)); } catch { continue; }
@@ -177,7 +182,7 @@ export function createRunner({ main, mainWt, paths, logBase }) {
         break;
       }
     }
-    if (copies.length) writeJson(copiesFile, copies);
+    if (copies.length) writeJson(copiesFile, [...new Set([...earlier, ...copies])]);
   };
 
   // ------------------------------------------------------------ the checks
