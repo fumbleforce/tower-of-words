@@ -4,6 +4,7 @@ const pop = () => document.getElementById('pop');
 
 export function openPop(anchor, fill) {
   const el = pop();
+  el.className = 'pop';
   el.replaceChildren();
   fill(el);
   el.hidden = false;

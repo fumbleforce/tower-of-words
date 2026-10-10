@@ -5,6 +5,7 @@ import { esc, api } from './common.js';
 import { S, load, markSaved, isDirty, docs, dirtyDocs, addLinked, refreshRevision, stepOf, docFor, undo, redo, select, on, scheduleDraft, cancelDraft, edit } from './store.js';
 import { renderTimeline, markSelection, installDrag, nudge, insert, remove, currentPath } from './timeline.js';
 import { choiceTargets } from './paths.js';
+import { installComments, loadComments } from './comments.js';
 import { renderBeatTab, renderSceneTab } from './inspector.js';
 import { renderPictureTab } from './pictures.js';
 import { openPreview, installPreview } from './preview.js';
@@ -14,7 +15,7 @@ import { installImages } from './images.js';
 import { kindOf } from './model.js';
 
 const $ = id => document.getElementById(id);
-let filter = 'all', tab = 'beat', saving = false, openAreas = new Set(), shownScene = null;
+let filter = 'all', tab = 'beat', saving = false, openAreas = new Set(), shownScene = null, statuses = {};
 
 function status(text, kind = '') {
   $('status').textContent = text;
@@ -37,7 +38,7 @@ function paintList() {
     const priv = area.startsWith('P|'), name = area.slice(2);
     const open = q || openAreas.has(area) || list.some(r => r.id === current);
     return `<section class="area${open ? ' open' : ''}" data-area="${esc(area)}"><button class="area-head"><span class="chev">›</span><span class="area-name">${esc(name)}</span>${priv ? '<span class="tag private mini">Private</span>' : ''}<span class="count">${list.length}</span></button>
-      ${open ? `<div class="area-items">${list.map(r => `<button class="scene-row${r.id === current ? ' current' : ''}" data-id="${esc(r.id)}"><span class="t">${esc(titleOf(r))}</span><span class="n">${r.count ?? ''}</span></button>`).join('')}</div>` : ''}</section>`;
+      ${open ? `<div class="area-items">${list.map(r => `<button class="scene-row${r.id === current ? ' current' : ''}" data-id="${esc(r.id)}"><span class="t">${esc(titleOf(r))}</span>${statusMarks(r.id)}<span class="n">${r.count ?? ''}</span></button>`).join('')}</div>` : ''}</section>`;
   }).join('');
   $('sceneList').innerHTML = html || '<p class="quiet pad">No scene matches.</p>';
   for (const b of $('sceneList').querySelectorAll('.area-head')) b.onclick = () => {
@@ -53,6 +54,21 @@ function paintList() {
   }
 }
 
+// ---------- where each scene stands (api.py scene_status) ----------
+// Jørgen, 2026-10-10: "I also want the status indicator on every scene in the scene editor". A dot for where the scene
+// stands (live in game, lines not voiced, pictures missing, waiting for a gate), a draft mark and the open comments.
+function statusMarks(id) {
+  const st = statuses[id];
+  if (!st) return '';
+  const tip = [st.label, st.why && `(${st.why})`, st.draft && 'unsaved draft', st.comments && `${st.comments} open comment${st.comments > 1 ? 's' : ''}`].filter(Boolean).join(' · ');
+  return `<span class="st" title="${esc(tip)}">${st.comments ? `<span class="st-c">${st.comments}</span>` : ''}${st.draft ? '<span class="st-d">draft</span>' : ''}${st.stage ? `<span class="st-dot st-${esc(st.stage)}"></span>` : ''}</span>`;
+}
+async function loadStatus() {
+  try { statuses = (await api('status')).status || {}; } catch { statuses = {}; }
+  paintList();
+  paintBar();
+}
+
 // ---------- open, save, drafts ----------
 async function open(id, { skipCheck = false } = {}) {
   if (!skipCheck && isDirty() && !confirm('This scene has changes that aren’t saved. Leave it anyway? A draft is kept.')) return;
@@ -65,6 +81,7 @@ async function open(id, { skipCheck = false } = {}) {
     status('Saved', 'ok');
     hideBanner();
     await loadLinked();
+    loadComments().catch(() => {});
     const drafts = [scene, ...Object.values(S.linked).map(d => d.scene)].filter(s => s.draft?.steps);
     if (drafts.length && S.scene === scene) offerDrafts(drafts);
   } catch (e) {
@@ -157,6 +174,7 @@ async function save() {
       warnings.push(...(saved.warnings || []));
     }
     status('Saved' + (warnings.length ? '. ' + warnings.join(' ') : ''), 'ok');
+    loadStatus();
   } catch (e) {
     status(e.message.startsWith('CONFLICT') ? 'Someone changed this scene outside the editor. Reload it to see their version (your edits stay as a draft).' : 'Not saved: ' + e.message, 'error');
     saveDraft();
@@ -177,6 +195,8 @@ function paintBar() {
     $('docAudience').textContent = s.audience === 'private' ? 'Private · Adult' : 'Public game';
     $('docAudience').className = 'tag ' + s.audience;
     $('docWhere').textContent = s.where || '';
+    const st = statuses[s.id];
+    $('docStatus').innerHTML = st ? `<span class="st-dot st-${esc(st.stage)}"></span>${esc(st.label)}${st.why ? ` <span class="quiet">(${esc(st.why)})</span>` : ''}${st.comments ? ` · ${st.comments} open comment${st.comments > 1 ? 's' : ''}` : ''}` : '';
     document.title = `${titleOf(row)} · Scene editor`;
   }
   const dirty = isDirty();
@@ -288,6 +308,7 @@ window.addEventListener('beforeunload', e => { if (isDirty()) { saveDraft(); e.p
 // ---------- start ----------
 installDrag();
 installPreview();
+installComments(() => { renderTimeline(); paintBar(); loadStatus(); });
 try {
   S.authoring = { ...S.authoring, ...(await api('authoring')) };
 } catch {
@@ -297,6 +318,7 @@ setConditionLabels(S.authoring.variables);
 try {
   const data = await api('catalog?scope=all');
   S.catalog = data.scenes || [];
+  loadStatus();
   if (!data.local) status('Private scenes are not set up on this computer. Public game scenes are all here.', 'dirty');
 } catch (e) {
   status(e.message, 'error');

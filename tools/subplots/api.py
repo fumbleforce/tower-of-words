@@ -165,9 +165,55 @@ def image_history():
         HISTORY_CACHE['all'] = (time.time(), rows)
     return rows
 
+def comments(body):
+    """Comments on beats, kept by comments.mjs (its header says where). Private scenes' stay in island/private/."""
+    r = subprocess.run(['node', str(HERE / 'comments.mjs'), '--json'], input=json.dumps(body), text=True, capture_output=True, timeout=20,
+                       cwd=ROOT, env={**os.environ, 'SUBPLOTS_ROOT': str(ROOT), 'SUBPLOTS_STATE': str(state_dir())})
+    data = json.loads(r.stdout or '{}')
+    if r.returncode or data.get('error'):
+        raise ValueError(data.get('error', 'The comments could not be read'))
+    return data
+
+STATUS_CACHE = {}
+def scene_status():
+    """Where every scene stands, for the scene list: a private scene's pictures, voice and normal-play entry (the local
+    provider's status, from live.json, the voice manifests and the entry check), a public scene is part of the game; for
+    both, an unsaved draft and the open comments. Cached for half a minute, dropped on save."""
+    with LOCK:
+        at, value = STATUS_CACHE.get('all', (0, None))
+        if value is not None and time.time() - at < 30:
+            return value
+    out = {}
+    try:
+        out.update(local_provider({'action': 'status'}).get('status', {}))
+    except (ValueError, OSError, subprocess.SubprocessError):
+        pass
+    for s in source({'action': 'catalog'})['scenes']:
+        out[s['id']] = {'stage': 'game', 'label': 'Part of the public game', 'draft': (slot(s['id']) / 'draft.json').is_file()}
+    for c in comments({'action': 'list'}).get('comments', []):
+        if c.get('status') == 'open':
+            row = out.setdefault(c['scene'], {'stage': '', 'label': ''})
+            row['comments'] = row.get('comments', 0) + 1
+    value = {'status': out}
+    with LOCK:
+        STATUS_CACHE['all'] = (time.time(), value)
+    return value
+
 def dispatch(action, body):
+    if action in ('draft', 'save'):
+        STATUS_CACHE.clear()
     if action == 'authoring':
         return authoring_catalog()
+    if action == 'status':
+        return scene_status()
+    if action == 'comments':
+        return comments({'action': 'list', 'ids': [x for x in body.get('ids', '').split(',') if x]})
+    if action == 'comment':
+        if body.get('action') not in ('add', 'reply', 'done', 'reopen'):
+            raise ValueError('Unknown comment request')
+        with LOCK:
+            STATUS_CACHE.clear()
+            return comments({**body, 'by': 'jorgen'})
     if action == 'pictures':
         scene_id = body.get('id', '')
         found = local_provider({'action': 'pictures', 'id': scene_id}) if scene_id and not scene_id.startswith('public:') else {}
@@ -300,7 +346,7 @@ def handle(handler):
             suffix = '/' + action[6:] + ('?' + url.query if url.query else '')
             image_proxy(handler, suffix, body if handler.command == 'POST' else None)
         else:
-            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'pictures')):
+            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'pictures', 'comments', 'status')):
                 raise ValueError('Unsupported request method')
             handler._json(200, dispatch(action, body))
     except (ValueError, OSError, subprocess.SubprocessError) as e:

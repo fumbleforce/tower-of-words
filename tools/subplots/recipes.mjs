@@ -232,6 +232,8 @@ export function recipe(source,config,request){
     const sequences=nodes?.properties||['steps','leave'].map(k=>property(scene,k)).filter(Boolean);
     for(const p of sequences){const node=name(p);if(!node)continue;rows.push({scene,sequence:p,id:`local:${config.key}:${id}:${node}`,sceneId:id,node});}
   }
+  // the picture files each part uses, for the scene list's status (local.py status)
+  if(request.action==='status'){const values=recipeValues(source);return {scenes:rows.map(r=>{let files=[];try{files=imageSlots(source,r.sequence.value,values).map(i=>i.file).filter(Boolean);}catch{/* a part whose pictures can't be read shows no picture status */}return {id:r.id,scene:r.sceneId,files};}),errors:[]};}
   if(request.action==='catalog')return {scenes:rows.map(r=>({id:r.id,provider:'local',title:`${r.sceneId.replaceAll('_',' ')} · ${r.node}`,node:r.node,group:config.label,where:where(config),scene:r.sceneId,count:r.sequence.value.elements?.length??null})),errors:[]};
   const row=rows.find(r=>r.id===request.id);if(!row)throw Error('Scene not found');
   const {scene,sequence}=row;
@@ -282,4 +284,4 @@ export function recipe(source,config,request){
   }
   throw Error('Unsupported recipe operation');
 }
-if(process.argv[1]===new URL(import.meta.url).pathname){try{const chunks=[];for await(const c of process.stdin)chunks.push(c);const input=JSON.parse(Buffer.concat(chunks));const config=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));const configs=config.sources;const selected=input.action==='catalog'?configs:configs.filter(c=>input.id.startsWith(`local:${c.key}:`));const data=selected.map(c=>recipe(fs.readFileSync(c.file,'utf8'),c,input));console.log(JSON.stringify(input.action==='catalog'?{scenes:data.flatMap(d=>d.scenes),errors:[]}:data[0]||{error:'Unknown scene'}));}catch(e){console.log(JSON.stringify({error:e.message}));process.exitCode=1;}}
+if(process.argv[1]===new URL(import.meta.url).pathname){try{const chunks=[];for await(const c of process.stdin)chunks.push(c);const input=JSON.parse(Buffer.concat(chunks));const config=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));const configs=config.sources;const all=input.action==='catalog'||input.action==='status';const selected=all?configs:configs.filter(c=>input.id.startsWith(`local:${c.key}:`));const data=selected.map(c=>recipe(fs.readFileSync(c.file,'utf8'),c,input));console.log(JSON.stringify(all?{scenes:data.flatMap(d=>d.scenes),errors:[]}:data[0]||{error:'Unknown scene'}));}catch(e){console.log(JSON.stringify({error:e.message}));process.exitCode=1;}}

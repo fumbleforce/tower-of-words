@@ -55,6 +55,62 @@ def picture_rounds(data, root, rewards):
                     rounds.add(str((rewards / parts[0] / parts[1]).relative_to(root)))
     return sorted(rounds)
 
+def scene_status(config, config_path, root, state, recipes):
+    """Where each scene stands, from what exists: its pictures in the live registry (game/live.json) or on disk, its
+    lines' clips (each source's voice manifest), the normal-play entry check's result, and an unsaved draft. Keyed by
+    the editor's scene id; every part of a scene shares the scene's pictures, voice and entry."""
+    rows = recipes({'action': 'status'})['scenes']
+    game = Path(config.get('imageLive') or root / 'island/private/game/encounters').resolve().parent
+    rewards = Path(config.get('rewards') or Path(config_path).resolve().parent.parent).resolve()
+    live = read_json(game / 'live.json', {})
+    units = set(live.get('units', {}))
+    audio = Path(config['audioRoot']) if config.get('audioRoot') else None
+    unvoiced = {}
+    for source in config['sources']:
+        for line in read_json(Path(source['voiceManifest']), {}).get('lines', []) if source.get('voiceManifest') else []:
+            if audio and line.get('id') and not (audio / (line['id'] + '.mp3')).exists():
+                unvoiced[line.get('scene')] = unvoiced.get(line.get('scene'), 0) + 1
+    reach = {}
+    for command in config.get('checks', []):
+        if command and str(command[-1]).endswith('normal-entry-check.mjs'):
+            result = subprocess.run([*command, '--json'], cwd=root, capture_output=True, text=True, timeout=60)
+            try:
+                reach = {r['id']: r for r in json.loads(result.stdout)}
+            except ValueError:
+                reach = {}
+    pictures = {}
+    for row in rows:
+        for file in row['files']:
+            if (game / file).is_file():
+                state_of = 'live' if str((game / file).relative_to(root)) in units else 'unregistered'
+            elif (rewards / file).is_file():
+                state_of = 'round'
+            else:
+                state_of = 'missing'
+            pictures.setdefault(row['scene'], {})[file] = state_of
+    out = {}
+    for row in rows:
+        pics = pictures.get(row['scene'], {})
+        entry = reach.get(row['scene'])
+        missing = sum(1 for v in pics.values() if v == 'missing')
+        silent = unvoiced.get(row['scene'], 0)
+        if missing:
+            stage, label = 'pictures', f'{missing} picture{"s" if missing > 1 else ""} missing'
+        elif entry and entry.get('unbuilt'):
+            stage, label = 'waiting', 'Waits for an unbuilt gate'
+        elif entry and entry.get('problem'):
+            stage, label = 'entry', 'No way in during play'
+        elif silent:
+            stage, label = 'voice', f'{silent} line{"s" if silent > 1 else ""} not voiced'
+        elif entry and entry.get('ready'):
+            stage, label = 'live', 'Live in game'
+        else:
+            stage, label = 'out', 'Not in the game yet'
+        out[row['id']] = {'stage': stage, 'label': label, 'pictures': len(pics), 'missing': missing, 'unvoiced': silent,
+                          'entry': (entry or {}).get('entry') or '', 'why': '; '.join((entry or {}).get('unbuilt') or []) or (entry or {}).get('problem') or '',
+                          'draft': (state / hashlib.sha256(row['id'].encode()).hexdigest() / 'draft.json').is_file()}
+    return out
+
 def invalidate_voice(config, selected, backups, root, recovery):
     """Retire stale takes after dialogue changes; never play old speech over new text."""
     manifest=selected.get('voiceManifest')
@@ -100,6 +156,8 @@ def run(config_path, request):
     action = request['action']
     if action == 'catalog':
         return recipes(request)
+    if action == 'status':
+        return {'status': scene_status(config, config_path, root, state, recipes)}
     scene_id = request.get('id','')
     selected = next((c for c in sources if scene_id.startswith('local:'+c['key']+':')),None)
     if not selected:

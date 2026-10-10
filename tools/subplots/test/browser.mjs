@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { spawn } from 'node:child_process';
+import { spawn, execFileSync } from 'node:child_process';
 import { withBrowserJob } from '../../lib/browser-job.mjs';
 
 const repo = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../../..');
@@ -89,6 +89,7 @@ try {
     for (const width of [2560, 1366]) {
       fs.writeFileSync(file, original);
       fs.rmSync(path.join(root, 'state'), { recursive: true, force: true });
+      fs.rmSync(path.join(root, 'island'), { recursive: true, force: true });
       const page = await browser.newPage({ viewport: { width, height: width > 2000 ? 1440 : 860 } });
       const errors = [];
       page.on('pageerror', e => errors.push(e.message));
@@ -123,6 +124,12 @@ try {
         return r.fulfill({ json: [] });
       });
       await page.route('**/api/subplots/pictures?*', r => r.fulfill({ json: sceneRuns }));
+      // the private half of the status comes from the local provider, which QA never runs: fixture rows stand in
+      await page.route('**/api/subplots/status', async r => {
+        const real = await (await fetch(base + '/api/subplots/status')).json();
+        for (const row of privateRows) real.status[row.id] = { ...real.status[row.id], stage: 'pictures', label: '1 picture missing', draft: false };
+        r.fulfill({ json: real });
+      });
       await page.goto(base + '/tools/subplots/web/');
 
       // open from the list; labels say what goes where
@@ -224,6 +231,40 @@ try {
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
       assert.match(fs.readFileSync(file, 'utf8'), /ten minutes/);
 
+      // a comment on a beat: the beat shows it, it stays with the beat when it moves, Claude answers from the command line
+      const asked = top.nth(2);
+      await asked.hover();
+      await asked.locator(':scope > .tools [data-op=comment]').click();
+      await page.locator('.pop.thread textarea').fill('Make this line shorter.');
+      await page.locator('.pop.thread [data-send]').click();
+      await asked.locator('.comment-mark.open').waitFor();
+      const commentedText = await asked.locator('[data-field=main]').inputValue();
+      await asked.locator('.grip').click();
+      await page.keyboard.press('Alt+ArrowUp');
+      const moved = top.filter({ has: page.locator('.comment-mark.open') });
+      assert.equal(await moved.count(), 1);
+      assert.equal(await moved.locator('[data-field=main]').inputValue(), commentedText, 'the comment moved with its beat');
+      await page.locator('.timeline-wrap').click({ position: { x: 5, y: 5 } });
+      await page.keyboard.press('Control+z');
+      assert.equal(await page.locator('#status').innerText(), 'Saved');
+      const cli = (...args) => execFileSync('node', ['tools/subplots/comments.mjs', ...args], { cwd: repo, encoding: 'utf8', env: { ...process.env, SUBPLOTS_ROOT: root, SUBPLOTS_STATE: path.join(root, 'state') } });
+      const listed = cli('open');
+      assert.match(listed, /Make this line shorter\./);
+      assert.match(listed, /public:game3d\/story\/office\.js#welcome/);
+      assert.match(listed, new RegExp(commentedText.slice(0, 20).replace(/[.?]/g, '\\$&')));
+      const commentId = /^(c\S+)/m.exec(listed)[1];
+      cli('done', commentId, 'Shortened it.');
+      assert.match(cli('open'), /No open comments/);
+      await page.evaluate(async () => (await import('/tools/subplots/web/comments.js')).loadComments());
+      await moved.first().waitFor({ state: 'detached' }).catch(() => {});
+      const doneMark = top.locator('.comment-mark').first();
+      assert.equal(await doneMark.getAttribute('class'), 'comment-mark');
+      await doneMark.click();
+      assert.match(await page.locator('.pop.thread').innerText(), /Claude\s+Shortened it\./);
+      assert.match(await page.locator('.pop.thread').innerText(), /Done/);
+      await page.keyboard.press('Escape');
+      assert.ok(fs.existsSync(path.join(root, 'state/comments.json')), 'public comments sit with the drafts');
+
       // a private scene is labelled; its picture is replaced from the history
       await page.locator('[data-filter=private]').click();
       await page.locator('.area-head', { hasText: 'Encounters' }).click();
@@ -274,12 +315,29 @@ try {
       await page.locator('#save').click();
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
       assert.deepEqual(privateSaves.sort(), ['local:fixture:bath:leave', 'local:fixture:bath:start'], 'only the edited parts are saved');
+      // a private scene's comment stays under island/private/
+      const first = page.locator('#timeline > .beats > .beat').first();
+      await first.hover();
+      await first.locator(':scope > .tools [data-op=comment]').click();
+      await page.locator('.pop.thread textarea').fill('More steam.');
+      await page.locator('.pop.thread [data-send]').click();
+      await first.locator('.comment-mark.open').waitFor();
+      assert.match(fs.readFileSync(path.join(root, 'island/private/rewards/docs/scene-comments.json'), 'utf8'), /More steam/);
+      assert.doesNotMatch(fs.readFileSync(path.join(root, 'state/comments.json'), 'utf8'), /More steam/);
+      // the scene list and the header say where the scene stands
+      await page.locator('#docStatus .st-dot').waitFor();
+      assert.equal(await page.locator('.scene-row .st-dot').count(), await page.locator('.scene-row').count(), 'every listed scene has its status');
+      await page.locator('#docStatus', { hasText: /1 picture missing · 1 open comment/ }).waitFor();
+      assert.equal(await page.locator('.scene-row.current .st-c').innerText(), '1');
+      await first.locator('.comment-mark').click();
+      await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-comments-${width}.png`) });
+      await page.keyboard.press('Escape');
       assert.equal(privateSave.id === 'local:fixture:bath:start' ? privateSave.metadata.images['image:0'].file : 'x.png', 'x.png');
 
       assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth > globalThis.innerWidth), false);
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(`PASS ${width}: open, labels, list stays put, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits`);
+      console.log(`PASS ${width}: open, labels, list stays put, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, comments on beats (public and private, command line), scene status`);
     }
   }, { timeoutMs: 150000, gpuWaitMs: 60000 });
 } finally {

@@ -8,6 +8,7 @@ import { S, edit, select, recipe, listOf, stepOf, docFor, moveBeat, setPick, set
 import { kindOf, KIND_LABEL, speakerOf, textsOf, withText, withSpeaker, newStep, samePath, describe, hasJapanese } from './model.js';
 import { personName, personColor, portrait, nodeTitle, humanize } from './names.js';
 import { readingPath, pathSummary } from './paths.js';
+import { marker, thread } from './comments.js';
 import { conditionSentence } from './conditions.js';
 import { pictureFor } from './pictures.js';
 import { openPop, closePop } from './pop.js';
@@ -169,7 +170,9 @@ function beat(item, index) {
   const row = document.createElement('article');
   row.className = `beat k-${kind}`;
   row.dataset.path = key(path);
-  row.innerHTML = `<div class="rail"><button class="grip" title="Drag to move (or Alt+↑ ↓)" aria-label="Move beat">⋮⋮</button><span class="num">${index + 1}</span></div><div class="body"></div><div class="tools"><button data-op="dup" title="Duplicate">Copy</button><button data-op="del" title="Delete (Del)">Delete</button></div>`;
+  row.innerHTML = `<div class="rail"><button class="grip" title="Drag to move (or Alt+↑ ↓)" aria-label="Move beat">⋮⋮</button><span class="num">${index + 1}</span></div><div class="body"></div><div class="tools"><button data-op="comment" title="Ask Claude to change this beat">Comment</button><button data-op="dup" title="Duplicate">Copy</button><button data-op="del" title="Delete (Del)">Delete</button></div>`;
+  const mark = marker(path, step);
+  if (mark) { row.querySelector('.rail').append(mark); row.classList.add('has-comment'); }
   const body = row.querySelector('.body');
   const content = { line, narration, picture, choice, branch, group }[kind] || other;
   content(body, step, path, item);
@@ -177,8 +180,9 @@ function beat(item, index) {
     if (!samePath(S.selected, path)) select(path, { tab: kind === 'picture' ? 'picture' : undefined });
     e.stopPropagation();
   });
-  row.querySelector('[data-op=del]').onclick = () => remove(path);
-  row.querySelector('[data-op=dup]').onclick = () => duplicate(path);
+  row.querySelector(':scope > .tools [data-op=del]').onclick = () => remove(path);
+  row.querySelector(':scope > .tools [data-op=comment]').onclick = e => thread(e.currentTarget, path, step);
+  row.querySelector(':scope > .tools [data-op=dup]').onclick = () => duplicate(path);
   drag(row, path);
   return row;
 }
