@@ -28,6 +28,7 @@
 </style>
 </head>
 <body>
+<script src="../tools/nav/nav.js"></script>
 <nav id="nav"></nav>
 <main><article id="doc">Pick a note.</article></main>
 <script>
@@ -58,7 +59,7 @@
   }
   (async () => {
     // The repo root serves index.html, so its docs are listed by name.
-    nav.insertAdjacentHTML('beforeend', '<a class="hub" href="../">← Hub</a><h4>Working docs</h4>');
+    nav.insertAdjacentHTML('beforeend', '<h4>Working docs</h4>');
     for (const f of ['GUIDE.md', 'TODO.md', 'README.md']) {
       const a = document.createElement('a');
       a.textContent = f.replace(/\.md$/, ''); a.href = '#' + new URL('../' + f, location.href).pathname;

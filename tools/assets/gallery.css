@@ -16,9 +16,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
 .x:hover, .nav:hover { border-color: var(--teal); }
 
 /* ------------------------------------------------ header */
-.top { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 16px; padding: 12px 20px; background: rgba(20, 24, 31, 0.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-.top .home { color: var(--dim); text-decoration: none; font-size: 13px; }
-.top .home:hover { color: var(--text); }
+.top { position: sticky; top: var(--anav-h, 0px); z-index: 5; display: flex; align-items: center; gap: 16px; padding: 12px 20px; background: rgba(20, 24, 31, 0.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .top h1 { margin: 0; font-size: 17px; font-weight: 600; white-space: nowrap; }
 .search { flex: 1; max-width: 520px; display: flex; align-items: center; gap: 8px; padding: 0 12px; height: 38px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
 .search:focus-within { border-color: var(--teal); }
@@ -28,8 +26,8 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
 .filters-btn span:not(:empty) { margin-left: 4px; padding: 0 7px; border-radius: 99px; background: var(--teal); color: #0d1216; font-size: 12px; font-weight: 600; }
 
 /* ------------------------------------------------ layout */
-.layout { display: grid; grid-template-columns: 250px 1fr; min-height: calc(100vh - 63px); }
-.side { position: sticky; top: 63px; align-self: start; max-height: calc(100vh - 63px); overflow: auto; padding: 18px 16px 24px 20px; border-right: 1px solid var(--line); }
+.layout { display: grid; grid-template-columns: 250px 1fr; min-height: calc(100vh - 63px - var(--anav-h, 0px)); }
+.side { position: sticky; top: calc(63px + var(--anav-h, 0px)); align-self: start; max-height: calc(100vh - 63px - var(--anav-h, 0px)); overflow: auto; padding: 18px 16px 24px 20px; border-right: 1px solid var(--line); }
 .side-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 .side-head b { font-weight: 600; flex: 1; }
 .side-head .x { display: none; }

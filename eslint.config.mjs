@@ -22,7 +22,7 @@ export default [
     rules: { 'no-undef': 'error', 'no-unused-vars': ['error', { args: 'none', caughtErrors: 'none' }] } },
   { files: ['game3d/js/**/*.{js,mjs}', 'game3d/story/**/*.{js,mjs}', 'game3d/design/**/*.js', 'game3d/minigames/**/*.js', 'game3d/opening/**/*.js',
     'bible/**/*.js', 'tools/assets/*.js', 'tools/creator/**/*.js', 'tools/imagegen/web/*.js',
-    'tools/characters/parts/viewer.js'],
+    'tools/characters/parts/viewer.js', 'tools/nav/*.js'],
     languageOptions: { globals: browser } },
   // the build flavor flag, set by game3d/js/full.js (tools/release/flavor.mjs defines it false in the vanilla build)
   { files: ['game3d/js/**/*.{js,mjs}', 'game3d/story/**/*.{js,mjs}'], languageOptions: { globals: { __FULL__: 'readonly' } } },

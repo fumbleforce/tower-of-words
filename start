@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Serve the repo locally (tools/review_server.py: static files plus the review Send button) and print the links.
 # Usage: ./start            (port 8771)
-#        ./start --open     (also open the hub in your browser)
+#        ./start --open     (also open the bible in your browser)
 #        PORT=9000 ./start
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -58,10 +58,9 @@ else
 fi
 
 echo
-echo "  Hub:    ${URL}   (a menu of links)"
+echo "  Bible:  ${URL}   (opens the bible; every tool is in the bar at the top)"
 echo "  Game:   ${URL}game3d/"
 echo "  Review: ${URL}bible/#review   (things waiting for your pick)"
-echo "  Bible:  ${URL}bible/"
 echo "  Assets: ${URL}tools/assets/   (every model, portrait, sound and prop, with its status)"
 echo "  Notes:  ${URL}hub/notes.html"
 echo
