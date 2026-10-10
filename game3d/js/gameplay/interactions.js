@@ -62,30 +62,24 @@ export function installInteractions(game) {
           return item._wv;
         },
       };
-      // a thing whose talk is a flat line (`pin: 'near'` in the catalog), or whose only use is a word (its own say:
-      // trigger, or the stock reply any thing gives: Jørgen wanted Say on the fridge), shows its pin only when Eric
-      // is close; with nothing at all to do (no talk, act or look, no near: trigger, no word known yet) it has no pin
-      // and can't be picked. A "no marker" thing stays out unless it's the goal or one of its own words works on it
-      // (Jørgen, 2026-09-30: "a hundred 'interactive' things in this room with symbols that dont really do anything
-      // interesting"; notes/interaction-audit.md)
+      // a thing whose talk is a flat line (`pin: 'near'` in the catalog), or whose only use is a word of its own (its
+      // say: trigger: the fan, the kettle), shows its pin only when Eric is close; with nothing of its own to do (no
+      // talk, act or look, no word of its own) it has no pin and can't be picked, whatever words he knows. A thing
+      // never takes the generic reply to a word (Jørgen, 2026-10-10, on the guard's monitor: "Stop making random
+      // things that have zero consequence or interesting actions/reactions attached to them interactive"). A "no
+      // marker" thing stays out unless it's the goal or one of its own words works on it (Jørgen, 2026-09-30: "a
+      // hundred 'interactive' things in this room with symbols that dont really do anything interesting";
+      // notes/interaction-audit.md)
       if (!isPerson(game, item)) {
         const talks = () => talksNow(item);
         // Say is in its menu only once Say has been taught (the first time it shows only at the goal, onboard.js)
-        const other = () => sayOpen() && SAYABLE.some((w) => known.has(w));
+        const other = () => sayOpen() && item.wordable();
         // cached for a moment like wordable: the markers, the targets and the clicks ask every frame
         const does = () => {
           const now = performance.now();
           if (!item._da || now - item._da > 400) {
             item._da = now;
-            item._dv = quiet
-              ? item.wordable() && sayOpen()
-                ? 'near'
-                : ''
-              : talks()
-                ? t.pin || 'always'
-                : other()
-                  ? 'near'
-                  : '';
+            item._dv = quiet ? (other() ? 'near' : '') : talks() ? t.pin || 'always' : other() ? 'near' : '';
           }
           return item._dv;
         };
@@ -248,12 +242,12 @@ export function installInteractions(game) {
     return !ob || !ob.active || ob.sayUsed;
   };
   // Say goes in a target's action menu when a word Eric knows does something there now: a say: trigger for it (or
-  // for anything), or, on a thing with nothing else to do, its answer to any word (Jørgen: "right now you just see
-  // 'Fridge' with no attached action even though you CAN say something to it")
+  // for anything), or a person's reaction to how he says it. A thing with no word of its own gets no Say row: the
+  // generic reply any thing gave to a word is gone (Jørgen, 2026-10-10: the guard's monitor offered only "Say a word")
   function saysSomething(item) {
     if (!item || !SAYABLE.some((w) => known.has(w))) return false;
     const hook = (w) => game.runner.has(`say:${w}:${item.id}`) || game.runner.has(`say:${w}:*`);
-    return SAYABLE.some((w) => known.has(w) && hook(w)) || !canUse(item) || registerDue(game, item.id);
+    return SAYABLE.some((w) => known.has(w) && hook(w)) || registerDue(game, item.id);
   }
   // whether the target's menu has a Say row: a word does something there (or the Say tip is up), and while the
   // train teaches Say, only at the goal (the cat)

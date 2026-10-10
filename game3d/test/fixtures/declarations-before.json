@@ -523,13 +523,11 @@
         },
         "poster_l": {
           "label": "Poster",
-          "kind": "thing small",
-          "pin": "near"
+          "kind": "thing small"
         },
         "poster_r": {
           "label": "Poster",
-          "kind": "thing small",
-          "pin": "near"
+          "kind": "thing small"
         },
         "lift": {
           "label": "Station exit",

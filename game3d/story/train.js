@@ -46,11 +46,7 @@ export default {
     'talk:music': [{ if: '!seat_goal && !sat', node: 'first_music' }, 'music'],
     'talk:reader': 'reader',
     'talk:window': 'window',
-    'talk:poster': 'poster',
-    'talk:straps': 'straps',
-    'talk:rack': 'rack',
     'talk:plant': 'plant',
-    'talk:bags': 'seat_bags',
     'say:ohayo:bun': 'ohayo_bun',
     'say:ohayo:music': 'ohayo_music',
     'say:matte:tama': 'matte_tama',
@@ -135,11 +131,7 @@ export default {
     ohayo_music: [{ do: 'emote', who: 'music', kind: '?' }],
     ohayo_stander: [{ say: 'stander', overheard: true, emo: 'low', text: '…{ohayo}。' }],
     window: [{ say: 'eric', emo: 'tired', text: "Sea on both sides. Nobody said the island was this far out." }],
-    poster: ['> A poster in katakana, with a smiling cartoon monorail on it.'],
-    straps: ['> You hold on as the car sways. Nobody else bothers.'],
-    rack: ['> Every suitcase up there has the same Amakawa luggage tag.'],
     plant: ["> It's plastic. Someone has watered it anyway."],
-    seat_bags: ['> Bags on every seat but one.'],
 
     // ------------------------------------------------------------------ Mio
     seat: [

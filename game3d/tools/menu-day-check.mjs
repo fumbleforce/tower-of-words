@@ -1,7 +1,8 @@
 // Plays the fast day (?test=fast) and, at every moment no scene runs, checks that each selectable thing's menu has an
 // action that does something right now and that no E row does nothing (issue #128; the rule and the faults are in
 // test/support/menu-effects.mjs). Prints each fault once with the goal it was first seen under, then PASS or FAIL.
-//   node game3d/tools/menu-day-check.mjs [W H]      (BASE=.claude/worktrees/<name>/game3d; LIST=1 prints every thing)
+//   node game3d/tools/menu-day-check.mjs [W H]      (BASE=.claude/worktrees/<name>/game3d; LIST=1 prints every thing;
+//   DAY=2 plays day 2 from a plain finished day 1, as fast.mjs does)
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { openGame } from '../test/support/open-game.mjs';
 import { menuEffects, sampleMenuEffects } from '../test/support/menu-effects.mjs';
@@ -13,7 +14,7 @@ const errors = [];
 await withBrowserJob(
   'menu-day-check',
   async (browser) => {
-    const url = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=0`;
+    const url = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=0${+process.env.DAY > 1 ? '&day=' + +process.env.DAY : ''}`;
     const game = await openGame(browser, {
       viewport: { width: +W, height: +H },
       touch: phone,

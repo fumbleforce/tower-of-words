@@ -229,13 +229,13 @@ The reader, the girl with headphones and the woman with a bun are the approved o
 | Nodes | When | What happens |
 |---|---|---|
 | `window` | Talk to the window | Eric: nobody said the island was this far out. |
-| `poster`, `straps`, `rack`, `plant`, `seat_bags` | Talk to them | One line each (see Things). |
+| `plant` | Talk to it | It's plastic; someone has watered it anyway. |
 | `reader`, `ohayo_reader` | Talk to him, or greet him | The book is called "Excel for People Who Hate Excel"; he nods, still reading. |
 | `phone_girl`, `ohayo_aoi` | Talk to Aoi, or greet her | She's on the phone about her assignment ("anywhere but the basement"); a nod. |
 | `bun`, `music`, `stander` | Talk to them after the first time | A line or an emote each; the girl with headphones gets a ♪ and "Her music is too loud. She doesn't hear you." |
 | `ohayo_bun`, `ohayo_music`, `ohayo_stander` | Greet them | Each answers in their own way. |
 
-The man with a bag (`stander`) is hidden following the silhouette rejection, and has no talk or greeting trigger, so `stander` and `ohayo_stander` never play. The six scenery nodes above exist in the script but are disabled by the current marker rules; the passengers are reachable.
+The man with a bag (`stander`) is hidden following the silhouette rejection, and has no talk or greeting trigger, so `stander` and `ohayo_stander` never play. The two scenery nodes above (`window`, `plant`) exist in the script but are disabled by the current marker rules; the passengers are reachable. The poster, straps, luggage rack and bags had one flat line each and no longer have any (Jørgen, 2026-10-10: "Stop making random things that have zero consequence or interesting actions/reactions attached to them interactive").
 
 Aoi keeps her original encounter; Jørgen rejected its proposed replacement.
 
@@ -255,7 +255,7 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 | `reader_r` | Card reader | Right card reader. |
 | `gate` | Gate | The arch and its flaps. |
 | `desk` | Guard desk | The guard's desk. |
-| `guard_monitor` | Monitor | The guard's monitor on his desk, its screen toward him. Named for the station's ticket (issue #227); nothing uses it yet. |
+| `guard_monitor` | Monitor | The guard's monitor on his desk, its screen toward him. Not a target on days 1 and 2 (Jørgen, 2026-10-10: "Why is the monitor of all things interactive? It gets in the way"); from day 3 it is the station request's repair (issue #227, game3d/story/day3/README.md). |
 | `counter` | Visitor counter | The visitor counter, with the visitor book on it. Nobody works it: Kuro is at the head office reception. |
 | `signin` | Visitor book | On the counter. |
 | `lostfound` | Lost and found | A shelf by the counter. |
@@ -263,7 +263,7 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 | `kiosk` | Coffee machine | A vending machine, front right. |
 | `bench_l` | Bench | Left bench. |
 | `bench_r` | Bench | Right bench, where Eric waits for nine. |
-| `poster_l` | Poster | "PEOPLE. IDEAS. PROGRESS." |
+| `poster_l` | Poster | "PEOPLE. IDEAS. PROGRESS." Scenery: not a target. |
 | `poster_r` | Poster | The same. |
 | `lift` | Station exit | Open doorway to the forecourt, beyond the security gate. |
 | `entrance` | Entrance | The glass doors. |
@@ -310,7 +310,6 @@ The security room is played in the early morning, before nine.
 | Nodes | When | What happens |
 |---|---|---|
 | `ohayo_gate`, `gate_talk` | Greet or talk to the gate | Its recorded voice asks for a card. |
-| `poster` | Talk to a poster | "PEOPLE. IDEAS. PROGRESS." |
 | `noop` | – | An empty node for choices that do nothing. |
 
 ## Station forecourt and head office entrance (`forecourt`)
@@ -336,7 +335,7 @@ The bicycle aisle continues south on a 2.5 m paved path into the shopping street
 | `station_exit` | Station | The station's island-side doorway, behind Eric as he enters the court. |
 | `office_entrance` | Head office | The head office's entrance under its canopy. Using it walks Eric in through the doors to the lift, which starts the ride. |
 | `lift` | Lift to B2 | The B2 car in the lobby's lift core. |
-| `label_printer` | Label printer | Kuro's label printer on the reception desk, west of her screen: a squat grey case, a strip of white label out of its slot. Named for the reception's ticket (issue #227); nothing uses it yet. |
+| `label_printer` | Label printer | Kuro's label printer on the reception desk, west of her screen: a squat grey case, a strip of white label out of its slot. Scenery, never a target (Jørgen, 2026-10-10: "remove the interaction with the printer in the lobby as well"): Kuro's label request on day 5 and later starts by talking to her, and its repair stages the printer (`labelRepair`). |
 | `shop_lane` | To the shopping street | South through the bicycle aisle, into the west passage. |
 | `plaza_lane` | To the plaza | The east end of the lane along the tower's south face. |
 | `garden_bench` | Garden bench | The bench on the gravel court in the south garden, Tama asleep at one end. After work only. |

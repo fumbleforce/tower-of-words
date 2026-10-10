@@ -45,8 +45,6 @@ export default {
     'talk:counter': 'signin',
     'talk:tama': [{ node: 'tama', once: true }, 'tama_ohayo'],
     'talk:signin': 'signin',
-    'talk:poster_l': 'poster',
-    'talk:poster_r': 'poster',
 
     // greetings
     'say:ohayo:guard': [{ if: 'jammed && !gate_through_way', node: 'jam_greet' }, { if: '!greeted_guard', node: 'ohayo_guard' }, 'greet_again_guard'],
@@ -402,6 +400,5 @@ export default {
       { say: 'guard', face: 'stern', overheard: true, emo: 'stern', text: '猫はいません。' },
     ],
     signin: ["> TAMA is the first name in today's visitor book."],
-    poster: ["> PEOPLE. IDEAS. PROGRESS."],
   },
 };

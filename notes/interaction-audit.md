@@ -2,6 +2,15 @@
 
 Issue #106. Jørgen, playing the office at "Go to the copy room with Mr. Mori." (notes/feedback-game/2026-09-30_211255): "there are a hundred 'interactive' things in this room with symbols that dont really do anything interesting, while Mio can not be interacted with, which is silly. All people should always be interactable, but dont necessarily need to say that much interesting."
 
+## 2026-10-10: scenery stays scenery
+
+Jørgen, at the guard's desk on day 1 (notes/feedback-game/2026-10-10_111104): "Why is the monitor of all things interactive? It gets in the way. Stop making random things that have zero consequence or interesting actions/reactions attached to them interactive. Sop cluttering". Then: "remove the interaction with the printer in the lobby as well".
+
+- The stock reply any thing gave to a word is gone. A thing with no talk, act, look or word of its own has no pin and can't be picked, whatever words Eric knows (game3d/js/gameplay/interactions.js; test: game3d/test/unit/scenery-things.test.mjs). That took the guard's monitor (days 1 and 2), the forecourt label printer, the lobby's coffee machine, lost and found and notice screen, and every other "Say a word only" thing out of the targets. The "stock" rows in the tables below are history.
+- Flat lines with nothing behind them removed: the security room posters ("PEOPLE. IDEAS. PROGRESS."), and the train's poster, straps, luggage rack and bags (already unmarked).
+- The label printer is never a target: Kuro's day-5 and later label request starts by talking to her.
+- Kept: talk lines that are a joke, a hint or a lead (the visitor book's TAMA, the covered desk, the paw prints on the office stairs, the in/out board with Eric's name, the fountain's coins, Eric's thoughts in his room), the closed doors' 準備中 cards, and every thing with its own word joke (the fan, the kettle, the coffee machine, the clock).
+
 ## What changed
 
 - People: every person with a body has a pin and Talk whenever they're visible and not walking. The story's `show` no longer hides a person. Talking runs their `talk:` entry if one holds (so the lines the story already had for these moments play again: Mio's nudges on the train, Mr. Mori's copier hint), else their `idle:` line (the contract is in game3d/story/FORMAT.md, Idle lines; Codex writes the lines), else they turn to Eric and nod.

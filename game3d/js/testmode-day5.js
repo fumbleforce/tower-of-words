@@ -6,7 +6,7 @@ export const DAY5_ROUTE = [
   ['dorm_court', 'street_gate'],
   ['east_lane', 'plaza_lane'],
   ['plaza', 'office_lane'],
-  ['forecourt', 'label_printer', ['Use the wider label format']],
+  ['forecourt', 'kuro', ['Use the wider label format']],
   ['forecourt', 'plaza_lane'],
   ['plaza', 'dorm_lane'],
   ['east_lane', 'dorm_gate'],

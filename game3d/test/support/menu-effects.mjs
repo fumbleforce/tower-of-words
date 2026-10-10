@@ -4,8 +4,9 @@
 //
 // A thing is selectable when its marker is enabled. Its effects: a person (Talk always does something: their talk,
 // idle line or a nod), an act or look of its own, a talk: entry that holds now with a non-empty node, being the goal,
-// or Say: a word Eric knows with a say: entry for it (or for anything), or the stock reply a thing with nothing else
-// to do gives to any word. Say counts only where the menu offers it (during the first minutes, only at the goal).
+// or Say: a word Eric knows with a say: entry for it (or for anything). A thing has no generic reply to a word any
+// more (Jørgen, 2026-10-10), so a thing with nothing of its own is a fault. Say counts only where the menu offers it
+// (during the first minutes, only at the goal).
 // Faults: selectable with no effect at all ("nothing"), or an E row whose use does nothing ("E does nothing").
 export async function menuEffects() {
   const G = globalThis.__game;
@@ -31,7 +32,6 @@ export async function menuEffects() {
     const words = SAYABLE.filter((w) => known.has(w) && (R.has(`say:${w}:${m.id}`) || R.has(`say:${w}:*`)));
     const use = G.canUse(m);
     if (sayOpen && words.length) fx.push('say:' + words.join('/'));
-    else if (sayOpen && !use && SAYABLE.some((w) => known.has(w))) fx.push('say:stock');
     const faults = [];
     if (!fx.length) faults.push('nothing');
     if (use && !(person || m.act || m.look || talkNode)) faults.push('E does nothing');
