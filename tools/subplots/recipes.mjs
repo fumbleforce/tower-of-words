@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {parseSource,staticValue,visitSource} from '../lib/source-data.mjs';
+import {recipeValues} from './recipe-values.mjs';
 const name=p=>p?.key?.name??p?.key?.value;
 const property=(o,key)=>o?.properties?.find(p=>name(p)===key);
 const literal=n=>{try{return staticValue(n);}catch{return undefined;}};
@@ -13,56 +14,133 @@ function model(source){
   return list.elements.map(e=>e.type==='Identifier'?bindings.find(d=>d.id.name===e.name)?.init:e).filter(n=>n?.type==='ObjectExpression');
 }
 const dialogueArgs={s:{say:0,text:1,emo:2},line:{say:0,text:1,emo:2},said:{say:1,text:2,emo:3},cw:{say:1,text:2,emo:4},sw:{say:1,text:2,emo:4},gs:{say:1,text:2,emo:4}};
-function helper(n,source){
-  if(n?.type!=='CallExpression'||n.callee.type!=='Identifier')return {$expression:slice(source,n)};
-  const h=n.callee.name,args=n.arguments,original={$recipe:slice(source,n)},d=dialogueArgs[h];
+const japanese = text => /[\u3040-\u30ff\u3400-\u9fff]/u.test(text||'');
+const shotFields = ['width','at','focus','push','fade','cue','fit','delay','ms','mask','kb'];
+function helper(node,source,context){
+  const spread=node?.type==='SpreadElement', n=spread?node.argument:node;
+  const original={$recipe:slice(source,node)};
+  if(spread&&n.type==='ArrayExpression')return {sequence:decode(n,source,context),label:'Picture sequence',...original};
+  if(n?.type!=='CallExpression'||n.callee.type!=='Identifier')return {$expression:slice(source,node)};
+  const h=n.callee.name,args=n.arguments,d=dialogueArgs[h];
+  const image=context.images.find(i=>i.calls.includes(n.range[0]));
+  const picture=image?{imageSlot:image.id,imageUrl:image.url}:{};
   if(h==='n'&&typeof literal(args[0])==='string')return {narration:literal(args[0]),...original};
-  if(d&&typeof literal(args[d.say])==='string'&&typeof literal(args[d.text])==='string')return {say:literal(args[d.say]),text:literal(args[d.text]),emo:typeof literal(args[d.emo])==='string'?literal(args[d.emo]):'',deliveryEditable:!args[d.emo]||typeof literal(args[d.emo])==='string',...original};
-  if(h==='choice'&&Array.isArray(literal(args[0])))return {choice:literal(args[0]),...original};
-  if(h==='seq'&&args[1]?.type==='ArrayExpression')return {sequence:decode(args[1],source),label:literal(args[0])||'Picture sequence',...original};
-  if(['iff','cond'].includes(h)&&typeof literal(args[0])==='string'&&args[1]?.type==='ArrayExpression'&&(!args[2]||args[2].type==='ArrayExpression'))return {if:literal(args[0]),then:decode(args[1],source)||[],else:decode(args[2],source)||[],...original};
-  if(h==='duo'&&args[0]?.type==='CallExpression'&&typeof literal(args[1])==='string'){
-    const inner=helper(args[0],source);
-    if(inner.say)return {say:inner.say,text:literal(args[1]),emo:typeof literal(property(args[2],'emo')?.value)==='string'?literal(property(args[2],'emo')?.value):'',deliveryEditable:(!args[2]||args[2].type==='ObjectExpression')&&(!property(args[2],'emo')||typeof literal(property(args[2],'emo').value)==='string'),...original};
+  if(d&&typeof literal(args[d.say])==='string'&&typeof literal(args[d.text])==='string'){
+    const text=literal(args[d.text]), translated=['cw','sw','gs'].includes(h);
+    const options=args[d.emo+2], translation=translated?literal(args[3]):literal(property(options,'en')?.value);
+    return {say:literal(args[d.say]),text,ja:translated||japanese(text)?text:literal(property(options,'ja')?.value)||'',en:translated||japanese(text)?translation||'':text,
+      emo:typeof literal(args[d.emo])==='string'?literal(args[d.emo]):'',deliveryEditable:!args[d.emo]||typeof literal(args[d.emo])==='string',...picture,...original};
   }
-  if(['pic','shot'].includes(h)&&args.length>1&&typeof literal(args[1])==='string')return {narration:literal(args[1]),image:slice(source,args[0]),...original};
-  return {$expression:slice(source,n)};
+  if(h==='choice'&&Array.isArray(literal(args[0])))return {choice:literal(args[0]),...original};
+  if(h==='seq'&&args[1]?.type==='ArrayExpression')return {sequence:decode(args[1],source,context),label:literal(args[0])||'Picture sequence',...original};
+  if(['iff','cond'].includes(h)&&typeof literal(args[0])==='string'&&args[1]?.type==='ArrayExpression'&&(!args[2]||args[2].type==='ArrayExpression'))return {if:literal(args[0]),then:decode(args[1],source,context)||[],else:decode(args[2],source,context)||[],...original};
+  if(h==='duo'&&args[0]?.type==='CallExpression'&&typeof literal(args[1])==='string'){
+    const inner=helper(args[0],source,context);
+    if(inner.say)return {say:inner.say,text:literal(args[1]),en:literal(args[1]),ja:inner.text,
+      emo:typeof literal(property(args[2],'emo')?.value)==='string'?literal(property(args[2],'emo')?.value):'',deliveryEditable:(!args[2]||args[2].type==='ObjectExpression')&&(!property(args[2],'emo')||typeof literal(property(args[2],'emo').value)==='string'),
+      ...(inner.imageSlot?{imageSlot:inner.imageSlot,imageUrl:inner.imageUrl}:{}),...original};
+  }
+  if(['pic','picWhenReady','shot','gap'].includes(h)){
+    const value=context.resolve(args[1]),options=value&&typeof value==='object'?value:{}, shot={};
+    for(const key of shotFields)if(options[key]!==undefined)shot[key]=options[key];
+    if(h==='gap'){shot.mask='gap';if(options.w!==undefined)shot.width=options.w;}
+    return {shot,$staging:structuredClone(shot),...picture,...(typeof literal(args[1])==='string'?{narration:literal(args[1])}:{}),...original};
+  }
+  if(['hide','go','bye','end','fin'].includes(h))return {action:h,...(h==='go'?{destination:literal(args[0])}:{}),...(h==='end'?{flag:literal(args[0])}:{}),...(h==='fin'?{keep:literal(args[0]),complete:literal(args[1])??literal(args[0])}:{}),...original};
+  if(h==='raw'&&literal(args[0]))return {action:'game',details:literal(args[0]),...original};
+  return {$expression:slice(source,node),summary:'Scene action'};
 }
-function decode(array,source){return array?.type==='ArrayExpression'?array.elements.map(n=>helper(n,source)):null;}
-function replaceArguments(raw,edits){let s=raw;for(const e of edits.sort((a,b)=>b.range[0]-a.range[0]))s=s.slice(0,e.range[0])+(e.raw??JSON.stringify(e.value))+s.slice(e.range[1]);return s;}
+function decode(array,source,context){return array?.type==='ArrayExpression'?array.elements.map(n=>helper(n,source,context)):null;}
+function replaceArguments(raw,edits){
+  let s=raw;
+  for(const e of edits.sort((a,b)=>b.range[0]-a.range[0])){
+    const options=e.options?Object.entries(e.options).map(([key,value])=>`${key}: ${JSON.stringify(value)}`).join(', '):null;
+    const appended=e.arguments?Array.from({length:Math.max(...Object.keys(e.arguments).map(Number))-e.start+1},(_,i)=>Object.hasOwn(e.arguments,i+e.start)?JSON.stringify(e.arguments[i+e.start]):'undefined').join(', '):null;
+    const replacement=appended!==null?', '+appended:options!==null?e.prefix+options+e.suffix:e.raw??JSON.stringify(e.value);
+    s=s.slice(0,e.range[0])+replacement+s.slice(e.range[1]);
+  }
+  return s;
+}
+function appendArgument(call,index,value,edits){
+  const position=call.range[1]-1;
+  let insertion=edits.find(e=>e.arguments&&e.range[0]===position);
+  if(!insertion){insertion={range:[position,position],arguments:{},start:call.arguments.length};edits.push(insertion);}
+  insertion.arguments[index]=value;
+}
+function patchOption(raw,call,index,key,value,edits){
+  const options=call.arguments[index], existing=property(options,key);
+  if(existing){edits.push({range:existing.value.range,value});return;}
+  if(options&&options.type!=='ObjectExpression')throw Error('This staging value is inherited and cannot be replaced here.');
+  if(!options){
+    const insertion=edits.find(e=>e.arguments&&e.range[0]===call.range[1]-1);
+    appendArgument(call,index,{...(insertion?.arguments[index]||{}),[key]:value},edits);return;
+  }
+  const position=options.range[0]+1;
+  let insertion=edits.find(e=>e.options&&e.range[0]===position);
+  if(!insertion){
+    insertion={range:[position,position],options:{},prefix:'',suffix:options.properties.length?', ':''};
+    edits.push(insertion);
+  }
+  insertion.options[key]=value;
+}
+function encodeShot(raw,call,step){
+  const fn=call.callee.name, edits=[],original=step.$staging||{};
+  if(typeof step.narration==='string'&&typeof literal(call.arguments[1])==='string')edits.push({range:call.arguments[1].range,value:step.narration});
+  // Unchanged computed values remain authored references such as GW.
+  for(const key of shotFields){
+    if(!Object.hasOwn(step.shot||{},key)||JSON.stringify(step.shot[key])===JSON.stringify(original[key]))continue;
+    if(fn==='gap'&&key==='mask')continue;
+    if(!['shot','gap'].includes(fn))continue;
+    patchOption(raw,call,1,fn==='gap'&&key==='width'?'w':key,step.shot[key],edits);
+  }
+  return replaceArguments(raw,edits);
+}
 function encode(step, helpers=new Set()){
   const child=s=>encode(s,helpers);
   if(typeof step==='string')return `n(${JSON.stringify(step)})`;
   if(step?.$expression){parseSource(`const steps=[${step.$expression}];`);return step.$expression;}
   if(step?.$recipe){
-    const raw=step.$recipe,ast=parseSource(raw),call=ast.body[0]?.expression;
+    const raw=step.$recipe,wrapped=raw.startsWith('...'),ast=parseSource(wrapped?`[${raw}]`:raw),element=wrapped?ast.body[0].expression.elements[0]:ast.body[0]?.expression;
+    if(wrapped)visitSource(element,n=>{n.range=n.range.map(v=>v-1);});
+    const call=wrapped?element.argument:element;
+    if(call?.type==='ArrayExpression'&&step.sequence)return `...[${raw.includes('/* subplot-gap */')?'/* subplot-gap */':''}${step.sequence.map(child).join(',\n')}]`;
     if(call?.type!=='CallExpression')throw Error('Invalid recipe step');
     const args=call.arguments,fn=call.callee.name;
     if(fn==='choice')return replaceArguments(raw,[{range:args[0].range,value:step.choice}]);
     if(fn==='seq')return raw.slice(0,args[1].range[0])+`[${step.sequence.map(child).join(',\n')}]`+raw.slice(args[1].range[1]);
     if(['iff','cond'].includes(fn))return `${fn}(${JSON.stringify(step.if)}, [${step.then.map(child).join(',\n')}], [${(step.else||[]).map(child).join(',\n')}])`;
-    if(fn==='n'||['pic','shot'].includes(fn))return replaceArguments(raw,[{range:args[fn==='n'?0:1].range,value:step.narration??''}]);
+    if(['pic','picWhenReady','shot','gap'].includes(fn))return encodeShot(raw,call,step);
+    if(['hide','bye'].includes(fn))return raw;
+    if(fn==='raw')return replaceArguments(raw,[{range:args[0].range,value:step.details}]);
+    if(fn==='go'||fn==='end')return replaceArguments(raw,[{range:args[0].range,value:fn==='go'?step.destination:step.flag}]);
+    if(fn==='fin')return `fin(${JSON.stringify(step.keep)}, ${JSON.stringify(step.complete)})`;
+    if(fn==='n')return replaceArguments(raw,[{range:args[0].range,value:step.narration??''}]);
     if(dialogueArgs[fn]||fn==='duo'){
       const inner=fn==='duo'?args[0]:call,positions=dialogueArgs[inner.callee?.name];
       if(!positions)throw Error('Unsupported dialogue helper');
-      const edits=[{range:inner.arguments[positions.say].range,value:step.say},{range:(fn==='duo'?args[1]:args[positions.text]).range,value:step.text}];
+      const originalText=literal(fn==='duo'?args[1]:args[positions.text]);
+      const isTranslated=['cw','sw','gs'].includes(fn), mainLanguage=fn==='duo'?'en':isTranslated||japanese(originalText)?'ja':'en';
+      const text=step[mainLanguage]!==undefined&&step[mainLanguage]!==originalText?step[mainLanguage]:step.text;
+      const edits=[{range:inner.arguments[positions.say].range,value:step.say},{range:(fn==='duo'?args[1]:args[positions.text]).range,value:text}];
+      if(fn==='duo'&&step.ja!==undefined)edits.push({range:inner.arguments[positions.text].range,value:step.ja});
+      if(isTranslated&&step.en!==undefined&&args[3])edits.push({range:args[3].range,value:step.en});
+      if(fn!=='duo'&&!isTranslated){
+        const translationField=mainLanguage==='ja'?'en':'ja', translation=step[translationField];
+        const options=args[positions.emo+2], prior=literal(property(options,translationField)?.value)||'';
+        if(translation!==undefined&&translation!==prior)patchOption(raw,call,positions.emo+2,translationField,translation,edits);
+      }
       if(fn==='duo'){
         const options=args[2];
         if(options&&options.type!=='ObjectExpression'&&step.emo)throw Error('Edit delivery in Source for this computed dialogue variant');
         const emotion=property(options,'emo');
         if(emotion){if(typeof literal(emotion.value)==='string')edits.push({range:emotion.value.range,value:step.emo||''});else if(step.emo)throw Error('This delivery is computed. Edit its helper in Source.');}
-        else if(step.emo){
-          const position=options?options.range[1]-1:call.range[1]-1;
-          const addition=options?`${options.properties.length?', ':''}emo: ${JSON.stringify(step.emo)}`:`, {emo:${JSON.stringify(step.emo)}}`;
-          edits.push({range:[position,position],raw:addition});
-        }
+        else if(step.emo)patchOption(raw,call,2,'emo',step.emo,edits);
       }else if(args[positions.emo]){
         if(typeof literal(args[positions.emo])==='string')edits.push({range:args[positions.emo].range,value:step.emo||''});
         else if(step.emo)throw Error('This delivery is computed. Edit its helper in Source.');
       }
       else if(step.emo){
-        const missing=Array(Math.max(0,positions.emo-args.length)).fill('undefined');
-        edits.push({range:[call.range[1]-1,call.range[1]-1],raw:', '+[...missing,JSON.stringify(step.emo)].join(', ')});
+        appendArgument(call,positions.emo,step.emo,edits);
       }
       return replaceArguments(raw,edits);
     }
@@ -71,28 +149,77 @@ function encode(step, helpers=new Set()){
   if(step?.if!==undefined){const fn=helpers.has('iff')?'iff':helpers.has('cond')?'cond':null;if(!fn)throw Error('This recipe has no condition helper. Use Source.');return `${fn}(${JSON.stringify(step.if)}, [${(step.then||[]).map(child).join(',')}], [${(step.else||[]).map(child).join(',')}])`;}
   if(step?.do&&helpers.has('raw'))return `raw(${JSON.stringify(step)})`;
   if(step?.choice)return `choice(${JSON.stringify(step.choice)})`;
-  if(step?.say)return `s(${JSON.stringify(step.say)}, ${JSON.stringify(step.text)}, ${JSON.stringify(step.emo||'')})`;
+  if(step?.say){
+    const en=step.en||'',ja=step.ja||'',emotion=JSON.stringify(step.emo||'');
+    const line=text=>`s(${JSON.stringify(step.say)}, ${JSON.stringify(text)}, ${emotion})`;
+    if(en&&ja&&helpers.has('duo'))return `duo(${line(ja)}, ${JSON.stringify(en)})`;
+    if(en&&ja)return `s(${JSON.stringify(step.say)}, ${JSON.stringify(ja)}, ${emotion}, undefined, {en:${JSON.stringify(en)}})`;
+    return line(ja||en||step.text||'');
+  }
   if(step?.narration!==undefined)return `n(${JSON.stringify(step.narration)})`;
   throw Error('Use Source for this recipe action. Existing helper calls are preserved.');
 }
-function imageSlots(source, sequence) {
-  const ast=parseSource(source),ds=ast.body.flatMap(n=>(n.declaration||n).declarations||[]);
-  const resolve=(n,seen=new Set())=>{
-    const v=literal(n);if(v!==undefined)return v;
-    if(n?.type==='Identifier'&&!seen.has(n.name)){seen.add(n.name);return resolve(ds.find(d=>d.id.name===n.name)?.init,seen);}
-    if(n?.type==='BinaryExpression'&&n.operator==='+'){const a=resolve(n.left,new Set(seen)),b=resolve(n.right,new Set(seen));if(typeof a==='string'&&typeof b==='string')return a+b;}
-    return undefined;
-  };
-  const pics=ds.find(d=>d.id.name==='PICS')?.init,slots=new Map();
-  visitSource(sequence,n=>{
-    if(n.type!=='CallExpression'||!['pic','picWhenReady','shot','said'].includes(n.callee.name))return;
+function imageSlots(source, sequence, values=recipeValues(source)) {
+  const {resolve,binding}=values,pics=binding('PICS'),slots=new Map(),locations=new Map();
+  function locate(node,path='sequence'){
+    if(!node?.type)return;locations.set(node.range[0],path);
+    for(const [key,value] of Object.entries(node)){
+      if(['loc','range','comments'].includes(key))continue;
+      if(Array.isArray(value))value.forEach((child,index)=>locate(child,`${path}.${key}.${index}`));
+      else if(value?.type)locate(value,`${path}.${key}`);
+    }
+  }
+  locate(sequence);
+  visitSource(sequence,(n,ancestors)=>{
+    if(n.type!=='CallExpression'||!['pic','picWhenReady','shot','said','gap'].includes(n.callee.name))return;
+    const gap=n.callee.name==='gap';
     const value=resolve(n.arguments[0]);if(typeof value!=='string')return;
     const p=property(property(pics,value)?.value,'file');
-    const file=p?resolve(p.value):value;
+    let file=p?resolve(p.value):value;
+    if(gap){
+      const definition=binding('gap'), first=definition?.body?.elements?.[0];
+      if(first?.callee?.name!=='shot')return;
+      file=resolve(first.arguments[0],{[definition.params[0].name]:value});
+    }
     if(typeof file!=='string'||!file.match(/\.(webp|png|jpe?g)$/i))return;
-    const node=p?.value||n.arguments[0],key=node.range[0],id=slots.get(key)?.id||`image:${slots.size}`;
-    slots.set(key,{id,label:value,file,range:node.range,url:'/island/private/game/'+file.replace(/^.*?(encounters\/)/,'$1')});
+    const group=ancestors.find(a=>a.type==='SpreadElement'&&a.argument?.type==='ArrayExpression'&&source.slice(a.range[0],a.argument.range[0]+24).includes('/* subplot-gap */'));
+    const parent=ancestors.at(-1),node=group|| (gap?(parent?.type==='SpreadElement'?parent:n):n.arguments[0]);
+    const key=node.range[0],existing=slots.get(key),id=existing?.id||`image:${slots.size}`;
+    slots.set(key,{id,label:value,file,location:group?`${locations.get(group.range[0])}.argument`:locations.get(n.range[0]),range:group?n.arguments[0].range:node.range,...(group?{pairedRanges:[...(existing?.pairedRanges||[]),n.arguments[0].range]}:{}),...(p?{table:{keys:pics.properties.map(name),trailingComma:source.slice(pics.properties.at(-1).range[1],pics.range[1]-1).replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,'').includes(','),range:pics.range,entry:slice(source,property(pics,value).value),fileRange:p.value.range.map(v=>v-property(pics,value).value.range[0])}}:{}),calls:[...(existing?.calls||[]),n.range[0]],
+      ...(gap?{gap:true,options:resolve(n.arguments[1])}:{}),url:'/island/private/game/'+file.replace(/^.*?(encounters\/)/,'$1')});
   });return [...slots.values()];
+}
+function imageEdit(slot,file){
+  if(slot.pairedRanges)return slot.pairedRanges.map(range=>({range,value:file}));
+  if(slot.table){
+    const table=slot.table,base=`${slot.label}__editor_${digest(file).slice(0,10)}`;
+    let key=base,suffix=1;while(table.keys.includes(key))key=`${base}_${suffix++}`;
+    const entry=replaceArguments(table.entry,[{range:table.fileRange,value:file}]);
+    return [{range:slot.range,value:key},{range:[table.range[1]-1,table.range[1]-1],raw:`${table.keys.length&&!table.trailingComma?',':''}\n${JSON.stringify(key)}: ${entry}\n`}];
+  }
+  if(!slot.gap)return [{range:slot.range,value:file}];
+  // A derived image has two presentations. Give this occurrence its own shots,
+  // leaving the shared gap helper and every other use of it untouched.
+  const o=slot.options;
+  if(!o||!Object.values(o).every(v=>v!==undefined))throw Error('Save the scene staging before replacing this derived image');
+  const first={mask:'gap',width:+(o.w*0.55).toFixed(3)};
+  for(const key of ['at','focus','push','fade','cue'])if(o[key]!==undefined)first[key]=o[key];
+  const second={mask:'gap',width:o.w,ms:600,delay:450,_skipList:true};
+  return [{range:slot.range,raw:`...[/* subplot-gap */shot(${JSON.stringify(file)}, ${JSON.stringify(first)}), shot(${JSON.stringify(file)}, ${JSON.stringify(second)})]`}];
+}
+function slotsByAuthoredStep(steps,array,slots,result=new Map()){
+  for(let index=0;index<(steps||[]).length;index++){
+    const step=steps[index],node=array?.elements?.[index];if(!node)continue;
+    if(step.imageSlot){
+      const slot=slots.find(s=>s.calls.some(call=>call>=node.range[0]&&call<node.range[1]));
+      if(slot)result.set(step.imageSlot,slot);
+    }
+    const call=node.type==='SpreadElement'?node.argument:node;
+    if(step.sequence)slotsByAuthoredStep(step.sequence,call.type==='ArrayExpression'?call:call.arguments?.[1],slots,result);
+    if(step.then)slotsByAuthoredStep(step.then,call.arguments?.[1],slots,result);
+    if(step.else)slotsByAuthoredStep(step.else,call.arguments?.[2],slots,result);
+  }
+  return result;
 }
 export function recipe(source,config,request){
   const scenes=model(source), rows=[];
@@ -105,8 +232,8 @@ export function recipe(source,config,request){
   if(request.action==='catalog')return {scenes:rows.map(r=>({id:r.id,provider:'local',title:`${r.sceneId.replaceAll('_',' ')} · ${r.node}`,node:r.node,group:config.label,count:r.sequence.value.elements?.length??null})),errors:[]};
   const row=rows.find(r=>r.id===request.id);if(!row)throw Error('Scene not found');
   const {scene,sequence}=row;
-  const images=imageSlots(source,sequence.value);
-  if(request.action==='read')return {id:row.id,provider:'local',title:`${row.sceneId.replaceAll('_',' ')} · ${row.node}`,node:row.node,group:config.label,revision:digest(source),steps:decode(sequence.value,source),raw:slice(source,sequence.value),entries:[],routesEditable:false,metadata:{},placement:{place:literal(property(scene,'place')?.value)??null,day:literal(property(scene,'day')?.value)??null,condition:literal(property(scene,'show')?.value)??null},previewUrl:`/game3d/index.html?scene=${encodeURIComponent(row.sceneId)}`,recipe:true,images:images.map(({range,...image})=>image)};
+  const values=recipeValues(source), images=imageSlots(source,sequence.value,values),context={...values,images};
+  if(request.action==='read')return {id:row.id,provider:'local',title:`${row.sceneId.replaceAll('_',' ')} · ${row.node}`,node:row.node,group:config.label,revision:digest(source),steps:decode(sequence.value,source,context),raw:slice(source,sequence.value),entries:[],routesEditable:false,metadata:{},placement:{place:literal(property(scene,'place')?.value)??null,day:literal(property(scene,'day')?.value)??null,condition:literal(property(scene,'show')?.value)??null},previewUrl:`/game3d/index.html?scene=${encodeURIComponent(row.sceneId)}`,recipe:true,capabilities:{camera:!!values.binding('raw')},images:images.map(({range,calls,gap,options,table,pairedRanges,...image})=>image)};
   if(request.action==='prepare'){
     if(request.revision!==digest(source))throw Error('CONFLICT: The recipe changed. Reload this scene.');
     const helpers=new Set(parseSource(source).body.flatMap(n=>(n.declaration||n).declarations||[]).map(d=>d.id.name));
@@ -123,27 +250,32 @@ export function recipe(source,config,request){
     }}
     let changed=source;for(const e of edits.sort((a,b)=>b.range[0]-a.range[0]))changed=changed.slice(0,e.range[0])+e.text+changed.slice(e.range[1]);
     if(request.restoreImages?.length){
-      const restoredScene=model(changed).find(s=>literal(property(s,'id')?.value)===row.sceneId);
-      const restoredSequence=property(property(restoredScene,'nodes')?.value,row.node)||property(restoredScene,row.node);
-      const currentSlots=imageSlots(changed,restoredSequence.value),replacements=[];
       for(let i=0;i<request.restoreImages.length;i++){
-        const prior=request.restoreImages[i];
-        const next=currentSlots.find(s=>s.label===prior.label)||currentSlots[i];
-        if(!next)throw Error('This revision’s image slot is no longer available');
-        if(next.file!==prior.file)replacements.push({range:next.range,value:prior.file});
+        const currentScene=model(changed).find(s=>literal(property(s,'id')?.value)===row.sceneId);
+        const currentSequence=property(property(currentScene,'nodes')?.value,row.node)||property(currentScene,row.node);
+        const currentSlots=imageSlots(changed,currentSequence.value), prior=request.restoreImages[i];
+        const authoredSlots=request.steps?slotsByAuthoredStep(request.steps,currentSequence.value,currentSlots):null;
+        const next=authoredSlots?authoredSlots.get(prior.id):currentSlots.find(s=>s.location===prior.location)||currentSlots[i];
+        if(!next){if(authoredSlots)continue;throw Error('This revision’s image slot is no longer available');}
+        if(next.file!==prior.file)changed=replaceArguments(changed,imageEdit(next,prior.file));
       }
-      changed=replaceArguments(changed,replacements);
     }
-    if(request.imageReplacement){
-      const prior=(request.restoreImages||images).find(i=>i.id===request.imageReplacement.slot);if(!prior)throw Error('The image slot changed. Reload the scene.');
+    for(const replacement of request.imageReplacements||[request.imageReplacement].filter(Boolean)){
+      const prior=(request.restoreImages||images).find(i=>i.id===replacement.slot);if(!prior)throw Error('The image slot changed. Reload the scene.');
       const editedScene=model(changed).find(s=>literal(property(s,'id')?.value)===row.sceneId);
       const editedSequence=property(property(editedScene,'nodes')?.value,row.node)||property(editedScene,row.node);
-      const matches=imageSlots(changed,editedSequence.value).filter(i=>i.label===prior.label&&i.file===prior.file);
-      const occurrence=(request.restoreImages||images).filter(i=>i.label===prior.label&&i.file===prior.file).findIndex(i=>i.id===prior.id);
-      const next=matches[occurrence];if(!next)throw Error('Save the changed sequence before replacing this image');
-      changed=changed.slice(0,next.range[0])+JSON.stringify(request.imageReplacement.file)+changed.slice(next.range[1]);
+      const currentSlots=imageSlots(changed,editedSequence.value);
+      const authoredSlots=request.steps?slotsByAuthoredStep(request.steps,editedSequence.value,currentSlots):null;
+      const next=authoredSlots?authoredSlots.get(replacement.slot):currentSlots.find(i=>i.location===prior.location);
+      if(!request.steps&&request.raw!==slice(source,sequence.value))throw Error('Save the changed sequence before replacing this image');
+      if(!next)throw Error('Save the changed sequence before replacing this image');
+      changed=replaceArguments(changed,imageEdit(next,replacement.file));
     }
-    parseSource(changed);return {source,changed,revision:digest(changed)};
+    parseSource(changed);
+    const finalScene=model(changed).find(s=>literal(property(s,'id')?.value)===row.sceneId);
+    const finalSequence=property(property(finalScene,'nodes')?.value,row.node)||property(finalScene,row.node);
+    const imageRemap=request.steps?Object.fromEntries([...slotsByAuthoredStep(request.steps,finalSequence.value,imageSlots(changed,finalSequence.value))].map(([old,slot])=>[old,slot.id])):{};
+    return {source,changed,revision:digest(changed),imageRemap};
   }
   throw Error('Unsupported recipe operation');
 }

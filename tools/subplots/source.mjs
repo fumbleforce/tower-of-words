@@ -7,6 +7,18 @@ const hash = s => crypto.createHash('sha256').update(s).digest('hex');
 const key = p => p?.type === 'Property' && !p.computed ? p.key.name ?? p.key.value : null;
 const prop = (o, name) => o?.properties?.find(p => key(p) === name);
 const literal = n => { try { return staticValue(n); } catch { return null; } };
+function decodeStep(node,source) {
+  try{return staticValue(node);}catch{/* Keep computed properties without executing them. */}
+  if(node?.type==='ArrayExpression')return node.elements.map(n=>decodeStep(n,source));
+  if(node?.type==='ObjectExpression'&&node.properties.every(p=>key(p)!==null))return Object.fromEntries(node.properties.map(p=>[key(p),decodeStep(p.value,source)]));
+  return {$expression:source.slice(...node.range)};
+}
+function encodeStep(value){
+  if(value&&typeof value==='object'&&typeof value.$expression==='string')return value.$expression;
+  if(Array.isArray(value))return '['+value.map(encodeStep).join(',\n')+']';
+  if(value&&typeof value==='object')return '{'+Object.entries(value).map(([k,v])=>JSON.stringify(k)+': '+encodeStep(v)).join(', ' )+'}';
+  return JSON.stringify(value);
+}
 export function inspect(source, file) {
   const ast = parseSource(source), scenes = [];
   visitSource(ast, node => {
@@ -15,7 +27,7 @@ export function inspect(source, file) {
     for (const p of nodes.properties) {
       const name = key(p);
       if (!name) continue;
-      const steps = literal(p.value);
+      const steps = p.value.type==='ArrayExpression'?decodeStep(p.value,source):null;
       scenes.push({ id: `public:${file}#${name}`, provider: 'public', title: name.replaceAll('_', ' '),
         node: name, file, group: file.replace(/^game3d\/story\//, '').replace(/\.js$/, ''),
         steps: Array.isArray(steps) ? steps : null, raw: source.slice(...p.value.range),
@@ -105,7 +117,7 @@ function proposed(root, data) {
   const {scene:s,resolved,source} = target(root,data.id);
   if (data.revision !== hash(source)) throw Error('CONFLICT: This story changed outside the editor. Reload it before saving.');
   let raw = data.raw;
-  if (data.steps !== null && data.steps !== undefined) { validateSteps(data.steps); raw = JSON.stringify(removeStaleVoice(data.steps,s.steps),null,2); }
+  if (data.steps !== null && data.steps !== undefined) { validateSteps(data.steps); raw = encodeStep(removeStaleVoice(data.steps,s.steps)); }
   if (typeof raw !== 'string' || raw.length > 500000) throw Error('Missing or oversized scene');
   const expression = parseSource(`const steps = (${raw});`).body[0]?.declarations?.[0]?.init;
   if (!expression || !['ArrayExpression','CallExpression','Identifier','MemberExpression','ConditionalExpression'].includes(expression.type)) throw Error('A scene expression must produce a sequence of steps');

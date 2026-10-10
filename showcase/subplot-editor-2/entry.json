@@ -1,0 +1,38 @@
+{
+  "title": "Visual subplot editor",
+  "date": "2026-10-10",
+  "by": "codex",
+  "caption": "Storyboards with scene pictures, English and Japanese together, bible-backed choices and an integrated image composer. These captures use a neutral sample scene and an existing game screenshot.",
+  "result": [
+    "storyboard-1366",
+    "images-1366"
+  ],
+  "images": [
+    {
+      "id": "storyboard-1366",
+      "image": "game3d/shots/subplot-editor-2/storyboard-1366.png",
+      "caption": "Visual storyboard and bilingual dialogue."
+    },
+    {
+      "id": "images-1366",
+      "image": "game3d/shots/subplot-editor-2/images-1366.png",
+      "caption": "Image composition and the existing render library."
+    },
+    {
+      "id": "storyboard-390",
+      "image": "game3d/shots/subplot-editor-2/storyboard-390.png",
+      "caption": "Phone storyboard with direct panel navigation."
+    },
+    {
+      "id": "images-390",
+      "image": "game3d/shots/subplot-editor-2/images-390.png",
+      "caption": "Phone image composition."
+    }
+  ],
+  "links": [
+    {
+      "label": "Open the local editor",
+      "href": "http://127.0.0.1:8771/tools/subplots/web/"
+    }
+  ]
+}

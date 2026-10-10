@@ -31,6 +31,16 @@ class LocalRecipes(unittest.TestCase):
         before=self.source.read_text();data=self.call('read');data['steps'][0]['text']='Changed'
         with self.assertRaisesRegex(ValueError,'rebuild failed'):self.call('save',**{k:v for k,v in data.items() if k!='id'})
         self.assertEqual(self.source.read_text(),before);self.assertEqual(self.output.read_text(),'{"prior":true}')
+    def test_failed_configured_check_restores_source_and_derived_output(self):
+        before=self.source.read_text()
+        self.settings['checks']=[['python3','-c','raise SystemExit(1)']]
+        self.config.write_text(json.dumps(self.settings))
+        data=self.call('read');data['steps'][0]['text']='Changed'
+        with self.assertRaisesRegex(ValueError,'validation failed'):
+            self.call('save',**{k:v for k,v in data.items() if k!='id'})
+        self.assertEqual(self.source.read_text(),before)
+        self.assertEqual(self.output.read_text(),'{"prior":true}')
+
     def test_stale_recipe_rejected(self):
         data=self.call('read');self.source.write_text(self.source.read_text()+'\n')
         with self.assertRaisesRegex(ValueError,'CONFLICT'):self.call('save',**{k:v for k,v in data.items() if k!='id'})
@@ -70,6 +80,37 @@ class LocalRecipes(unittest.TestCase):
         prior['metadata']['image']={'file':'selected.png','slot':prior['images'][0]['id']}
         restored=self.call('save',**{k:v for k,v in prior.items() if k!='id'})
         self.assertIn('editor-',restored['images'][0]['file'])
+
+    def test_multiple_selected_images_are_applied_in_one_save(self):
+        self.media_fixture()
+        self.source.write_text("const scene={id:'hello',nodes:{start:[shot('encounters/a.webp'),shot('encounters/b.webp')]}};const SCENES=[scene];")
+        data=self.call('read')
+        data['metadata']['images']={slot['id']:{'file':'selected.png','slot':slot['id']} for slot in data['images']}
+        result=self.call('save',**{k:v for k,v in data.items() if k!='id'})
+        self.assertEqual(len(result['images']),2)
+        self.assertTrue(all('editor-' in slot['file'] for slot in result['images']))
+
+    def test_reorder_remaps_composition_and_pending_image_to_the_same_shot(self):
+        self.media_fixture()
+        self.source.write_text("const scene={id:'hello',nodes:{start:[shot('encounters/a.webp'),shot('encounters/b.webp')]}};const SCENES=[scene];")
+        data=self.call('read')
+        data['metadata']['compositions']={'image:0':{'pose':'Seated','imageSlot':'image:0'},'image:1':{'pose':'Walking','imageSlot':'image:1'}}
+        data['metadata']['images']={'image:0':{'file':'selected.png','slot':'image:0'}}
+        data['steps'].reverse()
+        result=self.call('save',**{k:v for k,v in data.items() if k!='id'})
+        self.assertEqual(result['images'][0]['file'],'encounters/b.webp')
+        self.assertIn('editor-',result['images'][1]['file'])
+        self.assertEqual(result['metadata']['compositions']['image:1']['pose'],'Seated')
+        self.assertEqual(result['metadata']['compositions']['image:0']['pose'],'Walking')
+        self.assertTrue(result['metadata']['images']['image:1']['applied'])
+        self.assertEqual(result['metadata']['images']['image:1']['slot'],'image:1')
+
+    def test_removed_shot_drops_legacy_selected_image(self):
+        self.media_fixture()
+        saved=self.call('save',**self.selected())
+        saved['steps'].pop(0)
+        result=self.call('save',**{k:v for k,v in saved.items() if k!='id'})
+        self.assertNotIn('image',result['metadata'])
 
     def test_changed_voice_is_retired_and_removed_from_index(self):
         self.media_fixture();audio=self.root/'audio';audio.mkdir()

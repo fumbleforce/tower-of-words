@@ -59,3 +59,9 @@ test('edited dialogue drops its outdated explicit voice reference',t=>{
  const s=run(f.root,{action:'read',id:f.id});s.steps[0].text='New';
  const p=run(f.root,{...s,action:'prepare'});assert.doesNotMatch(p.changed,/old-take/);assert.match(p.changed,/smile/);
 });
+
+test('a computed direction does not hide adjacent editable dialogue',t=>{
+ const f=fixture(t,"const helper=()=>[]; export default {nodes:{hello:[...helper(),{say:'a',text:'Old',duration:getDuration()},'a: Later']}};");
+ const s=run(f.root,{action:'read',id:f.id});assert.equal(s.steps[1].text,'Old');s.steps[1].text='New';
+ const p=run(f.root,{...s,action:'prepare'});assert.match(p.changed,/\.\.\.helper\(\)/);assert.match(p.changed,/getDuration\(\)/);assert.match(p.changed,/New/);
+});

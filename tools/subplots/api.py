@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import posixpath
 import subprocess
 import tempfile
 import threading
@@ -16,6 +17,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = Path(os.environ.get('SUBPLOTS_ROOT', HERE.parent.parent)).resolve()
 LOCK = threading.RLock()
 MAX_BODY = 2 * 1024 * 1024
+AUTHORING_CACHE = {}
 
 def state_dir():
     override = os.environ.get('SUBPLOTS_STATE')
@@ -73,7 +75,32 @@ def local_provider(body):
         raise ValueError(data.get('error', 'Local scene adapter failed'))
     return data
 
+def authoring_catalog():
+    """Cache the static bible catalog until a public source or image changes."""
+    files = [ROOT / p for p in (
+        'docs/game/cast.md', 'docs/game/places.md', 'game3d/js/ui/portrait-data.js',
+        'game3d/js/places/definitions.js', 'game3d/js/sim.js', 'game3d/js/lang.js',
+        'game3d/js/tickets/words.js', 'game3d/data/mc/eric.json')]
+    files += list((ROOT / 'game3d/story').rglob('*.js'))
+    files += list((ROOT / 'bible/shots/places').glob('*.webp'))
+    signature = tuple((str(p), p.stat().st_mtime_ns, p.stat().st_size)
+                      for p in sorted(set(files)) if p.is_file())
+    with LOCK:
+        cached = AUTHORING_CACHE.get(str(ROOT))
+        if cached and cached[0] == signature:
+            return cached[1]
+        result = subprocess.run(['node', str(HERE / 'authoring.mjs')], text=True,
+                                capture_output=True, timeout=25, cwd=ROOT,
+                                env={**os.environ, 'SUBPLOTS_ROOT': str(ROOT)})
+        if result.returncode:
+            raise ValueError('The authoring catalog could not read its public sources.')
+        data = json.loads(result.stdout)
+        AUTHORING_CACHE[str(ROOT)] = (signature, data)
+        return data
+
 def dispatch(action, body):
+    if action == 'authoring':
+        return authoring_catalog()
     scene_id = body.get('id', '')
     if not isinstance(scene_id, str):
         raise ValueError('Invalid scene id')
@@ -131,12 +158,13 @@ def dispatch(action, body):
 
 def image_proxy(handler, suffix, body=None):
     parsed = urllib.parse.urlsplit(suffix)
-    allowed = {'/api/presets', '/api/jobs', '/api/state', '/api/generate', '/api/history'}
-    if parsed.path not in allowed and not (body is None and parsed.path.startswith(('/thumb/', '/out/'))):
+    allowed = {'/api/presets', '/api/jobs', '/api/state', '/api/generate', '/api/history', '/api/portraits'}
+    if parsed.path not in allowed and not (body is None and parsed.path.startswith(('/thumb/', '/out/', '/priv/portraits/', '/repo/'))):
         raise ValueError('Unsupported image service operation')
     if body is not None and parsed.path != '/api/generate':
         raise ValueError('Unsupported image service write')
-    if '..' in parsed.path or '\\' in parsed.path:
+    decoded_path = urllib.parse.unquote(parsed.path)
+    if '..' in decoded_path or '\\' in decoded_path or '%' in decoded_path or posixpath.normpath(decoded_path).startswith('/repo/island/private'):
         raise ValueError('Invalid image path')
     data = None if body is None else json.dumps(body).encode()
     req = urllib.request.Request('http://127.0.0.1:8772' + suffix, data=data,
@@ -187,7 +215,7 @@ def handle(handler):
             suffix = '/' + action[6:] + ('?' + url.query if url.query else '')
             image_proxy(handler, suffix, body if handler.command == 'POST' else None)
         else:
-            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history')):
+            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring')):
                 raise ValueError('Unsupported request method')
             handler._json(200, dispatch(action, body))
     except (ValueError, OSError, subprocess.SubprocessError) as e:
