@@ -82,7 +82,11 @@ export function progresses(nodes, node, seen = new Set()) {
   return walk(nodes?.[node]);
 }
 
-const nameOf = (game, item) => game.runner.speaker?.(item.id)?.name || item.label || item.id;
+// speaker() always answers, with the bare id for a thing that has no name of its own, so the label wins over an id
+const nameOf = (game, item) => {
+  const n = game.runner.speaker?.(item.id)?.name;
+  return (n && n !== item.id ? n : '') || item.label || n || item.id;
+};
 // a thing's verb now (Tama: Return the chair while the chair is to bring back, else Pet)
 function verbOf(item) {
   const vi = item.verbIf;
