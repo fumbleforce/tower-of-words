@@ -151,7 +151,7 @@ function buildTitle() {
   go.dataset.first = '';
   const mc = el('button', 'mcont', '<span class="l">Continue</span><span class="s"></span>');
   const ms = el('button', 'msettings', 'Settings');
-  menu.append(go, mc, ms, openingButton());
+  menu.append(go, mc, openingButton(), ms);
   inner.querySelector('.btns')?.remove();
   inner.querySelector('.keys')?.remove();
   inner.append(menu);

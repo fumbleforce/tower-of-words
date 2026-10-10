@@ -24,14 +24,16 @@ export function playOpening({ gate = false } = {}) {
   document.body.append(wrap);
   pauseAudio(true);
   frame.addEventListener('load', () => frame.contentWindow?.focus());
-  try {
-    localStorage.setItem(SEEN, '1');
-  } catch {
-    /* storage blocked: it may show again next visit */
-  }
   function done(e) {
     if (e.source !== frame.contentWindow || e.data?.opening !== 'done') return;
     removeEventListener('message', done);
+    // seen only once it was watched to the end or skipped on purpose: a reload before that shows it again
+    // (Jørgen 2026-10-10: "it should not be marked as viewed until actually viewed")
+    try {
+      localStorage.setItem(SEEN, '1');
+    } catch {
+      /* storage blocked: it may show again next visit */
+    }
     wrap.classList.add('out');
     setTimeout(() => wrap.remove(), 900);
     pauseAudio(false);
