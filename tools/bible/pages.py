@@ -40,8 +40,11 @@ LIST = 'bible/pages-media.json'
 BIBLE_FILES = ['bible/index.html', 'bible/app.js', 'bible/app.css', 'bible/live.js', 'bible/work.js', 'bible/showcase-order.js']
 MEDIA_RE = re.compile(r'\.(webp|png|jpe?g|gif|avif|mp3|wav|ogg|opus|m4a|mp4|webm)$', re.I)
 VIEWER_RE = re.compile(r'\.(glb|webp|json)$', re.I)  # review.json "viewer_files": staged as they are
-CONVERT_RE = re.compile(r'\.(png|jpe?g)$', re.I)
-CONVERT_MIN = 200 * 1024  # smaller PNG/JPEG files go up as they are
+CONVERT_RE = re.compile(r'\.(png|jpe?g|webp)$', re.I)
+CONVERT_MIN = 60 * 1024  # smaller images go up as they are
+# GitHub rejects a push over 2 GB and asks Pages sites to stay near 1 GB, and the full-size originals are 5 GB (R2 is not
+# publicly readable). So the public bible shows images at most SITE_MAX px on the long side, as WebP.
+SITE_MAX, SITE_QUALITY = 1024, 72
 # Never on the public site: the private folder, any private/ folder, anything reward, his own manifest.
 DENY_RE = re.compile(r'(^|/)island/private(/|$)|(^|/)private/|reward|manifest\.user\.json', re.I)
 # Media also left out of a public page when the name says private (a settings tab screenshot of private mode).
@@ -165,8 +168,8 @@ def cache_dir():
 
 
 def webp_copy(src, sha, cache):
-    """A full-size WebP of a PNG/JPEG, cached by the source's sha256; None when WebP would not help."""
-    out = os.path.join(cache, sha + '.webp')
+    """A WebP of an image at most SITE_MAX px, cached by the source's sha256 and those settings; None when it would not help."""
+    out = os.path.join(cache, f'{sha}-{SITE_MAX}-{SITE_QUALITY}.webp')
     if os.path.exists(out):
         return out
     skip = out + '.skip'
@@ -175,12 +178,13 @@ def webp_copy(src, sha, cache):
     from PIL import Image
     try:
         im = Image.open(src)
-        if max(im.size) > 16000:
-            raise ValueError('too large for WebP')
+        if getattr(im, 'is_animated', False):
+            raise ValueError('animated: kept as it is')
+        im.thumbnail((SITE_MAX, SITE_MAX))
         if im.mode not in ('RGB', 'RGBA'):
             im = im.convert('RGBA' if 'A' in im.getbands() or im.mode == 'P' else 'RGB')
         buf = io.BytesIO()
-        im.save(buf, 'WEBP', quality=88, method=4)
+        im.save(buf, 'WEBP', quality=SITE_QUALITY, method=4)
     except Exception:
         open(skip, 'w').close()
         return None
@@ -209,7 +213,7 @@ def cmd_stage(site):
         sys.exit('bible pages: bible/index.html no longer has the BIBLE_ROOT line to mark remote mode')
     open(idx, 'w', encoding='utf-8').write(html)
 
-    # 2. the media every item shows, sha-checked against HEAD's lock file; big PNG/JPEG as WebP
+    # 2. the media every item shows, sha-checked against HEAD's lock file; images over 60 KB as WebP at most 1024 px
     refs = referenced(site)
     have = sync.local_state(sorted(p for p in refs if p in lock), cache := sync.load_cache())
     sync.save_cache(cache)

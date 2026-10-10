@@ -20,7 +20,7 @@
 #
 # The bible: /bible/ is the world bible's Review and Showcase in remote mode, with every committed file under reviews/ and
 # showcase/ and the images and audio they show (tools/bible/pages.py stage: text from HEAD, media sha-checked against
-# HEAD's lock file, big PNGs as WebP). Send there opens a GitHub issue; tools/review.py pull imports it.
+# HEAD's lock file, images over 60 KB as WebP, 1024 px at most, to stay under the 2 GB push limit). Send there opens a GitHub issue; tools/review.py pull imports it.
 # Deny check (tools/bible/pages.py deny): the build stops if any file in the site is under island/private/, in a
 # private/ folder or on a reward path.
 #
