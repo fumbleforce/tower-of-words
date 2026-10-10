@@ -1,0 +1,451 @@
+{
+  "title": "Gym windows and equipment storage",
+  "date": "2026-10-09",
+  "by": "codex-tui",
+  "caption": "The gym has framed wall openings, wheeled ball carts, an open bib shelf and carrying loops on the mats. The existing reception attendant and phone framing still need separate work.",
+  "result": [
+    "store-desktop",
+    "windows-desktop",
+    "window-phone",
+    "shelf-phone"
+  ],
+  "sections": [
+    {
+      "title": "Fixture details",
+      "caption": "Views of the window frames and equipment storage.",
+      "images": [
+        {
+          "id": "store-desktop",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/store-desktop.png",
+          "caption": "Storage carts, stacked mats and folded bibs, desktop."
+        },
+        {
+          "id": "windows-desktop",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/windows-desktop.png",
+          "caption": "Window frames, inset panes and deep sills, desktop."
+        },
+        {
+          "id": "window-phone",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/window-phone.png",
+          "caption": "A complete window at phone size."
+        },
+        {
+          "id": "shelf-phone",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/shelf-phone.png",
+          "caption": "The open shelf, folded bibs and both side posts at phone size."
+        }
+      ]
+    },
+    {
+      "title": "Before the fixture work",
+      "caption": "The original windows, carts and shelf, recorded at both sizes.",
+      "images": [
+        {
+          "id": "baseline-1366-arrival",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-1366-arrival.png",
+          "caption": "Arrival, desktop."
+        },
+        {
+          "id": "baseline-1366-gym_desk",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-1366-gym_desk.png",
+          "caption": "Reception desk, desktop."
+        },
+        {
+          "id": "baseline-1366-gym_lockers",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-1366-gym_lockers.png",
+          "caption": "Lockers, desktop."
+        },
+        {
+          "id": "baseline-1366-gym_court",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-1366-gym_court.png",
+          "caption": "Court, desktop."
+        },
+        {
+          "id": "baseline-1366-gym_store",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-1366-gym_store.png",
+          "caption": "Equipment store, desktop."
+        },
+        {
+          "id": "baseline-1366-gym_benches",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-1366-gym_benches.png",
+          "caption": "Hall benches, desktop."
+        },
+        {
+          "id": "baseline-1366-gym_meeting",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-1366-gym_meeting.png",
+          "caption": "Meeting corner, desktop."
+        },
+        {
+          "id": "baseline-390-arrival",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-390-arrival.png",
+          "caption": "Arrival, phone."
+        },
+        {
+          "id": "baseline-390-gym_desk",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-390-gym_desk.png",
+          "caption": "Reception desk, phone."
+        },
+        {
+          "id": "baseline-390-gym_lockers",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-390-gym_lockers.png",
+          "caption": "Lockers, phone."
+        },
+        {
+          "id": "baseline-390-gym_court",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-390-gym_court.png",
+          "caption": "Court, phone."
+        },
+        {
+          "id": "baseline-390-gym_store",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-390-gym_store.png",
+          "caption": "Equipment store, phone."
+        },
+        {
+          "id": "baseline-390-gym_benches",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-390-gym_benches.png",
+          "caption": "Hall benches, phone."
+        },
+        {
+          "id": "baseline-390-gym_meeting",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/baseline-390-gym_meeting.png",
+          "caption": "Meeting corner, phone."
+        }
+      ]
+    },
+    {
+      "title": "First fixture attempt",
+      "caption": "The first carts used smaller balls. The shelf and window details were revised after review.",
+      "images": [
+        {
+          "id": "attempt-01-1366-arrival",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/attempt-01-1366-arrival.png",
+          "caption": "Arrival, desktop."
+        },
+        {
+          "id": "attempt-01-1366-gym_desk",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/attempt-01-1366-gym_desk.png",
+          "caption": "Reception desk, desktop."
+        },
+        {
+          "id": "attempt-01-1366-gym_lockers",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/attempt-01-1366-gym_lockers.png",
+          "caption": "Lockers, desktop."
+        },
+        {
+          "id": "attempt-01-1366-gym_court",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/attempt-01-1366-gym_court.png",
+          "caption": "Court, desktop."
+        },
+        {
+          "id": "attempt-01-1366-gym_store",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/attempt-01-1366-gym_store.png",
+          "caption": "Equipment store, desktop."
+        },
+        {
+          "id": "attempt-01-1366-gym_benches",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/attempt-01-1366-gym_benches.png",
+          "caption": "Hall benches, desktop."
+        },
+        {
+          "id": "attempt-01-1366-gym_meeting",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/attempt-01-1366-gym_meeting.png",
+          "caption": "Meeting corner, desktop."
+        },
+        {
+          "id": "attempt-01-1366-gym_lobby",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/attempt-01-1366-gym_lobby.png",
+          "caption": "Lobby, desktop."
+        },
+        {
+          "id": "attempt-01-1366-failure",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/attempt-01-1366-failure.png",
+          "caption": "The bounding-box check stopped at the store. Later triangle checks found no body intersection in the tested poses."
+        }
+      ]
+    },
+    {
+      "title": "Comparison with the unchanged gym",
+      "caption": "The same store approach also failed the broad bounding-box check on main.",
+      "images": [
+        {
+          "id": "main-baseline-1366-arrival",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-arrival.png",
+          "caption": "Arrival, desktop."
+        },
+        {
+          "id": "main-baseline-1366-gym_desk",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-gym_desk.png",
+          "caption": "Reception desk, desktop."
+        },
+        {
+          "id": "main-baseline-1366-gym_lockers",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-gym_lockers.png",
+          "caption": "Lockers, desktop."
+        },
+        {
+          "id": "main-baseline-1366-gym_court",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-gym_court.png",
+          "caption": "Court, desktop."
+        },
+        {
+          "id": "main-baseline-1366-gym_store",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-gym_store.png",
+          "caption": "Equipment store, desktop."
+        },
+        {
+          "id": "main-baseline-1366-gym_benches",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-gym_benches.png",
+          "caption": "Hall benches, desktop."
+        },
+        {
+          "id": "main-baseline-1366-gym_meeting",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-gym_meeting.png",
+          "caption": "Meeting corner, desktop."
+        },
+        {
+          "id": "main-baseline-1366-gym_lobby",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-gym_lobby.png",
+          "caption": "Lobby, desktop."
+        },
+        {
+          "id": "main-baseline-1366-store-close",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-store-close.png",
+          "caption": "Storage detail, desktop."
+        },
+        {
+          "id": "main-baseline-1366-window-close",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-window-close.png",
+          "caption": "Window detail, desktop."
+        },
+        {
+          "id": "main-baseline-1366-failure",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/main-baseline-1366-failure.png",
+          "caption": "The bounding-box check stopped at the store. Later triangle checks found no body intersection in the tested poses."
+        }
+      ]
+    },
+    {
+      "title": "Actual store arrivals",
+      "caption": "Eric and Carina retained their arrival headings. The probe also checked 16 rotated headings. It found no exact intersections, though Eric came within 25 mm of the panel at two headings.",
+      "images": [
+        {
+          "id": "approach-probe-carina-actual-arrival",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/approach-probe-carina-actual-arrival.png",
+          "caption": "Carina at the unchanged store target. The triangle probe found no intersection in this pose."
+        },
+        {
+          "id": "approach-probe-eric-actual-arrival",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/approach-probe-eric-actual-arrival.png",
+          "caption": "Eric at the unchanged store target. The triangle probe found no intersection in this pose."
+        }
+      ]
+    },
+    {
+      "title": "First desktop route check",
+      "caption": "Routes, seats, booking actions and fixture checks passed. The driver omitted the Autosave-card click, so this attempt did not complete Continue.",
+      "images": [
+        {
+          "id": "final-desktop-1366-arrival",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-arrival.png",
+          "caption": "Arrival, desktop."
+        },
+        {
+          "id": "final-desktop-1366-gym_desk",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-gym_desk.png",
+          "caption": "Reception desk, desktop."
+        },
+        {
+          "id": "final-desktop-1366-gym_lockers",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-gym_lockers.png",
+          "caption": "Lockers, desktop."
+        },
+        {
+          "id": "final-desktop-1366-gym_court",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-gym_court.png",
+          "caption": "Court, desktop."
+        },
+        {
+          "id": "final-desktop-1366-gym_store",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-gym_store.png",
+          "caption": "Equipment store, desktop."
+        },
+        {
+          "id": "final-desktop-1366-gym_benches",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-gym_benches.png",
+          "caption": "Hall benches, desktop."
+        },
+        {
+          "id": "final-desktop-1366-gym_meeting",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-gym_meeting.png",
+          "caption": "Meeting corner, desktop."
+        },
+        {
+          "id": "final-desktop-1366-gym_lobby",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-gym_lobby.png",
+          "caption": "Lobby, desktop."
+        },
+        {
+          "id": "final-desktop-1366-store-close",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-store-close.png",
+          "caption": "Storage detail, desktop."
+        },
+        {
+          "id": "final-desktop-1366-window-close",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-window-close.png",
+          "caption": "Window detail, desktop."
+        },
+        {
+          "id": "final-desktop-1366-failure",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-1366-failure.png",
+          "caption": "The first Continue check stopped at the save picker because the driver had not clicked the Autosave card."
+        }
+      ]
+    },
+    {
+      "title": "Desktop route context",
+      "caption": "Routes and Continue passed. Overviews still show the existing reception placeholder, which the critic capped at 3/10. These are context views, not approval of the whole gym.",
+      "images": [
+        {
+          "id": "final-desktop-02-1366-arrival",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-02-1366-arrival.png",
+          "caption": "Arrival, desktop."
+        },
+        {
+          "id": "final-desktop-02-1366-gym_desk",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-02-1366-gym_desk.png",
+          "caption": "Reception desk, desktop."
+        },
+        {
+          "id": "final-desktop-02-1366-gym_lockers",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-02-1366-gym_lockers.png",
+          "caption": "Lockers, desktop."
+        },
+        {
+          "id": "final-desktop-02-1366-gym_court",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-02-1366-gym_court.png",
+          "caption": "Court, desktop."
+        },
+        {
+          "id": "final-desktop-02-1366-gym_store",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-02-1366-gym_store.png",
+          "caption": "Equipment store, desktop."
+        },
+        {
+          "id": "final-desktop-02-1366-gym_benches",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-02-1366-gym_benches.png",
+          "caption": "Hall benches, desktop."
+        },
+        {
+          "id": "final-desktop-02-1366-gym_meeting",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-02-1366-gym_meeting.png",
+          "caption": "Meeting corner, desktop."
+        },
+        {
+          "id": "final-desktop-02-1366-gym_lobby",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-02-1366-gym_lobby.png",
+          "caption": "Lobby, desktop."
+        },
+        {
+          "id": "final-desktop-02-1366-continued",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-desktop-02-1366-continued.png",
+          "caption": "Continue during the title crossfade, desktop. Kept as transition history. Settled views follow."
+        }
+      ]
+    },
+    {
+      "title": "Phone route context",
+      "caption": "Routes and Continue passed. The existing reception placeholder and phone framing limits remain. Cropped details and transition frames are labelled below.",
+      "images": [
+        {
+          "id": "final-phone-390-arrival",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-arrival.png",
+          "caption": "Phone arrival with faint title lettering still fading. Kept as capture history."
+        },
+        {
+          "id": "final-phone-390-gym_desk",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-gym_desk.png",
+          "caption": "Reception desk, phone."
+        },
+        {
+          "id": "final-phone-390-gym_lockers",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-gym_lockers.png",
+          "caption": "Lockers, phone."
+        },
+        {
+          "id": "final-phone-390-gym_court",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-gym_court.png",
+          "caption": "Court, phone."
+        },
+        {
+          "id": "final-phone-390-gym_store",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-gym_store.png",
+          "caption": "Equipment store, phone."
+        },
+        {
+          "id": "final-phone-390-gym_benches",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-gym_benches.png",
+          "caption": "Hall benches, phone."
+        },
+        {
+          "id": "final-phone-390-gym_meeting",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-gym_meeting.png",
+          "caption": "Meeting corner, phone."
+        },
+        {
+          "id": "final-phone-390-gym_lobby",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-gym_lobby.png",
+          "caption": "Lobby, phone."
+        },
+        {
+          "id": "final-phone-390-store-close",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-store-close.png",
+          "caption": "Phone cart and mat detail. The far side of the shelf is outside this frame."
+        },
+        {
+          "id": "final-phone-390-window-close",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-window-close.png",
+          "caption": "The first phone window detail cut off both outer frame edges. A centered replacement appears above."
+        },
+        {
+          "id": "final-phone-390-continued",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/final-phone-390-continued.png",
+          "caption": "Continue during the title crossfade, phone. Kept as transition history. Settled views follow."
+        }
+      ]
+    },
+    {
+      "title": "Settled Continue and closer phone views",
+      "caption": "The title fade finished before the Continue captures. The first shelf detail still needed wider framing.",
+      "images": [
+        {
+          "id": "continue-settled-1366-continued",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/continue-settled-1366-continued.png",
+          "caption": "Continue after the title crossfade ended, desktop. The saved gym position was restored."
+        },
+        {
+          "id": "continue-settled-390-continued",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/continue-settled-390-continued.png",
+          "caption": "Continue after the title crossfade ended, phone. The saved gym position was restored."
+        },
+        {
+          "id": "continue-settled-390-shelf-detail",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/continue-settled-390-shelf-detail.png",
+          "caption": "The bib stacks are visible, but this first close view cropped both shelf posts. A complete replacement appears above."
+        }
+      ]
+    },
+    {
+      "title": "First complete shelf framing",
+      "caption": "The full shelf fitted the screen, but the title had not finished fading.",
+      "images": [
+        {
+          "id": "shelf-complete-390-shelf-complete",
+          "image": "bible/shots/showcase/gym-fixtures-20261009/shelf-complete-390-shelf-complete.png",
+          "caption": "Both shelf posts fit, but faint title lettering remained. The settled replacement appears above."
+        }
+      ]
+    }
+  ],
+  "commit": "ee45d6e49673bdf02d13870b43759b35b7254b80",
+  "updated": "2026-10-10T11:48:23+02:00"
+}
