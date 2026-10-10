@@ -19,6 +19,10 @@ SPEC = {
     'bed_lobby': ('A large office building lobby with a high ceiling and stone floor: a soft murmur of many people talking quietly, reverberant, a low air conditioning hum. No music.', 30),
     'bed_office': ('A quiet open-plan office: a steady air conditioning hum, computer fans, a faint murmur of distant conversation. No music.', 30),
     'bed_lift': ('Inside a moving elevator: a low steady motor hum and a soft whoosh of air, a faint rattle. No music.', 12),
+    # outdoor creatures and the harbour (#177)
+    'crow_caw': ('A single crow cawing outdoors, two or three harsh caws with a short pause, close, clean, no other sounds, no music.', 4),
+    'gull_call': ('A single seagull calling outdoors, a long drawn-out mewing cry then a shorter squeal, clean, no other sounds, no music.', 4),
+    'bed_harbour': ('Calm water lapping gently against a stone harbour wall and moored boats, soft slow waves, a faint creak of ropes, steady and constant, no birds, no voices, no music.', 30),
     # one-shots scattered over the beds
     'printer': ('A laser printer in an office printing three pages: a motor whirs up, paper feeds through the rollers, pages drop into the tray, the motor winds down.', 8),
     'phone_far': ('A desk telephone ringing twice far away across a large quiet office, muffled and distant.', 6),

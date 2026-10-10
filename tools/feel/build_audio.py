@@ -40,6 +40,8 @@ TARGET = {
     # outdoors (tools/feel/nature.py): sparrows and wind by day, crickets after work, under everything; a flock of
     # pigeons taking off near Eric
     'bed_birds': -41, 'bed_insects': -42, 'wings_flap': -34,
+    # a crow's caw and a gull's cry (Stable Audio takes, played when one is near), and the harbour's water at the quay
+    'crow_caw': -33, 'gull_call': -34, 'bed_harbour': -40,
 }
 BEDS = {k for k in TARGET if k.startswith('bed_')}
 PLUCKED = {'guitar_practice', 'zip', 'buzz'}

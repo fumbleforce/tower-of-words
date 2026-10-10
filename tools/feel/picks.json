@@ -13,5 +13,8 @@
  "vending": ["vending-5493", 0, 1.8],
  "phone_far": ["phone_far-5493", 0, 5.8],
  "printer": ["printer-5493", 0, 7.8],
- "typing": ["typing-5362", 0, 5.8]
+ "typing": ["typing-5362", 0, 5.8],
+ "crow_caw": ["crow_caw-5100", 0, 4],
+ "gull_call": ["gull_call-5100", 0, 4],
+ "bed_harbour": ["bed_harbour-5493", 0, 30]
 }
