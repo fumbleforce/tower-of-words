@@ -20,6 +20,7 @@
     "check:mc": "node game3d/tools/mc-check.mjs"
   },
   "devDependencies": {
+    "esbuild": "0.28.2",
     "eslint": "10.11.0",
     "espree": "11.2.0",
     "madge": "8.0.0",

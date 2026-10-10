@@ -14,4 +14,4 @@ for (const f of FINDS) {
   assert(!steps.some(s => ['find', 'period', 'ticket', 'bond', 'bondStep'].includes(s.do)));
   assert.equal(steps.filter(s => s.do === 'flavorFind' && s.state === 'putBack').length, 1);
 }
-console.log(`${ids.size} flavor finds: stable nooks, persistence and no album/clock/reward changes.`);
+console.log(`${ids.size} flavor finds: stable nooks, persistence and no album, clock or money changes.`);

@@ -5,8 +5,9 @@
 // Pins that take Eric between places (doors, stairs, the lift, ways out, walk-to points) are told apart here, in
 // one table, never by checks spread over the places: a thing whose verb says it goes somewhere (Go, Go in, Go out,
 // Go to, Walk to) is a way out by that verb, and TRAVEL_PINS names the rest and the ones whose kind differs from their verb.
-// Pure data and functions, no imports: interactions.js, goal-at.js, engine.js and act-menu.js use them, and
-// test/unit/pin-kinds.test.mjs checks them.
+// Pure data and functions, no imports but the build flag (js/full.js): interactions.js, goal-at.js, engine.js and
+// act-menu.js use them, and test/unit/pin-kinds.test.mjs checks them.
+import '../full.js';
 
 // each kind of way out: its symbol (engine.js PIN_GLYPHS) and its verb when the thing doesn't name one
 export const TRAVEL_KINDS = {
@@ -76,8 +77,8 @@ export function travelOf(place, id, t = {}) {
 const isPerson = (item) => /person/.test(item.kind || '');
 // the symbol name a pin was given (a local plugin's heart), or ''
 export const iconName = (item) => (typeof item.icon === 'function' ? item.icon() : item.icon) || '';
-// a pin a local plugin made private: its heart, or `private: true`
-export const isPrivatePin = (item) => !!item.private || /^heart/.test(iconName(item));
+// a pin a local plugin made private: its heart, or `private: true` (full builds only, js/full.js)
+export const isOptionalPin = (item) => __FULL__ && (!!item.private || /^heart/.test(iconName(item)));
 
 // The symbol on the pin: a way out's own (door, arrow, stairs, lift, walk), a paw to pet, speech for people, the eye
 // for everything else. A private plugin's heart goes over it in engine.js, in private mode only.
@@ -97,9 +98,10 @@ const lowerFirst = (s) => s.charAt(0).toLowerCase() + s.slice(1);
 // off a private pin says only Interact (and a person's name, which is public), never a private label or tip, so no
 // private wording shows in public play. `flags` are the story flags, for a thing's verbIf.
 export const INTERACT = 'Interact';
-export function pinTip(item, { privateMode = false, flags = {} } = {}) {
+export function pinTip(item, opts = {}) {
+  const flags = opts.flags ?? {};
   const person = isPerson(item);
-  if (isPrivatePin(item) && !privateMode) {
+  if (__FULL__ && isOptionalPin(item) && !opts.privateMode) {
     const verb = person ? 'Talk' : 'Look';
     const name = person ? item.label || '' : '';
     return { act: INTERACT, verb, name, text: name ? `${INTERACT}: ${name}` : INTERACT };

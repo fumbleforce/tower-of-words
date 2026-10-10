@@ -5,6 +5,7 @@
 // The tooltip shows the verb and what it is ("Look: Vending machine", "Go to the plaza") while the mouse is on a pin,
 // or after a long press on one on a phone. A tap still acts as before; the long press only previews, and its preview
 // stays until the next tap anywhere. Hidden while the action menu is open on the same target (the menu has the name).
+import '../full.js';
 import { pinTip } from '../gameplay/pin-kinds.js';
 import { flags } from '../narrative/state.js';
 import { pinTipPosition } from './pin-tip-layout.js';
@@ -29,19 +30,20 @@ export const PIN_GLYPHS = {
 export const HEART =
   '<svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5C5.2 15.6 3 12.2 3 8.8 3 6.3 5 4.5 7.3 4.5c1.9 0 3.5 1 4.7 2.8 1.2-1.8 2.8-2.8 4.7-2.8C19 4.5 21 6.3 21 8.8c0 3.4-2.2 6.8-9 11.7z"/></svg>';
 
-// private mode from window.__settings (settings.js), so engine.js, which walker tests load in Node, doesn't need it
-export const privateOn = () => !!globalThis.__settings?.privateMode;
+// private mode from window.__settings (settings.js), so engine.js, which walker tests load in Node, doesn't need it.
+// Full builds only (js/full.js).
+export const optionalOn = () => __FULL__ && !!globalThis.__settings?.privateMode;
 // the same heart in front of a reply a local plugin marked as a private scene's (a choice option's `icon`, runner.js):
 // purple for soft, red for hard, as on the pins (css/marks.css). Private mode only; any other name draws nothing.
 const HEART_FILL = { 'heart-soft': '#c9a0ff', 'heart-hard': '#ff5468' };
 export const choiceIcon = (name) =>
-  privateOn() && HEART_FILL[name]
+  __FULL__ && optionalOn() && HEART_FILL[name]
     ? HEART.replace(
         'class="heart"',
         `class="heart" style="width:1em;height:1em;fill:${HEART_FILL[name]};vertical-align:-0.14em;margin-right:0.35em"`,
       )
     : '';
-export const tipOf = (item) => pinTip(item, { privateMode: privateOn(), flags });
+export const tipOf = (item) => pinTip(item, __FULL__ ? { privateMode: optionalOn(), flags } : { flags });
 
 const LONG_PRESS = 450; // ms held still on a pin before its tooltip shows (a phone's long press)
 const MOVE = 10; // px a finger may move and still count as held

@@ -19,7 +19,7 @@ export const revealNodes = {
     ] },
   ],
   d5_reveal_agree: [
-    { do: 'teamDrinks', state: 'private' },
+    { do: 'teamDrinks', state: 'closedDoor' },
     { say: 'mio', emo: 'low', text: 'Okay, everyone else has gone. Kenji, put your phone away first, please.' },
     { do: 'teamDrinks', state: 'phoneAway' },
     { say: 'kenji', emo: 'puzzled', text: 'Okay. What is it?' },

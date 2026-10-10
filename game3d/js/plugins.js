@@ -10,7 +10,8 @@
 // and place.hooks. It runs before the place is entered, so a pin added there is visible on arrival.
 // boot.js, if present, loads once for the whole game and may register a portrait stand-in.
 // The published game does not contain these files, and a checkout without them plays the public story.
-import { forcePrivateMode, onSettings, settings } from './settings.js';
+// The vanilla desktop build replaces this module with tools/release/stubs/plugins.js (tools/release/flavor.mjs).
+import { forceSetting, onSettings, settings } from './settings.js';
 import { sampleDayOneEnd } from './days.js';
 import { voice, stopVoice, setClipResolver } from './audio/core.js';
 
@@ -121,7 +122,7 @@ export async function installViewer(query, ctx) {
     return null;
   }
   if (!mod) return null;
-  forcePrivateMode();
+  forceSetting('privateMode', true);
   return mod.start({
     ...ctx,
     id,

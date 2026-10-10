@@ -84,7 +84,7 @@ export function mondayOffice(game, P, cast) {
       frame(game, 'mio');
       return;
     }
-    if (state === 'private') {
+    if (state === 'closedDoor') {
       cast.hide('emi');
       door.visible = knob.visible = true;
       frame(game, 'office_door');
