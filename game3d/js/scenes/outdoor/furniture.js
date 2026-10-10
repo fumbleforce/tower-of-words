@@ -22,6 +22,10 @@ import { benchGeometries } from './plant-models.js';
 import { lightUp } from '../../kit/light/glow.js';
 
 export const STEEL = { dark: '#3e434d', mid: '#5b616b', pale: '#9aa0aa' };
+// what the steel is (kit/materials/metal.js): painted posts, lamp heads, sign boards and bin housings; bare steel
+// rails, hoops and caps. Both reflect the place's sky; each is one mesh per place, like any other set.
+export const PAINTED = { opts: { finish: 'painted' } },
+  BARE = { opts: { finish: 'brushed' } };
 const WOOD = '#9b958c',
   STONE = '#8b8d90',
   IRON = '#3a4441', // the park bench's cast-iron ends
@@ -71,9 +75,9 @@ export function lightSet() {
 export function lamps(set, p, points, { kind = 'post', dirs = [], pool = 0.95, y = 0, poolShift = [0, 0] } = {}) {
   const { glowParts, lit } = set;
   const lantern = (x, z, y0) => {
-    p.geo(STEEL.dark, new THREE.CylinderGeometry(0.11, 0.07, 0.06, 8).translate(x, y0 + 0.03, z)); // collar
+    p.geo(STEEL.dark, new THREE.CylinderGeometry(0.11, 0.07, 0.06, 8).translate(x, y0 + 0.03, z), PAINTED); // collar
     glowParts.push(new THREE.CylinderGeometry(0.1, 0.1, 0.28, 8).translate(x, y0 + 0.2, z));
-    p.geo(STEEL.dark, new THREE.CylinderGeometry(0.15, 0.13, 0.05, 8).translate(x, y0 + 0.365, z)); // cap
+    p.geo(STEEL.dark, new THREE.CylinderGeometry(0.15, 0.13, 0.05, 8).translate(x, y0 + 0.365, z), PAINTED); // cap
   };
   points.forEach(([x, z], i) => {
     if (kind === 'lantern') {
@@ -81,19 +85,28 @@ export function lamps(set, p, points, { kind = 'post', dirs = [], pool = 0.95, y
       lit.push([x + poolShift[0], z + poolShift[1], pool]);
       return;
     }
-    p.box(STEEL.dark, 0.2, 0.08, 0.2, x, 0, z); // the base plate
+    p.box(STEEL.dark, 0.2, 0.08, 0.2, x, 0, z, PAINTED); // the base plate
     if (kind === 'post') {
-      p.geo(STEEL.dark, new THREE.CylinderGeometry(0.035, 0.05, 2.3, 6).translate(x, 1.15 + 0.08, z));
+      p.geo(STEEL.dark, new THREE.CylinderGeometry(0.035, 0.05, 2.3, 6).translate(x, 1.15 + 0.08, z), PAINTED);
       lantern(x, z, 2.37);
       lit.push([x + poolShift[0], z + poolShift[1], pool]);
     } else {
       const a = dirs[i] ?? 0,
         [ux, uz] = [Math.cos(a), -Math.sin(a)];
-      p.geo(STEEL.dark, new THREE.CylinderGeometry(0.035, 0.055, 2.7, 6).translate(x, 1.35 + 0.08, z));
+      p.geo(STEEL.dark, new THREE.CylinderGeometry(0.035, 0.055, 2.7, 6).translate(x, 1.35 + 0.08, z), PAINTED);
       const hx = x + ux * 0.42,
         hz = z + uz * 0.42;
-      p.box(STEEL.dark, Math.abs(ux) * 0.44 + 0.05, 0.05, Math.abs(uz) * 0.44 + 0.05, x + ux * 0.2, 2.72, z + uz * 0.2);
-      p.box(STEEL.dark, 0.36, 0.08, 0.36, hx, 2.66, hz, { ry: a });
+      p.box(
+        STEEL.dark,
+        Math.abs(ux) * 0.44 + 0.05,
+        0.05,
+        Math.abs(uz) * 0.44 + 0.05,
+        x + ux * 0.2,
+        2.72,
+        z + uz * 0.2,
+        PAINTED,
+      );
+      p.box(STEEL.dark, 0.36, 0.08, 0.36, hx, 2.66, hz, { ry: a, ...PAINTED });
       glowParts.push(new THREE.BoxGeometry(0.3, 0.07, 0.3).rotateY(a).translate(hx, 2.63, hz));
       lit.push([hx, hz, pool]);
     }
@@ -156,7 +169,7 @@ export function bins(p, x, z, facing = 0) {
   ].forEach(([u, band]) => {
     const bx = x + u * c,
       bz = z - u * s;
-    p.box('#8d939b', 0.34, 0.6, 0.3, bx, 0, bz, { ry: facing });
+    p.box('#8d939b', 0.34, 0.6, 0.3, bx, 0, bz, { ry: facing, ...PAINTED });
     p.box(band, 0.36, 0.08, 0.32, bx, 0.44, bz, { ry: facing });
     p.box('#3e434d', 0.2, 0.05, 0.02, bx + 0.155 * s, 0.5, bz + 0.155 * c, { ry: facing });
   });
@@ -164,14 +177,14 @@ export function bins(p, x, z, facing = 0) {
 
 export function bollard(p, x, z) {
   p.geo(STONE, new THREE.CylinderGeometry(0.08, 0.09, 0.5, 8).translate(x, 0.25, z));
-  p.geo(STEEL.pale, new THREE.CylinderGeometry(0.085, 0.085, 0.05, 8).translate(x, 0.44, z));
+  p.geo(STEEL.pale, new THREE.CylinderGeometry(0.085, 0.085, 0.05, 8).translate(x, 0.44, z), BARE);
 }
 
 // a finger sign: boards [{ text, sub, dir }] one above another, pointing east (dir 1) or west (-1); `turn` spins
 // the whole sign about its post (radians, 0 = boards run along x)
 export function fingerSign(root, p, x, z, boards, { turn = 0 } = {}) {
-  p.geo(STEEL.dark, new THREE.CylinderGeometry(0.04, 0.05, 2.1, 6).translate(x, 1.05, z));
-  p.geo(STEEL.dark, new THREE.CylinderGeometry(0.07, 0.07, 0.05, 6).translate(x, 2.12, z));
+  p.geo(STEEL.dark, new THREE.CylinderGeometry(0.04, 0.05, 2.1, 6).translate(x, 1.05, z), PAINTED);
+  p.geo(STEEL.dark, new THREE.CylinderGeometry(0.07, 0.07, 0.05, 6).translate(x, 2.12, z), PAINTED);
   boards.forEach(({ text, sub, dir = 1 }, i) => {
     const tex = textTexture(
       (ctx, w, h) => {
@@ -201,7 +214,7 @@ export function fingerSign(root, p, x, z, boards, { turn = 0 } = {}) {
     b.position.set(bx + Math.sin(turn) * 0.021, y, bz + Math.cos(turn) * 0.021);
     b.rotation.y = turn;
     root.add(b);
-    p.box(STEEL.dark, 0.94, 0.25, 0.035, bx, y - 0.125, bz, { ry: turn }); // the board itself, behind its face
+    p.box(STEEL.dark, 0.94, 0.25, 0.035, bx, y - 0.125, bz, { ry: turn, ...PAINTED }); // the board, behind its face
   });
 }
 
@@ -226,19 +239,19 @@ export function stoneLantern(p, set, x, z, y = 0) {
 }
 
 const _up = new THREE.Vector3(0, 1, 0);
-export function rod(p, color, a, b, r = 0.02, { cast = false } = {}) {
+export function rod(p, color, a, b, r = 0.02, { cast = false, opts = null } = {}) {
   const A = new THREE.Vector3(...a),
     B = new THREE.Vector3(...b),
     L = A.distanceTo(B);
   const g = new THREE.CylinderGeometry(r, r, L, 6).translate(0, L / 2, 0);
   g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(_up, B.sub(A).normalize()));
-  p.geo(color, g.translate(...a), { cast });
+  p.geo(color, g.translate(...a), opts ? { cast, opts } : { cast });
 }
 
 // a handrail along points [x, z, floorY]: steel posts at every point and every 1.3 between, from the floor up; a
 // round rail 0.85 over the floor and a lower one at 0.62, as on every Japanese ramp
 export function handrail(p, pts, { color = STEEL.mid } = {}) {
-  const post = (x, z, y) => p.box(STEEL.mid, 0.045, 0.85, 0.045, x, y, z, { cast: false });
+  const post = (x, z, y) => p.box(STEEL.mid, 0.045, 0.85, 0.045, x, y, z, { cast: false, ...BARE });
   for (let i = 0; i + 1 < pts.length; i++) {
     const [ax, az, ay] = pts[i],
       [bx, bz, by] = pts[i + 1];
@@ -246,7 +259,7 @@ export function handrail(p, pts, { color = STEEL.mid } = {}) {
       [0.85, 0.04],
       [0.62, 0.03],
     ])
-      rod(p, color, [ax, ay + hh, az], [bx, by + hh, bz], r);
+      rod(p, color, [ax, ay + hh, az], [bx, by + hh, bz], r, BARE);
     const n = Math.max(1, Math.ceil(Math.hypot(bx - ax, bz - az) / 1.3));
     for (let k = 0; k < n; k++) {
       const u = k / n;
@@ -266,12 +279,12 @@ export function bikeRack(p, a, b, { n = 3 } = {}) {
   const L = Math.hypot(b[0] - a[0], b[1] - a[1]),
     [mx, mz] = at(0.5),
     out = [];
-  p.box(STEEL.dark, alongX ? L : 0.06, 0.03, alongX ? 0.06 : L, mx, 0, mz, { cast: false });
+  p.box(STEEL.dark, alongX ? L : 0.06, 0.03, alongX ? 0.06 : L, mx, 0, mz, { cast: false, ...PAINTED });
   for (let i = 0; i < n; i++) {
     const [x, z] = at((i + 0.25) / n);
     for (const d of [-0.3, 0.3])
-      p.box(STEEL.pale, 0.04, 0.55, 0.04, x + (alongX ? 0 : d), 0, z + (alongX ? d : 0), { cast: false });
-    p.box(STEEL.pale, alongX ? 0.04 : 0.64, 0.04, alongX ? 0.64 : 0.04, x, 0.53, z, { cast: false });
+      p.box(STEEL.pale, 0.04, 0.55, 0.04, x + (alongX ? 0 : d), 0, z + (alongX ? d : 0), { cast: false, ...BARE });
+    p.box(STEEL.pale, alongX ? 0.04 : 0.64, 0.04, alongX ? 0.64 : 0.04, x, 0.53, z, { cast: false, ...BARE });
     out.push(at((i + 0.62) / n));
   }
   return out;

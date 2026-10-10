@@ -15,7 +15,7 @@
 //                      from the face, 1 in 12, with handrails both sides
 // officeBlock returns { top, doors: [{ f, t, w, canopy: { c0, c1, out, y, h } | null }] }, for a place's signs.
 import * as THREE from 'three';
-import { STEEL, handrail } from './furniture.js';
+import { STEEL, PAINTED, BARE, handrail } from './furniture.js';
 import { ramp as rampSlab } from './edges.js';
 import { BLOCK, onFace, faceAt, tOf } from './block-face.js';
 
@@ -117,18 +117,20 @@ export function roofPlant(p, [x0, x1, z0, z1], top, wall, sx) {
   const tx1 = hx0 - 0.5,
     tx0 = tx1 - Math.min(1.8, w * 0.18),
     tz = z0 + 1.15;
-  for (const x of [tx0 + 0.1, tx1 - 0.1]) p.box(STEEL.dark, 0.08, 0.4, 1.1, x, top, tz);
-  p.box('#b7c0c6', tx1 - tx0, 1.1, 1.0, (tx0 + tx1) / 2, top + 0.4, tz);
+  for (const x of [tx0 + 0.1, tx1 - 0.1]) p.box(STEEL.dark, 0.08, 0.4, 1.1, x, top, tz, PAINTED);
+  p.box('#b7c0c6', tx1 - tx0, 1.1, 1.0, (tx0 + tx1) / 2, top + 0.4, tz, PAINTED);
   for (let x = tx0 + 0.5; x < tx1 - 0.1; x += 0.5)
     p.box('#9ea8b0', 0.03, 1.1, 0.02, x, top + 0.4, tz + 0.51, { cast: false });
   p.box('#9ea8b0', tx1 - tx0, 0.03, 0.02, (tx0 + tx1) / 2, top + 0.95, tz + 0.51, { cast: false });
-  // the condensers, fans to the south, in a row on two rails east of the stair bay, and a pair west of it
+  // the condensers (painted steel cases, kit/materials/), fans to the south, in a row on two rails east of the stair
+  // bay, and a pair west of it
   const uz = z1 - 1.25;
   const units = (ux0, n) => {
-    for (const dz of [-0.12, 0.12]) p.box(STEEL.dark, n * 0.85, 0.08, 0.06, ux0 + (n * 0.85) / 2, top, uz + dz);
+    for (const dz of [-0.12, 0.12])
+      p.box(STEEL.dark, n * 0.85, 0.08, 0.06, ux0 + (n * 0.85) / 2, top, uz + dz, PAINTED);
     for (let i = 0; i < n; i++) {
       const x = ux0 + i * 0.85 + 0.42;
-      p.box(UNIT, 0.72, 0.56, 0.34, x, top + 0.08, uz);
+      p.box(UNIT, 0.72, 0.56, 0.34, x, top + 0.08, uz, PAINTED);
       p.box(GRILLE, 0.38, 0.38, 0.02, x - 0.12, top + 0.17, uz + 0.18, { cast: false });
     }
   };
@@ -136,8 +138,8 @@ export function roofPlant(p, [x0, x1, z0, z1], top, wall, sx) {
   units(ux0, Math.max(2, Math.floor((x1 - 0.6 - ux0) / 0.85)));
   if (sx && sx[0] - 0.35 - 1.7 > x0 + 3.2) units(sx[0] - 0.35 - 1.7, 2);
   for (const x of [x0 + 1.0, x0 + 2.6]) {
-    p.geo(DUCT, new THREE.CylinderGeometry(0.08, 0.08, 0.4, 8).translate(x, top + 0.2, z0 + 0.9));
-    p.geo(DUCT, new THREE.CylinderGeometry(0.17, 0.11, 0.09, 8).translate(x, top + 0.44, z0 + 0.9));
+    p.geo(DUCT, new THREE.CylinderGeometry(0.08, 0.08, 0.4, 8).translate(x, top + 0.2, z0 + 0.9), BARE);
+    p.geo(DUCT, new THREE.CylinderGeometry(0.17, 0.11, 0.09, 8).translate(x, top + 0.44, z0 + 0.9), BARE);
   }
 }
 
