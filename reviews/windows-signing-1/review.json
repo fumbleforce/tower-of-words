@@ -1,0 +1,20 @@
+{
+ "title": "Windows signing: which route",
+ "date": "2026-10-10",
+ "by": "Claude (signing research agent)",
+ "status": "open",
+ "issue": 434,
+ "context": [
+  "You chose to sign the Windows build. The options are in docs/desktop-release.md (Windows signing). The cheapest and simplest to run from this Linux machine is Microsoft's Azure Artifact Signing at about 10 USD a month, but Microsoft only accepts individuals in the USA and Canada. From Norway it needs an organisation, so you'd register a sole proprietorship (enkeltpersonforetak) at Brreg, with a website and an email on its domain. Whether Microsoft accepts a sole proprietorship hasn't been confirmed. Validation takes 1 to 20 business days.",
+  "Without a company: SSL.com validates individuals, at about 180 USD a year for its cloud signing plus a certificate fee that isn't clear from their site. Signing from Linux with it is likely but not yet tested.",
+  "Either way, SmartScreen warnings fade gradually as more people install the game. Even the expensive EV certificates no longer skip that.",
+  "Read the provider's terms of use before paying. The agent couldn't open them, so it's not confirmed what they say about game content."
+ ],
+ "question": "Which signing route should we take?",
+ "multi": false,
+ "options": [
+  {"id": "azure-company", "label": "azure-company", "note": "Register a sole proprietorship and use Azure Artifact Signing, about 120 USD a year. You do the registration, the Azure account and the ID check; I wire the signing into the build."},
+  {"id": "sslcom-individual", "label": "sslcom-individual", "note": "SSL.com as an individual, no company, about 180 USD a year plus the certificate. I test the Linux signing first, before you pay."},
+  {"id": "later", "label": "later", "note": "Ship unsigned for now and decide on signing when a release is close."}
+ ]
+}
