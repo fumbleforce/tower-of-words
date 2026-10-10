@@ -20,7 +20,7 @@ import { hall, hallFares, ROOM } from './station-hall.js';
 import { FARES } from './station-fittings.js';
 import { glowSet } from '../kit/light/glow.js';
 import { buildShed, coveredWalk } from './station-shed.js';
-import { stationModel, stationLighter, stationMesh, stationGlass, stationSign } from './station-model.js';
+import { stationModel, stationLighter, stationMesh, stationGlass, stationSign, keepBounce } from './station-model.js';
 
 // the station's outline in the forecourt's frame: the gate room's walls (lobby.js X 6.3, Z 4.5, centred on the
 // forecourt's (-0.5, 7.15)); its north face is the court's south edge
@@ -388,12 +388,12 @@ export function buildStation(root, { covered = false } = {}) {
               ),
             { name: 'covered-walk' },
           );
+          keepBounce(walkRoof);
         }
       : null,
   );
   roof.name = 'station:shedRoof';
-  addOccluder(station.occ, [roof], () => station.view.x < -0.5, {
-    name: 'shed',
-  });
+  addOccluder(station.occ, [roof], () => station.view.x < -0.5, { name: 'shed' });
+  keepBounce(roof);
   return station;
 }

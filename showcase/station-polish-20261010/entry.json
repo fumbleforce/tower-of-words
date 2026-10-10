@@ -1,0 +1,235 @@
+{
+  "title": "Honsha station polish: lighter shed, the north end, stairs and walkway",
+  "date": "2026-10-10",
+  "by": "claude-agent:station-polish",
+  "caption": "Seen from the platforms, the stairs and the walkway at eye height. The shed's steel is now the world kit's pale grey, and the roof's underside, the walkway's roof and the steel in their shade catch the light off the platforms instead of going near black. The north end has pale panels, one to each bay of the glass, with the mullions running down them, and its glass now shows the shed through it. A round platform clock hangs over the track. The stairs have pale stone treads with dark nosings on a solid flight with a smooth underside, yellow warning rows at the top and bottom, and solid side walls with a stone coping and a handrail on posts. Before, the side walls only showed their edges. The covered walkway has down-lights under its roof and a yellow tactile guide path from the east stair to the station doors. The station has slightly fewer triangles than before.",
+  "preview": "after-plat-east-north-desk",
+  "result": [
+    "after-plat-east-north-desk",
+    "after-gable-out-desk",
+    "after-stairs-foot-desk",
+    "after-walk-east-desk"
+  ],
+  "sections": [
+    {
+      "title": "On the platforms",
+      "images": [
+        {
+          "id": "after-plat-east-north-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-plat-east-north-desk.webp",
+          "caption": "After, the east platform looking north"
+        },
+        {
+          "id": "after-plat-east-north-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/after-plat-east-north-phone.webp",
+          "caption": "After, phone"
+        },
+        {
+          "id": "before-platform-west-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-platform-west-desk.webp",
+          "caption": "Before, the west platform"
+        },
+        {
+          "id": "after-platform-west-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-platform-west-desk.webp",
+          "caption": "After, the west platform"
+        },
+        {
+          "id": "before-platform-west-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/before-platform-west-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-platform-west-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/after-platform-west-phone.webp",
+          "caption": "After, phone"
+        },
+        {
+          "id": "before-platform-east-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-platform-east-desk.webp",
+          "caption": "Before, the east platform"
+        },
+        {
+          "id": "after-platform-east-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-platform-east-desk.webp",
+          "caption": "After, the east platform"
+        },
+        {
+          "id": "before-plat-up-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-plat-up-desk.webp",
+          "caption": "Before, looking up at the roof"
+        },
+        {
+          "id": "after-plat-up-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-plat-up-desk.webp",
+          "caption": "After, looking up at the roof"
+        },
+        {
+          "id": "before-gable-in-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-gable-in-desk.webp",
+          "caption": "Before, the north end from the platform"
+        },
+        {
+          "id": "after-gable-in-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-gable-in-desk.webp",
+          "caption": "After, the north end from the platform"
+        }
+      ]
+    },
+    {
+      "title": "The north end and the roof from outside",
+      "images": [
+        {
+          "id": "before-gable-out-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-gable-out-desk.webp",
+          "caption": "Before, the north end"
+        },
+        {
+          "id": "after-gable-out-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-gable-out-desk.webp",
+          "caption": "After, the north end"
+        },
+        {
+          "id": "before-gable-out-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/before-gable-out-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-gable-out-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/after-gable-out-phone.webp",
+          "caption": "After, phone"
+        },
+        {
+          "id": "before-low-shed-north-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-low-shed-north-desk.webp",
+          "caption": "Before, the north-west corner"
+        },
+        {
+          "id": "after-low-shed-north-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-low-shed-north-desk.webp",
+          "caption": "After, the north-west corner"
+        },
+        {
+          "id": "before-roof-close-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-roof-close-desk.webp",
+          "caption": "Before, the roof"
+        },
+        {
+          "id": "after-roof-close-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-roof-close-desk.webp",
+          "caption": "After, the roof"
+        }
+      ]
+    },
+    {
+      "title": "The stairs",
+      "images": [
+        {
+          "id": "before-stairs-top-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-stairs-top-desk.webp",
+          "caption": "Before, from the top"
+        },
+        {
+          "id": "after-stairs-top-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-stairs-top-desk.webp",
+          "caption": "After, from the top"
+        },
+        {
+          "id": "before-stairs-foot-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-stairs-foot-desk.webp",
+          "caption": "Before, from the foot"
+        },
+        {
+          "id": "after-stairs-foot-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-stairs-foot-desk.webp",
+          "caption": "After, from the foot"
+        },
+        {
+          "id": "before-stairs-foot-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/before-stairs-foot-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-stairs-foot-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/after-stairs-foot-phone.webp",
+          "caption": "After, phone"
+        },
+        {
+          "id": "before-stairs-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-stairs-desk.webp",
+          "caption": "Before, from the walkway"
+        },
+        {
+          "id": "after-stairs-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-stairs-desk.webp",
+          "caption": "After, from the walkway"
+        },
+        {
+          "id": "after-stairs-side-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-stairs-side-desk.webp",
+          "caption": "After, the side wall"
+        }
+      ]
+    },
+    {
+      "title": "The covered walkway",
+      "images": [
+        {
+          "id": "before-walk-east-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-walk-east-desk.webp",
+          "caption": "Before, along the walkway"
+        },
+        {
+          "id": "after-walk-east-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-walk-east-desk.webp",
+          "caption": "After, along the walkway"
+        },
+        {
+          "id": "before-walk-east-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/before-walk-east-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-walk-east-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/after-walk-east-phone.webp",
+          "caption": "After, phone"
+        },
+        {
+          "id": "before-walk-north-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/before-walk-north-desk.webp",
+          "caption": "Before, to the station doors"
+        },
+        {
+          "id": "after-walk-north-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-walk-north-desk.webp",
+          "caption": "After, to the station doors"
+        }
+      ]
+    },
+    {
+      "title": "The play camera",
+      "images": [
+        {
+          "id": "after-play-court-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-play-court-desk.webp",
+          "caption": "After, out on the court"
+        },
+        {
+          "id": "after-play-court-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/after-play-court-phone.webp",
+          "caption": "After, phone"
+        },
+        {
+          "id": "after-play-door-desk",
+          "image": "bible/shots/showcase/station-polish-20261010/after-play-door-desk.webp",
+          "caption": "After, at the station door"
+        },
+        {
+          "id": "after-play-door-phone",
+          "image": "bible/shots/showcase/station-polish-20261010/after-play-door-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    }
+  ]
+}
