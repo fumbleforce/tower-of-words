@@ -1,0 +1,38 @@
+{
+ "title": "Licence audit for the desktop release",
+ "date": "2026-10-10",
+ "by": "Claude (licence-audit agent)",
+ "status": "open",
+ "context": [
+  "The full audit is notes/licenses.md (#424). Code, fonts, RDBT pictures, Qwen3-TTS voices and Stable Audio ambience are fine to ship with credits. Every voice in the game is synthetic; no real person's recording is used.",
+  "Three things block selling the game, though a free release is fine for them: the opening theme and the night loop are YuE2 music (the model is CC BY-NC 4.0, and whether that reaches the music is unsettled); the five Photos collectibles and some scenery come from One Obsession, whose Civitai page doesn't allow selling images; and 36 short voice clips were made with edge-tts, an unofficial Microsoft endpoint with no licence at all.",
+  "The edge-tts clips are a risk even for a free release, so I'd re-voice them with the Qwen3 clones either way (the 36 files are listed in the audit, item 2). They're mostly greetings and short commands from the announcer, Aoi, Emi, the guard, Kenji, Kuroda, Mio, Mori, Sota and Yui.",
+  "Still unclear: the MiniMax-derived voice references (Emi, the announcer), Lyria's output terms, and about 121 older clips whose engine wasn't recorded."
+ ],
+ "question": "Will the desktop release be free or paid, and which fixes should I start now?",
+ "multi": true,
+ "options": [
+  {
+   "id": "free",
+   "label": "free",
+   "note": "Free release. Keep the YuE2 tracks and One Obsession pictures, ship with the drafted credits."
+  },
+  {
+   "id": "paid",
+   "label": "paid",
+   "note": "Make it sellable: replace the opening theme and night loop with Lyria, regenerate the Photos and scenery with RDBT, settle the unclear items."
+  },
+  {
+   "id": "revoice-edge",
+   "label": "revoice-edge",
+   "note": "Re-voice the 36 edge-tts clips with the Qwen3 clones now (recommended either way). You'd hear the new clips in a Review item before they ship."
+  },
+  {
+   "id": "remake-minimax",
+   "label": "remake-minimax",
+   "note": "Re-make Emi's and the announcer's voice references with Qwen3 VoiceDesign so nothing depends on MiniMax's terms. Changes how they sound, so it comes back to you as a voice round."
+  }
+ ],
+ "ask": "Pick free or paid, plus any fixes to start. In the comment: was the Meshy account on a paid plan when the 3D models were made (free-plan models need a Meshy credit line)?",
+ "issue": 424
+}
