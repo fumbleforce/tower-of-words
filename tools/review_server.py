@@ -195,6 +195,9 @@ class Handler(SimpleHTTPRequestHandler):
         return self.client_address[0] in ('127.0.0.1', '::1', '::ffff:127.0.0.1')
 
     def do_GET(self):
+        from subplots.api import handle as subplot_request
+        if subplot_request(self):
+            return
         if self.path.split('?')[0] == '/api/feedback':
             return self._json(200 if self._local() else 403, {'ok': self._local()})
         path = self.path.split('?')[0]
@@ -242,6 +245,9 @@ class Handler(SimpleHTTPRequestHandler):
         return self._json(200, {'ok': True, 'folder': f'notes/feedback-game/{fid}'})
 
     def do_POST(self):
+        from subplots.api import handle as subplot_request
+        if subplot_request(self):
+            return
         path = self.path.split('?')[0]
         if path == '/api/feedback':
             return self._feedback()
