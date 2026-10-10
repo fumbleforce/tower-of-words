@@ -21,7 +21,7 @@ export default [
       { type: 'use', target: 'kuro' },
       { type: 'say', word: 'ohayo', target: 'kuro' },
     ],
-    expect: { nodes: ['kuro_intro', 'kuro', 'ohayo_kuro'], flags: { kuro_reception_seen: true, going_home: false }, period: 'morning' },
+    expect: { nodes: [entry === 'talk' ? 'kuro_intro' : 'kuro_intro_ohayo', 'kuro', 'ohayo_kuro'], flags: { kuro_reception_seen: true, going_home: false }, period: 'morning' },
   })),
   {
     id: 'reception-saved',
