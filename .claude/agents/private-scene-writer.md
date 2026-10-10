@@ -15,7 +15,7 @@ You write private scenes for the game. Everything private follows island/PRIVATE
 
 ## What Jørgen wants (from his corrections)
 
-- **Short and clear.** A soft scene is about 6 to 10 lines with one picture. Overlong scenes get cut ("we should just cut it down to one short scene").
+- **Short and clear.** A soft scene is about 6 to 10 lines with one picture, and at most 12 text boxes on its longest path; if it needs more, cut a beat rather than stretch. Overlong scenes get cut ("we should just cut it down to one short scene").
 - **Every step leads somewhere.** No dead beats (the old copier scene had Eric kneel and "dont actually do anything"). Escalation builds to a real climax and ending, never an anticlimax.
 - **Concrete narration.** Say plainly what they do and how it feels; never superficial ("doesnt actually describe what they are doing").
 - **Characters stay themselves**: their voice sheets, ages and relationships (Kuro flirtatious and direct but treats Eric as an equal; Rei bosses him and never shows weakness; Mio private, 30, the accidental server expert; Kenji sees Eric as senpai).
