@@ -1,6 +1,7 @@
 /* Image gen dashboard front end. No build step. Talks to server.py on the same origin. Block kinds, their fields and
    the prompt diff are shared with the scene editor's composer (blocks.js). */
-import { KINDS, RATINGS, fieldsHtml as sharedFieldsHtml, getp, setp, wordDiff, blank } from './blocks.js';
+import { KINDS, RATINGS, fieldsHtml as sharedFieldsHtml, getp, setp, blank, wordDiff } from './blocks.js';
+import { isAgent, fullUrl, rateFields, lightboxKey, lightboxHtml, compareHtml } from './gallery.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -388,8 +389,6 @@ function updateGenButton() {
 /* ------------------------------------------------------------ results */
 let JOBS = [], RECENT = [], lastJobs = 0, openInline = null;
 const T = new Map(); // id -> tile object (merged job and log info)
-const fullUrl = t => t.file ? '/out/' + t.file : '/agentsrc/' + encodeURIComponent(t.id);  // agent renders from old rounds have no copy
-const isAgent = t => t?.source === 'agent';
 function agentBadges(x) {
   if (!isAgent(x)) return '';
   const b = ['agent', x.owner, x.round, x.mode && x.mode !== 'txt2img' ? x.mode : ''].filter(Boolean).concat(x.extras || []);
@@ -480,15 +479,14 @@ async function rate(id, fields) {
 async function saveInline() {
   const id = openInline.id, kind = openInline.kind, v = $('#inl').value.trim();
   openInline = null;
-  if (kind === 'reject') await rate(id, { reject: true, reject_reason: v, star: false, fav: false });
+  if (kind === 'reject') await rate(id, rateFields('reject', { reject: false }, v));
   else await rate(id, { note: v });
 }
 function tileAction(a, id, btn) {
   const t = T.get(id); if (!t) return;
   if (a === 'open') return openLightbox(id);
-  if (a === 'star') return rate(id, { star: !t.star, reject: false, ...(t.star ? { fav: false } : {}) });
-  if (a === 'fav') return rate(id, { fav: !t.fav, star: !t.fav ? true : t.star, reject: false });
-  if (a === 'reject') { if (t.reject) return rate(id, { reject: false, reject_reason: '' }); openInline = { id, kind: 'reject' }; return renderRuns(); }
+  if (a === 'star' || a === 'fav') return rate(id, rateFields(a, t));
+  if (a === 'reject') { if (t.reject) return rate(id, rateFields(a, t)); openInline = { id, kind: 'reject' }; return renderRuns(); }
   if (a === 'note') { openInline = { id, kind: 'note' }; return renderRuns(); }
   if (a === 'inlsave') return saveInline();
   if (a === 'pin') return togglePin(t);
@@ -572,39 +570,7 @@ function openLightbox(id, list) {
 }
 function renderLightbox() {
   const t = LB.list[LB.i]; if (!t) return;
-  const c = t.compose || {};
-  $('#lightbox').innerHTML = `<div class="lb">
-    <div class="pic"><img src="${LB.raw && t.raw_file ? '/out/' + esc(t.raw_file) : esc(fullUrl(t))}" alt="Seed ${t.seed}">
-      ${LB.list.length > 1 ? `<button class="btn nav l" data-lb="-1" aria-label="Previous"><i class="ph ph-caret-left"></i></button><button class="btn nav r" data-lb="1" aria-label="Next"><i class="ph ph-caret-right"></i></button>` : ''}</div>
-    <div class="side">
-      <div class="row gap8"><h2 style="margin-right:auto">${LB.i + 1} of ${LB.list.length}</h2><button class="btn sm" data-close="1"><i class="ph ph-x"></i> Close</button></div>
-      <div class="row gap8 wrap">
-        <button class="btn sm" data-a="star" data-id="${esc(t.id)}"><i class="${t.star ? 'ph-fill' : 'ph'} ph-star"></i> ${t.star ? 'Starred' : 'Star'}</button>
-        <button class="btn sm" data-a="fav" data-id="${esc(t.id)}"><i class="${t.fav ? 'ph-fill' : 'ph'} ph-heart"></i> ${t.fav ? 'Favourite' : 'Favourite'}</button>
-        <button class="btn sm${t.reject ? ' danger' : ''}" data-lbrej="1"><i class="ph ph-x-circle"></i> ${t.reject ? 'Rejected' : 'Reject'}</button>
-        <button class="btn sm" data-a="pin" data-id="${esc(t.id)}"><i class="ph ph-columns"></i> ${pins.some(p => p.id === t.id) ? 'Pinned' : 'Compare'}</button>
-        <button class="btn sm danger" data-a="del" data-id="${esc(t.id)}" title="Delete (Delete key)"><i class="ph ph-trash"></i> Delete</button>
-      </div>
-      <div class="row gap8 wrap">
-        <button class="btn sm" data-a="sameseed" data-id="${esc(t.id)}">${isAgent(t) ? 'Load prompt and seed into Compose' : 'Same seed, edit prompt'}</button>
-        ${isAgent(t) ? '' : `<button class="btn sm" data-a="newseeds" data-id="${esc(t.id)}">New seeds, same prompt</button>`}
-      </div>
-      <label>Reject reason<input type="text" id="lbReason" value="${esc(t.reject_reason || '')}" placeholder="Only needed if you reject it"></label>
-      <label>Note<textarea id="lbNote" rows="2" placeholder="What works, what doesn't">${esc(t.note || '')}</textarea></label>
-      <div class="kv"><span>Seed</span><span class="mono">${t.seed}</span><span>Model</span><span>${esc((t.model_file || '').replace('.safetensors', ''))}</span>
-        <span>Size</span><span>${t.w} × ${t.h}</span>${isAgent(t) ? '' : `<span>Style</span><span>${esc(byId('style', c.style)?.data.name || c.style || '')}</span>`}
-        ${t.steps ? `<span>Steps, CFG</span><span>${t.steps}, ${t.cfg}</span>` : ''}${t.sampler ? `<span>Sampler</span><span>${esc(t.sampler)}${t.scheduler ? ' ' + esc(t.scheduler) : ''}</span>` : ''}
-        ${isAgent(t) ? `<span>Made by</span><span>${esc(t.owner || '')}</span><span>Round</span><span class="mono" style="word-break:break-all">${esc(t.round || '')}</span>
-          <span>Original</span><span class="mono" style="word-break:break-all">${esc(t.out_path || '')}</span>${t.mode && t.mode !== 'txt2img' ? `<span>Mode</span><span>${esc(t.mode)}${t.denoise != null ? ' at ' + t.denoise : ''}${t.src_image ? ', from ' + esc(t.src_image) : ''}</span>` : ''}
-          ${(t.extras || []).length ? `<span>Also used</span><span>${t.extras.map(esc).join('<br>')}</span>` : ''}` : ''}
-        <span>Render</span><span class="mono">${esc(t.id)}</span>
-        ${isAgent(t) ? '' : `<span>On-model</span><span>${t.ipa ? `Reference at ${(+t.ipa.strength).toFixed(2)}${t.ipa.cutout ? ' (cut out onto white)' : ''}` : 'No reference'}${t.repaint ? (t.repaint.skipped ? `; face fix skipped: ${esc(t.repaint.skipped)}` : `; face fix at ${(+t.repaint.denoise).toFixed(2)}${t.repaint.secs ? ` (${t.repaint.secs} s)` : ''}`) : ''}</span>
-        ${t.ipa || t.repaint ? `<span>Reference</span><span class="mono" style="word-break:break-all">${esc((t.ipa || t.repaint).ref)}</span>` : ''}`}</div>
-      ${t.raw_file ? `<div class="row gap8"><button class="btn sm" data-lbraw="1">${LB.raw ? 'Show the face fix' : 'Show before the face fix'}</button></div>` : ''}
-      ${t.repaint && !t.repaint.skipped ? `<details class="adv"><summary>Repaint prompt</summary><div class="ptext mt4">${esc(t.repaint.prompt)}</div></details>` : ''}
-      <div><div class="lbl">Positive${t.overridden ? ' <span class="badge">edited by hand</span>' : ''}</div><div class="ptext">${esc(t.positive || '')}</div></div>
-      <div><div class="lbl">Negative</div><div class="ptext">${esc(t.negative || '')}</div></div>
-    </div></div>`;
+  $('#lightbox').innerHTML = lightboxHtml(t, { i: LB.i, n: LB.list.length, pinned: pins.some(p => p.id === t.id), raw: LB.raw, styleName: byId('style', t.compose?.style)?.data.name });
   const lbSave = () => {
     const note = $('#lbNote').value.trim(), reason = $('#lbReason').value.trim();
     const f = {}; if (note !== (t.note || '')) f.note = note; if (reason !== (t.reject_reason || '')) f.reject_reason = reason;
@@ -618,20 +584,18 @@ function wireLightbox() {
     if (e.target.classList.contains('pic') || (b && b.dataset.close)) return closeOverlays();
     if (b && b.dataset.lb) { LB.i = (LB.i + +b.dataset.lb + LB.list.length) % LB.list.length; LB.raw = false; renderLightbox(); }
     if (b && b.dataset.lbraw) { LB.raw = !LB.raw; renderLightbox(); }
-    if (b && b.dataset.lbrej) { const t = LB.list[LB.i]; rate(t.id, t.reject ? { reject: false } : { reject: true, star: false, fav: false, reject_reason: $('#lbReason').value.trim() }); }
+    if (b && b.dataset.lbrej) { const t = LB.list[LB.i]; rate(t.id, rateFields('reject', t, $('#lbReason').value.trim())); }
   });
   document.addEventListener('keydown', e => {
     if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) { if (e.key === 'Escape') document.activeElement.blur(); return; }
     if (!$('#compare').hidden && e.key === 'Escape') return closeOverlays();
     if ($('#lightbox').hidden) return;
-    const t = LB.list[LB.i];
-    if (e.key === 'Escape') closeOverlays();
-    else if (e.key === 'ArrowRight') { LB.i = (LB.i + 1) % LB.list.length; renderLightbox(); }
-    else if (e.key === 'ArrowLeft') { LB.i = (LB.i - 1 + LB.list.length) % LB.list.length; renderLightbox(); }
-    else if (e.key === 's') tileAction('star', t.id);
-    else if (e.key === 'f') tileAction('fav', t.id);
-    else if (e.key === 'x') rate(t.id, t.reject ? { reject: false } : { reject: true, star: false, fav: false });
-    else if (e.key === 'Delete') deleteRender(t.id);
+    const t = LB.list[LB.i], k = lightboxKey(e);
+    if (k === 'close') closeOverlays();
+    else if (k === 'next') { LB.i = (LB.i + 1) % LB.list.length; renderLightbox(); }
+    else if (k === 'prev') { LB.i = (LB.i - 1 + LB.list.length) % LB.list.length; renderLightbox(); }
+    else if (k === 'star' || k === 'fav' || k === 'reject') rate(t.id, rateFields(k, t));
+    else if (k === 'del') deleteRender(t.id);
   });
 }
 function closeOverlays() { $('#lightbox').hidden = true; $('#compare').hidden = true; $('#lightbox').innerHTML = ''; }
@@ -652,13 +616,8 @@ function renderTray() {
   $('#cmpClear').onclick = () => { pins = []; renderTray(); renderRuns(); };
 }
 function openCompare() {
-  const base = pins[0];
   $('#compare').hidden = false;
-  $('#compare').innerHTML = `<button class="btn sm close" data-close="1"><i class="ph ph-x"></i> Close</button><div class="cmp"><div class="cmpgrid">${pins.map((p, k) => `
-    <figure><img src="${esc(fullUrl(p))}" alt="Seed ${p.seed}" data-open="${esc(p.id)}" style="cursor:zoom-in">
-      <figcaption><div class="row gap8" style="margin-bottom:6px"><button class="btn sm" data-unpin="${esc(p.id)}">Unpin</button><button class="btn sm danger" data-cdel="${esc(p.id)}"><i class="ph ph-trash"></i> Delete</button></div><div class="kv"><span>Seed</span><span class="mono">${p.seed}</span><span>Model</span><span>${esc((p.model_file || '').replace('.safetensors', ''))}</span></div>
-      <div class="lbl mt8">Positive${k ? ' (changes from the first)' : ''}</div><div class="ptext">${k ? wordDiff(base.positive, p.positive) : esc(p.positive || '')}</div>
-      <div class="lbl mt8">Negative</div><div class="ptext">${k ? wordDiff(base.negative, p.negative) : esc(p.negative || '')}</div></figcaption></figure>`).join('')}</div></div>`;
+  $('#compare').innerHTML = compareHtml(pins);
   $('#compare').onclick = e => {
     if (e.target.closest('[data-close]')) closeOverlays();
     const o = e.target.dataset.open; if (o) { $('#compare').hidden = true; openLightbox(o, pins); }
