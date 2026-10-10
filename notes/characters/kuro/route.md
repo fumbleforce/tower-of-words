@@ -26,19 +26,23 @@ The Japanese focus is the time and people the booking needs: 六時, 二人 and 
 
 At 24 points, at the counter on a working morning, she tells him: 「金曜の夜、空けておいてください。お店は私が予約しますから。」 This is the friendship-or-romance choice, and it is hers to offer and his to answer.
 
-He can accept, and she says she will tell him the time later. He can ask for Saturday instead, and she argues once (「土曜？ ……金曜のほうがいいんですけど。」) and then takes it (「じゃあ、土曜。私が予約し直します。」). Either of those is a date. Or he can say no calmly and go to work. That throws her. She answers in her reception voice as if he were a visitor (「かしこまりました。いってらっしゃいませ。」), and the next morning she takes control back by setting something else: 「土曜日、泳ぎましょう。そのあと一杯。お店は私が決めます。」 That keeps the line going as a friendship.
+He can accept, and she says she will tell him the time later. He can ask for Saturday instead, and she argues once (「土曜？ ……金曜のほうがいいんですけど。」) and then takes it (「じゃあ、土曜。私が予約し直します。」). Either of those is a date.
 
-On the date path the public scene is the dinner at the izakaya on the shop street. She orders his second drink before he has finished the first, and asks what he noticed about her that evening. Near the end she slips into plain form once, still with the さん on his name. She doesn't say she likes him. She tells him what they are doing next Friday: 「来週の金曜も、ここ。……空けといて。」
+Or he can say no calmly and go to work. That throws her. She answers in her reception voice as if he were a visitor (「かしこまりました。いってらっしゃいませ。」), and after that she stops asking him to anything. She still greets him every morning and still notices what he wears, but she doesn't touch his arm and she doesn't set the next thing. The no completes step 4 as a friendship, and step 5 waits until Eric asks her out himself. From then on, a working morning at the counter lets him ask her for Friday night (「金曜の夜、空いてますか。」) or for a swim on Saturday and a drink after. She makes him wait for the answer, looking at him and saying nothing for longer than she needs to, then takes over at once and picks the place and the time. Friday night is the izakaya date below and sets `romance_kuro`. To Friday she says 「空いてますよ。七時に、商店街の居酒屋で。お店は私が予約しておきますね。」 (I'm free. Seven o'clock, at the izakaya on the shop street. I'll book it.) The swim keeps it a friendship, and she goes back to inviting him, which opens step 5. To the swim she says 「いいですよ。土曜の六時に、プールで。六時のほうがすいてますから。そのあとの一杯は、私がお店を決めますね。」 (All right. Saturday at six, at the pool, since it's quieter at six. I'll pick where we go for the drink after.)
+
+Decided (Jørgen, 2026-10-10, [Review relationship-lines-1](../../../reviews/relationship-lines-1/review.json): "second option"): after a no she stops asking until he asks her out himself. In the earlier plan she set a swim herself the next morning.
+
+On the date path the public scene is the dinner at the izakaya on the shop street. She orders his second drink before he has finished the first, and asks what he noticed about her that evening. Near the end she slips into plain form once, still with the さん on his name. She doesn't say she likes him. She tells him what they are doing next Friday: 「エリックさん、来週の金曜もここね。……空けといて。」 (Eric, next Friday here again. Keep it free.)
 
 The Japanese focus is ordering: もう一杯, 同じの and すみません, which she says for both of them until he says one himself.
 
-The answer is saved in a new flag, `romance_kuro`, which only this choice sets.
+The answer is saved in a new flag, `romance_kuro`, which only this choice, or his own invitation after a no, sets.
 
 **Private:** on the date answer, the private scenes for step 4 open: the booking at the counter and the date that follows it. Both are written separately and gated on step 4 and that answer.
 
 ## Step 5: her table
 
-Step 4 and this scene. On a Friday or Saturday evening she invites him to her apartment on the east side. Clothes cover every surface in the bedroom behind a half-open door, but the dining table is clear, with takeaway on proper plates and a bottle of wine she chose. She has an old romantic drama on and complains about what the heroine decides. Eric can agree with her or tell her the heroine was right. She likes it better when he disagrees, and she says so by refilling his glass.
+Step 4 and this scene. On a Friday or Saturday evening she invites him (after a no at step 4, only once he has asked her out himself) to her apartment on the east side. Clothes cover every surface in the bedroom behind a half-open door, but the dining table is clear, with takeaway on proper plates and a bottle of wine she chose. She has an old romantic drama on and complains about what the heroine decides. Eric can agree with her or tell her the heroine was right. She likes it better when he disagrees, and she says so by refilling his glass.
 
 On the date path she leaves the さん off his name for good when they are alone, and she tells him about the seafront apartment she wants one day, the first time she has told anyone from work. She talks about the place and never the saving: 「いつか、海の見える部屋に住むの。ベランダで、こうやって食べたいな。」 On the friendship path she invites him the same way, as her one guest who argues back about the drama, and she still decides what they eat. With him she keeps です/ます and his さん, and she goes plain only when she complains at the screen (「なんでそっち選ぶの。」).
 

@@ -158,7 +158,7 @@ Eric is the player, so has no bond with himself. This covers all ten named non-p
 
 ### Mio: leaving a working server alone
 
-Revision needed under #357. The built scenes below remain an account of the game. The unbuilt plan predates her current personality in [People](#mio-mio). Rewrite it before adding scenes. Her desire for privacy and time to play games must matter.
+The built scenes below remain an account of the game. Her unbuilt steps 4 and 5 are now [her route](../../notes/characters/mio/route.md), approved by Jørgen in Review relationship-lines-1 (2026-10-10, #357); where the plan below differs, the route wins.
 
 Route: B2 machine room, then the sea terrace; no club. She wants an afternoon away without leaving a fault for someone else. Her habit of carrying every failure onto her own list keeps her close to Eric at work and hard to meet elsewhere. Continue [Mio notices](stories/mio-notices.md); the shared reveal's witnesses and timing belong to the days 3–5 outline. Her route never investigates the magic's origin.
 
@@ -252,7 +252,7 @@ Repeat meeting: Wednesday evening karaoke. He shares the venue with Kenji, but h
 
 ### Kuro: being recognised away from the counter
 
-Superseded proposal under #357. This route predates her current personality in [People](#kuro-kuro). Do not build these milestones. Rewrite them around her aggressive flirting and desire to take charge.
+Superseded. Her line is now [her route](../../notes/characters/kuro/route.md), approved by Jørgen in Review relationship-lines-1 (2026-10-10, #357). Do not build the milestones below.
 
 Route: swimming club, with reception as first contact. She wants an evening where people remember what she enjoys without asking her to find somebody or hold a bag. Her even courtesy stays; trust means letting Eric hear a direct preference without wrapping it as a service offer.
 
@@ -284,7 +284,7 @@ Repeat meeting: Sunday evening tennis; weekday lunch at the plaza for short work
 
 ### Rei: playing a game she could lose
 
-Superseded proposal under #357. This route predates her current personality in [People](#rei-rei). Do not build these milestones. Rewrite them around her abrasive leadership and weaknesses that persist beyond the first disagreement.
+Superseded. Her line is now [her route](../../notes/characters/rei/route.md), approved by Jørgen in Review relationship-lines-1 (2026-10-10, #357) with faster steps. Do not build the milestones below.
 
 Route: tennis club and the sea terrace. She enjoys competitive doubles and wants a partner who can disagree with her. At work she can steer an uncertain conversation toward an easy yes; on court she does the same by explaining every shot until the other person stops choosing.
 

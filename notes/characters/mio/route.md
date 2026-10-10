@@ -14,11 +14,11 @@ She reaches it at 6 points. Points come from greeting her in casual Japanese (sh
 
 ## Step 3: she goes out for lunch
 
-At 14 points, the built scene plays at weekday lunch. She is checking a front vent before she eats. Eric offers to check it or tells her to go and eat, and she hands him her checklist for that one row. She comes back and says she actually got outside, "like before lunch was over. That never happens." Afterwards she eats at the east-coast bench on weekdays, and she starts texting him first, in lower case with no full stops.
+At 14 points, the built scene plays at weekday lunch. She is checking a front vent before she eats. Eric offers to check it or tells her to go and eat, and she hands him her checklist for that one row. She comes back and says she actually got outside, "like, before lunch was even over, and that basically never happens." Afterwards she eats at the east-coast bench on weekdays, and she starts texting him first, in lower case with no full stops.
 
 ## Step 4: the last boss
 
-At 24 points, on a Saturday or Sunday evening, she texts him first: "theres a boss i lost to all week / need someone who doesnt talk the whole time / you free saturday". If he replies, he can come to her dorm room. If he turns up without replying, she opens the door halfway ("Ah... I texted you, you know. You could just answer. I'm not really dressed for people, so... next weekend, okay?") and the scene waits for next weekend.
+At 24 points, on a Thursday or Friday evening, she texts him first: "theres a boss i lost to all week / need someone who doesnt talk the whole time / you free saturday". If he replies, he can come to her dorm room. If he turns up without replying, she opens the door halfway ("Ah... I texted you, you know, you could just answer it. I'm not really dressed for people, so... next weekend, okay?") and the scene waits for next weekend.
 
 In her room she gives him the folding chair and a spare controller, and she explains the boss the way she explains a word: what it does, when it does it, and one joke at his expense. Her work phone buzzes in the middle of the fight. It is a routine alarm on a server that is still running. She looks at it, puts it face down and says it can go on tomorrow's list. It is the first time Eric has seen her leave a working machine alone.
 
@@ -27,6 +27,8 @@ They win, or they lose and she wants one more try. Then comes the choice. Eric c
 The Japanese focus is game talk she says out loud while playing: 右, 左, まだ, もう一回 and 次. The player hears each one with the action on screen and types もう一回 when they want the retry.
 
 The answer is saved in a new flag, `romance_mio`, which only this choice sets.
+
+Decided (Jørgen, 2026-10-10, [Review relationship-lines-1](../../../reviews/relationship-lines-1/review.json): "4 is fine for room"): step 4 happens in her dorm room, as planned here.
 
 **Private:** on the romance answer, the private scene for step 4 opens (her first time). It is written separately and is gated on step 4 and that answer.
 

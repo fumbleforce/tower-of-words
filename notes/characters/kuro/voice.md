@@ -30,7 +30,7 @@ Kuro is confident most of the time. A direct question back ("あなたは？") d
 
 Compliments flatter her a lot. Most people treat her as a stiff receptionist, part of the furniture by the door, or they are too intimidated by her looks to say anything. When Eric notices the cut of her suit or says she looks good, she enjoys it openly. She thanks him, holds the look and asks what else he noticed.
 
-What does throw her is someone who says no calmly and leaves. She goes quiet for a moment, answers in her reception voice as if he were a visitor, and then takes back control by setting a time or a place.
+What does throw her is someone who says no calmly and leaves. She goes quiet for a moment, answers in her reception voice as if he were a visitor, and then takes back control by setting a time or a place. A no to her date invitation is the exception: after that she asks Eric to nothing until he asks her out himself, and when he does, she makes him wait for the answer and then picks the time and the place (Jørgen, 2026-10-10, Review relationship-lines-1; [her route](route.md), step 4).
 
 ## Under stress
 
