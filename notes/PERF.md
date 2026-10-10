@@ -719,7 +719,7 @@ preserved outside the disposable worktree at `/tmp/perf-237-evidence/`.
 
 ## Place budgets (#372, 2026-10-09)
 
-`node game3d/tools/perf/place-budget.mjs` opens every place on its own (all 26 in `PLACE_FILES`, indoor and outdoor), measures it, and fails when a number goes over its budget. tools/land.sh runs it before main moves on any branch that changes game3d/, and refuses the landing with the place, the tier, the number and the budget. It takes about 3.5 minutes on a quiet machine. `--places forecourt,plaza` and `--tiers phone` narrow a run, and `--json <file>` keeps every camera's numbers. The rules are in place-budget-lib.mjs, with unit tests in test/unit/place-budget.test.mjs.
+`node game3d/tools/perf/place-budget.mjs` opens every place on its own (all 26 in `PLACE_FILES`, indoor and outdoor), measures it, and fails when a number goes over its budget. tools/land.sh runs it before main moves on any branch that changes game3d/, and refuses the landing with the place, the tier, the number and the budget, unless the place is just as far over on main (then it lands with a warning; land skill). It takes about 3.5 minutes on a quiet machine. `--places forecourt,plaza` and `--tiers phone` narrow a run, and `--json <file>` keeps every camera's numbers. The rules are in place-budget-lib.mjs, with unit tests in test/unit/place-budget.test.mjs.
 
 What it measures, per place and tier (game3d/tools/perf/place-budgets.json, `tiers`):
 
