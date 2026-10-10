@@ -66,7 +66,8 @@ export function weeklyPlan(day) {
   at('shotengai', 'kuroda', { lunch: SATURDAY.shotengai.kuroda.lunch });
   at('east_coast', 'emi', { lunch: { seat: (P) => benchNear(P, [0, 0], { skip: 1 }) } });
   at('east_coast', 'mio', MONDAY.east_coast.mio);
-  at('dorm_commons', 'kenji', week === 5 || week === 3 ? {} : { evening: sofa });
+  // Thursday evenings he works at the long table on his model spaceship (no prop; the kit has none).
+  at('dorm_commons', 'kenji', week === 5 || week === 3 ? {} : { evening: week === 4 ? table : sofa });
   at('dorm_commons', 'mori', week === 2 ? { evening: table } : { lunch: table });
   at('east_coast', 'rei', MONDAY.east_coast.rei);
   if (week === 3) {
@@ -76,5 +77,7 @@ export function weeklyPlan(day) {
     at('shotengai', 'kuroda', { lunch: SATURDAY.shotengai.kuroda.lunch, evening: MONDAY.shotengai.kuroda.evening });
   // Friday's B2 gathering also allows a missed introduction to the word experiment.
   if (week === 5) for (const id of ['mio', 'kenji', 'mori']) plan.office[id].evening = MONDAY.office[id].evening;
+  // Around seven he is at the kitchenette counter; the drinks scene puts him back by the lift.
+  if (week === 5) plan.office.kenji.evening = { at: [1.2, 3.3], face: [1.3, 2.76] };
   return plan;
 }

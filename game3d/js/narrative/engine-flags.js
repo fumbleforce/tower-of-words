@@ -95,6 +95,7 @@ ENGINE_WRITES['game3d/js/places/ongoing/index.js'] = {
     'ongoing_tennis_day',
     'ongoing_team_day',
     'ongoing_art_day',
+    'ongoing_model_day',
     'ongoing_art_ready',
     'ongoing_winter_day',
     'ongoing_winter_ready',

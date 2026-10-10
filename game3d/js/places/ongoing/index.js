@@ -32,7 +32,8 @@ export function attachOngoing(game, P, name) {
       if (!P.things[id] || !cast.people[id] || P.things[id].fixedSpot) continue;
       P.things[id] = { ...P.things[id], ...cast.thing(id) };
     }
-    P.roomResidents?.sync({ kenji: !!plan.kenji?.[sim.period] });
+    const kenji = plan.kenji?.[sim.period];
+    P.roomResidents?.sync({ kenji: kenji ? (kenji.seat ? true : undefined) : false });
     flags[KEYS.ongoing_art_ready] = name === 'dorm_commons' && clubStageReady(sim.day, 'art', P);
     flags[KEYS.ongoing_winter_ready] = name === 'gym' && clubStageReady(sim.day, 'swimming', P);
   };
@@ -58,6 +59,7 @@ export function installOngoing(game) {
     flags[KEYS.ongoing_tennis_day] = weekdayOf(sim.day) === 0;
     flags[KEYS.ongoing_team_day] = weekdayOf(sim.day) === 5;
     flags[KEYS.ongoing_art_day] = weekdayOf(sim.day) === 2;
+    flags[KEYS.ongoing_model_day] = weekdayOf(sim.day) === 4;
     flags[KEYS.ongoing_winter_day] = weekdayOf(sim.day) === 6;
     return game.place?.ongoing?.(a);
   };

@@ -3,11 +3,12 @@ import { artNodes } from './art.js';
 import { interactions, place } from './shared.js';
 const room = interactions(source, ['talk:kenji', 'talk:drying_rack', 'talk:commons_board', 'talk:commons_printer']);
 export default place('dorm_commons', {
-  on: { ...room.on, 'talk:mori': 'ongoing_mori_table', 'talk:art_table': 'ongoing_art_table' },
+  on: { ...room.on, 'talk:kenji': [{ node: 'ongoing_kenji_table', if: 'ongoing_model_day && period_evening' }, 'room_kenji'], 'talk:mori': 'ongoing_mori_table', 'talk:art_table': 'ongoing_art_table' },
   nodes: {
     ...room.nodes, ...artNodes,
     club_art_1: [{ go: 'ongoing_art' }],
     club_art_2: [{ go: 'ongoing_art' }],
+    ongoing_kenji_table: [{ do: 'cam', on: 'kenji', zoom: 1.2 }, { go: 'room_work' }],
     ongoing_mori_table: [
       { if: 'ongoing_art_day && period_evening && club_art && ongoing_art_ready', then: [{ go: 'ongoing_art' }] },
       { do: 'cam', on: 'mori', zoom: 1.2 },
