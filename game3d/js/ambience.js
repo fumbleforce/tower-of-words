@@ -8,7 +8,8 @@
 //   lift    during the ride between the lobby and the office (the player is hidden in the car)
 //   office  air conditioning, typing somewhere, a printer, a phone ringing across the floor; quieter after work
 //   outdoors  sparrows and a light wind by day, crickets after work (and the forecourt keeps the station's air);
-//           a flock of pigeons scattering near Eric is heard (creatureCall)
+//           a flock of pigeons scattering near Eric, a crow's caw and a gull's cry are heard (creatureCall); the
+//           harbour adds water lapping at the quay
 // Beds loop as overlapping copies with an equal-power crossfade, so the seam never shows (MP3 padding included).
 // All gain automation goes through audio/automation.js, and update() catches and logs: no audio error can stop the
 // frame loop (#273).
@@ -23,6 +24,7 @@ const BEDS = {
   lift: 'bed_lift',
   birds: 'bed_birds',
   insects: 'bed_insects',
+  harbour: 'bed_harbour',
 };
 // one-shots per scene: file, gain, seconds between (random in range), a stereo spread
 const EVENTS = {
@@ -194,7 +196,9 @@ function scene(game) {
   // outdoors, where there are birds and animals (js/creatures/): sparrows and wind by day, crickets after work
   if (p.creatures) {
     const outside = p.creatures.evening() ? { insects: 1 } : { birds: 1 };
-    return name === 'forecourt' ? { station: 0.6, ...outside } : outside;
+    if (name === 'forecourt') return { station: 0.6, ...outside };
+    // the harbour: water against the quay under the birds
+    return name === 'harbour' ? { harbour: 1, ...outside } : outside;
   }
   if (name === 'office') return { office: game.sim && game.sim.period === 'evening' ? 0.7 : 1 };
   return {};
@@ -244,7 +248,11 @@ async function playAmb(f, gain, pan = 0, at = 0) {
 
 // a bird's call or a flock's wings, from js/creatures/ (world.js sound): gain 0 to 1 by distance, pan by where it is
 // on screen; each kind no more than once in a while, so a scattering flock is one sound
-const CALLS = { flap: { f: ['wings_flap'], gap: 1.5 } };
+const CALLS = {
+  flap: { f: ['wings_flap'], gap: 1.5 },
+  caw: { f: ['crow_caw'], gap: 4 },
+  gull: { f: ['gull_call'], gap: 5 },
+};
 const callAt = {};
 export function creatureCall(name, gain, pan) {
   const c = CALLS[name],
