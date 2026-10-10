@@ -30,8 +30,8 @@
    "game3d/css/*.css",
    "game3d/vendor/**/*.js",
    "game3d/opening/**/*.{js,html}",
-   "game3d/minigames/*.html",
-   "game3d/minigames/*/*.{js,css}",
+   "game3d/minigames/kotodama.html",
+   "game3d/minigames/{common,kotodama}/*.{js,css}",
    "game3d/js/**/*.js",
    "game3d/story/**/*.js",
    "game3d/data/**/*.json",
@@ -41,11 +41,11 @@
    "game3d/vendor/**"
   ],
   "exclude": [
-   "game3d/minigames/tools/**",
-   "game3d/minigames/give-v1*",
-   "game3d/minigames/give-v1/**",
-   "game3d/js/shell-qa.js"
-  ]
+   "game3d/js/shell-qa.js",
+   "game3d/js/showcase/**",
+   "game3d/js/viewer/**"
+  ],
+  "about": "include: what a release ships besides the assets (build.json modules are always in). exclude: modules only the dev pages load (showcase.html, viewer.html) or that load behind a query flag (shell-qa.js); a shipped module may import them only dynamically. The other minigames are standalone prototypes; the game plays kotodama (js/places/day5/delivery.js)."
  },
  "units": {
   "game3d/assets/characters/aoi/": {

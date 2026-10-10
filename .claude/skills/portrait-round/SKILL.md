@@ -35,6 +35,10 @@ The art rules live in GUIDE.md (Art) and art/PROMPTS.md. This skill is the order
 12. Make a contact sheet of every attempt in order, labelled, beside the approved portrait at the same scale. imgqa-sheet.webp is one (approved first, then the images in the order given); for a side-by-side at the same scale, copy the pattern of art/candidates/portraits/mio-phone-3/sheet.py.
 13. Post the round with the post-review-item skill: the sheet as `media`, each attempt as an option with prompt, seed and red-rim number in its note.
 
+## When Jørgen picks
+
+14. Install the pick with `node tools/assets/live.mjs promote <round file> game3d/assets/portraits/<who>-<face>.webp --round <round> --review <id>` (`--replace` when a face is being replaced: the old file goes to art/production/retired/). Then `python3 tools/assets/sync.py push` and commit tools/assets/live.json with the lock file (notes/asset-lifecycle.md). Never render or cut out straight into game3d/assets.
+
 ## Reading imgqa
 
 What each number means is in the header of tools/imgqa.py; the lines are THRESH there. Calibrated on 2026-09-29 against rounds mio-phone-2 to 5 and eric-portrait-anime-2 to 5 (195 images), where Jørgen's picks and rejections are known:
