@@ -2,7 +2,7 @@
  "title": "Kuro's four expression portraits and Mio's annoyed face",
  "date": "2026-10-10",
  "by": "art agent (expressions-kuro-mio-1)",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Which face should Kuro use for flirtatious, teasing, pleased and polite, and is one of Mio's annoyed faces good enough (one each)?",
  "media": [
@@ -123,5 +123,15 @@
    ],
    "note": "brows drawn in, lips pressed; mild. Words: \"mildly annoyed, slight frown, eyebrows drawn together a little, small flat pout, looking at the viewer\"; denoise 0.7, seed 3. Full prompt and negative in prompts.json. Checks: red rim 0.0% (pass), glasses pass (cover 0.999), face drift ccip 0.006 (pass), framing and matte the installed neutral's."
   }
- ]
+ ],
+ "decided": [
+  "kuro-kf3-d70-1-lip",
+  "kuro-kt3-d70-1-lip",
+  "kuro-kp3-d70-3-lip",
+  "kuro-kc3-d70-3-lip",
+  "mio-ma3-d70-2"
+ ],
+ "decision": "Picked kuro-kf3-d70-1-lip (flirtatious), kuro-kt3-d70-1-lip (teasing), kuro-kp3-d70-3-lip (pleased), kuro-kc3-d70-3-lip (cool politeness), and mio-ma3-d70-2 (mildly annoyed). Install only these selected expression portraits.",
+ "decided_at": "2026-10-10T10:35:39+0200",
+ "issue": 400
 }
