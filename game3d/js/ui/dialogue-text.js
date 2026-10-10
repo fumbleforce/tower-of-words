@@ -1,4 +1,4 @@
-import { WORDS, known, nameAt } from '../lang.js';
+import { WORDS, known, nameAt, lineHTML } from '../lang.js';
 import { paused } from '../audio/core.js';
 
 // ---------- overheard Japanese ----------
@@ -75,6 +75,25 @@ export function heardHTML(text, clear = [], vocabulary = known) {
     i++;
   }
   return `<span class="heardico" aria-hidden="true"></span>${out}`;
+}
+// A mostly English line from someone else with Japanese in it ("Oh. 気持ちいい. Mizuno-san, 規則..."): the English
+// reads as written, each Japanese stretch blurs as in an overheard line. A stretch glossed on the spot by the speaker
+// ("おはよう (ohayō)") and sounds stay readable. (narrative/heard-line.js decides which lines come here.)
+const JP_RUN = /[぀-ヿ㐀-鿿々〆ヶ]+/g;
+export function mixedHTML(text, clear = [], vocabulary = known) {
+  let out = '',
+    at = 0;
+  for (const m of text.matchAll(JP_RUN)) {
+    // a {id} word's Japanese is never written raw, so a run here is never inside one
+    // glossed on the spot: "おはよう (ohayō)" or "もう一度, mou ichido, means" (not "お疲れ, I guess")
+    const glossed = /^\s*(?:[(（]\s*[a-zāīūēō]|,\s*[a-zāīūēō][a-zāīūēō' -]*,)/.test(text.slice(m.index + m[0].length));
+    if (glossed || INTERJ.includes(m[0])) continue;
+    out +=
+      lineHTML(text.slice(at, m.index)) +
+      heardHTML(m[0], clear, vocabulary).replace(/^<span class="heardico"[^>]*><\/span>/, '');
+    at = m.index + m[0].length;
+  }
+  return out + lineHTML(text.slice(at));
 }
 let scrambleTimer = null;
 export function scramble(line) {

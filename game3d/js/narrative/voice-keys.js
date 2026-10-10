@@ -16,8 +16,10 @@ fetch(new URL('../../audio/index.json?v=' + (window.BUILD || ''), import.meta.ur
   .then((l) => l.forEach((k) => audioKeys.add(k)))
   .catch(() => {});
 // The clip a spoken line plays (null if none exists): the protagonist's own (mc.js ownClip) when there is one; else
-// the shared clip, and for the player's lines the stand-in voice's (data/mc/<id>.json voice.lines)
-export function lineClip(who, text, overheard = false) {
+// the shared clip, and for the player's lines the stand-in voice's (data/mc/<id>.json voice.lines). blurred: a line the
+// text box blurs although the story didn't mark it overheard (narrative/heard-line.js) also tries the overheard key.
+export function lineClip(who, text, overheard = false, blurred = false) {
+  if (blurred && !overheard) return lineClip(who, text) || lineClip(who, text, true);
   const player = isPlayer(who);
   const key = overheard ? heardKey(text) : lineKey(player ? PLAYER_ID : who, text);
   const own = ownClip(key);

@@ -131,7 +131,7 @@ export default place(
           { say: 'mori', overheard: true, emo: 'warm', text: '火曜日、楽しみにしています。' },
           { say: 'eric', emo: 'warm', text: 'Tuesday’s the art club. I think he’s glad I signed up.' },
         ], else: [
-          { say: 'mori', overheard: true, emo: 'warm', text: 'よかったら、美術部にもどうぞ。', clear: [{ ja: '美術部', ro: 'bijutsubu', en: 'art club' }] },
+          { say: 'mori', overheard: true, emo: 'warm', text: 'よかったら、美術部にもどうぞ。' },
         ] },
       ],
       d3_emi: [...emiHello,

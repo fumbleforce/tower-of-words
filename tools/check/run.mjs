@@ -20,6 +20,7 @@ const checks = [
   ['day 2 story', ['game3d/tools/day2-story-check.mjs']],
   ['day 3 story', ['game3d/tools/day3-story-check.mjs']],
   ['language', ['game3d/tools/lang-audit.mjs']],
+  ['blur', ['game3d/tools/blur-check.mjs']],
   ['bonds', ['game3d/js/bonds/test.mjs']],
   ['facts', ['tools/facts/check.mjs']],
   ['story map', ['tools/bible/story-map-check.mjs']],
