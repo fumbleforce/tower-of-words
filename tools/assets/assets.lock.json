@@ -14522,6 +14522,8 @@
   "game3d/assets/mio/tosit.glb": {"size": 490684, "sha256": "8ae905b3c4600081a99aa40d1c39ab4f639a9c9c87cf3e75935b6b58e58aa201", "type": "model/gltf-binary"},
   "game3d/assets/mio/walk.glb": {"size": 256264, "sha256": "e7c752480900ff152f1a3f77e7be5ac39514a28a12bb0e82d6f3e9fd87600798", "type": "model/gltf-binary"},
   "game3d/assets/opening/copyroom.webp": {"size": 103752, "sha256": "0e0ba61a3b27bd157da4c8b9dc29a5414a8afd3364a1127fa677c5ff60e4b7af", "type": "image/webp"},
+  "game3d/assets/opening/film/opening-1080.mp4": {"size": 29045399, "sha256": "fe21c20536addb0f18765d215b4cb3927704b71146e645f35ec322d23462403c", "type": "video/mp4"},
+  "game3d/assets/opening/film/opening-720.mp4": {"size": 13377044, "sha256": "bb2a5ba72105d2f297a18705527d8e80aa8259fd185825b613e1dcc9840f4364", "type": "video/mp4"},
   "game3d/assets/opening/portraits/aoi-neutral.webp": {"size": 218826, "sha256": "e8305072c3af711cd216def35f80999864d81b93ed25141bb197778fd2f34ec7", "type": "image/webp"},
   "game3d/assets/opening/portraits/carina-neutral.webp": {"size": 260348, "sha256": "7934c3166337471464d1b92362ee846eac6a10a2deec9673e755e26fd50cda2b", "type": "image/webp"},
   "game3d/assets/opening/portraits/carina-surprised.webp": {"size": 193586, "sha256": "a864ce6a55888ca330121535ea84886dc485d0acbd0c3ac55914f1a212692686", "type": "image/webp"},

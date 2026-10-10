@@ -16,7 +16,8 @@ export function playOpening({ gate = false } = {}) {
   const wrap = document.createElement('div');
   wrap.id = 'opening';
   const frame = document.createElement('iframe');
-  frame.src = `opening/index.html?embed${gate ? '&gate' : ''}&v=${encodeURIComponent(window.BUILD || '')}`;
+  // the rendered film, not the live player: drawing the island live gets choppy (Jørgen 2026-10-10)
+  frame.src = `opening/index.html?embed&film${gate ? '&gate' : ''}&v=${encodeURIComponent(window.BUILD || '')}`;
   frame.allow = 'autoplay; fullscreen';
   frame.title = 'Opening';
   wrap.append(frame);

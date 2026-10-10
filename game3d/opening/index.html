@@ -41,6 +41,9 @@
   body.still #load { display: none; }
   #start:disabled { visibility: hidden; }
   @media (prefers-reduced-motion: reduce) { #load .rail::after { animation: none; } #load-bar { transition: none; } }
+  /* the film (film.js): the video, the karaoke canvas over it, both 16:9 in the middle */
+  body.film #film, body.film #op { position: fixed; inset: 0; margin: auto; background: transparent; }
+  body.film #film { background: #000; }
   #dbg { position: fixed; left: 10px; top: 8px; font: 600 13px/1 ui-monospace, monospace; color: #fff; background: rgba(0, 0, 0, .55); padding: 6px 8px; border-radius: 6px; pointer-events: none; }
 </style>
 <script type="importmap">{ "imports": { "three": "../vendor/three/three.module.js", "three/addons/": "../vendor/" } }</script>
@@ -50,6 +53,6 @@
 <div id="load" role="status" aria-live="polite"><div class="kanji">天川</div><div class="word">AMAKAWA</div><div class="rail"><div id="load-bar"></div></div><div id="load-say">Loading the opening</div></div>
 <button id="start" type="button" disabled><i aria-hidden="true"></i>Play the opening</button>
 <div id="bar"><button id="lyrics" type="button" aria-pressed="true">Lyrics on</button><button id="skip" type="button">Skip</button></div>
-<script type="module" src="./op.js"></script>
+<script type="module" src="./boot.js"></script>
 </body>
 </html>
