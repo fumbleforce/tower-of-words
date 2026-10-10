@@ -82,8 +82,9 @@ function codeShed(root) {
   return roof;
 }
 
-// the Blender-built shed (station-model.js); returns its roof and the walkway's roofs
-function modelShed(root) {
+// the Blender-built shed (station-model.js); returns its roof and the walkway's roofs (walkway: false leaves the
+// walkway's roofs out, for a place that sees only the shed's north end)
+function modelShed(root, { walkway = true } = {}) {
   const lighter = stationLighter();
   for (const n of ['sh_concrete', 'sh_metal', ...(lighter ? [] : ['sh_fine'])]) root.add(stationMesh(n));
   root.add(stationGlass('sh_glass'));
@@ -95,9 +96,28 @@ function modelShed(root) {
     root.add(sign);
   }
   const roof = stationMesh('sh_roof'),
-    walkRoof = stationMesh('wk_roof');
-  root.add(roof, walkRoof);
+    walkRoof = walkway ? stationMesh('wk_roof') : null;
+  root.add(roof, ...(walkRoof ? [walkRoof] : []));
   return { roof, walkRoof };
+}
+
+// the platform shed alone, without the beams' approach or the covered walkway: what the north campus sees past the
+// shed's north end (scenes/campus.js)
+export function buildShedOnly(root) {
+  if (!stationModel()) return codeShed(root);
+  const group = new THREE.Group(),
+    { roof } = modelShed(group, { walkway: false });
+  // the model's nodes carry no normals; under this place's plain lights (no street-style dressing, as the forecourt
+  // has) the shadow lookup then reads NaN and the shed draws black. Its own copies get them; the forecourt's stay as
+  // they are
+  group.traverse((o) => {
+    if (o.isMesh && !o.geometry.attributes.normal) {
+      o.geometry = o.geometry.clone();
+      o.geometry.computeVertexNormals();
+    }
+  });
+  root.add(group);
+  return roof;
 }
 
 // Points every ~1.5 along both beams' approach: the car's beam from its end at the shed's south end along the

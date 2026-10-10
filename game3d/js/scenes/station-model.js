@@ -18,7 +18,7 @@ let parts = null,
   lean = false;
 
 // the places that build the station (the shop street builds it again over its station garden)
-export const STATION_PLACES = new Set(['forecourt', 'shotengai']);
+export const STATION_PLACES = new Set(['forecourt', 'shotengai', 'campus']); // campus: the platform shed only
 
 // lighter: the phone's lighter build (perf/phone.js phoneLighter): no small detail nodes (st_fine, sh_fine)
 export function loadStationModel({ lighter = false } = {}) {

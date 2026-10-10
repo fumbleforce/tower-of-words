@@ -10,15 +10,15 @@
 import * as THREE from 'three';
 import { GRANITE } from '../outdoor/paving.js';
 import { LANE_BORDER as BW } from '../outdoor/lane.js';
-import { kerb, kerbRect } from '../outdoor/edges.js';
-import { sakura, keyaki, maple, ginkgo, hedge, bed, cluster } from '../outdoor/planting.js';
+import { kerb } from '../outdoor/edges.js';
+import { sakura, keyaki, maple, ginkgo, hedge, cluster } from '../outdoor/planting.js';
 import { lamps, bins, STEEL } from '../outdoor/furniture.js';
 import { BLOCK } from '../outdoor/block.js';
 import { TOWN } from '../town.js';
 import { tree, walk } from './east-lane.js';
 import * as N from './north-plan.js';
 
-const { BACK, APRON, YARD, M6_WALK, CANTEEN } = N;
+const { BACK, APRON, YARD, M6_WALK, CANTEEN, LANE_WEST } = N;
 const edge = (pv, rect, module) => pv.field(rect, { pattern: 'grid', module, tones: GRANITE.edge, h: 0.007 });
 const CRATES = ['#5f7d8f', '#6e8468'];
 
@@ -68,8 +68,9 @@ function trolley(q, x, z, ry) {
 // a generator: yields between its parts, for building in slices (js/perf/slice.js)
 export function* yardSteps(q, { glass, lit }, lights, shade) {
   const [x0, x1, z0, z1] = YARD;
-  // kerbs on the lawn sides, open for m6's walk; a hedge round them outside; a cherry at the corner
-  kerb(q, [x0, z0], [x0, z1], { off: 0.08 });
+  // kerbs on the lawn sides, open for m6's walk and the service lane from the west; a hedge round them outside; a
+  // cherry at the corner
+  kerb(q, [x0, LANE_WEST[3]], [x0, z1], { off: 0.08 });
   kerb(q, [x0, z1], [x1, z1], { off: -0.08 });
   kerb(q, [x0, z0], [x1, z0], { off: 0.08, gaps: [[M6_WALK[0], M6_WALK[1]]] });
   for (const [x, o] of [
@@ -77,16 +78,15 @@ export function* yardSteps(q, { glass, lit }, lights, shade) {
     [M6_WALK[1], 0.08],
   ])
     kerb(q, [x, M6_WALK[2]], [x, z0], { off: o });
-  hedge(q, [x0 - 0.45, z0 + 0.2], [x0 - 0.45, z1 + 0.45], { w: 0.5, h: 0.75, seed: 34 });
+  hedge(q, [x0 - 0.45, LANE_WEST[3] + 0.2], [x0 - 0.45, z1 + 0.45], { w: 0.5, h: 0.75, seed: 34 });
   hedge(q, [x0 - 0.2, z1 + 0.45], [x1 - 0.3, z1 + 0.45], { w: 0.5, h: 0.75, seed: 38 });
-  // and on the lawn west of it, toward office_e1 and m6: a cherry at the corner, a group of three on a kerbed bed
+  // and on the lawn west of it, toward office_e1 and m6: a cherry at the corner, a group of three loose on the lawn
+  // south of the service lane
   yield;
   tree(q, sakura, x0 - 2.2, z1 + 1.6, 1.0, 35);
   shade.tree(x0 - 2.2, z1 + 1.6, 1.0);
   yield;
-  const g = [x0 - 5.2, x0 - 1.6, z0 + 1.0, z0 + 4.2];
-  kerbRect(q, g);
-  bed(q, [g[0] + 0.1, g[1] - 0.1, g[2] + 0.1, g[3] - 0.1], { y: 0.06 });
+  const g = [x0 - 5.2, x0 - 1.6, LANE_WEST[3] + 1.0, LANE_WEST[3] + 4.2];
   for (const [kind, dx, dz, s, seed] of [
     [keyaki, 1.0, 1.0, 1.1, 36],
     [maple, 2.6, 2.3, 0.9, 37],

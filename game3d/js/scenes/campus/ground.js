@@ -33,12 +33,14 @@ export const RUNS_ON = Object.entries(P.EXITS).map(
   },
 );
 export const BUILDINGS = P.SOLIDS.map((rect) => ({ kind: 'building', rect }));
+// the service lane's east end: a closed gate into the canteen's loading yard (campus/grounds.js; the yard is a band)
+export const YARD_GATE = { kind: 'gate', rect: [P.LANE_END[0], P.LANE_END[0] + 0.5, P.LANE_END[1], P.LANE_END[2]] };
 
 export function ground() {
   return walkGround({
     walk: P.WALKS,
     cut: P.SOLIDS,
-    barriers: [...BUILDINGS, ...RUNS_ON.map(({ rect }) => ({ kind: 'open', rect }))],
+    barriers: [...BUILDINGS, YARD_GATE, ...RUNS_ON.map(({ rect }) => ({ kind: 'open', rect }))],
     bounds: WALK_AREA,
   });
 }

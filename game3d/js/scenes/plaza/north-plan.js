@@ -15,6 +15,8 @@ const path = (id) => LAYOUT.PATHS.find((p) => p.id === id);
 export const BACK = rect(path('back_lane').rect);
 export const APRON = rect(path('canteen_apron').rect);
 export const YARD = rect(path('canteen_yard').rect);
+// the service lane from the campus's quarter street, into the yard's west side (scenes/island-campus.js)
+export const LANE_WEST = rect(path('back_lane_west').rect);
 export const M6_WALK = rect(path('m6_walk').rect);
 export const GROVE_WALK = rect(path('grove_walk').rect);
 export const SQUARE = rect(path('grove_square').rect);

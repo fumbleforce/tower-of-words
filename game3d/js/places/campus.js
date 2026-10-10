@@ -3,15 +3,12 @@ import { campusSteps } from '../scenes/campus.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { MORNING_GRADE, EVENING_GRADE } from '../scenes/town.js';
 import { PRINT_DOOR, PRINT_STEP, inRect } from '../scenes/campus/plan.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { walkIn, walkOut, walkOutNearest, viaOf } from './edge-walk.js';
 import { followFit } from './turning-cam.js';
 import { canteenSave } from './canteen-state.js';
 import { campusCamera } from './campus-camera.js';
-
-const CAMPUS_EVENING = { ...EVENING_GRADE, charLift: 0.13 };
 
 export async function campusPlace(game) {
   const w = await sliced(campusSteps()),
@@ -67,11 +64,11 @@ export async function campusPlace(game) {
     space: w.root,
     nav: w.nav,
     sun: w.sun,
+    light: w.light, // the light for every period (scenes/campus.js, kit/light/)
     charScale: K,
     start: w.start,
     startFacing: Math.PI,
     music: 'calm',
-    grade: MORNING_GRADE,
     things,
     spots: { campus_in: w.start, print_door: PRINT_STEP },
     seats: { campus_bench: w.seats.campus_bench },
@@ -98,10 +95,6 @@ export async function campusPlace(game) {
         const to = id === 'office_shed' ? 'office_quarter' : id;
         if (Math.hypot(p.x - x.lane[0], p.z - x.lane[1]) < 6 && !game.prepared[to]) game.prepare?.(to);
       }
-    },
-    onPeriod(period) {
-      w.period(period);
-      P.grade = period === 'evening' ? CAMPUS_EVENING : MORNING_GRADE;
     },
     snapshotState: save.snapshot,
     restoreState: save.restore,

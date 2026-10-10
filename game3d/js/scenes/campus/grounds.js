@@ -5,7 +5,9 @@ import { BED_FLUSH } from '../outdoor/walk-edges.js';
 import { cluster, bed } from '../outdoor/planting.js';
 import { lamps, bench, fingerSign } from '../outdoor/furniture.js';
 import { CAMPUS_PATHS } from '../island-campus.js';
-import { pt, BENCH, BEDS } from './plan.js';
+import { pt, BENCH, BEDS, LANE_END } from './plan.js';
+import { fence } from '../../kit/street/fence.js';
+import { sign } from '../forecourt/details.js';
 import { quarterGrounds } from './quarter-grounds.js';
 import { campusLandscape } from './landscape.js';
 import { campusServiceFront } from './service-front.js';
@@ -67,6 +69,13 @@ export function* campusGrounds(root, lights) {
     bed(parts, [a[0], b[0], a[1], b[1]], { y: 0.08 });
   }
   bench(parts, BENCH.x, BENCH.z, 0, { len: 1.8 });
+  // the service lane ends at the canteen's loading yard behind a closed gate of steel bars (campus/ground.js YARD_GATE)
+  const [gx, gz0, gz1] = LANE_END;
+  fence(parts, { from: [gx + 0.1, gz0 + 0.05], to: [gx + 0.1, gz1 - 0.05], variant: 'bars' });
+  const staff = sign('STAFF ONLY', 1.0, 0.2);
+  staff.position.set(gx + 0.05, 0.62, (gz0 + gz1) / 2);
+  staff.rotation.y = -Math.PI / 2;
+  root.add(staff);
   lamps(
     lights,
     parts,
