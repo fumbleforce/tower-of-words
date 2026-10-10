@@ -1,7 +1,7 @@
 // The desktop app's main process: one window on app://game/game3d/index.html, its files served from a content source
 // (serve.mjs): a plain folder in a dev build, the encrypted pack in a release (desktop/pak/source.mjs).
 //
-// build.mjs writes config.json next to this file: { release, devResources? }. A release turns DevTools off, refuses the
+// build.mjs writes config.json next to this file: { release, content: "pak" or "folder" }. A release turns DevTools off, refuses the
 // debugging switches and tells the page (preload.cjs: window.desktop.release) so its dev features stay off.
 // An optional module, ./full/full.mjs, adds its own routes, start page and navigation (only some builds carry it).
 // Saves: userData, or a folder beside the app when a file named "portable" sits next to it (installDir()).
@@ -42,15 +42,13 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true, stream: true, corsEnabled: true, codeCache: true } },
 ]);
 
+// The content beside the app: content.pak, opened with this build's key (two shares, joined only here), or a plain
+// content/ folder in a dev build. The key never leaves the main process.
 async function openSource() {
-  const res = app.isPackaged ? process.resourcesPath : config.devResources;
   const { openDir, openPak } = await import('./pak/source.mjs');
-  const pak = path.join(res, 'content.pak');
-  if (fs.existsSync(pak)) {
-    const { key } = await import('./k.mjs');
-    return openPak(pak, key());
-  }
-  return openDir(path.join(res, 'content'));
+  if (config.content !== 'pak') return openDir(path.join(process.resourcesPath, 'content'));
+  const [{ a }, { b }] = await Promise.all([import('./ka.mjs'), import('./kb.mjs')]);
+  return openPak(path.join(process.resourcesPath, 'content.pak'), Buffer.from(a.map((x, i) => x ^ b[i])));
 }
 
 async function loadExtra(source, quit) {

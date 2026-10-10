@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHandler, parseRange, contentPath, mimeOf } from '../app/serve.mjs';
-import { openDir } from '../app/source-dir-temp.mjs';
+import { openDir } from '../pak/source.mjs';
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'serve-test-'));
 fs.mkdirSync(path.join(root, 'game3d/js'), { recursive: true });
