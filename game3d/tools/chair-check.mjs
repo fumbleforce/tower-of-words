@@ -94,7 +94,8 @@ await withBrowserJob('chair-check', async (browser) => {
     if (!actions.length) fails.push(`${id}: menu with no action rows`);
     else if (named.length === actions.length) fails.push(`${id}: menu rows show only the name (${actions.map((r) => r.text).join(', ')})`);
   }
-  if (log.my_chair && !log.my_chair.rows?.some((r) => /push/i.test(r.text)))
+  // its E row is Interact (gameplay/interact-menu.js), which runs the push: the beat is its one option
+  if (log.my_chair && !log.my_chair.rows?.some((r) => /interact|push/i.test(r.text)))
     fails.push(`my_chair: no push action in its menu (${(log.my_chair.rows || []).map((r) => r.text).join(', ')})`);
   // nothing has moved the chair yet
   const before = await page.evaluate(`${flagsExpr}.chair_back`);

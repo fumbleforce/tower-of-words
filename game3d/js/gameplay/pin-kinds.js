@@ -89,25 +89,30 @@ export function pinGlyph(item) {
 
 const lowerFirst = (s) => s.charAt(0).toLowerCase() + s.slice(1);
 
-// What the pin's tooltip and the action menu say: { verb, name, text }. text is the tooltip: "Look: Vending machine",
-// "Talk: Mr. Mori", "Go to the plaza", "Take the lift down to B2". With private mode off a private pin says only
-// the neutral verb (and a person's name, which is public), never a private label or tip, so no private wording shows
-// in public play. `flags` are the story flags, for a thing's verbIf.
+// What the pin's tooltip and the action menu say: { act, verb, name, text }. `act` is the E action's name: Interact for
+// people and things (Jørgen, 2026-10-10: "Maybe call it interact, rather than talk, since you wouldnt talk to the door
+// for example"; the options it opens are gameplay/interact-menu.js), a way out's own verb. `verb` is the thing's own
+// verb (Pet, Look, Return the chair), the words of its plain row in Interact's options. text is the tooltip:
+// "Interact: Vending machine", "Interact: Mr. Mori", "Go to the plaza", "Take the lift down to B2". With private mode
+// off a private pin says only Interact (and a person's name, which is public), never a private label or tip, so no
+// private wording shows in public play. `flags` are the story flags, for a thing's verbIf.
+export const INTERACT = 'Interact';
 export function pinTip(item, { privateMode = false, flags = {} } = {}) {
   const person = isPerson(item);
   if (isPrivatePin(item) && !privateMode) {
     const verb = person ? 'Talk' : 'Look';
     const name = person ? item.label || '' : '';
-    return { verb, name, text: name ? `${verb}: ${name}` : verb };
+    return { act: INTERACT, verb, name, text: name ? `${INTERACT}: ${name}` : INTERACT };
   }
   const tr = item.travel;
-  // a verb that changes with the story: Tama says Return the chair while clicking her does that, Pet otherwise
+  // a verb that changes with the story: Tama's is Return the chair while clicking her does that, Pet otherwise
   const vi = item.verbIf;
   const live = vi && flags[vi.set] && !flags[vi.unset] ? vi.verb : '';
   const verb = (tr && tr.verb) || live || item.verb || (person ? 'Talk' : 'Look');
   const name = item.label || '';
-  if (tr && tr.tip) return { verb, name, text: tr.tip };
+  if (tr && tr.tip) return { act: verb, verb, name, text: tr.tip };
   // a way out labelled with its destination ("To the plaza") reads as one phrase: "Go to the plaza"
-  if (tr && /^to /i.test(name)) return { verb, name, text: `${verb} ${lowerFirst(name)}` };
-  return { verb, name, text: name ? `${verb}: ${name}` : verb };
+  if (tr && /^to /i.test(name)) return { act: verb, verb, name, text: `${verb} ${lowerFirst(name)}` };
+  const act = tr ? verb : INTERACT;
+  return { act, verb, name, text: name ? `${act}: ${name}` : act };
 }

@@ -17,7 +17,7 @@ test('actual Talk keeps an unnamed later cast member out of People until the aut
   for (const id of ['kuro', 'aoi', 'rei']) {
     const met = new Set(), flags = {}, fired = [];
     const game = { place: { people: { [id]: {} } }, runner: { trigger: key => { fired.push(key); return true; } } };
-    const action = Function('game', 'meet', 'ui', 'sim', 'flags', 'isPerson', `return (${talk})`)(game, (_game, who) => met.add(who), { refreshPeople() {} }, { people: PEOPLE, met }, flags, () => true);
+    const action = Function('game', 'meet', 'ui', 'sim', 'flags', 'isPerson', 'planInteract', 'runInteract', `return (${talk})`)(game, (_game, who) => met.add(who), { refreshPeople() {} }, { people: PEOPLE, met }, flags, () => true, () => null, () => false);
     action({ id }); assert.equal(met.has(id), false); assert.deepEqual(fired, ['talk:' + id]);
     flags[PEOPLE[id].introduction] = true;
     action({ id }); assert.equal(met.has(id), true);

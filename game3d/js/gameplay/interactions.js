@@ -14,6 +14,7 @@ import { installDoorCards } from '../ui/door-card.js';
 import { PLAYER_ID } from '../mc.js';
 import { travelOf } from './pin-kinds.js';
 import { registerReaction, registerDue } from './register-reactions.js';
+import { planInteract, runInteract, extraOptions } from './interact-menu.js';
 
 export function installInteractions(game) {
   const ui = game.ui;
@@ -181,7 +182,7 @@ export function installInteractions(game) {
       if (item.face) game.walker.faceTo(...item.face());
       // tapped or clicked, with more than one thing to do there (its verb and Say): its menu opens, nothing is used
       // yet (Jørgen, 2026-10-02: the menu opening by itself "is very disruptive"). One thing to do: it's done.
-      if (ask && canUse(item) && (sayRow(item) || game.topicFor?.(item.id))) {
+      if (ask && canUse(item) && sayRow(item)) {
         game.targetLock = item;
         game.near = item;
         ui.openActs(item);
@@ -208,8 +209,11 @@ export function installInteractions(game) {
       else game.walker.goTo(sp[0], sp[1], go);
     } else go();
   }
-  function talk(item, trigger) {
+  // Interact (E): the target's options (gameplay/interact-menu.js), planned before meeting so a first meeting (no
+  // topics yet) runs its story directly; `plain` is the target's usual use, picked from that menu
+  function talk(item, trigger, { plain = false } = {}) {
     const person = isPerson(game, item);
+    const plan = !trigger && !plain ? planInteract(game, item, { person }) : null;
     if (game.place.people[item.id]) {
       const introduction = sim.people[item.id]?.introduction;
       if (!introduction || flags[introduction]) meet(game, item.id);
@@ -217,6 +221,7 @@ export function installInteractions(game) {
     }
     // a thing whose only use now is a word (an empty talk node doesn't count): E opens the Say menu
     if (item.sayOnly?.()) return void say();
+    if (plan && runInteract(game, item, plan)) return;
     if (game.runner.trigger(trigger || 'talk:' + item.id)) return;
     if (item.act) {
       game.beat(() => item.act());
@@ -231,6 +236,7 @@ export function installInteractions(game) {
   // menu got an E row that did nothing there (issue #128; game3d/tools/menu-day-check.mjs checks every moment)
   function talksNow(item) {
     if (item.act || item.look) return true;
+    if (extraOptions(game, item).length) return true; // an option other code added (interact-menu.js)
     const n = game.runner.resolve('talk:' + item.id, { peek: true });
     return !!n && (game.story.nodes?.[n]?.length ?? 1) > 0;
   }
@@ -258,6 +264,7 @@ export function installInteractions(game) {
     return !!(ob.sayUsed || !ob.active || item.goal?.());
   }
   game.canUse = canUse;
+  game.useDefault = (item) => talk(item, null, { plain: true });
   game.saysSomething = saysSomething;
   game.sayRow = sayRow;
   async function say() {

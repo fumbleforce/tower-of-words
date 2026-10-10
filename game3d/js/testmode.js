@@ -26,6 +26,9 @@ export function start(game) {
   const seenChoice = {};
   T.choices = [];
   ui.autoPick = (chips) => {
+    // Interact's options (gameplay/interact-menu.js): the route takes the story row
+    const story = chips.findIndex((c) => c.cls === 'story');
+    if (story >= 0) return story;
     if ((game.sim?.day || 1) === 1) return 0;
     const want = preferred(T, chips); // a reply day 3's route asked for (testmode-day3.js)
     if (want >= 0) {
