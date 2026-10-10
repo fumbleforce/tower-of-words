@@ -158,7 +158,7 @@ export const VERSE = [
     scene3d(S, lt, T) {
       const x = 660 + lt * TRAIN_V;
       S.setTrain(x - 400); // out of this view
-      const yaw = 0.38 - lt * 0.02;
+      const yaw = 0.16 - lt * 0.02; // the island in the left third, whole (it was cut by the frame's edge)
       const y = beamY(x) - BEAM_TOP + 1.3; // at a passenger's eye height as the line comes down
       S.look([x, y, 1.4], [x + Math.cos(yaw) * 100, y - 2.6, Math.sin(-yaw) * -100], 34);
     },
@@ -178,6 +178,9 @@ export const VERSE = [
       g.restore();
       glassSweep(g, lt, 0.3, 0.12);
     },
+    // the sun's path on the water lies beside the town: held down so it doesn't blow out over the buildings
+    bloom: 0.15,
+    exposure: 0.82,
   },
   {
     // 知らない街が 光ってる: low over the water toward the island; the train overtakes us on the beam.
