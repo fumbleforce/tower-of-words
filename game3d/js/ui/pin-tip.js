@@ -7,6 +7,7 @@
 // stays until the next tap anywhere. Hidden while the action menu is open on the same target (the menu has the name).
 import { pinTip } from '../gameplay/pin-kinds.js';
 import { flags } from '../narrative/state.js';
+import { pinTipPosition } from './pin-tip-layout.js';
 
 // the symbols, in a 24 px box, drawn in the pin's colour (css/marks.css); whole literals, so the asset library lists them
 export const PIN_GLYPHS = {
@@ -45,7 +46,8 @@ export const tipOf = (item) => pinTip(item, { privateMode: privateOn(), flags })
 const LONG_PRESS = 450; // ms held still on a pin before its tooltip shows (a phone's long press)
 const MOVE = 10; // px a finger may move and still count as held
 
-export function createPinTip(layer, markers) {
+// boxes: { thingBox, elBox } from ui/screen-box.js, passed in so the story runner can load choiceIcon without three.js
+export function createPinTip(layer, markers, { thingBox, elBox }) {
   const el = document.createElement('div');
   el.id = 'pinTip';
   el.setAttribute('role', 'tooltip');
@@ -123,7 +125,7 @@ export function createPinTip(layer, markers) {
     get for() {
       return cur;
     },
-    // every frame from Markers.update, after the pins have moved: above the pin, else beside it, kept on screen
+    // Every frame after the pins move: stay near the pin without covering Eric, its target or the HUD.
     update() {
       const m = cur;
       const ui = window.__game?.ui;
@@ -143,24 +145,30 @@ export function createPinTip(layer, markers) {
         rest.textContent = t.text.slice(head.length);
       }
       if (el.hidden) el.hidden = false;
-      const r = pin.getBoundingClientRect(),
-        L = layer.getBoundingClientRect();
-      const w = el.offsetWidth,
-        h = el.offsetHeight,
-        gap = 8;
-      const W = L.width,
-        H = L.height;
-      let x = (r.left + r.right) / 2 - L.left - w / 2,
-        y = r.top - L.top - gap - h;
-      if (y < 8) {
-        // no room above: beside the pin, right unless that runs off the screen
-        y = (r.top + r.bottom) / 2 - L.top - h / 2;
-        x = r.right - L.left + gap;
-        if (x + w > W - 8) x = r.left - L.left - gap - w;
+      const pinBox = elBox(pin);
+      if (!pinBox) {
+        el.hidden = true;
+        return;
       }
-      x = Math.max(8, Math.min(W - w - 8, x));
-      y = Math.max(8, Math.min(H - h - 8, y));
-      el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+      const g = window.__game;
+      const L = layer.getBoundingClientRect();
+      const keep = [g?.ericBox?.(), g?.place?.camera ? thingBox(g, m) : null];
+      for (const control of [
+        m.el.querySelector('.key'),
+        m.el.querySelector('.keyq'),
+        document.getElementById('goal'),
+        document.getElementById('hud'),
+      ]) {
+        if (control && !control.hidden && getComputedStyle(control).visibility !== 'hidden') keep.push(elBox(control));
+      }
+      const { x, y } = pinTipPosition(
+        pinBox,
+        el.offsetWidth,
+        el.offsetHeight,
+        { x0: L.left, y0: L.top, x1: L.right, y1: L.bottom },
+        keep,
+      );
+      el.style.transform = `translate(${x - L.left}px, ${y - L.top}px)`;
     },
   };
 }

@@ -46,6 +46,7 @@ const ob = (window.__onboard = {
 export function resetOnboarding() {
   Object.assign(st, { moved: false, talked: false, uses: 0, sayUsed: false });
   walked = 0;
+  last = null;
   keep();
 }
 
@@ -74,7 +75,7 @@ function talkedNow() {
   ui.releaseGoal();
 }
 
-export function startOnboarding(game) {
+export function startOnboarding(game, sim) {
   controlsLine();
   // E on anything goes through the runner as talk:<id> first (main.js talk()); a person makes it "talked"
   const trig = game.runner.trigger.bind(game.runner);
@@ -111,7 +112,7 @@ export function startOnboarding(game) {
     const g = window.__game;
     if (!g || !g.place || !g.player) return;
     const b = document.body;
-    const onTrain = g.place.name === 'train' && !g.test;
+    const onTrain = sim.day === 1 && g.place.name === 'train' && !g.test;
     const heldGoal = ob.holdGoal;
     ob.active = onTrain;
     ob.holdGoal = onTrain && !st.talked;
@@ -126,6 +127,7 @@ export function startOnboarding(game) {
       st.moved = true;
       keep();
     }
+    b.classList.toggle('ob-walking', onTrain && !st.moved);
     const show =
       onTrain &&
       !st.moved &&

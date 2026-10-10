@@ -6,6 +6,7 @@ import { canTravel } from './places/definitions.js';
 import { needsLegacyOpening } from './narrative/legacy-opening.js';
 import { showEnd } from './end.js';
 import { nextDaySave, sampleDayEnd } from './days.js';
+import { restoreGoal } from './saves/zones.js';
 import { restoreMet } from './saves/met.js';
 import { migrateDay2Save } from './saves/day2.js';
 
@@ -36,7 +37,7 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
     ui.refreshWords();
     ui.refreshPeople(sim.met.size);
     ui.refreshBag(sim);
-    ui.goal(saved.ui?.goal || '');
+    restoreGoal(game, saved);
     ui.sideGoal(saved.ui?.sideGoal || '');
     game.hold = saved.ui?.hold || null;
     game.restoreZones?.(saved);

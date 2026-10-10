@@ -215,7 +215,7 @@ export function createPlaceLifecycle(
     playMusic(sim.period === 'evening' ? 'night' : music || MUSIC[name] || 'calm');
     syncFinds(place); // prints already picked up stay gone, also after a load
     buildMarkers(place);
-    ui.goal('');
+    game.hooks.goal({ text: '' });
     nearSet.clear();
     zoneSet.clear();
     if (persist) save(game);

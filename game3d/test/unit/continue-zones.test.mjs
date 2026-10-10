@@ -6,6 +6,7 @@ import { parse } from 'espree';
 import * as THREE from '../../vendor/three/three.module.js';
 import { stepZones, snapshotZones, restoreZones, suppressArrivalZones } from '../../js/gameplay/zones.js';
 import { snapshotPeople, restorePeople, cancelSavedWalk } from '../../js/places/saved-people.js';
+import { snapshotGoalDestination, restoreGoal } from '../../js/saves/zones.js';
 import { eventTrigger } from '../../js/narrative/events.js';
 
 register(new URL('../support/save-loader.mjs', import.meta.url));
@@ -76,7 +77,8 @@ function fixture() {
   for (const name of ['captureStaging', 'restoreStaging']) {
     const assignment = sourceNode('../../js/narrative/hooks/movement.js', n => n.type === 'AssignmentExpression' &&
       n.left.object?.name === 'game' && n.left.property?.name === name);
-    new Function('game', 'ui', 'flags', 'THREE', assignment)(game, ui, flags, THREE);
+    new Function('game', 'ui', 'flags', 'THREE', 'snapshotGoalDestination', 'restoreGoal', assignment)
+      (game, ui, flags, THREE, snapshotGoalDestination, restoreGoal);
   }
   const deps = { game, ui, sim: S.sim, cancelSavedWalk, SHARED_THINGS: {}, document: globalThis.document, noteVisit: noop,
     SmoothWalker: Walker, setComposer: noop, liftPeople: noop, lightPlace: noop, resize: noop, absorb: S.absorb, PERIOD_ORDER: S.PERIODS,

@@ -219,8 +219,8 @@ export function createSaving({ game, grab, openLayer, closeLayer, setPaused }) {
     if (document.querySelector('#qsaveBtn')) return;
     const b = el(
       'button',
-      'hchip icon',
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9l3.5 3.5v13.5h-13z"/><path d="M8.5 3.5v4.5h6.5V3.5"/><path d="M12 11.5v6M9.3 14.8l2.7 2.7 2.7-2.7"/></svg>',
+      'hchip utility',
+      '<span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9l3.5 3.5v13.5h-13z"/><path d="M8.5 3.5v4.5h6.5V3.5"/><path d="M12 11.5v6M9.3 14.8l2.7 2.7 2.7-2.7"/></svg></span>Quick save',
     );
     b.id = 'qsaveBtn';
     b.type = 'button';
@@ -229,7 +229,7 @@ export function createSaving({ game, grab, openLayer, closeLayer, setPaused }) {
       e.stopPropagation();
       quickSave();
     };
-    hud.insertBefore(b, before || null);
+    hud.insertBefore(b, hud.querySelector('#feedbackBtn') || before || null);
   }
 
   return {

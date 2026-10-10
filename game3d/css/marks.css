@@ -56,14 +56,14 @@ body.reduce-motion #marks .mark.goal .pin::after { animation: none; transform: s
 #marks .mark.hover:not(.near) .pin { transform: scale(1.15); border-color: #fff; }
 
 /* in reach: the pin lights up, and the line becomes the small bobbing pointer aimed at the target */
-#marks .mark.near .pin { border-color: #fff; background: #1d4744; box-shadow: 0 0 0 3px rgba(111, 208, 198, .4), 0 2px 6px rgba(0, 0, 0, .45); }
-#marks .mark.near .pin svg { fill: #bff1ea; }
+#marks .mark.near .pin { border-color: #fff; background: #252e3b; box-shadow: 0 0 0 3px rgba(236, 240, 245, .3), 0 2px 6px rgba(0, 0, 0, .45); }
+#marks .mark.near .pin svg { fill: #fff; }
 #marks .mark.near.goal .pin { background: var(--accent, #6fd0c6); }
 #marks .mark.near.goal .pin svg { fill: #0f2624; }
 #marks .mark.near .stem { display: none; }
 #marks .mark.near::after {
   content: ""; position: absolute; left: -8px; top: -17px; width: 16px; height: 11px;
-  background: #bff1ea; clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: #fff; clip-path: polygon(0 0, 100% 0, 50% 100%);
   filter: drop-shadow(0 1px 1px rgba(10, 14, 24, .8));
   animation: markbob 1.4s ease-in-out infinite;
 }

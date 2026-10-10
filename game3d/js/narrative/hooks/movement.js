@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { walkRig, faceRig, standOut } from '../../move.js';
 import { beginSavedWalk } from '../../places/saved-people.js';
+import { snapshotGoalDestination, restoreGoal } from '../../saves/zones.js';
 import { save } from '../../sim.js';
 import { flags } from '../state.js';
 import { flagKeys } from '../engine-flags.js';
@@ -62,6 +63,7 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
       flags: { ...flags },
       world: game.place.snapshotState?.(),
       zones: game.snapshotZones?.(),
+      goalDestination: snapshotGoalDestination(game),
       ui: { goal: ui.goalText || '', sideGoal: ui.sideText || '', hold: game.hold || null },
       camera: close ? { ...close, ...(close.target ? { target: close.target.toArray() } : {}) } : null,
     };
@@ -72,7 +74,7 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
     game.place.restoreState?.({ flags: staging.flags, world: staging.world, runner: { execution: true } });
     game.restoreZones?.(staging, { legacy: false });
     if (staging.ui) {
-      ui.goal(staging.ui.goal);
+      restoreGoal(game, staging);
       ui.sideGoal(staging.ui.sideGoal);
       game.hold = staging.ui.hold;
     }

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
+import { registerHooks } from 'node:module';
 import { PLACE_DETAILS } from '../../js/places/catalog.js';
 import {
   TRAVEL_KINDS,
@@ -11,7 +12,15 @@ import {
   pinTip,
   isPrivatePin,
 } from '../../js/gameplay/pin-kinds.js';
-import { PIN_GLYPHS } from '../../js/ui/pin-tip.js';
+const hooks = registerHooks({
+  resolve(specifier, context, next) {
+    return specifier === 'three'
+      ? next(new URL('../../vendor/three/three.module.js', import.meta.url).href, context)
+      : next(specifier, context);
+  },
+});
+const { PIN_GLYPHS } = await import('../../js/ui/pin-tip.js');
+hooks.deregister();
 
 // a pin as interactions.js builds it from the catalog
 const pinFor = (place, id) => {
