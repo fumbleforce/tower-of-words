@@ -259,15 +259,16 @@ export const CHORUS = [
         const t = lt - at;
         if (t > 0) panelCard(g, t, id, P[i], { pic, dir: i % 2 ? -1 : 1, nameSize: 84, h: 900 });
       });
-      // 「てつだって」 lands across the panels
+      // 「てつだって」 lands across the panels, in the lower third over their jackets, clear of their faces and above
+      // the lyric
       const t3 = lt - 2.4;
       if (t3 > 0) {
         const e = ease.out5(clamp(t3 / 0.3));
         g.save();
         g.fillStyle = 'rgba(14,22,44,0.82)';
-        g.fillRect(0, 430 - e * 70, W, e * 140 + 20);
+        g.fillRect(0, 790 - e * 80, W, e * 160);
         g.restore();
-        typeIn(g, '「てつだって」', W / 2, 545, t3, { font: FONT.jp, size: 120, align: 'center', color: '#ffffff', stagger: 0.05, from: 1.5, shadow: { color: '#6fd0c6', dx: 6, dy: 6 } });
+        typeIn(g, '「てつだって」', W / 2, 850, t3, { font: FONT.jp, size: 120, align: 'center', color: '#ffffff', stagger: 0.05, from: 1.5, shadow: { color: '#6fd0c6', dx: 6, dy: 6 } });
       }
     },
   },
