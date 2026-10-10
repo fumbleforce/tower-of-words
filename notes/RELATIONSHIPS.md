@@ -79,7 +79,7 @@ Perks give time back or open doors early. Mio takes one tech ticket a week off t
 3. Turn [2]: Eric uses something from a binder page he could only just read, and it works. Mori sees it. From then on it's one binder a week, and he teaches 休んで, the word he says to the machines at night.
 4. Payoff [3]: the machine room's yearly check (年次点検) in January, every machine at once and by hand, the way Mori has always done it. He runs it one last time and gives Eric the key.
 
-**Emi (32, B2's team lead).** Day 1 hides her. Proposal: she's been at head office arguing for a proper parts budget for the old machines. Wants the 課長 promotion she's been passed over for twice, and that budget is her case. Problem: to win it she rounded up what B2 can do, and head office is sending an auditor.
+**Emi (35, B2's team lead).** Day 1 hides her. Proposal: she's been at head office arguing for a proper parts budget for the old machines. Wants the 課長 promotion she's been passed over for twice, and that budget is her case. Problem: to win it she rounded up what B2 can do, and head office is sending an auditor.
 1. [1] She comes back pleased, and tells the team she's promised head office "a few things".
 2. [2] She presents B2's case to the council, and Eric hears numbers he doesn't recognise.
 3. Turn [2]: the December audit. The auditor shadows Eric for a week and wants every fix explained. What gets him through is what he learned the slow way: Mori's binders, the logs inside the machines, knowing each keeper. The more of those he has, the better the week goes.
