@@ -6,7 +6,7 @@
 // never reaches. elev: a steeper (or flatter) camera than the place's, for a look over tall blocks.
 // Sizes: SIZES=1366x860,390x844 (default both); each shot is written as <name>-desk.png / <name>-phone.png.
 // BASE=.claude/worktrees/<name>/game3d for a worktree. Quality q=1 unless Q is set.
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -72,6 +72,6 @@ await withBrowserJob(
       await context.close();
     }
   },
-  { timeoutMs: 280000 },
+  gpuWaitOptions(60, 280000),
 );
 if (errors.length) console.log('page errors:\n' + errors.join('\n'));

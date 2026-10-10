@@ -387,7 +387,7 @@ The crowd ([systems.md](systems.md), The crowd):
 
 | Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
 |---|---|---|---|---|---|---|---|
-| early | 17 | 0 | 1 | 0 | 15% | 20% | Most cross the court to the head office door: in off the plaza lane, up from the bike court, off the monorail. Some go the other way or across: back out toward the plaza and the konbini, to the monorail, between the bikes and the plaza. |
+| early | 6 | 0 | 1 | 0 | 15% | 20% | Most cross the court to the head office door and on through the lobby to the lifts: in off the plaza lane, up from the bike court, off the monorail. Some go the other way or across: back out toward the plaza and the konbini, to the monorail, between the bikes and the plaza. Thinned from 17 (Jørgen, 2026-10-10: "still a massive amount of people walking around in forecourt day 1 morning, too many"). |
 | morning | 6 | 0 | 0 | 0 | 30% | 20% | A few people every way between the head office door, the plaza lane, the bike court and the monorail. |
 | lunch | 14 | 0 | 2 | 0 | 30% | 35% | Out of head office toward the plaza and the canteen and back, some to and from the bikes and the monorail; many in twos. |
 | afternoon | 6 | 0 | 0 | 0 | 30% | 20% | A few people between the head office door, the plaza lane, the monorail and the bike court. |
@@ -477,7 +477,7 @@ The crowd ([systems.md](systems.md), The crowd):
 
 | Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
 |---|---|---|---|---|---|---|---|
-| early | 14 | 2 | 1 | 0 | 20% | 20% | Most walk in from the dorms and the shop street toward head office. Others go the other way or across: to the shop street, back toward the dorms, in and out of the canteen. Two on the benches, a pair talking. |
+| early | 6 | 2 | 1 | 0 | 20% | 20% | Most walk in from the dorms and the shop street toward head office. Others go the other way or across: to the shop street, back toward the dorms, in and out of the canteen. Thinned from 14 (Jørgen, 2026-10-10: too many walking about). Two on the benches, a pair talking. |
 | morning | 6 | 2 | 0 | 0 | 35% | 20% | A few crossing every way; two on the benches. |
 | lunch | 17 | 4 | 2 | 0 | 30% | 35% | Out of head office into the canteen and the shop street, and back, some to and from the dorms; the benches fill up. |
 | afternoon | 7 | 2 | 1 | 0 | 35% | 20% | A few crossing every way; two on the benches, a pair talking. |
@@ -787,7 +787,7 @@ The crowd ([systems.md](systems.md), The crowd):
 
 | Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
 |---|---|---|---|---|---|---|---|
-| early | 14 | 1 | 1 | 0 | 15% | 20% | Most go out of the dorm gate and the dorm row, west along the lane toward head office, one or two up the north street. Some go the other way: back to the dorm gate, to the shop street. One on a bench, a pair talking. |
+| early | 6 | 1 | 1 | 0 | 15% | 20% | Most go out of the dorm gate and the dorm row, west along the lane toward head office, one or two up the north street. Some go the other way: back to the dorm gate, to the shop street. One on a bench, a pair talking. |
 | morning | 6 | 1 | 0 | 0 | 30% | 20% | A few every way between the dorm gate, the lane, the shop street and the north street. |
 | lunch | 12 | 2 | 1 | 0 | 30% | 30% | Between the lane and the shop street, some to and from the north street and the dorm row. |
 | afternoon | 6 | 1 | 0 | 0 | 30% | 20% | A few toward the dorm row and the shop street, someone out of the dorm gate. |
@@ -1260,7 +1260,7 @@ The crowd ([systems.md](systems.md), The crowd):
 
 | Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
 |---|---|---|---|---|---|---|---|
-| early | 17 | 0 | 1 | 0 | 15% | 15% | Office workers along the office street both ways, in from the sports lane and up the quarter street, some toward the gym and the harbour end; a pair talking. |
+| early | 7 | 0 | 1 | 0 | 15% | 15% | Office workers along the office street both ways, in from the sports lane and up the quarter street, some toward the gym and the harbour end; a pair talking. |
 | morning | 7 | 0 | 0 | 0 | 30% | 20% | A few between the quarter street, the bank and the harbour end. |
 | lunch | 14 | 0 | 2 | 0 | 30% | 30% | Between the quarter street and the bank, some along the street; two pairs talking. |
 | afternoon | 7 | 0 | 0 | 0 | 30% | 20% | A few along the street. |
