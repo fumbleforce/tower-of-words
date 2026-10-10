@@ -1,17 +1,25 @@
 // Play the scene in the editor, laid out like the game's dialogue (game3d/css/style.css, #talk): the picture or
 // the place behind, the speaker's portrait, the name in their colour, Japanese words in peach with reading and
-// meaning. Choices and branches ask which way to go; a jump to another part loads it. Nothing touches a save.
+// meaning. It plays the reading path the timeline shows (paths.js): a choice offers its options with the picked one
+// marked, and picking another switches the path in the timeline too. A jump to another part loads it. Nothing
+// touches a save.
 const { document } = globalThis;
 import { esc, api } from './common.js';
-import { S, select } from './store.js';
+import { S, select, setPick, docFor } from './store.js';
 import { kindOf, speakerOf, textsOf, describe } from './model.js';
 import { personName, personColor, portrait, nodeTitle } from './names.js';
 import { conditionSentence } from './conditions.js';
 import { pictureFor } from './pictures.js';
+import { flatten } from './paths.js';
+import { currentPath } from './timeline.js';
 
 const dlg = () => document.getElementById('previewDialog');
 let scene = null, items = [], at = 0;
 
+const pathItems = () => flatten(currentPath());
+const docOf = item => (scene === S.scene ? docFor(item.path) : scene);
+
+// Another part read on its own (a jump): every beat in order, branches asked as they come.
 function expand(steps, base) {
   const out = [];
   (steps || []).forEach((step, i) => {
@@ -32,7 +40,7 @@ export function words(text) {
 
 export function openPreview(fromPath) {
   scene = S.scene;
-  items = expand(scene.steps, []);
+  items = pathItems();
   const start = fromPath ? items.findIndex(x => x.path.join('.') === fromPath.join('.')) : 0;
   at = Math.max(0, start);
   dlg().showModal();
@@ -43,7 +51,7 @@ function backdrop() {
   for (let i = at; i >= 0; i--) {
     const s = items[i].step;
     if (s?.action === 'hide') return '';
-    if (kindOf(s) === 'picture') return pictureFor(s, scene).url;
+    if (kindOf(s) === 'picture') return pictureFor(s, docOf(items[i])).url;
   }
   const file = (scene.where || '').split('/').at(-1)?.replace(/\.js$/, '');
   return S.authoring.places.find(p => p.id === file)?.image || '';
@@ -74,7 +82,8 @@ function paint() {
   } else if (kind === 'picture') {
     box = bg ? '' : '<div class="pv-end"><p class="dim">No picture yet</p></div>';
   } else if (kind === 'choice') {
-    box = `<div class="pv-talk">${step.prompt ? `<div class="pv-line">${words(step.prompt)}</div>` : ''}<div class="pv-chips">${step.choice.map((c, j) => `<button data-opt="${j}">${words(c.text || '…')}${c.if ? `<small>only if ${esc(conditionSentence(c.if))}</small>` : ''}</button>`).join('')}</div></div>`;
+    const picked = item.type === 'choice' ? item.pick : -1;
+    box = `<div class="pv-talk">${step.prompt ? `<div class="pv-line">${words(step.prompt)}</div>` : ''}<div class="pv-chips">${step.choice.map((c, j) => `<button data-opt="${j}" class="${j === picked ? 'picked' : ''}" title="${j === picked ? 'The path in the timeline' : 'Switches the path in the timeline too'}">${words(c.text || '…')}${c.if ? `<small>only if ${esc(conditionSentence(c.if))}</small>` : ''}</button>`).join('')}</div></div>`;
   } else if (kind === 'branch') {
     box = `<div class="pv-talk narr"><div class="pv-line">Does this hold? ${esc(conditionSentence(step.if))}</div><div class="pv-chips"><button data-arm="then">Yes</button><button data-arm="else">No</button></div></div>`;
   } else if (kind === 'jump') {
@@ -94,7 +103,7 @@ function paint() {
     d.close();
     if (scene === S.scene) select(item.path);
   };
-  d.querySelectorAll('[data-opt]').forEach(b => { b.onclick = () => choose(step.choice[+b.dataset.opt]); });
+  d.querySelectorAll('[data-opt]').forEach(b => { b.onclick = () => choose(item, +b.dataset.opt); });
   d.querySelectorAll('[data-arm]').forEach(b => { b.onclick = () => { items.splice(at + 1, 0, ...expand(step[b.dataset.arm], [...item.path, b.dataset.arm])); next(); }; });
   d.querySelector('[data-follow]')?.addEventListener('click', e => follow(e.currentTarget.dataset.follow));
 }
@@ -107,8 +116,18 @@ function next() {
   paint();
 }
 
-function choose(option) {
-  if (option.go || option.call) return follow(option.go || option.call);
+function choose(item, j) {
+  const option = item.step.choice[j];
+  const target = option.go || option.call;
+  if (scene === S.scene && item.type === 'choice') {
+    if (j !== item.pick) {
+      setPick(item.key, j);
+      items = pathItems();
+      at = items.findIndex(x => x.path.join('.') === item.path.join('.'));
+    }
+    if (!target || S.linked[target]) { at++; paint(); return; }
+  }
+  if (target) return follow(target);
   at++;
   paint();
 }

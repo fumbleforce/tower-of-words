@@ -25,7 +25,10 @@ const original = `export default {
       ] },
     ],
     room: ['mio: The room beside reception.'],
-    later: ['eric: See you there.'],
+    later: [
+      'eric: See you there.',
+      { if: 'mc_carina', then: ['mio: Bye, Carina.'], else: ['mio: Bye, Eric.'] },
+    ],
   },
 };
 `;
@@ -48,7 +51,7 @@ const authoring = {
   deliveries: [{ id: '', label: 'Natural' }, { id: 'warm', label: 'Warm' }],
   words: [],
 };
-const privateRow = { id: 'local:fixture:bath:start', provider: 'local', title: 'bath · start', node: 'start', scene: 'enc_bath', group: 'Encounters', where: 'island/private/rewards/tools/fixture.src.mjs', count: 3, audience: 'private' };
+const privateRow = { id: 'local:fixture:bath:start', provider: 'local', title: 'bath · start', node: 'start', scene: 'enc_bath', group: 'Encounters', where: 'island/private/rewards/tools/fixture.src.mjs', count: 5, audience: 'private' };
 const privateScene = {
   ...privateRow, recipe: true, revision: 'p1', metadata: {}, entries: [], routesEditable: false, history: [],
   placement: { place: 'office', day: 2, condition: null }, previewUrl: '/game3d/index.html?scene=enc_bath',
@@ -57,10 +60,20 @@ const privateScene = {
     { narration: 'Steam over the water.', $recipe: "n('Steam over the water.')" },
     { shot: { fade: 900 }, $staging: { fade: 900 }, imageSlot: 'image:0', $recipe: "pic('missing')" },
     { say: 'mio', text: 'ちょっと待って', en: 'Wait a second.', ja: 'ちょっと待って', emo: '', $recipe: "duo(s('mio','ちょっと待って'),'Wait a second.')" },
+    { if: 'mc_carina', then: [{ narration: 'She hands Carina a towel.' }], else: [{ narration: 'She hands Eric a towel.' }] },
+    { choice: [{ text: 'Look', go: 'look' }, { text: 'Leave', go: 'leave' }], $recipe: "choice([...])" },
   ],
 };
+// the parts the choice leads to, each its own scene for saving
+const privateParts = {
+  look: { ...privateScene, id: 'local:fixture:bath:look', node: 'look', title: 'bath · look', count: 1, steps: [{ narration: 'You sit on the edge of the bath.' }] },
+  leave: { ...privateScene, id: 'local:fixture:bath:leave', node: 'leave', title: 'bath · leave', count: 1, steps: [{ narration: 'You walk on.' }] },
+};
+const privateRows = [privateRow, ...Object.values(privateParts).map(({ id, node, title, count }) => ({ ...privateRow, id, node, title, count }))];
 
 const wait = ms => new Promise(r => setTimeout(r, ms));
+// what a part of the page shows, with the words in its text boxes
+const textOf = loc => loc.evaluate(el => el.innerText + '\n' + [...el.querySelectorAll('textarea, input')].map(x => x.value).join('\n'));
 try {
   for (let i = 0; i < 60; i++) { try { if ((await fetch(base + '/api/subplots/catalog')).ok) break; } catch { /* starting */ } await wait(100); }
   await withBrowserJob('scene-editor-browser', async browser => {
@@ -71,20 +84,27 @@ try {
       const errors = [];
       page.on('pageerror', e => errors.push(e.message));
       let privateSave = null;
+      const privateSaves = [];
       await page.route('**/island/private/**', r => r.abort());
       await page.route('**/api/subplots/authoring', r => r.fulfill({ json: authoring }));
       await page.route('**/fixture/mio.webp', r => r.fulfill({ path: portraitFile }));
       await page.route('**/api/subplots/catalog?scope=all', async r => {
         const real = await (await fetch(base + '/api/subplots/catalog')).json();
-        r.fulfill({ json: { ...real, scenes: [...real.scenes, privateRow], local: true } });
+        // more groups than fit, to open one far down the list (never opened as scenes)
+        const filler = Array.from({ length: 40 }, (_, i) => ({ id: `public:game3d/story/zz${i}.js#a`, node: 'a', group: `zz${i}`, where: `game3d/story/zz${i}.js`, count: 1, audience: 'public' }));
+        r.fulfill({ json: { ...real, scenes: [...real.scenes, ...filler, ...privateRows], local: true } });
       });
-      await page.route('**/api/subplots/read?id=local*', r => r.fulfill({ json: privateScene }));
+      await page.route('**/api/subplots/read?id=local*', r => {
+        const id = new URL(r.request().url()).searchParams.get('id');
+        r.fulfill({ json: Object.values(privateParts).find(p => p.id === id) || privateScene });
+      });
       await page.route('**/api/subplots/draft', r => r.request().postDataJSON().id.startsWith('local:') ? r.fulfill({ json: { ok: true } }) : r.continue());
       await page.route('**/api/subplots/save', r => {
         const body = r.request().postDataJSON();
         if (!body.id.startsWith('local:')) return r.continue();
         privateSave = body;
-        return r.fulfill({ json: { ...privateScene, ...body, revision: 'p2' } });
+        privateSaves.push(body.id);
+        return r.fulfill({ json: { ...(Object.values(privateParts).find(p => p.id === body.id) || privateScene), ...body, revision: 'p2' } });
       });
       await page.route('**/api/subplots/image/**', r => {
         const u = new URL(r.request().url());
@@ -100,12 +120,28 @@ try {
       await page.locator('.beat').first().waitFor();
       assert.equal(await page.locator('#docAudience').innerText(), 'Public game');
       assert.equal(await page.locator('#docWhere').innerText(), 'game3d/story/office.js');
-      assert.equal(await page.locator('.beat').count(), 4);
-      assert.match(await page.locator('.beat').nth(0).innerText(), /Camera moves in on Mio/);
-      assert.doesNotMatch(await page.locator('#timeline').innerText(), /\$expression|do:|go:/);
+      // the scene's own beats, then the part the first option leads to, as one reading path
+      const top = page.locator('#timeline > .beats > .beat');
+      await page.locator('.path-section').waitFor();
+      assert.equal(await top.count(), 4);
+      assert.match(await top.nth(0).innerText(), /Camera moves in on Mio/);
+      assert.match(await page.locator('.path-head').innerText(), /After “Ask about the room”/);
+      assert.match(await textOf(page.locator('.path-section')), /The room beside reception/);
+      assert.match(await page.locator('.path-bar').innerText(), /Ask about the room/);
+      assert.doesNotMatch(await textOf(page.locator('#timeline')), /\$expression|do:|go:|@room|@later/);
+
+      // opening a group far down the list leaves the list where it is (Jørgen: "I am immediately thrown back")
+      const list = page.locator('#sceneList');
+      await list.evaluate(el => { el.scrollTop = el.scrollHeight; });
+      const before = await list.evaluate(el => el.scrollTop);
+      assert.ok(before > 200, 'the list scrolls');
+      await page.locator('.area-head', { hasText: 'Zz39' }).click();
+      await page.locator('.area.open .area-head', { hasText: 'Zz39' }).waitFor();
+      assert.ok(Math.abs(await list.evaluate(el => el.scrollTop) - before) < 60, 'the list stays put');
+      await list.evaluate(el => { el.scrollTop = 0; });
 
       // edit a line in place, undo and redo
-      const line = page.locator('.beat').nth(1).locator('[data-field=main]');
+      const line = top.nth(1).locator('[data-field=main]');
       await line.fill('The meeting starts at nine.');
       assert.equal(await page.locator('#status').innerText(), 'Unsaved changes');
       await page.locator('.timeline-wrap').click({ position: { x: 5, y: 5 } });
@@ -115,42 +151,64 @@ try {
       assert.equal(await line.inputValue(), 'The meeting starts at nine.');
 
       // change the speaker from the picker
-      await page.locator('.beat').nth(2).locator('.speaker').click();
+      await top.nth(2).locator('.speaker').click();
       await page.locator('.people button', { hasText: 'Emi' }).click();
-      assert.match(await page.locator('.beat').nth(2).locator('.speaker').innerText(), /Emi/);
+      assert.match(await top.nth(2).locator('.speaker').innerText(), /Emi/);
 
-      // drag the choice above the first line
-      await page.locator('.beat').nth(3).locator('.grip').hover();
-      await page.locator('.beat').nth(3).locator('.grip').dragTo(page.locator('.beat').nth(1), { targetPosition: { x: 200, y: 4 } });
-      assert.match(await page.locator('.beat').nth(1).innerText(), /Choice/i);
+      // drag the question above the first line
+      await top.nth(2).locator('.grip').hover();
+      await top.nth(2).locator('.grip').dragTo(top.nth(1), { targetPosition: { x: 200, y: 4 } });
+      assert.match(await textOf(top.nth(1)), /Which room/);
 
-      // add narration at the end
-      await page.locator('#timeline > .add-row.full button', { hasText: 'Narration' }).click();
+      // add narration at the end of the branch: it goes into the part the option leads to
+      await page.locator('.path-section .add-row.full button', { hasText: 'Narration' }).click();
       await page.keyboard.type('The room is cold.');
-      assert.equal(await page.locator('.beat').count(), 5);
+      assert.equal(await page.locator('.path-section .beat').count(), 2);
 
-      // save: the file changes, untouched text stays as written
+      // save: each changed part is written on its own, untouched text stays as written
       await page.keyboard.press('Control+s');
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
-      const saved = fs.readFileSync(file, 'utf8');
+      let saved = fs.readFileSync(file, 'utf8');
       assert.match(saved, /'mio: The meeting starts at nine\.'/);
       assert.match(saved, /'emi: Which room are we using\?'/);
       assert.match(saved, /\{ do: 'cam', on: 'mio', zoom: 1.4 \}, \/\/ close on her/);
-      assert.match(saved, /'> The room is cold\.'/);
-      assert.ok(saved.indexOf('Ask about the room') < saved.indexOf('starts at nine'), 'choice moved up');
-      assert.match(saved, /room: \['mio: The room beside reception\.'\]/);
+      assert.ok(saved.indexOf('Which room') < saved.indexOf('starts at nine'), 'question moved up');
+      assert.match(saved, /room: \[\s*'mio: The room beside reception\.',\s*'> The room is cold\.',?\s*\]/);
+      assert.match(saved, /    later: \[\n      'eric: See you there\.',\n      \{ if: 'mc_carina', then: \['mio: Bye, Carina\.'\], else: \['mio: Bye, Eric\.'\] \},\n    \],/, 'a part nobody edited is untouched');
 
-      // preview in the game's style, through the choice into another part
-      await page.locator('.beat').first().click({ position: { x: 20, y: 12 } });
+      // switch the pick: the other option's part follows instead; an edit there saves into it
+      await page.locator('#timeline > .beats > .beat.k-choice .option-tabs button', { hasText: 'Come back later' }).click();
+      await page.locator('.path-head', { hasText: 'Come back later' }).waitFor();
+      assert.match(await page.locator('.path-bar').innerText(), /Come back later/);
+      assert.doesNotMatch(await textOf(page.locator('#timeline')), /room beside reception/);
+      assert.match(await textOf(page.locator('.path-section')), /Bye, Eric\./);
+      await page.locator('.path-bar [data-arm=then]').click();
+      assert.match(await textOf(page.locator('.path-section')), /Bye, Carina\./);
+      assert.match(await textOf(page.locator('.path-section')), /Both ways meet again here|Bye, Carina/);
+      await page.locator('.path-section .beat').first().locator('[data-field=main]').fill('See you there soon.');
+      await page.keyboard.press('Control+s');
+      await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
+      saved = fs.readFileSync(file, 'utf8');
+      assert.match(saved, /'eric: See you there soon\.'/);
+      assert.match(saved, /room: \[\s*'mio: The room beside reception\.',\s*'> The room is cold\.',?\s*\]/);
+
+      // preview follows the picked path into the part, with the picked option marked
+      await top.first().click({ position: { x: 20, y: 12 } });
       await page.locator('#preview').click();
       await page.locator('.pv-talk').first().waitFor();
-      assert.match(await page.locator('.pv-line').first().innerText(), /meeting starts at nine|Camera/);
+      for (let i = 0; i < 6 && !(await page.locator('.pv-chips [data-opt]').count()); i++) await page.keyboard.press('ArrowRight');
+      assert.match(await page.locator('.pv-chips button.picked').innerText(), /Come back later/);
+      await page.locator('.pv-chips button.picked').click();
+      assert.match(await page.locator('.pv-line').first().innerText(), /See you there soon/);
+      await page.locator('.pv-stage').click({ position: { x: 20, y: 20 } });
+      assert.match(await page.locator('.pv-line').first().innerText(), /Bye, Carina/);
       await page.keyboard.press('Escape');
 
       // a revision restores the old text, and saving makes it the scene again
       await page.locator('[data-tab=scene]').click();
       await page.locator('.revision button').first().click();
-      assert.equal(await page.locator('.beat').nth(1).locator('[data-field=main]').inputValue(), 'The meeting starts in ten minutes.');
+      for (let i = 0; i < 50 && await top.nth(1).locator('[data-field=main]').inputValue() !== 'The meeting starts in ten minutes.'; i++) await wait(100);
+      assert.equal(await top.nth(1).locator('[data-field=main]').inputValue(), 'The meeting starts in ten minutes.');
       await page.locator('#save').click();
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
       assert.match(fs.readFileSync(file, 'utf8'), /ten minutes/);
@@ -162,18 +220,36 @@ try {
       await page.locator('.beat.k-picture').waitFor();
       assert.equal(await page.locator('#docAudience').innerText(), 'Private · Adult');
       assert.equal(await page.locator('#play').getAttribute('href'), '/game3d/index.html?scene=enc_bath');
+      // its choice: Look follows below; Leave swaps it; who plays switches the branch and Play in game
+      await page.locator('.path-head', { hasText: 'After “Look”' }).waitFor();
+      assert.match(await textOf(page.locator('.path-section')), /edge of the bath/);
+      assert.match(await textOf(page.locator('#timeline')), /She hands Eric a towel/);
+      await page.locator('.beat.k-choice .option-tabs button', { hasText: 'Leave' }).click();
+      assert.match(await textOf(page.locator('.path-section')), /You walk on/);
+      assert.doesNotMatch(await textOf(page.locator('#timeline')), /edge of the bath/);
+      await page.locator('.path-bar [data-arm=then]').click();
+      assert.match(await textOf(page.locator('#timeline')), /She hands Carina a towel/);
+      assert.equal(await page.locator('#play').getAttribute('href'), '/game3d/index.html?scene=enc_bath&mc=carina');
+      await page.locator('.path-bar [data-arm=else]').click();
+      await page.locator('.path-section .beat [data-field=main]').fill('You walk on, quickly.');
       await page.locator('.beat.k-picture .change').click();
       await page.locator('.history-grid button').first().click();
       await page.locator('.beat.k-picture.selected img').waitFor();
       assert.match(await page.locator('.pic-facts').innerText(), /New pick #41/);
+      // the whole picture in the feed: full height at the column's width, not cropped
+      const fit = await page.locator('.beat.k-picture img').evaluate(img => ({ w: img.clientWidth, h: img.clientHeight, ratio: img.naturalHeight / img.naturalWidth, box: img.closest('.body').clientWidth }));
+      assert.ok(Math.abs(fit.h / fit.w - fit.ratio) < 0.02, `picture keeps its shape ${JSON.stringify(fit)}`);
+      assert.ok(fit.w > fit.box - 30, `picture fills the column ${JSON.stringify(fit)}`);
+      await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-private-${width}.png`) });
       await page.locator('#save').click();
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
-      assert.equal(privateSave.metadata.images['image:0'].file, 'x.png');
+      assert.deepEqual(privateSaves.sort(), ['local:fixture:bath:leave', 'local:fixture:bath:start'], 'only the edited parts are saved');
+      assert.equal(privateSave.id === 'local:fixture:bath:start' ? privateSave.metadata.images['image:0'].file : 'x.png', 'x.png');
 
       assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth > globalThis.innerWidth), false);
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(`PASS ${width}: open, labels, inline edit, undo and redo, speaker picker, drag, add, save, preview, revisions, private picture pick`);
+      console.log(`PASS ${width}: open, labels, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, full-height pictures`);
     }
   }, { timeoutMs: 150000, gpuWaitMs: 60000 });
 } finally {

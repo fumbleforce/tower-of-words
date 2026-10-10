@@ -1,17 +1,32 @@
-// The scene as a list of beats: lines and narration edited in place, pictures shown where they play,
-// choices and branches with their beats indented under them. Beats move by drag (the handle) or Alt+arrows.
+// The scene as one reading path of beats: lines and narration edited in place, pictures shown where they play.
+// At a choice the author picks an option and the beats that option leads to follow below (paths.js); an "if"
+// shows the side the path takes, with a switch when no pick decides it. Beats move by drag (the handle) or
+// Alt+arrows, in the scene itself or in a part a choice leads to.
 const { document, structuredClone } = globalThis;
 import { esc } from './common.js';
-import { S, edit, select, recipe } from './store.js';
-import { kindOf, KIND_LABEL, speakerOf, textsOf, withText, withSpeaker, newStep, stepAt, listAt, samePath, moveStep, describe, hasJapanese } from './model.js';
+import { S, edit, select, recipe, listOf, stepOf, docFor, moveBeat, setPick, setArm } from './store.js';
+import { kindOf, KIND_LABEL, speakerOf, textsOf, withText, withSpeaker, newStep, samePath, describe, hasJapanese } from './model.js';
 import { personName, personColor, portrait, nodeTitle, humanize } from './names.js';
+import { readingPath, pathSummary } from './paths.js';
 import { conditionSentence } from './conditions.js';
 import { pictureFor } from './pictures.js';
 import { openPop, closePop } from './pop.js';
 
 const host = () => document.getElementById('timeline');
 const key = path => path.join('.');
-const parsePath = text => text.split('.').map(x => (/^\d+$/.test(x) ? Number(x) : x));
+const parsePath = text => (text ? text.split('.').map(x => (/^\d+$/.test(x) ? Number(x) : x)) : []);
+
+// The reading path for the open scene, with the parts its choices lead to.
+export function currentPath() {
+  return readingPath(S.scene?.steps, { docs: node => S.linked[node]?.scene || null, picks: S.picks, arms: S.arms, home: S.scene?.node });
+}
+
+// "If Carina is playing" reads better than the flag's name.
+export function whenLabel(condition) {
+  const m = /^\s*(!?)\s*mc_(\w+)\s*$/.exec(condition || '');
+  if (m) return `${personName(m[2])} ${m[1] ? 'isn’t' : 'is'} playing`;
+  return conditionSentence(condition);
+}
 
 export function renderTimeline() {
   const root = host();
@@ -28,8 +43,9 @@ export function renderTimeline() {
     root.innerHTML = '<p class="quiet pad">This scene is put together by the game, so it has no beats to edit here. It is kept as it is.</p>';
     return;
   }
-  root.append(list(scene.steps, []));
-  root.append(addRow([], scene.steps.length, true));
+  const tree = currentPath();
+  root.append(pathBar(tree));
+  root.append(list(tree, scene.steps, []));
   for (const el of root.querySelectorAll('textarea')) grow(el);
   markSelection();
   root.parentElement.scrollTop = scroll;
@@ -49,7 +65,10 @@ export function markSelection() {
   }
 }
 
-function list(steps, base) {
+// One list of beats along the path (`items` from paths.js), `steps` being the list itself. A choice whose picked
+// option goes on elsewhere ends the list there: what follows is that option's part.
+const BEAT_TYPES = ['beat', 'choice', 'branch', 'group'];
+function list(items, steps, base) {
   const frag = document.createElement('div');
   frag.className = 'beats';
   frag.dataset.list = key(base);
@@ -60,14 +79,92 @@ function list(steps, base) {
     empty.dataset.dropList = key(base);
     frag.append(empty);
   }
-  steps.forEach((step, i) => {
-    frag.append(beat(step, [...base, i], i));
-    if (i < steps.length - 1) frag.append(addRow(base, i + 1));
+  let cut = false;
+  items.forEach((item, n) => {
+    if (item.type === 'section') { frag.append(section(item)); cut ||= !item.call; return; }
+    if (item.type === 'elsewhere') { frag.append(elsewhere(item)); return; }
+    if (item.type === 'skipped') { frag.append(skipped(item)); cut = true; return; }
+    const i = item.path.at(-1);
+    frag.append(beat(item, i));
+    const last = !items.slice(n + 1).some(x => BEAT_TYPES.includes(x.type));
+    if (item.type === 'branch' && i < steps.length - 1) frag.append(rejoin());
+    if (!last) frag.append(addRow(base, i + 1));
   });
+  if (!cut) frag.append(addRow(base, steps.length, true));
   return frag;
 }
 
-function beat(step, path, index) {
+// The picks along the path, at the top of the timeline. Each one goes to its choice. Switches for the branches
+// no pick decides and that run through the whole scene (who plays) sit here too, so one click changes them all.
+function pathBar(tree) {
+  const bar = document.createElement('div');
+  bar.className = 'path-bar';
+  const picks = pathSummary(tree);
+  const conds = new Map();
+  const visit = xs => xs.forEach(it => { if (it.type === 'branch' && !it.locked && /^\s*!?\s*mc_\w+\s*$/.test(it.step.if) && !conds.has(it.step.if)) conds.set(it.step.if, it.arm); if (it.items) visit(it.items); });
+  visit(tree);
+  if (!picks.length && !conds.size) { bar.hidden = true; return bar; }
+  bar.innerHTML = '<span class="path-label">Reading</span>';
+  if (!picks.length) bar.insertAdjacentHTML('beforeend', '<span class="quiet">the whole scene</span>');
+  picks.forEach((p, n) => {
+    const b = document.createElement('button');
+    b.className = 'path-pick';
+    b.dataset.pick = n;
+    b.title = 'Go to this choice';
+    b.innerHTML = `${n ? '<span class="sep">›</span>' : ''}<span>${esc(p.label)}</span>`;
+    b.onclick = () => { select(p.path); host().querySelector(`[data-path="${key(p.path)}"]`)?.scrollIntoView({ block: 'center', behavior: 'smooth' }); };
+    bar.append(b);
+  });
+  for (const [c, arm] of conds) bar.append(armSwitch(c, arm, true));
+  return bar;
+}
+
+function armSwitch(condition, arm, label) {
+  const sw = document.createElement('span');
+  sw.className = 'arm-switch';
+  sw.innerHTML = `${label ? `<span>${esc(whenLabel(condition))}?</span>` : ''}<span class="seg mini" role="group"><button data-arm="then" aria-pressed="${arm === 'then'}">Yes</button><button data-arm="else" aria-pressed="${arm === 'else'}">No</button></span>`;
+  sw.querySelectorAll('[data-arm]').forEach(b => {
+    b.onpointerdown = e => e.stopPropagation();
+    b.onclick = e => { e.stopPropagation(); setArm(condition, b.dataset.arm); };
+  });
+  return sw;
+}
+
+// The beats a picked option leads to, in another part of the scene, continuing the path.
+function section(item) {
+  const box = document.createElement('section');
+  box.className = 'path-section';
+  box.dataset.part = item.node;
+  const doc = S.linked[item.node]?.scene;
+  box.innerHTML = `<header class="path-head"><span class="path-arrow" aria-hidden="true">↓</span><span>After <strong>“${esc(item.option || '…')}”</strong></span><span class="quiet">${item.call ? 'these play, then the scene carries on' : 'the scene goes on here'}</span></header>`;
+  box.append(list(item.items, doc?.steps || [], ['@' + item.node]));
+  if (item.call) box.append(rejoin('Back in the scene'));
+  return box;
+}
+
+function elsewhere(item) {
+  const p = document.createElement('p');
+  p.className = 'path-note';
+  p.textContent = item.shownAbove ? `“${item.option}” goes back to beats shown above.` : `“${item.option}” goes on to “${nodeTitle(item.node)}”, outside this scene.`;
+  return p;
+}
+
+function skipped(item) {
+  const p = document.createElement('p');
+  p.className = 'path-note';
+  p.textContent = `${item.count} more ${item.count === 1 ? 'beat follows' : 'beats follow'} this choice for the other options. Pick one of them to read on here.`;
+  return p;
+}
+
+function rejoin(text = 'Both ways meet again here') {
+  const el = document.createElement('div');
+  el.className = 'rejoin';
+  el.innerHTML = `<span>${esc(text)}</span>`;
+  return el;
+}
+
+function beat(item, index) {
+  const { step, path } = item;
   const kind = kindOf(step);
   const row = document.createElement('article');
   row.className = `beat k-${kind}`;
@@ -75,7 +172,7 @@ function beat(step, path, index) {
   row.innerHTML = `<div class="rail"><button class="grip" title="Drag to move (or Alt+↑ ↓)" aria-label="Move beat">⋮⋮</button><span class="num">${index + 1}</span></div><div class="body"></div><div class="tools"><button data-op="dup" title="Duplicate">Copy</button><button data-op="del" title="Delete (Del)">Delete</button></div>`;
   const body = row.querySelector('.body');
   const content = { line, narration, picture, choice, branch, group }[kind] || other;
-  content(body, step, path);
+  content(body, step, path, item);
   row.addEventListener('pointerdown', e => {
     if (!samePath(S.selected, path)) select(path, { tab: kind === 'picture' ? 'picture' : undefined });
     e.stopPropagation();
@@ -97,8 +194,8 @@ function field(path, name, value, placeholder, cls = '') {
   if (hasJapanese(value) || name === 'second') t.lang = 'ja';
   t.addEventListener('input', () => {
     grow(t);
-    edit(scene => {
-      const list = listAt(scene.steps, path);
+    edit(() => {
+      const list = listOf(path);
       list[path.at(-1)] = withText(list[path.at(-1)], name, t.value, recipe());
     }, { key: key(path) + name, quiet: true });
   });
@@ -135,7 +232,7 @@ function narration(body, step, path) {
 }
 
 function picture(body, step, path) {
-  const pic = pictureFor(step);
+  const pic = pictureFor(step, docFor(path));
   const fig = document.createElement('figure');
   fig.className = 'pic' + (pic.url ? '' : ' missing') + (pic.changed ? ' changed' : '');
   fig.innerHTML = pic.url
@@ -156,64 +253,90 @@ function picture(body, step, path) {
   }
 }
 
-function choice(body, step, path) {
+// A choice: its options as a switch. The picked one is the path the timeline follows below. Its words are edited
+// here; the other options' words are edited by picking them, or in the Beat tab.
+function choice(body, step, path, item) {
   const head = document.createElement('div');
   head.className = 'kind-head';
   head.innerHTML = `<span class="kind">Choice</span>${step.prompt ? `<span class="quiet">${esc(step.prompt)}</span>` : ''}`;
   body.append(head);
-  const opts = document.createElement('div');
-  opts.className = 'options';
+  const pick = item?.pick ?? 0;
+  const tabs = document.createElement('div');
+  tabs.className = 'option-tabs';
+  tabs.setAttribute('role', 'group');
+  tabs.setAttribute('aria-label', 'Which option the timeline follows');
   step.choice.forEach((c, j) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-pressed', String(j === pick));
+    b.dataset.opt = j;
+    b.title = j === pick ? 'The beats below follow this option' : 'Follow this option below';
+    b.innerHTML = `<span class="opt-text">${esc(c.text || 'Option ' + (j + 1))}</span>${c.if ? `<small>only if ${esc(whenLabel(c.if))}</small>` : ''}`;
+    b.onpointerdown = e => e.stopPropagation();
+    b.onclick = e => { e.stopPropagation(); if (j !== pick) setPick(item.key, j); };
+    tabs.append(b);
+  });
+  body.append(tabs);
+  const c = step.choice[pick];
+  if (c) {
     const o = document.createElement('div');
     o.className = 'option';
     const input = document.createElement('input');
     input.value = c.text || '';
     input.placeholder = 'What Eric says or does';
-    input.dataset.field = 'opt' + j;
-    input.oninput = () => edit(scene => { stepAt(scene.steps, path).choice[j].text = input.value; }, { key: key(path) + 'opt' + j, quiet: true });
+    input.dataset.field = 'opt' + pick;
+    input.setAttribute('aria-label', 'Words of the picked option');
+    input.oninput = () => edit(() => { stepOf(path).choice[pick].text = input.value; }, { key: key(path) + 'opt' + pick, quiet: true });
     o.innerHTML = '<span class="arrow">›</span>';
     o.append(input);
-    const dest = c.go || c.call;
     const meta = document.createElement('span');
     meta.className = 'dest';
-    meta.textContent = dest ? `→ ${nodeTitle(dest)}` : 'carries on';
-    if (c.if) meta.textContent += ' · only if ' + conditionSentence(c.if);
+    const dest = c.go || c.call;
+    meta.textContent = !dest ? 'carries on below' : !S.linked[dest] ? `goes on to “${nodeTitle(dest)}”` : c.go ? 'goes on below' : 'plays below, then carries on';
     o.append(meta);
-    opts.append(o);
-  });
+    body.append(o);
+  }
   const add = document.createElement('button');
-  add.className = 'ghost small';
+  add.className = 'ghost small add-option';
   add.textContent = 'Add an option';
-  add.onclick = () => edit(scene => stepAt(scene.steps, path).choice.push({ text: '' }));
-  opts.append(add);
-  body.append(opts);
+  add.onclick = () => edit(() => stepOf(path).choice.push({ text: '' }));
+  body.append(add);
 }
 
-function branch(body, step, path) {
+// An "if": the side the path takes, with its beats under it. When a pick above decides it, it says so; when
+// nothing does (who plays, say), a switch picks the side for every branch with the same rule.
+function branch(body, step, path, item) {
+  const arm = item?.arm || 'then';
   const head = document.createElement('div');
   head.className = 'kind-head';
-  head.innerHTML = `<span class="kind">If</span><span class="cond">${esc(conditionSentence(step.if))}</span>`;
+  // decided by a pick above: say which pick, not the rule's flag
+  if (item?.locked && item.reason) head.innerHTML = `<span class="kind">Because</span><span class="cond">you picked “${esc(item.reason)}”</span><span class="arm-why" title="${esc(whenLabel(step.if))}">these beats play</span>`;
+  else head.innerHTML = `<span class="kind">If</span><span class="cond">${esc(whenLabel(step.if))}</span>`;
+  if (!item?.locked) head.append(armSwitch(step.if, arm, false));
   body.append(head);
-  for (const [k, label] of [['then', 'Then'], ['else', 'Otherwise']]) {
-    if (!Array.isArray(step[k])) continue;
-    const arm = document.createElement('div');
-    arm.className = 'arm';
-    arm.innerHTML = `<div class="arm-label">${label}</div>`;
-    arm.append(list(step[k], [...path, k]));
-    arm.append(addRow([...path, k], step[k].length, true));
-    body.append(arm);
+  const box = document.createElement('div');
+  box.className = 'arm';
+  const steps = Array.isArray(step[arm]) ? step[arm] : null;
+  if (steps) box.append(list(item?.items || [], steps, [...path, arm]));
+  else {
+    box.classList.add('arm-empty');
+    box.innerHTML = '<span class="quiet">Nothing extra plays this way.</span>';
+    const b = document.createElement('button');
+    b.className = 'ghost small';
+    b.textContent = 'Add beats for this way';
+    b.onclick = () => edit(() => { stepOf(path)[arm] = []; });
+    box.append(b);
   }
+  body.append(box);
 }
 
-function group(body, step, path) {
+function group(body, step, path, item) {
   const head = document.createElement('div');
   head.className = 'kind-head';
   head.innerHTML = `<span class="kind">${esc(step.label && !/^Picture sequence$/i.test(step.label) ? humanize(step.label) : 'Sequence')}</span>`;
   body.append(head);
   const arm = document.createElement('div');
   arm.className = 'arm';
-  arm.append(list(step.sequence, [...path, 'sequence']));
-  arm.append(addRow([...path, 'sequence'], step.sequence.length, true));
+  arm.append(list(item?.items || [], step.sequence, [...path, 'sequence']));
   body.append(arm);
 }
 
@@ -252,7 +375,7 @@ function nextSpeaker(steps, at) {
 export function insert(listPath, at, kind) {
   let path;
   edit(scene => {
-    const target = listPath.length ? listAt(scene.steps, [...listPath, 0]) : scene.steps;
+    const target = listOf([...listPath, 0]);
     target.splice(at, 0, newStep(kind, recipe(), nextSpeaker(target, at)));
     path = [...listPath, at];
   });
@@ -261,13 +384,13 @@ export function insert(listPath, at, kind) {
 }
 
 export function remove(path) {
-  edit(scene => listAt(scene.steps, path).splice(path.at(-1), 1));
+  edit(() => listOf(path).splice(path.at(-1), 1));
   select(null);
 }
 
 function duplicate(path) {
   edit(scene => {
-    const list = listAt(scene.steps, path), copy = structuredClone(list[path.at(-1)]);
+    const list = listOf(path), copy = structuredClone(list[path.at(-1)]);
     // a copy is a new beat: it keeps no link to the source helper or the picture slot
     if (copy && typeof copy === 'object') { delete copy.$recipe; delete copy.imageSlot; delete copy.voice; }
     list.splice(path.at(-1) + 1, 0, copy);
@@ -276,10 +399,10 @@ function duplicate(path) {
 }
 
 export function nudge(path, delta) {
-  const list = listAt(S.scene.steps, path), to = path.at(-1) + delta;
+  const list = listOf(path), to = path.at(-1) + delta;
   if (to < 0 || to >= list.length) return;
   let next;
-  edit(scene => { next = moveStep(scene.steps, path, path.slice(0, -1), delta > 0 ? to + 1 : to); });
+  edit(() => { next = moveBeat(path, path.slice(0, -1), delta > 0 ? to + 1 : to); });
   select(next);
 }
 
@@ -305,7 +428,7 @@ function speakerPicker(anchor, path) {
 
 export function setSpeaker(path, who) {
   edit(scene => {
-    const list = listAt(scene.steps, path);
+    const list = listOf(path);
     list[path.at(-1)] = withSpeaker(list[path.at(-1)], who, recipe());
   });
 }
@@ -363,7 +486,7 @@ export function installDrag() {
     if (!t || !from) return;
     e.preventDefault();
     let next;
-    edit(scene => { next = moveStep(scene.steps, from, t.list, t.at); });
+    edit(() => { next = moveBeat(from, t.list, t.at); });
     select(next);
   });
 }

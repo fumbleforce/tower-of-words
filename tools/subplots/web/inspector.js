@@ -2,8 +2,9 @@
 // Every value with a fixed set of answers is a picker fed by the bible data, never free text.
 const { document } = globalThis;
 import { esc, api } from './common.js';
-import { S, edit, select, recipe } from './store.js';
-import { kindOf, KIND_LABEL, speakerOf, stepAt, listAt, describe } from './model.js';
+import { S, edit, select, recipe, stepOf, listOf, setPick } from './store.js';
+import { kindOf, KIND_LABEL, speakerOf, describe } from './model.js';
+import { choiceKey } from './paths.js';
 import { personName, person, nodeTitle } from './names.js';
 import { conditionEditor, selectHTML } from './conditions.js';
 import { setSpeaker } from './timeline.js';
@@ -47,7 +48,7 @@ export function renderBeatTab() {
   const tab = document.getElementById('tabBeat');
   tab.replaceChildren();
   if (!S.scene) { tab.innerHTML = '<p class="quiet pad">Open a scene first.</p>'; return; }
-  const path = S.selected, step = path ? stepAt(S.scene.steps, path) : undefined;
+  const path = S.selected, step = path ? stepOf(path) : undefined;
   if (step === undefined) {
     tab.innerHTML = `<p class="quiet">Select a beat to see its details.</p>
       <dl class="keys"><dt>Ctrl Z, Ctrl Shift Z</dt><dd>Undo, redo</dd><dt>Ctrl S</dt><dd>Save</dd><dt>Alt ↑ ↓</dt><dd>Move the selected beat</dd><dt>Ctrl Enter</dt><dd>New line after the selected one</dd><dt>P</dt><dd>Preview from the selected beat</dd></dl>`;
@@ -55,7 +56,7 @@ export function renderBeatTab() {
   }
   const kind = kindOf(step);
   tab.insertAdjacentHTML('beforeend', `<h2 class="tab-title">${esc(KIND_LABEL[kind])} ${esc(path.filter(x => typeof x === 'number').map(x => x + 1).join('.'))}</h2>`);
-  const set = (fn, opts) => edit(scene => fn(stepAt(scene.steps, path), scene), opts);
+  const set = (fn, opts) => edit(() => fn(stepOf(path)), opts);
   if (kind === 'line') {
     labelled(tab, 'Speaker', picker(castOptions(), speakerOf(step), v => setSpeaker(path, v), recipe() ? undefined : 'Narration'));
     const deliveries = (S.authoring.deliveries || []).map(d => ({ value: d.id, label: d.label }));
@@ -68,7 +69,7 @@ export function renderBeatTab() {
       const b = document.createElement('button');
       b.className = 'ghost small';
       b.textContent = 'Add delivery and face';
-      b.onclick = () => edit(scene => { const l = listAt(scene.steps, path); const m = /^(\w+): ([\s\S]*)$/.exec(l[path.at(-1)]); l[path.at(-1)] = { say: m[1], text: m[2] }; });
+      b.onclick = () => edit(() => { const l = listOf(path); const m = /^(\w+): ([\s\S]*)$/.exec(l[path.at(-1)]); l[path.at(-1)] = { say: m[1], text: m[2] }; });
       tab.append(b);
     }
     if (step.voice) tab.insertAdjacentHTML('beforeend', '<p class="quiet">This line has its own recorded clip. Changing the words drops the clip until a new take is made.</p>');
@@ -79,6 +80,13 @@ export function renderBeatTab() {
       const box = document.createElement('fieldset');
       box.className = 'option-box';
       box.innerHTML = `<legend>Option ${j + 1}</legend>`;
+      const follow = document.createElement('button');
+      follow.className = 'ghost small follow';
+      const picked = (S.picks.get(choiceKey(step)) ?? 0) === j;
+      follow.textContent = picked ? 'The timeline follows this option' : 'Follow this option in the timeline';
+      follow.disabled = picked;
+      follow.onclick = () => setPick(choiceKey(step), j);
+      box.append(follow);
       const text = document.createElement('input');
       text.value = c.text || '';
       text.oninput = () => set(s => { s.choice[j].text = text.value; }, { key: 'opt' + j, quiet: true });
