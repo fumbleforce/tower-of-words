@@ -33,12 +33,16 @@ function dialogue(box,step,scene,i,changed){
  const cast=[...(!scene.recipe||!say?[{value:'',label:'Narrator'}]:[]),...authoring.characters.map(c=>({value:c.id,label:c.name}))];
  for(const [id,info]of Object.entries(scene.speakers||{}))if(!cast.some(c=>c.value===id))cast.push({value:id,label:typeof info==='string'?info:info.name||name(id)});
  const speaker=dropdown(row,'Speaker',cast,say,()=>save());speaker.dataset.field='say';if(scene.recipe&&step.narration!==undefined)speaker.disabled=true;
- const emo=dropdown(row,'Delivery',[{value:'',label:'Natural'},...(authoring.deliveries?.length?authoring.deliveries:['curious','warm','quiet','firm','amused','surprised','hesitant','tired'])],step.emo||'',()=>save());emo.dataset.field='emo';emo.disabled=step.deliveryEditable===false;
+ const emo=dropdown(row,'Delivery',[{value:'',label:'Natural'},...(authoring.deliveries?.length?authoring.deliveries:['curious','warm','quiet','firm','amused','surprised','hesitant','tired'])],step.emo||'',()=>save());emo.dataset.field='emo';emo.disabled=step.deliveryEditable===false||!say;
  box.append(row);
  const language=!scene.recipe?dropdown(box,'Spoken language',[{value:'en',label:'English'},{value:'ja',label:'Japanese'}],japanese?'ja':'en',()=>save()):null;
  const pair=document.createElement('div');pair.className='bilingual';pair.innerHTML=`<label>English<textarea data-field="en" lang="en" rows="3" placeholder="English dialogue…">${esc(en)}</textarea></label><label>日本語 · Japanese<textarea data-field="ja" lang="ja" rows="3" placeholder="日本語の台詞…">${esc(ja)}</textarea></label>`;box.append(pair);
  function save(){
   const english=$('[data-field=en]',pair).value,jp=$('[data-field=ja]',pair).value;
+  emo.disabled=step.deliveryEditable===false||!speaker.value;
+  const portrait=authoring.characters.find(c=>c.id===speaker.value)?.portrait;
+  let avatar=$('.speaker-portrait',row);
+  if(portrait){if(!avatar){avatar=document.createElement('img');avatar.className='speaker-portrait';avatar.alt='';row.prepend(avatar);}if(avatar.getAttribute('src')!==portrait)avatar.src=portrait;}else avatar?.remove();
   if(scene.recipe){
    if(short){scene.steps[i]=speaker.value?{say:speaker.value,text:jp||english,en:english,ja:jp}:english;}
    else if(step.narration!==undefined){step.narration=english||jp;}
