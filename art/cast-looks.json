@@ -65,12 +65,12 @@
    "negative": "", "portrait": "art/approved/hamada/kuroda-hamada-new-743-neutral.webp", "aliases": ["Hamada"]
   },
   {
-   "id": "kuro", "checked": "5899850f", "cast_md": "kuro", "name": "Kuro", "gender": "female", "age": 38, "who": "woman", "skin": "pale skin",
-   "hair": "black hair in a high bun held with two hair sticks, a blunt fringe and long side locks with a blue streak",
-   "eyes": "grey eyes", "glasses": "black-framed glasses with clear lenses", "extra": "dark eyeliner and dark lipstick",
+   "id": "kuro", "checked": "121234d3", "cast_md": "kuro", "name": "Kuro", "gender": "female", "age": 38, "who": "woman", "skin": "pale skin",
+   "hair": "black hair in a high bun held with two hair sticks, a blunt fringe and long black side locks",
+   "eyes": "grey eyes", "glasses": "black-framed glasses with clear lenses", "extra": "dark eyeliner and black lipstick",
    "build": "slender with long legs", "signature": "", "outfit": "a black suit over a dark blouse",
-   "short": "Kuro, 38, pale skin, black bun with hair sticks, black glasses with clear lenses, dark lipstick",
-   "negative": "sunglasses, tinted eyewear", "portrait": "art/approved/kuro/kuro-after.webp"
+   "short": "Kuro, 38, pale skin, black bun with hair sticks, black glasses with clear lenses, black lipstick",
+   "negative": "sunglasses, tinted eyewear, blue streak, hair streaks, colored hair streak, red lipstick, pink lipstick", "portrait": "art/approved/kuro/kuro-after.webp"
   },
   {
    "id": "aoi", "checked": "9903e92e", "cast_md": "aoi", "name": "Aoi", "gender": "female", "age": 24, "who": "mature female", "skin": "fair skin",
