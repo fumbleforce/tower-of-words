@@ -79,7 +79,7 @@ def authoring_catalog():
     """Cache the static bible catalog until a public source or image changes."""
     files = [ROOT / p for p in (
         'docs/game/cast.md', 'docs/game/places.md', 'game3d/js/ui/portrait-data.js',
-        'game3d/js/places/definitions.js', 'game3d/js/sim.js', 'game3d/js/lang.js',
+        'game3d/js/places/definitions.js', 'game3d/js/sim.js', 'game3d/js/lang.js', 'game3d/js/narrative/speakers.js',
         'game3d/js/tickets/words.js', 'game3d/data/mc/eric.json')]
     files += list((ROOT / 'game3d/story').rglob('*.js'))
     files += list((ROOT / 'bible/shots/places').glob('*.webp'))
@@ -98,16 +98,47 @@ def authoring_catalog():
         AUTHORING_CACHE[str(ROOT)] = (signature, data)
         return data
 
+def label(scene):
+    """Say what goes where (Jørgen, 2026-10-10: "just labelling on what goes where"): the public game or the
+    private, adult side, and the file the scene lives in."""
+    public = scene.get('id', '').startswith('public:')
+    scene['audience'] = 'public' if public else 'private'
+    if public and not scene.get('where'):
+        scene['where'] = scene.get('file') or scene['id'][7:].split('#')[0]
+    return scene
+
+def catalog_all():
+    """Public and local scenes in one list, each labelled. A missing local adapter only drops the local half."""
+    result = source({'action': 'catalog'})
+    try:
+        local = local_provider({'action': 'catalog'})
+        result['scenes'] += local.get('scenes', [])
+        result['errors'] += local.get('errors', [])
+        result['local'] = True
+    except (ValueError, OSError, subprocess.SubprocessError):
+        result['local'] = False
+    result['scenes'] = [label(s) for s in result['scenes']]
+    return result
+
 def dispatch(action, body):
     if action == 'authoring':
         return authoring_catalog()
     scene_id = body.get('id', '')
     if not isinstance(scene_id, str):
         raise ValueError('Invalid scene id')
+    if action == 'catalog' and body.get('scope') == 'all':
+        return catalog_all()
     if body.get('scope') == 'local' or (scene_id and not scene_id.startswith('public:')):
-        return local_provider({**body, 'action': action})
+        result = local_provider({**body, 'action': action})
+        if action == 'catalog':
+            result['scenes'] = [label(s) for s in result.get('scenes', [])]
+        elif isinstance(result, dict) and result.get('id'):
+            label(result)
+        return result
     if action == 'catalog':
-        return source({'action': 'catalog'})
+        result = source({'action': 'catalog'})
+        result['scenes'] = [label(s) for s in result['scenes']]
+        return result
     if action == 'read':
         result = source({'action': 'read', 'id': scene_id})
         result['metadata'] = read_json(slot(scene_id) / 'metadata.json', {})
@@ -115,7 +146,7 @@ def dispatch(action, body):
         result['revision'] = hashlib.sha256((result['sourceRevision'] + json.dumps(result['metadata'], sort_keys=True)).encode()).hexdigest()
         result['draft'] = read_json(slot(scene_id) / 'draft.json', None)
         result['history'] = [p.name for p in sorted((slot(scene_id) / 'history').glob('*.json'), reverse=True)][:30]
-        return result
+        return label(result)
     if action == 'validate':
         current = dispatch('read', {'id': scene_id})
         if body.get('revision') != current['revision']:
@@ -134,6 +165,9 @@ def dispatch(action, body):
         fcntl.flock(lock, fcntl.LOCK_EX)
         if action == 'draft':
             source({'action': 'read', 'id': scene_id})
+            if body.get('discard'):
+                (slot(scene_id) / 'draft.json').unlink(missing_ok=True)
+                return {'ok': True, 'draft': False}
             atomic(slot(scene_id) / 'draft.json', json.dumps(body, ensure_ascii=False))
             return {'ok': True, 'draft': True}
         current = dispatch('read', {'id': scene_id})

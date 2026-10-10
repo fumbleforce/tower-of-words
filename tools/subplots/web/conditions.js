@@ -61,3 +61,25 @@ export function conditionEditor(host,source,variables,change){
   }
   paint();
 }
+
+// A condition as one readable sentence, with the bible's labels for flags ("Story day is 2 and Met Mio").
+let labels = {};
+export function setConditionLabels(variables) {
+  labels = Object.fromEntries((variables || []).map(v => [v.id, v]));
+}
+export function conditionSentence(source) {
+  const tree = parseCondition(source);
+  const name = id => labels[id]?.label || humanize(id);
+  const value = (id, v) => labels[id]?.options?.find(o => String(o.value) === String(v))?.label || (typeof v === 'string' ? humanize(v) : v);
+  const ops = {'==': 'is', '!=': 'is not', '>=': 'is at least', '<=': 'is at most', '>': 'is more than', '<': 'is less than'};
+  const say = n => {
+    if (n.preserved !== undefined) return 'a custom rule';
+    if (n.not) return n.not.op === 'true' ? 'not ' + name(n.not.field) : 'not (' + say(n.not) + ')';
+    if (n.all) return n.all.length ? n.all.map(say).join(' and ') : 'always';
+    if (n.any) return n.any.map(say).join(' or ');
+    if (n.op === 'true') return name(n.field);
+    if (n.op === 'false') return 'not ' + name(n.field);
+    return `${name(n.field)} ${ops[n.op] || n.op} ${value(n.field, n.value)}`;
+  };
+  return say(tree);
+}

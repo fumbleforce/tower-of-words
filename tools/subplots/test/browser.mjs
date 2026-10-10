@@ -1,84 +1,182 @@
+// The scene editor in a real browser, on fixture data only: a temporary public story file and a routed private
+// scene. Never opens the real private library, never starts a render.
+// GL=soft node tools/subplots/test/browser.mjs
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {spawn} from 'node:child_process';
-import {withBrowserJob} from '../../lib/browser-job.mjs';
-const root=fs.mkdtempSync(path.join(os.tmpdir(),'subplot-browser-'));
-fs.mkdirSync(path.join(root,'game3d/story'),{recursive:true});
-const file=path.join(root,'game3d/story/office.js');
-const original=`export default {on:{'talk:colleague':{if:'day >= 2 && (office_open || !met_colleague)',node:'welcome'}},nodes:{welcome:[{say:'colleague',text:'The meeting starts in ten minutes.'},{say:'eric',text:'Which room are we using?'},{set:{meeting_seen:1,day:2}},{choice:[{text:'Ask about the room',go:'room'},{text:'Come back later',go:'later'}]}],room:['colleague: The room beside reception.'],later:['eric: See you there.']}};`;
-fs.writeFileSync(file,original);
-const server=spawn('python3',['tools/review_server.py','8796'],{env:{...process.env,SUBPLOTS_ROOT:root,SUBPLOTS_STATE:path.join(root,'state'),SUBPLOTS_PUBLIC_ONLY:'1'},stdio:'ignore'});
-const base='http://127.0.0.1:8796';
-const authoring={characters:[{id:'colleague',name:'Mio',portrait:'/fixture-portrait.webp'},{id:'eric',name:'Eric'}],places:[{id:'office',name:'Office'},{id:'station',name:'Station'}],variables:[{id:'day',label:'Story day',type:'number'},{id:'office_open',label:'Office is open',type:'boolean'},{id:'met_colleague',label:'Met Mio',type:'boolean'},{id:'meeting_seen',label:'Attended the meeting',type:'number'}],events:[{id:'talk:colleague',label:'Talk to Mio'}],deliveries:[{id:'warm',label:'Warm'},{id:'curious',label:'Curious'}]};
-const presets={character:[{id:'colleague',v:1,data:{name:'Mio',portrait:'game3d/assets/portraits/mio-neutral.webp',outfit:'a blouse',gender:'female',rating_cap:'safe'}}],scene:[{id:'meeting',v:1,data:{name:'At the office',text:'Two colleagues preparing for a meeting.'}}],style:[{id:'paint',v:1,data:{name:'Painted',quality:'detailed illustration'}}],model:[{id:'local',v:1,data:{name:'Local model',file:'fixture.safetensors'}}],framing:[{id:'wide',v:1,data:{name:'Wide',w:1152,h:896}}],camera:[{id:'window',v:1,data:{name:'Window light',prompt:'soft window light'}}],negative:[]};
-const scene={id:'local:fixture:office:start',provider:'local',recipe:true,title:'Office arrival',node:'start',group:'Encounters',revision:'fixture-1',metadata:{},entries:[],routesEditable:false,placement:{place:'office',day:2,condition:'office_open'},history:[],images:[{id:'image:0',label:'internal-key',url:'/fixture-scene.png',available:true},{id:'image:1',label:'missing-key',url:'/not-available.png',available:false}],steps:[{shot:{width:.24,at:.48,focus:'55% 42%',push:.06,fade:1400,cue:'Footsteps outside the meeting room'},$staging:{},$recipe:"...gap('t01', { w: GW })",imageSlot:'image:0',imageUrl:'/fixture-scene.png'},{say:'colleague',text:'The room is ready.',en:'The room is ready.',ja:'部屋の準備ができました。',emo:'warm',$recipe:"duo(s('colleague','部屋の準備ができました。'),'The room is ready.')"},{shot:{},imageSlot:'image:1',imageUrl:'/not-available.png',$recipe:"pic('missing')"},{action:'go',destination:'finish'}]};
-try{
- for(let i=0;i<60;i++){try{if((await fetch(base+'/api/subplots/catalog')).ok)break;}catch{}await new Promise(r=>setTimeout(r,100));}
- await withBrowserJob('codex-human-editor',async browser=>{
-  for(const width of [2560,1366,390]){
-   fs.writeFileSync(file,original);
-   const page=await browser.newPage({viewport:{width,height:width===390?844:width===2560?1440:900}}),errors=[];
-   page.on('pageerror',e=>errors.push(e.message));
-   await page.route('**/island/private/**',route=>route.abort());
-   await page.route('**/api/subplots/authoring',route=>route.fulfill({json:authoring}));
-   await page.route('**/fixture-scene.png',route=>route.fulfill({path:'/home/jorgen/repo/japanese/game3d/shots/office-south-final/return-desk.png'}));
-   await page.route('**/fixture-portrait.webp',route=>route.fulfill({path:'/home/jorgen/repo/japanese/game3d/assets/portraits/mio-neutral.webp'}));
-   await page.goto(base+'/tools/subplots/web/');
-   if(width===390)await page.locator('#scenePicker').selectOption('public:game3d/story/office.js#welcome');else await page.locator('[data-id$="#welcome"]').click();
-   await page.locator('[data-field=en]').first().fill('The meeting starts at nine.');
-   await page.locator('[data-field=ja]').first().fill('会議は九時からです。');
-   await page.locator('[data-field=emo]').first().selectOption('warm');
-   await page.locator('#draft').click();await page.getByRole('status').filter({hasText:'Draft saved.'}).waitFor();
-   assert.match(fs.readFileSync(file,'utf8'),/ten minutes/);
-   await page.route('**/api/subplots/save',async route=>{await new Promise(r=>setTimeout(r,350));await route.continue();});
-   await page.locator('#save').click();assert.equal(await page.locator('.workspace').evaluate(el=>el.inert),true);
-   await page.getByRole('status').filter({hasText:'Saved to the story'}).waitFor();await page.unroute('**/api/subplots/save');
-   assert.match(fs.readFileSync(file,'utf8'),/at nine/);assert.match(fs.readFileSync(file,'utf8'),/"meeting_seen": 1/);
-   assert.equal(await page.locator('[data-field=ja]').first().inputValue(),'会議は九時からです。');
-   assert.equal(await page.locator('#rawSource').count(),0);
-   assert.equal(await page.locator('#entries input:not([type=checkbox]):not([type=number])').count(),0);
-   await page.locator('#preview').click();assert.match(await page.locator('#previewBody').innerText(),/at nine/);await page.locator('#nextBeat').click();await page.locator('#nextBeat').click();await page.locator('#nextBeat').click();await page.getByRole('button',{name:'Ask about the room',exact:true}).click();await page.getByText('colleague: The room beside reception.',{exact:true}).waitFor();await page.locator('#closePreview').click();
-   await page.locator('[data-view=history]').click();assert.ok(await page.locator('.revision').count());await page.locator('[data-view=sequence]').click();
-   let saved=null,generation=null;
-   await page.route('**/api/subplots/catalog?scope=local',r=>r.fulfill({json:{scenes:[{...scene,count:4},{...scene,id:'local:fixture:office:finish',node:'finish',title:'End of the meeting',count:1},{...scene,id:'local:fixture:other:secret',node:'secret',title:'Other scene',count:1}]}}));
-   await page.route('**/api/subplots/read?id=local*',r=>r.fulfill({json:scene}));
-   await page.route('**/api/subplots/save',r=>{saved=r.request().postDataJSON();const response={...scene,...structuredClone(saved),revision:'fixture-2'};for(const image of Object.values(response.metadata.images||{}))image.applied=true;return r.fulfill({json:response});});
-   await page.route('**/api/subplots/image/**',async route=>{
-    const u=new URL(route.request().url());let response={};
-    if(u.pathname.endsWith('/presets'))response=presets;
-    else if(u.pathname.endsWith('/jobs'))response=[];
-    else if(u.pathname.endsWith('/history'))response=[{at:'2026-10-10T10:00:00',characters:['colleague'],renders:[{id:'old-render',file:'existing.png',thumb:'existing.png',positive:'office illustration',seed:12}]}];
-    else if(u.pathname.endsWith('/generate')){generation=route.request().postDataJSON();response={run_id:'fixture',jobs:[]};}
-    else if(u.pathname.includes('/repo/')){await route.fulfill({path:'/home/jorgen/repo/japanese/game3d/assets/portraits/mio-neutral.webp'});return;}
-    else if(u.pathname.includes('/thumb/')||u.pathname.includes('/out/')){await route.fulfill({path:'/home/jorgen/repo/japanese/game3d/shots/office-south-final/return-desk.png'});return;}
-    await route.fulfill({json:response});
-   });
-   await page.locator('[data-scope=local]').click();if(width===390)await page.locator('#scenePicker').selectOption(scene.id);else await page.locator(`[data-id="${scene.id}"]`).click();
-   await page.waitForFunction(()=>{const img=globalThis.document.querySelector('.shot-picture img');return img?.complete&&img.naturalWidth>0;});
-   assert.equal(await page.locator('.missing-picture').count(),1);
-   assert.doesNotMatch(await page.locator('#sequence').innerText(),/\$expression|gap\(|internal-key|missing-key/);
-   assert.equal(await page.locator('#sequence select option[value=secret]').count(),0);
-   await page.locator('[data-field=en]').first().fill('The meeting room is ready.');await page.locator('[data-field=ja]').first().fill('会議室の準備ができました。');
-   await page.locator('.shot-controls summary').first().click();await page.getByLabel('Fade in · seconds').first().fill('1.8');await page.getByLabel('Fade in · seconds').first().press('Tab');
-   await page.locator('#save').click();await page.getByRole('status').filter({hasText:'Saved to the story'}).waitFor();
-   assert.equal(saved.steps[0].shot.fade,1800);assert.equal(saved.steps[1].en,'The meeting room is ready.');assert.equal(saved.steps[1].ja,'会議室の準備ができました。');
-   fs.mkdirSync('/tmp/codex-human-editor-shots',{recursive:true});await page.evaluate(()=>globalThis.scrollTo(0,0));await page.screenshot({path:`/tmp/codex-human-editor-shots/storyboard-${width}.png`,fullPage:true});
-   await page.locator('.gallery-shot').first().click();await page.locator('[data-char=colleague]').click();
-   await page.locator('[data-compose=pose]').selectOption('Seated');await page.locator('[data-compose=environment]').selectOption('Office interior');await page.locator('[data-compose=angle]').selectOption('High angle');
-   await page.locator('#generate').click();await page.getByRole('status').filter({hasText:'Picture queued'}).waitFor();
-   assert.match(generation.positive,/Seated/);assert.match(generation.positive,/High angle/);assert.match(generation.positive,/Office interior/);
-   await page.locator('[data-library=all]').click();await page.locator('[data-use]').first().click();
-   await page.locator('#save').click();await page.getByRole('status').filter({hasText:'Saved to the story'}).waitFor();assert.equal(saved.metadata.images['image:0'].file,'existing.png');
-   assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth>globalThis.innerWidth),false);assert.deepEqual(errors,[]);
-   await page.evaluate(()=>globalThis.scrollTo(0,0));await page.screenshot({path:`/tmp/codex-human-editor-shots/images-${width}.png`,fullPage:true});if(width===390){await page.locator('.mobile-tools [data-panel=story]').click();assert.equal(await page.locator('#sequence').isVisible(),true);await page.keyboard.press('Tab');}
-   if(width!==390)await page.locator('#backToStory').click();
-   await page.locator('#addShot').click();await page.locator('#shotOptions button').first().click();
-   assert.equal(await page.locator('#sequence > .beat').count(),5);
-   await page.locator('#save').click();await page.getByRole('status').filter({hasText:'Saved to the story'}).waitFor();assert.equal(saved.steps.length,5);assert.equal(saved.steps[4].imageSlot,undefined);
-   await page.close();
-   console.log(`PASS ${width}: bilingual edit/save/reload, conditions, actual images, missing image, framing, scoped destinations, image history and composition, no code shown`);
-  }
- },{timeoutMs:150000,gpuWaitMs:60000});
-}finally{server.kill('SIGTERM');fs.rmSync(root,{recursive:true,force:true});}
+import { spawn } from 'node:child_process';
+import { withBrowserJob } from '../../lib/browser-job.mjs';
+
+const repo = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../../..');
+const root = fs.mkdtempSync(path.join(os.tmpdir(), 'scene-editor-browser-'));
+fs.mkdirSync(path.join(root, 'game3d/story'), { recursive: true });
+const file = path.join(root, 'game3d/story/office.js');
+const original = `export default {
+  on: { 'talk:mio': { if: 'day >= 2', node: 'welcome' } },
+  nodes: {
+    welcome: [
+      { do: 'cam', on: 'mio', zoom: 1.4 }, // close on her
+      'mio: The meeting starts in ten minutes.',
+      { say: 'eric', text: 'Which room are we using?' },
+      { choice: [
+        { text: 'Ask about the room', go: 'room' },
+        { text: 'Come back later', go: 'later' },
+      ] },
+    ],
+    room: ['mio: The room beside reception.'],
+    later: ['eric: See you there.'],
+  },
+};
+`;
+fs.writeFileSync(file, original);
+const port = 8796, base = `http://127.0.0.1:${port}`;
+const server = spawn('python3', ['tools/review_server.py', String(port)], {
+  cwd: repo, stdio: 'ignore',
+  env: { ...process.env, SUBPLOTS_ROOT: root, SUBPLOTS_STATE: path.join(root, 'state'), SUBPLOTS_PUBLIC_ONLY: '1' },
+});
+const portraitFile = path.join(repo, 'game3d/assets/portraits/mio-neutral.webp');
+const authoring = {
+  characters: [
+    { id: 'eric', name: 'Eric', color: '#8fb4d8', faces: [{ id: 'neutral', label: 'Neutral' }] },
+    { id: 'mio', name: 'Mio', color: '#5fc6bf', portrait: '/fixture/mio.webp', faces: [{ id: 'neutral', label: 'Neutral' }, { id: 'smile', label: 'Smile' }] },
+    { id: 'emi', name: 'Emi', color: '#e0906f' },
+  ],
+  places: [{ id: 'office', name: 'IT support, B2' }],
+  variables: [{ id: 'day', label: 'Story day', type: 'number' }],
+  events: [{ id: 'talk:mio', label: 'Talk to Mio' }],
+  deliveries: [{ id: '', label: 'Natural' }, { id: 'warm', label: 'Warm' }],
+  words: [],
+};
+const privateRow = { id: 'local:fixture:bath:start', provider: 'local', title: 'bath · start', node: 'start', scene: 'enc_bath', group: 'Encounters', where: 'island/private/rewards/tools/fixture.src.mjs', count: 3, audience: 'private' };
+const privateScene = {
+  ...privateRow, recipe: true, revision: 'p1', metadata: {}, entries: [], routesEditable: false, history: [],
+  placement: { place: 'office', day: 2, condition: null }, previewUrl: '/game3d/index.html?scene=enc_bath',
+  images: [{ id: 'image:0', file: 'encounters/missing.webp', available: false }],
+  steps: [
+    { narration: 'Steam over the water.', $recipe: "n('Steam over the water.')" },
+    { shot: { fade: 900 }, $staging: { fade: 900 }, imageSlot: 'image:0', $recipe: "pic('missing')" },
+    { say: 'mio', text: 'ちょっと待って', en: 'Wait a second.', ja: 'ちょっと待って', emo: '', $recipe: "duo(s('mio','ちょっと待って'),'Wait a second.')" },
+  ],
+};
+
+const wait = ms => new Promise(r => setTimeout(r, ms));
+try {
+  for (let i = 0; i < 60; i++) { try { if ((await fetch(base + '/api/subplots/catalog')).ok) break; } catch { /* starting */ } await wait(100); }
+  await withBrowserJob('scene-editor-browser', async browser => {
+    for (const width of [2560, 1366]) {
+      fs.writeFileSync(file, original);
+      fs.rmSync(path.join(root, 'state'), { recursive: true, force: true });
+      const page = await browser.newPage({ viewport: { width, height: width > 2000 ? 1440 : 860 } });
+      const errors = [];
+      page.on('pageerror', e => errors.push(e.message));
+      let privateSave = null;
+      await page.route('**/island/private/**', r => r.abort());
+      await page.route('**/api/subplots/authoring', r => r.fulfill({ json: authoring }));
+      await page.route('**/fixture/mio.webp', r => r.fulfill({ path: portraitFile }));
+      await page.route('**/api/subplots/catalog?scope=all', async r => {
+        const real = await (await fetch(base + '/api/subplots/catalog')).json();
+        r.fulfill({ json: { ...real, scenes: [...real.scenes, privateRow], local: true } });
+      });
+      await page.route('**/api/subplots/read?id=local*', r => r.fulfill({ json: privateScene }));
+      await page.route('**/api/subplots/draft', r => r.request().postDataJSON().id.startsWith('local:') ? r.fulfill({ json: { ok: true } }) : r.continue());
+      await page.route('**/api/subplots/save', r => {
+        const body = r.request().postDataJSON();
+        if (!body.id.startsWith('local:')) return r.continue();
+        privateSave = body;
+        return r.fulfill({ json: { ...privateScene, ...body, revision: 'p2' } });
+      });
+      await page.route('**/api/subplots/image/**', r => {
+        const u = new URL(r.request().url());
+        if (u.pathname.endsWith('/history')) return r.fulfill({ json: [{ at: '2026-10-10T10:00:00', positive: 'steam', renders: [{ id: 'r-41', n: 41, file: 'x.png', thumb: 'x.png' }] }] });
+        if (u.pathname.includes('/thumb/') || u.pathname.includes('/out/')) return r.fulfill({ path: portraitFile });
+        return r.fulfill({ json: {} });
+      });
+      await page.goto(base + '/tools/subplots/web/');
+
+      // open from the list; labels say what goes where
+      await page.locator('.area-head', { hasText: 'IT support, B2' }).click();
+      await page.locator('.scene-row', { hasText: 'Welcome' }).click();
+      await page.locator('.beat').first().waitFor();
+      assert.equal(await page.locator('#docAudience').innerText(), 'Public game');
+      assert.equal(await page.locator('#docWhere').innerText(), 'game3d/story/office.js');
+      assert.equal(await page.locator('.beat').count(), 4);
+      assert.match(await page.locator('.beat').nth(0).innerText(), /Camera moves in on Mio/);
+      assert.doesNotMatch(await page.locator('#timeline').innerText(), /\$expression|do:|go:/);
+
+      // edit a line in place, undo and redo
+      const line = page.locator('.beat').nth(1).locator('[data-field=main]');
+      await line.fill('The meeting starts at nine.');
+      assert.equal(await page.locator('#status').innerText(), 'Unsaved changes');
+      await page.locator('.timeline-wrap').click({ position: { x: 5, y: 5 } });
+      await page.keyboard.press('Control+z');
+      assert.equal(await line.inputValue(), 'The meeting starts in ten minutes.');
+      await page.keyboard.press('Control+Shift+z');
+      assert.equal(await line.inputValue(), 'The meeting starts at nine.');
+
+      // change the speaker from the picker
+      await page.locator('.beat').nth(2).locator('.speaker').click();
+      await page.locator('.people button', { hasText: 'Emi' }).click();
+      assert.match(await page.locator('.beat').nth(2).locator('.speaker').innerText(), /Emi/);
+
+      // drag the choice above the first line
+      await page.locator('.beat').nth(3).locator('.grip').hover();
+      await page.locator('.beat').nth(3).locator('.grip').dragTo(page.locator('.beat').nth(1), { targetPosition: { x: 200, y: 4 } });
+      assert.match(await page.locator('.beat').nth(1).innerText(), /Choice/i);
+
+      // add narration at the end
+      await page.locator('#timeline > .add-row.full button', { hasText: 'Narration' }).click();
+      await page.keyboard.type('The room is cold.');
+      assert.equal(await page.locator('.beat').count(), 5);
+
+      // save: the file changes, untouched text stays as written
+      await page.keyboard.press('Control+s');
+      await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
+      const saved = fs.readFileSync(file, 'utf8');
+      assert.match(saved, /'mio: The meeting starts at nine\.'/);
+      assert.match(saved, /'emi: Which room are we using\?'/);
+      assert.match(saved, /\{ do: 'cam', on: 'mio', zoom: 1.4 \}, \/\/ close on her/);
+      assert.match(saved, /'> The room is cold\.'/);
+      assert.ok(saved.indexOf('Ask about the room') < saved.indexOf('starts at nine'), 'choice moved up');
+      assert.match(saved, /room: \['mio: The room beside reception\.'\]/);
+
+      // preview in the game's style, through the choice into another part
+      await page.locator('.beat').first().click({ position: { x: 20, y: 12 } });
+      await page.locator('#preview').click();
+      await page.locator('.pv-talk').first().waitFor();
+      assert.match(await page.locator('.pv-line').first().innerText(), /meeting starts at nine|Camera/);
+      await page.keyboard.press('Escape');
+
+      // a revision restores the old text, and saving makes it the scene again
+      await page.locator('[data-tab=scene]').click();
+      await page.locator('.revision button').first().click();
+      assert.equal(await page.locator('.beat').nth(1).locator('[data-field=main]').inputValue(), 'The meeting starts in ten minutes.');
+      await page.locator('#save').click();
+      await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
+      assert.match(fs.readFileSync(file, 'utf8'), /ten minutes/);
+
+      // a private scene is labelled; its picture is replaced from the history
+      await page.locator('[data-filter=private]').click();
+      await page.locator('.area-head', { hasText: 'Encounters' }).click();
+      await page.locator('.scene-row').first().click();
+      await page.locator('.beat.k-picture').waitFor();
+      assert.equal(await page.locator('#docAudience').innerText(), 'Private · Adult');
+      assert.equal(await page.locator('#play').getAttribute('href'), '/game3d/index.html?scene=enc_bath');
+      await page.locator('.beat.k-picture .change').click();
+      await page.locator('.history-grid button').first().click();
+      await page.locator('.beat.k-picture.selected img').waitFor();
+      assert.match(await page.locator('.pic-facts').innerText(), /New pick #41/);
+      await page.locator('#save').click();
+      await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
+      assert.equal(privateSave.metadata.images['image:0'].file, 'x.png');
+
+      assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth > globalThis.innerWidth), false);
+      assert.deepEqual(errors, []);
+      await page.close();
+      console.log(`PASS ${width}: open, labels, inline edit, undo and redo, speaker picker, drag, add, save, preview, revisions, private picture pick`);
+    }
+  }, { timeoutMs: 150000, gpuWaitMs: 60000 });
+} finally {
+  server.kill('SIGTERM');
+  fs.rmSync(root, { recursive: true, force: true });
+}

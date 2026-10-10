@@ -2,23 +2,23 @@
 #images { min-width: 0; }
 #composition, #renders { min-width: 0; }
 .image-current { display: grid; gap: 10px; padding-bottom: 18px; }
-.image-current > a { display: block; overflow: hidden; border-radius: 10px; background: #dce4e7; }
+.image-current > a { display: block; overflow: hidden; border-radius: 10px; background: #0b0d11; }
 .image-current .selected-image { display: block; width: 100%; max-height: 330px; margin: 0; object-fit: contain; }
 .image-current strong { font-size: 14px; }
-.image-empty { display: grid; place-items: center; min-height: 130px; padding: 20px; background: #e7edf0; color: #526875; text-align: center; border-radius: 10px; }
-.image-section { padding: 18px 0; border-top: 1px solid #d8e1e6; }
+.image-empty { display: grid; place-items: center; min-height: 130px; padding: 20px; background: #151920; color: var(--dim); text-align: center; border-radius: 10px; }
+.image-section { padding: 18px 0; border-top: 1px solid var(--line2); }
 .image-section h3 { margin: 0 0 14px; font-size: 15px; }
 .image-section h4 { margin: 16px 0 10px; font-size: 13px; font-weight: 600; }
 .image-section > summary { margin-bottom: 14px; cursor: pointer; font-weight: 600; font-size: 14px; }
 .image-section .two { align-items: start; }
 .image-section .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 14px; }
 .image-section .chips button { padding: 7px 10px; font-size: 12px; line-height: 1.35; white-space: normal; text-align: left; }
-.image-section button[aria-pressed="true"] { border-color: #3d827a; color: #174f49; background: #e4f2ee; }
+.image-section button[aria-pressed="true"] { border-color: rgba(111,208,198,.5); color: var(--ink); background: var(--accent-soft); }
 .image-cast { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 8px; }
 .image-cast > button { display: grid; grid-template-rows: 84px auto; gap: 0; padding: 0; min-width: 0; overflow: hidden; border-radius: 9px; }
-.image-cast img { width: 100%; height: 84px; object-fit: cover; object-position: center 25%; background: #e8eef0; }
+.image-cast img { width: 100%; height: 84px; object-fit: cover; object-position: center 25%; background: #0b0d11; }
 .image-cast button > span:last-child { padding: 7px 3px; overflow-wrap: anywhere; font-size: 12px; }
-.image-person-placeholder { display: grid; place-items: center; background: #dce5e9; color: #6e8794; font-size: 34px; }
+.image-person-placeholder { display: grid; place-items: center; background: #1d222b; color: var(--faint); font-size: 34px; }
 .image-check { display: flex !important; flex-direction: row; align-items: center; gap: 9px; min-height: 32px; }
 .image-check input { flex: 0 0 auto; width: 16px; height: 16px; margin: 0; }
 .image-reference { display: flex; align-items: center; gap: 12px; margin: 10px 0 15px; }
@@ -36,9 +36,9 @@
 .image-library .segmented { margin-bottom: 14px; }
 .image-library .segmented button { white-space: normal; }
 .image-library .render-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
-.image-library .render-card { display: flex; flex-direction: column; gap: 7px; min-width: 0; padding: 8px; border: 1px solid #d8e1e6; border-radius: 9px; background: #fff; }
-.image-library .render-card img { display: block; width: 100%; height: 136px; object-fit: contain; background: #e9eff1; border-radius: 5px; }
-.image-library .render-card small { font-size: 11px; color: #536976; overflow-wrap: anywhere; }
+.image-library .render-card { display: flex; flex-direction: column; gap: 7px; min-width: 0; padding: 8px; border: 1px solid var(--line2); border-radius: 9px; background: var(--raise); }
+.image-library .render-card img { display: block; width: 100%; height: 136px; object-fit: contain; background: #0b0d11; border-radius: 5px; }
+.image-library .render-card small { font-size: 11px; color: var(--dim); overflow-wrap: anywhere; }
 .image-library .render-card button { font-size: 12px; padding: 7px; white-space: normal; }
 .image-library [data-more-images] { width: 100%; margin-top: 14px; }
 @media (max-width: 600px) {

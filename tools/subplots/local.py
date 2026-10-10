@@ -97,6 +97,8 @@ def run(config_path, request):
         fcntl.flock(lock,fcntl.LOCK_EX)
         current=read()
         if action=='draft':
+            if request.get('discard'):
+                (folder/'draft.json').unlink(missing_ok=True);return {'ok':True,'draft':False}
             atomic(folder/'draft.json',json.dumps(request,ensure_ascii=False));return {'ok':True,'draft':True}
         if request.get('revision')!=current['revision']:
             raise ValueError('CONFLICT: This recipe changed outside the editor. Reload before saving.')

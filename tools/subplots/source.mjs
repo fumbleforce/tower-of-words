@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { parseSource, staticValue, visitSource } from '../lib/source-data.mjs';
+import { encodeSteps } from './encode.mjs';
 const hash = s => crypto.createHash('sha256').update(s).digest('hex');
 const key = p => p?.type === 'Property' && !p.computed ? p.key.name ?? p.key.value : null;
 const prop = (o, name) => o?.properties?.find(p => key(p) === name);
@@ -12,12 +13,6 @@ function decodeStep(node,source) {
   if(node?.type==='ArrayExpression')return node.elements.map(n=>decodeStep(n,source));
   if(node?.type==='ObjectExpression'&&node.properties.every(p=>key(p)!==null))return Object.fromEntries(node.properties.map(p=>[key(p),decodeStep(p.value,source)]));
   return {$expression:source.slice(...node.range)};
-}
-function encodeStep(value){
-  if(value&&typeof value==='object'&&typeof value.$expression==='string')return value.$expression;
-  if(Array.isArray(value))return '['+value.map(encodeStep).join(',\n')+']';
-  if(value&&typeof value==='object')return '{'+Object.entries(value).map(([k,v])=>JSON.stringify(k)+': '+encodeStep(v)).join(', ' )+'}';
-  return JSON.stringify(value);
 }
 export function inspect(source, file) {
   const ast = parseSource(source), scenes = [];
@@ -31,7 +26,7 @@ export function inspect(source, file) {
       scenes.push({ id: `public:${file}#${name}`, provider: 'public', title: name.replaceAll('_', ' '),
         node: name, file, group: file.replace(/^game3d\/story\//, '').replace(/\.js$/, ''),
         steps: Array.isArray(steps) ? steps : null, raw: source.slice(...p.value.range),
-        range: p.value.range, owner: node, revision: hash(source) });
+        range: p.value.range, owner: node, valueNode: p.value, comments: ast.comments || [], revision: hash(source) });
     }
   });
   return scenes;
@@ -60,7 +55,7 @@ function entries(on, node) {
 function readScene(root, id) {
   const {scene:s,source} = target(root,id), on = prop(s.owner,'on'), start = prop(s.owner,'start');
   const routes = on ? literal(on.value) : {};
-  const {owner,range,...rest}=s;
+  const rest=Object.fromEntries(Object.entries(s).filter(([k])=>!['owner','range','valueNode','comments'].includes(k)));const {owner,range}=s;
   const speakers = literal(prop(owner,'speakers')?.value) || {};
   return {...rest, speakers, entries: entries(routes,s.node), routesEditable: routes !== null,
     startsHere: literal(start?.value) === s.node, metadata: {},
@@ -117,7 +112,7 @@ function proposed(root, data) {
   const {scene:s,resolved,source} = target(root,data.id);
   if (data.revision !== hash(source)) throw Error('CONFLICT: This story changed outside the editor. Reload it before saving.');
   let raw = data.raw;
-  if (data.steps !== null && data.steps !== undefined) { validateSteps(data.steps); raw = encodeStep(removeStaleVoice(data.steps,s.steps)); }
+  if (data.steps !== null && data.steps !== undefined) { validateSteps(data.steps); raw = s.valueNode.type==='ArrayExpression' ? encodeSteps(removeStaleVoice(data.steps,s.steps), s.steps, s.valueNode, source, s.comments) : raw; }
   if (typeof raw !== 'string' || raw.length > 500000) throw Error('Missing or oversized scene');
   const expression = parseSource(`const steps = (${raw});`).body[0]?.declarations?.[0]?.init;
   if (!expression || !['ArrayExpression','CallExpression','Identifier','MemberExpression','ConditionalExpression'].includes(expression.type)) throw Error('A scene expression must produce a sequence of steps');
