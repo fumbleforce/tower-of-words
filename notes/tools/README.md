@@ -16,7 +16,7 @@ What each shared tool adds in private mode:
 |---|---|
 | Bible | The reward picks per character and the private Review items (capability `bible`) |
 | Scene editor | The private scenes. Outside private mode the server gives it public scenes only |
-| Image gen | Nothing yet: it shows every render in either mode |
+| Image gen | The private renders (reward and portrait rounds under island/private/, anything rated sensitive or nsfw, reward prompts): history, thumbnails and files are hidden outside private mode |
 
 ## Kept, in the bar's order
 
