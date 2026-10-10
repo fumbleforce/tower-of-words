@@ -22,9 +22,24 @@ export const PUBLIC_REGISTRY = 'tools/assets/live.json';
 export const LOCAL_REGISTRY = 'island/private/game/live.json';
 const NEVER = 'island/private/user'; // never listed, read or written, whatever a registry says
 
-const abs = (p) => path.join(ROOT, p);
+let mainRoot;
+function mainCheckout() {
+  if (mainRoot !== undefined) return mainRoot;
+  const r = spawnSync('git', ['rev-parse', '--path-format=absolute', '--git-common-dir'], { cwd: ROOT, encoding: 'utf8' });
+  mainRoot = r.status === 0 ? path.dirname(r.stdout.trim()) + '/' : ROOT;
+  return mainRoot;
+}
+// island/private is never in a worktree: its paths always mean the main checkout's files.
+const LOCAL = 'island/private/';
+export const abs = (p) => path.join(p.startsWith(LOCAL) ? mainCheckout() : ROOT, p);
 const exists = (p) => fs.existsSync(abs(p));
-const rel = (p) => path.relative(ROOT, path.resolve(p)).split(path.sep).join('/');
+const rel = (p) => {
+  const full = path.resolve(p);
+  const local = path.join(mainCheckout(), LOCAL);
+  if (full.startsWith(local)) return LOCAL + path.relative(local, full).split(path.sep).join('/');
+  const r = path.relative(ROOT, full).split(path.sep).join('/');
+  return r.startsWith('..') ? full : r; // a file outside the repo (a scratch folder) keeps its absolute path
+};
 export const readJson = (p) => JSON.parse(fs.readFileSync(abs(p), 'utf8'));
 const guard = (p) => {
   if (p === NEVER || p.startsWith(NEVER + '/')) throw new Error(`refused: ${NEVER} is never touched`);
@@ -36,6 +51,7 @@ const globCache = new Map();
 export function globRe(glob) {
   if (globCache.has(glob)) return globCache.get(glob);
   let re = '';
+  let depth = 0;
   for (let i = 0; i < glob.length; i++) {
     const c = glob[i];
     if (c === '*' && glob[i + 1] === '*') {
@@ -43,9 +59,9 @@ export function globRe(glob) {
       if (glob[i + 1] === '/') { i++; re += '(?:.*/)?'; } else re += '.*';
     } else if (c === '*') re += '[^/]*';
     else if (c === '?') re += '[^/]';
-    else if (c === '{') re += '(?:';
-    else if (c === '}') re += ')';
-    else if (c === ',' && re.includes('(?:')) re += '|';
+    else if (c === '{') { depth++; re += '(?:'; }
+    else if (c === '}') { depth--; re += ')'; }
+    else if (c === ',' && depth) re += '|';
     else re += c.replace(/[.+^$()|[\]\\]/g, '\\$&');
   }
   const out = new RegExp('^' + re + '$');
@@ -188,6 +204,21 @@ async function dataRefs() {
   return refs;
 }
 
+// The keys a refs file plays: an array of keys, or every `key` or `id` string in its entries, at any depth.
+function playedKeys(data) {
+  if (Array.isArray(data) && data.every((e) => typeof e === 'string')) return data;
+  const out = [];
+  const walkJson = (o) => {
+    if (Array.isArray(o)) o.forEach(walkJson);
+    else if (o && typeof o === 'object') {
+      for (const k of ['key', 'id']) if (typeof o[k] === 'string') out.push(o[k]);
+      Object.values(o).forEach(walkJson);
+    }
+  };
+  walkJson(data);
+  return out;
+}
+
 // The checks both halves share. refs: [{ref, from}] (coarse refs only prove existence); returns {errors, warnings}.
 export function compare(reg, refs, { label }) {
   const errors = [], warnings = [];
@@ -218,8 +249,10 @@ export function compare(reg, refs, { label }) {
   }
   // a list unit with `refs` (the voice clips and audio/manifest.json, which the story generates): every key is played
   for (const u of Object.values(reg.units)) {
-    if (!u.list || !u.refs || !exists(u.list) || !exists(u.refs)) continue;
-    const played = new Set(readJson(u.refs).map((e) => (typeof e === 'string' ? e : e.key)));
+    const refFiles = [u.refs ?? []].flat();
+    if (!u.list || !refFiles.length || !exists(u.list) || !refFiles.every(exists)) continue;
+    const played = new Set();
+    for (const id of refFiles.flatMap((f) => playedKeys(readJson(f)))) for (const v of u.variants ?? ['']) played.add(id + v);
     const stale = readJson(u.list).filter((k) => !played.has(k));
     for (const k of stale) errors.push(`${u.each.replace('{}', k)}: in ${u.list} but ${u.refs} has no line that plays it (retire it)`);
   }
@@ -253,7 +286,7 @@ export function localRefs(reg) {
   const refs = [];
   const lit = /(['"`])([^'"`\n]*?\.(?:webp|png|jpg|glb|json|mp3))\1/g;
   for (const f of localCode(reg)) {
-    if (reg.units[f]?.dev) continue;
+    // a dev plugin's references count too: `dev` decides what ships, not what is used
     const src = fs.readFileSync(abs(f), 'utf8');
     for (const m of src.matchAll(lit)) {
       const s = m[2];
@@ -261,6 +294,8 @@ export function localRefs(reg) {
       const base = Object.entries(reg.bases ?? {}).find(([prefix]) => s.startsWith(prefix));
       if (base) refs.push({ ref: base[1] + s, from: f });
     }
+    // the plugins it imports (statically, or through import()/new URL for one it loads when it exists)
+    for (const m of src.matchAll(/(?:from|import\(|new URL\()\s*['"`](\.\/[\w.-]+\.js)['"`]/g)) refs.push({ ref: path.posix.join(path.posix.dirname(f), m[1]), from: f });
   }
   return refs;
 }
@@ -287,7 +322,9 @@ const today = () => new Date().toISOString().slice(0, 10);
 function registryFor(livePath) {
   for (const which of ['public', 'local']) {
     const reg = loadRegistry(which);
-    if (reg && reg.roots.some((r) => livePath.startsWith(r))) return reg;
+    // a live root, or a folder the registry's picture bases point into (the local pictures before they had a root)
+    const places = reg ? [...reg.roots, ...Object.entries(reg.bases ?? {}).map(([prefix, base]) => base + prefix)] : [];
+    if (places.some((r) => livePath.startsWith(r)) || (reg && unitOf(reg, livePath))) return reg;
   }
   return null;
 }
@@ -297,13 +334,6 @@ function rename(from, to) {
   catch (e) { if (e.code !== 'EXDEV') throw e; fs.copyFileSync(from, to); fs.unlinkSync(from); }
 }
 // The main checkout (an agent worktree's binaries are links into a read-only store there: tools/assets/worktree_links.py).
-let mainRoot;
-function mainCheckout() {
-  if (mainRoot !== undefined) return mainRoot;
-  const r = spawnSync('git', ['rev-parse', '--path-format=absolute', '--git-common-dir'], { cwd: ROOT, encoding: 'utf8' });
-  mainRoot = r.status === 0 ? path.dirname(r.stdout.trim()) + '/' : ROOT;
-  return mainRoot;
-}
 // A retired file always lands in the main checkout's generated area (a worktree's goes when it is removed), and in a
 // worktree main's own copy leaves its live folder at once, so main never keeps a file the landed registry dropped.
 function moveFile(src, dest) {
@@ -326,7 +356,9 @@ export function retire(livePath, { by = null, note = '', reg = registryFor(liveP
   const isDir = livePath.endsWith('/');
   const files = isDir ? walk(livePath) : [livePath];
   if (!files.length || files.some((f) => !exists(f))) throw new Error(`${livePath}: missing on disk`);
-  const date = today();
+  // retired/<date>/<original path>; a second retire of the same path that day goes to retired/<date>-2/ and so on
+  let date = today();
+  for (let n = 2; files.some((f) => fs.existsSync(path.join(mainCheckout(), `${reg.generated}retired/${date}/${f}`))); n++) date = `${today()}-${n}`;
   const to = `${reg.generated}retired/${date}/${livePath}`;
   if (!dryRun) {
     for (const f of files) moveFile(f, `${reg.generated}retired/${date}/${f}`);
@@ -350,10 +382,14 @@ export function promote(src, dest, { round, review = null, note = '', replace = 
   if (!exists(src) || fs.statSync(abs(src)).isDirectory()) throw new Error(`${src}: not a file`);
   const reg = registryFor(dest);
   if (!reg) throw new Error(`${dest}: not under a live root of either registry (${PUBLIC_REGISTRY}, ${LOCAL_REGISTRY})`);
-  if (reg.roots.some((r) => src.startsWith(r))) throw new Error(`${src}: already in a live folder; promote from the generated area`);
+  if (reg.roots.some((r) => src.startsWith(r)) || unitOf(reg, src)) throw new Error(`${src}: already live; promote from the generated area`);
   if (exists(dest)) {
     if (!replace) throw new Error(`${dest}: exists; pass --replace to retire it first`);
-    if (!dryRun) retire(dest, { by: dest, note: `replaced by ${src}`, reg });
+    if (!dryRun) {
+      const kept = reg.units[dest]; // the replaced file's unit (and its flags) stays for the new version
+      retire(dest, { by: dest, note: `replaced by ${src}`, reg });
+      if (kept) reg.units[dest] = kept;
+    }
   }
   if (!dryRun) {
     fs.mkdirSync(path.dirname(abs(dest)), { recursive: true });

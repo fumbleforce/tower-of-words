@@ -25,6 +25,7 @@ You make one art round: render or build the candidates, check them, and put ever
 - GPU lock and freeing VRAM: GUIDE (GPU lock). Meshy credits: GUIDE (Budget).
 - Private scene rounds: run `python3 tools/imgqa_scene.py <round>` (identity of every face, hair, glasses; CPU only) and look at every warn and fail against the approved portraits before reporting (island/private/rewards/SHOTS.md, rule 6).
 - Never open images or pages on Jørgen's screen (GUIDE: Never open images or pages on his screen).
+- Renders go into the round folder or art/production/ (their binaries stay off git), never into a live folder (game3d/assets, game3d/audio, the local-only game folder): tools/comfy.py refuses. A pick reaches the game only through `node tools/assets/live.mjs promote`, and the file it replaces leaves through `retire` (notes/asset-lifecycle.md).
 - Private reward and skimpy art goes in island/private/rewards/<project>/<topic>-<n>/ (project: skimpy, peeks, day1, characters) as island/PRIVATE.md (Layout) says: finals .webp, raw PNGs in raw/, index.html and prompts.json in the round. Don't invent folders or a new system; a hook blocks it.
 
 ## Skills
