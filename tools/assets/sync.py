@@ -15,6 +15,8 @@ Usage:
   python3 tools/assets/sync.py push [--dry-run] [--prune]   upload new and changed used files, rewrite the lock file
   python3 tools/assets/sync.py pull [PATH ...] [--force]    fetch missing or changed files (optionally under PATHs)
   python3 tools/assets/sync.py check [--offline]            exit 1 if a used file is not in the lock file or not in R2
+  python3 tools/assets/sync.py forget PATH ...              drop lock entries of files retired from the live folders
+                                                            (tools/assets/live.mjs retire calls it)
   python3 tools/assets/sync.py check --offline --staged    the commit hook: an unpushed file fails only if the commit
                                                             being made uses it (staged_refs says how)
 
@@ -512,6 +514,19 @@ def cmd_check(a):
     sys.exit(1 if problems else 0)
 
 
+def cmd_forget(a):
+    # tools/assets/live.mjs retire moves a live file out of its root; its lock entry goes in the same commit. Only
+    # entries whose file is gone from this disk are dropped (a folder path drops everything under it).
+    files = load_lock()
+    gone = [p for p in files if any(p == q or (q.endswith('/') and p.startswith(q)) for q in a.paths)
+            and not os.path.exists(os.path.join(ROOT, p))]
+    for p in gone:
+        del files[p]
+    if gone:
+        save_lock(files)
+    print(f'lock: {len(gone)} entr{"y" if len(gone) == 1 else "ies"} dropped')
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     sub = ap.add_subparsers(dest='cmd', required=True)
@@ -531,8 +546,10 @@ def main():
     s.add_argument('--offline', action='store_true', help='skip the R2 listing')
     s.add_argument('--staged', action='store_true',
                    help='fail on an unpushed file only if the staged commit uses it (the commit hook)')
+    s = sub.add_parser('forget', help='drop the lock entries of retired files (gone from this disk)')
+    s.add_argument('paths', nargs='+')
     a = ap.parse_args()
-    {'status': cmd_status, 'push': cmd_push, 'pull': cmd_pull, 'check': cmd_check}[a.cmd](a)
+    {'status': cmd_status, 'push': cmd_push, 'pull': cmd_pull, 'check': cmd_check, 'forget': cmd_forget}[a.cmd](a)
 
 
 if __name__ == '__main__':
