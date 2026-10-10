@@ -93,10 +93,17 @@ export async function buildStage(renderer) {
   const train = new THREE.Group();
   scene.add(train);
   const cars = [];
+  // a warm light in each car over the far bench where the riders sit, up only in the window shots (S.cabin) so
+  // their faces read from outside against the bright morning; always present, so changing it never recompiles
+  const cabin = [];
   for (let i = 0; i < 3; i++) {
     const c = buildCar('closed', { furnished: true });
     c.root.remove(c.proxy);
     c.root.position.x = (i - 1) * PITCH;
+    const l = new THREE.PointLight('#ffe9cf', 0, 3.2, 1.2);
+    l.position.set(-1.0, SEAT_Y + 1.05, -(LZ - 0.24) + 0.95);
+    c.root.add(l);
+    cabin.push(l);
     train.add(c.root);
     cars.push(c);
   }
@@ -193,6 +200,11 @@ export async function buildStage(renderer) {
     reset() {
       active = scene;
       train.rotation.set(0, 0, 0);
+      for (const l of cabin) l.intensity = 0;
+    },
+    // the cars' cabin lights, 0 off to 1 (the window shots)
+    cabin(level = 1) {
+      for (const l of cabin) l.intensity = 2.4 * level;
     },
     // the game's indoor places as sets of their own (built once, on first use): 'lobby' (the station's security
     // room and gate, scenes/lobby.js) and 'office' (B2, scenes/office.js). Returns the place's world object.

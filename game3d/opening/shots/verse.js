@@ -84,6 +84,7 @@ function glassSweep(g, lt, speed = 0.45, alpha = 0.18) {
 function windowShot(S, T, lt, car, wx, { dist = 3.2, drift = 0.6, h = 0.86 } = {}) {
   const x = 120 + T * 18; // still on the level stretch, before the line comes down to the island
   S.setTrain(x);
+  S.cabin(1); // the riders lit from inside, so their faces read through the glass
   const cxw = x + (car - 1) * PITCH + wx;
   const p = lt;
   S.look([cxw + 1.2 - p * 0.12 * drift, h + 0.1, 1.3 + dist], [cxw - 0.1 - p * 0.05, h, 0], 30, 0.02);
@@ -259,10 +260,16 @@ export const VERSE = [
       const sc = Math.cos(spin);
       const y = lerp(H + 420, H * 0.5, land) + Math.sin(lt * 1.6) * 8;
       const tip = k(lt, 3.6, 4.4, ease.inOut2);
+      // after it lands: a slow push in, and a kick on every bar line, turning one way then the other (the hold
+      // moves with the music instead of floating, critic on the fifth cut)
+      const sinceBar = (((T - bar(0)) % 1.6) + 1.6) % 1.6,
+        barN = Math.floor((T - bar(0)) / 1.6);
+      const kick = lt > 0.6 ? Math.exp(-sinceBar / 0.14) : 0;
+      const push = 1 + 0.12 * k(lt, 0.6, 3.6, ease.inOut2) + 0.05 * kick;
       g.save();
-      g.translate(W * 0.5, y);
-      g.rotate(lerp(-0.12, 0, land) + Math.sin(lt * 1.1) * 0.015 - tip * 0.08);
-      g.scale(Math.abs(sc) * (1 + tip * 0.35), 1 + tip * 0.35);
+      g.translate(W * 0.5 + (barN % 2 ? 1 : -1) * 14 * kick, y);
+      g.rotate(lerp(-0.12, 0, land) + Math.sin(lt * 1.1) * 0.015 - tip * 0.08 + (barN % 2 ? 1 : -1) * 0.025 * kick);
+      g.scale(Math.abs(sc) * (1 + tip * 0.35) * push, (1 + tip * 0.35) * push);
       if (sc < 0) {
         // the back of the card: navy with the rail
         g.fillStyle = '#1b2b4f';
