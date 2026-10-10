@@ -22,7 +22,8 @@ export const TRAVEL_KINDS = {
 export const TRAVEL_VERBS = { Go: 'exit', 'Go in': 'door', 'Go out': 'door', 'Go to': 'walk', 'Walk to': 'walk' };
 
 // The ways out whose verb doesn't say so (or says a different kind), by place and thing id. `tip` is the whole
-// tooltip where the label alone can't name the destination; `verb` replaces the menu's verb.
+// tooltip where the label alone can't name the destination; `verb` replaces the menu's verb; `doorway` makes an
+// exit that is a door take clicks over its whole opening, as doors, lifts and stairs do (gameplay/pick-volumes.js).
 export const TRAVEL_PINS = {
   train: {
     doors: { kind: 'door', verb: 'Get off', tip: 'Get off the train' },
@@ -30,8 +31,8 @@ export const TRAVEL_PINS = {
     door_r: { kind: 'door', verb: 'Get off', tip: 'Get off the train' },
   },
   gate: {
-    lift: { kind: 'exit', tip: 'Go out to the forecourt' }, // the old lift id: now the open exit (places.md)
-    forecourt_way: { kind: 'exit', tip: 'Go out to the forecourt' },
+    lift: { kind: 'exit', tip: 'Go out to the forecourt', doorway: true }, // the old lift id: now the open exit (places.md)
+    forecourt_way: { kind: 'exit', tip: 'Go out to the forecourt', doorway: true },
   },
   forecourt: {
     station_exit: { kind: 'door', tip: 'Go into the station' },
@@ -71,7 +72,7 @@ export function travelOf(place, id, t = {}) {
   if (!kind) return null;
   // the thing's own verb stays when it is already one of this kind's verbs (Go in, Go out on a door)
   const verb = e?.verb || (TRAVEL_VERBS[t.verb] === kind ? t.verb : TRAVEL_KINDS[kind].verb);
-  return { kind, glyph: TRAVEL_KINDS[kind].glyph, verb, tip: e?.tip || t.tip || null };
+  return { kind, glyph: TRAVEL_KINDS[kind].glyph, verb, tip: e?.tip || t.tip || null, doorway: !!e?.doorway };
 }
 
 const isPerson = (item) => /person/.test(item.kind || '');

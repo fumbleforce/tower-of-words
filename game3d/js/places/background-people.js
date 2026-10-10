@@ -4,10 +4,13 @@
 // to one runs its idle: line or a nod (gameplay/idle-talk.js).
 // rigs: { id: rig }; standing(rig): whether they can be talked to now (a commuter only while waiting, never mid-walk).
 // The place spreads each over its catalog entry, so its registrations stay explicit (tools/lib/place-source.mjs)
+import { makePickable } from '../gameplay/pick-volumes.js';
 export function backgroundThings(rigs, standing = () => true) {
   return Object.fromEntries(
     Object.entries(rigs).map(([id, r]) => {
       const p = r.root.position;
+      makePickable(r.root, id); // a click anywhere on the body, not just the pin
+
       return [
         id,
         {
