@@ -6,7 +6,7 @@
 // An optional module, ./full/full.mjs, adds its own routes, start page and navigation (only some builds carry it).
 // Saves: userData, or a folder beside the app when a file named "portable" sits next to it (installDir()).
 // What the hardening does and doesn't stop: docs/desktop-release.md.
-import { app, BrowserWindow, Menu, protocol, session, ipcMain } from 'electron';
+import { app, BrowserWindow, Menu, dialog, protocol, session, ipcMain } from 'electron';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -63,7 +63,7 @@ async function registerSaves() {
   const file = path.join(here, 'saves', 'ipc.mjs');
   if (!fs.existsSync(file)) return;
   const { register } = await import(pathToFileURL(file).href);
-  register(ipcMain, path.join(app.getPath('userData'), 'saves'));
+  register(ipcMain, path.join(app.getPath('userData'), 'saves'), { app, dialog, BrowserWindow });
 }
 
 function lockDown(extra) {

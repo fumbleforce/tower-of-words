@@ -109,10 +109,13 @@ step('app folder written');
 
 // 5. electron-builder (into a fresh out/, so no installer of an earlier build lies beside this one)
 fs.rmSync(path.join(out, 'out'), { recursive: true, force: true });
-const { build, Platform } = require('electron-builder');
+const { build, Platform, Arch } = require('electron-builder');
 const electronVersion = require('electron/package.json').version;
 const target = { linux: Platform.LINUX, win: Platform.WINDOWS, mac: Platform.MAC }[platform];
-const targets = flag('dir') ? ['dir'] : { linux: ['AppImage', 'deb'], win: ['nsis', 'portable'], mac: ['dmg', 'zip'] }[platform];
+// a .dmg can only be made on a Mac (hdiutil); from Linux the Mac build is a .zip of the .app, for Apple Silicon and Intel
+const macTargets = process.platform === 'darwin' ? ['dmg', 'zip'] : ['zip'];
+const targets = flag('dir') ? ['dir'] : { linux: ['AppImage', 'deb'], win: ['nsis', 'portable'], mac: macTargets }[platform];
+const archs = platform === 'mac' ? [Arch.arm64, Arch.x64] : [Arch.x64];
 const config = {
   appId: IDENTITY.appId,
   productName: IDENTITY.productName,
@@ -147,9 +150,33 @@ const config = {
   },
 };
 config[platform].target = targets;
+// A Mac build made on Linux can't be signed by electron-builder, and Apple Silicon refuses to run an unsigned app.
+// With rcodesign (RCODESIGN=<path> or on PATH) it is signed ad-hoc here: the fuses are flipped first, then signed,
+// since a flip after signing would break the signature. Without it the .app ships unsigned (docs/desktop-release.md).
+let signMac = null;
+if (platform === 'mac' && process.platform !== 'darwin') {
+  const rcodesign = process.env.RCODESIGN || execFileSync('sh', ['-c', 'command -v rcodesign || true']).toString().trim();
+  if (rcodesign) {
+    const fuses = config.electronFuses;
+    delete config.electronFuses;
+    signMac = async (ctx) => {
+      await ctx.packager.addElectronFuses(ctx, await ctx.packager.generateFuseConfig(fuses));
+      const app = fs.readdirSync(ctx.appOutDir).find((f) => f.endsWith('.app'));
+      execFileSync(rcodesign, ['sign', path.join(ctx.appOutDir, app)], { stdio: 'ignore' });
+      step(`signed ${app} ad-hoc with rcodesign (${ctx.arch === Arch.arm64 ? 'arm64' : 'x64'})`);
+    };
+  } else step('no rcodesign: the Mac app is unsigned and Apple Silicon will refuse to open it');
+}
+// Electron's own default app (shown when no app is found) never ships; the fuses would ignore it anyway
+config.afterPack = async (ctx) => {
+  for (const f of fs.readdirSync(ctx.appOutDir, { recursive: true }).map(String)) {
+    if (f.endsWith('default_app.asar')) fs.rmSync(path.join(ctx.appOutDir, f), { force: true });
+  }
+  await signMac?.(ctx);
+};
 if (platform === 'linux' && process.platform === 'linux') config.electronDist = path.join(desktop, 'node_modules/electron/dist');
 try {
-  await build({ targets: target.createTarget(targets), config, projectDir: appDir });
+  await build({ targets: target.createTarget(targets, ...archs), config, projectDir: appDir });
 } catch (error) {
   if (/libcrypt\.so\.1/.test(String(error.message))) {
     console.error('\nThe .deb step needs libcrypt.so.1 (on Arch/Manjaro: sudo pacman -S libxcrypt-compat). See docs/desktop-release.md.');
@@ -158,15 +185,19 @@ try {
 }
 step(`built ${platform} (${targets.join(', ')}) in ${path.relative(root, config.directories.output)}`);
 
-// 6. vanilla: the word scan over what ships, the asar unpacked, file names included
+// 6. vanilla: the word scan over what ships. Every file name in the unpacked app, and the content of everything this
+// project wrote (app.asar, unpacked). Electron's own files are checked by name only: their content is the framework's
+// (LICENSES.chromium.html quotes licences that say "explicitly"); the content pack was scanned before it was sealed.
 if (flavor === 'vanilla') {
-  const unpacked = fs.readdirSync(config.directories.output).find((d) => d.endsWith('-unpacked') || d === 'mac');
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'amakawa-asar-'));
-  const asar = fs.readdirSync(path.join(config.directories.output, unpacked), { recursive: true }).find((f) => String(f).endsWith('app.asar'));
-  require('@electron/asar').extractAll(path.join(config.directories.output, unpacked, String(asar)), tmp);
+  const unpacked = path.join(config.directories.output, fs.readdirSync(config.directories.output).find((d) => d.endsWith('-unpacked') || d === 'mac'));
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'amakawa-shipped-'));
+  const names = fs.readdirSync(unpacked, { recursive: true }).map(String);
+  fs.writeFileSync(path.join(tmp, 'file-names.txt'), names.join('\n') + '\n');
+  const asar = names.find((f) => f.endsWith('app.asar'));
+  require('@electron/asar').extractAll(path.join(unpacked, asar), path.join(tmp, 'app.asar.unpacked'));
   scan(tmp);
   fs.rmSync(tmp, { recursive: true, force: true });
-  step('word scan passed over the unpacked app');
+  step('word scan passed over the unpacked app (all names, our files in full)');
 }
 for (const f of fs.readdirSync(config.directories.output)) {
   const p = path.join(config.directories.output, f);
