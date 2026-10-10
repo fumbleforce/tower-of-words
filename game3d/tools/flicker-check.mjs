@@ -61,6 +61,9 @@ const CASES = process.env.CASES
         ];
 const only = process.env.ONLY?.split(',');
 if (only) CASES.splice(0, CASES.length, ...CASES.filter(([pl]) => only.includes(pl)));
+// GPU_WAIT=600: wait up to that many seconds for a GPU slot (default 60) when the machine is busy
+const gpuWait = +(process.env.GPU_WAIT || 60) * 1000,
+  WAIT = { gpuWaitMs: gpuWait, timeoutMs: gpuWait + 285000 };
 const fails = [];
 await withBrowserJob('flicker-check', async (browser) => {
   const phone = +W < 700;
@@ -187,7 +190,7 @@ await withBrowserJob('flicker-check', async (browser) => {
       `${bad ? 'FAIL' : 'ok  '} ${name}: ${r.n} flickering pixels${r.n ? ` in x ${r.box[0]}-${r.box[2]}, y ${r.box[1]}-${r.box[3]}` : ''}${errs.length ? ' | errors: ' + errs.join(' | ') : ''}`,
     );
   }
-});
+}, WAIT);
 console.log(
   fails.length
     ? `FAIL flicker: ${fails.join(', ')} (marked stills in ${out})`

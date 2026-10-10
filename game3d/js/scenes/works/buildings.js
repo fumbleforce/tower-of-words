@@ -199,12 +199,14 @@ function* plant(p, plain) {
     [x1 + 0.06, 1.75, P.PLANT_DOOR.z + w / 2 + 1.0],
     Math.PI / 2,
   );
-  // ivy up the south-east corner
+  // ivy up the south-east corner; each clump 4 mm thicker than one of another green (clumps of one depth
+  // overlapping in different greens flickered)
   for (let k = 0; k < 26; k++) {
     const u = (k * 0.37) % 1.8,
-      y = ((k * 0.61) % 1) * (2.6 + u * 1.6);
-    p.box(C.ivy[k % 3], 0.5, 0.55, 0.12, x1 - 0.2 - u, y, z1 + 0.08, NO);
-    if (k % 2) p.box(C.ivy[(k + 1) % 3], 0.12, 0.5, 0.5, x1 + 0.08, y * 0.9, z1 - 0.3 - u * 0.8, NO);
+      y = ((k * 0.61) % 1) * (2.6 + u * 1.6),
+      d = 0.006 + 0.004 * (k % 6); // and clear of the corner pier's face (0.14 out)
+    p.box(C.ivy[k % 3], 0.5, 0.55, 0.12 + d, x1 - 0.2 - u, y, z1 + 0.08 + d / 2, NO);
+    if (k % 2) p.box(C.ivy[(k + 1) % 3], 0.12 + d, 0.5, 0.5, x1 + 0.08 + d / 2, y * 0.9, z1 - 0.3 - u * 0.8, NO);
   }
   yield;
 }
