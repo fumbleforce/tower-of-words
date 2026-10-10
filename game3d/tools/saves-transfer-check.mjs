@@ -3,6 +3,7 @@
 // imports that file into slot 7, refuses a file that isn't a save, then loads slot 7 and checks the game plays it.
 //   node game3d/tools/saves-transfer-check.mjs [w] [h]    writes game3d/shots/saves-transfer/<w>x<h>/, PASS or FAIL
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import fixture from '../test/fixtures/save-v1.json' with { type: 'json' };
@@ -14,6 +15,7 @@ const base = `http://127.0.0.1:8771/${path.relative(repo, G)}`;
 const out = path.join(G, `shots/saves-transfer/${W}x${H}`);
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
+const files = fs.mkdtempSync(path.join(os.tmpdir(), 'saves-transfer-')); // the exported and the junk file
 const phone = +W < 700;
 const fails = [];
 const check = (ok, what) => {
@@ -78,7 +80,7 @@ await withBrowserJob('saves-transfer-check', async (b) => {
     p.waitForEvent('download', { timeout: 8000 }),
     p.locator('#saves .slot[data-id="5"]').click(),
   ]);
-  const file = path.join(out, dl.suggestedFilename());
+  const file = path.join(files, dl.suggestedFilename());
   await dl.saveAs(file);
   const exported = JSON.parse(fs.readFileSync(file, 'utf8'));
   check(
@@ -118,7 +120,7 @@ await withBrowserJob('saves-transfer-check', async (b) => {
   await shot('4-imported');
 
   // a file that isn't a save
-  const junk = path.join(out, 'not-a-save.amakawa-save');
+  const junk = path.join(files, 'not-a-save.amakawa-save');
   fs.writeFileSync(junk, '{"hello":1}');
   const [chooser2] = await Promise.all([p.waitForEvent('filechooser'), p.locator('#saves [data-x="import"]').click()]);
   await chooser2.setFiles(junk);
@@ -175,5 +177,6 @@ await withBrowserJob('saves-transfer-check', async (b) => {
   check(!errs.length, `no page errors${errs.length ? ': ' + errs.slice(0, 3).join(' | ') : ''}`);
   await ctx.close();
 });
+fs.rmSync(files, { recursive: true, force: true });
 console.log(`${fails.length ? 'FAIL' : 'PASS'} saves-transfer-check ${W}x${H} (${out})`);
 process.exit(fails.length ? 1 : 0);
