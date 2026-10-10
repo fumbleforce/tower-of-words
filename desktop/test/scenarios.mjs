@@ -236,6 +236,13 @@ export const scenarios = {
     return { pass: ctx.running(), windowMs };
   },
 
+  // what a launch shows first (a release, by eye): a screenshot after 6 s
+  async first(ctx, { out }) {
+    await sleep(6000);
+    look(ctx, path.join(out, 'first-screen.png'));
+    return { pass: ctx.running() };
+  },
+
   // the start page's Leave: Esc closes the app
   async leave(ctx, { out }) {
     await sleep(6000);
@@ -243,6 +250,27 @@ export const scenarios = {
     ctx.key('Escape');
     const code = await Promise.race([ctx.exited, sleep(8000).then(() => 'still running')]);
     return { pass: code !== 'still running', exit: code };
+  },
+
+  // the title's Settings, opened with a real click (dev build): every row's text, and a screenshot of each page
+  async settings(ctx, { out }) {
+    const page = await ctx.page();
+    await passGate(ctx, page);
+    await page.waitForFunction(() => window.__game?.place && document.body.classList.contains('at-title'), null, { timeout: 120000 });
+    await page.evaluate(() => document.getElementById('opening')?.remove());
+    const box = await page.locator('#title .msettings').boundingBox();
+    ctx.click(Math.round(box.x + box.width / 2), Math.round(box.y + box.height / 2));
+    await sleep(1200);
+    ctx.shot(path.join(out, 'settings-1.png'));
+    const text = [];
+    for (let i = 0; i < 8; i++) {
+      text.push(await page.evaluate(() => document.querySelector('.settings, #settings, [class*=settings]')?.innerText || ''));
+      await page.mouse.wheel(0, 600);
+      await sleep(300);
+    }
+    ctx.shot(path.join(out, 'settings-2.png'));
+    const all = [...new Set(text.join('\n').split('\n').map((s) => s.trim()).filter(Boolean))];
+    return { pass: all.length > 0, rows: all };
   },
 
   // cold start and the first place (dev build): launch to the title, then New game's Start to a player who can walk
