@@ -8,7 +8,7 @@ export { ITEMS } from './gameplay/items.js';
 // (story/FORMAT.md, "Sim data"), story/people.js (People panel text), js/bonds/cast.js (tastes, registers,
 // relations) and js/bonds/day1.js (day 1's moments, by node name). The maths is js/bonds/model.js.
 import { flags, cond } from './narrative/state.js';
-import { known, seen, WORDS, COMMANDS } from './lang.js';
+import { known, seen, WORDS, COMMANDS, learnedAt, setLearnWhere, loadLearned } from './lang.js';
 import { ui, sfx } from './ui.js';
 import { Bonds, STEPS, dateOf, safeKey } from './bonds/model.js';
 import { CAST, WORD_REGISTER } from './bonds/cast.js';
@@ -64,6 +64,7 @@ let G = null; // the game, once installed
 export function installSim(game) {
   if (G === game) return;
   G = game;
+  setLearnWhere(() => ({ day: sim.day || 1, place: game.place?.name || '', period: sim.period || '' }));
   game.mc = MC; // the protagonist (mc.js) and the cast by role (roles.js; a save brings its own)
   game.cast ||= newCast();
   const H = game.hooks;
@@ -474,6 +475,7 @@ export function save(game) {
       flags: { ...flags },
       known: [...known],
       seen: [...seen],
+      learned: { ...learnedAt },
       found: [...game.found],
       visited: visitedList(), // the places he has been to, for the map (travel/visited.js)
       place: game.place && game.place.name,
@@ -528,6 +530,7 @@ export function restore(game, d) {
   markPeriod(sim.period, PERIODS); // a new day's opening save carries the last day's evening
   for (const k of d.known || []) known.add(k);
   for (const k of d.seen || []) seen.add(k);
+  loadLearned(d.learned, d.day);
   for (const f of d.found || []) game.found.add(f);
   const r = d.rel || {};
   if (!bonds.load(r.bonds)) {

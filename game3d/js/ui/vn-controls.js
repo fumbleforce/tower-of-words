@@ -54,7 +54,7 @@ const answering = () => typing() || choosing();
 const blocked = () =>
   document.body.classList.contains('at-title') ||
   !!shell()?.isPaused?.() ||
-  !!document.querySelector('.layer.in, #ui .panel:not([hidden]), #cmdsPanel:not([hidden]), #sayMenu:not([hidden])');
+  !!document.querySelector('.layer.in, #ui .panel:not([hidden]), #sayMenu:not([hidden])');
 
 // ---------- the modes ----------
 function sync() {

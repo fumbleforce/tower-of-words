@@ -24,7 +24,7 @@ export const WORDS = {
     cmd: true,
     voice: 'eric-akete',
   },
-  kite: { ja: '来て', ro: 'kite', en: 'come', cmd: true, voice: 'eric-kite' },
+  kite: { ja: '来て', kana: 'きて', ro: 'kite', en: 'come', cmd: true, voice: 'eric-kite' },
   ugoite: {
     ja: '動いて',
     alias: ['うごいて'],
@@ -35,6 +35,7 @@ export const WORDS = {
   },
   irete: {
     ja: '入れて',
+    kana: 'いれて',
     ro: 'irete',
     en: 'pour, make (tea)',
     cmd: true,
@@ -42,6 +43,7 @@ export const WORDS = {
   },
   dashite: {
     ja: '出して',
+    kana: 'だして',
     ro: 'dashite',
     en: 'give it out',
     cmd: true,
@@ -49,12 +51,13 @@ export const WORDS = {
   },
   tomatte: {
     ja: '止まって',
+    kana: 'とまって',
     ro: 'tomatte',
     en: 'stop',
     cmd: true,
     voice: 'eric-tomatte',
   },
-  honsha: { ja: '本社', ro: 'honsha', en: 'head office' },
+  honsha: { ja: '本社', kana: 'ほんしゃ', ro: 'honsha', en: 'head office' },
   tsugiwa: { ja: 'つぎは', ro: 'tsugi wa', en: 'next' },
   ohayo: {
     ja: 'おはようございます',
@@ -82,12 +85,13 @@ export const WORDS = {
   },
   otsukare: {
     ja: 'お疲れさまです',
+    kana: 'おつかれさまです',
     ro: 'otsukaresama desu',
     en: 'the everyday hello at work',
   },
   // Eric never says it, so the replay is Mio's slow word clip (audio/word-gaijin.mp3), not an eric- clip
-  gaijin: { ja: '外人', ro: 'gaijin', en: 'foreigner', voice: 'word-gaijin' },
-  kotodama: { ja: '言霊', ro: 'kotodama', en: 'words with power in them' },
+  gaijin: { ja: '外人', kana: 'がいじん', ro: 'gaijin', en: 'foreigner', voice: 'word-gaijin' },
+  kotodama: { ja: '言霊', kana: 'ことだま', ro: 'kotodama', en: 'words with power in them' },
   // day 2's words (story/day2/words.js): phrases, unknown until typed there
   ...DAY2.WORDS,
   // day 3's (story/day3/words.js): koko, typed at the plaza's map
@@ -225,10 +229,33 @@ export const SAYABLE = [...PHRASES, ...COMMANDS];
 
 // the words Eric has been taught in play (typed, `learn` or `offer`); nothing else counts as known
 export const known = new Set();
+// when and where each one was learned, for the Words panel: { day, place, period, n } (n counts up, so the panel can
+// list a day's words in the order they came). sim.js says where Eric is (setLearnWhere) and saves the record.
+export const learnedAt = {};
+let learnWhere = () => null;
+export function setLearnWhere(fn) {
+  learnWhere = fn;
+}
 export function learn(id) {
   const isNew = !known.has(id);
   known.add(id);
+  if (isNew) learnedAt[id] = { ...(learnWhere() || {}), n: Object.keys(learnedAt).length + 1 };
   return isNew;
+}
+// a save's record (sim.js restore); a day-1 save from before the record knows its words are all day 1's
+export function loadLearned(rec, day = 1) {
+  for (const k of Object.keys(learnedAt)) delete learnedAt[k];
+  Object.assign(learnedAt, rec || {});
+  for (const k of known) if (!learnedAt[k] && (day || 1) === 1) learnedAt[k] = { day: 1 };
+}
+// a word in kana: its `kana` spelling, else the first all-kana alias, else the word itself when it is kana already
+const KANA_ONLY = /^[\u3040-\u30ff\u30fc\s]+$/;
+export function kanaOf(id) {
+  const w = WORDS[id];
+  if (!w) return '';
+  if (w.kana) return w.kana;
+  if (KANA_ONLY.test(w.ja)) return w.ja;
+  return (w.alias || []).find((a) => KANA_ONLY.test(a)) || '';
 }
 
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');

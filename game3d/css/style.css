@@ -71,19 +71,6 @@ body.phone .mark .tag .key { display: none; }
 #wordsBtn .pips i { width: 7px; height: 7px; border-radius: 2px; background: #4a5160; }
 #wordsBtn .pips i.p2 { background: #9a8a80; }
 #wordsBtn .pips i.p3 { background: var(--jp); }
-#wordsPanel { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(12, 14, 18, 0.55); }
-#wordsPanel[hidden] { display: none; }
-#wordsPanel .card { width: min(420px, calc(100vw - 32px)); padding: 18px 18px 14px; border-radius: 14px; background: #1d2129; border: 1px solid var(--panel-edge); }
-#wordsPanel .head { font-weight: 700; margin-bottom: 10px; }
-#wordsPanel ul { list-style: none; margin: 0 0 12px; padding: 0; }
-#wordsPanel li { display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto auto; column-gap: 12px; padding: 8px 0; border-top: 1px solid rgba(255,255,255,.06); }
-#wordsPanel li .jp { grid-row: span 2; font-size: 22px; color: var(--jp); font-weight: 700; align-self: center; }
-#wordsPanel li .ro { color: var(--ink); }
-#wordsPanel li .en { color: var(--ink-dim); font-size: 14px; grid-column: 2; }
-#wordsPanel li .lv { grid-row: 1 / span 2; grid-column: 3; display: flex; gap: 3px; align-self: center; }
-#wordsPanel li .lv i, #wordsPanel li .lv b { width: 8px; height: 8px; border-radius: 2px; background: var(--jp); }
-#wordsPanel li .lv b { background: #3c424e; }
-#wordsPanel .close { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--panel-edge); background: #2a303b; cursor: pointer; }
 
 /* ---------- the train's LED board ---------- */
 #board { position: absolute; left: 50%; top: 64px; transform: translateX(-50%) translateY(-8px); opacity: 0; transition: opacity .35s, transform .35s; }
@@ -150,16 +137,6 @@ body.phone .kword { font-size: 28px; }
   #cmdsBtn.gain .n { animation: none; }
   @keyframes wordgainR { 0%, 25% { border-color: var(--accent); } }
 }
-#cmdsPanel { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(12, 14, 18, 0.55); }
-#cmdsPanel[hidden] { display: none; }
-#cmdsPanel .card { width: min(420px, calc(100vw - 32px)); padding: 18px 18px 14px; border-radius: 14px; background: #1d2129; border: 1px solid var(--panel-edge); }
-#cmdsPanel .head { font-weight: 700; }
-#cmdsPanel .note { margin: 4px 0 10px; color: var(--ink-dim); font-size: 14px; }
-#cmdsPanel ul { list-style: none; margin: 0 0 12px; padding: 0; }
-#cmdsPanel li { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; padding: 8px 0; border-top: 1px solid rgba(255,255,255,.06); }
-#cmdsPanel li .jp { grid-row: span 2; font-size: 24px; align-self: center; }
-#cmdsPanel li .en { color: var(--ink-dim); font-size: 14px; }
-#cmdsPanel .close, #sayMenu .cancel { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--panel-edge); background: #2a303b; cursor: pointer; }
 #sayBtn { position: absolute; right: 16px; bottom: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 92px; height: 92px; border-radius: 50%; border: 2px solid rgba(111, 208, 198, .6); background: #1f2c30; color: var(--ink); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
 #sayBtn[hidden] { display: none; }
 #sayBtn .t { font-weight: 700; font-size: 17px; color: var(--accent); }
@@ -328,8 +305,8 @@ body.phone #giveBtn { right: 88px; bottom: 58px; }
 #talk .plain { color: var(--ink); }
 #talk .heardico { display: inline-block; width: 18px; height: 14px; margin-right: 8px; vertical-align: -1px; border-radius: 3px; background: linear-gradient(90deg, #6f7a8c 0 3px, transparent 3px 6px, #6f7a8c 6px 9px, transparent 9px 12px, #6f7a8c 12px 15px); opacity: .7; }
 #talk.heard .rl::after { content: " · in Japanese"; }
-#sayMenu .sec, #cmdsPanel li.sec { color: var(--ink-dim); font-size: 13px; margin: 4px 0 -2px; display: block; border: 0; }
-#cmdsPanel li.sec span { font-size: 12px; }
+#sayMenu .cancel { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--panel-edge); background: #2a303b; cursor: pointer; }
+#sayMenu .sec { color: var(--ink-dim); font-size: 13px; margin: 4px 0 -2px; display: block; border: 0; }
 .cmd.phrase { border-color: rgba(255, 201, 168, .35); background: #332c28; }
 .cmd.phrase .rd { color: #f0d6c6; }
 
@@ -429,8 +406,7 @@ body.phone #sayTip { left: 50%; right: auto; top: 96px; bottom: auto; }
 .chip { border-radius: var(--chip-r); border-color: var(--chip-edge); background: #252b35; min-height: 44px; font-size: 17px; }
 .chip .k { border-radius: 5px; }
 .chip:hover { border-color: rgba(111, 208, 198, .45); background: #2b323d; }
-.panel .card, #cmdsPanel .card { border-radius: 14px; border-color: var(--chip-edge); }
-#cmdsPanel .close, #sayMenu .cancel, .panel .close { border-radius: var(--chip-r); }
+.panel .card { border-radius: 14px; border-color: var(--chip-edge); }
 #sayMenu { border-radius: 14px; border-color: var(--chip-edge); }
 #talk .por.card img { border-radius: 14px; }
 
@@ -453,9 +429,6 @@ body.phone #sayTip { left: 50%; right: auto; top: 96px; bottom: auto; }
    the 7th word sat hidden under "Never mind", and よろしくおねがいします was cut short) */
 body:not(.phone) #sayMenu { width: min(360px, calc(100vw - 32px)); }
 body:not(.phone) #sayMenu .list { max-height: calc((100vh - 230px) / var(--ui, 1)); }
-#cmdsPanel li { grid-template-columns: 26px auto 1fr; align-items: center; }
-#cmdsPanel li .wi { grid-row: span 2; }
-#cmdsPanel li .jp { font-size: 19px; }
 
 /* emote bubbles: 2-3x the old size, a round bubble with a tail, drawn icons */
 .emote { position: absolute; left: 0; top: 0; margin: 0; min-width: 0; padding: 0; background: none; transform-origin: 50% 100%; pointer-events: none; z-index: 4; }
@@ -484,10 +457,6 @@ body.phone .emote.wide { width: 112px; }
 .cmd .cw, .chip.cmdchip .cw { flex: 1; }
 .cmd .jp, .chip.cmdchip .jp { overflow: hidden; text-overflow: ellipsis; }
 
-#cmdsPanel li.wrow { display: flex; align-items: center; gap: 12px; padding: 8px 2px; }
-#cmdsPanel li.wrow .cw { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-#cmdsPanel li.wrow .jp { font-size: 19px; white-space: nowrap; }
-#cmdsPanel li.wrow .rd { color: var(--ink-dim); font-size: 13px; }
 
 /* ---------- dialogue: Stage light (design/DIALOGUE-OVERLAY.md, direction 1; Jørgen's pick) ----------
    No box. A navy gradient rises from the bottom and the edges darken a little; the line sits in the band. Portraits
@@ -849,7 +818,7 @@ body.phone #end footer { padding-bottom: calc(18px + env(safe-area-inset-bottom)
 /* ---------- playtest 2 (Jørgen and his wife): one action menu, whole-screen continue, waiting, words to replay,
    UI that scales with the screen, bigger hints and goal ---------- */
 /* scale: every fixed-size piece of UI grows with the screen (settings.js sets --ui: 1 at 1366 x 860, up to 2) */
-body:not(.phone) :is(#top, #talk, #hint, #toast, #sayMenu, .panel .card, #cmdsPanel .card, .layer .pane, #end .card, #title .inner, #loadchip, #caption, #board, #liftInd) { zoom: var(--ui, 1); }
+body:not(.phone) :is(#top, #talk, #hint, #toast, #sayMenu, .panel .card, .layer .pane, #end .card, #title .inner, #loadchip, #caption, #board, #liftInd) { zoom: var(--ui, 1); }
 
 /* the action menu beside the current target */
 #sayBtn { display: none !important; }
@@ -882,7 +851,6 @@ body:has(.mark.near) .mark:not(.near):not(.goal) { opacity: .45; }
 /* the HUD stays above the tap-to-continue layer (Words, People, Bag and sound work during a line), and the panels
    above everything in the HUD, the goal arrow and the Say button included (the arrow covered "by heart" on phone) */
 #top { z-index: 2; }
-#cmdsPanel, .panel { z-index: 5; }
 #talkHit.go { cursor: pointer; }
 #talkHit.go:hover { background: linear-gradient(to top, rgba(111, 208, 198, .07), transparent 45%); }
 #talk.can-go { cursor: pointer; }
@@ -1143,10 +1111,6 @@ body.phone #actMenu .hd { padding: 5px 12px; font-size: 14px; }
 #actMenu.up::before { top: auto; bottom: -6px; border-width: 0 1px 1px 0; }
 #actMenu.down::before { top: -6px; border-width: 1px 0 0 1px; }
 /* Words panel: the dictionary word under a word met in a form (-te, -masu), and the one-line note on the ending */
-#cmdsPanel li.wrow .bf { color: var(--ink-dim); font-size: 12px; opacity: .85; }
-#cmdsPanel li.wrow .bf .bj { font-size: 13px; }
-#cmdsPanel li.fnote { display: block; border: 0; padding: 4px 2px 8px; color: var(--ink-dim); font-size: 12.5px; line-height: 1.4; }
-#cmdsPanel .card { max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; }
 /* something held up for Eric (ui/held-view.js): a phone screen or sheets of paper, never taking taps */
 /* desktop: to the right of the person the camera frames; phone: across the top, above them */
 #held { position: absolute; right: 5%; top: 8%; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 0; pointer-events: none; }

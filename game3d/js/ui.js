@@ -2,7 +2,7 @@ import { bagItemHTML } from './ui/bag-item.js';
 import { clockHTML, updateClock } from './ui/clock-button.js';
 export { PORTRAITS } from './ui/portrait-data.js';
 // HTML overlay: goal, words, the train's LED board, the talk panel, replies, fades, the end card.
-import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML, baseHTML, FORM_NOTE, BASE } from './lang.js';
+import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML } from './lang.js';
 import { settings, onSettings } from './settings.js';
 import { mountVoice, VOICE_CSS, voiceMode } from './speech.js';
 import { notePractice, needsPractice, pipsHTML, MASTERY_CSS } from './mastery.js';
@@ -121,7 +121,6 @@ export const ui = {
         <div class="more" aria-hidden="true"><span class="ch">Click to continue</span><i></i></div>
         <div class="wait" aria-hidden="true"><i></i><i></i><i></i></div>
       </div>
-      <div id="cmdsPanel" hidden><div class="card"><div class="head">Words you can say</div><p class="note">Use the Say button. It speaks to whoever or whatever is nearest.</p><ul></ul><button type="button" class="close">Close</button></div></div>
       <div id="peoplePanel" class="panel" hidden><div class="card"><div class="head">People</div><ul></ul><button type="button" class="close">Close</button></div></div>
       <div id="bagPanel" class="panel" hidden><div class="card"><div class="head">Bag</div><p class="yen"></p><ul></ul><button type="button" class="close">Close</button></div></div>
       <button id="giveBtn" type="button" hidden><span class="t">Give</span><span class="to"></span></button>
@@ -136,9 +135,6 @@ export const ui = {
       <div id="end" hidden></div>
     `;
     $('#cmdsBtn').onclick = () => this.showCmds();
-    $('#cmdsPanel .close').onclick = () => {
-      $('#cmdsPanel').hidden = true;
-    };
     $('#sayBtn').onclick = (e) => {
       e.stopPropagation();
       this.onSay && this.onSay();
@@ -329,28 +325,9 @@ export const ui = {
       b.classList.add('gain');
     }
   },
+  // the Words panel (ui/words-view.js): a layer of the shell's (menu.js)
   showCmds() {
-    const row = (id) => {
-      const w = WORDS[id];
-      return `<li class="wrow">${iconHTML(id)}<span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span>${baseHTML(id)}</span>${pipsHTML(id)}</li>`;
-    };
-    const ph = PHRASES.filter((id) => known.has(id)),
-      cm = COMMANDS.filter((id) => known.has(id));
-    // words he understands but doesn't say (外人 gaijin): no practice marks, they never go in the Say menu
-    const wd = [...known].filter((id) => WORDS[id] && !PHRASES.includes(id) && !COMMANDS.includes(id));
-    const wrow = (id) => {
-      const w = WORDS[id];
-      return `<li class="wrow"><span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span></li>`;
-    };
-    $('#cmdsPanel ul').innerHTML =
-      (ph.length
-        ? `<li class="sec">Phrases</li>${ph.some((id) => BASE[id]?.form === 'tai') ? `<li class="fnote">${FORM_NOTE.tai}</li>` : ''}${ph.map(row).join('')}`
-        : '') +
-      (cm.length
-        ? `<li class="sec">Commands <span>(they make old machines listen)</span></li><li class="fnote">${FORM_NOTE.te}</li>${cm.map(row).join('')}`
-        : '') +
-      (wd.length ? `<li class="sec">Words</li>${wd.map(wrow).join('')}` : '');
-    $('#cmdsPanel').hidden = false;
+    window.__shell?.toggleWords?.();
   },
   // the Say menu: resolves with a command id or null
   closeSayMenu() {
@@ -527,7 +504,7 @@ export const ui = {
     l.querySelector('.arrow').textContent = dir === 'down' ? '▼' : '▲';
   },
   menuClosed() {
-    return $('#sayMenu').hidden && $('#cmdsPanel').hidden && !document.querySelector('.panel:not([hidden])');
+    return $('#sayMenu').hidden && !document.querySelector('.panel:not([hidden]), #words:not([hidden])');
   },
   clock: updateClock,
   refreshPeople(n) {

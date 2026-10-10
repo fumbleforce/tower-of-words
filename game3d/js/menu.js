@@ -9,7 +9,7 @@
 //
 // QA: ?shell=title|settings|pause|save|load|loading|end opens that screen on its own (with made-up save data),
 // for screenshots of each screen in isolation (game3d/tools/shell-shots.mjs).
-import { ui, sfx, unlockAudio, pauseAudio } from './ui.js';
+import { ui, sfx, unlockAudio, pauseAudio, keyLabel } from './ui.js';
 import { settings } from './settings.js';
 import { sim, periodName } from './sim.js';
 import { startOnboarding, resetOnboarding } from './onboard.js';
@@ -23,6 +23,7 @@ import { snapshot, crossfade } from './places/crossfade.js';
 import { settingsView } from './ui/settings-view.js';
 import { createSaving, kv, store as slots } from './saves/actions.js';
 import { savesView } from './saves/view.js';
+import { wordsView } from './ui/words-view.js';
 import { KEYS, slotKey } from './saves/store.js';
 
 const Q = new URLSearchParams(location.search);
@@ -256,6 +257,8 @@ const openSaves = (mode) => savesPanel.open(mode);
 shell.saving = saving;
 shell.closeLayers = () => layers.slice().forEach((l) => closeLayer(l.el));
 Object.assign(shell, { openLayer, closeLayer }); // the map is a layer too (ui/map/view.js)
+// the Words panel, a layer too: the HUD's Words chip opens it (ui.js showCmds)
+shell.toggleWords = wordsView({ keyLabel, settings, sayWord: (id, row) => ui.sayWord(id, row), sfx }).toggle;
 saving.noteAutosave();
 
 // ---------- pause ----------
@@ -390,7 +393,7 @@ window.addEventListener(
       (e.code === 'Enter' || e.code === 'Space' || e.code === 'NumpadEnter') &&
       e.target &&
       e.target.tagName === 'BUTTON' &&
-      e.target.closest('#title, .layer, #end, #sayMenu, .panel, #cmdsPanel, #hint, #sayTip')
+      e.target.closest('#title, .layer, #end, #sayMenu, .panel, #hint, #sayTip')
     ) {
       e.stopImmediatePropagation();
       return;
@@ -452,7 +455,7 @@ window.addEventListener(
         return;
       }
       if (!$('#sayMenu')?.hidden) return; // ui.js closes the Say menu
-      for (const pnl of document.querySelectorAll('#cmdsPanel, .panel')) {
+      for (const pnl of document.querySelectorAll('.panel')) {
         if (!pnl.hidden) {
           pnl.hidden = true;
           e.preventDefault();

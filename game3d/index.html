@@ -60,6 +60,7 @@ html, body { margin: 0; height: 100%; background: #0e121c; }
   const mc = document.createElement('link'); mc.rel = 'stylesheet'; mc.href = 'css/map.css' + v; document.head.appendChild(mc);
   const ca = document.createElement('link'); ca.rel = 'stylesheet'; ca.href = 'css/camera.css' + v; document.head.appendChild(ca);
   const ng = document.createElement('link'); ng.rel = 'stylesheet'; ng.href = 'css/new-game.css' + v; document.head.appendChild(ng);
+  const wd = document.createElement('link'); wd.rel = 'stylesheet'; wd.href = 'css/words.css' + v; document.head.appendChild(wd);
   const imports = { three: './vendor/three/three.module.js', 'three/addons/': './vendor/' };
   for (const f of b.files) imports[new URL(f, location.href).href] = new URL(f + v, location.href).href;
   const map = document.createElement('script'); map.type = 'importmap'; if (nonce) map.nonce = nonce; map.textContent = JSON.stringify({ imports }); document.head.appendChild(map);

@@ -77,7 +77,7 @@ const STORY = { train: 'train', gate: 'gate', forecourt: 'forecourt', plaza: 'pl
 export async function readGame(load = file => import(pathToFileURL(G(file)).href)) {
   const defaults = DEFAULT_SPEAKERS, portraits = PORTRAITS, items = ITEMS;
   const { CAST } = await load('js/bonds/cast.js');
-  const { WORDS } = await load('js/lang.js');
+  const { WORDS, kanaOf } = await load('js/lang.js');
 
   // Labels come from the same declarations spread into the actual factories.
   const places = Object.fromEntries(Object.entries(PLACE_DETAILS).map(([id, details]) => {
@@ -147,7 +147,7 @@ export async function readGame(load = file => import(pathToFileURL(G(file)).href
   };
   // the People panel's names (story/people.js, the one home of the panel's text)
   const panel = Object.fromEntries(Object.entries((await load('story/people.js')).default).map(([p, v]) => [p, v.name]));
-  return { defaults, portraits, items, CAST, WORDS, places, stories, where, people, plate, label, panel, nodes, flagsSet, builtIn, personIn };
+  return { defaults, portraits, items, CAST, WORDS, kanaOf, places, stories, where, people, plate, label, panel, nodes, flagsSet, builtIn, personIn };
 }
 
 // ------------------------------------------------------------------ the checks
@@ -446,7 +446,8 @@ function checkWords(game) {
     const g = game.WORDS[w];
     if (!g) { bad(file, `\`${w}\` isn't in game3d/js/lang.js`); continue; }
     const kind = g.cmd ? 'command' : g.phrase ? 'phrase' : g.ui ? 'label' : 'word';
-    for (const [col, want] of [['Japanese', g.ja], ['Reading', g.ro], ['Meaning', g.en], ['Kind', kind]]) if (val(r[col]) !== want) bad(file, `\`${w}\`: ${col.toLowerCase()} is "${want}" in the game, "${val(r[col])}" in the doc`);
+    const kana = game.kanaOf(w) === g.ja ? '' : game.kanaOf(w);
+    for (const [col, want] of [['Japanese', g.ja], ['Kana', kana], ['Reading', g.ro], ['Meaning', g.en], ['Kind', kind]]) if (val(r[col]) !== want) bad(file, `\`${w}\`: ${col.toLowerCase()} is "${want}" in the game, "${val(r[col])}" in the doc`);
   }
   for (const w of Object.keys(game.WORDS)) if (!seen.has(w)) bad(file, `game3d/js/lang.js has \`${w}\`, "Words" doesn't`);
 }
