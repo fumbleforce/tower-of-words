@@ -148,3 +148,7 @@ game3d/build.json.*.tmp
 
 # the creator's Blender build outputs (tools/creator/blender/README.md); the GLBs are in the lock file
 /art/parts/blender/*.json
+
+# the desktop content pack key (desktop/pak/FORMAT.md) and the pack benchmark output
+/desktop/.key
+/desktop/.bench/
