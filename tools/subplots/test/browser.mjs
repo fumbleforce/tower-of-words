@@ -72,6 +72,11 @@ const privateParts = {
 const privateRows = [privateRow, ...Object.values(privateParts).map(({ id, node, title, count }) => ({ ...privateRow, id, node, title, count }))];
 
 const wait = ms => new Promise(r => setTimeout(r, ms));
+// The test server runs outside private mode, where private scenes are refused; their comments are answered here the
+// way the editor's server answers them in private mode (comments.mjs, on the fixture's folder).
+process.env.SUBPLOTS_ROOT = root;
+process.env.SUBPLOTS_STATE = path.join(root, 'state');
+const comments = await import('../comments.mjs');
 // image generator presets in realistic numbers, so the full-screen composer is checked with a full cast
 const named = (n, prefix, data = i => ({})) => Array.from({ length: n }, (_, i) => ({ id: `${prefix}${i}`, v: 1, data: { name: `${prefix[0].toUpperCase()}${prefix.slice(1)} ${i + 1}`, ...data(i) } }));
 const presets = {
@@ -124,10 +129,20 @@ try {
         return r.fulfill({ json: [] });
       });
       await page.route('**/api/subplots/pictures?*', r => r.fulfill({ json: sceneRuns }));
+      await page.route('**/api/subplots/comment', r => {
+        const body = r.request().postDataJSON();
+        if (!comments.isPrivate(body.id || 'public:')) return r.continue();
+        r.fulfill({ json: comments.run({ ...body, by: 'jorgen' }) });
+      });
+      await page.route('**/api/subplots/comments?*', async r => {
+        const ids = new URL(r.request().url()).searchParams.get('ids').split(',');
+        r.fulfill({ json: comments.run({ action: 'list', ids }) });
+      });
       // the private half of the status comes from the local provider, which QA never runs: fixture rows stand in
       await page.route('**/api/subplots/status', async r => {
         const real = await (await fetch(base + '/api/subplots/status')).json();
-        for (const row of privateRows) real.status[row.id] = { ...real.status[row.id], stage: 'pictures', label: '1 picture missing', draft: false };
+        const open = comments.run({ action: 'list', ids: privateRows.map(row => row.id) }).comments.filter(c => c.status === 'open');
+        for (const row of privateRows) real.status[row.id] = { stage: 'pictures', label: '1 picture missing', draft: false, comments: open.filter(c => c.scene === row.id).length };
         r.fulfill({ json: real });
       });
       await page.goto(base + '/tools/subplots/web/');
@@ -264,6 +279,12 @@ try {
       assert.match(await page.locator('.pop.thread').innerText(), /Done/);
       await page.keyboard.press('Escape');
       assert.ok(fs.existsSync(path.join(root, 'state/comments.json')), 'public comments sit with the drafts');
+      // outside private mode the server refuses anything private: reads, drafts, saves, comments
+      const post = (action, body) => fetch(`${base}/api/subplots/${action}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(x => x.status);
+      assert.equal(await post('draft', { id: privateRow.id, steps: [] }), 403);
+      assert.equal(await post('save', { id: privateRow.id, steps: [] }), 403);
+      assert.equal(await post('comment', { action: 'add', id: privateRow.id, text: 'x' }), 403);
+      assert.equal((await fetch(`${base}/api/subplots/comments?ids=${encodeURIComponent(privateRow.id)}`)).status, 403);
 
       // a private scene is labelled; its picture is replaced from the history
       await page.locator('[data-filter=private]').click();
