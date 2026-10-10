@@ -4,6 +4,8 @@ A plan for issue #357. It replaces the swimming-club plan in [cast.md](../../../
 
 Kuro wants to be wanted and to decide what happens next. Eric gets close to her by speaking Japanese to her, noticing what she wears, answering her personal questions plainly, and now and then disagreeing with her. If he only ever agrees, she gets bored. Her line runs from the reception counter to the pool, the izakaya and her own dining table, and every invitation on it comes from her.
 
+Swimming stays at the pool. The [10 October decision](../../../reviews/kuro-winter-venue-1/review.json) rules out adding winter, climate or a calendar. No seasonal closure or new year-round venue is required for this plan. The remaining correction to seasonal code is tracked in #436.
+
 ## Step 1: one more foreigner
 
 Earned on day 3, when she gives him her name. Before that she is the receptionist he passes each morning. On day 2 an English greeting gets "Good evening." and nothing else, and a Japanese one gets her brushing the dust off his sleeve and teaching him あなた. She remembers which of the two he chose.

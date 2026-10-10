@@ -172,6 +172,8 @@ Repair tickets are how the work reaches Eric (Jørgen, 2026-10-03: "the main sto
 
 ## Clubs
 
+**Scope correction, 10 October:** Kuro keeps swimming at the pool. Winter, climate and calendar expansion are outside the current scope ([decision](../../reviews/kuro-winter-venue-1/review.json)). The seasonal pool-to-gym behavior documented below describes existing code awaiting correction in [#436](https://github.com/fumbleforce/tower-of-words/issues/436), not an approved constraint on new scenes.
+
 Clubs are social spaces, not minigames (Jørgen, 2026-10-03: "It's just a social space where you can get to know certain people"). Each meets one evening a week, and a session is a scene with its people. Built in game3d/js/clubs/ (model.js, index.js); the clubs, their posters and session nodes are game3d/story/clubs.js (contract: FORMAT.md, Clubs).
 
 | Id | Club | Meets | Where | Members |

@@ -1,31 +1,36 @@
 {
-  "title": "Kuro's winter venue",
-  "date": "2026-10-10",
-  "by": "Codex QC",
-  "status": "open",
-  "issue": 428,
-  "multi": false,
-  "question": "The outdoor pool closes after day three, before Kuro can reach the planned 14-point swimming meeting. Should her later meetings use the winter gym, or should swimming remain available all year?",
-  "options": [
-    {
-      "id": "gym",
-      "label": "Use the winter gym",
-      "note": "Recommended: adapt the activity and booking dialogue to the existing winter gym. Keep the relationship choices, including her waiting for the player to invite her after a refusal."
-    },
-    {
-      "id": "swimming",
-      "label": "Keep swimming year-round",
-      "note": "Preserve swimming and establish a year-round venue and schedule. This requires additional setting and implementation work. After a refusal, the player still initiates the later invitation."
-    }
-  ],
-  "links": [
-    {
-      "label": "Narrative QC report",
-      "href": "bible/#doc/notes/qc/2026-10-10-narrative.md"
-    },
-    {
-      "label": "Current relationship plan",
-      "href": "bible/#doc/notes/characters/kuro/route.md"
-    }
-  ]
+ "title": "Kuro's winter venue",
+ "date": "2026-10-10",
+ "by": "Codex QC",
+ "status": "decided",
+ "issue": 436,
+ "multi": false,
+ "question": "The outdoor pool closes after day three, before Kuro can reach the planned 14-point swimming meeting. Should her later meetings use the winter gym, or should swimming remain available all year?",
+ "options": [
+  {
+   "id": "gym",
+   "label": "Use the winter gym",
+   "note": "Recommended: adapt the activity and booking dialogue to the existing winter gym. Keep the relationship choices, including her waiting for the player to invite her after a refusal."
+  },
+  {
+   "id": "swimming",
+   "label": "Keep swimming year-round",
+   "note": "Preserve swimming and establish a year-round venue and schedule. This requires additional setting and implementation work. After a refusal, the player still initiates the later invitation."
+  }
+ ],
+ "links": [
+  {
+   "label": "Narrative QC report",
+   "href": "bible/#doc/notes/qc/2026-10-10-narrative.md"
+  },
+  {
+   "label": "Current relationship plan",
+   "href": "bible/#doc/notes/characters/kuro/route.md"
+  }
+ ],
+ "decided": [
+  "swimming"
+ ],
+ "decision": "Keep Kuro swimming. Jørgen rejects the seasonal premise: no winter, climate or calendar is being added. Do not move her meetings to a winter gym or create a year-round venue requirement. Preserve the approved refusal behavior. Plan and scope correction: #428. Existing seasonal runtime cleanup: #436.",
+ "decided_at": "2026-10-10T15:28:07+0200"
 }
