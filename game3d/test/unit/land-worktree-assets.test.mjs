@@ -28,7 +28,7 @@ function fixture(t, initial = { [ASSET]: 'old locked bytes' }) {
   git(main, 'config', 'user.email', 'fixture@example.invalid');
   git(main, 'config', 'core.hooksPath', '/dev/null');
   // The land tool itself; LAND_LOCK keeps the fixture off the operational repository's landing lock.
-  for (const file of ['land.sh', 'land/land.mjs', 'land/runner.mjs', 'land/queue.mjs', 'land/impact.mjs'])
+  for (const file of ['land.sh', 'land/land.mjs', 'land/runner.mjs', 'land/queue.mjs', 'land/impact.mjs', 'land/baseline.mjs'])
     write(main, `tools/${file}`, fs.readFileSync(new URL(`../../../tools/${file}`, import.meta.url), 'utf8'));
   write(main, 'tools/check/landed-assets.mjs', fs.readFileSync(new URL('../../../tools/check/landed-assets.mjs', import.meta.url), 'utf8'));
   const lock = (root, files) => write(root, LOCK, JSON.stringify({ files: Object.fromEntries(

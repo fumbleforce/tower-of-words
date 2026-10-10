@@ -9,6 +9,8 @@ import { execFileSync, spawn } from 'node:child_process';
 import { isolatedGitEnvironment } from '../../../tools/lib/git-environment.mjs';
 import { ahead, halves, landInHalves, ordered, pickBatch, recover } from '../../../tools/land/queue.mjs';
 import { affectedBy, affectedPlaces, buildGraph, importsOf, lockDelta, planPlaces } from '../../../tools/land/impact.mjs';
+import { heldWarning, judgeOverages, worseLine } from '../../../tools/land/baseline.mjs';
+import { METRICS } from '../../tools/perf/place-budget-lib.mjs';
 
 const entry = (seq, fields = {}) => ({ id: `e${seq}`, seq, state: 'waiting', branch: `b${seq}`, ...fields });
 
@@ -115,6 +117,38 @@ test('places nothing can move reuse their last pass', () => {
   assert.deepEqual(planPlaces(['plaza'], {}, 'tip', impact).measure, ['plaza'], 'never measured: measured now');
 });
 
+test('a place over its ceiling is refused only when the land makes it worse than main', () => {
+  const over = [
+    { tier: 'phone', place: 'forecourt', metric: 'calls', value: 233, limit: 212, issue: 374, exception: true },
+    { tier: 'desktop', place: 'forecourt', metric: 'tris', value: 937000, limit: 921000, issue: 374, exception: true },
+  ];
+  const main = { phone: { forecourt: { calls: 231, tris: 349000 } }, desktop: { forecourt: { calls: 561, tris: 937000 } } };
+  // within the noise margin of main: lands, with a warning naming the place, its numbers and the issue
+  const same = judgeOverages(over, main);
+  assert.equal(same.worse.length, 0);
+  assert.deepEqual(same.held.map(o => [o.place, o.tier, o.base]), [['forecourt', 'phone', 231], ['forecourt', 'desktop', 937000]]);
+  const warning = heldWarning(same.held[0], METRICS);
+  for (const part of ['WARNING', 'forecourt (phone)', '233 draw calls', 'main measures 231', '212', '#374']) assert.ok(warning.includes(part), warning);
+  // worse than main beyond the margin: refused
+  const worse = judgeOverages([{ ...over[0], value: 240 }], main);
+  assert.deepEqual(worse.worse.map(o => o.base), [231]);
+  assert.match(worseLine(worse.worse[0], METRICS), /240 draw calls, over .*212 \(#374\), and main measures 231/);
+  // nothing on main to compare with (a new place, or main's didn't open), or the tip's place didn't open: refused
+  assert.equal(judgeOverages(over, { phone: {} }).worse.length, 2);
+  assert.equal(judgeOverages([over[0]], { phone: { forecourt: { error: 'boom' } } }).worse.length, 1);
+  assert.equal(judgeOverages([{ tier: 'phone', place: 'forecourt', error: 'did not open' }], main).worse.length, 1);
+  // load times get the wider margin
+  assert.equal(judgeOverages([{ tier: 'phone', place: 'office', metric: 'loadMs', value: 9500, limit: 8800 }],
+    { phone: { office: { loadMs: 8500 } } }).held.length, 1);
+});
+
+test("main's measurement of an over place is reused while nothing since can move it", () => {
+  const impact = (from, to) => (from === 'old' && to === 'main2' ? new Set(['plaza']) : 'all');
+  const plan = planPlaces(['forecourt', 'plaza', 'office'], { forecourt: 'old', plaza: 'old' }, 'main2', impact);
+  assert.deepEqual(plan.reused, { forecourt: 'old' });
+  assert.deepEqual(plan.measure, ['plaza', 'office']);
+});
+
 // ---------------------------------------------------------------- three real lands through tools/land.sh
 function fixture(t) {
   const base = fs.mkdtempSync(path.join(os.tmpdir(), 'land-queue-fixture-'));
@@ -131,7 +165,7 @@ function fixture(t) {
   git(main, 'config', 'user.name', 'Fixture');
   git(main, 'config', 'user.email', 'fixture@example.invalid');
   git(main, 'config', 'core.hooksPath', '/dev/null');
-  for (const file of ['land.sh', 'land/land.mjs', 'land/runner.mjs', 'land/queue.mjs', 'land/impact.mjs', 'check/landed-assets.mjs'])
+  for (const file of ['land.sh', 'land/land.mjs', 'land/runner.mjs', 'land/queue.mjs', 'land/impact.mjs', 'land/baseline.mjs', 'check/landed-assets.mjs'])
     write(main, `tools/${file}`, fs.readFileSync(new URL(`../../../tools/${file}`, import.meta.url), 'utf8'));
   // The commit check: counts its runs, takes a moment (so the other lands queue up behind the first), and fails a
   // tree with a bad file in it.
@@ -168,8 +202,51 @@ function fixture(t) {
   };
   const cpuRuns = () => fs.existsSync(runs) ? fs.readFileSync(runs, 'utf8').trim().split('\n').length : 0;
   const waitFor = async check => { for (let i = 0; i < 200 && !check(); i++) await new Promise(r => setTimeout(r, 50)); };
-  return { main, git, branch, land, cpuRuns, waitFor, queued };
+  return { base, main, git, write, branch, land, cpuRuns, waitFor, queued };
 }
+
+test('a place already over on main lands with a warning unless the branch makes it worse', { timeout: 60000 }, async t => {
+  const { base, main, git, write, land } = fixture(t);
+  // One place, forecourt, whose phone draw calls are whatever game3d/calls.txt says; its ceiling is 212, main has 231.
+  const runs = path.join(base, 'budget-runs');
+  write(main, 'game3d/js/main.js', '// the game\n');
+  write(main, 'game3d/js/places/forecourt.js', '// forecourt\n');
+  write(main, 'game3d/js/places/definitions.js', "export const PLACE_FILES = { forecourt: 'game3d/js/places/forecourt.js' };\n");
+  write(main, 'game3d/calls.txt', '231\n');
+  write(main, 'game3d/tools/perf/place-budget-lib.mjs', fs.readFileSync(new URL('../../tools/perf/place-budget-lib.mjs', import.meta.url), 'utf8'));
+  write(main, 'game3d/tools/perf/place-budgets.json', JSON.stringify({ tiers: { phone: {} }, budgets: { phone: { calls: 200 } },
+    places: { forecourt: { phone: { calls: { max: 212, issue: 374 } } } } }));
+  write(main, 'game3d/tools/perf/place-budget.mjs', `
+    import fs from 'node:fs';
+    const calls = Number(fs.readFileSync('game3d/calls.txt', 'utf8'));
+    fs.appendFileSync(${JSON.stringify(runs)}, process.cwd() + ' ' + calls + '\\n');
+    const json = process.argv[process.argv.indexOf('--json') + 1];
+    fs.writeFileSync(json, JSON.stringify({ results: { phone: { forecourt: { calls } } } }));
+    console.log(calls > 212 ? 'FAIL place budgets: 1 over' : 'PASS place budgets');
+    process.exit(calls > 212 ? 1 : 0);
+  `);
+  write(main, 'tools/check/head-boot.mjs', "console.log('boot: PASS');\n");
+  git(main, 'add', '.');
+  git(main, 'commit', '--quiet', '-m', 'a place over its ceiling');
+  const change = (name, file, text) => {
+    const wt = path.join(main, '.claude/worktrees', name);
+    git(main, 'worktree', 'add', '--quiet', '-b', name, wt, 'main');
+    write(wt, file, text);
+    git(wt, 'commit', '--quiet', '-am', name);
+  };
+  change('same', 'game3d/js/main.js', '// the game, shared code that moves every place\n');
+  const same = await land('same');
+  assert.equal(same.code, 0, same.out);
+  assert.match(same.out, /WARNING: forecourt \(phone\) is over its known-exception ceiling 212 \(#374\) with 231 draw calls, but main measures 231/);
+  const measured = fs.readFileSync(runs, 'utf8').trim().split('\n');
+  assert.equal(measured.length, 2, 'the tip, then main once');
+  assert.match(measured[1], /land-base 231$/);
+  change('worse', 'game3d/calls.txt', '240\n');
+  const worse = await land('worse');
+  assert.equal(worse.code, 1, worse.out);
+  assert.match(worse.out, /REFUSED: this land makes a place worse than main.*forecourt \(phone\): 240 draw calls.*main measures 231/s);
+  assert.equal(git(main, 'log', '--format=%s', '-1', 'main'), 'same');
+});
 
 test('lands that queue up behind a running one land together, and a bad one is refused alone', { timeout: 60000 }, async t => {
   const { main, git, branch, land, cpuRuns, waitFor, queued } = fixture(t);

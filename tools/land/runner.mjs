@@ -4,7 +4,8 @@
 // them. A failing batch is split in halves (queue.mjs, landInHalves) until the bad branch is refused alone. The
 // checks are the ones tools/land.sh always ran, each from the candidate's own tree: the commit checks
 // (tools/check/commit-cpu.mjs, on exactly that commit), the place budgets when game3d/ changed (only the places the
-// batch can move; the others reuse their last pass, impact.mjs), then, once main has moved, the asset handoff
+// batch can move; the others reuse their last pass, impact.mjs; a place over its ceiling is refused only when it is
+// worse than on main, baseline.mjs), then, once main has moved, the asset handoff
 // (tools/check/landed-assets.mjs, per branch) and the boot check (tools/check/head-boot.mjs).
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -12,6 +13,8 @@ import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { appendLog, landInHalves, print, update, writeJson } from './queue.mjs';
 import { gitImpact, planPlaces } from './impact.mjs';
+import { heldWarning, judgeOverages, worseLine } from './baseline.mjs';
+import { pathToFileURL } from 'node:url';
 
 const MOVES = 5;  // rounds when main moves during the checks (a commit straight to main)
 
@@ -110,23 +113,27 @@ export function createRunner({ main, mainWt, paths, logBase }) {
     for (const rel of copies) fs.rmSync(path.join(cand, rel), { force: true });
     fs.rmSync(copiesFile, { force: true });
   };
-  const ensureCandidate = base => {
-    if (!worktreeListed(cand)) {
+  // A detached worktree land.sh keeps, clean and at the given commit: the candidate, and main's own tree for the
+  // place budgets (baseTree).
+  const ensureTree = (dir, commit, what, tidyFirst = () => {}) => {
+    const tg = (...args) => run('git', ['-c', 'core.hooksPath=/dev/null', ...args], dir);
+    if (!worktreeListed(dir)) {
       git('worktree', 'prune');
-      if (fs.existsSync(cand)) throw new Error(`${cand} exists but is not a worktree; move it away`);
-      const r = git('worktree', 'add', '--quiet', '--detach', cand, base);
-      if (r.code) throw new Error(`could not make the land candidate worktree: ${r.err}`);
+      if (fs.existsSync(dir)) throw new Error(`${dir} exists but is not a worktree; move it away`);
+      const r = git('worktree', 'add', '--quiet', '--detach', dir, commit);
+      if (r.code) throw new Error(`could not make the ${what} worktree: ${r.err}`);
     }
-    dropCopies();
-    cg('rebase', '--abort');
-    cg('reset', '--quiet', '--hard');
-    cg('clean', '-fdq');  // untracked, not ignored: links to locked files git tracks in some commits
-    if (cg('checkout', '--quiet', '--detach', base).code) {
-      cg('clean', '-fdxq');
-      const r = cg('checkout', '--quiet', '--detach', base);
-      if (r.code) throw new Error(`could not check out main in the land candidate: ${r.err}`);
+    tidyFirst();
+    tg('rebase', '--abort');
+    tg('reset', '--quiet', '--hard');
+    tg('clean', '-fdq');  // untracked, not ignored: links to locked files git tracks in some commits
+    if (tg('checkout', '--quiet', '--detach', commit).code) {
+      tg('clean', '-fdxq');
+      const r = tg('checkout', '--quiet', '--detach', commit);
+      if (r.code) throw new Error(`could not check out ${short(commit)} in the ${what} worktree: ${r.err}`);
     }
   };
+  const ensureCandidate = base => ensureTree(cand, base, 'land candidate', dropCopies);
   const worktreeListed = wt => git('worktree', 'list', '--porcelain').out.split('\n').includes(`worktree ${wt}`);
   const build = (group, base) => {
     ensureCandidate(base);
@@ -198,14 +205,68 @@ export function createRunner({ main, mainWt, paths, logBase }) {
     if (Object.keys(reused).length) say(chain, `place budgets: ${Object.keys(reused).join(', ')} reuse an earlier pass (nothing since then can move them)`);
     if (!measure.length) return { ok: true };
     say(chain, `measuring ${measure.length === places.length ? 'every place' : measure.join(', ')} against its budget (game3d/tools/perf/place-budget.mjs)`);
-    const started = Date.now(), log = `${logBase}.budget-${short(tip)}`;
-    const code = await longRun('node', [budgeter, ...(measure.length === places.length ? [] : ['--places', measure.join(',')])], cand, log);
+    const started = Date.now(), log = `${logBase}.budget-${short(tip)}`, json = `${log}.json`;
+    fs.rmSync(json, { force: true });
+    const code = await longRun('node', [budgeter, ...(measure.length === places.length ? [] : ['--places', measure.join(',')]), '--json', json], cand, log);
     for (const line of fs.readFileSync(log, 'utf8').split('\n').filter(l => /^(PASS|FAIL|DEFERRED|warning|note)|^ {2}/.test(l))) say(chain, line);
     if (code === 75) { say(chain, `WARNING: the place budgets were deferred (machine or GPU busy), so ${short(tip)} is unmeasured; run: node game3d/tools/perf/place-budget.mjs`); return { ok: true }; }
-    if (code) return { ok: false, message: `a place is over its budget on ${short(tip)} (above; the full table: ${log}); main is unchanged` };
+    let passed = measure;
+    if (code) {
+      // Over on the tip: refused only if the batch makes a place worse than main (baseline.mjs).
+      const refused = `a place is over its budget on ${short(tip)} (above; the full table: ${log}); main is unchanged`;
+      let over, lib;
+      try {
+        lib = await import(pathToFileURL(path.join(cand, 'game3d/tools/perf/place-budget-lib.mjs')).href + `?${tip}`);  // the tip's own rules, not a cached copy
+        over = lib.overBudget(JSON.parse(fs.readFileSync(path.join(cand, 'game3d/tools/perf/place-budgets.json'), 'utf8')), JSON.parse(fs.readFileSync(json, 'utf8')).results);
+      } catch { return { ok: false, message: refused }; }
+      if (!over.length || over.some(o => o.error)) return { ok: false, message: refused };
+      const overPlaces = [...new Set(over.map(o => o.place))];
+      say(chain, `place budgets: ${overPlaces.join(', ')} over on ${short(tip)}; comparing with main ${short(base)}`);
+      const baseline = await baselineFor(chain, overPlaces, base, impact);
+      if (baseline.error) return { ok: false, message: `${refused}\ncould not measure main to compare with: ${baseline.error}` };
+      const { worse, held } = judgeOverages(over, baseline.results);
+      if (worse.length) return { ok: false, message: `this land makes a place worse than main, over its budget:\n${worse.map(o => '  ' + worseLine(o, lib.METRICS)).join('\n')}\n(the full table: ${log}); main is unchanged` };
+      say(chain, '============================================================');
+      for (const o of held) say(chain, heldWarning(o, lib.METRICS));
+      say(chain, '============================================================');
+      passed = measure.filter(p => !overPlaces.includes(p));  // over places are measured again next time, so the warning stays
+    }
     say(chain, `place budgets passed in ${Math.round((Date.now() - started) / 1000)} s`);
-    saveCache({ budget: { ...(cache().budget || {}), ...Object.fromEntries(measure.map(p => [p, tip])) } });
+    saveCache({ budget: { ...(cache().budget || {}), ...Object.fromEntries(passed.map(p => [p, tip])) } });
     return { ok: true };
+  };
+  // main's numbers for places over budget on the tip: { results: { tier: { place: result } } } or { error }. A place
+  // reuses main's last measurement (cache.baseline: { place: { commit, results } }) while nothing since can move it.
+  const baseTree = path.join(main, '.claude/worktrees/land-base');
+  const baselineFor = async (chain, places, base, impact) => {
+    const stored = cache().baseline || {};
+    const onBase = new Set(impact.placesAt(base)), wanted = places.filter(p => onBase.has(p));
+    const { measure, reused } = planPlaces(wanted, Object.fromEntries(Object.entries(stored).map(([p, b]) => [p, b.commit])), base, impact.impact);
+    const results = {};
+    const add = (place, byTier) => { for (const [tier, r] of Object.entries(byTier)) (results[tier] ||= {})[place] = r; };
+    for (const place of Object.keys(reused)) add(place, stored[place].results);
+    if (Object.keys(reused).length) say(chain, `place budgets: main's ${Object.keys(reused).join(', ')} reuse the measurement at ${Object.values(reused).map(short).join(', ')} (nothing since can move them)`);
+    if (!measure.length) return { results };
+    try { ensureTree(baseTree, base, 'land base'); } catch (error) { return { error: error.message }; }
+    const setup = path.join(baseTree, 'tools/worktree.sh');
+    if (fs.existsSync(setup)) run(setup, ['setup', baseTree], baseTree);
+    const budgeter = path.join(baseTree, 'game3d/tools/perf/place-budget.mjs');
+    if (!fs.existsSync(budgeter)) return { error: `main ${short(base)} has no place budget tool` };
+    say(chain, `measuring ${measure.join(', ')} on main ${short(base)} to compare`);
+    const log = `${logBase}.budget-base-${short(base)}`, json = `${log}.json`;
+    fs.rmSync(json, { force: true });
+    const code = await longRun('node', [budgeter, '--places', measure.join(','), '--json', json], baseTree, log);
+    if (code === 75) return { error: `deferred (machine or GPU busy); log: ${log}` };
+    let measured;
+    try { measured = JSON.parse(fs.readFileSync(json, 'utf8')).results; } catch { return { error: `no numbers came out (log: ${log})` }; }
+    const fresh = {};
+    for (const place of measure) {
+      const byTier = Object.fromEntries(Object.entries(measured).filter(([, r]) => r[place]).map(([tier, r]) => [tier, r[place]]));
+      add(place, byTier);
+      if (Object.values(byTier).length && Object.values(byTier).every(r => !r.error)) fresh[place] = { commit: base, results: byTier };
+    }
+    saveCache({ baseline: { ...(cache().baseline || {}), ...fresh } });
+    return { results };
   };
 
   // ------------------------------------------------------------ main moves
