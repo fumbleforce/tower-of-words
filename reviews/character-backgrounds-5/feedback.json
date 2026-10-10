@@ -12,7 +12,7 @@
   }
  },
  "comment": "keep the defaults as you say",
- "read": false,
+ "read": true,
  "history": [
   {
    "sent": "2026-10-10T10:54:39+0200",
