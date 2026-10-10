@@ -1,0 +1,27 @@
+{
+ "sent": "2026-10-10T10:43:07+0200",
+ "picked": [
+  "mio",
+  "kuro"
+ ],
+ "options": {
+  "mio": {
+   "star": false,
+   "reject": false,
+   "comment": "4 is fine for room"
+  },
+  "kuro": {
+   "star": false,
+   "reject": false,
+   "comment": "second option"
+  },
+  "rei": {
+   "star": false,
+   "reject": false,
+   "comment": "\"I got there before I thought about it\" is a reallly terrible ai slop line, dont.\n\nprogression is too slow when she is the one in control"
+  }
+ },
+ "comment": "",
+ "read": false,
+ "history": []
+}
