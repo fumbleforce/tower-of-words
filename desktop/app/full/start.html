@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amakawa</title>
+<style>
+html, body { margin: 0; height: 100%; background: #0e121c; color: #eef0f4; font: 500 16px/1.5 "Zen Kaku Gothic New", "Noto Sans JP", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+body { display: grid; place-items: center; padding: 24px; box-sizing: border-box; background: radial-gradient(120% 80% at 70% 0%, #1b2436 0%, #0e121c 60%); }
+main { width: min(520px, 100%); }
+.mark { font-weight: 700; font-size: 15px; letter-spacing: .34em; color: #a9b1bf; margin: 0 0 28px; }
+h1 { margin: 0 0 14px; font-size: 30px; line-height: 1.2; font-weight: 700; }
+p { margin: 0 0 12px; color: #d3d8e0; font-size: 17px; }
+.rule { width: 48px; height: 2px; border-radius: 1px; background: #6fd0c6; margin: 0 0 22px; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+a { padding: 13px 26px; border-radius: 12px; font-weight: 700; font-size: 18px; text-decoration: none; outline: none; transition: box-shadow .15s, background .15s, border-color .15s; }
+a.yes { background: #6fd0c6; color: #0f2624; border: 1px solid #6fd0c6; }
+a.no { background: transparent; color: #eef0f4; border: 1px solid rgba(255, 255, 255, .2); }
+a:focus-visible, a.focus { box-shadow: 0 0 0 3px #0e121c, 0 0 0 5px #eef0f4; }
+a.no:hover { border-color: rgba(111, 208, 198, .5); }
+.keys { margin-top: 18px; color: #a9b1bf; font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="mark">AMAKAWA</div>
+  <h1>For adults only</h1>
+  <div class="rule"></div>
+  <p>Everyone in this game is a fictional adult, 18 or older.</p>
+  <p>This edition has sexual content. Play it only if you are 18 or older and it is legal where you live.</p>
+  <div class="btns">
+    <a class="yes" href="/shell/continue">I am 18 or older, continue</a>
+    <a class="no" href="/shell/leave">Leave</a>
+  </div>
+  <div class="keys">Arrow keys or the pad to choose, Enter or A to confirm, Esc or B to leave</div>
+</main>
+<script>
+(() => {
+  const btns = [...document.querySelectorAll('.btns a')];
+  let i = 0;
+  const focus = (n) => { i = (n + btns.length) % btns.length; btns[i].focus({ focusVisible: true }); btns.forEach((b, k) => b.classList.toggle('focus', k === i)); };
+  const go = (k) => location.assign(btns[k].href);
+  btns.forEach((b, k) => b.addEventListener('focus', () => { i = k; btns.forEach((o, m) => o.classList.toggle('focus', m === k)); }));
+  addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { focus(i + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { focus(i - 1); e.preventDefault(); }
+    else if (e.key === 'Escape') go(1);
+  });
+  // gamepad: d-pad or left stick moves, A (0) chooses, B (1) leaves
+  let last = {};
+  const poll = () => {
+    for (const pad of navigator.getGamepads ? navigator.getGamepads() : []) {
+      if (!pad) continue;
+      const x = pad.axes[0] || 0, y = pad.axes[1] || 0, b = pad.buttons;
+      const now = {
+        next: b[15]?.pressed || b[13]?.pressed || x > 0.6 || y > 0.6,
+        prev: b[14]?.pressed || b[12]?.pressed || x < -0.6 || y < -0.6,
+        a: b[0]?.pressed, b: b[1]?.pressed,
+      };
+      const was = last[pad.index] || {};
+      if (now.next && !was.next) focus(i + 1);
+      if (now.prev && !was.prev) focus(i - 1);
+      if (now.a && !was.a) go(i);
+      if (now.b && !was.b) go(1);
+      last[pad.index] = now;
+    }
+    requestAnimationFrame(poll);
+  };
+  requestAnimationFrame(poll);
+  focus(0);
+})();
+</script>
+</body>
+</html>
