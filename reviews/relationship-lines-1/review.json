@@ -2,7 +2,7 @@
  "title": "Relationship lines, round 1: Mio, Kuro and Rei",
  "date": "2026-10-10",
  "by": "Claude, with the voice-mio, voice-kuro and voice-rei agents",
- "status": "open",
+ "status": "decided",
  "context": [
   "These are plans for Mio's, Kuro's and Rei's relationship lines, steps 1 to 5, written from their approved voice sheets and bios. Each step says what earns it in play, the public scene that marks it, how she treats Eric from then on, and its Japanese focus. Each voice agent read its character's plan and its changes are worked in.",
   "Nothing here is built yet. Mio's step-2 and step-3 lunch scenes exist and stay. The built step-2 and step-3 scenes for Kuro and Rei were written for their earlier personalities, so the plans rewrite or replace them.",
@@ -69,5 +69,11 @@
   }
  ],
  "issue": 357,
- "question": "These are plans for Mio's, Kuro's and Rei's relationship lines, steps 1 to 5, written from their approved voice sheets and bios. Each step says what earns it in play, the public scene that marks it, how she treats Eric from then on, and its Japanese focus. Each voice agent read its character's plan and its changes are worked in. Nothing here is built yet. Mio's step-2 and step-3 lunch scenes exist and stay. The built step-2 and step-3 scenes for Kuro and Rei were written for their earlier personalities, so the plans rewrite or replace them. Following your rule, kisses, dates and sex happen only on these lines, gated on her step. Each plan has one friendship-or-romance choice, and the answer is saved in a new flag (romance_mio, romance_kuro, romance_rei) that only that choice sets. The private scenes check the step and that flag. They are written separately and only named here. After your answer, the public step scenes get written and built in step order, and the private scenes get connected to the steps and the new flags. For each character, pick the card to approve the plan as it is, pick it and comment to approve it with your changes, or reject it to have it redone. Answer the numbered questions in the card's comment box."
+ "question": "These are plans for Mio's, Kuro's and Rei's relationship lines, steps 1 to 5, written from their approved voice sheets and bios. Each step says what earns it in play, the public scene that marks it, how she treats Eric from then on, and its Japanese focus. Each voice agent read its character's plan and its changes are worked in. Nothing here is built yet. Mio's step-2 and step-3 lunch scenes exist and stay. The built step-2 and step-3 scenes for Kuro and Rei were written for their earlier personalities, so the plans rewrite or replace them. Following your rule, kisses, dates and sex happen only on these lines, gated on her step. Each plan has one friendship-or-romance choice, and the answer is saved in a new flag (romance_mio, romance_kuro, romance_rei) that only that choice sets. The private scenes check the step and that flag. They are written separately and only named here. After your answer, the public step scenes get written and built in step order, and the private scenes get connected to the steps and the new flags. For each character, pick the card to approve the plan as it is, pick it and comment to approve it with your changes, or reject it to have it redone. Answer the numbered questions in the card's comment box.",
+ "decided": [
+  "mio",
+  "kuro"
+ ],
+ "decision": "Mio: 4 is fine for room. Kuro: second option. Rei: \"I got there before I thought about it\" is a really terrible AI slop line, don't. Progression is too slow when she is the one in control.",
+ "decided_at": "2026-10-10T11:02:41+0200"
 }
