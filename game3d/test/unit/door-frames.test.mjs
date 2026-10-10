@@ -136,3 +136,18 @@ test("the world kit's door (every variant, every level) has no frame in the plan
       assert.deepEqual(found.slice(0, 12), [], `${variant} ${level}: ${found.length} pairs of coplanar faces`);
     }
 });
+
+// the office street's fronts (and the works' server hall): the canopy slab level with its dark front showed as a
+// flickering line under the name (#215)
+test("a block's front door under its deep canopy", async () => {
+  const { Parts } = await import('../../js/scenes/outdoor/parts.js');
+  const { faces: rectFaces } = await import('../../js/scenes/outdoor/block-face.js');
+  const { frontDoor } = await import('../../js/scenes/outdoor/block-style.js');
+  const sets = { p: new Parts(), glass: new Parts(), lit: new Parts() };
+  frontDoor(sets, rectFaces([0, 12, 0, 8]).s, { t: 6, w: 1.6, canopy: { out: 1.3, side: 0.7 } });
+  const root = new THREE.Group();
+  for (const s of Object.values(sets)) s.build(root);
+  // seen from the street and from above: faces looking into the building (z 8 its wall) or down are left out
+  const found = fights(root, { hidden: (f) => (f.axis === 2 && f.sign < 0) || (f.axis === 1 && f.sign < 0) });
+  assert.deepEqual(found.slice(0, 12), [], `${found.length} pairs of coplanar faces`);
+});

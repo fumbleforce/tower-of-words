@@ -156,8 +156,10 @@ export function frontDoor({ p, glass, lit }, f, { t, w, canopy, platform }) {
     onFace(glass, DOOR_GLASS, f, a, b, 0.08, h, -0.04, -0.01);
     onFace(lit, BLOCK.lit, f, a, b, 0.08, h, -0.008, -0.004, { cast: false });
   }
-  onFace(p, STEEL.pale, f, t - 0.03, t + 0.03, 0.08, h, -0.04, 0.0); // the meeting stiles
-  onFace(p, SILL, f, t - w / 2, t + w / 2, 1.2, 1.27, -0.01, 0.0, { cast: false });
+  // the meeting stiles (up into the head, past the glass's top) and the white band across the glass, behind the
+  // stiles' faces and short of the glass's ends (level with them it flickered)
+  onFace(p, STEEL.pale, f, t - 0.03, t + 0.03, 0.08, h + 0.004, -0.04, 0.0);
+  onFace(p, SILL, f, t - w / 2 + 0.003, t + w / 2 - 0.003, 1.2, 1.27, -0.01, -0.002, { cast: false });
   for (const c of [t - 0.12, t + 0.12])
     onFace(p, STEEL.pale, f, c - 0.015, c + 0.015, 0.8, 1.5, 0, 0.04, { cast: false });
   if (platform) entrance(p, f, platform, { t, w });
@@ -168,7 +170,9 @@ export function frontDoor({ p, glass, lit }, f, { t, w, canopy, platform }) {
 // a deep canopy on the fascia line with a dark front 0.32 tall and dark ends
 function deepCanopy(p, f, t, w, { out = 1.4, side = 0.8 }) {
   const [c0, c1] = [t - w / 2 - side, t + w / 2 + side];
-  onFace(p, CANOPY_TOP, f, c0, c1, 2.2, 2.27, 0, out);
+  // the slab stops a centimetre inside the dark front and ends: level with their faces it showed as a flickering
+  // line along the front under the name (office street, phone)
+  onFace(p, CANOPY_TOP, f, c0 + 0.01, c1 - 0.01, 2.2, 2.27, 0, out - 0.01);
   for (let c = c0 + 0.4; c < c1 - 0.2; c += 0.45)
     onFace(p, RIB, f, c - 0.02, c + 0.02, 2.27, 2.3, 0, out - 0.08, { cast: false });
   onFace(p, BLOCK.fascia, f, c0, c1, 2.04, 2.46, out - 0.08, out);
