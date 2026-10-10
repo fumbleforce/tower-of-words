@@ -1,0 +1,55 @@
+{
+  "title": "North campus: modelled ground past every edge",
+  "date": "2026-10-10",
+  "by": "claude-agent:campus-pass",
+  "caption": "Behind head office, every way you look now ends in built things: the platform shed instead of a grey box, the canteen's loading yard behind a closed gate where the service lane used to stop on bare grass, the office street with its offices across it, pines along the sea wall and a wood east of quarter street. Try it with ?place=campus&day=2.",
+  "commit": "a25b2f402",
+  "result": ["shed-after", "gate-after", "row-after", "sea-after"],
+  "sections": [
+    {
+      "title": "The platform shed from the rest garden",
+      "caption": "South of the bench court the shed was a plain box from the skyline. The campus builds the real shed now, the same model as the forecourt's.",
+      "images": [
+        { "id": "shed-before", "image": "bible/shots/showcase/campus-pass-20261010/before-desktop-rest-s.webp", "caption": "Facing south, before" },
+        { "id": "shed-after", "image": "bible/shots/showcase/campus-pass-20261010/final-desktop-rest-s.webp", "caption": "Facing south, after" },
+        { "id": "shed-evening", "image": "bible/shots/showcase/campus-pass-20261010/final-evening-desktop-rest-s.webp", "caption": "After work" },
+        { "id": "coast-s-before", "image": "bible/shots/showcase/campus-pass-20261010/before-desktop-coast-s.webp", "caption": "The coast walk south, before" },
+        { "id": "coast-s-after", "image": "bible/shots/showcase/campus-pass-20261010/final-desktop-coast-s.webp", "caption": "The coast walk south, after" }
+      ]
+    },
+    {
+      "title": "The service lane's end",
+      "caption": "The lane stopped at a kerb on the grass a few metres short of the canteen's yard. It ends at a closed gate now, with the yard built past it: shutter, crates, bins and the walk to m6's door.",
+      "images": [
+        { "id": "gate-before", "image": "bible/shots/showcase/campus-pass-20261010/before-desktop-backlane-e.webp", "caption": "Facing east, before" },
+        { "id": "gate-after", "image": "bible/shots/showcase/campus-pass-20261010/final-desktop-backlane-e.webp", "caption": "Facing east, after" },
+        { "id": "gate-evening", "image": "bible/shots/showcase/campus-pass-20261010/final-evening-desktop-backlane-e.webp", "caption": "After work" },
+        { "id": "gate-phone-before", "image": "bible/shots/showcase/campus-pass-20261010/before-phone-backlane-own.webp", "caption": "Phone, before" },
+        { "id": "gate-phone-after", "image": "bible/shots/showcase/campus-pass-20261010/final-phone-backlane-own.webp", "caption": "Phone, after" }
+      ]
+    },
+    {
+      "title": "North to the office street",
+      "caption": "Past the quarter and shed streets' mouths the office street was flat colour and the offices plain boxes. Now the street has its verge, lamps and bench bays, and the offices across it their doors, canopies and names.",
+      "images": [
+        { "id": "row-before", "image": "bible/shots/showcase/campus-pass-20261010/before-desktop-quarter-n-n.webp", "caption": "Quarter street, facing north, before" },
+        { "id": "row-after", "image": "bible/shots/showcase/campus-pass-20261010/final-desktop-quarter-n-n.webp", "caption": "Quarter street, facing north, after" },
+        { "id": "foods-before", "image": "bible/shots/showcase/campus-pass-20261010/before-desktop-shed-n-n.webp", "caption": "Shed street, facing north, before" },
+        { "id": "foods-after", "image": "bible/shots/showcase/campus-pass-20261010/final-desktop-shed-n-n.webp", "caption": "Shed street, facing north, after" },
+        { "id": "wood-before", "image": "bible/shots/showcase/campus-pass-20261010/before-desktop-quarter-n-e.webp", "caption": "East of quarter street, before" },
+        { "id": "wood-after", "image": "bible/shots/showcase/campus-pass-20261010/final-desktop-quarter-n-e.webp", "caption": "East of quarter street, after" }
+      ]
+    },
+    {
+      "title": "West to the sea",
+      "caption": "Ten metres of empty grass ran from the coast walk to the sea wall. A strip of pines stands along the wall now.",
+      "images": [
+        { "id": "sea-before", "image": "bible/shots/showcase/campus-pass-20261010/before-desktop-coast-w.webp", "caption": "Facing west, before" },
+        { "id": "sea-after", "image": "bible/shots/showcase/campus-pass-20261010/final-desktop-coast-w.webp", "caption": "Facing west, after" },
+        { "id": "rest-phone-before", "image": "bible/shots/showcase/campus-pass-20261010/before-phone-rest-own.webp", "caption": "Phone, the bench court, before" },
+        { "id": "rest-phone-after", "image": "bible/shots/showcase/campus-pass-20261010/final-phone-rest-own.webp", "caption": "Phone, the bench court, after" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Play it", "href": "game3d/index.html?place=campus&day=2" }]
+}

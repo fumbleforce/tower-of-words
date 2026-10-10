@@ -1,0 +1,28 @@
+{
+  "campus": {
+    "place": "campus",
+    "day": 2,
+    "spots": [
+      { "id": "shed-s", "at": [-5.3, -19.35] },
+      { "id": "cross", "at": [13.95, -15.35] },
+      { "id": "shed-mid", "at": [-5.3, -31.35] },
+      { "id": "print", "at": [-8.05, -42.65] },
+      { "id": "shed-n", "at": [-5.3, -45.6] },
+      { "id": "rest", "at": [-22.95, -31.15] },
+      { "id": "coast", "at": [-27.65, -33.85] },
+      { "id": "quarter-s", "at": [18.45, -21.35] },
+      { "id": "quarter-n", "at": [18.45, -44.35] },
+      { "id": "backlane", "at": [25.95, -30.85] }
+    ]
+  },
+  "campus-evening": {
+    "place": "campus",
+    "day": 2,
+    "period": "evening",
+    "spots": [
+      { "id": "backlane", "at": [25.95, -30.85] },
+      { "id": "rest", "at": [-22.95, -31.15] },
+      { "id": "quarter-n", "at": [18.45, -44.35] }
+    ]
+  }
+}
