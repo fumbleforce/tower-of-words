@@ -159,6 +159,7 @@ def log_render(workflow, out_path, elapsed=None):
 def run(workflow, out_path, timeout=900):
     """Queue a workflow, wait for it, save the first output image to out_path."""
     yield_to_dashboard()
+    gpu_priority.let_browsers_in()  # a waiting browser test gets a turn between two renders
     pid = _post('/prompt', {'prompt': workflow})['prompt_id']
     t0 = time.time()
     while time.time() - t0 < timeout:

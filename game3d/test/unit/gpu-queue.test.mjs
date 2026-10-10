@@ -161,3 +161,64 @@ test('browser slots and exclusive jobs cannot keep each other out', t => {
   assert.equal(after.slot, 0, 'then the browser test');
   late.remove(); after.release();
 });
+
+// A long holder (a voice batch) gives waiting browser tests a turn between two items, then queues again at its own rank.
+function holdLock(root, owner, ageSeconds) {
+  const lock = path.join(root, 'gpu.lock');
+  fs.mkdirSync(lock, { recursive: true });
+  fs.writeFileSync(path.join(lock, 'owner'), owner + '\n');
+  const when = new Date(Date.now() - ageSeconds * 1000);
+  fs.utimesSync(lock, when, when);
+}
+const turn = root => py(root, 'print(g.let_browsers_in("voice-batch", "voice", poll=0.1, limit=5, log=None))\nprint(g.lock_owner())');
+
+test('a holder past its slice lets a waiting browser test in, then takes the lock again', t => {
+  const root = fixture(t);
+  holdLock(root, 'voice-batch', 600);
+  const file = ticket(root, 'fast-test', { rank: 4.5, time: Date.now() / 1000 - 30 });
+  const r = py(root, `
+import threading, os, time
+def go():
+    time.sleep(0.5)
+    print('while waiting', g.lock_owner())
+    os.remove(${JSON.stringify(file)})
+threading.Thread(target=go).start()
+print(g.let_browsers_in("voice-batch", "voice", poll=0.1, limit=5, log=None))
+print(g.lock_owner())`);
+  assert.equal(r.out, 'while waiting None\nTrue\nvoice-batch', 'the lock is free while the test takes its turn, and ours again after');
+});
+
+test('the turn waits at most its limit, and the holder keeps the voice rank', t => {
+  const root = fixture(t);
+  holdLock(root, 'voice-batch', 600);
+  const file = ticket(root, 'fast-test', { rank: 4.5, time: Date.now() / 1000 - 30 });
+  const r = py(root, 'import time; t=time.time()\nprint(g.let_browsers_in("voice-batch", "voice", poll=0.1, limit=1, log=None), round(time.time()-t))\nprint(g.lock_owner())');
+  assert.equal(r.out, 'True 1\nvoice-batch');
+  assert.ok(fs.existsSync(file), 'the browser ticket is untouched');
+});
+
+test('no turn when the holder is within its slice, nobody waits, or only an exclusive job waits', t => {
+  const root = fixture(t);
+  holdLock(root, 'voice-batch', 10);
+  ticket(root, 'fast-test', { rank: 4.5, time: 1 });
+  assert.equal(turn(root).out, 'False\nvoice-batch', 'held for 10 s only');
+  holdLock(root, 'voice-batch', 600);
+  fs.rmSync(path.join(root, 'gpu.queue'), { recursive: true });
+  assert.equal(turn(root).out, 'False\nvoice-batch', 'no browser ticket');
+  ticket(root, 'render-job', { rank: 5, time: 1 });
+  assert.equal(turn(root).out, 'False\nvoice-batch', 'a render is not a browser test; ranks stay as they are');
+  assert.equal(py(root, 'print(g.let_browsers_in("someone-else", "voice", after=0, log=None))').out, 'False', 'not the holder');
+});
+
+test('GPU_WAIT sets how long a browser job waits in the queue, on top of its own time limit', async () => {
+  const { gpuWaitOptions } = await import('../../../tools/lib/browser-job.mjs');
+  const saved = process.env.GPU_WAIT;
+  try {
+    delete process.env.GPU_WAIT;
+    assert.deepEqual(gpuWaitOptions(900, 295000), { gpuWaitMs: 900000, timeoutMs: 1195000 });
+    process.env.GPU_WAIT = '1800';
+    assert.deepEqual(gpuWaitOptions(900, 295000), { gpuWaitMs: 1800000, timeoutMs: 2095000 });
+    process.env.GPU_WAIT = 'soon';
+    assert.throws(() => gpuWaitOptions(900, 295000), /GPU_WAIT/);
+  } finally { if (saved === undefined) delete process.env.GPU_WAIT; else process.env.GPU_WAIT = saved; }
+});

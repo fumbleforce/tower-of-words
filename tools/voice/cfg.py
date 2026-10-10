@@ -196,6 +196,12 @@ def must_yield():
     return gpu_priority.should_stop(ME)
 
 
+def give_turn():
+    """Between two batches: hand the GPU to browser tests that have waited (tools/gpu_priority.py let_browsers_in), then
+    take it again at this batch's rank (GPU_RANK, default voice)."""
+    return gpu_priority.let_browsers_in(ME, os.environ.get('GPU_RANK', 'voice'), root=os.path.dirname(os.path.dirname(LOCK)))
+
+
 def lock_ok():
     try:
         return open(LOCK).read().strip() == ME

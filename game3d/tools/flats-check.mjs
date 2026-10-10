@@ -15,7 +15,7 @@
 //                   nobody sees
 //   BASE=.claude/worktrees/<name>/game3d for a worktree
 //   GPU_WAIT=600   wait up to that many seconds for a GPU slot (default 60)
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
 
 const OUTDOOR = [
   'forecourt',
@@ -64,7 +64,7 @@ await withBrowserJob(
         );
     }
   },
-  { gpuWaitMs: +(process.env.GPU_WAIT || 60) * 1000, timeoutMs: +(process.env.GPU_WAIT || 60) * 1000 + 290000 },
+  gpuWaitOptions(60, 290000),
 );
 console.log(fails.length ? `FAIL flats: ${fails.join(', ')}` : `PASS flats: ${places.length} places`);
 process.exitCode = fails.length ? 1 : 0;

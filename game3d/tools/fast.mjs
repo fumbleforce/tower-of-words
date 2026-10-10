@@ -3,8 +3,9 @@
 // DAY=3 plays day 3 from a plain finished day 2 (HISTORY=keep: the old sensor kept; testmode-day3.js is its route).
 // Runs at quality tier 0; QUALITY=1 (or 2) runs the day at that tier, with its own perf baseline (phone-q1).
 // --mc <id> plays another protagonist (?mc=), --cast <set or role=person,...> another cast (?cast=); or MC=, CAST=.
+// GPU_WAIT=seconds: how long to wait in the GPU queue (default 900) before the run is DEFERRED (exit 75).
 // Prints PASS/FAIL, the places reached, the time taken and any page errors; saves the end screen.
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
 import { fastResult } from '../test/support/fast-result.mjs';
 import { openGame } from '../test/support/open-game.mjs';
 import { writePerf } from '../test/support/perf-report.mjs';
@@ -51,6 +52,7 @@ const output = fileURLToPath(new URL(`../shots/fast/${new Date().toISOString().r
 fs.mkdirSync(output, { recursive: true });
 const started = Date.now(), jobBudgetMs = 295000, captureReserveMs = 10000;
 const errors = [];
+let jobStarted = started;
 let run = {}, result, pageErrors = [], perf = null;
 // build.json is generated: stamp it before the page asks for it (the review server also stamps on request)
 let build = '';
@@ -58,12 +60,13 @@ try { build = ensureBuild().id; } catch (error) { console.log('build stamp faile
 try {
   if (![W, H, S].every(value => Number.isFinite(+value) && +value > 0)) throw new Error('Width, height and seconds must be positive numbers');
   await withBrowserJob('fast-test', async browser => {
+    jobStarted = Date.now(); // the five-minute budget counts from the GPU being ours, not from the queue
     const url = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=${+process.env.QUALITY || 0}${process.env.ROUTE ? '&route=' + encodeURIComponent(process.env.ROUTE) : ''}${+process.env.DAY > 1 ? `&day=${+process.env.DAY}${process.env.HISTORY ? '&history=' + process.env.HISTORY : ''}` : ''}${who.query}${process.env.Q || ''}`;
     const game = await openGame(browser, { viewport: { width: +W, height: +H }, mode: 'fast', url });
     const { page } = game;
     pageErrors = game.errors;
     // GUIDE caps the whole job at five minutes, including startup, capture and cleanup.
-    const routeMs = Math.max(1, Math.min(+S * 1000, jobBudgetMs - (Date.now() - started) - captureReserveMs));
+    const routeMs = Math.max(1, Math.min(+S * 1000, jobBudgetMs - (Date.now() - jobStarted) - captureReserveMs));
     if (routeMs < +S * 1000) console.log(`Route budget limited to ${(routeMs / 1000).toFixed(1)}s to reserve capture/cleanup within five minutes`);
     try { await page.waitForFunction(() => window.__test?.done, null, { timeout: routeMs }); }
     catch (error) { errors.push(`Route wait failed: ${error.message.split('\n')[0]}`); }
@@ -85,13 +88,13 @@ try {
       await page.screenshot({ path: path.join(output, `${W}x${H}.png`), timeout: 5000 });
     }
     catch (error) { errors.push(`Capture failed: ${error.message.split('\n')[0]}`); }
-  }, { timeoutMs: jobBudgetMs });
+  }, gpuWaitOptions(900, jobBudgetMs));
   // Print only after the entire lifecycle resolves: a late deadline/close failure cannot race a PASS.
   result = fastResult(run, [...errors, ...pageErrors], overrides);
   process.exitCode = result.pass ? 0 : 1;
 } catch (error) {
   errors.push(error.message);
-  if (error.code === 'LOAD_DEFERRED') {
+  if (error.code === 'LOAD_DEFERRED' || error.code === 'GPU_DEFERRED') {
     result = { pass: false, verdict: 'DEFERRED', errors, activeOverrides: Object.keys(overrides).filter(key => overrides[key]) };
     process.exitCode = 75;
   } else {
