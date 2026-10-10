@@ -1,0 +1,16 @@
+{
+  "title": "Kenji keeps one voice through his first meeting",
+  "date": "2026-10-10",
+  "by": "claude-agent:kenji-voice",
+  "caption": "Six of Kenji's eleven clips in the chair conversation were remade so his voice no longer jumps between lines. The two links below play the whole exchange as Carina hears it, before and after.",
+  "result": ["kenji-first-chart"],
+  "sections": [
+    {"title": "Pitch and voice match, line by line", "caption": "Grey is before, blue after; shaded lines were remade. The first line had been made from an older Kenji reference, and \"Ah... chair\" (the line you reported) was a take with a lower, rougher voice. \"Mio-san\" is now said in Japanese.",
+     "images": [
+       {"id": "kenji-first-chart", "image": "bible/shots/showcase/kenji-voice-20261010/kenji-first-chart.webp", "caption": "kenji_first, median pitch and WavLM match to Kenji's reference"}]}
+  ],
+  "links": [
+    {"label": "Before: the whole exchange", "href": "bible/shots/showcase/kenji-voice-20261010/kenji-first-before.mp3"},
+    {"label": "After: the whole exchange", "href": "bible/shots/showcase/kenji-voice-20261010/kenji-first-after.mp3"}
+  ]
+}
