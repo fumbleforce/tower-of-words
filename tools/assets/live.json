@@ -128,6 +128,15 @@
   },
   "game3d/assets/characters/crowd-a/": {},
   "game3d/assets/characters/crowd-b/": {},
+  "game3d/assets/characters/crowd-casual-1/": {
+   "note": "everyday crowd bodies, landed with #353"
+  },
+  "game3d/assets/characters/crowd-older-1/": {
+   "note": "everyday crowd bodies, landed with #353"
+  },
+  "game3d/assets/characters/crowd-service-1/": {
+   "note": "everyday crowd bodies, landed with #353"
+  },
   "game3d/assets/characters/emi/": {
    "loaded_by": "game3d/js/cast3d.js#'emi'"
   },
@@ -866,6 +875,30 @@
    ],
    "to": "art/production/retired/2026-10-10/",
    "note": "an old take: audio/manifest.json, made from the story, has no line that plays it"
+  },
+  {
+   "date": "2026-10-10",
+   "action": "register",
+   "path": "game3d/assets/characters/crowd-casual-1/",
+   "round": "art/candidates/crowd-everyday-2",
+   "review": "crowd-everyday-2",
+   "note": "everyday crowd bodies, landed with #353"
+  },
+  {
+   "date": "2026-10-10",
+   "action": "register",
+   "path": "game3d/assets/characters/crowd-older-1/",
+   "round": "art/candidates/crowd-everyday-2",
+   "review": "crowd-everyday-2",
+   "note": "everyday crowd bodies, landed with #353"
+  },
+  {
+   "date": "2026-10-10",
+   "action": "register",
+   "path": "game3d/assets/characters/crowd-service-1/",
+   "round": "art/candidates/crowd-everyday-2",
+   "review": "crowd-everyday-2",
+   "note": "everyday crowd bodies, landed with #353"
   }
  ]
 }
