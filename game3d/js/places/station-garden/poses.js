@@ -4,7 +4,11 @@ import { poolHandling } from '../day3/pool-handling.js';
 // Solve the approved body's arm, then align the pole through the actual wrist and floor contact.
 export function gardenPoses(P, worker, tools) {
   const hands = poolHandling(P.space, { codeArms: true });
-  const wrist = worker.arms[1].userData.hand;
+  // the hands the broom and pan hang from: the approved body's own hand bones (the right one poolHandling reaches
+  // with), or the code-built worker's
+  const bone = (name) => worker.model?.getObjectByName(name);
+  const wrist = bone('RightHand') || worker.arms[1].userData.hand,
+    leftHand = bone('LeftHand') || worker.arms[0].userData.hand;
   const hand = new THREE.Vector3(),
     base = new THREE.Vector3(),
     axis = new THREE.Vector3(0, 1, 0);
@@ -30,8 +34,7 @@ export function gardenPoses(P, worker, tools) {
       P.space.worldToLocal(wrist.getWorldPosition(hand));
       tools.broom.rotation.set(0, 0, 0);
       tools.broom.position.copy(hand).add(new THREE.Vector3(0, -0.45, 0));
-      const left = worker.arms[0].userData.hand;
-      P.space.worldToLocal(left.getWorldPosition(hand));
+      P.space.worldToLocal(leftHand.getWorldPosition(hand));
       tools.pan.rotation.set(0, 0, 0);
       tools.pan.position.copy(hand).add(new THREE.Vector3(0, -0.5275, -0.14));
     },

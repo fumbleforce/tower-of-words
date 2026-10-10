@@ -20,6 +20,12 @@ const cases = {
   closing: { place: 'plaza', person: 'canteen_worker', body: 'service-1', evening: true },
   'closing-walk': { place: 'plaza', person: 'canteen_worker', body: 'service-1', evening: true, carry: true },
   ferry: { place: 'ferry_terminal', person: 'ferry_staff', body: 'service-1' },
+  // #328: the station garden's grounds worker; the train's man with a bag and day 3's attendant and club member are
+  // hidden on a plain day, so the check stands them beside Eric (show)
+  grounds: { place: 'shotengai', person: 'station_worker', body: 'older-1' },
+  stander: { place: 'train', person: 'stander', body: 'a', show: 'here' }, // where he stood, by the far door
+  attendant: { place: 'gym', person: 'attendant', body: 'a', show: true },
+  member: { place: 'pool', person: 'member', body: 'b', show: true },
 };
 const width = +(process.argv[2] || 390), height = width < 600 ? 844 : 860;
 assert.ok([390, 1366].includes(width), 'Use the native 390 or 1366 viewport');
@@ -138,7 +144,17 @@ try {
             ? game.place.ambient?.pool.find((item) => item.r.kind === spec.kind && item.r.root.visible && item.state === 'walk')
             : { r: game.place.people[spec.person] };
           let target = find();
-          for (let i = 0; i < 40 && !target; i++) {
+          if (spec.show && target?.r) {
+            // beside Eric, facing him, where the check can see them
+            const r = target.r, e = game.player.root.position;
+            if (spec.show !== 'here') {
+              const at = r.root.parent.worldToLocal(e.clone().add({ x: 0.9, y: 0, z: 0.4 }));
+              r.root.position.set(at.x, 0, at.z);
+              r.root.rotation.y = Math.atan2(-0.9, -0.4);
+            }
+            r.root.visible = true;
+          }
+          for (let i = 0; i < 180 && !target; i++) {
             globalThis.__advance(1);
             target = find();
           }

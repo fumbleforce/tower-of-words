@@ -14,7 +14,7 @@ import { clearAt } from './paths.js';
 
 export function planStop(b, R, share, L) {
   b.walked = 0;
-  b.stopAt = b.kind !== 'jog' && R() < share ? L * (0.2 + R() * 0.55) : Infinity;
+  b.stopAt = b.gait !== 'jog' && R() < share ? L * (0.2 + R() * 0.55) : Infinity;
 }
 
 // the walker is far enough along, on paving wide enough to step aside, away from Eric, the ends and the doors

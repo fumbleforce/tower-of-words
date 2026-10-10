@@ -111,7 +111,7 @@ export function launcher({ game, g, K, ends, routes, pool, inView, st }) {
           state: 'walk',
           line,
           i: at.leg,
-          kind,
+          gait: kind, // the walk (walk, jog or stroll); body.kind stays the clothes the walker was made in
           offA: !!lead[i],
           offZ: true,
           toDoor: !!B.door,
@@ -143,7 +143,11 @@ export function launcher({ game, g, K, ends, routes, pool, inView, st }) {
     const fit = f.filter((b) => (sport ? b.kind === 'sport' : b.kind !== 'sport' || R() < 0.25));
     const list = fit.length ? fit : sport ? [] : f;
     if (!list.length) return null;
-    const w = list.map((b) => (spec.who[b.kind] || 0.3) + 0.05);
+    // each kind of clothes as often as the period's mix says, however many of its bodies are free (the pool is
+    // already sized by the mix: weighting each body by it as well squared the mix, and the elders hardly came out)
+    const n = {};
+    for (const b of list) n[b.kind] = (n[b.kind] || 0) + 1;
+    const w = list.map((b) => ((spec.who[b.kind] || 0.3) + 0.05) / n[b.kind]);
     let x = R() * w.reduce((a, b) => a + b, 0);
     for (let i = 0; i < list.length; i++) if ((x -= w[i]) <= 0) return list[i];
     return list[list.length - 1];
