@@ -4,7 +4,9 @@ import { applyGround } from '../movement/walk-ground.js';
 import { ground, WALK_AREA } from './campus/ground.js';
 import { walkEdges } from './outdoor/walk-edges.js';
 import { Parts } from './outdoor/parts.js';
-import { outdoorLight, eveningLight, SUN, TOWN } from './town.js';
+import { TOWN } from './town.js';
+import { lightRig } from '../kit/light/rig.js';
+import { OUTDOOR } from '../kit/light/looks.js';
 import { lightSet } from './outdoor/furniture.js';
 import { northSteps } from './forecourt/north.js';
 import { campusGrounds } from './campus/grounds.js';
@@ -12,6 +14,8 @@ import { campusFronts } from './campus/fronts.js';
 import { coastSteps } from './outdoor/coast.js';
 import { coastLand } from './island-west.js';
 import { skylineSteps } from './skyline.js';
+import { bandSteps } from './bands.js';
+import { buildShedOnly } from './station-shed.js';
 import * as LAYOUT from './island-layout.js';
 import * as P from './campus/plan.js';
 import { SHELTER_BIKES } from './forecourt/plan.js';
@@ -24,7 +28,8 @@ export function* campusSteps() {
     scene = new THREE.Scene();
   scene.background = new THREE.Color(TOWN.roof);
   scene.add(root);
-  const sun = outdoorLight(scene),
+  // the light for every period comes from the period table (kit/light/): the rig, and what glows at night below
+  const light = lightRig(scene, { looks: OUTDOOR, grade: { dusk: { charLift: 0.13 } } }),
     lights = lightSet();
   // one walkable ground for the walk grid and the kerbs (campus/ground.js)
   const nav = new Nav(...WALK_AREA, 0.14),
@@ -52,9 +57,12 @@ export function* campusSteps() {
   });
   // The coast wall is shared kit; campusGrounds owns all surface paving.
   const lamps = lights.build(root);
+  buildShedOnly(root); // the platform shed south of the rest garden, as the forecourt builds it
+  yield;
+  const bands = yield* bandSteps(root, 'campus'); // the canteen's yard past the service lane's gate (bands-plan.js)
   const sky = yield* skylineSteps(root, 'campus', {
     layout: LAYOUT,
-    skip: ['head_office', 'head_office_wing', 'office_e1', 'w3', 'b_h'],
+    skip: ['head_office', 'head_office_wing', 'office_e1', 'w3', 'b_h', 'platform_shed', ...bands.ids],
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
     near: 40,
@@ -62,51 +70,18 @@ export function* campusSteps() {
   });
   yield* mergeStaticSteps(root);
   yield* nav.buildSteps();
-  const lightState = [];
-  scene.traverse((o) => {
-    if (o.isLight) lightState.push([o, o.color.clone(), o.groundColor?.clone(), o.intensity, o.position.clone()]);
-  });
-  const poolState = [];
-  root.traverse((o) => {
-    if (o.userData.lampPool) poolState.push([o, o.userData.k, o.userData.gain]);
-  });
-  const glowState = [];
-  root.traverse((o) => {
-    if (o.material?.emissive) glowState.push([o.material, o.material.color.clone(), o.material.emissiveIntensity]);
-  });
-  let night = false;
-  function period(value) {
-    const next = value === 'evening';
-    if (next === night) return;
-    night = next;
-    if (next) {
-      eveningLight(scene);
-      lamps.evening();
-    } else {
-      for (const [o, c, g, i, p] of lightState) {
-        o.color.copy(c);
-        if (g) o.groundColor.copy(g);
-        o.intensity = i;
-        o.position.copy(p);
-      }
-      for (const [m, c, i] of glowState) {
-        m.color.copy(c);
-        m.emissiveIntensity = i;
-      }
-      for (const [o, k, g] of poolState) {
-        o.userData.gain = g;
-        o.userData.set(k);
-      }
-    }
-    if (north.lit) north.lit.visible = next;
-    if (fronts.lit) fronts.lit.visible = next;
-    sky.onPeriod(value);
-  }
-  const follow = (x, z) => {
-    sun.target.position.set(Math.round(x / 2) * 2, 0, Math.round(z / 2) * 2);
-    sun.position
-      .copy(sun.target.position)
-      .addScaledVector(new THREE.Vector3(...SUN[night ? 'evening' : 'morning']).normalize(), 40);
+  // after work the lamps, the lit windows, the yard past the gate and the skyline glow
+  light.glow.add(lamps.glows, fronts.glows, bands.glows, sky.glows);
+  if (north.lit) light.glow.add({ show: north.lit });
+  return {
+    root,
+    scene,
+    nav,
+    light,
+    sun: light.sun,
+    follow: light.follow, // the shadow box round Eric
+    exits: P.EXITS,
+    start: P.IN,
+    seats: { campus_bench: P.BENCH },
   };
-  return { root, scene, nav, sun, follow, period, exits: P.EXITS, start: P.IN, seats: { campus_bench: P.BENCH } };
 }

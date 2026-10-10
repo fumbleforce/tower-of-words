@@ -8,6 +8,11 @@ export const pt = ([x, z]) => [x - AT[0], z - AT[1]];
 export const rect = ([x0, x1, z0, z1]) => [x0 - AT[0], x1 - AT[0], z0 - AT[1], z1 - AT[1]];
 export const inRect = (x, z, [x0, x1, z0, z1]) => x >= x0 && x <= x1 && z >= z0 && z <= z1;
 const paths = CAMPUS_PATHS.map((p) => rect([p.rect[0], p.rect[2], p.rect[1], p.rect[3]]));
+// the service lane's east end, where it meets the canteen's loading yard: [x, z0, z1]
+export const LANE_END = (() => {
+  const r = CAMPUS_PATHS.find((p) => p.id === 'back_lane_west').rect;
+  return [r[2] - AT[0], r[1] - AT[1], r[3] - AT[1]];
+})();
 export const PRINT_DOOR = pt([-24.3, -43.3]);
 export const PRINT_STEP = pt([-23.35, -43.3]);
 export const BENCH = { x: pt([-37, -33.25])[0], z: pt([-37, -33.25])[1], top: 0.34, ry: 0, out: pt([-37, -32.5]) };

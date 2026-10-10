@@ -59,7 +59,7 @@ test('opening and continuing weeks retain native campus routes at real loader pa
 });
 test('campus lighting reverses and keeps navigation stable',()=>{
  const w=buildCampus(),initial=w.sun.intensity,nav=w.nav.rects.map(r=>[...r]);
- w.period('evening');assert.ok(w.sun.intensity<initial);w.period('morning');assert.equal(w.sun.intensity,initial);assert.deepEqual(w.nav.rects,nav);
+ w.light.apply('evening');assert.ok(w.sun.intensity<initial);w.light.apply('morning');assert.equal(w.sun.intensity,initial);assert.deepEqual(w.nav.rects,nav);
 });
 const {buildPrintShop}=await import('../../js/scenes/print-shop/room.js');
 test('print shop occupies w3 and keeps all usable approaches connected around solid equipment',()=>{

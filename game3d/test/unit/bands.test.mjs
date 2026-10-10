@@ -80,6 +80,9 @@ test('the bands table names real places, builders and blocks, and no band covers
       'fronts',
       'quarterGrounds',
       'shedGarden',
+      'canteenYard',
+      'officeStreet',
+      'officeRow',
     ];
     for (const [chunk, list] of Object.entries(BANDS)) {
       assert.ok(CHUNKS[chunk], `${chunk} is a place`);
@@ -89,6 +92,11 @@ test('the bands table names real places, builders and blocks, and no band covers
           assert.ok(
             BLOCKS.some((k) => k.id === id),
             `${chunk}: ${id} is an east lane block`,
+          );
+        for (const id of b.ids || [])
+          assert.ok(
+            BUILDINGS.some((x) => x.id === id),
+            `${chunk}: ${id} is a building`,
           );
         for (const k of b.blocks || [])
           assert.ok(

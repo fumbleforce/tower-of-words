@@ -1,7 +1,7 @@
 // The bands past each outdoor place's exits (#260), what builds each and where, in the island frame
 // ([x0, x1, z0, z1]); scenes/bands.js builds them (its header lists the builders). Rects of one band never overlap,
 // and never cover what the place lays itself. Each place's bands stay small (game3d/test/unit/bands-build.test.mjs).
-// The lawn at m6, south of the office street's own belts; bank planting is shared with campus.
+// The lawn east of m6, south of the office street's own belts; bank planting is shared with campus.
 const M6_LAWN = [[24.4, 31, -45.4, -41], 'keyaki,pine', 3.4];
 
 export const BANDS = {
@@ -89,17 +89,49 @@ export const BANDS = {
       ],
     },
   ],
+  campus: [
+    // past the service lane's closed gate: the canteen's loading yard, m6's walk, and the trees west of the yard on
+    // the lawn south of the lane
+    {
+      by: 'canteenYard',
+      rects: [
+        [15.79, 30, -39.1, -23.5],
+        [9.5, 15.79, -30, -21.5],
+      ],
+    },
+    // m6 over the yard, its office door on its walk
+    { by: 'fronts', blocks: [{ id: 'm6', face: 's', ground: 'office' }] },
+    // the coast walk on south past the shed's north end, as the shop street's coast builds it
+    { by: 'westCoast', rects: [[-50, -32.6, -25.4, -4]], pave: ['coast_path'] },
+    // the office street past the quarter and shed streets' north mouths, with its verge on this side
+    { by: 'officeStreet', rects: [[-38, 26, -60, -51.2]] },
+    // the office row across the street from the mouths and the coast lawn, and m1 at the head of the Foods walk
+    { by: 'officeRow', ids: ['w1', 'm1', 'm2', 'm3'] },
+    // the office street's southern belts, as the office quarter plants them: west of the print shop's border, and
+    // east of the quarter street
+    {
+      by: 'officeLawns',
+      rects: [
+        [-44, -24.6, -51.2, -45.5],
+        [7, 31, -51.2, -45.5],
+      ],
+    },
+    // nobody's lawns: pines along the sea wall west of the coast walk; a wood west of m6 behind the quarter street's
+    // strip; the trees east of m6
+    {
+      by: 'lawn',
+      seed: 410,
+      belts: [
+        [[-54.6, -51.6, -45, -26.5], 'pine,pine,sakura', 3.2],
+        [[8.6, 12.6, -44.6, -34.4], 'ginkgo,keyaki,sakura', 3.3],
+        [...M6_LAWN, 384], // as the office street sees it
+      ],
+    },
+  ],
   office_quarter: [
     { by: 'quarterGrounds', rects: [[-8, 13, -50.4, -19.25]] },
     { by: 'shedGarden', rects: [[-30, -4.4, -51.1, -28.2]] },
-    // the lawns south of the office street, behind its own belts, between the bank, the print shop and m6
-    {
-      by: 'lawn',
-      seed: 370,
-      belts: [
-        [[-22, -17, -45.4, -40.6], 'maple,sakura', 3.4],
-        [...M6_LAWN, 384],
-      ],
-    },
+    // the lawn east of m6, behind the office street's own belts (the campus's lawns are its shedGarden)
+    { by: 'lawn', seed: 370, belts: [[...M6_LAWN, 384]] },
   ],
 };

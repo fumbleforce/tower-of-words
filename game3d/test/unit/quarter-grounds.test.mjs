@@ -59,7 +59,7 @@ test('quarter planting and bank drainage stay outside the canonical paths', () =
     false,
   );
   for (const tree of QUARTER_TREES) assert.equal(plantedTrees.filter((t) => t[4] === tree[4]).length, 1);
-  assert.equal(BANDS.office_quarter.find((b) => b.by === 'lawn').belts[1][3], 384, 'M6 keeps its original seed');
+  assert.equal(BANDS.office_quarter.find((b) => b.by === 'lawn').belts[0][3], 384, 'M6 keeps its original seed');
 });
 
 test('map draws the physical bed and drainage footprints', () => {

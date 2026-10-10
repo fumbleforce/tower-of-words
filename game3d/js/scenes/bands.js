@@ -7,11 +7,15 @@
 // Each band is { by, rects, ... }; by names the builder:
 //   eastLane      plaza/east-lane.js: the lane's streets, walks, park, planting, lamps and small blocks' fronts
 //                 (skip: the blocks the place builds itself)
+//   canteenYard   plaza/north-yard.js: the canteen's loading yard, its fittings, m6's walk and the apron
 //   sportsGrounds sports/grounds.js: the sports lane and its corner, the pool and courts walks, planting and lamps
 //   coastWalk     east-coast/walk.js and the coast kit's kerbs: the east coast walk, the onsen path, their woods
 //   westCoast     outdoor/coast.js with the west coast's data (the forecourt draws it on the map only): kerbs,
 //                 beds, drifts, pines and benches, and the walks in `pave` laid in the walks' pale slabs
 //   officeLawns   office-quarter/grounds.js planting: the belts of trees on the office street's lawns
+//   officeRow     office-quarter/row.js: the office row's blocks in ids, their doors, signs, forecourts and walks
+//   officeStreet  office-quarter/grounds.js streetSteps: the office street's brick, its north beds, its south verge,
+//                 bench bays and lamps
 //   lawn          ground nobody builds, planted with the kit in the same style: belts [rect, kinds, pitch] of
 //                 trees over layered planting (dorm-court/cluster-yards.js belt), and walks [rect, kerb sides]
 //                 in the walks' pale slabs
@@ -31,12 +35,15 @@ import { signSet } from './shop-signs.js';
 import { placeIn } from './dorm-court/cluster.js';
 import { belt } from './dorm-court/cluster-yards.js';
 import { eastLaneSteps, walk } from './plaza/east-lane.js';
+import { yardGround, yardSteps } from './plaza/north-yard.js';
+import { blockSets, buildBlockSets } from './outdoor/block.js';
 import { frontsSteps } from './plaza/east-fronts.js';
 import { BLOCKS as EAST_BLOCKS } from './plaza/east-plan.js';
 import { groundsSteps } from './sports/grounds.js';
 import { walkSteps, kerbWalks } from './east-coast/walk.js';
-import { planting as officeLawns } from './office-quarter/grounds.js';
+import { planting as officeLawns, streetSteps as officeStreet } from './office-quarter/grounds.js';
 import { mergeStaticSteps } from './merge-static.js';
+import { rowSteps as officeRow } from './office-quarter/row.js';
 import { quarterGrounds } from './campus/quarter-grounds.js';
 import { southQuarterGrounds } from './forecourt/quarter-planting.js';
 import { shedGarden } from './campus/shed-garden.js';
@@ -63,9 +70,27 @@ export function bandIds(chunk) {
       for (const k of EAST_BLOCKS) if (clip.hits(toIsland(k.rect)) && !(b.skip || []).includes(k.id)) ids.push(k.id);
     }
     if (b.by === 'fronts') ids.push(...b.blocks.map((k) => k.id));
+    if (b.by === 'officeRow') ids.push(...b.ids);
   }
   return ids;
 }
+
+// the east lane's and the back lane's builders work in the plaza's frame: a group there, the band moved into it, and
+// the shared light set taking their lamps moved into the island's
+function plazaFrame(b, isl, s) {
+  const [dx, dz] = PLAZA,
+    pf = new THREE.Group();
+  pf.position.set(dx, 0, dz);
+  isl.add(pf);
+  const lights = {
+    glowParts: { push: (...gs) => s.lights.glowParts.push(...gs.map((g) => g.translate(dx, 0, dz))) },
+    lit: { push: (...ls) => s.lights.lit.push(...ls.map(([x, z, r]) => [x + dx, z + dz, r])) },
+  };
+  return { pf, lights, clip: band(b.rects).shift(-dx, -dz) };
+}
+// the west and east ends of a band's rects
+const spanX = (rects) => [Math.min(...rects.map((r) => r[0])), Math.max(...rects.map((r) => r[1]))];
+const NO_SHADE = { tree() {}, block() {} }; // no shadows laid on the ground (outdoor/shade.js)
 
 // each builder: (band, island-frame group, out: { glows, update, cards } lists, the shared collectors)
 const BUILD = {
@@ -80,20 +105,24 @@ const BUILD = {
     yield;
   },
   *eastLane(b, isl, out, s) {
-    // the east lane's builders work in the plaza's frame; its lamps join the shared set, moved into the island's
-    const pf = new THREE.Group();
-    pf.position.set(PLAZA[0], 0, PLAZA[1]);
-    isl.add(pf);
-    const [dx, dz] = PLAZA,
-      lights = {
-        glowParts: { push: (...gs) => s.lights.glowParts.push(...gs.map((g) => g.translate(dx, 0, dz))) },
-        lit: { push: (...ls) => s.lights.lit.push(...ls.map(([x, z, r]) => [x + dx, z + dz, r])) },
-      };
-    const clip = band(b.rects).shift(-dx, -dz);
+    const { pf, lights, clip } = plazaFrame(b, isl, s);
     const east = yield* eastLaneSteps(pf, null, lights, { clip, skip: b.skip || [] });
     out.glows.push(...east.glows);
     out.update.push(east.update);
     out.cards.push(east.cards);
+  },
+  *canteenYard(b, isl, out, s) {
+    // the yard as plaza/north-lane.js builds it, in the plaza's frame: paving, kerbs, hedges, fittings, the canteen's
+    // back windows; its trees cast their own shadows here
+    const { pf, lights, clip } = plazaFrame(b, isl, s),
+      q = new Parts(),
+      pv = paver(),
+      sets = blockSets();
+    yardGround(clip.paver(pv));
+    yield* yardSteps(clip.parts(q), sets, clip.lights(lights), NO_SHADE);
+    pv.build(pf);
+    q.build(pf);
+    out.glows.push(...buildBlockSets(sets, pf).glows);
   },
   *sportsGrounds(b, isl, out, s) {
     const clip = band(b.rects),
@@ -113,10 +142,18 @@ const BUILD = {
     for (const id of b.pave || []) walk(clip.paver(s.pv), box(WEST.walks[id].rect));
     yield* coastSteps(isl, { at, clip: clip.has, data: { ...WEST, coast: [] }, into: s.p }); // the sea wall is not in it
   },
-  *officeLawns(b, isl, out, s) {
+  *officeStreet(b, isl, out, s) {
     const clip = band(b.rects),
-      [x0, x1] = [Math.min(...b.rects.map((r) => r[0])), Math.max(...b.rects.map((r) => r[1]))];
-    yield* officeLawns(clip.parts(s.p), [x0, x1]);
+      c = s.clipped(clip);
+    yield* officeStreet(c.paver, c.parts, clip.lights(s.lights), spanX(b.rects));
+  },
+  *officeRow(b, isl, out, s) {
+    const sets = blockSets();
+    yield* officeRow(sets, s.pv, s.p, s.signs, s.lights, b.ids);
+    out.glows.push(...buildBlockSets(sets, isl).glows);
+  },
+  *officeLawns(b, isl, out, s) {
+    yield* officeLawns(band(b.rects).parts(s.p), spanX(b.rects));
   },
   *lawn(b, isl, out, { p, pv }) {
     for (const [r, sides] of b.walks || []) {
@@ -190,9 +227,9 @@ export function* bandSteps(root, chunk) {
     isl.add(g);
     yield* BUILD[b.by](b, g, out, s);
     // These shared trees keep their campus shadow policy across the walked seam.
-    s.build(g, out, b.by === 'quarterGrounds' || b.by === 'shedGarden');
+    s.build(g, out, ['quarterGrounds', 'shedGarden', 'canteenYard'].includes(b.by));
     // blocks' fronts stand tall and show from most of the place: they merge with the place's own meshes instead
-    if (b.by !== 'fronts') {
+    if (b.by !== 'fronts' && b.by !== 'officeRow') {
       yield* mergeStaticSteps(g);
       g.traverse((o) => o.isMesh && !o.name && (o.name = `band:${b.by}`));
     }
