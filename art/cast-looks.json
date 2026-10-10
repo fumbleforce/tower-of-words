@@ -43,11 +43,11 @@
    "negative": "", "portrait": "art/approved/kenji/kenji-kenji-ink-2001-neutral.webp"
   },
   {
-   "id": "emi", "checked": "b7717cfa", "cast_md": "emi", "name": "Emi", "gender": "female", "age": 32, "who": "woman", "skin": "fair skin",
+   "id": "emi", "checked": "b7717cfa", "cast_md": "emi", "name": "Emi", "gender": "female", "age": 35, "who": "woman", "skin": "fair skin",
    "hair": "a reddish auburn shoulder-length bob with side-swept bangs", "eyes": "warm brown eyes",
    "glasses": "brown tortoiseshell glasses with clear lenses", "extra": "",
    "build": "curvy", "signature": "", "outfit": "a charcoal blazer over a cream blouse",
-   "short": "Emi, 32, fair skin, auburn bob, tortoiseshell glasses",
+   "short": "Emi, 35, fair skin, auburn bob, tortoiseshell glasses",
    "negative": "sunglasses, tinted glasses", "portrait": "art/approved/emi/emi-emi-base-2001-neutral.webp"
   },
   {

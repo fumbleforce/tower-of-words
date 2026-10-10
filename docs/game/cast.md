@@ -92,7 +92,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Emi (`emi`)
 
-- Age 32. B2's team lead. Native British English.
+- Age 35 (Jørgen, 2026-10-10, Review character-backgrounds-5: "emi can be 35 instead"). B2's team lead. Native British English. Her background is in her [bio](../../notes/character-backgrounds/emi.md).
 - On day 1 she is upstairs at head office all day, arguing for B2's parts budget, and comes down at 17:40 ([`emi-budget`](stories/emi-budget.md)).
 - Quick and complete sentences; says the good news first and the problem as an aside.
 - A cast member like any other, with no special restrictions: romance and rewards apply to her as to the rest (Jørgen, 2026-09-27).
