@@ -167,3 +167,27 @@ test('handoff refuses linked destinations and sources outside the checkouts', t 
   assert.throws(() => materializeLandedAssets(main, task, original, candidate), /outside the checkouts/);
   assert.equal(fs.readFileSync(path.join(base, 'outside/used.bin'), 'utf8'), 'old locked bytes');
 });
+
+test('a stale asset copy left in the land candidate is replaced when a later branch updates the asset', t => {
+  const { main, task, git, write, lock, commit, land } = fixture(t);
+  write(main, ASSET, 'old locked bytes');
+  write(task, ASSET, 'first rebuild');
+  const first = commit({ [ASSET]: 'first rebuild' });
+  land();
+  assert.equal(git(main, 'rev-parse', 'HEAD'), first);
+  const candidateCopy = path.join(main, '.claude/worktrees/land-candidate', ASSET);
+  assert.equal(fs.readFileSync(candidateCopy, 'utf8'), 'first rebuild', 'the land left a copy in the candidate');
+  // A second branch rebuilds the same asset; the candidate's copy is now stale (and, as after an interrupted land, untracked).
+  for (const f of fs.readdirSync(path.join(main, '.git'), { recursive: true }).map(String).filter(f => f.endsWith('candidate-copies.json')))
+    fs.rmSync(path.join(main, '.git', f));
+  git(main, 'worktree', 'add', '--quiet', '-b', 'task', task);
+  write(task, ASSET, 'second rebuild');
+  lock(task, { [ASSET]: 'second rebuild' });
+  write(task, 'notes/second.md', 'Second change.\n');
+  git(task, 'add', LOCK, 'notes/second.md');
+  git(task, 'commit', '--quiet', '-m', 'second');
+  const second = git(task, 'rev-parse', 'HEAD');
+  assert.match(land(), /copied 1 asset\(s\)/);
+  assert.equal(git(main, 'rev-parse', 'HEAD'), second);
+  assert.equal(fs.readFileSync(path.join(main, ASSET), 'utf8'), 'second rebuild');
+});
