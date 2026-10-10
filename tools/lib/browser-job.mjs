@@ -40,12 +40,13 @@ function clearDeadMarkers() {
 }
 
 // GPU_WAIT (seconds in the GPU queue before the job defers; env GPU_WAIT, else defaultSeconds) as withBrowserJob
-// options: the wait is added to the job's own time limit (jobMs), so a busy GPU (voice or image batches) costs
-// waiting time, not a deferred test.
+// options. Two separate budgets: gpuWaitMs is the wait for the GPU and the load; timeoutMs (jobMs) is the run
+// deadline, which starts once the GPU is ours. A busy GPU costs waiting time, never run time, and an immediate
+// admission leaves no extra allowance.
 export function gpuWaitOptions(defaultSeconds, jobMs) {
   const seconds = process.env.GPU_WAIT === undefined || process.env.GPU_WAIT === '' ? defaultSeconds : +process.env.GPU_WAIT;
   if (!Number.isFinite(seconds) || seconds < 0) throw new Error(`GPU_WAIT must be a number of seconds, not ${process.env.GPU_WAIT}`);
-  return { gpuWaitMs: seconds * 1000, timeoutMs: seconds * 1000 + jobMs };
+  return { gpuWaitMs: seconds * 1000, timeoutMs: jobMs };
 }
 
 export async function withBrowserJob(name, run, {
@@ -54,7 +55,8 @@ export async function withBrowserJob(name, run, {
   if (!Number.isFinite(timeoutMs) || timeoutMs <= 0 || !Number.isFinite(loadWaitMs) || loadWaitMs < 0
     || !Number.isFinite(loadPollMs) || loadPollMs <= 0
     || !Number.isFinite(gpuWaitMs) || gpuWaitMs < 0) throw new Error('Invalid browser job time limits');
-  const started = Date.now();
+  const queued = Date.now();
+  let started = queued; // the run deadline counts from admission (the GPU is ours), not from the queue
   const owner = `${name} pid=${process.pid} ${randomUUID()}`, locks = [];
   let safeToRelease = true, gpuSlot, browserPid = null, gpuTicket = null, lockWaiter = null, lockHeld = false;
   // Kill Chromium's process group (Playwright starts it detached) when a close hangs
@@ -116,19 +118,26 @@ export async function withBrowserJob(name, run, {
   process.on('exit', onExit);
   for (const [signal, handler] of signals) process.on(signal, handler);
   try {
-    const deadline = new Promise((_, reject) => {
-      timer = setTimeout(() => {
-        deadlineError = new Error(`${name} exceeded ${timeoutMs / 1000} seconds`);
-        reject(deadlineError);
-      }, timeoutMs);
-    });
+    // One deadline promise, armed twice: first as a backstop on the queue wait (load wait + GPU wait), then, once the
+    // job is admitted, as the run deadline (timeoutMs from admission).
+    let rejectDeadline;
+    const deadline = new Promise((_, reject) => { rejectDeadline = reject; });
     deadline.catch(() => {});
-    const admissionUntil = started + Math.min(loadWaitMs, timeoutMs);
+    const arm = (ms, what) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        deadlineError = Object.assign(new Error(`${name} exceeded ${ms / 1000} seconds ${what}`),
+          what === 'in the queue' ? { code: 'GPU_DEFERRED' } : {});
+        rejectDeadline(deadlineError);
+      }, ms);
+    };
+    arm(loadWaitMs + gpuWaitMs + 5000, 'in the queue');
+    const admissionUntil = queued + loadWaitMs;
     let waiting = false, load;
     while ((load = os.loadavg()[0]) > 24) {
       const remaining = admissionUntil - Date.now();
-      if (remaining <= 0) throw Object.assign(new Error(`Render deferred: load ${load.toFixed(1)} exceeds GUIDE's limit of 24 after ${Date.now() - started}ms`), { code: 'LOAD_DEFERRED' });
-      if (!waiting) console.log(`${name}: waiting up to ${Math.min(loadWaitMs, timeoutMs) / 1000}s for load <= 24; no locks held`);
+      if (remaining <= 0) throw Object.assign(new Error(`Render deferred: load ${load.toFixed(1)} exceeds GUIDE's limit of 24 after ${Date.now() - queued}ms`), { code: 'LOAD_DEFERRED' });
+      if (!waiting) console.log(`${name}: waiting up to ${loadWaitMs / 1000}s for load <= 24; no locks held`);
       waiting = true;
       await Promise.race([deadline, cancelled, new Promise(resolve => {
         pollTimer = setTimeout(resolve, Math.min(loadPollMs, remaining));
@@ -137,13 +146,11 @@ export async function withBrowserJob(name, run, {
     }
     if (cancelledError) throw cancelledError;
     if (deadlineError) throw deadlineError;
-    // Check the clock too: an event-loop stall can delay the deadline callback.
-    if (Date.now() - started >= timeoutMs) throw new Error(`${name} exceeded ${timeoutMs / 1000} seconds`);
     clearDeadMarkers();
     acquire(`${ROOT}/browser.lock.${process.pid}`);
     const gpu = process.env.GL !== 'soft';
     if (gpu && gpuLock) {
-      const wait = Math.max(1, Math.min(started + timeoutMs, Date.now() + gpuWaitMs) - Date.now());
+      const wait = Math.max(1, gpuWaitMs);
       console.log(`${name}: waiting up to ${Math.round(wait / 1000)}s for the exclusive GPU lock as ${gpuLock}`);
       lockHeld = true; // release() is a no-op unless gpu.lock names us
       lockWaiter = spawn('python3', [GPU_PRIORITY, 'acquire', gpuLock, '--rank', 'render', '--pid', String(process.pid),
@@ -155,7 +162,7 @@ export async function withBrowserJob(name, run, {
       })]);
       if (code !== 0) throw Object.assign(new Error(`${name}: render deferred; the exclusive GPU lock stayed busy (python3 tools/gpu_priority.py queue)`), { code: 'GPU_DEFERRED' });
     } else if (gpu) {
-      const gpuUntil = Math.min(started + timeoutMs, Date.now() + gpuWaitMs);
+      const gpuUntil = Date.now() + gpuWaitMs;
       let waitingForGpu = false;
       // A place in the GPU queue (tools/gpu_priority.py), dropped once a slot is ours or on any exit.
       gpuTicket = enqueueGpuTicket({ owner, rank: 'browser' });
@@ -173,7 +180,9 @@ export async function withBrowserJob(name, run, {
     }
     if (cancelledError) throw cancelledError;
     if (deadlineError) throw deadlineError;
-    if (Date.now() - started >= timeoutMs) throw new Error(`${name} exceeded ${timeoutMs / 1000} seconds`);
+    // Admitted: from here the run deadline counts, separate from the wait above.
+    started = Date.now();
+    arm(timeoutMs, 'to run');
     const args = gpu
       ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu']
       : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];

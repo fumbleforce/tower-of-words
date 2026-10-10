@@ -8,7 +8,7 @@ Usage: gen_takes.py <seeds, comma separated> [keys, comma separated] [--lang Aut
 Takes already on disk from the same reference are skipped. Checks the GPU lock (cfg.LOCK, owner cfg.ME) before every batch and stops if it is gone,
 or with exit 75 when Jørgen's image gen dashboard asks for the GPU (cfg.must_yield); a rerun picks up from the takes on disk.
 Run with the Qwen venv: ~/ai/tts/qwen/venv/bin/python (run.sh does)."""
-import json, os, sys, time
+import gc, json, os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from cfg import RAW, ALT, XVEC_JA, QWEN, load, units, missing, speakers, lock_ok, must_yield, give_turn, spoken, setup
 seeds = [int(x) for x in sys.argv[1].split(',')]
@@ -54,7 +54,22 @@ if problems:
 
 import torch, soundfile as sf  # noqa: E402
 from qwen_tts import Qwen3TTSModel  # noqa: E402
-m = Qwen3TTSModel.from_pretrained(QWEN, device_map='cuda:0', dtype=torch.bfloat16, attn_implementation='sdpa')
+_model = []
+
+
+def model():
+    """The TTS model, loaded on first use and again after a turn given to a browser test (drop())."""
+    if not _model:
+        _model.append(Qwen3TTSModel.from_pretrained(QWEN, device_map='cuda:0', dtype=torch.bfloat16, attn_implementation='sdpa'))
+    return _model[0]
+
+
+def drop():
+    _model.clear()
+    gc.collect()
+    torch.cuda.empty_cache()
+
+
 for (sp, lang), es in todo.items():
     ref, ref_text, label = SP[sp]
     for seed in seeds:
@@ -65,13 +80,13 @@ for (sp, lang), es in todo.items():
             if must_yield():
                 print("stopping for Jørgen's image gen dashboard (gpu.priority); takes so far are on disk", flush=True)
                 sys.exit(75)
-            give_turn()  # a waiting day test gets a turn between batches
+            give_turn(drop)  # a waiting day test gets a turn between batches
             if not lock_ok():
                 sys.exit('lock lost, stopping')
             texts = [spoken(alt[e['key']]) if use_alt else e['tts'] for e in b]
             torch.manual_seed(seed)
             t = time.time()
-            wavs, sr = m.generate_voice_clone(text=texts, language=[lang] * len(b), ref_audio=[ref] * len(b), ref_text=[ref_text] * len(b),
+            wavs, sr = model().generate_voice_clone(text=texts, language=[lang] * len(b), ref_audio=[ref] * len(b), ref_text=[ref_text] * len(b),
                                               x_vector_only_mode=xvec(sp, lang), max_new_tokens=int(12 * (4 + max(len(x) for x in texts) * (0.25 if lang == 'Japanese' else 0.1))))
             for e, w, text in zip(b, wavs, texts):
                 d = f'{RAW}/{e["key"]}'
