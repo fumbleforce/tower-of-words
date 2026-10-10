@@ -94,6 +94,7 @@ MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commute
         'commuter_1', 'commuter_2', 'commuter_3', 'attendant', 'canteen_shirt', 'canteen_polo'}
 # clones whose reference speaks English: their Japanese is made from the timbre alone (gen_takes.xvec)
 XVEC_JA = {'eric', 'carina'}
+SPLICE = XVEC_JA  # and their English lines with Japanese in them are spliced (see RO2JA)
 LUFS = {'eric': -23.0, 'carina': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0,  # player thoughts quieter, recorded voices a little under the cast
         'kuro': -20.0, 'rei': -20.0}  # Kuro's husky voice: "bit loud" at -18 (Review kuro-voice-2)
 LUFS_DEFAULT = -18.0
@@ -130,7 +131,8 @@ def spoken(t):
 
 def manifest():
     """game3d/audio/manifest.json with 'said' (the written line, what the check compares against) and 'tts' (what is read).
-    An English line with Japanese in it also gets 'parts' (see parts())."""
+    An English line with Japanese in it also gets 'parts' (see parts()); its 'tts' is the whole line with the Japanese
+    written in kana (one take, see RO2JA), or it gets 'splice' when its speaker's Japanese has to be its own take (SPLICE)."""
     m = json.load(open(os.environ.get('VOICE_MANIFEST', f'{AUD}/manifest.json')))  # VOICE_MANIFEST: another story's (a worktree's)
     for e in m:
         e['said'] = e['text']
@@ -141,13 +143,39 @@ def manifest():
             ps = parts(t)
             if any(lang == 'ja' for lang, _ in ps):
                 e['parts'] = ps
+                if e['speaker'] in SPLICE:
+                    e['splice'] = True
+                else:
+                    e['tts'] = ' '.join(kana_reading(x) if lang == 'ja' else spoken(x) for lang, x in ps)
     return m
 
 
-# Japanese said inside an English line: voiced natively, as its own Japanese take spliced into the line (splice.py).
-# Romaji Japanese in English lines, spelled in kana for that take:
+# Japanese said inside an English line is said natively, in the same take as the English around it: the line is read in
+# English with the Japanese written in kana, so the model reads the word, not an English guess at the kanji (in English
+# mode 泳ぐ came out "Ongu" and "Unig"; written およぐ, 4 of 4 takes said it, P(ja) 0.95). One take keeps one voice:
+# spliced lines were among those where the voice changed partway (Jørgen, 2026-10-10: "kenji's first dialogue is
+# breaking into different voices when he talks english"). check_takes.py checks each word sounds Japanese
+# (native.words_native) and that the take keeps one voice (segvoice.py).
+# Only a clone whose reference speaks English (SPLICE: Eric, Carina) can't say Japanese in an English take: none of 32
+# of their takes did, in English, Auto or Japanese mode, kanji or kana. Their Japanese stays its own take, made from the
+# timbre alone and spliced in (splice.py); export.py picks the take closest in voice to the English around it and
+# checks the joined clip keeps one voice.
+# Romaji Japanese in English lines, spelled in kana:
 RO2JA = {'arigatō': 'ありがとう', '“tai”': 'たい',  # quoted, so it never matches inside an English word
          'mio-san': 'みおさん'}  # Kenji's "Mio-san... no." (#396); a name with -san in a Japanese speaker's English line
+# kana readings of the Japanese written in kanji inside English lines (a word missing here is a setup error)
+JA_READ = {'乾杯': 'かんぱい', '予約': 'よやく', '二人': 'ふたり', '休み': 'やすみ', '六時': 'ろくじ', '出して': 'だして',
+           '動いて': 'うごいて', '外人': 'がいじん', '大丈夫': 'だいじょうぶ', '待って': 'まって', '止まって': 'とまって',
+           '泳ぐ': 'およぐ', '画面': 'がめん', '行きたい': 'いきたい', '見たい': 'みたい', '開けて': 'あけて',
+           '飲みたい': 'のみたい', 'もう一度': 'もういちど'}
+_KANJI = re.compile('[㐀-鿿々]')
+
+
+def kana_reading(t):
+    """A Japanese run from parts() in kana: kanji words from JA_READ, kana as written."""
+    for w in sorted(JA_READ, key=len, reverse=True):
+        t = t.replace(w, JA_READ[w])
+    return tts_text(t)
 _JA_RUN = re.compile('(' + '|'.join(RO2JA) + r'|[぀-ヿ㐀-鿿々][぀-ヿ㐀-鿿々ー〜]*)([!?！？.。,、…]*)', re.I)
 _JA_PUNCT = str.maketrans({'!': '！', '?': '？', '.': '。', ',': '、'})
 
@@ -171,13 +199,13 @@ def parts(text):
 
 
 def units(keys=None):
-    """What the TTS makes and the check checks: every manifest line, except that a line with 'parts' is made part by part,
+    """What the TTS makes and the check checks: every manifest line, except that a line with 'splice' is made part by part,
     each as '<key>~<n>' with its own lang, 'said' and 'tts' and 'line' (the key of its line). keys: only these lines."""
     out = []
     for e in manifest():
         if keys is not None and e['key'] not in keys:
             continue
-        if 'parts' not in e:
+        if not e.get('splice'):
             out.append(e)
             continue
         for n, (lang, t) in enumerate(e['parts']):
@@ -222,6 +250,9 @@ def setup(keys=None):
     for wav in sorted({v[0] for v in sp.values()}):
         if not os.path.isfile(wav) or os.path.getsize(wav) < 1000:
             out.append(f'clone reference {os.path.relpath(wav, REPO)} is missing or empty (copy it from the main checkout)')
+    for e in units(keys):
+        if 'parts' in e and not e.get('splice') and _KANJI.search(e['tts']):
+            out.append(f"no kana reading for the Japanese in {e['key']} ({e['said'][:50]}): add it to JA_READ in tools/voice/cfg.py")
     for s in sorted(need & set(sp)):
         if not sp[s][1]:
             out.append(f'no transcript for {s!r}: tools/voice-refs/{sp[s][2]}.txt is missing or empty')

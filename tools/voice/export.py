@@ -1,7 +1,8 @@
 """Pick the best passing take per line and write game3d/audio/<key>.mp3 (mono 24 kHz 48 kbps), loudness per speaker,
 with tools/island_audio/export_voice.py's trim and normalise. Slow lines (manifest 'slow') are stretched to 0.72 of the pace.
-An English line with Japanese in it (cfg.units: '<key>~<n>' parts) gets the best take of each part, joined by splice.py;
-its parts are picked closest to the speaker's usual English pitch so the Japanese doesn't jump out of the line.
+A spliced line (cfg.SPLICE: Eric's and Carina's English lines with Japanese in them, '<key>~<n>' parts) gets the best take
+of each English part, at the speaker's usual English pitch; each Japanese part's takes are tried closest in voice (WavLM)
+to those English takes first, and the first joined clip (splice.py) that keeps one voice (segvoice.py) is exported.
 Only lines with no clip for their current text are touched (clips.json). A take named in force.json wins.
 Lines with no passing take are printed as NOPASS and listed in <work>/report.json 'fallback' (edge.py voices them).
 Rewrites game3d/audio/index.json.
@@ -9,11 +10,52 @@ Usage: ~/ai/tts-bench/.venv/bin/python tools/voice/export.py [--dry]"""
 import json, os, sys
 import numpy as np, librosa
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from cfg import RAW, AUD, WORK, CLIPS, FORCE, METRICS, REPORT, load, manifest, units, LUFS, LUFS_DEFAULT
+from cfg import RAW, AUD, WORK, CLIPS, FORCE, METRICS, REPORT, load, manifest, units, speakers, LUFS, LUFS_DEFAULT
 import export_voice as X
 import splice
+import segvoice as SV
+
+_C = []
+
+
+def voice_models():
+    """check.py's WavLM, pitch and Whisper (loaded only when a spliced line is exported)."""
+    if not _C:
+        import check
+        _C.append(check)
+    return _C[0]
+
+
+def english(y):
+    return voice_models().asr({'raw': y, 'sampling_rate': 16000}, generate_kwargs={'language': 'en', 'task': 'transcribe'})['text']
+
+
+def splice_pick(e, en, ja):
+    """en: {part key: (take, metrics)} picked; ja: {part key: [passing takes]}. The takes per part in the order to join
+    (or None) and the joined 16 kHz voice check: Japanese takes closest in voice to the English takes first, the first
+    combination of up to the 4 closest per part whose joined clip keeps one voice."""
+    import itertools
+    C = voice_models()
+    k = e['key']
+    load16 = lambda u, t: librosa.load(f"{RAW}/{u}/{t}.wav", sr=16000)[0]
+    host = [C.emb(load16(u, t)) for u, (t, m) in en.items()]
+    ref = C.emb(librosa.load(SPEAKERS[e['speaker']][0], sr=16000)[0])
+    target = sum(host) / len(host) if host else ref
+    ranked = {u: sorted(ts, key=lambda t: -float(C.emb(load16(u, t)) @ target))[:4] for u, ts in ja.items()}
+    order = [u['key'] for u in PARTS[k]]
+    for combo in sorted(itertools.product(*[range(len(ranked[u])) for u in ja]), key=sum):
+        pick_ = dict(zip(ja, [ranked[u][i] for u, i in zip(ja, combo)]))
+        takes = [en[u][0] if u in en else pick_[u] for u in order]
+        ys = [librosa.load(f"{RAW}/{u}/{t}.wav", sr=X.SR)[0] for u, t in zip(order, takes)]
+        y, _ = splice.join(ys, [u['said'] for u in PARTS[k]], [u['lang'] for u in PARTS[k]], X.SR)
+        y16 = librosa.resample(y, orig_sr=X.SR, target_sr=16000)
+        rows = SV.measure(y16, C.emb, C.pitch, ref)
+        if not SV.breaks(rows, y16, english):
+            return takes, rows
+    return None, None
 
 DRY = '--dry' in sys.argv
+SPEAKERS = speakers()
 M = load(METRICS, {})
 clips = load(CLIPS, {})
 force = load(FORCE, {})
@@ -66,15 +108,21 @@ for e in MAN:
         continue
     lufs = LUFS.get(e['speaker'], LUFS_DEFAULT)
     if k in PARTS:
-        # English parts at the speaker's usual English pitch, then each Japanese part as close as it gets to those
+        # English parts at the speaker's usual English pitch, then the Japanese takes closest in voice to those
         en = {u['key']: pick(u, SPK_F0.get((e['speaker'], 'en'))) for u in PARTS[k] if u['lang'] == 'en'}
-        f_en = [p[1]['median_f0'] for p in en.values() if p[1] and p[1].get('median_f0')]
-        f_line = float(np.median(f_en)) if f_en else SPK_F0.get((e['speaker'], 'en'))
-        picks = [(u,) + (en[u['key']] if u['key'] in en else pick(u, f_line, 0.05)) for u in PARTS[k]]
+        picks = [(u,) + (en[u['key']] if u['key'] in en else pick(u)) for u in PARTS[k]]
         if not all(p[1] for p in picks):
             rep['fallback'].append({'key': k, 'speaker': e['speaker'], 'lang': e['lang'], 'text': e['said'],
                                     'heard': {u['key']: [tk[t]['asr'] for t in sorted(tk)] for u, b, m, tk in picks if not b}})
             continue
+        ja = {u['key']: [force[u['key']]] if u['key'] in force else [t for t, m in tk.items() if m['ok']]
+              for u, b, m, tk in picks if u['lang'] == 'ja'}
+        takes, rows = splice_pick(e, {u: (b, m) for u, (b, m, tk) in en.items()}, ja)
+        if not takes:
+            rep['fallback'].append({'key': k, 'speaker': e['speaker'], 'lang': e['lang'], 'text': e['said'],
+                                    'heard': 'every joined clip changes voice partway (segvoice.py)'})
+            continue
+        picks = [(u, t, tk[t], tk) for (u, b, m, tk), t in zip(picks, takes)]
         if not DRY:
             ys = [librosa.load(f"{RAW}/{u['key']}/{b}.wav", sr=X.SR)[0] for u, b, m, tk in picks]
             y, spans = splice.join(ys, [u['said'] for u in PARTS[k]], [u['lang'] for u in PARTS[k]], X.SR)
@@ -84,7 +132,7 @@ for e in MAN:
             os.remove(tmp)
             clips[k] = e['said']
             print('made', k, e['speaker'], 'spliced', ' + '.join(f"{u['said']} [{b}]" for u, b, m, tk in picks), flush=True)
-        rep['made'][k] = {'speaker': e['speaker'], 'lang': e['lang'], 'text': e['said'], 'engine': 'qwen', 'spliced': True,
+        rep['made'][k] = {'speaker': e['speaker'], 'lang': e['lang'], 'text': e['said'], 'engine': 'qwen', 'spliced': True, 'stretches': rows,
                           'parts': [{'text': u['said'], 'lang': u['lang'], 'take': b, 'asr': m['asr'], 'cer': m['cer'],
                                      'f0': m['median_f0'], 'p_ja': m.get('p_ja')} for u, b, m, tk in picks]}
         continue

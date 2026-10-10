@@ -1,5 +1,5 @@
 """Clone takes with Qwen3-TTS 1.7B Base, batched per speaker and language: <work>/raw/<key>/<tag><seed>.wav + .json.
-Japanese is always read in Japanese, Eric's too; an English line with Japanese in it gets one take per part
+Japanese is always read in Japanese, Eric's too; a spliced English line (cfg.SPLICE) gets one take per part
 (<work>/raw/<key>~<n>/, cfg.units()), which export.py joins (splice.py).
 Usage: gen_takes.py <seeds, comma separated> [keys, comma separated] [--lang Auto] [--alt] [--xvec]
   no keys: every manifest line with no exported clip for its current text (cfg.missing())

@@ -1,0 +1,16 @@
+{
+  "title": "Kenji keeps one voice inside his English lines",
+  "date": "2026-10-10",
+  "by": "claude-agent:kenji-voice-one-take",
+  "caption": "In his first meeting, Kenji's voice changed partway through some English lines: the \"Ah...\" of \"Ah... chair\" and the \"Chair...\" of \"Chair... there\" came out in another voice, and \"Mio-san\" was a separate take spliced in. Each line is now one take, checked to keep one voice. The two links play the whole exchange before and after.",
+  "result": ["kenji-first-stretches"],
+  "sections": [
+    {"title": "Voice match, stretch by stretch", "caption": "Each dot is a stretch of speech between pauses. Before, two stretches sat far below the rest of their line. Now no stretch falls under 0.74. \"Norway... big cat?\" was already in one voice and is the same take.",
+     "images": [
+       {"id": "kenji-first-stretches", "image": "bible/shots/showcase/kenji-voice-one-take-20261010/kenji-first-stretches.webp", "caption": "kenji_first, English lines, voice match of each stretch to Kenji's reference"}]}
+  ],
+  "links": [
+    {"label": "Before: the whole exchange", "href": "bible/shots/showcase/kenji-voice-one-take-20261010/kenji-first-before.mp3"},
+    {"label": "After: the whole exchange", "href": "bible/shots/showcase/kenji-voice-one-take-20261010/kenji-first-after.mp3"}
+  ]
+}
