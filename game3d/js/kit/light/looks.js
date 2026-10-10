@@ -73,11 +73,36 @@ export const EVENING_LIGHT = {
 
 // the sky outdoors (sRGB; look/sky.js paints it, and the far view's haze takes the horizon's colour): zenith, the
 // sky a third of the way up, the horizon, the glow round the sun and how strong it is, the mainland's hills on the
-// horizon. early: the low morning sun before work; day: the rest of the working day; dusk: after work
+// horizon, and the ground below the horizon in what metal and glass reflect (kit/materials/env.js). early: the low
+// morning sun before work; day: the rest of the working day; dusk: after work
 export const SKY = {
-  early: { zenith: '#6c8fbb', mid: '#9cb3cb', horizon: '#c4c8c8', glow: '#f6d6a8', glowK: 0.5, land: '#98a1a8' },
-  day: { zenith: '#5f89ba', mid: '#93b0cd', horizon: '#bccad4', glow: '#fbeccd', glowK: 0.3, land: '#93a2ad' },
-  dusk: { zenith: '#3f4f7a', mid: '#7b809f', horizon: '#b2a0a6', glow: '#ff9d5e', glowK: 0.85, land: '#7f7a8a' },
+  early: {
+    zenith: '#6c8fbb',
+    mid: '#9cb3cb',
+    horizon: '#c4c8c8',
+    glow: '#f6d6a8',
+    glowK: 0.5,
+    land: '#98a1a8',
+    below: '#545a4c',
+  },
+  day: {
+    zenith: '#5f89ba',
+    mid: '#93b0cd',
+    horizon: '#bccad4',
+    glow: '#fbeccd',
+    glowK: 0.3,
+    land: '#93a2ad',
+    below: '#545a4c',
+  },
+  dusk: {
+    zenith: '#3f4f7a',
+    mid: '#7b809f',
+    horizon: '#b2a0a6',
+    glow: '#ff9d5e',
+    glowK: 0.85,
+    land: '#7f7a8a',
+    below: '#2c3034',
+  },
 };
 
 // outdoors. hemi: [sky, ground, intensity]; sun: [colour, intensity, direction]; fill: [colour, intensity];
