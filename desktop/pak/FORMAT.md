@@ -4,7 +4,7 @@ The desktop release keeps the game's files in one encrypted file, `content.pak`,
 
 - `source.mjs`: `openDir(root)` serves a plain folder (development); `openPak(file, key)` serves a pack (release). Both give `has`, `list`, `stat`, `read` and `stream(path, {start, end})`, where `end` is inclusive like an HTTP Range. The shell (#420) codes against this object only. `openPak` is synchronous and also has `close()`.
 - `pack.mjs`: `node desktop/pak/pack.mjs --list files.json --out content.pak [--zstd]`, where files.json is `[{src, dest}]` (#419 writes the list). Same inputs and key give the same bytes.
-- `key.mjs`: the build key is `DESKTOP_PAK_KEY` (64 hex characters) or `desktop/.key`, created with a random key on first use. `desktop/.key` is git-ignored. Back it up: a pack is unreadable without its key.
+- `key.mjs`: the build key is `DESKTOP_PAK_KEY` (64 hex characters) or `desktop/.key`, created with a random key on first use. `desktop/.key` is git-ignored (desktop/.gitignore). Back it up: a pack is unreadable without its key.
 - `bench.mjs`: the benchmark below. Tests: `game3d/test/unit/desktop-pak.test.mjs` (part of `npm test`).
 
 ## Layout
