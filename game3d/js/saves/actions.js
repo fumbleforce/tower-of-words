@@ -7,11 +7,12 @@
 import { ui, sfx } from '../ui.js';
 import { sim, save as simSave, periodName } from '../sim.js';
 import { PLACE_NAMES } from '../places/definitions.js';
-import { createSlotStore, localKV, idbThumbs, KEYS } from './store.js';
+import { createSlotStore, KEYS } from './store.js';
+import { storage } from '../storage.js';
 import { el } from '../ui/dom.js';
 
-export const kv = localKV();
-export const store = createSlotStore({ kv, thumbs: idbThumbs() });
+export const kv = storage;
+export const store = createSlotStore({ kv, thumbs: storage.blobs });
 export const migrated = store.migrate().catch(() => 0);
 
 const body = () => document.body.classList;
@@ -198,12 +199,7 @@ export function createSaving({ game, grab, openLayer, closeLayer, setPaused }) {
     setInterval(async () => {
       const g = game();
       if (!g || !g.place || atTitle() || body().contains('reloading')) return;
-      let raw = null;
-      try {
-        raw = localStorage.getItem(KEYS.SAVE);
-      } catch {
-        return;
-      }
+      const raw = storage.getText(KEYS.SAVE);
       if (!raw || raw === lastAuto) return;
       lastAuto = raw;
       await store.noteAuto({

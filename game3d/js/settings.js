@@ -1,10 +1,11 @@
-// Player settings: text, sound, graphics and motion. Kept in localStorage, applied at once, and announced to
+// Player settings: text, sound, graphics and motion. Kept (storage.js), applied at once, and announced to
 // whoever listens (ui.js for sound and text, main.js and post.js for the graphics tier, the camera for motion).
 //   import { settings, setSetting, onSettings } from './settings.js'
 //   window.__settings is the same object, for modules that don't import this one.
 //   A 'amakawa:settings' event fires on window after every change (detail: { key, value, settings }).
 
 import { flags } from './narrative/state.js';
+import { storage } from './storage.js';
 
 const KEY = 'amakawa-settings';
 const reduceDefault = (() => {
@@ -68,14 +69,10 @@ function migrate(s) {
 }
 
 function load() {
-  try {
-    const s = JSON.parse(localStorage.getItem(KEY) || 'null');
-    if (s && typeof s === 'object') {
-      if ((s.v || 0) < VERSION) localStorage.setItem(KEY, JSON.stringify(migrate(s)));
-      return { ...DEFAULTS, ...s };
-    }
-  } catch {
-    /* storage off */
+  const s = storage.get(KEY);
+  if (s && typeof s === 'object') {
+    if ((s.v || 0) < VERSION) storage.set(KEY, migrate(s));
+    return { ...DEFAULTS, ...s };
   }
   return { ...DEFAULTS, v: VERSION }; // saved with the first change, so the migrations above never run on it
 }
@@ -94,11 +91,7 @@ export function setSetting(key, value) {
   settings[key] = value;
   if (key === 'privateMode') flags.private_mode = !!value;
   if (key === 'skipChecks') flags.skill_checks = !value;
-  try {
-    localStorage.setItem(KEY, JSON.stringify(settings));
-  } catch {
-    /* storage off */
-  }
+  storage.set(KEY, settings);
   apply();
   for (const fn of subs) {
     try {

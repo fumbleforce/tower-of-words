@@ -1,4 +1,5 @@
 import { defaults, parseConfig, storageKey, TINTS } from './config.js';
+import { storage } from '../storage.js';
 
 export function attachPanel({ initial, apply, onView, onAnimation, onPause }) {
   let config = structuredClone(initial);
@@ -8,13 +9,9 @@ export function attachPanel({ initial, apply, onView, onAnimation, onPause }) {
     message.textContent = text;
   };
   function store() {
-    try {
-      localStorage.setItem(storageKey(config.variant), JSON.stringify(config));
-      return true;
-    } catch {
-      notice('Browser storage is unavailable. Download settings to keep your changes.');
-      return false;
-    }
+    if (storage.set(storageKey(config.variant), config)) return true;
+    notice('Browser storage is unavailable. Download settings to keep your changes.');
+    return false;
   }
   function refresh() {
     for (const key of fields) {
@@ -39,11 +36,8 @@ export function attachPanel({ initial, apply, onView, onAnimation, onPause }) {
   }
   function load(next) {
     if (next.variant !== config.variant) {
-      try {
-        localStorage.setItem(storageKey(next.variant), JSON.stringify(next));
-      } catch {
+      if (!storage.set(storageKey(next.variant), next))
         throw new Error('Browser storage is needed to load settings for another sample. Select that sample first.');
-      }
       const url = new URL(location.href);
       url.search = new URLSearchParams({ variant: next.variant });
       location.assign(url);

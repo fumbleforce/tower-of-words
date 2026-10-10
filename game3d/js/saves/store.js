@@ -1,10 +1,10 @@
 // The save slots (docs/game/systems.md, Saving): the autosave, one quick slot and twelve manual slots. Each slot is
 // a copy of the autosave's data (sim.js save) with what the saves screen shows: the day, period, place, the goal or
-// the line on screen, and when it was saved. Records live in localStorage under their old keys (amakawa-slot-1..3
-// from the three-slot build keep working); thumbnails go to IndexedDB, so a dozen pictures don't eat the few MB
-// localStorage has. Where IndexedDB isn't there (Node tests, a locked-down browser) a thumbnail stays in its record,
-// as the old build kept it.
-//   const store = createSlotStore({ kv: localKV(), thumbs: idbThumbs() }); await store.migrate();
+// the line on screen, and when it was saved. Records are small values under their old keys (amakawa-slot-1..3 from
+// the three-slot build keep working); thumbnails are pictures beside them (storage.js), so in the browser a dozen of
+// them don't eat the few MB localStorage has. Where there is nowhere for pictures (Node tests, a locked-down
+// browser) a thumbnail stays in its record, as the old build kept it.
+//   const store = createSlotStore({ kv: storage, thumbs: storage.blobs }); await store.migrate();
 // No DOM and no game imports, so the unit tests run it in Node with Map-backed fakes.
 export const KEYS = {
   SAVE: 'amakawa-day1-save',
@@ -159,55 +159,4 @@ export function progressKey(d) {
     d.ended || false,
     d.ui?.goal || '',
   ]);
-}
-
-// ---------- browser backends ----------
-// (the storage is looked up on each call, so a test can swap localStorage after import)
-export function localKV(storage = null) {
-  const st = () => storage || globalThis.localStorage;
-  return {
-    get(k) {
-      try {
-        return JSON.parse(st().getItem(k) || 'null');
-      } catch {
-        return null;
-      }
-    },
-    set(k, v) {
-      try {
-        st().setItem(k, JSON.stringify(v));
-        return true;
-      } catch {
-        return false;
-      }
-    },
-  };
-}
-
-// thumbnails as data URLs in one IndexedDB store; null where IndexedDB is missing
-export function idbThumbs(idb = globalThis.indexedDB) {
-  if (!idb) return null;
-  let db = null;
-  const open = () =>
-    (db ||= new Promise((res, rej) => {
-      const r = idb.open('amakawa-saves', 1);
-      r.onupgradeneeded = () => r.result.createObjectStore('thumbs');
-      r.onsuccess = () => res(r.result);
-      r.onerror = () => rej(r.error);
-    }));
-  const tx = (mode, fn) =>
-    open().then(
-      (d) =>
-        new Promise((res, rej) => {
-          const t = d.transaction('thumbs', mode);
-          const req = fn(t.objectStore('thumbs'));
-          t.oncomplete = () => res(req.result);
-          t.onerror = t.onabort = () => rej(t.error);
-        }),
-    );
-  return {
-    get: (k) => tx('readonly', (s) => s.get(k)).then((v) => v || null),
-    set: (k, v) => tx('readwrite', (s) => s.put(v, k)),
-    del: (k) => tx('readwrite', (s) => s.delete(k)),
-  };
 }

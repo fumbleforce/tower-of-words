@@ -16,6 +16,7 @@ import { voice, muted } from '../audio/core.js';
 import { openLog, closeLog, logOpen, logSize, scrollLog, focusLog, activateLog } from './backlog.js';
 import { whileUnpaused } from './dialogue-text.js';
 import { $, el } from './dom.js';
+import { storage } from '../storage.js';
 
 export const vn = { auto: false, skip: false, ctrl: false, hidden: false };
 let ui = null;
@@ -134,13 +135,7 @@ function showLog() {
     closed: () => $('#vnbar .log')?.focus?.({ preventScroll: true }),
   });
 }
-let seenBar = (() => {
-  try {
-    return localStorage.getItem(SEEN_KEY) === '1';
-  } catch {
-    return false;
-  }
-})();
+let seenBar = storage.getText(SEEN_KEY) === '1';
 export function installVn(theUi) {
   ui = theUi;
   const bar = el(
@@ -168,11 +163,7 @@ export function installVn(theUi) {
     // the row: after the first few lines, then always; not over a word prompt
     if (!seenBar && (ui._lines || 0) > 4) {
       seenBar = true;
-      try {
-        localStorage.setItem(SEEN_KEY, '1');
-      } catch {
-        /* storage off */
-      }
+      storage.setText(SEEN_KEY, '1');
     }
     bar.hidden = !seenBar || typing();
     sync();

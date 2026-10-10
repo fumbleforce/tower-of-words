@@ -7,6 +7,7 @@ import { stopVoice, voice } from '../audio/core.js';
 import { heardHTML, addPlayButtons } from './dialogue-text.js';
 import { thumbStyle } from './portraits.js';
 import { el } from './dom.js';
+import { storage } from '../storage.js';
 import { conversationMemory, rememberEntry, rememberedLines } from '../conversations/state.js';
 import { LOG_LIMIT, restoreLog, recordEntry, sameLine } from './backlog-records.js';
 import { earlierReading } from './backlog-comparison.js';
@@ -28,11 +29,8 @@ export function lineId(who, text) {
   return a.toString(36) + b.toString(36).slice(0, 3);
 }
 const read = (() => {
-  try {
-    return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]'));
-  } catch {
-    return new Set();
-  }
+  const v = storage.get(READ_KEY);
+  return new Set(Array.isArray(v) ? v : []);
 })();
 let readDirty = 0;
 export const wasRead = (id) => read.has(id);
@@ -41,11 +39,7 @@ export function markRead(id) {
   read.add(id);
   clearTimeout(readDirty);
   readDirty = setTimeout(() => {
-    try {
-      localStorage.setItem(READ_KEY, JSON.stringify([...read]));
-    } catch {
-      /* storage off */
-    }
+    storage.set(READ_KEY, [...read]);
   }, 400);
 }
 
