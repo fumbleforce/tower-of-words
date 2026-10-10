@@ -1,8 +1,8 @@
-"""Join the parts of an English line with Japanese in it (cfg.parts) into one clip: each part is its own take (English
-parts in English, Japanese parts in Japanese, same clone), trimmed, levelled to the English parts' speech loudness and
-joined with a pause that follows the punctuation between them. export.py uses it; the result is normalised like any clip.
-Why: the English voice reads Japanese with an English accent (待って as "matty"), so the Japanese is made natively and
-put into the line (Jørgen, 2026-09-30)."""
+"""Join the parts of a spliced English line (cfg.SPLICE: Eric's and Carina's lines with Japanese in them, cfg.parts)
+into one clip: each part is its own take (English parts in English, Japanese parts in Japanese, same clone), trimmed,
+levelled to the English parts' speech loudness and joined with a pause that follows the punctuation between them. export.py uses it; the result is normalised like any clip.
+Why: an English clone reads Japanese with an English accent (待って as "matty"; Jørgen, 2026-09-30), so their Japanese is made
+natively and put into the line. Every other speaker says the Japanese in the same take as the English (cfg.RO2JA)."""
 import numpy as np, librosa
 
 # pause after a part, by how it ends: a full stop, a comma, or nothing (the line runs on)

@@ -5,6 +5,10 @@ digits to words) and compared by character error rate.
 Japanese words said on their own (word-*, eric-*, carina-*) and the Japanese parts of English lines (cfg.units) must also sound
 Japanese: Whisper's language guess on the take, P(ja) >= 0.5 (native.py); exact name readings require it too.
 Word clips also get a rough pitch-accent check.
+An English line with Japanese in it, made in one take: each Japanese word must sound Japanese where it is said
+(native.words_native: P(ja) >= 0.5 on its stretch, 0.8 if neither transcript has it; words of 2 kana or fewer are too
+short to measure and only have to be heard). Every English take must keep one voice from start to end (segvoice.py, on
+the take trimmed and levelled as export.py writes it: no stretch in another voice).
 Results go to <work>/metrics.json; takes measured before (same file time, same text) are skipped.
 Prints PASS or FAIL with every take's transcript for the lines that still need a clip.
 Usage: DEV=cuda ~/ai/tts-bench/.venv/bin/python tools/voice/check_takes.py takes | reftext
@@ -13,14 +17,17 @@ import glob, json, os, re, sys, unicodedata
 mode = sys.argv[1]
 sys.argv = [sys.argv[0]]
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from cfg import RAW, METRICS, VR, units, missing, speakers, FEMALE, MALE  # puts tools/island_audio on the path
+from cfg import RAW, METRICS, VR, units, missing, speakers, kana_reading, spoken, LUFS, LUFS_DEFAULT, FEMALE, MALE  # puts tools/island_audio on the path
 import check as C
 import jiwer, librosa
 from readings import reading_target, strict_reading
 import native as N
+import segvoice as SV
+import export_voice as X
 from transformers import WhisperProcessor
 N.use(C.asr.model, WhisperProcessor(feature_extractor=C.asr.feature_extractor, tokenizer=C.asr.tokenizer))
 P_JA = 0.5
+EN_CHECK = 4  # version of the English take check (4: one voice, measured as exported, Japanese checked where it is said); older takes are measured again
 
 C.FEMALE.update(FEMALE)
 C.MALE.update(MALE)
@@ -77,7 +84,17 @@ def has_kana(h, k):
     return any(jiwer.cer(k, h[j:j + L]) * len(k) <= 1.01 for L in (len(k) - 1, len(k), len(k) + 1) for j in range(0, max(1, len(h) - L + 1)))
 
 
-def measure_en(items, refemb):
+def english(y):
+    return C.asr({'raw': y, 'sampling_rate': 16000}, generate_kwargs={'language': 'en', 'task': 'transcribe'})['text'].strip()
+
+
+def exported(path, sp):
+    """A take at 16 kHz trimmed and levelled as export.py writes it (export_voice.prep)."""
+    return librosa.resample(X.prep(path, LUFS.get(sp, LUFS_DEFAULT)).astype('float32'), orig_sr=X.SR, target_sr=16000)
+
+
+def measure_en(items, refemb, parts_of):
+    """parts_of: line key -> cfg.parts() for the English lines with Japanese in them made in one take."""
     ys = [librosa.load(p, sr=16000)[0] for _, p, _, _ in items]
     ok_idx = [i for i, y in enumerate(ys) if len(y) >= 1600]
     outs = C.asr([{'raw': ys[i], 'sampling_rate': 16000} for i in ok_idx], batch_size=8,
@@ -116,8 +133,32 @@ def measure_en(items, refemb):
         if sp in MALE and n <= 4:
             m['pitch_ok'] = True
         m['dur_ok'] = 0.02 * n <= dur <= 2.0 + 0.13 * n
+        if key[0] in parts_of:  # one take with Japanese in it: the English against what Whisper heard around the Japanese,
+            # and each Japanese word where it is said: heard (in either transcript) and Japanese-sounding
+            ps = parts_of[key[0]]
+            words, heard_en = N.words_native(y, ps, C.asr)
+            cer = min(cer, float(jiwer.cer(letters(spoken(' '.join(t for l, t in ps if l == 'en'))), letters(heard_en) or '-')))
+            m['cer'] = m['cer_written'] = round(cer, 3)
+            m['edits'] = round(cer * n)
+            hk = C.kana(hyp_ja.get(i, ''))
+            m['ja_words'], ja_miss = [], []
+            for w, s0, s1, pj in words:
+                r = kana_reading(w)
+                heard = has_kana(hk, C.kana(r)) or letters(r) in b or letters(r) in letters(hyp_ja.get(i, ''))
+                short = len(C.kana(r)) <= 2  # too short for Whisper's language guess: only has to be heard
+                ok_w = heard if short else (pj >= P_JA and (heard or pj >= 0.8))
+                m['ja_words'].append([w, s0, s1, round(pj, 3), heard, ok_w])
+                if not ok_w:
+                    ja_miss.append(w)
+            m['p_ja'] = min(pj for _, _, _, pj in words)
+            m['ja_missing'], ja_ok = ja_miss, not ja_miss
         m['read_ok'] = bool((cer <= 0.1 or (n <= 8 and m['edits'] <= 1)) and ja_ok)
-        m['ok'] = bool(m['pitch_ok'] and m['dur_ok'] and m['read_ok'])
+        if '~' not in key[0]:  # a whole line (a spliced line's parts are checked joined, in export.py)
+            yx = exported(p, sp)  # as export.py trims and levels it: where the pauses fall decides the stretches
+            rows = SV.measure(yx, C.emb, C.pitch, refemb[sp])
+            br = SV.breaks(rows, yx, english)
+            m['stretches'], m['voice_breaks'], m['voice_ok'], m['en_check'] = rows, br, not br, EN_CHECK
+        m['ok'] = bool(m['pitch_ok'] and m['dur_ok'] and m['read_ok'] and m.get('voice_ok', True))
         res[key] = m
     return res
 
@@ -129,6 +170,8 @@ old = json.load(open(OUT)) if os.path.exists(OUT) else {}
 SP = speakers()
 refemb = {k: C.emb(librosa.load(v[0], sr=16000)[0]) for k, v in SP.items()}
 M = units()
+need = set(missing())
+parts_of = {e['key']: e['parts'] for e in M if 'parts' in e and not e.get('part')}
 items = {'ja': [], 'en': []}
 for e in M:
     for p in sorted(glob.glob(f'{RAW}/{e["key"]}/*.wav')):
@@ -139,7 +182,10 @@ for e in M:
         if (prev and prev.get('mtime') == int(os.path.getmtime(p))
                 and prev.get('text') == e['said']
                 and prev.get('reading', prev.get('text')) == target
-                and (not needs_native or prev.get('p_ja') is not None)):
+                and (not needs_native or prev.get('p_ja') is not None)
+                # English takes measured before the one-voice and in-line native checks: again, if the line needs a clip
+                and not (e['lang'] == 'en' and e.get('line', e['key']) in need
+                         and '~' not in e['key'] and prev.get('en_check') != EN_CHECK)):
             continue
         items[e['lang']].append(((e['key'], tk), p, e['speaker'], target))
 print('to check', len(items['ja']), 'ja', len(items['en']), 'en', flush=True)
@@ -147,7 +193,7 @@ said = {e['key']: e['said'] for e in M}
 for lang, its in items.items():
     for s in range(0, len(its), 64):
         if lang == 'en':
-            res = measure_en(its[s:s + 64], refemb)
+            res = measure_en(its[s:s + 64], refemb, parts_of)
         else:
             res = C.measure(its[s:s + 64], refemb)
             for (key, tk), m in res.items():
@@ -177,7 +223,6 @@ for lang, its in items.items():
         os.makedirs(os.path.dirname(OUT), exist_ok=True)
         json.dump(old, open(OUT, 'w'), ensure_ascii=False, indent=1)
         print('checked', lang, min(s + 64, len(its)), '/', len(its), flush=True)
-need = set(missing())
 for e in M:
     if e.get('line', e['key']) not in need:
         continue

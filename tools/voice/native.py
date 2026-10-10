@@ -57,6 +57,66 @@ def ja_text(y):
     return M['p'].batch_decode(out, skip_special_tokens=True)[0].strip()
 
 
+def _norm(w):
+    w = re.sub(r'[^a-z0-9]', '', w.lower())
+    return 'hmm' if re.fullmatch(r'h?m+h?m*', w) else w  # "Mm" is read and heard as "Hmm"
+
+
+def word_spans(y, parts, asr):
+    """Where each Japanese word of an English line is in its take (16 kHz audio y), as [(word, start s, end s)], and
+    what English Whisper heard outside those words (it translates or drops Japanese: おはようございます as "Good
+    morning"), to check the English against. parts: cfg.parts() of the line ([('en', 'On the train you said'),
+    ('ja', '待って'), ...]). asr: check.py's Whisper pipeline. English Whisper with word times; its words are matched to the
+    line's English words, and a Japanese word is whatever Whisper heard between the English words around it (in the gap
+    between them if it heard nothing there)."""
+    import difflib
+    said = []  # (kind, normalised token or the Japanese word)
+    for kind, t in parts:
+        if kind == 'ja':
+            said.append(('ja', t))
+        else:
+            said += [('en', _norm(w)) for w in re.findall(r"[A-Za-z0-9'’]+", t) if _norm(w)]
+    out = asr({'raw': y, 'sampling_rate': 16000}, return_timestamps='word', generate_kwargs={'language': 'en', 'task': 'transcribe'})
+    chunks = out.get('chunks', [])
+    chunks = [c for c in chunks if _norm(c['text'])] or chunks
+    heard = [(_norm(c['text']), c['timestamp'][0], c['timestamp'][1]) for c in chunks]
+    end = len(y) / 16000
+    sm = difflib.SequenceMatcher(None, [s[1] if s[0] == 'en' else '\0' for s in said], [h[0] for h in heard], autojunk=False)
+    match = {}
+    for a, b, n in sm.get_matching_blocks():
+        for k in range(n):
+            match[a + k] = b + k
+    spans, inside = [], set()
+    for i, (kind, w) in enumerate(said):
+        if kind != 'ja':
+            continue
+        before = max([j for j in match if j < i], default=None)
+        after = min([j for j in match if j > i], default=None)
+        lo = match[before] + 1 if before is not None else 0
+        hi = match[after] if after is not None else len(heard)
+        inside.update(range(lo, hi))
+        if hi > lo:
+            s0 = heard[lo][1] or 0.0
+            s1 = heard[hi - 1][2] or (heard[hi][1] if hi < len(heard) else end)
+        else:
+            s0 = heard[lo - 1][2] if lo > 0 and heard[lo - 1][2] else 0.0
+            s1 = heard[hi][1] if hi < len(heard) else end
+        spans.append((w, round(float(s0), 2), round(float(max(s1, s0 + 0.3)), 2)))
+    english = ' '.join(c['text'].strip() for j, c in enumerate(chunks) if j not in inside)
+    return spans, english
+
+
+def words_native(y, parts, asr):
+    """([(word, start, end, P(ja))], English heard) for the Japanese words in a take of an English line (word_spans), each
+    measured on its own stretch plus a little either side."""
+    spans, english = word_spans(y, parts, asr)
+    out = []
+    for w, a, b in spans:
+        seg = y[max(0, int((a - 0.05) * 16000)):int((b + 0.08) * 16000)]
+        out.append((w, a, b, lang(seg)[0] if len(seg) >= 3200 else 0.0))
+    return out, english
+
+
 def load(path):
     return librosa.load(path, sr=16000)[0]
 
