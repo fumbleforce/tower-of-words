@@ -92,8 +92,8 @@ const lowerFirst = (s) => s.charAt(0).toLowerCase() + s.slice(1);
 // What the pin's tooltip and the action menu say: { verb, name, text }. text is the tooltip: "Look: Vending machine",
 // "Talk: Mr. Mori", "Go to the plaza", "Take the lift down to B2". With private mode off a private pin says only
 // the neutral verb (and a person's name, which is public), never a private label or tip, so no private wording shows
-// in public play.
-export function pinTip(item, { privateMode = false } = {}) {
+// in public play. `flags` are the story flags, for a thing's verbIf.
+export function pinTip(item, { privateMode = false, flags = {} } = {}) {
   const person = isPerson(item);
   if (isPrivatePin(item) && !privateMode) {
     const verb = person ? 'Talk' : 'Look';
@@ -101,7 +101,10 @@ export function pinTip(item, { privateMode = false } = {}) {
     return { verb, name, text: name ? `${verb}: ${name}` : verb };
   }
   const tr = item.travel;
-  const verb = (tr && tr.verb) || item.verb || (person ? 'Talk' : 'Look');
+  // a verb that changes with the story: Tama says Return the chair while clicking her does that, Pet otherwise
+  const vi = item.verbIf;
+  const live = vi && flags[vi.set] && !flags[vi.unset] ? vi.verb : '';
+  const verb = (tr && tr.verb) || live || item.verb || (person ? 'Talk' : 'Look');
   const name = item.label || '';
   if (tr && tr.tip) return { verb, name, text: tr.tip };
   // a way out labelled with its destination ("To the plaza") reads as one phrase: "Go to the plaza"

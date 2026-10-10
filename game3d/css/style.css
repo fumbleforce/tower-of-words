@@ -1186,3 +1186,12 @@ button, [role="button"], [role="tab"], #top, #marks, #actMenu, #board, #liftInd 
 #timeMenu .time-note { margin: 16px 0 0; }
 #timeMenu .time-goal { border-left: 2px solid var(--accent); padding-left: 12px; }
 body.phone #timeMenu .time-card { top: auto; bottom: calc(14px + env(safe-area-inset-bottom)); left: 12px; right: 12px; width: auto; max-height: calc(100dvh - 48px); }
+/* desktop: one key column for every row, so labels line up whether or not a row has a key, and for long remapped
+   key names (the column is as wide as the widest cap; an empty cap cell takes no width of its own) */
+body:not(.phone) #actMenu:not([hidden]) { display: grid; grid-template-columns: max-content 1fr max-content; row-gap: 2px; }
+body:not(.phone) #actMenu .hd { grid-column: 1 / -1; }
+body:not(.phone) #actMenu .act { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; column-gap: 0; }
+body:not(.phone) #actMenu .act .k { margin-right: 9px; justify-self: start; }
+body:not(.phone) #actMenu .act .k.none { margin: 0; min-width: 0; padding: 0; border: 0; background: none; }
+body:not(.phone) #actMenu .act .lb { grid-column: 2; }
+body:not(.phone) #actMenu .act .ct { grid-column: 3; }

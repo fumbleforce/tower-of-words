@@ -85,14 +85,17 @@ export function actMenu({ keyLabel, settings }) {
         // Jørgen: "the interaction box is also not very pretty". The name on top, then one row per action: a key cap
         // and the action in one type style. The action row always names its action (Jørgen, 2026-09-30, on a box that
         // had dropped it and showed only the name: "interaction windows but no actions"); the key cap goes after five
-        // uses. Phone rows have no key caps.
-        const k = (c) => (phone ? '' : `<span class="k">${c}</span>`);
+        // uses. Phone rows have no key caps. On desktop a row without a key still gets an empty cap cell, so every
+        // label starts in the same column (issue #398); the CSS sizes that column to the widest key.
+        const k = (c) => (phone ? '' : `<span class="k${c ? '' : ' none'}">${c}</span>`);
         const head = name ? `<div class="hd">${name}</div>` : '';
-        const useFace = `${uses < 5 ? k('E') : ''}<span class="lb">${verb}</span>`;
+        const useFace = `${k(uses < 5 ? 'E' : '')}<span class="lb">${verb}</span>`;
         act.innerHTML =
           head +
           (canUse ? `<button type="button" class="act use">${useFace}</button>` : '') +
-          (topic ? `<button type="button" class="act topic"><span class="lb">${topic.label}</span></button>` : '') +
+          (topic
+            ? `<button type="button" class="act topic">${k('')}<span class="lb">${topic.label}</span></button>`
+            : '') +
           (sayHere
             ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="lb">Say a word</span></button>`
             : '') +

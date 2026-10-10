@@ -6,6 +6,7 @@
 // or after a long press on one on a phone. A tap still acts as before; the long press only previews, and its preview
 // stays until the next tap anywhere. Hidden while the action menu is open on the same target (the menu has the name).
 import { pinTip } from '../gameplay/pin-kinds.js';
+import { flags } from '../narrative/state.js';
 
 // the symbols, in a 24 px box, drawn in the pin's colour (css/marks.css); whole literals, so the asset library lists them
 export const PIN_GLYPHS = {
@@ -29,7 +30,7 @@ export const HEART =
 
 // private mode from window.__settings (settings.js), so engine.js, which walker tests load in Node, doesn't need it
 export const privateOn = () => !!globalThis.__settings?.privateMode;
-export const tipOf = (item) => pinTip(item, { privateMode: privateOn() });
+export const tipOf = (item) => pinTip(item, { privateMode: privateOn(), flags });
 
 const LONG_PRESS = 450; // ms held still on a pin before its tooltip shows (a phone's long press)
 const MOVE = 10; // px a finger may move and still count as held

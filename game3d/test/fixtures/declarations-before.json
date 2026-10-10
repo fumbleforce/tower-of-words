@@ -2108,6 +2108,7 @@
         "tama": {
           "label": "Cat",
           "verb": "Pet",
+          "verbIf": { "set": "found_chair", "unset": "chair_back", "verb": "Return the chair" },
           "kind": "person small"
         },
         "covered": {

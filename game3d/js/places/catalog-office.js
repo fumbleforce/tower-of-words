@@ -20,6 +20,8 @@ export const OFFICE_DETAILS = {
     'tama': {
       'label': 'Cat',
       'verb': 'Pet',
+      // clicking her runs chair_push while the chair is found and not yet back (story/office.js talk:tama)
+      'verbIf': { 'verb': 'Return the chair', 'set': 'found_chair', 'unset': 'chair_back' },
       'kind': 'person small',
     },
     'covered': {
