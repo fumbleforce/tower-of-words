@@ -1,0 +1,3 @@
+# the content pack build key (desktop/pak/FORMAT.md) and the pack benchmark output; never committed
+/.key
+/.bench/
