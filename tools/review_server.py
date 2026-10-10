@@ -150,6 +150,38 @@ def showcase_answer(data):
 ANSWERS = {'review': (REVIEWS, 'review.json', review_answer), 'showcase': (SHOWCASE, 'entry.json', showcase_answer)}
 
 
+MEDIA_PATH = re.compile(r'[^\s"]+\.(?:png|webp|jpe?g|gif|mp4|webm|mp3|wav)', re.I)
+
+
+def missing_media(folders):
+    """Repo paths the items name (pictures, clips) that are not on disk here, so the bible shows a gap instead of
+    asking for each one and logging a 404. Checked once per request, not once per picture."""
+    found = set()
+
+    def walk(v):
+        if isinstance(v, str):
+            if MEDIA_PATH.fullmatch(v) and not v.startswith(('http:', 'https:', '/')):
+                found.add(v)
+        elif isinstance(v, list):
+            for x in v:
+                walk(x)
+        elif isinstance(v, dict):
+            for x in v.values():
+                walk(x)
+    for base, marker in folders:
+        try:
+            names = os.listdir(base)
+        except OSError:
+            continue
+        for d in names:
+            try:
+                with open(os.path.join(base, d, marker), encoding='utf-8') as fh:
+                    walk(json.load(fh))
+            except (OSError, ValueError):
+                continue
+    return sorted(p for p in found if not os.path.exists(os.path.join(ROOT, p)))
+
+
 def answer_folder(kind, rid, allow_private=True):
     """The folder an answer goes to, and whether it is a private Review item; None when there is no such item."""
     base, marker, _ = ANSWERS[kind]
@@ -256,6 +288,8 @@ class Handler(SimpleHTTPRequestHandler):
             return self._mode_switch(path.startswith('/private') and self._local())
         if path == '/api/nav-private.js':
             return self._nav_private()
+        if path == '/api/answers':
+            return self._answers()
         if path == '/api/plugins':
             # the local plugin names, so the game asks only for files that exist (no 404 per place)
             folder = os.path.join(ROOT, 'island', 'private', 'plugins')
@@ -263,6 +297,22 @@ class Handler(SimpleHTTPRequestHandler):
                 return self._json(404, {'error': 'no plugins'})
             return self._json(200, sorted(f[:-3] for f in os.listdir(folder) if f.endswith('.js')))
         return super().do_GET()
+
+    def _answers(self):
+        """GET /api/answers: which items have an answer file, per folder, so the bible fetches only those (no 404 per
+        item). The private Review folder is listed only in private mode."""
+        def with_answer(base):
+            try:
+                return sorted(d for d in os.listdir(base) if os.path.isfile(os.path.join(base, d, 'feedback.json')))
+            except OSError:
+                return []
+        out = {'reviews': with_answer(REVIEWS), 'showcase': with_answer(SHOWCASE)}
+        folders = [(REVIEWS, 'review.json'), (SHOWCASE, 'entry.json')]
+        if self._private_mode():
+            out[os.path.relpath(PRIVATE_REVIEWS, ROOT)] = with_answer(PRIVATE_REVIEWS)
+            folders.append((PRIVATE_REVIEWS, 'review.json'))
+        out['missing'] = missing_media(folders)
+        return self._json(200, out)
 
     def _nav_private(self):
         """GET /api/nav-private.js: the private registry for the shared tool menu (tools/nav/nav.js) in private mode, else

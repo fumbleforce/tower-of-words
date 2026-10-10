@@ -173,6 +173,7 @@ function list(block) {
 
 // ------------------------------------------------------------------ images and lightbox
 function img(src, alt, cls = '', attrs = '') {
+  if (L.missing && L.missing.has(src)) return `<span class="${esc(cls)} missing-pic" title="${esc(src)} is not on this machine">picture missing</span>`;
   return `<img src="${esc(url(src))}" alt="${esc(alt)}" loading="lazy" decoding="async" class="${cls}" data-lb="${esc(url(src))}" data-cap="${esc(alt)}" ${attrs}>`;
 }
 const LB = { list: [], i: 0 };
@@ -748,7 +749,7 @@ function reviewRow(r) {
   const thumb = (r.media || []).concat(opt).find((m) => m.image);
   const fb = r.feedback;
   return `<a class="rrow" href="#review/${esc(r.id)}">
-    <div class="rth">${thumb ? `<img src="${esc(url(thumb.image))}" alt="" loading="lazy" decoding="async">` : `<span class="raud" aria-hidden="true">♪</span>`}</div>
+    <div class="rth">${thumb && !(L.missing && L.missing.has(thumb.image)) ? `<img src="${esc(url(thumb.image))}" alt="" loading="lazy" decoding="async">` : `<span class="raud" aria-hidden="true">♪</span>`}</div>
     <div class="rbody"><b>${esc(r.title)}</b>
       <span class="muted small">${esc(r.date || '')} · ${esc(r.by || '')} · ${opt.length} options</span>
       ${st === 'decided' ? `<span class="small">Decided: <b>${esc(pickedText(r))}</b>${r.decision ? ` · <span class="muted">${inline(r.decision)}</span>` : ''}</span>` : `<span class="small">${esc(r.question || '')}</span>`}
@@ -876,6 +877,7 @@ function showcaseEntry(e, solo) {
   const sections = showcaseSections(e), images = sections.flatMap(sec => sec.images || []);
   const result = showcaseResult(e), inResult = new Set(result.images.map(im => im.id));
   const preview = images.find(im => im.id === e.preview) || result.images[0];
+  const previewShown = preview && !(L.missing && L.missing.has(preview.image));
   const rest = sections.map(sec => ({ ...sec, images: (sec.images || []).filter(im => !inResult.has(im.id)) })).filter(sec => sec.images.length);
   const details = `scdetails-${e.id}`;
   const count = `${images.length} picture${images.length === 1 ? '' : 's'}${sections.length > 1 ? ` in ${sections.length} sections` : ''}`;
@@ -884,7 +886,7 @@ function showcaseEntry(e, solo) {
   const item = (im, where) => showcaseImage(im, (d.items || {})[im.id] || {}, where);
   return `<article class="scentry${solo ? ' expanded' : ''}" data-showcase="${esc(e.id)}" data-lbg>
     <div class="scsummary">
-      ${preview ? `<button type="button" class="scpreview" data-act="expand" aria-expanded="${!!solo}" aria-controls="${esc(details)}" aria-label="${solo ? 'Hide' : 'Show'} details for ${esc(e.title)}"><img src="${esc(url(preview.image))}" alt="${esc(preview.caption || e.title)}" loading="lazy"></button>` : ''}
+      ${previewShown ? `<button type="button" class="scpreview" data-act="expand" aria-expanded="${!!solo}" aria-controls="${esc(details)}" aria-label="${solo ? 'Hide' : 'Show'} details for ${esc(e.title)}"><img src="${esc(url(preview.image))}" alt="${esc(preview.caption || e.title)}" loading="lazy"></button>` : ''}
       <div class="scintro">
         <${H} class="sctitle">${solo ? esc(e.title) : `<a href="#showcase/${esc(e.id)}">${esc(e.title)}</a>`}</${H}>
         <div class="pill-row"><span class="pill"${activity ? ` title="Latest entry update: ${esc(activity)}"` : ''}>${esc(e.date || '')}</span></div>

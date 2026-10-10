@@ -47,7 +47,7 @@ const GAME_DOCS = ['docs/game/README.md', 'docs/game/cast.md', 'docs/game/places
 export async function loadLive(ROOT, snapshot, extraFiles = [], { remote = false } = {}) {
   const base = new URL(ROOT, location.href);
   const abs = (p) => /^https?:/.test(p) ? p : new URL(p, base).href;
-  const L = { ok: {}, errors: [], files: {}, abs, remote };
+  const L = { ok: {}, errors: [], files: {}, abs, remote, missing: new Set() };
   const text = async (p) => {
     try {
       const r = await fetch(abs(p), { cache: 'no-cache' });
@@ -67,11 +67,26 @@ export async function loadLive(ROOT, snapshot, extraFiles = [], { remote = false
     return (snapshot && snapshot[p]) || [];
   };
 
+  // Which items have a feedback.json, asked once from tools/review_server.py (GET /api/answers) so no item probes for
+  // a file that isn't there. Without that server (the public site) every item is probed, as before.
+  // The same reply names the pictures the items point at that aren't on disk (L.missing), so the page shows a gap.
+  let asked = null, askedAt = 0;
+  const answerIds = () => {
+    if (remote) return Promise.resolve(null);
+    if (!asked || Date.now() - askedAt > 3000) {
+      askedAt = Date.now();
+      asked = fetch(abs('api/answers'), { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+        .then((j) => { if (j) L.missing = new Set(j.missing || []); return j; });
+    }
+    return asked;
+  };
+
   // reviews/<id>/review.json and showcase/<id>/entry.json, each with Jørgen's feedback.json; newest first
   const loadItems = async (folder, file) => {
     const dirs = (await listDir(folder + '/')).filter((f) => /^[a-z0-9][a-z0-9-]*\/$/.test(f)).map((f) => f.slice(0, -1));
     const get = async (p) => { try { const r = await fetch(abs(p), { cache: 'no-cache' }); return r.ok ? await r.json() : null; } catch (_) { return null; } };
-    const out = await Promise.all(dirs.map(async (id) => ({ id, ...(await get(`${folder}/${id}/${file}`) || { broken: true }), feedback: await get(`${folder}/${id}/feedback.json`) })));
+    const known = (await answerIds() || {})[folder];
+    const out = await Promise.all(dirs.map(async (id) => ({ id, ...(await get(`${folder}/${id}/${file}`) || { broken: true }), feedback: known && !known.includes(id) ? null : await get(`${folder}/${id}/feedback.json`) })));
     return out.filter((r) => !r.broken).sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || a.id.localeCompare(b.id));
   };
   const PRIVATE_REVIEWS = (typeof window !== 'undefined' && window.BIBLE_PRIVATE_REVIEWS) || null;
