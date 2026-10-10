@@ -61,6 +61,18 @@ export function installTimeMenu(game) {
       list.appendChild(b);
     }
   }
+  // The card opens directly below the clock, right edges aligned, and stays on screen.
+  function placeCard() {
+    const card = $('.time-card'),
+      r = button.getBoundingClientRect(),
+      w = card.offsetWidth,
+      right = Math.max(12, Math.min(innerWidth - r.right, innerWidth - w - 12));
+    card.style.top = `${Math.round(r.bottom + 8)}px`;
+    card.style.bottom = 'auto';
+    card.style.left = 'auto';
+    card.style.right = `${Math.round(right)}px`;
+    card.style.maxHeight = `${Math.round(innerHeight - r.bottom - 20)}px`;
+  }
   button.addEventListener('click', (e) => {
     e.stopPropagation();
     if (open) return close();
@@ -78,6 +90,7 @@ export function installTimeMenu(game) {
     game.walker?.keys.clear();
     button.setAttribute('aria-expanded', 'true');
     window.__shell.openLayer(root, close);
+    placeCard();
   });
   button.addEventListener('keydown', (e) => {
     if (e.code === 'Enter' || e.code === 'Space') e.stopPropagation();

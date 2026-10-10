@@ -396,10 +396,11 @@ button.hchip:hover { border-color: rgba(111, 208, 198, .45); }
 body.ob-walking #qsaveBtn, body.ob-walking #feedbackBtn { display: none; }
 #muteBtn.off .w { display: none; }
 #muteBtn.off { opacity: .6; }
-#clock { padding-right: 13px; }
+#clock { padding-right: 12px; }
 #clock .d { color: var(--ink); font-weight: 700; }
 #clock .p { color: var(--ink-dim); font-weight: 500; }
-#muteBtn { position: static; }
+#muteBtn { position: static; width: var(--chip-h); padding: 0; border-radius: var(--chip-r); border: 1px solid var(--chip-edge); background: var(--chip-bg); color: var(--ink); font: 600 13px/1 var(--font); }
+body.phone #muteBtn { width: 44px; }
 body.busy #muteBtn { display: inline-flex; }
 body.phone #clock { position: static; }
 body.phone .hchip .lbl { display: none; }
@@ -983,7 +984,7 @@ body.phone #actMenu .act { padding: 0 12px; }
 
 /* QA round 1 */
 /* Phone HUD keeps the time control visible above the compact action chips. */
-body.phone #clock { min-height: 44px; margin-left: auto; }
+body.phone #clock { margin-left: auto; }
 body.phone #hud { gap: 4px; }
 body.phone .hchip { padding: 0 7px 0 6px; }
 /* 4: the Say tip on the UI scale, clear of the goal */
@@ -1178,8 +1179,6 @@ body.phone #held .sheet + .sheet { margin-left: -18px; }
 button, [role="button"], [role="tab"], #top, #marks, #actMenu, #board, #liftInd { -webkit-user-select: none; user-select: none; }
 
 /* Time controls: an explicit period picker, with the same slate HUD styling. */
-#clock { min-height: 44px; }
-#clock .clock-more { color: var(--ink-dim); font-size: 15px; }
 #clock:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 #timeMenu .time-scrim { position: absolute; inset: 0; background: rgba(8, 12, 18, .48); }
 #timeMenu .time-card { position: absolute; top: 76px; right: 16px; width: min(360px, calc(100vw - 32px)); max-height: calc(100dvh - 100px); overflow-y: auto; padding: 20px; border: 1px solid var(--chip-edge); border-radius: 16px; background: #171c24; box-shadow: 0 14px 45px #0006; color: var(--ink); }
