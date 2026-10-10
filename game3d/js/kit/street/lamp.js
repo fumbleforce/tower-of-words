@@ -3,7 +3,8 @@
 //   lamp(p, { at: [x, z], face, variant, y })   face: the way an arm lamp's head reaches (over the path)
 // Variants: post (a slim post with a lantern on top, for courts and squares), arm (a taller pole whose arm curves
 // out over the road with a flat head), bollard (a waist-high light bollard along a path), wall (a lantern on a
-// bracket on a wall, h over the floor at y), lantern (a lantern alone, standing on a gatepost `y` high).
+// bracket on a wall, h over the floor at y), lantern (a lantern alone, standing on a gatepost `y` high), flood (a
+// court's floodlight mast, its heads tipped down over the court; lit: false for a court left dark).
 // Reports its base as blocked (none for wall and lantern, which stand on something else).
 import * as THREE from 'three';
 import { piece } from '../core/piece.js';
@@ -23,6 +24,7 @@ export const lamp = piece({
     bollard: { h: 0.85, pool: 0.75 },
     wall: { h: 2.4, pool: 0.9 },
     lantern: { h: 0, pool: 0.9 },
+    flood: { h: 7.2, pool: 0.9, heads: 2, lit: true },
   },
   vary: { tone: 0.03, wear: [0, 0.3], scale: [0.98, 1.02] },
   preview: (variant) => (variant === 'wall' ? { wall: [1.6, 3.0] } : {}), // the Asset library shows the wall lamp on a wall
@@ -84,15 +86,36 @@ export const lamp = piece({
       k.bar(pole, [0, y - 0.08, 0.02], [0, y + 0.02, 0.2], 0.012);
       lantern(y - 0.45, 0.8, 0.3);
       k.box(pole, 0.02, 0.07, 0.02, 0, y - 0.04, 0.3); // the hanger, from the arm's end to the lantern's knob
+    } else if (o.variant === 'flood') {
+      // a court's floodlight mast: a concrete foot, a tapered steel mast, a crossbar at the top with its heads tipped
+      // down toward the court (+v); lit: false leaves the heads as dark glass (a court not lit tonight)
+      k.box('#9a9c99', 0.42, 0.3, 0.42, 0, 0, 0, { round: 0.03, surf: 'concrete' });
+      k.cyl(pole, 0.06, 0.11, o.h - 0.3, 0, 0.3, 0, { n: 10, surf: 'metal' });
+      const top = o.h,
+        span = 0.5 * o.heads;
+      k.box(pole, span + 0.2, 0.08, 0.08, 0, top, 0.05, { surf: 'metal' });
+      for (let i = 0; i < o.heads; i++) {
+        const u = -span / 2 + span * ((i + 0.5) / o.heads),
+          tilt = -0.55;
+        const housing = new THREE.BoxGeometry(0.44, 0.3, 0.14).rotateX(tilt).translate(u, top - 0.08, 0.22);
+        k.geo(pole, housing, { surf: 'metal' });
+        const face = new THREE.BoxGeometry(0.38, 0.24, 0.02).rotateX(tilt).translate(u, top - 0.12, 0.3);
+        // a small pool at the mast's foot, as every lamp has; the lit court is day 4's own light (court-light.js)
+        if (o.lit) k.lamp(face, i === 0 ? [0, 0.9, o.pool] : null);
+        else k.geo('#5d6670', face, { cast: false });
+      }
+      if (!k.phone) k.box('#3c4046', 0.12, 0.28, 0.08, 0, 1.1, 0.1, { surf: 'metal' }); // the timer box on the mast
     } else {
       lantern(0, 1.1);
     }
   },
   // the lantern's own pool is under it: for the wall lamp, out from the wall
   footprint: (o) =>
-    o.variant === 'post' || o.variant === 'arm'
-      ? [[-0.15, 0.15, -0.15, 0.15]]
-      : o.variant === 'bollard'
-        ? [[-0.12, 0.12, -0.12, 0.12]]
-        : [],
+    o.variant === 'flood'
+      ? [[-0.25, 0.25, -0.25, 0.25]]
+      : o.variant === 'post' || o.variant === 'arm'
+        ? [[-0.15, 0.15, -0.15, 0.15]]
+        : o.variant === 'bollard'
+          ? [[-0.12, 0.12, -0.12, 0.12]]
+          : [],
 });

@@ -8,6 +8,7 @@
 //   the two courts, walked north from the gate onto the west court
 //   by the net's west post: the players' bench along the fence, the ball basket beside it, the score display on its
 //   post facing the court
+//   the floodlight masts on the run-off, the west court's lit after dark, the east court's left dark (#272)
 import * as LAYOUT from '../island-layout.js';
 import * as P from './plan.js';
 
@@ -31,6 +32,15 @@ export const DISPLAY = [NET.x0 - 0.75, CZ - 0.6]; // on its post, facing east ac
 // Both courts and their run-off strips are walkable; each net is blocked.
 // Sunday's singles/doubles players use the east court, reached from the south gate.
 const STRIP_E = CXS[1] - W / 2 - 0.5;
+// the floodlight masts (courts.js, kit lamp 'flood'), on the run-off a step in from the fence, level with each
+// court's service lines: the west court lit from both its sides (its west run-off and the strip between the courts),
+// the east court's two along its east side left dark ([x, z, face, lit])
+const STRIP_MID = (CXS[0] + W / 2 + CXS[1] - W / 2) / 2;
+export const MASTS = [-4.6, 4.6].flatMap((dz) => [
+  [X0 + 0.32, CZ + dz, Math.PI / 2, true],
+  [STRIP_MID, CZ + dz, -Math.PI / 2, true],
+  [X1 - 0.32, CZ + dz, -Math.PI / 2, false],
+]);
 const I_WALKS = [
   [X0 + 0.15, X1 - 0.15, Z0 + 0.15, Z1 - 0.12],
   [GATE_X - 0.7, GATE_X + 0.7, Z1 - 0.3, Z1 + 0.4],
@@ -43,6 +53,7 @@ const I_BLOCKS = [
   [BASKET[0] - 0.3, BASKET[0] + 0.3, BASKET[1] - 0.3, BASKET[1] + 0.3],
   [DISPLAY[0] - 0.2, DISPLAY[0] + 0.2, DISPLAY[1] - 0.15, DISPLAY[1] + 0.15],
   ...[-1, 1].map((s) => [GATE_X + s * 0.68 - 0.05, GATE_X + s * 0.68 + 0.05, Z1 - 0.75, Z1]), // the gate's open leaves
+  ...MASTS.map(([x, z]) => [x - 0.25, x + 0.25, z - 0.25, z + 0.25]),
 ];
 export const WALKS = I_WALKS.map(P.rect);
 export const BLOCKS = I_BLOCKS.map(P.rect);
