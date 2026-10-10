@@ -139,6 +139,9 @@ function inside(poly, x, z) {
 // which place a spot of ground belongs to: the place whose walked area is nearest (0 inside it; the first place in
 // PLACES when areas overlap). Each place keeps only its own ground, so no two places' lawns, roads or slabs ever lie
 // over each other (Jørgen 2026-10-09: grass and a road over the fountain's tiles)
+// a place whose designed ground reaches past its walked area claims that much more: the plaza's paved circle and its
+// outer ring run a metre or two past its walk (Jørgen 2026-10-10: grass in steps over the fountain's tiles)
+const REACH = { plaza: 3 };
 function owner(walks, x, z) {
   let best = null,
     bestD = Infinity;
@@ -155,6 +158,7 @@ function owner(walks, x, z) {
         d = Math.min(d, Math.hypot(ax + ex * t - x, az + ez * t - z));
       }
     }
+    d = Math.max(0, d - (REACH[n] || 0));
     if (d < bestD) [best, bestD] = [n, d];
   }
   return best;
@@ -268,7 +272,9 @@ export async function buildIsland(uniforms, { joinX, seaY }) {
         // island: one mesh can cover its own place and the neighbour's
         // (only plain materials: a shader material's clone copies its uniforms, which cut the anime water off its
         // shared colours and clock)
-        else if (box.max.y < 0.3 && !NO_CUT && !o.userData.noLook && [].concat(o.material).every((m) => m && !m.isShaderMaterial)) {
+        // and so are the short things it sets around them (merged tree crowns, street lamps, benches; under 6 m, not
+        // the buildings): the forecourt's crowns hung over the plaza without their trunks, its lamps stood on the tiles
+        else if (box.max.y - box.min.y < 6 && !NO_CUT && !o.userData.noLook && [].concat(o.material).every((m) => m && !m.isShaderMaterial)) {
           const pi = names.indexOf(name);
           o.material = Array.isArray(o.material) ? o.material.map((m) => ownGround(m, pi, OWN)) : ownGround(o.material, pi, OWN);
         }
