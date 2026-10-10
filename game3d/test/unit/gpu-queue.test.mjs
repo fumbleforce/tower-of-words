@@ -38,7 +38,7 @@ function ticket(root, name, { rank, time, pid = process.pid, start = processStar
   return file;
 }
 function py(root, code) {
-  const r = spawnSync('python3', ['-c', `import sys; sys.path.insert(0, ${JSON.stringify(tools)})\nimport gpu_priority as g\n${code}`],
+  const r = spawnSync('python3', ['-c', `import sys; sys.path.insert(0, ${JSON.stringify(tools)})\nimport gpu_priority as g\ng.free_comfy_models = lambda: False\n${code}`],
     { encoding: 'utf8', env: { ...process.env, GPU_ROOT: root } });
   return { status: r.status, out: (r.stdout + r.stderr).trim() };
 }
@@ -226,6 +226,10 @@ test('GPU_WAIT is the wait budget only: the run deadline stays the job\'s own ti
 
 test('a browser job admitted at once is cut off at its own run deadline, not at deadline plus the wait allowance', async () => {
   const { withBrowserJob } = await import('../../../tools/lib/browser-job.mjs');
+  const { chromium } = await import('playwright');
+  const launch = chromium.launch;
+  let closed = false;
+  chromium.launch = async () => ({ close: async () => { closed = true; } });
   const saved = process.env.GL;
   process.env.GL = 'soft'; // no GPU queue: admitted at once, with a huge wait allowance that must not extend the run
   const loadavg = os.loadavg;
@@ -234,7 +238,12 @@ test('a browser job admitted at once is cut off at its own run deadline, not at 
   try {
     await assert.rejects(withBrowserJob('deadline-test', () => new Promise(resolve => setTimeout(resolve, 60000).unref()),
       { timeoutMs: 6000, gpuWaitMs: 600000, loadWaitMs: 600000 }), /exceeded 6 seconds to run/);
-  } finally { os.loadavg = loadavg; if (saved === undefined) delete process.env.GL; else process.env.GL = saved; }
+  } finally {
+    chromium.launch = launch;
+    os.loadavg = loadavg;
+    if (saved === undefined) delete process.env.GL; else process.env.GL = saved;
+  }
+  assert.equal(closed, true, 'the admitted browser is closed after its run deadline');
   assert.ok(Date.now() - t0 < 25000, `stopped after ${Date.now() - t0} ms`);
 });
 
