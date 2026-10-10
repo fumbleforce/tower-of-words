@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { textTexture, plane } from '../../props.js';
 import { lightPool } from '../../places/life.js';
 import { drinksFace } from '../outdoor/vending-face.js';
-import { STEEL } from '../outdoor/furniture.js';
+import { STEEL, PAINTED } from '../outdoor/furniture.js';
 import { mound, LEAF } from '../outdoor/planting.js';
 import { bikeRow } from '../forecourt/details.js';
 import * as P from './plan.js';
@@ -122,7 +122,7 @@ export function vending(root, p, block) {
     ['#e3e6e8', '#3f6f9e', 4],
   ].forEach(([body, accent, seed], i) => {
     const x = x0 + W / 2 + i * (W + 0.04);
-    p.box(body, W, H, D, x, 0, z + D / 2);
+    p.box(body, W, H, D, x, 0, z + D / 2, PAINTED); // painted steel (kit/materials/)
     const face = plane(W - 0.06, H - 0.12, drinksFace(accent, seed), { emissiveK: 0.75 });
     face.position.set(x, H / 2 + 0.02, z + D + 0.006);
     root.add(face);

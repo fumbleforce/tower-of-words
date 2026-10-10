@@ -12,7 +12,7 @@
 import * as THREE from 'three';
 import { hash2 } from './outdoor/parts.js';
 import { mound, cluster, LEAF } from './outdoor/planting.js';
-import { STEEL } from './outdoor/furniture.js';
+import { STEEL, PAINTED } from './outdoor/furniture.js';
 
 // [first bay, last bay, roof (below), extra height] per building; bays are numbered from the rows' west end
 // (island-south.js BAYS). The south row leaves out the alleys' bays (1, 6, 11). An extra height of 1.45 is a third
@@ -63,10 +63,10 @@ function slab(p, u0, u1, v0, v1, h, seed) {
   }
 }
 
-// a condenser: a pale box with a grey fan disc on its top
+// a condenser: a pale painted-steel box (kit/materials/) with a grey fan disc on its top
 function condenser(p, u, v, h) {
-  p.box(C.plant, 0.95, 0.5, 0.7, u, h, v, { surf: 'metal' });
-  for (const x of [-0.32, 0.32]) p.box(STEEL.dark, 0.09, 0.09, 0.62, u + x, h - 0.06, v);
+  p.box(C.plant, 0.95, 0.5, 0.7, u, h, v, { surf: 'metal', ...PAINTED });
+  for (const x of [-0.32, 0.32]) p.box(STEEL.dark, 0.09, 0.09, 0.62, u + x, h - 0.06, v, PAINTED);
   for (let y = 0.12; y < 0.42; y += 0.065) p.box(C.fan, 0.66, 0.018, 0.016, u, h + y, v + 0.354, { cast: false });
   p.geo(C.fan, new THREE.CylinderGeometry(0.25, 0.25, 0.04, 16).translate(u, h + 0.5, v));
   for (const x of [-0.14, -0.07, 0, 0.07, 0.14])

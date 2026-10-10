@@ -24,7 +24,7 @@
 import * as THREE from 'three';
 import { Parts, hash2 } from './parts.js';
 import { kerb } from './edges.js';
-import { bench, STEEL } from './furniture.js';
+import { bench, STEEL, PAINTED } from './furniture.js';
 import { TREES, cluster, mound, LEAF } from './planting.js';
 import { drift } from '../forecourt/gardens.js';
 
@@ -261,13 +261,14 @@ function cuts(s, others) {
     .sort((p, q) => p[0] - q[0]);
 }
 
-// a terrace's rail from A to B (in the place's frame): a steel top rail on posts about 1.2 apart
+// a terrace's rail from A to B (in the place's frame): a painted steel top rail (kit/materials/) on posts about 1.2
+// apart
 export function rail(stone, A, B) {
   const L = Math.hypot(B[0] - A[0], B[1] - A[1]),
     d = [(B[0] - A[0]) / L, (B[1] - A[1]) / L];
-  along(stone, STEEL.mid, [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], d, L, 0.06, 0.88, 0.94);
+  along(stone, STEEL.mid, [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], d, L, 0.06, 0.88, 0.94, PAINTED);
   for (let u = 0; u <= L + 0.01; u += L / Math.round(L / 1.2))
-    stone.box(STEEL.dark, 0.06, 0.94, 0.06, A[0] + d[0] * u, 0, A[1] + d[1] * u);
+    stone.box(STEEL.dark, 0.06, 0.94, 0.06, A[0] + d[0] * u, 0, A[1] + d[1] * u, PAINTED);
 }
 
 const SLAB = 1.1;
