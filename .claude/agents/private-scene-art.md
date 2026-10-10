@@ -40,6 +40,10 @@ These rules come from Jørgen's own corrections. Each one exists because a round
 - `node island/private/rewards/tools/normal-entry-check.mjs` (CPU, seconds): fails when a scene with its pictures on disk has no normal-play entry; `--table` lists every scene.
 - `ONLY=<scene id> node island/private/rewards/tools/normal-reach-browser.mjs --both` (one headless browser, GPU queue): starts a normal run (no ?scene) at the scene's day, period and place with private mode and Skimpy on, as Eric and as Carina, taps the pin or runs the host node, and passes when the scene starts. A scene still waiting for its pictures shows WIRED (pictures missing) for an inline scene, or isn't listed.
 
+## A scene isn't done until its characters are physically there (Jørgen 2026-10-10)
+
+"mio outside on a bench icon is visible, but she is not actually there, it just starts a conversation with an empty bench. Please do remember to place people in the scenes for it to make sense, making sure they are not in multiple places also." Before a scene's pictures go live, it has a cast in `island/private/plugins/stage.js` (STAGE): each person in it, with a seat or a spot and a pose at the pin, an approved crowd body for anyone unnamed. Place them where your pictures show them, so the 3D place and the picture agree. normal-entry-check fails when a reachable scene's speakers have no staged body; normal-reach-browser fails when a cast member has no drawn body within a few metres of the pin, or two.
+
 ## Reporting
 
 - Renders stay in the round. A picture Jørgen picked reaches the game only through `node tools/assets/live.mjs promote <round file> <live path> --round <project>/<round> --review <id>` (`--replace` retires the one it replaces); never copy it into a live folder by hand (notes/asset-lifecycle.md; the private specifics are in rewards/docs/asset-lifecycle.md).
