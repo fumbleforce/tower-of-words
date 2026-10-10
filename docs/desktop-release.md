@@ -58,7 +58,7 @@ All runs use their own Xvfb display and a throwaway userData; nothing opens on a
 
 - `node --test desktop/test/*.test.mjs`: the handler without Electron.
 - `node desktop/test/app-run.mjs play --exe <dev build> --cdp --gl gpu`: plays the dev build with real clicks and keys to the first goal, checks the film seeks, and records the clicks to `clicks.json`.
-- `APP_GATE=1 node desktop/test/app-run.mjs replay --exe <release AppImage> --gl gpu --out <dir>`: the release, played blind with those clicks, a screenshot per step to look at. Also `leave` (Esc on the start page quits), `plugins`, `settings` and `timing` (dev builds).
+- `APP_GATE=1 node desktop/test/app-run.mjs replay --exe <release AppImage> --gl gpu --out <dir>`: the release, played blind with those clicks, a screenshot per step to look at. Also `first` (what a launch shows), `leave` (Esc on the start page quits), and for dev builds `plugins`, `settings`, `timing`, and `save1` then `continue1` with the same `--keep-config` (slot 1 saved, the window closed at once, Continue loads it from `saves/slot-01.json`).
 - `node desktop/test/timing-web.mjs`: the dev server's numbers for comparison.
 
 Measured 2026-10-10, GPU (RTX 3080) under Xvfb: launch to title 3.9 to 6.4 s in the app (Electron's own start included) against 1.6 to 2.4 s for the dev server in an already open headless Chromium; the handler serves the 1000 startup files in 0.6 s, and the app draws 46 fps under Xvfb against 62 headless. New game's Start to a player who can walk: 50 to 75 ms. The gap needs measuring on a real display before reading much into it.

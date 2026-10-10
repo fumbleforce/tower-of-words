@@ -63,7 +63,7 @@ async function registerSaves() {
   const file = path.join(here, 'saves', 'ipc.mjs');
   if (!fs.existsSync(file)) return;
   const { register } = await import(pathToFileURL(file).href);
-  register(ipcMain, path.join(app.getPath('userData'), 'saves'), { app, dialog, BrowserWindow });
+  register(ipcMain, app.getPath('userData'), { app, dialog, BrowserWindow });
 }
 
 function lockDown(extra) {
