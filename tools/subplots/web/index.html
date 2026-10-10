@@ -1,15 +1,69 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Subplot editor · Amakawa</title><link rel="stylesheet" href="editor.css"><link rel="stylesheet" href="images.css"></head>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Scene editor · Amakawa</title>
+<link rel="stylesheet" href="editor.css">
+<link rel="stylesheet" href="preview.css">
+<link rel="stylesheet" href="images.css">
+</head>
 <body>
-<header class="bar"><a class="wordmark" href="/">Amakawa <span>STUDIO</span></a><div class="document"><strong>Subplot editor</strong><span id="saveState">Choose a scene</span></div><div class="actions"><button id="undo" disabled>Undo</button><button id="draft" disabled>Save draft</button><button id="save" class="primary" disabled>Save to story</button></div></header>
-<div id="notice" role="status" hidden></div>
-<main class="workspace">
-<aside class="library"><div class="pane-title"><h1>Scenes</h1><span id="sceneCount"></span></div><label class="search"><span class="sr">Find a scene</span><input id="search" type="search" placeholder="Find a scene or place…"></label><div class="segmented" id="scope"><button data-scope="public" aria-pressed="true">Story scenes</button><button data-scope="local" aria-pressed="false">Encounters & peeks</button></div><label class="mobile-scene-picker">Current scene<select id="scenePicker"><option value="">Choose a scene</option></select></label><div id="sceneList" class="scene-list" aria-label="Scenes"></div><footer><a href="http://127.0.0.1:8772/" target="_blank" rel="noopener">Image generation ↗</a><a href="/bible/" target="_blank" rel="noopener">World bible ↗</a></footer></aside>
-<section class="canvas"><div id="empty" class="empty"><div class="empty-mark">枝</div><h2>Choose a scene to work on</h2><p>Read its sequence, change the dialogue, or decide when it happens.</p></div><div id="sceneEditor" hidden><div class="scene-heading"><div><div id="sceneSource" class="eyebrow"></div><h2 id="sceneTitle"></h2><button id="rename" class="small">Rename scene</button></div><button id="preview">Preview</button></div><nav class="view-tabs"><button data-view="sequence" aria-pressed="true">Storyboard</button><button data-view="history" aria-pressed="false">Revisions</button><span id="stepCount"></span></nav><div id="sceneGallery" class="scene-gallery"></div><div id="sequence"></div><div id="historyView" hidden></div><div id="insertBar" class="insert-bar"><span>Add to the scene</span><button id="addShot">Shot</button><button data-insert="dialogue">Dialogue</button><button data-insert="narration">Narration</button><button data-insert="choice">Choice</button><button data-insert="condition">Branch</button><button data-insert="action">Camera</button></div></div></section>
-<aside id="inspector" class="inspector"><nav class="view-tabs"><button data-inspect="conditions" aria-pressed="true">When & where</button><button data-inspect="images" aria-pressed="false">Images</button></nav><section id="conditions"><div class="pane-title"><h2>Story placement</h2><button id="addEntry" disabled aria-label="Add an encounter entry">Add starting point</button></div><p class="hint">Choose where this scene belongs and what the player must have done to reach it.</p><div id="entries"></div><hr><h3>Scene notes</h3><label><span class="sr">Notes</span><textarea id="notes" rows="5" placeholder="Intent, staging, ideas to try…" disabled></textarea></label><p class="hint">Notes and image settings stay in this local editor. Saving to story updates the scene and its entries.</p></section><section id="images" hidden><div class="pane-title"><h2>Compose an image</h2><button id="backToStory">Back to storyboard</button><button id="loadPresets">Refresh presets</button><button id="quickGenerate" class="primary">Generate picture</button></div><p class="hint" id="imageStatus">Uses the existing image service and its render history.</p><div id="composition"></div><div id="renders"></div></section></aside>
+<header class="top">
+  <div class="brand">Amakawa <span>Scene editor</span></div>
+  <div class="doc" id="doc" hidden>
+    <div class="doc-title"><span id="docArea" class="doc-area"></span><h1 id="docTitle"></h1></div>
+    <div class="doc-meta"><span id="docAudience" class="tag"></span><span id="docWhere" class="where"></span></div>
+  </div>
+  <div class="status" id="status" role="status"></div>
+  <div class="actions">
+    <button id="undo" class="icon" title="Undo (Ctrl+Z)" disabled>Undo</button>
+    <button id="redo" class="icon" title="Redo (Ctrl+Shift+Z)" disabled>Redo</button>
+    <span class="sep"></span>
+    <button id="preview" disabled title="Play the scene here, in the game's dialogue style (P)">Preview</button>
+    <a id="play" class="button" target="_blank" rel="noopener" aria-disabled="true">Play in game</a>
+    <button id="save" class="primary" disabled title="Save to the story (Ctrl+S)">Save</button>
+  </div>
+</header>
+<div id="banner" class="banner" hidden></div>
+<main class="work">
+  <nav class="scenes" aria-label="Scenes">
+    <div class="scenes-head">
+      <input id="search" type="search" placeholder="Find a scene, place or person" aria-label="Find a scene">
+      <div class="seg" id="filter" role="group" aria-label="Show">
+        <button data-filter="all" aria-pressed="true">All</button>
+        <button data-filter="public" aria-pressed="false">Public game</button>
+        <button data-filter="private" aria-pressed="false">Private</button>
+      </div>
+    </div>
+    <div id="sceneList" class="scene-list"><p class="quiet pad">Reading the scenes…</p></div>
+    <div class="scenes-foot"><a href="http://127.0.0.1:8772/" target="_blank" rel="noopener">Image generator</a><a href="/bible/" target="_blank" rel="noopener">World bible</a></div>
+  </nav>
+  <section class="timeline-wrap" aria-label="Scene timeline">
+    <div id="empty" class="empty">
+      <h2>Open a scene</h2>
+      <p>Pick one on the left. Public game scenes and private scenes are both here, each labelled with where it lives.</p>
+    </div>
+    <div id="timeline" class="timeline" hidden></div>
+  </section>
+  <aside class="inspector" aria-label="Details">
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="beat" aria-selected="true">Beat</button>
+      <button role="tab" data-tab="picture" aria-selected="false">Picture</button>
+      <button role="tab" data-tab="scene" aria-selected="false">Scene</button>
+    </div>
+    <div id="tabBeat" class="tab-body"></div>
+    <div id="tabPicture" class="tab-body" hidden></div>
+    <div id="tabScene" class="tab-body" hidden></div>
+  </aside>
 </main>
-<nav class="mobile-tools" aria-label="Editor panels"><button data-panel="story" aria-pressed="true">Storyboard</button><button data-panel="conditions">When & where</button><button data-panel="images">Images</button></nav>
-<dialog id="shotDialog"><div class="dialog-head"><h2>Add a shot</h2><button id="closeShotDialog" aria-label="Close shot picker">✕</button></div><p>Start with an existing shot’s picture and framing. After saving, you can select or generate a different picture.</p><div id="shotOptions" class="scene-gallery"></div></dialog>
-<dialog id="previewDialog"><div class="dialog-head"><h2>Scene preview</h2><button id="closePreview" aria-label="Close preview">✕</button></div><div id="previewBody"></div><div class="preview-controls"><button id="prevBeat">Previous</button><span id="previewPosition"></span><button id="nextBeat" class="primary">Next</button></div><p class="hint">Reading preview. Preview the pictures and dialogue without changing a game save.</p></dialog>
-<datalist id="sceneNodes"></datalist><datalist id="flags"><option value="day"><option value="period"><option value="place"><option value="going_home"><option value="know_ohayo"></datalist>
-<script type="module" src="editor.js"></script></body></html>
+<div id="pop" class="pop" hidden></div>
+<dialog id="previewDialog" class="preview-dialog" aria-label="Scene preview"></dialog>
+<dialog id="composeDialog" class="compose-dialog" aria-label="Compose a new picture">
+  <div class="compose-head"><h2>Compose a new picture</h2><span id="imageStatus" class="quiet"></span><button id="closeCompose">Done</button></div>
+  <div class="compose-body"><div id="composition"></div><div id="renders"></div></div>
+</dialog>
+<script type="module" src="app.js"></script>
+</body>
+</html>

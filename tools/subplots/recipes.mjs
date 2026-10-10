@@ -3,6 +3,9 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {parseSource,staticValue,visitSource} from '../lib/source-data.mjs';
 import {recipeValues} from './recipe-values.mjs';
+import path from 'node:path';
+// The recipe file, relative to the project, so the editor can say where a scene lives.
+const where=config=>config.file?path.relative(process.cwd(),config.file).split(path.sep).join('/'):'';
 const name=p=>p?.key?.name??p?.key?.value;
 const property=(o,key)=>o?.properties?.find(p=>name(p)===key);
 const literal=n=>{try{return staticValue(n);}catch{return undefined;}};
@@ -229,11 +232,11 @@ export function recipe(source,config,request){
     const sequences=nodes?.properties||['steps','leave'].map(k=>property(scene,k)).filter(Boolean);
     for(const p of sequences){const node=name(p);if(!node)continue;rows.push({scene,sequence:p,id:`local:${config.key}:${id}:${node}`,sceneId:id,node});}
   }
-  if(request.action==='catalog')return {scenes:rows.map(r=>({id:r.id,provider:'local',title:`${r.sceneId.replaceAll('_',' ')} · ${r.node}`,node:r.node,group:config.label,count:r.sequence.value.elements?.length??null})),errors:[]};
+  if(request.action==='catalog')return {scenes:rows.map(r=>({id:r.id,provider:'local',title:`${r.sceneId.replaceAll('_',' ')} · ${r.node}`,node:r.node,group:config.label,where:where(config),scene:r.sceneId,count:r.sequence.value.elements?.length??null})),errors:[]};
   const row=rows.find(r=>r.id===request.id);if(!row)throw Error('Scene not found');
   const {scene,sequence}=row;
   const values=recipeValues(source), images=imageSlots(source,sequence.value,values),context={...values,images};
-  if(request.action==='read')return {id:row.id,provider:'local',title:`${row.sceneId.replaceAll('_',' ')} · ${row.node}`,node:row.node,group:config.label,revision:digest(source),steps:decode(sequence.value,source,context),raw:slice(source,sequence.value),entries:[],routesEditable:false,metadata:{},placement:{place:literal(property(scene,'place')?.value)??null,day:literal(property(scene,'day')?.value)??null,condition:literal(property(scene,'show')?.value)??null},previewUrl:`/game3d/index.html?scene=${encodeURIComponent(row.sceneId)}`,recipe:true,capabilities:{camera:!!values.binding('raw')},images:images.map(({range,calls,gap,options,table,pairedRanges,...image})=>image)};
+  if(request.action==='read')return {id:row.id,provider:'local',title:`${row.sceneId.replaceAll('_',' ')} · ${row.node}`,node:row.node,group:config.label,where:where(config),scene:row.sceneId,revision:digest(source),steps:decode(sequence.value,source,context),raw:slice(source,sequence.value),entries:[],routesEditable:false,metadata:{},placement:{place:literal(property(scene,'place')?.value)??null,day:literal(property(scene,'day')?.value)??null,condition:literal(property(scene,'show')?.value)??null},previewUrl:`/game3d/index.html?scene=${encodeURIComponent(row.sceneId)}`,recipe:true,capabilities:{camera:!!values.binding('raw')},images:images.map(({range,calls,gap,options,table,pairedRanges,...image})=>image)};
   if(request.action==='prepare'){
     if(request.revision!==digest(source))throw Error('CONFLICT: The recipe changed. Reload this scene.');
     const helpers=new Set(parseSource(source).body.flatMap(n=>(n.declaration||n).declarations||[]).map(d=>d.id.name));

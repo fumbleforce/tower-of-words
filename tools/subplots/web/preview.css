@@ -1,0 +1,25 @@
+/* The preview, laid out like the game's subtitle dialogue (game3d/css/style.css #talk and vn.css): no panel,
+   the line over the picture with a soft shadow, the name in the speaker's colour, the portrait at the left. */
+.preview-dialog { width: min(1400px, 96vw); max-height: 96vh; padding: 0; border: 1px solid var(--line2); border-radius: var(--r); background: #0b0d11; color: #eef0f4; overflow: hidden; }
+.preview-dialog::backdrop { background: rgba(5, 7, 10, .85); }
+.pv-stage { position: relative; aspect-ratio: 16 / 9; max-height: calc(96vh - 52px); overflow: hidden; background: radial-gradient(120% 90% at 50% 30%, #2a3140, #14181f); cursor: pointer; user-select: none; }
+.pv-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pv-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14, 18, 28, 0) 45%, rgba(14, 18, 28, .55) 72%, rgba(14, 18, 28, .92) 100%); pointer-events: none; }
+.pv-notes { position: absolute; top: 14px; left: 16px; display: grid; gap: 4px; justify-items: start; }
+.pv-notes span { padding: 2px 9px; border-radius: 6px; background: rgba(14, 18, 28, .66); color: #a9b1bf; font-size: 12.5px; font-style: italic; }
+.pv-talk { position: absolute; left: 27%; right: 24%; bottom: 7%; font-family: var(--font); text-shadow: 0 1px 2px rgba(0, 0, 0, .75), 0 0 18px rgba(14, 18, 28, .9); }
+.pv-por { position: absolute; left: -36%; bottom: -14%; height: 230%; max-height: 520px; width: auto; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .45)); pointer-events: none; }
+.pv-who { margin-bottom: 6px; font-weight: 700; font-size: clamp(15px, 1.5vw, 20px); color: var(--c); }
+.pv-line { font-size: clamp(17px, 1.75vw, 24px); line-height: 1.5; font-weight: 500; }
+.pv-talk.narr .pv-line { color: #dfe3ea; font-style: italic; }
+.pv-line.dim { color: #a9b1bf; font-size: clamp(14px, 1.3vw, 17px); }
+.pv-sub { margin-top: 4px; color: #c7cdd8; font-size: clamp(14px, 1.3vw, 18px); }
+.pv-talk .jp { color: #ffc9a8; }
+.pv-talk .gl { color: #9aa6b8; font-size: .82em; }
+.pv-chips { display: flex; flex-direction: column; align-items: stretch; gap: 8px; max-width: 560px; margin-top: 12px; text-shadow: none; }
+.pv-chips button { justify-content: flex-start; flex-wrap: wrap; min-height: 42px; padding: 6px 16px; border-radius: 10px; background: rgba(24, 27, 34, .9); border-color: rgba(255, 255, 255, .12); font-size: 17px; white-space: normal; text-align: left; }
+.pv-chips button:hover { border-color: #6fd0c6; }
+.pv-chips small { width: 100%; color: #9aa6b8; font-size: 12px; }
+.pv-end { position: absolute; inset: 0; display: grid; place-content: center; gap: 12px; text-align: center; font-size: 18px; }
+.pv-bar { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 14px; border-top: 1px solid var(--line); background: var(--panel); font-size: 13px; }
+.pv-bar .grow { flex: 1; }

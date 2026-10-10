@@ -7,6 +7,12 @@ export async function api(action, body) {
   if (!r.ok || data.error) throw Error(data.error || `Request failed (${r.status})`);
   return data;
 }
-export function notice(text, error = false) { const el=$('#notice');el.textContent=text;el.hidden=!text;el.dataset.error=error; }
+// The composer reports through #notice; the scene editor has its status line (#status) instead.
+export function notice(text, error = false) {
+  const el = $('#notice') || $('#status');
+  if (!el) return;
+  el.textContent = text;
+  if (el.id === 'notice') { el.hidden = !text; el.dataset.error = error; } else el.dataset.kind = error ? 'error' : 'busy';
+}
 export function guarded(fn) { return async (...args) => {try {await fn(...args);} catch(e){notice(e.message,true);} }; }
 export const clone = o => JSON.parse(JSON.stringify(o));

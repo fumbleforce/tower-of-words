@@ -64,6 +64,12 @@ export function catalog(root) {
       character.portrait=`/game3d/assets/portraits/${mc.portrait.set}-${character.faces[0].id}.webp`;
     }
   } catch { warnings.push('Could not read the protagonist portrait'); } }
+  // Name colours, as the game's dialogue box shows them (the player's entry has a computed key).
+  for (const p of binding(ast('game3d/js/narrative/speakers.js'),'DEFAULT_SPEAKERS')?.properties || []) {
+    const id = p.computed ? 'eric' : nameOf(p), color = value(prop(p.value,'color'));
+    const character = characters.find(c=>c.id===id);
+    if (character && typeof color==='string') character.color = color;
+  }
   const definitions=ast('game3d/js/places/definitions.js');
   const placeDocs=read('docs/game/places.md');
   const placeTitles=Object.fromEntries([...placeDocs.matchAll(/^## (.+?) \(`([a-z0-9_]+)`\)\s*$/gm)].map(([,title,id])=>[id,title]));
