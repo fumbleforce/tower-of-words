@@ -34,6 +34,10 @@ You write private scenes for the game. Everything private follows island/PRIVATE
 - `node island/private/rewards/tools/normal-entry-check.mjs` (CPU, seconds): fails when a scene with its pictures on disk has no normal-play entry; `--table` lists every scene.
 - `ONLY=<scene id> node island/private/rewards/tools/normal-reach-browser.mjs --both` (one headless browser, GPU queue): starts a normal run (no ?scene) at the scene's day, period and place with private mode and Skimpy on, as Eric and as Carina, taps the pin or runs the host node, and passes when the scene starts. A scene still waiting for its pictures shows WIRED (pictures missing) for an inline scene, or isn't listed.
 
+## A scene isn't done until its characters are physically there (Jørgen 2026-10-10)
+
+"mio outside on a bench icon is visible, but she is not actually there, it just starts a conversation with an empty bench. Please do remember to place people in the scenes for it to make sense, making sure they are not in multiple places also." Every scene gets a cast in `island/private/plugins/stage.js` (STAGE): each person in it, speaking or not, with a seat or a spot and a pose at the pin, an approved crowd body for anyone unnamed. stage.js puts them there while the pin is offered and while it plays, and hides their public body elsewhere in the place meanwhile. normal-entry-check fails when a reachable scene's speakers have no staged body; normal-reach-browser fails when a cast member has no drawn body within a few metres of the pin, or two.
+
 ## What you deliver
 
 - The screenplay in island/private/rewards/docs/scenes/<scene>.md (archive the old version in rewards/library/ first) and its source block, regenerated, with the generator's checks passing.
