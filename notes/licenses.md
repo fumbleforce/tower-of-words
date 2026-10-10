@@ -8,10 +8,10 @@ Two facts hold for the whole audit:
 
 ## Blockers and actions
 
-Blockers for a paid release (free release is fine unless noted):
+Blockers for a paid release (free release is fine unless noted). Item 2 is resolved:
 
 1. **Opening theme and the `night` loop are YuE2 music.** The YuE2 weights are CC BY-NC 4.0. Whether that non-commercial term reaches the generated music is not settled by the model card, and the LICENSE file was not read. Settle it by reading the LICENSE in the m-a-p/YuE2-3B repository or asking the authors; otherwise replace both tracks (Lyria already makes the other three loops).
-2. **36 voice clips were made with edge-tts** (Microsoft's Edge Read Aloud endpoint through an unofficial library). There is no licence for that endpoint, and Microsoft sells Azure AI Speech for commercial use. Re-voice them with the local Qwen3-TTS clones (the voice-clips skill). The files are `ann-*`, `aoi-ohayo/hi/matte/chigau`, `emi-kite/ohayo/tsugi-seki`, `guard-card/card-short/ohayo/wait`, `kenji-hi/ohayo`, `kuroda-akete/wake`, `mio-*` (akete, dashite, irete, kite, matte, ohayo, ohayo-pol, tomatte, ugoite), `mori-hello/ohayo/ohayo-dry`, `sota-*`, `yui-*` in game3d/audio.
+2. **Resolved: the 36 edge-tts clips no longer ship.** They were old named takes (`ann-*`, `mio-ohayo` and the like) that the game's voice index (game3d/audio/index.json) stopped using; the asset lifecycle (#419) retired them on 2026-10-10, and the release file list leaves them out. Don't bring edge-tts clips back.
 3. **One Obsession (Anima) pictures.** Its Civitai page allows only "RentCivit"; selling generated images is not ticked. It made the five Photos collectibles and some scenery backgrounds. Free release: allowed by every reading. Paid: regenerate with RDBT (selling images is ticked there) or get the creator's written permission.
 
 Needs action (could become blockers):
@@ -94,7 +94,7 @@ Local TTS: Qwen3-TTS 1.7B Base and VoiceDesign clone every game voice from short
 | player-slice12 (the old player voice) | Qwen3-TTS design clone from the first-week game | yes / yes | none | OK |
 | emi-slice12, lift-announcer (also used for the announcer) | Cut from MiniMax Speech 2.6 HD stock voices (Japanese_CalmLady, Japanese_KindLady) through Replicate. No real person is named, but MiniMax's terms for output use were not readable | unclear / unclear | none known | Needs action (item 5) |
 | goro-ref12, jun-ref12, aoi-ref12 | Sources recorded as "voice design or casting clip" in the old game's audition (tools/slice_voices.mjs, legacy audition manifests list MiniMax stock voices and Qwen-designed candidates). The exact generator of each file is not recorded | unclear / unclear | none known | Unclear: if one is a MiniMax stock voice, treat as item 5; the story-cast voices that use them are Aoi, the reader and station worker |
-| edge-tts clips (36) | Unofficial Microsoft endpoint, no licence; Microsoft points commercial users to Azure AI Speech | unclear / no | none | Blocker for paid (item 2) |
+| edge-tts clips (36) | Unofficial Microsoft endpoint, no licence | not shipped | none | Resolved: retired, not in the voice index (item 2) |
 | Eric's Nordic-accent tests (Piper Norwegian voice, CosyVoice3) | Rejected by Jørgen; not in the game | n/a | n/a | OK, not shipped |
 | The player's voice for Eric and Carina, the word clips, the overheard lines | Qwen3-TTS clones of the designed references above | yes / yes | none | OK |
 
