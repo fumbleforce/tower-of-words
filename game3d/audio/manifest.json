@@ -1602,21 +1602,6 @@
   "emo": "polite"
  },
  {
-  "key": "commuter-ohayo",
-  "speaker": "commuter",
-  "text": "おはようございます。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "ohayo",
-    "おはようございます"
-   ]
-  ],
-  "clear": [],
-  "emo": "low"
- },
- {
   "key": "ln-mn2vz",
   "speaker": "eric",
   "text": "Hi. Um... good morning?",
@@ -2004,96 +1989,6 @@
   "emo": "low"
  },
  {
-  "key": "oh-6pwsf1",
-  "speaker": "kuro",
-  "text": "おはようございます。……何階ですか。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "ohayo",
-    "おはようございます"
-   ]
-  ],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-18tcbth",
-  "speaker": "kuro",
-  "text": "B2?",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "curt"
- },
- {
-  "key": "ln-r7g1l3",
-  "speaker": "eric",
-  "text": "Yes. Sorry, I should have said.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "oh-5vnlx5",
-  "speaker": "kuro",
-  "text": "まず、おはようございます、でしょう？",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "ohayo",
-    "おはようございます"
-   ]
-  ],
-  "clear": [],
-  "emo": "teasing"
- },
- {
-  "key": "ln-17d7qzu",
-  "speaker": "eric",
-  "text": "I'll remember that.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "casual"
- },
- {
-  "key": "oh-tfibku",
-  "speaker": "kuro",
-  "text": "明日も、ここで言ってくださいね。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "koko",
-    "ここ"
-   ]
-  ],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "kuro-otsukare",
-  "speaker": "kuro",
-  "text": "お疲れさまです。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "otsukare",
-    "お疲れさまです"
-   ]
-  ],
-  "clear": [],
-  "emo": "polite"
- },
- {
   "key": "oh-nvf9du",
   "speaker": "kuro",
   "text": "おはようございます。どうぞ。",
@@ -2109,6 +2004,36 @@
   "emo": "polite"
  },
  {
+  "key": "ln-pslh",
+  "speaker": "eric",
+  "text": "Hi. Sorry, which way is B2?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-w61c0x",
+  "speaker": "kuro",
+  "text": "Lift, there.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curt"
+ },
+ {
+  "key": "ln-1aex6pt",
+  "speaker": "eric",
+  "text": "Thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "neutral"
+ },
+ {
   "key": "oh-1tdi6z6",
   "speaker": "kuro",
   "text": "あ、おはようございます。",
@@ -2118,6 +2043,54 @@
    [
     "ohayo",
     "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1qgdsmw",
+  "speaker": "eric",
+  "text": "B2, please.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-co1fb5",
+  "speaker": "kuro",
+  "text": "B2は、あちらのエレベーターです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "B2",
+   "エレベーター"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-fftt6k",
+  "speaker": "kuro",
+  "text": "いってらっしゃい。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "kuro-otsukare",
+  "speaker": "kuro",
+  "text": "お疲れさまです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "otsukare",
+    "お疲れさまです"
    ]
   ],
   "clear": [],
@@ -2586,16 +2559,6 @@
   ],
   "clear": [],
   "emo": "warm"
- },
- {
-  "key": "ln-1aex6pt",
-  "speaker": "eric",
-  "text": "Thanks.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "neutral"
  },
  {
   "key": "oh-3q3h4y-canteen_cardigan",
@@ -15837,9 +15800,9 @@
   "emo": "low"
  },
  {
-  "key": "ln-r7g1l3-carina",
+  "key": "ln-pslh-carina",
   "speaker": "carina",
-  "text": "Yes. Sorry, I should have said.",
+  "text": "Hi. Sorry, which way is B2?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -15847,14 +15810,24 @@
   "emo": "polite"
  },
  {
-  "key": "ln-17d7qzu-carina",
+  "key": "ln-1aex6pt-carina",
   "speaker": "carina",
-  "text": "I'll remember that.",
+  "text": "Thanks.",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "casual"
+  "emo": "neutral"
+ },
+ {
+  "key": "ln-1qgdsmw-carina",
+  "speaker": "carina",
+  "text": "B2, please.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
  },
  {
   "key": "ln-1fhr7td-carina",
@@ -16020,16 +15993,6 @@
   "words": [],
   "clear": [],
   "emo": "curious"
- },
- {
-  "key": "ln-1aex6pt-carina",
-  "speaker": "carina",
-  "text": "Thanks.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "neutral"
  },
  {
   "key": "ln-36o9lu-carina",
