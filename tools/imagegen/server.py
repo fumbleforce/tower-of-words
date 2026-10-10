@@ -14,6 +14,9 @@ import comfy  # noqa: E402  (tools/comfy.py)
 import store, gpu, consist, privacy, huefix  # noqa: E402
 
 PORT = int(os.environ.get('IMAGEGEN_PORT', 8772))
+# Another port is a test copy: it never takes, ends or frees the GPU (the lock's owner name is the dashboard's, so a
+# test copy stopping would end his real session; it did on 2026-10-11).
+TEST_COPY = PORT != 8772
 WEB = os.path.join(HERE, 'web')
 MODELS_DIR = os.path.expanduser('~/ai/ComfyUI/models/diffusion_models')
 LORAS_DIR = os.path.expanduser('~/ai/ComfyUI/models/loras')
@@ -700,6 +703,8 @@ class H(BaseHTTPRequestHandler):
         p = urllib.parse.urlparse(self.path).path
         try:
             b = self._body()
+            if TEST_COPY and (p == '/api/session/start' or (p == '/api/generate' and b.get('autostart'))):
+                return self._send(409, {'ok': False, 'error': 'a test copy of the dashboard does not use the GPU'})
             if p == '/api/session/start':
                 return self._send(200, session.start())
             if p == '/api/session/end':
@@ -780,6 +785,8 @@ def restart_exit(*_):
 
 
 def shutdown(*_):
+    if TEST_COPY:
+        os._exit(0)
     if session.s['state'] in ('on', 'starting', 'lost', 'error') or gpu.owner_is_me():
         log('dashboard stopping: ending the GPU session')
         session.end('The dashboard was stopped.')

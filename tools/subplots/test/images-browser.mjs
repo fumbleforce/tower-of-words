@@ -16,7 +16,7 @@ try {
   for (let i = 0; i < 60; i++) {try {if ((await fetch(base + '/tools/subplots/web/images.js')).ok) break;} catch {} await new Promise(resolve => setTimeout(resolve, 100));}
   await withBrowserJob('codex-subplot-image-editor', async browser => {
     const page = await browser.newPage({viewport:{width:550,height:900}});
-    const errors = [], generated = [], created = [];
+    const errors = [], generated = [], created = [], rated = [];
     page.on('pageerror', e => errors.push(e.message));
     await page.route('**/island/private/**', route => route.abort());
     await page.route('**/api/subplots/picture-source**', route => route.fulfill({json:{how:'the fixture round', start:{image:'art/fixture.webp'},
@@ -31,6 +31,7 @@ try {
       if (u.pathname.endsWith('/portraits')) body = [{path:'art/fixture.webp',group:'Portrait'}];
       if (u.pathname.endsWith('/generate')) { generated.push(route.request().postDataJSON()); body = {run_id:'new'}; }
       if (u.pathname.endsWith('/mode')) body = {private: false};
+      if (u.pathname.includes('/api/render/')) { rated.push([u.pathname, route.request().postDataJSON()]); body = {ok: true}; }
       if (u.pathname.endsWith('/create')) { const b = route.request().postDataJSON(); created.push({path: u.pathname, ...b}); presets.location.push({id:'outside-sento',v:1,data:b.data}); body = {id:'outside-sento'}; }
       await route.fulfill({json:body});
     });
@@ -49,12 +50,22 @@ try {
     assert.match(generated[0].positive,/wearing blue coat/);
     assert.equal(generated[0].presets.cameras.length,2);
     await page.locator('[data-library=all]').click();
-    await page.locator('[data-use]').click();
+    // the lightbox: s stars, the reject reason, arrows and Escape (the dashboard's keys)
+    await page.locator('[data-lib=open]').click();
+    await page.locator('#libLightbox .lb').waitFor();
+    assert.match(await page.locator('#libLightbox h2').textContent(),/1 of 1/);
+    await page.keyboard.press('s');
+    await page.waitForFunction(()=>globalThis.document.querySelector('#libLightbox [data-a=star]')?.getAttribute('aria-pressed') === 'true');
+    assert.deepEqual(rated.at(-1),['/api/subplots/image/api/render/old-picture',{star:true,reject:false}]);
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('#libLightbox').isHidden(),true);
+    assert.equal(await page.locator('[data-lib=star]').getAttribute('aria-pressed'),'true');
+    await page.locator('[data-lib=use]').click();
     assert.equal(await page.evaluate(()=>fixture.metadata.images.one.file),'fixture.png');
     await page.evaluate(()=>globalThis.editor.focus('two'));
-    await page.locator('[data-use]').click();
+    await page.locator('[data-lib=use]').click();
     assert.deepEqual(await page.evaluate(()=>Object.keys(fixture.metadata.images)),['one','two']);
-    await page.locator('[data-reuse]').click();
+    await page.locator('[data-lib=reuse]').click();
     assert.equal(await page.locator('[data-compose=seed]').inputValue(),'8');
     // no blocks on that picture: Fill from prompt puts its words in the free text, and the original prompt stays as is
     assert.equal(await page.locator('[data-compose=scene]').inputValue(),'A previous picture.');
@@ -68,7 +79,7 @@ try {
     assert.equal(await page.locator('[data-compose=seed]').inputValue(),'77');
     assert.equal(await page.evaluate(()=>[...globalThis.document.querySelectorAll('[data-camera]')].filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.camera).join()),'near');
     await page.locator('[data-small-changes]').click();
-    await page.locator('[data-compose=startDenoise]').waitFor();
+    await page.locator('[data-tool=denoise]').waitFor();
     await page.locator('#generate').click();
     assert.equal(generated.length,2);
     assert.deepEqual(generated[1].start,{image:'art/fixture.webp',denoise:0.35});
@@ -92,6 +103,6 @@ try {
     assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth > globalThis.innerWidth),false);
     await page.screenshot({path:'/tmp/codex-subplot-image-editor/390.png',fullPage:true});
     await page.close();
-    console.log('PASS image editor: auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, + New setting from Bathhouse, a shot opened from its source with Small changes, 390px layout.');
+    console.log('PASS image editor: auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, + New setting from Bathhouse, lightbox star and keys, a shot opened from its source with Small changes, 390px layout.');
   }, {timeoutMs:60000,gpuWaitMs:60000});
 } finally {server.kill('SIGTERM');fs.rmSync(root,{recursive:true,force:true});}
