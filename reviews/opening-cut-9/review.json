@@ -1,0 +1,32 @@
+{
+ "title": "Watch the anime opening, ninth cut",
+ "date": "2026-10-10",
+ "by": "claude-main",
+ "status": "open",
+ "multi": false,
+ "context": "The 70-second anime opening that plays from the title menu before the game starts, to the opening theme.",
+ "question": "Is the ninth cut the game's opening? Watch the film, then approve it or write what to change.",
+ "options": [
+  {
+   "id": "approve",
+   "label": "Approve as the game's opening"
+  },
+  {
+   "id": "notes",
+   "label": "Notes",
+   "note": "Write what to change in the comment box."
+  }
+ ],
+ "links": [
+  {
+   "label": "The 1080p video, ninth cut",
+   "href": "game3d/shots/opening-film/full-v9/opening-1920.mp4"
+  },
+  {
+   "label": "Showcase: Anime opening, ninth cut",
+   "href": "bible/#showcase/opening-1"
+  }
+ ],
+ "updated": "2026-10-10T06:00:00+02:00",
+ "issue": 378
+}
