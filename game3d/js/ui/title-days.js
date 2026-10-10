@@ -4,8 +4,10 @@
 // does. A game in progress is only replaced after a one-line confirm.
 import { sfx } from '../ui.js';
 import { LAST_DAY } from '../days.js';
+import { DEV } from '../dev.js';
 
 export function addDayPicker(menu, before, { inProgress, keys }) {
+  if (!DEV) return; // dev mode only (dev.js): the public release has no Days
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'mday2';
