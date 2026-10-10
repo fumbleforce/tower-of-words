@@ -325,10 +325,19 @@ export function pathAround(nav, from, to, list, myR) {
 }
 
 // A walk getting nowhere stops where it is (Jørgen, 2026-09-30: "Mio was spinning around 20 times in place"): no
-// nearer the end for a second close to it (2.5 s anywhere), or a full turn without getting nearer.
+// nearer the end for a second close to it (2.5 s anywhere), a full turn without getting nearer, or going round and
+// round one way. A route never turns much more than half a turn one way, but someone circling a point she can't
+// reach creeps a little nearer each lap, which kept clearing the full-turn count (Mio circled her chair's corner 1.5
+// times, #195), so the one-way turn (`net`) isn't cleared by progress; it fades by a full turn every 3 s instead.
 export function stuck(prog, remain, dt, wait, turn) {
+  const ROUND = 1.5 * Math.PI, // the most one way a walk turns before it counts as circling
+    FADE = (2 * Math.PI) / 3; // rad/s
   if (remain < prog.best - 0.02) Object.assign(prog, { best: remain, noGain: 0, spun: 0 });
   else if (!wait) prog.noGain += dt;
   prog.spun += Math.abs(turn);
-  return (prog.noGain > 1 && remain < 0.6) || prog.noGain > 2.5 || prog.spun > 2 * Math.PI;
+  const net = (prog.net || 0) + turn;
+  prog.net = Math.sign(net) * Math.max(0, Math.abs(net) - FADE * dt);
+  return (
+    (prog.noGain > 1 && remain < 0.6) || prog.noGain > 2.5 || prog.spun > 2 * Math.PI || Math.abs(prog.net) > ROUND
+  );
 }

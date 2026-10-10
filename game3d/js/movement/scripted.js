@@ -59,7 +59,7 @@ export function walkRig(
     waited = 0,
     age = 0,
     blockT = 0;
-  const prog = { best: Infinity, noGain: 0, spun: 0 }; // getting nowhere: see `stuck` below
+  const prog = { best: Infinity, noGain: 0, spun: 0, net: 0 }; // getting nowhere: see `stuck` below
   let plen = 0;
   {
     let q = [obj.position.x, obj.position.z];
@@ -184,11 +184,15 @@ export function walkRig(
       const step = Math.min(v * dt, remain);
       let nx = p.x + Math.sin(yaw) * step,
         nz = p.z + Math.cos(yaw) * step;
-      // mostly along the way it faces, pulled onto the line to the waypoint so turns don't swing wide
+      // mostly along the way it faces, pulled onto the line to the waypoint so turns don't swing wide; inside the
+      // circle she could turn in at this pace, straight onto the waypoint and no further (turning toward a point that
+      // close, she went round and round it: Mio by her chair, #195)
       if (d > 1e-4) {
-        const k = Math.min(1, dt * 6);
-        nx += (p.x + (dx / d) * step - nx) * k;
-        nz += (p.z + (dz / d) * step - nz) * k;
+        const near = d < (v / TURN) * 1.5,
+          k = near ? 1 : Math.min(1, dt * 6),
+          s = near ? Math.min(step, d) : step;
+        nx += (p.x + (dx / d) * s - nx) * k;
+        nz += (p.z + (dz / d) * s - nz) * k;
       }
       let blockedBy = null;
       if (avoid) {
