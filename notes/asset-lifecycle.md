@@ -39,9 +39,11 @@ Both registries have one format, read and written only by `tools/assets/live.mjs
 ```
 node tools/assets/live.mjs promote <generated file> <live path> --round <round> [--review <id>] [--replace] [--note "..."]
 node tools/assets/live.mjs retire <live path>... [--from <file of paths>] [--by <new live path>] [--note "..."]
+node tools/assets/live.mjs register <live path>... --round <round or build> [--review <id>] [--note "..."]
 ```
 
 - Promote copies the picked file into the live folder, registers it (unless a folder unit already covers the path) and logs its round and review. `--replace` retires the file it replaces first. For a public file, then run `python3 tools/assets/sync.py push` and commit live.json with the lock file.
+- Register adds a file or folder a build script made in place (a Blender export of an approved model, a new crowd body installed by its round's script) without copying it, and logs where it came from.
 - Retire moves the file (or folder) into the retired area, drops its unit (a voice clip also leaves audio/index.json), drops its lock entries (`sync.py forget`) and logs what replaced it. Run in an agent worktree, it moves the main checkout's copy too, so main never keeps a file the landed registry dropped.
 
 ## The check

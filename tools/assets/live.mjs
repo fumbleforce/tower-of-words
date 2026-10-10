@@ -5,6 +5,9 @@
 //   node tools/assets/live.mjs check [--local] [--quiet]   the registry against the disk and the game's references
 //                                                          (public half in npm run check; --local adds the local-only one)
 //   node tools/assets/live.mjs promote <src> <dest> --round <round> [--review <id>] [--replace] [--note <text>]
+//   node tools/assets/live.mjs register <live path> --round <round> [--review <id>] [--note <text>]
+//                                                          a file or folder a build script made in place (a Blender
+//                                                          export of an approved model): register it as it is
 //   node tools/assets/live.mjs retire <live path>... [--from <file of paths>] [--by <new live path>] [--note <text>]
 //   node tools/assets/live.mjs list [--local]                every live file, one per line, with its unit's flags
 //
@@ -225,7 +228,7 @@ export function compare(reg, refs, { label }) {
   const { byFile, problems } = expand(reg);
   errors.push(...problems);
   // 1. every file in a live root is registered (or is a source file kept beside what it makes)
-  for (const root of reg.roots) for (const f of walk(root)) if (!byFile.has(f) && !matchAny(f, reg.source)) errors.push(`${f}: in a live folder but not in ${reg._file} (promote it, or move it to the generated area)`);
+  for (const root of reg.roots) for (const f of walk(root)) if (!byFile.has(f) && !matchAny(f, reg.source)) errors.push(`${f}: in a live folder but not in ${reg._file} (promote it, register it if a build made it in place, or move it to the generated area: notes/asset-lifecycle.md)`);
   // 2. every reference names something registered; 3. every unit is referenced
   const referenced = new Set();
   const coarse = Object.keys(reg.coarse ?? {});
@@ -401,6 +404,19 @@ export function promote(src, dest, { round, review = null, note = '', replace = 
   return { reg: reg._file, unit: unitOf(reg, dest) ?? dest };
 }
 
+export function register(livePath, { round, review = null, note = '' } = {}) {
+  guard(livePath);
+  if (!round) throw new Error('--round is required: the round or build the file came from');
+  const reg = registryFor(livePath);
+  if (!reg) throw new Error(`${livePath}: not under a live root of either registry`);
+  if (!exists(livePath)) throw new Error(`${livePath}: missing on disk`);
+  if (unitOf(reg, livePath)) throw new Error(`${livePath}: already registered (unit ${unitOf(reg, livePath)})`);
+  reg.units[livePath] = note ? { note } : {};
+  reg.log.push({ date: today(), action: 'register', path: livePath, round, ...(review && { review }), ...(note && { note }) });
+  saveRegistry(reg);
+  return reg._file;
+}
+
 // ---------- CLI ----------
 function args(argv) {
   const out = { _: [] };
@@ -432,6 +448,11 @@ async function main() {
     const r = promote(src, dest, { round: a.round, review: a.review, note: a.note, replace: !!a.replace, dryRun: !!a['dry-run'] });
     console.log(`promoted ${src} -> ${dest} (unit ${r.unit}, ${r.reg})`);
     if (r.reg === PUBLIC_REGISTRY) console.log('next: python3 tools/assets/sync.py push, then commit tools/assets/live.json and the lock file');
+  } else if (cmd === 'register') {
+    for (const x of rest) {
+      const p = x.endsWith('/') ? rel(x) + '/' : rel(x);
+      console.log(`registered ${p} in ${register(p, { round: a.round, review: a.review, note: a.note })}`);
+    }
   } else if (cmd === 'retire') {
     const named = [...rest, ...(a.from ? fs.readFileSync(a.from, 'utf8').split('\n').filter(Boolean) : [])];
     const paths = named.map((x) => (x.endsWith('/') ? rel(x) + '/' : rel(x)));
