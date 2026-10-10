@@ -42,9 +42,17 @@ if [ -n "$REVIEW_DIRTY" ]; then
 fi
 [ -n "$(git status --porcelain game3d/index.html)" ] && echo "note: game3d/index.html has uncommitted changes; the site uses the committed version"
 
-STAGE=$(mktemp -d "${TMPDIR:-/tmp}/pages.XXXXXX")
-# KEEP=1 keeps the built site folder (to serve and check it locally)
-[ -z "$KEEP" ] && trap 'rm -rf "$STAGE" "$STAGE.idx"' EXIT
+# The site is about 1 GB, so it is built on disk, never in /tmp (that is RAM). PAGES_BUILD_DIR moves it.
+BUILD_BASE="${PAGES_BUILD_DIR:-$HOME/.cache/tower-pages}"
+mkdir -p "$BUILD_BASE"
+# copies left by a run that was killed (here, or the older ones in /tmp), once they are an hour old
+find "$BUILD_BASE" /tmp -maxdepth 1 -user "$(id -un)" -name 'pages.*' -mmin +60 -exec rm -rf {} + 2>/dev/null || true
+STAGE=$(mktemp -d "$BUILD_BASE/pages.XXXXXX")
+# KEEP=1 keeps the built site folder (to serve and check it locally); otherwise it goes on every exit, signals included
+if [ -z "$KEEP" ]; then
+  trap 'rm -rf "$STAGE" "$STAGE.idx" "$STAGE.scan"' EXIT
+  trap 'exit 130' INT TERM HUP
+fi
 REV=$(git rev-parse --short HEAD)
 
 # 1. the committed game3d tree, the locked binaries from disk, then prune everything the game doesn't load
