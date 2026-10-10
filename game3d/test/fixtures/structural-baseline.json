@@ -3790,6 +3790,7 @@
     "can_exit",
     "train_hamada_seen",
     "train_reader_seen",
+    "tried_english",
     "greeted_guard",
     "guard_asked",
     "jammed",

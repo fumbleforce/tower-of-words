@@ -75,7 +75,7 @@ export default {
 
   goal: {
     guard: '(!greeted_guard && !guard_asked) || (jammed && !gate_through_way)',
-    reader_r: 'greeted_guard && !guard_asked',
+    reader_r: '(greeted_guard || tried_english) && !guard_asked',
     kuroda: 'jammed && !gate_through_way',
     lift: 'gate_through',
   },
@@ -113,6 +113,7 @@ export default {
 
     // talking to him in English gets nothing; he doesn't look up
     guard_look: [
+      { set: 'tried_english' },
       { say: 'eric', emo: 'hesitant', text: 'Hi. Um... good morning?' },
       { do: 'typing', who: 'guard', ms: 2500 },
       { do: 'emote', who: 'guard', kind: '…' },
