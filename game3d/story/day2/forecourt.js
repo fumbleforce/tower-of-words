@@ -72,7 +72,7 @@ export default {
     ],
     d2_kuro_ok: [
       { say: 'eric', emo: 'warm', text: '{daijoubu}. I found the right lift today.' },
-      { say: 'kuro', overheard: true, emo: 'teasing', text: 'じゃあ、話しに来ただけ？' },
+      { say: 'kuro', face: 'teasing', overheard: true, emo: 'teasing', text: 'じゃあ、話しに来ただけ？' },
       { say: 'eric', emo: 'warm', text: 'I did, yes.' },
       { set: 'd2_kuro_ok_seen' }, { go: 'd2_kuro_topics' },
     ],

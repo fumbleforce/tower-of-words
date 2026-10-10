@@ -119,13 +119,18 @@
       "surprised",
       "embarrassed",
       "tired",
-      "phone"
+      "phone",
+      "annoyed"
     ],
     "aoi": [
       "neutral"
     ],
     "kuro": [
-      "neutral"
+      "neutral",
+      "flirtatious",
+      "teasing",
+      "pleased",
+      "polite"
     ],
     "eric": [
       "neutral",

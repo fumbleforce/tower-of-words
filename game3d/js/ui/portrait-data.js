@@ -2,9 +2,9 @@
 import { MC } from '../mc.js';
 
 export const PORTRAITS = {
-  mio: ['neutral', 'smile', 'deadpan', 'surprised', 'embarrassed', 'tired', 'phone'],
+  mio: ['neutral', 'smile', 'deadpan', 'surprised', 'embarrassed', 'tired', 'phone', 'annoyed'],
   aoi: ['neutral'],
-  kuro: ['neutral'],
+  kuro: ['neutral', 'flirtatious', 'teasing', 'pleased', 'polite'],
   [MC.portrait.set]: MC.portrait.faces, // the protagonist's (data/mc/<id>.json)
   mori: ['neutral', 'smile', 'flustered'],
   kenji: ['neutral', 'grin', 'sheepish'],

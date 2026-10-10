@@ -59,12 +59,12 @@ export default {
     kuro_intro: [
       { do: 'face', who: 'kuro', to: 'eric' },
       { do: 'cam', on: 'kuro', zoom: 1.2 },
-      { say: 'kuro', overheard: true, emo: 'polite', text: '{ohayo}。どうぞ。' },
+      { say: 'kuro', face: 'polite', overheard: true, emo: 'polite', text: '{ohayo}。どうぞ。' },
       { say: 'eric', emo: 'polite', text: 'Hi. Sorry, which way is B2?' },
       { wait: 700 },
       { do: 'face', who: 'kuro', to: 'lift' },
       { do: 'gesture', who: 'kuro', kind: 'point', to: 'lift' },
-      { say: 'kuro', emo: 'curt', text: 'Lift, there.' },
+      { say: 'kuro', face: 'polite', emo: 'curt', text: 'Lift, there.' },
       { do: 'face', who: 'kuro', to: 'label_printer' },
       { say: 'eric', emo: 'polite', text: 'Thanks.' },
       { do: 'cam', back: true },
@@ -91,10 +91,10 @@ export default {
     kuro: [
       { do: 'face', who: 'kuro', to: 'eric' },
       { if: 'going_home', then: [
-        { say: 'kuro', voice: 'kuro-otsukare', overheard: true, emo: 'polite', text: 'お疲れさまです。' },
+        { say: 'kuro', face: 'polite', voice: 'kuro-otsukare', overheard: true, emo: 'polite', text: 'お疲れさまです。' },
         { do: 'bow', who: 'kuro' },
       ], else: [
-        { say: 'kuro', overheard: true, emo: 'polite', text: '{ohayo}。どうぞ。' },
+        { say: 'kuro', face: 'polite', overheard: true, emo: 'polite', text: '{ohayo}。どうぞ。' },
         { do: 'face', who: 'kuro', to: 'lift' },
         { do: 'gesture', who: 'kuro', kind: 'point' },
         { do: 'face', who: 'kuro', to: 'eric' },
@@ -103,7 +103,7 @@ export default {
     ohayo_kuro: [
       { do: 'face', who: 'kuro', to: 'eric' },
       { if: 'going_home', then: [
-        { say: 'kuro', voice: 'kuro-otsukare', overheard: true, emo: 'polite', text: 'お疲れさまです。' },
+        { say: 'kuro', face: 'polite', voice: 'kuro-otsukare', overheard: true, emo: 'polite', text: 'お疲れさまです。' },
       ], else: [
         { say: 'kuro', overheard: true, emo: 'warm', text: 'あ、{ohayo}。' },
         { do: 'gesture', who: 'kuro', kind: 'nod', to: 'eric' },

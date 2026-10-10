@@ -116,7 +116,7 @@ export default {
       { say: 'member', overheard: true, emo: 'polite', text: 'エミさん、これもお願いします。備品のリストです。', clear: ['リスト'] },
       { call: 'd3_pool_list' },
       { say: 'emi', emo: 'amused', text: 'Oh, she’s found me something else. That can wait until I’m dry again.' },
-      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'teasing', text: 'エミさん、泳ぎに来たんでしょう？' },
+      { say: 'kuro', face: 'teasing', name: 'Kuro', overheard: true, emo: 'teasing', text: 'エミさん、泳ぎに来たんでしょう？' },
       { say: 'emi', emo: 'warm', text: 'Yes, I did come here to swim. You’re quite right.' },
       { say: 'kuro', name: 'Kuro', overheard: true, emo: 'curious', text: '今日は、{oyogu}？' },
       { choice: [

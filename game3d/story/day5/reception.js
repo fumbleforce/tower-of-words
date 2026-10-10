@@ -9,7 +9,7 @@ export const receptionNodes = {
       { say: 'eric', emo: 'casual', text: 'Reception can check the label in the morning or afternoon.' }, { end: true },
     ] },
     { call: 'd5_kuro_name' },
-    { if: "ticket_T0007 == 'done'", then: [{ say: 'kuro', name: 'Kuro', overheard: true, emo: 'warm', text: '全部、入ってます。ありがとう。' }, { end: true }] },
+    { if: "ticket_T0007 == 'done'", then: [{ say: 'kuro', face: 'pleased', name: 'Kuro', overheard: true, emo: 'warm', text: '全部、入ってます。ありがとう。' }, { end: true }] },
     { say: 'kuro', name: 'Kuro', overheard: true, emo: 'polite', text: '{mc.name_jp}さん、これ、見てください。朝、頼みました。' },
     { do: 'ticket', add: 'T-0007' },
     { do: 'labelRepair', state: 'show' },
