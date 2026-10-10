@@ -2,7 +2,7 @@ import { receptionNodes } from '../day5/reception.js';
 import { place } from './shared.js';
 export default place('forecourt', {
   labels: { kuro: ['Kuro', 'd3_kuro_intro'] },
-  on: { 'talk:kuro': 'ongoing_reception', 'talk:label_printer': 'ongoing_reception' },
+  on: { 'talk:kuro': 'ongoing_reception' },
   nodes: {
     ...receptionNodes,
     ongoing_reception: [

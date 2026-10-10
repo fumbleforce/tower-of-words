@@ -125,8 +125,8 @@ export const PLACE_DETAILS = {
         label: 'Bench',
         kind: 'thing small',
       },
-      poster_l: { label: 'Poster', kind: 'thing small', pin: 'near' }, // a flat line: its pin only when close
-      poster_r: { label: 'Poster', kind: 'thing small', pin: 'near' }, // a flat line: its pin only when close
+      poster_l: { label: 'Poster', kind: 'thing small' },
+      poster_r: { label: 'Poster', kind: 'thing small' },
       lift: {
         label: 'Station exit',
         kind: 'thing',
