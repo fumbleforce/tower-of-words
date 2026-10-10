@@ -291,7 +291,10 @@ export async function buildIsland(uniforms, { joinX, seaY, onProgress = null }) 
         o.instanceMatrix.needsUpdate = true;
       } else if (o.isMesh) {
         box.setFromObject(o).getCenter(ctr);
-        const maskable = box.max.y - box.min.y < 6 && !NO_CUT && !o.userData.noLook && [].concat(o.material).every((m) => m && !m.isShaderMaterial);
+        // ground and what stands on it: starts within 3 m of the ground, under 6 m tall, and no part of a building
+        // (the gym's high glass, 4 to 6 m up where two places' areas overlap, was masked and the hall seen through)
+        const maskable =
+          box.min.y < 3 && box.max.y - box.min.y < 6 && !/glass|wall|roof|window|facade|door/i.test(o.name || '') && !NO_CUT && !o.userData.noLook && [].concat(o.material).every((m) => m && !m.isShaderMaterial);
         // a whole mesh goes only when the pixel mask below can't take it: judged by its box's centre, a merged ground
         // piece that holds part of the plaza's circle and a lane running on into the next place was dropped whole,
         // the circle's stones with it (Jørgen 2026-10-10: grass in steps on the paving, five cuts running)
