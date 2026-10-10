@@ -479,6 +479,7 @@
     "forecourt:to_b2",
     "forecourt:to_plaza",
     "forecourt:kuro_intro",
+    "forecourt:kuro_intro_ohayo",
     "forecourt:kuro",
     "forecourt:ohayo_kuro",
     "forecourt:yoroshiku_kuro",
@@ -3524,7 +3525,7 @@
     },
     {
       "from": "train:lesson2",
-      "to": "forecourt:kuro_intro",
+      "to": "forecourt:kuro_intro_ohayo",
       "kind": "unlock",
       "labels": [
         "know_ohayo"
