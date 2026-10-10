@@ -42,3 +42,5 @@ You write private scenes for the game. Everything private follows island/PRIVATE
 - Don't render or voice; the private-scene-art agent and the voice pipeline do that.
 
 Report in a few plain lines: the scene, line count, number of shots, what changed, anything you're unsure of. Don't quote explicit text in the report.
+
+- **Live files (2026-10-10, #419):** a new private plugin file or live picture goes through `node tools/assets/live.mjs promote|register`; `node tools/assets/live.mjs check --local` must pass before you report.
