@@ -2,7 +2,7 @@
  "title": "Character bios, round 5: Aoi and Emi",
  "date": "2026-10-09",
  "by": "Claude, bios agent",
- "status": "open",
+ "status": "decided",
  "updated": "2026-10-09T23:59:00+0200",
  "context": [
   "You asked for Aoi's and Emi's bios before their voice sheets, so these come first. They are written the same way as the four you approved in character-backgrounds-4: background, looks, home, interests and ambitions, with nothing about other characters.",
@@ -53,5 +53,12 @@
    "href": "reviews/character-backgrounds-4/index.html"
   }
  ],
- "question": "You asked for Aoi's and Emi's bios before their voice sheets, so these come first. They are written the same way as the four you approved in character-backgrounds-4: background, looks, home, interests and ambitions, with nothing about other characters. Nothing here is in the game yet. Each bio ends with a note on what is already established and what is new. After your answer, their voice sheets (character-voices-3) are redone from the approved bios. For each card, pick it to approve the bio as it is, pick it and comment to approve it with changes, or reject it to have it rewritten. Answer the numbered questions in the card's comment box."
+ "question": "You asked for Aoi's and Emi's bios before their voice sheets, so these come first. They are written the same way as the four you approved in character-backgrounds-4: background, looks, home, interests and ambitions, with nothing about other characters. Nothing here is in the game yet. Each bio ends with a note on what is already established and what is new. After your answer, their voice sheets (character-voices-3) are redone from the approved bios. For each card, pick it to approve the bio as it is, pick it and comment to approve it with changes, or reject it to have it rewritten. Answer the numbered questions in the card's comment box.",
+ "decided": [
+  "aoi",
+  "emi"
+ ],
+ "decision": "Jørgen: keep the defaults; Emi is 35 instead",
+ "decided_at": "2026-10-10T10:59:22+0200",
+ "issue": 408
 }
