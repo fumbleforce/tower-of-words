@@ -95,7 +95,8 @@ const menuTexts = (trigger, flags) => {
 const day1 = { day: 1, period_evening: true, place: 'office', met_emi: true, met_mio: true, met_kenji: true, fact_emi_ten_years: true };
 test('a fresh day 1 offers no swimming club, server lunch or crane game question', () => {
   assert.ok(!menuTexts('ask:emi', day1).some((text) => /swimming|join in/.test(text)));
-  assert.ok(menuTexts('ask:emi', day1).includes('What makes things easier for you at work?'), 'first-meeting questions stay');
+  assert.ok(!menuTexts('ask:emi', day1).includes('What makes things easier for you at work?'), 'a work question waits until they have worked together');
+  assert.ok(menuTexts('ask:emi', { ...day1, day: 3 }).includes('What makes things easier for you at work?'));
   assert.ok(!menuTexts('ask:mio', day1).some((text) => /servers/.test(text)));
   assert.ok(!menuTexts('ask:kenji', day1).some((text) => /crane/.test(text)));
   assert.equal(topicFor('kenji', createConversationMemory(REMARKS), new Set(), true, day1).label, 'Chat with Kenji');

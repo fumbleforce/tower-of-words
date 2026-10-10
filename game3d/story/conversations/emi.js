@@ -10,7 +10,7 @@ export default {
       { choice: [
         { text: 'What made you join the swimming club?', go: 'chat_emi_club', if: '!chat_emi_club_known', needs: ['emi.swimming_club'] },
         { text: 'Are you getting much time to join in?', go: 'chat_emi_turn', if: 'chat_emi_club_known', needs: ['emi.swimming_club'] },
-        { text: 'What makes things easier for you at work?', go: 'chat_emi_team' },
+        { text: 'What makes things easier for you at work?', go: 'chat_emi_team', if: 'day >= 3' },
         { text: 'How do I ask someone to say it again?', go: 'chat_emi_repeat_word', if: '!know_mouichido' },
         { text: 'I’ll let you get on.', go: 'chat_emi_leave' },
       ] },
