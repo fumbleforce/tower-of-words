@@ -101,13 +101,16 @@ export const CHORUS = [
     },
     draw(g, lt, T, S) {
       // the held frame's wash lifts as the band comes back; まして finishes the word in place, then it all lifts away
-      const wash = 1 - k(lt, 0, 0.45, ease.out3);
+      const wash = 1 - k(lt, 0, 0.22, ease.out3); // gone fast: the colour lands with the band
       if (wash > 0) heldWash(g, wash);
       const a = 1 - k(lt, 1.2, 1.7);
       if (a > 0) hajime(g, 99, lt, { y: 520 - k(lt, 1.2, 1.7, ease.in2) * 60, alpha: a });
       gulls(g, [0, 1, 2, 3, 4].map((i) => ({ x: 400 + i * 90 + lt * 70, y: 260 + (i % 2) * 40 - lt * 20, s: 16, ph: i })), lt, 'rgba(30,44,80,0.8)');
     },
-    flare: () => 0.9,
+    // the slam in full colour: a touch of flare, little bloom, so the sun's path doesn't milk the bay over
+    flare: () => 0.4,
+    bloom: 0.22,
+    exposure: 0.84,
     fx: (lt) => ({ chroma: 0.008 * Math.exp(-lt / 0.2), zoom: 1 + 0.04 * Math.exp(-lt / 0.25) }),
   },
   {
@@ -352,8 +355,8 @@ export const CHORUS = [
         const A = S.anchors;
         const at = A.inPlace('pool', 9, -20, 0);
         const yaw = -0.5 + lt * 0.25,
-          el = 1.0,
-          d = 14 - lt * 1.5;
+          el = 0.72, // low enough to give the lanes depth, high enough that the water still fills the frame
+          d = 12 - lt * 1.5;
         return [[at.x + Math.sin(yaw) * Math.cos(el) * d, at.y + Math.sin(el) * d, at.z + Math.cos(yaw) * Math.cos(el) * d], at.toArray(), 40];
       },
     ],

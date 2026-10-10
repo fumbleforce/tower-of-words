@@ -100,7 +100,7 @@ const GATE_END = GATE[1] - GATE[0];
 // own copy of the lobby, once; returns open(k), 0 shut to 1 slid behind the wall
 function exitDoors(w) {
   if (w.openExit) return w.openExit;
-  const z = -4.5; // the back wall (scenes/lobby.js Z)
+  const z = -4.58; // inside the back wall's thickness (scenes/lobby.js: Z + 0.08, 0.16 thick), so the leaves slide into it
   const frame = new THREE.MeshStandardMaterial({ color: '#5a606a', roughness: 0.5, metalness: 0.3 });
   const glass = new THREE.MeshStandardMaterial({ color: '#bcd3dc', roughness: 0.1, metalness: 0.1, transparent: true, opacity: 0.45 });
   const leaves = [-1, 1].map((side) => {
@@ -108,13 +108,29 @@ function exitDoors(w) {
     g.add(new THREE.Mesh(new THREE.BoxGeometry(0.6, 1.4, 0.04), frame));
     const pane = new THREE.Mesh(new THREE.BoxGeometry(0.5, 1.26, 0.045), glass);
     g.add(pane);
-    g.position.set(EXIT_X + side * 0.3, 0.7, z + 0.02);
+    g.position.set(EXIT_X + side * 0.3, 0.7, z);
     g.userData.side = side;
     w.root.add(g);
     return g;
   });
-  const light = new THREE.Mesh(new THREE.PlaneGeometry(3, 2.2), new THREE.MeshBasicMaterial({ color: '#fff4dc', toneMapped: false }));
-  light.position.set(EXIT_X, 0.9, z - 1.4);
+  // outside: a bright morning, sky over a warm horizon over pale paving (it blooms into the next shot's flash)
+  const cv = document.createElement('canvas');
+  cv.width = 8;
+  cv.height = 256;
+  const cg = cv.getContext('2d'),
+    gr = cg.createLinearGradient(0, 0, 0, 256);
+  gr.addColorStop(0, '#6fb4f2');
+  gr.addColorStop(0.42, '#bfe0ff');
+  gr.addColorStop(0.58, '#fff8ea');
+  gr.addColorStop(0.68, '#f1ede3');
+  gr.addColorStop(1, '#c9c2b2');
+  cg.fillStyle = gr;
+  cg.fillRect(0, 0, 8, 256);
+  const sky = new THREE.CanvasTexture(cv);
+  sky.colorSpace = THREE.SRGBColorSpace;
+  // the doorway (1.44 high) shows sky in its upper half and the bright paving below the horizon
+  const light = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 1.7), new THREE.MeshBasicMaterial({ map: sky, toneMapped: false }));
+  light.position.set(EXIT_X, 0.85, z - 1.4);
   w.root.add(light);
   w.openExit = (o) => leaves.forEach((g) => (g.position.x = EXIT_X + g.userData.side * (0.3 + 0.62 * o)));
   return w.openExit;
@@ -355,6 +371,8 @@ export const VERSE = [
       const tap = GATE_TAP;
       const open = k(lt, tap + 0.25, tap + 0.85, ease.inOut2);
       w.arch.userData.set?.(lt > tap ? 'ok' : 'idle');
+      // Ishibashi's card has just played: his blocky game figure stays out of this shot (critic on the seventh cut)
+      if (w.guard?.root) w.guard.root.visible = false;
       w.arch.userData.flaps?.(open);
       // low by the right-hand reader, then through the lane and on to the station exit, whose doors slide open
       // onto the morning outside (the light floods in and carries into the next shot)
