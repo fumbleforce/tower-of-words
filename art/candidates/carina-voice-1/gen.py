@@ -7,6 +7,7 @@ import os, sys, torch, soundfile as sf
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, '..', '..', '..', 'tools'))
+import gc
 import gpu_priority
 from cands import CANDS, REF_TEXT, LINES, SEEDS, WORK
 from qwen_tts import Qwen3TTSModel
@@ -14,11 +15,26 @@ from qwen_tts import Qwen3TTSModel
 Q = os.path.expanduser('~/ai/tts/qwen')
 
 
+LOADED = {}  # the TTS models in memory: model() loads on first use and again after a turn given to a browser test
+
+
+def model(kind):
+    if kind not in LOADED:
+        LOADED[kind] = Qwen3TTSModel.from_pretrained(f'{Q}/Qwen3-TTS-12Hz-1.7B-' + kind, device_map='cuda:0', dtype=torch.bfloat16, attn_implementation='sdpa')
+    return LOADED[kind]
+
+
+def drop():
+    LOADED.clear()
+    gc.collect()
+    torch.cuda.empty_cache()
+
+
 def stop():
     if gpu_priority.should_stop('carina-voice-1'):
         print('yield for the dashboard', flush=True)
         sys.exit(75)
-    gpu_priority.let_browsers_in('carina-voice-1', 'carina-voice')  # a waiting day test gets a turn
+    gpu_priority.let_browsers_in('carina-voice-1', 'carina-voice', free=drop)  # a waiting day test gets a turn
 
 
 def free_comfy():
@@ -39,18 +55,15 @@ def free_comfy():
 free_comfy()
 need = [c for c in CANDS if not os.path.exists(f"{WORK}/{c['id']}/ref.wav")]
 if need:
-    d = Qwen3TTSModel.from_pretrained(f'{Q}/Qwen3-TTS-12Hz-1.7B-VoiceDesign', device_map='cuda:0', dtype=torch.bfloat16, attn_implementation='sdpa')
     for c in need:
         stop()
         os.makedirs(f"{WORK}/{c['id']}", exist_ok=True)
         torch.manual_seed(c.get('seed', 7))
-        w, sr = d.generate_voice_design(text=REF_TEXT, language='English', instruct=c['instruct'])
+        w, sr = model('VoiceDesign').generate_voice_design(text=REF_TEXT, language='English', instruct=c['instruct'])
         sf.write(f"{WORK}/{c['id']}/ref.wav", w[0], sr)
         print('designed', c['id'], flush=True)
-    del d
-    torch.cuda.empty_cache()
+    drop()
 
-m = Qwen3TTSModel.from_pretrained(f'{Q}/Qwen3-TTS-12Hz-1.7B-Base', device_map='cuda:0', dtype=torch.bfloat16, attn_implementation='sdpa')
 for c in CANDS:
     ref = f"{WORK}/{c['id']}/ref.wav"
     for lang in ('English', 'Japanese'):
@@ -62,7 +75,7 @@ for c in CANDS:
             stop()
             torch.manual_seed(seed)
             texts = [l['tts'] for l in todo]
-            wavs, sr = m.generate_voice_clone(text=texts, language=[lang] * len(todo), ref_audio=[ref] * len(todo), ref_text=[REF_TEXT] * len(todo),
+            wavs, sr = model('Base').generate_voice_clone(text=texts, language=[lang] * len(todo), ref_audio=[ref] * len(todo), ref_text=[REF_TEXT] * len(todo),
                                               x_vector_only_mode=(lang == 'Japanese'),
                                               max_new_tokens=int(12 * (4 + max(len(x) for x in texts) * (0.25 if lang == 'Japanese' else 0.1))))
             for l, w in zip(todo, wavs):

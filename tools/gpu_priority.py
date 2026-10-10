@@ -361,13 +361,34 @@ def waiting_browsers(root=None):
     return [t for t in read_queue(root) if t['live'] and t.get('kind') == 'browser']
 
 
-def let_browsers_in(owner=None, rank=None, root=None, after=None, limit=None, poll=POLL, log=print):
+COMFY = os.environ.get('COMFY_HOST', 'http://127.0.0.1:8188')
+
+
+def free_comfy_models(host=None, timeout=10):
+    """Ask ComfyUI to unload its resident models, unless it is running or has queued work. True if it was asked."""
+    import json, urllib.request
+    host = host or COMFY
+    try:
+        q = json.load(urllib.request.urlopen(host + '/queue', timeout=5))
+        if q.get('queue_running') or q.get('queue_pending'):
+            return False
+        urllib.request.urlopen(urllib.request.Request(host + '/free', data=json.dumps(
+            {'unload_models': True, 'free_memory': True}).encode(), headers={'Content-Type': 'application/json'}), timeout=timeout)
+        return True
+    except Exception:
+        return False  # not running, so nothing of it is resident
+
+
+def let_browsers_in(owner=None, rank=None, root=None, after=None, limit=None, poll=POLL, log=print, free=None):
     """Call between two items of a long GPU job. If `owner` has held gpu.lock for `after` seconds (TURN_AFTER) and
     browser tests wait, release the lock, wait until those tickets have their slots (at most `limit` seconds,
     TURN_MAX), then queue again at `rank` and return once the lock is ours. True if a turn was given. Without owner it
-    covers the locks this process took with hold(). Does nothing while the lock is not held as owner, or nobody waits."""
+    covers the locks this process took with hold(). Does nothing while the lock is not held as owner, or nobody waits.
+    Before the lock goes, resident model memory is freed so the browser does not share the GPU with it: ComfyUI's
+    models are unloaded (free_comfy_models), then `free()` runs, for what this process holds itself (the TTS model:
+    drop it and torch.cuda.empty_cache(); load it again lazily after the turn)."""
     if owner is None:
-        return any([let_browsers_in(o, r, root, after, limit, poll, log) for o, r in list(_HELD.items())])
+        return any([let_browsers_in(o, r, root, after, limit, poll, log, free) for o, r in list(_HELD.items())])
     after = TURN_AFTER if after is None else after
     limit = TURN_MAX if limit is None else limit
     rank = rank or _HELD.get(owner) or 'render'
@@ -381,6 +402,9 @@ def let_browsers_in(owner=None, rank=None, root=None, after=None, limit=None, po
         return False
     if log:
         log(f'{owner}: {len(waiting)} browser test(s) waiting after {_ago(held_for)}; giving them a turn ({time.strftime("%H:%M:%S")})')
+    free_comfy_models()
+    if free:
+        free()
     release(owner, root)
     t0 = time.time()
     while time.time() - t0 < limit and waiting & {t['path'] for t in waiting_browsers(root)}:

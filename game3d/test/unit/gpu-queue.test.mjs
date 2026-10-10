@@ -3,6 +3,7 @@
 // ComfyUI or browser: temporary lock roots, fake tickets and short-lived helper processes only.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import http from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
@@ -210,15 +211,73 @@ test('no turn when the holder is within its slice, nobody waits, or only an excl
   assert.equal(py(root, 'print(g.let_browsers_in("someone-else", "voice", after=0, log=None))').out, 'False', 'not the holder');
 });
 
-test('GPU_WAIT sets how long a browser job waits in the queue, on top of its own time limit', async () => {
+test('GPU_WAIT is the wait budget only: the run deadline stays the job\'s own time limit', async () => {
   const { gpuWaitOptions } = await import('../../../tools/lib/browser-job.mjs');
   const saved = process.env.GPU_WAIT;
   try {
     delete process.env.GPU_WAIT;
-    assert.deepEqual(gpuWaitOptions(900, 295000), { gpuWaitMs: 900000, timeoutMs: 1195000 });
+    assert.deepEqual(gpuWaitOptions(900, 295000), { gpuWaitMs: 900000, timeoutMs: 295000 });
     process.env.GPU_WAIT = '1800';
-    assert.deepEqual(gpuWaitOptions(900, 295000), { gpuWaitMs: 1800000, timeoutMs: 2095000 });
+    assert.deepEqual(gpuWaitOptions(900, 295000), { gpuWaitMs: 1800000, timeoutMs: 295000 });
     process.env.GPU_WAIT = 'soon';
     assert.throws(() => gpuWaitOptions(900, 295000), /GPU_WAIT/);
   } finally { if (saved === undefined) delete process.env.GPU_WAIT; else process.env.GPU_WAIT = saved; }
+});
+
+test('a browser job admitted at once is cut off at its own run deadline, not at deadline plus the wait allowance', async () => {
+  const { withBrowserJob } = await import('../../../tools/lib/browser-job.mjs');
+  const saved = process.env.GL;
+  process.env.GL = 'soft'; // no GPU queue: admitted at once, with a huge wait allowance that must not extend the run
+  const loadavg = os.loadavg;
+  os.loadavg = () => [0, 0, 0]; // the load gate is not under test
+  const t0 = Date.now();
+  try {
+    await assert.rejects(withBrowserJob('deadline-test', () => new Promise(resolve => setTimeout(resolve, 60000).unref()),
+      { timeoutMs: 6000, gpuWaitMs: 600000, loadWaitMs: 600000 }), /exceeded 6 seconds to run/);
+  } finally { os.loadavg = loadavg; if (saved === undefined) delete process.env.GL; else process.env.GL = saved; }
+  assert.ok(Date.now() - t0 < 25000, `stopped after ${Date.now() - t0} ms`);
+});
+
+// A fake ComfyUI that records the paths it is asked for.
+async function fakeComfy(t, queue) {
+  const calls = [];
+  const server = http.createServer((req, res) => { calls.push(req.url); res.end(req.url === '/queue' ? queue : '{}'); });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => server.close());
+  return { calls, host: `http://127.0.0.1:${server.address().port}` };
+}
+// Run python with gpu_priority imported (asynchronously, so the fake server can answer).
+function pyAsync(root, host, code) {
+  return new Promise(resolve => {
+    const child = spawn('python3', ['-c', `import sys; sys.path.insert(0, ${JSON.stringify(tools)})\nimport gpu_priority as g\n${code}`],
+      { env: { ...process.env, GPU_ROOT: root, COMFY_HOST: host } });
+    let out = '';
+    child.stdout.on('data', d => { out += d; });
+    child.stderr.on('data', d => { out += d; });
+    child.on('exit', () => resolve(out.trim()));
+  });
+}
+
+test('a holder frees ComfyUI and its own model memory before the lock goes to a browser test', async t => {
+  const root = fixture(t);
+  holdLock(root, 'voice-batch', 600);
+  ticket(root, 'fast-test', { rank: 4.5, time: 1 });
+  const comfy = await fakeComfy(t, '{"queue_running":[],"queue_pending":[]}');
+  const out = await pyAsync(root, comfy.host, `import json
+seen = []
+def free():
+    seen.append(g.lock_owner())  # still ours when the model is dropped
+print(g.let_browsers_in("voice-batch", "voice", poll=0.1, limit=1, log=None, free=free))
+print(json.dumps(seen))`);
+  assert.equal(out, 'True\n["voice-batch"]', 'the model was dropped while the lock was still held, then the turn was given');
+  assert.deepEqual(comfy.calls, ['/queue', '/free'], 'ComfyUI was asked to unload');
+});
+
+test('a busy ComfyUI is left alone, and no turn frees nothing', async t => {
+  const root = fixture(t);
+  const comfy = await fakeComfy(t, '{"queue_running":[[1]],"queue_pending":[]}');
+  const out = await pyAsync(root, comfy.host,
+    'print(g.free_comfy_models())\nprint(g.let_browsers_in("x", "voice", after=0, log=None, free=lambda: print("freed")))');
+  assert.equal(out, 'False\nFalse');
+  assert.deepEqual(comfy.calls, ['/queue'], 'only looked, never /free');
 });
