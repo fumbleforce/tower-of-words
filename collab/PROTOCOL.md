@@ -39,6 +39,8 @@ Three teams work on this repo: Claude (Claude Code, the main session plus its su
 
 A starting split between Claude and Codex. Grok does not take a lead from this list unless Jørgen assigns it. Jørgen can change the split, and any team can propose a change in the inboxes.
 
+Codex's primary role after finishing its existing work is QC across code structure, plans, narratives, code quality and project processes (Jørgen, 2026-10-10). The responsibility and reporting rule is in [GUIDE.md, Process](../GUIDE.md#process); the area leads below identify who builds and who reviews.
+
 Cost rule (Jørgen, 2026-09-30): "Reserve codex for more detail passes, review and creative writing, it is more expensive". Claude does the bulk building: modelling, places and trips integration, engine, UI, tools and fixes. Codex takes creative writing, detail passes on finished work, and reviews. When in doubt, Claude builds and Codex reviews.
 
 - Story, dialogue, characters (writing): Codex leads (Jørgen's pick after the day-2 contest, 2026-09-29). Claude reviews as a cold first-time reader: does it make sense, is anything unexplained, too long, or contradicting the setting?
