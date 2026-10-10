@@ -24,6 +24,7 @@ const checks = [
   ['bonds', ['game3d/js/bonds/test.mjs']],
   ['facts', ['tools/facts/check.mjs']],
   ['story map', ['tools/bible/story-map-check.mjs']],
+  ['nav registry', ['tools/check/nav-registry.mjs']],
 ];
 let failures = 0;
 for (const [name, args, command = process.execPath] of checks) {

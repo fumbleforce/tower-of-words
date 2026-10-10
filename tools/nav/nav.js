@@ -6,8 +6,15 @@
 // The bar is fixed at the top. It sets --anav-h on <html> and pads <body> by that much; a page with its own sticky
 // or full-height parts offsets them with var(--anav-h, 0px).
 //
-// Private entries: when the local server finds the private files, /api/nav-private.js calls
-// AmakawaNav.addPrivate(items); otherwise it is empty and the private group never shows.
+// Private mode (Jørgen, 2026-10-10: "the /private route would open the private version of the hole nav, it would get
+// the additional tools and capabilities, like an extention of the original. be DRY, don't remake it, make sure every
+// tool and item has one place they are defined"). http://127.0.0.1:8771/private turns it on for this browser (a cookie,
+// so the image gen port sees it too) and /public turns it off (tools/review_server.py). It is the same site: in private
+// mode /api/nav-private.js hands out the one private registry file, which calls AmakawaNav.addPrivate({ items,
+// capabilities }) to add bar entries after these and to give tools their private extras (a tool asks with
+// await AmakawaNav.ready, then AmakawaNav.capability('<tool id>')). Outside private mode, or without the private files,
+// that script is empty and nothing private shows. This file never names private content; ITEMS below is the only
+// place a public tool is defined, and tools/check/nav-registry.mjs fails on a second definition.
 // The bar only appears on this machine (127.0.0.1 or localhost), never on the public site, and not in automated
 // browsers (screenshots and checks of these pages stay as they were) unless the test sets window.AMAKAWA_NAV = true.
 (() => {
@@ -18,6 +25,7 @@
   const root = new URL('../../', src); // the repo root this page belongs to (main checkout or a worktree)
   const origin = new URL(src).origin;
   const R = root.pathname;
+  const privateMode = local && /(?:^|;\s*)amakawa_mode=private(?:;|$)/.test(document.cookie);
   const here = () => ({ p: location.pathname, h: location.hash, port: location.port, o: location.origin });
   const on = (path) => ({ p, o }) => o === origin && (p === R + path || p === R + path + 'index.html');
 
@@ -35,6 +43,9 @@
     { id: 'game', label: 'Game', href: 'game3d/', target: 'amakawa-game', match: () => false, external: true },
   ];
   let privateItems = [];
+  let capabilities = {};
+  let settle;
+  const ready = new Promise((res) => { settle = res; });
 
   const url = (href) => /^https?:/.test(href) ? href : href.startsWith('/') ? origin + href : new URL(href, root).href;
 
@@ -57,6 +68,7 @@ html.has-anav body{padding-top:var(--anav-h)}
 #amakawa-nav .anav-tag{flex:none;margin:0 4px 0 2px;padding:0 7px;height:18px;display:inline-flex;align-items:center;border-radius:999px;
  background:rgba(236,147,173,.14);color:#ec93ad;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
 #amakawa-nav .anav-private a[aria-current=page]{color:#ec93ad;background:rgba(236,147,173,.14)}
+#amakawa-nav .anav-private a[data-anav=leave-private]{color:#727b8b;font-size:12px}
 @media (max-width:700px){#amakawa-nav{padding:0 6px}#amakawa-nav a{padding:0 8px}}
 @media print{#amakawa-nav{display:none}html.has-anav body{padding-top:0}}`;
 
@@ -93,6 +105,7 @@ html.has-anav body{padding-top:var(--anav-h)}
     g.className = 'anav-group anav-private';
     g.insertAdjacentHTML('beforeend', '<span class="anav-sep" aria-hidden="true"></span><span class="anav-tag">Private</span>');
     privateItems.forEach((it) => g.append(link(it)));
+    g.append(link({ id: 'leave-private', label: 'Leave private', href: '/public' }));
     bar.append(g);
     mark();
   };
@@ -120,19 +133,25 @@ html.has-anav body{padding-top:var(--anav-h)}
     root: root.href,
     items: () => ITEMS.map((it) => ({ ...it, url: url(it.href) })),
     privateItems: () => privateItems.map((it) => ({ ...it, url: url(it.href) })),
-    // called by /api/nav-private.js (the private file); hrefs starting with / are on the local server
-    addPrivate(items) {
+    privateMode,
+    ready, // settles once the private registry has loaded (or there is none)
+    capability: (id) => capabilities[id] || null,
+    // called by /api/nav-private.js (the private registry); hrefs starting with / are on the local server
+    addPrivate({ items = [], capabilities: caps = {} } = {}) {
       privateItems = items;
+      capabilities = caps;
       paintPrivate();
     },
     mark,
   };
 
+  if (!local || !privateMode) settle();
   if (!local) return;
   if (showBar) { if (document.body) build(); else document.addEventListener('DOMContentLoaded', build, { once: true }); }
+  if (!privateMode) return;
   const s = document.createElement('script');
   s.src = origin + '/api/nav-private.js';
   s.async = true;
-  s.onload = s.onerror = () => s.remove();
+  s.onload = s.onerror = () => { s.remove(); settle(); };
   document.head.append(s);
 })();

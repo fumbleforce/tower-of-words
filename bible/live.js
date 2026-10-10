@@ -1,8 +1,8 @@
 // Live sources for the world bible. Everything here is read from the repo when the page loads, so it can't go
 // stale: the game facts docs (docs/game/), the story files, the word list, the portrait table, GUIDE.md, the
 // approved-art list, the design notes, folder listings (python's http.server lists folders) and the build ids.
-// Served from the repo root by ./start. Nothing here reads island/private/, except the private Review folder when the
-// private bible (island/private/bible/index.html) names it in window.BIBLE_PRIVATE_REVIEWS.
+// Served from the repo root by ./start. Nothing here reads island/private/, except the private Review folder that
+// private mode names in window.BIBLE_PRIVATE_REVIEWS (app.js, from the menu's private registry).
 
 import { orderShowcase } from './showcase-order.js';
 
