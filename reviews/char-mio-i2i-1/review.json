@@ -1,0 +1,229 @@
+{
+ "title": "Mio modelled to the picked picture (mio-front-d60)",
+ "date": "2026-10-01",
+ "by": "Claude (mio-i2i agent)",
+ "status": "decided",
+ "question": "Does any of these reach the picture, and which way should the next round go?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/parts/style-concepts/claude-mioi2i/overview.webp.webp",
+   "caption": "Both targets, then every attempt from the picture's own camera, in order"
+  },
+  {
+   "image": "art/parts/style-concepts/claude-mioi2i/overview-l40.webp.webp",
+   "caption": "Every attempt turned 40 degrees toward her left (image right)"
+  },
+  {
+   "image": "art/parts/style-concepts/claude-mioi2i/overview-back.webp.webp",
+   "caption": "Every attempt from the back"
+  },
+  {
+   "image": "art/parts/style-concepts/claude-mioi2i/gen/t1/sheet.webp.webp",
+   "caption": "Turnaround t1 (plain img2img over mi-01, original target prompt), each beside its source render"
+  },
+  {
+   "image": "art/parts/style-concepts/claude-mioi2i/gen/t2/sheet.webp.webp",
+   "caption": "Turnaround t2 (plain img2img over the clean model, no glasses or drawstrings)"
+  }
+ ],
+ "options": [
+  {
+   "id": "mi-01",
+   "label": "mi-01 · shape modelled to the picture",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-01/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-01/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-01/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-01/game.webp.webp"
+   ],
+   "note": "Change: a new model, one skinned mesh on a 9-bone rig (idle and walk), every size measured off mio-front-d60 at its own camera (20 degree lens, 4 degrees down, 4.16 m; 1 px is about 1.4 mm). Flat colours sampled from the picture, lit. What I see: the outline sits on the picture's within a few px at the hoodie, legs and hands; the hair is a round helmet where the picture has an angular peak, and there is no face yet. This is also the source the turnaround was painted over."
+  },
+  {
+   "id": "mi-02",
+   "label": "mi-02 · + the picture projected from its camera",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-02/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-02/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-02/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-02/game.webp.webp"
+   ],
+   "note": "Change: mio-front-d60 projected onto the model from the camera it was drawn for, baked into one 2048 texture; what that camera doesn't see keeps mi-01's flat colours. Lit. What I see: from the front it is close to the picture. Turned, the painted hairline doesn't sit on the hair geometry, so hair paint lands on the forehead and dark gaps show at the fringe."
+  },
+  {
+   "id": "mi-03",
+   "label": "mi-03 · + front hair built from the hairline",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-03/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-03/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-03/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-03/game.webp.webp"
+   ],
+   "note": "Change: the hand-made fringe is replaced by a hair surface built from the picture: every 3 px cell the picture shows as hair is cast from its camera onto the skull (7 mm out), and its edge drops onto the skull, so the hair geometry follows the drawn hairline exactly. What I see: turned 32 degrees, the hair now sits on hair and the face on skin. A stair-step edge and a skin-coloured sliver show at her left temple (image right)."
+  },
+  {
+   "id": "mi-04",
+   "label": "mi-04 · + turnaround t1 projected",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-04/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-04/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-04/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-04/game.webp.webp"
+   ],
+   "note": "Change: five more views projected and blended (her left three-quarter and side, back, her right side and three-quarter), each RDBT img2img at 0.6, seed 301, over a render of mi-01 from that angle, with the target's prompt plus the view words (sheet gen t1). The 140 degree views are left out: the model drew her face turned over the shoulder there. What I see: the back and sides now read as hoodie, hood and hair. Drawstrings double at three-quarter (painted ones plus the model's), shoes are patchy, and brown patches come from the generated views."
+  },
+  {
+   "id": "mi-05",
+   "label": "mi-05 · + unlit",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-05/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-05/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-05/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-05/game.webp.webp"
+   ],
+   "note": "Change: painted light only (glTF unlit), no scene light on top. What I see: the front's colours are closest to the picture of the series so far. In the game she is slightly brighter than her surroundings."
+  },
+  {
+   "id": "mi-06",
+   "label": "mi-06 · clean reference, glasses as geometry",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-06/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-06/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-06/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-06/game.webp.webp"
+   ],
+   "note": "Change: the clean version of the target (mio-ref-clean, 3072 px, no shadow, drawstrings or glasses) is the front picture. That one switch brings: glasses as thin black geometry set on the face where the target drew them, no drawstring geometry, and the green under-layer given a pointed edge. Front only, unlit. What I see: the glasses read like the drawn ones and stay put when she turns. The green under the jaw is the layer's own flat green wherever the front camera can't see it."
+  },
+  {
+   "id": "mi-07",
+   "label": "mi-07 · + turnaround t2 (clean, plain img2img)",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-07/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-07/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-07/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-07/game.webp.webp"
+   ],
+   "note": "Change: a new turnaround over the clean model with glasses and drawstrings left out of the prompt and put in the negative (sheet gen t2). What I see: no doubled strings any more; brown patches on the back, hood and crown remain."
+  },
+  {
+   "id": "mi-08",
+   "label": "mi-08 · + t2 colours matched",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-08/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-08/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-08/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-08/game.webp.webp"
+   ],
+   "note": "Change: each generated view's colour mean and spread matched to the clean front. What I see: almost no change; the brown is local, not a cast over the whole picture."
+  },
+  {
+   "id": "mi-09",
+   "label": "mi-09 · + crown fitted to the outline",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-09/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-09/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-09/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-09/game.webp.webp"
+   ],
+   "note": "Change: the crown's width at each height read off the picture's outline, so the front outline has the angular peak instead of a dome. What I see: the outline matches better; stair-step patches remain on the crown at the front."
+  },
+  {
+   "id": "mi-10",
+   "label": "mi-10 · + front keeps glancing surfaces",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-10/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-10/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-10/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-10/game.webp.webp"
+   ],
+   "note": "Change: the front picture's weight raised on surfaces it sees at a glancing angle (seen to the power 1 times 4, was squared times 3). What I see: hardly different from mi-09; the crown patches are not caused by this."
+  },
+  {
+   "id": "mi-11",
+   "label": "mi-11 · + facet skin from the front wireframe",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-11/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-11/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-11/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-11/game.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-11/clay.webp.webp"
+   ],
+   "note": "Change: the clean front's facets (the measured wireframe, 703 corners, 264 facets) become the model's front faces: each corner cast from the picture's camera onto the model, 1.5 mm out, one face per facet, kept where its corners agree in depth. What I see: from the front the facets are the picture's own. The geometry sheet shows the facet faces plus the dense hair cells. Turned, a few facets at the outline stick out slightly."
+  },
+  {
+   "id": "mi-12",
+   "label": "mi-12 · + diptych turnaround t3",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-12/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-12/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-12/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-12/game.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-12/clay.webp.webp"
+   ],
+   "note": "Change: the turnaround from the aligned diptych run (t3: each view repainted beside the clean front on one canvas) in place of t2. What I see: the most even colour all round of any attempt. The back reads as hood, hoodie and legs in the picture's palette, and the brown is gone. Shoes and the edges of the hair are still patchy."
+  },
+  {
+   "id": "mi-13",
+   "label": "mi-13 · + back hair cut to the views",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-13/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-13/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-13/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-13/game.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-13/clay.webp.webp"
+   ],
+   "note": "Change: the back hair ends where the aligned side and back views end it (at the hood, z 0.94) instead of below the shoulders. What I see: the side and back silhouettes now follow t3. This is the attempt I'd judge."
+  },
+  {
+   "id": "mi-14",
+   "label": "mi-14 · + facet skins from back and sides",
+   "image": "art/parts/style-concepts/claude-mioi2i/mi-14/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/mi-14/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-14/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-14/game.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/mi-14/clay.webp.webp"
+   ],
+   "note": "Change: facet skins also from the back and both side wireframes, each only where it faces its camera within 45 degrees. What I see: worse. Facets on the outline of a generated view land at the wrong depth and stick out as shards (side and three-quarter)."
+  },
+  {
+   "id": "meshy-01",
+   "label": "meshy-01 · Meshy comparison (one call)",
+   "image": "art/parts/style-concepts/claude-mioi2i/meshy-01/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/meshy-01/turn.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/meshy-01/face.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/meshy-01/game.webp.webp"
+   ],
+   "note": "One Meshy image-to-3D with texture from the clean cut-out (meshy-t2, smart topology, 3000 polygons, about 30 credits; balance before 1645). Not rigged, not patched: a comparison only. What I see: smoother and more coherent from every angle than ours. It's softer and less faceted than the picture, with no glasses, a helmet-like mass of hair at the back and a bigger head."
+  },
+  {
+   "id": "turn-t3",
+   "label": "turn-t3 · aligned turnaround (diptych)",
+   "image": "art/parts/style-concepts/claude-mioi2i/gen/t3/guides.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/gen/t3/sheet.webp.webp",
+    "art/parts/style-concepts/claude-mioi2i/gen/t2/guides.webp.webp"
+   ],
+   "note": "The aligned turnaround. Every view is painted over a render of our model from a camera that only turns round her (same distance, height, lens and tilt as the picture), so landmarks share image rows. Each canvas is the clean front beside the source render; only the source half is repainted (RDBT, masked img2img with DifferentialDiffusion, 0.65, seed 301, 1536x768). Guide lines are the clean front's landmark rows. Measured against the front: top of head within 2 px, soles within 4 px, hem 4 to 15 px lower (the side views show the ribbed band). The second guide sheet is plain img2img (t2) for comparison."
+  },
+  {
+   "id": "wire",
+   "label": "wire · wireframes",
+   "image": "art/parts/style-concepts/claude-mioi2i/wire/sheet.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-mioi2i/wire/front.webp.webp"
+   ],
+   "note": "Left four: facet wireframes measured off the pictures (mean shift, Felzenszwalb regions, polygon outlines, corners snapped within 6 px): the clean front, her left side, back, her right side. The front one is what mi-11 to mi-14 put vertices on. Right two: the image model asked to draw a wireframe over the clean front (img2img 0.55 and 0.75, seed 301). At 0.55 she goes off-model (hood up, teal eyes, green hoodie); at 0.75 the mesh layout looks plausible but her face is gone under a hood."
+  }
+ ],
+ "links": [
+  {
+   "label": "Turn her, play idle and walk, see each attempt beside its picture, or from the picture's camera (live 3D)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/style-concepts/mio-i2i-viewer.html"
+  }
+ ],
+ "issue": 164,
+ "decision": "Not close: 'it is genuinely not close at all, you have all square edges and zero of the hand crafted look, only optimizing for a silhouette that doesnt matter instead of placing the actual edges where they need to go'. Next: geometry built from the picture's facets (vertices at facet corners, flat colour per face), no projected texture.",
+ "decided_at": "2026-10-01T15:29:04+0200"
+}

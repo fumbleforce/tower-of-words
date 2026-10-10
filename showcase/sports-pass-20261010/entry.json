@@ -1,0 +1,160 @@
+{
+ "title": "Sports ground: one ground for walking and kerbs, no blob beds, floodlit court",
+ "date": "2026-10-10",
+ "by": "claude-agent:sports-pass",
+ "caption": "The sports ground's kerbs now come from the same ground the walk grid uses, so he is stopped only where a kerb, a building, the courts' fence or a trip's start shows it. The free-shape beds are straight strips behind the kerbs, every bed is flush with the lawn, and the west tennis court has floodlight masts and a lights-off notice. Try it with ?place=sports.",
+ "commit": [
+  "4aab6e78e",
+  "e8b97d934"
+ ],
+ "result": [
+  "corner-top-after",
+  "corner-n-after",
+  "pavilion-n-after",
+  "gate-evening"
+ ],
+ "sections": [
+  {
+   "title": "The corner by the pool walk",
+   "caption": "The blob bed with its raised soil face is now a strip behind the lane's kerb, with shrubs loose on the lawn. The bench bays on the courts walk are walkable and kerbed.",
+   "images": [
+    {
+     "id": "corner-top-before",
+     "image": "bible/shots/showcase/sports-pass-20261010/before-desktop-corner-own.webp.webp",
+     "caption": "Own camera, before"
+    },
+    {
+     "id": "corner-top-after",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-corner-own.webp.webp",
+     "caption": "Own camera, after"
+    },
+    {
+     "id": "corner-n-before",
+     "image": "bible/shots/showcase/sports-pass-20261010/before-desktop-corner-n.webp.webp",
+     "caption": "Follow camera, north, before"
+    },
+    {
+     "id": "corner-n-after",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-corner-n.webp.webp",
+     "caption": "Follow camera, north, after"
+    },
+    {
+     "id": "corner-phone-before",
+     "image": "bible/shots/showcase/sports-pass-20261010/before-phone-corner-own.webp",
+     "caption": "Phone, before"
+    },
+    {
+     "id": "corner-phone-after",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-phone-corner-own.webp",
+     "caption": "Phone, after"
+    }
+   ]
+  },
+  {
+   "title": "Past the pavilion",
+   "caption": "The wood north of the gym stood on a raised plot of soil; its trees stand on the lawn now. A hedge closes the pool walk's end and trees fill the open grass north of it.",
+   "images": [
+    {
+     "id": "pavilion-w-before",
+     "image": "bible/shots/showcase/sports-pass-20261010/before-desktop-pavilion-w.webp.webp",
+     "caption": "Follow camera, west, before"
+    },
+    {
+     "id": "pavilion-w-after",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-pavilion-w.webp.webp",
+     "caption": "Follow camera, west, after"
+    },
+    {
+     "id": "pavilion-n-before",
+     "image": "bible/shots/showcase/sports-pass-20261010/before-desktop-pavilion-n.webp",
+     "caption": "Follow camera, north, before"
+    },
+    {
+     "id": "pavilion-n-after",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-pavilion-n.webp.webp",
+     "caption": "Follow camera, north, after"
+    }
+   ]
+  },
+  {
+   "title": "Edges elsewhere",
+   "caption": "The office street's wood by the gym's corner, and the courts walk by the north residence.",
+   "images": [
+    {
+     "id": "link-before",
+     "image": "bible/shots/showcase/sports-pass-20261010/before-desktop-link-own.webp.webp",
+     "caption": "The gym's corner, before"
+    },
+    {
+     "id": "link-after",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-link-own.webp.webp",
+     "caption": "The gym's corner, after"
+    },
+    {
+     "id": "courtswalk-before",
+     "image": "bible/shots/showcase/sports-pass-20261010/before-desktop-courtswalk-own.webp.webp",
+     "caption": "The courts walk, before"
+    },
+    {
+     "id": "courtswalk-after",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-courtswalk-own.webp.webp",
+     "caption": "The courts walk, after"
+    }
+   ]
+  },
+  {
+   "title": "The tennis courts",
+   "caption": "Six masts on the run-off: the west court's four light up after work, the east court's two stay dark. A notice on the gate post says the lights go off at nine.",
+   "images": [
+    {
+     "id": "court-top",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-court-own.webp.webp",
+     "caption": "Day, own camera"
+    },
+    {
+     "id": "gate-evening",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-evening-desktop-gate-n.webp.webp",
+     "caption": "After work, at the gate"
+    },
+    {
+     "id": "court-evening",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-evening-desktop-court-w.webp.webp",
+     "caption": "After work, on the court"
+    }
+   ]
+  },
+  {
+   "title": "The north street, four ways",
+   "caption": "Follow camera from the arrival spot.",
+   "images": [
+    {
+     "id": "street-n",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-street-n.webp.webp",
+     "caption": "Facing north"
+    },
+    {
+     "id": "street-e",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-street-e.webp.webp",
+     "caption": "Facing east"
+    },
+    {
+     "id": "street-s",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-street-s.webp.webp",
+     "caption": "Facing south"
+    },
+    {
+     "id": "street-w",
+     "image": "bible/shots/showcase/sports-pass-20261010/final-desktop-street-w.webp.webp",
+     "caption": "Facing west"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=sports"
+  }
+ ],
+ "media": []
+}

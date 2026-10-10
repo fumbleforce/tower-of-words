@@ -1,0 +1,168 @@
+{
+ "title": "Phone dialogue names and controls",
+ "date": "2026-10-07",
+ "by": "codex-tui",
+ "caption": "Speaker names and roles occupy their own column beside the dialogue controls. Full names wrap on narrow screens. Earlier attempts are included.",
+ "sections": [
+  {
+   "title": "Before",
+   "caption": "UI fixture captures; the office behind the dialogue is not scene staging.",
+   "images": [
+    {
+     "id": "before-1366-mio",
+     "image": "bible/shots/showcase/dialogue-header-1/before/1366-mio.png.webp",
+     "caption": "1366 · mio"
+    },
+    {
+     "id": "before-1366-mori",
+     "image": "bible/shots/showcase/dialogue-header-1/before/1366-mori.png.webp",
+     "caption": "1366 · mori"
+    },
+    {
+     "id": "before-320-mio",
+     "image": "bible/shots/showcase/dialogue-header-1/before/320-mio.png.webp",
+     "caption": "320 · mio"
+    },
+    {
+     "id": "before-320-mori",
+     "image": "bible/shots/showcase/dialogue-header-1/before/320-mori.png.webp",
+     "caption": "320 · mori"
+    },
+    {
+     "id": "before-390-mio",
+     "image": "bible/shots/showcase/dialogue-header-1/before/390-mio.png.webp",
+     "caption": "390 · mio"
+    },
+    {
+     "id": "before-390-mori",
+     "image": "bible/shots/showcase/dialogue-header-1/before/390-mori.png.webp",
+     "caption": "390 · mori"
+    }
+   ]
+  },
+  {
+   "title": "After",
+   "caption": "UI fixture captures; the office behind the dialogue is not scene staging.",
+   "images": [
+    {
+     "id": "after-1366-mio",
+     "image": "bible/shots/showcase/dialogue-header-1/after/1366-mio.png.webp",
+     "caption": "1366 · mio"
+    },
+    {
+     "id": "after-1366-mori",
+     "image": "bible/shots/showcase/dialogue-header-1/after/1366-mori.png.webp",
+     "caption": "1366 · mori"
+    },
+    {
+     "id": "after-320-mio",
+     "image": "bible/shots/showcase/dialogue-header-1/after/320-mio.png.webp",
+     "caption": "320 · mio"
+    },
+    {
+     "id": "after-320-mori",
+     "image": "bible/shots/showcase/dialogue-header-1/after/320-mori.png.webp",
+     "caption": "320 · mori"
+    },
+    {
+     "id": "after-390-mio",
+     "image": "bible/shots/showcase/dialogue-header-1/after/390-mio.png.webp",
+     "caption": "390 · mio"
+    },
+    {
+     "id": "after-390-mori",
+     "image": "bible/shots/showcase/dialogue-header-1/after/390-mori.png.webp",
+     "caption": "390 · mori"
+    }
+   ]
+  },
+  {
+   "title": "Final",
+   "caption": "UI fixture captures; the office behind the dialogue is not scene staging.",
+   "images": [
+    {
+     "id": "final-1366-guard",
+     "image": "bible/shots/showcase/dialogue-header-1/final/1366-guard.png.webp",
+     "caption": "1366 · guard"
+    },
+    {
+     "id": "final-1366-message",
+     "image": "bible/shots/showcase/dialogue-header-1/final/1366-message.png.webp",
+     "caption": "1366 · message"
+    },
+    {
+     "id": "final-1366-mio",
+     "image": "bible/shots/showcase/dialogue-header-1/final/1366-mio.png.webp",
+     "caption": "1366 · mio"
+    },
+    {
+     "id": "final-1366-mori",
+     "image": "bible/shots/showcase/dialogue-header-1/final/1366-mori.png.webp",
+     "caption": "1366 · mori"
+    },
+    {
+     "id": "final-1366-translated",
+     "image": "bible/shots/showcase/dialogue-header-1/final/1366-translated.png.webp",
+     "caption": "1366 · translated"
+    },
+    {
+     "id": "final-320-guard",
+     "image": "bible/shots/showcase/dialogue-header-1/final/320-guard.png.webp",
+     "caption": "320 · guard"
+    },
+    {
+     "id": "final-320-message",
+     "image": "bible/shots/showcase/dialogue-header-1/final/320-message.png.webp",
+     "caption": "320 · message"
+    },
+    {
+     "id": "final-320-mio",
+     "image": "bible/shots/showcase/dialogue-header-1/final/320-mio.png.webp",
+     "caption": "320 · mio"
+    },
+    {
+     "id": "final-320-mori",
+     "image": "bible/shots/showcase/dialogue-header-1/final/320-mori.png.webp",
+     "caption": "320 · mori"
+    },
+    {
+     "id": "final-320-translated",
+     "image": "bible/shots/showcase/dialogue-header-1/final/320-translated.png.webp",
+     "caption": "320 · translated"
+    },
+    {
+     "id": "final-390-guard",
+     "image": "bible/shots/showcase/dialogue-header-1/final/390-guard.png.webp",
+     "caption": "390 · guard"
+    },
+    {
+     "id": "final-390-message",
+     "image": "bible/shots/showcase/dialogue-header-1/final/390-message.png.webp",
+     "caption": "390 · message"
+    },
+    {
+     "id": "final-390-mio",
+     "image": "bible/shots/showcase/dialogue-header-1/final/390-mio.png.webp",
+     "caption": "390 · mio"
+    },
+    {
+     "id": "final-390-mori",
+     "image": "bible/shots/showcase/dialogue-header-1/final/390-mori.png.webp",
+     "caption": "390 · mori"
+    },
+    {
+     "id": "final-390-translated",
+     "image": "bible/shots/showcase/dialogue-header-1/final/390-translated.png.webp",
+     "caption": "390 · translated"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

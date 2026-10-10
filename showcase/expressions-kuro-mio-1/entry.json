@@ -1,0 +1,99 @@
+{
+ "title": "Kuro's four new faces and Mio's annoyed face, in the game",
+ "date": "2026-10-10",
+ "by": "claude-agent:expressions-kuro-mio",
+ "caption": "Your picks from expressions-kuro-mio-1 are installed: Kuro flirtatious, teasing, pleased and cool politeness, and Mio mildly annoyed. Teasing, polite, pleased and annoyed are on lines that fit; flirtatious has no scene yet.",
+ "result": [
+  "kuro-flirtatious",
+  "kuro-teasing",
+  "kuro-pleased",
+  "kuro-polite",
+  "mio-annoyed"
+ ],
+ "sections": [
+  {
+   "title": "The five faces",
+   "caption": "The installed portraits.",
+   "images": [
+    {
+     "id": "kuro-flirtatious",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/kuro-flirtatious.webp.webp",
+     "caption": "Kuro, flirtatious (no scene yet)"
+    },
+    {
+     "id": "kuro-teasing",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/kuro-teasing.webp.webp",
+     "caption": "Kuro, teasing"
+    },
+    {
+     "id": "kuro-pleased",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/kuro-pleased.webp.webp",
+     "caption": "Kuro, pleased"
+    },
+    {
+     "id": "kuro-polite",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/kuro-polite.webp.webp",
+     "caption": "Kuro, cool politeness"
+    },
+    {
+     "id": "mio-annoyed",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/mio-annoyed.webp.webp",
+     "caption": "Mio, mildly annoyed"
+    }
+   ]
+  },
+  {
+   "title": "In the dialogue box",
+   "caption": "A real scene for each face, desktop and phone.",
+   "images": [
+    {
+     "id": "scene-kuro-polite-desktop",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/scene-kuro-polite-desktop.webp.webp",
+     "caption": "Day 1 at the counter: Kuro, polite, desktop"
+    },
+    {
+     "id": "scene-kuro-polite-phone",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/scene-kuro-polite-phone.webp",
+     "caption": "Day 1 at the counter: Kuro, polite, phone"
+    },
+    {
+     "id": "scene-kuro-teasing-desktop",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/scene-kuro-teasing-desktop.webp.webp",
+     "caption": "Day 2: Kuro, teasing, desktop"
+    },
+    {
+     "id": "scene-kuro-teasing-phone",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/scene-kuro-teasing-phone.webp",
+     "caption": "Day 2: Kuro, teasing, phone"
+    },
+    {
+     "id": "scene-kuro-pleased-desktop",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/scene-kuro-pleased-desktop.webp.webp",
+     "caption": "Day 5, the label printer: Kuro, pleased, desktop"
+    },
+    {
+     "id": "scene-kuro-pleased-phone",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/scene-kuro-pleased-phone.webp",
+     "caption": "Day 5, the label printer: Kuro, pleased, phone"
+    },
+    {
+     "id": "scene-mio-annoyed-desktop",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/scene-mio-annoyed-desktop.webp.webp",
+     "caption": "Day 2, at her desk: Mio, annoyed, desktop"
+    },
+    {
+     "id": "scene-mio-annoyed-phone",
+     "image": "bible/shots/showcase/expressions-kuro-mio-1/scene-mio-annoyed-phone.webp",
+     "caption": "Day 2, at her desk: Mio, annoyed, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Review that picked them",
+   "href": "reviews/expressions-kuro-mio-1/review.json"
+  }
+ ],
+ "media": []
+}

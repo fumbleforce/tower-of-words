@@ -1,0 +1,206 @@
+{
+ "title": "Shed-street planting",
+ "date": "2026-10-08",
+ "result": [
+  "round2-1366-south",
+  "round2-1366-north",
+  "round2-1366-middle",
+  "round2-1366-rest-evening"
+ ],
+ "by": "codex",
+ "caption": "Connected planting along the shed street, with the existing trees and clear paths. The northern approach and some phone views still need work.",
+ "commit": "6e3023f9",
+ "preview": "round2-1366-south",
+ "sections": [
+  {
+   "title": "Shed-street beds",
+   "caption": "Five planted beds and drainage detail. Northern approach and phone framing remain unfinished.",
+   "images": [
+    {
+     "id": "round2-1366-east",
+     "image": "game3d/shots/campus-shed-20261008/round2/1366-east.png.webp",
+     "caption": "1366 east"
+    },
+    {
+     "id": "round2-1366-map",
+     "image": "game3d/shots/campus-shed-20261008/round2/1366-map.png.webp",
+     "caption": "1366 map"
+    },
+    {
+     "id": "round2-1366-middle",
+     "image": "game3d/shots/campus-shed-20261008/round2/1366-middle.png.webp",
+     "caption": "1366 middle"
+    },
+    {
+     "id": "round2-1366-north",
+     "image": "game3d/shots/campus-shed-20261008/round2/1366-north.png.webp",
+     "caption": "1366 north"
+    },
+    {
+     "id": "round2-1366-print-evening",
+     "image": "game3d/shots/campus-shed-20261008/round2/1366-print-evening.png.webp",
+     "caption": "1366 print evening"
+    },
+    {
+     "id": "round2-1366-rest-evening",
+     "image": "game3d/shots/campus-shed-20261008/round2/1366-rest-evening.png.webp",
+     "caption": "1366 rest evening"
+    },
+    {
+     "id": "round2-1366-rest-morning-restored",
+     "image": "game3d/shots/campus-shed-20261008/round2/1366-rest-morning-restored.png.webp",
+     "caption": "1366 rest morning restored"
+    },
+    {
+     "id": "round2-1366-south",
+     "image": "game3d/shots/campus-shed-20261008/round2/1366-south.png.webp",
+     "caption": "1366 south"
+    },
+    {
+     "id": "round2-390-east",
+     "image": "game3d/shots/campus-shed-20261008/round2/390-east.png.webp",
+     "caption": "390 east"
+    },
+    {
+     "id": "round2-390-map",
+     "image": "game3d/shots/campus-shed-20261008/round2/390-map.png.webp",
+     "caption": "390 map"
+    },
+    {
+     "id": "round2-390-middle",
+     "image": "game3d/shots/campus-shed-20261008/round2/390-middle.png.webp",
+     "caption": "390 middle"
+    },
+    {
+     "id": "round2-390-north",
+     "image": "game3d/shots/campus-shed-20261008/round2/390-north.png.webp",
+     "caption": "390 north"
+    },
+    {
+     "id": "round2-390-print-evening",
+     "image": "game3d/shots/campus-shed-20261008/round2/390-print-evening.png.webp",
+     "caption": "390 print evening"
+    },
+    {
+     "id": "round2-390-rest-evening",
+     "image": "game3d/shots/campus-shed-20261008/round2/390-rest-evening.png.webp",
+     "caption": "390 rest evening"
+    },
+    {
+     "id": "round2-390-rest-morning-restored",
+     "image": "game3d/shots/campus-shed-20261008/round2/390-rest-morning-restored.png.webp",
+     "caption": "390 rest morning restored"
+    },
+    {
+     "id": "round2-390-south",
+     "image": "game3d/shots/campus-shed-20261008/round2/390-south.png.webp",
+     "caption": "390 south"
+    }
+   ]
+  },
+  {
+   "title": "First planting attempt",
+   "caption": "Retained attempt before lowering the connecting foliage and adding western beds.",
+   "images": [
+    {
+     "id": "round1-1366-east",
+     "image": "game3d/shots/campus-shed-20261008/round1/1366-east.png.webp",
+     "caption": "1366 east"
+    },
+    {
+     "id": "round1-1366-map",
+     "image": "game3d/shots/campus-shed-20261008/round1/1366-map.png.webp",
+     "caption": "1366 map"
+    },
+    {
+     "id": "round1-1366-middle",
+     "image": "game3d/shots/campus-shed-20261008/round1/1366-middle.png.webp",
+     "caption": "1366 middle"
+    },
+    {
+     "id": "round1-1366-north",
+     "image": "game3d/shots/campus-shed-20261008/round1/1366-north.png.webp",
+     "caption": "1366 north"
+    },
+    {
+     "id": "round1-1366-print-evening",
+     "image": "game3d/shots/campus-shed-20261008/round1/1366-print-evening.png.webp",
+     "caption": "1366 print evening"
+    },
+    {
+     "id": "round1-1366-rest-evening",
+     "image": "game3d/shots/campus-shed-20261008/round1/1366-rest-evening.png.webp",
+     "caption": "1366 rest evening"
+    },
+    {
+     "id": "round1-1366-rest-morning-restored",
+     "image": "game3d/shots/campus-shed-20261008/round1/1366-rest-morning-restored.png.webp",
+     "caption": "1366 rest morning restored"
+    },
+    {
+     "id": "round1-1366-south",
+     "image": "game3d/shots/campus-shed-20261008/round1/1366-south.png.webp",
+     "caption": "1366 south"
+    }
+   ]
+  },
+  {
+   "title": "Before the grounds pass",
+   "caption": "Original lawns and paths, including the failed initial capture.",
+   "images": [
+    {
+     "id": "baseline-1366-east",
+     "image": "game3d/shots/campus-shed-20261008/baseline/1366-east.png.webp",
+     "caption": "1366 east"
+    },
+    {
+     "id": "baseline-1366-failure",
+     "image": "game3d/shots/campus-shed-20261008/baseline/1366-failure.png",
+     "caption": "1366 failure"
+    },
+    {
+     "id": "baseline-1366-map",
+     "image": "game3d/shots/campus-shed-20261008/baseline/1366-map.png.webp",
+     "caption": "1366 map"
+    },
+    {
+     "id": "baseline-1366-middle",
+     "image": "game3d/shots/campus-shed-20261008/baseline/1366-middle.png.webp",
+     "caption": "1366 middle"
+    },
+    {
+     "id": "baseline-1366-north",
+     "image": "game3d/shots/campus-shed-20261008/baseline/1366-north.png.webp",
+     "caption": "1366 north"
+    },
+    {
+     "id": "baseline-1366-print-evening",
+     "image": "game3d/shots/campus-shed-20261008/baseline/1366-print-evening.png.webp",
+     "caption": "1366 print evening"
+    },
+    {
+     "id": "baseline-1366-rest-evening",
+     "image": "game3d/shots/campus-shed-20261008/baseline/1366-rest-evening.png.webp",
+     "caption": "1366 rest evening"
+    },
+    {
+     "id": "baseline-1366-rest-morning-restored",
+     "image": "game3d/shots/campus-shed-20261008/baseline/1366-rest-morning-restored.png.webp",
+     "caption": "1366 rest morning restored"
+    },
+    {
+     "id": "baseline-1366-south",
+     "image": "game3d/shots/campus-shed-20261008/baseline/1366-south.png.webp",
+     "caption": "1366 south"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "North campus",
+   "href": "game3d/?day=3&place=campus"
+  }
+ ],
+ "media": []
+}

@@ -1,0 +1,124 @@
+{
+ "title": "The forecourt under the phone budget, with nothing lost from view",
+ "date": "2026-10-09",
+ "by": "claude-agent:perf",
+ "caption": "Stage 2 of #372. The forecourt drew most of its trees, paving and shop street whole from every camera and again for the shadows, though a tenth of it was on screen. Big merged meshes are now cut into pieces so what is off screen stops drawing, and shadows come from lighter stand-ins. Phone: 211 draws and 397k triangles before, 192 and 287k after (budget 200 and 300k). Desktop: 522 and 843k before, 464 and 786k after (budget 500 and 800k). The plaza and east lane got lighter too. The pictures are the same cameras before and after; only the pigeons moved.",
+ "preview": "sbs-follow2-desk",
+ "result": [
+  "sbs-overview-phone",
+  "sbs-follow2-desk",
+  "sbs-follow0-desk",
+  "sbs-follow4-desk"
+ ],
+ "sections": [
+  {
+   "title": "Side by side: before on the left, after on the right",
+   "caption": "The place budget's own views: the phone overview, then the desktop.",
+   "images": [
+    {
+     "id": "sbs-overview-phone",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/sbs-overview-phone.webp.webp",
+     "caption": "Before | after: phone overview, the camera the phone budget is measured from"
+    },
+    {
+     "id": "sbs-overview-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/sbs-overview-desk.webp.webp",
+     "caption": "Before | after: desktop overview"
+    },
+    {
+     "id": "sbs-follow0-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/sbs-follow0-desk.webp.webp",
+     "caption": "Before | after: desktop third-person camera, looking north from the station door"
+    },
+    {
+     "id": "sbs-follow2-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/sbs-follow2-desk.webp.webp",
+     "caption": "Before | after: desktop third-person camera, looking east down the lane (the heaviest view)"
+    },
+    {
+     "id": "sbs-follow4-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/sbs-follow4-desk.webp.webp",
+     "caption": "Before | after: desktop third-person camera, looking south"
+    },
+    {
+     "id": "sbs-follow6-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/sbs-follow6-desk.webp.webp",
+     "caption": "Before | after: desktop third-person camera, looking west"
+    }
+   ]
+  },
+  {
+   "title": "Before (main a3c0a22d)",
+   "caption": "",
+   "images": [
+    {
+     "id": "before-overview-phone",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/before-overview-phone.webp",
+     "caption": "Before: phone overview, the camera the phone budget is measured from"
+    },
+    {
+     "id": "before-overview-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/before-overview-desk.webp.webp",
+     "caption": "Before: desktop overview"
+    },
+    {
+     "id": "before-follow0-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/before-follow0-desk.webp.webp",
+     "caption": "Before: desktop third-person camera, looking north from the station door"
+    },
+    {
+     "id": "before-follow2-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/before-follow2-desk.webp.webp",
+     "caption": "Before: desktop third-person camera, looking east down the lane (the heaviest view)"
+    },
+    {
+     "id": "before-follow4-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/before-follow4-desk.webp.webp",
+     "caption": "Before: desktop third-person camera, looking south"
+    },
+    {
+     "id": "before-follow6-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/before-follow6-desk.webp.webp",
+     "caption": "Before: desktop third-person camera, looking west"
+    }
+   ]
+  },
+  {
+   "title": "After",
+   "caption": "",
+   "images": [
+    {
+     "id": "after-overview-phone",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/after-overview-phone.webp",
+     "caption": "After: phone overview, the camera the phone budget is measured from"
+    },
+    {
+     "id": "after-overview-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/after-overview-desk.webp.webp",
+     "caption": "After: desktop overview"
+    },
+    {
+     "id": "after-follow0-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/after-follow0-desk.webp.webp",
+     "caption": "After: desktop third-person camera, looking north from the station door"
+    },
+    {
+     "id": "after-follow2-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/after-follow2-desk.webp.webp",
+     "caption": "After: desktop third-person camera, looking east down the lane (the heaviest view)"
+    },
+    {
+     "id": "after-follow4-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/after-follow4-desk.webp.webp",
+     "caption": "After: desktop third-person camera, looking south"
+    },
+    {
+     "id": "after-follow6-desk",
+     "image": "bible/shots/showcase/perf-forecourt-20261009/after-follow6-desk.webp.webp",
+     "caption": "After: desktop third-person camera, looking west"
+    }
+   ]
+  }
+ ],
+ "media": []
+}

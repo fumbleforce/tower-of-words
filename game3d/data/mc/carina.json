@@ -1,0 +1,32 @@
+{
+  "id": "carina",
+  "name": "Carina",
+  "name_jp": "カリーナ",
+  "name_ro": "karīna",
+  "possessive": "Carina's",
+  "gender": "woman",
+  "orientation": "bisexual",
+  "pronouns": { "they": "she", "them": "her", "their": "her", "theirs": "hers", "themself": "herself" },
+  "address": { "default": "カリーナさん", "by": {} },
+  "portrait": {
+    "set": "carina",
+    "faces": ["neutral", "surprised", "tired"],
+    "crop": { "W": 648, "H": 768, "f": [219, 216, 429, 396] },
+    "note": "art/approved/carina (Jørgen's carina-9-jorgen face; fitted to the cast framing by tools/portrait_fit.py, face box from art/approved/carina/crop.json)"
+  },
+  "model": { "id": "carina", "dir": "characters/carina/", "height": 1.12, "extra": false, "chibi": "eric" },
+  "voice": {
+    "lines": "carina",
+    "words": "carina",
+    "ref": "tools/voice-refs/carina-voice-a.wav",
+    "description": "Tired woman in her thirties, quiet and polite, no accent."
+  },
+  "pitch": "From Norway. IT support on B2, quiet and polite.",
+  "bio": {
+    "from": "Norway",
+    "job": "IT support engineer on B2, on a support contract to keep Amakawa's ancient systems running",
+    "home": "dorm room 203 on 2F"
+  },
+  "text": { "name_caps": "CARINA", "new_person": "new girl" },
+  "placeholders": []
+}

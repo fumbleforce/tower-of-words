@@ -1,0 +1,69 @@
+{
+ "title": "New-game screen: Eric or Carina, and the skill checks",
+ "date": "2026-10-09",
+ "by": "claude-agent:new-game",
+ "caption": "Start on the title now opens a New game screen: a portrait card each for Eric and Carina, Japanese skill checks on or off, then Start. Continue, saves and Days skip it.",
+ "result": [
+  "desktop-eric",
+  "desktop-carina",
+  "phone-eric",
+  "phone-carina"
+ ],
+ "sections": [
+  {
+   "title": "Desktop, 1366 x 860",
+   "caption": "Cards on the left, the choices beside them. The picked card is in full colour with a teal edge; arrows, Tab and Esc work.",
+   "images": [
+    {
+     "id": "desktop-eric",
+     "image": "bible/shots/showcase/new-game-1/desktop-eric.webp.webp",
+     "caption": "Opened from Start, Eric picked"
+    },
+    {
+     "id": "desktop-carina",
+     "image": "bible/shots/showcase/new-game-1/desktop-carina.webp.webp",
+     "caption": "Carina picked, skill checks off"
+    },
+    {
+     "id": "desktop-hover",
+     "image": "bible/shots/showcase/new-game-1/desktop-hover.webp.webp",
+     "caption": "Pointer over the card that isn't picked"
+    }
+   ]
+  },
+  {
+   "title": "Phone, 390 x 844",
+   "caption": "The cards side by side, the choices under them, Start along the bottom.",
+   "images": [
+    {
+     "id": "phone-eric",
+     "image": "bible/shots/showcase/new-game-1/phone-eric.webp",
+     "caption": "Eric picked"
+    },
+    {
+     "id": "phone-carina",
+     "image": "bible/shots/showcase/new-game-1/phone-carina.webp",
+     "caption": "Carina picked, skill checks off"
+    }
+   ]
+  },
+  {
+   "title": "After Start",
+   "caption": "Picking the protagonist the page isn't playing reloads it as them, and the day starts by itself.",
+   "images": [
+    {
+     "id": "carina-train",
+     "image": "bible/shots/showcase/new-game-1/carina-train.webp.webp",
+     "caption": "Carina on the train after Start"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

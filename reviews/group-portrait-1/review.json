@@ -1,0 +1,240 @@
+{
+ "title": "Portrait style consistency: the B2 team in one picture",
+ "date": "2026-09-30",
+ "by": "claude-agent:group-portrait",
+ "status": "decided",
+ "multi": true,
+ "question": "Keep standalone portraits, or move to group-generated ones (or a hybrid)?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/group-1/group1-sheet.webp.webp",
+   "caption": "Standalone game portraits (top) against portraits cut from the two hires group shots, all framed the same way: face on Kenji's face box, 597x768.\n\nPer character, standalone vs group (line, shading, colour, face, eyes; imgqa drift is CCIP to the game portrait, pass < 0.05):\n- Eric: closest match. Ponytail, stubble and silver glasses held on both seeds; hair a little ashier, face a little older with more lines. Line and shading about the same as his standalone (it was already RDBT with this wording). Drift 0.025 / 0.034 pass. Glasses flagged on colour (dE 17-23, noisy on his silver frame per the calibration notes); the cut-out 'matte frame' fail sits where the approved portrait scores 0.80 too.\n- Mio: most drift. Frames come out thin silver-grey rectangles, not her taupe rounded ones; eyes blue instead of light tan; lighter line than her heavy black ink; hair navy-black with a softer green. Drift 0.111 / 0.134 fail. Her frame would still need the transplant method.\n- Kenji: his standalone has the heaviest outline and flat, saturated fill with orange skin, the biggest style outlier of the five. In the group he gets the shared medium line and grey shading, but his face is less round and babyish, stubble appears (his own negative had stubble/facial hair; the shared one didn't) and his forearms are muscular. Drift 0.068 warn / 0.090 fail.\n- Mr. Mori: standalone has fine hatching, deep lines and warm brown skin (and holds a tea cup). Group: cleaner, fewer wrinkles, looks younger; glasses added on both seeds though he has none; empty hands. Drift 0.109 fail / 0.076 warn.\n- Emi: standalone is glossy with auburn-red hair and a big open smile. Group: plain brown hair, softer smile; 1001 lost her glasses, 1003 kept them. Drift 0.061 warn / 0.110 fail.\nOverall: the group row is the more consistent set: one line weight, one cool-grey shadow colour, the same eye drawing, skin palette and light. The standalone row mixes heavy ink (Mio, Kenji), hatching (Mori), glossy soft shading (Emi) and Eric's cleaner line. The cost is identity: only Eric passes the drift check; the others lose named traits (Mio's frames and eye colour, Emi's auburn, Mori gains glasses, Kenji gains stubble).\nCut-out limits: where two people overlap there is a straight vertical cut and a sliver of the neighbour at the edge (Mio's left, Mori's left); a real run would space them apart in the collage. No red rim on any render (0 to 4%)."
+  },
+  {
+   "image": "art/candidates/portraits/group-1/group1-hr-bce70s0-1001.webp.webp",
+   "caption": "Group shot bce70s0-1001, hires 2496x1344."
+  },
+  {
+   "image": "art/candidates/portraits/group-1/group1-hr-bce70s0-1003.webp.webp",
+   "caption": "Group shot bce70s0-1003, hires 2496x1344."
+  },
+  {
+   "image": "art/candidates/portraits/group-1/group1-collage.webp.webp",
+   "caption": "Layout collage used as the img2img start for c and later (not a render)."
+  },
+  {
+   "image": "art/candidates/portraits/group-1/imgqa-eric/imgqa-eric-sheet.webp.webp",
+   "caption": "imgqa, eric: the approved game portrait first, then the group-derived ones."
+  },
+  {
+   "image": "art/candidates/portraits/group-1/imgqa-mio/imgqa-mio-sheet.webp.webp",
+   "caption": "imgqa, mio: the approved game portrait first, then the group-derived ones."
+  },
+  {
+   "image": "art/candidates/portraits/group-1/imgqa-kenji/imgqa-kenji-sheet.webp.webp",
+   "caption": "imgqa, kenji: the approved game portrait first, then the group-derived ones."
+  },
+  {
+   "image": "art/candidates/portraits/group-1/imgqa-mori/imgqa-mori-sheet.webp.webp",
+   "caption": "imgqa, mori: the approved game portrait first, then the group-derived ones."
+  },
+  {
+   "image": "art/candidates/portraits/group-1/imgqa-emi/imgqa-emi-sheet.webp.webp",
+   "caption": "imgqa, emi: the approved game portrait first, then the group-derived ones."
+  }
+ ],
+ "options": [
+  {
+   "id": "keep-standalone",
+   "label": "Keep the standalone portraits",
+   "image": "art/candidates/portraits/group-1/group1-sheet.webp.webp",
+   "note": "Top row of the sheet: the game portraits as they are."
+  },
+  {
+   "id": "group",
+   "label": "Move to group-generated portraits",
+   "image": "art/candidates/portraits/group-1/group1-sheet.webp.webp",
+   "note": "A round built on bce70s0: one group render gives all five faces, then only identity fixes per person."
+  },
+  {
+   "id": "hybrid",
+   "label": "Hybrid",
+   "image": "art/candidates/portraits/group-1/group1-sheet.webp.webp",
+   "note": "Say which: e.g. group style for everyone, with Mio's frame put back by the transplant method (art/PROMPTS.md \"Mio's glasses\") and Eric kept standalone."
+  },
+  {
+   "id": "a-1001",
+   "label": "group1-a-1001",
+   "image": "art/candidates/portraits/group-1/group1-a-1001.webp.webp",
+   "note": "a. One plain prompt. One prompt, one block per character, left to right. rdbtAnima, 1664x896, euler_ancestral normal, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies Seed 1001. Traits swap between people on all four seeds: Eric loses his glasses, ponytail and stubble (1001 puts him in a green hoodie), Kenji gets headphones or turns into a generic lead, Mio ends up in a suit (1001)."
+  },
+  {
+   "id": "a-1002",
+   "label": "group1-a-1002",
+   "image": "art/candidates/portraits/group-1/group1-a-1002.webp.webp",
+   "note": "a. One plain prompt. Same settings as a-1001. Seed 1002."
+  },
+  {
+   "id": "a-1003",
+   "label": "group1-a-1003",
+   "image": "art/candidates/portraits/group-1/group1-a-1003.webp.webp",
+   "note": "a. One plain prompt. Same settings as a-1001. Seed 1003."
+  },
+  {
+   "id": "a-1004",
+   "label": "group1-a-1004",
+   "image": "art/candidates/portraits/group-1/group1-a-1004.webp.webp",
+   "note": "a. One plain prompt. Same settings as a-1001. Seed 1004."
+  },
+  {
+   "id": "b-1001",
+   "label": "group1-b-1001",
+   "image": "art/candidates/portraits/group-1/group1-b-1001.webp.webp",
+   "note": "b. Regional prompts. a's prompt as the base, plus Anima regional conditioning: five equal vertical strips, one per character, each with its own prompt (README values: base off, end 35%, cross mask 1.0, self mask 0.2, base ratio 0.1). Region prompts: eric: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background | mio: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background | kenji: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background | mori: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background | emi: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background Seed 1001. Identity much better (Eric's glasses, ponytail and stubble, Mio's green underside, Emi, Mori). Hard seams where the strips meet (1002: Eric's strip has its own wall), heads up at the top edge, Mio's frames thin and silver."
+  },
+  {
+   "id": "b-1002",
+   "label": "group1-b-1002",
+   "image": "art/candidates/portraits/group-1/group1-b-1002.webp.webp",
+   "note": "b. Regional prompts. Same settings as b-1001. Seed 1002."
+  },
+  {
+   "id": "b-1003",
+   "label": "group1-b-1003",
+   "image": "art/candidates/portraits/group-1/group1-b-1003.webp.webp",
+   "note": "b. Regional prompts. Same settings as b-1001. Seed 1003."
+  },
+  {
+   "id": "b-1004",
+   "label": "group1-b-1004",
+   "image": "art/candidates/portraits/group-1/group1-b-1004.webp.webp",
+   "note": "b. Regional prompts. Same settings as b-1001. Seed 1004."
+  },
+  {
+   "id": "c-1001",
+   "label": "group1-c-1001",
+   "image": "art/candidates/portraits/group-1/group1-c-1001.webp.webp",
+   "note": "c. Collage start. a's prompt, img2img at denoise 0.65 from a layout collage: the five game portraits scaled to one face size, heads at the staged heights (Eric and Mori highest, Kenji lowest), pasted on the approved B2 office; Mori's tea cup painted over with his jacket colour (no props). Collage: art/candidates/portraits/group-1/group1-collage.webp Seed 1001. Heights and headroom held; the model repaints the office into a generic one. Faces drift more than b: Eric older, Kenji brown-haired with muscular arms, Mio's hair navy, text on Mio's hoodie on 1004."
+  },
+  {
+   "id": "c-1002",
+   "label": "group1-c-1002",
+   "image": "art/candidates/portraits/group-1/group1-c-1002.webp.webp",
+   "note": "c. Collage start. Same settings as c-1001. Seed 1002."
+  },
+  {
+   "id": "c-1003",
+   "label": "group1-c-1003",
+   "image": "art/candidates/portraits/group-1/group1-c-1003.webp.webp",
+   "note": "c. Collage start. Same settings as c-1001. Seed 1003."
+  },
+  {
+   "id": "c-1004",
+   "label": "group1-c-1004",
+   "image": "art/candidates/portraits/group-1/group1-c-1004.webp.webp",
+   "note": "c. Collage start. Same settings as c-1001. Seed 1004."
+  },
+  {
+   "id": "bc-1001",
+   "label": "group1-bc-1001",
+   "image": "art/candidates/portraits/group-1/group1-bc-1001.webp.webp",
+   "note": "bc. Regional + collage. b's regional prompts on c's collage start, both unchanged. Seed 1001. Almost the same as c: the regional patch only acts in the first 35% of the schedule and a 0.65 img2img starts after that, so it never switched on."
+  },
+  {
+   "id": "bc-1002",
+   "label": "group1-bc-1002",
+   "image": "art/candidates/portraits/group-1/group1-bc-1002.webp.webp",
+   "note": "bc. Regional + collage. Same settings as bc-1001. Seed 1002."
+  },
+  {
+   "id": "bc-1003",
+   "label": "group1-bc-1003",
+   "image": "art/candidates/portraits/group-1/group1-bc-1003.webp.webp",
+   "note": "bc. Regional + collage. Same settings as bc-1001. Seed 1003."
+  },
+  {
+   "id": "bc-1004",
+   "label": "group1-bc-1004",
+   "image": "art/candidates/portraits/group-1/group1-bc-1004.webp.webp",
+   "note": "bc. Regional + collage. Same settings as bc-1001. Seed 1004."
+  },
+  {
+   "id": "bce70-1001",
+   "label": "group1-bce70-1001",
+   "image": "art/candidates/portraits/group-1/group1-bce70-1001.webp.webp",
+   "note": "bce70. Regional to 70% + collage. bc with the regional patch running to 70% of the schedule. Seed 1001. Strongest identity so far, but each strip becomes its own panel with its own background: five pictures side by side, not one scene."
+  },
+  {
+   "id": "bce70-1002",
+   "label": "group1-bce70-1002",
+   "image": "art/candidates/portraits/group-1/group1-bce70-1002.webp.webp",
+   "note": "bce70. Regional to 70% + collage. Same settings as bce70-1001. Seed 1002."
+  },
+  {
+   "id": "bce70-1003",
+   "label": "group1-bce70-1003",
+   "image": "art/candidates/portraits/group-1/group1-bce70-1003.webp.webp",
+   "note": "bce70. Regional to 70% + collage. Same settings as bce70-1001. Seed 1003."
+  },
+  {
+   "id": "bce70-1004",
+   "label": "group1-bce70-1004",
+   "image": "art/candidates/portraits/group-1/group1-bce70-1004.webp.webp",
+   "note": "bce70. Regional to 70% + collage. Same settings as bce70-1001. Seed 1004."
+  },
+  {
+   "id": "bce70s0-1001",
+   "label": "group1-bce70s0-1001",
+   "image": "art/candidates/portraits/group-1/group1-bce70s0-1001.webp.webp",
+   "note": "bce70s0. Same, self-attention masking off. bce70 with self_mask_strength 0 (the strips can see each other), everything else the same. Seed 1001. One continuous office and the identities from bce70 stay. 1001 and 1003 are the cleanest; 1002 gives Kenji brown hair, 1004 puts text on Mio's hoodie."
+  },
+  {
+   "id": "bce70s0-1002",
+   "label": "group1-bce70s0-1002",
+   "image": "art/candidates/portraits/group-1/group1-bce70s0-1002.webp.webp",
+   "note": "bce70s0. Same, self-attention masking off. Same settings as bce70s0-1001. Seed 1002."
+  },
+  {
+   "id": "bce70s0-1003",
+   "label": "group1-bce70s0-1003",
+   "image": "art/candidates/portraits/group-1/group1-bce70s0-1003.webp.webp",
+   "note": "bce70s0. Same, self-attention masking off. Same settings as bce70s0-1001. Seed 1003."
+  },
+  {
+   "id": "bce70s0-1004",
+   "label": "group1-bce70s0-1004",
+   "image": "art/candidates/portraits/group-1/group1-bce70s0-1004.webp.webp",
+   "note": "bce70s0. Same, self-attention masking off. Same settings as bce70s0-1001. Seed 1004."
+  },
+  {
+   "id": "hr-bce70s0-1001",
+   "label": "group1-hr-bce70s0-1001",
+   "image": "art/candidates/portraits/group-1/group1-hr-bce70s0-1001.webp.webp",
+   "images": [
+    "art/candidates/portraits/group-1/group1-hr1001-eric.webp",
+    "art/candidates/portraits/group-1/group1-hr1001-mio.webp",
+    "art/candidates/portraits/group-1/group1-hr1001-kenji.webp",
+    "art/candidates/portraits/group-1/group1-hr1001-mori.webp",
+    "art/candidates/portraits/group-1/group1-hr1001-emi.webp"
+   ],
+   "note": "Hires of bce70s0-1001: scaled 1.5x (Lanczos) to 2496x1344 and repainted at denoise 0.35 with a's prompt, seed 1001. Then cut out (BiRefNet-HR on the whole picture, split halfway between faces) and framed on 597x768 with each face on Kenji's face box (x 221-384, y 167-335). Every face was scaled down (0.71 to 0.93), none blown up."
+  },
+  {
+   "id": "hr-bce70s0-1003",
+   "label": "group1-hr-bce70s0-1003",
+   "image": "art/candidates/portraits/group-1/group1-hr-bce70s0-1003.webp.webp",
+   "images": [
+    "art/candidates/portraits/group-1/group1-hr1003-eric.webp",
+    "art/candidates/portraits/group-1/group1-hr1003-mio.webp",
+    "art/candidates/portraits/group-1/group1-hr1003-kenji.webp",
+    "art/candidates/portraits/group-1/group1-hr1003-mori.webp",
+    "art/candidates/portraits/group-1/group1-hr1003-emi.webp"
+   ],
+   "note": "Hires of bce70s0-1003: scaled 1.5x (Lanczos) to 2496x1344 and repainted at denoise 0.35 with a's prompt, seed 1003. Then cut out (BiRefNet-HR on the whole picture, split halfway between faces) and framed on 597x768 with each face on Kenji's face box (x 221-384, y 167-335). Every face was scaled down (0.71 to 0.93), none blown up."
+  }
+ ],
+ "links": [],
+ "decision": "Jørgen in chat, 2026-09-30: the original Mio and Kuro are his favourites; align the world's portrait style around those two (he expects it to be tough). Milden Mio's stylization a little. Make Kenji look less like a Miyazaki character.",
+ "decided_at": "2026-09-30T16:04:39+0200",
+ "issue": 79
+}

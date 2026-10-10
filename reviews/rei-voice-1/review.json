@@ -1,0 +1,172 @@
+{
+ "title": "Rei's voice",
+ "date": "2026-10-09",
+ "by": "voice agent",
+ "status": "decided",
+ "multi": false,
+ "question": "Which of these is Rei?",
+ "media": [
+  {
+   "audio": "art/candidates/rei-voice-1/a-ref.mp3",
+   "caption": "Who Rei is: 41, she runs a team in Sales and ranks above Eric without being his boss. Brusque and abrasive, she scolds her team in plain 〜しなさい, never admits a weakness, and speaks practical English she learned on overseas customers. Where she speaks: the sports ground on day 3 (her serves), the tennis club and the broken score display on day 4, the evening walk on the east coast, overheard Japanese in the shopping street, and her reaction when Eric talks down to her. Most of what she says to Eric is English; Japanese is overheard or to her own people. Today she borrows the shop clerk voice (option 0), which is young and bright. What you pick: her voice. Each card plays her saying 「考えてる暇があったら、電話しなさい。断られたら、そのとき考えればいいの。」 (a junior hesitating before a call). Above the cards, for each voice: the reference, a second scolding, a dry English line and a quiet line, all at -20 LUFS. After you pick: the reference goes into tools/voice-refs/ and all her lines in the game are re-voiced with it. Nothing in the game changes before that. How they were made: a to e are Qwen3-TTS VoiceDesign voices from a short description, all reading the same Japanese text (「営業部のレイです。来週の納品の件、先に確認させてください。数量は前回と同じで、日付は火曜日です。……それから、あなた。報告書、まだ出てないよね。今日中に出しなさい。」), then cloned with Qwen3-TTS Base, the same way the game voices every line (Kuro's voice was made this way). 0 and p are for comparison: 0 is her voice today, p is the old prototype's Rei (MiniMax Japanese_ColdQueen). Every take passed the game's reading check unless its note says otherwise. This first clip is a's reference."
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/a-ja2.mp3",
+   "caption": "a. Low, cold and clipped: 「お客さんに何て言ったの？……もう一度、最初から説明しなさい。」 (scolding a junior who quoted the wrong date)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/a-en.mp3",
+   "caption": "a. Low, cold and clipped: \"I don't understand the joke. Can we go back to the delivery date?\" (dry, to an overseas customer)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/a-quiet.mp3",
+   "caption": "a. Low, cold and clipped: 「大丈夫です。」 \"We're one game from the set, so serve.\" (quiet, hiding a sore ankle)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/b-ref.mp3",
+   "caption": "b. Sharp and fast: the reference it was made from"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/b-ja2.mp3",
+   "caption": "b. Sharp and fast: 「お客さんに何て言ったの？……もう一度、最初から説明しなさい。」 (scolding a junior who quoted the wrong date)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/b-en.mp3",
+   "caption": "b. Sharp and fast: \"I don't understand the joke. Can we go back to the delivery date?\" (dry, to an overseas customer)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/b-quiet.mp3",
+   "caption": "b. Sharp and fast: 「大丈夫です。」 \"We're one game from the set, so serve.\" (quiet, hiding a sore ankle)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/c-ref.mp3",
+   "caption": "c. Deep and commanding: the reference it was made from"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/c-ja2.mp3",
+   "caption": "c. Deep and commanding: 「お客さんに何て言ったの？……もう一度、最初から説明しなさい。」 (scolding a junior who quoted the wrong date)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/c-en.mp3",
+   "caption": "c. Deep and commanding: \"I don't understand the joke. Can we go back to the delivery date?\" (dry, to an overseas customer)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/c-quiet.mp3",
+   "caption": "c. Deep and commanding: 「大丈夫です。」 \"We're one game from the set, so serve.\" (quiet, hiding a sore ankle)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/d-ref.mp3",
+   "caption": "d. Cool and smooth, dry amusement: the reference it was made from"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/d-ja2.mp3",
+   "caption": "d. Cool and smooth, dry amusement: 「お客さんに何て言ったの？……もう一度、最初から説明しなさい。」 (scolding a junior who quoted the wrong date)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/d-en.mp3",
+   "caption": "d. Cool and smooth, dry amusement: \"I don't understand the joke. Can we go back to the delivery date?\" (dry, to an overseas customer)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/d-quiet.mp3",
+   "caption": "d. Cool and smooth, dry amusement: 「大丈夫です。」 \"We're one game from the set, so serve.\" (quiet, hiding a sore ankle)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/e-ref.mp3",
+   "caption": "e. Clear and strict: the reference it was made from"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/e-ja2.mp3",
+   "caption": "e. Clear and strict: 「お客さんに何て言ったの？……もう一度、最初から説明しなさい。」 (scolding a junior who quoted the wrong date)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/e-en.mp3",
+   "caption": "e. Clear and strict: \"I don't understand the joke. Can we go back to the delivery date?\" (dry, to an overseas customer)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/e-quiet.mp3",
+   "caption": "e. Clear and strict: 「大丈夫です。」 \"We're one game from the set, so serve.\" (quiet, hiding a sore ankle)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/0-ref.mp3",
+   "caption": "0. Today (borrowed: the shop clerk voice): the reference it was made from"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/0-ja2.mp3",
+   "caption": "0. Today (borrowed: the shop clerk voice): 「お客さんに何て言ったの？……もう一度、最初から説明しなさい。」 (scolding a junior who quoted the wrong date)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/0-en.mp3",
+   "caption": "0. Today (borrowed: the shop clerk voice): \"I don't understand the joke. Can we go back to the delivery date?\" (dry, to an overseas customer)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/0-quiet.mp3",
+   "caption": "0. Today (borrowed: the shop clerk voice): 「大丈夫です。」 \"We're one game from the set, so serve.\" (quiet, hiding a sore ankle)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/p-ref.mp3",
+   "caption": "p. The old prototype's Rei: the reference it was made from"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/p-ja2.mp3",
+   "caption": "p. The old prototype's Rei: 「お客さんに何て言ったの？……もう一度、最初から説明しなさい。」 (scolding a junior who quoted the wrong date)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/p-en.mp3",
+   "caption": "p. The old prototype's Rei: \"I don't understand the joke. Can we go back to the delivery date?\" (dry, to an overseas customer)"
+  },
+  {
+   "audio": "art/candidates/rei-voice-1/p-quiet.mp3",
+   "caption": "p. The old prototype's Rei: 「大丈夫です。」 \"We're one game from the set, so serve.\" (quiet, hiding a sore ankle)"
+  }
+ ],
+ "options": [
+  {
+   "id": "a",
+   "label": "a. Low, cold and clipped",
+   "audio": "art/candidates/rei-voice-1/a-ja1.mp3",
+   "note": "Design prompt: \"A Japanese woman of forty-one, a sales manager. Native Japanese speaker. Medium-low voice, cool and clipped, crisp consonants, no warmth, speaks quickly and expects to be obeyed. Not husky, not breathy.\" Reference pitch about 260 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 606, ja2 505, English 505, 大丈夫です 606 with English 404."
+  },
+  {
+   "id": "b",
+   "label": "b. Sharp and fast",
+   "audio": "art/candidates/rei-voice-1/b-ja1.mp3",
+   "note": "Design prompt: \"A Japanese woman of forty-one, a sales manager. Native Japanese speaker. Medium pitch, sharp, brisk and impatient, quick tempo, a strict boss scolding her team, clear and cutting. Not husky.\" Reference pitch about 268 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 404, ja2 606, English 606, 大丈夫です 505 with English 505."
+  },
+  {
+   "id": "c",
+   "label": "c. Deep and commanding",
+   "audio": "art/candidates/rei-voice-1/c-ja1.mp3",
+   "note": "Design prompt: \"A Japanese woman of forty-one, a sales manager. Native Japanese speaker. Low, steady, firm voice with heavy authority, a little rough at the edges, unhurried but never soft, a woman used to giving orders. Not breathy, not seductive.\" Reference pitch about 234 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 404, ja2 404, English 505, 大丈夫です 404 with English 606."
+  },
+  {
+   "id": "d",
+   "label": "d. Cool and smooth, dry amusement",
+   "audio": "art/candidates/rei-voice-1/d-ja1.mp3",
+   "note": "Design prompt: \"A Japanese woman of forty-one, a sales manager. Native Japanese speaker. Medium-low, polished and controlled, composed, a faint dry amusement under it, never raises her voice because she never needs to. Precise diction. Not husky.\" Reference pitch about 217 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 404, ja2 404, English 505, 大丈夫です 606 with English 404."
+  },
+  {
+   "id": "e",
+   "label": "e. Clear and strict",
+   "audio": "art/candidates/rei-voice-1/e-ja1.mp3",
+   "note": "Design prompt: \"A Japanese woman of forty-one, a sales manager. Native Japanese speaker. Medium-high, clear, strong projection, like a strict teacher in front of a class, brisk and precise, firm endings on every sentence.\" Reference pitch about 280 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 505, ja2 505, English 505, 大丈夫です 606 with English 606."
+  },
+  {
+   "id": "0",
+   "label": "0. Today (borrowed: the shop clerk voice)",
+   "audio": "art/candidates/rei-voice-1/0-ja1.mp3",
+   "note": "Her borrowed voice today (the shop clerk, made for a twenty-year-old), for comparison. Reference pitch about 280 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 404, ja2 606, English 404, 大丈夫です 404 with English 606."
+  },
+  {
+   "id": "p",
+   "label": "p. The old prototype's Rei",
+   "audio": "art/candidates/rei-voice-1/p-ja1.mp3",
+   "note": "The Rei voice from the old prototype (a MiniMax preset, \"ColdQueen\"), cloned the same way, for comparison. Reference pitch about 226 Hz. Every line passed the reading check. Takes: seeds 404, 505 and 606 per line, picked by the check, then closeness to the reference (for the quiet line, the calmest take): ja1 606, ja2 606, English 505, 大丈夫です 404 with English 606."
+  }
+ ],
+ "decided": [
+  "d"
+ ],
+ "decision": "d: cool and smooth, dry amusement. Installed as tools/voice-refs/rei-design (cfg.py), all her lines re-voiced.",
+ "decided_at": "2026-10-09T23:32:31+0200",
+ "issue": 257
+}

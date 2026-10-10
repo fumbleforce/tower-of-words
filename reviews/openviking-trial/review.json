@@ -1,0 +1,37 @@
+{
+ "title": "OpenViking trial: index the docs for agents?",
+ "date": "2026-09-29",
+ "by": "claude-agent:openviking-trial",
+ "status": "decided",
+ "question": "Should agents look things up through an OpenViking index of the docs, next to or instead of ripgrep?",
+ "multi": false,
+ "options": [
+  {
+   "id": "adopt",
+   "label": "adopt",
+   "note": "Run it all the time (CPU embedder, about 6 GB RAM), add the read-only MCP server for Claude Code and Codex, and refresh the index after each commit, with summaries under the GPU lock. On 15 questions it answered 10 (reading the top 3 hits), against 12 for first-try ripgrep, at about the same total tokens."
+  },
+  {
+   "id": "dont",
+   "label": "don't",
+   "note": "Keep docs/game/README.md and ripgrep. Everything stays in ~/ai/openviking, stopped; nothing in the repo uses it. The generated L0/L1 summaries describe files without the facts in them, and the index is one more copy that goes stale."
+  },
+  {
+   "id": "adopt-with-changes",
+   "label": "adopt with changes",
+   "note": "Vectors only (no GPU, no summaries), the read-only search tool offered as an extra next to ripgrep for plain-language questions (where it found answers in 1 to 1.5k tokens that took ripgrep 10 to 12k), and a quick refresh (37 s) after each commit."
+  }
+ ],
+ "links": [
+  {
+   "label": "The trial: setup, numbers per question, cost",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/openviking-trial.md"
+  }
+ ],
+ "decided": [
+  "dont"
+ ],
+ "decision": "don't adopt; focus on making our docs better instead",
+ "issue": 39,
+ "media": []
+}

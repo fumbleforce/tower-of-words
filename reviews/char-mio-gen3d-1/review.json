@@ -1,0 +1,137 @@
+{
+ "title": "Mio: saved generated volume guides",
+ "date": "2026-10-01",
+ "by": "Claude generation; Codex recovery and comparison",
+ "status": "superseded",
+ "issue": 171,
+ "question": "Does any saved guide have useful shape for the hand-built model?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/parts/style-concepts/mio-ref-clean/final.png.webp",
+   "caption": "Target picture. Generated meshes remain hidden volume guides for hand-placed facets; none is a finished character."
+  }
+ ],
+ "options": [
+  {
+   "id": "meshy-single",
+   "label": "meshy-single · Meshy from one picture",
+   "image": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/tex-front.png.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/tex-l40.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/tex-l90.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/tex-back.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/clay-front.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/clay-l40.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/clay-l90.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/clay-back.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/preview.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/front.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/input-0.png.webp"
+   ],
+   "note": "Raw generated guide, 1280368 faces, no rig. 30 credits; latest model, texture on, remesh off, image enhancement off, PBR off. The first four views show its paint; the next four show the same shape in clay. No hand-placed facet rebuild is finished."
+  },
+  {
+   "id": "meshy-multi-t3",
+   "label": "meshy-multi-t3 · Meshy from four pictures",
+   "image": "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/tex-front.png.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/tex-l40.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/tex-l90.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/tex-back.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/clay-front.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/clay-l40.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/clay-l90.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/renders/clay-back.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/preview.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/input-0.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/input-1.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/input-2.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/meshy-multi-t3/input-3.png.webp"
+   ],
+   "note": "Raw generated guide, 681978 faces, no rig. 30 credits; latest model, texture on, remesh off, image enhancement off, PBR off. The first four views show its paint; the next four show the same shape in clay. No hand-placed facet rebuild is finished."
+  },
+  {
+   "id": "triposg-single",
+   "label": "triposg-single · Local TripoSG shape",
+   "image": "game3d/shots/codex-gen3d-takeover/triposg-single-1366.png.webp",
+   "images": [
+    "game3d/shots/codex-gen3d-takeover/triposg-single-1366-90.png.webp",
+    "game3d/shots/codex-gen3d-takeover/triposg-single-1366-180.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/raw/triposg-single/input-0.png.webp"
+   ],
+   "note": "Raw shape only, 580,866 triangles, 290,435 vertices; no texture or rig. Seed 42, 50 steps, guidance 7, dense decoder; completed in 37 seconds at 5.21 GB peak VRAM. Claude left the PLY without renders. Codex packaged it unchanged as GLB and captured these live viewer views. Every vertex and face index matches the PLY after reload."
+  },
+  {
+   "id": "u1-l40",
+   "label": "u1-l40 · Turnaround input",
+   "image": "art/parts/style-concepts/claude-miogen3d/views/u1/l40.png.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miogen3d/views/u1/l40-canvas.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/l40.png.webp"
+   ],
+   "note": "Generated picture for a future guide, not a 3D rebuild. Full canvas and original source render follow. {\"model\": \"rdbtAnima.safetensors\", \"seed\": 301, \"denoise\": 0.65, \"steps\": 30, \"cfg\": 5, \"sampler\": \"euler_ancestral\", \"size\": \"1536x768\", \"method\": \"diptych: clean front left, source render right, right half masked (SetLatentNoiseMask + DifferentialDiffusion)\", \"source\": \"art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/l40.png\", \"prompt\": \"masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, reference sheet, the same girl twice, left: front view, right: the same girl in three-quarter view, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, standing straight, arms down, full body, plain light grey background\", \"negative\": \"worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, glasses, eyewear, drawstrings, different outfits, different hair\"}"
+  },
+  {
+   "id": "u1-l90",
+   "label": "u1-l90 · Turnaround input",
+   "image": "art/parts/style-concepts/claude-miogen3d/views/u1/l90.png.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miogen3d/views/u1/l90-canvas.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/l90.png.webp"
+   ],
+   "note": "Generated picture for a future guide, not a 3D rebuild. Full canvas and original source render follow. {\"model\": \"rdbtAnima.safetensors\", \"seed\": 301, \"denoise\": 0.65, \"steps\": 30, \"cfg\": 5, \"sampler\": \"euler_ancestral\", \"size\": \"1536x768\", \"method\": \"diptych: clean front left, source render right, right half masked (SetLatentNoiseMask + DifferentialDiffusion)\", \"source\": \"art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/l90.png\", \"prompt\": \"masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, reference sheet, the same girl twice, left: front view, right: the same girl from the side, profile facing the left edge of the picture, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, standing straight, arms down, full body, plain light grey background\", \"negative\": \"worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, glasses, eyewear, drawstrings, different outfits, different hair\"}"
+  },
+  {
+   "id": "u1-back",
+   "label": "u1-back · Turnaround input",
+   "image": "art/parts/style-concepts/claude-miogen3d/views/u1/back.png.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miogen3d/views/u1/back-canvas.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/back.png.webp"
+   ],
+   "note": "Generated picture for a future guide, not a 3D rebuild. Full canvas and original source render follow. {\"model\": \"rdbtAnima.safetensors\", \"seed\": 301, \"denoise\": 0.65, \"steps\": 30, \"cfg\": 5, \"sampler\": \"euler_ancestral\", \"size\": \"1536x768\", \"method\": \"diptych: clean front left, source render right, right half masked (SetLatentNoiseMask + DifferentialDiffusion)\", \"source\": \"art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/back.png\", \"prompt\": \"masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, reference sheet, the same girl twice, left: front view, right: the same girl from behind, back view, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, standing straight, arms down, full body, plain light grey background\", \"negative\": \"worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, glasses, eyewear, drawstrings, different outfits, different hair\"}"
+  },
+  {
+   "id": "u1-r90",
+   "label": "u1-r90 · Turnaround input",
+   "image": "art/parts/style-concepts/claude-miogen3d/views/u1/r90.png.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miogen3d/views/u1/r90-canvas.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/r90.png.webp"
+   ],
+   "note": "Generated picture for a future guide, not a 3D rebuild. Full canvas and original source render follow. {\"model\": \"rdbtAnima.safetensors\", \"seed\": 301, \"denoise\": 0.65, \"steps\": 30, \"cfg\": 5, \"sampler\": \"euler_ancestral\", \"size\": \"1536x768\", \"method\": \"diptych: clean front left, source render right, right half masked (SetLatentNoiseMask + DifferentialDiffusion)\", \"source\": \"art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/r90.png\", \"prompt\": \"masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, reference sheet, the same girl twice, left: front view, right: the same girl from the side, profile facing the right edge of the picture, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, standing straight, arms down, full body, plain light grey background\", \"negative\": \"worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, glasses, eyewear, drawstrings, different outfits, different hair\"}"
+  },
+  {
+   "id": "u1-r40",
+   "label": "u1-r40 · Turnaround input",
+   "image": "art/parts/style-concepts/claude-miogen3d/views/u1/r40.png.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miogen3d/views/u1/r40-canvas.png.webp",
+    "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/r40.png.webp"
+   ],
+   "note": "Generated picture for a future guide, not a 3D rebuild. Full canvas and original source render follow. {\"model\": \"rdbtAnima.safetensors\", \"seed\": 301, \"denoise\": 0.65, \"steps\": 30, \"cfg\": 5, \"sampler\": \"euler_ancestral\", \"size\": \"1536x768\", \"method\": \"diptych: clean front left, source render right, right half masked (SetLatentNoiseMask + DifferentialDiffusion)\", \"source\": \"art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/r40.png\", \"prompt\": \"masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, reference sheet, the same girl twice, left: front view, right: the same girl in three-quarter view, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, standing straight, arms down, full body, plain light grey background\", \"negative\": \"worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, glasses, eyewear, drawstrings, different outfits, different hair\"}"
+  },
+  {
+   "id": "trellis-single",
+   "label": "trellis-single · Input only",
+   "image": "art/parts/style-concepts/claude-miogen3d/raw/trellis-single/input-0.png.webp",
+   "note": "Prepared input only. No model, completion receipt or error log was saved in the attempt folder. Completion is unconfirmed; no retry was started during takeover."
+  }
+ ],
+ "links": [
+  {
+   "label": "Rotate the three saved raw meshes beside the target",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/style-concepts/mio-gen3d-viewer.html"
+  },
+  {
+   "label": "Job status, settings and retained-file hashes",
+   "href": "reviews/char-mio-gen3d-1/inventory.json"
+  },
+  {
+   "label": "Texture and eye-edge cleanup follow-up",
+   "href": "#review/char-mio-clean-1"
+  }
+ ],
+ "decision": "Cleanup requested; no game asset approved. The follow-up comparison is char-mio-clean-1."
+}

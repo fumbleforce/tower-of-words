@@ -1,0 +1,181 @@
+// The island's cats and the insects (catalog.js).
+//   cats         sit up on a wall, a planter or a bench (or at the foot of a wall), looking out over the street;
+//                breathing, the tail swaying, an ear flicking and blinking (cat.js, the same cat as Tama), and the
+//                head follows Eric while he is close, otherwise looks about.
+//                One left far behind, out of sight, finds another spot nearer him. None of them is Tama.
+//                Eric can pet them (pet.js): after it a cat stays settled (curled up, washing or sitting on) for a
+//                while, then sits up again as before.
+//   butterflies  wander in loops over lawns and planting; red dragonflies hover, then dart a little way.
+import * as THREE from 'three';
+import { butterflyGeometry, dragonflyGeometry } from './models.js';
+import { makeCat } from './cat.js';
+import { InsectMeshes } from './meshes.js';
+import { pettable } from './pet.js';
+
+const rnd = (a, b) => a + Math.random() * (b - a);
+const angle = (a) => Math.atan2(Math.sin(a), Math.cos(a));
+
+export class Cat {
+  constructor(def, W, parent) {
+    // the same rigged cat as Tama (cat.js), sitting up; the blob under her is the creatures' own (W.blob)
+    this.rig = makeCat(def.coat, { mode: 'sit' });
+    this.rig.mesh.castShadow = false;
+    this.rig.mesh.userData.creature = true;
+    this.W = W;
+    this.def = def;
+    this.root = this.rig.root;
+    this.root.scale.setScalar(W.K * 1.1);
+    this.root.visible = false;
+    parent.add(this.root);
+  }
+  // a spot: on a low perch, else at the foot of a wall; seen = must be on screen (true), off it (false), either.
+  // Somewhere Eric can reach to pet her first (pet.js), anywhere else only if there is no such spot
+  place(seen) {
+    const W = this.W;
+    const at = (ok) =>
+      W.claim('low', this, { min: 4, max: 16, view: seen, maxY: 1.6, ok }) ||
+      W.claim('ground', this, { min: 4, max: 16, view: seen, edge: true, clear: 2, ok });
+    const s = at((p) => pettable(W.nav, p, W.K)) || at();
+    if (!s) return (this.root.visible = false);
+    this.root.position.copy(s.p);
+    // face out over the open ground: the direction round it with the most walkable space
+    let best = 0,
+      bn = -1;
+    for (let k = 0; k < 8; k++) {
+      const a = (k / 8) * Math.PI * 2;
+      let n = 0;
+      for (const r of [0.8, 1.6, 2.4])
+        n += W.nav.free(s.p.x + Math.sin(a) * r * W.K, s.p.z + Math.cos(a) * r * W.K, 0.05) ? 1 : 0;
+      if (n > bn) ((bn = n), (best = a));
+    }
+    this.root.rotation.y = best + rnd(-0.4, 0.4);
+    this.root.visible = true;
+    this.settled = 0;
+    this.rig.set('sit', { now: true });
+    return true;
+  }
+  step(dt, active) {
+    const W = this.W,
+      r = this.root;
+    if (!active) {
+      if (r.visible && !W.inView(r.position)) ((r.visible = false), W.free(this));
+      return;
+    }
+    if (!r.visible) {
+      if ((this.wait = (this.wait ?? 0) - dt) <= 0) this.place(false) || (this.wait = 3);
+      return;
+    }
+    if (r.position.distanceTo(W.eric) > 30 * W.K && !W.inView(r.position)) {
+      W.free(this);
+      r.visible = false;
+      this.wait = rnd(1, 4);
+      return;
+    }
+    // the head on Eric while he is near, else the cat looks about by itself; the tail, ears and breathing are the
+    // rig's own
+    // petted a while ago (pet.js): settled until then, then up to sitting and looking about again
+    if (this.settled && W.t > this.settled && !this.petting) ((this.settled = 0), this.rig.set('sit'));
+    const dx = W.eric.x - r.position.x,
+      dz = W.eric.z - r.position.z;
+    this.rig.look =
+      this.petting || (Math.hypot(dx, dz) < 5 * W.K && this.rig.mode !== 'sleep')
+        ? angle(Math.atan2(dx, dz) - r.rotation.y)
+        : null;
+    this.rig.update(dt);
+    W.blob(r.position, 0.16 * W.K, r.position.y);
+  }
+  reset(active) {
+    this.W.free(this);
+    this.root.visible = false;
+    this.wait = 0;
+    if (active) this.place(Math.random() < 0.7 ? true : undefined);
+  }
+}
+
+// butterflies and dragonflies of one kind, in one instanced mesh
+const TINTS = ['#fbf8ee', '#f4dd6a', '#f7f3e6', '#f2c27a'].map((c) => new THREE.Color(c));
+export class Insects {
+  constructor(def, n, W, parent) {
+    this.W = W;
+    this.kind = def.kind;
+    const geo = def.kind === 'butterfly' ? butterflyGeometry() : dragonflyGeometry();
+    this.meshes = new InsectMeshes(geo, n, W.K * (def.kind === 'butterfly' ? 1.6 : 1.5));
+    parent.add(this.meshes.mesh);
+    this.bugs = Array.from({ length: n }, (_, i) => ({
+      i,
+      on: false,
+      at: new THREE.Vector3(),
+      p: new THREE.Vector3(),
+      to: new THREE.Vector3(),
+      yaw: 0,
+      t: Math.random() * 10,
+      hold: 0,
+      tint: TINTS[i % TINTS.length],
+      f: [rnd(0.5, 0.9), rnd(0.7, 1.2), rnd(0.3, 0.6)],
+    }));
+  }
+  home(b, seen) {
+    const s = this.W.pick('green', { min: 2, max: 14, view: seen }) || this.W.pick('green', { min: 2, max: 14 });
+    if (!s) return (b.on = false);
+    b.at.copy(s.p);
+    b.p.copy(s.p).y += 0.6 * this.W.K;
+    b.to.copy(b.p);
+    b.on = true;
+  }
+  step(dt, active) {
+    const W = this.W,
+      K = W.K;
+    let any = false;
+    for (const b of this.bugs) {
+      if (!b.on && active && Math.random() < dt) this.home(b, false);
+      // out of its time of day it drifts up and away; left far behind out of sight, it is gone
+      if (b.on && !active) {
+        b.at.y += dt * 0.5 * K;
+        b.at.x += dt * 0.4 * K;
+        b.gone = (b.gone || 0) + dt;
+      } else b.gone = 0;
+      if (b.on && (b.gone > 5 || (!active && !W.inView(b.p)) || (b.at.distanceTo(W.eric) > 24 * K && !W.inView(b.p))))
+        b.on = false;
+      if (!b.on) {
+        this.meshes.hide(b.i);
+        continue;
+      }
+      any = true;
+      b.t += dt;
+      const px = b.p.x,
+        pz = b.p.z;
+      if (this.kind === 'butterfly') {
+        // loops over the planting, rising and dipping
+        const [a, c, h] = b.f;
+        b.p.set(
+          b.at.x + Math.sin(b.t * a) * 1.3 * K + Math.sin(b.t * 2.1) * 0.12 * K,
+          b.at.y + (0.45 + h * Math.sin(b.t * 1.3) * 0.5 + 0.1 * Math.sin(b.t * 7)) * K,
+          b.at.z + Math.sin(b.t * c + 1.3) * 1.1 * K,
+        );
+        this.meshes.pose(b.i, b.p, b.yaw, Math.abs(Math.sin(b.t * 11)) * 0.9, b.tint);
+      } else {
+        // hover, then dart to a spot nearby
+        b.hold -= dt;
+        if (b.hold <= 0) {
+          b.hold = rnd(0.6, 2.2);
+          const a = Math.random() * 6.28,
+            r = rnd(0.4, 1.6) * K;
+          b.to.set(b.at.x + Math.cos(a) * r, b.at.y + rnd(0.7, 1.5) * K, b.at.z + Math.sin(a) * r);
+        }
+        b.p.lerp(b.to, Math.min(1, dt * 7));
+        b.p.y += 0.004 * Math.sin(b.t * 9);
+        this.meshes.pose(b.i, b.p, b.yaw, 0.12 * Math.abs(Math.sin(b.t * 70)));
+      }
+      const dx = b.p.x - px,
+        dz = b.p.z - pz;
+      if (dx * dx + dz * dz > 1e-6) b.yaw += angle(Math.atan2(dx, dz) - b.yaw) * Math.min(1, dt * 6);
+    }
+    this.meshes.commit(any);
+  }
+  reset(active) {
+    for (const b of this.bugs) {
+      b.on = false;
+      if (active) this.home(b, Math.random() < 0.7);
+    }
+  }
+}

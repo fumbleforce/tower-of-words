@@ -1,0 +1,129 @@
+002s SHOT 000-t002-title.png
+006s SHOT 001-t005-first-screen.png
+008s SHOT 002-t007-walked.png
+009s SHOT 003-t008-place-train.png
+009s SHOT 004-t009-act-reader.png
+009s USE reader
+011s LINE The book is called "Excel for People Who Hate Excel". Press Space or click this area to continue
+011s SHOT 005-t011-line.png
+018s LINE Girl with headphones え？…もひこ、ぬみシさ。 Press Space or click this area to continue
+019s SHOT 006-t018-line.png
+023s LINE A nod at the empty seat. Press Space or click this area to continue
+024s SHOT 007-t023-line.png
+028s GOAL Sit down.
+028s SHOT 008-t028-goal.png
+029s SHOT 009-t028-every15s.png
+030s SHOT 010-t029-act-music.png
+032s SHOT 011-t031-act-mio.png
+032s USE mio
+033s LINE The train lurches. The woman's lunch bag slides to the edge of the seat and wobbles there. Press Space or click this area to continue
+034s SHOT 012-t033-line.png
+042s SHOT 013-t042-act-youth.png
+042s USE youth
+044s SHOT 014-t044-every15s.png
+044s LINE Young man …ん？
+045s SHOT 015-t044-line.png
+049s SHOT 016-t049-act-mio.png
+049s USE mio
+051s LINE Woman with a laptop Ah... okay, I got it. Sorry.
+051s SHOT 017-t051-line.png
+055s LINE Woman with a laptop Eh... B2? You're going to B2?
+055s SHOT 018-t055-line.png
+059s SHOT 019-t059-every15s.png
+059s LINE Eric you Yeah, IT support. I'm the contractor, it's my first day.
+060s SHOT 020-t059-line.png
+064s LINE Mio programmer Ahh, you're the support contract? Mori-san said a 外人 (gaijin, foreigner) is coming to help with the old machines. Amakawa never replaces anything
+065s SHOT 021-t064-line.png
+071s LINE Mio programmer I'm Mio. I'm also B2, so... same team, I guess.
+072s SHOT 022-t071-line.png
+077s SHOT 023-t076-every15s.png
+077s LINE I'm Mio. I'm also B2, so... same team, I guess. 1 “I'm Eric.” 2 “Were you visiting your mum?” 3 Just nod
+077s SHOT 024-t077-choice.png
+083s LINE Mio programmer Mm, I know. It's on your card.
+083s SHOT 025-t083-line.png
+086s GOAL Talk to Mio again when you like.
+087s SHOT 026-t086-goal.png
+088s SHOT 027-t087-act-reader.png
+088s GAVE UP reaching mio {"player":[1.58,-0.94],"spot":[1.96,0.06],"xy":[1746,770],"under":"c","path":0,"keys":[]}
+088s SHOT 028-t088-cant-reach-mio.png
+091s SHOT 029-t091-act-mio.png
+091s USE mio
+093s SHOT 030-t093-every15s.png
+093s LINE Mio programmer Ne... sorry. Where are you from?
+094s SHOT 031-t093-line.png
+097s LINE Eric you Norway.
+098s SHOT 032-t097-line.png
+100s LINE Mio programmer Norway... okay. And Japanese? You speak it, like, at all?
+101s SHOT 033-t100-line.png
+105s LINE Norway... okay. And Japanese? You speak it, like, at all? 1 “ありがとう (arigatō, thanks). That's about it.” 2 “Not really.”
+106s SHOT 034-t105-choice.png
+112s SHOT 035-t112-every15s.png
+112s LINE Mio programmer Okay, arigatō is good. You'll use that one a lot.
+113s SHOT 036-t112-line.png
+117s LINE Mio programmer You know it's all Amakawa people on the island, right? Nobody speaks English. Even at the supermarket.
+118s SHOT 037-t117-line.png
+123s LINE Mio programmer And Mori-san is going to be so polite with you, and you'll just stand there.
+124s SHOT 038-t123-line.png
+130s SHOT 039-t129-every15s.png
+130s LINE Mio programmer えっと, okay. First one, おはようございます (ohayō gozaimasu, good morning). You say it to everybody in the morning. The guard at the gate is really strict a
+130s SHOT 040-t130-line.png
+137s LINE She lifts two fingers off her laptop in a lazy wave, and nods.
+138s SHOT 041-t137-line.png
+141s LINE Mio programmer おはようございます (ohayō gozaimasu, good morning)...
+142s SHOT 042-t141-line.png
+147s SHOT 043-t146-every15s.png
+147s SHOT 044-t147-type-prompt.png
+147s TYPE ohayō gozaimasu
+152s SHOT 045-t152-typed.png
+152s LINE Mio programmer おはようございます (ohayō gozaimasu, good morning). Mm, okay, not bad.
+153s SHOT 046-t152-line.png
+157s LINE Mio programmer Try the cat, over there. She rides this train every morning, she won't judge you.
+158s SHOT 047-t157-line.png
+163s GOAL Say good morning to the cat.
+164s SHOT 048-t163-goal.png
+164s SHOT 049-t164-every15s.png
+165s SHOT 050-t164-act-youth.png
+167s SHOT 051-t167-act-music.png
+167s USE music
+169s LINE She lets you scratch behind one ear, then goes back to watching the door.
+169s SHOT 052-t169-line.png
+173s GOAL Say good morning to the cat.
+174s SHOT 053-t173-goal.png
+175s SHOT 054-t174-act-tama.png
+175s SAY at tama
+177s SHOT 055-t176-say-menu.png
+177s SAYMENU 1 おはようございます ohayō gozaimasu · good morning
+179s SHOT 056-t179-every15s.png
+180s SHOT 057-t179-type-prompt.png
+180s TYPE ohayō gozaimasu
+185s SHOT 058-t185-typed.png
+185s LINE A slow blink.
+186s SHOT 059-t185-line.png
+188s LINE Mio programmer See? She's fine with it.
+189s SHOT 060-t188-line.png
+192s GOAL Talk to Mio when you like.
+193s SHOT 061-t192-goal.png
+195s SHOT 062-t194-every15s.png
+195s SHOT 063-t195-act-reader.png
+211s SHOT 064-t210-every15s.png
+213s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[2022,893],"under":"c","path":0,"keys":[]}
+213s SHOT 065-t213-cant-reach-mio.png
+227s SHOT 066-t227-every15s.png
+234s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[2023,889],"under":"c","path":0,"keys":[]}
+234s SHOT 067-t234-cant-reach-mio.png
+244s SHOT 068-t243-every15s.png
+254s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[2023,896],"under":"c","path":0,"keys":[]}
+255s SHOT 069-t254-cant-reach-mio.png
+260s SHOT 070-t260-every15s.png
+276s SHOT 071-t275-every15s.png
+276s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[2022,890],"under":"c","path":0,"keys":[]}
+277s SHOT 072-t276-cant-reach-mio.png
+286s STUCK? no change for a while
+286s SHOT 073-t286-stuck.png
+292s SHOT 074-t291-every15s.png
+298s GAVE UP reaching mio {"player":[0.67,-0.48],"spot":[1.37,-0.63],"xy":[2023,891],"under":"c","path":0,"keys":[]}
+298s SHOT 075-t298-cant-reach-mio.png
+302s SHOT 076-t301-final.png
+
+ERRORS:
+

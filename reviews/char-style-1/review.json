@@ -1,0 +1,207 @@
+{
+ "title": "Character style concepts: 9 ways to model Mio and Eric",
+ "date": "2026-10-01",
+ "by": "Claude (round 1: A to C; round 2 after your comment on the voxel pair: D to F) and Codex (A to C)",
+ "status": "decided",
+ "question": "Which direction or directions should the game's characters take?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/parts/style-concepts/all-concepts.webp.webp",
+   "caption": "All concepts side by side"
+  },
+  {
+   "image": "art/parts/style-concepts/claude-voxel/attempt-04/sheet.webp.webp",
+   "caption": "Claude A · voxel: contact sheet"
+  },
+  {
+   "image": "art/parts/style-concepts/claude-toyfig/attempt-08/sheet.webp.webp",
+   "caption": "Claude B · toy figure: contact sheet"
+  },
+  {
+   "image": "art/parts/style-concepts/claude-facet/attempt-04/sheet.webp.webp",
+   "caption": "Claude C · faceted low-poly: contact sheet"
+  },
+  {
+   "image": "art/parts/style-concepts/claude-chamfer/attempt-06/sheet.webp.webp",
+   "caption": "Claude D · chamfered blocks: contact sheet"
+  },
+  {
+   "image": "art/parts/style-concepts/claude-ink/attempt-07/sheet.webp.webp",
+   "caption": "Claude E · ink outline: contact sheet"
+  },
+  {
+   "image": "art/parts/style-concepts/claude-float/attempt-03/sheet.webp.webp",
+   "caption": "Claude F · floating hands: contact sheet"
+  },
+  {
+   "image": "art/parts/style-concepts/codex-stitch/attempt-05/sheet.webp.webp",
+   "caption": "Codex A · stitched cloth: contact sheet"
+  },
+  {
+   "image": "art/parts/style-concepts/codex-carved/attempt-04/sheet.webp.webp",
+   "caption": "Codex B · carved puppets: contact sheet"
+  },
+  {
+   "image": "art/parts/style-concepts/codex-squash/attempt-02/sheet.webp.webp",
+   "caption": "Codex C · squash cartoon: contact sheet"
+  }
+ ],
+ "options": [
+  {
+   "id": "claude-voxel",
+   "label": "Claude A · voxel",
+   "image": "art/parts/style-concepts/claude-voxel/attempt-04/pair.webp",
+   "images": [
+    "art/parts/style-concepts/claude-voxel/attempt-04/pair-3q.webp",
+    "art/parts/style-concepts/claude-voxel/attempt-04/sheet-mio.webp.webp",
+    "art/parts/style-concepts/claude-voxel/attempt-04/sheet-eric.webp.webp",
+    "art/parts/style-concepts/claude-voxel/attempt-04/sheet-game.webp.webp",
+    "art/parts/style-concepts/claude-voxel/attempt-01/sheet.webp.webp",
+    "art/parts/style-concepts/claude-voxel/attempt-02/sheet.webp.webp",
+    "art/parts/style-concepts/claude-voxel/attempt-03/sheet.webp.webp"
+   ],
+   "note": "Jørgen on round 1: \"Voxel one is most polished but we dont have a voxel world so they dont fit in. they have the right details and elements though. Do 3 more\" Blocky voxel figures, one cube size for everything (about 3 cm), face drawn as pixel blocks, glasses as a block frame one voxel off the face. Rigid parts on 7 bones, Minecraft-style swing walk. Attempts, in order: attempt-01: First build. attempt-02: Smaller ID card, headphone cups with teal rings, bigger bun; Eric's hoodie strings and card smaller, more hair volume. attempt-03: Eric: darker stubble, darker glasses frame, hair down to the nape, bigger ponytail. attempt-04: Eric's hair combed back in steps instead of a straight fringe."
+  },
+  {
+   "id": "claude-toyfig",
+   "label": "Claude B · toy figure",
+   "image": "art/parts/style-concepts/claude-toyfig/attempt-08/pair.webp",
+   "images": [
+    "art/parts/style-concepts/claude-toyfig/attempt-08/pair-3q.webp",
+    "art/parts/style-concepts/claude-toyfig/attempt-08/sheet-mio.webp.webp",
+    "art/parts/style-concepts/claude-toyfig/attempt-08/sheet-eric.webp.webp",
+    "art/parts/style-concepts/claude-toyfig/attempt-08/sheet-game.webp.webp",
+    "art/parts/style-concepts/claude-toyfig/attempt-01/sheet.webp.webp",
+    "art/parts/style-concepts/claude-toyfig/attempt-02/sheet.webp.webp",
+    "art/parts/style-concepts/claude-toyfig/attempt-03/sheet.webp.webp",
+    "art/parts/style-concepts/claude-toyfig/attempt-04/sheet.webp.webp",
+    "art/parts/style-concepts/claude-toyfig/attempt-05/sheet.webp.webp",
+    "art/parts/style-concepts/claude-toyfig/attempt-06/sheet.webp.webp",
+    "art/parts/style-concepts/claude-toyfig/attempt-07/sheet.webp.webp"
+   ],
+   "note": "Toy-figure proportions (minifig, Playmobil) from clean primitives: cylinder head with a printed-style face, trapezoid torso, legs that swing from one hip pin, C-clip hands, clip-on hair pieces, glossy plastic. Attempts, in order: attempt-01: First build. Weak: the head's top shows through the hair as a pale band, the teal piece covers Mio's eyes. attempt-02: Hair pieces bigger, teal piece moved to the back. Weak: the pale band is still there. attempt-03: Hair pieces fitted closer. Weak: band still on Eric. attempt-04: Hair pieces wider. Weak: band still on Eric. attempt-05: Hair raised: band gone, but both hair pieces are tall egg-shaped helmets. Weak. attempt-06: Head rebuilt as a cylinder with a low dome so the hair can hug it. attempt-07: Mio's side strand round and tapered, glasses frame bars longer. attempt-08: Eric's hair sides slope back (combed back); glasses corners no longer show black dots."
+  },
+  {
+   "id": "claude-facet",
+   "label": "Claude C · faceted low-poly",
+   "image": "art/parts/style-concepts/claude-facet/attempt-04/pair.webp",
+   "images": [
+    "art/parts/style-concepts/claude-facet/attempt-04/pair-3q.webp",
+    "art/parts/style-concepts/claude-facet/attempt-04/sheet-mio.webp.webp",
+    "art/parts/style-concepts/claude-facet/attempt-04/sheet-eric.webp.webp",
+    "art/parts/style-concepts/claude-facet/attempt-04/sheet-game.webp.webp",
+    "art/parts/style-concepts/claude-facet/attempt-01/sheet.webp.webp",
+    "art/parts/style-concepts/claude-facet/attempt-02/sheet.webp.webp",
+    "art/parts/style-concepts/claude-facet/attempt-03/sheet.webp.webp"
+   ],
+   "note": "Tall faceted low-poly, flat-shaded planes, a small head on a long body; silhouette first (Mio an A: a bell-shaped oversized hoodie on thin legs; Eric a V: broad blazer shoulders over a narrow waist). Face is only glasses, eye planes and brows. Knees in the walk. Attempts, in order: attempt-01: First build. Weak: teal frames Mio's face on both sides, Eric's hair sits like a helmet. attempt-02: Mio's hair opened at the face, teal only at the nape and on her left (image right); smaller eyes; Eric's hairline higher with a lighter combed strip on top. attempt-03: Glasses bars overlap at the corners (black dots still visible). attempt-04: Glasses corner dots fixed."
+  },
+  {
+   "id": "claude-chamfer",
+   "label": "Claude D · chamfered blocks",
+   "image": "art/parts/style-concepts/claude-chamfer/attempt-06/pair.webp",
+   "images": [
+    "art/parts/style-concepts/claude-chamfer/attempt-06/pair-3q.webp",
+    "art/parts/style-concepts/claude-chamfer/attempt-06/sheet-mio.webp.webp",
+    "art/parts/style-concepts/claude-chamfer/attempt-06/sheet-eric.webp.webp",
+    "art/parts/style-concepts/claude-chamfer/attempt-06/sheet-game.webp.webp",
+    "art/parts/style-concepts/claude-chamfer/attempt-01/sheet.webp.webp",
+    "art/parts/style-concepts/claude-chamfer/attempt-02/sheet.webp.webp",
+    "art/parts/style-concepts/claude-chamfer/attempt-03/sheet.webp.webp",
+    "art/parts/style-concepts/claude-chamfer/attempt-04/sheet.webp.webp",
+    "art/parts/style-concepts/claude-chamfer/attempt-05/sheet.webp.webp"
+   ],
+   "note": "Round 2. Built the way the world's props are: boxes with one flat chamfer on every edge (the benches, planters and desks in game3d/js/look/detail.js), matte and flat-shaded. Keeps the voxel pair's parts and proportions (a squarish head about a third of the height, eyes and mouth as flat plates, glasses as a frame of bars standing off the face, hair as stepped slabs, lanyard, card, headphones) without the voxel grid. 7-bone rig, rigid parts, idle and walk. Attempts, in order: attempt-01: First build. attempt-02: Thicker glasses frames; Mio's fringe as one slab across the brow. Weak: black dots at the frame corners, and the fringe slab reads as a cap brim. attempt-03: Fringe back to attempt-01's stepped slabs, now overlapping; frame bars without a chamfer. Weak: the corner dots are worse. attempt-04: Frame side bars run between the top and bottom bars, so nothing overlaps: dots gone. Weak: a black strip at the top of Eric's side and back hair. attempt-05: Eric's side and back hair slabs raised into the first combed step. Weak: the strip is still there. attempt-06: Those slabs set 6 mm inside the combed steps (faces in one plane rendered black): strip gone."
+  },
+  {
+   "id": "claude-ink",
+   "label": "Claude E · ink outline",
+   "image": "art/parts/style-concepts/claude-ink/attempt-07/pair.webp",
+   "images": [
+    "art/parts/style-concepts/claude-ink/attempt-07/pair-3q.webp",
+    "art/parts/style-concepts/claude-ink/attempt-07/sheet-mio.webp.webp",
+    "art/parts/style-concepts/claude-ink/attempt-07/sheet-eric.webp.webp",
+    "art/parts/style-concepts/claude-ink/attempt-07/sheet-game.webp.webp",
+    "art/parts/style-concepts/claude-ink/attempt-01/sheet.webp.webp",
+    "art/parts/style-concepts/claude-ink/attempt-02/sheet.webp.webp",
+    "art/parts/style-concepts/claude-ink/attempt-03/sheet.webp.webp",
+    "art/parts/style-concepts/claude-ink/attempt-04/sheet.webp.webp",
+    "art/parts/style-concepts/claude-ink/attempt-05/sheet.webp.webp",
+    "art/parts/style-concepts/claude-ink/attempt-06/sheet.webp.webp"
+   ],
+   "note": "Round 2. An anime toon figure after the approved ink-line portraits: smooth simple forms in flat matte colours, about three and a half heads tall, anime eyes drawn on the face, hair as pointed clumps, and a dark ink outline round every part. The outline is an inverted hull (a pushed-out copy with flipped faces and back faces culled), so the game draws it with its normal materials; the world's own outline pass is thinner, so the people stand out from the props. 7 bones plus knees, idle and walk. Attempts, in order: attempt-01: First build. Weak: everything renders black (the outline's render material). attempt-02: The outline material's two sides swapped. Weak: still black; the cause was shadow rays hitting the outline from inside. attempt-03: Outline seen by the camera only; outline normals recalculated (the legs had no outline). Weak: Mio's fringe clumps show only their tips; Eric's hair reads as a cap. attempt-04: Clumps lifted off the head, the fringe wider; a second row of clumps over Eric's crown. Weak: Mio's fringe still looks like commas, Eric's crown row reads as bumps. attempt-05: Mio's fringe clumps start under the hair on top of her head; Eric's crown row removed, his hairline clumps flatter. Weak: in the game Eric's head reads as a plain round ball. attempt-06: Eric's clumps meet over the crown, some pointing forward to the hairline, some back. Weak: they are buried under the hair shell. attempt-07: Those clumps raised above the shell. In the game Eric's head still reads fairly round from the camera."
+  },
+  {
+   "id": "claude-float",
+   "label": "Claude F · floating hands",
+   "image": "art/parts/style-concepts/claude-float/attempt-03/pair.webp",
+   "images": [
+    "art/parts/style-concepts/claude-float/attempt-03/pair-3q.webp",
+    "art/parts/style-concepts/claude-float/attempt-03/sheet-mio.webp.webp",
+    "art/parts/style-concepts/claude-float/attempt-03/sheet-eric.webp.webp",
+    "art/parts/style-concepts/claude-float/attempt-03/sheet-game.webp.webp",
+    "art/parts/style-concepts/claude-float/attempt-01/sheet.webp.webp",
+    "art/parts/style-concepts/claude-float/attempt-02/sheet.webp.webp"
+   ],
+   "note": "Round 2. A limbless figure: body and head are one twelve-sided bean, flat-shaded like the world's trees and planters, split at the collar so the head can move. Hands and shoes float free, with a cuff over each wrist and a trouser hem over each shoe. Hair is heaped like the tree canopies, from low faceted clumps. The clothes are bands round the bean; the face, glasses, lanyard, card and headphones sit on its front facets. 7-bone rig (the arm and leg bones carry the hands and shoes), idle and walk. Attempts, in order: attempt-01: First build. Weak: the headphone ring crosses Mio's face, the glasses bars sink into the facets, the hands are small and far out, Eric's hair clumps are hidden under his cap. attempt-02: Headphones an arc behind the collar, glasses further off the face, bigger hands closer in, Eric's clumps bigger. attempt-03: Eric's clumps flatter, so they lie back."
+  },
+  {
+   "id": "codex-stitch",
+   "label": "Codex A · stitched cloth",
+   "image": "art/parts/style-concepts/codex-stitch/attempt-05/pair.webp",
+   "images": [
+    "art/parts/style-concepts/codex-stitch/attempt-05/pair-3q.webp",
+    "art/parts/style-concepts/codex-stitch/attempt-05/sheet-mio.webp.webp",
+    "art/parts/style-concepts/codex-stitch/attempt-05/sheet-eric.webp.webp",
+    "art/parts/style-concepts/codex-stitch/attempt-05/sheet-webgl.webp.webp",
+    "art/parts/style-concepts/codex-stitch/attempt-05/sheet-game.webp.webp",
+    "art/parts/style-concepts/codex-stitch/attempt-05/sheet-webgl-history.webp.webp",
+    "art/parts/style-concepts/codex-stitch/attempt-01/sheet.webp.webp",
+    "art/parts/style-concepts/codex-stitch/attempt-02/sheet.webp.webp",
+    "art/parts/style-concepts/codex-stitch/attempt-03/sheet.webp.webp",
+    "art/parts/style-concepts/codex-stitch/attempt-04/sheet.webp.webp"
+   ],
+   "note": "Sewn cloth dolls with broad cloth face panels, continuous seams, padded sleeves and short legs. Seven rigid bones, idle and walk. Includes actual game captures and earlier offline camera studies. The idle and walk clips can lift or sink the feet; static game views are grounded. Attempts, in order: attempt-01: First face, side and pair studies. Pair framing too tight; Eric’s hoodie intersects the jacket. attempt-02: Wider framing, jacket hem stitches, changed Eric hair. Hoodie and lapels sit off the torso. attempt-03: Fitted clothing and combed cloth hair seams. Sparse face stitches resemble facial hair. attempt-04: Continuous face seam and capped curves. A small break remains in Eric’s hoodie panel. attempt-05: Clothing follows the actual torso mesh. Full views and forecourt scale comparison."
+  },
+  {
+   "id": "codex-carved",
+   "label": "Codex B · carved puppets",
+   "image": "art/parts/style-concepts/codex-carved/attempt-04/pair.webp",
+   "images": [
+    "art/parts/style-concepts/codex-carved/attempt-04/pair-3q.webp",
+    "art/parts/style-concepts/codex-carved/attempt-04/sheet-mio.webp.webp",
+    "art/parts/style-concepts/codex-carved/attempt-04/sheet-eric.webp.webp",
+    "art/parts/style-concepts/codex-carved/attempt-04/sheet-webgl.webp.webp",
+    "art/parts/style-concepts/codex-carved/attempt-04/sheet-game.webp.webp",
+    "art/parts/style-concepts/codex-carved/attempt-01/sheet.webp.webp",
+    "art/parts/style-concepts/codex-carved/attempt-02/sheet.webp.webp",
+    "art/parts/style-concepts/codex-carved/attempt-03/sheet.webp.webp"
+   ],
+   "note": "Compact carved puppets: short barrel bodies, wedge shoes and shaped cheeks and jaws. Hair is cut into solid angular locks. Detailed faces and short rigid limbs on seven bones, idle and walk. Includes actual game captures and earlier offline camera studies. The idle and walk clips can lift or sink the feet; static game views are grounded. Eric’s beard marks stand away from the face in profile. Attempts, in order: attempt-01: Initial extruded faces and barrel bodies. Pair framing too tight. attempt-02: Wider framing and changed hoodie panel. Blender stopped partway through; generated GLBs and partial images retained. attempt-03: Added cheek and chin depth transitions; fitted clothing. attempt-04: Clothing follows the torso mesh; Mio’s green side hair tapers. Full views and forecourt scale comparison."
+  },
+  {
+   "id": "codex-squash",
+   "label": "Codex C · squash cartoon",
+   "image": "art/parts/style-concepts/codex-squash/attempt-02/pair.webp",
+   "images": [
+    "art/parts/style-concepts/codex-squash/attempt-02/pair-3q.webp",
+    "art/parts/style-concepts/codex-squash/attempt-02/sheet-mio.webp.webp",
+    "art/parts/style-concepts/codex-squash/attempt-02/sheet-eric.webp.webp",
+    "art/parts/style-concepts/codex-squash/attempt-02/sheet-webgl.webp.webp",
+    "art/parts/style-concepts/codex-squash/attempt-02/sheet-game.webp.webp",
+    "art/parts/style-concepts/codex-squash/attempt-01/sheet.webp.webp"
+   ],
+   "note": "Smooth squash cartoon bodies with pear torsos, narrow bean-shaped faces, large hands and long shoes. Mio has lower eyelids; Eric has a projecting nose. Seven rigid bones with a broader arm swing, idle and walk. Includes actual game captures and earlier offline camera studies. The idle and walk clips can lift or sink the feet; static game views are grounded. Eric’s beard marks stand away from the face in profile. Attempts, in order: attempt-01: First face, side and pair studies. Open hair ends and intersecting hoodie. attempt-02: Closed and tapered hair, lower swept hair on Eric, fitted clothing and wider pair framing. Full views and forecourt scale comparison."
+  }
+ ],
+ "links": [
+  {
+   "label": "Turn them and play idle and walk (live 3D)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/style-concepts/viewer.html"
+  }
+ ],
+ "decision": "All nine rejected: 'all are completely unusable, ugly as sin'.",
+ "decided_at": "2026-10-01T13:42:21+0200",
+ "issue": 151
+}

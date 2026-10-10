@@ -1,0 +1,1102 @@
+{
+ "title": "Karaoke reception and booth details",
+ "date": "2026-10-08",
+ "result": [
+  "final-2-1366-eric-02-desk-arrival",
+  "final-2-1366-eric-04-desk-drinks",
+  "final-2-1366-eric-07-booth-arrival",
+  "final-2-1366-eric-08-booth-screen"
+ ],
+ "by": "codex",
+ "caption": "Open drink dispensers, cupboard joinery, a connected stair rail, separate cushions and AV fittings add detail to both public rooms. Every retained render attempt appears by round and capture time. Save and return checks pass; existing stage contact failures remain tracked in #349.",
+ "preview": "final-2-1366-eric-02-desk-arrival",
+ "sections": [
+  {
+   "title": "Original rooms",
+   "caption": "Native door and stair interactions with scripted walking approaches. Original fixtures and recovered booth layout before the detail pass; some early side cameras faced outside the cutaway.",
+   "images": [
+    {
+     "id": "baseline-1366-eric-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-01-street.png.webp",
+     "caption": "Desktop Eric: Shop-street approach"
+    },
+    {
+     "id": "baseline-390-carina-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-01-street.png.webp",
+     "caption": "Phone Carina: Shop-street approach"
+    },
+    {
+     "id": "baseline-1366-eric-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-02-desk-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in reception"
+    },
+    {
+     "id": "baseline-1366-eric-03-desk-counter",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-03-desk-counter.png.webp",
+     "caption": "Desktop Eric: Reception cabinet panels, bell and microphone baskets"
+    },
+    {
+     "id": "baseline-390-carina-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-02-desk-arrival.png.webp",
+     "caption": "Phone Carina: Arrival in reception"
+    },
+    {
+     "id": "baseline-1366-eric-04-desk-drinks",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-04-desk-drinks.png.webp",
+     "caption": "Desktop Eric: Drink dispensers and cupboard joinery"
+    },
+    {
+     "id": "baseline-390-carina-03-desk-counter",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-03-desk-counter.png.webp",
+     "caption": "Phone Carina: Reception cabinet panels, bell and microphone baskets"
+    },
+    {
+     "id": "baseline-390-carina-04-desk-drinks",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-04-desk-drinks.png.webp",
+     "caption": "Phone Carina: Drink dispensers and cupboard joinery"
+    },
+    {
+     "id": "baseline-1366-eric-05-desk-waiting",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-05-desk-waiting.png.webp",
+     "caption": "Desktop Eric: Waiting bench and catalogue cupboard"
+    },
+    {
+     "id": "baseline-390-carina-05-desk-waiting",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-05-desk-waiting.png.webp",
+     "caption": "Phone Carina: Waiting bench and catalogue cupboard"
+    },
+    {
+     "id": "baseline-1366-eric-06-desk-stairs",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-06-desk-stairs.png.webp",
+     "caption": "Desktop Eric: Stair tread edges, posts and rail"
+    },
+    {
+     "id": "baseline-390-carina-06-desk-stairs",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-06-desk-stairs.png.webp",
+     "caption": "Phone Carina: Stair tread edges, posts and rail"
+    },
+    {
+     "id": "baseline-1366-eric-07-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-07-booth-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in the booth"
+    },
+    {
+     "id": "baseline-390-carina-07-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-07-booth-arrival.png.webp",
+     "caption": "Phone Carina: Arrival in the booth"
+    },
+    {
+     "id": "baseline-390-carina-08-booth-screen",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-08-booth-screen.png.webp",
+     "caption": "Phone Carina: Screen, AV cupboard and speaker fronts"
+    },
+    {
+     "id": "baseline-1366-eric-08-booth-screen",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-08-booth-screen.png.webp",
+     "caption": "Desktop Eric: Screen, AV cupboard and speaker fronts"
+    },
+    {
+     "id": "baseline-390-carina-09-booth-table",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-09-booth-table.png.webp",
+     "caption": "Phone Carina: Table edging, microphone basket and cups"
+    },
+    {
+     "id": "baseline-1366-eric-09-booth-table",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-09-booth-table.png.webp",
+     "caption": "Desktop Eric: Table edging, microphone basket and cups"
+    },
+    {
+     "id": "baseline-390-carina-10-booth-west-bench",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-10-booth-west-bench.png.webp",
+     "caption": "Phone Carina: Bench cushions and wall panels"
+    },
+    {
+     "id": "baseline-1366-eric-10-booth-west-bench",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-10-booth-west-bench.png.webp",
+     "caption": "Desktop Eric: Bench cushions and wall panels"
+    },
+    {
+     "id": "baseline-390-carina-11-booth-door",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-11-booth-door.png.webp",
+     "caption": "Phone Carina: Open doorway and frame"
+    },
+    {
+     "id": "baseline-1366-eric-11-booth-door",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-11-booth-door.png.webp",
+     "caption": "Desktop Eric: Open doorway and frame"
+    },
+    {
+     "id": "baseline-390-carina-12-desk-return",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-12-desk-return.png.webp",
+     "caption": "Phone Carina: Native return downstairs to reception"
+    },
+    {
+     "id": "baseline-1366-eric-12-desk-return",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-12-desk-return.png.webp",
+     "caption": "Desktop Eric: Native return downstairs to reception"
+    },
+    {
+     "id": "baseline-390-carina-13-street-return",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/390-carina-13-street-return.png.webp",
+     "caption": "Phone Carina: Native return to the shop street"
+    },
+    {
+     "id": "baseline-1366-eric-13-street-return",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline/1366-eric-13-street-return.png.webp",
+     "caption": "Desktop Eric: Native return to the shop street"
+    }
+   ]
+  },
+  {
+   "title": "First fixture pass",
+   "caption": "Open dispenser bays, counter joinery, supported stair rail, padded benches and AV detail. Review requested wall-panel contact and isolation of the new door frame from the interaction outline.",
+   "images": [
+    {
+     "id": "candidate-1-1366-eric-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-01-street.png.webp",
+     "caption": "Desktop Eric: Shop-street approach"
+    },
+    {
+     "id": "candidate-1-390-carina-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-01-street.png.webp",
+     "caption": "Phone Carina: Shop-street approach"
+    },
+    {
+     "id": "candidate-1-1366-eric-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-02-desk-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in reception"
+    },
+    {
+     "id": "candidate-1-1366-eric-03-desk-counter",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-03-desk-counter.png.webp",
+     "caption": "Desktop Eric: Reception cabinet panels, bell and microphone baskets"
+    },
+    {
+     "id": "candidate-1-390-carina-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-02-desk-arrival.png.webp",
+     "caption": "Phone Carina: Arrival in reception"
+    },
+    {
+     "id": "candidate-1-1366-eric-04-desk-drinks",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-04-desk-drinks.png.webp",
+     "caption": "Desktop Eric: Drink dispensers and cupboard joinery"
+    },
+    {
+     "id": "candidate-1-390-carina-03-desk-counter",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-03-desk-counter.png.webp",
+     "caption": "Phone Carina: Reception cabinet panels, bell and microphone baskets"
+    },
+    {
+     "id": "candidate-1-1366-eric-05-desk-waiting",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-05-desk-waiting.png.webp",
+     "caption": "Desktop Eric: Waiting bench and catalogue cupboard"
+    },
+    {
+     "id": "candidate-1-390-carina-04-desk-drinks",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-04-desk-drinks.png.webp",
+     "caption": "Phone Carina: Drink dispensers and cupboard joinery"
+    },
+    {
+     "id": "candidate-1-390-carina-05-desk-waiting",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-05-desk-waiting.png.webp",
+     "caption": "Phone Carina: Waiting bench and catalogue cupboard"
+    },
+    {
+     "id": "candidate-1-1366-eric-06-desk-stairs",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-06-desk-stairs.png.webp",
+     "caption": "Desktop Eric: Stair tread edges, posts and rail"
+    },
+    {
+     "id": "candidate-1-390-carina-06-desk-stairs",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-06-desk-stairs.png.webp",
+     "caption": "Phone Carina: Stair tread edges, posts and rail"
+    },
+    {
+     "id": "candidate-1-1366-eric-07-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-07-booth-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in the booth"
+    },
+    {
+     "id": "candidate-1-390-carina-07-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-07-booth-arrival.png.webp",
+     "caption": "Phone Carina: Arrival in the booth"
+    },
+    {
+     "id": "candidate-1-1366-eric-08-booth-screen",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-08-booth-screen.png.webp",
+     "caption": "Desktop Eric: Screen, AV cupboard and speaker fronts"
+    },
+    {
+     "id": "candidate-1-390-carina-08-booth-screen",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-08-booth-screen.png.webp",
+     "caption": "Phone Carina: Screen, AV cupboard and speaker fronts"
+    },
+    {
+     "id": "candidate-1-390-carina-09-booth-table",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-09-booth-table.png.webp",
+     "caption": "Phone Carina: Table edging, microphone basket and cups"
+    },
+    {
+     "id": "candidate-1-1366-eric-09-booth-table",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-09-booth-table.png.webp",
+     "caption": "Desktop Eric: Table edging, microphone basket and cups"
+    },
+    {
+     "id": "candidate-1-390-carina-10-booth-west-bench",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-10-booth-west-bench.png.webp",
+     "caption": "Phone Carina: Bench cushions and wall panels"
+    },
+    {
+     "id": "candidate-1-1366-eric-10-booth-west-bench",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-10-booth-west-bench.png.webp",
+     "caption": "Desktop Eric: Bench cushions and wall panels"
+    },
+    {
+     "id": "candidate-1-390-carina-11-booth-door",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-11-booth-door.png.webp",
+     "caption": "Phone Carina: Open doorway and frame"
+    },
+    {
+     "id": "candidate-1-1366-eric-11-booth-door",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-11-booth-door.png.webp",
+     "caption": "Desktop Eric: Open doorway and frame"
+    },
+    {
+     "id": "candidate-1-390-carina-12-desk-return",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-12-desk-return.png.webp",
+     "caption": "Phone Carina: Native return downstairs to reception"
+    },
+    {
+     "id": "candidate-1-1366-eric-12-desk-return",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-12-desk-return.png.webp",
+     "caption": "Desktop Eric: Native return downstairs to reception"
+    },
+    {
+     "id": "candidate-1-390-carina-13-street-return",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/390-carina-13-street-return.png.webp",
+     "caption": "Phone Carina: Native return to the shop street"
+    },
+    {
+     "id": "candidate-1-1366-eric-13-street-return",
+     "image": "game3d/shots/karaoke-detail-20261008/candidate-1/1366-eric-13-street-return.png.webp",
+     "caption": "Desktop Eric: Native return to the shop street"
+    }
+   ]
+  },
+  {
+   "title": "Frame correction and first activity attempt",
+   "caption": "Door-frame highlight correction and wall-panel contact fixes. This shortened stage harness failed a microphone contact check; Continue was not reached. These are retained failed-attempt originals.",
+   "images": [
+    {
+     "id": "final-1366-eric-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-01-street.png.webp",
+     "caption": "Desktop Eric: Shop-street approach"
+    },
+    {
+     "id": "final-1366-eric-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-02-desk-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in reception"
+    },
+    {
+     "id": "final-1366-eric-03-desk-counter",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-03-desk-counter.png.webp",
+     "caption": "Desktop Eric: Reception cabinet panels, bell and microphone baskets"
+    },
+    {
+     "id": "final-1366-eric-04-desk-drinks",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-04-desk-drinks.png.webp",
+     "caption": "Desktop Eric: Drink dispensers and cupboard joinery"
+    },
+    {
+     "id": "final-1366-eric-05-desk-waiting",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-05-desk-waiting.png.webp",
+     "caption": "Desktop Eric: Waiting bench and catalogue cupboard"
+    },
+    {
+     "id": "final-1366-eric-06-desk-stairs",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-06-desk-stairs.png.webp",
+     "caption": "Desktop Eric: Stair tread edges, posts and rail"
+    },
+    {
+     "id": "final-390-carina-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-01-street.png.webp",
+     "caption": "Phone Carina: Shop-street approach"
+    },
+    {
+     "id": "final-1366-eric-07-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-07-booth-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in the booth"
+    },
+    {
+     "id": "final-1366-eric-08-booth-screen",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-08-booth-screen.png.webp",
+     "caption": "Desktop Eric: Screen, AV cupboard and speaker fronts"
+    },
+    {
+     "id": "final-1366-eric-09-booth-table",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-09-booth-table.png.webp",
+     "caption": "Desktop Eric: Table edging, microphone basket and cups"
+    },
+    {
+     "id": "final-1366-eric-10-booth-west-bench",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-10-booth-west-bench.png.webp",
+     "caption": "Desktop Eric: Bench cushions and wall panels"
+    },
+    {
+     "id": "final-1366-eric-11-booth-door",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-11-booth-door.png.webp",
+     "caption": "Desktop Eric: Open doorway and frame"
+    },
+    {
+     "id": "final-1366-eric-12-stage-start",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-12-stage-start.png.webp",
+     "caption": "Desktop Eric: Invoked stage: start"
+    },
+    {
+     "id": "final-1366-eric-13-stage-queue",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-13-stage-queue.png.webp",
+     "caption": "Desktop Eric: Invoked stage: queue"
+    },
+    {
+     "id": "final-390-carina-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-02-desk-arrival.png.webp",
+     "caption": "Phone Carina: Arrival in reception"
+    },
+    {
+     "id": "final-1366-eric-14-stage-takeMicrophone",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-14-stage-takeMicrophone.png.webp",
+     "caption": "Desktop Eric: Invoked stage: take Microphone"
+    },
+    {
+     "id": "final-390-carina-03-desk-counter",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-03-desk-counter.png.webp",
+     "caption": "Phone Carina: Reception cabinet panels, bell and microphone baskets"
+    },
+    {
+     "id": "final-390-carina-04-desk-drinks",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-04-desk-drinks.png.webp",
+     "caption": "Phone Carina: Drink dispensers and cupboard joinery"
+    },
+    {
+     "id": "final-390-carina-05-desk-waiting",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-05-desk-waiting.png.webp",
+     "caption": "Phone Carina: Waiting bench and catalogue cupboard"
+    },
+    {
+     "id": "final-390-carina-06-desk-stairs",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-06-desk-stairs.png.webp",
+     "caption": "Phone Carina: Stair tread edges, posts and rail"
+    },
+    {
+     "id": "final-1366-eric-15-stage-passMicrophone",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-15-stage-passMicrophone.png.webp",
+     "caption": "Desktop Eric: Invoked stage: pass Microphone"
+    },
+    {
+     "id": "final-1366-eric-16-stage-group",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-16-stage-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: group"
+    },
+    {
+     "id": "final-1366-eric-17-failure",
+     "image": "game3d/shots/karaoke-detail-20261008/final/1366-eric-17-failure.png.webp",
+     "caption": "Desktop Eric: Failure endpoint; inspect the retained log for failed contact assertions"
+    },
+    {
+     "id": "final-390-carina-07-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-07-booth-arrival.png.webp",
+     "caption": "Phone Carina: Arrival in the booth"
+    },
+    {
+     "id": "final-390-carina-08-booth-screen",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-08-booth-screen.png.webp",
+     "caption": "Phone Carina: Screen, AV cupboard and speaker fronts"
+    },
+    {
+     "id": "final-390-carina-09-booth-table",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-09-booth-table.png.webp",
+     "caption": "Phone Carina: Table edging, microphone basket and cups"
+    },
+    {
+     "id": "final-390-carina-10-booth-west-bench",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-10-booth-west-bench.png.webp",
+     "caption": "Phone Carina: Bench cushions and wall panels"
+    },
+    {
+     "id": "final-390-carina-11-booth-door",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-11-booth-door.png.webp",
+     "caption": "Phone Carina: Open doorway and frame"
+    },
+    {
+     "id": "final-390-carina-12-stage-start",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-12-stage-start.png.webp",
+     "caption": "Phone Carina: Invoked stage: start"
+    },
+    {
+     "id": "final-390-carina-13-stage-queue",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-13-stage-queue.png.webp",
+     "caption": "Phone Carina: Invoked stage: queue"
+    },
+    {
+     "id": "final-390-carina-14-stage-takeMicrophone",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-14-stage-takeMicrophone.png.webp",
+     "caption": "Phone Carina: Invoked stage: take Microphone"
+    },
+    {
+     "id": "final-390-carina-15-stage-passMicrophone",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-15-stage-passMicrophone.png.webp",
+     "caption": "Phone Carina: Invoked stage: pass Microphone"
+    },
+    {
+     "id": "final-390-carina-16-stage-group",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-16-stage-group.png.webp",
+     "caption": "Phone Carina: Invoked stage: group"
+    },
+    {
+     "id": "final-390-carina-17-failure",
+     "image": "game3d/shots/karaoke-detail-20261008/final/390-carina-17-failure.png.webp",
+     "caption": "Phone Carina: Failure endpoint; inspect the retained log for failed contact assertions"
+    }
+   ]
+  },
+  {
+   "title": "Final room details and full stage attempt",
+   "caption": "Final fixture source: reception and booth reviewed at 8/10 at both sizes. Existing stage actions were invoked directly, not triggered through the story. Contact assertions failed before Continue; route and save proof follows below.",
+   "images": [
+    {
+     "id": "final-2-390-carina-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-01-street.png.webp",
+     "caption": "Phone Carina: Shop-street approach"
+    },
+    {
+     "id": "final-2-1366-eric-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-01-street.png.webp",
+     "caption": "Desktop Eric: Shop-street approach"
+    },
+    {
+     "id": "final-2-390-carina-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-02-desk-arrival.png.webp",
+     "caption": "Phone Carina: Arrival in reception"
+    },
+    {
+     "id": "final-2-1366-eric-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-02-desk-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in reception"
+    },
+    {
+     "id": "final-2-390-carina-03-desk-counter",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-03-desk-counter.png.webp",
+     "caption": "Phone Carina: Reception cabinet panels, bell and microphone baskets"
+    },
+    {
+     "id": "final-2-1366-eric-03-desk-counter",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-03-desk-counter.png.webp",
+     "caption": "Desktop Eric: Reception cabinet panels, bell and microphone baskets"
+    },
+    {
+     "id": "final-2-390-carina-04-desk-drinks",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-04-desk-drinks.png.webp",
+     "caption": "Phone Carina: Drink dispensers and cupboard joinery"
+    },
+    {
+     "id": "final-2-390-carina-05-desk-waiting",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-05-desk-waiting.png.webp",
+     "caption": "Phone Carina: Waiting bench and catalogue cupboard"
+    },
+    {
+     "id": "final-2-1366-eric-04-desk-drinks",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-04-desk-drinks.png.webp",
+     "caption": "Desktop Eric: Drink dispensers and cupboard joinery"
+    },
+    {
+     "id": "final-2-390-carina-06-desk-stairs",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-06-desk-stairs.png.webp",
+     "caption": "Phone Carina: Stair tread edges, posts and rail"
+    },
+    {
+     "id": "final-2-1366-eric-05-desk-waiting",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-05-desk-waiting.png.webp",
+     "caption": "Desktop Eric: Waiting bench and catalogue cupboard"
+    },
+    {
+     "id": "final-2-1366-eric-06-desk-stairs",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-06-desk-stairs.png.webp",
+     "caption": "Desktop Eric: Stair tread edges, posts and rail"
+    },
+    {
+     "id": "final-2-390-carina-07-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-07-booth-arrival.png.webp",
+     "caption": "Phone Carina: Arrival in the booth"
+    },
+    {
+     "id": "final-2-390-carina-08-booth-screen",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-08-booth-screen.png.webp",
+     "caption": "Phone Carina: Screen, AV cupboard and speaker fronts"
+    },
+    {
+     "id": "final-2-390-carina-09-booth-table",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-09-booth-table.png.webp",
+     "caption": "Phone Carina: Table edging, microphone basket and cups"
+    },
+    {
+     "id": "final-2-1366-eric-07-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-07-booth-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in the booth"
+    },
+    {
+     "id": "final-2-390-carina-10-booth-west-bench",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-10-booth-west-bench.png.webp",
+     "caption": "Phone Carina: Bench cushions and wall panels"
+    },
+    {
+     "id": "final-2-1366-eric-08-booth-screen",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-08-booth-screen.png.webp",
+     "caption": "Desktop Eric: Screen, AV cupboard and speaker fronts"
+    },
+    {
+     "id": "final-2-390-carina-11-booth-door",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-11-booth-door.png.webp",
+     "caption": "Phone Carina: Open doorway and frame"
+    },
+    {
+     "id": "final-2-1366-eric-09-booth-table",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-09-booth-table.png.webp",
+     "caption": "Desktop Eric: Table edging, microphone basket and cups"
+    },
+    {
+     "id": "final-2-1366-eric-10-booth-west-bench",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-10-booth-west-bench.png.webp",
+     "caption": "Desktop Eric: Bench cushions and wall panels"
+    },
+    {
+     "id": "final-2-1366-eric-11-booth-door",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-11-booth-door.png.webp",
+     "caption": "Desktop Eric: Open doorway and frame"
+    },
+    {
+     "id": "final-2-390-carina-12-stage-start-group",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-12-stage-start-group.png.webp",
+     "caption": "Phone Carina: Invoked stage: start group"
+    },
+    {
+     "id": "final-2-1366-eric-12-stage-start-group",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-12-stage-start-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: start group"
+    },
+    {
+     "id": "final-2-390-carina-13-stage-queue-group",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-13-stage-queue-group.png.webp",
+     "caption": "Phone Carina: Invoked stage: queue group"
+    },
+    {
+     "id": "final-2-1366-eric-13-stage-queue-group",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-13-stage-queue-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: queue group"
+    },
+    {
+     "id": "final-2-390-carina-14-stage-receiptBack-group",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-14-stage-receiptBack-group.png.webp",
+     "caption": "Phone Carina: Invoked stage: receipt Back group"
+    },
+    {
+     "id": "final-2-1366-eric-14-stage-receiptBack-group",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-14-stage-receiptBack-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: receipt Back group"
+    },
+    {
+     "id": "final-2-390-carina-15-stage-takeMicrophone-kenji",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-15-stage-takeMicrophone-kenji.png.webp",
+     "caption": "Phone Carina: Invoked stage: take Microphone kenji"
+    },
+    {
+     "id": "final-2-1366-eric-15-stage-takeMicrophone-kenji",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-15-stage-takeMicrophone-kenji.png.webp",
+     "caption": "Desktop Eric: Invoked stage: take Microphone kenji"
+    },
+    {
+     "id": "final-2-390-carina-16-stage-passMicrophone-kuroda",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-16-stage-passMicrophone-kuroda.png.webp",
+     "caption": "Phone Carina: Invoked stage: pass Microphone kuroda"
+    },
+    {
+     "id": "final-2-1366-eric-16-stage-passMicrophone-kuroda",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-16-stage-passMicrophone-kuroda.png.webp",
+     "caption": "Desktop Eric: Invoked stage: pass Microphone kuroda"
+    },
+    {
+     "id": "final-2-390-carina-17-stage-passMicrophone-eric",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-17-stage-passMicrophone-eric.png.webp",
+     "caption": "Phone Carina: Invoked stage: pass Microphone eric"
+    },
+    {
+     "id": "final-2-390-carina-18-stage-group-group",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-18-stage-group-group.png.webp",
+     "caption": "Phone Carina: Invoked stage: group group"
+    },
+    {
+     "id": "final-2-390-carina-19-failure",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/390-carina-19-failure.png.webp",
+     "caption": "Phone Carina: Failure endpoint; inspect the retained log for failed contact assertions"
+    },
+    {
+     "id": "final-2-1366-eric-17-stage-passMicrophone-eric",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-17-stage-passMicrophone-eric.png.webp",
+     "caption": "Desktop Eric: Invoked stage: pass Microphone eric"
+    },
+    {
+     "id": "final-2-1366-eric-18-stage-group-group",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-18-stage-group-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: group group"
+    },
+    {
+     "id": "final-2-1366-eric-19-failure",
+     "image": "game3d/shots/karaoke-detail-20261008/final-2/1366-eric-19-failure.png.webp",
+     "caption": "Desktop Eric: Failure endpoint; inspect the retained log for failed contact assertions"
+    }
+   ]
+  },
+  {
+   "title": "Strict desktop and phone day tests",
+   "caption": "Both strict day-one fast runs passed. End-of-day frames supplement the focused room checks.",
+   "images": [
+    {
+     "id": "fast-390x844",
+     "image": "game3d/shots/karaoke-detail-20261008/fast/2026-10-08T18-51-14-787Z-1088886/390x844.png.webp",
+     "caption": "Phone: strict day-one end state"
+    },
+    {
+     "id": "fast-1366x860",
+     "image": "game3d/shots/karaoke-detail-20261008/fast/2026-10-08T18-51-14-786Z-1088885/1366x860.png.webp",
+     "caption": "Desktop: strict day-one end state"
+    }
+   ]
+  },
+  {
+   "title": "Same-harness unchanged-room comparison",
+   "caption": "The identical full stage harness against unchanged main reproduces the receipt pickup failure. Original room source; no detail pass present.",
+   "images": [
+    {
+     "id": "baseline-stage-1366-eric-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-01-street.png.webp",
+     "caption": "Desktop Eric: Shop-street approach"
+    },
+    {
+     "id": "baseline-stage-1366-eric-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-02-desk-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in reception"
+    },
+    {
+     "id": "baseline-stage-1366-eric-03-desk-counter",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-03-desk-counter.png.webp",
+     "caption": "Desktop Eric: Reception cabinet panels, bell and microphone baskets"
+    },
+    {
+     "id": "baseline-stage-1366-eric-04-desk-drinks",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-04-desk-drinks.png.webp",
+     "caption": "Desktop Eric: Drink dispensers and cupboard joinery"
+    },
+    {
+     "id": "baseline-stage-1366-eric-05-desk-waiting",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-05-desk-waiting.png.webp",
+     "caption": "Desktop Eric: Waiting bench and catalogue cupboard"
+    },
+    {
+     "id": "baseline-stage-1366-eric-06-desk-stairs",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-06-desk-stairs.png.webp",
+     "caption": "Desktop Eric: Stair tread edges, posts and rail"
+    },
+    {
+     "id": "baseline-stage-1366-eric-07-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-07-booth-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in the booth"
+    },
+    {
+     "id": "baseline-stage-1366-eric-08-booth-screen",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-08-booth-screen.png.webp",
+     "caption": "Desktop Eric: Screen, AV cupboard and speaker fronts"
+    },
+    {
+     "id": "baseline-stage-1366-eric-09-booth-table",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-09-booth-table.png.webp",
+     "caption": "Desktop Eric: Table edging, microphone basket and cups"
+    },
+    {
+     "id": "baseline-stage-1366-eric-10-booth-west-bench",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-10-booth-west-bench.png.webp",
+     "caption": "Desktop Eric: Bench cushions and wall panels"
+    },
+    {
+     "id": "baseline-stage-1366-eric-11-booth-door",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-11-booth-door.png.webp",
+     "caption": "Desktop Eric: Open doorway and frame"
+    },
+    {
+     "id": "baseline-stage-1366-eric-12-stage-start-group",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-12-stage-start-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: start group"
+    },
+    {
+     "id": "baseline-stage-1366-eric-13-stage-queue-group",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-13-stage-queue-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: queue group"
+    },
+    {
+     "id": "baseline-stage-1366-eric-14-stage-receiptBack-group",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-14-stage-receiptBack-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: receipt Back group"
+    },
+    {
+     "id": "baseline-stage-1366-eric-15-stage-takeMicrophone-kenji",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-15-stage-takeMicrophone-kenji.png.webp",
+     "caption": "Desktop Eric: Invoked stage: take Microphone kenji"
+    },
+    {
+     "id": "baseline-stage-1366-eric-16-stage-passMicrophone-kuroda",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-16-stage-passMicrophone-kuroda.png.webp",
+     "caption": "Desktop Eric: Invoked stage: pass Microphone kuroda"
+    },
+    {
+     "id": "baseline-stage-1366-eric-17-stage-passMicrophone-eric",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-17-stage-passMicrophone-eric.png.webp",
+     "caption": "Desktop Eric: Invoked stage: pass Microphone eric"
+    },
+    {
+     "id": "baseline-stage-1366-eric-18-stage-group-group",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-18-stage-group-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: group group"
+    },
+    {
+     "id": "baseline-stage-1366-eric-19-failure",
+     "image": "game3d/shots/karaoke-detail-20261008/baseline-stage/1366-eric-19-failure.png.webp",
+     "caption": "Desktop Eric: Failure endpoint; inspect the retained log for failed contact assertions"
+    }
+   ]
+  },
+  {
+   "title": "Existing canonical stage test on unchanged main",
+   "caption": "The existing canonical checker also records four failed pickup/handoff distances. It injects stage actions and sample dialogue, including English test text, rather than playing a story. First launch was GPU-deferred without images; these originals are from the retry.",
+   "images": [
+    {
+     "id": "canonical-1366-start--motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/start--motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: start motion"
+    },
+    {
+     "id": "canonical-1366-start-",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/start-.png.webp",
+     "caption": "Desktop Eric, unchanged room: start"
+    },
+    {
+     "id": "canonical-1366-queue--motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/queue--motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: queue motion"
+    },
+    {
+     "id": "canonical-1366-queue-",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/queue-.png.webp",
+     "caption": "Desktop Eric, unchanged room: queue"
+    },
+    {
+     "id": "canonical-1366-queue--dialogue",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/queue--dialogue.png.webp",
+     "caption": "Desktop Eric, unchanged room: queue dialogue"
+    },
+    {
+     "id": "canonical-1366-clearQueueExtras--motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/clearQueueExtras--motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: clear Queue Extras motion"
+    },
+    {
+     "id": "canonical-1366-clearQueueExtras-",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/clearQueueExtras-.png.webp",
+     "caption": "Desktop Eric, unchanged room: clear Queue Extras"
+    },
+    {
+     "id": "canonical-1366-receiptFront--motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/receiptFront--motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: receipt Front motion"
+    },
+    {
+     "id": "canonical-1366-receiptFront-",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/receiptFront-.png.webp",
+     "caption": "Desktop Eric, unchanged room: receipt Front"
+    },
+    {
+     "id": "canonical-1366-receiptBack--motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/receiptBack--motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: receipt Back motion"
+    },
+    {
+     "id": "canonical-1366-receiptBack-",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/receiptBack-.png.webp",
+     "caption": "Desktop Eric, unchanged room: receipt Back"
+    },
+    {
+     "id": "canonical-1366-receiptBack--dialogue",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/receiptBack--dialogue.png.webp",
+     "caption": "Desktop Eric, unchanged room: receipt Back dialogue"
+    },
+    {
+     "id": "canonical-1366-selectNumber--motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/selectNumber--motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: select Number motion"
+    },
+    {
+     "id": "canonical-1366-selectNumber-",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/selectNumber-.png.webp",
+     "caption": "Desktop Eric, unchanged room: select Number"
+    },
+    {
+     "id": "canonical-1366-takeMicrophone-kenji-motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/takeMicrophone-kenji-motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: take Microphone kenji motion"
+    },
+    {
+     "id": "canonical-1366-takeMicrophone-kenji",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/takeMicrophone-kenji.png.webp",
+     "caption": "Desktop Eric, unchanged room: take Microphone kenji"
+    },
+    {
+     "id": "canonical-1366-passMicrophone-kuroda-contact",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/passMicrophone-kuroda-contact.png.webp",
+     "caption": "Desktop Eric, unchanged room: pass Microphone kuroda contact"
+    },
+    {
+     "id": "canonical-1366-passMicrophone-kuroda-motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/passMicrophone-kuroda-motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: pass Microphone kuroda motion"
+    },
+    {
+     "id": "canonical-1366-passMicrophone-kuroda",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/passMicrophone-kuroda.png.webp",
+     "caption": "Desktop Eric, unchanged room: pass Microphone kuroda"
+    },
+    {
+     "id": "canonical-1366-keepMicrophone-kuroda-motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/keepMicrophone-kuroda-motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: keep Microphone kuroda motion"
+    },
+    {
+     "id": "canonical-1366-keepMicrophone-kuroda",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/keepMicrophone-kuroda.png.webp",
+     "caption": "Desktop Eric, unchanged room: keep Microphone kuroda"
+    },
+    {
+     "id": "canonical-1366-passMicrophone-eric-contact",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/passMicrophone-eric-contact.png.webp",
+     "caption": "Desktop Eric, unchanged room: pass Microphone eric contact"
+    },
+    {
+     "id": "canonical-1366-passMicrophone-eric-motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/passMicrophone-eric-motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: pass Microphone eric motion"
+    },
+    {
+     "id": "canonical-1366-passMicrophone-eric",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/passMicrophone-eric.png.webp",
+     "caption": "Desktop Eric, unchanged room: pass Microphone eric"
+    },
+    {
+     "id": "canonical-1366-group--motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/group--motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: group motion"
+    },
+    {
+     "id": "canonical-1366-group-",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/group-.png.webp",
+     "caption": "Desktop Eric, unchanged room: group"
+    },
+    {
+     "id": "canonical-1366-group--dialogue",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/group--dialogue.png.webp",
+     "caption": "Desktop Eric, unchanged room: group dialogue"
+    },
+    {
+     "id": "canonical-1366-group-kenji-motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/group-kenji-motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: group kenji motion"
+    },
+    {
+     "id": "canonical-1366-group-kenji",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/group-kenji.png.webp",
+     "caption": "Desktop Eric, unchanged room: group kenji"
+    },
+    {
+     "id": "canonical-1366-group-kenji-dialogue",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/group-kenji-dialogue.png.webp",
+     "caption": "Desktop Eric, unchanged room: group kenji dialogue"
+    },
+    {
+     "id": "canonical-1366-group-kuroda-motion",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/group-kuroda-motion.png.webp",
+     "caption": "Desktop Eric, unchanged room: group kuroda motion"
+    },
+    {
+     "id": "canonical-1366-group-kuroda",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/group-kuroda.png.webp",
+     "caption": "Desktop Eric, unchanged room: group kuroda"
+    },
+    {
+     "id": "canonical-1366-group-kuroda-dialogue",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/group-kuroda-dialogue.png.webp",
+     "caption": "Desktop Eric, unchanged room: group kuroda dialogue"
+    },
+    {
+     "id": "canonical-1366-last",
+     "image": "game3d/shots/karaoke-detail-20261008/canonical-1366/last.png.webp",
+     "caption": "Desktop Eric, unchanged room: last"
+    }
+   ]
+  },
+  {
+   "title": "Continue and native return with contact failures retained",
+   "caption": "Final room source, existing stage invoked directly. Actual quicksave, title Continue, held-microphone/queue restoration and native exits to reception and street passed at both sizes. Scripted walking approaches lead to real pin/menu clicks. Overall checker remains failed because all four existing contact limits are exceeded; failure frames are taken after the successful return. Tracked in issue #349: https://github.com/fumbleforce/tower-of-words/issues/349.",
+   "images": [
+    {
+     "id": "activity-final-1366-eric-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-01-street.png.webp",
+     "caption": "Desktop Eric: Shop-street approach"
+    },
+    {
+     "id": "activity-final-390-carina-01-street",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-01-street.png.webp",
+     "caption": "Phone Carina: Shop-street approach"
+    },
+    {
+     "id": "activity-final-1366-eric-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-02-desk-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in reception"
+    },
+    {
+     "id": "activity-final-390-carina-02-desk-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-02-desk-arrival.png.webp",
+     "caption": "Phone Carina: Arrival in reception"
+    },
+    {
+     "id": "activity-final-1366-eric-03-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-03-booth-arrival.png.webp",
+     "caption": "Desktop Eric: Arrival in the booth"
+    },
+    {
+     "id": "activity-final-390-carina-03-booth-arrival",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-03-booth-arrival.png.webp",
+     "caption": "Phone Carina: Arrival in the booth"
+    },
+    {
+     "id": "activity-final-1366-eric-04-stage-start-group",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-04-stage-start-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: start group"
+    },
+    {
+     "id": "activity-final-390-carina-04-stage-start-group",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-04-stage-start-group.png.webp",
+     "caption": "Phone Carina: Invoked stage: start group"
+    },
+    {
+     "id": "activity-final-1366-eric-05-stage-queue-group",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-05-stage-queue-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: queue group"
+    },
+    {
+     "id": "activity-final-390-carina-05-stage-queue-group",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-05-stage-queue-group.png.webp",
+     "caption": "Phone Carina: Invoked stage: queue group"
+    },
+    {
+     "id": "activity-final-1366-eric-06-stage-receiptBack-group",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-06-stage-receiptBack-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: receipt Back group"
+    },
+    {
+     "id": "activity-final-390-carina-06-stage-receiptBack-group",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-06-stage-receiptBack-group.png.webp",
+     "caption": "Phone Carina: Invoked stage: receipt Back group"
+    },
+    {
+     "id": "activity-final-1366-eric-07-stage-takeMicrophone-kenji",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-07-stage-takeMicrophone-kenji.png.webp",
+     "caption": "Desktop Eric: Invoked stage: take Microphone kenji"
+    },
+    {
+     "id": "activity-final-390-carina-07-stage-takeMicrophone-kenji",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-07-stage-takeMicrophone-kenji.png.webp",
+     "caption": "Phone Carina: Invoked stage: take Microphone kenji"
+    },
+    {
+     "id": "activity-final-390-carina-08-stage-passMicrophone-kuroda",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-08-stage-passMicrophone-kuroda.png.webp",
+     "caption": "Phone Carina: Invoked stage: pass Microphone kuroda"
+    },
+    {
+     "id": "activity-final-1366-eric-08-stage-passMicrophone-kuroda",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-08-stage-passMicrophone-kuroda.png.webp",
+     "caption": "Desktop Eric: Invoked stage: pass Microphone kuroda"
+    },
+    {
+     "id": "activity-final-390-carina-09-stage-passMicrophone-eric",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-09-stage-passMicrophone-eric.png.webp",
+     "caption": "Phone Carina: Invoked stage: pass Microphone eric"
+    },
+    {
+     "id": "activity-final-1366-eric-09-stage-passMicrophone-eric",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-09-stage-passMicrophone-eric.png.webp",
+     "caption": "Desktop Eric: Invoked stage: pass Microphone eric"
+    },
+    {
+     "id": "activity-final-390-carina-10-stage-group-group",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-10-stage-group-group.png.webp",
+     "caption": "Phone Carina: Invoked stage: group group"
+    },
+    {
+     "id": "activity-final-1366-eric-10-stage-group-group",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-10-stage-group-group.png.webp",
+     "caption": "Desktop Eric: Invoked stage: group group"
+    },
+    {
+     "id": "activity-final-390-carina-11-stage-continued",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-11-stage-continued.png.webp",
+     "caption": "Phone Carina: Held microphone and queue restored through title Continue"
+    },
+    {
+     "id": "activity-final-1366-eric-11-stage-continued",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-11-stage-continued.png.webp",
+     "caption": "Desktop Eric: Held microphone and queue restored through title Continue"
+    },
+    {
+     "id": "activity-final-390-carina-12-desk-return",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-12-desk-return.png.webp",
+     "caption": "Phone Carina: Native return downstairs to reception"
+    },
+    {
+     "id": "activity-final-1366-eric-12-desk-return",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-12-desk-return.png.webp",
+     "caption": "Desktop Eric: Native return downstairs to reception"
+    },
+    {
+     "id": "activity-final-390-carina-13-street-return",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-13-street-return.png.webp",
+     "caption": "Phone Carina: Native return to the shop street"
+    },
+    {
+     "id": "activity-final-390-carina-14-failure",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/390-carina-14-failure.png.webp",
+     "caption": "Phone Carina: Failure endpoint; inspect the retained log for failed contact assertions"
+    },
+    {
+     "id": "activity-final-1366-eric-13-street-return",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-13-street-return.png.webp",
+     "caption": "Desktop Eric: Native return to the shop street"
+    },
+    {
+     "id": "activity-final-1366-eric-14-failure",
+     "image": "game3d/shots/karaoke-detail-20261008/activity-final/1366-eric-14-failure.png.webp",
+     "caption": "Desktop Eric: Failure endpoint; inspect the retained log for failed contact assertions"
+    }
+   ]
+  }
+ ],
+ "commit": [
+  "9a53313daaef29042c251215bc3f4408e4596093"
+ ],
+ "media": []
+}

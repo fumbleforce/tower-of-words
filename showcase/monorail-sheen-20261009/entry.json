@@ -1,0 +1,193 @@
+{
+ "title": "Monorail outside: brushed steel, reflections and baked wear",
+ "date": "2026-10-09",
+ "by": "claude-agent:monorail",
+ "caption": "The car's stainless now looks like brushed metal. It picks up the sky, the warm horizon and the sea, and it has grime, drips, thin rust runs and rubbed edges baked in Blender. Shape, colours, interior, doors and play are the same as before.",
+ "preview": "after-close-desk",
+ "result": [
+  "after-close-desk",
+  "after-corner-desk",
+  "after-under-desk",
+  "after-corner-phone"
+ ],
+ "sections": [
+  {
+   "title": "Close on the car side",
+   "caption": "Before and after, desktop and phone.",
+   "images": [
+    {
+     "id": "before-close-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-close-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-close-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-close-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-close-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-close-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-close-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-close-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Over the bay, from above the platform side",
+   "caption": "Before and after, desktop and phone.",
+   "images": [
+    {
+     "id": "before-bay-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-bay-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-bay-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-bay-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-bay-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-bay-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-bay-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-bay-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Level with the cars",
+   "caption": "Before and after, desktop and phone.",
+   "images": [
+    {
+     "id": "before-low-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-low-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-low-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-low-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-low-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-low-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-low-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-low-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "From below",
+   "caption": "Before and after, desktop and phone.",
+   "images": [
+    {
+     "id": "before-under-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-under-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-under-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-under-desk.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-under-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-under-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-under-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-under-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The car ends and bellows",
+   "caption": "Before and after, desktop and phone.",
+   "images": [
+    {
+     "id": "before-corner-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-corner-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-corner-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-corner-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-corner-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-corner-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-corner-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-corner-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The play camera (cut-away car)",
+   "caption": "Unchanged inside; the neighbour cars show the new steel.",
+   "images": [
+    {
+     "id": "before-play-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-play-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-play-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-play-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-play-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/before-play-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-play-phone",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-play-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Halfway through the cut-away fade",
+   "caption": "The navy door panels and frames fade with the steel and stay visible.",
+   "images": [
+    {
+     "id": "after-fade-desk",
+     "image": "bible/shots/showcase/monorail-sheen-20261009/after-fade-desk.webp.webp",
+     "caption": "After, desktop"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  },
+  {
+   "label": "The earlier rebuild",
+   "href": "#showcase/monorail-upgrade-20261009"
+  }
+ ],
+ "media": []
+}

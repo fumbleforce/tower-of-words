@@ -1,0 +1,4898 @@
+{
+  "width": 390,
+  "mc": "carina",
+  "visit": "first",
+  "fixture": "Tuesday evening art member, no prior art visit; real title Continue and Runner",
+  "lines": [
+    "つタちびわへレおしリアソ。ノルウェー (Norway)うぞむぺス。",
+    "もタすびわクレロしリいソ。ノルウェー (Norway)ひぞルぺス。",
+    "1994年 (1994)ざぴ。リレハンメル (Lillehammer)。",
+    "れタけびわナレかしリじソ。ノルウェー (Norway)くぞコフス。",
+    "1994年 (1994)ざぴ。リレハンメル (Lillehammer)。",
+    "1994年 (1994)ノら。リレハンメル (Lillehammer)。",
+    "あ、ぽセエカオレキコルだう。ふじずべ、ろざさどひぬシホんてキナけ。",
+    "あ、ンあエカオネゆむルだぴ。ふえずに、だざでどばエシクんソキナゆ。",
+    "You can have mine. I haven’t started yet.",
+    "メじはぜ、ネげワムふげあこンよ。せにシノ、きをむノさチマニ。"
+  ],
+  "errors": [],
+  "seed": {
+    "rel": {
+      "bonds": {
+        "v": 1,
+        "day": 6,
+        "p": {
+          "mio": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "guard": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "kuroda": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "emi": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "kenji": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "mori": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          }
+        },
+        "rel": {}
+      },
+      "moments": [],
+      "fired": [],
+      "ambient": []
+    },
+    "flags": {
+      "gate_magic": true,
+      "dorm_room_known": true,
+      "going_home": true,
+      "lunch_mio": true,
+      "mio_warm": 2,
+      "d2_started": true,
+      "d2_station_seen": true,
+      "d2_checked": true,
+      "d2_ticket_done": true,
+      "d2_order_sensor": true,
+      "d2_brief_done": true,
+      "d2_shift_done": true,
+      "d2_met_kenji": true,
+      "d2_ate": true,
+      "d2_food": "riceball",
+      "d2_party_done": true,
+      "d2_complete": true,
+      "ticket_T0001": "done",
+      "ticket_T0002": "progress",
+      "ticketread_T0001": true,
+      "ticketread_T0002": true,
+      "d3_complete": true,
+      "d4_complete": true,
+      "day": 6,
+      "period": "evening",
+      "place": "dorm_commons",
+      "met_mio": true,
+      "met_guard": true,
+      "met_kuroda": true,
+      "met_emi": true,
+      "met_kenji": true,
+      "met_mori": true,
+      "ongoing_workday": true,
+      "ongoing_tennis_day": false,
+      "ongoing_team_day": false,
+      "ongoing_art_day": true,
+      "ongoing_winter_day": false,
+      "ongoing_art_ready": true,
+      "ongoing_winter_ready": false,
+      "period_early": false,
+      "period_morning": false,
+      "period_lunch": false,
+      "period_afternoon": false,
+      "period_evening": true,
+      "club_art": true
+    }
+  },
+  "loaded": {
+    "rel": {
+      "v": 1,
+      "day": 6,
+      "p": {
+        "mio": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 6,
+          "weekGifts": 0,
+          "weekOf": 1,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        },
+        "guard": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 6,
+          "weekGifts": 0,
+          "weekOf": 1,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        },
+        "kuroda": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 6,
+          "weekGifts": 0,
+          "weekOf": 1,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        },
+        "emi": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 6,
+          "weekGifts": 0,
+          "weekOf": 1,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        },
+        "kenji": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 6,
+          "weekGifts": 0,
+          "weekOf": 1,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        },
+        "mori": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 6,
+          "weekGifts": 0,
+          "weekOf": 1,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        }
+      },
+      "rel": {}
+    },
+    "save": {
+      "bonds": {
+        "v": 1,
+        "day": 6,
+        "p": {
+          "mio": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "guard": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "kuroda": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "emi": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "kenji": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          },
+          "mori": {
+            "pts": 0,
+            "met": true,
+            "used": {},
+            "dayPts": 0,
+            "dayOf": 6,
+            "weekGifts": 0,
+            "weekOf": 1,
+            "log": [],
+            "rem": [],
+            "facts": [],
+            "noticed": [],
+            "seen": []
+          }
+        },
+        "rel": {}
+      },
+      "moments": [],
+      "fired": [],
+      "ambient": []
+    },
+    "sim": {
+      "mio": 0,
+      "guard": 0,
+      "kuroda": 0,
+      "emi": 0,
+      "kenji": 0,
+      "mori": 0
+    }
+  },
+  "beforeContinue": {
+    "busy": true,
+    "place": "dorm_commons",
+    "period": "evening",
+    "flags": {
+      "gate_magic": true,
+      "dorm_room_known": true,
+      "going_home": true,
+      "lunch_mio": true,
+      "mio_warm": 2,
+      "d2_started": true,
+      "d2_station_seen": true,
+      "d2_checked": true,
+      "d2_ticket_done": true,
+      "d2_order_sensor": true,
+      "d2_brief_done": true,
+      "d2_shift_done": true,
+      "d2_met_kenji": true,
+      "d2_ate": true,
+      "d2_food": "riceball",
+      "d2_party_done": true,
+      "d2_complete": true,
+      "ticket_T0001": "done",
+      "ticket_T0002": "progress",
+      "ticketread_T0001": true,
+      "ticketread_T0002": true,
+      "d3_complete": true,
+      "d4_complete": true,
+      "day": 6,
+      "period": "evening",
+      "place": "dorm_commons",
+      "ongoing_workday": true,
+      "ongoing_tennis_day": false,
+      "ongoing_team_day": false,
+      "ongoing_art_day": true,
+      "ongoing_winter_day": false,
+      "ongoing_art_ready": true,
+      "ongoing_winter_ready": false,
+      "period_early": false,
+      "period_morning": false,
+      "period_lunch": false,
+      "period_afternoon": false,
+      "period_evening": true,
+      "club_art": true,
+      "met_mio": true,
+      "met_guard": true,
+      "met_kuroda": true,
+      "met_emi": true,
+      "met_kenji": true,
+      "met_mori": true,
+      "clubday_art": 6,
+      "clubprog_art": 1,
+      "art_action_completed": true
+    },
+    "recovery": null,
+    "execution": {
+      "onceDone": [],
+      "execution": {
+        "v": 3,
+        "place": "dorm_commons",
+        "frames": [
+          {
+            "node": "ongoing_art_photo",
+            "fingerprint": "649:e7686e81:4eecae85",
+            "trigger": null,
+            "cursors": [
+              {
+                "path": [],
+                "index": 3,
+                "phase": "step"
+              }
+            ],
+            "done": [
+              "entry"
+            ],
+            "branches": {
+              "[0]": false,
+              "[2]": false
+            },
+            "choices": {},
+            "staging": {
+              "place": "dorm_commons",
+              "flags": {
+                "gate_magic": true,
+                "dorm_room_known": true,
+                "going_home": true,
+                "lunch_mio": true,
+                "mio_warm": 2,
+                "d2_started": true,
+                "d2_station_seen": true,
+                "d2_checked": true,
+                "d2_ticket_done": true,
+                "d2_order_sensor": true,
+                "d2_brief_done": true,
+                "d2_shift_done": true,
+                "d2_met_kenji": true,
+                "d2_ate": true,
+                "d2_food": "riceball",
+                "d2_party_done": true,
+                "d2_complete": true,
+                "ticket_T0001": "done",
+                "ticket_T0002": "progress",
+                "ticketread_T0001": true,
+                "ticketread_T0002": true,
+                "d3_complete": true,
+                "d4_complete": true,
+                "day": 6,
+                "period": "evening",
+                "place": "dorm_commons",
+                "ongoing_workday": true,
+                "ongoing_tennis_day": false,
+                "ongoing_team_day": false,
+                "ongoing_art_day": true,
+                "ongoing_winter_day": false,
+                "ongoing_art_ready": true,
+                "ongoing_winter_ready": false,
+                "period_early": false,
+                "period_morning": false,
+                "period_lunch": false,
+                "period_afternoon": false,
+                "period_evening": true,
+                "club_art": true,
+                "met_mio": true,
+                "met_guard": true,
+                "met_kuroda": true,
+                "met_emi": true,
+                "met_kenji": true,
+                "met_mori": true,
+                "clubday_art": 6,
+                "clubprog_art": 1,
+                "art_action_completed": true
+              },
+              "world": {
+                "player": {
+                  "eric": {
+                    "visible": true,
+                    "position": [
+                      0.5,
+                      0.048182119148908936,
+                      -3.25
+                    ],
+                    "rotation": [
+                      0,
+                      0,
+                      0,
+                      "XYZ"
+                    ],
+                    "seated": true,
+                    "seatOut": [
+                      0.5,
+                      -3.75
+                    ],
+                    "lookTarget": null,
+                    "blob": null,
+                    "pose": {}
+                  }
+                },
+                "roomActivity": {
+                  "shot": null,
+                  "home": null
+                },
+                "artClub": {
+                  "active": true,
+                  "prior": {
+                    "eric": {
+                      "visible": true,
+                      "position": [
+                        0,
+                        0,
+                        -1
+                      ],
+                      "rotation": [
+                        0,
+                        3.141592653589793,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": false,
+                      "lookTarget": null,
+                      "blob": null,
+                      "pose": {}
+                    },
+                    "mori": {
+                      "visible": true,
+                      "position": [
+                        1.3000000000000003,
+                        0,
+                        -1.45
+                      ],
+                      "rotation": [
+                        0,
+                        -2.999695598985629,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": false,
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": true,
+                        "position": [
+                          1.3000000000000003,
+                          0.004,
+                          -1.45
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {
+                        "hips": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0.32,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "torso": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "head": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "drawing": "blank",
+                  "held": [],
+                  "playerDrawing": {
+                    "kind": "blank",
+                    "progress": 1
+                  },
+                  "cupLevels": [
+                    0,
+                    0
+                  ],
+                  "shot": {
+                    "shot": {
+                      "point": [
+                        0.05,
+                        -2.75
+                      ],
+                      "distance": 11.534666666666665,
+                      "y": 0.55,
+                      "yaw": 0.1,
+                      "elev": 0.8
+                    },
+                    "home": {
+                      "yaw": 0,
+                      "elev": 0.9424777960769379
+                    }
+                  },
+                  "people": {
+                    "eric": {
+                      "visible": true,
+                      "position": [
+                        0.5,
+                        0.048182119148908936,
+                        -3.25
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": true,
+                      "seatOut": [
+                        0.5,
+                        -3.75
+                      ],
+                      "lookTarget": null,
+                      "blob": null,
+                      "pose": {}
+                    },
+                    "mori": {
+                      "visible": true,
+                      "position": [
+                        -0.4,
+                        0.15467461210317088,
+                        -3.25
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": true,
+                      "seatOut": [
+                        -0.4,
+                        -3.75
+                      ],
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": true,
+                        "position": [
+                          -0.4,
+                          0.004,
+                          -3.25
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {
+                        "hips": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0.32,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "torso": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "head": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "props": {
+                    "art-mori-paper": {
+                      "visible": true,
+                      "position": [
+                        -0.6,
+                        0.411,
+                        -2.99
+                      ],
+                      "rotation": [
+                        -1.5707963267948963,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-player-paper": {
+                      "visible": true,
+                      "position": [
+                        0.3,
+                        0.414,
+                        -2.99
+                      ],
+                      "rotation": [
+                        -1.5707963267948963,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-photograph": {
+                      "visible": true,
+                      "position": [
+                        0.38,
+                        0.419,
+                        -2.35
+                      ],
+                      "rotation": [
+                        -1.5707963267948963,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-pencil-0": {
+                      "visible": true,
+                      "position": [
+                        -0.52,
+                        0.425,
+                        -2.94
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-pencil-1": {
+                      "visible": true,
+                      "position": [
+                        0.38,
+                        0.425,
+                        -2.94
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-teacup-0": {
+                      "visible": true,
+                      "position": [
+                        -0.7,
+                        0.455,
+                        -2.69
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-teacup-1": {
+                      "visible": true,
+                      "position": [
+                        0.35,
+                        0.455,
+                        -2.69
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-teapot": {
+                      "visible": true,
+                      "position": [
+                        0.15,
+                        0.49,
+                        -2.99
+                      ],
+                      "rotation": [
+                        0,
+                        -1.5707963267948966,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-tea-stream": {
+                      "visible": false,
+                      "position": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    }
+                  }
+                },
+                "sunday": {
+                  "people": {
+                    "kenji": {
+                      "visible": true,
+                      "position": [
+                        -1.96,
+                        0.14202643934774795,
+                        -3.3
+                      ],
+                      "rotation": [
+                        0,
+                        -1.5707963267948966,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": true,
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": true,
+                        "position": [
+                          -1.96,
+                          0.004,
+                          -3.3
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {
+                        "hips": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0.32,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "torso": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "head": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        }
+                      }
+                    },
+                    "mori": {
+                      "visible": true,
+                      "position": [
+                        -0.4,
+                        0.15467461210317088,
+                        -3.25
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": true,
+                      "seatOut": [
+                        -0.4,
+                        -3.75
+                      ],
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": true,
+                        "position": [
+                          -0.4,
+                          0.004,
+                          -3.25
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {
+                        "hips": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0.32,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "torso": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "head": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        }
+                      }
+                    },
+                    "aoi": {
+                      "visible": false,
+                      "position": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": false,
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": false,
+                        "position": [
+                          0,
+                          0.004,
+                          0
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {
+                        "hips": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0.32,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "torso": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "head": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        }
+                      }
+                    },
+                    "mio": {
+                      "visible": false,
+                      "position": [
+                        2.1,
+                        0,
+                        -0.94
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": false,
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": true,
+                        "position": [
+                          0,
+                          0.004,
+                          0
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {}
+                    }
+                  },
+                  "shot": {
+                    "shot": null,
+                    "home": null
+                  },
+                  "props": [
+                    {
+                      "p": [
+                        1.1570710678118656,
+                        0.46,
+                        -2.4505025253169417
+                      ],
+                      "r": [
+                        -1.5707963267948966,
+                        0.14189705460416405,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        3.93,
+                        1.0900000000000003,
+                        -2.9
+                      ],
+                      "r": [
+                        0,
+                        -1.5707963267948966,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        -1.96,
+                        0.22,
+                        -3.3
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        1.5,
+                        0.46,
+                        -2.3
+                      ],
+                      "r": [
+                        -1.5707963267948966,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        1.5,
+                        0.47500000000000003,
+                        -2.3
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        1.62,
+                        0.47500000000000003,
+                        -2.3
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        0,
+                        0,
+                        0.002
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": true
+                    }
+                  ]
+                },
+                "monday": {
+                  "props": [
+                    {
+                      "p": [
+                        0.4500000000000002,
+                        0.42,
+                        -2.5
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        0.5,
+                        0.34,
+                        -3.25
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        1.5500000000000003,
+                        0.43,
+                        -2.5
+                      ],
+                      "r": [
+                        -1.5707963267948966,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        3.98,
+                        1.2400000000000002,
+                        -2.9
+                      ],
+                      "r": [
+                        0,
+                        -1.5707963267948966,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        -0.4,
+                        1.15,
+                        -4.4
+                      ],
+                      "r": [
+                        -1.5707963267948966,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    }
+                  ],
+                  "shot": {
+                    "shot": null,
+                    "home": null
+                  },
+                  "pieces": [
+                    null
+                  ]
+                }
+              },
+              "ui": {
+                "goal": "Visit someone, explore, or sleep in room 203 when you are ready.",
+                "sideGoal": "",
+                "hold": null
+              },
+              "camera": {
+                "target": [
+                  0.05,
+                  0.55,
+                  -2.75
+                ],
+                "zoom": 2.702050451517457,
+                "y": 0.55,
+                "onEric": false
+              }
+            },
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    "line": "1994年 (1994)ざぴ。リレハンメル (Lillehammer)。",
+    "choices": [],
+    "contacts": [],
+    "art": {
+      "active": true,
+      "prior": {
+        "eric": {
+          "visible": true,
+          "position": [
+            0,
+            0,
+            -1
+          ],
+          "rotation": [
+            0,
+            3.141592653589793,
+            0,
+            "XYZ"
+          ],
+          "seated": false,
+          "lookTarget": null,
+          "blob": null,
+          "pose": {}
+        },
+        "mori": {
+          "visible": true,
+          "position": [
+            1.3000000000000003,
+            0,
+            -1.45
+          ],
+          "rotation": [
+            0,
+            -2.999695598985629,
+            0,
+            "XYZ"
+          ],
+          "seated": false,
+          "lookTarget": null,
+          "blob": {
+            "visible": true,
+            "position": [
+              1.3000000000000003,
+              0.004,
+              -1.45
+            ],
+            "rotation": [
+              -1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ]
+          },
+          "pose": {
+            "hips": {
+              "visible": true,
+              "position": [
+                0,
+                0.32,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "torso": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "head": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            }
+          }
+        }
+      },
+      "drawing": "blank",
+      "held": [],
+      "playerDrawing": {
+        "kind": "blank",
+        "progress": 1
+      },
+      "cupLevels": [
+        0,
+        0
+      ],
+      "shot": {
+        "shot": {
+          "point": [
+            0.15,
+            -2.48
+          ],
+          "distance": 4.8,
+          "y": 0.42,
+          "yaw": 0.05,
+          "elev": 1.05
+        },
+        "home": {
+          "yaw": 0,
+          "elev": 0.9424777960769379
+        }
+      },
+      "people": {
+        "eric": {
+          "visible": true,
+          "position": [
+            0.5,
+            0.048182119148908936,
+            -3.25
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "seated": true,
+          "seatOut": [
+            0.5,
+            -3.75
+          ],
+          "lookTarget": null,
+          "blob": null,
+          "pose": {}
+        },
+        "mori": {
+          "visible": true,
+          "position": [
+            -0.4,
+            0.15467461210317088,
+            -3.25
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "seated": true,
+          "seatOut": [
+            -0.4,
+            -3.75
+          ],
+          "lookTarget": null,
+          "blob": {
+            "visible": true,
+            "position": [
+              -0.4,
+              0.004,
+              -3.25
+            ],
+            "rotation": [
+              -1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ]
+          },
+          "pose": {
+            "hips": {
+              "visible": true,
+              "position": [
+                0,
+                0.32,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "torso": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "head": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            }
+          }
+        }
+      },
+      "props": {
+        "art-mori-paper": {
+          "visible": true,
+          "position": [
+            -0.6,
+            0.411,
+            -2.99
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-player-paper": {
+          "visible": true,
+          "position": [
+            0.3,
+            0.414,
+            -2.99
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-photograph": {
+          "visible": true,
+          "position": [
+            0.38,
+            0.419,
+            -2.35
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-pencil-0": {
+          "visible": true,
+          "position": [
+            -0.52,
+            0.425,
+            -2.94
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-pencil-1": {
+          "visible": true,
+          "position": [
+            0.38,
+            0.425,
+            -2.94
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teacup-0": {
+          "visible": true,
+          "position": [
+            -0.7,
+            0.455,
+            -2.69
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teacup-1": {
+          "visible": true,
+          "position": [
+            0.35,
+            0.455,
+            -2.69
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teapot": {
+          "visible": true,
+          "position": [
+            0.15,
+            0.49,
+            -2.99
+          ],
+          "rotation": [
+            0,
+            -1.5707963267948966,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-tea-stream": {
+          "visible": false,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        }
+      }
+    }
+  },
+  "afterContinue": {
+    "busy": true,
+    "place": "dorm_commons",
+    "period": "evening",
+    "flags": {
+      "gate_magic": true,
+      "dorm_room_known": true,
+      "going_home": true,
+      "lunch_mio": true,
+      "mio_warm": 2,
+      "d2_started": true,
+      "d2_station_seen": true,
+      "d2_checked": true,
+      "d2_ticket_done": true,
+      "d2_order_sensor": true,
+      "d2_brief_done": true,
+      "d2_shift_done": true,
+      "d2_met_kenji": true,
+      "d2_ate": true,
+      "d2_food": "riceball",
+      "d2_party_done": true,
+      "d2_complete": true,
+      "ticket_T0001": "done",
+      "ticket_T0002": "progress",
+      "ticketread_T0001": true,
+      "ticketread_T0002": true,
+      "d3_complete": true,
+      "d4_complete": true,
+      "day": 6,
+      "period": "evening",
+      "place": "dorm_commons",
+      "ongoing_workday": true,
+      "ongoing_tennis_day": false,
+      "ongoing_team_day": false,
+      "ongoing_art_day": true,
+      "ongoing_winter_day": false,
+      "ongoing_art_ready": true,
+      "ongoing_winter_ready": false,
+      "period_early": false,
+      "period_morning": false,
+      "period_lunch": false,
+      "period_afternoon": false,
+      "period_evening": true,
+      "club_art": true,
+      "clubday_art": 6,
+      "clubprog_art": 1,
+      "art_action_completed": true,
+      "met_mio": true,
+      "met_guard": true,
+      "met_kuroda": true,
+      "met_emi": true,
+      "met_kenji": true,
+      "met_mori": true
+    },
+    "recovery": null,
+    "execution": {
+      "onceDone": [],
+      "execution": {
+        "v": 3,
+        "place": "dorm_commons",
+        "frames": [
+          {
+            "node": "ongoing_art_photo",
+            "fingerprint": "649:e7686e81:4eecae85",
+            "trigger": null,
+            "cursors": [
+              {
+                "path": [],
+                "index": 0,
+                "phase": "branch"
+              },
+              {
+                "path": [
+                  0,
+                  "else"
+                ],
+                "index": 0,
+                "phase": "step"
+              }
+            ],
+            "done": [
+              "entry"
+            ],
+            "branches": {
+              "[0]": false,
+              "[2]": false
+            },
+            "choices": {},
+            "staging": {
+              "place": "dorm_commons",
+              "flags": {
+                "gate_magic": true,
+                "dorm_room_known": true,
+                "going_home": true,
+                "lunch_mio": true,
+                "mio_warm": 2,
+                "d2_started": true,
+                "d2_station_seen": true,
+                "d2_checked": true,
+                "d2_ticket_done": true,
+                "d2_order_sensor": true,
+                "d2_brief_done": true,
+                "d2_shift_done": true,
+                "d2_met_kenji": true,
+                "d2_ate": true,
+                "d2_food": "riceball",
+                "d2_party_done": true,
+                "d2_complete": true,
+                "ticket_T0001": "done",
+                "ticket_T0002": "progress",
+                "ticketread_T0001": true,
+                "ticketread_T0002": true,
+                "d3_complete": true,
+                "d4_complete": true,
+                "day": 6,
+                "period": "evening",
+                "place": "dorm_commons",
+                "ongoing_workday": true,
+                "ongoing_tennis_day": false,
+                "ongoing_team_day": false,
+                "ongoing_art_day": true,
+                "ongoing_winter_day": false,
+                "ongoing_art_ready": true,
+                "ongoing_winter_ready": false,
+                "period_early": false,
+                "period_morning": false,
+                "period_lunch": false,
+                "period_afternoon": false,
+                "period_evening": true,
+                "club_art": true,
+                "met_mio": true,
+                "met_guard": true,
+                "met_kuroda": true,
+                "met_emi": true,
+                "met_kenji": true,
+                "met_mori": true,
+                "clubday_art": 6,
+                "clubprog_art": 1,
+                "art_action_completed": true
+              },
+              "world": {
+                "player": {
+                  "eric": {
+                    "visible": true,
+                    "position": [
+                      0.5,
+                      0.048182119148908936,
+                      -3.25
+                    ],
+                    "rotation": [
+                      0,
+                      0,
+                      0,
+                      "XYZ"
+                    ],
+                    "seated": true,
+                    "seatOut": [
+                      0.5,
+                      -3.75
+                    ],
+                    "lookTarget": null,
+                    "blob": null,
+                    "pose": {}
+                  }
+                },
+                "roomActivity": {
+                  "shot": null,
+                  "home": null
+                },
+                "artClub": {
+                  "active": true,
+                  "prior": {
+                    "eric": {
+                      "visible": true,
+                      "position": [
+                        0,
+                        0,
+                        -1
+                      ],
+                      "rotation": [
+                        0,
+                        3.141592653589793,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": false,
+                      "lookTarget": null,
+                      "blob": null,
+                      "pose": {}
+                    },
+                    "mori": {
+                      "visible": true,
+                      "position": [
+                        1.3000000000000003,
+                        0,
+                        -1.45
+                      ],
+                      "rotation": [
+                        0,
+                        -2.999695598985629,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": false,
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": true,
+                        "position": [
+                          1.3000000000000003,
+                          0.004,
+                          -1.45
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {
+                        "hips": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0.32,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "torso": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "head": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "drawing": "blank",
+                  "held": [],
+                  "playerDrawing": {
+                    "kind": "blank",
+                    "progress": 1
+                  },
+                  "cupLevels": [
+                    0,
+                    0
+                  ],
+                  "shot": {
+                    "shot": {
+                      "point": [
+                        0.05,
+                        -2.75
+                      ],
+                      "distance": 11.534666666666665,
+                      "y": 0.55,
+                      "yaw": 0.1,
+                      "elev": 0.8
+                    },
+                    "home": {
+                      "yaw": 0,
+                      "elev": 0.9424777960769379
+                    }
+                  },
+                  "people": {
+                    "eric": {
+                      "visible": true,
+                      "position": [
+                        0.5,
+                        0.048182119148908936,
+                        -3.25
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": true,
+                      "seatOut": [
+                        0.5,
+                        -3.75
+                      ],
+                      "lookTarget": null,
+                      "blob": null,
+                      "pose": {}
+                    },
+                    "mori": {
+                      "visible": true,
+                      "position": [
+                        -0.4,
+                        0.15467461210317088,
+                        -3.25
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": true,
+                      "seatOut": [
+                        -0.4,
+                        -3.75
+                      ],
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": true,
+                        "position": [
+                          -0.4,
+                          0.004,
+                          -3.25
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {
+                        "hips": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0.32,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "torso": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "head": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "props": {
+                    "art-mori-paper": {
+                      "visible": true,
+                      "position": [
+                        -0.6,
+                        0.411,
+                        -2.99
+                      ],
+                      "rotation": [
+                        -1.5707963267948963,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-player-paper": {
+                      "visible": true,
+                      "position": [
+                        0.3,
+                        0.414,
+                        -2.99
+                      ],
+                      "rotation": [
+                        -1.5707963267948963,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-photograph": {
+                      "visible": true,
+                      "position": [
+                        0.38,
+                        0.419,
+                        -2.35
+                      ],
+                      "rotation": [
+                        -1.5707963267948963,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-pencil-0": {
+                      "visible": true,
+                      "position": [
+                        -0.52,
+                        0.425,
+                        -2.94
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-pencil-1": {
+                      "visible": true,
+                      "position": [
+                        0.38,
+                        0.425,
+                        -2.94
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-teacup-0": {
+                      "visible": true,
+                      "position": [
+                        -0.7,
+                        0.455,
+                        -2.69
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-teacup-1": {
+                      "visible": true,
+                      "position": [
+                        0.35,
+                        0.455,
+                        -2.69
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-teapot": {
+                      "visible": true,
+                      "position": [
+                        0.15,
+                        0.49,
+                        -2.99
+                      ],
+                      "rotation": [
+                        0,
+                        -1.5707963267948966,
+                        0,
+                        "XYZ"
+                      ]
+                    },
+                    "art-tea-stream": {
+                      "visible": false,
+                      "position": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ]
+                    }
+                  }
+                },
+                "sunday": {
+                  "people": {
+                    "kenji": {
+                      "visible": true,
+                      "position": [
+                        -1.96,
+                        0.14202643934774795,
+                        -3.3
+                      ],
+                      "rotation": [
+                        0,
+                        -1.5707963267948966,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": true,
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": true,
+                        "position": [
+                          -1.96,
+                          0.004,
+                          -3.3
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {
+                        "hips": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0.32,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "torso": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "head": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        }
+                      }
+                    },
+                    "mori": {
+                      "visible": true,
+                      "position": [
+                        -0.4,
+                        0.15467461210317088,
+                        -3.25
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": true,
+                      "seatOut": [
+                        -0.4,
+                        -3.75
+                      ],
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": true,
+                        "position": [
+                          -0.4,
+                          0.004,
+                          -3.25
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {
+                        "hips": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0.32,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "torso": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "head": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        }
+                      }
+                    },
+                    "aoi": {
+                      "visible": false,
+                      "position": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": false,
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": false,
+                        "position": [
+                          0,
+                          0.004,
+                          0
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {
+                        "hips": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0.32,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "torso": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "head": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "arms1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "legs1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees0": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        },
+                        "knees1": {
+                          "visible": true,
+                          "position": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "rotation": [
+                            0,
+                            0,
+                            0,
+                            "XYZ"
+                          ]
+                        }
+                      }
+                    },
+                    "mio": {
+                      "visible": false,
+                      "position": [
+                        2.1,
+                        0,
+                        -0.94
+                      ],
+                      "rotation": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "seated": false,
+                      "lookTarget": null,
+                      "blob": {
+                        "visible": true,
+                        "position": [
+                          0,
+                          0.004,
+                          0
+                        ],
+                        "rotation": [
+                          -1.5707963267948966,
+                          0,
+                          0,
+                          "XYZ"
+                        ]
+                      },
+                      "pose": {}
+                    }
+                  },
+                  "shot": {
+                    "shot": null,
+                    "home": null
+                  },
+                  "props": [
+                    {
+                      "p": [
+                        1.1570710678118656,
+                        0.46,
+                        -2.4505025253169417
+                      ],
+                      "r": [
+                        -1.5707963267948966,
+                        0.14189705460416405,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        3.93,
+                        1.0900000000000003,
+                        -2.9
+                      ],
+                      "r": [
+                        0,
+                        -1.5707963267948966,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        -1.96,
+                        0.22,
+                        -3.3
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        1.5,
+                        0.46,
+                        -2.3
+                      ],
+                      "r": [
+                        -1.5707963267948966,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        1.5,
+                        0.47500000000000003,
+                        -2.3
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        1.62,
+                        0.47500000000000003,
+                        -2.3
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        0,
+                        0,
+                        0.002
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": true
+                    }
+                  ]
+                },
+                "monday": {
+                  "props": [
+                    {
+                      "p": [
+                        0.4500000000000002,
+                        0.42,
+                        -2.5
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        0.5,
+                        0.34,
+                        -3.25
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        1.5500000000000003,
+                        0.43,
+                        -2.5
+                      ],
+                      "r": [
+                        -1.5707963267948966,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        3.98,
+                        1.2400000000000002,
+                        -2.9
+                      ],
+                      "r": [
+                        0,
+                        -1.5707963267948966,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        -0.4,
+                        1.15,
+                        -4.4
+                      ],
+                      "r": [
+                        -1.5707963267948966,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    },
+                    {
+                      "p": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "r": [
+                        0,
+                        0,
+                        0,
+                        "XYZ"
+                      ],
+                      "s": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "v": false
+                    }
+                  ],
+                  "shot": {
+                    "shot": null,
+                    "home": null
+                  },
+                  "pieces": [
+                    null
+                  ]
+                }
+              },
+              "ui": {
+                "goal": "Visit someone, explore, or sleep in room 203 when you are ready.",
+                "sideGoal": "",
+                "hold": null
+              },
+              "camera": {
+                "target": [
+                  0.05,
+                  0.55,
+                  -2.75
+                ],
+                "zoom": 2.702050451517457,
+                "y": 0.55,
+                "onEric": false
+              }
+            },
+            "worldAfter": {}
+          }
+        ]
+      }
+    },
+    "line": "れタけびわむレかしリじソ。ノルウェー (Norway)ルぞコぺス。",
+    "choices": [],
+    "contacts": [],
+    "art": {
+      "active": true,
+      "prior": {
+        "eric": {
+          "visible": true,
+          "position": [
+            0,
+            0,
+            -1
+          ],
+          "rotation": [
+            0,
+            3.141592653589793,
+            0,
+            "XYZ"
+          ],
+          "seated": false,
+          "lookTarget": null,
+          "blob": null,
+          "pose": {}
+        },
+        "mori": {
+          "visible": true,
+          "position": [
+            1.3000000000000003,
+            0,
+            -1.45
+          ],
+          "rotation": [
+            0,
+            -2.999695598985629,
+            0,
+            "XYZ"
+          ],
+          "seated": false,
+          "lookTarget": null,
+          "blob": {
+            "visible": true,
+            "position": [
+              1.3000000000000003,
+              0.004,
+              -1.45
+            ],
+            "rotation": [
+              -1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ]
+          },
+          "pose": {
+            "hips": {
+              "visible": true,
+              "position": [
+                0,
+                0.32,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "torso": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "head": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            }
+          }
+        }
+      },
+      "drawing": "blank",
+      "held": [],
+      "playerDrawing": {
+        "kind": "blank",
+        "progress": 1
+      },
+      "cupLevels": [
+        0,
+        0
+      ],
+      "shot": {
+        "shot": {
+          "point": [
+            0.05,
+            -2.75
+          ],
+          "distance": 11.534666666666665,
+          "y": 0.55,
+          "yaw": 0.1,
+          "elev": 0.8
+        },
+        "home": {
+          "yaw": 0,
+          "elev": 0.9424777960769379
+        }
+      },
+      "people": {
+        "eric": {
+          "visible": true,
+          "position": [
+            0.5,
+            0.048182119148908936,
+            -3.25
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "seated": true,
+          "seatOut": [
+            0.5,
+            -3.75
+          ],
+          "lookTarget": null,
+          "blob": null,
+          "pose": {}
+        },
+        "mori": {
+          "visible": true,
+          "position": [
+            -0.4,
+            0.15467461210317088,
+            -3.25
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "seated": true,
+          "seatOut": [
+            -0.4,
+            -3.75
+          ],
+          "lookTarget": null,
+          "blob": {
+            "visible": true,
+            "position": [
+              -0.4,
+              0.004,
+              -3.25
+            ],
+            "rotation": [
+              -1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ]
+          },
+          "pose": {
+            "hips": {
+              "visible": true,
+              "position": [
+                0,
+                0.32,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "torso": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "head": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            }
+          }
+        }
+      },
+      "props": {
+        "art-mori-paper": {
+          "visible": true,
+          "position": [
+            -0.6,
+            0.411,
+            -2.99
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-player-paper": {
+          "visible": true,
+          "position": [
+            0.3,
+            0.414,
+            -2.99
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-photograph": {
+          "visible": true,
+          "position": [
+            0.38,
+            0.419,
+            -2.35
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-pencil-0": {
+          "visible": true,
+          "position": [
+            -0.52,
+            0.425,
+            -2.94
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-pencil-1": {
+          "visible": true,
+          "position": [
+            0.38,
+            0.425,
+            -2.94
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teacup-0": {
+          "visible": true,
+          "position": [
+            -0.7,
+            0.455,
+            -2.69
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teacup-1": {
+          "visible": true,
+          "position": [
+            0.35,
+            0.455,
+            -2.69
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teapot": {
+          "visible": true,
+          "position": [
+            0.15,
+            0.49,
+            -2.99
+          ],
+          "rotation": [
+            0,
+            -1.5707963267948966,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-tea-stream": {
+          "visible": false,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        }
+      }
+    }
+  },
+  "captures": [
+    "art-pencil-0-pickup-1",
+    "art-pencil-0-place-2",
+    "mori-draw",
+    "art-pencil-0-draw-tip-3",
+    "art-pencil-0-draw-4",
+    "art-pencil-0-pickup-5",
+    "art-pencil-0-place-6",
+    "art-player-paper-pickup-7",
+    "art-player-paper-place-8"
+  ],
+  "completed": {
+    "busy": false,
+    "place": "dorm_commons",
+    "period": "evening",
+    "flags": {
+      "gate_magic": true,
+      "dorm_room_known": true,
+      "going_home": true,
+      "lunch_mio": true,
+      "mio_warm": 2,
+      "d2_started": true,
+      "d2_station_seen": true,
+      "d2_checked": true,
+      "d2_ticket_done": true,
+      "d2_order_sensor": true,
+      "d2_brief_done": true,
+      "d2_shift_done": true,
+      "d2_met_kenji": true,
+      "d2_ate": true,
+      "d2_food": "riceball",
+      "d2_party_done": true,
+      "d2_complete": true,
+      "ticket_T0001": "done",
+      "ticket_T0002": "progress",
+      "ticketread_T0001": true,
+      "ticketread_T0002": true,
+      "d3_complete": true,
+      "d4_complete": true,
+      "day": 6,
+      "period": "evening",
+      "place": "dorm_commons",
+      "ongoing_workday": true,
+      "ongoing_tennis_day": false,
+      "ongoing_team_day": false,
+      "ongoing_art_day": true,
+      "ongoing_winter_day": false,
+      "ongoing_art_ready": true,
+      "ongoing_winter_ready": false,
+      "period_early": false,
+      "period_morning": false,
+      "period_lunch": false,
+      "period_afternoon": false,
+      "period_evening": true,
+      "club_art": true,
+      "clubday_art": 6,
+      "clubprog_art": 1,
+      "art_action_completed": true,
+      "met_mio": true,
+      "met_guard": true,
+      "met_kuroda": true,
+      "met_emi": true,
+      "met_kenji": true,
+      "met_mori": true,
+      "art_photo_seen": true,
+      "rem_mori_norway_photo": true,
+      "art_first_page": true,
+      "bond_mori": 1,
+      "step_mori": 1,
+      "bondready_mori": 0,
+      "art_first_day": 6
+    },
+    "recovery": null,
+    "execution": {
+      "onceDone": [],
+      "execution": null
+    },
+    "choices": [],
+    "contacts": [
+      {
+        "item": "art-pencil-0",
+        "phase": "pickup",
+        "hand": [
+          -0.5179479506512833,
+          0.43319475111630423,
+          -2.9607332540371374
+        ],
+        "target": [
+          -0.52,
+          0.425,
+          -2.94
+        ],
+        "gap": 0.02238822626641544
+      },
+      {
+        "item": "art-pencil-0",
+        "phase": "place",
+        "hand": [
+          -0.5182909634197472,
+          0.510971285327461,
+          -2.951708056443458
+        ],
+        "target": [
+          -0.52,
+          0.51,
+          -2.94
+        ],
+        "gap": 0.011871932736634776
+      },
+      {
+        "item": "art-pencil-0",
+        "phase": "draw-tip",
+        "gap": 0.01358137649783679
+      },
+      {
+        "item": "art-pencil-0",
+        "phase": "draw",
+        "hand": [
+          -0.43878687622507795,
+          0.4646536659444397,
+          -2.95990602860951
+        ],
+        "target": [
+          -0.4362965969487565,
+          0.4606818084094014,
+          -2.9471595958469567
+        ],
+        "gap": 0.0135811888773777
+      },
+      {
+        "item": "art-pencil-0",
+        "phase": "pickup",
+        "hand": [
+          -0.4399995461983338,
+          0.4667702299498935,
+          -2.9665361142580373
+        ],
+        "target": [
+          -0.43878687622507795,
+          0.4646536659444397,
+          -2.95990602860951
+        ],
+        "gap": 0.007064591096449006
+      },
+      {
+        "item": "art-pencil-0",
+        "phase": "place",
+        "hand": [
+          -0.5179479364881858,
+          0.4331950368685972,
+          -2.9607336290013118
+        ],
+        "target": [
+          -0.52,
+          0.425,
+          -2.94
+        ],
+        "gap": 0.022388679404963252
+      },
+      {
+        "item": "art-player-paper",
+        "phase": "pickup",
+        "hand": [
+          0.3016057115836238,
+          0.41390467792562785,
+          -2.9922117722023445
+        ],
+        "target": [
+          0.3,
+          0.414,
+          -2.99
+        ],
+        "gap": 0.0027348367890441083
+      },
+      {
+        "item": "art-player-paper",
+        "phase": "place",
+        "hand": [
+          0.14803768956215996,
+          0.42396643316793076,
+          -3.0132118915684716
+        ],
+        "target": [
+          0.12,
+          0.415,
+          -2.99
+        ],
+        "gap": 0.03748734279627585
+      }
+    ],
+    "art": {
+      "active": false,
+      "prior": null,
+      "drawing": "oversize",
+      "held": [],
+      "playerDrawing": {
+        "kind": "blank",
+        "progress": 1
+      },
+      "cupLevels": [
+        0,
+        0
+      ],
+      "shot": {
+        "shot": null,
+        "home": null
+      },
+      "people": {
+        "eric": {
+          "visible": true,
+          "position": [
+            0,
+            0,
+            -1
+          ],
+          "rotation": [
+            0,
+            3.141592653589793,
+            0,
+            "XYZ"
+          ],
+          "seated": false,
+          "lookTarget": null,
+          "blob": null,
+          "pose": {}
+        },
+        "mori": {
+          "visible": true,
+          "position": [
+            1.3000000000000003,
+            0,
+            -1.45
+          ],
+          "rotation": [
+            0,
+            -2.999695598985629,
+            0,
+            "XYZ"
+          ],
+          "seated": false,
+          "lookTarget": null,
+          "blob": {
+            "visible": true,
+            "position": [
+              1.3000000000000003,
+              0.004,
+              -1.45
+            ],
+            "rotation": [
+              -1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ]
+          },
+          "pose": {
+            "hips": {
+              "visible": true,
+              "position": [
+                0,
+                0.32,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "torso": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "head": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "arms1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "legs1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees0": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            },
+            "knees1": {
+              "visible": true,
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                "XYZ"
+              ]
+            }
+          }
+        }
+      },
+      "props": {
+        "art-mori-paper": {
+          "visible": true,
+          "position": [
+            -0.6,
+            0.411,
+            -2.99
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-player-paper": {
+          "visible": true,
+          "position": [
+            0.3,
+            0.414,
+            -2.99
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-photograph": {
+          "visible": true,
+          "position": [
+            0.38,
+            0.419,
+            -2.35
+          ],
+          "rotation": [
+            -1.5707963267948963,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-pencil-0": {
+          "visible": true,
+          "position": [
+            -0.52,
+            0.425,
+            -2.94
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-pencil-1": {
+          "visible": true,
+          "position": [
+            0.38,
+            0.425,
+            -2.94
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teacup-0": {
+          "visible": true,
+          "position": [
+            -0.7,
+            0.455,
+            -2.69
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teacup-1": {
+          "visible": true,
+          "position": [
+            0.35,
+            0.455,
+            -2.69
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-teapot": {
+          "visible": true,
+          "position": [
+            0.15,
+            0.49,
+            -2.99
+          ],
+          "rotation": [
+            0,
+            -1.5707963267948966,
+            0,
+            "XYZ"
+          ]
+        },
+        "art-tea-stream": {
+          "visible": false,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        }
+      }
+    }
+  },
+  "continued": true,
+  "pass": true
+}

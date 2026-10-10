@@ -1,0 +1,202 @@
+{
+  "title": "Crowd pilot 5: Meshy textures",
+  "blurb": "Jørgen selected a-image and b-image. Selected A is unchanged; B’s pale fringe patch is corrected on the original UV. Every earlier attempt remains available. Native mesh, weights and clips are preserved.",
+  "rigs": {
+    "kenji": {
+      "id": "kenji",
+      "label": "Kenji (in game)",
+      "dir": "game3d/assets/characters/kenji/",
+      "idle": "game3d/assets/characters/relaxed-idle-kenji.json",
+      "height": 1.12
+    },
+    "kuro": {
+      "id": "kuro",
+      "label": "Kuro (in game)",
+      "dir": "game3d/assets/characters/kuro/",
+      "idle": "game3d/assets/characters/relaxed-idle-kuro.json",
+      "height": 1.12
+    },
+    "aoi": {
+      "id": "aoi",
+      "label": "Aoi (in game)",
+      "dir": "game3d/assets/characters/aoi/",
+      "idle": "game3d/assets/characters/relaxed-idle-aoi.json",
+      "height": 1.09
+    },
+    "emi": {
+      "id": "emi",
+      "label": "Emi (in game)",
+      "dir": "game3d/assets/characters/emi/",
+      "idle": "game3d/assets/characters/relaxed-idle-emi.json",
+      "height": 1.09
+    },
+    "a-image": {
+      "id": "crowd5-a-image",
+      "label": "a-image: Meshy",
+      "dir": "art/parts/crowd-pilot-5/game/a-image/",
+      "idle": "art/parts/crowd-pilot-5/game/a-image/idle.json",
+      "height": 1.09
+    },
+    "b-image": {
+      "id": "crowd5-b-image",
+      "label": "b-image: Meshy",
+      "dir": "art/parts/crowd-pilot-5/game/b-image/",
+      "idle": "art/parts/crowd-pilot-5/game/b-image/idle.json",
+      "height": 1.06
+    },
+    "a-text": {
+      "id": "crowd5-a-text",
+      "label": "a-text: Meshy",
+      "dir": "art/parts/crowd-pilot-5/game/a-text/",
+      "idle": "art/parts/crowd-pilot-5/game/a-text/idle.json",
+      "height": 1.09
+    },
+    "b-text": {
+      "id": "crowd5-b-text",
+      "label": "b-text: Meshy",
+      "dir": "art/parts/crowd-pilot-5/game/b-text/",
+      "idle": "art/parts/crowd-pilot-5/game/b-text/idle.json",
+      "height": 1.06
+    },
+    "a-selected": {
+      "id": "crowd-a",
+      "label": "A selected, unchanged",
+      "dir": "art/parts/crowd-selected-1/game/a/",
+      "idle": "art/parts/crowd-selected-1/game/a/idle.json",
+      "height": 1.09
+    },
+    "b-selected": {
+      "id": "crowd-b",
+      "label": "B selected, fringe correction",
+      "dir": "art/parts/crowd-selected-1/game/b/",
+      "idle": "art/parts/crowd-selected-1/game/b/idle.json",
+      "height": 1.06
+    }
+  },
+  "scenes": {
+    "pair": {
+      "label": "Text-guided retry",
+      "items": [
+        {
+          "rig": "a-text"
+        },
+        {
+          "rig": "b-text"
+        }
+      ],
+      "gap": 0.9
+    },
+    "cast": {
+      "label": "Beside current cast",
+      "items": [
+        {
+          "rig": "kenji"
+        },
+        {
+          "rig": "a-text"
+        },
+        {
+          "rig": "kuro"
+        },
+        {
+          "rig": "aoi"
+        },
+        {
+          "rig": "b-text"
+        },
+        {
+          "rig": "emi"
+        }
+      ],
+      "gap": 0.85
+    },
+    "image": {
+      "label": "First image-guided attempts (rejected)",
+      "items": [
+        {
+          "rig": "a-image"
+        },
+        {
+          "rig": "b-image"
+        }
+      ],
+      "gap": 0.9
+    },
+    "alternatives": {
+      "label": "Every Meshy attempt",
+      "items": [
+        {
+          "rig": "a-image"
+        },
+        {
+          "rig": "a-text"
+        },
+        {
+          "rig": "b-image"
+        },
+        {
+          "rig": "b-text"
+        }
+      ],
+      "gap": 0.85
+    },
+    "selected": {
+      "label": "Selected pair + corrected fringe",
+      "items": [
+        {
+          "rig": "a-selected"
+        },
+        {
+          "rig": "b-selected"
+        }
+      ],
+      "gap": 0.9
+    },
+    "hair": {
+      "label": "B original / fringe correction",
+      "items": [
+        {
+          "rig": "b-image"
+        },
+        {
+          "rig": "b-selected"
+        }
+      ],
+      "gap": 0.9
+    },
+    "selected-cast": {
+      "label": "Selected beside cast",
+      "items": [
+        {
+          "rig": "kenji"
+        },
+        {
+          "rig": "a-selected"
+        },
+        {
+          "rig": "kuro"
+        },
+        {
+          "rig": "aoi"
+        },
+        {
+          "rig": "b-selected"
+        },
+        {
+          "rig": "emi"
+        }
+      ],
+      "gap": 0.8
+    }
+  },
+  "closeups": [
+    "a-text",
+    "b-text",
+    "a-image",
+    "b-image",
+    "kenji",
+    "kuro",
+    "aoi",
+    "emi"
+  ]
+}

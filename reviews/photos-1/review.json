@@ -1,0 +1,494 @@
+{
+ "title": "Photos finds: generated pictures, round 1",
+ "date": "2026-10-04",
+ "by": "claude-agent:photos-gen",
+ "status": "decided",
+ "question": "These are generated pictures to replace the in-game Photos collectibles (the five day-1 finds: Early train, Spring garden, At the fountain, Office company, Summer night), not in the game yet. Which picture do you want for each photo?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/photos-1/sheet.webp.webp",
+   "caption": "Pictures, not in the game yet. One row per photo: the current in-game drawing first (NOW), then every attempt in the order made, rejects included. Your note: \"these collectibles must be generatoed, they look like shit\" (notes/feedback-game/2026-10-04_193007). One style block, one light line (\"Soft light, gentle muted colours, a quiet everyday moment.\") and one size (1152x864, the 4:3 of the print) for all five. Pass a: each photo on RDBT and One Obsession, seeds 11-13. One Obsession was softer and closer to one set on all five (RDBT came out flat and saturated, with grimy office walls and pigeons in a row), so passes b-d are One Obsession only, one change each. Closest per photo by my check: Early train monorail-d-oneobs-11 or -13 (odd disc on one pillar); Spring garden cherry-a-oneobs-11; At the fountain pigeons-a-oneobs-13 or -11; Office company cat-a-oneobs-13, cat-b-oneobs-12 or -13; Summer night fireworks-b-oneobs-11. cat-b-oneobs-14 asks a separate question: the drawing has a ginger cat, but Tama, who sleeps in B2, is a calico. Day 2 has no photo finds. Scripts: art/candidates/photos-1/ (gen.py has the staging notes)."
+  },
+  {
+   "image": "art/candidates/photos-1/monorail-lines.webp",
+   "caption": "The line sketch used for the Early train in passes c and d (LLLite lineart). Words alone drew railway trains on bridges that end in the sea (passes a and b)."
+  }
+ ],
+ "options": [
+  {
+   "id": "monorail-a-rdbt-11",
+   "label": "monorail-a-rdbt-11 · Early train",
+   "image": "art/candidates/photos-1/monorail-a-rdbt-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. An ordinary railway train of five or more cars on a railway bridge with railings, not a monorail; the left end is cut off. The bridge runs across the frame and the light is right. Change this pass: first pass. RDBT, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-a-rdbt-12",
+   "label": "monorail-a-rdbt-12 · Early train",
+   "image": "art/candidates/photos-1/monorail-a-rdbt-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. A railway train of three-plus cars on a bridge that ends in mid-sea just past the train. Change this pass: first pass. RDBT, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-a-rdbt-13",
+   "label": "monorail-a-rdbt-13 · Early train",
+   "image": "art/candidates/photos-1/monorail-a-rdbt-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. A railway train on a bridge that ends in mid-sea; two pillars. Change this pass: first pass. RDBT, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-a-oneobs-11",
+   "label": "monorail-a-oneobs-11 · Early train",
+   "image": "art/candidates/photos-1/monorail-a-oneobs-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. An endless train on a double track running to the horizon, with a mountain shore behind. Change this pass: first pass. One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-a-oneobs-12",
+   "label": "monorail-a-oneobs-12 · Early train",
+   "image": "art/candidates/photos-1/monorail-a-oneobs-12.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. A tram-like train on a railway bridge that ends in mid-sea under the sun. Change this pass: first pass. One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-a-oneobs-13",
+   "label": "monorail-a-oneobs-13 · Early train",
+   "image": "art/candidates/photos-1/monorail-a-oneobs-13.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. A railway train on a bridge with rails; the bridge stops at the right. Change this pass: first pass. One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cherry-a-rdbt-11",
+   "label": "cherry-a-rdbt-11 · Spring garden",
+   "image": "art/candidates/photos-1/cherry-a-rdbt-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cherry.webp"
+   ],
+   "note": "Spring garden (photo_forecourt, found in the forecourt garden). Second picture: the current in-game drawing. Check: Flat and saturated: teal sky and blossom drawn as small pink blocks. Tree on the left over a lantern on the right, gravel in front. Logic fine. Change this pass: first pass. RDBT, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, a Japanese garden in spring. A cherry tree in full bloom stands on the left, its branches reaching over a stone lantern on the right. Raked pale gravel in front, with a few fallen petals. A low clipped hedge and blue sky behind. Morning sunlight. Dominant soft pink and pale grey, broad sky blue, sparse green accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cherry-a-rdbt-12",
+   "label": "cherry-a-rdbt-12 · Spring garden",
+   "image": "art/candidates/photos-1/cherry-a-rdbt-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cherry.webp"
+   ],
+   "note": "Spring garden (photo_forecourt, found in the forecourt garden). Second picture: the current in-game drawing. Check: Flat and saturated, same look as rdbt-11. Ring of rocks round the trunk; gravel. Logic fine. Change this pass: first pass. RDBT, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, a Japanese garden in spring. A cherry tree in full bloom stands on the left, its branches reaching over a stone lantern on the right. Raked pale gravel in front, with a few fallen petals. A low clipped hedge and blue sky behind. Morning sunlight. Dominant soft pink and pale grey, broad sky blue, sparse green accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cherry-a-rdbt-13",
+   "label": "cherry-a-rdbt-13 · Spring garden",
+   "image": "art/candidates/photos-1/cherry-a-rdbt-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cherry.webp"
+   ],
+   "note": "Spring garden (photo_forecourt, found in the forecourt garden). Second picture: the current in-game drawing. Check: Flat and saturated. Tree and lantern as asked, a gravel strip in front. Logic fine. Change this pass: first pass. RDBT, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, a Japanese garden in spring. A cherry tree in full bloom stands on the left, its branches reaching over a stone lantern on the right. Raked pale gravel in front, with a few fallen petals. A low clipped hedge and blue sky behind. Morning sunlight. Dominant soft pink and pale grey, broad sky blue, sparse green accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cherry-a-oneobs-11",
+   "label": "cherry-a-oneobs-11 · Spring garden",
+   "image": "art/candidates/photos-1/cherry-a-oneobs-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cherry.webp"
+   ],
+   "note": "Spring garden (photo_forecourt, found in the forecourt garden). Second picture: the current in-game drawing. Check: Pass. Soft painted look; tree on the left over a stone lantern, gravel raked round the trunk, hedge, a tiled-roof building corner on the right. Change this pass: first pass. One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, a Japanese garden in spring. A cherry tree in full bloom stands on the left, its branches reaching over a stone lantern on the right. Raked pale gravel in front, with a few fallen petals. A low clipped hedge and blue sky behind. Morning sunlight. Dominant soft pink and pale grey, broad sky blue, sparse green accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cherry-a-oneobs-12",
+   "label": "cherry-a-oneobs-12 · Spring garden",
+   "image": "art/candidates/photos-1/cherry-a-oneobs-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cherry.webp"
+   ],
+   "note": "Spring garden (photo_forecourt, found in the forecourt garden). Second picture: the current in-game drawing. Check: Pass. Soft; tree, lantern and rocks along the hedge, plain gravel (not raked). Change this pass: first pass. One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, a Japanese garden in spring. A cherry tree in full bloom stands on the left, its branches reaching over a stone lantern on the right. Raked pale gravel in front, with a few fallen petals. A low clipped hedge and blue sky behind. Morning sunlight. Dominant soft pink and pale grey, broad sky blue, sparse green accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cherry-a-oneobs-13",
+   "label": "cherry-a-oneobs-13 · Spring garden",
+   "image": "art/candidates/photos-1/cherry-a-oneobs-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cherry.webp"
+   ],
+   "note": "Spring garden (photo_forecourt, found in the forecourt garden). Second picture: the current in-game drawing. Check: Pass. Soft; the lantern on the right edge, plain pale gravel. Change this pass: first pass. One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, a Japanese garden in spring. A cherry tree in full bloom stands on the left, its branches reaching over a stone lantern on the right. Raked pale gravel in front, with a few fallen petals. A low clipped hedge and blue sky behind. Morning sunlight. Dominant soft pink and pale grey, broad sky blue, sparse green accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "pigeons-a-rdbt-11",
+   "label": "pigeons-a-rdbt-11 · At the fountain",
+   "image": "art/candidates/photos-1/pigeons-a-rdbt-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-pigeons.webp"
+   ],
+   "note": "At the fountain (photo_plaza, found in the plaza). Second picture: the current in-game drawing. Check: Stiff. Five pigeons standing in a row like a lineup; fountain behind. Logic fine. Change this pass: first pass. RDBT, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, low view across pale stone paving toward the round stone rim of a wide fountain. Five grey pigeons peck and walk on the paving in front. Clear water in the basin, and a two-tier stone centrepiece further back with water spilling from its bowls. Trees behind. Daylight. Dominant pale stone grey and water blue, broad green, sparse iridescent green and purple accents on the pigeons. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "pigeons-a-rdbt-12",
+   "label": "pigeons-a-rdbt-12 · At the fountain",
+   "image": "art/candidates/photos-1/pigeons-a-rdbt-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-pigeons.webp"
+   ],
+   "note": "At the fountain (photo_plaza, found in the plaza). Second picture: the current in-game drawing. Check: Stiff. Seven pigeons in a row; grass strip at the bottom. Change this pass: first pass. RDBT, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, low view across pale stone paving toward the round stone rim of a wide fountain. Five grey pigeons peck and walk on the paving in front. Clear water in the basin, and a two-tier stone centrepiece further back with water spilling from its bowls. Trees behind. Daylight. Dominant pale stone grey and water blue, broad green, sparse iridescent green and purple accents on the pigeons. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "pigeons-a-rdbt-13",
+   "label": "pigeons-a-rdbt-13 · At the fountain",
+   "image": "art/candidates/photos-1/pigeons-a-rdbt-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-pigeons.webp"
+   ],
+   "note": "At the fountain (photo_plaza, found in the plaza). Second picture: the current in-game drawing. Check: Stiff. Five pigeons in a row, a sixth on the rim. Change this pass: first pass. RDBT, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, low view across pale stone paving toward the round stone rim of a wide fountain. Five grey pigeons peck and walk on the paving in front. Clear water in the basin, and a two-tier stone centrepiece further back with water spilling from its bowls. Trees behind. Daylight. Dominant pale stone grey and water blue, broad green, sparse iridescent green and purple accents on the pigeons. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "pigeons-a-oneobs-11",
+   "label": "pigeons-a-oneobs-11 · At the fountain",
+   "image": "art/candidates/photos-1/pigeons-a-oneobs-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-pigeons.webp"
+   ],
+   "note": "At the fountain (photo_plaza, found in the plaza). Second picture: the current in-game drawing. Check: Pass. Soft; pigeons scattered naturally, a few tiny ones on the far rim. Two-tier fountain. Change this pass: first pass. One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, low view across pale stone paving toward the round stone rim of a wide fountain. Five grey pigeons peck and walk on the paving in front. Clear water in the basin, and a two-tier stone centrepiece further back with water spilling from its bowls. Trees behind. Daylight. Dominant pale stone grey and water blue, broad green, sparse iridescent green and purple accents on the pigeons. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "pigeons-a-oneobs-12",
+   "label": "pigeons-a-oneobs-12 · At the fountain",
+   "image": "art/candidates/photos-1/pigeons-a-oneobs-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-pigeons.webp"
+   ],
+   "note": "At the fountain (photo_plaza, found in the plaza). Second picture: the current in-game drawing. Check: Reject. One pigeon is a blurred ghost; two stone posts flank the fountain. Change this pass: first pass. One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, low view across pale stone paving toward the round stone rim of a wide fountain. Five grey pigeons peck and walk on the paving in front. Clear water in the basin, and a two-tier stone centrepiece further back with water spilling from its bowls. Trees behind. Daylight. Dominant pale stone grey and water blue, broad green, sparse iridescent green and purple accents on the pigeons. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "pigeons-a-oneobs-13",
+   "label": "pigeons-a-oneobs-13 · At the fountain",
+   "image": "art/candidates/photos-1/pigeons-a-oneobs-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-pigeons.webp"
+   ],
+   "note": "At the fountain (photo_plaza, found in the plaza). Second picture: the current in-game drawing. Check: Pass. Soft; six pigeons scattered on pale paving, two-tier fountain behind. Change this pass: first pass. One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, low view across pale stone paving toward the round stone rim of a wide fountain. Five grey pigeons peck and walk on the paving in front. Clear water in the basin, and a two-tier stone centrepiece further back with water spilling from its bowls. Trees behind. Daylight. Dominant pale stone grey and water blue, broad green, sparse iridescent green and purple accents on the pigeons. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cat-a-rdbt-11",
+   "label": "cat-a-rdbt-11 · Office company",
+   "image": "art/candidates/photos-1/cat-a-rdbt-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cat.webp"
+   ],
+   "note": "Office company (photo_office, found in the B2 copy room). Second picture: the current in-game drawing. Check: Reject. The cat sleeps beside the keyboard, not on it; rusty, stained walls. Change this pass: first pass. RDBT, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, a ginger tabby cat curled up asleep on a beige computer keyboard on a grey steel office desk, seen from slightly above. An old beige CRT monitor behind the keyboard, its screen glowing pale blue. A dim grey wall behind, cool fluorescent ceiling light, no window. Dominant cool grey and beige, broad pale blue screen light, sparse warm orange of the cat. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cat-a-rdbt-12",
+   "label": "cat-a-rdbt-12 · Office company",
+   "image": "art/candidates/photos-1/cat-a-rdbt-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cat.webp"
+   ],
+   "note": "Office company (photo_office, found in the B2 copy room). Second picture: the current in-game drawing. Check: The cat is on the keyboard; two monitors; rusty, grimy walls. Change this pass: first pass. RDBT, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, a ginger tabby cat curled up asleep on a beige computer keyboard on a grey steel office desk, seen from slightly above. An old beige CRT monitor behind the keyboard, its screen glowing pale blue. A dim grey wall behind, cool fluorescent ceiling light, no window. Dominant cool grey and beige, broad pale blue screen light, sparse warm orange of the cat. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cat-a-rdbt-13",
+   "label": "cat-a-rdbt-13 · Office company",
+   "image": "art/candidates/photos-1/cat-a-rdbt-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cat.webp"
+   ],
+   "note": "Office company (photo_office, found in the B2 copy room). Second picture: the current in-game drawing. Check: Reject. The cat beside the keyboard; grimy walls. Change this pass: first pass. RDBT, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, a ginger tabby cat curled up asleep on a beige computer keyboard on a grey steel office desk, seen from slightly above. An old beige CRT monitor behind the keyboard, its screen glowing pale blue. A dim grey wall behind, cool fluorescent ceiling light, no window. Dominant cool grey and beige, broad pale blue screen light, sparse warm orange of the cat. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cat-a-oneobs-11",
+   "label": "cat-a-oneobs-11 · Office company",
+   "image": "art/candidates/photos-1/cat-a-oneobs-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cat.webp"
+   ],
+   "note": "Office company (photo_office, found in the B2 copy room). Second picture: the current in-game drawing. Check: The cat is on the keyboard; two monitors and a tower. Clean basement, fluorescent light. Change this pass: first pass. One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, a ginger tabby cat curled up asleep on a beige computer keyboard on a grey steel office desk, seen from slightly above. An old beige CRT monitor behind the keyboard, its screen glowing pale blue. A dim grey wall behind, cool fluorescent ceiling light, no window. Dominant cool grey and beige, broad pale blue screen light, sparse warm orange of the cat. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cat-a-oneobs-12",
+   "label": "cat-a-oneobs-12 · Office company",
+   "image": "art/candidates/photos-1/cat-a-oneobs-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cat.webp"
+   ],
+   "note": "Office company (photo_office, found in the B2 copy room). Second picture: the current in-game drawing. Check: Reject. The cat lies on the desk next to the keyboard. Change this pass: first pass. One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, a ginger tabby cat curled up asleep on a beige computer keyboard on a grey steel office desk, seen from slightly above. An old beige CRT monitor behind the keyboard, its screen glowing pale blue. A dim grey wall behind, cool fluorescent ceiling light, no window. Dominant cool grey and beige, broad pale blue screen light, sparse warm orange of the cat. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cat-a-oneobs-13",
+   "label": "cat-a-oneobs-13 · Office company",
+   "image": "art/candidates/photos-1/cat-a-oneobs-13.webp",
+   "images": [
+    "art/candidates/photos-1/current-cat.webp"
+   ],
+   "note": "Office company (photo_office, found in the B2 copy room). Second picture: the current in-game drawing. Check: Pass. One monitor, the cat curled on the keyboard, a fluorescent tube, no window. Change this pass: first pass. One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, a ginger tabby cat curled up asleep on a beige computer keyboard on a grey steel office desk, seen from slightly above. An old beige CRT monitor behind the keyboard, its screen glowing pale blue. A dim grey wall behind, cool fluorescent ceiling light, no window. Dominant cool grey and beige, broad pale blue screen light, sparse warm orange of the cat. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "fireworks-a-rdbt-11",
+   "label": "fireworks-a-rdbt-11 · Summer night",
+   "image": "art/candidates/photos-1/fireworks-a-rdbt-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-fireworks.webp"
+   ],
+   "note": "Summer night (photo_dorm, found in the dorm courtyard). Second picture: the current in-game drawing. Check: Fireworks over the sea, but the houses in front are Western, with chimneys. Some bursts sit low on the horizon. Change this pass: first pass. RDBT, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, night view over the dark low roofs of a few apartment buildings toward the sea. Some windows are lit warm yellow. Fireworks burst in the night sky above the sea in gold, pale blue and pink, with thin drifting smoke. The calm dark sea reflects their colours. Dominant deep navy, broad dark slate, sparse gold, pale blue and pink accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "fireworks-a-rdbt-12",
+   "label": "fireworks-a-rdbt-12 · Summer night",
+   "image": "art/candidates/photos-1/fireworks-a-rdbt-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-fireworks.webp"
+   ],
+   "note": "Summer night (photo_dorm, found in the dorm courtyard). Second picture: the current in-game drawing. Check: Western houses with chimneys in front; bright waves. Change this pass: first pass. RDBT, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, night view over the dark low roofs of a few apartment buildings toward the sea. Some windows are lit warm yellow. Fireworks burst in the night sky above the sea in gold, pale blue and pink, with thin drifting smoke. The calm dark sea reflects their colours. Dominant deep navy, broad dark slate, sparse gold, pale blue and pink accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "fireworks-a-rdbt-13",
+   "label": "fireworks-a-rdbt-13 · Summer night",
+   "image": "art/candidates/photos-1/fireworks-a-rdbt-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-fireworks.webp"
+   ],
+   "note": "Summer night (photo_dorm, found in the dorm courtyard). Second picture: the current in-game drawing. Check: Western-style houses with tiled roofs; fireworks fine. Change this pass: first pass. RDBT, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, night view over the dark low roofs of a few apartment buildings toward the sea. Some windows are lit warm yellow. Fireworks burst in the night sky above the sea in gold, pale blue and pink, with thin drifting smoke. The calm dark sea reflects their colours. Dominant deep navy, broad dark slate, sparse gold, pale blue and pink accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "fireworks-a-oneobs-11",
+   "label": "fireworks-a-oneobs-11 · Summer night",
+   "image": "art/candidates/photos-1/fireworks-a-oneobs-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-fireworks.webp"
+   ],
+   "note": "Summer night (photo_dorm, found in the dorm courtyard). Second picture: the current in-game drawing. Check: Pitched-roof houses in front; soft, many bursts, reflections on the sea. Change this pass: first pass. One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, night view over the dark low roofs of a few apartment buildings toward the sea. Some windows are lit warm yellow. Fireworks burst in the night sky above the sea in gold, pale blue and pink, with thin drifting smoke. The calm dark sea reflects their colours. Dominant deep navy, broad dark slate, sparse gold, pale blue and pink accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "fireworks-a-oneobs-12",
+   "label": "fireworks-a-oneobs-12 · Summer night",
+   "image": "art/candidates/photos-1/fireworks-a-oneobs-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-fireworks.webp"
+   ],
+   "note": "Summer night (photo_dorm, found in the dorm courtyard). Second picture: the current in-game drawing. Check: Pitched-roof houses; small bursts further off. Change this pass: first pass. One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, night view over the dark low roofs of a few apartment buildings toward the sea. Some windows are lit warm yellow. Fireworks burst in the night sky above the sea in gold, pale blue and pink, with thin drifting smoke. The calm dark sea reflects their colours. Dominant deep navy, broad dark slate, sparse gold, pale blue and pink accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "fireworks-a-oneobs-13",
+   "label": "fireworks-a-oneobs-13 · Summer night",
+   "image": "art/candidates/photos-1/fireworks-a-oneobs-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-fireworks.webp"
+   ],
+   "note": "Summer night (photo_dorm, found in the dorm courtyard). Second picture: the current in-game drawing. Check: Japanese-style tiled roofs, a big gold burst; calm. Change this pass: first pass. One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, night view over the dark low roofs of a few apartment buildings toward the sea. Some windows are lit warm yellow. Fireworks burst in the night sky above the sea in gold, pale blue and pink, with thin drifting smoke. The calm dark sea reflects their colours. Dominant deep navy, broad dark slate, sparse gold, pale blue and pink accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-b-oneobs-11",
+   "label": "monorail-b-oneobs-11 · Early train",
+   "image": "art/candidates/photos-1/monorail-b-oneobs-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. 'Astride, no rails' still drew a train on rails, now coming toward the camera and running to the horizon. Change this pass: the train sits astride one narrow beam, no rails (pass a drew railway trains on a bridge). One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A single narrow white concrete beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits astride the beam, left of centre, with no rails. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-b-oneobs-12",
+   "label": "monorail-b-oneobs-12 · Early train",
+   "image": "art/candidates/photos-1/monorail-b-oneobs-12.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. The beam ends in mid-sea; the train hangs off its end. Change this pass: the train sits astride one narrow beam, no rails (pass a drew railway trains on a bridge). One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A single narrow white concrete beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits astride the beam, left of centre, with no rails. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-b-oneobs-13",
+   "label": "monorail-b-oneobs-13 · Early train",
+   "image": "art/candidates/photos-1/monorail-b-oneobs-13.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. A long train of six cars on a deck that runs off to the horizon. Change this pass: the train sits astride one narrow beam, no rails (pass a drew railway trains on a bridge). One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A single narrow white concrete beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits astride the beam, left of centre, with no rails. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cherry-b-oneobs-11",
+   "label": "cherry-b-oneobs-11 · Spring garden",
+   "image": "art/candidates/photos-1/cherry-b-oneobs-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cherry.webp"
+   ],
+   "note": "Spring garden (photo_forecourt, found in the forecourt garden). Second picture: the current in-game drawing. Check: Reject. 'Raked into straight parallel lines' became stone slabs in front. Change this pass: gravel raked into straight lines (pass a: plain gravel on 2 of 3). One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, a Japanese garden in spring. A cherry tree in full bloom stands on the left, its branches reaching over a stone lantern on the right. Pale gravel raked into straight parallel lines in front, with a few fallen petals. A low clipped hedge and blue sky behind. Morning sunlight. Dominant soft pink and pale grey, broad sky blue, sparse green accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cherry-b-oneobs-12",
+   "label": "cherry-b-oneobs-12 · Spring garden",
+   "image": "art/candidates/photos-1/cherry-b-oneobs-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cherry.webp"
+   ],
+   "note": "Spring garden (photo_forecourt, found in the forecourt garden). Second picture: the current in-game drawing. Check: Reject. Stone slabs in front again. Change this pass: gravel raked into straight lines (pass a: plain gravel on 2 of 3). One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, a Japanese garden in spring. A cherry tree in full bloom stands on the left, its branches reaching over a stone lantern on the right. Pale gravel raked into straight parallel lines in front, with a few fallen petals. A low clipped hedge and blue sky behind. Morning sunlight. Dominant soft pink and pale grey, broad sky blue, sparse green accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cherry-b-oneobs-13",
+   "label": "cherry-b-oneobs-13 · Spring garden",
+   "image": "art/candidates/photos-1/cherry-b-oneobs-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cherry.webp"
+   ],
+   "note": "Spring garden (photo_forecourt, found in the forecourt garden). Second picture: the current in-game drawing. Check: Reject. Striped paving in front. Change this pass: gravel raked into straight lines (pass a: plain gravel on 2 of 3). One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, a Japanese garden in spring. A cherry tree in full bloom stands on the left, its branches reaching over a stone lantern on the right. Pale gravel raked into straight parallel lines in front, with a few fallen petals. A low clipped hedge and blue sky behind. Morning sunlight. Dominant soft pink and pale grey, broad sky blue, sparse green accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cat-b-oneobs-11",
+   "label": "cat-b-oneobs-11 · Office company",
+   "image": "art/candidates/photos-1/cat-b-oneobs-11.webp",
+   "images": [
+    "art/candidates/photos-1/current-cat.webp"
+   ],
+   "note": "Office company (photo_office, found in the B2 copy room). Second picture: the current in-game drawing. Check: The cat on the keyboard; two monitors. Change this pass: the cat lies on top of the keys (pass a: beside the keyboard on 3 of 6). One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, a ginger tabby cat curled up asleep lying on top of the keys of a beige computer keyboard on a grey steel office desk, seen from slightly above. An old beige CRT monitor behind the keyboard, its screen glowing pale blue. A dim grey wall behind, cool fluorescent ceiling light, no window. Dominant cool grey and beige, broad pale blue screen light, sparse warm orange of the cat. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cat-b-oneobs-12",
+   "label": "cat-b-oneobs-12 · Office company",
+   "image": "art/candidates/photos-1/cat-b-oneobs-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-cat.webp"
+   ],
+   "note": "Office company (photo_office, found in the B2 copy room). Second picture: the current in-game drawing. Check: Pass. The cat on the keys, its tail over the desk edge; one monitor; fluorescent light. Change this pass: the cat lies on top of the keys (pass a: beside the keyboard on 3 of 6). One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, a ginger tabby cat curled up asleep lying on top of the keys of a beige computer keyboard on a grey steel office desk, seen from slightly above. An old beige CRT monitor behind the keyboard, its screen glowing pale blue. A dim grey wall behind, cool fluorescent ceiling light, no window. Dominant cool grey and beige, broad pale blue screen light, sparse warm orange of the cat. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cat-b-oneobs-13",
+   "label": "cat-b-oneobs-13 · Office company",
+   "image": "art/candidates/photos-1/cat-b-oneobs-13.webp",
+   "images": [
+    "art/candidates/photos-1/current-cat.webp"
+   ],
+   "note": "Office company (photo_office, found in the B2 copy room). Second picture: the current in-game drawing. Check: Pass. The cat curled on the keyboard, one monitor, fluorescent tube. Change this pass: the cat lies on top of the keys (pass a: beside the keyboard on 3 of 6). One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, a ginger tabby cat curled up asleep lying on top of the keys of a beige computer keyboard on a grey steel office desk, seen from slightly above. An old beige CRT monitor behind the keyboard, its screen glowing pale blue. A dim grey wall behind, cool fluorescent ceiling light, no window. Dominant cool grey and beige, broad pale blue screen light, sparse warm orange of the cat. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "fireworks-b-oneobs-11",
+   "label": "fireworks-b-oneobs-11 · Summer night",
+   "image": "art/candidates/photos-1/fireworks-b-oneobs-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-fireworks.webp"
+   ],
+   "note": "Summer night (photo_dorm, found in the dorm courtyard). Second picture: the current in-game drawing. Check: Pass. Low concrete apartment blocks in front with lit windows, bursts over the sea. Change this pass: flat-roofed concrete blocks (pass a: Western houses with chimneys). One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, night view over the dark flat roofs of a few low concrete apartment blocks toward the sea. Some windows are lit warm yellow. Fireworks burst in the night sky above the sea in gold, pale blue and pink, with thin drifting smoke. The calm dark sea reflects their colours. Dominant deep navy, broad dark slate, sparse gold, pale blue and pink accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "fireworks-b-oneobs-12",
+   "label": "fireworks-b-oneobs-12 · Summer night",
+   "image": "art/candidates/photos-1/fireworks-b-oneobs-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-fireworks.webp"
+   ],
+   "note": "Summer night (photo_dorm, found in the dorm courtyard). Second picture: the current in-game drawing. Check: The pitched roofs came back despite the new words. Change this pass: flat-roofed concrete blocks (pass a: Western houses with chimneys). One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, night view over the dark flat roofs of a few low concrete apartment blocks toward the sea. Some windows are lit warm yellow. Fireworks burst in the night sky above the sea in gold, pale blue and pink, with thin drifting smoke. The calm dark sea reflects their colours. Dominant deep navy, broad dark slate, sparse gold, pale blue and pink accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "fireworks-b-oneobs-13",
+   "label": "fireworks-b-oneobs-13 · Summer night",
+   "image": "art/candidates/photos-1/fireworks-b-oneobs-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-fireworks.webp"
+   ],
+   "note": "Summer night (photo_dorm, found in the dorm courtyard). Second picture: the current in-game drawing. Check: Low blocks with a few roofs; bursts and smoke over the sea. Change this pass: flat-roofed concrete blocks (pass a: Western houses with chimneys). One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, night view over the dark flat roofs of a few low concrete apartment blocks toward the sea. Some windows are lit warm yellow. Fireworks burst in the night sky above the sea in gold, pale blue and pink, with thin drifting smoke. The calm dark sea reflects their colours. Dominant deep navy, broad dark slate, sparse gold, pale blue and pink accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "cat-b-oneobs-14",
+   "label": "cat-b-oneobs-14 · Office company",
+   "image": "art/candidates/photos-1/cat-b-oneobs-14.webp",
+   "images": [
+    "art/candidates/photos-1/current-cat.webp"
+   ],
+   "note": "Office company (photo_office, found in the B2 copy room). Second picture: the current in-game drawing. Check: Question, not a fix: a calico like Tama (cast.md says Tama sleeps in B2) instead of the drawing's ginger tabby. She lies on the desk in front of the keyboard, mostly not on it. Change this pass: calico like Tama (cast.md) instead of ginger, with the pass-b cat wording; a question, not a fix. One Obsession, seed 14, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, a calico cat, white with orange and black patches, curled up asleep lying on top of the keys of a beige computer keyboard on a grey steel office desk, seen from slightly above. An old beige CRT monitor behind the keyboard, its screen glowing pale blue. A dim grey wall behind, cool fluorescent ceiling light, no window. Dominant cool grey and beige, broad pale blue screen light, sparse orange and black patches of the cat. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-c-oneobs-11",
+   "label": "monorail-c-oneobs-11 · Early train",
+   "image": "art/candidates/photos-1/monorail-c-oneobs-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Partly. The beam crosses the whole frame and the pillars stand in the water; only two cars, sitting on a wide deck, and two pillars have a round disc. Change this pass: pass a prompt plus a line sketch (sketch.py), LLLite lineart 0.8 until 60%. One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-c-oneobs-12",
+   "label": "monorail-c-oneobs-12 · Early train",
+   "image": "art/candidates/photos-1/monorail-c-oneobs-12.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. A two-car tram with pantographs. Change this pass: pass a prompt plus a line sketch (sketch.py), LLLite lineart 0.8 until 60%. One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-c-oneobs-13",
+   "label": "monorail-c-oneobs-13 · Early train",
+   "image": "art/candidates/photos-1/monorail-c-oneobs-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Partly. The beam crosses the frame and the pillars stand in the water; two cars on a deck with a hint of rails. Change this pass: pass a prompt plus a line sketch (sketch.py), LLLite lineart 0.8 until 60%. One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-c-rdbt-11",
+   "label": "monorail-c-rdbt-11 · Early train",
+   "image": "art/candidates/photos-1/monorail-c-rdbt-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. Four small old railway cars on a viaduct. Change this pass: pass a prompt plus a line sketch (sketch.py), LLLite lineart 0.8 until 60%. RDBT, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-c-rdbt-12",
+   "label": "monorail-c-rdbt-12 · Early train",
+   "image": "art/candidates/photos-1/monorail-c-rdbt-12.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. Two old railway cars on a bridge with railings; a big block in the deck. Change this pass: pass a prompt plus a line sketch (sketch.py), LLLite lineart 0.8 until 60%. RDBT, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-c-rdbt-13",
+   "label": "monorail-c-rdbt-13 · Early train",
+   "image": "art/candidates/photos-1/monorail-c-rdbt-13.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. An old railway train on an arched viaduct. Change this pass: pass a prompt plus a line sketch (sketch.py), LLLite lineart 0.8 until 60%. RDBT, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-d-oneobs-11",
+   "label": "monorail-d-oneobs-11 · Early train",
+   "image": "art/candidates/photos-1/monorail-d-oneobs-11.webp.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Closest. Three smooth white cars with a rounded cab, on a beam that runs across the whole frame, pillars in the water, sun right of centre. One pillar has an odd round disc at the top, and the beam is still wide like a deck. Change this pass: pass c with the sketch at strength 1.0 until 80%. One Obsession, seed 11, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-d-oneobs-12",
+   "label": "monorail-d-oneobs-12 · Early train",
+   "image": "art/candidates/photos-1/monorail-d-oneobs-12.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Reject. Two trains on a raised block that breaks the beam. Change this pass: pass c with the sketch at strength 1.0 until 80%. One Obsession, seed 12, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  },
+  {
+   "id": "monorail-d-oneobs-13",
+   "label": "monorail-d-oneobs-13 · Early train",
+   "image": "art/candidates/photos-1/monorail-d-oneobs-13.webp",
+   "images": [
+    "art/candidates/photos-1/current-monorail.webp"
+   ],
+   "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Close. Three smooth cars with a rounded cab, beam across the frame, pillars in the water. A round disc on one pillar; the deck has a railing on the far side. Change this pass: pass c with the sketch at strength 1.0 until 80%. One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
+  }
+ ],
+ "decided": [
+  "monorail-a-rdbt-11"
+ ],
+ "decision": "Early train: monorail-a-rdbt-11 (his pick). Rest chosen by Claude as he asked ('i am not interested in picking flavor pictures just choose some'): cherry-a-oneobs-11, pigeons-a-oneobs-13, cat-a-oneobs-13, fireworks-b-oneobs-11.",
+ "decided_at": "2026-10-04T20:15:55+0200",
+ "issue": 219
+}

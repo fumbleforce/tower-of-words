@@ -1,0 +1,33 @@
+{
+ "sent": "2026-10-05T17:54:01+0200",
+ "picked": [],
+ "options": {
+  "kenji-1": {
+   "star": false,
+   "reject": true,
+   "comment": "he is too slim, doesnt look like himself"
+  },
+  "kenji-2": {
+   "star": false,
+   "reject": false,
+   "comment": "his model is a bit broken, his hair is getting skin color due to aggressive lighting in reference"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": [
+  {
+   "sent": "2026-10-05T12:40:43+0200",
+   "picked": [],
+   "options": {
+    "kenji-1": {
+     "star": false,
+     "reject": true,
+     "comment": "he is too slim, doesnt look like himself"
+    }
+   },
+   "comment": "",
+   "read": true
+  }
+ ]
+}

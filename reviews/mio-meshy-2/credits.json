@@ -1,0 +1,123 @@
+[
+ {
+  "service": "meshy",
+  "part": "mio-2",
+  "task": "01a10de0-154b-70b9-9865-cbede317895c",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/mio-meshy-2/pics/d1.png",
+  "note": "mio-2 and mio-3 ran at the same time; 189 before, 179 after both. No bun in the shape; not textured."
+ },
+ {
+  "service": "meshy",
+  "part": "mio-3",
+  "task": "01a10de0-9b24-7794-aecf-d9312c4c2413",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 179,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/mio-meshy-2/pics/h1.png",
+  "note": "glasses modelled as a block over the eyes, no bun; not textured."
+ },
+ {
+  "service": "meshy",
+  "part": "mio-2b",
+  "task": "01a10de2-b3fb-7793-aa1d-6402b442924e",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 174,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/mio-meshy-2/pics/d1.png",
+  "note": "mio-2 sent again (same picture, same settings) for the bun; kept."
+ },
+ {
+  "service": "meshy",
+  "part": "mio-2b-tex",
+  "task": "01a10de4-53a8-70ed-8c74-df348d02e8c5",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 164,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/mio-meshy-2/meshy/mio-2b-uv.glb"
+  },
+  "input": "art/parts/mio-meshy-2/pics/d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "mio-2b-texg",
+  "task": "01a10de5-534f-738e-88ea-dd9499d89a35",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 154,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/mio-meshy-2/meshy/mio-2b-uv.glb"
+  },
+  "input": "art/parts/mio-meshy-2/pics/h1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "mio-2b-texg-rig",
+  "task": "01a10de6-408a-7050-9e2c-c25f533c65fb",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10de5-534f-738e-88ea-dd9499d89a35",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "mio-2b-texg-rig-sit",
+  "task": "01a10de7-3c78-7664-a023-0528de870966",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 146,
+  "settings": {
+   "rig_task_id": "01a10de6-408a-7050-9e2c-c25f533c65fb",
+   "action_id": 32
+  }
+ }
+]

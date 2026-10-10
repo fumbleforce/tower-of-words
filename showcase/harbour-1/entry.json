@@ -1,0 +1,169 @@
+{
+ "title": "The harbour, walkable",
+ "date": "2026-10-02",
+ "by": "claude-agent:harbour",
+ "caption": "The sixth south-half district from island-half-1: the office street goes on west past Amakawa Trading into the harbour. The supply yard with its warehouse, containers, crane and the foreman's hut; the supply pier with a freighter alongside; the ferry landing with the terminal and a ferry alongside its pier; the harbour office; and the harbour walk south along the rocks. Reach it in the morning from the office street: walk west past Amakawa Trading. It also loads with ?place=harbour. The terminal and the harbour office are shut for now. The ships don't move.",
+ "sections": [
+  {
+   "title": "The office street's west end",
+   "caption": "Before: the street stopped at a row of bollards in front of Amakawa Trading. After: the bollards are gone and the street goes on west to the harbour. The finger sign now points west to the harbour too (Harbour 港).",
+   "images": [
+    {
+     "id": "before-street-desk",
+     "image": "bible/shots/showcase/harbour-1/before-street-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-street-phone",
+     "image": "bible/shots/showcase/harbour-1/before-street-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-street-desk",
+     "image": "bible/shots/showcase/harbour-1/after-street-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-street-phone",
+     "image": "bible/shots/showcase/harbour-1/after-street-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The supply yard",
+   "caption": "Before: open sea with a grey box standing in it (the island's coast stopped short of the harbour). After: a concrete yard on quays, containers in two blocks, a green footway painted across it to the landing, and the warehouse with にあげば SUPPLY QUAY over its roller doors.",
+   "images": [
+    {
+     "id": "before-yard-desk",
+     "image": "bible/shots/showcase/harbour-1/before-yard-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-yard-phone",
+     "image": "bible/shots/showcase/harbour-1/before-yard-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-yard-desk",
+     "image": "bible/shots/showcase/harbour-1/after-yard-desk.webp",
+     "caption": "After, the containers, desktop"
+    },
+    {
+     "id": "after-yard-phone",
+     "image": "bible/shots/showcase/harbour-1/after-yard-phone.webp",
+     "caption": "After, the containers, phone"
+    },
+    {
+     "id": "after-shed-desk",
+     "image": "bible/shots/showcase/harbour-1/after-shed-desk.webp",
+     "caption": "After, the warehouse, desktop"
+    },
+    {
+     "id": "after-shed-phone",
+     "image": "bible/shots/showcase/harbour-1/after-shed-phone.webp",
+     "caption": "After, the warehouse, phone"
+    },
+    {
+     "id": "after-supply-desk",
+     "image": "bible/shots/showcase/harbour-1/after-supply-desk.webp",
+     "caption": "After, the supply pier, the freighter and the crane, desktop"
+    },
+    {
+     "id": "after-supply-phone",
+     "image": "bible/shots/showcase/harbour-1/after-supply-phone.webp",
+     "caption": "After, the supply pier, phone"
+    }
+   ]
+  },
+  {
+   "title": "The ferry landing and pier",
+   "caption": "Before: open sea. After: the landing in pale granite with benches over the water, the terminal's door with フェリーのりば FERRY TERMINAL on its canopy (shut, 準備中), and the ferry moored along the pier with a gangway down to it.",
+   "images": [
+    {
+     "id": "before-landing-desk",
+     "image": "bible/shots/showcase/harbour-1/before-landing-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-landing-phone",
+     "image": "bible/shots/showcase/harbour-1/before-landing-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-landing-desk",
+     "image": "bible/shots/showcase/harbour-1/after-landing-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-landing-phone",
+     "image": "bible/shots/showcase/harbour-1/after-landing-phone.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "after-ferry-desk",
+     "image": "bible/shots/showcase/harbour-1/after-ferry-desk.webp",
+     "caption": "After, the ferry pier, desktop"
+    },
+    {
+     "id": "after-ferry-phone",
+     "image": "bible/shots/showcase/harbour-1/after-ferry-phone.webp",
+     "caption": "After, the ferry pier, phone"
+    }
+   ]
+  },
+  {
+   "title": "The harbour walk",
+   "caption": "Before: bare lawn. After: the coast walk carried north to the office street, with a bay of two benches looking west over the rocks, lamps and trees. It ends at bollards where the coast walk goes on south to the station (not walkable yet).",
+   "images": [
+    {
+     "id": "before-walk-desk",
+     "image": "bible/shots/showcase/harbour-1/before-walk-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-walk-phone",
+     "image": "bible/shots/showcase/harbour-1/before-walk-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-walk-desk",
+     "image": "bible/shots/showcase/harbour-1/after-walk-desk.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-walk-phone",
+     "image": "bible/shots/showcase/harbour-1/after-walk-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "After work",
+   "caption": "The lamps, the terminal's front, the floodlights and the ships' windows lit.",
+   "images": [
+    {
+     "id": "after-eve-desk",
+     "image": "bible/shots/showcase/harbour-1/after-eve-desk.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "after-eve-phone",
+     "image": "bible/shots/showcase/harbour-1/after-eve-phone.webp",
+     "caption": "After work, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=harbour"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "media": []
+}

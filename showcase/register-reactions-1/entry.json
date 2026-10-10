@@ -1,0 +1,74 @@
+{
+ "title": "People react to how Eric speaks to them",
+ "date": "2026-10-09",
+ "by": "claude-agent:register",
+ "caption": "Mio, Kenji, Kuro and Rei now sometimes comment when Eric is too casual, too stiff or just right with them, after a word from the Say menu. Each of them does this at most once a day, and the first time is noted in People.",
+ "result": [
+  "kenji-stiff-desktop",
+  "kuro-casual-phone",
+  "rei-casual-desktop-2",
+  "kenji-people-card"
+ ],
+ "sections": [
+  {
+   "title": "Kenji, too stiff",
+   "caption": "Day 2, B2. Eric says ohayō gozaimasu to Kenji, and Kenji is flustered that his senpai is so polite.",
+   "images": [
+    {
+     "id": "kenji-stiff-desktop",
+     "image": "bible/shots/showcase/register-reactions-1/kenji-stiff-desktop.png.webp",
+     "caption": "Kenji's reaction, desktop"
+    },
+    {
+     "id": "kenji-stiff-desktop-2",
+     "image": "bible/shots/showcase/register-reactions-1/kenji-stiff-desktop-2.png.webp",
+     "caption": "His English line after it"
+    },
+    {
+     "id": "kenji-people-card",
+     "image": "bible/shots/showcase/register-reactions-1/kenji-people-card.png",
+     "caption": "What the People panel remembers"
+    }
+   ]
+  },
+  {
+   "title": "Kuro, too casual",
+   "caption": "Day 2, reception. Eric says matte to Kuro, so she makes him wait and tells him to start with sumimasen.",
+   "images": [
+    {
+     "id": "kuro-casual-phone-1",
+     "image": "bible/shots/showcase/register-reactions-1/kuro-casual-phone-1.png.webp",
+     "caption": "Phone, first line"
+    },
+    {
+     "id": "kuro-casual-phone",
+     "image": "bible/shots/showcase/register-reactions-1/kuro-casual-phone.png.webp",
+     "caption": "Phone, her line"
+    }
+   ]
+  },
+  {
+   "title": "Rei, too casual",
+   "caption": "Day 3, the tennis courts. Eric says akete to Rei and she tells him off.",
+   "images": [
+    {
+     "id": "rei-casual-desktop",
+     "image": "bible/shots/showcase/register-reactions-1/rei-casual-desktop.png.webp",
+     "caption": "Desktop, her Japanese line"
+    },
+    {
+     "id": "rei-casual-desktop-2",
+     "image": "bible/shots/showcase/register-reactions-1/rei-casual-desktop-2.png.webp",
+     "caption": "Desktop, the English that follows"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

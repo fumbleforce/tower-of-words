@@ -1,0 +1,71 @@
+{
+ "title": "Texture avenues for the world",
+ "date": "2026-09-29",
+ "by": "style agent",
+ "status": "decided",
+ "multi": true,
+ "question": "Which avenues should we try?",
+ "media": [
+  {
+   "image": "art/refs/style-target-kuro-pose-s202.webp.webp",
+   "caption": "The reference for polish and vibe"
+  }
+ ],
+ "options": [
+  {
+   "id": "1",
+   "label": "1. Hand-painted tiling textures",
+   "note": "Painted tile, plaster, carpet, wood and metal textures on every surface, mapped by world position so no prop needs UVs. 2-3 days, moderate frame cost."
+  },
+  {
+   "id": "2",
+   "label": "2. Procedural materials in the shader",
+   "note": "The same kinds of surfaces computed in the shader: tile-by-tile variation, chips, carpet fibre, plaster clouding, brushed metal. 3-4 days, no textures."
+  },
+  {
+   "id": "3",
+   "label": "3. Decals and wear",
+   "note": "A lived-in layer: scuffs, worn carpet paths, coffee rings, tape marks, stains and stickers from one painted atlas. 1-2 days, cheap."
+  },
+  {
+   "id": "4",
+   "label": "4. Vertex colour and baked light",
+   "note": "No pattern, but no flat faces: darker corners, warmer faces toward windows, gentle floor gradients, varied tints on repeated props. 1 day, free at runtime."
+  },
+  {
+   "id": "5",
+   "label": "5. Painted surfaces from our own art",
+   "note": "Repaint each room from its play camera with our anime model and project the painting back onto floors and walls. Closest to our generated images; 4-6 days plus approval per room."
+  },
+  {
+   "id": "6",
+   "label": "6. Gloss, reflections and sheen",
+   "note": "Floors that catch window and lamp reflections, metal highlights, fabric sheen; materials read as different without textures. 1-2 days; the floor reflection would be desktop only."
+  },
+  {
+   "id": "7",
+   "label": "7. Trim sheets",
+   "note": "One painted atlas of edge and panel detail (vents, screws, skirting, label strips) mapped onto props. 3-5 days, touches every prop builder."
+  },
+  {
+   "id": "8",
+   "label": "8. Small modelled detail",
+   "note": "Bevels, frames, cables, paper piles and handles modelled in. About a day per room; adds detail more than texture."
+  }
+ ],
+ "links": [
+  {
+   "label": "Full write-up: what you'd see, references, how it's built, costs and risks",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/game3d/design/style/AVENUES.md"
+  }
+ ],
+ "decided": [
+  "2",
+  "3",
+  "4",
+  "7",
+  "8"
+ ],
+ "decision": "Picked 2, 3, 4, 7 and 8: try them in a small showcase room so we can see the different effects (now style-avenues-room)",
+ "issue": 44
+}

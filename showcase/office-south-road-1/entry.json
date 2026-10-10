@@ -1,0 +1,39 @@
+{
+ "title": "Walk south from head office to the shops",
+ "date": "2026-10-06",
+ "by": "codex",
+ "caption": "The bicycle aisle now continues into the shopping street’s west passage. Walk through in either direction, or use its travel marker. The island map shows the same connection.",
+ "images": [
+  {
+   "id": "approach-desk",
+   "image": "bible/shots/showcase/office-south-road-1/approach-desk.webp.webp",
+   "caption": "South from head office through the bicycle parking, desktop."
+  },
+  {
+   "id": "approach-phone",
+   "image": "bible/shots/showcase/office-south-road-1/approach-phone.webp",
+   "caption": "South from head office through the bicycle parking, phone."
+  },
+  {
+   "id": "return-desk",
+   "image": "bible/shots/showcase/office-south-road-1/return-desk.webp.webp",
+   "caption": "North from the shopping street toward the bicycle parking, desktop."
+  },
+  {
+   "id": "return-phone",
+   "image": "bible/shots/showcase/office-south-road-1/return-phone.webp",
+   "caption": "North from the shopping street toward the bicycle parking, phone."
+  }
+ ],
+ "links": [
+  {
+   "label": "Start at head office",
+   "href": "game3d/?place=forecourt"
+  },
+  {
+   "label": "Start on the shopping street",
+   "href": "game3d/?place=shotengai"
+  }
+ ],
+ "media": []
+}

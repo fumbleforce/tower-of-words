@@ -1,0 +1,72 @@
+{
+ "title": "Aoi and Kuro, your picks in the game",
+ "date": "2026-10-01",
+ "by": "claude-agent:portraits-aoi-kuro",
+ "caption": "Aoi is fill-d65-s1 from Review aoi-edge-2 (the cream edge gone). Kuro is kuro-body-c-s11 from Review kuro-body-1, down to the waist, and shown 15% smaller than before so she matches the others (your note: \"15% too large / zoomed in\"). Kuro has only the one face, so there are no other expressions to change.",
+ "images": [
+  {
+   "id": "lineup",
+   "image": "bible/shots/showcase/portraits-aoi-kuro/lineup.webp.webp",
+   "caption": "The cast as the game places them, redone with both new portraits (Kuro at the right end)"
+  },
+  {
+   "id": "aoi-closeup",
+   "image": "bible/shots/showcase/portraits-aoi-kuro/aoi-closeup.webp",
+   "caption": "Aoi's left side (image right) on a dark background, where the cream edge was"
+  }
+ ],
+ "sections": [
+  {
+   "title": "Desktop 1366x860",
+   "caption": "The same line set up on the train, one speaker at a time (the fast test doesn't reach Kuro's desk).",
+   "images": [
+    {
+     "id": "desk-compare",
+     "image": "bible/shots/showcase/portraits-aoi-kuro/compare-1366x860.webp.webp",
+     "caption": "Kuro, Aoi, Kenji and Mio side by side, same crop"
+    },
+    {
+     "id": "desk-kuro",
+     "image": "bible/shots/showcase/portraits-aoi-kuro/1366x860-kuro.webp.webp",
+     "caption": "Kuro, Eric listening"
+    },
+    {
+     "id": "desk-aoi",
+     "image": "bible/shots/showcase/portraits-aoi-kuro/1366x860-aoi.webp.webp",
+     "caption": "Aoi, Eric listening"
+    }
+   ]
+  },
+  {
+   "title": "Phone 390x844",
+   "images": [
+    {
+     "id": "phone-compare",
+     "image": "bible/shots/showcase/portraits-aoi-kuro/compare-390x844.webp",
+     "caption": "Kuro, Aoi, Kenji and Mio side by side"
+    },
+    {
+     "id": "phone-kuro",
+     "image": "bible/shots/showcase/portraits-aoi-kuro/390x844-kuro.webp",
+     "caption": "Kuro"
+    },
+    {
+     "id": "phone-aoi",
+     "image": "bible/shots/showcase/portraits-aoi-kuro/390x844-aoi.webp",
+     "caption": "Aoi"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Review aoi-edge-2",
+   "href": "#review/aoi-edge-2"
+  },
+  {
+   "label": "Review kuro-body-1",
+   "href": "#review/kuro-body-1"
+  }
+ ],
+ "media": []
+}

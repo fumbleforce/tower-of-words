@@ -1,0 +1,67 @@
+{
+ "title": "Kenji concept round 2",
+ "date": "2026-09-29",
+ "by": "art agent (kenji-concept2)",
+ "status": "superseded",
+ "multi": true,
+ "question": "Which of these is Kenji? He is 21 and at work in work clothes, with a different height, build and face in each.",
+ "media": [
+  {
+   "image": "art/candidates/portraits/kenji-concept2-sheet.png.webp",
+   "caption": "The whole round: round 1 (rejected) at the top, the five directions, then the renders I discarded because he looked over 25 or generic"
+  }
+ ],
+ "options": [
+  {
+   "id": "a",
+   "label": "kenji2-a-soft",
+   "image": "art/candidates/portraits/kenji-concept2/kenji2-a-soft-761.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept2/kenji2-a-soft-762.webp.webp",
+    "art/candidates/portraits/kenji-concept2/kenji2-a-soft-full-761.webp.webp"
+   ],
+   "note": "Mop of hair, crooked tie, a LAN cable and a cat charm on the lanyard. Came out average height, not short."
+  },
+  {
+   "id": "b",
+   "label": "kenji2-b-gangly",
+   "image": "art/candidates/portraits/kenji-concept2/kenji2-b-gangly-761.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept2/kenji2-b-gangly-762.webp.webp",
+    "art/candidates/portraits/kenji-concept2/kenji2-b-gangly-full-761.webp.webp"
+   ],
+   "note": "Tall and skinny, messy hair, pen in pocket, cat sticker on the tablet, looking away. Acne came out as freckles."
+  },
+  {
+   "id": "c",
+   "label": "kenji2-c2-pudgy",
+   "image": "art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-761.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-762.webp.webp",
+    "art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-full-761.webp.webp"
+   ],
+   "note": "Short and pudgy, dyed hair with roots, tie tucked in, sticky note, snacks, screwdriver. Heavier than 'a little'."
+  },
+  {
+   "id": "d",
+   "label": "kenji2-d-freckles",
+   "image": "art/candidates/portraits/kenji-concept2/kenji2-d-freckles-761.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept2/kenji2-d-freckles-762.webp.webp",
+    "art/candidates/portraits/kenji-concept2/kenji2-d-freckles-full-761.webp.webp"
+   ],
+   "note": "Skinny, freckles, bedhead, one earbud in, sweater vest, typing on a laptop. Shares b's hair and freckles."
+  },
+  {
+   "id": "e",
+   "label": "kenji2-e3-fringe",
+   "image": "art/candidates/portraits/kenji-concept2/kenji2-e3-fringe-761.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept2/kenji2-e3-fringe-762.webp.webp",
+    "art/candidates/portraits/kenji-concept2/kenji2-e3-fringe-full-761.webp.webp"
+   ],
+   "note": "Blunt fringe, work jacket, keyboard and melon soda. Ears not big as asked; jacket reads a bit like a track top."
+  }
+ ],
+ "decision": "c, with other hair styles and a less intense look (round 3: kenji-concept-3)"
+}

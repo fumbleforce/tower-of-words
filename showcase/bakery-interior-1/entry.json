@@ -1,0 +1,57 @@
+{
+ "title": "A usable bakery on the shop street",
+ "date": "2026-10-07",
+ "by": "codex-exec:day5_build",
+ "caption": "Choose bread with the tray and tongs, pay at the counter, then take it away or eat at the window perch. Open during daytime from day three.",
+ "sections": [
+  {
+   "title": "Shop, purchase and perch",
+   "caption": "The existing ground-floor bay now has a clerk, working counter, stock and a real return door. Saved receipts prevent duplicate charges or consumption.",
+   "images": [
+    {
+     "id": "shop-overview",
+     "image": "bible/shots/showcase/bakery-interior-1/shop-overview.webp",
+     "caption": "The full shop and clear centre aisle, desktop."
+    },
+    {
+     "id": "paid-phone",
+     "image": "bible/shots/showcase/bakery-interior-1/paid-phone.webp",
+     "caption": "The clerk has bagged the bread; payment and collection choices, phone."
+    },
+    {
+     "id": "bite-phone",
+     "image": "bible/shots/showcase/bakery-interior-1/bite-phone.webp",
+     "caption": "Bread in hand at the window perch, phone."
+    },
+    {
+     "id": "bite-desktop",
+     "image": "bible/shots/showcase/bakery-interior-1/bite-desktop.webp.webp",
+     "caption": "The same perch action with Eric, desktop."
+    },
+    {
+     "id": "follow-counter",
+     "image": "bible/shots/showcase/bakery-interior-1/follow-counter.webp.webp",
+     "caption": "Captured-mouse view inside the fully enclosed shop."
+    }
+   ]
+  },
+  {
+   "title": "Earlier check",
+   "caption": "Retained review evidence; the final shot above corrects this angle.",
+   "images": [
+    {
+     "id": "earlier-eating",
+     "image": "bible/shots/showcase/bakery-interior-1/earlier-eating.webp",
+     "caption": "Earlier eating angle, replaced because the face and grip were hidden."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Visit the shop street on day three",
+   "href": "game3d/?day=3&place=shotengai"
+  }
+ ],
+ "media": []
+}

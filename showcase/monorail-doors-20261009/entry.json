@@ -1,0 +1,204 @@
+{
+ "title": "Monorail doors in wall pockets, and modern flush windows",
+ "date": "2026-10-09",
+ "by": "claude-agent:monorail",
+ "caption": "The platform-side doors are wider (0.9 instead of 0.68) and stainless like the car. They part in the middle and slide into pockets in the wall on either side, so they no longer slide out over the car side or across a window. The windows are large, with slim frames and glass flush with the body.",
+ "preview": "after-cycle-out-desk",
+ "result": [
+  "after-cycle-out-desk",
+  "after-cycle-play-desk",
+  "after-close-desk",
+  "after-cycle-out-phone"
+ ],
+ "sections": [
+  {
+   "title": "Door cycle from the platform",
+   "caption": "Shut, half open and open, left to right. Before, the leaves slid out over the car side and across the window. Now they go into the wall.",
+   "images": [
+    {
+     "id": "before-cycle-out-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-cycle-out-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-cycle-out-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-cycle-out-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-cycle-out-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-cycle-out-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-cycle-out-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-cycle-out-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Door cycle from the play camera",
+   "caption": "Shut, half open and open. In the cut-away car, the door sets and their pockets stand at full height, so the leaves always have wall to slide into.",
+   "images": [
+    {
+     "id": "before-cycle-play-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-cycle-play-desk.webp",
+     "caption": "Before, desktop (close-up)"
+    },
+    {
+     "id": "after-cycle-play-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-cycle-play-desk.webp",
+     "caption": "After, desktop (close-up)"
+    },
+    {
+     "id": "before-cycle-play-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-cycle-play-phone.webp.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-cycle-play-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-cycle-play-phone.webp.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Close on the car side",
+   "caption": "The same view as the brushed-steel entry.",
+   "images": [
+    {
+     "id": "before-close-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-close-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-close-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-close-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-close-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-close-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-close-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-close-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "By the gangway",
+   "caption": "The near car and its neighbour.",
+   "images": [
+    {
+     "id": "before-corner-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-corner-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-corner-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-corner-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-corner-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-corner-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-corner-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-corner-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Over the bay",
+   "caption": "From above the platform side.",
+   "images": [
+    {
+     "id": "before-bay-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-bay-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-bay-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-bay-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-bay-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-bay-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-bay-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-bay-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Level with the cars",
+   "caption": "From the side, at car height.",
+   "images": [
+    {
+     "id": "before-low-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-low-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-low-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-low-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-low-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-low-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-low-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-low-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "From under the beam",
+   "caption": "Looking up at the car.",
+   "images": [
+    {
+     "id": "before-under-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-under-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-under-desk",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-under-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-under-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/before-under-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-under-phone",
+     "image": "bible/shots/showcase/monorail-doors-20261009/after-under-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

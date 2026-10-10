@@ -1,0 +1,35 @@
+{
+ "title": "Watch the anime opening, ninth cut",
+ "date": "2026-10-10",
+ "by": "claude-main",
+ "status": "decided",
+ "multi": false,
+ "context": "The 70-second anime opening that plays from the title menu before the game starts, to the opening theme.",
+ "question": "Is the ninth cut the game's opening? Watch the film, then approve it or write what to change.",
+ "options": [
+  {
+   "id": "approve",
+   "label": "Approve as the game's opening"
+  },
+  {
+   "id": "notes",
+   "label": "Notes",
+   "note": "Write what to change in the comment box."
+  }
+ ],
+ "links": [
+  {
+   "label": "The 1080p video, ninth cut (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "Showcase: Anime opening, ninth cut",
+   "href": "#showcase/opening-1"
+  }
+ ],
+ "updated": "2026-10-10T06:00:00+02:00",
+ "issue": 378,
+ "decision": "Jørgen: \"game feedback already\" (his notes on the opening are already given elsewhere)",
+ "decided_at": "2026-10-10T10:35:23+0200",
+ "media": []
+}

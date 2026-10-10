@@ -1,0 +1,124 @@
+{
+  "base": "http://127.0.0.1:8771/.claude/worktrees/codex-flock-spacing/game3d/",
+  "sources": {
+    "birds.js": "a91fd4f36482ece2f06371d46acb02fa6eb1000f5787333148670645f42b38cc",
+    "motion.js": "04157914861508a0bc7068875546f0835c51032b7859d22a30372da4e30ab80c",
+    "ground-spacing.js": "dfefb32c0ba74933cbf676aed783613a6e47fef419deffb95ad7b0b6a4633820"
+  },
+  "views": [
+    {
+      "width": 1366,
+      "samples": 741,
+      "overlaps": 0,
+      "walks": 326,
+      "minimum": 0.004006168618423289,
+      "groundMax": 8,
+      "scatter": true,
+      "returned": true,
+      "playerStart": [
+        0,
+        0,
+        -0.20000000000000284
+      ],
+      "approached": true,
+      "retreat": true,
+      "info": [
+        {
+          "id": "crows",
+          "kind": "crow",
+          "shown": 4,
+          "modes": "rest,rest,rest,rest",
+          "seen": 1,
+          "where": "3.4 4.7 21.9 | -8.6 11.5 -12.1 | -7.2 4.8 -0.9 | 15.4 3.4 6.1"
+        },
+        {
+          "id": "pigeons",
+          "kind": "pigeon",
+          "shown": 5,
+          "modes": "fly,rest,fly,rest,rest",
+          "seen": 2,
+          "where": "-4.3 11 2.2 | 2.6 4.1 -2.1 | 14.6 10.3 -0.7 | 3.4 4.7 -5.9 | 11 4.8 -5.6"
+        },
+        {
+          "id": "sparrows",
+          "kind": "sparrow",
+          "shown": 3,
+          "modes": "rest,rest,rest",
+          "seen": 3,
+          "where": "0 0 -6 | -0.8 0 -6.8 | 0.3 0 -7.3"
+        },
+        {
+          "id": "butterflies",
+          "kind": "butterfly",
+          "shown": 2,
+          "seen": 2,
+          "where": "-6.3 0.3 2.3 | -4.6 0.6 -3"
+        },
+        {
+          "id": "works_cat",
+          "kind": "cat",
+          "shown": 1,
+          "seen": 0,
+          "where": "5.7 0 6.2"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "samples": 1389,
+      "overlaps": 0,
+      "walks": 324,
+      "minimum": 0.0010268766485399539,
+      "groundMax": 6,
+      "scatter": true,
+      "returned": true,
+      "playerStart": [
+        0,
+        0,
+        -0.20000000000000284
+      ],
+      "approached": true,
+      "retreat": true,
+      "info": [
+        {
+          "id": "crows",
+          "kind": "crow",
+          "shown": 3,
+          "modes": "fly,rest,rest",
+          "seen": 0,
+          "where": "5.2 6.1 17.6 | -8.6 11.5 -12.1 | -7.2 4.8 -0.9"
+        },
+        {
+          "id": "pigeons",
+          "kind": "pigeon",
+          "shown": 4,
+          "modes": "fly,fly,fly,rest",
+          "seen": 2,
+          "where": "6 10.3 -14.2 | -1.7 5.7 -6 | 10.6 10.1 -0.6 | -1.1 0 -3.7"
+        },
+        {
+          "id": "sparrows",
+          "kind": "sparrow",
+          "shown": 2,
+          "modes": "rest,rest",
+          "seen": 2,
+          "where": "-2.4 0 -7.3 | -1.8 0 -7.3"
+        },
+        {
+          "id": "butterflies",
+          "kind": "butterfly",
+          "shown": 2,
+          "seen": 2,
+          "where": "-5.2 0.4 -4.6 | -5 0.8 -4.2"
+        },
+        {
+          "id": "works_cat",
+          "kind": "cat",
+          "shown": 1,
+          "seen": 0,
+          "where": "5.7 0 6.2"
+        }
+      ]
+    }
+  ]
+}

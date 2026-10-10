@@ -1,0 +1,76 @@
+{
+ "title": "Astra vs Claude: chibi bases",
+ "date": "2026-09-30",
+ "by": "Astra models · Codex comparison",
+ "status": "decided",
+ "question": "Which base should we build on for Mio and Eric?",
+ "multi": true,
+ "options": [
+  {
+   "id": "mio-claude",
+   "label": "mio-claude",
+   "image": "art/parts/blender/review/mio-1-standing.webp.webp",
+   "images": [
+    "art/parts/blender/review/mio-3-closeups.webp.webp",
+    "art/parts/blender/review/mio-2-walking.webp.webp"
+   ],
+   "note": "Current Blender rebuild; its original reference is in the first row."
+  },
+  {
+   "id": "mio-astra",
+   "label": "mio-astra",
+   "image": "art/parts/astra/attempt-11/mio-standing.webp",
+   "images": [
+    "art/parts/astra/attempt-11/mio-details.webp.webp",
+    "art/parts/astra/attempt-11/mio-motion.webp.webp"
+   ],
+   "note": "Independent simplified base with its own hair and cargo outfit. Uses the original rig and approved idle/walk; collar, cuffs and hair silhouettes differ from the original. The preserved walk crosses the feet closely; idle lifts the toes slightly on both versions."
+  },
+  {
+   "id": "eric-claude",
+   "label": "eric-claude",
+   "image": "art/parts/blender/review/eric-1-standing.webp.webp",
+   "images": [
+    "art/parts/blender/review/eric-3-closeups.webp.webp",
+    "art/parts/blender/review/eric-2-walking.webp.webp"
+   ],
+   "note": "Current Blender rebuild; its original reference is in the first row."
+  },
+  {
+   "id": "eric-astra",
+   "label": "eric-astra",
+   "image": "art/parts/astra/attempt-11/eric-standing.webp",
+   "images": [
+    "art/parts/astra/attempt-11/eric-details.webp",
+    "art/parts/astra/attempt-11/eric-motion.webp.webp"
+   ],
+   "note": "Independent simplified base with its own hair and cargo outfit. Uses the original rig and approved idle/walk; collar, cuffs and hair silhouettes differ from the original. The preserved walk crosses the feet closely; idle lifts the toes slightly on both versions."
+  }
+ ],
+ "links": [
+  {
+   "label": "Compare live: rotate, Idle, Walk, bare body and close-ups",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/creator/astra/viewer"
+  },
+  {
+   "label": "Eric in the live comparison",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/tools/creator/astra/viewer"
+  },
+  {
+   "label": "Every attempt, including rejected versions",
+   "href": "reviews/creator-astra-1/attempts.html"
+  },
+  {
+   "label": "Claude’s original review",
+   "href": "#review/creator-blender-1"
+  }
+ ],
+ "decided": [
+  "mio-astra",
+  "eric-astra"
+ ],
+ "decision": "Astra's bases for both Mio and Eric, with fixes: bodies lean backwards as if partly sitting; hair less tentacle-like but still doesn't match the originals; Mio's face too gaunt, should be very rounded at the bottom; Eric's face too egg-shaped and hair like tentacles.",
+ "decided_at": "2026-10-01T08:36:04+0200",
+ "issue": 130,
+ "media": []
+}

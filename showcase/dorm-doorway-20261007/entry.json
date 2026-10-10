@@ -1,0 +1,1022 @@
+{
+ "title": "Room 203 doorway clearance",
+ "date": "2026-10-07",
+ "by": "codex-exec:dorm-doorway",
+ "caption": "The kitchen-to-bedroom passage is wider and clears both protagonists at their default size.",
+ "preview": "candidate8-2560-eric-south-01",
+ "sections": [
+  {
+   "title": "baseline1",
+   "caption": "Harness failure: settings migration selected overview.",
+   "images": [
+    {
+     "id": "baseline1-1366-eric-failure",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline1/1366-eric-failure.webp",
+     "caption": "1366 eric failure"
+    }
+   ]
+  },
+  {
+   "title": "baseline2",
+   "caption": "Movement passed; native camera direction was not checked.",
+   "images": [
+    {
+     "id": "baseline2-1366-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-eric-north-before.webp",
+     "caption": "1366 eric north before"
+    },
+    {
+     "id": "baseline2-1366-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-eric-north-00.webp",
+     "caption": "1366 eric north 00"
+    },
+    {
+     "id": "baseline2-1366-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-eric-north-01.webp",
+     "caption": "1366 eric north 01"
+    },
+    {
+     "id": "baseline2-1366-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-eric-south-before.webp",
+     "caption": "1366 eric south before"
+    },
+    {
+     "id": "baseline2-1366-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-eric-south-00.webp",
+     "caption": "1366 eric south 00"
+    },
+    {
+     "id": "baseline2-1366-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-eric-south-01.webp",
+     "caption": "1366 eric south 01"
+    },
+    {
+     "id": "baseline2-1366-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-eric-south-02.webp",
+     "caption": "1366 eric south 02"
+    },
+    {
+     "id": "baseline2-1366-carina-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-carina-north-before.webp",
+     "caption": "1366 carina north before"
+    },
+    {
+     "id": "baseline2-1366-carina-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-carina-north-00.webp",
+     "caption": "1366 carina north 00"
+    },
+    {
+     "id": "baseline2-1366-carina-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-carina-north-01.webp",
+     "caption": "1366 carina north 01"
+    },
+    {
+     "id": "baseline2-1366-carina-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-carina-south-before.webp",
+     "caption": "1366 carina south before"
+    },
+    {
+     "id": "baseline2-1366-carina-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-carina-south-00.webp",
+     "caption": "1366 carina south 00"
+    },
+    {
+     "id": "baseline2-1366-carina-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-carina-south-01.webp",
+     "caption": "1366 carina south 01"
+    },
+    {
+     "id": "baseline2-1366-carina-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/1366-carina-south-02.webp",
+     "caption": "1366 carina south 02"
+    },
+    {
+     "id": "baseline2-390-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-north-before.webp",
+     "caption": "390 eric north before"
+    },
+    {
+     "id": "baseline2-390-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-north-00.webp",
+     "caption": "390 eric north 00"
+    },
+    {
+     "id": "baseline2-390-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-north-01.webp",
+     "caption": "390 eric north 01"
+    },
+    {
+     "id": "baseline2-390-eric-north-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-north-02.webp",
+     "caption": "390 eric north 02"
+    },
+    {
+     "id": "baseline2-390-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-south-before.webp",
+     "caption": "390 eric south before"
+    },
+    {
+     "id": "baseline2-390-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-south-00.webp",
+     "caption": "390 eric south 00"
+    },
+    {
+     "id": "baseline2-390-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-south-01.webp",
+     "caption": "390 eric south 01"
+    },
+    {
+     "id": "baseline2-390-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-south-02.webp",
+     "caption": "390 eric south 02"
+    },
+    {
+     "id": "baseline2-390-eric-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-south-03.webp",
+     "caption": "390 eric south 03"
+    },
+    {
+     "id": "baseline2-390-eric-south-04",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-south-04.webp",
+     "caption": "390 eric south 04"
+    },
+    {
+     "id": "baseline2-390-eric-south-05",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline2/390-eric-south-05.webp",
+     "caption": "390 eric south 05"
+    }
+   ]
+  },
+  {
+   "title": "candidate1",
+   "caption": "Movement passed; native camera direction was not checked.",
+   "images": [
+    {
+     "id": "candidate1-1366-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-eric-north-before.webp",
+     "caption": "1366 eric north before"
+    },
+    {
+     "id": "candidate1-1366-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-eric-north-00.webp",
+     "caption": "1366 eric north 00"
+    },
+    {
+     "id": "candidate1-1366-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-eric-north-01.webp",
+     "caption": "1366 eric north 01"
+    },
+    {
+     "id": "candidate1-1366-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-eric-south-before.webp",
+     "caption": "1366 eric south before"
+    },
+    {
+     "id": "candidate1-1366-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-eric-south-00.webp",
+     "caption": "1366 eric south 00"
+    },
+    {
+     "id": "candidate1-1366-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-eric-south-01.webp",
+     "caption": "1366 eric south 01"
+    },
+    {
+     "id": "candidate1-1366-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-eric-south-02.webp",
+     "caption": "1366 eric south 02"
+    },
+    {
+     "id": "candidate1-1366-eric-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-eric-south-03.webp",
+     "caption": "1366 eric south 03"
+    },
+    {
+     "id": "candidate1-1366-carina-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-carina-north-before.webp",
+     "caption": "1366 carina north before"
+    },
+    {
+     "id": "candidate1-1366-carina-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-carina-north-00.webp",
+     "caption": "1366 carina north 00"
+    },
+    {
+     "id": "candidate1-1366-carina-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-carina-north-01.webp",
+     "caption": "1366 carina north 01"
+    },
+    {
+     "id": "candidate1-1366-carina-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-carina-south-before.webp",
+     "caption": "1366 carina south before"
+    },
+    {
+     "id": "candidate1-1366-carina-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-carina-south-00.webp",
+     "caption": "1366 carina south 00"
+    },
+    {
+     "id": "candidate1-1366-carina-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-carina-south-01.webp",
+     "caption": "1366 carina south 01"
+    },
+    {
+     "id": "candidate1-1366-carina-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-carina-south-02.webp",
+     "caption": "1366 carina south 02"
+    },
+    {
+     "id": "candidate1-1366-carina-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/1366-carina-south-03.webp",
+     "caption": "1366 carina south 03"
+    },
+    {
+     "id": "candidate1-390-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/390-eric-north-before.webp",
+     "caption": "390 eric north before"
+    },
+    {
+     "id": "candidate1-390-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/390-eric-north-00.webp",
+     "caption": "390 eric north 00"
+    },
+    {
+     "id": "candidate1-390-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/390-eric-north-01.webp",
+     "caption": "390 eric north 01"
+    },
+    {
+     "id": "candidate1-390-eric-north-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/390-eric-north-02.webp",
+     "caption": "390 eric north 02"
+    },
+    {
+     "id": "candidate1-390-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/390-eric-south-before.webp",
+     "caption": "390 eric south before"
+    },
+    {
+     "id": "candidate1-390-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/390-eric-south-00.webp",
+     "caption": "390 eric south 00"
+    },
+    {
+     "id": "candidate1-390-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/390-eric-south-01.webp",
+     "caption": "390 eric south 01"
+    },
+    {
+     "id": "candidate1-390-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/390-eric-south-02.webp",
+     "caption": "390 eric south 02"
+    },
+    {
+     "id": "candidate1-390-eric-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/390-eric-south-03.webp",
+     "caption": "390 eric south 03"
+    },
+    {
+     "id": "candidate1-390-eric-south-04",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate1/390-eric-south-04.webp",
+     "caption": "390 eric south 04"
+    }
+   ]
+  },
+  {
+   "title": "candidate2",
+   "caption": "Harness rejected the native camera direction.",
+   "images": [
+    {
+     "id": "candidate2-1366-eric-failure",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate2/1366-eric-failure.webp",
+     "caption": "1366 eric failure"
+    }
+   ]
+  },
+  {
+   "title": "baseline3",
+   "caption": "Original passage, camera directions verified.",
+   "images": [
+    {
+     "id": "baseline3-1366-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-eric-north-before.webp",
+     "caption": "1366 eric north before"
+    },
+    {
+     "id": "baseline3-1366-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-eric-north-00.webp",
+     "caption": "1366 eric north 00"
+    },
+    {
+     "id": "baseline3-1366-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-eric-north-01.webp",
+     "caption": "1366 eric north 01"
+    },
+    {
+     "id": "baseline3-1366-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-eric-south-before.webp",
+     "caption": "1366 eric south before"
+    },
+    {
+     "id": "baseline3-1366-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-eric-south-00.webp",
+     "caption": "1366 eric south 00"
+    },
+    {
+     "id": "baseline3-1366-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-eric-south-01.webp",
+     "caption": "1366 eric south 01"
+    },
+    {
+     "id": "baseline3-1366-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-eric-south-02.webp",
+     "caption": "1366 eric south 02"
+    },
+    {
+     "id": "baseline3-1366-eric-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-eric-south-03.webp",
+     "caption": "1366 eric south 03"
+    },
+    {
+     "id": "baseline3-1366-carina-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-carina-north-before.webp",
+     "caption": "1366 carina north before"
+    },
+    {
+     "id": "baseline3-1366-carina-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-carina-north-00.webp",
+     "caption": "1366 carina north 00"
+    },
+    {
+     "id": "baseline3-1366-carina-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-carina-north-01.webp",
+     "caption": "1366 carina north 01"
+    },
+    {
+     "id": "baseline3-1366-carina-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-carina-south-before.webp",
+     "caption": "1366 carina south before"
+    },
+    {
+     "id": "baseline3-1366-carina-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-carina-south-00.webp",
+     "caption": "1366 carina south 00"
+    },
+    {
+     "id": "baseline3-1366-carina-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-carina-south-01.webp",
+     "caption": "1366 carina south 01"
+    },
+    {
+     "id": "baseline3-1366-carina-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/1366-carina-south-02.webp",
+     "caption": "1366 carina south 02"
+    },
+    {
+     "id": "baseline3-390-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/390-eric-north-before.webp",
+     "caption": "390 eric north before"
+    },
+    {
+     "id": "baseline3-390-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/390-eric-north-00.webp",
+     "caption": "390 eric north 00"
+    },
+    {
+     "id": "baseline3-390-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/390-eric-north-01.webp",
+     "caption": "390 eric north 01"
+    },
+    {
+     "id": "baseline3-390-eric-north-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/390-eric-north-02.webp",
+     "caption": "390 eric north 02"
+    },
+    {
+     "id": "baseline3-390-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/390-eric-south-before.webp",
+     "caption": "390 eric south before"
+    },
+    {
+     "id": "baseline3-390-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/390-eric-south-00.webp",
+     "caption": "390 eric south 00"
+    },
+    {
+     "id": "baseline3-390-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/390-eric-south-01.webp",
+     "caption": "390 eric south 01"
+    },
+    {
+     "id": "baseline3-390-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/390-eric-south-02.webp",
+     "caption": "390 eric south 02"
+    },
+    {
+     "id": "baseline3-390-eric-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/390-eric-south-03.webp",
+     "caption": "390 eric south 03"
+    },
+    {
+     "id": "baseline3-390-eric-south-04",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline3/390-eric-south-04.webp",
+     "caption": "390 eric south 04"
+    }
+   ]
+  },
+  {
+   "title": "candidate3",
+   "caption": "Wider and taller passage, camera directions verified.",
+   "images": [
+    {
+     "id": "candidate3-1366-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-eric-north-before.webp",
+     "caption": "1366 eric north before"
+    },
+    {
+     "id": "candidate3-1366-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-eric-north-00.webp",
+     "caption": "1366 eric north 00"
+    },
+    {
+     "id": "candidate3-1366-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-eric-north-01.webp",
+     "caption": "1366 eric north 01"
+    },
+    {
+     "id": "candidate3-1366-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-eric-south-before.webp",
+     "caption": "1366 eric south before"
+    },
+    {
+     "id": "candidate3-1366-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-eric-south-00.webp",
+     "caption": "1366 eric south 00"
+    },
+    {
+     "id": "candidate3-1366-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-eric-south-01.webp",
+     "caption": "1366 eric south 01"
+    },
+    {
+     "id": "candidate3-1366-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-eric-south-02.webp",
+     "caption": "1366 eric south 02"
+    },
+    {
+     "id": "candidate3-1366-eric-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-eric-south-03.webp",
+     "caption": "1366 eric south 03"
+    },
+    {
+     "id": "candidate3-1366-carina-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-carina-north-before.webp",
+     "caption": "1366 carina north before"
+    },
+    {
+     "id": "candidate3-1366-carina-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-carina-north-00.webp",
+     "caption": "1366 carina north 00"
+    },
+    {
+     "id": "candidate3-1366-carina-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-carina-north-01.webp",
+     "caption": "1366 carina north 01"
+    },
+    {
+     "id": "candidate3-1366-carina-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-carina-south-before.webp",
+     "caption": "1366 carina south before"
+    },
+    {
+     "id": "candidate3-1366-carina-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-carina-south-00.webp",
+     "caption": "1366 carina south 00"
+    },
+    {
+     "id": "candidate3-1366-carina-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-carina-south-01.webp",
+     "caption": "1366 carina south 01"
+    },
+    {
+     "id": "candidate3-1366-carina-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/1366-carina-south-02.webp",
+     "caption": "1366 carina south 02"
+    },
+    {
+     "id": "candidate3-390-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/390-eric-north-before.webp",
+     "caption": "390 eric north before"
+    },
+    {
+     "id": "candidate3-390-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/390-eric-north-00.webp",
+     "caption": "390 eric north 00"
+    },
+    {
+     "id": "candidate3-390-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/390-eric-north-01.webp",
+     "caption": "390 eric north 01"
+    },
+    {
+     "id": "candidate3-390-eric-north-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/390-eric-north-02.webp",
+     "caption": "390 eric north 02"
+    },
+    {
+     "id": "candidate3-390-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/390-eric-south-before.webp",
+     "caption": "390 eric south before"
+    },
+    {
+     "id": "candidate3-390-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/390-eric-south-00.webp",
+     "caption": "390 eric south 00"
+    },
+    {
+     "id": "candidate3-390-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/390-eric-south-01.webp",
+     "caption": "390 eric south 01"
+    },
+    {
+     "id": "candidate3-390-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/390-eric-south-02.webp",
+     "caption": "390 eric south 02"
+    },
+    {
+     "id": "candidate3-390-eric-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/390-eric-south-03.webp",
+     "caption": "390 eric south 03"
+    },
+    {
+     "id": "candidate3-390-eric-south-04",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate3/390-eric-south-04.webp",
+     "caption": "390 eric south 04"
+    }
+   ]
+  },
+  {
+   "title": "baseline4",
+   "caption": "Original passage, final performance-recorded comparison.",
+   "images": [
+    {
+     "id": "baseline4-1366-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-eric-north-before.webp",
+     "caption": "1366 eric north before"
+    },
+    {
+     "id": "baseline4-1366-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-eric-north-00.webp",
+     "caption": "1366 eric north 00"
+    },
+    {
+     "id": "baseline4-1366-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-eric-north-01.webp",
+     "caption": "1366 eric north 01"
+    },
+    {
+     "id": "baseline4-1366-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-eric-south-before.webp",
+     "caption": "1366 eric south before"
+    },
+    {
+     "id": "baseline4-1366-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-eric-south-00.webp",
+     "caption": "1366 eric south 00"
+    },
+    {
+     "id": "baseline4-1366-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-eric-south-01.webp",
+     "caption": "1366 eric south 01"
+    },
+    {
+     "id": "baseline4-1366-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-eric-south-02.webp",
+     "caption": "1366 eric south 02"
+    },
+    {
+     "id": "baseline4-1366-carina-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-carina-north-before.webp",
+     "caption": "1366 carina north before"
+    },
+    {
+     "id": "baseline4-1366-carina-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-carina-north-00.webp",
+     "caption": "1366 carina north 00"
+    },
+    {
+     "id": "baseline4-1366-carina-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-carina-north-01.webp",
+     "caption": "1366 carina north 01"
+    },
+    {
+     "id": "baseline4-1366-carina-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-carina-south-before.webp",
+     "caption": "1366 carina south before"
+    },
+    {
+     "id": "baseline4-1366-carina-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-carina-south-00.webp",
+     "caption": "1366 carina south 00"
+    },
+    {
+     "id": "baseline4-1366-carina-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-carina-south-01.webp",
+     "caption": "1366 carina south 01"
+    },
+    {
+     "id": "baseline4-1366-carina-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/1366-carina-south-02.webp",
+     "caption": "1366 carina south 02"
+    },
+    {
+     "id": "baseline4-390-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/390-eric-north-before.webp",
+     "caption": "390 eric north before"
+    },
+    {
+     "id": "baseline4-390-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/390-eric-north-00.webp",
+     "caption": "390 eric north 00"
+    },
+    {
+     "id": "baseline4-390-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/390-eric-north-01.webp",
+     "caption": "390 eric north 01"
+    },
+    {
+     "id": "baseline4-390-eric-north-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/390-eric-north-02.webp",
+     "caption": "390 eric north 02"
+    },
+    {
+     "id": "baseline4-390-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/390-eric-south-before.webp",
+     "caption": "390 eric south before"
+    },
+    {
+     "id": "baseline4-390-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/390-eric-south-00.webp",
+     "caption": "390 eric south 00"
+    },
+    {
+     "id": "baseline4-390-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/390-eric-south-01.webp",
+     "caption": "390 eric south 01"
+    },
+    {
+     "id": "baseline4-390-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/390-eric-south-02.webp",
+     "caption": "390 eric south 02"
+    },
+    {
+     "id": "baseline4-390-eric-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/390-eric-south-03.webp",
+     "caption": "390 eric south 03"
+    },
+    {
+     "id": "baseline4-390-eric-south-04",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/baseline4/390-eric-south-04.webp",
+     "caption": "390 eric south 04"
+    }
+   ]
+  },
+  {
+   "title": "candidate4",
+   "caption": "Wider and taller passage, final performance-recorded comparison.",
+   "images": [
+    {
+     "id": "candidate4-1366-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-eric-north-before.webp",
+     "caption": "1366 eric north before"
+    },
+    {
+     "id": "candidate4-1366-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-eric-north-00.webp",
+     "caption": "1366 eric north 00"
+    },
+    {
+     "id": "candidate4-1366-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-eric-north-01.webp",
+     "caption": "1366 eric north 01"
+    },
+    {
+     "id": "candidate4-1366-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-eric-south-before.webp",
+     "caption": "1366 eric south before"
+    },
+    {
+     "id": "candidate4-1366-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-eric-south-00.webp",
+     "caption": "1366 eric south 00"
+    },
+    {
+     "id": "candidate4-1366-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-eric-south-01.webp",
+     "caption": "1366 eric south 01"
+    },
+    {
+     "id": "candidate4-1366-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-eric-south-02.webp",
+     "caption": "1366 eric south 02"
+    },
+    {
+     "id": "candidate4-1366-carina-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-carina-north-before.webp",
+     "caption": "1366 carina north before"
+    },
+    {
+     "id": "candidate4-1366-carina-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-carina-north-00.webp",
+     "caption": "1366 carina north 00"
+    },
+    {
+     "id": "candidate4-1366-carina-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-carina-north-01.webp",
+     "caption": "1366 carina north 01"
+    },
+    {
+     "id": "candidate4-1366-carina-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-carina-south-before.webp",
+     "caption": "1366 carina south before"
+    },
+    {
+     "id": "candidate4-1366-carina-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-carina-south-00.webp",
+     "caption": "1366 carina south 00"
+    },
+    {
+     "id": "candidate4-1366-carina-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-carina-south-01.webp",
+     "caption": "1366 carina south 01"
+    },
+    {
+     "id": "candidate4-1366-carina-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/1366-carina-south-02.webp",
+     "caption": "1366 carina south 02"
+    },
+    {
+     "id": "candidate4-390-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/390-eric-north-before.webp",
+     "caption": "390 eric north before"
+    },
+    {
+     "id": "candidate4-390-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/390-eric-north-00.webp",
+     "caption": "390 eric north 00"
+    },
+    {
+     "id": "candidate4-390-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/390-eric-north-01.webp",
+     "caption": "390 eric north 01"
+    },
+    {
+     "id": "candidate4-390-eric-north-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/390-eric-north-02.webp",
+     "caption": "390 eric north 02"
+    },
+    {
+     "id": "candidate4-390-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/390-eric-south-before.webp",
+     "caption": "390 eric south before"
+    },
+    {
+     "id": "candidate4-390-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/390-eric-south-00.webp",
+     "caption": "390 eric south 00"
+    },
+    {
+     "id": "candidate4-390-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/390-eric-south-01.webp",
+     "caption": "390 eric south 01"
+    },
+    {
+     "id": "candidate4-390-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/390-eric-south-02.webp",
+     "caption": "390 eric south 02"
+    },
+    {
+     "id": "candidate4-390-eric-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/390-eric-south-03.webp",
+     "caption": "390 eric south 03"
+    },
+    {
+     "id": "candidate4-390-eric-south-04",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate4/390-eric-south-04.webp",
+     "caption": "390 eric south 04"
+    }
+   ]
+  },
+  {
+   "title": "candidate5",
+   "caption": "Harness failure: native turn reached the 1600px test-display edge at the larger viewport.",
+   "images": [
+    {
+     "id": "candidate5-2560-eric-failure",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate5/2560-eric-failure.webp.webp",
+     "caption": "2560 eric failure"
+    }
+   ]
+  },
+  {
+   "title": "candidate6",
+   "caption": "Harness failure: native turn reached the 1600px test-display edge at the larger viewport.",
+   "images": [
+    {
+     "id": "candidate6-2560-eric-failure",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate6/2560-eric-failure.webp.webp",
+     "caption": "2560 eric failure"
+    }
+   ]
+  },
+  {
+   "title": "candidate7",
+   "caption": "Partial larger capture: Carina’s second native pointer capture timed out after viewport resize.",
+   "images": [
+    {
+     "id": "candidate7-2560-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate7/2560-eric-north-before.webp.webp",
+     "caption": "2560 eric north before"
+    },
+    {
+     "id": "candidate7-2560-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate7/2560-eric-north-00.webp.webp",
+     "caption": "2560 eric north 00"
+    },
+    {
+     "id": "candidate7-2560-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate7/2560-eric-north-01.webp.webp",
+     "caption": "2560 eric north 01"
+    },
+    {
+     "id": "candidate7-2560-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate7/2560-eric-south-before.webp.webp",
+     "caption": "2560 eric south before"
+    },
+    {
+     "id": "candidate7-2560-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate7/2560-eric-south-00.webp.webp",
+     "caption": "2560 eric south 00"
+    },
+    {
+     "id": "candidate7-2560-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate7/2560-eric-south-01.webp.webp",
+     "caption": "2560 eric south 01"
+    },
+    {
+     "id": "candidate7-2560-carina-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate7/2560-carina-north-before.webp.webp",
+     "caption": "2560 carina north before"
+    },
+    {
+     "id": "candidate7-2560-carina-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate7/2560-carina-north-00.webp.webp",
+     "caption": "2560 carina north 00"
+    },
+    {
+     "id": "candidate7-2560-carina-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate7/2560-carina-north-01.webp.webp",
+     "caption": "2560 carina north 01"
+    },
+    {
+     "id": "candidate7-2560-carina-failure",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate7/2560-carina-failure.webp",
+     "caption": "2560 carina failure"
+    }
+   ]
+  },
+  {
+   "title": "candidate8",
+   "caption": "Final 2560×1440 walkthroughs of both protagonists, with native turns at 1366×860 before restoring the larger viewport; phone overview also passes.",
+   "images": [
+    {
+     "id": "candidate8-2560-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-eric-north-before.webp.webp",
+     "caption": "2560 eric north before"
+    },
+    {
+     "id": "candidate8-2560-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-eric-north-00.webp.webp",
+     "caption": "2560 eric north 00"
+    },
+    {
+     "id": "candidate8-2560-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-eric-north-01.webp.webp",
+     "caption": "2560 eric north 01"
+    },
+    {
+     "id": "candidate8-2560-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-eric-south-before.webp.webp",
+     "caption": "2560 eric south before"
+    },
+    {
+     "id": "candidate8-2560-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-eric-south-00.webp.webp",
+     "caption": "2560 eric south 00"
+    },
+    {
+     "id": "candidate8-2560-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-eric-south-01.webp.webp",
+     "caption": "2560 eric south 01"
+    },
+    {
+     "id": "candidate8-2560-carina-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-carina-north-before.webp.webp",
+     "caption": "2560 carina north before"
+    },
+    {
+     "id": "candidate8-2560-carina-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-carina-north-00.webp.webp",
+     "caption": "2560 carina north 00"
+    },
+    {
+     "id": "candidate8-2560-carina-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-carina-north-01.webp.webp",
+     "caption": "2560 carina north 01"
+    },
+    {
+     "id": "candidate8-2560-carina-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-carina-south-before.webp.webp",
+     "caption": "2560 carina south before"
+    },
+    {
+     "id": "candidate8-2560-carina-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-carina-south-00.webp.webp",
+     "caption": "2560 carina south 00"
+    },
+    {
+     "id": "candidate8-2560-carina-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/2560-carina-south-01.webp.webp",
+     "caption": "2560 carina south 01"
+    },
+    {
+     "id": "candidate8-390-eric-north-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-north-before.webp",
+     "caption": "390 eric north before"
+    },
+    {
+     "id": "candidate8-390-eric-north-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-north-00.webp",
+     "caption": "390 eric north 00"
+    },
+    {
+     "id": "candidate8-390-eric-north-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-north-01.webp",
+     "caption": "390 eric north 01"
+    },
+    {
+     "id": "candidate8-390-eric-north-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-north-02.webp",
+     "caption": "390 eric north 02"
+    },
+    {
+     "id": "candidate8-390-eric-south-before",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-south-before.webp",
+     "caption": "390 eric south before"
+    },
+    {
+     "id": "candidate8-390-eric-south-00",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-south-00.webp",
+     "caption": "390 eric south 00"
+    },
+    {
+     "id": "candidate8-390-eric-south-01",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-south-01.webp",
+     "caption": "390 eric south 01"
+    },
+    {
+     "id": "candidate8-390-eric-south-02",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-south-02.webp",
+     "caption": "390 eric south 02"
+    },
+    {
+     "id": "candidate8-390-eric-south-03",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-south-03.webp",
+     "caption": "390 eric south 03"
+    },
+    {
+     "id": "candidate8-390-eric-south-04",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-south-04.webp",
+     "caption": "390 eric south 04"
+    },
+    {
+     "id": "candidate8-390-eric-south-05",
+     "image": "bible/shots/showcase/dorm-doorway-20261007/candidate8/390-eric-south-05.webp",
+     "caption": "390 eric south 05"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play room 203",
+   "href": "game3d/?place=dorms"
+  },
+  {
+   "label": "Check notes",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/dorm-doorway-20261007.md"
+  }
+ ],
+ "media": []
+}

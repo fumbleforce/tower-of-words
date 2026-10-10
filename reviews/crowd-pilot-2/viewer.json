@@ -1,0 +1,16 @@
+{
+ "title": "Crowd pilot round 2: office man (A) and office woman (B)",
+ "blurb": "Real rigged 3D models, built by the game's own loader from the files the game would load (Meshy's auto-rig with mended skin weights, Meshy's walk, run and sit, the approved relaxed-3 idle). Walk and run move them, as the game does: on a treadmill (the grid slides back under them) or round a loop. Not in the game.",
+ "rigs": {
+  "a": {"id": "crowd2-a", "label": "A, office man", "dir": "art/parts/crowd-pilot-2/game/a/", "idle": "art/parts/crowd-pilot-2/game/a/idle.json", "height": 1.09},
+  "b": {"id": "crowd2-b", "label": "B, office woman", "dir": "art/parts/crowd-pilot-2/game/b/", "idle": "art/parts/crowd-pilot-2/game/b/idle.json", "height": 1.06},
+  "kenji": {"id": "kenji", "label": "Kenji (in game)", "dir": "game3d/assets/characters/kenji/", "idle": "game3d/assets/characters/relaxed-idle-kenji.json", "height": 1.12},
+  "hamada": {"id": "kuroda", "label": "Hamada (in game)", "dir": "game3d/assets/characters/kuroda/", "idle": "game3d/assets/characters/relaxed-idle-kuroda.json", "height": 1.09},
+  "emi": {"id": "emi", "label": "Emi (in game)", "dir": "game3d/assets/characters/emi/", "idle": "game3d/assets/characters/relaxed-idle-emi.json", "height": 1.09}
+ },
+ "scenes": {
+  "pair": {"label": "A and B", "items": [{"rig": "a"}, {"rig": "b"}], "gap": 0.9},
+  "cast": {"label": "Beside the cast", "items": [{"rig": "hamada"}, {"rig": "a"}, {"rig": "kenji"}, {"rig": "emi"}, {"rig": "b"}], "gap": 0.85}
+ },
+ "closeups": ["a", "b"]
+}

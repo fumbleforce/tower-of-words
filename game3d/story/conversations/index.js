@@ -1,0 +1,12 @@
+import SENDER from '../investigations/sender.js';
+import MIO from './mio.js';
+import EMI from './emi.js';
+import GUARD from './guard.js';
+import KURO from './kuro.js';
+import AOI from './aoi.js';
+import REI from './rei.js';
+import HAMADA from './hamada.js';
+import MORI from './mori.js';
+import KENJI from './kenji.js';
+import REGISTER from './register.js';
+export default { on: { ...SENDER.on, ...MORI.on, ...KENJI.on, ...HAMADA.on, ...MIO.on, ...EMI.on, ...GUARD.on, ...KURO.on, ...AOI.on, ...REI.on, ...REGISTER.on }, nodes: { ...SENDER.nodes, ...MORI.nodes, ...KENJI.nodes, ...HAMADA.nodes, ...MIO.nodes, ...EMI.nodes, ...GUARD.nodes, ...KURO.nodes, ...AOI.nodes, ...REI.nodes, ...REGISTER.nodes } };

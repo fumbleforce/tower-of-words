@@ -1,0 +1,149 @@
+{
+ "title": "East lane, walkable",
+ "date": "2026-10-02",
+ "by": "claude-agent:east-lane",
+ "caption": "The second south-half district from island-half-1 is now a place to walk: the east lane (backdrop since east-lane-1), with the pocket park, the café, the liquor and rice shop, the barber and Amakawa Travel. Reach it from the plaza in the morning: keep walking east along the lane past the cross walk. It also loads with ?place=east_lane. The shops are shut for now.",
+ "sections": [
+  {
+   "title": "Coming in along the lane",
+   "caption": "Before: the plaza's camera aimed at the pocket park, which no play camera reached. After: Eric walks on east from the plaza toward the jog, the park ahead. The camera here looks north-east, so the park and the north street's fronts face it.",
+   "images": [
+    {
+     "id": "before-park-desk",
+     "image": "bible/shots/showcase/east-lane-2/before-park-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-park-phone",
+     "image": "bible/shots/showcase/east-lane-2/before-park-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-lane-desk",
+     "image": "bible/shots/showcase/east-lane-2/after-lane-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-lane-phone",
+     "image": "bible/shots/showcase/east-lane-2/after-lane-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The south walk: café and barber",
+   "caption": "Before: from the plaza only their backs showed. After: on the south walk the camera turns to look south-east, a little steeper, so the fronts face it and the lane's trees don't hide Eric. Signs (カフェ CAFE, とこや BARBER), the barber's striped pole, and each door shut with a 準備中 CLOSED card.",
+   "images": [
+    {
+     "id": "before-cafe-desk",
+     "image": "bible/shots/showcase/east-lane-2/before-cafe-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-cafe-phone",
+     "image": "bible/shots/showcase/east-lane-2/before-cafe-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-cafe-desk",
+     "image": "bible/shots/showcase/east-lane-2/after-cafe-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-cafe-phone",
+     "image": "bible/shots/showcase/east-lane-2/after-cafe-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The liquor and rice shop",
+   "caption": "At the foot of the cross walk: さかや SAKE · RICE on a board standing on its tiled roof, a cedar ball by the door, the door shut.",
+   "images": [
+    {
+     "id": "before-liquor-desk",
+     "image": "bible/shots/showcase/east-lane-2/before-liquor-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-liquor-phone",
+     "image": "bible/shots/showcase/east-lane-2/before-liquor-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-liquor-desk",
+     "image": "bible/shots/showcase/east-lane-2/after-liquor-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-liquor-phone",
+     "image": "bible/shots/showcase/east-lane-2/after-liquor-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Amakawa Travel",
+   "caption": "Up the north street past the family flats and the director's house, then west along the back lane to its door: あまかわトラベル AMAKAWA TRAVEL on the canopy, shut.",
+   "images": [
+    {
+     "id": "before-travel-desk",
+     "image": "bible/shots/showcase/east-lane-2/before-travel-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-travel-phone",
+     "image": "bible/shots/showcase/east-lane-2/before-travel-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-travel-desk",
+     "image": "bible/shots/showcase/east-lane-2/after-travel-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-travel-phone",
+     "image": "bible/shots/showcase/east-lane-2/after-travel-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "More",
+   "caption": "The north street, and the south walk after work.",
+   "images": [
+    {
+     "id": "after-north-desk",
+     "image": "bible/shots/showcase/east-lane-2/after-north-desk.webp.webp",
+     "caption": "North street, desktop"
+    },
+    {
+     "id": "after-north-phone",
+     "image": "bible/shots/showcase/east-lane-2/after-north-phone.webp",
+     "caption": "North street, phone"
+    },
+    {
+     "id": "after-eve-desk",
+     "image": "bible/shots/showcase/east-lane-2/after-eve-desk.webp.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "after-eve-phone",
+     "image": "bible/shots/showcase/east-lane-2/after-eve-phone.webp",
+     "caption": "After work, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=east_lane"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "media": []
+}

@@ -1,0 +1,22 @@
+{
+ "title": "Mio teaching gaijin: how kind?",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "decided",
+ "multi": false,
+ "question": "On the train Eric asks \"A what?\", types gaijin, and Mio says: \"Mm, like that. Don't worry, it's not mean, it's like saying 'the new guy', basically.\" Is that right for her, when she doesn't love strangers?",
+ "options": [
+  {
+   "id": "keep",
+   "label": "Keep it as it is"
+  },
+  {
+   "id": "guarded",
+   "label": "Make it more guarded",
+   "note": "She doesn't reassure him; she just moves on. Add wording in your comment if you have some in mind."
+  }
+ ],
+ "decision": "a little more teasing and cheeky",
+ "issue": 29,
+ "media": []
+}

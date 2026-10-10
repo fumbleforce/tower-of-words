@@ -1,0 +1,225 @@
+{
+ "title": "Natural hedges and bushes, real tree trunks and a proper park bench",
+ "date": "2026-10-09",
+ "by": "claude-agent:planting",
+ "caption": "Trees, bushes, hedges and benches outdoors are now Blender models. Trunks taper, flare at the roots and fork into limbs. Hedges and bushes are leafy clumps with no repeating leaf grid, and benches have timber slats on cast-iron ends. This is in every outdoor place, in both the default and the street style. Paths, kerbs, steps and beds are a separate job.",
+ "result": [
+  "after-street-hedges-desk",
+  "closeup-bench",
+  "after-street-wide-desk",
+  "models-closeup"
+ ],
+ "sections": [
+  {
+   "title": "Close-ups of the new models",
+   "caption": "The Blender models on their own, then the trunk, bench and hedge in the game (street style, desktop).",
+   "images": [
+    {
+     "id": "models-closeup",
+     "image": "bible/shots/showcase/planting-20261009/models-closeup.webp",
+     "caption": "Trunks (zelkova, cherry, pine, maple), a bush, a hedge plant, the bench and its iron end"
+    },
+    {
+     "id": "closeup-trunk",
+     "image": "bible/shots/showcase/planting-20261009/closeup-trunk.webp",
+     "caption": "A zelkova trunk: root flare, taper and the fork into its limbs"
+    },
+    {
+     "id": "closeup-bench",
+     "image": "bible/shots/showcase/planting-20261009/closeup-bench.webp",
+     "caption": "The garden bench: shaped slats on cast-iron ends with armrests"
+    },
+    {
+     "id": "closeup-hedge",
+     "image": "bible/shots/showcase/planting-20261009/closeup-hedge.webp",
+     "caption": "The lane hedge: leafy clumps, no grid of leaves"
+    }
+   ]
+  },
+  {
+   "title": "Your hedge view: the garden court looking south",
+   "caption": "Same player spot and camera before and after, both styles, desktop and phone.",
+   "images": [
+    {
+     "id": "before-street-hedges-desk",
+     "image": "bible/shots/showcase/planting-20261009/before-street-hedges-desk.webp.webp",
+     "caption": "Before, street style (?diorama=1), desktop"
+    },
+    {
+     "id": "after-street-hedges-desk",
+     "image": "bible/shots/showcase/planting-20261009/after-street-hedges-desk.webp.webp",
+     "caption": "After, street style (?diorama=1), desktop"
+    },
+    {
+     "id": "before-street-hedges-phone",
+     "image": "bible/shots/showcase/planting-20261009/before-street-hedges-phone.webp.webp",
+     "caption": "Before, street style (?diorama=1), phone"
+    },
+    {
+     "id": "after-street-hedges-phone",
+     "image": "bible/shots/showcase/planting-20261009/after-street-hedges-phone.webp.webp",
+     "caption": "After, street style (?diorama=1), phone"
+    },
+    {
+     "id": "before-legacy-hedges-desk",
+     "image": "bible/shots/showcase/planting-20261009/before-legacy-hedges-desk.webp.webp",
+     "caption": "Before, default style, desktop"
+    },
+    {
+     "id": "after-legacy-hedges-desk",
+     "image": "bible/shots/showcase/planting-20261009/after-legacy-hedges-desk.webp.webp",
+     "caption": "After, default style, desktop"
+    },
+    {
+     "id": "before-legacy-hedges-phone",
+     "image": "bible/shots/showcase/planting-20261009/before-legacy-hedges-phone.webp",
+     "caption": "Before, default style, phone"
+    },
+    {
+     "id": "after-legacy-hedges-phone",
+     "image": "bible/shots/showcase/planting-20261009/after-legacy-hedges-phone.webp",
+     "caption": "After, default style, phone"
+    }
+   ]
+  },
+  {
+   "title": "Your lantern deck view, from above",
+   "caption": "Same player spot and camera before and after, both styles, desktop and phone.",
+   "images": [
+    {
+     "id": "before-street-steps-desk",
+     "image": "bible/shots/showcase/planting-20261009/before-street-steps-desk.webp.webp",
+     "caption": "Before, street style (?diorama=1), desktop"
+    },
+    {
+     "id": "after-street-steps-desk",
+     "image": "bible/shots/showcase/planting-20261009/after-street-steps-desk.webp.webp",
+     "caption": "After, street style (?diorama=1), desktop"
+    },
+    {
+     "id": "before-street-steps-phone",
+     "image": "bible/shots/showcase/planting-20261009/before-street-steps-phone.webp.webp",
+     "caption": "Before, street style (?diorama=1), phone"
+    },
+    {
+     "id": "after-street-steps-phone",
+     "image": "bible/shots/showcase/planting-20261009/after-street-steps-phone.webp.webp",
+     "caption": "After, street style (?diorama=1), phone"
+    },
+    {
+     "id": "before-legacy-steps-desk",
+     "image": "bible/shots/showcase/planting-20261009/before-legacy-steps-desk.webp.webp",
+     "caption": "Before, default style, desktop"
+    },
+    {
+     "id": "after-legacy-steps-desk",
+     "image": "bible/shots/showcase/planting-20261009/after-legacy-steps-desk.webp.webp",
+     "caption": "After, default style, desktop"
+    },
+    {
+     "id": "before-legacy-steps-phone",
+     "image": "bible/shots/showcase/planting-20261009/before-legacy-steps-phone.webp",
+     "caption": "Before, default style, phone"
+    },
+    {
+     "id": "after-legacy-steps-phone",
+     "image": "bible/shots/showcase/planting-20261009/after-legacy-steps-phone.webp",
+     "caption": "After, default style, phone"
+    }
+   ]
+  },
+  {
+   "title": "Wide street view: the lane east toward the plaza",
+   "caption": "Same spot before and after, both styles, desktop and phone.",
+   "images": [
+    {
+     "id": "before-street-wide-desk",
+     "image": "bible/shots/showcase/planting-20261009/before-street-wide-desk.webp.webp",
+     "caption": "Before, street style (?diorama=1), desktop"
+    },
+    {
+     "id": "after-street-wide-desk",
+     "image": "bible/shots/showcase/planting-20261009/after-street-wide-desk.webp.webp",
+     "caption": "After, street style (?diorama=1), desktop"
+    },
+    {
+     "id": "before-street-wide-phone",
+     "image": "bible/shots/showcase/planting-20261009/before-street-wide-phone.webp",
+     "caption": "Before, street style (?diorama=1), phone"
+    },
+    {
+     "id": "after-street-wide-phone",
+     "image": "bible/shots/showcase/planting-20261009/after-street-wide-phone.webp",
+     "caption": "After, street style (?diorama=1), phone"
+    },
+    {
+     "id": "before-legacy-wide-desk",
+     "image": "bible/shots/showcase/planting-20261009/before-legacy-wide-desk.webp.webp",
+     "caption": "Before, default style, desktop"
+    },
+    {
+     "id": "after-legacy-wide-desk",
+     "image": "bible/shots/showcase/planting-20261009/after-legacy-wide-desk.webp.webp",
+     "caption": "After, default style, desktop"
+    },
+    {
+     "id": "before-legacy-wide-phone",
+     "image": "bible/shots/showcase/planting-20261009/before-legacy-wide-phone.webp",
+     "caption": "Before, default style, phone"
+    },
+    {
+     "id": "after-legacy-wide-phone",
+     "image": "bible/shots/showcase/planting-20261009/after-legacy-wide-phone.webp",
+     "caption": "After, default style, phone"
+    }
+   ]
+  },
+  {
+   "title": "The garden bench and the lane trees",
+   "caption": "Desktop, both styles.",
+   "images": [
+    {
+     "id": "before-street-bench-desk",
+     "image": "bible/shots/showcase/planting-20261009/before-street-bench-desk.webp.webp",
+     "caption": "Before, street style (?diorama=1), desktop"
+    },
+    {
+     "id": "after-street-bench-desk",
+     "image": "bible/shots/showcase/planting-20261009/after-street-bench-desk.webp.webp",
+     "caption": "After, street style (?diorama=1), desktop"
+    },
+    {
+     "id": "after-street-trunk-desk",
+     "image": "bible/shots/showcase/planting-20261009/after-street-trunk-desk.webp.webp",
+     "caption": "After, street style, the lane trees from the lane"
+    },
+    {
+     "id": "before-legacy-bench-desk",
+     "image": "bible/shots/showcase/planting-20261009/before-legacy-bench-desk.webp.webp",
+     "caption": "Before, default style, desktop"
+    },
+    {
+     "id": "after-legacy-bench-desk",
+     "image": "bible/shots/showcase/planting-20261009/after-legacy-bench-desk.webp.webp",
+     "caption": "After, default style, desktop"
+    },
+    {
+     "id": "after-legacy-trunk-desk",
+     "image": "bible/shots/showcase/planting-20261009/after-legacy-trunk-desk.webp.webp",
+     "caption": "After, default style, the lane trees from the lane"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the street style",
+   "href": "game3d/index.html?place=forecourt&diorama=1"
+  },
+  {
+   "label": "Issue #362",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/362"
+  }
+ ],
+ "media": []
+}

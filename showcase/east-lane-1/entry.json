@@ -1,0 +1,129 @@
+{
+ "title": "East lane: the blocks between the fountain plaza and the dorms",
+ "date": "2026-10-01",
+ "by": "claude-agent:east-lane",
+ "caption": "The first of the island's neighbour blocks (work issue #139): the lane past the fountain plaza on to the dorm street, built as backdrop in the plaza's palette. Day 1 doesn't walk it; you see it from the plaza's east exit and on the island map (M).",
+ "sections": [
+  {
+   "title": "The plaza's east exit, before and after",
+   "caption": "Where the lawn was bare, an office block's front now closes the view: its door, a bike rack and a walk crossing the lane between the avenue's zelkovas.",
+   "images": [
+    {
+     "id": "before-pl4-desk",
+     "image": "bible/shots/showcase/east-lane-1/before-pl4-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-pl4-desk",
+     "image": "bible/shots/showcase/east-lane-1/after-pl4-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-pl4-phone",
+     "image": "bible/shots/showcase/east-lane-1/before-pl4-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-pl4-phone",
+     "image": "bible/shots/showcase/east-lane-1/after-pl4-phone.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "after-pl4e-desk",
+     "image": "bible/shots/showcase/east-lane-1/after-pl4e-desk.webp.webp",
+     "caption": "After work: lamps and lit windows"
+    }
+   ]
+  },
+  {
+   "title": "The island map",
+   "caption": "The plaza's tile now runs east to the dorm courtyard, so the gap between them is gone.",
+   "images": [
+    {
+     "id": "before-map",
+     "image": "bible/shots/showcase/east-lane-1/before-map.webp.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "after-map",
+     "image": "bible/shots/showcase/east-lane-1/after-map.webp.webp",
+     "caption": "After"
+    }
+   ]
+  },
+  {
+   "title": "Close up (Eric placed where the player can't go)",
+   "caption": "The lane's jog, the pocket park with its gravel square, and the office block with the north street behind.",
+   "images": [
+    {
+     "id": "after-jog-desk",
+     "image": "bible/shots/showcase/east-lane-1/after-jog-desk.webp.webp",
+     "caption": "The cross walk and the jog"
+    },
+    {
+     "id": "after-park-desk",
+     "image": "bible/shots/showcase/east-lane-1/after-park-desk.webp.webp",
+     "caption": "The pocket park"
+    },
+    {
+     "id": "after-north-desk",
+     "image": "bible/shots/showcase/east-lane-1/after-north-desk.webp.webp",
+     "caption": "The office block and the north street"
+    }
+   ]
+  },
+  {
+   "title": "Follow-up (#162): the training centre up the cross walk",
+   "caption": "The block at the top of the cross walk is the company's new-staff training centre, with a sign on its canopy (けんしゅう NEW STAFF TRAINING). Eric can now walk the lane on past the cross walk and up it to the door. Its menu says Go in; the door is locked, and one line says why. The same line plays in the morning and after work, when its windows stay dark.",
+   "images": [
+    {
+     "id": "door-walk-desk",
+     "image": "bible/shots/showcase/east-lane-1/door-walk-desk.webp.webp",
+     "caption": "Walking up the cross walk, desktop"
+    },
+    {
+     "id": "door-walk-phone",
+     "image": "bible/shots/showcase/east-lane-1/door-walk-phone.webp",
+     "caption": "Walking up the cross walk, phone"
+    },
+    {
+     "id": "door-menu-desk",
+     "image": "bible/shots/showcase/east-lane-1/door-menu-desk.webp.webp",
+     "caption": "At the door: the menu, desktop"
+    },
+    {
+     "id": "door-menu-phone",
+     "image": "bible/shots/showcase/east-lane-1/door-menu-phone.webp",
+     "caption": "At the door: the menu, phone"
+    },
+    {
+     "id": "door-line-desk",
+     "image": "bible/shots/showcase/east-lane-1/door-line-desk.webp.webp",
+     "caption": "Go in: the line, desktop"
+    },
+    {
+     "id": "door-line-phone",
+     "image": "bible/shots/showcase/east-lane-1/door-line-phone.webp",
+     "caption": "Go in: the line, phone"
+    },
+    {
+     "id": "door-line-eve-desk",
+     "image": "bible/shots/showcase/east-lane-1/door-line-eve-desk.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "door-line-eve-phone",
+     "image": "bible/shots/showcase/east-lane-1/door-line-eve-phone.webp",
+     "caption": "After work, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

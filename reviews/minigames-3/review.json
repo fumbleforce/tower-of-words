@@ -1,0 +1,144 @@
+{
+ "title": "Kotodama: a new grammar game from scratch",
+ "date": "2026-10-04",
+ "by": "claude-agent:grammar-game",
+ "status": "decided",
+ "question": "This is a playable prototype, not pictures: play it at https://fumbleforce.github.io/tower-of-words/game3d/minigames/kotodama.html (phone or desktop, about four minutes). It's a new game, started over after \"even less fun, start over, write a new game from scratch, make it the most fun and impressive grammar game in existence\". Is this fun? Round 2 (after your note: translations cut off, too casual, instructions unclear): the first twelve pictures show the fixes. Same game; the translations fit at every size, people speak politely (～さん, ください, です/ます; the machines still get plain だして), and the first command is a three-step walkthrough with a hand. Round 3 (after \"kotodama: fun, keep going with it\"; tapping over dragging, better machines): the first seven pictures. Same game. The vending machine, hot-water pot and fridge are redrawn with idle motion and a dispense, and the drinks are redrawn to match. Every action was already a tap; now a unit test keeps it that way, and the particle buttons pulse while a word waits for its particle.",
+ "multi": false,
+ "media": [
+  {
+   "image": "reviews/minigames-3/shots/r3-machines-before.webp",
+   "caption": "Round 3, before: the machines and drinks as they were (SVG, shown large and at phone size)."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-machines-after.webp",
+   "caption": "Round 3, after: a red street vending machine (lit COLD sign, two shelves of drinks with prices and blinking select lights, ¥130 display, coin slot, PUSH tray), the thermos pot with its pump button, water gauge, 98° display, keep-warm lamp, steam and a mug under the spout, and a mint fridge covered in notes with Tama's photo on it. Below: the drinks redrawn to match."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-dispense-strip.webp.webp",
+   "caption": "Round 3, the dispense, slowed down (read left to right, top to bottom): the can clunks into the tray and the flap swings up; the pot's pump goes down and pours into the mug; the fridge door swings open in a puff of cold, then shuts."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-ingame-strip.webp.webp",
+   "caption": "Round 3, in the game at 1366x860: the first command. Lights dip, the can drops into the tray, the flap opens and the cola flies to Kenji."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-phone-shift3.webp",
+   "caption": "Round 3, phone 390x844, shift 3: all three machines, a little bigger than before."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-desktop-shift1.webp",
+   "caption": "Round 3, desktop 1366x860, shift 1."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-desktop-shift3.webp",
+   "caption": "Round 3, desktop 1366x860, shift 3."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-0-title.webp",
+   "caption": "Fix, phone 390: the title now says the goal in one line, with the dots drawn."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-1-step1.webp",
+   "caption": "Fix, the first minute, step 1 of 3: a hand on Kenji, the step card says \"Tap Kenji, then に (to)\". Kenji asks politely: コーラを ください！ Other taps wait until the hand's one is done."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-2-step2.webp",
+   "caption": "Step 2 of 3: Kenji has に, the hand moves to the cola: \"Tap the cola, then を (what)\"."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-3-step3.webp",
+   "caption": "Step 3 of 3: \"Press だして\". The whole English translation sits on its own line under the tiles and wraps instead of being cut off."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-4-second.webp",
+   "caption": "After the walkthrough: Mio, in です/ます: つぎは わたしです / コーヒー、いいですか？ The goal and the commands left stay under the top bar."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-5-to.webp",
+   "caption": "Shift 2: と is taught the first time it matters, with the hand on each tap (Kenji, と, Mori, に, coffee を)."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone360-6-shift3.webp",
+   "caption": "Phone 360x780, shift 3: four people, three machines, every line whole."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-desktop-1-step3.webp",
+   "caption": "Desktop at your window size (1000x645): on a short window the talk sits beside the sentence, so the room and the full translation both fit."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-desktop-2-to.webp",
+   "caption": "Desktop 1000x645: the と step."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-desktop-3-pick.webp",
+   "caption": "Desktop 1000x645: the power word pick between shifts."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-desktop-4-end.webp",
+   "caption": "Desktop 1000x645: the end card."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-desktop1920-step2.webp",
+   "caption": "Desktop 1920x1080: step 2 of the walkthrough."
+  },
+  {
+   "image": "reviews/minigames-3/shots/strip-combo.webp.webp",
+   "caption": "Frame strip, phone: the first と combo in shift 2. ケンジくんと モリさんに コーヒーを だしてください: the lights dip, the command rises off the vending machine, two cans fly, both bubbles pop, then 2 × 2 with the streak and ください multipliers."
+  },
+  {
+   "image": "reviews/minigames-3/shots/strip-swapped.webp.webp",
+   "caption": "Frame strip, phone: the particles swapped on purpose. コーヒーに ミオさんを だして puts Mio out of the vending machine and lands her on the coffee, then one line says what を and に said."
+  }
+ ],
+ "options": [
+  {
+   "id": "kotodama",
+   "label": "kotodama: fun, keep going with it",
+   "image": "reviews/minigames-3/shots/phone-3-built.webp",
+   "images": [
+    "reviews/minigames-3/shots/phone-1-title.webp",
+    "reviews/minigames-3/shots/phone-2-first.webp",
+    "reviews/minigames-3/shots/phone-4-swapped.webp",
+    "reviews/minigames-3/shots/phone-5-launch.webp",
+    "reviews/minigames-3/shots/phone-6-why.webp",
+    "reviews/minigames-3/shots/phone-7-pick.webp",
+    "reviews/minigames-3/shots/phone-8-combo-built.webp",
+    "reviews/minigames-3/shots/phone-9-combo.webp",
+    "reviews/minigames-3/shots/phone-10-shift3.webp",
+    "reviews/minigames-3/shots/phone-11-end.webp",
+    "reviews/minigames-3/shots/desktop-1-combo-built.webp",
+    "reviews/minigames-3/shots/desktop-2-combo.webp",
+    "reviews/minigames-3/shots/desktop-3-shift3.webp",
+    "reviews/minigames-3/shots/desktop-4-end.webp"
+   ],
+   "note": "The pitch: B2 after six, and the old machines do exactly what Eric says, word for word. You build each command from the room itself (tap who and what, give each a particle, then fire the verb), and the particles decide what flies where. Requests pile up faster than one command can answer them one at a time, so と (two or three people served in one sentence) is the combo you need, scored 2 × 2 or 3 × 3 with a streak on top. Between shifts you pick a power word: も, みんな, まって or ください. Three shifts, three hearts, a daily run with a best score. The design page, with what it borrows and an honest check, is game3d/minigames/README.md (Kotodama). The screens come from a headless run of the daily seed; the frame strips are from game3d/minigames/tools/frames.mjs."
+  },
+  {
+   "id": "not-fun",
+   "label": "not-fun: not it yet",
+   "image": "reviews/minigames-3/shots/phone-9-combo.webp",
+   "note": "Say what's missing in the comment and it goes into the next round."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play Kotodama (published)",
+   "href": "https://fumbleforce.github.io/tower-of-words/game3d/minigames/kotodama.html"
+  },
+  {
+   "label": "Locally",
+   "href": "game3d/minigames/kotodama.html"
+  },
+  {
+   "label": "The design page",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/game3d/minigames/README.md"
+  }
+ ],
+ "decided": [
+  "kotodama"
+ ],
+ "decision": "Kotodama picked: keep going (tap-only and better machines done in 246fd2df, 61ab7bce)",
+ "decided_at": "2026-10-05T11:45:31+0200",
+ "issue": 244
+}

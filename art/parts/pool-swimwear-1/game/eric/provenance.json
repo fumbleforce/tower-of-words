@@ -1,0 +1,12 @@
+{
+  "candidate": "eric",
+  "native_clips": {
+    "walk": "57c70dd2f360e5b9e30f54c1f1a2715d115fda10214b17c06ef708b4858c6001",
+    "run": "8ebc55d5b8aefaae60b76ef11c95857f4267212d71ea6e41e421afc8f182cecf"
+  },
+  "texture_pixels_unchanged": true,
+  "texture_size": [
+    2048,
+    2048
+  ]
+}

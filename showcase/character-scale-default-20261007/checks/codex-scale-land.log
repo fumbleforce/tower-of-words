@@ -1,0 +1,32 @@
+warning: unable to access 'game3d/shots/beats/.gitignore': Too many levels of symbolic links
+land: REFUSED: /home/jorgen/repo/japanese/.claude/worktrees/codex-character-scale-trial has uncommitted or untracked changes; commit them (your own files only) or remove them:
+ T game3d/shots/a11y/.gitignore
+ T game3d/shots/beats/.gitignore
+ T game3d/shots/beats/approved-1366x860/BUILD
+ T game3d/shots/codex-follow-camera/README.md
+ T game3d/shots/lift-doors/after-1366-log.txt
+ T game3d/shots/lift-doors/phone-390-log.txt
+ T game3d/shots/lunch/1366x860/log.json
+ T game3d/shots/lunch/390x844/log.json
+ T game3d/shots/mori-greet/desk/log.json
+ T game3d/shots/mori-greet/phone/log.json
+ T game3d/shots/perf/.gitignore
+ T game3d/shots/perf/0928-1808-1ef7506-gpu.json
+ T game3d/shots/perf/0928-1808-1ef7506-swiftshader.json
+ T game3d/shots/perf/after-161-hitch-390x844-cpu4.json
+ T game3d/shots/perf/after-163-hitch-390x844-cpu4.json
+ T game3d/shots/perf/after-hitch-1366x860.json
+ T game3d/shots/perf/after-hitch-390x844-cpu4.json
+ T game3d/shots/perf/after-hitch-390x844.json
+ T game3d/shots/perf/before-161-hitch-390x844-cpu4.json
+ T game3d/shots/perf/before-163-hitch-390x844-cpu4.json
+ T game3d/shots/perf/before-hitch-1366x860-a.json
+ T game3d/shots/perf/before-hitch-1366x860-b.json
+ T game3d/shots/perf/before-hitch-390x844-cpu4.json
+ T game3d/shots/perf/before-hitch-390x844.json
+ T game3d/shots/printer/1366x860-race/log.json
+ T game3d/shots/printer/1366x860/log.json
+ T game3d/shots/shell/.gitignore
+ T game3d/shots/style-in-game/bench-phone-gpu.json
+ T game3d/shots/style-in-game/bench-phone-swiftshader.json
+ T game3d/shots/style-in-game/stats.json

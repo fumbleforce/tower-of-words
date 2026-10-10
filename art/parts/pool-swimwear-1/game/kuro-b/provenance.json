@@ -1,0 +1,12 @@
+{
+  "candidate": "kuro-b",
+  "native_clips": {
+    "walk": "15508525d8ba958c28321056eee949ff990d1097fdb367941060718496643d62",
+    "run": "dcfafcb6b80a872bc6e35994b22e8b5f18d8f4161aa39c1ed3d939f926d004da"
+  },
+  "texture_pixels_unchanged": true,
+  "texture_size": [
+    2048,
+    2048
+  ]
+}

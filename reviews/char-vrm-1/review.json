@@ -1,0 +1,100 @@
+{
+ "title": "VRoid / VRM compatibility proof",
+ "date": "2026-10-01",
+ "by": "Claude prototype, Codex continuation",
+ "status": "decided",
+ "question": "Is this smooth anime direction worth an authored VRoid character test?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/parts/vrm-prototype/claude-shots/test-smooth-front.png.webp",
+   "caption": "Claude saved attempt: front. Preserved intermediate, not a finished character."
+  },
+  {
+   "image": "art/parts/vrm-prototype/claude-shots/test-smooth-three.png.webp",
+   "caption": "Claude saved attempt: three. Preserved intermediate, not a finished character."
+  },
+  {
+   "image": "art/parts/vrm-prototype/claude-shots/test-smooth-face.png.webp",
+   "caption": "Claude saved attempt: face. Preserved intermediate, not a finished character."
+  },
+  {
+   "image": "art/parts/vrm-prototype/inherited-check/test-smooth-front.png.webp",
+   "caption": "Inherited loader check: front. Preserved intermediate, not a finished character."
+  },
+  {
+   "image": "art/parts/vrm-prototype/inherited-check/test-smooth-three.png.webp",
+   "caption": "Inherited loader check: three. Preserved intermediate, not a finished character."
+  },
+  {
+   "image": "art/parts/vrm-prototype/inherited-check/test-smooth-face.png.webp",
+   "caption": "Inherited loader check: face. Preserved intermediate, not a finished character."
+  },
+  {
+   "image": "art/parts/vrm-prototype/fixed-quaternion/test-smooth-front.png.webp",
+   "caption": "Quaternion fix, before preview cleanup: front. Preserved intermediate, not a finished character."
+  },
+  {
+   "image": "art/parts/vrm-prototype/fixed-quaternion/test-smooth-three.png.webp",
+   "caption": "Quaternion fix, before preview cleanup: three. Preserved intermediate, not a finished character."
+  },
+  {
+   "image": "art/parts/vrm-prototype/fixed-quaternion/test-smooth-face.png.webp",
+   "caption": "Quaternion fix, before preview cleanup: face. Preserved intermediate, not a finished character."
+  }
+ ],
+ "options": [
+  {
+   "id": "vrm-base",
+   "label": "vrm-base",
+   "image": "art/parts/vrm-prototype/preview/desktop-base-three.png.webp",
+   "images": [
+    "art/parts/vrm-prototype/preview/desktop-base-face.png.webp",
+    "art/parts/vrm-prototype/preview/desktop-base-game.png.webp",
+    "art/parts/vrm-prototype/preview/phone-base-three.png.webp",
+    "art/parts/vrm-prototype/preview/phone-base-face.png.webp",
+    "art/parts/vrm-prototype/preview/phone-base-game.png.webp"
+   ],
+   "note": "Original pixiv sample. Tests smooth anime rendering and shared animation; it is not Mio."
+  },
+  {
+   "id": "vrm-recolour",
+   "label": "vrm-recolour",
+   "image": "art/parts/vrm-prototype/preview/desktop-recolour-three.png.webp",
+   "images": [
+    "art/parts/vrm-prototype/preview/desktop-recolour-face.png.webp",
+    "art/parts/vrm-prototype/preview/desktop-recolour-game.png.webp",
+    "art/parts/vrm-prototype/preview/phone-recolour-three.png.webp",
+    "art/parts/vrm-prototype/preview/phone-recolour-face.png.webp",
+    "art/parts/vrm-prototype/preview/phone-recolour-game.png.webp"
+   ],
+   "note": "Claude colour attempt. Same sample hair and clothes, painted sleeve boundaries, added glasses; not an authored Mio model."
+  },
+  {
+   "id": "vrm-flat",
+   "label": "vrm-flat",
+   "image": "art/parts/vrm-prototype/preview/desktop-flat-three.png.webp",
+   "images": [
+    "art/parts/vrm-prototype/preview/desktop-flat-face.png.webp",
+    "art/parts/vrm-prototype/preview/desktop-flat-game.png.webp",
+    "art/parts/vrm-prototype/preview/phone-flat-three.png.webp",
+    "art/parts/vrm-prototype/preview/phone-flat-face.png.webp",
+    "art/parts/vrm-prototype/preview/phone-flat-game.png.webp"
+   ],
+   "note": "Same recolour with flat shading on clothing and hair. No topology or facet placement changes."
+  }
+ ],
+ "links": [
+  {
+   "label": "Adjust the VRM settings yourself",
+   "href": "game3d/vrm-test.html?variant=recolour"
+  },
+  {
+   "label": "SDK, editor and source details",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/vrm-prototype.md"
+  }
+ ],
+ "decision": "The body is good; the character looks nuts. Provide controls Jørgen can experiment with himself; no character approved.",
+ "decided_at": "2026-10-01T17:12:00+0200",
+ "issue": 171
+}

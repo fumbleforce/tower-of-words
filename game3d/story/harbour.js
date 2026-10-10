@@ -1,0 +1,39 @@
+// The harbour, walked from the office street's west end into the supply yard, out on the piers, across to the ferry
+// landing and down the harbour walk (docs/game/places.md). The terminal is a usable waiting room; the harbour office remains closed. East along the street past the harbour walk goes back to the office street; up the works lane or the works
+// street goes on to the old works.
+export default {
+  start: 'arrive',
+  on: {
+    'talk:campus':'to_campus','zone:campus_exit':'to_campus',
+    'talk:office_street': 'to_offices',
+    'zone:east_exit': 'to_offices',
+    'talk:works_lane': 'to_works',
+    'zone:lane_exit': 'to_works',
+    'talk:works_street': 'to_works_street',
+    'zone:street_exit': 'to_works_street',
+    'talk:ferry_terminal': 'terminal',
+    'talk:harbour_office': 'shut',
+  },
+  goal: { office_street: 'true' },
+  nodes: {
+    to_terminal:[{do:'trip',to:'ferry_terminal'}],
+    terminal:[{if:"period_early || period_morning || period_lunch || period_afternoon || period_evening",then:[{go:'to_terminal'}],else:['> The waiting room is closed.']}],
+    to_campus:[{do:'trip',to:'campus'}],
+    arrive: [
+      {
+        if: 'going_home',
+        then: [{ do: 'goal', text: 'The dorms are back along the office street, past the gym and down the north street.' }],
+        else: [
+          {
+            do: 'goal',
+            text: 'Head office is back along the office street, past the gym and the plaza. Take its lift down to B2.',
+          },
+        ],
+      },
+    ],
+    shut: ['> The door is shut. A card on the glass says 準備中: not open yet.'],
+    to_offices: [{ do: 'trip', to: 'office_quarter' }],
+    to_works: [{ do: 'trip', to: 'works' }],
+    to_works_street: [{ do: 'trip', to: 'works' }],
+  },
+};

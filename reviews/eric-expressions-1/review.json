@@ -1,0 +1,106 @@
+{
+ "title": "Eric's surprised and tired faces",
+ "date": "2026-09-29",
+ "by": "art agent (Eric expressions)",
+ "status": "decided",
+ "multi": true,
+ "question": "Which surprised face and which tired face should Eric use?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/eric-expressions-1/all-attempts.webp.webp",
+   "caption": "All 27 attempts in order, the approved neutral first. Only the face was repainted (brows to chin, inside the jaw line). Round s1/t1/t2 had frowning brows on most seeds; s2/t3 add \"frown, furrowed brow, angry\" to the negative, nothing else changed. Prompts and settings per attempt: log.json in the same folder."
+  },
+  {
+   "image": "game3d/assets/portraits/eric-neutral.webp",
+   "caption": "The approved neutral they are made from (game file, 25% closer framing)."
+  }
+ ],
+ "options": [
+  {
+   "id": "s2-d60-1",
+   "label": "surprised: s2-d60-1",
+   "image": "art/candidates/portraits/eric-expressions-1/pair-s2-d60-1.webp.webp",
+   "images": [
+    "art/candidates/portraits/eric-expressions-1/face-s2-d60-1.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/bg-s2-d60-1.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/eric-s2-d60-1.webp.webp"
+   ],
+   "note": "Eyes wide, brows up, mouth a little open. Words: \"surprised, eyes wide open, eyebrows raised, mouth slightly open\", denoise 0.6, seed 1."
+  },
+  {
+   "id": "s2-d70-1",
+   "label": "surprised: s2-d70-1",
+   "image": "art/candidates/portraits/eric-expressions-1/pair-s2-d70-1.webp.webp",
+   "images": [
+    "art/candidates/portraits/eric-expressions-1/face-s2-d70-1.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/bg-s2-d70-1.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/eric-s2-d70-1.webp.webp"
+   ],
+   "note": "Wider eyes, mouth more open; reads a bit more alarmed. Words: \"surprised, eyes wide open, eyebrows raised, mouth slightly open\", denoise 0.7, seed 1."
+  },
+  {
+   "id": "s2-d70-3",
+   "label": "surprised: s2-d70-3",
+   "image": "art/candidates/portraits/eric-expressions-1/pair-s2-d70-3.webp.webp",
+   "images": [
+    "art/candidates/portraits/eric-expressions-1/face-s2-d70-3.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/bg-s2-d70-3.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/eric-s2-d70-3.webp.webp"
+   ],
+   "note": "Eyes wide, brows up, mouth barely open; the mildest. Words: \"surprised, eyes wide open, eyebrows raised, mouth slightly open\", denoise 0.7, seed 3."
+  },
+  {
+   "id": "t3-d65-1",
+   "label": "tired: t3-d65-1",
+   "image": "art/candidates/portraits/eric-expressions-1/pair-t3-d65-1.webp.webp",
+   "images": [
+    "art/candidates/portraits/eric-expressions-1/face-t3-d65-1.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/bg-t3-d65-1.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/eric-t3-d65-1.webp.webp"
+   ],
+   "note": "Heavy lids, flat mouth, no smile. Words: \"tired, weary, heavy-lidded eyes, mouth closed, no smile\", denoise 0.65, seed 1."
+  },
+  {
+   "id": "t3-d75-3",
+   "label": "tired: t3-d75-3",
+   "image": "art/candidates/portraits/eric-expressions-1/pair-t3-d75-3.webp.webp",
+   "images": [
+    "art/candidates/portraits/eric-expressions-1/face-t3-d75-3.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/bg-t3-d75-3.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/eric-t3-d75-3.webp.webp"
+   ],
+   "note": "Lids lower, brows slightly drawn; the most worn out. Words: \"tired, weary, heavy-lidded eyes, mouth closed, no smile\", denoise 0.75, seed 3."
+  },
+  {
+   "id": "t1-d60-3",
+   "label": "tired: t1-d60-3",
+   "image": "art/candidates/portraits/eric-expressions-1/pair-t1-d60-3.webp.webp",
+   "images": [
+    "art/candidates/portraits/eric-expressions-1/face-t1-d60-3.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/bg-t1-d60-3.webp.webp",
+    "art/candidates/portraits/eric-expressions-1/eric-t1-d60-3.webp.webp"
+   ],
+   "note": "Heavy lids, a slight downturn at the mouth. Words: \"tired, weary, heavy-lidded eyes, mouth closed, no smile\", denoise 0.6, seed 3."
+  },
+  {
+   "id": "redo",
+   "label": "Redo one or both (say what to change)"
+  }
+ ],
+ "links": [
+  {
+   "label": "Neutral decided in",
+   "href": "#review/eric-portrait-anime-5"
+  },
+  {
+   "label": "Height and zoom",
+   "href": "#review/eric-portrait-final"
+  }
+ ],
+ "decided": [
+  "s2-d70-1",
+  "t3-d65-1"
+ ],
+ "decision": "surprised s2-d70-1, tired t3-d65-1",
+ "issue": 23
+}

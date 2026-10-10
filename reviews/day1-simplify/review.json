@@ -1,0 +1,57 @@
+{
+ "title": "Day 1: fewer repeated steps",
+ "date": "2026-09-29",
+ "by": "Codex writing team",
+ "status": "superseded",
+ "question": "Which parts of this revised simplification should we apply?",
+ "multi": true,
+ "options": [
+  {
+   "id": "train",
+   "label": "train",
+   "note": "Keep the two-step lunchbox, lessons and rescue. Remove repeated narration, merge three replies and let Mio answer her buzzing phone during the conversation. [Scene counts and exact lines](#doc/reviews/day1-simplify/train.md)."
+  },
+  {
+   "id": "gate",
+   "label": "gate",
+   "note": "Show the useful briefcase mime immediately. Mio’s hint now says “show him”, and Hamada’s choice names the problem. Keep both solutions, typed akete and optional jokes. [Scene counts and exact lines](#doc/reviews/day1-simplify/gate.md)."
+  },
+  {
+   "id": "lift",
+   "label": "lift",
+   "note": "Five advances become three. Keep the B2 gossip and the moment they notice Eric’s card. [Exact lift edits, below gate proposal](#doc/reviews/day1-simplify/gate.md)."
+  },
+  {
+   "id": "office",
+   "label": "office",
+   "note": "Revised after the cold read: keep the door pause for akete, both request cards and Eric’s 1996 reaction. The chair conversation leads straight into Mio’s request; other repeated lines and gesture advances are cut. [Scene counts and exact lines](#doc/reviews/day1-simplify/office.md)."
+  }
+ ],
+ "links": [
+  {
+   "label": "Choose the remaining edits in context",
+   "href": "reviews/day1-frames/"
+  },
+  {
+   "label": "Before / after overview",
+   "href": "#doc/reviews/day1-simplify/proposal.md"
+  },
+  {
+   "label": "Train",
+   "href": "#doc/reviews/day1-simplify/train.md"
+  },
+  {
+   "label": "Gate and lift",
+   "href": "#doc/reviews/day1-simplify/gate.md"
+  },
+  {
+   "label": "Office",
+   "href": "#doc/reviews/day1-simplify/office.md"
+  }
+ ],
+ "decided": [
+  "train"
+ ],
+ "decision": "Train: family and Mori-bow merges, delete #7 and cut #9; keep the personal phrasing, flavour, tiny bow and #8. Applied in d64b4b4. Gate, lift and office move to day1-frames for contextual decisions.",
+ "media": []
+}

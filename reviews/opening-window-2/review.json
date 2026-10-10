@@ -1,0 +1,52 @@
+{
+ "title": "Opening window seats: the game's 3D models or small pictures",
+ "date": "2026-10-09",
+ "by": "claude-main",
+ "status": "decided",
+ "multi": false,
+ "question": "Which way should Eric and Mio sit at the train windows in the opening?",
+ "media": [
+  {
+   "image": "art/candidates/opening-window-2/big/t14.00.webp.webp",
+   "caption": "Renders from the opening itself, at 0:14 (Eric) and 0:23 (Mio). For reference, the first cut: the window pictures close to the glass, which you found \"way too big\". You asked to try both of the options below. In both, they sit on the far bench, facing the window, as passengers do."
+  },
+  {
+   "image": "art/candidates/opening-window-2/big/t23.50.webp.webp",
+   "caption": "The first cut, Mio."
+  }
+ ],
+ "options": [
+  {
+   "id": "small",
+   "label": "small: the window pictures at a passenger's size",
+   "image": "art/candidates/opening-window-2/small/t14.00.webp.webp",
+   "images": [
+    "art/candidates/opening-window-2/small/t23.50.webp.webp"
+   ],
+   "note": "The pictures from Review opening-window-1, on the far bench. The film I sent uses this one."
+  },
+  {
+   "id": "model",
+   "label": "model: the game's own 3D Eric and Mio",
+   "image": "art/candidates/opening-window-2/model/t14.00.webp.webp",
+   "images": [
+    "art/candidates/opening-window-2/model/t23.50.webp.webp"
+   ],
+   "note": "Fixed 21:15: the first upload showed the pictures here by mistake (rendered with the wrong setting). These are the game's Meshy models of Eric and Mio, seated with their sit pose. Mio's sit pose bows her head, so mostly her hair shows over the bench."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the opening (small)",
+   "href": "game3d/opening/?win=small"
+  },
+  {
+   "label": "Play the opening (model)",
+   "href": "game3d/opening/?win=model"
+  }
+ ],
+ "updated": "2026-10-09T21:15:00+0200",
+ "decision": "model: the game's 3D Eric and Mio in the wagons (Jørgen: \"the meshy characters in the wagons makes aLOT more sense. but you are using the old meshy model for Mio\"); Mio now uses the current mio2 body",
+ "decided_at": "2026-10-09T21:04:33+0200",
+ "issue": 380
+}

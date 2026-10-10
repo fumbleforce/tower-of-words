@@ -1,0 +1,11 @@
+/* A translated note remains beside the physical object until the player continues. */
+#talk.flavor-written { left: auto; right: 24px; bottom: 72px; width: min(330px, calc(100vw - 40px)); max-width: none; min-height: 0; transform: none; background: #f2f1eb; color: #293b46; border: 1px solid #bec9cc; border-radius: 5px; padding: 18px 20px 15px; box-shadow: 0 6px 24px #07101a66; }
+#talk.flavor-written::before { content: 'Note · translated'; display: block; margin-bottom: 10px; font: 500 12px/1.3 system-ui, sans-serif; color: #586d75; }
+#talk.flavor-written .who, #talk.flavor-written .portrait, #talk.flavor-written .doorcard, #talk.flavor-written .chips { display: none; }
+#talk.flavor-written .line { color: #293b46; font: 500 17px/1.5 system-ui, sans-serif; text-shadow: none; }
+#talk.flavor-written .more { color: #456670; }
+body.phone #talk.flavor-written { right: 14px; bottom: 85px; width: calc(100vw - 28px); max-width: 330px; padding: 14px 16px; }
+body.phone #talk.flavor-written .line { font-size: 16px; }
+#talk.flavor-written .more .ch { color: #315760; background: #dce9e6; border-color: #91ada8; }
+#talk.flavor-written .more i { border-top-color: #3c7476; filter: none; }
+#talk.flavor-written::before { text-shadow: none; }

@@ -1,0 +1,507 @@
+{
+ "title": "Northern print-shop approach",
+ "date": "2026-10-08",
+ "result": [
+  "final-1366-north",
+  "final-1366-print",
+  "final-1366-junction",
+  "final-1366-north-evening"
+ ],
+ "by": "codex",
+ "caption": "Low planted beds connect the northern print-shop approach to the shed-street gardens. Original trees and walking routes remain in place.",
+ "commit": "8bf21056",
+ "preview": "final-1366-north",
+ "sections": [
+  {
+   "title": "Failed initial capture",
+   "caption": "The review server was not yet running. These are the retained failure images, not a design candidate.",
+   "images": [
+    {
+     "id": "baseline-390-failure",
+     "image": "game3d/shots/north-grounds-20261008/baseline/390-failure.png",
+     "caption": "Server unavailable; no game scene rendered. Phone, 390 × 844."
+    },
+    {
+     "id": "baseline-1366-failure",
+     "image": "game3d/shots/north-grounds-20261008/baseline/1366-failure.png",
+     "caption": "Server unavailable; no game scene rendered. Desktop, 1366 × 860."
+    }
+   ]
+  },
+  {
+   "title": "Before the northern beds",
+   "caption": "Native overview before this change, including the earlier shed-street planting.",
+   "images": [
+    {
+     "id": "baseline2-390-north",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/390-north.png.webp",
+     "caption": "Northern print-shop approach, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "baseline2-390-middle",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/390-middle.png.webp",
+     "caption": "Middle of shed street, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "baseline2-390-south",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/390-south.png.webp",
+     "caption": "Southern shed street, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "baseline2-390-east",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/390-east.png.webp",
+     "caption": "Quarter street east of the shed gardens, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "baseline2-390-print-evening",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/390-print-evening.png.webp",
+     "caption": "Middle of shed street, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "baseline2-390-rest-evening",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/390-rest-evening.png.webp",
+     "caption": "Southern shed street, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "baseline2-390-rest-morning-restored",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/390-rest-morning-restored.png.webp",
+     "caption": "Southern shed street after restoring morning. Phone, 390 × 844."
+    },
+    {
+     "id": "baseline2-390-map",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/390-map.png.webp",
+     "caption": "Island map with the shared planted outlines. Phone, 390 × 844."
+    },
+    {
+     "id": "baseline2-1366-north",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/1366-north.png.webp",
+     "caption": "Northern print-shop approach, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "baseline2-1366-middle",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/1366-middle.png.webp",
+     "caption": "Middle of shed street, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "baseline2-1366-south",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/1366-south.png.webp",
+     "caption": "Southern shed street, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "baseline2-1366-east",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/1366-east.png.webp",
+     "caption": "Quarter street east of the shed gardens, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "baseline2-1366-print-evening",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/1366-print-evening.png.webp",
+     "caption": "Middle of shed street, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "baseline2-1366-rest-evening",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/1366-rest-evening.png.webp",
+     "caption": "Southern shed street, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "baseline2-1366-rest-morning-restored",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/1366-rest-morning-restored.png.webp",
+     "caption": "Southern shed street after restoring morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "baseline2-1366-map",
+     "image": "game3d/shots/north-grounds-20261008/baseline2/1366-map.png.webp",
+     "caption": "Island map with the shared planted outlines. Desktop, 1366 × 860."
+    }
+   ]
+  },
+  {
+   "title": "First attempt",
+   "caption": "The pointed shrub crowns were revised after desktop and phone inspection.",
+   "images": [
+    {
+     "id": "round1-390-north",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-north.png.webp",
+     "caption": "Northern print-shop approach, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-print",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-print.png.webp",
+     "caption": "Print-shop doorway, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-junction",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-junction.png.webp",
+     "caption": "Approach to the office-street junction, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-middle",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-middle.png.webp",
+     "caption": "Middle of shed street, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-south",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-south.png.webp",
+     "caption": "Southern shed street, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-east",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-east.png.webp",
+     "caption": "Quarter street east of the shed gardens, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-north-evening",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-north-evening.png.webp",
+     "caption": "Northern print-shop approach, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-door-evening",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-door-evening.png.webp",
+     "caption": "Print-shop doorway, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-print-evening",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-print-evening.png.webp",
+     "caption": "Middle of shed street, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-rest-evening",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-rest-evening.png.webp",
+     "caption": "Southern shed street, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-rest-morning-restored",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-rest-morning-restored.png.webp",
+     "caption": "Southern shed street after restoring morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-390-map",
+     "image": "game3d/shots/north-grounds-20261008/round1/390-map.png.webp",
+     "caption": "Island map with the shared planted outlines. Phone, 390 × 844."
+    },
+    {
+     "id": "round1-1366-north",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-north.png.webp",
+     "caption": "Northern print-shop approach, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-print",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-print.png.webp",
+     "caption": "Print-shop doorway, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-junction",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-junction.png.webp",
+     "caption": "Approach to the office-street junction, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-middle",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-middle.png.webp",
+     "caption": "Middle of shed street, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-south",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-south.png.webp",
+     "caption": "Southern shed street, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-east",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-east.png.webp",
+     "caption": "Quarter street east of the shed gardens, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-north-evening",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-north-evening.png.webp",
+     "caption": "Northern print-shop approach, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-door-evening",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-door-evening.png.webp",
+     "caption": "Print-shop doorway, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-print-evening",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-print-evening.png.webp",
+     "caption": "Middle of shed street, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-rest-evening",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-rest-evening.png.webp",
+     "caption": "Southern shed street, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-rest-morning-restored",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-rest-morning-restored.png.webp",
+     "caption": "Southern shed street after restoring morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round1-1366-map",
+     "image": "game3d/shots/north-grounds-20261008/round1/1366-map.png.webp",
+     "caption": "Island map with the shared planted outlines. Desktop, 1366 × 860."
+    }
+   ]
+  },
+  {
+   "title": "Second attempt",
+   "caption": "Rounded shrubs remained; diamond-shaped low cover was revised in the final pass.",
+   "images": [
+    {
+     "id": "round2-390-north",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-north.png.webp",
+     "caption": "Northern print-shop approach, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-print",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-print.png.webp",
+     "caption": "Print-shop doorway, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-junction",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-junction.png.webp",
+     "caption": "Approach to the office-street junction, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-middle",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-middle.png.webp",
+     "caption": "Middle of shed street, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-south",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-south.png.webp",
+     "caption": "Southern shed street, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-east",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-east.png.webp",
+     "caption": "Quarter street east of the shed gardens, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-north-evening",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-north-evening.png.webp",
+     "caption": "Northern print-shop approach, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-door-evening",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-door-evening.png.webp",
+     "caption": "Print-shop doorway, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-print-evening",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-print-evening.png.webp",
+     "caption": "Middle of shed street, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-rest-evening",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-rest-evening.png.webp",
+     "caption": "Southern shed street, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-rest-morning-restored",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-rest-morning-restored.png.webp",
+     "caption": "Southern shed street after restoring morning. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-390-map",
+     "image": "game3d/shots/north-grounds-20261008/round2/390-map.png.webp",
+     "caption": "Island map with the shared planted outlines. Phone, 390 × 844."
+    },
+    {
+     "id": "round2-1366-north",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-north.png.webp",
+     "caption": "Northern print-shop approach, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-print",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-print.png.webp",
+     "caption": "Print-shop doorway, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-junction",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-junction.png.webp",
+     "caption": "Approach to the office-street junction, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-middle",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-middle.png.webp",
+     "caption": "Middle of shed street, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-south",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-south.png.webp",
+     "caption": "Southern shed street, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-east",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-east.png.webp",
+     "caption": "Quarter street east of the shed gardens, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-north-evening",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-north-evening.png.webp",
+     "caption": "Northern print-shop approach, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-door-evening",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-door-evening.png.webp",
+     "caption": "Print-shop doorway, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-print-evening",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-print-evening.png.webp",
+     "caption": "Middle of shed street, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-rest-evening",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-rest-evening.png.webp",
+     "caption": "Southern shed street, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-rest-morning-restored",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-rest-morning-restored.png.webp",
+     "caption": "Southern shed street after restoring morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "round2-1366-map",
+     "image": "game3d/shots/north-grounds-20261008/round2/1366-map.png.webp",
+     "caption": "Island map with the shared planted outlines. Desktop, 1366 × 860."
+    }
+   ]
+  },
+  {
+   "title": "Northern approach gardens",
+   "caption": "A low entrance border and an opposite planted crescent keep the doorway, junction and lamp pocket clear. Existing trees remain in place.",
+   "images": [
+    {
+     "id": "final-390-north",
+     "image": "game3d/shots/north-grounds-20261008/final/390-north.png.webp",
+     "caption": "Northern print-shop approach, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-print",
+     "image": "game3d/shots/north-grounds-20261008/final/390-print.png.webp",
+     "caption": "Print-shop doorway, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-junction",
+     "image": "game3d/shots/north-grounds-20261008/final/390-junction.png.webp",
+     "caption": "Approach to the office-street junction, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-middle",
+     "image": "game3d/shots/north-grounds-20261008/final/390-middle.png.webp",
+     "caption": "Middle of shed street, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-south",
+     "image": "game3d/shots/north-grounds-20261008/final/390-south.png.webp",
+     "caption": "Southern shed street, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-east",
+     "image": "game3d/shots/north-grounds-20261008/final/390-east.png.webp",
+     "caption": "Quarter street east of the shed gardens, morning. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-north-evening",
+     "image": "game3d/shots/north-grounds-20261008/final/390-north-evening.png.webp",
+     "caption": "Northern print-shop approach, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-door-evening",
+     "image": "game3d/shots/north-grounds-20261008/final/390-door-evening.png.webp",
+     "caption": "Print-shop doorway, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-print-evening",
+     "image": "game3d/shots/north-grounds-20261008/final/390-print-evening.png.webp",
+     "caption": "Middle of shed street, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-rest-evening",
+     "image": "game3d/shots/north-grounds-20261008/final/390-rest-evening.png.webp",
+     "caption": "Southern shed street, evening. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-rest-morning-restored",
+     "image": "game3d/shots/north-grounds-20261008/final/390-rest-morning-restored.png.webp",
+     "caption": "Southern shed street after restoring morning. Phone, 390 × 844."
+    },
+    {
+     "id": "final-390-map",
+     "image": "game3d/shots/north-grounds-20261008/final/390-map.png.webp",
+     "caption": "Island map with the shared planted outlines. Phone, 390 × 844."
+    },
+    {
+     "id": "final-1366-north",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-north.png.webp",
+     "caption": "Northern print-shop approach, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-print",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-print.png.webp",
+     "caption": "Print-shop doorway, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-junction",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-junction.png.webp",
+     "caption": "Approach to the office-street junction, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-middle",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-middle.png.webp",
+     "caption": "Middle of shed street, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-south",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-south.png.webp",
+     "caption": "Southern shed street, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-east",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-east.png.webp",
+     "caption": "Quarter street east of the shed gardens, morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-north-evening",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-north-evening.png.webp",
+     "caption": "Northern print-shop approach, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-door-evening",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-door-evening.png.webp",
+     "caption": "Print-shop doorway, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-print-evening",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-print-evening.png.webp",
+     "caption": "Middle of shed street, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-rest-evening",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-rest-evening.png.webp",
+     "caption": "Southern shed street, evening. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-rest-morning-restored",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-rest-morning-restored.png.webp",
+     "caption": "Southern shed street after restoring morning. Desktop, 1366 × 860."
+    },
+    {
+     "id": "final-1366-map",
+     "image": "game3d/shots/north-grounds-20261008/final/1366-map.png.webp",
+     "caption": "Island map with the shared planted outlines. Desktop, 1366 × 860."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Walk the north campus",
+   "href": "game3d/index.html?day=3&place=campus&mc=eric&q=0"
+  },
+  {
+   "label": "Validation and remaining limits (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "media": []
+}

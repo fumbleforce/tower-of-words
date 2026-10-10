@@ -1,0 +1,189 @@
+{
+ "title": "The ticket app on Eric's computers, restyled as a Japanese company's in-house system",
+ "date": "2026-10-03",
+ "by": "claude-agent:tickets",
+ "caption": "From your notes: \"Maybe in day two, you get your first glimpse at the Windows 95 simple ticketing system with two tickets.\" and \"You're paid per task.\" When the story sits Eric at his room PC or his B2 desk, the screen becomes that computer: a teal desktop, a grey Repair Tickets window with _ □ ×, a list with ID, Subject, From and Status, the ticket itself, a status bar and a taskbar with Start. Eric reads tickets and can take a new one. Closing one is always the story's, with no deadline and no penalty; when it closes he is paid what it says (¥3,000 and ¥5,000 for day 2's two), into the same yen as the drinks. The first time, a yellow tooltip says how to open one, then what Take does. Codex is putting the app into day 2 now (where it opens, and the hooks), so the build can't reach it yet; these shots run the same story steps in room 203 on day 2, and close T-0002 by hand to show the payment.",
+ "sections": [
+  {
+   "title": "After, Japanese in-house system: desktop, 1366 × 860",
+   "caption": "From your note: \"I regret pure win 95, think japanese interfaces, corporate bad but simple design. Some japanese here, and learnable\". The same app, now as Amakawa's in-house web tool: an address strip, a blue header with the red 天川 mark, a breadcrumb, thin-bordered zebra tables, coloured status badges, square buttons and a copyright line. Ten labels are in Japanese, each with its reading over it and the English after it: 件名, 依頼者, 状態, 未対応, 対応中, 完了, 報酬, 担当する, 戻る, 閉じる. Tapping a label, or using a button, puts the word in your Words; you never need one to play. Everything else works as before. Ticket subjects and texts are blurred in these shots.",
+   "images": [
+    {
+     "id": "jp-desk-list",
+     "image": "bible/shots/showcase/ticket-app-1/jp-1-list-1366x860.webp",
+     "caption": "First open: the list, both tickets new and unread, the notice over the list"
+    },
+    {
+     "id": "jp-desk-detail",
+     "image": "bible/shots/showcase/ticket-app-1/jp-2-detail-1366x860.webp",
+     "caption": "A ticket open under the list: its form table, the pay, and 担当する Take ticket with its notice"
+    },
+    {
+     "id": "jp-desk-learned",
+     "image": "bible/shots/showcase/ticket-app-1/jp-2b-learned-1366x860.webp",
+     "caption": "件名 clicked: the line at the foot says it is in your Words"
+    },
+    {
+     "id": "jp-desk-taken",
+     "image": "bible/shots/showcase/ticket-app-1/jp-3-taken-1366x860.webp",
+     "caption": "Taken: 対応中 In progress"
+    },
+    {
+     "id": "jp-desk-closed",
+     "image": "bible/shots/showcase/ticket-app-1/jp-6-closed-1366x860.webp.webp",
+     "caption": "Closed with 閉じる: back in the room, Eric up from the chair"
+    },
+    {
+     "id": "jp-desk-paid-notice",
+     "image": "bible/shots/showcase/ticket-app-1/jp-7-paid-notice-1366x860.webp.webp",
+     "caption": "The story closes T-0002: the payment notice"
+    },
+    {
+     "id": "jp-desk-paid-app",
+     "image": "bible/shots/showcase/ticket-app-1/jp-8-paid-app-1366x860.webp",
+     "caption": "Afterwards: 完了 Done, ¥5,000 Paid, and Paid to you in the info strip"
+    }
+   ]
+  },
+  {
+   "title": "After, Japanese in-house system: phone, 390 × 844",
+   "caption": "One pane at a time; rows, buttons and tappable labels are at least 44 px tall.",
+   "images": [
+    {
+     "id": "jp-phone-list",
+     "image": "bible/shots/showcase/ticket-app-1/jp-1-list-390x844.webp",
+     "caption": "The list, with the notice"
+    },
+    {
+     "id": "jp-phone-detail",
+     "image": "bible/shots/showcase/ticket-app-1/jp-2-detail-390x844.webp",
+     "caption": "The ticket alone, 戻る Back in the breadcrumb"
+    },
+    {
+     "id": "jp-phone-learned",
+     "image": "bible/shots/showcase/ticket-app-1/jp-2b-learned-390x844.webp",
+     "caption": "件名 tapped"
+    },
+    {
+     "id": "jp-phone-taken",
+     "image": "bible/shots/showcase/ticket-app-1/jp-3-taken-390x844.webp",
+     "caption": "Taken"
+    },
+    {
+     "id": "jp-phone-back",
+     "image": "bible/shots/showcase/ticket-app-1/jp-4-back-390x844.webp",
+     "caption": "Back on the list"
+    },
+    {
+     "id": "jp-phone-closed",
+     "image": "bible/shots/showcase/ticket-app-1/jp-6-closed-390x844.webp",
+     "caption": "Closed"
+    },
+    {
+     "id": "jp-phone-paid-notice",
+     "image": "bible/shots/showcase/ticket-app-1/jp-7-paid-notice-390x844.webp",
+     "caption": "The payment notice"
+    },
+    {
+     "id": "jp-phone-paid-app",
+     "image": "bible/shots/showcase/ticket-app-1/jp-8-paid-app-390x844.webp",
+     "caption": "The closed ticket"
+    }
+   ]
+  },
+  {
+   "title": "Before, Windows 95: Desktop, 1366 × 860",
+   "caption": "The list over the ticket.",
+   "images": [
+    {
+     "id": "desk-list",
+     "image": "bible/shots/showcase/ticket-app-1/1-list-1366x860.webp",
+     "caption": "First open: both tickets new and unread (bold), the tooltip over the list"
+    },
+    {
+     "id": "desk-detail",
+     "image": "bible/shots/showcase/ticket-app-1/2-detail-1366x860.webp",
+     "caption": "A ticket open: what it pays, and the tooltip by Take ticket"
+    },
+    {
+     "id": "desk-taken",
+     "image": "bible/shots/showcase/ticket-app-1/3-taken-1366x860.webp",
+     "caption": "Taken: In progress"
+    },
+    {
+     "id": "desk-start",
+     "image": "bible/shots/showcase/ticket-app-1/5-start-1366x860.webp",
+     "caption": "The Start menu: Shut down… closes the app"
+    },
+    {
+     "id": "desk-closed",
+     "image": "bible/shots/showcase/ticket-app-1/6-closed-1366x860.webp.webp",
+     "caption": "Closed: back in the room, Eric up from the chair"
+    },
+    {
+     "id": "desk-paid-notice",
+     "image": "bible/shots/showcase/ticket-app-1/7-paid-notice-1366x860.webp.webp",
+     "caption": "The story closes T-0002: the payment notice"
+    },
+    {
+     "id": "desk-paid-app",
+     "image": "bible/shots/showcase/ticket-app-1/8-paid-app-1366x860.webp",
+     "caption": "The app afterwards: Done, Paid ¥5,000, and Paid to you in the status bar"
+    }
+   ]
+  },
+  {
+   "title": "Before, Windows 95: Phone, 390 × 844",
+   "caption": "One pane at a time; rows and buttons are at least 44 px tall.",
+   "images": [
+    {
+     "id": "phone-list",
+     "image": "bible/shots/showcase/ticket-app-1/1-list-390x844.webp",
+     "caption": "The list, with the tooltip"
+    },
+    {
+     "id": "phone-detail",
+     "image": "bible/shots/showcase/ticket-app-1/2-detail-390x844.webp",
+     "caption": "The ticket alone, with Back"
+    },
+    {
+     "id": "phone-taken",
+     "image": "bible/shots/showcase/ticket-app-1/3-taken-390x844.webp",
+     "caption": "Taken"
+    },
+    {
+     "id": "phone-back",
+     "image": "bible/shots/showcase/ticket-app-1/4-back-390x844.webp",
+     "caption": "Back on the list"
+    },
+    {
+     "id": "phone-start",
+     "image": "bible/shots/showcase/ticket-app-1/5-start-390x844.webp",
+     "caption": "The Start menu"
+    },
+    {
+     "id": "phone-closed",
+     "image": "bible/shots/showcase/ticket-app-1/6-closed-390x844.webp",
+     "caption": "Closed"
+    },
+    {
+     "id": "phone-paid-notice",
+     "image": "bible/shots/showcase/ticket-app-1/7-paid-notice-390x844.webp",
+     "caption": "The payment notice"
+    },
+    {
+     "id": "phone-paid-app",
+     "image": "bible/shots/showcase/ticket-app-1/8-paid-app-390x844.webp",
+     "caption": "The closed ticket"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play day 2",
+   "href": "game3d/?day=2"
+  }
+ ],
+ "media": []
+}

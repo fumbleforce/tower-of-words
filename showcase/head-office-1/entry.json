@@ -1,0 +1,146 @@
+{
+ "title": "Head office: a real tower and lobby, Kuro at reception",
+ "date": "2026-09-30",
+ "by": "claude-agent:head-office",
+ "caption": "The lift no longer stands alone: head office is a 12-storey tower east of the station, where the island map puts it, with a lobby round the lifts. Kuro now works its reception.",
+ "commit": "60d92d9",
+ "sections": [
+  {
+   "title": "Before",
+   "caption": "The old lobby box with the lift, a background-coloured roof beside it and a small tower behind.",
+   "images": [
+    {
+     "id": "before-door-desk",
+     "image": "bible/shots/showcase/head-office-1/before-door-desk.webp",
+     "caption": "At the station door, desktop"
+    },
+    {
+     "id": "before-door-phone",
+     "image": "bible/shots/showcase/head-office-1/before-door-phone.webp",
+     "caption": "At the station door, phone"
+    },
+    {
+     "id": "before-lobby-desk",
+     "image": "bible/shots/showcase/head-office-1/before-lobby-desk.webp",
+     "caption": "By the lift, desktop"
+    },
+    {
+     "id": "before-inside-desk",
+     "image": "bible/shots/showcase/head-office-1/before-inside-desk.webp",
+     "caption": "In the lift, desktop"
+    }
+   ]
+  },
+  {
+   "title": "Outside",
+   "caption": "From the station door the tower and the canopy with 本社 HEAD OFFICE are on the right; walking east brings the whole front into view.",
+   "images": [
+    {
+     "id": "after-door-desk",
+     "image": "bible/shots/showcase/head-office-1/after-door-desk.webp",
+     "caption": "At the station door, desktop"
+    },
+    {
+     "id": "after-court-desk",
+     "image": "bible/shots/showcase/head-office-1/after-court-desk.webp",
+     "caption": "Crossing to the door, desktop"
+    },
+    {
+     "id": "after-door-phone",
+     "image": "bible/shots/showcase/head-office-1/after-door-phone.webp",
+     "caption": "At the station door, phone (the tower is off to the right)"
+    },
+    {
+     "id": "after-court-phone",
+     "image": "bible/shots/showcase/head-office-1/after-court-phone.webp",
+     "caption": "Crossing to the door, phone"
+    }
+   ]
+  },
+  {
+   "title": "Lobby",
+   "caption": "Inside, the floors above fade so the lobby shows: reception with Kuro, the B2 lift, a closed 6F-10F lift, the stairs and the floor directory.",
+   "images": [
+    {
+     "id": "after-lobby-desk",
+     "image": "bible/shots/showcase/head-office-1/after-lobby-desk.webp",
+     "caption": "Lobby, desktop"
+    },
+    {
+     "id": "after-reception-desk",
+     "image": "bible/shots/showcase/head-office-1/after-reception-desk.webp",
+     "caption": "At reception, desktop"
+    },
+    {
+     "id": "after-core-closeup",
+     "image": "bible/shots/showcase/head-office-1/after-core-closeup.webp",
+     "caption": "Close-up: lifts, stairs and directory"
+    },
+    {
+     "id": "after-lobby-phone",
+     "image": "bible/shots/showcase/head-office-1/after-lobby-phone.webp",
+     "caption": "Lobby, phone"
+    },
+    {
+     "id": "after-reception-phone",
+     "image": "bible/shots/showcase/head-office-1/after-reception-phone.webp",
+     "caption": "At reception, phone"
+    }
+   ]
+  },
+  {
+   "title": "The lift and the evening walk out",
+   "caption": "The ride is filmed as before. After work he comes up into the lobby, and the tower comes back, lit, as he steps out of the door.",
+   "images": [
+    {
+     "id": "after-inside-desk",
+     "image": "bible/shots/showcase/head-office-1/after-inside-desk.webp",
+     "caption": "In the lift, desktop"
+    },
+    {
+     "id": "after-inside-phone",
+     "image": "bible/shots/showcase/head-office-1/after-inside-phone.webp",
+     "caption": "In the lift, phone"
+    },
+    {
+     "id": "after-evening-desk",
+     "image": "bible/shots/showcase/head-office-1/after-evening-desk.webp",
+     "caption": "After work, out of the lift"
+    },
+    {
+     "id": "after-walkout-desk-out-10",
+     "image": "bible/shots/showcase/head-office-1/after-walkout-desk-out-10.webp.webp",
+     "caption": "Stepping out: the tower fading back in"
+    },
+    {
+     "id": "after-evening2-desk",
+     "image": "bible/shots/showcase/head-office-1/after-evening2-desk.webp.webp",
+     "caption": "Outside after work, desktop"
+    },
+    {
+     "id": "after-evening2-phone",
+     "image": "bible/shots/showcase/head-office-1/after-evening2-phone.webp",
+     "caption": "Outside after work, phone"
+    }
+   ]
+  },
+  {
+   "title": "On the island map",
+   "caption": "The built tower from above sits on the map's head office outline.",
+   "images": [
+    {
+     "id": "after-map-forecourt",
+     "image": "bible/shots/showcase/head-office-1/after-map-forecourt.webp.webp",
+     "caption": "Forecourt from above with the layout"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

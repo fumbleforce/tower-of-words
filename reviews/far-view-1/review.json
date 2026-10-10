@@ -1,0 +1,111 @@
+{
+ "title": "Far view test: sky, haze and a model of the whole island",
+ "date": "2026-10-09",
+ "by": "claude-agent:farview",
+ "status": "decided",
+ "question": "Should this far view go to every outdoor place, or what should change first?",
+ "multi": false,
+ "media": [
+  {
+   "image": "reviews/far-view-1/works-north.webp.webp",
+   "caption": "Game screenshots (the real game, not concept art). You said: \"when in third person perspective, it is quite easy to see the weakness in the current environment, as we chunk the environment heavily. Consider performance implications of having one seamless world, vs larger chunks, vs some sort of effect / cheats to make the distance look less crap\". The research (notes/research/world-chunking.md) found that keeping the chunks and fixing what the camera sees past them is far cheaper than one seamless world, so this is that first test, behind a URL flag, ?far=1, in the three places with the worst edges: the old works, the shop street and the harbour. With the flag: a sky in place of the flat grey background, with its own colours for morning, day and after work and the mainland's hills low on the horizon; haze from about 30 units out that is complete by 140, so street ends fade into air; one low-detail model of the whole island past each place's own buildings (every building at full height with windows, the land, the sea, woods on the green and over the north half); the buildings south of the street at full height instead of cut to stubs; and the third-person camera's far plane ends just past the haze, with its lowest pitch a little higher, so the edge never shows. The phone's overview camera keeps what it had apart from the sky. Without the flag nothing changes. Cost on the desktop (all passes, one frame, same spot, four facings): 0 to 4 more draw calls and 43k to 73k more triangles (the island model is 23k to 25k triangles, drawn in the main pass and the shading pass). Old works 81-153 calls before, 83-151 after; shop street 119-413 before, 125-417 after; harbour 118-206 before, 120-206 after. Phone: the same as now (48, 93 and 59 calls). Every pair below: left is the game now, right is with ?far=1. Old works, facing north, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/works-east.webp.webp",
+   "caption": "Old works, facing east, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/works-south.webp.webp",
+   "caption": "Old works, facing south, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/works-west.webp.webp",
+   "caption": "Old works, facing west, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/shotengai-north.webp.webp",
+   "caption": "Shop street, facing north, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/shotengai-east.webp.webp",
+   "caption": "Shop street, facing east, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/shotengai-south.webp.webp",
+   "caption": "Shop street, facing south, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/shotengai-west.webp.webp",
+   "caption": "Shop street, facing west, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/harbour-north.webp.webp",
+   "caption": "Harbour, facing north, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/harbour-east.webp.webp",
+   "caption": "Harbour, facing east, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/harbour-south.webp.webp",
+   "caption": "Harbour, facing south, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/harbour-west.webp.webp",
+   "caption": "Harbour, facing west, from the start spot at the lowest camera pitch. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/harbour-evening-west.webp.webp",
+   "caption": "Harbour after work, facing west. Left: now. Right: ?far=1 (dusk sky, the sun's glow low in the west)."
+  },
+  {
+   "image": "reviews/far-view-1/works-evening-south.webp.webp",
+   "caption": "Old works after work, facing south. Left: now. Right: ?far=1."
+  },
+  {
+   "image": "reviews/far-view-1/works-phone.webp",
+   "caption": "Old works on a phone (overview camera). Left: now. Right: ?far=1. Meant to look the same: the haze and the island model are for the third-person camera only."
+  },
+  {
+   "image": "reviews/far-view-1/shotengai-phone.webp.webp",
+   "caption": "Shop street on a phone (overview camera). Left: now. Right: ?far=1. Meant to look the same: the haze and the island model are for the third-person camera only."
+  },
+  {
+   "image": "reviews/far-view-1/harbour-phone.webp.webp",
+   "caption": "Harbour on a phone (overview camera). Left: now. Right: ?far=1. Meant to look the same: the haze and the island model are for the third-person camera only."
+  }
+ ],
+ "options": [
+  {
+   "id": "far-roll-out",
+   "label": "far-roll-out: roll it out to every outdoor place",
+   "note": "Every outdoor place gets the sky, haze, island model and full-height buildings, and the ?far=1 flag goes away. The places themselves need no change; it is one list in game3d/js/look/far-flag.js."
+  },
+  {
+   "id": "far-change",
+   "label": "far-change: change something first",
+   "note": "Say what in the comment: the sky colours for a time of day, how thick or close the haze is, the trees or buildings in the distance, the mainland on the horizon, or anything else."
+  }
+ ],
+ "links": [
+  {
+   "label": "Old works with the far view (desktop, third-person camera)",
+   "href": "game3d/?place=works&far=1"
+  },
+  {
+   "label": "Shop street with the far view",
+   "href": "game3d/?place=shotengai&far=1"
+  },
+  {
+   "label": "Harbour with the far view",
+   "href": "game3d/?place=harbour&far=1"
+  },
+  {
+   "label": "Harbour as it is now, to compare",
+   "href": "game3d/?place=harbour"
+  }
+ ],
+ "decision": "Roll out as a first step: \"Works well as a first step. Still a lot of exterior areas that are just not built for this yet that seem super empty, but that is for pass 2\". Pass 2 is #375.",
+ "decided_at": "2026-10-09T13:21:26+0200",
+ "issue": 375
+}

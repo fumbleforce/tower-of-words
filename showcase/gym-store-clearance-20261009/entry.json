@@ -1,0 +1,44 @@
+{
+ "title": "Gym store doorway clearance",
+ "date": "2026-10-09",
+ "by": "codex",
+ "caption": "Eric now reaches the equipment store without standing inside its sliding door.",
+ "preview": "desktop-close",
+ "result": [
+  "desktop-close"
+ ],
+ "sections": [
+  {
+   "title": "Doorway closeups",
+   "caption": "Diagnostic camera views after walking to the store. Only the camera moves closer.",
+   "images": [
+    {
+     "id": "desktop-close",
+     "image": "game3d/shots/gym-store-clearance-20261009/final/1366-close.png.webp",
+     "caption": "Desktop closeup. Eric stands between the west wall and the sliding panel."
+    },
+    {
+     "id": "phone-close",
+     "image": "game3d/shots/gym-store-clearance-20261009/final/390-close.png.webp",
+     "caption": "Phone closeup of the same destination."
+    }
+   ]
+  },
+  {
+   "title": "Normal play views",
+   "images": [
+    {
+     "id": "desktop-native",
+     "image": "game3d/shots/gym-store-clearance-20261009/final/1366-native.png.webp",
+     "caption": "Desktop overview after walking to the store."
+    },
+    {
+     "id": "phone-native",
+     "image": "game3d/shots/gym-store-clearance-20261009/final/390-native.png.webp",
+     "caption": "Phone overview after walking to the store."
+    }
+   ]
+  }
+ ],
+ "media": []
+}

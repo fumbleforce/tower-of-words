@@ -1,0 +1,123 @@
+{
+ "title": "Dorm courtyard: the lane home, the gate, the front bed and the roofs",
+ "date": "2026-09-30",
+ "by": "claude-agent:dorm-court-rescore",
+ "caption": "The plaza's brick lane now runs on past the dorm courtyard as its street, and Eric turns in through a gate in the front bed on the hall doors' axis. The front bed is pale raked gravel with planted groups instead of hedge blocks, the bikes are all under the shelter roof, and the laundry, hall and sento have proper roofs (the sento's in grey tiles). Always evening here.",
+ "sections": [
+  {
+   "title": "The plan",
+   "caption": "From straight above, before and after. Two axes: the way in runs north-south from the lane through the gate, across the walk and up to the hall doors; the walk runs east-west from the garden to the bike shelter. The court is closed by walled beds on the west and south, open only at the gate.",
+   "images": [
+    {
+     "id": "before-plan",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/before-plan.webp",
+     "caption": "Before: grey pavers and drain grates along the street, the front bed unbroken, the walk running off the west edge"
+    },
+    {
+     "id": "after-plan",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/after-plan.webp.webp",
+     "caption": "After"
+    }
+   ]
+  },
+  {
+   "title": "Walking in",
+   "caption": "The walk from the plaza hands over on the same brick lane; he walks on along it, turns in through the gate and up toward the doors, then the camera lets go.",
+   "images": [
+    {
+     "id": "trip-desk",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/trip-desk.webp.webp",
+     "caption": "Desktop, frames in order (the first is the title fading)"
+    },
+    {
+     "id": "trip-phone",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/trip-phone.webp.webp",
+     "caption": "Phone, frames in order"
+    },
+    {
+     "id": "after-gate-desk",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/after-gate-desk.webp.webp",
+     "caption": "Just inside the gate"
+    },
+    {
+     "id": "after-gate-phone",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/after-gate-phone.webp",
+     "caption": "Just inside the gate, phone"
+    }
+   ]
+  },
+  {
+   "title": "The court, before and after",
+   "caption": "Same spots as the critic's shots. The drinks machines, laundry, hall, sento door and bike sign are unchanged.",
+   "images": [
+    {
+     "id": "before-dc1-desk",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/before-dc1-desk.webp.webp",
+     "caption": "Before, by the machines"
+    },
+    {
+     "id": "after-dc1-desk",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/after-dc1-desk.webp.webp",
+     "caption": "After, by the machines"
+    },
+    {
+     "id": "before-dc1-phone",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/before-dc1-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-dc1-phone",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/after-dc1-phone.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "before-dc3-desk",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/before-dc3-desk.webp.webp",
+     "caption": "Before, at the door"
+    },
+    {
+     "id": "after-dc3-desk",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/after-dc3-desk.webp.webp",
+     "caption": "After, at the door"
+    },
+    {
+     "id": "before-dc3-phone",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/before-dc3-phone.webp",
+     "caption": "Before, at the door, phone"
+    },
+    {
+     "id": "after-dc3-phone",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/after-dc3-phone.webp",
+     "caption": "After, at the door, phone"
+    },
+    {
+     "id": "before-dc4-desk",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/before-dc4-desk.webp.webp",
+     "caption": "Before, by the sento: bikes standing out past the roof"
+    },
+    {
+     "id": "after-dc4-desk",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/after-dc4-desk.webp.webp",
+     "caption": "After, by the sento: the roof runs out over the whole rack, the tiled sento roof"
+    },
+    {
+     "id": "before-dc4-phone",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/before-dc4-phone.webp",
+     "caption": "Before, by the sento, phone"
+    },
+    {
+     "id": "after-dc4-phone",
+     "image": "bible/shots/showcase/dorm-court-rescore-1/after-dc4-phone.webp",
+     "caption": "After, by the sento, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/?place=dorm_court"
+  }
+ ],
+ "media": []
+}

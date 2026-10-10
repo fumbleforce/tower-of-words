@@ -1,0 +1,167 @@
+{
+ "title": "Rei: a 3D model made the way Kuro, Aoi and Emi were",
+ "date": "2026-10-05",
+ "by": "Claude; rig recovery by Codex",
+ "status": "decided",
+ "question": "Real rigged 3D models, with a live viewer below. Your selected Rei model and texture are unchanged. The recovered rig corrects the backward knee bend, wide thigh angle and backward idle lean. The earlier attempts remain below.",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/parts/rei-meshy-1/sheets/step0-inputs.webp",
+   "caption": "ChatGPT pictures. Your words: \"can you also kick off the remaining staff and background characters in the new style\". One chat in ChatGPT's image model (openai/gpt-5.4-image-2 on OpenRouter), as for Kuro, Aoi and Emi. Step 1 attached these two: the approved portrait and your Mio chibi."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/steps.webp.webp",
+   "caption": "ChatGPT pictures. Every take, in order, with your words as written: 1 \"make a 3d chibi anime character in the style of the attached image\" (a1 with black trousers, a2 in the light grey trouser suit of her portrait, so a2 went on), 2 \"Simplify female character a LOT to match the detail level of the other chibi, with open eyes\" (b1), 3 \"Simpler head model, no earrings\" (c1: the gold hoops gone), then your angle prompt (d1). Head share in d1: 0.39 of her height counting the ponytail (Eric 0.46, Kuro 0.41, Aoi 0.40, Emi 0.43), so no head-size follow-up. Her long ponytail hangs down her left side (image right) to her knees in every take. 5 takes, $1.24."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/shape-previews.webp",
+   "caption": "Renders of the real model from here on. Meshy image-to-3D from d1 with Kuro's settings: smart topology (meshy-t2), 1,050 polygons, A-pose, no texture, 5 credits. Meshy's previews; first roll, kept. The ponytail is one big slab beside her left arm (image right)."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/uv.webp.webp",
+   "caption": "The face-first UV unwrap before the texture pass (Aoi's uv_bl.py): the front of the face as one piece at 3 times the detail of the rest (24 polygons, red; the biggest front-facing pieces were her fringe, so the face is piece=1). Then Meshy retexture on that mesh, styled from d1, keep the UVs, lighting removed, no PBR, 10 credits. Right: the texture Meshy painted."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/tex.webp",
+   "caption": "The textured model: front, three-quarter (the left side of the image turned to us), side, back, the other three-quarter, face. Same camera and light as Kuro's, Aoi's and Emi's rounds."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/faces.webp",
+   "caption": "From below the chin in the texture's own colours."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig-fault.webp.webp",
+   "caption": "The problem: Meshy's auto-rig put her skeleton in the wrong place. Her spine sits behind her body and her shoulders are twisted about 50 degrees (her left shoulder 0.2 m behind her right), so in the idle and walk her head and upper body bend and turn away. A second auto-rig on the same model (5 credits) placed the bones the same way. Most likely the ponytail slab: it hangs beside her left arm and the rig reads it as part of her body."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/measure.webp.webp",
+   "caption": "Head share on the models (straight-on, flat colour, rest pose, each figure at the same height): Eric 0.46, Kuro 0.41, Aoi 0.40, Emi 0.43, Rei 0.47 counting the top of her ponytail (0.39 in the picture). Hands not checked further because of the rig."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/compare.webp.webp",
+   "caption": "Rei beside the in-game Eric and Mio and Kuro (the same render script and camera), front and three-quarter."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/viewer.webp.webp",
+   "caption": "Meshy auto-rig at 1.1 m, twice (5 credits each), and Meshy's Chair_Sit_Idle_F, 3 credits. Stills from the live viewer (rest, idle, walk, walk from the side); the idle and walk are the game's. Meshy credits for Rei: 28 (shape 5, texture 10, rig 5, second rig 5, sit 3); balance 251 after her."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig2-joints.webp.webp",
+   "caption": "Rig round 2, from here on renders of the real model. Your note on rei-1: \"model good, rig terrible\". Left: Meshy's skeleton on rei-1; its spine, neck and her left arm's bones sit inside the ponytail (the red piece, behind her and to her left, image right), 12 cm behind her back and 7 cm to her left. Right: the new skeleton, the same 24 bones and names the other Meshy people have, each joint placed from her own mesh (the middle of each trouser leg, of the jacket between the arms, of each sleeve), left and right mirrored. Her model is not touched (no new Meshy generation, 0 credits)."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig2-weights.webp.webp",
+   "caption": "Which bone moves each part, by its strongest bone. Left: Meshy's weights. Right: the new ones. Head and hair tie on the head; the ponytail on the head at the top, blending to the neck lower down, so it turns with her head and hangs from her neck; arms, spine and legs each on their own side's bones."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig2-before-after.webp",
+   "caption": "The live viewer, before and after: rei-1 (Meshy's rig) bends sideways and turns her head; rei-1-rig2 stands and walks straight. The idle and walk here are the game's."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig2-viewer.webp.webp",
+   "caption": "rei-1-rig2 in the live viewer: rest, idle and walk from the front, three-quarter (the left side of the image turned to us), side and back."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig2-ingame.webp.webp",
+   "caption": "In the game (day 1, test mode, 2560x1440): seated on the train with Meshy's Chair_Sit_Idle_F, as she is before the story seats Mio in her place. The story keeps her hidden for the rest of day 1, so this still shows her for the picture only. Run, sit, idle and walk were also checked frame by frame: her head, chest and hips turn exactly as Emi's do (at most 4.5, 17 and 7 degrees in the walk)."
+  },
+  {
+   "image": "art/parts/rei-rig-2/viewer/compare-idle-side.png.webp",
+   "caption": "Recovered rig, before and after from the side. Corrected Emi idle maps through the same bone directions as Rei’s repaired walk. Her hands remain clear of her jacket and thighs."
+  },
+  {
+   "image": "art/parts/rei-rig-2/viewer/cast-walk-side.png.webp",
+   "caption": "Rei beside Emi and Kuro, using the game loader. Walking foot slip: Rei 0.15, Emi 0.15, Kuro 0.14. Rei’s previous rig measured 0.81. Her thigh angle is now 7.8°, matching both comparisons, previously 18.7°."
+  },
+  {
+   "image": "art/parts/rei-rig-2/train/close.png.webp",
+   "caption": "Rei in the real train seat with her laptop attached to her lap, before the story gives the seat to Mio. The selected mesh, UVs, normals, triangles and texture are unchanged."
+  },
+  {
+   "image": "art/parts/rei-rig-2/viewer/idle-trial-side.png.webp",
+   "caption": "Idle attempts retained: left is the generic rest-frame bake; right maps the corrected Emi idle through Rei’s donor-aligned rig, as the repaired walk does. The right-hand version is installed, with her feet under her hips and forward knee flexion."
+  }
+ ],
+ "options": [
+  {
+   "id": "rei-1",
+   "label": "rei-1",
+   "image": "art/parts/rei-meshy-1/renders/tex/r45.png.webp",
+   "images": [
+    "art/parts/rei-meshy-1/renders/tex/front.png.webp",
+    "art/parts/rei-meshy-1/renders/tex/face.png.webp",
+    "art/parts/rei-meshy-1/renders/tex/back.png.webp",
+    "art/parts/rei-meshy-1/pics/d1.png.webp"
+   ],
+   "note": "The model from d1 (chat a2, b1, c1, d1): smart topology, 1,050 polygons, our UV layout with the face in one piece, Meshy retexture styled from d1, auto-rig at 1.1 m. Her rig is twisted, so she is NOT in the game; the code-built Rei stays (she is hidden all day anyway). 28 Meshy credits; five pictures $1.24."
+  },
+  {
+   "id": "rei-1-rig2",
+   "label": "rei-1-rig2 (new rig)",
+   "image": "art/parts/rei-meshy-1/viewer/close-rig2/walk-80.png.webp",
+   "images": [
+    "art/parts/rei-meshy-1/viewer/close-rig2/idle-0.png.webp",
+    "art/parts/rei-meshy-1/viewer/close-rig2/walk-0.png.webp",
+    "art/parts/rei-meshy-1/viewer/close-rig2/walk-157.png.webp",
+    "art/parts/rei-meshy-1/game/train-rei.png.webp"
+   ],
+   "note": "rei-1 as Meshy made it (the same vertices, UVs and texture, unchanged) on a rig of ours: the game's Meshy skeleton placed inside her body, with Emi's bone orientations, so Meshy's walk, run and sit play on her as on Emi; the ponytail weighted to her head and neck. In the game since this round, 1.12 tall. No Meshy credits, no pictures."
+  },
+  {
+   "id": "rei-1-rig3",
+   "label": "rei-1-rig3 (recovered rig)",
+   "image": "art/parts/rei-rig-2/viewer/rei-idle-front.png.webp",
+   "images": [
+    "art/parts/rei-rig-2/viewer/rei-idle-side.png.webp",
+    "art/parts/rei-rig-2/viewer/rei-walk-side.png.webp",
+    "art/parts/rei-rig-2/viewer/rei-run-side.png.webp",
+    "art/parts/rei-rig-2/viewer/rei-sit-side.png.webp"
+   ],
+   "note": "Same selected mesh and texture. Bone axes follow the direction of Rei’s own limbs; Emi’s walk, run and sit now bend her knees forward. The corrected Emi idle uses the same bone mapping and keeps her feet under her hips. Ponytail head/neck weights preserved. No new paid generation."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live repaired rig: walk, run, sit and idle; compare before or beside Emi and Kuro",
+   "href": "reviews/crowd-pilot-1/viewer.html?cfg=../rei-meshy-1/rig-repair-viewer.json&s=compare&m=idle"
+  },
+  {
+   "label": "Live 3D: rei-1-rig2, the new rig, alone (turn, zoom, idle, walk; switch to rei-1 to compare)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/characters/parts/viewer.html"
+  },
+  {
+   "label": "Live 3D: Rei beside the in-game Eric, Mio, Kuro, Aoi and Emi (turn, zoom, idle, walk)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/characters/parts/viewer.html"
+  },
+  {
+   "label": "Aoi round 2, the same process (aoi-meshy-1)",
+   "href": "#review/aoi-meshy-1"
+  },
+  {
+   "label": "Kuro round 3, the approved process (kuro-meshy-orig-3)",
+   "href": "#review/kuro-meshy-orig-3"
+  }
+ ],
+ "decided": [
+  "rei-1"
+ ],
+ "decision": "Answered; follow-up handled",
+ "decided_at": "2026-10-05T23:15:37+0200",
+ "issue": 271,
+ "updated": "2026-10-06T10:15:00+02:00",
+ "viewer_files": [
+  "art/parts/rei-rig-2/before/walk.glb",
+  "art/parts/rei-rig-2/before/run.glb",
+  "art/parts/rei-rig-2/before/sit.glb",
+  "art/parts/rei-rig-2/before/base.webp",
+  "art/parts/rei-rig-2/before/idle.json",
+  "art/parts/rei-rig-2/game/walk.glb",
+  "art/parts/rei-rig-2/game/run.glb",
+  "art/parts/rei-rig-2/game/sit.glb",
+  "art/parts/rei-rig-2/game/base.webp",
+  "art/parts/rei-rig-2/game/idle.json",
+  "art/parts/rei-rig-2/game/idle-native.json",
+  "art/parts/rei-rig-2/game/idle-donor.json"
+ ]
+}

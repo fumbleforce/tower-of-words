@@ -1,0 +1,54 @@
+{
+ "title": "People on the train",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "decided",
+ "question": "Which passenger encounters would you like? Proposed Japanese lines include English subtitles.",
+ "multi": true,
+ "options": [
+  {
+   "id": "train-aoi",
+   "label": "train-aoi: Aoi realises where Eric will work",
+   "note": "Original kept. Jørgen rejected the proposed replacement."
+  },
+  {
+   "id": "train-bun",
+   "label": "train-bun: She brought back too much",
+   "note": "Shortened version selected by the authors under C-0193. One bag-closing gesture and one thank-you; seat hint names the lunchbox."
+  },
+  {
+   "id": "train-youth",
+   "label": "train-youth: The goal he keeps looking at",
+   "note": "He is pleased with his first goal even though his team lost badly."
+  },
+  {
+   "id": "train-music",
+   "label": "train-music: She is listening to her own practice",
+   "note": "The headphones belong to someone trying to get a guitar part right."
+  },
+  {
+   "id": "train-reader",
+   "label": "train-reader: The book and the work computer",
+   "note": "His new Excel book does not match the old version he has to use at work."
+  },
+  {
+   "id": "train-hamada",
+   "label": "train-hamada: Hamada silences his reminder",
+   "note": "His reminder is working; he has learned to dismiss it in his sleep."
+  }
+ ],
+ "links": [
+  {
+   "label": "Read each complete encounter and choose",
+   "href": "reviews/train-discoveries-1/"
+  },
+  {
+   "label": "Staging and scope",
+   "href": "#doc/reviews/train-discoveries-1/draft-notes.md"
+  }
+ ],
+ "decision": "Author decision by Codex under C-0193, following Claude cold-read fixes and the recorded player feedback: retain original train-aoi; use the shortened train-bun; select the current complete proposals for train-youth, train-music, train-reader and train-hamada in frames.json. These four are our writing decisions, not additional picks by Jørgen. Preserve English subtitles and the shown prop/audio staging; no extra closing quips, lessons, inventory or later-day promises. Implementation and voice remain work #6; this decision does not claim the encounters are live.",
+ "decided_at": "2026-09-30T19:22:42+0200",
+ "issue": 6,
+ "media": []
+}

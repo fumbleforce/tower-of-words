@@ -1,0 +1,28 @@
+{
+ "sent": "2026-09-29T12:29:45+0200",
+ "picked": [
+  "surfaces",
+  "bake-soft",
+  "detail"
+ ],
+ "options": {
+  "surfaces": {
+   "star": false,
+   "reject": false,
+   "comment": "looks good"
+  },
+  "bake-soft": {
+   "star": false,
+   "reject": false,
+   "comment": "good"
+  },
+  "detail": {
+   "star": false,
+   "reject": false,
+   "comment": "great"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": []
+}

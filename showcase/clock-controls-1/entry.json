@@ -1,0 +1,26 @@
+{
+ "title": "Clock controls and HUD spacing",
+ "date": "2026-10-06",
+ "by": "codex",
+ "caption": "Click the clock to wait until a later period on free days. Required story moments explain why waiting is unavailable. The phone clock is visible; performance numbers and the destination arrow clear the HUD.",
+ "commit": "4582aa83",
+ "images": [
+  {
+   "id": "desktop",
+   "image": "game3d/shots/codex-clock-controls/1366-large-hud.png.webp",
+   "caption": "Desktop with larger HUD"
+  },
+  {
+   "id": "phone",
+   "image": "game3d/shots/codex-clock-controls/390-menu.png.webp",
+   "caption": "Phone time menu"
+  }
+ ],
+ "links": [
+  {
+   "label": "Play locally",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

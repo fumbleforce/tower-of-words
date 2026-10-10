@@ -1,0 +1,200 @@
+{
+ "title": "Birds and small animals outdoors",
+ "date": "2026-10-02",
+ "by": "claude-agent:creatures",
+ "caption": "Pigeons, sparrows, crows, gulls, island cats, butterflies and red dragonflies in the outdoor places, by time of day; flocks scatter when Eric walks up. Sparrows and wind by day, crickets after work.",
+ "sections": [
+  {
+   "title": "Scattering, and up close",
+   "caption": "Walk up to a flock and it takes off.",
+   "images": [
+    {
+     "id": "scatter",
+     "image": "bible/shots/showcase/creatures-1/scatter.webp.webp",
+     "caption": "Eric steps up to the plaza pigeons: they take off a moment apart and fly off (frames 0.25 s apart, left to right, top to bottom)"
+    },
+    {
+     "id": "pigeons-close",
+     "image": "bible/shots/showcase/creatures-1/pigeons-close.webp",
+     "caption": "Close up: the pigeon flock feeding"
+    },
+    {
+     "id": "model-sheet",
+     "image": "bible/shots/showcase/creatures-1/model-sheet.webp",
+     "caption": "Model sheet (tools/creature-sheet.html): pigeon, sparrow, crow and gull resting and flying, the three cats, a butterfly"
+    }
+   ]
+  },
+  {
+   "title": "Station forecourt",
+   "caption": "Pigeons on the paving by the head office, sparrows by the benches, crows on the roofs.",
+   "images": [
+    {
+     "id": "forecourt-desk",
+     "image": "bible/shots/showcase/creatures-1/forecourt-desk.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "forecourt-phone",
+     "image": "bible/shots/showcase/creatures-1/forecourt-phone.webp",
+     "caption": "Morning, phone"
+    }
+   ]
+  },
+  {
+   "title": "Fountain plaza",
+   "caption": "Pigeons round the fountain, sparrows, a crow on the fountain top, butterflies and red dragonflies over the lawns.",
+   "images": [
+    {
+     "id": "plaza-desk",
+     "image": "bible/shots/showcase/creatures-1/plaza-desk.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "plaza-phone",
+     "image": "bible/shots/showcase/creatures-1/plaza-phone.webp",
+     "caption": "Morning, phone"
+    }
+   ]
+  },
+  {
+   "title": "Shop street",
+   "caption": "Pigeons and sparrows by the planter, the ginger shop cat by a wall, a crow on a roof, gulls over the sea.",
+   "images": [
+    {
+     "id": "shotengai-desk",
+     "image": "bible/shots/showcase/creatures-1/shotengai-desk.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "shotengai-phone",
+     "image": "bible/shots/showcase/creatures-1/shotengai-phone.webp",
+     "caption": "Morning, phone"
+    }
+   ]
+  },
+  {
+   "title": "East lane",
+   "caption": "Sparrows, butterflies and dragonflies over the verges.",
+   "images": [
+    {
+     "id": "east_lane-desk",
+     "image": "bible/shots/showcase/creatures-1/east_lane-desk.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "east_lane-phone",
+     "image": "bible/shots/showcase/creatures-1/east_lane-phone.webp",
+     "caption": "Morning, phone"
+    }
+   ]
+  },
+  {
+   "title": "East coast",
+   "caption": "Gulls circling and sitting on the blocks, sparrows, insects over the grass.",
+   "images": [
+    {
+     "id": "east_coast-desk",
+     "image": "bible/shots/showcase/creatures-1/east_coast-desk.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "east_coast-phone",
+     "image": "bible/shots/showcase/creatures-1/east_coast-phone.webp",
+     "caption": "Morning, phone"
+    }
+   ]
+  },
+  {
+   "title": "Gym and pool",
+   "caption": "Pigeons on the sports lane, dragonflies.",
+   "images": [
+    {
+     "id": "sports-desk",
+     "image": "bible/shots/showcase/creatures-1/sports-desk.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "sports-phone",
+     "image": "bible/shots/showcase/creatures-1/sports-phone.webp",
+     "caption": "Morning, phone"
+    }
+   ]
+  },
+  {
+   "title": "Office street",
+   "caption": "A pigeon flock and sparrows on the street.",
+   "images": [
+    {
+     "id": "office_quarter-desk",
+     "image": "bible/shots/showcase/creatures-1/office_quarter-desk.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "office_quarter-phone",
+     "image": "bible/shots/showcase/creatures-1/office_quarter-phone.webp",
+     "caption": "Morning, phone"
+    }
+   ]
+  },
+  {
+   "title": "Harbour",
+   "caption": "Gulls over the harbour, the ginger harbour cat.",
+   "images": [
+    {
+     "id": "harbour-desk",
+     "image": "bible/shots/showcase/creatures-1/harbour-desk.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "harbour-phone",
+     "image": "bible/shots/showcase/creatures-1/harbour-phone.webp",
+     "caption": "Morning, phone"
+    }
+   ]
+  },
+  {
+   "title": "After work",
+   "caption": "Pigeons, sparrows and insects are gone after work; crows stay, and the cats come out.",
+   "images": [
+    {
+     "id": "shotengai-eve-desk",
+     "image": "bible/shots/showcase/creatures-1/shotengai-eve-desk.webp",
+     "caption": "Shop street after work: the shop cat and the black night cat, a crow; crickets in the sound (desktop)"
+    },
+    {
+     "id": "shotengai-eve-phone",
+     "image": "bible/shots/showcase/creatures-1/shotengai-eve-phone.webp",
+     "caption": "Shop street after work: the shop cat and the black night cat, a crow; crickets in the sound (phone)"
+    },
+    {
+     "id": "dorm_court-eve-desk",
+     "image": "bible/shots/showcase/creatures-1/dorm_court-eve-desk.webp.webp",
+     "caption": "Dorm courtyard after work: a tabby on the wall (desktop)"
+    },
+    {
+     "id": "dorm_court-eve-phone",
+     "image": "bible/shots/showcase/creatures-1/dorm_court-eve-phone.webp",
+     "caption": "Dorm courtyard after work: a tabby on the wall (phone)"
+    },
+    {
+     "id": "plaza-eve-desk",
+     "image": "bible/shots/showcase/creatures-1/plaza-eve-desk.webp.webp",
+     "caption": "Plaza after work: the day birds gone, a crow stays (desktop)"
+    },
+    {
+     "id": "harbour-eve-desk",
+     "image": "bible/shots/showcase/creatures-1/harbour-eve-desk.webp",
+     "caption": "Harbour after work: gulls sitting, the harbour cat (desktop)"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

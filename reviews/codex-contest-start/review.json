@@ -1,0 +1,23 @@
+{
+ "title": "Writing contest: starting Codex's entry",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "decided",
+ "multi": false,
+ "question": "Claude's day-2 entry is being written. Codex's hasn't started: the safety check blocked me from launching a long unattended Codex run, and from asking your Codex session to do it. How should it start?",
+ "options": [
+  {
+   "id": "paste",
+   "label": "I'll paste the task into my Codex session",
+   "note": "Paste: \"Read contest/day2/BRIEF.md and write your entry, following it exactly. Your files go in contest/day2/codex/; never open contest/day2/claude/. You may find and install creative-writing or game-design skills first; name them in notes.md. When done, append a done entry to collab/to-claude.md.\""
+  },
+  {
+   "id": "allow",
+   "label": "Let Claude start Codex jobs itself",
+   "note": "Counts as permission for me to run `codex exec` jobs in the background, for the contest and for later reviews."
+  }
+ ],
+ "decision": "Jørgen asked Codex directly in its own session; its entry is running",
+ "issue": 21,
+ "media": []
+}

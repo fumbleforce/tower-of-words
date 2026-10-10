@@ -1,0 +1,221 @@
+{
+ "title": "Soft steam in the B2 kitchenette",
+ "date": "2026-10-08",
+ "result": [
+  "candidate-20261008-day2-1366-q2-kitchen-close",
+  "candidate-20261008-day2-1366-q2-overview"
+ ],
+ "updated": "2026-10-08T01:08:06.687995+00:00",
+ "by": "codex",
+ "caption": "Steam above the kettle, coffee maker and cup now stays soft when ambient occlusion is enabled.",
+ "preview": "candidate-20261008-day2-1366-q2-kitchen-close",
+ "sections": [
+  {
+   "title": "Original captures",
+   "caption": "The first close-up attempt was too tight; it is retained here.",
+   "images": [
+    {
+     "id": "diagnosis-20261008-day2-1366-overview",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-1366-overview.png.webp",
+     "caption": "Original office overview, 1366 pixels wide"
+    },
+    {
+     "id": "diagnosis-20261008-day2-1366-kitchen-close",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-1366-kitchen-close.png.webp",
+     "caption": "First close-up attempt, too tightly framed"
+    },
+    {
+     "id": "diagnosis-20261008-day2-390-overview",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-390-overview.png.webp",
+     "caption": "Original office overview, 390 pixels wide"
+    },
+    {
+     "id": "diagnosis-20261008-day2-390-kitchen-close",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-390-kitchen-close.png.webp",
+     "caption": "First close-up attempt, too tightly framed"
+    }
+   ]
+  },
+  {
+   "title": "Steam visibility check, 1366 pixels",
+   "caption": "Temporary diagnostic control: hiding steam identifies the affected objects. The hidden-steam view is not the fix.",
+   "images": [
+    {
+     "id": "diagnosis-20261008-day2-1366-kitchen-original-close",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-1366-kitchen-original-close.png.webp",
+     "caption": "Corrected close-up framing before the fix"
+    },
+    {
+     "id": "diagnosis-20261008-day2-1366-DIAGNOSTIC-steam-hidden",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-1366-DIAGNOSTIC-steam-hidden.png.webp",
+     "caption": "Diagnostic control with all steam hidden"
+    }
+   ]
+  },
+  {
+   "title": "Steam visibility check, 390 pixels",
+   "caption": "Temporary diagnostic control: hiding steam identifies the affected objects. The hidden-steam view is not the fix.",
+   "images": [
+    {
+     "id": "diagnosis-20261008-day2-390-kitchen-original-close",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-390-kitchen-original-close.png.webp",
+     "caption": "Corrected close-up framing before the fix"
+    },
+    {
+     "id": "diagnosis-20261008-day2-390-DIAGNOSTIC-steam-hidden",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-390-DIAGNOSTIC-steam-hidden.png.webp",
+     "caption": "Diagnostic control with all steam hidden"
+    }
+   ]
+  },
+  {
+   "title": "Day-one check",
+   "caption": "The same problem also appears on day one. The dialogue remains in these captures.",
+   "images": [
+    {
+     "id": "diagnosis-20261008-day1-1366-overview",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day1-1366-overview.png.webp",
+     "caption": "Day-one office view"
+    },
+    {
+     "id": "diagnosis-20261008-day1-1366-kitchen-original-close",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day1-1366-kitchen-original-close.png.webp",
+     "caption": "Black steam rectangles on day one"
+    },
+    {
+     "id": "diagnosis-20261008-day1-1366-DIAGNOSTIC-steam-hidden",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day1-1366-DIAGNOSTIC-steam-hidden.png.webp",
+     "caption": "Diagnostic control with steam hidden"
+    }
+   ]
+  },
+  {
+   "title": "Cause check, high quality at 1366 pixels",
+   "caption": "Temporary diagnostic control removes steam from the ambient-occlusion pass only, then restores the original rendering.",
+   "images": [
+    {
+     "id": "diagnosis-20261008-day2-1366-high-original-close",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-1366-high-original-close.png.webp",
+     "caption": "Original rendering: black rectangles"
+    },
+    {
+     "id": "diagnosis-20261008-day2-1366-DIAGNOSTIC-sprites-excluded-AO-only",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-1366-DIAGNOSTIC-sprites-excluded-AO-only.png.webp",
+     "caption": "Diagnostic pass exclusion: soft steam returns"
+    },
+    {
+     "id": "diagnosis-20261008-day2-1366-high-restored",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-1366-high-restored.png.webp",
+     "caption": "Restoring original rendering brings the rectangles back"
+    }
+   ]
+  },
+  {
+   "title": "Cause check, high quality at 390 pixels",
+   "caption": "Temporary diagnostic control removes steam from the ambient-occlusion pass only, then restores the original rendering.",
+   "images": [
+    {
+     "id": "diagnosis-20261008-day2-390-high-original-close",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-390-high-original-close.png.webp",
+     "caption": "Original rendering: black rectangles"
+    },
+    {
+     "id": "diagnosis-20261008-day2-390-DIAGNOSTIC-sprites-excluded-AO-only",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-390-DIAGNOSTIC-sprites-excluded-AO-only.png.webp",
+     "caption": "Diagnostic pass exclusion: soft steam returns"
+    },
+    {
+     "id": "diagnosis-20261008-day2-390-high-restored",
+     "image": "game3d/shots/kitchenette239/diagnosis-20261008/day2-390-high-restored.png.webp",
+     "caption": "Restoring original rendering brings the rectangles back"
+    }
+   ]
+  },
+  {
+   "title": "High quality after the fix",
+   "caption": "Normal game rendering with the source correction. Close-ups change only camera framing.",
+   "images": [
+    {
+     "id": "candidate-20261008-day2-1366-q2-overview",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-1366-q2-overview.png.webp",
+     "caption": "Desktop: office overview"
+    },
+    {
+     "id": "candidate-20261008-day2-1366-q2-kitchen-close",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-1366-q2-kitchen-close.png.webp",
+     "caption": "Desktop: kitchenette close-up; soft steam remains"
+    },
+    {
+     "id": "candidate-20261008-day2-390-q2-overview",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-390-q2-overview.png.webp",
+     "caption": "Phone: office overview"
+    },
+    {
+     "id": "candidate-20261008-day2-390-q2-kitchen-close",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-390-q2-kitchen-close.png.webp",
+     "caption": "Phone: kitchenette close-up; soft steam remains"
+    }
+   ]
+  },
+  {
+   "title": "Medium quality after the fix",
+   "caption": "Normal game rendering with the source correction. Close-ups change only camera framing.",
+   "images": [
+    {
+     "id": "candidate-20261008-day2-1366-q1-overview",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-1366-q1-overview.png.webp",
+     "caption": "Desktop: office overview"
+    },
+    {
+     "id": "candidate-20261008-day2-1366-q1-kitchen-close",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-1366-q1-kitchen-close.png.webp",
+     "caption": "Desktop: kitchenette close-up; soft steam remains"
+    },
+    {
+     "id": "candidate-20261008-day2-390-q1-overview",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-390-q1-overview.png.webp",
+     "caption": "Phone: office overview"
+    },
+    {
+     "id": "candidate-20261008-day2-390-q1-kitchen-close",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-390-q1-kitchen-close.png.webp",
+     "caption": "Phone: kitchenette close-up; soft steam remains"
+    }
+   ]
+  },
+  {
+   "title": "Low quality after the fix",
+   "caption": "Normal game rendering with the source correction. Close-ups change only camera framing.",
+   "images": [
+    {
+     "id": "candidate-20261008-day2-1366-q0-overview",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-1366-q0-overview.png.webp",
+     "caption": "Desktop: office overview"
+    },
+    {
+     "id": "candidate-20261008-day2-1366-q0-kitchen-close",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-1366-q0-kitchen-close.png.webp",
+     "caption": "Desktop: kitchenette close-up; soft steam remains"
+    },
+    {
+     "id": "candidate-20261008-day2-390-q0-overview",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-390-q0-overview.png.webp",
+     "caption": "Phone: office overview"
+    },
+    {
+     "id": "candidate-20261008-day2-390-q0-kitchen-close",
+     "image": "game3d/shots/kitchenette239/candidate-20261008/day2-390-q0-kitchen-close.png.webp",
+     "caption": "Phone: kitchenette close-up; soft steam remains"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play locally",
+   "href": "game3d/"
+  }
+ ],
+ "commit": "dfffe4a61ea355d4a372da74624cfe3a8106807d",
+ "media": []
+}

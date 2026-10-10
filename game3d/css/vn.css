@@ -1,0 +1,110 @@
+/* The dialogue box's controls (js/ui/vn-controls.js) and the backlog (js/ui/backlog.js). Same kit as the HUD:
+   slate glass, hairline edges, Zen Kaku Gothic, Mio's teal for what is on, peach only for Japanese. */
+
+/* ---------- the row on the box: Log, Auto, Skip, Hide, Replay ---------- */
+#vnbar { float: right; display: flex; gap: 2px; margin: -8px -8px 4px 14px; pointer-events: auto; text-shadow: none; animation: vnIn .35s ease; position: relative; z-index: 2; }
+#vnbar[hidden] { display: none; }
+@keyframes vnIn { from { opacity: 0; translate: 0 4px; } }
+#vnbar .vb { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-width: 34px; height: 34px; padding: 0 8px; border: 1px solid transparent; border-radius: 9px; background: rgba(22, 25, 32, .42); color: var(--ink-dim); cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+#vnbar .vb::before { content: ""; position: absolute; inset: -5px -1px; } /* a bigger target than the picture */
+#vnbar .vb svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#vnbar .vb svg .f { fill: currentColor; stroke: none; }
+#vnbar .vb .w { display: none; font: 700 12px/1 var(--font); letter-spacing: .02em; }
+#vnbar .vb:hover { background: rgba(255, 255, 255, .1); color: var(--ink); }
+#vnbar .vb:focus-visible { box-shadow: var(--focus); }
+#vnbar .vb:disabled { opacity: .3; cursor: default; background: transparent; }
+/* Auto and Skip while on: teal, with their name written out */
+#vnbar .vb.on { background: rgba(111, 208, 198, .2); border-color: rgba(111, 208, 198, .75); color: var(--accent); }
+#vnbar .vb.on .w { display: inline; }
+#vnbar .vb.on svg { animation: vnPulse 1.4s ease-in-out infinite; }
+@keyframes vnPulse { 50% { opacity: .55; } }
+body.reduce-motion #vnbar .vb.on svg { animation: none; }
+#talk.phone #vnbar { margin: -6px -8px 4px 12px; }
+/* phone: the row is the box's top right cell, beside the name (a row of its own over narration), never beside the text */
+body.phone #talk:not(.typing) { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+body.phone #talk:not(.typing) > :where(:not(#vnbar)) { grid-column: 1 / -1; }
+body.phone #talk:not(.typing) > .who { grid-column: 1; grid-row: 1; margin-bottom: 0; }
+body.phone #talk:not(.typing) > .line { margin-top: 4px; }
+body.phone #vnbar { float: none; grid-column: 2; grid-row: 1; gap: 0; margin: -10px -6px -4px 6px; }
+body.phone #vnbar .vb.on .w { display: none; }
+body.phone #vnbar .vb { min-width: 44px; height: 44px; padding: 0 9px; background: transparent; }
+body.phone #vnbar .vb::before { inset: 0; }
+body.phone #vnbar .vb svg { width: 20px; height: 20px; }
+body.phone #vnbar .vb.on { background: rgba(111, 208, 198, .2); }
+body.phone #talk .who { min-width: 0; flex-direction: column; align-items: flex-start; gap: 0; }
+body.phone #talk .who > * { max-width: 100%; }
+body.phone #talk .who .nm { display: block; overflow-wrap: anywhere; }
+body.phone #talk .who .rl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* while Auto runs, the continue arrow is teal: the line will move on by itself */
+body.vn-auto #talk .more { border-top-color: var(--accent); }
+
+/* ---------- hidden: only the world ---------- */
+body.vn-hide #ui { opacity: 0; transition: opacity .25s; }
+body.vn-hide #ui, body.vn-hide #ui * { pointer-events: none !important; }
+#vnShow { position: fixed; inset: 0; z-index: 40; cursor: pointer; }
+#vnShow[hidden] { display: none; }
+#vnShow::after { content: "Tap anywhere to show the text"; position: absolute; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); translate: -50% 0; padding: 7px 14px; border-radius: 999px; background: rgba(17, 21, 30, .62); border: 1px solid var(--chip-edge); color: var(--ink-dim); font: 600 13px/1 var(--font); white-space: nowrap; opacity: .8; }
+body:not(.phone) #vnShow::after { content: "Click or press any key to show the text"; }
+
+/* ---------- the backlog ---------- */
+.vnlog { position: fixed; inset: 0; z-index: 45; display: grid; place-items: center; background: rgba(var(--night), .74); backdrop-filter: blur(3px); opacity: 0; transition: opacity .18s; }
+.vnlog.in { opacity: 1; }
+.vnlog[hidden] { display: none; }
+.vnlog .sheet { display: flex; flex-direction: column; width: min(780px, 92vw); height: min(86vh, 900px); border-radius: 16px; background: var(--sheet); border: 1px solid var(--chip-edge); box-shadow: 0 18px 50px rgba(0, 0, 0, .5); overflow: hidden; translate: 0 10px; transition: translate .2s ease; }
+.vnlog.in .sheet { translate: 0 0; }
+.vnlog .hd { display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 20px; border-bottom: 1px solid var(--chip-edge); }
+.vnlog .hd .t { font: 700 16px/1 var(--font); }
+.vnlog .hd .n { color: var(--ink-dim); font-size: 13px; flex: 1; }
+.vnlog .x { width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 10px; background: transparent; cursor: pointer; }
+.vnlog .x svg { width: 20px; height: 20px; fill: none; stroke: var(--ink-dim); stroke-width: 2; stroke-linecap: round; }
+.vnlog .x:hover { background: rgba(255, 255, 255, .08); }
+.vnlog .ls { flex: 1; margin: 0; padding: 6px 12px 10px; list-style: none; overflow-y: auto; overscroll-behavior: contain; outline: none; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.18) transparent; }
+.vnlog .ft { padding: 8px 20px 10px; border-top: 1px solid var(--chip-edge); color: var(--ink-dim); font-size: 12px; text-align: center; }
+.vnlog li { display: grid; grid-template-columns: 40px 1fr 44px; gap: 12px; align-items: start; padding: 10px 6px; border-bottom: 1px solid rgba(255, 255, 255, .05); }
+.vnlog li:last-child { border-bottom: 0; }
+.vnlog .th { width: 40px; height: 40px; border-radius: 50%; background-color: #2a303b; background-repeat: no-repeat; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1); }
+.vnlog .th.none { background: none; box-shadow: none; }
+.vnlog .who { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
+.vnlog .nm { color: var(--c); font: 700 14px/1.3 var(--font); }
+.vnlog .rl { color: var(--ink-dim); font-size: 12px; }
+.vnlog .rl.txt { display: inline-flex; align-items: center; gap: 5px; }
+.vnlog .rl.txt::before { content: ""; width: 6px; height: 10px; border: 1.5px solid var(--accent); border-radius: 2px; }
+.vnlog .tx { font-size: 17px; line-height: 1.5; color: var(--ink); }
+.vnlog li.narr .tx { color: #c9ced8; font-style: italic; }
+.vnlog li.text .bd { padding-left: 10px; border-left: 2px solid var(--accent); }
+.vnlog li.seen .tx { color: #c4cad4; } /* seen on an earlier play: a little quieter */
+.vnlog li.narr.seen .tx { color: #aab1bd; }
+.vnlog li.pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding-left: 58px; }
+.vnlog li.pick .tag { color: var(--accent); font: 700 12px/1.1 var(--font); }
+.vnlog li.pick .c { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 6px 12px; border-radius: 9px; border: 1px solid rgba(111, 208, 198, .45); background: rgba(111, 208, 198, .08); font-size: 15px; }
+.vnlog li.pick .c .wi, .vnlog li.pick .c svg { width: 22px; height: 22px; }
+.vnlog li.pick .cw { display: flex; flex-direction: column; }
+.vnlog li.pick .rd { color: var(--gl); font-size: 12px; }
+.vnlog li.empty { display: block; padding: 40px 0; text-align: center; color: var(--ink-dim); }
+.vnlog .rp { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid transparent; border-radius: 50%; background: transparent; color: var(--ink-dim); cursor: pointer; transition: background .15s, color .15s; }
+.vnlog .rp svg { width: 20px; height: 20px; fill: currentColor; }
+.vnlog .rp svg .w { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.vnlog .rp:hover { background: rgba(255, 255, 255, .08); color: var(--ink); }
+.vnlog .rp:focus-visible { box-shadow: var(--focus); }
+.vnlog .rp.on { color: var(--accent); border-color: rgba(111, 208, 198, .6); }
+.vnlog .gx { display: inline-block; color: #8d96a6; filter: blur(2.2px); opacity: .6; }
+.vnlog .plain { color: var(--ink); }
+.vnlog .heardico { display: inline-block; width: 18px; height: 14px; margin-right: 8px; vertical-align: -1px; border-radius: 3px; background: linear-gradient(90deg, #6f7a8c 0 3px, transparent 3px 6px, #6f7a8c 6px 9px, transparent 9px 12px, #6f7a8c 12px 15px); opacity: .7; }
+body.phone .vnlog { place-items: end stretch; }
+body.phone .vnlog .sheet { width: 100%; height: 86vh; height: 86dvh; border-radius: 16px 16px 0 0; border-bottom: 0; padding-bottom: env(safe-area-inset-bottom); }
+body.phone .vnlog .ls { padding: 4px 8px 8px; }
+body.phone .vnlog li { grid-template-columns: 34px 1fr 44px; gap: 10px; padding: 9px 2px; }
+body.phone .vnlog .th { width: 34px; height: 34px; }
+body.phone .vnlog li.pick { padding-left: 46px; }
+body.phone .vnlog .tx { font-size: 16px; }
+/* the phone's swipe down and long press on the dialogue area are the game's, not the browser's */
+body.phone #talkHit, body.phone #talk { touch-action: none; -webkit-touch-callout: none; }
+
+.vnlog .memories { align-self: flex-start; min-height: 40px; margin: 8px 18px 2px; padding: 6px 12px; color: var(--ink); border: 1px solid var(--chip-edge); border-radius: 8px; background: transparent; font: inherit; cursor: pointer; }
+.vnlog .memories:hover, .vnlog .memories[aria-pressed="true"] { background: rgba(255, 255, 255, .08); }
+.vnlog .bd { min-width: 0; overflow-wrap: anywhere; }
+.vnlog .reading-before { margin-top: 8px; }
+.vnlog .reading-before summary { display: list-item; min-height: 44px; box-sizing: border-box; padding: 10px 4px; color: var(--ink-dim); font-size: 14px; cursor: pointer; }
+.vnlog .reading-before summary:hover { color: var(--ink); }
+.vnlog .reading-before summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.vnlog .reading-before .tx { padding: 6px 0 6px 12px; border-left: 2px solid var(--chip-edge); }

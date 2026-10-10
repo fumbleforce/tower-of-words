@@ -1,0 +1,2415 @@
+{
+  "DEFAULT_SPEAKERS": {
+    "eric": {
+      "name": "Eric",
+      "role": "you",
+      "color": "#8fb4d8"
+    },
+    "mio": {
+      "name": "Mio",
+      "role": "programmer",
+      "color": "#5fc6bf"
+    },
+    "aoi": {
+      "name": "Aoi",
+      "color": "#e79fb0"
+    },
+    "kuroda": {
+      "name": "Mr. Hamada",
+      "role": "Accounts",
+      "color": "#b3a58f"
+    },
+    "guard": {
+      "name": "Mr. Ishibashi",
+      "role": "security",
+      "color": "#8ea2c8"
+    },
+    "kuro": {
+      "name": "Kuro",
+      "role": "reception",
+      "color": "#c3a7d6"
+    },
+    "emi": {
+      "name": "Emi",
+      "color": "#e0906f"
+    },
+    "mori": {
+      "name": "Mr. Mori",
+      "role": "section chief",
+      "color": "#b9a3d3"
+    },
+    "kenji": {
+      "name": "Kenji",
+      "color": "#9fb6d8"
+    },
+    "yui": {
+      "name": "Yui",
+      "color": "#d7b27e"
+    },
+    "sota": {
+      "name": "Sota",
+      "color": "#9cc39a"
+    },
+    "nao": {
+      "name": "Nao",
+      "color": "#a9c3c0"
+    },
+    "hiro": {
+      "name": "Hiro",
+      "color": "#c0b39f"
+    },
+    "ann": {
+      "name": "Announcement",
+      "color": "#9aa9bd"
+    },
+    "reader": {
+      "name": "Man with a book",
+      "color": "#a8b0bf"
+    },
+    "music": {
+      "name": "Girl with headphones",
+      "color": "#a8b0bf"
+    },
+    "bun": {
+      "name": "Woman with a bun",
+      "color": "#a8b0bf"
+    },
+    "stander": {
+      "name": "Man by the door",
+      "color": "#a8b0bf"
+    },
+    "commuter": {
+      "name": "Office worker",
+      "color": "#a8b0bf"
+    },
+    "rei": {
+      "name": "Rei",
+      "role": "Sales",
+      "color": "#c9ced8"
+    },
+    "kanae": {
+      "name": "Kanae",
+      "color": "#f0a060"
+    },
+    "sales1": {
+      "name": "Man from Sales",
+      "color": "#a8b0bf"
+    },
+    "sales2": {
+      "name": "Woman from Sales",
+      "color": "#a8b0bf"
+    },
+    "gatev": {
+      "name": "Gate",
+      "role": "recorded voice",
+      "color": "#7fd0c8"
+    },
+    "reitext": {
+      "name": "Rei",
+      "role": "message",
+      "color": "#c9ced8",
+      "phone": true
+    }
+  },
+  "PORTRAITS": {
+    "mio": [
+      "neutral",
+      "smile",
+      "deadpan",
+      "surprised",
+      "embarrassed",
+      "tired",
+      "phone",
+      "annoyed"
+    ],
+    "aoi": [
+      "neutral"
+    ],
+    "kuro": [
+      "neutral",
+      "flirtatious",
+      "teasing",
+      "pleased",
+      "polite"
+    ],
+    "eric": [
+      "neutral",
+      "surprised",
+      "tired"
+    ],
+    "mori": [
+      "neutral",
+      "smile",
+      "flustered"
+    ],
+    "kenji": [
+      "neutral",
+      "grin",
+      "sheepish"
+    ],
+    "kuroda": [
+      "neutral",
+      "sleepy",
+      "panicked"
+    ],
+    "guard": [
+      "neutral",
+      "stern",
+      "amused"
+    ],
+    "emi": [
+      "neutral"
+    ],
+    "rei": [
+      "neutral",
+      "scolding",
+      "cold",
+      "smug",
+      "offguard"
+    ]
+  },
+  "ITEMS": {
+    "milk": {
+      "name": "Milk carton",
+      "price": 150,
+      "giftable": false,
+      "document": true
+    },
+    "riceball": {
+      "name": "Salted rice ball",
+      "price": 130,
+      "giftable": false,
+      "document": true
+    },
+    "curry_bread": {
+      "name": "Curry bread",
+      "price": 180,
+      "giftable": false
+    },
+    "butter_roll": {
+      "name": "Butter roll",
+      "price": 120,
+      "giftable": false
+    },
+    "island_directory": {
+      "name": "Island directory",
+      "price": 0,
+      "document": true,
+      "giftable": false
+    },
+    "coffee": {
+      "name": "Canned coffee",
+      "price": 120
+    },
+    "tea": {
+      "name": "Royal milk tea",
+      "price": 130
+    },
+    "melon": {
+      "name": "Melon soda",
+      "price": 130
+    },
+    "cornsoup": {
+      "name": "Hot corn soup",
+      "price": 130
+    }
+  },
+  "places": {
+    "print_shop": {
+      "things": {
+        "print_exit": {
+          "label": "North campus",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "directory_printer": {
+          "label": "Island directory",
+          "kind": "thing",
+          "verb": "Print"
+        },
+        "print_seat": {
+          "label": "Waiting chair",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        }
+      },
+      "spots": [
+        "directory",
+        "proof",
+        "press"
+      ],
+      "seats": [
+        "print_seat"
+      ],
+      "zones": [],
+      "people": [],
+      "hooks": [
+        "printDirectory"
+      ]
+    },
+    "campus": {
+      "things": {
+        "forecourt": {
+          "label": "Head office",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_quarter": {
+          "label": "Office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_shed": {
+          "label": "Office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "harbour": {
+          "label": "Harbour walk",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "print_shop": {
+          "label": "Print shop",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "campus_bench": {
+          "label": "Garden bench",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        }
+      },
+      "spots": [
+        "campus_in",
+        "print_door"
+      ],
+      "seats": [
+        "campus_bench"
+      ],
+      "zones": [
+        "forecourt_exit",
+        "office_quarter_exit",
+        "office_shed_exit",
+        "harbour_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "train": {
+      "things": {
+        "aoi": {
+          "label": "Woman on her phone",
+          "kind": "person"
+        },
+        "kuroda": {
+          "label": "Sleeping man",
+          "kind": "person"
+        },
+        "reader": {
+          "label": "Man with a book",
+          "kind": "person small"
+        },
+        "music": {
+          "label": "Girl with headphones",
+          "kind": "person small"
+        },
+        "rei": {
+          "label": "Woman with a laptop",
+          "kind": "person"
+        },
+        "cup": {
+          "label": "Coffee",
+          "kind": "thing small"
+        },
+        "bun": {
+          "label": "Woman with a bun",
+          "kind": "person small"
+        },
+        "tama": {
+          "label": "Cat",
+          "verb": "Pet",
+          "kind": "person small"
+        },
+        "doors": {
+          "label": "Doors",
+          "kind": "thing"
+        },
+        "door_l": {
+          "label": "Doors",
+          "kind": "thing"
+        },
+        "door_r": {
+          "label": "Doors",
+          "kind": "thing"
+        },
+        "plant": {
+          "label": "Plant",
+          "kind": "thing small"
+        },
+        "bags": {
+          "label": "Bags",
+          "kind": "thing small"
+        },
+        "rack": {
+          "label": "Luggage rack",
+          "kind": "thing small"
+        },
+        "straps": {
+          "label": "Straps",
+          "kind": "thing small"
+        },
+        "window": {
+          "label": "Window",
+          "kind": "thing small"
+        },
+        "poster": {
+          "label": "Poster",
+          "kind": "thing small"
+        },
+        "sign": {
+          "label": "Station sign",
+          "kind": "thing small"
+        },
+        "foodbag": {
+          "label": "Her lunch bag",
+          "verb": "Catch",
+          "kind": "thing small"
+        },
+        "stander": {
+          "label": "Man with a bag",
+          "kind": "person small"
+        },
+        "platform": {
+          "label": "Platform",
+          "kind": "thing small",
+          "reachAfter": "doors"
+        },
+        "door_test": {
+          "label": "Door test panel",
+          "kind": "thing",
+          "verb": "Test"
+        },
+        "station_exit": {
+          "label": "To the station",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "guard": {
+          "label": "Guard",
+          "kind": "person"
+        }
+      },
+      "spots": [
+        "aisle",
+        "door_l",
+        "door_r",
+        "by_aoi",
+        "by_kuroda",
+        "platform",
+        "walkway",
+        "plat_l",
+        "plat_l2",
+        "plat_hamada"
+      ],
+      "seats": [
+        "seat_aoi",
+        "seat_far_r",
+        "seat_near_l",
+        "seat_near_r",
+        "seat_mio"
+      ],
+      "zones": [
+        "door_zone",
+        "free_seat",
+        "platform_exit"
+      ],
+      "people": [
+        "kuroda",
+        "aoi",
+        "reader",
+        "rei",
+        "music",
+        "stander",
+        "bun",
+        "tama",
+        "guard"
+      ],
+      "hooks": [
+        "announce",
+        "arrive",
+        "doorsOpen",
+        "doorsClose",
+        "chime",
+        "doorsHold",
+        "alight",
+        "depart",
+        "wake",
+        "bag",
+        "cup",
+        "catTo",
+        "phone",
+        "headphones",
+        "shopBag",
+        "printout",
+        "stationSetup",
+        "doorTest",
+        "stationSignoff"
+      ]
+    },
+    "gate": {
+      "things": {
+        "guard": {
+          "label": "Mr. Ishibashi",
+          "kind": "person"
+        },
+        "kuroda": {
+          "label": "Mr. Hamada",
+          "kind": "person"
+        },
+        "aoi": {
+          "label": "Aoi",
+          "kind": "person"
+        },
+        "tama": {
+          "label": "Tama",
+          "verb": "Pet",
+          "kind": "person small"
+        },
+        "reader_l": {
+          "label": "Card reader",
+          "kind": "thing"
+        },
+        "reader_r": {
+          "label": "Card reader",
+          "kind": "thing"
+        },
+        "gate": {
+          "label": "Gate",
+          "kind": "thing"
+        },
+        "desk": {
+          "label": "Guard desk",
+          "kind": "thing small"
+        },
+        "guard_monitor": {
+          "label": "Monitor",
+          "kind": "thing small"
+        },
+        "counter": {
+          "label": "Visitor counter",
+          "kind": "thing small"
+        },
+        "signin": {
+          "label": "Visitor book",
+          "kind": "thing small"
+        },
+        "lostfound": {
+          "label": "Lost and found",
+          "kind": "thing small"
+        },
+        "screen": {
+          "label": "Notice screen",
+          "kind": "thing small"
+        },
+        "kiosk": {
+          "label": "Coffee machine",
+          "kind": "thing small"
+        },
+        "bench_l": {
+          "label": "Bench",
+          "kind": "thing small"
+        },
+        "bench_r": {
+          "label": "Bench",
+          "kind": "thing small"
+        },
+        "poster_l": {
+          "label": "Poster",
+          "kind": "thing small"
+        },
+        "poster_r": {
+          "label": "Poster",
+          "kind": "thing small"
+        },
+        "lift": {
+          "label": "Station exit",
+          "kind": "thing"
+        },
+        "entrance": {
+          "label": "Entrance",
+          "kind": "thing small"
+        },
+        "plant": {
+          "label": "Plant",
+          "kind": "thing small"
+        },
+        "bowl": {
+          "label": "Tama's bowl",
+          "kind": "thing small"
+        },
+        "worker_a": {
+          "label": "Office worker",
+          "kind": "person",
+          "reachAfter": "gate"
+        },
+        "worker_b": {
+          "label": "Office worker",
+          "kind": "person",
+          "reachAfter": "gate"
+        },
+        "commuter_1": {
+          "label": "Office worker",
+          "kind": "person"
+        },
+        "commuter_2": {
+          "label": "Office worker",
+          "kind": "person"
+        },
+        "commuter_3": {
+          "label": "Office worker",
+          "kind": "person"
+        },
+        "platform_way": {
+          "label": "To the platform",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "forecourt_way": {
+          "label": "Station exit",
+          "kind": "thing",
+          "verb": "Go"
+        }
+      },
+      "spots": [
+        "entrance_in",
+        "bench_l",
+        "bench_r",
+        "before_gate",
+        "after_gate",
+        "lift_front",
+        "counter_front",
+        "desk_front",
+        "outside",
+        "gate_lockers",
+        "gate_staff_door"
+      ],
+      "seats": [
+        "bench_r",
+        "bench_l"
+      ],
+      "zones": [
+        "arch",
+        "past_gate",
+        "lift_front",
+        "platform_way",
+        "forecourt_way"
+      ],
+      "people": [
+        "guard",
+        "kuroda",
+        "aoi",
+        "rei",
+        "tama"
+      ],
+      "hooks": [
+        "reader",
+        "gate",
+        "cardOk",
+        "enter",
+        "typing",
+        "phone",
+        "rush",
+        "catTo",
+        "newsletter",
+        "liftOpen",
+        "liftClose",
+        "monitorRepair"
+      ]
+    },
+    "forecourt": {
+      "things": {
+        "campus": {
+          "label": "North campus",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "station_exit": {
+          "label": "Station",
+          "kind": "thing"
+        },
+        "office_entrance": {
+          "label": "Head office",
+          "kind": "thing"
+        },
+        "lift": {
+          "label": "Lift to B2",
+          "kind": "thing"
+        },
+        "kuro": {
+          "label": "Receptionist",
+          "kind": "person"
+        },
+        "label_printer": {
+          "label": "Label printer",
+          "kind": "thing small"
+        },
+        "plaza_lane": {
+          "label": "To the plaza",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "shop_lane": {
+          "label": "To the shopping street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "garden_bench": {
+          "label": "Garden bench",
+          "kind": "thing",
+          "verb": "Sit"
+        },
+        "fallen_bicycle": {
+          "label": "Bicycle",
+          "kind": "thing",
+          "verb": "Stand up"
+        },
+        "kuroda": {
+          "label": "Mr. Hamada",
+          "kind": "person"
+        }
+      },
+      "spots": [
+        "station_exit",
+        "office_entrance",
+        "lift_front",
+        "plaza_lane",
+        "shop_lane",
+        "forecourt_staff_gate",
+        "lobby_model",
+        "lobby_island_w",
+        "lobby_island_e",
+        "lobby_lift_bench",
+        "lobby_umbrella",
+        "reception_office_door",
+        "reception_office"
+      ],
+      "nooks": [
+        "forecourt_staff_gate",
+        "lobby_model",
+        "lobby_island_w",
+        "lobby_island_e",
+        "lobby_lift_bench",
+        "lobby_umbrella"
+      ],
+      "seats": [
+        "garden_bench"
+      ],
+      "zones": [
+        "campus_exit",
+        "lift_front",
+        "station_exit",
+        "plaza_lane",
+        "shop_exit",
+        "reception_office"
+      ],
+      "people": [
+        "kuro",
+        "tama",
+        "kuroda"
+      ],
+      "hooks": [
+        "labelRepair",
+        "liftOpen",
+        "liftClose",
+        "gardenCat",
+        "bicycle"
+      ]
+    },
+    "dorm_court": {
+      "things": {
+        "bath": {
+          "label": "Bath",
+          "kind": "thing",
+          "verb": "Look"
+        },
+        "dorm_entry": {
+          "label": "Dorm entrance",
+          "kind": "thing"
+        },
+        "stairs": {
+          "label": "To the stairs",
+          "kind": "thing"
+        },
+        "mailboxes": {
+          "label": "Mailbox 203",
+          "kind": "thing",
+          "verb": "Take mail"
+        },
+        "street_gate": {
+          "label": "To the street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "tama": {
+          "label": "Tama",
+          "verb": "Pet",
+          "kind": "person small"
+        },
+        "hall_board": {
+          "label": "Notice board",
+          "kind": "thing",
+          "verb": "Read",
+          "pin": "near"
+        },
+        "manager_window": {
+          "label": "Manager's window",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        }
+      },
+      "spots": [
+        "plaza_entry",
+        "dorm_entry",
+        "hall",
+        "passage",
+        "bath"
+      ],
+      "seats": [],
+      "zones": [
+        "hall",
+        "passage",
+        "street_exit"
+      ],
+      "people": [
+        "tama"
+      ],
+      "hooks": [
+        "mailbox203"
+      ]
+    },
+    "shotengai": {
+      "things": {
+        "station_worker": {
+          "label": "Grounds worker",
+          "kind": "person"
+        },
+        "garden_bench_1": {
+          "label": "Garden bench",
+          "kind": "thing",
+          "verb": "Sit"
+        },
+        "garden_bench_2": {
+          "label": "Garden bench",
+          "kind": "thing",
+          "verb": "Sit"
+        },
+        "plaza_lane": {
+          "label": "To the plaza",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_lane": {
+          "label": "To head office",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "bike_shop": {
+          "label": "Bike shop",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "store": {
+          "label": "Store window",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        },
+        "bakery": {
+          "label": "Delivery note",
+          "kind": "thing",
+          "verb": "Read",
+          "pin": "near"
+        },
+        "store_door": {
+          "label": "Konbini",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "bakery_door": {
+          "label": "Bakery",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "game_centre": {
+          "label": "Game centre",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "karaoke": {
+          "label": "Karaoke",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "izakaya": {
+          "label": "Izakaya",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "mori": {
+          "label": "Mr. Mori",
+          "kind": "person"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
+        },
+        "party_seat": {
+          "label": "Bench",
+          "kind": "thing",
+          "verb": "Sit"
+        },
+        "kuroda": {
+          "label": "Mr. Hamada",
+          "kind": "person"
+        },
+        "aoi": {
+          "label": "Woman from the train",
+          "kind": "person"
+        },
+        "kuro": {
+          "label": "Receptionist",
+          "kind": "person"
+        },
+        "rei": {
+          "label": "Tennis player",
+          "kind": "person"
+        }
+      },
+      "spots": [
+        "station_garden",
+        "station_garden_approach",
+        "garden_free_bench",
+        "garden_next_patch",
+        "plaza_entry",
+        "office_lane",
+        "shotengai_shrine",
+        "shotengai_back_alley",
+        "shotengai_pine_bench",
+        "party_group",
+        "party_kenji",
+        "party_mio"
+      ],
+      "nooks": [
+        "station_garden",
+        "station_garden_approach",
+        "shotengai_shrine",
+        "shotengai_back_alley",
+        "shotengai_pine_bench"
+      ],
+      "seats": [
+        "garden_bench_1",
+        "garden_bench_2",
+        "party_seat",
+        "party_mori"
+      ],
+      "zones": [
+        "office_exit",
+        "plaza_exit"
+      ],
+      "people": [
+        "station_worker",
+        "mori",
+        "kenji",
+        "kuroda",
+        "aoi",
+        "kuro",
+        "rei"
+      ],
+      "hooks": [
+        "gardenWorker",
+        "partySetup",
+        "partyFood"
+      ]
+    },
+    "izakaya": {
+      "things": {
+        "izakaya_exit": {
+          "label": "To the shop street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "party_seat": {
+          "label": "Your place at the table",
+          "kind": "thing",
+          "verb": "Sit"
+        },
+        "mori": {
+          "label": "Mr. Mori",
+          "kind": "person"
+        },
+        "mio": {
+          "label": "Mio",
+          "kind": "person"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
+        },
+        "emi": {
+          "label": "Emi",
+          "kind": "person"
+        }
+      },
+      "spots": [
+        "izakaya_in",
+        "party_group",
+        "party_food",
+        "party_mori",
+        "party_mio",
+        "party_kenji",
+        "party_emi",
+        "service_counter"
+      ],
+      "nooks": [],
+      "seats": [
+        "party_seat",
+        "party_mori",
+        "party_mio",
+        "party_kenji",
+        "party_emi"
+      ],
+      "zones": [
+        "izakaya_exit"
+      ],
+      "people": [
+        "mori",
+        "mio",
+        "kenji",
+        "emi"
+      ],
+      "hooks": [
+        "partySetup",
+        "partyFood"
+      ]
+    },
+    "bakery": {
+      "things": {
+        "bakery_exit": {
+          "label": "Shopping street",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "bread_rack": {
+          "label": "Bread trays",
+          "kind": "thing",
+          "verb": "Choose"
+        },
+        "bakery_clerk": {
+          "label": "Bakery clerk",
+          "kind": "person"
+        },
+        "bakery_seat": {
+          "label": "Window seat",
+          "kind": "thing",
+          "verb": "Sit"
+        }
+      },
+      "spots": [
+        "bakery_in",
+        "bread_rack",
+        "checkout",
+        "window"
+      ],
+      "seats": [
+        "bakery_seat"
+      ],
+      "people": [
+        "bakery_clerk"
+      ],
+      "zones": [],
+      "nooks": [],
+      "hooks": [
+        "bakeryShop"
+      ]
+    },
+    "konbini": {
+      "things": {
+        "konbini_exit": {
+          "label": "Shopping street",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "fridge": {
+          "label": "Fridge",
+          "kind": "thing",
+          "verb": "Choose"
+        },
+        "konbini_clerk": {
+          "label": "Shop clerk",
+          "kind": "person"
+        },
+        "konbini_seat": {
+          "label": "Window seat",
+          "kind": "thing",
+          "verb": "Sit"
+        }
+      },
+      "spots": [
+        "konbini_in",
+        "fridge",
+        "checkout",
+        "window"
+      ],
+      "seats": [
+        "konbini_seat"
+      ],
+      "people": [
+        "konbini_clerk"
+      ],
+      "zones": [],
+      "nooks": [],
+      "hooks": [
+        "konbiniShop"
+      ]
+    },
+    "karaoke": {
+      "things": {
+        "karaoke_door": {
+          "label": "To the shop street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "karaoke_stairs": {
+          "label": "Upstairs",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "karaoke_desk": {
+          "label": "Front desk",
+          "kind": "thing"
+        },
+        "kuroda": {
+          "label": "Mr. Hamada",
+          "kind": "person"
+        }
+      },
+      "spots": [
+        "karaoke_in",
+        "karaoke_desk",
+        "karaoke_drinks",
+        "karaoke_bench",
+        "karaoke_stairs"
+      ],
+      "nooks": [
+        "karaoke_bench"
+      ],
+      "seats": [
+        "karaoke_bench"
+      ],
+      "zones": [],
+      "people": [
+        "kuroda"
+      ],
+      "hooks": []
+    },
+    "karaoke_booth": {
+      "things": {
+        "booth_door": {
+          "label": "Downstairs",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "song_terminal": {
+          "label": "Song selector",
+          "kind": "thing small"
+        },
+        "booth_screen": {
+          "label": "Screen",
+          "kind": "thing"
+        },
+        "kuroda": {
+          "label": "Man from the train",
+          "kind": "person"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
+        }
+      },
+      "spots": [
+        "booth_in",
+        "booth_table",
+        "booth_screen"
+      ],
+      "nooks": [],
+      "seats": [
+        "booth_seat_w",
+        "booth_seat_e",
+        "booth_seat_s"
+      ],
+      "zones": [],
+      "people": [
+        "kuroda",
+        "kenji"
+      ],
+      "hooks": [
+        "selectorRepair",
+        "karaokeClub"
+      ]
+    },
+    "east_lane": {
+      "things": {
+        "plaza_lane": {
+          "label": "To the plaza",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "shop_street": {
+          "label": "To the shop street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "dorm_row": {
+          "label": "To the sea terrace",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "north_street": {
+          "label": "To the gym and pool",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "dorm_gate": {
+          "label": "To the dorms",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "cafe": {
+          "label": "Café",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "liquor_shop": {
+          "label": "Liquor shop",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "barber": {
+          "label": "Barber",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "travel_office": {
+          "label": "Amakawa Travel",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "plaza_entry",
+        "east_lane_shrine",
+        "east_lane_footpath"
+      ],
+      "nooks": [
+        "east_lane_shrine",
+        "east_lane_footpath"
+      ],
+      "seats": [],
+      "zones": [
+        "plaza_exit",
+        "shop_exit",
+        "dorm_exit",
+        "row_exit",
+        "north_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "east_coast": {
+      "things": {
+        "dorm_street": {
+          "label": "To the dorm street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "courts_walk": {
+          "label": "To the gym and pool",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "lookout": {
+          "label": "Lookout",
+          "kind": "thing",
+          "verb": "Look"
+        },
+        "kuroda": {
+          "label": "Mr. Hamada",
+          "kind": "person"
+        },
+        "emi": {
+          "label": "Emi",
+          "kind": "person"
+        },
+        "aoi": {
+          "label": "Woman from the train",
+          "kind": "person"
+        },
+        "onsen": {
+          "label": "Onsen",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "commons": {
+          "label": "Common room",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "kuro": {
+          "label": "Receptionist",
+          "kind": "person"
+        },
+        "tama": {
+          "label": "Tama",
+          "kind": "person"
+        },
+        "rei": {
+          "label": "Rei",
+          "kind": "person"
+        }
+      },
+      "spots": [
+        "row_entry",
+        "east_coast_lookout",
+        "east_coast_shrine",
+        "lookout_view",
+        "inner_court",
+        "inner_court_bench",
+        "terrace_bench"
+      ],
+      "nooks": [
+        "east_coast_lookout",
+        "east_coast_shrine"
+      ],
+      "seats": [],
+      "zones": [
+        "row_exit",
+        "courts_exit"
+      ],
+      "people": [
+        "kuroda",
+        "emi",
+        "aoi",
+        "kuro",
+        "tama",
+        "rei"
+      ],
+      "hooks": [
+        "coastVisit"
+      ]
+    },
+    "dorm_commons": {
+      "things": {
+        "commons_door": {
+          "label": "To the inner court",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "commons_printer": {
+          "label": "Printer",
+          "kind": "thing small"
+        },
+        "art_table": {
+          "label": "Art materials",
+          "kind": "thing small"
+        },
+        "drying_rack": {
+          "label": "Drying rack",
+          "kind": "thing"
+        },
+        "commons_board": {
+          "label": "Notice board",
+          "kind": "thing"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
+        },
+        "mori": {
+          "label": "Mr. Mori",
+          "kind": "person"
+        },
+        "aoi": {
+          "label": "Aoi",
+          "kind": "person"
+        }
+      },
+      "spots": [
+        "commons_in",
+        "commons_table",
+        "commons_sofa",
+        "commons_tv",
+        "commons_kitchen",
+        "commons_rack",
+        "commons_books",
+        "commons_fridge"
+      ],
+      "nooks": [
+        "commons_books",
+        "commons_fridge"
+      ],
+      "seats": [
+        "commons_sofa",
+        "d5_aoi_beside"
+      ],
+      "zones": [],
+      "people": [
+        "kenji",
+        "mori",
+        "aoi"
+      ],
+      "hooks": [
+        "day5Commons",
+        "roomSofa",
+        "artClub"
+      ]
+    },
+    "sports": {
+      "things": {
+        "north_street": {
+          "label": "To the north street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "onsen_path": {
+          "label": "To the onsen path",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_street": {
+          "label": "To the office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "gym": {
+          "label": "Gym",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "pool": {
+          "label": "Pool",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "court_display": {
+          "label": "Score display",
+          "kind": "thing small"
+        },
+        "ball_basket": {
+          "label": "Ball basket",
+          "kind": "thing small"
+        },
+        "rei": {
+          "label": "Tennis player",
+          "kind": "person"
+        },
+        "aoi": {
+          "label": "Woman from the train",
+          "kind": "person"
+        },
+        "member": {
+          "label": "Club member",
+          "kind": "person"
+        },
+        "bench_ball": {
+          "label": "Ball by the bench",
+          "kind": "thing small",
+          "verb": "Look"
+        }
+      },
+      "spots": [
+        "north_entry",
+        "sports_courtside",
+        "sports_grove_bench",
+        "court_gate",
+        "court_bench",
+        "court_net",
+        "court_baseline_s",
+        "court_baseline_n",
+        "court_display",
+        "court_corner"
+      ],
+      "nooks": [
+        "sports_courtside",
+        "sports_grove_bench",
+        "court_corner"
+      ],
+      "seats": [
+        "court_bench"
+      ],
+      "zones": [
+        "north_exit",
+        "east_exit",
+        "west_exit"
+      ],
+      "people": [
+        "rei",
+        "aoi",
+        "member"
+      ],
+      "hooks": [
+        "courtRepair",
+        "tennisSession"
+      ]
+    },
+    "pool": {
+      "things": {
+        "changing_room": {
+          "label": "Pool exit",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "emi": {
+          "label": "Emi",
+          "kind": "person"
+        },
+        "kuro": {
+          "label": "Receptionist",
+          "kind": "person"
+        },
+        "attendant": {
+          "label": "Attendant",
+          "kind": "person"
+        },
+        "member": {
+          "label": "Club member",
+          "kind": "person"
+        },
+        "pool_goggles": {
+          "label": "Goggles",
+          "kind": "thing small"
+        },
+        "pool_notice": {
+          "label": "Pool notice",
+          "kind": "thing small",
+          "verb": "Read"
+        }
+      },
+      "spots": [
+        "deck_in",
+        "pool_steps",
+        "pool_blocks",
+        "lifeguard_chair",
+        "deck_benches",
+        "float_rack",
+        "pool_fence_corner",
+        "pool_lost_property"
+      ],
+      "nooks": [
+        "pool_fence_corner",
+        "pool_lost_property"
+      ],
+      "seats": [
+        "deck_bench_n",
+        "deck_bench_s"
+      ],
+      "zones": [],
+      "people": [
+        "emi",
+        "kuro",
+        "attendant",
+        "member"
+      ],
+      "hooks": [
+        "poolSession"
+      ]
+    },
+    "gym": {
+      "things": {
+        "gym_door": {
+          "label": "To the sports lane",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "gym_changing": {
+          "label": "To the pool",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "booking_terminal": {
+          "label": "Booking terminal",
+          "kind": "thing small"
+        },
+        "gym_printer": {
+          "label": "Printer",
+          "kind": "thing small"
+        },
+        "desk_fan": {
+          "label": "Desk fan",
+          "kind": "thing small"
+        },
+        "gym_board": {
+          "label": "Club board",
+          "kind": "thing"
+        },
+        "attendant": {
+          "label": "Attendant",
+          "kind": "person"
+        },
+        "mori": {
+          "label": "Mr. Mori",
+          "kind": "person"
+        },
+        "emi": {
+          "label": "Emi",
+          "kind": "person"
+        },
+        "kuro": {
+          "label": "Receptionist",
+          "kind": "person"
+        }
+      },
+      "spots": [
+        "gym_in",
+        "gym_desk",
+        "gym_lobby",
+        "gym_benches",
+        "gym_meeting",
+        "gym_court",
+        "gym_store",
+        "gym_lockers"
+      ],
+      "nooks": [
+        "gym_store",
+        "gym_lockers"
+      ],
+      "seats": [
+        "gym_bench_n",
+        "gym_bench_s"
+      ],
+      "zones": [],
+      "people": [
+        "attendant",
+        "mori",
+        "emi",
+        "kuro"
+      ],
+      "hooks": [
+        "bookingRepair",
+        "winterClub",
+        "fanRepair"
+      ]
+    },
+    "office_quarter": {
+      "things": {
+        "campus_shed": {
+          "label": "North campus",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "campus_quarter": {
+          "label": "North campus",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "sports_lane": {
+          "label": "To the gym and pool",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "harbour": {
+          "label": "To the harbour",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "trading_office": {
+          "label": "Amakawa Trading",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "foods_office": {
+          "label": "Amakawa Foods",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "electric_office": {
+          "label": "Amakawa Electric",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "logistics_office": {
+          "label": "Amakawa Logistics",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "construction_office": {
+          "label": "Amakawa Construction",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "insurance_office": {
+          "label": "Amakawa Life",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "bank": {
+          "label": "Bank",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "street_entry",
+        "office_smokers",
+        "office_vending"
+      ],
+      "nooks": [
+        "office_smokers",
+        "office_vending"
+      ],
+      "seats": [],
+      "zones": [
+        "campus_shed_exit",
+        "campus_quarter_exit",
+        "east_exit",
+        "west_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "harbour": {
+      "things": {
+        "campus": {
+          "label": "North campus",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_street": {
+          "label": "To the office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "works_lane": {
+          "label": "To the old works",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "works_street": {
+          "label": "To the works street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "ferry_terminal": {
+          "label": "Ferry terminal",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "harbour_office": {
+          "label": "Harbour office",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "street_entry",
+        "harbour_pier_end",
+        "harbour_shed_back",
+        "harbour_ferry_lookout"
+      ],
+      "nooks": [
+        "harbour_pier_end",
+        "harbour_shed_back",
+        "harbour_ferry_lookout"
+      ],
+      "seats": [],
+      "zones": [
+        "campus_exit",
+        "east_exit",
+        "lane_exit",
+        "street_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "works": {
+      "things": {
+        "harbour_lane": {
+          "label": "To the harbour",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_street": {
+          "label": "To the office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "old_power_plant": {
+          "label": "Old power plant",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "old_factory": {
+          "label": "Old factory",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "server_hall": {
+          "label": "Server hall",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "recycling_centre": {
+          "label": "Recycling centre",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "research_lab": {
+          "label": "Amakawa Research",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "lane_entry",
+        "chimney_foot",
+        "smoking_corner",
+        "gatehouse_window",
+        "transformer_lot",
+        "weather_station"
+      ],
+      "nooks": [
+        "chimney_foot",
+        "smoking_corner",
+        "gatehouse_window",
+        "transformer_lot",
+        "weather_station"
+      ],
+      "seats": [],
+      "zones": [
+        "lane_exit",
+        "street_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "dorms": {
+      "things": {
+        "door_203": {
+          "label": "Room 203",
+          "kind": "thing"
+        },
+        "window": {
+          "label": "Window",
+          "kind": "thing"
+        },
+        "boxes": {
+          "label": "Boxes",
+          "kind": "thing"
+        },
+        "bed": {
+          "label": "Bed",
+          "kind": "thing"
+        },
+        "computer": {
+          "label": "Computer",
+          "kind": "thing",
+          "verb": "Look"
+        },
+        "door_out": {
+          "label": "Front door",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "stairs_up": {
+          "label": "Upstairs",
+          "kind": "thing",
+          "verb": "Go up"
+        },
+        "stairs_down": {
+          "label": "Downstairs",
+          "kind": "thing",
+          "verb": "Go down"
+        },
+        "kitchen": {
+          "label": "Shared kitchen",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        },
+        "notices": {
+          "label": "Notice board",
+          "kind": "thing",
+          "verb": "Read",
+          "pin": "near"
+        },
+        "laundry": {
+          "label": "Laundry",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        },
+        "drinks": {
+          "label": "Drinks machine",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        },
+        "washing": {
+          "label": "Washing",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        },
+        "planters": {
+          "label": "Planters",
+          "kind": "thing",
+          "verb": "Look",
+          "pin": "near"
+        }
+      },
+      "spots": [
+        "landing",
+        "door_203",
+        "room_entry",
+        "window_front",
+        "desk_front",
+        "landing_3f",
+        "roof_door",
+        "dorm_2f_end",
+        "dorm_kitchen_shelf",
+        "dorm_3f_end",
+        "dorm_laundry_box",
+        "dorm_roof_chairs",
+        "dorm_roof_units"
+      ],
+      "nooks": [
+        "dorm_2f_end",
+        "dorm_kitchen_shelf",
+        "dorm_3f_end",
+        "dorm_laundry_box",
+        "dorm_roof_chairs",
+        "dorm_roof_units"
+      ],
+      "seats": [
+        "desk_chair"
+      ],
+      "zones": [
+        "door_203",
+        "room_exit"
+      ],
+      "people": [],
+      "hooks": [
+        "enterRoom",
+        "leaveRoom"
+      ]
+    },
+    "canteen": {
+      "things": {
+        "canteen_shirt": {
+          "label": "Diner in a shirt",
+          "kind": "person"
+        },
+        "canteen_cardigan": {
+          "label": "Diner in a cardigan",
+          "kind": "person"
+        },
+        "canteen_polo": {
+          "label": "Diner with a water cup",
+          "kind": "person"
+        },
+        "canteen_water": {
+          "label": "Water dispenser",
+          "kind": "thing",
+          "verb": "Use"
+        },
+        "canteen_collection": {
+          "label": "My paid tray",
+          "kind": "thing",
+          "verb": "Collect"
+        },
+        "canteen_return": {
+          "label": "Tray return",
+          "kind": "thing",
+          "verb": "Return tray"
+        },
+        "canteen_seat_shared": {
+          "label": "Shared table chair",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        },
+        "canteen_worker": {
+          "label": "Canteen worker",
+          "kind": "person"
+        },
+        "canteen_exit": {
+          "label": "Fountain plaza",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "canteen_seat_w": {
+          "label": "Dining chair",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        },
+        "canteen_seat_e": {
+          "label": "Dining chair",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        }
+      },
+      "spots": [
+        "canteen_in",
+        "meal_counter",
+        "water",
+        "tray_return"
+      ],
+      "seats": [
+        "canteen_seat_w",
+        "canteen_seat_e",
+        "canteen_seat_shared"
+      ],
+      "nooks": [],
+      "zones": [],
+      "people": [
+        "canteen_worker",
+        "canteen_shirt",
+        "canteen_cardigan",
+        "canteen_polo"
+      ],
+      "hooks": [
+        "roomWorker",
+        "canteenDining"
+      ]
+    },
+    "plaza": {
+      "things": {
+        "canteen_door": {
+          "label": "Canteen",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "office_lane": {
+          "label": "To head office",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "fountain": {
+          "label": "Fountain",
+          "kind": "thing"
+        },
+        "dorm_lane": {
+          "label": "To the dorms",
+          "kind": "thing"
+        },
+        "training_door": {
+          "label": "Training centre",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "canteen_table": {
+          "label": "Canteen table",
+          "kind": "thing",
+          "verb": "Sit"
+        },
+        "canteen_worker": {
+          "label": "Canteen worker",
+          "kind": "person"
+        },
+        "noticeboard": {
+          "label": "Notice board",
+          "kind": "thing",
+          "verb": "Read"
+        },
+        "shop_walk": {
+          "label": "To the shop street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "aoi": {
+          "label": "Woman from the train",
+          "kind": "person"
+        },
+        "board_map": {
+          "label": "Map",
+          "kind": "thing small",
+          "verb": "Look"
+        },
+        "tama": {
+          "label": "Tama",
+          "verb": "Pet",
+          "kind": "person small"
+        }
+      },
+      "spots": [
+        "office_entry",
+        "fountain_edge",
+        "dorm_exit",
+        "shop_walk",
+        "plaza_seat_bay",
+        "plaza_shrine"
+      ],
+      "nooks": [
+        "plaza_seat_bay",
+        "plaza_shrine"
+      ],
+      "seats": [],
+      "zones": [
+        "office_lane",
+        "dorm_exit",
+        "shop_walk"
+      ],
+      "people": [
+        "canteen_worker",
+        "aoi",
+        "tama"
+      ],
+      "hooks": [
+        "canteenChair",
+        "boardVisit"
+      ]
+    },
+    "office": {
+      "things": {
+        "sender_console": {
+          "label": "Sender console",
+          "kind": "thing",
+          "verb": "Inspect",
+          "pin": "near"
+        },
+        "sender_live": {
+          "label": "Timesheet sender",
+          "kind": "thing small",
+          "verb": "Inspect",
+          "pin": "near"
+        },
+        "emi": {
+          "label": "Emi",
+          "kind": "person"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
+        },
+        "rei": {
+          "label": "Rei",
+          "kind": "person"
+        },
+        "aoi": {
+          "label": "Aoi",
+          "kind": "person"
+        },
+        "mori": {
+          "label": "Mr. Mori",
+          "kind": "person"
+        },
+        "tama": {
+          "label": "Cat",
+          "verb": "Pet",
+          "verbIf": { "set": "found_chair", "unset": "chair_back", "verb": "Return the chair" },
+          "kind": "person small"
+        },
+        "covered": {
+          "label": "Covered desk",
+          "kind": "thing small"
+        },
+        "covered_monitor": {
+          "label": "Covered monitor",
+          "kind": "thing small"
+        },
+        "box_crowns": {
+          "label": "Box",
+          "kind": "thing small"
+        },
+        "cups": {
+          "label": "Cups",
+          "kind": "thing small"
+        },
+        "nameplate": {
+          "label": "Nameplate",
+          "kind": "thing small"
+        },
+        "my_desk": {
+          "label": "Your desk",
+          "kind": "thing"
+        },
+        "my_chair": {
+          "label": "Your chair",
+          "kind": "thing",
+          "verb": "Push to your desk"
+        },
+        "lift": {
+          "label": "Lift",
+          "kind": "thing small"
+        },
+        "vending": {
+          "label": "Vending machine",
+          "kind": "thing small"
+        },
+        "bench": {
+          "label": "Bench",
+          "kind": "thing small"
+        },
+        "stairs": {
+          "label": "Stairs",
+          "kind": "thing small"
+        },
+        "office_door": {
+          "label": "Office door",
+          "kind": "thing small"
+        },
+        "inout_board": {
+          "label": "In/out board",
+          "kind": "thing small",
+          "pin": "near"
+        },
+        "clock": {
+          "label": "Clock",
+          "kind": "thing small"
+        },
+        "whiteboard": {
+          "label": "Whiteboard",
+          "kind": "thing small"
+        },
+        "calendar": {
+          "label": "Calendar",
+          "kind": "thing small"
+        },
+        "water_cooler": {
+          "label": "Water cooler",
+          "kind": "thing small"
+        },
+        "cabinets": {
+          "label": "Cabinets",
+          "kind": "thing small"
+        },
+        "fan": {
+          "label": "Fan",
+          "kind": "thing small"
+        },
+        "boxes": {
+          "label": "Boxes",
+          "kind": "thing small"
+        },
+        "chief_desk": {
+          "label": "Mr. Mori's desk",
+          "kind": "thing small"
+        },
+        "machine_door": {
+          "label": "Machine room",
+          "kind": "thing small"
+        },
+        "racks": {
+          "label": "Server racks",
+          "kind": "thing small"
+        },
+        "fire_exit": {
+          "label": "Fire exit",
+          "kind": "thing small"
+        },
+        "noticeboard": {
+          "label": "Noticeboard",
+          "kind": "thing small"
+        },
+        "extinguisher": {
+          "label": "Extinguisher",
+          "kind": "thing small"
+        },
+        "hydrant": {
+          "label": "Hydrant",
+          "kind": "thing small"
+        },
+        "copier": {
+          "label": "Copier",
+          "kind": "thing"
+        },
+        "fax": {
+          "label": "Fax",
+          "kind": "thing small"
+        },
+        "paper_shelf": {
+          "label": "Paper shelf",
+          "kind": "thing small"
+        },
+        "worktable": {
+          "label": "Worktable",
+          "kind": "thing small"
+        },
+        "coffee_machine": {
+          "label": "Coffee machine",
+          "kind": "thing"
+        },
+        "kettle": {
+          "label": "Kettle",
+          "kind": "thing small"
+        },
+        "fridge": {
+          "label": "Fridge",
+          "kind": "thing small"
+        },
+        "microwave": {
+          "label": "Microwave",
+          "kind": "thing small"
+        },
+        "kitchen_table": {
+          "label": "Table",
+          "kind": "thing small"
+        },
+        "toilet_m": {
+          "label": "Men's toilet",
+          "kind": "thing small"
+        },
+        "toilet_f": {
+          "label": "Women's toilet",
+          "kind": "thing small"
+        },
+        "plant": {
+          "label": "Plant",
+          "kind": "thing small"
+        }
+      },
+      "spots": [
+        "sender_console",
+        "sender_guest",
+        "sender_desk",
+        "sender_door",
+        "sender_mori_door",
+        "lift_out",
+        "mori_greet",
+        "lobby",
+        "office_door",
+        "my_seat",
+        "emi_seat",
+        "emi_door",
+        "emi_desk",
+        "copier_front",
+        "coffee_front",
+        "corridor_w",
+        "corridor_e",
+        "machine_front",
+        "mio_by_desk",
+        "kenji_desk"
+      ],
+      "seats": [
+        "my_seat",
+        "emi_seat",
+        "mio_seat"
+      ],
+      "zones": [
+        "office",
+        "emi_office",
+        "copy_room",
+        "kitchen",
+        "toilets",
+        "machine_room",
+        "corridor"
+      ],
+      "people": [
+        "emi",
+        "kenji",
+        "mori",
+        "aoi",
+        "rei",
+        "tama"
+      ],
+      "hooks": [
+        "day5Office",
+        "teamDrinks",
+        "mioLunch",
+        "mioLunchComplete",
+        "copier",
+        "catTo",
+        "chairRoll",
+        "coffee",
+        "kettle",
+        "rackAlarm",
+        "machineDoor",
+        "vendingDrop",
+        "clockStop",
+        "fan",
+        "liftOpen",
+        "liftClose",
+        "sitDown",
+        "lunchSit",
+        "lunchOver",
+        "officeDay2"
+      ]
+    },
+    "ferry_terminal": {
+      "things": {
+        "ferry_exit": {
+          "label": "Harbour",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "ferry_staff": {
+          "label": "Room attendant",
+          "kind": "person",
+          "verb": "Talk"
+        },
+        "ferry_reader": {
+          "label": "Reader",
+          "kind": "person",
+          "verb": "Talk"
+        },
+        "ferry_traveller": {
+          "label": "Traveller",
+          "kind": "person",
+          "verb": "Talk"
+        },
+        "ferry_window_seat": {
+          "label": "Window bench",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        },
+        "ferry_quiet_seat": {
+          "label": "Quiet bench",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        },
+        "ferry_landing_seat": {
+          "label": "Landing bench",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        },
+        "ferry_notice_seat": {
+          "label": "Waiting bench",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        }
+      },
+      "spots": [
+        "ferry_in",
+        "ferry_counter",
+        "ferry_reader",
+        "ferry_traveller",
+        "ferry_luggage_corner",
+        "ferry_notice_recess"
+      ],
+      "seats": [
+        "ferry_window_seat",
+        "ferry_quiet_seat",
+        "ferry_landing_seat",
+        "ferry_notice_seat"
+      ],
+      "zones": [],
+      "people": [
+        "ferry_staff",
+        "ferry_reader",
+        "ferry_traveller"
+      ],
+      "hooks": [
+        "ferryActivity"
+      ]
+    }
+  }
+}

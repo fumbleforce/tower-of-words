@@ -1,0 +1,101 @@
+[
+ {
+  "service": "meshy",
+  "part": "head",
+  "task": "01a0fb37-8250-7671-86f8-6ceca2a5549c",
+  "status": "SUCCEEDED",
+  "credits": 30,
+  "balance_after": 1495,
+  "settings": {
+   "ai_model": "latest",
+   "should_remesh": false,
+   "should_texture": true,
+   "enable_pbr": false,
+   "image_enhancement": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "texture_resolution": "4k"
+  },
+  "input": "art/parts/char-mio-parts/inputs/head.png"
+ },
+ {
+  "service": "meshy",
+  "part": "body",
+  "task": "01a0fb3b-ba7d-741a-a822-740ea098590f",
+  "status": "SUCCEEDED",
+  "credits": 30,
+  "balance_after": 1465,
+  "settings": {
+   "ai_model": "latest",
+   "should_remesh": false,
+   "should_texture": true,
+   "enable_pbr": false,
+   "image_enhancement": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "texture_resolution": "4k"
+  },
+  "input": "art/parts/char-mio-parts/inputs/body.png"
+ },
+ {
+  "service": "meshy",
+  "part": "head-t2",
+  "task": "01a0fb42-d5c5-73c0-af11-ad6bd0e636ad",
+  "status": "SUCCEEDED",
+  "credits": 15,
+  "balance_after": 1450,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": true,
+   "enable_pbr": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "texture_resolution": "4k",
+   "model_type": "smart-topology",
+   "target_polycount": 3000
+  },
+  "input": "art/parts/char-mio-parts/inputs/head.png"
+ },
+ {
+  "service": "meshy",
+  "part": "body-t2",
+  "task": "01a0fb43-d900-74fd-8d95-1953341b9f9c",
+  "status": "SUCCEEDED",
+  "credits": 15,
+  "balance_after": 1435,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": true,
+   "enable_pbr": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "texture_resolution": "4k",
+   "model_type": "smart-topology",
+   "target_polycount": 4000
+  },
+  "input": "art/parts/char-mio-parts/inputs/body.png"
+ },
+ {
+  "service": "meshy",
+  "part": "meshy-single-rig",
+  "task": "01a10827-1051-777c-a894-ea13ec8e4e10",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "model": "art/parts/char-mio-parts/meshy/meshy-single-300k.glb",
+   "height_meters": 1.6
+  },
+  "balance_after": 480,
+  "note": "Jørgen on char-mio-parts-1: \"can you make the meshy single move?\" Rigged a copy of meshy-single (char-mio-gen3d-1) decimated from 1,280,368 to 299,999 faces (texture kept), under the 320k-face rig limit."
+ }
+]

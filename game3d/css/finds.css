@@ -1,0 +1,52 @@
+/* The finds (js/ui/finds-view.js): the Photos chip's pop, the album on Eric's phone, the close look at a photo or
+   paper, and a notice board's posts held up close. Same dark panels as People and Bag; the prints and posts are the
+   only light things, as objects from the world. */
+#photosBtn.gain { animation: find-pop .34s ease-out; border-color: var(--accent); transition: border-color 1s; }
+@keyframes find-pop { 40% { transform: scale(1.12); } 100% { transform: scale(1); } }
+
+/* the album */
+#photosPanel .head .cnt { color: var(--jp); margin-left: 6px; }
+#photosPanel .album { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 6px 0 12px; }
+#photosPanel .slot { aspect-ratio: 4 / 3.6; padding: 5px 5px 0; border-radius: 6px; border: 1px dashed rgba(255,255,255,.16); background: rgba(255,255,255,.03); display: flex; flex-direction: column; align-items: stretch; justify-content: center; cursor: default; }
+#photosPanel .slot .q { color: rgba(255,255,255,.22); font-size: 20px; font-weight: 700; text-align: center; }
+#photosPanel .slot.got { border: 0; background: #f3f1ec; cursor: pointer; justify-content: flex-start; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+#photosPanel .slot.got:hover { outline: 2px solid var(--accent); }
+#photosPanel .slot .pic { width: 100%; height: auto; display: block; }
+#photosPanel .slot .t { color: #2b2f37; font-size: 12px; font-weight: 700; padding: 3px 1px 0; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#photosPanel .papers .sub { color: var(--ink-dim); font-size: 13px; margin: 0 0 6px; }
+#photosPanel .paper-row { display: block; width: 100%; text-align: left; margin: 0 0 10px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--panel-edge); background: #252a33; cursor: pointer; }
+#photosPanel .paper-row:hover { border-color: rgba(111, 208, 198, .45); }
+
+/* the close looks: tap anywhere to close */
+.panel.look { background: rgba(10, 12, 16, .72); cursor: pointer; }
+.panel.look.in > * { animation: find-in .28s ease-out; }
+@keyframes find-in { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+#findView .shot { display: flex; flex-direction: column; align-items: center; gap: 14px; width: min(560px, calc(100vw - 36px)); }
+#findView .frame { width: 100%; padding: 12px 12px 28px; background: #f3f1ec; box-shadow: 0 10px 30px rgba(0,0,0,.5); transform: rotate(var(--tilt, -1deg)); }
+#findView .frame .pic { width: 100%; height: auto; display: block; }
+#findView .paper .frame { padding: 0 0 14px; background: #efe4c8; color: #3b2a1d; transform: rotate(-0.8deg); }
+#findView .paper .frame .ln { margin: 10px 18px 0; }
+#findView .cap { text-align: center; max-width: 100%; }
+#findView .cap .t { font-weight: 700; font-size: 18px; }
+#findView .cap .c { color: var(--ink-dim); margin-top: 4px; }
+#findView .cap .got { display: inline-block; margin-top: 10px; padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(111, 208, 198, .5); color: var(--accent); font-size: 13px; font-weight: 700; }
+.ln .ja { display: block; font-weight: 700; }
+.ln .en { display: block; font-size: .92em; opacity: .8; }
+
+/* a notice board, up close: the board's steel frame and pale cork, the posts pinned on it */
+#boardView { align-content: center; gap: 10px; }
+#boardView .cork { width: min(calc(var(--cols, 3) * 290px + 60px), calc(100vw - 32px)); max-height: calc(100vh - 90px); overflow: auto; padding: 22px; border: 8px solid #2c3139; border-radius: 4px; background: #c9bfa9; box-shadow: 0 12px 34px rgba(0,0,0,.55); }
+#boardView .posts { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 20px 18px; align-items: start; }
+#boardView .post { position: relative; padding: 16px 14px 14px; background: var(--bg); color: #23262d; box-shadow: 0 3px 8px rgba(0,0,0,.28); transform: rotate(var(--tilt)); font-size: 15px; line-height: 1.4; }
+#boardView .post .pin { position: absolute; left: 50%; top: 5px; width: 11px; height: 11px; margin-left: -5px; border-radius: 50%; background: #d4574c; box-shadow: 0 1px 2px rgba(0,0,0,.4); }
+#boardView .post:nth-child(3n+2) .pin { background: #3f7d8c; }
+#boardView .post:nth-child(3n) .pin { background: #e0b43c; }
+#boardView .post .pt { font-weight: 700; margin-bottom: 4px; }
+#boardView .post .ln { margin: 0 0 6px; }
+#boardView .post .ln:last-child { margin-bottom: 0; }
+#boardView .tapx { color: var(--ink-dim); font-size: 13px; text-align: center; margin: 0; }
+
+body.phone #boardView .cork { padding: 14px; border-width: 6px; max-height: calc(100dvh - 70px); }
+body.phone #boardView .posts { grid-template-columns: 1fr 1fr; gap: 14px 10px; }
+body.phone #boardView .post { font-size: 13px; padding: 14px 10px 10px; }
+body.phone #findView .cap .t { font-size: 16px; }

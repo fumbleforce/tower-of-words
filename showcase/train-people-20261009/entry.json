@@ -1,0 +1,41 @@
+{
+ "title": "Monorail passengers on the approved crowd bodies",
+ "date": "2026-10-09",
+ "by": "claude-agent:train-people",
+ "caption": "The man with a book, the girl with headphones and the woman with a bun now use the approved office bodies A and B, seated on the near benches instead of in the doorways.",
+ "result": [
+  "car-desk",
+  "car-phone",
+  "arrival-desk",
+  "music-close-desk"
+ ],
+ "sections": [
+  {
+   "title": "Day 1 on the train",
+   "caption": "The car as the day starts, and the arrival at Honsha, on desktop and phone.",
+   "images": []
+  },
+  {
+   "title": "Close-ups",
+   "caption": "Each passenger from the aisle. The book and phones sit in their hands and the headphones on her head. The bodies wear a smaller copy of their skin on the train to keep it inside its texture budget.",
+   "images": []
+  },
+  {
+   "title": "Their small moments still work",
+   "caption": "The video on her phone, the printout beside his book and the shopping bag, run through the real interaction.",
+   "images": []
+  },
+  {
+   "title": "Before",
+   "caption": "The code-built placeholders, two of them sitting in the doorways past the shortened benches.",
+   "images": []
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

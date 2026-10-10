@@ -1,0 +1,89 @@
+{
+ "title": "Character voices, round 2: Mio, Kenji, Kuro and Rei",
+ "date": "2026-10-09",
+ "by": "Claude, one writing agent per character",
+ "status": "decided",
+ "context": [
+  "This is round 2 of the voice sheets for Mio, Kenji, Kuro and Rei. All four were revised from your notes on round 1, and each card says what changed and quotes the note it came from.",
+  "Nothing here is in the game yet.",
+  "After your answer, each approved sheet becomes the reference for every future line of that character, and the lists of existing game lines that don't fit get applied to the game and re-voiced."
+ ],
+ "ask": "For each character, pick the card to approve the sheet as it is, pick it and write a comment to approve it with your changes, or reject it to have it redone. Answer the numbered questions in the card's comment box.",
+ "question": "This is round 2 of the voice sheets for Mio, Kenji, Kuro and Rei. All four were revised from your notes on round 1, and each card says what changed and quotes the note it came from. Nothing here is in the game yet. After your answer, each approved sheet becomes the reference for every future line of that character, and the lists of existing game lines that don't fit get applied to the game and re-voiced. For each character, pick the card to approve the sheet as it is, pick it and write a comment to approve it with your changes, or reject it to have it redone. Answer the numbered questions in the card's comment box.",
+ "multi": true,
+ "options": [
+  {
+   "id": "mio",
+   "label": "mio",
+   "image": "game3d/assets/portraits/mio-neutral.webp",
+   "changed": "You approved her (\"mostly good\") and asked what \"She does not list three things, and she does not give orders in fragments\" meant. That sentence is gone, along with the other writing rules that had ended up in her sheet. She is now 30, and the sheet follows the new job canon in cast.md: she was hired as a programmer, became the expert on the old servers, and asked for the engineer who turned out to be Eric. You said \"do rewrite the drift in later days if they dont match her\", so her list of lines to rewrite covers the later days too.",
+   "questions": [
+    "The list rewrites her day 1 line on the train (train.js, sit) so that she says she is the one who asked for Eric. Is that the right moment for it?"
+   ],
+   "note": "What changed: You approved her (\"mostly good\") and asked what \"She does not list three things, and she does not give orders in fragments\" meant. That sentence is gone, along with the other writing rules that had ended up in her sheet. She is now 30, and the sheet follows the new job canon in cast.md: she was hired as a programmer, became the expert on the old servers, and asked for the engineer who turned out to be Eric. You said \"do rewrite the drift in later days if they dont match her\", so her list of lines to rewrite covers the later days too. Questions: 1) The list rewrites her day 1 line on the train (train.js, sit) so that she says she is the one who asked for Eric. Is that the right moment for it?"
+  },
+  {
+   "id": "kenji",
+   "label": "kenji",
+   "image": "game3d/assets/portraits/kenji-neutral.webp",
+   "changed": "You rejected him: he is younger and inexperienced and \"would see eric as a senpai. Eric is 37\", and \"in the game his english is too god\". Kenji now treats Eric as his senpai and turns to him for help. He speaks simple polite Japanese with a few English words and his hands, and his list rewrites his existing lines the same way.",
+   "questions": [
+    "Later on, once Eric tells him to relax, may he slip into casual Japanese with Eric?",
+    "His day 1 joke \"Two months here, so now I am not the newest\" is dropped because it puts Eric below him. Should it go, or stay in a reworded form?"
+   ],
+   "note": "What changed: You rejected him: he is younger and inexperienced and \"would see eric as a senpai. Eric is 37\", and \"in the game his english is too god\". Kenji now treats Eric as his senpai and turns to him for help. He speaks simple polite Japanese with a few English words and his hands, and his list rewrites his existing lines the same way. Questions: 1) Later on, once Eric tells him to relax, may he slip into casual Japanese with Eric? 2) His day 1 joke \"Two months here, so now I am not the newest\" is dropped because it puts Eric below him. Should it go, or stay in a reworded form?"
+  },
+  {
+   "id": "kuro",
+   "label": "kuro",
+   "image": "game3d/assets/portraits/kuro-neutral.webp",
+   "changed": "You rejected her English: \"the player must learn to tell time, count people and the words you and me before this\", and she \"would demand more japanese knowledge even for visitors\" but \"really appreciates\" the effort. On touch: \"shoulder/arm first\" when she is interested, and \"on a date she would be fine with legs and face\". In your overall note she \"still views the player as an equal\". She now speaks Japanese first and warms up when Eric makes an effort, touches his arm and shoulder at the counter, and treats him as an equal. Her sample is now two scenes, and the words they need are taught before them.",
+   "questions": [
+    "Her lines need 私, あなた, 六時 and 二人 taught first. The sheet proposes where: day 2 morning, day 2 evening, the day 3 plaza club board and day 3 lunch on the shotengai. That changes existing day 2 and day 3 scenes. Is it OK to add those teaching moments?"
+   ],
+   "note": "What changed: You rejected her English: \"the player must learn to tell time, count people and the words you and me before this\", and she \"would demand more japanese knowledge even for visitors\" but \"really appreciates\" the effort. On touch: \"shoulder/arm first\" when she is interested, and \"on a date she would be fine with legs and face\". In your overall note she \"still views the player as an equal\". She now speaks Japanese first and warms up when Eric makes an effort, touches his arm and shoulder at the counter, and treats him as an equal. Her sample is now two scenes, and the words they need are taught before them. Questions: 1) Her lines need 私, あなた, 六時 and 二人 taught first. The sheet proposes where: day 2 morning, day 2 evening, the day 3 plaza club board and day 3 lunch on the shotengai. That changes existing day 2 and day 3 scenes. Is it OK to add those teaching moments?"
+  },
+  {
+   "id": "rei",
+   "label": "rei",
+   "image": "game3d/assets/portraits/rei-neutral.webp",
+   "changed": "You said she is \"borderline giving commands\", that the player is \"a plaything she warms to and bosses over\", and that she is \"ambitious and ruthless in her work\". In your overall note she sees the player \"as something to be controlled and bossed over overtly, only mildening over time\". You called \"Can you see the T from there? You can, you're standing on it.\" a stupid line, and it is gone. She now gives Eric open orders, is ruthless at work, and softens only slowly.",
+   "questions": [
+    "With Eric she uses plain 〜しなさい. Is that right, or does it read as scolding a child?",
+    "The agent added a work detail that isn't in her bio: when a colleague goes on leave, she takes over his customers and keeps them. Keep it?"
+   ],
+   "info": "Her short list of existing game lines to rewrite is at the end of her voice sheet. It includes the \"my train\" line, which breaks the no-commute rule.",
+   "note": "What changed: You said she is \"borderline giving commands\", that the player is \"a plaything she warms to and bosses over\", and that she is \"ambitious and ruthless in her work\". In your overall note she sees the player \"as something to be controlled and bossed over overtly, only mildening over time\". You called \"Can you see the T from there? You can, you're standing on it.\" a stupid line, and it is gone. She now gives Eric open orders, is ruthless at work, and softens only slowly. Questions: 1) With Eric she uses plain 〜しなさい. Is that right, or does it read as scolding a child? 2) The agent added a work detail that isn't in her bio: when a colleague goes on leave, she takes over his customers and keeps them. Keep it? Her short list of existing game lines to rewrite is at the end of her voice sheet. It includes the \"my train\" line, which breaks the no-commute rule."
+  }
+ ],
+ "links": [
+  {
+   "label": "Read all four voice sheets, sample scenes and lines to rewrite",
+   "href": "reviews/character-voices-2/index.html"
+  },
+  {
+   "label": "mio",
+   "href": "reviews/character-voices-2/index.html#mio"
+  },
+  {
+   "label": "kenji",
+   "href": "reviews/character-voices-2/index.html#kenji"
+  },
+  {
+   "label": "kuro",
+   "href": "reviews/character-voices-2/index.html#kuro"
+  },
+  {
+   "label": "rei",
+   "href": "reviews/character-voices-2/index.html#rei"
+  },
+  {
+   "label": "Round 1 and your answers",
+   "href": "#review/character-voices-1"
+  }
+ ],
+ "decision": "Approved with his comments worked in (\"if you work in current comments that should be enough\"); applied to the game in ff3d9187 (#368).",
+ "decided_at": "2026-10-09T19:02:24+0200",
+ "issue": 368,
+ "media": []
+}

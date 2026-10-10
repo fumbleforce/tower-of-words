@@ -1,0 +1,149 @@
+{
+ "title": "East coast to the onsen, walkable",
+ "date": "2026-10-02",
+ "by": "claude-agent:east-coast",
+ "caption": "The third south-half district from island-half-1: the dorm row, the dorms' sea terrace, the east coast walk and the onsen path up to the onsen's front. Reach it from the east lane in the morning: turn east off the dorm street into the dorm row. It also loads with ?place=east_coast. The onsen is shut for now.",
+ "sections": [
+  {
+   "title": "The dorm row",
+   "caption": "Before: backdrop only, seen from the east lane. After: Eric walks east along the row from the dorm street toward the terrace. The camera looks along the row from a little north of it and steeply, so the row's trees don't hide him.",
+   "images": [
+    {
+     "id": "before-row-desk",
+     "image": "bible/shots/showcase/east-coast-1/before-row-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-row-phone",
+     "image": "bible/shots/showcase/east-coast-1/before-row-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-row-desk",
+     "image": "bible/shots/showcase/east-coast-1/after-row-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-row-phone",
+     "image": "bible/shots/showcase/east-coast-1/after-row-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The sea terrace",
+   "caption": "Before: the terrace was closed on every side and the sea had no wall. After: the terrace opens on its east side onto the coast walk, a finger sign points the way (Onsen 温泉), and the coast has its sea wall, rocks and surf.",
+   "images": [
+    {
+     "id": "before-terrace-desk",
+     "image": "bible/shots/showcase/east-coast-1/before-terrace-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-terrace-phone",
+     "image": "bible/shots/showcase/east-coast-1/before-terrace-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-terrace-desk",
+     "image": "bible/shots/showcase/east-coast-1/after-terrace-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-terrace-phone",
+     "image": "bible/shots/showcase/east-coast-1/after-terrace-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The east coast walk",
+   "caption": "Before: lawn and trees behind dorm_4, the sea flat. After: the walk north along the coast, lamps on its landward edge, benches in two bays looking over it to the sea, pines along the wall. The camera looks north-east, the sea on the right.",
+   "images": [
+    {
+     "id": "before-coast-desk",
+     "image": "bible/shots/showcase/east-coast-1/before-coast-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-coast-phone",
+     "image": "bible/shots/showcase/east-coast-1/before-coast-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-coast-desk",
+     "image": "bible/shots/showcase/east-coast-1/after-coast-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-coast-phone",
+     "image": "bible/shots/showcase/east-coast-1/after-coast-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The onsen",
+   "caption": "Before: nothing there. After: past the tennis courts and through the trees to the red gate in the onsen's white wall, おんせん on a tall board beside it. Inside, a stone walk between raked gravel to the porch; the doors are shut with a 準備中 CLOSED card. Nothing behind them is built.",
+   "images": [
+    {
+     "id": "before-onsen-desk",
+     "image": "bible/shots/showcase/east-coast-1/before-onsen-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-onsen-phone",
+     "image": "bible/shots/showcase/east-coast-1/before-onsen-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-onsen-desk",
+     "image": "bible/shots/showcase/east-coast-1/after-onsen-desk.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-onsen-phone",
+     "image": "bible/shots/showcase/east-coast-1/after-onsen-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "More",
+   "caption": "At the onsen's door, and the onsen after work, its lanterns and paper screens lit.",
+   "images": [
+    {
+     "id": "after-door-desk",
+     "image": "bible/shots/showcase/east-coast-1/after-door-desk.webp",
+     "caption": "At the door, desktop"
+    },
+    {
+     "id": "after-door-phone",
+     "image": "bible/shots/showcase/east-coast-1/after-door-phone.webp",
+     "caption": "At the door, phone"
+    },
+    {
+     "id": "after-eve-desk",
+     "image": "bible/shots/showcase/east-coast-1/after-eve-desk.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "after-eve-phone",
+     "image": "bible/shots/showcase/east-coast-1/after-eve-phone.webp",
+     "caption": "After work, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=east_coast"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "media": []
+}

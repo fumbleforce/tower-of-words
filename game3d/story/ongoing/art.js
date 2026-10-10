@@ -1,0 +1,118 @@
+// Club progress follows completed actions. Leaving the table keeps the current visit available next week.
+export const artNodes = {
+  ongoing_art: [
+    { do: 'artClub', state: 'begin' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { if: '!met_mori', then: [
+      { say: 'mori', overheard: true, emo: 'polite', text: '森です。{yoroshiku}。', clear: ['森'] },
+      { do: 'meet', who: 'mori' },
+    ] },
+    { if: 'ms3_mori || art_mori_started', then: [{ go: 'ongoing_art_return' }] },
+    { if: '!art_photo_seen && !ms2_mori', then: [{ go: 'ongoing_art_photo' }] },
+    { if: '!art_first_page && !ms2_mori', then: [{ go: 'ongoing_art_choose' }] },
+    { if: 'bondready_mori == 3 && art_first_day < day', then: [{ go: 'ongoing_art_tea' }] },
+    { if: '!art_mori_started', then: [{ go: 'ongoing_art_practice' }] },
+    { go: 'ongoing_art_return' },
+  ],
+  ongoing_art_photo: [
+    { if: 'mori_photos_requested', then: [
+      { say: 'mori', overheard: true, emo: 'warm', text: '見つかりました。古いアルバムに挟まっていました。', clear: ['アルバム'] },
+    ], else: [
+      { say: 'mori', overheard: true, emo: 'warm', text: 'これを見ていただけますか。ノルウェーの写真です。', clear: [{ ja: 'ノルウェー', en: 'Norway' }] },
+    ] },
+    { do: 'artClub', state: 'photo' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'mori', overheard: true, emo: 'fond', text: '1994年です。リレハンメル。', clear: [{ ja: '1994年', en: '1994' }, { ja: 'リレハンメル', en: 'Lillehammer' }] },
+    { set: 'art_photo_seen' },
+    { do: 'remember', who: 'mori', id: 'norway_photo', text: 'Showed you his photograph from Lillehammer.' },
+    { go: 'ongoing_art_choose' },
+  ],
+  ongoing_art_choose: [
+    { do: 'artClub', state: 'group' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { choice: [
+      { text: '{mitai}. Ask him to show you the jump.', if: 'know_mitai', go: 'ongoing_art_mitai' },
+      { text: 'Point to the top of the ski jump.', go: 'ongoing_art_jump' },
+      { text: 'Watch him sketch the jump.', go: 'ongoing_art_first_page' },
+      { text: 'Leave him to his drawing.', go: 'ongoing_art_leave' },
+    ] },
+  ],
+  ongoing_art_mitai: [{ say: 'eric', emo: 'curious', text: '{mitai}。' }, { go: 'ongoing_art_jump' }],
+  ongoing_art_jump: [
+    { if: 'know_koko', then: [{ say: 'eric', emo: 'curious', text: '{koko}？' }],
+      else: [{ say: 'eric', emo: 'curious', text: 'From up there?' }] },
+    { do: 'artClub', state: 'tracePhoto' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'mori', overheard: true, emo: 'warm', text: 'ええ、ここから。こう滑って……。' },
+    { do: 'gesture', who: 'mori', kind: 'skijump' },
+    { say: 'eric', emo: 'dry', text: 'I think I’d stay at the bottom.' },
+    { go: 'ongoing_art_first_page' },
+  ],
+  ongoing_art_first_page: [
+    { do: 'artClub', state: 'firstPage' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'mori', overheard: true, emo: 'sheepish', text: 'あ、紙が足りなくなりました。もう少し、小さく描けばよかったですね。' },
+    { do: 'artClub', state: 'group' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'eric', emo: 'warm', text: 'You can have mine. I haven’t started yet.' },
+    { do: 'artClub', state: 'offerPage' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'mori', overheard: true, emo: 'warm', text: 'いえいえ、それは使ってください。こちらに、まだありますから。' },
+    { set: 'art_first_page' },
+    { do: 'bond', who: 'mori', source: 'scene', why: 'shared the art table and his Norway photograph' },
+    { if: 'step_mori >= 2', then: [{ set: 'ms2_mori' }] },
+    { do: 'artVisit', state: 'firstPage' },
+    { go: 'ongoing_art_leave' },
+  ],
+  ongoing_art_tea: [
+    { do: 'artClub', state: 'prepareTea' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'mori', overheard: true, emo: 'polite', text: '鉛筆、削っておきました。お茶も、今入れますね。' },
+    { choice: [
+      { text: 'Offer to pour the tea.', go: 'ongoing_art_pour' },
+      { text: '{isshoni}. Ask him to draw beside you.', if: 'know_isshoni', go: 'ongoing_art_together' },
+      { text: 'Leave a pencil beside his page.', go: 'ongoing_art_together' },
+      { text: 'Leave the club for tonight.', go: 'ongoing_art_leave' },
+    ] },
+  ],
+  ongoing_art_pour: [
+    { say: 'eric', emo: 'warm', text: 'I can make the tea.' },
+    { do: 'artClub', state: 'takeTea' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'mori', overheard: true, emo: 'hesitant', text: 'あ、では……お願いしてもいいですか。' },
+    { do: 'artClub', state: 'pour' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { go: 'ongoing_art_mori_draws' },
+  ],
+  ongoing_art_together: [
+    { if: 'know_isshoni', then: [{ say: 'eric', emo: 'warm', text: '{isshoni}？' }] },
+    { do: 'artClub', state: 'pencilBeside' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'mori', overheard: true, emo: 'hesitant', text: 'そうですね。お茶は、後でもいいですね。' },
+    { go: 'ongoing_art_mori_draws' },
+  ],
+  ongoing_art_mori_draws: [
+    { do: 'artClub', state: 'drawSlope' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'mori', overheard: true, emo: 'warm', text: '今度は、入りそうです。' },
+    { set: 'art_mori_started' },
+    { set: 'ms3_mori' },
+    { do: 'bondStep', who: 'mori', to: 3 },
+    { do: 'remember', who: 'mori', id: 'shared_drawing', text: 'Sat down to draw with you instead of preparing more things for the table.' },
+    { go: 'ongoing_art_leave' },
+  ],
+  ongoing_art_practice: [
+    { do: 'artClub', state: 'practice' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'mori', overheard: true, emo: 'warm', text: '今日は、何を描きましょうか。' },
+    { choice: [
+      { text: 'Use the photograph as a reference.', go: 'ongoing_art_continue' },
+      { text: 'Look at the photograph again.', go: 'ongoing_art_look_again' },
+      { text: 'Leave the table for now.', go: 'ongoing_art_leave' },
+    ] },
+  ],
+  ongoing_art_return: [
+    { do: 'artClub', state: 'showProgress' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { say: 'mori', overheard: true, emo: 'warm', text: 'ここ、少し描き直したんです。どうでしょう。' },
+    { choice: [
+      { text: 'Sit with him and keep drawing.', go: 'ongoing_art_continue' },
+      { text: 'Look at the photograph again.', go: 'ongoing_art_look_again' },
+      { text: 'Leave him to it for now.', go: 'ongoing_art_leave' },
+    ] },
+  ],
+  ongoing_art_look_again: [{ do: 'artClub', state: 'photo' }, { if: '!art_action_completed', then: [{ end: true }] }, { go: 'ongoing_art_leave' }],
+  ongoing_art_continue: [
+    { do: 'artClub', state: 'drawTogether' }, { if: '!art_action_completed', then: [{ end: true }] },
+    { do: 'bond', who: 'mori', source: 'talk', why: 'spent time together at the art table' },
+    { say: 'mori', overheard: true, emo: 'warm', text: 'そのまま、ここに置いておきましょう。また続きが描けますから。' },
+    { go: 'ongoing_art_leave' },
+  ],
+  ongoing_art_leave: [{ do: 'artClub', state: 'free' }, { if: '!art_action_completed', then: [{ end: true }] }, { do: 'ongoingGoal' }, { do: 'save' }],
+};

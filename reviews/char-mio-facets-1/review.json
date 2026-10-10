@@ -1,0 +1,132 @@
+{
+ "title": "Mio: traced facets and a closed head study",
+ "date": "2026-10-01",
+ "by": "Claude; continued by Codex",
+ "status": "decided",
+ "question": "Does mf-07 put the head’s facets and face in the right direction?",
+ "multi": true,
+ "options": [
+  {
+   "id": "mf-01",
+   "label": "mf-01 · the measured facets as the mesh",
+   "image": "art/parts/style-concepts/claude-miofacets/mf-01/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miofacets/mf-01/turn.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-01/face.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-01/wire.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-01/parts.webp"
+   ],
+   "note": "front and back facet maps as measured (no hand edits), lifted onto per-row elliptical sections from the side views; one flat colour per facet. The round core and back shell cut through the face and clothes. Earlier saved attempt; retained for comparison. Earlier full-body attempts use a projected facial decal; mf-06 and mf-07 replace it with geometry. Render settings: 1024 px, 20° lens, 4° pitch, unlit facet colours; clay uses 32 CPU Cycles samples and marked facet edges. No generative prompt was used for this continuation."
+  },
+  {
+   "id": "mf-02",
+   "label": "mf-02 · back kept inside the front outline",
+   "image": "art/parts/style-concepts/claude-miofacets/mf-02/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miofacets/mf-02/turn.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-02/face.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-02/wire.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-02/parts.webp"
+   ],
+   "note": "as mf-01, with the back map's corners kept inside each part's front outline and the dark core at 80 % (in mf-01 both showed round and through the front). Clamping the back reduces protrusions; dark core patches still cross the face and clothes. Earlier full-body attempts use a projected facial decal; mf-06 and mf-07 replace it with geometry. Render settings: 1024 px, 20° lens, 4° pitch, unlit facet colours; clay uses 32 CPU Cycles samples and marked facet edges. No generative prompt was used for this continuation."
+  },
+  {
+   "id": "mf-03",
+   "label": "mf-03 · dark core flattened to the middle",
+   "image": "art/parts/style-concepts/claude-miofacets/mf-03/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miofacets/mf-03/turn.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-03/face.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-03/wire.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-03/parts.webp"
+   ],
+   "note": "as mf-02, with the dark core flattened to a thin card in the middle of each section (3 % deep): big facets cut straight across the section, so a round core showed through them. Flattening the core removes most patches; the side views reveal large open seams. Earlier full-body attempts use a projected facial decal; mf-06 and mf-07 replace it with geometry. Render settings: 1024 px, 20° lens, 4° pitch, unlit facet colours; clay uses 32 CPU Cycles samples and marked facet edges. No generative prompt was used for this continuation."
+  },
+  {
+   "id": "mf-04",
+   "label": "mf-04 · front facets drawn by hand",
+   "image": "art/parts/style-concepts/claude-miofacets/mf-04/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miofacets/mf-04/turn.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-04/face.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-04/wire.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-04/parts.webp"
+   ],
+   "note": "as mf-03, with the front facet map drawn by hand (140 facets over 229 named corners, read off the clean reference on a 10 px grid at 4 to 8x zoom) in place of the measured one; the back is still the measured map. The front uses the hand trace. The pocket and shoes lose detail, and the side seams remain open. Earlier full-body attempts use a projected facial decal; mf-06 and mf-07 replace it with geometry. Render settings: 1024 px, 20° lens, 4° pitch, unlit facet colours; clay uses 32 CPU Cycles samples and marked facet edges. No generative prompt was used for this continuation."
+  },
+  {
+   "id": "mf-05",
+   "label": "mf-05 · back stretched to the front outline",
+   "image": "art/parts/style-concepts/claude-miofacets/mf-05/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miofacets/mf-05/turn.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-05/face.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-05/wire.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-05/parts.webp"
+   ],
+   "note": "as mf-04, with the back map mirrored and stretched row by row so each part spans the columns and rows it spans from the front (was: clamped inside it), so the front and back shells meet at her sides. Warping the back reduces the seams, but visible gaps remain at the head, shoulders and ankles. This is the last saved Claude attempt. Earlier full-body attempts use a projected facial decal; mf-06 and mf-07 replace it with geometry. Render settings: 1024 px, 20° lens, 4° pitch, unlit facet colours; clay uses 32 CPU Cycles samples and marked facet edges. No generative prompt was used for this continuation."
+  },
+  {
+   "id": "mf-06",
+   "label": "mf-06 · closed head with coloured facial geometry",
+   "image": "art/parts/style-concepts/claude-miofacets/mf-06/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miofacets/mf-06/turn.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-06/clay.webp.webp"
+   ],
+   "note": "Head-only study continued by Codex from mf-05. The existing hand-traced front facets are retained. A matching rear shell and edge strips close the head; rear facet layout and dark hair colours are inferred. Eyes, brows, nose, mouth and ear marks are traced into flat-colour triangles. No texture, no rig. Automatic feature tracing left jagged brows and lost the mouth. Head-only continuation. The shell has 228 triangles and no boundary or non-manifold edges; 442 more triangles draw the facial marks. The rear repeats the front topology with inferred dark hair colours. No rig or expressions yet. The rest of the body is excluded. Render settings: 1024 px, 20° lens, 4° pitch, unlit facet colours; clay uses 32 CPU Cycles samples and marked facet edges. No generative prompt was used for this continuation."
+  },
+  {
+   "id": "mf-07",
+   "label": "mf-07 · hand-traced facial marks",
+   "image": "art/parts/style-concepts/claude-miofacets/mf-07/compare.webp.webp",
+   "images": [
+    "art/parts/style-concepts/claude-miofacets/mf-07/turn.webp.webp",
+    "art/parts/style-concepts/claude-miofacets/mf-07/clay.webp.webp"
+   ],
+   "note": "Same closed head as mf-06. Only the facial marks change: explicit coloured polygons replace the automatic contours, including a thin mouth line. The rear is still inferred and the model has no rig. Facial-only correction to mf-06, with 101 feature triangles. The mouth is a thin line; eyes and brows use explicit polygons. The shell is unchanged. The eyes are narrower than the target, with pale breaks across the irises. The side hair is thick and angular; a pale facet remains at her left hair tip (image right). The back is broad and plain. Expressions and rigging remain unbuilt. Render settings: 1024 px, 20° lens, 4° pitch, unlit facet colours; clay uses 32 CPU Cycles samples and marked facet edges. No generative prompt was used for this continuation."
+  }
+ ],
+ "links": [
+  {
+   "label": "Rotate all seven attempts",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/style-concepts/mio-facets-viewer.html"
+  },
+  {
+   "label": "Previous decision and rejected models",
+   "href": "#review/char-mio-i2i-1"
+  },
+  {
+   "label": "mf-01 · every saved render (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/art/parts/style-concepts"
+  },
+  {
+   "label": "mf-02 · every saved render (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/art/parts/style-concepts"
+  },
+  {
+   "label": "mf-03 · every saved render (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/art/parts/style-concepts"
+  },
+  {
+   "label": "mf-04 · every saved render (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/art/parts/style-concepts"
+  },
+  {
+   "label": "mf-05 · every saved render (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/art/parts/style-concepts"
+  },
+  {
+   "label": "mf-06 · every saved render (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/art/parts/style-concepts"
+  },
+  {
+   "label": "mf-07 · every saved render (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/art/parts/style-concepts"
+  }
+ ],
+ "issue": 171,
+ "decision": "The face is surprisingly close, but it breaks down when she turns, especially on the body. Diagnose the 3D volume before another round; no model approved.",
+ "decided_at": "2026-10-01T17:11:53+0200",
+ "media": []
+}

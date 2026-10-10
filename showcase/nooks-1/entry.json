@@ -1,0 +1,233 @@
+{
+ "title": "Nooks in every walkable outdoor place",
+ "date": "2026-10-02",
+ "by": "claude-agent:nooks",
+ "caption": "Small places off the walks, with a few props each, kept for later secrets, encounters and collectibles: shrines, drinks machines, a lookout, a smoking corner, a back alley, benches tucked behind hedges and under pines. Nothing is placed in them yet. Each picture has Eric standing at the nook's named spot (docs/game/places.md, \"Nooks\").",
+ "sections": [
+  {
+   "title": "Station forecourt",
+   "caption": "The recess in front of the staff gate, between the court's north bed and head office's corner: a bike against the bed, a pot and an umbrella stand.",
+   "images": [
+    {
+     "id": "forecourt_staff_gate-desk",
+     "image": "bible/shots/showcase/nooks-1/forecourt_staff_gate-desk.webp.webp",
+     "caption": "forecourt_staff_gate, desktop"
+    },
+    {
+     "id": "forecourt_staff_gate-phone",
+     "image": "bible/shots/showcase/nooks-1/forecourt_staff_gate-phone.webp",
+     "caption": "forecourt_staff_gate, phone"
+    }
+   ]
+  },
+  {
+   "title": "Fountain plaza",
+   "caption": "The bay off the cross walk is now walkable, a pot at its end; a roadside shrine (hokora, torii, two stone lanterns) on the lawn west of the cross walk, by the ginkgo.",
+   "images": [
+    {
+     "id": "plaza_seat_bay-desk",
+     "image": "bible/shots/showcase/nooks-1/plaza_seat_bay-desk.webp.webp",
+     "caption": "plaza_seat_bay, desktop"
+    },
+    {
+     "id": "plaza_seat_bay-phone",
+     "image": "bible/shots/showcase/nooks-1/plaza_seat_bay-phone.webp",
+     "caption": "plaza_seat_bay, phone"
+    },
+    {
+     "id": "plaza_shrine-desk",
+     "image": "bible/shots/showcase/nooks-1/plaza_shrine-desk.webp.webp",
+     "caption": "plaza_shrine, desktop"
+    },
+    {
+     "id": "plaza_shrine-phone",
+     "image": "bible/shots/showcase/nooks-1/plaza_shrine-phone.webp",
+     "caption": "plaza_shrine, phone"
+    }
+   ]
+  },
+  {
+   "title": "Shop street and seafront",
+   "caption": "A shrine on the lawn past the arcade's west mouth; the shops' back in the middle alley (crates of empties, an outdoor unit, a bike); a bench under the pines through a new gap in the lookout's east rail.",
+   "images": [
+    {
+     "id": "shotengai_shrine-desk",
+     "image": "bible/shots/showcase/nooks-1/shotengai_shrine-desk.webp",
+     "caption": "shotengai_shrine, desktop"
+    },
+    {
+     "id": "shotengai_shrine-phone",
+     "image": "bible/shots/showcase/nooks-1/shotengai_shrine-phone.webp",
+     "caption": "shotengai_shrine, phone"
+    },
+    {
+     "id": "shotengai_back_alley-desk",
+     "image": "bible/shots/showcase/nooks-1/shotengai_back_alley-desk.webp",
+     "caption": "shotengai_back_alley, desktop"
+    },
+    {
+     "id": "shotengai_back_alley-phone",
+     "image": "bible/shots/showcase/nooks-1/shotengai_back_alley-phone.webp",
+     "caption": "shotengai_back_alley, phone"
+    },
+    {
+     "id": "shotengai_pine_bench-desk",
+     "image": "bible/shots/showcase/nooks-1/shotengai_pine_bench-desk.webp.webp",
+     "caption": "shotengai_pine_bench, desktop"
+    },
+    {
+     "id": "shotengai_pine_bench-phone",
+     "image": "bible/shots/showcase/nooks-1/shotengai_pine_bench-phone.webp",
+     "caption": "shotengai_pine_bench, phone"
+    }
+   ]
+  },
+  {
+   "title": "East lane",
+   "caption": "A shrine through a gap in the north street's west verge, between two zelkovas; a bench on the footpath behind the barber's, off the dorm street, bollards where the path is closed.",
+   "images": [
+    {
+     "id": "east_lane_shrine-desk",
+     "image": "bible/shots/showcase/nooks-1/east_lane_shrine-desk.webp.webp",
+     "caption": "east_lane_shrine, desktop"
+    },
+    {
+     "id": "east_lane_shrine-phone",
+     "image": "bible/shots/showcase/nooks-1/east_lane_shrine-phone.webp",
+     "caption": "east_lane_shrine, phone"
+    },
+    {
+     "id": "east_lane_footpath-desk",
+     "image": "bible/shots/showcase/nooks-1/east_lane_footpath-desk.webp.webp",
+     "caption": "east_lane_footpath, desktop"
+    },
+    {
+     "id": "east_lane_footpath-phone",
+     "image": "bible/shots/showcase/nooks-1/east_lane_footpath-phone.webp",
+     "caption": "east_lane_footpath, phone"
+    }
+   ]
+  },
+  {
+   "title": "East coast",
+   "caption": "A lookout with a coin telescope where the coast walk turns inland, out to the sea wall; a shrine on the lawn south of the walk inland.",
+   "images": [
+    {
+     "id": "east_coast_lookout-desk",
+     "image": "bible/shots/showcase/nooks-1/east_coast_lookout-desk.webp",
+     "caption": "east_coast_lookout, desktop"
+    },
+    {
+     "id": "east_coast_lookout-phone",
+     "image": "bible/shots/showcase/nooks-1/east_coast_lookout-phone.webp",
+     "caption": "east_coast_lookout, phone"
+    },
+    {
+     "id": "east_coast_shrine-desk",
+     "image": "bible/shots/showcase/nooks-1/east_coast_shrine-desk.webp.webp",
+     "caption": "east_coast_shrine, desktop"
+    },
+    {
+     "id": "east_coast_shrine-phone",
+     "image": "bible/shots/showcase/nooks-1/east_coast_shrine-phone.webp",
+     "caption": "east_coast_shrine, phone"
+    }
+   ]
+  },
+  {
+   "title": "Gym and pool",
+   "caption": "Drinks machines through a gap in the courts walk's hedge, between the pool and the courts; a bench behind a hedge on the grass by the pool walk.",
+   "images": [
+    {
+     "id": "sports_courtside-desk",
+     "image": "bible/shots/showcase/nooks-1/sports_courtside-desk.webp.webp",
+     "caption": "sports_courtside, desktop"
+    },
+    {
+     "id": "sports_courtside-phone",
+     "image": "bible/shots/showcase/nooks-1/sports_courtside-phone.webp",
+     "caption": "sports_courtside, phone"
+    },
+    {
+     "id": "sports_grove_bench-desk",
+     "image": "bible/shots/showcase/nooks-1/sports_grove_bench-desk.webp.webp",
+     "caption": "sports_grove_bench, desktop"
+    },
+    {
+     "id": "sports_grove_bench-phone",
+     "image": "bible/shots/showcase/nooks-1/sports_grove_bench-phone.webp",
+     "caption": "sports_grove_bench, phone"
+    }
+   ]
+  },
+  {
+   "title": "Harbour",
+   "caption": "The supply pier's end with bollards, a life ring, rope and a fisherman's stool; the warehouse's back with its outdoor units and crates of empties; a lookout with a coin telescope and a bench at the ferry pier's end.",
+   "images": [
+    {
+     "id": "harbour_pier_end-desk",
+     "image": "bible/shots/showcase/nooks-1/harbour_pier_end-desk.webp",
+     "caption": "harbour_pier_end, desktop"
+    },
+    {
+     "id": "harbour_pier_end-phone",
+     "image": "bible/shots/showcase/nooks-1/harbour_pier_end-phone.webp",
+     "caption": "harbour_pier_end, phone"
+    },
+    {
+     "id": "harbour_shed_back-desk",
+     "image": "bible/shots/showcase/nooks-1/harbour_shed_back-desk.webp",
+     "caption": "harbour_shed_back, desktop"
+    },
+    {
+     "id": "harbour_shed_back-phone",
+     "image": "bible/shots/showcase/nooks-1/harbour_shed_back-phone.webp",
+     "caption": "harbour_shed_back, phone"
+    },
+    {
+     "id": "harbour_ferry_lookout-desk",
+     "image": "bible/shots/showcase/nooks-1/harbour_ferry_lookout-desk.webp",
+     "caption": "harbour_ferry_lookout, desktop"
+    },
+    {
+     "id": "harbour_ferry_lookout-phone",
+     "image": "bible/shots/showcase/nooks-1/harbour_ferry_lookout-phone.webp",
+     "caption": "harbour_ferry_lookout, phone"
+    }
+   ]
+  },
+  {
+   "title": "Office street",
+   "caption": "A smoking corner behind frosted screens in the gap between Amakawa Electric and Amakawa Trading; drinks machines on Amakawa Life's forecourt.",
+   "images": [
+    {
+     "id": "office_smokers-desk",
+     "image": "bible/shots/showcase/nooks-1/office_smokers-desk.webp.webp",
+     "caption": "office_smokers, desktop"
+    },
+    {
+     "id": "office_smokers-phone",
+     "image": "bible/shots/showcase/nooks-1/office_smokers-phone.webp",
+     "caption": "office_smokers, phone"
+    },
+    {
+     "id": "office_vending-desk",
+     "image": "bible/shots/showcase/nooks-1/office_vending-desk.webp.webp",
+     "caption": "office_vending, desktop"
+    },
+    {
+     "id": "office_vending-phone",
+     "image": "bible/shots/showcase/nooks-1/office_vending-phone.webp",
+     "caption": "office_vending, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

@@ -1,0 +1,104 @@
+{
+ "title": "Texture avenues in a showcase room",
+ "date": "2026-09-29",
+ "by": "style showcase agent",
+ "status": "decided",
+ "multi": true,
+ "question": "Which of these effects do you want in the game? Pick one or more, or none.",
+ "media": [
+  {
+   "image": "game3d/design/style/avenues-room/sheet-close.jpg.webp",
+   "caption": "All six side by side, close up on the desk corner"
+  },
+  {
+   "image": "game3d/design/style/avenues-room/sheet-desk.jpg.webp",
+   "caption": "All six at the game camera (desktop)"
+  },
+  {
+   "image": "game3d/design/style/avenues-room/look0-close.jpg.webp",
+   "caption": "Today's look, close up, for comparison"
+  },
+  {
+   "image": "game3d/design/style/avenues-room/look0-desk.jpg.webp",
+   "caption": "Today's look at the game camera"
+  },
+  {
+   "image": "game3d/design/style/avenues-room/sheet-far.jpg.webp",
+   "caption": "All six at the desktop game's real zoom (the whole office floor fits the screen), cropped to the room"
+  }
+ ],
+ "options": [
+  {
+   "id": "2",
+   "label": "2. Procedural materials",
+   "note": "Tiles each a slightly different shade, some with a chipped corner; carpet tiles with the pile laid in alternating directions; faint grain on the desk; streaks on the metal; cloudy plaster. Easy to see close up, faint at the game camera. About the same draws as today.",
+   "image": "game3d/design/style/avenues-room/look2-close.jpg.webp",
+   "images": [
+    "game3d/design/style/avenues-room/look2-desk.jpg.webp",
+    "game3d/design/style/avenues-room/look2-phone.jpg.webp",
+    "game3d/design/style/avenues-room/look2-far.jpg"
+   ]
+  },
+  {
+   "id": "3",
+   "label": "3. Decals and wear",
+   "note": "Shoe marks and scuffs by the door, a worn path across the carpet to the chair, caster marks, a coffee ring, tape marks where a poster was, stickers on the cabinet, a taped cable on the floor. The one that shows most at the game camera. The worn path reads a bit like a patch of light. +2 draws.",
+   "image": "game3d/design/style/avenues-room/look3-close.jpg.webp",
+   "images": [
+    "game3d/design/style/avenues-room/look3-desk.jpg.webp",
+    "game3d/design/style/avenues-room/look3-phone.jpg.webp",
+    "game3d/design/style/avenues-room/look3-far.jpg"
+   ]
+  },
+  {
+   "id": "4",
+   "label": "4. Vertex colour and baked light",
+   "note": "Darker under the desk and chair, at wall bottoms and in the corners; the floor shades from the window side to the front; binders and chairs vary a little in tint. No pattern. Same draws, 40% more triangles (big faces split up), about 0.2 s more to build the room.",
+   "image": "game3d/design/style/avenues-room/look4-close.jpg.webp",
+   "images": [
+    "game3d/design/style/avenues-room/look4-desk.jpg.webp",
+    "game3d/design/style/avenues-room/look4-phone.jpg.webp",
+    "game3d/design/style/avenues-room/look4-far.jpg"
+   ]
+  },
+  {
+   "id": "7",
+   "label": "7. Trim sheets",
+   "note": "Keys on the keyboard, vents on the PC and monitor back, labels on the binder spines, panel lines and screws on the drawers, a scuffed top on the skirting. Mostly too small to see at the game camera. Same draws.",
+   "image": "game3d/design/style/avenues-room/look7-close.jpg.webp",
+   "images": [
+    "game3d/design/style/avenues-room/look7-desk.jpg.webp",
+    "game3d/design/style/avenues-room/look7-phone.jpg.webp",
+    "game3d/design/style/avenues-room/look7-far.jpg"
+   ]
+  },
+  {
+   "id": "8",
+   "label": "8. Small modelled detail",
+   "note": "Window with mullions and a sill (its shadow falls on the floor), door frame and hinges, drawer handles, a real keyboard, mouse, mug with a rim, paper pile, cables to a wall socket, chair on a five-star base, paper in the bin. Reads at the game camera. About 100 more draws here (new colours); the game's batching pass would merge most of them.",
+   "image": "game3d/design/style/avenues-room/look8-close.jpg.webp",
+   "images": [
+    "game3d/design/style/avenues-room/look8-desk.jpg.webp",
+    "game3d/design/style/avenues-room/look8-phone.jpg.webp",
+    "game3d/design/style/avenues-room/look8-far.jpg"
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Open the showcase room (keys 0 2 3 4 7 8 switch looks, V changes the view)",
+   "href": "game3d/showcase.html"
+  },
+  {
+   "label": "What each avenue is meant to be",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/game3d/design/style/AVENUES.md"
+  }
+ ],
+ "decided": [
+  "2",
+  "4",
+  "8"
+ ],
+ "decision": "2 as a toggle (Settings > Graphics > Surface detail) on all models, props included; 4 in a softer version; 8 as in the showcase. In the game: review style-in-game.",
+ "issue": 45
+}

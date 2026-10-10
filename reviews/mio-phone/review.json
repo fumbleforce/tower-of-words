@@ -1,0 +1,27 @@
+{
+ "title": "Mio looking at her phone (dialogue portrait)",
+ "date": "2026-09-29",
+ "by": "art agent (Mio phone)",
+ "status": "superseded",
+ "multi": false,
+ "question": "Use this as Mio's portrait while she reads the server alert?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/mio-phone-sheet.png.webp",
+   "caption": "Approved portrait, her neutral, and all 12 tries (pick framed in red)"
+  }
+ ],
+ "options": [
+  {
+   "id": "two-923",
+   "label": "Use two-923",
+   "image": "art/candidates/portraits/mio-phone/mio-phone-two-923-cut.webp.webp",
+   "note": "Head not really tilted down; screen glow faint; simple hands"
+  },
+  {
+   "id": "redo",
+   "label": "Redo it (say what to change)"
+  }
+ ],
+ "decision": "Rejected (painted-over hands). Replaced by mio-phone-2."
+}

@@ -1,0 +1,51 @@
+{
+ "title": "The island's south half, mapped for day 2",
+ "date": "2026-10-02",
+ "by": "claude-agent:island-half",
+ "status": "decided",
+ "question": "Is this the half of the island, and the set of places in it, that we build out for day 2?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/candidates/island-half-1/plan.webp.webp",
+   "caption": "The south half from the game's map (?map=1, M, Day 2 plan). Yellow: planned streets, courts, piers and green. Grey: what the layout already has. Orange dashes: the half's edge. Under it the picked island map, faint, and the places built for day 1."
+  },
+  {
+   "image": "art/candidates/island-half-1/plan-1.webp.webp",
+   "caption": "North-west: the harbour, the old works and the office quarter"
+  },
+  {
+   "image": "art/candidates/island-half-1/plan-2.webp.webp",
+   "caption": "North-east: the gym, pool, courts and onsen"
+  },
+  {
+   "image": "art/candidates/island-half-1/plan-3.webp.webp",
+   "caption": "South-west: the station, head office, plaza and shop street"
+  },
+  {
+   "image": "art/candidates/island-half-1/plan-4.webp.webp",
+   "caption": "South-east: the east lane and the dorms"
+  }
+ ],
+ "options": [
+  {
+   "id": "south-half-1",
+   "label": "south-half-1",
+   "image": "art/candidates/island-half-1/plan.webp.webp",
+   "note": "The south half: the whole day-1 route plus 63 places in seven districts (arrival and head office, office quarter, plaza with canteen and clinic, shop street and seafront, east lane and dorms, sports and baths, harbour and old works). Of your island-places picks it has the shotengai, ramen and izakaya, sento and coin laundry, clinic, karaoke and game centre, harbour and old industry; the shrine, history hall, viewpoint and cherry path with matsuri stage stay in the north half. Every place, who is there, its doors, whether it can be entered and one idea for using Japanese there: docs/game/island.md (link below). Nothing is built yet."
+  }
+ ],
+ "links": [
+  {
+   "label": "Every place, who is there, doors and Japanese hooks (docs/game/island.md)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/island.md"
+  },
+  {
+   "label": "The live map: open the game, press M, then Day 2 plan",
+   "href": "game3d/?map=1"
+  }
+ ],
+ "decision": "Correct: the south half and its 63 places are the set to build out for day 2 (Jørgen, 2026-10-02, on phone).",
+ "decided_at": "2026-10-02T08:42:53+0200",
+ "issue": 173
+}

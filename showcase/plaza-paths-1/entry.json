@@ -1,0 +1,119 @@
+{
+ "title": "Fountain plaza: paths re-laid",
+ "date": "2026-09-30",
+ "by": "claude-agent:plaza-paths",
+ "caption": "The plaza's paths laid out again from a plan. The lane comes in and goes out on one straight axis through the fountain, the loop round the plaza is gone, and the canteen has its own terrace with a wall and one link to the plaza on its door's axis. The lane, fountain, paving and canteen themselves are unchanged.",
+ "sections": [
+  {
+   "title": "The plan",
+   "caption": "Seen from straight above, before and after, and the plan drawing it was built from. Two axes cross at the fountain: the lane east-west, the canteen door north-south. The ring bed runs all round the plaza, open only for the two lanes and the link.",
+   "images": [
+    {
+     "id": "before-plan",
+     "image": "bible/shots/showcase/plaza-paths-1/before-plan.webp.webp",
+     "caption": "Before: the lane in and the lane out on different lines, the U round the south, the circle over the terrace"
+    },
+    {
+     "id": "plan-drawing",
+     "image": "bible/shots/showcase/plaza-paths-1/plan-drawing.webp",
+     "caption": "The plan drawing (red: the two axes; white ticks: where the walks to the forecourt and the dorms start)"
+    },
+    {
+     "id": "after-plan",
+     "image": "bible/shots/showcase/plaza-paths-1/after-plan.webp.webp",
+     "caption": "After, morning"
+    },
+    {
+     "id": "after-plan-eve",
+     "image": "bible/shots/showcase/plaza-paths-1/after-plan-eve.webp.webp",
+     "caption": "After, evening"
+    }
+   ]
+  },
+  {
+   "title": "Coming in from head office",
+   "caption": "Eric arrives on the lane just short of the circle and walks in along the axis toward the fountain. The circle's dark border ring crosses the lane's mouth.",
+   "images": [
+    {
+     "id": "west-desk",
+     "image": "bible/shots/showcase/plaza-paths-1/west-desk.webp.webp",
+     "caption": "The west lane's mouth"
+    },
+    {
+     "id": "arrive-desk",
+     "image": "bible/shots/showcase/plaza-paths-1/arrive-desk.webp.webp",
+     "caption": "Where he stops after the walk in"
+    },
+    {
+     "id": "arrive-phone",
+     "image": "bible/shots/showcase/plaza-paths-1/arrive-phone.webp",
+     "caption": "The same, phone"
+    },
+    {
+     "id": "arrive-eve-desk",
+     "image": "bible/shots/showcase/plaza-paths-1/arriveE-desk.webp.webp",
+     "caption": "Evening"
+    },
+    {
+     "id": "arrive-eve-phone",
+     "image": "bible/shots/showcase/plaza-paths-1/arriveE-phone.webp",
+     "caption": "Evening, phone"
+    }
+   ]
+  },
+  {
+   "title": "The canteen link",
+   "caption": "The terrace ends in its seat-height wall along its whole front, open only on the door's axis. A short link in the lane's brick and borders crosses a strip of lawn and the ring bed to the circle, a lamp and a maple either side.",
+   "images": [
+    {
+     "id": "link-desk",
+     "image": "bible/shots/showcase/plaza-paths-1/link-desk.webp.webp",
+     "caption": "Morning"
+    },
+    {
+     "id": "link-phone",
+     "image": "bible/shots/showcase/plaza-paths-1/link-phone.webp",
+     "caption": "Phone"
+    },
+    {
+     "id": "link-eve-phone",
+     "image": "bible/shots/showcase/plaza-paths-1/linkE-phone.webp",
+     "caption": "Evening, phone"
+    }
+   ]
+  },
+  {
+   "title": "Out toward the dorms",
+   "caption": "The lane leaves the circle on the same axis it came in on, in the same brick, and the walk to the dorm courtyard starts on it.",
+   "images": [
+    {
+     "id": "fountain-desk",
+     "image": "bible/shots/showcase/plaza-paths-1/fountain-desk.webp.webp",
+     "caption": "By the fountain"
+    },
+    {
+     "id": "east-desk",
+     "image": "bible/shots/showcase/plaza-paths-1/east-desk.webp.webp",
+     "caption": "The east lane's mouth"
+    },
+    {
+     "id": "east-eve-desk",
+     "image": "bible/shots/showcase/plaza-paths-1/eastE-desk.webp.webp",
+     "caption": "Evening"
+    },
+    {
+     "id": "east-eve-phone",
+     "image": "bible/shots/showcase/plaza-paths-1/eastE-phone.webp",
+     "caption": "Evening, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/?place=plaza"
+  }
+ ],
+ "media": []
+}

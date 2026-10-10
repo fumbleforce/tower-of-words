@@ -1,0 +1,36 @@
+{
+ "title": "Where the security gate is",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "decided",
+ "question": "For the extended version: where does the security gate go? Your note: \"lets say the security gate is at the station, and you take the elevator down to ground level, where you will now have to walk to the office building. it doesnt make sense to have a security gate inside buildings with people on the island does it? though I suppose you need to separate \"civilians\" from more imporant workers, needs more thinking.\" One thing to weigh: the setting says everyone on the island works for Amakawa, so there are no civilians. The split would be between staff and mainland visitors, or between ordinary staff and restricted floors.",
+ "multi": false,
+ "options": [
+  {
+   "id": "station",
+   "label": "Gate at the station",
+   "note": "The monorail arrives on an elevated platform, and the ticket gate there is the island's one security gate (card and ID check for everyone coming from the mainland). You take a lift down to street level and walk to head office. The office lobby has no gate, just a reception desk. Guard Ishibashi and the card scene move to the station."
+  },
+  {
+   "id": "both",
+   "label": "Station gate plus a card door for restricted floors",
+   "note": "The station gate checks who comes onto the island. Inside head office, the lobby is open, but restricted floors (B2 IT, the server room) need a card at a door or in the lift. This splits ordinary staff from the machines rather than from 'civilians'."
+  },
+  {
+   "id": "lobby",
+   "label": "Keep the gate in the head office lobby",
+   "note": "As built now. The station is open, and head office has its own gate because it's the company's centre (visitors from the mainland, contractors like Eric)."
+  },
+  {
+   "id": "later",
+   "label": "Think about it later",
+   "note": "Day 1 stays as built. Come back to this when the extended version is planned."
+  }
+ ],
+ "decided": [
+  "station"
+ ],
+ "decision": "Gate at the station: the current gate room already reads as the station's security room; keep it as-is, but from there you go outside and walk to head office.",
+ "issue": 31,
+ "media": []
+}

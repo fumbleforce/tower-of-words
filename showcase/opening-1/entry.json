@@ -1,0 +1,321 @@
+{
+ "title": "Anime opening, tenth cut",
+ "date": "2026-10-09",
+ "by": "claude-main",
+ "caption": "The 70-second opening to the opening theme, made in code, now in the game's anime look with the rebuilt station. In the title menu as Opening, and on its own at game3d/opening/.",
+ "commit": [
+  "5c6fc400",
+  "a6251477",
+  "0cae61b6",
+  "af2eb480",
+  "e8261beca",
+  "1aa53f732",
+  "4418b1b83",
+  "f77db8f37",
+  "8aba584c7",
+  "444486d24"
+ ],
+ "result": [
+  "v5-031-0",
+  "v5-039-0",
+  "v10-058-9",
+  "v5-063-0"
+ ],
+ "sections": [
+  {
+   "title": "Tenth cut (2026-10-10): the fountain clean again",
+   "caption": "The forecourt's new full vegetation reached over the plaza (crowns in the basin, a lamp on the tiles, grass in steps); each place's short props now draw only on its own ground, and the plaza claims its whole circle.",
+   "images": [
+    {
+     "id": "v10-058-9",
+     "image": "bible/shots/showcase/opening-1/v10-t058.9.webp.webp",
+     "caption": "The fountain, clean"
+    }
+   ]
+  },
+  {
+   "title": "Eighth and ninth cuts (2026-10-10): critic passes (7/10, then 8/10)",
+   "caption": "The chorus slam in colour, the gate without the blocky guard figure, daylight through the exit doors (they slide into the wall), the pool from a lower angle, Aoi fading out like the others. Ninth cut: the lineup straight out of the black, buildings through the exit, the gate framed lower, less glare on the town shot.",
+   "images": [
+    {
+     "id": "v8-035-3",
+     "image": "bible/shots/showcase/opening-1/v8-t035.3.webp.webp",
+     "caption": "Daylight through the exit"
+    },
+    {
+     "id": "v8-039-4",
+     "image": "bible/shots/showcase/opening-1/v8-t039.4.webp.webp",
+     "caption": "はじめまして lands on colour"
+    },
+    {
+     "id": "v8-059-5",
+     "image": "bible/shots/showcase/opening-1/v8-t059.5.webp.webp",
+     "caption": "The pool, with depth"
+    },
+    {
+     "id": "v9-035-3",
+     "image": "bible/shots/showcase/opening-1/v9-t035.3.webp.webp",
+     "caption": "The plaza through the exit"
+    }
+   ]
+  },
+  {
+   "title": "Sixth and seventh cuts (2026-10-10): fixes from a critic pass",
+   "caption": "The sea and clouds smooth far out, 「てつだって」 off the faces, the one-beat tower readable, a stronger title, the riders lit from inside the cars, the ID card moving with the bars, the aerial drifting. Seventh cut: the window view frames the whole island, and the anime look follows the game (toon, outline, paint, fountain water).",
+   "images": [
+    {
+     "id": "v6-014-5",
+     "image": "bible/shots/showcase/opening-1/v6-t014.5.webp.webp",
+     "caption": "Eric lit from inside the car"
+    },
+    {
+     "id": "v6-027-6",
+     "image": "bible/shots/showcase/opening-1/v6-t027.6.webp.webp",
+     "caption": "The ID card moving with the bars"
+    },
+    {
+     "id": "v6-053-6",
+     "image": "bible/shots/showcase/opening-1/v6-t053.6.webp.webp",
+     "caption": "「てつだって」 below the faces"
+    },
+    {
+     "id": "v6-065-5",
+     "image": "bible/shots/showcase/opening-1/v6-t065.5.webp.webp",
+     "caption": "The title, stronger on the sky"
+    },
+    {
+     "id": "v7-017-3",
+     "image": "bible/shots/showcase/opening-1/v7-t017.3.webp.webp",
+     "caption": "The window view, the island whole"
+    }
+   ]
+  },
+  {
+   "title": "Fifth cut (2026-10-10): the anime look, the rebuilt station, your notes",
+   "caption": "The game's anime look throughout (toon light, outlines, leaf shade, soft crowns, the fountain's water), the Blender-built station, the gate going through to the exit, one はじめまして, Carina's longer card, the copy room painted from inside, more places instead of repeated faces, no flicker on the locations.",
+   "images": [
+    {
+     "id": "v5-005-0",
+     "image": "bible/shots/showcase/opening-1/v5-t005.0.webp.webp",
+     "caption": "The train crossing the bay at sunrise"
+    },
+    {
+     "id": "v5-014-0",
+     "image": "bible/shots/showcase/opening-1/v5-t014.0.webp.webp",
+     "caption": "Eric at the window of the middle car"
+    },
+    {
+     "id": "v5-024-0",
+     "image": "bible/shots/showcase/opening-1/v5-t024.0.webp.webp",
+     "caption": "Mio looks up from her phone"
+    },
+    {
+     "id": "v5-031-0",
+     "image": "bible/shots/showcase/opening-1/v5-t031.0.webp.webp",
+     "caption": "The train arrives at the rebuilt Honsha station"
+    },
+    {
+     "id": "v5-033-8",
+     "image": "bible/shots/showcase/opening-1/v5-t033.8.webp.webp",
+     "caption": "Through the gate: the card on the reader, ピッ"
+    },
+    {
+     "id": "v5-039-0",
+     "image": "bible/shots/showcase/opening-1/v5-t039.0.webp.webp",
+     "caption": "はじめまして finishes on the slam"
+    },
+    {
+     "id": "v5-044-0",
+     "image": "bible/shots/showcase/opening-1/v5-t044.0.webp.webp",
+     "caption": "The copy room, from inside"
+    },
+    {
+     "id": "v5-047-0",
+     "image": "bible/shots/showcase/opening-1/v5-t047.0.webp.webp",
+     "caption": "The copier wakes: まほう"
+    },
+    {
+     "id": "v5-057-7",
+     "image": "bible/shots/showcase/opening-1/v5-t057.7.webp.webp",
+     "caption": "The forecourt garden"
+    },
+    {
+     "id": "v5-058-9",
+     "image": "bible/shots/showcase/opening-1/v5-t058.9.webp.webp",
+     "caption": "The plaza fountain, in the anime water"
+    },
+    {
+     "id": "v5-059-8",
+     "image": "bible/shots/showcase/opening-1/v5-t059.8.webp.webp",
+     "caption": "The pool"
+    },
+    {
+     "id": "v5-063-0",
+     "image": "bible/shots/showcase/opening-1/v5-t063.0.webp.webp",
+     "caption": "The cast lineup"
+    },
+    {
+     "id": "v5-066-0",
+     "image": "bible/shots/showcase/opening-1/v5-t066.0.webp.webp",
+     "caption": "The title"
+    }
+   ]
+  },
+  {
+   "title": "Intro (0:00 to 0:12)",
+   "caption": "Morning over the bay, the train crossing toward the island, then under, beside and above it as the band comes in. The title lands on the bar.",
+   "images": [
+    {
+     "id": "op-002-5",
+     "image": "bible/shots/showcase/opening-1/t002.5.webp.webp",
+     "caption": "The sky tilts down to the island at sunrise"
+    },
+    {
+     "id": "op-004-8",
+     "image": "bible/shots/showcase/opening-1/t004.8.webp.webp",
+     "caption": "The train crossing the bay"
+    },
+    {
+     "id": "op-006-6",
+     "image": "bible/shots/showcase/opening-1/t006.6.webp.webp",
+     "caption": "Under the beam as the band comes in"
+    },
+    {
+     "id": "op-011-0",
+     "image": "bible/shots/showcase/opening-1/t011.0.webp.webp",
+     "caption": "The title over the train"
+    }
+   ]
+  },
+  {
+   "title": "Verse (0:12 to 0:38)",
+   "caption": "Following the lyric: the morning monorail, the town shining across the water, the ID card, Honsha, the gate and the guard. The window seats use the new pictures from Review opening-window-1, which are still waiting for your pick.",
+   "images": [
+    {
+     "id": "op-014-0",
+     "image": "bible/shots/showcase/opening-1/t014.0.webp.webp",
+     "caption": "Eric at the window (candidate picture)"
+    },
+    {
+     "id": "op-017-5",
+     "image": "bible/shots/showcase/opening-1/t017.5.webp.webp",
+     "caption": "The island from the window"
+    },
+    {
+     "id": "op-020-5",
+     "image": "bible/shots/showcase/opening-1/t020.5.webp.webp",
+     "caption": "Low over the water toward head office"
+    },
+    {
+     "id": "op-024-2",
+     "image": "bible/shots/showcase/opening-1/t024.2.webp.webp",
+     "caption": "Mio looks up from her phone (candidate picture)"
+    },
+    {
+     "id": "op-026-0",
+     "image": "bible/shots/showcase/opening-1/t026.0.webp.webp",
+     "caption": "The ID card"
+    },
+    {
+     "id": "op-030-6",
+     "image": "bible/shots/showcase/opening-1/t030.6.webp.webp",
+     "caption": "Honsha station"
+    },
+    {
+     "id": "op-033-0",
+     "image": "bible/shots/showcase/opening-1/t033.0.webp.webp",
+     "caption": "The gate opens"
+    },
+    {
+     "id": "op-034-8",
+     "image": "bible/shots/showcase/opening-1/t034.8.webp.webp",
+     "caption": "The guard's good morning"
+    }
+   ]
+  },
+  {
+   "title": "Chorus (0:38 to 1:04)",
+   "caption": "The band stops for はじめ, then the island seen whole from above as the chorus comes in. Then the roll call: Eric or Carina, kotodama, Mio, the B2 team on 「てつだって」, the island people, a run of faces, and everyone together.",
+   "images": [
+    {
+     "id": "op-038-3",
+     "image": "bible/shots/showcase/opening-1/t038.3.webp.webp",
+     "caption": "The stop before the chorus"
+    },
+    {
+     "id": "op-041-0",
+     "image": "bible/shots/showcase/opening-1/t041.0.webp.webp",
+     "caption": "The island, whole"
+    },
+    {
+     "id": "op-042-9",
+     "image": "bible/shots/showcase/opening-1/t042.9.webp.webp",
+     "caption": "Eric"
+    },
+    {
+     "id": "op-046-6",
+     "image": "bible/shots/showcase/opening-1/t046.6.webp.webp",
+     "caption": "Words become magic"
+    },
+    {
+     "id": "op-049-5",
+     "image": "bible/shots/showcase/opening-1/t049.5.webp.webp",
+     "caption": "Mio"
+    },
+    {
+     "id": "op-053-2",
+     "image": "bible/shots/showcase/opening-1/t053.2.webp.webp",
+     "caption": "Kenji, Mr. Mori and Emi"
+    },
+    {
+     "id": "op-055-4",
+     "image": "bible/shots/showcase/opening-1/t055.4.webp.webp",
+     "caption": "Kuro, Aoi and Rei"
+    },
+    {
+     "id": "op-056-6",
+     "image": "bible/shots/showcase/opening-1/t056.6.webp.webp",
+     "caption": "Mr. Hamada wakes up"
+    },
+    {
+     "id": "op-057-8",
+     "image": "bible/shots/showcase/opening-1/t057.8.webp.webp",
+     "caption": "Round the running train"
+    },
+    {
+     "id": "op-059-0",
+     "image": "bible/shots/showcase/opening-1/t059.0.webp.webp",
+     "caption": "Faces on the beat"
+    },
+    {
+     "id": "op-064-0",
+     "image": "bible/shots/showcase/opening-1/t064.0.webp.webp",
+     "caption": "Everyone together"
+    }
+   ]
+  },
+  {
+   "title": "Title (1:04 to 1:10)",
+   "caption": "The title over the train as the interlude starts and the music fades.",
+   "images": [
+    {
+     "id": "op-066-6",
+     "image": "bible/shots/showcase/opening-1/t066.6.webp.webp",
+     "caption": "The end title"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it (on this machine)",
+   "href": "game3d/opening/"
+  },
+  {
+   "label": "The 1080p video, tenth cut (on this machine) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "updated": "2026-10-10T10:14:43+02:00",
+ "media": []
+}

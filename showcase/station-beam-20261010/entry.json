@@ -1,0 +1,126 @@
+{
+ "title": "Honsha station: the walkway no longer runs under the monorail beam",
+ "date": "2026-10-10",
+ "by": "claude-agent:station-beam",
+ "caption": "The car's beam crossed the covered walkway's west end 1.38 m above the paving, right where people came down the west platform's stair. Any stair down from the west platform lands between the two beams, so that stair is gone. The two platforms now join on a cross deck along the north end, over the ends of the beams, with a railing along its edge. The covered walkway starts at the east stair and ends a step short of the beam behind a glass screen. The train's approach and the beam's height are unchanged. The forecourt stays within its budget.",
+ "preview": "after-walk-west-desk",
+ "result": [
+  "after-walk-west-desk",
+  "after-gable-in-desk",
+  "after-above-sw-desk"
+ ],
+ "links": [
+  {
+   "label": "Issue #403",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/403"
+  }
+ ],
+ "sections": [
+  {
+   "title": "Looking west along the walkway",
+   "images": [
+    {
+     "id": "before-walk-west-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/before-walk-west-desk.webp.webp",
+     "caption": "Before: the walkway ran on under the beam, 1.38 m above the paving"
+    },
+    {
+     "id": "after-walk-west-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/after-walk-west-desk.webp",
+     "caption": "After: the walkway ends at a glass screen a step short of the beam"
+    },
+    {
+     "id": "before-walk-west-phone",
+     "image": "bible/shots/showcase/station-beam-20261010/before-walk-west-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-walk-west-phone",
+     "image": "bible/shots/showcase/station-beam-20261010/after-walk-west-phone.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "before-walk-west-end-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/before-walk-west-end-desk.webp",
+     "caption": "Before, closer to the west end"
+    },
+    {
+     "id": "after-walk-west-end-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/after-walk-west-end-desk.webp",
+     "caption": "After, closer to the west end"
+    }
+   ]
+  },
+  {
+   "title": "Where the west stair came down",
+   "images": [
+    {
+     "id": "before-west-foot-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/before-west-foot-desk.webp",
+     "caption": "Before: the foot of the west stair, with the beam between it and the walkway"
+    },
+    {
+     "id": "after-west-foot-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/after-west-foot-desk.webp",
+     "caption": "After: no stair here, and the walkway ends behind its glass"
+    }
+   ]
+  },
+  {
+   "title": "The north end",
+   "images": [
+    {
+     "id": "before-gable-in-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/before-gable-in-desk.webp.webp",
+     "caption": "Before: the beam ran to the gable"
+    },
+    {
+     "id": "after-gable-in-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/after-gable-in-desk.webp.webp",
+     "caption": "After: the cross deck joins the platforms over the buffers"
+    },
+    {
+     "id": "before-plat-west-north-phone",
+     "image": "bible/shots/showcase/station-beam-20261010/before-plat-west-north-phone.webp",
+     "caption": "Before, the west platform on a phone"
+    },
+    {
+     "id": "after-plat-west-north-phone",
+     "image": "bible/shots/showcase/station-beam-20261010/after-plat-west-north-phone.webp",
+     "caption": "After, the west platform on a phone"
+    }
+   ]
+  },
+  {
+   "title": "From outside, and in the opening",
+   "images": [
+    {
+     "id": "before-above-sw-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/before-above-sw-desk.webp.webp",
+     "caption": "Before, from above"
+    },
+    {
+     "id": "after-above-sw-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/after-above-sw-desk.webp.webp",
+     "caption": "After, from above"
+    },
+    {
+     "id": "before-low-south-west-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/before-low-south-west-desk.webp.webp",
+     "caption": "Before, from the south-west"
+    },
+    {
+     "id": "after-low-south-west-desk",
+     "image": "bible/shots/showcase/station-beam-20261010/after-low-south-west-desk.webp.webp",
+     "caption": "After, from the south-west"
+    },
+    {
+     "id": "after-opening-station",
+     "image": "bible/shots/showcase/station-beam-20261010/after-opening-station.webp.webp",
+     "caption": "After: the opening's station shot, with the train running in"
+    }
+   ]
+  }
+ ],
+ "media": []
+}

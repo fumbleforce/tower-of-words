@@ -1,0 +1,76 @@
+{
+ "title": "Island map: grounds, coast and destinations",
+ "date": "2026-10-07",
+ "by": "codex-exec:model_review",
+ "caption": "Actual planted grounds, distinct roof groups and pedestrian routes make the drawn map easier to read. Destination coordinates and fast-travel rules are unchanged.",
+ "sections": [
+  {
+   "title": "Island overview on desktop",
+   "images": [
+    {
+     "id": "island-1366-before",
+     "image": "bible/shots/showcase/map-fidelity-1/island-1366-before.png.webp",
+     "caption": "Before, 1366px wide. Same map control and starting place."
+    },
+    {
+     "id": "island-1366-after",
+     "image": "bible/shots/showcase/map-fidelity-1/island-1366-after.png.webp",
+     "caption": "After, 1366px wide. Same map control and starting place."
+    }
+   ]
+  },
+  {
+   "title": "Local map on phone",
+   "images": [
+    {
+     "id": "local-390-before",
+     "image": "bible/shots/showcase/map-fidelity-1/local-390-before.png",
+     "caption": "Before, 390px wide. Same map control and starting place."
+    },
+    {
+     "id": "local-390-after",
+     "image": "bible/shots/showcase/map-fidelity-1/local-390-after.png.webp",
+     "caption": "After, 390px wide. Same map control and starting place."
+    }
+   ]
+  },
+  {
+   "title": "Whole mapped coast on phone",
+   "images": [
+    {
+     "id": "island-390-before",
+     "image": "bible/shots/showcase/map-fidelity-1/island-390-before.png",
+     "caption": "Before, 390px wide. Same map control and starting place."
+    },
+    {
+     "id": "island-390-after",
+     "image": "bible/shots/showcase/map-fidelity-1/island-390-after.png.webp",
+     "caption": "After, 390px wide. Same map control and starting place."
+    }
+   ]
+  },
+  {
+   "title": "Destination controls",
+   "images": [
+    {
+     "id": "travel-1366",
+     "image": "bible/shots/showcase/map-fidelity-1/travel-1366.png.webp",
+     "caption": "Ordinary day-three destination selection, 1366px. Go there was clicked and arrived at the plaza."
+    },
+    {
+     "id": "travel-390",
+     "image": "bible/shots/showcase/map-fidelity-1/travel-390.png.webp",
+     "caption": "Ordinary day-three destination selection, 390px. Go there was clicked and arrived at the plaza."
+    }
+   ],
+   "caption": "Desktop and phone native selection, zoom, keyboard, pause and fast travel passed. Mean cached map painting measured 0.48–0.58 ms over 30 draws at 1000×800; the 3D office planting is byte-identical after sharing its plan. Northern terrain remains outside this map detail pass."
+  }
+ ],
+ "links": [
+  {
+   "label": "Open the game and press M",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

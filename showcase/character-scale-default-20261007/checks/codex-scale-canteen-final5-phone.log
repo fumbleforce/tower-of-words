@@ -1,0 +1,6 @@
+(node:2764188) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/js/scenes/canteen/plan.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+canteen-meals-390: GPU slot 1
+PASS 390 25 measured contacts; 4985 staff capsule samples

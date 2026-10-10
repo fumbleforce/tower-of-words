@@ -1,0 +1,91 @@
+{
+ "title": "The dorm inner court and the common room",
+ "date": "2026-10-05",
+ "by": "claude-agent:club-places",
+ "caption": "For the art club (day 5 in the plan). The inner court between the dorm blocks is now walked from the dorm row (east along the row from the dorm street, then north up the court's walk), and the common room's glazed door at its north end opens onto the room the art club uses. It also loads with ?place=dorm_commons. Nobody is there yet.",
+ "sections": [
+  {
+   "title": "The inner court",
+   "caption": "Before: seen from the row only. After: the north-south walk up to the common room's door, the square round the maple's bed and the east-west walk between the blocks' doors are walked. On the court the camera turns to look north, so the common room's door faces it.",
+   "images": [
+    {
+     "id": "before-court-desk",
+     "image": "game3d/shots/club-before/inner-court-desk.png.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-court-phone",
+     "image": "game3d/shots/club-before/inner-court-phone.png.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-court-look-desk",
+     "image": "game3d/shots/club-commons/court-look-desk.png.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-court-look-phone",
+     "image": "game3d/shots/club-commons/court-look-phone.png.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "after-door-desk",
+     "image": "game3d/shots/club-commons/court-desk.png.webp",
+     "caption": "At the common room's door, desktop"
+    },
+    {
+     "id": "after-door-phone",
+     "image": "game3d/shots/club-commons/court-phone.png.webp",
+     "caption": "At the common room's door, phone"
+    },
+    {
+     "id": "after-square-desk",
+     "image": "game3d/shots/club-commons/square-desk.png.webp",
+     "caption": "The square after work, desktop"
+    },
+    {
+     "id": "after-square-phone",
+     "image": "game3d/shots/club-commons/square-phone.png.webp",
+     "caption": "The square after work, phone"
+    }
+   ]
+  },
+  {
+   "title": "The common room",
+   "caption": "The lounge's TV, sofa and low table and a bookshelf; the long shared table with the art club's materials at its end; a drying rack of wire shelves with sheets on it; the shared kitchen, notes on the fridge; the printer and a notice board by the east wall. Desktop shows the whole room; a phone follows Eric.",
+   "images": [
+    {
+     "id": "after-room-desk",
+     "image": "game3d/shots/club-commons/room-desk.png.webp",
+     "caption": "Arriving, desktop"
+    },
+    {
+     "id": "after-room-phone",
+     "image": "game3d/shots/club-commons/room-phone.png.webp",
+     "caption": "Arriving, phone"
+    },
+    {
+     "id": "after-table-desk",
+     "image": "game3d/shots/club-commons/table-desk.png.webp",
+     "caption": "At the table, desktop"
+    },
+    {
+     "id": "after-table-phone",
+     "image": "game3d/shots/club-commons/table-phone.png.webp",
+     "caption": "At the table, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=dorm_commons"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "media": []
+}

@@ -1,0 +1,38 @@
+{
+ "title": "One source for game facts",
+ "date": "2026-09-29",
+ "by": "Codex source audit",
+ "status": "superseded",
+ "question": "Which parts of the source cleanup should we implement?",
+ "multi": true,
+ "options": [
+  {
+   "id": "runtime-views",
+   "label": "Generate current story and game references",
+   "note": "S01–S14: derive the story tree, place inventories, cast, taught words, schedules and bond tables from implemented data. Keep authoring explanations and design rationale. Fixes stale bible claims such as the office being on the third floor."
+  },
+  {
+   "id": "asset-decisions",
+   "label": "Use one asset approval resolver",
+   "note": "A01–A06: make the bible and asset gallery read the same original decisions per asset. Keep approval separate from use, and mark stale generated data. Kenji currently resolves differently in the two views."
+  },
+  {
+   "id": "current-guide",
+   "label": "Separate current rules from their history",
+   "note": "P01–P04: keep current requirements in GUIDE, preserve dated decisions, and replace copied policy and startup instructions with links. Retain task ownership, useful checklists and dated creator findings."
+  },
+  {
+   "id": "drafts-and-history",
+   "label": "Consolidate drafts and archive obsolete reports",
+   "note": "D01–D04: give each unimplemented design fact one draft home, link shorter summaries, and move obsolete day-1 drafts out of active navigation. Preserve historical reports and their evidence. This does not approve future stories."
+  }
+ ],
+ "links": [
+  {
+   "label": "Read the audit and exact source references (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/notes"
+  }
+ ],
+ "decision": "Jørgen: deriving facts from code is hacky; wants a well laid out set of game-facts docs kept in sync as part of development (see game-facts-docs)",
+ "media": []
+}

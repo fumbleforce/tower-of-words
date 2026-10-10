@@ -1,0 +1,252 @@
+{
+ "title": "The anime look is the default: toon light, outlines, painted stone, fixed fountain",
+ "date": "2026-10-10",
+ "by": "claude-agent:anime-look",
+ "caption": "Your pick on anime-look-1 (rollout, \"just fix the fountain\") is in: the toon light, the coloured outlines and the painted stone are now the look in every place, morning and after work, on desktop and phone, and the fountain's jets are whole arcs. Leaf shade and soft crowns are gone. Every pair: left before (?anime=0, still there to compare), right the game now. Phone cost on this machine (390x844, medium, rendering 585x1266): no extra draw calls or triangles to speak of, frames about 1 to 3 ms longer (plaza 4.0 to 4.4 ms before, 6.4 to 7.3 after; shop street 2.7 to 4.5 before, 4.5 to 4.7 after; canteen 3.2 to 3.4 before, 3.2 to 5.3 after). The day plays through at both sizes.",
+ "commit": "6d91d219",
+ "result": [
+  "desktop-plaza-fountain-close-morning",
+  "desktop-forecourt-path-east-morning",
+  "desktop-plaza-talk-evening",
+  "phone-plaza-overview-morning"
+ ],
+ "sections": [
+  {
+   "title": "The fountain",
+   "caption": "Your fix: each jet is now one whole arc from just outside the bowl's lip down into the water, so nothing breaks into pieces or runs through the stone, seen from any side. The water texture you liked stays.",
+   "images": [
+    {
+     "id": "desktop-plaza-fountain-close-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-plaza-fountain-close-morning.webp.webp",
+     "caption": "Desktop, close, morning"
+    },
+    {
+     "id": "desktop-plaza-fountain-close-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-plaza-fountain-close-evening.webp.webp",
+     "caption": "Desktop, close, after work"
+    },
+    {
+     "id": "desktop-plaza-fountain-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-plaza-fountain-morning.webp.webp",
+     "caption": "Desktop, behind Eric, morning"
+    },
+    {
+     "id": "desktop-plaza-fountain-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-plaza-fountain-evening.webp.webp",
+     "caption": "Desktop, behind Eric, after work"
+    },
+    {
+     "id": "desktop-plaza-overview-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-plaza-overview-morning.webp.webp",
+     "caption": "Desktop overview, morning"
+    },
+    {
+     "id": "desktop-plaza-overview-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-plaza-overview-evening.webp.webp",
+     "caption": "Desktop overview, after work"
+    },
+    {
+     "id": "phone-plaza-overview-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/phone-plaza-overview-morning.webp.webp",
+     "caption": "Phone, morning"
+    },
+    {
+     "id": "phone-plaza-overview-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/phone-plaza-overview-evening.webp.webp",
+     "caption": "Phone, after work"
+    }
+   ]
+  },
+  {
+   "title": "People close up",
+   "caption": "Third-person camera next to someone, where a conversation starts. Faces and clothes take the same toon light and the coloured outline.",
+   "images": [
+    {
+     "id": "desktop-plaza-talk-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-plaza-talk-morning.webp.webp",
+     "caption": "Plaza, beside a passer-by, morning"
+    },
+    {
+     "id": "desktop-plaza-talk-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-plaza-talk-evening.webp.webp",
+     "caption": "Plaza, beside a passer-by, after work"
+    },
+    {
+     "id": "desktop-forecourt-path-east-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-path-east-morning.webp.webp",
+     "caption": "Forecourt walk with commuters, morning"
+    },
+    {
+     "id": "desktop-forecourt-path-east-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-path-east-evening.webp.webp",
+     "caption": "Forecourt walk with commuters, after work"
+    }
+   ]
+  },
+  {
+   "title": "Forecourt and head office",
+   "caption": "The street style with toon light: the sunlit side warmer, the shade side cooler and richer instead of grey.",
+   "images": [
+    {
+     "id": "desktop-forecourt-head-office-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-head-office-morning.webp.webp",
+     "caption": "Toward head office, morning"
+    },
+    {
+     "id": "desktop-forecourt-head-office-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-head-office-evening.webp.webp",
+     "caption": "Toward head office, after work"
+    },
+    {
+     "id": "desktop-forecourt-garden-west-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-garden-west-morning.webp.webp",
+     "caption": "The garden, west, morning"
+    },
+    {
+     "id": "desktop-forecourt-garden-west-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-garden-west-evening.webp.webp",
+     "caption": "The garden, west, after work"
+    },
+    {
+     "id": "desktop-forecourt-overview-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-overview-morning.webp.webp",
+     "caption": "Desktop overview, morning"
+    },
+    {
+     "id": "desktop-forecourt-overview-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-overview-evening.webp.webp",
+     "caption": "Desktop overview, after work"
+    },
+    {
+     "id": "phone-forecourt-overview-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/phone-forecourt-overview-morning.webp.webp",
+     "caption": "Phone, morning"
+    },
+    {
+     "id": "phone-forecourt-overview-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/phone-forecourt-overview-evening.webp.webp",
+     "caption": "Phone, after work"
+    }
+   ]
+  },
+  {
+   "title": "Station and monorail",
+   "caption": "The beam and its piers over the station lawn, and the monorail on its beam from the title screen.",
+   "images": [
+    {
+     "id": "desktop-forecourt-station-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-station-morning.webp.webp",
+     "caption": "By the station lockers, the beam behind, morning"
+    },
+    {
+     "id": "desktop-forecourt-station-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-station-evening.webp.webp",
+     "caption": "By the station lockers, the beam behind, after work"
+    },
+    {
+     "id": "desktop-forecourt-shed-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-shed-morning.webp.webp",
+     "caption": "Under the beam, morning"
+    },
+    {
+     "id": "desktop-forecourt-shed-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-forecourt-shed-evening.webp.webp",
+     "caption": "Under the beam, after work"
+    },
+    {
+     "id": "desktop-train-car-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-train-car-morning.webp.webp",
+     "caption": "The monorail on its beam (title screen), morning"
+    },
+    {
+     "id": "desktop-train-car-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-train-car-evening.webp.webp",
+     "caption": "The monorail on its beam (title screen), after work"
+    },
+    {
+     "id": "phone-train-car-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/phone-train-car-morning.webp.webp",
+     "caption": "Phone, title screen, morning"
+    },
+    {
+     "id": "phone-train-car-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/phone-train-car-evening.webp.webp",
+     "caption": "Phone, title screen, after work"
+    }
+   ]
+  },
+  {
+   "title": "Shop street",
+   "caption": "The shop street; after work the lamps and windows keep their glow.",
+   "images": [
+    {
+     "id": "desktop-shotengai-street-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-shotengai-street-morning.webp.webp",
+     "caption": "Down the street, morning"
+    },
+    {
+     "id": "desktop-shotengai-street-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-shotengai-street-evening.webp.webp",
+     "caption": "Down the street, after work"
+    },
+    {
+     "id": "desktop-shotengai-overview-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-shotengai-overview-morning.webp.webp",
+     "caption": "Desktop overview, morning"
+    },
+    {
+     "id": "desktop-shotengai-overview-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-shotengai-overview-evening.webp.webp",
+     "caption": "Desktop overview, after work"
+    },
+    {
+     "id": "phone-shotengai-overview-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/phone-shotengai-overview-morning.webp.webp",
+     "caption": "Phone, morning"
+    },
+    {
+     "id": "phone-shotengai-overview-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/phone-shotengai-overview-evening.webp.webp",
+     "caption": "Phone, after work"
+    }
+   ]
+  },
+  {
+   "title": "Interior: the canteen",
+   "caption": "Indoors the change is small: the toon ramp works on the sun, so rooms lit by their own lamps mostly gain the outline and the richer shade. The B2 office would not open on its own in the capture tool on the busy machine this time, so it is not shown.",
+   "images": [
+    {
+     "id": "desktop-canteen-room-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-canteen-room-morning.webp.webp",
+     "caption": "Desktop, morning"
+    },
+    {
+     "id": "desktop-canteen-room-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/desktop-canteen-room-evening.webp.webp",
+     "caption": "Desktop, after work"
+    },
+    {
+     "id": "phone-canteen-room-morning",
+     "image": "bible/shots/showcase/anime-look-20261010/phone-canteen-room-morning.webp",
+     "caption": "Phone, morning"
+    },
+    {
+     "id": "phone-canteen-room-evening",
+     "image": "bible/shots/showcase/anime-look-20261010/phone-canteen-room-evening.webp",
+     "caption": "Phone, after work"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it (the plaza)",
+   "href": "game3d/index.html?place=plaza"
+  },
+  {
+   "label": "The look before, to compare",
+   "href": "game3d/index.html?place=plaza&anime=0"
+  }
+ ],
+ "media": []
+}

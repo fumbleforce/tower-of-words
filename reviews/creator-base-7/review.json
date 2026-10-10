@@ -1,0 +1,95 @@
+{
+ "title": "Creator: smooth face, painted eyes, straight legs, anime hair and clothes",
+ "date": "2026-09-30",
+ "by": "Claude (claude-agent:creator7)",
+ "status": "superseded",
+ "question": "Are the face, eyes, legs, hair and clothes good enough now to build new characters on?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/parts/base/shots/creator-base-7/1-face.webp.webp",
+   "caption": "Face. Why it had more edges: Eric's model is smooth shaded, but the base was drawn flat shaded, so every facet of his face showed. The base now takes his model's own normals on the head (same positions), so it reads as smooth as the original. Mio's model is flat shaded, so hers stays as it was. Before / now / original, front and three-quarter."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-7/2-eyes-mio.webp.webp",
+   "caption": "Eyes on Mio. Top row: the drawn round eyes you called horrifying. Below: every style is now the painted anime eye itself, lifted off the face and reshaped (wide, narrow, upturned, droopy) or swapped for Eric's painted eye; the iris colour can change on any of them."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-7/2-eyes-eric.webp.webp",
+   "caption": "Eyes on Eric, the same way (last one: Mio's painted eyes on his face)."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-7/3-legs-mio.webp",
+   "caption": "Mio's bare legs before and now: the leg rings between thigh and ankle now sit on one straight line and taper evenly, so the knees no longer knock and the knee lumps are gone. Idle, side, walk."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-7/3-legs-eric.webp",
+   "caption": "Eric's bare legs before and now."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-7/4-fit.webp.webp",
+   "caption": "Tight clothes before and now, idle and walk: tee with slim trousers, and the pleated skirt. The old trouser hems had jagged teeth; they are closed now."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-7/5-looks-before.webp.webp",
+   "caption": "The new looks in the last round (plain shells, plain caps)."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-7/5-looks-now.webp.webp",
+   "caption": "The new looks now (the example buttons in the creator)."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-7/6-hair.webp.webp",
+   "caption": "All seven hair styles on both bodies, front and back, in one brown with a teal second colour on the long hair and twin tails."
+  }
+ ],
+ "options": [
+  {
+   "id": "base-ok",
+   "label": "base-ok",
+   "note": "Good enough to build characters on. Face: Eric's base is smooth shaded like his model. Eyes: all styles come from the painted anime eyes. Legs: straightened and evened out. Hair: seven styles built from pointed, faceted locks like the originals (messy short, spiky, long straight, bob, twin tails, high ponytail, buns), fringes stop above the eyes, an optional second colour on inner locks and tips, and Mio's ears fold in under made hair. Clothes: hoodie (hood, drawstrings, pocket, ribbed cuffs), sailor blouse (collar with stripe, bow), shirt with collar and tie, blazer (lapels, buttons, pocket flaps, shirt and tie in the V), ringer tee; slim trousers (belt, buckle, crease and knee folds, back pockets), cargo shorts (side pockets, turned-up cuffs), pleated skirt with stripes; sneakers, loafers, boots. Also fixed: cuffs and hems are closed, the skirt sides stay clear of the hanging hands, shirt necklines keep Eric's shoulders covered, and Eric's stubble is its own choice (his sideburns still go with his own hair)."
+  },
+  {
+   "id": "needs-work",
+   "label": "needs-work",
+   "note": "Tell me what to fix first. What I can still see: the made hair is less chunky than the originals' big clumps, and the locks read a bit striped up close; Mio's and Eric's hands are still the originals' blocky hands; at the far end of a walking stride the forward thigh grazes the pleated skirt's hem (a long skirt and a knee-length A-line were tried and dropped, they tore in the walk); the face skin on the bare base is lighter and plainer than the original's, because the hair paint was cleaned off the texture in the last round; the buns are small."
+  }
+ ],
+ "links": [
+  {
+   "label": "The live creator (drag to turn it, Idle or Walk, Original puts the game model beside it)",
+   "href": "tools/creator/base/dress.html"
+  },
+  {
+   "label": "The same creator online, for your phone",
+   "href": "https://fumbleforce.github.io/tower-of-words/creator/"
+  },
+  {
+   "label": "Example: school look on Mio's body",
+   "href": "tools/creator/base/dress.html?hair=twintails&hairColour=%23d9b56a&eyes=upturned&iris=%233f8f5a&top=sailor&bottom=pleated&shoes=loafers"
+  },
+  {
+   "label": "Example: hoodie look on Eric's body",
+   "href": "tools/creator/base/dress.html?body=eric&hair=short&hairColour=%234a3325&eyes=wide&iris=%233f8f5a&top=hoodie&topColour=%232f6b4f&bottom=cargo&shoes=sneakers&shoesColour=%23b3473d"
+  },
+  {
+   "label": "The creator on last round's base, for comparing",
+   "href": "tools/creator/base/dress.html?v=source16"
+  },
+  {
+   "label": "Mio: base over the original",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/creator/base/overlay.html"
+  },
+  {
+   "label": "Eric: base over the original",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/creator/base/overlay.html"
+  },
+  {
+   "label": "Previous round and your feedback",
+   "href": "#review/creator-base-6"
+  }
+ ],
+ "decision": "Jørgen in chat, 2026-09-30: characters still look bow-legged. Hair looks kind of creepy rather than the cute artisan feel of Emi[Mio] and Eric's originals. Rest of the body a little better. Eyes much better. Clothes need more work to look as well crafted as the existing ones; give them volume.",
+ "decided_at": "2026-09-30T13:27:27+0200",
+ "issue": 77
+}

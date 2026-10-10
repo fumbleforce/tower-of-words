@@ -1,0 +1,64 @@
+{
+  "source": "art/parts/crowd-pilot-5/game/b-image/base.webp",
+  "source_sha256": "b75d9f913552ff9a4d946c101446cb6eeca51f3c5ffc52f4090dcc852204a30a",
+  "rig_sha256": "5a07aeacd60f5b85ed17954f5d81220bf22a38da73a655b6f1d3c031d4662784",
+  "crop": [
+    760,
+    420,
+    1290,
+    850
+  ],
+  "mask_polygon": [
+    [
+      884,
+      635
+    ],
+    [
+      902,
+      567
+    ],
+    [
+      1014,
+      540
+    ],
+    [
+      1190,
+      578
+    ],
+    [
+      1034,
+      747
+    ]
+  ],
+  "seed": 7381,
+  "steps": 24,
+  "cfg": 5,
+  "denoise": 0.26,
+  "model": "rdbtAnima.safetensors",
+  "method": "local LLLite inpainting-v2; constrained hair patch only",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe. Close detail of the existing dark brown hair fringe on a simple anime game model. Continuous dark brown hair across the small masked patch, matching the surrounding smooth flat hair texture and existing subtle strands. Preserve the exact fringe boundary and the open forehead.",
+  "negative": "worst quality, low quality, skin patch, bald spot, white hair, new hairstyle, curls, bright highlights, photorealistic, text, watermark",
+  "status": "Root accepted bounded fringe correction after actual front/angle inspection; native preservation and motion checks passed",
+  "invariants": {
+    "outside_mask_max_delta": 0,
+    "unchanged_texels": 4186955,
+    "changed_texels": 7342,
+    "files": {
+      "a": {
+        "walk.glb": "04b1425a15ef360f21eb408eb63117b88ae5ef33aa5734b2a4764b3e42c5d765",
+        "run.glb": "00db66ef81a0cb9f137fe726f90d9357b2cf2ee050442c0c3f6ed52e399528c1",
+        "sit.glb": "4e1e288a287774a2f783b98ad5fae5d143e836f48984313b0fdb4f11c0a29572",
+        "idle.json": "5dcf59704fb25e07253781bc231cbde7eb5fc2f38ef6d9edc2f36f6c5af673a8",
+        "base.webp": "032d27323869e1258a1c6f5023ad7782c872b87e87c980ac82d1bdba1ebe2dc0"
+      },
+      "b": {
+        "walk.glb": "697d746b70b7dec70ee7dfa1a83bb497b2b47ce1149303de197596fb771de78c",
+        "run.glb": "9ad446a8bec867089e887c011bb188bde334aa625b450b6e46cf6503d46f84ee",
+        "sit.glb": "684f775384f266fc24ad1ac97ebee97f94b52739934e8aa1b65e20ef8fe68936",
+        "idle.json": "ac64e437c0420fbda4d63e1c1e2bac4e8079ed66ec415c4c3f004b7f2508c826",
+        "base.webp": "8a749a9b01b3d5c42dc019fd31af4062f0023dc37c721595a64c21001212295d"
+      }
+    }
+  },
+  "projection_edge_cleanup": "Six-pixel expansion limited to original pale fringe texels; pale generated boundary samples use nearest dark generated hair sample. Original projection retained in b-hair-1-projection-original; no second render."
+}

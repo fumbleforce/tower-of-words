@@ -1,0 +1,64 @@
+[
+ {
+  "service": "meshy",
+  "part": "a-2",
+  "task": "01a10dd4-2839-763c-affd-4ac5adf3f5bd",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 189,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/crowd-pilot-2/pics/a-e1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "a-2-tex",
+  "task": "01a10e21-b1a5-7511-beb9-bf957c167ffd",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 136,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/crowd-pilot-2/meshy/a-2-uv.glb"
+  },
+  "input": "art/parts/crowd-pilot-2/pics/a-e1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "a-2-tex-rig",
+  "task": "01a10e22-67ee-775f-ab89-44b9a24da5c3",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10e21-b1a5-7511-beb9-bf957c167ffd",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "a-sit",
+  "task": "01a10e22-e671-7632-8417-54c1932748af",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 128,
+  "settings": {
+   "rig_task_id": "01a10e22-67ee-775f-ab89-44b9a24da5c3",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  }
+ }
+]

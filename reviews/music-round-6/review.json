@@ -1,0 +1,79 @@
+{
+ "title": "Background music, round 6: new YuE2 pieces in the opening theme's style",
+ "date": "2026-10-10",
+ "by": "claude-agent:music",
+ "status": "decided",
+ "context": [
+  "Round 6 of the background music, the direction you picked in music-direction-1: new YuE2 instrumentals in the opening theme's style. Nobody has listened to these before you. I can't hear audio, so I only checked them by measurement.",
+  "Same model as the opening theme (YuE2, run locally, no cost) and the opening's style tags (anime J-pop, melodic bass, sparkling synths, catchy melody), minus the vocal ones. Each piece is a new piece, not a variation of the opening's melody, with its own band and mood. The opening was sung; to keep these instrumental I used the instrumental add-on for YuE2, which needs the full-precision model, so the sound may differ a little from the opening.",
+  "Your notes so far: round 5's title was \"too slow and somber\", its day piece \"almost jamaican\", and they \"all still fall short of the current\"; round 4 sounded like \"an epic ballad\" and was \"too similar\". So these are livelier (104 to 140 BPM), with no strings or orchestra, and each use has a different band.",
+  "Five pieces, one each for the title menu, outdoors during the day, the evening, the office and the shop street. Each card's note says where it would play and what plays there today. Each card is the loop the game would play (1:49 to 2:21), then the first 15 seconds of the repeat so you can hear the loop point. For comparison, the opening theme and today's calm loop are at the top.",
+  "I made ten pieces, two per use, and kept the one per use that measured best. The five I left out stay on this machine: title-2: title-1 (same tags) is in a major key and its loop point matches better; title-2 came out in F# minor.; day-2: Demucs found singing in it: the vocal stem is -3.3 dB of the mix, in 42% of the piece.; evening-2: its loop point has an 18 dB jump in level.; office-1: no good loop point (match 0.58; the cut-off is 0.45).; shops-2: came out in Ab minor, which reads less playful than shops-1.",
+  "Nothing here is in the game yet. Pick the ones that fit and reject the rest, and say what is wrong with any you reject. What happens next: your picks replace the current loops in those places in the game; for any use you reject, I make a new round for just that use with your notes; your round-5 fallbacks (evening-2, office-2, shops-1) stay available if nothing here is better."
+ ],
+ "ask": "Which of these five fit the game as background music? Pick the ones you want and reject the others.",
+ "question": "Round 6 of the background music, the direction you picked in music-direction-1: new YuE2 instrumentals in the opening theme's style. Nobody has listened to these before you. I can't hear audio, so I only checked them by measurement. Same model as the opening theme (YuE2, run locally, no cost) and the opening's style tags (anime J-pop, melodic bass, sparkling synths, catchy melody), minus the vocal ones. Each piece is a new piece, not a variation of the opening's melody, with its own band and mood. The opening was sung; to keep these instrumental I used the instrumental add-on for YuE2, which needs the full-precision model, so the sound may differ a little from the opening. Your notes so far: round 5's title was \"too slow and somber\", its day piece \"almost jamaican\", and they \"all still fall short of the current\"; round 4 sounded like \"an epic ballad\" and was \"too similar\". So these are livelier (104 to 140 BPM), with no strings or orchestra, and each use has a different band. Five pieces, one each for the title menu, outdoors during the day, the evening, the office and the shop street. Each card's note says where it would play and what plays there today. Each card is the loop the game would play (1:49 to 2:21), then the first 15 seconds of the repeat so you can hear the loop point. For comparison, the opening theme and today's calm loop are at the top. I made ten pieces, two per use, and kept the one per use that measured best. The five I left out stay on this machine: title-2: title-1 (same tags) is in a major key and its loop point matches better; title-2 came out in F# minor.; day-2: Demucs found singing in it: the vocal stem is -3.3 dB of the mix, in 42% of the piece.; evening-2: its loop point has an 18 dB jump in level.; office-1: no good loop point (match 0.58; the cut-off is 0.45).; shops-2: came out in Ab minor, which reads less playful than shops-1. Nothing here is in the game yet. Pick the ones that fit and reject the rest, and say what is wrong with any you reject. What happens next: your picks replace the current loops in those places in the game; for any use you reject, I make a new round for just that use with your notes; your round-5 fallbacks (evening-2, office-2, shops-1) stay available if nothing here is better. Which of these five fit the game as background music? Pick the ones you want and reject the others.",
+ "multi": true,
+ "media": [
+  {
+   "audio": "art/approved/music/opening.mp3",
+   "caption": "For comparison: the opening theme, the quality bar."
+  },
+  {
+   "audio": "game3d/audio/music/calm.mp3",
+   "caption": "For comparison: today's calm loop, which plays on the title menu and almost everywhere else."
+  }
+ ],
+ "options": [
+  {
+   "id": "title-1",
+   "label": "title-1",
+   "audio": "art/candidates/music-6/title-1.mp3",
+   "note": "Title menu: Driving electric guitars, punchy drums and bright piano: the closest of the five to the opening theme, at 140 BPM instead of 150. Plays on the title menu. Today the title plays the calm train loop. Loops every 2:17. The card plays the loop once, then the first 15 seconds of the repeat. YuE2 3B bf16 + instrumental AR LoRA (v3abc), mode full, seed 9711. Tags: \"anime opening theme, J-pop rock, 140 BPM, driving electric guitars, punchy drums, bright piano, hopeful, energetic, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix\". Lyrics: section tags only ([intro] [verse] [chorus] ... [outro]). Measured: vocal stem -57.0 dB of the mix (today's Lyria loops: about -32; lower means less voice), loop-point match 0.287 (lower is better; up to 0.45 accepted), no level jump at the loop point (0.84 dB there, 14.81 dB elsewhere), key Eb major, tempo 143.6 BPM."
+  },
+  {
+   "id": "day-1",
+   "label": "day-1",
+   "audio": "art/candidates/music-6/day-1.mp3",
+   "note": "Day, outdoors: Acoustic guitar strumming, piano and glockenspiel, cheerful and light, 124 BPM. Plays outdoors during the day: the forecourt, the plaza and the other outdoor places. Today they play the calm train loop. Loops every 1:58. The card plays the loop once, then the first 15 seconds of the repeat. YuE2 3B bf16 + instrumental AR LoRA (v3abc), mode full, seed 9811. Tags: \"cheerful, 124 BPM, bright acoustic guitar strumming, piano, crisp pop drums, glockenspiel, sunny, light, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix\". Lyrics: section tags only ([intro] [verse] [chorus] ... [outro]). Measured: vocal stem -66.4 dB of the mix (today's Lyria loops: about -32; lower means less voice), loop-point match 0.345 (lower is better; up to 0.45 accepted), no level jump at the loop point (3.07 dB there, 11.39 dB elsewhere), key F major, tempo 123.0 BPM."
+  },
+  {
+   "id": "evening-1",
+   "label": "evening-1",
+   "audio": "art/candidates/music-6/evening-1.mp3",
+   "note": "Evening: Japanese city pop: clean electric guitar, Rhodes, slap bass, warm and nostalgic, 104 BPM. Plays everywhere after work. Today the evening plays the night loop. Loops every 2:03. The card plays the loop once, then the first 15 seconds of the repeat. YuE2 3B bf16 + instrumental AR LoRA (v3abc), mode full, seed 9911. Tags: \"Japanese city pop, 104 BPM, clean electric guitar, Rhodes electric piano, slap bass, tight drums, warm, nostalgic, sunset, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix\". Lyrics: section tags only ([intro] [verse] [chorus] ... [outro]). Measured: vocal stem -45.4 dB of the mix (today's Lyria loops: about -32; lower means less voice), loop-point match 0.349 (lower is better; up to 0.45 accepted), no level jump at the loop point (2.23 dB there, 13.75 dB elsewhere), key B minor, tempo 103.4 BPM."
+  },
+  {
+   "id": "office-2",
+   "label": "office-2",
+   "audio": "art/candidates/music-6/office-2.mp3",
+   "note": "Office: Japanese fusion: funky clean guitar, synth bass, electric piano and a steady groove, 116 BPM. Plays inside the office while Eric works. Today this is the office loop. Loops every 2:21. The card plays the loop once, then the first 15 seconds of the repeat. YuE2 3B bf16 + instrumental AR LoRA (v3abc) + NAR joint v9, mode full, seed 10012. Tags: \"J-fusion, 116 BPM, funky clean electric guitar, synth bass, tight drums, electric piano, focused, steady groove, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix\". Lyrics: section tags only ([intro] [verse] [chorus] ... [outro]). Measured: vocal stem -62.5 dB of the mix (today's Lyria loops: about -32; lower means less voice), loop-point match 0.316 (lower is better; up to 0.45 accepted), no level jump at the loop point (7.35 dB there, 15.48 dB elsewhere), key G minor, tempo 117.5 BPM."
+  },
+  {
+   "id": "shops-1",
+   "label": "shops-1",
+   "audio": "art/candidates/music-6/shops-1.mp3",
+   "note": "Shop street: Upbeat with a brass section, bouncy bass, handclaps and piano, playful, 132 BPM. Plays on the shop street and in the shops off it. Today it plays the calm train loop. Loops every 1:49. The card plays the loop once, then the first 15 seconds of the repeat. YuE2 3B bf16 + instrumental AR LoRA (v3abc), mode full, seed 10111. Tags: \"upbeat, 132 BPM, brass section, bouncy bass, handclaps, piano, punchy drums, playful, lively, busy street, instrumental, anime soundtrack, J-pop, melodic bass, sparkling synths, catchy melody, clean mix\". Lyrics: section tags only ([intro] [verse] [chorus] ... [outro]). Measured: vocal stem -40.9 dB of the mix (today's Lyria loops: about -32; lower means less voice), loop-point match 0.394 (lower is better; up to 0.45 accepted), no level jump at the loop point (2.94 dB there, 8.2 dB elsewhere), key F major, tempo 136.0 BPM."
+  }
+ ],
+ "links": [
+  {
+   "label": "Work issue #371",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/371"
+  },
+  {
+   "label": "The direction you picked: music-direction-1",
+   "href": "#review/music-direction-1"
+  },
+  {
+   "label": "Round 5 (your fallbacks): music-round-5",
+   "href": "#review/music-round-5"
+  }
+ ],
+ "issue": 371,
+ "decided": [
+  "evening-1"
+ ],
+ "decision": "Picked evening-1 (pretty cool). title-1: start not great, too repetitive, bit too fast. day-1: super repetitive. office-2 rejected (double notes on top of each other, too intense). shops-1 rejected (clown show).",
+ "decided_at": "2026-10-10T11:00:57+0200"
+}

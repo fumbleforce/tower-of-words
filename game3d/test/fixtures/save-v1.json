@@ -1,0 +1,131 @@
+{
+  "v": 1,
+  "day": 1,
+  "period": "lunch",
+  "bonds": {
+    "mio": 2,
+    "mori": 0
+  },
+  "inv": [
+    "coffee",
+    "tea"
+  ],
+  "taught": {
+    "ugoite": "mio"
+  },
+  "met": [
+    "mio",
+    "mori"
+  ],
+  "yen": 750,
+  "flags": {
+    "rel_mio_mori": "owes",
+    "rel_mori_mio": "likes",
+    "rel_kenji_mori": "likes",
+    "rel_kenji_mio": "owes",
+    "rel_kuroda_guard": "owes",
+    "period": "lunch",
+    "period_early": false,
+    "period_morning": false,
+    "period_lunch": true,
+    "period_afternoon": false,
+    "period_evening": false,
+    "place": "office",
+    "copier": true,
+    "practice_ugoite": 3,
+    "met_mio": true,
+    "bond_mio": 2,
+    "step_mio": 1,
+    "bondready_mio": 0,
+    "met_mori": true,
+    "bond_mori": 0,
+    "step_mori": 1,
+    "bondready_mori": 0,
+    "rem_mio_held_doors": true,
+    "fact_mio_her_list": true
+  },
+  "known": [
+    "ugoite",
+    "ohayo"
+  ],
+  "seen": [
+    "ugoite"
+  ],
+  "found": [
+    "office:copier"
+  ],
+  "place": "office",
+  "rel": {
+    "bonds": {
+      "v": 1,
+      "day": 1,
+      "p": {
+        "mio": {
+          "pts": 2,
+          "met": true,
+          "used": {
+            "k:scene:save-fixture": 1
+          },
+          "dayPts": 2,
+          "dayOf": 1,
+          "weekGifts": 0,
+          "weekOf": 0,
+          "log": [
+            {
+              "day": 1,
+              "source": "scene",
+              "add": 2,
+              "why": "fixture"
+            }
+          ],
+          "rem": [
+            {
+              "key": "held_doors",
+              "text": "Held the doors.",
+              "day": 1
+            }
+          ],
+          "facts": [
+            {
+              "key": "her_list",
+              "text": "She keeps a list.",
+              "day": 1
+            }
+          ],
+          "noticed": [
+            "coffee"
+          ],
+          "seen": [
+            "held_doors"
+          ]
+        },
+        "mori": {
+          "pts": 0,
+          "met": true,
+          "used": {},
+          "dayPts": 0,
+          "dayOf": 1,
+          "weekGifts": 0,
+          "weekOf": 0,
+          "log": [],
+          "rem": [],
+          "facts": [],
+          "noticed": [],
+          "seen": []
+        }
+      },
+      "rel": {
+        "mio>mori": "owes"
+      }
+    },
+    "moments": [
+      "office/lunch"
+    ],
+    "fired": [
+      "mio@2"
+    ],
+    "ambient": [
+      "office-chat@1.lunch"
+    ]
+  }
+}

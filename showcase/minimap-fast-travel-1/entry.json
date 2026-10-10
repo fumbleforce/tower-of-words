@@ -1,0 +1,35 @@
+{
+ "title": "Island map and fast travel",
+ "date": "2026-10-06",
+ "by": "codex:minimap-recovery",
+ "caption": "Tap the minimap or press M to open the island map. Pick an open destination and choose Go there. The minimap sits at the bottom left.",
+ "images": [
+  {
+   "id": "phone-map-open",
+   "image": "game3d/shots/minimap-recovery/phone-map-open.png",
+   "caption": "Phone: the map and destination card"
+  },
+  {
+   "id": "phone-hud",
+   "image": "game3d/shots/minimap-recovery/phone-hud.png.webp",
+   "caption": "Phone: the minimap in play"
+  },
+  {
+   "id": "desktop-map-open",
+   "image": "game3d/shots/minimap-recovery/desktop-map-open.png.webp",
+   "caption": "Desktop: the map and destination card"
+  },
+  {
+   "id": "desktop-hud",
+   "image": "game3d/shots/minimap-recovery/desktop-hud.png.webp",
+   "caption": "Desktop: the minimap in play"
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

@@ -1,0 +1,72 @@
+{
+ "title": "Environment style study, rough round",
+ "date": "2026-09-28",
+ "by": "world agent",
+ "status": "superseded",
+ "multi": true,
+ "question": "Which of these looks should we push further toward the reference (ink lines, cel shading, navy shadows, bright window light)? Pick one or more, or none.",
+ "media": [
+  {
+   "image": "game3d/design/style/rough/overview.jpg.webp",
+   "caption": "All six styles next to today's look (row 0) and the reference"
+  },
+  {
+   "image": "game3d/design/style/rough/style-0.jpg.webp",
+   "caption": "0: the current look, for comparison"
+  },
+  {
+   "image": "art/refs/style-target-kuro-pose-s202.webp.webp",
+   "caption": "The reference"
+  }
+ ],
+ "options": [
+  {
+   "id": "1",
+   "label": "1. Soft cel",
+   "note": "Three soft-edged tones per material, shadows pulled toward navy, no lines. The closest to today.",
+   "image": "game3d/design/style/rough/style-1.jpg.webp"
+  },
+  {
+   "id": "2",
+   "label": "2. Clean cel, fine line",
+   "note": "Hard two-to-three tone cel shading and a thin soft ink line on silhouettes and creases.",
+   "image": "game3d/design/style/rough/style-2.jpg.webp"
+  },
+  {
+   "id": "3",
+   "label": "3. Anime key",
+   "note": "Hard cel with navy shadows, dark ink of varying weight, a cool restrained palette and a rim of window light. Aimed at the reference.",
+   "image": "game3d/design/style/rough/style-3.jpg.webp"
+  },
+  {
+   "id": "4",
+   "label": "4. Ink and hatching",
+   "note": "Style 3 plus sparse hatching in the shadow band, faint brushed texture on big surfaces and film grain.",
+   "image": "game3d/design/style/rough/style-4.jpg.webp"
+  },
+  {
+   "id": "5",
+   "label": "5. Bold graphic",
+   "note": "Two tones only, heavy ink, palette mapped to navy, slate and white, a hard rim light. The loudest.",
+   "image": "game3d/design/style/rough/style-5.jpg.webp"
+  },
+  {
+   "id": "6",
+   "label": "6. Painted cel",
+   "note": "Cel tones with brushed texture and coloured line art (a dark shade of the colour under it, not black), palette map and grain.",
+   "image": "game3d/design/style/rough/style-6.jpg.webp"
+  },
+  {
+   "id": "none",
+   "label": "None of these, push further",
+   "note": "None is close enough yet; try again from a different angle."
+  }
+ ],
+ "links": [
+  {
+   "label": "Try a style in the game: add ?style=N to the game URL",
+   "href": "game3d/?style=3"
+  }
+ ],
+ "superseded_by": "style-avenues"
+}

@@ -1,0 +1,31 @@
+{
+ "title": "Office performance",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "decided",
+ "multi": false,
+ "question": "The new metrics show the office at 4,130 draw calls on desktop and 2,714 on phone (phone budget 250; it was 1,305 on phone before the style pass). Every place also has 270-880 ms hitches, probably the next place loading. Fix it now?",
+ "options": [
+  {
+   "id": "now",
+   "label": "Fix now, keep the look",
+   "note": "Merge static meshes (the batching pass already exists), share materials, instance repeated props (chairs, monitors, binders) and load the next place in slices so it doesn't hitch. Target: phone office near its budget, same look in before/after screenshots."
+  },
+  {
+   "id": "lighter-phone",
+   "label": "Fix now, and allow a lighter look on phone",
+   "note": "As above, plus phone may drop some modelled detail or surface patterns if that's what it takes."
+  },
+  {
+   "id": "later",
+   "label": "Later",
+   "note": "Keep building day 1 first."
+  }
+ ],
+ "decided": [
+  "lighter-phone"
+ ],
+ "decision": "Fix now, lighter look on phone allowed; low priority but should be done",
+ "issue": 11,
+ "media": []
+}

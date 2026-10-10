@@ -1,0 +1,52 @@
+{
+ "title": "The walk home and Eric’s dorm",
+ "date": "2026-09-29",
+ "by": "Codex and Claude",
+ "status": "decided",
+ "question": "Does this short walk and room layout work for day 1?",
+ "multi": false,
+ "options": [
+  {
+   "id": "dorm-a",
+   "label": "dorm-a: fountain path and direct entrance",
+   "image": "art/candidates/dorm-route-1/04-route-muted.png.webp",
+   "images": [
+    "art/candidates/dorm-route-1/02-room.png.webp"
+   ],
+   "note": "Walk from head office around the fountain to a sheltered dorm entrance, then through a short passage to Eric’s room. Bed left, desk right, boxes beside the desk; the window faces a nearby concrete wall. These are layout concepts, with the muted exterior revised after review. The room view does not establish the exact distance to the wall."
+  },
+  {
+   "id": "dorm-b",
+   "label": "dorm-b: seaward promenade and courtyard entrance",
+   "image": "art/candidates/dorm-route-claude/01-layout.png.webp",
+   "images": [
+    "art/candidates/dorm-route-claude/02-route.png.webp",
+    "art/candidates/dorm-route-claude/03-walk.png.webp",
+    "art/candidates/dorm-route-claude/04-dorm.png.webp",
+    "art/candidates/dorm-route-claude/05-room.png.webp"
+   ],
+   "note": "Walk from head office past the bike racks, along the seaward shop fronts and konbini, then through a courtyard to the dorm. About 56 game units (85 m), roughly 37 seconds of walking. Coin laundry and sento sit beside the dorm. Eric’s ground-floor room at the back of block A faces block B’s bare concrete wall, 2 m away; bed left, desk under the window, boxes by the bed. These are planning scenes rendered with the game’s own 3D modules, not a playable route. Eric obscures part of the desk and window in the room view; shop signs are still bright."
+  }
+ ],
+ "links": [
+  {
+   "label": "Every render attempt and full prompt",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/art/candidates/dorm-route-1/attempts.md"
+  },
+  {
+   "label": "dorm-b: every Claude render, staging and source settings",
+   "href": "#doc/reviews/dorm-route-1/claude-attempts.md"
+  },
+  {
+   "label": "Planned places and the continuous trip",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  },
+  {
+   "label": "Picked island layout",
+   "href": "#review/island-map-3"
+  }
+ ],
+ "decision": "No pick. dorm-b rejected as unnatural ('checklist... plonk it down'). Generate the full island map first (round 4), with the station as its own building connected to head office, the security gate there, and the walk to the office.",
+ "issue": 70,
+ "media": []
+}

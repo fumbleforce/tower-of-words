@@ -1,0 +1,36 @@
+{
+ "title": "Writing contest: day 2 sub-plots",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "decided",
+ "multi": false,
+ "question": "Which writer should lead creative writing? Each wrote three day-2 sub-plots with full dialogue from the same brief (contest/day2/BRIEF.md). Comment on each sub-plot if you like; who is who is revealed after you send.",
+ "options": [
+  {
+   "id": "A",
+   "label": "Writer A",
+   "note": "[Read A](contest/day2/blind/read.html?w=A&s=1): three sub-plots."
+  },
+  {
+   "id": "B",
+   "label": "Writer B",
+   "note": "[Read B](contest/day2/blind/read.html?w=B&s=1): three sub-plots."
+  }
+ ],
+ "links": [
+  {
+   "label": "Read both entries (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/"
+  },
+  {
+   "label": "The brief (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/"
+  }
+ ],
+ "decided": [
+  "B"
+ ],
+ "decision": "B (Codex) leads creative writing. B: clearer scenes, but too verbose, too many steps and detours. A (Claude): tries too hard to be funny, unclear situation. A welcome party at the end of the day is a good idea.",
+ "issue": 14,
+ "media": []
+}

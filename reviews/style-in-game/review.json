@@ -1,0 +1,101 @@
+{
+ "title": "Surface patterns, softer baked light and modelled detail in the game",
+ "date": "2026-09-29",
+ "by": "style-in-game agent",
+ "status": "decided",
+ "multi": true,
+ "question": "Your picks 2, 4 and 8 are in all three places now. Does each one look right, or should any change?",
+ "media": [
+  {
+   "image": "game3d/shots/style-in-game/office-close.jpg.webp",
+   "caption": "Office close up: before and after (all three on)"
+  },
+  {
+   "image": "game3d/shots/style-in-game/gate-close.jpg.webp",
+   "caption": "Gate close up: the plant pot and the bench fabric get patterns too"
+  },
+  {
+   "image": "game3d/shots/style-in-game/train-close.jpg.webp",
+   "caption": "Train close up"
+  },
+  {
+   "image": "game3d/shots/style-in-game/office-desk.jpg.webp",
+   "caption": "Office at the game camera (desktop)"
+  },
+  {
+   "image": "game3d/shots/style-in-game/gate-desk.jpg.webp",
+   "caption": "Gate at the game camera (desktop)"
+  },
+  {
+   "image": "game3d/shots/style-in-game/train-desk.jpg.webp",
+   "caption": "Train at the game camera (desktop)"
+  },
+  {
+   "image": "game3d/shots/style-in-game/office-phone.jpg.webp",
+   "caption": "Office on a phone"
+  },
+  {
+   "image": "game3d/shots/style-in-game/gate-phone.jpg.webp",
+   "caption": "Gate on a phone"
+  },
+  {
+   "image": "game3d/shots/style-in-game/train-phone.jpg.webp",
+   "caption": "Train on a phone"
+  }
+ ],
+ "options": [
+  {
+   "id": "surfaces",
+   "label": "surfaces. Surface patterns on every model, with a switch in Settings",
+   "note": "Every model except the people: floors, walls, desks, chairs, benches, plant pots, mugs, metal. Settings > Graphics > Surface detail turns it off and on at once.",
+   "image": "game3d/shots/style-in-game/extra/settings-desk.png.webp",
+   "images": [
+    "game3d/shots/style-in-game/extra/settings-phone.png.webp",
+    "game3d/shots/style-in-game/gate-close.jpg.webp",
+    "game3d/shots/style-in-game/extra/showcase-look2.png.webp"
+   ]
+  },
+  {
+   "id": "bake-soft",
+   "label": "bake-soft. Baked light, softer",
+   "note": "About half the darkening of the first version, and less warmth. Left: the first version, right: the softer one.",
+   "image": "game3d/shots/style-in-game/showcase-soft-close.jpg.webp",
+   "images": [
+    "game3d/shots/style-in-game/office-soft-close.jpg.webp",
+    "game3d/shots/style-in-game/gate-soft-close.jpg.webp",
+    "game3d/shots/style-in-game/train-soft-close.jpg.webp",
+    "game3d/shots/style-in-game/office-soft-desk.jpg.webp"
+   ]
+  },
+  {
+   "id": "detail",
+   "label": "detail. Modelled detail as in the showcase",
+   "note": "Desks with keyboards, trays, pen cups and drawer handles; chairs with a five-star base; plant pots with a rim, saucer and pebbles; doors with panels, handles and hinges; skirting and wall caps; shelves and filing cabinets; mugs with handles.",
+   "image": "game3d/shots/style-in-game/office-close.jpg.webp",
+   "images": [
+    "game3d/shots/style-in-game/extra/showcase-look8.png.webp"
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Office, as now",
+   "href": "game3d/?place=office&skip"
+  },
+  {
+   "label": "Office, the look before",
+   "href": "game3d/?place=office&skip&plainlook"
+  },
+  {
+   "label": "Office with the first (hard) baked light",
+   "href": "game3d/?place=office&skip&bake=hard"
+  }
+ ],
+ "decided": [
+  "surfaces",
+  "bake-soft",
+  "detail"
+ ],
+ "decision": "all three approved: surfaces 'looks good', bake-soft 'good', detail 'great'",
+ "issue": 46
+}

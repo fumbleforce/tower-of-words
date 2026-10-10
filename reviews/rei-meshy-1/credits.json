@@ -1,0 +1,75 @@
+[
+ {
+  "service": "meshy",
+  "part": "rei-1",
+  "task": "01a10b4d-f3a3-7349-b3f8-3ac2a38dcb58",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 269,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/rei-meshy-1/pics/d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "rei-1-tex",
+  "task": "01a10b55-ceeb-7585-94b5-c26afc47da79",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 259,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/rei-meshy-1/meshy/rei-1-uv.glb"
+  },
+  "input": "art/parts/rei-meshy-1/pics/d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "rei-1-tex-rig",
+  "task": "01a10b56-53f4-72d5-a319-49db86845709",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10b55-ceeb-7585-94b5-c26afc47da79",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "rei-sit",
+  "task": "01a10b56-aa8d-76a7-9f37-677658da9b4b",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 251,
+  "settings": {
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "note": "for the game: tools/characters/meshy.py anim rei <rig task> 32 sit"
+ },
+ {
+  "service": "meshy",
+  "part": "rei-1-tex-b-rig",
+  "task": "01a10b8e-5d2a-73a8-80f1-5658b8885fbe",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "model": "art/parts/rei-meshy-1/meshy/rei-1-tex.glb",
+   "height_meters": 1.1
+  }
+ }
+]

@@ -1,0 +1,125 @@
+{
+ "title": "Carina: her 3D model, made the way Kuro, Aoi, Emi and Rei were",
+ "date": "2026-10-05",
+ "by": "Claude (carina-meshy agent)",
+ "status": "superseded",
+ "question": "The sheets marked ChatGPT pictures are pictures; every other sheet is a render of a real rigged model, which you can turn and play in the live viewer (first link). carina-2 is made from your approved picture of her and is her body in the game now; is she right?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/parts/carina-meshy-1/sheets/turn2.webp.webp",
+   "caption": "Real model, carina-2, turned around: front, three-quarter (the left side of the image turned to us), side, back, the other three-quarter, face. Same camera and light as Kuro's, Aoi's, Emi's and Rei's rounds. For the live version, turn her in the viewer (first link)."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/viewer2.webp.webp",
+   "caption": "Real model, carina-2, in the live viewer beside the in-game Eric, Mio, Kuro, Aoi and Emi: rest, idle, walk, walk from the side, walk at three-quarter. The idle and walk are the game's."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r9-inputs.webp",
+   "caption": "ChatGPT pictures. Your words on your render: \"yes this is carina\". One chat in ChatGPT's image model (openai/gpt-5.4-image-2 on OpenRouter), as for Kuro, Aoi, Emi and Rei. Step 1 attached these two: your picture of her (art/candidates/portraits/carina-9-jorgen) and your Mio chibi."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r9-steps.webp",
+   "caption": "ChatGPT pictures. Every take, in order, with your words as written: 1 \"make a 3d chibi anime character in the style of the attached image\" (na1), 2 \"Simplify female character a LOT to match the detail level of the other chibi, with open eyes\" (nb1), 3 \"Simpler head model, no piercings\" (nc1: the ear ring and the two brow piercings gone, the props rule), then your angle prompt (d: nd1). One take each; the dark roots and teal eyes stayed through every step. 4 takes, $1.00."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/shape2-previews.webp",
+   "caption": "Renders of the real model from here on. Meshy image-to-3D from nd1 with Kuro's settings: smart topology (meshy-t2), 1,050 polygons, A-pose, no texture, 5 credits. Meshy's previews; first roll, kept."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/uv2.webp.webp",
+   "caption": "The face-first UV unwrap before the texture pass (Aoi's uv_bl.py, zmin=0.58 seed=0.72): the front of the face as one piece at 3 times the detail of the rest (50 polygons, red). Then Meshy retexture on that mesh, styled from nd1, keep the UVs, lighting removed, no PBR, 10 credits. Right: the texture Meshy painted."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/rig2.webp.webp",
+   "caption": "The rig, as on Rei (reviews/rei-meshy-1, rei-1-rig2). Left: Meshy's auto-rig (5 credits, needed as the base file): her right foot's joint 8 cm further forward than her left, and the knees in front of the legs. Right: ours, the game's Meshy skeleton (the same 24 bones and names as the other Meshy people) with Emi's bone orientations, each joint placed from her own mesh (the middle of each trouser leg, of the top, of each sleeve), left and right mirrored. Her model is untouched; Emi's walk, run and Chair_Sit_Idle_F play on her, and her head, chest and hips turn exactly as Emi's in the walk (4.5, 17 and 7 degrees)."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/game/carina-1366x860-train.png.webp",
+   "caption": "In the game as the player (?mc=carina, 1366x860): standing on the day-1 train. 1.12 tall, as Mio and Kuro."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/game/carina-1366x860-gate.png.webp",
+   "caption": "In the game as the player at the gate. The protagonist check (npm run check:mc) passes at 390x844 and 1366x860: in frame on the train and at the gate, seated right on the train's seats and the gate's bench. The fast test passes as Carina at both sizes, with only her voice clips missing (she has no voice yet)."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r6-inputs.webp",
+   "caption": "Before your picture was approved: carina-1, made from round 6 tile 3 (your words: \"3. hair 2, roots + stripes pretty good\", and of round 6's eyes \"she looks unhinged\"). ChatGPT pictures from here to the next note. Step 1 attached these two."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/r6-steps.webp.webp",
+   "caption": "ChatGPT pictures, every take in order: 1 (a1), 2 (b1), 3 \"Simpler head model, calm relaxed expression, no lanyard, no badge\" (c1, then c2 again: both dropped the dark roots and stripes), a follow-up on c1 \"give her hair the dark roots and a few dark stripes like in the portrait, everything else the same\" (r1: the roots back, and the lanyard too), then your angle prompt (d1: lanyard gone). 6 takes, $1.49."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/shape1-previews.webp",
+   "caption": "Real model from here on: carina-1's shape from d1 (same settings, 5 credits). Not reused for carina-2: its rounded helmet bob doesn't match the straight bob of your picture."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/uv1.webp.webp",
+   "caption": "carina-1's face-first UV layout (the sunken eye pieces added to the face piece) and Meshy's texture on it (10 credits)."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/turn1.webp.webp",
+   "caption": "carina-1 turned around, same camera and light."
+  },
+  {
+   "image": "art/parts/carina-meshy-1/sheets/rig1.webp.webp",
+   "caption": "carina-1's rig: Meshy's auto-rig (5 credits) and ours. Meshy credits for the round: 40 (carina-1 20, carina-2 20); balance 194 after."
+  }
+ ],
+ "options": [
+  {
+   "id": "carina-2",
+   "label": "carina-2 (from your picture, in the game)",
+   "image": "art/parts/carina-meshy-1/renders/tex2/r45.png.webp",
+   "images": [
+    "art/parts/carina-meshy-1/renders/tex2/front.png.webp",
+    "art/parts/carina-meshy-1/renders/tex2/face.png.webp",
+    "art/parts/carina-meshy-1/renders/tex2/back.png.webp",
+    "art/parts/carina-meshy-1/viewer/close-2/walk-80.png.webp",
+    "art/parts/carina-meshy-1/pics/nd1.png.webp"
+   ],
+   "note": "From ChatGPT picture nd1 (your picture of her, steps 1-3 and the angle prompt). Meshy smart topology 1,050, A-pose; our face-first UVs; Meshy retexture styled from nd1; our rig with Emi's walk, run and sit and the relaxed-3 idle. 1.12 tall. Her body in the game when she plays (game3d/data/mc/carina.json). No phone pose or gestures yet. Meshy 20 credits, pictures $1.00."
+  },
+  {
+   "id": "carina-1",
+   "label": "carina-1 (from round 6, before your pick)",
+   "image": "art/parts/carina-meshy-1/renders/tex/r45.png.webp",
+   "images": [
+    "art/parts/carina-meshy-1/renders/tex/front.png.webp",
+    "art/parts/carina-meshy-1/renders/tex/face.png.webp",
+    "art/parts/carina-meshy-1/renders/tex/back.png.webp",
+    "art/parts/carina-meshy-1/pics/d1.png.webp"
+   ],
+   "note": "From ChatGPT picture d1 (round 6 tile 3). Same settings and our rig. Superseded by your approved picture; not in the game. Meshy 20 credits, pictures $1.49."
+  }
+ ],
+ "links": [
+  {
+   "label": "Round 2: requested fixes and trouser colours",
+   "href": "#review/carina-meshy-2"
+  },
+  {
+   "label": "Live 3D: carina-2 beside the in-game Eric, Mio, Kuro, Aoi and Emi (turn, zoom, idle, walk; switch attempts to compare; on the local server)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/characters/parts/viewer.html"
+  },
+  {
+   "label": "Live 3D: carina-2 alone (turn, zoom, idle, walk)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/characters/parts/viewer.html"
+  },
+  {
+   "label": "Play as Carina (public game, ?mc=carina)",
+   "href": "https://fumbleforce.github.io/tower-of-words/game3d/?mc=carina"
+  },
+  {
+   "label": "Rei's rig, the same method (rei-meshy-1)",
+   "href": "#review/rei-meshy-1"
+  }
+ ],
+ "decided": [
+  "carina-2"
+ ],
+ "decision": "carina-2 picked with fixes: waist seam, head 15% smaller, trouser colour; fix round running",
+ "decided_at": "2026-10-05T23:11:13+0200",
+ "issue": 268
+}

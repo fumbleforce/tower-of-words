@@ -1,0 +1,23 @@
+{
+ "title": "Publish the site from a gh-pages branch",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "decided",
+ "multi": false,
+ "question": "Binaries are out of git now (R2), so the next push of main would leave the public Pages site without its images. The fix is to publish the site from its own gh-pages branch, built from the game plus its assets on disk (25 MB). OK to do it?",
+ "options": [
+  {
+   "id": "go",
+   "label": "Yes: build gh-pages, switch Pages to it, then push main",
+   "note": "Claude runs `sh game3d/tools/deploy-pages.sh --push` (a separate gh-pages branch, replaced on each deploy so it doesn't grow), switches the repo's Pages source to gh-pages with the GitHub CLI, checks the live site loads, then pushes main."
+  },
+  {
+   "id": "wait",
+   "label": "Not now",
+   "note": "Main stays unpushed until you say so."
+  }
+ ],
+ "decision": "Jørgen in chat: 'push dont care about existing page' (no gh-pages switch)",
+ "issue": 40,
+ "media": []
+}

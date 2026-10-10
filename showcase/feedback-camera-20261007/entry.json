@@ -1,0 +1,475 @@
+{
+ "title": "Feedback preserves the current camera",
+ "date": "2026-10-07",
+ "by": "Codex",
+ "caption": "Opening feedback keeps the third-person view in its screenshot, pauses movement and releases mouse capture. Closing resumes the normal camera policy.",
+ "preview": "round4-1366-follow-key-open",
+ "sections": [
+  {
+   "title": "round4",
+   "caption": "Final nine openings: actual room enclosure, desktop follow/overview and phone; F8 and HUD button. Prepaused cases deliberately set pause state as a diagnostic. Screenshots retain existing HUD-compositor limitations.",
+   "images": [
+    {
+     "id": "round4-1366-follow-button-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-button-attachment.webp.webp",
+     "caption": "1366 follow button attachment"
+    },
+    {
+     "id": "round4-1366-follow-button-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-button-before.webp.webp",
+     "caption": "1366 follow button before"
+    },
+    {
+     "id": "round4-1366-follow-button-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-button-closed.webp.webp",
+     "caption": "1366 follow button closed"
+    },
+    {
+     "id": "round4-1366-follow-button-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-button-open.webp.webp",
+     "caption": "1366 follow button open"
+    },
+    {
+     "id": "round4-1366-follow-key-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-key-attachment.webp.webp",
+     "caption": "1366 follow key attachment"
+    },
+    {
+     "id": "round4-1366-follow-key-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-key-before.webp.webp",
+     "caption": "1366 follow key before"
+    },
+    {
+     "id": "round4-1366-follow-key-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-key-closed.webp.webp",
+     "caption": "1366 follow key closed"
+    },
+    {
+     "id": "round4-1366-follow-key-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-key-open.webp.webp",
+     "caption": "1366 follow key open"
+    },
+    {
+     "id": "round4-1366-follow-paused-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-paused-attachment.webp.webp",
+     "caption": "1366 follow paused attachment"
+    },
+    {
+     "id": "round4-1366-follow-paused-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-paused-before.webp.webp",
+     "caption": "1366 follow paused before"
+    },
+    {
+     "id": "round4-1366-follow-paused-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-paused-closed.webp.webp",
+     "caption": "1366 follow paused closed"
+    },
+    {
+     "id": "round4-1366-follow-paused-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-follow-paused-open.webp.webp",
+     "caption": "1366 follow paused open"
+    },
+    {
+     "id": "round4-1366-overview-button-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-button-attachment.webp.webp",
+     "caption": "1366 overview button attachment"
+    },
+    {
+     "id": "round4-1366-overview-button-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-button-before.webp.webp",
+     "caption": "1366 overview button before"
+    },
+    {
+     "id": "round4-1366-overview-button-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-button-closed.webp.webp",
+     "caption": "1366 overview button closed"
+    },
+    {
+     "id": "round4-1366-overview-button-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-button-open.webp.webp",
+     "caption": "1366 overview button open"
+    },
+    {
+     "id": "round4-1366-overview-key-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-key-attachment.webp.webp",
+     "caption": "1366 overview key attachment"
+    },
+    {
+     "id": "round4-1366-overview-key-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-key-before.webp.webp",
+     "caption": "1366 overview key before"
+    },
+    {
+     "id": "round4-1366-overview-key-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-key-closed.webp.webp",
+     "caption": "1366 overview key closed"
+    },
+    {
+     "id": "round4-1366-overview-key-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-key-open.webp.webp",
+     "caption": "1366 overview key open"
+    },
+    {
+     "id": "round4-1366-overview-paused-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-paused-attachment.webp.webp",
+     "caption": "1366 overview paused attachment"
+    },
+    {
+     "id": "round4-1366-overview-paused-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-paused-before.webp.webp",
+     "caption": "1366 overview paused before"
+    },
+    {
+     "id": "round4-1366-overview-paused-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-paused-closed.webp.webp",
+     "caption": "1366 overview paused closed"
+    },
+    {
+     "id": "round4-1366-overview-paused-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/1366-overview-paused-open.webp.webp",
+     "caption": "1366 overview paused open"
+    },
+    {
+     "id": "round4-390-follow-button-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-button-attachment.webp.webp",
+     "caption": "390 follow button attachment"
+    },
+    {
+     "id": "round4-390-follow-button-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-button-before.webp.webp",
+     "caption": "390 follow button before"
+    },
+    {
+     "id": "round4-390-follow-button-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-button-closed.webp.webp",
+     "caption": "390 follow button closed"
+    },
+    {
+     "id": "round4-390-follow-button-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-button-open.webp.webp",
+     "caption": "390 follow button open"
+    },
+    {
+     "id": "round4-390-follow-key-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-key-attachment.webp.webp",
+     "caption": "390 follow key attachment"
+    },
+    {
+     "id": "round4-390-follow-key-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-key-before.webp.webp",
+     "caption": "390 follow key before"
+    },
+    {
+     "id": "round4-390-follow-key-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-key-closed.webp.webp",
+     "caption": "390 follow key closed"
+    },
+    {
+     "id": "round4-390-follow-key-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-key-open.webp.webp",
+     "caption": "390 follow key open"
+    },
+    {
+     "id": "round4-390-follow-paused-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-paused-attachment.webp.webp",
+     "caption": "390 follow paused attachment"
+    },
+    {
+     "id": "round4-390-follow-paused-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-paused-before.webp.webp",
+     "caption": "390 follow paused before"
+    },
+    {
+     "id": "round4-390-follow-paused-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-paused-closed.webp.webp",
+     "caption": "390 follow paused closed"
+    },
+    {
+     "id": "round4-390-follow-paused-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round4/390-follow-paused-open.webp.webp",
+     "caption": "390 follow paused open"
+    }
+   ]
+  },
+  {
+   "title": "round3",
+   "caption": "Retained harness failure: capture mode disables the real pause menu.",
+   "images": [
+    {
+     "id": "round3-1366-follow-button-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round3/1366-follow-button-attachment.webp.webp",
+     "caption": "1366 follow button attachment"
+    },
+    {
+     "id": "round3-1366-follow-button-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round3/1366-follow-button-before.webp.webp",
+     "caption": "1366 follow button before"
+    },
+    {
+     "id": "round3-1366-follow-button-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round3/1366-follow-button-closed.webp.webp",
+     "caption": "1366 follow button closed"
+    },
+    {
+     "id": "round3-1366-follow-button-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round3/1366-follow-button-open.webp.webp",
+     "caption": "1366 follow button open"
+    },
+    {
+     "id": "round3-1366-follow-failure",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round3/1366-follow-failure.webp.webp",
+     "caption": "1366 follow failure"
+    },
+    {
+     "id": "round3-1366-follow-key-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round3/1366-follow-key-attachment.webp.webp",
+     "caption": "1366 follow key attachment"
+    },
+    {
+     "id": "round3-1366-follow-key-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round3/1366-follow-key-before.webp.webp",
+     "caption": "1366 follow key before"
+    },
+    {
+     "id": "round3-1366-follow-key-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round3/1366-follow-key-closed.webp.webp",
+     "caption": "1366 follow key closed"
+    },
+    {
+     "id": "round3-1366-follow-key-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round3/1366-follow-key-open.webp.webp",
+     "caption": "1366 follow key open"
+    }
+   ]
+  },
+  {
+   "title": "round2",
+   "caption": "Six openings pass, with the third-person camera on the dorm corridor.",
+   "images": [
+    {
+     "id": "round2-1366-follow-button-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-follow-button-attachment.webp.webp",
+     "caption": "1366 follow button attachment"
+    },
+    {
+     "id": "round2-1366-follow-button-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-follow-button-before.webp.webp",
+     "caption": "1366 follow button before"
+    },
+    {
+     "id": "round2-1366-follow-button-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-follow-button-closed.webp.webp",
+     "caption": "1366 follow button closed"
+    },
+    {
+     "id": "round2-1366-follow-button-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-follow-button-open.webp.webp",
+     "caption": "1366 follow button open"
+    },
+    {
+     "id": "round2-1366-follow-key-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-follow-key-attachment.webp.webp",
+     "caption": "1366 follow key attachment"
+    },
+    {
+     "id": "round2-1366-follow-key-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-follow-key-before.webp.webp",
+     "caption": "1366 follow key before"
+    },
+    {
+     "id": "round2-1366-follow-key-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-follow-key-closed.webp.webp",
+     "caption": "1366 follow key closed"
+    },
+    {
+     "id": "round2-1366-follow-key-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-follow-key-open.webp.webp",
+     "caption": "1366 follow key open"
+    },
+    {
+     "id": "round2-1366-overview-button-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-overview-button-attachment.webp.webp",
+     "caption": "1366 overview button attachment"
+    },
+    {
+     "id": "round2-1366-overview-button-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-overview-button-before.webp.webp",
+     "caption": "1366 overview button before"
+    },
+    {
+     "id": "round2-1366-overview-button-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-overview-button-closed.webp.webp",
+     "caption": "1366 overview button closed"
+    },
+    {
+     "id": "round2-1366-overview-button-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-overview-button-open.webp.webp",
+     "caption": "1366 overview button open"
+    },
+    {
+     "id": "round2-1366-overview-key-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-overview-key-attachment.webp.webp",
+     "caption": "1366 overview key attachment"
+    },
+    {
+     "id": "round2-1366-overview-key-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-overview-key-before.webp.webp",
+     "caption": "1366 overview key before"
+    },
+    {
+     "id": "round2-1366-overview-key-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-overview-key-closed.webp.webp",
+     "caption": "1366 overview key closed"
+    },
+    {
+     "id": "round2-1366-overview-key-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/1366-overview-key-open.webp.webp",
+     "caption": "1366 overview key open"
+    },
+    {
+     "id": "round2-390-follow-button-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/390-follow-button-attachment.webp.webp",
+     "caption": "390 follow button attachment"
+    },
+    {
+     "id": "round2-390-follow-button-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/390-follow-button-before.webp.webp",
+     "caption": "390 follow button before"
+    },
+    {
+     "id": "round2-390-follow-button-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/390-follow-button-closed.webp.webp",
+     "caption": "390 follow button closed"
+    },
+    {
+     "id": "round2-390-follow-button-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/390-follow-button-open.webp.webp",
+     "caption": "390 follow button open"
+    },
+    {
+     "id": "round2-390-follow-key-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/390-follow-key-attachment.webp.webp",
+     "caption": "390 follow key attachment"
+    },
+    {
+     "id": "round2-390-follow-key-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/390-follow-key-before.webp.webp",
+     "caption": "390 follow key before"
+    },
+    {
+     "id": "round2-390-follow-key-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/390-follow-key-closed.webp.webp",
+     "caption": "390 follow key closed"
+    },
+    {
+     "id": "round2-390-follow-key-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round2/390-follow-key-open.webp.webp",
+     "caption": "390 follow key open"
+    }
+   ]
+  },
+  {
+   "title": "round1",
+   "caption": "First fix attempt. Follow view passed; the overview assertion sampled too early while its camera was still easing.",
+   "images": [
+    {
+     "id": "round1-1366-follow-button-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-follow-button-attachment.webp.webp",
+     "caption": "1366 follow button attachment"
+    },
+    {
+     "id": "round1-1366-follow-button-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-follow-button-before.webp.webp",
+     "caption": "1366 follow button before"
+    },
+    {
+     "id": "round1-1366-follow-button-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-follow-button-closed.webp.webp",
+     "caption": "1366 follow button closed"
+    },
+    {
+     "id": "round1-1366-follow-button-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-follow-button-open.webp.webp",
+     "caption": "1366 follow button open"
+    },
+    {
+     "id": "round1-1366-follow-key-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-follow-key-attachment.webp.webp",
+     "caption": "1366 follow key attachment"
+    },
+    {
+     "id": "round1-1366-follow-key-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-follow-key-before.webp.webp",
+     "caption": "1366 follow key before"
+    },
+    {
+     "id": "round1-1366-follow-key-closed",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-follow-key-closed.webp.webp",
+     "caption": "1366 follow key closed"
+    },
+    {
+     "id": "round1-1366-follow-key-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-follow-key-open.webp.webp",
+     "caption": "1366 follow key open"
+    },
+    {
+     "id": "round1-1366-overview-failure",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-overview-failure.webp.webp",
+     "caption": "1366 overview failure"
+    },
+    {
+     "id": "round1-1366-overview-key-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-overview-key-attachment.webp.webp",
+     "caption": "1366 overview key attachment"
+    },
+    {
+     "id": "round1-1366-overview-key-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-overview-key-before.webp.webp",
+     "caption": "1366 overview key before"
+    },
+    {
+     "id": "round1-1366-overview-key-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/round1/1366-overview-key-open.webp.webp",
+     "caption": "1366 overview key open"
+    }
+   ]
+  },
+  {
+   "title": "baseline",
+   "caption": "Reproduced failure before the fix: feedback changed the third-person camera to overview.",
+   "images": [
+    {
+     "id": "baseline-1366-follow-failure",
+     "image": "bible/shots/showcase/feedback-camera-20261007/baseline/1366-follow-failure.webp.webp",
+     "caption": "1366 follow failure"
+    },
+    {
+     "id": "baseline-1366-follow-key-attachment",
+     "image": "bible/shots/showcase/feedback-camera-20261007/baseline/1366-follow-key-attachment.webp.webp",
+     "caption": "1366 follow key attachment"
+    },
+    {
+     "id": "baseline-1366-follow-key-before",
+     "image": "bible/shots/showcase/feedback-camera-20261007/baseline/1366-follow-key-before.webp.webp",
+     "caption": "1366 follow key before"
+    },
+    {
+     "id": "baseline-1366-follow-key-open",
+     "image": "bible/shots/showcase/feedback-camera-20261007/baseline/1366-follow-key-open.webp.webp",
+     "caption": "1366 follow key open"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play locally",
+   "href": "game3d/"
+  },
+  {
+   "label": "Validation and limitations",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/feedback-camera.md"
+  }
+ ],
+ "media": []
+}

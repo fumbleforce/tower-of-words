@@ -1,0 +1,136 @@
+{
+ "title": "Carina: portrait round 6 (the liked tile, small changes to hair and expression)",
+ "date": "2026-10-05",
+ "by": "art agent (Carina portrait 6)",
+ "status": "decided",
+ "multi": true,
+ "question": "Is any of these Carina, or which hair line and which expression line should I keep?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/carina-6/sheet.webp.webp",
+   "caption": "The tile you liked ('The very last carina is most interesting') is first, then Mio and Kuro. Your words after round 5: \"she only needed the original prompt and a bit of adjustment on hair and expression\". So every tile here is that tile's exact prompt, negative, seed and settings with one or two phrases swapped in the hair line or the expression, no recolouring or editing of any kind. Hair 1: '(blonde hair with dark roots, honey blonde and golden lengths, obvious root regrowth:1.5)' replaces the dark-brown-crown-fading and 'ombre hair' phrase. Hair 2: '(blonde hair with dark roots and a few dark stripes, honey blonde and golden lengths:1.5)'. Hair 3: '(honey blonde hair, brown roots:1.5)'. Smile 1: '(soft smile:1.2)' and smile 2: '(relaxed expression, slightly amused:1.2)' replace '(confident slight smile:1.2)'. Tiles 1 to 10 are the original seed; the last three are a second seed of 3, 7 and 8. Not changed, as asked: the brows and lashes words are still the original's ('strong defined brows', 'long eyelashes'), so the brows and lashes are still fairly strong."
+  }
+ ],
+ "options": [
+  {
+   "id": "carina6-01",
+   "label": "1. original, re-render same seed",
+   "image": "art/candidates/portraits/carina-6/carina6-01-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-01.webp.webp"
+   ],
+   "note": "dark top, blonde ends (as r4). Seed 10496. Changed against the original prompt: none (the original, re-rendered to check it reproduces). Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. FULL PROMPT: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, a beautiful Swedish woman in her late twenties, (attractive:1.2), fair skin, flat skin colour, light natural makeup, soft pink full lips, long eyelashes, thin gold chain necklace, company lanyard, (slim narrow build, narrow shoulders, small bust:1.3), pale grey eyes, high cheekbones, strong defined brows, strong straight nose, full lips, long face, soft jaw, (wide-set eyes, wide space between the eyes:1.5), (dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5), (shoulder-length hair:1.4), sleek long bob to the shoulders, side parting, one side tucked behind her left ear (image right), fitted black knit top and small silver studs, arms relaxed at her sides, body turned slightly, face toward the viewer, both eyes visible, looking at the viewer, (confident slight smile:1.2), (matte, flat colour fills, soft cel shading, bold clean dark lineart, thick outlines:1.25), waist-up portrait, three-quarter view, (the whole head inside the frame with a very wide empty margin above the hair:2.4), (head low in the frame:1.6), (plain light grey background:1.3), soft even studio light NEGATIVE: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, sunglasses, tinted eyewear, colored background, green background, gradient background, red hair, orange hair, cropped head, head out of frame, from behind, profile, side view, from side, black hair, (ash blond hair, grey hair, silver hair, white hair, platinum hair, dull hair, muted colours:1.3), cleavage, (large breasts, huge breasts, wide shoulders, broad shoulders:1.3), canary yellow hair, neon yellow hair, (very long hair, hair past the chest, waist-length hair:1.3), (close-set eyes, narrow space between the eyes:1.3), circle, halo, nude, shy, sad, frown, tan skin, glossy, shiny hair, specular highlights, glossy skin, wet skin, oily skin, airbrushed, smooth gradient shading, 3d render, glossy lips, lens flare, glasses, eyewear"
+  },
+  {
+   "id": "carina6-02",
+   "label": "2. hair 1, dark roots no ombre",
+   "image": "art/candidates/portraits/carina-6/carina6-02-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-02.webp.webp"
+   ],
+   "note": "blonde, dark roots at part. Seed 10496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(blonde hair with dark roots, honey blonde and golden lengths, obvious root regrowth:1.5)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-03",
+   "label": "3. hair 2, roots + stripes",
+   "image": "art/candidates/portraits/carina-6/carina6-03-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-03.webp.webp"
+   ],
+   "note": "blonde, roots, stripes faint. Seed 10496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(blonde hair with dark roots and a few dark stripes, honey blonde and golden lengths:1.5)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-04",
+   "label": "4. hair 3, honey brown roots",
+   "image": "art/candidates/portraits/carina-6/carina6-04-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-04.webp.webp"
+   ],
+   "note": "honey, very faint roots. Seed 10496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(honey blonde hair, brown roots:1.5)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-05",
+   "label": "5. smile 1, soft smile",
+   "image": "art/candidates/portraits/carina-6/carina6-05-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-05.webp.webp"
+   ],
+   "note": "dark top still. Seed 10496. Changed against the original prompt: expression: \"(confident slight smile:1.2)\" -> \"(soft smile:1.2)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-06",
+   "label": "6. smile 2, relaxed amused",
+   "image": "art/candidates/portraits/carina-6/carina6-06-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-06.webp.webp"
+   ],
+   "note": "dark top still. Seed 10496. Changed against the original prompt: expression: \"(confident slight smile:1.2)\" -> \"(relaxed expression, slightly amused:1.2)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-07",
+   "label": "7. hair 1 + smile 1",
+   "image": "art/candidates/portraits/carina-6/carina6-07-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-07.webp.webp"
+   ],
+   "note": "blonde, roots, soft smile. Seed 10496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(blonde hair with dark roots, honey blonde and golden lengths, obvious root regrowth:1.5)\" ; expression: \"(confident slight smile:1.2)\" -> \"(soft smile:1.2)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-08",
+   "label": "8. hair 1 + smile 2",
+   "image": "art/candidates/portraits/carina-6/carina6-08-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-08.webp.webp"
+   ],
+   "note": "blonde, roots, relaxed. Seed 10496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(blonde hair with dark roots, honey blonde and golden lengths, obvious root regrowth:1.5)\" ; expression: \"(confident slight smile:1.2)\" -> \"(relaxed expression, slightly amused:1.2)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-09",
+   "label": "9. hair 2 + smile 1",
+   "image": "art/candidates/portraits/carina-6/carina6-09-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-09.webp.webp"
+   ],
+   "note": "blonde, roots, soft smile. Seed 10496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(blonde hair with dark roots and a few dark stripes, honey blonde and golden lengths:1.5)\" ; expression: \"(confident slight smile:1.2)\" -> \"(soft smile:1.2)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-10",
+   "label": "10. hair 3 + smile 2",
+   "image": "art/candidates/portraits/carina-6/carina6-10-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-10.webp.webp"
+   ],
+   "note": "honey, head small. Seed 10496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(honey blonde hair, brown roots:1.5)\" ; expression: \"(confident slight smile:1.2)\" -> \"(relaxed expression, slightly amused:1.2)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-03-seed2",
+   "label": "3. second seed, hair 2",
+   "image": "art/candidates/portraits/carina-6/carina6-03-seed2-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-03-seed2.webp.webp"
+   ],
+   "note": "blonde, dark roots. Seed 11496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(blonde hair with dark roots and a few dark stripes, honey blonde and golden lengths:1.5)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-07-seed2",
+   "label": "7. second seed",
+   "image": "art/candidates/portraits/carina-6/carina6-07-seed2-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-07-seed2.webp.webp"
+   ],
+   "note": "blonde, roots, soft smile. Seed 11496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(blonde hair with dark roots, honey blonde and golden lengths, obvious root regrowth:1.5)\" ; expression: \"(confident slight smile:1.2)\" -> \"(soft smile:1.2)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  },
+  {
+   "id": "carina6-08-seed2",
+   "label": "8. second seed",
+   "image": "art/candidates/portraits/carina-6/carina6-08-seed2-final.webp.webp",
+   "images": [
+    "art/candidates/portraits/carina-6/carina6-08-seed2.webp.webp"
+   ],
+   "note": "blonde, roots, lips parted. Seed 11496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(blonde hair with dark roots, honey blonde and golden lengths, obvious root regrowth:1.5)\" ; expression: \"(confident slight smile:1.2)\" -> \"(relaxed expression, slightly amused:1.2)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
+  }
+ ],
+ "decision": "Jørgen: '3. hair 2, roots + stripes pretty good'. Hair is settled (tile 3, hair 2 phrase); eyes and expression continue in carina-portrait-7.",
+ "decided_at": "2026-10-05T19:07:12+0200",
+ "issue": 256
+}

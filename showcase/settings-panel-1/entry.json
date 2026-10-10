@@ -1,0 +1,173 @@
+{
+ "title": "Settings, remade so it fits every screen",
+ "date": "2026-10-04",
+ "by": "claude-agent:settings-panel",
+ "caption": "From your note: \"rework the settings panel it is larger than my screen, cutting off. Remake to look great\". The old panel was one long list, and on a big screen or a larger interface size it grew past the top and bottom of the window (the interface zoom multiplied its height limit). Now the settings sit in six sections: Text, Sound, Graphics, Controls, Voice & learning and Private. On a computer the sections are a rail on the left of a centred panel; on a phone they are a row of tabs under the header of a sheet that rises from the bottom. The header and close button stay put, the panel always fits the window at any interface size, and a section that doesn't fit scrolls inside it. Every setting works as before and keeps its saved value. Keys: Up and Down move between sections and rows, Left and Right change the choice, slider or switch you're on, PageUp and PageDown change section, Esc closes.",
+ "sections": [
+  {
+   "title": "Before and after, on a computer",
+   "caption": "Before is the old panel as it opened; after shows the Graphics section. At 1920 × 1080 and with Interface size on Larger, the old one ran off the top and bottom of the window.",
+   "images": [
+    {
+     "id": "before-1366",
+     "image": "bible/shots/showcase/settings-panel-1/before-1366x860.webp",
+     "caption": "Before, 1366 × 860"
+    },
+    {
+     "id": "after-1366",
+     "image": "bible/shots/showcase/settings-panel-1/after-1366x860.webp",
+     "caption": "After, 1366 × 860"
+    },
+    {
+     "id": "before-1280",
+     "image": "bible/shots/showcase/settings-panel-1/before-1280x720.webp",
+     "caption": "Before, 1280 × 720"
+    },
+    {
+     "id": "after-1280",
+     "image": "bible/shots/showcase/settings-panel-1/after-1280x720.webp",
+     "caption": "After, 1280 × 720"
+    },
+    {
+     "id": "before-1920",
+     "image": "bible/shots/showcase/settings-panel-1/before-1920x1080.webp.webp",
+     "caption": "Before, 1920 × 1080: cut off at the top and bottom"
+    },
+    {
+     "id": "after-1920",
+     "image": "bible/shots/showcase/settings-panel-1/after-1920x1080.webp",
+     "caption": "After, 1920 × 1080"
+    },
+    {
+     "id": "before-1366-ui14",
+     "image": "bible/shots/showcase/settings-panel-1/before-1366x860-ui1.4.webp",
+     "caption": "Before, 1366 × 860 with Interface size Larger: cut off"
+    },
+    {
+     "id": "after-1366-ui14",
+     "image": "bible/shots/showcase/settings-panel-1/after-1366x860-ui1.4.webp",
+     "caption": "After, 1366 × 860 with Interface size Larger"
+    },
+    {
+     "id": "before-1920-ui14",
+     "image": "bible/shots/showcase/settings-panel-1/before-1920x1080-ui1.4.webp.webp",
+     "caption": "Before, 1920 × 1080 with Interface size Larger: cut off"
+    },
+    {
+     "id": "after-1920-ui14",
+     "image": "bible/shots/showcase/settings-panel-1/after-1920x1080-ui1.4.webp",
+     "caption": "After, 1920 × 1080 with Interface size Larger"
+    }
+   ]
+  },
+  {
+   "title": "Before and after, on a phone",
+   "caption": "Before is the old sheet; after shows the Graphics section. Landscape uses the computer layout, made shorter.",
+   "images": [
+    {
+     "id": "before-390",
+     "image": "bible/shots/showcase/settings-panel-1/before-390x844.webp",
+     "caption": "Before, 390 × 844"
+    },
+    {
+     "id": "after-390",
+     "image": "bible/shots/showcase/settings-panel-1/after-390x844.webp",
+     "caption": "After, 390 × 844"
+    },
+    {
+     "id": "before-360",
+     "image": "bible/shots/showcase/settings-panel-1/before-360x780.webp",
+     "caption": "Before, 360 × 780"
+    },
+    {
+     "id": "after-360",
+     "image": "bible/shots/showcase/settings-panel-1/after-360x780.webp",
+     "caption": "After, 360 × 780: the section scrolls inside the sheet"
+    },
+    {
+     "id": "before-844",
+     "image": "bible/shots/showcase/settings-panel-1/before-844x390.webp",
+     "caption": "Before, landscape 844 × 390"
+    },
+    {
+     "id": "after-844",
+     "image": "bible/shots/showcase/settings-panel-1/after-844x390.webp",
+     "caption": "After, landscape 844 × 390"
+    }
+   ]
+  },
+  {
+   "title": "Every section, computer and phone",
+   "caption": "1366 × 860 and 390 × 844. The Say key row is computer only, as before.",
+   "images": [
+    {
+     "id": "desk-text",
+     "image": "bible/shots/showcase/settings-panel-1/desk-text.webp",
+     "caption": "Text"
+    },
+    {
+     "id": "desk-sound",
+     "image": "bible/shots/showcase/settings-panel-1/desk-sound.webp",
+     "caption": "Sound"
+    },
+    {
+     "id": "desk-graphics",
+     "image": "bible/shots/showcase/settings-panel-1/desk-graphics.webp",
+     "caption": "Graphics"
+    },
+    {
+     "id": "desk-controls",
+     "image": "bible/shots/showcase/settings-panel-1/desk-controls.webp",
+     "caption": "Controls"
+    },
+    {
+     "id": "desk-voice",
+     "image": "bible/shots/showcase/settings-panel-1/desk-voice.webp",
+     "caption": "Voice & learning"
+    },
+    {
+     "id": "phone-text",
+     "image": "bible/shots/showcase/settings-panel-1/phone-text.webp",
+     "caption": "Text"
+    },
+    {
+     "id": "phone-sound",
+     "image": "bible/shots/showcase/settings-panel-1/phone-sound.webp",
+     "caption": "Sound"
+    },
+    {
+     "id": "phone-graphics",
+     "image": "bible/shots/showcase/settings-panel-1/phone-graphics.webp",
+     "caption": "Graphics"
+    },
+    {
+     "id": "phone-controls",
+     "image": "bible/shots/showcase/settings-panel-1/phone-controls.webp",
+     "caption": "Controls"
+    },
+    {
+     "id": "phone-voice",
+     "image": "bible/shots/showcase/settings-panel-1/phone-voice.webp",
+     "caption": "Voice & learning"
+    },
+    {
+     "id": "ingame-desk",
+     "image": "bible/shots/showcase/settings-panel-1/ingame-1366x860.webp",
+     "caption": "In play, opened from the pause menu, computer"
+    },
+    {
+     "id": "ingame-phone",
+     "image": "bible/shots/showcase/settings-panel-1/ingame-390x844.webp",
+     "caption": "In play, opened from the pause menu, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

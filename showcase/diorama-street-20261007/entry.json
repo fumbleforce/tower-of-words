@@ -1,0 +1,91 @@
+{
+ "title": "Street and garden style trial",
+ "date": "2026-10-07",
+ "by": "Codex",
+ "caption": "An opt-in forecourt trial with fuller trees, clipped hedges, detailed paving and revised station and office windows. The Review contains every earlier attempt.",
+ "sections": [
+  {
+   "title": "Window correction",
+   "images": [
+    {
+     "id": "windows-20261007-office-day",
+     "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/morning-office-near.webp.webp",
+     "caption": "Office glass after removing the repeated dark boxes, 2560 × 1440."
+    },
+    {
+     "id": "windows-20261007-office-evening",
+     "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/evening-office-native-right.webp.webp",
+     "caption": "Office blinds and reflections during movement, evening lighting."
+    },
+    {
+     "id": "windows-20261007-station-evening",
+     "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/evening-station-near.webp.webp",
+     "caption": "Station glazing and varied interior light, 2560 × 1440."
+    },
+    {
+     "id": "windows-20261007-station-phone",
+     "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/morning-station-near.webp.webp",
+     "caption": "Station glass in the unchanged phone overview."
+    }
+   ]
+  },
+  {
+   "title": "Daylight",
+   "images": [
+    {
+     "id": "court58-wide-garden",
+     "image": "bible/shots/reviews/diorama-street-1/court58-wide-2560/garden.webp.webp",
+     "caption": "Garden and office frontage, 2560 × 1440."
+    },
+    {
+     "id": "court56-desktop-1366-garden",
+     "image": "bible/shots/reviews/diorama-street-1/court56-desktop-1366/garden.webp.webp",
+     "caption": "Garden and office facade, desktop"
+    },
+    {
+     "id": "court56-phone-q1-390-garden",
+     "image": "bible/shots/reviews/diorama-street-1/court56-phone-q1-390/garden.webp.webp",
+     "caption": "Garden, phone"
+    },
+    {
+     "id": "court56-desktop-1366-street",
+     "image": "bible/shots/reviews/diorama-street-1/court56-desktop-1366/street.webp.webp",
+     "caption": "Station frontage, desktop"
+    }
+   ]
+  },
+  {
+   "title": "Evening and materials",
+   "images": [
+    {
+     "id": "court57-inspection-1366-office-evening",
+     "image": "bible/shots/reviews/diorama-street-1/court57-inspection-1366/office-evening.webp.webp",
+     "caption": "Office windows after work"
+    },
+    {
+     "id": "court57-inspection-390-station-evening",
+     "image": "bible/shots/reviews/diorama-street-1/court57-inspection-390/station-evening.webp.webp",
+     "caption": "Tree base and station windows, phone"
+    },
+    {
+     "id": "court57-inspection-1366-station-evening",
+     "image": "bible/shots/reviews/diorama-street-1/court57-inspection-1366/station-evening.webp.webp",
+     "caption": "Station facade at evening"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "All attempts and style feedback",
+   "href": "#review/diorama-street-1"
+  },
+  {
+   "label": "Try the optional street style",
+   "href": "game3d/index.html?day=2&place=forecourt&mc=eric&q=2&diorama=1"
+  }
+ ],
+ "preview": "windows-20261007-office-day",
+ "updated": "2026-10-07T12:56:42.543850+00:00",
+ "media": []
+}

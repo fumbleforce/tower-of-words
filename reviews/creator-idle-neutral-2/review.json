@@ -1,0 +1,50 @@
+{
+ "title": "Live creator idle comparison",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "superseded",
+ "question": "After playing the live comparison, should the creator use the neutral idle?",
+ "multi": false,
+ "links": [
+  {
+   "label": "Play the live comparison: orbit, zoom, pause and walk",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/creator/idle-compare.html"
+  },
+  {
+   "label": "Open with Eric",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/creator/idle-compare.html"
+  },
+  {
+   "label": "Earlier comparison and feedback",
+   "href": "#review/creator-idle-neutral"
+  }
+ ],
+ "options": [
+  {
+   "id": "neutral-v1",
+   "label": "neutral-v1: use the breathing idle",
+   "image": "art/parts/candidates/idle-review/eric.png.webp",
+   "images": [
+    "art/parts/candidates/idle-review/mio.png.webp"
+   ],
+   "note": "Judge the motion in the live viewer above. These earlier sheets are supplementary. Both live panels use identical models and retarget settings."
+  },
+  {
+   "id": "keep-held",
+   "label": "keep-held: keep the current frozen pose",
+   "image": "art/parts/candidates/idle-review/mio.png.webp",
+   "note": "In the live viewer, select Current creator: held at 0.4 s on the left. The full original clip is also available to play; it is currently frozen in the creator."
+  }
+ ],
+ "media": [
+  {
+   "image": "art/parts/base/shots/creator-base-3/idle-desktop.png.webp",
+   "caption": "Desktop viewer. Use the live link above to judge motion."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-3/idle-phone.png.webp",
+   "caption": "Phone viewer, side view."
+  }
+ ],
+ "decision": "motion too small to see; arms relaxed, not A-pose"
+}

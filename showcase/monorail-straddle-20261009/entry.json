@@ -1,0 +1,208 @@
+{
+ "title": "Monorail cars straddle the beam",
+ "date": "2026-10-09",
+ "by": "claude-agent:monorail",
+ "caption": "The cars now hug the beam instead of sitting on top of it. The navy skirt comes down both sides of the beam, so the car rides lower on it, and there is a guide-wheel housing either side at each bogie. The floor, doors, windows and inside of the car are unchanged.",
+ "preview": "after-wrap-desk",
+ "result": [
+  "after-beam-desk",
+  "after-wrap-desk",
+  "after-low-desk",
+  "after-beam-phone"
+ ],
+ "sections": [
+  {
+   "title": "Straight along the beam",
+   "caption": "The neighbour cars are hidden here so the beam runs out clear. Before, the car sat on top of the beam. Now the navy skirt comes down both sides of it.",
+   "images": [
+    {
+     "id": "before-beam-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-beam-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-beam-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-beam-desk.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-beam-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-beam-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-beam-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-beam-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Low by the car end",
+   "caption": "The skirt wraps the top half of the beam. Under it, a guide-wheel housing at each bogie, its wheels against the beam.",
+   "images": [
+    {
+     "id": "before-wrap-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-wrap-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-wrap-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-wrap-desk.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-wrap-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-wrap-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-wrap-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-wrap-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Level with the cars",
+   "caption": "From the side, at car height.",
+   "images": [
+    {
+     "id": "before-low-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-low-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-low-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-low-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-low-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-low-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-low-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-low-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "From below",
+   "caption": "The guide-wheel housings either side of the beam.",
+   "images": [
+    {
+     "id": "before-under-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-under-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-under-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-under-desk.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-under-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-under-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-under-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-under-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Over the bay",
+   "caption": "From above the platform side.",
+   "images": [
+    {
+     "id": "before-bay-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-bay-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-bay-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-bay-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-bay-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-bay-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-bay-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-bay-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "By the gangway",
+   "caption": "The near car and its neighbour.",
+   "images": [
+    {
+     "id": "before-corner-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-corner-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-corner-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-corner-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-corner-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-corner-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-corner-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-corner-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The play camera",
+   "caption": "The cut-away car is unchanged. The floor stays level with the platform.",
+   "images": [
+    {
+     "id": "before-play-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-play-desk.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "after-play-desk",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-play-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "before-play-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/before-play-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-play-phone",
+     "image": "bible/shots/showcase/monorail-straddle-20261009/after-play-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  },
+  {
+   "label": "Issue #359",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/359"
+  }
+ ],
+ "media": []
+}

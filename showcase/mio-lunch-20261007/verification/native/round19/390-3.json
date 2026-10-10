@@ -1,0 +1,1342 @@
+{
+  "before": {
+    "sender": {
+      "v": 1,
+      "offered": true,
+      "awake": true,
+      "acknowledged": [
+        24,
+        26,
+        27
+      ],
+      "held": 25,
+      "attempts": [
+        {
+          "id": 1,
+          "rows": [
+            {
+              "id": "1:0",
+              "item": 24,
+              "status": "acknowledged"
+            },
+            {
+              "id": "1:1",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "1:2",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "rows": [
+            {
+              "id": "2:0",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "2:1",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "rows": [
+            {
+              "id": "3:0",
+              "item": 26,
+              "status": "started"
+            },
+            {
+              "id": "3:1",
+              "item": 26,
+              "status": "acknowledged"
+            },
+            {
+              "id": "3:2",
+              "item": 27,
+              "status": "started"
+            },
+            {
+              "id": "3:3",
+              "item": 27,
+              "status": "acknowledged"
+            }
+          ]
+        }
+      ],
+      "selected": [
+        "1:1",
+        "2:0"
+      ],
+      "pinned": {
+        "item": 25,
+        "rows": [
+          "1:1",
+          "2:0"
+        ]
+      },
+      "active": null,
+      "failures": 0
+    },
+    "flags": {
+      "sender_state": {
+        "v": 1,
+        "offered": true,
+        "awake": true,
+        "acknowledged": [
+          24,
+          26,
+          27
+        ],
+        "held": 25,
+        "attempts": [
+          {
+            "id": 1,
+            "rows": [
+              {
+                "id": "1:0",
+                "item": 24,
+                "status": "acknowledged"
+              },
+              {
+                "id": "1:1",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "1:2",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "rows": [
+              {
+                "id": "2:0",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "2:1",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "rows": [
+              {
+                "id": "3:0",
+                "item": 26,
+                "status": "started"
+              },
+              {
+                "id": "3:1",
+                "item": 26,
+                "status": "acknowledged"
+              },
+              {
+                "id": "3:2",
+                "item": 27,
+                "status": "started"
+              },
+              {
+                "id": "3:3",
+                "item": 27,
+                "status": "acknowledged"
+              }
+            ]
+          }
+        ],
+        "selected": [
+          "1:1",
+          "2:0"
+        ],
+        "pinned": {
+          "item": 25,
+          "rows": [
+            "1:1",
+            "2:0"
+          ]
+        },
+        "active": null,
+        "failures": 0
+      },
+      "sender_offered": true,
+      "sender_partial": true,
+      "sender_delivered": true,
+      "sender_compared": true
+    },
+    "offered": 3,
+    "monitors": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -2,
+        0.42,
+        -3.14,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        4.2,
+        0.5,
+        -1.3,
+        1
+      ]
+    ]
+  },
+  "after": {
+    "busy": false,
+    "period": "afternoon",
+    "flags": {
+      "gate_magic": true,
+      "dorm_room_known": true,
+      "going_home": true,
+      "lunch_mio": true,
+      "mio_warm": 2,
+      "d2_started": true,
+      "d2_station_seen": true,
+      "d2_checked": true,
+      "d2_ticket_done": true,
+      "d2_order_sensor": true,
+      "d2_brief_done": true,
+      "d2_shift_done": true,
+      "d2_met_kenji": true,
+      "d2_ate": true,
+      "d2_food": "riceball",
+      "d2_party_done": true,
+      "d2_complete": true,
+      "ticket_T0001": "done",
+      "ticket_T0002": "progress",
+      "ticketread_T0001": true,
+      "ticketread_T0002": true,
+      "d3_complete": true,
+      "d4_complete": true,
+      "day": 5,
+      "period": "afternoon",
+      "place": "office",
+      "machineOpen": true,
+      "mio_lunch_offer": 0,
+      "bond_mio": 14,
+      "step_mio": 3,
+      "bondready_mio": 0,
+      "bond2_mio": true,
+      "period_early": false,
+      "period_morning": false,
+      "period_lunch": false,
+      "period_afternoon": true,
+      "period_evening": false,
+      "sender_state": {
+        "v": 1,
+        "offered": true,
+        "awake": true,
+        "acknowledged": [
+          24,
+          26,
+          27
+        ],
+        "held": 25,
+        "attempts": [
+          {
+            "id": 1,
+            "rows": [
+              {
+                "id": "1:0",
+                "item": 24,
+                "status": "acknowledged"
+              },
+              {
+                "id": "1:1",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "1:2",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "rows": [
+              {
+                "id": "2:0",
+                "item": 25,
+                "status": "started"
+              },
+              {
+                "id": "2:1",
+                "item": null,
+                "status": "restart"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "rows": [
+              {
+                "id": "3:0",
+                "item": 26,
+                "status": "started"
+              },
+              {
+                "id": "3:1",
+                "item": 26,
+                "status": "acknowledged"
+              },
+              {
+                "id": "3:2",
+                "item": 27,
+                "status": "started"
+              },
+              {
+                "id": "3:3",
+                "item": 27,
+                "status": "acknowledged"
+              }
+            ]
+          }
+        ],
+        "selected": [
+          "1:1",
+          "2:0"
+        ],
+        "pinned": {
+          "item": 25,
+          "rows": [
+            "1:1",
+            "2:0"
+          ]
+        },
+        "active": null,
+        "failures": 0
+      },
+      "sender_offered": true,
+      "sender_partial": true,
+      "sender_delivered": true,
+      "sender_compared": true,
+      "met_mio": true,
+      "met_guard": true,
+      "met_kuroda": true,
+      "met_emi": true,
+      "met_kenji": true,
+      "met_mori": true,
+      "ms3_mio": true,
+      "bond3_mio": true,
+      "rem_mio_milestone3": true,
+      "talked_mio": true
+    },
+    "points": 14,
+    "stage": {
+      "state": null,
+      "phase": "idle",
+      "day": 5,
+      "cableParked": true,
+      "props": {
+        "items": {
+          "food": {
+            "visible": true,
+            "position": [
+              5.95,
+              0.245,
+              -2.17
+            ],
+            "rotation": [
+              0,
+              -1.5707963267948966,
+              0,
+              "XYZ"
+            ],
+            "parent": "root"
+          },
+          "sheet": {
+            "visible": false,
+            "position": [
+              5.12,
+              0.85,
+              -2.935
+            ],
+            "rotation": [
+              1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ],
+            "parent": "root"
+          },
+          "pencil": {
+            "visible": true,
+            "position": [
+              0,
+              0.03,
+              -0.1
+            ],
+            "rotation": [
+              0,
+              1.5707963267948966,
+              0,
+              "XYZ"
+            ],
+            "parent": "sheet"
+          },
+          "cable": {
+            "visible": true,
+            "position": [
+              4.34,
+              0.225,
+              -2.09
+            ],
+            "rotation": [
+              1.5707963267948966,
+              0,
+              0,
+              "XYZ"
+            ],
+            "parent": "root"
+          },
+          "sticks": {
+            "visible": false,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0,
+              "XYZ"
+            ],
+            "parent": "root"
+          }
+        },
+        "lid": true,
+        "mark": false,
+        "bite": true,
+        "visible": false
+      },
+      "hands": [],
+      "bow": 0
+    },
+    "contacts": [
+      {
+        "id": "sheet-pickup",
+        "gap": 0.026595191359638955,
+        "hand": [
+          5.126912678724386,
+          0.7232069941532314,
+          -2.895233608501136
+        ],
+        "target": [
+          5.12,
+          0.73,
+          -2.92
+        ]
+      },
+      {
+        "id": "sheet-handover",
+        "gap": 0.00898410600951707,
+        "hand": [
+          5.415840509886829,
+          0.6660445589983421,
+          -1.837297046869665
+        ],
+        "target": [
+          5.42476077226455,
+          0.6658446188633658,
+          -1.8383473343756742
+        ]
+      },
+      {
+        "id": "sheet-handover-giver",
+        "gap": 0,
+        "hand": [
+          5.636363743620058,
+          0.6669577551989442,
+          -1.837792089569876
+        ],
+        "target": [
+          5.636363743620058,
+          0.6669577551989442,
+          -1.837792089569876
+        ]
+      },
+      {
+        "id": "sheet-handover-taker",
+        "gap": 0.010870065696132043,
+        "hand": [
+          5.415551384960949,
+          0.6660371638956256,
+          -1.8371566840951687
+        ],
+        "target": [
+          5.426363743620057,
+          0.6669577551989442,
+          -1.837792089569876
+        ]
+      },
+      {
+        "id": "bento-pickup",
+        "gap": 0.008567073418424073,
+        "hand": [
+          5.946144654394165,
+          0.25234624329471045,
+          -2.1721362974210434
+        ],
+        "target": [
+          5.95,
+          0.245,
+          -2.17
+        ]
+      },
+      {
+        "id": "checklist-support",
+        "gap": 0.02084971120833782,
+        "hand": [
+          4.442602932886172,
+          0.32576780801523775,
+          -2.1414616790209466
+        ],
+        "target": [
+          4.45,
+          0.31,
+          -2.13
+        ]
+      },
+      {
+        "id": "pencil-grip",
+        "gap": 0.000019042270879621693,
+        "hand": [
+          4.450000207089407,
+          0.34001687233900035,
+          -2.2300088254955037
+        ],
+        "target": [
+          4.45,
+          0.33999999999999997,
+          -2.23
+        ]
+      },
+      {
+        "id": "check-mark-hand",
+        "gap": 0.009192850720277895,
+        "hand": [
+          4.515426283634871,
+          0.3881779508951913,
+          -2.0840768114793797
+        ],
+        "target": [
+          4.521,
+          0.3837323472786823,
+          -2.078273467725018
+        ]
+      },
+      {
+        "id": "pencil-tip-mark",
+        "gap": 0.009192850720277895,
+        "from": [
+          4.515426283634871,
+          0.33044560361650904,
+          -2.1658033437543613
+        ],
+        "to": [
+          4.521,
+          0.326,
+          -2.1599999999999997
+        ]
+      },
+      {
+        "id": "pencil-clip",
+        "gap": 0.000019024533858924657,
+        "hand": [
+          4.450000206907037,
+          0.34001685638842744,
+          -2.230008817723471
+        ],
+        "target": [
+          4.45,
+          0.33999999999999997,
+          -2.23
+        ]
+      },
+      {
+        "id": "marked-sheet-pickup",
+        "gap": 0.0027892973718597913,
+        "hand": [
+          4.450020866989198,
+          0.31201244180072263,
+          -2.1319312748111363
+        ],
+        "target": [
+          4.45,
+          0.31,
+          -2.13
+        ]
+      },
+      {
+        "id": "sheet-return",
+        "gap": 0.0362837350488391,
+        "hand": [
+          5.5851429302288444,
+          0.667027643385764,
+          -1.816697671934633
+        ],
+        "target": [
+          5.552970529846305,
+          0.6650641793731659,
+          -1.8000366127908947
+        ]
+      },
+      {
+        "id": "sheet-return-giver",
+        "gap": 0,
+        "hand": [
+          5.34263364733832,
+          0.6650702368524604,
+          -1.8000548458111085
+        ],
+        "target": [
+          5.34263364733832,
+          0.6650702368524604,
+          -1.8000548458111085
+        ]
+      },
+      {
+        "id": "sheet-return-taker",
+        "gap": 0.03684142187051767,
+        "hand": [
+          5.585337026383497,
+          0.6668962334620536,
+          -1.8169203461253813
+        ],
+        "target": [
+          5.552633647338321,
+          0.6650702368524604,
+          -1.8000548458111085
+        ]
+      }
+    ],
+    "proof": {
+      "lines": [
+        "The front vent. Got it.",
+        "Just that row. I’ll do the rest when I’m back.",
+        "Nothing’s blocking it.",
+        "It was clear. I marked the row.",
+        "Thanks. I actually got outside before lunch was over."
+      ],
+      "contactCount": 14,
+      "capture": null,
+      "done": false,
+      "errors": [],
+      "choices": [
+        "Check the vent and mark its row."
+      ],
+      "routes": [
+        {
+          "phase": "handover",
+          "at": [
+            5.000333502104295,
+            0,
+            -0.6216321340235837
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.30566649789570466
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.000303943639057,
+            0,
+            -0.49563213740125167
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.30569605636094277
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.000272449798183,
+            0,
+            -0.3613821412741513
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.30572755020181663
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.0002149163569785,
+            0,
+            -0.11613214811197191
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3057850836430216
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.000209638059618,
+            0,
+            -0.09363214873109243
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.30579036194038167
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.00018113525379,
+            0,
+            0.027867848283284632
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3058188647462101
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.000149113583159,
+            0,
+            0.16436784443787983
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3001491135831591
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.000119203231452,
+            0,
+            0.2918678409295302
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3001192032314517
+        },
+        {
+          "phase": "handover",
+          "at": [
+            5.000089644766214,
+            0,
+            0.4178678375518623
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.32240754027327656
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.9984152210611255,
+            0,
+            0.5387478882878095
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.38216776201407754
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998565552309538,
+            0,
+            0.41649798062986587
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3204889522537958
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998736173664973,
+            0,
+            0.27774808553674135
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.29873617366497296
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.998877282137417,
+            0,
+            0.16299817220815577
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.2988772821374166
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.999034069328898,
+            0,
+            0.03549826860906834
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.305911503497054
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.999197312463449,
+            0,
+            -0.09725163093116285
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3068026875365515
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.999481373963419,
+            0,
+            -0.32825145636479874
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3065186260365813
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.9996427725428845,
+            0,
+            -0.4595013571285652
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3063572274571156
+        },
+        {
+          "phase": "return",
+          "at": [
+            4.999796792901466,
+            0,
+            -0.5847512623394383
+          ],
+          "wallRadius": 0.17,
+          "bodyRadius": 0.28319999999999995,
+          "clearance": 0.3062032070985339
+        }
+      ],
+      "routeShots": [
+        "door-out",
+        "lift-out",
+        "lift-return",
+        "door-return"
+      ]
+    },
+    "sender": {
+      "v": 1,
+      "offered": true,
+      "awake": true,
+      "acknowledged": [
+        24,
+        26,
+        27
+      ],
+      "held": 25,
+      "attempts": [
+        {
+          "id": 1,
+          "rows": [
+            {
+              "id": "1:0",
+              "item": 24,
+              "status": "acknowledged"
+            },
+            {
+              "id": "1:1",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "1:2",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "rows": [
+            {
+              "id": "2:0",
+              "item": 25,
+              "status": "started"
+            },
+            {
+              "id": "2:1",
+              "item": null,
+              "status": "restart"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "rows": [
+            {
+              "id": "3:0",
+              "item": 26,
+              "status": "started"
+            },
+            {
+              "id": "3:1",
+              "item": 26,
+              "status": "acknowledged"
+            },
+            {
+              "id": "3:2",
+              "item": 27,
+              "status": "started"
+            },
+            {
+              "id": "3:3",
+              "item": 27,
+              "status": "acknowledged"
+            }
+          ]
+        }
+      ],
+      "selected": [
+        "1:1",
+        "2:0"
+      ],
+      "pinned": {
+        "item": 25,
+        "rows": [
+          "1:1",
+          "2:0"
+        ]
+      },
+      "active": null,
+      "failures": 0
+    },
+    "monitors": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -2,
+        0.42,
+        -3.14,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        4.2,
+        0.5,
+        -1.3,
+        1
+      ]
+    ]
+  },
+  "continued": true,
+  "errors": [],
+  "captures": [
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-layout.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-cable-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-cable-hook.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-line-1.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-line-2.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-sheet-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-sheet-handover.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-sheet-handover-taker.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-start.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-sheet-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-sheet-handover.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-sheet-handover-taker.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-line-1.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-line-2.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-bento-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-door-out.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-lift-out.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-line-3.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-checklist-support.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-pencil-grip.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-pencil-tip-mark.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-pencil-clip.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-lift-return.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-door-return.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-marked-sheet-pickup.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-sheet-return.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-sheet-return-taker.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-line-4.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-continued-line-5.png",
+    "/home/jorgen/repo/japanese/.claude/worktrees/codex-mio-lunch/game3d/shots/mio-lunch/round19//390-3-finished.png"
+  ]
+}

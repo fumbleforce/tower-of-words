@@ -1,0 +1,50 @@
+{
+ "title": "A working konbini on the shop street",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "Enter from the shop street, read the packaging, fill a small basket and use the window perch. Purchases and unfinished actions survive Continue.",
+ "images": [
+  {
+   "id": "overview",
+   "image": "bible/shots/showcase/konbini-interior-1/overview.webp",
+   "caption": "The fitted shop interior: fridge, till, household stock and window perch."
+  },
+  {
+   "id": "follow-fridge",
+   "image": "bible/shots/showcase/konbini-interior-1/follow-fridge.webp.webp",
+   "caption": "Read real labels and prices in the optional desktop follow camera."
+  },
+  {
+   "id": "paid-phone",
+   "image": "bible/shots/showcase/konbini-interior-1/paid-phone.webp",
+   "caption": "The selected groceries are bagged after one confirmed payment."
+  },
+  {
+   "id": "bite-phone",
+   "image": "bible/shots/showcase/konbini-interior-1/bite-phone.webp",
+   "caption": "Eat an owned rice ball at the perch."
+  },
+  {
+   "id": "sip-desktop",
+   "image": "bible/shots/showcase/konbini-interior-1/sip-desktop.webp.webp",
+   "caption": "An owned milk carton can be opened and drunk."
+  },
+  {
+   "id": "sip-phone",
+   "image": "bible/shots/showcase/konbini-interior-1/sip-phone.webp",
+   "caption": "The phone view keeps the carton, grip and face visible during the sip."
+  },
+  {
+   "id": "overview-phone",
+   "image": "bible/shots/showcase/konbini-interior-1/overview-phone.webp",
+   "caption": "The phone overview keeps the entrance and central aisle usable."
+  }
+ ],
+ "links": [
+  {
+   "label": "Walk into the shop (day 3)",
+   "href": "game3d/index.html?day=3&place=shotengai"
+  }
+ ],
+ "media": []
+}

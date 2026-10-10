@@ -1,0 +1,124 @@
+{
+ "title": "Quick save, twelve save slots with pictures, and hearts in People",
+ "date": "2026-10-04",
+ "by": "claude-agent:saves",
+ "caption": "The save conventions you agreed to. F5 quick saves and F9 quick loads on a computer; on the phone there is a save button in the top bar, and both are in the pause menu. Loading asks first only when you'd lose progress. Save and Load are one screen now, with the quick save, the autosave and twelve slots, each with a picture, the place, the day and period, the goal and the real time. People shows each bond as five hearts with a line on where you stand. A quick save in the middle of a conversation brings that conversation back from its first line, and the notice says so. Names on day 2 showing as ids (mio, guard) is an older bug, now issue #223.",
+ "sections": [
+  {
+   "title": "Quick save and quick load, desktop",
+   "caption": "Saved in the middle of Mio's first message on day 2, then F9: the conversation starts again from its first line. Then saved while free, a purchase and a new goal, F9: it asks, and Load brings back the same room, goal and money.",
+   "images": [
+    {
+     "id": "d-quick-mid",
+     "image": "bible/shots/showcase/saves-1/1366x860-1-quick-saved-mid-talk.webp.webp",
+     "caption": "F5 mid-conversation: the notice says what loading will do"
+    },
+    {
+     "id": "d-quick-mid-back",
+     "image": "bible/shots/showcase/saves-1/1366x860-2-quick-loaded-mid-talk.webp",
+     "caption": "After F9: the conversation from its first line"
+    },
+    {
+     "id": "d-quick-free",
+     "image": "bible/shots/showcase/saves-1/1366x860-3-quick-saved.webp.webp",
+     "caption": "F5 while free to walk"
+    },
+    {
+     "id": "d-quick-ask",
+     "image": "bible/shots/showcase/saves-1/1366x860-4-quick-load-confirm.webp",
+     "caption": "F9 after making progress: it asks first"
+    },
+    {
+     "id": "d-quick-back",
+     "image": "bible/shots/showcase/saves-1/1366x860-5-quick-loaded.webp.webp",
+     "caption": "Back where the quick save was made"
+    },
+    {
+     "id": "d-pause",
+     "image": "bible/shots/showcase/saves-1/1366x860-5b-pause.webp",
+     "caption": "Pause menu with Quick save and Quick load and their keys"
+    }
+   ]
+  },
+  {
+   "title": "The saves screen, desktop",
+   "caption": "Save and Load tabs; arrow keys move through the cards. Saving over a slot asks first.",
+   "images": [
+    {
+     "id": "d-saved5",
+     "image": "bible/shots/showcase/saves-1/1366x860-6-saved-slot5.webp",
+     "caption": "Saved into slot 5"
+    },
+    {
+     "id": "d-replace",
+     "image": "bible/shots/showcase/saves-1/1366x860-7-replace-confirm.webp",
+     "caption": "Saving over slot 5"
+    },
+    {
+     "id": "d-load",
+     "image": "bible/shots/showcase/saves-1/1366x860-8-load-tab.webp",
+     "caption": "Load lists the saves there are"
+    }
+   ]
+  },
+  {
+   "title": "Phone",
+   "caption": "The save button sits left of the menu button. Its row fits 390 px with every chip up on the public build (the local note button wraps to a second row).",
+   "images": [
+    {
+     "id": "p-quick",
+     "image": "bible/shots/showcase/saves-1/390x844-3-quick-saved.webp",
+     "caption": "Tapped the save button"
+    },
+    {
+     "id": "p-ask",
+     "image": "bible/shots/showcase/saves-1/390x844-4-quick-load-confirm.webp",
+     "caption": "Quick load from the pause menu asks first"
+    },
+    {
+     "id": "p-pause",
+     "image": "bible/shots/showcase/saves-1/390x844-5b-pause.webp",
+     "caption": "Pause menu"
+    },
+    {
+     "id": "p-saved5",
+     "image": "bible/shots/showcase/saves-1/390x844-6-saved-slot5.webp",
+     "caption": "Saves sheet, saved into slot 5"
+    },
+    {
+     "id": "p-load",
+     "image": "bible/shots/showcase/saves-1/390x844-8-load-tab.webp",
+     "caption": "Load tab"
+    },
+    {
+     "id": "p-hud",
+     "image": "bible/shots/showcase/saves-1/390x844-11-hud-full-public.webp",
+     "caption": "Top bar with every chip up"
+    }
+   ]
+  },
+  {
+   "title": "People",
+   "caption": "Five hearts per person, filled to their bond step, and a line on where things stand. Only the step shows, never what the next one needs.",
+   "images": [
+    {
+     "id": "d-people",
+     "image": "bible/shots/showcase/saves-1/1366x860-9-people.webp",
+     "caption": "Desktop"
+    },
+    {
+     "id": "p-people",
+     "image": "bible/shots/showcase/saves-1/390x844-9-people.webp",
+     "caption": "Phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

@@ -1,0 +1,51 @@
+[
+ {
+  "service": "meshy",
+  "part": "kuro-2",
+  "task": "01a10823-32af-76bc-bfe3-c371b91686bd",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 500,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/kuro-meshy-orig-2/pics/d2.png"
+ },
+ {
+  "service": "meshy",
+  "part": "kuro-2-tex",
+  "task": "01a10824-1ef9-722d-ae05-6ba49f5f5dfe",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 490,
+  "settings": {
+   "input_task_id": "01a10823-32af-76bc-bfe3-c371b91686bd",
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ]
+  },
+  "input": "art/parts/kuro-meshy-orig-2/pics/d2.png"
+ },
+ {
+  "service": "meshy",
+  "part": "kuro-2-tex-rig",
+  "task": "01a10824-a3e9-72ed-ae38-ff0fb1d11aad",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10824-1ef9-722d-ae05-6ba49f5f5dfe",
+   "height_meters": 1.1
+  }
+ }
+]

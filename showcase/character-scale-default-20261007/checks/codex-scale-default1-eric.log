@@ -1,0 +1,16 @@
+character-scale-1366: GPU slot 1
+captured dorms 100 1.4159999999999997 
+captured forecourt 100 1.4159999999999997 
+captured canteen 100 1.4159999999999997 {
+  top: 0.34,
+  underside: 0.33055506377238575,
+  delta: -0.009444936227614276
+}
+captured dorms default 1.2035999999999996 
+captured forecourt default 1.2035999999999996 
+captured canteen default 1.2035999999999996 {
+  top: 0.34,
+  underside: 0.330556721192298,
+  delta: -0.009443278807702016
+}
+PASS /home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/shots/character-scale/default1-eric-1366/

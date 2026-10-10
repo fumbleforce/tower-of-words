@@ -1,0 +1,26 @@
+{
+ "title": "Mio working at her desk",
+ "date": "2026-10-06",
+ "by": "codex",
+ "caption": "During day-two office work Mio types, reads and notices a nearby player. The activity yields during dialogue and keeps her seated posture.",
+ "commit": "7c13160f",
+ "images": [
+  {
+   "id": "desk",
+   "image": "game3d/shots/codex-mio-office/working-1366.png.webp",
+   "caption": "At her desk"
+  },
+  {
+   "id": "near",
+   "image": "game3d/shots/codex-mio-office/near-390.png.webp",
+   "caption": "Approaching on phone"
+  }
+ ],
+ "links": [
+  {
+   "label": "Play locally",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

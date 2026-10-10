@@ -1,0 +1,245 @@
+{
+ "title": "The town on one grid: head office, lift core, court, shed and plaza lane square to the camera",
+ "date": "2026-09-30",
+ "by": "claude-agent:grid-frame",
+ "caption": "The island map draws the town's streets turned about 23° from its up, and the game kept the map's up as north, so the tower, its lobby, the shed and the shop street were built turned while the lift core, reception and cameras were square: walls cut through the core. The island frame is now turned onto the map's street grid, so every building on it is a plain rectangle square to the camera. The head office, its lobby and the lift core now share one set of axes, and the court, lane and shed were rebuilt on them. The plaza's lane runs straight and turns at right angles. Same spots before and after where they still exist.",
+ "sections": [
+  {
+   "title": "The lobby and the lift",
+   "caption": "Before: the lobby's walls turned 23°, the lift core square, the wall running through the core. After: walls, core, reception, sofas and the back office all on the camera's axes; the core stands against the lobby's back wall and faces the door.",
+   "images": [
+    {
+     "id": "lobby-desk-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/lobby-desk-after.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "lobby-desk-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-lobby-desk-after.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "lobby-phone-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/lobby-phone-after.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "lobby-phone-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-lobby-phone-after.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "ride-desk-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-ride-desk-after.webp",
+     "caption": "After: in the lift, desktop"
+    },
+    {
+     "id": "ride-phone-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-ride-phone-after.webp",
+     "caption": "After: in the lift, phone"
+    }
+   ]
+  },
+  {
+   "title": "Stepping out of the station",
+   "caption": "The court is one paved rectangle between the station's north door and the tower's south face, kerbed where it meets grass, with a worn line that runs door to door at right angles. The tower's angled plinth is gone; a dark stone base course runs round the tower instead. On a phone the camera looks up the court at the head office door.",
+   "images": [
+    {
+     "id": "arrive-desk-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/wide-after.webp.webp",
+     "caption": "Before, desktop (wider)"
+    },
+    {
+     "id": "arrive-desk-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-arrive-desk-after.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "arrive-phone-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/exit-phone-after.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "arrive-phone-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-arrive-phone-after.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "wide-desk-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-wide-desk-after.webp.webp",
+     "caption": "After: halfway across, desktop"
+    },
+    {
+     "id": "wide-phone-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-wide-phone-after.webp",
+     "caption": "After: halfway across, phone"
+    }
+   ]
+  },
+  {
+   "title": "At the head office door, and the lane east",
+   "caption": "The door opens straight onto the court under its canopy. The lane to the plaza leaves the court's corner and runs east along the tower's south face, with a hedge broken for two lamps and trees in rows beyond.",
+   "images": [
+    {
+     "id": "door-desk-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/hodoor-desk-after.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "door-desk-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-door-desk-after.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "door-phone-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/hodoor-phone-after.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "door-phone-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-door-phone-after.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "lane-desk-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-lane-desk-after.webp",
+     "caption": "After: the lane, desktop"
+    },
+    {
+     "id": "lane-phone-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-lane-phone-after.webp",
+     "caption": "After: the lane, phone"
+    },
+    {
+     "id": "eve-desk-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/hodoor-eve-desk-after.webp.webp",
+     "caption": "Before, evening"
+    },
+    {
+     "id": "eve-desk-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-eve-desk-after.webp",
+     "caption": "After, evening"
+    },
+    {
+     "id": "eve-phone-after",
+     "image": "bible/shots/showcase/grid-frame-1/fc-eve-phone-after.webp",
+     "caption": "After, evening, phone"
+    }
+   ]
+  },
+  {
+   "title": "Fountain plaza",
+   "caption": "Before: the lane curved across the plaza's south edge. After: it runs straight along it and turns north at right angles at both ends, a square of lane paving and a darker stone edge at each corner. The canteen and the shop street stand on the same grid.",
+   "images": [
+    {
+     "id": "plaza-desk-before",
+     "image": "bible/shots/showcase/grid-frame-1/pl-arrive-desk-before.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "plaza-desk-after",
+     "image": "bible/shots/showcase/grid-frame-1/pl-arrive-desk-after.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "plaza-phone-before",
+     "image": "bible/shots/showcase/grid-frame-1/pl-arrive-phone-before.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "plaza-phone-after",
+     "image": "bible/shots/showcase/grid-frame-1/pl-arrive-phone-after.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "plaza-canteen-after",
+     "image": "bible/shots/showcase/grid-frame-1/pl-canteen-desk-after.webp.webp",
+     "caption": "After: the canteen terrace"
+    },
+    {
+     "id": "plaza-wide-after",
+     "image": "bible/shots/showcase/grid-frame-1/pl-wide-desk-after.webp",
+     "caption": "After: the lane's west end"
+    },
+    {
+     "id": "plaza-eve-before",
+     "image": "bible/shots/showcase/grid-frame-1/pl-eve-desk-before.webp",
+     "caption": "Before, evening"
+    },
+    {
+     "id": "plaza-eve-after",
+     "image": "bible/shots/showcase/grid-frame-1/pl-eve-desk-after.webp",
+     "caption": "After, evening, the lane's east end"
+    }
+   ]
+  },
+  {
+   "title": "Dorm courtyard",
+   "caption": "The courtyard itself is unchanged; the blocks behind it now stand on the same grid as Eric's.",
+   "images": [
+    {
+     "id": "dorm-desk-after",
+     "image": "bible/shots/showcase/grid-frame-1/dc-arrive-desk-after.webp",
+     "caption": "Arriving, desktop"
+    },
+    {
+     "id": "dorm-phone-after",
+     "image": "bible/shots/showcase/grid-frame-1/dc-arrive-phone-after.webp",
+     "caption": "Arriving, phone"
+    },
+    {
+     "id": "dorm-hall-after",
+     "image": "bible/shots/showcase/grid-frame-1/dc-hall-desk-after.webp",
+     "caption": "At the hall doors"
+    }
+   ]
+  },
+  {
+   "title": "The island map",
+   "caption": "The compare view now lays the straight-down island map under the layout, turned onto the grid. Paths are drawn with square corners.",
+   "images": [
+    {
+     "id": "map-compare-before",
+     "image": "bible/shots/showcase/grid-frame-1/map-compare-route-before.webp.webp",
+     "caption": "Before: compare with island-map-4"
+    },
+    {
+     "id": "map-compare-after",
+     "image": "bible/shots/showcase/grid-frame-1/map-compare-route-after.webp.webp",
+     "caption": "After: compare with island-map-4"
+    },
+    {
+     "id": "map-forecourt-before",
+     "image": "bible/shots/showcase/grid-frame-1/map-forecourt-map-before.webp.webp",
+     "caption": "Before: the forecourt from above"
+    },
+    {
+     "id": "map-forecourt-after",
+     "image": "bible/shots/showcase/grid-frame-1/map-forecourt-map-after.webp.webp",
+     "caption": "After: the forecourt from above"
+    },
+    {
+     "id": "map-plaza-before",
+     "image": "bible/shots/showcase/grid-frame-1/map-plaza-map-before.webp.webp",
+     "caption": "Before: the plaza from above"
+    },
+    {
+     "id": "map-plaza-after",
+     "image": "bible/shots/showcase/grid-frame-1/map-plaza-map-after.webp.webp",
+     "caption": "After: the plaza from above"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  },
+  {
+   "label": "Island map compare",
+   "href": "game3d/?mapcompare=1"
+  }
+ ],
+ "media": []
+}

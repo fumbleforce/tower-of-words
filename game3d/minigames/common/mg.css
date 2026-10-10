@@ -1,0 +1,129 @@
+/* The minigames' shared look. Colours and type are the game's own (game3d/css/style.css :root),
+   so these pages read as part of Amakawa: slate panels, Mio's teal for what you act on, peach for Japanese. */
+@font-face { font-family: "Zen Kaku Gothic New"; src: url("../../fonts/zkg-medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Zen Kaku Gothic New"; src: url("../../fonts/zkg-bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+:root {
+  --ink: #eef0f4;
+  --ink-dim: #a9b1bf;
+  --panel: rgba(24, 27, 34, 0.92);
+  --panel-edge: rgba(255, 255, 255, 0.09);
+  --jp: #ffc9a8;
+  --gl: #9aa6b8;
+  --accent: #6fd0c6;
+  --warn: #f08a7e;
+  --floor: #3a414d;
+  --r: 12px;
+  --font: "Zen Kaku Gothic New", "Noto Sans CJK JP", "Noto Sans JP", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #20242b; color: var(--ink); font: 500 16px/1.45 var(--font); -webkit-font-smoothing: antialiased; overflow: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; }
+ruby rt { font-size: .5em; color: var(--gl); font-weight: 500; }
+ruby.kata rt { letter-spacing: .02em; }
+
+.mg { height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; }
+
+/* ---------- top bar ---------- */
+.bar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: rgba(16, 18, 23, .9); border-bottom: 1px solid var(--panel-edge); }
+.where { white-space: nowrap; display: flex; flex-direction: column; line-height: 1.2; margin-right: auto; }
+.where b { font-size: 15px; }
+.where span { font-size: 12px; color: var(--ink-dim); }
+.pips { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.pips li { width: 9px; height: 9px; border-radius: 3px; background: #3b4250; }
+.pips li.done { background: #8a93a3; }
+.pips li.won { background: var(--accent); }
+.pips li.now { background: transparent; box-shadow: inset 0 0 0 2px var(--accent); }
+.chip { padding: 6px 10px; border-radius: 8px; background: #2c323d; border: 1px solid var(--panel-edge); font-size: 13px; color: var(--ink-dim); }
+.chip[aria-pressed="true"] { color: var(--accent); border-color: rgba(111, 208, 198, .5); }
+
+/* ---------- stage ---------- */
+.stage { position: relative; overflow: hidden; background:
+  radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.05), transparent 65%),
+  repeating-linear-gradient(0deg, transparent 0 47px, rgba(255,255,255,.035) 47px 48px),
+  repeating-linear-gradient(90deg, transparent 0 47px, rgba(255,255,255,.035) 47px 48px), var(--floor); }
+.stage.good { animation: good .6s ease; }
+.stage.bad { animation: bad .45s ease; }
+@keyframes good { 30% { box-shadow: inset 0 0 0 4px rgba(111, 208, 198, .65); } }
+@keyframes bad { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+.arrows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 3; }
+.arrows marker path { fill: var(--accent); }
+.arrow { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; }
+.arrow.live { stroke-dasharray: 2 10; }
+.arrow.wrong { stroke: var(--warn); }
+.arrow.past { stroke: rgba(111, 208, 198, .35); stroke-width: 3; }
+.can-drag { touch-action: none; cursor: grab; }
+.picking .can-drag { cursor: grabbing; }
+.flying, .ghost { position: absolute; left: 0; top: 0; z-index: 5; pointer-events: none; margin: 0; }
+
+/* ---------- talk box (the game's dialogue look) ---------- */
+.talk { position: relative; display: grid; grid-template-columns: 200px 1fr; align-items: end; gap: 0 18px; padding: 0 24px 22px;
+  background: linear-gradient(to top, rgba(14, 16, 20, .96) 60%, rgba(14, 16, 20, 0)); min-height: 250px; }
+.talk .por { align-self: end; width: 200px; height: 250px; object-fit: cover; object-position: 50% 0; margin-top: -60px;
+  -webkit-mask: linear-gradient(to top, transparent 0, #000 40px); mask: linear-gradient(to top, transparent 0, #000 40px); }
+.talk.narration .por { visibility: hidden; }
+.talk.right { grid-template-columns: 1fr 160px; }
+.talk.right .por { order: 2; width: 160px; height: 200px; }
+.box { position: relative; max-width: 860px; padding: 14px 18px 12px; border-radius: var(--r); background: var(--panel); border: 1px solid var(--panel-edge); }
+.talk.waiting .box { cursor: pointer; }
+.who { font-size: 13px; font-weight: 700; color: var(--accent); min-height: 18px; }
+.line { font-size: 19px; margin: 2px 0 4px; }
+.line.jp { font-size: 22px; color: var(--jp); line-height: 2; }
+.en { min-height: 0; font-size: 15px; color: var(--ink-dim); }
+.en .reveal { margin-top: 2px; }
+.next { margin-top: 6px; font-size: 12px; color: var(--ink-dim); text-align: right; }
+.talk:not(.waiting) .next { display: none; }
+.w { border-bottom: 1px dashed rgba(255, 201, 168, .5); cursor: help; }
+.key { white-space: nowrap; color: #fff; background: rgba(111, 208, 198, .2); border-radius: 5px; padding: 0 3px; font-weight: 700; }
+
+.task:empty { display: none; }
+.task { margin-top: 10px; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice { min-height: 48px; padding: 6px 16px; border-radius: 10px; background: #2c323d; border: 1px solid rgba(255,255,255,.14); color: var(--jp); font-size: 20px; line-height: 1.9; font-weight: 700; transition: transform .12s, background .12s; }
+.choice:hover { background: #343b48; }
+.choice:active { transform: scale(.97); }
+.choice:disabled { opacity: .3; }
+.choice.wrongpick { border-color: var(--warn); }
+.sentence { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 4px; color: var(--jp); font-size: 22px; line-height: 2.1; margin-bottom: 10px; }
+.gap { min-width: 72px; min-height: 44px; padding: 0 10px; border-radius: 8px; border: 2px dashed #5b6475; background: rgba(0,0,0,.2); color: var(--jp); font-size: 20px; font-weight: 700; line-height: 1.8; }
+.gap.cur { border-color: var(--accent); }
+.gap.filled { border-style: solid; border-color: rgba(255,255,255,.25); background: #2c323d; }
+.gloss { color: var(--ink-dim); }
+
+.pop { position: fixed; z-index: 20; display: flex; flex-direction: column; padding: 8px 12px; border-radius: 10px; background: #11141a; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 6px 20px rgba(0,0,0,.4); font-size: 14px; pointer-events: none; }
+.pop[hidden] { display: none; }
+.pop b { color: var(--jp); }
+
+/* ---------- end card ---------- */
+.endcard { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 16px; background: rgba(12, 14, 18, .7); }
+.sheet { width: min(520px, 100%); max-height: calc(100dvh - 32px); overflow: auto; padding: 22px 22px 18px; border-radius: 16px; background: #1d2129; border: 1px solid var(--panel-edge); }
+.sheet h2 { margin: 0 0 4px; font-size: 22px; }
+.sheet .sub { margin: 0 0 14px; color: var(--ink-dim); }
+.sheet ul { list-style: none; margin: 0 0 16px; padding: 0; }
+.sheet li { display: flex; flex-direction: column; padding: 8px 0; border-top: 1px solid rgba(255,255,255,.06); }
+.sheet li .jp { color: var(--jp); font-size: 19px; line-height: 1.9; }
+.sheet li .gloss { font-size: 14px; }
+.primary { min-height: 48px; padding: 0 22px; border-radius: 10px; border: 0; background: var(--accent); color: #10302d; font-weight: 700; }
+
+/* ---------- phone ---------- */
+body.phone .bar { padding: 8px 10px; gap: 6px; }
+body.phone .where span { display: none; }
+body.phone .pips { gap: 3px; }
+body.phone .pips li { width: 7px; height: 7px; border-radius: 2px; }
+/* a talk box of one height, so the scene above it never jumps between a line and a task */
+body.phone .talk { grid-template-columns: 1fr; align-content: end; padding: 0 10px 12px; min-height: 326px; }
+body.phone .talk .por { position: absolute; left: 10px; bottom: calc(100% - 64px); width: 92px; height: 116px; margin: 0; }
+body.phone .talk.right .por { left: auto; right: 10px; }
+body.phone .talk .box { margin-top: 56px; padding: 10px 14px; }
+body.phone .talk.narration .box { margin-top: 12px; }
+body.phone .talk .who { padding-left: 92px; }
+body.phone .talk.right .who, body.phone .talk.narration .who { padding-left: 0; }
+body.phone .line { font-size: 17px; }
+body.phone .line.jp, body.phone .sentence { font-size: 20px; }
+body.phone .choice { font-size: 17px; padding: 2px 10px; min-height: 46px; }
+body.phone .choices { gap: 6px; }
+
+@media (prefers-reduced-motion: reduce) { .stage.good, .stage.bad { animation: none; } }
+
+/* On the phone the speaker's portrait stands up out of the talk box; keep the scene clear of it. */
+body.phone .stage > .scene { bottom: 54px; }

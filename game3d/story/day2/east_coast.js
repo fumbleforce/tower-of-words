@@ -1,0 +1,71 @@
+import { direction, shut, northClosed, sayFallbacks, fallbackNodes } from './shared.js';
+export default {
+  start: 'd2_arrive',
+  on: {
+    'talk:dorm_street': 'd2_to_lane', 'zone:row_exit': 'd2_to_lane',
+    'talk:courts_walk': 'd2_north_closed', 'zone:courts_exit': 'd2_north_closed',
+    'talk:onsen': 'd2_onsen',
+    'talk:lookout': [{ if: 'd2_shift_done && !d2_hamada_seen', node: 'd2_hamada' }, { if: '!d2_lookout_seen', node: 'd2_lookout' }, 'd2_lookout_again'],
+    'talk:kuroda': [{ if: '!d2_hamada_seen', node: 'd2_hamada' }, 'd2_hamada_again'],
+    'idle:kuroda': 'd2_hamada_idle',
+    ...sayFallbacks,
+    'say:mitai:kuroda': 'd2_lookout_view',
+    'say:ikitai:kuroda': 'd2_hamada_go',
+    'say:tabetai:kuroda': 'd2_hamada_food', 'say:nomitai:kuroda': 'd2_hamada_drink',
+  },
+  nodes: {
+    d2_arrive: [{ do: 'coastVisit', state: 'arrive' }, ...direction('dorm_street', 'dorm_street', 'dorm_street', 'dorm_street')],
+    d2_to_lane: [{ do: 'trip', to: 'east_lane' }],
+    d2_north_closed: northClosed,
+    d2_onsen: [{ if: 'd2_shift_done', then: ['> The card on the door says “Closed today for boiler repairs.”'], else: shut }],
+    d2_lookout: [
+      { do: 'cam', on: 'east_coast_lookout', zoom: 1.3 },
+      '> Someone has taped over the telescope’s coin slot: “Free to use.”',
+      { say: 'eric', emo: 'curious', text: 'I can have a look, then.' },
+      { go: 'd2_lookout_view' },
+    ],
+    d2_hamada: [
+      { do: 'cam', on: 'kuroda', zoom: 1.2 }, { do: 'coastVisit', state: 'clean' },
+      { say: 'kuroda', overheard: true, emo: 'polite', text: 'あ、すみません。もう終わります。' },
+      { say: 'eric', emo: 'warm', text: 'It’s all right. Is it broken?' },
+      { say: 'kuroda', overheard: true, emo: 'sheepish', text: 'いえ、レンズが汚れているだけです。毎回、こうなんです。' },
+      { do: 'coastVisit', state: 'offer' },
+      { say: 'kuroda', overheard: true, emo: 'polite', text: 'どうぞ。お金はいりませんよ。' },
+      { set: 'd2_hamada_seen' },
+      { choice: [
+        { text: 'How do I say “I want to see”?', go: 'd2_see_word', if: '!know_mitai' },
+        { text: 'Have a look through the telescope.', go: 'd2_lookout_view' },
+        { text: 'Leave him to enjoy the view.', go: 'd2_leave_lookout' },
+      ] },
+    ],
+    d2_see_word: [
+      { say: 'kuroda', overheard: true, emo: 'polite', text: '{mitai}。' },
+      { say: 'kuroda', emo: 'slow', slow: true, text: '{mitai}。' },
+      { do: 'type', word: 'mitai', from: 'kuroda', prompt: 'He has cleared the telescope for you. Try “I want to see”.' },
+      { go: 'd2_lookout_view' },
+    ],
+    d2_lookout_view: [
+      { do: 'coastVisit', state: 'view' },
+      { if: '!d2_lookout_seen', then: [
+        { say: 'eric', emo: 'curious', text: 'There are steps all the way down between those rocks. You can’t see them from the path.' },
+        { if: 'd2_shift_done', then: [
+          { say: 'kuroda', overheard: true, emo: 'polite', text: '満潮のときは、水の下です。' },
+          { say: 'eric', emo: 'tired', text: 'The bottom steps are under water. I’ll stay up here.' },
+        ] },
+      ], else: [{ say: 'eric', emo: 'warm', text: 'It’s easier to see where the water reaches from up here.' }] },
+      { set: 'd2_lookout_seen' }, { do: 'coastVisit', state: 'away' }, { do: 'cam', back: true },
+    ],
+    d2_hamada_idle: [{ say: 'kuroda', overheard: true, emo: 'polite', text: 'どうぞ。まだ見ますか。' }],
+    d2_hamada_again: [{ choice: [
+      { text: 'How do I say “I want to see”?', go: 'd2_see_word', if: '!know_mitai' },
+      { text: 'Have another look through the telescope.', go: 'd2_lookout_view' },
+      { text: 'Leave him to enjoy the view.', go: 'd2_leave_lookout' },
+    ] }],
+    d2_leave_lookout: [{ do: 'cam', back: true }],
+    d2_hamada_go: [{ say: 'kuroda', overheard: true, emo: 'polite', text: '下には降りられませんよ。ここから見るだけです。' }],
+    d2_hamada_food: [{ say: 'kuroda', overheard: true, emo: 'polite', text: '食事でしたら、商店街はあちらです。' }, { do: 'gesture', who: 'kuroda', kind: 'point', to: 'dorm_street' }],
+    d2_hamada_drink: [{ say: 'kuroda', overheard: true, emo: 'polite', text: 'テラスに自動販売機があります。' }, { do: 'gesture', who: 'kuroda', kind: 'point', to: 'dorm_street' }],
+    d2_lookout_again: [{ go: 'd2_lookout_view' }],
+    ...fallbackNodes,
+  },
+};

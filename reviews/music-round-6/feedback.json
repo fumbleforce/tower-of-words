@@ -1,0 +1,36 @@
+{
+ "sent": "2026-10-10T10:57:57+0200",
+ "picked": [
+  "evening-1"
+ ],
+ "options": {
+  "title-1": {
+   "star": false,
+   "reject": false,
+   "comment": "start is is not great, and is too repetetive, bit too fast paced"
+  },
+  "day-1": {
+   "star": false,
+   "reject": false,
+   "comment": "also super repetive"
+  },
+  "evening-1": {
+   "star": false,
+   "reject": false,
+   "comment": "pretty cool"
+  },
+  "office-2": {
+   "star": false,
+   "reject": true,
+   "comment": "some double notes on top of each other, too intense"
+  },
+  "shops-1": {
+   "star": false,
+   "reject": true,
+   "comment": "clown show"
+  }
+ },
+ "comment": "",
+ "read": false,
+ "history": []
+}

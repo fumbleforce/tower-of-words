@@ -1,0 +1,26 @@
+{
+ "title": "Test runs: one at a time, or in parallel",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "decided",
+ "multi": false,
+ "question": "Agents test the game in a headless browser. A rule from yesterday lets only one run at a time, so agents queue for up to an hour. Should runs go in parallel when the machine has room?",
+ "options": [
+  {
+   "id": "parallel",
+   "label": "Parallel when there's room",
+   "note": "Each run gets its own lock; a run only waits if the machine's load is above its 32 cores. About 5 or 6 runs fit at once. Your pick here is also the permission I need: the safety check blocked me from changing the shared lock without it."
+  },
+  {
+   "id": "one",
+   "label": "Keep one at a time",
+   "note": "No change. Slow, but the machine stays quiet."
+  }
+ ],
+ "decided": [
+  "parallel"
+ ],
+ "decision": "parallel when there's room",
+ "issue": 47,
+ "media": []
+}

@@ -1,0 +1,66 @@
+{
+ "title": "Crowds without waves: every way, own pace, stops and pairs",
+ "date": "2026-10-02",
+ "by": "claude-agent:crowd-mix",
+ "caption": "From your note on the phone: \"they come in waves and all walk the same way, it feels a bit artificial\". New people now set off at random gaps instead of in a rush (also after a scene), every period has people going against the commute and across it, everyone walks at their own pace, some stop on the way (a phone, a shop window, a shoe, a word together) and some walk in twos. Strips: the same phone view in the morning, one frame every 3 seconds, before and after.",
+ "sections": [
+  {
+   "title": "Station forecourt, morning (phone)",
+   "images": [
+    {
+     "id": "forecourt-morning-before",
+     "image": "bible/shots/showcase/crowd-mix-1/forecourt-morning-before.webp.webp",
+     "caption": "Before: a bunch of four walking the same way together, then an empty street, then the next bunch"
+    },
+    {
+     "id": "forecourt-morning-after",
+     "image": "bible/shots/showcase/crowd-mix-1/forecourt-morning-after.webp.webp",
+     "caption": "After: people spread out, some toward the head office, some away from it or across"
+    }
+   ]
+  },
+  {
+   "title": "Fountain plaza, morning (phone)",
+   "images": [
+    {
+     "id": "plaza-morning-before",
+     "image": "bible/shots/showcase/crowd-mix-1/plaza-morning-before.webp.webp",
+     "caption": "Before: three walking in step toward the head office, then one at a time. Over a minute, nine in ten walkers here headed west"
+    },
+    {
+     "id": "plaza-morning-after",
+     "image": "bible/shots/showcase/crowd-mix-1/plaza-morning-after.webp.webp",
+     "caption": "After: one or two crossing at a time, different ways, next to a pair talking. Over a minute, about half headed west"
+    }
+   ]
+  },
+  {
+   "title": "Stops and pairs up close",
+   "caption": "Taken with every walker set to stop, so there is one in view; in the game 15 to 40% of walkers stop once, depending on the place and time.",
+   "images": [
+    {
+     "id": "stop-fountain-desktop",
+     "image": "bible/shots/showcase/crowd-mix-1/stop-fountain-desktop.webp",
+     "caption": "Stopped at the fountain's rim, looking at it; two walking together below"
+    },
+    {
+     "id": "stop-shoe-desktop",
+     "image": "bible/shots/showcase/crowd-mix-1/stop-shoe-desktop.webp",
+     "caption": "Bent down to a shoe by the fountain"
+    },
+    {
+     "id": "pair-talking-phone",
+     "image": "bible/shots/showcase/crowd-mix-1/pair-talking-phone.webp",
+     "caption": "Two who were walking together, stopped to talk on the plaza lane"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

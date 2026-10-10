@@ -1,0 +1,61 @@
+{
+ "title": "Kenji's new faces in the game",
+ "date": "2026-09-30",
+ "by": "claude-agent:kenji-install",
+ "caption": "Kenji now uses the h4 portrait in the office: neutral nk-d80-1, grin g0-h4 (h4 itself) and sheepish s3k-d80-1 from reviews/kenji-expressions-1. The 711 stand-in is gone. Shots hold his first line in the office and swap the face.",
+ "sections": [
+  {
+   "title": "Desktop 1366x860",
+   "caption": "His first line, each face in turn. Eric on the right for scale.",
+   "images": [
+    {
+     "id": "desk-neutral",
+     "image": "bible/shots/showcase/kenji-faces-1/1366x860-neutral.webp.webp",
+     "caption": "Neutral (nk-d80-1)"
+    },
+    {
+     "id": "desk-grin",
+     "image": "bible/shots/showcase/kenji-faces-1/1366x860-grin.webp.webp",
+     "caption": "Grin (g0-h4)"
+    },
+    {
+     "id": "desk-sheepish",
+     "image": "bible/shots/showcase/kenji-faces-1/1366x860-sheepish.webp.webp",
+     "caption": "Sheepish (s3k-d80-1)"
+    }
+   ]
+  },
+  {
+   "title": "Phone 390x844",
+   "caption": "The same line on a phone.",
+   "images": [
+    {
+     "id": "phone-neutral",
+     "image": "bible/shots/showcase/kenji-faces-1/390x844-neutral.webp",
+     "caption": "Neutral"
+    },
+    {
+     "id": "phone-grin",
+     "image": "bible/shots/showcase/kenji-faces-1/390x844-grin.webp",
+     "caption": "Grin"
+    },
+    {
+     "id": "phone-sheepish",
+     "image": "bible/shots/showcase/kenji-faces-1/390x844-sheepish.webp",
+     "caption": "Sheepish"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "The pick",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/reviews/kenji-expressions-1"
+  },
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

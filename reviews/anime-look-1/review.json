@@ -1,0 +1,154 @@
+{
+ "title": "Anime look trial: six shader tricks at the plaza fountain",
+ "date": "2026-10-09",
+ "by": "claude-agent:anime-look",
+ "status": "decided",
+ "question": "Which of the six tricks should we keep, and should the look go to every place?",
+ "multi": true,
+ "media": [
+  {
+   "image": "reviews/anime-look-1/reference.webp.webp",
+   "caption": "Your reference (art/refs/style/anime-fountain-reference.png). You asked: \"There isnt like some shader tricks and texture hacks we can to to approach this look is there?\", then \"Yeah lets try it I say\". Everything below is a screenshot of the real game at the plaza fountain, nothing painted. The trial is six tricks behind a URL flag, so the game you play now is unchanged: ?anime=1 turns all six on, and a list turns on some of them, for example ?anime=toon,outline. 1 toon: the sun's light in three tones (lit, a middle band, shade) with a soft edge between them; the shade side goes cool blue and a little richer in colour instead of grey, the lit side a touch warm. It changes with the time of day. 2 outline: thin lines on edges and outlines, drawn as a darker shade of the colour underneath, never black, fading out in the distance. 3 dapple: under tree crowns the shadow becomes leaf shade with spots of sun in it. 4 paint: walls and stone a little darker at the foot and lighter up top, and a faint colour drift over stone and paving. 5 water: new fountain water, turquoise by depth, ripple rings, foam where the water lands, sparkles, the falling water as separate streams with splash rings. 6 crowns: tree crowns and hedges shaded as soft clumps instead of flat facets. An earlier style study (cel shading with ink lines, 2026-09-29) got \"looks more like evening\", so here the shade is lifted and kept cool rather than dark."
+  },
+  {
+   "image": "reviews/anime-look-1/pair-desktop-follow-morning.webp.webp",
+   "caption": "Desktop, third-person camera behind Eric, morning. Left: the game now. Right: all six."
+  },
+  {
+   "image": "reviews/anime-look-1/pair-desktop-follow-evening.webp.webp",
+   "caption": "The same view after work. Left: now. Right: all six."
+  },
+  {
+   "image": "reviews/anime-look-1/pair-desktop-close-morning.webp.webp",
+   "caption": "Desktop, closer and higher, morning. Left: now. Right: all six."
+  },
+  {
+   "image": "reviews/anime-look-1/pair-desktop-close-evening.webp.webp",
+   "caption": "The same, after work."
+  },
+  {
+   "image": "reviews/anime-look-1/pair-desktop-trees-morning.webp.webp",
+   "caption": "Desktop, the trees by the cross walk east of the fountain, morning (crowns and leaf shade show best here). Left: now. Right: all six."
+  },
+  {
+   "image": "reviews/anime-look-1/pair-desktop-trees-evening.webp.webp",
+   "caption": "The same, after work."
+  },
+  {
+   "image": "reviews/anime-look-1/pair-desktop-overview-morning.webp.webp",
+   "caption": "Desktop, overview camera, morning. Left: now. Right: all six."
+  },
+  {
+   "image": "reviews/anime-look-1/pair-desktop-overview-evening.webp.webp",
+   "caption": "The same, after work."
+  },
+  {
+   "image": "reviews/anime-look-1/pair-phone-morning.webp.webp",
+   "caption": "Phone (390x844), its overview camera, morning. Left: now. Right: all six."
+  },
+  {
+   "image": "reviews/anime-look-1/pair-phone-evening.webp.webp",
+   "caption": "Phone, after work. Left: now. Right: all six."
+  },
+  {
+   "image": "reviews/anime-look-1/desktop-follow-morning.webp.webp",
+   "caption": "Each trick on its own, desktop third-person view, morning: now, toon, outline, dapple / paint, water, crowns, all six."
+  },
+  {
+   "image": "reviews/anime-look-1/desktop-follow-evening.webp.webp",
+   "caption": "Each trick on its own, the same view after work."
+  },
+  {
+   "image": "reviews/anime-look-1/desktop-close-morning.webp.webp",
+   "caption": "Each trick on its own, the closer view, morning."
+  },
+  {
+   "image": "reviews/anime-look-1/desktop-close-evening.webp.webp",
+   "caption": "Each trick on its own, the closer view, after work."
+  },
+  {
+   "image": "reviews/anime-look-1/desktop-trees-morning.webp.webp",
+   "caption": "Each trick on its own, the trees, morning."
+  },
+  {
+   "image": "reviews/anime-look-1/desktop-trees-evening.webp.webp",
+   "caption": "Each trick on its own, the trees, after work."
+  },
+  {
+   "image": "reviews/anime-look-1/desktop-overview-morning.webp.webp",
+   "caption": "Each trick on its own, desktop overview, morning."
+  },
+  {
+   "image": "reviews/anime-look-1/desktop-overview-evening.webp.webp",
+   "caption": "Each trick on its own, desktop overview, after work."
+  },
+  {
+   "image": "reviews/anime-look-1/phone-morning.webp.webp",
+   "caption": "Each trick on its own, phone, morning."
+  },
+  {
+   "image": "reviews/anime-look-1/phone-evening.webp.webp",
+   "caption": "Each trick on its own, phone, after work. Phone cost, measured at 390x844 on quality medium as phones run it (rendering at 585x1266), same spot, on this machine's GPU, median of 40 frames: now 92 draw calls, 159k triangles, 4.0 ms a frame. toon 94 calls, 159k, 4.5 ms. outline 93, 159k, 5.4 ms (one extra full-screen pass, no extra scene draw). dapple 92, 159k, 4.0 ms (one 256x256 map). paint 93, 159k, 5.0 ms. water 91, 159k, 5.1 ms (three meshes in place of five, 870 triangles). crowns 94, 160k, 4.7 ms (no cost while playing, a moment at load). All six 92, 160k, 5.8 ms morning and 6.4 ms after work against 4.1 ms now. So no extra draw calls or triangles to speak of (the 1 to 3 call differences are passers-by walking in and out of view); the price is shader work per pixel, about half as much again per frame, mostly the outline, the paint and the water. The desktop numbers move the same way but are lost in this machine's noise (7 to 10 ms either way)."
+  }
+ ],
+ "options": [
+  {
+   "id": "toon",
+   "label": "toon",
+   "image": "reviews/anime-look-1/trick-toon.webp.webp",
+   "note": "Three-tone light, cool shade, warm lit side. Left now, right ?anime=toon. About +0.5 ms on a phone."
+  },
+  {
+   "id": "outline",
+   "label": "outline",
+   "image": "reviews/anime-look-1/trick-outline.webp.webp",
+   "note": "Coloured edge lines. Left now, right ?anime=outline. About +1 ms on a phone."
+  },
+  {
+   "id": "dapple",
+   "label": "dapple",
+   "image": "reviews/anime-look-1/trick-dapple.webp.webp",
+   "note": "Leaf shade with sun spots under crowns. Left now, right ?anime=dapple. No measurable cost."
+  },
+  {
+   "id": "paint",
+   "label": "paint",
+   "image": "reviews/anime-look-1/trick-paint.webp.webp",
+   "note": "Darker feet, lighter tops, faint colour drift on stone and paving. Left now, right ?anime=paint. About +1 ms on a phone."
+  },
+  {
+   "id": "water",
+   "label": "water",
+   "image": "reviews/anime-look-1/trick-water.webp.webp",
+   "note": "Stylised fountain water with streams and splash rings. Left now, right ?anime=water. About +1 ms on a phone."
+  },
+  {
+   "id": "crowns",
+   "label": "crowns",
+   "image": "reviews/anime-look-1/trick-crowns.webp.webp",
+   "note": "Soft clump shading on crowns and hedges. Left now, right ?anime=crowns. No cost while playing."
+  },
+  {
+   "id": "rollout",
+   "label": "rollout: make the kept tricks the default everywhere",
+   "note": "Pick this as well if the tricks you keep should become the game's look in every place, not only a flag."
+  }
+ ],
+ "links": [
+  {
+   "label": "All six in the game at the plaza",
+   "href": "game3d/index.html?place=plaza&anime=1"
+  },
+  {
+   "label": "The game now at the plaza (for comparison)",
+   "href": "game3d/index.html?place=plaza"
+  },
+  {
+   "label": "Only toon and outline",
+   "href": "game3d/index.html?place=plaza&anime=toon,outline"
+  }
+ ],
+ "decision": "rollout, \"just fix the fountain\"; toon kept; dapple and crowns dropped",
+ "decided_at": "2026-10-10T01:50:34+0200",
+ "issue": 402
+}

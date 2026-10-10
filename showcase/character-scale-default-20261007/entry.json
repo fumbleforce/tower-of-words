@@ -1,0 +1,1736 @@
+{
+ "title": "The selected 85% character size becomes the default",
+ "date": "2026-10-07",
+ "updated": "2026-10-07T13:23:10.569080+00:00",
+ "by": "codex",
+ "caption": "The approved 15% reduction applies to both protagonists, cast and crowds. Relative heights and movement speeds remain intact. Seats, markers and canteen hand contacts were checked; earlier diagnostic attempts remain below.",
+ "preview": "character-scale-default1-eric-1366-dorms-default",
+ "sections": [
+  {
+   "title": "character-scale / default1-eric-1366",
+   "caption": "Native diagnostic capture; measurements and limitations are in the accompanying work note.",
+   "images": [
+    {
+     "id": "character-scale-default1-eric-1366-canteen-100",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default1-eric-1366/canteen-100.webp.webp",
+     "caption": "canteen 100 — default1-eric-1366"
+    },
+    {
+     "id": "character-scale-default1-eric-1366-canteen-default",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default1-eric-1366/canteen-default.webp.webp",
+     "caption": "canteen default — default1-eric-1366"
+    },
+    {
+     "id": "character-scale-default1-eric-1366-canteen-detail-100",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default1-eric-1366/canteen-detail-100.webp.webp",
+     "caption": "canteen detail 100 — default1-eric-1366"
+    },
+    {
+     "id": "character-scale-default1-eric-1366-canteen-detail-default",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default1-eric-1366/canteen-detail-default.webp.webp",
+     "caption": "canteen detail default — default1-eric-1366"
+    },
+    {
+     "id": "character-scale-default1-eric-1366-dorms-100",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default1-eric-1366/dorms-100.webp.webp",
+     "caption": "dorms 100 — default1-eric-1366"
+    },
+    {
+     "id": "character-scale-default1-eric-1366-dorms-default",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default1-eric-1366/dorms-default.webp.webp",
+     "caption": "dorms default — default1-eric-1366"
+    },
+    {
+     "id": "character-scale-default1-eric-1366-forecourt-100",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default1-eric-1366/forecourt-100.webp.webp",
+     "caption": "forecourt 100 — default1-eric-1366"
+    },
+    {
+     "id": "character-scale-default1-eric-1366-forecourt-default",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default1-eric-1366/forecourt-default.webp.webp",
+     "caption": "forecourt default — default1-eric-1366"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-final5-1366",
+   "caption": "Final meal/water contacts, actual worker capsule clearance and mouth contact. Detail suffix uses a diagnostic side camera; some frames show the settled pose immediately after contact.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-final5-1366-collect-staff-tray-place-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/collect-staff-tray-place-contact-detail.webp.webp",
+     "caption": "collect staff tray place contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-collect-tray-take-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/collect-tray-take-contact-detail.webp.webp",
+     "caption": "collect tray take contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/collect.webp.webp",
+     "caption": "collect — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-eat-spoon-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/eat-spoon-contact-detail.webp.webp",
+     "caption": "eat spoon contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-eat-spoon-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/eat-spoon-contact.webp.webp",
+     "caption": "eat spoon contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-eat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/eat.webp.webp",
+     "caption": "eat — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-pay-payment-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/pay-payment-contact-detail.webp.webp",
+     "caption": "pay payment contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/pay.webp.webp",
+     "caption": "pay — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-returntray-tray-place-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/returnTray-tray-place-contact-detail.webp.webp",
+     "caption": "returnTray tray place contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-returntray-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/returnTray-tray-place-contact.webp.webp",
+     "caption": "returnTray tray place contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-returntray-tray-take-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/returnTray-tray-take-contact-detail.webp.webp",
+     "caption": "returnTray tray take contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-returntray-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/returnTray-tray-take-contact.webp.webp",
+     "caption": "returnTray tray take contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-returntray",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/returnTray.webp.webp",
+     "caption": "returnTray — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/room.webp.webp",
+     "caption": "room — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/select.webp.webp",
+     "caption": "select — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-sit-tray-place-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/sit-tray-place-contact-detail.webp.webp",
+     "caption": "sit tray place contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-sit-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/sit-tray-place-contact.webp.webp",
+     "caption": "sit tray place contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-sit",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/sit.webp.webp",
+     "caption": "sit — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water-cup-return-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water-cup-return-contact-detail.webp.webp",
+     "caption": "water cup return contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water-cup-return-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water-cup-return-contact.webp.webp",
+     "caption": "water cup return contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water-cup-under-outlet-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water-cup-under-outlet-contact-detail.webp.webp",
+     "caption": "water cup under outlet contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water-cup-under-outlet-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water-cup-under-outlet-contact.webp.webp",
+     "caption": "water cup under outlet contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water-water-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water-water-contact-detail.webp.webp",
+     "caption": "water water contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water-water-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water-water-contact.webp.webp",
+     "caption": "water water contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water-water-control-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water-water-control-contact-detail.webp.webp",
+     "caption": "water water control contact detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water-water-control-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water-water-control-contact.webp.webp",
+     "caption": "water water control contact — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water-water-fill-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water-water-fill-detail.webp.webp",
+     "caption": "water water fill detail — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water-water-fill",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water-water-fill.webp.webp",
+     "caption": "water water fill — scale85-final5-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-1366-water",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-1366/water.webp.webp",
+     "caption": "water — scale85-final5-1366"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-final5-390",
+   "caption": "Final meal/water contacts, actual worker capsule clearance and mouth contact. Detail suffix uses a diagnostic side camera; some frames show the settled pose immediately after contact.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-final5-390-collect-staff-tray-place-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/collect-staff-tray-place-contact-detail.webp.webp",
+     "caption": "collect staff tray place contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-collect-tray-take-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/collect-tray-take-contact-detail.webp.webp",
+     "caption": "collect tray take contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/collect.webp.webp",
+     "caption": "collect — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-eat-spoon-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/eat-spoon-contact-detail.webp.webp",
+     "caption": "eat spoon contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-eat-spoon-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/eat-spoon-contact.webp.webp",
+     "caption": "eat spoon contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-eat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/eat.webp.webp",
+     "caption": "eat — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-pay-payment-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/pay-payment-contact-detail.webp.webp",
+     "caption": "pay payment contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/pay.webp.webp",
+     "caption": "pay — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-returntray-tray-place-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/returnTray-tray-place-contact-detail.webp.webp",
+     "caption": "returnTray tray place contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-returntray-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/returnTray-tray-place-contact.webp.webp",
+     "caption": "returnTray tray place contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-returntray-tray-take-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/returnTray-tray-take-contact-detail.webp.webp",
+     "caption": "returnTray tray take contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-returntray-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/returnTray-tray-take-contact.webp.webp",
+     "caption": "returnTray tray take contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-returntray",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/returnTray.webp.webp",
+     "caption": "returnTray — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/room.webp.webp",
+     "caption": "room — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/select.webp.webp",
+     "caption": "select — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-sit-tray-place-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/sit-tray-place-contact-detail.webp.webp",
+     "caption": "sit tray place contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-sit-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/sit-tray-place-contact.webp.webp",
+     "caption": "sit tray place contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-sit",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/sit.webp.webp",
+     "caption": "sit — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water-cup-return-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water-cup-return-contact-detail.webp.webp",
+     "caption": "water cup return contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water-cup-return-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water-cup-return-contact.webp.webp",
+     "caption": "water cup return contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water-cup-under-outlet-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water-cup-under-outlet-contact-detail.webp.webp",
+     "caption": "water cup under outlet contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water-cup-under-outlet-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water-cup-under-outlet-contact.webp.webp",
+     "caption": "water cup under outlet contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water-water-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water-water-contact-detail.webp.webp",
+     "caption": "water water contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water-water-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water-water-contact.webp.webp",
+     "caption": "water water contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water-water-control-contact-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water-water-control-contact-detail.webp.webp",
+     "caption": "water water control contact detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water-water-control-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water-water-control-contact.webp.webp",
+     "caption": "water water control contact — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water-water-fill-detail",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water-water-fill-detail.webp.webp",
+     "caption": "water water fill detail — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water-water-fill",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water-water-fill.webp.webp",
+     "caption": "water water fill — scale85-final5-390"
+    },
+    {
+     "id": "canteen-meals-scale85-final5-390-water",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-final5-390/water.webp.webp",
+     "caption": "water — scale85-final5-390"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / contacts3-carina-1366",
+   "caption": "Native diagnostic capture; measurements and limitations are in the accompanying work note.",
+   "images": [
+    {
+     "id": "character-scale-contacts3-carina-1366-canteen-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-carina-1366/canteen-arrival.webp.webp",
+     "caption": "canteen arrival — contacts3-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts3-carina-1366-canteen-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-carina-1366/canteen-seat.webp.webp",
+     "caption": "canteen seat — contacts3-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts3-carina-1366-office-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-carina-1366/office-arrival.webp.webp",
+     "caption": "office arrival — contacts3-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts3-carina-1366-office-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-carina-1366/office-seat.webp.webp",
+     "caption": "office seat — contacts3-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts3-carina-1366-pool-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-carina-1366/pool-arrival.webp.webp",
+     "caption": "pool arrival — contacts3-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts3-carina-1366-pool-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-carina-1366/pool-seat.webp.webp",
+     "caption": "pool seat — contacts3-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts3-carina-1366-train-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-carina-1366/train-arrival.webp.webp",
+     "caption": "train arrival — contacts3-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts3-carina-1366-train-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-carina-1366/train-seat.webp.webp",
+     "caption": "train seat — contacts3-carina-1366"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / contacts3-eric-390",
+   "caption": "Native diagnostic capture; measurements and limitations are in the accompanying work note.",
+   "images": [
+    {
+     "id": "character-scale-contacts3-eric-390-canteen-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-eric-390/canteen-arrival.webp.webp",
+     "caption": "canteen arrival — contacts3-eric-390"
+    },
+    {
+     "id": "character-scale-contacts3-eric-390-canteen-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-eric-390/canteen-seat.webp.webp",
+     "caption": "canteen seat — contacts3-eric-390"
+    },
+    {
+     "id": "character-scale-contacts3-eric-390-office-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-eric-390/office-arrival.webp.webp",
+     "caption": "office arrival — contacts3-eric-390"
+    },
+    {
+     "id": "character-scale-contacts3-eric-390-office-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-eric-390/office-seat.webp.webp",
+     "caption": "office seat — contacts3-eric-390"
+    },
+    {
+     "id": "character-scale-contacts3-eric-390-pool-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-eric-390/pool-arrival.webp.webp",
+     "caption": "pool arrival — contacts3-eric-390"
+    },
+    {
+     "id": "character-scale-contacts3-eric-390-pool-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-eric-390/pool-seat.webp.webp",
+     "caption": "pool seat — contacts3-eric-390"
+    },
+    {
+     "id": "character-scale-contacts3-eric-390-train-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-eric-390/train-arrival.webp.webp",
+     "caption": "train arrival — contacts3-eric-390"
+    },
+    {
+     "id": "character-scale-contacts3-eric-390-train-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts3-eric-390/train-seat.webp.webp",
+     "caption": "train seat — contacts3-eric-390"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale100-delivery4-390",
+   "caption": "Final meal/water contacts, actual worker capsule clearance and mouth contact. Detail suffix uses a diagnostic side camera; some frames show the settled pose immediately after contact.",
+   "images": [
+    {
+     "id": "canteen-meals-scale100-delivery4-390-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/collect.webp.webp",
+     "caption": "collect — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-eat-spoon-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/eat-spoon-contact.webp.webp",
+     "caption": "eat spoon contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-eat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/eat.webp.webp",
+     "caption": "eat — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/pay.webp.webp",
+     "caption": "pay — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-returntray-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/returnTray-tray-place-contact.webp.webp",
+     "caption": "returnTray tray place contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-returntray-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/returnTray-tray-take-contact.webp.webp",
+     "caption": "returnTray tray take contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-returntray",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/returnTray.webp.webp",
+     "caption": "returnTray — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/room.webp.webp",
+     "caption": "room — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/select.webp.webp",
+     "caption": "select — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-sit-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/sit-tray-place-contact.webp.webp",
+     "caption": "sit tray place contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-sit",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/sit.webp.webp",
+     "caption": "sit — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-water-cup-return-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/water-cup-return-contact.webp.webp",
+     "caption": "water cup return contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-water-cup-under-outlet-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/water-cup-under-outlet-contact.webp.webp",
+     "caption": "water cup under outlet contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-water-water-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/water-water-contact.webp.webp",
+     "caption": "water water contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-water-water-control-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/water-water-control-contact.webp.webp",
+     "caption": "water water control contact — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-water-water-fill",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/water-water-fill.webp.webp",
+     "caption": "water water fill — scale100-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale100-delivery4-390-water",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-delivery4-390/water.webp.webp",
+     "caption": "water — scale100-delivery4-390"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale100-radius7-390",
+   "caption": "Final staff delivery checks at 85% and 100%, using the larger live-body/scripted collision envelope; hand contact and complete staff route pass.",
+   "images": [
+    {
+     "id": "canteen-meals-scale100-radius7-390-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-radius7-390/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale100-radius7-390"
+    },
+    {
+     "id": "canteen-meals-scale100-radius7-390-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-radius7-390/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale100-radius7-390"
+    },
+    {
+     "id": "canteen-meals-scale100-radius7-390-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-radius7-390/collect.webp.webp",
+     "caption": "collect — scale100-radius7-390"
+    },
+    {
+     "id": "canteen-meals-scale100-radius7-390-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-radius7-390/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale100-radius7-390"
+    },
+    {
+     "id": "canteen-meals-scale100-radius7-390-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-radius7-390/pay.webp.webp",
+     "caption": "pay — scale100-radius7-390"
+    },
+    {
+     "id": "canteen-meals-scale100-radius7-390-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-radius7-390/room.webp.webp",
+     "caption": "room — scale100-radius7-390"
+    },
+    {
+     "id": "canteen-meals-scale100-radius7-390-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale100-radius7-390/select.webp.webp",
+     "caption": "select — scale100-radius7-390"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-delivery1-1366",
+   "caption": "Earlier contact attempt retained; failures prompted the later physical contact corrections.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/collect.webp.webp",
+     "caption": "collect — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-eat-spoon-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/eat-spoon-contact.webp.webp",
+     "caption": "eat spoon contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-eat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/eat.webp.webp",
+     "caption": "eat — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/pay.webp.webp",
+     "caption": "pay — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-returntray-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/returnTray-tray-place-contact.webp.webp",
+     "caption": "returnTray tray place contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-returntray-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/returnTray-tray-take-contact.webp.webp",
+     "caption": "returnTray tray take contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-returntray",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/returnTray.webp.webp",
+     "caption": "returnTray — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/room.webp.webp",
+     "caption": "room — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/select.webp.webp",
+     "caption": "select — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-sit-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/sit-tray-place-contact.webp.webp",
+     "caption": "sit tray place contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-sit",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/sit.webp.webp",
+     "caption": "sit — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-water-cup-return-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/water-cup-return-contact.webp.webp",
+     "caption": "water cup return contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-water-cup-under-outlet-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/water-cup-under-outlet-contact.webp.webp",
+     "caption": "water cup under outlet contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-water-water-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/water-water-contact.webp.webp",
+     "caption": "water water contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-water-water-control-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/water-water-control-contact.webp.webp",
+     "caption": "water water control contact — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-water-water-fill",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/water-water-fill.webp.webp",
+     "caption": "water water fill — scale85-delivery1-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery1-1366-water",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery1-1366/water.webp.webp",
+     "caption": "water — scale85-delivery1-1366"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-delivery2-1366",
+   "caption": "Earlier contact attempt retained; failures prompted the later physical contact corrections.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/collect.webp.webp",
+     "caption": "collect — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-eat-spoon-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/eat-spoon-contact.webp.webp",
+     "caption": "eat spoon contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-eat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/eat.webp.webp",
+     "caption": "eat — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/pay.webp.webp",
+     "caption": "pay — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-returntray-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/returnTray-tray-place-contact.webp.webp",
+     "caption": "returnTray tray place contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-returntray-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/returnTray-tray-take-contact.webp.webp",
+     "caption": "returnTray tray take contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-returntray",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/returnTray.webp.webp",
+     "caption": "returnTray — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/room.webp.webp",
+     "caption": "room — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/select.webp.webp",
+     "caption": "select — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-sit-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/sit-tray-place-contact.webp.webp",
+     "caption": "sit tray place contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-sit",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/sit.webp.webp",
+     "caption": "sit — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-water-cup-return-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/water-cup-return-contact.webp.webp",
+     "caption": "water cup return contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-water-cup-under-outlet-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/water-cup-under-outlet-contact.webp.webp",
+     "caption": "water cup under outlet contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-water-water-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/water-water-contact.webp.webp",
+     "caption": "water water contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-water-water-control-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/water-water-control-contact.webp.webp",
+     "caption": "water water control contact — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-water-water-fill",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/water-water-fill.webp.webp",
+     "caption": "water water fill — scale85-delivery2-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-1366-water",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-1366/water.webp.webp",
+     "caption": "water — scale85-delivery2-1366"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-delivery2-390",
+   "caption": "Earlier contact attempt retained; failures prompted the later physical contact corrections.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-delivery2-390-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/collect.webp.webp",
+     "caption": "collect — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-eat-spoon-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/eat-spoon-contact.webp.webp",
+     "caption": "eat spoon contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-eat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/eat.webp.webp",
+     "caption": "eat — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/pay.webp.webp",
+     "caption": "pay — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-returntray-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/returnTray-tray-place-contact.webp.webp",
+     "caption": "returnTray tray place contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-returntray-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/returnTray-tray-take-contact.webp.webp",
+     "caption": "returnTray tray take contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-returntray",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/returnTray.webp.webp",
+     "caption": "returnTray — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/room.webp.webp",
+     "caption": "room — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/select.webp.webp",
+     "caption": "select — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-sit-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/sit-tray-place-contact.webp.webp",
+     "caption": "sit tray place contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-sit",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/sit.webp.webp",
+     "caption": "sit — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-water-cup-return-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/water-cup-return-contact.webp.webp",
+     "caption": "water cup return contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-water-cup-under-outlet-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/water-cup-under-outlet-contact.webp.webp",
+     "caption": "water cup under outlet contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-water-water-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/water-water-contact.webp.webp",
+     "caption": "water water contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-water-water-control-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/water-water-control-contact.webp.webp",
+     "caption": "water water control contact — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-water-water-fill",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/water-water-fill.webp.webp",
+     "caption": "water water fill — scale85-delivery2-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery2-390-water",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery2-390/water.webp.webp",
+     "caption": "water — scale85-delivery2-390"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-delivery3-1366",
+   "caption": "Earlier contact attempt retained; failures prompted the later physical contact corrections.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/collect.webp.webp",
+     "caption": "collect — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-eat-spoon-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/eat-spoon-contact.webp.webp",
+     "caption": "eat spoon contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-eat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/eat.webp.webp",
+     "caption": "eat — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/pay.webp.webp",
+     "caption": "pay — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-returntray-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/returnTray-tray-place-contact.webp.webp",
+     "caption": "returnTray tray place contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-returntray-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/returnTray-tray-take-contact.webp.webp",
+     "caption": "returnTray tray take contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-returntray",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/returnTray.webp.webp",
+     "caption": "returnTray — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/room.webp.webp",
+     "caption": "room — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/select.webp.webp",
+     "caption": "select — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-sit-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/sit-tray-place-contact.webp.webp",
+     "caption": "sit tray place contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-sit",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/sit.webp.webp",
+     "caption": "sit — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-water-cup-return-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/water-cup-return-contact.webp.webp",
+     "caption": "water cup return contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-water-cup-under-outlet-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/water-cup-under-outlet-contact.webp.webp",
+     "caption": "water cup under outlet contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-water-water-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/water-water-contact.webp.webp",
+     "caption": "water water contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-water-water-control-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/water-water-control-contact.webp.webp",
+     "caption": "water water control contact — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-water-water-fill",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/water-water-fill.webp.webp",
+     "caption": "water water fill — scale85-delivery3-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-1366-water",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-1366/water.webp.webp",
+     "caption": "water — scale85-delivery3-1366"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-delivery3-390",
+   "caption": "Earlier contact attempt retained; failures prompted the later physical contact corrections.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-delivery3-390-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/collect.webp.webp",
+     "caption": "collect — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-eat-spoon-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/eat-spoon-contact.webp.webp",
+     "caption": "eat spoon contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-eat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/eat.webp.webp",
+     "caption": "eat — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/pay.webp.webp",
+     "caption": "pay — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-returntray-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/returnTray-tray-place-contact.webp.webp",
+     "caption": "returnTray tray place contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-returntray-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/returnTray-tray-take-contact.webp.webp",
+     "caption": "returnTray tray take contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-returntray",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/returnTray.webp.webp",
+     "caption": "returnTray — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/room.webp.webp",
+     "caption": "room — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/select.webp.webp",
+     "caption": "select — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-sit-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/sit-tray-place-contact.webp.webp",
+     "caption": "sit tray place contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-sit",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/sit.webp.webp",
+     "caption": "sit — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-water-cup-return-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/water-cup-return-contact.webp.webp",
+     "caption": "water cup return contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-water-cup-under-outlet-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/water-cup-under-outlet-contact.webp.webp",
+     "caption": "water cup under outlet contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-water-water-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/water-water-contact.webp.webp",
+     "caption": "water water contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-water-water-control-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/water-water-control-contact.webp.webp",
+     "caption": "water water control contact — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-water-water-fill",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/water-water-fill.webp.webp",
+     "caption": "water water fill — scale85-delivery3-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery3-390-water",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery3-390/water.webp.webp",
+     "caption": "water — scale85-delivery3-390"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-delivery4-390",
+   "caption": "Final meal/water contacts, actual worker capsule clearance and mouth contact. Detail suffix uses a diagnostic side camera; some frames show the settled pose immediately after contact.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-delivery4-390-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/collect.webp.webp",
+     "caption": "collect — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-eat-spoon-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/eat-spoon-contact.webp.webp",
+     "caption": "eat spoon contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-eat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/eat.webp.webp",
+     "caption": "eat — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/pay.webp.webp",
+     "caption": "pay — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-returntray-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/returnTray-tray-place-contact.webp.webp",
+     "caption": "returnTray tray place contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-returntray-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/returnTray-tray-take-contact.webp.webp",
+     "caption": "returnTray tray take contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-returntray",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/returnTray.webp.webp",
+     "caption": "returnTray — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/room.webp.webp",
+     "caption": "room — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/select.webp.webp",
+     "caption": "select — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-sit-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/sit-tray-place-contact.webp.webp",
+     "caption": "sit tray place contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-sit",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/sit.webp.webp",
+     "caption": "sit — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-water-cup-return-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/water-cup-return-contact.webp.webp",
+     "caption": "water cup return contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-water-cup-under-outlet-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/water-cup-under-outlet-contact.webp.webp",
+     "caption": "water cup under outlet contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-water-water-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/water-water-contact.webp.webp",
+     "caption": "water water contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-water-water-control-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/water-water-control-contact.webp.webp",
+     "caption": "water water control contact — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-water-water-fill",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/water-water-fill.webp.webp",
+     "caption": "water water fill — scale85-delivery4-390"
+    },
+    {
+     "id": "canteen-meals-scale85-delivery4-390-water",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-delivery4-390/water.webp.webp",
+     "caption": "water — scale85-delivery4-390"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-radius7-1366",
+   "caption": "Final staff delivery checks at 85% and 100%, using the larger live-body/scripted collision envelope; hand contact and complete staff route pass.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-radius7-1366-collect-staff-tray-place-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-radius7-1366/collect-staff-tray-place-contact.webp.webp",
+     "caption": "collect staff tray place contact — scale85-radius7-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-radius7-1366-collect-tray-take-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-radius7-1366/collect-tray-take-contact.webp.webp",
+     "caption": "collect tray take contact — scale85-radius7-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-radius7-1366-collect",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-radius7-1366/collect.webp.webp",
+     "caption": "collect — scale85-radius7-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-radius7-1366-pay-payment-contact",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-radius7-1366/pay-payment-contact.webp.webp",
+     "caption": "pay payment contact — scale85-radius7-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-radius7-1366-pay",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-radius7-1366/pay.webp.webp",
+     "caption": "pay — scale85-radius7-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-radius7-1366-room",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-radius7-1366/room.webp.webp",
+     "caption": "room — scale85-radius7-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-radius7-1366-select",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-radius7-1366/select.webp.webp",
+     "caption": "select — scale85-radius7-1366"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-return6-1366",
+   "caption": "First frozen return-contact diagnostic. Measurements pass; the initial camera looks at the wrong side and obscures the hand. Corrected views are in return8.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-return6-1366-return-held-side",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-return6-1366/return-held-side.webp.webp",
+     "caption": "return held side — scale85-return6-1366"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-return6-390",
+   "caption": "First frozen return-contact diagnostic. Measurements pass; the initial camera looks at the wrong side and obscures the hand. Corrected views are in return8.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-return6-390-return-held-side",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-return6-390/return-held-side.webp.webp",
+     "caption": "return held side — scale85-return6-390"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-return8-1366",
+   "caption": "Actual return action held at contact before prop release. Right-side views expose the hand and tray rim; first side view is occluded and retained.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-return8-1366-return-held-right-high",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-return8-1366/return-held-right-high.webp.webp",
+     "caption": "return held right high — scale85-return8-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-return8-1366-return-held-right",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-return8-1366/return-held-right.webp.webp",
+     "caption": "return held right — scale85-return8-1366"
+    },
+    {
+     "id": "canteen-meals-scale85-return8-1366-return-held-side",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-return8-1366/return-held-side.webp.webp",
+     "caption": "return held side — scale85-return8-1366"
+    }
+   ]
+  },
+  {
+   "title": "canteen-meals / scale85-return8-390",
+   "caption": "Actual return action held at contact before prop release. Right-side views expose the hand and tray rim; first side view is occluded and retained.",
+   "images": [
+    {
+     "id": "canteen-meals-scale85-return8-390-return-held-right-high",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-return8-390/return-held-right-high.webp.webp",
+     "caption": "return held right high — scale85-return8-390"
+    },
+    {
+     "id": "canteen-meals-scale85-return8-390-return-held-right",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-return8-390/return-held-right.webp.webp",
+     "caption": "return held right — scale85-return8-390"
+    },
+    {
+     "id": "canteen-meals-scale85-return8-390-return-held-side",
+     "image": "bible/shots/showcase/character-scale-default-20261007/canteen-meals/scale85-return8-390/return-held-side.webp.webp",
+     "caption": "return held side — scale85-return8-390"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / contacts1-carina-1366",
+   "caption": "Earlier diagnostic attempt retained. Camera or measurement limitations; not final acceptance. Bag offset is a separate existing issue.",
+   "images": [
+    {
+     "id": "character-scale-contacts1-carina-1366-canteen-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-carina-1366/canteen-arrival.webp.webp",
+     "caption": "canteen arrival — contacts1-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts1-carina-1366-canteen-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-carina-1366/canteen-seat.webp.webp",
+     "caption": "canteen seat — contacts1-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts1-carina-1366-office-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-carina-1366/office-arrival.webp.webp",
+     "caption": "office arrival — contacts1-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts1-carina-1366-office-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-carina-1366/office-seat.webp.webp",
+     "caption": "office seat — contacts1-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts1-carina-1366-pool-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-carina-1366/pool-arrival.webp.webp",
+     "caption": "pool arrival — contacts1-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts1-carina-1366-pool-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-carina-1366/pool-seat.webp.webp",
+     "caption": "pool seat — contacts1-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts1-carina-1366-train-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-carina-1366/train-arrival.webp.webp",
+     "caption": "train arrival — contacts1-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts1-carina-1366-train-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-carina-1366/train-seat.webp.webp",
+     "caption": "train seat — contacts1-carina-1366"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / contacts1-eric-390",
+   "caption": "Earlier diagnostic attempt retained. Camera or measurement limitations; not final acceptance. Bag offset is a separate existing issue.",
+   "images": [
+    {
+     "id": "character-scale-contacts1-eric-390-failure",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-eric-390/failure.webp.webp",
+     "caption": "failure — contacts1-eric-390"
+    },
+    {
+     "id": "character-scale-contacts1-eric-390-office-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-eric-390/office-arrival.webp.webp",
+     "caption": "office arrival — contacts1-eric-390"
+    },
+    {
+     "id": "character-scale-contacts1-eric-390-office-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts1-eric-390/office-seat.webp.webp",
+     "caption": "office seat — contacts1-eric-390"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / contacts2-carina-1366",
+   "caption": "Earlier diagnostic attempt retained. Camera or measurement limitations; not final acceptance. Bag offset is a separate existing issue.",
+   "images": [
+    {
+     "id": "character-scale-contacts2-carina-1366-canteen-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-carina-1366/canteen-arrival.webp.webp",
+     "caption": "canteen arrival — contacts2-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts2-carina-1366-canteen-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-carina-1366/canteen-seat.webp.webp",
+     "caption": "canteen seat — contacts2-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts2-carina-1366-office-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-carina-1366/office-arrival.webp.webp",
+     "caption": "office arrival — contacts2-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts2-carina-1366-office-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-carina-1366/office-seat.webp.webp",
+     "caption": "office seat — contacts2-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts2-carina-1366-pool-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-carina-1366/pool-arrival.webp.webp",
+     "caption": "pool arrival — contacts2-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts2-carina-1366-pool-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-carina-1366/pool-seat.webp.webp",
+     "caption": "pool seat — contacts2-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts2-carina-1366-train-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-carina-1366/train-arrival.webp.webp",
+     "caption": "train arrival — contacts2-carina-1366"
+    },
+    {
+     "id": "character-scale-contacts2-carina-1366-train-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-carina-1366/train-seat.webp.webp",
+     "caption": "train seat — contacts2-carina-1366"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / contacts2-eric-390",
+   "caption": "Earlier diagnostic attempt retained. Camera or measurement limitations; not final acceptance. Bag offset is a separate existing issue.",
+   "images": [
+    {
+     "id": "character-scale-contacts2-eric-390-canteen-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-eric-390/canteen-arrival.webp.webp",
+     "caption": "canteen arrival — contacts2-eric-390"
+    },
+    {
+     "id": "character-scale-contacts2-eric-390-canteen-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-eric-390/canteen-seat.webp.webp",
+     "caption": "canteen seat — contacts2-eric-390"
+    },
+    {
+     "id": "character-scale-contacts2-eric-390-office-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-eric-390/office-arrival.webp.webp",
+     "caption": "office arrival — contacts2-eric-390"
+    },
+    {
+     "id": "character-scale-contacts2-eric-390-office-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-eric-390/office-seat.webp.webp",
+     "caption": "office seat — contacts2-eric-390"
+    },
+    {
+     "id": "character-scale-contacts2-eric-390-pool-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-eric-390/pool-arrival.webp.webp",
+     "caption": "pool arrival — contacts2-eric-390"
+    },
+    {
+     "id": "character-scale-contacts2-eric-390-pool-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-eric-390/pool-seat.webp.webp",
+     "caption": "pool seat — contacts2-eric-390"
+    },
+    {
+     "id": "character-scale-contacts2-eric-390-train-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-eric-390/train-arrival.webp.webp",
+     "caption": "train arrival — contacts2-eric-390"
+    },
+    {
+     "id": "character-scale-contacts2-eric-390-train-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/contacts2-eric-390/train-seat.webp.webp",
+     "caption": "train seat — contacts2-eric-390"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / default1-carina-390",
+   "caption": "Earlier diagnostic attempt retained. Camera or measurement limitations; not final acceptance. Bag offset is a separate existing issue.",
+   "images": [
+    {
+     "id": "character-scale-default1-carina-390-failure-100",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default1-carina-390/failure-100.webp.webp",
+     "caption": "failure 100 — default1-carina-390"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / default2-carina-390",
+   "caption": "Native diagnostic capture; measurements and limitations are in the accompanying work note.",
+   "images": [
+    {
+     "id": "character-scale-default2-carina-390-canteen-100",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default2-carina-390/canteen-100.webp.webp",
+     "caption": "canteen 100 — default2-carina-390"
+    },
+    {
+     "id": "character-scale-default2-carina-390-canteen-default",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default2-carina-390/canteen-default.webp.webp",
+     "caption": "canteen default — default2-carina-390"
+    },
+    {
+     "id": "character-scale-default2-carina-390-canteen-detail-100",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default2-carina-390/canteen-detail-100.webp.webp",
+     "caption": "canteen detail 100 — default2-carina-390"
+    },
+    {
+     "id": "character-scale-default2-carina-390-canteen-detail-default",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/default2-carina-390/canteen-detail-default.webp.webp",
+     "caption": "canteen detail default — default2-carina-390"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / grip-baseline-eric-1366",
+   "caption": "Earlier diagnostic attempt retained. Camera or measurement limitations; not final acceptance. Bag offset is a separate existing issue.",
+   "images": [
+    {
+     "id": "character-scale-grip-baseline-eric-1366-plaza-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/grip-baseline-eric-1366/plaza-arrival.webp.webp",
+     "caption": "plaza arrival — grip-baseline-eric-1366"
+    },
+    {
+     "id": "character-scale-grip-baseline-eric-1366-plaza-grip",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/grip-baseline-eric-1366/plaza-grip.webp.webp",
+     "caption": "plaza grip — grip-baseline-eric-1366"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / grip-baseline2-eric-1366",
+   "caption": "Earlier diagnostic attempt retained. Camera or measurement limitations; not final acceptance. Bag offset is a separate existing issue.",
+   "images": [
+    {
+     "id": "character-scale-grip-baseline2-eric-1366-plaza-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/grip-baseline2-eric-1366/plaza-arrival.webp.webp",
+     "caption": "plaza arrival — grip-baseline2-eric-1366"
+    },
+    {
+     "id": "character-scale-grip-baseline2-eric-1366-plaza-grip",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/grip-baseline2-eric-1366/plaza-grip.webp.webp",
+     "caption": "plaza grip — grip-baseline2-eric-1366"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / grip-baseline3-eric-1366",
+   "caption": "Earlier diagnostic attempt retained. Camera or measurement limitations; not final acceptance. Bag offset is a separate existing issue.",
+   "images": [
+    {
+     "id": "character-scale-grip-baseline3-eric-1366-plaza-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/grip-baseline3-eric-1366/plaza-arrival.webp.webp",
+     "caption": "plaza arrival — grip-baseline3-eric-1366"
+    },
+    {
+     "id": "character-scale-grip-baseline3-eric-1366-plaza-grip",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/grip-baseline3-eric-1366/plaza-grip.webp.webp",
+     "caption": "plaza grip — grip-baseline3-eric-1366"
+    }
+   ]
+  },
+  {
+   "title": "character-scale / mio1-carina-390",
+   "caption": "Native diagnostic capture; measurements and limitations are in the accompanying work note.",
+   "images": [
+    {
+     "id": "character-scale-mio1-carina-390-office-arrival",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/mio1-carina-390/office-arrival.webp.webp",
+     "caption": "office arrival — mio1-carina-390"
+    },
+    {
+     "id": "character-scale-mio1-carina-390-office-mio",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/mio1-carina-390/office-mio.webp.webp",
+     "caption": "office mio — mio1-carina-390"
+    },
+    {
+     "id": "character-scale-mio1-carina-390-office-seat",
+     "image": "bible/shots/showcase/character-scale-default-20261007/character-scale/mio1-carina-390/office-seat.webp.webp",
+     "caption": "office seat — mio1-carina-390"
+    }
+   ]
+  },
+  {
+   "title": "fast / 2026-10-07T12-18-19-485Z-2360029",
+   "caption": "Full day-one route, original end screenshot. Performance warnings are recorded separately; this is not a phone hardware benchmark.",
+   "images": [
+    {
+     "id": "fast-2026-10-07t12-18-19-485z-2360029-1366x860",
+     "image": "bible/shots/showcase/character-scale-default-20261007/fast/2026-10-07T12-18-19-485Z-2360029/1366x860.webp.webp",
+     "caption": "1366x860 — 2026-10-07T12-18-19-485Z-2360029"
+    }
+   ]
+  },
+  {
+   "title": "fast / 2026-10-07T12-18-20-648Z-2360779",
+   "caption": "Full day-one route, original end screenshot. Performance warnings are recorded separately; this is not a phone hardware benchmark.",
+   "images": [
+    {
+     "id": "fast-2026-10-07t12-18-20-648z-2360779-390x844",
+     "image": "bible/shots/showcase/character-scale-default-20261007/fast/2026-10-07T12-18-20-648Z-2360779/390x844.webp",
+     "caption": "390x844 — 2026-10-07T12-18-20-648Z-2360779"
+    }
+   ]
+  },
+  {
+   "title": "fast / 2026-10-07T12-56-52-594Z-2760889",
+   "caption": "Full day-one route, original end screenshot. Performance warnings are recorded separately; this is not a phone hardware benchmark.",
+   "images": [
+    {
+     "id": "fast-2026-10-07t12-56-52-594z-2760889-1366x860",
+     "image": "bible/shots/showcase/character-scale-default-20261007/fast/2026-10-07T12-56-52-594Z-2760889/1366x860.webp.webp",
+     "caption": "1366x860 — 2026-10-07T12-56-52-594Z-2760889"
+    }
+   ]
+  },
+  {
+   "title": "fast / 2026-10-07T12-57-04-337Z-2762047",
+   "caption": "Full day-one route, original end screenshot. Performance warnings are recorded separately; this is not a phone hardware benchmark.",
+   "images": [
+    {
+     "id": "fast-2026-10-07t12-57-04-337z-2762047-390x844",
+     "image": "bible/shots/showcase/character-scale-default-20261007/fast/2026-10-07T12-57-04-337Z-2762047/390x844.webp",
+     "caption": "390x844 — 2026-10-07T12-57-04-337Z-2762047"
+    }
+   ]
+  },
+  {
+   "title": "gait / 1366x860-mc=carina-scale-default1",
+   "caption": "Native walk/run check including Mio and approved office commuters.",
+   "images": [
+    {
+     "id": "gait-1366x860-mc-carina-scale-default1-forecourt",
+     "image": "bible/shots/showcase/character-scale-default-20261007/gait/1366x860-mc=carina-scale-default1/forecourt.webp.webp",
+     "caption": "forecourt — 1366x860-mc=carina-scale-default1"
+    }
+   ]
+  },
+  {
+   "title": "gait / 1366x860-mc=eric-run-scale-default1",
+   "caption": "Native walk/run check including Mio and approved office commuters.",
+   "images": [
+    {
+     "id": "gait-1366x860-mc-eric-run-scale-default1-forecourt",
+     "image": "bible/shots/showcase/character-scale-default-20261007/gait/1366x860-mc=eric-run-scale-default1/forecourt.webp.webp",
+     "caption": "forecourt — 1366x860-mc=eric-run-scale-default1"
+    }
+   ]
+  },
+  {
+   "title": "gait / 390x844-mc=carina-run-scale-default1",
+   "caption": "Native walk/run check including Mio and approved office commuters.",
+   "images": [
+    {
+     "id": "gait-390x844-mc-carina-run-scale-default1-forecourt",
+     "image": "bible/shots/showcase/character-scale-default-20261007/gait/390x844-mc=carina-run-scale-default1/forecourt.webp.webp",
+     "caption": "forecourt — 390x844-mc=carina-run-scale-default1"
+    }
+   ]
+  },
+  {
+   "title": "gait / 390x844-mc=eric-scale-default1",
+   "caption": "Native walk/run check including Mio and approved office commuters.",
+   "images": [
+    {
+     "id": "gait-390x844-mc-eric-scale-default1-forecourt",
+     "image": "bible/shots/showcase/character-scale-default-20261007/gait/390x844-mc=eric-scale-default1/forecourt.webp.webp",
+     "caption": "forecourt — 390x844-mc=eric-scale-default1"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the default size",
+   "href": "game3d/"
+  },
+  {
+   "label": "Original 100% comparison",
+   "href": "game3d/?charscale=100"
+  },
+  {
+   "label": "Measurements and scope",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/character-scale-default-20261007.md"
+  }
+ ],
+ "media": []
+}

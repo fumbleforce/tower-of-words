@@ -1,0 +1,37 @@
+{
+ "title": "Refactor: what next after stage 2c",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "decided",
+ "multi": false,
+ "question": "You approved stages 0 to 2c, and they're done and committed. They made the code checkable (reliable tests, pinned tools, formatting, lint, size and dependency gates, save/Continue fixed) but didn't split the big files: main.js 1720 lines, ui.js 1810, move.js 1461 (longer than before because the formatting pass put one statement per line). Splitting them is stages 3 to 5 of Codex's plan. What now?",
+ "options": [
+  {
+   "id": "continue",
+   "label": "Keep going: stages 3 to 5 now, in the same freeze",
+   "note": "3: audio and dialogue/portrait out of ui.js. 4: main.js hooks, interactions and place lifecycle. 5: movement and navigation out of move.js. Each step proven with before/after recordings. The queued game fixes (pins, outline, bag scene, train doors, click during Eric's word...) wait until it's done."
+  },
+  {
+   "id": "fixes-first",
+   "label": "Release the freeze, do the queued fixes, then stages 3 to 5 in a new freeze",
+   "note": "You get the visible fixes sooner; the split happens after, on top of them."
+  },
+  {
+   "id": "stop",
+   "label": "Stop here",
+   "note": "Keep the gates and checks; no big-file split for now. Release the freeze and do the queued fixes."
+  }
+ ],
+ "links": [
+  {
+   "label": "The plan (stages table) (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/notes"
+  }
+ ],
+ "decided": [
+  "continue"
+ ],
+ "decision": "Keep going: stages 3 to 5 in the same freeze (Jørgen in chat, 2026-09-29)",
+ "issue": 43,
+ "media": []
+}

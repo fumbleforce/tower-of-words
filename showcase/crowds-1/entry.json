@@ -1,0 +1,319 @@
+{
+ "title": "People about the island, by time of day",
+ "date": "2026-10-02",
+ "by": "claude-agent:crowds",
+ "caption": "Every outdoor place now has islanders going about their day: walking between the street ends and open doors, sitting on benches, talking in pairs, waiting at the konbini, jogging. Morning, lunch and after work each have their own mix. They are background (no pin, no talk) and step round Eric. Shots: desktop at high quality, phone at medium; phones show fewer people.",
+ "sections": [
+  {
+   "title": "Station forecourt",
+   "images": [
+    {
+     "id": "forecourt-early-desktop",
+     "image": "bible/shots/showcase/crowds-1/forecourt-early-desktop.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "forecourt-early-phone",
+     "image": "bible/shots/showcase/crowds-1/forecourt-early-phone.webp",
+     "caption": "Morning, phone"
+    },
+    {
+     "id": "forecourt-lunch-desktop",
+     "image": "bible/shots/showcase/crowds-1/forecourt-lunch-desktop.webp.webp",
+     "caption": "Lunch, desktop"
+    },
+    {
+     "id": "forecourt-lunch-phone",
+     "image": "bible/shots/showcase/crowds-1/forecourt-lunch-phone.webp",
+     "caption": "Lunch, phone"
+    },
+    {
+     "id": "forecourt-evening-desktop",
+     "image": "bible/shots/showcase/crowds-1/forecourt-evening-desktop.webp.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "forecourt-evening-phone",
+     "image": "bible/shots/showcase/crowds-1/forecourt-evening-phone.webp",
+     "caption": "After work, phone"
+    }
+   ],
+   "caption": "Office workers cross the court to the head office door in the morning and leave it after work, some to their bikes."
+  },
+  {
+   "title": "Fountain plaza",
+   "images": [
+    {
+     "id": "plaza-early-desktop",
+     "image": "bible/shots/showcase/crowds-1/plaza-early-desktop.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "plaza-early-phone",
+     "image": "bible/shots/showcase/crowds-1/plaza-early-phone.webp",
+     "caption": "Morning, phone"
+    },
+    {
+     "id": "plaza-lunch-desktop",
+     "image": "bible/shots/showcase/crowds-1/plaza-lunch-desktop.webp.webp",
+     "caption": "Lunch, desktop"
+    },
+    {
+     "id": "plaza-lunch-phone",
+     "image": "bible/shots/showcase/crowds-1/plaza-lunch-phone.webp",
+     "caption": "Lunch, phone"
+    },
+    {
+     "id": "plaza-evening-desktop",
+     "image": "bible/shots/showcase/crowds-1/plaza-evening-desktop.webp.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "plaza-evening-phone",
+     "image": "bible/shots/showcase/crowds-1/plaza-evening-phone.webp",
+     "caption": "After work, phone"
+    }
+   ],
+   "caption": "People cross between head office, the dorms, the canteen and the shop street; some sit on the benches round the circle."
+  },
+  {
+   "title": "Shop street",
+   "images": [
+    {
+     "id": "shotengai-early-desktop",
+     "image": "bible/shots/showcase/crowds-1/shotengai-early-desktop.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "shotengai-early-phone",
+     "image": "bible/shots/showcase/crowds-1/shotengai-early-phone.webp",
+     "caption": "Morning, phone"
+    },
+    {
+     "id": "shotengai-lunch-desktop",
+     "image": "bible/shots/showcase/crowds-1/shotengai-lunch-desktop.webp.webp",
+     "caption": "Lunch, desktop"
+    },
+    {
+     "id": "shotengai-lunch-phone",
+     "image": "bible/shots/showcase/crowds-1/shotengai-lunch-phone.webp",
+     "caption": "Lunch, phone"
+    },
+    {
+     "id": "shotengai-evening-desktop",
+     "image": "bible/shots/showcase/crowds-1/shotengai-evening-desktop.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "shotengai-evening-phone",
+     "image": "bible/shots/showcase/crowds-1/shotengai-evening-phone.webp",
+     "caption": "After work, phone"
+    }
+   ],
+   "caption": "People down the arcade both ways, three waiting at the shut konbini in the morning, strollers and a jogger on the promenade."
+  },
+  {
+   "title": "East lane",
+   "images": [
+    {
+     "id": "east_lane-early-desktop",
+     "image": "bible/shots/showcase/crowds-1/east_lane-early-desktop.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "east_lane-early-phone",
+     "image": "bible/shots/showcase/crowds-1/east_lane-early-phone.webp",
+     "caption": "Morning, phone"
+    },
+    {
+     "id": "east_lane-lunch-desktop",
+     "image": "bible/shots/showcase/crowds-1/east_lane-lunch-desktop.webp.webp",
+     "caption": "Lunch, desktop"
+    },
+    {
+     "id": "east_lane-lunch-phone",
+     "image": "bible/shots/showcase/crowds-1/east_lane-lunch-phone.webp",
+     "caption": "Lunch, phone"
+    },
+    {
+     "id": "east_lane-evening-desktop",
+     "image": "bible/shots/showcase/crowds-1/east_lane-evening-desktop.webp.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "east_lane-evening-phone",
+     "image": "bible/shots/showcase/crowds-1/east_lane-evening-phone.webp",
+     "caption": "After work, phone"
+    }
+   ],
+   "caption": "Out of the dorm gate and the dorm row toward head office in the morning, home along the lane after work."
+  },
+  {
+   "title": "East coast",
+   "images": [
+    {
+     "id": "east_coast-early-desktop",
+     "image": "bible/shots/showcase/crowds-1/east_coast-early-desktop.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "east_coast-early-phone",
+     "image": "bible/shots/showcase/crowds-1/east_coast-early-phone.webp",
+     "caption": "Morning, phone"
+    },
+    {
+     "id": "east_coast-lunch-desktop",
+     "image": "bible/shots/showcase/crowds-1/east_coast-lunch-desktop.webp.webp",
+     "caption": "Lunch, desktop"
+    },
+    {
+     "id": "east_coast-lunch-phone",
+     "image": "bible/shots/showcase/crowds-1/east_coast-lunch-phone.webp",
+     "caption": "Lunch, phone"
+    },
+    {
+     "id": "east_coast-evening-desktop",
+     "image": "bible/shots/showcase/crowds-1/east_coast-evening-desktop.webp.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "east_coast-evening-phone",
+     "image": "bible/shots/showcase/crowds-1/east_coast-evening-phone.webp",
+     "caption": "After work, phone"
+    }
+   ],
+   "caption": "Joggers along the dorm row and the coast walk, people going to and from the onsen after work."
+  },
+  {
+   "title": "Gym and pool",
+   "images": [
+    {
+     "id": "sports-early-desktop",
+     "image": "bible/shots/showcase/crowds-1/sports-early-desktop.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "sports-early-phone",
+     "image": "bible/shots/showcase/crowds-1/sports-early-phone.webp",
+     "caption": "Morning, phone"
+    },
+    {
+     "id": "sports-lunch-desktop",
+     "image": "bible/shots/showcase/crowds-1/sports-lunch-desktop.webp.webp",
+     "caption": "Lunch, desktop"
+    },
+    {
+     "id": "sports-lunch-phone",
+     "image": "bible/shots/showcase/crowds-1/sports-lunch-phone.webp",
+     "caption": "Lunch, phone"
+    },
+    {
+     "id": "sports-evening-desktop",
+     "image": "bible/shots/showcase/crowds-1/sports-evening-desktop.webp.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "sports-evening-phone",
+     "image": "bible/shots/showcase/crowds-1/sports-evening-phone.webp",
+     "caption": "After work, phone"
+    }
+   ],
+   "caption": "Joggers round the lane and the courts walk, people to the pool and up the north street."
+  },
+  {
+   "title": "Office street",
+   "images": [
+    {
+     "id": "office_quarter-early-desktop",
+     "image": "bible/shots/showcase/crowds-1/office_quarter-early-desktop.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "office_quarter-early-phone",
+     "image": "bible/shots/showcase/crowds-1/office_quarter-early-phone.webp",
+     "caption": "Morning, phone"
+    },
+    {
+     "id": "office_quarter-lunch-desktop",
+     "image": "bible/shots/showcase/crowds-1/office_quarter-lunch-desktop.webp.webp",
+     "caption": "Lunch, desktop"
+    },
+    {
+     "id": "office_quarter-lunch-phone",
+     "image": "bible/shots/showcase/crowds-1/office_quarter-lunch-phone.webp",
+     "caption": "Lunch, phone"
+    },
+    {
+     "id": "office_quarter-evening-desktop",
+     "image": "bible/shots/showcase/crowds-1/office_quarter-evening-desktop.webp.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "office_quarter-evening-phone",
+     "image": "bible/shots/showcase/crowds-1/office_quarter-evening-phone.webp",
+     "caption": "After work, phone"
+    }
+   ],
+   "caption": "Office workers along the street and up the quarter street, east toward the gym after work."
+  },
+  {
+   "title": "Harbour",
+   "images": [
+    {
+     "id": "harbour-early-desktop",
+     "image": "bible/shots/showcase/crowds-1/harbour-early-desktop.webp.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "harbour-early-phone",
+     "image": "bible/shots/showcase/crowds-1/harbour-early-phone.webp",
+     "caption": "Morning, phone"
+    },
+    {
+     "id": "harbour-lunch-desktop",
+     "image": "bible/shots/showcase/crowds-1/harbour-lunch-desktop.webp",
+     "caption": "Lunch, desktop"
+    },
+    {
+     "id": "harbour-lunch-phone",
+     "image": "bible/shots/showcase/crowds-1/harbour-lunch-phone.webp",
+     "caption": "Lunch, phone"
+    },
+    {
+     "id": "harbour-evening-desktop",
+     "image": "bible/shots/showcase/crowds-1/harbour-evening-desktop.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "harbour-evening-phone",
+     "image": "bible/shots/showcase/crowds-1/harbour-evening-phone.webp",
+     "caption": "After work, phone"
+    }
+   ],
+   "caption": "Dock workers in from the street to the works lane and the piers, a few sitting on the quay after work."
+  },
+  {
+   "title": "Dorm courtyard",
+   "images": [
+    {
+     "id": "dorm_court-evening-desktop",
+     "image": "bible/shots/showcase/crowds-1/dorm_court-evening-desktop.webp.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "dorm_court-evening-phone",
+     "image": "bible/shots/showcase/crowds-1/dorm_court-evening-phone.webp",
+     "caption": "After work, phone"
+    }
+   ],
+   "caption": "After work only: two or three residents between the street gate and the hall."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

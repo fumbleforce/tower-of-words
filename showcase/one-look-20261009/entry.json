@@ -1,0 +1,124 @@
+{
+ "title": "One outdoor look: the street style is the forecourt's only look",
+ "date": "2026-10-09",
+ "by": "claude-agent:one-look",
+ "caption": "After Review street-style-default-1 the street style (leafy crowns, clipped hedges, brick and limestone, broad office panels, meadow) is the forecourt's look for everyone, with no ?diorama=1 switch. The other places never had a street-style version, so they look as before until the world kit (#367) builds one for them. The phone's overview leaves out the leaf cards, grass and bed cover cards and has a coarser crown, to stay near its budget. Left of each pair: main before the change; right: after, same spot and camera.",
+ "preview": "sbs-forecourt-bikes-desk",
+ "result": [
+  "sbs-forecourt-bikes-desk",
+  "sbs-forecourt-lane-desk",
+  "sbs-forecourt-phone",
+  "sbs-forecourt-garden-phone"
+ ],
+ "sections": [
+  {
+   "title": "The forecourt, desktop",
+   "caption": "Same spot and camera, before (left) and after (right). The desktop pictures are from the switch commit d11235f3; the later commits change the phone and the crowns' shadow.",
+   "images": [
+    {
+     "id": "sbs-forecourt-desk",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-forecourt-desk.webp.webp",
+     "caption": "Before | after: the station door, desktop"
+    },
+    {
+     "id": "sbs-forecourt-bikes-desk",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-forecourt-bikes-desk.webp.webp",
+     "caption": "Before | after: the bike court, desktop"
+    },
+    {
+     "id": "sbs-forecourt-garden-desk",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-forecourt-garden-desk.webp.webp",
+     "caption": "Before | after: by the head office, over the garden, desktop"
+    },
+    {
+     "id": "sbs-forecourt-lane-desk",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-forecourt-lane-desk.webp.webp",
+     "caption": "Before | after: the lane to the plaza, desktop"
+    }
+   ]
+  },
+  {
+   "title": "The forecourt, phone",
+   "caption": "Before (left), after on the final build (right): the phone's lighter street style.",
+   "images": [
+    {
+     "id": "sbs-forecourt-phone",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-forecourt-phone.webp.webp",
+     "caption": "Before | after: the station door, phone"
+    },
+    {
+     "id": "sbs-forecourt-bikes-phone",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-forecourt-bikes-phone.webp.webp",
+     "caption": "Before | after: the bike court, phone"
+    },
+    {
+     "id": "sbs-forecourt-garden-phone",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-forecourt-garden-phone.webp",
+     "caption": "Before | after: by the head office, over the garden, phone"
+    },
+    {
+     "id": "sbs-forecourt-lane-phone",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-forecourt-lane-phone.webp.webp",
+     "caption": "Before | after: the lane to the plaza, phone"
+    }
+   ]
+  },
+  {
+   "title": "Other places, unchanged",
+   "caption": "They have no street-style version yet; the world kit (#367) brings it.",
+   "images": [
+    {
+     "id": "sbs-plaza-desk",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-plaza-desk.webp.webp",
+     "caption": "Before | after: the plaza, desktop"
+    },
+    {
+     "id": "sbs-shotengai-desk",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-shotengai-desk.webp.webp",
+     "caption": "Before | after: the shop street, desktop"
+    },
+    {
+     "id": "sbs-harbour-desk",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-harbour-desk.webp.webp",
+     "caption": "Before | after: the harbour, desktop"
+    },
+    {
+     "id": "sbs-sports-desk",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-sports-desk.webp.webp",
+     "caption": "Before | after: the sports ground, desktop"
+    },
+    {
+     "id": "sbs-plaza-phone",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-plaza-phone.webp",
+     "caption": "Before | after: the plaza, phone"
+    },
+    {
+     "id": "sbs-shotengai-phone",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-shotengai-phone.webp",
+     "caption": "Before | after: the shop street, phone"
+    },
+    {
+     "id": "sbs-harbour-phone",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-harbour-phone.webp",
+     "caption": "Before | after: the harbour, phone"
+    },
+    {
+     "id": "sbs-sports-phone",
+     "image": "bible/shots/showcase/one-look-20261009/sbs-sports-phone.webp",
+     "caption": "Before | after: the sports ground, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  },
+  {
+   "label": "The outdoor plan",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/outdoor-plan.md"
+  }
+ ],
+ "media": []
+}

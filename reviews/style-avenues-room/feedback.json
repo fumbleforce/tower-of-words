@@ -1,0 +1,38 @@
+{
+ "sent": "2026-09-29T11:03:50+0200",
+ "picked": [
+  "2",
+  "4",
+  "8"
+ ],
+ "options": {
+  "2": {
+   "star": false,
+   "reject": false,
+   "comment": "This looked good IMO (lets have it as a toggle in graphics settings in the game), and lets apply it to all the models so also the chair, flower pot gets it for example."
+  },
+  "3": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "4": {
+   "star": false,
+   "reject": false,
+   "comment": "Yes but it was over the top hard, softer version"
+  },
+  "7": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "8": {
+   "star": false,
+   "reject": false,
+   "comment": "looks good"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": []
+}

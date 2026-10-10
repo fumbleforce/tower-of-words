@@ -1,0 +1,30 @@
+{
+ "title": "Character story timelines",
+ "date": "2026-10-06",
+ "by": "Codex",
+ "caption": "Ten character routes across relationship stages, plus opening-day story lanes, with source details and separate plan/script status.",
+ "images": [
+  {
+   "id": "routes-2560",
+   "image": "bible/shots/showcase/story-timeline-1/routes-2560.png.webp",
+   "caption": "Character routes, desktop"
+  },
+  {
+   "id": "routes-390",
+   "image": "bible/shots/showcase/story-timeline-1/routes-390.png.webp",
+   "caption": "Selected milestone, phone"
+  },
+  {
+   "id": "days-2560",
+   "image": "bible/shots/showcase/story-timeline-1/days-2560.png.webp",
+   "caption": "Opening days, desktop"
+  }
+ ],
+ "links": [
+  {
+   "label": "Open the timeline",
+   "href": "#story-timeline"
+  }
+ ],
+ "media": []
+}

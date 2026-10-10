@@ -1,0 +1,30 @@
+scale-default-390: GPU slot 3
+checked office {
+  seatId: 'my_seat',
+  top: 0.24,
+  hip: [ 0, 0.21872355043780517, -4.440892098500627e-16 ],
+  underside: 0.2304829033688861,
+  delta: -0.009517096631113886
+}
+checked train {
+  seatId: 'seat_near_r',
+  top: 0.22,
+  hip: [ 0, 0.21875319514474292, 1.1102230246251565e-16 ],
+  underside: 0.2119643084589739,
+  delta: -0.008035691541026097
+}
+checked canteen {
+  seatId: 'canteen_seat_shared',
+  top: 0.34,
+  hip: [ 0, 0.21872293837437545, 4.440892098500627e-16 ],
+  underside: 0.3304821804762972,
+  delta: -0.009517819523702842
+}
+checked pool {
+  seatId: 'deck_bench_n',
+  top: 0.34,
+  hip: [ 0, 0.21872289437411674, 2.2204460492503136e-16 ],
+  underside: 0.33048212855599224,
+  delta: -0.009517871444007786
+}
+PASS /home/jorgen/repo/japanese/.claude/worktrees/codex-scale-85-default/game3d/shots/character-scale/contacts2-eric-390/

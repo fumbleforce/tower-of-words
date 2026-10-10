@@ -1,0 +1,52 @@
+{
+ "title": "Dorm building: the hall, the stairs and Eric's floor",
+ "date": "2026-09-30",
+ "by": "claude-agent:dorm-floor",
+ "status": "decided",
+ "question": "Is this the right layout for the way from the courtyard to Eric's door, with an open-air or an indoor corridor?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/candidates/dorm-floor-1/01-ground-floor.webp.webp",
+   "caption": "Ground floor, the same for both: in through the hall doors (walked), past the mailboxes to the passage, then the trip: along the ground-floor corridor and up the stairs in the corner by the return. G = where the goal line changes, C = camera, T = the crossfade. One open point, in the note: the next block runs behind 201 to 206, so every flat on the floor looks at its wall, not just 203."
+  }
+ ],
+ "options": [
+  {
+   "id": "dorm-floor-a",
+   "label": "dorm-floor-a: open-air corridor",
+   "image": "art/candidates/dorm-floor-1/02-floor2-open-air.webp.webp",
+   "note": "2F as the dorms scene already has it: the corridor open to the court behind a low parapet. Six flats from the stairs: 201, 202, 203 (Eric), 205, 206, 207 (no 4), then a fire escape. He comes up onto the landing and walks left past 201 and 202 to 203, about 5 seconds; under 20 seconds from the courtyard gate to his genkan. Goal line: 'Go in through the dorm entrance. Your room is 203.' at the gate, 'Room 203 is on 2F. The stairs are through the back.' inside the doors, 'Room 203.' on the landing. The court face of the block would show these corridors and doors instead of the balconies it shows now, and 203's door is almost straight above the hall doors, so you can see it from the court."
+  },
+  {
+   "id": "dorm-floor-b",
+   "label": "dorm-floor-b: indoor corridor",
+   "image": "art/candidates/dorm-floor-1/03-floor2-interior.webp.webp",
+   "note": "Same stairs, flats, numbers, route, goal lines and timing as a, but the corridor is indoors: a wall with a small window at each flat on the court side, strip lights on the ceiling. Darker, more like an older company dorm. The court face becomes a plain wall with a row of small windows on each floor, and his door can't be seen from outside."
+  }
+ ],
+ "links": [
+  {
+   "label": "The plan in words (proposed places.md section, cameras, goal lines, what else changes)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/dorm-floor-plan.md"
+  },
+  {
+   "label": "Dorm courtyard and Eric's room as built",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  },
+  {
+   "label": "Look at the courtyard in the game",
+   "href": "game3d/?place=dorm_court"
+  },
+  {
+   "label": "Look at the room in the game",
+   "href": "game3d/?place=dorms"
+  }
+ ],
+ "issue": 85,
+ "decided": [
+  "dorm-floor-a"
+ ],
+ "decision": "dorm-floor-a: open-air corridor",
+ "decided_at": "2026-09-30T18:52:19+0200"
+}

@@ -1,0 +1,130 @@
+{
+ "about": "What the game showed for Eric before the protagonist config (#251), captured from the code and story at 13f71f23. game3d/test/unit/mc-identity.test.mjs checks that Eric still gets exactly this. Day-2 dinner moved indoors in the quality rebuild; removed English replacement subtitle and moved identity lines to izakaya.js. Kenji's lines follow his voice sheet (#368): polite Japanese to his senpai.",
+ "story": {
+  "game3d/story/day2/index.js": [
+   "エリックさん、今日、歓迎会です。",
+   "あ、エリックさん！こちらです。",
+   "Monday... see you, Eric-san. Game also... maybe?",
+   "エリックさんは、どちらがいいですか。"
+  ],
+  "game3d/story/day2/office.js": [
+   "エリックさん、今日、歓迎会です。"
+  ],
+  "game3d/story/day2/shotengai.js": [
+   "あ、エリックさん！こちらです。"
+  ],
+  "game3d/story/dorm_court.js": [
+   "> エリック · erikku · Eric"
+  ],
+  "game3d/story/gate.js": [
+   "Eric"
+  ],
+  "game3d/story/office.js": [
+   "Eric",
+   "エリックさんですか？ケンジです。よろしくお願いします。",
+   "Okay, I'm going home. Um... Eric?",
+   "You must be Eric. Emi, I run this lot. Sorry I wasn't about, I've been upstairs since seven begging for money."
+  ],
+  "game3d/story/tickets.js": [
+   "The {コピー機|kopiiki|copier} on B2 eats paper during printing. Please check it before we order another one.\n\nOpened 1 April 1996. Closed by Mio after Eric’s test copies came through normally."
+  ],
+  "game3d/story/train.js": [
+   "Eric",
+   "Mm, like that. Don't worry, it's not mean, it's like saying “the new guy”. Only, you stay new guy for, um, maybe ten years.",
+   "“I'm Eric.”"
+  ],
+  "game3d/story/day2/izakaya.js": [
+   "Monday... see you, Eric-san. Game also... maybe?",
+   "エリックさんは、どちらがいいですか。"
+  ]
+ },
+ "speaker": "Eric",
+ "name": {
+  "ja": "エリック",
+  "en": "Eric"
+ },
+ "voices": {
+  "matte": "eric-matte",
+  "akete": "eric-akete",
+  "kite": "eric-kite",
+  "ugoite": "eric-ugoite",
+  "irete": "eric-irete",
+  "dashite": "eric-dashite",
+  "tomatte": "eric-tomatte",
+  "ohayo": "eric-ohayo",
+  "yoroshiku": "eric-yoroshiku",
+  "sumimasen": "eric-sumimasen"
+ },
+ "room": "Eric's room",
+ "portrait": {
+  "set": "eric",
+  "faces": [
+   "neutral",
+   "surprised",
+   "tired"
+  ],
+  "crop": {
+   "W": 648,
+   "H": 768,
+   "f": [
+    116,
+    203,
+    340,
+    394
+   ]
+  }
+ },
+ "model": {
+  "dir": "eric",
+  "height": 1.2,
+  "chibi": "eric"
+ },
+ "lineVoice": "eric",
+ "code": [
+  {
+   "file": "game3d/js/end.js",
+   "code": "`Handed to: ${MC.name} (from Mio, B2)`",
+   "expr": "`Handed to: ${MC.name} (from Mio, B2)`",
+   "was": "Handed to: Eric (from Mio, B2)"
+  },
+  {
+   "file": "game3d/js/ui/tickets-view.js",
+   "code": "B2 IT · ${MC.name}<",
+   "expr": "`B2 IT · ${MC.name}`",
+   "was": "B2 IT · Eric"
+  },
+  {
+   "file": "game3d/js/ui/settings-view.js",
+   "code": "`${MC.name}, Mio and the people they meet as chibi figures, from the next time the game loads`",
+   "expr": "`${MC.name}, Mio and the people they meet as chibi figures, from the next time the game loads`",
+   "was": "Eric, Mio and the people they meet as chibi figures, from the next time the game loads"
+  },
+  {
+   "file": "game3d/js/map/screen.js",
+   "code": "tag(ctx, MC.name, sx",
+   "expr": "MC.name",
+   "was": "Eric"
+  },
+  {
+   "file": "game3d/js/scenes/office.js",
+   "code": "nameCard(MC.name_jp, MC.name.toUpperCase())",
+   "expr": "[MC.name_jp, MC.name.toUpperCase()]",
+   "was": [
+    "エリック",
+    "ERIC"
+   ]
+  },
+  {
+   "file": "game3d/js/scenes/dorm-court/hall.js",
+   "code": "g.fillText(MC.name_jp,",
+   "expr": "MC.name_jp",
+   "was": "エリック"
+  },
+  {
+   "file": "game3d/js/scenes/dorm-court/hall.js",
+   "code": "g.fillText(MC.name.toUpperCase(),",
+   "expr": "MC.name.toUpperCase()",
+   "was": "ERIC"
+  }
+ ]
+}

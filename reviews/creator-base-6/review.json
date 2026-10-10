@@ -1,0 +1,54 @@
+{
+ "title": "Live character creator on the Mio and Eric bases",
+ "date": "2026-09-30",
+ "by": "Claude (claude-agent:creator6)",
+ "status": "superseded",
+ "question": "Is this base good enough to build new characters on?",
+ "multi": false,
+ "options": [
+  {
+   "id": "base-ok",
+   "label": "base-ok",
+   "note": "Build new characters on it. Your fixes from creator-base-5: the hair paint is gone from both bare heads (the base has its own clean skin texture); Eric's bare head now sits on a neck that goes up into it; idle is the approved relaxed idle; eyes have four shapes (original plus round, sharp, sleepy) and seven colours; four hair styles (short crop, bob, ponytail, spiky), four tops, four bottoms and two kinds of shoes, all made from the body itself so each one fits both bodies. Mio's and Eric's own hair and clothes are still there and fit only their own body."
+  },
+  {
+   "id": "needs-work",
+   "label": "needs-work",
+   "note": "Tell me what to fix first. What I can still see: sleeve and trouser ends are open tubes, so you can look inside a cuff close up; a swinging hand passes through a skirt; the drawn eyes are flat and don't have the painted eyes' shading; Mio's big ears show with short hair (a bob tucks them in); Eric's stubble layer only shows with his own hair, because it also holds bits of his side hair."
+  }
+ ],
+ "links": [
+  {
+   "label": "The live creator (drag to turn it, Idle or Walk, Original puts the game model beside it)",
+   "href": "tools/creator/base/dress.html"
+  },
+  {
+   "label": "The same creator online, for your phone",
+   "href": "https://fumbleforce.github.io/tower-of-words/creator/"
+  },
+  {
+   "label": "Example: new character on Mio's body",
+   "href": "tools/creator/base/dress.html?body=mio&hair=bob&hairColour=%238a5a32&eyes=round&iris=%233f8f5a&top=tank&topColour=%23f2f0ea&bottom=skirt&bottomColour=%231f3552&shoes=sneakers&shoesColour=%23b3473d"
+  },
+  {
+   "label": "Example: new character on Eric's body",
+   "href": "tools/creator/base/dress.html?body=eric&hair=spiky&hairColour=%231d1f2b&eyes=sharp&iris=%23c08a2e&top=tee&topColour=%23b3473d&bottom=shorts&bottomColour=%23c9b79a&shoes=sneakers&shoesColour=%23f2f0ea"
+  },
+  {
+   "label": "Mio: base over the original (checks nothing moved)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/creator/base/overlay.html"
+  },
+  {
+   "label": "Eric: base over the original",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/creator/base/overlay.html"
+  },
+  {
+   "label": "Previous round and your feedback",
+   "href": "#review/creator-base-5"
+  }
+ ],
+ "decision": "Very good progress (Jørgen in chat, 2026-09-30). Next round: face has more visible edges than the original and looks too angular (Eric vs original); new eyes are horrifying, must be much closer to the existing anime eyes, not round; bodies look poor under clothes: legs bent inward like they have to pee, knobbly, crude clay-like — refine to stylized and elegant; hair and clothes need more character like the originals, fitting the anime theme; new ones too plain and simple.",
+ "decided_at": "2026-09-30T11:58:40+0200",
+ "issue": 3,
+ "media": []
+}

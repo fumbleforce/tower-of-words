@@ -1,0 +1,173 @@
+{
+ "title": "Crowd pilot 5: actual Meshy texture attempts",
+ "date": "2026-10-06",
+ "updated": "2026-10-07T06:31:51.290483+00:00",
+ "by": "Codex",
+ "status": "decided",
+ "issue": 232,
+ "multi": true,
+ "question": "Selected a-image and b-image: B’s reported fringe patch is corrected; compare the preserved original below.",
+ "media": [
+  {
+   "image": "art/parts/crowd-selected-1/captures-final/a-selected-front.webp.webp",
+   "caption": "Selected A, unchanged. Actual textured 3D front view."
+  },
+  {
+   "image": "art/parts/crowd-selected-1/captures-final/a-selected-left.webp.webp",
+   "caption": "Selected A, unchanged. Actual textured 3D left view."
+  },
+  {
+   "image": "art/parts/crowd-selected-1/captures-final/a-selected-right.webp.webp",
+   "caption": "Selected A, unchanged. Actual textured 3D right view."
+  },
+  {
+   "image": "art/parts/crowd-selected-1/captures-final/b-selected-front.webp.webp",
+   "caption": "Selected B: local masked fringe correction, addressing “though she has a bald spot at the front of her face”. Eyes, face, body and native rig untouched. Actual textured 3D front view."
+  },
+  {
+   "image": "art/parts/crowd-selected-1/captures-final/b-selected-left.webp.webp",
+   "caption": "Selected B: local masked fringe correction, addressing “though she has a bald spot at the front of her face”. Eyes, face, body and native rig untouched. Actual textured 3D left view."
+  },
+  {
+   "image": "art/parts/crowd-selected-1/captures-final/b-selected-right.webp.webp",
+   "caption": "Selected B: local masked fringe correction, addressing “though she has a bald spot at the front of her face”. Eyes, face, body and native rig untouched. Actual textured 3D right view."
+  },
+  {
+   "image": "art/parts/crowd-selected-1/takes/b-hair-1-projection-original/front.webp.webp",
+   "caption": "First projection retained: bald patch filled, but tiny pale sampling dots remained at the fringe edge. Superseded by the bounded six-pixel projection-edge cleanup."
+  },
+  {
+   "image": "art/parts/crowd-selected-1/takes/b-hair-1/generated.webp.webp",
+   "caption": "The only new local generation: RDBT Anima + LLLite inpainting-v2, seed 7381, 24 steps, CFG 5, denoise 0.26. Only saved hair support transferred to the original UV."
+  },
+  {
+   "image": "art/parts/crowd-pilot-5/sheets/faces-front.webp.webp",
+   "caption": "Renders of actual Meshy-textured 3D models beside the current cast. Open the live viewer above to rotate, walk, run and sit. All four attempts are shown; none has passed the final quality bar or been installed."
+  },
+  {
+   "image": "art/parts/crowd-pilot-5/sheets/faces-left.webp.webp",
+   "caption": "Same camera distance, turned 0.6 radians. Image-guided attempts reproduce the original simple chibi faces; text-guided retries add anime eye structure and mouths. The woman’s pale hair patch remains."
+  },
+  {
+   "image": "art/parts/crowd-pilot-5/sheets/faces-right.webp.webp",
+   "caption": "Opposite angle. Original geometry, skin weights, rigs and walk/run/sit/idle files are unchanged. These are untouched Meshy base-colour textures, with no projected or hand-painted eye repair."
+  }
+ ],
+ "options": [
+  {
+   "id": "a-image",
+   "label": "a-image",
+   "image": "art/parts/crowd-pilot-5/captures/a-image-front.png.webp",
+   "images": [
+    "art/parts/crowd-pilot-5/captures/a-image-left.png.webp",
+    "art/parts/crowd-pilot-5/captures/a-image-right.png.webp"
+   ],
+   "note": "Selected by Jørgen on 2026-10-07. Original attempt and original QA assessment retained: First image-guided attempt: rejected in QA. Plain tall icon eyes and no visible mouth. Meshy 7; original UVs; 2048×2048 base colour; no PBR; 10 credits. Image-guided; no text prompt. Source: art/parts/crowd-pilot-2/pics/a-e1.png"
+  },
+  {
+   "id": "a-text",
+   "label": "a-text",
+   "image": "art/parts/crowd-pilot-5/captures/a-text-front.png.webp",
+   "images": [
+    "art/parts/crowd-pilot-5/captures/a-text-left.png.webp",
+    "art/parts/crowd-pilot-5/captures/a-text-right.png.webp"
+   ],
+   "note": "Text-guided retry: clearer anime eyes and a mouth. Still below the finish bar: the mouth sits very low across the chin facet. Meshy 7; original UVs; 2048×2048 base colour; no PBR; 10 credits. Clean anime game character texture. Symmetrical expressive anime eyes with distinct white sclera, dark irises, black pupils and one small white highlight in each eye. Defined upper eyelids, natural brows, a small clearly visible closed smiling mouth. Smooth warm skin and simple clean color areas. Adult office man. Short black hair, continuous black color across all hair surfaces. Medium gray business suit, white collared shirt, charcoal tie and black shoes."
+  },
+  {
+   "id": "b-image",
+   "label": "b-image",
+   "image": "art/parts/crowd-pilot-5/captures/b-image-front.png.webp",
+   "images": [
+    "art/parts/crowd-pilot-5/captures/b-image-left.png.webp",
+    "art/parts/crowd-pilot-5/captures/b-image-right.png.webp"
+   ],
+   "note": "Selected by Jørgen on 2026-10-07. Original attempt and original QA assessment retained: First image-guided attempt: rejected in QA. No mouth and a conspicuous pale patch in the hair. Meshy 7; original UVs; 2048×2048 base colour; no PBR; 10 credits. Image-guided; no text prompt. Source: art/parts/crowd-pilot-1/pics/b-d1.png"
+  },
+  {
+   "id": "b-text",
+   "label": "b-text",
+   "image": "art/parts/crowd-pilot-5/captures/b-text-front.png.webp",
+   "images": [
+    "art/parts/crowd-pilot-5/captures/b-text-left.png.webp",
+    "art/parts/crowd-pilot-5/captures/b-text-right.png.webp"
+   ],
+   "note": "Text-guided retry: mouth added. Still rejected in QA: pale hair patch and duplicated-looking eye highlights at an angle. Meshy 7; original UVs; 2048×2048 base colour; no PBR; 10 credits. Clean anime game character texture. Symmetrical expressive anime eyes with distinct white sclera, dark irises, black pupils and one small white highlight in each eye. Defined upper eyelids, natural brows, a small clearly visible closed smiling mouth. Smooth warm skin and simple clean color areas. Adult office woman. Dark brown side-parted hair in a low bun, continuous dark brown color across all hair surfaces. Navy blazer and knee-length navy skirt, ivory blouse, black low heels."
+  }
+ ],
+ "links": [
+  {
+   "label": "Selected pair: live corrected model and sustained native motion",
+   "href": "reviews/crowd-pilot-5/viewer.html?s=selected"
+  },
+  {
+   "label": "Hair correction history, exact mask, prompt and invariants",
+   "href": "reviews/crowd-pilot-5/correction.html"
+  },
+  {
+   "label": "Live 3D: Meshy retries, every attempt, cast and sustained motion",
+   "href": "reviews/crowd-pilot-5/viewer.html?s=pair"
+  },
+  {
+   "label": "Exact Meshy requests, source hashes and charged credits",
+   "href": "reviews/crowd-pilot-5/credits.json"
+  },
+  {
+   "label": "Your round-4 feedback",
+   "href": "#review/crowd-pilot-4"
+  }
+ ],
+ "viewer_files": [
+  "art/parts/crowd-pilot-5/game/a-image/base.webp",
+  "art/parts/crowd-pilot-5/game/a-image/walk.glb",
+  "art/parts/crowd-pilot-5/game/a-image/run.glb",
+  "art/parts/crowd-pilot-5/game/a-image/sit.glb",
+  "art/parts/crowd-pilot-5/game/a-image/idle.json",
+  "art/parts/crowd-pilot-5/game/a-image/preservation.json",
+  "art/parts/crowd-pilot-5/meshy/a-image.glb",
+  "art/parts/crowd-pilot-5/game/a-text/base.webp",
+  "art/parts/crowd-pilot-5/game/a-text/walk.glb",
+  "art/parts/crowd-pilot-5/game/a-text/run.glb",
+  "art/parts/crowd-pilot-5/game/a-text/sit.glb",
+  "art/parts/crowd-pilot-5/game/a-text/idle.json",
+  "art/parts/crowd-pilot-5/game/a-text/preservation.json",
+  "art/parts/crowd-pilot-5/meshy/a-text.glb",
+  "art/parts/crowd-pilot-5/game/b-image/base.webp",
+  "art/parts/crowd-pilot-5/game/b-image/walk.glb",
+  "art/parts/crowd-pilot-5/game/b-image/run.glb",
+  "art/parts/crowd-pilot-5/game/b-image/sit.glb",
+  "art/parts/crowd-pilot-5/game/b-image/idle.json",
+  "art/parts/crowd-pilot-5/game/b-image/preservation.json",
+  "art/parts/crowd-pilot-5/meshy/b-image.glb",
+  "art/parts/crowd-pilot-5/game/b-text/base.webp",
+  "art/parts/crowd-pilot-5/game/b-text/walk.glb",
+  "art/parts/crowd-pilot-5/game/b-text/run.glb",
+  "art/parts/crowd-pilot-5/game/b-text/sit.glb",
+  "art/parts/crowd-pilot-5/game/b-text/idle.json",
+  "art/parts/crowd-pilot-5/game/b-text/preservation.json",
+  "art/parts/crowd-pilot-5/meshy/b-text.glb",
+  "art/parts/crowd-selected-1/game/a/base.webp",
+  "art/parts/crowd-selected-1/game/a/walk.glb",
+  "art/parts/crowd-selected-1/game/a/run.glb",
+  "art/parts/crowd-selected-1/game/a/sit.glb",
+  "art/parts/crowd-selected-1/game/a/idle.json",
+  "art/parts/crowd-selected-1/game/b/base.webp",
+  "art/parts/crowd-selected-1/game/b/walk.glb",
+  "art/parts/crowd-selected-1/game/b/run.glb",
+  "art/parts/crowd-selected-1/game/b/sit.glb",
+  "art/parts/crowd-selected-1/game/b/idle.json",
+  "art/parts/crowd-selected-1/takes/b-hair-1/before.webp",
+  "art/parts/crowd-selected-1/takes/b-hair-1/input.webp",
+  "art/parts/crowd-selected-1/takes/b-hair-1/mask.webp",
+  "art/parts/crowd-selected-1/takes/b-hair-1/generated.webp",
+  "art/parts/crowd-selected-1/takes/b-hair-1-projection-original/front.webp",
+  "art/parts/crowd-selected-1/takes/b-hair-1/projection-mask-final.webp",
+  "art/parts/crowd-selected-1/takes/b-hair-1/settings.json"
+ ],
+ "decided": [
+  "a-image",
+  "b-image"
+ ],
+ "decision": "a-image and b-image; b-image: \"though she has a bald spot at the front of her face\"",
+ "decided_at": "2026-10-07T07:40:42+0200"
+}

@@ -1,0 +1,38 @@
+{
+ "title": "Eric's dialogue portrait: 10% closer",
+ "date": "2026-09-29",
+ "by": "art agent (Eric portrait final 2)",
+ "status": "decided",
+ "multi": false,
+ "question": "Is this the right amount closer?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/eric-final/lineup-zoom-before.webp.webp",
+   "caption": "Before: Mio, Eric and Emi placed the way the game places them at 2560x1440."
+  },
+  {
+   "image": "art/candidates/portraits/eric-final/eric-neutral-zoom110-bg.webp.webp",
+   "caption": "The new cut-out at game file size (597x768) over dark, light and a checkerboard."
+  },
+  {
+   "image": "art/candidates/portraits/eric-final/eric-neutral-zoom110-glasses-hair.webp.webp",
+   "caption": "Close-up of the glasses, hair and ponytail edges. The glasses frame is solid."
+  }
+ ],
+ "options": [
+  {
+   "id": "eric-final-zoom110",
+   "label": "10% bigger",
+   "image": "art/candidates/portraits/eric-final/lineup-zoom-after.webp.webp",
+   "images": [
+    "game3d/assets/portraits/eric-neutral.webp"
+   ],
+   "note": "Same render, re-cut from the full-size cut-out 10% closer. His chin is at the same height as before and his face stays in the same spot left to right. Already in the game as eric-neutral.webp; the previous crop is kept in art/production/eric-portrait-final/."
+  }
+ ],
+ "decided": [
+  "eric-final-zoom110"
+ ],
+ "decision": "25% bigger",
+ "issue": 26
+}

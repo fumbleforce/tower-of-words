@@ -1,0 +1,11 @@
+gait-check: GPU slot 3
+forecourt 1366x860-mc=carina-scale-default1: 165 windows, 13 people in view, 8 walked; walked: kuro
+  eric: 13 walking windows, median ratio 0.98, bad 1
+  mio: 11 walking windows, median ratio 0.95, bad 0
+  crowd6: 14 walking windows, median ratio 0.98, bad 0
+  crowd8: 12 walking windows, median ratio 0.99, bad 0
+  crowd14: 12 walking windows, median ratio 1, bad 0
+  crowd17: 14 walking windows, median ratio 1.01, bad 0
+  crowd13: 6 walking windows, median ratio 1.01, bad 0
+  crowd12: 10 walking windows, median ratio 1, bad 0
+PASS 1366x860-mc=carina-scale-default1 game3d/shots/gait/1366x860-mc=carina-scale-default1

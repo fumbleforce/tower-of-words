@@ -1,0 +1,140 @@
+{
+ "title": "Emi rounds 1 and 2: a 3D chibi made the way Kuro round 3 was",
+ "date": "2026-10-04",
+ "by": "Claude (aoi-emi-meshy agent)",
+ "status": "decided",
+ "question": "Round 2 (emi-2, last option) has no lanyard and her jaw edges repainted, and is in the game; is she right now?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/parts/emi-meshy-1/sheets/step0-inputs.webp",
+   "caption": "Round 1. ChatGPT pictures. Your verdict on Kuro round 3: \"Now lets use this approach for aoi and emi as well\". One chat in ChatGPT's image model (openai/gpt-5.4-image-2 on OpenRouter). Step 1 attached these two: her approved portrait and your Mio chibi."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/steps.webp.webp",
+   "caption": "Round 1. Every take, in order, with your words as written: 1 \"make a 3d chibi anime character in the style of the attached image\" (a1, a2; a2's hair is closer to her reddish auburn), 2 \"Simplify female character a LOT to match the detail level of the other chibi, with open eyes\" (b1), 3 \"Simpler head model, no glasses\" (c1), then your angle prompt (d1, d2: both put her glasses back, as e2 and e4 did for Kuro). That used the $3 image budget for both characters. c1 has no glasses and already stands at a three-quarter angle with her head and body facing the same way, so c1 went to Meshy, not an angle take. Her head is 0.47 of her height in c1 (top of the hair to the chin, over top to soles); Kuro's picked picture was 0.45. 6 takes, $1.48."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/measure.webp",
+   "caption": "Round 1. 3D renders from here on. Head size on the models: straight-on, flat-colour pictures in the rest pose, each scaled to the same height (the in-game Eric and Mio and Kuro round 3 are the pictures measured for Kuro round 3). Head share of height: Eric 0.46, Mio 0.52 (her buns count), Kuro round 3 0.41, Emi 0.48. Widest part of the head over the width of the legs: Eric 1.95, Mio 2.33, Kuro round 3 2.20, Emi 2.78 (Kuro round 2, whose head you found a little too big, was 0.47 and 2.55). So Emi's head is bigger than Kuro round 2's on both counts. Kuro's follow-up (\"make her head a little smaller relative to her body, everything else the same\") would fix this, but the image budget ran out, so it wasn't run."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/shape-previews.webp",
+   "caption": "Round 1. Meshy image-to-3D from c1 with Kuro's settings: smart topology (meshy-t2), 1,050 polygons, A-pose, no texture, 5 credits. Meshy's own previews. First roll, kept: 1,097 triangles."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/uv.webp.webp",
+   "caption": "Round 1. Kuro round 3's fix before the texture pass: our own UV layout with the front of her face as one piece at 3 times the detail of the rest. Kuro's script started the face at a point in the middle of her face; on Emi that point is on a bang, so it took the bang alone (10 polygons, 4.1 % of the texture). Here the face is the biggest front-facing piece of the head instead (43 polygons, red), which gives the face 14 % of the texture, as for Kuro. A big lock of hair sweeps over her right side (image left), so her face sits off-centre in the hair. Then Meshy retexture on that mesh with Kuro's settings: styled from c1, keep the UVs, lighting removed, no PBR, 2048 px, 10 credits. Right: the texture Meshy painted; her face came out as one piece."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/tex.webp.webp",
+   "caption": "Round 1. The textured model: front, her left three-quarter (image right side turned to us), her left side, back, her right three-quarter, face. Same camera and light as Kuro's rounds. The lanyard and badge from the picture are on the model (step 3 named only her glasses)."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/faces.webp.webp",
+   "caption": "Round 1. Face close-ups, then three flat-colour pictures from below the chin, looking for dark marks like the one under Kuro's cheek. Emi has them: a short grey-blue dash under each cheek on the underside of her jaw, one on her right and one on her left, seen from below. Her eyes and mouth are clean."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/compare.webp.webp",
+   "caption": "Round 1. Emi beside the in-game Meshy Eric and Mio and Kuro round 3 (the same render script and camera), front and her right three-quarter. In the live viewer they all stand at the same height."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/viewer.webp.webp",
+   "caption": "Round 1. Meshy auto-rig at 1.1 m, as for Kuro, 5 credits. Stills from the live viewer: rest, idle, walk, walk from the side. The idle and walk are the game's (Mio's approved idle and walk, carried over by bone name). She is not in the game. Meshy credits for Emi: 20 (shape 5, texture 10, rig 5); the balance is now 412 after Aoi and Emi."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/r2-steps.webp",
+   "caption": "Round 2. Your verdict on emi-1: \"looking good, but for some discoloration, and the lanyard which becomes mangled. we should remove props when making the models.\" One change for the lanyard: her step 3 again in her round-1 chat (a2, b1), as \"Simpler head model, no glasses, no lanyard\" (props come off in the picture steps, now in art/PROMPTS.md). Three takes, every one shown; none has the lanyard or badge. c2 has a hand on her hip (Meshy would fuse it to her side); c3 and c4 stand with arms down like c1. Head share: c1 0.47, c2 0.50, c3 0.44, c4 0.49. c3 went to Meshy: it keeps the rest closest to c1 and its head is the smallest. 3 takes, $0.74."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/r2-shape-previews.webp",
+   "caption": "Round 2. The same Meshy steps as round 1. Image-to-3D from c3: smart topology (meshy-t2), 1,050 polygons, A-pose, no texture, 5 credits. Meshy's own previews; first roll, kept (1,126 triangles). No lanyard."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/r2-uv.webp.webp",
+   "caption": "Round 2. Our UV layout with the front of her face as one piece at 3 times the detail. The biggest front-facing piece was the lock of hair over her right side (image left), so the face is the second biggest (18 polygons, red). Then Meshy retexture, styled from c3, keep the UVs, lighting removed, no PBR, 10 credits. Right: Meshy's texture; her face is one piece."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/r2-tex.webp.webp",
+   "caption": "Round 2. The textured model as Meshy painted it: front, her left three-quarter (image right side turned to us), her left side, back, her right three-quarter, face."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/r2-before-after.webp.webp",
+   "caption": "Round 2. Before and after: round 1 (emi-1, with the lanyard) and round 2 (emi-2, without), full figure and face. Her head came out a little smaller too (0.48 to 0.43 of her height), since c3's is."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/r2-measure.webp",
+   "caption": "Round 2. Head share of height on the models: Kuro round 3 0.41, Emi round 1 0.48, Emi round 2 0.43."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/r2-jaw.webp.webp",
+   "caption": "Round 2. The discolouration. The round-1 grey-blue dashes under her cheeks are gone with the new texture; the new one has dark slivers along the edges of her jaw (front, and under her left jaw, image right). Fixed the way Kuro's cheek was (kuro-meshy-orig-3/cheek_fix.py, here with her chin's height band): only the dark texels on the skin triangles facing down under her jaw are filled from the skin round them; her mouth's four chin triangles are left out, so the edge of her mouth stays. Before and after, from below, texture colours only. Not touched: the patch of hair colour under her right jaw (image left) with a small skin-coloured nub in it, which sits on hair; say if you want that changed too."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/r2-jaw-marked.webp",
+   "caption": "Round 2. Where the repainted texels are, marked green on the model (11 triangles, 3,897 texels of the 2048 px texture)."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/r2-compare.webp.webp",
+   "caption": "Round 2. Emi round 2 beside the in-game Eric and Mio and Kuro round 3, front and her right three-quarter (Meshy's texture)."
+  },
+  {
+   "image": "art/parts/emi-meshy-1/sheets/r2-viewer.webp.webp",
+   "caption": "Round 2. Meshy auto-rig at 1.1 m, 5 credits, and Meshy's Chair_Sit_Idle_F for her desk chair, 3 credits. Stills from the live viewer (rest, idle, walk, walk from the side), with Meshy's texture. Meshy credits for round 2: 23 (shape 5, texture 10, rig 5, sit 3). She is in the game now, with the repainted texture (Showcase aoi-emi-in-game-1)."
+  }
+ ],
+ "options": [
+  {
+   "id": "emi-1",
+   "label": "emi-1",
+   "image": "art/parts/emi-meshy-1/renders/tex/r45.png.webp",
+   "images": [
+    "art/parts/emi-meshy-1/renders/tex/front.png.webp",
+    "art/parts/emi-meshy-1/renders/tex/face.png.webp",
+    "art/parts/emi-meshy-1/renders/tex/back.png.webp",
+    "art/parts/emi-meshy-1/pics/c1.png.webp"
+   ],
+   "note": "The rigged model from c1 (chat a2, b1, c1): smart topology, 1,050 polygons, our UV layout with the face in one piece, Meshy retexture styled from c1, auto-rig at 1.1 m. Head share of height 0.48, head width 2.78 times the legs (Kuro round 3: 0.41 and 2.20). Grey-blue dashes under both cheeks. 20 Meshy credits; the six ChatGPT pictures cost $1.48."
+  },
+  {
+   "id": "emi-2",
+   "label": "emi-2 (round 2)",
+   "image": "art/parts/emi-meshy-1/renders/tex2/r45.png.webp",
+   "images": [
+    "art/parts/emi-meshy-1/renders/tex2/front.png.webp",
+    "art/parts/emi-meshy-1/renders/tex2/face.png.webp",
+    "art/parts/emi-meshy-1/renders/tex2/back.png.webp",
+    "art/parts/emi-meshy-1/pics/c3.png.webp"
+   ],
+   "note": "Round 2, from picture c3 (chat a2, b1, then \"Simpler head model, no glasses, no lanyard\"): smart topology, 1,050 polygons, our UV layout with the face in one piece, Meshy retexture styled from c3, auto-rig at 1.1 m, Meshy sit. No lanyard; head share 0.43 (round 1 0.48). In the game the dark texels along her jaw are repainted in skin. 23 Meshy credits; three pictures $0.74. In the game since this round."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D, round 2: emi-2 beside the in-game Eric and Mio and Kuro round 3 (turn, zoom, idle, walk)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/characters/parts/viewer.html"
+  },
+  {
+   "label": "In the game: Showcase aoi-emi-in-game-1",
+   "href": "#showcase/aoi-emi-in-game-1"
+  },
+  {
+   "label": "Live 3D: Emi beside the in-game Eric and Mio and Kuro round 3 (turn, zoom, idle, walk)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/characters/parts/viewer.html"
+  },
+  {
+   "label": "Kuro round 3, the approved process (kuro-meshy-orig-3)",
+   "href": "#review/kuro-meshy-orig-3"
+  },
+  {
+   "label": "Aoi round 1, the same process (aoi-meshy-1)",
+   "href": "#review/aoi-meshy-1"
+  }
+ ],
+ "decided": [
+  "emi-2"
+ ],
+ "decision": "emi-2 picked (in game)",
+ "decided_at": "2026-10-05T07:34:11+0200",
+ "issue": 224
+}

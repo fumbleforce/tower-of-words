@@ -1,0 +1,39 @@
+{
+ "title": "Where heavy files live",
+ "date": "2026-09-29",
+ "by": "asset storage agent (Claude)",
+ "status": "decided",
+ "multi": false,
+ "question": "Where should images, models, audio and screenshots live so git stops growing (about 250 MB a day now)? History and the bible are in sections 6 and 7 of the proposal; comment if you disagree.",
+ "options": [
+  {
+   "id": "supabase",
+   "label": "supabase: Supabase Storage + manifest (recommended)",
+   "note": "The plan from 2026-09-28. Files keep their paths on disk; a sync script uploads them by checksum and git keeps a manifest. Rewards in a separate bucket, encrypted before upload. About $10/month for a third active project; storage within the plan's 100 GB. Half a day to set up."
+  },
+  {
+   "id": "lfs",
+   "label": "lfs: Git LFS on GitHub",
+   "note": "Least new tooling, but LFS files in a public repo are public (no rewards), nothing can ever be deleted, and Pages serves pointer files. 10 GiB free, then about $0.07/GiB a month plus downloads."
+  },
+  {
+   "id": "r2",
+   "label": "r2: Cloudflare R2 (or Backblaze B2) + rclone",
+   "note": "Same design as supabase for under $1/month at 50 GB, but a new account."
+  },
+  {
+   "id": "local-backup",
+   "label": "local-backup: local disk + encrypted nightly backup",
+   "note": "Heavy files stay ignored on this disk; restic backs up the whole folder (rewards included, encrypted) to B2 or R2 for under $1/month. Simplest, but assets are tied to this machine and versions are by date, not by commit."
+  }
+ ],
+ "links": [
+  {
+   "label": "The proposal, with the measurements (a few minutes to read)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/asset-storage-proposal.md"
+  }
+ ],
+ "decision": "Cloudflare R2 for used assets only; local machine keeps WIP and rejected; repo as lean as possible, all resources in git-ignored areas, upload what another machine needs (Jørgen, 11:44)",
+ "issue": 20,
+ "media": []
+}

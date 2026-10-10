@@ -1,0 +1,71 @@
+{
+ "title": "Kenji concept round",
+ "date": "2026-09-28",
+ "by": "characters agent",
+ "status": "superseded",
+ "multi": true,
+ "question": "Kenji is about 21, inexperienced, eager to help and easily distracted. Which direction is him? Two seeds and a full body each.",
+ "media": [
+  {
+   "image": "art/candidates/portraits/kenji-concept-sheet.png.webp",
+   "caption": "The whole round on one sheet"
+  }
+ ],
+ "options": [
+  {
+   "id": "a",
+   "label": "a. Trains",
+   "image": "art/candidates/portraits/kenji-concept/kenji-a-trains-751.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept/kenji-a-trains-752.webp.webp",
+    "art/candidates/portraits/kenji-concept/kenji-a-trains-full-751.webp"
+   ]
+  },
+  {
+   "id": "b",
+   "label": "b. Gashapon",
+   "image": "art/candidates/portraits/kenji-concept/kenji-b-gashapon-751.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept/kenji-b-gashapon-752.webp.webp",
+    "art/candidates/portraits/kenji-concept/kenji-b-gashapon-full-751.webp"
+   ]
+  },
+  {
+   "id": "c",
+   "label": "c. City pop",
+   "image": "art/candidates/portraits/kenji-concept/kenji-c-citypop-751.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept/kenji-c-citypop-752.webp.webp",
+    "art/candidates/portraits/kenji-concept/kenji-c-citypop-full-751.webp"
+   ]
+  },
+  {
+   "id": "d",
+   "label": "d. Climber",
+   "image": "art/candidates/portraits/kenji-concept/kenji-d-climber-751.webp.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept/kenji-d-climber-752.webp.webp",
+    "art/candidates/portraits/kenji-concept/kenji-d-climber-full-751.webp"
+   ]
+  },
+  {
+   "id": "e",
+   "label": "e. Plants",
+   "image": "art/candidates/portraits/kenji-concept/kenji-e-plants-751.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept/kenji-e-plants-752.webp.webp",
+    "art/candidates/portraits/kenji-concept/kenji-e-plants-full-751.webp"
+   ]
+  },
+  {
+   "id": "f",
+   "label": "f. Rookie suit",
+   "image": "art/candidates/portraits/kenji-concept/kenji-f-rookiesuit-751.webp",
+   "images": [
+    "art/candidates/portraits/kenji-concept/kenji-f-rookiesuit-752.webp",
+    "art/candidates/portraits/kenji-concept/kenji-f-rookiesuit-full-751.webp"
+   ]
+  }
+ ],
+ "decision": "Rejected: hobby costumes ('way out of whacko land... he is at work'); replaced by kenji-concept-2"
+}

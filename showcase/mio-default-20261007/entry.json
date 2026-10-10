@@ -1,0 +1,2000 @@
+{
+ "title": "Selected Mio in the game",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "Selected Mio using her phone, laptop and desk keyboard, with native lunch contacts. Final highlights come first; the complete capture history follows in expandable sections. History frames follow capture order, including the ten final highlights again to keep each run complete. Older named contact checkpoints can be occluded or captured after release; held-detail views show the accepted contact proof.",
+ "preview": "phone85",
+ "sections": [
+  {
+   "title": "Phone and seated work",
+   "caption": "Desktop at 85% size. Close views are diagnostic cameras; the gameplay camera is unchanged. Keyboard contact applies during idle work, while authored gestures keep control during dialogue.",
+   "images": [
+    {
+     "id": "phone85",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/phone-side.webp.webp",
+     "caption": "Approved phone pose retargeted to the selected body."
+    },
+    {
+     "id": "laptop85",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/train-side.webp.webp",
+     "caption": "Laptop supported on the seated thighs, hands on the keyboard."
+    },
+    {
+     "id": "office85",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/office-side.webp.webp",
+     "caption": "Hands reach the desk keyboard."
+    },
+    {
+     "id": "laptop100",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/train-side.webp.webp",
+     "caption": "Explicit 100% size on a 390-pixel viewport."
+    },
+    {
+     "id": "office100",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/office-side.webp.webp",
+     "caption": "The same keyboard contact at 100%."
+    }
+   ]
+  },
+  {
+   "title": "Lunch contacts",
+   "caption": "Native actions paused before release, with a diagnostic view of the real contact. Both sizes pass; the lunch sequence and hand solver limits are unchanged.",
+   "images": [
+    {
+     "id": "cable85",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-cable-hook-held-detail.webp.webp",
+     "caption": "85%: cable held by the rim above the hook."
+    },
+    {
+     "id": "bento85",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-bento-pickup-held-detail.webp.webp",
+     "caption": "85%: hand reaches the box edge."
+    },
+    {
+     "id": "mouth85",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-bite-mouth.webp.webp",
+     "caption": "85%: the food reaches the selected model’s mouth."
+    },
+    {
+     "id": "cable100",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-cable-hook-held-detail.webp.webp",
+     "caption": "100%: native held cable contact on a phone viewport."
+    },
+    {
+     "id": "bento100",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-bento-pickup-held-detail.webp.webp",
+     "caption": "100%: native bento pickup contact."
+    }
+   ]
+  },
+  {
+   "title": "Attempt 1: round1-1366",
+   "caption": "Initial selected-body integration. The laptop and desk hands still need correction.",
+   "images": [
+    {
+     "id": "history-01-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round1-1366/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-01-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round1-1366/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-01-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round1-1366/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-01-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round1-1366/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-01-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round1-1366/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-01-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round1-1366/office-side.webp.webp",
+     "caption": "office side"
+    },
+    {
+     "id": "history-01-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round1-1366/forecourt-arrival.webp.webp",
+     "caption": "forecourt arrival"
+    },
+    {
+     "id": "history-01-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round1-1366/phone-front.webp.webp",
+     "caption": "phone front"
+    },
+    {
+     "id": "history-01-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round1-1366/phone-side.webp.webp",
+     "caption": "phone side"
+    },
+    {
+     "id": "history-01-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round1-1366/after-motion.webp.webp",
+     "caption": "after motion"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 2: round2-1366",
+   "caption": "Phone pose retained; laptop floats above the lap and desk hands sit above the keyboard.",
+   "images": [
+    {
+     "id": "history-02-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-1366/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-02-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-1366/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-02-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-1366/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-02-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-1366/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-02-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-1366/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-02-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-1366/office-side.webp.webp",
+     "caption": "office side"
+    },
+    {
+     "id": "history-02-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-1366/forecourt-arrival.webp.webp",
+     "caption": "forecourt arrival"
+    },
+    {
+     "id": "history-02-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-1366/phone-front.webp.webp",
+     "caption": "phone front"
+    },
+    {
+     "id": "history-02-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-1366/phone-side.webp.webp",
+     "caption": "phone side"
+    },
+    {
+     "id": "history-02-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-1366/after-motion.webp.webp",
+     "caption": "after motion"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 3: round2-390",
+   "caption": "Phone-size baseline before laptop and keyboard corrections.",
+   "images": [
+    {
+     "id": "history-03-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-390/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-03-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-390/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-03-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-390/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-03-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-390/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-03-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-390/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-03-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-390/office-side.webp.webp",
+     "caption": "office side"
+    },
+    {
+     "id": "history-03-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-390/forecourt-arrival.webp.webp",
+     "caption": "forecourt arrival"
+    },
+    {
+     "id": "history-03-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-390/phone-front.webp.webp",
+     "caption": "phone front"
+    },
+    {
+     "id": "history-03-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-390/phone-side.webp.webp",
+     "caption": "phone side"
+    },
+    {
+     "id": "history-03-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/round2-390/after-motion.webp.webp",
+     "caption": "after motion"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 4: contacts3-1366",
+   "caption": "Scene initialization failed while sampling the thigh surface; no image was produced. The failure report is linked below.",
+   "images": []
+  },
+  {
+   "title": "Attempt 5: contacts4-1366",
+   "caption": "Second scene initialization failure while sampling the thigh surface; no image was produced. The failure report is linked below.",
+   "images": []
+  },
+  {
+   "title": "Attempt 6: contacts5-1366",
+   "caption": "Laptop support corrected; the office keyboard is still too far from the wrists.",
+   "images": [
+    {
+     "id": "history-06-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts5-1366/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-06-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts5-1366/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-06-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts5-1366/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-06-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts5-1366/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-06-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts5-1366/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-06-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts5-1366/office-side.webp.webp",
+     "caption": "office side"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 7: mio335-85-1366-1",
+   "caption": "Retained failed lunch contact check: cable hook target too low; the old mouth coordinate also misses the new face.",
+   "images": [
+    {
+     "id": "history-07-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-layout.webp.webp",
+     "caption": "1366 2 layout"
+    },
+    {
+     "id": "history-07-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-cable-pickup.webp.webp",
+     "caption": "1366 2 cable pickup"
+    },
+    {
+     "id": "history-07-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-cable-hook.webp.webp",
+     "caption": "1366 2 cable hook"
+    },
+    {
+     "id": "history-07-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-line-1.webp.webp",
+     "caption": "1366 2 line 1"
+    },
+    {
+     "id": "history-07-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-line-2.webp.webp",
+     "caption": "1366 2 line 2"
+    },
+    {
+     "id": "history-07-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-line-3.webp.webp",
+     "caption": "1366 2 line 3"
+    },
+    {
+     "id": "history-07-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-chopsticks-pickup.webp.webp",
+     "caption": "1366 2 chopsticks pickup"
+    },
+    {
+     "id": "history-07-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-rice-pickup.webp.webp",
+     "caption": "1366 2 rice pickup"
+    },
+    {
+     "id": "history-07-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-bite-mouth.webp.webp",
+     "caption": "1366 2 bite mouth"
+    },
+    {
+     "id": "history-07-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-chopsticks-return.webp.webp",
+     "caption": "1366 2 chopsticks return"
+    },
+    {
+     "id": "history-07-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-finished.webp.webp",
+     "caption": "1366 2 finished"
+    },
+    {
+     "id": "history-07-12",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-1/1366-2-failed.webp.webp",
+     "caption": "1366 2 failed"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 8: contacts6-390",
+   "caption": "The 100% contact measurement exposes the distant office keyboard.",
+   "images": [
+    {
+     "id": "history-08-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts6-390/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-08-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts6-390/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-08-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts6-390/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-08-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts6-390/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-08-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts6-390/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-08-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts6-390/office-side.webp.webp",
+     "caption": "office side"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 9: contacts7-1366",
+   "caption": "85% office keyboard moved to its reachable near edge.",
+   "images": [
+    {
+     "id": "history-09-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts7-1366/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-09-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts7-1366/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-09-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts7-1366/office-side.webp.webp",
+     "caption": "office side"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 10: mio335-85-1366-2",
+   "caption": "Retained diagnostic attempt before the cable and native mouth corrections.",
+   "images": [
+    {
+     "id": "history-10-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-layout.webp.webp",
+     "caption": "1366 2 layout"
+    },
+    {
+     "id": "history-10-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-cable-pickup.webp.webp",
+     "caption": "1366 2 cable pickup"
+    },
+    {
+     "id": "history-10-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-cable-hook.webp.webp",
+     "caption": "1366 2 cable hook"
+    },
+    {
+     "id": "history-10-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-line-1.webp.webp",
+     "caption": "1366 2 line 1"
+    },
+    {
+     "id": "history-10-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-line-2.webp.webp",
+     "caption": "1366 2 line 2"
+    },
+    {
+     "id": "history-10-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-line-3.webp.webp",
+     "caption": "1366 2 line 3"
+    },
+    {
+     "id": "history-10-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-chopsticks-pickup.webp.webp",
+     "caption": "1366 2 chopsticks pickup"
+    },
+    {
+     "id": "history-10-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-rice-pickup.webp.webp",
+     "caption": "1366 2 rice pickup"
+    },
+    {
+     "id": "history-10-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-bite-mouth.webp.webp",
+     "caption": "1366 2 bite mouth"
+    },
+    {
+     "id": "history-10-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-chopsticks-return.webp.webp",
+     "caption": "1366 2 chopsticks return"
+    },
+    {
+     "id": "history-10-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-finished.webp.webp",
+     "caption": "1366 2 finished"
+    },
+    {
+     "id": "history-10-12",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-2/1366-2-failed.webp.webp",
+     "caption": "1366 2 failed"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 11: contacts8-390",
+   "caption": "100% laptop and desk keyboard contact check.",
+   "images": [
+    {
+     "id": "history-11-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts8-390/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-11-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts8-390/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-11-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts8-390/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-11-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts8-390/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-11-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts8-390/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-11-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/contacts8-390/office-side.webp.webp",
+     "caption": "office side"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 12: mio335-85-1366-3",
+   "caption": "85% lunch after correcting the cable rim and selected rig’s lower-lip target.",
+   "images": [
+    {
+     "id": "history-12-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-layout.webp.webp",
+     "caption": "1366 2 layout"
+    },
+    {
+     "id": "history-12-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-cable-pickup.webp.webp",
+     "caption": "1366 2 cable pickup"
+    },
+    {
+     "id": "history-12-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-cable-hook.webp.webp",
+     "caption": "1366 2 cable hook"
+    },
+    {
+     "id": "history-12-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-line-1.webp.webp",
+     "caption": "1366 2 line 1"
+    },
+    {
+     "id": "history-12-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-line-2.webp.webp",
+     "caption": "1366 2 line 2"
+    },
+    {
+     "id": "history-12-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-line-3.webp.webp",
+     "caption": "1366 2 line 3"
+    },
+    {
+     "id": "history-12-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-chopsticks-pickup.webp.webp",
+     "caption": "1366 2 chopsticks pickup"
+    },
+    {
+     "id": "history-12-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-rice-pickup.webp.webp",
+     "caption": "1366 2 rice pickup"
+    },
+    {
+     "id": "history-12-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-bite-mouth.webp.webp",
+     "caption": "1366 2 bite mouth"
+    },
+    {
+     "id": "history-12-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-chopsticks-return.webp.webp",
+     "caption": "1366 2 chopsticks return"
+    },
+    {
+     "id": "history-12-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-3/1366-2-finished.webp.webp",
+     "caption": "1366 2 finished"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 13: mio335-100-1366-final",
+   "caption": "100% lunch sequence on desktop.",
+   "images": [
+    {
+     "id": "history-13-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-layout.webp.webp",
+     "caption": "1366 2 layout"
+    },
+    {
+     "id": "history-13-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-cable-pickup.webp.webp",
+     "caption": "1366 2 cable pickup"
+    },
+    {
+     "id": "history-13-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-cable-hook.webp.webp",
+     "caption": "1366 2 cable hook"
+    },
+    {
+     "id": "history-13-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-line-1.webp.webp",
+     "caption": "1366 2 line 1"
+    },
+    {
+     "id": "history-13-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-line-2.webp.webp",
+     "caption": "1366 2 line 2"
+    },
+    {
+     "id": "history-13-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-line-3.webp.webp",
+     "caption": "1366 2 line 3"
+    },
+    {
+     "id": "history-13-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-chopsticks-pickup.webp.webp",
+     "caption": "1366 2 chopsticks pickup"
+    },
+    {
+     "id": "history-13-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-rice-pickup.webp.webp",
+     "caption": "1366 2 rice pickup"
+    },
+    {
+     "id": "history-13-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-bite-mouth.webp.webp",
+     "caption": "1366 2 bite mouth"
+    },
+    {
+     "id": "history-13-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-chopsticks-return.webp.webp",
+     "caption": "1366 2 chopsticks return"
+    },
+    {
+     "id": "history-13-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-1366-final/1366-2-finished.webp.webp",
+     "caption": "1366 2 finished"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 14: mio335-85-390-final",
+   "caption": "85% lunch sequence on the phone viewport.",
+   "images": [
+    {
+     "id": "history-14-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-layout.webp.webp",
+     "caption": "390 2 layout"
+    },
+    {
+     "id": "history-14-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-cable-pickup.webp.webp",
+     "caption": "390 2 cable pickup"
+    },
+    {
+     "id": "history-14-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-cable-hook.webp.webp",
+     "caption": "390 2 cable hook"
+    },
+    {
+     "id": "history-14-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-line-1.webp.webp",
+     "caption": "390 2 line 1"
+    },
+    {
+     "id": "history-14-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-line-2.webp.webp",
+     "caption": "390 2 line 2"
+    },
+    {
+     "id": "history-14-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-line-3.webp.webp",
+     "caption": "390 2 line 3"
+    },
+    {
+     "id": "history-14-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-chopsticks-pickup.webp.webp",
+     "caption": "390 2 chopsticks pickup"
+    },
+    {
+     "id": "history-14-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-rice-pickup.webp.webp",
+     "caption": "390 2 rice pickup"
+    },
+    {
+     "id": "history-14-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-bite-mouth.webp.webp",
+     "caption": "390 2 bite mouth"
+    },
+    {
+     "id": "history-14-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-chopsticks-return.webp.webp",
+     "caption": "390 2 chopsticks return"
+    },
+    {
+     "id": "history-14-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-final/390-2-finished.webp.webp",
+     "caption": "390 2 finished"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 15: mio335-100-390-final",
+   "caption": "100% lunch sequence on the phone viewport.",
+   "images": [
+    {
+     "id": "history-15-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-layout.webp.webp",
+     "caption": "390 2 layout"
+    },
+    {
+     "id": "history-15-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-cable-pickup.webp.webp",
+     "caption": "390 2 cable pickup"
+    },
+    {
+     "id": "history-15-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-cable-hook.webp.webp",
+     "caption": "390 2 cable hook"
+    },
+    {
+     "id": "history-15-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-line-1.webp.webp",
+     "caption": "390 2 line 1"
+    },
+    {
+     "id": "history-15-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-line-2.webp.webp",
+     "caption": "390 2 line 2"
+    },
+    {
+     "id": "history-15-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-line-3.webp.webp",
+     "caption": "390 2 line 3"
+    },
+    {
+     "id": "history-15-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-chopsticks-pickup.webp.webp",
+     "caption": "390 2 chopsticks pickup"
+    },
+    {
+     "id": "history-15-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-rice-pickup.webp.webp",
+     "caption": "390 2 rice pickup"
+    },
+    {
+     "id": "history-15-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-bite-mouth.webp.webp",
+     "caption": "390 2 bite mouth"
+    },
+    {
+     "id": "history-15-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-chopsticks-return.webp.webp",
+     "caption": "390 2 chopsticks return"
+    },
+    {
+     "id": "history-15-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-final/390-2-finished.webp.webp",
+     "caption": "390 2 finished"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 16: mio335-85-1366-step3",
+   "caption": "Retained failed box-centre pickup measurement, before moving the grip to its side.",
+   "images": [
+    {
+     "id": "history-16-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-layout.webp.webp",
+     "caption": "1366 3 layout"
+    },
+    {
+     "id": "history-16-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-cable-pickup.webp.webp",
+     "caption": "1366 3 cable pickup"
+    },
+    {
+     "id": "history-16-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-cable-hook.webp.webp",
+     "caption": "1366 3 cable hook"
+    },
+    {
+     "id": "history-16-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-line-1.webp.webp",
+     "caption": "1366 3 line 1"
+    },
+    {
+     "id": "history-16-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-line-2.webp.webp",
+     "caption": "1366 3 line 2"
+    },
+    {
+     "id": "history-16-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-sheet-pickup.webp.webp",
+     "caption": "1366 3 sheet pickup"
+    },
+    {
+     "id": "history-16-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-sheet-handover.webp.webp",
+     "caption": "1366 3 sheet handover"
+    },
+    {
+     "id": "history-16-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-sheet-handover-taker.webp.webp",
+     "caption": "1366 3 sheet handover taker"
+    },
+    {
+     "id": "history-16-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-line-3.webp.webp",
+     "caption": "1366 3 line 3"
+    },
+    {
+     "id": "history-16-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-line-4.webp.webp",
+     "caption": "1366 3 line 4"
+    },
+    {
+     "id": "history-16-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-bento-pickup.webp.webp",
+     "caption": "1366 3 bento pickup"
+    },
+    {
+     "id": "history-16-12",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-door-out.webp.webp",
+     "caption": "1366 3 door out"
+    },
+    {
+     "id": "history-16-13",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-lift-out.webp.webp",
+     "caption": "1366 3 lift out"
+    },
+    {
+     "id": "history-16-14",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-line-5.webp.webp",
+     "caption": "1366 3 line 5"
+    },
+    {
+     "id": "history-16-15",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-checklist-support.webp.webp",
+     "caption": "1366 3 checklist support"
+    },
+    {
+     "id": "history-16-16",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-pencil-grip.webp.webp",
+     "caption": "1366 3 pencil grip"
+    },
+    {
+     "id": "history-16-17",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-pencil-tip-mark.webp.webp",
+     "caption": "1366 3 pencil tip mark"
+    },
+    {
+     "id": "history-16-18",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-pencil-clip.webp.webp",
+     "caption": "1366 3 pencil clip"
+    },
+    {
+     "id": "history-16-19",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-lift-return.webp.webp",
+     "caption": "1366 3 lift return"
+    },
+    {
+     "id": "history-16-20",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-door-return.webp.webp",
+     "caption": "1366 3 door return"
+    },
+    {
+     "id": "history-16-21",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-marked-sheet-pickup.webp.webp",
+     "caption": "1366 3 marked sheet pickup"
+    },
+    {
+     "id": "history-16-22",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-sheet-return.webp.webp",
+     "caption": "1366 3 sheet return"
+    },
+    {
+     "id": "history-16-23",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-sheet-return-taker.webp.webp",
+     "caption": "1366 3 sheet return taker"
+    },
+    {
+     "id": "history-16-24",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-line-6.webp.webp",
+     "caption": "1366 3 line 6"
+    },
+    {
+     "id": "history-16-25",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-line-7.webp.webp",
+     "caption": "1366 3 line 7"
+    },
+    {
+     "id": "history-16-26",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-finished.webp.webp",
+     "caption": "1366 3 finished"
+    },
+    {
+     "id": "history-16-27",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3/1366-3-failed.webp.webp",
+     "caption": "1366 3 failed"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 17: mio335-85-1366-step3-2",
+   "caption": "85% checklist and departure sequence after moving bento pickup to the box side.",
+   "images": [
+    {
+     "id": "history-17-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-layout.webp.webp",
+     "caption": "1366 3 layout"
+    },
+    {
+     "id": "history-17-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-cable-pickup.webp.webp",
+     "caption": "1366 3 cable pickup"
+    },
+    {
+     "id": "history-17-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-cable-hook.webp.webp",
+     "caption": "1366 3 cable hook"
+    },
+    {
+     "id": "history-17-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-line-1.webp.webp",
+     "caption": "1366 3 line 1"
+    },
+    {
+     "id": "history-17-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-line-2.webp.webp",
+     "caption": "1366 3 line 2"
+    },
+    {
+     "id": "history-17-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-sheet-pickup.webp.webp",
+     "caption": "1366 3 sheet pickup"
+    },
+    {
+     "id": "history-17-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-sheet-handover.webp.webp",
+     "caption": "1366 3 sheet handover"
+    },
+    {
+     "id": "history-17-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-sheet-handover-taker.webp.webp",
+     "caption": "1366 3 sheet handover taker"
+    },
+    {
+     "id": "history-17-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-line-3.webp.webp",
+     "caption": "1366 3 line 3"
+    },
+    {
+     "id": "history-17-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-line-4.webp.webp",
+     "caption": "1366 3 line 4"
+    },
+    {
+     "id": "history-17-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-bento-pickup.webp.webp",
+     "caption": "1366 3 bento pickup"
+    },
+    {
+     "id": "history-17-12",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-door-out.webp.webp",
+     "caption": "1366 3 door out"
+    },
+    {
+     "id": "history-17-13",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-lift-out.webp.webp",
+     "caption": "1366 3 lift out"
+    },
+    {
+     "id": "history-17-14",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-line-5.webp.webp",
+     "caption": "1366 3 line 5"
+    },
+    {
+     "id": "history-17-15",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-checklist-support.webp.webp",
+     "caption": "1366 3 checklist support"
+    },
+    {
+     "id": "history-17-16",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-pencil-grip.webp.webp",
+     "caption": "1366 3 pencil grip"
+    },
+    {
+     "id": "history-17-17",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-pencil-tip-mark.webp.webp",
+     "caption": "1366 3 pencil tip mark"
+    },
+    {
+     "id": "history-17-18",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-pencil-clip.webp.webp",
+     "caption": "1366 3 pencil clip"
+    },
+    {
+     "id": "history-17-19",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-lift-return.webp.webp",
+     "caption": "1366 3 lift return"
+    },
+    {
+     "id": "history-17-20",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-door-return.webp.webp",
+     "caption": "1366 3 door return"
+    },
+    {
+     "id": "history-17-21",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-marked-sheet-pickup.webp.webp",
+     "caption": "1366 3 marked sheet pickup"
+    },
+    {
+     "id": "history-17-22",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-sheet-return.webp.webp",
+     "caption": "1366 3 sheet return"
+    },
+    {
+     "id": "history-17-23",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-sheet-return-taker.webp.webp",
+     "caption": "1366 3 sheet return taker"
+    },
+    {
+     "id": "history-17-24",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-line-6.webp.webp",
+     "caption": "1366 3 line 6"
+    },
+    {
+     "id": "history-17-25",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-line-7.webp.webp",
+     "caption": "1366 3 line 7"
+    },
+    {
+     "id": "history-17-26",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-step3-2/1366-3-finished.webp.webp",
+     "caption": "1366 3 finished"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 18: mio335-100-390-step3",
+   "caption": "100% checklist and departure sequence on the phone viewport.",
+   "images": [
+    {
+     "id": "history-18-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-layout.webp.webp",
+     "caption": "390 3 layout"
+    },
+    {
+     "id": "history-18-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-cable-pickup.webp.webp",
+     "caption": "390 3 cable pickup"
+    },
+    {
+     "id": "history-18-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-cable-hook.webp.webp",
+     "caption": "390 3 cable hook"
+    },
+    {
+     "id": "history-18-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-line-1.webp.webp",
+     "caption": "390 3 line 1"
+    },
+    {
+     "id": "history-18-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-line-2.webp.webp",
+     "caption": "390 3 line 2"
+    },
+    {
+     "id": "history-18-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-sheet-pickup.webp.webp",
+     "caption": "390 3 sheet pickup"
+    },
+    {
+     "id": "history-18-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-sheet-handover.webp.webp",
+     "caption": "390 3 sheet handover"
+    },
+    {
+     "id": "history-18-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-sheet-handover-taker.webp.webp",
+     "caption": "390 3 sheet handover taker"
+    },
+    {
+     "id": "history-18-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-line-3.webp.webp",
+     "caption": "390 3 line 3"
+    },
+    {
+     "id": "history-18-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-line-4.webp.webp",
+     "caption": "390 3 line 4"
+    },
+    {
+     "id": "history-18-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-bento-pickup.webp.webp",
+     "caption": "390 3 bento pickup"
+    },
+    {
+     "id": "history-18-12",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-door-out.webp.webp",
+     "caption": "390 3 door out"
+    },
+    {
+     "id": "history-18-13",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-lift-out.webp.webp",
+     "caption": "390 3 lift out"
+    },
+    {
+     "id": "history-18-14",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-line-5.webp.webp",
+     "caption": "390 3 line 5"
+    },
+    {
+     "id": "history-18-15",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-checklist-support.webp.webp",
+     "caption": "390 3 checklist support"
+    },
+    {
+     "id": "history-18-16",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-pencil-grip.webp.webp",
+     "caption": "390 3 pencil grip"
+    },
+    {
+     "id": "history-18-17",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-pencil-tip-mark.webp.webp",
+     "caption": "390 3 pencil tip mark"
+    },
+    {
+     "id": "history-18-18",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-pencil-clip.webp.webp",
+     "caption": "390 3 pencil clip"
+    },
+    {
+     "id": "history-18-19",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-lift-return.webp.webp",
+     "caption": "390 3 lift return"
+    },
+    {
+     "id": "history-18-20",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-door-return.webp.webp",
+     "caption": "390 3 door return"
+    },
+    {
+     "id": "history-18-21",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-marked-sheet-pickup.webp.webp",
+     "caption": "390 3 marked sheet pickup"
+    },
+    {
+     "id": "history-18-22",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-sheet-return.webp.webp",
+     "caption": "390 3 sheet return"
+    },
+    {
+     "id": "history-18-23",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-sheet-return-taker.webp.webp",
+     "caption": "390 3 sheet return taker"
+    },
+    {
+     "id": "history-18-24",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-line-6.webp.webp",
+     "caption": "390 3 line 6"
+    },
+    {
+     "id": "history-18-25",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-line-7.webp.webp",
+     "caption": "390 3 line 7"
+    },
+    {
+     "id": "history-18-26",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-step3/390-3-finished.webp.webp",
+     "caption": "390 3 finished"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 19: final85-1366",
+   "caption": "85% phone pose, seated work and sustained walk/run before the laptop ownership correction.",
+   "images": [
+    {
+     "id": "history-19-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85-1366/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-19-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85-1366/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-19-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85-1366/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-19-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85-1366/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-19-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85-1366/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-19-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85-1366/office-side.webp.webp",
+     "caption": "office side"
+    },
+    {
+     "id": "history-19-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85-1366/forecourt-arrival.webp.webp",
+     "caption": "forecourt arrival"
+    },
+    {
+     "id": "history-19-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85-1366/phone-front.webp.webp",
+     "caption": "phone front"
+    },
+    {
+     "id": "history-19-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85-1366/phone-side.webp.webp",
+     "caption": "phone side"
+    },
+    {
+     "id": "history-19-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85-1366/after-motion.webp.webp",
+     "caption": "after motion"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 20: final100-390",
+   "caption": "100% phone pose, seated work and sustained walk/run before the laptop ownership correction.",
+   "images": [
+    {
+     "id": "history-20-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100-390/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-20-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100-390/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-20-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100-390/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-20-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100-390/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-20-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100-390/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-20-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100-390/office-side.webp.webp",
+     "caption": "office side"
+    },
+    {
+     "id": "history-20-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100-390/forecourt-arrival.webp.webp",
+     "caption": "forecourt arrival"
+    },
+    {
+     "id": "history-20-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100-390/phone-front.webp.webp",
+     "caption": "phone front"
+    },
+    {
+     "id": "history-20-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100-390/phone-side.webp.webp",
+     "caption": "phone side"
+    },
+    {
+     "id": "history-20-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100-390/after-motion.webp.webp",
+     "caption": "after motion"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 21: final85b-1366",
+   "caption": "85% selected Mio with car-owned laptop and stand/reparent checks.",
+   "images": [
+    {
+     "id": "history-21-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-21-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-21-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-21-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-21-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-21-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/office-side.webp.webp",
+     "caption": "office side"
+    },
+    {
+     "id": "history-21-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/forecourt-arrival.webp.webp",
+     "caption": "forecourt arrival"
+    },
+    {
+     "id": "history-21-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/phone-front.webp.webp",
+     "caption": "phone front"
+    },
+    {
+     "id": "history-21-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/phone-side.webp.webp",
+     "caption": "phone side"
+    },
+    {
+     "id": "history-21-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final85b-1366/after-motion.webp.webp",
+     "caption": "after motion"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 22: legacy85-390",
+   "caption": "The prior body through the legacy query, with train and desk comparisons.",
+   "images": [
+    {
+     "id": "history-22-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy85-390/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-22-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy85-390/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-22-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy85-390/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-22-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy85-390/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-22-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy85-390/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-22-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy85-390/office-side.webp.webp",
+     "caption": "office side"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 23: final100b-390-390",
+   "caption": "100% selected Mio with car-owned laptop and stand/reparent checks.",
+   "images": [
+    {
+     "id": "history-23-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-23-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-23-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-23-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-23-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-23-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/office-side.webp.webp",
+     "caption": "office side"
+    },
+    {
+     "id": "history-23-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/forecourt-arrival.webp.webp",
+     "caption": "forecourt arrival"
+    },
+    {
+     "id": "history-23-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/phone-front.webp.webp",
+     "caption": "phone front"
+    },
+    {
+     "id": "history-23-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/phone-side.webp.webp",
+     "caption": "phone side"
+    },
+    {
+     "id": "history-23-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/final100b-390-390/after-motion.webp.webp",
+     "caption": "after motion"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 24: mio335-85-390-continue",
+   "caption": "Actual Save/Continue during the native bite action.",
+   "images": [
+    {
+     "id": "history-24-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-layout.webp.webp",
+     "caption": "390 2 layout"
+    },
+    {
+     "id": "history-24-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-cable-pickup.webp.webp",
+     "caption": "390 2 cable pickup"
+    },
+    {
+     "id": "history-24-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-cable-hook.webp.webp",
+     "caption": "390 2 cable hook"
+    },
+    {
+     "id": "history-24-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-line-1.webp.webp",
+     "caption": "390 2 line 1"
+    },
+    {
+     "id": "history-24-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-line-2.webp.webp",
+     "caption": "390 2 line 2"
+    },
+    {
+     "id": "history-24-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-line-3.webp.webp",
+     "caption": "390 2 line 3"
+    },
+    {
+     "id": "history-24-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-chopsticks-pickup.webp.webp",
+     "caption": "390 2 chopsticks pickup"
+    },
+    {
+     "id": "history-24-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-rice-pickup.webp.webp",
+     "caption": "390 2 rice pickup"
+    },
+    {
+     "id": "history-24-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-bite-mouth.webp.webp",
+     "caption": "390 2 bite mouth"
+    },
+    {
+     "id": "history-24-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-continued-start.webp.webp",
+     "caption": "390 2 continued start"
+    },
+    {
+     "id": "history-24-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-continued-line-1.webp.webp",
+     "caption": "390 2 continued line 1"
+    },
+    {
+     "id": "history-24-12",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-continued-line-2.webp.webp",
+     "caption": "390 2 continued line 2"
+    },
+    {
+     "id": "history-24-13",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-continued-chopsticks-pickup.webp.webp",
+     "caption": "390 2 continued chopsticks pickup"
+    },
+    {
+     "id": "history-24-14",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-continued-rice-pickup.webp.webp",
+     "caption": "390 2 continued rice pickup"
+    },
+    {
+     "id": "history-24-15",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-continued-bite-mouth.webp.webp",
+     "caption": "390 2 continued bite mouth"
+    },
+    {
+     "id": "history-24-16",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-continued-chopsticks-return.webp.webp",
+     "caption": "390 2 continued chopsticks return"
+    },
+    {
+     "id": "history-24-17",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-390-continue/390-2-finished.webp.webp",
+     "caption": "390 2 finished"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 25: legacy100-save-390",
+   "caption": "The prior body at 100%; this run supplies the full train snapshot for migration checks.",
+   "images": [
+    {
+     "id": "history-25-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy100-save-390/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-25-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy100-save-390/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-25-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy100-save-390/train-side.webp.webp",
+     "caption": "train side"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 26: legacy-upgrade85-1366",
+   "caption": "Retained failed full legacy snapshot restore: the outer saved-actor decorator overwrites the corrected seat.",
+   "images": [
+    {
+     "id": "history-26-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85-1366/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-26-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85-1366/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-26-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85-1366/train-side.webp.webp",
+     "caption": "train side"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 27: legacy-upgrade85b-1366",
+   "caption": "Second retained full-snapshot failure used to identify the outer actor restore.",
+   "images": [
+    {
+     "id": "history-27-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85b-1366/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-27-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85b-1366/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-27-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85b-1366/train-side.webp.webp",
+     "caption": "train side"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 28: legacy-upgrade85c-1366",
+   "caption": "Deferred legacy seat migration reaches the selected rig’s correct seat position.",
+   "images": [
+    {
+     "id": "history-28-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85c-1366/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-28-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85c-1366/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-28-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85c-1366/train-side.webp.webp",
+     "caption": "train side"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 29: legacy-upgrade85-final-1366",
+   "caption": "Full legacy snapshot migration also preserves hidden visibility and later selected-rig saved positions.",
+   "images": [
+    {
+     "id": "history-29-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85-final-1366/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-29-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85-final-1366/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-29-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/legacy-upgrade85-final-1366/train-side.webp.webp",
+     "caption": "train side"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 30: mio335-85-1366-held",
+   "caption": "85% native contacts held before release, with separate diagnostic detail views.",
+   "images": [
+    {
+     "id": "history-30-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-layout.webp.webp",
+     "caption": "1366 3 layout"
+    },
+    {
+     "id": "history-30-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-cable-pickup.webp.webp",
+     "caption": "1366 3 cable pickup"
+    },
+    {
+     "id": "history-30-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-cable-pickup-held-detail.webp.webp",
+     "caption": "1366 3 cable pickup held detail"
+    },
+    {
+     "id": "history-30-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-cable-hook.webp.webp",
+     "caption": "1366 3 cable hook"
+    },
+    {
+     "id": "history-30-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-cable-hook-held-detail.webp.webp",
+     "caption": "1366 3 cable hook held detail"
+    },
+    {
+     "id": "history-30-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-line-1.webp.webp",
+     "caption": "1366 3 line 1"
+    },
+    {
+     "id": "history-30-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-line-2.webp.webp",
+     "caption": "1366 3 line 2"
+    },
+    {
+     "id": "history-30-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-sheet-pickup.webp.webp",
+     "caption": "1366 3 sheet pickup"
+    },
+    {
+     "id": "history-30-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-sheet-handover.webp.webp",
+     "caption": "1366 3 sheet handover"
+    },
+    {
+     "id": "history-30-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-sheet-handover-taker.webp.webp",
+     "caption": "1366 3 sheet handover taker"
+    },
+    {
+     "id": "history-30-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-line-3.webp.webp",
+     "caption": "1366 3 line 3"
+    },
+    {
+     "id": "history-30-12",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-line-4.webp.webp",
+     "caption": "1366 3 line 4"
+    },
+    {
+     "id": "history-30-13",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-bento-pickup.webp.webp",
+     "caption": "1366 3 bento pickup"
+    },
+    {
+     "id": "history-30-14",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-bento-pickup-held-detail.webp.webp",
+     "caption": "1366 3 bento pickup held detail"
+    },
+    {
+     "id": "history-30-15",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-door-out.webp.webp",
+     "caption": "1366 3 door out"
+    },
+    {
+     "id": "history-30-16",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-lift-out.webp.webp",
+     "caption": "1366 3 lift out"
+    },
+    {
+     "id": "history-30-17",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-line-5.webp.webp",
+     "caption": "1366 3 line 5"
+    },
+    {
+     "id": "history-30-18",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-checklist-support.webp.webp",
+     "caption": "1366 3 checklist support"
+    },
+    {
+     "id": "history-30-19",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-pencil-grip.webp.webp",
+     "caption": "1366 3 pencil grip"
+    },
+    {
+     "id": "history-30-20",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-pencil-tip-mark.webp.webp",
+     "caption": "1366 3 pencil tip mark"
+    },
+    {
+     "id": "history-30-21",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-pencil-clip.webp.webp",
+     "caption": "1366 3 pencil clip"
+    },
+    {
+     "id": "history-30-22",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-lift-return.webp.webp",
+     "caption": "1366 3 lift return"
+    },
+    {
+     "id": "history-30-23",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-door-return.webp.webp",
+     "caption": "1366 3 door return"
+    },
+    {
+     "id": "history-30-24",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-marked-sheet-pickup.webp.webp",
+     "caption": "1366 3 marked sheet pickup"
+    },
+    {
+     "id": "history-30-25",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-sheet-return.webp.webp",
+     "caption": "1366 3 sheet return"
+    },
+    {
+     "id": "history-30-26",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-sheet-return-taker.webp.webp",
+     "caption": "1366 3 sheet return taker"
+    },
+    {
+     "id": "history-30-27",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-line-6.webp.webp",
+     "caption": "1366 3 line 6"
+    },
+    {
+     "id": "history-30-28",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-line-7.webp.webp",
+     "caption": "1366 3 line 7"
+    },
+    {
+     "id": "history-30-29",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-85-1366-held/1366-3-finished.webp.webp",
+     "caption": "1366 3 finished"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 31: mio335-100-390-held",
+   "caption": "100% native contacts held before release, with separate diagnostic detail views.",
+   "images": [
+    {
+     "id": "history-31-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-layout.webp.webp",
+     "caption": "390 3 layout"
+    },
+    {
+     "id": "history-31-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-cable-pickup.webp.webp",
+     "caption": "390 3 cable pickup"
+    },
+    {
+     "id": "history-31-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-cable-pickup-held-detail.webp.webp",
+     "caption": "390 3 cable pickup held detail"
+    },
+    {
+     "id": "history-31-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-cable-hook.webp.webp",
+     "caption": "390 3 cable hook"
+    },
+    {
+     "id": "history-31-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-cable-hook-held-detail.webp.webp",
+     "caption": "390 3 cable hook held detail"
+    },
+    {
+     "id": "history-31-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-line-1.webp.webp",
+     "caption": "390 3 line 1"
+    },
+    {
+     "id": "history-31-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-line-2.webp.webp",
+     "caption": "390 3 line 2"
+    },
+    {
+     "id": "history-31-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-sheet-pickup.webp.webp",
+     "caption": "390 3 sheet pickup"
+    },
+    {
+     "id": "history-31-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-sheet-handover.webp.webp",
+     "caption": "390 3 sheet handover"
+    },
+    {
+     "id": "history-31-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-sheet-handover-taker.webp.webp",
+     "caption": "390 3 sheet handover taker"
+    },
+    {
+     "id": "history-31-11",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-line-3.webp.webp",
+     "caption": "390 3 line 3"
+    },
+    {
+     "id": "history-31-12",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-line-4.webp.webp",
+     "caption": "390 3 line 4"
+    },
+    {
+     "id": "history-31-13",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-bento-pickup.webp.webp",
+     "caption": "390 3 bento pickup"
+    },
+    {
+     "id": "history-31-14",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-bento-pickup-held-detail.webp.webp",
+     "caption": "390 3 bento pickup held detail"
+    },
+    {
+     "id": "history-31-15",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-door-out.webp.webp",
+     "caption": "390 3 door out"
+    },
+    {
+     "id": "history-31-16",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-lift-out.webp.webp",
+     "caption": "390 3 lift out"
+    },
+    {
+     "id": "history-31-17",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-line-5.webp.webp",
+     "caption": "390 3 line 5"
+    },
+    {
+     "id": "history-31-18",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-checklist-support.webp.webp",
+     "caption": "390 3 checklist support"
+    },
+    {
+     "id": "history-31-19",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-pencil-grip.webp.webp",
+     "caption": "390 3 pencil grip"
+    },
+    {
+     "id": "history-31-20",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-pencil-tip-mark.webp.webp",
+     "caption": "390 3 pencil tip mark"
+    },
+    {
+     "id": "history-31-21",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-pencil-clip.webp.webp",
+     "caption": "390 3 pencil clip"
+    },
+    {
+     "id": "history-31-22",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-lift-return.webp.webp",
+     "caption": "390 3 lift return"
+    },
+    {
+     "id": "history-31-23",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-door-return.webp.webp",
+     "caption": "390 3 door return"
+    },
+    {
+     "id": "history-31-24",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-marked-sheet-pickup.webp.webp",
+     "caption": "390 3 marked sheet pickup"
+    },
+    {
+     "id": "history-31-25",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-sheet-return.webp.webp",
+     "caption": "390 3 sheet return"
+    },
+    {
+     "id": "history-31-26",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-sheet-return-taker.webp.webp",
+     "caption": "390 3 sheet return taker"
+    },
+    {
+     "id": "history-31-27",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-line-6.webp.webp",
+     "caption": "390 3 line 6"
+    },
+    {
+     "id": "history-31-28",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-line-7.webp.webp",
+     "caption": "390 3 line 7"
+    },
+    {
+     "id": "history-31-29",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-lunch/mio335-100-390-held/390-3-finished.webp.webp",
+     "caption": "390 3 finished"
+    }
+   ]
+  },
+  {
+   "title": "Attempt 32: integrated-default-390",
+   "caption": "Rebased source at the 85% default, with no size query: phone, seated work, sustained motion and prop lifecycle.",
+   "images": [
+    {
+     "id": "history-32-01",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/integrated-default-390/train-arrival.webp.webp",
+     "caption": "train arrival"
+    },
+    {
+     "id": "history-32-02",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/integrated-default-390/train-detail.webp.webp",
+     "caption": "train detail"
+    },
+    {
+     "id": "history-32-03",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/integrated-default-390/train-side.webp.webp",
+     "caption": "train side"
+    },
+    {
+     "id": "history-32-04",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/integrated-default-390/office-arrival.webp.webp",
+     "caption": "office arrival"
+    },
+    {
+     "id": "history-32-05",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/integrated-default-390/office-detail.webp.webp",
+     "caption": "office detail"
+    },
+    {
+     "id": "history-32-06",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/integrated-default-390/office-side.webp.webp",
+     "caption": "office side"
+    },
+    {
+     "id": "history-32-07",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/integrated-default-390/forecourt-arrival.webp.webp",
+     "caption": "forecourt arrival"
+    },
+    {
+     "id": "history-32-08",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/integrated-default-390/phone-front.webp.webp",
+     "caption": "phone front"
+    },
+    {
+     "id": "history-32-09",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/integrated-default-390/phone-side.webp.webp",
+     "caption": "phone side"
+    },
+    {
+     "id": "history-32-10",
+     "image": "bible/shots/showcase/mio-default-20261007/mio-default/integrated-default-390/after-motion.webp.webp",
+     "caption": "after motion"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  },
+  {
+   "label": "Integration and validation",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/mio-default-20261007.md"
+  },
+  {
+   "label": "contacts3-1366 initialization failure report (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  },
+  {
+   "label": "contacts4-1366 initialization failure report (only on the local bible)",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/game3d/shots"
+  }
+ ],
+ "media": []
+}

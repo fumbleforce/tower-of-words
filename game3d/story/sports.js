@@ -1,0 +1,29 @@
+// The sports ground, walked up the north street from the east lane, west along the gym's front, up the pool walk
+// and east along the courts walk to the onsen path (docs/game/places.md). The gym's main doors lead into its corner;
+// the pool's door leads through the shower pavilion onto the pool deck. South down the north street goes back to the east lane; east along the courts walk goes on to the onsen
+// path and the east coast; west along the lane round the gym's corner goes on to the office street.
+export default {
+  start: 'arrive',
+  on: {
+    'talk:north_street': 'to_east_lane',
+    'zone:north_exit': 'to_east_lane',
+    'talk:onsen_path': 'to_coast',
+    'zone:east_exit': 'to_coast',
+    'talk:office_street': 'to_offices',
+    'zone:west_exit': 'to_offices',
+    'talk:gym': 'to_gym',
+    'talk:pool': 'to_pool',
+  },
+  goal: { north_street: 'true' },
+  nodes: {
+    arrive: [
+      { if: 'going_home', then: [{ do: 'goal', text: 'The dorms are back down the north street, east of the park.' }],
+        else: [{ do: 'goal', text: 'Head office is back west past the plaza. Take its lift down to B2.' }] },
+    ],
+    to_east_lane: [{ do: 'trip', to: 'east_lane' }],
+    to_coast: [{ do: 'trip', to: 'east_coast' }],
+    to_offices: [{ do: 'trip', to: 'office_quarter' }],
+    to_pool: [{ do: 'trip', to: 'pool' }],
+    to_gym: [{ do: 'trip', to: 'gym' }],
+  },
+};

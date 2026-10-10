@@ -1,0 +1,48 @@
+{
+ "title": "Five additions to try next",
+ "date": "2026-10-07",
+ "by": "Codex",
+ "status": "decided",
+ "question": "These are five written gameplay proposals; there is no playable build yet. Which would you like us to prototype first?",
+ "multi": true,
+ "issue": 339,
+ "options": [
+  {
+   "id": "outing",
+   "label": "outing · Take someone out for an afternoon",
+   "note": "Invite an already-met coworker for a short walk and choose where to stop together. Start with Kenji, the shotengai and one seafront bench: you can keep walking, buy a drink or sit down, and his conversation changes with the place and what you have previously talked about. He remembers the chosen stop on a later visit. Familiar ikitai and isshoni give you another way to make the invitation; an ordinary invitation always works. This adds control over a shared outing beyond the existing fixed club meetings. First prototype: one companion, two stops and one remembered choice, about five minutes. A busy answer preserves the invitation. Friendship remains the default; leaving early is allowed."
+  },
+  {
+   "id": "command-workbench",
+   "label": "command-workbench · Make the old machines work together",
+   "note": "At B2, try a small physical puzzle with Kenji after the team has seen the commands work. A feeder, a moving tray and two receiving bins sit together on a workbench. Choose where the tray waits before asking the feeder to give out its contents; you can see why one sequence catches the load and another misses. Reuse ugoite, matte and dashite, with ordinary switches available while a word is unfamiliar. First prototype: one tabletop arrangement, two solutions and a reset button, with every motion shown. The payoff is a working setup that stays on the bench and gets a different response when revisited. I suggest trying this first: it gives familiar commands a new physical use. Turns advance only when you act."
+  },
+  {
+   "id": "rainy-shotengai",
+   "label": "rainy-shotengai · Get caught in the shop street rain",
+   "note": "A rainy afternoon changes where people spend their break. The covered shop street fills up, the shop street's exposed benches empty, and Mio is waiting under a shop awning. Stay and talk, head through the covered route with her or go on alone. Choosing shelter brings a conversation that you can return to after the rain has gone; recognising yasumi in the remembered remark opens a further question when you next meet. First prototype: one shop-street weather state, one companion and a visible covered route. Rain continues while you read, without a countdown or damage. Future rainy visits can repeat the opportunity if you pass it by. This would need weather rendering and changes to local crowd destinations."
+  },
+  {
+   "id": "camera",
+   "label": "camera · Take photos and show people what you saw",
+   "note": "Use the company phone to frame and save a picture of the island, then show it to someone in person. Start at the east-coast lookout: Mori points out something he would like in the frame, and you choose your angle and what else to include. His reply responds to the visible subject you actually captured. Later you can show him a different view or keep your first picture. Known mitai supports the conversation, with ordinary choices available. First prototype: one location, two recognisable subjects and three saved photo slots. Your pictures appear beside the existing found-photo album. This adds making and sharing pictures to the current collectibles; there is no photography score or compulsory checklist."
+  },
+  {
+   "id": "crane-game",
+   "label": "crane-game · Try the crane machine with Kenji",
+   "note": "Give the game-centre frontage one playable machine. A long, awkward prize rests across two rails. Inspect how it is balanced, choose where the claw should grip and watch the attempt; Kenji takes the next turn and responds to what moved. Positions carry between turns so you can work out a better approach together. Mouichido lets you ask for another attempt. First prototype: one cabinet, one prize and a short exchange, played with deliberate taps and no countdown. Outcomes follow the grip and balance rather than hidden odds. A free practice mode keeps retries available; the first win can leave one ordinary souvenir in your room. This is a separate arcade activity, with no club attendance or repeated bond rewards."
+  }
+ ],
+ "links": [
+  {
+   "label": "Prototype scope and checks",
+   "href": "#doc/reviews/game-additions-1/prototype-notes.md"
+  }
+ ],
+ "decided": [
+  "outing"
+ ],
+ "decision": "Jørgen picked outing: prototype the short Kenji outing first, using the scope in the selected option.",
+ "decided_at": "2026-10-07T23:10:09+0200",
+ "media": []
+}

@@ -1,0 +1,84 @@
+[
+  {
+    "task": "01a11315-850e-7590-8f82-2d684bb7fd0e",
+    "candidate": "a-image",
+    "settings": {
+      "ai_model": "meshy-7",
+      "enable_original_uv": true,
+      "enable_pbr": false,
+      "texture_resolution": "2k",
+      "target_formats": [
+        "glb"
+      ]
+    },
+    "model": "art/parts/crowd-pilot-2/rig/a-rigged.glb",
+    "model_sha256": "139c8544036bfdb06616c0e125b53a47e0d8f48231a6d904f546262299f3953a",
+    "image": "art/parts/crowd-pilot-2/pics/a-e1.png",
+    "image_sha256": "ee4a9dc7c81c291d7f83081b0aac296db4d018152096c072749900453427f9f0",
+    "submitted_at": 1791321541.230968,
+    "status": "SUCCEEDED",
+    "credits": 10,
+    "balance_after": 105
+  },
+  {
+    "task": "01a11315-8bfe-718b-8b65-7ca202367711",
+    "candidate": "b-image",
+    "settings": {
+      "ai_model": "meshy-7",
+      "enable_original_uv": true,
+      "enable_pbr": false,
+      "texture_resolution": "2k",
+      "target_formats": [
+        "glb"
+      ]
+    },
+    "model": "art/parts/crowd-pilot-2/rig/b-rigged.glb",
+    "model_sha256": "5a07aeacd60f5b85ed17954f5d81220bf22a38da73a655b6f1d3c031d4662784",
+    "image": "art/parts/crowd-pilot-1/pics/b-d1.png",
+    "image_sha256": "b7ec266b06ace94da44587cdc075721663bfce64657a7aa8de22a4c7ff467f60",
+    "submitted_at": 1791321543.2571285,
+    "status": "SUCCEEDED",
+    "credits": 10,
+    "balance_after": 105
+  },
+  {
+    "task": "01a1131e-a706-760c-84a2-82ffde9802a7",
+    "candidate": "a-text",
+    "settings": {
+      "ai_model": "meshy-7",
+      "enable_original_uv": true,
+      "enable_pbr": false,
+      "texture_resolution": "2k",
+      "target_formats": [
+        "glb"
+      ]
+    },
+    "model": "art/parts/crowd-pilot-2/rig/a-rigged.glb",
+    "model_sha256": "139c8544036bfdb06616c0e125b53a47e0d8f48231a6d904f546262299f3953a",
+    "submitted_at": 1791322139.990713,
+    "text_style_prompt": "Clean anime game character texture. Symmetrical expressive anime eyes with distinct white sclera, dark irises, black pupils and one small white highlight in each eye. Defined upper eyelids, natural brows, a small clearly visible closed smiling mouth. Smooth warm skin and simple clean color areas. Adult office man. Short black hair, continuous black color across all hair surfaces. Medium gray business suit, white collared shirt, charcoal tie and black shoes.",
+    "status": "SUCCEEDED",
+    "credits": 10,
+    "balance_after": 85
+  },
+  {
+    "task": "01a1131e-af7a-74c3-a07d-0d38be2b6dac",
+    "candidate": "b-text",
+    "settings": {
+      "ai_model": "meshy-7",
+      "enable_original_uv": true,
+      "enable_pbr": false,
+      "texture_resolution": "2k",
+      "target_formats": [
+        "glb"
+      ]
+    },
+    "model": "art/parts/crowd-pilot-2/rig/b-rigged.glb",
+    "model_sha256": "5a07aeacd60f5b85ed17954f5d81220bf22a38da73a655b6f1d3c031d4662784",
+    "submitted_at": 1791322142.212654,
+    "text_style_prompt": "Clean anime game character texture. Symmetrical expressive anime eyes with distinct white sclera, dark irises, black pupils and one small white highlight in each eye. Defined upper eyelids, natural brows, a small clearly visible closed smiling mouth. Smooth warm skin and simple clean color areas. Adult office woman. Dark brown side-parted hair in a low bun, continuous dark brown color across all hair surfaces. Navy blazer and knee-length navy skirt, ivory blouse, black low heels.",
+    "status": "SUCCEEDED",
+    "credits": 10,
+    "balance_after": 85
+  }
+]

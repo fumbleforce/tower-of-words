@@ -1,0 +1,1217 @@
+{
+ "title": "Street-style trial: playable work in progress",
+ "date": "2026-10-07",
+ "updated": "2026-10-07T12:56:42.543850+00:00",
+ "by": "Codex",
+ "status": "superseded",
+ "issue": 321,
+ "multi": true,
+ "question": "What should change next in this street-style trial?",
+ "media": [
+  {
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/morning-office-near.webp.webp",
+   "caption": "Office glazing after removing the repeated dark silhouettes; blinds, recesses and reflections remain."
+  },
+  {
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/evening-station-near.webp.webp",
+   "caption": "Station windows with evening lighting, without the repeated rectangular shadows."
+  },
+  {
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/evening-station-near.webp.webp",
+   "caption": "Phone viewport inspection of the same optional trial."
+  }
+ ],
+ "options": [
+  {
+   "id": "round1-1366",
+   "label": "round1-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round1-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round1-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round1-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round1-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round1-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed."
+  },
+  {
+   "id": "round2-1366",
+   "label": "round2-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round2-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round2-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round2-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round2-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round2-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed."
+  },
+  {
+   "id": "round3-1366",
+   "label": "round3-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round3-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round3-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round3-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round3-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round3-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed."
+  },
+  {
+   "id": "round7-1366",
+   "label": "round7-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round7-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round7-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round7-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round7-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round7-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 329 calls, 1726167 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round8-1366",
+   "label": "round8-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round8-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round8-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round8-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round8-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round8-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round8-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 380 calls, 1043862 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round9-1366",
+   "label": "round9-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round9-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round9-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round9-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round9-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round9-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round9-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 372 calls, 1017622 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round10-390",
+   "label": "round10-390",
+   "image": "bible/shots/reviews/diorama-street-1/round10-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round10-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round10-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round10-390/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round10-390/garden.webp.webp"
+   ],
+   "note": "Native game render, round10-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 398 calls, 921530 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round11-1366",
+   "label": "round11-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round11-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round11-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round11-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round11-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round11-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round11-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 381 calls, 929470 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round11-390",
+   "label": "round11-390",
+   "image": "bible/shots/reviews/diorama-street-1/round11-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round11-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round11-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round11-390/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round11-390/garden.webp.webp"
+   ],
+   "note": "Native game render, round11-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 332 calls, 816898 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round12-1366",
+   "label": "round12-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round12-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round12-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round12-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round12-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round12-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round12-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 413 calls, 988566 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "light-probe13-1366",
+   "label": "light-probe13-1366",
+   "image": "bible/shots/reviews/diorama-street-1/light-probe13-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/light-probe13-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/light-probe13-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/light-probe13-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/light-probe13-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, light-probe13-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 418 calls, 991690 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round14-1366",
+   "label": "round14-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round14-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round14-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round14-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round14-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round14-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round14-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 420 calls, 992670 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round15-1366",
+   "label": "round15-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round15-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round15-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round15-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round15-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round15-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round15-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Rejected: grass shader compilation failed. Desktop round15 did not yet collect console errors. Last capture: 413 calls, 1050366 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round15-390",
+   "label": "round15-390",
+   "image": "bible/shots/reviews/diorama-street-1/round15-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round15-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round15-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round15-390/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round15-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round15-390/failure.webp.webp"
+   ],
+   "note": "Native game render, round15-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Rejected: grass shader compilation failed. Desktop round15 did not yet collect console errors. Last capture: 311 calls, 848698 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round16-1366",
+   "label": "round16-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round16-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round16-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round16-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round16-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round16-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round16-1366/failure.webp.webp"
+   ],
+   "note": "Native game render, round16-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Rejected: grass shader compilation failed. Desktop round15 did not yet collect console errors. Last capture: 413 calls, 1050064 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "baseline17-1366",
+   "label": "baseline17-1366",
+   "image": "bible/shots/reviews/diorama-street-1/baseline17-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/baseline17-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/baseline17-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/baseline17-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/baseline17-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, baseline17-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 352 calls, 581120 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round17-1366",
+   "label": "round17-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round17-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round17-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round17-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round17-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round17-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round17-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 415 calls, 1054036 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round17-390",
+   "label": "round17-390",
+   "image": "bible/shots/reviews/diorama-street-1/round17-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round17-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round17-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round17-390/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round17-390/garden.webp.webp"
+   ],
+   "note": "Native game render, round17-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 311 calls, 849522 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "crown-probe18-1366",
+   "label": "crown-probe18-1366",
+   "image": "bible/shots/reviews/diorama-street-1/crown-probe18-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/crown-probe18-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/crown-probe18-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/crown-probe18-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/crown-probe18-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, crown-probe18-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 415 calls, 1053158 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "shadow19-1366",
+   "label": "shadow19-1366",
+   "image": "bible/shots/reviews/diorama-street-1/shadow19-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/shadow19-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/shadow19-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/shadow19-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/shadow19-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, shadow19-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 465 calls, 1272166 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round20-1366",
+   "label": "round20-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round20-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round20-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round20-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round20-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round20-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round20-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 499 calls, 1039898 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round21-1366",
+   "label": "round21-1366",
+   "image": "bible/shots/reviews/diorama-street-1/round21-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round21-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round21-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round21-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round21-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, round21-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 472 calls, 976730 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "round21-390",
+   "label": "round21-390",
+   "image": "bible/shots/reviews/diorama-street-1/round21-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/round21-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round21-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round21-390/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round21-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/round21-390/station-return.webp.webp"
+   ],
+   "note": "Native game render, round21-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 338 calls, 782158 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "layers22-1366",
+   "label": "layers22-1366",
+   "image": "bible/shots/reviews/diorama-street-1/layers22-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/layers22-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/layers22-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/layers22-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/layers22-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, layers22-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 468 calls, 963136 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "bevel23-1366",
+   "label": "bevel23-1366",
+   "image": "bible/shots/reviews/diorama-street-1/bevel23-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/bevel23-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/bevel23-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/bevel23-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/bevel23-1366/garden.webp.webp"
+   ],
+   "note": "Native game render, bevel23-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Native route passed. Last capture: 465 calls, 1030018 all-pass triangles; desktop GPU, not mobile-device clearance."
+  },
+  {
+   "id": "canopy24-1366",
+   "label": "canopy24-1366",
+   "image": "bible/shots/reviews/diorama-street-1/canopy24-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/canopy24-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/canopy24-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/canopy24-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/canopy24-1366/garden.webp.webp"
+   ],
+   "note": "Native game render. Broader leaves, tighter clusters and dark inner leaf mass. Procedural seeds711/1207; no image model. Work in progress."
+  },
+  {
+   "id": "glazing25-1366",
+   "label": "glazing25-1366",
+   "image": "bible/shots/reviews/diorama-street-1/glazing25-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/glazing25-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/glazing25-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/glazing25-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/glazing25-1366/garden.webp.webp"
+   ],
+   "note": "Native game render. Slimmer station surrounds, no added crossbars, first sky-reflection material. Procedural seeds711/1207; no image model. Work in progress."
+  },
+  {
+   "id": "glass26-1366",
+   "label": "glass26-1366",
+   "image": "bible/shots/reviews/diorama-street-1/glass26-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/glass26-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/glass26-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/glass26-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/glass26-1366/garden.webp.webp"
+   ],
+   "note": "Native game render. Pane gradient and metallic station roof casings. Office glass still untreated in this attempt. Procedural seeds711/1207; no image model. Work in progress."
+  },
+  {
+   "id": "office27-1366",
+   "label": "office27-1366",
+   "image": "bible/shots/reviews/diorama-street-1/office27-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/office27-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/office27-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/office27-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/office27-1366/garden.webp.webp"
+   ],
+   "note": "Native game render. Taller varied grass; office glass remained untreated because its builder runs later. Procedural seeds711/1207; no image model. Work in progress."
+  },
+  {
+   "id": "office28-1366",
+   "label": "office28-1366",
+   "image": "bible/shots/reviews/diorama-street-1/office28-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/office28-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/office28-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/office28-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/office28-1366/garden.webp.webp"
+   ],
+   "note": "Native game render. Office glass treatment applied after the office builder; all named glazing handles checked in native report. Procedural seeds711/1207; no image model. Work in progress."
+  },
+  {
+   "id": "office28-390",
+   "label": "office28-390",
+   "image": "bible/shots/reviews/diorama-street-1/office28-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/office28-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/office28-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/office28-390/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/office28-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/office28-390/station-return.webp.webp"
+   ],
+   "note": "Native game render. Phone view and actual station return with updated planting, panes and trim. Procedural seeds711/1207; no image model. Work in progress."
+  },
+  {
+   "id": "court29-1366",
+   "label": "court29-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court29-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court29-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court29-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court29-1366/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court29-1366/garden.webp.webp"
+   ],
+   "note": "Native game render. Extend the same leaf treatment to the north court and station-return view. Procedural seeds711/1207. All named office/station panes use the new glazing. Work in progress; no image model."
+  },
+  {
+   "id": "court29-390",
+   "label": "court29-390",
+   "image": "bible/shots/reviews/diorama-street-1/court29-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court29-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court29-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court29-390/street.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court29-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court29-390/station-return.webp.webp"
+   ],
+   "note": "Native game render. Extend the same leaf treatment to the north court and station-return view. Procedural seeds711/1207. All named office/station panes use the new glazing. Work in progress; no image model."
+  },
+  {
+   "id": "reviewer29-evening",
+   "label": "reviewer29-evening",
+   "image": "bible/shots/reviews/diorama-street-1/reviewer29/codex-street-review-evening-29-regression.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/reviewer29/codex-street-review-evening-29.webp.webp"
+   ],
+   "note": "Independent native browser probe: first image retains the rejected dark-lobby regression after material isolation; second shows restored window glow and corrected sunset direction. No image model. Per-mesh materials prevent the trial changing glass elsewhere. Daylight court29 review remains 6–7/10; office glazing, grass, crown variety and phone detail budget are still being revised."
+  },
+  {
+   "id": "court30-desktop-1366",
+   "label": "court30-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court30-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court30-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court30-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court30-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court30-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court30-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court30-phone-q1-390",
+   "label": "court30-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court30-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court30-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court30-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court30-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court30-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court30-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court30-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court31-desktop-1366",
+   "label": "court31-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court31-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court31-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court31-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court31-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court31-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court31-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court31-phone-q1-390",
+   "label": "court31-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court31-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court31-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court31-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court31-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court31-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court31-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court31-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court32-desktop-1366",
+   "label": "court32-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court32-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court32-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court32-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court32-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court32-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court32-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court32-phone-q1-390",
+   "label": "court32-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court32-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court32-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court32-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court32-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court32-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court32-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court32-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court33-phone-q1-390",
+   "label": "court33-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court33-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court33-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court33-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court33-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court33-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court33-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court33-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court34-desktop-1366",
+   "label": "court34-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court34-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court34-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court34-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court34-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court34-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court34-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court34-dusk-1366",
+   "label": "court34-dusk-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court34-dusk-1366/evening.webp.webp",
+   "images": [],
+   "note": "Native game render, court34-dusk-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court34-phone-q1-390",
+   "label": "court34-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court34-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court34-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court34-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court34-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court34-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court34-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court34-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court35-desktop-1366",
+   "label": "court35-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court35-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court35-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court35-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court35-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court35-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court35-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court35-phone-q1-390",
+   "label": "court35-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court35-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court35-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court35-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court35-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court35-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court35-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court35-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court36-desktop-1366",
+   "label": "court36-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court36-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court36-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court36-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court36-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court36-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court36-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court36-phone-q1-390",
+   "label": "court36-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court36-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court36-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court36-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court36-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court36-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court36-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court36-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court37-desktop-1366",
+   "label": "court37-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court37-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court37-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court37-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court37-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court37-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court37-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court37-phone-q1-390",
+   "label": "court37-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court37-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court37-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court37-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court37-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court37-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court37-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court37-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court38-phone-q1-390",
+   "label": "court38-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court38-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court38-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court38-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court38-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court38-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court38-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court38-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court39-desktop-1366",
+   "label": "court39-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court39-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court39-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court39-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court39-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court39-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court39-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier inspection: evening labels were captured before the period update; retained as an invalid dusk attempt. "
+  },
+  {
+   "id": "court39-inspection-1366",
+   "label": "court39-inspection-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court39-inspection-1366/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court39-inspection-1366/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court39-inspection-1366/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court39-inspection-1366/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court39-inspection-1366/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court39-inspection-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier inspection: evening labels were captured before the period update; retained as an invalid dusk attempt. "
+  },
+  {
+   "id": "court39-inspection-390",
+   "label": "court39-inspection-390",
+   "image": "bible/shots/reviews/diorama-street-1/court39-inspection-390/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court39-inspection-390/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court39-inspection-390/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court39-inspection-390/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court39-inspection-390/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court39-inspection-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier inspection: evening labels were captured before the period update; retained as an invalid dusk attempt. "
+  },
+  {
+   "id": "court41-inspection-1366",
+   "label": "court41-inspection-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court41-inspection-1366/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court41-inspection-1366/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court41-inspection-1366/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court41-inspection-1366/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court41-inspection-1366/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court41-inspection-1366/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court41-inspection-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court41-inspection-390",
+   "label": "court41-inspection-390",
+   "image": "bible/shots/reviews/diorama-street-1/court41-inspection-390/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court41-inspection-390/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court41-inspection-390/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court41-inspection-390/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court41-inspection-390/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court41-inspection-390/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court41-inspection-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court42-desktop-1366",
+   "label": "court42-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court42-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court42-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court42-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court42-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court42-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court42-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court42-phone-q1-390",
+   "label": "court42-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court42-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court42-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court42-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court42-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court42-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court42-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court42-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court43-desktop-1366",
+   "label": "court43-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court43-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court43-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court43-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court43-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court43-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court43-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court43-phone-q1-390",
+   "label": "court43-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court43-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court43-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court43-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court43-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court43-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court43-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court43-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court44-inspection-1366",
+   "label": "court44-inspection-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court44-inspection-1366/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court44-inspection-1366/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court44-inspection-1366/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court44-inspection-1366/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court44-inspection-1366/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court44-inspection-1366/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court44-inspection-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court44-inspection-390",
+   "label": "court44-inspection-390",
+   "image": "bible/shots/reviews/diorama-street-1/court44-inspection-390/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court44-inspection-390/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court44-inspection-390/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court44-inspection-390/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court44-inspection-390/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court44-inspection-390/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court44-inspection-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court45-glare-390",
+   "label": "court45-glare-390",
+   "image": "bible/shots/reviews/diorama-street-1/court45-glare-390/baseline.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court45-glare-390/no-environment.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court45-glare-390/no-local.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court45-glare-390/no-sun.webp.webp"
+   ],
+   "note": "Native game render, court45-glare-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court46-desktop-1366",
+   "label": "court46-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court46-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court46-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court46-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court46-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court46-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court46-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court46-phone-q1-390",
+   "label": "court46-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court46-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court46-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court46-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court46-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court46-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court46-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court46-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court47-inspection-1366",
+   "label": "court47-inspection-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court47-inspection-1366/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court47-inspection-1366/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court47-inspection-1366/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court47-inspection-1366/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court47-inspection-1366/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court47-inspection-1366/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court47-inspection-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court47-inspection-390",
+   "label": "court47-inspection-390",
+   "image": "bible/shots/reviews/diorama-street-1/court47-inspection-390/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court47-inspection-390/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court47-inspection-390/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court47-inspection-390/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court47-inspection-390/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court47-inspection-390/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court47-inspection-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court48-desktop-1366",
+   "label": "court48-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court48-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court48-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court48-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court48-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court48-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court48-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court48-phone-q1-390",
+   "label": "court48-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court48-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court48-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court48-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court48-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court48-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court48-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court48-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court49-inspection-1366",
+   "label": "court49-inspection-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court49-inspection-1366/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court49-inspection-1366/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court49-inspection-1366/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court49-inspection-1366/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court49-inspection-1366/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court49-inspection-1366/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court49-inspection-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court49-inspection-390",
+   "label": "court49-inspection-390",
+   "image": "bible/shots/reviews/diorama-street-1/court49-inspection-390/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court49-inspection-390/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court49-inspection-390/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court49-inspection-390/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court49-inspection-390/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court49-inspection-390/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court49-inspection-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court50-desktop-1366",
+   "label": "court50-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court50-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court50-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court50-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court50-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court50-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court50-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court50-phone-q1-390",
+   "label": "court50-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court50-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court50-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court50-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court50-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court50-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court50-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court50-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court51-inspection-390",
+   "label": "court51-inspection-390",
+   "image": "bible/shots/reviews/diorama-street-1/court51-inspection-390/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court51-inspection-390/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court51-inspection-390/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court51-inspection-390/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court51-inspection-390/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court51-inspection-390/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court51-inspection-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court52-desktop-1366",
+   "label": "court52-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court52-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court52-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court52-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court52-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court52-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court52-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court52-phone-q1-390",
+   "label": "court52-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court52-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court52-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court52-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court52-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court52-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court52-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court52-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court53-inspection-1366",
+   "label": "court53-inspection-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court53-inspection-1366/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court53-inspection-1366/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court53-inspection-1366/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court53-inspection-1366/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court53-inspection-1366/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court53-inspection-1366/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court53-inspection-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court54-desktop-1366",
+   "label": "court54-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court54-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court54-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court54-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court54-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court54-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court54-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court54-phone-q1-390",
+   "label": "court54-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court54-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court54-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court54-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court54-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court54-phone-q1-390/station-return.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court54-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court54-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court55-inspection-1366",
+   "label": "court55-inspection-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court55-inspection-1366/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court55-inspection-1366/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court55-inspection-1366/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court55-inspection-1366/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court55-inspection-1366/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court55-inspection-1366/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court55-inspection-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court55-inspection-390",
+   "label": "court55-inspection-390",
+   "image": "bible/shots/reviews/diorama-street-1/court55-inspection-390/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court55-inspection-390/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court55-inspection-390/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court55-inspection-390/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court55-inspection-390/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court55-inspection-390/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court55-inspection-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Earlier work-in-progress attempt. "
+  },
+  {
+   "id": "court56-desktop-1366",
+   "label": "court56-desktop-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court56-desktop-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court56-desktop-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court56-desktop-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court56-desktop-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court56-desktop-1366/street.webp.webp"
+   ],
+   "note": "Native game render, court56-desktop-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Rounded root-bed foliage uses the canopy leaf texture at the same triangle count. "
+  },
+  {
+   "id": "court56-phone-q1-390",
+   "label": "court56-phone-q1-390",
+   "image": "bible/shots/reviews/diorama-street-1/court56-phone-q1-390/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court56-phone-q1-390/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court56-phone-q1-390/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court56-phone-q1-390/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court56-phone-q1-390/street.webp.webp"
+   ],
+   "note": "Native game render, court56-phone-q1-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Rounded root-bed foliage uses the canopy leaf texture at the same triangle count. "
+  },
+  {
+   "id": "court57-inspection-1366",
+   "label": "court57-inspection-1366",
+   "image": "bible/shots/reviews/diorama-street-1/court57-inspection-1366/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court57-inspection-1366/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court57-inspection-1366/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court57-inspection-1366/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court57-inspection-1366/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court57-inspection-1366/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court57-inspection-1366. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Rounded root-bed foliage uses the canopy leaf texture at the same triangle count. "
+  },
+  {
+   "id": "court57-inspection-390",
+   "label": "court57-inspection-390",
+   "image": "bible/shots/reviews/diorama-street-1/court57-inspection-390/garden-evening.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court57-inspection-390/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court57-inspection-390/office-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court57-inspection-390/office-glass.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court57-inspection-390/station-evening.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court57-inspection-390/station-glass.webp.webp"
+   ],
+   "note": "Native game render, court57-inspection-390. No image-generation prompt or image model. Procedural foliage seeds711/1207, fittings411. Rounded root-bed foliage uses the canopy leaf texture at the same triangle count. "
+  },
+  {
+   "id": "court58-wide-2560",
+   "label": "court58-wide-2560",
+   "image": "bible/shots/reviews/diorama-street-1/court58-wide-2560/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/court58-wide-2560/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court58-wide-2560/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court58-wide-2560/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/court58-wide-2560/street.webp.webp"
+   ],
+   "note": "Native2560×1440 overview of rebased source1be24ffa. Five actual-route frames, errors[]. No image-generation model. Same foliage seeds711/1207 and final material source as56/57."
+  },
+  {
+   "id": "windows-20261007-initial-day-1366",
+   "label": "Windows: initial-day-1366",
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-initial-day-1366/arrival.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/windows-20261007-initial-day-1366/bikes.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-initial-day-1366/garden.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-initial-day-1366/south.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-initial-day-1366/street.webp.webp"
+   ],
+   "note": "Window correction, initial-day-1366. Native game render; no image model or generation prompt. PASS initial daylight route before correction; retained for complete attempt history. Evening labels denote the lighting callback; the story HUD remains on morning. Phone is desktop-GPU viewport evidence, not mobile-device performance clearance."
+  },
+  {
+   "id": "windows-20261007-baseline1-1366",
+   "label": "Windows: baseline1-1366",
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-baseline1-1366/failure.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline1-1366/morning-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline1-1366/morning-station-near.webp.webp"
+   ],
+   "note": "Window correction, baseline1-1366. Native game render; no image model or generation prompt. FAILED fixture: requested office point (20, 1.3) was blocked and clamped. All three frames retained; the later matching runs use reachable (18.5, 1.5). No runtime navigation change. Evening labels denote the lighting callback; the story HUD remains on morning. Phone is desktop-GPU viewport evidence, not mobile-device performance clearance."
+  },
+  {
+   "id": "windows-20261007-baseline2-1366",
+   "label": "Windows: baseline2-1366",
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/evening-office-native-right.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/evening-office-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/evening-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/evening-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/evening-station-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/morning-office-native-right.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/morning-office-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/morning-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/morning-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline2-1366/morning-station-near.webp.webp"
+   ],
+   "note": "Window correction, baseline2-1366. Native game render; no image model or generation prompt. PASS. Matching player stops with ordinary camera settling; lift cutaway is traversal sanity. Existing period lighting. Evening labels denote the lighting callback; the story HUD remains on morning. Phone is desktop-GPU viewport evidence, not mobile-device performance clearance."
+  },
+  {
+   "id": "windows-20261007-baseline3-390",
+   "label": "Windows: baseline3-390",
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-baseline3-390/evening-office-near.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline3-390/evening-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline3-390/evening-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline3-390/evening-station-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline3-390/lift-cutaway.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline3-390/morning-office-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline3-390/morning-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline3-390/morning-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline3-390/morning-station-near.webp.webp"
+   ],
+   "note": "Window correction, baseline3-390. Native game render; no image model or generation prompt. PASS. Matching player stops with ordinary camera settling; lift cutaway is traversal sanity. Existing period lighting. Evening labels denote the lighting callback; the story HUD remains on morning. Phone is desktop-GPU viewport evidence, not mobile-device performance clearance."
+  },
+  {
+   "id": "windows-20261007-baseline4-2560",
+   "label": "Windows: baseline4-2560",
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-baseline4-2560/evening-office-near.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline4-2560/evening-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline4-2560/evening-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline4-2560/evening-station-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline4-2560/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline4-2560/morning-office-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline4-2560/morning-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline4-2560/morning-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-baseline4-2560/morning-station-near.webp.webp"
+   ],
+   "note": "Window correction, baseline4-2560. Native game render; no image model or generation prompt. PASS. Matching player stops with ordinary camera settling; lift cutaway is traversal sanity. Existing period lighting. Evening labels denote the lighting callback; the story HUD remains on morning. Phone is desktop-GPU viewport evidence, not mobile-device performance clearance."
+  },
+  {
+   "id": "windows-20261007-candidate1-1366",
+   "label": "Windows: candidate1-1366",
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/evening-office-native-right.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/evening-office-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/evening-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/evening-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/evening-station-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/morning-office-native-right.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/morning-office-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/morning-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/morning-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate1-1366/morning-station-near.webp.webp"
+   ],
+   "note": "Window correction, candidate1-1366. Native game render; no image model or generation prompt. PASS. Matching player stops with ordinary camera settling; lift cutaway is traversal sanity. Existing period lighting. Evening labels denote the lighting callback; the story HUD remains on morning. Phone is desktop-GPU viewport evidence, not mobile-device performance clearance."
+  },
+  {
+   "id": "windows-20261007-candidate2-390",
+   "label": "Windows: candidate2-390",
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/evening-office-near.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/evening-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/evening-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/evening-station-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/lift-cutaway.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/morning-office-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/morning-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/morning-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate2-390/morning-station-near.webp.webp"
+   ],
+   "note": "Window correction, candidate2-390. Native game render; no image model or generation prompt. PASS. Matching player stops with ordinary camera settling; lift cutaway is traversal sanity. Existing period lighting. Evening labels denote the lighting callback; the story HUD remains on morning. Phone is desktop-GPU viewport evidence, not mobile-device performance clearance."
+  },
+  {
+   "id": "windows-20261007-candidate3-2560",
+   "label": "Windows: candidate3-2560",
+   "image": "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/evening-office-near.webp.webp",
+   "images": [
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/evening-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/evening-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/evening-station-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/lift-cutaway.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/morning-office-near.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/morning-office-oblique.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/morning-station-far.webp.webp",
+    "bible/shots/reviews/diorama-street-1/windows-20261007-candidate3-2560/morning-station-near.webp.webp"
+   ],
+   "note": "Window correction, candidate3-2560. Native game render; no image model or generation prompt. PASS. Matching player stops with ordinary camera settling; lift cutaway is traversal sanity. Existing period lighting. Evening labels denote the lighting callback; the story HUD remains on morning. Phone is desktop-GPU viewport evidence, not mobile-device performance clearance."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the optional street trial",
+   "href": "game3d/index.html?day=2&place=forecourt&mc=eric&q=2&diorama=1"
+  },
+  {
+   "label": "Reference direction: image2",
+   "href": "art/refs/diorama-trial-20261007/reference-2.png.webp"
+  },
+  {
+   "label": "Additional garden and office-window reference",
+   "href": "art/refs/diorama-trial-20261007/reference-4-garden.png.webp"
+  }
+ ],
+ "decision": "Outdoor work moved to Claude on 2026-10-09; his answers here carry into #362. The next outdoor result comes as a Showcase entry."
+}

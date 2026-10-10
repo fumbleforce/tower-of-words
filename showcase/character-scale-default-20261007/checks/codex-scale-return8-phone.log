@@ -1,0 +1,2 @@
+scale-return-contact-390: GPU slot 1
+PASS carina {"phase":"tray-place-contact","held":true,"gap":0.06938980201138265,"hand":[-10.435701830188641,0.7672680607839614,-0.8770560351459579],"target":[-10.4517712073177,0.808,-0.8232264069699812],"actor":[-10.3,0,-1.09072],"scale":1.18}

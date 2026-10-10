@@ -1,0 +1,43 @@
+{
+ "title": "Everyday NPCs: first casual, older and service candidates",
+ "date": "2026-10-07",
+ "updated": "2026-10-07T11:05:48.470204+00:00",
+ "by": "Codex",
+ "status": "decided",
+ "issue": 328,
+ "multi": true,
+ "question": "These are source pictures for future 3D models. Which people should go through Meshy next?",
+ "options": [
+  {
+   "id": "casual-01",
+   "label": "casual-01",
+   "image": "bible/shots/reviews/crowd-everyday-1/casual-01.webp.webp",
+   "note": "Casual resident: sage sweatshirt, jeans, short auburn bob. Full figure and empty hands. This source picture has not been converted into a model. Built-in imagegen, one attempt; seed and model version not exposed. Meshy credits: 0. Prompt: Make a new everyday NPC in exactly the simple faceted 3D chibi style and proportions of the supplied approved crowd references. One adult shown head to shoes, turned three quarters toward image left, head looking the same way as the body, arms relaxed slightly away from the sides and empty hands. White background, soft neutral light, flat matte model texture, sturdy simple shapes and simple eyes painted flat on the face. An adult Japanese woman in her forties with a short straight dark auburn bob, a muted sage green sweatshirt, straight dark blue jeans and cream flat sneakers. Average build. No accessories, bags, text, props or extra subjects."
+  },
+  {
+   "id": "older-01",
+   "label": "older-01",
+   "image": "bible/shots/reviews/crowd-everyday-1/older-01.webp.webp",
+   "note": "Older resident: grey hair, subtle cheek and forehead lines, fuller jacket and waist. The intended age reads mostly through hair and face lines at this scale. This source picture has not been converted into a model. Built-in imagegen, one attempt; seed and model version not exposed. Meshy credits: 0. Prompt: Make a new everyday NPC in exactly the simple faceted 3D chibi style and proportions of the supplied approved crowd references. One adult shown head to shoes, turned three quarters toward image left, head looking the same way as the body, arms relaxed slightly away from the sides and empty hands. White background, soft neutral light, flat matte model texture, sturdy simple shapes and simple eyes painted flat on the face. A Japanese man in his late sixties with a short full silver-grey haircut, grey eyebrows, gently lined face and a slightly broader waist. A dusty blue zip-front casual jacket over a cream shirt, charcoal straight trousers and plain dark slip-on shoes. Upright relaxed posture. No glasses, accessories, bags, text, props or extra subjects."
+  },
+  {
+   "id": "service-01",
+   "label": "service-01",
+   "image": "bible/shots/reviews/crowd-everyday-1/service-01.webp.webp",
+   "note": "Service worker: broad build, short black hair, cream shirt and brick-red apron. The apron needs a walking and sitting check after modelling because its lower edge crosses the thighs. This source picture has not been converted into a model. Built-in imagegen, one attempt; seed and model version not exposed. Meshy credits: 0. Prompt: Make a new everyday NPC in exactly the simple faceted 3D chibi style and proportions of the supplied approved crowd references. One adult shown head to shoes, turned three quarters toward image left, head looking the same way as the body, arms relaxed slightly away from the sides and empty hands. White background, soft neutral light, flat matte model texture, sturdy simple shapes and simple eyes painted flat on the face. An adult Japanese man in his forties with short closely cropped black hair and a broad sturdy build. A simple muted brick-red knee-length work apron over a cream short-sleeved shirt, dark slate trousers and black practical shoes. The apron lies flat with broad sturdy straps and no loose ties. No hat, glasses, badges, accessories, utensils, bags, text, props or extra subjects."
+  }
+ ],
+ "links": [
+  {
+   "label": "Existing approved office pair: live 3D and motion",
+   "href": "reviews/crowd-pilot-5/viewer.html?s=selected"
+  },
+  {
+   "label": "Remaining placeholder coverage and next model steps",
+   "href": "reviews/crowd-everyday-1/coverage.html"
+  }
+ ],
+ "decision": "looks ok: the three source pictures may proceed to3D trials. This does not approve unbuilt models for installation.",
+ "decided_at": "2026-10-07T14:31:26+0200",
+ "media": []
+}

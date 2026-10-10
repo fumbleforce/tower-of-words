@@ -1,0 +1,177 @@
+{
+ "title": "Mio looking at her phone, round 2 (full new renders)",
+ "date": "2026-09-29",
+ "by": "art agent (Mio phone 2)",
+ "status": "superseded",
+ "multi": false,
+ "question": "Which one is Mio's portrait while she reads the server alert?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/mio-phone-2-sheet.webp.webp",
+   "caption": "Approved portrait, then all 18 renders in the order they were made (red = rejected by me). Each is a whole new picture from a prompt; none is painted over her standard portrait. Her glasses come out silver-grey in all of them; the approved frames are taupe-grey."
+  }
+ ],
+ "options": [
+  {
+   "id": "ipa7a-1001",
+   "label": "mio-phone2-ipa7a-1001",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1001-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1001.webp.webp"
+   ],
+   "note": "IP-Adapter 0.7."
+  },
+  {
+   "id": "ipa7a-1002",
+   "label": "mio-phone2-ipa7a-1002",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1002-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1002.webp.webp"
+   ],
+   "note": "IP-Adapter 0.7."
+  },
+  {
+   "id": "ipa7a-1010",
+   "label": "mio-phone2-ipa7a-1010",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1010-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1010.webp.webp"
+   ],
+   "note": "IP-Adapter 0.7."
+  },
+  {
+   "id": "ipa7a-1011",
+   "label": "mio-phone2-ipa7a-1011",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1011-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1011.webp.webp"
+   ],
+   "note": "IP-Adapter 0.7."
+  },
+  {
+   "id": "ipa7a-1012",
+   "label": "mio-phone2-ipa7a-1012",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1012-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1012.webp.webp"
+   ],
+   "note": "IP-Adapter 0.7."
+  },
+  {
+   "id": "ipa7b-1007",
+   "label": "mio-phone2-ipa7b-1007",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1007-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1007.webp.webp"
+   ],
+   "note": "IP-Adapter 0.7, back of phone to viewer. Phone held off to her left, both hands."
+  },
+  {
+   "id": "ipa7b-1008",
+   "label": "mio-phone2-ipa7b-1008",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1008-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1008.webp.webp"
+   ],
+   "note": "IP-Adapter 0.7, back of phone to viewer. Phone held off to her left, both hands."
+  },
+  {
+   "id": "ipaa-1001",
+   "label": "mio-phone2-ipaa-1001",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1001-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1001.webp.webp"
+   ],
+   "note": "IP-Adapter 0.5."
+  },
+  {
+   "id": "ipaa-1002",
+   "label": "mio-phone2-ipaa-1002",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1002-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1002.webp.webp"
+   ],
+   "note": "IP-Adapter 0.5."
+  },
+  {
+   "id": "ipaa-1003",
+   "label": "mio-phone2-ipaa-1003",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1003-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1003.webp.webp"
+   ],
+   "note": "IP-Adapter 0.5."
+  },
+  {
+   "id": "ipab-1004",
+   "label": "mio-phone2-ipab-1004",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1004-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1004.webp.webp"
+   ],
+   "note": "IP-Adapter 0.5, back of phone to viewer."
+  },
+  {
+   "id": "ipab-1005",
+   "label": "mio-phone2-ipab-1005",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1005-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1005.webp.webp"
+   ],
+   "note": "IP-Adapter 0.5, back of phone to viewer."
+  },
+  {
+   "id": "ipab-1006",
+   "label": "mio-phone2-ipab-1006",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1006-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1006.webp.webp"
+   ],
+   "note": "IP-Adapter 0.5, back of phone to viewer."
+  },
+  {
+   "id": "ipa7a-1003",
+   "label": "mio-phone2-ipa7a-1003",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1003.webp.webp",
+   "note": "IP-Adapter 0.7. Rejected by me: fingers of one hand fuse into the phone edge."
+  },
+  {
+   "id": "ipa7b-1009",
+   "label": "mio-phone2-ipa7b-1009",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1009.webp.webp",
+   "note": "IP-Adapter 0.7, back of phone to viewer. Rejected by me: only one hand shows."
+  },
+  {
+   "id": "txta-1001",
+   "label": "mio-phone2-txta-1001",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-txta-1001.webp.webp",
+   "note": "text only. Rejected by me: off-model (bun on top, beige background)."
+  },
+  {
+   "id": "txta-1002",
+   "label": "mio-phone2-txta-1002",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-txta-1002.webp.webp",
+   "note": "text only. Rejected by me: off-model (bun on top, lime streaks)."
+  },
+  {
+   "id": "txta-1003",
+   "label": "mio-phone2-txta-1003",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-txta-1003.webp.webp",
+   "note": "text only. Rejected by me: off-model (bun on top, lime streaks, glow)."
+  },
+  {
+   "id": "redo",
+   "label": "Redo it (say what to change)"
+  }
+ ],
+ "links": [
+  {
+   "label": "Round 1 (rejected)",
+   "href": "#review/mio-phone"
+  }
+ ],
+ "decision": "ipa7a-1001, fix the glasses (they must match her approved portrait's); round 3 is mio-phone-3",
+ "decided": [
+  "ipa7a-1001"
+ ]
+}

@@ -1,0 +1,100 @@
+{
+ "title": "Fountain plaza at the map's scale",
+ "date": "2026-09-30",
+ "by": "claude-agent:plaza",
+ "caption": "The plaza rebuilt from the island layout: the 23-across round plaza, an 8.6-across fountain with water and coins, the two-storey canteen and its umbrella terrace, the lane along the plaza's south edge, and after dark the lamps, the canteen and the town windows lit. Walk east from the forecourt to see it (or ?place=plaza).",
+ "commit": "94db1e7",
+ "sections": [
+  {
+   "title": "Before",
+   "caption": "The old chunk: 14.6 wide, a 3-across basin, a one-storey canteen box and one row of shop roofs.",
+   "images": [
+    {
+     "id": "before-desk-morning",
+     "image": "game3d/shots/plaza-map-scale/before/desk-morning-lane.png.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "before-phone-evening",
+     "image": "game3d/shots/plaza-map-scale/before/phone-evening-lane.png.webp",
+     "caption": "After work, phone"
+    },
+    {
+     "id": "before-map",
+     "image": "game3d/shots/plaza-map-scale/before/map-plaza.png.webp",
+     "caption": "On the island map: the whole chunk fit inside the map's plaza"
+    }
+   ]
+  },
+  {
+   "title": "Arriving",
+   "caption": "Coming from the forecourt he lands on the lane just south-west of the fountain, so the phone view shows it.",
+   "images": [
+    {
+     "id": "after-arrive-desk-morning",
+     "image": "game3d/shots/plaza-map-scale/after/desk-morning-arrive.png.webp",
+     "caption": "Morning, desktop"
+    },
+    {
+     "id": "after-arrive-phone-morning",
+     "image": "game3d/shots/plaza-map-scale/after/phone-morning-arrive.png.webp",
+     "caption": "Morning, phone"
+    },
+    {
+     "id": "after-arrive-desk-evening",
+     "image": "game3d/shots/plaza-map-scale/after/desk-evening-arrive.png.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "after-arrive-phone-evening",
+     "image": "game3d/shots/plaza-map-scale/after/phone-evening-arrive.png.webp",
+     "caption": "After work, phone"
+    }
+   ]
+  },
+  {
+   "title": "The canteen side and the east lane",
+   "caption": "North of the fountain: the canteen terrace. East: the lane bending on toward the dorms.",
+   "images": [
+    {
+     "id": "after-north-desk-morning",
+     "image": "game3d/shots/plaza-map-scale/after/desk-morning-north.png.webp",
+     "caption": "Canteen terrace, morning"
+    },
+    {
+     "id": "after-north-desk-evening",
+     "image": "game3d/shots/plaza-map-scale/after/desk-evening-north.png.webp",
+     "caption": "Canteen terrace, after work"
+    },
+    {
+     "id": "after-east-desk-evening",
+     "image": "game3d/shots/plaza-map-scale/after/desk-evening-east.png.webp",
+     "caption": "East end of the lane, after work"
+    },
+    {
+     "id": "after-east-phone-morning",
+     "image": "game3d/shots/plaza-map-scale/after/phone-morning-east.png.webp",
+     "caption": "East end of the lane, phone"
+    }
+   ]
+  },
+  {
+   "title": "On the island map",
+   "caption": "From above, over the layout: plaza, canteen, lane and the two shop rows under the arcade where island-map-4 has them.",
+   "images": [
+    {
+     "id": "after-map",
+     "image": "game3d/shots/plaza-map-scale/after/map-plaza.png.webp",
+     "caption": "Built plaza over the island layout"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/?place=plaza"
+  }
+ ],
+ "media": []
+}

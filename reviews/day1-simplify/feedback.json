@@ -1,0 +1,16 @@
+{
+ "sent": "2026-09-29T22:16:16+0200",
+ "picked": [
+  "train"
+ ],
+ "options": {
+  "train": {
+   "star": false,
+   "reject": false,
+   "comment": "charming dialogue that adds context to the words especially is good. Merging 2 lines is generally fine, but the \"You know it's all..\" is good phrasing, direct and personal, dont merge.  merge family fine.  dont remove the flavor lines., tiny bow is charming. merge mori-bow line. \n\n#7 yes delete., but keep #8\n#9 yes cut\n"
+  }
+ },
+ "comment": "the rest are way too much to read, references I dont know or remember. We need a frame by frame keep - remome widget so I can easily see them in context.\n\nAlso, SUPER annoying that the slash button catpures focus for search while I am typing, that should not happen",
+ "read": true,
+ "history": []
+}

@@ -1,0 +1,170 @@
+{
+ "title": "Carina's voice",
+ "date": "2026-10-06",
+ "by": "voice agent",
+ "status": "decided",
+ "multi": false,
+ "question": "Which of these is Carina?",
+ "media": [
+  {
+   "audio": "art/candidates/carina-voice-1/eric-ref.mp3",
+   "caption": "How to read this: six designed voices, a to f; e is the lowest and f the brightest. Each card plays her saying \"Yeah, IT support. I'm the contractor, it's my first day.\" Above the cards, for each voice: the reference it was designed with, another of Eric's day-1 lines as hers, \"ここ. Right by the fountain.\" (his day-2 line, with ここ said in Japanese and spliced in, as the game does) and the word clip おはようございます. All are at -20 LUFS. How they were made: each is a Qwen3-TTS VoiceDesign voice made from a short description and reading the same English reference text, then cloned with Qwen3-TTS Base, with her Japanese made from the timbre only. Eric's voice, eric-2, was made the same way, so hers would work in the game the way his does. This first clip is Eric's reference, for comparison."
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/eric-en1.mp3",
+   "caption": "Eric (eric-2, in the game now): \"Yeah, IT support...\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/eric-en2.mp3",
+   "caption": "Eric (eric-2, in the game now): \"Sea on both sides...\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/eric-mix.mp3",
+   "caption": "Eric (eric-2, in the game now): \"ここ. Right by the fountain.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/eric-word.mp3",
+   "caption": "Eric (eric-2, in the game now): おはようございます"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/a-ref.mp3",
+   "caption": "a. Tired and quiet: reference voice"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/a-en2.mp3",
+   "caption": "a. Tired and quiet: \"Sea on both sides. Nobody said the island was this far out.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/a-mix.mp3",
+   "caption": "a. Tired and quiet: \"ここ. Right by the fountain.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/a-word.mp3",
+   "caption": "a. Tired and quiet: おはようございます"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/b-ref.mp3",
+   "caption": "b. Dry and level: reference voice"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/b-en2.mp3",
+   "caption": "b. Dry and level: \"Sea on both sides. Nobody said the island was this far out.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/b-mix.mp3",
+   "caption": "b. Dry and level: \"ここ. Right by the fountain.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/b-word.mp3",
+   "caption": "b. Dry and level: おはようございます"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/c-ref.mp3",
+   "caption": "c. Relaxed, slightly husky: reference voice"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/c-en2.mp3",
+   "caption": "c. Relaxed, slightly husky: \"Sea on both sides. Nobody said the island was this far out.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/c-mix.mp3",
+   "caption": "c. Relaxed, slightly husky: \"ここ. Right by the fountain.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/c-word.mp3",
+   "caption": "c. Relaxed, slightly husky: おはようございます"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/d-ref.mp3",
+   "caption": "d. Warm, easy, amused: reference voice"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/d-en2.mp3",
+   "caption": "d. Warm, easy, amused: \"Sea on both sides. Nobody said the island was this far out.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/d-mix.mp3",
+   "caption": "d. Warm, easy, amused: \"ここ. Right by the fountain.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/d-word.mp3",
+   "caption": "d. Warm, easy, amused: おはようございます"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/e-ref.mp3",
+   "caption": "e. Low, husky, weary: reference voice"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/e-en2.mp3",
+   "caption": "e. Low, husky, weary: \"Sea on both sides. Nobody said the island was this far out.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/e-mix.mp3",
+   "caption": "e. Low, husky, weary: \"ここ. Right by the fountain.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/e-word.mp3",
+   "caption": "e. Low, husky, weary: おはようございます"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/f-ref.mp3",
+   "caption": "f. Bright and clear: reference voice"
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/f-en2.mp3",
+   "caption": "f. Bright and clear: \"Sea on both sides. Nobody said the island was this far out.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/f-mix.mp3",
+   "caption": "f. Bright and clear: \"ここ. Right by the fountain.\""
+  },
+  {
+   "audio": "art/candidates/carina-voice-1/f-word.mp3",
+   "caption": "f. Bright and clear: おはようございます"
+  }
+ ],
+ "options": [
+  {
+   "id": "a",
+   "label": "a. Tired and quiet",
+   "audio": "art/candidates/carina-voice-1/a-en1.mp3",
+   "note": "Matches carina.json (\"tired woman in her thirties, quiet and polite\"). Reference pitch about 184 Hz. It's low enough that her lines would need the pitch check for drift (under 190 Hz, the same check Mio has). Design prompt: \"A woman in her thirties, quiet and polite, a little tired. Soft medium-low voice, gentle and reserved, unhurried, slightly weary at the end of a long day but kind. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 606, en2 404, ここ 606 with English 505, word 404."
+  },
+  {
+   "id": "b",
+   "label": "b. Dry and level",
+   "audio": "art/candidates/carina-voice-1/b-en1.mp3",
+   "note": "Close to carina.json, drier: the IT support side of her. Reference pitch about 227 Hz. Design prompt: \"A woman in her thirties with a dry, level, matter-of-fact voice. Medium-low pitch, understated, little emotion, even pace, quietly deadpan and polite, a practical tech support engineer. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 606, en2 505, ここ 505 with English 404, word 404."
+  },
+  {
+   "id": "c",
+   "label": "c. Relaxed, slightly husky",
+   "audio": "art/candidates/carina-voice-1/c-en1.mp3",
+   "note": "The confident, relaxed direction (late twenties, slightly husky, calm, a little amused). Reference pitch about 222 Hz. Design prompt: \"A confident, relaxed woman in her late twenties. Low-medium pitch with a slightly husky texture, warm and calm, a little amused, unhurried, never shy, not girlish. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 404, en2 505, ここ 606 with English 606, word 606."
+  },
+  {
+   "id": "d",
+   "label": "d. Warm, easy, amused",
+   "audio": "art/candidates/carina-voice-1/d-en1.mp3",
+   "note": "The confident, relaxed direction, brighter and warmer. Reference pitch about 291 Hz. Design prompt: \"A relaxed, self-assured woman in her late twenties. Medium pitch, warm and clear, an easy smile in the voice, lightly amused, calm and natural pace, not girlish. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 505, en2 505, ここ 404 with English 606, word 404."
+  },
+  {
+   "id": "e",
+   "label": "e. Low, husky, weary",
+   "audio": "art/candidates/carina-voice-1/e-en1.mp3",
+   "note": "The lowest: carina.json's tired and quiet, taken down into a husky register. Reference pitch about 173 Hz. It's low enough that her lines would need the pitch check for drift (under 190 Hz, the same check Mio has). Design prompt: \"A woman in her thirties with a low, husky, slightly smoky voice. Calm and quiet, tired, slow and deliberate, polite, a little dry. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 505, en2 404, ここ 606 with English 606, word 505."
+  },
+  {
+   "id": "f",
+   "label": "f. Bright and clear",
+   "audio": "art/candidates/carina-voice-1/f-en1.mp3",
+   "note": "The brightest, for range. Reference pitch about 346 Hz. Design prompt: \"A woman around thirty with a bright, clear, crisp voice. Medium-high pitch, polite and friendly, quick and articulate, composed. Neutral, standard English with no regional or foreign accent.\" Takes: seeds 404, 505 and 606 for each line, picked with Whisper (the text it heard, P(ja) over 0.9 for Japanese, then the pitch closest to the reference): en1 404, en2 404, ここ 404 with English 404, word 404."
+  }
+ ],
+ "decided": [
+  "a"
+ ],
+ "decision": "Jørgen picked a, Tired and quiet, with no comment. Apply the selected reference to the currently playable public Carina lines and words.",
+ "decided_at": "2026-10-06T11:48:13+0200",
+ "issue": 277
+}

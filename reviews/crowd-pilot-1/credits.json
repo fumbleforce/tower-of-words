@@ -1,0 +1,160 @@
+[
+ {
+  "service": "meshy",
+  "part": "b-1",
+  "task": "01a10d35-394c-777d-b581-b9a151a8ea1f",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 285,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/crowd-pilot-1/pics/b-d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "a-1",
+  "task": "01a10d35-2d8b-734c-a4e6-df4aa9fea36d",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 285,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/crowd-pilot-1/pics/a-d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "a-1-tex",
+  "task": "01a10d36-604c-7703-8caa-56cf51501180",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 265,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/crowd-pilot-1/meshy/a-1-uv.glb"
+  },
+  "input": "art/parts/crowd-pilot-1/pics/a-d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "b-1-tex",
+  "task": "01a10d36-af20-7269-ab7b-cb9e2f609ee5",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 265,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/crowd-pilot-1/meshy/b-1-uv.glb"
+  },
+  "input": "art/parts/crowd-pilot-1/pics/b-d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "a-1-tex-rig",
+  "task": "01a10d37-487c-766f-8589-7b4fa137592b",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10d36-604c-7703-8caa-56cf51501180",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "b-1-tex-rig",
+  "task": "01a10d37-833b-71d6-a7cb-67ac2af142fb",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10d36-af20-7269-ab7b-cb9e2f609ee5",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "a-1-tex2",
+  "task": "01a10d38-15d9-75f4-a4b3-dbe62b6c7a94",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 224,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/crowd-pilot-1/meshy/a-1-uv.glb"
+  },
+  "input": "art/parts/crowd-pilot-1/pics/a-d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "a-sit",
+  "task": "01a10d38-2ae4-7107-a47f-c23a4482a4af",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "settings": {
+   "rig_task_id": "01a10d37-487c-766f-8589-7b4fa137592b",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "b-sit",
+  "task": "01a10d38-2b04-76a6-83e7-5ed3e422735d",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "settings": {
+   "rig_task_id": "01a10d37-833b-71d6-a7cb-67ac2af142fb",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "a-1-tex3",
+  "task": "01a10d39-d2e7-7275-95e6-24ec1ff8a260",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 214,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/crowd-pilot-1/meshy/a-1-uv.glb"
+  },
+  "input": "art/parts/crowd-pilot-1/pics/a-c1.png"
+ }
+]

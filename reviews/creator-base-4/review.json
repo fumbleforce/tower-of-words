@@ -1,0 +1,57 @@
+{
+ "title": "Dressed chibi bases: first fit",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "superseded",
+ "question": "Does the simpler body work for Mio and Eric?",
+ "multi": true,
+ "options": [
+  {
+   "id": "v16-mio",
+   "label": "v16-mio: simpler body with source layers",
+   "image": "art/parts/base/shots/creator-base-4/game-colours/mio-v16-dressed-front.png.webp",
+   "images": [
+    "art/parts/base/shots/creator-base-4/game-colours/mio-v16-dressed-side.png.webp",
+    "art/parts/base/shots/creator-base-4/game-colours/mio-v16-dressed-back.png.webp",
+    "art/parts/base/shots/creator-base-4/mio-v15-bare-front.png.webp",
+    "art/parts/base/shots/creator-base-4/mio-v16-bare-front.png.webp",
+    "art/parts/base/shots/creator-base-4/fit3/mio-v16-dressed-front.png.webp"
+   ],
+   "note": "One hip ring removed from v15; head and eyes unchanged. Original layers leave skin protruding through shoulders and the back. The fitted trial covers more skin but distorts hems and shoes; it is not ready for the game."
+  },
+  {
+   "id": "v16-eric",
+   "label": "v16-eric: simpler body with source layers",
+   "image": "art/parts/base/shots/creator-base-4/game-colours/eric-v16-dressed-front.png.webp",
+   "images": [
+    "art/parts/base/shots/creator-base-4/game-colours/eric-v16-dressed-side.png.webp",
+    "art/parts/base/shots/creator-base-4/game-colours/eric-v16-dressed-back.png.webp",
+    "art/parts/base/shots/creator-base-4/eric-v15-bare-front.png.webp",
+    "art/parts/base/shots/creator-base-4/eric-v16-bare-front.png.webp",
+    "art/parts/base/shots/creator-base-4/fit3/eric-v16-dressed-front.png.webp"
+   ],
+   "note": "One hip ring removed from v15; head and eyes unchanged. Original layers leave skin protruding through shoulders. The fitted trial covers more skin but distorts hems and shoes; it is not ready for the game."
+  }
+ ],
+ "links": [
+  {
+   "label": "Rotate, animate and toggle each layer",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/creator/base/compare.html"
+  },
+  {
+   "label": "Every capture, including failed fits",
+   "href": "reviews/creator-base-4/attempts.html"
+  },
+  {
+   "label": "Previous base choice and your feedback",
+   "href": "#review/creator-base-3"
+  }
+ ],
+ "media": [
+  {
+   "image": "art/parts/base/shots/creator-base-4/fit3/phone.png.webp",
+   "caption": "Phone viewer. Original and fitted layers are both available; neither fit is ready for game integration."
+  }
+ ],
+ "decision": "Rejected: damaged next to the originals (Mio's face flat at the bottom, Eric's too broad, body shows through clothes); remake clothes to fit; match the original shape by overlaying"
+}

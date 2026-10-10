@@ -1,0 +1,61 @@
+{
+ "title": "Character bios: background and everyday life",
+ "date": "2026-10-09",
+ "by": "Codex character-backgrounds",
+ "status": "decided",
+ "question": "Which proposed details would you keep or change?",
+ "multi": true,
+ "options": [
+  {
+   "id": "mio",
+   "label": "mio · Mio",
+   "note": "A private gamer working on a tactics game under an online name. Proposed details include sharing a bedroom as a child, her island room and the games she spends her evenings playing.",
+   "image": "game3d/assets/portraits/mio-neutral.webp"
+  },
+  {
+   "id": "kenji",
+   "label": "kenji · Kenji",
+   "note": "A new engineer living away from his parents for the first time. Proposed details include the family bicycle shop, his half-built spacecraft models and his wish to handle a job alone.",
+   "image": "game3d/assets/portraits/kenji-neutral.webp"
+  },
+  {
+   "id": "kuro",
+   "label": "kuro · Kuro",
+   "note": "A domineering flirt with a taste for comfort and attention. Proposed details include hotel work, a staff apartment, a difficult former relationship and the seafront home she wants to buy.",
+   "image": "game3d/assets/portraits/kuro-neutral.webp"
+  },
+  {
+   "id": "rei",
+   "label": "rei · Rei",
+   "note": "An abrasive saleswoman aiming for management. Proposed details include her island childhood, her life near the tennis courts and an ankle injury she tries to ignore.",
+   "image": "game3d/assets/portraits/rei-neutral.webp"
+  }
+ ],
+ "links": [
+  {
+   "label": "Read the four revised bios",
+   "href": "reviews/character-backgrounds-4/index.html"
+  },
+  {
+   "label": "Mio bio",
+   "href": "reviews/character-backgrounds-4/index.html#mio"
+  },
+  {
+   "label": "Kenji bio",
+   "href": "reviews/character-backgrounds-4/index.html#kenji"
+  },
+  {
+   "label": "Kuro bio",
+   "href": "reviews/character-backgrounds-4/index.html#kuro"
+  },
+  {
+   "label": "Rei bio",
+   "href": "reviews/character-backgrounds-4/index.html#rei"
+  }
+ ],
+ "updated": "2026-10-09T11:32:36+02:00",
+ "decision": "Jørgen accepted the four revised bios as a solid foundation and asked that this approach be applied consistently to future bios and prose. His full wording is in the feedback. Character-agent follow-up is coordinated by Claude under #368.",
+ "decided_at": "2026-10-09T12:17:03+0200",
+ "issue": 327,
+ "media": []
+}

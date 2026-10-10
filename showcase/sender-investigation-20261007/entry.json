@@ -1,0 +1,2923 @@
+{
+ "title": "Mio’s persistent sender investigation",
+ "date": "2026-10-07",
+ "by": "codex:sender-investigation",
+ "caption": "Compare the retained output, hold one item and deliver the unaffected timesheets. Optional mada practice changes how Mori’s remembered remark reads; item 25 remains recoverable.",
+ "sections": [
+  {
+   "title": "Accepted final scene, desktop and phone",
+   "caption": "Actual story routes 21 and 22, with native choices, typing, console controls and title-screen Continue. Independent bounded scene/UI visual review: 8/10. Rendered point duration and fixed monitor transforms are checked separately in the linked reports.",
+   "images": [
+    {
+     "id": "accepted-1366-eric-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-desk-keyboard.webp.webp",
+     "caption": "Desktop, Eric: Mio uses the existing keyboard; actual hand contact."
+    },
+    {
+     "id": "accepted-1366-eric-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-door-point.webp.webp",
+     "caption": "Desktop, Eric: Mori points through the opened doorway after the invitation is accepted."
+    },
+    {
+     "id": "accepted-1366-eric-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-mori-remark.webp.webp",
+     "caption": "Desktop, Eric: The spoken remark holds on its real referent. The memory records which words were understood at that moment."
+    },
+    {
+     "id": "accepted-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-output.webp.webp",
+     "caption": "Desktop, Eric: The two retained failure records can be compared."
+    },
+    {
+     "id": "accepted-1366-eric-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-continued-delivery.webp.webp",
+     "caption": "Desktop, Eric: Native Autosave Continue resumes delivery without resending acknowledged items."
+    },
+    {
+     "id": "accepted-1366-eric-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-note-place.webp.webp",
+     "caption": "Desktop, Eric: Mio places the retained-item note on her desk."
+    },
+    {
+     "id": "accepted-1366-eric-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-payoff-line.webp.webp",
+     "caption": "Desktop, Eric: The partial success ends back at Mio’s desk, with both speakers visible."
+    },
+    {
+     "id": "accepted-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "Phone, Carina: Mio uses the existing keyboard; actual hand contact."
+    },
+    {
+     "id": "accepted-390-carina-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-door-point.webp.webp",
+     "caption": "Phone, Carina: Mori points through the opened doorway after the invitation is accepted."
+    },
+    {
+     "id": "accepted-390-carina-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-mori-remark.webp.webp",
+     "caption": "Phone, Carina: The spoken remark holds on its real referent. The memory records which words were understood at that moment."
+    },
+    {
+     "id": "accepted-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-output.webp",
+     "caption": "Phone, Carina: The two retained failure records can be compared."
+    },
+    {
+     "id": "accepted-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-continued-delivery.webp",
+     "caption": "Phone, Carina: Native Autosave Continue resumes delivery without resending acknowledged items."
+    },
+    {
+     "id": "accepted-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-note-place.webp.webp",
+     "caption": "Phone, Carina: Mio places the retained-item note on her desk."
+    },
+    {
+     "id": "accepted-390-carina-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-payoff-line.webp.webp",
+     "caption": "Phone, Carina: The partial success ends back at Mio’s desk, with both speakers visible."
+    }
+   ]
+  },
+  {
+   "title": "Lab proof 1",
+   "caption": "Inspectable UI laboratory fixture using the real queue model and controls. These images are diagnostic fixtures, not in-world story shots.",
+   "images": [
+    {
+     "id": "archive-codex-sender-lab-proof-1-390-initial",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-1--390-initial.webp",
+     "caption": "390 initial"
+    },
+    {
+     "id": "archive-codex-sender-lab-proof-1-390-wrong-hold",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-1--390-wrong-hold.webp",
+     "caption": "390 wrong hold"
+    },
+    {
+     "id": "archive-codex-sender-lab-proof-1-390-delivered",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-1--390-delivered.webp",
+     "caption": "390 delivered"
+    },
+    {
+     "id": "archive-codex-sender-lab-proof-1-1366-initial",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-1--1366-initial.webp",
+     "caption": "1366 initial"
+    },
+    {
+     "id": "archive-codex-sender-lab-proof-1-1366-wrong-hold",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-1--1366-wrong-hold.webp",
+     "caption": "1366 wrong hold"
+    },
+    {
+     "id": "archive-codex-sender-lab-proof-1-1366-delivered",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-1--1366-delivered.webp",
+     "caption": "1366 delivered"
+    }
+   ]
+  },
+  {
+   "title": "Stage 1",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-1-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-1--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-1-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-1--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-1-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-1--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-1-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-1--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-1-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-1--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-1-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-1--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-1-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-1--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-1-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-1--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-1-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-1--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-1-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-1--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Stage 2",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-2-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-2--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-2-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-2--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-2-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-2--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-2-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-2--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-2-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-2--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-2-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-2--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-2-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-2--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-2-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-2--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-2-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-2--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-2-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-2--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Stage 3",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-3-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-3--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-3-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-3--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-3-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-3--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-3-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-3--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-3-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-3--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-3-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-3--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-3-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-3--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-3-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-3--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-3-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-3--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-3-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-3--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Stage 4",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-4-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-4--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-4-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-4--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-4-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-4--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-4-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-4--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-4-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-4--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-4-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-4--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-4-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-4--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-4-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-4--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-4-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-4--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-4-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-4--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Stage mori direct",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-mori-direct-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-mori-direct--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    }
+   ]
+  },
+  {
+   "title": "Lab proof 2",
+   "caption": "Inspectable UI laboratory fixture using the real queue model and controls. These images are diagnostic fixtures, not in-world story shots.",
+   "images": [
+    {
+     "id": "archive-codex-sender-lab-proof-2-390-initial",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-2--390-initial.webp",
+     "caption": "390 initial"
+    },
+    {
+     "id": "archive-codex-sender-lab-proof-2-390-wrong-hold",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-2--390-wrong-hold.webp",
+     "caption": "390 wrong hold"
+    },
+    {
+     "id": "archive-codex-sender-lab-proof-2-390-delivered",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-2--390-delivered.webp",
+     "caption": "390 delivered"
+    },
+    {
+     "id": "archive-codex-sender-lab-proof-2-1366-initial",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-2--1366-initial.webp",
+     "caption": "1366 initial"
+    },
+    {
+     "id": "archive-codex-sender-lab-proof-2-1366-wrong-hold",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-2--1366-wrong-hold.webp",
+     "caption": "1366 wrong hold"
+    },
+    {
+     "id": "archive-codex-sender-lab-proof-2-1366-delivered",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-lab-proof-2--1366-delivered.webp",
+     "caption": "1366 delivered"
+    }
+   ]
+  },
+  {
+   "title": "Stage 5",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-wake-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-wake-contact.webp.webp",
+     "caption": "1366 eric wake contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-5-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-5--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Play 1",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-1-1366-eric-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-1--1366-eric-declined.webp.webp",
+     "caption": "1366 eric declined"
+    },
+    {
+     "id": "archive-codex-sender-play-1-1366-eric-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-1--1366-eric-doorway.webp.webp",
+     "caption": "1366 eric doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-1-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-1--1366-eric-output.webp.webp",
+     "caption": "1366 eric output"
+    },
+    {
+     "id": "archive-codex-sender-play-1-1366-eric-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-1--1366-eric-ack26.webp.webp",
+     "caption": "1366 eric ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-1-1366-eric-failed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-1--1366-eric-failed.webp.webp",
+     "caption": "1366 eric failed"
+    }
+   ]
+  },
+  {
+   "title": "Stage 6",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-wake-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-wake-contact.webp.webp",
+     "caption": "1366 eric wake contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-6-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-6--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 1",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-1-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-1--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-1-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-1--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Play 2",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-2-1366-eric-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-2--1366-eric-declined.webp.webp",
+     "caption": "1366 eric declined"
+    },
+    {
+     "id": "archive-codex-sender-play-2-1366-eric-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-2--1366-eric-doorway.webp.webp",
+     "caption": "1366 eric doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-2-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-2--1366-eric-output.webp.webp",
+     "caption": "1366 eric output"
+    },
+    {
+     "id": "archive-codex-sender-play-2-1366-eric-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-2--1366-eric-ack26.webp.webp",
+     "caption": "1366 eric ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-2-1366-eric-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-2--1366-eric-continued-delivery.webp.webp",
+     "caption": "1366 eric continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-2-1366-eric-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-2--1366-eric-payoff.webp.webp",
+     "caption": "1366 eric payoff"
+    }
+   ]
+  },
+  {
+   "title": "Play 3",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-3-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-3--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-3-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-3--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-3-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-3--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-3-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-3--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-3-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-3--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-3-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-3--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    }
+   ]
+  },
+  {
+   "title": "Stage 7",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-wake-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-wake-contact.webp.webp",
+     "caption": "1366 eric wake contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-7-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-7--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 2",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-2-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-2--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-2-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-2--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Stage 8",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-wake-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-wake-contact.webp.webp",
+     "caption": "1366 eric wake contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-8-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-8--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 3",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-3-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-3--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-3-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-3--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Stage 9",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-wake-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-wake-contact.webp.webp",
+     "caption": "1366 eric wake contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-9-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-9--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 4",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-4-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-4--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-4-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-4--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Play 4",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-4-1366-eric-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-4--1366-eric-declined.webp.webp",
+     "caption": "1366 eric declined"
+    },
+    {
+     "id": "archive-codex-sender-play-4-1366-eric-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-4--1366-eric-doorway.webp.webp",
+     "caption": "1366 eric doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-4-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-4--1366-eric-output.webp.webp",
+     "caption": "1366 eric output"
+    },
+    {
+     "id": "archive-codex-sender-play-4-1366-eric-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-4--1366-eric-ack26.webp.webp",
+     "caption": "1366 eric ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-4-1366-eric-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-4--1366-eric-continued-delivery.webp.webp",
+     "caption": "1366 eric continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-4-1366-eric-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-4--1366-eric-payoff.webp.webp",
+     "caption": "1366 eric payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-4-1366-eric-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-4--1366-eric-interpretation-after-delivery.webp.webp",
+     "caption": "1366 eric interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 5",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-5-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-5--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-5-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-5--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-5-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-5--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-5-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-5--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-5-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-5--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-5-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-5--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-5-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-5--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 5",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-5-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-5--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-5-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-5--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Stage 10",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-wake-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-wake-contact.webp.webp",
+     "caption": "1366 eric wake contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-10-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-10--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 6",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-6-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-6--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-6-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-6--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 7",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-7-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-7--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-7-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-7--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Stage 11",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-wake-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-wake-contact.webp.webp",
+     "caption": "1366 eric wake contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-11-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-11--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 8",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-8-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-8--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-8-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-8--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 9",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-9-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-9--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-9-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-9--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Stage 12",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-wake-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-wake-contact.webp.webp",
+     "caption": "1366 eric wake contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-12-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-12--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 10",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-10-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-10--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-10-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-10--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 11",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-11-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-11--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-11-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-11--resumed.webp.webp",
+     "caption": "resumed"
+    }
+   ]
+  },
+  {
+   "title": "Stage 13",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-wake-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-wake-contact.webp.webp",
+     "caption": "1366 eric wake contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-13-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-13--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Stage 14",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-door",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-door.webp.webp",
+     "caption": "1366 eric door"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-wake-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-wake-contact.webp.webp",
+     "caption": "1366 eric wake contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-wake",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-wake.webp.webp",
+     "caption": "1366 eric wake"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-mori",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-mori.webp.webp",
+     "caption": "1366 eric mori"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-point.webp.webp",
+     "caption": "1366 eric point"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-moriHome",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-moriHome.webp.webp",
+     "caption": "1366 eric moriHome"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-mio",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-mio.webp.webp",
+     "caption": "1366 eric mio"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-14-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-14--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Play 6",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-6-1366-eric-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-6--1366-eric-story-desk-keyboard.webp.webp",
+     "caption": "1366 eric story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-6-1366-eric-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-6--1366-eric-declined.webp.webp",
+     "caption": "1366 eric declined"
+    },
+    {
+     "id": "archive-codex-sender-play-6-1366-eric-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-6--1366-eric-doorway.webp.webp",
+     "caption": "1366 eric doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-6-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-6--1366-eric-output.webp.webp",
+     "caption": "1366 eric output"
+    },
+    {
+     "id": "archive-codex-sender-play-6-1366-eric-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-6--1366-eric-ack26.webp.webp",
+     "caption": "1366 eric ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-6-1366-eric-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-6--1366-eric-continued-delivery.webp.webp",
+     "caption": "1366 eric continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-6-1366-eric-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-6--1366-eric-story-note-place.webp.webp",
+     "caption": "1366 eric story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-6-1366-eric-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-6--1366-eric-payoff.webp.webp",
+     "caption": "1366 eric payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-6-1366-eric-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-6--1366-eric-story-wake-control.webp.webp",
+     "caption": "1366 eric story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-6-1366-eric-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-6--1366-eric-interpretation-after-delivery.webp.webp",
+     "caption": "1366 eric interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Stage 15",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-15-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-15--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-15-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-15--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-15-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-15--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-15-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-15--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-15-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-15--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-15-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-15--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Play 7",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-7-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-7--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "390 carina story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-7-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-7--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-7-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-7--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-7-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-7--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-7-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-7--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-7-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-7--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-7-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-7--390-carina-story-note-place.webp.webp",
+     "caption": "390 carina story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-7-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-7--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-7-390-carina-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-7--390-carina-story-wake-control.webp.webp",
+     "caption": "390 carina story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-7-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-7--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Arrival 12",
+   "caption": "Direct and resumed Mori chair-arrival diagnostics. Earlier failed pose/contact probes remain visible; attempt 12 is the final passing ordinary/resumed/cancellation proof.",
+   "images": [
+    {
+     "id": "archive-codex-sender-arrival-12-ordinary",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-12--ordinary.webp.webp",
+     "caption": "ordinary"
+    },
+    {
+     "id": "archive-codex-sender-arrival-12-ordinary-front",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-12--ordinary-front.webp.webp",
+     "caption": "ordinary front"
+    },
+    {
+     "id": "archive-codex-sender-arrival-12-resumed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-12--resumed.webp.webp",
+     "caption": "resumed"
+    },
+    {
+     "id": "archive-codex-sender-arrival-12-resumed-front",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-arrival-12--resumed-front.webp.webp",
+     "caption": "resumed front"
+    }
+   ]
+  },
+  {
+   "title": "Play 8",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-story-desk-keyboard.webp.webp",
+     "caption": "1366 eric story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-declined.webp.webp",
+     "caption": "1366 eric declined"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-story-door-point.webp.webp",
+     "caption": "1366 eric story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-story-door-referent.webp.webp",
+     "caption": "1366 eric story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-story-mori-remark.webp.webp",
+     "caption": "1366 eric story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-doorway.webp.webp",
+     "caption": "1366 eric doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-output.webp.webp",
+     "caption": "1366 eric output"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-ack26.webp.webp",
+     "caption": "1366 eric ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-continued-delivery.webp.webp",
+     "caption": "1366 eric continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-story-note-place.webp.webp",
+     "caption": "1366 eric story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-payoff.webp.webp",
+     "caption": "1366 eric payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-story-payoff-line.webp.webp",
+     "caption": "1366 eric story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-story-wake-control.webp.webp",
+     "caption": "1366 eric story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-8-1366-eric-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-8--1366-eric-interpretation-after-delivery.webp.webp",
+     "caption": "1366 eric interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 9",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-9-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "390 carina story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-story-door-point.webp.webp",
+     "caption": "390 carina story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-story-door-referent.webp.webp",
+     "caption": "390 carina story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-story-mori-remark.webp.webp",
+     "caption": "390 carina story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-story-note-place.webp.webp",
+     "caption": "390 carina story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-story-payoff-line.webp.webp",
+     "caption": "390 carina story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-story-wake-control.webp.webp",
+     "caption": "390 carina story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-9-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-9--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Stage 16",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-16-1366-eric-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-16--1366-eric-before.webp.webp",
+     "caption": "1366 eric before"
+    },
+    {
+     "id": "archive-codex-sender-stage-16-1366-eric-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-16--1366-eric-desk.webp.webp",
+     "caption": "1366 eric desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-16-1366-eric-screen-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-16--1366-eric-screen-contact.webp.webp",
+     "caption": "1366 eric screen contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-16-1366-eric-screen",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-16--1366-eric-screen.webp.webp",
+     "caption": "1366 eric screen"
+    },
+    {
+     "id": "archive-codex-sender-stage-16-1366-eric-note-contact",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-16--1366-eric-note-contact.webp.webp",
+     "caption": "1366 eric note contact"
+    },
+    {
+     "id": "archive-codex-sender-stage-16-1366-eric-note",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-16--1366-eric-note.webp.webp",
+     "caption": "1366 eric note"
+    }
+   ]
+  },
+  {
+   "title": "Play 10",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-story-desk-keyboard.webp.webp",
+     "caption": "1366 eric story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-declined.webp.webp",
+     "caption": "1366 eric declined"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-story-door-point.webp.webp",
+     "caption": "1366 eric story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-story-door-referent.webp.webp",
+     "caption": "1366 eric story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-story-mori-remark.webp.webp",
+     "caption": "1366 eric story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-doorway.webp.webp",
+     "caption": "1366 eric doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-output.webp.webp",
+     "caption": "1366 eric output"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-ack26.webp.webp",
+     "caption": "1366 eric ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-continued-delivery.webp.webp",
+     "caption": "1366 eric continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-story-note-place.webp.webp",
+     "caption": "1366 eric story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-payoff.webp.webp",
+     "caption": "1366 eric payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-story-payoff-line.webp.webp",
+     "caption": "1366 eric story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-story-wake-control.webp.webp",
+     "caption": "1366 eric story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-10-1366-eric-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-10--1366-eric-interpretation-after-delivery.webp.webp",
+     "caption": "1366 eric interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 11",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-11-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "390 carina story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-story-door-point.webp.webp",
+     "caption": "390 carina story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-story-door-referent.webp.webp",
+     "caption": "390 carina story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-story-mori-remark.webp.webp",
+     "caption": "390 carina story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-story-note-place.webp.webp",
+     "caption": "390 carina story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-story-payoff-line.webp.webp",
+     "caption": "390 carina story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-story-wake-control.webp.webp",
+     "caption": "390 carina story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-11-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-11--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 12",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-story-desk-keyboard.webp.webp",
+     "caption": "1366 eric story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-declined.webp.webp",
+     "caption": "1366 eric declined"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-story-door-point.webp.webp",
+     "caption": "1366 eric story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-story-door-referent.webp.webp",
+     "caption": "1366 eric story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-story-mori-remark.webp.webp",
+     "caption": "1366 eric story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-doorway.webp.webp",
+     "caption": "1366 eric doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-output.webp.webp",
+     "caption": "1366 eric output"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-ack26.webp.webp",
+     "caption": "1366 eric ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-continued-delivery.webp.webp",
+     "caption": "1366 eric continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-story-note-place.webp.webp",
+     "caption": "1366 eric story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-story-payoff-line.webp.webp",
+     "caption": "1366 eric story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-payoff.webp.webp",
+     "caption": "1366 eric payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-story-wake-control.webp.webp",
+     "caption": "1366 eric story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-12-1366-eric-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-12--1366-eric-interpretation-after-delivery.webp.webp",
+     "caption": "1366 eric interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 13",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-13-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "390 carina story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-story-door-point.webp.webp",
+     "caption": "390 carina story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-story-door-referent.webp.webp",
+     "caption": "390 carina story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-story-mori-remark.webp.webp",
+     "caption": "390 carina story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-story-note-place.webp.webp",
+     "caption": "390 carina story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-story-payoff-line.webp.webp",
+     "caption": "390 carina story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-story-wake-control.webp.webp",
+     "caption": "390 carina story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-13-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-13--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 15",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-15-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "390 carina story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-story-door-point.webp.webp",
+     "caption": "390 carina story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-story-door-referent.webp.webp",
+     "caption": "390 carina story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-story-mori-remark.webp.webp",
+     "caption": "390 carina story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-story-note-place.webp.webp",
+     "caption": "390 carina story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-story-payoff-line.webp.webp",
+     "caption": "390 carina story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-story-wake-control.webp.webp",
+     "caption": "390 carina story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-15-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-15--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 14",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-story-desk-keyboard.webp.webp",
+     "caption": "1366 eric story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-declined.webp.webp",
+     "caption": "1366 eric declined"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-story-door-point.webp.webp",
+     "caption": "1366 eric story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-story-door-referent.webp.webp",
+     "caption": "1366 eric story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-story-mori-remark.webp.webp",
+     "caption": "1366 eric story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-doorway.webp.webp",
+     "caption": "1366 eric doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-output.webp.webp",
+     "caption": "1366 eric output"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-ack26.webp.webp",
+     "caption": "1366 eric ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-continued-delivery.webp.webp",
+     "caption": "1366 eric continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-story-note-place.webp.webp",
+     "caption": "1366 eric story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-story-payoff-line.webp.webp",
+     "caption": "1366 eric story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-payoff.webp.webp",
+     "caption": "1366 eric payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-story-wake-control.webp.webp",
+     "caption": "1366 eric story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-14-1366-eric-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-14--1366-eric-interpretation-after-delivery.webp.webp",
+     "caption": "1366 eric interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Stage 17",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-17-390-carina-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-17--390-carina-before.webp.webp",
+     "caption": "390 carina before"
+    },
+    {
+     "id": "archive-codex-sender-stage-17-390-carina-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-17--390-carina-desk.webp.webp",
+     "caption": "390 carina desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-17-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-17--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-stage-17-390-carina-pair-0.8",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-17--390-carina-pair-0.8.webp.webp",
+     "caption": "390 carina pair 0.8"
+    },
+    {
+     "id": "archive-codex-sender-stage-17-390-carina-pair-1.2",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-17--390-carina-pair-1.2.webp.webp",
+     "caption": "390 carina pair 1.2"
+    },
+    {
+     "id": "archive-codex-sender-stage-17-390-carina-pair-1.6",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-17--390-carina-pair-1.6.webp.webp",
+     "caption": "390 carina pair 1.6"
+    },
+    {
+     "id": "archive-codex-sender-stage-17-390-carina-pair-2",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-17--390-carina-pair-2.webp.webp",
+     "caption": "390 carina pair 2"
+    },
+    {
+     "id": "archive-codex-sender-stage-17-390-carina-pair-2.4",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-17--390-carina-pair-2.4.webp.webp",
+     "caption": "390 carina pair 2.4"
+    }
+   ]
+  },
+  {
+   "title": "Stage 18",
+   "caption": "Direct staging diagnostic using real office actors, navigation and geometry; these are not story-dialogue acceptance frames. Superseded camera/contact attempts are retained.",
+   "images": [
+    {
+     "id": "archive-codex-sender-stage-18-390-carina-before",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-18--390-carina-before.webp.webp",
+     "caption": "390 carina before"
+    },
+    {
+     "id": "archive-codex-sender-stage-18-390-carina-desk",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-18--390-carina-desk.webp.webp",
+     "caption": "390 carina desk"
+    },
+    {
+     "id": "archive-codex-sender-stage-18-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-18--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-stage-18-390-carina-pair-2.2",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-18--390-carina-pair-2.2.webp.webp",
+     "caption": "390 carina pair 2.2"
+    },
+    {
+     "id": "archive-codex-sender-stage-18-390-carina-pair-2.4",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-18--390-carina-pair-2.4.webp.webp",
+     "caption": "390 carina pair 2.4"
+    },
+    {
+     "id": "archive-codex-sender-stage-18-390-carina-pair-2.6",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-18--390-carina-pair-2.6.webp.webp",
+     "caption": "390 carina pair 2.6"
+    },
+    {
+     "id": "archive-codex-sender-stage-18-390-carina-pair--2.6",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-stage-18--390-carina-pair--2.6.webp.webp",
+     "caption": "390 carina pair  2.6"
+    }
+   ]
+  },
+  {
+   "title": "Play 16",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-16-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "390 carina story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-story-door-point.webp.webp",
+     "caption": "390 carina story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-story-door-referent.webp.webp",
+     "caption": "390 carina story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-story-mori-remark.webp.webp",
+     "caption": "390 carina story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-story-note-place.webp.webp",
+     "caption": "390 carina story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-story-payoff-line.webp.webp",
+     "caption": "390 carina story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-story-wake-control.webp.webp",
+     "caption": "390 carina story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-16-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-16--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 17",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-17-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "390 carina story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-story-door-point.webp.webp",
+     "caption": "390 carina story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-story-door-referent.webp.webp",
+     "caption": "390 carina story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-story-mori-remark.webp.webp",
+     "caption": "390 carina story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-story-note-place.webp.webp",
+     "caption": "390 carina story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-story-payoff-line.webp.webp",
+     "caption": "390 carina story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-story-wake-control.webp.webp",
+     "caption": "390 carina story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-17-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-17--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 18",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-story-desk-keyboard.webp.webp",
+     "caption": "1366 eric story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-declined.webp.webp",
+     "caption": "1366 eric declined"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-story-door-point.webp.webp",
+     "caption": "1366 eric story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-story-door-referent.webp.webp",
+     "caption": "1366 eric story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-story-mori-remark.webp.webp",
+     "caption": "1366 eric story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-doorway.webp.webp",
+     "caption": "1366 eric doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-output.webp.webp",
+     "caption": "1366 eric output"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-ack26.webp.webp",
+     "caption": "1366 eric ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-continued-delivery.webp.webp",
+     "caption": "1366 eric continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-story-note-place.webp.webp",
+     "caption": "1366 eric story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-story-payoff-line.webp.webp",
+     "caption": "1366 eric story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-payoff.webp.webp",
+     "caption": "1366 eric payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-story-wake-control.webp.webp",
+     "caption": "1366 eric story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-18-1366-eric-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-18--1366-eric-interpretation-after-delivery.webp.webp",
+     "caption": "1366 eric interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 19",
+   "caption": "Native story route. Earlier attempts are retained, including rejected framing and failed diagnostic assertions; final accepted scene is above.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-19-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "390 carina story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-story-door-point.webp.webp",
+     "caption": "390 carina story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-story-door-referent.webp.webp",
+     "caption": "390 carina story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-story-mori-remark.webp.webp",
+     "caption": "390 carina story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-story-note-place.webp.webp",
+     "caption": "390 carina story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-story-payoff-line.webp.webp",
+     "caption": "390 carina story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-story-wake-control.webp.webp",
+     "caption": "390 carina story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-19-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-19--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 20",
+   "caption": "Native story route with a rejected diagnostic: a pointing target was incorrectly tested as physical hand contact. Original failure and captures are retained; the final probe checks raised-hand stability during the line.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-20-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "390 carina story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-story-door-point.webp.webp",
+     "caption": "390 carina story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-story-door-referent.webp.webp",
+     "caption": "390 carina story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-story-mori-remark.webp.webp",
+     "caption": "390 carina story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-story-note-place.webp.webp",
+     "caption": "390 carina story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-story-payoff-line.webp.webp",
+     "caption": "390 carina story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-story-wake-control.webp.webp",
+     "caption": "390 carina story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-20-390-carina-failed",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-20--390-carina-failed.webp.webp",
+     "caption": "390 carina failed"
+    }
+   ]
+  },
+  {
+   "title": "Play 21",
+   "caption": "Complete final passing native route, including all intermediate output checkpoints and physical captures.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-desk-keyboard.webp.webp",
+     "caption": "1366 eric story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-declined.webp.webp",
+     "caption": "1366 eric declined"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-door-point.webp.webp",
+     "caption": "1366 eric story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-door-referent.webp.webp",
+     "caption": "1366 eric story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-mori-remark.webp.webp",
+     "caption": "1366 eric story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-doorway.webp.webp",
+     "caption": "1366 eric doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-output.webp.webp",
+     "caption": "1366 eric output"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-ack26.webp.webp",
+     "caption": "1366 eric ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-continued-delivery.webp.webp",
+     "caption": "1366 eric continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-note-place.webp.webp",
+     "caption": "1366 eric story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-payoff-line.webp.webp",
+     "caption": "1366 eric story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-payoff.webp.webp",
+     "caption": "1366 eric payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-story-wake-control.webp.webp",
+     "caption": "1366 eric story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-21-1366-eric-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-21--1366-eric-interpretation-after-delivery.webp.webp",
+     "caption": "1366 eric interpretation after delivery"
+    }
+   ]
+  },
+  {
+   "title": "Play 22",
+   "caption": "Complete final passing native route, including all intermediate output checkpoints and physical captures.",
+   "images": [
+    {
+     "id": "archive-codex-sender-play-22-390-carina-story-desk-keyboard",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-desk-keyboard.webp.webp",
+     "caption": "390 carina story desk keyboard"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-declined",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-declined.webp.webp",
+     "caption": "390 carina declined"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-story-door-point",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-door-point.webp.webp",
+     "caption": "390 carina story door point"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-story-door-referent",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-door-referent.webp.webp",
+     "caption": "390 carina story door referent"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-story-mori-remark",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-mori-remark.webp.webp",
+     "caption": "390 carina story mori remark"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-doorway",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-doorway.webp.webp",
+     "caption": "390 carina doorway"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-output",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-output.webp",
+     "caption": "390 carina output"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-ack26",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-ack26.webp",
+     "caption": "390 carina ack26"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-continued-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-continued-delivery.webp",
+     "caption": "390 carina continued delivery"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-story-note-place",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-note-place.webp.webp",
+     "caption": "390 carina story note place"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-story-payoff-line",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-payoff-line.webp.webp",
+     "caption": "390 carina story payoff line"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-payoff",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-payoff.webp.webp",
+     "caption": "390 carina payoff"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-story-wake-control",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-story-wake-control.webp.webp",
+     "caption": "390 carina story wake control"
+    },
+    {
+     "id": "archive-codex-sender-play-22-390-carina-interpretation-after-delivery",
+     "image": "bible/shots/showcase/sender-investigation-20261007/codex-sender-play-22--390-carina-interpretation-after-delivery.webp",
+     "caption": "390 carina interpretation after delivery"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play the office; talk to Mio after the first work report",
+   "href": "game3d/?day=2&place=office"
+  },
+  {
+   "label": "Scene, persistence and validation notes",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/stories/investigations/sender.md"
+  },
+  {
+   "label": "Native geometry and fixed-monitor report, desktop",
+   "href": "showcase/sender-investigation-20261007/native-proof.json"
+  },
+  {
+   "label": "Native geometry and fixed-monitor report, phone",
+   "href": "showcase/sender-investigation-20261007/native-proof.json"
+  }
+ ],
+ "media": []
+}

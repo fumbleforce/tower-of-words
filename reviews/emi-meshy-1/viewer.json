@@ -1,0 +1,42 @@
+{
+ "title": "Emi, rounds 1 and 2 (emi-meshy-1)",
+ "blurb": "A real rigged 3D model, made the way Kuro round 3 was: Meshy smart topology (1,050 polygons, A-pose) from ChatGPT picture c1, textured in a second pass on a UV layout with her face as one piece, Meshy auto-rig at 1.1 m. Idle and walk are the game's. Beside her: the in-game Meshy Eric and Mio, and Kuro round 3. Drag to turn, wheel to zoom. Round 2 (emi-2): from picture c3, without the lanyard; the viewer shows Meshy's texture (the game has the jaw edges repainted).",
+ "attempts": {
+  "emi-1": "/art/parts/emi-meshy-1/meshy/emi-1-tex-rigged.glb",
+  "emi-2": "/art/parts/emi-meshy-1/meshy/emi-2-tex-rigged.glb"
+ },
+ "compare": {
+  "Eric, Mio and Kuro": [
+   {
+    "glb": "/game3d/assets/eric/walk.glb",
+    "tex": "/game3d/assets/eric/base.webp"
+   },
+   {
+    "glb": "/game3d/assets/mio/walk.glb",
+    "tex": "/game3d/assets/mio/base-clean.webp"
+   },
+   {
+    "glb": "/art/parts/kuro-meshy-orig-3/meshy/kuro-3b-tex-rigged.glb"
+   }
+  ],
+  "Eric and Mio (in game)": [
+   {
+    "glb": "/game3d/assets/eric/walk.glb",
+    "tex": "/game3d/assets/eric/base.webp"
+   },
+   {
+    "glb": "/game3d/assets/mio/walk.glb",
+    "tex": "/game3d/assets/mio/base-clean.webp"
+   }
+  ],
+  "Kuro round 3": [
+   {
+    "glb": "/art/parts/kuro-meshy-orig-3/meshy/kuro-3b-tex-rigged.glb"
+   }
+  ]
+ },
+ "refs": [
+  "/art/parts/emi-meshy-1/pics/c1.png",
+  "/art/parts/emi-meshy-1/pics/c3.png"
+ ]
+}

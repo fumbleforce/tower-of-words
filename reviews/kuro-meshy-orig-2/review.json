@@ -1,0 +1,77 @@
+{
+ "title": "Kuro again with your original 3D workflow, this time in ChatGPT's image model with your exact words",
+ "date": "2026-10-04",
+ "by": "Claude (kuro-meshy-orig-2 agent)",
+ "status": "decided",
+ "question": "The first sheets are ChatGPT pictures (your picture steps, word for word); the rest are renders of a real rigged 3D model, and the live 3D link lets you turn her and watch her idle and walk beside the in-game Eric and Mio. Does this Kuro fit next to them?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/parts/kuro-meshy-orig-2/sheets/step0-inputs.webp",
+   "caption": "ChatGPT pictures. Model: openai/gpt-5.4-image-2 on OpenRouter (GPT-5.4 with GPT Image 2, ChatGPT's current image model), one chat per take, sent as a conversation the way ChatGPT keeps it. Step 1 attaches these two, in this order, as you attached Eric's portrait with the Mio chibi: her approved portrait (game3d/assets/portraits/kuro-neutral.webp, on white) and your Mio chibi picture (tools/characters/ref/mio-chibi-34.png). No words added to any prompt, no settings beyond the defaults (1024x1024 out). About $0.25 a picture."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-2/sheets/step1.webp",
+   "caption": "Step 1, your words: \"make a 3d chibi anime character in the style of the attached image\". Three takes. All three are her: bun with hair sticks, blunt fringe, glasses, dark lips, black suit. The blazer came out black, not the portrait's dark teal. a1 went on (the biggest chibi head of the three)."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-2/sheets/step2.webp",
+   "caption": "Step 2, your words with \"female\" for \"male\": \"Simplify female character a LOT to match the detail level of the other chibi, with open eyes\". Five takes. b1 and b2 were made without seeing a1: OpenRouter accepts a picture on ChatGPT's own reply turn but doesn't pass it on to OpenAI (the prompt token count stayed the same as step 1). From b3 on, each step's message also attaches the take it follows (still the same words), and the count rose by the picture's size. b5 went on: arms down, her dark lips, closest to Mio's detail."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-2/sheets/step3.webp",
+   "caption": "Step 3: \"Simpler head model, no glasses\", nothing more. Three takes, after a1 and b5. The glasses are gone in all three; the hair sticks stay (the prompt doesn't name them). c3 went on: arms down, straight fringe, head and body facing the same way."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-2/sheets/angle.webp",
+   "caption": "The angle prompt, your words exactly (\"orintation\" included): \"she should be looking to the left instead, same orientation as her body. Keep all features thick and sturdy, no fine strands or thin spikes. No text, no props, no extra subjects, no photorealism. she is looking the same orintation as her body. Flat matte texture of model\". Three takes, after a1, b5, c3; your angled Mio on the right for comparison. d1 and d2 turn toward image right (her left), d3 toward image left like your Mio, but d3 put the glasses back. d2 went to Meshy as it is: head and body turned together, no glasses, and the hair sticks dropped."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-2/sheets/shape-previews.webp",
+   "caption": "3D model from here on. Meshy image-to-3D from d2: smart topology (meshy-t2), 1,050 polygons, A-pose, no texture. 5 credits. Meshy's own previews: front, left, right, back. The shape looked right (big head, the bun, the side locks), so it went on to the texture pass."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-2/sheets/shape.webp",
+   "caption": "The untextured shape in Blender (same camera and light as round 1): front, her left three-quarter (image right side turned to us), her left side, back, her right three-quarter, face. 1,092 triangles; the in-game Eric has 1,120 and Mio 1,127."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-2/sheets/tex.webp",
+   "caption": "Texture in a second pass: Meshy retexture styled from d2, on the shape's own UVs, lighting removed, no PBR. 10 credits. Same views. The suit and face read like d2; the face close-up shows a grey smudge in her left eye (image right)."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-2/sheets/compare.webp.webp",
+   "caption": "Kuro beside the in-game Meshy Eric and Mio (round 1's renders of them, same script and camera), front and her right three-quarter. Mio renders smaller here because her file's bounding box is bigger (as in round 1); in the live viewer all three stand at the same height."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-2/sheets/viewer.webp.webp",
+   "caption": "Meshy auto-rig at height 1.1 m (Eric's setting, lowered for the big head). 5 credits. Stills from the live viewer: rest, idle, walk, walk from the side. The idle and walk are the game's (Mio's approved idle and walk, carried over by bone name), played on Kuro and the in-game Eric and Mio at once. She is not in the game."
+  }
+ ],
+ "options": [
+  {
+   "id": "kuro-2",
+   "label": "kuro-2",
+   "image": "art/parts/kuro-meshy-orig-2/renders/tex/r45.png.webp",
+   "images": [
+    "art/parts/kuro-meshy-orig-2/renders/tex/front.png.webp",
+    "art/parts/kuro-meshy-orig-2/renders/tex/back.png.webp",
+    "art/parts/kuro-meshy-orig-2/renders/tex/face.png.webp",
+    "art/parts/kuro-meshy-orig-2/pics/d2.png.webp"
+   ],
+   "note": "The rigged model from d2 (ChatGPT picture path a1, b5, c3, d2): smart topology, 1,050 polygons, textured in a second pass, auto-rigged at 1.1 m. 20 Meshy credits; the 14 ChatGPT pictures cost $3.43. No glasses, no hair sticks."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: Kuro beside the in-game Eric and Mio (turn, zoom, idle, walk)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/tools/characters/parts/viewer.html"
+  },
+  {
+   "label": "Last round (local FLUX, paraphrased steps)",
+   "href": "#review/kuro-meshy-orig-1"
+  }
+ ],
+ "decision": "it's a good attempt but she came out a bit fucked still. Her head is a little too big compared to body, when comparing to eric and mio. The reference image are quite good and look good besides that, but the texturing was botched and her eyes came out terrible",
+ "decided_at": "2026-10-04T22:03:25+0200",
+ "issue": 221
+}

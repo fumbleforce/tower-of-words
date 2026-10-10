@@ -1,0 +1,175 @@
+// The 3D cast from the Meshy workflow (tools/characters/, assets/characters/<id>/), wrapped so the scenes can treat
+// them like the code-built people of cast.js. The Meshy chibis (chibi.js) come in here when that look is on: their
+// files load once, and every place that builds the person gets its own copy.
+import * as THREE from 'three';
+import { HIP } from './train/people.js';
+import { SEAT_Y } from './train/car.js';
+import { clone } from '../vendor/utils/SkeletonUtils.js';
+import { meshyFiles, meshyFrom } from './avatar.js';
+import { chibiFiles, chibiFrom, CHIBI_CAST } from './chibi.js';
+
+// Standing heights next to Mio (1.12) and Eric (1.2). While a model waits for Jørgen's approval it only loads with
+// ?cast3d=<id>[,<id>]; approved ids go in CAST3D_ON.
+export const CAST3D = {
+  mori: 1.09,
+  kenji: 1.12,
+  guard: 1.09,
+  kuroda: 1.09,
+  kuro: 1.12,
+  aoi: 1.09,
+  emi: 1.09,
+  rei: 1.12,
+};
+// Kuro: Review kuro-meshy-orig-3 (Jørgen, 2026-10-04: "Yes, very good"); Aoi and Emi: Reviews aoi-meshy-1 and
+// emi-meshy-1, round 2; the staff from Reviews <id>-meshy-1, made the same way (Jørgen, 2026-10-05: "can you also
+// kick off the remaining staff and background characters in the new style"); Kenji is round 2 (kenji-2), after
+// Jørgen's "he is too slim, doesnt look like himself" on kenji-1; Rei is rei-1 on a new rig of ours (Jørgen: "model good,
+// rig terrible"; art/candidates/rei-rig-1)
+const CAST3D_ON = ['kuro', 'aoi', 'emi', 'mori', 'guard', 'kuroda', 'kenji', 'rei'];
+const Q3 = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
+// only in a page: the unit tests import the cast in Node, where everyone stays code-built (as in chibi.js)
+const PAGE = typeof addEventListener === 'function';
+const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter(
+  (id) => PAGE && CAST3D[id] && !CHIBI_CAST.includes(id),
+);
+// The Meshy cast has no phone pose or library gestures: their scenes use the drawn ones (rig-gestures.js)
+const NO_EXTRAS = ['kuro', 'aoi', 'emi', 'mori', 'kenji', 'guard', 'kuroda', 'rei'];
+// Hand bones scaled at load (Jørgen on aoi-1: "her hands are larger than the others"; at 0.75 hers are between Kuro's
+// and Mio's, art/candidates/aoi-emi-meshy-2/hand_area.py); the rest is as Meshy made her
+// The guard's came out larger still (0.139 of his height, Eric's 0.107; aoi-emi-meshy-2/hands.py): 0.75 brings them to Eric's
+const HANDS = { aoi: 0.75, guard: 0.75 };
+const PRE3 = {};
+const warn = (id) => (e) => {
+  console.warn('3D cast', id, e);
+  return null;
+};
+await Promise.all([
+  ...want3.map(
+    async (id) =>
+      (PRE3[id] = await meshyFiles(id, {
+        extra: !NO_EXTRAS.includes(id),
+      }).catch(warn(id))),
+  ),
+  ...CHIBI_CAST.map(async (id) => (PRE3[id] = await chibiFiles(id).catch(warn(id)))),
+]);
+// the ids cast.js asks for here first
+export const CAST3D_IDS = [...new Set([...Object.keys(CAST3D), ...CHIBI_CAST])];
+// Wrap a loaded Meshy character so the scenes can treat it like a chibi rig: the pose helpers (sit, walkPose, arms...)
+// switch its clips instead, the chibi parts they write to are harmless stand-ins (the head follows the real head bone,
+// for labels and look-at), `seated` picks sit or idle, and it updates itself each frame it's drawn.
+export function meshyPerson(m) {
+  const O = () => new THREE.Object3D();
+  m.legs = [O(), O()];
+  m.knees = [O(), O()];
+  m.arms = [O(), O()];
+  m.torso = O();
+  m.hips = O();
+  m.hips.position.y = HIP;
+  let hb = null;
+  m.model.traverse((o) => {
+    if (!hb && o.isBone && /^head$/i.test(o.name)) hb = o;
+  });
+  m.head = O();
+  (hb || m.root).add(m.head);
+  // the lap when seated, for things a place puts there (Rei's laptop on the train); the stand-ins above are not drawn
+  if (m.sitHip) {
+    m.lap = O();
+    m.lap.position.set(0, m.sitHip.y + 0.03, 0);
+    m.root.add(m.lap);
+  }
+  m.headK = O();
+  let last = null;
+  const bones = {};
+  m.model.traverse((o) => o.isBone && /^(Head|Spine)$/.test(o.name) && (bones[o.name] ??= o));
+  // m.lean = { head: [forward, side], spine: forward } (radians, about the body's own axes) bends the head and upper
+  // back over whatever the clip did this frame: Hamada asleep on the train (places/train.js); null leaves the clip
+  m.lean = null;
+  const sks = [];
+  m.model.traverse((o) => o.isSkinnedMesh && sks.push(o));
+  // on the game's clock, which moves them (a sped-up or paused game, a slow frame): on the wall clock their steps
+  // fell behind or ran ahead of their feet; the wall clock only where there is no game (a viewer)
+  // (on every mesh: a chibi draws only one of its tiers, chibi.js; the first drawn in a frame steps it)
+  const step = () => {
+    const G = globalThis.__game,
+      now = G ? G.t : performance.now() / 1000;
+    if (last !== null && now >= last && now - last < 0.004) return;
+    const dt = last !== null && now > last ? Math.min(G ? 0.5 : 0.1, now - last) : 0;
+    last = now;
+    if (m.seated && m.state !== 'sit') m.sitHere();
+    else if (m.seated === false && m.state === 'sit') {
+      m.setState('idle');
+      m.root.position.y = 0;
+    }
+    m.update(dt);
+    if (m.lean) leanOver(m, bones);
+  };
+  for (const sk of sks) sk.onBeforeRender = step;
+  m.stepNow = step; // a gesture tween takes the frame's step first (rig-gestures.js boneTween)
+  // seat the hips on the chair under the root (train and office seats: SEAT_Y), keeping x, z and facing
+  m.sitHere = () => {
+    m.sitAt(m.root.position.x, SEAT_Y, m.root.position.z, m.root.rotation.y);
+  };
+  return m;
+}
+// turn a bone by `a` radians about one of the body's axes ('x' side, 'z' forward), as rig-gestures.js turn()
+const _pw = new THREE.Quaternion(),
+  _r = new THREE.Quaternion(),
+  _mq = new THREE.Quaternion(),
+  _ax = new THREE.Vector3();
+function bend(root, b, axis, a) {
+  if (!b || !a) return;
+  root.getWorldQuaternion(_mq);
+  _ax.set(axis === 'x' ? 1 : 0, 0, axis === 'z' ? 1 : 0).applyQuaternion(_mq);
+  b.parent.updateWorldMatrix(true, false);
+  b.parent.getWorldQuaternion(_pw);
+  _r.setFromAxisAngle(_ax, a);
+  b.quaternion.premultiply(_pw.clone().invert().multiply(_r).multiply(_pw));
+}
+function leanOver(m, bones) {
+  const { head = [0, 0], spine = 0 } = m.lean;
+  bend(m.root, bones.Spine, 'x', spine);
+  bend(m.root, bones.Head, 'x', head[0]);
+  bend(m.root, bones.Head, 'z', head[1]);
+}
+export const meshy3 = (id) => {
+  const p = PRE3[id];
+  if (!p) return null;
+  if (CHIBI_CAST.includes(id)) return meshyPerson(chibiFrom(p));
+  // a copy for each place that builds the person (Aoi is in the lobby and the office; each scales its own), its height
+  // measured once on the loaded original (a fresh clone's skinned bounds come out a hundredth of the size, chibi.js)
+  const [walk, ...rest] = p;
+  p.size ??= new THREE.Box3().setFromObject(walk.scene).getSize(new THREE.Vector3()).y;
+  const m = meshyFrom(id, [{ ...walk, scene: clone(walk.scene) }, ...rest], {
+    height: CAST3D[id],
+    size: p.size,
+  });
+  const hands = [];
+  if (HANDS[id]) m.model.traverse((o) => o.isBone && /^(Left|Right)Hand$/.test(o.name) && hands.push(o));
+  if (hands.length) {
+    const update = m.update; // after each clip step, which would set them back
+    m.update = (...a) => {
+      update(...a);
+      for (const h of hands) h.scale.setScalar(HANDS[id]);
+    };
+  }
+  return meshyPerson(m);
+};
+
+// A Meshy model (if it is on) in a code-built passenger's seat, facing the same way, with an optional act (train.js);
+// otherwise the passenger as built
+export function inSeat(id, r, act) {
+  const m = meshy3(id);
+  if (!m) return r;
+  m.root.position.set(r.root.position.x, 0, r.root.position.z);
+  m.root.rotation.copy(r.root.rotation);
+  m.seated = true;
+  if (act) m.act = act;
+  return m;
+}
+// asleep in a seat (Hamada on the train): the head drops slowly and catches itself every ~7 s, as the code-built
+// sleeper's act; the place clears it with the act when he wakes
+export function dozing(t, r) {
+  const c = (t + 2.3) % 7.2,
+    drop = c < 6.5 ? c / 6.5 : 1 - (c - 6.5) / 0.7;
+  r.lean = { head: [0.35 + drop * 0.25 - (c > 6.5 && c < 6.8 ? 0.08 : 0), 0.3 + drop * 0.08], spine: 0.12 };
+}

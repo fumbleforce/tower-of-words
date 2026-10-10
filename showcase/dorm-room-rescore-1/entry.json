@@ -1,0 +1,93 @@
+{
+ "title": "Eric's room: the neighbours' flats, the bathroom window, the genkan",
+ "date": "2026-09-30",
+ "by": "claude-agent:dorm-room-rescore",
+ "caption": "Fixes from the re-score (7/10 in notes/environment-critique.md). The dark blocks either side are now the neighbours' flats, cut open at the same height and kept a shade darker than his: on the right someone is home (kotatsu, TV on, washing on a rack), on the left they're out. His window now shows the neighbour's lit bathroom window across the gap, with bottles and a shower head behind the frosted glass. The kitchen hood is fixed to the wall, the genkan is paler and has its own light, and on the way in he comes along the corridor from the side so the genkan and his shoes show. Evening, desktop 1366x860 and phone 390x844. Issue #75.",
+ "sections": [
+  {
+   "title": "The room",
+   "caption": "Before (the critic's shot): two thirds of the desktop frame is flat navy. After: a row of flats, his the brightest.",
+   "images": [
+    {
+     "id": "room-desk-before",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/room-desk-before.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "room-desk-after",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/room-desk-after.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "room-phone-before",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/room-phone-before.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "room-phone-after",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/room-phone-after.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Coming in",
+   "caption": "The first frame of the trip in. Before: Eric on the doorstep, his head over the genkan. After: he comes along the corridor from the right, past a neighbour's sandals, and the open door, the step and his shoes are clear.",
+   "images": [
+    {
+     "id": "arrive-desk-before",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/arrive-desk-before.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "arrive-desk-after",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/arrive-desk-after.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "arrive-phone-before",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/arrive-phone-before.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "arrive-phone-after",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/arrive-phone-after.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Close-ups",
+   "caption": "Cropped from the desktop frames at 3x and 2x. The window: before, a small orange square; after, the lit bathroom window opposite, and the look marker moved up onto the air conditioner so it doesn't cover it. The kitchen and genkan: the hood now hangs on a steel splashback with its duct boxed into the wall, and the genkan has pale tiles under its own light.",
+   "images": [
+    {
+     "id": "window-before",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/window-before.webp",
+     "caption": "Window, before"
+    },
+    {
+     "id": "window-after",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/window-after.webp",
+     "caption": "Window, after"
+    },
+    {
+     "id": "kitchen-genkan-before",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/kitchen-genkan-before.webp",
+     "caption": "Kitchen and genkan, before"
+    },
+    {
+     "id": "kitchen-genkan-after",
+     "image": "bible/shots/showcase/dorm-room-rescore-1/kitchen-genkan-after.webp",
+     "caption": "Kitchen and genkan, after"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it (loads the room directly)",
+   "href": "game3d/?place=dorms"
+  }
+ ],
+ "media": []
+}

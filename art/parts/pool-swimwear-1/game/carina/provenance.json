@@ -1,0 +1,12 @@
+{
+  "candidate": "carina",
+  "native_clips": {
+    "walk": "38bb1b0b4b77a90dabfce2745af5ef213f1a5419b832e12f492cb9283bcea978",
+    "run": "a366ba49f872eed6b136ecda1e8841c1d56c3f434b3da14338a384c926a35145"
+  },
+  "texture_pixels_unchanged": true,
+  "texture_size": [
+    2048,
+    2048
+  ]
+}

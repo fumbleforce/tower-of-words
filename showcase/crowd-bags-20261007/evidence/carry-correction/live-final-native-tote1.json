@@ -1,0 +1,517 @@
+{
+  "mode": "normal",
+  "fixture": "population",
+  "focusKind": "tote",
+  "sourceDir": "/home/jorgen/repo/japanese/.claude/worktrees/codex-briefcase-carry/game3d/js/crowd/",
+  "observerSha256": "cb9699653e26d4e7220ddf58ccbce87a622c3b26f05f7257dac0565acf7c814d",
+  "sourceSha256": {
+    "looks": "35f518fc9488f91182d87707a60aa4cc91978424c9825c6298eadcc3d4196c25",
+    "motion": "25dd60c281a027b8b21f9c72e1768a33ff3a75dcf685a11ec1b85539a7787d5a",
+    "stops": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75",
+    "bag-pose": "d4bb7a3f67acc397d3562ff63f766f94cb23a246dec28c48041632ad5bf43ed1"
+  },
+  "errors": [],
+  "blocked": [],
+  "frames": [
+    {
+      "file": "00-live.png",
+      "focus": {
+        "id": 3,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          -4.8253840908751915,
+          0,
+          -4.480956890898309
+        ]
+      }
+    },
+    {
+      "file": "01-live.png",
+      "focus": {
+        "id": 3,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          -2.9296525253848054,
+          0,
+          -4.713646715601984
+        ]
+      }
+    },
+    {
+      "file": "02-live.png",
+      "focus": {
+        "id": 3,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          -1.0750593158655426,
+          0,
+          -4.9412870506976505
+        ]
+      }
+    },
+    {
+      "file": "03-live.png",
+      "focus": {
+        "id": 3,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          0.7788018945265884,
+          0,
+          -5.168837537234746
+        ]
+      }
+    },
+    {
+      "file": "04-live.png",
+      "focus": {
+        "id": 3,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          2.289507254786039,
+          0,
+          -4.357040260822469
+        ]
+      }
+    },
+    {
+      "file": "05-live.png",
+      "focus": {
+        "id": 3,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          3.6905186349735906,
+          0,
+          -3.1534880753173593
+        ]
+      }
+    },
+    {
+      "file": "06-live.png",
+      "focus": {
+        "id": 3,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          5.089228061213588,
+          0,
+          -1.915002826241852
+        ]
+      }
+    },
+    {
+      "file": "07-live.png",
+      "focus": {
+        "id": 3,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "state": "walk",
+        "seated": false,
+        "position": [
+          6.598975773679768,
+          0,
+          -1.0134111036331355
+        ]
+      }
+    }
+  ],
+  "setup": {
+    "routeFixture": null,
+    "paused": false,
+    "period": "early",
+    "periodFixture": "actual early-period population configuration",
+    "characterScale": 0.85,
+    "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+    "actors": [
+      {
+        "id": 1,
+        "kind": "office",
+        "variant": 0,
+        "approved": "a",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1327999999999998,
+          1.1327999999999998,
+          1.1327999999999998
+        ],
+        "state": "still",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -4.897301666892392,
+          0,
+          8.29751603930744
+        ]
+      },
+      {
+        "id": 2,
+        "kind": "office",
+        "variant": 1,
+        "approved": "b",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.18,
+          1.18,
+          1.18
+        ],
+        "state": "still",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -4.502698333107598,
+          0,
+          7.662483960692567
+        ]
+      },
+      {
+        "id": 3,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2272,
+          1.2272,
+          1.2272
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -4.850711263710682,
+          0,
+          -4.4778481303994
+        ]
+      },
+      {
+        "id": 5,
+        "kind": "office",
+        "variant": 0,
+        "approved": "a",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1918,
+          1.1918,
+          1.1918
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -12.906294715825203,
+          0,
+          -0.7774193812483449
+        ]
+      },
+      {
+        "id": 6,
+        "kind": "office",
+        "variant": 1,
+        "approved": "b",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2389999999999999,
+          1.2389999999999999,
+          1.2389999999999999
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          0.5674521870294464,
+          0,
+          5.4300041707318565
+        ]
+      },
+      {
+        "id": 7,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1563999999999999,
+          1.1563999999999999,
+          1.1563999999999999
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          17.51891325735022,
+          0,
+          -0.13713775589189753
+        ]
+      },
+      {
+        "id": 9,
+        "kind": "office",
+        "variant": 0,
+        "approved": "a",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.121,
+          1.121,
+          1.121
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          8.721393295923155,
+          0,
+          -0.49360163095952325
+        ]
+      },
+      {
+        "id": 10,
+        "kind": "office",
+        "variant": 1,
+        "approved": "b",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1682,
+          1.1682,
+          1.1682
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -2.959887813920186,
+          0,
+          -5.688864711774267
+        ]
+      },
+      {
+        "id": 11,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2154,
+          1.2154,
+          1.2154
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -2.407610643277199,
+          0,
+          -6.414623563326031
+        ]
+      },
+      {
+        "id": 13,
+        "kind": "office",
+        "variant": 0,
+        "approved": "a",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.18,
+          1.18,
+          1.18
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          6.375418644996577,
+          0,
+          1.4149784545505817
+        ]
+      },
+      {
+        "id": 14,
+        "kind": "office",
+        "variant": 1,
+        "approved": "b",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.2272,
+          1.2272,
+          1.2272
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -5.384440816627719,
+          0,
+          -3.7543995289890346
+        ]
+      },
+      {
+        "id": 15,
+        "kind": "office",
+        "variant": 2,
+        "approved": "a",
+        "bridge": false,
+        "meshy": true,
+        "scale": [
+          1.1445999999999998,
+          1.1445999999999998,
+          1.1445999999999998
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          15.959334439844362,
+          0,
+          -0.6541875409247517
+        ]
+      },
+      {
+        "id": 17,
+        "kind": "casual",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": false,
+        "scale": [
+          1.2111224999999999,
+          1.2111224999999999,
+          1.2111224999999999
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          17.772867075577764,
+          0,
+          2.6100542275257035
+        ]
+      },
+      {
+        "id": 19,
+        "kind": "casual",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": false,
+        "scale": [
+          1.1765189999999999,
+          1.1765189999999999,
+          1.1765189999999999
+        ],
+        "state": "off",
+        "visible": false,
+        "seated": false,
+        "position": [
+          14.921594184149921,
+          0,
+          -0.37276855943377957
+        ]
+      },
+      {
+        "id": 21,
+        "kind": "casual",
+        "variant": 0,
+        "approved": null,
+        "bridge": false,
+        "meshy": false,
+        "scale": [
+          1.1419154999999999,
+          1.1419154999999999,
+          1.1419154999999999
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          -4.057129640851487,
+          0,
+          -8.142186787924855
+        ]
+      },
+      {
+        "id": 23,
+        "kind": "casual",
+        "variant": 2,
+        "approved": null,
+        "bridge": false,
+        "meshy": false,
+        "scale": [
+          1.1073119999999996,
+          1.1073119999999996,
+          1.1073119999999996
+        ],
+        "state": "walk",
+        "visible": true,
+        "seated": false,
+        "position": [
+          16.990656809823513,
+          0,
+          -0.8037198880925438
+        ]
+      }
+    ]
+  },
+  "live": {
+    "firstTime": 0.01730000001192093,
+    "lastTime": 10.17860000002384,
+    "walkingRows": 5681
+  },
+  "rawReport": {
+    "path": "/home/jorgen/repo/japanese/game3d/shots/crowd-bags/live-final-native-tote1/report.json",
+    "sha256": "ec09bbede7b0b1d369bc64f61a5e57a25315a68460cb60b6baf1ccb13d161b76",
+    "bytes": 31141713
+  },
+  "measurements": {
+    "rows": 5681,
+    "clearanceSamples": 210,
+    "intersectingSamples": 0,
+    "maximumDepth": 0,
+    "maximumPaletteError": 4.7356698118505847e-07,
+    "maximumSameFrameGripGap": 4.619123274512188e-07
+  }
+}

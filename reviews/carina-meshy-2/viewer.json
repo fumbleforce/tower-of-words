@@ -1,0 +1,115 @@
+{
+ "title": "Carina: round 2",
+ "blurb": "The selected grey trousers are installed on Carina’s corrected native rig with the current game posture and animations. Earlier denim, grey and fitted-rig candidates remain available for comparison.",
+ "rigs": {
+  "denim": {
+   "id": "carina",
+   "label": "Earlier fitted rig, denim",
+   "dir": "art/parts/carina-meshy-1/r2/viewer/denim/",
+   "idle": "art/parts/carina-meshy-1/r2/viewer/denim/idle.json",
+   "height": 1.12
+  },
+  "grey": {
+   "id": "carina",
+   "label": "carina-2-r2-grey",
+   "dir": "art/parts/carina-meshy-1/r2/viewer/grey/",
+   "idle": "art/parts/carina-meshy-1/r2/viewer/grey/idle.json",
+   "height": 1.12
+  },
+  "before": {
+   "id": "carina",
+   "label": "carina-2, before",
+   "dir": "art/parts/carina-meshy-1/r2/viewer/before/",
+   "idle": "art/parts/carina-meshy-1/r2/viewer/before/idle.json",
+   "height": 1.12
+  },
+  "meshyrig": {
+   "id": "carina",
+   "label": "Earlier denim, native rig",
+   "dir": "art/parts/carina-meshy-1/r2/viewer/meshyrig/",
+   "idle": "art/parts/carina-meshy-1/r2/viewer/meshyrig/idle.json",
+   "height": 1.12
+  },
+  "installed": {
+   "id": "carina",
+   "label": "Selected grey, current game rig",
+   "dir": "game3d/assets/characters/carina/",
+   "idle": "game3d/assets/characters/relaxed-idle-carina.json",
+   "height": 1.12
+  }
+ },
+ "scenes": {
+  "installed": {
+   "label": "Installed grey",
+   "items": [
+    {
+     "rig": "installed"
+    }
+   ]
+  },
+  "meshyrig": {
+   "label": "Earlier denim, native rig",
+   "items": [
+    {
+     "rig": "meshyrig"
+    }
+   ]
+  },
+  "compare": {
+   "label": "Before, denim, grey",
+   "items": [
+    {
+     "rig": "before"
+    },
+    {
+     "rig": "denim"
+    },
+    {
+     "rig": "grey"
+    }
+   ]
+  },
+  "denim": {
+   "label": "Earlier fitted rig",
+   "items": [
+    {
+     "rig": "denim"
+    }
+   ]
+  },
+  "grey": {
+   "label": "carina-2-r2-grey",
+   "items": [
+    {
+     "rig": "grey"
+    }
+   ]
+  },
+  "before": {
+   "label": "carina-2, before",
+   "items": [
+    {
+     "rig": "before"
+    }
+   ]
+  },
+  "rigs": {
+   "label": "Rig comparison",
+   "items": [
+    {
+     "rig": "denim"
+    },
+    {
+     "rig": "meshyrig"
+    }
+   ]
+  }
+ },
+ "closeups": [
+  "installed",
+  "denim",
+  "grey",
+  "before",
+  "meshyrig"
+ ]
+}

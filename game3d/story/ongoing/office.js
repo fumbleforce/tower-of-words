@@ -1,0 +1,60 @@
+import { nodes as mioLunchNodes } from '../milestones/mio.js';
+import source from '../day5/office.js';
+import { interactions, place } from './shared.js';
+const familiar = interactions(source, [
+  'event:kotodama_first', 'event:kotodama_cancel', 'event:kotodama_exit',
+  'talk:vending', 'talk:copier', 'talk:mori', 'talk:emi',
+]);
+export default place('office', {
+  on: {
+    ...familiar.on,
+    'talk:my_desk': 'ongoing_desk', 'talk:my_chair': 'ongoing_desk',
+    'talk:kenji': 'ongoing_kenji', 'talk:mio': [{ node: 'ms_mio_help', if: 'mio_lunch_offer == 3' }, { node: 'ms_mio_lunch', if: 'mio_lunch_offer == 2' }, 'ongoing_mio'],
+  },
+  nodes: {
+    ...mioLunchNodes,
+    ...familiar.nodes,
+    ongoing_desk: [
+      { do: 'sitDown' }, { do: 'tickets' },
+      { do: 'stand', who: 'eric' }, { do: 'save' },
+    ],
+    ongoing_kenji: [
+      { call: 'd5_kenji_name' },
+      { if: 'period_evening && ongoing_team_day', then: [{ go: 'd5_drinks' }] },
+      { say: 'kenji', emo: 'warm', overheard: true, text: '金曜日、ここで飲み会です。' },
+      { say: 'kenji', emo: 'warm', text: 'Friday... drink. {mc.name}-san, come?' },
+      { do: 'gesture', who: 'kenji', kind: 'point', to: 'vending' },
+      { if: 'kenji_arcade_talked', then: [
+        { say: 'kenji', emo: 'warm', text: 'After... game centre? Maybe.' },
+        { say: 'kenji', emo: 'polite', overheard: true, text: 'これ、先に終わらせます。' },
+      ] },
+    ],
+    ongoing_mio: [
+      { if: 'period_evening && ongoing_team_day', then: [{ go: 'd5_drinks' }] },
+      { say: 'mio', emo: 'casual', text: 'I’m almost done with this. If it’s the printer, Kenji is right there, so...' },
+      { choice: [
+        { text: 'Ask about the open requests.', go: 'ongoing_mio_requests' },
+        { text: 'Ask where she goes for lunch.', go: 'ongoing_mio_lunch' },
+        { text: 'Let her finish.', go: 'ongoing_mio_leave' },
+      ] },
+    ],
+    ongoing_mio_requests: [
+      { say: 'mio', emo: 'casual', text: 'Anything you haven’t signed off stays on the list. If somebody’s not there, just go another time. Some of mine are from March.' },
+      { do: 'tickets' }, { go: 'ongoing_mio_leave' },
+    ],
+    ongoing_mio_lunch: [
+      { say: 'mio', emo: 'warm', text: 'There’s a bench by the water, past the dorms. Usually nobody needs a printer fixed out there.' },
+      { say: 'eric', emo: 'warm', text: 'I’ll leave my requests here, then.' },
+      { say: 'mio', emo: 'amused', text: 'Yeah, do that. Your phone also.' },
+      { do: 'remember', who: 'mio', id: 'coast_lunch', text: 'Told you where she likes to sit for lunch.' },
+      { go: 'ongoing_mio_leave' },
+    ],
+    ongoing_mio_leave: [{ do: 'cam', back: true }, { do: 'save' }],
+    d5_drinks: [
+      { if: '!ongoing_team_day || !period_evening', then: [
+        { say: 'eric', emo: 'warm', text: 'They get together here on Friday after work.' }, { end: true },
+      ] },
+      ...familiar.nodes.d5_drinks.slice(1),
+    ],
+  },
+});

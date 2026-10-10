@@ -1,0 +1,12 @@
+{
+  "candidate": "emi",
+  "native_clips": {
+    "walk": "b0fabda1de84bba8793827e9da1f3d93a4e8c6bd0cf4eb647ad1be993f8ad549",
+    "run": "dcbfd0a24ea2e29d3a83e81cf41f2563771e0b6fe2cea6edf8e780cb075535c0"
+  },
+  "texture_pixels_unchanged": true,
+  "texture_size": [
+    2048,
+    2048
+  ]
+}

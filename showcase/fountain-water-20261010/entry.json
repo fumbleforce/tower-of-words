@@ -1,0 +1,129 @@
+{
+ "title": "Plaza fountain: the waterfall is back",
+ "date": "2026-10-10",
+ "by": "claude-agent:fountain-water",
+ "caption": "The separate jets are gone. Each bowl pours one even curtain over its lip into the water below, like the fountain before the anime look, now in the anime look's turquoise and white streaks.",
+ "result": [
+  "fix-zoom",
+  "fix-close",
+  "fix-side",
+  "fix-phone"
+ ],
+ "sections": [
+  {
+   "title": "Now",
+   "caption": "The anime look with the curtains back. Morning, desktop and phone.",
+   "images": [
+    {
+     "id": "fix-zoom",
+     "image": "bible/shots/showcase/fountain-water-20261010/fix-zoom.webp",
+     "caption": "Close-up, desktop"
+    },
+    {
+     "id": "fix-close",
+     "image": "bible/shots/showcase/fountain-water-20261010/fix-desktop-fountain-close.webp.webp",
+     "caption": "Standing at the rim, desktop"
+    },
+    {
+     "id": "fix-side",
+     "image": "bible/shots/showcase/fountain-water-20261010/fix-desktop-fountain-side.webp.webp",
+     "caption": "From the side, eye level, desktop"
+    },
+    {
+     "id": "fix-far",
+     "image": "bible/shots/showcase/fountain-water-20261010/fix-desktop-fountain.webp.webp",
+     "caption": "Walking up, desktop"
+    },
+    {
+     "id": "fix-overview",
+     "image": "bible/shots/showcase/fountain-water-20261010/fix-desktop-overview.webp.webp",
+     "caption": "Overview, desktop"
+    },
+    {
+     "id": "fix-phone",
+     "image": "bible/shots/showcase/fountain-water-20261010/fix-phone-overview.webp",
+     "caption": "Phone"
+    }
+   ]
+  },
+  {
+   "title": "Before the anime look",
+   "caption": "The fountain's own curtains, which these follow. Same views.",
+   "images": [
+    {
+     "id": "before-zoom",
+     "image": "bible/shots/showcase/fountain-water-20261010/before-zoom.webp",
+     "caption": "Close-up, desktop"
+    },
+    {
+     "id": "before-close",
+     "image": "bible/shots/showcase/fountain-water-20261010/before-desktop-fountain-close.webp.webp",
+     "caption": "Standing at the rim, desktop"
+    },
+    {
+     "id": "before-side",
+     "image": "bible/shots/showcase/fountain-water-20261010/before-desktop-fountain-side.webp.webp",
+     "caption": "From the side, desktop"
+    },
+    {
+     "id": "before-far",
+     "image": "bible/shots/showcase/fountain-water-20261010/before-desktop-fountain.webp.webp",
+     "caption": "Walking up, desktop"
+    },
+    {
+     "id": "before-overview",
+     "image": "bible/shots/showcase/fountain-water-20261010/before-desktop-overview.webp.webp",
+     "caption": "Overview, desktop"
+    },
+    {
+     "id": "before-phone",
+     "image": "bible/shots/showcase/fountain-water-20261010/before-phone-overview.webp",
+     "caption": "Phone"
+    }
+   ]
+  },
+  {
+   "title": "The separate jets this replaces",
+   "caption": "Main until now: one arc per jet, starting in the air off the lip.",
+   "images": [
+    {
+     "id": "broken-zoom",
+     "image": "bible/shots/showcase/fountain-water-20261010/broken-zoom.webp",
+     "caption": "Close-up, desktop"
+    },
+    {
+     "id": "broken-close",
+     "image": "bible/shots/showcase/fountain-water-20261010/broken-desktop-fountain-close.webp.webp",
+     "caption": "Standing at the rim, desktop"
+    },
+    {
+     "id": "broken-side",
+     "image": "bible/shots/showcase/fountain-water-20261010/broken-desktop-fountain-side.webp.webp",
+     "caption": "From the side, desktop"
+    },
+    {
+     "id": "broken-far",
+     "image": "bible/shots/showcase/fountain-water-20261010/broken-desktop-fountain.webp.webp",
+     "caption": "Walking up, desktop"
+    },
+    {
+     "id": "broken-overview",
+     "image": "bible/shots/showcase/fountain-water-20261010/broken-desktop-overview.webp.webp",
+     "caption": "Overview, desktop"
+    },
+    {
+     "id": "broken-phone",
+     "image": "bible/shots/showcase/fountain-water-20261010/broken-phone-overview.webp.webp",
+     "caption": "Phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

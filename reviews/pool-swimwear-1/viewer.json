@@ -1,0 +1,139 @@
+{
+  "title": "Pool swimwear \u2014 actual Meshy candidates",
+  "blurb": "Actual Meshy geometry, textures and native walk/run. Retargeted relaxed idle; candidate-only static seat pose. Compare clothing and faces separately from animation. No outfit installed in the game.",
+  "rigs": {
+    "kuro-b": {
+      "id": "kuro",
+      "label": "Kuro swimwear candidate",
+      "dir": "art/parts/pool-swimwear-1/game/kuro-b/",
+      "height": 1.12,
+      "idle": "art/parts/pool-swimwear-1/game/kuro-b/idle.json",
+      "sitJson": "art/parts/pool-swimwear-1/game/kuro-b/sit.json"
+    },
+    "kuro-current": {
+      "id": "kuro",
+      "label": "Kuro current outfit",
+      "dir": "game3d/assets/characters/kuro/",
+      "height": 1.12,
+      "idle": "game3d/assets/characters/relaxed-idle-kuro.json"
+    },
+    "emi": {
+      "id": "emi",
+      "label": "Emi swimwear candidate",
+      "dir": "art/parts/pool-swimwear-1/game/emi/",
+      "height": 1.09,
+      "idle": "art/parts/pool-swimwear-1/game/emi/idle.json",
+      "sitJson": "art/parts/pool-swimwear-1/game/emi/sit.json"
+    },
+    "emi-current": {
+      "id": "emi",
+      "label": "Emi current outfit",
+      "dir": "game3d/assets/characters/emi/",
+      "height": 1.09,
+      "idle": "game3d/assets/characters/relaxed-idle-emi.json"
+    },
+    "eric": {
+      "id": "eric",
+      "label": "Eric swimwear candidate",
+      "dir": "art/parts/pool-swimwear-1/game/eric/",
+      "height": 1.2,
+      "idle": "art/parts/pool-swimwear-1/game/eric/idle.json",
+      "sitJson": "art/parts/pool-swimwear-1/game/eric/sit.json"
+    },
+    "eric-current": {
+      "id": "eric",
+      "label": "Eric current outfit",
+      "dir": "game3d/assets/eric/",
+      "height": 1.2,
+      "idle": "game3d/assets/characters/relaxed-idle-eric.json"
+    },
+    "carina": {
+      "id": "carina",
+      "label": "Carina swimwear candidate",
+      "dir": "art/parts/pool-swimwear-1/game/carina/",
+      "height": 1.12,
+      "idle": "art/parts/pool-swimwear-1/game/carina/idle.json",
+      "sitJson": "art/parts/pool-swimwear-1/game/carina/sit.json"
+    },
+    "carina-current": {
+      "id": "carina",
+      "label": "Carina current outfit",
+      "dir": "game3d/assets/characters/carina/",
+      "height": 1.12,
+      "idle": "game3d/assets/characters/relaxed-idle-carina.json"
+    }
+  },
+  "scenes": {
+    "kuro": {
+      "label": "Kuro comparison",
+      "items": [
+        {
+          "rig": "kuro-b"
+        },
+        {
+          "rig": "kuro-current"
+        }
+      ]
+    },
+    "emi": {
+      "label": "Emi comparison",
+      "items": [
+        {
+          "rig": "emi"
+        },
+        {
+          "rig": "emi-current"
+        }
+      ]
+    },
+    "pair": {
+      "label": "Swimwear candidates",
+      "items": [
+        {
+          "rig": "kuro-b"
+        },
+        {
+          "rig": "emi"
+        },
+        {
+          "rig": "eric"
+        },
+        {
+          "rig": "carina"
+        }
+      ]
+    },
+    "eric": {
+      "label": "Eric comparison",
+      "items": [
+        {
+          "rig": "eric"
+        },
+        {
+          "rig": "eric-current"
+        }
+      ]
+    },
+    "carina": {
+      "label": "Carina comparison",
+      "items": [
+        {
+          "rig": "carina"
+        },
+        {
+          "rig": "carina-current"
+        }
+      ]
+    }
+  },
+  "closeups": [
+    "kuro-b",
+    "kuro-current",
+    "emi",
+    "emi-current",
+    "eric",
+    "eric-current",
+    "carina",
+    "carina-current"
+  ]
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amakawa bible</title>
+<meta name="description" content="The Amakawa world bible: cast, places, story, rules and review pages, with the status and source of every fact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="topbar"><a class="hublink" href="../">← Hub</a><b>Amakawa bible</b><button id="menu" aria-label="Open the menu">Menu</button></div>
+<div class="shell">
+  <nav class="nav" aria-label="Sections">
+    <a class="hublink" href="../">← Hub</a>
+    <div class="brand"><b>Amakawa</b><span>world bible</span></div>
+    <label class="search"><input id="q" type="search" placeholder="Search everything" aria-label="Search everything" autocomplete="off"><kbd>/</kbd></label>
+    <ul id="navlist"></ul>
+    <ul id="cast"></ul>
+    <div class="foot"><button id="theme" type="button">Light or dark</button></div>
+  </nav>
+  <main id="main" aria-live="polite"><div class="page"><p class="muted">Loading…</p></div></main>
+</div>
+<div class="lb" id="lb" role="dialog" aria-label="Image"><button class="x" aria-label="Close">✕</button><button class="p" aria-label="Previous">‹</button><img alt=""><div class="c"></div><button class="n" aria-label="Next">›</button></div>
+<script>window.BIBLE_REMOTE = true; window.BIBLE_ROOT = '../'; window.BIBLE_DATA = 'data.json';</script>
+<script type="importmap">{"scopes":{"../game3d/":{"three":"../game3d/vendor/three/three.module.js"}}}</script>
+<script src="app.js"></script>
+</body>
+</html>

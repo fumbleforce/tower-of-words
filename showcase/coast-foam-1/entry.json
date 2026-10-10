@@ -1,0 +1,45 @@
+{
+ "title": "Foam at the coast",
+ "date": "2026-10-01",
+ "by": "Claude and Codex",
+ "caption": "Broken foam edges follow the rocks and sea wall. The broad pale patches are gone.",
+ "images": [
+  {
+   "id": "before-arrival-desk",
+   "image": "game3d/shots/codex-coast-takeover/before/1-desk.png.webp",
+   "caption": "Before: first arrival frame, desktop."
+  },
+  {
+   "id": "before-arrival-phone",
+   "image": "game3d/shots/codex-coast-takeover/before/1-phone.png.webp",
+   "caption": "Before: first arrival frame, phone."
+  },
+  {
+   "id": "after-arrival-desk",
+   "image": "game3d/shots/codex-coast-takeover/after/1-desk.png.webp",
+   "caption": "After: first arrival frame, desktop."
+  },
+  {
+   "id": "after-arrival-phone",
+   "image": "game3d/shots/codex-coast-takeover/after/1-phone.png.webp",
+   "caption": "After: first arrival frame, phone."
+  },
+  {
+   "id": "after-coast-desk",
+   "image": "game3d/shots/codex-coast-takeover/after/coast-detail-desk.png.webp",
+   "caption": "Foam along the coast, desktop close-up."
+  },
+  {
+   "id": "after-coast-phone",
+   "image": "game3d/shots/codex-coast-takeover/after/coast-detail-phone.png.webp",
+   "caption": "Foam along the coast, phone close-up."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

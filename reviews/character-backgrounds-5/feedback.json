@@ -1,0 +1,34 @@
+{
+ "sent": "2026-10-10T10:54:46+0200",
+ "picked": [
+  "aoi",
+  "emi"
+ ],
+ "options": {
+  "emi": {
+   "star": false,
+   "reject": false,
+   "comment": "emi can be 35 instead"
+  }
+ },
+ "comment": "keep the defaults as you say",
+ "read": false,
+ "history": [
+  {
+   "sent": "2026-10-10T10:54:39+0200",
+   "picked": [
+    "aoi",
+    "emi"
+   ],
+   "options": {
+    "emi": {
+     "star": false,
+     "reject": false,
+     "comment": "emi can be 35 instead"
+    }
+   },
+   "comment": "keep the defaults",
+   "read": false
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "sent": "2026-10-10T00:56:32+0200",
+ "picked": [
+  "rollout"
+ ],
+ "options": {
+  "water": {
+   "star": false,
+   "reject": true,
+   "comment": "the texture is nice but you end up with discrete streams that clip through the fountain right now"
+  },
+  "rollout": {
+   "star": false,
+   "reject": false,
+   "comment": "just fix the fountain"
+  }
+ },
+ "comment": "cant tell what dapple and crowns do at all, not right motif. The toon one has a lot of potential, more examples",
+ "read": true,
+ "history": [
+  {
+   "sent": "2026-10-10T00:30:42+0200",
+   "picked": [],
+   "options": {},
+   "comment": "cant tell what dapple and crowns do at all, not right motif. The toon one has a lot of potential, more examples",
+   "read": true
+  }
+ ]
+}

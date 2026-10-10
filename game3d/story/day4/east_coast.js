@@ -1,0 +1,19 @@
+import { place, emiHello } from './shared.js';
+export default place({ east_lane: ['talk:dorm_street', 'zone:row_exit'], sports: ['talk:courts_walk', 'zone:courts_exit'], dorm_commons: ['talk:commons'] }, {
+  labels: { kuro: ['Kuro', 'd3_kuro_intro'] },
+  on: { 'talk:mio': 'd4_mio_lunch', 'talk:kuro': 'd4_kuro', 'talk:emi': 'd4_emi', 'talk:tama': 'd4_cat', 'talk:onsen': 'd4_onsen', 'talk:lookout': 'd4_lookout' },
+  nodes: {
+    d4_mio_lunch: [{ if: '!d4_mio_lunch_seen', then: [
+      { say: 'mio', emo: 'casual', text: 'I brought a sandwich. My mother asked if I eat properly, so I said there’s tomato in it.' },
+      { say: 'eric', emo: 'curious', text: 'Is there?' },
+      { say: 'mio', emo: 'dry', text: 'There was when I left home. It keeps falling out.' }, { set: 'd4_mio_lunch_seen' },
+    ], else: [{ say: 'mio', emo: 'casual', text: 'I’m staying until I finish this, but the wind keeps taking the, um... the lettuce.' }] }],
+    d4_kuro: [{ if: 'd3_kuro_intro', then: [
+      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'warm', text: '{mc.name_jp}さん。ここ、風が弱いですよ。' },
+    ], else: [{ say: 'kuro', overheard: true, emo: 'polite', text: 'こんにちは。ここ、どうぞ。' }, { do: 'gesture', who: 'kuro', kind: 'point' }] }],
+    d4_emi: [...emiHello, { say: 'emi', emo: 'casual', text: 'I’m taking the long way home. If I go straight back I’ll open my work bag.' }],
+    d4_cat: [{ say: 'eric', emo: 'warm', text: 'I’ll leave you the warm bit.' }],
+    d4_onsen: ['> The boiler repair notice is still on the door.'],
+    d4_lookout: [{ do: 'cam', on: 'east_coast_lookout', zoom: 1.2 }, { say: 'eric', emo: 'curious', text: 'I can smell the sea much more from up here.' }, { do: 'cam', back: true }],
+  },
+});

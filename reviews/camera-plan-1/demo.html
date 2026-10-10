@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Camera alternatives · Amakawa</title>
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body>
+    <header>
+      <div class="heading">
+        <h1>Try the cameras</h1>
+        <a href="../../bible/#review/camera-plan-1">Back to the review</a>
+      </div>
+      <div class="toolbar">
+        <label
+          >Place
+          <select id="place">
+            <option value="plaza">Plaza</option>
+            <option value="office">B2 office</option>
+            <option value="dorms">Room 203</option>
+            <option value="train">Train aisle</option>
+          </select></label
+        >
+        <label
+          >Camera
+          <select id="camera">
+            <option value="1a">1a · Follow, 2.8 back / 2.1 up</option>
+            <option value="1b">1b · Close, 2.3 back / 1.45 up</option>
+            <option value="1c" selected>1c · High, 3.6 back / 2.8 up</option>
+            <option value="overview">Current overview</option>
+          </select></label
+        >
+        <button id="reset" type="button">Reset view</button>
+        <button id="scene" type="button">Preview scene camera</button>
+      </div>
+      <details>
+        <summary>Controls and prototype limits</summary>
+        <p>
+          Desktop: click Play to capture the mouse. Move the mouse to look, WASD
+          or arrows to move, Shift to run. The character turns toward the
+          direction you move. Esc releases the mouse for these controls. The
+          view follows the character at the selected distance. Walking forward
+          keeps the camera behind your direction of travel; moving sideways or
+          back does not make the view swing around. Reset view explicitly puts
+          it behind the character.
+        </p>
+        <p>
+          This demo uses the actual places and walking collision. Camera
+          obstruction checks pull the view in near walls; the train camera stays
+          below its roof. Rooms still have the overview's cutaway walls, and
+          pins and authored story transitions are not demonstrated. Scene camera
+          frames two actual nearby characters and pauses player movement; it
+          previews framing only, with no conversation playing. Demo progress and
+          settings last only until this frame reloads. The game's default camera
+          is unchanged.
+        </p>
+      </details>
+      <p id="scene-note" role="status">
+        Scene preview: frames two nearby characters without moving them.
+      </p>
+      <p id="mobile-note" hidden>
+        Third-person view is desktop only. This device shows the current
+        overview; tap or hold to walk.
+      </p>
+    </header>
+    <main>
+      <iframe
+        id="world"
+        title="Playable camera comparison"
+        allow="fullscreen"
+      ></iframe>
+      <p id="status" role="status">Loading the plaza…</p>
+    </main>
+    <footer>
+      <span id="hint"
+        >Play captures mouse · mouse to look · WASD to move · Esc for
+        controls</span
+      ><span>Desktop review prototype · 1c selected</span>
+    </footer>
+    <script type="module" src="demo.mjs"></script>
+  </body>
+</html>

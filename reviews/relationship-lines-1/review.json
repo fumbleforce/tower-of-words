@@ -1,0 +1,80 @@
+{
+ "title": "Relationship lines, round 1: Mio, Kuro and Rei",
+ "date": "2026-10-10",
+ "by": "Claude, with the voice-mio, voice-kuro and voice-rei agents",
+ "status": "decided",
+ "context": [
+  "These are plans for Mio's, Kuro's and Rei's relationship lines, steps 1 to 5, written from their approved voice sheets and bios. Each step says what earns it in play, the public scene that marks it, how she treats Eric from then on, and its Japanese focus. Each voice agent read its character's plan and its changes are worked in.",
+  "Nothing here is built yet. Mio's step-2 and step-3 lunch scenes exist and stay. The built step-2 and step-3 scenes for Kuro and Rei were written for their earlier personalities, so the plans rewrite or replace them.",
+  "Following your rule, kisses, dates and sex happen only on these lines, gated on her step. Each plan has one friendship-or-romance choice, and the answer is saved in a new flag (romance_mio, romance_kuro, romance_rei) that only that choice sets. The private scenes check the step and that flag. They are written separately and only named here.",
+  "After your answer, the public step scenes get written and built in step order, and the private scenes get connected to the steps and the new flags."
+ ],
+ "ask": "For each character, pick the card to approve the plan as it is, pick it and comment to approve it with your changes, or reject it to have it redone. Answer the numbered questions in the card's comment box.",
+ "multi": true,
+ "options": [
+  {
+   "id": "mio",
+   "label": "mio",
+   "image": "game3d/assets/portraits/mio-neutral.webp",
+   "summary": "Her line goes from the machine room to her own room. Step 4 is a weekend co-op boss in her dorm room, where she puts her work phone face down for the first time and the romance choice comes at the end. Step 5 is the tactics game she has shown nobody. The private scenes hang on step 4 (her first time) and step 5, on the romance path only.",
+   "questions": [
+    "The romance choice comes at the end of step 4. Friendship players get one more chance at step 5, and that also sets the flag. Is that right, or should step 4 be the only chance?",
+    "Step 4 takes Eric into her dorm room for the first time, before she shows him her game at step 5. Is her room right for step 4, or should step 4 stay at work and her room wait for step 5?"
+   ],
+   "note": "Her line goes from the machine room to her own room. Step 4 is a weekend co-op boss in her dorm room, where she puts her work phone face down for the first time and the romance choice comes at the end. Step 5 is the tactics game she has shown nobody. The private scenes hang on step 4 (her first time) and step 5, on the romance path only. Questions: 1) The romance choice comes at the end of step 4. Friendship players get one more chance at step 5, and that also sets the flag. Is that right, or should step 4 be the only chance? 2) Step 4 takes Eric into her dorm room for the first time, before she shows him her game at step 5. Is her room right for step 4, or should step 4 stay at work and her room wait for step 5?"
+  },
+  {
+   "id": "kuro",
+   "label": "kuro",
+   "image": "game3d/assets/portraits/kuro-neutral.webp",
+   "summary": "Every invitation comes from her. She picks his seat at step 2, and step 3 is the pool booking from her approved sample. At step 4 she tells him to keep Friday night free, which is the romance choice. Step 5 is dinner at her apartment. The private scenes (the booking and the date) hang on step 4, on the date answer only.",
+   "questions": [
+    "Her built step-2 scene (the window seat) gets rewritten, and the built step-3 scene (spare equipment) is replaced by the pool booking from her sample. Is that OK?",
+    "If Eric calmly says no to Friday, she goes cold for a day and then sets a swim instead, so the line goes on as a friendship where she still flirts. Is that right, or should a no stop her asking until he asks her out himself?"
+   ],
+   "note": "Every invitation comes from her. She picks his seat at step 2, and step 3 is the pool booking from her approved sample. At step 4 she tells him to keep Friday night free, which is the romance choice. Step 5 is dinner at her apartment. The private scenes (the booking and the date) hang on step 4, on the date answer only. Questions: 1) Her built step-2 scene (the window seat) gets rewritten, and the built step-3 scene (spare equipment) is replaced by the pool booking from her sample. Is that OK? 2) If Eric calmly says no to Friday, she goes cold for a day and then sets a swim instead, so the line goes on as a friendship where she still flirts. Is that right, or should a no stop her asking until he asks her out himself?"
+  },
+  {
+   "id": "rei",
+   "label": "rei",
+   "image": "game3d/assets/portraits/rei-neutral.webp",
+   "summary": "She softens slowly and never admits a mistake. Step 3 is the doubles drill, step 4 is calling her lines at match point while her ankle hurts, and step 5 is her home, where she clears a second corner of the table for him. The romance choice comes at step 5, later than for Mio and Kuro. Her private terrace scene hangs on step 2, with no romance in it.",
+   "questions": [
+    "Her romance choice comes at step 5, and no private scene hangs on steps 3 to 5 yet. Is step 5 right for her?",
+    "The built step-2 and step-3 scenes have her offering things and admitting a mistake (\"I got there before I thought about it\"), so both get rewritten. She gives Eric a nickname at step 4. Do you want to choose it, or should the writer?"
+   ],
+   "note": "She softens slowly and never admits a mistake. Step 3 is the doubles drill, step 4 is calling her lines at match point while her ankle hurts, and step 5 is her home, where she clears a second corner of the table for him. The romance choice comes at step 5, later than for Mio and Kuro. Her private terrace scene hangs on step 2, with no romance in it. Questions: 1) Her romance choice comes at step 5, and no private scene hangs on steps 3 to 5 yet. Is step 5 right for her? 2) The built step-2 and step-3 scenes have her offering things and admitting a mistake (\"I got there before I thought about it\"), so both get rewritten. She gives Eric a nickname at step 4. Do you want to choose it, or should the writer?"
+  }
+ ],
+ "links": [
+  {
+   "label": "Read all three plans",
+   "href": "reviews/relationship-lines-1/index.html"
+  },
+  {
+   "label": "mio",
+   "href": "reviews/relationship-lines-1/index.html#mio"
+  },
+  {
+   "label": "kuro",
+   "href": "reviews/relationship-lines-1/index.html#kuro"
+  },
+  {
+   "label": "rei",
+   "href": "reviews/relationship-lines-1/index.html#rei"
+  },
+  {
+   "label": "The voice sheets these follow",
+   "href": "#review/character-voices-2"
+  }
+ ],
+ "issue": 357,
+ "question": "These are plans for Mio's, Kuro's and Rei's relationship lines, steps 1 to 5, written from their approved voice sheets and bios. Each step says what earns it in play, the public scene that marks it, how she treats Eric from then on, and its Japanese focus. Each voice agent read its character's plan and its changes are worked in. Nothing here is built yet. Mio's step-2 and step-3 lunch scenes exist and stay. The built step-2 and step-3 scenes for Kuro and Rei were written for their earlier personalities, so the plans rewrite or replace them. Following your rule, kisses, dates and sex happen only on these lines, gated on her step. Each plan has one friendship-or-romance choice, and the answer is saved in a new flag (romance_mio, romance_kuro, romance_rei) that only that choice sets. The private scenes check the step and that flag. They are written separately and only named here. After your answer, the public step scenes get written and built in step order, and the private scenes get connected to the steps and the new flags. For each character, pick the card to approve the plan as it is, pick it and comment to approve it with your changes, or reject it to have it redone. Answer the numbered questions in the card's comment box.",
+ "decided": [
+  "mio",
+  "kuro"
+ ],
+ "decision": "Mio: 4 is fine for room. Kuro: second option. Rei: \"I got there before I thought about it\" is a really terrible AI slop line, don't. Progression is too slow when she is the one in control.",
+ "decided_at": "2026-10-10T11:02:41+0200",
+ "media": []
+}

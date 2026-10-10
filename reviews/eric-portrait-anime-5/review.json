@@ -1,0 +1,53 @@
+{
+ "title": "Eric: anime portrait, round 5 (relaxed pose, nothing in his hands)",
+ "date": "2026-09-29",
+ "by": "art agent (Eric anime 5)",
+ "status": "decided",
+ "multi": true,
+ "question": "Which of these three is Eric?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/eric-anime4/eric-p3h2-909.webp.webp",
+   "caption": "p3h2-909 (round 4, your pick)"
+  },
+  {
+   "image": "art/candidates/portraits/eric-anime4/eric-p6h2-3909.webp.webp",
+   "caption": "p6h2-3909 (round 4, your pick)"
+  },
+  {
+   "image": "art/candidates/portraits/eric-anime4/eric-p3m75-5909.webp.webp",
+   "caption": "p3m75-5909 (round 4, your pick, \"nice but remove coffee\")"
+  }
+ ],
+ "options": [
+  {
+   "id": "eric-r3-7909",
+   "label": "eric-r3-7909",
+   "image": "art/candidates/portraits/eric-anime5/eric-r3-7909.webp.webp",
+   "note": "arms relaxed at his sides, body turned slightly, face to the viewer; hands out of frame. Hair one colour, stubble and glasses as before, no props. Red in the outline: 0.03%. rdbtAnima, seed 7909, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, company lanyard, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, arms relaxed at his sides, slight three-quarter turn, looking at the viewer, faint smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, (rim light, red rim light, red outline, backlighting:1.4), undercut, shaved sides, two-tone hair"
+  },
+  {
+   "id": "eric-r4-909",
+   "label": "eric-r4-909",
+   "image": "art/candidates/portraits/eric-anime5/eric-r4-909.webp.webp",
+   "note": "one hand in his pocket, three-quarter turn, looking at the viewer. Hair one colour, stubble and glasses as before, no props. Red in the outline: 0.08%. rdbtAnima, seed 909, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, company lanyard, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, one hand in his pocket, slight three-quarter turn, looking at the viewer, faint smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, (rim light, red rim light, red outline, backlighting:1.4), undercut, shaved sides, two-tone hair"
+  },
+  {
+   "id": "eric-r3-3909",
+   "label": "eric-r3-3909",
+   "image": "art/candidates/portraits/eric-anime5/eric-r3-3909.webp.webp",
+   "note": "arms relaxed at his sides, three-quarter turn, looking at the viewer; hands in the pockets at the bottom edge. Hair one colour, stubble and glasses as before, no props. Red in the outline: 0.04%. rdbtAnima, seed 3909, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, company lanyard, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, arms relaxed at his sides, slight three-quarter turn, looking at the viewer, faint smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, (rim light, red rim light, red outline, backlighting:1.4), undercut, shaved sides, two-tone hair"
+  }
+ ],
+ "links": [
+  {
+   "label": "All attempts (24 renders)",
+   "href": "art/candidates/portraits/eric-anime5-sheet.png.webp"
+  }
+ ],
+ "decided": [
+  "eric-r4-909"
+ ],
+ "decision": "r4-909, crop to match the others' height",
+ "issue": 24
+}

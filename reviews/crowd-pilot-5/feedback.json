@@ -1,0 +1,28 @@
+{
+ "sent": "2026-10-07T07:34:06+0200",
+ "picked": [
+  "a-image",
+  "b-image"
+ ],
+ "options": {
+  "b-image": {
+   "star": false,
+   "reject": false,
+   "comment": "though she has a bald spot at the front of her face"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": [
+  {
+   "sent": "2026-10-07T07:33:44+0200",
+   "picked": [
+    "a-image",
+    "b-image"
+   ],
+   "options": {},
+   "comment": "",
+   "read": false
+  }
+ ]
+}

@@ -1,0 +1,3088 @@
+[
+  {
+    "run": "resume-ao015-normal-85",
+    "images": 6,
+    "reportSha256": "dea05855340b51185f63f99f7bdb27f02017e1f8eeec979fa5329d00bd8710d4",
+    "files": [
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "d172c842047af1e13aa66a8d4fa66075f0890cb3d5e7319117a81583f038f4c8"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "b2cf8cc491ee6ef6c6bccec9a35a202c5031ef2984388de8d0457f41c0c313e3"
+      },
+      {
+        "path": "report.json",
+        "sha256": "dea05855340b51185f63f99f7bdb27f02017e1f8eeec979fa5329d00bd8710d4"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "910451a1953fea633b2fb2f886a8216c2ce2973e69d2d419629f2057446bdb2c"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "9bde75afce232b86b4991f823fbc5920241480094603727d91c545bf5a9d5b2a"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "5a74a86f51e86efb046935cfab870334918e2031dd67322539e52eae5c79e8c5"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "deec9eb9e11ad217d544b4a7f352247c0bd314bfbd9eecfeea23d10f7d36155b"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/post.js",
+        "sha256": "976d19cba0afa3bccddf4a9dd3bd44e91006291bfab55bf5050b426966dd29a6"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-ao03-normal-85",
+    "images": 6,
+    "reportSha256": "59c25213cee299f819c16fe1b1849f2ef62ad36a20c841183b3ed16cef0c68f9",
+    "files": [
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "ac422c0c9e9266fcef7dbcac562ec0ff749adbc86cfe5b140d1fef1e842927f7"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "3931de5d00c9c8a26dbebb8aab201b4a019bf9e0e37372e0f9eaa715fbef20e8"
+      },
+      {
+        "path": "report.json",
+        "sha256": "59c25213cee299f819c16fe1b1849f2ef62ad36a20c841183b3ed16cef0c68f9"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "a308acc43fa23537e134c357fe490a24a8fa4a9f895c94502c332923dc922142"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "5049827254018e19b693a52f1598396a555f6e9e70e511ce7de8264232e45acd"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "c0abf5c2bbbce906f5634a4f86a431b8ea4b7a45466bf36d5cfb13cf421a5842"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "ce1cb1ed4bc1bb96e75e89e140f40457bc0a495342b8cf80df9779bfaf8c3a6b"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/post.js",
+        "sha256": "d1ab6bf73c92ea3ca10bc96d7c2d2a39a7069f1c72184bb88dbbad4e8d0ebb4e"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-ao05-normal-85",
+    "images": 6,
+    "reportSha256": "11a3a5fbb0a9f307489b003dfbcda51a00601d94188eb7cb8856d84637324065",
+    "files": [
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "00273fb0623b363bc0ce38610fa90d0c2d88c8a210b7ebfed41a85094546c86f"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "c4852dbf3c311953476cccf36561ca74f075b7c94f78840a1c3519c478ee17e7"
+      },
+      {
+        "path": "report.json",
+        "sha256": "11a3a5fbb0a9f307489b003dfbcda51a00601d94188eb7cb8856d84637324065"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "b8bc145cfdc944155eb3a2c8e65c8194d2a47156450f9540bd09410918899751"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "fd3c9d94a6965919a53a8e471d21aa1f62b0b3e76bdb80fd0f932740334d22f5"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "7fd7f3e58ea172ed25f9643670a1d65c1729b63ec708e65859f30b5724cd3d2e"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "d408558835e3e78f5cecc24e6c4ced6c5edc3b1ccf9ad19000ba42874a88282c"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/post.js",
+        "sha256": "5b017ec29e5da8940d2f5a894a2ae5067334819269c8c786b63d312cad39212e"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-arm-solve-85",
+    "images": 2,
+    "reportSha256": "abf3ec8b52b6039aae027f0ad021b25ac5d91625f264fe9528e21e146f427e48",
+    "files": [
+      {
+        "path": "report.json",
+        "sha256": "abf3ec8b52b6039aae027f0ad021b25ac5d91625f264fe9528e21e146f427e48"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "5aa21afec08ffb65eaeb17f1a41d5104bf52f6b5d013dd34552542e1b9437de0"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "34f4d50b6654d525e88c7b12fab06fc9d14bbbf7c70aec09f6b2d58880fa6463"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "df840593d60d66c4ab7fadec3ec706868322e7f39ac9b748f5adc7899129b7ee"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/post.js",
+        "sha256": "713feb001a209f65729b0fa5c87edc50969f1725e94d53ab9e06c1d6fa206c25"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "b58f6db6966a4a307fb4bbb421e94f45be32beb03600fd9b293d05be65cb2fdb"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-arm-target-normal-85",
+    "images": 6,
+    "reportSha256": "229065514d8ede39b1125a393fbb65b54fd38518ae8cb7bc74bfd930776423de",
+    "files": [
+      {
+        "path": "office-0-idle-front.png",
+        "sha256": "cb2561b187466e2f7165a6405469cd55ca8ef95c21f8c58375ce9a5a25964106"
+      },
+      {
+        "path": "report.json",
+        "sha256": "229065514d8ede39b1125a393fbb65b54fd38518ae8cb7bc74bfd930776423de"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "79262a1369fdcf40dc5db5e755206f85622362fdddb2af05cde05d9bd95ff879"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "be3d61b4184dfd71222e77363e44b04af6342d1fd4b4ca606f8ea934f7e53548"
+      },
+      {
+        "path": "office-0-idle-side.png",
+        "sha256": "81616c346a4908041f93ebff29d6ab2439c3361b6b3659c093ec8de95686fc82"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "9b167fa9ec6edf15743f79f8c49196029a83b8954678978e110aafca8cc5ecb2"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "9fbec4a5ae01d83a1c9498563288f3b14750ae620363b7a50d6fef61e44e9da9"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28c1de73b738d1f7405f47052de69ed7efb708074441be7d4642bcd6f4e824"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-baseline-phone-85",
+    "images": 2,
+    "reportSha256": "e5ab6faa1ad927b3deb35054115c830da3e3bafb27fd37bdf61835870cc4387e",
+    "files": [
+      {
+        "path": "report.json",
+        "sha256": "e5ab6faa1ad927b3deb35054115c830da3e3bafb27fd37bdf61835870cc4387e"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "3e321de261b2b5ecaac78e607df46b95d2e1d78890899a61326644ec834ef4e6"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "4c7c3d70be489cf278dc4605a0140273ea6662d1449d6e7a0c8dfc82115ea00f"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "a1c208d18bfca91951344fb87b9e712a0276c6ad94cf08ddcdca3aba73190423"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28c1de73b738d1f7405f47052de69ed7efb708074441be7d4642bcd6f4e824"
+      }
+    ]
+  },
+  {
+    "run": "resume-env-baseline",
+    "images": 8,
+    "reportSha256": "eef53b38695bcd878ea43315b2e39045c4f9012183ef4e82d6b7188b2776b73e",
+    "files": [
+      {
+        "path": "seating-390.png",
+        "sha256": "b77877e8c5431031b1d6bc5ddce0455f9c7be94cbd4459c45ab695e3bf3b1836"
+      },
+      {
+        "path": "report.json",
+        "sha256": "eef53b38695bcd878ea43315b2e39045c4f9012183ef4e82d6b7188b2776b73e"
+      },
+      {
+        "path": "greenery-390.png",
+        "sha256": "41b019dcf6ec67b682df18ebf85e646b92a9a579c3053c8b3c527ed7c16ed77f"
+      },
+      {
+        "path": "lobby-390.png",
+        "sha256": "eb52b0dbe64d815cc8abc17b5324072fa58b822ccb12161eaace3ff35f5a4f9a"
+      },
+      {
+        "path": "seating-2560.png",
+        "sha256": "b4d44a2e47c5b3df4f6b64b06be1dc04430558647f659a4d0604676e7c7c87d1"
+      },
+      {
+        "path": "b2-390.png",
+        "sha256": "7b7c89e4cf577316b3ac0b83c0a01a5dbf67dc483db303f03f05310ada553242"
+      },
+      {
+        "path": "lobby-2560.png",
+        "sha256": "8ab9b81010fe4d8f543e207589cb8056d2b2e5350b02052ba92ba1be33fd8ee7"
+      },
+      {
+        "path": "b2-2560.png",
+        "sha256": "0423cf61183a9778bf707d8b11fa44a68adeef03c963523485d479f86a4087b5"
+      },
+      {
+        "path": "greenery-2560.png",
+        "sha256": "02a8a064d278a4110a91220cd4744e34c53eef3e5074136ec762599694a3ac9a"
+      },
+      {
+        "path": "sources/post.js",
+        "sha256": "7e32a19a250f08c4b1a3712e1d0b9601688dcf63cab86350d7bd10b004286272"
+      }
+    ]
+  },
+  {
+    "run": "resume-env-candidate",
+    "images": 8,
+    "reportSha256": "42c2832c1e575230e1323afae35ed966a4b15d18ddc84557f8e56aa6e9eb832a",
+    "files": [
+      {
+        "path": "seating-390.png",
+        "sha256": "c78f1685c047add1bbe27171d5fc34855baaca9db4a1c460be79d3efd125eeaf"
+      },
+      {
+        "path": "report.json",
+        "sha256": "42c2832c1e575230e1323afae35ed966a4b15d18ddc84557f8e56aa6e9eb832a"
+      },
+      {
+        "path": "greenery-390.png",
+        "sha256": "3847df26a059dab1cbe9a4828b778c7a7308974a87f9a37d769a8e4117ee270d"
+      },
+      {
+        "path": "lobby-390.png",
+        "sha256": "7570eeba69cbb3a282ea868e67b08cc1797840d8830714ad57b55f76aaaa8707"
+      },
+      {
+        "path": "seating-2560.png",
+        "sha256": "ad1bf49e3cebfbfa79f75bedb5b4bb9d2ff460a28358452ad8dbf0347d062a75"
+      },
+      {
+        "path": "b2-390.png",
+        "sha256": "a99e9041ddabe343e884e3ced485a5f149831909b6336726679d40cf945e3b32"
+      },
+      {
+        "path": "lobby-2560.png",
+        "sha256": "f49881a1c783663390755f2652dd5516d3a74014257504e9b7825268fe64aa15"
+      },
+      {
+        "path": "b2-2560.png",
+        "sha256": "da6585af3db9cd0f2541eb833da6698adf0b106ca350d9b81189eaba3ea777aa"
+      },
+      {
+        "path": "greenery-2560.png",
+        "sha256": "b45ae91f50ce907b451668762023f1355fd30894dd22600012a5355f2190b19c"
+      },
+      {
+        "path": "sources/post.js",
+        "sha256": "5b017ec29e5da8940d2f5a894a2ae5067334819269c8c786b63d312cad39212e"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-bridge-100",
+    "images": 12,
+    "reportSha256": "fbe82581f1735af73b01f7c3fa34adcafd19f9661a2ec44832e8ed3e9b5d0d96",
+    "files": [
+      {
+        "path": "office-0-idle-front.png",
+        "sha256": "97c3a682f34e4175af982fd88a426a9858c66dd516b82aa2695803baea65e634"
+      },
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "7e2120e102ebc42d191e552fff22887151c1bb0128b47dd016030ee35e73a0b5"
+      },
+      {
+        "path": "office-0-shoe-side.png",
+        "sha256": "21a0fb14db0e6c6e9edc10fc10bd5063acd3f8714135db411eb214a892b74dfc"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "4e1900ccbf136ddcb34b47185d87013022cfd291bd70b6bf53195e5d666029f0"
+      },
+      {
+        "path": "report.json",
+        "sha256": "fbe82581f1735af73b01f7c3fa34adcafd19f9661a2ec44832e8ed3e9b5d0d96"
+      },
+      {
+        "path": "office-0-restore-side.png",
+        "sha256": "56effcac717bb78f37eca4b6b697a37a1ab06ec132704d64250b2b384ac9ec76"
+      },
+      {
+        "path": "office-0-restore-front.png",
+        "sha256": "f2125fb558c6feca1b6c8ffa0bdedb0e7d4e2194360a150727520f2402248af9"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "bc2356b9eea3a0dcee7f3c81f4173e9d44c410184ac9fdb0de9c0fa77b0f72dc"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "a0b8463cc5630691ccc27d54f889a9ccb83daf5c659f70e4f37fc9cf1c231289"
+      },
+      {
+        "path": "office-0-idle-side.png",
+        "sha256": "1861c415a50333745b075ab95dff167be8022b7bd6667b813c6f033867bc6daf"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "e69d82f48f359a5c6752ee586859ef55106de21a9969b6584587a822a168069f"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "ede4314f44e39854489f568e70cc03370a19312717665a694ae8c06a924681c9"
+      },
+      {
+        "path": "office-0-shoe-front.png",
+        "sha256": "b60f55c941d7e05c5c16afdc9c0d2bad49e4583987bef4c7ff831bfec23ed52e"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-bridge-85",
+    "images": 12,
+    "reportSha256": "c62d409f11c28491f26b04284f45c88317d81694d6a293d2c4abc87f7f4b072b",
+    "files": [
+      {
+        "path": "office-0-idle-front.png",
+        "sha256": "729b172465812f874b96bca7388b616a123ce4f3953b243b12c62044558936d9"
+      },
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "fb689cbe4e0f3460fb6e94d32c7728a617cc87bc89593e993ed50bf98092e48d"
+      },
+      {
+        "path": "office-0-shoe-side.png",
+        "sha256": "07985b9d2a218c84b65988574130b9ad5c2db37ffadb7bef08f53233a6191d08"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "acca3b98a890e9761bf71990d31125137111aacdbedada1399543298c93563f7"
+      },
+      {
+        "path": "report.json",
+        "sha256": "c62d409f11c28491f26b04284f45c88317d81694d6a293d2c4abc87f7f4b072b"
+      },
+      {
+        "path": "office-0-restore-side.png",
+        "sha256": "861423965bb310dce5347db277f7589b2422f78aff5ffdfca9b950e105bef857"
+      },
+      {
+        "path": "office-0-restore-front.png",
+        "sha256": "0fe67bfe951e3cc05776e13e90b0ba49003ac67cb1bff32b9165d4494b6b848c"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "086c907d5303ca02c9630270724197953afc8feb2a8b29fe91f909eba6983bba"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "e741483f2191bf67ca1ab6f6281f3e432fdabc31b85bc349397323d4d18705c1"
+      },
+      {
+        "path": "office-0-idle-side.png",
+        "sha256": "ea88cc7bb318fd05bfa1efe9b7d506ccdb11ee7eb8794e8b51899a8dd3ca7136"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "52faa7c2ab22023a81c6046a100597857f568e1f8f5b29dc58e94941b79457b2"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "3557714767c19115dfcb07ee94e3c6b7c28bb9c7cddcad32c345d63477ba0fff"
+      },
+      {
+        "path": "office-0-shoe-front.png",
+        "sha256": "2c142a0be3f5ad7705a3a775980464b0b39b6c3d91ade5a57c5e5f2137f396a4"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-fallback-100",
+    "images": 36,
+    "reportSha256": "e0584780d6297ec84c73f22d87fa4b1bb07e20a63cb94f1f6ce0f1747112cc69",
+    "files": [
+      {
+        "path": "office-2-restore-front.png",
+        "sha256": "cc10281db53c3964ad4fc66ab4580c804828536f87062c8b307bf9991c8a66ce"
+      },
+      {
+        "path": "office-2-walk-front.png",
+        "sha256": "54ef9aad382555086e0d7eb9507543783edd361c24512d70ccf75f4246c73290"
+      },
+      {
+        "path": "office-1-idle-front.png",
+        "sha256": "4ff96d07da01885c193b346037d56f1c6f2453a5646467be5ae9d2abea2c0d4c"
+      },
+      {
+        "path": "office-0-idle-front.png",
+        "sha256": "a9991eb1c45804dd8661eb1af04898bbd21a7e004a3244ec956d96ac6e277316"
+      },
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "d91342d56dd73e8f8559acfe8da55d839ecc78e7071bb022a713a498c6ff30bc"
+      },
+      {
+        "path": "office-0-shoe-side.png",
+        "sha256": "187669738fa872e86cbef96724a55987088fcbf9b35f994ca378ead8600adeb7"
+      },
+      {
+        "path": "office-2-shoe-side.png",
+        "sha256": "d4b9ce2cf4ee660f2b6e6c624e59ebff15b57fcd81eb0a381b9a3ede511fdfaa"
+      },
+      {
+        "path": "office-1-idle-side.png",
+        "sha256": "d716188a45bbfe64fb50dab905855a39c74bb30f80af432305c96e5c494dbb07"
+      },
+      {
+        "path": "office-1-restore-side.png",
+        "sha256": "e67869f776c2010668d0b747558cc44a044d67da530aa33efb1f8a32fb8cb067"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "56d2cbd94ffd30f34c5e084c39811220d64cb0ef8d72820fa4b4adbf1e622b92"
+      },
+      {
+        "path": "office-1-sit-side.png",
+        "sha256": "a9b4137fb2406086ccd530d63567da97dc05b1a950f708c876b15f34bdf65b47"
+      },
+      {
+        "path": "office-2-phone-side.png",
+        "sha256": "66f40cf3f19f3470e50fcad7f7b7714ffda39192474ec4e024b3323515713a03"
+      },
+      {
+        "path": "report.json",
+        "sha256": "e0584780d6297ec84c73f22d87fa4b1bb07e20a63cb94f1f6ce0f1747112cc69"
+      },
+      {
+        "path": "office-2-walk-side.png",
+        "sha256": "972ff5a455e333b0b687d43017770b00429dc36f0b28b4b15adbf33683b33ea0"
+      },
+      {
+        "path": "office-0-restore-side.png",
+        "sha256": "3eab33fe7c4389ce2aac0119418984739f280e0d349967e1d3a77ba2161b744d"
+      },
+      {
+        "path": "office-2-sit-front.png",
+        "sha256": "4404cfa78f9b09722a1053b4a5dd0fd08e5eb58f62d295728a2c6453d537d168"
+      },
+      {
+        "path": "office-0-restore-front.png",
+        "sha256": "bfdad56800f6c6342b54979a5d10c276b6e31cac32480a79539cbe5391889a63"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "16c528491f2762966f85ea6231f3881355853eeeec1cc3b35d3b98a8fe199ecc"
+      },
+      {
+        "path": "office-1-shoe-side.png",
+        "sha256": "6e01e980e1acced7f77f8c75561f38494422e27ba8b58937177e0d1270e54f99"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "14191458d4c72dde9f81abf4942b79012a0257f341caf7659f95939b285ddc74"
+      },
+      {
+        "path": "office-1-walk-side.png",
+        "sha256": "d67335667d800f03f79b7a8fd92a293498f2227d015db0b5ec682a5be2365109"
+      },
+      {
+        "path": "office-2-idle-side.png",
+        "sha256": "dcb189884d80300c23f98f7879f81045536bbfd9770cb9e4f0df2495b42c2d36"
+      },
+      {
+        "path": "office-1-restore-front.png",
+        "sha256": "2f61e31a521db01a9298f410c6cbef903d8a3ea19e0118e257dfaad8a2333d0b"
+      },
+      {
+        "path": "office-1-sit-front.png",
+        "sha256": "ed78b7277dc72c2c515c5ef7600551ffbf88c4fe4f23bbce1e9aa7a9f80368a2"
+      },
+      {
+        "path": "office-1-phone-front.png",
+        "sha256": "8cbe9f80f7518fd0819ae1a8cf664cb4bbed7c007071326e6fe32725d4a58018"
+      },
+      {
+        "path": "office-2-shoe-front.png",
+        "sha256": "d0252852ea95819106eb168b22c54c9392b1580d9e6647d8b55ca1cf6335218f"
+      },
+      {
+        "path": "office-2-sit-side.png",
+        "sha256": "b5979f6c5f25bc9b924286f8e78be3924e8c14bf49bce509e6995dc37a96b990"
+      },
+      {
+        "path": "office-2-restore-side.png",
+        "sha256": "bc847beeff5d3f6431ee5750a414fb8da1881a1e66f7998ebfc627133461cb43"
+      },
+      {
+        "path": "office-0-idle-side.png",
+        "sha256": "022ee4905bb27668123fd08d86c5d5849f8a156586e642867de7b3adbf5c9fcf"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "0bd9581d70e51667806eae4431c09b9b4fa73743f51246e0dc0416b5aa0d76a3"
+      },
+      {
+        "path": "office-2-idle-front.png",
+        "sha256": "416d3f3556e3a0f412a990e627d129d022c39c932dd9bd5da19e234d3858c90d"
+      },
+      {
+        "path": "office-2-phone-front.png",
+        "sha256": "a95e4beb5275689798e485cb15642c7efb434a966b382670ae607683cb722066"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "4ce22cbc810bf463e826cf1934b76264a3b8f320b8d5d7f1bc17b70a4c6753d5"
+      },
+      {
+        "path": "office-1-walk-front.png",
+        "sha256": "84d64d361250d27a344bad99d6cca09dca3082b34eec43e3bc1d483e780112b4"
+      },
+      {
+        "path": "office-0-shoe-front.png",
+        "sha256": "f58c8c6136e161e6776d5cc54a9fbec80bd4f041232a651af6116a826f740413"
+      },
+      {
+        "path": "office-1-phone-side.png",
+        "sha256": "8403a14a1a9daf45aa152feb2ee09370ab04118bddd51577306fb3dc0a711639"
+      },
+      {
+        "path": "office-1-shoe-front.png",
+        "sha256": "9005b6a58a35a5b380331fbfb1b5e402c97dd4ef57b6a145b73a5f58cb719b6b"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-fallback-85",
+    "images": 36,
+    "reportSha256": "cbe79ab88c66ef7276ce8e8c24ca6de71aac75d687c9fa747d05a4b697611076",
+    "files": [
+      {
+        "path": "office-2-restore-front.png",
+        "sha256": "f8f7cd348765150092057bf37d4f7d0eb760459244ce5fe9a17f8440add797bd"
+      },
+      {
+        "path": "office-2-walk-front.png",
+        "sha256": "94f4c3bdbc2c2ca673d173658a637ac6044c8ab21950a6fd220454afedbab2b7"
+      },
+      {
+        "path": "office-1-idle-front.png",
+        "sha256": "04bd2381a82fc7eb9ee4b158256dfcfdf4e5a4f16ea66633ee856657ef13ba81"
+      },
+      {
+        "path": "office-0-idle-front.png",
+        "sha256": "fe8f7bcf8cced6dbd1d49f418f66256fabbef0db5c31429e055948d3123d32ea"
+      },
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "2c441df9967cba0aee32cc995363357a8a76e660058d5c9edb9349e308c2fb53"
+      },
+      {
+        "path": "office-0-shoe-side.png",
+        "sha256": "c063e10fb27a6923d0d928f67c91fa11c2428eab000891d32f981694814fa963"
+      },
+      {
+        "path": "office-2-shoe-side.png",
+        "sha256": "681fc44e4e9c32df0a0bccce89e9c8d50a9449a41abd2cc1738c94beaa0b4e39"
+      },
+      {
+        "path": "office-1-idle-side.png",
+        "sha256": "8b098b7f38c48dd52c5c8aa7b2b80e4e935afdabea389960c0fd645ff4484703"
+      },
+      {
+        "path": "office-1-restore-side.png",
+        "sha256": "af5c45fe8b471af256b858c794a24467ad3f2b26a00d90258c93340a45daa8d7"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "7c9daa9dfe7aa71d008292dfbd1b647f6e21d45a3badff61224620e406edcef7"
+      },
+      {
+        "path": "office-1-sit-side.png",
+        "sha256": "f5b562faa542722e6c11cfc2717aafbca496f01dfcbb53935b8ae76881250e84"
+      },
+      {
+        "path": "office-2-phone-side.png",
+        "sha256": "cfeb75f272c7d60f6fbd875f4243eb9f607bc6b97e43b75fa14d6ad850595610"
+      },
+      {
+        "path": "report.json",
+        "sha256": "cbe79ab88c66ef7276ce8e8c24ca6de71aac75d687c9fa747d05a4b697611076"
+      },
+      {
+        "path": "office-2-walk-side.png",
+        "sha256": "fb0b2a05497c0111a113120228db61e71225bf76795ccfba31a0000debeb86e8"
+      },
+      {
+        "path": "office-0-restore-side.png",
+        "sha256": "142db07af815ef36b13ae5515935a65229670fd825ed902c2b334d97a2c3358d"
+      },
+      {
+        "path": "office-2-sit-front.png",
+        "sha256": "8cc235761b13ac9747709406d7364140e6e2320947d4290d4cdf6de95da309b2"
+      },
+      {
+        "path": "office-0-restore-front.png",
+        "sha256": "d467dd38e6dccb73c33f3cce7df3b4dabe1e67270574353bf2c6f181daf065d6"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "649793252e2ab27effc57def0a56ab272b6b6425e00e514bfc1209de3ce7172b"
+      },
+      {
+        "path": "office-1-shoe-side.png",
+        "sha256": "a6ee8f9a802f9d428bda049cd333c7d08c21b729e5108aeba0ea0e1aa4c58746"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "fa685f78ab0eaa95fd1e671839843d7f2e75342d7039a2b6e7ac6e4f23069919"
+      },
+      {
+        "path": "office-1-walk-side.png",
+        "sha256": "13e84f5b781346f71aa845274586fb56e24ff4623fa718d9a7cc57358579d7d8"
+      },
+      {
+        "path": "office-2-idle-side.png",
+        "sha256": "fa47775d9009b97bde74dacc8cca9a9c2a78e36cb6e9f339a5c75b0d056fce8f"
+      },
+      {
+        "path": "office-1-restore-front.png",
+        "sha256": "eacc262cf29e2b40c4f9fe85f79fab6001432db6c3ffe352e016731adf93fc47"
+      },
+      {
+        "path": "office-1-sit-front.png",
+        "sha256": "2ebd9c086077aa6f372ebfcd645b420e4e00cc47f3fe7003cda42ac2b3a975ac"
+      },
+      {
+        "path": "office-1-phone-front.png",
+        "sha256": "056e8ee46aaf91eb16411219f43a771a2a1306e9db484bf770fc72a316abc95f"
+      },
+      {
+        "path": "office-2-shoe-front.png",
+        "sha256": "00ba72b636ffeeb0d69c2467459171918de422ef7080026063447ccb74ce5305"
+      },
+      {
+        "path": "office-2-sit-side.png",
+        "sha256": "c56dfdb2c884cfb3868a0817123245404d82ccfb46fc6add0b70754ce5a5fd0c"
+      },
+      {
+        "path": "office-2-restore-side.png",
+        "sha256": "cb37a9777a3ab42ec4459f0f25b024dbcd3af69d9dd05bbc1d70de1db62dd14f"
+      },
+      {
+        "path": "office-0-idle-side.png",
+        "sha256": "e5da671ac0cd0206aba5b1d236736a3a4dd17142d1d295e79e66124296c5f7a2"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "62656ac47c192dde4ccb0b6377d8c12d946c35e35b4d6fad511566f18c7f4d83"
+      },
+      {
+        "path": "office-2-idle-front.png",
+        "sha256": "c71edcf99deabcd0ccdf089dc60aa0c10b5df9c6725b2083787de910849f270e"
+      },
+      {
+        "path": "office-2-phone-front.png",
+        "sha256": "1ff22a21ceb1bcab1c58bbafcf3d5ce5a5e2775918d640c70b931e937de22681"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "ea7cdaec73e40dd8ac225a888bed63bff8e29192ec3d98dd291922f8371a3b51"
+      },
+      {
+        "path": "office-1-walk-front.png",
+        "sha256": "de070ee25773b41410dc78bd49bb73755050cbd3735daca1df7b5d04b0598b25"
+      },
+      {
+        "path": "office-0-shoe-front.png",
+        "sha256": "b86d54793e4decf73bfdd0830c48521865561896b08a4a8cec507d1466cfbb29"
+      },
+      {
+        "path": "office-1-phone-side.png",
+        "sha256": "2a8abd84db0377017ed502cbabf18181288a65be1a7295e60a8d2d054e19ddeb"
+      },
+      {
+        "path": "office-1-shoe-front.png",
+        "sha256": "8a1393b168d64072e2fb4a5cf830f20771f2ad89418c1f007debac3611995684"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-generated-100",
+    "images": 36,
+    "reportSha256": "98ad7c22fa50417a58ccf173a09f3057b75053cca66da71a2a4daee03fcaca10",
+    "files": [
+      {
+        "path": "elder-1-idle-front.png",
+        "sha256": "04e993ee79d6fc6b8f22f16b2d98059a4fe20100e799b410469b10cb8c845c03"
+      },
+      {
+        "path": "casual-0-idle-front.png",
+        "sha256": "6b69576ade97a6ff855b78a78513043a7f6ec90dacf24813d85600670a7639bd"
+      },
+      {
+        "path": "casual-2-walk-front.png",
+        "sha256": "8523dfce2cfb38d09bd644e1a3f2242a257dde7509f45ccc0f21d78d5644dafc"
+      },
+      {
+        "path": "elder-1-shoe-front.png",
+        "sha256": "0ae34dac084246ab1ef118c255f64978ed209548e18d17992af9bd69c7e1d6f7"
+      },
+      {
+        "path": "casual-0-walk-side.png",
+        "sha256": "3d1101b65cb45b7aee6fdca7b63eb7fcd1d75051d734eb120ee0c6027835f237"
+      },
+      {
+        "path": "elder-1-restore-side.png",
+        "sha256": "4e7a9eb4fef9743282652992328c68a4589946bfee8f4ce3fd519b3f77f06fdc"
+      },
+      {
+        "path": "casual-2-restore-side.png",
+        "sha256": "0dab9f38e33a7d71dc7c511e448fc2a0fdd882cd87bdd8c20f694ef31a2c6eb6"
+      },
+      {
+        "path": "elder-1-walk-side.png",
+        "sha256": "c1b38eed466539eece589e3d83bb45749469ce2060aa22b93646103587834e8a"
+      },
+      {
+        "path": "casual-0-sit-side.png",
+        "sha256": "30af8a677683fa789ccb9a0e14268de73edddf16d91ecf2769c7ba1f7543be15"
+      },
+      {
+        "path": "report.json",
+        "sha256": "98ad7c22fa50417a58ccf173a09f3057b75053cca66da71a2a4daee03fcaca10"
+      },
+      {
+        "path": "elder-1-shoe-side.png",
+        "sha256": "6f62c0a655d5a44f244e8e6d37e68b8a03ce80248068dd6e106cefd369edeaf9"
+      },
+      {
+        "path": "casual-2-phone-front.png",
+        "sha256": "4e010c81dd8d13bf55b50bd08fddbae8e722f30817adcb7a29014f69a24e31af"
+      },
+      {
+        "path": "casual-0-shoe-front.png",
+        "sha256": "bf09f1493b961c7d506adb1a9671435583354ace2aaac37fb3abafd90fc95d87"
+      },
+      {
+        "path": "casual-0-sit-front.png",
+        "sha256": "b63ddc0a6cb3bc181ba0bebee6210d0f03d0120a0483013183120a9bcf87fa1d"
+      },
+      {
+        "path": "casual-0-idle-side.png",
+        "sha256": "643a6042f533b5685620b4b197480e7543575ee59fb5b412393780c659f30bd8"
+      },
+      {
+        "path": "casual-0-walk-front.png",
+        "sha256": "9b32f996b108bc15eb3431262a22749b9ad927f7ebdbb8f403db1b8f0b7b7a28"
+      },
+      {
+        "path": "casual-0-phone-front.png",
+        "sha256": "5e485c2aeb8a8cd8ec935362b4e0705e42e189d0be28c9614ca80550d6d8824d"
+      },
+      {
+        "path": "casual-2-idle-front.png",
+        "sha256": "dd766c49ade5612ba40bae24a1afbe057b9a225ffb3b5f09b2e081e8974817ae"
+      },
+      {
+        "path": "casual-0-phone-side.png",
+        "sha256": "dfd2a8ae35764ecbe173afdb33d555f30aedac41b2f80b3b1f0523598e8ec51d"
+      },
+      {
+        "path": "casual-0-shoe-side.png",
+        "sha256": "cd0329517664f7ab9817190273de30a7ca4a0a6dfe8d8954d66340d8030825a0"
+      },
+      {
+        "path": "casual-2-restore-front.png",
+        "sha256": "f19672857aeaae4a91df6ecebcc034efab96275c6856b63c838f712b25eab84f"
+      },
+      {
+        "path": "elder-1-phone-front.png",
+        "sha256": "775cf03583a0d5e0f5d27df288fd1324949e730291ff17b01f44f9c650addc78"
+      },
+      {
+        "path": "elder-1-walk-front.png",
+        "sha256": "2d425e752ba2318f76ec83df174a7aec6f3b48fe5083e43c85ee5a04d96c1e5f"
+      },
+      {
+        "path": "casual-2-shoe-side.png",
+        "sha256": "af0f372f7baa7a4f0690bda6729c5a09809b4b73ae0f8ed9e81a0e8b9a68808c"
+      },
+      {
+        "path": "elder-1-restore-front.png",
+        "sha256": "c07d9e362aaaef31a34358db7bdad0254f2a6c9dd5af8182cb51fd54fc600023"
+      },
+      {
+        "path": "elder-1-phone-side.png",
+        "sha256": "25c3b3c105ba6d734281193973a4a2373b16af2f65aa82e0eaab4a049d969b63"
+      },
+      {
+        "path": "casual-0-restore-front.png",
+        "sha256": "9f0339bcc2e314aa7e8d133302a4829e91e0f260d187f34706728998f922c407"
+      },
+      {
+        "path": "casual-2-shoe-front.png",
+        "sha256": "51018540c7e26d33c96a1742208b02fdfef91f985fd2454efffd6826e77d2b88"
+      },
+      {
+        "path": "casual-2-phone-side.png",
+        "sha256": "030910aea421a5201140cdc2698034be2ceab3ab9a1ce1db06712e1d2829f971"
+      },
+      {
+        "path": "elder-1-idle-side.png",
+        "sha256": "3dd9ded4af17af82e663512dfacac9a6c8b88f7182e847643ea2cfd2719fe9c2"
+      },
+      {
+        "path": "casual-2-sit-side.png",
+        "sha256": "75ccd465f68d9a73d9128b4c4213144d595642b27bce6143544ee7e75f865b5c"
+      },
+      {
+        "path": "casual-2-walk-side.png",
+        "sha256": "fe74392f44c3bff8f8666757951671a7c9124fe4acf4472fee14813529e5eaf7"
+      },
+      {
+        "path": "elder-1-sit-side.png",
+        "sha256": "8c3b8c18d91e11a35afaf280378ae261629df2022d0bf2a53515e12fd8ba34d8"
+      },
+      {
+        "path": "casual-0-restore-side.png",
+        "sha256": "398ef83feabc6082b347c26ab592ed1016188fd2841fe35c830f121bfa28aa27"
+      },
+      {
+        "path": "elder-1-sit-front.png",
+        "sha256": "bc9c5761c345e2e60e5fb5d1a34f4a080d2af4b5ab54fc1cc84c01ba5f852975"
+      },
+      {
+        "path": "casual-2-idle-side.png",
+        "sha256": "a8ab83ccdf567da12897fd8dd280234ea1a36e8c39670f4806d373ebc563fcf1"
+      },
+      {
+        "path": "casual-2-sit-front.png",
+        "sha256": "99756e4c9dd08c6a2a20e36627217ce74ff669ed35dc64b0fe4817c7f166be49"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-generated-85",
+    "images": 36,
+    "reportSha256": "0df3ff281307943c18ffa09cf3504096cf4ddc90cbf378f0e6d3d5422ce426f2",
+    "files": [
+      {
+        "path": "elder-1-idle-front.png",
+        "sha256": "174ce76246be5ea594822420b8ee46467be1f14103b479964a3979aae76299d6"
+      },
+      {
+        "path": "casual-0-idle-front.png",
+        "sha256": "a1f8805bc7b2af7375e8ba83be7f18fe33b46bf219abc0d11342396ca3ef4afd"
+      },
+      {
+        "path": "casual-2-walk-front.png",
+        "sha256": "93eaa14307d6f19ea01d2373facf1c775748a7fb860b53929aeef2db0adba395"
+      },
+      {
+        "path": "elder-1-shoe-front.png",
+        "sha256": "93a89596de46fe480d3b530b7ea0f8cbdb91988769a5699e5a31cdd31281a358"
+      },
+      {
+        "path": "casual-0-walk-side.png",
+        "sha256": "f80e5d21231e64c27b8fba76e59f246f9352767b0705cd7dc889ac58488d1d1e"
+      },
+      {
+        "path": "elder-1-restore-side.png",
+        "sha256": "0d75d5c1d465eaa9ea160b9e5d4ff5fb656e9b4b77f26e8b5d03acd9710d7802"
+      },
+      {
+        "path": "casual-2-restore-side.png",
+        "sha256": "4ce71e08f8084adf33ae533e762e5e4b3e29b732b441a6aaa568d7e10bee2913"
+      },
+      {
+        "path": "elder-1-walk-side.png",
+        "sha256": "904b7147787c9b468cdd3d6fcb36c6f63d458da16b784389d789adc780b99ea3"
+      },
+      {
+        "path": "casual-0-sit-side.png",
+        "sha256": "0fde536a1e138982f793bc23912529e60d74b56e7ef79292a7e3110f10a38f9b"
+      },
+      {
+        "path": "report.json",
+        "sha256": "0df3ff281307943c18ffa09cf3504096cf4ddc90cbf378f0e6d3d5422ce426f2"
+      },
+      {
+        "path": "elder-1-shoe-side.png",
+        "sha256": "c3edc8d8a4d5f021ffd872d7359aeefeeaa317257bf0eb82dadf52ecd6bfc3cc"
+      },
+      {
+        "path": "casual-2-phone-front.png",
+        "sha256": "5a63d45f81020133275c9c7a085853ad08ab6f5623cd64d3d8d37937a542af82"
+      },
+      {
+        "path": "casual-0-shoe-front.png",
+        "sha256": "3b1e9bb352d57cfdb907007b841f451aa7b3621129c9c1641fd6440802321240"
+      },
+      {
+        "path": "casual-0-sit-front.png",
+        "sha256": "e3a166ed542de9d1214d1cb375570d2bfa23a5181aa186268ee6646dd5e17166"
+      },
+      {
+        "path": "casual-0-idle-side.png",
+        "sha256": "fa9d07ea54987159a87129a5102bd6b450edb45473a0ccb7b99a9de371541edd"
+      },
+      {
+        "path": "casual-0-walk-front.png",
+        "sha256": "4e70a6ec6966b3f9bcb87407d8dc1cb526c322338ca0bdbebe6fb60633d0e523"
+      },
+      {
+        "path": "casual-0-phone-front.png",
+        "sha256": "94694089d2dec5180c5b3d6897460c471b3e2d9a461e430a6bda1a861719e962"
+      },
+      {
+        "path": "casual-2-idle-front.png",
+        "sha256": "2ab10b7ad97c48992ec7fbc51c8a751c58fcb4c299417329e83351277de60aed"
+      },
+      {
+        "path": "casual-0-phone-side.png",
+        "sha256": "23c5218b58eb97975559214a6089ad9d4c8dc600bc1c7cb230a998bcf4aec271"
+      },
+      {
+        "path": "casual-0-shoe-side.png",
+        "sha256": "ced7ffc0a31fe6ca087f6cab436966ea4c903593c7ff8a63b1541edc2658293b"
+      },
+      {
+        "path": "casual-2-restore-front.png",
+        "sha256": "fa1f9e5e6867cfa122c68e7c9cd2e91b5bc29f0066a3a84ef0879333a3581251"
+      },
+      {
+        "path": "elder-1-phone-front.png",
+        "sha256": "7613b1e421e3f41a64464e88776c6608d1709478209566f40c12f79d02b45282"
+      },
+      {
+        "path": "elder-1-walk-front.png",
+        "sha256": "ef0bcee6e939b38d3658d03f9a4280bc7f8e2e69afc125fa72814fcea8e396f2"
+      },
+      {
+        "path": "casual-2-shoe-side.png",
+        "sha256": "3e304e37c2e619e7a9828d5a9c5509d2c7b79262da32a9ca038f321bcea6973e"
+      },
+      {
+        "path": "elder-1-restore-front.png",
+        "sha256": "1100a8b7c5cb6986bdc2f31c3a23d43f68273d6c3f434a113a748985ba69ab52"
+      },
+      {
+        "path": "elder-1-phone-side.png",
+        "sha256": "ff27b27c33236de9b4ca423872e81b6be92ea69c3b316bf3eff5ab3fd8414a64"
+      },
+      {
+        "path": "casual-0-restore-front.png",
+        "sha256": "ca6c5b4691a666f9f5b7d3f59e431412cd914cf8a7af4082f3155da582556c1c"
+      },
+      {
+        "path": "casual-2-shoe-front.png",
+        "sha256": "246e25000f077e50540b13eaf233492470b186414c43122f082c8233cf6b181a"
+      },
+      {
+        "path": "casual-2-phone-side.png",
+        "sha256": "dcfccfccad40f998596bb67c4014ae97f35f993cb75d9cfc6e030008d85625e0"
+      },
+      {
+        "path": "elder-1-idle-side.png",
+        "sha256": "67f02234abc37ef3eb747ab377ab616b6751c54fd2669a16df07b32a32808a4a"
+      },
+      {
+        "path": "casual-2-sit-side.png",
+        "sha256": "45545551a39b5baf11784e4293a7effc2ae4262b8d58304cfd25d13f60ff897c"
+      },
+      {
+        "path": "casual-2-walk-side.png",
+        "sha256": "9390a03dc463d69c3250a068603d5e53c666b5468947617e5b3fc3f99895180d"
+      },
+      {
+        "path": "elder-1-sit-side.png",
+        "sha256": "82ec17d9deddb59057dc2bd8e7c6e2684609766aedd6dbe4b73faa9adb1a5c64"
+      },
+      {
+        "path": "casual-0-restore-side.png",
+        "sha256": "7b6ce54259bafba2ace4cb02d8d1dddb0ca85ecfde3b9844a90127a46e6eab82"
+      },
+      {
+        "path": "elder-1-sit-front.png",
+        "sha256": "dd7eb8b2ed14bc97ee73a10b03908aa7e8c9ffb673b9a7cc94a48c478687c814"
+      },
+      {
+        "path": "casual-2-idle-side.png",
+        "sha256": "2155cb4a9f371a4341f24b3cfb43923c17aceb82df2f01e1341a8fdbf6e2426c"
+      },
+      {
+        "path": "casual-2-sit-front.png",
+        "sha256": "685de3c81d7388a6e9fe860be3ecdbab3453e6d3de4f90857b6010476a90eed7"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "b14855c72e6c05461d0ab10485c6aac21b59ca79210315d3424be23e864beca0"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-generated-85-frozen",
+    "images": 36,
+    "reportSha256": "5d441de95e803e4aa86163e3c70d8c1d52f60cb5c55a7c6b2d0a35bc9abc93fb",
+    "files": [
+      {
+        "path": "elder-1-idle-front.png",
+        "sha256": "058eceb18d63fc3e126d7de2f36eec812c93deeb79514750391d751dd6a1ca0d"
+      },
+      {
+        "path": "casual-0-idle-front.png",
+        "sha256": "41f069a8b579db886ca44340cfeb53c9a58695c24e5cec4c94643f5685f4b672"
+      },
+      {
+        "path": "casual-2-walk-front.png",
+        "sha256": "6fe56aa76b14afd9ab839d90c8b1f5fe25d092eccc9c82a6d6884d9fbe464b29"
+      },
+      {
+        "path": "elder-1-shoe-front.png",
+        "sha256": "5ee330b5b97ec7931d15594ac92f5dc8197cc51c4b132fd5c2f19a260caf9e48"
+      },
+      {
+        "path": "casual-0-walk-side.png",
+        "sha256": "b51bedab409f1464a9eaaba4013d16f4fae53c551d7c2fb69d40488cb914364e"
+      },
+      {
+        "path": "elder-1-restore-side.png",
+        "sha256": "a530477cab7b728153f6a5e62b0c7ce10569c8596836f39035494213bcba76d1"
+      },
+      {
+        "path": "casual-2-restore-side.png",
+        "sha256": "87c037d5d03c803f98a9fe7855226872b9c84bdd1368afbc8802a545eb8861be"
+      },
+      {
+        "path": "elder-1-walk-side.png",
+        "sha256": "4e1c432f2d1ad2b2d7b79b0f392ac6f31477b5a194ed64d2af24b6981b4edb07"
+      },
+      {
+        "path": "casual-0-sit-side.png",
+        "sha256": "5d77b33392b960815b75bb50c9f6ec6175da4871039ee944e24d69603b32fc4a"
+      },
+      {
+        "path": "report.json",
+        "sha256": "5d441de95e803e4aa86163e3c70d8c1d52f60cb5c55a7c6b2d0a35bc9abc93fb"
+      },
+      {
+        "path": "elder-1-shoe-side.png",
+        "sha256": "420a4d99919e250fb74566f92b6d4656102508c44aa914b8d142615f5be66548"
+      },
+      {
+        "path": "casual-2-phone-front.png",
+        "sha256": "b0ca566747724684cdd7068822597ef4763ef477fe47ddedbdc21033763276ba"
+      },
+      {
+        "path": "casual-0-shoe-front.png",
+        "sha256": "d61eed9bd1ac34514f8df472caa843620cf8b19f2df038c78836fdf83d00225a"
+      },
+      {
+        "path": "casual-0-sit-front.png",
+        "sha256": "7557b83c1c448aebe523dd21705711d4ecfe40294d3eb04891b908222a37f9fb"
+      },
+      {
+        "path": "casual-0-idle-side.png",
+        "sha256": "e5c7d51703ab0bd9df49e7500730b80eb0fb806ef9ec8ef24bb26a90e5f3e21d"
+      },
+      {
+        "path": "casual-0-walk-front.png",
+        "sha256": "e1d9b62dd7aca3ea1c2f6699a834e7b5a830852d0cfe40f51b4daf1188bd016e"
+      },
+      {
+        "path": "casual-0-phone-front.png",
+        "sha256": "d7f13da99cce2af535b00660a17f75ac4c9cc6491b1a705dacf0d4978259cb9e"
+      },
+      {
+        "path": "casual-2-idle-front.png",
+        "sha256": "0190a84de0982ffe3da5e66302cc720e55c689a99a4627e207c76bb383730cb2"
+      },
+      {
+        "path": "casual-0-phone-side.png",
+        "sha256": "fa68fba5823bfba796af67a77d33941a1f73884c5ce0ef81d970ff46fa62173e"
+      },
+      {
+        "path": "casual-0-shoe-side.png",
+        "sha256": "d0bf0c2ded1668f42a1bdc9c530bf86ce1ca5a9d30e3d5a5da3c46240e4e3aa3"
+      },
+      {
+        "path": "casual-2-restore-front.png",
+        "sha256": "9282d985100fc5deacdfc0fde8cc69a606b9cf85633a7470e87c720b00643ca3"
+      },
+      {
+        "path": "elder-1-phone-front.png",
+        "sha256": "f608b90398be5c96c7bc26ad7f8a3a090bb8f40e025ecd04c34ab0c089ab3274"
+      },
+      {
+        "path": "elder-1-walk-front.png",
+        "sha256": "10b40d0cc5be8972b2aaaf50963952a7f829495f1859855c737de8ecad0c9942"
+      },
+      {
+        "path": "casual-2-shoe-side.png",
+        "sha256": "c0591e9efa10909c3d8ee020ea73bd01edce490cebdd088e34a331a6eeff1315"
+      },
+      {
+        "path": "elder-1-restore-front.png",
+        "sha256": "608778d58bc77fe3df20ea4c4d43ceb199b32cc3ed7bba7b895e5de92cde05c1"
+      },
+      {
+        "path": "elder-1-phone-side.png",
+        "sha256": "c9a97d19f2ebb7c2b3316fa02582b555cf638c2add75f06de8f9f5b0bbdce57f"
+      },
+      {
+        "path": "casual-0-restore-front.png",
+        "sha256": "f50ea0f3f4d2d217242013c82f957b99501c65745dcbb35ed5175e7947f19b71"
+      },
+      {
+        "path": "casual-2-shoe-front.png",
+        "sha256": "5c395a1955b624e50228acdb6254c87af42ccfabbda61791f3f931e6765594cd"
+      },
+      {
+        "path": "casual-2-phone-side.png",
+        "sha256": "96d1fe4a69048db18153a73ef61bb4bff3accd7560486e981d3aab6291fc119c"
+      },
+      {
+        "path": "elder-1-idle-side.png",
+        "sha256": "3ffe810175b0cf814d15ddfa9b30cf089216316e3e8153763028a2c709f850ec"
+      },
+      {
+        "path": "casual-2-sit-side.png",
+        "sha256": "009352920a6c4dabf38501178e229f734c08daad58637a728c9223f7cd8a8919"
+      },
+      {
+        "path": "casual-2-walk-side.png",
+        "sha256": "eb70df9e86a4a0ce891a681d851824ebafa36ceadc5d3b8dc75b85a7a3f7e686"
+      },
+      {
+        "path": "elder-1-sit-side.png",
+        "sha256": "216252a4c1846d64c49295f9d371ef4b5d458edc9195d325fad70b4127399ff7"
+      },
+      {
+        "path": "casual-0-restore-side.png",
+        "sha256": "1cddd55e2a1ac5d81a6d5eaa5eed8c6f001508432ea61571f5d16ea76755d627"
+      },
+      {
+        "path": "elder-1-sit-front.png",
+        "sha256": "3a81a9c5aa6e076b6b0cf327b433292fa7d4d2e24b57d8493e89fd4ac5e832d6"
+      },
+      {
+        "path": "casual-2-idle-side.png",
+        "sha256": "2644ec4488885968e3c27769850f5d8ce1fec240918946389ba73c6339d2d043"
+      },
+      {
+        "path": "casual-2-sit-front.png",
+        "sha256": "29ab463fe815b59e02e836e0c56b0834f89c9edf81362b1a55cafc6f34032e32"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-generated-office-100",
+    "images": 48,
+    "reportSha256": "5d4a8b729f88d4a41145553882487be64606b432eb6fc926bce0c17e429e36af",
+    "files": [
+      {
+        "path": "office-2-restore-front.png",
+        "sha256": "9f114e77c200d9498f1444da57a797e23b119084cab4afd34564f193889929d5"
+      },
+      {
+        "path": "office-2-walk-front.png",
+        "sha256": "b80a5d5ac144285eb3480bad5548849750162bf8da8f82025cd6cbb5d6277d6d"
+      },
+      {
+        "path": "office-1-idle-front.png",
+        "sha256": "6f63d50ffe27a4791f150ab72144aa3b18f5e0d348c7daa20b82f372a8395d78"
+      },
+      {
+        "path": "office-0-idle-front.png",
+        "sha256": "13c92c457c981f9217e67858c166492baf531c1b8360f8da97d94e2d4b1b8153"
+      },
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "127f1362689d95c493a6a6ada32f9f1368ccea6168eaf6ab1e75e821c78f0527"
+      },
+      {
+        "path": "office-0-shoe-side.png",
+        "sha256": "e95530699b59023ca3c2e90c91f56f920aaebf8005a0665c4af351eb6b817e9f"
+      },
+      {
+        "path": "office-2-shoe-side.png",
+        "sha256": "60a7cf534b3359771d1bfd7877a78c6353982029efc987c0bb6deb3c530270eb"
+      },
+      {
+        "path": "office-1-idle-side.png",
+        "sha256": "e84101248536d0ad3d2136b1c60df3f73bb19b39ca7dbc4b96cc99520026cce3"
+      },
+      {
+        "path": "office-1-restore-side.png",
+        "sha256": "2345895e0993511038f11e24727063b57758baa29b74a829599d76020407168b"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "62a23441b263f40f44f0ed8824a2243fc9db3a84a540cb839fd824ee45921cd3"
+      },
+      {
+        "path": "office-1-sit-side.png",
+        "sha256": "1ed12c20083816a8c3a4f8b9f49505ff910bb88072f7db43278d54f0e3b40e08"
+      },
+      {
+        "path": "office-2-phone-side.png",
+        "sha256": "22064257e3e41c52bd4aa0a394f7578ea135b9882bec773a005a1d17e49c8eee"
+      },
+      {
+        "path": "report.json",
+        "sha256": "5d4a8b729f88d4a41145553882487be64606b432eb6fc926bce0c17e429e36af"
+      },
+      {
+        "path": "office-2-walk-side.png",
+        "sha256": "e87a711fa1f166acac69abe847aba9b3b4cada7d8af97db5635503878c615876"
+      },
+      {
+        "path": "office-4-sit-front.png",
+        "sha256": "3b400309d7f01d76af3c43dcb04806360e48c5a4850bf8e30fa81a2394edd055"
+      },
+      {
+        "path": "office-0-restore-side.png",
+        "sha256": "4c8992e9f8f27c70775ed957b1fd962c3eab6409da78c07c45aff1dba71eb3e0"
+      },
+      {
+        "path": "office-4-restore-front.png",
+        "sha256": "947b8768c33436fb1c41b4cfd78042a6055dc9a1f75bfb2c6f9b0d64277df0f0"
+      },
+      {
+        "path": "office-2-sit-front.png",
+        "sha256": "c4d251a4daa6225ea82181a4ed571c0c689a066716c3216c7fd816872f6a514d"
+      },
+      {
+        "path": "office-0-restore-front.png",
+        "sha256": "46492185d238d825a5e441a94c4569ff09d5a93aeaa54f27c777215a658f26d0"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "5223233fa18011ce4047b21382ad34485d5b1fa0bf9a5433a310f8eb7587e2f5"
+      },
+      {
+        "path": "office-4-phone-front.png",
+        "sha256": "b6e18454ccd9ed81e576187852d5d8a96d9538c7e5ed1d9e515743bde44fb363"
+      },
+      {
+        "path": "office-4-idle-side.png",
+        "sha256": "fc3138026edb17de5cd8c8eefb1b32ea63c249a6a01261c22d4e97e7b2345735"
+      },
+      {
+        "path": "office-4-walk-front.png",
+        "sha256": "3a2a3355819eea0a8bba5ffb76976fe13338cff0db363a144d9b9598b4cda755"
+      },
+      {
+        "path": "office-1-shoe-side.png",
+        "sha256": "25976ba42b526591dbf477974ef0e31a3ffb61a4872255c9aa93cd053070771f"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "a0e85bfbdbb5d561f6c7aab878434adf4f14cc8df1e4523a9b9e9825f116eaf0"
+      },
+      {
+        "path": "office-1-walk-side.png",
+        "sha256": "f8da36498f244adba7ff0f68c396eedd5022fd2f715c7ebbd17a4f672381a473"
+      },
+      {
+        "path": "office-4-idle-front.png",
+        "sha256": "7871e3fcf59a7660ef7ee8fb0d54884728a76ba65f52c5928baf77cc9c26a96c"
+      },
+      {
+        "path": "office-2-idle-side.png",
+        "sha256": "9b36652549947e74dec0572eb5528f94ecbb62d3cff1bee6fbf57cc9855ccc7d"
+      },
+      {
+        "path": "office-1-restore-front.png",
+        "sha256": "95ac81607451aeae89af2189888bb1d94171636473542f141e401acb290fcb80"
+      },
+      {
+        "path": "office-4-shoe-side.png",
+        "sha256": "2ce04bccb0703c11f3ce6597cf7dee3b05be8f1563e4aa6bc14cdf82b3a779b6"
+      },
+      {
+        "path": "office-4-phone-side.png",
+        "sha256": "cd92cb13f7aa9547f9a28944513bc46b82bf16515bd7e1761079820c4843c837"
+      },
+      {
+        "path": "office-1-sit-front.png",
+        "sha256": "fb8647d1678e8794f0ac22fbd4084a23386e98062b1b37b87621b0f3d0c6414e"
+      },
+      {
+        "path": "office-1-phone-front.png",
+        "sha256": "31a84e5dee70b3970216db34d68552bd2cb2a7e4fb08291e94fe70bc215058fb"
+      },
+      {
+        "path": "office-2-shoe-front.png",
+        "sha256": "3b6f8a7f9bd76dc50d01a750f50783d6d10c265f38e3627546ff93181f7d9638"
+      },
+      {
+        "path": "office-2-sit-side.png",
+        "sha256": "7a0db3c35febe3b0ff6769c3a585e81361ec727171bba07d7a24af046d3d3bee"
+      },
+      {
+        "path": "office-4-walk-side.png",
+        "sha256": "6027e1cbc85e43cc1509844e717409b1da6b9f6e20d8b0d42db1ffa9538e8cc7"
+      },
+      {
+        "path": "office-4-shoe-front.png",
+        "sha256": "5c939b3da9c5806ace806cafdb5c5b6f88928d7af23f0d15a65a031d3b7329b2"
+      },
+      {
+        "path": "office-2-restore-side.png",
+        "sha256": "f69d68662cac5dabd8241eacbb7e8191554d354b3aeaa9cbccf6dd0cf4cedc89"
+      },
+      {
+        "path": "office-0-idle-side.png",
+        "sha256": "9760fc5712fba7860c1dd7823c56d7bc9f056d95ef9445002564d93ea0e61a77"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "95a31a0c724b5ed7974ad0b9a8f898611a0b4bac0a9d282f5da682347bbcdc5f"
+      },
+      {
+        "path": "office-2-idle-front.png",
+        "sha256": "f9eb8d4e54fe425bce006cd3833293fbf0a251ce1e8efcb5024675814bc08548"
+      },
+      {
+        "path": "office-2-phone-front.png",
+        "sha256": "d0fd4780d4e802dcabe6a3bd52a05473e195465fbf5c7b5d21c8e3275a9b5b0c"
+      },
+      {
+        "path": "office-4-sit-side.png",
+        "sha256": "a55230a01f9b9bfe4e21e566452c704aac2d57aff390fe70bd1e54a4d9aee9e4"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "1bbe3bf32880056d9575e30418e029bc79b9217b708e483fc550942aed32b28d"
+      },
+      {
+        "path": "office-1-walk-front.png",
+        "sha256": "adff02427efb90b40d3236a7431bb7764973d856ce4d7fb0473e21cf80ecb873"
+      },
+      {
+        "path": "office-0-shoe-front.png",
+        "sha256": "977f401641c1ef868aefbd35fb6d808b15a049debc67e9fa6dd14ea4c550ec51"
+      },
+      {
+        "path": "office-4-restore-side.png",
+        "sha256": "b5cdf9bdd390cc6e4e696d76b695f3ba4b3c573c983dfd7da651546fa21a84e8"
+      },
+      {
+        "path": "office-1-phone-side.png",
+        "sha256": "b866f0afaa7c1789f65f4742d2c3c0a61836c6bd5575782d246c1d054c5511e5"
+      },
+      {
+        "path": "office-1-shoe-front.png",
+        "sha256": "729f4981cd797dc557a4fc3d5bded8ea04798ddd10481cf2b81c08c43189f179"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-generated-office-85",
+    "images": 48,
+    "reportSha256": "5597682a810123f8643ee48703675af7d50ec7fc20cfcf607f7d917d8a039732",
+    "files": [
+      {
+        "path": "office-2-restore-front.png",
+        "sha256": "b8f339eb562829f6afeb31787bc152988d37d2b8cbe0cc7a3dd9bf750907f33e"
+      },
+      {
+        "path": "office-2-walk-front.png",
+        "sha256": "d770b713970dbe941d5a2bc025c40c0936784b6f153a73aff47f1519d2b1e8bb"
+      },
+      {
+        "path": "office-1-idle-front.png",
+        "sha256": "094885ec391315f2a7ab54699b84abbb3c972a119205177127dd39e4ecf403e7"
+      },
+      {
+        "path": "office-0-idle-front.png",
+        "sha256": "4c723c7864419f8f0ab492005fb39c0f46d64c905430abdc238b8bca5460b16a"
+      },
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "5ec0ffec496735ad67bd1dcf7dae5fce7f52d66f88fbb2cfb1e0be0e0b4c3b6d"
+      },
+      {
+        "path": "office-0-shoe-side.png",
+        "sha256": "d3d246d0987029fd0a42921b5f133d62fa5af0263567206b633dd8cbae8db524"
+      },
+      {
+        "path": "office-2-shoe-side.png",
+        "sha256": "f85f4cf449e1f62db508c13229a6911f7b84b05f534a229c74491ba8767135e7"
+      },
+      {
+        "path": "office-1-idle-side.png",
+        "sha256": "31cb2a205e9f674d8530e44ec61fb9bd180e26e29cc5652b08408bf7703e7a7a"
+      },
+      {
+        "path": "office-1-restore-side.png",
+        "sha256": "561eec963ee6fd7fff8df3a164f0264bb9689dfc2cc91bc7dc24e0d4ab576c49"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "f2a5d650e15f8deda65a6b5d696963e0061753e751eada0b688eafc315d93455"
+      },
+      {
+        "path": "office-1-sit-side.png",
+        "sha256": "a5b557eda4607b82bd564dd6f9d451335304dfde5af75326a880b96473cfb9ac"
+      },
+      {
+        "path": "office-2-phone-side.png",
+        "sha256": "a09539f71bbc14b44ce0656cc0806597c2d5cfcd063c25d9c306f1199f9ddf30"
+      },
+      {
+        "path": "report.json",
+        "sha256": "5597682a810123f8643ee48703675af7d50ec7fc20cfcf607f7d917d8a039732"
+      },
+      {
+        "path": "office-2-walk-side.png",
+        "sha256": "1c384a981107399edd8b4115dae613d64b5bf277e2de63a4721479369fa1392d"
+      },
+      {
+        "path": "office-4-sit-front.png",
+        "sha256": "e0ea4c018a19e37c9fca65a5450b8bd1070b6fa8f97bae6201100b489058bf6a"
+      },
+      {
+        "path": "office-0-restore-side.png",
+        "sha256": "252be3ee1ce46f9052af3a455e361880c163c40655a4aea9471b9e1da4809b2c"
+      },
+      {
+        "path": "office-4-restore-front.png",
+        "sha256": "73ffa2b5787d57de8dca172321078386b9a94a2a5182ec7c13dcc234a742ec3d"
+      },
+      {
+        "path": "office-2-sit-front.png",
+        "sha256": "fd0a2eeeee63fff7f511509de87ed26c2b4b17d3441f8edec132d4f9387e9628"
+      },
+      {
+        "path": "office-0-restore-front.png",
+        "sha256": "4bd6c09429e7a5ff01e1c6d9a2ed5673b17d2b66f3dbee92722844ee6e0be9e2"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "2de7adc263ebc69adf34cd6359d9e1336e7253fdb411cccc6d822582d8fd7880"
+      },
+      {
+        "path": "office-4-phone-front.png",
+        "sha256": "bbe4a253e30f9f1c185fb5ee0447ce334c36a28aa69e0c7f4d80cc937cb1d713"
+      },
+      {
+        "path": "office-4-idle-side.png",
+        "sha256": "66f24e3f4390ea849ae077217a48e19e54080f3b4ed6a5ea4ad27a2638605a53"
+      },
+      {
+        "path": "office-4-walk-front.png",
+        "sha256": "0a0971ec2fb9c9d5306e064408e3af7d7e5567279f9324bce198be05ca26d740"
+      },
+      {
+        "path": "office-1-shoe-side.png",
+        "sha256": "b36e5d72dcfabdc9193a8c11e6612d9a81da582af77a1b819c38a0b10721b49f"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "51d2c75ce46067817fbbdea7addceb21c7c92f629741ab6a2e4614f95619ee1d"
+      },
+      {
+        "path": "office-1-walk-side.png",
+        "sha256": "9a360b440d9f7767fad477293c32cc4ab6e671fba3b9697c06a08c56bb4e2c9e"
+      },
+      {
+        "path": "office-4-idle-front.png",
+        "sha256": "63f8108d4616539c37453bd716d57557d5416318339bbca0b04aaa6cf141087d"
+      },
+      {
+        "path": "office-2-idle-side.png",
+        "sha256": "d3b12444479cdc3f98871dbf1d03167dae7bb73e404e6d96e5fd5e657b70a227"
+      },
+      {
+        "path": "office-1-restore-front.png",
+        "sha256": "efb0a4563286757a46e31267db5008147dcd31b478d4380ab1628de51932d02e"
+      },
+      {
+        "path": "office-4-shoe-side.png",
+        "sha256": "2ec6c5be66aad908f1e9c49c3899eb6338cdaa2f559a512e4cee11fd8e04d995"
+      },
+      {
+        "path": "office-4-phone-side.png",
+        "sha256": "a08f7aa993ebaba74aa9aaba4cca18374487da1559fba3d6676eec31ef237779"
+      },
+      {
+        "path": "office-1-sit-front.png",
+        "sha256": "bbaadae6022dcd494f58316f4a0927a72d1770a09b53fde86c4b8d6210964e04"
+      },
+      {
+        "path": "office-1-phone-front.png",
+        "sha256": "26166ac9ac3dc8ee19fe359793c4caa311519f110c19bbedbb2f44036641844f"
+      },
+      {
+        "path": "office-2-shoe-front.png",
+        "sha256": "26063ea1baccb90ea0c3639c33fa6a4146ac6b3aa315bfa7ce2694f60cd8e56b"
+      },
+      {
+        "path": "office-2-sit-side.png",
+        "sha256": "b1bba1e825455534aff764283a7a9f5a545de4dba7cfd1d543fdc7cc06e5c618"
+      },
+      {
+        "path": "office-4-walk-side.png",
+        "sha256": "014f9b94eca1447209ead4e1edecfee577813833512596977c7fcd9b77982c7a"
+      },
+      {
+        "path": "office-4-shoe-front.png",
+        "sha256": "830cdd3bead08a571cfa5fdac11cf2eb9dc3acf75074c2a659ee9b02d504c646"
+      },
+      {
+        "path": "office-2-restore-side.png",
+        "sha256": "840957fb63581014162117e7b80db3c9776168831e3b34aac9ac72c1dcaf6e1d"
+      },
+      {
+        "path": "office-0-idle-side.png",
+        "sha256": "c8c3fce98082fc6b29a7a09af64f01de6e55a828e91c7de305b9a84983fe2e99"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "815b2637b17c048d73debccfcc568d00641daf7d18bfcee8e68c91ffaa8b827e"
+      },
+      {
+        "path": "office-2-idle-front.png",
+        "sha256": "65298ce19c471b3258504fc93c725766decb7a16493b3f33226cded818dbd2b0"
+      },
+      {
+        "path": "office-2-phone-front.png",
+        "sha256": "27e6fb0cef087a2f29a4d02d53297b4e42ffb6137ddaee1f162a9a57e885f0bb"
+      },
+      {
+        "path": "office-4-sit-side.png",
+        "sha256": "f5a7a5083091e33a5b564e736e123920c2cf7e010a447acd3684509ce6c8305f"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "0ceb71542d9df1f0b44080b1ba774f5177a76e7270ecdd5e1970dec8e76a6a82"
+      },
+      {
+        "path": "office-1-walk-front.png",
+        "sha256": "4e03f579230f831f9384a8e57e2664afd775bf99752844f903d4e5129f360a32"
+      },
+      {
+        "path": "office-0-shoe-front.png",
+        "sha256": "314586ea202d4eb139ab7fc49db3ce2b4e333d779eaf18ad25789fd55d363346"
+      },
+      {
+        "path": "office-4-restore-side.png",
+        "sha256": "fe0185395456063e36e7c0d8f48901cce06a43252f8da2ec26e52fcd2ef0a864"
+      },
+      {
+        "path": "office-1-phone-side.png",
+        "sha256": "b6040813e2bfb1bc108a785b0a5147db690ec86ad53c514b6c80eb9dd52d743d"
+      },
+      {
+        "path": "office-1-shoe-front.png",
+        "sha256": "276c0134d046a7a767818474c2a4b367b41073f83528d75ac41b4192b2a158c0"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-normal-100",
+    "images": 72,
+    "reportSha256": "5388f10423f229c97d485271d87ff0f5b7ea33d2f9acb765669c3a4fb0024dfe",
+    "files": [
+      {
+        "path": "elder-1-idle-front.png",
+        "sha256": "e3831d9ec39559e2d03c7a17b7f9674591848768daf7b45a29ec46a90a760850"
+      },
+      {
+        "path": "office-2-restore-front.png",
+        "sha256": "cc6c176142f0f1c81ed8424ab86ef2240eeeec97ec61240d60f1c2bd1bd35a12"
+      },
+      {
+        "path": "office-2-walk-front.png",
+        "sha256": "8d0ac3b1ca8c2bea852d1fdd245611ed69ed1badaf375ea375e348c7d6938ff2"
+      },
+      {
+        "path": "casual-0-idle-front.png",
+        "sha256": "54c47a890bbc55ffa6eb514d60e2d0893921aebcea22b3933dbb8453b878a837"
+      },
+      {
+        "path": "office-1-idle-front.png",
+        "sha256": "5e612e9a6af2d69af0261570e80d757045d66a7923357072894f9dbfb9b4a105"
+      },
+      {
+        "path": "office-0-idle-front.png",
+        "sha256": "fd29ccbe87bb01b28fa8bfb1cf0adaf839252402f06ddad97b817be007432bf0"
+      },
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "0ab01eed62c5823c548841c35482fc19903128ad46fef0447eb31c3f75662b3f"
+      },
+      {
+        "path": "office-0-shoe-side.png",
+        "sha256": "f8dbacec75d39441a5767586f3a9149906066bb1664ffa1c42a52cfa9e5ad845"
+      },
+      {
+        "path": "office-2-shoe-side.png",
+        "sha256": "4a2e2f30ad30a00506883816dc0395019d1b5700a82ef20f64a9b47e6baaf23d"
+      },
+      {
+        "path": "office-1-idle-side.png",
+        "sha256": "38f3b19cf1c8d5d989f984735a91cdce34eda357d469e6f0ec4249b7797673bf"
+      },
+      {
+        "path": "casual-2-walk-front.png",
+        "sha256": "749b57188327f640b4569262af475b8e6f9e90d65f25aef043bb739686f771bd"
+      },
+      {
+        "path": "office-1-restore-side.png",
+        "sha256": "f5d95c445125e9b0229db5eccd0d1637f3bb53b6146053d44af8774b6d75024a"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "1cb7015e865a74aebdecd7f26b587a6f7da12ce0f4f0fea539cd86712502c1f9"
+      },
+      {
+        "path": "elder-1-shoe-front.png",
+        "sha256": "04f191fa07616f29342c2740f0681b266c5a92cfcfd2449c23c3ea7142d124be"
+      },
+      {
+        "path": "casual-0-walk-side.png",
+        "sha256": "3cdb84df6c8e29d98a940cfd6fe4fd2dfae958ac16e93765e8fbe6f208522ee3"
+      },
+      {
+        "path": "elder-1-restore-side.png",
+        "sha256": "4da959fcb8d6aafa96ad4140a0c92074e6423234b3dcbaecd3e4b19f0fb952ad"
+      },
+      {
+        "path": "casual-2-restore-side.png",
+        "sha256": "203de4ac6ba56063584d93b7156f2011cc05ee38b43a39e68291419931d54306"
+      },
+      {
+        "path": "elder-1-walk-side.png",
+        "sha256": "a0488e6ef6eb7e0faeb4108048c9e1149c3eab99c15ab43f88ba18570781fdd5"
+      },
+      {
+        "path": "office-1-sit-side.png",
+        "sha256": "8d8b9683dadeaa7d459672e2c78630a67cdbd7ac968aa4dae942a46a94195339"
+      },
+      {
+        "path": "casual-0-sit-side.png",
+        "sha256": "6090c6609ed3c67b19393cf53080f89ed4f3374a54479c0a399cb59bd0d8a7f0"
+      },
+      {
+        "path": "office-2-phone-side.png",
+        "sha256": "79491c03c543b6258adda74f64e035a72a6fa4a5ee7aa9b9db450375c38079ba"
+      },
+      {
+        "path": "report.json",
+        "sha256": "5388f10423f229c97d485271d87ff0f5b7ea33d2f9acb765669c3a4fb0024dfe"
+      },
+      {
+        "path": "office-2-walk-side.png",
+        "sha256": "e9e6d62964b16d3a8c5cd68f0708eb39850525273eb8810c6edcdea10c94470e"
+      },
+      {
+        "path": "elder-1-shoe-side.png",
+        "sha256": "8a048b78e22e5b94469bf8e96a18e37d8d5a8ed0da02231ebd253f29e58cdebf"
+      },
+      {
+        "path": "casual-2-phone-front.png",
+        "sha256": "c8e384dbceb81a5d32fb31232ddcd2fa3c2b3a16c6c9c5da1b6675c51fa77765"
+      },
+      {
+        "path": "casual-0-shoe-front.png",
+        "sha256": "22cb5b92c8b70d397983503f969e62e1e15b63e82b5c5737cc7b131d49d9aad1"
+      },
+      {
+        "path": "office-0-restore-side.png",
+        "sha256": "11bc51b181c3786b4290ef86c76a70c67b4894e777a4823668d23e045dbf7d8f"
+      },
+      {
+        "path": "casual-0-sit-front.png",
+        "sha256": "f5a40e9d6c82daf6d5c1671d7a918094fef03b7a3f24c34557cf6162ea2f1507"
+      },
+      {
+        "path": "casual-0-idle-side.png",
+        "sha256": "30c80be807d477876476096cc461724c16e9344f5f0ee44288d222be3af85274"
+      },
+      {
+        "path": "office-2-sit-front.png",
+        "sha256": "be7e520d8536ca78dc6295cf665025c513b42e27022b9167350d9bff100597c2"
+      },
+      {
+        "path": "casual-0-walk-front.png",
+        "sha256": "7393013d25bbef1957d5ce1c0b7810fa413a03b6f958eefcc80e8cb81903a565"
+      },
+      {
+        "path": "office-0-restore-front.png",
+        "sha256": "7679f061c339045cc263f587efa94c3339583a7860c0863e8f8b7e207bfdaa9c"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "1f9642991f904d7512c2628cbe727bac49e09ca7b98d7c82dead7595c98c1e6e"
+      },
+      {
+        "path": "casual-0-phone-front.png",
+        "sha256": "b2af063673fc281d6f7f713c07d4a5ba7cbaf9adf1927ad9b63b5b312b97c271"
+      },
+      {
+        "path": "casual-2-idle-front.png",
+        "sha256": "fba8800cad352050b04b56e6029d2aefe477e8c940df9999d6ca9310f4249b2c"
+      },
+      {
+        "path": "casual-0-phone-side.png",
+        "sha256": "94446dfbe06fc762718fdc337698f3e638af3da800dbdcdecae9c4e9714b526b"
+      },
+      {
+        "path": "casual-0-shoe-side.png",
+        "sha256": "a20683d5123a5c3035e897ac17d4d401a3e5dcb4c8f3fe1eb6357378c79f9cfb"
+      },
+      {
+        "path": "casual-2-restore-front.png",
+        "sha256": "cf0c567672f5799994ab80a5c9b536dda8934e15e8987e91c2df06a07ff51925"
+      },
+      {
+        "path": "office-1-shoe-side.png",
+        "sha256": "7d7a1810663fcb6ef08ceefa5719d0696fa0c166c280f090d1c18c988bde840a"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "911709dbb485b9fbc91fa7b82e9b06f0728b30946b7f47f2ade6e54f37e5de28"
+      },
+      {
+        "path": "office-1-walk-side.png",
+        "sha256": "1ffb1ed20f05c2b6e6db08000bc664c287c795db5b2f2426ca526936abd03753"
+      },
+      {
+        "path": "office-2-idle-side.png",
+        "sha256": "9125a7418d93240272513d267b518ca32848b7a51812559a1a2107241e0196b5"
+      },
+      {
+        "path": "office-1-restore-front.png",
+        "sha256": "b2797fcc4f8905ac4ebb64d25e72b17103c235a4c6d5cb9755837ecd1b210df2"
+      },
+      {
+        "path": "elder-1-phone-front.png",
+        "sha256": "44e63d5c596531640e1b2ffb0d5188acb2e0d3a70312a5f54b45f9185028c583"
+      },
+      {
+        "path": "elder-1-walk-front.png",
+        "sha256": "423820437f24d6a33d2afc773121ae7ed969912dc452a583965a3b9e043609b1"
+      },
+      {
+        "path": "casual-2-shoe-side.png",
+        "sha256": "b41c1d2d01823970176a3ce6dcbee3ecb5f7d4dcfa7be8a7322fdd24525027be"
+      },
+      {
+        "path": "elder-1-restore-front.png",
+        "sha256": "8d1dd71d1fd97b47e77c30412cefce81d3fd7c8ee753c059ad1c896d7e2f6406"
+      },
+      {
+        "path": "elder-1-phone-side.png",
+        "sha256": "589d82ec5b186fae8beb23a5084a65d1c7842bd92fae8cb521aeb38227f93748"
+      },
+      {
+        "path": "casual-0-restore-front.png",
+        "sha256": "2afb8a0fc90362742cb1b4884c81bec20631321db1fd1858c01c4eca9521f381"
+      },
+      {
+        "path": "casual-2-shoe-front.png",
+        "sha256": "b121808a1a01881bcbff33dd20ce07a8dddd26c8a2a14fa7045c7d2c30462951"
+      },
+      {
+        "path": "office-1-sit-front.png",
+        "sha256": "198c6f66276710f5c5e03afe267b5497efe92c57996be9c46e261dba00f3fab7"
+      },
+      {
+        "path": "casual-2-phone-side.png",
+        "sha256": "342c4ae8bc3dae69fa9ad53f625ecb9cccd24230ef9d82b9f72242511afc170e"
+      },
+      {
+        "path": "elder-1-idle-side.png",
+        "sha256": "3954f387fc26cf54821ec5d898ed17a4cf276e76a997a7c832c9033a0cdc0e09"
+      },
+      {
+        "path": "office-1-phone-front.png",
+        "sha256": "e309b2500fe5ab38906cf3b5ed07565fc2a0fc7e72e725fa025181c941809aa7"
+      },
+      {
+        "path": "office-2-shoe-front.png",
+        "sha256": "02ba6292ffc6df97a6eaa8055d3b2c6dfa457cbd2d6a952b9fa17e6e0789e4ad"
+      },
+      {
+        "path": "office-2-sit-side.png",
+        "sha256": "4cdd7258ebe6f4a68997ec5ad6737638f554745b32292eebfbb354ed6e2e79ea"
+      },
+      {
+        "path": "casual-2-sit-side.png",
+        "sha256": "437cc783fe6efcfc63af81347d6b497e53797573e9193424690284eddbaf9d57"
+      },
+      {
+        "path": "casual-2-walk-side.png",
+        "sha256": "3f4179d8dc00e7d3f8954ac1a4700580698df4ea9baca3b5449187e09648201f"
+      },
+      {
+        "path": "elder-1-sit-side.png",
+        "sha256": "8a5554f1750bc5823229f6ef0ccba985d6f9beb4faa3885c525c32ee732c7fcb"
+      },
+      {
+        "path": "office-2-restore-side.png",
+        "sha256": "2ef08bc6fca2b7a8848cea8acbb1857ed125337446e95c03e73b37376ca607f1"
+      },
+      {
+        "path": "casual-0-restore-side.png",
+        "sha256": "5d53dfaea689ba8fca228902b0313d86ead3809887bba1caec20f7b0ffe2a647"
+      },
+      {
+        "path": "office-0-idle-side.png",
+        "sha256": "76232522ce70f9dd28d9247860de4c630f18c4a776cb4c11d8357a126a9a8a7d"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "859fd1f1116684210f517bb5e4ca50994273b3ad49aca71b1be34177b22a7187"
+      },
+      {
+        "path": "elder-1-sit-front.png",
+        "sha256": "0a7667de030b46c6f58124a05ef1f159d10da75aa06eacbd980c834b2936dbb6"
+      },
+      {
+        "path": "office-2-idle-front.png",
+        "sha256": "f53b2d9e6f2aec61566ac811676c1642112c5e1909903252bcda3c88f5b2d3dd"
+      },
+      {
+        "path": "office-2-phone-front.png",
+        "sha256": "6f81b14e9fdecdb51d7202de7c613701b4ff73fc435a4fd65085bff1c7aad87a"
+      },
+      {
+        "path": "casual-2-idle-side.png",
+        "sha256": "f6d89d68ac35015a0c638f5dba4a1dec831ebe39fe49c86625c6387c30215c9d"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "e9fd9bb1a87eef23361580a61f8173aad99260b9f5c60389d27f67e17353f508"
+      },
+      {
+        "path": "office-1-walk-front.png",
+        "sha256": "5649688ff649b45872fa9413abde00938deecac16ace9e982529ce8cff23d81f"
+      },
+      {
+        "path": "office-0-shoe-front.png",
+        "sha256": "28acaabb47534d12a0482257c167f164b96c3f0c2d93f2975289a44bdb626747"
+      },
+      {
+        "path": "office-1-phone-side.png",
+        "sha256": "ce4f85991454d09f3f94c176b8a7b622b3bdae58c45647bd18234b4f9828ea1e"
+      },
+      {
+        "path": "office-1-shoe-front.png",
+        "sha256": "9a0ce1607d285f5f61c8375112a7c0bd87974f500c80477649520b5158069072"
+      },
+      {
+        "path": "casual-2-sit-front.png",
+        "sha256": "d3659cc64bc09fe596a549e89ca2f7abfcc49327f9d66b39ee3240f8b771012a"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28cde32eba8f303a1c58c5beef444067f252a1f469bca713f81c281657a08b"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-final-normal-85",
+    "images": 72,
+    "reportSha256": "023f580c58bd12473efe7d8d766e03930a0dcc70fd2752075c15fcca4b3fba4d",
+    "files": [
+      {
+        "path": "elder-1-idle-front.png",
+        "sha256": "701ffd14f17425090ab3abf19cb5a9cbe32f07c01a00674e71bc0e95ab3972c9"
+      },
+      {
+        "path": "office-2-restore-front.png",
+        "sha256": "be194954824b684013cb0ab8fd1f376255bcdc1e9529870964c9a07b558fc4a5"
+      },
+      {
+        "path": "office-2-walk-front.png",
+        "sha256": "c331b605d9a38d1ebb165994aa4fbce4e7753c275c44b5d53f3925e1c45238f1"
+      },
+      {
+        "path": "casual-0-idle-front.png",
+        "sha256": "01bea63dd5c3633e0f3072707bbe0ccdeafa76b933a5d7f28cb2e138f71b1673"
+      },
+      {
+        "path": "office-1-idle-front.png",
+        "sha256": "6da2e9eadc765800d1718b24f38e6db9da9b30a3b9ad7d5f592f2e927434d8bc"
+      },
+      {
+        "path": "office-0-idle-front.png",
+        "sha256": "f50e9b4bc1a2f514d7a5942793be7e8d664b0cc2c5aa032709abf8fcc3480d61"
+      },
+      {
+        "path": "office-0-sit-side.png",
+        "sha256": "f370687baa9a3949cdf04190cf4a5cde57f9711c96804350e7a40ac4f646f364"
+      },
+      {
+        "path": "office-0-shoe-side.png",
+        "sha256": "099a061a1711e9045290b3bedae83183a5f46eb814780173d55ed0c37ecf02f8"
+      },
+      {
+        "path": "office-2-shoe-side.png",
+        "sha256": "b212d0b2bf6343e5778a8b7a11e6f694cd49468b86fdab9da3b7095c98794f88"
+      },
+      {
+        "path": "office-1-idle-side.png",
+        "sha256": "15ce079d3d7f203b6524a715e4bddfad88e80fcd34d1314eabf8b1726c1155d0"
+      },
+      {
+        "path": "casual-2-walk-front.png",
+        "sha256": "23fd5da1411f2a29b2cca69d1f59509af7bb957e02663f89fbc4d6ae7a2fb78b"
+      },
+      {
+        "path": "office-1-restore-side.png",
+        "sha256": "4d4eb5f03ed97e69d2639f724e710a7c037b653aeb89cd865b1165e34a7905fd"
+      },
+      {
+        "path": "office-0-sit-front.png",
+        "sha256": "d27d49b73a13d28035c021a25f060a95334fffcfe708a45b254bc2dc35ab2f90"
+      },
+      {
+        "path": "elder-1-shoe-front.png",
+        "sha256": "0d69d9077f7a30ac12746b7718f46534f1dd340a182ba96a84588550af5bc03f"
+      },
+      {
+        "path": "casual-0-walk-side.png",
+        "sha256": "a71518ca5b1b41af038754761b90959c4692bced3436354675ff34fd73a0d724"
+      },
+      {
+        "path": "elder-1-restore-side.png",
+        "sha256": "b3175ba93fe2c0f5b23eb986d060a1d0bc885ab8ba30718f005209f7e56abb8c"
+      },
+      {
+        "path": "casual-2-restore-side.png",
+        "sha256": "c648ef53672cf3c3cf254012f506e686001e29e5b35e7005e3f8702268689bde"
+      },
+      {
+        "path": "elder-1-walk-side.png",
+        "sha256": "c76e2ddab22301d03546181b4417a606f74429b11c8005412473691c9616cbb5"
+      },
+      {
+        "path": "office-1-sit-side.png",
+        "sha256": "368762edc7beb6bab62184e2e3bd79d611362ec1796b2c2288e58f4f05b345d3"
+      },
+      {
+        "path": "casual-0-sit-side.png",
+        "sha256": "42ab6fe2d3f126690c7870a30ca4599e589e2ba6eb650ba37f2e50d20065fe8b"
+      },
+      {
+        "path": "office-2-phone-side.png",
+        "sha256": "fe229a1ca25fd34a9094d4edc0c2e7a5e37fe3e6485c20c3304580ba19bbc59c"
+      },
+      {
+        "path": "report.json",
+        "sha256": "023f580c58bd12473efe7d8d766e03930a0dcc70fd2752075c15fcca4b3fba4d"
+      },
+      {
+        "path": "office-2-walk-side.png",
+        "sha256": "5af81d35ff7a50de5bf69dff760b28df4f43e46135c2f6cc62bdcb1cea7090a5"
+      },
+      {
+        "path": "elder-1-shoe-side.png",
+        "sha256": "c4bcde698af8a42a6b66e748e160fc2aa59d61e15e02d7f7d78410f74fee4145"
+      },
+      {
+        "path": "casual-2-phone-front.png",
+        "sha256": "e2b3cc24a4d77984c347a0eb4100dde897c3997a9d95ac9fff37665152f8932a"
+      },
+      {
+        "path": "casual-0-shoe-front.png",
+        "sha256": "3b33699fbb949f682d8b83f50ef95fd8fafe12bd09db71259f77095a617ebc60"
+      },
+      {
+        "path": "office-0-restore-side.png",
+        "sha256": "cc461b8910e3aadf702b2053f202824d92546cb68e4deccf0c4f45285bc2ed37"
+      },
+      {
+        "path": "casual-0-sit-front.png",
+        "sha256": "e8e531b9422f07298016ec009bfa3fa8adcf87e88c196983d02a905471dcbcdf"
+      },
+      {
+        "path": "casual-0-idle-side.png",
+        "sha256": "31efa5b563dc7c1998f83d9adeba8ff857d1b1496258f6842f924d04a8a40384"
+      },
+      {
+        "path": "office-2-sit-front.png",
+        "sha256": "649ea8c87eaf52f0cd9e868f5cc91fe651b49ed237f912d3e018f88cfe8ccd60"
+      },
+      {
+        "path": "casual-0-walk-front.png",
+        "sha256": "a2263916c4634446a713da0362f63f0f4240d9db20e3b353773cd3edf01c016b"
+      },
+      {
+        "path": "office-0-restore-front.png",
+        "sha256": "4363c503d27e2dce95dc982b2a8adda2e5f3428d791a497028fbe3ca9d247d59"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "ecbf86305d44079519a4a6ecce437d8dd3af52f562e00a1f7599519de761a881"
+      },
+      {
+        "path": "casual-0-phone-front.png",
+        "sha256": "06a8b681fcff86c49ed0b72ae982e81f7837b5adc3bae40019902db9bc461bb1"
+      },
+      {
+        "path": "casual-2-idle-front.png",
+        "sha256": "6f0cbc633144adc21194b5309c180a17a457c80c1ff4c1265b6f850305cee49e"
+      },
+      {
+        "path": "casual-0-phone-side.png",
+        "sha256": "a68d8d298b0254ae528e634a0f40787b4cfd9fb8db6aa33ad36f0dc00f36a0a1"
+      },
+      {
+        "path": "casual-0-shoe-side.png",
+        "sha256": "26f778f265571b9aa916613dcf4861a763b5d6f8caf0d12b89c4e205b7ee3a73"
+      },
+      {
+        "path": "casual-2-restore-front.png",
+        "sha256": "cf4bae35498a8c3f362a02dff8a2d70fbfecfda5c0ffeccb056a3750457c69d7"
+      },
+      {
+        "path": "office-1-shoe-side.png",
+        "sha256": "fee5cde2bf89ec1121de900c517ac0be23918f576a5f1b221ab22dcb413b1a77"
+      },
+      {
+        "path": "office-0-walk-front.png",
+        "sha256": "6bd18a0b16e5878e806b3b95f6538b75f3a07ac4b49718a1cfc4237a049b59c8"
+      },
+      {
+        "path": "office-1-walk-side.png",
+        "sha256": "9e811f06ca3b5a4931c5d9173b58b1267926feae959500d6a44a3f24a4b87dd6"
+      },
+      {
+        "path": "office-2-idle-side.png",
+        "sha256": "43fff00beb665b9e5a99e62e7c21b9fdd8667bee1275a4a96289177fba59705a"
+      },
+      {
+        "path": "office-1-restore-front.png",
+        "sha256": "bf77035eeaab75492d1fc96cdd7d533aff1fc92f022254bf75455a472de63648"
+      },
+      {
+        "path": "elder-1-phone-front.png",
+        "sha256": "33c6373836ba0319fb5749e67f6864530f132664d6d403369b83fb248de30b6f"
+      },
+      {
+        "path": "elder-1-walk-front.png",
+        "sha256": "4ed145b3141fae6898ebc22e648f05def4897f0a27b5f8281c31255d9c480c66"
+      },
+      {
+        "path": "casual-2-shoe-side.png",
+        "sha256": "349460ac2e806602f131f92aa2762b8737a463010086a5a1ec2bdbe272389250"
+      },
+      {
+        "path": "elder-1-restore-front.png",
+        "sha256": "86469b71c23e58ba831ceb12f1f010d5f197bbacba0a1f52793fdc909f992565"
+      },
+      {
+        "path": "elder-1-phone-side.png",
+        "sha256": "af7c81d3099a3eae234c90ac91d6aa262dffe8677a24671a7dc5aa56ca7921b5"
+      },
+      {
+        "path": "casual-0-restore-front.png",
+        "sha256": "922dab013cb084b375d15644d19a6192e0a68c7b33f04e919b5e0d2397bf7e5d"
+      },
+      {
+        "path": "casual-2-shoe-front.png",
+        "sha256": "a830214d1286fab2cf69f0a5df114e295f6fc0330f8ad21240c987a82f70e55f"
+      },
+      {
+        "path": "office-1-sit-front.png",
+        "sha256": "47a543a5033ecf3fb5a5dc73dcb0bb15cda641150f6f333103241dc4d5140666"
+      },
+      {
+        "path": "casual-2-phone-side.png",
+        "sha256": "6b90ca16751eac7b806ceec12816daea7ce821b9a6f146ffb60415bdfc3d1e80"
+      },
+      {
+        "path": "elder-1-idle-side.png",
+        "sha256": "24a93fec3b9448c667bf485a63d4fd4864676cea3f4c3717314e944c55f8414a"
+      },
+      {
+        "path": "office-1-phone-front.png",
+        "sha256": "2671b359fc29456c7c4a6c9f1ad3c010d82ebace152f0acb4572e18dfcf4447f"
+      },
+      {
+        "path": "office-2-shoe-front.png",
+        "sha256": "64990bbb2a8165d0ed8d61b439e3cb6755ab3502f2d9ccd4f309669071171485"
+      },
+      {
+        "path": "office-2-sit-side.png",
+        "sha256": "7e4322e4dc9d3f013097a11aa60c403871e7371a4a13f931bf3ae6fc8bb73e57"
+      },
+      {
+        "path": "casual-2-sit-side.png",
+        "sha256": "71ce9aadea8518d4e0de9290048ea53a111692e7f4e9c0a18bdaf2c95b7fb317"
+      },
+      {
+        "path": "casual-2-walk-side.png",
+        "sha256": "f2d6c23cb4b459dffc71c8a9f25c95d31540995e0db612c66ff4d9667a8a04fb"
+      },
+      {
+        "path": "elder-1-sit-side.png",
+        "sha256": "11667c425828179860d325ac8956a23a543338058d04526b1790717eee9343c7"
+      },
+      {
+        "path": "office-2-restore-side.png",
+        "sha256": "f7f9ecc23e1522078aa65792bf5bab07be69bbdf7294ba0b43edc995ce1107b8"
+      },
+      {
+        "path": "casual-0-restore-side.png",
+        "sha256": "da4fd1fb1abf267776ffe70e6e521fc80bfd8ef64c455ee12887e248a3e80019"
+      },
+      {
+        "path": "office-0-idle-side.png",
+        "sha256": "76a4752509d32a03a76fb802f8bcd034b89d8eb454593ff49b84d732e99e1fd8"
+      },
+      {
+        "path": "office-0-walk-side.png",
+        "sha256": "cd699c64552419a61556ec5e1e37b04c69d5bca0e77156059c57ff6f5c7eda67"
+      },
+      {
+        "path": "elder-1-sit-front.png",
+        "sha256": "448c61da8b6c317cae58707bcc62bd1d8819c0f3c626444fd2bc6c99c63d40e2"
+      },
+      {
+        "path": "office-2-idle-front.png",
+        "sha256": "ff0c0da87cbe3cee9a9ccdce052ecce23cefc7f0a081db94b9f92395343c5fd0"
+      },
+      {
+        "path": "office-2-phone-front.png",
+        "sha256": "b6dd7bdf8d0eb48ad4290d2420931194ed3827c89bb14e5b7d62843812e642f1"
+      },
+      {
+        "path": "casual-2-idle-side.png",
+        "sha256": "14c12b7c18880619ec3e51299323fa872dcac30ba035505aa912a264c45eac98"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "13193cb17c575f6d7634e1423fb9692a8628bfc0b61ba909802f4ddff49b2504"
+      },
+      {
+        "path": "office-1-walk-front.png",
+        "sha256": "6aaa2ae0e0801c563a126331e0938bd327fbacc3e01cb85924aa217f9a5e1c5b"
+      },
+      {
+        "path": "office-0-shoe-front.png",
+        "sha256": "a86b408d31f792166b790a6b64088a78d162317c4755f79fbf396998f970e1d3"
+      },
+      {
+        "path": "office-1-phone-side.png",
+        "sha256": "56c4cdd9b1e506b6e236eebc3a77324ac30186aa770c737973bb2e1e00e539d1"
+      },
+      {
+        "path": "office-1-shoe-front.png",
+        "sha256": "fae5b365b2b8979bd267ae1d45128fa7593003595cd5921bf80ee80c4dda4b96"
+      },
+      {
+        "path": "casual-2-sit-front.png",
+        "sha256": "7db4b87c0113c1d2ed1f426d43c661b6d722ed51f76f63694e3b55d36153f8e3"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "9a28c1de73b738d1f7405f47052de69ed7efb708074441be7d4642bcd6f4e824"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-live-bridge",
+    "images": 8,
+    "reportSha256": "e93b468c8adac50e65077715dc3b659d1adaeefc90061c6969ffda38d62c191f",
+    "files": [
+      {
+        "path": "07-live.png",
+        "sha256": "5932d1b28b4e6faae82c84c768231f8fa448caf100cf8553b9b0487b3aff054a"
+      },
+      {
+        "path": "report.json",
+        "sha256": "e93b468c8adac50e65077715dc3b659d1adaeefc90061c6969ffda38d62c191f"
+      },
+      {
+        "path": "05-live.png",
+        "sha256": "34f936e08e5e9721e59b168dbdf383432a3565dc42f09cf0e6274fc779255b66"
+      },
+      {
+        "path": "03-live.png",
+        "sha256": "35db36a06af10192a073fa87ff9238a2c55e7d2838d9dd3c514fa8d068bf021a"
+      },
+      {
+        "path": "06-live.png",
+        "sha256": "a1fb1b61afda63a94b41e6befe3ccdcd36c29960433522d25eac4d30b53a1cf1"
+      },
+      {
+        "path": "02-live.png",
+        "sha256": "0dbd594adb1359ae8ba532f23fb47af5e6017431155752d0fff9f9092308e011"
+      },
+      {
+        "path": "04-live.png",
+        "sha256": "221c5d0a16c29ccd703071b8c2ab0ad5215a91380cfef7a6bc4f26a6cebe879a"
+      },
+      {
+        "path": "00-live.png",
+        "sha256": "bc08fe2b0ae7c68cb0a7df42b4477610938eb3b5c7faf5c1a463d9c28248cde3"
+      },
+      {
+        "path": "01-live.png",
+        "sha256": "39c05e43f96e16a6dd6accef868d05b3a1ca9916ed227a05d442fafb924a9fae"
+      },
+      {
+        "path": "source/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "source/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "source/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "source/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-live-briefcase",
+    "images": 8,
+    "reportSha256": "7dd0e678bbe0fa1b1c8b8311e79e21b08d348c42353fa40e5c9f3ba28d5fd74b",
+    "files": [
+      {
+        "path": "07-live.png",
+        "sha256": "8c7a7ecd7a81df7e8357ba820f01ca227b4619e929a173ea208be7dd4bff9c9a"
+      },
+      {
+        "path": "report.json",
+        "sha256": "7dd0e678bbe0fa1b1c8b8311e79e21b08d348c42353fa40e5c9f3ba28d5fd74b"
+      },
+      {
+        "path": "05-live.png",
+        "sha256": "e28c4c51452c7f9b89b81bdd450317e92227bb173dc735c79dd193ceb2d089f9"
+      },
+      {
+        "path": "03-live.png",
+        "sha256": "e5332c9e65a3bc0805031c20c947476334331153e0b45b2f24f35eadc6817043"
+      },
+      {
+        "path": "06-live.png",
+        "sha256": "8710b49493a92d9d5536ed971bb3478d8450d0afca54043328635ba32603fe42"
+      },
+      {
+        "path": "02-live.png",
+        "sha256": "7e5f960620e33199c5c9abe31eb4a22ff69dd4796bb5acc4b27488757a3fe734"
+      },
+      {
+        "path": "04-live.png",
+        "sha256": "917f61f5873d36c5ae67c3df66a23caafe8dc13fb900977e08f6402294fbeb05"
+      },
+      {
+        "path": "00-live.png",
+        "sha256": "6d7a9f6cf47e96f6f188ada1ead2b710a40e49fe7a997918af51ad6130cb9620"
+      },
+      {
+        "path": "01-live.png",
+        "sha256": "bdd3f44d9a5aa129a252243094b3f6e0eb2d47876f05bee1169032d526995911"
+      },
+      {
+        "path": "source/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "source/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "source/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "source/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-live-briefcase-b",
+    "images": 8,
+    "reportSha256": "fbd93e4deebcdb7137badcb7a337fc49630303b04f64c2e9fc1911192d2b05b6",
+    "files": [
+      {
+        "path": "07-live.png",
+        "sha256": "cbeabba67bfffe6863de12e88244d9fbef4f2af77ac8030d5f7f291d37308760"
+      },
+      {
+        "path": "report.json",
+        "sha256": "fbd93e4deebcdb7137badcb7a337fc49630303b04f64c2e9fc1911192d2b05b6"
+      },
+      {
+        "path": "05-live.png",
+        "sha256": "5f744b94b06ea753794995aa3d333666e973aef3f5739ab94e4411ddd2343f83"
+      },
+      {
+        "path": "03-live.png",
+        "sha256": "1a89a4febd59c8a9159926c7c813e4562dee4390357b7fc8fbccbc0f89f74f43"
+      },
+      {
+        "path": "06-live.png",
+        "sha256": "ee1c8f5204f56d9a9a533d077846f7101d2768d1fe6fb7958bdc1660f66b1a2d"
+      },
+      {
+        "path": "02-live.png",
+        "sha256": "7b8436d104a6fa22b3c40603dd18fc0af9fba7c5dc990ab2328f3af99fb9c1ae"
+      },
+      {
+        "path": "04-live.png",
+        "sha256": "5187d947d33e65dd75630de22ff8c620720aa3ce753d58a29e0f4d5c15d78a57"
+      },
+      {
+        "path": "00-live.png",
+        "sha256": "cddded26fefc3c4a5625ab5547c4c5332df55d0503173daeb7fb7b89cd8a247c"
+      },
+      {
+        "path": "01-live.png",
+        "sha256": "96176b111414b60293995139edc529a2ac62966b05f9d197c28bccd65e47720f"
+      },
+      {
+        "path": "source/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "source/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "source/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "source/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-live-tote",
+    "images": 8,
+    "reportSha256": "1895cc738e064ce591a5c731fc8e4fb9195bdab19347ad84fd348aa2ad430a0b",
+    "files": [
+      {
+        "path": "07-live.png",
+        "sha256": "4218de5aefc9c57b95750697fd34addc1118a77b9df08439847abf322dfe30e5"
+      },
+      {
+        "path": "report.json",
+        "sha256": "1895cc738e064ce591a5c731fc8e4fb9195bdab19347ad84fd348aa2ad430a0b"
+      },
+      {
+        "path": "05-live.png",
+        "sha256": "a9b47ba40eb0053d5717086842b408ac0047d3098ad2279dd2919a6e3ee440ff"
+      },
+      {
+        "path": "03-live.png",
+        "sha256": "18cc26bb7ae6ac33ad8f5ff0dbd5f9ceaf997bf5fb8f14a0a4dcb2c08b3d8c15"
+      },
+      {
+        "path": "06-live.png",
+        "sha256": "177c339fc50c7f884aec22e8c05396e377df37fa1519447c7532a371e94c828b"
+      },
+      {
+        "path": "02-live.png",
+        "sha256": "b915877d5fd174e0f4e2def11c28a4e11fdafdec6abdff3ef2d1ed009e8d5320"
+      },
+      {
+        "path": "04-live.png",
+        "sha256": "7155c902c414481248dd51bfa8277e0d4814af0d16701c7fee011665f7742d1d"
+      },
+      {
+        "path": "00-live.png",
+        "sha256": "92bb0e0cb38844f7ca39ebba8889673e6914739e79946c13937a1d6412fab4de"
+      },
+      {
+        "path": "01-live.png",
+        "sha256": "10ffc07ef9c14012afb022d06301b8e4278436cc2dc98d61ab161cc6382bdc21"
+      },
+      {
+        "path": "source/bag-pose.js",
+        "sha256": "5db667893874658f78b83ee3b2e65e653bfa8d73f89d2395704d11c2309645a5"
+      },
+      {
+        "path": "source/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "source/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "source/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-lobby-baseline",
+    "images": 2,
+    "reportSha256": "44f5cc0fad972da72de73b8b8faee4cc37fe3ca522efb1724b3e96b787e87b2d",
+    "files": [
+      {
+        "path": "report.json",
+        "sha256": "44f5cc0fad972da72de73b8b8faee4cc37fe3ca522efb1724b3e96b787e87b2d"
+      },
+      {
+        "path": "lobby-390.png",
+        "sha256": "b43dba8889f1d7699792ba2bac0765449b37fd4e35934d4df95b0f5c04cd9371"
+      },
+      {
+        "path": "lobby-2560.png",
+        "sha256": "50b328296dedddab66935863ef4e8eb4050c6d4de82b6b569fed79287a86187e"
+      },
+      {
+        "path": "sources/post.js",
+        "sha256": "7e32a19a250f08c4b1a3712e1d0b9601688dcf63cab86350d7bd10b004286272"
+      }
+    ]
+  },
+  {
+    "run": "resume-lobby-candidate",
+    "images": 2,
+    "reportSha256": "0983c7b28a3b455a963fc7ed7e98fee2ffa3b8568d66c7026834a7ba72861d67",
+    "files": [
+      {
+        "path": "report.json",
+        "sha256": "0983c7b28a3b455a963fc7ed7e98fee2ffa3b8568d66c7026834a7ba72861d67"
+      },
+      {
+        "path": "lobby-390.png",
+        "sha256": "980194eabdeed774b315bf97db0258ad18916d8718393529849fc1aa18a4da80"
+      },
+      {
+        "path": "lobby-2560.png",
+        "sha256": "df087fd0fe1a19a7e2f2e5c8ecdea2e93ec6548abadf8571af02bd9f8ff6d6c5"
+      },
+      {
+        "path": "sources/post.js",
+        "sha256": "5b017ec29e5da8940d2f5a894a2ae5067334819269c8c786b63d312cad39212e"
+      }
+    ]
+  },
+  {
+    "run": "resume-palm-target-85",
+    "images": 2,
+    "reportSha256": "defb214a0c6234ecb4233a2f922f9d21a99487d36907cd5744198e2eb2699e32",
+    "files": [
+      {
+        "path": "report.json",
+        "sha256": "defb214a0c6234ecb4233a2f922f9d21a99487d36907cd5744198e2eb2699e32"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "5d6fb6a35419178e64162724dba3ffcc368e156230fc13b4698971772d24d746"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "04e76894633e184ddcc5b3e7ee0a55c93f09a10e6ff88f26f61e408cac419672"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "8b404e6502cb3fbf8437330bb0d6d4f7c7bc6926d5c78eaf1e023f45689a3288"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/post.js",
+        "sha256": "713feb001a209f65729b0fa5c87edc50969f1725e94d53ab9e06c1d6fa206c25"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "91cb67f148e8e3737aff2bc48d22d985d22b37bf12e8fb5ed7a429c731988bd0"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-surface-noao-85",
+    "images": 2,
+    "reportSha256": "e4d136a58129f9453a00b6ddcefb0198d17773052d18526305a4477d37ac604b",
+    "files": [
+      {
+        "path": "report.json",
+        "sha256": "e4d136a58129f9453a00b6ddcefb0198d17773052d18526305a4477d37ac604b"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "4de51ea6968eb8cab2b17bd6777e2755f1c6ba35e8a46fb611de290c217bb821"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "078e8d8b40e9626008d72d5784d443a2eb1162b4211057beea4364a831f03ae7"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "ab1732e19ee0775fcb3ec6886200542aac5081e192de1028acb2019471843bc9"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-surface-noao-camera-85",
+    "images": 2,
+    "reportSha256": "027773f48f262a0c3e1ec940ae13bba54902302ffc874408ad6ff7619b66482b",
+    "files": [
+      {
+        "path": "report.json",
+        "sha256": "027773f48f262a0c3e1ec940ae13bba54902302ffc874408ad6ff7619b66482b"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "c7cc662ee59fd05ff652805d79cc0e6f65fa3cfa93b66bc994f8e2de807519f3"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "196287ee524c7f7be518be7e076c2c739af324506033efd9bda157515487ba83"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "5fecbd6026158a40ad6f0cd2a0e63f13a5cb23270211eb6daefc98e4ba9c9df8"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-surface-probe-85",
+    "images": 2,
+    "reportSha256": "fb5f31c1944ce63397e094cefc6fe89c110239c41c0133d11ab3d39ea9c9bf27",
+    "files": [
+      {
+        "path": "report.json",
+        "sha256": "fb5f31c1944ce63397e094cefc6fe89c110239c41c0133d11ab3d39ea9c9bf27"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "748543d5d17d0edbfe2c7c26af36f5a4801dd7e98de8115223a54377736b2b1e"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "7c64be95018c85513cf9b72066b3b593dbd8c426906ebc2f26a62fc252835a9f"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "0e54798b9f4498fda7b5ef91cc688c2df6824162d2009c5b73233ce77e660f01"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  },
+  {
+    "run": "resume-surface-zeroao-85",
+    "images": 2,
+    "reportSha256": "87b7aaca7c79022c8a3d6cdec8adb90048fe0793f4c3d4dee99b38c9860f7175",
+    "files": [
+      {
+        "path": "report.json",
+        "sha256": "87b7aaca7c79022c8a3d6cdec8adb90048fe0793f4c3d4dee99b38c9860f7175"
+      },
+      {
+        "path": "office-0-phone-side.png",
+        "sha256": "c9ad99bf713854afdff9129c5da2b93334aa1e6b576696eafc9e2fc07bb95ba3"
+      },
+      {
+        "path": "office-0-phone-front.png",
+        "sha256": "9cadef59d088abcfa8103d4f6d2506823e843f3791f582473e52d1d5af60dfbf"
+      },
+      {
+        "path": "sources/bag-pose.js",
+        "sha256": "e67fe09b20a5a349e909e33b52c25610e8fceabcd46c7e4d0f7d4a83166629fb"
+      },
+      {
+        "path": "sources/crowd-bag-clearance.mjs",
+        "sha256": "170b04de4284dcfea8627d7e66ae53e075621c33b0b875fc929a2480d1524ff1"
+      },
+      {
+        "path": "sources/motion.js",
+        "sha256": "1f403ee637ee9a8987e4a118ac95bd394704256f3169eade5b3e3cd75c5c1fdf"
+      },
+      {
+        "path": "sources/post.js",
+        "sha256": "713feb001a209f65729b0fa5c87edc50969f1725e94d53ab9e06c1d6fa206c25"
+      },
+      {
+        "path": "sources/looks.js",
+        "sha256": "dc45d529979d02c10bc5567e736fbafe46153629920086b8feed1b4b4aa11f3d"
+      },
+      {
+        "path": "sources/crowd-bag-check.mjs",
+        "sha256": "2e4bd9eb95672b5f49ef4d451e6d21f24b4af370a1fd998200021331b960d09f"
+      },
+      {
+        "path": "sources/stops.js",
+        "sha256": "cf9deb473d46ea07e7615a449769ed32225e97677972f677adda71e506329f75"
+      }
+    ]
+  }
+]

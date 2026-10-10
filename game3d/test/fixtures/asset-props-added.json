@@ -1,0 +1,3750 @@
+[
+  {
+    "id_": "prop/bakery/bakery_exit",
+    "kind": "prop",
+    "name": "Shopping street",
+    "paths": [
+      "game3d/js/places/bakery.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "bakery.js things.bakery_exit",
+    "place": "bakery",
+    "used": [
+      "Bakery: tap target 'Shopping street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "bakery"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/bakery/bakery_seat",
+    "kind": "prop",
+    "name": "Window seat",
+    "paths": [
+      "game3d/js/places/bakery.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "bakery.js things.bakery_seat",
+    "place": "bakery",
+    "used": [
+      "Bakery: tap target 'Window seat'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "bakery"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/bakery/bread_rack",
+    "kind": "prop",
+    "name": "Bread trays",
+    "paths": [
+      "game3d/js/places/bakery.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "bakery.js things.bread_rack",
+    "place": "bakery",
+    "used": [
+      "Bakery: tap target 'Bread trays'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "bakery"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/campus_bench",
+    "kind": "prop",
+    "name": "Garden bench",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.campus_bench",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Garden bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/forecourt",
+    "kind": "prop",
+    "name": "Head office",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.forecourt",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Head office'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/harbour",
+    "kind": "prop",
+    "name": "Harbour walk",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.harbour",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Harbour walk'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/office_quarter",
+    "kind": "prop",
+    "name": "Office street",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.office_quarter",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Office street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/office_shed",
+    "kind": "prop",
+    "name": "Office street",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.office_shed",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Office street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/campus/print_shop",
+    "kind": "prop",
+    "name": "Print shop",
+    "paths": [
+      "game3d/js/places/campus.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "campus.js things.print_shop",
+    "place": "campus",
+    "used": [
+      "North campus: tap target 'Print shop'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "campus"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_collection",
+    "kind": "prop",
+    "name": "My paid tray",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_collection",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'My paid tray'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_exit",
+    "kind": "prop",
+    "name": "Fountain plaza",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_exit",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Fountain plaza'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_return",
+    "kind": "prop",
+    "name": "Tray return",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_return",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Tray return'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_seat_e",
+    "kind": "prop",
+    "name": "Dining chair",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_seat_e",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Dining chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_seat_shared",
+    "kind": "prop",
+    "name": "Shared table chair",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_seat_shared",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Shared table chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_seat_w",
+    "kind": "prop",
+    "name": "Dining chair",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_seat_w",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Dining chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/canteen/canteen_water",
+    "kind": "prop",
+    "name": "Water dispenser",
+    "paths": [
+      "game3d/js/places/canteen.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "canteen.js things.canteen_water",
+    "place": "canteen",
+    "used": [
+      "Canteen: tap target 'Water dispenser'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "canteen"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_commons/art_table",
+    "kind": "prop",
+    "name": "Art materials",
+    "paths": [
+      "game3d/js/places/commons.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "commons.js things.art_table",
+    "place": "dorm_commons",
+    "used": [
+      "Dorm common room: tap target 'Art materials'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "commons"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/dorm_commons/commons_board",
+    "kind": "prop",
+    "name": "Notice board",
+    "paths": [
+      "game3d/js/places/commons.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "commons.js things.commons_board",
+    "place": "dorm_commons",
+    "used": [
+      "Dorm common room: tap target 'Notice board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "commons"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_commons/commons_door",
+    "kind": "prop",
+    "name": "To the inner court",
+    "paths": [
+      "game3d/js/places/commons.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "commons.js things.commons_door",
+    "place": "dorm_commons",
+    "used": [
+      "Dorm common room: tap target 'To the inner court'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "commons"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_commons/commons_printer",
+    "kind": "prop",
+    "name": "Printer",
+    "paths": [
+      "game3d/js/places/commons.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "commons.js things.commons_printer",
+    "place": "dorm_commons",
+    "used": [
+      "Dorm common room: tap target 'Printer'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "commons"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/dorm_commons/drying_rack",
+    "kind": "prop",
+    "name": "Drying rack",
+    "paths": [
+      "game3d/js/places/commons.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "commons.js things.drying_rack",
+    "place": "dorm_commons",
+    "used": [
+      "Dorm common room: tap target 'Drying rack'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "commons"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_court/bath",
+    "kind": "prop",
+    "name": "Bath",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.bath",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'Bath'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_court/dorm_entry",
+    "kind": "prop",
+    "name": "Dorm entrance",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.dorm_entry",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'Dorm entrance'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_court/hall_board",
+    "kind": "prop",
+    "name": "Notice board",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.hall_board",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'Notice board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_court/mailboxes",
+    "kind": "prop",
+    "name": "Mailbox 203",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.mailboxes",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'Mailbox 203'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_court/manager_window",
+    "kind": "prop",
+    "name": "Manager's window",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.manager_window",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'Manager's window'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_court/stairs",
+    "kind": "prop",
+    "name": "To the stairs",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.stairs",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'To the stairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_court/street_gate",
+    "kind": "prop",
+    "name": "To the street",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.street_gate",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'To the street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/bed",
+    "kind": "prop",
+    "name": "Bed",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.bed",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Bed'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/boxes",
+    "kind": "prop",
+    "name": "Boxes",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.boxes",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Boxes'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/computer",
+    "kind": "prop",
+    "name": "Computer",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.computer",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Computer'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/door_203",
+    "kind": "prop",
+    "name": "Room 203",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.door_203",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Room 203'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/door_out",
+    "kind": "prop",
+    "name": "Front door",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.door_out",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Front door'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/drinks",
+    "kind": "prop",
+    "name": "Drinks machine",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.drinks",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Drinks machine'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/kitchen",
+    "kind": "prop",
+    "name": "Shared kitchen",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.kitchen",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Shared kitchen'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/laundry",
+    "kind": "prop",
+    "name": "Laundry",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.laundry",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Laundry'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/notices",
+    "kind": "prop",
+    "name": "Notice board",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.notices",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Notice board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/planters",
+    "kind": "prop",
+    "name": "Planters",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.planters",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Planters'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/stairs_down",
+    "kind": "prop",
+    "name": "Downstairs",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.stairs_down",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Downstairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/stairs_up",
+    "kind": "prop",
+    "name": "Upstairs",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.stairs_up",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Upstairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/washing",
+    "kind": "prop",
+    "name": "Washing",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.washing",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Washing'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/window",
+    "kind": "prop",
+    "name": "Window",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.window",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Window'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_coast/commons",
+    "kind": "prop",
+    "name": "Common room",
+    "paths": [
+      "game3d/js/places/east-coast.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-coast.js things.commons",
+    "place": "east_coast",
+    "used": [
+      "East coast: tap target 'Common room'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-coast"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_coast/courts_walk",
+    "kind": "prop",
+    "name": "To the gym and pool",
+    "paths": [
+      "game3d/js/places/east-coast.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-coast.js things.courts_walk",
+    "place": "east_coast",
+    "used": [
+      "East coast: tap target 'To the gym and pool'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-coast"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_coast/dorm_street",
+    "kind": "prop",
+    "name": "To the dorm street",
+    "paths": [
+      "game3d/js/places/east-coast.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-coast.js things.dorm_street",
+    "place": "east_coast",
+    "used": [
+      "East coast: tap target 'To the dorm street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-coast"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_coast/lookout",
+    "kind": "prop",
+    "name": "Lookout",
+    "paths": [
+      "game3d/js/places/east-coast.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-coast.js things.lookout",
+    "place": "east_coast",
+    "used": [
+      "East coast: tap target 'Lookout'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-coast"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_coast/onsen",
+    "kind": "prop",
+    "name": "Onsen",
+    "paths": [
+      "game3d/js/places/east-coast.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-coast.js things.onsen",
+    "place": "east_coast",
+    "used": [
+      "East coast: tap target 'Onsen'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-coast"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/barber",
+    "kind": "prop",
+    "name": "Barber",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.barber",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'Barber'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/cafe",
+    "kind": "prop",
+    "name": "Café",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.cafe",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'Café'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/dorm_gate",
+    "kind": "prop",
+    "name": "To the dorms",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.dorm_gate",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'To the dorms'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/dorm_row",
+    "kind": "prop",
+    "name": "To the sea terrace",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.dorm_row",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'To the sea terrace'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/liquor_shop",
+    "kind": "prop",
+    "name": "Liquor shop",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.liquor_shop",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'Liquor shop'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/north_street",
+    "kind": "prop",
+    "name": "To the gym and pool",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.north_street",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'To the gym and pool'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/plaza_lane",
+    "kind": "prop",
+    "name": "To the plaza",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.plaza_lane",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'To the plaza'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/shop_street",
+    "kind": "prop",
+    "name": "To the shop street",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.shop_street",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'To the shop street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/travel_office",
+    "kind": "prop",
+    "name": "Amakawa Travel",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.travel_office",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'Amakawa Travel'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/ferry_terminal/ferry_exit",
+    "kind": "prop",
+    "name": "Harbour",
+    "paths": [
+      "game3d/js/places/ferry-terminal.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "ferry-terminal.js things.ferry_exit",
+    "place": "ferry_terminal",
+    "used": [
+      "Ferry waiting room: tap target 'Harbour'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "ferry-terminal"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/ferry_terminal/ferry_landing_seat",
+    "kind": "prop",
+    "name": "Landing bench",
+    "paths": [
+      "game3d/js/places/ferry-terminal.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "ferry-terminal.js things.ferry_landing_seat",
+    "place": "ferry_terminal",
+    "used": [
+      "Ferry waiting room: tap target 'Landing bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "ferry-terminal"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/ferry_terminal/ferry_notice_seat",
+    "kind": "prop",
+    "name": "Waiting bench",
+    "paths": [
+      "game3d/js/places/ferry-terminal.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "ferry-terminal.js things.ferry_notice_seat",
+    "place": "ferry_terminal",
+    "used": [
+      "Ferry waiting room: tap target 'Waiting bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "ferry-terminal"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/ferry_terminal/ferry_quiet_seat",
+    "kind": "prop",
+    "name": "Quiet bench",
+    "paths": [
+      "game3d/js/places/ferry-terminal.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "ferry-terminal.js things.ferry_quiet_seat",
+    "place": "ferry_terminal",
+    "used": [
+      "Ferry waiting room: tap target 'Quiet bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "ferry-terminal"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/ferry_terminal/ferry_window_seat",
+    "kind": "prop",
+    "name": "Window bench",
+    "paths": [
+      "game3d/js/places/ferry-terminal.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "ferry-terminal.js things.ferry_window_seat",
+    "place": "ferry_terminal",
+    "used": [
+      "Ferry waiting room: tap target 'Window bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "ferry-terminal"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/campus",
+    "kind": "prop",
+    "name": "North campus",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.campus",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'North campus'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/fallen_bicycle",
+    "kind": "prop",
+    "name": "Bicycle",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.fallen_bicycle",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'Bicycle'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/garden_bench",
+    "kind": "prop",
+    "name": "Garden bench",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.garden_bench",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'Garden bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/label_printer",
+    "kind": "prop",
+    "name": "Label printer",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.label_printer",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'Label printer'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/lift",
+    "kind": "prop",
+    "name": "Lift to B2",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.lift",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'Lift to B2'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/office_entrance",
+    "kind": "prop",
+    "name": "Head office",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.office_entrance",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'Head office'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/plaza_lane",
+    "kind": "prop",
+    "name": "To the plaza",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.plaza_lane",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'To the plaza'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/shop_lane",
+    "kind": "prop",
+    "name": "To the shopping street",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.shop_lane",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'To the shopping street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/station_exit",
+    "kind": "prop",
+    "name": "Station",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.station_exit",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'Station'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gate/bowl",
+    "kind": "prop",
+    "name": "Tama's bowl",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.bowl; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Station security room: tap target 'Tama's bowl' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        3.2,
+        0.3,
+        0.010000000000000009
+      ],
+      "spot": [
+        3.2,
+        0.55
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/forecourt_way",
+    "kind": "prop",
+    "name": "Station exit",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.forecourt_way; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Station security room: tap target 'Station exit'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        -1,
+        1.7,
+        -4.5
+      ],
+      "spot": null,
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gate/guard_monitor",
+    "kind": "prop",
+    "name": "Monitor",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "lobby.js things.guard_monitor",
+    "place": "gate",
+    "used": [
+      "Station security room: tap target 'Monitor'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/platform_way",
+    "kind": "prop",
+    "name": "To the platform",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.platform_way; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Station security room: tap target 'To the platform'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        0,
+        1.3,
+        4.5
+      ],
+      "spot": null,
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gym/booking_terminal",
+    "kind": "prop",
+    "name": "Booking terminal",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.booking_terminal",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'Booking terminal'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gym/desk_fan",
+    "kind": "prop",
+    "name": "Desk fan",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.desk_fan",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'Desk fan'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gym/gym_board",
+    "kind": "prop",
+    "name": "Club board",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.gym_board",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'Club board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gym/gym_changing",
+    "kind": "prop",
+    "name": "To the pool",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.gym_changing",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'To the pool'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gym/gym_door",
+    "kind": "prop",
+    "name": "To the sports lane",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.gym_door",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'To the sports lane'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gym/gym_printer",
+    "kind": "prop",
+    "name": "Printer",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.gym_printer",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'Printer'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/harbour/campus",
+    "kind": "prop",
+    "name": "North campus",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.campus",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'North campus'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/harbour/ferry_terminal",
+    "kind": "prop",
+    "name": "Ferry terminal",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.ferry_terminal",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'Ferry terminal'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/harbour/harbour_office",
+    "kind": "prop",
+    "name": "Harbour office",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.harbour_office",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'Harbour office'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/harbour/office_street",
+    "kind": "prop",
+    "name": "To the office street",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.office_street",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'To the office street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/harbour/works_lane",
+    "kind": "prop",
+    "name": "To the old works",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.works_lane",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'To the old works'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/harbour/works_street",
+    "kind": "prop",
+    "name": "To the works street",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.works_street",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'To the works street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/izakaya/izakaya_exit",
+    "kind": "prop",
+    "name": "To the shop street",
+    "paths": [
+      "game3d/js/places/izakaya.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "izakaya.js things.izakaya_exit",
+    "place": "izakaya",
+    "used": [
+      "Izakaya: tap target 'To the shop street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "izakaya"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/izakaya/party_seat",
+    "kind": "prop",
+    "name": "Your place at the table",
+    "paths": [
+      "game3d/js/places/izakaya.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "izakaya.js things.party_seat",
+    "place": "izakaya",
+    "used": [
+      "Izakaya: tap target 'Your place at the table'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "izakaya"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/karaoke_booth/booth_door",
+    "kind": "prop",
+    "name": "Downstairs",
+    "paths": [
+      "game3d/js/places/karaoke-booth.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke-booth.js things.booth_door",
+    "place": "karaoke_booth",
+    "used": [
+      "Karaoke booth: tap target 'Downstairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke-booth"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/karaoke_booth/booth_screen",
+    "kind": "prop",
+    "name": "Screen",
+    "paths": [
+      "game3d/js/places/karaoke-booth.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke-booth.js things.booth_screen",
+    "place": "karaoke_booth",
+    "used": [
+      "Karaoke booth: tap target 'Screen'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke-booth"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/karaoke_booth/song_terminal",
+    "kind": "prop",
+    "name": "Song selector",
+    "paths": [
+      "game3d/js/places/karaoke-booth.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke-booth.js things.song_terminal",
+    "place": "karaoke_booth",
+    "used": [
+      "Karaoke booth: tap target 'Song selector'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke-booth"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/karaoke/karaoke_desk",
+    "kind": "prop",
+    "name": "Front desk",
+    "paths": [
+      "game3d/js/places/karaoke.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke.js things.karaoke_desk",
+    "place": "karaoke",
+    "used": [
+      "Karaoke box: tap target 'Front desk'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/karaoke/karaoke_door",
+    "kind": "prop",
+    "name": "To the shop street",
+    "paths": [
+      "game3d/js/places/karaoke.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke.js things.karaoke_door",
+    "place": "karaoke",
+    "used": [
+      "Karaoke box: tap target 'To the shop street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/karaoke/karaoke_stairs",
+    "kind": "prop",
+    "name": "Upstairs",
+    "paths": [
+      "game3d/js/places/karaoke.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke.js things.karaoke_stairs",
+    "place": "karaoke",
+    "used": [
+      "Karaoke box: tap target 'Upstairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/konbini/fridge",
+    "kind": "prop",
+    "name": "Fridge",
+    "paths": [
+      "game3d/js/places/konbini.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "konbini.js things.fridge",
+    "place": "konbini",
+    "used": [
+      "Konbini: tap target 'Fridge'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "konbini"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/konbini/konbini_exit",
+    "kind": "prop",
+    "name": "Shopping street",
+    "paths": [
+      "game3d/js/places/konbini.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "konbini.js things.konbini_exit",
+    "place": "konbini",
+    "used": [
+      "Konbini: tap target 'Shopping street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "konbini"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/konbini/konbini_seat",
+    "kind": "prop",
+    "name": "Window seat",
+    "paths": [
+      "game3d/js/places/konbini.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "konbini.js things.konbini_seat",
+    "place": "konbini",
+    "used": [
+      "Konbini: tap target 'Window seat'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "konbini"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/bank",
+    "kind": "prop",
+    "name": "Bank",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.bank",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Bank'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/campus_quarter",
+    "kind": "prop",
+    "name": "North campus",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.campus_quarter",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'North campus'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/campus_shed",
+    "kind": "prop",
+    "name": "North campus",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.campus_shed",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'North campus'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/construction_office",
+    "kind": "prop",
+    "name": "Amakawa Construction",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.construction_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Construction'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/electric_office",
+    "kind": "prop",
+    "name": "Amakawa Electric",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.electric_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Electric'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/foods_office",
+    "kind": "prop",
+    "name": "Amakawa Foods",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.foods_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Foods'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/harbour",
+    "kind": "prop",
+    "name": "To the harbour",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.harbour",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'To the harbour'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/insurance_office",
+    "kind": "prop",
+    "name": "Amakawa Life",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.insurance_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Life'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/logistics_office",
+    "kind": "prop",
+    "name": "Amakawa Logistics",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.logistics_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Logistics'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/sports_lane",
+    "kind": "prop",
+    "name": "To the gym and pool",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.sports_lane",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'To the gym and pool'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/trading_office",
+    "kind": "prop",
+    "name": "Amakawa Trading",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.trading_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Trading'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office/chief_desk",
+    "kind": "prop",
+    "name": "Mr. Mori's desk",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.chief_desk; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Mr. Mori's desk' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        1.55,
+        0.8,
+        -3.36
+      ],
+      "spot": [
+        2.3,
+        -2.55
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/covered",
+    "kind": "prop",
+    "name": "Covered desk",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.covered; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Covered desk'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/covered_monitor",
+    "kind": "prop",
+    "name": "Covered monitor",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.covered_monitor; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Covered monitor'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/sender_console",
+    "kind": "prop",
+    "name": "Sender console",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.sender_console; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Sender console'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        4.2,
+        0.8,
+        -1.3
+      ],
+      "spot": null,
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office/sender_live",
+    "kind": "prop",
+    "name": "Timesheet sender",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.sender_live; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Timesheet sender'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -2,
+        0.8,
+        -3
+      ],
+      "spot": null,
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/toilet_f",
+    "kind": "prop",
+    "name": "Women's toilet",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.toilet_f; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Women's toilet'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        5.2,
+        1,
+        2.4
+      ],
+      "spot": [
+        5.2,
+        1.85
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/toilet_m",
+    "kind": "prop",
+    "name": "Men's toilet",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.toilet_m; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Men's toilet'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        2.6,
+        1,
+        2.4
+      ],
+      "spot": [
+        2.6,
+        1.85
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/plaza/board_map",
+    "kind": "prop",
+    "name": "Map",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.board_map",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Map'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/plaza/canteen_door",
+    "kind": "prop",
+    "name": "Canteen",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.canteen_door",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Canteen'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/plaza/canteen_table",
+    "kind": "prop",
+    "name": "Canteen table",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.canteen_table",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Canteen table'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/plaza/dorm_lane",
+    "kind": "prop",
+    "name": "To the dorms",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.dorm_lane",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'To the dorms'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/plaza/fountain",
+    "kind": "prop",
+    "name": "Fountain",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.fountain",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Fountain'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/plaza/noticeboard",
+    "kind": "prop",
+    "name": "Notice board",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.noticeboard",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Notice board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/plaza/office_lane",
+    "kind": "prop",
+    "name": "To head office",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.office_lane",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'To head office'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/plaza/shop_walk",
+    "kind": "prop",
+    "name": "To the shop street",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.shop_walk",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'To the shop street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/plaza/training_door",
+    "kind": "prop",
+    "name": "Training centre",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.training_door",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Training centre'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/pool/changing_room",
+    "kind": "prop",
+    "name": "Pool exit",
+    "paths": [
+      "game3d/js/places/pool.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "pool.js things.changing_room",
+    "place": "pool",
+    "used": [
+      "Pool deck: tap target 'Pool exit'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "pool"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/pool/pool_goggles",
+    "kind": "prop",
+    "name": "Goggles",
+    "paths": [
+      "game3d/js/places/pool.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "pool.js things.pool_goggles",
+    "place": "pool",
+    "used": [
+      "Pool deck: tap target 'Goggles'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "pool"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/pool/pool_notice",
+    "kind": "prop",
+    "name": "Pool notice",
+    "paths": [
+      "game3d/js/places/pool.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "pool.js things.pool_notice",
+    "place": "pool",
+    "used": [
+      "Pool deck: tap target 'Pool notice'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "pool"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/print_shop/directory_printer",
+    "kind": "prop",
+    "name": "Island directory",
+    "paths": [
+      "game3d/js/places/print-shop.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "print-shop.js things.directory_printer",
+    "place": "print_shop",
+    "used": [
+      "Print shop: tap target 'Island directory'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "print-shop"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/print_shop/print_exit",
+    "kind": "prop",
+    "name": "North campus",
+    "paths": [
+      "game3d/js/places/print-shop.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "print-shop.js things.print_exit",
+    "place": "print_shop",
+    "used": [
+      "Print shop: tap target 'North campus'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "print-shop"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/print_shop/print_seat",
+    "kind": "prop",
+    "name": "Waiting chair",
+    "paths": [
+      "game3d/js/places/print-shop.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "print-shop.js things.print_seat",
+    "place": "print_shop",
+    "used": [
+      "Print shop: tap target 'Waiting chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "print-shop"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/bakery",
+    "kind": "prop",
+    "name": "Delivery note",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.bakery",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Delivery note'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/bakery_door",
+    "kind": "prop",
+    "name": "Bakery",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.bakery_door",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Bakery'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/bike_shop",
+    "kind": "prop",
+    "name": "Bike shop",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.bike_shop",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Bike shop'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/game_centre",
+    "kind": "prop",
+    "name": "Game centre",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.game_centre",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Game centre'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/garden_bench_1",
+    "kind": "prop",
+    "name": "Garden bench",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.garden_bench_1",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Garden bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/garden_bench_2",
+    "kind": "prop",
+    "name": "Garden bench",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.garden_bench_2",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Garden bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/izakaya",
+    "kind": "prop",
+    "name": "Izakaya",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.izakaya",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Izakaya'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/karaoke",
+    "kind": "prop",
+    "name": "Karaoke",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.karaoke",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Karaoke'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/office_lane",
+    "kind": "prop",
+    "name": "To head office",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.office_lane",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'To head office'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/party_seat",
+    "kind": "prop",
+    "name": "Bench",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.party_seat",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/plaza_lane",
+    "kind": "prop",
+    "name": "To the plaza",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.plaza_lane",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'To the plaza'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/store",
+    "kind": "prop",
+    "name": "Store window",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.store",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Store window'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/store_door",
+    "kind": "prop",
+    "name": "Konbini",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.store_door",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Konbini'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/sports/ball_basket",
+    "kind": "prop",
+    "name": "Ball basket",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.ball_basket",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'Ball basket'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/sports/bench_ball",
+    "kind": "prop",
+    "name": "Ball by the bench",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.bench_ball",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'Ball by the bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/sports/court_display",
+    "kind": "prop",
+    "name": "Score display",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.court_display",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'Score display'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/sports/gym",
+    "kind": "prop",
+    "name": "Gym",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.gym",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'Gym'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/sports/north_street",
+    "kind": "prop",
+    "name": "To the north street",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.north_street",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'To the north street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/sports/office_street",
+    "kind": "prop",
+    "name": "To the office street",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.office_street",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'To the office street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/sports/onsen_path",
+    "kind": "prop",
+    "name": "To the onsen path",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.onsen_path",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'To the onsen path'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/sports/pool",
+    "kind": "prop",
+    "name": "Pool",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.pool",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'Pool'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/train/door_test",
+    "kind": "prop",
+    "name": "Door test panel",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.door_test; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Door test panel'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/train/station_exit",
+    "kind": "prop",
+    "name": "To the station",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.station_exit; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'To the station'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/harbour_lane",
+    "kind": "prop",
+    "name": "To the harbour",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.harbour_lane",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'To the harbour'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/office_street",
+    "kind": "prop",
+    "name": "To the office street",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.office_street",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'To the office street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/old_factory",
+    "kind": "prop",
+    "name": "Old factory",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.old_factory",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Old factory'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/old_power_plant",
+    "kind": "prop",
+    "name": "Old power plant",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.old_power_plant",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Old power plant'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/recycling_centre",
+    "kind": "prop",
+    "name": "Recycling centre",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.recycling_centre",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Recycling centre'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/research_lab",
+    "kind": "prop",
+    "name": "Amakawa Research",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.research_lab",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Amakawa Research'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/server_hall",
+    "kind": "prop",
+    "name": "Server hall",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.server_hall",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Server hall'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  }
+]

@@ -1,0 +1,83 @@
+{
+ "title": "Continue restores the saved objective",
+ "date": "2026-10-07",
+ "by": "Codex",
+ "caption": "A later-day save now shows its objective after Continue, even when onboarding storage is fresh. The initial train introduction still keeps its goal hidden.",
+ "preview": "round1-1366-continued-office",
+ "sections": [
+  {
+   "title": "First diagnostic attempt",
+   "caption": "The checker encountered a reload race before it could assert the restored goal. Retained as a failed diagnostic, not a passing baseline.",
+   "images": [
+    {
+     "id": "baseline-1366-failure",
+     "image": "bible/shots/showcase/continue-goal-20261007/baseline/1366-failure.webp",
+     "caption": "1366 failure. Visibility-state capture during UI fade; no whole-opening visual approval claimed."
+    },
+    {
+     "id": "baseline-1366-fresh-train",
+     "image": "bible/shots/showcase/continue-goal-20261007/baseline/1366-fresh-train.webp.webp",
+     "caption": "1366 fresh train. Visibility-state capture during UI fade; no whole-opening visual approval claimed."
+    }
+   ]
+  },
+  {
+   "title": "Reproduced: saved goal stays hidden",
+   "caption": "Desktop Continue restores the text but leaves it held and hidden. The assertion fails with no game page errors; this attempt stops before phone.",
+   "images": [
+    {
+     "id": "baseline2-1366-continued-office",
+     "image": "bible/shots/showcase/continue-goal-20261007/baseline2/1366-continued-office.webp.webp",
+     "caption": "1366 continued office. Visibility-state capture during UI fade; no whole-opening visual approval claimed."
+    },
+    {
+     "id": "baseline2-1366-failure",
+     "image": "bible/shots/showcase/continue-goal-20261007/baseline2/1366-failure.webp.webp",
+     "caption": "1366 failure. Visibility-state capture during UI fade; no whole-opening visual approval claimed."
+    },
+    {
+     "id": "baseline2-1366-fresh-train",
+     "image": "bible/shots/showcase/continue-goal-20261007/baseline2/1366-fresh-train.webp.webp",
+     "caption": "1366 fresh train. Visibility-state capture during UI fade; no whole-opening visual approval claimed."
+    }
+   ]
+  },
+  {
+   "title": "Corrected: desktop and phone",
+   "caption": "Fresh train keeps its controls-first introduction. Continuing the day-two office save now displays the saved goal on both sizes.",
+   "images": [
+    {
+     "id": "round1-1366-continued-office",
+     "image": "bible/shots/showcase/continue-goal-20261007/round1/1366-continued-office.webp.webp",
+     "caption": "1366 continued office. Visibility-state capture during UI fade; no whole-opening visual approval claimed."
+    },
+    {
+     "id": "round1-1366-fresh-train",
+     "image": "bible/shots/showcase/continue-goal-20261007/round1/1366-fresh-train.webp.webp",
+     "caption": "1366 fresh train. Visibility-state capture during UI fade; no whole-opening visual approval claimed."
+    },
+    {
+     "id": "round1-390-continued-office",
+     "image": "bible/shots/showcase/continue-goal-20261007/round1/390-continued-office.webp.webp",
+     "caption": "390 continued office. Visibility-state capture during UI fade; no whole-opening visual approval claimed."
+    },
+    {
+     "id": "round1-390-fresh-train",
+     "image": "bible/shots/showcase/continue-goal-20261007/round1/390-fresh-train.webp.webp",
+     "caption": "390 fresh train. Visibility-state capture during UI fade; no whole-opening visual approval claimed."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Fix and validation",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/continue-goal-20261007.md"
+  },
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

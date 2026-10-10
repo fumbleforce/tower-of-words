@@ -1,0 +1,31 @@
+{
+ "title": "Push and publish",
+ "date": "2026-09-30",
+ "by": "main agent",
+ "status": "decided",
+ "question": "Main has many local commits that aren't pushed, and the Pages deploy handoff isn't finished, so the current build can't be played from another machine. What should happen?",
+ "multi": false,
+ "options": [
+  {
+   "id": "push-now",
+   "label": "Push main now",
+   "note": "Secret-scan, then push main to GitHub. Pages stays as it is until the deploy handoff is done."
+  },
+  {
+   "id": "push-and-pages",
+   "label": "Push and finish the Pages deploy",
+   "note": "Push main, then finish the Pages switch (assets from R2) so the game is playable online from the pushed build. Deploy checks run first."
+  },
+  {
+   "id": "wait",
+   "label": "Not yet",
+   "note": "Keep working locally. Ask again later."
+  }
+ ],
+ "decided": [
+  "push-now"
+ ],
+ "decision": "Push now, and push regularly from now on.",
+ "issue": 41,
+ "media": []
+}

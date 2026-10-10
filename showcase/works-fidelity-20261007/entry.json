@@ -1,0 +1,387 @@
+{
+ "title": "Works recycling bay and weather station details",
+ "date": "2026-10-07",
+ "updated": "2026-10-07T15:20:52.124623+00:00",
+ "by": "codex",
+ "caption": "Four labelled, lidded bins stand on a drained wash pad. Weather instruments have footings, a clear service path and a sign fastened to the existing fence. Desktop and phone walks use the existing gate and street.",
+ "preview": "round4-1366-gate-approach",
+ "sections": [
+  {
+   "title": "Current — normal player camera and support details",
+   "caption": "Q1 real mouse/touch routes and focused diagnostics. The two rear-labelled attempts still face the front and are retained for comparison.",
+   "images": [
+    {
+     "id": "round4-1366-bins-approach",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-approach.webp.webp",
+     "caption": "1366 bins approach — ordinary player camera"
+    },
+    {
+     "id": "round4-1366-bins-front-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-front-detail.webp.webp",
+     "caption": "1366 bins front detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round4-1366-bins-middle",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-middle.webp.webp",
+     "caption": "1366 bins middle — ordinary player camera"
+    },
+    {
+     "id": "round4-1366-bins-north",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-north.webp.webp",
+     "caption": "1366 bins north — ordinary player camera"
+    },
+    {
+     "id": "round4-1366-bins-rear-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-rear-detail.webp.webp",
+     "caption": "1366 bins rear detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round4-1366-bins-south",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-bins-south.webp.webp",
+     "caption": "1366 bins south — ordinary player camera"
+    },
+    {
+     "id": "round4-1366-gate-approach",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-gate-approach.webp.webp",
+     "caption": "1366 gate approach — ordinary player camera"
+    },
+    {
+     "id": "round4-1366-gate-inside",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-gate-inside.webp.webp",
+     "caption": "1366 gate inside — ordinary player camera"
+    },
+    {
+     "id": "round4-1366-gate-return",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-gate-return.webp.webp",
+     "caption": "1366 gate return — ordinary player camera"
+    },
+    {
+     "id": "round4-1366-instruments",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-instruments.webp.webp",
+     "caption": "1366 instruments — ordinary player camera"
+    },
+    {
+     "id": "round4-1366-station-board-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-station-board-detail.webp.webp",
+     "caption": "1366 station board detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round4-1366-station-feet-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/1366-station-feet-detail.webp.webp",
+     "caption": "1366 station feet detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round4-390-bins-approach",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-approach.webp.webp",
+     "caption": "390 bins approach — ordinary player camera"
+    },
+    {
+     "id": "round4-390-bins-front-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-front-detail.webp.webp",
+     "caption": "390 bins front detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round4-390-bins-middle",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-middle.webp.webp",
+     "caption": "390 bins middle — ordinary player camera"
+    },
+    {
+     "id": "round4-390-bins-north",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-north.webp.webp",
+     "caption": "390 bins north — ordinary player camera"
+    },
+    {
+     "id": "round4-390-bins-rear-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-rear-detail.webp.webp",
+     "caption": "390 bins rear detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round4-390-bins-south",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-bins-south.webp.webp",
+     "caption": "390 bins south — ordinary player camera"
+    },
+    {
+     "id": "round4-390-gate-approach",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-gate-approach.webp.webp",
+     "caption": "390 gate approach — ordinary player camera"
+    },
+    {
+     "id": "round4-390-gate-inside",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-gate-inside.webp.webp",
+     "caption": "390 gate inside — ordinary player camera"
+    },
+    {
+     "id": "round4-390-gate-return",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-gate-return.webp.webp",
+     "caption": "390 gate return — ordinary player camera"
+    },
+    {
+     "id": "round4-390-instruments",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-instruments.webp.webp",
+     "caption": "390 instruments — ordinary player camera"
+    },
+    {
+     "id": "round4-390-station-board-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-station-board-detail.webp.webp",
+     "caption": "390 station board detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round4-390-station-feet-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round4/390-station-feet-detail.webp.webp",
+     "caption": "390 station feet detail — diagnostic inspection camera"
+    }
+   ]
+  },
+  {
+   "title": "Current — rear wheel and drain inspection",
+   "caption": "Q1 diagnostic view from southeast, showing the rear wheels supported by the wash pad and the grated drain. This is a camera inspection, not the player camera.",
+   "images": [
+    {
+     "id": "round6-rear-1366-bins-rear-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round6-rear/1366-bins-rear-detail.webp.webp",
+     "caption": "1366 bins rear detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round6-rear-390-bins-rear-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round6-rear/390-bins-rear-detail.webp.webp",
+     "caption": "390 bins rear detail — diagnostic inspection camera"
+    }
+   ]
+  },
+  {
+   "title": "Before — original frontage",
+   "caption": "Original q1 normal camera views: plain cube bins and bare weather enclosure.",
+   "images": [
+    {
+     "id": "baseline-20261007-research-desk",
+     "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/research-desk.webp.webp",
+     "caption": "research desk — ordinary player camera"
+    },
+    {
+     "id": "baseline-20261007-research-phone",
+     "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/research-phone.webp.webp",
+     "caption": "research phone — ordinary player camera"
+    },
+    {
+     "id": "baseline-20261007-street-desk",
+     "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/street-desk.webp.webp",
+     "caption": "street desk — ordinary player camera"
+    },
+    {
+     "id": "baseline-20261007-street-phone",
+     "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/street-phone.webp.webp",
+     "caption": "street phone — ordinary player camera"
+    },
+    {
+     "id": "baseline-20261007-yard-desk",
+     "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/yard-desk.webp.webp",
+     "caption": "yard desk — ordinary player camera"
+    },
+    {
+     "id": "baseline-20261007-yard-phone",
+     "image": "bible/shots/showcase/works-fidelity-20261007/baseline-20261007/yard-phone.webp.webp",
+     "caption": "yard phone — ordinary player camera"
+    }
+   ]
+  },
+  {
+   "title": "First construction pass",
+   "caption": "Initial q1 normal camera views before the station-board support repair.",
+   "images": [
+    {
+     "id": "round1-research-desk",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round1/research-desk.webp.webp",
+     "caption": "research desk — ordinary player camera"
+    },
+    {
+     "id": "round1-research-phone",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round1/research-phone.webp.webp",
+     "caption": "research phone — ordinary player camera"
+    },
+    {
+     "id": "round1-street-desk",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round1/street-desk.webp.webp",
+     "caption": "street desk — ordinary player camera"
+    },
+    {
+     "id": "round1-street-phone",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round1/street-phone.webp.webp",
+     "caption": "street phone — ordinary player camera"
+    },
+    {
+     "id": "round1-yard-desk",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round1/yard-desk.webp.webp",
+     "caption": "yard desk — ordinary player camera"
+    },
+    {
+     "id": "round1-yard-phone",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round1/yard-phone.webp.webp",
+     "caption": "yard phone — ordinary player camera"
+    }
+   ]
+  },
+  {
+   "title": "Route and framing attempt — low quality",
+   "caption": "Q0 mouse/touch routes passed. Diagnostic station and bin closeups were rejected for missing details, especially on phone.",
+   "images": [
+    {
+     "id": "round3-1366-bins-approach",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-bins-approach.webp.webp",
+     "caption": "1366 bins approach — ordinary player camera"
+    },
+    {
+     "id": "round3-1366-bins-middle",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-bins-middle.webp.webp",
+     "caption": "1366 bins middle — ordinary player camera"
+    },
+    {
+     "id": "round3-1366-bins-north",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-bins-north.webp.webp",
+     "caption": "1366 bins north — ordinary player camera"
+    },
+    {
+     "id": "round3-1366-bins-south",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-bins-south.webp.webp",
+     "caption": "1366 bins south — ordinary player camera"
+    },
+    {
+     "id": "round3-1366-bins-support-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-bins-support-detail.webp.webp",
+     "caption": "1366 bins support detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round3-1366-gate-approach",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-gate-approach.webp.webp",
+     "caption": "1366 gate approach — ordinary player camera"
+    },
+    {
+     "id": "round3-1366-gate-inside",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-gate-inside.webp.webp",
+     "caption": "1366 gate inside — ordinary player camera"
+    },
+    {
+     "id": "round3-1366-gate-return",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-gate-return.webp.webp",
+     "caption": "1366 gate return — ordinary player camera"
+    },
+    {
+     "id": "round3-1366-instruments",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-instruments.webp.webp",
+     "caption": "1366 instruments — ordinary player camera"
+    },
+    {
+     "id": "round3-1366-station-support-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/1366-station-support-detail.webp.webp",
+     "caption": "1366 station support detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round3-390-bins-approach",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-bins-approach.webp.webp",
+     "caption": "390 bins approach — ordinary player camera"
+    },
+    {
+     "id": "round3-390-bins-middle",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-bins-middle.webp.webp",
+     "caption": "390 bins middle — ordinary player camera"
+    },
+    {
+     "id": "round3-390-bins-north",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-bins-north.webp.webp",
+     "caption": "390 bins north — ordinary player camera"
+    },
+    {
+     "id": "round3-390-bins-south",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-bins-south.webp.webp",
+     "caption": "390 bins south — ordinary player camera"
+    },
+    {
+     "id": "round3-390-bins-support-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-bins-support-detail.webp.webp",
+     "caption": "390 bins support detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round3-390-gate-approach",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-gate-approach.webp.webp",
+     "caption": "390 gate approach — ordinary player camera"
+    },
+    {
+     "id": "round3-390-gate-inside",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-gate-inside.webp.webp",
+     "caption": "390 gate inside — ordinary player camera"
+    },
+    {
+     "id": "round3-390-gate-return",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-gate-return.webp.webp",
+     "caption": "390 gate return — ordinary player camera"
+    },
+    {
+     "id": "round3-390-instruments",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-instruments.webp.webp",
+     "caption": "390 instruments — ordinary player camera"
+    },
+    {
+     "id": "round3-390-station-support-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round3/390-station-support-detail.webp.webp",
+     "caption": "390 station support detail — diagnostic inspection camera"
+    }
+   ]
+  },
+  {
+   "title": "Inspection framing attempt",
+   "caption": "Q1 board, footings and bin fronts. The rear view was rejected because the building blocked the lens.",
+   "images": [
+    {
+     "id": "round5-detail-1366-bins-front-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/1366-bins-front-detail.webp.webp",
+     "caption": "1366 bins front detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round5-detail-1366-bins-rear-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/1366-bins-rear-detail.webp.webp",
+     "caption": "1366 bins rear detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round5-detail-1366-station-board-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/1366-station-board-detail.webp.webp",
+     "caption": "1366 station board detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round5-detail-1366-station-feet-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/1366-station-feet-detail.webp.webp",
+     "caption": "1366 station feet detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round5-detail-390-bins-front-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/390-bins-front-detail.webp.webp",
+     "caption": "390 bins front detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round5-detail-390-bins-rear-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/390-bins-rear-detail.webp.webp",
+     "caption": "390 bins rear detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round5-detail-390-station-board-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/390-station-board-detail.webp.webp",
+     "caption": "390 station board detail — diagnostic inspection camera"
+    },
+    {
+     "id": "round5-detail-390-station-feet-detail",
+     "image": "bible/shots/showcase/works-fidelity-20261007/round5-detail/390-station-feet-detail.webp.webp",
+     "caption": "390 station feet detail — diagnostic inspection camera"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Visit Works",
+   "href": "game3d/?day=6&place=works"
+  },
+  {
+   "label": "Implementation and QA notes",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/works-fidelity-20261007.md"
+  }
+ ],
+ "media": []
+}

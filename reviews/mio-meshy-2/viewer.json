@@ -1,0 +1,62 @@
+{
+ "title": "Mio: new 3D model (mio-meshy-2)",
+ "blurb": "Real rigged 3D models, built by the game's own loader from the files the game would load: walk, run, sit and the approved relaxed-3 idle. mio-2 is made the way Kuro, Aoi and Emi were (Meshy smart topology from the ChatGPT picture, our face-first UVs, Meshy's texture, Meshy's auto-rig, walk, run and Chair_Sit_Idle_F); mio-2 (d1 texture) is the same model with the other texture pass. 'Mio now' is her model in the game today, through her own loader with the game's colours. Not in the game until you pick.",
+ "halves": ["mio-2", "right half"],
+ "rigs": {
+  "mio-2": {
+   "id": "mio2",
+   "label": "mio-2",
+   "dir": "game3d/assets/characters/mio2/",
+   "idle": "game3d/assets/characters/relaxed-idle-mio2.json",
+   "height": 1.12
+  },
+  "mio-now": {
+   "loader": "mio",
+   "label": "Mio now (in game)",
+   "height": 1.12
+  },
+  "kuro": {
+   "id": "kuro",
+   "label": "Kuro (in game)",
+   "dir": "game3d/assets/characters/kuro/",
+   "idle": "game3d/assets/characters/relaxed-idle-kuro.json",
+   "height": 1.12
+  },
+  "aoi": {
+   "id": "aoi",
+   "label": "Aoi (in game)",
+   "dir": "game3d/assets/characters/aoi/",
+   "idle": "game3d/assets/characters/relaxed-idle-aoi.json",
+   "height": 1.09
+  },
+  "emi": {
+   "id": "emi",
+   "label": "Emi (in game)",
+   "dir": "game3d/assets/characters/emi/",
+   "idle": "game3d/assets/characters/relaxed-idle-emi.json",
+   "height": 1.09
+  }
+ },
+ "scenes": {
+  "now": {
+   "label": "mio-2 beside Mio now",
+   "items": [{"rig": "mio-2"}, {"rig": "mio-now"}],
+   "gap": 0.9
+  },
+  "green": {
+   "label": "Green tweak beside Mio now",
+   "items": [{"rig": "mio-2", "tex": "game3d/assets/characters/mio2/base-green.webp", "label": "mio-2-green"}, {"rig": "mio-now"}],
+   "gap": 0.9
+  },
+  "textures": {
+   "label": "The texture versions",
+   "items": [{"rig": "mio-2"}, {"rig": "mio-2", "tex": "game3d/assets/characters/mio2/base-green.webp", "label": "mio-2-green"}, {"rig": "mio-2", "tex": "game3d/assets/characters/mio2/base-d1.webp", "label": "mio-2-d1"}],
+   "gap": 0.9
+  },
+  "cast": {
+   "label": "Beside Kuro, Aoi and Emi",
+   "items": [{"rig": "kuro"}, {"rig": "mio-2"}, {"rig": "aoi"}, {"rig": "emi"}],
+   "gap": 0.85
+  }
+ }
+}

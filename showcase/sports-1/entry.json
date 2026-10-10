@@ -1,0 +1,149 @@
+{
+ "title": "The gym, the pool and the courts walk, walkable",
+ "date": "2026-10-02",
+ "by": "claude-agent:sports",
+ "caption": "The fourth south-half district from island-half-1: the north street's top, the sports lane past the gym, the pool walk to the shower pavilion and the courts walk to the onsen path. Reach it from the east lane in the morning: walk on up the north street past the back lane. The courts walk joins the east coast at the onsen path, so you can now walk a loop and come back along the dorm row. It also loads with ?place=sports. The gym and the pool are shut for now.",
+ "sections": [
+  {
+   "title": "The north street's top",
+   "caption": "Before: the street ended at the back lane, backdrop past it. After: Eric walks on north to where it turns into the sports lane, a finger sign there pointing west to the gym and the pool.",
+   "images": [
+    {
+     "id": "before-corner-desk",
+     "image": "bible/shots/showcase/sports-1/before-corner-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-corner-phone",
+     "image": "bible/shots/showcase/sports-1/before-corner-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-corner-desk",
+     "image": "bible/shots/showcase/sports-1/after-corner-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-corner-phone",
+     "image": "bible/shots/showcase/sports-1/after-corner-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The gym",
+   "caption": "Before: a plain box with windows on a lawn. After: a hall under a shallow barrel roof with clerestory glass, its glass front and doors on the sports lane under a canopy with たいいくかん GYM, the doors shut with a 準備中 card.",
+   "images": [
+    {
+     "id": "before-gym-desk",
+     "image": "bible/shots/showcase/sports-1/before-gym-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-gym-phone",
+     "image": "bible/shots/showcase/sports-1/before-gym-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-gym-desk",
+     "image": "bible/shots/showcase/sports-1/after-gym-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-gym-phone",
+     "image": "bible/shots/showcase/sports-1/after-gym-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The pool",
+   "caption": "Before: lawn. After: the pool walk between the gym and the pool's fence; behind it a 25 m pool of six lanes with lane ropes, starting blocks, a lifeguard's chair and loungers. At the walk's end the shower pavilion's door with プール POOL over it, shut.",
+   "images": [
+    {
+     "id": "before-pool-desk",
+     "image": "bible/shots/showcase/sports-1/before-pool-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-pool-phone",
+     "image": "bible/shots/showcase/sports-1/before-pool-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-pool-desk",
+     "image": "bible/shots/showcase/sports-1/after-pool-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-pool-phone",
+     "image": "bible/shots/showcase/sports-1/after-pool-phone.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "after-pavilion-desk",
+     "image": "bible/shots/showcase/sports-1/after-pavilion-desk.webp.webp",
+     "caption": "At the pavilion's door, desktop"
+    },
+    {
+     "id": "after-pavilion-phone",
+     "image": "bible/shots/showcase/sports-1/after-pavilion-phone.webp",
+     "caption": "At the pavilion's door, phone"
+    }
+   ]
+  },
+  {
+   "title": "The courts walk",
+   "caption": "Before: lawn between the courts and the north residence. After: the walk east along the courts' fence, the courts' gate on one side with テニスコート on a board, the north residence's door on the other with its name on a low wall. The camera looks along the walk so the residence doesn't hide Eric.",
+   "images": [
+    {
+     "id": "before-courts-desk",
+     "image": "bible/shots/showcase/sports-1/before-courts-desk.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-courts-phone",
+     "image": "bible/shots/showcase/sports-1/before-courts-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-courts-desk",
+     "image": "bible/shots/showcase/sports-1/after-courts-desk.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-courts-phone",
+     "image": "bible/shots/showcase/sports-1/after-courts-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "After work",
+   "caption": "The gym's glass, the canopy lights and the lamps lit.",
+   "images": [
+    {
+     "id": "after-eve-desk",
+     "image": "bible/shots/showcase/sports-1/after-eve-desk.webp.webp",
+     "caption": "After work, desktop"
+    },
+    {
+     "id": "after-eve-phone",
+     "image": "bible/shots/showcase/sports-1/after-eve-phone.webp",
+     "caption": "After work, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=sports"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "media": []
+}

@@ -1,0 +1,45 @@
+{
+ "title": "Selected office crowd in the island",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "Your selected a-image and b-image now appear among the ambient office crowd. B’s reported fringe patch is corrected; the selected faces, native rigs and motion are retained.",
+ "sections": [
+  {
+   "title": "Selected models and ordinary play",
+   "caption": "Other crowd categories and named workers keep their established appearances. Counts and routes are unchanged.",
+   "images": [
+    {
+     "id": "a-face",
+     "image": "bible/shots/showcase/crowd-selected-1/a-face.png.webp",
+     "caption": "Selected A, unchanged."
+    },
+    {
+     "id": "b-fringe",
+     "image": "bible/shots/showcase/crowd-selected-1/b-fringe.png.webp",
+     "caption": "Selected B with the reported pale fringe patch corrected."
+    },
+    {
+     "id": "plaza-desktop",
+     "image": "bible/shots/showcase/crowd-selected-1/plaza-desktop.png.webp",
+     "caption": "The selected office crowd in the plaza, desktop."
+    },
+    {
+     "id": "plaza-phone",
+     "image": "bible/shots/showcase/crowd-selected-1/plaza-phone.png.webp",
+     "caption": "The selected office crowd in the plaza, phone."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Live models, motion and correction history",
+   "href": "reviews/crowd-pilot-5/viewer.html?s=selected"
+  },
+  {
+   "label": "Original selection and feedback",
+   "href": "#review/crowd-pilot-5"
+  }
+ ],
+ "media": []
+}

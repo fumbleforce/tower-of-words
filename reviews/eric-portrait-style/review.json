@@ -1,0 +1,36 @@
+{
+ "title": "Eric's portrait: original style or 734",
+ "date": "2026-09-29",
+ "by": "art agent (Eric old style)",
+ "status": "superseded",
+ "multi": false,
+ "question": "You said the old portraits matched the cast better. This is the original approved portrait with his eyes opened and the red rim removed. Use this set, or keep 734?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/eric-oldstyle-sheet.png.webp",
+   "caption": "Old set, current 734 set, new set, every attempt, and Mio and Mori next to the new neutral"
+  }
+ ],
+ "options": [
+  {
+   "id": "oldstyle",
+   "label": "Original style, eyes open (neutral 831 at 0.6, surprised 831, tired 833)",
+   "image": "art/candidates/portraits/eric-oldstyle/eric-old-neutral-d60-831-cut.webp.webp",
+   "images": [
+    "art/candidates/portraits/eric-oldstyle/eric-old-surprised-831-cut.webp.webp",
+    "art/candidates/portraits/eric-oldstyle/eric-old-tired-833-cut.webp.webp"
+   ],
+   "note": "Beard drawn a little fuller; cream highlights in the hair remain"
+  },
+  {
+   "id": "keep734",
+   "label": "Keep 734 (in the game now)",
+   "image": "game3d/assets/portraits/eric-neutral.webp",
+   "images": [
+    "game3d/assets/portraits/eric-surprised.webp",
+    "game3d/assets/portraits/eric-tired.webp"
+   ]
+  }
+ ],
+ "decision": "No: wanted the old, ancient first ones that look like anime figures, not this graphic-novel style"
+}

@@ -1,0 +1,191 @@
+{
+ "title": "Station forecourt: the phone's first view, the tower's plinth, the lift core's top and the station windows",
+ "date": "2026-09-30",
+ "by": "claude-agent:forecourt-polish",
+ "caption": "Fixes to the rebuilt forecourt. On a phone the camera now looks east from the station door, so head office is in view from the first step. The tower stands on a paved plinth turned with it, which the square court meets along one dark stone edge. The lift core's top shows the cut through the building, and the station's side windows have surrounds. Same spots before and after.",
+ "commit": "66f17d0",
+ "sections": [
+  {
+   "title": "Stepping out of the station (phone)",
+   "caption": "Before: the camera looked north, so the bottom half was the security room seen through the faded station, and head office was off to the right, out of frame. Now the camera turns east as Eric steps out: the court ahead, head office's door, canopy and lower floors at the top, and the station whole beside him. Eric stops a few paces from the door, clear of its canopy. Over the platform shed, its roof fades so it doesn't block the bottom of the frame.",
+   "images": [
+    {
+     "id": "exit-phone-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/exit-phone-before.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "exit-phone-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/exit-phone-after.webp",
+     "caption": "After"
+    },
+    {
+     "id": "exit-eve-phone-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/exit-eve-phone-before.webp",
+     "caption": "Before, evening"
+    },
+    {
+     "id": "exit-eve-phone-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/exit-eve-phone-after.webp",
+     "caption": "After, evening"
+    }
+   ]
+  },
+  {
+   "title": "Crossing the court (phone)",
+   "caption": "The camera keeps looking east across the court, then turns back to north over the bike court, so at the head office door, in the lobby and in the lift the phone view is the same as before.",
+   "images": [
+    {
+     "id": "mid-phone-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/mid-phone-before.webp",
+     "caption": "Before, east of the station"
+    },
+    {
+     "id": "mid-phone-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/mid-phone-after.webp",
+     "caption": "After, east of the station"
+    },
+    {
+     "id": "turn-1-phone",
+     "image": "bible/shots/showcase/forecourt-polish-1/turn-1-phone.webp",
+     "caption": "After: the turn begins"
+    },
+    {
+     "id": "turn-2-phone",
+     "image": "bible/shots/showcase/forecourt-polish-1/turn-2-phone.webp",
+     "caption": "After: halfway"
+    },
+    {
+     "id": "turn-3-phone",
+     "image": "bible/shots/showcase/forecourt-polish-1/turn-3-phone.webp",
+     "caption": "After: nearly north, at the door"
+    },
+    {
+     "id": "hodoor-phone-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/hodoor-phone-before.webp",
+     "caption": "Before, at the head office door"
+    },
+    {
+     "id": "hodoor-phone-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/hodoor-phone-after.webp",
+     "caption": "After, at the head office door"
+    }
+   ]
+  },
+  {
+   "title": "Where the turned tower meets the square court",
+   "caption": "Before, a square paved patch lay under the turned tower, its corners showing round it, and the tower's apron and the lane poked into the court at an angle. Now the tower stands on a plinth turned with it, tiled on its grid, with a dark stone band round the edge; the court's paving runs up to that band. The worn line from the station turns at the band and runs up to the door. The lane starts at the bike court's corner with the same band and a lamp, the hedge starts at that lamp, and lawn turned with the tower lies round the plinth and south of the hedge.",
+   "images": [
+    {
+     "id": "wide-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/wide-before.webp.webp",
+     "caption": "Before (wider than the game's camera)"
+    },
+    {
+     "id": "wide-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/wide-after.webp.webp",
+     "caption": "After (wider than the game's camera)"
+    },
+    {
+     "id": "hodoor-desk-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/hodoor-desk-before.webp.webp",
+     "caption": "Before, at the door"
+    },
+    {
+     "id": "hodoor-desk-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/hodoor-desk-after.webp.webp",
+     "caption": "After, at the door"
+    },
+    {
+     "id": "wide-eve-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/wide-eve-before.webp",
+     "caption": "Before, evening"
+    },
+    {
+     "id": "wide-eve-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/wide-eve-after.webp.webp",
+     "caption": "After, evening"
+    },
+    {
+     "id": "hodoor-eve-desk-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/hodoor-eve-desk-before.webp.webp",
+     "caption": "Before, evening at the door"
+    },
+    {
+     "id": "hodoor-eve-desk-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/hodoor-eve-desk-after.webp.webp",
+     "caption": "After, evening at the door"
+    }
+   ]
+  },
+  {
+   "title": "The station's side windows",
+   "caption": "From the court the camera sees the station's east and west walls almost edge on, so their windows showed as thin slanted outlines. Each window now has a pale surround standing out from the wall (a hood, jambs and a sill), as do the upper windows on the south front.",
+   "images": [
+    {
+     "id": "mid-desk-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/mid-desk-before.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "mid-desk-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/mid-desk-after.webp.webp",
+     "caption": "After"
+    },
+    {
+     "id": "exit-desk-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/exit-desk-before.webp.webp",
+     "caption": "Before, desktop at the station door"
+    },
+    {
+     "id": "exit-desk-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/exit-desk-after.webp",
+     "caption": "After, desktop at the station door (unchanged apart from where Eric stops)"
+    }
+   ]
+  },
+  {
+   "title": "The top of the lift core",
+   "caption": "When the tower fades over the lobby, the lift core's top was one flat pale slab. Now it shows where the building is cut: pale caps on the core's walls, the shafts dark below them, the lift's machine on two steel beams over the B2 shaft, the stair's upper flight and a riser with ducts.",
+   "images": [
+    {
+     "id": "lobby-desk-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/lobby-desk-before.webp.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "lobby-desk-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/lobby-desk-after.webp.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "lobby-phone-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/lobby-phone-before.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "lobby-phone-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/lobby-phone-after.webp",
+     "caption": "After, phone"
+    },
+    {
+     "id": "lobby-eve-desk-before",
+     "image": "bible/shots/showcase/forecourt-polish-1/lobby-eve-desk-before.webp",
+     "caption": "Before, evening"
+    },
+    {
+     "id": "lobby-eve-desk-after",
+     "image": "bible/shots/showcase/forecourt-polish-1/lobby-eve-desk-after.webp",
+     "caption": "After, evening"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

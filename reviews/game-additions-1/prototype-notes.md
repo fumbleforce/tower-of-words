@@ -1,0 +1,19 @@
+# Prototype notes
+
+The proposals and selected option are in [game-additions-1](../../bible/#review/game-additions-1). None is implemented or established story. Issue [339](https://github.com/fumbleforce/tower-of-words/issues/339) now tracks the selected prototype; posting this round is complete.
+
+The five pitches were compared with the current [systems](../../docs/game/systems.md), [places](../../docs/game/places.md), [progression](../../docs/game/progression.md) and [language plan](../../docs/game/language-progression.md). Two independent drafts converged on the camera and physical command puzzle. Room furnishing was removed because it is already planned. Existing groceries, canteen meals, remembered remarks and club sessions are foundations, rather than new proposals in this round.
+
+| Pick | What the first prototype must demonstrate | Main uncertainty |
+|---|---|---|
+| outing | Kenji follows through both stops without obstructing the player. Stopping, leaving and resuming produce appropriate replies. The later callback reflects the actual stop. | Companion movement and available time must fit existing schedules. This extends fixed invitations into player-chosen routes without replacing later character milestones. |
+| command-workbench | Feeder and tray each visibly obey the selected action; a caught or missed load follows the physical arrangement. Both solutions work, and reset restores every part. | Matte needs a clear persistent hold/release rule. Establish that behavior in the prototype and compare it with existing commands before integration. Keep this distinct from the existing Kotodama recipient/particle game. |
+| rainy-shotengai | Rain, shelter and crowd positions agree. Staying or leaving remains possible; a deferred conversation is offered on another rainy visit. The heard remark and learned word open its question in either order. | Weather must be affordable on the phone. Scope starts with one outdoor place; no claim of island-wide weather or seasons. |
+| camera | Saved images contain the actual chosen framing. Mori recognises a subject only if it is visible, and changing the picture changes the applicable reply. Player pictures survive Continue. | Framing, occlusion and storage limits need a prototype. Avoid rewarding a named subject that was actually behind a wall or outside the picture. |
+| crane-game | Two different grips give visibly different outcomes. Kenji follows the same rules as the player. Reset, returning later and winning preserve the correct prize state. | Start with a constrained physical model that reads clearly before expanding the cabinet. No random win probability or precision timing. |
+
+Use existing approved characters and places in the first tests. Any new visible prop or sound follows the asset review rules in GUIDE. These pitches establish no new cast history, romantic commitment or knowledge of the commands: B2 experiments require the existing team reveal to have happened. The crane cabinet uses the existing outdoor game-centre frontage, where Kenji already watches the machines; it requires meeting him first.
+
+Prototype verification includes a first visit with the relevant words unknown, a visit with them known, leaving partway through, and Save/Continue after an actual choice. Optional learning remains optional. Knowledge is awarded only by the existing explicit learning action; merely seeing a gloss does not teach it. Check desktop and phone controls, and keep all text available until the player acts. The proposed persistent callback, photograph, machine state or prize must be tested across a later visit, rather than inferred from a completion flag.
+
+Each selected addition starts with its small standalone interaction. Authored dialogue, staging and voice coverage then receive the existing cold-read and visual checks before it joins the game. Full character arcs, new destinations and bulk assets are outside this proposal round.

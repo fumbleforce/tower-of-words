@@ -1,0 +1,65 @@
+{
+ "title": "Everyday conversations with the cast",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "Mio, Emi, the guard, Kuro, Aoi and Rei have recurring Chat topics, optional word practice and remembered replies. Conversation views now keep people facing each other after Continue.",
+ "sections": [
+  {
+   "title": "At work",
+   "images": [
+    {
+     "id": "mio-phone",
+     "image": "bible/shots/showcase/everyday-cast-chat-1/mio-phone.png.webp",
+     "caption": "Mio at her desk, phone."
+    },
+    {
+     "id": "emi-desktop",
+     "image": "bible/shots/showcase/everyday-cast-chat-1/emi-desktop.png.webp",
+     "caption": "Emi at her desk, desktop."
+    },
+    {
+     "id": "guard-desktop",
+     "image": "bible/shots/showcase/everyday-cast-chat-1/guard-desktop.png.webp",
+     "caption": "An ordinary conversation at the station."
+    }
+   ]
+  },
+  {
+   "title": "Away from work",
+   "images": [
+    {
+     "id": "kuro-phone",
+     "image": "bible/shots/showcase/everyday-cast-chat-1/kuro-phone.png.webp",
+     "caption": "Kuro’s topics after title Continue, phone."
+    },
+    {
+     "id": "aoi-desktop",
+     "image": "bible/shots/showcase/everyday-cast-chat-1/aoi-desktop.png.webp",
+     "caption": "Aoi outside the shops, desktop."
+    },
+    {
+     "id": "rei-phone",
+     "image": "bible/shots/showcase/everyday-cast-chat-1/rei-phone.png.webp",
+     "caption": "Rei outside the shops, phone."
+    }
+   ]
+  },
+  {
+   "title": "Returning to an earlier remark",
+   "images": [
+    {
+     "id": "word-reply-phone",
+     "image": "bible/shots/showcase/everyday-cast-chat-1/word-reply-phone.png.webp",
+     "caption": "A known word opens a reply about an earlier remark."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

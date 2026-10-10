@@ -1,0 +1,73 @@
+{
+ "title": "Optional desktop camera",
+ "date": "2026-10-07",
+ "by": "codex-exec:day5_build",
+ "caption": "Settings → Controls now offers a desktop third-person view with mouse look and camera-relative movement. Overview remains the default and the phone camera.",
+ "sections": [
+  {
+   "title": "Exploration",
+   "caption": "Click Mouse look, move with WASD and hold Shift to run. Escape releases the mouse.",
+   "images": [
+    {
+     "id": "street",
+     "image": "game3d/shots/codex-follow-camera/native-1366-eric-explore.png.webp",
+     "caption": "Shop street, desktop"
+    },
+    {
+     "id": "office",
+     "image": "game3d/shots/codex-follow-camera/interiors-1366-carina-office-closed.png.webp",
+     "caption": "Turning inside the office"
+    },
+    {
+     "id": "setting",
+     "image": "game3d/shots/codex-follow-camera/native-1366-eric-settings.png.webp",
+     "caption": "The optional setting"
+    }
+   ]
+  },
+  {
+   "title": "Inside the buildings",
+   "caption": "The free camera stays below physical ceilings and outside walls. Overview and dialogue keep their original cutaways.",
+   "images": [
+    {
+     "id": "restaurant",
+     "image": "game3d/shots/codex-follow-camera/interiors-1366-carina-izakaya-closed.png.webp",
+     "caption": "Restaurant entrance and table"
+    },
+    {
+     "id": "dorm-room",
+     "image": "game3d/shots/codex-follow-camera/dorm-1366-carina-room-0.png.webp",
+     "caption": "Room 203, with its existing window and desk"
+    },
+    {
+     "id": "station",
+     "image": "game3d/shots/codex-follow-camera/rooms-1366-eric-gate-turn-5.png.webp",
+     "caption": "The station’s glass entrance and upper wall"
+    }
+   ]
+  },
+  {
+   "title": "Dialogue and phone",
+   "caption": "Authored scenes keep their own camera. Phone play keeps the overview and touch controls.",
+   "images": [
+    {
+     "id": "dialogue",
+     "image": "game3d/shots/codex-follow-camera/native-1366-eric-authored-dialogue.png.webp",
+     "caption": "Native interaction returns to the authored view"
+    },
+    {
+     "id": "phone",
+     "image": "game3d/shots/codex-follow-camera/native-390-carina-overview.png.webp",
+     "caption": "Phone overview"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

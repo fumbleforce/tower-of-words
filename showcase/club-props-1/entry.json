@@ -1,0 +1,47 @@
+{
+ "title": "Two ticket props named: the guard's monitor and Kuro's label printer",
+ "date": "2026-10-05",
+ "by": "claude-agent:club-places",
+ "caption": "The machines the days 3 to 5 tickets are about now all exist as named things a scene can use: the gym's booking terminal, the common room's printer and the karaoke booth's song selector (in their own entries), and here the guard's monitor and a new label printer on the reception counter. None has a marker until a story uses it.",
+ "sections": [
+  {
+   "title": "Kuro's label printer",
+   "caption": "New: a squat grey label printer at the west end of the head office's reception counter, beside her screen, a strip of white label out of its slot.",
+   "images": [
+    {
+     "id": "printer-close-desk",
+     "image": "game3d/shots/club-props/printer-close-desk.png.webp",
+     "caption": "At the counter, desktop"
+    },
+    {
+     "id": "reception-phone",
+     "image": "game3d/shots/club-props/reception-phone.png.webp",
+     "caption": "The lobby, phone"
+    }
+   ]
+  },
+  {
+   "title": "The guard's monitor",
+   "caption": "Unchanged to look at: the monitor on the guard's desk, its screen toward him. Its spot is beside it, so it stays in sight past Eric.",
+   "images": [
+    {
+     "id": "monitor-close-desk",
+     "image": "game3d/shots/club-props/monitor-close-desk.png.webp",
+     "caption": "At the desk, desktop"
+    },
+    {
+     "id": "guard-desk-phone",
+     "image": "game3d/shots/club-props/guard-desk-phone.png.webp",
+     "caption": "At the desk, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "media": []
+}

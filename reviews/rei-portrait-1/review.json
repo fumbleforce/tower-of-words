@@ -1,0 +1,169 @@
+{
+ "title": "Rei's dialogue portrait, round 1",
+ "date": "2026-10-03",
+ "by": "claude-agent:rei-portrait-1",
+ "status": "decided",
+ "question": "Which one is Rei?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/portraits/rei-portrait-1/sheet-attempts.webp.webp",
+   "caption": "Every attempt in the order made, after her approved picture rei-after. You asked \"Make rei portrait\"; on her chibi you said \"too happy naive looking instead of sly confident saleswoman\". The recipe is rei-after's own prompt (gallery B-rei-smirk, RDBT, seed 202) with one phrase changed: the expression \"thin knowing smile, looking down at the viewer\" became \"sly confident look, slight knowing smile\". Also added, as the rules ask: her build line \"tall and curvy\", room above the head, and the red-rim, no-props and build words in the negative. t- is text to image (seed 202 and five new seeds), i50/i65 is img2img from rei-after at denoise 0.5 and 0.65, rf- is each t- render with room outpainted above because the ponytail touched the top edge."
+  },
+  {
+   "image": "art/candidates/portraits/rei-portrait-1/sheet-game.webp.webp",
+   "caption": "Cut-outs at the size the game shows the cast: Mio, Kuro (at her 0.85), Aoi and Emi as installed, then each Rei with the same face height and chin line. At that scale every Rei render ends at the chest, above the bottom of the frame, because the renders are framed closer than the others (as Kuro's was before kuro-body-1). Once you pick, the next step is extending the pick down to the waist; nothing goes into the game before that."
+  },
+  {
+   "image": "art/candidates/portraits/rei-portrait-1/imgqa-sheet.webp.webp",
+   "caption": "Image check on every render, against rei-after: red rim, headroom, framing and face drift. Red rim is 0 to 0.4% on all 16 (her gallery picture had a red outline; the weighted negative removed it). t-2103 and t-2105 (and their rf- versions) drift furthest from her face."
+  }
+ ],
+ "options": [
+  {
+   "id": "rei-t-202",
+   "label": "rei-t-202",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-t-202.webp.webp",
+   "images": [],
+   "note": "Attempt 1 of 16. Step 1, text to image from her approved recipe. Seed 202 (the seed of rei-after itself), RDBT Anima, Euler A, 30 steps, CFG 5, 896x1152. The ponytail touches or is cut by the top edge (framecheck: head/hair 9px from the top edge (want >= 34)); rei-rf-202 is this same picture with room added above. Image check fail: red rim 0.4%, headroom 1%, drift from rei-after ccip 0.038 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "rei-t-2101",
+   "label": "rei-t-2101",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-t-2101.webp.webp",
+   "images": [],
+   "note": "Attempt 2 of 16. Step 1, text to image from her approved recipe. Seed 2101, RDBT Anima, Euler A, 30 steps, CFG 5, 896x1152. The ponytail touches or is cut by the top edge (framecheck: head/hair 0px from the top edge (want >= 34)); rei-rf-2101 is this same picture with room added above. Image check fail: red rim 0.0%, headroom 0%, drift from rei-after ccip 0.043 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "rei-t-2102",
+   "label": "rei-t-2102",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-t-2102.webp.webp",
+   "images": [],
+   "note": "Attempt 3 of 16. Step 1, text to image from her approved recipe. Seed 2102, RDBT Anima, Euler A, 30 steps, CFG 5, 896x1152. The ponytail touches or is cut by the top edge (framecheck: head/hair 3px from the top edge (want >= 34)); rei-rf-2102 is this same picture with room added above. Image check fail: red rim 0.0%, headroom 0%, drift from rei-after ccip 0.064 (warn). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "rei-t-2103",
+   "label": "rei-t-2103",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-t-2103.webp.webp",
+   "images": [],
+   "note": "Attempt 4 of 16. Step 1, text to image from her approved recipe. Seed 2103, RDBT Anima, Euler A, 30 steps, CFG 5, 896x1152. The ponytail touches or is cut by the top edge (framecheck: head/hair 0px from the top edge (want >= 34)); rei-rf-2103 is this same picture with room added above. Image check fail: red rim 0.0%, headroom 0%, drift from rei-after ccip 0.140 (fail). Her fringe is swept back off her forehead; a different face from rei-after. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "rei-t-2104",
+   "label": "rei-t-2104",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-t-2104.webp.webp",
+   "images": [],
+   "note": "Attempt 5 of 16. Step 1, text to image from her approved recipe. Seed 2104, RDBT Anima, Euler A, 30 steps, CFG 5, 896x1152. The ponytail touches or is cut by the top edge (framecheck: head/hair 0px from the top edge (want >= 34)); rei-rf-2104 is this same picture with room added above. Image check fail: red rim 0.0%, headroom 0%, drift from rei-after ccip 0.067 (warn). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "rei-t-2105",
+   "label": "rei-t-2105",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-t-2105.webp.webp",
+   "images": [],
+   "note": "Attempt 6 of 16. Step 1, text to image from her approved recipe. Seed 2105, RDBT Anima, Euler A, 30 steps, CFG 5, 896x1152. The ponytail touches or is cut by the top edge (framecheck: head/hair 0px from the top edge (want >= 34)); rei-rf-2105 is this same picture with room added above. Image check fail: red rim 0.1%, headroom 0%, drift from rei-after ccip 0.137 (fail). Darker, tanned-looking skin and hair swept back; a different face from rei-after. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "rei-i50-2101",
+   "label": "rei-i50-2101",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-i50-2101-game.webp.webp",
+   "images": [
+    "art/candidates/portraits/rei-portrait-1/rei-i50-2101.webp.webp",
+    "art/candidates/portraits/rei-portrait-1/rei-i50-2101-cut.webp.webp"
+   ],
+   "note": "Attempt 7 of 16. Step 1, img2img from art/approved/rei/rei-after.webp with the same prompt, denoise 0.5, seed 2101, RDBT Anima, Euler A, 30 steps, CFG 5, 896x1152. Keeps her approved drawing and changes the expression. Card picture: the cut-out at the cast's game scale (597x768, same face height and chin line as Aoi, Mio and Emi). Image check pass: red rim 0.0%, headroom 16%, drift from rei-after ccip 0.018 (pass); cut-out warn, matte holes 1. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "rei-i50-2102",
+   "label": "rei-i50-2102",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-i50-2102-game.webp.webp",
+   "images": [
+    "art/candidates/portraits/rei-portrait-1/rei-i50-2102.webp.webp",
+    "art/candidates/portraits/rei-portrait-1/rei-i50-2102-cut.webp.webp"
+   ],
+   "note": "Attempt 8 of 16. Step 1, img2img from art/approved/rei/rei-after.webp with the same prompt, denoise 0.5, seed 2102, RDBT Anima, Euler A, 30 steps, CFG 5, 896x1152. Keeps her approved drawing and changes the expression. Card picture: the cut-out at the cast's game scale (597x768, same face height and chin line as Aoi, Mio and Emi). Image check pass: red rim 0.0%, headroom 16%, drift from rei-after ccip 0.017 (pass); cut-out pass, matte holes 0. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "rei-i65-2101",
+   "label": "rei-i65-2101",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-i65-2101-game.webp.webp",
+   "images": [
+    "art/candidates/portraits/rei-portrait-1/rei-i65-2101.webp.webp",
+    "art/candidates/portraits/rei-portrait-1/rei-i65-2101-cut.webp.webp"
+   ],
+   "note": "Attempt 9 of 16. Step 1, img2img from art/approved/rei/rei-after.webp with the same prompt, denoise 0.65, seed 2101, RDBT Anima, Euler A, 30 steps, CFG 5, 896x1152. Keeps her approved drawing and changes the expression. Card picture: the cut-out at the cast's game scale (597x768, same face height and chin line as Aoi, Mio and Emi). Image check warn: red rim 0.0%, headroom 16%, drift from rei-after ccip 0.080 (warn); cut-out warn, matte holes 0. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "rei-i65-2102",
+   "label": "rei-i65-2102",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-i65-2102-game.webp.webp",
+   "images": [
+    "art/candidates/portraits/rei-portrait-1/rei-i65-2102.webp.webp",
+    "art/candidates/portraits/rei-portrait-1/rei-i65-2102-cut.webp.webp"
+   ],
+   "note": "Attempt 10 of 16. Step 1, img2img from art/approved/rei/rei-after.webp with the same prompt, denoise 0.65, seed 2102, RDBT Anima, Euler A, 30 steps, CFG 5, 896x1152. Keeps her approved drawing and changes the expression. Card picture: the cut-out at the cast's game scale (597x768, same face height and chin line as Aoi, Mio and Emi). Image check pass: red rim 0.0%, headroom 16%, drift from rei-after ccip 0.042 (pass); cut-out pass, matte holes 0. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "rei-rf-202",
+   "label": "rei-rf-202",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-rf-202-game.webp.webp",
+   "images": [
+    "art/candidates/portraits/rei-portrait-1/rei-rf-202.webp.webp",
+    "art/candidates/portraits/rei-portrait-1/rei-rf-202-cut.webp.webp"
+   ],
+   "note": "Attempt 11 of 16. Step 2: rei-t-202 with 256 px outpainted on top and 100 px each side (tools/reframe.py, RDBT masked img2img, denoise 0.7, seed 301); the picture inside the old frame is unchanged (max pixel change 0). Card picture: the cut-out at the cast's game scale (597x768). Image check warn: red rim 0.4%, headroom 19%, drift from rei-after ccip 0.039 (pass); cut-out warn, matte holes 0. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book Outpaint prompt adds: a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame; negative adds: hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick"
+  },
+  {
+   "id": "rei-rf-2101",
+   "label": "rei-rf-2101",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-rf-2101-game.webp.webp",
+   "images": [
+    "art/candidates/portraits/rei-portrait-1/rei-rf-2101.webp.webp",
+    "art/candidates/portraits/rei-portrait-1/rei-rf-2101-cut.webp.webp"
+   ],
+   "note": "Attempt 12 of 16. Step 2: rei-t-2101 with 256 px outpainted on top and 100 px each side (tools/reframe.py, RDBT masked img2img, denoise 0.7, seed 301); the picture inside the old frame is unchanged (max pixel change 0). Card picture: the cut-out at the cast's game scale (597x768). Image check warn: red rim 0.0%, headroom 18%, drift from rei-after ccip 0.042 (pass); cut-out warn, matte holes 0. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book Outpaint prompt adds: a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame; negative adds: hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick"
+  },
+  {
+   "id": "rei-rf-2102",
+   "label": "rei-rf-2102",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-rf-2102-game.webp.webp",
+   "images": [
+    "art/candidates/portraits/rei-portrait-1/rei-rf-2102.webp.webp",
+    "art/candidates/portraits/rei-portrait-1/rei-rf-2102-cut.webp.webp"
+   ],
+   "note": "Attempt 13 of 16. Step 2: rei-t-2102 with 256 px outpainted on top and 100 px each side (tools/reframe.py, RDBT masked img2img, denoise 0.7, seed 301); the picture inside the old frame is unchanged (max pixel change 0). Card picture: the cut-out at the cast's game scale (597x768). Image check warn: red rim 0.0%, headroom 18%, drift from rei-after ccip 0.066 (warn); cut-out warn, matte holes 1. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book Outpaint prompt adds: a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame; negative adds: hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick"
+  },
+  {
+   "id": "rei-rf-2103",
+   "label": "rei-rf-2103",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-rf-2103-game.webp.webp",
+   "images": [
+    "art/candidates/portraits/rei-portrait-1/rei-rf-2103.webp.webp",
+    "art/candidates/portraits/rei-portrait-1/rei-rf-2103-cut.webp.webp"
+   ],
+   "note": "Attempt 14 of 16. Step 2: rei-t-2103 with 256 px outpainted on top and 100 px each side (tools/reframe.py, RDBT masked img2img, denoise 0.7, seed 301); the picture inside the old frame is unchanged (max pixel change 0). Card picture: the cut-out at the cast's game scale (597x768). Image check fail: red rim 0.0%, headroom 16%, drift from rei-after ccip 0.150 (fail); cut-out fail, matte holes 0. Her fringe is swept back off her forehead; a different face from rei-after. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book Outpaint prompt adds: a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame; negative adds: hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick"
+  },
+  {
+   "id": "rei-rf-2104",
+   "label": "rei-rf-2104",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-rf-2104-game.webp.webp",
+   "images": [
+    "art/candidates/portraits/rei-portrait-1/rei-rf-2104.webp.webp",
+    "art/candidates/portraits/rei-portrait-1/rei-rf-2104-cut.webp.webp"
+   ],
+   "note": "Attempt 15 of 16. Step 2: rei-t-2104 with 256 px outpainted on top and 100 px each side (tools/reframe.py, RDBT masked img2img, denoise 0.7, seed 301); the picture inside the old frame is unchanged (max pixel change 0). Card picture: the cut-out at the cast's game scale (597x768). Image check warn: red rim 0.0%, headroom 17%, drift from rei-after ccip 0.061 (warn); cut-out warn, matte holes 0. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book Outpaint prompt adds: a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame; negative adds: hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick"
+  },
+  {
+   "id": "rei-rf-2105",
+   "label": "rei-rf-2105",
+   "image": "art/candidates/portraits/rei-portrait-1/rei-rf-2105-game.webp.webp",
+   "images": [
+    "art/candidates/portraits/rei-portrait-1/rei-rf-2105.webp.webp",
+    "art/candidates/portraits/rei-portrait-1/rei-rf-2105-cut.webp.webp"
+   ],
+   "note": "Attempt 16 of 16. Step 2: rei-t-2105 with 256 px outpainted on top and 100 px each side (tools/reframe.py, RDBT masked img2img, denoise 0.7, seed 301); the picture inside the old frame is unchanged (max pixel change 0). Card picture: the cut-out at the cast's game scale (597x768). Image check fail: red rim 0.1%, headroom 17%, drift from rei-after ccip 0.137 (fail); cut-out fail, matte holes 0. Darker, tanned-looking skin and hair swept back; a different face from rei-after. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book Outpaint prompt adds: a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame; negative adds: hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick"
+  }
+ ],
+ "decision": "Picked rei-i65-2102 (Jørgen, 2026-10-03, in chat: \"65-2102\"). Next: extend to the waist like kuro-body-1, cut out, install as rei-neutral.",
+ "decided_at": "2026-10-03T17:52:07+0200",
+ "issue": 214
+}

@@ -1,0 +1,35 @@
+{
+ "title": "People in the shared rooms",
+ "date": "2026-10-07",
+ "by": "codex",
+ "caption": "Ordinary Talk with the canteen worker and Kenji, with visible activities, repeat replies and a busy response. Available on their existing schedules.",
+ "images": [
+  {
+   "id": "counter-desktop",
+   "image": "bible/shots/showcase/room-life-1/counter-desktop.png.webp",
+   "caption": "Canteen service, desktop."
+  },
+  {
+   "id": "commons-desktop",
+   "image": "bible/shots/showcase/room-life-1/commons-desktop.png.webp",
+   "caption": "Common-room conversation, desktop."
+  },
+  {
+   "id": "counter-phone",
+   "image": "bible/shots/showcase/room-life-1/counter-phone.png.webp",
+   "caption": "Canteen service, phone."
+  },
+  {
+   "id": "commons-phone",
+   "image": "bible/shots/showcase/room-life-1/commons-phone.png.webp",
+   "caption": "Common-room conversation, phone."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

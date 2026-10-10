@@ -1,0 +1,85 @@
+{
+ "title": "Sports centre lobby and hall",
+ "date": "2026-10-06",
+ "by": "codex:gym-recovery",
+ "caption": "Reception, shoe lockers and changing-room doors are in the entrance lobby. The courts and equipment store are behind the glass partition.",
+ "images": [
+  {
+   "id": "entrance-desk",
+   "image": "game3d/shots/gym-recovery/entrance-desk.png.webp",
+   "caption": "Entrance lobby and separate sports hall, desktop"
+  },
+  {
+   "id": "entrance-phone",
+   "image": "game3d/shots/gym-recovery/entrance-phone.png.webp",
+   "caption": "Entrance lobby and separate sports hall, phone"
+  },
+  {
+   "id": "reception-desk",
+   "image": "game3d/shots/gym-recovery/reception-desk.png.webp",
+   "caption": "Reception counter, desktop"
+  },
+  {
+   "id": "reception-phone",
+   "image": "game3d/shots/gym-recovery/reception-phone.png.webp",
+   "caption": "Reception counter, phone"
+  },
+  {
+   "id": "hall-desk",
+   "image": "game3d/shots/gym-recovery/hall-desk.png.webp",
+   "caption": "Sports hall, desktop"
+  },
+  {
+   "id": "hall-phone",
+   "image": "game3d/shots/gym-recovery/hall-phone.png.webp",
+   "caption": "Sports hall, phone"
+  },
+  {
+   "id": "changing-desk",
+   "image": "game3d/shots/gym-recovery/changing-desk.png.webp",
+   "caption": "Changing-room doors, desktop"
+  },
+  {
+   "id": "changing-phone",
+   "image": "game3d/shots/gym-recovery/changing-phone.png.webp",
+   "caption": "Changing-room doors, phone"
+  },
+  {
+   "id": "changing-carina-desk",
+   "image": "game3d/shots/gym-recovery/changing-carina-desk.png.webp",
+   "caption": "Carina at the women’s changing room, desktop"
+  },
+  {
+   "id": "changing-carina-phone",
+   "image": "game3d/shots/gym-recovery/changing-carina-phone.png.webp",
+   "caption": "Carina at the women’s changing room, phone"
+  },
+  {
+   "id": "booking-printed-desk",
+   "image": "game3d/shots/gym-recovery/booking-printed-desk.png.webp",
+   "caption": "Printout on the back counter, desktop"
+  },
+  {
+   "id": "booking-printed-phone",
+   "image": "game3d/shots/gym-recovery/booking-printed-phone.png.webp",
+   "caption": "Printout on the back counter, phone"
+  },
+  {
+   "id": "booking-checked-desk",
+   "image": "game3d/shots/gym-recovery/booking-checked-desk.png.webp",
+   "caption": "Printout returned to reception, desktop"
+  },
+  {
+   "id": "booking-checked-phone",
+   "image": "game3d/shots/gym-recovery/booking-checked-phone.png.webp",
+   "caption": "Printout returned to reception, phone"
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

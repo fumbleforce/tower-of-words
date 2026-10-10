@@ -1,0 +1,81 @@
+{
+ "title": "The gym's corner, inside its main doors",
+ "date": "2026-10-05",
+ "by": "claude-agent:club-places",
+ "caption": "For the clubs' winter meetings and the gym's two tickets (days 3 to 5). The gym's glass doors on the sports lane now open onto the south end of the hall, as far as the green divider net. It also loads with ?place=gym. Nobody is there yet.",
+ "sections": [
+  {
+   "title": "The doors",
+   "caption": "Before: the two pairs of glass doors carried 準備中 cards and were shut. After: the cards are gone and Go in takes Eric inside.",
+   "images": [
+    {
+     "id": "before-front-desk",
+     "image": "game3d/shots/club-before/gym-front-desk.png.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "before-front-phone",
+     "image": "game3d/shots/club-before/gym-front-phone.png.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-front-desk",
+     "image": "game3d/shots/club-gym/front-desk.png.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "after-front-phone",
+     "image": "game3d/shots/club-gym/front-phone.png.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "Inside",
+   "caption": "The entrance's tiles with shoe lockers and a crate of indoor slippers; the attendant's desk with the booking terminal, an old desk fan, the booking sheets and the printer; the club board and an AED; the badminton court with its net up; two benches; the equipment store open on the ball carts; the winter meeting corner's folding chairs and whiteboard; the divider net, a goal and a clock beyond. On a desktop the whole corner is one frame; on a phone the camera follows Eric.",
+   "images": [
+    {
+     "id": "after-in-desk",
+     "image": "game3d/shots/club-gym/in-desk.png.webp",
+     "caption": "Arriving, desktop"
+    },
+    {
+     "id": "after-in-phone",
+     "image": "game3d/shots/club-gym/in-phone.png.webp",
+     "caption": "Arriving, phone"
+    },
+    {
+     "id": "after-desk-desk",
+     "image": "game3d/shots/club-gym/desk-desk.png.webp",
+     "caption": "At the desk, desktop"
+    },
+    {
+     "id": "after-desk-phone",
+     "image": "game3d/shots/club-gym/desk-phone.png.webp",
+     "caption": "At the desk, phone"
+    },
+    {
+     "id": "after-store-desk",
+     "image": "game3d/shots/club-gym/store-desk.png.webp",
+     "caption": "By the equipment store, desktop"
+    },
+    {
+     "id": "after-store-phone",
+     "image": "game3d/shots/club-gym/store-phone.png.webp",
+     "caption": "By the equipment store, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/index.html?place=gym"
+  },
+  {
+   "label": "Places doc",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/docs/game/places.md"
+  }
+ ],
+ "media": []
+}

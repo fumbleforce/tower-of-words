@@ -1,0 +1,30 @@
+{
+ "sent": "2026-10-05T07:32:14+0200",
+ "picked": [
+  "emi-2"
+ ],
+ "options": {
+  "emi-1": {
+   "star": false,
+   "reject": false,
+   "comment": "looking good, but for some discoloration, and the lanyard which becomes mangled. we should remove props when making the models."
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": [
+  {
+   "sent": "2026-10-05T00:12:53+0200",
+   "picked": [],
+   "options": {
+    "emi-1": {
+     "star": false,
+     "reject": false,
+     "comment": "looking good, but for some discoloration, and the lanyard which becomes mangled. we should remove props when making the models."
+    }
+   },
+   "comment": "",
+   "read": true
+  }
+ ]
+}

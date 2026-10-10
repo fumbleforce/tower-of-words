@@ -1,0 +1,110 @@
+{
+ "title": "Island map, straight down",
+ "date": "2026-09-30",
+ "by": "claude-agent:island-topdown",
+ "caption": "A north-up, straight-down version of the picked island map for the builder to re-register the overlay and re-trace the layout on. Buildings sit on their footprints; nothing was redesigned.",
+ "sections": [
+  {
+   "title": "Before and after",
+   "caption": "Left: the picked map with the landmarks we check. Right: the top-down version with the same landmarks at their ground points.",
+   "images": [
+    {
+     "id": "side-by-side",
+     "image": "bible/shots/showcase/island-topdown-1/side-by-side.webp.webp",
+     "caption": "Picked map vs top-down"
+    },
+    {
+     "id": "hidden",
+     "image": "bible/shots/showcase/island-topdown-1/hidden-ground.webp.webp",
+     "caption": "Pink: ground the leaning buildings hid in the picked map (15% of the land). It is filled as plain paving and lawn, so don't trace paths or buildings from it."
+    }
+   ]
+  },
+  {
+   "title": "Every attempt, in order",
+   "caption": "One change per attempt. The roof moves are the same in all of them; only the fill of the hidden ground changes.",
+   "images": [
+    {
+     "id": "01-rectified",
+     "image": "bible/shots/showcase/island-topdown-1/01-rectified.webp.webp",
+     "caption": "The picked map through the ground-plane fit the map code uses (REF). Roads and coast land right; every building leans north over its own footprint."
+    },
+    {
+     "id": "02-geometric-holes",
+     "image": "bible/shots/showcase/island-topdown-1/02-geometric-holes.webp.webp",
+     "caption": "Each of 76 buildings traced once, plus the monorail beam (outline plus how far it sits above its base) and moved down onto its footprint, then rectified. Magenta: ground the leaning buildings hid in the picked map. Grey: outside the picked picture."
+    },
+    {
+     "id": "03-klein-fill-a",
+     "image": "bible/shots/showcase/island-topdown-1/03-klein-fill-a.webp.webp",
+     "caption": "Holes and outside filled by Flux 2 Klein 4B, masked, 4 steps, reference latent, seed 101. Prompt: \"Straight top-down view ... Flat grey and white rooftops, paved paths and small plazas, round tree canopies, lawns, blue sea around a rocky coast.\" It drew new roofs and blue blobs in the holes."
+    },
+    {
+     "id": "04-klein-fill-b",
+     "image": "bible/shots/showcase/island-topdown-1/04-klein-fill-b.webp.webp",
+     "caption": "One change: prompt without rooftops (\"Paved footpaths, small paved courtyards, lawns and round tree canopies between the buildings; open blue sea around a rocky coast.\"). Still blue blobs and new grey shapes."
+    },
+    {
+     "id": "05-anima-fill",
+     "image": "bible/shots/showcase/island-topdown-1/05-anima-fill.webp.webp",
+     "caption": "One change: RDBT Anima with the LLLite inpainting-v2 patch, denoise 1.0, 30 steps, cfg 5, seed 101, prompt: quality tags, safe, \"top-down view, overhead view, from above, map, scenery, no humans, paved footpaths, small paved courtyards, lawns, round tree canopies, blue sea, rocky coast\". Blends better but invents domes, lawns, a round building in the dorm court and islets in the sea."
+    },
+    {
+     "id": "06-anima-fill-groundstart",
+     "image": "bible/shots/showcase/island-topdown-1/06-anima-fill-groundstart.webp.webp",
+     "caption": "One change: holes start from the nearest open ground (never a roof), blurred. At denoise 1.0 it makes no difference."
+    },
+    {
+     "id": "07-anima-fill-d075",
+     "image": "bible/shots/showcase/island-topdown-1/07-anima-fill-d075.webp.webp",
+     "caption": "One change: denoise 0.75. The sea is clean, the holes still get pools and domes."
+    },
+    {
+     "id": "08-anima-fill-d055",
+     "image": "bible/shots/showcase/island-topdown-1/08-anima-fill-d055.webp.webp",
+     "caption": "One change: denoise 0.55. The blurred grey start turns into round tanks. Worse."
+    },
+    {
+     "id": "09-telea-fill",
+     "image": "bible/shots/showcase/island-topdown-1/09-telea-fill.webp.webp",
+     "caption": "No model: holes continued inward from their edges (OpenCV Telea). Nothing new is drawn, but it smears into stars."
+    },
+    {
+     "id": "10-telea-anima-d04",
+     "image": "bible/shots/showcase/island-topdown-1/10-telea-anima-d04.webp.webp",
+     "caption": "One change: Anima inpaint over the Telea fill, holes only, denoise 0.4. Holes read as paving and lawn; a few wall-like blocks in the north."
+    },
+    {
+     "id": "11-telea-anima-d03",
+     "image": "bible/shots/showcase/island-topdown-1/11-telea-anima-d03.webp.webp",
+     "caption": "One change: denoise 0.3. No new buildings; the hidden ground is plain paving and lawn."
+    },
+    {
+     "id": "12-telea-anima-d03-beam",
+     "image": "bible/shots/showcase/island-topdown-1/12-telea-anima-d03-beam.webp.webp",
+     "caption": "Picked. Same as 11, with the monorail beam traced in 20 px steps (no stair-steps) and the ground its lean hid filled with sea instead of paving."
+    },
+    {
+     "id": "13-klein-unify-d025",
+     "image": "bible/shots/showcase/island-topdown-1/13-klein-unify-d025.webp.webp",
+     "caption": "One change: a light Klein img2img over the whole of 12 (8 steps, last 25%). Almost no visible change, so 12 stays."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "The top-down map, full size (art/island/island-map-4-topdown.png)",
+   "href": "bible/shots/showcase/island-topdown-1/island-map-4-topdown.png.webp"
+  },
+  {
+   "label": "Scripts, roof outlines and frame",
+   "href": "https://github.com/fumbleforce/tower-of-words/tree/main/art/candidates/island-map-4-topdown"
+  },
+  {
+   "label": "Picked map (island-map-4)",
+   "href": "art/candidates/island-map-4/01-overview.png.webp"
+  }
+ ],
+ "media": []
+}

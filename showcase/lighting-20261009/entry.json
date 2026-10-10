@@ -1,0 +1,257 @@
+{
+ "title": "One system for light and time of day: the forecourt and Eric's room",
+ "date": "2026-10-09",
+ "by": "claude-agent:lighting",
+ "caption": "Stage 1 of #370. Every period's light now comes from one table, each place has one light rig, and everything that glows at night is switched by it. The forecourt and Eric's room look as before in each period, and now go back to morning when the clock does. The other places follow after you have seen this.",
+ "commit": "e29779a3",
+ "preview": "after-step-back-desk",
+ "result": [
+  "after-step-evening-desk",
+  "after-step-back-desk",
+  "after-step-back-phone",
+  "after-dorm-d2-back-desk"
+ ],
+ "sections": [
+  {
+   "title": "Stepping the clock in the forecourt, forward and back",
+   "caption": "Same camera, the clock moved to after work, back to morning, and to after work again. Before, morning never came back: the lamps, lit windows and dusk stayed. Now each step changes the light at once, and the colour grade with it.",
+   "images": [
+    {
+     "id": "before-step-evening-desk",
+     "image": "bible/shots/showcase/lighting-20261009/before-step-evening-desk.webp.webp",
+     "caption": "Before: moved to after work, desktop"
+    },
+    {
+     "id": "before-step-back-desk",
+     "image": "bible/shots/showcase/lighting-20261009/before-step-back-desk.webp.webp",
+     "caption": "Before: moved back to morning, still dusk, desktop"
+    },
+    {
+     "id": "after-step-evening-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-step-evening-desk.webp.webp",
+     "caption": "After: moved to after work, desktop"
+    },
+    {
+     "id": "after-step-back-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-step-back-desk.webp.webp",
+     "caption": "After: moved back to morning, desktop"
+    },
+    {
+     "id": "after-step-again-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-step-again-desk.webp.webp",
+     "caption": "After: after work again, desktop"
+    },
+    {
+     "id": "before-step-evening-phone",
+     "image": "bible/shots/showcase/lighting-20261009/before-step-evening-phone.webp",
+     "caption": "Before: moved to after work, phone"
+    },
+    {
+     "id": "before-step-back-phone",
+     "image": "bible/shots/showcase/lighting-20261009/before-step-back-phone.webp",
+     "caption": "Before: moved back to morning, phone"
+    },
+    {
+     "id": "after-step-evening-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-step-evening-phone.webp",
+     "caption": "After: moved to after work, phone"
+    },
+    {
+     "id": "after-step-back-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-step-back-phone.webp",
+     "caption": "After: moved back to morning, phone"
+    },
+    {
+     "id": "after-step-again-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-step-again-phone.webp",
+     "caption": "After: after work again, phone"
+    }
+   ]
+  },
+  {
+   "title": "Forecourt entered in the morning",
+   "caption": "The same light as before. Only the people differ between shots.",
+   "images": [
+    {
+     "id": "before-court-east-morning-desk",
+     "image": "bible/shots/showcase/lighting-20261009/before-court-east-morning-desk.webp.webp",
+     "caption": "Before, court, desktop"
+    },
+    {
+     "id": "after-court-east-morning-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-court-east-morning-desk.webp.webp",
+     "caption": "After, court, desktop"
+    },
+    {
+     "id": "before-court-east-morning-phone",
+     "image": "bible/shots/showcase/lighting-20261009/before-court-east-morning-phone.webp",
+     "caption": "Before, court, phone"
+    },
+    {
+     "id": "after-court-east-morning-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-court-east-morning-phone.webp",
+     "caption": "After, court, phone"
+    },
+    {
+     "id": "before-lane-morning-desk",
+     "image": "bible/shots/showcase/lighting-20261009/before-lane-morning-desk.webp.webp",
+     "caption": "Before, lane, desktop"
+    },
+    {
+     "id": "after-lane-morning-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-lane-morning-desk.webp.webp",
+     "caption": "After, lane, desktop"
+    },
+    {
+     "id": "before-lane-morning-phone",
+     "image": "bible/shots/showcase/lighting-20261009/before-lane-morning-phone.webp",
+     "caption": "Before, lane, phone"
+    },
+    {
+     "id": "after-lane-morning-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-lane-morning-phone.webp",
+     "caption": "After, lane, phone"
+    }
+   ]
+  },
+  {
+   "title": "Forecourt entered after work",
+   "caption": "The same light as before: lamps, the lit tower and station glass, the skyline's windows.",
+   "images": [
+    {
+     "id": "before-court-east-evening-desk",
+     "image": "bible/shots/showcase/lighting-20261009/before-court-east-evening-desk.webp.webp",
+     "caption": "Before, court, desktop"
+    },
+    {
+     "id": "after-court-east-evening-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-court-east-evening-desk.webp.webp",
+     "caption": "After, court, desktop"
+    },
+    {
+     "id": "before-court-east-evening-phone",
+     "image": "bible/shots/showcase/lighting-20261009/before-court-east-evening-phone.webp",
+     "caption": "Before, court, phone"
+    },
+    {
+     "id": "after-court-east-evening-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-court-east-evening-phone.webp",
+     "caption": "After, court, phone"
+    },
+    {
+     "id": "before-lane-evening-desk",
+     "image": "bible/shots/showcase/lighting-20261009/before-lane-evening-desk.webp.webp",
+     "caption": "Before, lane, desktop"
+    },
+    {
+     "id": "after-lane-evening-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-lane-evening-desk.webp.webp",
+     "caption": "After, lane, desktop"
+    },
+    {
+     "id": "before-lane-evening-phone",
+     "image": "bible/shots/showcase/lighting-20261009/before-lane-evening-phone.webp",
+     "caption": "Before, lane, phone"
+    },
+    {
+     "id": "after-lane-evening-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-lane-evening-phone.webp",
+     "caption": "After, lane, phone"
+    }
+   ]
+  },
+  {
+   "title": "Eric's room",
+   "caption": "Day 1 after work is unchanged. On day 2 the room used to switch to its dusk lights without its grade; now the grade follows, and morning comes back.",
+   "images": [
+    {
+     "id": "before-dorm-evening-desk",
+     "image": "bible/shots/showcase/lighting-20261009/before-dorm-evening-desk.webp",
+     "caption": "Before, day 1 after work, desktop"
+    },
+    {
+     "id": "after-dorm-evening-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-dorm-evening-desk.webp",
+     "caption": "After, day 1 after work, desktop"
+    },
+    {
+     "id": "before-dorm-evening-phone",
+     "image": "bible/shots/showcase/lighting-20261009/before-dorm-evening-phone.webp",
+     "caption": "Before, day 1 after work, phone"
+    },
+    {
+     "id": "after-dorm-evening-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-dorm-evening-phone.webp",
+     "caption": "After, day 1 after work, phone"
+    },
+    {
+     "id": "before-dorm-d2-morning-desk",
+     "image": "bible/shots/showcase/lighting-20261009/before-dorm-d2-morning-desk.webp.webp",
+     "caption": "Before, day 2 morning, desktop"
+    },
+    {
+     "id": "before-dorm-d2-evening-desk",
+     "image": "bible/shots/showcase/lighting-20261009/before-dorm-d2-evening-desk.webp.webp",
+     "caption": "Before, day 2 moved to after work, desktop"
+    },
+    {
+     "id": "before-dorm-d2-back-desk",
+     "image": "bible/shots/showcase/lighting-20261009/before-dorm-d2-back-desk.webp.webp",
+     "caption": "Before, day 2 back to morning, desktop"
+    },
+    {
+     "id": "after-dorm-d2-morning-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-dorm-d2-morning-desk.webp.webp",
+     "caption": "After, day 2 morning, desktop"
+    },
+    {
+     "id": "after-dorm-d2-evening-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-dorm-d2-evening-desk.webp.webp",
+     "caption": "After, day 2 moved to after work, desktop"
+    },
+    {
+     "id": "after-dorm-d2-back-desk",
+     "image": "bible/shots/showcase/lighting-20261009/after-dorm-d2-back-desk.webp.webp",
+     "caption": "After, day 2 back to morning, desktop"
+    },
+    {
+     "id": "before-dorm-d2-morning-phone",
+     "image": "bible/shots/showcase/lighting-20261009/before-dorm-d2-morning-phone.webp",
+     "caption": "Before, day 2 morning, phone"
+    },
+    {
+     "id": "before-dorm-d2-evening-phone",
+     "image": "bible/shots/showcase/lighting-20261009/before-dorm-d2-evening-phone.webp",
+     "caption": "Before, day 2 after work, phone"
+    },
+    {
+     "id": "before-dorm-d2-back-phone",
+     "image": "bible/shots/showcase/lighting-20261009/before-dorm-d2-back-phone.webp",
+     "caption": "Before, day 2 back to morning, phone"
+    },
+    {
+     "id": "after-dorm-d2-morning-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-dorm-d2-morning-phone.webp",
+     "caption": "After, day 2 morning, phone"
+    },
+    {
+     "id": "after-dorm-d2-evening-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-dorm-d2-evening-phone.webp",
+     "caption": "After, day 2 after work, phone"
+    },
+    {
+     "id": "after-dorm-d2-back-phone",
+     "image": "bible/shots/showcase/lighting-20261009/after-dorm-d2-back-phone.webp",
+     "caption": "After, day 2 back to morning, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Design note",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/lighting-system.md"
+  }
+ ],
+ "media": []
+}

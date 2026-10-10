@@ -1,0 +1,57 @@
+{
+ "title": "Kuro's 3D model at reception",
+ "date": "2026-10-04",
+ "by": "claude-agent:kuro-in-game",
+ "caption": "Your kuro-3 pick (Review kuro-meshy-orig-3) now stands behind the head office reception counter on day 1 and day 2, in the game's idle, at Mio's height. The black under her chin and jaw is repainted in skin; nothing else in the model or texture changed.",
+ "sections": [
+  {
+   "title": "The black under her cheek",
+   "caption": "Head close-ups of the model, before and after the fix: top row as Meshy made it, bottom row after. Front, from below, and her right and left from below.",
+   "images": [
+    {
+     "id": "cheek-flat",
+     "image": "bible/shots/showcase/kuro-in-game-1/cheek-flat.webp.webp",
+     "caption": "Texture colour only"
+    },
+    {
+     "id": "cheek-lit",
+     "image": "bible/shots/showcase/kuro-in-game-1/cheek-lit.webp.webp",
+     "caption": "With a light"
+    }
+   ]
+  },
+  {
+   "title": "In the game",
+   "caption": "Her first line at reception, and her point toward the lift.",
+   "images": [
+    {
+     "id": "reception-desktop",
+     "image": "bible/shots/showcase/kuro-in-game-1/reception-1366x860.webp.webp",
+     "caption": "Desktop 1366x860"
+    },
+    {
+     "id": "reception-phone",
+     "image": "bible/shots/showcase/kuro-in-game-1/reception-390x844.webp",
+     "caption": "Phone 390x844"
+    },
+    {
+     "id": "point-desktop",
+     "image": "bible/shots/showcase/kuro-in-game-1/point-1366x860.webp.webp",
+     "caption": "Pointing to the lift, desktop"
+    },
+    {
+     "id": "point-phone",
+     "image": "bible/shots/showcase/kuro-in-game-1/point-390x844.webp",
+     "caption": "Pointing to the lift, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

@@ -1,0 +1,71 @@
+{
+ "sent": "2026-09-29T22:23:21+0200",
+ "picked": [
+  "shotengai",
+  "food-after-hours",
+  "sento-laundry",
+  "clinic",
+  "shrine",
+  "museum",
+  "old-industry",
+  "karaoke-arcade",
+  "viewpoint",
+  "sakura-matsuri",
+  "harbour"
+ ],
+ "options": {
+  "shotengai": {
+   "star": false,
+   "reject": false,
+   "comment": "combine konbini, yen shop and drugstore"
+  },
+  "food-after-hours": {
+   "star": false,
+   "reject": false,
+   "comment": "just ramen and izakaya"
+  },
+  "clinic": {
+   "star": false,
+   "reject": false,
+   "comment": "just one"
+  },
+  "koban-post": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "undokai": {
+   "star": false,
+   "reject": false,
+   "comment": "combine with existing sports field"
+  },
+  "training": {
+   "star": false,
+   "reject": false,
+   "comment": "probably part of one of the office building"
+  },
+  "old-industry": {
+   "star": false,
+   "reject": false,
+   "comment": "not too many, but a section on the island"
+  },
+  "footbath": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "utilities": {
+   "star": false,
+   "reject": false,
+   "comment": "keep utility mostly hidden in basements and out of the way, but still there. dont want a big utility building taking up space"
+  },
+  "housing-tiers": {
+   "star": false,
+   "reject": false,
+   "comment": "dont need to classify them as such, keep it somewhat uniform, but with some more luxurious residences"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": []
+}

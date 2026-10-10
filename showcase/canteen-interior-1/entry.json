@@ -1,0 +1,63 @@
+{
+ "title": "Inside the canteen",
+ "date": "2026-10-06",
+ "by": "codex",
+ "caption": "The plaza canteen now has a furnished, walkable ground floor on days 1–5. Food service is scenery; the kitchen and upper floor stay closed.",
+ "sections": [
+  {
+   "title": "The front door",
+   "caption": "Enter from the glazed door facing the fountain and return to the same doorway.",
+   "images": [
+    {
+     "id": "plaza-door-desktop",
+     "image": "bible/shots/showcase/canteen-interior-1/1366x860-plaza-door.png.webp",
+     "caption": "Desktop"
+    },
+    {
+     "id": "plaza-door-phone",
+     "image": "bible/shots/showcase/canteen-interior-1/390x844-plaza-door.png.webp",
+     "caption": "Phone"
+    }
+   ]
+  },
+  {
+   "title": "Ground-floor dining room",
+   "caption": "Eight furnished tables, two usable seats, service counter, water and tray return; ambient diners use the existing crowd bodies.",
+   "images": [
+    {
+     "id": "day-desktop",
+     "image": "bible/shots/showcase/canteen-interior-1/1366x860-day.png.webp",
+     "caption": "Desktop"
+    },
+    {
+     "id": "day-phone",
+     "image": "bible/shots/showcase/canteen-interior-1/390x844-day.png.webp",
+     "caption": "Phone"
+    }
+   ]
+  },
+  {
+   "title": "After service",
+   "caption": "The worker leaves and the room lighting warms in the evening. The dining room remains open.",
+   "images": [
+    {
+     "id": "evening-desktop",
+     "image": "bible/shots/showcase/canteen-interior-1/1366x860-evening.png.webp",
+     "caption": "Desktop"
+    },
+    {
+     "id": "evening-phone",
+     "image": "bible/shots/showcase/canteen-interior-1/390x844-evening.png.webp",
+     "caption": "Phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play from the plaza",
+   "href": "game3d/index.html?place=plaza"
+  }
+ ],
+ "media": []
+}

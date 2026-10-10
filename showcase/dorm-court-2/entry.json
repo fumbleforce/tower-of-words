@@ -1,0 +1,95 @@
+{
+ "title": "Dorm courtyard upgrade: Eric's block, the cluster, dusk",
+ "date": "2026-09-30",
+ "by": "claude-agent:dorm-court",
+ "caption": "The dorm courtyard rebuilt against island-map-4: the court now sits on the open ground west of the dorm blocks and looks east at them. Before and after, same camera.",
+ "commit": "cc08de5",
+ "sections": [
+  {
+   "title": "Arriving (desktop)",
+   "caption": "Eric's block is five storeys and runs past both edges of the frame, with a balcony for every room, washing on a few, some rooms lit, and a return coming forward on the right. The bike shelter moved east so it no longer hides Eric's legs where he arrives; an open rack took its place.",
+   "images": [
+    {
+     "id": "court-desk-before",
+     "image": "bible/shots/showcase/dorm-court-2/court-desk-before.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "court-desk-after",
+     "image": "bible/shots/showcase/dorm-court-2/court-desk-after.webp",
+     "caption": "After"
+    }
+   ]
+  },
+  {
+   "title": "Arriving (phone)",
+   "caption": "Same moment on a phone.",
+   "images": [
+    {
+     "id": "court-phone-before",
+     "image": "bible/shots/showcase/dorm-court-2/court-phone-before.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "court-phone-after",
+     "image": "bible/shots/showcase/dorm-court-2/court-phone-after.webp",
+     "caption": "After"
+    }
+   ]
+  },
+  {
+   "title": "Pulled back",
+   "caption": "A wider camera than the game uses, to show what stands around the court: the other dorm blocks and the shops now come from the island layout instead of two plain boxes. The sento chimney rises past the roof. Dusk is darker and bluer, with a low orange sun; the forecourt and plaza share this evening light.",
+   "images": [
+    {
+     "id": "court-wide-before",
+     "image": "bible/shots/showcase/dorm-court-2/court-wide-before.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "court-wide-after",
+     "image": "bible/shots/showcase/dorm-court-2/court-wide-after.webp.webp",
+     "caption": "After"
+    },
+    {
+     "id": "map-drawn-after",
+     "image": "bible/shots/showcase/dorm-court-2/map-drawn-after.webp.webp",
+     "caption": "The built court over island-map-4 (pink: layout buildings, red: walk area)"
+    }
+   ]
+  },
+  {
+   "title": "Eric's room window",
+   "caption": "The window used to show dark glass. It now shows the next block's concrete wall about two metres out, in the evening light.",
+   "images": [
+    {
+     "id": "room-desk-before",
+     "image": "bible/shots/showcase/dorm-court-2/room-desk-before.webp",
+     "caption": "Before, desktop"
+    },
+    {
+     "id": "room-desk-after",
+     "image": "bible/shots/showcase/dorm-court-2/room-desk-after.webp",
+     "caption": "After, desktop"
+    },
+    {
+     "id": "room-phone-before",
+     "image": "bible/shots/showcase/dorm-court-2/room-phone-before.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "room-phone-after",
+     "image": "bible/shots/showcase/dorm-court-2/room-phone-after.webp",
+     "caption": "After, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it (the courtyard on its own)",
+   "href": "game3d/index.html?place=dorm_court"
+  }
+ ],
+ "media": []
+}

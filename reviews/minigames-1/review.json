@@ -1,0 +1,68 @@
+{
+ "title": "Grammar minigame prototypes",
+ "date": "2026-10-02",
+ "by": "claude-agent:minigames",
+ "status": "superseded",
+ "question": "Which of these should we develop further, and what would you change?",
+ "multi": true,
+ "options": [
+  {
+   "id": "drink-round",
+   "label": "drink-round: giving and receiving (あげる, くれる, もらう)",
+   "image": "reviews/minigames-1/shots/give-phone-1-show.webp",
+   "images": [
+    "reviews/minigames-1/shots/give-phone-2-dragging.webp",
+    "reviews/minigames-1/shots/give-phone-3-wrong-verb.webp",
+    "reviews/minigames-1/shots/give-phone-4-mio-speaks.webp",
+    "reviews/minigames-1/shots/give-phone-5-end.webp",
+    "reviews/minigames-1/shots/give-desktop-1.webp",
+    "reviews/minigames-1/shots/give-desktop-2-fill.webp"
+   ],
+   "note": "B2 swaps drinks at the kitchenette table and Mr. Mori notes who to thank. Read a sentence and drag from giver to getter, or watch a hand-over and fill in the verb or particle. Whoever is talking wears a わたし tag, and when Mio or Kenji talks the same hand-over takes a different verb. A wrong verb is acted out literally. 13 rounds, about 5 minutes. Play: http://127.0.0.1:8771/game3d/minigames/give.html"
+  },
+  {
+   "id": "lunch-run",
+   "label": "lunch-run: comparing and liking (より, のほうが, いちばん)",
+   "image": "reviews/minigames-1/shots/compare-phone-1-read.webp",
+   "images": [
+    "reviews/minigames-1/shots/compare-phone-2-answer.webp",
+    "reviews/minigames-1/shots/compare-phone-3-rank.webp",
+    "reviews/minigames-1/shots/compare-phone-4-end.webp",
+    "reviews/minigames-1/shots/compare-desktop-1-rank.webp",
+    "reviews/minigames-1/shots/compare-desktop-2-end.webp"
+   ],
+   "note": "Eric fetches B2's lunch from the canteen counter, where prices and bowl sizes are visible. Carry dishes to the trays from what people say they like, answer どちらのほうが questions in AはBより order, tap the いちばん dish, solve a small spicy-week puzzle from two comparisons with the lids on, and finish by saying your own favourite. 9 rounds, about 4 minutes. Play: http://127.0.0.1:8771/game3d/minigames/compare.html"
+  },
+  {
+   "id": "favours",
+   "label": "favours: wanting (～たい, ～てほしい)",
+   "image": "reviews/minigames-1/shots/want-phone-1-tai.webp",
+   "images": [
+    "reviews/minigames-1/shots/want-phone-2-hoshii.webp",
+    "reviews/minigames-1/shots/want-phone-3-command.webp",
+    "reviews/minigames-1/shots/want-phone-4-wrong.webp",
+    "reviews/minigames-1/shots/want-desktop-1.webp"
+   ],
+   "note": "The third family, my pick. Everyone on B2 wants something; give each job to whoever will do it (たい: the speaker; Yに～てほしい: Y). When a job lands on a machine, Eric says the day-1 command to it and Mio's word clip plays, so known words come back in a new structure. 9 rounds, about 4 minutes. Play: http://127.0.0.1:8771/game3d/minigames/want.html"
+  }
+ ],
+ "links": [
+  {
+   "label": "Play Drink round",
+   "href": "game3d/minigames/give.html"
+  },
+  {
+   "label": "Play Lunch run",
+   "href": "game3d/minigames/compare.html"
+  },
+  {
+   "label": "Play Favours",
+   "href": "game3d/minigames/want.html"
+  },
+  {
+   "label": "Design notes (mechanic, what each teaches, how it ramps, missing voice clips)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/game3d/minigames/README.md"
+  }
+ ],
+ "media": []
+}

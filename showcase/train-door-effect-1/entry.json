@@ -1,0 +1,20 @@
+{
+ "title": "Train door effect",
+ "date": "2026-10-01",
+ "by": "Codex",
+ "caption": "The door effect keeps its translucent surface instead of becoming too bright or turning black.",
+ "images": [
+  {
+   "id": "comparison",
+   "image": "game3d/shots/codex-perf-review/held-door-visual-settled/door-crops.png.webp",
+   "caption": "Before and after, on phone and desktop. Each pair compares rendering with batching off and on; ambient occlusion is tested both ways."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

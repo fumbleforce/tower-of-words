@@ -1,0 +1,27 @@
+{
+ "title": "Put the bible in git?",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "superseded",
+ "multi": false,
+ "question": "The bible (bible/, tools/bible/, reviews/) has never been committed, so its changes (like today's story map link) can't be saved in git on their own. The repo is public on GitHub. Commit it?",
+ "options": [
+  {
+   "id": "public",
+   "label": "Commit it to this repo",
+   "note": "Everything in bible/ and reviews/ becomes public with the next push. Private items (rewards) are already kept out of the public build."
+  },
+  {
+   "id": "private-repo",
+   "label": "Commit it to a separate private repo",
+   "note": "History kept, nothing public."
+  },
+  {
+   "id": "not-yet",
+   "label": "Leave it out of git for now",
+   "note": "Works locally as today; nothing is versioned."
+  }
+ ],
+ "decision": "Superseded by asset-storage (the bible and reviews question is section 7 of notes/asset-storage-proposal.md)",
+ "media": []
+}

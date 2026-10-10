@@ -1,0 +1,142 @@
+{
+ "title": "Forecourt: the lobby, the station hall and the lane gardens",
+ "date": "2026-09-30",
+ "by": "claude-agent:forecourt-rescore",
+ "caption": "The three things the critic held the forecourt back on: the blank slab round the lobby, the empty station hall and the flat lawns along the lane. Before on the left of each pair, after on the right; the plan from above at the end.",
+ "commit": [
+  "c70083c"
+ ],
+ "sections": [
+  {
+   "title": "Arriving out of the station",
+   "caption": "The station's cut now shows the security room as it is inside: its banded floor, the gate line, the guard's desk, the counter and shelf, benches, the welcome stand, the cleaning cart, all ten plants and the lamps' light on the floor, inside walls that stay up to the ground storey where they can't hide Eric. A sign where the walk turns points to head office and the plaza.",
+   "images": [
+    {
+     "id": "before-arrive-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/before-arrive-desk.webp.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "after-arrive-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-arrive-desk.webp.webp",
+     "caption": "After"
+    },
+    {
+     "id": "after-hall-close",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-hall-close.webp",
+     "caption": "After, the hall close up"
+    },
+    {
+     "id": "before-arrive-eve-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/before-arrive-eve-desk.webp.webp",
+     "caption": "Before, evening"
+    },
+    {
+     "id": "after-arrive-eve-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-arrive-eve-desk.webp.webp",
+     "caption": "After, evening"
+    }
+   ]
+  },
+  {
+   "title": "Head office lobby",
+   "caption": "Only the glass front, the canopy and the three storeys over the lobby fade now; the rest of the tower stands round it, so the lobby reads as a room cut into the foot of the tower instead of a room under a blank slab. The walk carries on inside as a runner to the lifts, with the guide line to reception.",
+   "images": [
+    {
+     "id": "before-lobby-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/before-lobby-desk.webp.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "after-lobby-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-lobby-desk.webp.webp",
+     "caption": "After"
+    },
+    {
+     "id": "after-lobby-close",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-lobby-close.webp",
+     "caption": "After, close up"
+    },
+    {
+     "id": "after-lobby-eve-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-lobby-eve-desk.webp.webp",
+     "caption": "After, evening"
+    },
+    {
+     "id": "before-lobby-phone",
+     "image": "bible/shots/showcase/forecourt-rescore-1/before-lobby-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-lobby-phone",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-lobby-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "The lane",
+   "caption": "The avenue stands in one kerbed bed with azaleas between the trees. Either side a garden in bands: a strip of lawn, a raised border with a cherry or maple at every other avenue tree, a pine at the east end in line with the gateposts, and a belt of taller trees behind. The lane's brick gets a pale border where it leaves the court.",
+   "images": [
+    {
+     "id": "before-lane-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/before-lane-desk.webp.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "after-lane-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-lane-desk.webp.webp",
+     "caption": "After"
+    },
+    {
+     "id": "before-laneend-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/before-laneend-desk.webp.webp",
+     "caption": "Lane end, before"
+    },
+    {
+     "id": "after-laneend-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-laneend-desk.webp.webp",
+     "caption": "Lane end, after"
+    },
+    {
+     "id": "after-laneend-eve-desk",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-laneend-eve-desk.webp",
+     "caption": "Lane end, evening"
+    },
+    {
+     "id": "before-laneend-phone",
+     "image": "bible/shots/showcase/forecourt-rescore-1/before-laneend-phone.webp",
+     "caption": "Before, phone"
+    },
+    {
+     "id": "after-laneend-phone",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-laneend-phone.webp",
+     "caption": "After, phone"
+    }
+   ]
+  },
+  {
+   "title": "From above",
+   "caption": "The gardens run in bands parallel to the lane, their ends on the court's edge and the gateposts. The service way north of the court now stops at the tower's service door, on the line of the tower's north face, instead of running off the island. The after plan is taken a little further out.",
+   "images": [
+    {
+     "id": "before-plan",
+     "image": "bible/shots/showcase/forecourt-rescore-1/before-plan.webp.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "after-plan",
+     "image": "bible/shots/showcase/forecourt-rescore-1/after-plan.webp.webp",
+     "caption": "After"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

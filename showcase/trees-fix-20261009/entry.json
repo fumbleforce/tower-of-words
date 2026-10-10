@@ -1,0 +1,238 @@
+{
+ "title": "Trees everywhere get the forecourt's leafy crowns, with the limbs inside them",
+ "date": "2026-10-09",
+ "by": "claude-agent:trees-fix",
+ "caption": "Jørgen: \"do you mean these disconnected brown sticks that are supposed to be trees?\" and \"for desktop we need the proper forecourt vegetation everywhere.\" Every tree and hedge on the island is now the forecourt's: a crown round the end of every limb, brown bark, and the same leaf cards, crown mass, hedge leaves and lawn grass near where you walk. Phones get the lighter version the forecourt has (the crown mass, no leaf cards or grass). Left of each pair: before; right: after.",
+ "preview": "office_quarter-eye-desk",
+ "result": [
+  "office_quarter-eye-desk",
+  "east_lane-game-desk",
+  "plaza-game-desk",
+  "sports-game-phone"
+ ],
+ "sections": [
+  {
+   "title": "The fountain plaza",
+   "caption": "Same spot and camera: main before the change on the left, after on the right.",
+   "images": [
+    {
+     "id": "plaza-game-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/plaza-game-desk.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, desktop"
+    },
+    {
+     "id": "plaza-eye-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/plaza-eye-desk.webp.webp",
+     "caption": "Before | after: close-up of the nearest tree, eye height, desktop"
+    },
+    {
+     "id": "plaza-low-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/plaza-low-desk.webp.webp",
+     "caption": "Before | after: close-up, low, looking up into the crown, desktop"
+    },
+    {
+     "id": "plaza-high-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/plaza-high-desk.webp.webp",
+     "caption": "Before | after: close-up from above, desktop"
+    },
+    {
+     "id": "plaza-game-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/plaza-game-phone.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, phone"
+    },
+    {
+     "id": "plaza-high-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/plaza-high-phone.webp",
+     "caption": "Before | after: close-up from above, phone"
+    }
+   ]
+  },
+  {
+   "title": "The north campus",
+   "caption": "Same spot and camera: main before the change on the left, after on the right.",
+   "images": [
+    {
+     "id": "campus-game-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/campus-game-desk.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, desktop"
+    },
+    {
+     "id": "campus-eye-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/campus-eye-desk.webp.webp",
+     "caption": "Before | after: close-up of the nearest tree, eye height, desktop"
+    },
+    {
+     "id": "campus-low-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/campus-low-desk.webp.webp",
+     "caption": "Before | after: close-up, low, looking up into the crown, desktop"
+    },
+    {
+     "id": "campus-high-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/campus-high-desk.webp.webp",
+     "caption": "Before | after: close-up from above, desktop"
+    },
+    {
+     "id": "campus-game-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/campus-game-phone.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, phone"
+    },
+    {
+     "id": "campus-high-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/campus-high-phone.webp",
+     "caption": "Before | after: close-up from above, phone"
+    }
+   ]
+  },
+  {
+   "title": "The sports lane",
+   "caption": "Same spot and camera: main before the change on the left, after on the right.",
+   "images": [
+    {
+     "id": "sports-game-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/sports-game-desk.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, desktop"
+    },
+    {
+     "id": "sports-eye-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/sports-eye-desk.webp.webp",
+     "caption": "Before | after: close-up of the nearest tree, eye height, desktop"
+    },
+    {
+     "id": "sports-low-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/sports-low-desk.webp.webp",
+     "caption": "Before | after: close-up, low, looking up into the crown, desktop"
+    },
+    {
+     "id": "sports-high-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/sports-high-desk.webp.webp",
+     "caption": "Before | after: close-up from above, desktop"
+    },
+    {
+     "id": "sports-game-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/sports-game-phone.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, phone"
+    },
+    {
+     "id": "sports-high-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/sports-high-phone.webp",
+     "caption": "Before | after: close-up from above, phone"
+    }
+   ]
+  },
+  {
+   "title": "The east lane",
+   "caption": "Same spot and camera: main before the change on the left, after on the right.",
+   "images": [
+    {
+     "id": "east_lane-game-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/east_lane-game-desk.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, desktop"
+    },
+    {
+     "id": "east_lane-eye-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/east_lane-eye-desk.webp",
+     "caption": "Before | after: close-up of the nearest tree, eye height, desktop"
+    },
+    {
+     "id": "east_lane-low-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/east_lane-low-desk.webp",
+     "caption": "Before | after: close-up, low, looking up into the crown, desktop"
+    },
+    {
+     "id": "east_lane-high-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/east_lane-high-desk.webp.webp",
+     "caption": "Before | after: close-up from above, desktop"
+    },
+    {
+     "id": "east_lane-game-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/east_lane-game-phone.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, phone"
+    },
+    {
+     "id": "east_lane-high-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/east_lane-high-phone.webp",
+     "caption": "Before | after: close-up from above, phone"
+    }
+   ]
+  },
+  {
+   "title": "The office quarter",
+   "caption": "Same spot and camera: main before the change on the left, after on the right.",
+   "images": [
+    {
+     "id": "office_quarter-game-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/office_quarter-game-desk.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, desktop"
+    },
+    {
+     "id": "office_quarter-eye-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/office_quarter-eye-desk.webp.webp",
+     "caption": "Before | after: close-up of the nearest tree, eye height, desktop"
+    },
+    {
+     "id": "office_quarter-low-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/office_quarter-low-desk.webp.webp",
+     "caption": "Before | after: close-up, low, looking up into the crown, desktop"
+    },
+    {
+     "id": "office_quarter-high-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/office_quarter-high-desk.webp.webp",
+     "caption": "Before | after: close-up from above, desktop"
+    },
+    {
+     "id": "office_quarter-game-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/office_quarter-game-phone.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, phone"
+    },
+    {
+     "id": "office_quarter-high-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/office_quarter-high-phone.webp",
+     "caption": "Before | after: close-up from above, phone"
+    }
+   ]
+  },
+  {
+   "title": "The forecourt (already street style, for comparison)",
+   "caption": "Same spot and camera: main before the change on the left, after on the right.",
+   "images": [
+    {
+     "id": "forecourt-game-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/forecourt-game-desk.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, desktop"
+    },
+    {
+     "id": "forecourt-eye-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/forecourt-eye-desk.webp.webp",
+     "caption": "Before | after: close-up of the nearest tree, eye height, desktop"
+    },
+    {
+     "id": "forecourt-low-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/forecourt-low-desk.webp.webp",
+     "caption": "Before | after: close-up, low, looking up into the crown, desktop"
+    },
+    {
+     "id": "forecourt-high-desk",
+     "image": "bible/shots/showcase/trees-fix-20261009/forecourt-high-desk.webp.webp",
+     "caption": "Before | after: close-up from above, desktop"
+    },
+    {
+     "id": "forecourt-game-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/forecourt-game-phone.webp.webp",
+     "caption": "Before | after: the game's own camera where Eric starts, phone"
+    },
+    {
+     "id": "forecourt-high-phone",
+     "image": "bible/shots/showcase/trees-fix-20261009/forecourt-high-phone.webp",
+     "caption": "Before | after: close-up from above, phone"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ],
+ "media": []
+}

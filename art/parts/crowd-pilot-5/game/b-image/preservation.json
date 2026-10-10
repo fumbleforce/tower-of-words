@@ -1,0 +1,20 @@
+{
+  "candidate": "b-image",
+  "source_rig_sha256": "5a07aeacd60f5b85ed17954f5d81220bf22a38da73a655b6f1d3c031d4662784",
+  "meshy_output_sha256": "7df89080095b067d18e44cc75451b4f5d026a5d059dcdb3e1721286ac922b02c",
+  "original_triangle_count": 1099,
+  "triangle_uvs_exact": true,
+  "normalized_position_error_m": 1.2347474694258953e-06,
+  "texture_pixels_unchanged": true,
+  "texture_size": [
+    2048,
+    2048
+  ],
+  "base_webp_sha256": "b75d9f913552ff9a4d946c101446cb6eeca51f3c5ffc52f4090dcc852204a30a",
+  "unchanged_animation_files": {
+    "walk": "697d746b70b7dec70ee7dfa1a83bb497b2b47ce1149303de197596fb771de78c",
+    "run": "9ad446a8bec867089e887c011bb188bde334aa625b450b6e46cf6503d46f84ee",
+    "sit": "684f775384f266fc24ad1ac97ebee97f94b52739934e8aa1b65e20ef8fe68936",
+    "idle": "ac64e437c0420fbda4d63e1c1e2bac4e8079ed66ec415c4c3f004b7f2508c826"
+  }
+}

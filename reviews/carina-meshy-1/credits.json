@@ -1,0 +1,113 @@
+[
+ {
+  "service": "meshy",
+  "part": "carina-1",
+  "task": "01a10d35-3e5b-7378-ab3a-5a7240ef9d1d",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 285,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/carina-meshy-1/pics/d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "carina-1-tex",
+  "task": "01a10d37-7bfb-7777-8b9c-681299db2082",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 235,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/carina-meshy-1/meshy/carina-1-uv.glb"
+  },
+  "input": "art/parts/carina-meshy-1/pics/d1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "carina-1-tex-rig",
+  "task": "01a10d38-939c-713b-b071-23cca1ee16b9",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "model": "art/parts/carina-meshy-1/meshy/carina-1-tex.glb",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "carina-2",
+  "task": "01a10d64-4caa-731e-8554-bccff2560007",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 209,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/carina-meshy-1/pics/nd1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "carina-2-tex",
+  "task": "01a10d65-2d5f-72d2-b410-7e543f2f7f29",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 199,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/carina-meshy-1/meshy/carina-2-uv.glb"
+  },
+  "input": "art/parts/carina-meshy-1/pics/nd1.png"
+ },
+ {
+  "service": "meshy",
+  "part": "carina-2-tex-rig",
+  "task": "01a10d65-e575-7116-85b1-5b6d4f230c49",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "model": "art/parts/carina-meshy-1/meshy/carina-2-tex.glb",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "carina-2-tex-sit",
+  "task": "01a10e9f-230f-764a-9845-ae3635690ea9",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 125,
+  "settings": {
+   "rig_task_id": "01a10d65-e575-7116-85b1-5b6d4f230c49",
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  }
+ }
+]

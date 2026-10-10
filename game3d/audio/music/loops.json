@@ -1,0 +1,19 @@
+{
+ "about": "Loop region of each music file, in seconds of the file: tools/make_loop.py cut prints it. game3d/js/audio/music.js loops [start, end).",
+ "calm": {
+  "start": 1.0,
+  "end": 30.093
+ },
+ "lively": {
+  "start": 1.0,
+  "end": 24.801646
+ },
+ "night": {
+  "start": 1.0,
+  "end": 132.968
+ },
+ "office": {
+  "start": 1.0,
+  "end": 28.272854
+ }
+}

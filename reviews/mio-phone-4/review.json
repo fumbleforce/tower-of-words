@@ -1,0 +1,83 @@
+{
+ "title": "Mio looking at her phone, round 4 (left lens frame made solid)",
+ "date": "2026-09-29",
+ "by": "art agent (Mio phone 4)",
+ "status": "superseded",
+ "multi": false,
+ "question": "Is the frame solid all the way round now?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/mio-phone-4/frame-blendk20-3501-exact-3401-v2.webp.webp",
+   "caption": "Round 3 and round 4 of the pick, left lens over a checkerboard."
+  },
+  {
+   "image": "art/candidates/portraits/mio-phone-4/bg-blendk20-3501-exact-3401-v2.webp.webp",
+   "caption": "The round 4 pick cut out, over dark, light and a checkerboard."
+  },
+  {
+   "image": "art/candidates/portraits/mio-phone-4/approved-frame.webp.webp",
+   "caption": "Her approved game portrait (mio-neutral) had a see-through spot too, on the bottom of the left lens where it crosses the background. Before and after. All six expressions are fixed the same way."
+  }
+ ],
+ "options": [
+  {
+   "id": "blendk20-3501-exact-3401-v2",
+   "label": "blendk20-3501-exact-3401-v2",
+   "image": "art/candidates/portraits/mio-phone-4/glasses-blendk20-3501-exact-3401-v2.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-4/frame-blendk20-3501-exact-3401-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/bg-blendk20-3501-exact-3401-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3401-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3401-v2-cut.webp.webp"
+   ],
+   "note": "Round 3 pick, fixed. The top bar of the left lens is solid now. A few grey strokes show through the lens just under that bar."
+  },
+  {
+   "id": "blendk25-3501-exact-3401-v2",
+   "label": "blendk25-3501-exact-3401-v2",
+   "image": "art/candidates/portraits/mio-phone-4/glasses-blendk25-3501-exact-3401-v2.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-4/frame-blendk25-3501-exact-3401-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/bg-blendk25-3501-exact-3401-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk25-3501-exact-3401-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk25-3501-exact-3401-v2-cut.webp.webp"
+   ],
+   "note": "Same at 0.25."
+  },
+  {
+   "id": "exact-3401-v2",
+   "label": "exact-3401-v2",
+   "image": "art/candidates/portraits/mio-phone-4/glasses-exact-3401-v2.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-4/frame-exact-3401-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/bg-exact-3401-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-exact-3401-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-exact-3401-v2-cut.webp.webp"
+   ],
+   "note": "Without the light blend: the portrait frame pixels on the bare face."
+  },
+  {
+   "id": "blendk20-3501-exact-3403-v2",
+   "label": "blendk20-3501-exact-3403-v2",
+   "image": "art/candidates/portraits/mio-phone-4/glasses-blendk20-3501-exact-3403-v2.webp.webp",
+   "images": [
+    "art/candidates/portraits/mio-phone-4/frame-blendk20-3501-exact-3403-v2.webp",
+    "art/candidates/portraits/mio-phone-4/bg-blendk20-3501-exact-3403-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2.webp.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2-cut.webp.webp"
+   ],
+   "note": "Same method on the other bare face, exact-3403-v2. It has a small teal fleck above her left eye."
+  },
+  {
+   "id": "redo",
+   "label": "Redo it (say what to change)"
+  }
+ ],
+ "links": [
+  {
+   "label": "Round 3",
+   "href": "#review/mio-phone-3"
+  }
+ ],
+ "decision": "left means HER left (the lens on the image's right); none of round 4 fixed it. Round 5: mio-phone-5"
+}

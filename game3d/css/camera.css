@@ -1,0 +1,40 @@
+#cameraLook {
+  position: fixed;
+  z-index: 26;
+  left: 16px;
+  bottom: 205px;
+  zoom: var(--ui, 1);
+  padding: 9px 13px;
+  border: 1px solid #849baa;
+  border-radius: 7px;
+  color: #f4f8fb;
+  background: #162330f5;
+  font: 600 14px/1.4 system-ui;
+  cursor: pointer;
+  box-shadow: 0 2px 9px #0007;
+}
+#cameraLook::before {
+  content: "◉";
+  color: #92dbce;
+  margin-right: 8px;
+}
+#cameraLook:hover {
+  background: #263e50;
+}
+#cameraLook:focus-visible {
+  outline: 3px solid #9af2df;
+  outline-offset: 3px;
+}
+#cameraLook[hidden],
+.phone #cameraLook {
+  display: none;
+}
+body.phone #settings .srow[data-row="cameraMode"] {
+  display: none;
+}
+@media (pointer: coarse), (max-width: 699px), (max-height: 599px) {
+  #cameraLook,
+  #settings .srow[data-row="cameraMode"] {
+    display: none;
+  }
+}
