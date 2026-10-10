@@ -314,6 +314,28 @@ def image_proxy(handler, suffix, body=None):
     except urllib.error.URLError:
         handler._json(503, {'error': 'Image generation is offline. Start tools/imagegen/run.sh, then retry.'})
 
+is_public = lambda scene_id: str(scene_id).startswith('public:')
+
+def public_only(action, body):
+    """Outside private mode: does this request touch public scenes only? A comment answered by its id is checked
+    through the scene it belongs to."""
+    if body.get('scope') == 'local' or (body.get('id') and not is_public(body['id'])):
+        return False
+    if action == 'comments':
+        return all(is_public(x) for x in body.get('ids', '').split(',') if x)
+    if action == 'comment' and body.get('comment'):
+        owner = next((c['scene'] for c in comments({'action': 'list'}).get('comments', []) if c['id'] == body['comment']), '')
+        return is_public(owner)
+    return True
+
+def public_view(action, data):
+    """Outside private mode the answers that cover every scene keep the public ones only."""
+    if action == 'status':
+        return {'status': {k: v for k, v in data['status'].items() if is_public(k)}}
+    if action == 'comments':
+        return {'comments': [c for c in data['comments'] if is_public(c['scene'])]}
+    return data
+
 def handle(handler):
     """Return True when this request belongs to the subplot editor."""
     url = urllib.parse.urlsplit(handler.path)
@@ -348,6 +370,14 @@ def handle(handler):
         else:
             if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'pictures', 'comments', 'status')):
                 raise ValueError('Unsupported request method')
+            # Outside private mode (tools/review_server.py, /private) only public scenes are read or written
+            mode = getattr(handler, '_private_mode', None)
+            if callable(mode) and not mode():
+                if not public_only(action, body):
+                    handler._json(403, {'error': 'Private scenes open in private mode: http://127.0.0.1:8771/private'})
+                    return True
+                handler._json(200, public_view(action, dispatch(action, body)))
+                return True
             handler._json(200, dispatch(action, body))
     except (ValueError, OSError, subprocess.SubprocessError) as e:
         handler._json(409 if str(e).startswith('CONFLICT:') else 400, {'error': str(e)})

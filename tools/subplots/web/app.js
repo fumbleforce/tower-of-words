@@ -319,7 +319,7 @@ try {
   const data = await api('catalog?scope=all');
   S.catalog = data.scenes || [];
   loadStatus();
-  if (!data.local) status('Private scenes are not set up on this computer. Public game scenes are all here.', 'dirty');
+  // outside private mode the list is the public game's scenes, with nothing to say about it
 } catch (e) {
   status(e.message, 'error');
 }
