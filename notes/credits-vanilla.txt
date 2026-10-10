@@ -1,0 +1,42 @@
+AMAKAWA: CREDITS AND LICENSES
+(Draft for the credits screen and the LICENSES file. Lines marked [CHECK] depend on open items in notes/licenses.md and are removed or kept once those are settled.)
+
+Story, design and game: Jørgen
+
+Images
+Character portraits, expressions and backgrounds were made with AI image tools and then edited by the team.
+Images made with RDBT [Anima] by reakaakasky (Civitai). Built on Anima by CircleStone Labs, a derivative of NVIDIA Cosmos-Predict2.
+Image control patches: Anima-LLLite by kohya-ss. Upscaling: Real-ESRGAN (BSD-3-Clause). Cut-outs: anime-segmentation by SkyTNT (Apache-2.0).
+[CHECK] Scenery and the Photos collectibles: One Obsession by maxfeifei8 (Civitai).
+One travel print was made with OpenAI image generation.
+
+3D characters and animation
+Character models, rigs and animation clips were made with Meshy.
+[CHECK] Model created with Meshy. (https://www.meshy.ai)
+World pieces, rooms, props, extra characters and many gestures are built in code for this game.
+
+Voices
+Every voice is synthetic. No real person was recorded or imitated.
+Voices were designed from written descriptions and produced with Qwen3-TTS (Alibaba Cloud Qwen team, Apache-2.0) and Irodori-TTS by Aratako (MIT).
+[CHECK] A few station and building announcement voices were first made with MiniMax Speech.
+
+Music and sound
+Background music made with Google Lyria. Audio carries a SynthID watermark. [CHECK]
+Ambience beds and some effects made with Stable Audio 3 by Stability AI (Stability AI Community License). [CHECK]
+[CHECK] Opening theme and the evening track made with YuE2 (CC BY-NC 4.0).
+Other effects are synthesised for this game.
+
+Fonts
+Zen Kaku Gothic New: Copyright 2022 The Zen Kaku Gothic Project Authors (https://github.com/googlefonts/zen-kakugothic). SIL Open Font License 1.1.
+Barlow Condensed: Copyright 2017 The Barlow Project Authors (https://github.com/jpt/barlow). SIL Open Font License 1.1.
+Dela Gothic One: Copyright The Dela Gothic Project Authors (exact line from the font's OFL.txt). SIL Open Font License 1.1.
+The full licence text, https://openfontlicense.org, ships in LICENSES/OFL.txt.
+
+Code
+three.js: Copyright 2010-2026 three.js authors. MIT License.
+@pixiv/three-vrm: Copyright 2019-2026 pixiv Inc. MIT License.
+Electron: Copyright Electron contributors and GitHub Inc. MIT License. Chromium and its components: see LICENSES.chromium.html shipped with the app.
+The MIT License text ships in LICENSES/MIT.txt:
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+All characters, places and events are fictional.
