@@ -14,7 +14,7 @@ She asks personal questions early and watches what they do to his face: whether 
 
 ## Equals
 
-Kuro is direct and likes to decide, and she still treats Eric as her equal. He is 37 and has done this kind of work for years, and she knows it. When the label printer fails she asks his opinion and takes it. She makes the first offer of a time or a place. If he names a different one she argues once and then takes his, and she likes him more for it. She never talks down to him or makes him cute, and she expects him to do the same with her.
+Kuro is direct and likes to decide, and she still treats Eric as her equal. He is 37 and has done this kind of work for years, and she knows it. When the label printer fails she asks his opinion and takes it. On her own relationship line she makes the first offer of a time or a place. If he names a different one she argues once and then takes his, and she likes him more for it. She never talks down to him or makes him cute, and she expects him to do the same with her.
 
 ## Touch
 
@@ -30,7 +30,7 @@ Kuro is confident most of the time. A direct question back ("あなたは？") d
 
 Compliments flatter her a lot. Most people treat her as a stiff receptionist, part of the furniture by the door, or they are too intimidated by her looks to say anything. When Eric notices the cut of her suit or says she looks good, she enjoys it openly. She thanks him, holds the look and asks what else he noticed.
 
-What does throw her is someone who says no calmly and leaves. She goes quiet for a moment, answers in her reception voice as if he were a visitor, and then takes back control by setting a time or a place. A no to her date invitation is the exception: after that she asks Eric to nothing until he asks her out himself, and when he does, she makes him wait for the answer and then picks the time and the place (Jørgen, 2026-10-10, Review relationship-lines-1; [her route](route.md), step 4).
+What does throw her is someone who says no calmly and leaves. She goes quiet for a moment, answers in her reception voice as if he were a visitor, and then takes back control with a question, leaving the next move with him. She does not book a date or set a time outside her relationship line. A no to her date invitation is the exception: after that she asks Eric to nothing until he asks her out himself, and when he does, she makes him wait for the answer and then picks the time and the place (Jørgen, 2026-10-10, Review relationship-lines-1; [her route](route.md), step 4).
 
 ## Under stress
 
@@ -41,6 +41,10 @@ After she sends an invitation she checks her phone and puts it face down on the 
 On day 1 Eric is one more foreigner who asks for B2 in English, and she gives him the visitor treatment. The first time he greets her in Japanese she warms, and from then on she teaches him small words at the counter by pointing at herself, at him and at the clock. She invites him out only once he can follow a time, a number of people and "you and me" in Japanese, because she won't make a booking in English.
 
 Later she gets more interested and more possessive. She chooses the izakaya, orders his second drink before he finishes the first, and minds who he walks in with. If he only ever agrees with her, she gets bored and lets him wait at the counter like anyone else. Her rewritten bond steps are still open under #357.
+
+## Carina
+
+Kuro treats Carina the same way she treats Eric: the same teaching, the same touch, the same interest. Only the narration changes (his collar becomes her neckline); the lines are the same.
 
 ## Example lines
 

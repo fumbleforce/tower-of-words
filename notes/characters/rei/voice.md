@@ -8,6 +8,8 @@ Rei treats Eric as a subordinate she has decided to keep for her own amusement. 
 
 This is the difference from Kuro. Kuro is direct and flirtatious but treats Eric as an equal in the end. Rei wants to control him, and she softens only slowly. The warmth shows first in how much attention she pays him. She remembers what he did last time, she finds him jobs, and she teases him in front of other people. She still gives the orders.
 
+When she wants someone close, she gives it a practical reason ("my hands are full") and does not take it back when the reason is plainly false.
+
 ## How she talks
 
 Most of what she says to Eric is an instruction or close to one. She doesn't dress orders up as questions or offers. She says them in full spoken sentences, often with the reason tacked on: "Go and stand over there, by the line, and tell me if they're in." When he hesitates, she repeats the order a bit louder. She doesn't explain it again.
