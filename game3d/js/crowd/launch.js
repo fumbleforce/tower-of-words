@@ -39,7 +39,7 @@ export function launcher({ game, g, K, ends, routes, pool, inView, st }) {
         B = ends[to],
         route = routes.get(from + '>' + to);
       const e = game.player.root.position;
-      if (A.door && Math.hypot(e.x - A.door[0], e.z - A.door[1]) < 3.5 * K) continue; // not out of a door into him
+      if (A.door && A.exit.some(([x, z]) => Math.hypot(e.x - x, e.z - z) < 3.5 * K)) continue; // not out of a door into him
       // each walker its own lane, right of the line by up to a metre and a half where the way is wide; a second one
       // beside them, further right, walking together
       // (the two within the same metre and a half: the people standing about keep off it)
@@ -55,6 +55,7 @@ export function launcher({ game, g, K, ends, routes, pool, inView, st }) {
         return [ax + ((ax - bx) / l) * d, az + ((az - bz) / l) * d];
       };
       let lead = lanes.map(() => A.door || null);
+      const lift = (i) => (A.door ? A.exit : lead[i] ? [lead[i]] : []); // the way out of a door, from inside it
       if (!fresh && !A.door) {
         // d back from the street's end: the first at d (the end itself at 0), the second 0.4 behind; each of them
         // checked out of view right where they will stand (#183: a point half a metre further back was checked, so
@@ -73,7 +74,7 @@ export function launcher({ game, g, K, ends, routes, pool, inView, st }) {
       for (const [i, lane] of lanes.entries()) {
         const body = pickBody(kind === 'jog');
         if (!body) break;
-        const line = [...(lead[i] ? [lead[i]] : []), ...lane, ...(B.door ? [B.door] : [])];
+        const line = [...lift(i), ...lane, ...(B.door ? [B.door, ...B.inside] : [])];
         if (!B.door) {
           // on past the street's end, out of the chunk, until out of view
           const [px, pz] = line[line.length - 2],
@@ -84,7 +85,7 @@ export function launcher({ game, g, K, ends, routes, pool, inView, st }) {
         let at = { x: line[0][0], z: line[0][1], leg: 1 };
         if (fresh) {
           at = pointAlong(lane, Math.max(0, s0 - i * 0.4 * K));
-          at.leg += lead[i] ? 1 : 0;
+          at.leg += lift(i).length;
           if (!clearOfAll(at.x, at.z, 3.5 * K, i ? 0.5 * K : 1.0 * K)) break;
         } else if (!(i && A.door) && !clearOfAll(at.x, at.z, 0, i ? 0.5 * K : 0.9 * K)) break; // nobody else there yet
         body.r.root.position.set(at.x, 0, at.z);
@@ -116,7 +117,7 @@ export function launcher({ game, g, K, ends, routes, pool, inView, st }) {
           offZ: true,
           toDoor: !!B.door,
           goal: B.at,
-          tail: line.slice(-1), // the door, or the point past the street's end
+          tail: line.slice(-(1 + (B.door ? B.inside.length : 0))), // the door and the way on inside, or the point past the street's end
           more: 0,
           best: Infinity,
           held: 0,

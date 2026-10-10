@@ -158,7 +158,23 @@ export async function attachCrowd(game, place, name) {
     const a = local(t.anchor(new THREE.Vector3())),
       sp = e.out || t.spot?.();
     const out = sp && snapFree(g, sp, 0.35);
-    if (out) ends[id] = { at: out, door: [a.x, a.z] };
+    if (out) ends[id] = { at: out, door: [a.x, a.z], pending: e.inside, spot: t.spot?.() };
+  }
+  // through a door and on inside: the way from the door to the named spot (the head office's lobby, on to the lifts),
+  // so nobody vanishes on the threshold; walked in after the door, and the other way out of the lift
+  for (const e of Object.values(ends)) {
+    if (!e.door) continue;
+    const to = e.pending === true && e.spot,
+      goal = to && snapFree(g, to, 0.35),
+      way = goal && routeBetween(g, snapFree(g, e.door, 0.35) || e.door, goal);
+    // true: the grid's way to the thing's spot; points (offsets from the door): a way on that the grid doesn't know (a shut door's room)
+    e.inside = Array.isArray(e.pending)
+      ? e.pending.map(([x, z]) => [e.door[0] + x, e.door[1] + z])
+      : way && way.length > 1
+        ? way.slice(1)
+        : [];
+    e.exit = [...e.inside].reverse().concat([e.door]);
+    delete e.pending;
   }
   const routes = new Map();
   for (const s of specs)
@@ -292,7 +308,7 @@ export async function attachCrowd(game, place, name) {
               ? b.pace
               : m.speed * Math.max(0.5, Math.min(1.35, 1 - (ahead / K) * 0.6));
         }
-        b.onGrid = !(b.offA && b.i === 1) && !(b.offZ && b.i >= b.line.length - 1);
+        b.onGrid = !(b.offA && b.i === 1) && !(b.offZ && b.i >= b.line.length - b.tail.length);
         // in a scene at the door they are going to (the dorm hall's stairs): they wait for Eric, out of his way
         const door = b.tail[0];
         b.wait =
@@ -314,7 +330,8 @@ export async function attachCrowd(game, place, name) {
           b.ghost = true; // in sight with no way round: on through the other passers-by (never through Eric)
           b.held = 0;
         }
-        if (b.toDoor && b.i >= b.line.length - 1 && Math.hypot(door[0] - p.x, door[1] - p.z) < 0.5 * K) done = true;
+        const last = b.tail[b.tail.length - 1];
+        if (b.toDoor && b.i >= b.line.length - 1 && Math.hypot(last[0] - p.x, last[1] - p.z) < 0.5 * K) done = true;
         // past a street's end and still in sight (a camera that sees the edge): on the same way a while longer
         if (done && seen && !b.toDoor && (b.more = (b.more || 0) + 1) < 4) {
           const [px, pz] = b.line[b.line.length - 2],

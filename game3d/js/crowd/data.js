@@ -4,7 +4,9 @@
 // Per place:
 //   ends    where people come from and go to, in the place's own x/z: a street running on out of the chunk ([x, z],
 //           they walk out of view there), or a door they go in and out of ({ door: <thing id>, out: [x, z] }: an open
-//           building; out is the floor outside it when the thing's spot is not).
+//           building; out is the floor outside it when the thing's spot is not; inside walks on in through the door
+//           before they are gone: true, to the thing's spot (the head office's lobby up to the lifts), or points
+//           [x, z] from the door (the station's security room, through its arch to the platform doors).
 //   periods early | morning | lunch | afternoon | evening:
 //           walk   how many are walking at once; flows [from, to, weight] pick their way (kind 'jog' runs, in
 //                  sports clothes; 'stroll' is slow). Every way has some: the commute is the biggest weight, with
@@ -23,25 +25,31 @@ import { CROWD_SOUTH } from './data-south.js';
 export const CROWD = {
   forecourt: {
     ends: {
-      station: { door: 'station_exit' },
-      office: { door: 'office_entrance', out: [12.25, -1.7] },
+      // on through the security room: in at its back door, through the arch and readers, out to the platform doors
+      station: {
+        door: 'station_exit',
+        inside: [
+          [0, 0.25],
+          [1.1, 3.35],
+          [1.2, 4.65],
+          [1.5, 8.05],
+        ],
+      },
+      office: { door: 'office_entrance', out: [12.25, -1.7], inside: true },
       plaza: [34.4, -2.1],
       bikes: [9.9, 10.0],
     },
     periods: {
       early: {
         who: OFFICE,
-        walk: 17,
+        walk: 6,
         flows: [
-          ['plaza', 'office', 5],
-          ['bikes', 'office', 3],
-          ['station', 'office', 2],
-          ['office', 'plaza', 2],
-          ['office', 'station', 1],
+          ['plaza', 'office', 2],
+          ['bikes', 'office', 1],
+          ['station', 'office', 1],
+          ['office', 'plaza', 1],
           ['plaza', 'station', 1],
-          ['station', 'plaza', 1],
           ['bikes', 'plaza', 1],
-          ['plaza', 'bikes', 1],
         ],
         chat: 1,
         stop: 0.15,
@@ -117,16 +125,13 @@ export const CROWD = {
     periods: {
       early: {
         who: OFFICE,
-        walk: 14,
+        walk: 6,
         flows: [
-          ['dorms', 'forecourt', 6],
-          ['shops', 'forecourt', 3],
-          ['forecourt', 'shops', 2],
-          ['forecourt', 'dorms', 1],
-          ['dorms', 'canteen', 1],
-          ['canteen', 'forecourt', 1],
+          ['dorms', 'forecourt', 3],
+          ['shops', 'forecourt', 1],
+          ['forecourt', 'shops', 1],
           ['canteen', 'dorms', 1],
-          ['dorms', 'shops', 1],
+          ['dorms', 'canteen', 1],
           ['shops', 'canteen', 1],
         ],
         sit: 2,
@@ -291,16 +296,13 @@ export const CROWD = {
     periods: {
       early: {
         who: OFFICE,
-        walk: 14,
+        walk: 6,
         flows: [
-          ['dorm_gate', 'plaza', 4],
-          ['dorm_row', 'plaza', 3],
+          ['dorm_gate', 'plaza', 2],
+          ['dorm_row', 'plaza', 2],
           ['plaza', 'dorm_gate', 1],
-          ['dorm_row', 'north', 1],
           ['shops', 'plaza', 1],
-          ['plaza', 'shops', 1],
-          ['dorm_gate', 'north', 1],
-          ['north', 'shops', 1],
+          ['dorm_row', 'north', 1],
         ],
         sit: 1,
         chat: 1,
