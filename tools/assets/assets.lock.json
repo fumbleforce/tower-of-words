@@ -14538,7 +14538,7 @@
   "game3d/assets/portraits/rei-offguard.webp": {"size": 291284, "sha256": "f0c23a70bbfd832fc59e19b2cb6e2ff4e32b4eafa9aa892d52b384b6554d6db7", "type": "image/webp"},
   "game3d/assets/portraits/rei-scolding.webp": {"size": 290184, "sha256": "fd30c315d4e9b7409c6bf3291e762a54788a8615ccf447a4df6cca9a221e0a47", "type": "image/webp"},
   "game3d/assets/portraits/rei-smug.webp": {"size": 292318, "sha256": "79a3b9cef9c4ca3c51ececc6c323ed34c5e7ffc660f677d266c71a52f4572406", "type": "image/webp"},
-  "game3d/assets/station/station.glb": {"size": 852652, "sha256": "385a5ab3c1bd0745664b4c55cdd01b07b8b6bf3d9d391f1058afcc7b6a0cebe1", "type": "model/gltf-binary"},
+  "game3d/assets/station/station.glb": {"size": 815652, "sha256": "60752459f36557c8a4489fec549f78a03da19ab0ef3ee92f1cc8d11a4123e5f5", "type": "model/gltf-binary"},
   "game3d/assets/train/monorail-wear.webp": {"size": 38280, "sha256": "b562be74872bd818502ee8593209c29d5f9f4f44c74f6a75e81c3ca806578341", "type": "image/webp"},
   "game3d/assets/train/monorail.glb": {"size": 398544, "sha256": "93c7b60d7825417101d7fe1bbc6cdaf39f50d450a98127532387adc73a73880f", "type": "model/gltf-binary"},
   "game3d/audio/amb/bed_birds.mp3": {"size": 270673, "sha256": "7d62424d2393e83a00475336396ff6b8e527a58148e37887591812f5d874ca8a", "type": "audio/mpeg"},

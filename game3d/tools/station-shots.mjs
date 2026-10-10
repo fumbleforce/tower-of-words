@@ -56,6 +56,10 @@ const VIEWS = [
   { id: "walk-east", cam: [-13, 1.6, 17.25], look: [0, 1.3, 17.25] },
   { id: "walk-north", cam: [-0.5, 1.6, 17.6], look: [-0.5, 1.6, 11] },
   { id: "walk-west", cam: [-6, 1.6, 17.25], look: [-20, 1.5, 17.25] },
+  // the walkway's west end and the approach beam beside it (#403): at eye level looking west along it, and from the
+  // west platform's south end at the foot of where its stair came down
+  { id: "walk-west-end", cam: [-10.5, 1.6, 17.25], look: [-24, 1.5, 17.1] },
+  { id: "west-foot", cam: [-17.35, 1.6, 15.4], look: [-10, 1.5, 17.3] },
   { id: "stairs-side", cam: [-8.6, 1.7, 12.5], look: [-12, 1.4, 13.2] },
   { id: "walk-out", cam: [-6, 1.7, 24], look: [-7, 1.6, 16] },
   { id: "sea", cam: [-48, 9, 4], look: [-10, 2.5, 0] },
