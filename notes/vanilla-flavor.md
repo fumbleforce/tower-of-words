@@ -31,7 +31,7 @@ Every surface in the shipped game files (game3d/ without tests, tools, shots, do
 | Interact options a plugin adds with a heart | js/gameplay/interact-menu.js extraOptions (via `optionalOn`) | gated: rows with an icon are left out |
 | Day-5 staging state named `private` | js/places/day5/office.js, story/day5/reveal.js | renamed `closedDoor` (all builds) |
 | Wording in a check message ("reward") | story/days3-5-finds-check.mjs | reworded (all builds) |
-| Clip resolver hook for plugin audio | js/audio/core.js setClipResolver | neutral name, kept; nothing calls it |
+| Clip resolver and word-time hooks for plugin audio | js/audio/core.js setClipResolver, addVoiceSpans | neutral names, kept; nothing calls them |
 | Heart pin CSS | css/marks.css (`.icon-heart-*`) | neutral names, kept |
 
 Not adult: the Photos album (finds, js/ui/finds-view.js), `explicit` as an ordinary word in code (minified away), three.js internals (scan clean). The web build is unchanged for now: it still has the Private setting, and plugins load only on a local host.
