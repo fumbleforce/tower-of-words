@@ -1,5 +1,5 @@
 {
-  "title": "Anime opening, fifth cut",
+  "title": "Anime opening, sixth cut",
   "date": "2026-10-09",
   "by": "claude-main",
   "caption": "The 70-second opening to the opening theme, made in code, now in the game's anime look with the rebuilt station. In the title menu as Opening, and on its own at game3d/opening/.",
@@ -7,7 +7,9 @@
     "5c6fc400",
     "a6251477",
     "0cae61b6",
-    "af2eb480"
+    "af2eb480",
+    "e8261beca",
+    "1aa53f732"
   ],
   "result": [
     "v5-031-0",
@@ -16,6 +18,32 @@
     "v5-063-0"
   ],
   "sections": [
+    {
+      "title": "Sixth cut (2026-10-10): fixes from a critic pass",
+      "caption": "The sea and clouds smooth far out, 「てつだって」 off the faces, the one-beat tower readable, a stronger title, the riders lit from inside the cars, the ID card moving with the bars, the aerial drifting.",
+      "images": [
+        {
+          "id": "v6-014-5",
+          "image": "bible/shots/showcase/opening-1/v6-t014.5.webp",
+          "caption": "Eric lit from inside the car"
+        },
+        {
+          "id": "v6-027-6",
+          "image": "bible/shots/showcase/opening-1/v6-t027.6.webp",
+          "caption": "The ID card moving with the bars"
+        },
+        {
+          "id": "v6-053-6",
+          "image": "bible/shots/showcase/opening-1/v6-t053.6.webp",
+          "caption": "「てつだって」 below the faces"
+        },
+        {
+          "id": "v6-065-5",
+          "image": "bible/shots/showcase/opening-1/v6-t065.5.webp",
+          "caption": "The title, stronger on the sky"
+        }
+      ]
+    },
     {
       "title": "Fifth cut (2026-10-10): the anime look, the rebuilt station, your notes",
       "caption": "The game's anime look throughout (toon light, outlines, leaf shade, soft crowns, the fountain's water), the Blender-built station, the gate going through to the exit, one はじめまして, Carina's longer card, the copy room painted from inside, more places instead of repeated faces, no flicker on the locations.",
@@ -238,9 +266,9 @@
       "href": "game3d/opening/"
     },
     {
-      "label": "The 1080p video, fifth cut (on this machine)",
-      "href": "game3d/shots/opening-film/full-v5/opening-1920.mp4"
+      "label": "The 1080p video, sixth cut (on this machine)",
+      "href": "game3d/shots/opening-film/full-v6/opening-1920.mp4"
     }
   ],
-  "updated": "2026-10-10T02:03:53+02:00"
+  "updated": "2026-10-10T02:45:11+02:00"
 }
