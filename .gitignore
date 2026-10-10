@@ -19,8 +19,6 @@ art/opening/
 # private reward pictures and dashboard data (local only), and the old island prototype's dev dependencies
 island/private/
 legacy/island/node_modules/
-# the image gen dashboard's blocks: local configuration of the tool (tools/imagegen/README.md)
-/tools/imagegen/config/
 
 # Per-run automated QA artifacts (review assets remain retained separately)
 game3d/shots/fast/
