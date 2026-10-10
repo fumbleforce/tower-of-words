@@ -372,8 +372,8 @@ body.phone #talk .doorcard span { font-size: 11px; }
    Every HUD element is the same chip: 36 px tall, 10 px radius, a dark slate glass panel, a hairline border,
    a 16 px line icon, 13 px text. Counts in the peach of the Japanese words; the accent is Mio's teal. */
 :root { --chip-h: 36px; --chip-r: 10px; --chip-bg: rgba(22, 25, 32, .84); --chip-edge: rgba(255, 255, 255, .11); --ic: #aeb8c8; }
-#top { align-items: center; }
-#hud { display: flex; gap: 6px; align-items: center; }
+#top { align-items: flex-start; }
+#hud { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: flex-end; min-width: 0; }
 .hchip { pointer-events: auto; display: inline-flex; align-items: center; gap: 7px; height: var(--chip-h); padding: 0 12px 0 10px; border-radius: var(--chip-r); border: 1px solid var(--chip-edge); background: var(--chip-bg); color: var(--ink); font: 600 13px/1 var(--font); white-space: nowrap; backdrop-filter: blur(6px); box-shadow: 0 2px 8px rgba(0,0,0,.25); }
 button.hchip { cursor: pointer; }
 button.hchip:hover { border-color: rgba(111, 208, 198, .45); }
@@ -383,6 +383,8 @@ button.hchip:hover { border-color: rgba(111, 208, 198, .45); }
 .hchip .n { color: var(--jp); font-weight: 700; min-width: 8px; text-align: center; }
 .hchip.icon { width: var(--chip-h); padding: 0; justify-content: center; }
 .hchip.icon svg { width: 19px; height: 19px; }
+.hchip.utility { flex-shrink: 0; }
+body.ob-walking #qsaveBtn, body.ob-walking #feedbackBtn { display: none; }
 #muteBtn.off .w { display: none; }
 #muteBtn.off { opacity: .6; }
 #clock { padding-right: 13px; }
@@ -1083,6 +1085,7 @@ body.kb #stage .por { visibility: hidden; }
    the goal text. Action prompt: the target's name on top, then one row per action (key cap and label, one type
    style), with a small pointer toward the target. */
 #top > #goal { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 0; min-height: 0; max-width: min(460px, calc(100vw - 420px)); border-radius: 12px; border: 1px solid rgba(111, 208, 198, .45); background: rgba(19, 38, 40, .92); cursor: default; overflow: hidden; }
+body:not(.phone) #top > #goal { flex-shrink: 0; }
 #top > #goal[hidden] { display: none; }
 #top > #goal:hover { border-color: rgba(111, 208, 198, .45); }
 #goal .gl { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 40px; padding: 0 14px 0 11px; border: 0; background: transparent; color: #e6faf7; font: 700 15px/1.25 var(--font); text-align: left; cursor: pointer; }

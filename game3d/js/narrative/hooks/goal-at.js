@@ -19,16 +19,19 @@ export function goalAt(game, posOf) {
     if (forced) forced.goal = forced.goal0;
     if (stand) stand.goal = stand.goal0;
     pin = forced = stand = null;
+    game.goalDestination = null;
   };
   return (at) => {
     clear();
     const P = game.place;
+    if (Array.isArray(at)) at = [...at];
     if (!at || !P) return;
     const own = typeof at === 'string' && game.markers.list.find((m) => m.id === at);
     if (own) {
       own.goal0 = own.goal;
       own.goal = () => true;
       forced = own;
+      game.goalDestination = { place: P.name, at };
       const other = own.goalElse && game.markers.list.find((m) => m.id === own.goalElse);
       if (other) {
         const was = (other.goal0 = other.goal);
@@ -40,6 +43,7 @@ export function goalAt(game, posOf) {
     const s = typeof at === 'string' ? P.seats?.[at] : null;
     const p = s ? s.out || [s.x, s.z + (s.ry ? -0.55 : 0.55)] : posOf(at);
     if (!p) return;
+    game.goalDestination = { place: P.name, at };
     const y = (P.floorY || 0) + (s ? (s.top || 0.3) + 0.35 : 0.5);
     pin = game.markers.add({
       id: 'goal_at',

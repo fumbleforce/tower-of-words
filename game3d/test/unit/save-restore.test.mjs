@@ -45,8 +45,9 @@ function reset() {
   Object.assign(S.sim, structuredClone(initialSim));
   Object.assign(S.bonds, new Bonds({ cast: CAST, flag: key => !!flags[key] }));
   S.bonds.relChanged = new Set();
-  game = { found: new Set(), hooks: {}, runner: { run: async () => {}, trigger: () => {} },
+  game = { ui: { goalText: '' }, found: new Set(), hooks: {}, runner: { run: async () => {}, trigger: () => {} },
     place: { name: 'office', people: {} }, story: {}, busy: false, queue: [], beat: fn => fn() };
+  game.hooks.goal = ({ text }) => { game.ui.goalText = text; };
   window.__game = game;
   S.restore(game, { v: 1, day: 1, period: 'early', rel: { bonds: { v: 1, day: 1, p: {}, rel: {} } } });
   S.installSim(game);
@@ -169,14 +170,14 @@ function seed() {
 test('whole simulation save restores words, inventory, flags, relationships and one-shot state', () => {
   const { visited, ...saved } = seed();
   assert.ok(Array.isArray(visited), 'the places he has been to (#261, travel/visited.js)');
-  assert.deepEqual(saved, { ...savedBaseline, pendingStart: null, mc: 'eric', cast: defaultCast() },
+  assert.deepEqual(saved, { ...savedBaseline, goalDestination: null, pendingStart: null, mc: 'eric', cast: defaultCast() },
     'legacy values plus explicit completed-opening marker, and the protagonist and cast (#251)');
   // Eric's save is byte for byte the one from before protagonists, with mc and cast added at the end
   const { mc, cast, ...before } = JSON.parse(localStorage.getItem('amakawa-day1-save'));
   assert.deepEqual([mc, cast], ['eric', defaultCast()]);
   assert.equal(localStorage.getItem('amakawa-day1-save'),
     JSON.stringify(before).slice(0, -1) + ',"mc":"eric","cast":' + JSON.stringify(defaultCast()) + '}');
-  assert.deepEqual(Object.keys(before).filter((k) => k !== 'visited'), Object.keys({ ...savedBaseline, pendingStart: null }).filter((k) => k in before));
+  assert.deepEqual(Object.keys(before).filter((k) => k !== 'visited'), Object.keys({ ...savedBaseline, goalDestination: null, pendingStart: null }).filter((k) => k in before));
   assert.deepEqual(saved.known, ['ugoite', 'ohayo']);
   assert.deepEqual(saved.inv, ['coffee', 'tea']);
   assert.equal(saved.yen, 750);

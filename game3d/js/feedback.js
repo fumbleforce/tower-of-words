@@ -308,11 +308,11 @@ function addButton() {
   if ($('#feedbackBtn')) return;
   const b = document.createElement('button');
   b.id = 'feedbackBtn';
-  b.className = 'hchip icon';
+  b.className = 'hchip utility';
   b.type = 'button';
   b.title = 'Feedback (F8)';
   b.setAttribute('aria-label', 'Send feedback');
-  b.innerHTML = ICON;
+  b.innerHTML = `<span class="ic">${ICON}</span>Feedback`;
   b.onclick = (e) => {
     e.stopPropagation();
     open();

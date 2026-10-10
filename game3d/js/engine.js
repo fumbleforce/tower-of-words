@@ -1,9 +1,11 @@
 // Shared pieces for the three places: renderer and post chain (the same light model and AO as the train),
 // contact shadows, a walk grid with A* for tap-to-move, the player controller and the talk markers.
 import * as THREE from 'three';
+import { markerGoal } from './ui/marker-goal.js';
 import { DECAL } from './look/decal.js';
 import { iconName, pinGlyph } from './gameplay/pin-kinds.js';
 import { createPinTip, tipOf, privateOn, PIN_GLYPHS, HEART } from './ui/pin-tip.js';
+import { thingBox, elBox } from './ui/screen-box.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
@@ -215,7 +217,7 @@ export class Markers {
   constructor(layer) {
     this.layer = layer;
     this.list = [];
-    this.tip = createPinTip(layer, this); // the tooltip on hover or a long press (ui/pin-tip.js)
+    this.tip = createPinTip(layer, this, { thingBox, elBox }); // the tooltip on hover or a long press (ui/pin-tip.js)
   }
   add(item) {
     const el = document.createElement('button');
@@ -250,6 +252,13 @@ export class Markers {
     // smaller and paler, and where two pins would overlap only the one nearer to Eric shows, so they never pile up
     // over people (css/marks.css draws them)
     const shown = [];
+    const onboarding = globalThis.__onboard;
+    const goalState = {
+      opening: !!onboarding?.active,
+      held: !!onboarding?.holdGoal,
+      text: globalThis.__game?.ui?.goalText,
+      destination: this.list.find((m) => m.id === 'goal_at'),
+    };
     for (const m of this.list) {
       const on = m.enabled && (typeof m.enabled !== 'function' || m.enabled());
       const vis = typeof m.enabled === 'function' ? m.enabled() : m.enabled;
@@ -262,7 +271,7 @@ export class Markers {
       let sx = ((v.x + 1) / 2) * w,
         sy = ((1 - v.y) / 2) * h;
       // off screen: no marker squeezed into a corner (the goal has its own edge arrow)
-      if ((v.z > 1 || v.x < -1.02 || v.x > 1.02 || v.y < -1.02 || v.y > 1.02) && !(m.goal && m.goal())) {
+      if ((v.z > 1 || v.x < -1.02 || v.x > 1.02 || v.y < -1.02 || v.y > 1.02) && !markerGoal(m, goalState)) {
         m.el.style.display = 'none';
         continue;
       }
@@ -303,7 +312,7 @@ export class Markers {
       }
       if (m.icon) setIcon(m);
       m.el.classList.toggle('near', near === m);
-      const isGoal = !!(m.goal && m.goal());
+      const isGoal = markerGoal(m, goalState);
       m.el.classList.toggle('goal', isGoal);
       // a close-only pin never crowds out a full one (the covered monitor hid Mio's)
       const rank = near === m ? -2 : isGoal ? -1 : d + (m.nearOnly && m.nearOnly() ? 100 : 0);

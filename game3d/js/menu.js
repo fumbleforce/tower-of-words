@@ -483,11 +483,11 @@ document.addEventListener('visibilitychange', () => {
 function addPauseChip() {
   const hud = $('#hud');
   if (!hud || $('#pauseBtn')) return;
-  // a settings cog: it opens the pause menu (resume, save, settings, quit)
+  // Menu includes Settings and saves.
   const b = el(
     'button',
-    'hchip icon',
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/><circle cx="12" cy="12" r="6.4"/></svg>',
+    'hchip utility',
+    '<span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/><circle cx="12" cy="12" r="6.4"/></svg></span>Menu',
   );
   b.id = 'pauseBtn';
   b.setAttribute('aria-label', 'Menu and settings');
@@ -675,7 +675,7 @@ whenReady(() => {
   watchLoading();
   installGoalArrow({ game, phone, paused: () => isPaused, root: $('#ui') });
   targetCycling();
-  startOnboarding(game());
+  startOnboarding(game(), sim);
   const t = $('#title');
   if (t) {
     buildTitle();

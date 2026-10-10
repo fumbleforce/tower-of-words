@@ -5,6 +5,8 @@ import { test } from 'node:test';
 import { parse } from 'espree';
 import * as THREE from '../../vendor/three/three.module.js';
 import { showRecoveryNotice } from '../../js/ui/recovery-notice.js';
+import { goalAt } from '../../js/narrative/hooks/goal-at.js';
+import { snapshotGoalDestination, restoreGoal } from '../../js/saves/zones.js';
 import { restoreMet } from '../../js/saves/met.js';
 import { migrateDay2Save } from '../../js/saves/day2.js';
 import { needsLegacyOpening } from '../../js/narrative/legacy-opening.js';
@@ -39,7 +41,8 @@ test('the actual Continue branch migrates old openings after hydration and prese
   assert.ok(inner, 'continueFrom must exist');
   for (const current of [false, true]) {
     const events = [], flags = { stale: true };
-    const saved = { place: 'office', flags: { held_doors: true }, ...(current ? { pendingStart: null } : {}) };
+    const saved = { place: 'office', flags: { held_doors: true }, ...(current ? { pendingStart: null,
+      ui: { goal: 'Find the chair.' }, goalDestination: { place: 'office', at: [5, -1] } } : {}) };
     const game = { saveEnabled: false, busy: false, story: { start: 'opening', nodes: { opening: [{ set: 'localProgress' }] } },
       place: { name: 'office', restoreState(value) { assert.equal(value, saved); flags.hydrated = true; events.push('world'); } },
       resumeWalks() { events.push('walks'); } };
@@ -49,7 +52,8 @@ test('the actual Continue branch migrates old openings after hydration and prese
     };
     const ui = Object.fromEntries(['refreshWords', 'refreshPeople', 'refreshBag', 'goal', 'sideGoal']
       .map(name => [name, () => events.push(name)]));
-    const dependencies = { game, flags, ui, migrateDay2Save, sim: { met: new Set(), day: 1 }, enter, needsLegacyOpening, restoreMet, canTravel: () => false,
+    game.hooks = { goal: ({ text, at }) => { assert.deepEqual(at, current ? [5, -1] : null); ui.goal(text); } };
+    const dependencies = { game, flags, ui, restoreGoal, migrateDay2Save, sim: { met: new Set(), day: 1 }, enter, needsLegacyOpening, restoreMet, canTravel: () => false,
       restore: (target, value) => { assert.equal(target, game); assert.equal(value, saved); events.push('restore'); },
       startScene: place => { assert.equal(place, 'office'); events.push('start'); },
       save: () => events.push('save'), showEnd: () => { throw new Error('Unexpected end'); }, NEXT: {}, PLACES: {},
@@ -84,17 +88,27 @@ test('real staging boundary restores world, camera and prompts while retaining d
       assert.equal(saved.runner.execution, true);
       world = structuredClone(saved.world);
     } } };
+  game.ui = ui;
+  game.markers = { list: [], add(marker) { marker.el = { remove() {} }; this.list.push(marker); return marker; } };
+  const pinAt = goalAt(game, at => Array.isArray(at) ? at : null);
+  game.hooks = { goal: ({ text, at }) => { pinAt(text ? at : null); ui.goal(text); } };
+  game.hooks.goal({ text: ui.goalText, at: [5, -1] });
   for (const [name, body] of Object.entries(callbacks)) {
-    game[name] = new Function('game', 'ui', 'flags', 'THREE', `return ${stagingSource.slice(...body.range)}`)(game, ui, flags, THREE);
+    game[name] = new Function('game', 'ui', 'flags', 'THREE', 'snapshotGoalDestination', 'restoreGoal',
+      `return ${stagingSource.slice(...body.range)}`)(game, ui, flags, THREE, snapshotGoalDestination, restoreGoal);
   }
   const captured = game.captureStaging();
   flags.paid = true; world.chair[0] = 2; cam.close.target.x = 10;
-  ui.goalText = 'After purchase'; game.hold = null;
+  game.hooks.goal({ text: 'After purchase', at: [2, 3] }); game.hold = null;
   game.restoreStaging(captured);
   assert.deepEqual(events, ['stop', 'world', 'camera', 'walks']);
   assert.deepEqual(world.chair, [5, 0, -1]);
   assert.equal(flags.paid, true);
   assert.equal(ui.goalText, 'Find the chair.');
+  assert.deepEqual(game.goalDestination, { place: 'office', at: [5, -1] });
+  assert.deepEqual(game.markers.list.find(m => m.id === 'goal_at').spot(), [5, -1]);
+  game.goalDestination.at[0] = 99;
+  assert.deepEqual(captured.goalDestination.at, [5, -1]);
   assert.equal(game.hold, 'mori');
   assert.deepEqual(cam.close.target.toArray(), [1, 2, 3]);
   cam.close.target.x = 20;
