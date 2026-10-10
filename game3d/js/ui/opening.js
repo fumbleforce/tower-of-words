@@ -6,6 +6,7 @@
 import { pauseAudio } from '../audio/core.js';
 import { sfx } from '../ui.js';
 import { el } from './dom.js';
+import { storage } from '../storage.js';
 
 const SEEN = 'amakawa.openingSeen';
 
@@ -29,11 +30,7 @@ export function playOpening({ gate = false } = {}) {
     removeEventListener('message', done);
     // seen only once it was watched to the end or skipped on purpose: a reload before that shows it again
     // (Jørgen 2026-10-10: "it should not be marked as viewed until actually viewed")
-    try {
-      localStorage.setItem(SEEN, '1');
-    } catch {
-      /* storage blocked: it may show again next visit */
-    }
+    storage.setText(SEEN, '1'); // where storage is blocked it may show again next visit
     wrap.classList.add('out');
     setTimeout(() => wrap.remove(), 900);
     pauseAudio(false);
@@ -46,13 +43,8 @@ export function playOpening({ gate = false } = {}) {
 function firstVisit() {
   const q = new URLSearchParams(location.search);
   if (navigator.webdriver || ['test', 'cap', 'shell', 'day', 'map'].some((k) => q.has(k))) return;
-  let seen = true;
-  try {
-    seen = localStorage.getItem(SEEN) === '1';
-  } catch {
-    /* storage blocked: skip it rather than show it on every visit */
-  }
-  if (!seen) playOpening({ gate: true });
+  // where storage is blocked, skip it rather than show it on every visit
+  if (storage.works() && storage.getText(SEEN) !== '1') playOpening({ gate: true });
 }
 
 // the title menu's Opening item; building it (with the title) is also when the first visit's opening starts

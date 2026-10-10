@@ -4,6 +4,7 @@
 // does. A game in progress is only replaced after a one-line confirm.
 import { sfx } from '../ui.js';
 import { LAST_DAY } from '../days.js';
+import { storage } from '../storage.js';
 import { DEV } from '../dev.js';
 
 export function addDayPicker(menu, before, { inProgress, keys }) {
@@ -29,8 +30,8 @@ export function addDayPicker(menu, before, { inProgress, keys }) {
   const start = async () => {
     const { dayStartSave } = await import('../continue.js');
     try {
-      localStorage.setItem(keys.SAVE_KEY, JSON.stringify(dayStartSave(day)));
-      localStorage.removeItem(keys.AUTO_META);
+      storage.set(keys.SAVE_KEY, dayStartSave(day));
+      storage.remove(keys.AUTO_META);
       sessionStorage.setItem(keys.CONTINUE_FLAG, '1');
     } catch {
       /* storage off: the reload shows the title again */

@@ -21,6 +21,7 @@ import { newCast } from './roles.js';
 import { markPeriod } from './period-flags.js';
 import { restoreMet } from './saves/met.js';
 import { snapshotPlace } from './saves/zones.js';
+import { storage } from './storage.js';
 
 expandMc(PEOPLE); // the protagonist's tokens in the People cards (mc.js)
 
@@ -492,14 +493,14 @@ export function save(game) {
     data.log = ui.logJSON?.(); // the backlog (ui/backlog.js)
     data.mc = MC.id; // who plays this game (mc.js), and who fills each role (roles.js)
     data.cast = game.cast || newCast();
-    localStorage.setItem(KEY, JSON.stringify(data));
+    storage.set(KEY, data);
   } catch {
     /* storage may be off */
   }
 }
 export function loadSave() {
   try {
-    const d = JSON.parse(localStorage.getItem(KEY) || 'null');
+    const d = storage.get(KEY);
     return d && d.v === 1 ? migrateMc(d) : null;
   } catch {
     return null;
@@ -546,9 +547,5 @@ export function restore(game, d) {
   syncAll();
 }
 export function clearSave() {
-  try {
-    localStorage.removeItem(KEY);
-  } catch {
-    /* ignore */
-  }
+  storage.remove(KEY);
 }

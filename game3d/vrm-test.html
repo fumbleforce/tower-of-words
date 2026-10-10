@@ -96,12 +96,13 @@ import * as THREE from 'three';
 import { loadVrmMio } from './js/vrm/mio.js';
 import { defaults, parseConfig, storageKey, VARIANTS, VIEWS, ANIMATIONS, EXPRESSIONS } from './js/vrm/config.js';
 import { attachPanel } from './js/vrm/panel.js';
+import { storage } from './js/storage.js';
 import { attachOrbit } from '../tools/style-concepts/viewer-kit.js';
 const Q = new URLSearchParams(location.search);
 const variant = VARIANTS.includes(Q.get('variant')) ? Q.get('variant') : 'base';
 let config = defaults(variant);
 try {
-  const saved = localStorage.getItem(storageKey(variant));
+  const saved = storage.getText(storageKey(variant));
   if (saved) {
     config = parseConfig(saved);
     if (config.variant !== variant) throw new Error('Wrong sample');

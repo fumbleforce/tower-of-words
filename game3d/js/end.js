@@ -7,6 +7,7 @@ import { sim, periodName } from './sim.js';
 import { PLACE_NAMES } from './places/definitions.js';
 import { canStartNextDay, nextDaySave, dayExitUrl } from './days.js';
 import { MC, isPlayer } from './mc.js';
+import { storage } from './storage.js';
 
 const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three', 4: 'Day four', 5: 'Day five' };
 const SAVE_KEY = 'amakawa-day1-save',
@@ -117,8 +118,8 @@ export async function showEnd(game) {
   if (next)
     next.onclick = () => {
       try {
-        const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
-        if (saved) localStorage.setItem(SAVE_KEY, JSON.stringify(nextDaySave(saved)));
+        const saved = storage.get(SAVE_KEY);
+        if (saved) storage.set(SAVE_KEY, nextDaySave(saved));
         sessionStorage.setItem(CONTINUE_FLAG, '1');
       } catch {
         /* storage may be off: the title's Continue still has the ended day */

@@ -6,6 +6,7 @@
 import eric from '../data/mc/eric.json' with { type: 'json' };
 import carina from '../data/mc/carina.json' with { type: 'json' };
 import { KEYS } from './saves/store.js';
+import { storage } from './storage.js';
 import { defaultCast } from './roles.js';
 
 export const PROTAGONISTS = { eric, carina };
@@ -17,11 +18,7 @@ export const isPlayer = (id) => id === PLAYER_ID || id === 'player';
 
 const query = () => (typeof location !== 'undefined' ? new URLSearchParams(location.search).get('mc') : null);
 function savedMc() {
-  try {
-    return JSON.parse(globalThis.localStorage?.getItem(KEYS.SAVE) || 'null')?.mc || null;
-  } catch {
-    return null;
-  }
+  return storage.get(KEYS.SAVE)?.mc || null;
 }
 export function pickMc(q = query(), saved = savedMc()) {
   for (const id of [q, saved]) if (id && PROTAGONISTS[id]) return id;

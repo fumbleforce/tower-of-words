@@ -6,28 +6,14 @@
 //   - the E prompt drops its key cap after five uses; the action word always stays (ui.placeSay reads `uses`)
 //   - Say (Q) first shows only at the goal target (the cat); after one use it shows wherever a word works
 //   - no Tab/Next, clock, people count or mute chip on the train
-// State lives in localStorage so a reload on the train doesn't teach it all again; Start on the title resets it.
+// State is kept (storage.js) so a reload on the train doesn't teach it all again; Start on the title resets it.
 import { ui } from './ui.js';
+import { storage } from './storage.js';
 
 const KEY = 'amakawa-onboard';
-const load = () => {
-  try {
-    return JSON.parse(localStorage.getItem(KEY) || 'null') || {};
-  } catch {
-    return {};
-  }
-};
+const load = () => storage.get(KEY) || {};
 const st = Object.assign({ moved: false, talked: false, uses: 0, sayUsed: false }, load());
-const keep = () => {
-  try {
-    localStorage.setItem(
-      KEY,
-      JSON.stringify({ moved: st.moved, talked: st.talked, uses: st.uses, sayUsed: st.sayUsed }),
-    );
-  } catch {
-    /* */
-  }
-};
+const keep = () => storage.set(KEY, { moved: st.moved, talked: st.talked, uses: st.uses, sayUsed: st.sayUsed });
 const ob = (window.__onboard = {
   active: false,
   holdGoal: false,
