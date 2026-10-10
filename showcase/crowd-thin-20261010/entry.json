@@ -1,0 +1,18 @@
+{
+  "title": "Thinner early-morning crowd, and people walk in through the doors",
+  "date": "2026-10-10",
+  "by": "claude-agent:crowd-thin",
+  "caption": "The early forecourt has 6 walkers instead of 17, and commuters now walk into head office's lobby instead of vanishing at the door.",
+  "result": ["after-desk", "after-phone", "lobby-desk"],
+  "sections": [
+    {"title": "After", "caption": "Early forecourt, day 1 morning.", "images": [
+      {"id": "after-desk", "image": "bible/shots/showcase/crowd-thin-20261010/after-desk.webp", "caption": "6 walkers, desktop"},
+      {"id": "after-phone", "image": "bible/shots/showcase/crowd-thin-20261010/after-phone.webp", "caption": "Phone"},
+      {"id": "lobby-desk", "image": "bible/shots/showcase/crowd-thin-20261010/lobby-desk.webp", "caption": "A commuter stepping into the lobby"}
+    ]},
+    {"title": "Before", "caption": "17 walkers.", "images": [
+      {"id": "before-desk", "image": "bible/shots/showcase/crowd-thin-20261010/before-desk.webp", "caption": "Desktop"},
+      {"id": "before-phone", "image": "bible/shots/showcase/crowd-thin-20261010/before-phone.webp", "caption": "Phone"}
+    ]}
+  ]
+}
