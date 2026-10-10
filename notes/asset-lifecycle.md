@@ -30,7 +30,7 @@ Both registries have one format, read and written only by `tools/assets/live.mjs
   - `loaded_by: "<file>#<text>"`: for a unit the code reaches through a computed path (a cast id joined to a folder); the check proves that file still contains that text.
   - `note`.
 - `coarse`: references in the code too broad to prove a unit is used (`assets/characters/` + an id), each with where the precise answer comes from. They still have to match something.
-- `code` (public): the runtime code a release ships, as globs (`include`, `exclude`), and `not_scanned` (vendor code, whose comments name example files).
+- `code` (public): the runtime code a release ships, as globs (`include`, `exclude`, and `adult` for modules only the adult flavor ships), and `not_scanned` (vendor code, whose comments name example files).
 - `planned` (local-only): pictures a scene asks for that are not rendered yet; the scene shows its card until they are.
 - `log`: every promote and retire, newest last, with the round, review id, what replaced what, and a note.
 

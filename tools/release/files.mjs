@@ -77,7 +77,11 @@ async function build(flavor) {
   const modules = stamp();
   const code = new Set(publicCode(pub));
   for (const m of modules) if (!matchAny(m, pub.code.exclude)) code.add(m);
-  for (const f of [...code].sort()) add(f, 'code');
+  for (const f of [...code].sort()) {
+    // code.adult: modules only the optional content uses (#423); the vanilla bundle leaves them out
+    if (flavor !== 'adult' && matchAny(f, pub.code.adult ?? [])) excluded.push(`${f}: adult flavor only`);
+    else add(f, 'code');
+  }
   // public assets: every unit file, except dev units and, in vanilla, units for the optional content
   const { byFile, problems: p1 } = expand(pub);
   problems.push(...p1);
