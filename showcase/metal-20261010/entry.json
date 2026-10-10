@@ -1,0 +1,411 @@
+{
+  "title": "Metal and glass reflect the sky everywhere",
+  "date": "2026-10-10",
+  "by": "claude-agent:metal",
+  "caption": "#366. The monorail's reflective steel is now one shared finish for the whole game: glass and steel reflect the sky of the place and the time of day (morning, day, dusk), with a low street round it. The monorail looks as it did. Lamps, signs, bins, drinks machines, rails, bike racks and roof plant are painted or bare steel; the sports hall, the north-street office and the harbour hut's glass show sky above and the street below.",
+  "result": [
+    "sports-r3-glass-morning-desk-after",
+    "harbour-hut-morning-desk-after",
+    "forecourt-lamps-evening-desk-after",
+    "train-neighbour-morning-desk-after"
+  ],
+  "preview": "sports-r3-glass-morning-desk-after",
+  "sections": [
+    {
+      "title": "The monorail, train place",
+      "caption": "The car skin before and after the move to the shared finish: the same picture.",
+      "images": [
+        {
+          "id": "train-neighbour-morning-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/train-neighbour-morning-desk-before.webp",
+          "caption": "Before: neighbour, morning, desktop"
+        },
+        {
+          "id": "train-neighbour-morning-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/train-neighbour-morning-desk-after.webp",
+          "caption": "After: neighbour, morning, desktop"
+        },
+        {
+          "id": "train-neighbour-morning-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/train-neighbour-morning-phone-before.webp",
+          "caption": "Before: neighbour, morning, phone"
+        },
+        {
+          "id": "train-neighbour-morning-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/train-neighbour-morning-phone-after.webp",
+          "caption": "After: neighbour, morning, phone"
+        },
+        {
+          "id": "train-doors-morning-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/train-doors-morning-desk-before.webp",
+          "caption": "Before: doors, morning, desktop"
+        },
+        {
+          "id": "train-doors-morning-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/train-doors-morning-desk-after.webp",
+          "caption": "After: doors, morning, desktop"
+        },
+        {
+          "id": "train-doors-morning-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/train-doors-morning-phone-before.webp",
+          "caption": "Before: doors, morning, phone"
+        },
+        {
+          "id": "train-doors-morning-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/train-doors-morning-phone-after.webp",
+          "caption": "After: doors, morning, phone"
+        }
+      ]
+    },
+    {
+      "title": "Sports district: the hall and the north-street office",
+      "caption": "The glazing reflected a fixed hand-made pale map; now the period's sky above and a hazed street below, moving with the camera.",
+      "images": [
+        {
+          "id": "sports-r3-glass-morning-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/sports-r3-glass-morning-desk-before.webp",
+          "caption": "Before: r3 glass, morning, desktop"
+        },
+        {
+          "id": "sports-r3-glass-morning-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/sports-r3-glass-morning-desk-after.webp",
+          "caption": "After: r3 glass, morning, desktop"
+        },
+        {
+          "id": "sports-r3-glass-morning-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/sports-r3-glass-morning-phone-before.webp",
+          "caption": "Before: r3 glass, morning, phone"
+        },
+        {
+          "id": "sports-r3-glass-morning-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/sports-r3-glass-morning-phone-after.webp",
+          "caption": "After: r3 glass, morning, phone"
+        },
+        {
+          "id": "sports-r3-glass-evening-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/sports-r3-glass-evening-desk-before.webp",
+          "caption": "Before: r3 glass, after work, desktop"
+        },
+        {
+          "id": "sports-r3-glass-evening-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/sports-r3-glass-evening-desk-after.webp",
+          "caption": "After: r3 glass, after work, desktop"
+        },
+        {
+          "id": "sports-r3-glass-evening-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/sports-r3-glass-evening-phone-before.webp",
+          "caption": "Before: r3 glass, after work, phone"
+        },
+        {
+          "id": "sports-r3-glass-evening-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/sports-r3-glass-evening-phone-after.webp",
+          "caption": "After: r3 glass, after work, phone"
+        },
+        {
+          "id": "sports-gym-glass-morning-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/sports-gym-glass-morning-desk-before.webp",
+          "caption": "Before: gym glass, morning, desktop"
+        },
+        {
+          "id": "sports-gym-glass-morning-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/sports-gym-glass-morning-desk-after.webp",
+          "caption": "After: gym glass, morning, desktop"
+        },
+        {
+          "id": "sports-gym-glass-morning-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/sports-gym-glass-morning-phone-before.webp",
+          "caption": "Before: gym glass, morning, phone"
+        },
+        {
+          "id": "sports-gym-glass-morning-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/sports-gym-glass-morning-phone-after.webp",
+          "caption": "After: gym glass, morning, phone"
+        },
+        {
+          "id": "sports-gym-glass-evening-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/sports-gym-glass-evening-desk-before.webp",
+          "caption": "Before: gym glass, after work, desktop"
+        },
+        {
+          "id": "sports-gym-glass-evening-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/sports-gym-glass-evening-desk-after.webp",
+          "caption": "After: gym glass, after work, desktop"
+        },
+        {
+          "id": "sports-gym-glass-evening-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/sports-gym-glass-evening-phone-before.webp",
+          "caption": "Before: gym glass, after work, phone"
+        },
+        {
+          "id": "sports-gym-glass-evening-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/sports-gym-glass-evening-phone-after.webp",
+          "caption": "After: gym glass, after work, phone"
+        }
+      ]
+    },
+    {
+      "title": "Harbour: the foreman's hut and the bike rack",
+      "caption": "The hut window takes the shared glass; the rack bar is painted steel and the hoops bare steel.",
+      "images": [
+        {
+          "id": "harbour-hut-morning-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/harbour-hut-morning-desk-before.webp",
+          "caption": "Before: hut, morning, desktop"
+        },
+        {
+          "id": "harbour-hut-morning-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/harbour-hut-morning-desk-after.webp",
+          "caption": "After: hut, morning, desktop"
+        },
+        {
+          "id": "harbour-hut-morning-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/harbour-hut-morning-phone-before.webp",
+          "caption": "Before: hut, morning, phone"
+        },
+        {
+          "id": "harbour-hut-morning-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/harbour-hut-morning-phone-after.webp",
+          "caption": "After: hut, morning, phone"
+        },
+        {
+          "id": "harbour-hut-evening-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/harbour-hut-evening-desk-before.webp",
+          "caption": "Before: hut, after work, desktop"
+        },
+        {
+          "id": "harbour-hut-evening-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/harbour-hut-evening-desk-after.webp",
+          "caption": "After: hut, after work, desktop"
+        },
+        {
+          "id": "harbour-hut-evening-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/harbour-hut-evening-phone-before.webp",
+          "caption": "Before: hut, after work, phone"
+        },
+        {
+          "id": "harbour-hut-evening-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/harbour-hut-evening-phone-after.webp",
+          "caption": "After: hut, after work, phone"
+        },
+        {
+          "id": "harbour-rack-morning-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/harbour-rack-morning-desk-before.webp",
+          "caption": "Before: rack, morning, desktop"
+        },
+        {
+          "id": "harbour-rack-morning-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/harbour-rack-morning-desk-after.webp",
+          "caption": "After: rack, morning, desktop"
+        },
+        {
+          "id": "harbour-rack-morning-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/harbour-rack-morning-phone-before.webp",
+          "caption": "Before: rack, morning, phone"
+        },
+        {
+          "id": "harbour-rack-morning-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/harbour-rack-morning-phone-after.webp",
+          "caption": "After: rack, morning, phone"
+        },
+        {
+          "id": "harbour-rack-evening-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/harbour-rack-evening-desk-before.webp",
+          "caption": "Before: rack, after work, desktop"
+        },
+        {
+          "id": "harbour-rack-evening-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/harbour-rack-evening-desk-after.webp",
+          "caption": "After: rack, after work, desktop"
+        },
+        {
+          "id": "harbour-rack-evening-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/harbour-rack-evening-phone-before.webp",
+          "caption": "Before: rack, after work, phone"
+        },
+        {
+          "id": "harbour-rack-evening-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/harbour-rack-evening-phone-after.webp",
+          "caption": "After: rack, after work, phone"
+        }
+      ]
+    },
+    {
+      "title": "Forecourt: lamps and the station",
+      "caption": "Lamp posts are painted steel with a soft sheen of the sky; after work they catch the warm dusk on one edge.",
+      "images": [
+        {
+          "id": "forecourt-lamps-morning-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-lamps-morning-desk-before.webp",
+          "caption": "Before: lamps, morning, desktop"
+        },
+        {
+          "id": "forecourt-lamps-morning-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-lamps-morning-desk-after.webp",
+          "caption": "After: lamps, morning, desktop"
+        },
+        {
+          "id": "forecourt-lamps-morning-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-lamps-morning-phone-before.webp",
+          "caption": "Before: lamps, morning, phone"
+        },
+        {
+          "id": "forecourt-lamps-morning-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-lamps-morning-phone-after.webp",
+          "caption": "After: lamps, morning, phone"
+        },
+        {
+          "id": "forecourt-lamps-evening-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-lamps-evening-desk-before.webp",
+          "caption": "Before: lamps, after work, desktop"
+        },
+        {
+          "id": "forecourt-lamps-evening-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-lamps-evening-desk-after.webp",
+          "caption": "After: lamps, after work, desktop"
+        },
+        {
+          "id": "forecourt-lamps-evening-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-lamps-evening-phone-before.webp",
+          "caption": "Before: lamps, after work, phone"
+        },
+        {
+          "id": "forecourt-lamps-evening-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-lamps-evening-phone-after.webp",
+          "caption": "After: lamps, after work, phone"
+        },
+        {
+          "id": "forecourt-station-east-morning-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-station-east-morning-desk-before.webp",
+          "caption": "Before: station east, morning, desktop"
+        },
+        {
+          "id": "forecourt-station-east-morning-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-station-east-morning-desk-after.webp",
+          "caption": "After: station east, morning, desktop"
+        },
+        {
+          "id": "forecourt-station-east-morning-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-station-east-morning-phone-before.webp",
+          "caption": "Before: station east, morning, phone"
+        },
+        {
+          "id": "forecourt-station-east-morning-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-station-east-morning-phone-after.webp",
+          "caption": "After: station east, morning, phone"
+        },
+        {
+          "id": "forecourt-station-east-evening-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-station-east-evening-desk-before.webp",
+          "caption": "Before: station east, after work, desktop"
+        },
+        {
+          "id": "forecourt-station-east-evening-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-station-east-evening-desk-after.webp",
+          "caption": "After: station east, after work, desktop"
+        },
+        {
+          "id": "forecourt-station-east-evening-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-station-east-evening-phone-before.webp",
+          "caption": "Before: station east, after work, phone"
+        },
+        {
+          "id": "forecourt-station-east-evening-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/forecourt-station-east-evening-phone-after.webp",
+          "caption": "After: station east, after work, phone"
+        }
+      ]
+    },
+    {
+      "title": "Dorm courtyard: drinks machines and lamp",
+      "caption": "The machine housings and the lamp post are painted steel.",
+      "images": [
+        {
+          "id": "dorm-court-vending-morning-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-vending-morning-desk-before.webp",
+          "caption": "Before: vending, morning, desktop"
+        },
+        {
+          "id": "dorm-court-vending-morning-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-vending-morning-desk-after.webp",
+          "caption": "After: vending, morning, desktop"
+        },
+        {
+          "id": "dorm-court-vending-morning-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-vending-morning-phone-before.webp",
+          "caption": "Before: vending, morning, phone"
+        },
+        {
+          "id": "dorm-court-vending-morning-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-vending-morning-phone-after.webp",
+          "caption": "After: vending, morning, phone"
+        },
+        {
+          "id": "dorm-court-vending-evening-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-vending-evening-desk-before.webp",
+          "caption": "Before: vending, after work, desktop"
+        },
+        {
+          "id": "dorm-court-vending-evening-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-vending-evening-desk-after.webp",
+          "caption": "After: vending, after work, desktop"
+        },
+        {
+          "id": "dorm-court-vending-evening-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-vending-evening-phone-before.webp",
+          "caption": "Before: vending, after work, phone"
+        },
+        {
+          "id": "dorm-court-vending-evening-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-vending-evening-phone-after.webp",
+          "caption": "After: vending, after work, phone"
+        },
+        {
+          "id": "dorm-court-lamp-morning-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-lamp-morning-desk-before.webp",
+          "caption": "Before: lamp, morning, desktop"
+        },
+        {
+          "id": "dorm-court-lamp-morning-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-lamp-morning-desk-after.webp",
+          "caption": "After: lamp, morning, desktop"
+        },
+        {
+          "id": "dorm-court-lamp-morning-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-lamp-morning-phone-before.webp",
+          "caption": "Before: lamp, morning, phone"
+        },
+        {
+          "id": "dorm-court-lamp-morning-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-lamp-morning-phone-after.webp",
+          "caption": "After: lamp, morning, phone"
+        },
+        {
+          "id": "dorm-court-lamp-evening-desk-before",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-lamp-evening-desk-before.webp",
+          "caption": "Before: lamp, after work, desktop"
+        },
+        {
+          "id": "dorm-court-lamp-evening-desk-after",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-lamp-evening-desk-after.webp",
+          "caption": "After: lamp, after work, desktop"
+        },
+        {
+          "id": "dorm-court-lamp-evening-phone-before",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-lamp-evening-phone-before.webp",
+          "caption": "Before: lamp, after work, phone"
+        },
+        {
+          "id": "dorm-court-lamp-evening-phone-after",
+          "image": "bible/shots/showcase/metal-20261010/dorm-court-lamp-evening-phone-after.webp",
+          "caption": "After: lamp, after work, phone"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play it",
+      "href": "game3d/"
+    }
+  ]
+}
