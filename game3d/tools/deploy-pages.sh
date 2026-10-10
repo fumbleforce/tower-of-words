@@ -24,7 +24,7 @@
 # Deny check (tools/bible/pages.py deny): the build stops if any file in the site is under island/private/, in a
 # private/ folder or on a reward path.
 #
-# The site: /game3d/ with index.html, build.json (stamped here), css, js, story (.js), fonts, vendor, audio (mp3, json) and the
+# The site (vanilla flavor, see below): /game3d/ with index.html, build.json (stamped here), css, js, story (.js), fonts, vendor, audio (mp3, json) and the
 # assets the game loads. Left out: tools, design, ref, shots, notes (*.md) and contact sheets. Only committed files
 # and files in the committed lock file go up, so nothing local, private or git-ignored beyond those can leak.
 set -e
@@ -82,12 +82,16 @@ G="$STAGE/game3d"
 rm -f "$G/js/shell-qa.js"
 # build.json is generated, never committed: stamp the staged copy (HEAD's id, the staged module list)
 GIT_DIR=$(git rev-parse --absolute-git-dir) python3 "$G/tools/stamp.py" | sed 's/^/build: /'
-rm -rf "$G/tools" "$G/design" "$G/ref" "$G/shots"
+rm -rf "$G/tools" "$G/design" "$G/ref" "$G/shots" "$G/test"
 find "$G" -name '*.md' -delete
 # assets: keep only the folders the code loads from (assets/<folder>/ written in js/ or opening/), drop loose files
 USED=$(grep -rhoE "assets/[A-Za-z0-9_-]+/" "$G/js" "$G/opening" | sort -u | sed 's#assets/##; s#/##')
 for d in "$G"/assets/*; do n=$(basename "$d"); if [ -d "$d" ]; then echo "$USED" | grep -qx "$n" || rm -rf "$d"; else rm -f "$d"; fi; done
 find "$G/assets" \( -name 'check*.png' -o -name 'check*.html' -o -name '*.blend' \) -delete 2>/dev/null || true
+# The published game is the vanilla flavor, like the vanilla desktop build: __FULL__ false, the plugin loader stubbed, then
+# the word scan (tools/release/flavor.mjs, tools/release/scan.mjs). The dev server keeps __FULL__ true.
+node "$ROOT/tools/release/flavor.mjs" --flavor vanilla --in "$G" || { echo "deploy: REFUSED: the vanilla transform failed" >&2; exit 1; }
+node "$ROOT/tools/release/scan.mjs" --flavor vanilla "$G" || { echo "deploy: REFUSED: the vanilla word scan failed" >&2; exit 1; }
 for x in $EXTRA; do git archive HEAD "$x" | tar -x -C "$STAGE"; done
 python3 "$ROOT/tools/bible/pages.py" stage "$STAGE"
 
