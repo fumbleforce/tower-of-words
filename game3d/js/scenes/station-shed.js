@@ -5,8 +5,10 @@
 // The shed is as the train shows it (places/train.js, train/world.js): one beam down the middle, the car's line,
 // with a side platform either side at the car's floor (DECK), and the other way's beam (BEAM2) outside the shed's
 // back wall on the sea side. It is the Blender model (scenes/station-model.js, tools/station/station.py): portal
-// frames, the platforms with their coping, edge line and tactile strip, stairs down from both platforms' south ends,
-// the curved roof on columns, a glazed back wall on the sea side, a railing on the town side and a glazed north end.
+// frames, the platforms with their coping, edge line and tactile strip, a cross deck joining them at the north end over
+// the beam's end, a stair down from the east platform's south end (none from the west one: it would come down between
+// the beams, and the walkway from it would pass under the car's beam, #403), the curved roof on columns, a glazed back
+// wall on the sea side, a railing on the town side and a glazed north end.
 // Without the model, a plainer code-built shed of the same plan stands in.
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
@@ -35,7 +37,8 @@ export const DECK = 2.5, // platform level (the monorail car's floor)
   BEAM_TOP = DECK - 0.16, // the beam just under the car floor, as on the ride (train/world.js BEAM_TOP)
   BEAM_H = 0.96,
   EDGE = 1.38, // the platforms' edges from the beam's centre (the car is 2.6 wide)
-  BEAM2 = -6.36; // the other way's beam, west of the car's (train/world.js BEAM2_Z over CHUNKS.train.scale)
+  BEAM2 = -6.36, // the other way's beam, west of the car's (train/world.js BEAM2_Z over CHUNKS.train.scale)
+  CROSS = 2.4; // the cross deck's depth at the shed's north end; the beams end against it
 const EAVE = 4.75;
 
 // the code-built shed, for when the model can't be loaded: the same plan in plain boxes
@@ -49,9 +52,11 @@ function codeShed(root) {
     deck = [],
     steel = [];
   for (const u of [0, BEAM2]) {
-    beams.push([0.84, BEAM_H, L - 1.2, u, BEAM_TOP - BEAM_H, 0.6]);
-    for (let v = -L / 2 + 0.6; v < L / 2; v += 4.8) piers.push([0.6, BEAM_TOP - BEAM_H, 0.6, u, 0, v]);
+    beams.push([0.84, BEAM_H, L - CROSS, u, BEAM_TOP - BEAM_H, CROSS / 2]);
+    for (let v = -L / 2 + 0.6; v < L / 2; v += 4.8)
+      if (u === 0 || v > CROSS - L / 2) piers.push([0.6, BEAM_TOP - BEAM_H, 0.6, u, 0, v]);
   }
+  deck.push([2 * EDGE, 0.45, CROSS, 0, DECK - 0.45, CROSS / 2 - L / 2]); // the cross deck
   for (const s of [-1, 1]) {
     deck.push([4 - EDGE, 0.45, L, s * (EDGE + 4) * 0.5, DECK - 0.45, 0]);
     steel.push([0.08, 0.03, L, s * (EDGE + 0.2), DECK, 0]);
@@ -59,8 +64,9 @@ function codeShed(root) {
       piers.push([0.4, DECK - 0.45, 0.4, s * 3.55, 0, v]);
       steel.push([0.16, EAVE - DECK, 0.16, s * 3.55, DECK, v]);
     }
-    // stairs down from the south end
-    for (let i = 0; i < 10; i++) deck.push([1.3, DECK - i * 0.25, 0.34, s * 2.7, 0, L / 2 - 3.2 + 0.34 * (i + 0.5)]);
+    // the east platform's stair down from the south end
+    if (s > 0)
+      for (let i = 0; i < 10; i++) deck.push([1.3, DECK - i * 0.25, 0.34, 2.7, 0, L / 2 - 3.2 + 0.34 * (i + 0.5)]);
   }
   steel.push([0.1, 1.2, L, -4, DECK, 0]); // the back wall's dado
   g.add(boxes(beams, '#9aa0a6'), boxes(piers, '#8a8f96'), boxes(deck, '#7d8288'), boxes(steel, '#6f7782'));
@@ -118,7 +124,7 @@ function approachLines() {
   return [a, b];
 }
 
-// where no pier may stand: the covered walkway and the stairs' feet
+// where no pier may stand: the covered walkway, its west end and the stair's foot
 const clearOfWalk = ([x, z]) => !(x > SHED.c[0] - 4.5 && x < 1.5 && z > SHED.c[1] + SHED.L / 2 - 0.6 && z < 19);
 
 function approach(root) {
@@ -164,12 +170,13 @@ function approach(root) {
   }
 }
 
-// the covered walkway from the stairs' feet: east along the shed's south end, then north to the station's glass front
+// the covered walkway from the stair's foot: east along the shed's south end from its glazed west end, a step east of
+// the beam, then north to the station's glass front
 export function coveredWalk(station) {
   const CX = (station.x0 + station.x1) / 2,
     [x, z] = [SHED.c[0], SHED.c[1] + SHED.L / 2 + 2.6];
   return [
-    [x - 0.9, CX + 1.2, z - 0.9, z + 0.9],
+    [x + 1.6, CX + 1.2, z - 0.9, z + 0.9],
     [CX - 1.2, CX + 1.2, station.zS, z - 0.9],
   ];
 }
@@ -179,7 +186,7 @@ function codeWalkway(root, station) {
   const { x0: X0, x1: X1, zS: ZS } = station;
   const CX = (X0 + X1) / 2,
     z = SHED.c[1] + SHED.L / 2 + 2.6,
-    x0 = SHED.c[0] + 1.0,
+    x0 = SHED.c[0] + 1.6,
     posts = [],
     roofs = [];
   roofs.push([CX + 1.2 - x0, 0.08, 1.8, (x0 + CX + 1.2) / 2, 2.2, z]);

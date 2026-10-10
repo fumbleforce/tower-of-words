@@ -26,8 +26,9 @@ with them (scenes/station-model.js):
   st_glass   the window panes, one quad each (the game makes each a pane of its own)
   st_fine    small roof and wall detail: fan grilles, louvres, railings, the hatch door (not on a phone)
   sh_concrete  the track beam and the other way's beam in the shed, the portal frames, the platforms with their
-             coping, edge line, tactile strip and paving, the stairs (waist, treads, nosings, warning rows) and their
-             side walls with coping, the landings, the tactile guide path along the walkway
+             coping, edge line, tactile strip and paving, the cross deck joining them at the north end, the east
+             platform's stair (waist, treads, nosings, warning rows) and its side walls with coping, its landing, the
+             tactile guide path along the walkway
   sh_metal   roof columns, the back wall's panels and mullions, the east railing, the north gable's panels and
              mullions, the platform clock, the buffers, the stair handrails, the walkway's posts, the sign frames
              (the shed's steel is the world kit's pale steel, game3d/js/kit/core/palette.js STEEL)
@@ -66,16 +67,18 @@ EDGE = 1.38  # the platforms' edge from the beam's centre
 PW = 4.0  # the platforms' outer edge
 BEAM2 = -6.36  # the other way's beam, west of the arrival line
 V0, V1 = -SL / 2, SL / 2
+CROSS = V0 + 2.4  # the cross deck at the north end, from the gable to here (v): the beams end against it (#403)
+BUFFER_V = CROSS + 0.6  # the beams' buffer stops
 PORTALS = [-18.6 + 4.8 * k for k in range(8)]  # -18.6 .. 15.0
 END_V = 18.9  # the posts under the platforms' south ends
-STAIR = (16.0, 19.36)  # v of the stairs' top and foot
+STAIR = (16.0, 19.36)  # v of the stair's top and foot (the east platform's)
 STAIR_U = (2.05, 3.35)
 EAVE_U, EAVE_Y, CROWN = 4.6, 4.75, 0.85
 ROOF_V = (V0 - 0.4, V1 + 0.4)
 COL_U = 3.55
 BEAM_SECTION = [(0.36, 0.0), (0.42, -0.06), (0.42, -0.7), (0.48, -0.74), (0.48, -0.9), (0.42, -BEAM_H)]
 
-WALK = [(-15.55, 0.7, 16.35, 18.15), (-1.7, 0.7, 11.65, 16.35)]  # station-shed.js coveredWalk(), x0 x1 z0 z1
+WALK = [(-13.05, 0.7, 16.35, 18.15), (-1.7, 0.7, 11.65, 16.35)]  # station-shed.js coveredWalk(), x0 x1 z0 z1
 WROOF_Y = (2.14, 2.24)
 
 
@@ -566,12 +569,13 @@ def shed():
     con, met, rf, gl, fine = Mesh('sh_concrete'), Mesh('sh_metal'), Mesh('sh_roof'), Mesh('sh_glass', uv=True), Mesh('sh_fine')
     cc = lambda p, n: grime(C['concrete'] if n != '+y' else C['concreteTop'], p, 0.1, 7)
     # the track beam (its south end runs on into the approach, which the game strings from ap_beam) and the other
-    # way's beam outside the back wall, each with its joints and a buffer at the north end
-    for u, v0 in ((0.0, V0 + 0.6), (BEAM2, V0 + 0.6)):
-        beam_profile(con, u, v0, V1, None)
+    # way's beam outside the back wall, each with its joints and a buffer at the north end, short of the cross deck
+    for u in (0.0, BEAM2):
+        beam_profile(con, u, CROSS, V1, None)
         for v in PORTALS + [END_V]:
-            con.box(U(u) - 0.43, U(u) + 0.43, BEAM_TOP - 0.006, BEAM_TOP + 0.006, Vz(v) - 0.04, Vz(v) + 0.04, C['joint'])
-        buffer(met, fine, u, v0)
+            if v > CROSS:
+                con.box(U(u) - 0.43, U(u) + 0.43, BEAM_TOP - 0.006, BEAM_TOP + 0.006, Vz(v) - 0.04, Vz(v) + 0.04, C['joint'])
+        buffer(met, fine, u, BUFFER_V)
     # portal frames: two columns, a crosshead under the beam, short walls carrying the platforms
     for v in PORTALS:
         for s in (-1, 1):
@@ -581,18 +585,20 @@ def shed():
         con.prism([(U(a), b) for a, b in prof][::-1], 'z', Vz(v) - 0.35, Vz(v) + 0.35, lambda p: grime(C['concrete'], p, 0.08, 11))
         con.box(U(-0.5), U(0.5), 1.38, 1.4, Vz(v) - 0.3, Vz(v) + 0.3, C['joint'])
         # the other way's beam on its own column and hammerhead
-        pier(con, U(BEAM2), Vz(v))
-    for s in (-1, 1):  # posts under the platforms' south ends, beside the stairs
+        if v > CROSS:
+            pier(con, U(BEAM2), Vz(v))
+    for s in (-1, 1):  # posts under the platforms' south ends (beside the east one's stair)
         for u in (1.65, 3.75):
             oct_col(con, U(s * u), Vz(END_V), 0.17, 0.0, DECK - 0.45)
     pier(con, U(0), Vz(END_V))
     pier(con, U(BEAM2), Vz(END_V))
-    # the platforms
+    pier(con, U(BEAM2), Vz(CROSS + 0.4))  # under the other way's beam's north end
+    # the platforms, joined at the north end by the cross deck over the beam's end
     for s in (-1, 1):
         platform(con, met, fine, s)
-    # the stairs down from the platforms' south ends, their side walls and handrails, and the paved landings
-    for s in (-1, 1):
-        stairs(con, met, s)
+    cross_deck(con, met)
+    # the stair down from the east platform's south end, its side walls and handrails, and the paved landing
+    stairs(con, met, 1)
     # the roof's columns, the back wall on the sea side, the railing on the town side, the north gable
     for s in (-1, 1):
         for v in PORTALS + [END_V]:
@@ -641,15 +647,17 @@ def platform(con, met, fine, s):
     yellow tactile strip and the paving."""
     ua, ub = s * EDGE, s * PW
     lo, hi = min(ua, ub), max(ua, ub)
-    holes = [(STAIR[0], V1)]  # the stairwell (v), between the stair's side walls
-    sw0, sw1 = sorted((s * (STAIR_U[0] - 0.12), s * (STAIR_U[1] + 0.12)))
+    # the stairwell (u), between the stair's side walls; only the east platform has a stair
+    sw0, sw1 = sorted((s * (STAIR_U[0] - 0.12), s * (STAIR_U[1] + 0.12))) if s > 0 else (lo, lo)
     # slab body: under the paving, the full length; split round the stairwell
     for a, b in ((lo, sw0), (sw1, hi)):
-        con.box(U(a), U(b), DECK - 0.45, DECK - 0.002, Vz(V0), Vz(V1), lambda p, n: grime(C['concreteDark'] if n == '-y' else C['concrete'], p, 0.1, 21))
-    con.box(U(sw0), U(sw1), DECK - 0.45, DECK - 0.002, Vz(V0), Vz(STAIR[0]), lambda p, n: grime(C['concrete'], p, 0.1, 21))
-    # the dark edge face toward the track and the pale coping lip over it
+        if b - a > 1e-3:
+            con.box(U(a), U(b), DECK - 0.45, DECK - 0.002, Vz(V0), Vz(V1), lambda p, n: grime(C['concreteDark'] if n == '-y' else C['concrete'], p, 0.1, 21))
+    if sw1 - sw0 > 1e-3:
+        con.box(U(sw0), U(sw1), DECK - 0.45, DECK - 0.002, Vz(V0), Vz(STAIR[0]), lambda p, n: grime(C['concrete'], p, 0.1, 21))
+    # the dark edge face toward the track and the pale coping lip over it, from the cross deck south
     e = s * EDGE
-    con.box(U(e) - 0.01 * s, U(e) + 0.0, DECK - 0.45, DECK - 0.04, Vz(V0), Vz(V1), C['edge'])
+    con.box(U(e) - 0.01 * s, U(e) + 0.0, DECK - 0.45, DECK - 0.04, Vz(CROSS), Vz(V1), C['edge'])
     # the top: bands across the platform's width (coping, line, a gap, the tactile strip, then paving)
     bands = [(0.0, 0.16, 'coping'), (0.16, 0.24, 'line'), (0.24, 0.41, 'paving'), (0.41, 0.69, 'tactile'), (0.69, PW - EDGE, 'paving')]
     for a, b, kind in bands:
@@ -660,7 +668,7 @@ def platform(con, met, fine, s):
                 continue
             vend = STAIR[0] if k == 2 else V1
             step = 0.3 if kind == 'tactile' else 1.2
-            v = V0
+            v = CROSS if b <= 0.41 else V0  # the edge bands stop at the cross deck, which paves the rest
             i = 0
             while v < vend - 1e-6:
                 v1 = min(vend, v + step)
@@ -679,7 +687,7 @@ def platform(con, met, fine, s):
                 v = v1
                 i += 1
     # the coping's lip over the edge face
-    con.box(U(e) - 0.03 * s, U(e) + 0.02 * s, DECK - 0.07, DECK, Vz(V0), Vz(V1), C['coping'])
+    con.box(U(e) - 0.03 * s, U(e) + 0.02 * s, DECK - 0.07, DECK, Vz(CROSS), Vz(V1), C['coping'])
     # the slab's north and south end faces
     con.box(U(lo), U(hi), DECK - 0.45, DECK, Vz(V0) - 0.02, Vz(V0), C['concreteDark'])
 
@@ -723,10 +731,33 @@ def stairs(con, met, s):
             zz, yy = Vz(va + (vb - va) * t), DECK + 1.0 - DECK * t
             met.box(hx - 0.018, hx + 0.018, yy, yy + 0.13, zz - 0.018, zz + 0.018, C['shRail'])
     # the landing at the foot, paved like the walkway, joining it
-    a, b = (U(min(u0, u1) - 0.25), U(max(u0, u1) + 0.25))
-    if s < 0:
-        b = WALK[0][0]  # on to the walkway's west end
-    con.box(a, b, 0.0, 0.014, Vz(vb), WALK[0][2] if s > 0 else WALK[0][3], C['walkStone'])
+    con.box(U(min(u0, u1) - 0.25), U(max(u0, u1) + 0.25), 0.0, 0.014, Vz(vb), WALK[0][2], C['walkStone'])
+
+
+def cross_deck(con, met):
+    """The north end's cross deck: a slab between the platforms over the end of the track beam, from the gable to CROSS,
+    paved as they are, so people get from one platform to the other at platform level (the west platform has no stair
+    of its own: one down to the walkway would pass under the beam, #403). A steel railing along its south edge, over
+    the buffers."""
+    w = EDGE + 0.41  # it paves the platforms' edge bands too, which stop at CROSS
+    con.box(U(-EDGE), U(EDGE), DECK - 0.45, DECK - 0.002, Vz(V0), Vz(CROSS), lambda p, n: grime(C['concreteDark'] if n == '-y' else C['concrete'], p, 0.1, 21))
+    v, i = V0, 0
+    while v < CROSS - 1e-6:
+        v1 = min(CROSS, v + 1.2)
+        for k, (a, b) in enumerate(((-w, -0.6), (-0.6, 0.6), (0.6, w))):
+            col = mul(C['paving'] if (i + k) % 2 == 0 else C['pavingB'], 0.96 + 0.08 * _h(i, k, 5))
+            con.face([(U(a), DECK, Vz(v)), (U(a), DECK, Vz(v1)), (U(b), DECK, Vz(v1)), (U(b), DECK, Vz(v))], col)
+        v, i = v1, i + 1
+    # its south face and a pale coping along the edge, then the railing on it
+    z = Vz(CROSS)
+    con.box(U(-EDGE), U(EDGE), DECK - 0.45, DECK - 0.04, z, z + 0.01, C['edge'])
+    con.box(U(-EDGE) - 0.02, U(EDGE) + 0.02, DECK - 0.07, DECK, z - 0.03, z + 0.02, C['coping'])
+    met.box(U(-EDGE), U(EDGE), DECK + 1.02, DECK + 1.08, z - 0.08, z - 0.02, C['shRail'])
+    met.box(U(-EDGE), U(EDGE), DECK + 0.5, DECK + 0.53, z - 0.07, z - 0.03, C['shRail'])
+    met.box(U(-EDGE), U(EDGE), DECK, DECK + 0.12, z - 0.07, z - 0.03, C['shRail'])
+    for k in range(4):
+        x = U(-EDGE + 0.05 + (2 * EDGE - 0.1) * k / 3)
+        met.box(x - 0.03, x + 0.03, DECK, DECK + 1.05, z - 0.08, z - 0.02, C['shRail'])
 
 
 def back_wall(met, gl, fine):
@@ -762,9 +793,9 @@ def railing(met, fine):
         fine.box(x - 0.07, x - 0.03, y, y + 0.03, Vz(V0), Vz(V1), C['shRail'])
     met.box(x - 0.07, x - 0.02, DECK, DECK + 0.12, Vz(V0), Vz(V1), C['shRail'])
     met.box(x - 0.02, x + 0.0, DECK - 0.45, DECK, Vz(V0), Vz(V1), C['panel'])
-    # across the platforms' south ends, either side of the stairwell
+    # across the platforms' south ends: the west one's whole width, the east one's either side of the stairwell
     for s in (-1, 1):
-        for a, b in ((EDGE + 0.3, STAIR_U[0] - 0.12), (STAIR_U[1] + 0.12, PW)):
+        for a, b in ((EDGE + 0.3, STAIR_U[0] - 0.12), (STAIR_U[1] + 0.12, PW)) if s > 0 else ((EDGE + 0.3, PW),):
             u0, u1 = sorted((s * a, s * b))
             met.box(U(u0), U(u1), DECK + 1.02, DECK + 1.08, Vz(V1) - 0.06, Vz(V1), C['shRail'])
             met.box(U(u0), U(u1), DECK + 0.5, DECK + 0.53, Vz(V1) - 0.05, Vz(V1) - 0.01, C['shRail'])
@@ -915,16 +946,15 @@ def bench(fine, u, v, s):
 
 def walkway(met, gl):
     """The covered walkway's posts, wind screen and roofs (wk_roof): east of the beam along the shed's south end, a
-    roof over each stair's foot, and north to the station's glass front, where its canopy takes over."""
+    roof over the stair's foot, and north to the station's glass front, where its canopy takes over."""
     rf = Mesh('wk_roof')
     y0, y1 = WROOF_Y
     ex0, ex1, ez0, ez1 = WALK[0]
     nx0, nx1, nz0, nz1 = WALK[1]
     pieces = [
-        (U(1.0), ex1 + 0.2, ez0 - 0.2, ez1 + 0.2),  # the east run, east of the beam
+        (ex0 - 0.15, ex1 + 0.2, ez0 - 0.2, ez1 + 0.2),  # the east run, from its glazed west end east of the beam
         (nx0 - 0.2, nx1 + 0.2, ZS + 1.7, ez0 - 0.2),  # the north leg, up to the station's south canopy
-        (U(STAIR_U[0] - 0.4), U(STAIR_U[1] + 0.4), Vz(STAIR[1]) - 0.5, ez0 - 0.2),  # over the east stair's foot
-        (U(-STAIR_U[1] - 0.4), U(-0.75), Vz(STAIR[1]) - 0.5, ez1 + 0.2),  # over the west stair's foot, west of the beam
+        (U(STAIR_U[0] - 0.4), U(STAIR_U[1] + 0.4), Vz(STAIR[1]) - 0.5, ez0 - 0.2),  # over the stair's foot
     ]
     for a, b, c, d in pieces:
         rf.box(a, b, y0, y1, c, d, lambda p, n: C['roofTop'] if n == '+y' else C['roofUnder'] if n == '-y' else C['shTrim'])
@@ -953,18 +983,25 @@ def walkway(met, gl):
             met.box(x - 0.08, x + 0.08, 0.0, 0.02, z - 0.08, z + 0.08, C['shTrim'], skip=('-y',))
     posts(U(STAIR_U[1] + 0.5), nx0 - 0.3, ez0 - 0.05)
     met.cyl(ex1 + 0.05, ez0 - 0.05, 0.05, 0.0, y0 - 0.1, 6, C['shSteel'])
-    posts(U(STAIR_U[1] + 0.3), ex1 - 0.05, ez1 + 0.05)
+    posts(ex0 - 0.05, ex1 - 0.05, ez1 + 0.05)
     for x in (nx0 - 0.05, nx1 + 0.05):
         n = max(1, round((ez0 - 0.3 - (ZS + 1.9)) / 2.5))
         for k in range(n + 1):
             z = ZS + 1.9 + (ez0 - 0.3 - ZS - 1.9) * k / n
             met.cyl(x, z, 0.05, 0.0, y0 - 0.1, 6, C['shSteel'])
-    for x, z in ((U(-STAIR_U[1] - 0.3), ez1 + 0.05), (U(-0.95), ez1 + 0.05), (U(-STAIR_U[1] - 0.3), Vz(STAIR[1]) - 0.3),
-                 (U(1.4), ez1 + 0.05), (U(STAIR_U[1] + 0.3), Vz(STAIR[1]) - 0.3)):
+    for x, z in ((ex0 - 0.05, ez0 - 0.05), (U(STAIR_U[1] + 0.3), Vz(STAIR[1]) - 0.3)):
         met.cyl(x, z, 0.05, 0.0, y0 - 0.1, 6, C['shSteel'])
-    # the wind screen along the east run's south side: glass in a frame, below a rail
+    # the wind screen along the east run's south side and across its west end, the beam a step beyond it: glass in a
+    # frame, below a rail
+    xa = ex0 - 0.05
+    for z0, z1 in ((ez0 - 0.05, (ez0 + ez1) / 2), ((ez0 + ez1) / 2, ez1 + 0.05)):
+        gl.quad_x(xa, z0 + 0.04, z1 - 0.04, 0.12, 1.0, -1, C['glass'], uv=True)
+        gl.quad_x(xa + 0.01, z0 + 0.04, z1 - 0.04, 0.12, 1.0, 1, mul(C['glass'], 0.85), uv=True)
+        met.box(xa - 0.03, xa + 0.03, 1.0, 1.04, z0, z1, C['shTrim'])
+        met.box(xa - 0.03, xa + 0.03, 0.08, 0.12, z0, z1, C['shTrim'])
+        met.box(xa - 0.02, xa + 0.02, 0.08, 1.04, z1 - 0.02, z1 + 0.02, C['shTrim'])
     za = ez1 + 0.05
-    x = U(STAIR_U[1] + 0.3)
+    x = xa
     while x < ex1 - 0.6:
         xb = min(ex1 - 0.05, x + 1.25)
         gl.quad_z(za, x + 0.04, xb - 0.04, 0.12, 1.0, 1, C['glass'], uv=True)
