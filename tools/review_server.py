@@ -17,7 +17,10 @@ notes/feedback-game/<time>/ with text.md, shot.png (git-ignored) and context.jso
 notes/feedback-log/ file. GET /api/feedback answers {"ok": true} so the game knows it can show the button.
 Both refuse anything not from this machine.
 
-GET /api/nav-private.js answers the private entries of the shared tool menu (tools/nav/nav.js), or an empty script.
+GET /private turns private mode on for this browser (a cookie) and opens the bible; GET /public turns it off. Private
+mode is the same site with the private additions (notes/tools/README.md): GET /api/nav-private.js answers the private
+registry for the shared tool menu (tools/nav/nav.js) in private mode, else an empty script, and the scene editor's API
+answers public scenes only outside it.
 
 GET .../game3d/build.json (the main checkout's or a worktree's) first runs that game3d's tools/stamp.py --if-stale:
 build.json is generated and never committed, so it is written when missing or when HEAD or the module list changed.
@@ -30,6 +33,7 @@ import subprocess
 import sys
 import threading
 import time
+import urllib.parse
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
@@ -51,6 +55,8 @@ REVIEWS = os.path.join(ROOT, 'reviews')
 SHOWCASE = os.path.join(ROOT, 'showcase')
 # Private Review items (git-ignored, listed only by the private bible); their answers never go to GitHub
 PRIVATE_REVIEWS = os.path.join(ROOT, 'island', 'private', 'rewards', 'reviews')
+# The one private registry: the bar entries and tool capabilities private mode adds (tools/nav/nav.js)
+PRIVATE_NAV = os.path.join(ROOT, 'island', 'private', 'bible', 'nav.js')
 MAX_BODY = 256 * 1024
 FEEDBACK = os.path.join(ROOT, 'notes', 'feedback-game')
 FEEDBACK_LOG = os.path.join(ROOT, 'notes', 'feedback-log')
@@ -196,9 +202,40 @@ class Handler(SimpleHTTPRequestHandler):
     def _local(self):
         return self.client_address[0] in ('127.0.0.1', '::1', '::ffff:127.0.0.1')
 
+    def _private_mode(self):
+        """Private mode is on: a local request carrying the cookie /private sets, with the private files present."""
+        cookie = self.headers.get('Cookie', '')
+        return (self._local() and re.search(r'(?:^|;\s*)amakawa_mode=private(?:;|$)', cookie) is not None
+                and os.path.isfile(PRIVATE_NAV) and os.environ.get('SUBPLOTS_PUBLIC_ONLY') != '1')
+
+    def _mode_switch(self, on):
+        self.send_response(302)
+        value = 'private; Max-Age=31536000' if on else '; Max-Age=0'
+        self.send_header('Set-Cookie', f'amakawa_mode={value}; Path=/; SameSite=Lax')
+        # ?to=/a/local/path goes back to the page that asked (a private page opened outside private mode)
+        to = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query).get('to', [''])[0]
+        self.send_header('Location', to if re.fullmatch(r'/(?!/)[^\s\\]*', to) else '/bible/')
+        self.send_header('Cache-Control', 'no-store')
+        self.end_headers()
+
+    def _public_scenes_only(self):
+        """Outside private mode the scene editor gets public scenes only: its full list becomes the public list, and a
+        private scene or the private image history is refused. Answers True when it has replied."""
+        url = self.path.split('?', 1)
+        if not url[0].startswith('/api/subplots/') or self._private_mode():
+            return False
+        query = url[1] if len(url) > 1 else ''
+        if url[0] == '/api/subplots/catalog' and re.search(r'(?:^|&)scope=all(?:&|$)', query):
+            self.path = '/api/subplots/catalog?' + re.sub(r'(?:^|&)scope=all(?=&|$)', '', query).lstrip('&')
+            return False
+        if re.search(r'(?:^|&)(scope=local|id=(?!public%3A|public:)[^&]+)(?:&|$)', query):
+            self._json(403, {'error': 'Private scenes open in private mode: http://127.0.0.1:8771/private'})
+            return True
+        return False
+
     def do_GET(self):
         from subplots.api import handle as subplot_request
-        if subplot_request(self):
+        if self._public_scenes_only() or subplot_request(self):
             return
         if self.path.split('?')[0] == '/api/feedback':
             return self._json(200 if self._local() else 403, {'ok': self._local()})
@@ -215,10 +252,8 @@ class Handler(SimpleHTTPRequestHandler):
                 return self._json(200, {'items': None, 'stale': [], 'repo': work.REPO_URL, 'error': str(e)[:300]})
         if path == '/game3d/build.json' or path.endswith('/game3d/build.json'):
             stamp_build(path)
-        if path in ('/private', '/private/'):
-            # the local hub with the private pages (the private bible home, which carries the shared private menu; local server only, never published)
-            self.send_response(302); self.send_header('Location', '/island/private/bible/'); self.end_headers()
-            return
+        if path in ('/private', '/private/', '/public', '/public/'):
+            return self._mode_switch(path.startswith('/private') and self._local())
         if path == '/api/nav-private.js':
             return self._nav_private()
         if path == '/api/plugins':
@@ -230,13 +265,11 @@ class Handler(SimpleHTTPRequestHandler):
         return super().do_GET()
 
     def _nav_private(self):
-        """GET /api/nav-private.js: the private entries of the shared tool menu (tools/nav/nav.js). It answers 200 either
-        way, so a page never logs a 404: the private menu file when it exists here and the request is local, else a
-        script that does nothing. SUBPLOTS_PUBLIC_ONLY=1 (the browser tests) always gets the empty one."""
-        body = b'/* no private pages on this machine */\n'
-        f = os.path.join(ROOT, 'island', 'private', 'bible', 'nav.js')
-        if self._local() and os.path.isfile(f) and os.environ.get('SUBPLOTS_PUBLIC_ONLY') != '1':
-            with open(f, 'rb') as fh:
+        """GET /api/nav-private.js: the private registry for the shared tool menu (tools/nav/nav.js) in private mode, else
+        a script that does nothing; 200 either way, so a page never logs a 404."""
+        body = b'/* private mode is off: http://127.0.0.1:8771/private */\n'
+        if self._private_mode():
+            with open(PRIVATE_NAV, 'rb') as fh:
                 body = fh.read()
         self.send_response(200)
         self.send_header('Content-Type', 'text/javascript; charset=utf-8')

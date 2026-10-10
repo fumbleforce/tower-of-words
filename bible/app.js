@@ -2,7 +2,7 @@
 //  - Live (bible/live.js): read from the repo at load time: the game facts docs (docs/game/), story files, words,
 //    portraits, GUIDE quotes, approved art, design notes, build ids. These can't go stale.
 //  - Static (bible/data.json, from tools/bible/build.py): the hand-kept facts in bible/facts.yaml, review pages
-//    (needs git), prompts, and island/private/bible/private.json on the private page.
+//    (needs git), prompts, plus the private bible data in private mode (its path comes from the private registry).
 // Review (reviews/) and Showcase (showcase/) are read live too, and Jørgen's answers are saved through tools/review_server.py.
 // Work (bible/work.js) lists the work tracker's GitHub issues, read through the server's /api/work.
 // Paths in the data are relative to the repo root. Plain JS, no build step; ./start serves the repo.
@@ -11,9 +11,16 @@
 const ROOT = window.BIBLE_ROOT || '../';
 const REMOTE = !!window.BIBLE_REMOTE || /\.github\.io$/.test(location.hostname);
 // The shared tool menu (tools/nav/nav.js) is only on the local server; the public site has no other tools to go to.
-if (!REMOTE) document.head.append(Object.assign(document.createElement('script'), { src: ROOT + 'tools/nav/nav.js' }));
+// In private mode (http://127.0.0.1:8771/private) the menu's private registry gives the bible its private additions:
+// capability('bible') = { data: the private bible JSON, reviews: the private Review folder }, paths from the repo root.
+const NAV_READY = REMOTE ? Promise.resolve() : new Promise((done) => {
+  const s = Object.assign(document.createElement('script'), { src: ROOT + 'tools/nav/nav.js' });
+  s.onload = () => (window.AmakawaNav?.ready || Promise.resolve()).then(done);
+  s.onerror = done;
+  document.head.append(s);
+});
 const REPO_URL = 'https://github.com/fumbleforce/tower-of-words';
-const PRIVATE_URL = window.BIBLE_PRIVATE || null;
+let PRIVATE_URL = null;
 const DATA_URL = window.BIBLE_DATA || 'data.json';
 const HERE = document.currentScript ? document.currentScript.src : location.href;
 let D = null, P = null, L = null, LIVE = null, INDEX = null, WORK = null;
@@ -1091,6 +1098,9 @@ function renderNav() {
 }
 
 async function init() {
+  await NAV_READY;
+  const priv = window.AmakawaNav?.capability('bible');
+  if (priv) { PRIVATE_URL = ROOT + priv.data; window.BIBLE_PRIVATE_REVIEWS = priv.reviews; }
   const [d, p] = await Promise.all([
     fetch(DATA_URL, { cache: 'no-cache' }).then((r) => r.json()),
     PRIVATE_URL ? fetch(PRIVATE_URL, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null) : null,
