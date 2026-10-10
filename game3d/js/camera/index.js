@@ -2,6 +2,7 @@ import { settings, onSettings } from '../settings.js';
 import { followAvailable, followAllowed } from './policy.js';
 import { followCamera } from './follow.js';
 import { followControls } from './controls.js';
+import { installUserView } from './user-view.js';
 
 export function installFollowCamera(game, canvas) {
   let place = null,
@@ -16,6 +17,8 @@ export function installFollowCamera(game, canvas) {
       pointerLock: !!canvas.requestPointerLock,
     });
   const allowed = () => settings.cameraMode === 'follow' && followAllowed(game, desktop());
+  const stepUserView = installUserView(game, canvas); // wheel zoom, middle-drag turn, the Camera button
+  let lastT = performance.now();
   const controls = followControls(game, canvas, {
     available: () => active && !held,
     look: (x, y) => lens?.look(x, y),
@@ -61,6 +64,9 @@ export function installFollowCamera(game, canvas) {
       };
     },
     beforeStep() {
+      const now = performance.now();
+      stepUserView(Math.min(0.1, (now - lastT) / 1000));
+      lastT = now;
       lens?.restore();
       refresh();
       if (active && game.walker) game.walker.keyFrame = lens.movementFrame();

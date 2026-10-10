@@ -308,17 +308,6 @@ for (const type of ['pointerup', 'pointercancel'])
     },
     true,
   );
-// the wheel up opens the backlog (over the game, not over a panel that scrolls)
-window.addEventListener(
-  'wheel',
-  (e) => {
-    if (e.deltaY >= 0 || logOpen() || vn.hidden || blocked() || !ui) return;
-    if (!e.target.closest?.('#c, #talk, #talkHit, #stage, #marks') && e.target.id !== 'ui') return;
-    showLog();
-  },
-  { passive: true },
-);
-
 // ---------- a controller: the same actions as the keys ----------
 const PAD = {
   0: 'Space',

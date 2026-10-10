@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { HF } from '../train/car.js';
 import { cameraObstruction } from './obstruction.js';
 import { playerFraming } from './framing.js';
+import { userView } from './user-view.js';
 
 // The approved 1c lens. Authored cameras continue to update underneath; their exact pose/lens is restored
 // before the next step, resize, pause or scene, so their fitting never uses this camera's field of view.
@@ -96,8 +97,9 @@ export function followCamera(game, place) {
       pivot.copy(feet);
       pivot.y += 1.12 * (place.charScale || 1) * 0.85;
       target.copy(pivot).addScaledVector(forward, 1.2);
-      desired.copy(feet).addScaledVector(forward, -3.6 * Math.cos(pitch));
-      desired.y += 2.8 + 3.6 * Math.sin(pitch);
+      const zoom = userView.f; // the wheel (camera/user-view.js)
+      desired.copy(feet).addScaledVector(forward, -3.6 * zoom * Math.cos(pitch));
+      desired.y += (2.8 + 3.6 * Math.sin(pitch)) * zoom;
       local.copy(desired);
       place.space.worldToLocal(local);
       if (place.name === 'train') local.y = Math.min(local.y, HF - 0.17);
