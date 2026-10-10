@@ -2,7 +2,8 @@
 // tabs; at the title it is Continue (load only). Save lists the quick slot, the autosave (it can't be written by
 // hand) and the twelve slots; Load lists the saves there are. Each card: the picture taken when it was saved, the
 // slot's name and the real time, the place, the day and period, and the goal or line. Replacing a save and loading
-// over progress ask first (actions.js confirm). Desktop: a centred panel with two columns of cards; phone: a sheet
+// over progress ask first (actions.js confirm). Export and Import (transfer.js) sit under the list: Export asks which
+// save to write to a file, Import reads a file, checks it, and asks which slot it goes in. Desktop: a centred panel with two columns of cards; phone: a sheet
 // from the bottom with one. The panel never grows past the screen (css/saves.css); the list scrolls inside it.
 // Keys: arrows move through the cards (Up and Down by row), Left and Right or PageUp and PageDown change tab, Tab
 // stays inside, Esc closes (menu.js).
@@ -11,6 +12,7 @@ import { sfx } from '../ui.js';
 import { el } from '../ui/dom.js';
 import { ALL_IDS, slotLabel } from './store.js';
 import { fmtTime, placeName, dayPeriod } from './actions.js';
+import { exportText, exportName, parseSave, saveFile, openFile } from './transfer.js';
 
 const esc = (t) =>
   String(t || '')
@@ -22,7 +24,9 @@ const X = '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 export function savesView({ saving, openLayer, closeLayer, trap, thumbNow }) {
   const { store } = saving;
   let s = null,
-    mode = 'load';
+    mode = 'load',
+    pick = null, // 'export' (which save goes to a file) or 'import' (which slot the file goes in)
+    incoming = null; // the checked file waiting for its slot
   const inGame = () => !document.body.classList.contains('at-title') && !!window.__game?.place;
 
   function build() {
@@ -36,7 +40,8 @@ export function savesView({ saving, openLayer, closeLayer, trap, thumbNow }) {
           <div class="modes" role="tablist" aria-label="Save or load"><button type="button" role="tab" data-mode="save">Save</button><button type="button" role="tab" data-mode="load">Load</button></div>
           <button type="button" class="x" data-close aria-label="Close">${X}</button></header>
         <div class="slots mlist" role="list"></div>
-        <p class="note" aria-live="polite"></p>
+        <footer class="sfoot"><p class="note" aria-live="polite"></p>
+          <div class="xfer"><button type="button" data-x="export">Export</button><button type="button" data-x="import">Import</button><button type="button" data-x="cancel">Cancel</button></div></footer>
       </section>`,
     );
     s.id = 'saves';
@@ -48,9 +53,21 @@ export function savesView({ saving, openLayer, closeLayer, trap, thumbNow }) {
         (b.onclick = () => {
           if (b.dataset.mode === mode) return;
           sfx('tap');
+          pick = incoming = null;
           render(b.dataset.mode, { focusTab: true });
         }),
     );
+    s.querySelector('[data-x="export"]').onclick = () => {
+      sfx('tap');
+      pick = 'export';
+      render(mode, { note: 'Choose the save to export.' });
+    };
+    s.querySelector('[data-x="import"]').onclick = importFile;
+    s.querySelector('[data-x="cancel"]').onclick = () => {
+      sfx('tap');
+      pick = incoming = null;
+      render(mode);
+    };
     s.addEventListener('keydown', keys);
     return s;
   }
@@ -62,6 +79,7 @@ export function savesView({ saving, openLayer, closeLayer, trap, thumbNow }) {
       tabs.length &&
       (e.key === 'PageUp' || e.key === 'PageDown' || (tabs.includes(a) && /^Arrow(Left|Right)$/.test(e.key)))
     ) {
+      pick = incoming = null;
       render(mode === 'save' ? 'load' : 'save', { focusTab: tabs.includes(a) });
       sfx('tap');
       e.preventDefault();
@@ -96,7 +114,14 @@ export function savesView({ saving, openLayer, closeLayer, trap, thumbNow }) {
     b.type = 'button';
     b.dataset.id = id;
     b.setAttribute('role', 'listitem');
-    const empty = id === 'auto' ? 'Saves by itself at each new place' : mode === 'save' ? 'Empty. Save here' : 'Empty';
+    const empty =
+      id === 'auto'
+        ? 'Saves by itself at each new place'
+        : pick === 'import'
+          ? 'Empty. Import here'
+          : mode === 'save'
+            ? 'Empty. Save here'
+            : 'Empty';
     b.innerHTML =
       `<span class="thumb"><span class="blank"></span></span><span class="meta">` +
       `<span class="top"><span class="nm">${label}</span>${info?.at ? `<span class="at">${esc(fmtTime(info.at))}</span>` : ''}</span>` +
@@ -136,12 +161,22 @@ export function savesView({ saving, openLayer, closeLayer, trap, thumbNow }) {
     });
     const list = s.querySelector('.slots');
     list.innerHTML = '';
+    s.dataset.pick = pick || '';
+    const writing = pick === 'import' || (!pick && mode === 'save');
     for (const id of ALL_IDS) {
       const info = store.info(id);
-      if (mode === 'load' && !info) continue;
+      if (!writing && !info) continue;
+      if (pick === 'import' && id === 'auto') continue;
       const c = card(id, info);
-      if (mode === 'save' && id === 'auto') c.disabled = true;
-      c.onclick = () => (mode === 'save' ? saveInto(id, info) : saving.loadAsking(info));
+      if (writing && id === 'auto') c.disabled = true;
+      c.onclick = () =>
+        pick === 'export'
+          ? exportSlot(id, info)
+          : pick === 'import'
+            ? importInto(id, info)
+            : mode === 'save'
+              ? saveInto(id, info)
+              : saving.loadAsking(info);
       list.appendChild(c);
     }
     if (!list.children.length) list.appendChild(el('p', 'none', 'No saves yet.'));
@@ -180,8 +215,61 @@ export function savesView({ saving, openLayer, closeLayer, trap, thumbNow }) {
     if (ok) s.querySelector(`.slot[data-id="${id}"]`)?.classList.add('just');
   }
 
+  async function exportSlot(id, info) {
+    sfx('tap');
+    pick = null;
+    const r = await saveFile(exportName(info), exportText(info, await store.thumb(id))).catch((e) => ({
+      ok: false,
+      error: e?.message,
+    }));
+    render(mode, {
+      focusId: id,
+      note: r.ok ? `Exported ${slotLabel(id)}.` : r.canceled ? '' : "Couldn't write the file.",
+    });
+  }
+
+  // the file picker opens from the click itself (a browser only allows it then)
+  async function importFile() {
+    sfx('tap');
+    pick = incoming = null;
+    const got = await openFile().catch(() => ({ ok: false }));
+    if (!got.ok) return render(mode, { note: got.canceled ? '' : "Couldn't read the file." });
+    const check = parseSave(got.text);
+    if (!check.ok) return render(mode, { note: check.error });
+    pick = 'import';
+    incoming = check.slot;
+    const d = check.slot.data;
+    render(mode, {
+      note: `Choose a slot for the imported save (${placeName(d.place)} · ${dayPeriod({ day: d.day, period: d.period })}).`,
+    });
+  }
+
+  async function importInto(id, info) {
+    sfx('tap');
+    if (
+      info &&
+      !(await saving.confirm({
+        title: `Replace ${slotLabel(id)}?`,
+        where: `${placeName(info.place)} · ${dayPeriod(info)} · saved ${fmtTime(info.at)}`,
+        text: 'The save in this slot is replaced with the imported one.',
+        yes: 'Replace',
+        no: 'Cancel',
+      }))
+    )
+      return;
+    const ok = !!incoming && (await store.write(id, incoming));
+    pick = incoming = null;
+    if (ok) sfx('ok');
+    render('load', {
+      focusId: id,
+      note: ok ? `Imported into ${slotLabel(id)}.` : "Couldn't save: this browser isn't keeping data for the game.",
+    });
+    if (ok) s.querySelector(`.slot[data-id="${id}"]`)?.classList.add('just');
+  }
+
   return {
     open(m) {
+      pick = incoming = null;
       const v = render(m);
       openLayer(v, () => closeLayer(v));
     },
