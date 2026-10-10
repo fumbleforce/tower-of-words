@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { grass } from '../outdoor/planting.js';
 import { quarterCover } from '../campus/quarter-plan.js';
 import { ARRIVAL_GARDENS } from './arrival-garden-plan.js';
+import { BED_FLUSH } from '../outdoor/walk-edges.js';
 
 // Broad, overlapping cushions use only eight visible faces. The original shrubs
 // and trunks stay in place; this lower layer connects them to their planted ground.
@@ -21,34 +22,27 @@ export function arrivalGardens(p, { foundations = false, northStreet = false } =
   for (const bed of ARRIVAL_GARDENS) {
     if (bed.id.startsWith('gym-foundation') !== foundations) continue;
     if (bed.id.startsWith('north-street') !== northStreet) continue;
-    const shape = new THREE.Shape(bed.poly.map(([x, z]) => new THREE.Vector2(x, -z)));
-    // Replace the grove's old 3 cm soil and understorey while retaining its trees.
-    // The gym foundation beds keep their existing 6 cm soil beneath this cover.
-    const y = 0.13;
-    p.geo('#59614d', new THREE.ShapeGeometry(shape).rotateX(-Math.PI / 2).translate(0, y, 0), {
-      cast: false,
-      surf: 'soil',
-    });
-    const sides = [];
-    bed.poly.forEach(([x, z], i) => {
-      const [xx, zz] = bed.poly[(i + 1) % bed.poly.length];
-      sides.push(x, 0, z, xx, y, zz, xx, 0, zz, x, 0, z, x, y, z, xx, y, zz);
-    });
-    const skirt = new THREE.BufferGeometry();
-    skirt.setAttribute('position', new THREE.Float32BufferAttribute(sides, 3));
-    skirt.computeVertexNormals();
-    p.geo('#59614d', skirt, { cast: false, surf: 'soil' });
-    quarterCover(bed).forEach(({ x, z, r }, i) =>
-      p.geo(
-        ['#486849', '#4b6b4b', '#4e6d4c'][i % 3],
-        cushion(r)
-          .scale(1, 0.055 / r, 0.96)
-          .rotateY(i * 2.39996)
-          .translate(x, y, z),
-        { cast: false, surf: 'foliage' },
-      ),
-    );
-    bed.masses.forEach(([x, z, r], i) => {
+    // flush with the lawn, one footprint, no raised face (notes/grounds-system.md); a bed with no walk beside it is
+    // only its plants, loose on the lawn (outdoor/bed-layout.js)
+    const y = BED_FLUSH;
+    if (!bed.loose) {
+      const shape = new THREE.Shape(bed.poly.map(([x, z]) => new THREE.Vector2(x, -z)));
+      p.geo('#59614d', new THREE.ShapeGeometry(shape).rotateX(-Math.PI / 2).translate(0, y, 0), {
+        cast: false,
+        surf: 'soil',
+      });
+      quarterCover(bed).forEach(({ x, z, r }, i) =>
+        p.geo(
+          ['#486849', '#4b6b4b', '#4e6d4c'][i % 3],
+          cushion(r)
+            .scale(1, 0.055 / r, 0.96)
+            .rotateY(i * 2.39996)
+            .translate(x, y, z),
+          { cast: false, surf: 'foliage' },
+        ),
+      );
+    }
+    [...bed.masses, ...(bed.looseMasses || [])].forEach(([x, z, r], i) => {
       for (let j = 0; j < 5; j++) {
         const a = i * 2.39996 + j * 2.1;
         p.geo(
@@ -69,7 +63,8 @@ export function arrivalGardens(p, { foundations = false, northStreet = false } =
         p.geo(color, g.translate(0, y, 0), opts);
       },
     };
-    bed.grasses.forEach(([x, z], i) => {
+    const grasses = [...bed.grasses, ...(bed.looseGrasses || [])];
+    grasses.forEach(([x, z], i) => {
       for (let j = 0; j < (bed.masses.length && i % 3 !== 0 ? 2 : 1); j++)
         grass(planted, x + j * 0.13, z - j * 0.1, { h: 0.38 + j * 0.12, seed: bed.seed + i * 7 + j });
     });

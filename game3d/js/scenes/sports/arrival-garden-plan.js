@@ -1,7 +1,11 @@
-import { roundCorners } from '../campus/quarter-plan.js';
+import { alignBeds } from '../outdoor/bed-layout.js';
+import { WALKS as I_WALKS_LOCAL, NS, pt } from './plan.js';
 
 // Island coordinates: a shared source for the sports place, neighboring bands and map.
 // Existing avenue and grove trees remain in grounds.js with their original seeds.
+// The two gardens planned as free shapes on the lawn (the turn's, and r3's south of its walk) are laid as strips
+// along the walk they border (outdoor/bed-layout.js; GUIDE: no blob-shaped beds); the rest are strips already,
+// along the gym's and r3's walls.
 const beds = [
   {
     id: 'sports-turn',
@@ -102,13 +106,16 @@ const beds = [
     cover: { radius: 0.22, variation: 0.055, spacing: 0.32 },
   })),
 ];
-export const ARRIVAL_GARDENS = beds.map((b) => ({
-  ...b,
-  poly: roundCorners(b.poly),
-  cover: b.cover || {
-    radius: 0.34,
-    variation: 0.15,
-    spacing: 0.5,
-    drifts: b.masses.map(([x, z, r]) => [x, z, r * 2.7, r * 2.1]),
-  },
-}));
+// the walks in the island frame (plan.js WALKS is in the chunk's), and the whole north street (walked on south of
+// here in the east lane)
+const [ox, oz] = pt([0, 0]);
+const WALKS = [...I_WALKS_LOCAL.map(([x0, x1, z0, z1]) => [x0 - ox, x1 - ox, z0 - oz, z1 - oz]), NS];
+const FREE = ['sports-turn', 'north-street-office-south'];
+const COVER = { radius: 0.34, variation: 0.15, spacing: 0.5 };
+export const ARRIVAL_GARDENS = [
+  ...alignBeds(
+    beds.filter((b) => FREE.includes(b.id)),
+    WALKS,
+  ).map((b) => ({ ...b, cover: COVER })),
+  ...beds.filter((b) => !FREE.includes(b.id)).map((b) => ({ ...b, cover: b.cover || COVER })),
+];

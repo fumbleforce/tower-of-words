@@ -12,9 +12,15 @@
 // lane shows them, with r3's and block_e3's fronts (plaza/east-fronts.js); the town round it the layout (skyline.js).
 // The camera turns: north over the lane and the pool walk, north-east at the pavilion, east along the courts walk
 // (places/sports.js eases it).
-// Evening: the lamps, the gym's glass, the pavilion's windows and the town's windows light up.
+// Evening: the lamps, the west court's floodlights, the gym's glass, the pavilion's windows and the town's windows
+// light up.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
+import { buildKit } from '../kit/core/build.js';
+import { lightUp } from '../kit/light/glow.js';
+import { applyGround } from '../movement/walk-ground.js';
+import { walkEdges } from './outdoor/walk-edges.js';
+import { ground, WALK_AREA } from './sports/ground.js';
 import { outdoorLight, sunFollow, TOWN } from './town.js';
 import * as LAYOUT from './island-layout.js';
 import { skylineSteps } from './skyline.js';
@@ -53,7 +59,7 @@ export const buildSports = (ground) => drain(sportsSteps(ground));
 // ground: what is walked, in the chunk's frame (the streets and walks and the west tennis court by default; the pool
 // deck walks the deck, in the same world: places/pool.js): { walks, blocks, start }
 export function* sportsSteps({
-  walks = [...P.WALKS, ...CP.WALKS],
+  walks = null,
   blocks = [...P.FURNITURE, ...CP.BLOCKS],
   start = P.IN,
   poolInterior = false,
@@ -66,10 +72,15 @@ export function* sportsSteps({
   let shadows = sunFollow(sun); // the district is long: the sun's shadow box follows Eric
   shadows.follow(...start);
 
-  // walkable: the streets and walks (plan.js WALKS), never what stands on them
-  const [bx0, bx1, bz0, bz1] = P.boundsOf(walks);
-  const nav = new Nav(bx0 - 0.2, bx1 + 0.2, bz0 - 0.2, bz1 + 0.2, 0.12);
-  nav.extra = (x, z) => walks.some((r) => inRect(x, z, r, -0.02));
+  // one walkable ground for the walk grid and the kerbs (sports/ground.js); the pool deck walks its own ground in the
+  // same world (places/pool.js), and sees the same kerbs
+  const walkable = ground();
+  let nav;
+  if (walks) {
+    const [bx0, bx1, bz0, bz1] = P.boundsOf(walks);
+    nav = new Nav(bx0 - 0.2, bx1 + 0.2, bz0 - 0.2, bz1 + 0.2, 0.12);
+    nav.extra = (x, z) => walks.some((r) => inRect(x, z, r, -0.02));
+  } else nav = applyGround(new Nav(...WALK_AREA, 0.12), walkable);
   for (const r of blocks) nav.block(...r);
 
   // everything of its own is laid in the island frame, in a group moved into the chunk's
@@ -87,14 +98,20 @@ export function* sportsSteps({
     wg = placeIn(new THREE.Group(), CHUNK);
   const pool = yield* poolSteps(isl, p, c.parts, c.paver, signs, lights, { interior: poolInterior });
   yield* groundsSteps(c, lights, signs, isl);
-  courts(c.parts, signs);
+  const flood = new Parts(); // the west court's floodlights' heads and light (kit lamp 'flood')
+  courts(c.parts, signs, { lights: flood });
   const sets = blockSets();
-  yield* linkSteps(c.paver, c.parts, lights, isl);
+  yield* linkSteps(c.paver, c.parts, lights, isl, { ground: true });
   yield* streetSteps(c.paver, c.parts, lights, [STREET_W, PAVE_W]);
   yield* rowSteps(sets, c.paver, c.parts, signs, lights, OFFICES);
   yield* c.paver.build(wg);
   for (const m of yield* c.parts.build(wg)) m.castShadow = false;
   p.build(isl);
+  const floods = buildKit(flood, isl, { poolY: 0.05 });
+  // the kerbs, in the chunk's own frame (the ground's)
+  const kerbs = new Parts();
+  walkEdges(kerbs, walkable);
+  for (const m of kerbs.build(root)) m.castShadow = false;
   const offices = buildBlockSets(sets, isl);
   const lit = lights.build(isl, { poolY: 0.03 });
   const sg = signs.build(isl);
@@ -169,6 +186,7 @@ export function* sportsSteps({
       nooks.evening();
       if (offices.lit) offices.lit.visible = true;
       sky.onPeriod('evening');
+      lightUp(floods.glows);
     },
     morning() {
       for (const [light, intensity, color, ground] of dayLights) {

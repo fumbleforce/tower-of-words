@@ -36,6 +36,7 @@ const { BUILDINGS } = await import('../../js/scenes/island-layout.js');
 const { BLOCKS } = await import('../../js/scenes/plaza/east-plan.js');
 const { ARRIVAL_GARDENS } = await import('../../js/scenes/sports/arrival-garden-plan.js');
 const { drawPlanting } = await import('../../js/ui/map/terrain.js');
+const { BED_FLUSH } = await import('../../js/scenes/outdoor/walk-edges.js');
 const geometries = (p) => [...p.sets.values()].flatMap((s) => s.list);
 
 test('sports arrival planting keeps every vertex off native paths and buildings', () => {
@@ -54,7 +55,8 @@ test('sports arrival planting keeps every vertex off native paths and buildings'
         !BUILDINGS.some(({ rect: r }) => r && P.inRect(v.getX(i), v.getZ(i), [r[0], r[2], r[1], r[3]])),
         `solid intrusion ${v.getX(i)},${v.getZ(i)}`,
       );
-      assert.ok(v.getY(i) >= 0 && v.getY(i) < 1.2, 'grounded low planting');
+      // flush with the lawn: shrub and grass bases may sit a little in the ground
+      assert.ok(v.getY(i) >= -0.1 && v.getY(i) < 1.2, 'grounded low planting');
     }
     g.dispose();
   }
@@ -130,7 +132,7 @@ test('r3 shares its soil and original seed-330 trees across collector frames', a
     northFront(p, new Parts(), { ...k, rect: k.rect.map((v, i) => v + (i < 2 ? dx : dz)), at: k.at + dz }, '#ccc');
     assert.deepEqual(trees, expected, 'same species, roots, scales and seeds');
     const soil = [...p.sets.values()].filter((s) => s.surf === 'soil').flatMap((s) => s.list);
-    assert.equal(soil.length, 4, 'both shared gardens have top and grounded perimeter');
+    assert.equal(soil.length, 2, 'both shared gardens have their soil, flush with the lawn');
     snapshots.push(
       soil.flatMap((g) => {
         const v = g.attributes.position,
@@ -153,7 +155,7 @@ test('the map includes the exact sports arrival garden outlines', () => {
   const soil = [...parts.sets.values()].filter((s) => s.surf === 'soil').flatMap((s) => s.list);
   for (const bed of ARRIVAL_GARDENS)
     for (const [x, z] of bed.poly)
-      for (const y of [0, 0.13])
+      for (const y of [BED_FLUSH])
         assert.ok(
           soil.some((g) => {
             const v = g.attributes.position;
@@ -161,7 +163,7 @@ test('the map includes the exact sports arrival garden outlines', () => {
               if (Math.hypot(v.getX(i) - x, v.getY(i) - y, v.getZ(i) - z) < 1e-5) return true;
             return false;
           }),
-          bed.id + ' soil meets the ground at every edge',
+          bed.id + ' soil lies on the outline, flush with the lawn',
         );
   geometries(parts).forEach((g) => g.dispose());
 

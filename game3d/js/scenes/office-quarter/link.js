@@ -34,16 +34,20 @@ function* paving(pv) {
   yield;
 }
 
-function* edges(p, lights, signRoot) {
+// ground: the place draws the kerbs from its walkable ground (movement/walk-ground.js; the sports ground does), so
+// none are laid here and the verges' beds lie flush
+function* edges(p, lights, signRoot, ground) {
   // the outer kerbs: the street's north side, the corner's east side, gym_link's east side, the lane's north side
-  kerb(p, [PAVE_W, S[2]], [L[1], S[2]], { off: -0.08 });
-  kerb(p, [L[1], S[2]], [L[1], LANE[2]], { off: 0.08 });
-  kerb(p, [L[1], LANE[2]], [LINK_E, LANE[2]], { off: -0.08 });
+  if (!ground) {
+    kerb(p, [PAVE_W, S[2]], [L[1], S[2]], { off: -0.08 });
+    kerb(p, [L[1], S[2]], [L[1], LANE[2]], { off: 0.08 });
+    kerb(p, [L[1], LANE[2]], [LINK_E, LANE[2]], { off: -0.08 });
+  }
   // the verges: the street's south side to the corner, gym_link's west side down to the lane, the lane's south side
-  verge(p, [PAVE_W, S[3]], [L[0] - V, S[3]], 's', { seed: 61 });
-  kerb(p, [L[0] - V, S[3]], [L[0], S[3]], { off: 0.08 });
-  verge(p, [L[0], S[3]], [L[0], LANE[3]], 'w', { seed: 63 });
-  verge(p, [L[0] - V, LANE[3]], [LINK_E, LANE[3]], 's', { seed: 65 });
+  verge(p, [PAVE_W, S[3]], [L[0] - V, S[3]], 's', { seed: 61, ground });
+  if (!ground) kerb(p, [L[0] - V, S[3]], [L[0], S[3]], { off: 0.08 });
+  verge(p, [L[0], S[3]], [L[0], LANE[3]], 'w', { seed: 63, ground });
+  verge(p, [L[0] - V, LANE[3]], [LINK_E, LANE[3]], 's', { seed: 65, ground });
   // their pools on the paving they light, not the lawn behind the verge
   const [street, link, lane] = P.LINK_LAMPS;
   lamps(lights, p, [street, lane], { pool: 1.2, poolShift: [0, -0.6] });
@@ -70,13 +74,14 @@ function* edges(p, lights, signRoot) {
     {
       seed: 69,
       pitch: 3.2,
+      soil: false, // on the lawn: a plot of soil reads as a raised step in the grass (notes/grounds-system.md)
     },
   );
 }
 
 // pv: a paver; p: a Parts collector (or cells' parts); lights: a lightSet; signRoot: the group the finger sign's
 // boards go in
-export function* linkSteps(pv, p, lights, signRoot) {
+export function* linkSteps(pv, p, lights, signRoot, { ground = false } = {}) {
   yield* paving(pv);
-  yield* edges(p, lights, signRoot);
+  yield* edges(p, lights, signRoot, ground);
 }

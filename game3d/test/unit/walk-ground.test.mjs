@@ -196,10 +196,14 @@ const CP = await import('../../js/scenes/campus/plan.js');
 const FG = await import('../../js/scenes/forecourt/ground.js');
 const CG = await import('../../js/scenes/campus/ground.js');
 const FP = await import('../../js/scenes/forecourt/plan.js');
+const SG = await import('../../js/scenes/sports/ground.js');
+const SP = await import('../../js/scenes/sports/plan.js');
+const SCP = await import('../../js/scenes/sports/court-plan.js');
 
 for (const [name, g] of [
   ['forecourt', FG.ground()],
   ['campus', CG.ground()],
+  ['sports', SG.ground()],
 ]) {
   test(`${name}: every place the walk grid stops him shows why (a kerb or a named barrier, never a seam)`, () => {
     const seams = g.stops.filter((e) => e.kind === 'seam');
@@ -262,10 +266,13 @@ const KNOWN_ENDS = {
   // the campus's east path meets the office quarter's paving at the chunk's edge, with no trip there yet (#362 stage 2
   // looks at the seams between places)
   '19.95,29.74,-32.35,-29.35 e': 'the chunk edge',
+  // the sports ground's grove bench nook: a pad off the pool walk with the bench and its tree at the end
+  '-4.3,-0.95,-26.2,-23.6 w': 'the grove bench',
 };
 for (const [name, g] of [
   ['forecourt', FG.ground()],
   ['campus', CG.ground()],
+  ['sports', SG.ground()],
 ])
   test(`${name}: no path ends in a kerb with nothing at its end`, () =>
     assert.deepEqual(
@@ -346,4 +353,48 @@ test('forecourt: the ground reaches the garden court, the bench bays, the shed s
   // lawn beside the gravel court and past the court's east edge stays off limits
   assert.equal(nav.free(FP.GARDEN_COURT[1] + 0.3, FP.GARDEN_COURT[2] + 1), false);
   assert.equal(nav.free(FP.LE + 0.3, 1.5), false);
+});
+
+// the sports ground's scene needs the browser's canvas for its signs; its ground alone is checked here
+test('sports: the ground reaches every way out, both doors, the court, the bench bays and the nooks', () => {
+  const nav = applyGround(new Nav(...SG.WALK_AREA, 0.12), SG.ground());
+  for (const r of [...SP.FURNITURE, ...SCP.BLOCKS]) nav.block(...r);
+  const targets = {
+    ...Object.fromEntries(Object.entries(SP.EXITS).flatMap(([to, e]) => [[to, e.lane], ...(e.in ? [[to + ' in', e.in]] : [])])),
+    ...Object.fromEntries(SP.DOORS.map((d) => [d.id, d.step])),
+    ...SCP.SPOTS,
+    bay: [(SP.BAY_WALKS[0][0] + SP.BAY_WALKS[0][1]) / 2, SP.BAY_WALKS[0][2] + 0.4],
+    courtside: [(SP.NOOKS[0].walks[0][0] + SP.NOOKS[0].walks[0][1]) / 2, SP.NOOKS[0].walks[0][2] + 0.6],
+  };
+  for (const [id, p] of Object.entries(targets)) {
+    assert.ok(nav.free(...p), `${id} blocked ${p}`);
+    assert.ok(nav.path(...SP.IN, ...p)?.length, `${id} unreachable ${p}`);
+  }
+  // the lawn in the corner between the lane, the pool walk and the courts walk stays off limits
+  assert.equal(nav.free(5, 5), false);
+});
+
+const { ARRIVAL_GARDENS } = await import('../../js/scenes/sports/arrival-garden-plan.js');
+test('sports: every arrival garden is a strip along a walk or a wall, never a free shape on the lawn', () => {
+  const g = SG.ground(),
+    [ax, az] = CHUNKS.sports.at;
+  for (const bed of ARRIVAL_GARDENS) {
+    const xs = bed.poly.map((p) => p[0]),
+      zs = bed.poly.map((p) => p[1]);
+    assert.equal(bed.poly.length, 4, bed.id);
+    assert.ok(Math.min(Math.max(...xs) - Math.min(...xs), Math.max(...zs) - Math.min(...zs)) <= 1.5 + 1e-6, bed.id);
+    if (!bed.strip) continue; // the gym's and r3's foundation strips, along their walls
+    const [x0, x1, z0, z1] = bed.strip.map((v, i) => v - (i < 2 ? ax : az));
+    const kerbAt = (out, line, a, b) =>
+      g.edges.some(
+        (e) => e.kind === 'kerb' && e.out === out && Math.abs(e.line - line) < 1e-3 && e.s0 < b - 0.5 && e.s1 > a + 0.5,
+      );
+    assert.ok(
+      kerbAt('e', x0 - 0.16, z0, z1) ||
+        kerbAt('w', x1 + 0.16, z0, z1) ||
+        kerbAt('s', z0 - 0.16, x0, x1) ||
+        kerbAt('n', z1 + 0.16, x0, x1),
+      `${bed.id} stands behind no kerb`,
+    );
+  }
 });
