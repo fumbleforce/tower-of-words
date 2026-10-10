@@ -150,19 +150,27 @@ def scene_runs(scene_id, runs, found):
     return out
 
 HISTORY_CACHE = {}
+REQUEST = threading.local()  # .private: this request came in private mode (the image service then shows private renders)
+
+def image_headers():
+    """Headers for a call to the image service: private mode passes on as the same cookie /private sets."""
+    return {'Cookie': 'amakawa_mode=private'} if getattr(REQUEST, 'private', False) else {}
+
 def image_history():
-    """Every run the image generator knows, cached for half a minute (a scene's library filters it)."""
+    """Every run the image generator knows (in this request's mode), cached for half a minute (a scene's library filters it)."""
+    key = 'private' if getattr(REQUEST, 'private', False) else 'public'
     with LOCK:
-        at, rows = HISTORY_CACHE.get('all', (0, None))
+        at, rows = HISTORY_CACHE.get(key, (0, None))
         if rows is not None and time.time() - at < 30:
             return rows
     try:
-        with urllib.request.urlopen('http://127.0.0.1:8772/api/history?limit=1000000&who=all', timeout=30) as r:
+        req = urllib.request.Request('http://127.0.0.1:8772/api/history?limit=1000000&who=all', headers=image_headers())
+        with urllib.request.urlopen(req, timeout=30) as r:
             rows = json.loads(r.read(200 * 1024 * 1024))
     except (urllib.error.URLError, OSError):
         raise ValueError('Image generation is offline. Start tools/imagegen/run.sh, then retry.') from None
     with LOCK:
-        HISTORY_CACHE['all'] = (time.time(), rows)
+        HISTORY_CACHE[key] = (time.time(), rows)
     return rows
 
 def comments(body):
@@ -299,7 +307,7 @@ def image_proxy(handler, suffix, body=None):
         raise ValueError('Invalid image path')
     data = None if body is None else json.dumps(body).encode()
     req = urllib.request.Request('http://127.0.0.1:8772' + suffix, data=data,
-                                 headers={'Content-Type': 'application/json'})
+                                 headers={'Content-Type': 'application/json', **image_headers()})
     try:
         with urllib.request.urlopen(req, timeout=15) as response:
             content = response.read(25 * 1024 * 1024)
@@ -364,6 +372,8 @@ def handle(handler):
         else:
             body = dict(urllib.parse.parse_qsl(url.query))
         action = url.path[len(prefix):]
+        mode = getattr(handler, '_private_mode', None)
+        REQUEST.private = bool(mode()) if callable(mode) else os.environ.get('SUBPLOTS_PUBLIC_ONLY') != '1'
         if action.startswith('image/'):
             suffix = '/' + action[6:] + ('?' + url.query if url.query else '')
             image_proxy(handler, suffix, body if handler.command == 'POST' else None)
@@ -371,7 +381,6 @@ def handle(handler):
             if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'pictures', 'comments', 'status')):
                 raise ValueError('Unsupported request method')
             # Outside private mode (tools/review_server.py, /private) only public scenes are read or written
-            mode = getattr(handler, '_private_mode', None)
             if callable(mode) and not mode():
                 if not public_only(action, body):
                     handler._json(403, {'error': 'Private scenes open in private mode: http://127.0.0.1:8771/private'})
