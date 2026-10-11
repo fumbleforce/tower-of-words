@@ -121,4 +121,17 @@ class ScenePictures(unittest.TestCase):
         got = [r['run_id'] for r in api.scene_runs('local:x:emi_look:start', runs, found)]
         self.assertEqual(got, ['a', 'b', 'd', 'e'])
 
+    def test_renders_made_under_an_old_place_based_id_name_the_shot_now(self):
+        scene = 'local:x:emi_look:start'
+        runs = [{'run_id': 'a', 'compose': {'subplotId': scene, 'imageSlot': 'image:1'},
+                 'renders': [{'id': 'a1', 'compose': {'subplotId': scene, 'imageSlot': 'image:1'}}, {'id': 'a2'}]},
+                {'run_id': 'b', 'renders': [{'id': 'b1', 'compose': {'subplotId': 'local:x:other:start', 'imageSlot': 'image:1'}}]}]
+        images = [{'id': 'file:encounters/a.webp', 'aliases': ['image:0']}, {'id': 'pic:emi.2', 'aliases': ['image:1']}]
+        got = api.as_shot_ids(scene, runs, images)
+        self.assertEqual(got[0]['compose']['imageSlot'], 'pic:emi.2')
+        self.assertEqual(got[0]['renders'][0]['compose']['imageSlot'], 'pic:emi.2')
+        self.assertEqual(got[0]['renders'][1], {'id': 'a2'})
+        self.assertEqual(got[1]['renders'][0]['compose']['imageSlot'], 'image:1')
+        self.assertEqual(runs[0]['compose']['imageSlot'], 'image:1')  # the history's own records are not changed
+
 if __name__=='__main__':unittest.main()

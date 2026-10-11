@@ -149,6 +149,20 @@ def scene_runs(scene_id, runs, found):
             out.append(run)
     return out
 
+def as_shot_ids(scene_id, runs, images):
+    """Runs with each render made for a shot under an older id of it (an alias: the place-based image:N it had before
+    shots were known by their picture) named by the shot's id now, so the editor matches them on one id. Copies; the
+    image generator's records stay as they are."""
+    names = {alias: image['id'] for image in images for alias in image.get('aliases') or []}
+    def named(compose):
+        if isinstance(compose, dict) and compose.get('subplotId') == scene_id and compose.get('imageSlot') in names:
+            return {**compose, 'imageSlot': names[compose['imageSlot']]}
+        return compose
+    if not names:
+        return runs
+    return [{**run, 'compose': named(run.get('compose')), 'renders': [{**r, 'compose': named(r.get('compose'))} if 'compose' in r else r
+                                                                      for r in run.get('renders') or []]} for run in runs]
+
 IMAGE_SERVICE = os.environ.get('IMAGEGEN_URL', 'http://127.0.0.1:8772')  # the image gen dashboard (tools/imagegen)
 HISTORY_CACHE = {}
 REQUEST = threading.local()  # .private: this request came in private mode (the image service then shows private renders)
@@ -326,7 +340,8 @@ def dispatch(action, body):
         found = local_provider({'action': 'pictures', 'id': scene_id}) if scene_id and not scene_id.startswith('public:') else {}
         if scene_id.startswith('public:'):
             found = {'metadata': read_json(slot(scene_id) / 'metadata.json', {})}
-        return {'runs': scene_runs(scene_id, image_history(), found), 'rounds': found.get('rounds', [])}
+        return {'runs': as_shot_ids(scene_id, scene_runs(scene_id, image_history(), found), found.get('images') or []),
+                'rounds': found.get('rounds', [])}
     scene_id = body.get('id', '')
     if not isinstance(scene_id, str):
         raise ValueError('Invalid scene id')

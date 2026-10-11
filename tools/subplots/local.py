@@ -66,6 +66,29 @@ def picture_rounds(data, root, rewards, copies=None):
                 rounds.add(str((rewards / parts[0] / parts[1]).relative_to(root)))
     return sorted(rounds)
 
+def renamed(value, names):
+    """A copy of saved editor data with shot ids renamed: keys of the per-shot tables and the slot fields of steps,
+    picks and compositions."""
+    if isinstance(value, list):
+        return [renamed(v, names) for v in value]
+    if not isinstance(value, dict):
+        return value
+    return {names.get(k, k): (names.get(v, v) if k in ('imageSlot', 'slot') and isinstance(v, str) else renamed(v, names))
+            for k, v in value.items()}
+
+def migrate_shots(folder, shots, images):
+    """Shots used to be known by their place (image:0 was the scene's first picture), which broke when beats moved.
+    The first read with picture ids freezes what each old id meant then, renames the scene's saved picks, compositions
+    and draft to the new ids, and keeps the old ids as aliases so renders made under them stay the shot's versions."""
+    legacy = {f'image:{i}': image['id'] for i, image in enumerate(images)}
+    for name in ('metadata.json', 'draft.json'):
+        data = read_json(folder / name, None)
+        if data is not None:
+            atomic(folder / name, json.dumps(renamed(data, legacy), ensure_ascii=False))
+    shots = {**shots, 'legacy': legacy}
+    atomic(folder / 'slots.json', json.dumps(shots, ensure_ascii=False))
+    return shots
+
 def scene_status(config, config_path, root, state, recipes):
     """Where each scene stands, from what exists: its pictures in the live registry (game/live.json) or on disk, its
     lines' clips (each source's voice manifest), the normal-play entry check's result, and an unsaved draft. Keyed by
@@ -174,8 +197,17 @@ def run(config_path, request):
     if not selected:
         raise ValueError('Unknown recipe source')
     folder = state / hashlib.sha256(scene_id.encode()).hexdigest()
+    # slots.json: {ids: {picture: shot id} for shots whose picture changed since their id was given, legacy: {old
+    # place-based id: shot id}} (recipes.mjs imageSlots, migrate_shots)
+    def shots():
+        return read_json(folder/'slots.json',{})
     def read():
-        data = locate_images(recipes({'action':'read','id':scene_id}),root)
+        known = shots()
+        data = locate_images(recipes({'action':'read','id':scene_id,'slotIds':known.get('ids',{})}),root)
+        if 'legacy' not in known and data.get('images'):
+            known = migrate_shots(folder, known, data['images'])
+        for image in data.get('images',[]):
+            image['aliases'] = sorted(k for k,v in known.get('legacy',{}).items() if v==image['id'])
         data['metadata'] = read_json(folder/'metadata.json',{})
         data['sourceRevision'] = data['revision']
         data['revision'] = hashlib.sha256((data['sourceRevision']+json.dumps(data['metadata'],sort_keys=True)).encode()).hexdigest()
@@ -189,7 +221,7 @@ def run(config_path, request):
         rewards = Path(config.get('rewards') or Path(config_path).resolve().parent.parent).resolve()
         copies = picture_copies(data, root, rewards)
         return {'rounds': picture_rounds(data, root, rewards, copies), 'copies': copies, 'scene': data.get('scene', ''),
-                'images': [{k: i.get(k) for k in ('id', 'file', 'url', 'available', 'storage')} for i in data.get('images', [])],
+                'images': [{k: i.get(k) for k in ('id', 'file', 'url', 'available', 'storage', 'aliases')} for i in data.get('images', [])],
                 'files': [i.get('file', '') for i in data.get('images', [])], 'metadata': data.get('metadata', {})}
     if action == 'history':
         version=request.get('version','')
@@ -208,7 +240,7 @@ def run(config_path, request):
             atomic(folder/'draft.json',json.dumps(request,ensure_ascii=False));return {'ok':True,'draft':True}
         if request.get('revision')!=current['revision']:
             raise ValueError('CONFLICT: This recipe changed outside the editor. Reload before saving.')
-        body={**request,'action':'prepare','revision':current['sourceRevision']}
+        body={**request,'action':'prepare','revision':current['sourceRevision'],'slotIds':shots().get('ids',{})}
         restore=request.get('restoreVersion')
         if restore:
             if not restore.endswith('.json') or '/' in restore or '\\' in restore:
@@ -233,8 +265,9 @@ def run(config_path, request):
                     for key in ('then','else','sequence'):walk(step.get(key))
         if isinstance(body.get('steps'),list):
             body['steps']=json.loads(json.dumps(body['steps']));walk(body['steps'])
+        shown={image['id'] for image in current.get('images',[])}
         for slot,selected_image in selections.items():
-            if slot.startswith('new:') and slot not in added:
+            if slot.startswith('new:') and slot not in added and slot not in shown:
                 continue  # its beat was deleted
             if selected_image==previous.get('images',{}).get(slot):
                 continue
@@ -254,24 +287,22 @@ def run(config_path, request):
         if replacements:
             body['imageReplacements']=replacements
         prepared=recipes(body)
-        remap=prepared.get('imageRemap')
-        if remap is not None:
-            metadata=json.loads(json.dumps(metadata))
-            for field in ('images','compositions'):
-                if field not in metadata:continue
-                metadata[field]={remap.get(key,key):{**value,**({'slot':remap[key]} if field=='images' and key in remap else {}),**({'imageSlot':remap[key]} if field=='compositions' and key in remap else {})} for key,value in metadata[field].items() if key in remap or key=='scene'}
-            for value in metadata.get('images',{}).values():value['applied']=True
-            if metadata.get('image',{}).get('slot') in remap:
-                metadata['image']['slot']=remap[metadata['image']['slot']]
-            elif 'image' in metadata:
-                del metadata['image']
+        # a shot keeps its id wherever it moved (recipes.mjs imageSlots); picks and compositions of shots that are gone go
+        kept=set(prepared.get('shots',[]))
+        metadata=json.loads(json.dumps(metadata))
+        for field in ('images','compositions'):
+            if field in metadata:
+                metadata[field]={key:value for key,value in metadata[field].items() if key in kept or key=='scene'}
+        for value in metadata.get('images',{}).values():value['applied']=True
+        if 'image' in metadata and metadata['image'].get('slot') not in kept:
+            del metadata['image']
         if action=='validate':return {'ok':True}
         source_file=Path(selected['file'])
         if source_file.read_text()!=prepared['source']:
             raise ValueError('CONFLICT: The recipe changed while saving.')
         version=str(time.time_ns())
         backups={str(source_file):source_file.read_bytes()}
-        for file in selected['outputs'] + config.get('extraBackups', []) + [str(folder/'metadata.json')]:
+        for file in selected['outputs'] + config.get('extraBackups', []) + [str(folder/'metadata.json'),str(folder/'slots.json')]:
             p=Path(file);backups[file]=p.read_bytes() if p.exists() else None
         for _,target,_ in promotions:
             backups[str(target)]=target.read_bytes() if target.exists() else None
@@ -300,6 +331,7 @@ def run(config_path, request):
                     raise ValueError('Scene validation failed. The source has been restored. '+(result.stderr or result.stdout)[-400:])
             retired = invalidate_voice(config, selected, backups, root, recovery)
             atomic(folder/'metadata.json',json.dumps(metadata,ensure_ascii=False))
+            atomic(folder/'slots.json',json.dumps({**shots(),'ids':prepared.get('slotIds',{})},ensure_ascii=False))
         except Exception:
             for file,content in backups.items():
                 p=Path(file)

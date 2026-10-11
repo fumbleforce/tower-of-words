@@ -5,7 +5,7 @@ const PICS={room:{file:'encounters/room.webp'}};
 const first={id:'first',day:2,place:'office',show:'office_open',nodes:{start:[s('colleague','Hello','warm'),duo(s('colleague','Japanese version','calm'),'English version'),pic('room'),choice([{text:'Continue',go:'next'}])],next:[n('The meeting ends.')]}};
 export const SCENES=[first];`;
 const id='local:sample:first:start';
-test('reads recipe helpers into dialogue fields without executing',()=>{const r=recipe(source,config,{action:'read',id});assert.equal(r.steps[0].text,'Hello');assert.equal(r.steps[1].text,'English version');assert.equal(r.steps[2].imageSlot,'image:0');assert.deepEqual(r.steps[2].shot,{});assert.equal(r.images[0].file,'encounters/room.webp');});
+test('reads recipe helpers into dialogue fields without executing',()=>{const r=recipe(source,config,{action:'read',id});assert.equal(r.steps[0].text,'Hello');assert.equal(r.steps[1].text,'English version');assert.equal(r.steps[2].imageSlot,'pic:room');assert.deepEqual(r.steps[2].shot,{});assert.equal(r.images[0].file,'encounters/room.webp');});
 test('edits dialogue but preserves advanced variants and helper calls',()=>{const r=recipe(source,config,{action:'read',id});r.steps[1].text='A new normal line';const out=recipe(source,config,{...r,action:'prepare'});assert.match(out.changed,/Japanese version/);assert.match(out.changed,/A new normal line/);assert.match(out.changed,/pic\('room'\)/);});
 test('placement is written to the authored scene',()=>{const r=recipe(source,config,{action:'read',id});r.placement={place:'garden',day:3,condition:'knows_name'};const out=recipe(source,config,{...r,action:'prepare'});const next=recipe(out.changed,config,{action:'read',id});assert.deepEqual(next.placement,r.placement);});
 test('selected image updates the picture table, retaining sequence and other data',()=>{const r=recipe(source,config,{action:'read',id});const out=recipe(source,config,{...r,action:'prepare',imageReplacement:{slot:r.images[0].id,file:'encounters/new.webp'}});assert.match(out.changed,/encounters\/new.webp/);assert.match(out.changed,/pic\('room__editor_/);});
@@ -57,7 +57,7 @@ const stagedId='local:sample:first:steps';
 test('spread gap is a human shot with resolved image and editable staging',()=>{
  const r=recipe(staged,config,{action:'read',id:stagedId}),step=r.steps[0];
  assert.equal(step.$expression,undefined);assert.equal(step.shot.width,.34);assert.equal(step.shot.mask,'gap');
- assert.equal(step.imageUrl,'/island/private/game/encounters/example-t01.webp');assert.equal(r.steps[1].imageSlot,'image:1');
+ assert.equal(step.imageUrl,'/island/private/game/encounters/example-t01.webp');assert.equal(r.steps[1].imageSlot,'file:encounters/example-second.webp');
  const unchanged=recipe(staged,config,{...r,action:'prepare'}).changed;assert.match(unchanged,/w: GW/);
  step.shot.width=.5;step.shot.focus='60% 30%';const saved=recipe(staged,config,{...r,action:'prepare'});
  const next=recipe(saved.changed,config,{action:'read',id:stagedId});assert.equal(next.steps[0].shot.width,.5);assert.equal(next.steps[0].shot.focus,'60% 30%');assert.equal(next.steps[0].shot.cue,step.shot.cue);
@@ -131,10 +131,10 @@ test('raw game actions save their structured details',()=>{
 
 test('expanded gap keeps one image slot through repeat saves and replacement',()=>{
  const r=recipe(staged,config,{action:'read',id:stagedId});const saved=recipe(staged,config,{...r,action:'prepare',imageReplacement:{slot:r.images[0].id,file:'encounters/new.webp'}});
- const next=recipe(saved.changed,config,{action:'read',id:stagedId});assert.deepEqual(next.images.map(i=>i.id),r.images.map(i=>i.id));
+ const next=recipe(saved.changed,config,{action:'read',id:stagedId,slotIds:saved.slotIds});assert.deepEqual(next.images.map(i=>i.id),r.images.map(i=>i.id));
  assert.equal(next.steps[0].sequence[0].imageSlot,next.steps[0].sequence[1].imageSlot);
- const again=recipe(saved.changed,config,{...next,action:'prepare',imageReplacement:{slot:next.images[0].id,file:'encounters/again.webp'}});
- const result=recipe(again.changed,config,{action:'read',id:stagedId});assert.equal(result.images.length,2);assert.equal(result.steps[0].sequence[1].imageUrl,'/island/private/game/encounters/again.webp');
+ const again=recipe(saved.changed,config,{...next,action:'prepare',slotIds:saved.slotIds,imageReplacement:{slot:next.images[0].id,file:'encounters/again.webp'}});
+ const result=recipe(again.changed,config,{action:'read',id:stagedId,slotIds:again.slotIds});assert.deepEqual(result.images.map(i=>i.id),r.images.map(i=>i.id));assert.equal(result.images.length,2);assert.equal(result.steps[0].sequence[1].imageUrl,'/island/private/game/encounters/again.webp');
 });
 
 test('picture-table cloning accepts a trailing comma and retains arbitrary metadata',()=>{
@@ -146,9 +146,10 @@ test('picture-table cloning accepts a trailing comma and retains arbitrary metad
 test('moving a shot and replacing it in the same save follows the authored step',()=>{
  const text=`const scene={id:'first',steps:[shot('encounters/first.webp'),shot('encounters/second.webp')]};const SCENES=[scene];`;
  const r=recipe(text,config,{action:'read',id:stagedId});r.steps.reverse();
- const saved=recipe(text,config,{...r,action:'prepare',imageReplacement:{slot:'image:0',file:'encounters/new-first.webp'}});
+ const saved=recipe(text,config,{...r,action:'prepare',imageReplacement:{slot:r.images[0].id,file:'encounters/new-first.webp'}});
  assert.deepEqual(recipe(saved.changed,config,{action:'read',id:stagedId}).images.map(i=>i.file),['encounters/second.webp','encounters/new-first.webp']);
- assert.deepEqual(saved.imageRemap,{'image:1':'image:0','image:0':'image:1'});
+ assert.deepEqual(saved.shots,['file:encounters/second.webp','file:encounters/first.webp']);
+ assert.deepEqual(saved.slotIds,{'file:encounters/new-first.webp':'file:encounters/first.webp'});
 });
 test('new staging and delivery options work with trailing commas',()=>{
  const text=`const scene={id:'first',steps:[shot('encounters/first.webp',{fade:400,}),duo(s('person','Japanese'),'English',{variant:true,})]};const SCENES=[scene];`;
@@ -159,7 +160,7 @@ test('new staging and delivery options work with trailing commas',()=>{
 test('restoring a revision follows reordered step identities and skips removed shots',()=>{
  const text=`const scene={id:'first',steps:[shot('encounters/first.webp'),shot('encounters/second.webp')]};const SCENES=[scene];`;
  const old=recipe(text,config,{action:'read',id:stagedId});
- const changed=recipe(text,config,{...old,action:'prepare',imageReplacement:{slot:'image:0',file:'encounters/new-first.webp'}}).changed;
+ const changed=recipe(text,config,{...old,action:'prepare',imageReplacement:{slot:old.images[0].id,file:'encounters/new-first.webp'}}).changed;
  const current=recipe(changed,config,{action:'read',id:stagedId});
  const reordered=recipe(changed,config,{...current,action:'prepare',steps:[old.steps[1],old.steps[0]],restoreImages:old.images});
  assert.deepEqual(recipe(reordered.changed,config,{action:'read',id:stagedId}).images.map(i=>i.file),['encounters/second.webp','encounters/first.webp']);
