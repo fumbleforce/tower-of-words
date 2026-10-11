@@ -244,7 +244,7 @@
 }
 /* the original prompt is a few lines with an expand (a shot opened from its picture) */
 .compose-dialog .image-original .section-head { flex-wrap: wrap; gap: 4px 12px; }
-.original-facts { font-size: 11.5px; flex: 1; }
+.original-facts { font-size: 11.5px; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .original-peek { cursor: pointer; font-size: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .original-less { display: none; font-size: 12px; }
 .image-original details[open] .original-peek { display: none; }
@@ -337,14 +337,14 @@
   .stage-side .tile-mini { width: 38px; padding: 1px; }
   .stage-side .tile-mini .tile-art { height: 18px; }
   .stage-side .tile-mini .tile-label { font-size: 9.5px; }
-  .compose-dialog .stage-side .ctl .chips button { min-height: 20px; padding: 0 5px; font-size: 11px; }
+  .compose-dialog .stage-side .ctl .chips button { min-height: 20px; padding: 0 4px; font-size: 11px; }
   .compose-dialog .image-section { padding: 4px 0; }
   .place-more { margin-top: 2px; }
   .image-place h3 { margin-bottom: 2px !important; }
   .tile-art { height: 28px; }
   .tile-row-pics .tile-art { height: 32px; }
   .tile-mini .tile-art { height: 20px; }
-  .compose-stage > .image-prompt { min-height: 124px; }
+  .compose-stage > .image-prompt { min-height: 92px; }
   .tile-dia { width: 64px; }
   .tile-dia .tile-art { height: 24px; }
   .tile-dia .tile-label { font-size: 9.5px; letter-spacing: -.1px; }
@@ -362,7 +362,7 @@
 /* the generated prompt, each block's words on its own tint (Jørgen, 2026-10-11: "add colored background to separate
    the different blocks of the prompts visually"); the tints come from the editor's colours, muted for the dark box */
 .compose-dialog, #images { --pp-style: rgba(163, 171, 185, .13); --pp-cast: rgba(163, 171, 185, .22); --pp-person: var(--accent-soft);
-  --pp-action: rgba(255, 201, 168, .16); --pp-stage: rgba(134, 184, 240, .17); --pp-pose: rgba(134, 184, 240, .1); --pp-place: rgba(147, 214, 160, .15);
+  --pp-action: rgba(255, 201, 168, .16); --pp-stage: rgba(124, 140, 255, .22); --pp-pose: rgba(124, 140, 255, .12); --pp-place: rgba(147, 214, 160, .15);
   --pp-light: rgba(243, 210, 122, .15); --pp-mood: rgba(240, 191, 134, .13); --pp-camera: rgba(185, 162, 240, .17); --pp-details: var(--private-soft); }
 .pp { border-radius: 3px; padding: 1px 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .pp-style { background: var(--pp-style); } .pp-cast { background: var(--pp-cast); } .pp-person { background: var(--pp-person); }
