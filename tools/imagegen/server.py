@@ -709,6 +709,9 @@ class H(BaseHTTPRequestHandler):
                 return self._send(200, session.start())
             if p == '/api/session/end':
                 with JOBS_LOCK:
+                    if b.get('if_idle') and any(j['status'] in ('queued', 'running') for j in JOBS):
+                        # an agent ending its own session must not cancel anyone else's jobs
+                        return self._send(200, {'ok': True, 'ended': False, 'reason': 'other jobs are still queued or running'})
                     for j in JOBS:
                         if j['status'] == 'queued':
                             j['status'] = 'cancelled'
@@ -725,7 +728,10 @@ class H(BaseHTTPRequestHandler):
                 return self._send(200, dict(run_id=run_id, jobs=[public_job(j) for j in jobs]))
             if p == '/api/cancel':
                 with JOBS_LOCK:
+                    only = set(b.get('ids') or [])  # ids given: only those jobs; none: everything, as the dashboard button does
                     for j in JOBS:
+                        if only and j['id'] not in only:
+                            continue
                         if j['status'] == 'queued':
                             j['status'] = 'cancelled'
                         elif j['status'] == 'running':

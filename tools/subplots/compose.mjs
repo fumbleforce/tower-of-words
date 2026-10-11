@@ -15,9 +15,13 @@
 // picture belongs to, so the editor lists it under that scene) and `details` (free notes for what the blocks
 // cannot say yet: img2img start, inpaint, hue fix, LoRA weights, ControlNet; stored and shown, never sent).
 // --dry-run prints the assembled job and sends nothing. --wait waits for the pictures, saves each next to the
-// recipe (or in --out) and prints the paths; --end-session then ends the image gen session so the GPU is freed.
+// recipe (or in --out) and prints the paths; --end-session then ends the image gen session so the GPU is freed,
+// but only when nothing else is queued or running (other agents' jobs are never cancelled); it cancels only this
+// run's own unfinished jobs. Against the local dashboard on a machine that has island/private/, the requests carry
+// the same private cookie /private sets (private renders download, island/private start images are accepted).
 import fs from 'node:fs';
 import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {applyDefaults, normalizeComposition, assembleComposition} from './web/image-compose.js';
 
 const args = process.argv.slice(2);
@@ -30,8 +34,13 @@ if (!file) { console.error('usage: node tools/subplots/compose.mjs <recipe.json>
 
 const recipe = JSON.parse(fs.readFileSync(file, 'utf8'));
 const name = path.basename(file).replace(/\.recipe\.json$|\.json$/, '');
-const getJson = async (url, init) => {
-  const r = await fetch(url, init);
+// Local private access: the dashboard honours the cookie only for local requests with the private files present.
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..').split(/[\\/]\.claude[\\/]worktrees[\\/]/)[0];
+const localServer = /^https?:\/\/(127\.0\.0\.1|localhost)(:|\/|$)/.test(server);
+const privateHeaders = localServer && fs.existsSync(path.join(repoRoot, 'island', 'private', 'bible', 'nav.js')) && process.env.SUBPLOTS_PUBLIC_ONLY !== '1'
+  ? {Cookie: 'amakawa_mode=private'} : {};
+const getJson = async (url, init = {}) => {
+  const r = await fetch(url, {...init, headers: {...privateHeaders, ...init.headers}});
   const t = await r.text();
   if (!r.ok) throw new Error(`${url}: ${r.status} ${t.slice(0, 300)}`);
   return JSON.parse(t);
@@ -70,9 +79,18 @@ if (wait) {
   for (const j of done) {
     if (j.status !== 'done') { console.error(`${j.id}: ${j.status} ${j.error || ''}`); continue; }
     const out = path.join(outDir, `${name}-${j.id}-s${j.seed}.png`);
-    const r = await fetch(server + '/out/' + j.file.split('/').map(encodeURIComponent).join('/'));
+    const url = server + '/out/' + j.file.split('/').map(encodeURIComponent).join('/');
+    const r = await fetch(url, {headers: privateHeaders});
+    const type = r.headers.get('content-type') || '';
+    if (!r.ok || !type.startsWith('image/')) { console.error(`${j.id}: could not download ${url}: ${r.status} ${type} ${(await r.text()).slice(0, 200)}`); process.exitCode = 1; continue; }
     fs.writeFileSync(out, Buffer.from(await r.arrayBuffer()));
     console.log(`${j.id}\t${out}`);
   }
-  if (endSession) await getJson(server + '/api/session/end', {method: 'POST', headers: {'content-type': 'application/json'}, body: '{}'}).catch(e => console.error(e.message));
+  if (endSession) {
+    const post = (url, data) => getJson(server + url, {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify(data)});
+    // cancel only this run's jobs (all finished by now, but an error exit may leave some), end the session only when idle
+    await post('/api/cancel', {ids: [...ids]}).catch(e => console.error(e.message));
+    const r = await post('/api/session/end', {if_idle: true}).catch(e => (console.error(e.message), {}));
+    if (r.ended === false) console.log('Session left running: ' + r.reason);
+  }
 }
