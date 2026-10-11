@@ -10,49 +10,38 @@ import { renderBeatTab, renderSceneTab } from './inspector.js';
 import { renderPictureTab } from './pictures.js';
 import { openPreview, installPreview } from './preview.js';
 import { areaOf, titleOf, playUrl } from './names.js';
+import { buildMap, locate, dayTitle } from './storymap.js';
+import { paintOutline, paintDays, dayOfScene } from './outline.js';
 import { setConditionLabels } from './conditions.js';
 import { installImages } from './images.js';
 import { kindOf } from './model.js';
 import { setProblems, setUnvoiced, notesFor, unplaced } from './checks.js';
 
 const $ = id => document.getElementById(id);
-let filter = 'all', tab = 'beat', saving = false, openAreas = new Set(), shownScene = null, statuses = {};
+let filter = 'all', tab = 'beat', saving = false, statuses = {}, day = 1, mapItems = null;
 
 function status(text, kind = '') {
   $('status').textContent = text;
   $('status').dataset.kind = kind;
 }
 
-// ---------- scene list ----------
+// ---------- scene list: the story map's outline (outline.js) ----------
 function paintList() {
-  const q = $('search').value.trim().toLowerCase();
-  const rows = S.catalog.filter(r => (filter === 'all' || r.audience === filter)
-    && (!q || `${titleOf(r)} ${areaOf(r)} ${r.node} ${r.where}`.toLowerCase().includes(q)));
-  const groups = new Map();
-  for (const r of rows) {
-    const a = (r.audience === 'private' ? 'P|' : 'G|') + areaOf(r);
-    if (!groups.has(a)) groups.set(a, []);
-    groups.get(a).push(r);
-  }
-  const current = S.scene?.id;
-  const html = [...groups].map(([area, list]) => {
-    const priv = area.startsWith('P|'), name = area.slice(2);
-    const open = q || openAreas.has(area) || list.some(r => r.id === current);
-    return `<section class="area${open ? ' open' : ''}" data-area="${esc(area)}"><button class="area-head"><span class="chev">›</span><span class="area-name">${esc(name)}</span>${priv ? '<span class="tag private mini">Private</span>' : ''}<span class="count">${list.length}</span></button>
-      ${open ? `<div class="area-items">${list.map(r => `<button class="scene-row${r.id === current ? ' current' : ''}" data-id="${esc(r.id)}"><span class="t">${esc(titleOf(r))}</span>${statusMarks(r.id)}<span class="n">${r.count ?? ''}</span></button>`).join('')}</div>` : ''}</section>`;
-  }).join('');
-  $('sceneList').innerHTML = html || '<p class="quiet pad">No scene matches.</p>';
-  for (const b of $('sceneList').querySelectorAll('.area-head')) b.onclick = () => {
-    const a = b.parentElement.dataset.area;
-    if (openAreas.has(a)) openAreas.delete(a); else openAreas.add(a);
+  mapItems ||= buildMap();
+  paintDays($('days'), day, d => { day = d; paintList(); });
+  paintOutline($('sceneList'), { items: mapItems, day, filter, query: $('search').value, marks: statusMarks, onOpen: id => open(id) });
+}
+
+// A save can change where and when a scene plays: read the map and the catalog's placements again.
+async function refreshMap() {
+  try {
+    const [data, map] = await Promise.all([api('catalog?scope=all'), api('map')]);
+    S.catalog = data.scenes || S.catalog;
+    S.map = map;
+    mapItems = null;
     paintList();
-  };
-  for (const b of $('sceneList').querySelectorAll('.scene-row')) b.onclick = () => open(b.dataset.id);
-  // bring the open scene into view only when it changes, never when a group is opened or closed
-  if (current !== shownScene) {
-    shownScene = current;
-    $('sceneList').querySelector('.scene-row.current')?.scrollIntoView({ block: 'nearest' });
-  }
+    paintBar();
+  } catch { /* the list keeps what it had */ }
 }
 
 // ---------- where each scene stands (api.py scene_status) ----------
@@ -190,6 +179,7 @@ async function save() {
     }
     status('Saved' + (warnings.length ? '. ' + warnings.join(' ') : ''), 'ok');
     loadStatus();
+    refreshMap();
   } catch (e) {
     status(e.message.startsWith('CONFLICT') ? 'Someone changed this scene outside the editor. Reload it to see their version (your edits stay as a draft).' : 'Not saved: ' + e.message, 'error');
     saveDraft();
@@ -214,7 +204,8 @@ function paintBar() {
   $('doc').hidden = !s;
   if (s) {
     const row = S.catalog.find(r => r.id === s.id) || { ...s, audience: s.audience };
-    $('docArea').textContent = areaOf(row);
+    const at = mapItems && locate(mapItems, s.id);
+    $('docArea').textContent = at ? `${dayTitle(at.day)} · ${at.areaTitle}` : areaOf(row);
     $('docTitle').textContent = titleOf(row);
     $('docAudience').textContent = s.audience === 'private' ? 'Private · Adult' : 'Public game';
     $('docAudience').className = 'tag ' + s.audience;
@@ -341,8 +332,9 @@ try {
 }
 setConditionLabels(S.authoring.variables);
 try {
-  const data = await api('catalog?scope=all');
+  const [data, map] = await Promise.all([api('catalog?scope=all'), api('map').catch(() => null)]);
   S.catalog = data.scenes || [];
+  S.map = map;
   loadStatus();
   // outside private mode the list is the public game's scenes, with nothing to say about it
 } catch (e) {
@@ -352,4 +344,7 @@ paintList();
 paintBar();
 setTab('beat');
 const wanted = decodeURIComponent(location.hash.slice(1));
-if (wanted && S.catalog.some(r => r.id === wanted)) open(wanted, { skipCheck: true });
+if (wanted && S.catalog.some(r => r.id === wanted)) {
+  day = dayOfScene(buildMap(), wanted) ?? day;
+  open(wanted, { skipCheck: true });
+}

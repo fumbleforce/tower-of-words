@@ -302,6 +302,10 @@ function newPictures(steps,source,values,sceneId,edits){
   const at=table.range[1]-1;
   edits.push({range:[at,at],text:`${table.properties.length&&!trailing?',':''}\n  ${added.join(',\n  ')},\n`});
 }
+// Where and when a scene plays (its place, story day and `show` condition), for the read and the story map.
+// a changed placement value in the quotes its literal had, when they fit
+const sameQuotes=(node,value)=>typeof value==='string'&&/^'/.test(node.raw||'')&&!/['\\\n]/.test(value)?`'${value}'`:JSON.stringify(value);
+const placementOf=scene=>({place:literal(property(scene,'place')?.value)??null,day:literal(property(scene,'day')?.value)??null,condition:literal(property(scene,'show')?.value)??null});
 export function recipe(source,config,request){
   const scenes=model(source), rows=[];
   for(const scene of scenes){
@@ -312,12 +316,12 @@ export function recipe(source,config,request){
   }
   // the picture files each part uses, for the scene list's status (local.py status)
   if(request.action==='status'){const values=recipeValues(source);return {scenes:rows.map(r=>{let files=[];try{files=imageSlots(source,r.sequence.value,values).map(i=>i.file).filter(Boolean);}catch{/* a part whose pictures can't be read shows no picture status */}return {id:r.id,scene:r.sceneId,files};}),errors:[]};}
-  if(request.action==='catalog')return {scenes:rows.map(r=>({id:r.id,provider:'local',title:`${r.sceneId.replaceAll('_',' ')} · ${r.node}`,node:r.node,group:config.label,where:where(config),scene:r.sceneId,count:r.sequence.value.elements?.length??null})),errors:[]};
+  if(request.action==='catalog')return {scenes:rows.map(r=>({id:r.id,provider:'local',title:`${r.sceneId.replaceAll('_',' ')} · ${r.node}`,node:r.node,group:config.label,where:where(config),scene:r.sceneId,count:r.sequence.value.elements?.length??null,placement:placementOf(r.scene)})),errors:[]};
   const row=rows.find(r=>r.id===request.id);if(!row)throw Error('Scene not found');
   const {scene,sequence}=row;
   const known=request.slotIds&&typeof request.slotIds==='object'?request.slotIds:{};
   const values=recipeValues(source), images=imageSlots(source,sequence.value,values,known),context={...values,images};
-  if(request.action==='read')return {id:row.id,provider:'local',title:`${row.sceneId.replaceAll('_',' ')} · ${row.node}`,node:row.node,group:config.label,where:where(config),scene:row.sceneId,revision:digest(source),steps:decode(sequence.value,source,context),raw:slice(source,sequence.value),entries:[],routesEditable:false,metadata:{},placement:{place:literal(property(scene,'place')?.value)??null,day:literal(property(scene,'day')?.value)??null,condition:literal(property(scene,'show')?.value)??null},previewUrl:`/game3d/index.html?scene=${encodeURIComponent(row.sceneId)}`,recipe:true,capabilities:{camera:!!values.binding('raw'),picture:pictureHelper(values)},images:images.map(({range,calls,gap,options,table,pairedRanges,picture,...image})=>image)};
+  if(request.action==='read')return {id:row.id,provider:'local',title:`${row.sceneId.replaceAll('_',' ')} · ${row.node}`,node:row.node,group:config.label,where:where(config),scene:row.sceneId,revision:digest(source),steps:decode(sequence.value,source,context),raw:slice(source,sequence.value),entries:[],routesEditable:false,metadata:{},placement:placementOf(scene),previewUrl:`/game3d/index.html?scene=${encodeURIComponent(row.sceneId)}`,recipe:true,capabilities:{camera:!!values.binding('raw'),picture:pictureHelper(values)},images:images.map(({range,calls,gap,options,table,pairedRanges,picture,...image})=>image)};
   if(request.action==='prepare'){
     if(request.revision!==digest(source))throw Error('CONFLICT: The recipe changed. Reload this scene.');
     const helpers=new Set(parseSource(source).body.flatMap(n=>(n.declaration||n).declarations||[]).map(d=>d.id.name));
@@ -333,7 +337,7 @@ export function recipe(source,config,request){
       if(key==='day'&&(!Number.isInteger(value)||value<1))throw Error('Story day must be a positive integer');
       if(key!=='day'&&typeof value!=='string')throw Error('Invalid scene placement');
       if(key==='show'&&value){if(!/^[\w\s!&|()<>=.'"+-]*$/.test(value))throw Error('Unsupported condition characters');parseSource(`(${value});`);}
-      if(literal(p.value)!==value)edits.push({range:p.value.range,text:JSON.stringify(value)});
+      if(literal(p.value)!==value)edits.push({range:p.value.range,text:sameQuotes(p.value,value)});
     }}
     let changed=source;for(const e of edits.sort((a,b)=>b.range[0]-a.range[0]))changed=changed.slice(0,e.range[0])+e.text+changed.slice(e.range[1]);
     if(request.restoreImages?.length){

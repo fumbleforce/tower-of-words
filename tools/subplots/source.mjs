@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { parseSource, staticValue, visitSource } from '../lib/source-data.mjs';
-import { encodeSteps } from './encode.mjs';
+import { encodeSteps, encodeValue } from './encode.mjs';
+import { entriesOf, routeChanges, encodeRoutes } from './routes.mjs';
 const hash = s => crypto.createHash('sha256').update(s).digest('hex');
 const key = p => p?.type === 'Property' && !p.computed ? p.key.name ?? p.key.value : null;
 const prop = (o, name) => o?.properties?.find(p => key(p) === name);
@@ -43,50 +44,14 @@ function target(root, id) {
   if (matches.length !== 1) throw Error('Scene is missing or ambiguous');
   return { scene: matches[0], resolved, source };
 }
-function entries(on, node) {
-  const out = [];
-  for (const [event, value] of Object.entries(on || {})) {
-    for (const v of Array.isArray(value) ? value : [value]) {
-      if (v === node || v?.node === node) out.push({event, condition: v?.if || '', once: !!v?.once});
-    }
-  }
-  return out;
-}
 function readScene(root, id) {
   const {scene:s,source} = target(root,id), on = prop(s.owner,'on'), start = prop(s.owner,'start');
   const routes = on ? literal(on.value) : {};
   const rest=Object.fromEntries(Object.entries(s).filter(([k])=>!['owner','range','valueNode','comments'].includes(k)));const {owner,range}=s;
   const speakers = literal(prop(owner,'speakers')?.value) || {};
-  return {...rest, speakers, entries: entries(routes,s.node), routesEditable: routes !== null,
+  return {...rest, speakers, entries: entriesOf(routes,s.node), routesEditable: routes !== null,
     startsHere: literal(start?.value) === s.node, metadata: {},
     sourceLine: source.slice(0,range[0]).split('\n').length};
-}
-function routeChanges(on, node, rows) {
-  const next = structuredClone(on || {});
-  // Keep every other node's routes, including their relative priority.
-  for (const [event,value] of Object.entries(next)) {
-    const list = Array.isArray(value) ? value : [value];
-    const matching = list.findIndex(v => v === node || v?.node === node);
-    if (matching < 0) continue;
-    const previous=list.filter(v=>v===node||v?.node===node);
-    const replacements = rows.filter(r => r.event === event).map((r,i) => {
-      const replacement={...(typeof previous[i]==='object'?previous[i]:{}),node};
-      delete replacement.if; delete replacement.once;
-      if(r.condition)replacement.if=r.condition; if(r.once)replacement.once=true;
-      return replacement;
-    });
-    let at=0;
-    const kept=list.flatMap(v=>v===node||v?.node===node?(at<replacements.length?[replacements[at++]]:[]):[v]);
-    kept.push(...replacements.slice(at));
-    if (!kept.length) delete next[event]; else next[event] = kept.length === 1 ? kept[0] : kept;
-  }
-  for (const event of new Set(rows.map(r=>r.event))) {
-    if (entries(next,node).some(e => e.event === event)) continue;
-    const values=rows.filter(r=>r.event===event).map(r=>({node,...(r.condition?{if:r.condition}:{}),...(r.once?{once:true}:{})}));
-    const existing=Object.hasOwn(next,event)?(Array.isArray(next[event])?next[event]:[next[event]]):[];
-    const combined=[...values,...existing];next[event]=combined.length===1?combined[0]:combined;
-  }
-  return next;
 }
 function validateSteps(steps) {
   if (!Array.isArray(steps)) throw Error('A scene must contain a sequence of steps');
@@ -129,9 +94,12 @@ function proposed(root, data) {
       }
     }
     if (old === null && data.entries.length) throw Error('These routes use code. Edit their source instead.');
-    if (old !== null && JSON.stringify(entries(old,s.node)) !== JSON.stringify(data.entries)) {
-      const text=JSON.stringify(routeChanges(old,s.node,data.entries),null,2);
-      edits.push(on ? {range:on.value.range,text} : {range:[s.owner.range[0]+1,s.owner.range[0]+1],text:`\n on: ${text},`});
+    // only the triggers that name this scene and changed are rewritten (routes.mjs)
+    if (old !== null && on) {
+      const text = encodeRoutes(on.value, source, s.node, data.entries);
+      if (text !== null) edits.push({range:on.value.range,text});
+    } else if (old !== null && data.entries.length) {
+      edits.push({range:[s.owner.range[0]+1,s.owner.range[0]+1],text:`\n  on: ${encodeValue(routeChanges({},s.node,data.entries),'  ')},`});
     }
   }
   let changed=source;

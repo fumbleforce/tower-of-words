@@ -27,6 +27,15 @@ class Saves(unittest.TestCase):
     def read(self):
         return api.dispatch('read', {'id':self.id})
 
+    def test_story_map_follows_a_saved_way_in(self):
+        self.file.write_text("export default {on:{'talk:a':'hello'},nodes:{hello:['a: Hello'],other:['b: Keep']}};")
+        row = lambda: next(s for s in api.dispatch('map', {})['scenes'] if s['id'] == self.id)
+        self.assertEqual(row()['entries'], [{'event': 'talk:a', 'condition': '', 'once': False}])
+        old = self.read()
+        api.dispatch('save', {**old, 'entries': [{'event': 'talk:a', 'condition': "period == 'lunch'", 'once': True}]})
+        self.assertIn("""'talk:a':{ if: "period == 'lunch'", node: 'hello', once: true }""", self.file.read_text())
+        self.assertEqual(row()['entries'], [{'event': 'talk:a', 'condition': "period == 'lunch'", 'once': True}])
+
     def test_save_history_and_conflict(self):
         old=self.read(); edit={**old,'steps':[{'say':'a','text':'Changed'}],'metadata':{'notes':'An idea'}}
         saved=api.dispatch('save',edit)

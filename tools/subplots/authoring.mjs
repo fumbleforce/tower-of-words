@@ -117,7 +117,7 @@ export function catalog(root) {
     const [action,target,who]=event.id.split(':');
     const word=words.get(target);
     const spoken=word ? `${word.ja} (${word.en})` : humanize(target||'');
-    event.label=action==='talk'?`Talk to ${personOrThing(target)}`:action==='say'?`Say ${spoken}${who?' to '+personOrThing(who):''}`:action==='zone'?`Enter ${personOrThing(target)}`:action==='idle'?`Near ${personOrThing(target)}`:action==='look'?`Look at ${personOrThing(target)}`:action==='act'?`Use ${personOrThing(target)}`:action==='event'?`${personOrThing(target)} happens`:humanize(event.id.replaceAll(':',' '));
+    event.label=action==='talk'?`Talk to ${personOrThing(target)}`:action==='say'?`Say ${spoken}${who?' to '+personOrThing(who):''}`:action==='zone'?`Enter ${personOrThing(target)}`:action==='idle'?`Chat with ${personOrThing(target)}, when nothing else is on`:action==='near'?`Walk up to ${personOrThing(target)}`:action==='give'?`Give ${target==='*'?'something':humanize(target)} to ${personOrThing(who)}`:action==='ask'?`Ask ${personOrThing(target)} something`:action==='look'?`Look at ${personOrThing(target)}`:action==='act'?`Use ${personOrThing(target)}`:action==='event'?`${personOrThing(target)} happens`:humanize(event.id.replaceAll(':',' '));
   }
   const variables=[
     {id:'day',label:'Story day',type:'number',options:[...new Set([1,...(observed.get('day')||[])].filter(x=>typeof x==='number'))].sort((a,b)=>a-b).map(value=>({value,label:`Day ${value}`}))},
