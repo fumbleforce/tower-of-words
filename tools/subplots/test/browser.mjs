@@ -414,6 +414,8 @@ try {
       for (const name of ['model', 'count', 'seed', 'steps', 'cfg']) assert.ok(await page.locator(`#composition [data-compose=${name}]`).isVisible(), name + ' in view');
       assert.equal(await page.locator('#composition [data-size]').count(), 3);
       await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-settings-${width}.png`) });
+      const opened = await page.locator('#composition').evaluate(el => [el.clientHeight, el.scrollHeight]);
+      assert.ok(opened[1] <= opened[0] + 2, `the left column fits with every person shown and the settings open: ${opened}`);
       await page.locator('#composition .image-settings summary').click();
       assert.equal(await page.locator('[data-library=scene]').getAttribute('aria-pressed'), 'true');
       assert.equal(await page.locator('#renders .render-card').count(), 1);
