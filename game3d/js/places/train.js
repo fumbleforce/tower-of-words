@@ -29,7 +29,6 @@ import {
 } from '../train/car.js';
 import { buildDoorSets, slideLeaves, lampShut, lampOpen } from '../train/doors.js';
 import { loadMonorail, SUN_DIR } from '../train/models.js';
-import { swingStraps } from '../train/straps.js';
 import { buildPassengers, sit, armsHold } from '../train/people.js';
 import { makeCat } from '../creatures/cat.js';
 import { moveTrainCat } from './train-cat.js';
@@ -1142,11 +1141,7 @@ export async function trainPlace(game) {
         n.bellows.rotation.x = (m.roll + mn.roll) / 2;
         n.bellows.position.y = (m.y + mn.y) / 2;
       }
-      const latVel = (m.z - prevM.z) / Math.max(dt, 1e-3),
-        bump = (m.y - prevM.y) / Math.max(dt, 1e-3),
-        rollVel = (m.roll - prevM.roll) / Math.max(dt, 1e-3);
-      const brakeKick = st.mode === 'brake' ? -st.decel * 0.05 : 0;
-      swingStraps(car.straps, { m, latVel, bump, rollVel, brakeKick, simT, dt });
+      const bump = (m.y - prevM.y) / Math.max(dt, 1e-3);
       for (const nd of car.nodders) {
         nd.obj.rotation.z = -m.roll * 4 * nd.k + Math.sin(simT * 1.7) * 0.015 * nd.k;
         nd.obj.rotation.x = bump * 0.5 * nd.k;
