@@ -31,6 +31,17 @@ class LocalRecipes(unittest.TestCase):
         before=self.source.read_text();data=self.call('read');data['steps'][0]['text']='Changed'
         with self.assertRaisesRegex(ValueError,'rebuild failed'):self.call('save',**{k:v for k,v in data.items() if k!='id'})
         self.assertEqual(self.source.read_text(),before);self.assertEqual(self.output.read_text(),'{"prior":true}')
+    def test_unused_picture_error_names_the_scene_and_picture_in_plain_words(self):
+        self.build.write_text("import sys\nsys.stderr.write('file:///x/days-scenes.src.mjs:3059\\n  throw new Error(1)\\nError: picture used by no scene: mio_bath.1\\n    at file:///x:3059:78\\n')\nsys.exit(1)\n")
+        before=self.source.read_text();data=self.call('read');data['steps'][0]['text']='Changed'
+        with self.assertRaises(ValueError) as caught:self.call('save',**{k:v for k,v in data.items() if k!='id'})
+        message=str(caught.exception)
+        self.assertIn('"mio_bath.1" (scene "mio_bath")',message);self.assertNotIn(' at file:',message);self.assertNotIn('Error:',message)
+        self.assertEqual(self.source.read_text(),before)
+    def test_other_build_errors_show_only_the_error_line(self):
+        self.build.write_text("import sys\nsys.stderr.write('x.mjs:5\\n  boom\\nTypeError: bad thing\\n    at f (x:1:1)\\n')\nsys.exit(1)\n")
+        data=self.call('read');data['steps'][0]['text']='Changed'
+        with self.assertRaisesRegex(ValueError,'rebuild failed.*TypeError: bad thing$'):self.call('save',**{k:v for k,v in data.items() if k!='id'})
     def test_failed_configured_check_restores_source_and_derived_output(self):
         before=self.source.read_text()
         self.settings['checks']=[['python3','-c','raise SystemExit(1)']]

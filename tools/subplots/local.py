@@ -3,6 +3,7 @@ import fcntl
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -175,6 +176,16 @@ def invalidate_voice(config, selected, backups, root, recovery):
         atomic(index,json.dumps([key for key in ids if key not in retired],ensure_ascii=False))
     return retired
 
+def build_failure(stderr,selected,file_name):
+    """The rebuild's own message in plain words: the scene and picture it names, not the stack trace."""
+    m=re.search(r'picture used by no scene: (\S+)',stderr)
+    if m:
+        pic=m.group(1);scene=pic.split('.')[0]
+        return f'Not saved: the picture "{pic}" (scene "{scene}") is no longer used by any scene in {file_name}, and the scene builder refuses an unused picture. Keep the picture in {scene}, or retire "{pic}" in the builder first. Your source has been restored.'
+    lines=[l for l in stderr.strip().splitlines() if l.strip() and not l.lstrip().startswith('at ')]
+    error=next((l for l in reversed(lines) if re.match(r'\w*Error',l)),lines[-1] if lines else 'no message')
+    return 'Scene rebuild failed. The source has been restored. '+error[-300:]
+
 def run(config_path, request):
     config = json.loads(Path(config_path).read_text())
     root = Path(config['root']).resolve()
@@ -324,7 +335,7 @@ def run(config_path, request):
                     if result.returncode:raise ValueError('Image promotion failed: '+result.stderr[-500:])
             atomic(source_file,prepared['changed'])
             result=subprocess.run(selected['build'],cwd=root,capture_output=True,text=True,timeout=60)
-            if result.returncode:raise ValueError('Scene rebuild failed. The source has been restored. '+result.stderr[-400:])
+            if result.returncode:raise ValueError(build_failure(result.stderr,selected,source_file.name))
             for command in config.get('checks',[]) + selected.get('checks',[]):
                 result=subprocess.run(command,cwd=root,capture_output=True,text=True,timeout=60)
                 if result.returncode:
