@@ -78,7 +78,7 @@ export const BENCH = [-2.9, 2.2];
 // drinks machines and on the walk's axis in the garden, where the walk ends; the gate's lanterns, the shelter's
 // light and the sento's door light the rest. Low bollard lights along the front bed's wall.
 export const LAMPS = [
-  [-3.9, AZ - h - 0.35],
+  [-1.5, AZ - h - 0.35],
   [GARDEN_X - 0.45, AZ],
 ];
 export const BOLLARDS = [

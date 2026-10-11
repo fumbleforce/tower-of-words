@@ -1,7 +1,7 @@
 // The dorm's entrance hall, in front of Eric's block on the dorm court (scenes/dorm-court.js): the glass front cut
 // low with its doors open, a doormat, the side and back walls full height; on the back wall the bank of 24
 // mailboxes (2F to 5F, their numbers on them, 203 with Eric's name on tape and a flap that opens), the manager's
-// window beside the passage, the notice board right of it; the passage to the stairs, and the roof behind the hall
+// window beside the passage; the passage to the stairs, and the roof behind the hall
 // under the 2F corridor. Eric walks in; the passage's mouth starts the trip up (places/dorm-court.js).
 import * as THREE from 'three';
 import { PAL, rbox, wall, tileFloor, textTexture, plane, JP_FONT } from '../../props.js';
@@ -200,7 +200,7 @@ function managerWindow(root) {
 }
 
 // the entrance hall: cut-low glass front with open doors, side and back walls full height, the mailboxes, the
-// manager's window, the notice board and the passage at the back to the stairs. Eric walks in; the passage's mouth
+// manager's window and the passage at the back to the stairs. Eric walks in; the passage's mouth
 // starts the trip up (places/dorm-court.js)
 export function hall(root, nav) {
   const [x0, x1] = HALL;
@@ -268,19 +268,6 @@ export function hall(root, nav) {
   const mailbox = mailbox203(root);
   managerWindow(root);
   nav.block(MANAGER[0] - 0.1, MANAGER[1] + 0.1, BACK_Z, BACK_Z + 0.25);
-  // the notice board, right of the passage: narrow, between the passage's jamb and the side wall, clear of the opening
-  const nx = x1 - 0.27;
-  root.add(rbox(0.26, 0.5, 0.04, '#c9c6bd', { x: nx, y: 0.7, z: BACK_Z + 0.12, r: 0.01, cast: false }));
-  root.add(
-    boxes(
-      [
-        [0.1, 0.22, 0.01, nx - 0.06, 0.8, BACK_Z + 0.145],
-        [0.1, 0.14, 0.01, nx + 0.06, 0.92, BACK_Z + 0.145],
-        [0.09, 0.16, 0.01, nx + 0.06, 0.74, BACK_Z + 0.145],
-      ],
-      PAL.paper,
-    ),
-  );
   const light = new THREE.PointLight('#ffd8a8', 2.2, 3.8, 1.8);
   light.position.set((x0 + x1) / 2, 1.6, (FRONT_Z + BACK_Z) / 2);
   root.add(light);

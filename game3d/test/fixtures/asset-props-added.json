@@ -529,29 +529,6 @@
     ]
   },
   {
-    "id_": "prop/dorm_court/hall_board",
-    "kind": "prop",
-    "name": "Notice board",
-    "paths": [
-      "game3d/js/places/dorm-court.js"
-    ],
-    "status": "provisional",
-    "status_from": "A named thing in the game (built in code)",
-    "source": "dorm-court.js things.hall_board",
-    "place": "dorm_court",
-    "used": [
-      "Dorm courtyard: tap target 'Notice board'"
-    ],
-    "view": {
-      "type": "room",
-      "room": "dorm-court"
-    },
-    "tags": [
-      "in game",
-      "thing"
-    ]
-  },
-  {
     "id_": "prop/dorm_court/mailboxes",
     "kind": "prop",
     "name": "Mailbox 203",

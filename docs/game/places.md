@@ -1593,7 +1593,6 @@ Eric arrives along the lane from the plaza on the walk home, through the gate, a
 | `stairs` | To the stairs | The passage at the back of the hall, to the stairs. |
 | `street_gate` | To the street | Day 2: the court's gate, out to the lane and the east lane. Its pin shows while the story uses it. |
 | `mailboxes` | Mailbox 203 | Eric's mailbox in the bank: 203 and his name on tape (エリック ERIC), a flap that opens (the `mailbox203` hook) on one folded bakery flyer (パン BAKERY). Take mail: the box opens and Eric takes the flyer (a find, [systems.md](systems.md), Finds); the box stays empty after, and its pin goes. Its pin shows once the story uses it. |
-| `hall_board` | Notice board | The hall's notice board, right of the passage. Read, its pin when he is close: a narration line (game3d/story/dorm-building.js). |
 | `manager_window` | Manager's window | The manager's window, left of the passage, its curtain drawn. Look, its pin when he is close: a narration line (game3d/story/dorm-building.js). |
 
 ### Spots

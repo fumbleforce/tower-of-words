@@ -3,7 +3,6 @@
 // still take any of them over with its own talk: trigger.
 export const DORM_LOOKS = {
   // 1F, the entrance hall (dorm_court)
-  hall_board: "The building's notice board: a fire drill next month, the manager's hours, a menu from the ramen shop.",
   manager_window: 'The curtain is drawn. A card on the counter says “Back at 9:00”.',
   // 2F
   kitchen: 'The shared kitchen. Two rings, one rice cooker, and a fridge where every box has a room number on it.',
