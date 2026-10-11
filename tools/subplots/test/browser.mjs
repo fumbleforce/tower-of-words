@@ -207,6 +207,14 @@ try {
       await page.keyboard.type('The room is cold.');
       assert.equal(await page.locator('.path-section .beat').count(), 2);
 
+      // a save the story check refuses: nothing is written, and its finding sits on the beat in plain words
+      await page.route('**/api/subplots/save', r => r.fulfill({ status: 422, json: { error: 'The story check found a problem', problems: ['welcome: unknown speaker emi'] } }), { times: 1 });
+      await page.keyboard.press('Control+s');
+      await page.locator('.beat.has-problem .check-notes li.problem').waitFor();
+      assert.match(await page.locator('.beat.has-problem').innerText(), /Nobody called “emi” is in the cast/);
+      assert.match(await page.locator('#status').innerText(), /Not saved: the story check found a problem, marked in red on the beat/);
+      assert.equal(fs.readFileSync(file, 'utf8'), original);
+
       // save: each changed part is written on its own, untouched text stays as written
       await page.keyboard.press('Control+s');
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
@@ -410,7 +418,7 @@ try {
       assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth > globalThis.innerWidth), false);
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(`PASS ${width}: open, labels, list stays put, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), comments on beats (public and private, command line), scene status`);
+      console.log(`PASS ${width}: open, labels, list stays put, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), story-check findings on the beat, comments on beats (public and private, command line), scene status`);
     }
   }, { timeoutMs: 150000, gpuWaitMs: 60000 });
 } finally {

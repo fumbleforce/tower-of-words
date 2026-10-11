@@ -347,3 +347,10 @@ textarea[lang=ja], .text-second:lang(ja) { color: var(--jp); }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* what the checks on a public save found, on the beat (checks.js) */
+.check-notes { display: grid; gap: 4px; margin: 8px 0 0; padding: 0; list-style: none; }
+.check-notes li { padding: 5px 10px; border-radius: 6px; font-size: 12.5px; }
+.check-notes li.problem { background: rgba(240, 138, 126, .13); color: var(--warn); }
+.check-notes li.voice { background: var(--raise); color: var(--dim); }
+.beat.has-problem { border-color: rgba(240, 138, 126, .55); }

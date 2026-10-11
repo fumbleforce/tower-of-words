@@ -264,6 +264,46 @@ def scene_status():
         STATUS_CACHE['all'] = (time.time(), value)
     return value
 
+class CheckFailed(ValueError):
+    """A save the story check refused: the file is back as it was, and `problems` lists what the check found."""
+    def __init__(self, message, problems):
+        super().__init__(message)
+        self.problems = problems
+
+def story_check():
+    """What the public story checks find (game3d/tools/*story-check.mjs: the main one lists 'file: node: what', the
+    day ones stop at their first 'place/node: what'), as 'node: what' lines; None when the project has no story check
+    (the tests' fixture roots)."""
+    scripts = sorted((ROOT / 'game3d/tools').glob('*story-check.mjs')) if (ROOT / 'game3d/tools').is_dir() else []
+    if not scripts:
+        return None
+    found = set()
+    for script in scripts:
+        r = subprocess.run(['node', str(script)], cwd=ROOT, capture_output=True, text=True, timeout=60)
+        if script.name == 'story-check.mjs':
+            found |= {line.split(': ', 1)[1] for line in r.stdout.splitlines() if ': ' in line and not line.startswith('story check')}
+        elif r.returncode:
+            m = re.search(r'AssertionError[^:]*: (.+)', r.stderr)
+            what = m.group(1).strip() if m else (r.stderr.strip().splitlines() or ['the check failed'])[-1]
+            where, _, msg = what.partition(': ')
+            found.add((where.split('/', 1)[1] if '/' in where else '') + ': ' + msg if msg else what)
+    return found
+
+def unvoiced_lines():
+    """Refresh the public voice manifest (game3d/tools/voice-manifest.mjs writes audio/manifest.json, so a changed line
+    is on the list for the voice run) and say which lines have no clip yet: [{speaker, text}]."""
+    script = ROOT / 'game3d/tools/voice-manifest.mjs'
+    if not script.is_file():
+        return []
+    subprocess.run(['node', str(script)], cwd=ROOT, capture_output=True, text=True, timeout=60)
+    r = subprocess.run(['node', str(script), '--check'], cwd=ROOT, capture_output=True, text=True, timeout=60)
+    out = []
+    for line in r.stdout.splitlines():
+        m = re.match(r'NO CLIP \S+ (\w+): (.*)$', line)
+        if m:
+            out.append({'speaker': m.group(1), 'text': m.group(2)})
+    return out
+
 def dispatch(action, body):
     if action in ('draft', 'save'):
         STATUS_CACHE.clear()
@@ -343,16 +383,25 @@ def dispatch(action, body):
         if old != prepared['source']:
             raise ValueError('CONFLICT: The source changed while saving. Reload before saving.')
         old_scene = current
+        before = story_check()
         name = f'{time.time_ns()}.json'
         atomic(slot(scene_id) / 'history' / name, json.dumps(old_scene, ensure_ascii=False))
         atomic(file, prepared['changed'])
+        # the story check after the write: anything it finds that it didn't before came from this save, which is undone
+        found = sorted((story_check() or set()) - (before or set())) if before is not None else []
+        if found:
+            atomic(file, old)
+            (slot(scene_id) / 'history' / name).unlink(missing_ok=True)
+            raise CheckFailed('The story check found a problem, so nothing was saved. It is marked on the beat.', found)
         try:
             atomic(slot(scene_id) / 'metadata.json', json.dumps(body.get('metadata', {}), ensure_ascii=False))
         except OSError:
             atomic(file, old)
             raise
         (slot(scene_id) / 'draft.json').unlink(missing_ok=True)
-        return dispatch('read', {'id': scene_id})
+        result = dispatch('read', {'id': scene_id})
+        result['unvoiced'] = unvoiced_lines()
+        return result
 
 # What the composer may ask the image service (tools/imagegen/server.py): its own reads, and the writes the original
 # dashboard makes (generate, ratings, delete and restore, trash, blocks with their versions).
@@ -452,6 +501,8 @@ def handle(handler):
                 handler._json(200, public_view(action, dispatch(action, body)))
                 return True
             handler._json(200, dispatch(action, body))
+    except CheckFailed as e:
+        handler._json(422, {'error': str(e), 'problems': e.problems})
     except (ValueError, OSError, subprocess.SubprocessError) as e:
         handler._json(409 if str(e).startswith('CONFLICT:') else 400, {'error': str(e)})
     return True
