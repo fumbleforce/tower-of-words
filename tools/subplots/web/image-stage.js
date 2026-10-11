@@ -5,7 +5,7 @@
 // Shot size, angle and lens are camera blocks; cameraKind() says which row a camera block belongs in.
 
 export const FACING = [['camera', 'Camera'], ['left', 'Left'], ['right', 'Right'], ['away', 'Away'], ['partner', 'Toward']];
-export const GAZE = [['viewer', 'The viewer'], ['partner', ''], ['away', 'Away'], ['down', 'Down'], ['up', 'Up']];
+export const GAZE = [['viewer', 'Viewer'], ['partner', ''], ['away', 'Away'], ['down', 'Down'], ['up', 'Up']];
 export const HEIGHTS = [['short', 'Shorter'], ['', 'Average'], ['tall', 'Taller']];
 export const LIGHT_FROM = [['front', 'Front', 'front lighting'], ['left', 'Left', 'light coming from the left'], ['right', 'Right', 'light coming from the right'],
   ['back', 'Behind', 'backlighting, rim light'], ['above', 'Above', 'light from above']];
