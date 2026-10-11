@@ -2,7 +2,8 @@
 // blocks like the rest (kinds pose, location, light in blocks.js); a composition keeps the block's id, and an older
 // one that kept the words themselves still reads (blockText).
 const {structuredClone} = globalThis;
-import {blockText, blockId} from '../../imagegen/web/blocks.js';
+import {blockId} from '../../imagegen/web/blocks.js';
+import {blockData, directionText} from './image-block-words.js';
 import {personWords} from './image-people.js';
 import {stageWords, personOf} from './image-stage.js';
 export const DIRECTION_KINDS = [['pose', 'pose', 'Pose'], ['environment', 'location', 'Setting'], ['light', 'light', 'Light']];
@@ -27,6 +28,7 @@ export function normalizeComposition(value = {}) {
   c.characters = value.characters || value.chars || [];
   c.cameras = value.cameras || value.cams || (value.camera ? [value.camera] : []);
   c.negatives = value.negatives ?? value.negs ?? null;
+  if (value.blockOverrides) c.blockOverrides = structuredClone(value.blockOverrides);
   if (value.people) c.people = structuredClone(value.people);
   if (value.stage) c.stage = structuredClone(value.stage);
   c.seedMode = value.seedMode || (value.seed === '' || value.seed == null ? 'random' : 'fixed');
@@ -52,7 +54,7 @@ function build(c, presets, subplotId) {
   const selected = c.characters.map(id => byId('character', id)).filter(Boolean);
   const generic = c.man && (presets.character || []).find(p => p.data.generic && !p.archived);
   const chars = generic && !selected.includes(generic) ? [...selected, generic] : selected;
-  const style = byId('style', c.style)?.data || {};
+  const style = blockData(c, presets, 'style', c.style);
   const ratings = ['safe', 'sensitive', 'nsfw'];
   let ratingIndex = Math.max(0, ratings.indexOf(c.rating));
   chars.forEach(p => { const cap = ratings.indexOf(p.data.rating_cap); if (cap >= 0) ratingIndex = Math.min(ratingIndex, cap); });
@@ -66,22 +68,22 @@ function build(c, presets, subplotId) {
   // direction and the mood after the setting and light blocks
   const staged = stageWords(c, chars.map(personOf));
   const sentence = x => String(x || '').trim().replace(/[.]+$/, '');
-  const directionParts = [['action', 'What happens', c.scene], ['pose', 'Pose', blockText(presets, 'pose', c.pose)], ['stage', 'Staging', staged.people], ['camera', 'Older camera angle', c.angle],
-    ['place', 'Setting', blockText(presets, 'location', c.environment)], ['light', 'Light', blockText(presets, 'light', c.light)], ['light', 'Light from', staged.light], ['mood', 'Mood', staged.mood]]
+  const directionParts = [['action', 'What happens', c.scene], ['pose', 'Pose', directionText(c, presets, 'pose', c.pose)], ['stage', 'Staging', staged.people], ['camera', 'Older camera angle', c.angle],
+    ['place', 'Setting', directionText(c, presets, 'location', c.environment)], ['light', 'Light', directionText(c, presets, 'light', c.light)], ['light', 'Light from', staged.light], ['mood', 'Mood', staged.mood]]
     .map(([kind, label, text]) => [kind, label, sentence(text)]).filter(x => x[2]);
   const direction = directionParts.map(x => x[2]).join('. ');
   const head = [style.quality, rating, cast, style.anchors].filter(Boolean).join(', ');
-  const cameraWords = c.cameras.map(id => byId('camera', id)?.data.prompt).filter(Boolean).join(', ');
-  const positive = smartJoin([head, blocks.join('; '), direction, cameraWords, byId('framing', c.framing)?.data.prompt, c.extra, style.suffix]);
+  const cameraWords = c.cameras.map(id => blockData(c, presets, 'camera', id).prompt).filter(Boolean).join(', ');
+  const positive = smartJoin([head, blocks.join('; '), direction, cameraWords, blockData(c, presets, 'framing', c.framing).prompt, c.extra, style.suffix]);
   // which block each stretch of the prompt comes from, in order, for the composer's coloured prompt (promptParts)
   const parts = [['style', 'Quality and style', [style.quality, rating].filter(Boolean).join(', ')], ['cast', 'Who is in it', cast], ['style', 'Style', style.anchors],
     ...blocks.map((text, i) => ['person', chars[i].data.generic ? 'The other person' : chars[i].data.name || chars[i].id, text]), ...directionParts,
-    ['camera', 'Camera', cameraWords], ['camera', 'Picture shape', byId('framing', c.framing)?.data.prompt], ['details', 'More details', c.extra], ['style', 'Style', style.suffix]]
+    ['camera', 'Camera', cameraWords], ['camera', 'Picture shape', blockData(c, presets, 'framing', c.framing).prompt], ['details', 'More details', c.extra], ['style', 'Style', style.suffix]]
     .map(([kind, label, text]) => ({kind, label, text: String(text || '').trim()})).filter(x => x.text);
   const negatives = c.negatives || (presets.negative || []).filter(p => !p.archived && p.data.default).map(p => p.id);
   const soft = rating !== 'safe' && !c.hard;
   const withSoft = text => soft ? dedupe([text, SOFT_NEGATIVE]) : text;
-  const negative = withSoft(dedupe([...negatives.map(id => byId('negative', id)?.data.text), c.styleNegOff ? '' : style.negative,
+  const negative = withSoft(dedupe([...negatives.map(id => blockData(c, presets, 'negative', id).text), c.blockOverrides?.style?.[c.style]?.negative ?? (c.styleNegOff ? '' : style.negative),
     ...people.map(p => p.appearanceNegative), ...people.map(p => p.clothingNegative), c.negative, 'child, loli']));
   const md = byId('model', c.model)?.data || {};
   const fr = byId('framing', c.framing)?.data || {};

@@ -1,5 +1,7 @@
 const {setInterval, clearInterval, document, URLSearchParams, CustomEvent} = globalThis;
 import {$, esc, api, guarded, notice} from './common.js';
+import {localBlockHtml, bindBlockWords} from './image-block-words.js';
+import {newestPictureFirst} from './image-order.js';
 import {personWords} from './image-people.js';
 import {guessComposition} from './image-guess.js';
 import {applyDefaults, normalizeComposition, assembleComposition, promptParts, portraitUrl} from './image-compose.js';
@@ -21,7 +23,7 @@ const chip = (label, selected, data) => `<button type="button" ${data} aria-pres
 const NEW = '__new__';
 const SETTINGS = ['model', 'count', 'seed', 'steps', 'cfg', 'width', 'height'];
 // A block picker: the block's entries, "+ New…" to add one right here, and Edit for the chosen one (block-editor.js).
-const pickerHtml = (name, kind, title, items, value, empty = 'No preference') => `<label>${esc(title)}<span class="block-pick"><select data-compose="${name}" data-kind="${kind}">${empty === null ? '' : `<option value="">${esc(empty)}</option>`}${options(items, value)}<option value="${NEW}">+ New…</option></select><button type="button" class="small ghost" data-edit-block="${kind}" data-edit-field="${name}" title="Edit, retire or restore an older version">Edit</button></span></label>`;
+const pickerHtml = (name, kind, title, items, value, empty = 'No preference') => `<label>${esc(title)}<span class="block-pick"><select data-compose="${name}" data-kind="${kind}">${empty === null ? '' : `<option value="">${esc(empty)}</option>`}${options(items, value)}<option value="${NEW}">+ New…</option></select><button type="button" class="small ghost" data-edit-block="${kind}" data-edit-field="${name}" title="Edit the template used by all shots">Edit shared template</button></span></label>`;
 const asset = (kind, path) => '/api/subplots/image/' + kind + '/' + String(path).split('/').map(encodeURIComponent).join('/');
 
 export function installImages(getScene, changed) {
@@ -88,6 +90,7 @@ export function installImages(getScene, changed) {
   const selectedImage = slot => getScene()?.metadata.images?.[slot] || (getScene()?.metadata.image?.slot === slot ? getScene().metadata.image : null);
   function updatePrompt() {
     const body = assemble();
+    if ($('#assembledNegative')) $('#assembledNegative').textContent = body.negative;
     // each block's words on a tint of their own, named on hover (Jørgen, 2026-10-11: "add colored background to
     // separate the different blocks of the prompts visually"); the prompt sent is the same text
     if ($('#assembled')) $('#assembled').innerHTML = promptParts(compose() || normalizeComposition(), presets || {}, getScene()?.id)
@@ -178,7 +181,7 @@ export function installImages(getScene, changed) {
       <div class="settings-grid">${pickerHtml('model', 'model', 'Model', presetOptions('model'), c.model, null)}${number('count', 'Pictures', c.count, 1, 8)}${number('steps', 'Steps', c.steps, 1, 100, 1, md.steps || 30)}${number('cfg', 'Prompt strength', c.cfg, 0.1, 30, 0.1, md.cfg || 5)}</div>
       <div class="settings-seed"><span class="settings-label">Seed</span><span class="seed-mode">${chip('Auto', !fixed, 'data-seed-mode="random" title="A new random seed for every picture"')}${chip('Fixed', fixed, 'data-seed-mode="fixed" title="Repeat one seed"')}</span>
         <input data-compose="seed" type="number" min="0" max="9007199254740991" step="1" value="${esc(c.seed ?? '')}" placeholder="${fixed ? 'Seed' : 'Random'}" aria-label="Seed" ${fixed ? '' : 'disabled'}></div>
-      <div class="chips sizes"><span class="settings-label">Size</span>${sizes}${size.own ? chip('This shot’s size ' + size.w + '×' + size.h, true, 'data-size-own') : ''}${chip('Custom size', customSize, 'data-size-custom')}<button type="button" data-new-block="framing">+ New</button><button type="button" data-edit-block="framing" data-edit-field="framing">Edit…</button></div>
+      <div class="chips sizes"><span class="settings-label">Size</span>${sizes}${size.own ? chip('This shot’s size ' + size.w + '×' + size.h, true, 'data-size-own') : ''}${chip('Custom size', customSize, 'data-size-custom')}<button type="button" data-new-block="framing">+ New</button><button type="button" data-edit-block="framing" data-edit-field="framing">Edit shared template…</button></div>${localBlockHtml(c, presets || {}, 'framing', c.framing, 'Picture shape')}
       ${customSize || size.own ? `<div class="two">${number('width', 'Width', c.width, 256, 2048, 64, size.w)}${number('height', 'Height', c.height, 256, 2048, 64, size.h)}</div>` : ''}</details>`;
   }
   const blockValue = (kind, value) => blockId(presets, kind, value) || value || '';
@@ -212,7 +215,7 @@ export function installImages(getScene, changed) {
     const c = compose();
     const setting = blockValue('location', c.environment);
     if (!setting) return notice('Choose a setting first.', true);
-    await api('image/api/generate', placeJob({...c, environment: setting, light: blockValue('light', c.light)}, presets));
+    await api('image/api/generate', placeJob(c, presets));
     notice('Making a small picture of the place. It shows on the right when it is done.');
     await refresh();
     renderShot();
@@ -222,10 +225,10 @@ export function installImages(getScene, changed) {
   function placeState(c) {
     const setting = blockValue('location', c.environment), light = blockValue('light', c.light);
     if (!setting) return {setting};
-    const key = placeKey(setting, light);
+    const key = placeKey(setting, light, c, presets);
     const job = jobs.find(j => j.compose?.placePreview === key && ['queued', 'running'].includes(j.status));
-    const exact = placeOf(setting, light);
-    return {setting, light, key, job, url: exact || exampleOf('location', setting), exact: !!exact};
+    const exact = placeOf(setting, light, c, presets);
+    return {setting, light, key, job, url: exact || (c.blockOverrides?.location?.[c.environment] || c.blockOverrides?.light?.[c.light] || c.blockOverrides?.style?.[c.style] || c.blockOverrides?.framing?.[c.framing] ? '' : exampleOf('location', setting)), exact: !!exact};
   }
   function shotHtml(c) {
     const slot = slots().find(s => s.id === activeSlot);
@@ -272,17 +275,19 @@ export function installImages(getScene, changed) {
     if (presets && !c.sourceChecked && !c.edited && (picked || slot?.available)) loadSource(activeSlot);
     const cast = c.characters.map(id => preset('character', id)).filter(Boolean);
     const current = shotHtml(c);
-    const look = `<section class="image-section image-look"><div class="two">${pickerHtml('style', 'style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p></section>`;
-    const happens = `<section class="image-section image-what"><div class="section-head"><h3>What happens</h3>${pickerHtml('scenePreset', 'scene', 'Saved scene direction', presetOptions('scene'), c.sceneRefs?.[0] || '', 'Choose a saved direction…')}</div>
-      <label><span class="visually-hidden">What happens in this picture?</span><textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label></section>`;
+    const look = `<section class="image-section image-look"><div class="two">${pickerHtml('style', 'style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p>${localBlockHtml(c, presets || {}, 'style', c.style, 'Art style')}</section>`;
+    const happens = `<section class="image-section image-what"><div class="section-head"><h3>What happens</h3>${pickerHtml('scenePreset', 'scene', 'Scene template', presetOptions('scene'), c.sceneRefs?.[0] || '', 'Choose a saved direction…')}</div>
+      <label><span class="visually-hidden">What happens in this shot</span><textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>${c.sceneRefs?.[0] ? '<button type="button" class="small" data-reset-scene>Reset to template</button>' : ''}</section>`;
     // Exclude folds to one line, like the generation settings: the negative blocks in use and anything else
     const negNames = active('negative').filter(p => c.negatives?.includes(p.id)).map(p => p.data.name);
     const excludePeek = [...negNames, c.negative ? 'more words' : '', c.rating !== 'safe' && !c.hard ? 'soft-scene limits' : ''].filter(Boolean).join(', ') || 'nothing';
     const details = `<section class="image-section image-details"><label class="details-line">More details<textarea data-compose="extra" rows="1" placeholder="Props, clothes, anything the blocks don't say">${esc(c.extra || '')}</textarea></label></section>`;
-    const exclude = `<details class="image-section image-exclude" data-exclude-open ${excludeOpen ? 'open' : ''}><summary><span class="settings-title">Exclude</span><span class="hint exclude-peek">${esc(excludePeek)}</span></summary><div class="chips">${active('negative').map(p => chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}" title="${esc(p.data.text)}"`)).join('')}<button type="button" data-new-block="negative">+ New</button><button type="button" data-edit-block="negative" data-edit-list="negatives">Edit…</button></div>
+    const exclude = `<details class="image-section image-exclude" data-exclude-open ${excludeOpen ? 'open' : ''}><summary><span class="settings-title">Exclude</span><span class="hint exclude-peek">${esc(excludePeek)}</span></summary><div class="chips">${active('negative').map(p => chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}" title="${esc(p.data.text)}"`)).join('')}<button type="button" data-new-block="negative">+ New</button><button type="button" data-edit-block="negative" data-edit-list="negatives">Edit shared template…</button></div>
+      ${(c.negatives || []).map(id => localBlockHtml(c, presets || {}, 'negative', id)).join('')}
+      <p class="hint">Generated exclusion prompt:</p><p id="assembledNegative" class="hint prompt-box exclude-prompt"></p>
       <div class="two"><label>Anything else to avoid?<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
       <label>Notes for steps outside the prompt<textarea data-compose="details" rows="1" placeholder="Inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></div>
-      ${c.rating !== 'safe' ? check('hard', 'Hard scene: leave out the standing soft-scene exclusions', c.hard) : '<p class="hint">Mature and Adult pictures always exclude visible nipples, visible genitals and an uncovered crotch, unless marked as a hard scene.</p>'}</details>`;
+      <p class="hint">${c.hard ? 'Adult: standing soft-scene exclusions are off.' : 'Nonadult: standing soft-scene exclusions apply to Mature and Adult content levels.'} Other exclusion words stay as written.</p></details>`;
     const dctx = directCtx();
     const o = c.original;
     const smallChanges = o?.start ? '<button data-small-changes title="Start from this shot’s picture with the same seed and change it a little (img2img, low strength).">Small changes to this picture</button>' : '';
@@ -303,8 +308,11 @@ export function installImages(getScene, changed) {
     // runs down one column.
     const stage = $('#composePreview'), shot = $('#composeShot');
     const composerHead = $('.compose-dialog .compose-head');
-    if (composerHead && !composerHead.querySelector('[data-composer-mode]') && globalThis.AmakawaNav?.modeControl) {
-      const mode = globalThis.AmakawaNav.modeControl(); mode.dataset.composerMode = ''; composerHead.insertBefore(mode, composerHead.querySelector('#closeCompose'));
+    if (composerHead) {
+      let mode = composerHead.querySelector('[data-composer-mode]');
+      if (!mode) { mode = document.createElement('div'); mode.dataset.composerMode = ''; mode.className = 'shot-mode'; composerHead.insertBefore(mode, composerHead.querySelector('#closeCompose')); }
+      mode.innerHTML = `<span>Shot</span>${['Nonadult', 'Adult'].map((label, i) => `<button type="button" data-shot-mode="${i ? 'adult' : 'nonadult'}" aria-pressed="${!!c.hard === !!i}" title="${i ? 'Leave out' : 'Apply'} standing soft-scene exclusions for this shot">${label}</button>`).join('')}`;
+      mode.querySelectorAll('[data-shot-mode]').forEach(b => b.onclick = () => edit(c => { c.hard = b.dataset.shotMode === 'adult'; }));
     }
     const direct = directHtml(c, dctx), place = placeHtml(c, dctx);
     if (stage && shot) {
@@ -322,7 +330,7 @@ export function installImages(getScene, changed) {
     if (presets) {
       loadExamples(api, exampleKinds(), paintExamples);
       const setting = blockValue('location', c.environment);
-      if (setting) loadPlace(api, setting, blockValue('light', c.light), paintExamples);
+      if (setting) loadPlace(api, setting, blockValue('light', c.light), paintExamples, c, presets);
     }
   }
   function edit(mutator, repaint = true) {
@@ -355,7 +363,7 @@ export function installImages(getScene, changed) {
         edit(c => {
           c[name] = el.type === 'checkbox' ? el.checked : el.value;
           if (!SETTINGS.includes(name)) c.override = null;
-        }, ['model', 'count', 'referenceOn', 'faceFix', 'rating'].includes(name));
+        }, ['model', 'count', 'referenceOn', 'faceFix', 'rating', 'pose', 'style', 'framing', 'environment', 'light'].includes(name));
       };
     });
     // picking people keeps the full picker open until Done
@@ -408,6 +416,7 @@ export function installImages(getScene, changed) {
     if (sd) sd.ontoggle = () => { settingsOpen = sd.open; };
     const xd = host.querySelector('[data-exclude-open]');
     if (xd) xd.ontoggle = () => { excludeOpen = xd.open; };
+    bindBlockWords(host, (change, repaint) => { edit(change, repaint); if (repaint === false) renderShot(); });
     bindDirect(host, directCtx());
     // Seed Auto or Fixed, as in the dashboard: Fixed with no seed yet picks one to repeat
     host.querySelectorAll('[data-seed-mode]').forEach(b => b.onclick = () => edit(c => {
@@ -432,6 +441,7 @@ export function installImages(getScene, changed) {
       notice('Guessed ' + (found.join(', ') || 'nothing') + ' from the prompt; the rest is in the free text.');
     }));
     bind('[data-reset-prompt]', () => edit(c => { c.override = null; }));
+    bind('[data-reset-scene]', () => edit(c => { c.scene = preset('scene', c.sceneRefs?.[0])?.data.text || ''; c.override = null; }));
     host.querySelectorAll('[data-original]').forEach(el => el.oninput = () => edit(c => {
       c.override = {positive: $('[data-original="positive"]', host).value, negative: $('[data-original="negative"]', host).value};
     }, false));
@@ -498,10 +508,10 @@ export function installImages(getScene, changed) {
     renderJobs();
   }
   function historyQuery(before) {
-    const q = new URLSearchParams({limit: '100', who: historyWho});
+    const q = new URLSearchParams({limit: '100', who: historyWho, pictures: '1'});
     if (historyCharacter) q.set('character', historyCharacter);
     if (historyStar) q.set('star', '1');
-    if (before) q.set('before', before);
+    if (before?.at) { q.set('before', before.at); q.set('before_run', before.run_id); q.set('before_n', before.last_n || 0); }
     return q;
   }
   async function loadHistory(more = false) {
@@ -509,7 +519,7 @@ export function installImages(getScene, changed) {
     const request = ++loadingHistory;
     historyBusy = true;
     try {
-      const rows = await api('image/api/history?' + historyQuery(more ? runs.at(-1)?.at : ''));
+      const rows = await api('image/api/history?' + historyQuery(more ? runs.at(-1) : null));
       if (request !== loadingHistory) return;
       runs = more ? [...runs, ...rows] : rows; historyEnd = rows.length < 100;
     } finally { if (request === loadingHistory) { historyBusy = false; renderJobs(); } }
@@ -531,12 +541,12 @@ export function installImages(getScene, changed) {
     if (sceneScope && sceneRunsFor !== getScene().id) { loadScenePictures(); }
     const ownRuns = new Set((sceneRuns || []).map(r => r.run_id));
     const all = new Map((sceneScope ? sceneRuns || [] : runs).flatMap(run => (run.renders || []).map(j => [j.id, {...run, ...j, status: 'done'}])));
-    for (const job of jobs) if (!sceneScope || all.has(job.id) || job.compose?.subplotId === getScene().id || ownRuns.has(job.run_id)) all.set(job.id, {...all.get(job.id), ...job});
+    for (const job of jobs) if (!sceneScope || all.has(job.id) || job.compose?.subplotId === getScene().id || ownRuns.has(job.run_id)) all.set(job.id, {...all.get(job.id), ...job, n: job.n ?? all.get(job.id)?.n});
     for (const [id, f] of edits) if (all.has(id)) Object.assign(all.get(id), f);
     const madeBy = j => historyWho === 'all' || (j.source === 'agent') === (historyWho === 'agents');
     selected = [...all.values()].filter(j => !j.deleted && madeBy(j) && !j.compose?.example && !j.compose?.placePreview
       && (!historyCharacter || j.characters?.includes(historyCharacter)) && (!historyStar || j.star || j.fav))
-      .sort((a, b) => (b.at || '9999').localeCompare(a.at || '9999'));
+      .sort(newestPictureFirst);
     const empty = `<p class="hint">${sceneScope && !sceneRuns ? 'Finding this scene’s pictures…' : historyScope === 'scene' ? 'No pictures for this scene yet, from the editor or from its picture rounds. Browse all generated pictures to use an existing one.' : 'No pictures match these filters.'}</p>`;
     host.innerHTML = `<section class="image-section image-library"><div class="pane-title"><h3>Picture library</h3><button data-trash aria-pressed="${showTrash}">Trash</button><button data-refresh-images>Refresh</button></div><p class="hint library-hint">Click a picture to look closer (arrows, s, f, x, Delete). “Use for this shot” puts one in the scene.</p>
       ${showTrash ? library.trashHtml() : `<div class="segmented"><button data-library="scene" aria-pressed="${historyScope === 'scene'}">This scene</button><button data-library="all" aria-pressed="${historyScope === 'all'}">All generated pictures</button></div>
@@ -581,7 +591,7 @@ export function installImages(getScene, changed) {
       else { c.sourceChecked = true; if (r.start?.image) c.original = {how: 'no record of how it was made', start: r.start.image}; render(); }
     } catch (e) { notice(e.message, true); }
   }
-  const hasBlocks = compose => !!compose && ['characters', 'chars', 'cameras', 'cams'].some(k => compose[k]?.length) || !!compose?.scene || !!compose?.man || !!Object.keys(compose?.people || {}).length;
+  const hasBlocks = compose => !!compose && ['characters', 'chars', 'cameras', 'cams'].some(k => compose[k]?.length) || !!compose?.scene || !!compose?.man || !!Object.keys(compose?.people || {}).length || !!Object.keys(compose?.blockOverrides || {}).length || ['environment', 'light', 'style', 'framing', 'pose'].some(k => !!compose?.[k]);
   // One way to open a picture's settings, for "Reuse settings" and for a shot's own picture: its blocks when it has
   // them, else Fill from prompt; the original prompt and settings ride along either way.
   function fillFromJob(j, {how = '', start = '', slot = activeSlot, quiet = false} = {}) {

@@ -1,0 +1,44 @@
+{
+  "title": "Edit image prompts for one shot",
+  "date": "2026-10-11",
+  "by": "codex",
+  "caption": "Setting, lighting, pose, camera and style words can be adapted for one shot. The shot mode controls its exclusions, and the picture library puts the newest pictures first.",
+  "result": [
+    "editor-desktop",
+    "setting-phone",
+    "direction-phone"
+  ],
+  "images": [
+    {
+      "id": "editor-desktop",
+      "image": "game3d/shots/editor-shot-blocks/editor-2560.png",
+      "caption": "Shot controls and picture library, with local appearance, clothing and camera words. Synthetic test scene."
+    },
+    {
+      "id": "setting-phone",
+      "image": "game3d/shots/editor-shot-blocks/place-390.png",
+      "caption": "Setting and light have local words, template reset and explicit shared-template editing."
+    },
+    {
+      "id": "style-desktop",
+      "image": "game3d/shots/editor-shot-blocks/look-1366.png",
+      "caption": "Style words and exclusions can be changed for one shot."
+    },
+    {
+      "id": "direction-phone",
+      "image": "game3d/shots/editor-shot-blocks/direction-screen-390.png",
+      "caption": "The shot mode remains at the top while editing camera words on a phone."
+    },
+    {
+      "id": "pose-phone",
+      "image": "game3d/shots/editor-shot-blocks/pose-390.png",
+      "caption": "Local pose words with Reset to template."
+    }
+  ],
+  "links": [
+    {
+      "label": "Open the scene editor",
+      "href": "tools/subplots/web/"
+    }
+  ]
+}

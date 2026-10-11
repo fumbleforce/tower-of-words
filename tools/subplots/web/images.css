@@ -418,3 +418,16 @@
   .compose-dialog .compose-col { overflow: visible; border-right: 0; }
   .compose-dialog .stage-wrap { grid-template-columns: minmax(0, 1fr); }
 }
+
+.local-block-words { margin: 6px 0; min-width: 0; }
+.local-block-words > summary { cursor: pointer; font-size: 12px; color: var(--dim); }
+.local-block-words label { margin: 6px 0; }
+.local-block-words textarea { width: 100%; min-height: 54px !important; }
+.shot-mode { display: flex; align-items: center; flex-shrink: 0; gap: 3px; }
+.shot-mode > span { color: var(--dim); font-size: 12px; margin-right: 4px; }
+.shot-mode button[aria-pressed=true] { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+.exclude-prompt { max-height: 160px; overflow: auto; white-space: pre-wrap; }
+.block-pick { flex-wrap: wrap; }
+.block-pick select { flex-basis: 120px; }
+.row-head { min-width: 0; }
+.row-head .tile-tool { max-width: 100%; white-space: normal; text-align: left; }

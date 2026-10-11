@@ -11,13 +11,13 @@ if (await fetch(base + '/').then(() => true, () => false)) throw Error(`Port ${p
 const server = spawn('python3', ['tools/review_server.py', String(port)], {env: {...process.env, SUBPLOTS_ROOT: root, SUBPLOTS_PUBLIC_ONLY: '1'}, stdio: 'ignore'});
 const picture = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240"><rect width="400" height="240" fill="#dae4ed"/><circle cx="200" cy="80" r="30" fill="#86a5bd"/><path d="M150 210v-65q50-60 100 0v65" fill="#567c98"/></svg>');
 const fixture = {id:'fixture:scene',steps:[{say:'alice',text:'Hello.'}],images:[{id:'one',label:'First shot',url:picture},{id:'two',label:'Second shot',url:picture},{id:'three',label:'Third shot',url:picture,available:true}],metadata:{}};
-const presets = {character:[{id:'alice',v:1,data:{name:'Alice',gender:'female',outfit:'blue coat',portrait:'art/fixture.webp'}},{id:'bob',v:1,data:{name:'Bob',gender:'male',portrait:'art/fixture.webp'}}],model:[{id:'local',v:1,data:{name:'Local model',file:'fixture.safetensors'}}],style:[{id:'paint',v:1,data:{name:'Painted',quality:'illustration'}}],framing:[{id:'wide',v:1,data:{name:'Wide',w:1200,h:800}}],camera:[{id:'near',v:1,data:{name:'Close',prompt:'close camera'}},{id:'left',v:1,data:{name:'From left',prompt:'left camera'}},{id:'cowboy',v:1,data:{name:'Cowboy shot',prompt:'cowboy shot',group:'shot',diagram:'thighs'}},{id:'full',v:1,data:{name:'Full body',prompt:'full body',group:'shot',diagram:'full'}}],scene:[{id:'reading',v:1,data:{name:'Reading',text:'Reading a letter'}}],negative:[],pose:[{id:'seated',v:1,data:{name:'Seated',text:'seated on a bench'}}],location:[{id:'bathhouse',v:1,data:{name:'Bathhouse',text:'in a bathhouse'}}],light:[{id:'night',v:1,data:{name:'Night lighting',text:'night lighting'}}],outfit:[]};
+const presets = {character:[{id:'alice',v:1,data:{name:'Alice',gender:'female',outfit:'blue coat',portrait:'art/fixture.webp'}},{id:'bob',v:1,data:{name:'Bob',gender:'male',portrait:'art/fixture.webp'}}],model:[{id:'local',v:1,data:{name:'Local model',file:'fixture.safetensors'}}],style:[{id:'paint',v:1,data:{name:'Painted',quality:'illustration'}}],framing:[{id:'wide',v:1,data:{name:'Wide',w:1200,h:800}}],camera:[{id:'near',v:1,data:{name:'Close',prompt:'close camera'}},{id:'left',v:1,data:{name:'From left',prompt:'left camera'}},{id:'cowboy',v:1,data:{name:'Cowboy shot',prompt:'cowboy shot',group:'shot',diagram:'thighs'}},{id:'full',v:1,data:{name:'Full body',prompt:'full body',group:'shot',diagram:'full'}}],scene:[{id:'reading',v:1,data:{name:'Reading',text:'Reading a letter'}}],negative:[{id:'clean',v:1,data:{name:'Clean',text:'watermark',default:true}}],pose:[{id:'seated',v:1,data:{name:'Seated',text:'seated on a bench'}}],location:[{id:'bathhouse',v:1,data:{name:'Bathhouse',text:'in a bathhouse'}}],light:[{id:'night',v:1,data:{name:'Night lighting',text:'night lighting'}}],outfit:[]};
 const html = `<html><head><link rel="stylesheet" href="/tools/subplots/web/editor.css"><link rel="stylesheet" href="/tools/subplots/web/images.css"></head><body><script>window.AMAKAWA_NAV=true;</script><script src="/tools/nav/nav.js"></script><div id="notice" role="status" hidden></div><main style="max-width:450px;margin:auto;padding:16px"><button data-inspect="images">Images</button><section id="images" hidden><button id="loadPresets">Connect</button><p id="imageStatus"></p><div id="composition"></div><div id="renders"></div></section></main><script type="module">import {installImages} from '/tools/subplots/web/images.js';window.fixture=${JSON.stringify(fixture)};window.edits=0;globalThis.document.querySelector('[data-inspect]').onclick=()=>globalThis.document.querySelector('#images').hidden=false;window.editor=installImages(()=>window.fixture,()=>window.edits++);window.editor.render();</script></body></html>`;
 try {
   for (let i = 0; i < 60; i++) {try {if ((await fetch(base + '/tools/subplots/web/images.js')).ok) break;} catch {} await new Promise(resolve => setTimeout(resolve, 100));}
-  await withBrowserJob('codex-subplot-image-editor', async browser => {
+  await withBrowserJob('codex-subplot-shot-blocks', async browser => {
     const page = await browser.newPage({viewport:{width:550,height:900}});
-    const errors = [], generated = [], created = [], rated = [], history = [], examples = [], jobsNow = [];
+    const errors = [], generated = [], created = [], rated = [], history = [], examples = [], jobsNow = [], historyQueries = [];
     page.on('pageerror', e => errors.push(e.message));
     await page.route('**/api/nav-private.js', route => route.fulfill({contentType:'text/javascript',body:''}));
     await page.route('**/island/private/**', route => route.abort());
@@ -30,7 +30,8 @@ try {
       let body = [];
       if (u.pathname.endsWith('/presets')) body = presets;
       if (u.pathname.endsWith('/jobs')) body = jobsNow;
-      if (u.pathname.endsWith('/history')) body = u.searchParams.get('preset') ? examples.filter(r => r.example === u.searchParams.get('preset')).map(r => r.run) : history.length ? history : [{run_id:'old',at:'2026-10-01',characters:['alice'],positive:'A previous picture.',model_file:'fixture.safetensors',renders:[{id:'old-picture',file:'fixture.png',thumb:'fixture.webp',seed:8}]}];
+      if (u.pathname.endsWith('/history')) historyQueries.push(Object.fromEntries(u.searchParams));
+      if (u.pathname.endsWith('/history')) body = u.searchParams.has('before') ? [] : u.searchParams.get('preset') ? examples.filter(r => r.example === u.searchParams.get('preset')).map(r => r.run) : history.length ? history : [{run_id:'old',at:'2026-10-01',characters:['alice'],positive:'A previous picture.',model_file:'fixture.safetensors',renders:[{id:'old-picture',file:'fixture.png',thumb:'fixture.webp',seed:8}]}];
       if (u.pathname.endsWith('/portraits')) body = [{path:'art/fixture.webp',group:'Portrait'}];
       if (u.pathname.endsWith('/generate')) { generated.push(route.request().postDataJSON()); body = {run_id:'new'}; }
       if (u.pathname.endsWith('/mode')) body = {private: false};
@@ -65,7 +66,7 @@ try {
     assert.equal(generated[0].seed_mode,'random');
     assert.match(await page.locator('.settings-peek').textContent(),/Local model · 1 picture · seed auto · 30 steps · CFG 5 · Wide 1200×800/);
     assert.equal(await page.locator('[data-compose=seed]').isVisible(),false);
-    await page.locator('.image-settings summary').click();
+    await page.locator('.image-settings > summary').click();
     assert.equal(await page.locator('[data-compose=seed]').isDisabled(),true);
     await page.locator('[data-seed-mode=fixed]').click();
     assert.ok(+await page.locator('[data-compose=seed]').inputValue() > 0);
@@ -192,11 +193,11 @@ try {
     assert.match(await page.locator('.image-current').textContent(), /Preview its place|Place preview/);
     await page.locator('.image-current [data-preview-place]').click();
     const place = generated.at(-1);
-    assert.equal(place.compose.placePreview, 'place:outside-sento|night');
+    assert.match(place.compose.placePreview, /^place:outside-sento\|night\|/);
     assert.match(place.positive, /no people.*outside a sento, a noren curtain.*night lighting/);
     assert.doesNotMatch(place.positive, /1girl|Alice/);
     assert.ok(place.w <= 640 && place.h <= 640 && place.steps === 20, 'small and quick');
-    jobsNow.push({id:'pl-1',status:'done',file:'pl.png',thumb:'pl.webp',compose:{placePreview:'place:outside-sento|night'}});
+    jobsNow.push({id:'pl-1',status:'done',file:'pl.png',thumb:'pl.webp',compose:{placePreview:place.compose.placePreview}});
     await page.locator('[data-refresh-images]').click();
     await page.waitForFunction(()=>/Place preview: Outside sento, Night lighting\./.test(globalThis.document.querySelector('.place-preview figcaption')?.textContent || ''));
     assert.equal(await page.locator('.place-preview img').count(), 1);
@@ -236,7 +237,7 @@ try {
     await page.locator('[data-reset-person=clothing][data-person-id=alice]').click();
     assert.equal(await local('clothing').inputValue(), 'wearing blue coat');
     await local('clothing').fill(localJob.compose.people.alice.clothing);
-    fs.mkdirSync('/tmp/codex-subplot-image-editor',{recursive:true});
+    fs.mkdirSync('/tmp/codex-subplot-shot-blocks',{recursive:true});
     // A shot containing only the unnamed person still has reusable local prompt blocks.
     presets.character.push({id:'extra',v:1,data:{generic:true,name:'Unnamed adult',gender:'male',look:'brown hair'}});
     await page.locator('#loadPresets').click();
@@ -252,9 +253,10 @@ try {
     await page.evaluate(() => {
       const main = globalThis.document.querySelector('main');
       main.style = '';
-      const dialog = globalThis.document.createElement('dialog'); dialog.className = 'compose-dialog';
+      const dialog = globalThis.document.createElement('dialog'); dialog.className = 'compose-dialog'; dialog.id = 'composeDialog';
       const head = globalThis.document.createElement('div'); head.className = 'compose-head'; head.innerHTML = '<h2>Compose a new picture <span id=composeFor></span></h2><span class=quiet></span><button id=closeCompose>Done</button>';
       dialog.append(head); globalThis.document.body.append(dialog);
+      for (const overlay of globalThis.document.querySelectorAll('.lib-overlay')) dialog.append(overlay);
       const body = globalThis.document.createElement('div'); body.className = 'compose-body';
       const composition = globalThis.document.querySelector('#composition'); composition.className = 'compose-col';
       const stage = globalThis.document.createElement('div'); stage.id = 'composePreview'; stage.className = 'compose-col compose-stage';
@@ -263,24 +265,127 @@ try {
       side.append(shot, globalThis.document.querySelector('#renders'));
       body.append(composition, stage, side); dialog.append(body); main.hidden = true; dialog.showModal(); globalThis.editor.render();
     });
-    assert.equal(await page.locator('.compose-head .anav-mode').count(), 1);
-    assert.equal(await page.locator('.compose-head .anav-mode button').count(), 2);
-    await page.locator('.compose-head .anav-mode button').first().click();
+    assert.equal(await page.locator('.compose-head .shot-mode').count(), 1);
+    assert.equal(await page.locator('.compose-head .shot-mode button').count(), 2);
+    await page.locator('.compose-head .shot-mode button').first().click();
+    await page.setViewportSize({width:1366,height:844});
+    // Every selected prompt block can be adapted without a shared-preset API write.
+    await page.locator('[data-compose=pose]').selectOption('seated');
+    const word = (kind, id, key = 'text') => page.locator(`[data-block-kind="${kind}"][data-block-id="${id}"][data-block-word="${key}"]`);
+    const openWords = async (kind, id) => {
+      const d = page.locator(`[data-local-block="${kind}"][data-local-id="${id}"]`);
+      if (!await d.evaluate(el => el.open)) await d.locator('summary').click();
+    };
+    await openWords('location', 'outside-sento');
+    await word('location', 'outside-sento').fill('outside a cafe with its door open');
+    await openWords('light', 'night');
+    await word('light', 'night').fill('warm window light');
+    await openWords('style', 'paint');
+    await word('style', 'paint', 'quality').fill('ink drawing');
+    await word('style', 'paint', 'anchors').fill('fine pen strokes');
+    await word('style', 'paint', 'suffix').fill('muted colours');
+    await word('style', 'paint', 'negative').fill('rough lines');
+    await openWords('pose', 'seated');
+    await word('pose', 'seated').fill('leaning forward');
+    await page.locator('[data-cam-tab=shot]').click();
+    await openWords('camera', 'full');
+    await word('camera', 'full', 'prompt').fill('full length view from across the room');
+    if (!await page.locator('.image-settings').evaluate(el => el.open)) await page.locator('.image-settings > summary').click();
+    await openWords('framing', 'wide');
+    await word('framing', 'wide', 'prompt').fill('extra room above the head');
+    if (!await page.locator('.image-exclude').evaluate(el => el.open)) await page.locator('.image-exclude > summary').click();
+    await page.locator('[data-negative=clean]').click();
+    if (await page.locator('[data-negative=clean]').getAttribute('aria-pressed') !== 'true') await page.locator('[data-negative=clean]').click();
+    await openWords('negative', 'clean');
+    await word('negative', 'clean').fill('window reflections');
+    const beforeLocal = JSON.stringify(presets);
+    await page.locator('#generate').click();
+    const adapted = generated.at(-1);
+    assert.match(adapted.positive, /ink drawing.*fine pen strokes.*leaning forward.*outside a cafe.*warm window light.*full length view.*extra room above the head.*muted colours/);
+    assert.match(adapted.negative, /window reflections, rough lines/);
+    assert.equal(adapted.negative, await page.locator('#assembledNegative').textContent());
+    assert.equal(adapted.positive, await page.locator('#assembled').textContent());
+    assert.equal(created.length, 1);
+    assert.equal(JSON.stringify(presets), beforeLocal);
+    await word('negative', 'clean').fill('');
+    assert.doesNotMatch(await page.locator('#assembledNegative').textContent(), /window reflections|watermark/);
+    await page.locator('[data-reset-block-words=negative]').click();
+    assert.match(await page.locator('#assembledNegative').textContent(), /watermark/);
+    // Local setting changes make a fresh place preview with the same local words.
+    await page.locator('#composeShot [data-preview-place]').click();
+    assert.match(generated.at(-1).positive, /ink drawing.*outside a cafe.*warm window light.*extra room above the head/);
+    assert.notEqual(generated.at(-1).compose.placePreview, place.compose.placePreview);
+    // The shot mode edits hard in place. It does not navigate, discard copied prompts or change the library cookie.
+    await page.locator('[data-compose=rating]').selectOption('nsfw');
+    const cookieBefore = await page.context().cookies(), urlBefore = page.url();
+    await page.locator('[data-shot-mode=adult]').click();
+    assert.doesNotMatch(await page.locator('#assembledNegative').textContent(), /visible genitals/);
+    await page.locator('[data-shot-mode=nonadult]').click();
+    assert.match(await page.locator('#assembledNegative').textContent(), /visible genitals/);
+    await page.evaluate(() => { fixture.metadata.compositions.three.override = {positive:'Exact original words',negative:'visible nipples, original exclusions'}; globalThis.editor.render(); });
+    await page.locator('[data-shot-mode=adult]').click();
+    assert.equal(await page.locator('#assembled').textContent(), 'Exact original words');
+    assert.equal(await page.locator('#assembledNegative').textContent(), 'visible nipples, original exclusions');
+    assert.deepEqual(await page.context().cookies(), cookieBefore);
+    assert.equal(page.url(), urlBefore);
+    // Background-only generated compositions keep their local words on history reuse.
+    const background = structuredClone(adapted.compose); background.characters = []; background.chars = []; background.man = false;
+    history.unshift({run_id:'blocks',at:'2026-10-14',characters:[],positive:adapted.positive,negative:adapted.negative,model_file:'fixture.safetensors',compose:background,renders:[{id:'blocks-1',file:'blocks.png',seed:10}]});
+    await page.locator('[data-refresh-images]').click();
+    await page.waitForFunction(() => globalThis.document.querySelectorAll('[data-lib=reuse]').length >= 4);
+    await page.locator('[data-lib=reuse]').first().click();
+    assert.equal(await word('location', 'outside-sento').inputValue(), background.blockOverrides.location['outside-sento'].text);
+    assert.equal(await page.locator('[data-person]').count(), 0);
+    await page.evaluate(c => { fixture.metadata.compositions.three = c; globalThis.editor.render(); }, adapted.compose);
+    await openWords('location', 'outside-sento');
+    await openWords('style', 'paint');
+    await openWords('camera', 'full');
+    await openWords('pose', 'seated');
+    // The grid and lightbox share exact newest-first image order, including merged live jobs.
+    const at = '2026-10-15T12:00:00Z', epoch = Date.parse(at) / 1000;
+    history.splice(0, history.length, {run_id:'ordered',at,characters:['alice'],renders:[
+      {id:'old-order',file:'order-old.png',n:39,at_epoch:epoch,idx:0},
+      {id:'batch-zero',file:'order-zero.png',n:40,at_epoch:epoch+1,idx:0},
+      {id:'batch-one',file:'order-one.png',n:41,at_epoch:epoch+1,idx:1},
+      {id:'later-run',file:'order-later.png',n:42,at_epoch:epoch+1,idx:0},
+    ]});
+    jobsNow.push({id:'batch-one',status:'done',file:'order-one.png',at_epoch:epoch+1,n:null,idx:1},
+      {id:'completed-live',status:'done',file:'order-live.png',at_epoch:epoch+2,n:43},
+      {id:'pending-live',status:'running',created:epoch+3});
+    await page.locator('[data-refresh-images]').click();
+    await page.waitForFunction(() => globalThis.document.querySelectorAll('#renders [data-lib=open]').length === 5);
+    assert.deepEqual(await page.locator('#renders [data-lib=open] img').evaluateAll(els => els.map(el => el.src.split('/').at(-1))), ['order-live.png','order-later.png','order-one.png','order-zero.png','order-old.png']);
+    assert.match(await page.locator('#renders .render-card').nth(3).textContent(), /#41/);
+    await page.locator('#renders [data-lib=open]').first().click();
+    assert.match(await page.locator('#libLightbox .pic img').getAttribute('src'), /order-live.png/);
+    await page.keyboard.press('ArrowRight');
+    assert.match(await page.locator('#libLightbox .pic img').getAttribute('src'), /order-later.png/);
+    await page.keyboard.press('Escape');
     for (const width of [2560, 1366, 390]) {
       await page.setViewportSize({width,height:844});
-      await page.locator('[data-person=alice]').screenshot({path:`/tmp/codex-subplot-image-editor/people-${width}.png`});
-      await page.evaluate(() => { globalThis.document.querySelector('.compose-body').scrollTop = 0; globalThis.document.querySelector('#composition').scrollTop = 0; });
-      await page.screenshot({path:`/tmp/codex-subplot-image-editor/editor-${width}.png`});
+      await page.locator('[data-person=alice]').screenshot({path:`/tmp/codex-subplot-shot-blocks/people-${width}.png`});
+      for (const section of ['place', 'look', 'direction']) await page.locator('.image-' + section).screenshot({path:`/tmp/codex-subplot-shot-blocks/${section}-${width}.png`});
+      await page.locator('[data-local-block=pose]').screenshot({path:`/tmp/codex-subplot-shot-blocks/pose-${width}.png`});
+      await page.locator('.image-direction').evaluate(el => el.scrollIntoView({block:'start'}));
+      await page.evaluate(() => { globalThis.document.querySelector('#composeDialog').scrollTop = 0; globalThis.scrollTo(0,0); });
+      await page.screenshot({path:`/tmp/codex-subplot-shot-blocks/direction-screen-${width}.png`});
+      await page.evaluate(() => { globalThis.document.querySelector('#composeDialog').scrollTop = 0; globalThis.scrollTo(0,0); globalThis.document.querySelector('.compose-body').scrollTop = 0; for (const col of globalThis.document.querySelectorAll('.compose-col')) col.scrollTop = 0; });
+      await page.screenshot({path:`/tmp/codex-subplot-shot-blocks/editor-${width}.png`});
       assert.ok(await local('appearance').evaluate(el => el.getBoundingClientRect().width) > 200);
       assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth > globalThis.innerWidth),false);
     }
     assert.deepEqual(errors,[]);
-    fs.mkdirSync('/tmp/codex-subplot-image-editor',{recursive:true});
-    await page.screenshot({path:'/tmp/codex-subplot-image-editor/550.png',fullPage:true});
+    fs.mkdirSync('/tmp/codex-subplot-shot-blocks',{recursive:true});
+    await page.screenshot({path:'/tmp/codex-subplot-shot-blocks/550.png',fullPage:true});
     await page.setViewportSize({width:390,height:844});
     assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth > globalThis.innerWidth),false);
-    await page.screenshot({path:'/tmp/codex-subplot-image-editor/390.png',fullPage:true});
+    await page.screenshot({path:'/tmp/codex-subplot-shot-blocks/390.png',fullPage:true});
+    history.splice(0, history.length, ...Array.from({length:100}, (_, i) => ({run_id:'page-'+i,at:'2026-10-15T12:00:00Z',last_n:100-i,renders:[]})));
+    await page.locator('[data-refresh-images]').click();
+    await page.locator('[data-more-images]').click();
+    await page.waitForFunction(() => !globalThis.document.querySelector('[data-more-images]'));
+    assert.deepEqual(historyQueries.findLast(q => q.before), {limit:'100',who:'all',pictures:'1',before:'2026-10-15T12:00:00Z',before_run:'page-99',before_n:'1'});
     await page.close();
-    console.log('PASS image editor: Preview this place in the empty picture slot, setting and light rows folded to the choice, the prompt tinted by block, Direct the shot (camera tabs, shot size tiles, stage drag, facing, gaze, arrow keys, the stage reopened by Reuse), Make examples, auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, + New setting from Bathhouse, lightbox star and keys, a shot opened from its source with Small changes, people folded to the cast, settings folded with seed Auto or Fixed and size presets, 390px layout.');
+    console.log('PASS local prompt blocks, explicit blanks, reset, saved history, background-only reuse, adapted place previews, shot modes with copied prompts and unchanged cookies; image editor: Preview this place in the empty picture slot, setting and light rows folded to the choice, the prompt tinted by block, Direct the shot (camera tabs, shot size tiles, stage drag, facing, gaze, arrow keys, the stage reopened by Reuse), Make examples, auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, + New setting from Bathhouse, lightbox star and keys, a shot opened from its source with Small changes, people folded to the cast, settings folded with seed Auto or Fixed and size presets, 390px layout.');
   }, {timeoutMs:60000,gpuWaitMs:60000});
 } finally {server.kill('SIGTERM');fs.rmSync(root,{recursive:true,force:true});}

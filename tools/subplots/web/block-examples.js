@@ -3,6 +3,8 @@
 // first (made by "Make examples": a small render of a plain stand-in figure with the block), then a starred one, then
 // the newest. Nothing is fetched for a block twice in a session.
 const {URLSearchParams} = globalThis;
+import {blockId} from '../../imagegen/web/blocks.js';
+import {blockData, directionText} from './image-block-words.js';
 import {applyDefaults, normalizeComposition, assembleComposition} from './image-compose.js';
 
 const found = new Map();    // 'kind:id' -> thumbnail url, or '' when there is none
@@ -58,17 +60,26 @@ export function forgetMissing(blocks) { for (const [kind, id] of blocks) if (fou
 // then to see if it matches expectations, and not get a blank preview as now"): the shot's setting in its light, with
 // no people, small and quick, in the shot's style and shape. Kept by its setting and light, so the tile and the empty
 // picture slot can show it until the shot itself is made.
-export const placeKey = (setting, light) => 'place:' + setting + '|' + (light || '');
-export const placeOf = (setting, light) => found.get(placeKey(setting, light)) || '';
+export function placeKey(setting, light, c, presets = {}) {
+  const base = 'place:' + (blockId(presets, 'location', setting) || setting) + '|' + (blockId(presets, 'light', light) || light || '');
+  if (!c) return base;
+  const words = JSON.stringify([directionText(c, presets, 'location', c.environment), directionText(c, presets, 'light', c.light),
+    blockData(c, presets, 'style', c.style), blockData(c, presets, 'framing', c.framing), c.width, c.height,
+    (c.negatives || []).map(id => blockData(c, presets, 'negative', id).text), c.negative, c.styleNegOff]);
+  let hash = 2166136261;
+  for (const ch of words) hash = Math.imul(hash ^ ch.charCodeAt(0), 16777619);
+  return base + '|' + (hash >>> 0).toString(36);
+}
+export const placeOf = (setting, light, c, presets) => found.get(placeKey(setting, light, c, presets)) || '';
 export function placeJob(c, presets) {
   const fr = (presets.framing || []).find(p => p.id === c.framing)?.data || {};
   const w0 = +c.width || fr.w || 1216, h0 = +c.height || fr.h || 832, k = 640 / Math.max(w0, h0);
   const p = applyDefaults(normalizeComposition({scene: SUBJECT.location, environment: c.environment, light: c.light, style: c.style, model: c.model,
-    framing: c.framing, count: 1, rating: 'safe', negatives: null, castInitialized: true}), presets);
+    framing: c.framing, blockOverrides: c.blockOverrides, styleNegOff: c.styleNegOff, negative: c.negative, count: 1, rating: 'safe', negatives: c.negatives ?? null, castInitialized: true}), presets);
   const body = assembleComposition(p, presets, '');
   const snap = n => Math.max(320, Math.round(n * k / 64) * 64);
   Object.assign(body, {w: snap(w0), h: snap(h0), steps: 20, count: 1, seed_mode: 'random', ipa: null, repaint: null, start: null, control: null, loras: [], huefix: []});
-  body.compose = {...body.compose, placePreview: placeKey(c.environment, c.light), subplotId: '', ...(c.light ? {} : {example: 'location:' + c.environment})};
+  body.compose = {...body.compose, placePreview: placeKey(c.environment, c.light, c, presets), subplotId: ''};
   return body;
 }
 // A finished example or place preview from the queue becomes the newest picture for its block or place at once.
@@ -79,8 +90,8 @@ export function noteDone(job) {
   return changed;
 }
 // The newest place preview for this setting and light in the history (once a session).
-export function loadPlace(api, setting, light, done) {
-  const key = placeKey(setting, light);
+export function loadPlace(api, setting, light, done, c, presets) {
+  const key = placeKey(setting, light, c, presets);
   if (!setting || found.has(key) || asking.has(key)) return;
   const p = api('image/api/history?' + new URLSearchParams({preset: 'location:' + setting, limit: '60'}))
     .then(runs => {

@@ -59,6 +59,7 @@ html.has-anav body{padding-top:var(--anav-h)}
 #amakawa-nav .anav-links{display:flex;align-items:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
 #amakawa-nav .anav-links::-webkit-scrollbar{display:none}
 .anav-mode{display:flex;flex:none;gap:2px;padding:3px;margin-left:8px;border:1px solid #36404e;border-radius:8px}
+.anav-mode-label{align-self:center;padding:0 4px;color:#a3abb9;font-size:11px}
 .anav-mode button{appearance:none;cursor:pointer;border:0;border-radius:5px;padding:5px 8px;margin:0;min-height:26px;background:transparent;color:#a3abb9;font:inherit}
 .anav-mode button[aria-pressed=true]{background:#28433f;color:#a0e4d8}
 .anav-mode button[data-mode=adult][aria-pressed=true]{background:#472c37;color:#f3b1c6}
@@ -117,14 +118,18 @@ html.has-anav body{padding-top:var(--anav-h)}
     const mode = document.createElement('div');
     mode.className = 'anav-mode';
     mode.setAttribute('role', 'group');
-    mode.setAttribute('aria-label', 'Content mode');
+    mode.setAttribute('aria-label', 'Library content');
+    const label = document.createElement('span');
+    label.className = 'anav-mode-label';
+    label.textContent = 'Library';
+    mode.append(label);
     for (const [adult, label] of [[false, 'Nonadult'], [true, 'Adult']]) {
       const button = document.createElement('button');
       button.type = 'button';
       button.textContent = label;
       button.dataset.mode = adult ? 'adult' : 'nonadult';
       button.setAttribute('aria-pressed', String(privateMode === adult));
-      button.title = adult ? 'Show adult content and tools' : 'Show nonadult content only';
+      button.title = adult ? 'Browse adult content and tools' : 'Browse nonadult content only';
       button.onclick = () => {
         if (privateMode === adult) return;
         const target = new URL(adult ? '/private' : '/public', origin);

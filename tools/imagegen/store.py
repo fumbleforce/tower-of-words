@@ -257,6 +257,7 @@ def log_append(entry):
             entry = dict(entry, n=max((r.get('n') or 0 for r in log_read()), default=0) + 1)
         with open(LOG, 'a', encoding='utf-8') as f:
             f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+        return entry
 
 
 def log_read():

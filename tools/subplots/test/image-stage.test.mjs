@@ -93,11 +93,34 @@ test('the prompt cut into its blocks joins back to the exact prompt, each stretc
 });
 
 test('a place preview is the setting in its light with no people, small, in the shot shape', () => {
-  const body = placeJob(normalizeComposition({characters: ['ana'], style: 'house', framing: 'landscape', environment: 'office', light: 'evening'}), presets);
+  const c = normalizeComposition({characters: ['ana'], style: 'house', framing: 'landscape', environment: 'office', light: 'evening'});
+  const body = placeJob(c, presets);
   assert.match(body.positive, /no people\. in an office\. evening light/);
   assert.doesNotMatch(body.positive, /Ana|1girl/);
   assert.deepEqual([body.w, body.h, body.steps], [640, 448, 20]);
-  assert.equal(body.compose.placePreview, placeKey('office', 'evening'));
+  assert.equal(body.compose.placePreview, placeKey('office', 'evening', c, presets));
   assert.equal(body.compose.example, undefined);
-  assert.equal(placeJob(normalizeComposition({framing: 'landscape', environment: 'office'}), presets).compose.example, 'location:office');
+  assert.equal(placeJob(normalizeComposition({framing: 'landscape', environment: 'office'}), presets).compose.example, undefined);
+});
+
+test('place previews use local words and have distinct keys without replacing template examples', () => {
+  const c = normalizeComposition({style: 'house', framing: 'landscape', environment: 'office', light: 'evening', blockOverrides: {location: {office: {text: 'quiet rooftop'}}, light: {evening: {text: 'blue hour'}}, style: {house: {quality: 'watercolour'}}, framing: {landscape: {prompt: 'panorama'}}}});
+  const b = placeJob(c, presets);
+  assert.match(b.positive, /watercolour.*quiet rooftop.*blue hour.*panorama/);
+  assert.equal(b.compose.example, undefined);
+  for (const [kind, id, field] of [['location', 'office', 'text'], ['light', 'evening', 'text'], ['style', 'house', 'quality'], ['framing', 'landscape', 'prompt']]) {
+    const changed = structuredClone(c); changed.blockOverrides[kind][id][field] = '';
+    assert.notEqual(placeJob(changed, presets).compose.placePreview, b.compose.placePreview);
+  }
+});
+
+test('legacy template names keep their local override in place previews and canonical cache lookups', () => {
+  const ps = structuredClone(presets);
+  ps.location = [{id:'room',data:{name:'Room',text:'an old room'}}];
+  ps.light = [{id:'day',data:{name:'Daylight',text:'old light'}}];
+  const c = normalizeComposition({environment:'Room',light:'Daylight',blockOverrides:{location:{Room:{text:'a sunny terrace'}},light:{Daylight:{text:'clear sunlight'}}}});
+  const b = placeJob(c, ps);
+  assert.match(b.positive, /a sunny terrace.*clear sunlight/);
+  assert.doesNotMatch(b.positive, /an old room|old light/);
+  assert.equal(b.compose.placePreview, placeKey('room', 'day', c, ps));
 });

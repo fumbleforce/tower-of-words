@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeComposition, assembleComposition, portraitUrl} from '../web/image-compose.js';
+import {normalizeComposition, assembleComposition, portraitUrl, SOFT_NEGATIVE, promptParts} from '../web/image-compose.js';
 
 const rec = (id, data) => ({id, v: 3, data});
 const presets = {
@@ -108,4 +108,47 @@ test('explicit blank shot words suppress template words while legacy short and f
 test('local exclusions work even when a legacy composition disabled template exclusions', () => {
   const c = composition({charNegOff: {alice: true}, people: {alice: {appearanceNegative: 'messy bun'}}});
   assert.match(assembleComposition(c, presets).negative, /messy bun/);
+});
+
+test('all template text blocks support shot-local words, blanks, and generation metadata round trips', () => {
+  const ps = structuredClone(presets);
+  ps.pose = [rec('sit', {text: 'template pose'})];
+  ps.location = [rec('room', {text: 'template room'})];
+  ps.light = [rec('day', {text: 'template light'})];
+  const before = JSON.stringify(ps);
+  const c = composition({pose: 'sit', environment: 'room', light: 'day', cameras: ['near'], negatives: ['clean'], blockOverrides: {
+    pose: {sit: {text: 'leaning forward'}}, location: {room: {text: 'beside an open window'}}, light: {day: {text: 'sunlight through clouds'}},
+    style: {soft: {quality: 'ink drawing', anchors: '', suffix: 'fine lines', negative: 'rough lines'}}, camera: {near: {prompt: 'over the shoulder'}},
+    framing: {wide: {prompt: ''}}, negative: {clean: {text: 'crooked window'}},
+  }});
+  const b = assembleComposition(c, ps);
+  assert.match(b.positive, /ink drawing.*leaning forward.*beside an open window.*sunlight through clouds.*over the shoulder.*fine lines/);
+  assert.doesNotMatch(b.positive, /painted illustration|wide shot|template/);
+  assert.match(b.negative, /crooked window, rough lines/);
+  assert.doesNotMatch(b.negative, /blur|watermark/);
+  assert.equal(promptParts(c, ps).map(p => p.text).join(''), b.positive);
+  assert.equal(assembleComposition(normalizeComposition(JSON.parse(JSON.stringify(b.compose))), ps).positive, b.positive);
+  assert.equal(JSON.stringify(ps), before);
+  c.blockOverrides.negative.clean.text = '';
+  assert.doesNotMatch(assembleComposition(c, ps).negative, /crooked window|watermark/);
+});
+
+test('shot mode only changes standing exclusions and preserves copied prompts and explicit exclusions', () => {
+  const c = composition({characters: [], rating: 'nsfw', negative: 'visible nipples, custom words'});
+  const soft = assembleComposition(c, presets);
+  assert.match(soft.negative, /visible genitals/);
+  c.hard = true;
+  const adult = assembleComposition(c, presets);
+  assert.equal(adult.positive, soft.positive);
+  assert.doesNotMatch(adult.negative, /visible genitals/);
+  assert.match(adult.negative, /visible nipples, custom words/);
+  c.override = {positive: 'Exact original words', negative: 'visible nipples, original exclusions'};
+  c.hard = false;
+  assert.match(assembleComposition(c, presets).negative, /visible genitals/);
+  c.hard = true;
+  const copy = assembleComposition(c, presets);
+  assert.equal(copy.positive, c.override.positive);
+  assert.equal(copy.negative, c.override.negative);
+  assert.deepEqual(normalizeComposition(copy.compose).override, c.override);
+  assert.ok(SOFT_NEGATIVE.includes('visible genitals'));
 });

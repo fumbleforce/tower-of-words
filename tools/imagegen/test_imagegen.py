@@ -3,6 +3,7 @@ dashboard renders. Run: python3 -m unittest tools/imagegen/test_imagegen.py  (a 
 compose.mjs's side (private cookie, loud download failure, scoped --end-session) is in tools/subplots/test/compose.test.mjs."""
 import json, os, sys, tempfile, threading, unittest, urllib.request
 from http.server import ThreadingHTTPServer
+from unittest.mock import patch
 
 TMP = tempfile.TemporaryDirectory()
 os.environ['IMAGEGEN_ROOT'] = TMP.name
@@ -26,8 +27,9 @@ class Numbering(unittest.TestCase):
     def test_job_entry_with_empty_n_is_numbered(self):
         # the dashboard bug: log_entry copies the job's n (None), and log_append used to skip numbering for it
         job = dict(id='a1', run_id='r1', idx=1, status='done', seed=5, file='x.webp')
-        store.log_append(server.log_entry(job))
-        store.log_append(server.log_entry(dict(job, id='a2')))
+        first = store.log_append(server.log_entry(job))
+        second = store.log_append(server.log_entry(dict(job, id='a2')))
+        self.assertEqual((first['n'], second['n']), (1, 2))
         self.assertEqual([r['n'] for r in store.log_read()], [1, 2])
 
     def test_given_number_is_kept(self):
@@ -82,6 +84,66 @@ class Jobs(unittest.TestCase):
         self.assertTrue(self.post('/api/session/end', {'if_idle': True})['ok'])
         threading.Event().wait(0.3)
         self.assertEqual(len(ended), 1)
+
+
+class HistoryOrder(unittest.TestCase):
+    def history(self, rows, **query):
+        with patch.object(store, 'number_all'), patch.object(store, 'log_read', return_value=rows), patch.object(server, '_exists', return_value=True):
+            return server.history(query)
+
+    def row(self, rid, at, idx=1):
+        return dict(id=f'{rid}-{idx}', run_id=rid, idx=idx, status='done', rating='safe', at=at)
+
+    def test_a_batch_is_paged_by_its_newest_picture_with_individual_times_preserved(self):
+        rows = [self.row('a', '2026-10-11T10:00:00Z'), self.row('b', '2026-10-11T10:01:00Z'),
+                self.row('a', '2026-10-11T10:02:00Z', 2)]
+        first = self.history(rows, limit=1)[0]
+        self.assertEqual(first['run_id'], 'a')
+        self.assertEqual(first['at'], rows[2]['at'])
+        self.assertEqual([r['at_epoch'] for r in first['renders']], [server.history_time(rows[0]['at']), server.history_time(rows[2]['at'])])
+        self.assertEqual([r['idx'] for r in first['renders']], [1, 2])
+        second = self.history(rows, before=first['at'], before_run=first['run_id'], limit=1)
+        self.assertEqual(second[0]['run_id'], 'b')
+
+    def test_pagination_does_not_drop_batches_finished_in_the_same_second(self):
+        rows = [dict(self.row(rid, '2026-10-11T10:00:00Z'), n=n) for n, rid in enumerate(['c', 'b', 'a'], 1)]
+        seen, cursor = [], {}
+        for _ in range(4):
+            page = self.history(rows, limit=1, **cursor)
+            if page:
+                seen.append(page[0]['run_id'])
+                cursor = dict(before=page[0]['at'], before_n=page[0]['last_n'], before_run=page[0]['run_id'])
+        self.assertEqual(seen, ['a', 'b', 'c'])
+
+    def test_mixed_timezone_dates_sort_by_time(self):
+        rows = [self.row('earlier', '2026-10-11T12:00:00+02:00'), self.row('later', '2026-10-11T10:01:00Z')]
+        self.assertEqual([r['run_id'] for r in self.history(rows)], ['later', 'earlier'])
+
+    def test_picture_pages_interleave_batches_without_old_members_before_newer_pages(self):
+        rows = [dict(self.row(rid, at, idx), n=n) for n, (rid, at, idx) in enumerate([
+            ('a', '2026-10-11T10:00:00Z', 1), ('b', '2026-10-11T10:01:00Z', 1),
+            ('a', '2026-10-11T10:02:00Z', 2), ('a', '2026-10-11T10:02:00Z', 3),
+        ], 1)]
+        seen, cursor = [], {}
+        for _ in range(5):
+            page = self.history(rows, pictures='1', limit=1, **cursor)
+            if page:
+                self.assertEqual(len(page[0]['renders']), 1)
+                seen.append(page[0]['renders'][0]['id'])
+                cursor = dict(before=page[0]['at'], before_n=page[0]['last_n'], before_run=page[0]['run_id'])
+        self.assertEqual(seen, ['a-3', 'a-2', 'b-1', 'a-1'])
+
+    def test_live_jobs_keep_submission_and_completion_times(self):
+        job = dict(id='job', created=12, status='queued')
+        queued = server.public_job(job)
+        self.assertEqual(queued['created'], 12)
+        self.assertNotIn('at', queued)
+        self.assertNotIn('at_epoch', queued)
+        job.update(status='done', at='2026-10-11T10:00:00.900000Z')
+        done = server.public_job(job)
+        self.assertEqual(done['at'], job['at'])
+        self.assertEqual(done['at_epoch'], server.history_time(job['at']))
+        self.assertEqual(server.log_entry(job)['at'], job['at'])
 
 
 class Verdict(unittest.TestCase):

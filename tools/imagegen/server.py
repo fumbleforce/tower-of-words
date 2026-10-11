@@ -5,6 +5,7 @@ Code is in git (tools/imagegen). Blocks are local configuration (store.py says w
 state are in island/private/imagegen (git-ignored).
 Workflows come from tools/comfy.py anima(); the GPU lock rules are in GUIDE.md and gpu.py."""
 import json, mimetypes, os, random, re, signal, sys, threading, time, traceback, urllib.parse, urllib.request, uuid
+from datetime import datetime
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -205,7 +206,7 @@ def log_entry(j):
             'scheduler', 'positive', 'negative', 'overridden', 'presets', 'rating', 'scene_text', 'characters', 'compose', 'elapsed',
             'ipa', 'repaint', 'raw_file', 'start', 'loras', 'control', 'huefix')
     e = {k: j.get(k) for k in keep}
-    e['at'] = store.now()
+    e['at'] = j.get('at') or store.now()
     e.update(star=False, fav=False, reject=False, reject_reason='', note='')
     return e
 
@@ -234,7 +235,8 @@ def worker():
             j['progress'] = 1
             session.touch()
             if j['status'] in ('done', 'error'):
-                store.log_append(log_entry(j))
+                j['at'] = datetime.now().astimezone().isoformat(timespec='microseconds')
+                j['n'] = store.log_append(log_entry(j))['n']
         except Exception:
             log('worker error: ' + traceback.format_exc())
             time.sleep(2)
@@ -345,9 +347,14 @@ def new_run(body, private=False):
 
 
 def public_job(j):
-    return {k: j.get(k) for k in ('id', 'n', 'run_id', 'idx', 'status', 'progress', 'seed', 'file', 'thumb', 'error', 'w', 'h', 'elapsed',
+    out = {k: j.get(k) for k in ('id', 'n', 'run_id', 'idx', 'status', 'progress', 'seed', 'file', 'thumb', 'error', 'w', 'h', 'elapsed',
                                   'positive', 'negative', 'overridden', 'compose', 'model_file', 'star', 'fav', 'reject', 'reject_reason', 'note',
                                   'presets', 'characters', 'rating', 'deleted', 'ipa', 'repaint', 'raw_file', 'phase', 'start', 'loras', 'control', 'huefix')}
+    if j.get('created') is not None:
+        out['created'] = j['created']
+    if j.get('at'):
+        out.update(at=j['at'], at_epoch=history_time(j['at']))
+    return out
 
 
 # ---------------------------------------------------------------- delete, trash, portraits
@@ -487,6 +494,14 @@ def private_files():
 AGENT_FIELDS = ('source', 'owner', 'round', 'extras', 'out_path', 'backfilled', 'mode', 'denoise', 'src_image', 'steps', 'cfg', 'sampler', 'scheduler')
 
 
+def history_time(at):
+    """Old log dates use the server's local timezone; offset dates describe an absolute instant."""
+    try:
+        return datetime.fromisoformat(at).timestamp()
+    except (TypeError, ValueError, OverflowError):
+        return 0
+
+
 def history(q, private=False):
     """q['who']: 'mine' (rendered in the dashboard), 'agents' (logged by tools/comfy.py, agentlog.py) or all (default)."""
     store.number_all()  # pictures logged by an agent process still running the older store code get their #n here
@@ -505,19 +520,28 @@ def history(q, private=False):
             continue
         if starred and not (r.get('star') or r.get('fav')):
             continue
-        runs.setdefault(r['run_id'], []).append(r)
+        # The scene editor pages individual pictures. Other dashboard views still group batches.
+        runs.setdefault(r['id'] if q.get('pictures') == '1' else r['run_id'], []).append(r)
     out = []
-    for rid, rs in runs.items():
+    for rs in runs.values():
         f = rs[0]
-        out.append(dict(run_id=rid, at=f['at'], characters=f.get('characters'), scene_text=f.get('scene_text'), model_file=f.get('model_file'), rating=f.get('rating'),
+        newest = max(rs, key=lambda r: (history_time(r.get('at')), r.get('n') or 0))
+        out.append(dict(run_id=f['run_id'], at=newest['at'], at_epoch=history_time(newest['at']), last_n=newest.get('n') or 0,
+                        characters=f.get('characters'), scene_text=f.get('scene_text'), model_file=f.get('model_file'), rating=f.get('rating'),
                         presets=f.get('presets'), positive=f.get('positive'), negative=f.get('negative'), overridden=f.get('overridden'),
                         compose=f.get('compose'), w=f.get('w'), h=f.get('h'),
                         ipa=f.get('ipa'), repaint=f.get('repaint'), start=f.get('start'), loras=f.get('loras'), control=f.get('control'), huefix=f.get('huefix'), **{k: f.get(k) for k in AGENT_FIELDS},
-                        renders=[{k: r.get(k) for k in ('id', 'n', 'file', 'thumb', 'seed', 'star', 'fav', 'reject', 'reject_reason', 'note',
-                                                         'positive', 'negative', 'w', 'h', 'model_file', 'at', 'ipa', 'repaint', 'raw_file', 'start', 'loras', 'control', 'huefix', 'compose') + AGENT_FIELDS} for r in rs]))
-    out.sort(key=lambda x: x['at'], reverse=True)
+                        renders=[{**{k: r.get(k) for k in ('id', 'n', 'idx', 'file', 'thumb', 'seed', 'star', 'fav', 'reject', 'reject_reason', 'note',
+                                                         'positive', 'negative', 'w', 'h', 'model_file', 'at', 'ipa', 'repaint', 'raw_file', 'start', 'loras', 'control', 'huefix', 'compose') + AGENT_FIELDS},
+                                  'at_epoch': history_time(r.get('at'))} for r in rs]))
+    out.sort(key=lambda x: (x['at_epoch'], x['last_n'], x['run_id']), reverse=True)
     if q.get('before'):  # paging for the History view's infinite scroll: only runs older than the last one shown
-        out = [x for x in out if x['at'] < q['before']]
+        before = history_time(q['before'])
+        if q.get('before_run'):
+            cursor = (before, int(q.get('before_n', 0)), q['before_run'])
+            out = [x for x in out if (x['at_epoch'], x['last_n'], x['run_id']) < cursor]
+        else:
+            out = [x for x in out if x['at_epoch'] < before]
     lim = int(q.get('limit', 60))
     return out[:lim]
 

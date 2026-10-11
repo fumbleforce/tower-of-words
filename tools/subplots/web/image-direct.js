@@ -6,6 +6,7 @@
 // example picture. Every tile row has + New and Edit, as the other pickers do. The staging itself is kept in the
 // composition's `stage` (image-stage.js), which image-compose.js turns into prompt words.
 const {structuredClone, CSS} = globalThis;
+import {localBlockHtml} from './image-block-words.js';
 import {esc} from './common.js';
 import {stageCast as stagePeople, stageOf, placeOf, FACING, GAZE, HEIGHTS, LIGHT_FROM, MOODS, EXPRESSIONS, CAMERA_ROWS, DIAGRAMS, cameraKind, cameraSetup, stageSummary} from './image-stage.js';
 import {stageSvg, bindStage, diagramSvg, PERSON_COLOURS} from './stage-view.js';
@@ -15,7 +16,7 @@ const readStage = c => stageOf({stage: c.stage});  // without adding a stage to 
 const tile = ({attrs, pressed, art, label, title = '', cls = ''}) =>
   `<button type="button" class="tile ${cls}${art ? '' : ' tile-text'}" ${attrs} aria-pressed="${!!pressed}" title="${esc(title || label)}"><span class="tile-art">${art}</span><span class="tile-label">${esc(label)}</span></button>`;
 // a row's name with + New and Edit under it, so the tiles get the row's whole width
-const rowHead = (title, attrs) => `<span class="row-head"><span class="row-label">${esc(title)}</span><span class="tile-tools"><button type="button" class="tile-tool" ${attrs.add} title="A new block in this row">+ New</button>${attrs.edit ? `<button type="button" class="tile-tool" ${attrs.edit} title="Edit the chosen block">Edit</button>` : ''}</span></span>`;
+const rowHead = (title, attrs) => `<span class="row-head"><span class="row-label">${esc(title)}</span><span class="tile-tools"><button type="button" class="tile-tool" ${attrs.add} title="A new block in this row">+ New</button>${attrs.edit ? `<button type="button" class="tile-tool" ${attrs.edit} title="Edit the shared template">Edit shared template</button>` : ''}</span></span>`;
 const initial = () => '';  // no picture yet: the tile shows its name only (tile-text)
 const order = (group, d) => { const i = (DIAGRAMS[group] || []).findIndex(x => x[0] === d); return i < 0 ? 99 : i; };
 
@@ -34,8 +35,9 @@ function cameraRows(c, ctx) {
   const tabs = CAMERA_ROWS.map(([group, title]) => `<button type="button" role="tab" data-cam-tab="${group}" aria-selected="${cameraTab === group}" aria-pressed="${cameraTab === group}">${esc(title)}<span class="cam-choice">${esc(picked(group).join(', ') || 'none')}</span></button>`).join('');
   const own = ofRow(cameraTab).filter(x => x.group === cameraTab), rest = ofRow(cameraTab).filter(x => x.group !== cameraTab);
   const chosen = c.cameras.find(id => own.some(x => x.b.id === id)) || own[0]?.b.id || '';
-  return `<div class="cam-tabs" role="tablist" aria-label="Camera">${tabs}<span class="tile-tools"><button type="button" class="tile-tool" data-new-cam="${cameraTab}" title="A new block in this row">+ New</button>${chosen ? `<button type="button" class="tile-tool" data-edit-cam="${esc(chosen)}" title="Edit the chosen block">Edit</button>` : ''}</span></div>
-    <div class="tile-row cam-row" data-row="${cameraTab}" role="tabpanel"><div class="tiles">${own.map(x => one(x, cameraTab)).join('')}${rest.length ? '<span class="tile-sep" aria-hidden="true"></span>' + rest.map(x => one(x, cameraTab)).join('') : ''}</div></div>`;
+  return `<div class="cam-tabs" role="tablist" aria-label="Camera">${tabs}<span class="tile-tools"><button type="button" class="tile-tool" data-new-cam="${cameraTab}" title="A new block in this row">+ New</button>${chosen ? `<button type="button" class="tile-tool" data-edit-cam="${esc(chosen)}" title="Edit the shared template">Edit shared template</button>` : ''}</span></div>
+    <div class="tile-row cam-row" data-row="${cameraTab}" role="tabpanel"><div class="tiles">${own.map(x => one(x, cameraTab)).join('')}${rest.length ? '<span class="tile-sep" aria-hidden="true"></span>' + rest.map(x => one(x, cameraTab)).join('') : ''}</div></div>
+    ${c.cameras.filter(id => ofRow(cameraTab).some(x => x.b.id === id)).map(id => localBlockHtml(c, ctx.presets, 'camera', id)).join('')}`;
 }
 
 // The selected person's controls beside the stage.
@@ -70,6 +72,7 @@ export function directHtml(c, ctx) {
     ${c.angle ? `<p class="hint">Older camera angle kept: ${esc(c.angle)} <button type="button" class="link" data-clear-angle>Remove</button></p>` : ''}
     <div class="direct-more direct-line">${ctx.picker('pose', 'pose', 'Pose', ctx.blockItems('pose', ctx.blockValue('pose', c.pose)), ctx.blockValue('pose', c.pose))}
       <label>Touching<input data-stage-field="contact" value="${esc(stage.contact)}" placeholder="her hand on his shoulder"></label></div>
+    ${localBlockHtml(c, ctx.presets, 'pose', c.pose, 'Pose')}
     <datalist id="stageExpressions">${EXPRESSIONS.map(x => `<option value="${esc(x)}">`).join('')}</datalist></section>`;
 }
 
@@ -87,12 +90,13 @@ export function placeHtml(c, ctx) {
     const words = c[field] && !value ? `<span class="hint">Words only: ${esc(c[field])}</span>` : '';
     const head = rowHead(title, {add: `data-new-tile="${kind}" data-field="${field}"`, edit: value ? `data-edit-tile="${kind}" data-id="${esc(value)}"` : ''});
     const chosen = items.find(b => b.id === value);
+    const local = localBlockHtml(c, ctx.presets, kind, c[field], title);
     if (chosen && !unfolded.has(kind)) return `<div class="tile-row tile-row-pics folded" data-row="${kind}">${head}<div class="tiles">${tile({attrs: `data-unfold="${kind}" data-chosen="${kind}" data-id="${esc(chosen.id)}" aria-expanded="false"`,
       pressed: true, label: chosen.data.name || chosen.id, title: chosen.data.text, art: picture(kind, chosen.id), cls: 'tile-chosen'})}
-      <span class="fold-tools"><button type="button" class="small" data-unfold="${kind}" aria-expanded="false">Change</button>${kind === 'location' ? '<button type="button" class="small" data-preview-place title="A small picture of this place in this light, with no people, to see it before making the shot">Preview this place</button>' : ''}</span></div>${words}</div>`;
+      <span class="fold-tools"><button type="button" class="small" data-unfold="${kind}" aria-expanded="false">Change</button>${kind === 'location' ? '<button type="button" class="small" data-preview-place title="A small picture of this place in this light, with no people, to see it before making the shot">Preview this place</button>' : ''}</span></div>${words}</div>${local}`;
     return `<div class="tile-row tile-row-pics" data-row="${kind}">${head}<div class="tiles">${items.map(b => tile({attrs: `data-block-tile="${kind}" data-field="${field}" data-id="${esc(b.id)}"`,
       pressed: b.id === value, label: b.data.name || b.id, title: b.data.text, art: picture(kind, b.id)})).join('')}
-      ${missing ? `<button type="button" class="tile-tool" data-make-examples="${kind}" title="Queue a small render of a plain stand-in for each one without a picture">Make examples (${missing})</button>` : ''}</div>${words}</div>`;
+      ${missing ? `<button type="button" class="tile-tool" data-make-examples="${kind}" title="Queue a small render of a plain stand-in for each one without a picture">Make examples (${missing})</button>` : ''}</div>${words}</div>${local}`;
   };
   const from = LIGHT_FROM.find(l => l[0] === stage.lightFrom);
   const fromTiles = from && !unfolded.has('lightFrom')
