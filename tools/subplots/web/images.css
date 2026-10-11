@@ -402,3 +402,19 @@
 /* Pose and Touching on one line, their names beside them */
 .direct-line { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
 .direct-line > label { grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 6px !important; }
+
+/* Prompt words belong to a shot unless the author explicitly opens the shared template. */
+.image-outfit { display: grid; gap: 8px; min-width: 0; }
+.image-outfit .hint { margin: 0; }
+.person-title, .person-resets { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.person-title { justify-content: space-between; }
+.image-outfit textarea { width: 100%; min-height: 64px; resize: vertical; }
+.person-exclusions { min-width: 0; }
+.person-exclusions label { margin-top: 8px; }
+@media (max-width: 900px) {
+  .compose-dialog .compose-head { flex-wrap: wrap; gap: 6px; }
+  .compose-dialog .compose-head h2 { flex-basis: 100%; }
+  .compose-dialog .compose-body { display: block; overflow-y: auto; }
+  .compose-dialog .compose-col { overflow: visible; border-right: 0; }
+  .compose-dialog .stage-wrap { grid-template-columns: minmax(0, 1fr); }
+}

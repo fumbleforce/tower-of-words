@@ -69,3 +69,43 @@ test('portrait paths are limited to image service assets and public repository i
   assert.equal(portraitUrl('../secret.png'), '');
   assert.equal(portraitUrl(''), '');
 });
+
+test('shot appearance replaces every template constituent and short form without changing presets', () => {
+  const ps = structuredClone(presets);
+  Object.assign(ps.character[0].data, {signature: 'messy bun', build: 'tall', short: 'Alice with messy bun', negative: 'loose hair'});
+  ps.outfit = [rec('coat', {text: 'blue coat', negative: 'red coat'})];
+  const before = JSON.stringify(ps);
+  const c = composition({characters: ['alice', 'extra'], outfit: {alice: 'coat'}, people: {alice: {
+    appearance: 'Alice, adult woman, black hair, tidy bun, tall', clothing: 'blue sweater halfway on, one arm through its sleeve',
+    appearanceNegative: 'messy bun', clothingNegative: 'coat',
+  }}});
+  const b = assembleComposition(c, ps);
+  assert.match(b.positive, /tidy bun, tall, blue sweater halfway on/);
+  assert.doesNotMatch(b.positive, /messy bun|blue coat/);
+  assert.match(b.negative, /messy bun, coat/);
+  assert.doesNotMatch(b.negative, /loose hair|red coat/);
+  assert.equal(JSON.stringify(ps), before);
+  assert.deepEqual(assembleComposition(normalizeComposition(JSON.parse(JSON.stringify(b.compose))), ps).positive, b.positive);
+  const single = assembleComposition({...c, characters: ['alice'], faceFix: true}, ps);
+  assert.match(single.repaint.prompt, /tidy bun/);
+  assert.doesNotMatch(single.repaint.prompt, /messy bun/);
+});
+
+test('explicit blank shot words suppress template words while legacy short and full words stay intact', () => {
+  const ps = structuredClone(presets);
+  Object.assign(ps.character[0].data, {signature: 'messy bun', build: 'tall', short: 'short Alice', negative: 'loose hair'});
+  ps.outfit = [rec('coat', {text: 'blue coat', negative: 'red coat'})];
+  const c = composition({characters: ['alice', 'extra'], outfit: {alice: 'coat'}});
+  assert.match(assembleComposition(c, ps).positive, /short Alice, wearing blue coat/);
+  c.useShort = false;
+  assert.match(assembleComposition(c, ps).positive, /black hair, messy bun, tall/);
+  c.people = {alice: {appearance: '', clothing: '', appearanceNegative: '', clothingNegative: ''}};
+  const b = assembleComposition(c, ps);
+  assert.doesNotMatch(b.positive, /Alice|blue coat|messy bun/);
+  assert.doesNotMatch(b.negative, /loose hair|red coat/);
+});
+
+test('local exclusions work even when a legacy composition disabled template exclusions', () => {
+  const c = composition({charNegOff: {alice: true}, people: {alice: {appearanceNegative: 'messy bun'}}});
+  assert.match(assembleComposition(c, presets).negative, /messy bun/);
+});

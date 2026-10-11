@@ -12,13 +12,14 @@ const server = spawn('python3', ['tools/review_server.py', String(port)], {env: 
 const picture = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240"><rect width="400" height="240" fill="#dae4ed"/><circle cx="200" cy="80" r="30" fill="#86a5bd"/><path d="M150 210v-65q50-60 100 0v65" fill="#567c98"/></svg>');
 const fixture = {id:'fixture:scene',steps:[{say:'alice',text:'Hello.'}],images:[{id:'one',label:'First shot',url:picture},{id:'two',label:'Second shot',url:picture},{id:'three',label:'Third shot',url:picture,available:true}],metadata:{}};
 const presets = {character:[{id:'alice',v:1,data:{name:'Alice',gender:'female',outfit:'blue coat',portrait:'art/fixture.webp'}},{id:'bob',v:1,data:{name:'Bob',gender:'male',portrait:'art/fixture.webp'}}],model:[{id:'local',v:1,data:{name:'Local model',file:'fixture.safetensors'}}],style:[{id:'paint',v:1,data:{name:'Painted',quality:'illustration'}}],framing:[{id:'wide',v:1,data:{name:'Wide',w:1200,h:800}}],camera:[{id:'near',v:1,data:{name:'Close',prompt:'close camera'}},{id:'left',v:1,data:{name:'From left',prompt:'left camera'}},{id:'cowboy',v:1,data:{name:'Cowboy shot',prompt:'cowboy shot',group:'shot',diagram:'thighs'}},{id:'full',v:1,data:{name:'Full body',prompt:'full body',group:'shot',diagram:'full'}}],scene:[{id:'reading',v:1,data:{name:'Reading',text:'Reading a letter'}}],negative:[],pose:[{id:'seated',v:1,data:{name:'Seated',text:'seated on a bench'}}],location:[{id:'bathhouse',v:1,data:{name:'Bathhouse',text:'in a bathhouse'}}],light:[{id:'night',v:1,data:{name:'Night lighting',text:'night lighting'}}],outfit:[]};
-const html = `<html><head><link rel="stylesheet" href="/tools/subplots/web/editor.css"><link rel="stylesheet" href="/tools/subplots/web/images.css"></head><body><div id="notice" role="status" hidden></div><main style="max-width:450px;margin:auto;padding:16px"><button data-inspect="images">Images</button><section id="images" hidden><button id="loadPresets">Connect</button><p id="imageStatus"></p><div id="composition"></div><div id="renders"></div></section></main><script type="module">import {installImages} from '/tools/subplots/web/images.js';window.fixture=${JSON.stringify(fixture)};window.edits=0;document.querySelector('[data-inspect]').onclick=()=>document.querySelector('#images').hidden=false;window.editor=installImages(()=>window.fixture,()=>window.edits++);window.editor.render();</script></body></html>`;
+const html = `<html><head><link rel="stylesheet" href="/tools/subplots/web/editor.css"><link rel="stylesheet" href="/tools/subplots/web/images.css"></head><body><script>window.AMAKAWA_NAV=true;</script><script src="/tools/nav/nav.js"></script><div id="notice" role="status" hidden></div><main style="max-width:450px;margin:auto;padding:16px"><button data-inspect="images">Images</button><section id="images" hidden><button id="loadPresets">Connect</button><p id="imageStatus"></p><div id="composition"></div><div id="renders"></div></section></main><script type="module">import {installImages} from '/tools/subplots/web/images.js';window.fixture=${JSON.stringify(fixture)};window.edits=0;globalThis.document.querySelector('[data-inspect]').onclick=()=>globalThis.document.querySelector('#images').hidden=false;window.editor=installImages(()=>window.fixture,()=>window.edits++);window.editor.render();</script></body></html>`;
 try {
   for (let i = 0; i < 60; i++) {try {if ((await fetch(base + '/tools/subplots/web/images.js')).ok) break;} catch {} await new Promise(resolve => setTimeout(resolve, 100));}
   await withBrowserJob('codex-subplot-image-editor', async browser => {
     const page = await browser.newPage({viewport:{width:550,height:900}});
     const errors = [], generated = [], created = [], rated = [], history = [], examples = [], jobsNow = [];
     page.on('pageerror', e => errors.push(e.message));
+    await page.route('**/api/nav-private.js', route => route.fulfill({contentType:'text/javascript',body:''}));
     await page.route('**/island/private/**', route => route.abort());
     await page.route('**/api/subplots/picture-source**', route => route.fulfill({json:{how:'the fixture round', start:{image:'art/fixture.webp'},
       job:{positive:'Original words, close camera', negative:'bad hands', seed:77, model_file:'fixture.safetensors', w:1024, h:768, steps:28, cfg:4}}}));
@@ -205,6 +206,74 @@ try {
     await page.locator('#generate').click();
     assert.equal(generated.at(-1).positive, await page.locator('#assembled').textContent());
     assert.equal(await page.locator('#renders [data-lib]').filter({hasText: 'ex.png'}).count(), 0);
+    // Local prompt blocks are editable on the person, persist through history and never write a template.
+    await page.locator('[data-outfit-for=alice]').selectOption('usual');
+    const local = key => page.locator(`[data-person-id=alice][data-shot-person-field=${key}]`);
+    await local('appearance').fill('Alice, adult woman, black hair in a tidy bun');
+    await local('clothing').fill('blue sweater halfway on, one arm through its sleeve');
+    await page.locator('[data-person=alice] .person-exclusions summary').click();
+    await local('appearanceNegative').fill('messy bun');
+    await local('clothingNegative').fill('coat');
+    await page.locator('#generate').click();
+    const localJob = generated.at(-1);
+    assert.match(localJob.positive, /tidy bun, blue sweater halfway on/);
+    assert.equal(localJob.positive, await page.locator('#assembled').textContent());
+    assert.match(localJob.negative, /messy bun, coat/);
+    assert.equal(presets.character[0].data.outfit, 'blue coat');
+    assert.equal(created.length, 1, 'only the earlier explicit new setting writes a shared preset');
+    // Round-trip saved metadata, then restore from a generated history record.
+    await page.evaluate(() => { fixture.metadata = JSON.parse(JSON.stringify(fixture.metadata)); globalThis.editor.render(); });
+    assert.equal(await local('clothing').inputValue(), localJob.compose.people.alice.clothing);
+    history.unshift({run_id:'local',at:'2026-10-12',characters:['alice','bob'],positive:localJob.positive,negative:localJob.negative,model_file:'fixture.safetensors',compose:localJob.compose,renders:[{id:'local-1',file:'local.png',thumb:'local.webp',seed:6}]});
+    await page.locator('[data-refresh-images]').click();
+    await page.waitForFunction(() => globalThis.document.querySelectorAll('[data-lib=reuse]').length >= 2);
+    await local('clothing').fill('temporary words');
+    await page.locator('[data-lib=reuse]').first().click();
+    assert.equal(await local('clothing').inputValue(), localJob.compose.people.alice.clothing);
+    await local('clothing').fill('');
+    await page.locator('#generate').click();
+    assert.doesNotMatch(generated.at(-1).positive, /blue coat|sweater/);
+    await page.locator('[data-reset-person=clothing][data-person-id=alice]').click();
+    assert.equal(await local('clothing').inputValue(), 'wearing blue coat');
+    await local('clothing').fill(localJob.compose.people.alice.clothing);
+    fs.mkdirSync('/tmp/codex-subplot-image-editor',{recursive:true});
+    // A shot containing only the unnamed person still has reusable local prompt blocks.
+    presets.character.push({id:'extra',v:1,data:{generic:true,name:'Unnamed adult',gender:'male',look:'brown hair'}});
+    await page.locator('#loadPresets').click();
+    history.unshift({run_id:'generic',at:'2026-10-13',characters:['extra'],positive:'Unnamed adult with a neat haircut',model_file:'fixture.safetensors',compose:{characters:[],man:true,people:{extra:{appearance:'Unnamed adult with a neat haircut',clothing:'green jacket'}}},renders:[{id:'generic-1',file:'generic.png',seed:9}]});
+    await page.locator('[data-refresh-images]').click();
+    await page.waitForFunction(() => globalThis.document.querySelectorAll('[data-lib=reuse]').length >= 3);
+    await page.locator('[data-lib=reuse]').first().click();
+    assert.equal(await page.locator('[data-person=extra]').count(), 1);
+    assert.equal(await page.locator('[data-shot-person-field=appearance][data-person-id=extra]').inputValue(), 'Unnamed adult with a neat haircut');
+    await page.locator('[data-lib=reuse]').nth(1).click();
+    assert.equal(await local('appearance').inputValue(), localJob.compose.people.alice.appearance);
+    // Use the actual composer's three columns for the visual checks.
+    await page.evaluate(() => {
+      const main = globalThis.document.querySelector('main');
+      main.style = '';
+      const dialog = globalThis.document.createElement('dialog'); dialog.className = 'compose-dialog';
+      const head = globalThis.document.createElement('div'); head.className = 'compose-head'; head.innerHTML = '<h2>Compose a new picture <span id=composeFor></span></h2><span class=quiet></span><button id=closeCompose>Done</button>';
+      dialog.append(head); globalThis.document.body.append(dialog);
+      const body = globalThis.document.createElement('div'); body.className = 'compose-body';
+      const composition = globalThis.document.querySelector('#composition'); composition.className = 'compose-col';
+      const stage = globalThis.document.createElement('div'); stage.id = 'composePreview'; stage.className = 'compose-col compose-stage';
+      const side = globalThis.document.createElement('div'); side.className = 'compose-col compose-side';
+      const shot = globalThis.document.createElement('div'); shot.id = 'composeShot';
+      side.append(shot, globalThis.document.querySelector('#renders'));
+      body.append(composition, stage, side); dialog.append(body); main.hidden = true; dialog.showModal(); globalThis.editor.render();
+    });
+    assert.equal(await page.locator('.compose-head .anav-mode').count(), 1);
+    assert.equal(await page.locator('.compose-head .anav-mode button').count(), 2);
+    await page.locator('.compose-head .anav-mode button').first().click();
+    for (const width of [2560, 1366, 390]) {
+      await page.setViewportSize({width,height:844});
+      await page.locator('[data-person=alice]').screenshot({path:`/tmp/codex-subplot-image-editor/people-${width}.png`});
+      await page.evaluate(() => { globalThis.document.querySelector('.compose-body').scrollTop = 0; globalThis.document.querySelector('#composition').scrollTop = 0; });
+      await page.screenshot({path:`/tmp/codex-subplot-image-editor/editor-${width}.png`});
+      assert.ok(await local('appearance').evaluate(el => el.getBoundingClientRect().width) > 200);
+      assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth > globalThis.innerWidth),false);
+    }
     assert.deepEqual(errors,[]);
     fs.mkdirSync('/tmp/codex-subplot-image-editor',{recursive:true});
     await page.screenshot({path:'/tmp/codex-subplot-image-editor/550.png',fullPage:true});

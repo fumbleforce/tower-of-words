@@ -1,5 +1,6 @@
 const {setInterval, clearInterval, document, URLSearchParams, CustomEvent} = globalThis;
 import {$, esc, api, guarded, notice} from './common.js';
+import {personWords} from './image-people.js';
 import {guessComposition} from './image-guess.js';
 import {applyDefaults, normalizeComposition, assembleComposition, promptParts, portraitUrl} from './image-compose.js';
 import {blockId} from '../../imagegen/web/blocks.js';
@@ -99,8 +100,19 @@ export function installImages(getScene, changed) {
     const value = pick === true ? 'usual' : typeof pick === 'string' ? pick : '';
     const items = [...(p.data.outfit ? [{id: 'usual', label: 'Usual: ' + p.data.outfit}] : []),
       ...active('outfit').filter(o => !o.data.character || o.data.character === p.id).map(o => ({id: o.id, label: o.data.name}))];
-    return `<div class="image-outfit"><label>${esc(p.data.name)}’s outfit<span class="block-pick"><select data-outfit-for="${esc(p.id)}"><option value="">No outfit words</option>${options(items, value)}<option value="${NEW}">+ New outfit…</option></select><button type="button" class="small ghost" data-edit-person="${esc(p.id)}" title="Edit ${esc(p.data.name)}’s look">Edit ${esc(p.data.name)}</button></span></label></div>`;
+    const words = personWords(c, p, presets), local = c.people?.[p.id] || {};
+    const input = (key, label, rows = 2) => `<label>${label}<textarea rows="${rows}" data-shot-person-field="${key}" data-person-id="${esc(p.id)}">${esc(words[key])}</textarea></label>`;
+    return `<div class="image-outfit"><div class="person-title"><strong>${esc(p.data.name || p.id)}</strong><button type="button" class="small ghost" data-edit-person="${esc(p.id)}">Edit shared template…</button></div>
+      <p class="hint">These fields apply only to this shot. The shared template stays unchanged.</p>
+      <label>Clothing preset<select data-outfit-for="${esc(p.id)}"><option value="">No outfit words</option>${options(items, value)}<option value="${NEW}">+ New shared outfit…</option></select></label>
+      ${input('clothing', 'Clothing in this shot')}
+      ${input('appearance', 'Appearance in this shot', 3)}
+      <div class="person-resets"><button type="button" class="small" data-reset-person="clothing" data-person-id="${esc(p.id)}">Reset clothing to preset</button><button type="button" class="small" data-reset-person="appearance" data-person-id="${esc(p.id)}">Reset appearance to template</button></div>
+      <details class="person-exclusions"><summary>Clothing and appearance exclusions</summary>${input('clothingNegative', 'Clothing words to avoid')}${input('appearanceNegative', 'Appearance words to avoid')}
+      ${c.charNegOff?.[p.id] && local.appearanceNegative == null ? '<p class="hint">Template exclusions are off. Typing here adds exclusions for this shot.</p>' : ''}</details>
+      <span class="hint person-local-status">${Object.keys(local).length ? 'Using changes for this shot.' : 'Using preset and template words.'}</span></div>`;
   }
+
   // Open the block editor; afterwards the blocks reload and `apply` puts the new or edited block in this picture.
   function openBlock(kind, {id = null, from, prefill, apply} = {}) {
     return openBlockEditor({kind, id, from, prefill, presets, privateMode, files: modelFiles, portraitUrl,
@@ -143,7 +155,7 @@ export function installImages(getScene, changed) {
     const groupChip = cast.length + (c.man ? 1 : 0) > 1 ? chip('Short descriptions for a group', c.useShort, 'data-toggle="useShort"') : '';
     const head = `<div class="section-head"><h3>People</h3>${any ? `<button type="button" data-people-open aria-expanded="${peopleOpen}">${peopleOpen ? 'Done' : 'Add or change people'}</button>` : ''}</div>`;
     const rows = `<div class="image-included">${cast.map(p => `<div class="image-person-row" data-person="${esc(p.id)}">${face(p)}<div class="person-main">${outfitPicker(c, p)}${one ? sameFaceHtml(c, p, refPath) : ''}</div></div>`).join('')}
-      ${generic ? `<div class="image-person-row" data-person="${esc(generic.id)}">${face(generic)}<span>Unnamed person</span></div>` : ''}</div>
+      ${generic ? `<div class="image-person-row" data-person="${esc(generic.id)}">${face(generic)}<div class="person-main">${outfitPicker(c, generic)}</div></div>` : ''}</div>
       ${cast.length + (c.man ? 1 : 0) > 1 ? '<p class="hint same-face-note">Keeping a face the same (portrait reference, face fix) works when one person is in the picture.</p>' : ''}`;
     if (any && !peopleOpen) return `<section class="image-section image-people">${head}${rows}${groupChip ? `<div class="chips">${groupChip}</div>` : ''}</section>`;
     return `<section class="image-section image-people">${head}<div class="image-cast">${active('character').filter(p => !p.data.generic).map(p => `<button type="button" data-char="${esc(p.id)}" aria-pressed="${c.characters.includes(p.id)}" title="${esc(p.data.name || p.id)}">${face(p)}<span>${esc(p.data.name || p.id)}</span></button>`).join('') || '<p class="hint">Your image-generation character presets appear here when connected.</p>'}</div>
@@ -290,6 +302,10 @@ export function installImages(getScene, changed) {
     // Generate and the library (notes/tools/scene-editor.md, Composer). Without the columns (a narrow panel) it all
     // runs down one column.
     const stage = $('#composePreview'), shot = $('#composeShot');
+    const composerHead = $('.compose-dialog .compose-head');
+    if (composerHead && !composerHead.querySelector('[data-composer-mode]') && globalThis.AmakawaNav?.modeControl) {
+      const mode = globalThis.AmakawaNav.modeControl(); mode.dataset.composerMode = ''; composerHead.insertBefore(mode, composerHead.querySelector('#closeCompose'));
+    }
     const direct = directHtml(c, dctx), place = placeHtml(c, dctx);
     if (stage && shot) {
       // Jørgen, 2026-10-11: "put the camera direction and preview on top of the middle lane, moving the orig prompt
@@ -353,11 +369,24 @@ export function installImages(getScene, changed) {
         const person = preset('character', who);
         render();
         openBlock('outfit', {from: typeof pick === 'string' ? pick : '', prefill: {character: who, text: typeof pick === 'string' ? '' : person?.data.outfit || ''},
-          apply: (c, id) => { c.outfit[who] = id; c.override = null; }});
+          apply: (c, id) => { c.outfit[who] = id; if (c.people?.[who]) { delete c.people[who].clothing; delete c.people[who].clothingNegative; } c.override = null; }});
         return;
       }
-      edit(c => { c.outfit[who] = el.value === 'usual' ? true : el.value || false; c.override = null; });
+      edit(c => { c.outfit[who] = el.value === 'usual' ? true : el.value || false; if (c.people?.[who]) { delete c.people[who].clothing; delete c.people[who].clothingNegative; } c.override = null; });
     });
+    host.querySelectorAll('[data-shot-person-field]').forEach(el => el.oninput = () => {
+      edit(c => {
+        c.people ||= {}; c.people[el.dataset.personId] ||= {};
+        c.people[el.dataset.personId][el.dataset.shotPersonField] = el.value;
+        c.override = null;
+      }, false);
+      el.closest('.image-outfit').querySelector('.person-local-status').textContent = 'Using changes for this shot.';
+    });
+    host.querySelectorAll('[data-reset-person]').forEach(b => b.onclick = () => edit(c => {
+      const local = c.people?.[b.dataset.personId];
+      if (local) { delete local[b.dataset.resetPerson]; delete local[b.dataset.resetPerson + 'Negative']; }
+      c.override = null;
+    }));
     host.querySelectorAll('[data-edit-person]').forEach(b => b.onclick = () => openBlock('character', {id: b.dataset.editPerson}));
     host.querySelectorAll('[data-new-block]').forEach(b => b.onclick = () => {
       const kind = b.dataset.newBlock;
@@ -552,7 +581,7 @@ export function installImages(getScene, changed) {
       else { c.sourceChecked = true; if (r.start?.image) c.original = {how: 'no record of how it was made', start: r.start.image}; render(); }
     } catch (e) { notice(e.message, true); }
   }
-  const hasBlocks = compose => !!compose && ['characters', 'chars', 'cameras', 'cams'].some(k => compose[k]?.length) || !!compose?.scene;
+  const hasBlocks = compose => !!compose && ['characters', 'chars', 'cameras', 'cams'].some(k => compose[k]?.length) || !!compose?.scene || !!compose?.man || !!Object.keys(compose?.people || {}).length;
   // One way to open a picture's settings, for "Reuse settings" and for a shot's own picture: its blocks when it has
   // them, else Fill from prompt; the original prompt and settings ride along either way.
   function fillFromJob(j, {how = '', start = '', slot = activeSlot, quiet = false} = {}) {
@@ -563,7 +592,6 @@ export function installImages(getScene, changed) {
     if (blocks) {
       c = normalizeComposition(j.compose);
       for (const type of ['model', 'style', 'framing']) c[type] = j.presets?.[type]?.id || c[type] || current[type];
-      if (!c.characters.length) c.characters = (j.characters || []).filter(id => preset('character', id));
     } else c = guessComposition(j, presets || {}).composition;
     c.model = active('model').find(p => p.data.file === j.model_file)?.id || c.model || current.model;
     Object.assign(c, {imageSlot: slot, seedMode: 'fixed', seed: j.seed, count: 1, width: j.w, height: j.h,

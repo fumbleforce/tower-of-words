@@ -3,6 +3,7 @@
 // one that kept the words themselves still reads (blockText).
 const {structuredClone} = globalThis;
 import {blockText, blockId} from '../../imagegen/web/blocks.js';
+import {personWords} from './image-people.js';
 import {stageWords, personOf} from './image-stage.js';
 export const DIRECTION_KINDS = [['pose', 'pose', 'Pose'], ['environment', 'location', 'Setting'], ['light', 'light', 'Light']];
 export const DEFAULT_COMPOSITION = {
@@ -26,6 +27,7 @@ export function normalizeComposition(value = {}) {
   c.characters = value.characters || value.chars || [];
   c.cameras = value.cameras || value.cams || (value.camera ? [value.camera] : []);
   c.negatives = value.negatives ?? value.negs ?? null;
+  if (value.people) c.people = structuredClone(value.people);
   if (value.stage) c.stage = structuredClone(value.stage);
   c.seedMode = value.seedMode || (value.seed === '' || value.seed == null ? 'random' : 'fixed');
   if (value.ipa) Object.assign(c, {reference: value.ipa.ref || value.omRef || '', referenceOn: value.ipa.on, referenceStrength: value.ipa.strength, referenceCutout: value.ipa.cutout});
@@ -58,17 +60,8 @@ function build(c, presets, subplotId) {
   const countGender = gender => chars.filter(p => (p.data.gender || 'female') === gender).length;
   const countTag = (n, single) => n ? n + single + (n > 1 ? 's' : '') : '';
   const cast = [countTag(countGender('female'), 'girl'), countTag(countGender('male'), 'boy')].filter(Boolean).join(', ');
-  const outfitOf = p => {
-    const pick = c.outfit[p.id];
-    const words = pick === true ? p.data.outfit : typeof pick === 'string' ? byId('outfit', pick)?.data.text : '';
-    return words ? 'wearing ' + words.replace(/^wearing\s+/i, '') : '';
-  };
-  const blocks = chars.map(p => {
-    const d = p.data;
-    const outfit = outfitOf(p);
-    if (chars.length > 1 && c.useShort && d.short) return [d.short, outfit].filter(Boolean).join(', ');
-    return [d.generic ? '' : d.name, d.age, d.look, d.signature, d.build, outfit].filter(Boolean).join(', ');
-  });
+  const people = chars.map(p => personWords(c, p, presets));
+  const blocks = people.map(p => [chars.length > 1 && c.useShort ? p.short : p.appearance, p.clothing].filter(Boolean).join(', '));
   // the staging (image-stage.js): who stands where, facing and looking at what, heights, contact; then the light's
   // direction and the mood after the setting and light blocks
   const staged = stageWords(c, chars.map(personOf));
@@ -88,15 +81,16 @@ function build(c, presets, subplotId) {
   const negatives = c.negatives || (presets.negative || []).filter(p => !p.archived && p.data.default).map(p => p.id);
   const soft = rating !== 'safe' && !c.hard;
   const withSoft = text => soft ? dedupe([text, SOFT_NEGATIVE]) : text;
-  const outfitNegs = chars.map(p => typeof c.outfit[p.id] === 'string' ? byId('outfit', c.outfit[p.id])?.data.negative : '');
-  const negative = withSoft(dedupe([...negatives.map(id => byId('negative', id)?.data.text), c.styleNegOff ? '' : style.negative, ...chars.filter(p => !c.charNegOff?.[p.id]).map(p => p.data.negative), ...outfitNegs, c.negative, 'child, loli']));
+  const negative = withSoft(dedupe([...negatives.map(id => byId('negative', id)?.data.text), c.styleNegOff ? '' : style.negative,
+    ...people.map(p => p.appearanceNegative), ...people.map(p => p.clothingNegative), c.negative, 'child, loli']));
   const md = byId('model', c.model)?.data || {};
   const fr = byId('framing', c.framing)?.data || {};
   const ref = (type, id) => { const p = byId(type, id); return p ? {id: p.id, v: p.v} : null; };
   const portrait = c.reference || (chars.length === 1 ? chars[0].data.portrait : '');
   const canReference = chars.length === 1 && portrait;
-  const own = chars[0]?.data || {};
-  const repaintPrompt = smartJoin([style.quality, rating, 'Two panels side by side showing the same person, a close-up of their head.', 'Both panels show the same face, hairstyle, hair colour and eyes.', [own.name, own.age, own.look, own.signature].filter(Boolean).join(', ')]);
+  const ownTemplate = chars[0]?.data || {};
+  const own = c.people?.[chars[0]?.id]?.appearance ?? [ownTemplate.name, ownTemplate.age, ownTemplate.look, ownTemplate.signature].filter(Boolean).join(', ');
+  const repaintPrompt = smartJoin([style.quality, rating, 'Two panels side by side showing the same person, a close-up of their head.', 'Both panels show the same face, hairstyle, hair colour and eyes.', own]);
   return {parts, body: {
     positive: (typeof c.override === 'string' ? c.override : c.override?.positive)?.trim() || positive,
     negative: c.override?.negative != null ? withSoft(c.override.negative) : negative, overridden: !!c.override,

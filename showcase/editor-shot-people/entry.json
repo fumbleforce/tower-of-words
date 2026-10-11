@@ -1,0 +1,28 @@
+{
+  "title": "Edit a person for one shot",
+  "date": "2026-10-11",
+  "by": "codex",
+  "caption": "Clothing and appearance can be edited for one picture without changing the shared character template. Adult and Nonadult buttons sit at the top.",
+  "result": [
+    "people-desktop",
+    "people-phone"
+  ],
+  "images": [
+    {
+      "id": "people-desktop",
+      "image": "game3d/shots/editor-shot-people/editor-1366.png",
+      "caption": "The image editor with clothing and appearance fields for this shot, presets and separate shared-template editing. Synthetic test characters."
+    },
+    {
+      "id": "people-phone",
+      "image": "game3d/shots/editor-shot-people/people-390.png",
+      "caption": "The local fields and reset controls on a phone. Synthetic test character."
+    }
+  ],
+  "links": [
+    {
+      "label": "Open the scene editor",
+      "href": "tools/subplots/web/"
+    }
+  ]
+}
