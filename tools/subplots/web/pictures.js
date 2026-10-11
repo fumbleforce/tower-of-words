@@ -6,6 +6,7 @@ import { esc, api } from './common.js';
 import { S, edit, select, checkpoint, stepOf, docFor } from './store.js';
 import { kindOf, speakerOf } from './model.js';
 import { personName, portrait, person } from './names.js';
+import { paintVersions } from './versions.js';
 
 const asset = (kind, path) => '/api/subplots/image/' + kind + '/' + String(path).split('/').map(encodeURIComponent).join('/');
 
@@ -67,19 +68,22 @@ export function renderPictureTab(installComposer) {
     <figure class="pic-large ${pic.url ? '' : 'missing'}">${pic.url ? `<img src="${esc(pic.url)}" alt="">` : '<div class="missing-box"><strong>No picture yet</strong></div>'}</figure>
     <div class="pic-facts">
       <span class="tag ${private_ ? 'private' : 'public'}">${private_ ? 'Private · Adult' : 'Public game'}</span>
-      ${pic.changed ? `<span class="tag new">New pick #${esc(pic.chosen.n ?? '')}, goes live on Save</span><button class="link" data-keep>Keep the old picture</button>` : `<span class="where">${esc(pic.file ? (private_ ? 'island/private/game/' : '') + pic.file : 'Not made yet')}</span>`}
+      ${pic.changed ? `<span class="tag new">New pick${pic.chosen.n ? ' #' + esc(pic.chosen.n) : ''}, goes live on Save</span><button class="link" data-keep>Keep the old picture</button>` : `<span class="where">${esc(pic.file ? (private_ ? 'island/private/game/' : '') + pic.file : 'Not made yet')}</span>`}
     </div>
-    <div class="pic-actions"><button data-compose class="primary-soft">Compose a new picture</button></div>
+    <div data-versions></div>
+    <div class="pic-actions"><button data-compose>Compose a new picture</button></div>
     <h3>From the image generator</h3>
     <div class="chips" data-chips></div>
     <div class="history" data-history></div>`;
   tab.querySelector('[data-keep]')?.addEventListener('click', () => edit(() => { delete doc.metadata.images[pic.slot]; }));
+  const getComposer = () => (composer ||= installComposer());
   tab.querySelector('[data-compose]').onclick = () => {
     checkpoint();
-    if (!composer) composer = installComposer();
     document.getElementById('composeDialog').showModal();
-    composer.focus(pic.slot);
+    getComposer().focus(pic.slot);
   };
+  if (pic.slot) paintVersions(tab.querySelector('[data-versions]'), { doc, pic, getPic: () => pictureFor(stepOf(path), doc), composer: getComposer,
+    rerender: () => { if (document.querySelector('[data-tab=picture][aria-selected=true]') && S.selected === path) renderPictureTab(installComposer); } });
   const chips = tab.querySelector('[data-chips]');
   const people = cast();
   chips.innerHTML = `<button data-scene aria-pressed="${filter.scene}" title="Made for this scene, or in the picture rounds its pictures came from">This scene</button>` + [['', 'Anyone'], ...people.map(id => [id, personName(id)])].map(([id, label]) =>

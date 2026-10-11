@@ -121,8 +121,17 @@ try {
         privateSaves.push(body.id);
         return r.fulfill({ json: { ...(Object.values(privateParts).find(p => p.id === body.id) || privateScene), ...body, revision: 'p2' } });
       });
+      // the queue: what it has made for the scene's shots, and what was asked of it (never a real render)
+      let jobsNow = [];
+      const generated = [];
       await page.route('**/api/subplots/image/**', r => {
         const u = new URL(r.request().url());
+        if (u.pathname.endsWith('/jobs')) return r.fulfill({ json: jobsNow });
+        if (u.pathname.endsWith('/generate')) {
+          generated.push(r.request().postDataJSON());
+          jobsNow = [{ id: 'new-1', n: 42, status: 'done', file: 'y.png', thumb: 'y.png', seed: 9, created: 1, compose: { subplotId: privateRow.id, imageSlot: 'image:0', made: 'new-version' } }];
+          return r.fulfill({ json: { run_id: 'new' } });
+        }
         if (u.pathname.endsWith('/history')) return r.fulfill({ json: [{ at: '2026-10-10T10:00:00', positive: 'steam', renders: [{ id: 'r-41', n: 41, file: 'x.png', thumb: 'x.png' }] }] });
         if (u.pathname.includes('/thumb/') || u.pathname.includes('/out/') || u.pathname.includes('/repo/')) return r.fulfill({ path: portraitFile });
         if (u.pathname.endsWith('/presets')) return r.fulfill({ json: presets });
@@ -333,6 +342,49 @@ try {
       await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-${width}.png`) });
       await page.locator('#closeCompose').click();
       if (width < 2000) await page.setViewportSize({ width, height: 860 });
+      // stage 2 on the beat: New version from the shot's own settings, Repaint a part with a painted mask, Compare
+      // two versions side by side and pick the one the beat uses
+      await page.route('**/api/subplots/picture-source?*', r => r.fulfill({ json: { how: 'the fixture', start: { image: 'island/private/imagegen/outputs/x.png' },
+        job: { id: 'r-41', positive: 'steam over the water', negative: '', seed: 5, model_file: 'fixture.safetensors', w: 896, h: 1152, steps: 20, cfg: 4 } } }));
+      await page.locator('[data-tab=beat]').click();
+      await page.locator('[data-tab=picture]').click();
+      await page.locator('.ver-strip [data-v="r-41"]').waitFor();
+      assert.match(await page.locator('.ver-strip').innerText(), /#41 · used/);
+      await page.locator('#tabPicture [data-new]').click();
+      await page.locator('.ver-strip [data-v="new-1"]').waitFor();
+      assert.equal(generated.length, 1);
+      assert.deepEqual([generated[0].seed_mode, generated[0].count, generated[0].compose.subplotId, generated[0].compose.imageSlot, generated[0].compose.made],
+        ['random', 1, privateRow.id, 'image:0', 'new-version']);
+      assert.match(generated[0].positive, /steam over the water/);
+      assert.equal(generated[0].start, null);
+      await page.locator('#tabPicture [data-repaint]').click();
+      const canvas = page.locator('.painter canvas');
+      await page.locator('.painter canvas[data-ready]').waitFor();
+      const cb = await canvas.boundingBox();
+      await page.mouse.move(cb.x + cb.width / 2, cb.y + cb.height / 2);
+      await page.mouse.down();
+      await page.mouse.move(cb.x + cb.width / 2 + 30, cb.y + cb.height / 2 + 10);
+      await page.mouse.up();
+      await page.locator('.painter [data-what]').fill('a folded towel');
+      await page.locator('.painter [data-done]').click();
+      await page.waitForFunction(() => !globalThis.document.querySelector('.painter'));
+      assert.equal(generated.length, 2);
+      assert.match(generated[1].positive, /steam over the water, a folded towel$/);
+      assert.equal(generated[1].start.image, 'island/private/imagegen/outputs/x.png');
+      assert.match(generated[1].start.mask, /^data:image\/png;base64,/);
+      assert.equal(generated[1].start.denoise, 0.75);
+      assert.equal(generated[1].compose.made, 'repaint');
+      await page.locator('.ver-strip [data-v="new-1"]').click();
+      await page.locator('#compareDialog[open] .cmp-side img').first().waitFor();
+      assert.equal(await page.locator('#compareDialog .cmp-side').count(), 2);
+      assert.match(await page.locator('#compareDialog .cmp-side').nth(0).innerText(), /The beat uses this one/);
+      await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-compare-${width}.png`) });
+      await page.locator('#compareDialog [data-use="new-1"]').click();
+      assert.match(await page.locator('#compareDialog .cmp-side').nth(1).innerText(), /The beat uses this one/);
+      assert.match(await page.locator('.pic-facts').innerText(), /New pick #42/);
+      await page.locator('#compareDialog [data-use="r-41"]').click();
+      await page.locator('#compareDialog [data-close]').click();
+      assert.match(await page.locator('.pic-facts').innerText(), /New pick #41/);
       await page.locator('#save').click();
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
       assert.deepEqual(privateSaves.sort(), ['local:fixture:bath:leave', 'local:fixture:bath:start'], 'only the edited parts are saved');
@@ -358,7 +410,7 @@ try {
       assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth > globalThis.innerWidth), false);
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(`PASS ${width}: open, labels, list stays put, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, comments on beats (public and private, command line), scene status`);
+      console.log(`PASS ${width}: open, labels, list stays put, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), comments on beats (public and private, command line), scene status`);
     }
   }, { timeoutMs: 150000, gpuWaitMs: 60000 });
 } finally {

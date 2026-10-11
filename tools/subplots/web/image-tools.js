@@ -89,21 +89,24 @@ export function bindTools(host, {edit, compose, current, size}) {
 
 // A full-screen painter over the picture: a round brush for the mask (white = repaint), or one dragged box for a
 // colour fix. The mask comes back as a PNG data URL at the picture's own size; a box in the picture's pixels, scaled
-// to the render size (`size`) when the picture is a different size.
-function openPainter({mode, picture, mask, size, onDone}) {
+// to the render size (`size`) when the picture is a different size. `fields` adds controls to the bar (Repaint a part
+// on the beat, versions.js); onDone gets the overlay too, to read them, and the picture's own size.
+export function openPainter({mode, picture, mask, size, onDone, title = '', fields = '', doneLabel = 'Done'}) {
   const el = document.createElement('div');
   el.className = 'lib-overlay painter';
-  el.innerHTML = `<div class="painter-bar"><strong>${mode === 'mask' ? 'Paint over what should change' : 'Drag a box round what needs its colour fixed'}</strong>
+  el.innerHTML = `<div class="painter-bar"><strong>${esc(title || (mode === 'mask' ? 'Paint over what should change' : 'Drag a box round what needs its colour fixed'))}</strong>
     ${mode === 'mask' ? '<label>Brush<input type="range" min="8" max="160" value="48" data-brush></label><button type="button" data-erase aria-pressed="false">Erase</button><button type="button" data-clear>Clear</button>' : ''}
-    <span></span><button type="button" data-cancel>Cancel</button><button type="button" class="primary" data-done>Done</button></div>
+    ${fields}<span></span><button type="button" data-cancel>Cancel</button><button type="button" class="primary" data-done>${esc(doneLabel)}</button></div>
     <div class="painter-stage"><canvas></canvas></div>`;
-  (document.getElementById('composeDialog') || document.body).append(el);
+  const dialog = document.getElementById('composeDialog');
+  (dialog?.open ? dialog : document.body).append(el);  // inside the composer when it is open (top layer), else on the page
   const canvas = el.querySelector('canvas'), ctx = canvas.getContext('2d');
   const img = new Image();
   const maskCanvas = document.createElement('canvas'), mctx = maskCanvas.getContext('2d');
   let box = null, drawing = false, erase = false, start = null;
   img.onload = () => {
     canvas.width = maskCanvas.width = img.naturalWidth; canvas.height = maskCanvas.height = img.naturalHeight;
+    canvas.dataset.ready = '1';
     mctx.fillStyle = '#000'; mctx.fillRect(0, 0, maskCanvas.width, maskCanvas.height);
     if (mask && mask.startsWith('data:')) { const m = new Image(); m.onload = () => { mctx.drawImage(m, 0, 0, maskCanvas.width, maskCanvas.height); draw(); }; m.src = mask; }
     draw();
@@ -136,7 +139,12 @@ function openPainter({mode, picture, mask, size, onDone}) {
     if (b.dataset.clear !== undefined) { mctx.fillStyle = '#000'; mctx.fillRect(0, 0, maskCanvas.width, maskCanvas.height); draw(); }
     if (b.dataset.cancel !== undefined) el.remove();
     if (b.dataset.done !== undefined) {
-      if (mode === 'mask') onDone(maskCanvas.toDataURL('image/png'));
+      if (mode === 'mask') {
+        if (fields && !mctx.getImageData(0, 0, maskCanvas.width, maskCanvas.height).data.some((v, k) => k % 4 === 0 && v > 0)) {
+          el.querySelector('strong').textContent = 'Paint over the part to change first.'; return;
+        }
+        onDone(maskCanvas.toDataURL('image/png'), el, {w: canvas.width, h: canvas.height});
+      }
       else if (box && box[2] - box[0] > 2) {
         const sx = size?.w ? size.w / canvas.width : 1, sy = size?.h ? size.h / canvas.height : 1;
         onDone([box[0] * sx, box[1] * sy, box[2] * sx, box[3] * sy].map(Math.round));

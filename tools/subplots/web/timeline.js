@@ -11,6 +11,7 @@ import { readingPath, pathSummary } from './paths.js';
 import { marker, thread } from './comments.js';
 import { conditionSentence } from './conditions.js';
 import { pictureFor } from './pictures.js';
+import { makingLabel } from './versions.js';
 import { openPop, closePop } from './pop.js';
 
 const host = () => document.getElementById('timeline');
@@ -237,10 +238,11 @@ function narration(body, step, path) {
 
 function picture(body, step, path) {
   const pic = pictureFor(step, docFor(path));
+  const making = pic.slot ? makingLabel(docFor(path)?.id, pic.slot) : '';
   const fig = document.createElement('figure');
   fig.className = 'pic' + (pic.url ? '' : ' missing') + (pic.changed ? ' changed' : '');
   fig.innerHTML = pic.url
-    ? `<img src="${esc(pic.url)}" alt="" loading="lazy"><figcaption>${pic.changed ? '<span class="tag new">New picture, saved with the scene</span>' : ''}<button class="change">Change picture</button></figcaption>`
+    ? `<img src="${esc(pic.url)}" alt="" loading="lazy"><span class="tag making" data-making="${esc(JSON.stringify([docFor(path)?.id, pic.slot]))}" ${making ? '' : 'hidden'}>${esc(making)}</span><figcaption>${pic.changed ? '<span class="tag new">New picture, saved with the scene</span>' : ''}<button class="change">Change picture</button></figcaption>`
     : '<div class="missing-box"><strong>No picture yet</strong><span>Pick one from the image generator’s history, or compose a new one.</span><button class="change">Choose a picture</button></div>';
   fig.querySelector('img')?.addEventListener('error', () => {
     fig.classList.add('missing');
