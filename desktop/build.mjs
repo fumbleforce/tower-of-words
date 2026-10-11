@@ -20,7 +20,7 @@ import { execFileSync } from 'node:child_process';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { fileList, stage, stampBuild, checkImports } from './lib/stage.mjs';
-import { releaseProfile } from './lib/profile.mjs';
+import { daysArgument, releaseProfile } from './lib/profile.mjs';
 import { scopeDays } from '../tools/release/days.mjs';
 import { writeAppDir } from './lib/app-dir.mjs';
 import { pack } from './pak/pack.mjs';
@@ -43,7 +43,7 @@ const DEV = flag('dev');
 if (!['vanilla', 'full'].includes(flavor)) throw new Error(`--flavor vanilla|full, not ${flavor}`);
 if (!['linux', 'win', 'mac'].includes(platform)) throw new Error(`--platform linux|win|mac, not ${platform}`);
 
-const profile = releaseProfile(flavor, opt('days', 'all'));
+const profile = releaseProfile(flavor, daysArgument(args));
 const IDENTITY = profile.identity;
 const version = JSON.parse(fs.readFileSync(path.join(desktop, 'package.json'), 'utf8')).version;
 
