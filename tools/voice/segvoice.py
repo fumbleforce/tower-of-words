@@ -49,9 +49,10 @@ HUM = re.compile(r'^(m+|mm+h?m*|hm+|h?mm+|mhm+|n+|ん+|うん|ふん)$', re.I)
 
 def hum(text):
     """A stretch that is only a closed-mouth hum ("Mm.", which the TTS reads as "Hmm"): WavLM can't tell whose voice a
-    hum is (Mio's "Mm." stretches score 0.1 to 0.5 to her reference), so it is never counted as a break."""
-    words = re.findall(r"[\w']+", text)
-    return not words or all(HUM.match(w) for w in words)
+    hum is (Mio's "Mm." stretches score 0.1 to 0.5 to her reference), so it is never counted as a break. An empty or
+    punctuation-only transcript is a failed recognition, not evidence of a hum: it stays a break."""
+    words = re.findall(r"[\w']+", text or '')
+    return bool(words) and all(HUM.match(w) for w in words)
 
 
 def breaks(rows, y=None, transcribe=None):
@@ -91,9 +92,9 @@ if __name__ == '__main__':
         y = librosa.load(f"{AUD}/{e['key']}.mp3", sr=SR)[0]
         rows = measure(y, C.emb, C.pitch, refs[e['speaker']])
         br = breaks(rows, y, english)
-        print('BREAK' if br else 'ok', e['key'], e['speaker'], e['said'][:60], '|',
+        print('BREAK' if br else 'no break flagged', e['key'], e['speaker'], e['said'][:60], '|',
               ' '.join(f"{'*' if i in br else ''}{r['t'][0]}-{r['t'][1]}s:{r['sim']:.2f}/{r['f0'] and round(r['f0'])}Hz{' ' + repr(r['heard']) if 'heard' in r else ''}" for i, r in enumerate(rows)), flush=True)
         if br:
             bad.append(e['key'])
-    print(f'{len(bad)} of {len(lines)} clips change voice partway:', ' '.join(bad))
+    print(f'{len(bad)} of {len(lines)} clips have a flagged voice break (pauses only: no breaks were flagged in the rest, which is not a guarantee):', ' '.join(bad))
     sys.exit(1 if bad else 0)

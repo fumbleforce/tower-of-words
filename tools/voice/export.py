@@ -3,7 +3,7 @@ with tools/island_audio/export_voice.py's trim and normalise. Slow lines (manife
 A spliced line (cfg.SPLICE: Eric's and Carina's English lines with Japanese in them, '<key>~<n>' parts) gets the best take
 of each English part, at the speaker's usual English pitch; each Japanese part's takes are tried closest in voice (WavLM)
 to those English takes first, and the first joined clip (splice.py) that keeps one voice (segvoice.py) is exported.
-Only lines with no clip for their current text are touched (clips.json). A take named in force.json wins.
+Only lines with no clip for their current text are touched (clips.json). A take named in force.json wins, but only if it passes the voice check (or voice_listened.json records a listening override for that take).
 Lines with no passing take are printed as NOPASS and listed in <work>/report.json 'fallback' (edge.py voices them).
 Rewrites game3d/audio/index.json.
 Usage: ~/ai/tts-bench/.venv/bin/python tools/voice/export.py [--dry]"""
@@ -59,6 +59,7 @@ SPEAKERS = speakers()
 M = load(METRICS, {})
 clips = load(CLIPS, {})
 force = load(FORCE, {})
+listened = load(os.path.join(os.path.dirname(FORCE), 'voice_listened.json'), {})  # {key: {take, by, date, note}}: a recorded listening override for a voice-break take, separate from force.json
 MAN = manifest()
 PARTS = {}
 for u in units():
@@ -90,12 +91,18 @@ def target(k):
     return p
 
 
+def voice_clear(k, m, t):
+    """A take passes the mandatory voice check, or a recorded listening override (voice_listened.json) names this take."""
+    return bool(m.get('voice_ok', True) and not m.get('voice_breaks')) or listened.get(k, {}).get('take') == t
+
+
 def pick(e, f=None, w=0.015):
     """(best take, its metrics, every take's metrics) for a line or a part, or (None, None, takes). f, w: see score()."""
     k = e['key']
     takes = {t: m for t, m in M.get(k, {}).items() if m.get('text') == e['said'] and os.path.exists(f'{RAW}/{k}/{t}.wav') and not m.get('error')}
     ok = {t: m for t, m in takes.items() if m['ok']}
-    best = force[k] if k in force and force[k] in takes else (min(ok, key=lambda t: score(e, ok[t], f, w)) if ok else None)
+    # a forced take must still pass the voice-consistency check, unless a listening override names that exact take
+    best = force[k] if k in force and force[k] in takes and voice_clear(k, takes[force[k]], force[k]) else (min(ok, key=lambda t: score(e, ok[t], f, w)) if ok else None)
     return best, takes.get(best), takes
 
 
@@ -115,7 +122,7 @@ for e in MAN:
             rep['fallback'].append({'key': k, 'speaker': e['speaker'], 'lang': e['lang'], 'text': e['said'],
                                     'heard': {u['key']: [tk[t]['asr'] for t in sorted(tk)] for u, b, m, tk in picks if not b}})
             continue
-        ja = {u['key']: [force[u['key']]] if u['key'] in force else [t for t, m in tk.items() if m['ok']]
+        ja = {u['key']: [force[u['key']]] if u['key'] in force and voice_clear(u['key'], M.get(u['key'], {}).get(force[u['key']], {}), force[u['key']]) else [t for t, m in tk.items() if m['ok']]
               for u, b, m, tk in picks if u['lang'] == 'ja'}
         takes, rows = splice_pick(e, {u: (b, m) for u, (b, m, tk) in en.items()}, ja)
         if not takes:
