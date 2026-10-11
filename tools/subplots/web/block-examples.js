@@ -53,3 +53,41 @@ export function exampleJob(kind, id, presets) {
 }
 // After Make examples: forget what was missing so the new pictures are fetched when they are done.
 export function forgetMissing(blocks) { for (const [kind, id] of blocks) if (found.get(kind + ':' + id) === '') found.delete(kind + ':' + id); }
+
+// A place preview (Jørgen, 2026-10-11: "it would be nice to be able to gen that background scene as a preview ther and
+// then to see if it matches expectations, and not get a blank preview as now"): the shot's setting in its light, with
+// no people, small and quick, in the shot's style and shape. Kept by its setting and light, so the tile and the empty
+// picture slot can show it until the shot itself is made.
+export const placeKey = (setting, light) => 'place:' + setting + '|' + (light || '');
+export const placeOf = (setting, light) => found.get(placeKey(setting, light)) || '';
+export function placeJob(c, presets) {
+  const fr = (presets.framing || []).find(p => p.id === c.framing)?.data || {};
+  const w0 = +c.width || fr.w || 1216, h0 = +c.height || fr.h || 832, k = 640 / Math.max(w0, h0);
+  const p = applyDefaults(normalizeComposition({scene: SUBJECT.location, environment: c.environment, light: c.light, style: c.style, model: c.model,
+    framing: c.framing, count: 1, rating: 'safe', negatives: null, castInitialized: true}), presets);
+  const body = assembleComposition(p, presets, '');
+  const snap = n => Math.max(320, Math.round(n * k / 64) * 64);
+  Object.assign(body, {w: snap(w0), h: snap(h0), steps: 20, count: 1, seed_mode: 'random', ipa: null, repaint: null, start: null, control: null, loras: [], huefix: []});
+  body.compose = {...body.compose, placePreview: placeKey(c.environment, c.light), subplotId: '', ...(c.light ? {} : {example: 'location:' + c.environment})};
+  return body;
+}
+// A finished example or place preview from the queue becomes the newest picture for its block or place at once.
+export function noteDone(job) {
+  const url = thumb(job); if (!url) return false;
+  let changed = false;
+  for (const key of [job.compose?.example, job.compose?.placePreview].filter(Boolean)) if (found.get(key) !== url) { found.set(key, url); changed = true; }
+  return changed;
+}
+// The newest place preview for this setting and light in the history (once a session).
+export function loadPlace(api, setting, light, done) {
+  const key = placeKey(setting, light);
+  if (!setting || found.has(key) || asking.has(key)) return;
+  const p = api('image/api/history?' + new URLSearchParams({preset: 'location:' + setting, limit: '60'}))
+    .then(runs => {
+      const r = runs.flatMap(run => (run.renders || []).filter(x => !x.reject && (x.compose?.placePreview || run.compose?.placePreview) === key))[0];
+      found.set(key, r ? thumb(r) : '');
+    })
+    .catch(() => found.set(key, ''))
+    .finally(() => { asking.delete(key); done?.(); });
+  asking.set(key, p);
+}

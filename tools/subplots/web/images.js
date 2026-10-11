@@ -1,13 +1,13 @@
 const {setInterval, clearInterval, document, URLSearchParams, CustomEvent} = globalThis;
 import {$, esc, api, guarded, notice} from './common.js';
 import {guessComposition} from './image-guess.js';
-import {applyDefaults, normalizeComposition, assembleComposition, portraitUrl} from './image-compose.js';
+import {applyDefaults, normalizeComposition, assembleComposition, promptParts, portraitUrl} from './image-compose.js';
 import {blockId} from '../../imagegen/web/blocks.js';
 import {openBlockEditor} from './block-editor.js';
 import {createLibrary} from './library.js';
 import {toolsHtml, bindTools} from './image-tools.js';
 import {directHtml, placeHtml, bindDirect} from './image-direct.js';
-import {loadExamples, exampleJob, exampleOf, forgetMissing} from './block-examples.js';
+import {loadExamples, exampleJob, exampleOf, placeJob, placeOf, placeKey, loadPlace, noteDone} from './block-examples.js';
 
 const options = (items, value) => items.map(item => {
   const id = item.id ?? item;
@@ -87,7 +87,10 @@ export function installImages(getScene, changed) {
   const selectedImage = slot => getScene()?.metadata.images?.[slot] || (getScene()?.metadata.image?.slot === slot ? getScene().metadata.image : null);
   function updatePrompt() {
     const body = assemble();
-    if ($('#assembled')) $('#assembled').textContent = body.positive;
+    // each block's words on a tint of their own, named on hover (Jørgen, 2026-10-11: "add colored background to
+    // separate the different blocks of the prompts visually"); the prompt sent is the same text
+    if ($('#assembled')) $('#assembled').innerHTML = promptParts(compose() || normalizeComposition(), presets || {}, getScene()?.id)
+      .map(p => p.kind ? `<span class="pp pp-${p.kind}" title="${esc(p.label)}">${esc(p.text)}</span>` : esc(p.text)).join('');
     const peek = $('.image-settings .settings-peek'); if (peek) peek.textContent = settingsPeek(compose());
     if ($('#imageRatingNote')) $('#imageRatingNote').textContent = body.rating === compose()?.rating ? '' : 'The selected character preset limits this image to ' + body.rating + '.';
   }
@@ -169,7 +172,7 @@ export function installImages(getScene, changed) {
   const blockValue = (kind, value) => blockId(presets, kind, value) || value || '';
   const blockItems = (kind, value) => { const items = presetOptions(kind); return value && !items.some(i => i.id === value) ? [...items, {id: value, label: value + ' (words only)'}] : items; };
   // what Direct the shot and Place and light need from the composer (image-direct.js)
-  const directCtx = () => ({presets: presets || {}, active, preset, blockValue, blockItems, picker: pickerHtml, edit, render, compose, openBlock, makeExamples,
+  const directCtx = () => ({presets: presets || {}, active, preset, blockValue, blockItems, picker: pickerHtml, edit, render, compose, openBlock, makeExamples, previewPlace,
     selected: () => stageWho, select: id => { stageWho = id; }, size: c => sizeOf(c)});
   // Example pictures on the setting, light and camera tiles: fetched once, then painted into the tiles in place so a
   // text box being typed in keeps its focus.
@@ -178,8 +181,9 @@ export function installImages(getScene, changed) {
   function paintExamples() {
     const typing = document.activeElement?.matches?.('textarea, input:not([type]), input[type=text], input[type=number]');
     if (!typing) return render();
-    for (const el of document.querySelectorAll('[data-block-tile]')) {
-      const url = exampleOf(el.dataset.blockTile, el.dataset.id), art = el.querySelector('.tile-art');
+    renderShot();
+    for (const el of document.querySelectorAll('[data-block-tile], [data-chosen][data-id]')) {
+      const url = exampleOf(el.dataset.blockTile || el.dataset.chosen, el.dataset.id), art = el.querySelector('.tile-art');
       if (url && art && !art.querySelector('img')) art.innerHTML = `<img src="${esc(url)}" alt="">`;
     }
   }
@@ -190,6 +194,62 @@ export function installImages(getScene, changed) {
     notice(`Queued ${blocks.length} small example ${blocks.length > 1 ? 'pictures' : 'picture'} of a stand-in figure. They show on the tiles when they are done.`);
     await refresh();
   }
+  // Preview this place: the setting in its light, no people, small, through the queue; it shows in the picture slot
+  // until the shot has a picture of its own (block-examples.js placeJob).
+  async function previewPlace() {
+    const c = compose();
+    const setting = blockValue('location', c.environment);
+    if (!setting) return notice('Choose a setting first.', true);
+    await api('image/api/generate', placeJob({...c, environment: setting, light: blockValue('light', c.light)}, presets));
+    notice('Making a small picture of the place. It shows on the right when it is done.');
+    await refresh();
+    renderShot();
+  }
+  // The right column: the shot's picture, or a picture of its place while it has none, never an empty box
+  // (Jørgen, 2026-10-11: "not get a blank preview as now").
+  function placeState(c) {
+    const setting = blockValue('location', c.environment), light = blockValue('light', c.light);
+    if (!setting) return {setting};
+    const key = placeKey(setting, light);
+    const job = jobs.find(j => j.compose?.placePreview === key && ['queued', 'running'].includes(j.status));
+    const exact = placeOf(setting, light);
+    return {setting, light, key, job, url: exact || exampleOf('location', setting), exact: !!exact};
+  }
+  function shotHtml(c) {
+    const slot = slots().find(s => s.id === activeSlot);
+    const picked = selectedImage(activeSlot);
+    const imageTitle = slot ? 'Shot ' + (slots().indexOf(slot) + 1) : 'Scene image';
+    const previewUrl = picked?.url || (slot?.available === false ? '' : slot?.url);
+    const go = `<div class="image-go"><button id="generate" class="primary" ${presets ? '' : 'disabled'} title="Uses your existing image-generation queue. Choose a result from the Picture library to add it to this shot.">Generate ${+c.count > 1 ? c.count + ' pictures' : 'a picture'}</button></div>`;
+    const why = slot?.label === 'New picture' ? 'A new picture beat.' : slot ? 'This shot has no picture yet.' : '';
+    const place = placeState(c);
+    const name = (kind, id) => preset(kind, id)?.data.name || id;
+    const progress = place.job ? `Making a picture of the place${place.job.status === 'running' ? ', ' + Math.round(100 * (place.job.progress || 0)) + '%' : ', queued'}.` : '';
+    const again = place.setting ? `<button type="button" class="small" data-preview-place>${place.exact ? 'Preview again' : 'Preview this place'}</button>` : '';
+    const empty = place.url
+      ? `<figure class="place-preview"><img class="selected-image" src="${esc(place.url)}" alt="The place: ${esc(name('location', place.setting))}"><figcaption><span>Place preview: ${esc([name('location', place.setting), place.exact && place.light ? name('light', place.light) : ''].filter(Boolean).join(', '))}${place.exact ? '' : ' (its example picture)'}. ${esc(why)} Generate to make the shot.</span>${progress ? `<span class="hint">${esc(progress)}</span>` : again}</figcaption></figure>`
+      : `<div class="image-empty"><p>${esc(why || 'Choose a shot in the storyboard to replace its image.')} ${place.setting ? (progress || 'Preview its place to see the setting and light before you generate the shot.') : 'Choose a setting on the left, then preview the place here before you generate the shot.'}</p>${progress ? '' : again}</div>`;
+    return `<div class="image-current"><p class="hint image-scene-name">${esc(getScene().metadata.title || getScene().title)}</p>${previewUrl ? `<a href="${esc(previewUrl)}" target="_blank" rel="noopener"><img class="selected-image" src="${esc(previewUrl)}" alt="${esc(imageTitle)}"></a>` : empty}
+        <div class="image-current-row">${go}${slots().length > 1 ? field('imageSlot', 'Image in this scene', slots().map((s, i) => ({id: s.id, label: 'Shot ' + (i + 1)})), activeSlot, null) : `<strong>${esc(imageTitle)}</strong>`}
+        ${slot?.storage === 'archive' && !picked ? '<p class="hint">Showing the earlier picture from the archive.</p>' : ''}
+        ${picked && !picked.applied ? '<p class="hint" title="Replacement selected. Save the scene to use it in the story.">Replacement selected. Save the scene to use it in the story.</p><button data-clear-image>Keep the current story image</button>' : ''}</div>
+      </div>`;
+  }
+  // redraw only the right column (a place preview finishing must not take the focus from a text box)
+  let shotSeen = '';
+  function renderShot() {
+    const shot = $('#composeShot'), c = compose();
+    if (!shot || !c || !$('#composePreview')) return;
+    shot.innerHTML = shotHtml(c);
+    bindShot(shot);
+  }
+  function bindShot(root) {
+    root.querySelectorAll('#generate').forEach(b => { b.onclick = guarded(generate); });
+    root.querySelectorAll('[data-preview-place]').forEach(b => { b.onclick = guarded(previewPlace); });
+    const pick = root.querySelector('[data-compose=imageSlot]');
+    if (pick) pick.oninput = () => { activeSlot = pick.value; fold(); render(); };
+    root.querySelectorAll('[data-clear-image]').forEach(b => { b.onclick = () => { const s = getScene(); if (s.metadata.images) delete s.metadata.images[activeSlot]; if (s.metadata.image?.slot === activeSlot) delete s.metadata.image; changed(); render(); announceImage(); }; });
+  }
   function render() {
     const host = $('#composition');
     if (!host) return;
@@ -199,20 +259,14 @@ export function installImages(getScene, changed) {
     const picked = selectedImage(activeSlot);
     if (presets && !c.sourceChecked && !c.edited && (picked || slot?.available)) loadSource(activeSlot);
     const cast = c.characters.map(id => preset('character', id)).filter(Boolean);
-    const imageTitle = slot ? 'Shot ' + (slots().indexOf(slot) + 1) : 'Scene image';
-    const previewUrl = picked?.url || (slot?.available === false ? '' : slot?.url);
-    const go = `<div class="image-go"><button id="generate" class="primary" ${presets ? '' : 'disabled'} title="Uses your existing image-generation queue. Choose a result from the Picture library to add it to this shot.">Generate ${+c.count > 1 ? c.count + ' pictures' : 'a picture'}</button></div>`;
-    const current = `<div class="image-current"><p class="hint image-scene-name">${esc(getScene().metadata.title||getScene().title)}</p>${previewUrl ? `<a href="${esc(previewUrl)}" target="_blank" rel="noopener"><img class="selected-image" src="${esc(previewUrl)}" alt="${esc(imageTitle)}"></a>` : `<div class="image-empty">${slot?.label === 'New picture' ? 'A new picture beat. Direct the shot and generate it, or choose a picture from the library.' : slot ? 'This shot’s picture is unavailable. Generate a replacement or choose one from the picture library.' : 'Choose a shot in the storyboard to replace its image.'}</div>`}
-        <div class="image-current-row">${go}${slots().length > 1 ? field('imageSlot', 'Image in this scene', slots().map((s, i) => ({id: s.id, label: 'Shot ' + (i + 1)})), activeSlot, null) : `<strong>${esc(imageTitle)}</strong>`}
-        ${slot?.storage === 'archive' && !picked ? '<p class="hint">Showing the earlier picture from the archive.</p>' : ''}
-        ${picked&&!picked.applied ? '<p class="hint" title="Replacement selected. Save the scene to use it in the story.">Replacement selected. Save the scene to use it in the story.</p><button data-clear-image>Keep the current story image</button>' : ''}</div>
-      </div>`;
+    const current = shotHtml(c);
     const look = `<section class="image-section image-look"><div class="two">${pickerHtml('style', 'style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p></section>`;
     const happens = `<section class="image-section image-what"><div class="section-head"><h3>What happens</h3>${pickerHtml('scenePreset', 'scene', 'Saved scene direction', presetOptions('scene'), c.sceneRefs?.[0] || '', 'Choose a saved direction…')}</div>
       <label><span class="visually-hidden">What happens in this picture?</span><textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label></section>`;
     // Exclude folds to one line, like the generation settings: the negative blocks in use and anything else
     const negNames = active('negative').filter(p => c.negatives?.includes(p.id)).map(p => p.data.name);
     const excludePeek = [...negNames, c.negative ? 'more words' : '', c.rating !== 'safe' && !c.hard ? 'soft-scene limits' : ''].filter(Boolean).join(', ') || 'nothing';
+    const details = `<section class="image-section image-details"><label class="details-line">More details<textarea data-compose="extra" rows="1" placeholder="Props, clothes, anything the blocks don't say">${esc(c.extra || '')}</textarea></label></section>`;
     const exclude = `<details class="image-section image-exclude" data-exclude-open ${excludeOpen ? 'open' : ''}><summary><span class="settings-title">Exclude</span><span class="hint exclude-peek">${esc(excludePeek)}</span></summary><div class="chips">${active('negative').map(p => chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}" title="${esc(p.data.text)}"`)).join('')}<button type="button" data-new-block="negative">+ New</button><button type="button" data-edit-block="negative" data-edit-list="negatives">Edit…</button></div>
       <div class="two"><label>Anything else to avoid?<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
       <label>Notes for steps outside the prompt<textarea data-compose="details" rows="1" placeholder="Inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></div>
@@ -238,16 +292,22 @@ export function installImages(getScene, changed) {
     const stage = $('#composePreview'), shot = $('#composeShot');
     const direct = directHtml(c, dctx), place = placeHtml(c, dctx);
     if (stage && shot) {
-      host.innerHTML = peopleHtml(c, cast) + place + look + exclude + settingsHtml(c) + tools;
-      stage.innerHTML = original + happens + direct + prompt;
+      // Jørgen, 2026-10-11: "put the camera direction and preview on top of the middle lane, moving the orig prompt
+      // down together with the other prompt related stuff"; the generated prompt takes what is left
+      host.innerHTML = peopleHtml(c, cast) + place + look + settingsHtml(c) + tools;
+      stage.innerHTML = direct + happens + details + original + prompt + exclude;
       shot.innerHTML = current;
       if ($('#composeFor')) $('#composeFor').textContent = getScene().metadata.title || getScene().title || '';
-    } else host.innerHTML = current + original + peopleHtml(c, cast) + happens + direct + place + look + exclude + settingsHtml(c) + tools + prompt;
+    } else host.innerHTML = current + peopleHtml(c, cast) + direct + place + look + happens + details + original + prompt + exclude + settingsHtml(c) + tools;
     bindComposition();
     updatePrompt();
     renderReferenceChoices();
     renderJobs();
-    if (presets) loadExamples(api, exampleKinds(), paintExamples);
+    if (presets) {
+      loadExamples(api, exampleKinds(), paintExamples);
+      const setting = blockValue('location', c.environment);
+      if (setting) loadPlace(api, setting, blockValue('light', c.light), paintExamples);
+    }
   }
   function edit(mutator, repaint = true) {
     const c = compose(); if (!c) return;
@@ -332,7 +392,6 @@ export function installImages(getScene, changed) {
     });
     host.querySelectorAll('[data-clear-angle]').forEach(b => b.onclick = () => edit(c => { c.angle = ''; }));
     const bind = (selector, fn) => { const el = $(selector, host); if (el) el.onclick = fn; };
-    bind('[data-clear-image]', () => { const s = getScene(); if (s.metadata.images) delete s.metadata.images[activeSlot]; if (s.metadata.image?.slot === activeSlot) delete s.metadata.image; changed(); render(); announceImage(); });
     bind('[data-reset-reference]', () => edit(c => { c.reference = ''; }));
     bind('[data-pick-reference]', guarded(loadReferences));
     bind('[data-fill-prompt]', () => edit(c => {
@@ -360,7 +419,7 @@ export function installImages(getScene, changed) {
     const current = picked?.file ? 'island/private/imagegen/outputs/' + picked.file : slot?.available !== false && slot?.url && !slot.url.startsWith('data:') ? slot.url.replace(/^\//, '') : '';
     const cc = compose();
     bindTools(host, {edit, compose, current, size: {w: +cc.width || preset('framing', cc.framing)?.data.w, h: +cc.height || preset('framing', cc.framing)?.data.h}});
-    bind('#generate', guarded(generate));
+    bindShot(host);
   }
   async function loadReferences() {
     const c = compose(), id = c.characters[0];
@@ -400,8 +459,13 @@ export function installImages(getScene, changed) {
   async function refresh() {
     jobs = await api('image/api/jobs');
     // example pictures that finished since the tiles last looked (Make examples)
-    const examples = jobs.filter(j => j.status === 'done' && j.compose?.example && !examplesSeen.has(j.id)).map(j => { examplesSeen.add(j.id); return j.compose.example.split(':'); });
-    if (examples.length) { forgetMissing(examples); loadExamples(api, examples, paintExamples); }
+    // example pictures and place previews that finished since the last look go on their tiles and in the picture slot
+    let fresh = false;
+    for (const j of jobs) if (j.status === 'done' && (j.compose?.example || j.compose?.placePreview) && !examplesSeen.has(j.id)) { examplesSeen.add(j.id); fresh = noteDone(j) || fresh; }
+    if (fresh) paintExamples();
+    // a place preview's progress
+    const sig = jobs.filter(j => j.compose?.placePreview && ['queued', 'running'].includes(j.status)).map(j => j.id + j.status + Math.round(10 * (j.progress || 0))).join();
+    if (sig !== shotSeen) { shotSeen = sig; renderShot(); }
     renderJobs();
   }
   function historyQuery(before) {
@@ -441,7 +505,7 @@ export function installImages(getScene, changed) {
     for (const job of jobs) if (!sceneScope || all.has(job.id) || job.compose?.subplotId === getScene().id || ownRuns.has(job.run_id)) all.set(job.id, {...all.get(job.id), ...job});
     for (const [id, f] of edits) if (all.has(id)) Object.assign(all.get(id), f);
     const madeBy = j => historyWho === 'all' || (j.source === 'agent') === (historyWho === 'agents');
-    selected = [...all.values()].filter(j => !j.deleted && madeBy(j) && !j.compose?.example
+    selected = [...all.values()].filter(j => !j.deleted && madeBy(j) && !j.compose?.example && !j.compose?.placePreview
       && (!historyCharacter || j.characters?.includes(historyCharacter)) && (!historyStar || j.star || j.fav))
       .sort((a, b) => (b.at || '9999').localeCompare(a.at || '9999'));
     const empty = `<p class="hint">${sceneScope && !sceneRuns ? 'Finding this scene’s pictures…' : historyScope === 'scene' ? 'No pictures for this scene yet, from the editor or from its picture rounds. Browse all generated pictures to use an existing one.' : 'No pictures match these filters.'}</p>`;

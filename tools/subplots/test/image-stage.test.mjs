@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeComposition, assembleComposition} from '../web/image-compose.js';
+import {normalizeComposition, assembleComposition, promptParts} from '../web/image-compose.js';
 import {stageWords, stageSummary, placeOf, cameraKind, cameraSetup, figures, poseShape, stageCast} from '../web/image-stage.js';
-import {exampleJob} from '../web/block-examples.js';
+import {exampleJob, placeJob, placeKey} from '../web/block-examples.js';
 
 const rec = (id, data) => ({id, v: 1, data});
 const presets = {
@@ -79,4 +79,25 @@ test('an example picture is a small stand-in render tagged with its block', () =
   assert.equal(body.compose.example, 'location:office');
   assert.deepEqual(body.presets.location, {id: 'office', v: 1});
   assert.equal(exampleJob('pose', 'seated', presets).compose.example, 'pose:seated');
+});
+
+test('the prompt cut into its blocks joins back to the exact prompt, each stretch named', () => {
+  const c = normalizeComposition({characters: ['ana', 'ben'], model: 'm', style: 'house', framing: 'landscape', scene: 'Ana hands Ben a mug.', environment: 'office', light: 'evening',
+    cameras: ['cowboy-shot'], extra: 'steam rising', stage: {people: {ana: {x: 0.2, d: 0, placed: true}}, mood: 'calm'}});
+  const parts = promptParts(c, presets, 'scene');
+  assert.equal(parts.map(p => p.text).join(''), assembleComposition(c, presets, 'scene').positive);
+  const named = Object.fromEntries(parts.filter(p => p.kind).map(p => [p.label, p.kind]));
+  assert.deepEqual([named.Ana, named.Ben, named['What happens'], named.Staging, named.Setting, named.Light, named.Mood, named.Camera, named['More details']],
+    ['person', 'person', 'action', 'stage', 'place', 'light', 'mood', 'camera', 'details']);
+  assert.deepEqual(promptParts({...c, override: {positive: 'copied words', negative: ''}}, presets, 'scene'), [{text: 'copied words'}]);
+});
+
+test('a place preview is the setting in its light with no people, small, in the shot shape', () => {
+  const body = placeJob(normalizeComposition({characters: ['ana'], style: 'house', framing: 'landscape', environment: 'office', light: 'evening'}), presets);
+  assert.match(body.positive, /no people\. in an office\. evening light/);
+  assert.doesNotMatch(body.positive, /Ana|1girl/);
+  assert.deepEqual([body.w, body.h, body.steps], [640, 448, 20]);
+  assert.equal(body.compose.placePreview, placeKey('office', 'evening'));
+  assert.equal(body.compose.example, undefined);
+  assert.equal(placeJob(normalizeComposition({framing: 'landscape', environment: 'office'}), presets).compose.example, 'location:office');
 });
