@@ -90,6 +90,20 @@ class LocalRecipes(unittest.TestCase):
         self.assertEqual(len(result['images']),2)
         self.assertTrue(all('editor-' in slot['file'] for slot in result['images']))
 
+    def test_a_picture_beat_added_in_the_editor_gets_its_picked_render(self):
+        self.media_fixture()
+        self.source.write_text("const shot=(src,o={})=>({t:'shot',src,o});const n=x=>({t:'n',x});const scene={id:'hello',nodes:{start:[n('Hello')]}};const SCENES=[scene];")
+        data=self.call('read')
+        data['steps'].append({'shot':{},'newPicture':True,'imageSlot':'new:x'})
+        with self.assertRaisesRegex(ValueError,'no picture yet'):self.call('save',**{k:v for k,v in data.items() if k!='id'})
+        data['metadata']['images']={'new:x':{'file':'selected.png','slot':'new:x'},'new:gone':{'file':'selected.png','slot':'new:gone'}}
+        result=self.call('save',**{k:v for k,v in data.items() if k!='id'})
+        self.assertEqual(len(result['images']),1)
+        self.assertIn('editor-',result['images'][0]['file'])
+        self.assertIn("shot(\"encounters/editor-",self.source.read_text())
+        self.assertEqual(result['metadata']['images']['image:0']['slot'],'image:0')
+        self.assertNotIn('new:gone',result['metadata']['images'])
+
     def test_reorder_remaps_composition_and_pending_image_to_the_same_shot(self):
         self.media_fixture()
         self.source.write_text("const scene={id:'hello',nodes:{start:[shot('encounters/a.webp'),shot('encounters/b.webp')]}};const SCENES=[scene];")

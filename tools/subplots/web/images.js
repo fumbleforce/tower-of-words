@@ -30,7 +30,13 @@ export function installImages(getScene, changed) {
   const active = type => (presets?.[type] || []).filter(p => !p.archived);
   const preset = (type, id) => (presets?.[type] || []).find(p => p.id === id);
   const presetOptions = type => active(type).map(p => ({id: p.id, label: p.data.name || p.data.title || p.id}));
-  const slots = () => getScene()?.images || [];
+  // the scene's picture slots, and picture beats added in the editor that have none yet (model.js newStep)
+  const slots = () => {
+    const scene = getScene(), added = [];
+    const walk = xs => (xs || []).forEach(st => { if (st?.newPicture && st.imageSlot) added.push({id: st.imageSlot, label: 'New picture', available: false}); if (st && typeof st === 'object') for (const k of ['then', 'else', 'sequence']) walk(st[k]); });
+    walk(scene?.steps);
+    return [...(scene?.images || []), ...added];
+  };
   function compose() {
     const scene = getScene();
     if (!scene) return null;
@@ -106,7 +112,7 @@ export function installImages(getScene, changed) {
     const imageTitle = slot ? 'Shot ' + (slots().indexOf(slot) + 1) : 'Scene image';
     const previewUrl = picked?.url || (slot?.available === false ? '' : slot?.url);
     const fr = preset('framing', c.framing)?.data || {};
-    const current = `<div class="image-current"><p class="hint image-scene-name">${esc(getScene().metadata.title||getScene().title)}</p>${previewUrl ? `<a href="${esc(previewUrl)}" target="_blank" rel="noopener"><img class="selected-image" src="${esc(previewUrl)}" alt="${esc(imageTitle)}"></a>` : `<div class="image-empty">${slot ? 'This shot’s picture is unavailable. Generate a replacement or choose one from the picture library.' : 'Choose a shot in the storyboard to replace its image.'}</div>`}
+    const current = `<div class="image-current"><p class="hint image-scene-name">${esc(getScene().metadata.title||getScene().title)}</p>${previewUrl ? `<a href="${esc(previewUrl)}" target="_blank" rel="noopener"><img class="selected-image" src="${esc(previewUrl)}" alt="${esc(imageTitle)}"></a>` : `<div class="image-empty">${slot?.label === 'New picture' ? 'A new picture beat. Direct the shot and generate it, or choose a picture from the library.' : slot ? 'This shot’s picture is unavailable. Generate a replacement or choose one from the picture library.' : 'Choose a shot in the storyboard to replace its image.'}</div>`}
         <div class="image-current-row">${slots().length > 1 ? field('imageSlot', 'Image in this scene', slots().map((s, i) => ({id: s.id, label: 'Shot ' + (i + 1)})), activeSlot, null) : `<strong>${esc(imageTitle)}</strong>`}
         ${slot?.storage === 'archive' && !picked ? '<p class="hint">Showing the earlier picture from the archive.</p>' : ''}
         ${picked&&!picked.applied ? '<p class="hint">Replacement selected. Save the scene to use it in the story.</p><button data-clear-image>Keep the current story image</button>' : ''}</div>

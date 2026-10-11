@@ -249,7 +249,7 @@ function picture(body, step, path) {
   fig.className = 'pic' + (pic.url ? '' : ' missing') + (pic.changed ? ' changed' : '');
   fig.innerHTML = pic.url
     ? `<img src="${esc(pic.url)}" alt="" loading="lazy"><span class="tag making" data-making="${esc(JSON.stringify([docFor(path)?.id, pic.slot]))}" ${making ? '' : 'hidden'}>${esc(making)}</span><figcaption>${pic.changed ? '<span class="tag new">New picture, saved with the scene</span>' : ''}<button class="change">Change picture</button></figcaption>`
-    : '<div class="missing-box"><strong>No picture yet</strong><span>Pick one from the image generator’s history, or compose a new one.</span><button class="change">Choose a picture</button></div>';
+    : `<div class="missing-box"><strong>No picture yet</strong><span>${step.newPicture ? 'Compose one for this beat in the Picture tab, or pick one from the image generator’s history. Save needs a picture here.' : 'Pick one from the image generator’s history, or compose a new one.'}</span><button class="change">Choose a picture</button></div>`;
   fig.querySelector('img')?.addEventListener('error', () => {
     fig.classList.add('missing');
     fig.querySelector('img').replaceWith(Object.assign(document.createElement('div'), { className: 'missing-box', innerHTML: '<strong>Picture file not found</strong>' }));
@@ -363,13 +363,15 @@ function other(body, step) {
 function addRow(listPath, at, full = false) {
   const row = document.createElement('div');
   row.className = full ? 'add-row full' : 'add-row';
+  // a picture beat where the recipe can show one (recipes.mjs pictureHelper)
+  const picture = recipe() && S.scene?.capabilities?.picture ? '<button data-k="picture">Picture</button>' : '';
   if (full) {
-    row.innerHTML = '<span class="quiet">Add</span><button data-k="line">Line</button><button data-k="narration">Narration</button><button data-k="choice">Choice</button>';
+    row.innerHTML = `<span class="quiet">Add</span><button data-k="line">Line</button><button data-k="narration">Narration</button><button data-k="choice">Choice</button>${picture}`;
     for (const b of row.querySelectorAll('button')) b.onclick = () => insert(listPath, at, b.dataset.k);
   } else {
     row.innerHTML = '<button class="plus" title="Add a beat here" aria-label="Add a beat here">+</button>';
     row.querySelector('.plus').onclick = e => openPop(e.currentTarget, pop => {
-      pop.innerHTML = '<div class="menu"><button data-k="line">Line</button><button data-k="narration">Narration</button><button data-k="choice">Choice</button></div>';
+      pop.innerHTML = `<div class="menu"><button data-k="line">Line</button><button data-k="narration">Narration</button><button data-k="choice">Choice</button>${picture}</div>`;
       for (const b of pop.querySelectorAll('button')) b.onclick = () => { closePop(); insert(listPath, at, b.dataset.k); };
     });
   }
@@ -391,7 +393,7 @@ export function insert(listPath, at, kind) {
     target.splice(at, 0, newStep(kind, recipe(), nextSpeaker(target, at)));
     path = [...listPath, at];
   });
-  select(path);
+  select(path, kind === 'picture' ? { tab: 'picture' } : undefined);
   host().querySelector(`[data-path="${key(path)}"] [data-field]`)?.focus();
 }
 

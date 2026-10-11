@@ -100,6 +100,7 @@ function encodeShot(raw,call,step){
 }
 function encode(step, helpers=new Set()){
   const child=s=>encode(s,helpers);
+  if(step?.newPicture){if(!step.$newCall)throw Error('A new picture beat has no picture yet. Pick or make one for it, or delete the beat.');return step.$newCall;}
   if(typeof step==='string')return `n(${JSON.stringify(step)})`;
   if(step?.$expression){parseSource(`const steps=[${step.$expression}];`);return step.$expression;}
   if(step?.$recipe){
@@ -224,6 +225,32 @@ function slotsByAuthoredStep(steps,array,slots,result=new Map()){
   }
   return result;
 }
+// How a recipe shows a picture: an inline shot(file) call, or pic(key) into its PICS table; false when it has neither.
+function pictureHelper(values){return values.binding('shot')?'shot':values.binding('pic')&&values.binding('PICS')?.type==='ObjectExpression'?'pic':false;}
+// A picture beat added in the editor ({shot, newPicture, file}; local.py sets the file of the render picked for it) becomes
+// shot("<file>", {}), or pic("<scene>.<n>") with a new PICS entry: the file, the beat's narration as its caption and the
+// scene's first picture's level and people, so the briefs and checks the generator writes still have them.
+function newPictures(steps,source,values,sceneId,edits){
+  const found=[];const walk=xs=>(xs||[]).forEach(st=>{if(st?.newPicture)found.push(st);if(st&&typeof st==='object')for(const k of['then','else','sequence'])walk(st[k]);});
+  walk(steps);if(!found.length)return;
+  const how=pictureHelper(values);if(!how)throw Error('This recipe has no picture helper, so a picture beat cannot be added here.');
+  const table=values.binding('PICS'),keys=how==='pic'?table.properties.map(name):[];
+  const own=keys.filter(k=>String(k).startsWith(sceneId+'.'));
+  const first=own.length?values.resolve(property(table,own[0]).value)||{}:{};
+  let next=Math.max(0,...own.map(k=>parseInt(String(k).split('.')[1],10)).filter(Number.isFinite))+1;
+  const added=[];
+  for(const st of found){
+    if(!st.file)continue; // encode says what is missing
+    if(how==='shot'){st.$newCall=`shot(${JSON.stringify(st.file)}, {})`;continue;}
+    const key=`${sceneId}.${next++}`;
+    const entry={file:st.file,cap:st.narration||'Added in the scene editor.',...Object.fromEntries(['level','who'].filter(k=>typeof first[k]==='string').map(k=>[k,first[k]]))};
+    added.push(`${JSON.stringify(key)}: ${JSON.stringify(entry)}`);st.$newCall=`pic(${JSON.stringify(key)})`;
+  }
+  if(!added.length)return;
+  const trailing=source.slice(table.properties.at(-1)?.range[1]??table.range[0]+1,table.range[1]-1).replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,'').includes(',');
+  const at=table.range[1]-1;
+  edits.push({range:[at,at],text:`${table.properties.length&&!trailing?',':''}\n  ${added.join(',\n  ')},\n`});
+}
 export function recipe(source,config,request){
   const scenes=model(source), rows=[];
   for(const scene of scenes){
@@ -238,13 +265,15 @@ export function recipe(source,config,request){
   const row=rows.find(r=>r.id===request.id);if(!row)throw Error('Scene not found');
   const {scene,sequence}=row;
   const values=recipeValues(source), images=imageSlots(source,sequence.value,values),context={...values,images};
-  if(request.action==='read')return {id:row.id,provider:'local',title:`${row.sceneId.replaceAll('_',' ')} · ${row.node}`,node:row.node,group:config.label,where:where(config),scene:row.sceneId,revision:digest(source),steps:decode(sequence.value,source,context),raw:slice(source,sequence.value),entries:[],routesEditable:false,metadata:{},placement:{place:literal(property(scene,'place')?.value)??null,day:literal(property(scene,'day')?.value)??null,condition:literal(property(scene,'show')?.value)??null},previewUrl:`/game3d/index.html?scene=${encodeURIComponent(row.sceneId)}`,recipe:true,capabilities:{camera:!!values.binding('raw')},images:images.map(({range,calls,gap,options,table,pairedRanges,...image})=>image)};
+  if(request.action==='read')return {id:row.id,provider:'local',title:`${row.sceneId.replaceAll('_',' ')} · ${row.node}`,node:row.node,group:config.label,where:where(config),scene:row.sceneId,revision:digest(source),steps:decode(sequence.value,source,context),raw:slice(source,sequence.value),entries:[],routesEditable:false,metadata:{},placement:{place:literal(property(scene,'place')?.value)??null,day:literal(property(scene,'day')?.value)??null,condition:literal(property(scene,'show')?.value)??null},previewUrl:`/game3d/index.html?scene=${encodeURIComponent(row.sceneId)}`,recipe:true,capabilities:{camera:!!values.binding('raw'),picture:pictureHelper(values)},images:images.map(({range,calls,gap,options,table,pairedRanges,...image})=>image)};
   if(request.action==='prepare'){
     if(request.revision!==digest(source))throw Error('CONFLICT: The recipe changed. Reload this scene.');
     const helpers=new Set(parseSource(source).body.flatMap(n=>(n.declaration||n).declarations||[]).map(d=>d.id.name));
+    const edits=[];
+    if(request.steps)newPictures(request.steps,source,values,row.sceneId,edits);
     const expression=request.steps?`[\n${request.steps.map(s=>encode(s,helpers)).join(',\n')}\n]`:request.raw;
     if(typeof expression!=='string')throw Error('Missing scene sequence');
-    const edits=[{range:sequence.value.range,text:expression}];
+    edits.push({range:sequence.value.range,text:expression});
     if(request.placement){for(const [key,field]of[['place','place'],['day','day'],['show','condition']]){
       const p=property(scene,key);if(!p||request.placement[field]===null)continue;
       const value=request.placement[field];
