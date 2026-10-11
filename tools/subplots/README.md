@@ -8,7 +8,7 @@ A picture beat added in the editor is `{shot: {}, newPicture: true, imageSlot: '
 
 A public save runs every `game3d/tools/*story-check.mjs` before and after writing (`story_check` in api.py); a finding that is new undoes the write and answers 422 with `problems` (`node: what`), which `web/checks.js` puts on the beats in plain words. A save that passes rewrites the voice manifest (`voice-manifest.mjs`) and returns `unvoiced`, the lines its `--check` finds with no clip.
 
-Public saves are minimal: `encode.mjs` keeps the exact source text and comments of every unchanged beat, wherever it moved, and writes new or edited beats in the story files' style.
+Saves are minimal, public and private: `encode.mjs` cuts a sequence into its beats with the comments and spacing around each (`listItems`, `writeList`) and pairs the edited beats with the originals (`alignSteps`). An unchanged beat keeps its exact text wherever it moved, an edited public step is written property by property, an edited recipe call changes only the arguments that changed (`encodeArray` in recipes.mjs, nested sequences and branches the same way), and new beats are written in the files' style. `test/roundtrip.test.mjs` saves every public node and every configured private sequence unchanged and expects the exact source back.
 
 ## Adapters
 

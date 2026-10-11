@@ -8,7 +8,7 @@ const id='local:sample:first:start';
 test('reads recipe helpers into dialogue fields without executing',()=>{const r=recipe(source,config,{action:'read',id});assert.equal(r.steps[0].text,'Hello');assert.equal(r.steps[1].text,'English version');assert.equal(r.steps[2].imageSlot,'image:0');assert.deepEqual(r.steps[2].shot,{});assert.equal(r.images[0].file,'encounters/room.webp');});
 test('edits dialogue but preserves advanced variants and helper calls',()=>{const r=recipe(source,config,{action:'read',id});r.steps[1].text='A new normal line';const out=recipe(source,config,{...r,action:'prepare'});assert.match(out.changed,/Japanese version/);assert.match(out.changed,/A new normal line/);assert.match(out.changed,/pic\('room'\)/);});
 test('placement is written to the authored scene',()=>{const r=recipe(source,config,{action:'read',id});r.placement={place:'garden',day:3,condition:'knows_name'};const out=recipe(source,config,{...r,action:'prepare'});const next=recipe(out.changed,config,{action:'read',id});assert.deepEqual(next.placement,r.placement);});
-test('selected image updates the picture table, retaining sequence and other data',()=>{const r=recipe(source,config,{action:'read',id});const out=recipe(source,config,{...r,action:'prepare',imageReplacement:{slot:r.images[0].id,file:'encounters/new.webp'}});assert.match(out.changed,/encounters\/new.webp/);assert.match(out.changed,/pic\("room__editor_/);});
+test('selected image updates the picture table, retaining sequence and other data',()=>{const r=recipe(source,config,{action:'read',id});const out=recipe(source,config,{...r,action:'prepare',imageReplacement:{slot:r.images[0].id,file:'encounters/new.webp'}});assert.match(out.changed,/encounters\/new.webp/);assert.match(out.changed,/pic\('room__editor_/);});
 test('inline image replacement uses an AST range, not a textual first match',()=>{const text=`const PREFIX='encounters/';const first={id:'first',steps:[s('a','PREFIX is mentioned here'),shot(PREFIX+'old.webp'),s('b','Goodbye')]};export const SCENES=[first];`;const key='local:sample:first:steps',r=recipe(text,config,{action:'read',id:key});const out=recipe(text,config,{...r,action:'prepare',imageReplacement:{slot:r.images[0].id,file:'encounters/new.webp'}});assert.match(out.changed,/PREFIX is mentioned here/);assert.match(out.changed,/shot\("encounters\/new.webp"\)/);});
 test('choice edits preserve helper form and unknown fields',()=>{const r=recipe(source,config,{action:'read',id});r.steps[3].choice[0].text='Go on';const out=recipe(source,config,{...r,action:'prepare'});assert.match(out.changed,/choice\(\[\{"text":"Go on","go":"next"\}\]\)/);});
 test('recipe rejects stale revisions',()=>{const r=recipe(source,config,{action:'read',id});assert.throws(()=>recipe(source+'\n',config,{...r,action:'prepare'}),/CONFLICT/);});
@@ -35,7 +35,7 @@ test('spread helpers and computed delivery survive a no-op save',()=>{
  const text=`const scene={id:'first',steps:[s('person','Hello',mood),...ending()]};const SCENES=[scene];`;
  const r=recipe(text,config,{action:'read',id:'local:sample:first:steps'});
  const result=recipe(text,config,{...r,action:'prepare'});
- assert.match(result.changed,/s\("person","Hello",mood\)/);assert.match(result.changed,/\.\.\.ending\(\)/);
+ assert.equal(result.changed,text);
 });
 test('inline image slots survive source reformatting',()=>{
  const text=`const scene={id:'first',steps:[s('person','Hello'),shot('encounters/old.webp')]};const SCENES=[scene];`;
@@ -65,7 +65,7 @@ test('spread gap is a human shot with resolved image and editable staging',()=>{
 test('both duo languages save independently without discarding the inner helper identity',()=>{
  const r=recipe(staged,config,{action:'read',id:stagedId});r.steps[2].ja='おはよう';r.steps[2].en='Good morning';
  const saved=recipe(staged,config,{...r,action:'prepare'}),next=recipe(saved.changed,config,{action:'read',id:stagedId});
- assert.equal(next.steps[2].ja,'おはよう');assert.equal(next.steps[2].en,'Good morning');assert.match(saved.changed,/cw\('a',"friend","おはよう",'Hello','calm'\)/);
+ assert.equal(next.steps[2].ja,'おはよう');assert.equal(next.steps[2].en,'Good morning');assert.match(saved.changed,/cw\('a','friend','おはよう','Hello','calm'\)/);
 });
 test('bilingual helper translations and new shot properties roundtrip',()=>{
  const text=`const scene={id:'first',steps:[sw('line','person','おはよう','Morning'),shot('encounters/room.webp',{})]};const SCENES=[scene];`;
@@ -165,4 +165,43 @@ test('restoring a revision follows reordered step identities and skips removed s
  assert.deepEqual(recipe(reordered.changed,config,{action:'read',id:stagedId}).images.map(i=>i.file),['encounters/second.webp','encounters/first.webp']);
  const removed=recipe(changed,config,{...current,action:'prepare',steps:[old.steps[1]],restoreImages:old.images});
  assert.deepEqual(recipe(removed.changed,config,{action:'read',id:stagedId}).images.map(i=>i.file),['encounters/second.webp']);
+});
+
+// Formatting and comments survive edits: only the changed beat's changed words differ.
+const commented=`const SCENES=[{
+  id: 'first',
+  steps: [
+    // ---- the opening, no picture
+    s('mio', 'Hello there', 'warm'), // first words
+
+    n('She waits.'),
+    // ---- picture one
+    shot('encounters/one.webp', { fade: 400 }),
+    iff('stay', [
+      // inside the branch
+      n('You stay.'),
+      n('She smiles.'),
+    ], [n('You go.')]),
+    n('The end.'),
+  ],
+}];`;
+const difference=(from,to)=>{let i=0;while(from[i]===to[i])i++;let j=0;while(j<from.length-i&&from.at(-1-j)===to.at(-1-j))j++;return {removed:from.slice(i,from.length-j),added:to.slice(i,to.length-j)};};
+const readCommented=()=>JSON.parse(JSON.stringify(recipe(commented,config,{action:'read',id:stagedId})));
+test('editing one line changes only its words',()=>{
+ const r=readCommented();r.steps[0].text='Hello again';
+ assert.deepEqual(difference(commented,recipe(commented,config,{...r,action:'prepare'}).changed),{removed:'there',added:'again'});
+});
+test('a line inside a branch is edited in place; the branch keeps its comments',()=>{
+ const r=readCommented();r.steps[3].then[1].narration='She laughs.';
+ assert.deepEqual(difference(commented,recipe(commented,config,{...r,action:'prepare'}).changed),{removed:'smile',added:'laugh'});
+});
+test('inserting, deleting and moving beats keeps every comment and the spacing of the others',()=>{
+ let r=readCommented();r.steps.splice(2,0,{narration:'New beat.'});
+ assert.equal(recipe(commented,config,{...r,action:'prepare'}).changed,commented.replace("    // ---- picture one\n","    n(\"New beat.\"),\n    // ---- picture one\n"));
+ r=readCommented();r.steps.splice(2,1);
+ assert.equal(recipe(commented,config,{...r,action:'prepare'}).changed,commented.replace("    shot('encounters/one.webp', { fade: 400 }),\n",''),'the comment above a deleted picture stays');
+ r=readCommented();const [line]=r.steps.splice(1,1);r.steps.push(line);
+ const out=recipe(commented,config,{...r,action:'prepare'}).changed;
+ // the blank line above a moved beat goes with it
+ assert.equal(out,commented.replace("\n\n    n('She waits.'),\n","\n").replace("    n('The end.'),\n","    n('The end.'),\n\n    n('She waits.'),\n"));
 });

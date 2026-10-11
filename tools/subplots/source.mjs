@@ -95,7 +95,7 @@ function validateSteps(steps) {
     if (!s || typeof s !== 'object' || Array.isArray(s)) throw Error('Each step must be text or an action');
     if (s.say && typeof s.text !== 'string') throw Error('Dialogue needs text');
     if (s.choice && (!Array.isArray(s.choice) || s.choice.some(c => !c || typeof c.text !== 'string'))) throw Error('Each choice needs a label');
-    for (const k of ['then','else']) if (s[k]) check(s[k]);
+    for (const k of ['then','else']) if (Array.isArray(s[k])) check(s[k]);
   });
   check(steps);
 }
@@ -112,7 +112,7 @@ function proposed(root, data) {
   const {scene:s,resolved,source} = target(root,data.id);
   if (data.revision !== hash(source)) throw Error('CONFLICT: This story changed outside the editor. Reload it before saving.');
   let raw = data.raw;
-  if (data.steps !== null && data.steps !== undefined) { validateSteps(data.steps); raw = s.valueNode.type==='ArrayExpression' ? encodeSteps(removeStaleVoice(data.steps,s.steps), s.steps, s.valueNode, source, s.comments) : raw; }
+  if (data.steps !== null && data.steps !== undefined) { validateSteps(data.steps); raw = s.valueNode.type==='ArrayExpression' ? encodeSteps(removeStaleVoice(data.steps,s.steps), s.steps, s.valueNode, source) : raw; }
   if (typeof raw !== 'string' || raw.length > 500000) throw Error('Missing or oversized scene');
   const expression = parseSource(`const steps = (${raw});`).body[0]?.declarations?.[0]?.init;
   if (!expression || !['ArrayExpression','CallExpression','Identifier','MemberExpression','ConditionalExpression'].includes(expression.type)) throw Error('A scene expression must produce a sequence of steps');
@@ -120,7 +120,7 @@ function proposed(root, data) {
   if (data.entries) {
     if (!Array.isArray(data.entries)) throw Error('Invalid encounter conditions');
     for (const r of data.entries) {
-      if (!r || typeof r.event !== 'string' || !/^[\w:.-]+$/.test(r.event) || typeof r.condition !== 'string') throw Error('Each entry needs a valid event and condition');
+      if (!r || typeof r.event !== 'string' || !/^[\w:.*-]+$/.test(r.event) || typeof r.condition !== 'string') throw Error('Each entry needs a valid event and condition');
       if (r.condition) {
         if (!/^[\w\s!&|()<>=.'"+-]*$/.test(r.condition)) throw Error('This condition uses characters the game does not support');
         // Syntax only; conditions are never executed by the editor.

@@ -64,3 +64,30 @@ test('speaker and text changes keep the step shape', () => {
   assert.equal(kindOf({ shot: {}, narration: 'x' }), 'picture');
   assert.deepEqual(textsOf({ say: 'mio', text: 'x', en: 'Wait', ja: '待って' }, true), { main: 'Wait', second: '待って', recipe: true });
 });
+
+test('an edit inside an if branch keeps the other beats, their comments and spacing', () => {
+  const text = `export default { nodes: {
+    a: [
+      'mio: Hi.',   // hello
+
+      {
+        if: 'ready',
+        then: [
+          // she says yes
+          'mio: Yes.',
+          'mio: Fine.',
+        ],
+      },
+    ],
+  } };
+`;
+  let node;
+  const walk = n => { if (!n || typeof n !== 'object') return; if (n.type === 'ArrayExpression' && !node) node = n; for (const v of Object.values(n)) if (v && typeof v === 'object') Array.isArray(v) ? v.forEach(walk) : walk(v); };
+  walk(parseSource(text).body);
+  const before = ['mio: Hi.', { if: 'ready', then: ['mio: Yes.', 'mio: Fine.'] }];
+  const steps = structuredClone(before), whole = text.slice(...node.range);
+  steps[1].then[1] = 'mio: Good.';
+  assert.equal(encodeSteps(steps, before, node, text), whole.replace("'mio: Fine.'", "'mio: Good.'"));
+  steps.splice(1, 0, 'eric: Okay.');
+  assert.equal(encodeSteps(steps, before, node, text), whole.replace("'mio: Fine.'", "'mio: Good.'").replace('\n\n      {', "\n      'eric: Okay.',\n\n      {"));
+});
