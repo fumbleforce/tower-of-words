@@ -347,7 +347,7 @@
   .tile-row { margin: 2px 0; }
 }
 @media (min-width: 1800px) {
-  .stage-box { height: 380px; max-width: 760px; }
+  .stage-box { height: clamp(380px, 30vh, 460px); max-width: 640px; }
   .tile { width: 76px; }
   .tile-art { height: 46px; }
   .tile-row-pics .tile { width: 92px; }
