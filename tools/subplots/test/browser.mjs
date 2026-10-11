@@ -95,7 +95,7 @@ try {
       fs.writeFileSync(file, original);
       fs.rmSync(path.join(root, 'state'), { recursive: true, force: true });
       fs.rmSync(path.join(root, 'island'), { recursive: true, force: true });
-      const page = await browser.newPage({ viewport: { width, height: width > 2000 ? 1440 : 860 } });
+      const page = await browser.newPage({ viewport: { width, height: width > 2000 ? 1440 : 768 } });
       const errors = [];
       page.on('pageerror', e => errors.push(e.message));
       let privateSave = null;
