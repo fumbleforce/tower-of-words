@@ -359,6 +359,26 @@ try {
       await page.locator('[data-tab=picture]').click();
       await page.locator('.ver-strip [data-v="r-41"]').waitFor();
       assert.match(await page.locator('.ver-strip').innerText(), /#41 · used/);
+      // a shot opened from its own picture (original prompt, settings, Small changes) fits as well: Jørgen, 2026-10-11
+      if (width < 2000) await page.setViewportSize({ width, height: 768 });
+      await page.locator('#tabPicture [data-compose]').click();
+      await page.locator('#composePreview .image-original').waitFor();
+      await page.locator('#composePreview [data-small-changes]').waitFor();
+      for (const small of [false, true]) {
+        if (small) await page.locator('#composePreview [data-small-changes]').click();
+        await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-source-${width}-${small ? 'small' : 'plain'}.png`) });
+        const fitted = await page.evaluate(() => ['composition', 'composePreview'].map(id => { const el = globalThis.document.getElementById(id); return [id, el.clientHeight, el.scrollHeight]; }));
+        for (const [id, client, scroll] of fitted) assert.ok(scroll <= client + 2, `${id} fits with the shot's own picture${small ? ' and Small changes' : ''}: ${client} < ${scroll}`);
+        for (const sel of ['[data-small-changes]', '[data-original-open] summary', '#generate', '[data-compose=seed]']) assert.ok(await page.locator('#composePreview ' + sel).isVisible(), sel + ' in view');
+      }
+      assert.match(await page.locator('#composePreview .image-tools summary').innerText(), /1 on/);
+      await page.locator('#composePreview .image-tools summary').click();
+      await page.locator('#composePreview [data-tool-clear=start]').click();
+      await page.locator('#composePreview [data-original-open] summary').click();
+      assert.ok(await page.locator('#composePreview [data-original=positive]').isVisible(), 'the whole original prompt opens');
+      await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-source-${width}.png`) });
+      await page.locator('#closeCompose').click();
+      if (width < 2000) await page.setViewportSize({ width, height: 860 });
       await page.locator('#tabPicture [data-new]').click();
       await page.locator('.ver-strip [data-v="new-1"]').waitFor();
       assert.equal(generated.length, 1);
