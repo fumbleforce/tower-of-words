@@ -1,0 +1,28 @@
+{
+  "title": "Composer: Direct the shot as a staging tool",
+  "date": "2026-10-11",
+  "by": "claude-main/composer-staging",
+  "caption": "The composer now reads left to right: who and where, then the shot, then the picture. Direct the shot has a stage where you drag stand-in figures into place, rows of shot size, angle and lens drawings, and each person's facing, gaze, expression and height. Keeping a face the same sits in that person's row in People. The staging goes into the prompt as words.",
+  "commit": ["52f9c0b87", "2334f339d", "b4c430d2"],
+  "result": ["composer-1366", "direct-1366", "staged-render-1", "composer-2560"],
+  "sections": [
+    {"title": "The composer", "caption": "A two-person shot staged in the composer: Mio in front on the left turned toward Kenji, Kenji further back on the right, a cowboy shot, light from the left. Shot at 1366 x 768 (the left and middle columns fit without scrolling) and 2560 x 1440.",
+     "images": [
+       {"id": "composer-1366", "image": "bible/shots/showcase/composer-staging-1/composer-1366.webp", "caption": "1366 x 768"},
+       {"id": "composer-2560", "image": "bible/shots/showcase/composer-staging-1/composer-2560.webp", "caption": "2560 x 1440"}
+     ]},
+    {"title": "Close-ups", "caption": "Direct the shot, Place and light, and People with one person in the shot.",
+     "images": [
+       {"id": "direct-1366", "image": "bible/shots/showcase/composer-staging-1/direct-1366.webp", "caption": "Direct the shot: the stage, the selected person's controls, the Shot, Angle and Lens rows, Pose, Touching and More details"},
+       {"id": "place-1366", "image": "bible/shots/showcase/composer-staging-1/place-1366.webp", "caption": "Place and light: setting and light blocks with an example picture each (Make examples renders a small stand-in per block), light direction, mood"},
+       {"id": "people-1366", "image": "bible/shots/showcase/composer-staging-1/people-1366.webp", "caption": "One person in the shot: the portrait reference, face fix and cut-out sit in her row"}
+     ]},
+    {"title": "What the words do", "caption": "Renders of the staged shot through the image gen queue (RDBT Anima, the prompt the composer built, seeds 4242 and 4243), and an earlier test with placement words only.",
+     "images": [
+       {"id": "staged-render-1", "image": "bible/shots/showcase/composer-staging-1/staged-render-1.webp", "caption": "The staged shot, seed 4242"},
+       {"id": "staged-render-2", "image": "bible/shots/showcase/composer-staging-1/staged-render-2.webp", "caption": "The staged shot, seed 4243"},
+       {"id": "words-test", "image": "bible/shots/showcase/composer-staging-1/words-test.webp", "caption": "Test: Mio in front on the left, Kenji smaller at the back on the right, from the words alone"}
+     ]}
+  ],
+  "links": [{"label": "Open the scene editor", "href": "tools/subplots/web/"}]
+}
