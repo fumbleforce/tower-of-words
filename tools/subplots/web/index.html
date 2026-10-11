@@ -39,7 +39,7 @@
         <button data-filter="private" aria-pressed="false">Private</button>
       </div>
       <div class="day-pick"><span>Day</span><div class="seg days" id="days" role="group" aria-label="Story day"></div></div>
-      <button id="mapToggle" class="map-toggle" aria-pressed="false" title="The day's scenes by place and time of day">Show the day on the map</button>
+      <div class="head-actions"><button id="mapToggle" class="map-toggle" aria-pressed="false" title="The day's scenes by place and time of day">Map of the day</button><button id="newScene" title="A new public scene from a template">+ New scene</button></div>
     </div>
     <div id="sceneList" class="scene-list"><p class="quiet pad">Reading the scenes…</p></div>
     <div class="scenes-foot"><a href="http://127.0.0.1:8772/" target="_blank" rel="noopener">Image generator</a><a href="/bible/" target="_blank" rel="noopener">World bible</a></div>
@@ -64,6 +64,7 @@
   </aside>
 </main>
 <div id="pop" class="pop" hidden></div>
+<dialog id="newDialog" class="new-dialog" aria-label="New scene"></dialog>
 <dialog id="previewDialog" class="preview-dialog" aria-label="Scene preview"></dialog>
 <dialog id="compareDialog" class="compare-dialog" aria-label="Compare versions of a picture"></dialog>
 <dialog id="composeDialog" class="compose-dialog" aria-label="Compose a new picture">

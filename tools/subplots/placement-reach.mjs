@@ -2,7 +2,7 @@
 // makes for that day (days.js: a plain finished day before, then the next day's opening save), with the clock at the
 // way in's time of day and the player at its place, and is continued from the title like a player would. Then the
 // player walks up to the thing or person of the scene's `talk:` way in and taps its marker. PASS when the scene's
-// first step runs. With --not <period>, the same run at another time of day must not start it.
+// first step runs. A way in with no time of day is tried at each time until its person or thing is there. With --not <period>, the same run at another time of day must not start it.
 //
 //   node tools/subplots/placement-reach.mjs <scene id> [--not <period>] [--phone]     PORT=8797 BASE=game3d (the server
 //   and the game folder to load; a worktree's own server, or BASE=.claude/worktrees/<name>/game3d on 8771)
@@ -31,7 +31,9 @@ if (!way || typeof scene.day !== 'number' || scene.day < 2 || !scene.place) {
   process.exit(1);
 }
 const thing = way.event.slice(5);
-const placed = periodsOf(readRestrictions(way.condition, { once: way.once }))[0] || 'morning';
+// the way in's times of day; with none set, every time of day in turn until its person or thing is there
+const placed = periodsOf(readRestrictions(way.condition, { once: way.once }));
+const tries = placed.length ? placed.slice(0, 1) : ['morning', 'lunch', 'afternoon', 'evening'];
 const viewport = phone ? { width: 390, height: 844 } : { width: 1366, height: 860 };
 
 async function run(browser, period) {
@@ -73,14 +75,32 @@ async function run(browser, period) {
       return { resolved, there: !!target, day: g.flagsRef.day, period: g.flagsRef.period };
     }, { thing, node: scene.node });
     await page.waitForTimeout(1200);
-    const pin = await page.evaluate(thing => {
+    const pinAt = () => page.evaluate(thing => {
       const m = globalThis.__game.markers.list.find(x => x.id === thing);
       if (!m || m.el.style.display === 'none') return null;
       const r = m.el.querySelector('.pin').getBoundingClientRect();
-      return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+      return r.width ? { x: r.x + r.width / 2, y: r.y + r.height / 2 } : null;
     }, thing);
+    let pin = await pinAt();
+    if (!pin) {
+      // some things only take a tap from outside their spot (a door, from outside the hall): tap it from where the
+      // player arrives in the place, and he walks up to it
+      await page.evaluate(() => {
+        const g = globalThis.__game, [x, z] = g.place.start;
+        g.walker.stop(); g.player.root.position.set(x, g.place.floorY || 0, z); g.walker.sync?.(); g.place.cam?.snap?.(g.player.root.position);
+      });
+      await page.waitForTimeout(1200);
+      pin = await pinAt();
+    }
     if (pin) { if (phone) await page.touchscreen.tap(pin.x, pin.y); else await page.mouse.click(pin.x, pin.y); }
-    const hit = await page.waitForFunction(() => globalThis.__game.flagsRef.__reach_hit === true, null, { timeout: 12000 }).then(() => true, () => false);
+    // a person with more to talk about opens the Talk menu first: pick its story row, as a player does
+    const story = page.locator('#talk .chips button:not([disabled])', { hasText: 'Story' }).first();
+    if (pin && await story.waitFor({ state: 'visible', timeout: 4000 }).then(() => true, () => false)) {
+      await page.waitForTimeout(900); // the rows take clicks only after a moment
+      if (phone) await story.tap(); else await story.click();
+    }
+    const hit = await page.waitForFunction(() => globalThis.__game.flagsRef.__reach_hit === true, null, { timeout: 25000 }).then(() => true, () => false);
+    if (process.env.SHOT) await page.screenshot({ path: process.env.SHOT }); // SHOT=<file>: the screen after the tap
     return { ...probe, pin: !!pin, hit, errors: opened.errors.filter(e => !/favicon/.test(e)).slice(0, 3) };
   } finally {
     await opened.close();
@@ -89,7 +109,11 @@ async function run(browser, period) {
 
 let failed = false;
 await withBrowserJob('placement-reach', async browser => {
-  const r = await run(browser, placed);
+  let r;
+  for (const period of tries) {
+    r = await run(browser, period);
+    if (r.pin) break;
+  }
   const ok = r.hit && r.resolved === scene.node && r.pin;
   failed ||= !ok;
   console.log(`${ok ? 'PASS' : 'FAIL'} ${scene.node} at ${scene.place}, day ${r.day}, ${r.period}: tapping ${thing} ${r.hit ? 'starts it' : `does not start it (the way in picks ${r.resolved || 'nothing'}${r.there ? '' : `, no ${thing} in the place`}${r.pin ? '' : ', no marker to tap'})`}${r.errors.length ? ' · page errors: ' + r.errors.join(' | ') : ''}`);

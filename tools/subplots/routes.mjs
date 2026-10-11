@@ -124,5 +124,24 @@ export function encodeRoutes(onNode, source, node, rows) {
     const p = at.p;
     out.push({ from: at.i, text: source.slice(p.range[0], p.value.range[0]) + valueText(p.value, value, source) + source.slice(p.value.range[1], p.range[1]) });
   }
+  const own = source.slice(...onNode.range);
+  const kept = out.filter(r => r.from !== undefined), added = out.filter(r => r.from === undefined);
+  // every trigger still there, in its order (only changed or added ones): splice them into the text as it is, so a
+  // file that writes several triggers on a line keeps its layout
+  if (kept.length === props.length && kept.every((r, i) => r.from === i)) {
+    const last = props.at(-1)?.p;
+    if (!last) return `{ ${added.map(r => r.text).join(', ')} }`;
+    const edits = kept.filter(r => r.text !== source.slice(...props[r.from].p.range)).map(r => ({ range: props[r.from].p.range, text: r.text }));
+    if (added.length) {
+      const multiline = own.includes('\n');
+      const indent = multiline ? /^[ \t]*/.exec(source.slice(source.lastIndexOf('\n', last.range[0]) + 1))[0] : '';
+      const sep = multiline ? `,\n${indent}` : ', ';
+      edits.push({ range: [last.range[1], last.range[1]], text: sep + added.map(r => r.text).join(sep) });
+    }
+    const at = onNode.range[0];
+    let text = own;
+    for (const e of edits.sort((a, b) => b.range[0] - a.range[0])) text = text.slice(0, e.range[0] - at) + e.text + text.slice(e.range[1] - at);
+    return text;
+  }
   return writeList(onNode, source, out);
 }

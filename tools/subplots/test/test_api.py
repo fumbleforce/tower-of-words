@@ -36,6 +36,17 @@ class Saves(unittest.TestCase):
         self.assertIn("""'talk:a':{ if: "period == 'lunch'", node: 'hello', once: true }""", self.file.read_text())
         self.assertEqual(row()['entries'], [{'event': 'talk:a', 'condition': "period == 'lunch'", 'once': True}])
 
+    def test_a_new_scene_from_a_template_is_written_and_readable(self):
+        place = self.root / 'game3d/story/day2/office.js'
+        place.parent.mkdir(parents=True)
+        place.write_text("export default {on:{'talk:mio':'hello'},nodes:{hello:['mio: Hi.']}};\n")
+        made = api.dispatch('create', {'day': 2, 'place': 'office', 'template': 'exchange', 'title': 'Lunch plans', 'event': 'talk:emi', 'who': 'emi', 'name': 'Emi'})
+        self.assertEqual(made['id'], 'public:game3d/story/day2/office.js#lunch_plans')
+        self.assertIn("'talk:emi': 'lunch_plans'", place.read_text())
+        self.assertEqual(api.dispatch('read', {'id': made['id']})['steps'][0]['text'], '(What Emi says.)')
+        with self.assertRaisesRegex(ValueError, 'no story file'):
+            api.dispatch('create', {'day': 4, 'place': 'office', 'template': 'look', 'title': 'x', 'event': 'talk:desk'})
+
     def test_save_history_and_conflict(self):
         old=self.read(); edit={**old,'steps':[{'say':'a','text':'Changed'}],'metadata':{'notes':'An idea'}}
         saved=api.dispatch('save',edit)

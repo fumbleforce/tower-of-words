@@ -1,0 +1,30 @@
+{
+  "title": "Scene editor: story map and placement",
+  "date": "2026-10-11",
+  "by": "claude-agent:scene-editor-stage3",
+  "caption": "Stage 3 of the scene editor. The scene list is now the story map's outline: pick a day, and each place lists the scenes that start there, how they start and when. The Scene tab says when a scene plays as one sentence, and each part of it opens a picker. The map of a day shows a place's scenes by time of day with the choices and jumps between them, and a scene is dragged to another time (a private one also to another place or day). New public scenes come from three templates. Every capture here is of public scenes outside private mode.",
+  "result": ["outline-sentence-1366", "map-office-1366", "map-moved-1366", "new-scene-1366"],
+  "sections": [
+    {"title": "The list and the sentence", "caption": "Day 1, Station security. Each scene says how it starts; the Scene tab says when it plays, and the parts in boxes are the pickers.",
+     "images": [
+       {"id": "outline-sentence-1366", "image": "bible/shots/showcase/scene-editor-map-1/outline-sentence-1366.webp", "caption": "The outline and when the scene plays, 1366 x 768"},
+       {"id": "outline-sentence-2560", "image": "bible/shots/showcase/scene-editor-map-1/outline-sentence-2560.webp", "caption": "The same at 2560 x 1440"},
+       {"id": "time-picker-1366", "image": "bible/shots/showcase/scene-editor-map-1/time-picker-1366.webp", "caption": "The time of day picker"},
+       {"id": "add-condition-1366", "image": "bible/shots/showcase/scene-editor-map-1/add-condition-1366.webp", "caption": "Add a condition: people met, words known and story flags from the bible"},
+       {"id": "add-condition-2560", "image": "bible/shots/showcase/scene-editor-map-1/add-condition-2560.webp", "caption": "The same at 2560 x 1440"}
+     ]},
+    {"title": "The map of a day", "caption": "Rows by time of day, lines for the choices (solid) and jumps (dashed) between scenes, and the places a scene leads to.",
+     "images": [
+       {"id": "map-office-1366", "image": "bible/shots/showcase/scene-editor-map-1/map-office-1366.webp", "caption": "Day 1, IT support B2, 1366 x 768"},
+       {"id": "map-office-2560", "image": "bible/shots/showcase/scene-editor-map-1/map-office-2560.webp", "caption": "The same at 2560 x 1440"},
+       {"id": "map-moved-1366", "image": "bible/shots/showcase/scene-editor-map-1/map-moved-1366.webp", "caption": "Day 3, Dorm courtyard: the mailboxes dragged to After work, not saved yet (this one was undone)"},
+       {"id": "map-moved-2560", "image": "bible/shots/showcase/scene-editor-map-1/map-moved-2560.webp", "caption": "The same at 2560 x 1440"}
+     ]},
+    {"title": "A new scene from a template", "caption": "A conversation, a short exchange or something to look at, for a day and place, started by someone or something that place already uses.",
+     "images": [
+       {"id": "new-scene-1366", "image": "bible/shots/showcase/scene-editor-map-1/new-scene-1366.webp", "caption": "New scene, 1366 x 768"},
+       {"id": "new-scene-2560", "image": "bible/shots/showcase/scene-editor-map-1/new-scene-2560.webp", "caption": "The same at 2560 x 1440"}
+     ]}
+  ],
+  "links": [{"label": "Open the scene editor", "href": "tools/subplots/web/"}]
+}

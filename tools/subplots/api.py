@@ -83,7 +83,7 @@ def authoring_catalog():
         'game3d/js/places/definitions.js', 'game3d/js/sim.js', 'game3d/js/lang.js', 'game3d/js/narrative/speakers.js',
         'game3d/js/tickets/words.js', 'game3d/data/mc/eric.json')]
     files += list((ROOT / 'game3d/story').rglob('*.js'))
-    files += list((ROOT / 'bible/shots/places').glob('*.webp'))
+    files += list((ROOT / 'bible/shots/places').glob('*.webp')) + [HERE / 'authoring.mjs']
     signature = tuple((str(p), p.stat().st_mtime_ns, p.stat().st_size)
                       for p in sorted(set(files)) if p.is_file())
     with LOCK:
@@ -340,6 +340,33 @@ def unvoiced_lines():
             out.append({'speaker': m.group(1), 'text': m.group(2)})
     return out
 
+def create_scene(body):
+    """A new public scene from a template (create.mjs), written with the story checks around it like a save: anything
+    new they find undoes the write. Answers the new scene's id."""
+    r = subprocess.run(['node', str(HERE / 'create.mjs')], input=json.dumps(body), text=True, capture_output=True,
+                       timeout=25, cwd=ROOT, env={**os.environ, 'SUBPLOTS_ROOT': str(ROOT)})
+    try:
+        prepared = json.loads(r.stdout)
+    except ValueError:
+        raise ValueError('The new scene could not be written.') from None
+    if r.returncode or prepared.get('error'):
+        raise ValueError(prepared.get('error', 'The new scene could not be written.'))
+    state_dir().mkdir(parents=True, exist_ok=True)
+    with LOCK, (state_dir() / 'write.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        file = Path(prepared['resolved'])
+        old = file.read_text()
+        if old != prepared['source']:
+            raise ValueError('CONFLICT: The story file changed while adding the scene. Try again.')
+        before = story_check()
+        atomic(file, prepared['changed'])
+        found = sorted((story_check() or set()) - (before or set())) if before is not None else []
+        if found:
+            atomic(file, old)
+            raise CheckFailed('The story check found a problem with the new scene, so it was not added.', found)
+        STATUS_CACHE.clear()
+        return {'id': prepared['id'], 'node': prepared['node'], 'unvoiced': unvoiced_lines()}
+
 def dispatch(action, body):
     if action in ('draft', 'save'):
         STATUS_CACHE.clear()
@@ -349,6 +376,8 @@ def dispatch(action, body):
         return scene_status()
     if action == 'map':
         return story_map()
+    if action == 'create':
+        return create_scene(body)
     if action == 'comments':
         return comments({'action': 'list', 'ids': [x for x in body.get('ids', '').split(',') if x]})
     if action == 'comment':

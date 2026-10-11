@@ -125,6 +125,10 @@ export function catalog(root) {
     {id:'place',label:'Current place',type:'enum',options:places.map(p=>({value:p.id,label:p.name}))},
   ];
   for(const word of words.values()) observe('know_'+word.id,true);
+  // everyone in the cast can be met (the engine sets met_<id>), so "Has met" is offered for each of them
+  // (one per name: Mio's text messages are a speaker of their own, miotext, but she is met once)
+  const metNames=new Set();
+  for(const c of characters) if(c.id!=='eric'&&!metNames.has(c.name)&&(metNames.add(c.name),true)) observe('met_'+c.id,true);
   for(const [id,values] of observed) {
     if(['day','period','place'].includes(id)) continue;
     const word=id.startsWith('know_')&&words.get(id.slice(5));
