@@ -1,10 +1,11 @@
 // A lift for the people in a dim place: each character's own surface colour added back as a little emission, and a
 // soft rim of sky light round their edges, so dark clothes (Mio's hoodie, Mr. Hamada's suit) keep their shape against
 // the dusk on a phone, while the street, the lamps and the sky keep their light. It touches only the people (the player, Mio and the place's people), never
-// the scene. A place asks for it with `charLift` in its grade (scenes/town.js, day 2 after work): the lift's
+// the scene. A place asks for it with `charLift` in its grade (scenes/town.js, day 2 after work), or by name in CHAR_LIFT (kit/light/looks.js): the lift's
 // strength, the rim's following from it, strongest on dark surfaces (pale hair and shirts need none); 0 or none: off.
 //   liftPeople(game, place)   on entering a place (places/lifecycle.js): sets the strength, patches the people
 import * as THREE from 'three';
+import { CHAR_LIFT } from '../kit/light/looks.js';
 
 const LIFT = { value: 0 }; // one strength for every patched material: changing it needs no recompile
 const RIM = { value: new THREE.Color('#aebfe8') }; // the dusk sky's colour, at the rim's full strength
@@ -41,7 +42,7 @@ function patch(m) {
 }
 
 export function liftPeople(game, place) {
-  LIFT.value = place.grade?.charLift || 0;
+  LIFT.value = place.grade?.charLift ?? CHAR_LIFT[place.name] ?? 0;
   if (!LIFT.value) return;
   const roots = [game.player?.root, game.mioNpc?.root, ...Object.values(place.people || {}).map((p) => p?.root || p)];
   for (const r of roots)

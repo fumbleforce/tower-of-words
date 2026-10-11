@@ -37,7 +37,8 @@ export const MORNING_GRADE = {
   focusBand: 0.3,
 };
 // after work: dusk outdoors, so the walk home is in one light: a dim blue sky, the last of the sun low and orange
-// from the west, lamps and windows glowing
+// from the west, lamps and windows glowing. charLift: the people's own colours added back a little (look/char-lift.js),
+// so Mio's dark hoodie keeps its shape in the dusk
 export const EVENING_GRADE = {
   exposure: 0.98,
   temp: -0.02,
@@ -50,10 +51,11 @@ export const EVENING_GRADE = {
   bloom: 0.42,
   bloomThreshold: 0.72,
   focusBand: 0.3,
+  charLift: 0.18,
 };
 // day 2's after work (story/day2/): the same dusk lifted, so faces and paths read on a phone screen, the lamps still
-// warm and the sky still dusk; day 1's evening stays as it is. charLift: the people's own colours added back a little
-// with a rim of sky light (look/char-lift.js), so dark clothes keep their shape against the dusk
+// warm and the sky still dusk; day 1's evening stays as it is. charLift: a little more than day 1's, with a rim of sky
+// light (look/char-lift.js), so dark clothes keep their shape against the dusk
 export const EVENING_GRADE_2 = {
   ...EVENING_GRADE,
   exposure: 1.18,
@@ -63,6 +65,9 @@ export const EVENING_GRADE_2 = {
   vignette: 0.22,
   charLift: 0.13,
 };
+// the people's lift (look/char-lift.js) in the indoor places whose own grades are dim all day: Mio's dark hoodie keeps its
+// shape on the train, at the gate and in the basement office; the grade's own charLift wins where it has one
+export const CHAR_LIFT = { train: 0.18, gate: 0.18, office: 0.18 };
 export const eveningGrade = (day = 1) => (day === 2 ? EVENING_GRADE_2 : EVENING_GRADE);
 // the evening's lights per day. pool: the gain on the street lamps' pools (outdoor/furniture.js lightSet), up on
 // day 2 so they hold against its brighter dusk
@@ -190,6 +195,7 @@ export const DORM_NIGHT_GRADE = {
   bloom: 0.32,
   bloomThreshold: 0.8,
   focusBand: 0.3,
+  charLift: 0.18,
 };
 export const DORM = {
   day: {
