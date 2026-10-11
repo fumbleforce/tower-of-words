@@ -125,6 +125,7 @@ await withBrowserJob('codex-image-studio', async browser => {
   assert.equal(reused.seed, 128);
   await page.locator('[data-lib=use]').first().click();
   assert.match(await page.locator('#studioSelection').textContent(), /picture #6/);
+  await page.locator('#studioSelection img').evaluate(img => img.decode());
   await page.screenshot({path: path.join(output, 'selection.png')});
   await page.locator('[data-create-scene]').click();
   await page.locator('#createSceneFromImage [name=title]').fill('Waiting at the station');
@@ -175,6 +176,7 @@ await withBrowserJob('codex-image-studio', async browser => {
   assert.ok(stageBox.y > 0 && stageBox.y + stageBox.height < 1000, 'Staging is in view for its capture');
   await page.screenshot({path: path.join(output, 'staging.png')});
   await page.setViewportSize({width: 390, height: 844});
+  await page.waitForFunction(() => !globalThis.document.querySelector('.studio-controls').open);
   assert.equal(await page.locator('.studio-controls').evaluate(el => el.open), false, 'Phone opens with Composition collapsed');
   await page.screenshot({path: path.join(output, 'phone.png')});
   await page.locator('[data-studio-direction] > summary').click();
