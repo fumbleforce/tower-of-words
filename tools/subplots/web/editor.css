@@ -34,7 +34,9 @@ button, .button { display: inline-flex; align-items: center; justify-content: ce
 button:hover:not(:disabled), .button:hover { background: var(--raise2); border-color: rgba(255, 255, 255, .2); }
 button:active:not(:disabled) { transform: translateY(1px); }
 button:disabled, .button[aria-disabled=true] { opacity: .38; cursor: default; }
-button:focus-visible, .button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* focus: never a ring on a container, dialog or panel, and none after a mouse click; one small ring on the focused control while the keyboard is in use (app.js sets body.kbd on Tab) */
+:focus, :focus-visible { outline: none; }
+body.kbd :is(button, .button, a, input, select, textarea, summary):focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
 button.primary:hover:not(:disabled) { background: #86ddd4; }
 button.primary-soft { background: var(--accent-soft); border-color: rgba(111, 208, 198, .45); color: var(--accent); }

@@ -3,6 +3,9 @@
 const { document, window, location, history, confirm, URL } = globalThis;
 import { esc, api } from './common.js';
 import { S, load, markSaved, isDirty, docs, dirtyDocs, addLinked, refreshRevision, stepOf, docFor, undo, redo, select, on, scheduleDraft, cancelDraft, edit } from './store.js';
+// the focus ring on a control shows only after Tab, never after a mouse click (editor.css)
+document.addEventListener('keydown', e => { if (e.key === 'Tab') document.body.classList.add('kbd'); }, true);
+document.addEventListener('pointerdown', () => document.body.classList.remove('kbd'), true);
 import { renderTimeline, markSelection, installDrag, nudge, insert, remove, currentPath } from './timeline.js';
 import { choiceTargets } from './paths.js';
 import { installComments, loadComments } from './comments.js';
