@@ -12,7 +12,7 @@ import { openGame } from '../test/support/open-game.mjs';
 
 const width = +(process.argv[2] || 1366),
   phone = width < 700;
-const base = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}`;
+const base = `http://127.0.0.1:${process.env.PORT || 8771}/${process.env.BASE || 'game3d'}`;
 const out = new URL('../shots/pick-check/', import.meta.url).pathname;
 fs.mkdirSync(out, { recursive: true });
 // door: the middle of the doorway, at half its height under the pin
@@ -21,6 +21,10 @@ const CASES = [
   { name: 'guard-jam', flags: { jammed: true }, who: 'guard' },
   { name: 'guard', flags: { greeted_guard: true, gate_through_way: true, gateOpen: true, gate_through: true }, who: 'guard' },
   { name: 'worker', flags: { greeted_guard: true, gate_through_way: true, gateOpen: true, gate_through: true }, who: 'worker_a' },
+  { name: 'worker-head', flags: { greeted_guard: true, gate_through_way: true, gateOpen: true, gate_through: true }, who: 'worker_a', part: 0.92 },
+  { name: 'worker-legs', flags: { greeted_guard: true, gate_through_way: true, gateOpen: true, gate_through: true }, who: 'worker_a', part: 0.1 },
+  { name: 'guard-head', flags: { jammed: true }, who: 'guard', part: 0.92 },
+  { name: 'guard-legs', flags: { jammed: true }, who: 'guard', part: 0.1 },
   { name: 'exit', flags: { greeted_guard: true, gate_through_way: true, gateOpen: true, gate_through: true }, who: 'lift', door: true },
 ];
 const results = [];
@@ -60,7 +64,7 @@ await withBrowserJob('pick-check', async (browser) => {
       }, c.who);
       await page.waitForFunction(() => !globalThis.__game.walker.path && !globalThis.__game.busy, null, { timeout: 20000 });
       await page.waitForTimeout(700); // the camera settles
-      const at = await page.evaluate(async ({ who, door }) => {
+      const at = await page.evaluate(async ({ who, door, part }) => {
         const THREE = await import('three');
         const g = globalThis.__game, P = g.place, item = g.markers.list.find((m) => m.id === who);
         let mid;
@@ -77,6 +81,7 @@ await withBrowserJob('pick-check', async (browser) => {
             });
           }
           mid = box.getCenter(new THREE.Vector3());
+          if (part != null) mid.y = box.min.y + (box.max.y - box.min.y) * part; // head or legs, on the body's centre line
         }
         const v = mid.clone().project(P.camera), r = g.canvas?.getBoundingClientRect?.() || globalThis.document.querySelector('canvas').getBoundingClientRect();
         const x = r.left + ((v.x + 1) / 2) * r.width, y = r.top + ((1 - v.y) / 2) * r.height;
