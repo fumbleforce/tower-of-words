@@ -115,7 +115,7 @@ export function installImages(getScene, changed) {
     const current = `<div class="image-current"><p class="hint image-scene-name">${esc(getScene().metadata.title||getScene().title)}</p>${previewUrl ? `<a href="${esc(previewUrl)}" target="_blank" rel="noopener"><img class="selected-image" src="${esc(previewUrl)}" alt="${esc(imageTitle)}"></a>` : `<div class="image-empty">${slot?.label === 'New picture' ? 'A new picture beat. Direct the shot and generate it, or choose a picture from the library.' : slot ? 'This shot’s picture is unavailable. Generate a replacement or choose one from the picture library.' : 'Choose a shot in the storyboard to replace its image.'}</div>`}
         <div class="image-current-row">${slots().length > 1 ? field('imageSlot', 'Image in this scene', slots().map((s, i) => ({id: s.id, label: 'Shot ' + (i + 1)})), activeSlot, null) : `<strong>${esc(imageTitle)}</strong>`}
         ${slot?.storage === 'archive' && !picked ? '<p class="hint">Showing the earlier picture from the archive.</p>' : ''}
-        ${picked&&!picked.applied ? '<p class="hint">Replacement selected. Save the scene to use it in the story.</p><button data-clear-image>Keep the current story image</button>' : ''}</div>
+        ${picked&&!picked.applied ? '<p class="hint" title="Replacement selected. Save the scene to use it in the story.">Replacement selected. Save the scene to use it in the story.</p><button data-clear-image>Keep the current story image</button>' : ''}</div>
       </div>`;
     const people = `<section class="image-section"><h3>People in the picture</h3><div class="image-cast">${active('character').filter(p => !p.data.generic).map(p => `<button type="button" data-char="${esc(p.id)}" aria-pressed="${c.characters.includes(p.id)}" title="${esc(p.data.name || p.id)}">${portraitUrl(p.data.portrait) ? `<img loading="lazy" src="${esc(portraitUrl(p.data.portrait))}" alt="">` : `<span class="image-person-placeholder">${esc((p.data.name||p.id).slice(0,1))}</span>`}<span>${esc(p.data.name || p.id)}</span></button>`).join('') || '<p class="hint">Your image-generation character presets appear here when connected.</p>'}</div>
       <div class="chips">${active('character').some(p => p.data.generic) ? chip('Include an unnamed person', c.man, 'data-toggle="man"') : ''}${cast.length + (c.man ? 1 : 0) > 1 ? chip('Short descriptions for a group', c.useShort, 'data-toggle="useShort"') : ''}<button type="button" data-new-block="character">+ New person</button></div>
@@ -144,14 +144,15 @@ export function installImages(getScene, changed) {
     const o = c.original;
     const smallChanges = o?.start ? '<button data-small-changes title="Start from this shot’s picture with the same seed and change it a little (img2img, low strength).">Small changes to this picture</button>' : '';
     const original = o && o.positive == null ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3>${smallChanges}</div><p class="hint">There is no record of how this picture was made. Describe it above, or start from it.</p></section>`
-      : o ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3>${smallChanges}</div>
+      : o ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3><span class="hint original-facts">${esc(['Seed ' + (o.seed ?? '?'), o.w && o.h ? o.w + '×' + o.h : '', o.steps ? o.steps + ' steps' : '', o.cfg ? 'CFG ' + o.cfg : ''].filter(Boolean).join(' · '))}</span>${smallChanges}</div>
+      <details data-original-open ${c.originalOpen ? 'open' : ''}><summary><span class="original-peek" title="Show the whole original prompt">${esc(c.override?.positive ?? o.positive ?? '')}</span><span class="original-less">Hide the original prompt</span></summary>
       <p class="hint">${esc(['Seed ' + (o.seed ?? '?'), o.model_file, o.w && o.h ? o.w + '×' + o.h : '', o.steps ? o.steps + ' steps' : '', o.cfg ? 'CFG ' + o.cfg : '', o.sampler].filter(Boolean).join(' · '))}. From ${esc(o.how || 'the picture')}.</p>
       <label>Prompt<textarea data-original="positive" rows="3">${esc(c.override?.positive ?? o.positive ?? '')}</textarea></label>
       <label>Negative<textarea data-original="negative" rows="2">${esc(c.override?.negative ?? o.negative ?? '')}</textarea></label>
-      ${c.override ? '<p class="hint">Generate uses this prompt as it stands. Changing a block above builds a new prompt instead.</p>' : '<button data-use-original>Use the original prompt</button>'}</section>` : '';
+      ${c.override ? '<p class="hint">Generate uses this prompt as it stands. Changing a block above builds a new prompt instead.</p>' : '<button data-use-original>Use the original prompt</button>'}</details></section>` : '';
     const currentPicture = picked?.file ? 'island/private/imagegen/outputs/' + picked.file : slot?.available !== false && slot?.url && !slot.url.startsWith('data:') ? slot.url.replace(/^\//, '') : '';
     const tools = toolsHtml(c, {loras: loraFiles, controls: controlFiles, current: currentPicture});
-    const prompt = `<section class="image-section"><h3>Generated prompt</h3><p id="assembled" class="hint prompt-box"></p>${c.override ? '<p class="hint">This picture uses a prompt copied from history.</p><button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</section>`;
+    const prompt = `<section class="image-section image-prompt"><h3>Generated prompt</h3><p id="assembled" class="hint prompt-box"></p>${c.override ? '<p class="hint">This picture uses a prompt copied from history.</p><button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</section>`;
     // The full-screen composer (index.html) has a stage between the controls and the library: the picture, Generate
     // and every generation setting in view at once. Without one (a narrow panel) it all runs down one column.
     const stage = $('#composePreview');
@@ -245,10 +246,12 @@ export function installImages(getScene, changed) {
     host.querySelectorAll('[data-original]').forEach(el => el.oninput = () => edit(c => {
       c.override = {positive: $('[data-original="positive"]', host).value, negative: $('[data-original="negative"]', host).value};
     }, false));
+    const od = host.querySelector('[data-original-open]');
+    if (od) od.ontoggle = () => edit(c => { c.originalOpen = od.open; }, false);
     bind('[data-use-original]', () => edit(c => { c.override = {positive: c.original.positive, negative: c.original.negative || ''}; }));
     bind('[data-small-changes]', () => edit(c => {
       const o = c.original;
-      Object.assign(c, {start: {image: o.start, denoise: 0.35}, toolsOpen: true, seedMode: 'fixed', seed: o.seed ?? c.seed, count: 1, width: o.w || c.width, height: o.h || c.height});
+      Object.assign(c, {start: {image: o.start, denoise: 0.35}, seedMode: 'fixed', seed: o.seed ?? c.seed, count: 1, width: o.w || c.width, height: o.h || c.height});
       if (!o.blocks) c.override ||= {positive: o.positive, negative: o.negative || ''};
       notice('Starts from this picture with the same seed. Change the prompt a little, then Generate.');
     }));

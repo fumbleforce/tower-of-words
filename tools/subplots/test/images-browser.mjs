@@ -79,6 +79,7 @@ try {
     assert.equal(await page.locator('[data-compose=seed]').inputValue(),'77');
     assert.equal(await page.evaluate(()=>[...globalThis.document.querySelectorAll('[data-camera]')].filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.camera).join()),'near');
     await page.locator('[data-small-changes]').click();
+    await page.locator('.image-tools summary').click();
     await page.locator('[data-tool=denoise]').waitFor();
     await page.locator('#generate').click();
     assert.equal(generated.length,2);
