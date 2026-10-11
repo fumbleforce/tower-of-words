@@ -4,7 +4,7 @@
 // Keys: <voice>-<word> for the player's phrases and commands (eric-ohayo), word-<word> for Mio's slow word,
 // ln-<hash> for spoken lines, oh-<hash> for overheard lines. Every protagonist in data/mc/ gets its own: the default's
 // (Eric's) keys are as they always were; another's are mc.js ownClip of them (docs/game/systems.md, Protagonists).
-// node voice-manifest.mjs [--day N] [--mc <id>] [--check [--voiced]]
+// node voice-manifest.mjs [--day N] [--mc <id>] [--check [--voiced]] [--fresh]
 //   --day N: only that day's lines (and the words); --mc: only what that protagonist plays
 //   --check: write nothing; list each line with no clip in audio/ (NO CLIP) or with escape leftovers (ESCAPE), exit 1
 //   if any. Without --mc it checks every protagonist; --voiced only those with a voice (voice.ref), as the file holds.
@@ -199,7 +199,15 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     console.log(bad.length ? bad.join('\n') : `voices ok: ${list.length} lines, all with clips, no escapes`);
     process.exit(bad.length ? 1 : 0);
   }
-  fs.writeFileSync(path.join(root, 'audio/manifest.json'), JSON.stringify(list, null, 1));
+  const fresh = JSON.stringify(list, null, 1);
+  if (process.argv.includes('--fresh')) {
+    // The committed manifest must equal a fresh generation, or every public save in the scene editor rewrites it (#496).
+    if (onlyMc || onlyDay) { console.log('--fresh checks the whole manifest: no --mc or --day'); process.exit(2); }
+    const have = fs.readFileSync(path.join(root, 'audio/manifest.json'), 'utf8');
+    console.log(have === fresh ? `manifest fresh: ${list.length} lines` : 'audio/manifest.json is stale: run node game3d/tools/voice-manifest.mjs and commit it');
+    process.exit(have === fresh ? 0 : 1);
+  }
+  fs.writeFileSync(path.join(root, 'audio/manifest.json'), fresh);
   const by = {}; for (const o of list) by[o.speaker] = (by[o.speaker] || 0) + 1;
   console.log(list.length, 'clips', JSON.stringify(by), 'overheard', list.filter((x) => x.overheard).length, 'en', list.filter((x) => x.lang === 'en').length);
 }

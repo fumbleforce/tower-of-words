@@ -776,7 +776,7 @@
   "speaker": "bun",
   "text": "ありがとう。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "warm"
@@ -786,7 +786,7 @@
   "speaker": "music",
   "text": "あ、ごめん。音、漏れてた？",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "apologetic"
@@ -796,7 +796,7 @@
   "speaker": "music",
   "text": "自分で録ったの。まだ下手だけど。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [
    [
     "mada",
@@ -1453,7 +1453,7 @@
   "speaker": "kuroda",
   "text": "すみません……あと五分。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [
    [
     "sumimasen",
@@ -1478,7 +1478,7 @@
   "speaker": "reader",
   "text": "会社のは古くて、同じボタンがないんだよ。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "weary"
@@ -2830,7 +2830,7 @@
   "overheard": true,
   "words": [],
   "clear": [
-   "2ヶ月"
+   "2"
   ],
   "emo": "teasing"
  },
@@ -3130,9 +3130,7 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": [
-   "外国の方"
-  ],
+  "clear": [],
   "emo": "warm"
  },
  {
@@ -3252,9 +3250,7 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": [
-   "三十年"
-  ],
+  "clear": [],
   "emo": "whisper"
  },
  {
@@ -8268,9 +8264,7 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": [
-   "美術部"
-  ],
+  "clear": [],
   "emo": "warm"
  },
  {
@@ -15027,9 +15021,7 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": [
-   "ゆっくり"
-  ],
+  "clear": [],
   "emo": "warm"
  },
  {
