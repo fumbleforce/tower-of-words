@@ -37,7 +37,7 @@ test('placement, facing, gaze, expression, heights, distance and contact become 
     ben: {x: 0.8, d: 0.7, placed: true, facing: 'away', gaze: 'down', height: 'tall'}}, contact: 'her hand on his shoulder', lightFrom: 'back', mood: 'tense'};
   const w = stageWords({stage}, people);
   assert.equal(w.people, 'Ana on the left in the foreground, turned toward Ben, looking at Ben, smiling. Ben on the right in the background, his back to the viewer, looking down. '
-    + 'Ben is taller than Ana. They stand far apart. her hand on his shoulder');
+    + 'Ben is taller than Ana. They stand far apart. Her hand on his shoulder');
   assert.equal(w.light, 'backlighting, rim light');
   assert.equal(w.mood, 'tense mood');
   assert.equal(stageSummary({stage}, people), 'Placed: Ana left, in front. Ben right, at the back.');

@@ -14,7 +14,8 @@ import {exampleOf, exampleKnown} from './block-examples.js';
 const readStage = c => stageOf({stage: c.stage});  // without adding a stage to a composition that has none
 const tile = ({attrs, pressed, art, label, title = '', cls = ''}) =>
   `<button type="button" class="tile ${cls}${art ? '' : ' tile-text'}" ${attrs} aria-pressed="${!!pressed}" title="${esc(title || label)}"><span class="tile-art">${art}</span><span class="tile-label">${esc(label)}</span></button>`;
-const addTile = (attrs, label) => `<span class="tile-tools"><button type="button" class="tile-tool" ${attrs.add}>+ New</button>${attrs.edit ? `<button type="button" class="tile-tool" ${attrs.edit}>Edit</button>` : ''}</span>`;
+// a row's name with + New and Edit under it, so the tiles get the row's whole width
+const rowHead = (title, attrs) => `<span class="row-head"><span class="row-label">${esc(title)}</span><span class="tile-tools"><button type="button" class="tile-tool" ${attrs.add} title="A new block in this row">+ New</button>${attrs.edit ? `<button type="button" class="tile-tool" ${attrs.edit} title="Edit the chosen block">Edit</button>` : ''}</span></span>`;
 const initial = () => '';  // no picture yet: the tile shows its name only (tile-text)
 const order = (group, d) => { const i = (DIAGRAMS[group] || []).findIndex(x => x[0] === d); return i < 0 ? 99 : i; };
 
@@ -27,8 +28,8 @@ function cameraRows(c, ctx) {
     const one = x => tile({attrs: `data-cam="${esc(x.b.id)}" data-cam-group="${x.group}"`, pressed: c.cameras.includes(x.b.id), label: x.b.data.name || x.b.id, title: x.b.data.prompt,
       art: diagramSvg(x.group === 'other' ? 'other' : group, x.diagram) || (exampleOf('camera', x.b.id) ? `<img loading="lazy" src="${esc(exampleOf('camera', x.b.id))}" alt="">` : initial(x.b.data.name)), cls: 'tile-dia'});
     const chosen = c.cameras.find(id => own.some(x => x.b.id === id)) || own[0]?.b.id || '';
-    return `<div class="tile-row" data-row="${group}"><span class="row-label">${esc(title)}</span><div class="tiles">${own.map(one).join('')}${rest.length ? '<span class="tile-sep" aria-hidden="true"></span>' + rest.map(one).join('') : ''}
-      ${addTile({add: `data-new-cam="${group}"`, edit: chosen ? `data-edit-cam="${esc(chosen)}"` : ''})}</div></div>`;
+    return `<div class="tile-row" data-row="${group}">${rowHead(title, {add: `data-new-cam="${group}"`, edit: chosen ? `data-edit-cam="${esc(chosen)}"` : ''})}
+      <div class="tiles">${own.map(one).join('')}${rest.length ? '<span class="tile-sep" aria-hidden="true"></span>' + rest.map(one).join('') : ''}</div></div>`;
   }).join('');
 }
 
@@ -45,7 +46,7 @@ function personControls(c, people, who) {
   return `<div class="who">${people.map((p, n) => `<button type="button" title="Arrow keys move ${esc(p.name)} on the stage" data-who="${esc(p.id)}" aria-pressed="${p.id === who.id}"><span class="who-dot" style="background:${PERSON_COLOURS[n % PERSON_COLOURS.length]}"></span>${esc(p.name)}</button>`).join('')}</div>
     <div class="ctl ctl-row"><span class="ctl-label">Faces</span><div class="facing">${facing.map(x => tile({attrs: `data-facing="${x.k}" data-target="${esc(x.target)}"`, pressed: isFacing(x), label: x.label, art: diagramSvg('facing', x.k), cls: 'tile-mini'})).join('')}</div></div>
     <div class="ctl ctl-row"><span class="ctl-label">Looks at</span><div class="chips gaze">${gaze.map(x => `<button type="button" data-gaze="${x.k}" data-target="${esc(x.target)}" aria-pressed="${isGaze(x)}">${esc(x.label)}</button>`).join('')}</div></div>
-    <div class="ctl-pair"><label class="ctl">Expression<input data-person-field="expression" list="stageExpressions" value="${esc(at.expression)}" placeholder="smiling, surprised…"></label>
+    <div class="ctl-pair"><label class="ctl">Expression<input data-person-field="expression" list="stageExpressions" value="${esc(at.expression)}" placeholder="smiling…"></label>
       ${people.length > 1 ? `<label class="ctl">Height<select data-person-field="height">${HEIGHTS.map(([k, label]) => `<option value="${k}" ${at.height === k ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select></label>` : ''}</div>`;
 }
 
@@ -63,7 +64,8 @@ export function directHtml(c, ctx) {
     ${cameraRows(c, ctx)}
     ${c.angle ? `<p class="hint">Older camera angle kept: ${esc(c.angle)} <button type="button" class="link" data-clear-angle>Remove</button></p>` : ''}
     <div class="direct-more">${ctx.picker('pose', 'pose', 'Pose', ctx.blockItems('pose', ctx.blockValue('pose', c.pose)), ctx.blockValue('pose', c.pose))}
-      <label>Touching<input data-stage-field="contact" value="${esc(stage.contact)}" placeholder="her hand on his shoulder"></label></div>
+      <label>Touching<input data-stage-field="contact" value="${esc(stage.contact)}" placeholder="her hand on his shoulder"></label>
+      <label>More details<textarea data-compose="extra" rows="1" placeholder="Props, clothes…">${esc(c.extra || '')}</textarea></label></div>
     <datalist id="stageExpressions">${EXPRESSIONS.map(x => `<option value="${esc(x)}">`).join('')}</datalist></section>`;
 }
 
@@ -75,12 +77,12 @@ export function placeHtml(c, ctx) {
     const items = ctx.active(kind);
     const missing = items.filter(b => exampleKnown(kind, b.id) && !exampleOf(kind, b.id)).length;
     const words = c[field] && !value ? `<span class="hint">Words only: ${esc(c[field])}</span>` : '';
-    return `<div class="tile-row tile-row-pics" data-row="${kind}"><span class="row-label">${esc(title)}</span><div class="tiles">${items.map(b => tile({attrs: `data-block-tile="${kind}" data-field="${field}" data-id="${esc(b.id)}"`,
+    return `<div class="tile-row tile-row-pics" data-row="${kind}">${rowHead(title, {add: `data-new-tile="${kind}" data-field="${field}"`, edit: value ? `data-edit-tile="${kind}" data-id="${esc(value)}"` : ''})}<div class="tiles">${items.map(b => tile({attrs: `data-block-tile="${kind}" data-field="${field}" data-id="${esc(b.id)}"`,
       pressed: b.id === value, label: b.data.name || b.id, title: b.data.text, art: exampleOf(kind, b.id) ? `<img loading="lazy" src="${esc(exampleOf(kind, b.id))}" alt="">` : initial(b.data.name)})).join('')}
-      ${addTile({add: `data-new-tile="${kind}" data-field="${field}"`, edit: value ? `data-edit-tile="${kind}" data-id="${esc(value)}"` : ''})}${missing ? `<button type="button" class="tile-tool" data-make-examples="${kind}" title="Queue a small render of a plain stand-in for each one without a picture">Make examples (${missing})</button>` : ''}</div>${words}</div>`;
+      ${missing ? `<button type="button" class="tile-tool" data-make-examples="${kind}" title="Queue a small render of a plain stand-in for each one without a picture">Make examples (${missing})</button>` : ''}</div>${words}</div>`;
   };
   return `<section class="image-section image-place"><h3>Place and light</h3>
-    ${blockRow('location', 'environment', 'Setting')}${blockRow('light', 'light', 'Time and light')}
+    ${blockRow('location', 'environment', 'Setting')}${blockRow('light', 'light', 'Light')}
     <div class="place-more"><div class="ctl"><span class="ctl-label">Light from</span><div class="facing">${LIGHT_FROM.map(([k, label, words]) => tile({attrs: `data-light-from="${k}"`, pressed: stage.lightFrom === k, label, title: words, art: diagramSvg('light', k), cls: 'tile-mini'})).join('')}</div></div>
       <label class="ctl">Mood<input data-stage-field="mood" list="stageMoods" value="${esc(stage.mood)}" placeholder="calm, tense, romantic…"></label></div>
     <datalist id="stageMoods">${MOODS.map(x => `<option value="${esc(x)}">`).join('')}</datalist></section>`;

@@ -210,7 +210,6 @@ export function installImages(getScene, changed) {
     const look = `<section class="image-section image-look"><div class="two">${pickerHtml('style', 'style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p></section>`;
     const happens = `<section class="image-section image-what"><div class="section-head"><h3>What happens</h3>${pickerHtml('scenePreset', 'scene', 'Saved scene direction', presetOptions('scene'), c.sceneRefs?.[0] || '', 'Choose a saved direction…')}</div>
       <label><span class="visually-hidden">What happens in this picture?</span><textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label></section>`;
-    const details = `<section class="image-section image-details"><label>More details for the prompt<textarea data-compose="extra" rows="1" placeholder="Specifics the blocks don't cover: props, clothes.">${esc(c.extra || '')}</textarea></label></section>`;
     // Exclude folds to one line, like the generation settings: the negative blocks in use and anything else
     const negNames = active('negative').filter(p => c.negatives?.includes(p.id)).map(p => p.data.name);
     const excludePeek = [...negNames, c.negative ? 'more words' : '', c.rating !== 'safe' && !c.hard ? 'soft-scene limits' : ''].filter(Boolean).join(', ') || 'nothing';
@@ -240,10 +239,10 @@ export function installImages(getScene, changed) {
     const direct = directHtml(c, dctx), place = placeHtml(c, dctx);
     if (stage && shot) {
       host.innerHTML = peopleHtml(c, cast) + place + look + exclude + settingsHtml(c) + tools;
-      stage.innerHTML = original + happens + direct + details + prompt;
+      stage.innerHTML = original + happens + direct + prompt;
       shot.innerHTML = current;
       if ($('#composeFor')) $('#composeFor').textContent = getScene().metadata.title || getScene().title || '';
-    } else host.innerHTML = current + original + peopleHtml(c, cast) + happens + direct + place + look + details + exclude + settingsHtml(c) + tools + prompt;
+    } else host.innerHTML = current + original + peopleHtml(c, cast) + happens + direct + place + look + exclude + settingsHtml(c) + tools + prompt;
     bindComposition();
     updatePrompt();
     renderReferenceChoices();
