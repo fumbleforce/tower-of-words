@@ -12,6 +12,7 @@ import { marker, thread } from './comments.js';
 import { conditionSentence } from './conditions.js';
 import { pictureFor } from './pictures.js';
 import { makingLabel } from './versions.js';
+import { notesFor } from './checks.js';
 import { openPop, closePop } from './pop.js';
 
 const host = () => document.getElementById('timeline');
@@ -177,6 +178,11 @@ function beat(item, index) {
   const body = row.querySelector('.body');
   const content = { line, narration, picture, choice, branch, group }[kind] || other;
   content(body, step, path, item);
+  const doc = docFor(path), notes = doc ? notesFor(doc.id, doc.node || String(doc.id).split('#')[1] || '', step) : [];
+  if (notes.length) {
+    body.insertAdjacentHTML('beforeend', `<ul class="check-notes">${notes.map(n => `<li class="${n.kind}">${esc(n.text)}</li>`).join('')}</ul>`);
+    if (notes.some(n => n.kind === 'problem')) row.classList.add('has-problem');
+  }
   row.addEventListener('pointerdown', e => {
     if (!samePath(S.selected, path)) select(path, { tab: kind === 'picture' ? 'picture' : undefined });
     e.stopPropagation();

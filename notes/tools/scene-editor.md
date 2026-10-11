@@ -67,12 +67,12 @@ Speakers come from docs/game/cast.md, with portraits from game3d/js/ui/portrait-
 |---|---|---|
 | Parse and syntax of the written file | yes | yes |
 | Generator rebuild (`*.src.mjs` writes sequences, plugins, line lists) | none | yes, restored on failure |
-| `story-check.mjs` (unknown ids, missing nodes, bad conditions) | stage 2 | none |
+| The story checks (`story-check.mjs` and the day checks: unknown ids, missing nodes, bad conditions, missing deliveries) | yes, the save is undone when it finds something new | none |
 | Reachability (`normal-entry-check`, then `normal-reach-browser` on request) | none | entry check now, browser on request |
 | Blur check | none | yes |
-| Voice manifest (changed lines go back to "needs voice", stale clips retired) | stage 2 | yes |
+| Voice manifest (changed lines go back to "needs voice", stale clips retired) | yes: the manifest is rewritten and lines with no clip are marked; old clips stay, keyed by their old text | yes |
 
-A failed check shows in plain words next to the beat it concerns.
+A failed check shows in plain words next to the beat it concerns, in red ("Pick a delivery: on this day every line says how it is spoken"); one no beat matches goes in the status line. A saved line with no voice clip says so under it, and the status line counts them.
 
 ## Stages
 

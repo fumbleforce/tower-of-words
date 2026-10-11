@@ -37,6 +37,24 @@ class Saves(unittest.TestCase):
         self.assertEqual(before['steps'],['a: Hello'])
         with self.assertRaisesRegex(ValueError,'CONFLICT'):api.dispatch('save',edit)
 
+    def test_story_check_refuses_a_save_and_voice_lines_are_listed(self):
+        tools = self.root / 'game3d/tools'; tools.mkdir(parents=True)
+        # stand-ins for the public checks: a problem when the story says BROKEN, and no clip for any line
+        (tools / 'story-check.mjs').write_text("import fs from 'node:fs';const s=fs.readFileSync('game3d/story/test.js','utf8');"
+            "console.log(s.includes('BROKEN')?'story/test.js: hello: unknown speaker zed':'story check: ok');")
+        (tools / 'day9-story-check.mjs').write_text("import fs from 'node:fs';import assert from 'node:assert/strict';"
+            "assert(!fs.readFileSync('game3d/story/test.js','utf8').includes('BROKEN'), 'test/hello: missing nowhere');")
+        (tools / 'voice-manifest.mjs').write_text("if(process.argv.includes('--check'))console.log('NO CLIP ln-1 a: Fine now');")
+        old = self.read(); source = self.file.read_text()
+        with self.assertRaises(api.CheckFailed) as caught:
+            api.dispatch('save', {**old, 'steps': ['zed: BROKEN']})
+        self.assertEqual(caught.exception.problems, ['hello: missing nowhere', 'hello: unknown speaker zed'])
+        self.assertEqual(self.file.read_text(), source)
+        self.assertEqual(self.read()['history'], [])
+        saved = api.dispatch('save', {**old, 'steps': ['a: Fine now']})
+        self.assertIn('Fine now', self.file.read_text())
+        self.assertEqual(saved['unvoiced'], [{'speaker': 'a', 'text': 'Fine now'}])
+
     def test_draft_does_not_touch_source(self):
         old=self.file.read_text(); edit=self.read();edit['steps']=['a: Draft']
         api.dispatch('draft',edit)

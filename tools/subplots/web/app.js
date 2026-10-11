@@ -13,6 +13,7 @@ import { areaOf, titleOf, playUrl } from './names.js';
 import { setConditionLabels } from './conditions.js';
 import { installImages } from './images.js';
 import { kindOf } from './model.js';
+import { setProblems, setUnvoiced, notesFor, unplaced } from './checks.js';
 
 const $ = id => document.getElementById(id);
 let filter = 'all', tab = 'beat', saving = false, openAreas = new Set(), shownScene = null, statuses = {};
@@ -169,9 +170,23 @@ async function save() {
         const fresh = await api('read?id=' + encodeURIComponent(d.scene.id));
         if (fresh.revision !== d.scene.revision && !refreshRevision(d.node, fresh)) throw Error('CONFLICT');
       }
-      const saved = await api('save', payload(d.scene));
+      let saved;
+      try { saved = await api('save', payload(d.scene)); }
+      catch (e) {
+        // the story check refused it: its findings go on the beats (checks.js), the rest in the status line
+        if (e.data?.problems) {
+          setProblems(d.scene.id, e.data.problems);
+          renderTimeline();
+          const loose = unplaced(d.scene.id, nodeOf(d.scene), d.scene.steps);
+          throw Error(`the story check found ${e.data.problems.length === 1 ? 'a problem' : e.data.problems.length + ' problems'}${loose.length ? ': ' + loose.join(' ').replace(/[.]$/, '') : ', marked in red on the beat'}.`);
+        }
+        throw e;
+      }
+      if (saved.unvoiced) setUnvoiced(saved.id, saved.unvoiced);
       markSaved(saved, d.node);
       warnings.push(...(saved.warnings || []));
+      const silent = countSilent(saved);
+      if (silent) warnings.push(`${silent === 1 ? 'One line has' : silent + ' lines have'} no voice clip yet.`);
     }
     status('Saved' + (warnings.length ? '. ' + warnings.join(' ') : ''), 'ok');
     loadStatus();
@@ -182,6 +197,15 @@ async function save() {
     saving = false;
     paintBar();
   }
+}
+
+const nodeOf = scene => scene.node || String(scene.id).split('#')[1] || '';
+// lines of a saved part the voice manifest lists with no clip yet
+function countSilent(scene) {
+  let n = 0;
+  const walk = xs => (xs || []).forEach(st => { if (notesFor(scene.id, nodeOf(scene), st).some(x => x.kind === 'voice')) n++; if (st && typeof st === 'object') for (const k of ['then', 'else', 'sequence']) walk(st[k]); });
+  walk(scene.steps);
+  return n;
 }
 
 // ---------- top bar ----------
@@ -209,7 +233,8 @@ function paintBar() {
   $('play').href = url || '#';
   $('play').setAttribute('aria-disabled', String(!url));
   $('play').title = url ? 'Open the game here, in a new tab' : 'This part has no place to start from';
-  if (s && !saving && $('status').dataset.kind !== 'error') status(dirty ? 'Unsaved changes' : 'Saved', dirty ? 'dirty' : 'ok');
+  // a save's own message (warnings, lines with no voice) stays until the next edit
+  if (s && !saving && $('status').dataset.kind !== 'error' && (dirty || $('status').dataset.kind !== 'ok')) status(dirty ? 'Unsaved changes' : 'Saved', dirty ? 'dirty' : 'ok');
 }
 
 // Play in game on the reading path: who plays (?mc=) and the remembered flags a private scene's viewer takes

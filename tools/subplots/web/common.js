@@ -4,7 +4,7 @@ export const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','
 export async function api(action, body) {
   const r = await fetch('/api/subplots/' + action, body === undefined ? {} : {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
   const data = await r.json();
-  if (!r.ok || data.error) throw Error(data.error || `Request failed (${r.status})`);
+  if (!r.ok || data.error) throw Object.assign(Error(data.error || `Request failed (${r.status})`), {data});
   return data;
 }
 // The composer reports through #notice; the scene editor has its status line (#status) instead.
