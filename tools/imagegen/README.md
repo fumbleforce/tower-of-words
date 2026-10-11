@@ -2,6 +2,8 @@
 
 `tools/imagegen/run.sh`, then http://127.0.0.1:8772/ (`--restart` loads new code and keeps his GPU session). The rules for using it are in GUIDE.md (Engineering, "Image gen dashboard").
 
+ComfyUI started by the dashboard leaves 2 GB of VRAM alone (`--reserve-vram`, `IMAGEGEN_RESERVE_VRAM` in gpu.py), so the browser keeps headroom while a render runs. A ComfyUI that was already running keeps whatever it was started with.
+
 ## What is in git and what is not
 
 The code is in git. The data is not:
