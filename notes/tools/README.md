@@ -8,6 +8,8 @@ A new tool page gets one line, `<script src="<repo root>/tools/nav/nav.js"></scr
 
 ## Private mode
 
+The top bar has Adult and Nonadult buttons, with the current mode highlighted. Switching keeps the current page, including its selected scene. The buttons stay visible when the tool links scroll on a narrow screen.
+
 http://127.0.0.1:8771/private turns private mode on for this browser and opens the bible; http://127.0.0.1:8771/public turns it off (a cookie, so the image gen port sees it too; tools/review_server.py). It is the same site, not a copy. In private mode the server hands out the one private registry file (git-ignored, under island/private/; island/PRIVATE.md says where) as `/api/nav-private.js`. It only adds: bar entries after the public ones, and capabilities for the shared tools, which a tool reads with `await AmakawaNav.ready` and `AmakawaNav.capability('<tool id>')`. Outside private mode, or on a computer without the private files, that script is empty and nothing private shows. The public code never names private content.
 
 What each shared tool adds in private mode:

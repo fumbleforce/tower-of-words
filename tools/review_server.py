@@ -246,7 +246,17 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_header('Set-Cookie', f'amakawa_mode={value}; Path=/; SameSite=Lax')
         # ?to=/a/local/path goes back to the page that asked (a private page opened outside private mode)
         to = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query).get('to', [''])[0]
-        self.send_header('Location', to if re.fullmatch(r'/(?!/)[^\s\\]*', to) else '/bible/')
+        local_path = re.fullmatch(r'/(?!/)[^\s\\]*', to)
+        # The image generator shares this cookie on another port and returns to its current page.
+        dashboard = False
+        try:
+            dest = urllib.parse.urlsplit(to)
+            dashboard = (dest.scheme == 'http' and dest.hostname in ('127.0.0.1', 'localhost', '::1')
+                         and dest.port == 8772 and not dest.username and not dest.password
+                         and not re.search(r'[\s\\]', to))
+        except ValueError:
+            pass
+        self.send_header('Location', to if local_path or dashboard else '/bible/')
         self.send_header('Cache-Control', 'no-store')
         self.end_headers()
 

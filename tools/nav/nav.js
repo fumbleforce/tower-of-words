@@ -53,10 +53,16 @@
 html.has-anav{--anav-h:40px;scroll-padding-top:var(--anav-h)}
 html.has-anav body{padding-top:var(--anav-h)}
 #amakawa-nav{position:fixed;top:0;left:0;right:0;z-index:19;height:40px;box-sizing:border-box;display:flex;align-items:center;gap:2px;
- margin:0;padding:0 10px;background:#0f1217;border:0;border-bottom:1px solid rgba(255,255,255,.08);overflow-x:auto;overflow-y:hidden;
+ margin:0;padding:0 10px;background:#0f1217;border:0;border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden;
  scrollbar-width:none;white-space:nowrap;font:500 13px/1 Geist,"Zen Kaku Gothic New",system-ui,-apple-system,"Segoe UI",sans-serif;
  -webkit-font-smoothing:antialiased;color-scheme:dark}
-#amakawa-nav::-webkit-scrollbar{display:none}
+#amakawa-nav .anav-links{display:flex;align-items:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+#amakawa-nav .anav-links::-webkit-scrollbar{display:none}
+.anav-mode{display:flex;flex:none;gap:2px;padding:3px;margin-left:8px;border:1px solid #36404e;border-radius:8px}
+.anav-mode button{appearance:none;cursor:pointer;border:0;border-radius:5px;padding:5px 8px;margin:0;min-height:26px;background:transparent;color:#a3abb9;font:inherit}
+.anav-mode button[aria-pressed=true]{background:#28433f;color:#a0e4d8}
+.anav-mode button[data-mode=adult][aria-pressed=true]{background:#472c37;color:#f3b1c6}
+.anav-mode button:focus-visible{outline:2px solid #6fd0c6;outline-offset:1px}
 #amakawa-nav a{flex:none;display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:6px;color:#a3abb9;
  text-decoration:none;background:none;border:0;font:inherit;letter-spacing:0}
 #amakawa-nav a:hover{color:#e7eaf0;background:rgba(255,255,255,.05)}
@@ -68,7 +74,6 @@ html.has-anav body{padding-top:var(--anav-h)}
 #amakawa-nav .anav-tag{flex:none;margin:0 4px 0 2px;padding:0 7px;height:18px;display:inline-flex;align-items:center;border-radius:999px;
  background:rgba(236,147,173,.14);color:#ec93ad;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
 #amakawa-nav .anav-private a[aria-current=page]{color:#ec93ad;background:rgba(236,147,173,.14)}
-#amakawa-nav .anav-private a[data-anav=leave-private]{color:#727b8b;font-size:12px}
 @media (max-width:700px){#amakawa-nav{padding:0 6px}#amakawa-nav a{padding:0 8px}}
 @media print{#amakawa-nav{display:none}html.has-anav body{padding-top:0}}`;
 
@@ -81,7 +86,7 @@ html.has-anav body{padding-top:var(--anav-h)}
     if (it.external) a.insertAdjacentHTML('beforeend', '<span class="anav-ext" aria-hidden="true">↗</span>');
     return a;
   };
-  let bar;
+  let bar, links;
   const mark = () => {
     if (!bar) return;
     const l = here();
@@ -93,8 +98,8 @@ html.has-anav body{padding-top:var(--anav-h)}
     });
     // on a narrow screen the bar scrolls sideways: bring the current entry into view
     const el = bar.querySelector('[aria-current=page]');
-    if (el && (el.offsetLeft < bar.scrollLeft || el.offsetLeft + el.offsetWidth > bar.scrollLeft + bar.clientWidth)) {
-      bar.scrollLeft = Math.max(0, el.offsetLeft - 48);
+    if (el && (el.offsetLeft < links.scrollLeft || el.offsetLeft + el.offsetWidth > links.scrollLeft + links.clientWidth)) {
+      links.scrollLeft = Math.max(0, el.offsetLeft - 48);
     }
   };
   const paintPrivate = () => {
@@ -105,9 +110,33 @@ html.has-anav body{padding-top:var(--anav-h)}
     g.className = 'anav-group anav-private';
     g.insertAdjacentHTML('beforeend', '<span class="anav-sep" aria-hidden="true"></span><span class="anav-tag">Private</span>');
     privateItems.forEach((it) => g.append(link(it)));
-    g.append(link({ id: 'leave-private', label: 'Leave private', href: '/public' }));
-    bar.append(g);
+    links.append(g);
     mark();
+  };
+  const modeControl = () => {
+    const mode = document.createElement('div');
+    mode.className = 'anav-mode';
+    mode.setAttribute('role', 'group');
+    mode.setAttribute('aria-label', 'Content mode');
+    for (const [adult, label] of [[false, 'Nonadult'], [true, 'Adult']]) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = label;
+      button.dataset.mode = adult ? 'adult' : 'nonadult';
+      button.setAttribute('aria-pressed', String(privateMode === adult));
+      button.title = adult ? 'Show adult content and tools' : 'Show nonadult content only';
+      button.onclick = () => {
+        if (privateMode === adult) return;
+        const target = new URL(adult ? '/private' : '/public', origin);
+        // Cookies belong to the current hostname, even when the shared script came from 127.0.0.1.
+        target.hostname = location.hostname;
+        const back = location.port === '8772' ? location.href : location.pathname + location.search + location.hash;
+        target.searchParams.set('to', back);
+        location.assign(target.href);
+      };
+      mode.append(button);
+    }
+    return mode;
   };
   const build = () => {
     const style = document.createElement('style');
@@ -117,10 +146,15 @@ html.has-anav body{padding-top:var(--anav-h)}
     bar = document.createElement('nav');
     bar.id = 'amakawa-nav';
     bar.setAttribute('aria-label', 'Tools');
-    ITEMS.forEach((it, i) => {
-      bar.append(link(it));
-      if (it.id === 'showcase' || it.id === 'notes') bar.insertAdjacentHTML('beforeend', '<span class="anav-sep" aria-hidden="true"></span>');
+    links = document.createElement('div');
+    links.className = 'anav-links';
+    bar.append(links);
+    ITEMS.forEach((it) => {
+      links.append(link(it));
+      if (it.id === 'showcase' || it.id === 'notes') links.insertAdjacentHTML('beforeend', '<span class="anav-sep" aria-hidden="true"></span>');
     });
+    const mode = modeControl();
+    bar.append(mode);
     document.body.prepend(bar);
     document.documentElement.classList.add('has-anav');
     paintPrivate();
@@ -131,6 +165,7 @@ html.has-anav body{padding-top:var(--anav-h)}
 
   window.AmakawaNav = {
     root: root.href,
+    modeControl, // dialogs can place the same control inside their interactive top layer
     items: () => ITEMS.map((it) => ({ ...it, url: url(it.href) })),
     privateItems: () => privateItems.map((it) => ({ ...it, url: url(it.href) })),
     privateMode,
