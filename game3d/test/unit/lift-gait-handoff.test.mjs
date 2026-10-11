@@ -113,7 +113,7 @@ async function realGlide(f, game, root, to, speed) {
   const shared = fs.readFileSync(new URL('../../js/movement/shared.js', import.meta.url), 'utf8');
   const motion = new Function(
     shared.slice(shared.indexOf('export const ACCEL'), shared.indexOf('// ---------- who')).replaceAll('export ', '') +
-      '\nreturn {ACCEL,BRAKE,CORNER,FRAME_MAX,STEP_MAX,TURN,angDiff,turnToward};',
+      '\nreturn {ACCEL,BRAKE,CORNER,FRAME_MAX,FRAME_T,frameDt,STEP_MAX,TURN,angDiff,turnToward};',
   )();
   const dependencies = {
     THREE,

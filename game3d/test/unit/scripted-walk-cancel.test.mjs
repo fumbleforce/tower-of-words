@@ -12,10 +12,10 @@ function fixture() {
   // the walk's feet (movement/gait.js): walking while it moves, idle when stopped
   const stepGait = (rig, moved, dt) => rig.setState?.(moved / dt > 0.12 ? 'walk' : 'idle');
   const stopGait = rig => [undefined, 'walk'].includes(rig.state) && rig.setState?.('idle');
-  const walk = new Function('requestAnimationFrame', 'THREE', 'turnToward', 'angDiff', 'BRAKE', 'ACCEL', 'FRAME_MAX',
+  const walk = new Function('requestAnimationFrame', 'THREE', 'turnToward', 'angDiff', 'BRAKE', 'ACCEL', 'frameDt',
     'STEP_MAX', 'stuck', 'stepGait', 'stopGait', 'TURN', `return ${source.slice(...node.range)}`)(fn => raf.push(fn),
     { MathUtils: { clamp: (n, lo, hi) => Math.max(lo, Math.min(hi, n)) } }, (_from, to) => to,
-    (a, b) => a - b, 3, 3, 0.1, 0.05, () => false, stepGait, stopGait, 9);
+    (a, b) => a - b, 3, 3, (ms, scale) => Math.min(0.15, Math.min(0.1, ms / 1000) * scale), 0.05, () => false, stepGait, stopGait, 9);
   const rig = { root: { userData: {}, parent: {}, position: { x: 0, z: 0 }, rotation: { y: 0 }, scale: { x: 1 } },
     states: [], setState(value) { this.state = value; this.states.push(value); } };
   return { walk, rig, raf, game: { place: {}, timeScale: 1 } };

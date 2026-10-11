@@ -12,7 +12,7 @@ import { createRenderer, Markers, Q, blob } from './engine.js';
 import { installMetrics } from './perf/metrics.js';
 import { createView } from './perf/view.js';
 import { guardedLoop } from './perf/gl-guard.js';
-import { softSeparate } from './move.js';
+import { softSeparate, frameDt } from './move.js';
 import { scanTargets } from './gameplay/targeting.js';
 import { installSteer } from './movement/steer.js';
 import * as ambience from './ambience.js';
@@ -365,7 +365,7 @@ function tick() {
     render();
     return;
   }
-  let dt = Math.min(0.1, (now - lastT) / 1000) * TS * (game.hurry ? HURRY : 1);
+  let dt = frameDt(now - lastT, TS * (game.hurry ? HURRY : 1));
   lastT = now;
   if (!CAP || window.__run)
     while (dt > 1e-4) {

@@ -1,4 +1,4 @@
-import { rigOf, bodies, BODY, CORNER, turnToward, angDiff, BRAKE, ACCEL, TURN, FRAME_MAX, STEP_MAX } from './shared.js';
+import { rigOf, bodies, BODY, CORNER, turnToward, angDiff, BRAKE, ACCEL, TURN, frameDt, STEP_MAX } from './shared.js';
 import { standOff } from './targets.js';
 import { freeNear, reachableNear, clearOf, pathAround, stuck } from './navigation.js';
 import { spaceFrom, isPassing, slideStep, isHard, press, followSpeed } from './crowd.js';
@@ -266,7 +266,7 @@ export function walkRig(
       // the game loop's clock (main.js frame): as much game time as a frame covers, in steps no longer than the loop's,
       // so a walk keeps pace with everyone else and its following and avoiding stay steady on a slow frame
       const now = performance.now();
-      const dt = game.paused ? 0 : Math.min(FRAME_MAX, (now - last) / 1000) * (game.timeScale || 1);
+      const dt = game.paused ? 0 : frameDt(now - last, game.timeScale || 1);
       last = now;
       if (!obj.parent && dt > 0) {
         done();
