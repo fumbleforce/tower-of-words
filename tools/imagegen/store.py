@@ -252,7 +252,7 @@ def _log_locked():
 def log_append(entry):
     with _log_locked():
         os.makedirs(ROOT, exist_ok=True)
-        if 'n' not in entry:
+        if not entry.get('n'):  # a job's entry carries n=None until here: that must count as missing too
             # A permanent short number per picture, shown as #n in the dashboard so Jørgen can name a picture in chat.
             entry = dict(entry, n=max((r.get('n') or 0 for r in log_read()), default=0) + 1)
         with open(LOG, 'a', encoding='utf-8') as f:
