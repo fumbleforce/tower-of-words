@@ -283,7 +283,7 @@ $('timeline').parentElement.addEventListener('pointerdown', e => { if (!e.target
 window.addEventListener('subplot-image-changed', () => { renderTimeline(); paintTab(); paintBar(); });
 
 document.addEventListener('keydown', e => {
-  if ($('previewDialog').open || $('composeDialog').open) return;
+  if ($('previewDialog').open || $('composeDialog').open || $('compareDialog').open) return;
   const mod = e.ctrlKey || e.metaKey, typing = e.target.closest?.('input, textarea, select');
   if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); save(); return; }
   if (mod && e.key.toLowerCase() === 'z' && !typing) { e.preventDefault(); if (e.shiftKey) redo(); else undo(); return; }

@@ -357,10 +357,13 @@ export function installImages(getScene, changed) {
   // need the fields filled out, and if the "format" is not fully compatible, we need at least the prompt to be filled"):
   // the editor's server finds the render (api.py picture_source), its blocks fill the composer, and the original
   // prompt and settings are always kept beside them.
-  const sourcesLoading = new Set();
-  async function loadSource(slotId) {
+  const sourcesLoading = new Map();
+  function loadSource(slotId) {
     const scene = getScene(); const key = scene.id + '|' + slotId;
-    if (sourcesLoading.has(key)) return; sourcesLoading.add(key);
+    if (!sourcesLoading.has(key)) sourcesLoading.set(key, fetchSource(scene, slotId).finally(() => sourcesLoading.delete(key)));
+    return sourcesLoading.get(key);
+  }
+  async function fetchSource(scene, slotId) {
     try {
       const r = await api('picture-source?' + new URLSearchParams({id: scene.id, slot: slotId}));
       const c = scene.metadata.compositions?.[slotId || 'scene'];
@@ -368,7 +371,6 @@ export function installImages(getScene, changed) {
       if (r.job) fillFromJob(r.job, {how: r.how, start: r.start?.image || '', slot: slotId, quiet: true});
       else { c.sourceChecked = true; if (r.start?.image) c.original = {how: 'no record of how it was made', start: r.start.image}; render(); }
     } catch (e) { notice(e.message, true); }
-    finally { sourcesLoading.delete(key); }
   }
   const hasBlocks = compose => !!compose && ['characters', 'chars', 'cameras', 'cams'].some(k => compose[k]?.length) || !!compose?.scene;
   // One way to open a picture's settings, for "Reuse settings" and for a shot's own picture: its blocks when it has
@@ -406,6 +408,18 @@ export function installImages(getScene, changed) {
     fillFromJob(j);
     notice('Picture settings loaded. Change the direction or generate another version.');
   }
+  // The shot's own settings as a queue job, for New version and Repaint a part on the beat (versions.js): the
+  // composition the composer keeps for the shot, filled from the picture's source the first time. null when nothing
+  // says how the picture was made, unless `anyway` (a repaint keeps most of the picture, so the cast's blocks will do).
+  async function shotJob(slotId, {anyway = false} = {}) {
+    if (!presets) await connect();
+    compose();
+    activeSlot = slotId;
+    let c = compose();
+    if (!c.sourceChecked && !c.edited) { await loadSource(slotId); c = compose(); }
+    if (!anyway && !c.edited && !c.original?.positive) return null;
+    return assemble();
+  }
   function focus(slotId) {
     compose();
     if (slotId) activeSlot = slotId;
@@ -417,5 +431,5 @@ export function installImages(getScene, changed) {
   if ($('#loadPresets')) $('#loadPresets').onclick = guarded(connect);
   $('[data-inspect="images"]')?.addEventListener('click', () => { if (!presets) guarded(connect)(); });
   globalThis.addEventListener('pagehide', () => { if (poll) clearInterval(poll); });
-  return {render, focus, connect};
+  return {render, focus, connect, shotJob};
 }
