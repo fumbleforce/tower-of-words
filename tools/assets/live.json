@@ -42,10 +42,14 @@
   ],
   "exclude": [
    "game3d/js/shell-qa.js",
+   "game3d/js/testmode*.js",
+   "game3d/js/feedback.js",
+   "game3d/js/feedback/**",
+   "game3d/css/feedback.css",
    "game3d/js/showcase/**",
    "game3d/js/viewer/**"
   ],
-  "about": "include: what a release ships besides the assets (build.json modules are always in). exclude: modules only the dev pages load (showcase.html, viewer.html) or that load behind a query flag (shell-qa.js); a shipped module may import them only dynamically. The other minigames are standalone prototypes; the game plays kotodama (js/places/day5/delivery.js)."
+  "about": "include: what a release ships besides the assets (build.json modules are always in). exclude: modules only the dev pages load (showcase.html, viewer.html) or that load behind a query flag (shell-qa.js, testmode*.js) or on a local host only (the feedback window: feedback.js, feedback/, css/feedback.css); a shipped module may import them only dynamically. The other minigames are standalone prototypes; the game plays kotodama (js/places/day5/delivery.js)."
  },
  "units": {
   "game3d/assets/characters/aoi/": {
