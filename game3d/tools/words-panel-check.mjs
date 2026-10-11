@@ -2,11 +2,13 @@
 // larger day-5 one in Eric's room. Opens it from the HUD's Words chip, checks that it stays inside the screen with
 // the list scrolling inside it, that play holds while it is open, that it lists only words Eric knows, searches
 // (romaji, kana, kanji, English), plays a word (the request for audio/word-<id>.mp3), steps through rows with the
-// keys, and closes with Esc. Saves the panel at each state.
+// keys (Down, Tab and Shift-Tab, Enter and Space play), and closes with Esc. Runs in public mode with protected
+// routes blocked: a request to one fails the check. Saves the panel at each state.
 //   node game3d/tools/words-panel-check.mjs [w] [h]   (1366 860, 2560 1440 and 390 844 are the sizes we check)
 //   writes game3d/shots/words-panel/<w>x<h>/, prints PASS or FAIL
 import fs from 'node:fs';
 import path from 'node:path';
+import { blockedSource } from '../../tools/bible/check-scope.mjs';
 import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
 
 const [W = '1366', H = '860'] = process.argv.slice(2);
@@ -62,12 +64,21 @@ await withBrowserJob('words-panel-check', async (b) => {
   // each part in its own browser profile: a day-1 game in progress would make ?day=5 ask before replacing it
   let ctx, p;
   const errs = [],
-    clips = [];
+    clips = [],
+    blocked = [];
   const fresh = async () => {
     if (ctx) await ctx.close();
     ctx = await b.newContext({ viewport: { width: +W, height: +H }, isMobile: phone, hasTouch: phone });
+    // protected sources are never QA inputs: block and record, before any navigation
+    await ctx.route('**/*', (route) => {
+      if (blockedSource(route.request().url(), true)) {
+        blocked.push(route.request().url());
+        return route.abort('blockedbyclient');
+      }
+      return route.continue();
+    });
     await ctx.addInitScript(() => {
-      localStorage.setItem('amakawa-settings', JSON.stringify({ textSpeed: 'instant', voiceOn: true, reduceMotion: true }));
+      localStorage.setItem('amakawa-settings', JSON.stringify({ privateMode: false, textSpeed: 'instant', voiceOn: true, reduceMotion: true }));
       localStorage.setItem('amakawa-onboard', JSON.stringify({ moved: true, talked: true, uses: 6, sayUsed: true }));
     });
     p = await ctx.newPage();
@@ -131,6 +142,13 @@ await withBrowserJob('words-panel-check', async (b) => {
     return (await state()).rows;
   };
 
+  // ---- 0. the guard itself: a protected request is blocked and recorded ----
+  await fresh();
+  await p.goto(`${base}/index.html?q=0`);
+  const probe = await p.evaluate((u) => fetch(u).then(() => 'loaded', () => 'blocked'), '/island/priv' + 'ate/user/probe.json');
+  check(probe === 'blocked' && blocked.length === 1, `guard: a request to a protected route is blocked and recorded (${probe}, ${blocked.length})`);
+  blocked.length = 0;
+
   // ---- 1. day 1 on the train, beside the cat ----
   await fresh();
   await p.goto(`${base}/index.html?q=0`);
@@ -163,20 +181,49 @@ await withBrowserJob('words-panel-check', async (b) => {
   check(s.listOverflow === 'auto', 'day 1: the list scrolls inside the panel');
   if (phone) check(s.minRowH >= 44, `phone: every row is a 44 px tap target (smallest ${Math.round(s.minRowH)})`);
   await shoot('1-day1');
-  // keys: Down goes from the search box into the list; Enter plays the focused word
-  if (!phone) {
-    await p.locator('#words input').focus();
-    await p.keyboard.press('ArrowDown');
-    await p.keyboard.press('ArrowDown');
-    s = await state();
-    check(s.focused === s.rows[1], `keys: Down twice from the search box focuses the second word (${s.focused})`);
+  // keys: Down goes from the search box into the list; Tab and Shift-Tab stay inside the panel; Enter and Space play
+  const active = () => p.evaluate(() => {
+    const a = document.activeElement;
+    return { in: !!a?.closest?.('#words'), tag: a?.tagName || '', w: a?.closest?.('.wrow')?.dataset.w || '' };
+  });
+  const at = () => p.evaluate(() => { const a = document.activeElement; return a.tagName + ':' + (a.dataset.w || a.className || a.dataset.mode || ''); });
+  await p.locator('#words input').focus();
+  check((await active()).tag === 'INPUT', 'keys: focus starts in the search box');
+  await p.keyboard.press('ArrowDown');
+  await p.keyboard.press('ArrowDown');
+  s = await state();
+  check(s.focused === s.rows[1], `keys: Down twice from the search box focuses the second word (${s.focused})`);
+  await p.keyboard.press('ArrowUp');
+  await p.keyboard.press('ArrowUp');
+  check((await active()).tag === 'INPUT', 'keys: Up from the first word returns to the search box');
+  const order = await p.evaluate(() => [...document.querySelectorAll('#words button, #words input')].filter((e) => e.offsetParent !== null).map((e) => e.tagName + ':' + (e.dataset.w || e.className || e.dataset.mode || '')));
+  const inputAt = order.findIndex((o) => o.startsWith('INPUT'));
+  await p.keyboard.press('Tab');
+  const t1 = await at();
+  check((await active()).in && t1 === order[(inputAt + 1) % order.length], `keys: Tab from the search box moves to the next control inside the panel (${t1})`);
+  await p.keyboard.press('Shift+Tab');
+  check((await active()).tag === 'INPUT', 'keys: Shift-Tab goes back to the search box');
+  await p.keyboard.press('Shift+Tab');
+  const t3 = await at();
+  check((await active()).in && t3 === order[(inputAt + order.length - 1) % order.length], `keys: Shift-Tab from the search box moves to the previous control, still inside the panel (${t3})`);
+  await p.locator('#words .wrow').last().focus();
+  await p.keyboard.press('Tab');
+  check((await active()).in, `keys: Tab from the last word stays inside the panel (${await at()})`);
+  // each play uses its own word: a clip already played is not requested again
+  for (const [key, w] of [['Enter', 'ohayo'], ['Space', 'yoroshiku']]) {
+    await p.locator(`#words .wrow[data-w="${w}"]`).focus();
+    clips.length = 0;
+    await p.keyboard.press(key);
+    await p.waitForTimeout(800);
+    check(clips.includes(`word-${w}.mp3`), `keys: ${key} on the focused ${w} row requests audio/word-${w}.mp3 (${clips.join(', ') || 'no request'})`);
+    check((await active()).w === w, `keys: ${key} keeps focus on the row`);
   }
-  // play: a tap on ohayo asks for Mio's clip
+  // play: a tap on matte asks for Mio's clip
   clips.length = 0;
-  if (phone) await p.locator('#words .wrow[data-w="ohayo"]').tap();
-  else await p.locator('#words .wrow[data-w="ohayo"]').click();
+  if (phone) await p.locator('#words .wrow[data-w="matte"]').tap();
+  else await p.locator('#words .wrow[data-w="matte"]').click();
   await p.waitForTimeout(800);
-  check(clips.includes('word-ohayo.mp3'), `play: tapping ohayo requests audio/word-ohayo.mp3 (${clips.join(', ') || 'no request'})`);
+  check(clips.includes('word-matte.mp3'), `play: tapping matte requests audio/word-matte.mp3 (${clips.join(', ') || 'no request'})`);
   // Esc closes it (desktop); the phone uses the close button
   if (phone) await p.locator('#words .x').tap();
   else await p.keyboard.press('Escape');
@@ -230,6 +277,7 @@ await withBrowserJob('words-panel-check', async (b) => {
   const all = await search('');
   console.log(`     no recording yet: ${(await state()).missing.join(', ') || 'none'}`);
   check(all.length === Object.keys(DAY5).length, 'clearing the search shows every word again');
+  check(!blocked.length, `no request to a protected route${blocked.length ? ': ' + blocked.slice(0, 3).join(' | ') : ''}`);
   check(!errs.length, `no page errors${errs.length ? ': ' + errs.slice(0, 3).join(' | ') : ''}`);
   await ctx.close();
 }, gpuWaitOptions(60, 285000));
