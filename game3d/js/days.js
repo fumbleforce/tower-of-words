@@ -39,6 +39,9 @@ export const dayOf = (n) => DAYS[n] || (Number.isSafeInteger(n) && n > LAST_DAY 
 export const canStartNextDay = (n) => Number.isSafeInteger(n) && n >= 1 && n < Number.MAX_SAFE_INTEGER;
 // the story module path for a place on a day, relative to game3d/js/
 export const storyPath = (name, day = 1) => `../story/${dayOf(day).dir}${name}.js`;
+// a place the day's story index lists has a story module that must load: a failed import is an error, not an
+// empty place (runner.js load). Day 1 and the places a day doesn't list have fallbacks by design.
+export const storyRegistered = (name, day = 1) => day > 1 && !!dayOf(day).files?.includes(name);
 // the next day's opening save, made from the save the day ended on
 export function nextDaySave(prev) {
   const day = (prev.day || 1) + 1,
