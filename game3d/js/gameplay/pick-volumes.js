@@ -22,12 +22,14 @@
 import * as THREE from 'three';
 import { travelOf } from './pin-kinds.js';
 
-const extra = new Map(); // item id -> Set of objects made pickable for it
+// item id -> Set of weak refs to the objects made pickable for it (a place that is dropped is not kept alive here)
+const extra = new Map();
 export function makePickable(object3d, itemId) {
   if (!object3d || !itemId) return () => {};
   if (!extra.has(itemId)) extra.set(itemId, new Set());
-  extra.get(itemId).add(object3d);
-  return () => extra.get(itemId)?.delete(object3d);
+  const ref = new WeakRef(object3d);
+  extra.get(itemId).add(ref);
+  return () => extra.get(itemId)?.delete(ref);
 }
 
 // the objects made pickable for `id` that hang in the current place
@@ -36,7 +38,12 @@ export function pickablesOf(game, id) {
     root = game.place?.space;
   if (!set || !root) return [];
   const out = [];
-  for (const o of set) {
+  for (const ref of set) {
+    const o = ref.deref();
+    if (!o) {
+      set.delete(ref); // collected
+      continue;
+    }
     let p = o;
     while (p && p !== root) p = p.parent;
     if (p) out.push(o);
@@ -44,12 +51,10 @@ export function pickablesOf(game, id) {
   return out;
 }
 
-// a mesh that is shown: it and every parent up to `top` visible
-function shown(o, top) {
-  for (let p = o; p; p = p.parent) {
-    if (!p.visible) return false;
-    if (p === top) return true;
-  }
+// an object that is shown: it and every parent up to the scene root visible (a hidden ancestor above a registered
+// root hides it too)
+function shown(o) {
+  for (let p = o; p; p = p.parent) if (!p.visible) return false;
   return true;
 }
 // a stand-in that rays are meant to pass (a shadow-only proxy, a batch drawn for parts that are picked themselves)
@@ -113,9 +118,8 @@ export function installPicking(game, objsOf) {
     const P = game.place,
       r = P.people?.[m.id],
       t = P.things?.[m.id];
-    const objs = [r?.root?.visible ? r.root : t?.obj?.visible ? t.obj : null, ...pickablesOf(game, m.id)].filter(
-      Boolean,
-    );
+    const own = [r?.root, t?.obj].find((o) => o && shown(o));
+    const objs = [own, ...pickablesOf(game, m.id).filter((o) => shown(o))].filter(Boolean);
     if (!objs.length) return false;
     objs[0].updateWorldMatrix(true, true);
     objs[0].matrixWorld.decompose(_v, _q, _s);
@@ -160,17 +164,19 @@ export function installPicking(game, objsOf) {
     for (const m of game.markers.list) {
       if (!m.enabled()) continue;
       for (const o of objsOf(m)) {
-        const hit = ray.intersectObject(o, true).find((h) => shown(h.object, o));
+        const hit = ray.intersectObject(o, true).find((h) => shown(h.object));
         if (hit && hit.distance < bd) {
           bd = hit.distance;
           best = m;
         }
       }
     }
-    if (best) return best;
-    // 2. the volumes
+    // 2. the volumes: a person's box also beats a mesh behind it (the nearest target wins); a doorway's only counts
+    // when no mesh was under the cursor
+    const meshHit = !!best;
     for (const m of game.markers.list) {
       if (!m.enabled()) continue;
+      if (meshHit && !isPerson(m)) continue;
       const vol = isPerson(m) ? personVolume(m) : boxVolume(m);
       if (!vol) continue;
       const d = rayBox(ray.ray, box, frame);
