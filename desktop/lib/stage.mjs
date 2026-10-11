@@ -49,7 +49,7 @@ function walk(dir, base = dir) {
 }
 
 // game3d/build.json for exactly the staged modules (the page's import map; game3d/tools/stamp.py does the same)
-export function stampBuild(dir, root) {
+export function stampBuild(dir, root, scope = {}) {
   const g = path.join(dir, 'game3d');
   const out = path.join(g, 'build.json');
   let commit = '';
@@ -66,7 +66,7 @@ export function stampBuild(dir, root) {
   const p = (n) => String(n).padStart(2, '0');
   const id = `${p(d.getUTCMonth() + 1)}${p(d.getUTCDate())}-${p(d.getUTCHours())}${p(d.getUTCMinutes())}${commit ? '-' + commit : ''}`;
   fs.rmSync(out, { force: true }); // may be a hard link to the checkout's own build.json
-  fs.writeFileSync(out, JSON.stringify({ id, files }, null, 0));
+  fs.writeFileSync(out, JSON.stringify({ id, files, ...scope }, null, 0));
   return id;
 }
 
