@@ -6,7 +6,7 @@
 //   --days      all (default) or 1. Limited editions have separate output, identity and saves.
 //   --platform  defaults to this machine's
 //   --dev       content as a plain folder, no pack, DevTools and the debugging port allowed; for checking a build
-//   --dir       stop at the unpacked app (dist/desktop/<flavor>/out/<os>-unpacked), no installers
+//   --dir       stop at the unpacked app (dist/desktop/<flavor>/out/<platform>/<os>-unpacked), no installers
 //
 // Steps: file list (tools/release/files.mjs) -> staged copy at URL paths -> flavor step and word scan
 // (tools/release/flavor.mjs, scan.mjs) -> content.pak under a fresh key made for this build (or DESKTOP_PAK_KEY),
@@ -51,6 +51,7 @@ const version = JSON.parse(fs.readFileSync(path.join(desktop, 'package.json'), '
 const out = path.join(mainCheckoutRoot(root), 'dist', 'desktop', profile.output + (DEV ? '-dev' : ''));
 const stageDir = path.join(out, 'stage');
 const appDir = path.join(out, 'app');
+const packageOut = path.join(out, 'out', platform);
 const t0 = Date.now();
 const step = (s) => console.log(`[${((Date.now() - t0) / 1000).toFixed(1)}s] ${s}`);
 
@@ -114,15 +115,15 @@ key?.fill(0);
 if (flavor === 'vanilla') scan(appDir);
 step('app folder written');
 
-// 5. electron-builder (into a fresh out/, so no installer of an earlier build lies beside this one)
-fs.rmSync(path.join(out, 'out'), { recursive: true, force: true });
+// 5. Clear this platform's old packages while keeping the other platforms' downloads.
+fs.rmSync(packageOut, { recursive: true, force: true });
 const { build, Platform, Arch } = require('electron-builder');
 const electronVersion = require('electron/package.json').version;
 const target = { linux: Platform.LINUX, win: Platform.WINDOWS, mac: Platform.MAC }[platform];
 // a .dmg can only be made on a Mac (hdiutil); from Linux the Mac build is a .zip of the .app, for Apple Silicon and Intel
 const macTargets = process.platform === 'darwin' ? ['dmg', 'zip'] : ['zip'];
 // Windows ZIP is the primary itch download: the runnable app folder, with installer and portable alternatives.
-const targets = flag('dir') ? ['dir'] : { linux: ['AppImage', 'deb'], win: ['zip', 'nsis', 'portable'], mac: macTargets }[platform];
+const targets = flag('dir') ? ['dir'] : { linux: ['AppImage', 'tar.gz', 'deb'], win: ['zip', 'nsis', 'portable'], mac: macTargets }[platform];
 const archs = platform === 'mac' ? [Arch.arm64, Arch.x64] : [Arch.x64];
 const config = {
   appId: IDENTITY.appId,
@@ -130,7 +131,7 @@ const config = {
   executableName: IDENTITY.name,
   artifactName: `${IDENTITY.name}-\${version}-\${os}-\${arch}.\${ext}`,
   electronVersion,
-  directories: { app: appDir, output: path.join(out, 'out') },
+  directories: { app: appDir, output: packageOut },
   files: ['**/*'],
   extraResources: [resource],
   asar: true,
