@@ -58,11 +58,16 @@ class StudioDrafts(unittest.TestCase):
         self.assertEqual(scene['title'], 'The station')
         self.assertNotIn('sources', scene)
         self.assertIn(scene_id, [r['id'] for r in api.dispatch('catalog', {})['scenes']])
-        self.assertEqual(api.dispatch('picture-source', {'id': scene_id, 'slot': 'image:0'})['job'], self.job)
+        source_job = api.dispatch('picture-source', {'id': scene_id, 'slot': 'image:0'})['job']
+        self.assertEqual(source_job, {**self.job, 'url': scene['images'][0]['url'], 'status': 'done', 'deleted': False, 'raw_file': None})
+        self.assertEqual(scene['images'][0]['savedPick'], scene['metadata']['images']['image:0'])
         self.assertEqual(api.dispatch('picture-source', {'id': scene_id, 'slot': 'image:0'})['start']['image'], scene['images'][0]['url'])
         self.assertTrue(api.public_only('read', {'id': scene_id}))
         with patch.object(api, 'image_render', side_effect=ValueError('Deleted')), patch.object(api, 'image_history', return_value=[]):
-            self.assertEqual(api.dispatch('pictures', {'id': scene_id})['runs'][0]['renders'][0]['positive'], 'a rainy station')
+            preserved = api.dispatch('pictures', {'id': scene_id})['runs'][0]['renders'][0]
+            self.assertEqual(preserved['positive'], 'a rainy station')
+            self.assertEqual(preserved['status'], 'done')
+            self.assertEqual(preserved['url'], scene['images'][0]['url'])
             scene['steps'].append({'narration': 'Rain settles on the empty platform.'})
             scene['metadata']['notes'] = 'Keep the umbrella.'
             saved = api.dispatch('save', scene)
@@ -76,6 +81,40 @@ class StudioDrafts(unittest.TestCase):
             restored = api.dispatch('save', {**saved, 'steps': old['steps'], 'metadata': old['metadata']})
             self.assertEqual(len(restored['steps']), 1)
         self.assertEqual(self.story.read_bytes(), before)
+
+    def test_discarded_pick_persists_saved_picture_and_empty_revisions_stay_empty(self):
+        scene_id = self.create()
+        scene = self.read(scene_id)
+        scene['metadata']['images']['image:0'] = {'id': 'render-2'}
+        # The shared Keep handler restores the adapter's saved pick before Save.
+        scene['metadata']['images']['image:0'] = copy.deepcopy(scene['images'][0]['savedPick'])
+        scene['metadata']['notes'] = 'Keep the saved picture.'
+        with patch.object(api, 'image_render', side_effect=ValueError('Deleted')):
+            saved = api.dispatch('save', scene)
+        self.assertEqual(saved['metadata']['images']['image:0']['id'], 'render-1')
+        self.assertEqual(saved['images'][0]['savedPick']['id'], 'render-1')
+        empty = api.dispatch('save', {**saved, 'metadata': {**saved['metadata'], 'images': {}}})
+        self.assertEqual(empty['metadata']['images'], {})
+        self.assertEqual(empty['images'], [])
+        filled = api.dispatch('save', {**empty, 'metadata': saved['metadata']})
+        old = api.dispatch('history', {'id': scene_id, 'version': filled['history'][0]})
+        restored = api.dispatch('save', {**filled, 'steps': old['steps'], 'metadata': old['metadata']})
+        self.assertEqual(restored['metadata']['images'], {})
+        self.assertEqual(restored['images'], [])
+
+    def test_existing_history_rows_use_the_preserved_result_without_changing_service_data(self):
+        self.job['raw_file'] = 'run/before-face-fix.png'
+        scene_id = self.create()
+        scene = self.read(scene_id)
+        history = [{'run_id': 'original', 'renders': [{**self.job, 'deleted': True}]}]
+        before = copy.deepcopy(history)
+        with patch.object(api, 'image_history', return_value=history):
+            render = api.dispatch('pictures', {'id': scene_id})['runs'][0]['renders'][0]
+        self.assertEqual(history, before)
+        self.assertEqual(render['url'], scene['images'][0]['url'])
+        self.assertEqual(render['status'], 'done')
+        self.assertFalse(render.get('deleted'))
+        self.assertIsNone(render['raw_file'])
 
     def test_revisions_guard_save_validate_and_autosave(self):
         scene_id = self.create()

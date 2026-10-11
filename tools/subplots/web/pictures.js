@@ -7,8 +7,8 @@ import { S, edit, select, checkpoint, stepOf, docFor } from './store.js';
 import { kindOf, speakerOf } from './model.js';
 import { personName, portrait, person } from './names.js';
 import { paintVersions } from './versions.js';
-
-const asset = (kind, path) => '/api/subplots/image/' + kind + '/' + String(path).split('/').map(encodeURIComponent).join('/');
+import { clearPendingPicture, picturePick } from './picture-selection.js';
+import { draftPictureUrl, thumbUrl } from '../../imagegen/web/gallery.js';
 
 export function pictureFor(step, sc = S.scene) {
   const slot = step?.imageSlot;
@@ -75,7 +75,7 @@ export function renderPictureTab(installComposer) {
     <h3>From the image generator</h3>
     <div class="chips" data-chips></div>
     <div class="history" data-history></div>`;
-  tab.querySelector('[data-keep]')?.addEventListener('click', () => edit(() => { delete doc.metadata.images[pic.slot]; }));
+  tab.querySelector('[data-keep]')?.addEventListener('click', () => edit(() => { clearPendingPicture(doc, pic.slot); }));
   const getComposer = () => (composer ||= installComposer());
   tab.querySelector('[data-compose]').onclick = () => {
     checkpoint();
@@ -98,15 +98,15 @@ export function renderPictureTab(installComposer) {
 
 function paintHistory(box, doc, pic, installComposer) {
   if (offline) { box.innerHTML = `<p class="warn-text">${esc(offline)}</p><button data-retry>Try again</button>`; box.querySelector('[data-retry]').onclick = () => { offline = ''; loadHistory(false, installComposer); }; return; }
-  const renders = runs.flatMap(r => (r.renders || []).map(x => ({ ...x, run: r }))).filter(x => x.file && !x.reject);
+  const renders = runs.flatMap(r => (r.renders || []).map(x => ({ ...x, run: r }))).filter(x => (x.file || draftPictureUrl(x.url)) && !x.reject);
   if (!renders.length) { box.innerHTML = `<p class="quiet">${loading ? 'Loading pictures…' : filter.scene ? 'No pictures for this scene yet. Turn off “This scene” to see every picture.' : 'No pictures match.'}</p>`; return; }
-  box.innerHTML = `<div class="history-grid">${renders.map((r, i) => `<button data-r="${i}" class="${pic.chosen?.id === r.id ? 'on' : ''}" title="${esc((r.run.positive || '').slice(0, 300))}"><img src="${esc(asset('thumb', r.thumb || r.file))}" alt="" loading="lazy"><span>#${esc(r.n ?? '')}${r.star || r.fav ? ' ★' : ''}</span></button>`).join('')}</div>${end ? '' : '<button data-more class="ghost">Show older pictures</button>'}`;
+  box.innerHTML = `<div class="history-grid">${renders.map((r, i) => `<button data-r="${i}" class="${pic.chosen?.id === r.id ? 'on' : ''}" title="${esc((r.run.positive || '').slice(0, 300))}"><img src="${esc(thumbUrl(r, '/api/subplots/image'))}" alt="" loading="lazy"><span>#${esc(r.n ?? '')}${r.star || r.fav ? ' ★' : ''}</span></button>`).join('')}</div>${end ? '' : '<button data-more class="ghost">Show older pictures</button>'}`;
   box.querySelectorAll('[data-r]').forEach(b => {
     b.onclick = () => {
       const r = renders[+b.dataset.r];
       edit(() => {
         doc.metadata.images ||= {};
-        doc.metadata.images[pic.slot] = { slot: pic.slot, id: r.id, n: r.n, url: asset('out', r.file), file: r.file, seed: r.seed, positive: r.positive || r.run.positive };
+        doc.metadata.images[pic.slot] = picturePick(pic.slot, {...r, positive: r.positive || r.run.positive});
       });
     };
   });

@@ -183,8 +183,10 @@ function offerDrafts(drafts) {
     hideBanner();
   };
   b.querySelector('[data-drop]').onclick = async () => {
-    hideBanner();
-    await Promise.all(drafts.map(s => api('draft', { id: s.id, discard: true }).catch(() => {})));
+    try {
+      await Promise.all(drafts.map(s => api('draft', { id: s.id, revision: s.revision, discard: true })));
+      hideBanner();
+    } catch (e) { status(e.message, 'error'); }
   };
 }
 const hideBanner = () => { $('banner').hidden = true; };

@@ -446,6 +446,9 @@ def dispatch(action, body):
             # The preserved source stays available even when the original is deleted.
             jobs = [drafts.dispatch('picture-source', {'id': scene_id, 'slot': key})['job']
                     for key in current['metadata'].get('images', {})]
+            preserved = {job['id']: job for job in jobs if job}
+            runs = [{**run, 'renders': [{**render, **preserved[render['id']]} if render.get('id') in preserved else render
+                                      for render in run.get('renders', [])]} for run in runs]
             known = {r.get('id') for run in runs for r in run.get('renders', [])}
             runs += [{**job, 'run_id': 'draft-' + job['id'], 'renders': [job]}
                      for job in jobs if job and job['id'] not in known]

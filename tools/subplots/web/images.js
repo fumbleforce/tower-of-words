@@ -2,6 +2,8 @@ const {setInterval, clearInterval, document, URLSearchParams, CustomEvent} = glo
 import {$, esc, api, guarded, notice} from './common.js';
 import {localBlockHtml, bindBlockWords} from './image-block-words.js';
 import {newestPictureFirst} from './image-order.js';
+import {clearPendingPicture, picturePick, picturePath} from './picture-selection.js';
+import {draftPictureUrl} from '../../imagegen/web/gallery.js';
 import {standaloneComposition, standaloneJob, standalonePromptHtml} from './image-standalone.js';
 import {personWords} from './image-people.js';
 import {guessComposition} from './image-guess.js';
@@ -100,6 +102,8 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     return standalone ? standaloneJob(body) : body;
   };
   const selectedImage = slot => standalone ? standaloneSelection : getScene()?.metadata.images?.[slot] || (getScene()?.metadata.image?.slot === slot ? getScene().metadata.image : null);
+  const currentSource = (picked, slot) => standalone && picked?.out_path && !picked.file ? picked.out_path
+    : picturePath({chosen: picked, url: picked && !picked.applied ? picked.url : slot?.available !== false ? slot?.url : ''});
   function updatePrompt() {
     const body = assemble();
     for (const el of document.querySelectorAll('[data-studio-prompt]')) if (el !== document.activeElement) el.value = body[el.dataset.studioPrompt];
@@ -284,7 +288,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     root.querySelectorAll('[data-preview-place]').forEach(b => { b.onclick = guarded(previewPlace); });
     const pick = root.querySelector('[data-compose=imageSlot]');
     if (pick) pick.oninput = () => { activeSlot = pick.value; fold(); render(); };
-    root.querySelectorAll('[data-clear-image]').forEach(b => { b.onclick = () => { const s = getScene(); if (s.metadata.images) delete s.metadata.images[activeSlot]; if (s.metadata.image?.slot === activeSlot) delete s.metadata.image; changed(); render(); announceImage(); }; });
+    root.querySelectorAll('[data-clear-image]').forEach(b => { b.onclick = () => { clearPendingPicture(getScene(), activeSlot); changed(); render(); announceImage(); }; });
   }
   function render() {
     const host = $('#composition');
@@ -319,7 +323,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       <label>Prompt<textarea data-original="positive" rows="3">${esc(c.override?.positive ?? o.positive ?? '')}</textarea></label>
       <label>Negative<textarea data-original="negative" rows="2">${esc(c.override?.negative ?? o.negative ?? '')}</textarea></label>
       ${c.override ? '<p class="hint">Generate uses this prompt as it stands. Changing a block builds a new prompt instead.</p>' : '<button data-use-original>Use the original prompt</button>'}</details></section>` : '';
-    const currentPicture = picked?.file ? 'island/private/imagegen/outputs/' + picked.file : standalone && picked?.out_path ? picked.out_path : getScene()?.studioDraft && slot?.start ? slot.start : slot?.available !== false && slot?.url && !/^(data:|\/api\/)/.test(slot.url) ? slot.url.replace(/^\//, '') : '';
+    const currentPicture = currentSource(picked, slot);
     const tools = toolsHtml(c, {loras: loraFiles, controls: controlFiles, current: currentPicture});
     const prompt = `<section class="image-section image-prompt"><div class="section-head"><h3>Generated prompt</h3>${c.override ? '<button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</div>${c.override && !c.original ? '<p class="hint">This picture uses a prompt copied from history.</p>' : ''}<p id="assembled" class="hint prompt-box"></p></section>`;
     // The full-screen composer (index.html) reads left to right as a director works: the cast and the place (people
@@ -487,7 +491,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       notice('Starts from this picture with the same seed. Change the prompt a little, then Generate.');
     }));
     const slot = slots().find(x => x.id === activeSlot), picked = selectedImage(activeSlot);
-    const current = picked?.file ? 'island/private/imagegen/outputs/' + picked.file : standalone && picked?.out_path ? picked.out_path : getScene()?.studioDraft && slot?.start ? slot.start : slot?.available !== false && slot?.url && !/^(data:|\/api\/)/.test(slot.url) ? slot.url.replace(/^\//, '') : '';
+    const current = currentSource(picked, slot);
     const cc = compose();
     bindTools(host, {edit, compose, current, size: {w: +cc.width || preset('framing', cc.framing)?.data.w, h: +cc.height || preset('framing', cc.framing)?.data.h}});
     bindShot(host);
@@ -573,7 +577,10 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     if (sceneScope && sceneRunsFor !== getScene().id) { loadScenePictures(); }
     const ownRuns = new Set((sceneRuns || []).map(r => r.run_id));
     const all = new Map((sceneScope ? sceneRuns || [] : runs).flatMap(run => (run.renders || []).map(j => [j.id, {...run, ...j, status: 'done'}])));
-    for (const job of jobs) if (!sceneScope || all.has(job.id) || job.compose?.subplotId === getScene().id || ownRuns.has(job.run_id)) all.set(job.id, {...all.get(job.id), ...job, n: job.n ?? all.get(job.id)?.n});
+    for (const job of jobs) if (!sceneScope || all.has(job.id) || job.compose?.subplotId === getScene().id || ownRuns.has(job.run_id)) {
+      const saved = all.get(job.id), durable = draftPictureUrl(saved?.url);
+      all.set(job.id, {...saved, ...job, n: job.n ?? saved?.n, ...(durable ? {url: durable, status: 'done', deleted: false, raw_file: null} : {})});
+    }
     for (const [id, f] of edits) if (all.has(id)) Object.assign(all.get(id), f);
     const madeBy = j => historyWho === 'all' || (j.source === 'agent') === (historyWho === 'agents');
     selected = [...all.values()].filter(j => !j.deleted && madeBy(j) && !j.compose?.example && !j.compose?.placePreview
@@ -601,7 +608,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
     if (standalone) { standaloneSelection = {...j, url: j.file ? asset('out', j.file) : asset('agentsrc', j.id)}; standalone.onSelect?.(j); render(); return; }
     const s = getScene(); if (!s || !activeSlot) return;
     s.metadata.images ||= {};
-    s.metadata.images[activeSlot] = {slot: activeSlot, id: j.id, url: asset('out', j.file), file: j.file, seed: j.seed, positive: j.positive};
+    s.metadata.images[activeSlot] = picturePick(activeSlot, j);
     changed(); render(); announceImage(); notice(s.studioDraft ? 'Picture selected. Save draft to keep this picture.' : 'Picture selected for this shot. Save the scene to use it in the story.');
   }
   function announceImage() { globalThis.dispatchEvent(new CustomEvent('subplot-image-changed', {detail: {slotId: activeSlot}})); }
@@ -641,7 +648,7 @@ export function installImages(getScene, changed, {standalone = null} = {}) {
       steps: j.steps || c.steps, cfg: j.cfg || c.cfg, sampler: j.sampler || undefined, scheduler: j.scheduler || undefined,
       castInitialized: true, sourceChecked: true, edited: false,
       original: {positive: j.positive || '', negative: j.negative || '', seed: j.seed, model_file: j.model_file, w: j.w, h: j.h,
-        steps: j.steps, cfg: j.cfg, sampler: j.sampler, how: how || (j.n ? 'picture #' + j.n : 'the picture'), start: start || (j.file ? 'island/private/imagegen/outputs/' + j.file : j.out_path || ''), blocks},
+        steps: j.steps, cfg: j.cfg, sampler: j.sampler, how: how || (j.n ? 'picture #' + j.n : 'the picture'), start: start || draftPictureUrl(j.url) || (j.file ? 'island/private/imagegen/outputs/' + j.file : j.out_path || ''), blocks},
       override: blocks ? null : {positive: j.positive || '', negative: j.negative || ''}});
     if (j.ipa) Object.assign(c, {reference: j.ipa.ref, referenceOn: true, referenceStrength: j.ipa.strength, referenceCutout: j.ipa.cutout});
     if (j.repaint) Object.assign(c, {reference: j.repaint.ref, faceFix: true, faceStrength: j.repaint.denoise});

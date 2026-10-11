@@ -97,7 +97,7 @@ class Drafts:
         doc['draft'] = read_json(self.folder(scene_id) / 'draft.json')
         if doc['draft']:
             doc['draft'].pop('sources', None)
-        doc['images'] = [dict(id=key, file='', url=value['url'], start=value['url'], available=True)
+        doc['images'] = [dict(id=key, file='', url=value['url'], start=value['url'], available=True, savedPick=copy.deepcopy(value))
                          for key, value in doc['metadata'].get('images', {}).items()]
         # Original jobs stay server-owned; picture-source exposes the selected shot only.
         doc.pop('sources', None)
@@ -121,6 +121,13 @@ class Drafts:
         job = source['job']
         return {k: v for k, v in dict(slot=key, id=job['id'], n=job.get('n'), url=picture_url(scene_id, source['asset']),
                                     seed=job.get('seed'), positive=job.get('positive'), applied=True).items() if v is not None}
+
+    def preserved_job(self, scene_id, source):
+        job = copy.deepcopy(source['job'])
+        job.update(url=picture_url(scene_id, source['asset']), status='done', deleted=False)
+        # Only the selected result was copied, not intermediate face-fix images.
+        job['raw_file'] = None
+        return job
 
     def create(self, body):
         image_id = body.get('imageId')
@@ -209,7 +216,7 @@ class Drafts:
             key = body.get('slot', '')
             picked = current['metadata']['images'].get(key, {})
             source = current['sources'].get(picked.get('id'))
-            return {'job': source['job'] if source else None, 'how': 'the picture saved with this scene draft',
+            return {'job': self.preserved_job(scene_id, source) if source else None, 'how': 'the picture saved with this scene draft',
                     'start': {'image': picture_url(scene_id, source['asset'])} if source else None, 'copies': []}
         if action not in ('save', 'draft', 'validate'):
             raise ValueError('Unknown scene draft operation')

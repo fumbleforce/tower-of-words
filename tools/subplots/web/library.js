@@ -4,7 +4,7 @@
 // the image gen dashboard's own (tools/imagegen/web/gallery.js); the writes go to its API through the editor's proxy.
 const {document, navigator} = globalThis;
 import {esc} from './common.js';
-import {rateFields, lightboxKey, lightboxHtml, compareHtml, thumbUrl, fullUrl, isAgent} from '../../imagegen/web/gallery.js';
+import {rateFields, lightboxKey, lightboxHtml, compareHtml, thumbUrl, fullUrl, isAgent, draftPictureUrl} from '../../imagegen/web/gallery.js';
 
 const BASE = '/api/subplots/image';
 
@@ -75,8 +75,8 @@ export function createLibrary(hooks) {
     return ['scene', 'character'].filter(kind => hooks.actions?.[kind]).map(kind => `<button type="button" ${attrs(kind)}>Create ${kind}</button>`).join('');
   }
   function cardHtml(j, i) {
-    const done = j.status === 'done' && (j.thumb || j.file || isAgent(j));
-    const canUse = !!j.file || !!hooks.actions && isAgent(j);
+    const done = j.status === 'done' && (j.thumb || j.file || draftPictureUrl(j.url) || isAgent(j));
+    const canUse = !!j.file || !!draftPictureUrl(j.url) || !!hooks.actions && isAgent(j);
     const marks = `${j.fav ? '♥' : j.star ? '★' : ''}${j.reject ? ' ✕' : ''}`;
     const tools = done ? `<div class="lib-tools">
         <button type="button" data-lib="star" data-i="${i}" aria-pressed="${!!j.star}" title="Star (s)">★</button>
@@ -107,7 +107,7 @@ export function createLibrary(hooks) {
   }
 
   function openLightbox(id, list = lb.all || []) {
-    lb.list = list.filter(t => t.status === 'done' && !t.deleted && (t.file || t.thumb || isAgent(t)));
+    lb.list = list.filter(t => t.status === 'done' && !t.deleted && (t.file || t.thumb || draftPictureUrl(t.url) || isAgent(t)));
     lb.i = Math.max(0, lb.list.findIndex(t => t.id === id)); lb.raw = false;
     overlay('libLightbox').hidden = false; renderLightbox();
   }

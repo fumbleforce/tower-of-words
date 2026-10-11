@@ -4,9 +4,16 @@
 import { esc, wordDiff } from './blocks.js';
 
 export const isAgent = t => t?.source === 'agent';
+// Only this local, content-addressed endpoint may override a render's service URL.
+export function draftPictureUrl(value) {
+  if (typeof value !== 'string' || !value.startsWith('/api/subplots/draft-picture?') || value.includes('#')) return '';
+  const query = new URLSearchParams(value.slice(value.indexOf('?') + 1));
+  return [...query].length === 2 && /^studio:(public|private):[a-f0-9]{32}$/.test(query.get('id') || '')
+    && /^[a-f0-9]{64}$/.test(query.get('asset') || '') ? value : '';
+}
 // agent renders from old rounds have no copy in the dashboard, only their original
-export const fullUrl = (t, base = '') => t.file ? `${base}/out/${t.file}` : `${base}/agentsrc/${encodeURIComponent(t.id)}`;
-export const thumbUrl = (t, base = '') => t.thumb ? `${base}/thumb/${t.thumb}` : t.file ? `${base}/out/${t.file}` : '';
+export const fullUrl = (t, base = '') => draftPictureUrl(t.url) || (t.file ? `${base}/out/${t.file}` : `${base}/agentsrc/${encodeURIComponent(t.id)}`);
+export const thumbUrl = (t, base = '') => draftPictureUrl(t.url) || (t.thumb ? `${base}/thumb/${t.thumb}` : t.file ? `${base}/out/${t.file}` : '');
 
 // What a star, favourite or reject sets on a picture (a favourite is also starred; a reject clears both).
 export function rateFields(action, t, reason = '') {
