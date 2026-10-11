@@ -8,6 +8,7 @@ import { choiceKey } from './paths.js';
 import { personName, person, nodeTitle } from './names.js';
 import { conditionEditor, selectHTML } from './conditions.js';
 import { setSpeaker } from './timeline.js';
+import { renderPlacement } from './placement.js';
 
 function labelled(host, label, control, hint = '') {
   const el = document.createElement('label');
@@ -152,54 +153,7 @@ export function renderSceneTab() {
   const place = document.createElement('section');
   place.innerHTML = '<h3>When it plays</h3>';
   tab.append(place);
-  if (scene.placement) {
-    const p = scene.placement;
-    if (p.place !== null) labelled(place, 'Place', picker(S.authoring.places.map(x => ({ value: x.id, label: x.name })), p.place, v => edit(s => { s.placement.place = v; })));
-    if (p.day !== null) labelled(place, 'Day', picker([1, 2, 3, 4, 5].map(d => ({ value: d, label: `Day ${d}` })), p.day, v => edit(s => { s.placement.day = Number(v); })));
-    if (p.condition !== null) {
-      const box = document.createElement('div');
-      box.className = 'cond-box';
-      box.innerHTML = '<span class="field-label">Shown when</span>';
-      const inner = document.createElement('div');
-      box.append(inner);
-      conditionEditor(inner, p.condition, S.authoring.variables, v => edit(s => { s.placement.condition = v; }));
-      place.append(box);
-    }
-    if (Object.values(p).every(v => v === null)) place.insertAdjacentHTML('beforeend', '<p class="quiet">This part plays inside its scene, in the order the scene sets.</p>');
-  } else {
-    scene.entries.forEach((entry, i) => {
-      const box = document.createElement('fieldset');
-      box.className = 'option-box';
-      box.innerHTML = `<legend>Starts when</legend>`;
-      labelled(box, 'The player', picker(S.authoring.events.map(e => ({ value: e.id, label: e.label })), entry.event, v => edit(s => { s.entries[i].event = v; }), 'Choose what the player does'));
-      const inner = document.createElement('div');
-      conditionEditor(inner, entry.condition, S.authoring.variables, v => edit(s => { s.entries[i].condition = v; }));
-      const cond = document.createElement('div');
-      cond.className = 'cond-box';
-      cond.innerHTML = '<span class="field-label">And</span>';
-      cond.append(inner);
-      box.append(cond);
-      const once = document.createElement('label');
-      once.className = 'check';
-      once.innerHTML = `<input type="checkbox" ${entry.once ? 'checked' : ''}> Only the first time`;
-      once.querySelector('input').onchange = e => edit(s => { s.entries[i].once = e.target.checked; });
-      box.append(once);
-      const rm = document.createElement('button');
-      rm.className = 'ghost small danger';
-      rm.textContent = 'Remove';
-      rm.onclick = () => edit(s => s.entries.splice(i, 1));
-      box.append(rm);
-      place.append(box);
-    });
-    if (!scene.entries.length) place.insertAdjacentHTML('beforeend', '<p class="quiet">Nothing starts this part directly. Other parts lead here through a choice or a jump.</p>');
-    if (scene.routesEditable) {
-      const add = document.createElement('button');
-      add.className = 'ghost small';
-      add.textContent = 'Add a way in';
-      add.onclick = () => edit(s => s.entries.push({ event: '', condition: '', once: false }));
-      place.append(add);
-    }
-  }
+  renderPlacement(place);
 
   const notes = document.createElement('section');
   notes.innerHTML = '<h3>Notes</h3>';
