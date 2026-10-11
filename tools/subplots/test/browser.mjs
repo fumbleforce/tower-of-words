@@ -49,7 +49,7 @@ const authoring = {
     { id: 'emi', name: 'Emi', color: '#e0906f' },
   ],
   places: [{ id: 'office', name: 'IT support, B2' }],
-  variables: [{ id: 'day', label: 'Story day', type: 'number' }],
+  variables: [{ id: 'day', label: 'Story day', type: 'number' }, { id: 'met_mio', label: 'Has met Mio', type: 'boolean', group: 'People' }],
   events: [{ id: 'talk:mio', label: 'Talk to Mio' }],
   deliveries: [{ id: '', label: 'Natural' }, { id: 'warm', label: 'Warm' }],
   words: [],
@@ -274,6 +274,24 @@ try {
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
       assert.match(fs.readFileSync(file, 'utf8'), /ten minutes/);
 
+      // when it plays: one sentence, its parts changed through pickers, saved as a small edit of the way in
+      const sentence = page.locator('.way .sentence').first();
+      assert.equal(await sentence.innerText(), 'Plays when you talk to Mio at IT support, B2, from day 2 on, at any time of day, every time.');
+      assert.doesNotMatch(await page.locator('#tabScene').innerText(), /day >=|&&|period ==/);
+      await sentence.locator('.chip[data-chip=time]').click();
+      await page.locator('.pop label', { hasText: 'Lunch' }).locator('input').check();
+      await page.locator('.pop [data-ok]').click();
+      await sentence.locator('.chip[data-chip=once]').click();
+      await page.locator('.pop .menu button', { hasText: 'Only the first time' }).click();
+      await page.locator('.way-tools button', { hasText: 'Add a condition' }).click();
+      await page.locator('.pop-search').fill('mio');
+      await page.locator('.pop .menu button', { hasText: 'Has met Mio' }).click();
+      await page.locator('.pop .menu button', { hasText: 'if you have met Mio' }).click();
+      assert.equal(await page.locator('.way .sentence').first().innerText(), 'Plays when you talk to Mio at IT support, B2, from day 2 on, at lunch, only the first time, if you have met Mio.');
+      await page.locator('#save').click();
+      await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
+      assert.match(fs.readFileSync(file, 'utf8'), /on: \{ 'talk:mio': \{ if: "day >= 2 && period == 'lunch' && met_mio", node: 'welcome', once: true \} \},/);
+
       // a comment on a beat: the beat shows it, it stays with the beat when it moves, Claude answers from the command line
       const asked = top.nth(2);
       await asked.hover();
@@ -462,7 +480,7 @@ try {
       assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth > globalThis.innerWidth), false);
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(`PASS ${width}: open, labels, list stays put, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), story-check findings on the beat, a new picture beat, comments on beats (public and private, command line), scene status`);
+      console.log(`PASS ${width}: open, the story map outline, labels, list stays put, when it plays as one sentence with pickers, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), story-check findings on the beat, a new picture beat, comments on beats (public and private, command line), scene status`);
     }
   }, { timeoutMs: 150000, gpuWaitMs: 60000 });
 } finally {

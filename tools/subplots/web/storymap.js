@@ -135,6 +135,9 @@ export function areasOf(items, day) {
   return [...areas.values()].sort((a, b) => rank(a) - rank(b) || a.title.localeCompare(b.title));
 }
 
+// The map's row for a public scene: its day, place, file, ways in and routes out.
+export const mapScene = id => S.map?.scenes?.find(s => s.id === id) || null;
+
 // Which day and area a scene id sits in (the open scene's place in the list).
 export function locate(items, id) {
   return items.find(i => i.row.id === id || i.parts.some(p => p.id === id)) || null;
