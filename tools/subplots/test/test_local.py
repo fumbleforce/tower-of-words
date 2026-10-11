@@ -101,23 +101,71 @@ class LocalRecipes(unittest.TestCase):
         self.assertEqual(len(result['images']),1)
         self.assertIn('editor-',result['images'][0]['file'])
         self.assertIn("shot(\"encounters/editor-",self.source.read_text())
-        self.assertEqual(result['metadata']['images']['image:0']['slot'],'image:0')
+        # the beat keeps the id it was composed under
+        self.assertEqual(result['images'][0]['id'],'new:x')
+        self.assertEqual(result['metadata']['images']['new:x']['slot'],'new:x')
         self.assertNotIn('new:gone',result['metadata']['images'])
 
-    def test_reorder_remaps_composition_and_pending_image_to_the_same_shot(self):
+    def test_reorder_keeps_composition_and_pending_image_on_the_same_shot(self):
         self.media_fixture()
         self.source.write_text("const scene={id:'hello',nodes:{start:[shot('encounters/a.webp'),shot('encounters/b.webp')]}};const SCENES=[scene];")
-        data=self.call('read')
-        data['metadata']['compositions']={'image:0':{'pose':'Seated','imageSlot':'image:0'},'image:1':{'pose':'Walking','imageSlot':'image:1'}}
-        data['metadata']['images']={'image:0':{'file':'selected.png','slot':'image:0'}}
+        data=self.call('read');a,b=[i['id'] for i in data['images']]
+        data['metadata']['compositions']={a:{'pose':'Seated','imageSlot':a},b:{'pose':'Walking','imageSlot':b}}
+        data['metadata']['images']={a:{'file':'selected.png','slot':a}}
         data['steps'].reverse()
         result=self.call('save',**{k:v for k,v in data.items() if k!='id'})
         self.assertEqual(result['images'][0]['file'],'encounters/b.webp')
         self.assertIn('editor-',result['images'][1]['file'])
-        self.assertEqual(result['metadata']['compositions']['image:1']['pose'],'Seated')
-        self.assertEqual(result['metadata']['compositions']['image:0']['pose'],'Walking')
-        self.assertTrue(result['metadata']['images']['image:1']['applied'])
-        self.assertEqual(result['metadata']['images']['image:1']['slot'],'image:1')
+        self.assertEqual([i['id'] for i in result['images']],[b,a])
+        self.assertEqual(result['metadata']['compositions'][a]['pose'],'Seated')
+        self.assertEqual(result['metadata']['compositions'][b]['pose'],'Walking')
+        self.assertTrue(result['metadata']['images'][a]['applied'])
+        self.assertEqual(result['metadata']['images'][a]['slot'],a)
+
+    def save(self,data):
+        return self.call('save',**{k:v for k,v in data.items() if k!='id'})
+    def test_shots_keep_their_ids_through_inserted_moved_and_deleted_beats(self):
+        # renders are matched to a shot by the id they were made under (compose.imageSlot); it must not move to another shot
+        self.media_fixture()
+        self.source.write_text("const shot=(src,o={})=>({t:'shot',src,o});const n=x=>({t:'n',x});"
+            "const scene={id:'hello',nodes:{start:[n('One'),shot('encounters/a.webp'),n('Two'),shot('encounters/b.webp'),shot('encounters/c.webp')]}};const SCENES=[scene];")
+        data=self.call('read')
+        made={i['file']:i['id'] for i in data['images']}  # what the history recorded for each shot
+        ids=lambda r:{i['file']:i['id'] for i in r['images']}
+        # a picture beat inserted before the first shot, with a render picked for it
+        data['steps'].insert(1,{'shot':{},'newPicture':True,'imageSlot':'new:first'})
+        data['metadata']['images']={'new:first':{'file':'selected.png','slot':'new:first'}}
+        data=self.save(data)
+        self.assertEqual({f:i for f,i in ids(data).items() if not f.startswith('encounters/editor-')},made)
+        self.assertEqual(data['images'][0]['id'],'new:first')
+        # moved: the last shot goes first
+        data['steps'].insert(0,data['steps'].pop());data=self.save(data)
+        self.assertEqual({f:i for f,i in ids(data).items() if not f.startswith('encounters/editor-')},made)
+        self.assertEqual(data['images'][0]['file'],'encounters/c.webp')
+        # deleted: a line and the shot of a.webp
+        data['steps']=[s for s in data['steps'] if not (isinstance(s,dict) and (s.get('narration')=='One' or s.get('imageSlot')==made['encounters/a.webp']))]
+        data=self.save(data)
+        self.assertEqual(ids(data),{'encounters/c.webp':made['encounters/c.webp'],'encounters/b.webp':made['encounters/b.webp'],data['images'][1]['file']:'new:first'})
+        # a new picture picked for b.webp's shot: the shot keeps its id, through the next read too
+        b=made['encounters/b.webp'];(self.root/'renders/other.png').write_bytes((self.root/'renders/selected.png').read_bytes()+b'x')
+        data['metadata']['images'][b]={'file':'other.png','slot':b};data=self.save(data)
+        self.assertEqual([i['id'] for i in self.call('read')['images']],[made['encounters/c.webp'],'new:first',b])
+        self.assertNotIn('encounters/b.webp',self.source.read_text())
+
+    def test_place_based_ids_from_before_become_aliases_of_the_shot(self):
+        self.media_fixture()
+        self.source.write_text("const scene={id:'hello',nodes:{start:[shot('encounters/a.webp'),n('Two'),shot('encounters/b.webp')]}};const SCENES=[scene];")
+        folder=self.root/'state'/local.hashlib.sha256(self.id.encode()).hexdigest();folder.mkdir(parents=True)
+        (folder/'metadata.json').write_text(json.dumps({'compositions':{'image:1':{'pose':'Walking','imageSlot':'image:1'}}}))
+        (folder/'draft.json').write_text(json.dumps({'steps':[{'imageSlot':'image:0'}],'metadata':{'images':{'image:1':{'slot':'image:1'}}}}))
+        data=self.call('read');a,b=[i['id'] for i in data['images']]
+        self.assertEqual([i['aliases'] for i in data['images']],[['image:0'],['image:1']])
+        self.assertEqual(data['metadata']['compositions'],{b:{'pose':'Walking','imageSlot':b}})
+        self.assertEqual(data['draft'],{'steps':[{'imageSlot':a}],'metadata':{'images':{b:{'slot':b}}}})
+        # a beat inserted before both: the old ids stay with the shots they named
+        data['steps'].insert(0,{'narration':'Before'});data=self.save(data)
+        self.assertEqual([(i['id'],i['aliases']) for i in data['images']],[(a,['image:0']),(b,['image:1'])])
+        self.assertEqual(data['metadata']['compositions'][b]['pose'],'Walking')
 
     def test_removed_shot_drops_legacy_selected_image(self):
         self.media_fixture()

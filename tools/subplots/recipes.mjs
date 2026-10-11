@@ -205,7 +205,11 @@ function encodeChanged(step,prior,node,source,helpers){
   }
   return encode(step,helpers);
 }
-function imageSlots(source, sequence, values=recipeValues(source)) {
+// The pictures of a sequence, one slot per shot. A shot is known by its picture, not its place, so its id survives
+// beats being added, moved and deleted around it: `pic:<PICS key>` or `file:<file>`, with #2, #3 for a picture shown
+// more than once. `ids` ({that picture: id}, kept by the provider) holds the shots whose picture has changed since
+// their id was given, so a shot keeps its id (and its versions) when a new picture is picked for it.
+function imageSlots(source, sequence, values=recipeValues(source), ids={}) {
   const {resolve,binding}=values,pics=binding('PICS'),slots=new Map(),locations=new Map();
   function locate(node,path='sequence'){
     if(!node?.type)return;locations.set(node.range[0],path);
@@ -230,10 +234,15 @@ function imageSlots(source, sequence, values=recipeValues(source)) {
     if(typeof file!=='string'||!file.match(/\.(webp|png|jpe?g)$/i))return;
     const group=ancestors.find(a=>a.type==='SpreadElement'&&a.argument?.type==='ArrayExpression'&&source.slice(a.range[0],a.argument.range[0]+24).includes('/* subplot-gap */'));
     const parent=ancestors.at(-1),node=group|| (gap?(parent?.type==='SpreadElement'?parent:n):n.arguments[0]);
-    const key=node.range[0],existing=slots.get(key),id=existing?.id||`image:${slots.size}`;
-    slots.set(key,{id,label:value,file,location:group?`${locations.get(group.range[0])}.argument`:locations.get(n.range[0]),range:group?n.arguments[0].range:node.range,...(group?{pairedRanges:[...(existing?.pairedRanges||[]),n.arguments[0].range]}:{}),...(p?{table:{keys:pics.properties.map(name),trailingComma:source.slice(pics.properties.at(-1).range[1],pics.range[1]-1).replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,'').includes(','),range:pics.range,entry:slice(source,property(pics,value).value),fileRange:p.value.range.map(v=>v-property(pics,value).value.range[0])}}:{}),calls:[...(existing?.calls||[]),n.range[0]],
+    const key=node.range[0],existing=slots.get(key);
+    slots.set(key,{label:value,file,location:group?`${locations.get(group.range[0])}.argument`:locations.get(n.range[0]),range:group?n.arguments[0].range:node.range,...(group?{pairedRanges:[...(existing?.pairedRanges||[]),n.arguments[0].range]}:{}),...(p?{table:{keys:pics.properties.map(name),trailingComma:source.slice(pics.properties.at(-1).range[1],pics.range[1]-1).replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,'').includes(','),range:pics.range,entry:slice(source,property(pics,value).value),fileRange:p.value.range.map(v=>v-property(pics,value).value.range[0])}}:{}),calls:[...(existing?.calls||[]),n.range[0]],
       ...(gap?{gap:true,options:resolve(n.arguments[1])}:{}),url:'/island/private/game/'+file.replace(/^.*?(encounters\/)/,'$1')});
-  });return [...slots.values()];
+  });
+  const list=[...slots.values()],seen=new Map(),taken=new Set();
+  for(const slot of list){const base=slot.table?`pic:${slot.label}`:`file:${slot.file}`,n=(seen.get(base)||0)+1;seen.set(base,n);slot.picture=n>1?`${base}#${n}`:base;}
+  for(const slot of list){const id=ids[slot.picture];if(typeof id==='string'&&!taken.has(id)){slot.id=id;taken.add(id);}}
+  for(const slot of list){if(slot.id)continue;let id=slot.picture,n=2;while(taken.has(id))id=`${slot.picture}~${n++}`;slot.id=id;taken.add(id);}
+  return list;
 }
 function imageEdit(slot,file){
   if(slot.pairedRanges)return slot.pairedRanges.map(range=>({range,value:file}));
@@ -306,8 +315,9 @@ export function recipe(source,config,request){
   if(request.action==='catalog')return {scenes:rows.map(r=>({id:r.id,provider:'local',title:`${r.sceneId.replaceAll('_',' ')} · ${r.node}`,node:r.node,group:config.label,where:where(config),scene:r.sceneId,count:r.sequence.value.elements?.length??null})),errors:[]};
   const row=rows.find(r=>r.id===request.id);if(!row)throw Error('Scene not found');
   const {scene,sequence}=row;
-  const values=recipeValues(source), images=imageSlots(source,sequence.value,values),context={...values,images};
-  if(request.action==='read')return {id:row.id,provider:'local',title:`${row.sceneId.replaceAll('_',' ')} · ${row.node}`,node:row.node,group:config.label,where:where(config),scene:row.sceneId,revision:digest(source),steps:decode(sequence.value,source,context),raw:slice(source,sequence.value),entries:[],routesEditable:false,metadata:{},placement:{place:literal(property(scene,'place')?.value)??null,day:literal(property(scene,'day')?.value)??null,condition:literal(property(scene,'show')?.value)??null},previewUrl:`/game3d/index.html?scene=${encodeURIComponent(row.sceneId)}`,recipe:true,capabilities:{camera:!!values.binding('raw'),picture:pictureHelper(values)},images:images.map(({range,calls,gap,options,table,pairedRanges,...image})=>image)};
+  const known=request.slotIds&&typeof request.slotIds==='object'?request.slotIds:{};
+  const values=recipeValues(source), images=imageSlots(source,sequence.value,values,known),context={...values,images};
+  if(request.action==='read')return {id:row.id,provider:'local',title:`${row.sceneId.replaceAll('_',' ')} · ${row.node}`,node:row.node,group:config.label,where:where(config),scene:row.sceneId,revision:digest(source),steps:decode(sequence.value,source,context),raw:slice(source,sequence.value),entries:[],routesEditable:false,metadata:{},placement:{place:literal(property(scene,'place')?.value)??null,day:literal(property(scene,'day')?.value)??null,condition:literal(property(scene,'show')?.value)??null},previewUrl:`/game3d/index.html?scene=${encodeURIComponent(row.sceneId)}`,recipe:true,capabilities:{camera:!!values.binding('raw'),picture:pictureHelper(values)},images:images.map(({range,calls,gap,options,table,pairedRanges,picture,...image})=>image)};
   if(request.action==='prepare'){
     if(request.revision!==digest(source))throw Error('CONFLICT: The recipe changed. Reload this scene.');
     const helpers=new Set(parseSource(source).body.flatMap(n=>(n.declaration||n).declarations||[]).map(d=>d.id.name));
@@ -351,8 +361,13 @@ export function recipe(source,config,request){
     parseSource(changed);
     const finalScene=model(changed).find(s=>literal(property(s,'id')?.value)===row.sceneId);
     const finalSequence=property(property(finalScene,'nodes')?.value,row.node)||property(finalScene,row.node);
-    const imageRemap=request.steps?Object.fromEntries([...slotsByAuthoredStep(request.steps,finalSequence.value,imageSlots(changed,finalSequence.value))].map(([old,slot])=>[old,slot.id])):{};
-    return {source,changed,revision:digest(changed),imageRemap};
+    // Each shot of the saved sequence keeps the id of the beat it came from, wherever it moved and whatever picture it
+    // now shows; `slotIds` is what the provider keeps for the next read, `shots` every id the sequence still has.
+    const finalSlots=imageSlots(changed,finalSequence.value,recipeValues(changed),known);
+    const owners=new Map(request.steps?[...slotsByAuthoredStep(request.steps,finalSequence.value,finalSlots)].map(([id,slot])=>[slot,id]):[]);
+    const slotIds={},shots=[];
+    for(const slot of finalSlots){const id=owners.get(slot)??slot.id;shots.push(id);if(id!==slot.picture)slotIds[slot.picture]=id;}
+    return {source,changed,revision:digest(changed),slotIds,shots};
   }
   throw Error('Unsupported recipe operation');
 }

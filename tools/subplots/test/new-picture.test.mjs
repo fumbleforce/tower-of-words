@@ -21,9 +21,12 @@ test('a new picture beat in a recipe with a picture table', () => {
   const out = recipe(table, config, { ...r, action: 'prepare' });
   assert.match(out.changed, /pic\("first\.2"\)/);
   assert.match(out.changed, /"first\.2": \{"file":"encounters\/editor-1\.webp","cap":"She looks up\.","level":"soft","who":"A colleague"\}/);
-  const next = recipe(out.changed, config, { action: 'read', id });
+  // the beat keeps the id it was composed under, so the renders made for it stay its versions
+  assert.deepEqual(out.shots, ['pic:first.1', 'new:a']);
+  assert.deepEqual(out.slotIds, { 'pic:first.2': 'new:a' });
+  const next = recipe(out.changed, config, { action: 'read', id, slotIds: out.slotIds });
   assert.deepEqual(next.images.map(i => i.file), ['encounters/room.webp', 'encounters/editor-1.webp']);
-  assert.equal(out.imageRemap['new:a'], 'image:1');
+  assert.deepEqual(next.images.map(i => i.id), ['pic:first.1', 'new:a']);
 });
 
 test('a new picture beat in a recipe with inline shots', () => {
