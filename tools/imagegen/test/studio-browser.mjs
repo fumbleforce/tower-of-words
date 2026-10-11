@@ -128,7 +128,6 @@ await withBrowserJob('codex-image-studio', async browser => {
   await page.locator('[data-compose=cfg]').fill('7');
   await page.locator('[data-lib=use]').first().click();
   assert.match(await page.locator('#studioSelection').textContent(), /picture #6/);
-  assert.match(await page.locator('#studioSelection').textContent(), /Steps: 30 · Prompt strength \(CFG\): 5/);
   await page.locator('#studioSelection img').evaluate(img => img.decode());
   await page.screenshot({path: path.join(output, 'selection.png')});
   await page.locator('[data-create-scene]').click();
@@ -165,6 +164,8 @@ await withBrowserJob('codex-image-studio', async browser => {
   await page.locator('[data-lib=open]').first().click();
   await page.locator('#libLightbox [data-a=scene]').waitFor();
   assert.match(await page.locator('#libLightbox .kv').textContent(), /Steps30Prompt strength \(CFG\)5/);
+  await page.locator('#libLightbox .pic img').evaluate(img => img.decode());
+  await page.screenshot({path: path.join(output, 'preview-params.png')});
   assert.equal(await page.locator('#libLightbox [data-a=sameseed]').textContent(), 'Load prompt and settings');
   await page.keyboard.press('Escape');
   await page.locator('[data-lib=use]').last().click();
