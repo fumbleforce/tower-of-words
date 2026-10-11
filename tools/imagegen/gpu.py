@@ -23,6 +23,9 @@ COMFY_PY = os.path.expanduser('~/ai/sd/venv/bin/python')
 COMFY_LOG = os.path.expanduser('~/ai/comfy.log')
 COMFY = 'http://127.0.0.1:8188'
 IDLE_LIMIT = 20 * 60
+# VRAM ComfyUI leaves alone, in GB, so the browser (the editor, the game, headless checks) keeps headroom on the 10 GB
+# card while a render runs. ComfyUI's own default is 0.4. IMAGEGEN_RESERVE_VRAM overrides it.
+RESERVE_VRAM = os.environ.get('IMAGEGEN_RESERVE_VRAM') or '2'
 
 
 def comfy_up(timeout=1.5):
@@ -218,7 +221,7 @@ class Session:
             return
         logf = open(COMFY_LOG, 'ab')
         logf.write(f'\n--- started by {NAME} {time.ctime()} ---\n'.encode())
-        p = subprocess.Popen([COMFY_PY, 'main.py', '--listen', '127.0.0.1', '--port', '8188', '--disable-auto-launch'],
+        p = subprocess.Popen([COMFY_PY, 'main.py', '--listen', '127.0.0.1', '--port', '8188', '--disable-auto-launch', '--reserve-vram', RESERVE_VRAM],
                              cwd=COMFY_DIR, stdout=logf, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, start_new_session=True)
         self.proc = p
         self._set(pid=p.pid, by_us=True)
