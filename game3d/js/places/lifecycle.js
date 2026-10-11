@@ -129,7 +129,7 @@ export function createPlaceLifecycle(
         // what will be shown, not what entering would rebuild
         const [w, h] = size();
         place.layout?.(w / h);
-        if (BATCHED.has(name)) optimizePlace(place, { game, ...batchSizes(!!PINS[name]?.in) });
+        if (BATCHED.has(name)) optimizePlace(place, { game, ...batchSizes(!!PINS[name]?.in, name) });
         installCreatures(game, place, name); // birds and small animals outdoors (creatures/index.js), after the batching
         await nextFrame(); // the pass's first scan and the finds' floor raycasts each take a frame's time on a phone
         await sliced(findSpotSteps(game, place)); // after the draw-call pass, so each print stays its own mesh to hide

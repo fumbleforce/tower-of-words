@@ -51,12 +51,19 @@ export const phoneLighter = on;
 // On the phone the shadow-only batches also draw their casters snapped to a 2 cm grid (perf/shadow-proxy.js
 // snappedShadow): its shadow map's texels are bigger than that, so what collapses (bevels, small rounded corners, thin
 // rods) never showed in a shadow (#374: the forecourt's shadow-only batches 78k to 60k triangles a frame).
-export const batchSizes = (room = false) =>
+//
+// The east coast gets coarser batches on the desktop too (#456): its dorm row, planting and lawns are many trees and
+// hedges of one material each a few metres apart, so the 3 m cut left each on its own (the third-person camera facing
+// the dorms drew 505 a frame). 10 m and 16,000 triangles: 505 to about 443 draws, the same pictures.
+const COARSE = new Set(['east_coast']);
+export const batchSizes = (room = false, place = '') =>
   on()
     ? { span: 6, tris: 12000, cast: { span: Infinity, tris: 8000 }, shadowCell: 0.02 }
     : room
       ? { span: 6, tris: 12000, cast: { span: Infinity, tris: 8000 } }
-      : {};
+      : COARSE.has(place)
+        ? { span: 10, tris: 16000 }
+        : {};
 
 // Big merged meshes cut finer on the phone (perf/tile-geometry.js): its overview looks down at a small part of an
 // outdoor place, so what casts a shadow is cut in 8 m squares (sets over 2,000 triangles) and what doesn't in pieces
