@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {parseSource,staticValue,visitSource} from '../lib/source-data.mjs';
 import {recipeValues} from './recipe-values.mjs';
+import {quote,alignSteps,writeList} from './encode.mjs';
 import path from 'node:path';
 // The recipe file, relative to the project, so the editor can say where a scene lives.
 const where=config=>config.file?path.relative(process.cwd(),config.file).split(path.sep).join('/'):'';
@@ -54,12 +55,21 @@ function helper(node,source,context){
   return {$expression:slice(source,node),summary:'Scene action'};
 }
 function decode(array,source,context){return array?.type==='ArrayExpression'?array.elements.map(n=>helper(n,source,context)):null;}
+// A new value for a literal in the style the source wrote it: single quotes, a template, or JSON.
+function styled(original,value){
+  if(typeof value!=='string')return JSON.stringify(value);
+  if(original.startsWith("'"))return quote(value);
+  if(original.startsWith('`')&&!/[`\\\n]|\$\{/.test(value))return '`'+value+'`';
+  return JSON.stringify(value);
+}
+// Edit one argument only when its value changed, so an unchanged call keeps its exact text.
+function change(node,value,edits){if(node&&JSON.stringify(literal(node))!==JSON.stringify(value))edits.push({range:node.range,value});}
 function replaceArguments(raw,edits){
   let s=raw;
   for(const e of edits.sort((a,b)=>b.range[0]-a.range[0])){
     const options=e.options?Object.entries(e.options).map(([key,value])=>`${key}: ${JSON.stringify(value)}`).join(', '):null;
     const appended=e.arguments?Array.from({length:Math.max(...Object.keys(e.arguments).map(Number))-e.start+1},(_,i)=>Object.hasOwn(e.arguments,i+e.start)?JSON.stringify(e.arguments[i+e.start]):'undefined').join(', '):null;
-    const replacement=appended!==null?', '+appended:options!==null?e.prefix+options+e.suffix:e.raw??JSON.stringify(e.value);
+    const replacement=appended!==null?', '+appended:options!==null?e.prefix+options+e.suffix:e.raw??styled(s.slice(e.range[0],e.range[1]),e.value);
     s=s.slice(0,e.range[0])+replacement+s.slice(e.range[1]);
   }
   return s;
@@ -72,7 +82,7 @@ function appendArgument(call,index,value,edits){
 }
 function patchOption(raw,call,index,key,value,edits){
   const options=call.arguments[index], existing=property(options,key);
-  if(existing){edits.push({range:existing.value.range,value});return;}
+  if(existing){change(existing.value,value,edits);return;}
   if(options&&options.type!=='ObjectExpression')throw Error('This staging value is inherited and cannot be replaced here.');
   if(!options){
     const insertion=edits.find(e=>e.arguments&&e.range[0]===call.range[1]-1);
@@ -88,7 +98,7 @@ function patchOption(raw,call,index,key,value,edits){
 }
 function encodeShot(raw,call,step){
   const fn=call.callee.name, edits=[],original=step.$staging||{};
-  if(typeof step.narration==='string'&&typeof literal(call.arguments[1])==='string')edits.push({range:call.arguments[1].range,value:step.narration});
+  if(typeof step.narration==='string'&&typeof literal(call.arguments[1])==='string')change(call.arguments[1],step.narration,edits);
   // Unchanged computed values remain authored references such as GW.
   for(const key of shotFields){
     if(!Object.hasOwn(step.shot||{},key)||JSON.stringify(step.shot[key])===JSON.stringify(original[key]))continue;
@@ -110,24 +120,24 @@ function encode(step, helpers=new Set()){
     if(call?.type==='ArrayExpression'&&step.sequence)return `...[${raw.includes('/* subplot-gap */')?'/* subplot-gap */':''}${step.sequence.map(child).join(',\n')}]`;
     if(call?.type!=='CallExpression')throw Error('Invalid recipe step');
     const args=call.arguments,fn=call.callee.name;
-    if(fn==='choice')return replaceArguments(raw,[{range:args[0].range,value:step.choice}]);
+    if(fn==='choice'){const edits=[];change(args[0],step.choice,edits);return replaceArguments(raw,edits);}
     if(fn==='seq')return raw.slice(0,args[1].range[0])+`[${step.sequence.map(child).join(',\n')}]`+raw.slice(args[1].range[1]);
     if(['iff','cond'].includes(fn))return `${fn}(${JSON.stringify(step.if)}, [${step.then.map(child).join(',\n')}], [${(step.else||[]).map(child).join(',\n')}])`;
     if(['pic','picWhenReady','shot','gap'].includes(fn))return encodeShot(raw,call,step);
     if(['hide','bye'].includes(fn))return raw;
-    if(fn==='raw')return replaceArguments(raw,[{range:args[0].range,value:step.details}]);
-    if(fn==='go'||fn==='end')return replaceArguments(raw,[{range:args[0].range,value:fn==='go'?step.destination:step.flag}]);
-    if(fn==='fin')return `fin(${JSON.stringify(step.keep)}, ${JSON.stringify(step.complete)})`;
-    if(fn==='n')return replaceArguments(raw,[{range:args[0].range,value:step.narration??''}]);
+    if(fn==='raw'){const edits=[];change(args[0],step.details,edits);return replaceArguments(raw,edits);}
+    if(fn==='go'||fn==='end'){const edits=[];change(args[0],fn==='go'?step.destination:step.flag,edits);return replaceArguments(raw,edits);}
+    if(fn==='fin'){const edits=[];change(args[0],step.keep,edits);if(args[1])change(args[1],step.complete,edits);else if(step.complete!==step.keep)appendArgument(call,1,step.complete,edits);return replaceArguments(raw,edits);}
+    if(fn==='n'){const edits=[];change(args[0],step.narration??'',edits);return replaceArguments(raw,edits);}
     if(dialogueArgs[fn]||fn==='duo'){
       const inner=fn==='duo'?args[0]:call,positions=dialogueArgs[inner.callee?.name];
       if(!positions)throw Error('Unsupported dialogue helper');
       const originalText=literal(fn==='duo'?args[1]:args[positions.text]);
       const isTranslated=['cw','sw','gs'].includes(fn), mainLanguage=fn==='duo'?'en':isTranslated||japanese(originalText)?'ja':'en';
       const text=step[mainLanguage]!==undefined&&step[mainLanguage]!==originalText?step[mainLanguage]:step.text;
-      const edits=[{range:inner.arguments[positions.say].range,value:step.say},{range:(fn==='duo'?args[1]:args[positions.text]).range,value:text}];
-      if(fn==='duo'&&step.ja!==undefined)edits.push({range:inner.arguments[positions.text].range,value:step.ja});
-      if(isTranslated&&step.en!==undefined&&args[3])edits.push({range:args[3].range,value:step.en});
+      const edits=[];change(inner.arguments[positions.say],step.say,edits);change(fn==='duo'?args[1]:args[positions.text],text,edits);
+      if(fn==='duo'&&step.ja!==undefined)change(inner.arguments[positions.text],step.ja,edits);
+      if(isTranslated&&step.en!==undefined&&args[3])change(args[3],step.en,edits);
       if(fn!=='duo'&&!isTranslated){
         const translationField=mainLanguage==='ja'?'en':'ja', translation=step[translationField];
         const options=args[positions.emo+2], prior=literal(property(options,translationField)?.value)||'';
@@ -137,10 +147,10 @@ function encode(step, helpers=new Set()){
         const options=args[2];
         if(options&&options.type!=='ObjectExpression'&&step.emo)throw Error('Edit delivery in Source for this computed dialogue variant');
         const emotion=property(options,'emo');
-        if(emotion){if(typeof literal(emotion.value)==='string')edits.push({range:emotion.value.range,value:step.emo||''});else if(step.emo)throw Error('This delivery is computed. Edit its helper in Source.');}
+        if(emotion){if(typeof literal(emotion.value)==='string')change(emotion.value,step.emo||'',edits);else if(step.emo)throw Error('This delivery is computed. Edit its helper in Source.');}
         else if(step.emo)patchOption(raw,call,2,'emo',step.emo,edits);
       }else if(args[positions.emo]){
-        if(typeof literal(args[positions.emo])==='string')edits.push({range:args[positions.emo].range,value:step.emo||''});
+        if(typeof literal(args[positions.emo])==='string')change(args[positions.emo],step.emo||'',edits);
         else if(step.emo)throw Error('This delivery is computed. Edit its helper in Source.');
       }
       else if(step.emo){
@@ -162,6 +172,38 @@ function encode(step, helpers=new Set()){
   }
   if(step?.narration!==undefined)return `n(${JSON.stringify(step.narration)})`;
   throw Error('Use Source for this recipe action. Existing helper calls are preserved.');
+}
+// A sequence written back with the fewest changes: an unchanged beat keeps its exact text wherever it moved, an edited
+// one is edited in place (only its changed arguments, nested beats the same way), a new one is written fresh, and the
+// comments and spacing between beats stay. `original` is the sequence as decoded from `array` in `source`.
+function encodeArray(steps,original,array,source,helpers){
+  const recipeKey=s=>s&&typeof s==='object'?s.$recipe??s.$expression:undefined;
+  const nodes=array.elements.filter(Boolean);
+  const rows=alignSteps(steps,original||[],{keys:[recipeKey]}).map(({from,exact},j)=>{
+    if(from<0)return {text:encode(steps[j],helpers)};
+    const node=nodes[from];
+    return {from,text:exact?slice(source,node):encodeChanged(steps[j],original[from],node,source,helpers)};
+  });
+  return writeList(array,source,rows);
+}
+// An edited beat that holds beats of its own (a picture sequence, seq, iff/cond) keeps its call and edits each list.
+function encodeChanged(step,prior,node,source,helpers){
+  const call=node.type==='SpreadElement'?node.argument:node;
+  const splice=(parts)=>{let out=slice(source,node);for(const [range,text] of parts.sort((a,b)=>b[0][0]-a[0][0]))out=out.slice(0,range[0]-node.range[0])+text+out.slice(range[1]-node.range[0]);return out;};
+  if(Array.isArray(step.sequence)&&call.type==='ArrayExpression')return splice([[call.range,encodeArray(step.sequence,prior.sequence,call,source,helpers)]]);
+  if(call.type==='CallExpression'&&call.callee.type==='Identifier'){
+    const fn=call.callee.name,args=call.arguments;
+    if(fn==='seq'&&Array.isArray(step.sequence)&&args[1]?.type==='ArrayExpression')return splice([[args[1].range,encodeArray(step.sequence,prior.sequence,args[1],source,helpers)]]);
+    if(['iff','cond'].includes(fn)&&args[1]?.type==='ArrayExpression'){
+      const parts=[];
+      if(step.if!==prior.if)parts.push([args[0].range,styled(slice(source,args[0]),step.if)]);
+      parts.push([args[1].range,encodeArray(step.then||[],prior.then,args[1],source,helpers)]);
+      if(args[2]?.type==='ArrayExpression')parts.push([args[2].range,encodeArray(step.else||[],prior.else,args[2],source,helpers)]);
+      else if((step.else||[]).length){const at=args[1].range[1];parts.push([[at,at],`, [${step.else.map(s=>encode(s,helpers)).join(', ')}]`]);}
+      return splice(parts);
+    }
+  }
+  return encode(step,helpers);
 }
 function imageSlots(source, sequence, values=recipeValues(source)) {
   const {resolve,binding}=values,pics=binding('PICS'),slots=new Map(),locations=new Map();
@@ -271,7 +313,8 @@ export function recipe(source,config,request){
     const helpers=new Set(parseSource(source).body.flatMap(n=>(n.declaration||n).declarations||[]).map(d=>d.id.name));
     const edits=[];
     if(request.steps)newPictures(request.steps,source,values,row.sceneId,edits);
-    const expression=request.steps?`[\n${request.steps.map(s=>encode(s,helpers)).join(',\n')}\n]`:request.raw;
+    const expression=!request.steps?request.raw:sequence.value.type==='ArrayExpression'?encodeArray(request.steps,decode(sequence.value,source,context),sequence.value,source,helpers)
+      :`[\n${request.steps.map(s=>encode(s,helpers)).join(',\n')}\n]`;
     if(typeof expression!=='string')throw Error('Missing scene sequence');
     edits.push({range:sequence.value.range,text:expression});
     if(request.placement){for(const [key,field]of[['place','place'],['day','day'],['show','condition']]){

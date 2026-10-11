@@ -54,7 +54,7 @@ The author never sees code. A beat is one of narration, line, choice, picture, b
 
 - Every read and write goes through `/api/subplots/*` (tools/subplots/api.py). Public story modules are read by `source.mjs`, which parses them without running them. The private recipe sources are read through the provider command that `island/private/rewards/tools/subplot-editor.json` configures. The public repo holds only the generic adapters.
 - A save checks the source's revision hash, so an outside change gives a conflict and never an overwrite. The previous scene goes into Revisions first. A private save also backs up the generated files and rebuilds them. If the rebuild or a check fails, everything is restored.
-- Public saves are minimal edits. A beat that did not change keeps its exact source text, moved beats keep theirs, and only new or edited beats are written, in the house style (`'mio: text'`, unquoted keys, single quotes).
+- Saves are minimal edits, public and private. A save that changes nothing writes the file back byte for byte. A beat that did not change keeps its exact source text, moved beats keep theirs, and the comments and blank lines between beats stay. An edited beat changes only the words that changed (an edited recipe call keeps its helper and its quote style; an edited public step keeps its other properties, and a beat inside a branch is edited inside it). New beats are written in the house style (`'mio: text'`, unquoted keys, single quotes).
 - Undo and redo work in the browser over every edit since opening, with Ctrl+Z and Ctrl+Shift+Z. A save can be taken back by restoring the revision before it and saving again. That is one click in Revisions.
 
 ## Pickers from the bible
