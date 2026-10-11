@@ -121,7 +121,8 @@ const electronVersion = require('electron/package.json').version;
 const target = { linux: Platform.LINUX, win: Platform.WINDOWS, mac: Platform.MAC }[platform];
 // a .dmg can only be made on a Mac (hdiutil); from Linux the Mac build is a .zip of the .app, for Apple Silicon and Intel
 const macTargets = process.platform === 'darwin' ? ['dmg', 'zip'] : ['zip'];
-const targets = flag('dir') ? ['dir'] : { linux: ['AppImage', 'deb'], win: ['nsis', 'portable'], mac: macTargets }[platform];
+// Windows ZIP is the primary itch download: the runnable app folder, with installer and portable alternatives.
+const targets = flag('dir') ? ['dir'] : { linux: ['AppImage', 'deb'], win: ['zip', 'nsis', 'portable'], mac: macTargets }[platform];
 const archs = platform === 'mac' ? [Arch.arm64, Arch.x64] : [Arch.x64];
 const config = {
   appId: IDENTITY.appId,
