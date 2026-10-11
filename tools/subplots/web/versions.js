@@ -147,6 +147,8 @@ export function paintVersions(box, ctx) {
   if (!k?.loading && (!list || k.stale || !(slot in k.sources))) load(id, slot).then(() => { ctx.rerender(); watch(); });
   if (!list) { box.innerHTML = '<p class="quiet">Looking for this shot’s versions…</p>'; return; }
   const current = picturePath(pic), busy = pending(list);
+  // a picture beat added here has nothing to make again until a picture is composed for it
+  if (!current && !list.length) { box.innerHTML = '<p class="quiet small">Compose a picture for this beat, or pick one from the image generator below.</p>'; return; }
   box.innerHTML = `<div class="ver-actions">
       <button data-new class="primary-soft" title="The same settings as this picture, with a new seed">New version</button>
       <button data-repaint ${current ? '' : 'disabled'} title="Paint over a part of the picture and say what goes there">Repaint a part</button>

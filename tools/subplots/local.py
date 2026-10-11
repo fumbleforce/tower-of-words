@@ -224,7 +224,18 @@ def run(config_path, request):
             selections.setdefault(legacy.get('slot',''),legacy)
         promotions=[]
         replacements=[]
+        # picture beats added in the editor ({newPicture, imageSlot 'new:...'}): their pick becomes the beat's file
+        added={}
+        def walk(steps):
+            for step in steps or []:
+                if isinstance(step,dict):
+                    if step.get('newPicture') and step.get('imageSlot'):added[step['imageSlot']]=step
+                    for key in ('then','else','sequence'):walk(step.get(key))
+        if isinstance(body.get('steps'),list):
+            body['steps']=json.loads(json.dumps(body['steps']));walk(body['steps'])
         for slot,selected_image in selections.items():
+            if slot.startswith('new:') and slot not in added:
+                continue  # its beat was deleted
             if selected_image==previous.get('images',{}).get(slot):
                 continue
             if not slot:
@@ -237,7 +248,8 @@ def run(config_path, request):
             token=hashlib.sha256(source.read_bytes()).hexdigest()[:20]
             filename='editor-'+token+'.webp'
             target=Path(config['imageLive'])/filename
-            replacements.append({'slot':slot,'file':'encounters/'+filename})
+            if slot in added:added[slot]['file']='encounters/'+filename
+            else:replacements.append({'slot':slot,'file':'encounters/'+filename})
             promotions.append((source,target,token))
         if replacements:
             body['imageReplacements']=replacements

@@ -99,6 +99,8 @@ export function newStep(kind, recipe, who = 'eric') {
   if (kind === 'line') return recipe ? { say: who, text: '', en: '', ja: '' } : { say: who, text: '' };
   if (kind === 'narration') return recipe ? { narration: '' } : '> ';
   if (kind === 'choice') return { choice: [{ text: '' }, { text: '' }] };
+  // a picture beat of its own (private recipes): its picture is composed or picked in the editor, and Save writes it
+  if (kind === 'picture') return { shot: {}, newPicture: true, imageSlot: 'new:' + Math.random().toString(36).slice(2, 10) };
   throw new Error('Unknown beat kind ' + kind);
 }
 

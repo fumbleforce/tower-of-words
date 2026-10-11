@@ -71,7 +71,7 @@ export function renderPictureTab(installComposer) {
       ${pic.changed ? `<span class="tag new">New pick${pic.chosen.n ? ' #' + esc(pic.chosen.n) : ''}, goes live on Save</span><button class="link" data-keep>Keep the old picture</button>` : `<span class="where">${esc(pic.file ? (private_ ? 'island/private/game/' : '') + pic.file : 'Not made yet')}</span>`}
     </div>
     <div data-versions></div>
-    <div class="pic-actions"><button data-compose>Compose a new picture</button></div>
+    <div class="pic-actions"><button data-compose ${pic.url ? '' : 'class="primary-soft"'}>Compose a new picture</button></div>
     <h3>From the image generator</h3>
     <div class="chips" data-chips></div>
     <div class="history" data-history></div>`;

@@ -53,7 +53,7 @@ const authoring = {
 };
 const privateRow = { id: 'local:fixture:bath:start', provider: 'local', title: 'bath · start', node: 'start', scene: 'enc_bath', group: 'Encounters', where: 'island/private/rewards/tools/fixture.src.mjs', count: 5, audience: 'private' };
 const privateScene = {
-  ...privateRow, recipe: true, revision: 'p1', metadata: {}, entries: [], routesEditable: false, history: [],
+  ...privateRow, recipe: true, revision: 'p1', metadata: {}, entries: [], routesEditable: false, history: [], capabilities: { picture: 'pic' },
   placement: { place: 'office', day: 2, condition: null }, previewUrl: '/game3d/index.html?scene=enc_bath',
   images: [{ id: 'image:0', file: 'encounters/missing.webp', available: false }],
   steps: [
@@ -98,7 +98,7 @@ try {
       const page = await browser.newPage({ viewport: { width, height: width > 2000 ? 1440 : 768 } });
       const errors = [];
       page.on('pageerror', e => errors.push(e.message));
-      let privateSave = null;
+      let privateSave = null, startSave = null;
       const privateSaves = [];
       await page.route('**/island/private/**', r => r.abort());
       await page.route('**/api/subplots/authoring', r => r.fulfill({ json: authoring }));
@@ -118,6 +118,7 @@ try {
         const body = r.request().postDataJSON();
         if (!body.id.startsWith('local:')) return r.continue();
         privateSave = body;
+        if (body.id === privateRow.id) startSave = body;
         privateSaves.push(body.id);
         return r.fulfill({ json: { ...(Object.values(privateParts).find(p => p.id === body.id) || privateScene), ...body, revision: 'p2' } });
       });
@@ -393,6 +394,14 @@ try {
       await page.locator('#compareDialog [data-use="r-41"]').click();
       await page.locator('#compareDialog [data-close]').click();
       assert.match(await page.locator('.pic-facts').innerText(), /New pick #41/);
+      // a picture beat of its own: added between two beats, its picture picked from the history, saved with the scene
+      await page.locator('#timeline > .beats > .add-row .plus').first().click();
+      await page.locator('.pop .menu button', { hasText: 'Picture' }).click();
+      await page.locator('.beat.k-picture.selected .missing-box', { hasText: 'Save needs a picture here' }).waitFor();
+      assert.equal(await page.locator('[data-tab=picture]').getAttribute('aria-selected'), 'true');
+      await page.locator('.history-grid button').first().click();
+      await page.locator('.beat.k-picture.selected img').waitFor();
+      assert.equal(await page.locator('.beat.k-picture').count(), 2);
       await page.locator('#save').click();
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
       assert.deepEqual(privateSaves.sort(), ['local:fixture:bath:leave', 'local:fixture:bath:start'], 'only the edited parts are saved');
@@ -414,11 +423,14 @@ try {
       await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-comments-${width}.png`) });
       await page.keyboard.press('Escape');
       assert.equal(privateSave.id === 'local:fixture:bath:start' ? privateSave.metadata.images['image:0'].file : 'x.png', 'x.png');
+      const added = startSave.steps.find(x => x.newPicture);
+      assert.match(added.imageSlot, /^new:/);
+      assert.equal(startSave.metadata.images[added.imageSlot].file, 'x.png');
 
       assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth > globalThis.innerWidth), false);
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(`PASS ${width}: open, labels, list stays put, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), story-check findings on the beat, comments on beats (public and private, command line), scene status`);
+      console.log(`PASS ${width}: open, labels, list stays put, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), story-check findings on the beat, a new picture beat, comments on beats (public and private, command line), scene status`);
     }
   }, { timeoutMs: 150000, gpuWaitMs: 60000 });
 } finally {
