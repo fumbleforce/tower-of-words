@@ -22,6 +22,7 @@ import { fileList, stage, stampBuild, checkImports } from './lib/stage.mjs';
 import { writeAppDir } from './lib/app-dir.mjs';
 import { pack } from './pak/pack.mjs';
 import { parseKey } from './pak/format.mjs';
+import { mainCheckoutRoot } from '../tools/lib/git-snapshot.mjs';
 
 const desktop = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(desktop);
@@ -56,7 +57,8 @@ const IDENTITY = {
 }[flavor];
 const version = JSON.parse(fs.readFileSync(path.join(desktop, 'package.json'), 'utf8')).version;
 
-const out = path.join(root, 'dist', 'desktop', DEV ? `${flavor}-dev` : flavor);
+// Output goes to the main checkout's dist/, also from a worktree (a worktree's own dist/ is deleted with it).
+const out = path.join(mainCheckoutRoot(root), 'dist', 'desktop', DEV ? `${flavor}-dev` : flavor);
 const stageDir = path.join(out, 'stage');
 const appDir = path.join(out, 'app');
 const t0 = Date.now();

@@ -7,6 +7,12 @@ import { isolatedGitEnvironment } from './git-environment.mjs';
 const git = (cwd, args, env, input) => execFileSync('git', ['--no-replace-objects', ...args],
   { cwd, env, input, encoding: 'utf8', timeout: 10000, maxBuffer: 16 * 1024 * 1024 });
 
+// The shared .git directory: the same from the main checkout and from every worktree.
+export const gitCommonDir = (cwd, env = process.env) => git(cwd, ['rev-parse', '--path-format=absolute', '--git-common-dir'], env).trim();
+
+// The main checkout's top folder. Release output goes there, so removing a worktree keeps it.
+export const mainCheckoutRoot = (cwd, env = process.env) => path.dirname(gitCommonDir(cwd, env));
+
 // Descend one tree at a time so private subtrees are never listed or opened.
 export function publicTree(cwd, tree, { env = process.env, readTree = oid => git(cwd, ['ls-tree', '-z', '-l', oid], env) } = {}) {
   assert(/^[a-f0-9]{40,64}$/.test(tree), 'Snapshot needs an immutable tree object');
@@ -108,7 +114,7 @@ export async function withGitSnapshot(cwd, tree, use, { env = process.env, timeo
   const format = git(cwd, ['rev-parse', '--show-object-format'], env).trim();
   assert(['sha1', 'sha256'].includes(format), 'Unsupported Git object format');
   // On disk under the shared .git, not the system temp folder: /tmp is RAM on this machine and each snapshot is several GB.
-  const base = path.join(git(cwd, ['rev-parse', '--path-format=absolute', '--git-common-dir'], env).trim(), 'snapshots');
+  const base = path.join(gitCommonDir(cwd, env), 'snapshots');
   fs.mkdirSync(base, { recursive: true });
   const directory = fs.mkdtempSync(path.join(base, `git-snapshot-${process.pid}-`));
   try {
