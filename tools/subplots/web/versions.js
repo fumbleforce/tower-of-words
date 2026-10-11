@@ -208,7 +208,7 @@ function openCompare(ctx, rightId) {
     const side = (v, which) => !v ? '<figure class="cmp-side empty"><p class="quiet">Pick a version below.</p></figure>' : `<figure class="cmp-side">
         <img src="${esc(v.url)}" alt="">
         <figcaption><strong>${v.id === use ? 'The beat uses this one' : which === 'left' ? 'On the left' : 'On the right'}</strong>
-          <span class="quiet">${esc(v.live ? 'The picture in the game now' : `${v.n ? '#' + v.n + ' · ' : ''}${v.how} · seed ${v.seed}`)}</span>
+          <span class="quiet">${esc(v.live ? 'The picture in the game now' : `${v.n ? '#' + v.n + ' · ' : ''}${v.how}${v.seed != null ? ` · seed ${v.seed}` : ''}`)}</span>
           ${v.id === use ? '' : `<button class="primary" data-use="${esc(v.id)}">Use this one</button>`}</figcaption></figure>`;
     dialog.innerHTML = `<div class="cmp-head"><h2>Compare versions <span class="quiet">Shot ${(doc.images || []).findIndex(i => i.id === slot) + 1}</span></h2>
         <span class="quiet">Click a version to put it on the right, Shift-click for the left. ← → step through them.</span><button data-close>Done</button></div>
