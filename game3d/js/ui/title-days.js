@@ -8,7 +8,7 @@ import { storage } from '../storage.js';
 import { DEV } from '../dev.js';
 
 export function addDayPicker(menu, before, { inProgress, keys }) {
-  if (!DEV) return; // dev mode only (dev.js): the public release has no Days
+  if (!DEV || LAST_DAY <= 1) return; // dev mode only (dev.js): the public release has no Days
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'mday2';

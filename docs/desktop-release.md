@@ -24,6 +24,12 @@ What it does, in order: the release file list (`tools/release/files.mjs`, which 
 - `desktop/app/full/` (full flavor only; the vanilla build leaves the folder out): the age check before anything of the game loads, asked once per computer (the answer is `first-run.json` in userData; deleting it asks again), and `/api/plugins`, the list of optional plugins in the pack.
 - Saves: userData, or with a file named `portable` next to the AppImage, the .exe or the .app, a folder `<name> data` beside it (the age answer goes there too).
 
+## Day 1 edition
+
+`node desktop/build.mjs --flavor full --days 1 --platform win` builds **Amakawa Complete Day 1**. Its Windows installer and portable executable go to `dist/desktop/full-day1/out/`. The app name, app id and save folder differ from Amakawa Complete, so both editions can be installed together. Without `--days 1`, the existing editions keep all days and their existing output paths. Add `--stage-only` to inspect the filtered content without packaging, or `--dev` to put the debug edition in `full-day1-dev/`.
+
+The day scope removes the later story directories, club sessions, later finds, milestones and their exclusive voice clips. Everyday conversation vocabulary and shared world assets stay available. A local adapter filters the optional content before packaging, and a limited full build refuses to continue without it. The staged `day-scope.json` records the public removal counts; `game3d/build.json` records the edition and day limit. The source checkout is untouched. The game refuses later-day imports, copied save slots and direct next-day progression. Its day 1 exports use the normal save format.
+
 ## Dev features in a release
 
 `window.desktop.release` turns them off in three places, and the release file list leaves the dev files out as well:

@@ -3,13 +3,14 @@
 // which places/definitions.js canTravel reads).
 // A new day starts from the save the last one ended on: every choice, word, bond and find carries over, and only
 // the state of being somewhere (the place's world, a running scene, a trip, one-off triggers) is cleared.
+import { MAX_DAY, supportsDay } from './content-scope.js';
 import { STORIES as DAY2_STORIES } from '../story/day2/index.js';
 import { STORIES as DAY3_STORIES } from '../story/day3/index.js';
 import { STORIES as DAY4_STORIES } from '../story/day4/index.js';
 import { STORIES as DAY5_STORIES } from '../story/day5/index.js';
 import { ROUTES } from '../story/ongoing/routes.js';
 
-export const DAYS = {
+const AUTHORED_DAYS = {
   1: { dir: '', start: 'train', period: 'early' },
   2: {
     dir: 'day2/',
@@ -32,11 +33,15 @@ export const DAYS = {
   },
   5: { dir: 'day5/', start: 'dorms', period: 'morning', files: Object.keys(DAY5_STORIES) },
 };
+export const DAYS = Object.fromEntries(Object.entries(AUTHORED_DAYS).filter(([n]) => supportsDay(+n)));
 // The title offers the authored opening days. Saves can keep advancing afterwards.
-export const LAST_DAY = 5;
+export const LAST_DAY = Math.min(5, MAX_DAY);
 export const CONTINUING_DAY = { dir: 'ongoing/', start: 'dorms', period: 'morning', files: Object.keys(ROUTES) };
-export const dayOf = (n) => DAYS[n] || (Number.isSafeInteger(n) && n > LAST_DAY ? CONTINUING_DAY : DAYS[1]);
-export const canStartNextDay = (n) => Number.isSafeInteger(n) && n >= 1 && n < Number.MAX_SAFE_INTEGER;
+export const dayOf = (n) => {
+  if (MAX_DAY !== Infinity && !supportsDay(n)) throw new Error('This edition only contains day 1.');
+  return DAYS[n] || (Number.isSafeInteger(n) && n > LAST_DAY ? CONTINUING_DAY : DAYS[1]);
+};
+export const canStartNextDay = (n) => supportsDay(n) && supportsDay(n + 1);
 // the story module path for a place on a day, relative to game3d/js/
 export const storyPath = (name, day = 1) => `../story/${dayOf(day).dir}${name}.js`;
 // a place the day's story index lists has a story module that must load: a failed import is an error, not an
@@ -44,6 +49,7 @@ export const storyPath = (name, day = 1) => `../story/${dayOf(day).dir}${name}.j
 export const storyRegistered = (name, day = 1) => day > 1 && !!dayOf(day).files?.includes(name);
 // the next day's opening save, made from the save the day ended on
 export function nextDaySave(prev) {
+  if (!canStartNextDay(prev.day || 1)) throw new Error('This edition ends after day 1.');
   const day = (prev.day || 1) + 1,
     D = dayOf(day);
   const flags = { ...prev.flags, day, period: D.period, place: D.start };

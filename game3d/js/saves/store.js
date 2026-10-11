@@ -6,6 +6,8 @@
 // browser) a thumbnail stays in its record, as the old build kept it.
 //   const store = createSlotStore({ kv: storage, thumbs: storage.blobs }); await store.migrate();
 // No DOM and no game imports, so the unit tests run it in Node with Map-backed fakes.
+import { supportsSave } from '../content-scope.js';
+
 export const KEYS = {
   SAVE: 'amakawa-day1-save',
   AUTO_META: 'amakawa-auto-meta',
@@ -24,12 +26,12 @@ export function createSlotStore({ kv, thumbs = null, now = () => Date.now() }) {
   function info(id) {
     if (id === 'auto') {
       const d = kv.get(KEYS.SAVE);
-      if (!d || !d.place) return null;
+      if (!d || !d.place || !supportsSave(d)) return null;
       const m = kv.get(KEYS.AUTO_META) || {};
       return describe('auto', d, m);
     }
     const s = kv.get(slotKey(id));
-    return s && s.data ? describe(id, s.data, s) : null;
+    return s && s.data && supportsSave(s.data) ? describe(id, s.data, s) : null;
   }
   function describe(id, data, meta) {
     return {
@@ -77,7 +79,7 @@ export function createSlotStore({ kv, thumbs = null, now = () => Date.now() }) {
     },
     // save into a quick or manual slot; false when storage refused it (full, or off)
     async write(id, { data, thumb = null, line = '', date = '' }) {
-      if (id === 'auto' || !data) return false;
+      if (id === 'auto' || !data || !supportsSave(data)) return false;
       const key = slotKey(id);
       const rec = {
         v: 2,

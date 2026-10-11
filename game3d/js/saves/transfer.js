@@ -5,6 +5,7 @@
 //   const got = await openFile(); const check = parseSave(got.text); if (check.ok) store.write(id, check.slot)
 // On the desktop the files go through native dialogs (storage.files); in the browser through a download and a file
 // picker. The checks have no DOM, so the unit tests run them in Node.
+import { supportsSave } from '../content-scope.js';
 import { storage } from '../storage.js';
 
 export const FORMAT = 'amakawa-save';
@@ -64,6 +65,7 @@ export function parseSave(text) {
     (d.known === undefined || Array.isArray(d.known)) &&
     (d.yen === undefined || typeof d.yen === 'number');
   if (!shape) return fail(DAMAGED);
+  if (!supportsSave(d)) return fail('This edition only loads day 1 saves.');
   const thumb = f.thumb;
   if (thumb != null && (typeof thumb !== 'string' || !/^data:image\/(jpeg|png|webp);base64,/.test(thumb)))
     return fail(DAMAGED);

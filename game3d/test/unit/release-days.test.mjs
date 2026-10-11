@@ -1,0 +1,74 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { releaseProfile } from '../../../desktop/lib/profile.mjs';
+import { scopeDays, LATER_STORY } from '../../../tools/release/days.mjs';
+import { supportsSave } from '../../js/content-scope.js';
+
+const root = fileURLToPath(new URL('../../../', import.meta.url));
+test('limited release identities and outputs never share the normal release save directory', () => {
+  const normal = releaseProfile('full'), limited = releaseProfile('full', '1');
+  assert.equal(limited.output, 'full-day1');
+  for (const field of ['name', 'productName', 'appId']) assert.notEqual(limited.identity[field], normal.identity[field]);
+  assert.equal(releaseProfile('vanilla', 1).output, 'vanilla-day1');
+  assert.throws(() => releaseProfile('full', '2'), /--days/);
+  assert.equal(supportsSave({ day: 100 }), true);
+});
+
+test('a staged day-one edition removes later content and rejects later saves at every entry', async () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'release-days-'));
+  const dir = path.join(tmp, 'dist', 'stage');
+  const put = (rel, text) => { fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true }); fs.writeFileSync(path.join(dir, rel), text); };
+  const copy = rel => put(rel, fs.readFileSync(path.join(root, rel), 'utf8'));
+  try {
+    put('package.json', '{"type":"module"}');
+    for (const rel of ['js/content-scope.js', 'js/days.js', 'js/storage.js', 'js/saves/store.js', 'js/saves/transfer.js']) copy('game3d/' + rel);
+    for (const day of [2, 3, 4]) copy(`game3d/story/day${day}/words.js`);
+    put('game3d/story/day5/spoiler.js', 'export default "later scene";');
+    put('game3d/audio/index.json', '["rei-chat-repeat-slow"]');
+    put('game3d/audio/rei-chat-repeat-slow.mp3', 'later voice');
+    const report = await scopeDays({ dir, root, days: 1 });
+    assert.equal(report.removedStories, 4);
+    assert.deepEqual(fs.readdirSync(path.join(dir, 'game3d/story')).sort(), ['conversations', 'tickets.js']);
+    const shared = await import(pathToFileURL(path.join(dir, 'game3d/story/conversations/index.js')).href);
+    assert.equal(shared.default.nodes.chat_rei, undefined);
+    assert.equal(shared.default.nodes.register_rei_casual_1, undefined);
+    const remarks = await import(pathToFileURL(path.join(dir, 'game3d/story/conversations/remarks.js')).href);
+    assert.equal(remarks.REMARKS.some(remark => remark.who === 'rei'), false);
+    assert.equal(shared.default.nodes.chat_emi_team, undefined);
+    assert.ok(shared.default.nodes.chat_emi_repeat_word);
+    assert.equal(LATER_STORY.test('game3d/story/ongoing/office.js'), true);
+    const imp = rel => import(pathToFileURL(path.join(dir, 'game3d/js', rel)).href);
+    const days = await imp('days.js');
+    assert.deepEqual(Object.keys(days.DAYS), ['1']);
+    assert.equal(days.LAST_DAY, 1);
+    assert.equal(fs.existsSync(path.join(dir, 'game3d/audio/rei-chat-repeat-slow.mp3')), false);
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(dir, 'game3d/audio/index.json'))), []);
+    assert.equal(days.canStartNextDay(1), false);
+    assert.throws(() => days.nextDaySave({ day: 1 }), /ends after day 1/);
+    assert.throws(() => days.dayOf(2), /only contains day 1/);
+    const words = await imp('release-words-4.js');
+    assert.ok(words.WORDS);
+    const scope = await imp('content-scope.js');
+    assert.equal(scope.supportsSave({ day: 1, flags: { day: 2 } }), false);
+    assert.equal(scope.supportsSave({ day: 1 }), true);
+    const { parseSave, exportText } = await imp('saves/transfer.js');
+    const save = { v: 1, place: 'dorms', day: 2 };
+    assert.match(parseSave(exportText({ data: save })).error, /only loads day 1/);
+    assert.equal(parseSave(exportText({ data: { ...save, day: 1 } })).ok, true);
+    const { parseSave: normalParse } = await import('../../js/saves/transfer.js');
+    assert.equal(normalParse(exportText({ data: { ...save, day: 1 } })).ok, true);
+    const { createSlotStore, KEYS } = await imp('saves/store.js');
+    const values = new Map([[KEYS.SAVE, save], ['amakawa-slot-1', { data: save }]]);
+    const kv = { get: key => values.get(key), set: (key, value) => { values.set(key, value); return true; } };
+    const store = createSlotStore({ kv });
+    assert.equal(store.info('auto'), null);
+    assert.equal(store.info(1), null);
+    assert.equal(await store.adopt(1), false);
+    assert.equal(await store.write(2, { data: save }), false);
+    assert.equal(await store.write(2, { data: { ...save, day: 1 } }), true);
+  } finally { fs.rmSync(tmp, { recursive: true, force: true }); }
+});

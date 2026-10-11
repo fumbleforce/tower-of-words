@@ -1,3 +1,4 @@
+import { supportsDay, supportsSave } from './content-scope.js';
 import { flagKeys } from './narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/sim.js');
 import { ITEMS } from './gameplay/items.js';
@@ -116,6 +117,7 @@ export function setPeriod(p, game) {
 }
 // a new day (later days): the date moves on, daily caps reset, the day starts early
 export function newDay(game) {
+  if (!supportsDay(sim.day + 1)) return false;
   sim.day++;
   sim.date = dateOf(sim.day);
   flags[ENGINE_KEYS.day] = sim.day;
@@ -503,12 +505,13 @@ export function save(game) {
 export function loadSave() {
   try {
     const d = storage.get(KEY);
-    return d && d.v === 1 ? migrateMc(d) : null;
+    return d && d.v === 1 && supportsSave(d) ? migrateMc(d) : null;
   } catch {
     return null;
   }
 }
 export function restore(game, d) {
+  if (!supportsSave(d)) throw new Error('This edition only loads day 1 saves.');
   game.cast = d.cast || newCast();
   game.pendingStart = d.pendingStart || null;
   game.transition = d.transition || null;

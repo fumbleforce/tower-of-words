@@ -1,8 +1,9 @@
 // Build the desktop app. How to use it and what each platform needs: docs/desktop-release.md.
 //
-//   node desktop/build.mjs [--flavor vanilla|full] [--platform linux|win|mac] [--dev] [--dir]
+//   node desktop/build.mjs [--flavor vanilla|full] [--days all|1] [--platform linux|win|mac] [--dev] [--dir]
 //
 //   --flavor    vanilla (default) or full. They install side by side (own app id, name, executable, userData).
+//   --days      all (default) or 1. Limited editions have separate output, identity and saves.
 //   --platform  defaults to this machine's
 //   --dev       content as a plain folder, no pack, DevTools and the debugging port allowed; for checking a build
 //   --dir       stop at the unpacked app (dist/desktop/<flavor>/out/<os>-unpacked), no installers
@@ -16,9 +17,11 @@ import os from 'node:os';
 import path from 'node:path';
 import { randomBytes } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
+import { pathToFileURL, fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { fileList, stage, stampBuild, checkImports } from './lib/stage.mjs';
+import { releaseProfile } from './lib/profile.mjs';
+import { scopeDays } from '../tools/release/days.mjs';
 import { writeAppDir } from './lib/app-dir.mjs';
 import { pack } from './pak/pack.mjs';
 import { parseKey } from './pak/format.mjs';
@@ -40,25 +43,12 @@ const DEV = flag('dev');
 if (!['vanilla', 'full'].includes(flavor)) throw new Error(`--flavor vanilla|full, not ${flavor}`);
 if (!['linux', 'win', 'mac'].includes(platform)) throw new Error(`--platform linux|win|mac, not ${platform}`);
 
-// Names per flavor. The vanilla identity must pass the word scan, so it says nothing of the other flavor.
-const IDENTITY = {
-  vanilla: {
-    name: 'amakawa',
-    productName: 'Amakawa',
-    appId: 'io.github.fumbleforce.amakawa',
-    description: 'A Japanese-learning RPG on a company island.',
-  },
-  full: {
-    name: 'amakawa-complete',
-    productName: 'Amakawa Complete',
-    appId: 'io.github.fumbleforce.amakawa.complete',
-    description: 'A Japanese-learning RPG on a company island. Complete edition.',
-  },
-}[flavor];
+const profile = releaseProfile(flavor, opt('days', 'all'));
+const IDENTITY = profile.identity;
 const version = JSON.parse(fs.readFileSync(path.join(desktop, 'package.json'), 'utf8')).version;
 
 // Output goes to the main checkout's dist/, also from a worktree (a worktree's own dist/ is deleted with it).
-const out = path.join(mainCheckoutRoot(root), 'dist', 'desktop', DEV ? `${flavor}-dev` : flavor);
+const out = path.join(mainCheckoutRoot(root), 'dist', 'desktop', profile.output + (DEV ? '-dev' : ''));
 const stageDir = path.join(out, 'stage');
 const appDir = path.join(out, 'app');
 const t0 = Date.now();
@@ -79,7 +69,18 @@ const scan = (dir) => tool('tools/release/scan.mjs', ['--flavor', 'vanilla', dir
 // 1. files, staged at their URL paths
 const list = fileList(root, flavor);
 const bytes = stage(list, stageDir);
-const id = stampBuild(stageDir, root);
+if (profile.days) {
+  const report = await scopeDays({ dir: stageDir, root, days: profile.days });
+  step(`day scope: ${JSON.stringify(report)}`);
+  if (flavor === 'full') {
+    const adapter = path.join(mainCheckoutRoot(root), 'island/private/rewards/tools/release-days.mjs');
+    if (!fs.existsSync(adapter)) throw new Error('The local content day-scope adapter is required for a limited full edition');
+    const { scopeRelease } = await import(pathToFileURL(adapter).href);
+    const local = await scopeRelease({ dir: stageDir, days: profile.days });
+    step(`optional day scope: ${JSON.stringify(local)}`);
+  }
+}
+const id = stampBuild(stageDir, root, { days: profile.days, edition: profile.output });
 step(`staged ${list.length} files, ${(bytes / 1e6).toFixed(0)} MB, build ${id}`);
 const missing = checkImports(stageDir);
 if (missing.length) throw new Error(`staged modules import files the release left out:\n  ${missing.slice(0, 20).join('\n  ')}`);
@@ -87,6 +88,10 @@ if (missing.length) throw new Error(`staged modules import files the release lef
 // 2. the flavor step (game3d constant __FULL__, dead code removed per file) and, for vanilla, the word scan
 tool('tools/release/flavor.mjs', ['--flavor', flavor, '--in', stageDir], { required: flavor === 'vanilla' });
 if (flavor === 'vanilla') scan(stageDir);
+if (flag('stage-only')) {
+  step(`stage ready: ${stageDir}`);
+  process.exit(0);
+}
 
 // 3. content: the encrypted pack under this build's own key, or the plain folder for --dev
 let key = null;
