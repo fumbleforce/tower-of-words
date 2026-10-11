@@ -99,6 +99,28 @@ def authoring_catalog():
         AUTHORING_CACHE[str(ROOT)] = (signature, data)
         return data
 
+MAP_CACHE = {}
+def story_map():
+    """The public story map (storymap.mjs: each scene's day, place, ways in and routes out), cached until a story file
+    or the place list changes."""
+    files = list((ROOT / 'game3d/story').rglob('*.js')) + [ROOT / 'game3d/js/places/definitions.js']
+    signature = tuple((str(p), p.stat().st_mtime_ns, p.stat().st_size) for p in sorted(set(files)) if p.is_file())
+    with LOCK:
+        cached = MAP_CACHE.get(str(ROOT))
+        if cached and cached[0] == signature:
+            return cached[1]
+    r = subprocess.run(['node', str(HERE / 'storymap.mjs')], text=True, capture_output=True, timeout=25, cwd=ROOT,
+                       env={**os.environ, 'SUBPLOTS_ROOT': str(ROOT)})
+    try:
+        data = json.loads(r.stdout)
+    except ValueError:
+        raise ValueError('The story map could not read the story files.') from None
+    if r.returncode or data.get('error'):
+        raise ValueError(data.get('error', 'The story map could not read the story files.'))
+    with LOCK:
+        MAP_CACHE[str(ROOT)] = (signature, data)
+    return data
+
 def label(scene):
     """Say what goes where (Jørgen, 2026-10-10: "just labelling on what goes where"): the public game or the
     private, adult side, and the file the scene lives in."""
@@ -325,6 +347,8 @@ def dispatch(action, body):
         return authoring_catalog()
     if action == 'status':
         return scene_status()
+    if action == 'map':
+        return story_map()
     if action == 'comments':
         return comments({'action': 'list', 'ids': [x for x in body.get('ids', '').split(',') if x]})
     if action == 'comment':
@@ -506,7 +530,7 @@ def handle(handler):
             suffix = '/' + action[6:] + ('?' + url.query if url.query else '')
             image_proxy(handler, suffix, body if handler.command == 'POST' else None)
         else:
-            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'pictures', 'picture-source', 'comments', 'status')):
+            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'map', 'pictures', 'picture-source', 'comments', 'status')):
                 raise ValueError('Unsupported request method')
             # Outside private mode (tools/review_server.py, /private) only public scenes are read or written
             if callable(mode) and not mode():

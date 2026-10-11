@@ -206,3 +206,10 @@ test('inserting, deleting and moving beats keeps every comment and the spacing o
  // the blank line above a moved beat goes with it
  assert.equal(out,commented.replace("\n\n    n('She waits.'),\n","\n").replace("    n('The end.'),\n","    n('The end.'),\n\n    n('She waits.'),\n"));
 });
+test('a placement change rewrites only the values that changed, in their quotes; the catalog says where each scene plays',()=>{
+ const r=recipe(source,config,{action:'read',id});r.placement={...r.placement,place:'garden',condition:"office_open && period == 'lunch'"};
+ const out=recipe(source,config,{...r,action:'prepare'});
+ assert.equal(out.changed,source.replace("place:'office'","place:'garden'").replace("show:'office_open'",`show:"office_open && period == 'lunch'"`));
+ const row=recipe(source,config,{action:'catalog'}).scenes.find(s=>s.id===id);
+ assert.deepEqual(row.placement,{place:'office',day:2,condition:'office_open'});
+});

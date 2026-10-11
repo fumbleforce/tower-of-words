@@ -33,6 +33,9 @@ const original = `export default {
 };
 `;
 fs.writeFileSync(file, original);
+// the place list the story map orders places by (storymap.mjs reads it)
+fs.mkdirSync(path.join(root, 'game3d/js/places'), { recursive: true });
+fs.writeFileSync(path.join(root, 'game3d/js/places/definitions.js'), "export const PLACE_NAMES = { office: 'IT support, B2' };\nexport const STORY_FILES = ['office'];\n");
 const port = 8796, base = `http://127.0.0.1:${port}`;
 const server = spawn('python3', ['tools/review_server.py', String(port)], {
   cwd: repo, stdio: 'ignore',
@@ -51,7 +54,7 @@ const authoring = {
   deliveries: [{ id: '', label: 'Natural' }, { id: 'warm', label: 'Warm' }],
   words: [],
 };
-const privateRow = { id: 'local:fixture:bath:start', provider: 'local', title: 'bath · start', node: 'start', scene: 'enc_bath', group: 'Encounters', where: 'island/private/rewards/tools/fixture.src.mjs', count: 5, audience: 'private' };
+const privateRow = { id: 'local:fixture:bath:start', provider: 'local', title: 'bath · start', node: 'start', scene: 'enc_bath', group: 'Encounters', where: 'island/private/rewards/tools/fixture.src.mjs', count: 5, audience: 'private', placement: { place: 'office', day: 2, condition: 'private_mode && period_evening && !enc_bath_seen' } };
 const privateScene = {
   ...privateRow, recipe: true, revision: 'p1', metadata: {}, entries: [], routesEditable: false, history: [], capabilities: { picture: 'pic' },
   placement: { place: 'office', day: 2, condition: null }, previewUrl: '/game3d/index.html?scene=enc_bath',
@@ -173,7 +176,14 @@ try {
       assert.match(await page.locator('.path-bar').innerText(), /Ask about the room/);
       assert.doesNotMatch(await textOf(page.locator('#timeline')), /\$expression|do:|go:|@room|@later/);
 
+      // the list is the story map's outline: the scene under its day and place, with how it starts and its parts
+      const welcome = page.locator('.scene-row', { hasText: 'Welcome' });
+      assert.match(await welcome.innerText(), /Talk to Mio · from day 2 on/);
+      assert.equal(await page.locator('.scene-item', { has: welcome }).locator('.parts-toggle').innerText(), '2 parts');
+      assert.match(await page.locator('#docArea').innerText(), /Day 1 · IT support, B2/);
+
       // opening a group far down the list leaves the list where it is (Jørgen: "I am immediately thrown back")
+      await page.locator('#days button', { hasText: 'Any' }).click();
       const list = page.locator('#sceneList');
       await list.evaluate(el => { el.scrollTop = el.scrollHeight; });
       const before = await list.evaluate(el => el.scrollTop);
@@ -306,7 +316,9 @@ try {
 
       // a private scene is labelled; its picture is replaced from the history
       await page.locator('[data-filter=private]').click();
-      await page.locator('.area-head', { hasText: 'Encounters' }).click();
+      await page.locator('#days button', { hasText: '2' }).click();
+      await page.locator('.area-head', { hasText: 'IT support, B2' }).click();
+      assert.match(await page.locator('.scene-row').first().innerText(), /Shows up at IT support, B2 · after work · first time only/);
       await page.locator('.scene-row').first().click();
       await page.locator('.beat.k-picture').waitFor();
       assert.equal(await page.locator('#docAudience').innerText(), 'Private · Adult');
