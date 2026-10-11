@@ -32,14 +32,18 @@ export const FIELDS = {
     ['defaults.model', 'Default model', 'ref', 'model'], ['defaults.negatives', 'Default negative sets', 'negs'], ['notes', 'Notes', 3]],
   negative: [['name', 'Name'], ['text', 'Negative text', 3], ['default', 'On by default', 'check'], ['notes', 'Notes', 2]],
   framing: [['name', 'Name'], ['w', 'Width', 'num'], ['h', 'Height', 'num'], ['prompt', 'Added to the prompt (optional)', 2], ['notes', 'Notes', 2]],
-  camera: [['name', 'Name'], ['prompt', 'Added to the prompt', 2], ['notes', 'Notes', 2]],
+  // group and diagram place a camera block in the scene editor's composer: its row (shot size, angle, lens; empty is
+  // the other camera words) and the small drawing on its tile (tools/subplots/web/image-stage.js DIAGRAMS)
+  camera: [['name', 'Name'], ['prompt', 'Added to the prompt', 2], ['group', 'Row in the composer', 'select', ['', 'shot', 'angle', 'lens']],
+    ['diagram', 'Drawn as', 'select', ['', 'face', 'head', 'chest', 'thighs', 'full', 'wide', 'eye', 'high', 'low', 'top', 'wide-lens', 'normal', 'long', 'shallow', 'tilt', 'behind', 'side', 'pov', 'selfie', 'shoulder', 'viewer']],
+    ['notes', 'Notes', 2]],
   location: [['name', 'Name'], ['text', 'Added to the prompt', 3], ['notes', 'Notes', 2]],
   pose: [['name', 'Name'], ['text', 'Added to the prompt', 3], ['notes', 'Notes', 2]],
   light: [['name', 'Name'], ['text', 'Added to the prompt', 2], ['notes', 'Notes', 2]],
   scene: [['name', 'Name'], ['text', 'Scene text', 5], ['rating', 'Rating it sets', 'select', ['', ...RATINGS]], ['notes', 'Notes', 2]],
   model: [['name', 'Name'], ['file', 'File', 'file'], ['steps', 'Steps', 'num'], ['cfg', 'CFG', 'num'], ['sampler', 'Sampler', 1], ['scheduler', 'Scheduler', 1], ['notes', 'Notes', 3]],
 };
-export const PAIRS = { character: [['name', 'gender'], ['build', 'rating_cap']], framing: [['w', 'h']], model: [['steps', 'cfg'], ['sampler', 'scheduler']],
+export const PAIRS = { character: [['name', 'gender'], ['build', 'rating_cap']], framing: [['w', 'h']], camera: [['group', 'diagram']], model: [['steps', 'cfg'], ['sampler', 'scheduler']],
   style: [['defaults.rating', 'defaults.framing']], scene: [['name', 'rating']] };
 
 export const getp = (o, path) => path.split('.').reduce((a, k) => (a == null ? a : a[k]), o);

@@ -405,7 +405,13 @@ try {
       }));
       assert.deepEqual(cols.dialog.slice(0, 2), cols.dialog.slice(2), 'the composer fills the screen');
       for (const [id, client, scroll] of cols.cols) assert.ok(scroll <= client + 2, `${id} fits without scrolling: ${client} < ${scroll}`);
-      for (const name of ['referenceStrength', 'faceStrength', 'scene', 'extra', 'negative', 'details']) assert.ok(await page.locator(`[data-compose=${name}]`).isVisible(), name + ' in view');
+      for (const name of ['scene', 'extra']) assert.ok(await page.locator(`[data-compose=${name}]`).isVisible(), name + ' in view');
+      // Jørgen, 2026-10-11: Direct the shot with the camera in it and previews for positioning, all in view
+      for (const sel of ['#composePreview [data-stage] svg', '#composePreview [data-row=shot]', '#composePreview [data-row=angle]', '#composePreview [data-row=lens]', '#composePreview [data-compose=pose]', '#composition [data-row=location]', '#composition [data-row=light]', '#composition [data-light-from]', '#composition .image-exclude summary']) assert.ok(await page.locator(sel).first().isVisible(), sel + ' in view');
+      // Exclude folds to one line; opened, its blocks, other words and notes are there
+      await page.locator('#composition .image-exclude summary').click();
+      for (const name of ['negative', 'details']) assert.ok(await page.locator(`#composition [data-compose=${name}]`).isVisible(), name + ' in Exclude');
+      await page.locator('#composition .image-exclude summary').click();
       // Jørgen, 2026-10-11: the picture in the right column at a useful size, the generation settings folded on the left
       const shotBox = await page.locator('#composeShot .selected-image').boundingBox();
       assert.ok(shotBox.height >= 250, `the shot's picture is big enough: ${JSON.stringify(shotBox)}`);
@@ -456,6 +462,8 @@ try {
       assert.equal(await page.locator('#composition [data-char]').count(), 0);
       await page.locator('#composition .image-settings summary').click();
       await page.locator('#composition .image-tools summary').click();
+      // one person: keeping the face the same sits in their row, with its strengths
+      for (const name of ['referenceStrength', 'faceStrength']) assert.ok(await page.locator(`#composition [data-person=person0] [data-compose=${name}]`).isVisible(), name + ' in the person row');
       const folded = await page.locator('#composition').evaluate(el => [el.clientHeight, el.scrollHeight]);
       assert.ok(folded[1] <= folded[0] + 2, `the left column fits with the people folded and the settings open: ${folded}`);
       await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-folded-${width}.png`) });

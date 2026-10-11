@@ -3,6 +3,7 @@
 // one that kept the words themselves still reads (blockText).
 const {structuredClone} = globalThis;
 import {blockText, blockId} from '../../imagegen/web/blocks.js';
+import {stageWords, personOf} from './image-stage.js';
 export const DIRECTION_KINDS = [['pose', 'pose', 'Pose'], ['environment', 'location', 'Setting'], ['light', 'light', 'Light']];
 export const DEFAULT_COMPOSITION = {
   characters: [], outfit: {}, useShort: true, cameras: [], sceneRefs: [], negatives: null,
@@ -25,6 +26,7 @@ export function normalizeComposition(value = {}) {
   c.characters = value.characters || value.chars || [];
   c.cameras = value.cameras || value.cams || (value.camera ? [value.camera] : []);
   c.negatives = value.negatives ?? value.negs ?? null;
+  if (value.stage) c.stage = structuredClone(value.stage);
   c.seedMode = value.seedMode || (value.seed === '' || value.seed == null ? 'random' : 'fixed');
   if (value.ipa) Object.assign(c, {reference: value.ipa.ref || value.omRef || '', referenceOn: value.ipa.on, referenceStrength: value.ipa.strength, referenceCutout: value.ipa.cutout});
   if (value.fix) Object.assign(c, {faceFix: value.fix.on, faceStrength: value.fix.denoise});
@@ -66,7 +68,10 @@ export function assembleComposition(c, presets, subplotId) {
     if (chars.length > 1 && c.useShort && d.short) return [d.short, outfit].filter(Boolean).join(', ');
     return [d.generic ? '' : d.name, d.age, d.look, d.signature, d.build, outfit].filter(Boolean).join(', ');
   });
-  const direction = [c.scene, blockText(presets, 'pose', c.pose), c.angle, blockText(presets, 'location', c.environment), blockText(presets, 'light', c.light)].filter(Boolean).join('. ');
+  // the staging (image-stage.js): who stands where, facing and looking at what, heights, contact; then the light's
+  // direction and the mood after the setting and light blocks
+  const staged = stageWords(c, chars.map(personOf));
+  const direction = [c.scene, blockText(presets, 'pose', c.pose), staged.people, c.angle, blockText(presets, 'location', c.environment), blockText(presets, 'light', c.light), staged.light, staged.mood].map(x => String(x || '').trim().replace(/[.]+$/, '')).filter(Boolean).join('. ');
   const head = [style.quality, rating, cast, style.anchors].filter(Boolean).join(', ');
   const positive = smartJoin([head, blocks.join('; '), direction, c.cameras.map(id => byId('camera', id)?.data.prompt).filter(Boolean).join(', '), byId('framing', c.framing)?.data.prompt, c.extra, style.suffix]);
   const negatives = c.negatives || (presets.negative || []).filter(p => !p.archived && p.data.default).map(p => p.id);
