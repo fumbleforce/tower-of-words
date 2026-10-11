@@ -21,11 +21,6 @@
 .image-person-placeholder { display: grid; place-items: center; background: #1d222b; color: var(--faint); font-size: 34px; }
 .image-check { display: flex !important; flex-direction: row; align-items: center; gap: 9px; min-height: 32px; }
 .image-check input { flex: 0 0 auto; width: 16px; height: 16px; margin: 0; }
-.image-reference { display: flex; align-items: center; gap: 12px; margin: 10px 0 15px; }
-.image-reference > img { width: 76px; height: 88px; object-fit: cover; border-radius: 8px; }
-.image-reference > div { display: grid; gap: 8px; min-width: 0; }
-.image-reference strong { font-size: 13px; }
-.image-reference button { font-size: 12px; padding: 6px 9px; }
 .image-reference-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-height: 320px; gap: 7px; overflow-y: auto; margin: 12px 0; }
 .image-reference-grid button { padding: 0; overflow: hidden; }
 .image-reference-grid img { width: 100%; height: 105px; display: block; object-fit: cover; }
@@ -66,25 +61,13 @@
 .image-person-row { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; align-items: center; min-width: 0; }
 .image-person-row > img, .image-person-row > .image-person-placeholder { width: 34px; height: 40px; object-fit: cover; object-position: center 25%; border-radius: 6px; font-size: 16px; }
 .image-person-row > span:last-child { font-size: 12.5px; }
-.compose-dialog .image-outfits { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
-
-/* keep the character consistent */
-.compose-dialog .image-reference { margin: 4px 0 8px; }
-.compose-dialog .image-reference > img { width: 52px; height: 60px; }
-.compose-dialog .image-consistency { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.6fr); gap: 10px; align-items: start; }
-.compose-dialog .image-consistency .image-reference { margin: 0; min-width: 0; }
-.compose-dialog .image-consistency .image-reference button { white-space: normal; text-align: left; }
-.compose-dialog .image-strengths { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 8px; align-items: center; }
-.compose-dialog .image-strengths input[type=number] { width: 64px; }
-.compose-dialog .image-strengths label:not(.image-check) { grid-template-columns: auto 1fr; align-items: center; gap: 6px; }
-.compose-dialog .image-strengths .image-check:last-child { grid-column: 1 / -1; }
 
 /* generation settings: one summary line when folded (the original prompt's pattern) */
-.image-settings > summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; margin: 0 !important; }
-.image-settings[open] > summary { margin-bottom: 8px !important; }
+.image-settings > summary, .image-exclude > summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; margin: 0 !important; }
+.image-settings[open] > summary, .image-exclude[open] > summary { margin-bottom: 8px !important; }
 .settings-title { flex: none; font-size: 13.5px; font-weight: 600; }
-.settings-peek { flex: 1 1 100%; width: 0; min-width: 0; margin: 0 !important; font-size: 11.5px; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.image-settings[open] .settings-peek { display: none; }
+.settings-peek, .exclude-peek { flex: 1 1 100%; width: 0; min-width: 0; margin: 0 !important; font-size: 11.5px; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.image-settings[open] .settings-peek, .image-exclude[open] .exclude-peek { display: none; }
 .settings-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, .8fr)) minmax(0, 1.1fr); gap: 6px 8px; align-items: end; }
 .settings-label { font-size: 12px; color: var(--dim); }
 .settings-seed { display: flex; align-items: center; gap: 8px; margin: 8px 0 4px; }
@@ -100,7 +83,6 @@
 .compose-stage > .image-prompt { flex: 1 1 0; min-height: 96px; display: flex; flex-direction: column; }
 .compose-stage .image-prompt .prompt-box { flex: 1 1 0; min-height: 40px; max-height: none; overflow-y: auto; margin: 0; padding: 8px 10px; border-radius: 8px; background: #0f1217; color: var(--ink); font-size: 12.5px; }
 .compose-stage .image-prompt .section-head { flex-wrap: wrap; }
-.compose-stage .image-what textarea[data-compose=scene] { min-height: 64px; }
 .compose-dialog .image-exclude .two { margin-bottom: 0; }
 
 /* the right column: the shot's picture with Generate, then the library, which scrolls on its own */
@@ -189,7 +171,6 @@
 .block-pick { display: flex; gap: 4px; align-items: center; min-width: 0; }
 .block-pick select { flex: 1 1 auto; min-width: 0; }
 .block-pick button.small { flex: 0 0 auto; min-height: 30px; padding: 0 7px; font-size: 11.5px; color: var(--dim); }
-.image-outfits { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px 10px; margin-top: 4px; }
 .block-dialog { width: min(560px, 94vw); max-height: 90vh; padding: 0; border: 1px solid var(--line2); border-radius: 12px; background: var(--panel); color: var(--ink); }
 .block-dialog::backdrop { background: rgba(5, 7, 10, .55); }
 .block-form { display: grid; gap: 10px; padding: 16px 18px; }
@@ -233,8 +214,7 @@
   .compose-dialog .image-current .selected-image { max-height: 50vh; }
   .compose-dialog .image-empty { min-height: 34vh; }
   .compose-dialog .image-library .render-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .compose-stage .image-what textarea[data-compose=scene] { min-height: 120px; }
-  .compose-stage .image-what textarea[data-compose=extra] { min-height: 64px; }
+  .compose-stage .image-what textarea[data-compose=scene] { min-height: 72px; }
 }
 /* a 768 px tall laptop: the left and middle columns still fit without scrolling */
 @media (max-height: 800px) {
@@ -271,3 +251,98 @@
 .image-original details[open] .original-less { display: inline; }
 .image-original summary { display: flex; align-items: baseline; gap: 6px; }
 .image-original summary .original-peek { flex: 1; }
+
+/* People: each row is the person, their outfit and how the picture keeps their face (images.js) */
+.person-main { display: grid; gap: 4px; min-width: 0; }
+.same-face { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; font-size: 12px; color: var(--dim); }
+.same-face .image-check { min-height: 24px; gap: 5px; color: var(--ink); font-size: 12px; }
+.same-face .image-check input { width: 14px; height: 14px; }
+.same-face-label { color: var(--faint); font-size: 11.5px; }
+.same-face-pair { display: inline-flex; align-items: center; gap: 4px; }
+.same-face-pair input[type=number] { width: 56px; min-height: 24px; padding: 1px 4px; font-size: 12px; }
+.same-face-ref { width: 22px; height: 26px; object-fit: cover; border-radius: 4px; }
+.same-face-pick { display: inline-flex; gap: 4px; }
+.same-face-pick button.small { min-height: 22px; padding: 0 7px; font-size: 11.5px; }
+.same-face-note { margin: 4px 0 0; }
+.image-person-row { align-items: start; }
+
+/* tiles: a row of small pictures or diagrams, one per block, that scrolls sideways; + New and Edit at the end */
+.tile-row { display: grid; grid-template-columns: 74px minmax(0, 1fr); align-items: center; gap: 6px; margin: 4px 0; }
+.tile-row > .hint { grid-column: 2; margin: 0; }
+.row-label { font-size: 12px; color: var(--dim); }
+.tiles { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 2px; align-items: stretch; }
+.tile { flex: 0 0 auto; display: grid; grid-template-rows: auto auto; align-content: start; gap: 1px; width: 58px; min-height: 0; padding: 3px; border-radius: 6px; white-space: normal; }
+.tile-art { display: grid; place-items: center; height: 34px; overflow: hidden; border-radius: 4px; background: #11151b; }
+.tile-art img { width: 100%; height: 100%; object-fit: cover; }
+.tile-art svg.dia { width: 100%; height: 100%; }
+.tile-label { font-size: 10.5px; line-height: 1.15; color: var(--dim); text-align: center; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tile[aria-pressed="true"] { border-color: rgba(111, 208, 198, .7); background: var(--accent-soft); }
+.tile[aria-pressed="true"] .tile-label { color: var(--ink); }
+.tile-initial { font-size: 16px; color: var(--faint); }
+.tile-row-pics .tile { width: 64px; }
+.tile-row-pics .tile-art { height: 40px; }
+.tile-sep { flex: 0 0 1px; margin: 4px 3px; background: var(--line2); }
+.tile-tools { display: flex; flex-direction: column; gap: 3px; flex: 0 0 auto; }
+.tile-tool { min-height: 0; flex: 1; padding: 0 7px; font-size: 11px; color: var(--dim); }
+.tiles > .tile-tool { flex: 0 0 auto; align-self: center; min-height: 26px; }
+.tile-mini { width: 44px; padding: 2px; }
+.tile-mini .tile-art { height: 24px; }
+.tile-mini .tile-label { -webkit-line-clamp: 1; }
+/* a block with no example picture yet: its name fills the tile */
+.tile-text { align-content: center; }
+.tile-text .tile-art { display: none; }
+.tile-text .tile-label { font-size: 11px; color: var(--ink); padding: 4px 1px; }
+.tile-row-pics .tile-text { min-height: 52px; }
+.ctl-row { grid-template-columns: 54px minmax(0, 1fr); align-items: center; gap: 6px; }
+.ctl-pair { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; align-items: end; }
+.ctl select { min-height: 26px; padding: 2px 6px; font-size: 12.5px; }
+
+/* Direct the shot: the stage, with the selected person's controls beside it (image-direct.js, stage-view.js) */
+.image-direction .section-head .hint { margin: 0 0 0 auto !important; font-size: 11.5px; }
+.stage-wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; align-items: start; }
+.compose-dialog .stage-wrap { grid-template-columns: auto minmax(200px, 1fr); }
+.stage-box { height: 220px; width: auto; max-width: min(60vw, 520px); border-radius: 6px; overflow: hidden; background: #11151b; touch-action: none; }
+.stage-box .stage-svg { display: block; width: 100%; height: 100%; }
+.stage-fig { cursor: grab; }
+.stage-fig:active { cursor: grabbing; }
+.stage-grid { stroke: rgba(255, 255, 255, .06); stroke-width: .4; }
+.stage-horizon { stroke: rgba(111, 208, 198, .35); stroke-width: .5; stroke-dasharray: 2 2; }
+.stage-gaze { stroke: rgba(243, 210, 122, .8); stroke-width: .6; stroke-dasharray: 1.6 1.2; }
+.stage-name { font-size: 4.2px; font-weight: 700; text-anchor: middle; fill: var(--dim); paint-order: stroke; stroke: #11151b; stroke-width: 1px; }
+.stage-name.on { fill: var(--ink); }
+.stage-frame { fill: none; stroke: rgba(255, 255, 255, .18); stroke-width: .6; }
+.stage-side { display: grid; gap: 5px; min-width: 0; }
+.stage-say { margin: 4px 0 2px !important; }
+.stage-empty { margin: 0; }
+.who { display: flex; flex-wrap: wrap; gap: 4px; }
+.who button { min-height: 24px; padding: 0 8px; font-size: 12px; gap: 5px; }
+.who-dot { width: 8px; height: 8px; border-radius: 50%; }
+.ctl { display: grid; gap: 2px; font-size: 11.5px; color: var(--dim); }
+.ctl input { min-height: 26px; padding: 2px 7px; font-size: 12.5px; }
+.ctl-label { font-size: 11.5px; color: var(--dim); }
+.facing { display: flex; flex-wrap: wrap; gap: 3px; }
+.compose-dialog .ctl .chips { margin: 0; gap: 3px; }
+.compose-dialog .ctl .chips button { min-height: 22px; padding: 0 7px; font-size: 11.5px; }
+.direct-more, .place-more { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px 10px; align-items: end; margin-top: 4px; }
+.place-more { grid-template-columns: auto minmax(0, 1fr); }
+.dia-cam { font-size: 4px; fill: var(--faint); text-anchor: middle; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-height: 800px) {
+  .stage-box { height: 196px; }
+  .tile-art { height: 28px; }
+  .tile-row-pics .tile-art { height: 32px; }
+  .tile-mini .tile-art { height: 20px; }
+  .compose-stage > .image-prompt { min-height: 64px; }
+  .tile-dia { width: 64px; }
+  .tile-dia .tile-art { height: 24px; }
+  .tile-dia .tile-label { -webkit-line-clamp: 1; white-space: nowrap; text-overflow: ellipsis; display: block; }
+  .tile-label { font-size: 10px; }
+  .tile-row { margin: 2px 0; }
+}
+@media (min-width: 1800px) {
+  .stage-box { height: 380px; max-width: 760px; }
+  .tile { width: 76px; }
+  .tile-art { height: 46px; }
+  .tile-row-pics .tile { width: 92px; }
+  .tile-row-pics .tile-art { height: 62px; }
+}

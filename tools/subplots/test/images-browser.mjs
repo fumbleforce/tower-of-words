@@ -11,13 +11,13 @@ if (await fetch(base + '/').then(() => true, () => false)) throw Error(`Port ${p
 const server = spawn('python3', ['tools/review_server.py', String(port)], {env: {...process.env, SUBPLOTS_ROOT: root, SUBPLOTS_PUBLIC_ONLY: '1'}, stdio: 'ignore'});
 const picture = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240"><rect width="400" height="240" fill="#dae4ed"/><circle cx="200" cy="80" r="30" fill="#86a5bd"/><path d="M150 210v-65q50-60 100 0v65" fill="#567c98"/></svg>');
 const fixture = {id:'fixture:scene',steps:[{say:'alice',text:'Hello.'}],images:[{id:'one',label:'First shot',url:picture},{id:'two',label:'Second shot',url:picture},{id:'three',label:'Third shot',url:picture,available:true}],metadata:{}};
-const presets = {character:[{id:'alice',v:1,data:{name:'Alice',gender:'female',outfit:'blue coat',portrait:'art/fixture.webp'}}],model:[{id:'local',v:1,data:{name:'Local model',file:'fixture.safetensors'}}],style:[{id:'paint',v:1,data:{name:'Painted',quality:'illustration'}}],framing:[{id:'wide',v:1,data:{name:'Wide',w:1200,h:800}}],camera:[{id:'near',v:1,data:{name:'Close',prompt:'close camera'}},{id:'left',v:1,data:{name:'From left',prompt:'left camera'}}],scene:[{id:'reading',v:1,data:{name:'Reading',text:'Reading a letter'}}],negative:[],pose:[{id:'seated',v:1,data:{name:'Seated',text:'seated on a bench'}}],location:[{id:'bathhouse',v:1,data:{name:'Bathhouse',text:'in a bathhouse'}}],light:[{id:'night',v:1,data:{name:'Night lighting',text:'night lighting'}}],outfit:[]};
+const presets = {character:[{id:'alice',v:1,data:{name:'Alice',gender:'female',outfit:'blue coat',portrait:'art/fixture.webp'}},{id:'bob',v:1,data:{name:'Bob',gender:'male',portrait:'art/fixture.webp'}}],model:[{id:'local',v:1,data:{name:'Local model',file:'fixture.safetensors'}}],style:[{id:'paint',v:1,data:{name:'Painted',quality:'illustration'}}],framing:[{id:'wide',v:1,data:{name:'Wide',w:1200,h:800}}],camera:[{id:'near',v:1,data:{name:'Close',prompt:'close camera'}},{id:'left',v:1,data:{name:'From left',prompt:'left camera'}},{id:'cowboy',v:1,data:{name:'Cowboy shot',prompt:'cowboy shot',group:'shot',diagram:'thighs'}},{id:'full',v:1,data:{name:'Full body',prompt:'full body',group:'shot',diagram:'full'}}],scene:[{id:'reading',v:1,data:{name:'Reading',text:'Reading a letter'}}],negative:[],pose:[{id:'seated',v:1,data:{name:'Seated',text:'seated on a bench'}}],location:[{id:'bathhouse',v:1,data:{name:'Bathhouse',text:'in a bathhouse'}}],light:[{id:'night',v:1,data:{name:'Night lighting',text:'night lighting'}}],outfit:[]};
 const html = `<html><head><link rel="stylesheet" href="/tools/subplots/web/editor.css"><link rel="stylesheet" href="/tools/subplots/web/images.css"></head><body><div id="notice" role="status" hidden></div><main style="max-width:450px;margin:auto;padding:16px"><button data-inspect="images">Images</button><section id="images" hidden><button id="loadPresets">Connect</button><p id="imageStatus"></p><div id="composition"></div><div id="renders"></div></section></main><script type="module">import {installImages} from '/tools/subplots/web/images.js';window.fixture=${JSON.stringify(fixture)};window.edits=0;document.querySelector('[data-inspect]').onclick=()=>document.querySelector('#images').hidden=false;window.editor=installImages(()=>window.fixture,()=>window.edits++);window.editor.render();</script></body></html>`;
 try {
   for (let i = 0; i < 60; i++) {try {if ((await fetch(base + '/tools/subplots/web/images.js')).ok) break;} catch {} await new Promise(resolve => setTimeout(resolve, 100));}
   await withBrowserJob('codex-subplot-image-editor', async browser => {
     const page = await browser.newPage({viewport:{width:550,height:900}});
-    const errors = [], generated = [], created = [], rated = [];
+    const errors = [], generated = [], created = [], rated = [], history = [], examples = [], jobsNow = [];
     page.on('pageerror', e => errors.push(e.message));
     await page.route('**/island/private/**', route => route.abort());
     await page.route('**/api/subplots/picture-source**', route => route.fulfill({json:{how:'the fixture round', start:{image:'art/fixture.webp'},
@@ -28,7 +28,8 @@ try {
       if (u.pathname.includes('/repo/') || u.pathname.includes('/out/') || u.pathname.includes('/thumb/')) return route.fulfill({contentType:'image/svg+xml',body:decodeURIComponent(picture.split(',')[1])});
       let body = [];
       if (u.pathname.endsWith('/presets')) body = presets;
-      if (u.pathname.endsWith('/history')) body = [{run_id:'old',at:'2026-10-01',characters:['alice'],positive:'A previous picture.',model_file:'fixture.safetensors',renders:[{id:'old-picture',file:'fixture.png',thumb:'fixture.webp',seed:8}]}];
+      if (u.pathname.endsWith('/jobs')) body = jobsNow;
+      if (u.pathname.endsWith('/history')) body = u.searchParams.get('preset') ? examples.filter(r => r.example === u.searchParams.get('preset')).map(r => r.run) : history.length ? history : [{run_id:'old',at:'2026-10-01',characters:['alice'],positive:'A previous picture.',model_file:'fixture.safetensors',renders:[{id:'old-picture',file:'fixture.png',thumb:'fixture.webp',seed:8}]}];
       if (u.pathname.endsWith('/portraits')) body = [{path:'art/fixture.webp',group:'Portrait'}];
       if (u.pathname.endsWith('/generate')) { generated.push(route.request().postDataJSON()); body = {run_id:'new'}; }
       if (u.pathname.endsWith('/mode')) body = {private: false};
@@ -48,8 +49,8 @@ try {
     await page.locator('[data-outfit-for=alice]').selectOption('usual');
     await page.locator('[data-compose=scenePreset]').selectOption('reading');
     await page.locator('[data-compose=pose]').selectOption('seated');
-    await page.locator('[data-camera=near]').click();
-    await page.locator('[data-camera=left]').click();
+    await page.locator('[data-cam=near]').click();
+    await page.locator('[data-cam=left]').click();
     await page.locator('#generate').click();
     assert.equal(generated.length,1);
     assert.match(generated[0].positive,/Reading a letter/);
@@ -88,7 +89,7 @@ try {
     assert.equal(await page.locator('[data-compose=scene]').inputValue(),'A previous picture.');
     assert.equal(await page.locator('[data-original=positive]').inputValue(),'A previous picture.');
     assert.match(await page.locator('#assembled').textContent(),/A previous picture/);
-    await page.locator('[data-compose=light]').selectOption('night');
+    await page.locator('[data-block-tile=light][data-id=night]').click();
     assert.match(await page.locator('#assembled').textContent(),/night lighting/);
     // a shot's own picture opens filled in from its source, and "Small changes" starts from it with the same seed
     await page.evaluate(()=>globalThis.editor.focus('three'));
@@ -97,7 +98,7 @@ try {
     // a size no preset has still opens, and shows as the shot's own size
     assert.match(await page.locator('[data-size-own]').textContent(),/1024×768/);
     assert.equal(await page.locator('[data-size=wide]').getAttribute('aria-pressed'),'false');
-    assert.equal(await page.evaluate(()=>[...globalThis.document.querySelectorAll('[data-camera]')].filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.camera).join()),'near');
+    assert.equal(await page.evaluate(()=>[...globalThis.document.querySelectorAll('[data-cam]')].filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.cam).join()),'near');
     await page.locator('[data-small-changes]').click();
     await page.locator('.image-tools summary').click();
     await page.locator('[data-tool=denoise]').waitFor();
@@ -113,16 +114,67 @@ try {
     assert.deepEqual([generated[2].w,generated[2].h,generated[2].seed,generated[2].seed_mode,generated[2].positive],[1200,800,77,'fixed','Original words, close camera']);
     assert.deepEqual(generated[2].start,{image:'art/fixture.webp',denoise:0.35});
     // "+ New…" in a picker: a setting made from Bathhouse, saved as a block and used at once
-    await page.locator('[data-compose=environment]').selectOption('__new__');
+    await page.locator('[data-block-tile=location][data-id=bathhouse]').click();
+    await page.locator('[data-new-tile=location]').click();
     await page.locator('#blockDialog [data-from]').selectOption('bathhouse');
     assert.equal(await page.locator('#blockDialog [data-f=text]').inputValue(),'in a bathhouse');
     await page.locator('#blockDialog [data-f=name]').fill('Outside sento');
     await page.locator('#blockDialog [data-f=text]').fill('outside a sento, a noren curtain');
     await page.locator('#blockDialog [data-save]').click();
-    await page.waitForFunction(()=>globalThis.document.querySelector('[data-compose=environment]').value === 'outside-sento');
+    await page.waitForFunction(()=>globalThis.document.querySelector('[data-block-tile=location][data-id=outside-sento]')?.getAttribute('aria-pressed') === 'true');
     assert.equal(created[0].path,'/api/subplots/image/api/preset/location/bathhouse/create');
     assert.equal(created[0].private,false);
     assert.match(await page.locator('#assembled').textContent(),/outside a sento, a noren curtain/);
+    // Direct the shot (Jørgen, 2026-10-11: "I want previews for positioning. the camera and composition belongs wit hthis"):
+    // one shot size at a time, people dragged on the stage, facing and gaze, and all of it in the prompt
+    if (!await page.locator('[data-char=alice]').count()) await page.locator('[data-people-open]').click();
+    for (const who of ['alice', 'bob']) if (await page.locator(`[data-char=${who}]`).getAttribute('aria-pressed') !== 'true') await page.locator(`[data-char=${who}]`).click();
+    await page.locator('[data-people-open]').click();
+    assert.match(await page.locator('.same-face-note').textContent(),/one person/);
+    await page.locator('[data-cam=cowboy]').click();
+    await page.locator('[data-cam=full]').click();
+    assert.deepEqual(await page.evaluate(()=>[...globalThis.document.querySelectorAll('[data-row=shot] [data-cam]')].filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.cam)),['full']);
+    const drag = async (id, dx, dy) => {
+      const box = await page.locator(`[data-fig="${id}"] ellipse`).last().boundingBox();  // the head
+      const x = box.x + box.width / 2, y = box.y + box.height / 2;
+      await page.mouse.move(x, y); await page.mouse.down(); await page.mouse.move(x + dx, y + dy, {steps: 6}); await page.mouse.up();
+    };
+    await drag('alice', -30, 0);
+    await drag('bob', 25, -40);
+    assert.match(await page.locator('.stage-say').textContent(),/Placed: Alice left, in front\. Bob right, (further|at the) back/);
+    await page.locator('[data-who=bob]').click();
+    await page.locator('[data-facing=partner]').click();
+    await page.locator('[data-gaze=partner]').click();
+    await page.locator('[data-person-field=expression]').fill('smiling');
+    await page.locator('[data-light-from=back]').click();
+    assert.match(await page.locator('#assembled').textContent(),/Alice on the left in the foreground\. Bob on the right [a-z ]+, turned toward Alice, looking at Alice, smiling.*backlighting, rim light.*full body/);
+    // the arrow keys move the person whose button has focus
+    const bobX = () => page.evaluate(()=>Object.values(globalThis.fixture.metadata.compositions).find(c=>c.stage).stage.people.bob.x);
+    const before = await bobX();
+    await page.locator('[data-who=bob]').focus();
+    await page.keyboard.press('ArrowLeft');
+    assert.ok(await bobX() < before, 'arrow left moves Bob');
+    await page.locator('#generate').click();
+    const staged = generated.at(-1);
+    assert.equal(staged.compose.stage.people.bob.facing,'partner');
+    // a staged picture reopens with its stage: Reuse settings fills it back in
+    history.push({run_id:'staged',at:'2026-10-11',characters:['alice','bob'],positive:staged.positive,model_file:'fixture.safetensors',compose:staged.compose,renders:[{id:'staged-1',file:'staged.png',thumb:'staged.webp',seed:5,compose:staged.compose,positive:staged.positive}]});
+    await page.locator('[data-refresh-images]').click();
+    await page.locator('[data-lib=reuse]').first().waitFor();
+    await page.evaluate(()=>{ for (const c of Object.values(globalThis.fixture.metadata.compositions)) delete c.stage; });
+    await page.locator('[data-lib=reuse]').first().click();
+    await page.waitForFunction(()=>/Placed: Alice left/.test(globalThis.document.querySelector('.stage-say')?.textContent || ''));
+    assert.match(await page.locator('#assembled').textContent(),/turned toward Alice, looking at Alice, smiling/);
+    // Make examples queues a small stand-in render per block without a picture; when it is done the tile shows it
+    await page.locator('[data-make-examples=light]').click();
+    const asked = generated.filter(g => g.compose?.example);
+    assert.deepEqual(asked.map(g => g.compose.example), ['light:night']);
+    assert.match(asked[0].positive, /mannequin/);
+    examples.push({example:'light:night',run:{run_id:'ex',compose:{example:'light:night'},renders:[{id:'ex-1',file:'ex.png',thumb:'ex.webp',compose:{example:'light:night'}}]}});
+    jobsNow.push({id:'ex-1',status:'done',file:'ex.png',thumb:'ex.webp',compose:{example:'light:night'}});
+    await page.locator('[data-refresh-images]').click();
+    await page.locator('[data-block-tile=light][data-id=night] img').waitFor();
+    assert.equal(await page.locator('#renders [data-lib]').filter({hasText: 'ex.png'}).count(), 0);
     assert.deepEqual(errors,[]);
     fs.mkdirSync('/tmp/codex-subplot-image-editor',{recursive:true});
     await page.screenshot({path:'/tmp/codex-subplot-image-editor/550.png',fullPage:true});
@@ -130,6 +182,6 @@ try {
     assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth > globalThis.innerWidth),false);
     await page.screenshot({path:'/tmp/codex-subplot-image-editor/390.png',fullPage:true});
     await page.close();
-    console.log('PASS image editor: auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, + New setting from Bathhouse, lightbox star and keys, a shot opened from its source with Small changes, people folded to the cast, settings folded with seed Auto or Fixed and size presets, 390px layout.');
+    console.log('PASS image editor: Direct the shot (shot size tiles, stage drag, facing, gaze, arrow keys, the stage reopened by Reuse), Make examples, auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, + New setting from Bathhouse, lightbox star and keys, a shot opened from its source with Small changes, people folded to the cast, settings folded with seed Auto or Fixed and size presets, 390px layout.');
   }, {timeoutMs:60000,gpuWaitMs:60000});
 } finally {server.kill('SIGTERM');fs.rmSync(root,{recursive:true,force:true});}

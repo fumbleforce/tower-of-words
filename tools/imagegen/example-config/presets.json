@@ -560,6 +560,83 @@
     "prompt": "overhead shot, from directly above",
     "notes": ""
    }
+  },
+  {
+   "id": "face-close-up",
+   "type": "camera",
+   "data": {
+    "name": "Face close-up",
+    "prompt": "extreme close-up, the face fills the frame",
+    "group": "shot",
+    "diagram": "face",
+    "notes": "Shot size, angle and lens rows of the scene editor composer (2026-10-11)."
+   }
+  },
+  {
+   "id": "upper-body",
+   "type": "camera",
+   "data": {
+    "name": "Upper body",
+    "prompt": "upper body",
+    "group": "shot",
+    "diagram": "chest",
+    "notes": "Shot size, angle and lens rows of the scene editor composer (2026-10-11)."
+   }
+  },
+  {
+   "id": "cowboy-shot",
+   "type": "camera",
+   "data": {
+    "name": "Cowboy shot",
+    "prompt": "cowboy shot, from the thighs up",
+    "group": "shot",
+    "diagram": "thighs",
+    "notes": "Shot size, angle and lens rows of the scene editor composer (2026-10-11)."
+   }
+  },
+  {
+   "id": "wide-shot",
+   "type": "camera",
+   "data": {
+    "name": "Wide shot",
+    "prompt": "wide shot, small figures in a large space",
+    "group": "shot",
+    "diagram": "wide",
+    "notes": "Shot size, angle and lens rows of the scene editor composer (2026-10-11)."
+   }
+  },
+  {
+   "id": "wide-angle",
+   "type": "camera",
+   "data": {
+    "name": "Wide-angle",
+    "prompt": "wide-angle lens, strong perspective",
+    "group": "lens",
+    "diagram": "wide-lens",
+    "notes": "Shot size, angle and lens rows of the scene editor composer (2026-10-11)."
+   }
+  },
+  {
+   "id": "telephoto",
+   "type": "camera",
+   "data": {
+    "name": "Telephoto",
+    "prompt": "telephoto lens, compressed perspective",
+    "group": "lens",
+    "diagram": "long",
+    "notes": "Shot size, angle and lens rows of the scene editor composer (2026-10-11)."
+   }
+  },
+  {
+   "id": "shallow-focus",
+   "type": "camera",
+   "data": {
+    "name": "Shallow focus",
+    "prompt": "depth of field, blurry background",
+    "group": "lens",
+    "diagram": "shallow",
+    "notes": "Shot size, angle and lens rows of the scene editor composer (2026-10-11)."
+   }
   }
  ]
 }

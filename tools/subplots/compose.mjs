@@ -8,7 +8,8 @@
 //        [--server URL] [--presets FILE] [--end-session]
 //
 // Recipe fields are the composition's (web/image-compose.js DEFAULT_COMPOSITION): characters, outfit, cameras,
-// framing, style, model, rating, hard, scene, pose, angle, environment, light, extra (more prompt words),
+// framing, style, model, rating, hard, scene, pose, angle, environment, light, stage (who stands where, facing and
+// looking at what: web/image-stage.js), extra (more prompt words),
 // negatives, negative (more to avoid), reference/referenceOn/referenceStrength/referenceCutout (identity
 // reference), faceFix/faceStrength, width, height, steps, cfg, count, seed. Also `subplotId` (the scene the
 // picture belongs to, so the editor lists it under that scene) and `details` (free notes for what the blocks
