@@ -8,8 +8,14 @@ export const BRAKE = 7.5; // m/s² when stopping (keys released, or the end of a
 export const TURN = 9; // rad/s at most
 
 // the game loop's clock, which scripted walks keep to: a frame covers at most FRAME_MAX s of real time (times the time
-// scale), in steps of at most STEP_MAX game seconds. Keep equal to the two numbers in main.js frame().
+// scale) and at most FRAME_T game seconds, in steps of at most STEP_MAX game seconds (main.js tick, frameDt).
+// FRAME_T: a walk cycle takes 0.4 s or more (2.5 a second at the briskest), and a slow frame under the test clock or
+// the hurry that covered most of one drew the legs in nearly the same pose each frame while the body glided (Mr. Mori
+// in the office, gait-watch.js); the clock slows instead.
 export const FRAME_MAX = 0.1;
+export const FRAME_T = 0.15;
+// the game time (s) a frame covers: `ms` of real time since the last one, at time scale `scale`
+export const frameDt = (ms, scale) => Math.min(FRAME_T, Math.min(FRAME_MAX, ms / 1000) * scale);
 
 export const STEP_MAX = 0.05;
 

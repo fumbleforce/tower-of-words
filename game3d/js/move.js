@@ -15,7 +15,7 @@
 // Numbers (measured on the Meshy clips): Eric's walk clip covers about 0.44 body units / s at time scale 1, his run
 // clip about 1.1; Mio's 0.47 and 0.77. The avatars blend walk and run by the gait value (setGait) so feet don't slide.
 // Public facade retained for places, story staging and tooling.
-export { turnToward, bodies } from './movement/shared.js';
+export { turnToward, bodies, frameDt } from './movement/shared.js';
 export { isPassing, softSeparate, personStep } from './movement/crowd.js';
 export { SmoothWalker } from './movement/walker.js';
 export { walkRig, faceRig, standOut, glide } from './movement/scripted.js';
