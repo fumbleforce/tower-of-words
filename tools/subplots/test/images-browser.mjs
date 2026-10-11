@@ -49,8 +49,12 @@ try {
     await page.locator('[data-outfit-for=alice]').selectOption('usual');
     await page.locator('[data-compose=scenePreset]').selectOption('reading');
     await page.locator('[data-compose=pose]').selectOption('seated');
+    await page.locator('[data-cam-tab=angle]').click();
     await page.locator('[data-cam=near]').click();
     await page.locator('[data-cam=left]').click();
+    // the tabs name what is chosen in each
+    assert.match(await page.locator('[data-cam-tab=angle]').textContent(), /Close, From left/);
+    await page.locator('[data-cam-tab=shot]').click();
     await page.locator('#generate').click();
     assert.equal(generated.length,1);
     assert.match(generated[0].positive,/Reading a letter/);
@@ -90,6 +94,9 @@ try {
     assert.equal(await page.locator('[data-original=positive]').inputValue(),'A previous picture.');
     assert.match(await page.locator('#assembled').textContent(),/A previous picture/);
     await page.locator('[data-block-tile=light][data-id=night]').click();
+    // a chosen light folds its row to the choice with Change (Jørgen, 2026-10-11: "upon selecting one, collapse the options")
+    assert.equal(await page.locator('[data-row=light] [data-block-tile]').count(), 0);
+    assert.equal(await page.locator('[data-chosen=light][data-id=night]').count(), 1);
     assert.match(await page.locator('#assembled').textContent(),/night lighting/);
     // a shot's own picture opens filled in from its source, and "Small changes" starts from it with the same seed
     await page.evaluate(()=>globalThis.editor.focus('three'));
@@ -98,7 +105,7 @@ try {
     // a size no preset has still opens, and shows as the shot's own size
     assert.match(await page.locator('[data-size-own]').textContent(),/1024×768/);
     assert.equal(await page.locator('[data-size=wide]').getAttribute('aria-pressed'),'false');
-    assert.equal(await page.evaluate(()=>[...globalThis.document.querySelectorAll('[data-cam]')].filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.cam).join()),'near');
+    assert.deepEqual(await page.evaluate(()=>[...globalThis.document.querySelectorAll('[data-cam-tab]')].map(b=>b.querySelector('.cam-choice').textContent)),['none','Close','none']);
     await page.locator('[data-small-changes]').click();
     await page.locator('.image-tools summary').click();
     await page.locator('[data-tool=denoise]').waitFor();
@@ -114,6 +121,7 @@ try {
     assert.deepEqual([generated[2].w,generated[2].h,generated[2].seed,generated[2].seed_mode,generated[2].positive],[1200,800,77,'fixed','Original words, close camera']);
     assert.deepEqual(generated[2].start,{image:'art/fixture.webp',denoise:0.35});
     // "+ New…" in a picker: a setting made from Bathhouse, saved as a block and used at once
+    if (await page.locator('[data-unfold=location]').count()) await page.locator('[data-row=location] [data-unfold=location].small').click();
     await page.locator('[data-block-tile=location][data-id=bathhouse]').click();
     await page.locator('[data-new-tile=location]').click();
     await page.locator('#blockDialog [data-from]').selectOption('bathhouse');
@@ -121,7 +129,7 @@ try {
     await page.locator('#blockDialog [data-f=name]').fill('Outside sento');
     await page.locator('#blockDialog [data-f=text]').fill('outside a sento, a noren curtain');
     await page.locator('#blockDialog [data-save]').click();
-    await page.waitForFunction(()=>globalThis.document.querySelector('[data-block-tile=location][data-id=outside-sento]')?.getAttribute('aria-pressed') === 'true');
+    await page.waitForFunction(()=>globalThis.document.querySelector('[data-chosen=location][data-id=outside-sento]')?.getAttribute('aria-pressed') === 'true');
     assert.equal(created[0].path,'/api/subplots/image/api/preset/location/bathhouse/create');
     assert.equal(created[0].private,false);
     assert.match(await page.locator('#assembled').textContent(),/outside a sento, a noren curtain/);
@@ -135,6 +143,7 @@ try {
     await page.locator('[data-cam=full]').click();
     assert.deepEqual(await page.evaluate(()=>[...globalThis.document.querySelectorAll('[data-row=shot] [data-cam]')].filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.cam)),['full']);
     const drag = async (id, dx, dy) => {
+      await page.locator(`[data-fig="${id}"]`).first().scrollIntoViewIfNeeded();
       const box = await page.locator(`[data-fig="${id}"] ellipse`).last().boundingBox();  // the head
       const x = box.x + box.width / 2, y = box.y + box.height / 2;
       await page.mouse.move(x, y); await page.mouse.down(); await page.mouse.move(x + dx, y + dy, {steps: 6}); await page.mouse.up();
@@ -166,6 +175,7 @@ try {
     await page.waitForFunction(()=>/Placed: Alice left/.test(globalThis.document.querySelector('.stage-say')?.textContent || ''));
     assert.match(await page.locator('#assembled').textContent(),/turned toward Alice, looking at Alice, smiling/);
     // Make examples queues a small stand-in render per block without a picture; when it is done the tile shows it
+    if (await page.locator('[data-row=light] [data-unfold=light].small').count()) await page.locator('[data-row=light] [data-unfold=light].small').click();
     await page.locator('[data-make-examples=light]').click();
     const asked = generated.filter(g => g.compose?.example);
     assert.deepEqual(asked.map(g => g.compose.example), ['light:night']);
@@ -174,6 +184,26 @@ try {
     jobsNow.push({id:'ex-1',status:'done',file:'ex.png',thumb:'ex.webp',compose:{example:'light:night'}});
     await page.locator('[data-refresh-images]').click();
     await page.locator('[data-block-tile=light][data-id=night] img').waitFor();
+    // Preview this place: the setting in its light, no people, small, through the queue, and the empty picture slot shows
+    // it (Jørgen, 2026-10-11: "gen that background scene as a preview ther ... and not get a blank preview as now")
+    if (await page.locator('[data-block-tile=light][data-id=night]').getAttribute('aria-pressed') !== 'true') await page.locator('[data-block-tile=light][data-id=night]').click();
+    await page.evaluate(()=>{ for (const im of globalThis.fixture.images) { im.available = false; im.url = ''; } globalThis.fixture.metadata.images = {}; globalThis.editor.render(); });
+    assert.match(await page.locator('.image-current').textContent(), /Preview its place|Place preview/);
+    await page.locator('.image-current [data-preview-place]').click();
+    const place = generated.at(-1);
+    assert.equal(place.compose.placePreview, 'place:outside-sento|night');
+    assert.match(place.positive, /no people.*outside a sento, a noren curtain.*night lighting/);
+    assert.doesNotMatch(place.positive, /1girl|Alice/);
+    assert.ok(place.w <= 640 && place.h <= 640 && place.steps === 20, 'small and quick');
+    jobsNow.push({id:'pl-1',status:'done',file:'pl.png',thumb:'pl.webp',compose:{placePreview:'place:outside-sento|night'}});
+    await page.locator('[data-refresh-images]').click();
+    await page.waitForFunction(()=>/Place preview: Outside sento, Night lighting\./.test(globalThis.document.querySelector('.place-preview figcaption')?.textContent || ''));
+    assert.equal(await page.locator('.place-preview img').count(), 1);
+    // the generated prompt shows each block's words on its own tint, named on hover; the text is unchanged
+    assert.ok(await page.locator('#assembled .pp-place[title=Setting]').count());
+    assert.ok(await page.locator('#assembled .pp-light').count());
+    await page.locator('#generate').click();
+    assert.equal(generated.at(-1).positive, await page.locator('#assembled').textContent());
     assert.equal(await page.locator('#renders [data-lib]').filter({hasText: 'ex.png'}).count(), 0);
     assert.deepEqual(errors,[]);
     fs.mkdirSync('/tmp/codex-subplot-image-editor',{recursive:true});
@@ -182,6 +212,6 @@ try {
     assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth > globalThis.innerWidth),false);
     await page.screenshot({path:'/tmp/codex-subplot-image-editor/390.png',fullPage:true});
     await page.close();
-    console.log('PASS image editor: Direct the shot (shot size tiles, stage drag, facing, gaze, arrow keys, the stage reopened by Reuse), Make examples, auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, + New setting from Bathhouse, lightbox star and keys, a shot opened from its source with Small changes, people folded to the cast, settings folded with seed Auto or Fixed and size presets, 390px layout.');
+    console.log('PASS image editor: Preview this place in the empty picture slot, setting and light rows folded to the choice, the prompt tinted by block, Direct the shot (camera tabs, shot size tiles, stage drag, facing, gaze, arrow keys, the stage reopened by Reuse), Make examples, auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, + New setting from Bathhouse, lightbox star and keys, a shot opened from its source with Small changes, people folded to the cast, settings folded with seed Auto or Fixed and size presets, 390px layout.');
   }, {timeoutMs:60000,gpuWaitMs:60000});
 } finally {server.kill('SIGTERM');fs.rmSync(root,{recursive:true,force:true});}

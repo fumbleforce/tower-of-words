@@ -80,7 +80,7 @@
 /* the middle column: the prompt takes what the other sections leave */
 .compose-stage { display: flex; flex-direction: column; }
 .compose-stage > * { flex: none; }
-.compose-stage > .image-prompt { flex: 1 1 0; min-height: 96px; display: flex; flex-direction: column; }
+.compose-stage > .image-prompt { flex: 1 1 0; min-height: 220px; display: flex; flex-direction: column; }
 .compose-stage .image-prompt .prompt-box { flex: 1 1 0; min-height: 40px; max-height: none; overflow-y: auto; margin: 0; padding: 8px 10px; border-radius: 8px; background: #0f1217; color: var(--ink); font-size: 12.5px; }
 .compose-stage .image-prompt .section-head { flex-wrap: wrap; }
 .compose-dialog .image-exclude .two { margin-bottom: 0; }
@@ -327,19 +327,24 @@
 .compose-dialog .ctl .chips { margin: 0; gap: 3px; }
 .compose-dialog .ctl .chips button { min-height: 22px; padding: 0 7px; font-size: 11.5px; }
 .direct-more, .place-more { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px 10px; align-items: end; margin-top: 4px; }
-.direct-more { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr); }
-.direct-more textarea { min-height: 0; height: 32px; resize: vertical; }
 .place-more { grid-template-columns: auto minmax(0, 1fr); }
 .dia-cam { font-size: 4px; fill: var(--faint); text-anchor: middle; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-height: 800px) {
-  .stage-box { height: 196px; }
+  .stage-box { height: 176px; }
+  .stage-side { gap: 3px; }
+  .stage-side .ctl-row { grid-template-columns: minmax(0, 1fr); gap: 1px; }
+  .stage-side .tile-mini { width: 38px; padding: 1px; }
+  .stage-side .tile-mini .tile-art { height: 18px; }
+  .stage-side .tile-mini .tile-label { font-size: 9.5px; }
+  .compose-dialog .stage-side .ctl .chips button { min-height: 20px; padding: 0 5px; font-size: 11px; }
+  .compose-dialog .image-section { padding: 4px 0; }
   .place-more { margin-top: 2px; }
   .image-place h3 { margin-bottom: 2px !important; }
   .tile-art { height: 28px; }
   .tile-row-pics .tile-art { height: 32px; }
   .tile-mini .tile-art { height: 20px; }
-  .compose-stage > .image-prompt { min-height: 64px; }
+  .compose-stage > .image-prompt { min-height: 124px; }
   .tile-dia { width: 64px; }
   .tile-dia .tile-art { height: 24px; }
   .tile-dia .tile-label { font-size: 9.5px; letter-spacing: -.1px; }
@@ -353,3 +358,47 @@
   .tile-row-pics .tile { width: 92px; }
   .tile-row-pics .tile-art { height: 62px; }
 }
+
+/* the generated prompt, each block's words on its own tint (Jørgen, 2026-10-11: "add colored background to separate
+   the different blocks of the prompts visually"); the tints come from the editor's colours, muted for the dark box */
+.compose-dialog, #images { --pp-style: rgba(163, 171, 185, .13); --pp-cast: rgba(163, 171, 185, .22); --pp-person: var(--accent-soft);
+  --pp-action: rgba(255, 201, 168, .16); --pp-stage: rgba(134, 184, 240, .17); --pp-pose: rgba(134, 184, 240, .1); --pp-place: rgba(147, 214, 160, .15);
+  --pp-light: rgba(243, 210, 122, .15); --pp-mood: rgba(240, 191, 134, .13); --pp-camera: rgba(185, 162, 240, .17); --pp-details: var(--private-soft); }
+.pp { border-radius: 3px; padding: 1px 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.pp-style { background: var(--pp-style); } .pp-cast { background: var(--pp-cast); } .pp-person { background: var(--pp-person); }
+.pp-action { background: var(--pp-action); } .pp-stage { background: var(--pp-stage); } .pp-pose { background: var(--pp-pose); }
+.pp-place { background: var(--pp-place); } .pp-light { background: var(--pp-light); } .pp-mood { background: var(--pp-mood); }
+.pp-camera { background: var(--pp-camera); } .pp-details { background: var(--pp-details); }
+#assembled { line-height: 1.75; }
+
+/* a chosen setting, light or light direction: the row folds to it, with Change */
+.tile-row.folded .tiles { align-items: center; gap: 8px; overflow: visible; }
+.tile-chosen { width: 96px; }
+.tile-row-pics .tile-chosen .tile-art { height: 54px; }
+.fold-tools { display: flex; flex-wrap: wrap; gap: 4px; }
+.fold-tools button.small { min-height: 24px; font-size: 11.5px; }
+.facing > button.small { align-self: center; min-height: 24px; font-size: 11.5px; }
+
+/* the empty picture slot shows the place: the setting in its light, before the shot exists */
+.place-preview { margin: 0; display: grid; gap: 6px; }
+.place-preview img { border-radius: 10px; }
+.place-preview figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 12px; color: var(--dim); }
+.image-empty p { margin: 0 0 8px; }
+
+/* More details on one line under What happens */
+.details-line { display: grid !important; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px !important; }
+.details-line textarea { min-height: 0; height: 32px; resize: vertical; }
+
+/* the camera: Shot, Angle and Lens tabs, each naming its choice, over one row of tiles */
+.cam-tabs { display: flex; align-items: stretch; gap: 4px; margin: 6px 0 3px; }
+.cam-tabs > button { display: grid; justify-items: start; gap: 0; min-height: 0; padding: 3px 10px; line-height: 1.25; font-size: 12px; max-width: 34%; }
+.cam-tabs > button[aria-pressed="true"] { border-color: rgba(111, 208, 198, .7); background: var(--accent-soft); }
+.cam-choice { font-size: 11px; color: var(--dim); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cam-tabs > button[aria-pressed="true"] .cam-choice { color: var(--ink); }
+.cam-tabs .tile-tools { margin-left: auto; align-self: center; }
+.cam-tabs .tile-tool { min-height: 18px; padding: 0; border: 0; background: none; font-size: 11px; color: var(--accent); }
+.cam-row { grid-template-columns: minmax(0, 1fr); }
+
+/* Pose and Touching on one line, their names beside them */
+.direct-line { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+.direct-line > label { grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 6px !important; }

@@ -44,7 +44,8 @@ export function portraitUrl(path) {
   if (path.startsWith('island/private/')) return '';
   return root + 'repo/' + path.replace(/^\//, '');
 }
-export function assembleComposition(c, presets, subplotId) {
+// The prompt and the job, and which block wrote each stretch of the prompt (parts).
+function build(c, presets, subplotId) {
   const byId = (type, id) => (presets[type] || []).find(p => p.id === id);
   const selected = c.characters.map(id => byId('character', id)).filter(Boolean);
   const generic = c.man && (presets.character || []).find(p => p.data.generic && !p.archived);
@@ -71,9 +72,19 @@ export function assembleComposition(c, presets, subplotId) {
   // the staging (image-stage.js): who stands where, facing and looking at what, heights, contact; then the light's
   // direction and the mood after the setting and light blocks
   const staged = stageWords(c, chars.map(personOf));
-  const direction = [c.scene, blockText(presets, 'pose', c.pose), staged.people, c.angle, blockText(presets, 'location', c.environment), blockText(presets, 'light', c.light), staged.light, staged.mood].map(x => String(x || '').trim().replace(/[.]+$/, '')).filter(Boolean).join('. ');
+  const sentence = x => String(x || '').trim().replace(/[.]+$/, '');
+  const directionParts = [['action', 'What happens', c.scene], ['pose', 'Pose', blockText(presets, 'pose', c.pose)], ['stage', 'Staging', staged.people], ['camera', 'Older camera angle', c.angle],
+    ['place', 'Setting', blockText(presets, 'location', c.environment)], ['light', 'Light', blockText(presets, 'light', c.light)], ['light', 'Light from', staged.light], ['mood', 'Mood', staged.mood]]
+    .map(([kind, label, text]) => [kind, label, sentence(text)]).filter(x => x[2]);
+  const direction = directionParts.map(x => x[2]).join('. ');
   const head = [style.quality, rating, cast, style.anchors].filter(Boolean).join(', ');
-  const positive = smartJoin([head, blocks.join('; '), direction, c.cameras.map(id => byId('camera', id)?.data.prompt).filter(Boolean).join(', '), byId('framing', c.framing)?.data.prompt, c.extra, style.suffix]);
+  const cameraWords = c.cameras.map(id => byId('camera', id)?.data.prompt).filter(Boolean).join(', ');
+  const positive = smartJoin([head, blocks.join('; '), direction, cameraWords, byId('framing', c.framing)?.data.prompt, c.extra, style.suffix]);
+  // which block each stretch of the prompt comes from, in order, for the composer's coloured prompt (promptParts)
+  const parts = [['style', 'Quality and style', [style.quality, rating].filter(Boolean).join(', ')], ['cast', 'Who is in it', cast], ['style', 'Style', style.anchors],
+    ...blocks.map((text, i) => ['person', chars[i].data.generic ? 'The other person' : chars[i].data.name || chars[i].id, text]), ...directionParts,
+    ['camera', 'Camera', cameraWords], ['camera', 'Picture shape', byId('framing', c.framing)?.data.prompt], ['details', 'More details', c.extra], ['style', 'Style', style.suffix]]
+    .map(([kind, label, text]) => ({kind, label, text: String(text || '').trim()})).filter(x => x.text);
   const negatives = c.negatives || (presets.negative || []).filter(p => !p.archived && p.data.default).map(p => p.id);
   const soft = rating !== 'safe' && !c.hard;
   const withSoft = text => soft ? dedupe([text, SOFT_NEGATIVE]) : text;
@@ -86,7 +97,7 @@ export function assembleComposition(c, presets, subplotId) {
   const canReference = chars.length === 1 && portrait;
   const own = chars[0]?.data || {};
   const repaintPrompt = smartJoin([style.quality, rating, 'Two panels side by side showing the same person, a close-up of their head.', 'Both panels show the same face, hairstyle, hair colour and eyes.', [own.name, own.age, own.look, own.signature].filter(Boolean).join(', ')]);
-  return {
+  return {parts, body: {
     positive: (typeof c.override === 'string' ? c.override : c.override?.positive)?.trim() || positive,
     negative: c.override?.negative != null ? withSoft(c.override.negative) : negative, overridden: !!c.override,
     model_file: md.file, steps: +c.steps || md.steps || 30, cfg: +c.cfg || md.cfg || 5,
@@ -105,5 +116,23 @@ export function assembleComposition(c, presets, subplotId) {
     ipa: canReference && c.referenceOn ? {ref: portrait, strength: +c.referenceStrength, cutout: !!c.referenceCutout} : null,
     repaint: canReference && c.faceFix ? {ref: portrait, denoise: +c.faceStrength, prompt: repaintPrompt} : null,
     autostart: true,
-  };
+  }};
+}
+export const assembleComposition = (c, presets, subplotId) => build(c, presets, subplotId).body;
+// The built prompt cut into the stretches each block wrote, for display only: [{kind, label, text}] with the plain
+// separators between them as {text}. A prompt copied from history (override) is one plain stretch.
+export function promptParts(c, presets, subplotId) {
+  const {body, parts} = build(c, presets, subplotId);
+  if (body.overridden) return [{text: body.positive}];
+  const out = [];
+  let at = 0;
+  for (const part of parts) {
+    const i = body.positive.indexOf(part.text, at);
+    if (i < 0) continue;
+    if (i > at) out.push({text: body.positive.slice(at, i)});
+    out.push(part);
+    at = i + part.text.length;
+  }
+  if (at < body.positive.length) out.push({text: body.positive.slice(at)});
+  return out;
 }

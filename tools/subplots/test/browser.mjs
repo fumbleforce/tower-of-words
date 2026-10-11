@@ -423,12 +423,17 @@ try {
       assert.deepEqual(cols.dialog.slice(0, 2), cols.dialog.slice(2), 'the composer fills the screen');
       for (const [id, client, scroll] of cols.cols) assert.ok(scroll <= client + 2, `${id} fits without scrolling: ${client} < ${scroll}`);
       for (const name of ['scene', 'extra']) assert.ok(await page.locator(`[data-compose=${name}]`).isVisible(), name + ' in view');
-      // Jørgen, 2026-10-11: Direct the shot with the camera in it and previews for positioning, all in view
-      for (const sel of ['#composePreview [data-stage] svg', '#composePreview [data-row=shot]', '#composePreview [data-row=angle]', '#composePreview [data-row=lens]', '#composePreview [data-compose=pose]', '#composition [data-row=location]', '#composition [data-row=light]', '#composition [data-light-from]', '#composition .image-exclude summary']) assert.ok(await page.locator(sel).first().isVisible(), sel + ' in view');
+      // Jørgen, 2026-10-11: Direct the shot with the camera in it and previews for positioning, all in view, at the top of
+      // the middle column, then the prompt group with a tall generated prompt, then the excludes
+      for (const sel of ['#composePreview [data-stage] svg', '#composePreview [data-row=shot]', '#composePreview [data-cam-tab=angle]', '#composePreview [data-cam-tab=lens]', '#composePreview [data-compose=pose]', '#composition [data-row=location]', '#composition [data-row=light]', '#composition [data-light-from]', '#composePreview .image-exclude summary']) assert.ok(await page.locator(sel).first().isVisible(), sel + ' in view');
+      const order = await page.evaluate(() => ['.image-direction', '.image-what', '.image-details', '.image-prompt', '.image-exclude'].map(s => globalThis.document.querySelector('#composePreview ' + s).getBoundingClientRect().top));
+      assert.deepEqual([...order].sort((a, b) => a - b), order, 'Direct the shot first, then What happens, More details, the prompt, Exclude');
+      const promptBox = await page.locator('#composePreview .prompt-box').boundingBox();
+      assert.ok(promptBox.height >= (width > 2000 ? 300 : 100), `the generated prompt is tall: ${promptBox.height}`);
       // Exclude folds to one line; opened, its blocks, other words and notes are there
-      await page.locator('#composition .image-exclude summary').click();
-      for (const name of ['negative', 'details']) assert.ok(await page.locator(`#composition [data-compose=${name}]`).isVisible(), name + ' in Exclude');
-      await page.locator('#composition .image-exclude summary').click();
+      await page.locator('#composePreview .image-exclude summary').click();
+      for (const name of ['negative', 'details']) assert.ok(await page.locator(`#composePreview [data-compose=${name}]`).isVisible(), name + ' in Exclude');
+      await page.locator('#composePreview .image-exclude summary').click();
       // Jørgen, 2026-10-11: the picture in the right column at a useful size, the generation settings folded on the left
       const shotBox = await page.locator('#composeShot .selected-image').boundingBox();
       assert.ok(shotBox.height >= 250, `the shot's picture is big enough: ${JSON.stringify(shotBox)}`);

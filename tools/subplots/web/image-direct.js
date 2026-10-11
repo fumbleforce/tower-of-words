@@ -20,17 +20,22 @@ const initial = () => '';  // no picture yet: the tile shows its name only (tile
 const order = (group, d) => { const i = (DIAGRAMS[group] || []).findIndex(x => x[0] === d); return i < 0 ? 99 : i; };
 
 // The camera rows: Shot, Angle (with the other camera words after a divider) and Lens.
+// The camera: Shot, Angle and Lens as tabs over one row of tiles. Each tab names its choice, so all three read at a
+// glance while the row keeps the column's height for the prompt (Jørgen, 2026-10-11: "The generated prompt needs
+// larger default surface area").
+let cameraTab = 'shot';
 function cameraRows(c, ctx) {
   const blocks = ctx.active('camera').map(b => ({b, ...cameraKind(b)}));
-  return CAMERA_ROWS.map(([group, title]) => {
-    const own = blocks.filter(x => x.group === group).sort((a, b) => order(group, a.diagram) - order(group, b.diagram));
-    const rest = group === 'angle' ? blocks.filter(x => x.group === 'other') : [];
-    const one = x => tile({attrs: `data-cam="${esc(x.b.id)}" data-cam-group="${x.group}"`, pressed: c.cameras.includes(x.b.id), label: x.b.data.name || x.b.id, title: x.b.data.prompt,
-      art: diagramSvg(x.group === 'other' ? 'other' : group, x.diagram) || (exampleOf('camera', x.b.id) ? `<img loading="lazy" src="${esc(exampleOf('camera', x.b.id))}" alt="">` : initial(x.b.data.name)), cls: 'tile-dia'});
-    const chosen = c.cameras.find(id => own.some(x => x.b.id === id)) || own[0]?.b.id || '';
-    return `<div class="tile-row" data-row="${group}">${rowHead(title, {add: `data-new-cam="${group}"`, edit: chosen ? `data-edit-cam="${esc(chosen)}"` : ''})}
-      <div class="tiles">${own.map(one).join('')}${rest.length ? '<span class="tile-sep" aria-hidden="true"></span>' + rest.map(one).join('') : ''}</div></div>`;
-  }).join('');
+  const ofRow = group => [...blocks.filter(x => x.group === group).sort((a, b) => order(group, a.diagram) - order(group, b.diagram)),
+    ...(group === 'angle' ? blocks.filter(x => x.group === 'other') : [])];
+  const one = (x, group) => tile({attrs: `data-cam="${esc(x.b.id)}" data-cam-group="${x.group}"`, pressed: c.cameras.includes(x.b.id), label: x.b.data.name || x.b.id, title: x.b.data.prompt,
+    art: diagramSvg(x.group === 'other' ? 'other' : group, x.diagram) || (exampleOf('camera', x.b.id) ? `<img loading="lazy" src="${esc(exampleOf('camera', x.b.id))}" alt="">` : initial(x.b.data.name)), cls: 'tile-dia'});
+  const picked = group => ofRow(group).filter(x => c.cameras.includes(x.b.id)).map(x => x.b.data.name || x.b.id);
+  const tabs = CAMERA_ROWS.map(([group, title]) => `<button type="button" role="tab" data-cam-tab="${group}" aria-selected="${cameraTab === group}" aria-pressed="${cameraTab === group}">${esc(title)}<span class="cam-choice">${esc(picked(group).join(', ') || 'none')}</span></button>`).join('');
+  const own = ofRow(cameraTab).filter(x => x.group === cameraTab), rest = ofRow(cameraTab).filter(x => x.group !== cameraTab);
+  const chosen = c.cameras.find(id => own.some(x => x.b.id === id)) || own[0]?.b.id || '';
+  return `<div class="cam-tabs" role="tablist" aria-label="Camera">${tabs}<span class="tile-tools"><button type="button" class="tile-tool" data-new-cam="${cameraTab}" title="A new block in this row">+ New</button>${chosen ? `<button type="button" class="tile-tool" data-edit-cam="${esc(chosen)}" title="Edit the chosen block">Edit</button>` : ''}</span></div>
+    <div class="tile-row cam-row" data-row="${cameraTab}" role="tabpanel"><div class="tiles">${own.map(x => one(x, cameraTab)).join('')}${rest.length ? '<span class="tile-sep" aria-hidden="true"></span>' + rest.map(x => one(x, cameraTab)).join('') : ''}</div></div>`;
 }
 
 // The selected person's controls beside the stage.
@@ -63,33 +68,45 @@ export function directHtml(c, ctx) {
     ${say ? `<p class="stage-say hint">${esc(say)}${who && placeOf(stage, who.id, people.indexOf(who), people.length).placed ? ` <button type="button" class="link" data-unplace>Forget ${esc(who.name)}’s place</button>` : ''}</p>` : ''}
     ${cameraRows(c, ctx)}
     ${c.angle ? `<p class="hint">Older camera angle kept: ${esc(c.angle)} <button type="button" class="link" data-clear-angle>Remove</button></p>` : ''}
-    <div class="direct-more">${ctx.picker('pose', 'pose', 'Pose', ctx.blockItems('pose', ctx.blockValue('pose', c.pose)), ctx.blockValue('pose', c.pose))}
-      <label>Touching<input data-stage-field="contact" value="${esc(stage.contact)}" placeholder="her hand on his shoulder"></label>
-      <label>More details<textarea data-compose="extra" rows="1" placeholder="Props, clothes…">${esc(c.extra || '')}</textarea></label></div>
+    <div class="direct-more direct-line">${ctx.picker('pose', 'pose', 'Pose', ctx.blockItems('pose', ctx.blockValue('pose', c.pose)), ctx.blockValue('pose', c.pose))}
+      <label>Touching<input data-stage-field="contact" value="${esc(stage.contact)}" placeholder="her hand on his shoulder"></label></div>
     <datalist id="stageExpressions">${EXPRESSIONS.map(x => `<option value="${esc(x)}">`).join('')}</datalist></section>`;
 }
 
 // Place and light (the left column): setting and light as picture tiles, where the light comes from, the mood.
+// Once a setting, light or light direction is chosen its row folds to that choice and Change (Jørgen, 2026-10-11:
+// "upon selecting one, collapse the options, same with the light, so we save space"). The rows that are open again.
+const unfolded = new Set();
 export function placeHtml(c, ctx) {
   const stage = readStage(c);
+  const picture = (kind, id) => exampleOf(kind, id) ? `<img loading="lazy" src="${esc(exampleOf(kind, id))}" alt="">` : initial();
   const blockRow = (kind, field, title) => {
     const value = ctx.blockValue(kind, c[field]);
     const items = ctx.active(kind);
     const missing = items.filter(b => exampleKnown(kind, b.id) && !exampleOf(kind, b.id)).length;
     const words = c[field] && !value ? `<span class="hint">Words only: ${esc(c[field])}</span>` : '';
-    return `<div class="tile-row tile-row-pics" data-row="${kind}">${rowHead(title, {add: `data-new-tile="${kind}" data-field="${field}"`, edit: value ? `data-edit-tile="${kind}" data-id="${esc(value)}"` : ''})}<div class="tiles">${items.map(b => tile({attrs: `data-block-tile="${kind}" data-field="${field}" data-id="${esc(b.id)}"`,
-      pressed: b.id === value, label: b.data.name || b.id, title: b.data.text, art: exampleOf(kind, b.id) ? `<img loading="lazy" src="${esc(exampleOf(kind, b.id))}" alt="">` : initial(b.data.name)})).join('')}
+    const head = rowHead(title, {add: `data-new-tile="${kind}" data-field="${field}"`, edit: value ? `data-edit-tile="${kind}" data-id="${esc(value)}"` : ''});
+    const chosen = items.find(b => b.id === value);
+    if (chosen && !unfolded.has(kind)) return `<div class="tile-row tile-row-pics folded" data-row="${kind}">${head}<div class="tiles">${tile({attrs: `data-unfold="${kind}" data-chosen="${kind}" data-id="${esc(chosen.id)}" aria-expanded="false"`,
+      pressed: true, label: chosen.data.name || chosen.id, title: chosen.data.text, art: picture(kind, chosen.id), cls: 'tile-chosen'})}
+      <span class="fold-tools"><button type="button" class="small" data-unfold="${kind}" aria-expanded="false">Change</button>${kind === 'location' ? '<button type="button" class="small" data-preview-place title="A small picture of this place in this light, with no people, to see it before making the shot">Preview this place</button>' : ''}</span></div>${words}</div>`;
+    return `<div class="tile-row tile-row-pics" data-row="${kind}">${head}<div class="tiles">${items.map(b => tile({attrs: `data-block-tile="${kind}" data-field="${field}" data-id="${esc(b.id)}"`,
+      pressed: b.id === value, label: b.data.name || b.id, title: b.data.text, art: picture(kind, b.id)})).join('')}
       ${missing ? `<button type="button" class="tile-tool" data-make-examples="${kind}" title="Queue a small render of a plain stand-in for each one without a picture">Make examples (${missing})</button>` : ''}</div>${words}</div>`;
   };
+  const from = LIGHT_FROM.find(l => l[0] === stage.lightFrom);
+  const fromTiles = from && !unfolded.has('lightFrom')
+    ? `${tile({attrs: `data-unfold="lightFrom" data-chosen="lightFrom" aria-expanded="false"`, pressed: true, label: from[1], title: from[2], art: diagramSvg('light', from[0]), cls: 'tile-mini'})}<button type="button" class="small" data-unfold="lightFrom" aria-expanded="false">Change</button>`
+    : LIGHT_FROM.map(([k, label, words]) => tile({attrs: `data-light-from="${k}"`, pressed: stage.lightFrom === k, label, title: words, art: diagramSvg('light', k), cls: 'tile-mini'})).join('');
   return `<section class="image-section image-place"><h3>Place and light</h3>
     ${blockRow('location', 'environment', 'Setting')}${blockRow('light', 'light', 'Light')}
-    <div class="place-more"><div class="ctl"><span class="ctl-label">Light from</span><div class="facing">${LIGHT_FROM.map(([k, label, words]) => tile({attrs: `data-light-from="${k}"`, pressed: stage.lightFrom === k, label, title: words, art: diagramSvg('light', k), cls: 'tile-mini'})).join('')}</div></div>
+    <div class="place-more"><div class="ctl"><span class="ctl-label">Light from</span><div class="facing">${fromTiles}</div></div>
       <label class="ctl">Mood<input data-stage-field="mood" list="stageMoods" value="${esc(stage.mood)}" placeholder="calm, tense, romantic…"></label></div>
     <datalist id="stageMoods">${MOODS.map(x => `<option value="${esc(x)}">`).join('')}</datalist></section>`;
 }
 
 // Wire both sections. ctx: {presets, active(kind), preset(kind, id), blockValue(kind, value), edit(mutator, repaint), render(), compose(),
-// selected(), select(id), size(c), openBlock(kind, opts), makeExamples(kind)}
+// selected(), select(id), size(c), openBlock(kind, opts), makeExamples(kind), previewPlace()}
 export function bindDirect(host, ctx) {
   const c0 = ctx.compose(), people = stagePeople(c0, ctx.presets);
   const person = (c, id) => { const s = stageOf(c); return (s.people[id] = {...s.people[id]}); };
@@ -128,7 +145,7 @@ export function bindDirect(host, ctx) {
     host.querySelectorAll('[data-unplace]').forEach(b => b.onclick = () => ctx.edit(c => { const p = person(c, who()); delete p.x; delete p.d; p.placed = false; c.override = null; }));
   host.querySelectorAll('[data-person-field]').forEach(el => el.oninput = () => ctx.edit(c => { person(c, who())[el.dataset.personField] = el.value; c.override = null; }, el.tagName === 'SELECT'));
   host.querySelectorAll('[data-stage-field]').forEach(el => el.oninput = () => ctx.edit(c => { stageOf(c)[el.dataset.stageField] = el.value; c.override = null; }, false));
-  host.querySelectorAll('[data-light-from]').forEach(b => b.onclick = () => ctx.edit(c => { const s = stageOf(c); s.lightFrom = s.lightFrom === b.dataset.lightFrom ? '' : b.dataset.lightFrom; c.override = null; }));
+  host.querySelectorAll('[data-light-from]').forEach(b => b.onclick = () => ctx.edit(c => { const s = stageOf(c); unfolded.delete('lightFrom'); s.lightFrom = s.lightFrom === b.dataset.lightFrom ? '' : b.dataset.lightFrom; c.override = null; }));
   // camera tiles: one shot size, one angle and one lens at a time; the other camera words go on and off
   host.querySelectorAll('[data-cam]').forEach(b => b.onclick = () => ctx.edit(c => {
     const id = b.dataset.cam, group = b.dataset.camGroup;
@@ -147,8 +164,12 @@ export function bindDirect(host, ctx) {
     }});
   });
   host.querySelectorAll('[data-edit-cam]').forEach(b => b.onclick = () => ctx.openBlock('camera', {id: b.dataset.editCam}));
+  host.querySelectorAll('[data-cam-tab]').forEach(b => b.onclick = () => { cameraTab = b.dataset.camTab; ctx.render(); });
+  host.querySelectorAll('[data-unfold]').forEach(b => b.onclick = () => { unfolded.add(b.dataset.unfold); ctx.render(); });
+  host.querySelectorAll('[data-preview-place]').forEach(b => b.onclick = () => ctx.previewPlace());
   host.querySelectorAll('[data-block-tile]').forEach(b => b.onclick = () => ctx.edit(c => {
     const field = b.dataset.field;
+    unfolded.delete(b.dataset.blockTile);
     c[field] = ctx.blockValue(b.dataset.blockTile, c[field]) === b.dataset.id ? '' : b.dataset.id; c.override = null;
   }));
   host.querySelectorAll('[data-new-tile]').forEach(b => b.onclick = () => {
