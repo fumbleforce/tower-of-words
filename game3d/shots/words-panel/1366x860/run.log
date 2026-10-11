@@ -1,0 +1,43 @@
+words-panel-check: GPU slot 1
+ok   guard: a request to a protected route is blocked and recorded (blocked, 1)
+     in reach: tama sayRow=true has=true
+     day 1: 8 words, groups ["Day 1Thu 1 Oct · today8"], say ["ohayo: QSay to Cat","matte: QSay to Cat"]
+ok   day 1: beside the cat, ohayo is marked "Say to Cat"
+ok   day 1: the panel stays inside the 1366x860 screen (323,50 to 1043,810)
+ok   day 1: play holds while the panel is open
+ok   day 1: lists every known word and nothing else
+ok   day 1: a word Eric has not learned (kanpai) is not listed
+ok   day 1: the list scrolls inside the panel
+ok   keys: focus starts in the search box
+ok   keys: Down twice from the search box focuses the second word (ohayo)
+ok   keys: Up from the first word returns to the search box
+ok   keys: Tab from the search box moves to the next control inside the panel (BUTTON:day)
+ok   keys: Shift-Tab goes back to the search box
+ok   keys: Shift-Tab from the search box moves to the previous control, still inside the panel (BUTTON:x)
+ok   keys: Tab from the last word stays inside the panel (BUTTON:x)
+ok   keys: Enter on the focused ohayo row requests audio/word-ohayo.mp3 (word-ohayo.mp3)
+ok   keys: Enter keeps focus on the row
+ok   keys: Space on the focused yoroshiku row requests audio/word-yoroshiku.mp3 (word-yoroshiku.mp3)
+ok   keys: Space keeps focus on the row
+ok   play: tapping matte requests audio/word-matte.mp3 (word-matte.mp3)
+ok   Esc closes the panel and play goes on
+     day 5: 27 words, groups ["Day 5Mon 5 Oct · today2","Day 4Sun 4 Oct2","Day 3Sat 3 Oct6","Day 2Fri 2 Oct9","Day 1Thu 1 Oct8"]
+ok   day 5: the panel stays inside the 1366x860 screen (323,50 to 1043,810)
+ok   day 5: the longer list scrolls inside the panel
+ok   day 5: lists every known word and nothing else
+ok   day 5: by day, today comes first
+ok   by kind: phrases first, then the other kinds (4 groups)
+ok   search "ohayo" finds ohayo (ohayo)
+ok   search "ohayou" finds ohayo (ohayo)
+ok   search "よろしく" finds yoroshiku (yoroshiku)
+ok   search "待" finds matte (matte)
+ok   search "swim" finds oyogu (oyogu)
+ok   search "じょうたい" finds jotai (jotai)
+ok   search finds kanpai once it is learned
+ok   search never brings up a word Eric has not learned (oishii)
+ok   search: the panel stays inside the 1366x860 screen (323,50 to 1043,810)
+     no recording yet: kanryo, kenmei, jotai
+ok   clearing the search shows every word again
+ok   no request to a protected route
+ok   no page errors
+PASS words-panel-check 1366x860 (/home/jorgen/repo/japanese/.claude/worktrees/agent-a7a01eb8bde3beef7/game3d/shots/words-panel/1366x860)
