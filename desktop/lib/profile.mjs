@@ -1,3 +1,13 @@
+// An explicit scope option must never silently select (and overwrite) the unrestricted edition.
+export function daysArgument(args) {
+  const i = args.indexOf('--days');
+  if (i < 0) return 'all';
+  const value = args[i + 1];
+  if (!value || value.startsWith('--')) throw new Error('--days requires all or 1');
+  if (args.indexOf('--days', i + 1) >= 0) throw new Error('--days may only be specified once');
+  return value;
+}
+
 // Flavor controls optional content; days controls how much of the game ships.
 export function releaseProfile(flavor, days = 'all') {
   if (!['vanilla', 'full'].includes(flavor)) throw new Error('--flavor must be vanilla or full');

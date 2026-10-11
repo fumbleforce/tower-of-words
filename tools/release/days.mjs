@@ -2,9 +2,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { dayOneConversations } from './day1-data.mjs';
+import { dayOneConversations, LATER_WORDS } from './day1-data.mjs';
+import { DAY1_STUBS, LATER_ENGINE } from './day1-stubs.mjs';
+import { exportNames } from './flavor.mjs';
 
-export const LATER_STORY = /^game3d\/story\/(?:day[2-5]\/|ongoing\/|milestones\/|clubs\.js$|days3-5-finds\.js$)/;
+export const LATER_STORY = /^game3d\/story\/(?:day[2-5]\/|ongoing\/|milestones\/|clubs\.js$|days3-5-finds\.js$|bakery\.js$|konbini\.js$)/;
 const EMPTY = 'game3d/js/release-empty.js';
 const WORDS = /^game3d\/story\/day([234])\/words\.js$/;
 const DATA = /^game3d\/story\/(?:day[2-5]\/index\.js|ongoing\/routes\.js|clubs\.js|days3-5-finds\.js)$/;
@@ -51,7 +53,13 @@ export async function scopeDays({ dir, root, days }) {
   writes.set('game3d/story/conversations/needs.js', 'export const NEEDS = ' + JSON.stringify(conversations.needs) + ';\n');
   writes.set('game3d/story/conversations/register.js', Object.entries(conversations.register).map(([name, value]) =>
     (name === 'default' ? 'export default ' : `export const ${name} = `) + JSON.stringify(value) + ';').join('\n'));
-  writes.set('game3d/story/conversations/emi.js', 'export default ' + JSON.stringify(conversations.emi) + ';\n');
+  for (const [name, part] of Object.entries(conversations.parts))
+    writes.set(`game3d/story/conversations/${name}.js`, 'export default ' + JSON.stringify(part) + ';\n');
+  for (const [rel, stub] of Object.entries(DAY1_STUBS)) {
+    const source = fs.readFileSync(path.join(root, rel), 'utf8');
+    if (exportNames(source).join(',') !== exportNames(stub).join(',')) throw new Error(`Day scope stub exports changed: ${rel}`);
+    writes.set(rel, stub);
+  }
   const tickets = (await import(pathToFileURL(path.join(root, 'game3d/story/tickets.js')).href)).default;
   // Day one's closing screen previews the station request; subsequent requests do not appear that day.
   writes.set('game3d/story/tickets.js', 'export default ' + JSON.stringify(Object.fromEntries(
@@ -59,7 +67,7 @@ export async function scopeDays({ dir, root, days }) {
   const narrative = list.filter(f => f.startsWith('game3d/story/') && f.endsWith('.js') && !LATER_STORY.test(f) && !conversations.removed.includes(f))
     .map(f => writes.get(f) ?? read(f)).join('\n');
   const { WORDS: vocabulary } = await import(pathToFileURL(path.join(root, 'game3d/js/lang.js')).href);
-  const usedWords = new Set(Object.keys(vocabulary).filter(id =>
+  const usedWords = new Set(Object.keys(vocabulary).filter(id => !LATER_WORDS.has(id) &&
     new RegExp(`\\{${id}\\}|['"]${id}['"]|\\bknow_${id}\\b`).test(narrative)));
   // Retain later-introduced words only when a first-day conversation also uses or teaches them.
   for (const rel of list.filter(f => WORDS.test(f))) {
@@ -80,14 +88,16 @@ export async function scopeDays({ dir, root, days }) {
   const { voiceLines, storySets } = await import(pathToFileURL(path.join(root, 'game3d/tools/voice-manifest.mjs')).href);
   const all = await voiceLines();
   const sets = storySets().filter(set => set.day <= 1).map(set => set.day === 0 ?
-    { ...set, files: [{ name: 'conversations', load: async () => conversations.story }] } : set);
+    { ...set, files: [{ name: 'conversations', load: async () => conversations.story }] } :
+    { ...set, files: set.files.filter(file => !['bakery', 'konbini'].includes(file.name)) });
   const kept = await voiceLines({ sets });
   const allKeys = new Set(Object.values(all).flat().map(line => line.key));
   const keepKeys = new Set(Object.values(kept).flat().filter(line => {
     const word = /^(?:word|eric|carina)-(.+)$/.exec(line.key);
     return word ? usedWords.has(word[1]) : line.day <= 1;
   }).map(line => line.key));
-  const removed = list.filter(f => LATER_STORY.test(f) || conversations.removed.includes(f) ||
+  const removed = list.filter(f => LATER_STORY.test(f) || LATER_ENGINE.has(f) || conversations.removed.includes(f) ||
+    f.startsWith('game3d/minigames/') ||
     (/^game3d\/audio\/[^/]+\.mp3$/.test(f) && allKeys.has(path.basename(f, '.mp3')) && !keepKeys.has(path.basename(f, '.mp3'))));
   const removedSet = new Set(removed);
   const index = 'game3d/audio/index.json';
@@ -95,7 +105,7 @@ export async function scopeDays({ dir, root, days }) {
   for (const [rel, source] of writes) replace(stage, rel, source);
   for (const rel of removed) fs.rmSync(path.join(stage, rel));
   for (const day of ['day2', 'day3', 'day4', 'day5', 'ongoing', 'milestones']) fs.rmSync(path.join(stage, 'game3d/story', day), { recursive: true, force: true });
-  const report = { days, removedStories: removed.filter(f => f.startsWith('game3d/story/')).length, removedVoices: removed.filter(f => f.endsWith('.mp3')).length };
+  const report = { days, removedStories: removed.filter(f => f.startsWith('game3d/story/')).length, removedMinigameFiles: removed.filter(f => f.startsWith('game3d/minigames/')).length, removedVoices: removed.filter(f => f.endsWith('.mp3')).length };
   replace(stage, 'day-scope.json', JSON.stringify(report));
   return report;
 }
