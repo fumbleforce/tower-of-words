@@ -54,7 +54,7 @@ body.phone #saves .pane { height: min(88dvh, 760px); max-height: none; }
 body.phone #saves .shead { padding: 10px 8px 10px 18px; gap: 10px; }
 body.phone #saves .shead h2 { font-size: 20px; }
 body.phone #saves .modes button { min-width: 64px; height: 40px; }
-body.phone #saves .slots { grid-template-columns: minmax(0, 1fr); padding: 12px 12px 6px; gap: 8px; }
+body.phone #saves .slots { grid-template-columns: minmax(0, 1fr); padding: 12px 12px 58px; gap: 8px; scroll-padding-bottom: 58px; } /* room under the last slot as tall as the footer, so it scrolls fully clear of it */
 body.phone #saves .slots > .slot { grid-template-columns: 112px minmax(0, 1fr); gap: 12px; min-height: 92px; }
 body.phone #saves .sfoot { padding: 6px 12px 12px 18px; }
 body.phone #saves .xfer button { height: 40px; }
