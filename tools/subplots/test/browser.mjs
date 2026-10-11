@@ -36,7 +36,8 @@ fs.writeFileSync(file, original);
 // the place list the story map orders places by (storymap.mjs reads it)
 fs.mkdirSync(path.join(root, 'game3d/js/places'), { recursive: true });
 fs.writeFileSync(path.join(root, 'game3d/js/places/definitions.js'), "export const PLACE_NAMES = { office: 'IT support, B2' };\nexport const STORY_FILES = ['office'];\n");
-const port = 8796, base = `http://127.0.0.1:${port}`;
+const port = +process.env.SUBPLOTS_TEST_PORT || 8796, base = `http://127.0.0.1:${port}`;
+if (await fetch(base + '/').then(() => true, () => false)) throw Error(`Port ${port} already has a server (one an earlier run left behind?). Stop it or set SUBPLOTS_TEST_PORT.`);
 const server = spawn('python3', ['tools/review_server.py', String(port)], {
   cwd: repo, stdio: 'ignore',
   env: { ...process.env, SUBPLOTS_ROOT: root, SUBPLOTS_STATE: path.join(root, 'state'), SUBPLOTS_PUBLIC_ONLY: '1' },
@@ -367,7 +368,7 @@ try {
       // the composer fills the screen; its controls and settings fit without scrolling, at 1366 x 768 too
       if (width < 2000) await page.setViewportSize({ width, height: 768 });
       await page.locator('#tabPicture [data-compose]').click();
-      await page.locator('#composePreview #generate').waitFor();
+      await page.locator('#composeShot #generate').waitFor();
       await page.locator('#renders .render-card').first().waitFor();
       const cols = await page.evaluate(() => ({
         dialog: [globalThis.document.getElementById('composeDialog').offsetWidth, globalThis.document.getElementById('composeDialog').offsetHeight, globalThis.innerWidth, globalThis.innerHeight],
@@ -375,7 +376,16 @@ try {
       }));
       assert.deepEqual(cols.dialog.slice(0, 2), cols.dialog.slice(2), 'the composer fills the screen');
       for (const [id, client, scroll] of cols.cols) assert.ok(scroll <= client + 2, `${id} fits without scrolling: ${client} < ${scroll}`);
-      for (const name of ['model', 'seed', 'steps', 'cfg', 'width', 'height', 'referenceStrength', 'faceStrength']) assert.ok(await page.locator(`[data-compose=${name}]`).isVisible(), name + ' in view');
+      for (const name of ['referenceStrength', 'faceStrength', 'scene', 'extra', 'negative', 'details']) assert.ok(await page.locator(`[data-compose=${name}]`).isVisible(), name + ' in view');
+      // Jørgen, 2026-10-11: the picture in the right column at a useful size, the generation settings folded on the left
+      const shotBox = await page.locator('#composeShot .selected-image').boundingBox();
+      assert.ok(shotBox.height >= 250, `the shot's picture is big enough: ${JSON.stringify(shotBox)}`);
+      assert.match(await page.locator('#composition .settings-peek').innerText(), /seed auto/);
+      await page.locator('#composition .image-settings summary').click();
+      for (const name of ['model', 'count', 'seed', 'steps', 'cfg']) assert.ok(await page.locator(`#composition [data-compose=${name}]`).isVisible(), name + ' in view');
+      assert.equal(await page.locator('#composition [data-size]').count(), 3);
+      await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-settings-${width}.png`) });
+      await page.locator('#composition .image-settings summary').click();
       assert.equal(await page.locator('[data-library=scene]').getAttribute('aria-pressed'), 'true');
       assert.equal(await page.locator('#renders .render-card').count(), 1);
       await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-${width}.png`) });
@@ -399,14 +409,26 @@ try {
         await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-source-${width}-${small ? 'small' : 'plain'}.png`) });
         const fitted = await page.evaluate(() => ['composition', 'composePreview'].map(id => { const el = globalThis.document.getElementById(id); return [id, el.clientHeight, el.scrollHeight]; }));
         for (const [id, client, scroll] of fitted) assert.ok(scroll <= client + 2, `${id} fits with the shot's own picture${small ? ' and Small changes' : ''}: ${client} < ${scroll}`);
-        for (const sel of ['[data-small-changes]', '[data-original-open] summary', '#generate', '[data-compose=seed]']) assert.ok(await page.locator('#composePreview ' + sel).isVisible(), sel + ' in view');
+        for (const sel of ['#composePreview [data-small-changes]', '#composePreview [data-original-open] summary', '#composeShot #generate', '#composition .settings-peek']) assert.ok(await page.locator(sel).isVisible(), sel + ' in view');
+        assert.match(await page.locator('#composition .settings-peek').innerText(), /seed 5/);
       }
-      assert.match(await page.locator('#composePreview .image-tools summary').innerText(), /1 on/);
-      await page.locator('#composePreview .image-tools summary').click();
-      await page.locator('#composePreview [data-tool-clear=start]').click();
+      assert.match(await page.locator('#composition .image-tools summary').innerText(), /1 on/);
+      await page.locator('#composition .image-tools summary').click();
+      await page.locator('#composition [data-tool-clear=start]').click();
       await page.locator('#composePreview [data-original-open] summary').click();
       assert.ok(await page.locator('#composePreview [data-original=positive]').isVisible(), 'the whole original prompt opens');
       await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-source-${width}.png`) });
+      // with the cast chosen, People folds to the people in the shot; the settings open and the column still fits
+      await page.locator('#composition [data-char=person0]').click();
+      await page.locator('#composition [data-people-open]').click();
+      await page.locator('#composition [data-person=person0]').waitFor();
+      assert.equal(await page.locator('#composition [data-char]').count(), 0);
+      await page.locator('#composition .image-settings summary').click();
+      await page.locator('#composition .image-tools summary').click();
+      const folded = await page.locator('#composition').evaluate(el => [el.clientHeight, el.scrollHeight]);
+      assert.ok(folded[1] <= folded[0] + 2, `the left column fits with the people folded and the settings open: ${folded}`);
+      await page.screenshot({ path: path.join(os.tmpdir(), `scene-editor-composer-folded-${width}.png`) });
+      await page.locator('#composition .image-settings summary').click();
       await page.locator('#closeCompose').click();
       if (width < 2000) await page.setViewportSize({ width, height: 860 });
       await page.locator('#tabPicture [data-new]').click();

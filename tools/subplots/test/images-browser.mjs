@@ -5,8 +5,9 @@ import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {withBrowserJob} from '../../lib/browser-job.mjs';
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'subplot-images-'));
-const port = 8797;
+const port = +process.env.SUBPLOTS_TEST_PORT || 8797;
 const base = `http://127.0.0.1:${port}`;
+if (await fetch(base + '/').then(() => true, () => false)) throw Error(`Port ${port} already has a server (one an earlier run left behind?). Stop it or set SUBPLOTS_TEST_PORT.`);
 const server = spawn('python3', ['tools/review_server.py', String(port)], {env: {...process.env, SUBPLOTS_ROOT: root, SUBPLOTS_PUBLIC_ONLY: '1'}, stdio: 'ignore'});
 const picture = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240"><rect width="400" height="240" fill="#dae4ed"/><circle cx="200" cy="80" r="30" fill="#86a5bd"/><path d="M150 210v-65q50-60 100 0v65" fill="#567c98"/></svg>');
 const fixture = {id:'fixture:scene',steps:[{say:'alice',text:'Hello.'}],images:[{id:'one',label:'First shot',url:picture},{id:'two',label:'Second shot',url:picture},{id:'three',label:'Third shot',url:picture,available:true}],metadata:{}};
@@ -20,7 +21,7 @@ try {
     page.on('pageerror', e => errors.push(e.message));
     await page.route('**/island/private/**', route => route.abort());
     await page.route('**/api/subplots/picture-source**', route => route.fulfill({json:{how:'the fixture round', start:{image:'art/fixture.webp'},
-      job:{positive:'Original words, close camera', negative:'bad hands', seed:77, model_file:'fixture.safetensors', w:1200, h:800, steps:28, cfg:4}}}));
+      job:{positive:'Original words, close camera', negative:'bad hands', seed:77, model_file:'fixture.safetensors', w:1024, h:768, steps:28, cfg:4}}}));
     await page.route('**/image-harness', route => route.fulfill({contentType:'text/html',body:html}));
     await page.route('**/api/subplots/image/**', async route => {
       const u = new URL(route.request().url());
@@ -37,8 +38,13 @@ try {
     });
     await page.goto(base + '/image-harness');
     await page.locator('[data-inspect=images]').click();
-    await page.locator('[data-char=alice]').waitFor();
+    // the scene's speaker is already in the shot, so People shows only her, with her outfit; the full picker opens on request
+    await page.locator('[data-person=alice]').waitFor();
+    assert.equal(await page.locator('[data-char]').count(),0);
+    await page.locator('[data-people-open]').click();
     assert.equal(await page.locator('[data-char=alice]').getAttribute('aria-pressed'),'true');
+    await page.locator('[data-people-open]').click();
+    await page.locator('[data-person=alice]').waitFor();
     await page.locator('[data-outfit-for=alice]').selectOption('usual');
     await page.locator('[data-compose=scenePreset]').selectOption('reading');
     await page.locator('[data-compose=pose]').selectOption('seated');
@@ -49,6 +55,17 @@ try {
     assert.match(generated[0].positive,/Reading a letter/);
     assert.match(generated[0].positive,/wearing blue coat/);
     assert.equal(generated[0].presets.cameras.length,2);
+    // generation settings are folded to one line; seed is Auto unless Fixed, and Fixed picks a seed to repeat
+    assert.equal(generated[0].seed_mode,'random');
+    assert.match(await page.locator('.settings-peek').textContent(),/Local model · 1 picture · seed auto · 30 steps · CFG 5 · Wide 1200×800/);
+    assert.equal(await page.locator('[data-compose=seed]').isVisible(),false);
+    await page.locator('.image-settings summary').click();
+    assert.equal(await page.locator('[data-compose=seed]').isDisabled(),true);
+    await page.locator('[data-seed-mode=fixed]').click();
+    assert.ok(+await page.locator('[data-compose=seed]').inputValue() > 0);
+    await page.locator('[data-seed-mode=random]').click();
+    assert.equal(await page.locator('[data-size=wide]').getAttribute('aria-pressed'),'true');
+    assert.equal(await page.locator('[data-compose=width]').count(),0);
     await page.locator('[data-library=all]').click();
     // the lightbox: s stars, the reject reason, arrows and Escape (the dashboard's keys)
     await page.locator('[data-lib=open]').click();
@@ -77,6 +94,9 @@ try {
     await page.evaluate(()=>globalThis.editor.focus('three'));
     await page.waitForFunction(()=>globalThis.document.querySelector('[data-original=positive]')?.value === 'Original words, close camera');
     assert.equal(await page.locator('[data-compose=seed]').inputValue(),'77');
+    // a size no preset has still opens, and shows as the shot's own size
+    assert.match(await page.locator('[data-size-own]').textContent(),/1024×768/);
+    assert.equal(await page.locator('[data-size=wide]').getAttribute('aria-pressed'),'false');
     assert.equal(await page.evaluate(()=>[...globalThis.document.querySelectorAll('[data-camera]')].filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.dataset.camera).join()),'near');
     await page.locator('[data-small-changes]').click();
     await page.locator('.image-tools summary').click();
@@ -86,6 +106,12 @@ try {
     assert.deepEqual(generated[1].start,{image:'art/fixture.webp',denoise:0.35});
     assert.equal(generated[1].seed,77);
     assert.equal(generated[1].positive,'Original words, close camera');
+    assert.deepEqual([generated[1].w,generated[1].h],[1024,768]);
+    // a size preset after Small changes keeps the same seed and the original prompt
+    await page.locator('[data-size=wide]').click();
+    await page.locator('#generate').click();
+    assert.deepEqual([generated[2].w,generated[2].h,generated[2].seed,generated[2].seed_mode,generated[2].positive],[1200,800,77,'fixed','Original words, close camera']);
+    assert.deepEqual(generated[2].start,{image:'art/fixture.webp',denoise:0.35});
     // "+ New…" in a picker: a setting made from Bathhouse, saved as a block and used at once
     await page.locator('[data-compose=environment]').selectOption('__new__');
     await page.locator('#blockDialog [data-from]').selectOption('bathhouse');
@@ -104,6 +130,6 @@ try {
     assert.equal(await page.evaluate(()=>globalThis.document.documentElement.scrollWidth > globalThis.innerWidth),false);
     await page.screenshot({path:'/tmp/codex-subplot-image-editor/390.png',fullPage:true});
     await page.close();
-    console.log('PASS image editor: auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, + New setting from Bathhouse, lightbox star and keys, a shot opened from its source with Small changes, 390px layout.');
+    console.log('PASS image editor: auto-connect, scene direction, cast/outfit, multiple cameras, generation request, full history, separate shot selections, reuse with Fill from prompt, + New setting from Bathhouse, lightbox star and keys, a shot opened from its source with Small changes, people folded to the cast, settings folded with seed Auto or Fixed and size presets, 390px layout.');
   }, {timeoutMs:60000,gpuWaitMs:60000});
 } finally {server.kill('SIGTERM');fs.rmSync(root,{recursive:true,force:true});}
