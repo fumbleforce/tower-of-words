@@ -1,5 +1,5 @@
 // The train's unnamed passengers on the approved native crowd bodies (crowd/approved-models.js): the man with a book,
-// the girl with headphones, the woman with a bun and the man with a bag, standing (docs/game/cast.md). Each code-built passenger
+// the woman with headphones, the woman with a bun and the man with a bag, standing (docs/game/cast.md). Each code-built passenger
 // (train/people.js buildPassengers) becomes that body in place, the same object, so places/train.js and
 // train/discoveries.js keep every reference they hold. The things that tell them apart move over onto the new body:
 // the book, the phones and the headphones. Office woman B already wears her hair in a bun. Called by

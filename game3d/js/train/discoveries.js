@@ -57,7 +57,7 @@ export function trainDiscoveries(game, { people, car, nav, SEAT_Y }) {
   const eric = () => [game.player.root.position.x, game.player.root.position.z];
   const pan = (r) => Math.max(-0.7, Math.min(0.7, (r.root.position.x - eric()[0]) / 3));
 
-  // ---- the girl with headphones: her own phone moves from her lap to Eric; the headphone cup on the aisle side
+  // ---- the woman with headphones: her own phone moves from her lap to Eric; the headphone cup on the aisle side
   const mPhone = music.torso.children.find((o) => o.isGroup && o !== music.head && !music.arms.includes(o));
   const mPhoneRest = { p: mPhone.position.clone(), q: mPhone.quaternion.clone() };
   const mPhoneShow = {

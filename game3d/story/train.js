@@ -7,7 +7,7 @@ export default {
     kuroda: { name: 'Sleeping man' },
     reader: { name: 'Man with a book' },
     bun: { name: 'Woman with a bun' },
-    music: { name: 'Girl with headphones' },
+    music: { name: 'Woman with headphones' },
     stander: { name: 'Man with a bag' },
   },
 

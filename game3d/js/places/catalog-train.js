@@ -13,7 +13,7 @@ export const TRAIN_DETAILS = {
       'kind': 'person small',
     },
     'music': {
-      'label': 'Girl with headphones',
+      'label': 'Woman with headphones',
       'kind': 'person small',
     },
     'rei': {
