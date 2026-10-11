@@ -758,12 +758,6 @@
           "verb": "Pet",
           "kind": "person small"
         },
-        "hall_board": {
-          "label": "Notice board",
-          "kind": "thing",
-          "verb": "Read",
-          "pin": "near"
-        },
         "manager_window": {
           "label": "Manager's window",
           "kind": "thing",

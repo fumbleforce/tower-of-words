@@ -235,13 +235,7 @@ export const PLACE_DETAILS = {
       mailboxes: { label: 'Mailbox 203', kind: 'thing', verb: 'Take mail' },
       street_gate: { label: 'To the street', kind: 'thing', verb: 'Go' }, // day 2: out to the east lane
       tama: { label: 'Tama', verb: 'Pet', kind: 'person small' }, // day 3, the afternoon: asleep (places/day3/)
-      // in the hall, a look line each (story/dorm-building.js)
-      hall_board: {
-        label: 'Notice board',
-        kind: 'thing',
-        verb: 'Read',
-        pin: 'near',
-      },
+      // in the hall, a look line (story/dorm-building.js)
       manager_window: {
         label: "Manager's window",
         kind: 'thing',
