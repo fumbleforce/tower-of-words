@@ -16,7 +16,9 @@ function figure({x, y0, u, dir, shape, fill, stroke, eyes = true, guide = false,
   const sh = 0.95 * U * w, hip = 0.72 * U * w;
   const lean = shape === 'lean' ? 6 : 0;
   const parts = [];
-  const torso = `M${f(X - sh)} ${f(Y + 1.35 * U)} L${f(X + sh)} ${f(Y + 1.35 * U)} L${f(X + hip)} ${f(Y + 3.95 * U)} L${f(X - hip)} ${f(Y + 3.95 * U)} Z`;
+  // shoulders rounded, the waist a little in, the hips out again: a person at a glance, not a box
+  const torso = `M${f(X - sh + 0.25 * U)} ${f(Y + 1.3 * U)} L${f(X + sh - 0.25 * U)} ${f(Y + 1.3 * U)} Q${f(X + sh)} ${f(Y + 1.32 * U)} ${f(X + sh)} ${f(Y + 1.7 * U)}`
+    + ` L${f(X + hip * 0.86)} ${f(Y + 3.1 * U)} L${f(X + hip)} ${f(Y + 3.95 * U)} L${f(X - hip)} ${f(Y + 3.95 * U)} L${f(X - hip * 0.86)} ${f(Y + 3.1 * U)} L${f(X - sh)} ${f(Y + 1.7 * U)} Q${f(X - sh)} ${f(Y + 1.32 * U)} ${f(X - sh + 0.25 * U)} ${f(Y + 1.3 * U)} Z`;
   const arm = s => `M${f(X + s * sh)} ${f(Y + 1.45 * U)} L${f(X + s * (sh + 0.28 * U))} ${f(Y + 4.1 * U)} L${f(X + s * (sh + 0.02 * U))} ${f(Y + 4.15 * U)} L${f(X + s * (sh - 0.22 * U))} ${f(Y + 1.9 * U)} Z`;
   let legs;
   const lw = 0.3 * U * (sideOn ? 0.8 : 1);

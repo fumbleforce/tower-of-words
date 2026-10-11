@@ -267,7 +267,8 @@
 .image-person-row { align-items: start; }
 
 /* tiles: a row of small pictures or diagrams, one per block, that scrolls sideways; + New and Edit at the end */
-.tile-row { display: grid; grid-template-columns: 74px minmax(0, 1fr); align-items: center; gap: 6px; margin: 4px 0; }
+.tile-row { display: grid; grid-template-columns: 62px minmax(0, 1fr); align-items: center; gap: 6px; margin: 4px 0; }
+.row-head { display: grid; gap: 0; align-content: center; }
 .tile-row > .hint { grid-column: 2; margin: 0; }
 .row-label { font-size: 12px; color: var(--dim); }
 .tiles { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 2px; align-items: stretch; }
@@ -282,8 +283,10 @@
 .tile-row-pics .tile { width: 64px; }
 .tile-row-pics .tile-art { height: 40px; }
 .tile-sep { flex: 0 0 1px; margin: 4px 3px; background: var(--line2); }
-.tile-tools { display: flex; flex-direction: column; gap: 3px; flex: 0 0 auto; }
-.tile-tool { min-height: 0; flex: 1; padding: 0 7px; font-size: 11px; color: var(--dim); }
+.tile-tools { display: flex; flex-wrap: wrap; gap: 0 7px; }
+.row-head .tile-tool { min-height: 16px; line-height: 16px; padding: 0; border: 0; background: none; font-size: 11px; color: var(--accent); }
+.row-head .tile-tool:hover:not(:disabled) { background: none; text-decoration: underline; }
+.tiles > .tile-tool { padding: 0 8px; font-size: 11px; color: var(--dim); }
 .tiles > .tile-tool { flex: 0 0 auto; align-self: center; min-height: 26px; }
 .tile-mini { width: 44px; padding: 2px; }
 .tile-mini .tile-art { height: 24px; }
@@ -324,18 +327,22 @@
 .compose-dialog .ctl .chips { margin: 0; gap: 3px; }
 .compose-dialog .ctl .chips button { min-height: 22px; padding: 0 7px; font-size: 11.5px; }
 .direct-more, .place-more { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px 10px; align-items: end; margin-top: 4px; }
+.direct-more { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr); }
+.direct-more textarea { min-height: 0; height: 32px; resize: vertical; }
 .place-more { grid-template-columns: auto minmax(0, 1fr); }
 .dia-cam { font-size: 4px; fill: var(--faint); text-anchor: middle; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-height: 800px) {
   .stage-box { height: 196px; }
+  .place-more { margin-top: 2px; }
+  .image-place h3 { margin-bottom: 2px !important; }
   .tile-art { height: 28px; }
   .tile-row-pics .tile-art { height: 32px; }
   .tile-mini .tile-art { height: 20px; }
   .compose-stage > .image-prompt { min-height: 64px; }
   .tile-dia { width: 64px; }
   .tile-dia .tile-art { height: 24px; }
-  .tile-dia .tile-label { -webkit-line-clamp: 1; white-space: nowrap; text-overflow: ellipsis; display: block; }
+  .tile-dia .tile-label { font-size: 9.5px; letter-spacing: -.1px; }
   .tile-label { font-size: 10px; }
   .tile-row { margin: 2px 0; }
 }

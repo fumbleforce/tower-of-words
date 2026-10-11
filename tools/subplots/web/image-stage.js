@@ -112,7 +112,8 @@ export function stageWords(c, people) {
   }
   const light = LIGHT_FROM.find(l => l[0] === stage.lightFrom)?.[2] || '';
   const mood = stage.mood.trim() ? (/mood|atmosphere/i.test(stage.mood) ? stage.mood.trim() : stage.mood.trim() + ' mood') : '';
-  return {people: [...lines, ...heights, distance, stage.contact.trim()].filter(Boolean).join('. '), light, mood};
+  const contact = stage.contact.trim().replace(/^./, ch => ch.toUpperCase());
+  return {people: [...lines, ...heights, distance, contact].filter(Boolean).join('. '), light, mood};
 }
 
 // Where the placed people stand, said back to the author under the stage ('Placed: Mio left, in front.').
