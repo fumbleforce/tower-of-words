@@ -58,7 +58,7 @@ const authoring = {
 const privateRow = { id: 'local:fixture:bath:start', provider: 'local', title: 'bath · start', node: 'start', scene: 'enc_bath', group: 'Encounters', where: 'island/private/rewards/tools/fixture.src.mjs', count: 5, audience: 'private', placement: { place: 'office', day: 2, condition: 'private_mode && period_evening && !enc_bath_seen' } };
 const privateScene = {
   ...privateRow, recipe: true, revision: 'p1', metadata: {}, entries: [], routesEditable: false, history: [], capabilities: { picture: 'pic' },
-  placement: { place: 'office', day: 2, condition: null }, previewUrl: '/game3d/index.html?scene=enc_bath',
+  previewUrl: '/game3d/index.html?scene=enc_bath',
   images: [{ id: 'image:0', file: 'encounters/missing.webp', available: false }],
   steps: [
     { narration: 'Steam over the water.', $recipe: "n('Steam over the water.')" },
@@ -293,6 +293,21 @@ try {
       await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
       assert.match(fs.readFileSync(file, 'utf8'), /on: \{ 'talk:mio': \{ if: "day >= 2 && period == 'lunch' && met_mio", node: 'welcome', once: true \} \},/);
 
+      // the map: the day's place in rows by time of day; a card dragged to another time is that edit, saved the same way
+      await page.locator('#days button', { hasText: '1' }).click();
+      await page.locator('#mapToggle').click();
+      await page.locator('.lane[data-lane="lunch"] .card', { hasText: 'Welcome' }).waitFor();
+      assert.match(await page.locator('.board-head h2').innerText(), /Day 1 · IT support, B2/);
+      await page.locator('.card', { hasText: 'Welcome' }).dragTo(page.locator('.lane[data-lane="evening"]'));
+      await page.locator('.lane[data-lane="evening"] .card.pending', { hasText: 'Welcome' }).waitFor();
+      await page.locator('#save').click();
+      await page.locator('#status', { hasText: /^Saved$/ }).waitFor();
+      assert.match(fs.readFileSync(file, 'utf8'), /if: "day >= 2 && period == 'evening' && met_mio", node: 'welcome'/);
+      await page.locator('.lane[data-lane="evening"] .card:not(.pending)', { hasText: 'Welcome' }).waitFor();
+      await page.locator('.card', { hasText: 'Welcome' }).click();
+      await page.locator('#timeline').waitFor();
+      assert.equal(await page.locator('#board').isHidden(), true, 'a card opens its scene');
+
       // a comment on a beat: the beat shows it, it stays with the beat when it moves, Claude answers from the command line
       const asked = top.nth(2);
       await asked.hover();
@@ -342,6 +357,20 @@ try {
       await page.locator('.beat.k-picture').waitFor();
       assert.equal(await page.locator('#docAudience').innerText(), 'Private · Adult');
       assert.equal(await page.locator('#play').getAttribute('href'), '/game3d/index.html?scene=enc_bath');
+      // on the map a private scene also goes to another day: dropped on day 3 it plays on day 3; undo takes it back
+      await page.locator('#mapToggle').click();
+      await page.locator('.lane[data-lane="evening"] .card.private').waitFor();
+      await page.locator('.card.private').dragTo(page.locator('#days button', { hasText: '3' }));
+      await page.locator('#days button[aria-pressed=true]', { hasText: '3' }).waitFor();
+      await page.locator('.card.private.pending').waitFor();
+      await page.locator('[data-tab=scene]').click();
+      assert.match(await page.locator('.way .sentence').innerText(), /Plays at IT support, B2, on day 3, after work, only the first time/);
+      await page.locator('.timeline-wrap').click({ position: { x: 5, y: 400 } });
+      await page.keyboard.press('Control+z');
+      assert.match(await page.locator('.way .sentence').innerText(), /on day 2, after work/);
+      await page.locator('#mapToggle').click();
+      await page.locator('#days button', { hasText: '2' }).click();
+      await page.locator('[data-tab=beat]').click();
       // its choice: Look follows below; Leave swaps it; who plays switches the branch and Play in game
       await page.locator('.path-head', { hasText: 'After “Look”' }).waitFor();
       assert.match(await textOf(page.locator('.path-section')), /edge of the bath/);
@@ -502,7 +531,7 @@ try {
       assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth > globalThis.innerWidth), false);
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(`PASS ${width}: open, the story map outline, labels, list stays put, when it plays as one sentence with pickers, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), story-check findings on the beat, a new picture beat, comments on beats (public and private, command line), scene status`);
+      console.log(`PASS ${width}: open, the story map outline, labels, list stays put, when it plays as one sentence with pickers, the map board (drag to a time of day, drop a private scene on a day), inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), story-check findings on the beat, a new picture beat, comments on beats (public and private, command line), scene status`);
     }
   }, { timeoutMs: 150000, gpuWaitMs: 60000 });
 } finally {

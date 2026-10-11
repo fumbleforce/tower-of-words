@@ -1,7 +1,7 @@
 // The story map: every scene, public and private, sorted into the day and place it plays in, with its ways in and
 // the parts its choices and jumps lead to. Public scenes come from /api/subplots/map (storymap.mjs), private ones from
 // their placement in the catalog. The scene list (outline.js) and the map board (board.js) draw this.
-import { S } from './store.js';
+import { S, isDirty } from './store.js';
 import { humanize, personName, placeName } from './names.js';
 import { readRestrictions, summary } from './restrictions.js';
 
@@ -59,7 +59,7 @@ export function buildMap(catalog = S.catalog, map = S.map) {
   }
   for (const r of public_) {
     const s = byId.get(r.id);
-    if (!s.entries.length) continue;
+    if (!s.entries.length || s.node === 'noop') continue; // noop: a way in that does nothing on purpose
     const first = s.entries[0];
     const model = readRestrictions(first.condition, { once: first.once });
     items.push({
@@ -68,6 +68,7 @@ export function buildMap(catalog = S.catalog, map = S.map) {
       way: wayLabel(first, s.place) + (s.entries.length > 1 ? ` +${s.entries.length - 1}` : ''),
       note: summary(model, names), parts: partsOf(s, byId, catalog),
     });
+    items.at(-1).partRoutes = items.at(-1).parts.flatMap(p => byId.get(p.id)?.routes || []);
   }
   // the place's own arrival first, chats that run when nothing else is on last, the rest in the file's order
   const rank = it => (it.entries[0]?.event === 'start' ? 0 : /^idle:/.test(it.entries[0]?.event) ? 2 : 1);
@@ -141,4 +142,21 @@ export const mapScene = id => S.map?.scenes?.find(s => s.id === id) || null;
 // Which day and area a scene id sits in (the open scene's place in the list).
 export function locate(items, id) {
   return items.find(i => i.row.id === id || i.parts.some(p => p.id === id)) || null;
+}
+
+// The open scene's unsaved ways in stand in for the map's, so a scene moved but not saved shows where it is going.
+export function liveItems(items) {
+  const s = S.scene;
+  if (!s || !isDirty()) return items;
+  return items.map(item => {
+    if (s.id !== item.row.id) return item;
+    if (s.placement) {
+      const model = readRestrictions(s.placement.condition || '', { seen: `${s.scene || ''}_seen` });
+      const place = s.placement.place || null;
+      return { ...item, model, day: privateDay(s.placement, s.scene), place, area: place || 'private', areaTitle: place ? placeName(place) : item.areaTitle, way: place ? `Shows up at ${placeName(place)}` : '', note: summary(model, names, { day: false }), pending: true };
+    }
+    if (!s.entries?.length) return item;
+    const model = readRestrictions(s.entries[0].condition, { once: s.entries[0].once });
+    return { ...item, model, note: summary(model, names), pending: true };
+  });
 }

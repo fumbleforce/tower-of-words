@@ -9,16 +9,18 @@ import { installComments, loadComments } from './comments.js';
 import { renderBeatTab, renderSceneTab } from './inspector.js';
 import { renderPictureTab } from './pictures.js';
 import { openPreview, installPreview } from './preview.js';
-import { areaOf, titleOf, playUrl } from './names.js';
-import { buildMap, locate, dayTitle } from './storymap.js';
+import { areaOf, titleOf, playUrl, placeName } from './names.js';
+import { buildMap, locate, dayTitle, liveItems } from './storymap.js';
 import { paintOutline, paintDays, dayOfScene } from './outline.js';
+import { paintBoard, dropZone, dragging } from './board.js';
+import * as R from './restrictions.js';
 import { setConditionLabels } from './conditions.js';
 import { installImages } from './images.js';
 import { kindOf } from './model.js';
 import { setProblems, setUnvoiced, notesFor, unplaced } from './checks.js';
 
 const $ = id => document.getElementById(id);
-let filter = 'all', tab = 'beat', saving = false, statuses = {}, day = 1, mapItems = null;
+let filter = 'all', tab = 'beat', saving = false, statuses = {}, day = 1, mapItems = null, view = 'timeline', area = '';
 
 function status(text, kind = '') {
   $('status').textContent = text;
@@ -28,8 +30,59 @@ function status(text, kind = '') {
 // ---------- scene list: the story map's outline (outline.js) ----------
 function paintList() {
   mapItems ||= buildMap();
-  paintDays($('days'), day, d => { day = d; paintList(); });
-  paintOutline($('sceneList'), { items: mapItems, day, filter, query: $('search').value, marks: statusMarks, onOpen: id => open(id) });
+  paintDays($('days'), day, d => { day = d; area = ''; paintList(); });
+  // a private scene dropped on a day moves to that day
+  for (const b of $('days').querySelectorAll('button')) {
+    const to = b.dataset.day === 'later' ? 6 : Number(b.dataset.day);
+    if (to) dropZone(b, () => dragging()?.kind === 'private' && dragging().day !== (to > 5 ? 'later' : to), () => moveScene(dragging(), { day: to }));
+  }
+  paintOutline($('sceneList'), { items: liveItems(mapItems), day, filter, query: $('search').value, marks: statusMarks, onOpen: id => open(id), onArea: a => { area = a; paintMap(); } });
+  paintMap();
+}
+
+// ---------- the story map board (board.js) ----------
+function paintMap() {
+  const on = view === 'map';
+  $('board').hidden = !on;
+  $('board').parentElement.classList.toggle('map-view', on);
+  $('mapToggle').setAttribute('aria-pressed', String(on));
+  $('mapToggle').textContent = on ? 'Back to the scene' : 'Show the day on the map';
+  const here = area || (S.scene && locate(mapItems, S.scene.id)?.area) || '';
+  if (on) paintBoard($('board'), { items: liveItems(mapItems), day, area: here, filter, onOpen: id => { setView('timeline'); open(id); }, onArea: a => { area = a; paintMap(); }, onMove: moveScene });
+}
+function setView(next) {
+  view = next;
+  paintMap();
+}
+
+// A card dropped on a time of day, a place or a day: open its scene (if it isn't open) and make the change there,
+// as an edit like any other, so Save writes it with the scene's checks and undo takes it back.
+async function moveScene(item, change) {
+  if (!item) return;
+  if (S.scene?.id !== item.row.id) {
+    await open(item.row.id);
+    if (S.scene?.id !== item.row.id) return;
+  }
+  const seen = `${S.scene.scene || ''}_seen`;
+  const move = model => {
+    let m = model;
+    if (change.periods) m = R.setPeriods(m, change.periods);
+    if (change.day) m = R.setDays(m, { only: change.day });
+    return m;
+  };
+  edit(s => {
+    if (s.placement) {
+      if (change.place) s.placement.place = change.place;
+      if (s.placement.condition !== null) s.placement.condition = R.writeRestrictions(move(R.readRestrictions(s.placement.condition || '', { seen })));
+      if (change.day && s.placement.day !== null) s.placement.day = change.day;
+    } else {
+      for (const e of s.entries) e.condition = R.writeRestrictions(move(R.readRestrictions(e.condition, { once: e.once })));
+    }
+  });
+  const what = change.place ? `now plays at ${placeName(change.place)}` : change.day ? `now plays on day ${change.day}` : `now plays ${R.periodsPhrase(change.periods)}`;
+  status(`${titleOf(item.row)} ${what}. Save to keep it.`, 'dirty');
+  if (change.day) { day = change.day > 5 ? 'later' : change.day; }
+  paintList();
 }
 
 // A save can change where and when a scene plays: read the map and the catalog's placements again.
@@ -267,7 +320,7 @@ function paintTab() {
 
 on((type, detail) => {
   if (type === 'load' || type === 'saved') { renderTimeline(); paintTab(); paintList(); }
-  if (type === 'edit') { renderTimeline(); paintTab(); scheduleDraft(saveDraft); loadLinked(); }
+  if (type === 'edit') { renderTimeline(); paintTab(); scheduleDraft(saveDraft); loadLinked(); paintList(); }
   if (type === 'path') { renderTimeline(); paintTab(); }
   if (type === 'typing') scheduleDraft(saveDraft);
   if (type === 'select') {
@@ -287,6 +340,7 @@ $('save').onclick = save;
 $('preview').onclick = () => openPreview(S.selected);
 $('play').addEventListener('click', e => { if ($('play').getAttribute('aria-disabled') === 'true') e.preventDefault(); });
 $('search').oninput = paintList;
+$('mapToggle').onclick = () => setView(view === 'map' ? 'timeline' : 'map');
 for (const b of document.querySelectorAll('[data-filter]')) b.onclick = () => {
   filter = b.dataset.filter;
   for (const x of document.querySelectorAll('[data-filter]')) x.setAttribute('aria-pressed', String(x === b));
