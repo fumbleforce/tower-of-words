@@ -16,6 +16,7 @@ import { areaOf, titleOf, playUrl, placeName } from './names.js';
 import { buildMap, locate, dayTitle, liveItems } from './storymap.js';
 import { paintOutline, paintDays, dayOfScene } from './outline.js';
 import { paintBoard, dropZone, dragging } from './board.js';
+import { openNewScene } from './newscene.js';
 import * as R from './restrictions.js';
 import { setConditionLabels } from './conditions.js';
 import { installImages } from './images.js';
@@ -49,7 +50,7 @@ function paintMap() {
   $('board').hidden = !on;
   $('board').parentElement.classList.toggle('map-view', on);
   $('mapToggle').setAttribute('aria-pressed', String(on));
-  $('mapToggle').textContent = on ? 'Back to the scene' : 'Show the day on the map';
+  $('mapToggle').textContent = on ? 'Back to the scene' : 'Map of the day';
   const here = area || (S.scene && locate(mapItems, S.scene.id)?.area) || '';
   if (on) paintBoard($('board'), { items: liveItems(mapItems), day, area: here, filter, onOpen: id => { setView('timeline'); open(id); }, onArea: a => { area = a; paintMap(); }, onMove: moveScene });
 }
@@ -344,6 +345,15 @@ $('preview').onclick = () => openPreview(S.selected);
 $('play').addEventListener('click', e => { if ($('play').getAttribute('aria-disabled') === 'true') e.preventDefault(); });
 $('search').oninput = paintList;
 $('mapToggle').onclick = () => setView(view === 'map' ? 'timeline' : 'map');
+$('newScene').onclick = () => openNewScene({
+  day, area: area || (S.scene && locate(mapItems, S.scene.id)?.place) || '',
+  onCreated: async made => {
+    await refreshMap();
+    setView('timeline');
+    await open(made.id, { skipCheck: true });
+    status(`Added. It plays in the game now; write its lines here and save.${made.unvoiced?.length ? ' Its lines have no voice clips yet.' : ''}`, 'ok');
+  },
+});
 for (const b of document.querySelectorAll('[data-filter]')) b.onclick = () => {
   filter = b.dataset.filter;
   for (const x of document.querySelectorAll('[data-filter]')) x.setAttribute('aria-pressed', String(x === b));
@@ -356,7 +366,7 @@ $('timeline').parentElement.addEventListener('pointerdown', e => { if (!e.target
 window.addEventListener('subplot-image-changed', () => { renderTimeline(); paintTab(); paintBar(); });
 
 document.addEventListener('keydown', e => {
-  if ($('previewDialog').open || $('composeDialog').open || $('compareDialog').open) return;
+  if ($('previewDialog').open || $('composeDialog').open || $('compareDialog').open || $('newDialog').open) return;
   const mod = e.ctrlKey || e.metaKey, typing = e.target.closest?.('input, textarea, select');
   if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); save(); return; }
   if (mod && e.key.toLowerCase() === 'z' && !typing) { e.preventDefault(); if (e.shiftKey) redo(); else undo(); return; }

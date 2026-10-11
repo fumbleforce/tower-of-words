@@ -51,7 +51,7 @@ const authoring = {
   ],
   places: [{ id: 'office', name: 'IT support, B2' }],
   variables: [{ id: 'day', label: 'Story day', type: 'number' }, { id: 'met_mio', label: 'Has met Mio', type: 'boolean', group: 'People' }],
-  events: [{ id: 'talk:mio', label: 'Talk to Mio' }],
+  events: [{ id: 'talk:mio', label: 'Talk to Mio', sources: ['game3d/story/office.js'] }],
   deliveries: [{ id: '', label: 'Natural' }, { id: 'warm', label: 'Warm' }],
   words: [],
 };
@@ -341,6 +341,23 @@ try {
       assert.match(await page.locator('.pop.thread').innerText(), /Done/);
       await page.keyboard.press('Escape');
       assert.ok(fs.existsSync(path.join(root, 'state/comments.json')), 'public comments sit with the drafts');
+      // a new scene from a template: added to the place's story with the checks, opened ready to write
+      await page.locator('#days button', { hasText: '1' }).click();
+      await page.locator('#newScene').click();
+      await page.locator('#newDialog .template.on', { hasText: 'A conversation' }).waitFor();
+      assert.equal(await page.locator('#newDialog select[name=place]').inputValue(), 'office');
+      assert.equal(await page.locator('#newDialog select[name=event] option:checked').innerText(), 'Talk to Mio');
+      await page.locator('#newDialog input[name=title]').fill('Coffee break');
+      await page.locator('#newDialog button[value=add]').click();
+      await page.locator('#status', { hasText: /^Added/ }).waitFor();
+      assert.equal(await page.locator('#docTitle').innerText(), 'Coffee break');
+      assert.match(await textOf(page.locator('#timeline')), /\(What Mio says first\.\)/);
+      const withNew = fs.readFileSync(file, 'utf8');
+      assert.match(withNew, /'talk:mio': \[\{ node: 'coffee_break', once: true \}, \{ if: "day >= 2/);
+      assert.match(withNew, /    coffee_break: \[\n      \{ say: 'mio', emo: 'casual', text: '\(What Mio says first\.\)' \},/);
+      assert.match(withNew, /    coffee_break_b: \[/);
+      assert.ok(await page.locator('.scene-row', { hasText: 'Coffee break' }).isVisible(), 'the list has it');
+
       // outside private mode the server refuses anything private: reads, drafts, saves, comments
       const post = (action, body) => fetch(`${base}/api/subplots/${action}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(x => x.status);
       assert.equal(await post('draft', { id: privateRow.id, steps: [] }), 403);
@@ -541,7 +558,7 @@ try {
       assert.equal(await page.evaluate(() => globalThis.document.documentElement.scrollWidth > globalThis.innerWidth), false);
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(`PASS ${width}: open, the story map outline, labels, list stays put, when it plays as one sentence with pickers, the map board (drag to a time of day, drop a private scene on a day), inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), story-check findings on the beat, a new picture beat, comments on beats (public and private, command line), scene status`);
+      console.log(`PASS ${width}: open, the story map outline, labels, list stays put, when it plays as one sentence with pickers, the map board (drag to a time of day, drop a private scene on a day), a new scene from a template, inline edit, undo and redo, speaker picker, drag, branches as one reading path (pick, switch, add and edit inside, who plays), per-part saves, preview on the path, revisions, private branch and picture pick, the scene's own pictures, full-height pictures, full-screen composer that fits, a shot's versions (new version, repaint a part, compare and pick), story-check findings on the beat, a new picture beat, comments on beats (public and private, command line), scene status`);
     }
   }, { timeoutMs: 150000, gpuWaitMs: 60000 });
 } finally {

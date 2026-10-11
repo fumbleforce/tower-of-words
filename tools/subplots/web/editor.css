@@ -81,7 +81,8 @@ textarea { resize: vertical; }
 .banner span { flex: 1; }
 
 /* ---------- three columns ---------- */
-.work { display: grid; grid-template-columns: 300px minmax(0, 1fr) 380px; min-height: 0; }
+/* always the 1fr row, whether or not the banner above it shows */
+.work { grid-row: 3; display: grid; grid-template-columns: 300px minmax(0, 1fr) 380px; min-height: 0; }
 .scenes, .inspector { display: flex; flex-direction: column; min-height: 0; background: var(--panel); }
 .scenes { border-right: 1px solid var(--line); }
 .inspector { border-left: 1px solid var(--line); }
@@ -298,6 +299,7 @@ textarea[lang=ja], .text-second:lang(ja) { color: var(--jp); }
 
 /* the story map board (board.js): one day and place, rows by time of day */
 .timeline-wrap.map-view > :not(#board) { display: none !important; }
+.head-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .map-toggle { width: 100%; }
 #mapToggle[aria-pressed=true] { background: var(--accent-soft); border-color: rgba(111, 208, 198, .5); color: var(--accent); }
 .board { padding: 18px 24px 80px; }
@@ -335,6 +337,24 @@ svg.routes marker path { fill: rgba(111, 208, 198, .8); }
 .drop-here { outline: 2px dashed var(--accent); outline-offset: 2px; background: var(--accent-soft) !important; }
 body.drag-private .place-chip[data-place]:not(.on), body.drag-private #days button { border-style: dashed; border-color: rgba(236, 147, 173, .5); }
 .board-empty { max-width: 460px; margin: 18vh auto 0; color: var(--dim); }
+
+/* new scene from a template (newscene.js) */
+.new-dialog { width: min(640px, 92vw); padding: 0; border: 1px solid var(--line2); border-radius: var(--r); background: var(--panel); color: var(--ink); }
+.new-dialog::backdrop { background: rgba(5, 7, 10, .7); }
+.new-scene { display: grid; gap: 14px; padding: 20px 22px; }
+.new-scene h2 { margin: 0; font-size: 17px; }
+.new-scene label { display: grid; gap: 5px; font-size: 12.5px; color: var(--dim); }
+.new-scene .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.templates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.template { position: relative; display: grid !important; align-content: start; gap: 4px; padding: 12px; border: 1px solid var(--line2); border-radius: var(--r); cursor: pointer; }
+.template input { position: absolute; opacity: 0; }
+.template strong { color: var(--ink); font-size: 13.5px; }
+.template span { font-size: 12px; line-height: 1.45; }
+.template.on { border-color: var(--accent); background: var(--accent-soft); }
+.template:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
+.new-scene .quiet { margin: 0; font-size: 12.5px; }
+.new-scene .error { margin: 0; color: var(--warn); font-size: 13px; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 8px; }
 
 /* when it plays, as one sentence with parts to click (placement.js) */
 .way { margin: 0 0 12px; padding: 12px 12px 8px; border: 1px solid var(--line); border-radius: var(--r); background: rgba(255, 255, 255, .015); }
