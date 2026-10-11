@@ -1,11 +1,10 @@
-// The monorail car: a roofless shell with window cut-outs, blue benches, poles, hand straps, racks,
+// The monorail car: a roofless shell with window cut-outs, blue benches, poles, racks,
 // wall lamps and a plant, plus the neighbouring cars and the gangway bellows.
 // Car-local space: floor top at y = 0, travel along +x, the camera-side wall at +z.
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { hull, icoPoints } from './hull.js';
 import { V } from './kit.js';
-import { strapMeshes } from './straps.js';
 import { monorailMesh, monorailParts, skyEnv } from './models.js';
 import { doorLeaf } from './door-leaf.js';
 
@@ -72,8 +71,6 @@ export const COL = {
   seatBack: '#4f80c6',
   seatBase: '#b7c0cb',
   metal: '#cfd6de',
-  strap: '#8d98a6',
-  loop: '#f3f5f7',
   frame: '#d5dbe2',
   lamp: '#fff0cf',
   door: '#dde3e9',
@@ -507,31 +504,13 @@ function bench(x0, x1, side, withBack) {
   return g;
 }
 
-function rackAndRail(x0, x1, side, straps, rack) {
+function rackAndRail(x0, x1, side, rack) {
   const g = new THREE.Group();
   const metal = mat('metal', COL.metal, { roughness: 0.4, metalness: 0.25 });
-  const zr = side * (LZ - 0.55);
-  // bench end poles up to the rail, with a curved top into the rail
+  // bench end poles, and an armrest bar back to the wall
   for (const xe of [x0, x1]) {
     g.add(pole([xe, 0, side * (LZ - BENCH_D - 0.02)], [xe, RAIL_Y, side * (LZ - BENCH_D - 0.02)], 0.022, metal));
-    g.add(pole([xe, RAIL_Y, side * (LZ - BENCH_D - 0.02)], [xe, RAIL_Y, zr], 0.02, metal));
-    // armrest bar back to the wall
     g.add(pole([xe, 0.5, side * (LZ - BENCH_D - 0.02)], [xe, 0.5, side * LZ], 0.018, metal));
-  }
-  g.add(pole([x0 - 0.02, RAIL_Y, zr], [x1 + 0.02, RAIL_Y, zr], 0.021, metal));
-  // hand straps: a pivot at the rail so they can swing (train/straps.js draws them)
-  for (let x = x0 + 0.24; x <= x1 - 0.2; x += 0.4) {
-    const piv = new THREE.Group();
-    piv.position.set(x, RAIL_Y, zr);
-    g.add(piv);
-    straps.push({
-      piv,
-      ph: (straps.length * 2.39) % 6.28,
-      a: 0,
-      v: 0,
-      b: 0,
-      w: 0,
-    });
   }
   if (rack) {
     // luggage rack: an open rod shelf on wall brackets (Jørgen wanted a real shelf, not floating bags), kept open
@@ -743,7 +722,6 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
   // the draw-call pass batches under it (place.perfMovers), so the departure doesn't break its batches up
   const cab = new THREE.Group();
   root.add(cab);
-  const straps = [];
   const nodders = []; // things that nod a little with the motion: {obj, k}
 
   // floor and the body below it
@@ -854,14 +832,12 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
   cab.add(benchHolder);
   function furnish(md) {
     benchHolder.clear();
-    straps.length = 0;
     for (const [x0, x1] of BENCHES) {
       benchHolder.add(bench(x0, x1, -1, true));
       benchHolder.add(bench(Math.max(x0, -NEAR_END), Math.min(x1, NEAR_END), 1, true));
-      benchHolder.add(rackAndRail(x0, x1, -1, straps, md === 'land'));
-      benchHolder.add(rackAndRail(Math.max(x0, -NEAR_END), Math.min(x1, NEAR_END), 1, straps, false));
+      benchHolder.add(rackAndRail(x0, x1, -1, md === 'land'));
+      benchHolder.add(rackAndRail(Math.max(x0, -NEAR_END), Math.min(x1, NEAR_END), 1, false));
     }
-    benchHolder.add(...strapMeshes(straps, mat('strap', COL.strap), mat('loop', COL.loop, { roughness: 0.45 })));
     // middle standing poles
     const metal = mat('metal', COL.metal, { roughness: 0.4, metalness: 0.25 });
     for (const z of [-0.5, 0.5]) benchHolder.add(pole([0, 0, z], [0, RAIL_Y, z], 0.022, metal));
@@ -950,7 +926,6 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
   return {
     root,
     cab,
-    straps,
     nodders,
     proxy,
     setMode,
