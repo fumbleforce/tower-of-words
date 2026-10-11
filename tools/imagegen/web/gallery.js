@@ -52,7 +52,7 @@ export function lightboxHtml(t, ctx) {
       <label>Note to Claude<textarea id="lbNote" rows="2" placeholder="What works, what doesn't">${esc(t.note || '')}</textarea></label>
       <div class="kv"><span>Seed</span><span class="mono">${t.seed}</span><span>Model</span><span>${esc((t.model_file || '').replace('.safetensors', ''))}</span>
         <span>Size</span><span>${t.w} × ${t.h}</span>${agent ? '' : `<span>Style</span><span>${esc(ctx.styleName || c.style || '')}</span>`}
-        ${t.steps ? `<span>Steps, CFG</span><span>${t.steps}, ${t.cfg}</span>` : ''}${t.sampler ? `<span>Sampler</span><span>${esc(t.sampler)}${t.scheduler ? ' ' + esc(t.scheduler) : ''}</span>` : ''}
+        <span>Steps</span><span>${esc(t.steps ?? 'Not recorded')}</span><span>Prompt strength (CFG)</span><span>${esc(t.cfg ?? 'Not recorded')}</span>${t.sampler ? `<span>Sampler</span><span>${esc(t.sampler)}${t.scheduler ? ' ' + esc(t.scheduler) : ''}</span>` : ''}
         ${t.start ? `<span>Started from</span><span class="mono" style="word-break:break-all">${esc(t.start.image)} at ${t.start.denoise}${t.start.mask ? ', masked (inpaint)' : ''}</span>` : ''}
         ${(t.loras || []).length ? `<span>LoRA</span><span>${t.loras.map(l => esc(l.file.replace('.safetensors', '')) + ' ' + l.weight).join('<br>')}</span>` : ''}
         ${t.control ? `<span>Guide</span><span>${esc(t.control.file.replace('.safetensors', ''))} at ${t.control.strength}</span>` : ''}

@@ -123,8 +123,12 @@ await withBrowserJob('codex-image-studio', async browser => {
   const reused = writes.filter(x => x.path.endsWith('/generate')).at(-1).body;
   assert.ok(!('subplotId' in reused.compose)); assert.ok(!('imageSlot' in reused.compose));
   assert.equal(reused.seed, 128);
+  if (!await page.locator('[data-settings-open]').evaluate(el => el.open)) await page.locator('[data-settings-open] > summary').click();
+  await page.locator('[data-compose=steps]').fill('42');
+  await page.locator('[data-compose=cfg]').fill('7');
   await page.locator('[data-lib=use]').first().click();
   assert.match(await page.locator('#studioSelection').textContent(), /picture #6/);
+  assert.match(await page.locator('#studioSelection').textContent(), /Steps: 30 · Prompt strength \(CFG\): 5/);
   await page.locator('#studioSelection img').evaluate(img => img.decode());
   await page.screenshot({path: path.join(output, 'selection.png')});
   await page.locator('[data-create-scene]').click();
@@ -160,6 +164,7 @@ await withBrowserJob('codex-image-studio', async browser => {
   await page.locator('[data-trash]').click();
   await page.locator('[data-lib=open]').first().click();
   await page.locator('#libLightbox [data-a=scene]').waitFor();
+  assert.match(await page.locator('#libLightbox .kv').textContent(), /Steps30Prompt strength \(CFG\)5/);
   assert.equal(await page.locator('#libLightbox [data-a=sameseed]').textContent(), 'Load prompt and settings');
   await page.keyboard.press('Escape');
   await page.locator('[data-lib=use]').last().click();

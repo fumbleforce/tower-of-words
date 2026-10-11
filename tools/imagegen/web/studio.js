@@ -28,7 +28,7 @@ function renderSelection() {
   host.hidden = !selected;
   if (!selected) return;
   const image = selected;
-  host.innerHTML = `<img src="${esc(fullUrl(image, '/api/subplots/image'))}" alt="Selected picture"><div><strong>Selected ${image.n ? 'picture #' + esc(image.n) : 'picture'}</strong><p class="hint">Use this image as the starting point.</p></div><div class="studio-selection-actions"><button type="button" data-create-scene>Create scene</button><button type="button" data-create-character>Create character</button></div>`;
+  host.innerHTML = `<img src="${esc(fullUrl(image, '/api/subplots/image'))}" alt="Selected picture"><div><strong>Selected ${image.n ? 'picture #' + esc(image.n) : 'picture'}</strong><p class="hint">Steps: <strong>${esc(image.steps ?? 'Not recorded')}</strong> · Prompt strength (CFG): <strong>${esc(image.cfg ?? 'Not recorded')}</strong></p></div><div class="studio-selection-actions"><button type="button" data-create-scene>Create scene</button><button type="button" data-create-character>Create character</button></div>`;
   $('[data-create-scene]', host).onclick = guarded(() => create.scene(image));
   $('[data-create-character]', host).onclick = guarded(() => create.character(image));
 }
