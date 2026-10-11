@@ -16,6 +16,7 @@ const check = (name, title, value, disabled = false) => `<label class="image-che
 const number = (name, title, value, min, max, step = 1, placeholder = '') => `<label>${esc(title)}<input data-compose="${name}" type="number" min="${min}" max="${max}" step="${step}" value="${esc(value ?? '')}" placeholder="${esc(placeholder)}"></label>`;
 const chip = (label, selected, data) => `<button type="button" ${data} aria-pressed="${!!selected}">${esc(label)}</button>`;
 const NEW = '__new__';
+const SETTINGS = ['model', 'count', 'seed', 'steps', 'cfg', 'width', 'height'];
 // A block picker: the block's entries, "+ New…" to add one right here, and Edit for the chosen one (block-editor.js).
 const pickerHtml = (name, kind, title, items, value, empty = 'No preference') => `<label>${esc(title)}<span class="block-pick"><select data-compose="${name}" data-kind="${kind}">${empty === null ? '' : `<option value="">${esc(empty)}</option>`}${options(items, value)}<option value="${NEW}">+ New…</option></select><button type="button" class="small ghost" data-edit-block="${kind}" data-edit-field="${name}" title="Edit, retire or restore an older version">Edit</button></span></label>`;
 const asset = (kind, path) => '/api/subplots/image/' + kind + '/' + String(path).split('/').map(encodeURIComponent).join('/');
@@ -25,6 +26,9 @@ export function installImages(getScene, changed) {
   let historyScope = 'scene', historyCharacter = '', historyStar = false, historyEnd = false, historyBusy = false, historyWho = 'all', showTrash = false;
   const edits = new Map();  // ratings and deletes made here since the library loaded: id -> fields
   let selected = [], referenceChoices = [], referenceOwner = '', activeScene = '', activeSlot = '', loadingHistory = 0;
+  // how the composer is folded: the full people picker, the generation settings, the width and height fields
+  let peopleOpen = false, settingsOpen = false, customSize = false;
+  const fold = () => { peopleOpen = false; customSize = false; };
   // "This scene": the runs the editor's server matches to the scene (api.py scene_runs), loaded once per scene
   let sceneRuns = null, sceneRunsFor = '';
   const active = type => (presets?.[type] || []).filter(p => !p.archived);
@@ -44,6 +48,7 @@ export function installImages(getScene, changed) {
     if (activeScene !== scene.id) {
       activeScene = scene.id;
       activeSlot = slots()[0]?.id || '';
+      fold();
       referenceChoices = [];
       referenceOwner = '';
     }
@@ -79,6 +84,7 @@ export function installImages(getScene, changed) {
   function updatePrompt() {
     const body = assemble();
     if ($('#assembled')) $('#assembled').textContent = body.positive;
+    const peek = $('.settings-peek'); if (peek) peek.textContent = settingsPeek(compose());
     if ($('#imageRatingNote')) $('#imageRatingNote').textContent = body.rating === compose()?.rating ? '' : 'The selected character preset limits this image to ' + body.rating + '.';
   }
   function outfitPicker(c, p) {
@@ -97,6 +103,50 @@ export function installImages(getScene, changed) {
         notice(id ? 'Saved. Every scene uses the new version.' : 'Added. It is in every scene’s pickers now.');
       })}).catch(e => notice(e.message, true));
   }
+  // The size a shot renders at: the picture shape's preset, or the shot's own width and height when they differ
+  // from it (a picture made at a size no preset has). Sizes are presets, as in the image gen dashboard's Framing.
+  function sizeOf(c) {
+    const fr = preset('framing', c.framing);
+    const w = +c.width || fr?.data.w || 1152, h = +c.height || fr?.data.h || 896;
+    const own = !fr || w !== +fr.data.w || h !== +fr.data.h;
+    return {w, h, own, label: (own ? '' : fr.data.name + ' ') + w + '×' + h};
+  }
+  // People: once the shot has its cast, only the people in it show, each with their outfit; "Add or change people"
+  // opens every character (Jørgen, 2026-10-11: "the people section takes up too much room, when you have already
+  // decided on the character. maybe collapsable while showing only the currently included characters").
+  function peopleHtml(c, cast) {
+    const generic = c.man && active('character').find(p => p.data.generic);
+    const any = cast.length || generic;
+    const face = p => portraitUrl(p.data.portrait) ? `<img loading="lazy" src="${esc(portraitUrl(p.data.portrait))}" alt="">` : `<span class="image-person-placeholder">${esc((p.data.name || p.id).slice(0, 1))}</span>`;
+    const groupChip = cast.length + (c.man ? 1 : 0) > 1 ? chip('Short descriptions for a group', c.useShort, 'data-toggle="useShort"') : '';
+    const head = `<div class="section-head"><h3>People in the picture</h3>${any ? `<button type="button" data-people-open aria-expanded="${peopleOpen}">${peopleOpen ? 'Done' : 'Add or change people'}</button>` : ''}</div>`;
+    if (any && !peopleOpen) return `<section class="image-section image-people">${head}<div class="image-included">
+      ${cast.map(p => `<div class="image-person-row" data-person="${esc(p.id)}">${face(p)}${outfitPicker(c, p)}</div>`).join('')}
+      ${generic ? `<div class="image-person-row" data-person="${esc(generic.id)}">${face(generic)}<span>Unnamed person</span></div>` : ''}</div>
+      ${groupChip ? `<div class="chips">${groupChip}</div>` : ''}</section>`;
+    return `<section class="image-section image-people">${head}<div class="image-cast">${active('character').filter(p => !p.data.generic).map(p => `<button type="button" data-char="${esc(p.id)}" aria-pressed="${c.characters.includes(p.id)}" title="${esc(p.data.name || p.id)}">${face(p)}<span>${esc(p.data.name || p.id)}</span></button>`).join('') || '<p class="hint">Your image-generation character presets appear here when connected.</p>'}</div>
+      <div class="chips">${active('character').some(p => p.data.generic) ? chip('Include an unnamed person', c.man, 'data-toggle="man"') : ''}${groupChip}<button type="button" data-new-block="character">+ New person</button></div>
+      ${cast.length ? `<div class="image-outfits">${cast.map(p => outfitPicker(c, p)).join('')}</div>` : ''}</section>`;
+  }
+  // Generation settings: folded by default with a one-line summary, like the original prompt (Jørgen, 2026-10-11:
+  // "the model parameters should also be collapsed, and on the left side"). Seed is Auto or Fixed and size is a
+  // preset, as in the image gen dashboard ("seed should have an auto option, learn from the imagegen view").
+  function settingsPeek(c) {
+    const md = preset('model', c.model)?.data || {}, n = +c.count || 1;
+    return [md.name || 'No model', n + (n > 1 ? ' pictures' : ' picture'), c.seedMode === 'fixed' ? 'seed ' + (c.seed || '?') : 'seed auto',
+      (+c.steps || md.steps || 30) + ' steps', 'CFG ' + (+c.cfg || md.cfg || 5), sizeOf(c).label].join(' · ');
+  }
+  function settingsHtml(c) {
+    const md = preset('model', c.model)?.data || {}, size = sizeOf(c);
+    const fixed = c.seedMode === 'fixed';
+    const sizes = active('framing').map(f => chip(f.data.name + ' ' + f.data.w + '×' + f.data.h, f.id === c.framing && !size.own, `data-size="${esc(f.id)}" title="${esc(f.data.prompt || f.data.notes || '')}"`)).join('');
+    return `<details class="image-section image-settings" data-settings-open ${settingsOpen ? 'open' : ''}><summary><span class="settings-title">Generation settings</span><span class="hint settings-peek">${esc(settingsPeek(c))}</span></summary>
+      <div class="settings-grid">${pickerHtml('model', 'model', 'Model', presetOptions('model'), c.model, null)}${number('count', 'Pictures', c.count, 1, 8)}${number('steps', 'Steps', c.steps, 1, 100, 1, md.steps || 30)}${number('cfg', 'Prompt strength', c.cfg, 0.1, 30, 0.1, md.cfg || 5)}</div>
+      <div class="settings-seed"><span class="settings-label">Seed</span><span class="seed-mode">${chip('Auto', !fixed, 'data-seed-mode="random" title="A new random seed for every picture"')}${chip('Fixed', fixed, 'data-seed-mode="fixed" title="Repeat one seed"')}</span>
+        <input data-compose="seed" type="number" min="0" max="9007199254740991" step="1" value="${esc(c.seed ?? '')}" placeholder="${fixed ? 'Seed' : 'Random'}" aria-label="Seed" ${fixed ? '' : 'disabled'}></div>
+      <div class="settings-label">Size</div><div class="chips sizes">${sizes}${size.own ? chip('This shot’s size ' + size.w + '×' + size.h, true, 'data-size-own') : ''}${chip('Custom size', customSize, 'data-size-custom')}<button type="button" data-new-block="framing">+ New</button><button type="button" data-edit-block="framing" data-edit-field="framing">Edit…</button></div>
+      ${customSize || size.own ? `<div class="two">${number('width', 'Width', c.width, 256, 2048, 64, size.w)}${number('height', 'Height', c.height, 256, 2048, 64, size.h)}</div>` : ''}</details>`;
+  }
   function render() {
     const host = $('#composition');
     if (!host) return;
@@ -108,59 +158,55 @@ export function installImages(getScene, changed) {
     const cast = c.characters.map(id => preset('character', id)).filter(Boolean);
     const oneCharacter = cast.length === 1 && !c.man;
     const refPath = c.reference || (oneCharacter ? cast[0].data.portrait : '');
-    const md = preset('model', c.model)?.data || {};
     const imageTitle = slot ? 'Shot ' + (slots().indexOf(slot) + 1) : 'Scene image';
     const previewUrl = picked?.url || (slot?.available === false ? '' : slot?.url);
-    const fr = preset('framing', c.framing)?.data || {};
+    const go = `<div class="image-go"><button id="generate" class="primary" ${presets ? '' : 'disabled'} title="Uses your existing image-generation queue. Choose a result from the Picture library to add it to this shot.">Generate ${+c.count > 1 ? c.count + ' pictures' : 'a picture'}</button></div>`;
     const current = `<div class="image-current"><p class="hint image-scene-name">${esc(getScene().metadata.title||getScene().title)}</p>${previewUrl ? `<a href="${esc(previewUrl)}" target="_blank" rel="noopener"><img class="selected-image" src="${esc(previewUrl)}" alt="${esc(imageTitle)}"></a>` : `<div class="image-empty">${slot?.label === 'New picture' ? 'A new picture beat. Direct the shot and generate it, or choose a picture from the library.' : slot ? 'This shot’s picture is unavailable. Generate a replacement or choose one from the picture library.' : 'Choose a shot in the storyboard to replace its image.'}</div>`}
-        <div class="image-current-row">${slots().length > 1 ? field('imageSlot', 'Image in this scene', slots().map((s, i) => ({id: s.id, label: 'Shot ' + (i + 1)})), activeSlot, null) : `<strong>${esc(imageTitle)}</strong>`}
+        <div class="image-current-row">${go}${slots().length > 1 ? field('imageSlot', 'Image in this scene', slots().map((s, i) => ({id: s.id, label: 'Shot ' + (i + 1)})), activeSlot, null) : `<strong>${esc(imageTitle)}</strong>`}
         ${slot?.storage === 'archive' && !picked ? '<p class="hint">Showing the earlier picture from the archive.</p>' : ''}
         ${picked&&!picked.applied ? '<p class="hint" title="Replacement selected. Save the scene to use it in the story.">Replacement selected. Save the scene to use it in the story.</p><button data-clear-image>Keep the current story image</button>' : ''}</div>
       </div>`;
-    const people = `<section class="image-section"><h3>People in the picture</h3><div class="image-cast">${active('character').filter(p => !p.data.generic).map(p => `<button type="button" data-char="${esc(p.id)}" aria-pressed="${c.characters.includes(p.id)}" title="${esc(p.data.name || p.id)}">${portraitUrl(p.data.portrait) ? `<img loading="lazy" src="${esc(portraitUrl(p.data.portrait))}" alt="">` : `<span class="image-person-placeholder">${esc((p.data.name||p.id).slice(0,1))}</span>`}<span>${esc(p.data.name || p.id)}</span></button>`).join('') || '<p class="hint">Your image-generation character presets appear here when connected.</p>'}</div>
-      <div class="chips">${active('character').some(p => p.data.generic) ? chip('Include an unnamed person', c.man, 'data-toggle="man"') : ''}${cast.length + (c.man ? 1 : 0) > 1 ? chip('Short descriptions for a group', c.useShort, 'data-toggle="useShort"') : ''}<button type="button" data-new-block="character">+ New person</button></div>
-      ${cast.length ? `<div class="image-outfits">${cast.map(p => outfitPicker(c, p)).join('')}</div>` : ''}</section>`;
     const blockValue = (kind, value) => blockId(presets, kind, value) || value || '';
     const blockItems = (kind, value) => { const items = presetOptions(kind); return value && !items.some(i => i.id === value) ? [...items, {id: value, label: value + ' (words only)'}] : items; };
-    const direction = `<section class="image-section"><div class="section-head"><h3>Direct the shot</h3>${pickerHtml('scenePreset', 'scene', 'Saved scene direction', presetOptions('scene'), c.sceneRefs?.[0] || '', 'Choose a saved direction…')}</div>
+    const direction = `<section class="image-section image-direction"><h3>Direct the shot</h3>
       <div class="three">${DIRECTION_KINDS.map(([name, kind, title]) => pickerHtml(name, kind, title, blockItems(kind, blockValue(kind, c[name])), blockValue(kind, c[name]))).join('')}</div>${c.angle ? `<p class="hint">Older camera angle kept: ${esc(c.angle)} <button type="button" class="link" data-clear-angle>Remove</button></p>` : ''}
-      <label>What happens in this picture?<textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>
-      <label>More details for the prompt<textarea data-compose="extra" rows="1" placeholder="Specifics the blocks above don't cover: props, clothes, a mood.">${esc(c.extra || '')}</textarea></label>
-      <h4>Camera and composition</h4><div class="chips">${active('camera').map(p => chip(p.data.name, c.cameras.includes(p.id), `data-camera="${esc(p.id)}" title="${esc(p.data.prompt)}"`)).join('')}<button type="button" data-new-block="camera">+ New</button><button type="button" data-edit-block="camera" data-edit-list="cameras">Edit…</button></div>
-      <div class="three">${pickerHtml('framing', 'framing', 'Picture shape', presetOptions('framing'), c.framing, null)}${pickerHtml('style', 'style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p></section>`;
+      <div class="two">${pickerHtml('style', 'style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p></section>`;
+    const happens = `<section class="image-section image-what"><div class="section-head"><h3>What happens</h3>${pickerHtml('scenePreset', 'scene', 'Saved scene direction', presetOptions('scene'), c.sceneRefs?.[0] || '', 'Choose a saved direction…')}</div>
+      <label>What happens in this picture?<textarea data-compose="scene" rows="3" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>
+      <label>More details for the prompt<textarea data-compose="extra" rows="2" placeholder="Specifics the blocks don't cover: props, clothes, a mood.">${esc(c.extra || '')}</textarea></label>
+      <h4>Camera and composition</h4><div class="chips">${active('camera').map(p => chip(p.data.name, c.cameras.includes(p.id), `data-camera="${esc(p.id)}" title="${esc(p.data.prompt)}"`)).join('')}<button type="button" data-new-block="camera">+ New</button><button type="button" data-edit-block="camera" data-edit-list="cameras">Edit…</button></div></section>`;
     const consistency = `<section class="image-section"><h3>Keep the character consistent</h3><div class="image-consistency">
       ${oneCharacter ? `<div class="image-reference">${portraitUrl(refPath) ? `<img src="${esc(portraitUrl(refPath))}" alt="Character reference">` : ''}<div><strong>${esc(c.reference ? 'Selected reference' : cast[0].data.name + '’s portrait')}</strong><button data-pick-reference>Choose a reference picture</button>${c.reference ? '<button data-reset-reference>Use character portrait</button>' : ''}</div></div>` : '<p class="hint">Choose one character to use a portrait reference or face correction.</p>'}
       <div class="image-strengths">${check('referenceOn', 'Use the reference', c.referenceOn, !oneCharacter || !refPath)}${number('referenceStrength', 'Strength', c.referenceStrength, 0, 2, 0.05)}
       ${check('faceFix', 'Correct the face after', c.faceFix, !oneCharacter || !refPath)}${number('faceStrength', 'Strength', c.faceStrength, 0.1, 1, 0.05)}
       ${check('referenceCutout', 'Remove the portrait background', c.referenceCutout, !oneCharacter)}</div></div><div id="imageReferenceChoices"></div></section>`;
-    const settings = `<section class="image-section"><h3>Generation settings</h3>
-      <div class="settings-grid">${pickerHtml('model', 'model', 'Model', presetOptions('model'), c.model, null)}${number('count', 'Pictures', c.count, 1, 8)}${field('seedMode', 'Variation', [{id: 'random', label: 'New variations'}, {id: 'fixed', label: 'Repeat a seed'}], c.seedMode, null)}${number('seed', 'Seed', c.seed, 0, 9007199254740991)}
-      ${number('steps', 'Steps', c.steps, 1, 100, 1, md.steps || 30)}${number('cfg', 'Prompt strength', c.cfg, 0.1, 30, 0.1, md.cfg || 5)}${number('width', 'Width', c.width, 256, 2048, 64, fr.w || 1152)}${number('height', 'Height', c.height, 256, 2048, 64, fr.h || 896)}</div>
-      <h4>Exclude from the picture</h4><div class="chips">${active('negative').map(p => chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}" title="${esc(p.data.text)}"`)).join('')}<button type="button" data-new-block="negative">+ New</button><button type="button" data-edit-block="negative" data-edit-list="negatives">Edit…</button></div>
-      <label>Anything else to avoid?<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
-      ${c.rating !== 'safe' ? check('hard', 'Hard scene: leave out the standing soft-scene exclusions', c.hard) : '<p class="hint">Mature and Adult pictures always exclude visible nipples, visible genitals and an uncovered crotch, unless marked as a hard scene.</p>'}
-      <label>Notes for steps outside the prompt<textarea data-compose="details" rows="2" placeholder="Inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></section>`;
-    const go = `<div class="image-go"><button id="generate" class="primary" ${presets ? '' : 'disabled'} title="Uses your existing image-generation queue. Choose a result from the Picture library to add it to this shot.">Generate ${+c.count > 1 ? c.count + ' pictures' : 'a picture'}</button></div>`;
+    const exclude = `<section class="image-section image-exclude"><h3>Exclude from the picture</h3><div class="chips">${active('negative').map(p => chip(p.data.name, c.negatives?.includes(p.id), `data-negative="${esc(p.id)}" title="${esc(p.data.text)}"`)).join('')}<button type="button" data-new-block="negative">+ New</button><button type="button" data-edit-block="negative" data-edit-list="negatives">Edit…</button></div>
+      <div class="two"><label>Anything else to avoid?<textarea data-compose="negative" rows="1">${esc(c.negative || '')}</textarea></label>
+      <label>Notes for steps outside the prompt<textarea data-compose="details" rows="1" placeholder="Inpaint, colour fix, LoRA weights. Kept with the picture, not sent to the model.">${esc(c.details || '')}</textarea></label></div>
+      ${c.rating !== 'safe' ? check('hard', 'Hard scene: leave out the standing soft-scene exclusions', c.hard) : '<p class="hint">Mature and Adult pictures always exclude visible nipples, visible genitals and an uncovered crotch, unless marked as a hard scene.</p>'}</section>`;
     const o = c.original;
     const smallChanges = o?.start ? '<button data-small-changes title="Start from this shot’s picture with the same seed and change it a little (img2img, low strength).">Small changes to this picture</button>' : '';
-    const original = o && o.positive == null ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3>${smallChanges}</div><p class="hint">There is no record of how this picture was made. Describe it above, or start from it.</p></section>`
+    const original = o && o.positive == null ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3>${smallChanges}</div><p class="hint">There is no record of how this picture was made. Describe it below, or start from it.</p></section>`
       : o ? `<section class="image-section image-original"><div class="section-head"><h3>Original prompt</h3><span class="hint original-facts">${esc(['Seed ' + (o.seed ?? '?'), o.w && o.h ? o.w + '×' + o.h : '', o.steps ? o.steps + ' steps' : '', o.cfg ? 'CFG ' + o.cfg : ''].filter(Boolean).join(' · '))}</span>${smallChanges}</div>
       <details data-original-open ${c.originalOpen ? 'open' : ''}><summary><span class="original-peek" title="Show the whole original prompt">${esc(c.override?.positive ?? o.positive ?? '')}</span><span class="original-less">Hide the original prompt</span></summary>
       <p class="hint">${esc(['Seed ' + (o.seed ?? '?'), o.model_file, o.w && o.h ? o.w + '×' + o.h : '', o.steps ? o.steps + ' steps' : '', o.cfg ? 'CFG ' + o.cfg : '', o.sampler].filter(Boolean).join(' · '))}. From ${esc(o.how || 'the picture')}.</p>
       <label>Prompt<textarea data-original="positive" rows="3">${esc(c.override?.positive ?? o.positive ?? '')}</textarea></label>
       <label>Negative<textarea data-original="negative" rows="2">${esc(c.override?.negative ?? o.negative ?? '')}</textarea></label>
-      ${c.override ? '<p class="hint">Generate uses this prompt as it stands. Changing a block above builds a new prompt instead.</p>' : '<button data-use-original>Use the original prompt</button>'}</details></section>` : '';
+      ${c.override ? '<p class="hint">Generate uses this prompt as it stands. Changing a block builds a new prompt instead.</p>' : '<button data-use-original>Use the original prompt</button>'}</details></section>` : '';
     const currentPicture = picked?.file ? 'island/private/imagegen/outputs/' + picked.file : slot?.available !== false && slot?.url && !slot.url.startsWith('data:') ? slot.url.replace(/^\//, '') : '';
     const tools = toolsHtml(c, {loras: loraFiles, controls: controlFiles, current: currentPicture});
-    const prompt = `<section class="image-section image-prompt"><h3>Generated prompt</h3><p id="assembled" class="hint prompt-box"></p>${c.override ? '<p class="hint">This picture uses a prompt copied from history.</p><button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</section>`;
-    // The full-screen composer (index.html) has a stage between the controls and the library: the picture, Generate
-    // and every generation setting in view at once. Without one (a narrow panel) it all runs down one column.
-    const stage = $('#composePreview');
-    if (stage) {
-      host.innerHTML = people + direction + consistency;
-      stage.innerHTML = current.replace('<div class="image-current-row">', '<div class="image-current-row">' + go) + original + settings + tools + prompt;
+    const prompt = `<section class="image-section image-prompt"><div class="section-head"><h3>Generated prompt</h3>${c.override ? '<button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</div>${c.override ? '<p class="hint">This picture uses a prompt copied from history.</p>' : ''}<p id="assembled" class="hint prompt-box"></p></section>`;
+    // The full-screen composer (index.html) has three columns: who is in the shot, its direction and the generation
+    // settings on the left; the prompt in the middle; the picture, Generate and the library on the right (Jørgen,
+    // 2026-10-11: "The current image could go on the rightmost column, so we have more room for the prompt in the
+    // middle"). Without them (a narrow panel) it all runs down one column.
+    const stage = $('#composePreview'), shot = $('#composeShot');
+    if (stage && shot) {
+      host.innerHTML = peopleHtml(c, cast) + direction + consistency + settingsHtml(c) + tools;
+      stage.innerHTML = original + happens + prompt + exclude;
+      shot.innerHTML = current;
       if ($('#composeFor')) $('#composeFor').textContent = getScene().metadata.title || getScene().title || '';
-    } else host.innerHTML = current + original + people + direction + consistency + settings + tools + go + prompt;
+    } else host.innerHTML = current + original + peopleHtml(c, cast) + direction + happens + consistency + settingsHtml(c) + tools + exclude + prompt;
     bindComposition();
     updatePrompt();
     renderReferenceChoices();
@@ -177,31 +223,33 @@ export function installImages(getScene, changed) {
     host.querySelectorAll('[data-compose]').forEach(el => {
       el.oninput = () => {
         const name = el.dataset.compose;
-        if (name === 'imageSlot') { activeSlot = el.value; render(); return; }
+        if (name === 'imageSlot') { activeSlot = el.value; fold(); render(); return; }
         if (el.value === NEW) {
           const kind = el.dataset.kind, current = c => name === 'scenePreset' ? c.sceneRefs?.[0] : c[name];
           el.value = '';
           render();
           const from = blockId(presets, kind, current(compose()));
           if (name === 'scenePreset') openBlock('scene', {from: '', prefill: {text: compose().scene, rating: compose().rating}, apply: (c, id) => { c.sceneRefs = [id]; }});
-          else openBlock(kind, {from: from || undefined, apply: (c, id) => { c[name] = id; c.override = null; if (name === 'framing') { delete c.width; delete c.height; } }});
+          else openBlock(kind, {from: from || undefined, apply: (c, id) => { c[name] = id; if (name !== 'model') c.override = null; }});
           return;
         }
         if (name === 'scenePreset') {
           const p = preset('scene', el.value); if (!p) return;
           edit(c => { c.scene = p.data.text || ''; c.sceneRefs = [p.id]; if (p.data.rating) c.rating = p.data.rating; c.override = null; }); return;
         }
+        // the generation settings change how the picture is made, not its words: a prompt copied from a picture
+        // stays (Small changes keeps its prompt when the seed or size changes)
         edit(c => {
           c[name] = el.type === 'checkbox' ? el.checked : el.value;
-          if (name === 'framing') { delete c.width; delete c.height; }
-          c.override = null;
+          if (!SETTINGS.includes(name)) c.override = null;
         }, ['model', 'count', 'referenceOn', 'faceFix', 'rating'].includes(name));
       };
     });
-    host.querySelectorAll('[data-char]').forEach(b => b.onclick = () => edit(c => { toggleList(c, 'characters', b.dataset.char); c.reference = ''; c.override = null; }));
+    // picking people keeps the full picker open until Done
+    host.querySelectorAll('[data-char]').forEach(b => b.onclick = () => edit(c => { peopleOpen = true; toggleList(c, 'characters', b.dataset.char); c.reference = ''; c.override = null; }));
     host.querySelectorAll('[data-camera]').forEach(b => b.onclick = () => edit(c => { toggleList(c, 'cameras', b.dataset.camera); c.override = null; }));
     host.querySelectorAll('[data-negative]').forEach(b => b.onclick = () => edit(c => { toggleList(c, 'negatives', b.dataset.negative); c.override = null; }));
-    host.querySelectorAll('[data-toggle]').forEach(b => b.onclick = () => edit(c => { c[b.dataset.toggle] = !c[b.dataset.toggle]; c.override = null; }));
+    host.querySelectorAll('[data-toggle]').forEach(b => b.onclick = () => edit(c => { if (b.dataset.toggle === 'man') peopleOpen = true; c[b.dataset.toggle] = !c[b.dataset.toggle]; c.override = null; }));
     host.querySelectorAll('[data-outfit-for]').forEach(el => el.onchange = () => {
       const who = el.dataset.outfitFor;
       if (el.value === NEW) {
@@ -217,10 +265,11 @@ export function installImages(getScene, changed) {
     host.querySelectorAll('[data-edit-person]').forEach(b => b.onclick = () => openBlock('character', {id: b.dataset.editPerson}));
     host.querySelectorAll('[data-new-block]').forEach(b => b.onclick = () => {
       const kind = b.dataset.newBlock;
-      const add = {character: (c, id) => { c.characters = [...c.characters, id]; }, camera: (c, id) => { c.cameras = [...c.cameras, id]; }, negative: (c, id) => { c.negatives = [...(c.negatives || []), id]; }}[kind];
+      const add = {character: (c, id) => { c.characters = [...c.characters, id]; c.override = null; }, camera: (c, id) => { c.cameras = [...c.cameras, id]; c.override = null; },
+        negative: (c, id) => { c.negatives = [...(c.negatives || []), id]; c.override = null; }, framing: (c, id) => { c.framing = id; delete c.width; delete c.height; }}[kind];
       const c = compose();
-      const from = kind === 'character' ? c.characters[0] : kind === 'camera' ? c.cameras.at(-1) : (c.negatives || []).at(-1);
-      openBlock(kind, {from: from || undefined, apply: (cc, id) => { add(cc, id); cc.override = null; }});
+      const from = {character: c.characters[0], camera: c.cameras.at(-1), negative: (c.negatives || []).at(-1), framing: c.framing}[kind];
+      openBlock(kind, {from: from || undefined, apply: add});
     });
     host.querySelectorAll('[data-edit-block]').forEach(b => b.onclick = () => {
       const kind = b.dataset.editBlock, c = compose();
@@ -228,6 +277,19 @@ export function installImages(getScene, changed) {
       const id = value || active(kind)[0]?.id;
       if (!id) return openBlock(kind, {});
       openBlock(kind, {id});
+    });
+    host.querySelectorAll('[data-people-open]').forEach(b => b.onclick = () => { peopleOpen = !peopleOpen; render(); });
+    const sd = host.querySelector('[data-settings-open]');
+    if (sd) sd.ontoggle = () => { settingsOpen = sd.open; };
+    // Seed Auto or Fixed, as in the dashboard: Fixed with no seed yet picks one to repeat
+    host.querySelectorAll('[data-seed-mode]').forEach(b => b.onclick = () => edit(c => {
+      c.seedMode = b.dataset.seedMode;
+      if (c.seedMode === 'fixed' && !c.seed) c.seed = Math.floor(Math.random() * 2 ** 31);
+    }));
+    host.querySelectorAll('[data-size]').forEach(b => b.onclick = () => { customSize = false; edit(c => { c.framing = b.dataset.size; delete c.width; delete c.height; }); });
+    host.querySelectorAll('[data-size-custom]').forEach(b => b.onclick = () => {
+      customSize = !customSize;
+      if (customSize) render(); else edit(c => { delete c.width; delete c.height; });
     });
     host.querySelectorAll('[data-clear-angle]').forEach(b => b.onclick = () => edit(c => { c.angle = ''; }));
     const bind = (selector, fn) => { const el = $(selector, host); if (el) el.onclick = fn; };
@@ -432,6 +494,7 @@ export function installImages(getScene, changed) {
   function focus(slotId) {
     compose();
     if (slotId) activeSlot = slotId;
+    fold();
     $('[data-inspect="images"]')?.click();
     render();
     if (!presets) guarded(connect)();

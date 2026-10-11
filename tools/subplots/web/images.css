@@ -41,45 +41,83 @@
 .image-library .render-card small { font-size: 11px; color: var(--dim); overflow-wrap: anywhere; }
 .image-library .render-card button { font-size: 12px; padding: 7px; white-space: normal; }
 .image-library [data-more-images] { width: 100%; margin-top: 14px; }
-/* full-screen composer (index.html #composeDialog): tighter sections so each column fits a laptop screen */
+/* full-screen composer (index.html #composeDialog): people, direction and the folded settings on the left, the prompt
+   in the middle, the picture and the library on the right. Tight sections so the left and middle fit a laptop. */
 .compose-dialog .image-section { padding: 10px 0; }
 .compose-dialog .compose-col > .image-section:first-child { border-top: 0; }
 .compose-dialog .image-section h3 { margin: 0 0 8px; font-size: 13.5px; }
 .compose-dialog .image-section h4 { margin: 8px 0 6px; font-size: 12.5px; }
 .compose-dialog .image-section .chips { margin: 6px 0 8px; gap: 5px; }
 .compose-dialog .image-section .chips button { min-height: 24px; padding: 2px 8px; font-size: 11.5px; }
-.compose-dialog .image-cast { grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: 4px; }
-.compose-dialog .image-cast > button { grid-template-rows: 40px auto; border-radius: 7px; min-height: 0; }
-.compose-dialog .image-cast img, .compose-dialog .image-person-placeholder { height: 40px; font-size: 18px; }
-.compose-dialog .image-cast button > span:last-child { padding: 2px 2px 3px; font-size: 10.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.compose-dialog .image-current { gap: 6px; padding: 10px 0 8px; }
-.compose-dialog .image-current .selected-image { max-height: 30vh; }
-.compose-dialog .image-empty { min-height: 22vh; }
-.compose-dialog .image-current-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
-.compose-dialog .image-current-row label { flex: 1 1 160px; }
-.compose-dialog .image-scene-name { display: none; }
-.compose-dialog .image-current-row .image-go { order: 2; margin-left: auto; padding: 0; }
-.compose-dialog .library-hint { margin: 0 0 8px; }
-.compose-dialog .image-go { display: grid; gap: 4px; padding-bottom: 8px; }
-.compose-dialog .image-go .hint { margin: 0; }
-.compose-dialog #generate { width: auto; min-width: 220px; padding: 8px 18px; }
-.compose-dialog .image-reference { margin: 4px 0 8px; }
-.compose-dialog .image-reference > img { width: 52px; height: 60px; }
-.compose-dialog .image-check { min-height: 26px; }
-.compose-dialog .image-library { padding-top: 10px; border-top: 0; }
-.compose-dialog .image-library .render-card img { height: 120px; }
 .compose-dialog .section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
 .compose-dialog .section-head h3 { margin: 0; white-space: nowrap; }
 .compose-dialog .section-head label { flex: 1; font-size: 0; gap: 0; }
 .compose-dialog .section-head select { font-size: 13px; }
+.compose-dialog .section-head > button { margin-left: auto; min-height: 26px; padding: 2px 10px; font-size: 12px; }
+.compose-dialog .image-check { min-height: 26px; }
+.compose-dialog .image-section .hint { margin: 3px 0; }
+
+/* people: the full picker, or only the people in the shot with their outfits */
+.compose-dialog .image-cast { grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: 4px; }
+.compose-dialog .image-cast > button { grid-template-rows: 40px auto; border-radius: 7px; min-height: 0; }
+.compose-dialog .image-cast img, .compose-dialog .image-person-placeholder { height: 40px; font-size: 18px; }
+.compose-dialog .image-cast button > span:last-child { padding: 2px 2px 3px; font-size: 10.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.image-included { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 6px 10px; }
+.image-person-row { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; align-items: center; min-width: 0; }
+.image-person-row > img, .image-person-row > .image-person-placeholder { width: 34px; height: 40px; object-fit: cover; object-position: center 25%; border-radius: 6px; font-size: 16px; }
+.image-person-row > span:last-child { font-size: 12.5px; }
+.compose-dialog .image-outfits { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+
+/* keep the character consistent */
+.compose-dialog .image-reference { margin: 4px 0 8px; }
+.compose-dialog .image-reference > img { width: 52px; height: 60px; }
 .compose-dialog .image-consistency { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 10px; align-items: start; }
-.compose-dialog .image-consistency .image-reference { margin: 0; }
-.compose-dialog .image-strengths { display: grid; grid-template-columns: minmax(0, 1fr) 128px; gap: 4px 8px; align-items: center; }
+.compose-dialog .image-consistency .image-reference { margin: 0; min-width: 0; }
+.compose-dialog .image-consistency .image-reference button { white-space: normal; text-align: left; }
+.compose-dialog .image-strengths { display: grid; grid-template-columns: minmax(0, 1fr) 118px; gap: 4px 8px; align-items: center; }
 .compose-dialog .image-strengths label:not(.image-check) { grid-template-columns: auto 1fr; align-items: center; gap: 6px; }
 .compose-dialog .image-strengths .image-check:last-child { grid-column: 1 / -1; }
-.compose-dialog .settings-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px 8px; }
-.compose-dialog .prompt-box { max-height: 52px; overflow-y: auto; margin: 0; }
-.compose-dialog .image-go .hint { font-size: 11.5px; }
+
+/* generation settings: one summary line when folded (the original prompt's pattern) */
+.image-settings > summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; margin: 0 !important; }
+.image-settings[open] > summary { margin-bottom: 8px !important; }
+.settings-title { flex: none; font-size: 13.5px; font-weight: 600; }
+.settings-peek { flex: 1 1 100%; width: 0; min-width: 0; margin: 0 !important; font-size: 11.5px; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.image-settings[open] .settings-peek { display: none; }
+.settings-grid { display: grid; grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)); gap: 6px 8px; align-items: end; }
+.settings-label { font-size: 12px; color: var(--dim); }
+.settings-seed { display: flex; align-items: center; gap: 8px; margin: 8px 0 4px; }
+.settings-seed input { width: 150px; }
+.seed-mode { display: inline-flex; gap: 3px; }
+.seed-mode button { min-height: 26px; padding: 2px 12px; font-size: 12px; }
+.compose-dialog .image-settings .sizes { margin-top: 3px; }
+
+/* the middle column: the prompt takes what the other sections leave */
+.compose-stage { display: flex; flex-direction: column; }
+.compose-stage > * { flex: none; }
+.compose-stage > .image-prompt { flex: 1 1 0; min-height: 96px; display: flex; flex-direction: column; }
+.compose-stage .image-prompt .prompt-box { flex: 1 1 0; min-height: 40px; max-height: none; overflow-y: auto; margin: 0; padding: 8px 10px; border-radius: 8px; background: #0f1217; color: var(--ink); font-size: 12.5px; }
+.compose-stage .image-prompt .section-head { flex-wrap: wrap; }
+.compose-stage .image-what textarea[data-compose=scene] { min-height: 64px; }
+.compose-dialog .image-exclude .two { margin-bottom: 0; }
+
+/* the right column: the shot's picture with Generate, then the library, which scrolls on its own */
+.compose-side { display: flex; flex-direction: column; overflow: hidden; padding-bottom: 0; }
+.compose-side > #composeShot { flex: none; }
+.compose-side > #renders { flex: 1 1 0; min-height: 0; overflow-y: auto; margin: 0 -18px; padding: 0 18px 14px; }
+.compose-dialog .image-current { gap: 6px; padding: 10px 0 8px; }
+.compose-dialog .image-current > a { display: grid; place-items: center; }
+.compose-dialog .image-current .selected-image { width: 100%; max-height: 45vh; }
+.compose-dialog .image-empty { min-height: 22vh; }
+.compose-dialog .image-scene-name { display: none; }
+.compose-dialog .image-current-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.compose-dialog .image-current-row label { flex: 1 1 120px; }
+.compose-dialog .image-current-row > .hint { flex: 1 1 100%; margin: 0; }
+.compose-dialog .image-go { display: grid; gap: 4px; padding: 0; }
+.compose-dialog #generate { width: auto; min-width: 180px; padding: 8px 18px; }
+.compose-dialog .library-hint { margin: 0 0 8px; }
+.compose-dialog .image-library { padding-top: 8px; border-top: 1px solid var(--line2); }
+.compose-dialog .image-library .render-card img { height: 120px; }
 
 /* picture library actions, lightbox and compare (library.js; markup from tools/imagegen/web/gallery.js) */
 .lib-filters { display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px 8px; align-items: end; }
@@ -182,37 +220,32 @@
   .compose-dialog .image-library .render-card img { height: 84px; }
   .compose-dialog .image-library .render-card button { min-height: 24px; padding: 3px; font-size: 11px; }
   .compose-dialog .image-library .two { grid-template-columns: 1fr; }
+  .compose-side > #renders { margin: 0 -14px; padding: 0 14px 14px; }
 }
 @media (min-width: 1800px) {
   .compose-dialog .image-cast { grid-template-columns: repeat(auto-fill, minmax(62px, 1fr)); gap: 6px; }
   .compose-dialog .image-cast > button { grid-template-rows: 66px auto; }
   .compose-dialog .image-cast img, .compose-dialog .image-person-placeholder { height: 66px; }
-  .compose-dialog .image-current .selected-image { max-height: 46vh; }
+  .image-person-row { grid-template-columns: 46px minmax(0, 1fr); }
+  .image-person-row > img, .image-person-row > .image-person-placeholder { width: 46px; height: 54px; }
+  .compose-dialog .image-current .selected-image { max-height: 50vh; }
   .compose-dialog .image-empty { min-height: 34vh; }
   .compose-dialog .image-library .render-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .compose-stage .image-what textarea[data-compose=scene] { min-height: 120px; }
+  .compose-stage .image-what textarea[data-compose=extra] { min-height: 64px; }
 }
-/* a 768 px tall laptop: the left column (people, direction, consistency) still fits without scrolling */
+/* a 768 px tall laptop: the left and middle columns still fit without scrolling */
 @media (max-height: 800px) {
   .compose-dialog .image-section { padding: 6px 0; }
   .compose-dialog .image-cast > button { grid-template-rows: 30px auto; }
-  .compose-dialog .image-cast img, .compose-dialog .image-person-placeholder { height: 30px; }
+  .compose-dialog .image-cast img, .compose-dialog .image-cast .image-person-placeholder { height: 30px; }
   .compose-dialog .image-section h4 { margin: 5px 0 4px; }
   .compose-dialog .image-section .chips { margin: 4px 0 5px; }
   .compose-dialog .image-section label { gap: 2px; }
-  .compose-dialog .image-current .selected-image { max-height: 15vh; }
-  .compose-dialog .image-empty { min-height: 14vh; }
   .compose-dialog .image-section textarea { min-height: 0; }
-  .compose-dialog textarea[data-compose=details] { height: 26px; }
-  .compose-dialog .image-current-row { flex-wrap: nowrap; }
-  .compose-dialog .image-current-row > .hint { flex: 1 1 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .compose-dialog .image-current-row #generate, .compose-dialog #generate { min-width: 150px; padding: 7px 12px; }
-  .compose-dialog .image-current-row .image-go { order: 2; flex: none; }
-  .compose-stage > .image-current { min-height: 90px; }
-  .compose-stage .image-prompt { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; }
-  .compose-stage .image-prompt h3 { margin: 0; }
-  .compose-stage .image-prompt > .hint { order: 1; flex: 1 1 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .compose-stage .image-prompt > button { order: 2; padding: 3px 10px; min-height: 24px; }
-  .compose-stage .image-prompt > .prompt-box { order: 3; flex: 0 0 100%; }
+  .compose-dialog .image-current .selected-image { max-height: 42vh; }
+  .compose-dialog .image-empty { min-height: 18vh; }
+  .compose-dialog #generate { min-width: 150px; padding: 7px 12px; }
   .compose-stage .image-original .section-head { margin-bottom: 2px; }
   .compose-stage .image-original summary, .compose-stage .image-original .original-peek { font-size: 11.5px; line-height: 1.3; }
   .compose-stage .image-original .original-peek { -webkit-line-clamp: 1; }
@@ -232,10 +265,3 @@
 .image-original details[open] .original-less { display: inline; }
 .image-original summary { display: flex; align-items: baseline; gap: 6px; }
 .image-original summary .original-peek { flex: 1; }
-/* the middle column: the picture takes what the controls leave, so opening a shot's tools never makes the column scroll */
-.compose-stage { display: flex; flex-direction: column; }
-.compose-stage > * { flex: none; }
-.compose-stage > .image-current { flex: 1 1 0; min-height: 150px; max-height: 62vh; display: flex; flex-direction: column; }
-.compose-stage > .image-current > a { flex: 1 1 0; min-height: 0; }
-.compose-stage > .image-current .selected-image { height: 100%; max-height: none; }
-.compose-stage > .image-current .image-empty { flex: 1 1 0; min-height: 0; }
