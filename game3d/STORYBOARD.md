@@ -37,7 +37,7 @@ How to say one: the Say button (bottom right, or F) lists the commands you know.
 |---|---|---|---|---|
 | 1.1 | Title over the moving car. | "Day one. First morning at Amakawa." Start. | Taps Start. | A first day at a new job. |
 | 1.2 | The car crossing the bay, Mio in the aisle. | Goal: "Ride to 本社 (honsha, head office)." Hint: "Tap the floor to walk. Tap people and things to talk or look." | Walks. | How to move and poke. |
-| 1.3 | Anyone can be tapped: the sleeping man, the reader, the girl with headphones, the cat, the plant, the bags. | Short, funny lines. Aoi: introduces herself, then sulks about the cat, who has never once looked at her. | Pokes around. | Who's who; Kuroda is asleep. |
+| 1.3 | Anyone can be tapped: the sleeping man, the reader, the woman with headphones, the cat, the plant, the bags. | Short, funny lines. Aoi: introduces herself, then sulks about the cat, who has never once looked at her. | Pokes around. | Who's who; Kuroda is asleep. |
 | 1.4 | Chime, the LED board slides in. | "つぎは 本社 (tsugi wa honsha, next: head office)" | | We're nearly there. |
 | 1.5 | The train slows; the platform slides in (yellow tactile strips, the 本社 sign). Doors open. | Goal: "Get off the train." | Heads for the door. | |
 | 1.6 | The door chime starts. Aoi is shaking Kuroda awake. | Aoi: "Kuroda-san, it's our stop! Mio, hold the doors! Shout 待って (matte, wait)!" A big button: 待って matte · wait. | Taps it. Mio says it (voiced). | |

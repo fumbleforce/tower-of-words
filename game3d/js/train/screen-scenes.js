@@ -1,4 +1,4 @@
-// The phone video on the train that needs a person in it, rendered in the game's own style: the video the girl with
+// The phone video on the train that needs a person in it, rendered in the game's own style: the video the woman with
 // headphones took of herself practising guitar (her, cap and all, on her bed, strumming in time with
 // audio/sfx/guitar_practice.mp3, fumbling where the recording fumbles). It is a small scene drawn into a corner of the
 // game's own canvas and copied out at once (the map does the same, map/render.js), so no second WebGL context.

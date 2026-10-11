@@ -195,7 +195,7 @@ export async function trainPlace(game) {
   list.splice(list.indexOf(stander), 1);
   // Rei (the writer's train conversation) takes the headphone girl's place on the far bench, laptop on
   // her knees, her folder and a lidded coffee on the free seat beside her
-  // the girl with headphones moves to the near bench (seen from behind), still nodding along
+  // the woman with headphones moves to the near bench (seen from behind), still nodding along
   music.root.position.set(0.75, music.root.position.y, LZ - 0.24);
   music.root.rotation.y = Math.PI;
   music.blob.position.set(0.75, 0.004, LZ - 0.5);

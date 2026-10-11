@@ -17,7 +17,7 @@ export const DEFAULT_SPEAKERS = {
   hiro: { name: 'Hiro', color: '#c0b39f' },
   ann: { name: 'Announcement', color: '#9aa9bd' },
   reader: { name: 'Man with a book', color: '#a8b0bf' },
-  music: { name: 'Girl with headphones', color: '#a8b0bf' },
+  music: { name: 'Woman with headphones', color: '#a8b0bf' },
   bun: { name: 'Woman with a bun', color: '#a8b0bf' },
   stander: { name: 'Man by the door', color: '#a8b0bf' },
   commuter: { name: 'Office worker', color: '#a8b0bf' },

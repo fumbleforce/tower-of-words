@@ -34,7 +34,7 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 | `attendant` | Attendant | The gym's attendant on day 3: the desk by day, the pool's floats at the club's evening. Office man A's body, a borrowed voice. |
 | `member` | Club member | A swimming club member on day 3's evening, with the equipment list; her goggles are on the pool's fence. Office woman B's body, a borrowed voice. |
 | `bun` | Woman with a bun | A monorail passenger. |
-| `music` | Girl with headphones | A monorail passenger. |
+| `music` | Woman with headphones | A monorail passenger. |
 | `stander` | Man with a bag | A monorail passenger. |
 | `reader` | Man with a book | A monorail passenger. |
 | `commuter` | Office worker | People coming in through the gate for work. |
@@ -340,7 +340,7 @@ Each People panel card has the name and one line about them, the same on every d
 | `attendant` | Attendant | Attendant | none |
 | `member` | Club member | Club member | none |
 | `bun` | Woman with a bun | Woman with a bun | none |
-| `music` | Girl with headphones | Girl with headphones | none |
+| `music` | Woman with headphones | Woman with headphones | none |
 | `stander` | Man with a bag | Man with a bag | none |
 | `reader` | Man with a book | Man with a book | none |
 | `commuter` | Office worker | none | none |

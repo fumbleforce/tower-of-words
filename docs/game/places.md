@@ -222,7 +222,7 @@ The monorail has one period, early morning.
 | `rei` | Hidden (her seat is Mio's now). | – |
 | `guard` | Day 3 only: on the platform beside the tester on a morning visit before the sign-off; walks back along the platform after it. Label "Guard". | – |
 
-The reader, the girl with headphones and the woman with a bun are approved crowd bodies, the older man, the casual woman and office woman B ([art-and-sound.md](art-and-sound.md)), sitting on the near benches clear of the doorways.
+The reader, the woman with headphones and the woman with a bun are approved crowd bodies, the older man, the casual woman and office woman B ([art-and-sound.md](art-and-sound.md)), sitting on the near benches clear of the doorways.
 
 ### Small moments
 
@@ -232,14 +232,14 @@ The reader, the girl with headphones and the woman with a bun are approved crowd
 | `plant` | Talk to it | It's plastic; someone has watered it anyway. |
 | `reader`, `ohayo_reader` | Talk to him, or greet him | The book is called "Excel for People Who Hate Excel"; he nods, still reading. |
 | `phone_girl`, `ohayo_aoi` | Talk to Aoi, or greet her | She's on the phone about her assignment ("anywhere but the basement"); a nod. |
-| `bun`, `music`, `stander` | Talk to them after the first time | A line or an emote each; the girl with headphones gets a ♪ and "Her music is too loud. She doesn't hear you." |
+| `bun`, `music`, `stander` | Talk to them after the first time | A line or an emote each; the woman with headphones gets a ♪ and "Her music is too loud. She doesn't hear you." |
 | `ohayo_bun`, `ohayo_music`, `ohayo_stander` | Greet them | Each answers in their own way. |
 
 The man with a bag (`stander`) is hidden following the silhouette rejection, and has no talk or greeting trigger, so `stander` and `ohayo_stander` never play. The two scenery nodes above (`window`, `plant`) exist in the script but are disabled by the current marker rules; the passengers are reachable. The poster, straps, luggage rack and bags had one flat line each and no longer have any (Jørgen, 2026-10-10: "Stop making random things that have zero consequence or interesting actions/reactions attached to them interactive").
 
 Aoi keeps her original encounter; Jørgen rejected its proposed replacement.
 
-Planned passenger revisions, awaiting [train-discoveries-1](../../reviews/train-discoveries-1/review.json): let the woman with the bun enlist Eric to close an overfilled shopping bag; let the girl with headphones show her own guitar practice; let the reader show the mismatch between his Excel book and the company's old software; and show Hamada silencing a reminder without waking properly. Each moment starts with one interaction, including on first contact before the seat hint. They are optional, need no menu or quiz, and add no later quest. Proposed passenger speech has English subtitles for the player, including unfamiliar Japanese; Eric still follows familiar words and gestures. Mio's conversation and Tama's existing moments stay as they are. Exact proposed passages and their visual staging live only in the review. Their props and sounds are built (the woman with the bun's overfull shopping bag on the floor by her feet; a phone on the seat beside Hamada; the reader's printout; the pictures on them; hooks in game3d/story/FORMAT.md, Train); the story doesn't use them yet.
+Planned passenger revisions, awaiting [train-discoveries-1](../../reviews/train-discoveries-1/review.json): let the woman with the bun enlist Eric to close an overfilled shopping bag; let the woman with headphones show her own guitar practice; let the reader show the mismatch between his Excel book and the company's old software; and show Hamada silencing a reminder without waking properly. Each moment starts with one interaction, including on first contact before the seat hint. They are optional, need no menu or quiz, and add no later quest. Proposed passenger speech has English subtitles for the player, including unfamiliar Japanese; Eric still follows familiar words and gestures. Mio's conversation and Tama's existing moments stay as they are. Exact proposed passages and their visual staging live only in the review. Their props and sounds are built (the woman with the bun's overfull shopping bag on the floor by her feet; a phone on the seat beside Hamada; the reader's printout; the pictures on them; hooks in game3d/story/FORMAT.md, Train); the story doesn't use them yet.
 
 ## Honsha station security room (`gate`)
 
