@@ -4,7 +4,7 @@ const ENGINE_KEYS = flagKeys('game3d/js/runner.js');
 import { DEFAULT_SPEAKERS } from './narrative/speakers.js';
 import { MC, PLAYER_ID, expandMc } from './mc.js';
 import { presentLine } from './narrative/heard-line.js';
-import { storyPath } from './days.js';
+import { importStory } from './story-load.js';
 // Runs the story files (game3d/story/*.js, format in game3d/story/FORMAT.md) against a place.
 import { voiceThenBeat } from './ui.js';
 import { ui, voice, sfx, setFace, newScene } from './ui.js';
@@ -30,22 +30,11 @@ export class Runner {
   }
 
   async load(name) {
-    const tryImport = async (p) => {
-      try {
-        return (await import(p)).default;
-      } catch (e) {
-        if (!/Failed to fetch|Cannot find|404|error loading/i.test(String(e))) console.error(e);
-        return null;
-      }
-    };
     // Later days have their own stories and no travel dialogue.
     const day = this.game.sim?.day || 1;
-    // {mc.name} and the other protagonist tokens are filled in once, before anything reads the lines (mc.js)
     if (day > 1 && name === 'transitions') return {};
-    if (day > 1) return expandMc((await tryImport(storyPath(name, day))) || { nodes: {}, on: {} });
-    const s = (await tryImport(`../story/${name}.js`)) ||
-      (await tryImport(`../story/placeholder/${name}.js`)) || { nodes: {}, on: {} };
-    return expandMc(s);
+    // {mc.name} and the other protagonist tokens are filled in once, before anything reads the lines (mc.js)
+    return expandMc(await importStory(name, day)); // throws if a story the day lists will not load (story-load.js)
   }
   use(place, story) {
     this.place = place;

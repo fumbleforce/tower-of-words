@@ -2,6 +2,7 @@ import { assertPlaceRegistered } from '../narrative/registration.js';
 import { eventTrigger } from '../narrative/events.js';
 import { PLACE_DETAILS, SHARED_THINGS } from './catalog.js';
 import { NEXT } from './definitions.js';
+import { storyLoads } from './story-guard.js';
 import { cancelSavedWalk } from './saved-people.js';
 import { attachLift } from './lift.js';
 import { lookSteps } from '../look/index.js';
@@ -141,7 +142,10 @@ export function createPlaceLifecycle(
         });
         return { place, story };
       })();
-    return game.prepared[name];
+    // a failed build (a story that would not load) is not kept, so the next try builds it again
+    const built = game.prepared[name];
+    built.catch(() => game.prepared[name] === built && delete game.prepared[name]);
+    return built;
   }
   async function enter(name, { persist = true, resuming = false } = {}) {
     const { place } = await prepare(name);
@@ -229,6 +233,17 @@ export function createPlaceLifecycle(
   // move plays. No black screens. Fast travel (travel/go.js): no leaving move, and he arrives as he would on foot
   // from `via`, the route's last place before this one.
   async function travel(name, { arriving = false, fromName, fast = false, via } = {}) {
+    game.busy = true;
+    game.walker.locked = true;
+    document.body.classList.add('busy', 'trip');
+    // the story must load before anything is left, cleared or saved: if not, he stays where he is and can try again.
+    // Only the story is waited for; the place itself still builds while the old one plays its leaving move.
+    if (!(await storyLoads(game, name, (n) => game.runner.load(n), { arriving }))) {
+      document.body.classList.remove('busy', 'trip');
+      game.busy = false;
+      game.walker.locked = false;
+      return false;
+    }
     const from = arriving ? { name: fromName } : fast ? { name: via } : game.place;
     game.transition = {
       from: from.name,
@@ -237,9 +252,6 @@ export function createPlaceLifecycle(
       ...(fast ? { fast } : {}),
     };
     save(game);
-    game.busy = true;
-    game.walker.locked = true;
-    document.body.classList.add('busy', 'trip');
     let built = false;
     const ready = prepare(name).then((r) => ((built = true), r));
     const tr = await game.runner.load('transitions');
