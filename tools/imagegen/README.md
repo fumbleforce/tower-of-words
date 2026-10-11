@@ -4,6 +4,14 @@
 
 ComfyUI started by the dashboard leaves 2 GB of VRAM alone (`--reserve-vram`, `IMAGEGEN_RESERVE_VRAM` in gpu.py), so the browser keeps headroom while a render runs. A ComfyUI that was already running keeps whatever it was started with.
 
+## Image workspace
+
+The main page uses the scene editor's composer, prompt builder, picture tools and library. Its composition has no scene or shot attachment. Prompt and Negative remain editable side by side, with generated pictures in rows below. People, place, light, camera direction, local prompt changes, references, masks, LoRAs and generation settings use the same controls in both tools. Public and private browser drafts are stored separately. The previous page remains at `/legacy`.
+
+Select a picture to create a scene or character. Create scene saves a local draft with a separate copy of the image and its generation settings, then links to the scene editor. It can be edited, previewed, saved and restored from revisions there. Scene drafts do not enter the game automatically. Create character opens the shared character form, then saves a versioned image-tool character with its own portrait copy. Private source pictures keep their audience. Neither action changes the original render or an existing character.
+
+The scene editor owns scene draft storage and access. The image service owns character creation, render lookup and portrait copies (`image_actions.py`). Tests use temporary data, intercepted generation requests and software-rendered browser fixtures. Run `python3 -m unittest tools/imagegen/test_imagegen.py`, `node --test tools/imagegen/test/*.test.mjs`, and `GL=soft node tools/imagegen/test/studio-browser.mjs`.
+
 ## What is in git and what is not
 
 The code is in git. The data is not:
@@ -23,4 +31,4 @@ A block keeps every version; saving makes a new one and Restore brings an old on
 
 ## Backups
 
-Nothing backs up the blocks or island/private/ today: tools/assets/sync.py never uploads anything private and only uploads binaries.
+Local tool data needs its own backup. `tools/assets/sync.py` never uploads private files and only uploads binaries. Before a tool migration, preserve the versioned code in Git and archive `tools/imagegen/config/`, the image service data directory, and the scene editor state directory. Browser composition drafts remain in that browser's local storage. Restore data with the services stopped so a running writer cannot overwrite it.

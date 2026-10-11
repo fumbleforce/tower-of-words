@@ -125,7 +125,7 @@ async function open(id, { skipCheck = false } = {}) {
     const scene = await api('read?id=' + encodeURIComponent(id));
     load(scene);
     history.replaceState(null, '', '#' + encodeURIComponent(id));
-    status('Saved', 'ok');
+    status(scene.studioDraft ? 'Draft saved locally' : 'Saved', 'ok');
     hideBanner();
     await loadLinked();
     loadComments().catch(() => {});
@@ -206,7 +206,7 @@ async function save() {
   if (!S.scene || saving || !isDirty()) return;
   saving = true;
   cancelDraft();
-  status(S.scene.audience === 'private' ? 'Saving, rebuilding and checking…' : 'Saving…', 'busy');
+  status(S.scene.studioDraft ? 'Saving draft…' : S.scene.audience === 'private' ? 'Saving, rebuilding and checking…' : 'Saving…', 'busy');
   paintBar();
   try {
     const warnings = [];
@@ -234,7 +234,7 @@ async function save() {
       const silent = countSilent(saved);
       if (silent) warnings.push(`${silent === 1 ? 'One line has' : silent + ' lines have'} no voice clip yet.`);
     }
-    status('Saved' + (warnings.length ? '. ' + warnings.join(' ') : ''), 'ok');
+    status((S.scene.studioDraft ? 'Draft saved locally' : 'Saved') + (warnings.length ? '. ' + warnings.join(' ') : ''), 'ok');
     loadStatus();
     refreshMap();
   } catch (e) {
@@ -264,7 +264,7 @@ function paintBar() {
     const at = mapItems && locate(mapItems, s.id);
     $('docArea').textContent = at ? `${dayTitle(at.day)} · ${at.areaTitle}` : areaOf(row);
     $('docTitle').textContent = titleOf(row);
-    $('docAudience').textContent = s.audience === 'private' ? 'Private · Adult' : 'Public game';
+    $('docAudience').textContent = s.studioDraft ? (s.audience === 'private' ? 'Scene draft · Private' : 'Scene draft') : s.audience === 'private' ? 'Private · Adult' : 'Public game';
     $('docAudience').className = 'tag ' + s.audience;
     $('docWhere').textContent = s.where || '';
     const st = statuses[s.id];
@@ -275,12 +275,13 @@ function paintBar() {
   $('undo').disabled = !S.undo.length || saving;
   $('redo').disabled = !S.redo.length || saving;
   $('save').disabled = !dirty || saving;
-  $('save').textContent = saving ? 'Saving…' : 'Save';
+  $('save').textContent = saving ? 'Saving…' : s?.studioDraft ? 'Save draft' : 'Save';
+  $('save').title = s?.studioDraft ? 'Save this local scene draft (Ctrl+S)' : 'Save to the story (Ctrl+S)';
   $('preview').disabled = !s || !Array.isArray(s.steps);
   const url = withPath(playUrl(s));
   $('play').href = url || '#';
   $('play').setAttribute('aria-disabled', String(!url));
-  $('play').title = url ? 'Open the game here, in a new tab' : 'This part has no place to start from';
+  $('play').title = url ? 'Open the game here, in a new tab' : s?.studioDraft ? 'This scene draft is saved locally. Use Preview to play it here.' : 'This part has no place to start from';
   // a save's own message (warnings, lines with no voice) stays until the next edit
   if (s && !saving && $('status').dataset.kind !== 'error' && (dirty || $('status').dataset.kind !== 'ok')) status(dirty ? 'Unsaved changes' : 'Saved', dirty ? 'dirty' : 'ok');
 }
@@ -410,7 +411,7 @@ try {
 paintList();
 paintBar();
 setTab('beat');
-const wanted = decodeURIComponent(location.hash.slice(1));
+const wanted = decodeURIComponent(location.hash.slice(1)) || new URL(location.href).searchParams.get('scene');
 if (wanted && S.catalog.some(r => r.id === wanted)) {
   day = dayOfScene(buildMap(), wanted) ?? day;
   open(wanted, { skipCheck: true });

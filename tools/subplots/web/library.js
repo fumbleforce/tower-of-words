@@ -4,7 +4,7 @@
 // the image gen dashboard's own (tools/imagegen/web/gallery.js); the writes go to its API through the editor's proxy.
 const {document, navigator} = globalThis;
 import {esc} from './common.js';
-import {rateFields, lightboxKey, lightboxHtml, compareHtml, thumbUrl, isAgent} from '../../imagegen/web/gallery.js';
+import {rateFields, lightboxKey, lightboxHtml, compareHtml, thumbUrl, fullUrl, isAgent} from '../../imagegen/web/gallery.js';
 
 const BASE = '/api/subplots/image';
 
@@ -65,13 +65,18 @@ export function createLibrary(hooks) {
     if (action === 'copyseed') return copy(String(t.seed), 'Seed ' + t.seed);
     if (action === 'sameseed') { closeLightbox(); return hooks.reuse(t); }
     if (action === 'newseeds') { closeLightbox(); return newSeeds(t).catch(e => hooks.notice(e.message, true)); }
-    if (action === 'use') return hooks.use(t);
+    if (action === 'scene' || action === 'character') { closeLightbox(); hooks.select?.(t); return Promise.resolve(hooks.actions?.[action]?.(t)).catch(e => hooks.notice(e.message, true)); }
+    if (action === 'use') { if (hooks.select) closeLightbox(); return hooks.use(t); }
     if (action === 'reuse') return hooks.reuse(t);
     void btn;
   }
 
+  function createButtons(attrs) {
+    return ['scene', 'character'].filter(kind => hooks.actions?.[kind]).map(kind => `<button type="button" ${attrs(kind)}>Create ${kind}</button>`).join('');
+  }
   function cardHtml(j, i) {
-    const done = j.status === 'done' && (j.thumb || j.file);
+    const done = j.status === 'done' && (j.thumb || j.file || isAgent(j));
+    const canUse = !!j.file || !!hooks.actions && isAgent(j);
     const marks = `${j.fav ? '♥' : j.star ? '★' : ''}${j.reject ? ' ✕' : ''}`;
     const tools = done ? `<div class="lib-tools">
         <button type="button" data-lib="star" data-i="${i}" aria-pressed="${!!j.star}" title="Star (s)">★</button>
@@ -84,9 +89,9 @@ export function createLibrary(hooks) {
       j.seed != null ? `<button type="button" class="link" data-lib="copyseed" data-i="${i}" title="Copy the seed">s${j.seed}</button>` : '',
       esc(j.status === 'done' ? j.at?.slice(0, 10) || 'Ready' : j.status + (j.status === 'running' ? ` · ${Math.round((j.progress || 0) * 100)}%` : '')),
       isAgent(j) ? `<span title="${esc(j.owner || '')}">agent</span>` : '', marks ? `<span class="lib-marks">${marks}</span>` : ''].filter(Boolean).join(' · ');
-    return `<article class="render-card${j.reject ? ' rejected' : ''}">${done ? `<button type="button" class="lib-shot" data-lib="open" data-i="${i}" title="Open (arrows, s, f, x, Delete)"><img loading="lazy" src="${esc(thumbUrl(j, BASE))}" alt="Picture ${j.n ? '#' + j.n : i + 1}"></button>` : ''}
+    return `<article class="render-card${hooks.selected?.() === j.id ? ' selected' : ''}${j.reject ? ' rejected' : ''}">${done ? `<button type="button" class="lib-shot" data-lib="open" data-i="${i}" title="Open (arrows, s, f, x, Delete)"><img loading="lazy" src="${esc(thumbUrl(j, BASE) || fullUrl(j, BASE))}" alt="Picture ${j.n ? '#' + j.n : i + 1}"></button>` : ''}
       <small>${meta}</small>${j.error ? `<small>${esc(j.error)}</small>` : ''}${j.reject && j.reject_reason ? `<small>Rejected: ${esc(j.reject_reason)}</small>` : ''}${j.note ? `<small>Note: ${esc(j.note)}</small>` : ''}
-      ${tools}${j.file ? `<button data-lib="use" data-i="${i}">Use for this shot</button>` : ''}${j.positive ? `<button data-lib="reuse" data-i="${i}">Use in Compose</button>` : ''}</article>`;
+      ${tools}${canUse ? `<button data-lib="use" data-i="${i}">${esc(hooks.useLabel || 'Use for this shot')}</button>` : ''}${canUse && hooks.actions ? `<div class="lib-create">${createButtons(kind => `data-lib="${kind}" data-i="${i}"`)}</div>` : ''}${j.positive ? `<button data-lib="reuse" data-i="${i}">${esc(hooks.reuseLabel || 'Use in Compose')}</button>` : ''}</article>`;
   }
   function bind(host, list) {
     lb.all = list;
@@ -102,7 +107,7 @@ export function createLibrary(hooks) {
   }
 
   function openLightbox(id, list = lb.all || []) {
-    lb.list = list.filter(t => t.status === 'done' && !t.deleted && (t.file || t.thumb));
+    lb.list = list.filter(t => t.status === 'done' && !t.deleted && (t.file || t.thumb || isAgent(t)));
     lb.i = Math.max(0, lb.list.findIndex(t => t.id === id)); lb.raw = false;
     overlay('libLightbox').hidden = false; renderLightbox();
   }
@@ -110,7 +115,8 @@ export function createLibrary(hooks) {
   function renderLightbox() {
     const t = lb.list[lb.i], el = overlay('libLightbox'); if (!t) return closeLightbox();
     el.innerHTML = lightboxHtml(t, {i: lb.i, n: lb.list.length, pinned: pins.some(p => p.id === t.id), raw: lb.raw, styleName: hooks.styleName(t.compose?.style),
-      base: BASE, useLabel: 'Use in Compose (same seed)', agentNewSeeds: true});
+      base: BASE, useLabel: hooks.reuseLabel || 'Use in Compose (same seed)', agentNewSeeds: true});
+    if ((t.file || isAgent(t)) && hooks.actions) el.querySelector('.side').insertAdjacentHTML('beforeend', `<div class="lib-create"><button type="button" data-a="use">${esc(hooks.useLabel || 'Select image')}</button>${createButtons(kind => `data-a="${kind}"`)}</div>`);
     const save = () => {
       const note = el.querySelector('#lbNote').value.trim(), reason = el.querySelector('#lbReason').value.trim();
       const f = {}; if (note !== (t.note || '')) f.note = note; if (reason !== (t.reject_reason || '')) f.reject_reason = reason;

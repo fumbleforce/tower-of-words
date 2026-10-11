@@ -15,7 +15,7 @@ export function pictureFor(step, sc = S.scene) {
   const chosen = slot ? sc?.metadata?.images?.[slot] : null;
   const image = sc?.images?.find(i => i.id === slot);
   const pending = chosen && !chosen.applied;
-  const url = pending ? chosen.url : image?.available === false ? '' : image?.url || step?.imageUrl || '';
+  const url = chosen && sc?.studioDraft ? chosen.url : pending ? chosen.url : image?.available === false ? '' : image?.url || step?.imageUrl || '';
   return { url, changed: !!pending, slot, file: image?.file || '', chosen };
 }
 
@@ -57,7 +57,7 @@ export function renderPictureTab(installComposer) {
         const pic = pictureFor(p.step);
         return `<button data-i="${i}" class="${pic.url ? '' : 'missing'}">${pic.url ? `<img src="${esc(pic.url)}" alt="" loading="lazy">` : '<span>No picture yet</span>'}<small>${i + 1}</small></button>`;
       }).join('')}</div>`
-      : `<p class="quiet pad">${scene.audience === 'public' ? 'Public game scenes play in the 3D world, so they have no pictures. Pictures belong to the private scenes.' : 'This scene has no pictures.'}</p>`;
+      : `<p class="quiet pad">${scene.studioDraft ? 'This scene draft has no pictures yet. Add a Picture beat to begin.' : scene.audience === 'public' ? 'Public game scenes play in the 3D world, so they have no pictures. Pictures belong to the private scenes.' : 'This scene has no pictures.'}</p>`;
     tab.querySelectorAll('[data-i]').forEach(b => { b.onclick = () => select(pics[+b.dataset.i].path, { tab: 'picture' }); });
     return;
   }
@@ -67,8 +67,8 @@ export function renderPictureTab(installComposer) {
   tab.innerHTML = `
     <figure class="pic-large ${pic.url ? '' : 'missing'}">${pic.url ? `<img src="${esc(pic.url)}" alt="">` : '<div class="missing-box"><strong>No picture yet</strong></div>'}</figure>
     <div class="pic-facts">
-      <span class="tag ${private_ ? 'private' : 'public'}">${private_ ? 'Private · Adult' : 'Public game'}</span>
-      ${pic.changed ? `<span class="tag new">New pick${pic.chosen.n ? ' #' + esc(pic.chosen.n) : ''}, goes live on Save</span><button class="link" data-keep>Keep the old picture</button>` : `<span class="where">${esc(pic.file ? (private_ ? 'island/private/game/' : '') + pic.file : 'Not made yet')}</span>`}
+      <span class="tag ${private_ ? 'private' : 'public'}">${scene.studioDraft ? (private_ ? 'Scene draft · Private' : 'Scene draft') : private_ ? 'Private · Adult' : 'Public game'}</span>
+      ${pic.changed ? `<span class="tag new">New pick${pic.chosen.n ? ' #' + esc(pic.chosen.n) : ''}, ${scene.studioDraft ? 'kept with this draft on Save' : 'goes live on Save'}</span><button class="link" data-keep>Keep the old picture</button>` : `<span class="where">${esc(scene.studioDraft && pic.url ? 'Picture saved with this draft' : pic.file ? (private_ ? 'island/private/game/' : '') + pic.file : 'Not made yet')}</span>`}
     </div>
     <div data-versions></div>
     <div class="pic-actions"><button data-compose ${pic.url ? '' : 'class="primary-soft"'}>Compose a new picture</button></div>

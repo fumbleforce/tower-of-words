@@ -2,6 +2,7 @@ const {setInterval, clearInterval, document, URLSearchParams, CustomEvent} = glo
 import {$, esc, api, guarded, notice} from './common.js';
 import {localBlockHtml, bindBlockWords} from './image-block-words.js';
 import {newestPictureFirst} from './image-order.js';
+import {standaloneComposition, standaloneJob, standalonePromptHtml} from './image-standalone.js';
 import {personWords} from './image-people.js';
 import {guessComposition} from './image-guess.js';
 import {applyDefaults, normalizeComposition, assembleComposition, promptParts, portraitUrl} from './image-compose.js';
@@ -26,9 +27,12 @@ const SETTINGS = ['model', 'count', 'seed', 'steps', 'cfg', 'width', 'height'];
 const pickerHtml = (name, kind, title, items, value, empty = 'No preference') => `<label>${esc(title)}<span class="block-pick"><select data-compose="${name}" data-kind="${kind}">${empty === null ? '' : `<option value="">${esc(empty)}</option>`}${options(items, value)}<option value="${NEW}">+ New…</option></select><button type="button" class="small ghost" data-edit-block="${kind}" data-edit-field="${name}" title="Edit the template used by all shots">Edit shared template</button></span></label>`;
 const asset = (kind, path) => '/api/subplots/image/' + kind + '/' + String(path).split('/').map(encodeURIComponent).join('/');
 
-export function installImages(getScene, changed) {
+// A standalone host supplies its own composition store and selection actions. It never creates a scene document.
+export function installImages(getScene, changed, {standalone = null} = {}) {
+  let standaloneSelection = null;
+  const hasDocument = () => !!standalone || !!getScene();
   let presets = null, jobs = [], runs = [], poll = null, pendingConnect = null, privateMode = false, modelFiles = [], loraFiles = [], controlFiles = [];
-  let historyScope = 'scene', historyCharacter = '', historyStar = false, historyEnd = false, historyBusy = false, historyWho = 'all', showTrash = false;
+  let historyScope = standalone ? 'all' : 'scene', historyCharacter = '', historyStar = false, historyEnd = false, historyBusy = false, historyWho = 'all', showTrash = false;
   const edits = new Map();  // ratings and deletes made here since the library loaded: id -> fields
   let selected = [], referenceChoices = [], referenceOwner = '', activeScene = '', activeSlot = '', loadingHistory = 0;
   // how the composer is folded: the full people picker, the generation settings, the width and height fields
@@ -49,6 +53,11 @@ export function installImages(getScene, changed) {
     return [...(scene?.images || []), ...added];
   };
   function compose() {
+    if (standalone) {
+      const c = standalone.getComposition();
+      if (presets) applyDefaults(c, presets);
+      return c;
+    }
     const scene = getScene();
     if (!scene) return null;
     scene.metadata ||= {};
@@ -86,10 +95,15 @@ export function installImages(getScene, changed) {
     }
     return c;
   }
-  const assemble = () => assembleComposition(compose() || normalizeComposition(), presets || {}, getScene()?.id);
-  const selectedImage = slot => getScene()?.metadata.images?.[slot] || (getScene()?.metadata.image?.slot === slot ? getScene().metadata.image : null);
+  const assemble = () => {
+    const body = assembleComposition(compose() || normalizeComposition(), presets || {}, getScene()?.id);
+    return standalone ? standaloneJob(body) : body;
+  };
+  const selectedImage = slot => standalone ? standaloneSelection : getScene()?.metadata.images?.[slot] || (getScene()?.metadata.image?.slot === slot ? getScene().metadata.image : null);
   function updatePrompt() {
     const body = assemble();
+    for (const el of document.querySelectorAll('[data-studio-prompt]')) if (el !== document.activeElement) el.value = body[el.dataset.studioPrompt];
+    const reset = $('[data-studio-reset]'); if (reset) reset.hidden = !compose()?.override;
     if ($('#assembledNegative')) $('#assembledNegative').textContent = body.negative;
     // each block's words on a tint of their own, named on hover (Jørgen, 2026-10-11: "add colored background to
     // separate the different blocks of the prompts visually"); the prompt sent is the same text
@@ -205,7 +219,7 @@ export function installImages(getScene, changed) {
   async function makeExamples(kind) {
     const blocks = active(kind).filter(b => !exampleOf(kind, b.id));
     if (!blocks.length) return;
-    for (const b of blocks) await api('image/api/generate', exampleJob(kind, b.id, presets));
+    for (const b of blocks) { const body = exampleJob(kind, b.id, presets); await api('image/api/generate', standalone ? standaloneJob(body) : body); }
     notice(`Queued ${blocks.length} small example ${blocks.length > 1 ? 'pictures' : 'picture'} of a stand-in figure. They show on the tiles when they are done.`);
     await refresh();
   }
@@ -215,7 +229,8 @@ export function installImages(getScene, changed) {
     const c = compose();
     const setting = blockValue('location', c.environment);
     if (!setting) return notice('Choose a setting first.', true);
-    await api('image/api/generate', placeJob(c, presets));
+    const body = placeJob(c, presets);
+    await api('image/api/generate', standalone ? standaloneJob(body) : body);
     notice('Making a small picture of the place. It shows on the right when it is done.');
     await refresh();
     renderShot();
@@ -247,12 +262,18 @@ export function installImages(getScene, changed) {
     return `<div class="image-current"><p class="hint image-scene-name">${esc(getScene().metadata.title || getScene().title)}</p>${previewUrl ? `<a href="${esc(previewUrl)}" target="_blank" rel="noopener"><img class="selected-image" src="${esc(previewUrl)}" alt="${esc(imageTitle)}"></a>` : empty}
         <div class="image-current-row">${go}${slots().length > 1 ? field('imageSlot', 'Image in this scene', slots().map((s, i) => ({id: s.id, label: 'Shot ' + (i + 1)})), activeSlot, null) : `<strong>${esc(imageTitle)}</strong>`}
         ${slot?.storage === 'archive' && !picked ? '<p class="hint">Showing the earlier picture from the archive.</p>' : ''}
-        ${picked && !picked.applied ? '<p class="hint" title="Replacement selected. Save the scene to use it in the story.">Replacement selected. Save the scene to use it in the story.</p><button data-clear-image>Keep the current story image</button>' : ''}</div>
+        ${picked && !picked.applied ? `<p class="hint">${getScene().studioDraft ? 'Save draft to keep this picture.' : 'Replacement selected. Save the scene to use it in the story.'}</p><button data-clear-image>${getScene().studioDraft ? 'Keep the saved draft image' : 'Keep the current story image'}</button>` : ''}</div>
       </div>`;
   }
   // redraw only the right column (a place preview finishing must not take the focus from a text box)
   let shotSeen = '';
   function renderShot() {
+    if (standalone) {
+      const host = $('#studioPlacePreview'), c = compose(); if (!host || !c) return;
+      const place = placeState(c); host.hidden = !place.url && !place.job;
+      host.innerHTML = `${place.url ? `<img src="${esc(place.url)}" alt="Place preview">` : ''}<span class="hint">${place.job ? 'Making a preview of the place…' : 'Place preview'}</span>`;
+      return;
+    }
     const shot = $('#composeShot'), c = compose();
     if (!shot || !c || !$('#composePreview')) return;
     shot.innerHTML = shotHtml(c);
@@ -272,9 +293,9 @@ export function installImages(getScene, changed) {
     if (!c) { host.innerHTML = '<p class="hint">Choose a scene first.</p>'; return; }
     const slot = slots().find(s => s.id === activeSlot);
     const picked = selectedImage(activeSlot);
-    if (presets && !c.sourceChecked && !c.edited && (picked || slot?.available)) loadSource(activeSlot);
+    if (!standalone && presets && !c.sourceChecked && !c.edited && (picked || slot?.available)) loadSource(activeSlot);
     const cast = c.characters.map(id => preset('character', id)).filter(Boolean);
-    const current = shotHtml(c);
+    const current = standalone ? '' : shotHtml(c);
     const look = `<section class="image-section image-look"><div class="two">${pickerHtml('style', 'style', 'Art style', presetOptions('style'), c.style, null)}${field('rating', 'Content level', [{id: 'safe', label: 'General'}, {id: 'sensitive', label: 'Mature'}, {id: 'nsfw', label: 'Adult'}], c.rating, null)}</div><p id="imageRatingNote" class="hint"></p>${localBlockHtml(c, presets || {}, 'style', c.style, 'Art style')}</section>`;
     const happens = `<section class="image-section image-what"><div class="section-head"><h3>What happens</h3>${pickerHtml('scenePreset', 'scene', 'Scene template', presetOptions('scene'), c.sceneRefs?.[0] || '', 'Choose a saved direction…')}</div>
       <label><span class="visually-hidden">What happens in this shot</span><textarea data-compose="scene" rows="2" placeholder="Choose a saved direction above, or describe the action in your own words.">${esc(c.scene)}</textarea></label>${c.sceneRefs?.[0] ? '<button type="button" class="small" data-reset-scene>Reset to template</button>' : ''}</section>`;
@@ -298,7 +319,7 @@ export function installImages(getScene, changed) {
       <label>Prompt<textarea data-original="positive" rows="3">${esc(c.override?.positive ?? o.positive ?? '')}</textarea></label>
       <label>Negative<textarea data-original="negative" rows="2">${esc(c.override?.negative ?? o.negative ?? '')}</textarea></label>
       ${c.override ? '<p class="hint">Generate uses this prompt as it stands. Changing a block builds a new prompt instead.</p>' : '<button data-use-original>Use the original prompt</button>'}</details></section>` : '';
-    const currentPicture = picked?.file ? 'island/private/imagegen/outputs/' + picked.file : slot?.available !== false && slot?.url && !slot.url.startsWith('data:') ? slot.url.replace(/^\//, '') : '';
+    const currentPicture = picked?.file ? 'island/private/imagegen/outputs/' + picked.file : standalone && picked?.out_path ? picked.out_path : getScene()?.studioDraft && slot?.start ? slot.start : slot?.available !== false && slot?.url && !/^(data:|\/api\/)/.test(slot.url) ? slot.url.replace(/^\//, '') : '';
     const tools = toolsHtml(c, {loras: loraFiles, controls: controlFiles, current: currentPicture});
     const prompt = `<section class="image-section image-prompt"><div class="section-head"><h3>Generated prompt</h3>${c.override ? '<button data-reset-prompt>Build the prompt from these controls</button>' : ''}${c.source ? '<button data-fill-prompt title="Guesses the character, camera, shape, style and model blocks from the old prompt and puts the rest in the free text. Nothing is saved until you generate.">Fill from prompt</button>' : ''}</div>${c.override && !c.original ? '<p class="hint">This picture uses a prompt copied from history.</p>' : ''}<p id="assembled" class="hint prompt-box"></p></section>`;
     // The full-screen composer (index.html) reads left to right as a director works: the cast and the place (people
@@ -307,7 +328,7 @@ export function installImages(getScene, changed) {
     // Generate and the library (notes/tools/scene-editor.md, Composer). Without the columns (a narrow panel) it all
     // runs down one column.
     const stage = $('#composePreview'), shot = $('#composeShot');
-    const composerHead = $('.compose-dialog .compose-head');
+    const composerHead = standalone ? $('.studio-mode') : $('.compose-dialog .compose-head');
     if (composerHead) {
       let mode = composerHead.querySelector('[data-composer-mode]');
       if (!mode) { mode = document.createElement('div'); mode.dataset.composerMode = ''; mode.className = 'shot-mode'; composerHead.insertBefore(mode, composerHead.querySelector('#closeCompose')); }
@@ -315,7 +336,11 @@ export function installImages(getScene, changed) {
       mode.querySelectorAll('[data-shot-mode]').forEach(b => b.onclick = () => edit(c => { c.hard = b.dataset.shotMode === 'adult'; }));
     }
     const direct = directHtml(c, dctx), place = placeHtml(c, dctx);
-    if (stage && shot) {
+    if (standalone) {
+      host.innerHTML = peopleHtml(c, cast) + happens + place + look + details + exclude + settingsHtml(c) + tools;
+      stage.innerHTML = `<details class="studio-direction" data-studio-direction ${c.directionOpen ? 'open' : ''}><summary>Camera and staging<span class="hint">Position people, choose the angle and lens</span></summary>${direct}</details>`;
+      $('#studioPrompt').innerHTML = standalonePromptHtml(c, assemble(), !!presets);
+    } else if (stage && shot) {
       // Jørgen, 2026-10-11: "put the camera direction and preview on top of the middle lane, moving the orig prompt
       // down together with the other prompt related stuff"; the generated prompt takes what is left
       host.innerHTML = peopleHtml(c, cast) + place + look + settingsHtml(c) + tools;
@@ -326,6 +351,7 @@ export function installImages(getScene, changed) {
     bindComposition();
     updatePrompt();
     renderReferenceChoices();
+    if (standalone) renderShot();
     renderJobs();
     if (presets) {
       loadExamples(api, exampleKinds(), paintExamples);
@@ -340,7 +366,13 @@ export function installImages(getScene, changed) {
   }
   function toggleList(c, key, id) { c[key] = c[key].includes(id) ? c[key].filter(x => x !== id) : [...c[key], id]; }
   function bindComposition() {
-    const host = $('#composePreview') ? $('#composition').parentElement : $('#composition');
+    const host = standalone ? $('#images') : $('#composePreview') ? $('#composition').parentElement : $('#composition');
+    const direction = host.querySelector('[data-studio-direction]');
+    if (direction) direction.ontoggle = () => edit(c => { c.directionOpen = direction.open; }, false);
+    host.querySelectorAll('[data-studio-prompt]').forEach(el => el.oninput = () => edit(c => {
+      c.override = {positive: $('[data-studio-prompt=positive]', host).value, negative: $('[data-studio-prompt=negative]', host).value};
+    }, false));
+    const reset = host.querySelector('[data-studio-reset]'); if (reset) reset.onclick = () => edit(c => { c.override = null; });
     host.querySelectorAll('[data-compose]').forEach(el => {
       el.oninput = () => {
         const name = el.dataset.compose;
@@ -455,7 +487,7 @@ export function installImages(getScene, changed) {
       notice('Starts from this picture with the same seed. Change the prompt a little, then Generate.');
     }));
     const slot = slots().find(x => x.id === activeSlot), picked = selectedImage(activeSlot);
-    const current = picked?.file ? 'island/private/imagegen/outputs/' + picked.file : slot?.available !== false && slot?.url && !slot.url.startsWith('data:') ? slot.url.replace(/^\//, '') : '';
+    const current = picked?.file ? 'island/private/imagegen/outputs/' + picked.file : standalone && picked?.out_path ? picked.out_path : getScene()?.studioDraft && slot?.start ? slot.start : slot?.available !== false && slot?.url && !/^(data:|\/api\/)/.test(slot.url) ? slot.url.replace(/^\//, '') : '';
     const cc = compose();
     bindTools(host, {edit, compose, current, size: {w: +cc.width || preset('framing', cc.framing)?.data.w, h: +cc.height || preset('framing', cc.framing)?.data.h}});
     bindShot(host);
@@ -531,13 +563,13 @@ export function installImages(getScene, changed) {
     catch (e) { if (sceneRunsFor === id) sceneRuns = []; notice(e.message, true); }
     renderJobs();
   }
-  const library = createLibrary({api, notice, changed: () => renderJobs(), use: j => useImage(j), reuse: j => reuseImage(j),
-    generate: body => api('image/api/generate', body).then(refresh), styleName: id => preset('style', id)?.data.name, count: () => +compose()?.count || 1,
-    rated: (t, fields) => edits.set(t.id, {...edits.get(t.id), ...fields}), restored: t => { edits.set(t.id, {...edits.get(t.id), deleted: false}); sceneRunsFor = ''; loadHistory(); }});
+  const library = createLibrary({api, notice, actions: standalone?.actions, reuseLabel: standalone ? 'Load prompt and settings' : null, useLabel: standalone ? 'Select image' : 'Use for this shot', selected: () => standaloneSelection?.id, select: standalone ? j => useImage(j) : null, changed: () => renderJobs(), use: j => useImage(j), reuse: j => reuseImage(j),
+    generate: body => api('image/api/generate', standalone ? standaloneJob(body) : body).then(refresh), styleName: id => preset('style', id)?.data.name, count: () => +compose()?.count || 1,
+    rated: (t, fields) => { edits.set(t.id, {...edits.get(t.id), ...fields}); if (standalone && fields.deleted && standaloneSelection?.id === t.id) { standaloneSelection = null; standalone.onSelect?.(null); } }, restored: t => { edits.set(t.id, {...edits.get(t.id), deleted: false}); sceneRunsFor = ''; loadHistory(); }});
   function renderJobs() {
     const host = $('#renders'); if (!host) return;
-    if (!getScene()) { host.replaceChildren(); return; }
-    const sceneScope = historyScope === 'scene';
+    if (!hasDocument()) { host.replaceChildren(); return; }
+    const sceneScope = !standalone && historyScope === 'scene';
     if (sceneScope && sceneRunsFor !== getScene().id) { loadScenePictures(); }
     const ownRuns = new Set((sceneRuns || []).map(r => r.run_id));
     const all = new Map((sceneScope ? sceneRuns || [] : runs).flatMap(run => (run.renders || []).map(j => [j.id, {...run, ...j, status: 'done'}])));
@@ -548,8 +580,8 @@ export function installImages(getScene, changed) {
       && (!historyCharacter || j.characters?.includes(historyCharacter)) && (!historyStar || j.star || j.fav))
       .sort(newestPictureFirst);
     const empty = `<p class="hint">${sceneScope && !sceneRuns ? 'Finding this scene’s pictures…' : historyScope === 'scene' ? 'No pictures for this scene yet, from the editor or from its picture rounds. Browse all generated pictures to use an existing one.' : 'No pictures match these filters.'}</p>`;
-    host.innerHTML = `<section class="image-section image-library"><div class="pane-title"><h3>Picture library</h3><button data-trash aria-pressed="${showTrash}">Trash</button><button data-refresh-images>Refresh</button></div><p class="hint library-hint">Click a picture to look closer (arrows, s, f, x, Delete). “Use for this shot” puts one in the scene.</p>
-      ${showTrash ? library.trashHtml() : `<div class="segmented"><button data-library="scene" aria-pressed="${historyScope === 'scene'}">This scene</button><button data-library="all" aria-pressed="${historyScope === 'all'}">All generated pictures</button></div>
+    host.innerHTML = `<section class="image-section image-library"><div class="pane-title"><h3>Picture library</h3><button data-trash aria-pressed="${showTrash}">Trash</button><button data-refresh-images>Refresh</button></div><p class="hint library-hint">${standalone ? 'Newest pictures first. Select an image to create a scene or character.' : 'Click a picture to look closer (arrows, s, f, x, Delete). “Use for this shot” puts one in the scene.'}</p>
+      ${showTrash ? library.trashHtml() : `${standalone ? '' : `<div class="segmented"><button data-library="scene" aria-pressed="${historyScope === 'scene'}">This scene</button><button data-library="all" aria-pressed="${historyScope === 'all'}">All generated pictures</button></div>`}
       <div class="lib-filters"><label>Character<select id="imageHistoryCharacter"><option value="">Anyone</option>${options(presetOptions('character'), historyCharacter)}</select></label><label>Made by<select id="imageHistoryWho">${options([{id: 'all', label: 'Anyone'}, {id: 'mine', label: 'Jørgen'}, {id: 'agents', label: 'Agents'}], historyWho)}</select></label><label class="image-check"><input id="imageHistoryStar" type="checkbox" ${historyStar ? 'checked' : ''}>Starred</label></div>
       ${library.trayHtml()}
       ${selected.length ? '<div class="render-grid">' + selected.map((j, i) => library.cardHtml(j, i)).join('') + '</div>' : empty}
@@ -566,10 +598,11 @@ export function installImages(getScene, changed) {
     library.bindTray(host);
   }
   function useImage(j) {
+    if (standalone) { standaloneSelection = {...j, url: j.file ? asset('out', j.file) : asset('agentsrc', j.id)}; standalone.onSelect?.(j); render(); return; }
     const s = getScene(); if (!s || !activeSlot) return;
     s.metadata.images ||= {};
     s.metadata.images[activeSlot] = {slot: activeSlot, id: j.id, url: asset('out', j.file), file: j.file, seed: j.seed, positive: j.positive};
-    changed(); render(); announceImage(); notice('Picture selected for this shot. Save the scene to use it in the story.');
+    changed(); render(); announceImage(); notice(s.studioDraft ? 'Picture selected. Save draft to keep this picture.' : 'Picture selected for this shot. Save the scene to use it in the story.');
   }
   function announceImage() { globalThis.dispatchEvent(new CustomEvent('subplot-image-changed', {detail: {slotId: activeSlot}})); }
   // A shot's picture opens with what made it (Jørgen, 2026-10-11: "when opening to re-gen a picture for a scene, we
@@ -595,7 +628,7 @@ export function installImages(getScene, changed) {
   // One way to open a picture's settings, for "Reuse settings" and for a shot's own picture: its blocks when it has
   // them, else Fill from prompt; the original prompt and settings ride along either way.
   function fillFromJob(j, {how = '', start = '', slot = activeSlot, quiet = false} = {}) {
-    const s = getScene(); if (!s) return;
+    const s = getScene(); if (!s && !standalone) return;
     const current = compose() || normalizeComposition();
     const blocks = hasBlocks(j.compose);
     let c;
@@ -608,7 +641,7 @@ export function installImages(getScene, changed) {
       steps: j.steps || c.steps, cfg: j.cfg || c.cfg, sampler: j.sampler || undefined, scheduler: j.scheduler || undefined,
       castInitialized: true, sourceChecked: true, edited: false,
       original: {positive: j.positive || '', negative: j.negative || '', seed: j.seed, model_file: j.model_file, w: j.w, h: j.h,
-        steps: j.steps, cfg: j.cfg, sampler: j.sampler, how: how || (j.n ? 'picture #' + j.n : 'the picture'), start: start || (j.file ? 'island/private/imagegen/outputs/' + j.file : ''), blocks},
+        steps: j.steps, cfg: j.cfg, sampler: j.sampler, how: how || (j.n ? 'picture #' + j.n : 'the picture'), start: start || (j.file ? 'island/private/imagegen/outputs/' + j.file : j.out_path || ''), blocks},
       override: blocks ? null : {positive: j.positive || '', negative: j.negative || ''}});
     if (j.ipa) Object.assign(c, {reference: j.ipa.ref, referenceOn: true, referenceStrength: j.ipa.strength, referenceCutout: j.ipa.cutout});
     if (j.repaint) Object.assign(c, {reference: j.repaint.ref, faceFix: true, faceStrength: j.repaint.denoise});
@@ -618,7 +651,8 @@ export function installImages(getScene, changed) {
     if (j.huefix?.length) c.huefix = j.huefix.map(h => ({...h}));
     if (c.start || c.loras || c.control || c.huefix) c.toolsOpen = true;
     applyDefaults(c, presets || {});
-    s.metadata.compositions[slot || 'scene'] = c;
+    if (standalone) standalone.setComposition(standaloneComposition(c));
+    else s.metadata.compositions[slot || 'scene'] = c;
     if (!quiet) changed();
     render();
   }

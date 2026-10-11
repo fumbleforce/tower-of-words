@@ -12,7 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, '..'))
 import comfy  # noqa: E402  (tools/comfy.py)
-import store, gpu, consist, privacy, huefix  # noqa: E402
+import store, gpu, consist, privacy, huefix, image_actions  # noqa: E402
 
 PORT = int(os.environ.get('IMAGEGEN_PORT', 8772))
 # Another port is a test copy: it never takes, ends or frees the GPU (the lock's owner name is the dashboard's, so a
@@ -259,6 +259,14 @@ def _clean_repaint(x):
 def _picture(rel, private):
     """A picture a job may read: repo-relative, island/private/ ones only in private mode, never Jørgen's own folder."""
     rel = str(rel)
+    if rel.startswith('/api/subplots/draft-picture?'):
+        return image_actions.draft_picture(rel, private)
+    portraits = 'island/private/imagegen/portraits/'
+    if rel.startswith(portraits):
+        name = rel[len(portraits):]
+        if os.path.isfile(os.path.join(store.PORTRAITS, name) + '.json') and image_actions.portrait_visible(name, private):
+            consist.resolve(rel)
+            return rel
     if rel.startswith('island/private/') and not private:
         raise ValueError('that picture opens in private mode only')
     if consist.resolve(rel).startswith(store.OFF_LIMITS + os.sep):
@@ -663,9 +671,18 @@ class H(BaseHTTPRequestHandler):
     def do_GET(self):
         u = urllib.parse.urlparse(self.path)
         p, q = urllib.parse.unquote(u.path), dict(urllib.parse.parse_qsl(u.query))
+        if p.startswith('/api/subplots/image/'):
+            p = p[len('/api/subplots/image'):]
         try:
             if p in ('/', '/index.html'):
                 return self._file(WEB, 'index.html', cache=False)
+            if p in ('/legacy', '/legacy/'):
+                return self._file(WEB, 'legacy.html', cache=False)
+            # The standalone page imports the exact modules used by the scene editor.
+            for prefix, folder in (('/tools/subplots/web/', os.path.join(HERE, '..', 'subplots', 'web')),
+                                   ('/tools/imagegen/web/', WEB), ('/game3d/fonts/', os.path.join(HERE, '..', '..', 'game3d', 'fonts'))):
+                if p.startswith(prefix) and os.path.splitext(p)[1] in ('.js', '.css', '.woff2'):
+                    return self._file(folder, p[len(prefix):], cache=False)
             if p == '/favicon.ico':
                 return self._send(204, b'', 'image/x-icon')
             if p.startswith('/web/'):
@@ -675,6 +692,8 @@ class H(BaseHTTPRequestHandler):
             if p.startswith('/trashthumb/'):
                 return self._file(os.path.join(store.TRASH, 'thumbs'), p[12:], check=True)
             if p.startswith('/priv/portraits/'):
+                if not image_actions.portrait_visible(p[16:], self._private()):
+                    return self._send(404, {'error': 'not found'})
                 return self._file(store.PORTRAITS, p[16:])
             if p.startswith('/agentsrc/'):
                 path = None if p[10:] in private_files()[1] and not self._private() else agent_original(p[10:])
@@ -707,6 +726,12 @@ class H(BaseHTTPRequestHandler):
                 return self._send(200, rec if rec and (self._private() or not rec['private']) else {})
             if p == '/api/history':
                 return self._send(200, history(q, self._private()))
+            if p.startswith('/api/render/'):
+                try:
+                    record, _ = image_actions.selected_image(p[len('/api/render/'):], self._private())
+                except ValueError as error:
+                    return self._send(404, {'error': str(error)})
+                return self._send(200, record)
             if p.startswith('/api/tuning/'):
                 _, _, _, typ, pid = p.split('/')
                 return self._send(200, tuning(typ, pid, self._private()))
@@ -725,8 +750,22 @@ class H(BaseHTTPRequestHandler):
 
     def do_POST(self):
         p = urllib.parse.urlparse(self.path).path
+        if p.startswith('/api/subplots/image/'):
+            p = p[len('/api/subplots/image'):]
         try:
+            if p in ('/api/character-from-image', '/api/subplots/create-from-image'):
+                host = self.headers.get('Host', '')
+                origin = self.headers.get('Origin')
+                if (urllib.parse.urlparse('http://' + host).hostname not in ('localhost', '127.0.0.1', '::1')
+                        or (origin and origin != 'http://' + host)):
+                    return self._send(403, {'error': 'Open Image gen on this computer to create from a picture.'})
+                if 'application/json' not in self.headers.get('Content-Type', '') or not 0 < int(self.headers.get('Content-Length', 0)) <= 2 * 1024 * 1024:
+                    return self._send(400, {'error': 'Send character or scene details as JSON.'})
             b = self._body()
+            if p == '/api/character-from-image':
+                return self._send(200, image_actions.create_character(b, self._private()))
+            if p == '/api/subplots/create-from-image':
+                return self._create_scene(b)
             if TEST_COPY and (p == '/api/session/start' or (p == '/api/generate' and b.get('autostart'))):
                 return self._send(409, {'ok': False, 'error': 'a test copy of the dashboard does not use the GPU'})
             if p == '/api/session/start':
@@ -806,6 +845,21 @@ class H(BaseHTTPRequestHandler):
         except Exception as e:
             log('POST error ' + traceback.format_exc())
             return self._send(400, {'error': str(e)})
+
+    def _create_scene(self, body):
+        """Forward a selected image to the local scene authoring service."""
+        url = 'http://127.0.0.1:8771/api/subplots/create-from-image'
+        headers = {'Content-Type': 'application/json'}
+        if self._private():
+            headers['Cookie'] = 'amakawa_mode=private'
+        req = urllib.request.Request(url, json.dumps(body).encode(), headers)
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                return self._send(response.status, response.read(), 'application/json')
+        except urllib.error.HTTPError as error:
+            return self._send(error.code, error.read(), 'application/json')
+        except urllib.error.URLError:
+            return self._send(503, {'error': 'The scene editor is offline. Start the local project server, then retry.'})
 
 
 def restart_exit(*_):

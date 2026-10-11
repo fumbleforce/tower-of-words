@@ -51,7 +51,7 @@ const privateDay = (placement, scene) => {
 export function buildMap(catalog = S.catalog, map = S.map) {
   const byId = new Map((map?.scenes || []).map(s => [s.id, s]));
   const items = [];
-  const public_ = catalog.filter(r => r.audience !== 'private' && byId.has(r.id));
+  const public_ = catalog.filter(r => !r.studioDraft && r.audience !== 'private' && byId.has(r.id));
   const reached = new Set();
   for (const r of public_) {
     const s = byId.get(r.id);
@@ -80,13 +80,13 @@ export function buildMap(catalog = S.catalog, map = S.map) {
     items.push({ row: r, kind: 'loose', day: s.day, place: s.place, area: s.place || s.area, areaTitle: s.place ? placeName(s.place) : areaTitle(s.area), entries: [], routes: s.routes, model: readRestrictions(''), way: '', note: '', parts: [] });
   }
   // scenes the map couldn't read (it failed, or the file is new since): listed under any day by their file
-  for (const r of catalog.filter(x => x.audience !== 'private' && !byId.has(x.id))) {
+  for (const r of catalog.filter(x => !x.studioDraft && x.audience !== 'private' && !byId.has(x.id))) {
     const area = r.group || 'other';
     items.push({ row: r, kind: 'other', day: 'any', place: null, area, areaTitle: areaTitle(area), entries: [], routes: [], model: readRestrictions(''), way: '', note: '', parts: [] });
   }
   // private scenes: one item per scene, its other nodes are its parts
   const groups = new Map();
-  for (const r of catalog.filter(x => x.audience === 'private')) {
+  for (const r of catalog.filter(x => !x.studioDraft && x.audience === 'private')) {
     const key = r.scene || r.id;
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(r);
@@ -101,6 +101,10 @@ export function buildMap(catalog = S.catalog, map = S.map) {
       entries: [], routes: [], model, way: placement.place ? `Shows up at ${placeName(placement.place)}` : '',
       note: summary(model, names, { day: false }), parts: rows.filter(r => r !== main),
     });
+  }
+  for (const row of catalog.filter(r => r.studioDraft)) {
+    items.push({ row, kind: 'draft', day: 'any', place: null, area: 'drafts', areaTitle: 'Drafts',
+      entries: [], routes: [], model: readRestrictions(''), way: 'Scene draft', note: 'Saved locally', parts: [] });
   }
   return items;
 }

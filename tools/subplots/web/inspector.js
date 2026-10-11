@@ -35,6 +35,7 @@ function number(value, change, { min = 0, max = 100, step = 1 } = {}) {
 // Other parts of the same scene file, for jumps and choice destinations.
 function destinations() {
   const id = S.scene.id;
+  if (S.scene.studioDraft) return [];
   const prefix = id.startsWith('public:') ? id.split('#')[0] + '#' : id.slice(0, id.lastIndexOf(':') + 1);
   return S.catalog.filter(r => r.id.startsWith(prefix)).map(r => ({ value: r.node, label: nodeTitle(r.node) }));
 }
@@ -148,12 +149,13 @@ export function renderSceneTab() {
   const scene = S.scene;
   if (!scene) { tab.innerHTML = '<p class="quiet pad">Open a scene first.</p>'; return; }
   const priv = scene.audience === 'private';
-  tab.insertAdjacentHTML('beforeend', `<section class="facts"><span class="tag ${priv ? 'private' : 'public'}">${priv ? 'Private · Adult' : 'Public game'}</span><p class="where">${esc(scene.where || '')}</p><p class="quiet">${priv ? 'Plays only in private mode. Saving rebuilds the private scene files and runs the private checks.' : 'Part of the public game. Saving writes this scene back into its story file.'}</p></section>`);
+  tab.insertAdjacentHTML('beforeend', `<section class="facts"><span class="tag ${priv ? 'private' : 'public'}">${scene.studioDraft ? (priv ? 'Scene draft · Private' : 'Scene draft') : priv ? 'Private · Adult' : 'Public game'}</span><p class="where">${esc(scene.where || '')}</p><p class="quiet">${scene.studioDraft ? 'Save keeps this draft and its pictures locally, with a revision for each save. Preview plays it here. It has no gameplay placement yet.' : priv ? 'Plays only in private mode. Saving rebuilds the private scene files and runs the private checks.' : 'Part of the public game. Saving writes this scene back into its story file.'}</p></section>`);
 
   const place = document.createElement('section');
   place.innerHTML = '<h3>When it plays</h3>';
   tab.append(place);
-  renderPlacement(place);
+  if (!scene.studioDraft) renderPlacement(place);
+  else place.remove();
 
   const notes = document.createElement('section');
   notes.innerHTML = '<h3>Notes</h3>';

@@ -270,7 +270,11 @@ class Handler(SimpleHTTPRequestHandler):
         if url[0] == '/api/subplots/catalog' and re.search(r'(?:^|&)scope=all(?:&|$)', query):
             self.path = '/api/subplots/catalog?' + re.sub(r'(?:^|&)scope=all(?=&|$)', '', query).lstrip('&')
             return False
-        if re.search(r'(?:^|&)(scope=local|id=(?!public%3A|public:)[^&]+)(?:&|$)', query):
+        args = dict(urllib.parse.parse_qsl(query))
+        scene_id = args.get('id', '')
+        # Studio drafts carry their audience in their id; the adapter also verifies the saved audience.
+        public_draft = re.fullmatch(r'studio:public:[a-f0-9]{32}', scene_id)
+        if args.get('scope') == 'local' or (scene_id and not scene_id.startswith('public:') and not public_draft):
             self._json(403, {'error': 'Private scenes open in private mode: http://127.0.0.1:8771/private'})
             return True
         return False

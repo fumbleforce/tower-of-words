@@ -30,7 +30,7 @@ export async function openBlockEditor(opts) {
   const live = k => (presets[k] || []).filter(p => !p.archived);
   const d = dialog();
   const state = {id: opts.id || null, from: opts.from ?? (opts.id ? '' : list.find(p => !p.archived)?.id || ''), rec: null, draft: null, note: '', isPrivate: false, diff: null};
-  const portrait = (key, v, label) => `<label>${label}<span class="block-portrait">${v && opts.portraitUrl?.(v) ? `<img src="${esc(opts.portraitUrl(v))}" alt="">` : ''}<input type="text" class="mono" data-f="${key}" value="${esc(v ?? '')}"></span></label>`;
+  const portrait = (key, v, label) => `<label>${label}<span class="block-portrait">${v && opts.portraitUrl?.(v) ? `<img src="${esc(opts.portraitUrl(v))}" alt="Selected portrait">` : ''}${opts.portraitLocked ? '<span class="hint">From the selected picture. A separate copy is kept with this character.</span>' : `<input type="text" class="mono" data-f="${key}" value="${esc(v ?? '')}">`}</span></label>`;
   const ctx = {live, files: opts.files || [], portrait};
 
   function startFrom(id) {
@@ -38,7 +38,7 @@ export async function openBlockEditor(opts) {
     const name = state.draft?.name || '';
     state.draft = p ? clone(p.data) : blank(kind, opts.files);
     state.draft.name = name;
-    state.isPrivate = !!p?.private;
+    state.isPrivate = !!opts.private || !!p?.private;
     for (const [k, v] of Object.entries(opts.prefill || {})) if (v) setp(state.draft, k, v);
   }
   async function load(id) {
@@ -59,7 +59,7 @@ export async function openBlockEditor(opts) {
       ? `<label>${esc(kindLabel(kind, true))}<select data-switch>${list.map(p => `<option value="${esc(p.id)}" ${p.id === state.id ? 'selected' : ''}>${esc(p.data.name || p.id)}${p.archived ? ' (retired)' : ''}</option>`).join('')}</select></label>
          <p class="hint">v${cur.v}, saved ${esc(cur.at.replace('T', ' ').slice(0, 16))}. Saving makes v${cur.v + 1}; old versions stay.</p>`
       : `<label>Start from<select data-from><option value="">Blank</option>${list.filter(p => !p.archived).map(p => `<option value="${esc(p.id)}" ${p.id === state.from ? 'selected' : ''}>${esc(p.data.name || p.id)}</option>`).join('')}</select></label>
-         <p class="hint">The words of the block you start from are filled in below. Give it a name and change what differs.</p>`;
+         <p class="hint">${opts.portraitLocked ? 'Copy details from an existing character, or start blank. Give the new character a name and describe their appearance.' : 'The words of the block you start from are filled in below. Give it a name and change what differs.'}</p>`;
     const fields = fieldsHtml(kind, state.draft, ctx).replace(`data-f="name"`, `data-f="name" placeholder="${esc(editing ? '' : 'e.g. ' + exampleName(kind))}"`);
     const versions = editing ? `<details class="block-versions"><summary>Versions (${state.rec.versions.length})</summary>${state.rec.versions.slice().reverse().map(v => `<div class="block-version"><span>v${v.v}</span><span>${esc(v.at.slice(5, 16).replace('T', ' '))} ${esc(v.message || '')}</span>${v.v === cur.v ? '<span class="hint">current</span>' : `<span><button type="button" class="small" data-diff="${v.v}">Diff</button><button type="button" class="small" data-restore="${v.v}">Restore</button></span>`}</div>`).join('')}${state.diff ? diffHtml(state.rec, state.diff) : ''}</details>` : '';
     d.innerHTML = `<form method="dialog" class="block-form">
@@ -67,7 +67,7 @@ export async function openBlockEditor(opts) {
       ${head}
       <div class="block-fields" data-main="${esc(main)}">${fields}</div>
       ${editing ? `<label>Note to Claude<textarea rows="2" data-note placeholder="What's wrong with it, or what to try next">${esc(state.note)}</textarea></label>` : ''}
-      ${privateMode ? `<label class="image-check"><input type="checkbox" data-private ${state.isPrivate ? 'checked' : ''}>Only in private mode</label>` : ''}
+      ${privateMode ? `<label class="image-check"><input type="checkbox" data-private ${state.isPrivate ? 'checked' : ''} ${opts.private ? 'disabled' : ''}>Only in private mode</label>` : ''}
       ${versions}
       <p class="block-error" role="alert" hidden></p>
       <div class="block-actions">${editing ? `<button type="button" class="ghost danger" data-retire>${state.rec.archived ? 'Bring back' : 'Retire'}</button>` : ''}<span></span>
@@ -109,6 +109,9 @@ export async function openBlockEditor(opts) {
     });
     form.addEventListener('submit', async e => {
       e.preventDefault();
+      const save = form.querySelector('[data-save]');
+      if (save.disabled) return;
+      save.disabled = true;
       try {
         if (!String(state.draft.name || '').trim()) throw Error('Give it a name.');
         const main = mainField(kind);
@@ -121,11 +124,13 @@ export async function openBlockEditor(opts) {
           done(state.id);
         } else {
           const from = list.find(p => p.id === state.from);
-          const rec = await imageApi(`preset/${kind}/${state.from || 'new'}/create`, {name: state.draft.name, data: state.draft, private: privateMode && state.isPrivate,
-            message: from ? `made in the scene editor from ${from.data.name || from.id} v${from.v}` : 'made in the scene editor'});
+          const request = {name: state.draft.name, data: state.draft, private: privateMode && state.isPrivate,
+            message: from ? `made in the scene editor from ${from.data.name || from.id} v${from.v}` : 'made in the scene editor'};
+          const rec = opts.create ? await opts.create(request) : await imageApi(`preset/${kind}/${state.from || 'new'}/create`, request);
           done(rec.id);
         }
       } catch (err) { error(err.message); }
+      finally { save.disabled = false; }
     });
   }
   render();

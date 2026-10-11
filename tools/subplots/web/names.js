@@ -43,6 +43,7 @@ export function areaOf(row) {
 }
 
 export function titleOf(row) {
+  if (row.studioDraft) return row.title;
   if (row.audience === 'private' && row.scene) {
     const part = row.node === 'start' || row.node === 'steps' ? '' : ` · ${humanize(row.node)}`;
     return humanize(row.scene) + part;
@@ -53,6 +54,7 @@ export function titleOf(row) {
 // Where "Play in game" goes: the private viewer for a private scene, the place for a public one.
 export function playUrl(scene) {
   if (!scene) return '';
+  if (scene.studioDraft) return '';
   if (scene.previewUrl) return scene.previewUrl;
   const file = (scene.where || '').replace(/^game3d\/story\//, '').replace(/\.js$/, '');
   const parts = file.split('/');

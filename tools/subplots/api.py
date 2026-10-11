@@ -1,6 +1,7 @@
 """Local editing API. Source adapters own formats; this module owns revisions and HTTP."""
 import fcntl
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -15,6 +16,9 @@ import urllib.parse
 import urllib.request
 
 HERE = Path(__file__).resolve().parent
+_studio_spec = importlib.util.spec_from_file_location('subplot_studio', HERE / 'studio.py')
+studio = importlib.util.module_from_spec(_studio_spec)
+_studio_spec.loader.exec_module(studio)
 ROOT = Path(os.environ.get('SUBPLOTS_ROOT', HERE.parent.parent)).resolve()
 LOCK = threading.RLock()
 MAX_BODY = 2 * 1024 * 1024
@@ -124,6 +128,8 @@ def story_map():
 def label(scene):
     """Say what goes where (Jørgen, 2026-10-10: "just labelling on what goes where"): the public game or the
     private, adult side, and the file the scene lives in."""
+    if studio.is_studio(scene.get('id')):
+        return scene
     public = scene.get('id', '').startswith('public:')
     scene['audience'] = 'public' if public else 'private'
     if public and not scene.get('where'):
@@ -141,6 +147,7 @@ def catalog_all():
     except (ValueError, OSError, subprocess.SubprocessError):
         result['local'] = False
     result['scenes'] = [label(s) for s in result['scenes']]
+    result['scenes'] += studio_drafts().rows()
     return result
 
 def picture_key(name):
@@ -192,6 +199,42 @@ REQUEST = threading.local()  # .private: this request came in private mode (the 
 def image_headers():
     """Headers for a call to the image service: private mode passes on as the same cookie /private sets."""
     return {'Cookie': 'amakawa_mode=private'} if getattr(REQUEST, 'private', False) else {}
+
+def image_render(image_id):
+    """Resolve IDs through the image service, which owns deletion and audience checks."""
+    if not isinstance(image_id, str) or not re.fullmatch(r'[A-Za-z0-9_.-]+', image_id):
+        raise ValueError('Invalid generated image id')
+    req = urllib.request.Request(IMAGE_SERVICE + '/api/render/' + urllib.parse.quote(image_id), headers=image_headers())
+    try:
+        with urllib.request.urlopen(req, timeout=15) as response:
+            return json.loads(response.read(MAX_BODY))
+    except urllib.error.HTTPError as e:
+        if e.code in (403, 404):
+            raise ValueError('The selected image is unavailable in this mode.') from None
+        raise ValueError('The image service could not load that render.') from None
+    except (urllib.error.URLError, OSError):
+        raise ValueError('Image generation is offline. Start tools/imagegen/run.sh, then retry.') from None
+
+def image_bytes(job):
+    """Copy only a trusted service-owned output URL, never a caller's filesystem path."""
+    url = job.get('url', '')
+    prefix = '/api/subplots/image'
+    if not isinstance(url, str) or not url.startswith(prefix + '/'):
+        raise ValueError('The image service returned an invalid picture URL.')
+    suffix = url[len(prefix):]
+    decoded = urllib.parse.unquote(suffix)
+    if (not re.fullmatch(r'/(out/[A-Za-z0-9_./-]+|agentsrc/[A-Za-z0-9_.-]+)', decoded)
+            or '..' in decoded or '\\' in decoded or '%' in decoded):
+        raise ValueError('The image service returned an invalid picture URL.')
+    try:
+        req = urllib.request.Request(IMAGE_SERVICE + suffix, headers=image_headers())
+        with urllib.request.urlopen(req, timeout=30) as response:
+            return response.read(studio.MAX_IMAGE + 1)
+    except (urllib.error.URLError, OSError):
+        raise ValueError('The selected picture could not be copied from image generation.') from None
+
+def studio_drafts():
+    return studio.Drafts(state_dir(), image_render, image_bytes, private=getattr(REQUEST, 'private', False))
 
 def image_history():
     """Every run the image generator knows (in this request's mode), cached for half a minute (a scene's library filters it)."""
@@ -280,8 +323,9 @@ def scene_status():
     """Where every scene stands, for the scene list: a private scene's pictures, voice and normal-play entry (the local
     provider's status, from live.json, the voice manifests and the entry check), a public scene is part of the game; for
     both, an unsaved draft and the open comments. Cached for half a minute, dropped on save."""
+    cache_key = 'private' if getattr(REQUEST, 'private', False) else 'public'
     with LOCK:
-        at, value = STATUS_CACHE.get('all', (0, None))
+        at, value = STATUS_CACHE.get(cache_key, (0, None))
         if value is not None and time.time() - at < 30:
             return value
     out = {}
@@ -291,13 +335,20 @@ def scene_status():
         pass
     for s in source({'action': 'catalog'})['scenes']:
         out[s['id']] = {'stage': 'game', 'label': 'Part of the public game', 'draft': (slot(s['id']) / 'draft.json').is_file()}
+    for s in studio_drafts().rows():
+        out[s['id']] = {'stage': 'draft', 'label': 'Scene draft', 'why': 'Saved locally; not in the game',
+                        'draft': (studio_drafts().folder(s['id']) / 'draft.json').is_file()}
     for c in comments({'action': 'list'}).get('comments', []):
         if c.get('status') == 'open':
             row = out.setdefault(c['scene'], {'stage': '', 'label': ''})
             row['comments'] = row.get('comments', 0) + 1
+    for c in studio_drafts().comments({'action': 'list'})['comments']:
+        if c.get('status') == 'open' and c['scene'] in out:
+            row = out[c['scene']]
+            row['comments'] = row.get('comments', 0) + 1
     value = {'status': out}
     with LOCK:
-        STATUS_CACHE['all'] = (time.time(), value)
+        STATUS_CACHE[cache_key] = (time.time(), value)
     return value
 
 class CheckFailed(ValueError):
@@ -370,6 +421,43 @@ def create_scene(body):
 def dispatch(action, body):
     if action in ('draft', 'save'):
         STATUS_CACHE.clear()
+    scene_id = body.get('id', '')
+    if action == 'comments':
+        ids = [x for x in body.get('ids', '').split(',') if x]
+        draft_ids = [x for x in ids if studio.is_studio(x)]
+        other_ids = [x for x in ids if not studio.is_studio(x)]
+        out = studio_drafts().comments({'action': 'list', 'ids': draft_ids})['comments'] if draft_ids or not ids else []
+        if other_ids or not ids:
+            out += comments({'action': 'list', 'ids': other_ids}).get('comments', [])
+        return {'comments': out}
+    if action == 'comment' and (studio.is_studio(scene_id) or str(body.get('comment', '')).startswith('studio-comment-')):
+        with LOCK:
+            STATUS_CACHE.clear()
+            return studio_drafts().comments(body)
+    if action == 'create-from-image' or studio.is_studio(scene_id):
+        drafts = studio_drafts()
+        if action == 'pictures':
+            current = drafts.read(scene_id)
+            found = {'metadata': current['metadata']}
+            try:
+                runs = scene_runs(scene_id, image_history(), found)
+            except ValueError:
+                runs = []
+            # The preserved source stays available even when the original is deleted.
+            jobs = [drafts.dispatch('picture-source', {'id': scene_id, 'slot': key})['job']
+                    for key in current['metadata'].get('images', {})]
+            known = {r.get('id') for run in runs for r in run.get('renders', [])}
+            runs += [{**job, 'run_id': 'draft-' + job['id'], 'renders': [job]}
+                     for job in jobs if job and job['id'] not in known]
+            return {'runs': runs, 'rounds': []}
+        if action in ('create-from-image', 'save', 'draft', 'validate'):
+            state_dir().mkdir(parents=True, exist_ok=True)
+            with LOCK, (state_dir() / 'write.lock').open('a') as lock:
+                fcntl.flock(lock, fcntl.LOCK_EX)
+                result = drafts.dispatch(action, body)
+                STATUS_CACHE.clear()
+                return result
+        return drafts.dispatch(action, body)
     if action == 'authoring':
         return authoring_catalog()
     if action == 'status':
@@ -410,6 +498,7 @@ def dispatch(action, body):
     if action == 'catalog':
         result = source({'action': 'catalog'})
         result['scenes'] = [label(s) for s in result['scenes']]
+        result['scenes'] += studio_drafts().rows()
         return result
     if action == 'read':
         result = source({'action': 'read', 'id': scene_id})
@@ -474,7 +563,7 @@ def dispatch(action, body):
 # What the composer may ask the image service (tools/imagegen/server.py): its own reads, and the writes the original
 # dashboard makes (generate, ratings, delete and restore, trash, blocks with their versions).
 _ID = r'[A-Za-z0-9_.-]+'
-IMAGE_READS = re.compile(r'/api/(presets|jobs|state|history|portraits|mode|loras|controls|trash|models/files|preset/' + _ID + '/' + _ID
+IMAGE_READS = re.compile(r'/api/(presets|jobs|state|history|portraits|mode|loras|controls|trash|models/files|render/' + _ID + '|preset/' + _ID + '/' + _ID
                          + '|tuning/' + _ID + '/' + _ID + r')|/(thumb|out|priv/portraits|repo|trashthumb|agentsrc)/.+')
 IMAGE_WRITES = re.compile(r'/api/(generate|cancel|trash/empty|render/' + _ID + '(/delete|/restore)?|run/' + _ID + '/delete|preset/'
                           + _ID + '/' + _ID + '(/create|/restore|/note|/archive|/private)?)')
@@ -503,7 +592,7 @@ def image_proxy(handler, suffix, body=None):
     except urllib.error.URLError:
         handler._json(503, {'error': 'Image generation is offline. Start tools/imagegen/run.sh, then retry.'})
 
-is_public = lambda scene_id: str(scene_id).startswith('public:')
+is_public = lambda scene_id: str(scene_id).startswith('public:') or (studio.is_studio(scene_id) and scene_id.startswith('studio:public:'))
 
 def public_only(action, body):
     """Outside private mode: does this request touch public scenes only? A comment answered by its id is checked
@@ -513,6 +602,9 @@ def public_only(action, body):
     if action == 'comments':
         return all(is_public(x) for x in body.get('ids', '').split(',') if x)
     if action == 'comment' and body.get('comment'):
+        if str(body['comment']).startswith('studio-comment-'):
+            return any(c['id'] == body['comment'] and is_public(c['scene'])
+                       for c in studio_drafts().comments({'action': 'list'})['comments'])
         owner = next((c['scene'] for c in comments({'action': 'list'}).get('comments', []) if c['id'] == body['comment']), '')
         return is_public(owner)
     return True
@@ -559,18 +651,30 @@ def handle(handler):
             suffix = '/' + action[6:] + ('?' + url.query if url.query else '')
             image_proxy(handler, suffix, body if handler.command == 'POST' else None)
         else:
-            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'map', 'pictures', 'picture-source', 'comments', 'status')):
+            if (handler.command == 'GET') != (action in ('catalog', 'read', 'history', 'authoring', 'map', 'pictures', 'picture-source', 'draft-picture', 'comments', 'status')):
                 raise ValueError('Unsupported request method')
             # Outside private mode (tools/review_server.py, /private) only public scenes are read or written
             if callable(mode) and not mode():
                 if not public_only(action, body):
                     handler._json(403, {'error': 'Private scenes open in private mode: http://127.0.0.1:8771/private'})
                     return True
+            if action == 'draft-picture':
+                content, mime = studio_drafts().picture(body)
+                handler.send_response(200)
+                handler.send_header('Content-Type', mime)
+                handler.send_header('Cache-Control', 'no-store')
+                handler.send_header('Content-Length', str(len(content)))
+                handler.end_headers()
+                handler.wfile.write(content)
+                return True
+            if callable(mode) and not mode():
                 handler._json(200, public_view(action, dispatch(action, body)))
                 return True
             handler._json(200, dispatch(action, body))
     except CheckFailed as e:
         handler._json(422, {'error': str(e), 'problems': e.problems})
+    except PermissionError as e:
+        handler._json(403, {'error': str(e)})
     except (ValueError, OSError, subprocess.SubprocessError) as e:
         handler._json(409 if str(e).startswith('CONFLICT:') else 400, {'error': str(e)})
     return True

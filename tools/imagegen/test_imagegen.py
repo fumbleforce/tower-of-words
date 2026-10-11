@@ -172,5 +172,97 @@ class Verdict(unittest.TestCase):
         self.assertIsNone(verdict.verdict('#99', True, 'x'))
 
 
+class CreateFromImage(unittest.TestCase):
+    def setUp(self):
+        reset()
+        from pathlib import Path
+        self.picture = Path(store.OUTPUTS) / 'fixture.png'
+        self.picture.parent.mkdir(parents=True, exist_ok=True)
+        self.picture.write_bytes(b'fixture image bytes')
+        self.row = dict(id='selected', run_id='run', status='done', file='fixture.png', rating='safe', seed=123,
+                        positive='A person reading', negative='watermark', compose={'scene': 'reading'})
+        store.log_append(self.row)
+        self.srv = ThreadingHTTPServer(('127.0.0.1', 0), server.H)
+        threading.Thread(target=self.srv.serve_forever, daemon=True).start()
+        self.addCleanup(self.srv.server_close)
+        self.addCleanup(self.srv.shutdown)
+        self.base = f'http://127.0.0.1:{self.srv.server_port}'
+
+    def test_lookup_and_shared_routes_use_the_same_record(self):
+        for prefix in ('', '/api/subplots/image'):
+            row = json.load(urllib.request.urlopen(self.base + prefix + '/api/render/selected'))
+            self.assertEqual(row['seed'], 123)
+            self.assertEqual(row['compose'], {'scene': 'reading'})
+            self.assertFalse(row['private'])
+        module = urllib.request.urlopen(self.base + '/tools/subplots/web/images.js').read()
+        self.assertIn(b'installImages', module)
+
+    def test_character_keeps_its_own_portrait_and_unique_versioned_preset(self):
+        from pathlib import Path
+        body = {'imageId': 'selected', 'data': {'name': 'Fixture reader', 'look': 'dark curly hair', 'outfit': 'blue coat'}}
+        a = server.image_actions.create_character(body)
+        b = server.image_actions.create_character(body)
+        self.assertNotEqual(a['id'], b['id'])
+        data = a['versions'][0]['data']
+        self.assertEqual(data['sourceImage']['id'], 'selected')
+        self.assertEqual(data['look'], 'dark curly hair')
+        self.assertEqual(len(a['versions']), 1)
+        self.picture.unlink()
+        portrait = Path(store.PORTRAITS) / data['portrait'].split('/')[-1]
+        self.assertEqual(portrait.read_bytes(), b'fixture image bytes')
+
+    def test_private_selection_cannot_be_downgraded_or_seen_in_public_mode(self):
+        with patch.object(server.image_actions.privacy, 'is_private_render', return_value=True):
+            with self.assertRaisesRegex(ValueError, 'private mode'):
+                server.image_actions.selected_image('selected')
+            made = server.image_actions.create_character({'imageId': 'selected', 'private': False,
+                'data': {'name': 'Private fixture', 'look': 'curly hair'}}, private=True)
+        self.assertTrue(made['private'])
+        name = made['versions'][0]['data']['portrait'].split('/')[-1]
+        self.assertFalse(server.image_actions.portrait_visible(name))
+        self.assertTrue(server.image_actions.portrait_visible(name, private=True))
+        with self.assertRaises(urllib.error.HTTPError) as error:
+            urllib.request.urlopen(self.base + '/api/subplots/image/priv/portraits/' + name)
+        self.assertEqual(error.exception.code, 404)
+
+    def test_missing_deleted_and_path_escape_images_are_refused(self):
+        for changes in ({'deleted': True}, {'file': '../fixture.png'}, {'file': 'missing.png'}):
+            with patch.object(store, 'log_read', return_value=[{**self.row, **changes}]):
+                with self.assertRaises(ValueError):
+                    server.image_actions.selected_image('selected')
+        with self.assertRaises(ValueError):
+            server.image_actions.selected_image('../../private')
+        self.assertFalse(server.image_actions.portrait_visible('../config.json'))
+
+    def test_creation_rejects_foreign_origin_and_leaves_no_preset(self):
+        body = json.dumps({'imageId': 'selected', 'data': {'name': 'Do not create', 'look': 'hair'}}).encode()
+        request = urllib.request.Request(self.base + '/api/subplots/image/api/character-from-image', body,
+                                        {'Content-Type': 'application/json', 'Origin': 'https://example.invalid'})
+        with self.assertRaises(urllib.error.HTTPError) as error:
+            urllib.request.urlopen(request)
+        self.assertEqual(error.exception.code, 403)
+        self.assertIsNone(store.load('character', 'do-not-create'))
+
+    def test_saved_draft_picture_is_an_authorized_durable_img2img_source(self):
+        import hashlib
+        import io
+        raw = b'\x89PNG\r\n\x1a\nfixture'
+        asset = hashlib.sha256(raw).hexdigest()
+        reference = '/api/subplots/draft-picture?' + urllib.parse.urlencode({'id': 'studio:public:' + 'a' * 32, 'asset': asset})
+        with patch.object(server.image_actions.urllib.request, 'urlopen', return_value=io.BytesIO(raw)) as download:
+            start = server._clean_start({'image': reference, 'denoise': 0.3}, False)
+        self.assertTrue(start['image'].startswith('island/private/imagegen/portraits/scene-public-'))
+        self.assertEqual(server._picture(start['image'], False), start['image'])
+        self.assertEqual(download.call_args.args[0].host, '127.0.0.1:8771')
+        private_ref = reference.replace('studio%3Apublic', 'studio%3Aprivate')
+        with patch.object(server.image_actions.urllib.request, 'urlopen') as download:
+            with self.assertRaisesRegex(ValueError, 'private mode'):
+                server._picture(private_ref, False)
+            download.assert_not_called()
+        for invalid in ('https://example.invalid' + reference, reference.replace(asset, '../escape')):
+            with self.assertRaises(ValueError):
+                server.image_actions.draft_picture(invalid, True)
+
+
 if __name__ == '__main__':
     unittest.main()

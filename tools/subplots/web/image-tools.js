@@ -10,6 +10,9 @@ import {esc} from './common.js';
 export function pictureUrl(path) {
   if (!path) return '';
   if (path.startsWith('data:')) return path;
+  if (path.startsWith('/api/subplots/draft-picture?')) return path;
+  const portrait = 'island/private/imagegen/portraits/';
+  if (path.startsWith(portrait)) return '/api/subplots/image/priv/portraits/' + path.slice(portrait.length).split('/').map(encodeURIComponent).join('/');
   const out = 'island/private/imagegen/outputs/';
   if (path.startsWith(out)) return '/api/subplots/image/out/' + path.slice(out.length).split('/').map(encodeURIComponent).join('/');
   const masks = 'island/private/imagegen/masks/';
