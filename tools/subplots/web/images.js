@@ -240,7 +240,7 @@ export function installImages(getScene, changed) {
     const place = placeState(c);
     const name = (kind, id) => preset(kind, id)?.data.name || id;
     const progress = place.job ? `Making a picture of the place${place.job.status === 'running' ? ', ' + Math.round(100 * (place.job.progress || 0)) + '%' : ', queued'}.` : '';
-    const again = place.setting ? `<button type="button" class="small" data-preview-place>${place.exact ? 'Preview again' : 'Preview this place'}</button>` : '';
+    const again = place.setting ? `<button type="button" class="small" data-preview-place ${presets ? '' : 'disabled'}>${place.exact ? 'Preview again' : 'Preview this place'}</button>` : '';
     const empty = place.url
       ? `<figure class="place-preview"><img class="selected-image" src="${esc(place.url)}" alt="The place: ${esc(name('location', place.setting))}"><figcaption><span>Place preview: ${esc([name('location', place.setting), place.exact && place.light ? name('light', place.light) : ''].filter(Boolean).join(', '))}${place.exact ? '' : ' (its example picture)'}. ${esc(why)} Generate to make the shot.</span>${progress ? `<span class="hint">${esc(progress)}</span>` : again}</figcaption></figure>`
       : `<div class="image-empty"><p>${esc(why || 'Choose a shot in the storyboard to replace its image.')} ${place.setting ? (progress || 'Preview its place to see the setting and light before you generate the shot.') : 'Choose a setting on the left, then preview the place here before you generate the shot.'}</p>${progress ? '' : again}</div>`;

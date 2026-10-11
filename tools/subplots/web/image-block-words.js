@@ -3,7 +3,7 @@ import {blockText} from '../../imagegen/web/blocks.js';
 import {esc} from './common.js';
 
 export function blockData(c, presets, kind, id) {
-  const data = presets[kind]?.find(p => p.id === id)?.data || {};
+  const data = presets?.[kind]?.find(p => p.id === id)?.data || {};
   return {...data, ...c.blockOverrides?.[kind]?.[id || '']};
 }
 export function directionText(c, presets, kind, value) {
