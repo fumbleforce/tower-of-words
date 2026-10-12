@@ -33,7 +33,7 @@ let drift = 0;
 // in the page: survey the place (stored null), or re-test stored points
 const survey = async ([STEP, MARGIN, stored, strict, solidModule]) => {
   const THREE = await import('three');
-  const { perchSolidHit, perchWaterHit } = await import(solidModule);
+  const { perchRayHit, perchWaterHit } = await import(solidModule);
   const g = globalThis.__game,
     P = g.place,
     nav = P.nav;
@@ -46,7 +46,6 @@ const survey = async ([STEP, MARGIN, stored, strict, solidModule]) => {
     ...Object.values(P.extras || {}).map(a => a?.root),
     ...(P.crowd || []).map(a => a?.root),
   ].filter(Boolean));
-  const solid = h => perchSolidHit(h, actors);
   const rc = new THREE.Raycaster();
   const down = new THREE.Vector3(0, -1, 0),
     v = new THREE.Vector3(),
@@ -56,7 +55,7 @@ const survey = async ([STEP, MARGIN, stored, strict, solidModule]) => {
     v.set(x, 60, z);
     P.space.localToWorld(v);
     rc.set(v, down);
-    const h = rc.intersectObject(P.scene, true).find(solid);
+    const h = perchRayHit(rc.intersectObject(P.scene, true), actors);
     if (!h) return null;
     const p = P.space.worldToLocal(h.point.clone());
     n.copy(h.face.normal).transformDirection(h.object.matrixWorld);
@@ -77,7 +76,7 @@ const survey = async ([STEP, MARGIN, stored, strict, solidModule]) => {
     const walk = nav.free(x, z, 0.12);
     if (walk && h.y > -0.05 && h.y < 0.5) return 'ground';
     if (walk) return null;
-    if (h.y < -0.08) return h.b > h.r ? 'water' : null;
+    if (h.y < -0.08) return null;
     const green = h.g > h.r * 1.08 && h.g > h.b * 1.05;
     if (green) return h.y < 0.45 ? 'green' : h.y < 2.4 ? 'hedge' : 'tree';
     if (h.y >= 0.35 && h.y <= 2.4) return 'low';

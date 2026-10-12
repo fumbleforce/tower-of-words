@@ -270,7 +270,10 @@ export function* skylineSteps(
     toMesh(gb, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95 }), 'skyline:ground'),
     { noLook: true },
   );
-  if (ground) ground.geometry.userData.traversalSkipFaces = waterFaces;
+  if (ground) {
+    ground.geometry.userData.traversalSkipFaces = waterFaces;
+    ground.geometry.userData.seaSurfaceFaces = waterFaces;
+  }
   const lit = put(toMesh(litAll, litMat, 'skyline:lit'), { recv: false });
   if (lit) lit.visible = !!evening;
   const allTris = [...wallsNear.values(), roofNear, winNear, bands, farB, gb, litAll].reduce((s, b) => s + tris(b), 0);

@@ -202,7 +202,10 @@ export function* quaySteps(pv, p, water) {
   // the harbour's water, round the chunk
   const [cx, cz] = [-80, -60],
     R = 150;
-  water.geo(SEA, new THREE.PlaneGeometry(2 * R, 2 * R).rotateX(-Math.PI / 2).translate(cx, SEA_Y, cz), NO_CAST);
+  water.geo(SEA, new THREE.PlaneGeometry(2 * R, 2 * R).rotateX(-Math.PI / 2).translate(cx, SEA_Y, cz), {
+    ...NO_CAST,
+    opts: { userData: { seaSurface: true } },
+  });
   yield* quays(p);
   yield* ground(pv, p);
 }

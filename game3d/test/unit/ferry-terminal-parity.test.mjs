@@ -71,7 +71,13 @@ test('harbour details preserve original ship, water and paving construction', ()
     digest(original.ship, original.glass, original.lit, original.board),
     '275c9f69f65be42cf7b0374d90337656c43bc1d939bfe616db84553245564d0c',
   );
-  assert.equal(digest(original.water), '390b7143034761676192bd7993c8868004a83322ea703bcdd46cd59c0d335695');
+  const waterAppearance = original.water.map((row) => {
+    const primitive = JSON.parse(row);
+    assert.deepEqual(primitive[2].opts, { userData: { seaSurface: true } });
+    delete primitive[2].opts;
+    return JSON.stringify(primitive);
+  });
+  assert.equal(digest(waterAppearance), '390b7143034761676192bd7993c8868004a83322ea703bcdd46cd59c0d335695');
   assert.equal(digest(original.paving), '591a05f98328ed1173e5caec8067ded1190d186c91830fd9cee0801dac861498');
 });
 
