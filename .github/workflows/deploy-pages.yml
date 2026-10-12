@@ -57,11 +57,18 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
+          cache: npm
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      # the build's own tools (tools/release/flavor.mjs needs esbuild); no browser download
+      - name: Install npm packages
+        run: npm ci --no-audit --no-fund
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
 
       - name: Install Python packages
         run: pip install pillow pyyaml
@@ -71,6 +78,9 @@ jobs:
 
       - name: Build and push gh-pages
         run: |
+          # tools/check/secrets.sh (the site's secret scan) keeps its temp files in /tmp/claude-1000, which a dev
+          # machine running Claude Code has and a runner doesn't
+          mkdir -p /tmp/claude-1000
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           sh game3d/tools/deploy-pages.sh --push
