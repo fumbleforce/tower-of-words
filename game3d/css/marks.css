@@ -162,6 +162,7 @@ body.phone #pinTip { max-width: 86vw; padding: 7px 12px; border-radius: 10px; fo
 #marks .mark .pin { -webkit-touch-callout: none; touch-action: manipulation; }
 
 /* A usable seat names its action in the existing pin so its pose reads even from overhead. */
+#marks .mark.pin-text { --kx: 45px; }
 #marks .mark.pin-text .pin {
   width: max-content; min-width: 36px; padding: 0 8px; border-radius: 14px;
   left: 0; transform: translateX(-50%); font: 600 12px/1 var(--font); white-space: nowrap;
