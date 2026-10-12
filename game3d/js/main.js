@@ -390,14 +390,14 @@ function step(dt, drawn) {
     holdNudge();
   }
   steer.update(dt);
-  game.jump.update(dt); // in the air, or landing (movement/jump.js)
-  if (game.walker && !mio.seated && !mio.scripted)
-    moving = game.walker.update(playerMovementDt(game, dt, HURRY), place.camera);
+  game.jump.update(dt);
+  const moveDt = playerMovementDt(game, dt, HURRY);
+  if (game.walker && !mio.seated && !mio.scripted) moving = game.walker.update(moveDt, place.camera);
   if (!mio.seated && !mio.scripted && !mio._walk) {
     mio.setState(moving ? 'walk' : 'idle');
     mio.setGait?.(game.walker.gait.v, game.walker.gait); // .run
   }
-  mio.update(dt * game.jump.animRate, 1.25); // in the air the stride holds
+  mio.update((moving ? moveDt : dt) * game.jump.animRate, 1.25);
   if (game.mioNpc.root.visible) game.mioNpc.update(dt, 1.25);
   game.stepTweens(dt);
   place.update(dt, game.t);
@@ -407,7 +407,6 @@ function step(dt, drawn) {
   followCamera.afterStep(drawn);
   window.__gaitCheck?.sample();
   if (!game.saveEnabled) return;
-  // nearest usable thing, the Say target and near: triggers (gameplay/targeting.js); then the zones
   let { near, st } = scanTargets(game, nearSet);
   const mp = mio.root.position;
   stepZones(game, zoneSet);
