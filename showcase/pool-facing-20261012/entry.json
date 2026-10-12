@@ -1,0 +1,29 @@
+{
+  "title": "Walking direction stays correct near the pool",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "Preparing and changing swimwear preserves the character’s facing direction.",
+  "commit": "fa1b3aba5",
+  "result": [
+    "dressed",
+    "swimwear"
+  ],
+  "images": [
+    {
+      "id": "dressed",
+      "image": "game3d/shots/pool-facing-529/eric-1366/turns-12.png",
+      "caption": "Walking after repeated turns and outfit changes."
+    },
+    {
+      "id": "swimwear",
+      "image": "game3d/shots/pool-facing-529/eric-1366/turns-16.png",
+      "caption": "The same turn in swimwear."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

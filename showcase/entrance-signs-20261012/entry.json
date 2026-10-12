@@ -1,0 +1,23 @@
+{
+  "title": "Entrance names above the canopies",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "The English entrance names remain visible when you walk up to the buildings.",
+  "commit": "1c0d911f5",
+  "result": [
+    "foods"
+  ],
+  "images": [
+    {
+      "id": "foods",
+      "image": "game3d/shots/entrance-sign-531/after/1366-evening-user-foods.png",
+      "caption": "Amakawa Foods from the reported approach."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

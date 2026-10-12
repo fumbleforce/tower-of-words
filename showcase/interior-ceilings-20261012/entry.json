@@ -1,0 +1,35 @@
+{
+  "title": "Room for the perspective camera",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "Higher ceilings and complete upper walls give the perspective camera room inside, while overhead views remain open.",
+  "commit": "8c9a4a579",
+  "result": [
+    "bakery",
+    "commons",
+    "pool"
+  ],
+  "images": [
+    {
+      "id": "bakery",
+      "image": "game3d/shots/interior-clearance-522/1366-bakery-0-follow-1.png",
+      "caption": "Bakery interior."
+    },
+    {
+      "id": "commons",
+      "image": "game3d/shots/interior-clearance-522/1366-dorm_commons-0-overview.png",
+      "caption": "The overhead commons view remains open."
+    },
+    {
+      "id": "pool",
+      "image": "game3d/shots/interior-clearance-522/1366-pool-0-follow-1.png",
+      "caption": "The pool changing pavilion."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

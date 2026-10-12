@@ -1,0 +1,35 @@
+{
+  "title": "Connected forecourt trees",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "Tree forks are joined, and the north-bed roots sit inside the planting instead of reaching onto the curb.",
+  "commit": "5662347d5",
+  "result": [
+    "forks",
+    "roots",
+    "phone"
+  ],
+  "images": [
+    {
+      "id": "forks",
+      "image": "game3d/shots/forecourt-trees-523/1366/user-angle.png",
+      "caption": "The repaired trees from the reported side."
+    },
+    {
+      "id": "roots",
+      "image": "game3d/shots/forecourt-trees-523/1366/roots-curb.png",
+      "caption": "Roots contained behind the bench and curb."
+    },
+    {
+      "id": "phone",
+      "image": "game3d/shots/forecourt-trees-523/390/game.png",
+      "caption": "The forecourt planting on phone."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "title": "Clearer travel blocks and working club slips",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "The map names the action blocking travel and offers Return to game. Club slips respond and show Joined with the meeting details.",
+  "commit": "42e361623",
+  "result": [
+    "map",
+    "joined"
+  ],
+  "images": [
+    {
+      "id": "map",
+      "image": "game3d/shots/travel-club-527/390/board-map.png",
+      "caption": "The map explains that the notice board is still open."
+    },
+    {
+      "id": "joined",
+      "image": "game3d/shots/travel-club-527/1366/joined.png",
+      "caption": "Taking a swimming-club slip confirms membership and meeting details."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

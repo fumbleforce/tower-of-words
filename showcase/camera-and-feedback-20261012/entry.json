@@ -1,0 +1,29 @@
+{
+  "title": "Camera reset and feedback screenshots",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "Reset view appears after you change the camera. Feedback attachments now include the world and minimap, including while paused.",
+  "commit": "1c6bccd05",
+  "result": [
+    "gameplay",
+    "attachment"
+  ],
+  "images": [
+    {
+      "id": "gameplay",
+      "image": "game3d/shots/camera-capture-517/1366-gameplay.png",
+      "caption": "Normal play without the idle Camera box."
+    },
+    {
+      "id": "attachment",
+      "image": "game3d/shots/camera-capture-517/390-30-paused-attachment.png",
+      "caption": "An actual paused-game feedback attachment on phone."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

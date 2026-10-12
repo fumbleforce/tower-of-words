@@ -1,0 +1,29 @@
+{
+  "title": "A finished station platform",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "The platform has a complete canopy, walkway and surrounding buildings, with camera clearance outside the train.",
+  "commit": "cf1e7b6ff",
+  "result": [
+    "west",
+    "east"
+  ],
+  "images": [
+    {
+      "id": "west",
+      "image": "game3d/shots/platform-526/final/1366-west.png",
+      "caption": "Covered platform toward the station."
+    },
+    {
+      "id": "east",
+      "image": "game3d/shots/platform-526/final/1366-east.png",
+      "caption": "Platform and campus buildings from the other direction."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

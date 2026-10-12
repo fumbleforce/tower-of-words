@@ -1,0 +1,29 @@
+{
+  "title": "Crowds talk and react",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "People respond when you jump nearby or block their path. You can talk to them and practise everyday words.",
+  "commit": "99b7c0574",
+  "result": [
+    "reaction",
+    "conversation"
+  ],
+  "images": [
+    {
+      "id": "reaction",
+      "image": "game3d/shots/crowd-social-518/landed-main/390/jump-reaction.png",
+      "caption": "A nearby pedestrian responds to a jump."
+    },
+    {
+      "id": "conversation",
+      "image": "game3d/shots/crowd-social-518/landed-main/390/conversation.png",
+      "caption": "A short conversation offers optional word practice."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

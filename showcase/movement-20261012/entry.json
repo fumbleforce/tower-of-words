@@ -1,0 +1,29 @@
+{
+  "title": "Jumping and walking across the town",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "Jump over curbs, onto benches and down to the beach. The third consecutive jump becomes a somersault, and walking stays at normal speed after entering an area.",
+  "commit": "99b7c0574",
+  "result": [
+    "flip",
+    "landing"
+  ],
+  "images": [
+    {
+      "id": "flip",
+      "image": "game3d/shots/jump-animation-519/landed-main/flip-close/3-inverted.png",
+      "caption": "The third jump, captured halfway through its somersault."
+    },
+    {
+      "id": "landing",
+      "image": "game3d/shots/jump-animation-519/landed-main/flip-close/3-landing.png",
+      "caption": "Landing upright after the somersault."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}
