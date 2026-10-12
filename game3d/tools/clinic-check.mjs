@@ -5,7 +5,7 @@
 // Q='&chibi=1' adds to the URL; STUB_MIO=1 lets a checkout without the Meshy bodies boot (below).
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
 import { waitForGame } from '../test/support/wait-ready.mjs';
 const width = +(process.argv[2] || 1366),
   height = width < 700 ? 844 : 860,
@@ -17,6 +17,8 @@ await withBrowserJob(
   'clinic-check-' + width,
   async (browser) => {
     const page = await browser.newPage({ viewport: { width, height }, isMobile: phone, hasTouch: phone });
+    await page.route('**/api/plugins', (route) => route.fulfill({ json: [] }));
+    await page.route('**/island/private/**', (route) => route.abort());
     const errors = [],
       lines = [];
     page.on('pageerror', (e) => errors.push(e.message));
@@ -70,9 +72,6 @@ await withBrowserJob(
         )
       )
         await menu.click();
-      // with software GL a frame can take longer than a click: then E, on the nearest target
-      else if (!(await page.evaluate(() => globalThis.__game.busy || globalThis.__game.player.seated)))
-        await page.keyboard.press('KeyE');
     }
     // click through lines, choosing the first option that matches; a screenshot of the first line of each speaker
     async function talk(prefer = [], name = '') {
@@ -188,5 +187,5 @@ await withBrowserJob(
     assert.deepEqual(errors, []);
     console.log('PASS clinic', width);
   },
-  { timeoutMs: 1500000 },
+  gpuWaitOptions(900, 295000),
 );

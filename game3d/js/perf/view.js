@@ -5,6 +5,7 @@
 import * as THREE from 'three';
 import { Q } from '../engine.js';
 import { frameCap } from '../settings.js';
+import { createFramePacer } from './frame-pacer.js';
 import { makePost, GRADE } from '../post.js';
 import { styleGrade, currentStyle } from '../style/index.js';
 import { liftPeople } from '../look/char-lift.js';
@@ -89,18 +90,15 @@ export function createView(game, renderer, canvas, save) {
   // shot moves only by a slow sway, so it draws at most 30 a second (Jørgen, 2026-10-05: an RTX 3080 at about 80 %
   // load with only the title open), and a paused world, which doesn't move, at most 20. A frame counts as due a few
   // ms early so a 60 Hz screen under a 30 cap draws every other refresh rather than drifting.
-  const SLACK = 3; // ms
-  let cap = frameCap(),
-    lastDue = 0;
+  const pace = createFramePacer();
+  let cap = frameCap();
   function due(now) {
     if (CAP_MODE) return true;
     const paused = game.paused && !game.mapOpen;
     let fps = cap;
     if (document.body.classList.contains('at-title')) fps = fps ? Math.min(fps, 30) : 30;
     if (paused) fps = fps ? Math.min(fps, 20) : 20;
-    if (fps && now - lastDue < 1000 / fps - SLACK) return false;
-    lastDue = now;
-    return true;
+    return pace(now, fps);
   }
   // one-shot callbacks run right after the next frame drawn, while the canvas still holds it (ui/frame-grab.js)
   const drawn = [];
