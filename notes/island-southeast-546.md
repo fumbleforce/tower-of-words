@@ -17,6 +17,14 @@ Local ignored evidence lives in `game3d/shots/island-southeast/` on the main che
 
 ## Checks
 
-Full CPU `npm run check` passes after the spot catalog, structural snapshot and coastal-sea/camera changes. The subsequent terrace-bed and approach-pose adjustments pass the focused runtime-consumer and declaration-baseline checks. All 14 desktop walking targets pass within 3.7 cm and bench sit/stand succeeds. The first native jump attempt reaches the stone too late and collides with its face; that attempt is retained in `routes-attempt1/`. A proper running approach is being checked before handoff.
+The environment milestone is `ee36d8721`. Its full staged-snapshot CPU check and native title boot pass. Both whole-day fast tests pass without overrides: phone 73 s and desktop 84 s, with zero movement overlaps or spins.
 
-The first isolated performance attempt was cancelled cleanly when the visual rejection arrived; no numbers from it are claimed. Final performance and both whole-day checks remain required. East-coast perches will be refreshed against the integrated apartment-roof and landscape candidate, so the survey uses the final geometry.
+`routes-final/` passes at both native formats: all 14 walking targets, real bench sit/stand, a held running jump onto the 0.42 m stone, and stable landing. It travels out and back through east lane, sports and commons using their existing trips. All six return landings are on free navigation ground. Sports retains gym and pool entries. Original lookout and shrine path endpoints are exact. No page or public-scope errors occur. The seated images show the sitter facing south toward the sea, with clear foot space between the bench and trough.
+
+Failed jump timing attempts remain in `routes-attempt1/`, `routes-attempt2/` and `routes-jump-attempt3/`. The first reached the stone too late; the second cleared it and coasted beyond; the third stopped before its face. `routes-jump-attempt4/` is the first successful focused native landing at both sizes. The full final route subsequently reproduces it. These are test input adjustments; movement physics and the stones did not change.
+
+`day2-continuity/` passes at both sizes with the existing after-shift flag fixture: Mr. Hamada becomes available at the original telescope, lookout and shrine routes remain connected, and the existing day-2 sports closure remains in force. These are focused continuity checks, separate from a full day-2 story run.
+
+The independent critic and coordinator each inspected all 28 `round3/` images; every screen scores at least 8/10. The critic's initial bench-direction concern is resolved by actual model-coordinate evidence and the native seated proof.
+
+The first isolated performance attempt was cancelled cleanly when the visual rejection arrived; no numbers from it are claimed. The coordinator will measure final combined geometry against the existing budgets. East-coast perches will be refreshed against that same integrated apartment-roof and landscape candidate, so the survey uses final geometry. All text logs are retained under `logs/` alongside the evidence; screenshots remain local and ignored.

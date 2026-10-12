@@ -73,7 +73,10 @@ await withBrowserJob(
               blocked: globalThis.__game.followCamera?.blocked,
               distance: globalThis.__game.followCamera?.distance,
               player: globalThis.__game.player.root.position.toArray(),
-              navFree: globalThis.__game.place.nav.free(globalThis.__game.player.root.position.x, globalThis.__game.player.root.position.z),
+              navFree: globalThis.__game.place.nav.free(
+                globalThis.__game.player.root.position.x,
+                globalThis.__game.player.root.position.z,
+              ),
             }));
             const file = `${width}-${period}-${name}.png`;
             await page.screenshot({ path: `${out}/${file}` });
