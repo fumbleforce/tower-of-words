@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {withBrowserJob,gpuWaitOptions} from '../../tools/lib/browser-job.mjs';
 import {waitForGame} from '../test/support/wait-ready.mjs';
 const baseline=process.argv.includes('--baseline');
-const base='http://127.0.0.1:8771/'+(baseline?'':'.claude/worktrees/codex-hurry-fix-525/')+'game3d';
+const base=baseline?'http://127.0.0.1:8771/game3d':(process.env.BASE_URL||'http://127.0.0.1:8771/game3d');
 await withBrowserJob('hurry-'+(baseline?'baseline':'fixed'),async browser=>{
  const page=await browser.newPage({viewport:{width:1366,height:860}});
  await page.route(/\/private\//,r=>r.abort());await page.route('**/api/plugins',r=>r.fulfill({json:[]}));
