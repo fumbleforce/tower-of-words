@@ -57,11 +57,18 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
+          cache: npm
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      # the build's own tools (tools/release/flavor.mjs needs esbuild); no browser download
+      - name: Install npm packages
+        run: npm ci --no-audit --no-fund
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
 
       - name: Install Python packages
         run: pip install pillow pyyaml
