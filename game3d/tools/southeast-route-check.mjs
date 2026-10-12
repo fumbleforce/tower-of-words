@@ -45,6 +45,49 @@ await withBrowserJob(
           'play',
         );
         await page.waitForFunction(() => globalThis.__done && !globalThis.__game.busy);
+        if (process.env.NAV_ONLY) {
+          const navigation = await page.evaluate(() => {
+            const g = globalThis.__game,
+              P = g.place;
+            const destinations = {
+              row: P.start,
+              onsen: P.things.onsen.spot(),
+              sports: P.things.courts_walk.spot(),
+              commons: P.things.commons.spot(),
+              lookout: P.spots.east_coast_lookout,
+              shrine: P.spots.east_coast_shrine,
+              terrace: [0, 0.7],
+              pergola: P.spots.coast_garden_pergola,
+              lawn: P.spots.coast_garden_lawn,
+              rest: P.spots.coast_garden_rest,
+            };
+            const routes = [];
+            for (const [from, start] of Object.entries(destinations))
+              for (const [to, end] of Object.entries(destinations)) {
+                if (from === to) continue;
+                const began = performance.now(),
+                  path = P.nav.path(...start, ...end);
+                let safe = !!path?.length,
+                  previous = start;
+                for (const point of path || []) {
+                  safe &&= P.nav.clear(previous, point);
+                  previous = point;
+                }
+                routes.push({
+                  from,
+                  to,
+                  safe,
+                  points: path?.length,
+                  exact: JSON.stringify(path?.at(-1)) === JSON.stringify(end),
+                  ms: performance.now() - began,
+                });
+              }
+            return { cell: P.nav.cell, routes };
+          });
+          for (const route of navigation.routes) assert.ok(route.safe && route.exact, JSON.stringify(route));
+          rows.push({ width, navigation });
+          continue;
+        }
         if (process.env.DAY2_ONLY) {
           const day2 = await page.evaluate(async () => {
             const g = globalThis.__game;
@@ -259,5 +302,5 @@ await withBrowserJob(
 fs.writeFileSync(`${out}/report.json`, JSON.stringify({ rows, errors }, null, 2));
 assert.deepEqual(errors, []);
 console.log(
-  `PASS ${process.env.DAY2_ONLY ? 'day2 lookout, Hamada and existing sports closure' : process.env.JUMP_ONLY ? 'focused bench and native jump' : 'southern loops, bench, native jump and both return routes'}: ${out}`,
+  `PASS ${process.env.NAV_ONLY ? 'all original and garden routes in both directions' : process.env.DAY2_ONLY ? 'day2 lookout, Hamada and existing sports closure' : process.env.JUMP_ONLY ? 'focused bench and native jump' : 'southern loops, bench, native jump and both return routes'}: ${out}`,
 );

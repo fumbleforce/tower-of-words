@@ -8,7 +8,6 @@
 // The camera turns: east along the row, north up the coast and to the onsen (places/east-coast.js eases it).
 // Evening: the lamps, the lanterns, the onsen's paper screens and the town's windows light up.
 import * as THREE from 'three';
-import { Nav } from '../movement/navigation.js';
 import { outdoorLight, sunFollow, TOWN } from './town.js';
 import * as LAYOUT from './island-layout.js';
 import { skylineSteps } from './skyline.js';
@@ -26,11 +25,12 @@ import { coastLand } from './island-west.js';
 import { walkSteps, kerbWalks, Z_CUTS } from './east-coast/walk.js';
 import { onsenSteps } from './east-coast/onsen.js';
 import * as P from './east-coast/plan.js';
+import { coastNavigation } from './east-coast/navigation.js';
 import * as C from './dorm-court/cluster-plan.js';
 import { buildNooks } from './outdoor/nooks.js';
 import { bandSteps } from './bands.js';
 
-const { CHUNK, inRect } = P;
+const { CHUNK } = P;
 // the coast from south of the dorms round past the onsen (the layout's line, its east side)
 const EAST_COAST = LAYOUT.COAST.line.filter(([x, z]) => x >= 86 && z < 40);
 
@@ -45,10 +45,7 @@ export function* eastCoastSteps() {
   shadows.follow(...P.IN);
 
   // walkable: the row, the terrace, the walks and the onsen's stone walk (plan.js WALKS), never what stands on them
-  const [bx0, bx1, bz0, bz1] = P.BOUNDS;
-  const nav = new Nav(bx0 - 0.2, bx1 + 0.2, bz0 - 0.2, bz1 + 0.2, 0.12);
-  nav.extra = (x, z) => P.WALKS.some((r) => inRect(x, z, r, -0.02));
-  for (const r of P.FURNITURE) nav.block(...r);
+  const nav = coastNavigation();
 
   // everything of its own is laid in the island frame, in a group moved into the chunk's
   const isl = placeIn(new THREE.Group(), CHUNK);
