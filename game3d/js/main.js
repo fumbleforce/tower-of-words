@@ -13,7 +13,7 @@ import { installMetrics } from './perf/metrics.js';
 import { createView } from './perf/view.js';
 import { guardedLoop } from './perf/gl-guard.js';
 import { softSeparate, frameDt } from './move.js';
-import { movementClockScale } from './movement/clock-scale.js';
+import { movementClockScale, playerMovementDt } from './movement/clock-scale.js';
 import { scanTargets } from './gameplay/targeting.js';
 import { installSteer } from './movement/steer.js';
 import { installJump } from './movement/jump-input.js';
@@ -391,7 +391,8 @@ function step(dt, drawn) {
   }
   steer.update(dt);
   game.jump.update(dt); // in the air, or landing (movement/jump.js)
-  if (game.walker && !mio.seated && !mio.scripted) moving = game.walker.update(dt, place.camera);
+  if (game.walker && !mio.seated && !mio.scripted)
+    moving = game.walker.update(playerMovementDt(game, dt, HURRY), place.camera);
   if (!mio.seated && !mio.scripted && !mio._walk) {
     mio.setState(moving ? 'walk' : 'idle');
     mio.setGait?.(game.walker.gait.v, game.walker.gait); // .run
@@ -410,7 +411,6 @@ function step(dt, drawn) {
   let { near, st } = scanTargets(game, nearSet);
   const mp = mio.root.position;
   stepZones(game, zoneSet);
-  // a target the player chose (Tab / Next in the action menu) holds while it's usable and within 1.7 m
   const lk = game.targetLock;
   if (lk) {
     const s = lk.spot && lk.spot();
@@ -418,7 +418,6 @@ function step(dt, drawn) {
     else near = lk;
   }
   game.near = near;
-  // the target in the action menu is the one Say speaks to, when a word does something there (the menu's Say row)
   const nearSays = !!(near && !game.busy && game.saysSomething(near));
   if (nearSays) st = near;
   game.sayTarget = st;

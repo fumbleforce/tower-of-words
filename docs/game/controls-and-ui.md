@@ -163,3 +163,5 @@ Jørgen, 2026-10-05: "I want a minimap I can click, giving me a full interactive
 - The UI scales with the screen: 1 at 1366 × 860 and up to 2 on large screens (QHD and 4K get a bigger UI by default), times the interface size setting. Phones keep 1.
 - The phone keyboard (Jørgen, 2026-10-02, Galaxy S23 in Chrome: "On phone the full panel doesn't show"): while the word field has focus and the keyboard is up, the whole typing prompt (the line, the word card, the field, the mic, the hint and "Never mind") sits just above the keyboard and the browser bar, a little tighter, and the portraits step out until the keyboard closes. The 3D view keeps its size. game3d/tools/keyboard-fit.mjs checks it with the visible area cut to keyboard heights at phone sizes.
 - The game targets desktop first; Android comes later.
+
+Holding movement while an area finishes loading uses the ordinary walking speed, even when Space hurried the preceding travel animation. Hurry accelerates scripted travel, not the player's unlocked walker during the remaining crossfade.
