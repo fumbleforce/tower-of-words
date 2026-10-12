@@ -1,7 +1,7 @@
 // Physical support and clearance for the player. The navigation grid remains the route planner; it is not a
 // wall. Cast against the original static scene meshes, before batching, in the place's coordinate system.
 import * as THREE from 'three';
-import { capsuleHits } from './capsule.js';
+import { capsuleHits, supportHit } from './capsule.js';
 
 const EPS = 0.025;
 
@@ -40,7 +40,7 @@ export function createTraversal(place, excluded = []) {
   }
   function present(object) {
     for (let p = object; p; p = p.parent) {
-      if (skip.has(p)) return false;
+      if (skip.has(p) || p.userData.noTraversal || p.userData.creature) return false;
       if (!p.visible && !p.userData.occluder && !p.userData.followEnclosure) return false;
       if (roots.includes(p)) return true;
     }
@@ -62,7 +62,7 @@ export function createTraversal(place, excluded = []) {
     )
       return;
     if (!(object.layers.mask & (1 | (1 << 31)))) return;
-    for (let p = object; p; p = p.parent) if (skip.has(p) || p.userData.noTraversal) return;
+    for (let p = object; p; p = p.parent) if (skip.has(p) || p.userData.noTraversal || p.userData.creature) return;
     const materials = Array.isArray(object.material) ? object.material : [object.material];
     const glass = materials.every(
       (m) => m?.isMeshStandardMaterial && m.transparent && m.roughness < 0.6 && !m.emissive?.getHex(),
@@ -143,8 +143,6 @@ export function createTraversal(place, excluded = []) {
     }
   }
   const ray = new THREE.Raycaster();
-  const normal = new THREE.Vector3();
-  const normalMatrix = new THREE.Matrix3();
   function hits(x, y, z, direction, distance, radius = 0) {
     ray.set(new THREE.Vector3(x, y, z), direction);
     ray.far = distance;
@@ -172,21 +170,15 @@ export function createTraversal(place, excluded = []) {
         b.max.y >= Math.min(y, y + direction.y * distance) - EPS &&
         b.min.y <= Math.max(y, y + direction.y * distance) + EPS,
     );
-    return ray.intersectObjects(
-      candidates.map((e) => e.mesh),
-      false,
-    );
+    return candidates
+      .map(({ mesh }) => supportHit(mesh, ray, (point) => !voids.some((v) => v.containsPoint(point))))
+      .filter(Boolean)
+      .sort((a, b) => a.distance - b.distance);
   }
   function supportPoint(x, z, ceiling, depth = 8) {
-    const found = hits(x, ceiling, z, new THREE.Vector3(0, -1, 0), depth);
-    for (const hit of found) {
-      if (voids.some((v) => v.containsPoint(hit.point))) continue;
-      if (hit.faceIndex < (hit.object.geometry.userData.traversalSkipFaces || 0)) continue;
-      normal.copy(hit.face.normal).applyNormalMatrix(normalMatrix.getNormalMatrix(hit.object.matrixWorld));
-      if (normal.y > 0.65) return hit.point.y;
-    }
-    return null;
+    return hits(x, ceiling, z, new THREE.Vector3(0, -1, 0), depth)[0]?.point.y ?? null;
   }
+
   function support(x, z, ceiling, depth = 8) {
     let height = supportPoint(x, z, ceiling, depth);
     if (height !== null && ceiling - height < 0.3) return height;
@@ -201,13 +193,18 @@ export function createTraversal(place, excluded = []) {
     }
     return height;
   }
-  function free(x, z, ox, oz, feet, scale, airborne) {
+  function free(x, z, ox, oz, feet, scale, airborne, previousFeet = null) {
     const radius = 0.16 * scale,
       step = (airborne ? 0.025 : 0.21) * scale;
     const n = Math.max(1, Math.ceil(Math.hypot(x - ox, z - oz) / (radius * 0.5)));
     for (let i = 1; i <= n; i++) {
       const cx = ox + ((x - ox) * i) / n,
         cz = oz + ((z - oz) * i) / n;
+      const px = ox + ((x - ox) * (i - 1)) / n,
+        pz = oz + ((z - oz) * (i - 1)) / n;
+      const beforeFeet = previousFeet ?? feet;
+      const previousBottom = new THREE.Vector3(px, beforeFeet + step + radius, pz);
+      const previousTop = new THREE.Vector3(px, beforeFeet + 1.2 * scale - radius, pz);
       const bottom = new THREE.Vector3(cx, feet + step + radius, cz),
         top = new THREE.Vector3(cx, feet + 1.2 * scale - radius, cz);
       const nearby = new Set(broad);
@@ -225,7 +222,7 @@ export function createTraversal(place, excluded = []) {
           b.min.y > feet + 1.2 * scale
         )
           continue;
-        if (capsuleHits(mesh, bottom, top, radius)) return false;
+        if (capsuleHits(mesh, bottom, top, radius, previousBottom, previousTop, previousFeet !== null)) return false;
       }
     }
     return true;

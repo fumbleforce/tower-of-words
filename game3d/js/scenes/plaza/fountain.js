@@ -177,6 +177,7 @@ export function fountain(root, x, z, R) {
     emissiveIntensity: 0.35,
   });
   group.add(merged([disc(IN, WATER, 72), disc(1.46, 1.5, 32), disc(0.74, 2.28, 24)], water, { cast: false }));
+  water.userData.noTraversal = true;
   // the curtains falling from the bowls' rims, and the jet on top
   const streaks = streakTexture();
   const fall = new THREE.MeshStandardMaterial({
@@ -188,6 +189,7 @@ export function fountain(root, x, z, R) {
     depthWrite: false,
     side: THREE.DoubleSide,
   });
+  fall.userData.noTraversal = true;
   const curtains = merged(
     [
       new THREE.CylinderGeometry(1.56, 1.72, 1.52 - WATER, 40, 1, true).translate(0, (1.52 + WATER) / 2, 0),
@@ -208,6 +210,7 @@ export function fountain(root, x, z, R) {
     depthWrite: false,
   });
   foam.userData.noInk = true;
+  foam.userData.noTraversal = true;
   const foamMesh = merged(
     [
       new THREE.RingGeometry(1.62, 1.82, 48).rotateX(-Math.PI / 2).translate(0, WATER + 0.005, 0),
@@ -227,6 +230,7 @@ export function fountain(root, x, z, R) {
       depthWrite: false,
     });
     m.userData.noInk = true;
+    m.userData.noTraversal = true;
     const mesh = new THREE.Mesh(new THREE.RingGeometry(1.0, 1.035, 64).rotateX(-Math.PI / 2), m);
     mesh.position.y = WATER + 0.004;
     mesh.name = 'fountain:ripple';

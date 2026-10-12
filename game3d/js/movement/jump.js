@@ -278,6 +278,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
             root.position.y + next,
             k,
             true,
+            root.position.y + s.h,
           )
         )
           s.vy = 0;

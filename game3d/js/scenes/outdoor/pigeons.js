@@ -45,6 +45,7 @@ export function pigeons(root, home, { n = 5, seed = 7 } = {}) {
     m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
     m.castShadow = false;
     m.receiveShadow = false;
+    m.userData.creature = true;
     m.name = 'pigeons'; // named: the static merge (scenes/merge-static.js) leaves it alone
     root.add(m);
     return m;

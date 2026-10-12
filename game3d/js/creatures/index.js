@@ -24,6 +24,7 @@ export function installCreatures(game, place, name) {
   const tier = qualityTier();
   const root = new THREE.Group();
   root.name = 'creatures';
+  root.userData.noTraversal = true;
   root.userData.noBatch = true;
   place.space.add(root);
   const blobs = new Blobs(48);
