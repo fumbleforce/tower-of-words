@@ -4049,6 +4049,270 @@
   "emo": "polite"
  },
  {
+  "key": "oh-w7i589",
+  "speaker": "clinic_nurse",
+  "text": "こんにちは。今日は、どうしましたか？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-os0e3p",
+  "speaker": "eric",
+  "text": "Oh, I’m not ill. I only wanted to see where the clinic was.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-igozj",
+  "speaker": "clinic_nurse",
+  "text": "毎日、やってますよ。夜も。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1uuwdh2",
+  "speaker": "eric",
+  "text": "The board by the counter says every day, and a nurse at night.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "clinic-nurse-hello",
+  "speaker": "clinic_nurse",
+  "text": "こんにちは。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-qfjbc1",
+  "speaker": "clinic_nurse",
+  "text": "頭は、大丈夫ですか？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-nz6vj6",
+  "speaker": "eric",
+  "text": "大丈夫. Thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-19kl7lt",
+  "speaker": "eric",
+  "text": "She’s pointing at my head. It’s fine, thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-5fza4l",
+  "speaker": "clinic_nurse",
+  "text": "あ、起きましたね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "calm"
+ },
+ {
+  "key": "oh-1p2lzfl",
+  "speaker": "clinic_nurse",
+  "text": "大丈夫ですか？どこが痛いですか？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1fd66rq",
+  "speaker": "eric",
+  "text": "頭が……痛いです。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "oh-1l8jten",
+  "speaker": "clinic_nurse",
+  "text": "頭ですね。ちょっと、見せてください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "calm"
+ },
+ {
+  "key": "ln-1bkxngr",
+  "speaker": "eric",
+  "text": "大丈夫。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-c59k2a",
+  "speaker": "eric",
+  "text": "I’m fine. Really.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "oh-13bd6jy",
+  "speaker": "clinic_nurse",
+  "text": "本当に？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "oh-qbiv51",
+  "speaker": "clinic_nurse",
+  "text": "ベランダから、ジャンプ？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ベランダ",
+   "ジャンプ"
+  ],
+  "emo": "dry"
+ },
+ {
+  "key": "oh-sp7xbl",
+  "speaker": "clinic_nurse",
+  "text": "ジャンプ、ですか？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ジャンプ"
+  ],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1gbfa1m",
+  "speaker": "eric",
+  "text": "In my defence, it looked lower from up there.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "oh-1znsqx",
+  "speaker": "clinic_nurse",
+  "text": "ジャンプは、だめです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ジャンプ"
+  ],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1gra3s3",
+  "speaker": "eric",
+  "text": "I caught “jump”, and then something that sounded a lot like no.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "oh-cn9kp1",
+  "speaker": "clinic_nurse",
+  "text": "また、あなたですか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "anata",
+    "あなた"
+   ]
+  ],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "oh-1tot6ap",
+  "speaker": "clinic_nurse",
+  "text": "ジャンプは、だめですよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ジャンプ"
+  ],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-15eyjo0",
+  "speaker": "eric",
+  "text": "Jump, and no. I remember that part.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
   "key": "ferry-staff-01",
   "speaker": "ferry_staff",
   "text": "こんにちは。どうぞ、中で休んでいってください。",
@@ -12041,21 +12305,6 @@
   "emo": "polite"
  },
  {
-  "key": "ln-1bkxngr",
-  "speaker": "eric",
-  "text": "大丈夫。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [
-   [
-    "daijoubu",
-    "大丈夫"
-   ]
-  ],
-  "clear": [],
-  "emo": "warm"
- },
- {
   "key": "ln-jxavey",
   "speaker": "eric",
   "text": "もう一度？",
@@ -16219,6 +16468,116 @@
   "emo": "warm"
  },
  {
+  "key": "ln-os0e3p-carina",
+  "speaker": "carina",
+  "text": "Oh, I’m not ill. I only wanted to see where the clinic was.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1uuwdh2-carina",
+  "speaker": "carina",
+  "text": "The board by the counter says every day, and a nurse at night.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-nz6vj6-carina",
+  "speaker": "carina",
+  "text": "大丈夫. Thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-19kl7lt-carina",
+  "speaker": "carina",
+  "text": "She’s pointing at my head. It’s fine, thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1fd66rq-carina",
+  "speaker": "carina",
+  "text": "頭が……痛いです。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1bkxngr-carina",
+  "speaker": "carina",
+  "text": "大丈夫。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-c59k2a-carina",
+  "speaker": "carina",
+  "text": "I’m fine. Really.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1gbfa1m-carina",
+  "speaker": "carina",
+  "text": "In my defence, it looked lower from up there.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-1gra3s3-carina",
+  "speaker": "carina",
+  "text": "I caught “jump”, and then something that sounded a lot like no.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-15eyjo0-carina",
+  "speaker": "carina",
+  "text": "Jump, and no. I remember that part.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
   "key": "ln-1p21yul-carina",
   "speaker": "carina",
   "text": "Can I sit in here?",
@@ -19221,21 +19580,6 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": [],
-  "emo": "warm"
- },
- {
-  "key": "ln-1bkxngr-carina",
-  "speaker": "carina",
-  "text": "大丈夫。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [
-   [
-    "daijoubu",
-    "大丈夫"
-   ]
-  ],
   "clear": [],
   "emo": "warm"
  },

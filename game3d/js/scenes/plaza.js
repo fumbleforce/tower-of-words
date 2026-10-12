@@ -7,7 +7,7 @@
 // (scenes/outdoor/): the ground in plaza/ground.js, the planting and edges in plaza/green.js, lamps, benches, the
 // notice board and the terrace in plaza/furniture.js, the fountain in plaza/fountain.js, the canteen and the shop
 // street in plaza-buildings.js, the east lane on to the dorm street (backdrop) in plaza/east-lane.js, the back lane
-// behind the canteen with the clinic (backdrop) in plaza/north-lane.js. Everything else
+// behind the canteen with the training centre (backdrop) in plaza/north-lane.js. Everything else
 // comes from the layout through buildSkyline. Palette and light are the forecourt's: the period table's (kit/light/
 // looks.js PLAZA) through the plaza's light rig; after dark the lamps, the lights round the basin, the canteen, the
 // shops and the town's windows light up (each builder's glows).
@@ -55,9 +55,9 @@ const CHUNK = 'plaza';
 export const laneZ = () => LZ;
 const lanePoint = (x) => [x, LZ];
 const laneFace = () => Math.PI / 2; // east
-// the training centre (block_e1, plaza/east-plan.js): its door at the head of the cross walk, north off the lane
-const TRAINING = EAST_BLOCKS.find((k) => k.id === 'block_e1');
-const CROSS_N = [CROSS[0], CROSS[1], TRAINING.rect[3], LZ]; // the cross walk from the lane up to that door
+// the clinic (block_e1, plaza/east-plan.js): its door at the head of the cross walk, north off the lane
+const CLINIC = EAST_BLOCKS.find((k) => k.id === 'block_e1');
+const CROSS_N = [CROSS[0], CROSS[1], CLINIC.rect[3], LZ]; // the cross walk from the lane up to that door
 // and down from the lane to the south walk, which leads east to the dorm street and on to the shop street
 // (scenes/shotengai.js): he walks onto the south walk's first stretch, past which he is on his way there
 const CROSS_S = [CROSS[0], CROSS[1], LZ, SOUTH_WALK[3]];
@@ -81,7 +81,7 @@ export function* plazaSteps() {
   light.placeSun();
 
   // walkable: the circle (never the basin), the lanes, the link, the terrace (through the gap in its wall), the
-  // cross walk up to the training centre's door and down to the south walk's start
+  // cross walk up to the clinic's door and down to the south walk's start
   const nav = new Nav(NAV[0], NAV[1], NAV[2], NAV[3], 0.1);
   const terrace = [TERRACE[0], TERRACE[1], TERRACE[2] + 0.3, TERRACE_S - 0.25];
   const link = [LINK[0], LINK[1], TERRACE_S - 1, LINK[3]];
@@ -122,7 +122,7 @@ export function* plazaSteps() {
   const nooks = buildNooks(NOOKS, root, { p, lights }); // outdoor/nooks.js: props round each nook, its spot named
   for (const r of nooks.blocks) nav.block(...r);
   const east = yield* eastLaneSteps(root, p, lights); // backdrop: the lane on east to the dorm street
-  const north = yield* northLaneSteps(root, lights); // backdrop: the back lane behind the canteen, the clinic
+  const north = yield* northLaneSteps(root, lights); // backdrop: the back lane behind the canteen, the training centre
   p.build(root);
   yield;
   const lit = lights.build(root, { poolY: 0.028 }); // over the circle's stones
@@ -188,9 +188,9 @@ export function* plazaSteps() {
     arriveIn,
     arriveFace: laneFace(),
     dormExit: lanePoint(EAST_X - 0.8),
-    // the training centre's door, and where Eric stands to try it
-    trainingDoor: [TRAINING.at, TRAINING.rect[3]],
-    trainingStep: [TRAINING.at, TRAINING.rect[3] + 0.8],
+    // the clinic's door, and where Eric stands before going in (places/clinic.js, the room behind it)
+    clinicDoor: [CLINIC.at, CLINIC.rect[3]],
+    clinicStep: [CLINIC.at, CLINIC.rect[3] + 0.8],
     dormEdge: lanePoint(EAST_X + 2.2),
     // the south walk east of the cross walk's foot, on the way to the shop street: where he starts down it, and
     // where the walk out ends (the same, walking in); past shopX he is leaving

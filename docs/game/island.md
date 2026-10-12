@@ -18,7 +18,7 @@ Seven districts, all on the town grid, reached on foot or by bike (no cars):
 
 - Arrival and head office, on the west coast: the station, the forecourt, head office and its wing.
 - The office quarter, north of head office: one block for each Amakawa division, along the office street.
-- The plaza, the canteen and the clinic, in the middle.
+- The plaza, the canteen and the training centre, in the middle; the clinic on the east lane.
 - The shop street and the seafront, along the south coast.
 - The east lane and the dorms, in the south-east.
 - Sports and baths, in the north-east: the gym, the pool, the courts and the onsen.
@@ -64,15 +64,15 @@ One row per place. Where: the building ids in island-layout.js (or island-plan.j
 | `personnel_office` | Personnel (人事部) | `m6` | Five storeys north of the canteen's yard: hiring, transfers and the new-staff intake. | Door on the walk from the canteen's loading yard (built as backdrop) | Enter | The transfers notice (異動): names, departments, dates. |
 | `bank` | Company bank (天川銀行) | `b_h` | A long two-storey branch. Salaries land here, and the ATM corner stays open late. Its front is built in `office_quarter`, the door shut. | Door and ATM corner on its east face, in the quarter street's mouth at the office street | Enter | The ATM screen: お引き出し, 残高, 暗証番号, amounts in 円. |
 
-### Plaza, canteen and clinic
+### Plaza, canteen and training centre
 
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
 | `plaza` | Fountain plaza (噴水広場) | `fountain_plaza` | Built as `plaza`. | The lane west and east, the canteen link north, the cross walk south to the south walk, which leads on to the shop street | Built | Day-2 posters on the notice board: dates, times, places. |
 | `canteen` | Canteen (社員食堂) | `canteen` | Ground-floor dining room built as `canteen`: eight six-seat tables, two usable end chairs, serving line, water dispenser, tray return and unnamed diners. Terrace remains in `plaza`. | Front door on the fountain axis; kitchen back lane remains closed | Ground floor built; kitchen and upper floor closed | Future food ordering is not implemented. |
 | `canteen_yard` | Canteen loading yard (搬入口) | `canteen_yard` | Built as backdrop. Morning deliveries come in by cargo bike from the quay. | From the back lane; m6's walk north | Outside | Crate labels: 割れ物注意, 冷蔵, 天地無用. |
-| `clinic` | Clinic (クリニック) | `clinic` | The island's one clinic; its front is built as backdrop ([places.md](places.md)). Internal medicine and paediatrics, a nurse at reception, a pharmacy window. | Door off its entrance court on the back lane | Enter | The questionnaire (問診票) and saying what hurts: 頭が痛い, 熱, 咳. |
-| `clinic_grove` | Grove (木立の広場) | `grove_square` | Built as backdrop: a gravel square with benches between the clinic and block_e2. A quiet lunch spot for office workers. | Walk from the back lane | Outside | Lunchtime talk on the benches, overheard ([systems.md](systems.md)). |
+| `training_centre` | New-staff training centre (研修センター) | `clinic` | Three storeys behind the canteen (the footprint keeps its old id); its front is built as backdrop ([places.md](places.md)). New hires spend their first weeks here. It was the clinic until 2026-10-12. | Door off its entrance court on the back lane | Enter | The training timetable: times (9時半), rooms, 研修. |
+| `clinic_grove` | Grove (木立の広場) | `grove_square` | Built as backdrop: a gravel square with benches between the training centre and block_e2. A quiet lunch spot for office workers. | Walk from the back lane | Outside | Lunchtime talk on the benches, overheard ([systems.md](systems.md)). |
 
 ### Shop street and seafront
 
@@ -95,7 +95,7 @@ The shop rows have fifteen bays each, numbered 0 to 14 from the west (island-sou
 
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
-| `training_centre` | New-staff training centre (研修センター) | `block_e1` | Two storeys; its front and door are built in `plaza` ([places.md](places.md)). New hires spend their first weeks here. | Door at the head of the cross walk | Enter | The training timetable: times (9時半), rooms, 研修. |
+| `clinic` | Clinic (クリニック) | `block_e1` | The island's one clinic (Jørgen, 2026-10-12): two storeys, its front built in `plaza` and its ground floor walked as `clinic` ([places.md](places.md)). Internal medicine and paediatrics, a nurse at reception, a pharmacy window; where Eric wakes up after a fall. | Glass door at the head of the cross walk | Built | Saying what hurts: 頭が痛い, 熱, 咳. |
 | `cafe` | Café (カフェ) | `m_e1` | A café on the ground floor; its front and sign are built, walked past in `east_lane` ([places.md](places.md)), the door shut. | Door on the south walk | Enter | Ordering a drink: ホット, アイス, サイズ, 店内 or 持ち帰り. |
 | `liquor_shop` | Liquor and rice shop (酒屋) | `m_e2` | One storey under a tiled roof, its sign on the roof and a cedar ball by the door; front built in `east_lane`, the door shut. Sake, beer and rice by the bag, run by an old couple. | Door at the foot of the cross walk | Enter | Sake labels, and rice bags by the kilo: 重い. |
 | `barber` | Barber (床屋) | `r8` | Two storeys, the striped pole by the door; front built in `east_lane`, the door shut. The barber lives upstairs. | Door on the pocket park's axis, across the south walk | Enter | Saying how to cut it: 短く, 少しだけ, 前髪. |

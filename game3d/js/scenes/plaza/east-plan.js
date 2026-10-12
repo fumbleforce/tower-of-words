@@ -55,15 +55,16 @@ export const SQUARE = (() => {
 // on the front slope of a tiled roof, 'canopy': standing on the door's canopy); plaza/east-shops.js builds them
 const b = (id) => rect(building(id).rect);
 export const BLOCKS = [
-  // block_e1: the new-staff training centre, its sign on the canopy (its door is a thing, places/plaza.js)
+  // block_e1: the island's clinic (its door is a thing, places/plaza.js; inside, places/clinic.js): its name board
+  // with the green cross on the canopy, a cross on the wall beside it, the hours and departments on the glass
   {
     id: 'block_e1',
     face: 's',
     at: (CROSS[0] + CROSS[1]) / 2,
     ground: 'office',
     wall: 1,
-    sign: ['けんしゅう', 'NEW STAFF TRAINING'],
-    dark: true,
+    sign: ['クリニック', 'CLINIC'],
+    clinic: true,
   },
   {
     id: 'm_e2',

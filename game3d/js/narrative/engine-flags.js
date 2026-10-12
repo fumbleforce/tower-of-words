@@ -88,6 +88,8 @@ ENGINE_WRITES['game3d/js/places/bakery/stage.js'] = {
 };
 
 ENGINE_WRITES['game3d/js/places/bakery/action.js'] = { exact: ['bakery_action_complete'], prefix: [] };
+// a fall that ends in the clinic: where he fell (cleared by the wake-up, story/clinic.js) and how often
+ENGINE_WRITES['game3d/js/places/clinic-fall.js'] = { exact: ['fell_from', 'falls'], prefix: [] };
 ENGINE_WRITES['game3d/js/places/ongoing/art-progress.js'] = { exact: ['art_first_day'], prefix: [] };
 
 ENGINE_WRITES['game3d/js/places/ongoing/index.js'] = {

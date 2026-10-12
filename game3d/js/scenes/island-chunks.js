@@ -61,6 +61,15 @@ export const CHUNKS = {
     view: [-2, 2, -4.5, 0.2],
     anchor: 'the izakaya south door and existing ground-floor footprint',
   },
+  clinic: {
+    at: [55.14, -12.6],
+    turn: 0,
+    scale: 1,
+    level: 0,
+    walk: [-4.76, 4.78, -6.82, -0.04],
+    view: [-4.94, 4.96, -7.0, 0.2],
+    anchor: 'block_e1’s south door at the head of the plaza’s cross walk, and its ground-floor footprint',
+  },
   canteen: {
     at: [33.885, -20.5],
     turn: 0,
@@ -103,7 +112,7 @@ export const CHUNKS = {
     scale: 1,
     level: 0,
     walk: [-11.8, 13.2, -16.4, 11.2],
-    view: [-22, 38.6, -42, 53.98], // east to the dorm court's tile, north to the clinic, south to the beach
+    view: [-22, 38.6, -42, 53.98], // east to the dorm court's tile, north to the training centre, south to the beach
     anchor: 'the fountain on the fountain as drawn',
   },
   dorm_court: {

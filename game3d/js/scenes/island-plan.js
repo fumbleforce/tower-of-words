@@ -71,7 +71,7 @@ export const PLACES = [
   { id: 'insurance_office', en: 'Amakawa Life', ja: '天川生命', b: 'm5' },
   { id: 'personnel_office', en: 'Personnel', ja: '人事部', b: 'm6' },
   { id: 'bank', en: 'Company bank', ja: '天川銀行', b: 'b_h' },
-  // fountain plaza, canteen, clinic
+  // fountain plaza, canteen, the training centre behind the canteen
   { id: 'plaza', en: 'Fountain plaza', ja: '噴水広場', at: [37.29, -2.75] },
   { id: 'canteen', en: 'Canteen', ja: '社員食堂', b: 'canteen' },
   {
@@ -80,7 +80,12 @@ export const PLACES = [
     ja: '搬入口',
     at: [19.2, -28.5],
   },
-  { id: 'clinic', en: 'Clinic', ja: 'クリニック', b: 'clinic' },
+  {
+    id: 'training_centre',
+    en: 'New-staff training centre',
+    ja: '研修センター',
+    b: 'clinic',
+  },
   { id: 'clinic_grove', en: 'Grove', ja: '木立の広場', at: [47.6, -39] },
   // shop street and seafront (bays: island-south.js BAYS, bay i's middle at -3 + 4.5 (i + 0.5))
   { id: 'shotengai', en: 'Shop street', ja: '商店街', at: [20, 20.15] },
@@ -109,12 +114,7 @@ export const PLACES = [
   },
   { id: 'beach', en: 'Beach', ja: '浜辺', at: [25, 42] },
   // east lane
-  {
-    id: 'training_centre',
-    en: 'New-staff training centre',
-    ja: '研修センター',
-    b: 'block_e1',
-  },
+  { id: 'clinic', en: 'Clinic', ja: 'クリニック', b: 'block_e1' },
   { id: 'cafe', en: 'Café', ja: 'カフェ', b: 'm_e1' },
   { id: 'liquor_shop', en: 'Liquor and rice shop', ja: '酒屋', b: 'm_e2' },
   { id: 'barber', en: 'Barber', ja: '床屋', b: 'r8' },

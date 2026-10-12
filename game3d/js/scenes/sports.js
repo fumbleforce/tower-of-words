@@ -7,8 +7,8 @@
 // pool, its deck and its pavilion sports/pool.js; the tennis courts sports/courts.js (shared with the east coast);
 // the paving, planting, lamps and signs sports/grounds.js; the gym's corner, where the lane turns into the office
 // street, office-quarter/link.js, and the street west of it past the two offices nearest it (Amakawa Life and
-// Construction) office-quarter/grounds.js and row.js, all shared with the office quarter; the back lane, the clinic,
-// the grove and Amakawa Travel south of it the plaza's own builder of that ground (plaza/north-lane.js), as the east
+// Construction) office-quarter/grounds.js and row.js, all shared with the office quarter; the back lane, the
+// training centre, the grove and Amakawa Travel south of it the plaza's own builder of that ground (plaza/north-lane.js), as the east
 // lane shows them, with r3's and block_e3's fronts (plaza/east-fronts.js); the town round it the layout (skyline.js).
 // The camera turns: north over the lane and the pool walk, north-east at the pavilion, east along the courts walk
 // (places/sports.js eases it).

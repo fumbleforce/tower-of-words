@@ -1070,6 +1070,43 @@
         "konbiniShop"
       ]
     },
+    "clinic": {
+      "things": {
+        "clinic_exit": {
+          "label": "Fountain plaza",
+          "kind": "thing",
+          "verb": "Go out"
+        },
+        "clinic_nurse": {
+          "label": "Nurse",
+          "kind": "person"
+        },
+        "exam_bed": {
+          "label": "Examination bed",
+          "kind": "thing",
+          "verb": "Sit",
+          "pin": "near"
+        }
+      },
+      "spots": [
+        "clinic_in",
+        "reception",
+        "pharmacy",
+        "exam_bed",
+        "waiting",
+        "nurse_desk",
+        "bedside"
+      ],
+      "seats": [
+        "exam_bed"
+      ],
+      "people": [
+        "clinic_nurse"
+      ],
+      "zones": [],
+      "nooks": [],
+      "hooks": []
+    },
     "karaoke": {
       "things": {
         "karaoke_door": {
@@ -2001,8 +2038,8 @@
           "label": "To the dorms",
           "kind": "thing"
         },
-        "training_door": {
-          "label": "Training centre",
+        "clinic_door": {
+          "label": "Clinic",
           "kind": "thing",
           "verb": "Go in"
         },
@@ -2105,7 +2142,11 @@
         "tama": {
           "label": "Cat",
           "verb": "Pet",
-          "verbIf": { "set": "found_chair", "unset": "chair_back", "verb": "Return the chair" },
+          "verbIf": {
+            "set": "found_chair",
+            "unset": "chair_back",
+            "verb": "Return the chair"
+          },
           "kind": "person small"
         },
         "covered": {

@@ -7,7 +7,7 @@
 // costs no draw calls of its own.
 //   const sets = blockSets();                        opaque parts, glass, and the windows lit after work
 //   officeBlock(sets, rect, { storeys, fh, gf, wall, doors: [{ face: 'w', at, w, porch }], seed })
-//     and the style options for a building that is more than an office (the clinic): upper, glazed, stair, roof,
+//     and the style options for a building that is more than an office (the training centre): upper, glazed, stair, roof,
 //     a door's canopy and platform (outdoor/block-style.js)
 //   const { lit, glows } = buildBlockSets(sets, root);   lit starts hidden and shows after dark: glows, for a
 //                                                        place's light rig (kit/light/glow.js)

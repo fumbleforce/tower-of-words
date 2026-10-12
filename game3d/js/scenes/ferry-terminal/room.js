@@ -3,19 +3,11 @@ import { terminalDetails } from './details.js';
 import * as THREE from 'three';
 import { Kit } from '../dorms/kit.js';
 import { shell, roomLights } from '../rooms/shell.js';
+import { waitingBench } from '../rooms/waiting-bench.js';
 import { terminalView } from './view.js';
 import { R, DOOR, SEATS, SPOTS, terminalNav } from './plan.js';
 
-function bench(k, x, z, facing) {
-  const side = Math.cos(facing);
-  k.box('#4f7c82', 3.15, 0.065, 0.54, x, 0.275, z, { surf: 'plastic', r: 0.035 });
-  for (const dx of [-1.15, 1.15]) {
-    k.box('#64747a', 0.075, 0.275, 0.43, x + dx, 0, z, { surf: 'metal' });
-    k.box('#64747a', 0.1, 0.42, 0.045, x + dx, 0.3, z - side * 0.27, { surf: 'metal' });
-  }
-  k.box('#5e858a', 3.15, 0.35, 0.055, x, 0.37, z - side * 0.28, { surf: 'plastic', r: 0.02 });
-  for (const dx of [-1.45, 1.45]) k.box('#65777b', 0.055, 0.08, 0.56, x + dx, 0.57, z, { surf: 'metal', r: 0.02 });
-}
+const bench = (k, x, z, facing) => waitingBench(k, x, z, facing);
 export function buildFerryTerminal() {
   const scene = new THREE.Scene(),
     root = new THREE.Group(),

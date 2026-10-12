@@ -63,6 +63,8 @@ Who each person is (age, job, what they speak) is in docs/game/cast.md. This she
 
 **The club member** (`member`, day 3). A young woman in the swimming club. Quick, casual-polite Japanese, an あっ before she knows what she's saying. Never English.
 
+**The nurse** (`clinic_nurse`, the clinic). Polite, short N5 Japanese (です and ます), never English: どうしましたか, どこが痛いですか. Calm and dry. She doesn't scold or fuss; after a fall she asks where it hurts and says ジャンプは、だめです in the same tone she'd read out the hours. The second time she skips the questions. Eric gets her from ジャンプ, ベランダ, the words he knows and her pointing.
+
 **Narration**. Second person, a few words, only for what the scene can't show.
 
 **Mio's texts** (`miotext`). Lower case, no full stops, short: "is that you?", "loud".

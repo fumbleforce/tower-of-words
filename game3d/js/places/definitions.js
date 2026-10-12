@@ -20,6 +20,7 @@ export const PLACE_FILES = {
   izakaya: 'game3d/js/places/izakaya.js',
   bakery: 'game3d/js/places/bakery.js',
   konbini: 'game3d/js/places/konbini.js',
+  clinic: 'game3d/js/places/clinic.js',
   karaoke: 'game3d/js/places/karaoke.js',
   karaoke_booth: 'game3d/js/places/karaoke-booth.js',
   east_lane: 'game3d/js/places/east-lane.js',
@@ -49,6 +50,7 @@ export const PLACE_NAMES = {
   izakaya: 'Izakaya',
   bakery: 'Bakery',
   konbini: 'Konbini',
+  clinic: 'Clinic',
   karaoke: 'Karaoke box',
   karaoke_booth: 'Karaoke booth',
   east_lane: 'East lane',
@@ -80,11 +82,13 @@ export const NEXT = {
 // pavilion's door at the sports ground's pool walk, and back, or from the gym's lobby through the protagonist's
 // changing room; the gym's lobby through its main doors on the lane;
 // the dorm common room through its glazed door on the inner court, off the east coast's dorm row;
-// the karaoke box's front desk through its door off the arcade, and its booth up the stairs.
+// the karaoke box's front desk through its door off the arcade, and its booth up the stairs; the clinic through its
+// glass door at the head of the plaza's cross walk.
 export const TRIPS = {
   forecourt: ['plaza', 'shotengai', 'campus'],
-  plaza: ['forecourt', 'dorm_court', 'shotengai', 'east_lane', 'canteen'],
+  plaza: ['forecourt', 'dorm_court', 'shotengai', 'east_lane', 'canteen', 'clinic'],
   canteen: ['plaza'],
+  clinic: ['plaza'],
   campus: ['forecourt', 'office_quarter', 'harbour', 'print_shop'],
   print_shop: ['campus'],
   office: ['forecourt'],
@@ -129,6 +133,7 @@ export const STORY_FILES = [
   'izakaya',
   'bakery',
   'konbini',
+  'clinic',
   'karaoke',
   'karaoke_booth',
   'east_lane',
