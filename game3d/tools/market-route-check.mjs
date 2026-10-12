@@ -148,8 +148,32 @@ await withBrowserJob(
           const [x, zz] = L.toLocal('shotengai', 37.29, z);
           const from = g.player.root.position;
           if (!g.place.nav.clear([from.x, from.z], [x, zz])) throw Error('Direct route obstructed to ' + z);
+          if (!g.walker.traversal.clear([from.x, from.z], [x, zz])) throw Error('Physical route obstructed to ' + z);
           await g.walkTo(x, zz);
-          return { wanted: [x, zz], actual: g.player.root.position.toArray(), free: g.place.nav.free(x, zz) };
+          // An ambient pedestrian can occupy the exact destination. The ordinary walker
+          // intentionally arrives short of them; retap the same floor after they pass.
+          const retries = [],
+            until = performance.now() + 10000;
+          while (Math.hypot(from.x - x, from.z - zz) >= 0.4 && performance.now() < until) {
+            retries.push({ actual: from.toArray(), distance: Math.hypot(from.x - x, from.z - zz) });
+            await new Promise((resolve) => setTimeout(resolve, 150));
+            const left = until - performance.now();
+            if (left <= 0) break;
+            let timer;
+            await Promise.race([
+              g.walkTo(x, zz),
+              new Promise((resolve) => {
+                timer = setTimeout(resolve, left);
+              }),
+            ]);
+            clearTimeout(timer);
+          }
+          return {
+            wanted: [x, zz],
+            actual: from.toArray(),
+            free: g.place.nav.free(x, zz),
+            retries,
+          };
         }, z);
         assert.ok(
           Math.hypot(result.wanted[0] - result.actual[0], result.wanted[1] - result.actual[2]) < 0.4,
