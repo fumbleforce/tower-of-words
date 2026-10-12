@@ -83,7 +83,7 @@ export const WALKS = {
   south_lookout: { rect: [-46.1, 16.5, -40.6, 20.5], terrace: 'w', look: -Math.PI / 4, slabs: true },
   // The promenade continues seaward of the station garden's planted western end.
   southwest_promenade: { rect: [-40.6, 28.8, -16.1, 30.8], open: 'e' },
-  southwest_turn: { rect: [-44, 26.2, -38.2, 28.8] },
+  southwest_turn: { rect: [-44, 26.2, -36.5, 28.8] },
   southwest_coast_turn: { rect: [-44, 20.5, -42, 26.2] },
   southwest_rest: { rect: [-26.5, 30.8, -21.5, 33.8], slabs: true },
   coast_path_east: { rect: [-40.6, -27.4, -20.75, -25.4] },
@@ -246,7 +246,7 @@ export const WEST_DRIFTS = [
   [-50.4, -46.6, -19.4, -17.6, 's'],
   [-39.6, -34.8, 20.4, 22.2, 'n'],
   // on the lawn south of the walk, in the wedge between the line and the wall
-  [-37.6, -32.6, 26.2, 28.0, 's'],
+  [-36.0, -32.6, 26.2, 28.0, 's'],
   [-24.4, -19.4, 34.5, 36.3, 's'],
   // The public garden ends before the station's covered approach. Planting closes the former path's axis.
   [AXIS[0], AXIS[1], WALKWAY_S + 0.3, 19.5, 'n'],

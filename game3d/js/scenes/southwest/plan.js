@@ -52,7 +52,7 @@ export const BENCHES = Object.fromEntries(
     return [`southwest_bench_${i + 1}`, { x, z, top: 0.34, ry: angle - Math.PI / 2, out }];
   }),
 );
-// Actual station approach hammerhead footprints; taps use the clear southern lane around the first.
+// Actual station approach hammerhead footprints; the widened inland turn also clears the crowd grid.
 const PIER_HEADS = [
   [-39.45, 28.4, -38.17, 30.09],
   [-41.75, 22.47, -40.47, 24.16],

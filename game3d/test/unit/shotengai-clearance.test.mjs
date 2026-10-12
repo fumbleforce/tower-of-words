@@ -130,3 +130,26 @@ test('both sides of every seaside bench retain reachable standing floor and sea-
     }
   }
 });
+
+test('actual southwest crowd routes clear the real support footprint in both directions', async () => {
+  const { CROWD } = await import('../../js/crowd/data.js');
+  const { snapFree, clearAt } = await import('../../js/crowd/paths.js');
+  const { coast, prom_e, prom_w } = CROWD.shotengai.ends;
+  assert.equal(world.nav.free(...P.local([-38.809, 29.242])), false, 'keep the physical hammerhead blocked');
+  for (const [a, b] of [
+    [coast, prom_e],
+    [prom_e, coast],
+    [prom_w, prom_e],
+    [prom_e, prom_w],
+  ]) {
+    const from = snapFree(grid, a, 0.45),
+      to = snapFree(grid, b, 0.45);
+    assert.ok(from && to, 'runtime crowd endpoints retain their launch clearance');
+    const route = routeBetween(grid, from, to);
+    assert.ok(route?.length > 1, 'the real coarse crowd grid connects the coast and promenade');
+    for (const point of route) {
+      assert.ok(world.nav.free(...point), 'walkers stay on the canonical paved route');
+      assert.ok(clearAt(grid, ...point) >= 0.3, 'route retains the unchanged crowd clearance');
+    }
+  }
+});
