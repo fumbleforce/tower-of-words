@@ -144,7 +144,7 @@ body.phone .kword { font-size: 28px; }
 body.busy #sayBtn { display: none; }
 /* the jump (movement/jump-input.js): a phone button bottom right, left of Say when Say shows; desktop jumps with Space */
 #jumpBtn { display: none; }
-body.phone #jumpBtn { position: absolute; right: 12px; bottom: 52px; width: 68px; height: 68px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border: 2px solid rgba(232, 236, 242, .35); background: rgba(31, 36, 44, .82); color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.35); touch-action: none; user-select: none; -webkit-user-select: none; }
+body.phone #jumpBtn { position: absolute; z-index: 4; right: 12px; bottom: 52px; width: 68px; height: 68px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border: 2px solid rgba(232, 236, 242, .35); background: rgba(31, 36, 44, .82); color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.35); touch-action: none; user-select: none; -webkit-user-select: none; }
 body.phone #jumpBtn[hidden], body.busy #jumpBtn { display: none; }
 body.phone #jumpBtn svg { width: 22px; height: 22px; fill: var(--ink); stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
 body.phone #jumpBtn .t { font-size: 12px; font-weight: 700; }
