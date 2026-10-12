@@ -108,16 +108,21 @@ export function installJumpPose(hop, player) {
     body.updateWorldMatrix(true, true);
     const tuck = airborne ? (flip ? Math.sin(progress * Math.PI) : smooth(0.75, 0.05, ratio)) : 0;
     const extend = airborne ? smooth(-0.35, -1.1, ratio) : 1;
-    const bend = airborne ? (0.45 + tuck * 0.65) * (1 - extend * 0.8) : 0.42 * (1 - landing / 0.2);
+    const bend = airborne ? (0.55 + tuck * 1.05) * (1 - extend * 0.8) : 0.6 * (1 - landing / 0.2);
     for (const side of ['Left', 'Right']) {
       const sign = side === 'Left' ? 1 : -1;
       aim(side + 'UpLeg', side + 'Leg', [sign * 0.07, -Math.cos(bend), Math.sin(bend)], weight);
       aim(side + 'Leg', side + 'Foot', [sign * 0.03, -Math.cos(bend * 0.8), -Math.sin(bend * 0.8)], weight);
       turn(side + 'Foot', -bend * 0.3 * weight);
-      aim(side + 'Arm', side + 'ForeArm', [sign * 0.32, airborne ? -0.55 : -1, airborne ? 0.7 : 0.2], weight);
+      aim(
+        side + 'Arm',
+        side + 'ForeArm',
+        [sign * 0.32, airborne ? -0.7 + tuck * 0.65 : -1, airborne ? 0.7 : 0.2],
+        weight,
+      );
       aim(side + 'ForeArm', side + 'Hand', [sign * 0.12, airborne ? -0.05 : -0.8, 0.8], weight);
     }
-    turn('Spine', (airborne ? 0.1 + tuck * 0.15 : 0.15) * weight);
+    turn('Spine', (airborne ? 0.1 + tuck * 0.32 : 0.15) * weight);
   }
   const originalUpdate = player.update;
   player.update = function (...args) {
