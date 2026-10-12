@@ -44,7 +44,7 @@ export function poolOutfitSlot(actor, make, decorate) {
     ordinary = descriptors(actor),
     parent = root.parent;
   const position = root.position.clone(),
-    quaternion = root.quaternion.clone(),
+    rotation = root.rotation.clone(),
     scale = root.scale.clone();
   const ordinaryChildren = [...root.children];
   const isBody = (child) => {
@@ -63,7 +63,7 @@ export function poolOutfitSlot(actor, make, decorate) {
     root.removeFromParent();
     for (const child of ordinaryChildren) root.remove(child);
     root.position.set(0, 0, 0);
-    root.quaternion.identity();
+    root.rotation.set(0, 0, 0);
     root.scale.setScalar(1);
     root.updateMatrixWorld(true);
     body = make(root);
@@ -73,7 +73,9 @@ export function poolOutfitSlot(actor, make, decorate) {
     for (const child of [...root.children]) root.remove(child);
     root.add(...ordinaryChildren);
     root.position.copy(position);
-    root.quaternion.copy(quaternion);
+    // Walker updates yaw alone. Restoring only a quaternion can rewrite a yaw
+    // beyond 90 degrees as Euler X/Z=pi, reversing every later yaw-only turn.
+    root.rotation.copy(rotation);
     root.scale.copy(scale);
     parent?.add(root);
     root.updateMatrixWorld(true);

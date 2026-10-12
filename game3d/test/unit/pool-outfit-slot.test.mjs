@@ -37,3 +37,33 @@ test('procedural player fallback keeps one visible body and restores its rig sur
  assert.equal(actor.rig,undefined);assert.equal(holder.parent,null);assert.equal(blob.parent,actor.root);
  slot.dispose();assert.equal(actor.rig,rig);assert.equal(holder.parent,actor.root);assert.equal(actor.model,undefined);
 });
+
+test('high-yaw outfit preparation preserves Euler angles and later yaw-only walking turns', () => {
+  for (const order of ['XYZ', 'YXZ', 'ZXY']) {
+    for (const yaw of [-Math.PI, -2.92, 2.92, Math.PI]) {
+      const {actor, parent} = fixture(), root = actor.root;
+      parent.rotation.set(0, 0, 0);
+      root.rotation.set(0, yaw, 0, order);
+      const rotation = root.rotation.toArray();
+      const slot = poolOutfitSlot(actor, body);
+      assert.deepEqual(root.rotation.toArray(), rotation, 'preserve authored Euler yaw and order');
+      for (const wearing of [true, false, true, false]) {
+        slot.set(wearing);
+        assert.deepEqual(root.rotation.toArray(), rotation, 'swapping bodies leaves facing untouched');
+      }
+      // This is the walker's normal turn: it assigns Y without resetting X/Z.
+      root.rotation.y = 0;
+      const forward = root.getWorldDirection(new THREE.Vector3());
+      assert(forward.distanceTo(new THREE.Vector3(0, 0, 1)) < 1e-10, 'yaw zero faces world +Z');
+      slot.dispose();
+    }
+  }
+});
+
+test('failed preparation restores exact high-yaw Euler rotation and order', () => {
+  const {actor} = fixture(), root = actor.root;
+  root.rotation.set(0.17, -2.92, -0.08, 'ZYX');
+  const before = root.rotation.toArray();
+  assert.throws(() => poolOutfitSlot(actor, () => { throw Error('load failed'); }), /load failed/);
+  assert.deepEqual(root.rotation.toArray(), before);
+});
