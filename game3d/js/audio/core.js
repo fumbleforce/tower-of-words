@@ -35,6 +35,8 @@ export function audioContext() {
     }
   }
   if (actx && actx.state === 'suspended' && !paused) actx.resume();
+  // made while the sound is held (the opening film): stay silent until the hold ends
+  else if (actx && paused && actx.state === 'running') actx.suspend();
   return actx;
 }
 // ---------- volume buses ----------
@@ -81,7 +83,16 @@ onSettings((k) => {
 // ---------- pause (menu.js): Web Audio stops where it is, the voice clip holds its place ----------
 export let paused = false;
 let pausedClip = null;
+// Something that must stay silent (the opening film) holds the sound on its own: the pause menu or the feedback window
+// closing meanwhile must not bring the music back under it.
+const holds = new Set();
+export function holdAudio(who, on) {
+  if (on) holds.add(who);
+  else holds.delete(who);
+  pauseAudio(holds.size > 0);
+}
 export function pauseAudio(on) {
+  if (!on && holds.size) return;
   paused = !!on;
   if (on) {
     if (actx && actx.state === 'running') actx.suspend();

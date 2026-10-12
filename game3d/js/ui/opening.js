@@ -3,7 +3,7 @@
 // after a tap), and again from the title menu's Opening item. It ends by pushing in on the train to the title's own
 // framing and fading to black, and the title fades up from there. The game's sound pauses under it; its own Skip,
 // Esc or its end closes it.
-import { pauseAudio } from '../audio/core.js';
+import { holdAudio } from '../audio/core.js';
 import { sfx } from '../ui.js';
 import { el } from './dom.js';
 import { storage } from '../storage.js';
@@ -23,7 +23,7 @@ export function playOpening({ gate = false } = {}) {
   frame.title = 'Opening';
   wrap.append(frame);
   document.body.append(wrap);
-  pauseAudio(true);
+  holdAudio('opening', true);
   frame.addEventListener('load', () => frame.contentWindow?.focus());
   function done(e) {
     if (e.source !== frame.contentWindow || e.data?.opening !== 'done') return;
@@ -33,7 +33,7 @@ export function playOpening({ gate = false } = {}) {
     storage.setText(SEEN, '1'); // where storage is blocked it may show again next visit
     wrap.classList.add('out');
     setTimeout(() => wrap.remove(), 900);
-    pauseAudio(false);
+    holdAudio('opening', false);
     back?.focus?.();
   }
   addEventListener('message', done);
