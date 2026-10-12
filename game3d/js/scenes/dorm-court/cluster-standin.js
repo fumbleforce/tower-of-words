@@ -7,8 +7,8 @@ import * as THREE from 'three';
 import { lowWall, KERB } from '../outdoor/edges.js';
 import { keyaki, sakura, maple, mound, bed, LEAF } from '../outdoor/planting.js';
 import { lamps, bench, bins } from '../outdoor/furniture.js';
-import { flatRoof } from './roofs.js';
-import { toIsland, PATHS } from '../island-layout.js';
+import { laundryRoof, hallRoof, sentoRoofs } from './frontages.js';
+import { toIsland, PATHS, CHUNKS } from '../island-layout.js';
 import { pale, bike, shelter } from './cluster-yards.js';
 import * as P from './plan.js';
 
@@ -111,20 +111,52 @@ export function* standIn(pv, p, lights) {
     [0.25, -0.2, '#d9dcd8'],
   ])
     mound(p, gx + dx * gw, gcz + dz * gd, 0.24, c, { squash: 0.8 });
-  // the laundry, the hall and the sento: one storey along the block's face, their roofs with plant
-  const fr = fromCourt([P.LAUNDRY.x0, P.RETURN_X, P.BLOCK_Z, P.LAUNDRY.z]);
-  p.box('#7b838d', fr[1] - fr[0], 2.3, fr[3] - fr[2], (fr[0] + fr[1]) / 2, 0, (fr[2] + fr[3]) / 2);
+  // Front roofs retain the court's actual heights, sento gable and chimney. The
+  // adapter places their shared local geometry into the cluster's island frame.
+  const frame = CHUNKS.dorm_court,
+    matrix = new THREE.Matrix4().makeRotationY((-frame.turn * Math.PI) / 180);
+  matrix.setPosition(frame.at[0], 0, frame.at[1]);
+  const local = {
+    geo(color, g, opts) {
+      p.geo(color, g.applyMatrix4(matrix), opts);
+    },
+    box(color, w, h, d, x, y, z, opts = {}) {
+      const g = new THREE.BoxGeometry(w, h, d);
+      if (opts.ry) g.rotateY(opts.ry);
+      local.geo(color, g.translate(x, y + h / 2, z), opts);
+    },
+  };
+  const volume = (color, x0, x1, z0, z1, h) => local.box(color, x1 - x0, h, z1 - z0, (x0 + x1) / 2, 0, (z0 + z1) / 2);
+  volume('#a3a6a9', P.LAUNDRY.x0, P.LAUNDRY.x1, P.BLOCK_Z, P.LAUNDRY.z, 2.1);
+  volume('#8d969f', P.HALL[0], P.HALL[1], P.BLOCK_Z, P.FRONT_Z, 2.2);
+  volume('#c9c6bf', P.SENTO.x0, P.EAST + 0.4, P.BLOCK_Z, P.SENTO.z, 1.9);
+  local.box(
+    '#69849a',
+    P.LAUNDRY.x1 - P.LAUNDRY.x0 - 0.5,
+    1.3,
+    0.025,
+    (P.LAUNDRY.x0 + P.LAUNDRY.x1) / 2,
+    0.15,
+    P.LAUNDRY.z + 0.016,
+    { cast: false },
+  );
+  local.box('#668298', P.HALL[1] - P.HALL[0] - 0.3, 1.85, 0.025, (P.HALL[0] + P.HALL[1]) / 2, 0.05, P.FRONT_Z + 0.016, {
+    cast: false,
+  });
+  local.box('#34425c', 0.95, 0.5, 0.03, P.SENTO.x0 + 0.95, 1.2, P.SENTO.z + 0.04, { cast: false });
+  laundryRoof(local, { ...P.LAUNDRY, back: P.BLOCK_Z });
+  hallRoof(local, {
+    x0: P.HALL[0],
+    x1: P.HALL[1],
+    back: P.BLOCK_Z,
+    front: P.FRONT_Z,
+    full: true,
+  });
+  sentoRoofs(local, { east: P.EAST, back: P.BLOCK_Z });
   lamps(
     lights,
     p,
     P.LAMPS.map(([x, z]) => toIsland('dorm_court', x, z)),
     { pool: 1.05 },
   );
-  flatRoof(p, fr, 2.3, {
-    edges: 'nsew',
-    units: [
-      [fr[0] + 0.8, fr[2] + 2.0],
-      [fr[0] + 0.8, fr[3] - 3.5],
-    ],
-  });
 }

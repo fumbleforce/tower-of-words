@@ -36,6 +36,8 @@ import { standIn } from './cluster-standin.js';
 import * as P from './plan.js';
 import * as C from './cluster-plan.js';
 import { lightUp } from '../../kit/light/glow.js';
+import * as THREE from 'three';
+import { ericBlock } from './block.js';
 
 const { ROW, NS, EW, LINK, BACK, ENTRY, COURT, SQUARE, PLANTER, AXIS_X, AXIS_Z } = C;
 const edge = (pv, rect, module) => pv.field(rect, { pattern: 'grid', module, tones: GRANITE.edge, h: 0.007 });
@@ -215,14 +217,24 @@ export function* clusterSteps(group, { plaza = false } = {}) {
   yield* belts(p);
   doorPots(p, C.BLOCKS);
   yield;
-  if (plaza) yield* standIn(pv, p, lights);
-  else {
+  let exterior = null;
+  if (plaza) {
+    yield* standIn(pv, p, lights);
+    // A light exterior variant, with no playable interiors or navigation. Shared
+    // galleries and roof plan keep its identity when seen from another district.
+    const eric = new THREE.Group(),
+      frame = CHUNKS.dorm_court;
+    exterior = ericBlock(eric, { backdrop: true });
+    eric.position.set(frame.at[0], 0, frame.at[1]);
+    eric.rotation.y = (-frame.turn * Math.PI) / 180;
+    group.add(eric);
+  } else {
     // the dorm street's edge south of the row, to the courtyard's end of it (the plaza's east lane kerbs its own)
     kerb(p, [ROW[0], ROW[3]], [ROW[0], P.STREET[1] + CHUNKS.dorm_court.at[1]], { off: 0.08 });
     lawn(group);
   }
   yield;
-  const fronts = yield* frontsSteps(p, lights, plaza ? [...C.BLOCKS, ...C.DORM_1_PARTS] : C.BLOCKS);
+  const fronts = yield* frontsSteps(p, lights, C.BLOCKS);
   fronts.meshes(group);
   yield;
   yield* pv.build(group);
@@ -230,7 +242,7 @@ export function* clusterSteps(group, { plaza = false } = {}) {
   const lit = lights.build(group);
   // no shadows on it either: the courtyard's shadow box ends a little way into the row, and its edge would show
   group.traverse((m) => m.isMesh && (m.receiveShadow = false));
-  const glows = [...fronts.glows, ...lit.glows]; // what lights up after dark (kit/light/glow.js)
+  const glows = [...fronts.glows, ...lit.glows, ...(exterior?.glows || [])]; // what lights up after dark (kit/light/glow.js)
   return { glows, evening: () => lightUp(glows) };
 }
 

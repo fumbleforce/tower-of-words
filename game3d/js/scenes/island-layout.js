@@ -228,6 +228,7 @@ export const BUILDINGS = ROWS.map(([id, kind, storeys, floorH, wall, roof, windo
   ...(f.length === 4 ? { rect: f } : { poly: pairs(f) }),
   storeys,
   floorH,
+  ...(id === 'dorm_1' ? { groundH: 2.45 } : {}),
   wall,
   roof,
   windows,

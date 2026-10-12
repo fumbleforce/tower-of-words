@@ -132,22 +132,31 @@ export function* skylineSteps(
     const dist = Math.hypot(Math.max(x0 - cx, 0, cx - x1), Math.max(z0 - cz, 0, cz - z1));
     if (dist > far) continue;
     const fh = b.floorH || FLOOR_H;
+    const groundOffset = (b.groundH || fh) - fh;
     const full = b.storeys || 2;
     let storeys = full;
     // the occlusion rule: south of the walk line and across it, nothing taller than 0.95 x its distance to the line
-    if (z0 > wz1 && x1 > wx0 && x0 < wx1) storeys = Math.min(storeys, Math.floor((0.95 * (z0 - wz1)) / fh));
+    if (z0 > wz1 && x1 > wx0 && x0 < wx1)
+      storeys = Math.min(storeys, Math.floor((0.95 * (z0 - wz1) - groundOffset) / fh));
     const kind = b.windows || 'flat',
       wallHex = typeof b.wall === 'number' ? TOWN.walls[b.wall] : b.wall || TOWN.walls[0];
     const es = edges(poly);
     if (farMode && dist <= near) {
       nearIds.add(skylinePieceId(b));
       if (storeys < full)
-        upperFloors(tall, poly, es, { kind, storeys: full, fh, from: Math.max(0, storeys) }, b.id, wallHex);
+        upperFloors(
+          tall,
+          poly,
+          es,
+          { kind, storeys: full, fh, groundOffset, from: Math.max(0, storeys) },
+          b.id,
+          wallHex,
+        );
     }
     if (storeys < 1) continue;
-    const h = storeys * fh;
+    const h = storeys * fh + groundOffset;
     const seen = (e) => e.n[1] > 0.2 || e.n[0] * (cx - e.mid[0]) + e.n[1] * (cz - e.mid[1]) > 0;
-    const s = { kind, storeys, fh };
+    const s = { kind, storeys, fh, groundOffset };
     if (dist <= near) {
       nNear++;
       const wb = wallBucket(wallsNear, wallHex);
@@ -158,7 +167,19 @@ export function* skylineSteps(
       for (const e of es) {
         edgeBox(bands, e.a, e.d, e.n, 0, e.L, 0.02, 0.16, -0.01, 0.08, null);
         for (let floor = 1; floor < storeys; floor++)
-          edgeBox(bands, e.a, e.d, e.n, 0, e.L, floor * fh - 0.07, floor * fh + 0.04, -0.01, 0.09, null);
+          edgeBox(
+            bands,
+            e.a,
+            e.d,
+            e.n,
+            0,
+            e.L,
+            floor * fh + groundOffset - 0.07,
+            floor * fh + groundOffset + 0.04,
+            -0.01,
+            0.09,
+            null,
+          );
       }
       // parapet all round, a little plant on the roof
       for (const e of es) edgeBox(bands, e.a, e.d, e.n, 0, e.L, h, h + 0.3, -0.14, 0, null);
@@ -333,8 +354,8 @@ export function* skylineSteps(
 // the far view: a building the occlusion rule cut down, from where the cut left it to its full height (walls, roof,
 // parapet and the missing floors' windows in one vertex-coloured bucket), for the follow camera only
 function upperFloors(b, poly, es, s, id, wallHex) {
-  const y0 = s.from * s.fh,
-    h = s.storeys * s.fh,
+  const y0 = s.from * s.fh + (s.from ? s.groundOffset : 0),
+    h = s.storeys * s.fh + s.groundOffset,
     wc = new THREE.Color(wallHex),
     band = new THREE.Color(TOWN.band);
   for (const e of es) facePatch(b, e.a, e.d, e.n, 0, e.L, y0, h, 0, wc);

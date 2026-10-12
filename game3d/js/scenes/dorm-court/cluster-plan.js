@@ -77,13 +77,8 @@ export const BLOCKS = [
   { id: 'dorm_annex', face: null, ground: 'house', wall: 3 },
 ].map((k) => ({ ...k, rect: b(k.id), row: building(k.id) }));
 export const BLOCK_IDS = BLOCKS.map((k) => k.id);
-// Eric's block (dorm_1), for the plaza, which doesn't build the courtyard: its long block and its return, plain,
-// with the court side's open corridors as a balcony row (the courtyard builds the real one, dorm-court/block.js)
-const D1 = building('dorm_1');
-export const DORM_1_PARTS = [
-  { id: 'dorm_1', rect: [84.14, 88.29, -11.8, 8.1], face: null, ground: 'house', wall: 1, balconies: 'ws' },
-  { id: 'dorm_1', rect: [78.84, 84.14, 4.6, 8.1], face: null, ground: 'house', wall: 1, balconies: 'ws' },
-].map((k) => ({ ...k, row: D1 }));
+// Eric's L block uses the same exterior builder in the court and its neighbours.
+export const DORM_1 = building('dorm_1');
 // a block's doors: where each is on its face, the face's outward normal and its direction along
 export function doorsOf(k) {
   const out = [];

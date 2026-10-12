@@ -25,6 +25,7 @@ import { drain } from '../../perf/slice.js';
 import { lightUp } from '../../kit/light/glow.js';
 import { facadeDrainage } from '../outdoor/facade-detail.js';
 import { northFront } from '../sports/north-front.js';
+import { dormWindow, dormRoof } from '../dorm-court/upper-fronts.js';
 
 const PLINTH = '#6c7178',
   FRAME = '#4f565f',
@@ -113,8 +114,11 @@ export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => fals
           const u = step * (c + 0.5);
           // the shop's back and sides: small high windows on the ground floor
           const [wy, wh] = shop ? [y + 1.0, 0.55] : [y + 0.6, 0.85];
-          onFace(blockPane(hash2(u + cx, y + cz, c) < 0.3), F, u, wy, 0.02, 0.8, wh, 0.05);
-          onFace(box(SILL, false), F, u, wy - 0.07, 0.06, 0.92, 0.07, 0.12);
+          if (k.id.startsWith('dorm_')) dormWindow(p, F, u, wy, glass, litGlass, cx * 19 + cz * 7 + s * 31 + c);
+          else {
+            onFace(blockPane(hash2(u + cx, y + cz, c) < 0.3), F, u, wy, 0.02, 0.8, wh, 0.05);
+            onFace(box(SILL, false), F, u, wy - 0.07, 0.06, 0.92, 0.07, 0.12);
+          }
         }
       }
       if (front) groundFloor(p, F, door, fh, { box, pane: blockPane, lights });
@@ -122,7 +126,8 @@ export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => fals
     }
 
     // the roof
-    if (k.tiled) {
+    if (k.id.startsWith('dorm_')) dormRoof(p, k, H, wall);
+    else if (k.tiled) {
       tiledRoof(p, {
         x0: x0 - 0.25,
         x1: x1 + 0.25,

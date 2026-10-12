@@ -8,6 +8,8 @@
 //     walls and their bargeboards
 //   slope(p, x0, x1, zEave, yEave, zRidge, yRidge)   one tiled slope on its own (a pent roof over a front)
 import * as THREE from 'three';
+import { copedParapet } from '../outdoor/block-style.js';
+import { faces } from '../outdoor/block-face.js';
 
 const SLAB = '#767b83',
   PARAPET = '#9da1a6',
@@ -48,6 +50,85 @@ export function flatRoof(p, [x0, x1, z0, z1], y, { edges = 's', units = [], vent
   for (const [x, z] of vents) {
     p.geo(VENT, new THREE.CylinderGeometry(0.07, 0.07, 0.34, 8).translate(x, y + 0.17, z));
     p.geo(VENT, new THREE.CylinderGeometry(0.15, 0.1, 0.08, 8).translate(x, y + 0.38, z));
+  }
+}
+
+// Apartment roof finish: one membrane deck, coped outer edges and lap joints. A caller
+// can omit the shared side of two wings so an L roof has no wall across its middle.
+export function apartmentDeck(p, rect, y, { edges = 'nsew', wall = PARAPET, seams = true } = {}) {
+  const [x0, x1, z0, z1] = rect;
+  flatRoof(p, rect, y, { edges: '' });
+  p.box('#7a8580', x1 - x0 - 0.2, 0.015, z1 - z0 - 0.2, (x0 + x1) / 2, y + 0.006, (z0 + z1) / 2);
+  const F = faces(rect);
+  for (const edge of edges) copedParapet(p, F[edge], y, wall);
+  if (seams)
+    for (let x = x0 + 1.6; x < x1 - 0.3; x += 1.6)
+      p.box('#68756f', 0.025, 0.004, z1 - z0 - 0.3, x, y + 0.022, (z0 + z1) / 2, { cast: false });
+  for (const x of [x0 + 0.3, x1 - 0.3])
+    p.box('#4b5658', 0.14, 0.008, 0.14, x, y + 0.023, z0 + 0.27, {
+      cast: false,
+    });
+}
+
+// Service furniture is grouped beside the stair head, leaving a clear roof route.
+// Coordinates belong to the roof plan; different blocks can turn the arrangement.
+export function apartmentServices(p, y, { stair, doorZ, tank, units = [], vents = [], wall = PARAPET, detail = true }) {
+  if (stair) {
+    const [x0, x1, z0, z1] = stair,
+      h = 1.3,
+      cx = (x0 + x1) / 2,
+      cz = (z0 + z1) / 2,
+      door = doorZ ?? z1 - 0.6;
+    p.box(wall, x1 - x0, h, z1 - z0, cx, y, cz, { surf: 'plaster' });
+    flatRoof(p, [x0 - 0.04, x1 + 0.04, z0 - 0.04, z1 + 0.04], y + h, {
+      edges: 'nsew',
+    });
+    p.box('#454f5c', 0.035, 1.22, 0.66, x0 - 0.021, y, door);
+    p.box('#a7afb7', 0.04, 0.035, 0.14, x0 - 0.05, y + 0.6, door + 0.2, {
+      cast: false,
+    });
+    p.box('#dce4e7', 0.07, 0.08, 0.17, x0 - 0.05, y + 1.27, door, {
+      cast: false,
+    });
+    p.box('#7f8a92', 0.3, 0.18, 0.3, cx + 0.2, y + h + 0.14, z0 + 0.4);
+    p.box('#7f8a92', 0.03, 1.0, 0.03, x1 - 0.3, y + h + 0.14, z0 + 0.4, {
+      cast: false,
+    });
+    if (detail)
+      for (let i = 0; i < 4; i++)
+        p.box('#7f8a92', 0.48 - i * 0.07, 0.018, 0.018, x1 - 0.3, y + h + 0.74 + i * 0.08, z0 + 0.4, { cast: false });
+  }
+  if (tank) {
+    const [x, z] = tank;
+    p.box('#667582', 1.1, 0.25, 0.9, x, y, z);
+    p.box('#b9c3c8', 1.0, 0.8, 0.8, x, y + 0.25, z, { surf: 'plastic' });
+    for (let i = 1; i < 4; i++)
+      p.box('#929fa8', 1.01, 0.016, 0.81, x, y + 0.25 + i * 0.2, z, {
+        cast: false,
+      });
+    p.box('#b9c3c8', 0.2, 0.06, 0.2, x + 0.2, y + 1.05, z, { cast: false });
+    if (detail) {
+      for (const dz of [-0.15, 0.15])
+        p.box('#667582', 0.025, 1.04, 0.025, x + 0.53, y, z + dz, {
+          cast: false,
+        });
+      for (let i = 0; i < 5; i++)
+        p.box('#667582', 0.025, 0.025, 0.3, x + 0.53, y + 0.2 + i * 0.2, z, {
+          cast: false,
+        });
+    }
+  }
+  for (const [x, z, turn = 0] of units) {
+    p.box('#667582', 0.75, 0.06, 0.32, x, y, z, { ry: turn, cast: false });
+    p.box(UNIT, 0.65, 0.44, 0.28, x, y + 0.06, z, { ry: turn });
+    p.box(GRILLE, 0.38, 0.32, 0.018, x + Math.sin(turn) * 0.15, y + 0.12, z + Math.cos(turn) * 0.15, {
+      ry: turn,
+      cast: false,
+    });
+  }
+  for (const [x, z] of vents) {
+    p.box(VENT, 0.09, 0.3, 0.09, x, y, z);
+    p.box('#a3adb5', 0.2, 0.06, 0.2, x, y + 0.3, z, { cast: false });
   }
 }
 

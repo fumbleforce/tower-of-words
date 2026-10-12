@@ -193,8 +193,13 @@ export function* farModelSteps(
       continue;
     }
     const fh = b.floorH || FLOOR_H,
-      s = { kind: b.windows || 'flat', storeys: b.storeys || 2, fh },
-      h = s.storeys * fh,
+      s = {
+        kind: b.windows || 'flat',
+        storeys: b.storeys || 2,
+        fh,
+        groundOffset: (b.groundH || fh) - fh,
+      },
+      h = s.storeys * fh + s.groundOffset,
       wall = new THREE.Color(typeof b.wall === 'number' ? TOWN.walls[b.wall] : b.wall || TOWN.walls[0]);
     const es = edges(poly);
     for (const e of es) facePatch(B, e.a, e.d, e.n, 0, e.L, 0, h, 0, wall);

@@ -12,6 +12,7 @@ import { boxes } from '../forecourt/details.js';
 import { Parts } from '../outdoor/parts.js';
 import { PITCH, DOOR } from '../dorms/layout.js';
 import { DORMS, STOREY, STAIR_WINDOW, RETURN_X, RETURN_Z } from './plan.js';
+import { exteriorRoof } from './exterior-roof.js';
 
 export const BLOCK = {
   x0: -10.5, // the long face's west end, well past the frame
@@ -136,7 +137,7 @@ function windowsZ(parts, y, z0, z1, n, x, h = 0.9, f = 0) {
   }
 }
 
-export function ericBlock(root) {
+export function ericBlock(root, { backdrop = false } = {}) {
   const B = BLOCK,
     top = B.ground + B.floors * B.floor;
   const parts = {
@@ -195,31 +196,18 @@ export function ericBlock(root) {
       dir: 1,
     });
     parts.trim.push([0.04, 0.1, B.rz - B.z, B.rx - 0.01, y - 0.25, (B.z + B.rz) / 2]);
+    // The rear flats face dorm_1e. End windows continue the same floor heights.
+    for (const k of [-4, ...FLATS]) {
+      const wx = DORMS.x + k * PITCH - 0.075;
+      (lit(f, k + 4) ? parts.lit : parts.glass).push([0.75, 0.72, 0.02, wx, y + 0.52, B.back - 0.015]);
+      parts.frame.push([0.85, 0.04, 0.08, wx, y + 1.24, B.back - 0.035]);
+      parts.rail.push([0.9, 0.06, 0.14, wx, y + 0.45, B.back - 0.055]);
+    }
   }
   // the ground floor where it shows: west of the laundry, the return's west face over its strip bed, its front
   windowsX(parts, 0.7, B.x0, -6.0, 3, B.z + 0.01, 0.95, 1);
   windowsZ(parts, 0.8, -1.3, B.rz - 0.1, 2, B.rx - 0.01, 0.9, 3);
   windowsX(parts, 0.7, B.rx, B.x1, 3, B.rz + 0.01, 0.95, 2);
-  // roof: a parapet, a water tank on legs, two plant boxes
-  parts.trim.push(
-    [B.rx - B.x0, 0.35, 0.18, (B.x0 + B.rx) / 2, top, B.z + 0.09],
-    [B.x1 - B.rx, 0.35, 0.18, (B.rx + B.x1) / 2, top, B.rz - 0.09],
-    [0.18, 0.35, B.rz - B.z, B.rx + 0.09, top, (B.z + B.rz) / 2],
-  );
-  const tank = [
-    [1.6, 1.0, 1.1, -3.2, top + 0.45, -6.2],
-    [0.9, 0.55, 0.7, 1.8, top, -6.4],
-    [0.7, 0.45, 0.7, 7.6, top, -1.2],
-  ];
-  const legs = [];
-  for (const [dx, dz] of [
-    [-0.7, -0.45],
-    [0.7, -0.45],
-    [-0.7, 0.45],
-    [0.7, 0.45],
-  ])
-    legs.push([0.08, 0.45, 0.08, -3.2 + dx, top, -6.2 + dz]);
-
   // every part of the face in one vertex-coloured mesh (outdoor/parts.js): one draw, not one per colour
   const P = new Parts();
   const put = (list, color) => list.forEach(([w, h, d, x, y, z]) => P.box(color, w, h, d, x, y, z));
@@ -235,11 +223,10 @@ export function ericBlock(root) {
   put(parts.drip, '#5b6068');
   put(parts.door, STEEL);
   put(parts.plate, '#d8dadc');
-  put(parts.meter, '#b4b8bc');
+  if (!backdrop) put(parts.meter, '#b4b8bc');
   put(parts.frost, '#8f9aa4');
-  put(parts.grille, '#4a515c');
-  put(tank, '#9fa4a9');
-  put(legs, FRAME);
+  if (!backdrop) put(parts.grille, '#4a515c');
+  exteriorRoof(P, B, { detail: !backdrop });
   parts.cloth.forEach((list, i) => put(list, CLOTHES[i]));
   P.build(root);
   const warm = boxes(parts.lit, LIT);
@@ -253,5 +240,16 @@ export function ericBlock(root) {
   cool.material = mat(COOL, { emissive: new THREE.Color(COOL_GLOW), emissiveIntensity: 0.3 });
   cool.castShadow = false;
   root.add(cool);
-  return { top };
+  if (backdrop) {
+    warm.material.color.set(GLASS);
+    warm.material.emissiveIntensity = 0;
+    cool.material.emissiveIntensity = 0;
+  }
+  return {
+    top,
+    glows: [
+      { mat: warm.material, night: { color: LIT, emissiveIntensity: 0.9 } },
+      { mat: cool.material, night: { emissiveIntensity: 0.3 } },
+    ],
+  };
 }

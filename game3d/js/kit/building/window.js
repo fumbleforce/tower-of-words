@@ -24,6 +24,16 @@ export const windowBay = piece({
     tall: { w: 0.9, h: 2.1, lights: 1, transom: 0.8, sill: false, rail: true, lit: 0.4, blind: 0.5 },
     shop: { w: 2.4, h: 2.0, lights: 3, transom: 0.84, riser: 0.45, frame: STEEL.dark, lit: 0.85, blind: 0 },
     frosted: { w: 0.7, h: 0.6, lights: 1, transom: 0, sill: true, frosted: true, lit: 0, blind: 0 },
+    dorm: {
+      w: 0.8,
+      h: 0.85,
+      lights: 2,
+      transom: 0.74,
+      sill: true,
+      lit: 0.3,
+      blind: 0,
+      shallow: true,
+    },
   },
   vary: { tone: 0.03, wear: [0, 0.25] },
   preview: { wall: [3.2, 3.2], y: 0.9 }, // the Asset library shows it on a plain wall, its glass 0.9 up
@@ -32,6 +42,34 @@ export const windowBay = piece({
     const y0 = o.riser || 0,
       frame = o.frame || TRIM.frame,
       fw = 0.06; // the frame's width
+    if (o.shallow) {
+      // A frame ring has eight triangles. It keeps the reveal in distant apartment
+      // rows without building four solid frame bars around every pane.
+      const shape = new THREE.Shape();
+      shape.moveTo(-w / 2 - fw, -fw);
+      shape.lineTo(w / 2 + fw, -fw);
+      shape.lineTo(w / 2 + fw, h + fw);
+      shape.lineTo(-w / 2 - fw, h + fw);
+      shape.closePath();
+      const hole = new THREE.Path();
+      hole.moveTo(-w / 2, 0);
+      hole.lineTo(-w / 2, h);
+      hole.lineTo(w / 2, h);
+      hole.lineTo(w / 2, 0);
+      hole.closePath();
+      shape.holes.push(hole);
+      k.geo(frame, new THREE.ShapeGeometry(shape).translate(0, 0, 0.07), {
+        cast: false,
+      });
+      k.glass(new THREE.PlaneGeometry(w, h).translate(0, h / 2, 0.035));
+      if (!k.phone) {
+        k.geo(frame, new THREE.PlaneGeometry(0.04, h).translate(0, h / 2, 0.072), { cast: false });
+        k.geo(frame, new THREE.PlaneGeometry(w, 0.04).translate(0, h * transom, 0.072), { cast: false });
+      }
+      if (k.r() < o.lit) k.lit(new THREE.PlaneGeometry(w, h).translate(0, h / 2, 0.039));
+      k.box(TRIM.sill, w + 0.18, 0.06, 0.14, 0, -0.12, 0.06, { cast: false });
+      return;
+    }
     // the reveal: a dark recess the glass sits in
     k.box('#2c3136', w + 0.02, h + 0.02, 0.01, 0, y0 - 0.01, 0.012, { cast: false });
     // the glass, set back

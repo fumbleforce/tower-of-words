@@ -143,13 +143,13 @@ export function edges(poly) {
 // window rows on one face; `lit` gets the same windows a hair further out, for the evening
 // (win coloured with wc when it is the far ring's vertex-coloured bucket); B takes fins and balconies (near ring);
 // `from`: the first floor with windows (the floors under it are left as they are)
-export function windows(B, e, { kind, storeys, fh, from = 0 }, id, win, lit, wc = null) {
+export function windows(B, e, { kind, storeys, fh, from = 0, groundOffset = 0 }, id, win, lit, wc = null) {
   const add = (u0, u1, y0, y1, key) => {
     facePatch(win, e.a, e.d, e.n, u0, u1, y0, y1, 0.02, wc);
     if (hash(key) < 0.28) facePatch(lit, e.a, e.d, e.n, u0, u1, y0, y1, 0.035, null);
   };
   for (let f = from; f < storeys; f++) {
-    const y = f * fh;
+    const y = f * fh + (f ? groundOffset : 0);
     if (kind === 'office') {
       add(0.2, e.L - 0.2, y + 0.35 * fh, y + 0.85 * fh, `${id}|${f}|${e.a}`);
       continue;
@@ -169,10 +169,10 @@ export function windows(B, e, { kind, storeys, fh, from = 0 }, id, win, lit, wc 
   if (!B) return;
   if (kind === 'office')
     for (let u = 0; u <= e.L + 0.01; u += Math.max(1.1, e.L / Math.ceil(e.L / 1.4)))
-      edgeBox(B, e.a, e.d, e.n, u - 0.05, u + 0.05, 0, storeys * fh, 0, 0.18, null);
+      edgeBox(B, e.a, e.d, e.n, u - 0.05, u + 0.05, 0, storeys * fh + groundOffset, 0, 0.18, null);
   if (kind === 'dorm' && e.n[1] > 0.5)
     for (let f = 1; f < storeys; f++) {
-      edgeBox(B, e.a, e.d, e.n, 0.1, e.L - 0.1, f * fh - 0.08, f * fh, 0, 0.5, null);
-      edgeBox(B, e.a, e.d, e.n, 0.1, e.L - 0.1, f * fh, f * fh + 0.45, 0.46, 0.5, null);
+      edgeBox(B, e.a, e.d, e.n, 0.1, e.L - 0.1, f * fh + groundOffset - 0.08, f * fh + groundOffset, 0, 0.5, null);
+      edgeBox(B, e.a, e.d, e.n, 0.1, e.L - 0.1, f * fh + groundOffset, f * fh + groundOffset + 0.45, 0.46, 0.5, null);
     }
 }
