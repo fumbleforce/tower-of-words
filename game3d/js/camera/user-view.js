@@ -3,8 +3,8 @@ import { followAllowed } from './policy.js';
 
 // The player's own view of the play camera (Jørgen, 2026-10-10: "make scrolling zoom in rather than open up the log"
 // and "middle mouse hold does free camera rotation. clicking camera resets to the top down view"): the wheel zooms,
-// holding the middle button and dragging orbits (yaw and pitch), the Camera button resets. It is an offset on top of
-// whatever shot the place gives (cam.js RoomCam reads `userView`; camera/follow.js reads it for third person), so it is
+// holding the middle button and dragging orbits (yaw and pitch), a contextual Reset view button resets. The offset
+// sits on the place shot (cam.js reads `userView`; camera/follow.js reads it for third person), so it is
 // shown only in free play and eases away while a story or conversation camera has the shot, then comes back.
 export const ZOOM = [0.35, 1.25]; // times the place's own distance (smaller = closer)
 export const PITCH = [-0.75, 0.45]; // radians added to the place's elevation (the sum is clamped in cam.js)
@@ -103,16 +103,17 @@ export function installUserView(game, canvas) {
   window.addEventListener('mousedown', (e) => e.button === 1 && over(e) && e.preventDefault(), true);
   window.addEventListener('auxclick', (e) => e.button === 1 && over(e) && e.preventDefault(), true);
 
-  // the Camera button: back to the top-down view the place gives, zoom included
+  // Offer a reset only when the player has changed the view.
   const button = document.createElement('button');
   button.id = 'cameraReset';
   button.type = 'button';
   button.hidden = true;
-  button.textContent = 'Camera';
-  button.title = 'Reset the camera to the top-down view · wheel: zoom · hold middle mouse: turn';
-  button.setAttribute('aria-label', 'Reset the camera to the top-down view');
+  button.textContent = 'Reset view';
+  button.title = 'Reset zoom and rotation';
+  button.setAttribute('aria-label', 'Reset zoom and rotation');
   button.addEventListener('click', () => {
     userView.reset();
+    button.hidden = true;
     button.blur();
   });
   button.addEventListener('keydown', (e) => {
@@ -128,7 +129,8 @@ export function installUserView(game, canvas) {
       Object.assign(userView.shown, { zoom: 1, yaw: 0, pitch: 0 });
     }
     userView.step(dt, free());
-    const show = !touchOnly() && free() && followAllowed(game, true);
+    const changed = userView.zoom !== 1 || userView.yaw !== 0 || userView.pitch !== 0;
+    const show = changed && !touchOnly() && free() && followAllowed(game, true);
     if (button.hidden === show) button.hidden = !show;
   };
 }

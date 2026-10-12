@@ -1,6 +1,6 @@
 // The feedback window's screenshot (js/feedback.js): the WebGL frame, then the page drawn over it.
-// The canvas keeps its picture only until the frame is shown, so it is copied in an animation frame queued after
-// main.js's own (as menu.js's thumbnails are). The HUD is plain DOM: every visible box, border, text run, image
+// The canvas is cleared after presentation, and a capped animation frame may not draw. Render the held view
+// immediately before copying it, in the same task. The HUD is plain DOM: every visible box, border, text run, image
 // and icon is read in that same frame and drawn onto the copy (box shadows, gradients and blur are left out).
 // Text fields aren't text nodes, so what is typed in them (the romaji practice answer) is drawn from their value,
 // or their placeholder when empty.
@@ -20,6 +20,7 @@ export function capture(skip = null) {
           const x = cv.getContext('2d');
           x.fillStyle = getComputedStyle(document.body).backgroundColor;
           x.fillRect(0, 0, cv.width, cv.height);
+          window.__game?.view?.render(); // draw even when paused or covered by the map; never advance time
           const c = $('#c');
           if (c && c.width) {
             const r = c.getBoundingClientRect();

@@ -1,4 +1,4 @@
-// Wheel zoom, middle-drag turn and the Camera button in free play. Usage: node user-view-check.mjs W H
+// Wheel zoom, middle-drag turn and a contextual Reset view button in free play. Usage: node user-view-check.mjs W H
 // (BASE=.claude/worktrees/<name>/game3d to test a worktree; needs the review server on 8771).
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import assert from 'node:assert/strict';
@@ -9,6 +9,8 @@ await withBrowserJob(
   `user-view-${W}`,
   async (browser) => {
     const page = await browser.newPage({ viewport: { width: W, height: H } });
+    await page.route('**/*', route => new URL(route.request().url()).pathname.includes('/private/')
+      ? route.fulfill({ status: 404, body: '' }) : route.continue());
     const errors = [];
     page.on('pageerror', (e) => errors.push(e.message));
     await page.addInitScript(() =>
@@ -30,6 +32,8 @@ await withBrowserJob(
         return { dist: +p.distanceTo(c.target).toFixed(2), x: +p.x.toFixed(2), y: +p.y.toFixed(2), z: +p.z.toFixed(2) };
       });
     const settle = () => page.waitForTimeout(1500);
+    assert.equal(await page.locator('#cameraReset').isVisible(), false, 'no reset box in default view');
+    if (W < 700) { console.log('PASS phone: no camera reset box'); return; }
     const a = await view();
     await page.mouse.move(W / 2, H / 2);
     for (let i = 0; i < 5; i++) await page.mouse.wheel(0, -120);
@@ -37,6 +41,8 @@ await withBrowserJob(
     const b = await view();
     console.log('start', a, 'zoomed in', b);
     assert(b.dist < a.dist * 0.8, 'wheel up zooms in');
+    assert.equal(await page.locator('#cameraReset').innerText(), 'Reset view');
+    assert.equal(await page.locator('#cameraReset').isVisible(), true, 'reset appears only after a change');
     for (let i = 0; i < 40; i++) await page.mouse.wheel(0, -120);
     await settle();
     const min = await view();
@@ -75,6 +81,7 @@ await withBrowserJob(
     console.log('low pitch', low);
     assert(low.y > 0.8, 'pitch clamped above ground');
     await page.locator('#cameraReset').click();
+    assert.equal(await page.locator('#cameraReset').isVisible(), false, 'reset hides immediately');
     await settle();
     const r = await view();
     console.log('reset', r);
