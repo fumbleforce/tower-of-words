@@ -34,10 +34,13 @@ export function fittings(p, signs, lights, k, door) {
     const [x, z] = faceAt(f, u, o);
     return [x, y, z];
   };
-  const bw = Math.min(2.6, c.c1 - c.c0 - 0.2);
-  signs.board(kana, en, colour, bw, 0.56, at(t, c.out - 0.14, 2.3 + 0.3), ry);
-  const [bx, , bz] = at(t, c.out - 0.17, 0);
-  p.box('#2c3b42', f.d[0] ? bw + 0.04 : 0.04, 0.6, f.d[0] ? 0.04 : bw + 0.04, bx, 2.3, bz);
+  const bw = Math.min(2.6, c.c1 - c.c0 - 0.2),
+    base = c.y + c.h;
+  // Seat the backing on the fascia and keep the lettering ahead of its front.
+  // A board behind this lip loses its English line from the walking camera.
+  signs.board(kana, en, colour, bw, 0.56, at(t, c.out + 0.012, base + 0.3), ry);
+  const [bx, , bz] = at(t, c.out - 0.01, 0);
+  p.box('#2c3b42', f.d[0] ? bw + 0.04 : 0.04, 0.6, f.d[0] ? 0.04 : bw + 0.04, bx, base, bz);
   signs.card('準備中', 'CLOSED', 0.46, 0.3, at(t + 0.3, 0.012, 1.2), ry, { door: k.place });
   for (const s of [-1, 1]) {
     const [x, , z] = at(t + s * (c.c1 - c.c0) * 0.3, c.out * 0.5, 0);
