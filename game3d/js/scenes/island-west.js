@@ -100,6 +100,7 @@ export const WALKS = {
     slabs: true,
     planters: [{ at: [AXIS[0] - 2.1, 23.7], face: Math.PI / 2, w: 2.8, d: 0.5, variant: 'flowering', seed: 546 }],
     lamps: [[-17.7, 21.8]],
+    lampPoolOffset: [2, 1.5],
     benches: [
       [AXIS[1] + 1.15, 22.95, -Math.PI / 2],
       [AXIS[1] + 1.15, 24.55, -Math.PI / 2],

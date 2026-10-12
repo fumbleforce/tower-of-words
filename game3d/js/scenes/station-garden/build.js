@@ -37,7 +37,7 @@ export function* gardenSteps(island, root) {
   pv.build(garden);
   p.build(garden);
   const glow = glowSet().add(lights.build(garden).glows),
-    practical = new THREE.PointLight('#ffe3b5', 4.5, 8, 2);
+    practical = new THREE.PointLight('#ffe3b5', 8, 9, 2);
   const [lx, lz] = WEST.walks.garden_square.lamps[0];
   practical.position.set(lx, 2.4, lz);
   practical.visible = false;
