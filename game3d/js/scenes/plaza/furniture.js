@@ -16,6 +16,8 @@ import { bikeRow, bicycle } from '../forecourt/details.js';
 import { merged, AWNING } from '../plaza-buildings.js';
 import { BENCH_ANGLES, RING_LAMPS, SOUTH_PAIR } from './green.js';
 import * as P from './plan.js';
+import { REAR_DOOR_OFFSET } from '../shotengai/rear-facades.js';
+import { BAYS } from '../island-south.js';
 import { CROSS_X } from './east-plan.js';
 
 const { F, R, BORDER, BASIN, LANE, LINK, LZ, HALF, AVENUE, CANTEEN, SHOPS_Z, polar } = P;
@@ -216,11 +218,21 @@ export function buildTerrace(root, nav) {
   return { day, closed, blocks };
 }
 
-// bikes in a rack along the shops' backs, by their back doors; one left on its stand by the north-east benches
+// Two short racks sit between service doors, leaving the doors and thresholds
+// clear; one other bicycle is left on its stand by the north-east benches.
 export function buildBikes(root, nav) {
-  const row = bikeRow(7, { gaps: [2, 5], seed: 4 });
-  row.position.set(F[0] - 6.5, 0, SHOPS_Z - 0.75);
-  root.add(row);
+  for (const [bay, count] of [
+    [8, 3],
+    [9, 2],
+  ]) {
+    const row = bikeRow(count, { seed: 4 + bay });
+    // Bay centers follow the same island grid as shopStreetSteps. The midpoint
+    // between this bay's door and the previous door lies on the solid wall bay.
+    const grid = P.SHOPS.a[0] + BAYS.x0 - P.building('shops_north').rect[0];
+    const center = grid + BAYS.w * bay + REAR_DOOR_OFFSET;
+    row.position.set(center - ((count - 1) * 0.55) / 2, 0, SHOPS_Z - 0.75);
+    root.add(row);
+  }
   const a = (BENCH_ANGLES[2] + BENCH_ANGLES[3]) / 2;
   const [x, z] = polar(a, R - BORDER - 1.2);
   const bike = bicycle('#6f8a9c', { basket: true });

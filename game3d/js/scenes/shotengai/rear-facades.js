@@ -3,6 +3,8 @@
 import * as THREE from 'three';
 import { shopWindow } from './facades.js';
 
+export const REAR_DOOR_OFFSET = -1.03;
+
 const FRAME = '#46545e',
   SILL = '#b3b7b8';
 export function rearFacade(p, panes, box, { u, back, n, floorH, storeys, bay }) {
@@ -17,7 +19,7 @@ export function rearFacade(p, panes, box, { u, back, n, floorH, storeys, bay }) 
     }
   // A painted steel service door set within a dark reveal, with a panel,
   // threshold and lever; the small hood is physically supported off the frame.
-  const door = -1.03,
+  const door = REAR_DOOR_OFFSET,
     doorH = floorH * 0.8;
   put(FRAME, 0.98, doorH + 0.08, 0.07, door, 0.035, 0.02);
   put(bay % 3 === 0 ? '#617d78' : '#71818b', 0.82, doorH - 0.08, 0.035, door, 0.08, 0.075);
