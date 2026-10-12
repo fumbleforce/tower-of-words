@@ -11,6 +11,7 @@ import { lightPlace } from '../kit/light/rig.js';
 import { PLAYER_ID } from '../mc.js';
 import { dormFloors } from './dorm-floors.js';
 import { dormView } from './dorm-view.js';
+import { dormFalls } from './dorm-falls.js';
 import { STAIR, WEST_END, LEVEL_DX } from '../scenes/dorms/layout.js';
 
 // Eric's floor and his room, and the rest of the building he can walk (docs/game/places.md, Eric's dorm building).
@@ -196,6 +197,7 @@ export function dormsPlace(game) {
     space: w.root,
     mapOffset: () => [floors.dx(), 0], // all floors share the same island footprint
     nav: w.nav,
+    falls: dormFalls(), // the parapets a jump goes over (dorm-falls.js, movement/falls.js)
     sun: w.sun,
     charScale: K,
     // each floor's batches under its own group in the draw-call pass (perf/batch.js), so none spans two floors and

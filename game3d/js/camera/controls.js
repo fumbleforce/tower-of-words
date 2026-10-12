@@ -5,7 +5,7 @@ export function followControls(game, canvas, { available, look, refresh }) {
   button.type = 'button';
   button.hidden = true;
   button.setAttribute('aria-label', 'Capture mouse to look around. Escape releases the mouse.');
-  button.title = 'Mouse: look · WASD: move · Shift: run · E: interact · Esc: release';
+  button.title = 'Mouse: look · WASD: move · Shift: run · Space: jump · E: interact · Esc: release';
   document.body.append(button);
   const locked = () => document.pointerLockElement === canvas;
   let requested = false,
