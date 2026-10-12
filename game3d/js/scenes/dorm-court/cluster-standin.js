@@ -1,7 +1,7 @@
 // A plain stand-in for the dorm courtyard (scenes/dorm-court.js), for the plaza, which builds the dorm cluster
 // (dorm-court/cluster.js) east of the dorm street but not the courtyard itself: its paving, the walled and planted
 // front bed open at the gate, the garden's trees, the drinks machines, bench, bins, lamps, bike shelter and garbage
-// cage where the courtyard has them (dorm-court/plan.js), and one low roof for the laundry, hall and sento. In the
+// cage where the courtyard has them (dorm-court/plan.js), and the separate low roofs of the laundry, hall and sento. In the
 // island frame, like the cluster.
 import * as THREE from 'three';
 import { lowWall, KERB } from '../outdoor/edges.js';
@@ -129,7 +129,8 @@ export function* standIn(pv, p, lights) {
   const volume = (color, x0, x1, z0, z1, h) => local.box(color, x1 - x0, h, z1 - z0, (x0 + x1) / 2, 0, (z0 + z1) / 2);
   volume('#a3a6a9', P.LAUNDRY.x0, P.LAUNDRY.x1, P.BLOCK_Z, P.LAUNDRY.z, 2.1);
   volume('#8d969f', P.HALL[0], P.HALL[1], P.BLOCK_Z, P.FRONT_Z, 2.2);
-  volume('#c9c6bf', P.SENTO.x0, P.EAST + 0.4, P.BLOCK_Z, P.SENTO.z, 1.9);
+  volume('#c9c6bf', P.SENTO.x0, P.EAST + 0.4, P.SENTO.z - 1.6, P.SENTO.z, 1.9);
+  volume('#c9c6bf', P.SENTO.x0 + 0.3, P.EAST + 0.4, P.BLOCK_Z, P.SENTO.z - 1.6, 1.6);
   local.box(
     '#69849a',
     P.LAUNDRY.x1 - P.LAUNDRY.x0 - 0.5,

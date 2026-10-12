@@ -128,12 +128,21 @@ function windowsX(parts, y, x0, x1, n, z, h = 0.9, f = 0) {
   }
 }
 // the same on a face along z (the return's west face)
-function windowsZ(parts, y, z0, z1, n, x, h = 0.9, f = 0) {
+function windowsZ(parts, y, z0, z1, n, x, h = 0.9, f = 0, dir = -1) {
   const step = (z1 - z0) / n;
   for (let c = 0; c < n; c++) {
     const cz = z0 + step * (c + 0.5);
     (lit(f + 2, c + 1) ? parts.lit : parts.glass).push([0.03, h, step * 0.26, x, y, cz]);
-    parts.frame.push([0.06, 0.05, step * 0.26 + 0.08, x - 0.01, y - 0.05, cz]);
+    parts.frame.push([0.06, 0.05, step * 0.26 + 0.08, x + dir * 0.01, y - 0.05, cz]);
+    if (dir > 0) {
+      const w = step * 0.26;
+      parts.frame.push(
+        [0.065, 0.04, w + 0.08, x + 0.025, y + h, cz],
+        [0.065, h, 0.04, x + 0.025, y, cz - w / 2 - 0.02],
+        [0.065, h, 0.04, x + 0.025, y, cz + w / 2 + 0.02],
+        [0.065, h, 0.025, x + 0.025, y, cz],
+      );
+    }
   }
 }
 
@@ -196,6 +205,10 @@ export function ericBlock(root, { backdrop = false } = {}) {
       dir: 1,
     });
     parts.trim.push([0.04, 0.1, B.rz - B.z, B.rx - 0.01, y - 0.25, (B.z + B.rz) / 2]);
+    // The return's outer end faces the dorm street. Punched room windows and
+    // floor bands finish this visible end without adding a second open gallery.
+    windowsZ(parts, y + 0.45, B.back + 0.4, B.rz - 0.4, 3, B.x1 + 0.012, 0.85, f + 2, 1);
+    parts.trim.push([0.08, 0.085, B.rz - B.back, B.x1 + 0.018, y - 0.16, (B.back + B.rz) / 2]);
     // The rear flats face dorm_1e. End windows continue the same floor heights.
     for (const k of [-4, ...FLATS]) {
       const wx = DORMS.x + k * PITCH - 0.075;
@@ -208,6 +221,7 @@ export function ericBlock(root, { backdrop = false } = {}) {
   windowsX(parts, 0.7, B.x0, -6.0, 3, B.z + 0.01, 0.95, 1);
   windowsZ(parts, 0.8, -1.3, B.rz - 0.1, 2, B.rx - 0.01, 0.9, 3);
   windowsX(parts, 0.7, B.rx, B.x1, 3, B.rz + 0.01, 0.95, 2);
+  windowsZ(parts, 0.75, B.back + 0.4, B.rz - 0.4, 3, B.x1 + 0.012, 0.85, 3, 1);
   // every part of the face in one vertex-coloured mesh (outdoor/parts.js): one draw, not one per colour
   const P = new Parts();
   const put = (list, color) => list.forEach(([w, h, d, x, y, z]) => P.box(color, w, h, d, x, y, z));
@@ -241,6 +255,7 @@ export function ericBlock(root, { backdrop = false } = {}) {
   cool.castShadow = false;
   root.add(cool);
   if (backdrop) {
+    root.traverse((m) => m.isMesh && (m.castShadow = false));
     warm.material.color.set(GLASS);
     warm.material.emissiveIntensity = 0;
     cool.material.emissiveIntensity = 0;
