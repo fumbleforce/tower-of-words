@@ -34,6 +34,7 @@ import { drain } from '../perf/slice.js';
 import { emiOffice, emiOfficeBlocks, EMI_X, EMI_DOOR } from './office-emi.js';
 import { MC } from '../mc.js';
 import { officeWalls } from './office-enclosure.js';
+import { corridorToiletSigns, toiletSign } from './office-signs.js';
 export { EMI } from './office-emi.js';
 
 export const K = 1.18; // people scale in the office and lobby
@@ -60,31 +61,6 @@ export const DOORWAYS = Object.entries(DOORS).flatMap(([z, doors]) =>
   Object.entries(doors).map(([id, [x0, x1]]) => ({ id, x0, x1, z0: +z - T / 2, z1: +z + T / 2 })),
 );
 
-function toiletSign(kind) {
-  const tex = textTexture(
-    (g, W, H) => {
-      g.fillStyle = kind === 'm' ? '#4f6f9a' : '#9a5a64';
-      g.fillRect(0, 0, W, H);
-      g.fillStyle = '#f2f2f2';
-      g.beginPath();
-      g.arc(W / 2, 38, 18, 0, Math.PI * 2);
-      g.fill();
-      if (kind === 'm') g.fillRect(W / 2 - 20, 62, 40, 70);
-      else {
-        g.beginPath();
-        g.moveTo(W / 2, 60);
-        g.lineTo(W / 2 + 34, 132);
-        g.lineTo(W / 2 - 34, 132);
-        g.fill();
-      }
-      g.fillRect(W / 2 - 16, 130, 12, 44);
-      g.fillRect(W / 2 + 4, 130, 12, 44);
-    },
-    128,
-    190,
-  );
-  return plane(0.26, 0.38, tex);
-}
 function nameCard(name, ro) {
   // printed katakana, the English added by hand in blue pen
   const tex = textTexture(
@@ -761,6 +737,7 @@ export function* officeSteps() {
     root.add(p);
   }
   yield;
+  corridorToiletSigns(root, CS);
   // corridor dressing: noticeboard, extinguisher, hydrant, distribution board, notices
   const nb = pinboard(0.9, 0.46);
   nb.position.set(-3.0, 0.72, CN + T / 2 + 0.01);
@@ -978,7 +955,7 @@ export function* officeSteps() {
     dS = (i) => desks.find((d) => d.row === 's' && d.i === i);
   yield;
   // Back-to-back desks; the chief sits across the head.
-  const DX = [-2.0, -0.8, 0.4],
+  const DX = [-2.0, -0.8],
     ZN = -3.72,
     ZS = -3.0;
   const desks = [];
@@ -986,7 +963,7 @@ export function* officeSteps() {
     ['n', ZN, -1],
     ['s', ZS, 1],
   ])
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < DX.length; i++) {
       const d = desk({ w: 1.12, d: 0.7, seed: i + (row === 'n' ? 3 : 0), clutter: 1, crt: true });
       d.position.set(DX[i], 0, z);
       if (face < 0) d.rotation.y = Math.PI;
@@ -1009,9 +986,7 @@ export function* officeSteps() {
   chiefChair.position.set(2.2, 0, -3.36);
   root.add(chiefChair);
   yield;
-  root.add(rbox(0.4, 0.3, 0.34, PAL.box, { x: DX[2] + 0.25, y: 0.42, z: ZN - 0.05, r: 0.02 }));
-  yield;
-  // the team has shrunk: three desks have their monitors under a cloth
+  // The remaining spare desk keeps its covered monitor.
   const cloth = (d) => {
     // Dust sheet follows the tube housing, with its hem on the desk.
     const g = new THREE.Group();
@@ -1026,7 +1001,7 @@ export function* officeSteps() {
     root.add(g);
     return g;
   };
-  const covers = [cloth(dN(1)), cloth(dN(2)), cloth(dS(2))];
+  const covers = [cloth(dN(1))];
   yield;
   // the 2019 party box on the cabinets, a tray of seven cups in the kitchenette, a nameplate face down on the chief's desk
   root.add(rbox(0.42, 0.22, 0.3, PAL.box, { x: -3.5, y: 1.2, z: Z0 + 0.3, r: 0.02 }));
@@ -1254,7 +1229,7 @@ export function* officeSteps() {
   root.add(nao.root);
   yield;
   const hiro = scaleUp(PEOPLE.worker(2));
-  seatAt(hiro, dS(2), Math.PI);
+  seatAt(hiro, dN(1), 0);
   root.add(hiro.root);
   yield;
   const mori = scaleUp(PEOPLE.mori());
@@ -1394,7 +1369,7 @@ export function* officeSteps() {
   secHand.visible = false;
   yield;
   // cable tray along the island's spine
-  root.add(rbox(3.5, 0.03, 0.08, '#5a606b', { x: -0.8, y: 0.01, z: (ZN + ZS) / 2, r: 0.01, cast: false }));
+  root.add(rbox(2.3, 0.03, 0.08, '#5a606b', { x: -1.4, y: 0.01, z: (ZN + ZS) / 2, r: 0.01, cast: false }));
 
   yield;
   // ---- lift lobby ----
@@ -1859,7 +1834,7 @@ export function* officeSteps() {
   B(-3.5, -3.1, -2.4, -2.0);
   B(-2.9, -1.9, -1.5, -0.55);
   B(-4.1, -3.6, -3.2, -2.8);
-  B(-2.62, 1.0, ZN - 0.36, ZS + 0.36); // island
+  B(DX[0] - 0.56, DX[1] + 0.56, ZN - 0.36, ZS + 0.36); // work pod
   for (const d of desks)
     B(
       d.seat[0] - 0.24,

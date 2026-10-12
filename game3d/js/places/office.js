@@ -196,8 +196,8 @@ export async function officePlace(game) {
     },
     covered_monitor: {
       ...PLACE_DETAILS.office.things.covered_monitor,
-      anchor: v3(w.dS(2).x, 1.0, w.dS(2).z),
-      ...at(w.dS(2).x, -1.75, w.dS(2).x, w.dS(2).z),
+      anchor: v3(w.dN(1).x, 1.0, w.dN(1).z),
+      ...at(w.dN(1).x, -5.05, w.dN(1).x, w.dN(1).z),
     },
     box_crowns: {
       ...PLACE_DETAILS.office.things.box_crowns,
