@@ -1,0 +1,352 @@
+{
+  "title": "Station garden with deliberate dead ends",
+  "date": "2026-10-13",
+  "by": "codex:island-builder",
+  "caption": "The garden paths end at planted seating and service courts. The redundant spur under the monorail is lawn, and the closed security circuit no longer appears to be a public route.",
+  "result": [
+    "round3-1366-morning-west-end",
+    "round3-1366-evening-feedback",
+    "round3-390-evening-station-end"
+  ],
+  "sections": [
+    {
+      "title": "Original station garden",
+      "images": [
+        {
+          "id": "before-1366-evening-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/1366-evening-entry.png",
+          "caption": "1366 evening entry"
+        },
+        {
+          "id": "before-1366-evening-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/1366-evening-feedback.png",
+          "caption": "1366 evening feedback"
+        },
+        {
+          "id": "before-1366-evening-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/1366-evening-station-end.png",
+          "caption": "1366 evening station end"
+        },
+        {
+          "id": "before-1366-evening-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/1366-evening-west-end.png",
+          "caption": "1366 evening west end"
+        },
+        {
+          "id": "before-1366-morning-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/1366-morning-entry.png",
+          "caption": "1366 morning entry"
+        },
+        {
+          "id": "before-1366-morning-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/1366-morning-feedback.png",
+          "caption": "1366 morning feedback"
+        },
+        {
+          "id": "before-1366-morning-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/1366-morning-station-end.png",
+          "caption": "1366 morning station end"
+        },
+        {
+          "id": "before-1366-morning-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/1366-morning-west-end.png",
+          "caption": "1366 morning west end"
+        },
+        {
+          "id": "before-390-evening-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/390-evening-entry.png",
+          "caption": "390 evening entry"
+        },
+        {
+          "id": "before-390-evening-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/390-evening-feedback.png",
+          "caption": "390 evening feedback"
+        },
+        {
+          "id": "before-390-evening-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/390-evening-station-end.png",
+          "caption": "390 evening station end"
+        },
+        {
+          "id": "before-390-evening-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/390-evening-west-end.png",
+          "caption": "390 evening west end"
+        },
+        {
+          "id": "before-390-morning-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/390-morning-entry.png",
+          "caption": "390 morning entry"
+        },
+        {
+          "id": "before-390-morning-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/390-morning-feedback.png",
+          "caption": "390 morning feedback"
+        },
+        {
+          "id": "before-390-morning-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/390-morning-station-end.png",
+          "caption": "390 morning station end"
+        },
+        {
+          "id": "before-390-morning-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/before/390-morning-west-end.png",
+          "caption": "390 morning west end"
+        }
+      ]
+    },
+    {
+      "title": "First bounded garden ends",
+      "images": [
+        {
+          "id": "round1-1366-evening-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/1366-evening-entry.png",
+          "caption": "1366 evening entry"
+        },
+        {
+          "id": "round1-1366-evening-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/1366-evening-station-end.png",
+          "caption": "1366 evening station end"
+        },
+        {
+          "id": "round1-1366-evening-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/1366-evening-west-end.png",
+          "caption": "1366 evening west end"
+        },
+        {
+          "id": "round1-1366-morning-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/1366-morning-entry.png",
+          "caption": "1366 morning entry"
+        },
+        {
+          "id": "round1-1366-morning-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/1366-morning-station-end.png",
+          "caption": "1366 morning station end"
+        },
+        {
+          "id": "round1-1366-morning-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/1366-morning-west-end.png",
+          "caption": "1366 morning west end"
+        },
+        {
+          "id": "round1-390-evening-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/390-evening-entry.png",
+          "caption": "390 evening entry"
+        },
+        {
+          "id": "round1-390-evening-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/390-evening-station-end.png",
+          "caption": "390 evening station end"
+        },
+        {
+          "id": "round1-390-evening-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/390-evening-west-end.png",
+          "caption": "390 evening west end"
+        },
+        {
+          "id": "round1-390-morning-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/390-morning-entry.png",
+          "caption": "390 morning entry"
+        },
+        {
+          "id": "round1-390-morning-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/390-morning-station-end.png",
+          "caption": "390 morning station end"
+        },
+        {
+          "id": "round1-390-morning-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round1/390-morning-west-end.png",
+          "caption": "390 morning west end"
+        }
+      ]
+    },
+    {
+      "title": "Continuous lawn and flowering troughs",
+      "images": [
+        {
+          "id": "round2-1366-evening-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/1366-evening-entry.png",
+          "caption": "1366 evening entry"
+        },
+        {
+          "id": "round2-1366-evening-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/1366-evening-feedback.png",
+          "caption": "1366 evening feedback"
+        },
+        {
+          "id": "round2-1366-evening-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/1366-evening-station-end.png",
+          "caption": "1366 evening station end"
+        },
+        {
+          "id": "round2-1366-evening-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/1366-evening-west-end.png",
+          "caption": "1366 evening west end"
+        },
+        {
+          "id": "round2-1366-morning-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/1366-morning-entry.png",
+          "caption": "1366 morning entry"
+        },
+        {
+          "id": "round2-1366-morning-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/1366-morning-feedback.png",
+          "caption": "1366 morning feedback"
+        },
+        {
+          "id": "round2-1366-morning-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/1366-morning-station-end.png",
+          "caption": "1366 morning station end"
+        },
+        {
+          "id": "round2-1366-morning-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/1366-morning-west-end.png",
+          "caption": "1366 morning west end"
+        },
+        {
+          "id": "round2-390-evening-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/390-evening-entry.png",
+          "caption": "390 evening entry"
+        },
+        {
+          "id": "round2-390-evening-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/390-evening-feedback.png",
+          "caption": "390 evening feedback"
+        },
+        {
+          "id": "round2-390-evening-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/390-evening-station-end.png",
+          "caption": "390 evening station end"
+        },
+        {
+          "id": "round2-390-evening-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/390-evening-west-end.png",
+          "caption": "390 evening west end"
+        },
+        {
+          "id": "round2-390-morning-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/390-morning-entry.png",
+          "caption": "390 morning entry"
+        },
+        {
+          "id": "round2-390-morning-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/390-morning-feedback.png",
+          "caption": "390 morning feedback"
+        },
+        {
+          "id": "round2-390-morning-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/390-morning-station-end.png",
+          "caption": "390 morning station end"
+        },
+        {
+          "id": "round2-390-morning-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round2/390-morning-west-end.png",
+          "caption": "390 morning west end"
+        }
+      ]
+    },
+    {
+      "title": "Light reaching the seating court",
+      "images": [
+        {
+          "id": "round3-1366-evening-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/1366-evening-entry.png",
+          "caption": "1366 evening entry"
+        },
+        {
+          "id": "round3-1366-evening-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/1366-evening-feedback.png",
+          "caption": "1366 evening feedback"
+        },
+        {
+          "id": "round3-1366-evening-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/1366-evening-station-end.png",
+          "caption": "1366 evening station end"
+        },
+        {
+          "id": "round3-1366-evening-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/1366-evening-west-end.png",
+          "caption": "1366 evening west end"
+        },
+        {
+          "id": "round3-1366-morning-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/1366-morning-entry.png",
+          "caption": "1366 morning entry"
+        },
+        {
+          "id": "round3-1366-morning-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/1366-morning-feedback.png",
+          "caption": "1366 morning feedback"
+        },
+        {
+          "id": "round3-1366-morning-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/1366-morning-station-end.png",
+          "caption": "1366 morning station end"
+        },
+        {
+          "id": "round3-1366-morning-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/1366-morning-west-end.png",
+          "caption": "1366 morning west end"
+        },
+        {
+          "id": "round3-390-evening-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/390-evening-entry.png",
+          "caption": "390 evening entry"
+        },
+        {
+          "id": "round3-390-evening-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/390-evening-feedback.png",
+          "caption": "390 evening feedback"
+        },
+        {
+          "id": "round3-390-evening-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/390-evening-station-end.png",
+          "caption": "390 evening station end"
+        },
+        {
+          "id": "round3-390-evening-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/390-evening-west-end.png",
+          "caption": "390 evening west end"
+        },
+        {
+          "id": "round3-390-morning-entry",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/390-morning-entry.png",
+          "caption": "390 morning entry"
+        },
+        {
+          "id": "round3-390-morning-feedback",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/390-morning-feedback.png",
+          "caption": "390 morning feedback"
+        },
+        {
+          "id": "round3-390-morning-station-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/390-morning-station-end.png",
+          "caption": "390 morning station end"
+        },
+        {
+          "id": "round3-390-morning-west-end",
+          "image": "game3d/shots/island-day1/forecourt-dead-ends/round3/390-morning-west-end.png",
+          "caption": "390 morning west end"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play the game",
+      "href": "game3d/"
+    },
+    {
+      "label": "Feedback and verification",
+      "href": "game3d/shots/island-day1/QA.md"
+    },
+    {
+      "label": "Visual audit",
+      "href": "game3d/shots/island-day1/forecourt-dead-ends/round3/visual-audit.md"
+    },
+    {
+      "label": "First-time phone playthrough",
+      "href": "game3d/shots/island-day1/garden-cold-player/report.md"
+    }
+  ],
+  "updated": "2026-10-12T22:40:59.547790+00:00"
+}
