@@ -165,7 +165,8 @@ body.phone #pinTip { max-width: 86vw; padding: 7px 12px; border-radius: 10px; fo
 #marks .mark.pin-text { --kx: 45px; }
 #marks .mark.pin-text .pin {
   width: max-content; min-width: 36px; padding: 0 8px; border-radius: 14px;
-  left: 0; transform: translateX(-50%); font: 600 12px/1 var(--font); white-space: nowrap;
+  left: 0; translate: -50% 0; font: 600 12px/1 var(--font); white-space: nowrap;
 }
-#marks .mark.pin-text.below .pin { left: 24px; transform: none; }
+#marks .mark.pin-text.below { --kx: 110px; }
+#marks .mark.pin-text.below .pin { left: 24px; translate: 0; }
 #marks .mark.pin-text.below.flip .pin { left: auto; right: 24px; }
