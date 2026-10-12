@@ -7,6 +7,8 @@ import { createConditionEvaluator } from '../narrative/conditions.js';
 import { waysGraph, keepPublic } from './ways.js';
 import { placeStates, openToday } from './rules.js';
 import { visited } from './visited.js';
+import { busyReason } from './activity.js';
+export { busyReason } from './activity.js';
 
 // the flags as they are, with work over (going_home)
 const workOver = createConditionEvaluator((k) => (k === 'going_home' ? true : cond(k)));
@@ -25,16 +27,6 @@ async function storiesFor(game, day) {
     }),
   );
   return out;
-}
-
-// what is running now, as the map says it: '' when nothing is
-export function busyReason(game) {
-  const talk = document.getElementById('talk');
-  if (talk && !talk.hidden) return 'talking';
-  if (game.busy || game.saying || game.transition || game.pendingStart || game.ended || game.queue?.length)
-    return 'busy';
-  if (document.body.classList.contains('trip') || game.walker?.locked) return 'busy';
-  return '';
 }
 
 // every place's state now (rules.js placeStates)

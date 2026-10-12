@@ -48,7 +48,7 @@ export function cardHTML(s, states, { phone }) {
     ${
       s.state === 'here'
         ? ''
-        : `<div class="mv-btns">${phone ? '<button type="button" class="mv-cancel">Cancel</button>' : ''}<button type="button" class="mv-go"${canGo ? '' : ' disabled'}>Go there${phone ? '' : ' <kbd>Enter</kbd>'}</button></div>`
+        : `<div class="mv-btns">${phone ? '<button type="button" class="mv-cancel">Cancel</button>' : ''}${s.state === 'wait' ? '<button type="button" class="mv-resume">Return to game</button>' : ''}<button type="button" class="mv-go"${canGo ? '' : ' disabled'}>Go there${phone ? '' : ' <kbd>Enter</kbd>'}</button></div>`
     }`;
 }
 

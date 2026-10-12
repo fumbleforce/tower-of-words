@@ -123,3 +123,5 @@ body.reduce-motion #mapView.in { animation:none; }
 
 body.phone #mapView .mv-destinations { display:none; }
 body.phone #mapView .mv-scale { left:16px; bottom:18px; }
+
+#mapView .mv-resume { border:1px solid #78c8c0; background:#275854; color:#effbf7; }

@@ -19,6 +19,7 @@ import { ROUTES } from '../../story/ongoing/routes.js';
 import { findRoute } from './route.js';
 import { isLift } from './ways.js';
 import { nameOf } from './pins.js';
+import { ACTIVITY_REASON } from './activity.js';
 
 const DAY1_OPEN = [...new Set([...Object.entries(NEXT).flat(), ...Object.entries(TRIPS).flat(2)])].filter(
   (id) => id !== 'bakery' && id !== 'konbini',
@@ -33,8 +34,7 @@ export function openEver(day) {
 export const ALL_PLACES = Object.keys(PLACE_NAMES);
 
 export const REASON = {
-  talking: 'Finish the conversation first.',
-  busy: 'Wait until this moment is over.',
+  ...ACTIVITY_REASON,
   stuck: 'There is no way out of here yet.',
   sceneOut: 'Walk out of here first.',
   lift: 'By the lift from the forecourt.',

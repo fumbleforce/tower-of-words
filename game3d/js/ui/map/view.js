@@ -277,8 +277,8 @@ export function createMapView(game) {
     } else if (t.classList.contains('mv-places')) {
       const expanded = root.classList.toggle('places-open');
       t.setAttribute('aria-expanded', String(expanded));
-    } else if (t.classList.contains('mv-close') || t.classList.contains('mv-cancel')) {
-      if (t.classList.contains('mv-close')) close();
+    } else if (t.matches('.mv-close, .mv-resume, .mv-cancel')) {
+      if (!t.classList.contains('mv-cancel')) close();
       else ((picked = null), side());
     } else if (t.classList.contains('mv-go')) go();
     else if (t.dataset.pick) {

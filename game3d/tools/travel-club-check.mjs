@@ -41,19 +41,21 @@ await withBrowserJob(`travel-club-${W}`, async browser => {
     const g = globalThis.window.__game;
     return !g.busy && !g.saying && !g.pendingStart && !g.transition && !g.walker.path && !g.walker.locked;
   }, null, { timeout: 45000 });
-  const mapOffice = async expected => {
+  const mapOffice = async (expected, destination = 'office') => {
     await page.keyboard.press('m');
     await page.waitForSelector('#mapView:not([hidden])');
     if (+W < 700) await click('#mapView .mv-places');
-    await click('#mapView .mv-list [data-pick="office"]');
+    await click(`#mapView .mv-list [data-pick="${destination}"]`);
     const actual = await page.locator('#mapView .mv-go').isEnabled();
     assert.equal(actual, expected, await page.locator('#mapView .mv-side').innerText());
+    await page.waitForTimeout(400);
   };
   try {
     await continued(); await idle();
-    await mapOffice(true);
+    await page.keyboard.down('d'); await page.waitForTimeout(250); await page.keyboard.up('d');
+    await idle(); await mapOffice(true);
     await page.screenshot({ path: `${out}/idle-map.png` });
-    await page.keyboard.press('Escape');
+    await page.keyboard.press('Escape'); await page.waitForTimeout(400);
     // The real Use handler approaches the physical board; the defect is its modal pointer input.
     const read = async () => {
       await page.evaluate(() => { const g = globalThis.window.__game; g.use(g.markers.list.find(m => m.id === 'noticeboard')); });
@@ -62,25 +64,47 @@ await withBrowserJob(`travel-club-${W}`, async browser => {
     };
     await read();
     await mapOffice(false);
+    assert.match(await page.locator('#mapView .mv-why').innerText(), /notice board/);
     await page.screenshot({ path: `${out}/board-map.png` });
-    await page.keyboard.press('Escape');
+    await click('#mapView .mv-resume');
+    await page.waitForTimeout(400);
+    assert.equal(await page.evaluate(() => globalThis.window.__game.paused), false);
     const slip = page.locator('#boardView .poster').filter({ hasText: 'Swimming club' }).locator('button.slip');
     // Playwright's hit testing must succeed; force-click would conceal the original bug.
     if (+W < 700) await slip.tap(); else await slip.click();
     assert.equal(await page.locator('#boardView .poster').filter({ hasText: 'Swimming club' }).locator('.slip.joined').count(), 1);
     assert.match(await page.locator('#toast').innerText(), /Joined the Swimming club/);
+    await page.waitForTimeout(400);
     await page.screenshot({ path: `${out}/joined.png` });
     await page.keyboard.press('Escape'); await idle();
     assert(await page.evaluate(() => JSON.parse(globalThis.localStorage.getItem('amakawa-day1-save')).flags.club_swimming));
-    await mapOffice(true); await page.keyboard.press('Escape');
+    await mapOffice(true); await page.keyboard.press('Escape'); await page.waitForTimeout(400);
     // Repeat visits, backdrop close, and Continue cannot leave a pending board beat behind.
     await read(); await page.mouse.click(4, +H / 2); await idle();
+    // A genuine conversation stays gated; Return to game restores its input.
+    await page.evaluate(() => { const g = globalThis.window.__game; g.use(g.markers.list.find(m => m.id === 'fountain')); });
+    await page.waitForSelector('#talk:not([hidden])', { timeout: 45000 });
+    await mapOffice(false);
+    assert.match(await page.locator('#mapView .mv-why').innerText(), /conversation/);
+    await page.locator('#mapView .mv-resume').focus();
+    await page.keyboard.press('Enter'); await page.waitForTimeout(400);
+    assert.equal(await page.evaluate(() => globalThis.window.__game.mapOpen), false);
+    for (let i = 0; i < 4 && await page.locator('#talk').isVisible(); i++) {
+      await page.keyboard.press('Space'); await page.waitForTimeout(400);
+    }
+    await idle();
     await page.reload(); await page.waitForSelector('#title .mcont', { timeout: 90000 });
     await continued(); await idle();
-    await mapOffice(true); await click('#mapView .mv-go');
+    await page.keyboard.down('d'); await page.waitForTimeout(250); await page.keyboard.up('d');
+    await idle(); await mapOffice(true); await click('#mapView .mv-go');
     await page.waitForFunction(() => globalThis.window.__game.place?.name === 'office', null, { timeout: 60000 });
     await idle();
+    await page.waitForTimeout(400);
     await page.screenshot({ path: `${out}/arrived-b2.png` });
+    await mapOffice(true, 'plaza'); await click('#mapView .mv-go');
+    await page.waitForFunction(() => globalThis.window.__game.place?.name === 'plaza', null, { timeout: 60000 });
+    await idle(); await mapOffice(true);
+    await page.screenshot({ path: `${out}/returned-idle-map.png` });
     assert.deepEqual(errors, []);
     console.log(`PASS ${W}x${H}: idle map, real slip click, Joined, Escape/backdrop, Continue, B2 travel; ${out}`);
   } catch (error) {
