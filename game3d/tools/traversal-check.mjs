@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
 import { waitForGame } from '../test/support/wait-ready.mjs';
 const width = +(process.argv[2] || 1366), height = width < 700 ? 844 : 860;
-const base = process.env.BASE_URL || 'http://127.0.0.1:8771/.claude/worktrees/codex-traversal-fix/game3d';
+const base = process.env.BASE_URL || 'http://127.0.0.1:8771/game3d';
 const out = new URL('../shots/traversal/', import.meta.url).pathname;
 fs.mkdirSync(out, { recursive: true });
 await withBrowserJob('traversal-' + width, async browser => {
@@ -21,8 +21,16 @@ await withBrowserJob('traversal-' + width, async browser => {
   return {benches:BENCHES,scale:g.player.root.scale.x, count:t.count, supports:Object.values(BENCHES).map(b=>[b.x,b.z,t.support(b.x,b.z,2)])};
  });
  console.log(JSON.stringify(info));
+ async function bodyFeet() { return page.evaluate(async()=>{
+  const T=await import('three'); const g=globalThis.__game, root=g.player.root, hop=g.jump.hop;
+  root.updateWorldMatrix(true,true);let min=Infinity;
+  root.traverse(m=>{if(m.isSkinnedMesh&&m.visible){m.computeBoundingBox();min=Math.min(min,m.boundingBox.clone().applyMatrix4(m.matrixWorld).min.y);}});
+  return {min,rootY:root.getWorldPosition(new T.Vector3()).y,hopY:hop.getWorldPosition(new T.Vector3()).y,seated:g.player.seated,air:g.jump.air,height:g.jump.height};
+ }); }
  const bench=Object.values(info.benches)[0];
  await page.evaluate(b=>{const g=globalThis.__game;g.player.root.position.set(b.x,0,b.z-0.55);g.walker.sync();g.walker.keyFrame=null;g.place.camera.position.set(b.x-8,6,b.z);g.place.camera.lookAt(b.x,0,b.z);},bench);
+ await page.waitForTimeout(400);
+ const floorFeet=await bodyFeet();
  await page.keyboard.down('KeyW');
  await page.waitForFunction(()=>globalThis.__game.walker.keyFrame);
  await page.evaluate(()=>{globalThis.__game.walker.keyFrame.set(0,0,1);globalThis.__trace=[];const j=globalThis.__game.jump,old=j.update;j.update=function(dt){old(dt);if(globalThis.__trace.length<120)globalThis.__trace.push([globalThis.__game.player.root.position.z,j.height,j.air]);};});
@@ -40,6 +48,8 @@ await withBrowserJob('traversal-' + width, async browser => {
  const result=await page.evaluate(()=>({p:globalThis.__game.player.root.position.toArray(),h:globalThis.__game.jump.height,air:globalThis.__game.jump.air,near:globalThis.__game.near,errors:globalThis.document.querySelector('.err')?.textContent}));
  console.log('bench',JSON.stringify(result));
  assert.ok(result.h>0.25 && result.h<0.45 && !result.air,'jump must land on the real bench');
+ const benchFeet=await bodyFeet(); console.log('measured feet',JSON.stringify({floor:floorFeet,bench:benchFeet}));
+ assert.ok(Math.abs((benchFeet.min-benchFeet.hopY)-(floorFeet.min-floorFeet.hopY))<.06,'landed model keeps its normal feet offset above bench support');
  await page.screenshot({path:out+width+'-bench.png'});
  if(process.env.CHECK_SAVE) {
   await page.keyboard.press('F5');

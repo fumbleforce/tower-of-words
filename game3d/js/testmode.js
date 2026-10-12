@@ -121,6 +121,11 @@ export function start(game) {
         return;
       }
     }
+    // The open gate asks for a floor walk before the exit pin appears; cross its real zone deliberately.
+    if (p.name === 'gate' && flags.gate_through_way && !flags.gate_through) {
+      game.walker.goTo(...p.spots.after_gate);
+      return;
+    }
     // 1. a goal: walk up and use it
     for (const g of goals) {
       if (route === 'social' && g.id === 'kuroda' && game.runner.has('say:sumimasen:guard')) continue;

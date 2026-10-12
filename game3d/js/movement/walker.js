@@ -92,7 +92,7 @@ export class SmoothWalker extends Walker {
   steerDirect(p, dt) {
     const s = this.steer,
       k = this.body.scale.x || 1;
-    if (this.traversal?.clear([p.x, p.z], [s.x, s.z]) || this.nav.clear([p.x, p.z], [s.x, s.z])) {
+    if ((this.traversal || this.nav).clear([p.x, p.z], [s.x, s.z])) {
       if (this.path?.steer) this.path = null;
       return true;
     }
@@ -102,7 +102,7 @@ export class SmoothWalker extends Walker {
       s.routeT = 0;
       const route = this.nav.path(p.x, p.z, s.x, s.z);
       if (!route?.length) return true;
-      this.path = Object.assign(route, { steer: true });
+      this.path = Object.assign(this.traversal?.route([p.x, p.z], route) || route, { steer: true });
       this.arrive = null;
     }
     return false;
