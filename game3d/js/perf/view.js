@@ -1,6 +1,7 @@
 // The 3D view: the quality tier, each place's post chain (post.js) with the hover outline, the canvas size and the
 // frame's render, with the guard that keeps it drawing on phones (perf/gl-guard.js). main.js runs the loop.
 //   const view = createView(game, renderer, canvas, save); view.setComposer(place); view.render(); view.outline
+//   view.due(now): whether this display frame is drawn (the frame cap); view.afterDraw(fn): fn right after the next one
 import * as THREE from 'three';
 import { Q } from '../engine.js';
 import { frameCap } from '../settings.js';
@@ -101,6 +102,9 @@ export function createView(game, renderer, canvas, save) {
     lastDue = now;
     return true;
   }
+  // one-shot callbacks run right after the next frame drawn, while the canvas still holds it (ui/frame-grab.js)
+  const drawn = [];
+  view.afterDraw = (fn) => drawn.push(fn);
   function render() {
     if (!view.composer || !game.place) return;
     game.place.beforeRender?.();
@@ -108,6 +112,7 @@ export function createView(game, renderer, canvas, save) {
     view.post.render();
     view.draws++;
     guard.afterRender();
+    for (const fn of drawn.splice(0)) fn();
   }
   game.setQuality = (q) => {
     view.quality = q;

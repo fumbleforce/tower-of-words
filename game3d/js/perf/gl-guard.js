@@ -18,7 +18,7 @@
 // #14171d round the lit car, never pure black).
 //   import { installGlGuard, lighterAfterLoss, onResizeFrame, validSize, guardedLoop, disposePost } from './perf/gl-guard.js'
 const WAIT_MS = 3000;
-const CHECK_MS = 2000; // how often a drawn frame is sampled (one pixel, read right after the frame)
+const CHECK_MS = 2000; // how often a drawn frame is sampled (five pixels, copied right after the frame)
 const BLANK_CHECKS = 3; // empty samples in a row that count as a dead view
 const LOST_KEY = 'amakawa-gl-lost'; // sessionStorage: how many times this tab lost the view
 const CONTINUE_FLAG = 'amakawa-continue'; // menu.js: a reload with this set continues straight into the save
@@ -105,7 +105,7 @@ export function installGlGuard({ canvas, renderer, save, resize = () => {} }) {
     lost = false, // lost and not given back yet
     nextCheck = performance.now() + CHECK_MS,
     blank = 0;
-  const px = new Uint8Array(4);
+  const px = new Uint8Array(4 * SPOTS.length);
   const say = (text) => {
     if (!note) {
       note = document.createElement('div');
@@ -155,6 +155,7 @@ export function installGlGuard({ canvas, renderer, save, resize = () => {} }) {
     note = null;
     nextCheck = 0; // check the next frames right away
     blank = 0;
+    forget(); // the old context's pack buffer and fence (also when it was found lost without the event)
   });
   // back on the page: the context checked, a fresh drawing buffer at the window's size, the next frames sampled
   let backTimer = 0;
@@ -180,40 +181,83 @@ export function installGlGuard({ canvas, renderer, save, resize = () => {} }) {
   document.addEventListener('visibilitychange', back);
   window.addEventListener('pageshow', back);
   document.addEventListener('resume', back);
-  // the frame just drawn shows nothing: all five pixels fully transparent, or all the same pure black
-  const dead = (gl) => {
+  // the frame shows nothing: all five pixels (RGBA each, in `px`) fully transparent, or all the same pure black
+  const dead = () => {
     let clear = 0,
       black = 0,
       first = -1;
-    for (const [fx, fy] of SPOTS) {
-      const x = Math.floor(gl.drawingBufferWidth * fx),
-        y = Math.floor(gl.drawingBufferHeight * fy);
-      gl.readPixels(x, y, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
-      if (px[3] === 0) clear++;
-      const v = px[0] | (px[1] << 8) | (px[2] << 16);
+    for (let i = 0; i < px.length; i += 4) {
+      if (px[i + 3] === 0) clear++;
+      const v = px[i] | (px[i + 1] << 8) | (px[i + 2] << 16);
       if (first < 0) first = v;
-      if (v === first && Math.max(px[0], px[1], px[2]) <= 6) black++;
+      if (v === first && Math.max(px[i], px[i + 1], px[i + 2]) <= 6) black++;
     }
     return clear === SPOTS.length || black === SPOTS.length;
   };
+  const judge = () => {
+    blank = dead() ? blank + 1 : 0;
+    if (blank >= BLANK_CHECKS) {
+      console.warn('the 3D view draws nothing');
+      reload();
+    }
+  };
+  // The five pixels of the frame just drawn (still readable in this task). A plain readPixels makes the CPU wait until
+  // the GPU has finished the whole frame: a stall every CHECK_MS, the costliest call in a CPU profile of play. With
+  // WebGL2 they are copied into a buffer on the GPU instead and read once a fence says the GPU got there, a frame or
+  // two later (`reading`); the pack buffer and fence go with a lost context.
+  let pbo = null,
+    reading = null;
+  const read = (gl) => {
+    const gl2 = typeof gl.fenceSync === 'function'; // WebGL2
+    if (gl2) {
+      if (!pbo) {
+        pbo = gl.createBuffer();
+        gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
+        gl.bufferData(gl.PIXEL_PACK_BUFFER, px.length, gl.STREAM_READ);
+      } else gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
+    }
+    SPOTS.forEach(([fx, fy], i) => {
+      const x = Math.floor(gl.drawingBufferWidth * fx),
+        y = Math.floor(gl.drawingBufferHeight * fy);
+      if (gl2) gl.readPixels(x, y, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, i * 4);
+      else gl.readPixels(x, y, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px.subarray(i * 4, i * 4 + 4));
+    });
+    if (!gl2) return judge();
+    gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
+    reading = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
+  };
+  // the copy, once the GPU has made it; false while it hasn't
+  const collect = (gl) => {
+    if (gl.getSyncParameter(reading, gl.SYNC_STATUS) !== gl.SIGNALED) return false;
+    gl.deleteSync(reading);
+    reading = null;
+    gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
+    gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, px);
+    gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
+    judge();
+    return true;
+  };
+  const forget = () => {
+    pbo = null;
+    reading = null;
+  };
+  canvas.addEventListener('webglcontextlost', forget);
   return {
-    // after each drawn frame: now and then read a few pixels of what was just drawn (still readable in this task)
+    // after each drawn frame: now and then sample what was just drawn
     afterRender() {
       const now = performance.now();
-      if (gone || now < nextCheck) return;
-      nextCheck = now + (blank ? 100 : CHECK_MS);
+      if (gone) return;
       const gl = renderer.getContext();
       if (gl.isContextLost()) {
-        onLost(); // with or without the lost event
+        if (now >= nextCheck) onLost(); // with or without the lost event
         return;
       }
       if (lost) return; // the browser hasn't given it back yet
+      if (reading && !collect(gl)) return;
+      if (now < nextCheck) return;
+      nextCheck = now + (blank ? 100 : CHECK_MS);
       renderer.setRenderTarget(null);
-      blank = dead(gl) ? blank + 1 : 0;
-      if (blank >= BLANK_CHECKS) {
-        console.warn('the 3D view draws nothing');
-        reload();
-      }
+      read(gl);
     },
   };
 }

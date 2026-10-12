@@ -4,7 +4,8 @@
 // recording every frame and every long task (over 50 ms) until the preparation and the draw-call pass are done.
 // Prints per trip: preparation time, longest task, long tasks, worst frame and the 1% low (fps). BASE=<dir> for a
 // worktree (default game3d), CPU=4 for a CPU slowed down 4x like perf.mjs's phone, Q=<tier> (default 1; the fast
-// test plays at 0). Runs through tools/lib/browser-job.mjs (GPU slot; GL=soft for software rendering).
+// test plays at 0). Runs through tools/lib/browser-job.mjs (GPU slot; GL=soft for software rendering, JOB_S=<seconds>
+// for a longer time limit than its 285 s).
 // A trip written from>to measures the entry instead: <to> is prepared first and left to settle, then game.travel(<to>)
 // walks out of <from> and into <to> while frames, long tasks and the time spent in WebGL calls are recorded (shader
 // compile and link, texture uploads) and the snapshot for the crossfade; printed for the worst frame of the entry.
@@ -155,7 +156,7 @@ await withBrowserJob('perf-hitch', async (browser) => {
     );
     await ctx.close();
   }
-});
+}, { timeoutMs: (+process.env.JOB_S || 285) * 1000 }); // JOB_S: a longer limit for software GL, where a frame takes seconds
 const dir = new URL('../../shots/perf/', import.meta.url);
 fs.mkdirSync(dir, { recursive: true });
 fs.writeFileSync(new URL(`hitch-${W}x${H}-cpu${process.env.CPU || 1}-${Date.now()}.json`, dir), JSON.stringify(out, null, 2));

@@ -854,3 +854,64 @@ Changes:
   `guardedLoop` (perf/gl-guard.js) before the tick, so a skipped frame costs nothing and its time goes to the next.
 - The metrics overlay and the fast test's frame times count drawn frames only (`view.draws`), so they show the
   real drawn rate under the cap.
+
+### Measured in the places (2026-10-12): the gate, the forecourt outside it, the fountain plaza, and the trips
+
+Two tools, both in `game3d/tools/perf/`, run on a machine without a GPU (software GL, SwiftShader):
+
+- `pass-cost.mjs`: what each pass of a frame costs the GPU (shadow map, scene, AO, outline, edges, bloom, final),
+  timed one by one behind a GPU read-back (gl.finish() doesn't wait in Chrome), with strategies applied in the page
+  and the picture compared with the page's own (`--try`), `--integrated` for an integrated GPU, `--draws` for the
+  scene pass draw by draw. Software GL turns the GPU's work into CPU time, so a pass's time follows the pixels it
+  shades and the vertices it transforms: a proxy for comparing strategies on a weak GPU, not a frame rate.
+- `cpu-frame.mjs`: the CPU side. `--micro N` times the frame's parts on their own with the GPU idle before each;
+  `--trip from>to` profiles a walk into the next place (prepared ahead, as in play): the long tasks, the functions
+  with the most time and the shader programs compiled on the way that the warm-up missed.
+
+GPU, a 1080p laptop at 125 % (1920 x 1080 drawn), whole frame in software GL, run-to-run noise about 5 %:
+
+| place | old auto (high) | new auto on an integrated GPU (medium, no AO) | then no MSAA | then pixel ratio 1 |
+|---|--:|--:|--:|--:|
+| forecourt, outside the security gate | 9.4 s | 7.3 s (-22 %) | -21 % | -34 % |
+| fountain plaza | 11.4 s | 7.9 s (-31 %) | -16 % | -30 % |
+| gate | 7.3 s | 4.8 s (-34 %) | -36 % | -31 % |
+
+At high in the forecourt the scene pass is about 70 % of the frame and AO about 25 % (AO off: -21 %, 7 % of the
+pixels change, by 1.6/255 on average). No MSAA changes 2 to 9 % of the pixels (edges); pixel ratio 1 softens the
+whole frame. Both are left as they are: a change in the look, for Jørgen to decide. Tried and within the noise:
+sorting opaque draws front to back by their bounds, drawing the skyline's ground (under each place's own) last,
+shadows every other frame, a 1024 shadow map, bloom off or 3 levels, fewer tilt-shift taps. A 60 m far plane
+cut half the picture.
+
+CPU per frame (`--micro`, high): the scene's draw 4 to 6 ms, the shadow map 0.5 to 3 ms more, the AO pass 3 to 6 ms
+(it draws the whole scene again for its normals), the scene graph's matrices 0.5 to 1 ms. Dropping AO on an
+integrated GPU saves as much CPU as GPU, and the CPU and GPU share one power budget there.
+
+The trips (`--trip`, low quality and a 320 x 180 view so the software GL takes little CPU). Software GL makes any
+wait for the GPU last about a frame there (a second); on a laptop each such wait is a frame (10 to 16 ms), and
+every shader compile is real (ANGLE on Windows takes tens of ms to over 100 ms a program on an integrated GPU).
+
+| trip | long tasks before | after | programs compiled on the way, before | after |
+|---|--:|--:|--:|--:|
+| gate -> forecourt | 11 (largest 2.4 s) | 2 | 17 | 9 |
+| forecourt -> plaza | 51 (0.7 to 6 s) | 2 | 13 | 8 |
+
+What was behind them, and the fixes:
+
+- The 3D view's check (perf/gl-guard.js) read five pixels every 2 s with readPixels, which waits until the GPU has
+  finished the frame: a stall of a frame every 2 s in play (44 s of the forecourt-to-plaza trip in software GL).
+  On WebGL2 the pixels are now copied into a buffer on the GPU and read once a fence passes; a dead view still
+  reloads (checked: about 3 s after the canvas went blank).
+- The photo of the day (menu.js, for the end screen) is often taken as Eric leaves a place, mid-trip, and the save
+  thumbnails on saving and pausing: drawImage then toDataURL waited for the GPU and encoded the JPEG on the main
+  thread. `ui/frame-grab.js` now scales the frame on the GPU (a blit), reads it through a pixel buffer and a fence,
+  and encodes from a canvas in memory. It is taken right after a frame the game drew (`view.afterDraw`): with the
+  frame cap some animation frames draw nothing, and the old grab could have copied an empty canvas.
+- The anime look patched the draw-call pass's batch materials a second time on entering (look/anime/shade.js): the
+  batches copy a patched material's shader hooks, but not its place in the patched set, so the period sync wrapped
+  them again. The shader stayed the same, the program key doubled, and every batch material compiled again on the
+  first frame in the place. A material whose key already has the patch is now left alone.
+
+Left (each once a session, or small): the sky's cube material and its panorama-to-cube conversion on the first
+frame outdoors, the reflection prefilter's two programs, four shadow depth programs the warm-up's stand-ins
+don't match, and the new place's geometry uploads (0.3 to 1 s of bufferData in software GL).

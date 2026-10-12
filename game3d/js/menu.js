@@ -25,6 +25,7 @@ import { createSaving, kv, store as slots } from './saves/actions.js';
 import { savesView } from './saves/view.js';
 import { wordsView } from './ui/words-view.js';
 import { KEYS, slotKey } from './saves/store.js';
+import { grab } from './ui/frame-grab.js';
 
 const Q = new URLSearchParams(location.search);
 const TEST = Q.get('test') === 'fast',
@@ -33,37 +34,7 @@ const TEST = Q.get('test') === 'fast',
 const game = () => window.__game;
 const shell = (window.__shell = { photos: {}, PLACE_NAMES });
 
-// ---------- thumbnails: a frame of the world with no UI on it ----------
-// The canvas keeps its picture only until the frame is shown, so the copy is taken in an animation frame
-// callback queued after main.js's own (which has just rendered).
-function grab(w = 320, aspect = 1.6) {
-  return new Promise((res) => {
-    setTimeout(
-      () =>
-        requestAnimationFrame(() => {
-          try {
-            const c = $('#c');
-            if (!c || !c.width) return res(null);
-            const h = Math.round(w / aspect),
-              cv = document.createElement('canvas');
-            cv.width = w;
-            cv.height = h;
-            let sw = c.width,
-              sh = c.width / aspect;
-            if (sh > c.height) {
-              sh = c.height;
-              sw = sh * aspect;
-            }
-            cv.getContext('2d').drawImage(c, (c.width - sw) / 2, (c.height - sh) / 2, sw, sh, 0, 0, w, h);
-            res(cv.toDataURL('image/jpeg', 0.74));
-          } catch {
-            res(null);
-          }
-        }),
-      0,
-    );
-  });
-}
+// ---------- thumbnails: a frame of the world with no UI on it (ui/frame-grab.js) ----------
 shell.grab = grab;
 
 // ---------- helpers ----------
