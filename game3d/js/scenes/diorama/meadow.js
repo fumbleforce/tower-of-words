@@ -7,7 +7,7 @@ import { rng } from '../outdoor/parts.js';
 export function meadowDetail(
   root,
   nav,
-  { budget = 10000, shadows = true, bounds, avoid = null, trees = null, skip = null } = {},
+  { budget = 10000, shadows = true, bounds, avoid = null, exclude = [], trees = null, skip = null } = {},
 ) {
   trees ??= (root.userData.dioramaPlanting || []).filter((plant) => plant.kind === 'tree');
   const [x0, x1, z0, z1] = bounds;
@@ -83,6 +83,8 @@ export function meadowDetail(
         .addScaledVector(f.c, u * v);
       if (p.x < x0 || p.x > x1 || p.z < z0 || p.z > z1) continue;
       if (avoid && p.x > avoid[0] && p.x < avoid[1] && p.z > avoid[2]) continue;
+      // A continuous lawn mesh can run under a building whose floor is revealed by a cutaway.
+      if (exclude.some(([a, b, c, d]) => p.x >= a && p.x <= b && p.z >= c && p.z <= d)) continue;
       if (p.y <= 0.04 && nav?.extra?.(p.x, p.z)) continue;
       const patch = Math.sin(p.x * 2.1 + Math.cos(p.z * 1.3)) + Math.cos(p.z * 2.3 - Math.sin(p.x * 1.5));
       const ring = Math.exp(-Math.pow((nearRoot(p) - 0.8) / 0.45, 2));

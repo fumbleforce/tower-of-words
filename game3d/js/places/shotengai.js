@@ -1,6 +1,6 @@
 import { conversationCamera } from './conversation-camera.js';
 import * as THREE from 'three';
-import { local as shopLocal } from '../scenes/shotengai/plan.js';
+import { local as shopLocal, building, rect } from '../scenes/shotengai/plan.js';
 import { southLinkFrame } from '../scenes/forecourt/south-link.js';
 import { shotengaiSteps } from '../scenes/shotengai.js';
 import { sliced } from '../perf/slice.js';
@@ -132,6 +132,7 @@ export async function shotengaiPlace(game) {
     cam,
     space: w.root,
     nav: w.nav,
+    meadowExclude: [rect(building('station').rect)],
     sun: w.sun,
     light: w.light, // the light for every period (scenes/shotengai.js, kit/light/)
     charScale: K,

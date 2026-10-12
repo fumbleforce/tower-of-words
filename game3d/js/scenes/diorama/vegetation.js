@@ -98,6 +98,7 @@ export function dressVegetation(place, name, { phone = false } = {}) {
         budget: 6500,
         shadows: false,
         bounds: grow(walk, 4) || [-Infinity, Infinity, -Infinity, Infinity],
+        exclude: place.meadowExclude || [],
         trees: trunks(root, skip),
         skip,
       });
