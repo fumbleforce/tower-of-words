@@ -1931,7 +1931,7 @@ Inside the glass doors a mat, an umbrella stand and a hand-sanitiser stand. The 
 | `clinic_nurse` | Nurse | Talk |
 | `exam_bed` | Examination bed | Sit |
 
-Spots: `clinic_in`, `reception`, `pharmacy`, `exam_bed`, `waiting`, `nurse_desk` (hers, behind the counter), `bedside` (hers after a fall). Seat: `exam_bed`. Person: `clinic_nurse`, the existing generic apron body in a pale blue tunic. No zones, hooks or secret nooks.
+Spots: `clinic_in`, `reception` (the visitor's side of the counter, where Eric stands to talk to the nurse), `pharmacy`, `exam_bed`, `waiting`, `nurse_desk` (hers, behind the counter), `bedside` (hers after a fall). Seat: `exam_bed`. Person: `clinic_nurse`, the existing generic apron body in a pale blue tunic. No zones, hooks or secret nooks.
 
 Talking to the nurse the first time, she asks what the matter is (overheard); Eric says he only wanted to see where the clinic was, she points at the hours and says it is open every day and at night, and he reads that off the board. After that she says hello. Once he has been in after a fall she asks after his head instead.
 

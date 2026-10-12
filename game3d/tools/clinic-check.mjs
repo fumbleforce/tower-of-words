@@ -49,11 +49,12 @@ await withBrowserJob(
       });
     async function use(id) {
       await ready();
-      await page.evaluate(async (id) => {
-        const g = globalThis.__game;
-        g.standUp?.();
-        await g.walkTo(...g.place.things[id].spot());
-      }, id);
+      if (id !== 'clinic_nurse')
+        await page.evaluate(async (id) => {
+          const g = globalThis.__game;
+          g.standUp?.();
+          await g.walkTo(...g.place.things[id].spot());
+        }, id);
       await page.waitForTimeout(400);
       const point = await page.evaluate((id) => {
         const m = globalThis.__game.markers.list.find((m) => m.id === id),
@@ -97,6 +98,11 @@ await withBrowserJob(
         if (s.line && !seen.has(s.line)) {
           seen.add(s.line);
           lines.push(`${name} ${s.who}: ${s.line}`);
+          if (name === 'nurse' && seen.size === 1) {
+            const visitor = await page.evaluate(() => globalThis.__game.player.root.position.toArray());
+            console.log('nurse visitor position:', JSON.stringify(visitor));
+            assert.ok(visitor[2] > -4.35, 'the visitor stays in front of the reception counter');
+          }
           if (seen.size <= 2 && name) await shot(`${name}-${seen.size}`);
         }
         if (s.choice.length) {
@@ -141,6 +147,7 @@ await withBrowserJob(
     await talk([], 'nurse');
     assert.equal((await flags()).clinic_met, true);
     log('talked to the nurse');
+    if (process.env.NURSE_ONLY) return;
     await use('exam_bed');
     await ready();
     assert.ok(await page.evaluate(() => globalThis.__game.player.seated));
@@ -179,7 +186,10 @@ await withBrowserJob(
           globalThis.__fall = sendToClinic(globalThis.__game, 'dorms');
         });
       }
-      await page.waitForFunction(() => globalThis.document.querySelector('#fade.on'), null, { timeout: 10000 });
+      await page.waitForFunction(() => {
+        const fade = globalThis.document.querySelector('#fade.on');
+        return fade && +globalThis.getComputedStyle(fade).opacity > 0.98;
+      }, null, { timeout: 10000 });
       await shot(`fall${n}-black`);
       log(`fall ${n}: black`);
       await arrived('clinic');

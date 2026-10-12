@@ -65,6 +65,7 @@ export function clinicPlace(game) {
     },
     clinic_nurse: {
       ...PLACE_DETAILS.clinic.things.clinic_nurse,
+      fixedSpot: true,
       anchor: (v) => {
         nurse.root.getWorldPosition(v);
         v.y += 1.2;
