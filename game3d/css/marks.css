@@ -163,10 +163,10 @@ body.phone #pinTip { max-width: 86vw; padding: 7px 12px; border-radius: 10px; fo
 
 /* A usable seat names its action in the existing pin so its pose reads even from overhead. */
 #marks .mark.pin-text { --kx: 45px; }
-#marks .mark.pin-text .pin {
+body.phone #marks .mark.pin-text .pin, #marks .mark.pin-text .pin {
   width: max-content; min-width: 36px; padding: 0 8px; border-radius: 14px;
   left: 0; translate: -50% 0; font: 600 12px/1 var(--font); white-space: nowrap;
 }
 #marks .mark.pin-text.below { --kx: 110px; }
-#marks .mark.pin-text.below .pin { left: 24px; translate: 0; }
-#marks .mark.pin-text.below.flip .pin { left: auto; right: 24px; }
+body.phone #marks .mark.pin-text.below .pin, #marks .mark.pin-text.below .pin { left: 24px; translate: 0; }
+body.phone #marks .mark.pin-text.below.flip .pin, #marks .mark.pin-text.below.flip .pin { left: auto; right: 24px; }
