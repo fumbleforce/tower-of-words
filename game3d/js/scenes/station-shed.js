@@ -107,15 +107,6 @@ export function buildShedOnly(root) {
   if (!stationModel()) return codeShed(root);
   const group = new THREE.Group(),
     { roof } = modelShed(group, { walkway: false });
-  // the model's nodes carry no normals; under this place's plain lights (no street-style dressing, as the forecourt
-  // has) the shadow lookup then reads NaN and the shed draws black. Its own copies get them; the forecourt's stay as
-  // they are
-  group.traverse((o) => {
-    if (o.isMesh && !o.geometry.attributes.normal) {
-      o.geometry = o.geometry.clone();
-      o.geometry.computeVertexNormals();
-    }
-  });
   root.add(group);
   return roof;
 }

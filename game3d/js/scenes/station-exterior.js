@@ -10,6 +10,7 @@
 // office. On a phone the camera looks east past it from the door (places/forecourt.js), so it stays whole there and
 // the platform shed's roof fades instead.
 import * as THREE from 'three';
+import { stationSight } from './station-visibility.js';
 import { PAL, mat } from '../props.js';
 import { lightPool } from '../places/life.js';
 import { addOccluder, updateOccluders } from './occluders.js';
@@ -291,36 +292,23 @@ function block(root) {
   // width), or he stands in the door. `view` is the direction toward the camera; the forecourt's usual one looks
   // north at 46 degrees, and on a phone the camera looks east along the court, past the station.
   const view = new THREE.Vector3(0, Math.sin(0.8), Math.cos(0.8));
-  // the line from a point of Eric (his feet, or up to `tall` above them) toward the camera runs through the box
-  const through =
-    ([bx, by, bz], tall = 0) =>
-    (p) => {
-      let t0 = 0,
-        t1 = Infinity;
-      const o = [p.x, 0.05, p.z],
-        d = [view.x, view.y, view.z],
-        box = [bx, [by[0] - tall, by[1]], bz];
-      for (let i = 0; i < 3; i++) {
-        const [lo, hi] = box[i];
-        if (Math.abs(d[i]) < 1e-6) {
-          if (o[i] < lo || o[i] > hi) return false;
-          continue;
-        }
-        let a = (lo - o[i]) / d[i],
-          b = (hi - o[i]) / d[i];
-        if (a > b) [a, b] = [b, a];
-        t0 = Math.max(t0, a);
-        t1 = Math.min(t1, b);
-        if (t0 > t1) return false;
-      }
-      return true;
-    };
+  const through = stationSight(view);
   const hides = through([
     [X0 - 0.4, X1 + 0.4],
     [0, TOPH],
     [ZN - 0.3, ZS],
   ]);
-  const facade = addOccluder(occ, [...meshes, ...sign], hides, {
+  // The south entrance canopy belongs to the model's facade, rather than the walkway
+  // roof. Include its overhang so it cannot hide someone at the glass doors.
+  const canopyHides = through(
+    [
+      [FRONT[0] - 0.5, FRONT[1] + 0.5],
+      [0, 2.3],
+      [ZS, ZS + 1.9],
+    ],
+    1.3,
+  );
+  const facade = addOccluder(occ, [...meshes, ...sign], (p) => hides(p) || canopyHides(p), {
     name: 'station',
   });
   // the station is open late: its windows glow after work (for a light rig, kit/light/glow.js); registered after the

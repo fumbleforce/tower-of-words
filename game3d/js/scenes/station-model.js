@@ -29,13 +29,16 @@ export function loadStationModel({ lighter = false } = {}) {
     .then((g) => {
       const out = {};
       g.scene.traverse((o) => o.isMesh && (out[o.name] = o.geometry));
-      parts = out;
+      setStationModel(out);
     })
     .catch((e) => console.warn('station.glb', e)));
 }
 
 // Set directly (tests).
 export function setStationModel(p) {
+  // The exported flat faces have colours but no NORMAL attribute. Shadow receivers need
+  // finite normals even when flatShading supplies the visible face normal in the fragment shader.
+  for (const geometry of Object.values(p || {})) if (!geometry.attributes.normal) geometry.computeVertexNormals();
   parts = p;
 }
 export const stationModel = () => parts;

@@ -7,6 +7,8 @@ import { walk } from '../plaza/east-lane.js';
 import { buildStation } from '../station-exterior.js';
 import { CHUNKS } from '../island-layout.js';
 import { maintenanceProps } from './props.js';
+import { finishStreet } from '../diorama/materials.js';
+import { stationLighter } from '../station-model.js';
 
 export function* gardenSteps(island, root) {
   const garden = new THREE.Group();
@@ -35,6 +37,9 @@ export function* gardenSteps(island, root) {
   island.add(stationFrame);
   const station = buildStation(stationFrame, { covered: true }),
     tools = maintenanceProps(root);
+  // This is the same station as the forecourt: retain its masonry grain and window interiors
+  // when approaching from the shopping street, including the covered walkway's concrete.
+  finishStreet(stationFrame, stationLighter());
   const point = new THREE.Vector3(),
     direction = new THREE.Vector3();
   return {
