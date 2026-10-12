@@ -119,10 +119,9 @@ export const game = {
       setTimeout(tick, Math.min(50, left));
     });
   },
-  // a scripted walk; resolves on arrival, or if the walk is dropped or stalls (a stop, a blocked path), so a scene
-  // can never hang on it
+  // Scripted walks finish on arrival, cancellation or a stall.
   walkTo(x, z) {
-    if (this.player.seated) {
+    if (this.player.seated && !this.place.seating?.stand({ persist: false })) {
       this.player.seated = false;
       this.player.setState('idle');
       this.player.root.position.y = 0;

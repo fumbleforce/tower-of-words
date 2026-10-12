@@ -1,3 +1,4 @@
+import { seatPoint, seatRow } from '../../kit/core/seats.js';
 // The dorm common room (dorm_commons; docs/game/places.md "Dorm common room"), the ground floor of dorm_gallery on
 // the inner court, looked into from the south over the cut-down front wall with its glazed door. In its own frame: x
 // east, z toward the camera, the origin the glazed door's middle, inside.
@@ -119,6 +120,7 @@ function lounge(kit, nav) {
   kit.box('#2f333b', 0.06, 0.02, 0.14, -2.65, 0.18, tz + 0.05);
   nav.block(-3.05, -2.45, tz - 0.45, tz + 0.45);
   const sx = -1.75;
+  seatRow(kit, sx - 0.06, tz, 0.2, -Math.PI / 2, 1.4, { label: 'Sofa' });
   kit.box(C.sofa, 0.5, 0.2, 1.5, sx, 0, tz, { r: 0.04, surf: 'fabric' });
   kit.box(C.sofa, 0.16, 0.4, 1.5, sx + 0.25, 0, tz, { r: 0.04, surf: 'fabric' });
   for (const s of [-1, 1]) kit.box(C.sofa, 0.5, 0.3, 0.14, sx, 0, tz + s * 0.75, { r: 0.04, surf: 'fabric' });
@@ -158,6 +160,7 @@ function work(kit, nav) {
       kit.box(C.steel, 0.04, h - 0.04, 0.04, x + sx * (w / 2 - 0.1), 0, z + sz * (d / 2 - 0.1), { surf: 'metal' });
   nav.block(x - w / 2 - 0.05, x + w / 2 + 0.05, z - d / 2 - 0.05, z + d / 2 + 0.05);
   const chair = (cx, cz, ry) => {
+    seatPoint(kit, cx, cz, 0.25, ry);
     kit.box(C.chair, 0.28, 0.03, 0.28, cx, 0.22, cz, { ry, surf: 'plastic' });
     kit.box(C.chair, 0.28, 0.24, 0.03, cx - Math.sin(ry) * 0.13, 0.25, cz - Math.cos(ry) * 0.13, {
       ry,

@@ -138,7 +138,7 @@ export function installPicking(game, objsOf) {
     if (!own && !way?.doorway && !DOOR_KINDS.has(way?.kind)) return false;
     const scale = P.space.getWorldScale(s).y;
     t.anchor(a);
-    const floor = P.space.localToWorld(_v.set(0, P.floorY || 0, 0)).y;
+    const floor = P.space.localToWorld(_v.set(0, own?.bottom ?? P.floorY ?? 0, 0)).y;
     // facing: from the opening toward the spot in front of it
     let yaw = 0;
     const sp = t.spot?.();

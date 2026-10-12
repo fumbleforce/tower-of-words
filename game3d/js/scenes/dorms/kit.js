@@ -1,3 +1,4 @@
+import { transferSeats } from '../../kit/core/seats.js';
 // Eric's dorm room is built from many small boxes (tatami, bedding, box flaps, shoes). The kit collects their
 // geometry and adds one mesh per colour, surface and shadow setting, so the whole flat costs a few dozen draw calls.
 // Surfaces are the look's kinds (look/procedural.js): 'fabric', 'plaster', 'metal', 'card' and so on.
@@ -53,6 +54,7 @@ export class Kit {
   }
   // everything collected, as one mesh per set, into root
   flush(root) {
+    transferSeats(this, root);
     for (const s of this.sets.values()) {
       const parts = s.parts.map((g) => {
         if (!g.attributes.uv)

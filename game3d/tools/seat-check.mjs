@@ -39,6 +39,9 @@ const SCENES = [
   { name: 'office-day2', q: 'day=2&place=office', office: true },
   { name: 'train', q: 'place=train' },
   { name: 'gate', q: 'place=gate' },
+  { name: 'ferry', q: 'place=ferry_terminal' },
+  { name: 'clinic', q: 'place=clinic' },
+  { name: 'canteen', q: 'place=canteen' },
   { name: 'party-day2', q: 'day=2&place=shotengai', party: true },
   // day 3: the pool deck's benches (the swimming club), the common room's sofa (Kenji's evening), the gym's benches
   { name: 'pool-day3', q: 'day=3&place=pool' },
@@ -59,7 +62,7 @@ const MINE = {
 };
 
 // ---- in the page ----
-async function inPage({ scene, TOL, phase, placed = [] }) {
+async function inPage({ scene, TOL, phase, placed = [], seatIds, playerOnly }) {
   const THREE = await import('three');
   const { seatSurface } = await import('./tools/seat-surface.mjs');
   const g = window.__game,
@@ -359,7 +362,7 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
   }
   // every model body on every seat
   const seats = {};
-  for (const [k, s] of Object.entries(P.seats || {})) if (s && s.top !== undefined) seats[k] = { ...s };
+  for (const [k, s] of Object.entries(P.seats || {})) if (s && s.top !== undefined) seats[k] = { x: s.x, z: s.z, top: s.top, ry: s.ry, out: s.out };
   for (const p of placed)
     if (p.seatTop !== null) {
       const r = rigs[p.id];
@@ -372,11 +375,15 @@ async function inPage({ scene, TOL, phase, placed = [] }) {
     seats.lunch_eric = { x: 4.45, z: -2.3, top: 0.24, ry: Math.PI / 2 };
     seats.lunch_mio = { x: 5.95, z: -2.3, top: 0.24, ry: -Math.PI / 2 };
   }
+  if (scene.name === 'ferry') P.space.getObjectByName('terminal-activity-props')?.traverse(o => { if (/bag/.test(o.name)) o.visible = false; });
+  if (globalThis.__seatForward) for (const s of Object.values(seats)) { s.x += Math.sin(s.ry || 0) * globalThis.__seatForward; s.z += Math.cos(s.ry || 0) * globalThis.__seatForward; }
   const bodies = Object.entries(rigs).filter(([, r]) => r?.meshy && r.sitAt);
   const vis = new Map(Object.entries(rigs).map(([id, r]) => [id, r?.root?.visible]));
   for (const [, r] of bodies) r.root.visible = false;
   for (const [sid, s] of Object.entries(seats)) {
+    if (seatIds && !seatIds.includes(sid)) continue;
     for (const [id, r] of bodies) {
+      if (playerOnly && id !== 'eric') continue;
       // seat coordinates are the place's own (the rig's parent space), except at_<id>: world
       let x = s.x,
         z = s.z;
@@ -438,12 +445,15 @@ await withBrowserJob('seat-check', async (browser) => {
   for (const sc of SCENES.filter((s) => !ONLY || ONLY.includes(s.name))) {
     const context = await browser.newContext({ viewport: { width: +W, height: +H }, isMobile: phone, hasTouch: phone });
     const page = await context.newPage();
+    await page.route('**/api/plugins', r => r.fulfill({json:[]}));
+    await page.route('**/island/private/**', r => r.abort());
     const errors = [];
     page.on('pageerror', (e) => errors.push(e.message));
+    await page.addInitScript(forward => { globalThis.__seatForward = forward; }, +(process.env.FORWARD || 0));
     await page.goto(`http://127.0.0.1:8771/${base}/index.html?cap&q=1&${sc.q}${process.env.QS || ''}`, { timeout: 60000 });
     await page.waitForFunction(() => window.__done && window.__game?.place, null, { timeout: 120000 });
     await page.waitForTimeout(1500);
-    const run = (phase, placed) => page.evaluate(inPage, { scene: sc, TOL, phase, placed }).catch((e) => ({ error: e.message }));
+    const run = (phase, placed) => page.evaluate(inPage, { scene: sc, TOL, phase, placed, seatIds: process.env.SEAT_IDS?.split(','), playerOnly: !!process.env.PLAYER_ONLY }).catch((e) => ({ error: e.message }));
     const shoot = async (list) => {
       for (const s of SHOTS ? list : []) {
         const f = path.join(out, `${sc.name}--${s.tag}.jpg`);
@@ -477,7 +487,7 @@ await withBrowserJob('seat-check', async (browser) => {
       console.log(`${sc.name.padEnd(12)} ${label.padEnd(22)} seat ${m.seatTop} desk/table ${m.first} first frame, ${m.settled} settled, hips off ${m.hipOffMax}, hips up ${m.hipUp}, under ${m.under}, legs in ${m.legsIn} ${m.over.length ? 'OVERLAP' : 'ok'}${other}`);
     };
     for (const p of res.placed) say(`${p.id} as placed`, p, true, p.id === 'eric');
-    for (const t of res.tried) say(`${t.id} on ${t.seat}`, t, t.seat === 'at_' + t.id || [MINE[t.seat]].flat().includes(t.id), t.id === 'eric');
+    for (const t of res.tried) say(`${t.id} on ${t.seat}`, t, t.seat === 'at_' + t.id || [MINE[t.seat]].flat().includes(t.id) || (!!process.env.SEAT_IDS && t.id === 'eric'), t.id === 'eric');
     const placedAt = (who, s) => res.placed.some((p) => p.id === who && Math.hypot(p.at[0] - s.x, p.at[1] - s.z) < 0.15);
     await shoot(
       Object.entries(MINE)
@@ -485,6 +495,7 @@ await withBrowserJob('seat-check', async (browser) => {
         .filter(([sid, who]) => res.seats[sid] && !placedAt(who, res.seats[sid]))
         .map(([sid, who]) => ({ who, seat: res.seats[sid], tag: `${sid}-${who}` })),
     );
+    if (process.env.SEAT_IDS) await shoot(process.env.SEAT_IDS.split(',').filter(id => res.seats[id]).map(id => ({ who: 'eric', seat: res.seats[id], tag: id + '-eric' })));
     if (errors.length) fails.push(`${sc.name} page errors: ${errors.slice(0, 3).join(' | ')}`);
     await context.close();
   }

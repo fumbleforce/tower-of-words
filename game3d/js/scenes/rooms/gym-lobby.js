@@ -1,3 +1,4 @@
+import { seatPoint, seatRow } from '../../kit/core/seats.js';
 // The gym's lobby furniture (scenes/rooms/gym.js builds the room; gym-plan.js has the plan): the entrance's tiles,
 // step, shoe lockers and slipper rack; the reception counter with its machines, the staff side's chair, back counter,
 // printer and key box; the waiting benches, the umbrella stand, the drinks machine and the plant. Each laid into the room's Kit, each
@@ -94,6 +95,7 @@ export function reception(kit, nav, signs) {
   // behind: the chair
   const chx = x - 0.85,
     chz = -1.3;
+  seatPoint(kit, chx, chz, 0.29, Math.PI / 2);
   kit.box('#3a4254', 0.3, 0.05, 0.32, chx, 0.24, chz, { surf: 'fabric' });
   kit.box('#3a4254', 0.05, 0.3, 0.32, chx - 0.16, 0.29, chz, {
     surf: 'fabric',
@@ -138,6 +140,7 @@ export function lobby(kit, nav) {
   const bx = R.x1 - 0.3,
     bz = -1.5,
     bl = 2.0;
+  seatRow(kit, bx, bz, 0.26, -Math.PI / 2, bl);
   kit.box(C.blue, 0.36, 0.06, bl, bx, 0.2, bz, { r: 0.02, surf: 'fabric' });
   kit.box(C.blue, 0.06, 0.32, bl, bx + 0.17, 0.26, bz, {
     r: 0.02,
@@ -152,6 +155,7 @@ export function lobby(kit, nav) {
   const sx = 5.7,
     sz = -2.4,
     sl = 2.0;
+  seatRow(kit, sx, sz, 0.26, 0, sl);
   kit.box(C.blue, sl, 0.06, 0.36, sx, 0.2, sz, { r: 0.02, surf: 'fabric' });
   kit.box(C.blue, sl, 0.32, 0.06, sx, 0.26, sz - 0.17, {
     r: 0.02,

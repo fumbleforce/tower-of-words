@@ -1,3 +1,4 @@
+import { seatPoint, seatRow } from '../../kit/core/seats.js';
 // The head office atrium's floor and furniture (scenes/head-office.js), in the tower's frame, all on the facade's
 // bay grid: the pale marble floor's joints on the bay lines; the court's dark granite walk carried in through the
 // door to the reception desk, a cross walk east at the first bay line and on north to the granite apron in front of
@@ -52,6 +53,7 @@ export function furniture(g, root) {
   k.gloss(C.steel, p0 + 0.06, p1 - 0.06, 0, 0.05, q0 - 0.08, q1 + 0.08);
   // the bench by the lift apron, along the east wall, facing west: a stone plinth, a slate cushion
   const [b0, b1, c0, c1] = BENCH;
+  seatRow(k.p, (b0 + b1) / 2, -(c0 + c1) / 2, 0.34, -Math.PI / 2, c1 - c0);
   k.B(C.stone, b0 + 0.04, b1, 0, 0.26, c0, c1);
   k.B(C.slate, b0, b1, 0.26, 0.34, c0 + 0.02, c1 - 0.02);
   // the umbrella stand inside the door, three umbrellas in it
@@ -169,6 +171,7 @@ function island(k, u, n) {
     [-0.72, 0, 'n'],
     [0.72, 0, 'n'],
   ]) {
+    seatPoint(k.p, u + du, -(n + dn), 0.32, Math.atan2(du, -dn), { label: 'Bench' });
     const [a, b] = along === 'u' ? [L / 2, 0.16] : [0.16, L / 2];
     k.B(C.stone, u + du - a + 0.04, u + du + a - 0.04, 0, 0.24, n + dn - b + 0.03, n + dn + b - 0.03);
     k.B(C.slate, u + du - a, u + du + a, 0.24, 0.32, n + dn - b, n + dn + b);

@@ -128,8 +128,9 @@ function shuffle(list, R) {
 }
 
 // put the period's sitters, talkers and queue in place. fresh: on entering (anywhere); otherwise only out of view
-export function placeStill(pool, spots, counts, spec, R, { fresh, inView }) {
+export function placeStill(pool, spots, counts, spec, R, { fresh, inView, game }) {
   const taken = (x, z) =>
+    (game?.player?.seated && Math.hypot(game.player.root.position.x - x, game.player.root.position.z - z) < 0.5) ||
     pool.some((b) => b.state !== 'off' && Math.hypot(b.r.root.position.x - x, b.r.root.position.z - z) < 0.5);
   const ok = (x, z) => !taken(x, z) && (fresh || !inView(x, z));
   const body = () => {

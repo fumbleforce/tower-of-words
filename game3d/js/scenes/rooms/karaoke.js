@@ -1,3 +1,4 @@
+import { seatRow } from '../../kit/core/seats.js';
 // The karaoke box (karaoke; docs/game/places.md "Karaoke box"), south row bays 13 and 14 of the shop street: the front
 // desk downstairs, and one booth upstairs (karaoke_booth), each looked into from the south over a cut-down front
 // wall. Each in its own frame: x east, z toward the camera, the origin its door's middle, inside.
@@ -97,6 +98,7 @@ export function buildKaraokeDesk() {
       surf: 'card',
     });
   nav.block(-3.15, -2.65, -1.12, -0.68);
+  seatRow(kit, R.x0 + 0.24, -2.0, 0.22, Math.PI / 2, 1.2);
   kit.box(C.bench, 0.36, 0.22, 1.2, R.x0 + 0.2, 0, -2.0, { r: 0.03, surf: 'fabric' });
   nav.block(R.x0, R.x0 + 0.42, -2.65, -1.35);
   posters(kit, R);
@@ -235,21 +237,22 @@ export function buildKaraokeBooth() {
   });
   nav.block(-1.45, 1.45, R.z0, R.z0 + 0.45);
   // the benches along the west and east walls, and along the front wall's inside
-  const bench = (x0, x1, z0, z1) => {
+  const bench = (x0, x1, z0, z1, ry) => {
+    seatRow(kit, (x0 + x1) / 2, (z0 + z1) / 2, 0.2, ry, Math.max(x1 - x0, z1 - z0), { label: 'Sofa' });
     boothBench(kit, x0, x1, z0, z1);
     nav.block(x0, x1, z0, z1);
   };
-  bench(R.x0, R.x0 + 0.5, R.z0 + 0.6, -0.1);
+  bench(R.x0, R.x0 + 0.5, R.z0 + 0.6, -0.1, Math.PI / 2);
   kit.box('#6a2847', 0.14, 0.42, -0.1 - R.z0 - 0.6, R.x0 + 0.07, 0, (R.z0 + 0.6 - 0.1) / 2, {
     r: 0.03,
     surf: 'fabric',
   });
-  bench(R.x1 - 0.5, R.x1, R.z0 + 0.6, BD[0] - 0.15);
+  bench(R.x1 - 0.5, R.x1, R.z0 + 0.6, BD[0] - 0.15, -Math.PI / 2);
   kit.box('#6a2847', 0.14, 0.42, BD[0] - 0.15 - R.z0 - 0.6, R.x1 - 0.07, 0, (R.z0 + 0.6 + BD[0] - 0.15) / 2, {
     r: 0.03,
     surf: 'fabric',
   });
-  bench(R.x0 + 0.5, 0.7, -0.5, R.z1);
+  bench(R.x0 + 0.5, 0.7, -0.5, R.z1, Math.PI);
   // the table: the selector in its cradle, the microphones in their basket, a tambourine, the menu, two glasses
   const tz = -1.9,
     tx = -0.5;

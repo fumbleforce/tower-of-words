@@ -1,3 +1,4 @@
+import { seatPoint, seatRow } from '../../kit/core/seats.js';
 // The roof of Eric's block (docs/game/places.md, Eric's dorm building), up the stairs past 4F and 5F: the long flat
 // roof over the flats and the corridors, grey-green waterproofing in bays with a low parapet all round, and on the
 // return the stair house Eric comes out of, its steel door under a bulkhead light, an aerial on top. The water tank
@@ -234,6 +235,7 @@ function plant(kit, root, nav) {
     [-0.45, 0.5],
     [0.45, -0.4],
   ]) {
+    seatPoint(kit, bx + dx, bz, 0.29, ry);
     kit.box('#3f6f9e', 0.32, 0.03, 0.3, bx + dx, 0.26, bz, { ry, surf: 'fabric' });
     kit.box('#3f6f9e', 0.32, 0.3, 0.03, bx + dx - Math.sin(ry) * 0.15, 0.3, bz - Math.cos(ry) * 0.15, {
       ry,
@@ -334,6 +336,7 @@ function more(kit, root, nav) {
   nav.block(-7.15, -6.45, Z0, Z0 + 0.42);
   // a plank bench along the west parapet, on two blocks
   const bz = 0.55;
+  seatRow(kit, W0 + 0.3, bz, 0.29, Math.PI / 2, 1.2);
   kit.boxes('#8d939b', [
     [0.22, 0.24, 0.2, W0 + 0.3, 0, bz - 0.45],
     [0.22, 0.24, 0.2, W0 + 0.3, 0, bz + 0.45],

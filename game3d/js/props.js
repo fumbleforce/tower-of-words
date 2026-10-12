@@ -1,3 +1,4 @@
+import { seatPoint } from './kit/core/seats.js';
 import { deskKeyboard } from './desk-keyboard.js';
 import * as THREE from 'three';
 import { roundedBox } from './perf/rounded-box.js';
@@ -155,7 +156,6 @@ export function plainPlant({ size = 1, seed = 1, pot = PAL.planter, tall = 1 } =
   return g;
 }
 
-// ---------- benches (dark navy, steel frame) ----------
 export function bench(len = 2.0, { seats = 3 } = {}) {
   const g = new THREE.Group();
   const d = 0.5;
@@ -166,6 +166,7 @@ export function bench(len = 2.0, { seats = 3 } = {}) {
   const sw = len / seats;
   for (let i = 0; i < seats; i++) {
     const x = -len / 2 + sw * (i + 0.5);
+    seatPoint(g, x, 0, 0.29, 0, { label: 'Bench' });
     g.add(rbox(sw - 0.04, 0.09, d, PAL.bench, { x, y: 0.2, r: 0.04, seg: 3 }));
     g.add(rbox(sw - 0.04, 0.34, 0.09, PAL.benchBack, { x, y: 0.26, z: -d / 2 + 0.02, r: 0.04, seg: 3 }));
   }
@@ -345,10 +346,10 @@ export function shadowProxy(parts) {
   return g;
 }
 
-// ---------- office furniture ----------
-export const officeChair = (c) => (LOOK.detail ? D.chair(c) : plainChair(c));
+export const officeChair = (c) => (LOOK.detail ? seatPoint(D.chair(c), 0, 0, 0.24) : plainChair(c));
 export function plainChair(color = PAL.chair) {
   const g = new THREE.Group();
+  seatPoint(g, 0, 0, 0.24);
   g.add(rbox(0.06, 0.03, 0.42, PAL.dark, { y: 0.03, r: 0.01 }));
   g.add(rbox(0.42, 0.03, 0.06, PAL.dark, { y: 0.03, r: 0.01 }));
   g.add(rbox(0.05, 0.15, 0.05, PAL.dark, { y: 0.05, r: 0.01 }));
@@ -371,8 +372,7 @@ export function plainMonitor({ on = true, kind, crt = false } = {}) {
   return crt ? crtHousing(g, rbox, mat) : g;
 }
 export const PED = 0.26; // a desk's drawer pedestals: wide enough to leave room for seated knees (#240)
-// desk facing +z (the sitter sits on the +z side). open: no front panel and one drawer unit, on the -x side, with two
-// legs at the +x end, set in from the top's edges and 5 mm up into it, so a seated person's legs show (Emi's, #248)
+// Desk faces +z. Open desks keep the front and knees clear (#248).
 export function desk(o = {}) {
   const g = LOOK.detail ? D.desk(o) : plainDesk(o);
   const { w = 1.4, d = 0.72 } = o;

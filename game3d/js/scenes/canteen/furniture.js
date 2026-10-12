@@ -1,7 +1,9 @@
+import { seatPoint } from '../../kit/core/seats.js';
 import { TABLES, COUNTER, SEATS, SERVICE_END } from './plan.js';
 const STEEL = '#7e898d',
   TEAL = '#457b78';
 export function chair(kit, x, z, ry) {
+  seatPoint(kit, x, z, 0.34, ry);
   kit.box(TEAL, 0.42, 0.045, 0.42, x, 0.295, z, { surf: 'plastic', ry });
   kit.box(TEAL, 0.42, 0.35, 0.045, x - Math.sin(ry) * 0.19, 0.34, z - Math.cos(ry) * 0.19, { surf: 'plastic', ry });
   for (const dx of [-0.16, 0.16])

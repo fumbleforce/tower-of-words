@@ -1,3 +1,4 @@
+import { transferSeats } from './seats.js';
 // The Parts collector: geometry gathered with its colour in the vertices, one mesh per kind of surface, so a whole
 // court of kerbs, trees and lamps costs a few meshes and the place's merge pass (scenes/merge-static.js) folds them
 // further. Also the layout helpers that put things on lines and in pairs. Moved here from scenes/outdoor/parts.js
@@ -66,6 +67,7 @@ export class Parts {
     return this.geo(color, g.translate(x, y + h / 2, z), o);
   }
   build(root) {
+    transferSeats(this, root);
     const out = [];
     // the benches' seats (furniture.js bench()), in root's frame, for the ambient crowd (crowd/still.js)
     if (this.seats) (root.userData.seats ||= []).push(...this.seats.splice(0));

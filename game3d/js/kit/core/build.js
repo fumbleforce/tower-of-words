@@ -1,3 +1,4 @@
+import { seatPoint } from './seats.js';
 // Builds what kit pieces put into a Parts collector (kit/core/piece.js) and hands a place everything they reported:
 //   const { meshes, blocks, spots, glows } = buildKit(p, root, { poolY });
 //   blocks -> nav.block(...rect) each, and walk-ground; spots -> the place's seats, doors and tap targets;
@@ -42,6 +43,7 @@ const merge = (list) => {
 export function buildKit(p, root, { poolY } = {}) {
   const bag = kitBag(p);
   const meshes = p.build(root);
+  for (const [x, z, top, ry] of bag.spots.seats || []) seatPoint(root, x, z, top, ry, { label: 'Bench' });
   const glows = [];
   if (bag.glass.length) {
     const m = new THREE.Mesh(merge(bag.glass.map(plain)), mat(GLASS, { roughness: 0.25, metalness: 0.1 }));

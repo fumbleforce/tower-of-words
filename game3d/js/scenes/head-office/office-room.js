@@ -1,3 +1,4 @@
+import { seatPoint } from '../../kit/core/seats.js';
 // The receptionist's office behind the feature wall (scenes/head-office.js; Jørgen, on the atrium: "there should be
 // a door on the right side to a receptioner's office, that the player could in theory visit, so the reception desk
 // is not completely closed off"). One storey, open to the camera like every cut room: a slate carpet, a desk against
@@ -36,6 +37,7 @@ export function officeRoom(g, root) {
   // the chair, pulled up, facing the desk: seat, back, post, base
   const cU = U0 + 1.17,
     cN = N1 - 0.77;
+  seatPoint(k.p, cU, -cN, 0.44, Math.PI);
   k.B(C.slateDark, cU - 0.2, cU + 0.2, 0.36, 0.44, cN - 0.2, cN + 0.18);
   k.B(C.slateDark, cU - 0.19, cU + 0.19, 0.44, 0.88, cN - 0.24, cN - 0.18);
   k.B(C.steelDark, cU - 0.03, cU + 0.03, 0.06, 0.36, cN - 0.03, cN + 0.03);

@@ -121,7 +121,9 @@ export function planInteract(game, item, { person = false } = {}) {
   // the plain use, when no story beat matches (a talk: list's later entries assume the earlier conditions failed, so
   // it is never offered beside the beat); a person's only when they have no topics either
   const plain =
-    story || (person && topics.length) ? null : { label: person ? 'Talk' : verbOf(item) || 'Look', use: true };
+    story || (person && topics.length) || (item.seatAction && extra.length)
+      ? null
+      : { label: person ? 'Talk' : verbOf(item) || 'Look', use: true };
   return { person, story, topics, extra, plain };
 }
 

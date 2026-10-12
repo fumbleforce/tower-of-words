@@ -1,3 +1,4 @@
+import { seatRow } from '../../kit/core/seats.js';
 // The old works' gear and the nooks' props (works/plan.js), in the island frame:
 //   the pipe bridge: three pipes on tall steel portals from the power plant over the lane's head to the factory's
 //   west end, one lagged in silver, an elbow down into the plant; high, so they never hide Eric at the chimney's foot
@@ -208,6 +209,7 @@ export function corner(p, mesh, plain) {
   }
   // the plank bench on two crates, the sand bucket, the sign
   const [bx, bz] = P.CORNER_BENCH;
+  seatRow(p, bx, bz, 0.48, 0, 1.9);
   for (const s of [-0.7, 0.7]) p.box('#5c7f9a', 0.45, 0.42, 0.4, bx + s, 0, bz);
   p.box('#9b958c', 1.9, 0.06, 0.34, bx, 0.42, bz);
   p.geo('#a33f37', new THREE.CylinderGeometry(0.17, 0.14, 0.32, 10).translate(bx + 1.35, 0.16, bz + 0.05));

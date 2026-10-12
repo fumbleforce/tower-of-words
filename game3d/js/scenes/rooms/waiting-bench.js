@@ -1,3 +1,4 @@
+import { seatRow } from '../../kit/core/seats.js';
 // A waiting-room bench in a Kit (dorms/kit.js): a moulded seat and back on two steel frames, with arm rails at the
 // ends. The ferry waiting room's (scenes/ferry-terminal/room.js) and the clinic's (scenes/clinic/room.js).
 //   waitingBench(k, x, z, facing, { len, seat, back, frame, rail })
@@ -10,6 +11,7 @@ export function waitingBench(
   facing,
   { len = 3.15, seat = '#4f7c82', back = '#5e858a', frame = '#64747a', rail = '#65777b' } = {},
 ) {
+  seatRow(k, x, z, 0.34, facing, len);
   const along = Math.abs(Math.sin(facing)) < 1e-6, // the length runs along x
     fx = Math.sin(facing),
     fz = Math.cos(facing),

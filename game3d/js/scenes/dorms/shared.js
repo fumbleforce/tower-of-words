@@ -1,3 +1,4 @@
+import { seatPoint } from '../../kit/core/seats.js';
 // The shared room at the west end of a corridor floor (docs/game/places.md, Eric's dorm building): a flat's width,
 // one room from the corridor wall to the back window, cut open at the ceiling like the flats. On 2F the floor's
 // kitchen (a counter with a sink and two rings under a hood, a tall fridge full of named boxes, a shelf of baskets,
@@ -220,6 +221,7 @@ export function kitchen(kit, root, nav) {
   ])
     kit.box('#848a93', 0.03, 0.38, 0.03, tx + dx, 0, tz + dz, { surf: 'metal' });
   for (const dz of [-0.22, 0.24]) {
+    seatPoint(kit, tx - 0.45, tz + dz, 0.28, Math.PI / 2, { label: 'Stool' });
     kit.cyl('#5f6b7d', 0.11, 0.11, 0.04, tx - 0.45, 0.24, tz + dz, { seg: 10, surf: 'plastic' });
     kit.cyl('#848a93', 0.02, 0.03, 0.24, tx - 0.45, 0, tz + dz, { seg: 6 });
   }
@@ -309,6 +311,7 @@ export function laundry(kit, root, nav) {
   kit.box('#a9bcd6', 0.24, 0.03, 0.18, tx + 0.02, 0.51, tz + 0.2, { r: 0.01, surf: 'fabric' });
   nav.block(tx - 0.27, XB, tz - 0.42, tz + 0.42);
   const cx = XA + 0.24;
+  seatPoint(kit, cx, 0.25, 0.29, Math.PI / 2);
   kit.box('#5f6b7d', 0.3, 0.03, 0.3, cx, 0.26, 0.25, { r: 0.02, surf: 'plastic' });
   kit.box('#5f6b7d', 0.03, 0.3, 0.3, cx - 0.14, 0.28, 0.25, { r: 0.02, surf: 'plastic' });
   kit.boxes('#848a93', [

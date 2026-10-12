@@ -1,3 +1,4 @@
+import { seatPoint, seatRow } from '../../kit/core/seats.js';
 // The gym's sports hall (scenes/rooms/gym.js lays the lobby; gym-plan.js has the plan): the court's lines and the red
 // boundary, the hall's walls (the wainscot, the high windows, the goal, the clock), the equipment store, the
 // benches by the windows and the cart of volleyballs, the winter meeting corner. Each laid into the room's Kit, each
@@ -126,6 +127,7 @@ export function store(kit, nav) {
 // a cart of volleyballs left inside the doors
 export function benches(kit, nav) {
   for (const [x, z] of BENCHES) {
+    seatRow(kit, x, z, 0.24, Math.PI / 2, BENCH_LEN);
     kit.box(C.bench, 0.3, 0.04, BENCH_LEN, x, 0.2, z, { surf: 'laminate' });
     for (const s of [-1, 1]) {
       kit.box(C.steel, 0.24, 0.2, 0.03, x, 0, z + s * (BENCH_LEN / 2 - 0.2), { surf: 'metal' });
@@ -145,6 +147,7 @@ export function meeting(kit, nav) {
   const { x0, x1, rows, board } = MEETING;
   for (const z of rows)
     for (let x = x0 + 0.3; x < x1; x += 0.8) {
+      seatPoint(kit, x, z, 0.265, Math.PI);
       kit.box('#4f7f9a', 0.3, 0.025, 0.28, x, 0.24, z, { surf: 'plastic' });
       kit.box('#4f7f9a', 0.3, 0.22, 0.025, x, 0.3, z + 0.14, { surf: 'plastic' });
       for (const dx of [-0.13, 0.13]) {

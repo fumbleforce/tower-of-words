@@ -28,6 +28,7 @@ import { attachSunday, installDay4 } from './day4/index.js';
 import { noteBenches } from './day3/seats.js';
 import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
 import { installCreatures } from '../creatures/index.js';
+import { attachSeating } from '../gameplay/seating.js';
 import { attachCrowd } from '../crowd/index.js';
 import { liftPeople } from '../look/char-lift.js';
 import { keepPublic } from '../travel/ways.js';
@@ -122,6 +123,7 @@ export function createPlaceLifecycle(
         await attachLift(game, place); // walk-in lift (places/lift.js)
         await nextFrame();
         await attachCrowd(game, place, name); // the outdoor places' passers-by, before the draw-call pass (crowd/)
+        attachSeating(game, place);
         await sliced(farViewSteps(game, place, name, () => sim.period)); // the far view: sky, haze, far model (look/sky.js)
         // surface patterns, baked light (look/index.js); materials patched in place, in slices between frames so the
         // place being played doesn't stall (js/perf/slice.js)
@@ -190,6 +192,8 @@ export function createPlaceLifecycle(
     place.placeMio?.(game.mioNpc);
     game.player.root.scale.setScalar(place.charScale || 1);
     game.player.seated = false;
+    game.player.freeSeat = null;
+    game.player.seatOut = null;
     game.player.scripted = false;
     game.player.setState('idle');
     game.player.root.visible = true;

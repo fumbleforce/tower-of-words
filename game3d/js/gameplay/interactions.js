@@ -129,6 +129,7 @@ export function installInteractions(game) {
   function standUp() {
     const pl = game.player;
     if (!pl.seated) return;
+    if (game.place.seating?.stand()) return;
     if (pl.seatOut) {
       // off a bench the story sat him on (hooks/movement.js H.sit): back on the free floor in front of it
       pl.root.position.set(pl.seatOut[0], 0, pl.seatOut[1]);

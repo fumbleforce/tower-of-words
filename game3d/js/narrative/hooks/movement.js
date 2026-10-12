@@ -137,6 +137,7 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
     await game.place.sitPerson?.(isPlayer(who) ? PLAYER_ID : who, at);
   };
   H.stand = async ({ who }) => {
+    if (isPlayer(who) && game.place.seating?.stand({ persist: false })) return;
     const pl = game.player;
     if (isPlayer(who) && pl.seatOut) {
       const dz = pl.seatOut[1] - pl.root.position.z;

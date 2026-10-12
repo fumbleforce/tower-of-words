@@ -11,7 +11,7 @@ const _m = new THREE.Matrix4(),
   _f = new THREE.Vector3();
 // every bench seat in a place, found once (two along a long bench, one on a short one)
 const lists = new WeakMap();
-function benches(P) {
+export function benches(P) {
   if (lists.has(P)) return lists.get(P);
   const out = [];
   P.space.updateMatrixWorld(true);
