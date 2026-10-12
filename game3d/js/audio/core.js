@@ -33,10 +33,17 @@ export function audioContext() {
     } catch {
       actx = null;
     }
+    if (actx) {
+      // while paused or held (the opening film), a context that starts on its own (autoplay allowed) or a resume that
+      // lands after the pause (the Opening button's tap sound resumes it a moment before the film opens) goes straight
+      // back to sleep
+      actx.addEventListener('statechange', () => {
+        if (paused && actx.state === 'running') actx.suspend();
+      });
+      if (paused) actx.suspend();
+    }
   }
   if (actx && actx.state === 'suspended' && !paused) actx.resume();
-  // made while the sound is held (the opening film): stay silent until the hold ends
-  else if (actx && paused && actx.state === 'running') actx.suspend();
   return actx;
 }
 // ---------- volume buses ----------
@@ -95,7 +102,8 @@ export function pauseAudio(on) {
   if (!on && holds.size) return;
   paused = !!on;
   if (on) {
-    if (actx && actx.state === 'running') actx.suspend();
+    // also when it still reads 'suspended': a resume may be on its way (state changes only once it lands)
+    if (actx && actx.state !== 'closed') actx.suspend();
     if (curVoice && !curVoice.paused) {
       pausedClip = curVoice;
       curVoice.pause();
