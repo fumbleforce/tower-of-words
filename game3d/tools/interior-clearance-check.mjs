@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
-const base = process.env.URL || 'http://127.0.0.1:8771/.claude/worktrees/codex-interior-roofs/game3d';
+const base = process.env.URL || `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}`;
 const width = +(process.argv[2] || 1366), height = width === 390 ? 844 : 860;
 const out = new URL('../shots/interior-clearance/', import.meta.url).pathname;
 fs.mkdirSync(out, {recursive:true});
