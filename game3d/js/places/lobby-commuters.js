@@ -21,11 +21,22 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
     const b = blob(0.5, 0.35);
     w.root.add(b);
     b.visible = false;
-    commuters.push({ r, b, t: 1 - i * 3.5, side: i % 2 ? 1 : -1, stage: 'wait', qi: i });
+    commuters.push({
+      r,
+      b,
+      t: 1 - i * 3.5,
+      side: i % 2 ? 1 : -1,
+      stage: 'wait',
+      qi: i,
+    });
   });
   function stepCommuter(c, dt) {
     const r = c.r,
       p = r.root.position;
+    if (r.socialHold) {
+      stopGait(r);
+      return;
+    }
     c.t += dt;
     if (c.stage === 'wait') {
       if (c.t > 0 && st.rush && !game.busyTrip && !st.leaving) {
@@ -173,5 +184,9 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
           Math.hypot(c.path[0][0] - c.r.root.position.x, c.path[0][1] - c.r.root.position.z) < 1.0);
     for (let i = 0; i < 60 && commuters.some((c) => c.letGo && c.stage !== 'wait'); i++) await g.wait(100);
   }
-  return { list: commuters, step: (dt) => commuters.forEach((c) => stepCommuter(c, dt)), clearDoor };
+  return {
+    list: commuters,
+    step: (dt) => commuters.forEach((c) => stepCommuter(c, dt)),
+    clearDoor,
+  };
 }

@@ -151,7 +151,7 @@ export function pickPerson(game, clientX, clientY, canvas) {
     bd = 1e9;
   for (const m of game.markers.list) {
     if (!/person/.test(m.kind || '') || !(typeof m.enabled === 'function' ? m.enabled() : m.enabled)) continue;
-    const r = P.people && P.people[m.id];
+    const r = P.people?.[m.id] || P.extras?.[m.id];
     if (!r || !r.root || !r.root.visible) continue;
     const foot = new THREE.Vector3();
     r.root.getWorldPosition(foot);

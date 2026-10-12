@@ -6,6 +6,67 @@
    "ohayo"
   ]
  ],
+ "crowd-casual-block-0": [
+  [
+   0.0,
+   1.103,
+   "sumimasen"
+  ]
+ ],
+ "crowd-casual-hello-0": [
+  [
+   0.867,
+   1.853,
+   "nomitai"
+  ]
+ ],
+ "crowd-elder-block-1": [
+  [
+   0.0,
+   0.728,
+   "sumimasen"
+  ],
+  [
+   1.198,
+   1.828,
+   "ikitai"
+  ]
+ ],
+ "crowd-elder-hello-0": [
+  [
+   0.68,
+   1.12,
+   "yasumi"
+  ]
+ ],
+ "crowd-office-block-0": [
+  [
+   0.0,
+   0.962,
+   "sumimasen"
+  ]
+ ],
+ "crowd-office-hello-0": [
+  [
+   0.0,
+   0.645,
+   "daijoubu"
+  ]
+ ],
+ "crowd-officeWoman-answer-0": [
+  [
+   0.648,
+   1.244,
+   "daijoubu"
+  ]
+ ],
+ "crowd-officeWoman-block-0": [
+  [
+   0.0,
+   0.783,
+   "sumimasen"
+  ]
+ ],
  "evening-canteen-worker": [
   [
    0.0,

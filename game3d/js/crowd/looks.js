@@ -251,6 +251,7 @@ export function makeBody(kind, i) {
   if (bag) carryBag(r, bag);
   if (pack && gen) hold(r, pack, boneAt(r, 'Spine').add(new THREE.Vector3(0, -0.03, 0.02)), 'Spine02');
   else if (pack) r.torso.add(pack);
+  r.socialProfile = kind === 'office' ? (i % 2 ? 'officeWoman' : 'office') : kind === 'elder' ? 'elder' : 'casual';
   r.kind = kind;
   r.carries = !!(bag || pack);
   r.ph = i * 1.37;

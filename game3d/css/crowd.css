@@ -1,0 +1,5 @@
+.crowd-reaction { position: absolute; z-index: 3; transform: translate(-50%, -100%); width: max-content; max-width: min(340px, calc(100% - 28px)); border: 1px solid #788ca3; border-radius: 13px; padding: 9px 28px 10px 12px; background: rgba(20, 28, 40, .96); color: #f2f5fc; text-align: left; font: inherit; box-shadow: 0 4px 18px #0005; cursor: pointer; pointer-events: auto; }
+.crowd-reaction[hidden] { display: none; }
+.crowd-name { display: block; color: #afcbe9; font-size: 12px; margin-bottom: 4px; }
+.crowd-words { font-size: 17px; line-height: 1.45; }
+.crowd-close { position: absolute; right: 9px; top: 7px; color: #aebbd0; }

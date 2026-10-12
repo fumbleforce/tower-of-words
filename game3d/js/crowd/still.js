@@ -28,7 +28,7 @@ export function stillSpots(game, place, g, data, ends, lines) {
   const keep = [];
   const V = new THREE.Vector3();
   for (const [id, t] of Object.entries(place.things || {})) {
-    if (id === 'mio' || !t || !t.anchor) continue;
+    if (id === 'mio' || !t || t.ambient || !t.anchor) continue;
     try {
       const a = local(t.anchor(V.set(0, 0, 0)));
       keep.push([a.x, a.z]);

@@ -1,22 +1,5 @@
-// The ambient crowd (Jørgen, 2026-10-02: "there should be plenty of people about, this is a well populated island
-// ... dependent on the time of day"): background islanders in the outdoor places, walking between the ends of the
-// streets and the doors of open buildings, sitting on benches, standing in pairs talking, waiting at a shut door.
-// Who is about in each place and period is data (crowd/data.js; facts in docs/game/places.md, Who's there when).
-//
-//   await attachCrowd(game, place, name)   once, when the place is built, before the draw-call pass (lifecycle.js);
-//                                         sets place.crowd (the bodies: movement and the draw-call pass see them)
-//   place.ambient.enter(period)           on entering: everyone placed at once, nobody near Eric
-//   (each frame)                          place.update runs the crowd after the place's own update
-//
-// The mix (Jørgen, 2026-10-02: "they come in waves and all walk the same way, it feels a bit artificial"): new walkers
-// set off at random gaps, about as often as people leave, so the numbers drift instead of coming in a rush; each
-// period's flows run every way, the commute only the biggest share; each walks at their own pace, some stop on the way
-// (crowd/stops.js) and some walk in twos.
-//
-// Rules: they are never story targets (not in place.people or place.things, so no pin, no talk); they never push
-// Eric or the story's people (crowd/motion.js); nobody appears or vanishes in view (new walkers start at a street end
-// out of view or step out of a door, and leave the same way); while a scene plays nobody steps out of a door, nobody
-// stops on the way, and walkers give Eric a wide berth; phones and the low tier have fewer (TIERS), with no sun shadows on phones.
+// Ambient population and pedestrian movement. Social responses live in social.js.
+// Period counts and paths are in data.js; static placement is in still.js.
 import * as THREE from 'three';
 import { CROWD } from './data.js';
 import { makeBody } from './looks.js';
@@ -32,6 +15,7 @@ import { sim } from '../sim.js';
 import { qualityTier, isPhone } from '../settings.js';
 import { nextFrame } from '../perf/slice.js';
 import { blob } from '../engine.js';
+import { attachCrowdSocial } from './social.js';
 
 // k: share of the data's counts; cap: most people at once
 export const TIERS = {
@@ -93,7 +77,10 @@ const hashName = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 997
 export async function attachCrowd(game, place, name) {
   const data = place.crowdPlan?.(CROWD[name]) || CROWD[name];
   const specs = data && Object.values(data.periods);
-  if (!specs?.length || !place.nav || Q.has('nocrowd')) return null; // ?nocrowd: none (perf comparisons)
+  if (!specs?.length || !place.nav || Q.has('nocrowd')) {
+    attachCrowdSocial(game, place);
+    return null;
+  } // ?nocrowd: none (perf comparisons)
   const tier = crowdTier();
   const K = place.charScale || 1;
   // the pool: as many bodies as the busiest period needs, in a mix of the kinds its periods ask for
@@ -158,7 +145,13 @@ export async function attachCrowd(game, place, name) {
     const a = local(t.anchor(new THREE.Vector3())),
       sp = e.out || t.spot?.();
     const out = sp && snapFree(g, sp, 0.35);
-    if (out) ends[id] = { at: out, door: [a.x, a.z], pending: e.inside, spot: t.spot?.() };
+    if (out)
+      ends[id] = {
+        at: out,
+        door: [a.x, a.z],
+        pending: e.inside,
+        spot: t.spot?.(),
+      };
   }
   // through a door and on inside: the way from the door to the named spot (the head office's lobby, on to the lifts),
   // so nobody vanishes on the threshold; walked in after the door, and the other way out of the lift
@@ -287,6 +280,11 @@ export async function attachCrowd(game, place, name) {
         if ((b.hold -= dt) > 0) continue; // not out yet (unseen, no shadow)
         b.r.root.visible = true;
       }
+      if (b.r.socialHold) {
+        _m.makeTranslation(p.x, 0.006, p.z);
+        blobs.setMatrixAt(n++, _m);
+        continue;
+      }
       if (b.state === 'walk' && b.stopped) {
         // stopped on the way: a phone, a shop window, a shoe, a word with the one they walk with (not in a scene)
         // (and on at once when someone in fixed choreography comes by: walkStep steps them out of the way)
@@ -387,5 +385,6 @@ export async function attachCrowd(game, place, name) {
     }),
     clearAt: (x, z) => clearAt(g, x, z),
   };
+  attachCrowdSocial(game, place, pool);
   return place.ambient;
 }

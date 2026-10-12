@@ -11,6 +11,7 @@ export { prepareApprovedCrowd as prepareOfficeWorkers } from './approved-models.
 export function officeWorker(seed) {
   const rig = approvedCrowd(seed % 3 === 1 ? 1 : 0);
   if (!rig) return PEOPLE.worker(seed);
+  rig.socialProfile = seed % 3 === 1 ? 'officeWoman' : 'office';
   rig.ph = seed * 1.37;
   proxyParts(rig);
   bridgeOfficePose(rig);

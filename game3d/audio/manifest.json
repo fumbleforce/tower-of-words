@@ -15052,6 +15052,330 @@
   "emo": "amused"
  },
  {
+  "key": "crowd-office-hello-0",
+  "speaker": "sales1",
+  "text": "大丈夫ですか？道、分かります？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-office-answer-0",
+  "speaker": "sales1",
+  "text": "よかった。では、また。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-office-jump-0",
+  "speaker": "sales1",
+  "text": "あっ、びっくりした。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "surprised"
+ },
+ {
+  "key": "crowd-office-jump-1",
+  "speaker": "sales1",
+  "text": "元気ですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "crowd-office-block-0",
+  "speaker": "sales1",
+  "text": "すみません、通ります。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-office-block-1",
+  "speaker": "sales1",
+  "text": "ちょっと、通してもらえますか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-office-annoyed-0",
+  "speaker": "sales1",
+  "text": "まったく。危ないですよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "stern"
+ },
+ {
+  "key": "crowd-officeWoman-hello-0",
+  "speaker": "sales2",
+  "text": "あ、びっくりした。急に声をかけるから。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-officeWoman-answer-0",
+  "speaker": "sales2",
+  "text": "いえいえ、大丈夫ですよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "daijoubu",
+    "大丈夫"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-officeWoman-jump-0",
+  "speaker": "sales2",
+  "text": "わっ、危ない！",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "surprised"
+ },
+ {
+  "key": "crowd-officeWoman-jump-1",
+  "speaker": "sales2",
+  "text": "ふふ、元気ですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "crowd-officeWoman-block-0",
+  "speaker": "sales2",
+  "text": "すみません、ちょっといいですか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-officeWoman-block-1",
+  "speaker": "sales2",
+  "text": "あの、通りたいんですけど。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-officeWoman-annoyed-0",
+  "speaker": "sales2",
+  "text": "もう、やめてください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "stern"
+ },
+ {
+  "key": "crowd-elder-hello-0",
+  "speaker": "reader",
+  "text": "ちょっと休みです。足が疲れちゃって。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "yasumi",
+    "休み"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-elder-answer-0",
+  "speaker": "reader",
+  "text": "ええ。もう少し休んでから行きます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-elder-jump-0",
+  "speaker": "reader",
+  "text": "おっと、危ない。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "surprised"
+ },
+ {
+  "key": "crowd-elder-jump-1",
+  "speaker": "reader",
+  "text": "はは、よく跳ぶね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "crowd-elder-block-0",
+  "speaker": "reader",
+  "text": "ごめんね、通してね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-elder-block-1",
+  "speaker": "reader",
+  "text": "すみません、そっちへ行きたいんです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ],
+   [
+    "ikitai",
+    "行きたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-elder-annoyed-0",
+  "speaker": "reader",
+  "text": "まったく、落ち着きなさい。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "stern"
+ },
+ {
+  "key": "crowd-casual-hello-0",
+  "speaker": "music",
+  "text": "ああ、何か飲みたいな。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "nomitai",
+    "飲みたい"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-casual-answer-0",
+  "speaker": "music",
+  "text": "そっちも？のど、渇くよね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-casual-jump-0",
+  "speaker": "music",
+  "text": "なに、運動？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "surprised"
+ },
+ {
+  "key": "crowd-casual-jump-1",
+  "speaker": "music",
+  "text": "おお、すごいね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "crowd-casual-block-0",
+  "speaker": "music",
+  "text": "すみません、通るね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-casual-block-1",
+  "speaker": "music",
+  "text": "ねえ、ちょっと通して。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "crowd-casual-annoyed-0",
+  "speaker": "music",
+  "text": "ばか、ぶつかるでしょ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "stern"
+ },
+ {
   "key": "ln-1lvkziu",
   "speaker": "eric",
   "text": "I’d have missed that tray.",
