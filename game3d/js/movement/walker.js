@@ -304,7 +304,8 @@ export class SmoothWalker extends Walker {
       this.vx += (mx - this.vx) * blend;
       this.vz += (mz - this.vz) * blend;
     }
-    const a = want > this.v ? ACCEL : BRAKE;
+    // in the air (jump.js sets air each frame) he keeps most of his speed: little grip to stop or speed up with
+    const a = (want > this.v ? ACCEL : BRAKE) * (this.air ? (want > this.v ? 0.6 : 0.2) : 1);
     this.v += THREE.MathUtils.clamp(want - this.v, -a * dt, a * dt);
     let moved = 0;
     if (this.v > 1e-3) {
