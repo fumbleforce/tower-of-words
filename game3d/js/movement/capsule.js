@@ -117,7 +117,7 @@ export function capsuleHits(mesh, bottom, top, radius, previousBottom, previousT
     );
     // Recover only toward less overlap; a vertical lift may slide along an existing side contact.
     // A newly contacted face always blocks, including another face of this same merged mesh.
-    const sideContact = parallel && Math.abs(triangle.getNormal(near).y) < 0.65;
+    const sideContact = parallel && (distance > 1e-10 || Math.abs(triangle.getNormal(near).y) < 0.65);
     if (sideContact ? distance < previous - 1e-10 : distance <= previous + 1e-10) return true;
   }
   return false;

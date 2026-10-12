@@ -147,6 +147,8 @@ test('rising beside a walkable curb releases the foot overlap but a new ceiling 
  const t=createTraversal({space});
  assert.equal(t.free(.24,0,.24,0,0,1,false),true);
  assert.equal(t.free(.24,0,.24,0,.04,1,true,0),true);
+ curb.geometry=new T.BoxGeometry(.2,.65,2);curb.position.y=.325;t.refresh();
+ assert.equal(t.free(.24,0,.24,0,.04,1,true,0),true, "a taller rim edge also permits vertical escape");
  const ceiling=new T.Mesh(new T.BoxGeometry(2,.1,2),material);ceiling.position.y=1.35;space.add(ceiling);
  const withCeiling=createTraversal({space});
  assert.equal(withCeiling.free(.24,0,.24,0,.2,1,true,0),false);
