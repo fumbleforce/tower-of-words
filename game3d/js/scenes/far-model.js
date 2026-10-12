@@ -19,7 +19,8 @@ import { mat } from '../props.js';
 import { LEAF } from './outdoor/planting.js';
 import { TOWN } from './town.js';
 import { coastLand } from './island-west.js';
-import { marketFootprints } from './market-route.js';
+import { skylinePieces, skylinePieceId } from './skyline-pieces.js';
+import { farStation } from './far-station.js';
 import { distantMaterial } from './diorama/distant-material.js';
 import { islandTreeSpots } from './distant-trees.js';
 import { SEA } from './skyline.js';
@@ -52,8 +53,8 @@ const GREENS = ['#4d6b47', '#43603f', '#57704c', '#4a6545'].map((h) => new THREE
 // into a broad crown of two flattened twenty-faced blobs, flat-shaded, at (x, z) in the chunk's frame; r is the crown's
 // radius. The trunk starts below LAND_Y so it meets whichever ground lies over it (the far land or the skyline's).
 const CANOPY = new THREE.IcosahedronGeometry(1, 0).toNonIndexed();
-const NEAR_CANOPY = new THREE.SphereGeometry(1, 12, 6).toNonIndexed();
-const SIDE_CANOPY = new THREE.SphereGeometry(1, 10, 5).toNonIndexed();
+const NEAR_CANOPY = new THREE.SphereGeometry(1, 10, 5).toNonIndexed();
+const SIDE_CANOPY = new THREE.SphereGeometry(1, 8, 4).toNonIndexed();
 const TRUNK = new THREE.CylinderGeometry(0.62, 1, 1, 5, 1, true).translate(0, 0.5, 0).toNonIndexed();
 const BARK = new THREE.Color(LEAF.barkGrey);
 function put(b, geo, [sx, sy, sz], [x, y, z], color, turn = 0) {
@@ -163,14 +164,18 @@ export function* farModelSteps(
   yield;
 
   let nb = 0;
-  for (const b of (L.BUILDINGS || []).flatMap(marketFootprints)) {
-    if (skipIds.has(b.id) || b.detail === chunk) continue;
+  for (const b of (L.BUILDINGS || []).flatMap(skylinePieces)) {
+    if (skipIds.has(b.id) || skipIds.has(skylinePieceId(b)) || b.detail === chunk) continue;
     const shape = shapeOf(b);
     if (!shape) continue;
     const poly = ccw(shape.map(local)),
       [x0, x1, z0, z1] = bbox(poly);
     if (off(x0, x1, z0, z1) <= Math.max(near, buildFrom) || samples(poly).some(([x, z]) => own(x, z))) continue;
     nb++;
+    if (b.id === 'platform_shed') {
+      farStation(B, b, local);
+      continue;
+    }
     const fh = b.floorH || FLOOR_H,
       s = { kind: b.windows || 'flat', storeys: b.storeys || 2, fh },
       h = s.storeys * fh,
@@ -188,7 +193,7 @@ export function* farModelSteps(
     const [x, z] = local([t.x, t.z]);
     const d = off(x, x, z, z);
     if (d <= treesFrom || ownTree(x, z)) continue;
-    tree(B, x, z, t.r, GREENS[t.c], t.s, d < sideTo, d < 30);
+    tree(B, x, z, t.r, GREENS[t.c], t.s, d < Math.min(sideTo, 30), d < 45);
     nt++;
   }
   yield;

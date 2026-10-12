@@ -24,7 +24,7 @@
 import * as THREE from 'three';
 import { mat } from '../props.js';
 import { drain } from '../perf/slice.js';
-import { marketFootprints } from './market-route.js';
+import { skylinePieces, skylinePieceId } from './skyline-pieces.js';
 import { TOWN } from './town.js';
 import { FAR_VIEW, farFollow } from '../look/far-flag.js';
 import {
@@ -123,7 +123,7 @@ export function* skylineSteps(
   const roofC = new THREE.Color(TOWN.roof),
     winC = new THREE.Color(TOWN.window);
 
-  for (const b of (L.BUILDINGS || []).flatMap(marketFootprints)) {
+  for (const b of (L.BUILDINGS || []).flatMap(skylinePieces)) {
     if (skipIds.has(b.id) || b.detail === chunkId) continue;
     const shape = shapeOf(b);
     if (!shape) continue;
@@ -140,7 +140,7 @@ export function* skylineSteps(
       wallHex = typeof b.wall === 'number' ? TOWN.walls[b.wall] : b.wall || TOWN.walls[0];
     const es = edges(poly);
     if (farMode && dist <= near) {
-      nearIds.add(b.id);
+      nearIds.add(skylinePieceId(b));
       if (storeys < full)
         upperFloors(tall, poly, es, { kind, storeys: full, fh, from: Math.max(0, storeys) }, b.id, wallHex);
     }

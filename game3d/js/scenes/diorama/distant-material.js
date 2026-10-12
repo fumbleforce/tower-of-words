@@ -36,11 +36,21 @@ export function distantMaterial() {
       float planted=step(vColor.r*1.08,vColor.g)*step(vColor.b*1.08,vColor.g);
       vec3 leafWeight=pow(abs(normalize(vIslandNormal)),vec3(4.));
       leafWeight/=max(dot(leafWeight,vec3(1.)),.001);
-      float leaves=dot(leafWeight,vec3(islandLeaves(vIslandPoint.yz*7.),islandLeaves(vIslandPoint.xz*7.),islandLeaves(vIslandPoint.xy*7.)));
-      diffuseColor.rgb*=mix(1.,.8+leaves*.35,planted);
+      float leaves=dot(leafWeight,vec3(islandLeaves(vIslandPoint.yz*10.),islandLeaves(vIslandPoint.xz*10.),islandLeaves(vIslandPoint.xy*10.)));
+      diffuseColor.rgb*=mix(1.,.62+leaves*.8,planted);
+      float leafRelief=leaves*.055*planted;
+    `,
+    );
+    shader.fragmentShader = shader.fragmentShader.replace(
+      '#include <normal_fragment_maps>',
+      `#include <normal_fragment_maps>
+      vec3 leafDx=dFdx(-vViewPosition),leafDy=dFdy(-vViewPosition);
+      vec3 leafR1=cross(leafDy,normal),leafR2=cross(normal,leafDx);
+      float leafDet=dot(leafDx,leafR1)*faceDirection;
+      normal=normalize(abs(leafDet)*normal-sign(leafDet)*(dFdx(leafRelief)*leafR1+dFdy(leafRelief)*leafR2));
     `,
     );
   };
-  material.customProgramCacheKey = () => 'island-distant-leaves-1';
+  material.customProgramCacheKey = () => 'island-distant-leaves-2';
   return material;
 }
