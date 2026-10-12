@@ -7,16 +7,16 @@ export function distantMaterial() {
   material.onBeforeCompile = (shader) => {
     shader.vertexShader = shader.vertexShader.replace(
       '#include <common>',
-      '#include <common>\nvarying vec3 vIslandPoint;',
+      '#include <common>\nvarying vec3 vIslandPoint; varying vec3 vIslandNormal;',
     );
     shader.vertexShader = shader.vertexShader.replace(
       '#include <begin_vertex>',
-      '#include <begin_vertex>\nvIslandPoint = position;',
+      '#include <begin_vertex>\nvIslandPoint = position; vIslandNormal = normal;',
     );
     shader.fragmentShader = shader.fragmentShader.replace(
       '#include <common>',
       `#include <common>
-      varying vec3 vIslandPoint;
+      varying vec3 vIslandPoint; varying vec3 vIslandNormal;
       float islandHash(vec2 p) { return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
       float islandLeaves(vec2 p) {
         vec2 cell=floor(p); float shade=0.;
@@ -34,7 +34,7 @@ export function distantMaterial() {
       '#include <color_fragment>',
       `#include <color_fragment>
       float planted=step(vColor.r*1.08,vColor.g)*step(vColor.b*1.08,vColor.g);
-      vec3 leafWeight=pow(abs(normalize(vNormal)),vec3(4.));
+      vec3 leafWeight=pow(abs(normalize(vIslandNormal)),vec3(4.));
       leafWeight/=max(dot(leafWeight,vec3(1.)),.001);
       float leaves=dot(leafWeight,vec3(islandLeaves(vIslandPoint.yz*7.),islandLeaves(vIslandPoint.xz*7.),islandLeaves(vIslandPoint.xy*7.)));
       diffuseColor.rgb*=mix(1.,.8+leaves*.35,planted);

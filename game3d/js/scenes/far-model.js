@@ -19,6 +19,7 @@ import { mat } from '../props.js';
 import { LEAF } from './outdoor/planting.js';
 import { TOWN } from './town.js';
 import { coastLand } from './island-west.js';
+import { marketFootprints } from './market-route.js';
 import { distantMaterial } from './diorama/distant-material.js';
 import { islandTreeSpots } from './distant-trees.js';
 import { SEA } from './skyline.js';
@@ -51,7 +52,8 @@ const GREENS = ['#4d6b47', '#43603f', '#57704c', '#4a6545'].map((h) => new THREE
 // into a broad crown of two flattened twenty-faced blobs, flat-shaded, at (x, z) in the chunk's frame; r is the crown's
 // radius. The trunk starts below LAND_Y so it meets whichever ground lies over it (the far land or the skyline's).
 const CANOPY = new THREE.IcosahedronGeometry(1, 0).toNonIndexed();
-const NEAR_CANOPY = new THREE.IcosahedronGeometry(1, 1).toNonIndexed();
+const NEAR_CANOPY = new THREE.SphereGeometry(1, 12, 6).toNonIndexed();
+const SIDE_CANOPY = new THREE.SphereGeometry(1, 10, 5).toNonIndexed();
 const TRUNK = new THREE.CylinderGeometry(0.62, 1, 1, 5, 1, true).translate(0, 0.5, 0).toNonIndexed();
 const BARK = new THREE.Color(LEAF.barkGrey);
 function put(b, geo, [sx, sy, sz], [x, y, z], color, turn = 0) {
@@ -70,7 +72,7 @@ function put(b, geo, [sx, sy, sz], [x, y, z], color, turn = 0) {
     }
     const n = e1.subVectors(tri[1], tri[0]).cross(e2.subVectors(tri[2], tri[0])).normalize();
     for (const [k, v] of tri.entries()) {
-      if (geo === CANOPY || geo === NEAR_CANOPY) {
+      if (geo !== TRUNK) {
         n.fromBufferAttribute(normals, i + k).set(n.x / sx, n.y / sy, n.z / sz);
         n.set(n.x * cs - n.z * sn, n.y, n.x * sn + n.z * cs).normalize();
       }
@@ -92,12 +94,21 @@ function tree(b, x, z, r, color, seed, side, rounded) {
   const a = turn * 1.7;
   put(
     b,
-    canopy,
+    rounded ? SIDE_CANOPY : canopy,
     [0.68 * r, 0.55 * r, 0.68 * r],
     [x + Math.cos(a) * 0.55 * r, cy + 0.42 * r, z + Math.sin(a) * 0.55 * r],
     color,
     turn + 1,
   );
+  if (rounded)
+    put(
+      b,
+      SIDE_CANOPY,
+      [0.52 * r, 0.48 * r, 0.52 * r],
+      [x - Math.cos(a) * 0.5 * r, cy + 0.34 * r, z - Math.sin(a) * 0.5 * r],
+      color,
+      turn + 2,
+    );
 }
 
 // points spread over a footprint (a three by three grid inside it): where the place's own ground is probed
@@ -152,7 +163,7 @@ export function* farModelSteps(
   yield;
 
   let nb = 0;
-  for (const b of L.BUILDINGS || []) {
+  for (const b of (L.BUILDINGS || []).flatMap(marketFootprints)) {
     if (skipIds.has(b.id) || b.detail === chunk) continue;
     const shape = shapeOf(b);
     if (!shape) continue;

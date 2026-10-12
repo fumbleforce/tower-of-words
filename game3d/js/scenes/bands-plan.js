@@ -8,7 +8,14 @@ export const BANDS = {
   dorm_court: [
     // The pocket park and its actual shop fronts across the courtyard's gate.
     // Stop at the street's western curb so the courtyard keeps ownership of its lane.
-    { by: 'eastLane', rects: [[54, 73.04, -30, 10.4]], skip: ['r9'] },
+    {
+      by: 'eastLane',
+      rects: [
+        [54, 73.04, -30, 10.4],
+        [73.04, 77, 14.7, 22.4],
+      ],
+      skip: ['r9'],
+    },
   ],
   east_coast: [
     // the dorm street's foot and the ramen corner, past the dorm row's west end

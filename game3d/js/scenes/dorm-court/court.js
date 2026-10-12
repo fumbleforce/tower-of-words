@@ -14,6 +14,7 @@ import { laneField, verge } from '../outdoor/lane.js';
 import { keyaki, sakura, maple, cluster, hedge, grass, bed, mound, gravel as rake, LEAF } from '../outdoor/planting.js';
 import { lamps, bench, bins, stoneLantern } from '../outdoor/furniture.js';
 import * as P from './plan.js';
+import { clippedColumn } from '../diorama/clipped-column.js';
 
 const { WALK, DOOR_LEG, LINK, GATE, BW, LAUNDRY, SENTO, RETURN_X, RETURN_Z, SHELTER, SOUTH_BED: SB, STREET } = P;
 const [W0, W1, WZ0, WZ1] = WALK;
@@ -111,23 +112,6 @@ function moss(p, x, z, rx, rz) {
   });
 }
 
-// a clipped podocarpus (inumaki) column, the tree Japanese gates are flanked with: a short trunk, a tall narrow
-// clipped shape in three tiers
-function column(p, x, z) {
-  p.geo(LEAF.bark, new THREE.CylinderGeometry(0.05, 0.06, 0.3, 5).translate(x, BED_Y + 0.15, z));
-  [
-    [0.3, 0.55, 0.24],
-    [0.62, 0.95, 0.2],
-    [0.95, 1.3, 0.13],
-  ].forEach(([y0, y1, r], i) =>
-    p.geo(
-      i % 2 ? LEAF.pine : '#44604f',
-      new THREE.CylinderGeometry(r * 0.8, r, y1 - y0, 7).translate(x, BED_Y + (y0 + y1) / 2, z),
-    ),
-  );
-  p.geo('#44604f', new THREE.SphereGeometry(0.12, 7, 4).scale(1, 0.8, 1).translate(x, BED_Y + 1.33, z));
-}
-
 // the gate: the bed's walls turn in at the opening; a stone pier at each side with a lantern on it, a clipped column
 // (podocarpus) beside each and a sweep of clipped azalea running out from it, the same both sides
 function gate(p, set, block) {
@@ -138,7 +122,7 @@ function gate(p, set, block) {
     const out = i ? 1 : -1;
     p.box('#8b8d90', 0.46, 1.05, 0.46, x, 0, zc, { surf: 'concrete' });
     p.box('#b0b1b0', 0.56, 0.08, 0.56, x, 1.05, zc, { surf: 'concrete' });
-    column(p, x + out * 0.72, zc + 0.05);
+    clippedColumn(p, x + out * 0.72, zc + 0.05, BED_Y);
     // a sweep of clipped azalea running out from the column, each dome a little lower (okarikomi)
     [0.34, 0.27, 0.21].forEach((r, k) =>
       mound(p, x + out * (1.25 + k * 0.42), z1 - 0.38 + (k % 2) * 0.08, r, k % 2 ? PALE_LEAF : LEAF.fresh, {

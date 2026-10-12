@@ -23,7 +23,7 @@ export const FOG_NEAR = 30,
   PITCH_MIN = -0.12;
 // where the far model begins, from the walk box: its buildings just past where the haze starts, its trees where the
 // haze has softened their low-poly crowns, and a crown's second mass only as far as it shows
-const FAR_FROM = { buildFrom: FOG_NEAR + 4, treesFrom: 10, sideTo: 80 };
+const FAR_FROM = { buildFrom: FOG_NEAR + 4, treesFrom: 10, sideTo: 45 };
 // the mainland, across the bay to the west-south-west in the island's frame (the monorail comes in from it)
 const MAINLAND = [-0.92, 0.38];
 

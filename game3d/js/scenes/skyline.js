@@ -24,6 +24,7 @@
 import * as THREE from 'three';
 import { mat } from '../props.js';
 import { drain } from '../perf/slice.js';
+import { marketFootprints } from './market-route.js';
 import { TOWN } from './town.js';
 import { FAR_VIEW, farFollow } from '../look/far-flag.js';
 import {
@@ -122,7 +123,7 @@ export function* skylineSteps(
   const roofC = new THREE.Color(TOWN.roof),
     winC = new THREE.Color(TOWN.window);
 
-  for (const b of L.BUILDINGS || []) {
+  for (const b of (L.BUILDINGS || []).flatMap(marketFootprints)) {
     if (skipIds.has(b.id) || b.detail === chunkId) continue;
     const shape = shapeOf(b);
     if (!shape) continue;
