@@ -43,12 +43,13 @@ await withBrowserJob('gate-traversal-'+width,async browser=>{
  console.log('PASS held gate steering',JSON.stringify(held));
 
  // The story opens the gate before another movement frame: the next real floor click must see that opening.
- await page.evaluate(()=>{const g=globalThis.__game;g.walker.stop();g.jump.reset();g.place.hooks.gate({state:'closed'});globalThis.__advance(1);const state=g.place.snapshotState();g.place.restoreState({world:{...state,gateOpen:true,flap:1,flapWant:1}});g.player.root.position.set(1.464146940279297,0,.5800845471954071);g.walker.sync();});
+ await page.evaluate(()=>{const g=globalThis.__game;g.walker.stop();g.jump.reset();g.place.hooks.gate({state:'closed'});globalThis.__advance(1);const state=g.place.snapshotState();g.place.restoreState({world:{...state,gateOpen:true,flap:1,flapWant:1}});g.player.root.position.set(1.464146940279297,0,.5800845471954071);g.walker.sync();g.place.cam.snap(g.player.root.position);});
  const exitPoint=await page.evaluate(async()=>{const T=await import('three'),g=globalThis.__game,p=new T.Vector3(0,0,-2).applyMatrix4(g.place.space.matrixWorld).project(g.place.camera);return {x:(p.x+1)*globalThis.innerWidth/2,y:(1-p.y)*globalThis.innerHeight/2};});
  if(touch){await touch.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[exitPoint]});await touch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});}
  else await page.mouse.click(exitPoint.x,exitPoint.y);
  await page.evaluate(()=>globalThis.__advance(6));
  const clicked=await page.evaluate(()=>({p:globalThis.__game.player.root.position.toArray(),busy:globalThis.__game.busy,path:globalThis.__game.walker.path}));
+ console.log('native destination result',JSON.stringify({exitPoint,clicked}));
  assert.ok(clicked.p[2]<-.8,'native floor destination clears the right reader and open flap');
  console.log('PASS right-reader native destination',JSON.stringify(clicked));
 

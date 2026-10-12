@@ -123,5 +123,6 @@ test('a route query sees a door opened since the last movement frame',()=>{
  assert.equal(t.clear(a,b,0,1),false);
  door.position.x=-.65;door.rotation.y=Math.PI/2;
  const path=t.route(a,[b],0,1);
+ assert.deepEqual(path,[b], 'the newly open direct path replaces the cached closed-door detour');
  let previous=a;for(const next of path){assert.equal(t.clear(previous,next,0,1),true);previous=next;}
 });
