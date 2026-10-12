@@ -11,6 +11,7 @@
 //   node game3d/tools/creature-perches.mjs [--check] [place ...]       (BASE=.claude/worktrees/<n>/game3d)
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
+import { scopedRoute } from '../../tools/bible/check-scope.mjs';
 import path from 'node:path';
 
 const OUT = path.join(path.dirname(new URL(import.meta.url).pathname), '../js/creatures/perches.js');
@@ -19,6 +20,8 @@ const ALL = ['forecourt', 'plaza', 'dorm_court', 'shotengai', 'east_lane', 'east
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 const places = args.length ? args : ALL;
 const base = process.env.BASE || 'game3d';
+const solidModule = `http://127.0.0.1:8771/${base}/tools/lib/perch-solid.mjs`;
+const scopeErrors = [];
 const CAPS = { ground: 120, low: 50, high: 50, hedge: 30, tree: 30, green: 40, water: 24 };
 const STEP = 1.2,
   MARGIN = 5;
@@ -28,25 +31,22 @@ const result = { ...old };
 let drift = 0;
 
 // in the page: survey the place (stored null), or re-test stored points
-const survey = async ([STEP, MARGIN, stored, strict]) => {
+const survey = async ([STEP, MARGIN, stored, strict, solidModule]) => {
   const THREE = await import('three');
+  const { perchSolidHit } = await import(solidModule);
   const g = globalThis.__game,
     P = g.place,
     nav = P.nav;
   g.player.root.visible = false;
   if (g.mioNpc) g.mioNpc.root.visible = false;
   P.scene.updateMatrixWorld(true);
-  const shown = (o) => {
-    for (; o; o = o.parent) if (!o.visible) return false;
-    return true;
-  };
-  const solid = (h) => {
-    const m = Array.isArray(h.object.material) ? h.object.material[0] : h.object.material;
-    if (!m || m.userData?.noLook || h.object.userData.creature) return false; // people, the creatures
-    if (m.transparent && (m.opacity < 0.9 || m.blending === THREE.AdditiveBlending)) return false; // light pools, glass
-    if (m.depthWrite === false) return false;
-    return shown(h.object);
-  };
+  const actors = new Set([
+    g.player?.root, g.mioNpc?.root,
+    ...Object.values(P.people || {}).map(a => a?.root),
+    ...Object.values(P.extras || {}).map(a => a?.root),
+    ...(P.crowd || []).map(a => a?.root),
+  ].filter(Boolean));
+  const solid = h => perchSolidHit(h, actors);
   const rc = new THREE.Raycaster();
   const down = new THREE.Vector3(0, -1, 0),
     v = new THREE.Vector3(),
@@ -120,13 +120,17 @@ await withBrowserJob(
   'creature-perches',
   async (browser) => {
     const ctx = await browser.newContext({ viewport: { width: 1366, height: 860 } });
+    let closing = false;
+    await ctx.route('**/*', scopedRoute({ publicOnly: true, isClosing: () => closing, onFailure: e => scopeErrors.push(String(e)) }));
+    await ctx.addInitScript(() => globalThis.localStorage.setItem('amakawa-settings', JSON.stringify({ privateMode: false, voiceOn: false })));
     for (const place of places) {
       const page = await ctx.newPage();
-      page.on('pageerror', (e) => console.log(place, 'page error', e.message));
+      page.on('pageerror', e => scopeErrors.push(`${place}: ${e.message}`));
       await page.goto(`http://127.0.0.1:8771/${base}/index.html?cap&q=1&place=${place}&nocreatures`);
       await page.waitForFunction(() => globalThis.__done, null, { timeout: 120000 });
       await page.waitForTimeout(1500);
-      const got = await page.evaluate(survey, [STEP, MARGIN, CHECK ? old[place] || {} : null, false]);
+      await page.evaluate(() => { if (globalThis.__settings.privateMode) throw Error('privateMode enabled'); });
+      const got = await page.evaluate(survey, [STEP, MARGIN, CHECK ? old[place] || {} : null, false, solidModule]);
       if (CHECK) {
         console.log(place, got.bad.length ? `${got.bad.length} moved:\n  ` + got.bad.join('\n  ') : 'ok');
         drift += got.bad.length;
@@ -134,7 +138,7 @@ await withBrowserJob(
         const thin = {};
         for (const [k, pts] of Object.entries(got.out)) thin[k] = spread(pts, CAPS[k]).flat();
         // drop points on an edge (they would flicker between surfaces on the next survey)
-        const { badAt } = await page.evaluate(survey, [STEP, MARGIN, thin, true]);
+        const { badAt } = await page.evaluate(survey, [STEP, MARGIN, thin, true, solidModule]);
         for (const [k, idx] of Object.entries(badAt)) {
           const drop = new Set(idx);
           thin[k] = thin[k].filter((_, j) => !drop.has(Math.floor(j / 3)));
@@ -144,6 +148,9 @@ await withBrowserJob(
       }
       await page.close();
     }
+    closing = true;
+    await ctx.close();
+    if (scopeErrors.length) throw Error(scopeErrors.join('\n'));
   },
   { timeoutMs: 1800000, gpuWaitMs: 1200000 },
 );
