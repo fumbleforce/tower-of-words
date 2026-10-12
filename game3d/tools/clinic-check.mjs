@@ -151,20 +151,51 @@ await withBrowserJob(
       [2, []],
     ]) {
       await ready();
-      await page.evaluate(async () => {
-        const { sendToClinic } = await import('./js/places/clinic-fall.js');
-        globalThis.__fall = sendToClinic(globalThis.__game, 'dorms');
-      });
+      if (n === 1) {
+        await page.evaluate(async () => {
+          const g = globalThis.__game;
+          g.standUp?.();
+          await g.travel('dorms', { fast: true, via: 'dorm_court' });
+        });
+        await arrived('dorms');
+        await ready();
+        await page.evaluate(() => {
+          const g = globalThis.__game,
+            edge = g.place.falls[0],
+            root = g.player.root;
+          root.position.set((edge.a[0] + edge.b[0]) / 2, 0, edge.a[1] - 0.15);
+          root.rotation.y = 0;
+          g.walker.sync();
+          g.place.cam.snap(root.position);
+        });
+        await shot('parapet');
+        if (phone) await page.locator('#jumpBtn').tap();
+        else await page.keyboard.press('Space');
+        await page.waitForFunction(() => globalThis.__game.falling, null, { timeout: 10000 });
+        await shot('falling');
+      } else {
+        await page.evaluate(async () => {
+          const { sendToClinic } = await import('./js/places/clinic-fall.js');
+          globalThis.__fall = sendToClinic(globalThis.__game, 'dorms');
+        });
+      }
       await page.waitForFunction(() => globalThis.document.querySelector('#fade.on'), null, { timeout: 10000 });
       await shot(`fall${n}-black`);
       log(`fall ${n}: black`);
+      await arrived('clinic');
+      await page.waitForFunction(
+        () => globalThis.document.querySelector('#talk:not([hidden]) .line')?.textContent,
+        null,
+        { timeout: 30000 },
+      );
       await talk(prefer, `wake${n}`);
       await ready();
       const f = await flags();
       assert.ok(!f.fell_from, 'fell_from is cleared');
       assert.equal(f.falls, n);
       assert.ok(await page.evaluate(() => !globalThis.document.querySelector('#fade.on')), 'the screen is back');
-      assert.equal(await page.evaluate(() => globalThis.__fall), true);
+      if (n === 2) assert.equal(await page.evaluate(() => globalThis.__fall), true);
+      assert.equal(await page.evaluate(() => globalThis.__game.place.name), 'clinic');
       // the nurse goes back to her counter
       await page.waitForFunction(
         () => {
