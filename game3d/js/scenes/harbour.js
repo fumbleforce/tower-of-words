@@ -87,7 +87,7 @@ export function* harbourSteps() {
   for (const m of yield* c.parts.build(wg)) m.castShadow = false;
   for (const m of mesh.build(wg)) m.castShadow = false;
   p.build(isl);
-  water.build(isl);
+  for (const m of water.build(isl)) m.userData.noTraversal = true;
   const blocks = buildBlockSets(sets, isl);
   const lit = lights.build(isl, { poolY: 0.03 });
   const sg = signs.build(isl);

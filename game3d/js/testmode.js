@@ -54,6 +54,11 @@ export function start(game) {
     // the ticket app (ui/tickets-view.js): open each unread ticket, take a new one, then close the window
     const app = globalThis.document?.getElementById('ticketsApp');
     if (app && !app.hidden) return driveTickets(app, T);
+    const find = globalThis.document?.getElementById('findView');
+    if (find && !find.hidden) {
+      T.log.push('find: close');
+      return find.click();
+    }
     // the notice board up close (ui/finds-view.js showBoard): take the first slip on offer, then close it
     const board = globalThis.document?.getElementById('boardView');
     if (board && !board.hidden) {

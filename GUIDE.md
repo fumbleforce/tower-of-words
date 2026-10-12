@@ -118,6 +118,7 @@ Game first, learning light (docs/game/setting.md) overrides these where they con
 
 - Crowd members react to nearby jumping and being blocked, and everyone in the crowd offers a short conversation with everyday Japanese practice (Jørgen, 2026-10-12).
 
+- Pending design requests (Jørgen, 2026-10-12): let the player sit on chairs and benches (#521); raise roofed interiors enough for the perspective camera (#522).
 - Movement follows visible geometry: low curbs, bench tops and reachable beach terrain are traversable; no invisible walls (Jørgen, 2026-10-12).
 
 No text on timers, the first screen (controls only), a goal line that stays, separate phone and desktop layouts, no brown, gold or serif, the flat-shaded 3D world (never paper or cut-out), and how review pages lay out options.

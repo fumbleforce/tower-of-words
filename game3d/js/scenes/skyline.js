@@ -181,6 +181,7 @@ export function* skylineSteps(
     R = far + 30;
   const C = (hex) => new THREE.Color(hex);
   if (sea) flat(gb, rectPoly([cx - R, cz - R, cx + R, cz + R]), -0.2, C(GROUND.sea));
+  const waterFaces = gb.pos.length / 9;
   // opts.land: the land as one island-frame polygon (scenes/island-west.js coastLand); without it, COAST if it is
   // a polygon, else land everywhere
   if (land)
@@ -262,6 +263,7 @@ export function* skylineSteps(
     toMesh(gb, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95 }), 'skyline:ground'),
     { noLook: true },
   );
+  if (ground) ground.geometry.userData.traversalSkipFaces = waterFaces;
   const lit = put(toMesh(litAll, litMat, 'skyline:lit'), { recv: false });
   if (lit) lit.visible = !!evening;
   const allTris = [...wallsNear.values(), roofNear, winNear, bands, farB, gb, litAll].reduce((s, b) => s + tris(b), 0);

@@ -10,7 +10,7 @@ function world() {
   const m=new T.Mesh(new T.BoxGeometry(w,h,d),material);m.position.set(x,y,z);space.add(m);return m;
  };
  add(0,-0.1,0,8,0.2,8);
- add(0,0.2,0,1,0.4,0.5); // bench seat
+ add(0,0.35,0,1,0.1,0.5); // bench seat
  add(2,0.05,0,0.16,0.1,5); // small curb
  add(3,1,0,0.2,2,4); // solid wall
  add(-5,-0.6,0,2,0.2,6); // lower beach
@@ -45,4 +45,37 @@ test('decorative shadows and actors never become support or static obstacles',()
  assert.ok(Math.abs(t.support(1,-1,3))<1e-6);
  assert.ok(Math.abs(t.support(1,2,3))<1e-6);
  assert.equal(t.support(20,20,1),null);
+});
+test('moved and opened doors follow their current transforms and visibility',()=>{
+ const p=world(),door=p.add(-1,1,2,.1,2,1),t=createTraversal(p);
+ assert.equal(t.free(-1,2,-1.4,2,0,1,false),false);
+ door.position.x=-3;t.refresh();
+ assert.equal(t.free(-1,2,-1.4,2,0,1,false),true);
+ assert.equal(t.free(-3,2,-3.4,2,0,1,false),false);
+ door.visible=false;
+ assert.equal(t.free(-3,2,-3.4,2,0,1,false),true);
+});
+test('shadow proxies and map-only geometry are excluded; hidden camera enclosures remain solid',()=>{
+ const p=world(),proxy=p.add(-1,1,2,.1,2,1),map=p.add(-2,1,2,.1,2,1);
+ proxy.raycast=()=>{};map.layers.set(2);
+ const wall=p.add(-3,1,2,.1,2,1);wall.visible=false;wall.userData.followEnclosure={};
+ const t=createTraversal(p);
+ assert.equal(t.free(-1,2,-1.4,2,0,1,false),true);
+ assert.equal(t.free(-2,2,-2.4,2,0,1,false),true);
+ assert.equal(t.free(-3,2,-3.4,2,0,1,false),false);
+});
+test('opaque water triangles do not support feet and jumping meets a solid low ceiling',()=>{
+ const p=world(),water=p.add(-5,-.3,0,2,.01,6);
+ water.userData.noTraversal=true;
+ const ceiling=p.add(0,1.8,2,2,.1,2),t=createTraversal(p);
+ assert.ok(Math.abs(t.support(-5,0,0.5)+.5)<1e-6);
+ assert.equal(t.free(0,2,0,2,.1,1,true),true);
+ assert.equal(t.free(0,2,0,2,.7,1,true),false);
+ assert.ok(ceiling);
+});
+
+test('geometry attached after a place loads joins the physical index',()=>{
+ const p=world(),t=createTraversal(p);
+ p.add(-1,1,2,.1,2,1);t.refresh();
+ assert.equal(t.free(-1,2,-1.4,2,0,1,false),false);
 });

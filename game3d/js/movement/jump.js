@@ -16,6 +16,7 @@ import * as THREE from 'three';
 import { dust, jumpSound, landSound } from './jump-fx.js';
 import { RUN } from './walker.js';
 import { createTraversal } from './traversal.js';
+import { installJumpPose } from './jump-pose.js';
 
 const HIGH = 0.78, // the top of a held jump, m (times the character scale)
   RISE_T = 0.34, // and how long it takes to get there
@@ -38,6 +39,10 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
   hop.name = 'jump';
   for (const c of [...root.children]) if (c !== shadow) hop.add(c);
   root.add(hop);
+  const jumpPose = installJumpPose(hop, P);
+  let salto = false,
+    count = 0,
+    groundedFor = Infinity;
   const shadowK = shadow ? { s: shadow.scale.x, o: shadow.material.opacity } : null;
 
   const s = {
@@ -82,6 +87,21 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
 
   function takeoff() {
     const k = scale();
+    count = groundedFor <= 0.5 ? (count % 3) + 1 : 1;
+    groundedFor = 0;
+    salto =
+      count === 3 &&
+      (!physical ||
+        physical.free(
+          root.position.x,
+          root.position.z,
+          root.position.x,
+          root.position.z,
+          root.position.y + s.h + 0.65 * k,
+          k,
+          true,
+        ));
+    jumpPose.begin(salto ? 3 : 1);
     s.air = true;
     s.held = s.down; // a press buffered before landing and let go since is a hop
     s.buffer = 0;
@@ -102,6 +122,10 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
     if (s.buffer > 0) takeoff(); // pressed just before landing: straight back up
   }
   function reset() {
+    jumpPose.reset();
+    salto = false;
+    count = 0;
+    groundedFor = Infinity;
     Object.assign(s, {
       h: 0,
       vy: 0,
@@ -123,7 +147,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
     hop.rotation.x = s.lean;
     if (shadow) {
       const k = scale(),
-        f = 1 / (1 + (s.h / k) * 1.1);
+        f = 1 / (1 + (Math.max(0, s.h - ground) / k) * 1.1);
       shadow.scale.setScalar(shadowK.s * (0.55 + 0.45 * f));
       shadow.material.opacity = shadowK.o * (0.45 + 0.55 * f);
     }
@@ -134,7 +158,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
       terrain();
       const p = root.position;
       const y = physical?.support(saved.x, saved.z, saved.y + 0.22 * scale(), 0.6 * scale());
-      if (y == null) return false;
+      if (y == null || !physical.free(saved.x, saved.z, saved.x, saved.z, y, scale(), false)) return false;
       p.x = saved.x;
       p.z = saved.z;
       s.h = ground = y - p.y;
@@ -148,6 +172,12 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
     get air() {
       return s.air;
     },
+    get salto() {
+      return salto;
+    },
+    get count() {
+      return count;
+    },
     get supportHeight() {
       return ground;
     },
@@ -156,7 +186,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
     },
     // his animation clock: nearly still in the air, so the walk or run holds the stride he left the ground in
     get animRate() {
-      return s.air || game.falling ? 0.12 : 1;
+      return s.air || game.falling ? 0 : 1;
     },
     press() {
       if (!canJump()) return false;
@@ -166,24 +196,35 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
       return true;
     },
     release() {
-      s.held = s.down = false;
+      s.down = false;
+      s.held = salto && s.vy > 0;
     },
     // something else took him (a scene, a trip, a seat): back on the ground, no squash left over
     reset,
     update(dt) {
       if (game.busy || P.seated || P.scripted) {
-        if (!game.falling && (s.h || s.air)) reset();
+        count = 0;
+        groundedFor = Infinity;
+        jumpPose.reset();
+        if (!game.falling && s.air) {
+          s.h = ground;
+          s.air = false;
+          s.vy = 0;
+          pose();
+        }
+        if ((P.seated || P.scripted || game.transition) && s.h) reset();
         inactive = true;
       } else {
         if (inactive) {
           physical = null;
           inactive = false;
         }
-        terrain();
+        terrain()?.refresh();
       }
       if (game.falling) return; // a fall moves him itself (falls.js)
       if (game.walker) game.walker.air = s.air; // his grip in the air (walker.js)
       if (s.buffer > 0) s.buffer -= dt;
+      if (!s.air) groundedFor += dt;
       const k = scale();
       if (physical && !P.seated && !P.scripted && !game.busy) {
         const y = physical.support(
@@ -205,11 +246,27 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
           return;
         }
         let g = G * k;
+        if (salto && s.vy > 0) s.held = true;
         if (s.vy > 0 && !s.held) g *= CUT;
         else if (s.held && Math.abs(s.vy) < HANG_V * k) g *= HANG;
         else if (s.vy < 0) g *= FALL;
         s.vy = Math.max(-TERMINAL * k, s.vy - g * dt);
-        s.h += s.vy * dt;
+        const next = s.h + s.vy * dt;
+        if (
+          s.vy > 0 &&
+          physical &&
+          !physical.free(
+            root.position.x,
+            root.position.z,
+            root.position.x,
+            root.position.z,
+            root.position.y + next,
+            k,
+            true,
+          )
+        )
+          s.vy = 0;
+        else s.h = next;
         if (s.h < -3 * k && ground < s.h - k) {
           onVoid?.();
           return;
@@ -217,6 +274,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
         if (s.h <= ground && s.vy <= 0) land();
         else if (onAir?.(s.h)) return; // in the air he went over something, and falls (falls.js)
       }
+      jumpPose.update({ airborne: s.air, velocityRatio: s.vy / (V0 * k), dt });
       // the squash-and-stretch spring; in the air it leans toward a stretch while rising
       const want = s.air ? THREE.MathUtils.clamp((s.vy / (V0 * k)) * 0.12, -0.06, 0.14) : 0;
       s.sqv += (-170 * (s.sq - want) - 15 * s.sqv) * dt;

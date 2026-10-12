@@ -27,6 +27,7 @@ export function terminalView(root) {
     new THREE.PlaneGeometry(180, 180),
     new THREE.MeshStandardMaterial({ color: SEA, roughness: 0.8 }),
   );
+  water.userData.noTraversal = true;
   water.rotation.x = -Math.PI / 2;
   water.position.set((LANDING[0] + LANDING[1]) / 2, SEA_Y, FERRY_PIER[3] + 30);
   group.add(water);
