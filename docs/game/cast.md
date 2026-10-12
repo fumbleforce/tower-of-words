@@ -23,6 +23,7 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 | `tama` | Tama | A calico cat. |
 | `konbini_clerk` | Shop clerk | An unnamed adult at the konbini till; the existing generic apron body and approved sales2 voice. |
 | `bakery_clerk` | Bakery clerk | An unnamed adult serving bread in the shop street bakery; the existing generic apron body and approved sales2 voice. |
+| `clinic_nurse` | Nurse | The nurse at the clinic's reception in block_e1, there at every hour; the existing generic apron body in a pale blue tunic and the approved sales2 voice. Polite, unhurried N5 Japanese, never English. She checks on Eric after a fall and is dry about it, more so the second time. |
 | `ferry_staff` | Room attendant | An unnamed adult who keeps the harbour waiting room usable; existing generic body and approved sales2 voice. |
 | `ferry_reader` | Reader | An unnamed adult reading a leaflet by the harbour window; existing generic body and approved sales1 voice. |
 | `ferry_traveller` | Traveller | An unnamed adult resting with a bag, which he moves from a usable seat; existing generic body and approved reader voice. |
@@ -123,7 +124,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 ### Aoi (`aoi`)
 
 - Age 24 (Jørgen, 2026-10-05). A new hire. Her assignment is decided today (day 1), and she's telling someone on the phone it can be anywhere but the basement. Japanese only.
-- Assignment (#226, to build): Facilities scheduling, with her first weeks at the east-lane training centre. At their first real meeting she tells Eric she got a room upstairs, then learns he works on B2. She checks whether he heard her train call and starts again with her name; the awkwardness is brief. Her work concerns room bookings, not engineering.
+- Assignment (#226, to build): Facilities scheduling, with her first weeks at the new-staff training centre on the back lane behind the canteen. At their first real meeting she tells Eric she got a room upstairs, then learns he works on B2. She checks whether he heard her train call and starts again with her name; the awkwardness is brief. Her work concerns room bookings, not engineering.
 - Look: approved portrait aoi-base-2001 (reviews/style-align-1), with the cream edge on her left side redrawn as fill-d65-s1 (reviews/aoi-edge-2); redrawn from gallery B-aoi (art/approved/aoi/aoi-after.webp): pink bob with dark roots and teal underneath, violet eyes, fair skin, winking grin, green varsity jacket with a pink star patch. In the 3D world, the Meshy model aoi-2 (reviews/aoi-meshy-1, round 2, made after Jørgen's note on aoi-1, 2026-10-05: "her face is a tiny bit too large and her hands are larger than the others. but it is very very close id say"): pink hair with teal underneath, a dark teal track jacket with a pink star over a white top, dark trousers; her hands are shown at 0.75 of Meshy's size ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
 
 ### Rei (`rei`)
@@ -269,7 +270,7 @@ Repeat meeting: Saturday club, pool in season and gym in winter. She attends as 
 
 ### Aoi: choosing an assignment she can stand behind
 
-Route: tennis club, plus the training-centre frontage. Her assignment is in her People entry. She wants to be trusted to make a booking that someone else will actually use, while fearing that asking a basic question will confirm she is the newest person in the room.
+Route: tennis club, plus the training centre's front on the back lane. Her assignment is in her People entry. She wants to be trusted to make a booking that someone else will actually use, while fearing that asking a basic question will confirm she is the newest person in the room.
 
 Repeat meeting: Sunday evening tennis; weekday lunch at the plaza for short work follow-ups. Booking discussions stay at the frontage or board, so this route needs no training-office interior.
 

@@ -1,17 +1,19 @@
-// The clinic behind the canteen and its court on the back lane (plaza/north-lane.js builds the rest; the plan is
-// plaza/north-plan.js). Backdrop, nothing inside. A small town clinic's front, on the block builder
-// (outdoor/block.js) and the outdoor kit:
+// The new-staff training centre behind the canteen and its court on the back lane (plaza/north-lane.js builds the
+// rest; the plan is plaza/north-plan.js, where its footprint keeps the id `clinic`: it was the island's clinic until
+// the clinic moved into block_e1 on the east lane, 2026-10-12). Backdrop, nothing inside. A three-storey block on the
+// block builder (outdoor/block.js) and the outdoor kit:
 //   the block: three storeys in a pale wall with a window to each bay in a dark frame over a pale sill; a glass
 //   front below with slim mullions, frosted to the waist, the door in the middle; a glazed stair bay over the door
-//   rising past the parapet to a crown with the green cross in a white box, クリニック down its glass on a white strip; a coped parapet, and on the roof a
-//   stair house, a water tank, condensers and vents, and a green cross on its west end for the map
-//   the entrance: a deep canopy with クリニック CLINIC and the cross on its front, a strip of light under it; a
+//   rising past the parapet to a crown with 研修 in a white box, 研修センター down its glass on a white strip; a coped
+//   parapet, and on the roof a stair house, a water tank, condensers and vents
+//   the entrance: a deep canopy with 研修センター NEW STAFF TRAINING on its front, a strip of light under it; a
 //   raised landing with a mat at the door, two steps along its front and a ramp down its east end to the lane,
-//   handrails both sides of the ramp; the hours (診療時間) on a white plate on the glass west of the canopy
+//   handrails both sides of the ramp; the training timetable (研修) on a white plate on the glass west of the canopy
 //   the court: pale stone in running bond, a yellow tactile line from the lane to the steps, a bench against the
-//   glass west of the door and a planter along the court's west edge, a sign stone at the lane with the cross and the name, a young zelkova in the bed past it; the bike
-//   bay east of it in herringbone brick, three bikes at a rack and a bed of shrubs along its east edge
-// After work the ground floor, the stair, the canopy's strip, some windows, the cross and the names are lit.
+//   glass west of the door and a planter along the court's west edge, a sign stone at the lane with the name, a young
+//   zelkova in the bed past it; the bike bay east of it in herringbone brick, three bikes at a rack and a bed of
+//   shrubs along its east edge
+// After work the ground floor, the stair, the canopy's strip, some windows, the crown and the names are lit.
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { GRANITE } from '../outdoor/paving.js';
@@ -30,7 +32,7 @@ const VB = BACK[2] - VERGE; // the north verge's back
 const WALL = '#b3b8be'; // a pale tile, paler than the town's offices
 const DOOR = doorAt(CLINIC, 's', (COURT[0] + COURT[1]) / 2);
 const BAY = DOOR.w + 0.36;
-const GREEN = '#4f8a62';
+const TEAL = '#3e7a86'; // the training centre's accent
 // the landing: from west of the door to the court's east edge, the ramp off its east end down to the lane
 const LAND = {
   from: COURT[0] + 1.7,
@@ -42,7 +44,7 @@ const LAND = {
 const STEP = CLINIC[3] + LAND.d + 0.72; // the lower step's front
 
 // the court's paving and the bike bay's, and the tactile line from the lane to the step
-export function clinicGround(pv) {
+export function trainingGround(pv) {
   const [cx0, cx1, cz0, cz1] = COURT;
   pv.field([cx0 + BW, cx1 - BW, cz0 + BW, cz1], {
     pattern: 'bond',
@@ -69,7 +71,7 @@ export function clinicGround(pv) {
 // the court's furniture and planting: the west bed, a planter and a bench by the door, the sign stone, the bike
 // rack and bikes, kerbs where the court and the bay leave the verge. Returns the sign stone's face. Yields between
 // parts (js/perf/slice.js).
-function* clinicCourt(q) {
+function* trainingCourt(q) {
   const [cx0, , cz0] = COURT;
   kerb(q, [cx0, cz0], [cx0, VB], { off: -0.08 });
   kerb(q, [BIKES[1], cz0], [BIKES[1], VB], { off: 0.08 });
@@ -109,8 +111,8 @@ function intoParts(q, obj) {
   });
 }
 
-// the sign stone at the court's lane corner: a dark slab on a plinth facing the lane; returns its face (the cross
-// and the name), which shares one texture and one mesh with the canopy's front
+// the sign stone at the court's lane corner: a dark slab on a plinth facing the lane; returns its face (the name),
+// which shares one texture and one mesh with the canopy's front
 function signStone(q, x, z) {
   q.box('#8f9092', 1.06, 0.12, 0.32, x, 0, z, { surf: 'concrete' });
   q.box(BLOCK.fascia, 0.94, 1.6, 0.2, x, 0.12, z);
@@ -126,54 +128,71 @@ function face(w, h, c, [u0, v0, u1, v1]) {
   return g.translate(...c);
 }
 
+// the crown's face: 研修 in white on the accent
+function crownSheet() {
+  return textTexture(
+    (ctx, w, h) => {
+      ctx.fillStyle = TEAL;
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#f2f3f1';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = '700 88px ' + JP_FONT;
+      ctx.fillText('研', w / 2, h * 0.24);
+      ctx.fillText('修', w / 2, h * 0.6);
+      ctx.font = '700 24px sans-serif';
+      ctx.fillText('TRAINING', w / 2, h * 0.88);
+    },
+    256,
+    256,
+  );
+}
+
 // the sheet: the canopy's name along the top (0.88..1 of its height), the stone's face below it on the left
 function sheet() {
   return textTexture(
     (ctx, w, h) => {
-      const cross = (cx, cy, s) => {
-        ctx.fillStyle = '#eef0ee';
-        ctx.fillRect(cx - s / 2, cy - s / 2, s, s);
-        ctx.fillStyle = GREEN;
-        ctx.fillRect(cx - s * 0.36, cy - s * 0.12, s * 0.72, s * 0.24);
-        ctx.fillRect(cx - s * 0.12, cy - s * 0.36, s * 0.24, s * 0.72);
-      };
       ctx.fillStyle = '#3f4650';
       ctx.fillRect(0, 0, w, h);
       // the canopy's front: 1024 x 120 along the top
       const bh = h * 0.12;
-      cross(120, bh / 2, 84);
+      ctx.fillStyle = TEAL;
+      ctx.fillRect(60, bh / 2 - 34, 14, 68);
       ctx.fillStyle = '#eef0ee';
       ctx.textBaseline = 'middle';
-      ctx.font = '700 70px ' + JP_FONT;
-      ctx.fillText('クリニック', 190, bh / 2 + 4);
-      ctx.font = '700 60px sans-serif';
-      ctx.letterSpacing = '8px';
-      ctx.fillText('CLINIC', 600, bh / 2 + 4);
+      ctx.font = '700 66px ' + JP_FONT;
+      ctx.fillText('研修センター', 100, bh / 2 + 4);
+      ctx.font = '700 40px sans-serif';
+      ctx.letterSpacing = '4px';
+      ctx.fillText('NEW STAFF TRAINING', 540, bh / 2 + 4, 460);
       ctx.letterSpacing = '0px';
       // the stone's face: the left half below it, 512 x 900
       const sx = w / 4,
         top = h * 0.11;
-      cross(sx, top + 290, 330);
       ctx.fillStyle = '#eef0ee';
       ctx.textAlign = 'center';
+      ctx.font = '700 190px ' + JP_FONT;
+      ctx.fillText('研修', sx, top + 300);
       ctx.font = '700 92px ' + JP_FONT;
-      ctx.fillText('クリニック', sx, top + 640);
-      ctx.fillStyle = GREEN;
+      ctx.fillText('センター', sx, top + 520);
+      ctx.font = '700 40px sans-serif';
+      ctx.fillText('NEW STAFF TRAINING', sx, top + 640, 460);
+      ctx.fillStyle = TEAL;
       ctx.fillRect(sx - 160, top + 730, 320, 12);
       // the hours by the door: a white plate, 400 x 496 at (560, 160)
       ctx.fillStyle = '#f2f3f1';
       ctx.fillRect(560, 160, 400, 496);
-      ctx.fillStyle = GREEN;
+      ctx.fillStyle = TEAL;
       ctx.fillRect(560, 160, 400, 92);
       ctx.fillStyle = '#f2f3f1';
       ctx.font = '700 54px ' + JP_FONT;
-      ctx.fillText('診療時間', 760, 210);
+      ctx.fillText('研修', 760, 210);
       ctx.fillStyle = '#3f4650';
       ctx.font = '600 32px ' + JP_FONT;
       [
-        ['月〜金', 'Mon–Fri', '9:00–18:00'],
-        ['土', 'Sat', '9:00–12:00'],
-        ['休診', 'Closed', 'Sun, holidays'],
+        ['開始', 'Starts', '9時半'],
+        ['教室', 'Rooms', '201・202'],
+        ['期間', 'Weeks', '4月〜6月'],
       ].forEach(([ja, en, b], i) => {
         const y = 320 + i * 110;
         ctx.textAlign = 'left';
@@ -191,21 +210,24 @@ function sheet() {
       ctx.fillStyle = '#eef0ee';
       ctx.textAlign = 'center';
       ctx.font = '700 54px ' + JP_FONT;
-      ctx.fillText('内科・小児科', 768, 744);
-      // the stair's vertical name: 56 x 570 at (966, 126), white with a green cross and green letters
+      ctx.fillText('新入社員研修', 768, 744);
+      // the stair's vertical name: 56 x 570 at (966, 126), white with a teal mark and teal letters
       ctx.fillStyle = '#eef0ee';
       ctx.fillRect(966, 126, 56, 570);
-      ctx.fillStyle = GREEN;
-      ctx.fillRect(980, 150, 28, 8);
-      ctx.fillRect(990, 140, 8, 28);
-      ctx.fillStyle = '#1f6a3a';
+      ctx.fillStyle = TEAL;
+      ctx.fillRect(980, 144, 28, 28);
+      ctx.fillStyle = '#245a63';
       ctx.font = '900 46px ' + JP_FONT;
-      const [ja, en] = ['クリニック', 'CLINIC'];
-      [...ja].forEach((ch, i) => ctx.fillText(ch, 994, 220 + i * 84));
+      const [ja, en] = ['研修センター', 'TRAINING'];
+      // written down the strip: the long-vowel mark stands upright, as in vertical writing
+      [...ja].forEach((ch, i) => {
+        if (ch.charCodeAt(0) === 0x30fc) ctx.fillRect(991, 186 + i * 66, 6, 50);
+        else ctx.fillText(ch, 994, 210 + i * 66);
+      });
       ctx.save(); // and CLINIC up its foot, on its side
       ctx.translate(994, 640);
       ctx.rotate(Math.PI / 2);
-      ctx.font = '700 26px sans-serif';
+      ctx.font = '700 22px sans-serif';
       ctx.fillText(en, 0, 0);
       ctx.restore();
     },
@@ -214,10 +236,10 @@ function sheet() {
   );
 }
 
-// the block, its entrance and signs; the cross on the stair crown and the roof cross for the map. Returns the meshes
-// that stay apart from the merge (the cross and the names, both lit after work) and what lights up after dark (glows). A generator
-// that yields between parts, for building in slices (js/perf/slice.js).
-export function* clinicSteps(sets, q, lights, sh) {
+// the block, its entrance and signs; 研修 on the stair crown. Returns the meshes that stay apart from the merge (the
+// crown and the names, both lit after work) and what lights up after dark (glows). A generator that yields between
+// parts, for building in slices (js/perf/slice.js).
+export function* trainingSteps(sets, q, lights, sh) {
   const { doors, top } = yield* officeBlockSteps(sets, CLINIC, {
     storeys: 3,
     fh: 2,
@@ -229,13 +251,6 @@ export function* clinicSteps(sets, q, lights, sh) {
     doors: [{ face: 's', at: DOOR.at, canopy: { out: 1.15, side: 0.85 }, platform: LAND }],
     seed: 8,
   });
-  // the roof cross, on the roof's west end clear of the plant
-  const rx = CLINIC[0] + 2.3,
-    rz = (CLINIC[2] + CLINIC[3]) / 2 + 0.4;
-  q.box('#5f6268', 1.5, 0.1, 1.5, rx, top, rz, { cast: false }); // a raised panel with a rim
-  q.box('#d9dcdf', 1.38, 0.12, 1.38, rx, top, rz, { cast: false });
-  q.box('#5d8a6c', 1.06, 0.13, 0.31, rx, top, rz, { cast: false });
-  q.box('#5d8a6c', 0.31, 0.13, 1.06, rx, top, rz, { cast: false });
   // under the canopy a strip of light, lit with the lamps, and its pool at the door
   const { canopy: c } = doors[0];
   lights.glowParts.push(
@@ -247,23 +262,14 @@ export function* clinicSteps(sets, q, lights, sh) {
   lights.lit.push([bx, CLINIC[3] + 1.5, 1.4]);
   sh.block(CLINIC, top);
   yield;
-  // the cross on the stair's crown, in a white box
+  // 研修 on the stair's crown, in a white box
   const cy = top + 0.42,
     z = CLINIC[3] + 0.18;
   q.box('#e3e6e4', 0.92, 0.92, 0.06, DOOR.at, cy - 0.46, z + 0.03);
-  const sign = new THREE.MeshStandardMaterial({
-    color: GREEN,
-    emissive: new THREE.Color('#3f6b4d'),
-    emissiveIntensity: 0.3,
-  });
-  const cross = new THREE.Mesh(
-    mergeGeometries([
-      new THREE.BoxGeometry(0.66, 0.2, 0.05).translate(DOOR.at, cy, z + 0.08),
-      new THREE.BoxGeometry(0.2, 0.66, 0.05).translate(DOOR.at, cy, z + 0.08),
-    ]),
-    sign,
-  );
-  cross.name = 'clinic:cross'; // named, so the static merge leaves its material alone
+  const crown = plane(0.7, 0.7, crownSheet(), { emissiveK: 0.3 });
+  crown.position.set(DOOR.at, cy, z + 0.065);
+  crown.name = 'training:crown'; // named, so the static merge leaves its material alone
+  const sign = crown.material;
   // the names: the canopy's front, the hours by the door and the sign stone, one mesh
   const band = face(
     c.c1 - c.c0 - 0.2,
@@ -281,14 +287,14 @@ export function* clinicSteps(sets, q, lights, sh) {
   const depts = face(1.4, 0.22, [CLINIC[0] + 2.29, 1.58, gz], [0.5, 0.238, 1, 0.316]);
   const depts2 = face(1.4, 0.22, [CLINIC[1] - 2.29, 1.58, gz], [0.5, 0.238, 1, 0.316]);
   const blade = face(0.3, 3.05, [DOOR.at, 2.4 + 2.05, CLINIC[3] + 0.145], [0.943, 0.32, 0.998, 0.877]); // down the stair
-  const stone = yield* clinicCourt(q);
+  const stone = yield* trainingCourt(q);
   names.geometry = mergeGeometries([band, hours, depts, depts2, blade, stone]);
-  names.name = 'clinic:names';
+  names.name = 'training:names';
   return {
-    meshes: [cross, names],
+    meshes: [crown, names],
     // after dark (kit/light/glow.js)
     glows: [
-      { mat: sign, night: { emissive: '#7fd39a', emissiveIntensity: 1.1 } },
+      { mat: sign, night: { emissiveIntensity: 1.2 } },
       { mat: names.material, night: { emissiveIntensity: 1.3 } },
     ],
   };

@@ -24,6 +24,8 @@ import { signBoard } from '../plaza-buildings.js';
 import { signSet } from '../shop-signs.js';
 import { shopFittings } from './east-shops.js';
 import { faces, faceAt, tOf } from '../outdoor/block.js';
+import { clinicBoard } from '../clinic/signs.js';
+import { clinicFront } from '../clinic/front.js';
 import { LANE, FOOTPATH } from './plan.js';
 import * as E from './east-plan.js';
 import { BACK, E2 } from './north-plan.js';
@@ -364,14 +366,19 @@ export function* eastLaneSteps(root, p, lights, { clip = null, skip = [] } = {})
   const fronts = yield* frontsSteps(q, lights, blocks, cast);
   fronts.meshes(root);
   yield;
-  // a block's sign standing on its door canopy's front edge, as the canteen's (k.sign: [kana, English])
+  // a block's sign standing on its door canopy's front edge, as the canteen's (k.sign: [kana, English]); the clinic's
+  // is its name board with the cross (clinic/signs.js), with a cross on the wall, its hours and departments
+  const signGlows = [];
   for (const k of blocks.filter((b) => b.sign)) {
     const F = faces(k.rect)[k.face],
-      [x, z] = faceAt(F, tOf(F, k.at), 1.08);
-    const s = signBoard(k.sign[0], k.sign[1], 2.4, 0.6, '#44535f');
+      u = tOf(F, k.at),
+      [x, z] = faceAt(F, u, 1.08),
+      ry = Math.atan2(F.n[0], F.n[1]);
+    const s = k.clinic ? clinicBoard(2.4, 0.6) : signBoard(k.sign[0], k.sign[1], 2.4, 0.6, '#44535f');
     s.position.set(x, 2.72, z);
-    s.rotation.y = Math.atan2(F.n[0], F.n[1]);
+    s.rotation.y = ry;
     root.add(s);
+    if (k.clinic) signGlows.push(...clinicFront(root, q, k, F, u, ry, s));
   }
   for (const k of blocks) if (clip || k.rect[0] >= SHADOW_X) sh.block(k.rect, k.row.storeys * k.row.floorH);
   // the named shops' signs and shut doors (plaza/east-shops.js), Amakawa Travel's too (its block is the back lane's,
@@ -386,7 +393,7 @@ export function* eastLaneSteps(root, p, lights, { clip = null, skip = [] } = {})
   yield;
   const shadows = sh.build(root);
   return {
-    glows: [...fronts.glows, ...shopSigns.glows], // what lights up after dark (kit/light/glow.js)
+    glows: [...fronts.glows, ...shopSigns.glows, ...signGlows], // what lights up after dark (kit/light/glow.js)
     cards: (day, period) => shopSigns.show(day, period), // the shops' door cards (shop-signs.js WHEN)
     update: (sun) => shadows.follow(sun.position),
   };

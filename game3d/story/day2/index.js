@@ -21,7 +21,7 @@ export const TRIPS = {
  campus:['forecourt','office_quarter','harbour','print_shop'],print_shop:['campus'],office_quarter:['campus','harbour'],harbour:['campus','office_quarter','ferry_terminal'],ferry_terminal:['harbour'],
   dorms: ['dorm_court'], dorm_court: ['dorms', 'east_lane'],
   east_lane: ['plaza', 'shotengai', 'dorm_court', 'east_coast'], east_coast: ['east_lane'],
-  canteen: ['plaza'], plaza: ['forecourt', 'east_lane', 'shotengai', 'canteen'], forecourt: ['gate', 'office', 'plaza', 'shotengai', 'campus'],
+  canteen: ['plaza'], clinic: ['plaza'], plaza: ['forecourt', 'east_lane', 'shotengai', 'canteen', 'clinic'], forecourt: ['gate', 'office', 'plaza', 'shotengai', 'campus'],
   gate: ['train', 'forecourt'], train: ['gate'], office: ['forecourt'], shotengai: ['east_lane', 'forecourt', 'izakaya'], izakaya: ['shotengai'],
 };
 // These are explicit requests, not engine registrations. The draft checker treats undeclared ids as errors.

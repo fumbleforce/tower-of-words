@@ -44,6 +44,7 @@ export const ROUTES = {
     "canteen": [
       "talk:canteen_door"
     ],
+    "clinic": ["talk:clinic_door"],
     "east_lane": [
       "talk:dorm_lane",
       "zone:dorm_exit"
@@ -221,6 +222,9 @@ export const ROUTES = {
   },
   "print_shop": {
     "campus": ["talk:print_exit"]
+  },
+  "clinic": {
+    "plaza": ["talk:clinic_exit"]
   },
   "works": {
     "harbour": [

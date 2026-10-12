@@ -79,6 +79,7 @@ def speakers():
     sp['canteen_shirt'] = sp['sales1']; sp['canteen_cardigan'] = sp['sales2']; sp['canteen_polo'] = sp['reader']
     sp['bakery_clerk'] = sp['sales2']
     sp['konbini_clerk'] = sp['sales2']
+    sp['clinic_nurse'] = sp['sales2']  # the clinic's nurse (story/clinic.js), a borrowed voice
     sp['ferry_staff'] = sp['sales2']; sp['ferry_reader'] = sp['sales1']; sp['ferry_traveller'] = sp['reader']
     # Background people use the approved body-matched contextual Talk presets.
     sp['worker_a'] = sp['sales2']; sp['worker_b'] = sp['reader']
@@ -88,7 +89,7 @@ def speakers():
     return sp
 
 
-FEMALE = {'carina', 'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'bakery_clerk', 'konbini_clerk', 'ferry_staff', 'worker_a', 'canteen_cardigan',
+FEMALE = {'carina', 'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'bakery_clerk', 'konbini_clerk', 'clinic_nurse', 'ferry_staff', 'worker_a', 'canteen_cardigan',
           'member', 'rei'}
 MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'stander', 'worker_b', 'ferry_reader', 'ferry_traveller',
         'commuter_1', 'commuter_2', 'commuter_3', 'attendant', 'canteen_shirt', 'canteen_polo'}

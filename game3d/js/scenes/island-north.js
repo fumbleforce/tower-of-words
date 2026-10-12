@@ -7,7 +7,7 @@ export const NORTH_PATHS = [
     kind: 'lane',
     rect: [22.535, -33, 67.77, -30],
     detail:
-      'The service street behind the canteen: from the canteen’s loading yard at its west end east past the clinic and block_e2 to the north street, which it meets square on.',
+      'The service street behind the canteen: from the canteen’s loading yard at its west end east past the new-staff training centre and block_e2 to the north street, which it meets square on.',
   },
   {
     id: 'canteen_yard',
@@ -33,7 +33,7 @@ export const NORTH_PATHS = [
     id: 'clinic_court',
     kind: 'walk',
     rect: [27.75, -36.2, 33.75, -33],
-    detail: 'The clinic’s small entrance court off the back lane, on the clinic’s door.',
+    detail: 'The training centre’s small entrance court off the back lane, on its door.',
   },
   {
     id: 'e2_walk',
@@ -59,6 +59,6 @@ export const NORTH_GREEN = [
     id: 'clinic_grove',
     rect: [36.6, -45, 57.7, -34.1],
     detail:
-      'Lawn between the clinic and block_e2, north of the back lane’s avenue: two planted beds either side of the grove walk, trees round its seating square.',
+      'Lawn between the training centre and block_e2, north of the back lane’s avenue: two planted beds either side of the grove walk, trees round its seating square.',
   },
 ];

@@ -8,7 +8,7 @@ export const EVERYDAY_ROLES = {
   elder: { body: 'older-1' },
   apron: {
     body: 'service-1',
-    places: ['bakery', 'konbini', 'canteen', 'plaza', 'ferry_terminal'],
+    places: ['bakery', 'konbini', 'canteen', 'plaza', 'ferry_terminal', 'clinic'],
   },
   // the seated residents of the canteen and the ferry terminal (places/canteen.js, ferry-terminal/residents.js), by
   // the chibi base they had: the young man in a shirt as office man A, the older woman in a cardigan as office woman

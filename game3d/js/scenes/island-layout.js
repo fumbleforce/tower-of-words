@@ -173,7 +173,7 @@ const DETAILS = {
   canteen:
     'The company canteen: two storeys, blue-grey roof with plant, umbrella terrace on its south side facing the fountain; placed so its door bay is on the fountain’s north-south axis and the terrace ends short of the plaza.',
   clinic:
-    'The clinic (green cross), three storeys behind the canteen, set back from the back lane by its entrance court; its door in the middle of its south face.',
+    'The new-staff training centre (研修センター), three storeys behind the canteen, set back from the back lane by its entrance court; its door in the middle of its south face. Its id is from when it was the clinic.',
   gym: 'The gym’s arched roof (green on the reference, muted); the pool and courts east of it.',
   shops_north:
     'The north row: awnings to the arcade, bilingual rooftop signs, backs to the lane. One street on the grid.',
@@ -194,7 +194,7 @@ const DETAILS = {
   dorm_annex: 'A one-storey annex on dorm_4’s east end, reached through it.',
   // the east lane's six small blocks (scenes/plaza/east-lane.js builds their fronts), squared onto its paths
   block_e1:
-    'Two storeys of offices north of the lane past the plaza; its door in the middle of its south face, at the head of the cross path.',
+    'The island’s clinic (green cross), two storeys north of the lane past the plaza; its glass door in the middle of its south face, at the head of the cross path.',
   m_e2: 'A one-storey shop with a tiled roof; its door at the foot of the cross path, opposite block_e1’s.',
   m_e1: 'Two storeys, a café on the ground floor fronting the south walk.',
   r8: 'Two storeys; its door on the pocket park’s north-south axis, across the south walk.',

@@ -14,7 +14,7 @@ export default {
     'talk:office_lane': 'to_forecourt',
     'zone:office_lane': 'to_forecourt',
     'talk:fountain': 'fountain',
-    'talk:training_door': 'training_locked',
+    'talk:clinic_door': 'to_clinic',
     'talk:dorm_lane': [{ if: 'going_home', node: 'to_dorms' }, 'to_east_lane'],
     'zone:dorm_exit': [{ if: 'going_home', node: 'to_dorms' }, 'to_east_lane'],
     'talk:shop_walk': 'to_shops',
@@ -24,6 +24,7 @@ export default {
   goal: { office_lane: '!going_home', dorm_lane: 'going_home' },
   nodes: {
     to_canteen: [{ do: 'trip', to: 'canteen' }],
+    to_clinic: [{ do: 'trip', to: 'clinic' }],
     canteen_closing: [
       { do: 'look', who: 'canteen_worker', at: 'canteen_table' },
       { say: 'canteen_worker', overheard: true, emo: 'polite', text: '{sumimasen}、今日はもう終わりなんです。' },
@@ -49,7 +50,6 @@ export default {
         else: [{ do: 'goal', text: 'Head office is back west. Take its lift down to B2.' }] },
     ],
     fountain: ['> A sign on the rim asks people not to throw coins. The bottom is covered in coins.'],
-    training_locked: ['> The door is locked. A notice on the glass says the next new-staff training starts in April.'],
     to_forecourt: [{ do: 'trip', to: 'forecourt' }],
     to_dorms: [{ do: 'trip', to: 'dorm_court' }],
     to_east_lane: [{ do: 'trip', to: 'east_lane' }],

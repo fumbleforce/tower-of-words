@@ -12,6 +12,7 @@ import { dormsPlace as dorms } from './dorms.js';
 import { shotengaiPlace as shotengai } from './shotengai.js';
 import { bakeryPlace as bakery } from './bakery.js';
 import { konbiniPlace as konbini } from './konbini.js';
+import { clinicPlace as clinic } from './clinic.js';
 import { izakayaPlace as izakaya } from './izakaya.js';
 import { karaokePlace as karaoke } from './karaoke.js';
 import { karaokeBoothPlace as karaoke_booth } from './karaoke-booth.js';
@@ -41,6 +42,7 @@ export const PLACES = {
   izakaya,
   bakery,
   konbini,
+  clinic,
   karaoke,
   karaoke_booth,
   east_lane,
