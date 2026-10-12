@@ -358,6 +358,7 @@
     "izakaya",
     "bakery",
     "konbini",
+    "clinic",
     "karaoke",
     "karaoke_booth",
     "east_lane",
@@ -563,12 +564,12 @@
     "office:tomatte_fan",
     "office:~kenji_mori",
     "plaza:to_canteen",
+    "plaza:to_clinic",
     "plaza:canteen_closing",
     "plaza:canteen_goodbye",
     "plaza:canteen_table",
     "plaza:arrive",
     "plaza:fountain",
-    "plaza:training_locked",
     "plaza:to_forecourt",
     "plaza:to_dorms",
     "plaza:to_east_lane",
@@ -690,6 +691,18 @@
     "konbini:coffee_menu",
     "konbini:coffee_add",
     "konbini:coffee_remove",
+    "clinic:arrive",
+    "clinic:leave",
+    "clinic:bed",
+    "clinic:nurse",
+    "clinic:nurse_again",
+    "clinic:nurse_after",
+    "clinic:wake",
+    "clinic:wake_head",
+    "clinic:wake_fine",
+    "clinic:wake_jump",
+    "clinic:wake_again",
+    "clinic:wake_end",
     "karaoke:arrive",
     "karaoke:to_street",
     "karaoke:to_booth",
@@ -2643,6 +2656,68 @@
       "cond": ""
     },
     {
+      "from": "clinic:arrive",
+      "to": "clinic:wake",
+      "kind": "call",
+      "labels": [],
+      "cond": "(fell_from)",
+      "call": true
+    },
+    {
+      "from": "clinic:wake",
+      "to": "clinic:wake_again",
+      "kind": "go",
+      "labels": [],
+      "cond": "(falls > 1)"
+    },
+    {
+      "from": "clinic:wake",
+      "to": "clinic:wake_head",
+      "kind": "choice",
+      "labels": [
+        "Touch the back of your head: it hurts there."
+      ],
+      "cond": ""
+    },
+    {
+      "from": "clinic:wake",
+      "to": "clinic:wake_fine",
+      "kind": "choice",
+      "labels": [
+        "{daijoubu}.",
+        "Tell her you’re fine."
+      ],
+      "cond": "(know_daijoubu)"
+    },
+    {
+      "from": "clinic:wake_head",
+      "to": "clinic:wake_jump",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "clinic:wake_fine",
+      "to": "clinic:wake_jump",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "clinic:wake_jump",
+      "to": "clinic:wake_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "clinic:wake_again",
+      "to": "clinic:wake_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
       "from": "harbour:terminal",
       "to": "harbour:to_terminal",
       "kind": "go",
@@ -3029,6 +3104,12 @@
       "labels": []
     },
     {
+      "from": "plaza:to_clinic",
+      "to": "clinic:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "plaza:to_forecourt",
       "to": "forecourt:outside",
       "kind": "trip",
@@ -3127,6 +3208,12 @@
     {
       "from": "konbini:leave",
       "to": "shotengai:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "clinic:leave",
+      "to": "plaza:arrive",
       "kind": "trip",
       "labels": []
     },
@@ -3862,6 +3949,9 @@
     "garden_worker_met",
     "bakery_visited",
     "konbini_visited",
+    "clinic_visited",
+    "clinic_met",
+    "fell_from",
     "ferry_staff_met",
     "ferry_reader_met",
     "canteen_dining_complete",
@@ -3899,6 +3989,8 @@
     "konbini_selected_riceball",
     "konbini_selected_tea",
     "konbini_selected_coffee",
+    "falls",
+    "know_daijoubu",
     "period_early",
     "period_morning",
     "period_lunch",

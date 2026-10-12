@@ -1,5 +1,6 @@
 // The style options of the backdrop block (outdoor/block.js officeBlock), for a building that is more than an
-// office: the clinic (plaza/north-clinic.js). Each is off by default, so the town's plain offices are unchanged.
+// office: the training centre (plaza/north-training.js). Each is off by default, so the town's plain offices are
+// unchanged.
 //   upper: 'punched'   each bay a window of its own in a dark frame, a pale sill under it, the wall between
 //   glazed: 'sw'       on these faces the ground floor is a glass front: corner piers only, slim mullions, a
 //                      transom, frosted to the waist (a clinic's or a bank's reception)

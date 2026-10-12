@@ -60,6 +60,10 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   expected.engine.exact.art_action_completed = ['game3d/js/places/commons.js'];
   expected.engine.exact.winter_action_completed = ['game3d/js/places/gym.js'];
   expected.engine.exact.art_first_day = ['game3d/js/places/ongoing/art-progress.js'];
+  // the clinic (2026-10-12): its place file, and the fall that sends Eric there
+  expected.engine.events.clinic = {};
+  expected.engine.placeFile.clinic = 'game3d/js/places/clinic.js';
+  for (const flag of ['fell_from', 'falls']) expected.engine.exact[flag] = ['game3d/js/places/clinic-fall.js'];
   expected.engine.events.konbini = {};
   expected.engine.placeFile.konbini = 'game3d/js/places/konbini.js';
   expected.engine.exact.konbini_action_complete = ['game3d/js/places/konbini/action.js'];

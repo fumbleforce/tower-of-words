@@ -463,7 +463,7 @@
         ["scenes/forecourt/details.js", 13, "sign", "forecourt sign"],
         ["scenes/station-exterior.js", 98, "", "station exterior"],
         ["scenes/shotengai/street.js", 89, "", "shop street"],
-        ["scenes/plaza/north-clinic.js", 114, "", "clinic"],
+        ["scenes/plaza/north-training.js", 150, "", "training centre"],
         ["places/day5/props.js", 8, "", "day 5 props"] ] },
     { "id": "boards", "title": "Notice boards and pinboards", "lines": 40,
       "shared": ["props.js#pinboard"],

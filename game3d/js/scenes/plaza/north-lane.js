@@ -1,10 +1,10 @@
 // North of the lane, behind the canteen (the plan is plaza/north-plan.js): backdrop for the top of the plaza's
 // frames and the island map, nothing walkable. Laid with the outdoor kit like the east lane (plaza/east-lane.js):
 //   the back lane: the town's lane in grey brick between pale borders, from the canteen's loading yard to the north
-//   street; a verge and zelkova avenue down its north side, opened for the clinic's court and block_e2's walk; a
+//   street; a verge and zelkova avenue down its north side, opened for the training centre's court and block_e2's walk; a
 //   lower verge without trees on its south side past the canteen; post lamps every 8, manhole covers
 //   the canteen's yard and apron: plaza/north-yard.js
-//   the clinic, its court and bike bay: plaza/north-clinic.js; the lane's lamps either side of the court
+//   the training centre, its court and bike bay: plaza/north-training.js; the lane's lamps either side of the court
 //   block_e2 and m6: small blocks (plaza/east-fronts.js), their office doors on their walks
 //   office_e1: the block the forecourt's cross street ends at (forecourt/north.js), the same here
 //   the grove: a walk from the lane between two beds of trees to a gravel square with benches, a row of trees
@@ -25,7 +25,7 @@ import { officeE1 } from '../forecourt/north.js';
 import { frontsSteps } from './east-fronts.js';
 import { tree, walk } from './east-lane.js';
 import { yardGround, yardSteps } from './north-yard.js';
-import { clinicGround, clinicSteps } from './north-clinic.js';
+import { trainingGround, trainingSteps } from './north-training.js';
 import * as N from './north-plan.js';
 import { lightUp } from '../../kit/light/glow.js';
 
@@ -39,7 +39,7 @@ function* ground(root) {
   laneField(pv, BACK, { origin: [BACK[0], BACK[2]] });
   yield;
   yardGround(pv);
-  clinicGround(pv);
+  trainingGround(pv);
   yield;
   walk(pv, E2_WALK, false);
   walk(pv, GROVE_WALK, false);
@@ -162,7 +162,7 @@ export function* northLaneSteps(root, lights) {
     sh = shade();
   yield* planting(q, lights, sh);
   yield* yardSteps(q, sets, lights, sh);
-  const cl = yield* clinicSteps(sets, q, lights, sh);
+  const cl = yield* trainingSteps(sets, q, lights, sh);
   for (const m of cl.meshes) root.add(m);
   yield;
   officeE1(sets, N.E1);

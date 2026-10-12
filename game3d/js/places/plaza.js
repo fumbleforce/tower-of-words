@@ -60,12 +60,12 @@ export async function plazaPlace(game) {
       spot: () => w.dormExit,
       face: () => w.dormEdge,
     },
-    // the training centre's door up the cross walk (block_e1): locked, it says why (story/plaza.js)
-    training_door: {
-      ...PLACE_DETAILS.plaza.things.training_door,
-      anchor: (v) => v.set(w.trainingDoor[0], 2.0, w.trainingDoor[1]),
-      spot: () => w.trainingStep,
-      face: () => w.trainingDoor,
+    // the clinic's glass door up the cross walk (block_e1): in to its waiting room (places/clinic.js)
+    clinic_door: {
+      ...PLACE_DETAILS.plaza.things.clinic_door,
+      anchor: (v) => v.set(w.clinicDoor[0], 2.0, w.clinicDoor[1]),
+      spot: () => w.clinicStep,
+      face: () => w.clinicDoor,
     },
     canteen_table: {
       ...PLACE_DETAILS.plaza.things.canteen_table,
@@ -150,7 +150,7 @@ export async function plazaPlace(game) {
           new THREE.Vector3(0, 0, 0),
           {
             follow: true,
-            clamp: [-8, 12.5, -11.5, 6.8], // east as far as the training centre's door
+            clamp: [-8, 12.5, -11.5, 6.8], // east as far as the clinic's door
             lead: -1.4,
             limY: 0.96,
           },
@@ -183,6 +183,9 @@ export async function plazaPlace(game) {
       // down the cross walk toward the south walk: build the shop street now, for the same reason
       const p = game.player.root.position;
       if (p.x > w.shopX - 4 && p.z > w.laneZ() + 2.4 && !game.prepared.shotengai) game.prepare?.('shotengai');
+      // up the cross walk toward the clinic's door: build the clinic now
+      if (Math.hypot(p.x - w.clinicStep[0], p.z - w.clinicStep[1]) < 4 && !game.prepared.clinic)
+        game.prepare?.('clinic');
       // heading east before work is over: the lane goes on into the east lane
       if (sim.period !== 'evening' && p.x > w.eastX - 6 && !game.prepared.east_lane) game.prepare?.('east_lane');
     },
@@ -206,6 +209,7 @@ export async function plazaPlace(game) {
     },
     tripOutTo: {
       canteen: (g) => walkOut(g, cam, PLAZA_DOOR.out, PLAZA_DOOR.edge),
+      clinic: (g) => walkOut(g, cam, w.clinicStep, w.clinicDoor),
       forecourt: (g) => walkOut(g, cam, w.westLane, w.westEdge),
       dorm_court: (g) => walkOut(g, cam, w.dormExit, w.dormEdge),
       shotengai: (g) => walkOut(g, cam, w.shopWalk, w.shopEdge),
@@ -213,6 +217,7 @@ export async function plazaPlace(game) {
     },
     tripInFrom: {
       canteen: (g) => walkIn(g, cam, PLAZA_DOOR.edge, PLAZA_DOOR.out, 0),
+      clinic: (g) => walkIn(g, cam, w.clinicDoor, w.clinicStep, 0),
       forecourt: (g) => walkIn(g, cam, w.arriveEdge, w.arriveIn, w.arriveFace),
       shotengai: (g) => walkIn(g, cam, w.shopEdge, w.shopWalk, -Math.PI / 2),
       east_lane: (g) => walkIn(g, cam, w.dormEdge, w.dormExit, -Math.PI / 2),

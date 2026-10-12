@@ -4,7 +4,7 @@
 // rice shop and the barber, and the north street up to the back lane and Amakawa Travel. What is where:
 // east-lane/plan.js. It is the plaza's own backdrop of the same ground, built whole by the same builders in the
 // plaza's frame: the paving, park, planting and the small blocks with the named shops' signs and shut doors
-// (plaza/east-lane.js, plaza/east-shops.js), the back lane with the clinic and block_e2 (plaza/north-lane.js), the
+// (plaza/east-lane.js, plaza/east-shops.js), the back lane with the training centre and block_e2 (plaza/north-lane.js), the
 // lane's own stretch and verges (plaza/ground.js, plaza/green.js) and its lamps; the dorm courtyard and its cluster
 // (dorm-court/cluster.js), the shop street's east end (plaza-buildings.js), and the town round it from the layout
 // (skyline.js). The camera turns: north-east over most of it, so the north street's fronts, the park and Amakawa
@@ -75,7 +75,7 @@ export function* eastLaneChunkSteps() {
     lamps(lights, p, [[x, z]], { kind: 'post', pool, poolShift: shift });
   yield;
   const east = yield* eastLaneSteps(pf, p, lights); // the east lane, its blocks and named shops
-  const north = yield* northLaneSteps(pf, lights); // the back lane, the clinic, block_e2 (Amakawa Travel)
+  const north = yield* northLaneSteps(pf, lights); // the back lane, the training centre, block_e2 (Amakawa Travel)
   p.build(pf);
   const lit = lights.build(pf, { poolY: 0.03 });
   yield;

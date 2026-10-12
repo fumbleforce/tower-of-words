@@ -368,6 +368,52 @@
     ]
   },
   {
+    "id_": "prop/clinic/clinic_exit",
+    "kind": "prop",
+    "name": "Fountain plaza",
+    "paths": [
+      "game3d/js/places/clinic.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "clinic.js things.clinic_exit",
+    "place": "clinic",
+    "used": [
+      "Clinic: tap target 'Fountain plaza'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "clinic"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/clinic/exam_bed",
+    "kind": "prop",
+    "name": "Examination bed",
+    "paths": [
+      "game3d/js/places/clinic.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "clinic.js things.exam_bed",
+    "place": "clinic",
+    "used": [
+      "Clinic: tap target 'Examination bed'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "clinic"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/dorm_commons/art_table",
     "kind": "prop",
     "name": "Art materials",
@@ -2759,6 +2805,29 @@
     ]
   },
   {
+    "id_": "prop/plaza/clinic_door",
+    "kind": "prop",
+    "name": "Clinic",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.clinic_door",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Clinic'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/plaza/dorm_lane",
     "kind": "prop",
     "name": "To the dorms",
@@ -2863,29 +2932,6 @@
     "place": "plaza",
     "used": [
       "Fountain plaza: tap target 'To the shop street'"
-    ],
-    "view": {
-      "type": "room",
-      "room": "plaza"
-    },
-    "tags": [
-      "in game",
-      "thing"
-    ]
-  },
-  {
-    "id_": "prop/plaza/training_door",
-    "kind": "prop",
-    "name": "Training centre",
-    "paths": [
-      "game3d/js/places/plaza.js"
-    ],
-    "status": "provisional",
-    "status_from": "A named thing in the game (built in code)",
-    "source": "plaza.js things.training_door",
-    "place": "plaza",
-    "used": [
-      "Fountain plaza: tap target 'Training centre'"
     ],
     "view": {
       "type": "room",

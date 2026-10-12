@@ -42,7 +42,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     dorms: { eric: 3 },
     shotengai: { station_worker: 4, eric: 2 },
     izakaya: {},
-    bakery: { bakery_clerk: 5 }, konbini: { konbini_clerk: 5 },
+    bakery: { bakery_clerk: 5 }, konbini: { konbini_clerk: 5 }, clinic: { clinic_nurse: 13, eric: 10 },
     karaoke: {},
     karaoke_booth: {},
     east_lane: {},

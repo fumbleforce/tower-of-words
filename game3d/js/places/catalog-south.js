@@ -3,6 +3,7 @@
 import { SHOTENGAI_DETAILS, KARAOKE_DETAILS, KARAOKE_BOOTH_DETAILS } from './catalog-shotengai.js';
 import { BAKERY_DETAILS } from './catalog-bakery.js';
 import { KONBINI_DETAILS } from './catalog-konbini.js';
+import { CLINIC_DETAILS } from './catalog-clinic.js';
 import { IZAKAYA_DETAILS } from './catalog-izakaya.js';
 import { EAST_LANE_DETAILS } from './catalog-east-lane.js';
 import { EAST_COAST_DETAILS, DORM_COMMONS_DETAILS } from './catalog-east-coast.js';
@@ -16,6 +17,7 @@ export const SOUTH_HALF_DETAILS = {
   izakaya: IZAKAYA_DETAILS,
   bakery: BAKERY_DETAILS,
   konbini: KONBINI_DETAILS,
+  clinic: CLINIC_DETAILS,
   karaoke: KARAOKE_DETAILS,
   karaoke_booth: KARAOKE_BOOTH_DETAILS,
   east_lane: EAST_LANE_DETAILS,

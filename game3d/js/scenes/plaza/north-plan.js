@@ -1,12 +1,13 @@
 // North of the lane's plan (plaza/north-lane.js): the ground behind the canteen, from the island layout
-// (scenes/island-north.js: the back lane, the canteen's yard and apron, the clinic's court, the walks to block_e2 and
-// m6, the grove), in the plaza's frame as [x0, x1, z0, z1] like the rest of the plaza's plan.
+// (scenes/island-north.js: the back lane, the canteen's yard and apron, the training centre's court, the walks to
+// block_e2 and m6, the grove), in the plaza's frame as [x0, x1, z0, z1] like the rest of the plaza's plan. The
+// training centre's footprint and court keep the ids `clinic` and `clinic_court` from when it was the clinic.
 //
 // One grid. The back lane runs east-west behind the canteen, 3 wide like every street, from the canteen's loading
 // yard at its west end to the north street (plaza/east-plan.js), which it meets square on. The yard lies against the
 // canteen's west face, its roller shutter, and a walk leaves its north edge for m6's door. Along the lane's south side
 // the canteen's apron: the kitchen door, the duct, the condensers. Along its north side the lane's verge and avenue,
-// opened for two doors: the clinic's, on a small entrance court centred on it, and block_e2's, on a walk.
+// opened for two doors: the training centre's, on a small entrance court centred on it, and block_e2's, on a walk.
 import * as LAYOUT from '../island-layout.js';
 import { building } from './plan.js';
 import { rect } from './east-plan.js';
@@ -27,7 +28,7 @@ export const VERGE = 1.1; // the verge's depth (outdoor/lane.js)
 export const CLINIC = rect(building('clinic').rect);
 export const E1 = rect(building('office_e1').rect);
 export const CANTEEN = rect(building('canteen').rect);
-// the clinic's bike bay: east of its court, from the clinic's face to the lane, as far as its east wall
+// the training centre's bike bay: east of its court, from its face to the lane, as far as its east wall
 export const BIKES = [COURT[1], CLINIC[1] - 0.1, COURT[2], COURT[3]];
 // block_e2 and m6, for the small blocks' fronts (plaza/east-fronts.js): office ground floors, each door on its walk
 const front = (id, walk, wall) => ({
@@ -47,7 +48,7 @@ export const E2 = {
 export const M6 = front('m6', M6_WALK, 0);
 // built here, so the skyline leaves them out
 export const NORTH_IDS = ['clinic', 'office_e1', 'block_e2', 'm6'];
-// the avenue on the north verge: a zelkova every 4, none in front of the clinic or block_e2 (they stand close
+// the avenue on the north verge: a zelkova every 4, none in front of the training centre or block_e2 (they stand close
 // behind the verge, and their doors open through it) or at an opening, and a lamp every 8 on the lane's north
 // border, between two trees' places, and one either side of the clinic's court and bike bay
 export const OPENINGS = [
