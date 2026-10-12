@@ -145,6 +145,18 @@ export function ferryTerminalPlace(game) {
     restoreState(data) {
       save.restore(data);
       activity.restore(data.world?.terminal);
+      const previous = data.world?.player?.eric;
+      if (previous?.seated && !data.world.freeSeat) {
+        const seat = Object.values(w.seats).find(
+          (s) => Math.hypot(s.x - previous.position[0], s.z - previous.position[2]) < 0.25,
+        );
+        if (seat) {
+          game.player.sitAt(seat.x, seat.top, seat.z, seat.ry);
+          game.player.seated = true;
+          game.player.seatOut = [...seat.out];
+          game.walker.sync?.();
+        }
+      }
     },
     leave: () => activity.leave(),
     tripIn: (g) => walkIn(g, cam, w.door.edge, w.door.in, Math.PI),

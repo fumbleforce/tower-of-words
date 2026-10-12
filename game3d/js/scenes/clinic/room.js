@@ -1,3 +1,4 @@
+import { seatPoint } from '../../kit/core/seats.js';
 // The clinic's ground floor in block_e1 (places/clinic.js; the plan is clinic/plan.js): a pale waiting room with a
 // glass front, the reception counter and its files, two waiting benches, the pharmacy's window, the examination
 // bay behind a half-drawn curtain, a children's corner and plants. The furniture is boxes in one Kit (dorms/kit.js),
@@ -171,6 +172,7 @@ function examBay(k) {
   k.box('#8fb4c9', 0.4, 0.2, 0.28, x - len / 2 - 0.38, 0, z - 0.06, { surf: 'plastic', r: 0.02 }); // the basket
   // the stool: a round seat on a post, five feet
   const [sx, sz] = STOOL;
+  seatPoint(k, sx, sz, 0.39, -Math.PI / 2, { label: 'Stool' });
   k.cyl('#3f4a52', 0.17, 0.17, 0.06, sx, 0.33, sz, { surf: 'fabric', seg: 16 });
   k.cyl(STEEL, 0.02, 0.025, 0.3, sx, 0.03, sz, { surf: 'metal' });
   for (let i = 0; i < 5; i++) {

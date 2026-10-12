@@ -22,7 +22,7 @@ export function benches(P) {
       const c = Math.cos(b.facing),
         s = Math.sin(b.facing);
       for (const u of b.len >= 1.3 ? [-b.len * 0.22, b.len * 0.22] : [0]) {
-        _p.set(b.x + u * c - 0.02 * s, SEAT_TOP, b.z - u * s - 0.02 * c).applyMatrix4(_m);
+        _p.set(b.x + u * c + 0.12 * s, SEAT_TOP, b.z - u * s + 0.12 * c).applyMatrix4(_m);
         _f.set(b.x + u * c + s, SEAT_TOP, b.z - u * s + c).applyMatrix4(_m);
         out.push({ x: _p.x, z: _p.z, top: _p.y, ry: Math.atan2(_f.x - _p.x, _f.z - _p.z) });
       }

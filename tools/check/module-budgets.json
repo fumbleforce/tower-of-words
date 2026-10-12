@@ -87,7 +87,7 @@
     },
     "game3d/js/props.js": {
       "lines": 537,
-      "bytes": 19570,
+      "bytes": 19573,
       "owner": "codex-tui",
       "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112); 2026-10-05 #240 PED, the desks' narrower drawer pedestals, so seated knees fit between them; #248 desk({ open }), Emi's desk open underneath with two legs; 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-07 #335 selected Mio contacts: cohesive keyboard/laptop helpers, ceiling lowered; 2026-10-09 #367 the material cache moved to kit/core/mat.js, ceiling lowered; 2026-10-09 #373 the skin loads through perf/skin-tex.js, one import line",
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
@@ -107,8 +107,8 @@
       "reason": "Existing lobby geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/scenes/office.js": {
-      "lines": 1958,
-      "bytes": 68043,
+      "lines": 1959,
+      "bytes": 68076,
       "owner": "codex-tui",
       "review": "C-0110 / X-0193; C-0352: tray, sink plate and counter no longer overlap, unused kitchen()/tableSet() removed; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 the corridor door openings defined once, for the wall holes and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-07 X-0668: officeWalls wrapper reuses exact partition calls for follow-only enclosure; ceiling reduced; 2026-10-07 #309/#311: sender handles and separate arrival helper; ceiling reduced; 2026-10-07 X-0761: office-only CRT option, ceilings lowered; 2026-10-10 #411: the alarm as a front light of one rack (office-leds.js alarmLight; two lines); 2026-10-12 #532/#533: remove unused desk column, extract office-signs.js, lower ceiling; #532 huddle/reference nook, shelf producer extracted",
       "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."

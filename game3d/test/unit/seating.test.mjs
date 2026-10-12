@@ -7,7 +7,7 @@ const hooks = registerHooks({ resolve(specifier, context, next) {
 } });
 const THREE = await import('three');
 const { seatPoint, seatRow, transferSeats } = await import('../../js/kit/core/seats.js');
-const { seatInventory, seatExit, seatOccupied } = await import('../../js/gameplay/seat-inventory.js');
+const { seatInventory, seatExit, seatOccupied, refreshSeat } = await import('../../js/gameplay/seat-inventory.js');
 hooks.deregister();
 const place = () => ({ space: new THREE.Group(), seats: {}, nav: { free: () => true } });
 test('seat metadata follows nested translated, rotated and elevated furniture and retains stable IDs', () => {
@@ -45,4 +45,15 @@ test('only another visible sitter occupies a seat, including crowd rigs', () => 
   const npc = { root: new THREE.Group(), seated: true }; p.space.add(npc.root); p.crowd = [npc];
   assert.equal(seatOccupied({player}, p, seat), true);
   npc.root.visible = false; assert.equal(seatOccupied({player}, p, seat), false);
+});
+
+test('a story-owned rolling chair keeps its ID and follows the actual chair instead of an empty desk', () => {
+  const p = place(), chair = new THREE.Group();
+  p.seats.my_seat = {x:0,z:0,top:.24,ry:Math.PI};
+  chair.userData.seatId = 'my_seat'; chair.position.set(5,0,-1);
+  seatPoint(chair,0,0,.24);p.space.add(chair);
+  const inventory=seatInventory(p), seat=inventory.get('my_seat');
+  assert.equal(inventory.size,1);assert.equal(seat.x,5);
+  chair.position.set(0,0,0);chair.rotation.y=Math.PI;
+  refreshSeat(p,seat);assert.equal(seat.x,0);assert.ok(Math.abs(seat.ry-Math.PI)<1e-6);
 });

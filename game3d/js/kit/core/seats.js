@@ -5,10 +5,13 @@ export function seatPoint(host, x, z, top, ry = 0, options = {}) {
   return host;
 }
 export function seatRow(host, x, z, top, ry, length, options = {}) {
+  const { forward = 0.1, ...rest } = options;
+  x += Math.sin(ry) * forward;
+  z += Math.cos(ry) * forward;
   const count = Math.max(1, Math.floor(length / 0.65));
   for (let i = 0; i < count; i++) {
     const u = (i - (count - 1) / 2) * Math.min(0.72, length / count);
-    seatPoint(host, x + Math.cos(ry) * u, z - Math.sin(ry) * u, top, ry, { label: 'Bench', ...options });
+    seatPoint(host, x + Math.cos(ry) * u, z - Math.sin(ry) * u, top, ry, { label: 'Bench', ...rest });
   }
 }
 export function transferSeats(host, root) {

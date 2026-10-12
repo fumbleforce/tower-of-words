@@ -399,7 +399,9 @@ async function inPage({ scene, TOL, phase, placed = [], seatIds, playerOnly }) {
       r.root.visible = true;
       r.sitAt(x, s.top, z, s.ry || 0);
       r.seated = true;
-      res.tried.push({ seat: sid, id, ...(await both(r, s)) });
+      const knees = [];
+      r.model?.traverse(o => { if (o.isBone && /leg|knee|thigh/i.test(o.name)) { const p = o.getWorldPosition(new THREE.Vector3()); r.root.worldToLocal(p); knees.push({name:o.name,at:p.toArray()}); } });
+      res.tried.push({ seat: sid, id, bones:knees, ...(await both(r, s)) });
       r.root.visible = false;
       if (sitter) sitter.root.visible = vis.get(sid.slice(3));
     }
@@ -499,7 +501,7 @@ await withBrowserJob('seat-check', async (browser) => {
     if (errors.length) fails.push(`${sc.name} page errors: ${errors.slice(0, 3).join(' | ')}`);
     await context.close();
   }
-}, { timeoutMs: 560000, gpuWaitMs: 300000 });
+}, { timeoutMs: 300000, gpuWaitMs: 900000 });
 fs.writeFileSync(path.join(out, 'log.json'), JSON.stringify(log, null, 1));
 if (SHOTS) {
   try {

@@ -180,7 +180,8 @@ export function installInteractions(game) {
     const go = () => {
       // he may arrive after a Say started on the way
       if (game.busy || game.saying) return;
-      if (item.face) game.walker.faceTo(...item.face());
+      if (item.face && !(game.player.seated && game.place.seating?.seats.has(item.id)))
+        game.walker.faceTo(...item.face());
       // tapped or clicked, with more than one thing to do there (its verb and Say): its menu opens, nothing is used
       // yet (Jørgen, 2026-10-02: the menu opening by itself "is very disruptive"). One thing to do: it's done.
       if (ask && canUse(item) && sayRow(item)) {

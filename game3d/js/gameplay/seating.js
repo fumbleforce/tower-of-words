@@ -1,5 +1,5 @@
 // Optional sitting uses the same measured pose as story scenes. Furniture advertises its seat surface before batching.
-import { seatInventory, seatExit, seatOccupied, seatVisible } from './seat-inventory.js';
+import { seatInventory, seatExit, seatOccupied, seatVisible, refreshSeat } from './seat-inventory.js';
 import { addInteractOptions } from './interact-menu.js';
 import { save } from '../sim.js';
 
@@ -9,7 +9,16 @@ export function attachSeating(game, place) {
   const current = () => (game.player.freeSeat?.place === place.name ? game.player.freeSeat : null);
   const sittingOn = (s) =>
     game.player.seated && Math.hypot(game.player.root.position.x - s.x, game.player.root.position.z - s.z) < 0.18;
-  const available = (s) => seatVisible(s) && !seatOccupied(game, place, s);
+  const reserved = (s) => {
+    const bagSeat = place.seats?.ferry_window_seat;
+    return (
+      place.name === 'ferry_terminal' &&
+      bagSeat &&
+      !place.things.ferry_window_seat.enabled() &&
+      Math.hypot(s.x - bagSeat.x, s.z - bagSeat.z) < 0.6
+    );
+  };
+  const available = (s) => !!refreshSeat(place, s) && seatVisible(s) && !reserved(s) && !seatOccupied(game, place, s);
   const reachable = (s) => available(s) && !!seatExit(place, s);
   // The train's bags and deliberately staged seats retain their existing story actions.
   const protectedSeat = (s) => place.name === 'train' && (s.bag != null || s.props || s.id === 'seat_mio');
@@ -67,12 +76,12 @@ export function attachSeating(game, place) {
       face: () => [s.x, s.z],
       fixedSpot: true,
       pickBox: { w: 0.5, h: 0.55, bottom: s.top - 0.1 },
-      enabled: () => reachable(s),
+      enabled: () => reachable(s) && !(place.name === 'office' && id === 'my_seat' && place.things.my_chair?.enabled()),
     };
   }
   addInteractOptions((item, active) => {
     if (active !== game || game.place !== place) return null;
-    const s = seats.get(item.id);
+    const s = seats.get(item.id) || (place.name === 'office' && item.id === 'my_chair' ? seats.get('my_seat') : null);
     if (!s || protectedSeat(s) || !reachable(s)) return null;
     // The generic target already has Sit as its sole action. Only the seated state needs a different verb.
     if (sittingOn(s))

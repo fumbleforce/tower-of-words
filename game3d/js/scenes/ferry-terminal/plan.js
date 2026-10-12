@@ -14,13 +14,13 @@ export const R = {
 };
 export const DOOR = { edge: [0, 0.12], in: [0, -0.95], out: [0, -0.55] };
 export const STAFF = [4.6, -6.62];
-export const READER = { x: -5.7, z: -5.8, ry: 0, top: 0.34 };
-export const TRAVELLER = { x: -5.7, z: -2.8, ry: Math.PI, top: 0.34 };
+export const READER = { x: -5.7, z: -5.6, ry: 0, top: 0.34 };
+export const TRAVELLER = { x: -5.7, z: -3.0, ry: Math.PI, top: 0.34 };
 export const SEATS = {
-  ferry_landing_seat: { x: 4.3, z: -2.1, ry: Math.PI, top: 0.34, out: [4.3, -2.95] },
-  ferry_notice_seat: { x: 0.4, z: -5.05, ry: 0, top: 0.34, out: [0.4, -4.2] },
-  ferry_window_seat: { x: -4.55, z: -2.8, ry: Math.PI, top: 0.34, out: [-4.55, -3.65] },
-  ferry_quiet_seat: { x: -4.55, z: -5.8, ry: 0, top: 0.34, out: [-4.55, -4.95] },
+  ferry_landing_seat: { x: 4.3, z: -2.3, ry: Math.PI, top: 0.34, out: [4.3, -2.95] },
+  ferry_notice_seat: { x: 0.4, z: -4.85, ry: 0, top: 0.34, out: [0.4, -4.2] },
+  ferry_window_seat: { x: -4.55, z: -3.0, ry: Math.PI, top: 0.34, out: [-4.55, -3.65] },
+  ferry_quiet_seat: { x: -4.55, z: -5.6, ry: 0, top: 0.34, out: [-4.55, -4.95] },
 };
 export const SPOTS = {
   ferry_in: DOOR.in,

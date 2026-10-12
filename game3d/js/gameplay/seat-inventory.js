@@ -19,15 +19,25 @@ export function seatInventory(place) {
     if (!s || !Number.isFinite(s.top) || s.top <= 0 || /bed/.test(id)) continue;
     seats.set(id, { ...s, id, floor: place.floorY || 0, named: true });
   }
-  const add = (seat) => {
-    const same = [...seats.values()].find(
-      (s) => Math.hypot(s.x - seat.x, s.z - seat.z) < 0.22 && Math.abs(s.top - seat.top) < 0.1,
-    );
+  const add = (seat, explicitId) => {
+    const same = explicitId
+      ? seats.get(explicitId)
+      : [...seats.values()].find(
+          (s) => Math.hypot(s.x - seat.x, s.z - seat.z) < (s.named ? 0.42 : 0.22) && Math.abs(s.top - seat.top) < 0.1,
+        );
     if (same) {
-      Object.assign(same, { source: seat.source, floor: seat.floor ?? same.floor });
+      Object.assign(same, {
+        source: seat.source,
+        local: explicitId ? seat.local : undefined,
+        floor: seat.floor ?? same.floor,
+      });
+      if (explicitId) {
+        Object.assign(same, { x: seat.x, z: seat.z, top: seat.top, ry: seat.ry });
+        delete same.out;
+      }
       return;
     }
-    const id = `seat_${key(seat)}`;
+    const id = explicitId || `seat_${key(seat)}`;
     seats.set(id, { ...seat, id });
   };
   place.space.updateMatrixWorld(true);
@@ -42,7 +52,7 @@ export function seatInventory(place) {
       facing.set(s.x + Math.sin(s.ry), s.top, s.z + Math.cos(s.ry)).applyMatrix4(matrix);
       const ry = Math.atan2(facing.x - x, facing.z - z);
       point.set(s.x, s.floor ?? 0, s.z).applyMatrix4(matrix);
-      add({ ...s, x, z, top, ry, floor: point.y, source: o });
+      add({ ...s, x, z, top, ry, floor: point.y, source: o, local: { ...s } }, o.userData.seatId);
     }
   });
   for (const s of benches(place)) add({ ...s, floor: s.top - 0.34, label: 'Bench' });
@@ -51,7 +61,8 @@ export function seatInventory(place) {
 
 // Try the front first, then either side. Dining chairs often face a table, so their front is blocked.
 export function seatExit(place, seat) {
-  if (seat.out && place.nav.free(...seat.out)) return [...seat.out];
+  if (seat.out && Math.hypot(seat.out[0] - seat.x, seat.out[1] - seat.z) < 1.5 && place.nav.free(...seat.out))
+    return [...seat.out];
   for (const distance of [0.55, 0.75, 1, 1.25])
     for (const turn of [0, Math.PI / 2, -Math.PI / 2, Math.PI]) {
       const angle = (seat.ry || 0) + turn;
@@ -64,7 +75,7 @@ export function seatExit(place, seat) {
 export function seatOccupied(game, place, seat) {
   const people = [...Object.values(place.people || {}), ...(place.crowd || [])];
   return people.some((r) => {
-    if (!r?.root || r === game.player || !r.root.visible || !r.seated) return false;
+    if (!r?.root || r === game.player || !r.root.visible || !(r.seated || r.cat || r.selfGait)) return false;
     r.root.getWorldPosition(point);
     place.space.worldToLocal(point);
     return (
@@ -72,4 +83,21 @@ export function seatOccupied(game, place, seat) {
       Math.abs(point.y - seat.floor) < 1
     );
   });
+}
+
+export function refreshSeat(place, seat) {
+  if (!seat.source || !seat.local) return seat;
+  seat.source.updateWorldMatrix(true, false);
+  inverse.copy(place.space.matrixWorld).invert();
+  matrix.multiplyMatrices(inverse, seat.source.matrixWorld);
+  const s = seat.local;
+  point.set(s.x, s.top, s.z).applyMatrix4(matrix);
+  const x = point.x,
+    z = point.z,
+    top = point.y;
+  facing.set(s.x + Math.sin(s.ry), s.top, s.z + Math.cos(s.ry)).applyMatrix4(matrix);
+  const ry = Math.atan2(facing.x - x, facing.z - z);
+  point.set(s.x, s.floor || 0, s.z).applyMatrix4(matrix);
+  Object.assign(seat, { x, z, top, ry, floor: point.y });
+  return seat;
 }

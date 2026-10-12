@@ -134,7 +134,11 @@ export function runInteract(game, item, plan) {
   const talkKey = 'talk:' + item.id;
   const rows = [
     ...(story ? [{ label: story.label, story: true, trigger: talkKey, cls: 'story' }] : []),
-    ...topics.map((t) => ({ label: t.label, trigger: t.trigger, cls: 'topic' })),
+    ...topics.map((t) => ({
+      label: t.label,
+      trigger: t.trigger,
+      cls: 'topic',
+    })),
     ...extra.map((o) => ({ ...o, cls: o.story ? 'story' : 'extra' })),
     ...(plain ? [{ ...plain, cls: 'plain' }] : []),
   ];
@@ -157,7 +161,8 @@ export function runInteract(game, item, plan) {
   ];
   const glow = rows[0].story ? 0 : -1;
   game.beat(async () => {
-    if (item.face) game.walker.faceTo(...item.face());
+    if (item.face && !(game.player.seated && game.place.seating?.seats.has(item.id)))
+      game.walker.faceTo(...item.face());
     const speaker = person ? game.runner.speaker(item.id) : { name: nameOf(game, item) };
     const pick = await game.ui.choose(speaker, '', chips, {
       whoId: person ? item.id : null,

@@ -149,6 +149,7 @@ export function terminalActivity(game, P) {
               game.player.seated = true;
               game.player.seatOut = [...s.out];
               game.walker.facing = s.ry;
+              game.walker.sync?.();
             }
             frame(
               seat === 'ferry_window_seat' ? 'ferry_traveller' : seat === 'ferry_quiet_seat' ? 'ferry_reader' : 'seat',

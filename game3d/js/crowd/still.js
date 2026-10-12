@@ -57,7 +57,7 @@ export function stillSpots(game, place, g, data, ends, lines) {
         s = Math.sin(b.facing);
       const us = b.len >= 1.3 ? [-b.len * 0.22, b.len * 0.22] : [0];
       for (const u of us) {
-        const p = new THREE.Vector3(b.x + u * c - 0.02 * s, SEAT_TOP, b.z - u * s - 0.02 * c).applyMatrix4(M);
+        const p = new THREE.Vector3(b.x + u * c + 0.12 * s, SEAT_TOP, b.z - u * s + 0.12 * c).applyMatrix4(M);
         const f = new THREE.Vector3(b.x + u * c + s, SEAT_TOP, b.z - u * s + c).applyMatrix4(M);
         const yaw = Math.atan2(f.x - p.x, f.z - p.z);
         // a bench out where nobody walks (behind a hedge, on the backdrop) has no free floor in front of it

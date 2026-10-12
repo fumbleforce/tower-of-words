@@ -1,3 +1,4 @@
+import { seatPoint } from '../kit/core/seats.js';
 // B2 office geometry. Overview uses cutaway walls; free interior camera closes the rooms.
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -164,7 +165,6 @@ function ceilingLamp(w = 0.9) {
 
 // ---------- more office parts ----------
 function plate(text, { w = 0.5, h = 0.16, bg = '#e9ebee', fg = '#2b3140', sub = '' } = {}) {
-  // Japanese on top, the English under it (signs the player hasn't been taught carry both)
   const tex = textTexture(
     (g, W, H) => {
       g.fillStyle = bg;
@@ -357,7 +357,6 @@ function fridge() {
   g.add(rbox(0.03, 0.26, 0.03, '#a4a8ae', { x: 0.24, y: 0.78, z: 0.29, r: 0.01, cast: false }));
   return g;
 }
-// counter()'s top; seat() puts a thing's lowest point on a surface (no shared faces, no floating)
 const COUNTER_TOP = 0.52,
   GAP = 0.002; // flat things lie this far above the surface under them
 function seat(o, y) {
@@ -401,6 +400,7 @@ function table2() {
   ])
     g.add(rbox(0.04, 0.4, 0.04, PAL.deskLeg, { x, z, r: 0.01 }));
   for (const x of [-0.3, 0.3]) {
+    seatPoint(g, x, 0.55, 0.3, Math.PI, { label: 'Stool' });
     g.add(rbox(0.26, 0.04, 0.26, PAL.chair, { x, y: 0.26, z: 0.55, r: 0.02 }));
     g.add(rbox(0.03, 0.26, 0.03, PAL.deskLeg, { x, z: 0.55, r: 0.01 }));
   }
@@ -926,7 +926,6 @@ export function* officeSteps() {
     yield;
   }
   yield;
-  // a bench in the corridor, by the office door
   {
     const bc = bench(1.4, { seats: 2 });
     bc.position.set(-1.9, 0, 0.62);
@@ -944,6 +943,7 @@ export function* officeSteps() {
         rbox(0.03, 0.24, 0.03, PAL.deskLeg, { x, z: 0.45, r: 0.01 }),
       );
     mt.add(rbox(0.3, 0.02, 0.22, PAL.paper, { x: 0.15, y: 0.44, r: 0.005 }));
+    for (const x of [-0.3, 0.3]) seatPoint(mt, x, 0.45, 0.29, Math.PI, { label: 'Stool' });
     mt.position.set(1.1, 0, -5.3);
     root.add(mt);
   }
@@ -1024,6 +1024,7 @@ export function* officeSteps() {
   root.add(card);
 
   const myChair = officeChair();
+  myChair.userData.seatId = 'my_seat';
   myChair.position.set(5.5, 0, -1.3);
   myChair.rotation.y = -0.5;
   root.add(myChair);
@@ -1481,7 +1482,6 @@ export function* officeSteps() {
   yield;
   yield* emiOffice(root, pool, { X0, CS, Z1, T });
   yield;
-  // ---- kitchenette ----
   {
     const rug = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.012, 1.6), mat('#56607a', { roughness: 0.95 }));
     rug.position.set(-0.8, 0.006, 4.75);
@@ -1489,6 +1489,7 @@ export function* officeSteps() {
     root.add(rug);
   }
   for (const x of [-0.3 - 0.8, 0.3 - 0.8]) {
+    seatPoint(root, x, 4.05, 0.3, 0, { label: 'Stool' });
     root.add(
       rbox(0.26, 0.04, 0.26, PAL.chair, { x, y: 0.26, z: 4.05, r: 0.02 }),
       rbox(0.03, 0.26, 0.03, PAL.deskLeg, { x, z: 4.05, r: 0.01 }),

@@ -166,7 +166,7 @@ export function bench(len = 2.0, { seats = 3 } = {}) {
   const sw = len / seats;
   for (let i = 0; i < seats; i++) {
     const x = -len / 2 + sw * (i + 0.5);
-    seatPoint(g, x, 0, 0.29, 0, { label: 'Bench' });
+    seatPoint(g, x, 0.18, 0.29, 0, { label: 'Bench' });
     g.add(rbox(sw - 0.04, 0.09, d, PAL.bench, { x, y: 0.2, r: 0.04, seg: 3 }));
     g.add(rbox(sw - 0.04, 0.34, 0.09, PAL.benchBack, { x, y: 0.26, z: -d / 2 + 0.02, r: 0.04, seg: 3 }));
   }

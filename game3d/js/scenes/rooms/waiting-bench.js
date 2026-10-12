@@ -11,7 +11,7 @@ export function waitingBench(
   facing,
   { len = 3.15, seat = '#4f7c82', back = '#5e858a', frame = '#64747a', rail = '#65777b' } = {},
 ) {
-  seatRow(k, x, z, 0.34, facing, len);
+  seatRow(k, x + Math.sin(facing) * 0.2, z + Math.cos(facing) * 0.2, 0.34, facing, len, { forward: 0 });
   const along = Math.abs(Math.sin(facing)) < 1e-6, // the length runs along x
     fx = Math.sin(facing),
     fz = Math.cos(facing),
