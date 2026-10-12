@@ -13,6 +13,7 @@
 import * as LAYOUT from '../island-layout.js';
 import * as C from '../dorm-court/cluster-plan.js';
 import { nookWalks } from '../outdoor/nook-walks.js';
+import { COAST_GARDEN as G } from '../island-dorms.js';
 
 export const CHUNK = 'east_coast';
 const AT = LAYOUT.CHUNKS[CHUNK].at;
@@ -76,6 +77,10 @@ const I_WALKS = [
   ...ONSEN_LEGS,
   STONE_WALK,
   COURTS_STUB,
+  G.entry,
+  G.pergola,
+  ...G.paths,
+  ...G.lawns,
 ];
 // the nooks (outdoor/nooks.js), in the chunk's frame: a lookout with a coin telescope where the coast walk turns
 // inland, out to the sea wall; a roadside shrine on the lawn south of the walk inland, the cherries behind it
@@ -128,7 +133,7 @@ const post = ([x, z], r = 0.16) => [x - r, x + r, z - r, z + r];
 const TR = C.TERRACE,
   SQ = C.SQUARE_END,
   tc = mid(TR[0], TR[1]),
-  tz = TR[2] + 1.6;
+  tz = TR[2] + 0.95;
 const D3 = C.BLOCKS.find((k) => k.id === 'dorm_3'),
   d3x = mid(SQ[0], SQ[1]);
 export const FURNITURE = [
@@ -150,6 +155,16 @@ export const FURNITURE = [
   ),
   post([C.SQUARE_BINS[0], C.SQUARE_BINS[1]], 0.35),
   ...C.COURT_LAMPS.map((p) => post(p)),
+  ...G.lamps.map((p) => post(p)),
+  ...G.benches.map(([x, z]) => [x - 0.9, x + 0.9, z - 0.3, z + 0.3]),
+  ...G.stones.map(([x, z]) => [x - 0.43, x + 0.43, z - 0.4, z + 0.4]),
+  [111.1, 111.9, 25.5, 26.1],
+  // The pergola's posts and benches leave both entrances clear.
+  ...[G.pergola[0] + 0.3, G.pergola[1] - 0.3].flatMap((x) =>
+    [G.pergola[2] + 0.3, G.pergola[3] - 0.3].map((z) => post([x, z], 0.1)),
+  ),
+  [86.9, 87.5, 17.3, 18.9],
+  [89.6, 91.2, 18.8, 19.4],
 ].map(rect);
 
 // the shut door: on the hall's south face under the porch (local), and where Eric stands to try it (step)
@@ -198,6 +213,10 @@ export const BOUNDS = (() => {
 // then from the coast's look to the onsen's as he comes off the coast walk onto the onsen path ([z from, z to]);
 // all in the chunk's frame
 export const TURNS = {
+  approach: rect([86, 97, 9, 12.5]),
+  garden: rect([82, 96, 12.5, 24.8]),
+  shore: rect([96, 124, 12.5, 33]),
+  rest: rect([104.8, 112, 25.2, 30]),
   inner: rect([INNER[0], INNER[1], INNER[2] - 1, INNER[3] - 0.2]), // on the inner court: north at the common room
   row: { x: [pt([SQ[1] - 4, 0])[0], pt([TR[1] - 1, 0])[0]], z: [pt([0, ROW[2] - 8])[1], pt([0, ROW[2] - 4])[1]] },
   onsen: { z: [pt([0, W2[2] - 2])[1], pt([0, W2[3]])[1]] },

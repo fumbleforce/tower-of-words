@@ -1,7 +1,39 @@
 // The dorm cluster's paths and green round the inner court, east of the dorm courtyard, in the island frame:
 // scenes/island-layout.js spreads them into PATHS and GREEN, scenes/dorm-court/cluster.js builds them. On the lane's
-// grid like the east lane (scenes/island-east.js): the street 3 wide, walks 1.5, every one meeting a street, another
-// walk or a door square on.
+// grid like the east lane (scenes/island-east.js). The coastal garden's paths and lawn use these same footprints
+// for the map, the shared landscape builder and east_coast's navigation.
+export const COAST_GARDEN = {
+  pergola: [86.1, 92.8, 16.6, 19.6],
+  entry: [88.7, 90.2, 12, 16.6],
+  paths: [
+    [92.8, 95.7, 17, 18.8],
+    [93.9, 95.7, 18.8, 24.8],
+    [95.7, 117, 23, 24.8],
+    [117, 118.8, 12, 24.8],
+    [104, 111, 24.8, 28.8],
+  ],
+  lawns: [
+    [96.3, 116.8, 21, 23],
+    [96.3, 104, 24.8, 28.8],
+  ],
+  benches: [
+    [105.1, 27.7, 0],
+    [109.9, 27.7, 0],
+  ],
+  lamps: [
+    [95.35, 20.6],
+    [102.3, 23.3],
+    [111.9, 24.5],
+    [118.45, 18.6],
+  ],
+  stones: [
+    [97.8, 26.7, 0.16],
+    [99.1, 26.7, 0.28],
+    [100.4, 26.7, 0.42],
+    [101.7, 26.7, 0.28],
+    [103, 26.7, 0.16],
+  ],
+};
 export const DORM_PATHS = [
   {
     id: 'dorm_row',
@@ -58,6 +90,13 @@ export const DORM_PATHS = [
     rect: [98.5, -9.4, 100, -6.9],
     detail: 'From dorm_entry’s door south to the back walk.',
   },
+  ...[COAST_GARDEN.entry, COAST_GARDEN.pergola, ...COAST_GARDEN.paths].map(([x0, x1, z0, z1], i) => ({
+    id: `coast_garden_${i}`,
+    kind: i === 1 || i === 6 ? 'court' : 'walk',
+    rect: [x0, z0, x1, z1],
+    detail:
+      'The dorm garden loop through the pergola, along the southern lawn and sea-facing rest court, back to the row square.',
+  })),
 ];
 export const DORM_GREEN = [
   {
@@ -71,4 +110,9 @@ export const DORM_GREEN = [
     rect: [82, 12, 96.9, 20],
     detail: 'Lawn and trees on the dorm row’s south side, between the ramen shop and dorm_2.',
   },
+  ...COAST_GARDEN.lawns.map(([x0, x1, z0, z1], i) => ({
+    id: `coast_garden_lawn_${i}`,
+    rect: [x0, z0, x1, z1],
+    detail: 'Open coastal lawn for recreation, with low stone stepping blocks and clear sea views.',
+  })),
 ];

@@ -19,6 +19,9 @@ export const EAST_COAST_DETAILS = {
     'inner_court',
     'inner_court_bench',
     'terrace_bench',
+    'coast_garden_pergola',
+    'coast_garden_lawn',
+    'coast_garden_rest',
   ],
   nooks: ['east_coast_lookout', 'east_coast_shrine'], // docs/game/places.md, "Nooks"
   seats: [],

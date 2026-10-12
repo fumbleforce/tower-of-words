@@ -18,6 +18,7 @@ import { Parts } from './outdoor/parts.js';
 import { lightSet } from './outdoor/furniture.js';
 import { paver } from './outdoor/paving.js';
 import { coastSteps } from './outdoor/coast.js';
+import { coastalSea } from './outdoor/sea.js';
 import { signSet } from './shop-signs.js';
 import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
 import { cells } from './dorm-court/cells.js';
@@ -31,7 +32,7 @@ import { bandSteps } from './bands.js';
 
 const { CHUNK, inRect } = P;
 // the coast from south of the dorms round past the onsen (the layout's line, its east side)
-const EAST_COAST = LAYOUT.COAST.line.filter(([x, z]) => x > 100 && z < 40);
+const EAST_COAST = LAYOUT.COAST.line.filter(([x, z]) => x >= 86 && z < 40);
 
 export const buildEastCoast = () => drain(eastCoastSteps());
 export function* eastCoastSteps() {
@@ -77,6 +78,7 @@ export function* eastCoastSteps() {
     at: (x, z) => [x, z],
     data: { coast: [{ line: EAST_COAST, plant: true }], walks: kerbWalks() },
   });
+  const sea = coastalSea(root, sun.position.clone().normalize());
   yield;
   const bands = yield* bandSteps(root, CHUNK); // the ground past the exits, as the neighbours build it (bands.js)
   const sky = yield* skylineSteps(root, CHUNK, {
@@ -118,7 +120,8 @@ export function* eastCoastSteps() {
     // the sea terrace's east bench, which looks south over the wall to the sea: the spot is just behind it
     terraceBench: P.pt([C.TERRACE[1] - 1.1, C.TERRACE[3] - 1.35]),
     camera: { elev: 46, fov: 24 },
-    update() {
+    update(t) {
+      sea.update(t);
       bands.update(sun);
     },
     evening() {

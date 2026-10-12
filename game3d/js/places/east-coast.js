@@ -30,6 +30,9 @@ const POSE = {
   coast: { yaw: -0.6, elev: deg(56) },
   onsen: { yaw: 0, elev: deg(52) },
   inner: { yaw: 0.12, elev: deg(56) }, // on the inner court: north, the common room's door facing it
+  garden: { yaw: Math.PI - 0.18, elev: deg(56) }, // the southern lawn and the sea beyond it
+  shore: { yaw: 0.18, elev: deg(60) }, // from the sea side, clear of the tall blocks beside the loop
+  approach: { yaw: Math.PI / 2 + 0.25, elev: deg(62) }, // along the row from its clear eastern end
 };
 const smooth = THREE.MathUtils.smoothstep,
   lerp = THREE.MathUtils.lerp;
@@ -41,6 +44,9 @@ export async function eastCoastPlace(game) {
   const T = w.turns;
   const turn = turningCam(cam, (x, z) => {
     if (inRect(x, z, T.inner)) return POSE.inner;
+    if (inRect(x, z, T.approach)) return POSE.approach;
+    if (inRect(x, z, T.garden) || inRect(x, z, T.rest)) return POSE.garden;
+    if (inRect(x, z, T.shore)) return POSE.shore;
     const r = (1 - smooth(x, T.row.x[0], T.row.x[1])) * smooth(z, T.row.z[0], T.row.z[1]),
       o = 1 - smooth(z, T.onsen.z[0], T.onsen.z[1]);
     return {
@@ -108,6 +114,7 @@ export async function eastCoastPlace(game) {
     nav: w.nav,
     sun: w.sun,
     charScale: K,
+    followCameraLift: 2.0, // keep the actor visible when the terrace pine compresses the follow camera
     start: w.in,
     startFacing: Math.PI / 2,
     music: 'calm',
@@ -121,6 +128,9 @@ export async function eastCoastPlace(game) {
       inner_court: w.inner.square,
       inner_court_bench: w.inner.bench,
       terrace_bench: w.terraceBench,
+      coast_garden_pergola: [-37.05, 7.5],
+      coast_garden_lawn: [-26.1, 14.7],
+      coast_garden_rest: [-19, 16.5],
     },
     seats: {},
     people: {
@@ -145,11 +155,11 @@ export async function eastCoastPlace(game) {
       const point = new THREE.Vector3();
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
-    update(dt) {
+    update(dt, t) {
       d3.update(dt);
       const p = game.player.root.position;
       w.follow(p.x, p.z);
-      w.update(); // the bands' laid shadows on the sun's side (scenes/bands.js)
+      w.update(t); // sea motion and the bands' laid shadows on the sun's side (scenes/bands.js)
       turn.steer(p, dt);
       // heading for a way out: build the next place now, so the walk there needs no loading pause
       const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;

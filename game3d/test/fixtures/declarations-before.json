@@ -1325,7 +1325,10 @@
         "lookout_view",
         "inner_court",
         "inner_court_bench",
-        "terrace_bench"
+        "terrace_bench",
+        "coast_garden_pergola",
+        "coast_garden_lawn",
+        "coast_garden_rest"
       ],
       "nooks": [
         "east_coast_lookout",

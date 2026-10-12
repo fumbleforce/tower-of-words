@@ -838,6 +838,8 @@ The third district of the island's south half built to walk (issue #173, after J
 
 Walked: the dorm row from the dorm street east to the square at dorm_3's door, and north off it the inner court (issue #227, the art club): the north-south walk up to the common room's glazed door in dorm_gallery's south face, the paved square round the maple's raised bed where it crosses the east-west walk, and that walk from dorm_1e's door to dorm_3's (not the bed, the benches, the bins or the lamps); the walk on east to the sea terrace, and the terrace (not its pine bed, benches, drinks machine or lamp); the east coast walk out of the terrace's east side, north along the coast behind dorm_4, west where the coast comes in, north past dorm_6 and west behind the north residence; the onsen path north along the tennis courts' fence and east along the onsen's precinct wall to the red gate; inside the gate, the stone walk to the onsen's porch; and from the onsen path's foot a few steps west along the courts walk, which goes on to the sports ground (`sports`, below). The terrace's low wall on the coast side is now open on its east side, where the walk leaves it; a finger sign there points along it: Onsen 温泉 →, and another where the onsen path turns east.
 
+South off the dorm row, the pergola garden is walkable. Its east opening joins a pale stone loop around dorm_2’s southern grounds, returning directly to the row square. The loop passes an open recreation lawn, five low stone stepping blocks and a sea-facing rest court with two benches, flowering troughs, sorted bins and lamps. Sparse pines shelter its edges while leaving the southern horizon open. Low kerbs and stone tops follow physical walking and jumping. The shared dorm landscape builder supplies these grounds to neighbouring views.
+
 The coast walk is pale slabs between kerbs, 2 wide, turning in squares. On its landward edge stand post lamps about every 8, and two paved bays with a bench look over it to the sea. Between it and the coast's wall (the forecourt's wall, rocks and broken surf, here along the east coast) a strip of black pines; behind dorm_4 and dorm_6 a grove of cherries on the lawn; where it turns inland, pines and zelkovas; a clipped hedge along the north residence's back. The onsen path runs between the tennis courts (two hard courts with their lines and nets inside a steel fence) and the onsen's grounds: a wood of pines, maples and zelkovas, kept back from the path by a band of layered planting, and a belt of trees between the path and the precinct wall.
 
 The onsen: a precinct wall of white plaster on a stone base under a tiled cap, the red gate in its south side on the hall's door axis: two round vermilion posts on stones, a tie beam, a dark top beam and a small tiled gable, its two leaves standing open against the wall's inside, and by its west post a tall board with おんせん written top to bottom. Inside, a stone walk of dark slabs runs up to the porch between raked gravel, with a big black pine and a set of rocks to the west, a maple to the east and a stone lantern either side of the walk by the porch; a moss garden with maples and a pine lies behind the west corner. The hall is two storeys of white plaster between dark timber posts over a dark timber skirt, with lattice windows over paper screens, a tiled pent roof along the ground floor and a tiled gable roof over all. The porch on the axis has two posts with paper lanterns, its own tiled roof, and おんせん ONSEN on a board standing on its eave; its sliding lattice doors are shut, with a white card on the glass: 準備中 CLOSED (after work on day 2 a larger notice in its place: 本日休業, ボイラー修理のため, CLOSED TODAY · BOILER REPAIR). East of the hall, toward the sea, two bath courtyards behind bamboo fences, each with a rock-edged pool. Nothing behind the door is built.
@@ -859,7 +861,7 @@ In the morning the sun is the plaza's; after work the lamps, the stone lanterns,
 
 ### Spots
 
-`row_entry` (on the dorm row, the terrace ahead); `inner_court` (on the inner court's square, by the maple's bed), `inner_court_bench` (in front of the square's bench facing the common room); `terrace_bench` (just behind the sea terrace's east bench, which looks south over the low wall to the sea); `lookout_view` (the shoreline below the lookout, where the view through the telescope is framed from above); and each nook below
+`row_entry` (on the dorm row, the terrace ahead); `inner_court` (on the inner court's square, by the maple's bed), `inner_court_bench` (in front of the square's bench facing the common room); `terrace_bench` (just behind the sea terrace's east bench, which looks south over the low wall to the sea); `lookout_view` (the shoreline below the lookout, where the view through the telescope is framed from above); `coast_garden_pergola`, `coast_garden_lawn` and `coast_garden_rest` (the southern garden and sea-facing court); and each nook below
 
 ### Nooks
 
@@ -872,7 +874,7 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Seats
 
-None.
+The pergola, shore court, terrace, inner court and promenade benches support optional sitting through the shared seat inventory.
 
 ### Zones
 

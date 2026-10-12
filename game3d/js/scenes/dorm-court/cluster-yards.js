@@ -18,6 +18,8 @@ import { drift } from '../forecourt/gardens.js';
 import { lamps, bench, STEEL } from '../outdoor/furniture.js';
 import * as C from './cluster-plan.js';
 import { terraceDetails, terraceVending } from '../east-coast/terrace-details.js';
+import { coastGardenSteps } from '../east-coast/coast-garden.js';
+import { COAST_GARDEN as G } from '../island-dorms.js';
 
 const { ROW, BACK, ENTRY, GARDEN, SQUARE_END: SQ, SEA_WALK: SW, TERRACE: TR } = C;
 export const pale = (pv, r) =>
@@ -92,7 +94,7 @@ export function* endSquare(pv, p, lights, root) {
   edge(pv, [x1 - BW, x1, z0, z1 - BW], [BW, 0.15]);
   kerbRect(p, [x0, x1, z0, z1], { sides: 'e', gaps: { e: [[SW[2], SW[3]]] } });
   kerb(p, [x0, z0], [x0, ROW[2]], { off: 0.08 });
-  verge(p, [x0, z1], [x1, z1], 's', { seed: 71 });
+  verge(p, [x0, z1], [x1, z1], 's', { seed: 71, crossings: [[117, 118.8]] });
   yield;
   lamps(
     lights,
@@ -119,7 +121,6 @@ export function* endSquare(pv, p, lights, root) {
   kerbRect(p, TR, { sides: 'nw', gaps: { w: [[SW[2], SW[3]]] } });
   kerbRect(p, TR, { sides: 'e', gaps: { e: [C.COAST_Z] } }); // open for the east coast walk
   // the wall on the coast side, closed
-  const st = [(TR[0] + TR[1]) / 2 - 0.75, (TR[0] + TR[1]) / 2 + 0.75];
   lowWall(p, [TR[0], TR[3]], [TR[1], TR[3]], { off: -0.11 });
   // a bench at each end looking out; a drinks machine lit on the terrace's north side, by the walk
   for (const x of [TR[0] + 1.1, TR[1] - 1.1]) bench(p, x, TR[3] - 0.7, 0, { len: 1.3 });
@@ -129,18 +130,19 @@ export function* endSquare(pv, p, lights, root) {
   lights.lit.push([vx, vz + 0.9, 0.9]);
   // in the terrace's north half a raised bed with a big black pine, seen from up the row
   const tc = (TR[0] + TR[1]) / 2,
-    tz = TR[2] + 1.6;
+    tz = TR[2] + 0.95;
   yield;
   wallRect(p, [tc - 1.0, tc + 1.0, tz - 0.8, tz + 0.8], { h: 0.45 });
   bed(p, [tc - 0.8, tc + 0.8, tz - 0.6, tz + 0.6], { y: 0.43, cover: false });
   terraceDetails(p, TR, [tc - 1, tc + 1, tz - 0.8, tz + 0.8]);
-  pine(p, tc, tz, 1.25, 81);
+  pine(p, tc, tz, 0.9, 81);
   lamps(lights, p, [[TR[1] - 0.4, TR[2] + 0.4]], { pool: 1.5 });
   yield;
-  pine(p, (st[0] + st[1]) / 2 + 1.6, TR[3] + 2.4, 1.0, 82);
-  pine(p, TR[0] - 0.6, TR[3] + 1.0, 0.9, 79);
-  pine(p, TR[1] + 0.4, TR[3] + 0.8, 0.85, 80);
+  // Keep the terrace's southern view open between two shelter pines.
+  pine(p, TR[0] - 0.8, TR[3] + 2.4, 0.8, 79);
+  pine(p, TR[1] + 0.4, TR[3] + 0.8, 0.75, 80);
   yield;
+  yield* coastGardenSteps(pv, p, lights);
 }
 
 // a wood along an edge: trees of the given kinds in turn, in staggered rows `pitch` apart (2.4) and a little off the
@@ -180,10 +182,13 @@ export function* belt(p, [x0, x1, z0, z1], kinds, { seed = 1, pitch = 2.4, under
 export function* belts(p) {
   const DE = C.block('dorm_entry'),
     D2 = C.block('dorm_2');
-  yield* belt(p, [GARDEN[0], D2[0] - 0.3, GARDEN[3] + 0.6, 26], [pine, pine, sakura], { seed: 90 });
-  yield* belt(p, [D2[0] - 0.3, 136, D2[3] + 1.6, 26], [pine, pine, keyaki], { seed: 94 });
-  yield* belt(p, [C.block('dorm_2')[1] + 0.6, TR[1] + 1.0, SQ[3] + 1.6, D2[3] + 1.6], [pine, sakura, pine], {
+  yield* belt(p, [GARDEN[0], 93.1, GARDEN[3] + 0.6, 26], [pine, pine, sakura], { seed: 90 });
+  // Sheltered planting beside dorm_2, clear of the new garden loop and its sea views.
+  yield* belt(p, [D2[1] + 0.6, 108, SQ[3] + 1.6, D2[3] + 0.6], [pine, sakura, pine], {
     seed: 98,
+    pitch: 3.6,
+    under: 1,
+    soil: false,
   });
   // east of the east coast walk, a strip of pines on the land above the coast's wall
   yield* belt(p, [C.COAST_X[1] + 1.2, 135.8, -21, 0], [pine, pine, keyaki], { seed: 102, pitch: 3.4 });
@@ -293,14 +298,14 @@ export const GARDEN_WALK = [(GARDEN[0] + GARDEN[1]) / 2 - 0.75, (GARDEN[0] + GAR
 export function* garden(pv, p) {
   const [x0, x1, , z1] = GARDEN,
     [w0, w1] = GARDEN_WALK,
-    pad = [w0 - 2.6, w1 + 2.6, z1 - 3.4, z1 - 0.4];
+    pad = G.pergola;
   // from the row's kerb, through the verge's opening
   pale(pv, [w0, w1, ROW[3], pad[2]]);
   for (const x of [w0, w1 - BW]) edge(pv, [x, x + BW, ROW[3], pad[2]], [BW, 0.15]);
   kerbRect(p, [w0, w1, ROW[3] + 1.1, pad[2]], { sides: 'we' });
   pv.field(pad, { pattern: 'bond', module: [0.6, 0.3], tones: GRANITE.mid, origin: [pad[0], pad[2]] });
   for (const z of [pad[2], pad[3] - BW]) edge(pv, [pad[0], pad[1], z, z + BW], [0.15, BW]);
-  kerbRect(p, pad, { gaps: { n: [[w0, w1]] } });
+  kerbRect(p, pad, { gaps: { n: [[w0, w1]], e: [[17, 18.8]] } });
   // the pergola: four posts, two beams along it, slats across
   for (const x of [pad[0] + 0.3, pad[1] - 0.3])
     for (const z of [pad[2] + 0.3, pad[3] - 0.3]) p.box('#8f969e', 0.14, 2.3, 0.14, x, 0, z);
@@ -308,19 +313,16 @@ export function* garden(pv, p) {
     p.box('#7d858e', pad[1] - pad[0] - 0.2, 0.12, 0.12, (pad[0] + pad[1]) / 2, 2.3, z);
   for (let x = pad[0] + 0.4; x < pad[1] - 0.3; x += 0.45)
     p.box('#9aa0a6', 0.06, 0.06, pad[3] - pad[2] - 0.2, x, 2.42, (pad[2] + pad[3]) / 2, { cast: false });
-  for (const [x, f] of [
-    [pad[0] + 0.7, Math.PI / 2],
-    [pad[1] - 0.7, -Math.PI / 2],
-  ])
-    bench(p, x, (pad[2] + pad[3]) / 2, f, { len: 1.6 });
+  bench(p, pad[0] + 0.7, (pad[2] + pad[3]) / 2, Math.PI / 2, { len: 1.6 });
+  bench(p, 90.4, pad[3] - 0.5, Math.PI, { len: 1.6 });
   yield;
   // the drifts, and a cherry in each
   drift(p, [x0 + 0.4, pad[0] - 0.4, ROW[3] + 1.6, z1 - 0.3], { back: 's', seed: 41 });
   yield;
-  drift(p, [pad[1] + 0.4, x1 - 0.4, ROW[3] + 1.6, z1 - 0.3], { back: 's', seed: 45 });
+  drift(p, [pad[1] + 0.4, x1 - 0.4, ROW[3] + 1.6, 16.2], { back: 'n', seed: 45 });
   yield;
   sakura(p, (x0 + pad[0]) / 2, ROW[3] + 3.6, 1.0, 42);
-  sakura(p, (pad[1] + x1) / 2, ROW[3] + 3.9, 0.95, 43);
+  sakura(p, 95.2, 14.4, 0.85, 43);
   pine(p, (x0 + pad[0]) / 2 + 0.8, z1 - 1.4, 0.8, 44);
   yield;
 }
