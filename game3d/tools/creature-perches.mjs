@@ -33,7 +33,7 @@ let drift = 0;
 // in the page: survey the place (stored null), or re-test stored points
 const survey = async ([STEP, MARGIN, stored, strict, solidModule]) => {
   const THREE = await import('three');
-  const { perchSolidHit } = await import(solidModule);
+  const { perchSolidHit, perchWaterHit } = await import(solidModule);
   const g = globalThis.__game,
     P = g.place,
     nav = P.nav;
@@ -69,10 +69,11 @@ const survey = async ([STEP, MARGIN, stored, strict, solidModule]) => {
       h.object.getColorAt(h.instanceId, ic);
       c.multiply(ic);
     }
-    return { y: p.y, up: n.y, r: c.r, g: c.g, b: c.b };
+    return { y: p.y, up: n.y, r: c.r, g: c.g, b: c.b, water: perchWaterHit(h) };
   };
   const sort = (x, z, h) => {
     if (!h || h.up < 0.9) return null;
+    if (h.water) return h.y < -0.08 ? 'water' : null;
     const walk = nav.free(x, z, 0.12);
     if (walk && h.y > -0.05 && h.y < 0.5) return 'ground';
     if (walk) return null;

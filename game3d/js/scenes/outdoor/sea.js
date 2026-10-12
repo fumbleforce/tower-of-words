@@ -142,7 +142,9 @@ void main(){
 }`;
 
 export function seaMaterial(uniforms) {
-  return new THREE.ShaderMaterial({ vertexShader: SEA_VERT, fragmentShader: SEA_FRAG, uniforms });
+  const material = new THREE.ShaderMaterial({ vertexShader: SEA_VERT, fragmentShader: SEA_FRAG, uniforms });
+  material.userData.seaSurface = true;
+  return material;
 }
 
 // A coast has no monorail shadows. Keep the same wave/foam/glint material with those features off-island.
