@@ -6,7 +6,7 @@ const width = +(process.argv[2] || 1366), height = width < 700 ? 844 : 860;
 const base = process.env.BASE_URL || 'http://127.0.0.1:8771/.claude/worktrees/codex-crowd-alive/game3d';
 const out = new URL(`../shots/crowd-social/${width}/`, import.meta.url).pathname;
 fs.mkdirSync(out, { recursive: true });
-const results = [];
+const results = [], topEdge = process.argv.includes('--top-edge');
 await withBrowserJob('crowd-social-' + width, async browser => {
   const page = await browser.newPage({ viewport: { width, height }, isMobile: width < 700, hasTouch: width < 700 });
   const errors = [];
@@ -54,6 +54,43 @@ await withBrowserJob('crowd-social-' + width, async browser => {
   assert.match(await page.locator('.crowd-reaction .gx').first().evaluate(el => globalThis.getComputedStyle(el).filter), /blur\(/);
   await page.waitForTimeout(4000);
   assert(await page.locator('.crowd-reaction').isVisible(), 'reaction must not expire on a timer');
+  if (topEdge) {
+    const placements = [];
+    for (const targetY of [40, 130, 230]) {
+      await page.evaluate(async targetY => {
+        const g = globalThis.__game, r = globalThis.__crowdFixture.r;
+        const THREE = await import('three'), v = new THREE.Vector3();
+        const screenY = () => { r.root.getWorldPosition(v); v.y += 1.35 * (g.place.charScale || 1); v.project(g.place.camera); return (1 - v.y) * globalThis.innerHeight / 2; };
+        // A pedestrian continues away while Eric stays put: retain the actual native-jump reaction.
+        for (let i = 0; i < 5; i++) {
+          const y = screenY(); r.root.position.z += 0.1; const slope = (screenY() - y) / 0.1; r.root.position.z -= 0.1;
+          if (Math.abs(slope) < 0.01) throw Error('Cannot frame upper-edge speaker');
+          r.root.position.z += (targetY - y) / slope;
+        }
+      }, targetY);
+      await shot('top-edge-' + targetY);
+      const placement = await page.evaluate(() => {
+        const b = globalThis.document.querySelector('.crowd-reaction').getBoundingClientRect();
+        const blockers = [...globalThis.document.querySelectorAll('#hud, #goal, #goal2, #goalArrow, #minimap, #jumpBtn, #sayBtn, #giveBtn')].filter(el => {
+          const r = el.getBoundingClientRect(); return r.width && r.height && globalThis.getComputedStyle(el).visibility !== 'hidden';
+        }).map(el => {
+          const r = el.getBoundingClientRect();
+          return { id: el.id, overlap: Math.max(0, Math.min(b.right,r.right)-Math.max(b.left,r.left)) * Math.max(0,Math.min(b.bottom,r.bottom)-Math.max(b.top,r.top)) };
+        });
+        return { box: { x: b.x, y: b.y, width: b.width, height: b.height }, blockers };
+      });
+      assert(placement.blockers.every(b => b.overlap === 0), JSON.stringify(placement));
+      placements.push({ targetY, ...placement });
+    }
+    await page.locator('.crowd-reaction').tap();
+    assert(await page.locator('.crowd-reaction').isHidden());
+    assert.deepEqual(errors, []);
+    fs.writeFileSync(out + 'top-edge-result.json', JSON.stringify(placements, null, 2));
+    results.push({ topEdge: placements });
+    await page.close();
+    return;
+  }
+
   await page.locator('.crowd-reaction').click();
   assert(await page.locator('.crowd-reaction').isHidden());
   results.push({ jump: `${width < 700 ? 'touch Jump' : 'Space'} input, blurred persistent reaction, dismiss works` });

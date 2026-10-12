@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { heardHTML } from '../ui/dialogue-text.js';
 import { voice } from '../ui.js';
 import { logLine } from '../ui/backlog.js';
+import { pinTipPosition } from '../ui/pin-tip-layout.js';
 
 // One readable response at a time. It stays until dismissed or the player leaves the person.
 export function reactionView(game, place) {
@@ -66,10 +67,26 @@ export function reactionView(game, place) {
     const stage = document.getElementById('ui').getBoundingClientRect();
     const x = ((v.x + 1) * stage.width) / 2,
       y = ((1 - v.y) * stage.height) / 2;
-    const half = box.offsetWidth / 2 + 14,
-      top = box.offsetHeight + 14;
-    box.style.left = `${Math.max(half, Math.min(stage.width - half, x))}px`;
-    box.style.top = `${Math.max(top, Math.min(stage.height - 170, y))}px`;
+    const width = box.offsetWidth,
+      height = box.offsetHeight;
+    const avoid = [];
+    for (const el of document.querySelectorAll(
+      '#hud, #goal, #goal2, #goalArrow, #minimap, #jumpBtn, #sayBtn, #giveBtn',
+    )) {
+      const b = el.getBoundingClientRect();
+      if (b.width && b.height && getComputedStyle(el).visibility !== 'hidden')
+        avoid.push({ x0: b.left, y0: b.top, x1: b.right, y1: b.bottom });
+    }
+    const anchor = { x0: stage.left + x, x1: stage.left + x, y0: stage.top + y, y1: stage.top + y };
+    const at = pinTipPosition(
+      anchor,
+      width,
+      height,
+      { x0: stage.left + 6, y0: stage.top + 6, x1: stage.right - 6, y1: stage.bottom - 6 },
+      avoid,
+    );
+    box.style.left = `${at.x - stage.left + width / 2}px`;
+    box.style.top = `${at.y - stage.top + height}px`;
   }
   return {
     show,
