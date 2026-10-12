@@ -24,7 +24,7 @@ await withBrowserJob(`forecourt-trees-${width}`, async browser => {
     const bed = await page.evaluate(async () => (await import(new URL('js/scenes/forecourt/plan.js', globalThis.location.href).href)).NORTH_BED);
     const [x0, x1, z0, z1] = bed, z = (z0 + z1) / 2, x = (x0 + x1) / 2 + 3;
     for (const [name, eye, at] of [
-      ['user-angle', [x - 2.6, 2.4, z + 5], [x - 1.5, 1.3, z]],
+      ['user-angle', phone ? [x - 1, 2.5, z + 8] : [x - 2.6, 2.4, z + 5], [phone ? x : x - 1.5, 1.3, z]],
       ['joins-front', [x + 0.2, 1.6, z + 3], [x, 1.5, z]],
       ['joins-side', [x - 2.1, 1.4, z + 0.5], [x, 1.5, z]],
       ['roots-curb', [x - 0.7, 2.1, z + 2.3], [x, 0.4, z]],
