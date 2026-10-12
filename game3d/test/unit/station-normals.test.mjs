@@ -26,7 +26,7 @@ Object.assign(globalThis, {
   },
 });
 const THREE = await import('../../vendor/three/three.module.js');
-const { setStationModel, stationModel } = await import('../../js/scenes/station-model.js');
+const { setStationModel, stationModel, approachGeometry } = await import('../../js/scenes/station-model.js');
 
 test('station model prepares finite outward normals before any place uses its shadow receivers', () => {
   const geometry = new THREE.BoxGeometry(4, 2, 3);
@@ -44,5 +44,42 @@ test('station model prepares finite outward normals before any place uses its sh
   const authored = normal;
   setStationModel({ st_walls: geometry });
   assert.equal(geometry.attributes.normal, authored, 'preserve supplied normals');
+  setStationModel(null);
+});
+
+test('coastal approach preserves the running top while fitting a clear beam and continuous grounded supports', async () => {
+  const fs = await import('node:fs');
+  const { GLTFLoader } = await import('../../vendor/loaders/GLTFLoader.js');
+  const bytes = fs.readFileSync(new URL('../../assets/station/station.glb', import.meta.url));
+  const gltf = await new GLTFLoader().parseAsync(
+    bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength),
+    '',
+  );
+  const nodes = {};
+  gltf.scene.traverse((object) => {
+    if (object.isMesh) nodes[object.name] = object.geometry;
+  });
+  setStationModel(nodes);
+  const beamH = 0.72,
+    top = 2.34;
+  const [beam, supports] = approachGeometry(
+    [
+      [0, 0],
+      [0, 3],
+    ],
+    top,
+    [0],
+    beamH,
+  );
+  beam.computeBoundingBox();
+  supports.computeBoundingBox();
+  assert.ok(Math.abs(beam.boundingBox.max.y - top) < 1e-6, 'train running height stays fixed');
+  assert.ok(Math.abs(beam.boundingBox.min.y - (top - beamH)) < 1e-6, 'beam underside clears the native player capsule');
+  assert.ok(beam.boundingBox.min.y > 1.2 * 1.18 + 0.16, 'walking capsule and headroom fit under the approach');
+  assert.ok(Math.abs(supports.boundingBox.min.y) < 1e-6, 'column remains grounded');
+  assert.ok(Math.abs(supports.boundingBox.max.y - (top - beamH + 0.03)) < 1e-6, 'bearing pad meets the beam underside');
+  assert.ok(supports.boundingBox.max.y > beam.boundingBox.min.y, 'no support gap');
+  beam.dispose();
+  supports.dispose();
   setStationModel(null);
 });

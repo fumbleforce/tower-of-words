@@ -183,6 +183,9 @@ export function stationGlass(node) {
 // segments of ap_beam, and at each `piers` index a column (ap_col) under a hammerhead (ap_head), turned to the beam.
 export function approachGeometry(points, top, piers, beamH) {
   if (!parts?.ap_beam) return null;
+  parts.ap_beam.computeBoundingBox();
+  const authoredTop = parts.ap_beam.boundingBox.max.y,
+    authoredDepth = authoredTop - parts.ap_beam.boundingBox.min.y;
   const beam = [],
     heads = [],
     m = new THREE.Matrix4(),
@@ -193,8 +196,8 @@ export function approachGeometry(points, top, piers, beamH) {
       [bx, bz] = points[i + 1],
       len = Math.hypot(bx - ax, bz - az);
     q.setFromAxisAngle(UP, Math.atan2(bx - ax, bz - az));
-    m.compose(new THREE.Vector3(ax, top, az), q, new THREE.Vector3(1, 1, len + 0.02));
-    beam.push(parts.ap_beam.clone().applyMatrix4(m));
+    m.compose(new THREE.Vector3(ax, top, az), q, new THREE.Vector3(1, beamH / authoredDepth, len + 0.02));
+    beam.push(parts.ap_beam.clone().translate(0, -authoredTop, 0).applyMatrix4(m));
   }
   for (const i of piers) {
     const [ax, az] = points[i],

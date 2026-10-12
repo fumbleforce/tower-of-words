@@ -35,7 +35,7 @@ const SHED = (() => {
 })();
 export const DECK = 2.5, // platform level (the monorail car's floor)
   BEAM_TOP = DECK - 0.16, // the beam just under the car floor, as on the ride (train/world.js BEAM_TOP)
-  BEAM_H = 0.96,
+  BEAM_H = 0.72, // a slimmer approach section leaves true pedestrian clearance at the coastal promenade
   EDGE = 1.38, // the platforms' edges from the beam's centre (the car is 2.6 wide)
   BEAM2 = -6.36, // the other way's beam, west of the car's (train/world.js BEAM2_Z over CHUNKS.train.scale)
   CROSS = 2.4; // the cross deck's depth at the shed's north end; the beams end against it
