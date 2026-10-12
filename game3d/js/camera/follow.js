@@ -128,17 +128,22 @@ export function followCamera(game, place) {
       const collisionStart = performance.now();
       lifted.copy(desired);
       api.blocked = obstruct(pivot, desired);
+      let liftFraming = false;
       // A narrow outdoor passage can still fit the third-person lens above its
       // compressed arm. Opted-in districts try that clearance before fading Eric.
       if (api.blocked && place.followCameraLift && desired.distanceTo(pivot) < 2.1 * (place.charScale || 1)) {
         lifted.y += place.followCameraLift;
         obstruct(pivot, lifted);
-        if (lifted.distanceToSquared(pivot) > desired.distanceToSquared(pivot)) desired.copy(lifted);
+        if (lifted.distanceToSquared(pivot) > desired.distanceToSquared(pivot)) {
+          desired.copy(lifted);
+          target.copy(pivot);
+          liftFraming = true;
+        }
       }
       api.collisionMs = performance.now() - collisionStart;
       api.distance = desired.distanceTo(pivot);
       camera.position.copy(desired);
-      camera.fov = 50;
+      camera.fov = liftFraming ? 60 : 50;
       camera.near = 0.04;
       // the far view (look/sky.js): the far plane just past where the haze is whole, so the island's edge never shows
       if (place.farView) camera.far = place.farView.far;
