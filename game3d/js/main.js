@@ -13,6 +13,7 @@ import { installMetrics } from './perf/metrics.js';
 import { createView } from './perf/view.js';
 import { guardedLoop } from './perf/gl-guard.js';
 import { softSeparate, frameDt } from './move.js';
+import { movementClockScale } from './movement/clock-scale.js';
 import { scanTargets } from './gameplay/targeting.js';
 import { installSteer } from './movement/steer.js';
 import { installJump } from './movement/jump-input.js';
@@ -348,10 +349,9 @@ installPresentationHooks(game, { ...targets, canvas, TS });
 installGesturesHooks(game, targets);
 installKotodamaHooks(game, { renderer, objsOf });
 installProgressionHooks(game, { travel });
-
 let lastT = performance.now();
 let frames = 0;
-// stills and frame sequences (?cap): advance game time exactly, independent of how slow the renderer is
+// Deterministic time for stills (?cap).
 if (CAP)
   window.__advance = (sec) => {
     for (let t = sec; t > 1e-6; t -= 1 / 30) step(Math.min(1 / 30, t));
@@ -360,13 +360,13 @@ const frame = guardedLoop(tick, view.due); // an error never stops it; due: the 
 function tick() {
   followCamera.refresh();
   const now = performance.now();
-  if (game.mapOpen) return void (lastT = now); // the map covers the screen: nothing drawn (ui/map/view.js)
+  if (game.mapOpen) return void (lastT = now); // The map covers the screen.
   if (game.paused) {
     lastT = now;
     render();
     return;
   }
-  let dt = frameDt(now - lastT, TS * (game.hurry ? HURRY : 1));
+  let dt = frameDt(now - lastT, movementClockScale(game, TS, HURRY));
   lastT = now;
   if (!CAP || window.__run)
     while (dt > 1e-4) {
