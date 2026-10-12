@@ -301,6 +301,8 @@ function pavilion(p, glow, signs, lights) {
 // builds it all: the pavilion into p (Parts, casts), the deck, the pool and the fence into q (Parts that doesn't),
 // pv (a paver), signs (a signSet), lights (a lightSet); root takes the lit glass. Returns the evening switch.
 export function* poolSteps(root, p, q, pv, signs, lights, { interior = false } = {}) {
+  // The rendered water overlays combined deck/landscape meshes. Those covered faces are not a walking floor.
+  root.userData.traversalVoids = [{ min: [PX - PW / 2, -100, PZ - PL / 2], max: [PX + PW / 2, 0.2, PZ + PL / 2] }];
   deck(q, pv, signs);
   const floodlights = poolFloodlights(root, p);
   yield;

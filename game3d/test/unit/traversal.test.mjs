@@ -79,3 +79,14 @@ test('geometry attached after a place loads joins the physical index',()=>{
  p.add(-1,1,2,.1,2,1);t.refresh();
  assert.equal(t.free(-1,2,-1.4,2,0,1,false),false);
 });
+
+test('a pool aperture removes covered deck/water support while coping outside remains solid',()=>{
+ const p=world();p.space.userData.traversalVoids=[{min:[-.8,-20,1],max:[.8,.2,3]}];
+ const t=createTraversal(p);
+ assert.equal(t.support(0,2,1),null);
+ assert.ok(Math.abs(t.support(1,2,1))<1e-6);
+});
+test('render-batched originals on unsigned layer31 retain physical geometry',()=>{
+ const p=world(),door=p.add(-1,1,2,.1,2,1);door.layers.set(31);
+ assert.equal(createTraversal(p).free(-1,2,-1.4,2,0,1,false),false);
+});

@@ -15,7 +15,9 @@ export function createTraversal(place, excluded = []) {
     bins = new Map();
   const cell = 2;
   const key = (x, z) => `${x},${z}`;
-  const sources = new Map();
+  const sources = new Map(),
+    voidSources = new Set(),
+    voids = [];
   function indexEntry(entry) {
     for (const k of entry.keys || []) bins.get(k)?.delete(entry);
     broad.delete(entry);
@@ -37,12 +39,19 @@ export function createTraversal(place, excluded = []) {
   }
   function present(object) {
     for (let p = object; p; p = p.parent) {
+      if (skip.has(p)) return false;
       if (!p.visible && !p.userData.occluder && !p.userData.followEnclosure) return false;
       if (p === root) return true;
     }
     return false;
   }
   function collect(object) {
+    if (object.userData.traversalVoids && !voidSources.has(object)) {
+      voidSources.add(object);
+      const matrix = new THREE.Matrix4().multiplyMatrices(inverse, object.matrixWorld);
+      for (const v of object.userData.traversalVoids)
+        voids.push(new THREE.Box3(new THREE.Vector3(...v.min), new THREE.Vector3(...v.max)).applyMatrix4(matrix));
+    }
     if (sources.has(object)) return;
     if (
       !object.isMesh ||
@@ -51,7 +60,7 @@ export function createTraversal(place, excluded = []) {
       (object.raycast !== THREE.Mesh.prototype.raycast && object.raycast !== THREE.InstancedMesh.prototype.raycast)
     )
       return;
-    if (!(object.layers.mask & 1) && object.layers.mask !== 1 << 31) return;
+    if (!(object.layers.mask & (1 | (1 << 31)))) return;
     for (let p = object; p; p = p.parent) if (skip.has(p) || p.userData.noTraversal) return;
     const materials = Array.isArray(object.material) ? object.material : [object.material];
     const glass = materials.every(
@@ -89,6 +98,12 @@ export function createTraversal(place, excluded = []) {
   root.traverse(collect);
   let discovery = -Infinity;
   function refresh() {
+    for (const actor of [
+      ...Object.values(place.people || {}),
+      ...Object.values(place.extras || {}),
+      ...(place.crowd || []),
+    ])
+      if (actor.root) skip.add(actor.root);
     if (performance.now() - discovery > 250) {
       root.updateWorldMatrix(true, true);
       root.traverse(collect);
@@ -158,6 +173,7 @@ export function createTraversal(place, excluded = []) {
   function supportPoint(x, z, ceiling, depth = 8) {
     const found = hits(x, ceiling, z, new THREE.Vector3(0, -1, 0), depth);
     for (const hit of found) {
+      if (voids.some((v) => v.containsPoint(hit.point))) continue;
       if (hit.faceIndex < (hit.object.geometry.userData.traversalSkipFaces || 0)) continue;
       normal.copy(hit.face.normal).applyNormalMatrix(normalMatrix.getNormalMatrix(hit.object.matrixWorld));
       if (normal.y > 0.65) return hit.point.y;

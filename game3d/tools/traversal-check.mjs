@@ -37,10 +37,26 @@ await withBrowserJob('traversal-' + width, async browser => {
  await page.keyboard.up('KeyW');
  if(width<700) await page.mouse.up(); else await page.keyboard.up('Space');
  await page.waitForTimeout(700);
- const result=await page.evaluate(()=>({p:globalThis.__game.player.root.position.toArray(),trace:globalThis.__trace,h:globalThis.__game.jump.height,air:globalThis.__game.jump.air,near:globalThis.__game.near,errors:globalThis.document.querySelector('.err')?.textContent}));
+ const result=await page.evaluate(()=>({p:globalThis.__game.player.root.position.toArray(),h:globalThis.__game.jump.height,air:globalThis.__game.jump.air,near:globalThis.__game.near,errors:globalThis.document.querySelector('.err')?.textContent}));
  console.log('bench',JSON.stringify(result));
  assert.ok(result.h>0.25 && result.h<0.45 && !result.air,'jump must land on the real bench');
  await page.screenshot({path:out+width+'-bench.png'});
+ if(process.env.CHECK_SAVE) {
+  await page.keyboard.press('F5');
+  await page.waitForFunction(()=>JSON.parse(globalThis.localStorage.getItem('amakawa-slot-quick')||'null')?.data?.surface?.y>.25);
+  const saved=await page.evaluate(()=>JSON.parse(globalThis.localStorage.getItem('amakawa-slot-quick')).data.surface);
+  console.log('saved bench',JSON.stringify(saved));
+  await page.evaluate(()=>globalThis.history.replaceState(null,'','index.html?q=0'));
+  const reloaded=page.waitForEvent('load');
+  await page.keyboard.press('F9');
+  await page.locator('#ask .yes').click({timeout:2500}).catch(()=>{});
+  await reloaded;
+  await page.waitForFunction(()=>!globalThis.document.querySelector('#boot')&&!globalThis.__game?.busy&&globalThis.__game?.jump?.height>.25,null,{timeout:180000});
+  const restored=await page.evaluate(()=>({x:globalThis.__game.player.root.position.x,z:globalThis.__game.player.root.position.z,y:globalThis.__game.jump.height}));
+  assert.ok(Math.hypot(restored.x-saved.x,restored.z-saved.z)<.05&&Math.abs(restored.y-saved.y)<.05,'real quickload restores supported bench position');
+  console.log('PASS F5/F9 bench save and reload',JSON.stringify({saved,restored}));
+ }
+
  const scan=await page.evaluate(async()=>{
   const {local}=await import('./js/scenes/shotengai/plan.js');
   const {createTraversal}=await import('./js/movement/traversal.js');
@@ -72,7 +88,7 @@ await withBrowserJob('traversal-' + width, async browser => {
  }
  const beach=await page.evaluate(async()=>{
   const {local}=await import('./js/scenes/shotengai/plan.js');
-  return {from:local([12,31.75]),to:local([12,34.2])};
+  return {from:local([12,31.75]),to:local([12,33.1])};
  });
  await walkAxis(beach.from,[-1,0],beach.to,true);
  const landedBeach=await page.evaluate(()=>({p:globalThis.__game.player.root.position.toArray(),h:globalThis.__game.jump.height}));

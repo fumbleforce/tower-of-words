@@ -16,7 +16,7 @@ import * as THREE from 'three';
 import { dust, jumpSound, landSound } from './jump-fx.js';
 import { RUN } from './walker.js';
 import { createTraversal } from './traversal.js';
-import { installJumpPose } from './jump-pose.js';
+import { installJumpBodies } from './jump-bodies.js';
 
 const HIGH = 0.78, // the top of a held jump, m (times the character scale)
   RISE_T = 0.34, // and how long it takes to get there
@@ -34,12 +34,21 @@ const HIGH = 0.78, // the top of a held jump, m (times the character scale)
 export function createJump(game, { shadow, canJump = () => true, onAir, onVoid } = {}) {
   const P = game.player,
     root = P.root;
-  // the group the body rises in: everything on him but his shadow
-  const hop = new THREE.Group();
-  hop.name = 'jump';
-  for (const c of [...root.children]) if (c !== shadow) hop.add(c);
-  root.add(hop);
-  const jumpPose = installJumpPose(hop, P);
+  const bodies = installJumpBodies(P, shadow);
+  let { hop, pose: jumpPose } = bodies.sync();
+  function syncBody() {
+    const body = bodies.sync();
+    if (!body.changed) return;
+    hop = body.hop;
+    jumpPose = body.pose;
+    s.air = false;
+    s.h = ground;
+    s.vy = 0;
+    count = 0;
+    salto = false;
+    groundedFor = Infinity;
+    pose();
+  }
   let salto = false,
     count = 0,
     groundedFor = Infinity;
@@ -68,7 +77,9 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
       physical = place
         ? createTraversal(place, [
             root,
+            game.mioNpc?.root,
             ...Object.values(place.people || {}).map((p) => p.root),
+            ...Object.values(place.extras || {}).map((p) => p.root),
             ...(place.crowd || []).map((p) => p.root),
           ])
         : null;
@@ -86,6 +97,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
   };
 
   function takeoff() {
+    syncBody();
     const k = scale();
     count = groundedFor <= 0.5 ? (count % 3) + 1 : 1;
     groundedFor = 0;
@@ -122,6 +134,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
     if (s.buffer > 0) takeoff(); // pressed just before landing: straight back up
   }
   function reset() {
+    syncBody();
     jumpPose.reset();
     salto = false;
     count = 0;
@@ -202,6 +215,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
     // something else took him (a scene, a trip, a seat): back on the ground, no squash left over
     reset,
     update(dt) {
+      syncBody();
       if (game.busy || P.seated || P.scripted) {
         count = 0;
         groundedFor = Infinity;
@@ -287,7 +301,9 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
       }
       pose();
     },
-    hop,
+    get hop() {
+      return hop;
+    },
   };
   return api;
 }
