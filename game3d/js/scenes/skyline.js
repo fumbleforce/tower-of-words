@@ -153,6 +153,12 @@ export function* skylineSteps(
       if (dist <= SHADOW_R) casts = true;
       for (const e of es) facePatch(wb, e.a, e.d, e.n, 0, e.L, 0, h, 0, null);
       flat(roofNear, poly, h, null);
+      // A low plinth and floor ledges give nearby residential blocks depth in low street views.
+      for (const e of es) {
+        edgeBox(bands, e.a, e.d, e.n, 0, e.L, 0.02, 0.16, -0.01, 0.08, null);
+        for (let floor = 1; floor < storeys; floor++)
+          edgeBox(bands, e.a, e.d, e.n, 0, e.L, floor * fh - 0.07, floor * fh + 0.04, -0.01, 0.09, null);
+      }
       // parapet all round, a little plant on the roof
       for (const e of es) edgeBox(bands, e.a, e.d, e.n, 0, e.L, h, h + 0.3, -0.14, 0, null);
       for (let i = 0; i < 3; i++) {

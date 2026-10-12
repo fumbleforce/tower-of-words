@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { rng } from '../outdoor/parts.js';
+import { pavedGround } from './planting-ground.js';
 
 // Grass blades and a few flowers over the lawn and the planted ground inside bounds ([x0, x1, z0, z1] in root's
 // frame), thicker in a ring round each tree's roots; avoid: [x0, x1, z0] a path's strip south of z0 left bare;
@@ -11,6 +12,7 @@ export function meadowDetail(
 ) {
   trees ??= (root.userData.dioramaPlanting || []).filter((plant) => plant.kind === 'tree');
   const [x0, x1, z0, z1] = bounds;
+  const paved = pavedGround(root, bounds);
   // the trees in 4 m cells: a blade looks only at its own cell and the ones round it (the ring and the flowers reach
   // about two tree sizes)
   const cells = new Map(),
@@ -82,6 +84,7 @@ export function meadowDetail(
         .addScaledVector(f.b, u * (1 - v))
         .addScaledVector(f.c, u * v);
       if (p.x < x0 || p.x > x1 || p.z < z0 || p.z > z1) continue;
+      if (paved(p)) continue;
       if (avoid && p.x > avoid[0] && p.x < avoid[1] && p.z > avoid[2]) continue;
       // A continuous lawn mesh can run under a building whose floor is revealed by a cutaway.
       if (exclude.some(([a, b, c, d]) => p.x >= a && p.x <= b && p.z >= c && p.z <= d)) continue;

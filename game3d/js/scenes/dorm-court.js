@@ -30,6 +30,7 @@ import { groundPatches, TOWN } from './town.js';
 import { lightRig } from '../kit/light/rig.js';
 import { DORM_COURT } from '../kit/light/looks.js';
 import { mergeStaticSteps } from './merge-static.js';
+import { bandSteps } from './bands.js';
 import * as PL from './dorm-court/plan.js';
 
 const { HALL, FRONT_Z, BACK_Z, DOOR_X, PASS_X, BLOCK_Z, NEAR, WEST, EAST } = PL;
@@ -49,7 +50,11 @@ export function* dormCourtSteps({ phaseOf } = {}) {
     scene = new THREE.Scene();
   scene.background = new THREE.Color(DORM_COURT.day.bg); // the rig sets it per period
   scene.add(root);
-  const light = lightRig(scene, { looks: DORM_COURT, phaseOf, shadow: { box: 13, normalBias: 0.06 } }),
+  const light = lightRig(scene, {
+      looks: DORM_COURT,
+      phaseOf,
+      shadow: { box: 13, normalBias: 0.06 },
+    }),
     sun = light.sun;
 
   const nav = new Nav(WEST + 0.1, EAST - 0.2, BACK_Z - 1.2, PL.OUT_Z, 0.1); // the court, and the way out through the gate (dorm-court/court.js)
@@ -89,15 +94,16 @@ export function* dormCourtSteps({ phaseOf } = {}) {
   root.add(cluster);
   const dorms = yield* clusterSteps(cluster);
   yield;
+  const neighbours = yield* bandSteps(root, 'dorm_court');
   // the town around, from the island layout; Eric's block and the cluster are built above
   // r9 (the director's house) stands where the court's street runs on past the dorm street's end: left out here
   const sky = yield* skylineSteps(root, 'dorm_court', {
     layout,
-    skip: ['dorm_1', 'r9', ...CLUSTER_IDS],
+    skip: ['dorm_1', 'r9', ...CLUSTER_IDS, ...neighbours.ids],
     land: coastLand(layout.COAST.line),
     landColor: TOWN.grass,
   });
-  light.glow.add(lit.glows, dorms.glows, sky.glows); // what lights up after dark
+  light.glow.add(lit.glows, dorms.glows, sky.glows, neighbours.glows); // what lights up after dark
   return {
     root,
     scene,
@@ -116,8 +122,18 @@ export function* dormCourtSteps({ phaseOf } = {}) {
     passageMouth: [PASS_X, BACK_Z],
     passageIn: [PASS_X, BACK_Z - 0.75],
     mailbox, // 203's: its flap, the flyer inside, where it is (dorm-court/hall.js)
-    bounds: { west: WEST, east: EAST, front: FRONT_Z, back: BACK_Z, near: NEAR, hall: HALL },
+    bounds: {
+      west: WEST,
+      east: EAST,
+      front: FRONT_Z,
+      back: BACK_Z,
+      near: NEAR,
+      hall: HALL,
+    },
     camera: { elev: 46, fov: 24 },
-    update() {},
+    cards: neighbours.cards,
+    update() {
+      neighbours.update(sun);
+    },
   };
 }

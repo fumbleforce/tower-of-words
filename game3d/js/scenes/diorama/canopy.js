@@ -47,8 +47,7 @@ export function addCanopyCore(root, faces, sun, phone = false) {
   for (const face of faces)
     for (const p of [face.a, face.b, face.c]) {
       all.push(p.x, p.y, p.z);
-      // the undersides face the ground, which no camera here looks up from: they only cast (below)
-      if (face.n.y < -0.5) continue;
+      // Follow cameras and jumping players see the undersides. Keep the whole closed crown.
       vertices.push(p.x, p.y, p.z);
       normals.push(face.n.x, face.n.y, face.n.z);
     }
@@ -60,8 +59,9 @@ export function addCanopyCore(root, faces, sun, phone = false) {
     shape = clustered(coreGeometry, 0.2);
     shape.computeVertexNormals();
   }
+  shape.deleteAttribute('normal');
   const core = new THREE.Mesh(mergeVertices(shape), new THREE.MeshStandardMaterial({ color: '#365020', roughness: 1 }));
-  if (phone) core.geometry.computeVertexNormals();
+  core.geometry.computeVertexNormals();
   coreGeometry.dispose();
   if (shape !== coreGeometry) shape.dispose();
   // its shadow from a lighter stand-in on the shadow-only layer (perf/shadow-proxy.js): every crown, corners snapped to

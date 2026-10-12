@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { rng } from '../outdoor/parts.js';
 import { clippedHedge } from './planting-shapes.js';
 import { rootBed } from './root-bed.js';
+import { treeCrown } from './tree-crown.js';
 import { plantGeometry, plantTips, trunkName, hedgeGeometries, lighterPlanting } from '../outdoor/plant-models.js';
 
 function branch(p, from, to, radius, tip) {
@@ -43,17 +44,13 @@ export function streetPlanting({ cover = true, bounds = null, records: keep = tr
         // the Blender-built trunk (outdoor/plant-models.js), a crown mass round the end of every limb: each limb's tip
         // sits in the lower part of its crown, so no limb ends below one
         note({ kind: 'tree', ...plant, baseY });
-        p.geo('#77644b', plantGeometry(name, [x, baseY - 0.01, z], s, ry), { surf: 'bark', shade: true });
-        const spread = species === 'ginkgo' ? 0.47 : species === 'sakura' ? 0.86 : 0.74;
+        p.geo('#77644b', plantGeometry(name, [x, baseY - 0.01, z], s, ry), {
+          surf: 'bark',
+          shade: true,
+        });
         for (const [cx, cy, cz, k] of plantTips(name, [x, baseY, z], s, ry)) {
-          const geometry = new THREE.IcosahedronGeometry(1, 0);
-          geometry.scale(
-            spread * 0.86 * k * s,
-            (species === 'pine' ? 0.22 : 0.36) * Math.max(0.8, k) * s,
-            spread * 0.86 * k * s,
-          );
-          geometry.rotateY(seed * 0.7 + cx);
-          geometry.translate(cx, cy + 0.16 * s, cz);
+          const geometry = treeCrown(species, s, k, seed + cx);
+          geometry.translate(cx, cy + (species === 'pine' ? 0.12 : 0.25) * s, cz);
           p.geo('#557b38', geometry, { surf: 'diorama-tree' });
         }
         return true;
@@ -105,4 +102,7 @@ export function streetPlanting({ cover = true, bounds = null, records: keep = tr
 
 // The island's planting for every builder without its own (outdoor/planting.js): no bounds, no records, and with the
 // phone's lighter models no leaf cards over the bed soil, as in the forecourt.
-export const ISLAND_PLANTING = streetPlanting({ cover: () => !lighterPlanting(), records: false });
+export const ISLAND_PLANTING = streetPlanting({
+  cover: () => !lighterPlanting(),
+  records: false,
+});

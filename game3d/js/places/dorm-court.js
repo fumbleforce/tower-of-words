@@ -25,7 +25,11 @@ const FLAP_OPEN = -1.9, // mailbox 203's flap swung open
 export async function dormCourtPlace(game) {
   // in slices between frames: it's built while the plaza is played. Its light follows the clock (kit/light/), but on
   // day 1 Eric is only here after work, so day 1 is always dusk, as in his dorm building (scenes/dorms.js)
-  const w = await sliced(dormCourtSteps({ phaseOf: (period, day) => (day > 1 ? phaseOf(period) : 'dusk') }));
+  const w = await sliced(
+    dormCourtSteps({
+      phaseOf: (period, day) => (day > 1 ? phaseOf(period) : 'dusk'),
+    }),
+  );
   const cam = new RoomCam(w.camera);
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const bath = dormBath(game);
@@ -165,6 +169,7 @@ export async function dormCourtPlace(game) {
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
     update(dt) {
+      w.update();
       // the gate onto the lane is walkable while the day's story leads out that way (day 2 on: to the east lane)
       const out = game.runner.has('zone:street_exit');
       if (out !== gateOpen) {
@@ -181,7 +186,10 @@ export async function dormCourtPlace(game) {
       gateOpen = false;
     },
     snapshotState() {
-      return { player: snapshotPeople({ eric: game.player }), mailbox: { ...mbState } };
+      return {
+        player: snapshotPeople({ eric: game.player }),
+        mailbox: { ...mbState },
+      };
     },
     restoreState(saved) {
       const m = saved.world?.mailbox;
@@ -200,7 +208,9 @@ export async function dormCourtPlace(game) {
     // in along the lane from the plaza, on the same close framing the plaza let go of (places/edge-walk.js), then
     // left through the gate and up the door axis into the court
     async tripIn(g) {
-      await walkIn(g, cam, w.streetEdge, w.streetGate, Math.PI / 2, { release: false });
+      await walkIn(g, cam, w.streetEdge, w.streetGate, Math.PI / 2, {
+        release: false,
+      });
       const eric = g.player;
       eric.scripted = true;
       cam.closeOn(w.start, 1.3);
@@ -243,6 +253,8 @@ export async function dormCourtPlace(game) {
       eric.setState('idle');
     },
   };
+  w.light.listen(() => w.cards(sim.day, sim.period));
+  w.cards(sim.day, sim.period);
   lightPlace(P, sim.period, sim.day);
   return P;
 }

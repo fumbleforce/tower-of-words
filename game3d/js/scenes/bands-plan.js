@@ -5,6 +5,11 @@
 const M6_LAWN = [[24.4, 31, -45.4, -41], 'keyaki,pine', 3.4];
 
 export const BANDS = {
+  dorm_court: [
+    // The pocket park and its actual shop fronts across the courtyard's gate.
+    // Stop at the street's western curb so the courtyard keeps ownership of its lane.
+    { by: 'eastLane', rects: [[54, 73.04, -30, 10.4]], skip: ['r9'] },
+  ],
   east_coast: [
     // the dorm street's foot and the ramen corner, past the dorm row's west end
     {
@@ -28,7 +33,11 @@ export const BANDS = {
         [[106, 118, -55.4, -52.6], 'pine,maple,keyaki', 3.4],
       ],
     },
-    { by: 'lawn', seed: 320, belts: [[[88, 100.8, -91, -86.4], 'pine,keyaki,maple', 3.6]] },
+    {
+      by: 'lawn',
+      seed: 320,
+      belts: [[[88, 100.8, -91, -86.4], 'pine,keyaki,maple', 3.6]],
+    },
     // the boxes nearest the walks given ground floors and doors: the north residence's back on the field, dorm_6
     // facing the coast walk
     {
@@ -51,7 +60,11 @@ export const BANDS = {
       skip: ['izakaya', 'ramen'],
     },
     // the dorm cluster's belt of pines south of the row's garden, as dorm-court/cluster-yards.js plants it
-    { by: 'lawn', seed: 90, belts: [[[82, 94, 20.6, 25], 'pine,pine,sakura', 3.0]] },
+    {
+      by: 'lawn',
+      seed: 90,
+      belts: [[[82, 94, 20.6, 25], 'pine,pine,sakura', 3.0]],
+    },
   ],
   east_lane: [
     // the sports lane's corner with the north street and the lawns past it, past the north street's top
@@ -80,7 +93,11 @@ export const BANDS = {
     // the onsen path north from the courts walk's end, and its woods
     { by: 'coastWalk', rects: [[102, 113, -84, -50]] },
     // north of the pool's pavilion and the courts' hall
-    { by: 'lawn', seed: 350, belts: [[[50, 86, -99, -95.2], 'pine,keyaki,maple', 3.6]] },
+    {
+      by: 'lawn',
+      seed: 350,
+      belts: [[[50, 86, -99, -95.2], 'pine,keyaki,maple', 3.6]],
+    },
     {
       by: 'fronts',
       blocks: [

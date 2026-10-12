@@ -23,7 +23,7 @@ export const FOG_NEAR = 30,
   PITCH_MIN = -0.12;
 // where the far model begins, from the walk box: its buildings just past where the haze starts, its trees where the
 // haze has softened their low-poly crowns, and a crown's second mass only as far as it shows
-const FAR_FROM = { buildFrom: FOG_NEAR + 4, treesFrom: FOG_NEAR + 16, sideTo: 80 };
+const FAR_FROM = { buildFrom: FOG_NEAR + 4, treesFrom: 10, sideTo: 80 };
 // the mainland, across the bay to the west-south-west in the island's frame (the monorail comes in from it)
 const MAINLAND = [-0.92, 0.38];
 
@@ -103,11 +103,13 @@ function skyNow(place, period) {
 // a place. Only meshes whose box covers the point are cast against.
 const WIDE = 300,
   OWN_Y = -0.1; // the skyline's ground lies at -0.2 to -0.12 (scenes/skyline.js), a place's own at 0 or above
-function ownGround(scene, frame) {
+function ownGround(scene, frame, minY = OWN_Y) {
   scene.updateMatrixWorld(true);
   const list = [];
   scene.traverse((o) => {
     if (!o.isMesh || o.isSkinnedMesh || /^(skyline|far):/.test(o.name) || o.userData.farView) return;
+    // Canopy cores already describe the planted volume. Casting against every leaf instance adds no clearance.
+    if (minY > OWN_Y && o.isInstancedMesh) return;
     const box = new THREE.Box3().setFromObject(o);
     if (box.isEmpty() || box.max.x - box.min.x > WIDE || box.max.z - box.min.z > WIDE) return;
     list.push([o, box]);
@@ -118,13 +120,15 @@ function ownGround(scene, frame) {
     hits = [];
   return (x, z) => {
     frame.localToWorld(p.set(x, 0, z));
-    const under = list.filter(([, b]) => p.x >= b.min.x && p.x <= b.max.x && p.z >= b.min.z && p.z <= b.max.z);
+    const under = list.filter(
+      ([, b]) => b.max.y > minY && p.x >= b.min.x && p.x <= b.max.x && p.z >= b.min.z && p.z <= b.max.z,
+    );
     if (!under.length) return false;
     ray.set(p.set(p.x, 1e3, p.z), down);
     for (const [o] of under) {
       hits.length = 0;
       o.raycast(ray, hits);
-      if (hits.some((h) => frame.worldToLocal(h.point).y > OWN_Y)) return true;
+      if (hits.some((h) => frame.worldToLocal(h.point).y > minY)) return true;
     }
     return false;
   };
@@ -142,7 +146,11 @@ export function* farViewSteps(game, place, name, period) {
   const info = ground.userData.farModel;
   // none on a phone (far-flag.js); nothing of it right at the place's edge, where the follow camera would see it close
   const far = farFollow()
-    ? yield* farModelSteps(info, LAYOUT, { own: ownGround(scene, ground.parent), ...FAR_FROM })
+    ? yield* farModelSteps(info, LAYOUT, {
+        own: ownGround(scene, ground.parent),
+        ownTree: ownGround(scene, ground.parent, 0.55),
+        ...FAR_FROM,
+      })
     : { stats: null };
   for (const m of [far.mesh, far.lit]) if (m) ground.parent.add(m);
   // which way the mainland lies in this chunk's frame

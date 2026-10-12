@@ -19,7 +19,8 @@ import { mat } from '../props.js';
 import { LEAF } from './outdoor/planting.js';
 import { TOWN } from './town.js';
 import { coastLand } from './island-west.js';
-import { HALF_EDGE } from './island-plan.js';
+import { distantMaterial } from './diorama/distant-material.js';
+import { islandTreeSpots } from './distant-trees.js';
 import { SEA } from './skyline.js';
 import {
   tierNow,
@@ -27,7 +28,6 @@ import {
   ccw,
   inside,
   bbox,
-  hash,
   bucket,
   facePatch,
   edgeBox,
@@ -41,66 +41,22 @@ import {
 
 const SEA_Y = -0.5,
   LAND_Y = -0.42,
-  TREE_GAP = 3.4, // the tree grid on the green, in island units
-  WOOD_GAP = 4.2, // and in the north half's woods
   SEA_PAD = 260, // how far the sea runs past the island's land
   LIT = '#e8c89a',
   LIT_GLOW = '#ffc98a';
 const GREENS = ['#4d6b47', '#43603f', '#57704c', '#4a6545'].map((h) => new THREE.Color(h));
 
 // ---------- the trees: spots on the island, once ----------
-let spots = null;
-function treeSpots(L) {
-  if (spots) return spots;
-  const land = coastLand(L.COAST.line),
-    blocked = (L.BUILDINGS || []).map((b) => shapeOf(b)).filter(Boolean),
-    paths = (L.PATHS || []).map((p) => shapeOf(p)).filter(Boolean),
-    free = (x, z) => inside(land, x, z) && !blocked.some((s) => inside(s, x, z)) && !paths.some((s) => inside(s, x, z));
-  spots = [];
-  const add = (x, z, key, big = 1) => {
-    if (!free(x, z)) return;
-    spots.push({
-      x,
-      z,
-      r: (1.1 + hash(key + 'r') * 0.9) * big, // the crown's radius
-      c: Math.floor(hash(key + 'c') * GREENS.length),
-      s: hash(key + 's'),
-    });
-  };
-  // on the green: a jittered grid, a third of it left open as lawn
-  for (const g of L.GREEN || []) {
-    const sh = shapeOf(g);
-    if (!sh) continue;
-    const [x0, x1, z0, z1] = bbox(sh);
-    for (let x = x0; x < x1; x += TREE_GAP)
-      for (let z = z0; z < z1; z += TREE_GAP) {
-        const k = `${g.id}|${Math.round(x)}|${Math.round(z)}`,
-          px = x + hash(k + 'x') * TREE_GAP,
-          pz = z + hash(k + 'z') * TREE_GAP;
-        if (hash(k) < 0.66 && inside(sh, px, pz)) add(px, pz, k);
-      }
-  }
-  // the north half, past its edge: woods in broad clumps with clearings between (the park's lawns)
-  const north = Math.min(...HALF_EDGE.map((p) => p[1])),
-    [lx0, lx1, lz0] = bbox(land);
-  for (let x = lx0; x < lx1; x += WOOD_GAP)
-    for (let z = lz0; z < north + 8; z += WOOD_GAP) {
-      const k = `n|${Math.round(x)}|${Math.round(z)}`,
-        clump = Math.sin(x * 0.07) + Math.cos(z * 0.09 + x * 0.03);
-      if (clump < -0.2 || hash(k) < 0.25) continue;
-      add(x + hash(k + 'x') * WOOD_GAP, z + hash(k + 'z') * WOOD_GAP, k, 1.6);
-    }
-  return spots;
-}
-
 // a tree in the street trees' shape (outdoor/planting.js keyaki, seen from far): a grey trunk from under the far land up
 // into a broad crown of two flattened twenty-faced blobs, flat-shaded, at (x, z) in the chunk's frame; r is the crown's
 // radius. The trunk starts below LAND_Y so it meets whichever ground lies over it (the far land or the skyline's).
 const CANOPY = new THREE.IcosahedronGeometry(1, 0).toNonIndexed();
+const NEAR_CANOPY = new THREE.IcosahedronGeometry(1, 1).toNonIndexed();
 const TRUNK = new THREE.CylinderGeometry(0.62, 1, 1, 5, 1, true).translate(0, 0.5, 0).toNonIndexed();
 const BARK = new THREE.Color(LEAF.barkGrey);
 function put(b, geo, [sx, sy, sz], [x, y, z], color, turn = 0) {
   const P = geo.attributes.position,
+    normals = geo.attributes.normal,
     cs = Math.cos(turn),
     sn = Math.sin(turn),
     tri = [new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()],
@@ -113,25 +69,30 @@ function put(b, geo, [sx, sy, sz], [x, y, z], color, turn = 0) {
       v.set(v.x * cs - v.z * sn, v.y, v.x * sn + v.z * cs);
     }
     const n = e1.subVectors(tri[1], tri[0]).cross(e2.subVectors(tri[2], tri[0])).normalize();
-    for (const v of tri) {
+    for (const [k, v] of tri.entries()) {
+      if (geo === CANOPY || geo === NEAR_CANOPY) {
+        n.fromBufferAttribute(normals, i + k).set(n.x / sx, n.y / sy, n.z / sz);
+        n.set(n.x * cs - n.z * sn, n.y, n.x * sn + n.z * cs).normalize();
+      }
       b.pos.push(x + v.x, y + v.y, z + v.z);
       b.nor.push(n.x, n.y, n.z);
       b.col.push(color.r, color.g, color.b);
     }
   }
 }
-function tree(b, x, z, r, color, seed, side) {
+function tree(b, x, z, r, color, seed, side, rounded) {
+  const canopy = rounded ? NEAR_CANOPY : CANOPY;
   const trunkTop = 0.95 * r,
     cy = trunkTop + 0.62 * r,
     turn = seed * 6.283;
   put(b, TRUNK, [0.12 * r, trunkTop - LAND_Y + 0.2 * r, 0.12 * r], [x, LAND_Y, z], BARK, turn);
-  put(b, CANOPY, [r, 0.72 * r, r], [x, cy, z], color, turn);
+  put(b, canopy, [r, 0.72 * r, r], [x, cy, z], color, turn);
   // a second, smaller mass to one side, so the crown reads as a tree's and not a ball (not past opts.sideTo, where the haze hides it)
   if (!side) return;
   const a = turn * 1.7;
   put(
     b,
-    CANOPY,
+    canopy,
     [0.68 * r, 0.55 * r, 0.68 * r],
     [x + Math.cos(a) * 0.55 * r, cy + 0.42 * r, z + Math.sin(a) * 0.55 * r],
     color,
@@ -153,7 +114,11 @@ function samples(poly) {
 }
 
 // ---------- one place's far model ----------
-export function* farModelSteps(info, L, { own = () => false, buildFrom = 0, treesFrom = 0, sideTo = Infinity } = {}) {
+export function* farModelSteps(
+  info,
+  L,
+  { own = () => false, ownTree = own, buildFrom = 0, treesFrom = 0, sideTo = Infinity } = {},
+) {
   const { chunk, near, box, skip } = info,
     skipIds = new Set(skip);
   const local = (p) => {
@@ -208,16 +173,16 @@ export function* farModelSteps(info, L, { own = () => false, buildFrom = 0, tree
   yield;
 
   let nt = 0;
-  for (const t of treeSpots(L)) {
+  for (const t of islandTreeSpots(L)) {
     const [x, z] = local([t.x, t.z]);
     const d = off(x, x, z, z);
-    if (d <= Math.max(near, treesFrom) || own(x, z)) continue;
-    tree(B, x, z, t.r, GREENS[t.c], t.s, d < sideTo);
+    if (d <= treesFrom || ownTree(x, z)) continue;
+    tree(B, x, z, t.r, GREENS[t.c], t.s, d < sideTo, d < 30);
     nt++;
   }
   yield;
 
-  const mesh = toMesh(B, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.92 }), 'far:island');
+  const mesh = toMesh(B, distantMaterial(), 'far:island');
   const litMesh = toMesh(lit, mat(LIT, { emissive: new THREE.Color(LIT_GLOW), emissiveIntensity: 0.9 }), 'far:lit');
   for (const m of [mesh, litMesh].filter(Boolean)) {
     m.castShadow = false;
