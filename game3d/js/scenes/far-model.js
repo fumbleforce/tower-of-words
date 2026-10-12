@@ -55,6 +55,8 @@ const GREENS = ['#4d6b47', '#43603f', '#57704c', '#4a6545'].map((h) => new THREE
 const CANOPY = new THREE.IcosahedronGeometry(1, 0).toNonIndexed();
 const NEAR_CANOPY = new THREE.SphereGeometry(1, 10, 5).toNonIndexed();
 const SIDE_CANOPY = new THREE.SphereGeometry(1, 8, 4).toNonIndexed();
+const CLOSE_CANOPY = new THREE.SphereGeometry(1, 16, 8).toNonIndexed();
+const CLOSE_SIDE = new THREE.SphereGeometry(1, 12, 6).toNonIndexed();
 const TRUNK = new THREE.CylinderGeometry(0.62, 1, 1, 5, 1, true).translate(0, 0.5, 0).toNonIndexed();
 const BARK = new THREE.Color(LEAF.barkGrey);
 function put(b, geo, [sx, sy, sz], [x, y, z], color, turn = 0) {
@@ -83,8 +85,9 @@ function put(b, geo, [sx, sy, sz], [x, y, z], color, turn = 0) {
     }
   }
 }
-function tree(b, x, z, r, color, seed, side, rounded) {
-  const canopy = rounded ? NEAR_CANOPY : CANOPY;
+function tree(b, x, z, r, color, seed, side, rounded, close) {
+  const canopy = close ? CLOSE_CANOPY : rounded ? NEAR_CANOPY : CANOPY;
+  const sideCanopy = close ? CLOSE_SIDE : rounded ? SIDE_CANOPY : canopy;
   const trunkTop = 0.95 * r,
     cy = trunkTop + 0.62 * r,
     turn = seed * 6.283;
@@ -95,7 +98,7 @@ function tree(b, x, z, r, color, seed, side, rounded) {
   const a = turn * 1.7;
   put(
     b,
-    rounded ? SIDE_CANOPY : canopy,
+    sideCanopy,
     [0.68 * r, 0.55 * r, 0.68 * r],
     [x + Math.cos(a) * 0.55 * r, cy + 0.42 * r, z + Math.sin(a) * 0.55 * r],
     color,
@@ -104,7 +107,7 @@ function tree(b, x, z, r, color, seed, side, rounded) {
   if (rounded)
     put(
       b,
-      SIDE_CANOPY,
+      sideCanopy,
       [0.52 * r, 0.48 * r, 0.52 * r],
       [x - Math.cos(a) * 0.5 * r, cy + 0.34 * r, z - Math.sin(a) * 0.5 * r],
       color,
@@ -129,7 +132,7 @@ function samples(poly) {
 export function* farModelSteps(
   info,
   L,
-  { own = () => false, ownTree = own, buildFrom = 0, treesFrom = 0, sideTo = Infinity } = {},
+  { own = () => false, ownTree = own, buildFrom = 0, treesFrom = 0, treesTo = Infinity, sideTo = Infinity } = {},
 ) {
   const { chunk, near, box, skip } = info,
     skipIds = new Set(skip);
@@ -192,8 +195,10 @@ export function* farModelSteps(
   for (const t of islandTreeSpots(L)) {
     const [x, z] = local([t.x, t.z]);
     const d = off(x, x, z, z);
-    if (d <= treesFrom || ownTree(x, z)) continue;
-    tree(B, x, z, t.r, GREENS[t.c], t.s, d < Math.min(sideTo, 30), d < 45);
+    // Past the full haze plus camera-arm margin, the entire crown is hidden. Spend those
+    // triangles on round silhouettes in the exposed middle distance instead.
+    if (d <= treesFrom || d > treesTo + t.r * 2 || ownTree(x, z)) continue;
+    tree(B, x, z, t.r, GREENS[t.c], t.s, d < Math.min(sideTo, 30), d < 45, d < 22);
     nt++;
   }
   yield;

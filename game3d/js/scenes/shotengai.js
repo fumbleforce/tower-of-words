@@ -134,7 +134,17 @@ export function* shotengaiSteps() {
   const bands = yield* bandSteps(root, CHUNK); // the ground past the exits, as the neighbours build it (bands.js)
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['shops_north', 'arcade', 'shops_south', 'izakaya', 'ramen', 'station', 'platform_shed', ...bands.ids],
+    skip: [
+      'shops_north',
+      'arcade',
+      'shops_south',
+      'izakaya',
+      'ramen',
+      'station',
+      'platform_shed',
+      ...bands.ids,
+      ...plazaContext.ids,
+    ],
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
   });

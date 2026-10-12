@@ -18,6 +18,11 @@ export function distantMaterial() {
       `#include <common>
       varying vec3 vIslandPoint; varying vec3 vIslandNormal;
       float islandHash(vec2 p) { return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+      float islandClumps(vec2 p) {
+        vec2 c=floor(p),f=fract(p); f=f*f*(3.-2.*f);
+        return mix(mix(islandHash(c),islandHash(c+vec2(1.,0.)),f.x),
+          mix(islandHash(c+vec2(0.,1.)),islandHash(c+vec2(1.,1.)),f.x),f.y);
+      }
       float islandLeaves(vec2 p) {
         vec2 cell=floor(p); float shade=0.;
         for(int j=-1;j<=1;j++)for(int i=-1;i<=1;i++) {
@@ -37,8 +42,12 @@ export function distantMaterial() {
       vec3 leafWeight=pow(abs(normalize(vIslandNormal)),vec3(4.));
       leafWeight/=max(dot(leafWeight,vec3(1.)),.001);
       float leaves=dot(leafWeight,vec3(islandLeaves(vIslandPoint.yz*10.),islandLeaves(vIslandPoint.xz*10.),islandLeaves(vIslandPoint.xy*10.)));
-      diffuseColor.rgb*=mix(1.,.62+leaves*.8,planted);
-      float leafRelief=leaves*.055*planted;
+      float clumps=dot(leafWeight,vec3(islandClumps(vIslandPoint.yz*2.),islandClumps(vIslandPoint.xz*2.),islandClumps(vIslandPoint.xy*2.)));
+      // Fade fine leaves before their cells shrink below a few pixels; broad clumps remain stable.
+      float footprint=max(length(dFdx(vIslandPoint)),length(dFdy(vIslandPoint)))*10.;
+      float leafVisible=1.-smoothstep(.2,.6,footprint);
+      diffuseColor.rgb*=mix(1.,.82+clumps*.25+(leaves-.4)*.16*leafVisible,planted);
+      float leafRelief=leaves*.008*leafVisible*planted;
     `,
     );
     shader.fragmentShader = shader.fragmentShader.replace(
@@ -51,6 +60,6 @@ export function distantMaterial() {
     `,
     );
   };
-  material.customProgramCacheKey = () => 'island-distant-leaves-2';
+  material.customProgramCacheKey = () => 'island-distant-leaves-3';
   return material;
 }

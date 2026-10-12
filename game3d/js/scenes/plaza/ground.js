@@ -42,7 +42,7 @@ export function* circleSteps(root) {
 
 // the canteen terrace: large pale slabs from the canteen's front to the terrace wall, with a soldier course along
 // the canteen's face
-function terrace(pv) {
+export function terrace(pv) {
   const slabs = { pattern: 'grid', module: [0.9, 0.45], tones: GRANITE.edge, vary: 0.05, origin: [F[0], TERRACE[2]] };
   pv.field([TERRACE[0], TERRACE[1], TERRACE[2] + BW, TERRACE_S], slabs);
   pv.field([TERRACE[0], TERRACE[1], TERRACE[2], TERRACE[2] + BW], {
