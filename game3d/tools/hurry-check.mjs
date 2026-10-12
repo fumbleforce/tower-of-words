@@ -6,11 +6,13 @@ const baseline=process.argv.includes('--baseline');
 const base=baseline?'http://127.0.0.1:8771/game3d':(process.env.BASE_URL||'http://127.0.0.1:8771/game3d');
 await withBrowserJob('hurry-'+(baseline?'baseline':'fixed'),async browser=>{
  const page=await browser.newPage({viewport:{width:1366,height:860}});
- if(process.env.MAIN_FIXTURE)await page.route('**/js/main.js',r=>r.fulfill({contentType:'text/javascript',body:fs.readFileSync(process.env.MAIN_FIXTURE,'utf8')}));
+ let fixtureLoads=0;
+ if(process.env.MAIN_FIXTURE)await page.route(/\/js\/main\.js(?:\?|$)/,r=>{fixtureLoads++;return r.fulfill({contentType:'text/javascript',body:fs.readFileSync(process.env.MAIN_FIXTURE,'utf8')});});
  await page.route(/\/private\//,r=>r.abort());await page.route('**/api/plugins',r=>r.fulfill({json:[]}));
  await page.addInitScript(()=>globalThis.localStorage.setItem('amakawa-settings',JSON.stringify({privateMode:false,cameraMode:'follow',textSpeed:'instant',voiceOn:false})));
  await waitForGame(page,240000,()=>page.goto(base+'/index.html?place='+(process.env.POOL?'pool':'shotengai')+'&q=0'),'play');
  await page.waitForFunction(()=>!globalThis.document.querySelector('#boot')&&!globalThis.__game.busy);
+ if(process.env.MAIN_FIXTURE)assert.equal(fixtureLoads,1,'historical main fixture was loaded');
  for(const dest of (process.env.POOL?['sports','pool']:['east_coast','shotengai'])){
   await page.evaluate(dest=>{const g=globalThis.__game;globalThis.__samples=[];const w=g.player,old=w.update;w.update=function(dt,...args){const before=this.mixer?.time,result=old.call(this,dt,...args);globalThis.__samples.push({dt,moving:g.walker.moving,walkerDt:globalThis.__walkerDt,mixerDelta:this.mixer?.time-before,hurry:g.hurry,scale:g.timeScale,busy:g.busy,place:g.place.name,locked:g.walker.locked,scripted:g.player.scripted,keys:[...g.walker.keys],x:g.player.root.position.x,z:g.player.root.position.z,t:performance.now()});return result;};globalThis.__trip=g.travel(dest);},dest);
   await page.keyboard.press('Space');
