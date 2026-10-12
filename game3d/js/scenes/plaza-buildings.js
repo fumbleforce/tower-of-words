@@ -12,6 +12,7 @@ import { signSet } from './shop-signs.js';
 import { drain } from '../perf/slice.js';
 import { facadeDrainage } from './outdoor/facade-detail.js';
 import { shopWindow, shopShell } from './shotengai/facades.js';
+import { rearFacade } from './shotengai/rear-facades.js';
 import { FRONT_IDS, displayCenters } from './shotengai/shopfront-plan.js';
 import { recessedShopWall, shopfront } from './shotengai/shopfronts.js';
 
@@ -185,7 +186,6 @@ export function* shopStreetSteps(
     trims = [],
     panes = [],
     shutters = [],
-    plant = [],
     awnings = [[], [], []],
     top = new Parts(),
     far = new Parts(),
@@ -266,10 +266,7 @@ export function* shopStreetSteps(
               n: row.dirF,
             });
           }
-        // the back: a window on each upper floor, a door, a condenser on the wall
-        for (let s = 1; s < storeys; s++) panes.push(box(0.9, storeyH * 0.38, 0.05, u + 0.9, storeyH * (s + 0.32), b));
-        trims.push(box(0.8, storeyH * 0.8, 0.05, u - 1.2, 0, b));
-        plant.push(box(0.7, 0.5, 0.35, u + 0.6, 0.1, b - row.dirF * 0.2));
+        rearFacade(fittings, panes, box, { u, back: b, n: -row.dirF, floorH: storeyH, storeys, bay: i });
       }
       // the rows' end walls, seen from the walks past them: a window either side on every floor
       for (const [end, ue] of [
@@ -304,7 +301,6 @@ export function* shopStreetSteps(
   g.add(merged(panes, glass, { cast: false }));
   yield;
   if (shutters.length) g.add(merged(shutters, mat('#9ba1a8', { roughness: 0.6 })));
-  g.add(merged(plant, mat('#a3a9b0')));
   awnings.forEach((parts, k) => parts.length && g.add(merged(parts, mat(AWN[k]))));
   g.add(merged(posts, mat(PAL.dark)));
   yield;
