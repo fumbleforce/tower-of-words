@@ -7,7 +7,8 @@ const EPS = 0.025;
 
 export function createTraversal(place, excluded = []) {
   const root = place.space;
-  root.updateWorldMatrix(true, true);
+  const roots = [root, ...(place.traversalRoots || [])];
+  for (const sourceRoot of roots) sourceRoot.updateWorldMatrix(true, true);
   const inverse = root.matrixWorld.clone().invert();
   const skip = new Set(excluded.filter(Boolean));
   const entries = [],
@@ -41,7 +42,7 @@ export function createTraversal(place, excluded = []) {
     for (let p = object; p; p = p.parent) {
       if (skip.has(p)) return false;
       if (!p.visible && !p.userData.occluder && !p.userData.followEnclosure) return false;
-      if (p === root) return true;
+      if (roots.includes(p)) return true;
     }
     return false;
   }
@@ -95,7 +96,7 @@ export function createTraversal(place, excluded = []) {
       indexEntry(entry);
     }
   }
-  root.traverse(collect);
+  for (const sourceRoot of roots) sourceRoot.traverse(collect);
   let discovery = -Infinity;
   function refresh() {
     for (const actor of [
@@ -105,14 +106,20 @@ export function createTraversal(place, excluded = []) {
     ])
       if (actor.root) skip.add(actor.root);
     if (performance.now() - discovery > 250) {
-      root.updateWorldMatrix(true, true);
-      root.traverse(collect);
+      for (const sourceRoot of roots) {
+        sourceRoot.updateWorldMatrix(true, true);
+        sourceRoot.traverse(collect);
+      }
       discovery = performance.now();
     }
+    root.updateWorldMatrix(true, false);
+    const previousInverse = inverse.clone();
     inverse.copy(root.matrixWorld).invert();
+    const frameMoved = !inverse.equals(previousInverse);
     for (const [source, record] of sources) {
       source.updateWorldMatrix(true, false);
       if (
+        !frameMoved &&
         source.matrixWorld.equals(record.matrix) &&
         source.geometry === record.geometry &&
         source.instanceMatrix?.version === record.instances
@@ -181,9 +188,9 @@ export function createTraversal(place, excluded = []) {
     return null;
   }
   function support(x, z, ceiling, depth = 8) {
-    let height = null;
+    let height = supportPoint(x, z, ceiling, depth);
+    if (height !== null && ceiling - height < 0.3) return height;
     for (const [dx, dz] of [
-      [0, 0],
       [0.08, 0],
       [-0.08, 0],
       [0, 0.08],
@@ -247,5 +254,35 @@ export function createTraversal(place, excluded = []) {
     }
     return true;
   }
-  return { support, collide, clear, free, refresh, count: entries.length };
+  function route(from, path, feet, scale) {
+    if (!path) return null;
+    const result = [];
+    let a = from;
+    for (const b of path) {
+      if (!clear(a, b, feet, scale)) {
+        const dx = b[0] - a[0],
+          dz = b[1] - a[1],
+          length = Math.hypot(dx, dz) || 1;
+        let elbow = null;
+        for (const along of [0.25, 0.5, 0.75]) {
+          for (const offset of [0.3, -0.3, 0.6, -0.6, 0.9, -0.9]) {
+            const c = [
+              a[0] + dx * along - (dz / length) * offset * scale,
+              a[1] + dz * along + (dx / length) * offset * scale,
+            ];
+            if (clear(a, c, feet, scale) && clear(c, b, feet, scale)) {
+              elbow = c;
+              break;
+            }
+          }
+          if (elbow) break;
+        }
+        if (elbow) result.push(elbow);
+      }
+      result.push(b);
+      a = b;
+    }
+    return result;
+  }
+  return { support, collide, clear, free, route, refresh, count: entries.length };
 }

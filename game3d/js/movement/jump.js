@@ -1,5 +1,5 @@
 // Jumping, the classic platformer way (Jørgen, 2026-10-12: "lets add satisfying jumping into the game, like classic
-// mario"). Space while walking, or with nothing in reach, and the Jump button on a phone. The jump is the feel of the
+// mario"). Space during free play and the Jump button on a phone. The jump is the feel of the
 // old games: he leaves the ground at once, holding the button carries him higher (a tap is a hop), he hangs a moment
 // at the top and comes down faster than he went up; a running jump goes a little higher. Stretched on the way up,
 // squashed on landing with a puff of dust, the legs held mid-stride in the air, and the shadow stays on the ground,
@@ -87,6 +87,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir, onVoid }
         game.walker.traversal = {
           collide: (x, z, ox, oz) => physical.collide(x, z, ox, oz, root.position.y + s.h, scale(), s.air),
           clear: (a, b) => physical.clear(a, b, root.position.y + s.h, scale()),
+          route: (a, path) => physical.route(a, path, root.position.y + s.h, scale()),
         };
     }
     return physical;

@@ -1,6 +1,5 @@
-// The jump's controls (jump.js): Space on a keyboard, the Jump button on a phone. Space still uses the target in
-// reach when he is standing still by it (docs/game/controls-and-ui.md, Controls); walking, running, already in the
-// air or with nothing in reach, it jumps. Holding it jumps higher. Only while he is free to walk: no jump in a scene,
+// The jump's controls (jump.js): Space on a keyboard, the Jump button on a phone. Free-play Space always jumps,
+// including while standing beside an interactable. E and Enter use the nearby target. Holding it jumps higher. Only while he is free to walk: no jump in a scene,
 // a conversation, a menu, the map, sitting, or while typing.
 //   installJump(game, { shadow, ui })   once, at boot: game.jump is the jump (jump.js), with its falls (falls.js)
 import { createJump } from './jump.js';
@@ -43,12 +42,11 @@ export function installJump(game, { shadow, ui }) {
   falls = installFalls(game, { jump, shadow, ui });
   game.jump = jump;
 
-  // Space: a jump, unless he stands still by something he can use (then it is still Interact, as before)
-  const jumps = () => free() && (!game.near || jump.air || game.walker.moving || game.walker.keys.size > 0);
+  // Capture free-play Space before the interaction shortcut.
   window.addEventListener(
     'keydown',
     (e) => {
-      if (e.code !== 'Space' || !jumps()) return;
+      if (e.code !== 'Space' || !free()) return;
       e.preventDefault();
       e.stopImmediatePropagation(); // not also Interact (main.js)
       if (!e.repeat) jump.press();

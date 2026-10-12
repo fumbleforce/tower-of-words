@@ -90,3 +90,26 @@ test('render-batched originals on unsigned layer31 retain physical geometry',()=
  const p=world(),door=p.add(-1,1,2,.1,2,1);door.layers.set(31);
  assert.equal(createTraversal(p).free(-1,2,-1.4,2,0,1,false),false);
 });
+
+test('an old route corner is repaired around a visible open door leaf',()=>{
+ const space=new T.Group();
+ const floor=new T.Mesh(new T.BoxGeometry(8,.1,8),new T.MeshStandardMaterial());floor.position.y=-.05;space.add(floor);
+ const flap=new T.Mesh(new T.BoxGeometry(.1,.5,.55),new T.MeshStandardMaterial());flap.position.set(-.58,.45,-.27);space.add(flap);
+ const t=createTraversal({space}),a=[-.5,.7],b=[-.35,-.85];
+ assert.equal(t.clear(a,b,0,1.18),false);
+ const path=t.route(a,[b],0,1.18);
+ assert.ok(path.length>1);
+ let prev=a;for(const next of path){assert.equal(t.clear(prev,next,0,1.18),true);prev=next;}
+});
+
+test('platform sibling follows moving place frame while retaining world support',()=>{
+ const scene=new T.Scene(),space=new T.Group(),station=new T.Group();scene.add(space,station);
+ const floor=new T.Mesh(new T.BoxGeometry(2,.2,2),new T.MeshStandardMaterial());floor.position.set(3,-.1,0);station.add(floor);
+ const t=createTraversal({space,traversalRoots:[station]});
+ assert.ok(Math.abs(t.support(3,0,.3))<1e-6);
+ space.position.x=1;t.refresh();
+ assert.ok(Math.abs(t.support(2,0,.3))<1e-6);
+ assert.equal(t.support(4,0,.3),null);
+ station.position.x=2;t.refresh();
+ assert.ok(Math.abs(t.support(4,0,.3))<1e-6);
+});

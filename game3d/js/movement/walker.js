@@ -45,9 +45,12 @@ export class SmoothWalker extends Walker {
     this.aside = null;
     this.runTo = false;
     super.goTo(x, z, arrive);
-    if (this.path) this.path.scripted = scripted;
+    if (this.path) {
+      if (!scripted)
+        this.path = this.traversal?.route([this.body.position.x, this.body.position.z], this.path) || this.path;
+      this.path.scripted = scripted;
+    }
   }
-  // someone walking (dx, dz) is held up by him: step aside, off their line, even during a scene (people do)
   makeRoom(fx, fz, need) {
     const now = performance.now();
     if (this.aside || this.keys.size || this.steer || (this.path && !this.locked) || now - (this._roomT || 0) < 2500)
@@ -148,6 +151,7 @@ export class SmoothWalker extends Walker {
     }
     const direct = this.traversal?.clear([from.x, from.z], [tx, tz]);
     let path = direct ? [[tx, tz]] : inside ? N.path(from.x, from.z, tx, tz) : null;
+    if (path) path = this.traversal?.route([from.x, from.z], path) || path;
     let last = path && path.length ? path[path.length - 1] : null;
     // the tap is somewhere he can't stand (inside furniture, a closed room): walk to the nearest floor he can reach
     if (inside && (!last || Math.hypot(last[0] - tx, last[1] - tz) > 0.8)) {
@@ -161,8 +165,6 @@ export class SmoothWalker extends Walker {
         }
       }
     }
-    // unreachable: off the walkable map, no route, or the nearest reachable spot is well away from the tap
-    // (a wall, a closed room): don't walk off somewhere else, say no where the finger was
     if (!last || Math.hypot(last[0] - tx, last[1] - tz) > 0.8) {
       if (inside) this.preview.fail(space, p.x, p.z, y);
       sfx('nope');
@@ -258,7 +260,7 @@ export class SmoothWalker extends Walker {
       while (
         this.path.length > 1 &&
         Math.hypot(this.path[0][0] - p.x, this.path[0][1] - p.z) < CORNER &&
-        this.nav.clear([p.x, p.z], this.path[1])
+        (this.path.scripted ? this.nav : this.traversal || this.nav).clear([p.x, p.z], this.path[1])
       )
         this.path.shift();
       const [tx, tz] = this.path[0];
