@@ -1,0 +1,29 @@
+{
+  "title": "Station entrance restored",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "Station surfaces are lit correctly at normal quality, and the approach and glass entrance stay visible.",
+  "commit": "62994e02a",
+  "result": [
+    "entrance",
+    "approach"
+  ],
+  "images": [
+    {
+      "id": "entrance",
+      "image": "game3d/shots/station-515/1366-q2-glass-clear.png",
+      "caption": "Final entrance from the walking camera."
+    },
+    {
+      "id": "approach",
+      "image": "game3d/shots/station-515/1366-q2-canopy.png",
+      "caption": "Approaching from the shopping street."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}

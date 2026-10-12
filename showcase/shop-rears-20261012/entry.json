@@ -1,0 +1,29 @@
+{
+  "title": "Shop backs and service paths",
+  "date": "2026-10-12",
+  "by": "codex",
+  "caption": "The rear shop walls now have fitted windows, service doors and equipment; bicycles leave the doorways clear.",
+  "commit": "b5b3cbcf",
+  "result": [
+    "rear",
+    "fountain"
+  ],
+  "images": [
+    {
+      "id": "rear",
+      "image": "game3d/shots/codex-shop-facades-520/shop-520-final/desktop-rear-walk-own.png",
+      "caption": "Rear shop frontage and clear service entrances."
+    },
+    {
+      "id": "fountain",
+      "image": "game3d/shots/codex-shop-facades-520/shop-520-phone-final/phone-fountain-south-own.png",
+      "caption": "The view toward the shops from the fountain."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play",
+      "href": "game3d/"
+    }
+  ]
+}
