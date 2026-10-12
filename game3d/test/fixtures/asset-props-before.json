@@ -1581,12 +1581,12 @@
       "type": "room",
       "room": "office",
       "anchor": [
-        0.55,
+        1.1,
         1.3,
         -6.4
       ],
       "spot": [
-        0.55,
+        0.1,
         -5.3
       ],
       "small": true

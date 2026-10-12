@@ -35,6 +35,7 @@ import { emiOffice, emiOfficeBlocks, EMI_X, EMI_DOOR } from './office-emi.js';
 import { MC } from '../mc.js';
 import { officeWalls } from './office-enclosure.js';
 import { corridorToiletSigns, toiletSign } from './office-signs.js';
+import { referenceShelf } from './office-nook.js';
 export { EMI } from './office-emi.js';
 
 export const K = 1.18; // people scale in the office and lobby
@@ -875,7 +876,7 @@ export function* officeSteps() {
   cal.position.set(-0.6, 0.86, Z0 + T / 2 + 0.01);
   root.add(cal);
   const wb = whiteboard();
-  wb.position.set(0.55, 0.6, Z0 + T / 2 + 0.01);
+  wb.position.set(1.1, 0.6, Z0 + T / 2 + 0.01);
   root.add(wb);
   const cb = pinboard(0.6, 0.36);
   cb.position.set(-2.95, 0.84, Z0 + T / 2 + 0.01);
@@ -933,7 +934,7 @@ export function* officeSteps() {
   }
 
   yield;
-  // a small meeting table below the island, for the morning huddle
+  // The huddle table sits under the whiteboard, clear of the work pod and entrance.
   {
     const mt = new THREE.Group();
     mt.add(rbox(0.9, 0.04, 0.6, '#d5d6d3', { y: 0.4, r: 0.01 }), rbox(0.08, 0.4, 0.08, PAL.deskLeg, { r: 0.01 }));
@@ -943,7 +944,7 @@ export function* officeSteps() {
         rbox(0.03, 0.24, 0.03, PAL.deskLeg, { x, z: 0.45, r: 0.01 }),
       );
     mt.add(rbox(0.3, 0.02, 0.22, PAL.paper, { x: 0.15, y: 0.44, r: 0.005 }));
-    mt.position.set(-2.4, 0, -1.15);
+    mt.position.set(1.1, 0, -5.3);
     root.add(mt);
   }
   const fan = standFan();
@@ -1652,24 +1653,12 @@ export function* officeSteps() {
   life.leds = ledLights(root);
 
   yield;
-  // a waist-high divider shelf behind the island's south row: binders facing the island, plants and trays on top
+  // Reference binders face the huddle table from the east wall.
   {
-    const dv = shelf(1.4, 0.56, 0.34, { fill: 'binders', seed: 13 });
-    dv.position.set(-1.28, 0, -1.35);
-    root.add(dv);
-    root.add(rbox(1.44, 0.03, 0.38, '#c9ccd0', { x: -1.28, y: 0.56, z: -1.35, r: 0.01 }));
-    for (const [x, sd] of [
-      [-1.8, 33],
-      [-0.75, 35],
-    ]) {
-      const p = plant({ size: 0.5, seed: sd });
-      p.position.set(x, 0.58, -1.35);
-      root.add(p);
-    }
-    root.add(
-      rbox(0.3, 0.06, 0.24, PAL.dark, { x: -1.28, y: 0.58, z: -1.35, r: 0.01 }),
-      rbox(0.28, 0.03, 0.22, PAL.paper, { x: -1.28, y: 0.64, z: -1.35, r: 0.004 }),
-    );
+    const references = referenceShelf();
+    references.position.set(3.0, 0, -5.05);
+    references.rotation.y = -Math.PI / 2;
+    root.add(references);
   }
   yield;
   // tall steel storage by the machine-room wall instead of loose boxes, with the boxes on top
@@ -1832,7 +1821,8 @@ export function* officeSteps() {
   B(-4.1, -3.6, -0.6, -0.1);
   B(2.05, 3.2, -1.8, -0.15);
   B(-3.5, -3.1, -2.4, -2.0);
-  B(-2.9, -1.9, -1.5, -0.55);
+  B(0.65, 1.55, -5.6, -5.0); // huddle table
+  for (const x of [0.8, 1.4]) B(x - 0.15, x + 0.15, -4.99, -4.71); // stools
   B(-4.1, -3.6, -3.2, -2.8);
   B(DX[0] - 0.56, DX[1] + 0.56, ZN - 0.36, ZS + 0.36); // work pod
   for (const d of desks)
@@ -1905,7 +1895,7 @@ export function* officeSteps() {
   B(2.85, 3.15, 4.8, 5.0);
   B(2.8, 4.1, 0.35, 0.9);
   B(2.8, 3.3, -1.8, -0.7);
-  B(-2.0, -0.55, -1.55, -1.15);
+  B(2.81, 3.19, -5.77, -4.33); // reference shelf
 
   for (const r of [nao, hiro, yui, sota]) r.root.visible = false;
   const world = {

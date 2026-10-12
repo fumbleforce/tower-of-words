@@ -34,8 +34,10 @@ await withBrowserJob('b2-layout-check', async browser => {
     });
     assert.equal(aisle.free, true, 'Removed desks must leave a walkable aisle');
     assert.equal(aisle.covered[0], -0.8);
+    assert.equal(await page.evaluate(() => globalThis.__game.place.nav.free(-1.28, -1.35)), true, 'Former divider footprint is clear');
     for (const [name, x, z, yaw] of [
       ['desks', 0.12, -1.93, Math.PI],
+      ['nook', 0.3, -4.35, 2.45],
       ['men', 2.6, 0.8, 0], ['women', 5.2, 0.8, 0],
     ]) {
       await page.evaluate(({ x, z, yaw }) => {
@@ -55,6 +57,12 @@ await withBrowserJob('b2-layout-check', async browser => {
     });
     const z = await page.evaluate(() => globalThis.__game.player.root.position.z);
     assert.ok(Math.abs(z + 4.5) < 0.15, `Walk reaches other end of cleared aisle: ${z}`);
+    await page.evaluate(async () => {
+      const g = globalThis.__game;
+      await g.walkTo(...g.place.things.whiteboard.spot());
+    });
+    const boardApproach = await page.evaluate(() => globalThis.__game.player.root.position.toArray());
+    assert.ok(Math.hypot(boardApproach[0] - 0.1, boardApproach[2] + 5.3) < 0.15, 'Whiteboard approach stays reachable');
     await page.evaluate(async () => (await import('./js/settings.js')).setSetting('cameraMode', 'overview'));
     await page.waitForTimeout(1200);
     await page.screenshot({ path: `${out}/${width}-overview.png` });

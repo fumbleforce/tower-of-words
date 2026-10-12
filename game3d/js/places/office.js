@@ -258,7 +258,7 @@ export async function officePlace(game) {
       ...at(-1.8, -5.3, -1.6, Z0),
       noMarker: true,
     },
-    whiteboard: { ...PLACE_DETAILS.office.things.whiteboard, anchor: v3(0.55, 1.3, Z0), ...at(0.55, -5.3, 0.55, Z0) },
+    whiteboard: { ...PLACE_DETAILS.office.things.whiteboard, anchor: v3(1.1, 1.3, Z0), ...at(0.1, -5.3, 1.1, Z0) },
     calendar: {
       ...PLACE_DETAILS.office.things.calendar,
       anchor: v3(-0.6, 1.2, Z0),
