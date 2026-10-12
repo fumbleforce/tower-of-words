@@ -1,0 +1,879 @@
+{
+  "title": "Southeast coastal garden",
+  "date": "2026-10-13",
+  "by": "codex-agent:southeast-corner",
+  "caption": "A public loop now joins the pergola, open lawn, jumping stones and sea-facing benches, with clear paths back to the dorm row and terrace.",
+  "commit": [
+    "ee36d87211bf3184530009e35b2d452e3c892a5f",
+    "61f52b7d28b7c75c6fe4f31f30cf7e75275653c2",
+    "cd52567714275251597ab82cdb425ac19ed53304",
+    "4b1e404db2914e06da915c91d7bbe2e9463d0598"
+  ],
+  "preview": "round3-1366-morning-rest-court",
+  "result": [
+    "round3-1366-morning-rest-court",
+    "round3-390-morning-garden",
+    "round3-1366-evening-shore",
+    "routes-nav-fixed-390-seated"
+  ],
+  "sections": [
+    {
+      "title": "Finished garden: morning and evening",
+      "caption": "All 28 final southeast views passed personal inspection and independent visual review at 8/10 or better.",
+      "images": [
+        {
+          "id": "round3-1366-evening-approach",
+          "image": "game3d/shots/island-southeast/round3/1366-evening-approach.png",
+          "caption": "Desktop 1366×860 · dorm-row approach · evening"
+        },
+        {
+          "id": "round3-1366-evening-building-join",
+          "image": "game3d/shots/island-southeast/round3/1366-evening-building-join.png",
+          "caption": "Desktop 1366×860 · building and public path join · evening"
+        },
+        {
+          "id": "round3-1366-evening-garden",
+          "image": "game3d/shots/island-southeast/round3/1366-evening-garden.png",
+          "caption": "Desktop 1366×860 · pergola garden · evening"
+        },
+        {
+          "id": "round3-1366-evening-horizon",
+          "image": "game3d/shots/island-southeast/round3/1366-evening-horizon.png",
+          "caption": "Desktop 1366×860 · sea and horizon · evening"
+        },
+        {
+          "id": "round3-1366-evening-rest-court",
+          "image": "game3d/shots/island-southeast/round3/1366-evening-rest-court.png",
+          "caption": "Desktop 1366×860 · sea-facing rest court · evening"
+        },
+        {
+          "id": "round3-1366-evening-shore",
+          "image": "game3d/shots/island-southeast/round3/1366-evening-shore.png",
+          "caption": "Desktop 1366×860 · shore loop · evening"
+        },
+        {
+          "id": "round3-1366-evening-terrace",
+          "image": "game3d/shots/island-southeast/round3/1366-evening-terrace.png",
+          "caption": "Desktop 1366×860 · original sea terrace · evening"
+        },
+        {
+          "id": "round3-1366-morning-approach",
+          "image": "game3d/shots/island-southeast/round3/1366-morning-approach.png",
+          "caption": "Desktop 1366×860 · dorm-row approach · morning"
+        },
+        {
+          "id": "round3-1366-morning-building-join",
+          "image": "game3d/shots/island-southeast/round3/1366-morning-building-join.png",
+          "caption": "Desktop 1366×860 · building and public path join · morning"
+        },
+        {
+          "id": "round3-1366-morning-garden",
+          "image": "game3d/shots/island-southeast/round3/1366-morning-garden.png",
+          "caption": "Desktop 1366×860 · pergola garden · morning"
+        },
+        {
+          "id": "round3-1366-morning-horizon",
+          "image": "game3d/shots/island-southeast/round3/1366-morning-horizon.png",
+          "caption": "Desktop 1366×860 · sea and horizon · morning"
+        },
+        {
+          "id": "round3-1366-morning-rest-court",
+          "image": "game3d/shots/island-southeast/round3/1366-morning-rest-court.png",
+          "caption": "Desktop 1366×860 · sea-facing rest court · morning"
+        },
+        {
+          "id": "round3-1366-morning-shore",
+          "image": "game3d/shots/island-southeast/round3/1366-morning-shore.png",
+          "caption": "Desktop 1366×860 · shore loop · morning"
+        },
+        {
+          "id": "round3-1366-morning-terrace",
+          "image": "game3d/shots/island-southeast/round3/1366-morning-terrace.png",
+          "caption": "Desktop 1366×860 · original sea terrace · morning"
+        },
+        {
+          "id": "round3-390-evening-approach",
+          "image": "game3d/shots/island-southeast/round3/390-evening-approach.png",
+          "caption": "Phone 390×844 · dorm-row approach · evening"
+        },
+        {
+          "id": "round3-390-evening-building-join",
+          "image": "game3d/shots/island-southeast/round3/390-evening-building-join.png",
+          "caption": "Phone 390×844 · building and public path join · evening"
+        },
+        {
+          "id": "round3-390-evening-garden",
+          "image": "game3d/shots/island-southeast/round3/390-evening-garden.png",
+          "caption": "Phone 390×844 · pergola garden · evening"
+        },
+        {
+          "id": "round3-390-evening-horizon",
+          "image": "game3d/shots/island-southeast/round3/390-evening-horizon.png",
+          "caption": "Phone 390×844 · sea and horizon · evening"
+        },
+        {
+          "id": "round3-390-evening-rest-court",
+          "image": "game3d/shots/island-southeast/round3/390-evening-rest-court.png",
+          "caption": "Phone 390×844 · sea-facing rest court · evening"
+        },
+        {
+          "id": "round3-390-evening-shore",
+          "image": "game3d/shots/island-southeast/round3/390-evening-shore.png",
+          "caption": "Phone 390×844 · shore loop · evening"
+        },
+        {
+          "id": "round3-390-evening-terrace",
+          "image": "game3d/shots/island-southeast/round3/390-evening-terrace.png",
+          "caption": "Phone 390×844 · original sea terrace · evening"
+        },
+        {
+          "id": "round3-390-morning-approach",
+          "image": "game3d/shots/island-southeast/round3/390-morning-approach.png",
+          "caption": "Phone 390×844 · dorm-row approach · morning"
+        },
+        {
+          "id": "round3-390-morning-building-join",
+          "image": "game3d/shots/island-southeast/round3/390-morning-building-join.png",
+          "caption": "Phone 390×844 · building and public path join · morning"
+        },
+        {
+          "id": "round3-390-morning-garden",
+          "image": "game3d/shots/island-southeast/round3/390-morning-garden.png",
+          "caption": "Phone 390×844 · pergola garden · morning"
+        },
+        {
+          "id": "round3-390-morning-horizon",
+          "image": "game3d/shots/island-southeast/round3/390-morning-horizon.png",
+          "caption": "Phone 390×844 · sea and horizon · morning"
+        },
+        {
+          "id": "round3-390-morning-rest-court",
+          "image": "game3d/shots/island-southeast/round3/390-morning-rest-court.png",
+          "caption": "Phone 390×844 · sea-facing rest court · morning"
+        },
+        {
+          "id": "round3-390-morning-shore",
+          "image": "game3d/shots/island-southeast/round3/390-morning-shore.png",
+          "caption": "Phone 390×844 · shore loop · morning"
+        },
+        {
+          "id": "round3-390-morning-terrace",
+          "image": "game3d/shots/island-southeast/round3/390-morning-terrace.png",
+          "caption": "Phone 390×844 · original sea terrace · morning"
+        }
+      ]
+    },
+    {
+      "title": "Using the garden with the final navigation",
+      "caption": "Both native formats repeat the bench, running jump, stable stone landing and east-lane, sports and commons return routes after the navigation repair.",
+      "images": [
+        {
+          "id": "routes-nav-fixed-1366-jump",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/1366-jump.png",
+          "caption": "Desktop 1366×860 · running jump"
+        },
+        {
+          "id": "routes-nav-fixed-1366-landed",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/1366-landed.png",
+          "caption": "Desktop 1366×860 · stable stone landing"
+        },
+        {
+          "id": "routes-nav-fixed-1366-return-dorm-commons",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/1366-return-dorm_commons.png",
+          "caption": "Desktop 1366×860 · return from commons"
+        },
+        {
+          "id": "routes-nav-fixed-1366-return-east-lane",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/1366-return-east_lane.png",
+          "caption": "Desktop 1366×860 · return from east lane"
+        },
+        {
+          "id": "routes-nav-fixed-1366-return-sports",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/1366-return-sports.png",
+          "caption": "Desktop 1366×860 · return from sports"
+        },
+        {
+          "id": "routes-nav-fixed-1366-seated",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/1366-seated.png",
+          "caption": "Desktop 1366×860 · seated toward the sea"
+        },
+        {
+          "id": "routes-nav-fixed-390-jump",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/390-jump.png",
+          "caption": "Phone 390×844 · running jump"
+        },
+        {
+          "id": "routes-nav-fixed-390-landed",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/390-landed.png",
+          "caption": "Phone 390×844 · stable stone landing"
+        },
+        {
+          "id": "routes-nav-fixed-390-return-dorm-commons",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/390-return-dorm_commons.png",
+          "caption": "Phone 390×844 · return from commons"
+        },
+        {
+          "id": "routes-nav-fixed-390-return-east-lane",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/390-return-east_lane.png",
+          "caption": "Phone 390×844 · return from east lane"
+        },
+        {
+          "id": "routes-nav-fixed-390-return-sports",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/390-return-sports.png",
+          "caption": "Phone 390×844 · return from sports"
+        },
+        {
+          "id": "routes-nav-fixed-390-seated",
+          "image": "game3d/shots/island-southeast/routes-nav-fixed/390-seated.png",
+          "caption": "Phone 390×844 · seated toward the sea"
+        }
+      ]
+    },
+    {
+      "title": "Original lookout remains available",
+      "caption": "Focused day-two checks preserve the lookout and shrine paths, Hamada’s after-shift availability and the existing sports closure.",
+      "images": [
+        {
+          "id": "day2-continuity-1366-day2-lookout",
+          "image": "game3d/shots/island-southeast/day2-continuity/1366-day2-lookout.png",
+          "caption": "Desktop 1366×860 · day-two lookout"
+        },
+        {
+          "id": "day2-continuity-390-day2-lookout",
+          "image": "game3d/shots/island-southeast/day2-continuity/390-day2-lookout.png",
+          "caption": "Phone 390×844 · day-two lookout"
+        }
+      ]
+    },
+    {
+      "title": "Before: dense planting and unused southern grounds",
+      "caption": "The original approach, pergola, shore, rest-court site, building join, terrace and horizon at both native formats and times of day.",
+      "images": [
+        {
+          "id": "before-1366-evening-approach",
+          "image": "game3d/shots/island-southeast/before/1366-evening-approach.png",
+          "caption": "Desktop 1366×860 · dorm-row approach · evening"
+        },
+        {
+          "id": "before-1366-evening-building-join",
+          "image": "game3d/shots/island-southeast/before/1366-evening-building-join.png",
+          "caption": "Desktop 1366×860 · building and public path join · evening"
+        },
+        {
+          "id": "before-1366-evening-garden",
+          "image": "game3d/shots/island-southeast/before/1366-evening-garden.png",
+          "caption": "Desktop 1366×860 · pergola garden · evening"
+        },
+        {
+          "id": "before-1366-evening-horizon",
+          "image": "game3d/shots/island-southeast/before/1366-evening-horizon.png",
+          "caption": "Desktop 1366×860 · sea and horizon · evening"
+        },
+        {
+          "id": "before-1366-evening-rest-court",
+          "image": "game3d/shots/island-southeast/before/1366-evening-rest-court.png",
+          "caption": "Desktop 1366×860 · sea-facing rest court · evening"
+        },
+        {
+          "id": "before-1366-evening-shore",
+          "image": "game3d/shots/island-southeast/before/1366-evening-shore.png",
+          "caption": "Desktop 1366×860 · shore loop · evening"
+        },
+        {
+          "id": "before-1366-evening-terrace",
+          "image": "game3d/shots/island-southeast/before/1366-evening-terrace.png",
+          "caption": "Desktop 1366×860 · original sea terrace · evening"
+        },
+        {
+          "id": "before-1366-morning-approach",
+          "image": "game3d/shots/island-southeast/before/1366-morning-approach.png",
+          "caption": "Desktop 1366×860 · dorm-row approach · morning"
+        },
+        {
+          "id": "before-1366-morning-building-join",
+          "image": "game3d/shots/island-southeast/before/1366-morning-building-join.png",
+          "caption": "Desktop 1366×860 · building and public path join · morning"
+        },
+        {
+          "id": "before-1366-morning-garden",
+          "image": "game3d/shots/island-southeast/before/1366-morning-garden.png",
+          "caption": "Desktop 1366×860 · pergola garden · morning"
+        },
+        {
+          "id": "before-1366-morning-horizon",
+          "image": "game3d/shots/island-southeast/before/1366-morning-horizon.png",
+          "caption": "Desktop 1366×860 · sea and horizon · morning"
+        },
+        {
+          "id": "before-1366-morning-rest-court",
+          "image": "game3d/shots/island-southeast/before/1366-morning-rest-court.png",
+          "caption": "Desktop 1366×860 · sea-facing rest court · morning"
+        },
+        {
+          "id": "before-1366-morning-shore",
+          "image": "game3d/shots/island-southeast/before/1366-morning-shore.png",
+          "caption": "Desktop 1366×860 · shore loop · morning"
+        },
+        {
+          "id": "before-1366-morning-terrace",
+          "image": "game3d/shots/island-southeast/before/1366-morning-terrace.png",
+          "caption": "Desktop 1366×860 · original sea terrace · morning"
+        },
+        {
+          "id": "before-390-evening-approach",
+          "image": "game3d/shots/island-southeast/before/390-evening-approach.png",
+          "caption": "Phone 390×844 · dorm-row approach · evening"
+        },
+        {
+          "id": "before-390-evening-building-join",
+          "image": "game3d/shots/island-southeast/before/390-evening-building-join.png",
+          "caption": "Phone 390×844 · building and public path join · evening"
+        },
+        {
+          "id": "before-390-evening-garden",
+          "image": "game3d/shots/island-southeast/before/390-evening-garden.png",
+          "caption": "Phone 390×844 · pergola garden · evening"
+        },
+        {
+          "id": "before-390-evening-horizon",
+          "image": "game3d/shots/island-southeast/before/390-evening-horizon.png",
+          "caption": "Phone 390×844 · sea and horizon · evening"
+        },
+        {
+          "id": "before-390-evening-rest-court",
+          "image": "game3d/shots/island-southeast/before/390-evening-rest-court.png",
+          "caption": "Phone 390×844 · sea-facing rest court · evening"
+        },
+        {
+          "id": "before-390-evening-shore",
+          "image": "game3d/shots/island-southeast/before/390-evening-shore.png",
+          "caption": "Phone 390×844 · shore loop · evening"
+        },
+        {
+          "id": "before-390-evening-terrace",
+          "image": "game3d/shots/island-southeast/before/390-evening-terrace.png",
+          "caption": "Phone 390×844 · original sea terrace · evening"
+        },
+        {
+          "id": "before-390-morning-approach",
+          "image": "game3d/shots/island-southeast/before/390-morning-approach.png",
+          "caption": "Phone 390×844 · dorm-row approach · morning"
+        },
+        {
+          "id": "before-390-morning-building-join",
+          "image": "game3d/shots/island-southeast/before/390-morning-building-join.png",
+          "caption": "Phone 390×844 · building and public path join · morning"
+        },
+        {
+          "id": "before-390-morning-garden",
+          "image": "game3d/shots/island-southeast/before/390-morning-garden.png",
+          "caption": "Phone 390×844 · pergola garden · morning"
+        },
+        {
+          "id": "before-390-morning-horizon",
+          "image": "game3d/shots/island-southeast/before/390-morning-horizon.png",
+          "caption": "Phone 390×844 · sea and horizon · morning"
+        },
+        {
+          "id": "before-390-morning-rest-court",
+          "image": "game3d/shots/island-southeast/before/390-morning-rest-court.png",
+          "caption": "Phone 390×844 · sea-facing rest court · morning"
+        },
+        {
+          "id": "before-390-morning-shore",
+          "image": "game3d/shots/island-southeast/before/390-morning-shore.png",
+          "caption": "Phone 390×844 · shore loop · morning"
+        },
+        {
+          "id": "before-390-morning-terrace",
+          "image": "game3d/shots/island-southeast/before/390-morning-terrace.png",
+          "caption": "Phone 390×844 · original sea terrace · morning"
+        }
+      ]
+    },
+    {
+      "title": "First captured attempt: rejected",
+      "caption": "Paths and seating were useful, but phone roofs and trees obscured approaches, the desktop terrace hid the actor, and the sea looked flat. These pictures led to another pass.",
+      "images": [
+        {
+          "id": "round1-attempt2-1366-evening-approach",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-evening-approach.png",
+          "caption": "Desktop 1366×860 · dorm-row approach · evening"
+        },
+        {
+          "id": "round1-attempt2-1366-evening-building-join",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-evening-building-join.png",
+          "caption": "Desktop 1366×860 · building and public path join · evening"
+        },
+        {
+          "id": "round1-attempt2-1366-evening-garden",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-evening-garden.png",
+          "caption": "Desktop 1366×860 · pergola garden · evening"
+        },
+        {
+          "id": "round1-attempt2-1366-evening-horizon",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-evening-horizon.png",
+          "caption": "Desktop 1366×860 · sea and horizon · evening"
+        },
+        {
+          "id": "round1-attempt2-1366-evening-rest-court",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-evening-rest-court.png",
+          "caption": "Desktop 1366×860 · sea-facing rest court · evening"
+        },
+        {
+          "id": "round1-attempt2-1366-evening-shore",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-evening-shore.png",
+          "caption": "Desktop 1366×860 · shore loop · evening"
+        },
+        {
+          "id": "round1-attempt2-1366-evening-terrace",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-evening-terrace.png",
+          "caption": "Desktop 1366×860 · original sea terrace · evening"
+        },
+        {
+          "id": "round1-attempt2-1366-morning-approach",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-morning-approach.png",
+          "caption": "Desktop 1366×860 · dorm-row approach · morning"
+        },
+        {
+          "id": "round1-attempt2-1366-morning-building-join",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-morning-building-join.png",
+          "caption": "Desktop 1366×860 · building and public path join · morning"
+        },
+        {
+          "id": "round1-attempt2-1366-morning-garden",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-morning-garden.png",
+          "caption": "Desktop 1366×860 · pergola garden · morning"
+        },
+        {
+          "id": "round1-attempt2-1366-morning-horizon",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-morning-horizon.png",
+          "caption": "Desktop 1366×860 · sea and horizon · morning"
+        },
+        {
+          "id": "round1-attempt2-1366-morning-rest-court",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-morning-rest-court.png",
+          "caption": "Desktop 1366×860 · sea-facing rest court · morning"
+        },
+        {
+          "id": "round1-attempt2-1366-morning-shore",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-morning-shore.png",
+          "caption": "Desktop 1366×860 · shore loop · morning"
+        },
+        {
+          "id": "round1-attempt2-1366-morning-terrace",
+          "image": "game3d/shots/island-southeast/round1-attempt2/1366-morning-terrace.png",
+          "caption": "Desktop 1366×860 · original sea terrace · morning"
+        },
+        {
+          "id": "round1-attempt2-390-evening-approach",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-evening-approach.png",
+          "caption": "Phone 390×844 · dorm-row approach · evening"
+        },
+        {
+          "id": "round1-attempt2-390-evening-building-join",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-evening-building-join.png",
+          "caption": "Phone 390×844 · building and public path join · evening"
+        },
+        {
+          "id": "round1-attempt2-390-evening-garden",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-evening-garden.png",
+          "caption": "Phone 390×844 · pergola garden · evening"
+        },
+        {
+          "id": "round1-attempt2-390-evening-horizon",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-evening-horizon.png",
+          "caption": "Phone 390×844 · sea and horizon · evening"
+        },
+        {
+          "id": "round1-attempt2-390-evening-rest-court",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-evening-rest-court.png",
+          "caption": "Phone 390×844 · sea-facing rest court · evening"
+        },
+        {
+          "id": "round1-attempt2-390-evening-shore",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-evening-shore.png",
+          "caption": "Phone 390×844 · shore loop · evening"
+        },
+        {
+          "id": "round1-attempt2-390-evening-terrace",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-evening-terrace.png",
+          "caption": "Phone 390×844 · original sea terrace · evening"
+        },
+        {
+          "id": "round1-attempt2-390-morning-approach",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-morning-approach.png",
+          "caption": "Phone 390×844 · dorm-row approach · morning"
+        },
+        {
+          "id": "round1-attempt2-390-morning-building-join",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-morning-building-join.png",
+          "caption": "Phone 390×844 · building and public path join · morning"
+        },
+        {
+          "id": "round1-attempt2-390-morning-garden",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-morning-garden.png",
+          "caption": "Phone 390×844 · pergola garden · morning"
+        },
+        {
+          "id": "round1-attempt2-390-morning-horizon",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-morning-horizon.png",
+          "caption": "Phone 390×844 · sea and horizon · morning"
+        },
+        {
+          "id": "round1-attempt2-390-morning-rest-court",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-morning-rest-court.png",
+          "caption": "Phone 390×844 · sea-facing rest court · morning"
+        },
+        {
+          "id": "round1-attempt2-390-morning-shore",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-morning-shore.png",
+          "caption": "Phone 390×844 · shore loop · morning"
+        },
+        {
+          "id": "round1-attempt2-390-morning-terrace",
+          "image": "game3d/shots/island-southeast/round1-attempt2/390-morning-terrace.png",
+          "caption": "Phone 390×844 · original sea terrace · morning"
+        }
+      ]
+    },
+    {
+      "title": "Second captured attempt: revised again",
+      "caption": "The sea and shore/building views improved. Personal inspection still rejected the phone approach roof and the compressed desktop terrace camera.",
+      "images": [
+        {
+          "id": "round2-1366-evening-approach",
+          "image": "game3d/shots/island-southeast/round2/1366-evening-approach.png",
+          "caption": "Desktop 1366×860 · dorm-row approach · evening"
+        },
+        {
+          "id": "round2-1366-evening-building-join",
+          "image": "game3d/shots/island-southeast/round2/1366-evening-building-join.png",
+          "caption": "Desktop 1366×860 · building and public path join · evening"
+        },
+        {
+          "id": "round2-1366-evening-garden",
+          "image": "game3d/shots/island-southeast/round2/1366-evening-garden.png",
+          "caption": "Desktop 1366×860 · pergola garden · evening"
+        },
+        {
+          "id": "round2-1366-evening-horizon",
+          "image": "game3d/shots/island-southeast/round2/1366-evening-horizon.png",
+          "caption": "Desktop 1366×860 · sea and horizon · evening"
+        },
+        {
+          "id": "round2-1366-evening-rest-court",
+          "image": "game3d/shots/island-southeast/round2/1366-evening-rest-court.png",
+          "caption": "Desktop 1366×860 · sea-facing rest court · evening"
+        },
+        {
+          "id": "round2-1366-evening-shore",
+          "image": "game3d/shots/island-southeast/round2/1366-evening-shore.png",
+          "caption": "Desktop 1366×860 · shore loop · evening"
+        },
+        {
+          "id": "round2-1366-evening-terrace",
+          "image": "game3d/shots/island-southeast/round2/1366-evening-terrace.png",
+          "caption": "Desktop 1366×860 · original sea terrace · evening"
+        },
+        {
+          "id": "round2-1366-morning-approach",
+          "image": "game3d/shots/island-southeast/round2/1366-morning-approach.png",
+          "caption": "Desktop 1366×860 · dorm-row approach · morning"
+        },
+        {
+          "id": "round2-1366-morning-building-join",
+          "image": "game3d/shots/island-southeast/round2/1366-morning-building-join.png",
+          "caption": "Desktop 1366×860 · building and public path join · morning"
+        },
+        {
+          "id": "round2-1366-morning-garden",
+          "image": "game3d/shots/island-southeast/round2/1366-morning-garden.png",
+          "caption": "Desktop 1366×860 · pergola garden · morning"
+        },
+        {
+          "id": "round2-1366-morning-horizon",
+          "image": "game3d/shots/island-southeast/round2/1366-morning-horizon.png",
+          "caption": "Desktop 1366×860 · sea and horizon · morning"
+        },
+        {
+          "id": "round2-1366-morning-rest-court",
+          "image": "game3d/shots/island-southeast/round2/1366-morning-rest-court.png",
+          "caption": "Desktop 1366×860 · sea-facing rest court · morning"
+        },
+        {
+          "id": "round2-1366-morning-shore",
+          "image": "game3d/shots/island-southeast/round2/1366-morning-shore.png",
+          "caption": "Desktop 1366×860 · shore loop · morning"
+        },
+        {
+          "id": "round2-1366-morning-terrace",
+          "image": "game3d/shots/island-southeast/round2/1366-morning-terrace.png",
+          "caption": "Desktop 1366×860 · original sea terrace · morning"
+        },
+        {
+          "id": "round2-390-evening-approach",
+          "image": "game3d/shots/island-southeast/round2/390-evening-approach.png",
+          "caption": "Phone 390×844 · dorm-row approach · evening"
+        },
+        {
+          "id": "round2-390-evening-building-join",
+          "image": "game3d/shots/island-southeast/round2/390-evening-building-join.png",
+          "caption": "Phone 390×844 · building and public path join · evening"
+        },
+        {
+          "id": "round2-390-evening-garden",
+          "image": "game3d/shots/island-southeast/round2/390-evening-garden.png",
+          "caption": "Phone 390×844 · pergola garden · evening"
+        },
+        {
+          "id": "round2-390-evening-horizon",
+          "image": "game3d/shots/island-southeast/round2/390-evening-horizon.png",
+          "caption": "Phone 390×844 · sea and horizon · evening"
+        },
+        {
+          "id": "round2-390-evening-rest-court",
+          "image": "game3d/shots/island-southeast/round2/390-evening-rest-court.png",
+          "caption": "Phone 390×844 · sea-facing rest court · evening"
+        },
+        {
+          "id": "round2-390-evening-shore",
+          "image": "game3d/shots/island-southeast/round2/390-evening-shore.png",
+          "caption": "Phone 390×844 · shore loop · evening"
+        },
+        {
+          "id": "round2-390-evening-terrace",
+          "image": "game3d/shots/island-southeast/round2/390-evening-terrace.png",
+          "caption": "Phone 390×844 · original sea terrace · evening"
+        },
+        {
+          "id": "round2-390-morning-approach",
+          "image": "game3d/shots/island-southeast/round2/390-morning-approach.png",
+          "caption": "Phone 390×844 · dorm-row approach · morning"
+        },
+        {
+          "id": "round2-390-morning-building-join",
+          "image": "game3d/shots/island-southeast/round2/390-morning-building-join.png",
+          "caption": "Phone 390×844 · building and public path join · morning"
+        },
+        {
+          "id": "round2-390-morning-garden",
+          "image": "game3d/shots/island-southeast/round2/390-morning-garden.png",
+          "caption": "Phone 390×844 · pergola garden · morning"
+        },
+        {
+          "id": "round2-390-morning-horizon",
+          "image": "game3d/shots/island-southeast/round2/390-morning-horizon.png",
+          "caption": "Phone 390×844 · sea and horizon · morning"
+        },
+        {
+          "id": "round2-390-morning-rest-court",
+          "image": "game3d/shots/island-southeast/round2/390-morning-rest-court.png",
+          "caption": "Phone 390×844 · sea-facing rest court · morning"
+        },
+        {
+          "id": "round2-390-morning-shore",
+          "image": "game3d/shots/island-southeast/round2/390-morning-shore.png",
+          "caption": "Phone 390×844 · shore loop · morning"
+        },
+        {
+          "id": "round2-390-morning-terrace",
+          "image": "game3d/shots/island-southeast/round2/390-morning-terrace.png",
+          "caption": "Phone 390×844 · original sea terrace · morning"
+        }
+      ]
+    },
+    {
+      "title": "Jump input attempt 1: missed landing",
+      "caption": "The first desktop jump reached the stone too late. Seating passed; this jump attempt did not.",
+      "images": [
+        {
+          "id": "routes-attempt1-1366-jump",
+          "image": "game3d/shots/island-southeast/routes-attempt1/1366-jump.png",
+          "caption": "Desktop 1366×860 · running jump"
+        },
+        {
+          "id": "routes-attempt1-1366-landed",
+          "image": "game3d/shots/island-southeast/routes-attempt1/1366-landed.png",
+          "caption": "Desktop 1366×860 · stable stone landing"
+        },
+        {
+          "id": "routes-attempt1-1366-seated",
+          "image": "game3d/shots/island-southeast/routes-attempt1/1366-seated.png",
+          "caption": "Desktop 1366×860 · seated toward the sea"
+        }
+      ]
+    },
+    {
+      "title": "Jump input attempt 2: overshot",
+      "caption": "The desktop jump cleared the stone but continued beyond it. Input timing was adjusted; the scene and physics stayed unchanged.",
+      "images": [
+        {
+          "id": "routes-attempt2-1366-jump",
+          "image": "game3d/shots/island-southeast/routes-attempt2/1366-jump.png",
+          "caption": "Desktop 1366×860 · running jump"
+        },
+        {
+          "id": "routes-attempt2-1366-landed",
+          "image": "game3d/shots/island-southeast/routes-attempt2/1366-landed.png",
+          "caption": "Desktop 1366×860 · stable stone landing"
+        },
+        {
+          "id": "routes-attempt2-1366-seated",
+          "image": "game3d/shots/island-southeast/routes-attempt2/1366-seated.png",
+          "caption": "Desktop 1366×860 · seated toward the sea"
+        }
+      ]
+    },
+    {
+      "title": "Jump input attempt 3: stopped early",
+      "caption": "The desktop jump stopped before the stone face. Retained as a failed input attempt.",
+      "images": [
+        {
+          "id": "routes-jump-attempt3-1366-jump",
+          "image": "game3d/shots/island-southeast/routes-jump-attempt3/1366-jump.png",
+          "caption": "Desktop 1366×860 · running jump"
+        },
+        {
+          "id": "routes-jump-attempt3-1366-landed",
+          "image": "game3d/shots/island-southeast/routes-jump-attempt3/1366-landed.png",
+          "caption": "Desktop 1366×860 · stable stone landing"
+        },
+        {
+          "id": "routes-jump-attempt3-1366-seated",
+          "image": "game3d/shots/island-southeast/routes-jump-attempt3/1366-seated.png",
+          "caption": "Desktop 1366×860 · seated toward the sea"
+        }
+      ]
+    },
+    {
+      "title": "Focused jump attempt 4: passed",
+      "caption": "The first successful focused sitting, jumping and stable stone landing at both native formats. Full route reproduction follows below.",
+      "images": [
+        {
+          "id": "routes-jump-attempt4-1366-jump",
+          "image": "game3d/shots/island-southeast/routes-jump-attempt4/1366-jump.png",
+          "caption": "Desktop 1366×860 · running jump"
+        },
+        {
+          "id": "routes-jump-attempt4-1366-landed",
+          "image": "game3d/shots/island-southeast/routes-jump-attempt4/1366-landed.png",
+          "caption": "Desktop 1366×860 · stable stone landing"
+        },
+        {
+          "id": "routes-jump-attempt4-1366-seated",
+          "image": "game3d/shots/island-southeast/routes-jump-attempt4/1366-seated.png",
+          "caption": "Desktop 1366×860 · seated toward the sea"
+        },
+        {
+          "id": "routes-jump-attempt4-390-jump",
+          "image": "game3d/shots/island-southeast/routes-jump-attempt4/390-jump.png",
+          "caption": "Phone 390×844 · running jump"
+        },
+        {
+          "id": "routes-jump-attempt4-390-landed",
+          "image": "game3d/shots/island-southeast/routes-jump-attempt4/390-landed.png",
+          "caption": "Phone 390×844 · stable stone landing"
+        },
+        {
+          "id": "routes-jump-attempt4-390-seated",
+          "image": "game3d/shots/island-southeast/routes-jump-attempt4/390-seated.png",
+          "caption": "Phone 390×844 · seated toward the sea"
+        }
+      ]
+    },
+    {
+      "title": "Full recreation and return routes: passed",
+      "caption": "The complete first successful route run shows sitting, jumping, landing and returns at both native formats. The final-navigation rerun is shown above.",
+      "images": [
+        {
+          "id": "routes-final-1366-jump",
+          "image": "game3d/shots/island-southeast/routes-final/1366-jump.png",
+          "caption": "Desktop 1366×860 · running jump"
+        },
+        {
+          "id": "routes-final-1366-landed",
+          "image": "game3d/shots/island-southeast/routes-final/1366-landed.png",
+          "caption": "Desktop 1366×860 · stable stone landing"
+        },
+        {
+          "id": "routes-final-1366-return-dorm-commons",
+          "image": "game3d/shots/island-southeast/routes-final/1366-return-dorm_commons.png",
+          "caption": "Desktop 1366×860 · return from commons"
+        },
+        {
+          "id": "routes-final-1366-return-east-lane",
+          "image": "game3d/shots/island-southeast/routes-final/1366-return-east_lane.png",
+          "caption": "Desktop 1366×860 · return from east lane"
+        },
+        {
+          "id": "routes-final-1366-return-sports",
+          "image": "game3d/shots/island-southeast/routes-final/1366-return-sports.png",
+          "caption": "Desktop 1366×860 · return from sports"
+        },
+        {
+          "id": "routes-final-1366-seated",
+          "image": "game3d/shots/island-southeast/routes-final/1366-seated.png",
+          "caption": "Desktop 1366×860 · seated toward the sea"
+        },
+        {
+          "id": "routes-final-390-jump",
+          "image": "game3d/shots/island-southeast/routes-final/390-jump.png",
+          "caption": "Phone 390×844 · running jump"
+        },
+        {
+          "id": "routes-final-390-landed",
+          "image": "game3d/shots/island-southeast/routes-final/390-landed.png",
+          "caption": "Phone 390×844 · stable stone landing"
+        },
+        {
+          "id": "routes-final-390-return-dorm-commons",
+          "image": "game3d/shots/island-southeast/routes-final/390-return-dorm_commons.png",
+          "caption": "Phone 390×844 · return from commons"
+        },
+        {
+          "id": "routes-final-390-return-east-lane",
+          "image": "game3d/shots/island-southeast/routes-final/390-return-east_lane.png",
+          "caption": "Phone 390×844 · return from east lane"
+        },
+        {
+          "id": "routes-final-390-return-sports",
+          "image": "game3d/shots/island-southeast/routes-final/390-return-sports.png",
+          "caption": "Phone 390×844 · return from sports"
+        },
+        {
+          "id": "routes-final-390-seated",
+          "image": "game3d/shots/island-southeast/routes-final/390-seated.png",
+          "caption": "Phone 390×844 · seated toward the sea"
+        }
+      ]
+    },
+    {
+      "title": "Startup attempt: no captures",
+      "caption": "The initial round1 startup stopped because the three new public spots lacked catalog declarations. Those declarations were fixed before round1-attempt2; no pictures were produced. The navigation regression has a report and no additional screenshots.",
+      "images": []
+    }
+  ],
+  "links": [
+    {
+      "label": "Matching before/after and QA reports",
+      "href": "game3d/shots/island-southeast/proof.md"
+    },
+    {
+      "label": "Play Amakawa",
+      "href": "game3d/"
+    },
+    {
+      "label": "Final native navigation: all 90 directed routes",
+      "href": "game3d/shots/island-southeast/native-nav-regression/report.json"
+    },
+    {
+      "label": "Final physical route report",
+      "href": "game3d/shots/island-southeast/routes-nav-fixed/report.json"
+    },
+    {
+      "label": "Final combined-geometry perch check",
+      "href": "game3d/shots/island-southeast/perches/report.json"
+    }
+  ]
+}
