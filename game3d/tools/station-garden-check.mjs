@@ -207,10 +207,11 @@ await withBrowserJob(
           for (const point of route) await walk(point);
           await shot('arcade-link');
           for (const point of [...route].reverse()) await walk(point);
-          await walk(local([-14.45, 16.6]));
-          await shot('covered-approach');
-          await walk(local([-14.45, 12]));
-          await shot('station-boundary');
+          await walk(local([-14.45, 20.8]));
+          await shot('garden-north-end');
+          await walk(local([-14.45, 23.5]));
+          await walk(local([-16.55, 23.7]));
+          await shot('garden-west-end');
         }
         await walk(local([-14.45, 23.5]));
         await page.evaluate(async () => {

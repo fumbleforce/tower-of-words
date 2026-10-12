@@ -18,11 +18,8 @@ export const COVERED = coveredWalk({
 }).map(([x0, x1, z0, z1]) => [x0 + fx, z0 + fz, x1 + fx, z1 + fz]);
 export const PATH_IDS = ['station_walk', 'garden_square', 'south_link', 'garden_arcade', 'garden_return'];
 export const PATHS = PATH_IDS.map((id) => WALKS[id].rect);
-// Stop short of the existing glass and the stair riser. Neither is a new station entrance.
-export const WALKS_LOCAL = [
-  ...PATHS,
-  ...COVERED.map(([x0, z0, x1, z1], i) => [x0 + 0.16, z0 + (i ? 0.2 : 0.16), x1 - 0.16, z1 + (i ? 0.25 : -0.16)]),
-].map(rect);
+// The covered station approach is scenery from this garden. Public paving ends at its planted rest corner.
+export const WALKS_LOCAL = PATHS.map(rect);
 export const BENCHES = Object.fromEntries(
   WALKS.garden_square.benches.map(([ix, iz], i) => {
     const [x, z] = local([ix, iz]),

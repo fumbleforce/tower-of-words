@@ -14,7 +14,7 @@ const GREENS = ['#4d6b47', '#43603f', '#577650', '#5f7d57'];
 const FLOWERS = ['#c9607a', '#e0d2e8', '#d8a33a'];
 
 // clipped shrubs over a soil top w x d at height y: domes in a row (n), a little different each
-function shrubs(k, w, d, y, n) {
+function shrubs(k, w, d, y, n, flowering = false) {
   const r = k.r;
   k.box('#4b4540', w, 0.02, d, 0, y - 0.02, 0, { surf: 'soil', cast: false });
   const count = k.phone ? Math.max(1, Math.ceil(n / 2)) : n,
@@ -30,6 +30,15 @@ function shrubs(k, w, d, y, n) {
     k.geo(GREENS[Math.floor(r() * GREENS.length)], g.translate(u, y + rr * 0.45, (r() - 0.5) * 0.05), {
       surf: 'foliage',
     });
+    if (flowering)
+      for (let j = 0; j < (k.phone ? 3 : 7); j++) {
+        const a = j * 2.4 + i,
+          flower = new THREE.IcosahedronGeometry(k.phone ? 0.065 : 0.05, 0).scale(1, 0.65, 1);
+        k.geo(FLOWERS[i % 2], flower.translate(u + Math.cos(a) * rr * 0.55, y + rr * 0.78, Math.sin(a) * rr * 0.5), {
+          cast: false,
+          worn: false,
+        });
+      }
     // a few flowers on the high level
     if (k.high && r() < 0.5)
       for (let j = 0; j < 5; j++) {
@@ -53,6 +62,7 @@ export const planter = piece({
   variants: {
     box: { w: 1.2, d: 0.6, h: 0.5, shrubs: 2 },
     long: { w: 2.4, d: 0.45, h: 0.4, shrubs: 5 },
+    flowering: { w: 2.4, d: 0.5, h: 0.4, shrubs: 5, flowering: true },
     round: { r: 0.42, h: 0.45 },
     timber: { w: 1.0, d: 1.0, h: 0.55, shrubs: 1, timber: true },
     seat: { w: 1.8, d: 0.75, h: 0.45, shrubs: 3, seat: true },
@@ -85,7 +95,7 @@ export const planter = piece({
       k.box(STONE.pale, w + 0.03, 0.04, d + 0.03, 0, h, 0, { round: 0.01, surf: 'concrete' });
       if (!k.phone) k.box(STONE.dark, w - 0.02, 0.03, d - 0.02, 0, 0, 0, { cast: false }); // a shadow gap at its foot
     }
-    shrubs(k, w - 2 * t, d - 2 * t, h, o.shrubs);
+    shrubs(k, w - 2 * t, d - 2 * t, h, o.shrubs, o.flowering);
     if (o.seat) {
       // a timber bench along the front, on two concrete brackets
       for (const s of [-1, 1])

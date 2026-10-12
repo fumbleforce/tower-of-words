@@ -27,6 +27,7 @@ import { kerb } from './edges.js';
 import { bench, STEEL, PAINTED } from './furniture.js';
 import { TREES, cluster, mound, LEAF } from './planting.js';
 import { drift } from '../forecourt/gardens.js';
+import { walkEndFurniture } from './walk-planters.js';
 
 import { WEST_COAST, WEST_TREES, WEST_SHRUBS, WEST_BEDS, WEST_DRIFTS, WALKS } from '../island-west.js';
 
@@ -294,7 +295,7 @@ function seams(stone, at, [x0, z0, x1, z1]) {
 
 // the walks' kerbs (each side less where another walk meets it, and less its open sides), the terraces' rails on
 // their seaward sides and two benches on each, a step back from the rail
-function walks(stone, at, turn, clip, WALKS) {
+function walks(stone, at, turn, clip, WALKS, lights) {
   const list = Object.values(WALKS);
   for (const w of list) {
     for (const [k, s] of Object.entries(sides(w.rect))) {
@@ -318,6 +319,7 @@ function walks(stone, at, turn, clip, WALKS) {
     const [wx0, wz0, wx1, wz1] = w.rect;
     if (!clip(...at((wx0 + wx1) / 2, (wz0 + wz1) / 2))) continue;
     for (const [x, z, look] of w.benches || []) bench(stone, ...at(x, z), look + turn, { len: 1.5 });
+    walkEndFurniture(stone, w, at, turn, clip, lights);
     // a paved place (a terrace, a square) is laid in slabs: a fine dark seam every SLAB both ways
     if (w.slabs) seams(stone, at, w.rect);
     if (!w.terrace) continue;
@@ -340,7 +342,7 @@ function walks(stone, at, turn, clip, WALKS) {
 
 export function* coastSteps(
   root,
-  { at, turn = 0, sea = -0.2, clip = () => true, layer = null, data = WEST, into = null },
+  { at, turn = 0, sea = -0.2, clip = () => true, layer = null, data = WEST, into = null, lights = null },
 ) {
   const stone = into || new Parts(),
     green = into || new Parts(),
@@ -351,7 +353,7 @@ export function* coastSteps(
   const bare = (x, z) =>
     terraces.some((w) => near(w.rect, x, z, 0.5)) || (data.paved || []).some((r) => near(r, x, z, 0.3));
   for (const c of data.coast) yield* wall(stone, green, surf, at, sea, clip, c, bare);
-  walks(stone, at, turn, clip, data.walks || {});
+  walks(stone, at, turn, clip, data.walks || {}, lights);
   yield;
   (data.trees || []).forEach(([kind, x, z, s], i) => {
     const [lx, lz] = at(x, z);

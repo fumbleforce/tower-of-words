@@ -9,9 +9,9 @@
 //   (island-south.js SHORE), so the sea wall bends like a shore rather than in straight runs
 //   the coast walk: 2 wide, on the grid, kerbed. From the shed street's north end west along the shed's north end,
 //   south past the shed (clear of the second track's beam) to a lookout terrace on a point of the coast, on south to
-//   a corner terrace where the coast turns east and the monorail comes in off the bay, then east as the south walk,
-//   under the line, to the station's axis, where it meets the walk down from the station's covered walkway and goes
-//   on south to the promenade (island-south.js). One loop: no dead ends.
+//   a corner terrace where the coast turns east and the monorail comes in off the bay,
+//   ending at the southern lookout. The station south garden is separate, reached from the shops and promenade.
+//   Its short northern walk and west side end in planted resting corners before the railway and station approach.
 //   the garden south of the station: on the station's axis between its covered walkway and the south walk, a walk
 //   with planted beds either side; either side of it a lawn panel mown in bands, a drift of layered planting along
 //   the walkway, a cherry; a row of zelkovas between the garden and the line
@@ -87,8 +87,10 @@ export const WALKS = {
     open: 's',
     lane: true,
   },
-  coast_south_walk: { rect: [-40.6, 22.5, AXIS[1], 24.5] },
-  station_walk: { rect: [AXIS[0], WALKWAY_S, AXIS[1], 22.5], open: 'n' },
+  station_walk: {
+    rect: [AXIS[0], 20.1, AXIS[1], 22.5],
+    planters: [{ at: [-14.45, 19.8], w: 2.4, d: 0.5, variant: 'flowering', seed: 545 }],
+  },
   garden_arcade: { rect: [-11.45, 23.7, -5.5, 25.3], open: 'e' },
   garden_return: { rect: [-13.25, 25.3, -10.85, 26.4] },
   south_link: { rect: [AXIS[0], 24.5, AXIS[1], 26.9], open: 's' }, // to the promenade (island-south.js)
@@ -96,6 +98,8 @@ export const WALKS = {
   garden_square: {
     rect: [AXIS[0] - 1.8, 22.1, AXIS[1] + 1.8, 25.3],
     slabs: true,
+    planters: [{ at: [AXIS[0] - 2.1, 23.7], face: Math.PI / 2, w: 2.8, d: 0.5, variant: 'flowering', seed: 546 }],
+    lamps: [[-17.7, 21.8]],
     benches: [
       [AXIS[1] + 1.15, 22.95, -Math.PI / 2],
       [AXIS[1] + 1.15, 24.55, -Math.PI / 2],
@@ -112,13 +116,11 @@ const DETAIL = {
   coast_path_east: 'The coast walk’s leg east past the shed’s north end, to the head of the shed street.',
   shed_street_north:
     'The shed street’s last stretch north (3 wide on the station’s west face line, as forecourt/plan.js lays it), out of the forecourt’s view, to the coast walk.',
-  coast_south_walk:
-    'From the corner terrace east across the lawn south of the station, under the line, to the station’s axis.',
-  station_walk: 'Down the station’s axis from its covered walkway, between planted beds, to the south walk.',
+  station_walk: 'A short garden walk from the bench square to a planted northern end, clear of the station approach.',
   south_link: 'On down the station’s axis from the south walk to the promenade’s west end.',
   garden_arcade: 'The garden square’s east path to the arcade’s western passage.',
   garden_return: 'A paved return around the south garden bench to the promenade link.',
-  garden_square: 'A square of slabs where the south walk meets the station’s axis, with two benches.',
+  garden_square: 'A slab rest square with two benches and a planted west end, reached from the shops and promenade.',
 };
 export const WEST_PATHS = Object.entries(WALKS).map(([id, w]) => ({
   id,
@@ -200,8 +202,7 @@ export const WEST_MOWN = [
   // west of the line, between the walk and the second track's beam
   ...bands([-39.9, 12.4, -34.4, 22.1], 1.4),
   // under the line between its two beds, along it
-  ...bands([-32, 13.2, -25.4, 22.1], 1.65),
-  ...bands([-32, 24.9, -25.4, 32], 1.65),
+  ...bands([-32, 13.2, -25.4, 32], 1.65),
   // the garden's two panels either side of the station's axis, mown across
   ...bands([-22.6, 19.4, -17.4, 22.1], 0.9),
   ...bands([-11.6, 19.4, -6.4, 22.1], 0.9),
@@ -237,6 +238,11 @@ export const WEST_DRIFTS = [
   // on the lawn south of the walk, in the wedge between the line and the wall
   [-37.6, -32.6, 27, 28.8, 's'],
   [-24.4, -19.4, 32.2, 34, 's'],
+  // The public garden ends before the station's covered approach. Planting closes the former path's axis.
+  [AXIS[0], AXIS[1], WALKWAY_S + 0.3, 19.5, 'n'],
+  // Loose low planting follows the railway verge across the removed paving spur.
+  [-30.8, -26.4, 22.3, 24.8, 'n'],
+  [-23.4, -20.8, 20.2, 26.8, 'w'],
 ];
 
 // Trees on the grid, [kind, x, z, size]; shrub clusters [x, z].
