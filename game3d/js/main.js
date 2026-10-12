@@ -15,6 +15,7 @@ import { guardedLoop } from './perf/gl-guard.js';
 import { softSeparate, frameDt } from './move.js';
 import { scanTargets } from './gameplay/targeting.js';
 import { installSteer } from './movement/steer.js';
+import { installJump } from './movement/jump-input.js';
 import * as ambience from './ambience.js';
 import { mioBody, playerBody } from './chibi.js';
 import { reloadForMc } from './mc.js';
@@ -389,12 +390,13 @@ function step(dt, drawn) {
     holdNudge();
   }
   steer.update(dt);
+  game.jump.update(dt); // in the air, or landing (movement/jump.js)
   if (game.walker && !mio.seated && !mio.scripted) moving = game.walker.update(dt, place.camera);
   if (!mio.seated && !mio.scripted && !mio._walk) {
     mio.setState(moving ? 'walk' : 'idle');
     mio.setGait?.(game.walker.gait.v, game.walker.gait); // .run
   }
-  mio.update(dt, 1.25);
+  mio.update(dt * game.jump.animRate, 1.25); // in the air the stride holds
   if (game.mioNpc.root.visible) game.mioNpc.update(dt, 1.25);
   game.stepTweens(dt);
   place.update(dt, game.t);
@@ -452,7 +454,9 @@ async function boot() {
           console.warn('Meshy body failed, using the chibi', e);
           return makeAvatar();
         });
-  game.player.root.add(blob(0.55, 0.4));
+  game.player.blob = blob(0.55, 0.4);
+  game.player.root.add(game.player.blob);
+  installJump(game, { shadow: game.player.blob, ui }); // Space or the phone's button, and falls (movement/jump-input.js)
   // Mio is an NPC now: Jørgen's Meshy model, colour-tweaked only, shown wherever the story puts her
   game.mioNpc = await mioBody();
   game.mioNpc.meshy = true;

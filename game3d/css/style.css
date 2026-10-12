@@ -142,6 +142,14 @@ body.phone .kword { font-size: 28px; }
 #sayBtn .t { font-weight: 700; font-size: 17px; color: var(--accent); }
 #sayBtn .to { font-size: 11px; color: var(--ink-dim); max-width: 68px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 body.busy #sayBtn { display: none; }
+/* the jump (movement/jump-input.js): a phone button bottom right, left of Say when Say shows; desktop jumps with Space */
+#jumpBtn { display: none; }
+body.phone #jumpBtn { position: absolute; right: 12px; bottom: 52px; width: 68px; height: 68px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border: 2px solid rgba(232, 236, 242, .35); background: rgba(31, 36, 44, .82); color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.35); touch-action: none; user-select: none; -webkit-user-select: none; }
+body.phone #jumpBtn[hidden], body.busy #jumpBtn { display: none; }
+body.phone #jumpBtn svg { width: 22px; height: 22px; fill: var(--ink); stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
+body.phone #jumpBtn .t { font-size: 12px; font-weight: 700; }
+body.phone #jumpBtn:active { transform: scale(.92); background: rgba(52, 60, 72, .9); }
+body.phone #sayBtn:not([hidden]) ~ #jumpBtn { right: 88px; }
 #sayMenu { position: absolute; right: 16px; bottom: 58px; width: min(340px, calc(100vw - 32px)); padding: 14px; border-radius: 14px; background: #1d2129; border: 1px solid var(--panel-edge); }
 #sayMenu[hidden] { display: none; }
 #sayMenu .head { color: var(--ink-dim); font-size: 14px; margin-bottom: 8px; }
