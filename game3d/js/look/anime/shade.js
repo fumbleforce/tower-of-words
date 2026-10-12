@@ -106,6 +106,14 @@ const LIT = (m) => m && (m.isMeshStandardMaterial || m.isMeshLambertMaterial || 
 export function patchAnime(m) {
   if (!LIT(m) || done.has(m) || m.userData.noAnime) return false;
   done.add(m);
+  // a copy that took a patched material's shader hooks along (the draw-call pass's batches, perf/batch.js) is patched
+  // already: patching it again left the shader as it was but doubled its program key, so the GPU compiled the same
+  // program a second time on entering the place (notes/PERF.md, "Laptops without a graphics card")
+  if (
+    m.customProgramCacheKey !== THREE.Material.prototype.customProgramCacheKey &&
+    m.customProgramCacheKey().includes('|anime:')
+  )
+    return false;
   const prev = m.onBeforeCompile,
     had = prev !== THREE.Material.prototype.onBeforeCompile,
     prevKey = m.customProgramCacheKey;
