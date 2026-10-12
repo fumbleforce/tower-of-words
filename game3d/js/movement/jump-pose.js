@@ -124,7 +124,7 @@ export function installJumpPose(hop, player) {
     }
     turn('Spine', (airborne ? 0.1 + tuck * 0.32 : 0.15) * weight);
   }
-  const originalUpdate = player.update;
+  let originalUpdate = player.update;
   const update = function (...args) {
     undo();
     const result = originalUpdate.apply(this, args);
@@ -167,6 +167,9 @@ export function installJumpPose(hop, player) {
     },
     reset,
     activate() {
+      // A Continue into water can install a fresh swimming overlay after the
+      // outfit slot restores its animation method, before this body is synced.
+      if (player.update !== update) originalUpdate = player.update;
       player.update = update;
     },
     body,

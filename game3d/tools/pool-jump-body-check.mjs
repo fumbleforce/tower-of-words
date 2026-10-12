@@ -130,8 +130,28 @@ await withBrowserJob(
     await page.screenshot({ path: out + 'after-collisions.png' });
     await change(false);
     rows.push({ stage: 'final', ...(await sample()) });
+    const waterOverlay = await page.evaluate(() => {
+      const g = globalThis.__game,
+        dry = g.place.snapshotState(),
+        wet = structuredClone(dry);
+      wet.swim.outfits.eric = true;
+      wet.swim.swimmers.eric = 'swim';
+      g.place.restoreState({ world: wet });
+      g.jump.update(0);
+      g.player.root.rotation.x = 0;
+      g.player.update(0.1);
+      const swimmingPitch = g.player.root.rotation.x;
+      g.place.restoreState({ world: dry });
+      g.jump.update(0);
+      g.player.update(0);
+      return { swimmingPitch, restoredPitch: g.player.root.rotation.x };
+    });
+    if (!process.env.BASELINE) {
+      assert(waterOverlay.swimmingPitch > 0.6, 'cached outfit keeps the restored swimming overlay');
+      assert(Math.abs(waterOverlay.restoredPitch) < 0.01, 'leaving water restores upright body');
+    }
     assert.deepEqual(errors, []);
-    fs.writeFileSync(out + 'result.json', JSON.stringify({ base, mc, width, rows, errors }, null, 2));
+    fs.writeFileSync(out + 'result.json', JSON.stringify({ base, mc, width, rows, waterOverlay, errors }, null, 2));
     console.log(
       'POOL BODY TRACE',
       out,

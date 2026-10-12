@@ -9,6 +9,7 @@ registerHooks({
 });
 const { installJumpBodies } = await import('../../js/movement/jump-bodies.js');
 const { poolOutfitSlot } = await import('../../js/places/day3/pool-outfit-slot.js');
+const { swimmerPose } = await import('../../js/places/day3/swim-pose.js');
 function make(root, name, calls) {
   const model = new THREE.Group();
   model.name = name;
@@ -77,4 +78,32 @@ test('pool model swaps retain one body, physical root and exactly one native mix
   }
   slot.dispose();
   assert.equal(bodies.sync().changed, false);
+});
+
+test('restoring a cached outfit directly into water keeps the new swimming overlay', () => {
+  const root = new THREE.Group(),
+    shadow = new THREE.Group(),
+    calls = {};
+  root.add(shadow);
+  const player = make(root, 'ordinary', calls),
+    bodies = installJumpBodies(player, shadow);
+  bodies.sync();
+  const slot = poolOutfitSlot(player, (r) => make(r, 'swimwear', calls));
+  for (let cycle = 0; cycle < 4; cycle++) {
+    slot.set(true);
+    const water = swimmerPose(player);
+    water.enter('swim');
+    bodies.sync();
+    const before = calls.swimwear;
+    root.rotation.x = 0;
+    player.update(0.1);
+    assert.equal(root.rotation.x, 0.72, 'the restored swim overlay still applies every frame');
+    assert.equal(calls.swimwear, before + 1, 'one native mixer update, without old overlay accumulation');
+    water.dispose();
+    slot.set(false);
+    bodies.sync();
+    player.update(0.1);
+    assert.equal(Math.abs(root.rotation.x), 0);
+  }
+  slot.dispose();
 });
