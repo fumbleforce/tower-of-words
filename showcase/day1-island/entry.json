@@ -4,7 +4,7 @@
   "by": "codex:island-builder",
   "caption": "Fuller greenery and matching neighbouring scenery from the forecourt through the residential court and market. A straight path now runs south from the fountain, splits the market into two halves, and reaches the beach.",
   "result": [
-    "final-combined-forecourt-morning-south",
+    "phone-arrival-forecourt-morning-phone",
     "budget-finish-plaza-morning-north",
     "final-combined-shotengai-morning-west",
     "route-finish-1366-sand"
@@ -3484,6 +3484,112 @@
           "caption": "390 stairs"
         }
       ]
+    },
+    {
+      "title": "Forecourt phone arrival and return",
+      "caption": "A steeper phone view clears the foreground tree and keeps the player visible from the station door to the main walk. Morning, evening and desktop checks.",
+      "images": [
+        {
+          "id": "phone-arrival-forecourt-evening-east",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/forecourt-evening-east.png",
+          "caption": "forecourt evening east"
+        },
+        {
+          "id": "phone-arrival-forecourt-evening-north",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/forecourt-evening-north.png",
+          "caption": "forecourt evening north"
+        },
+        {
+          "id": "phone-arrival-forecourt-evening-phone",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/forecourt-evening-phone.png",
+          "caption": "forecourt evening phone"
+        },
+        {
+          "id": "phone-arrival-forecourt-evening-south",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/forecourt-evening-south.png",
+          "caption": "forecourt evening south"
+        },
+        {
+          "id": "phone-arrival-forecourt-evening-west",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/forecourt-evening-west.png",
+          "caption": "forecourt evening west"
+        },
+        {
+          "id": "phone-arrival-forecourt-morning-east",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/forecourt-morning-east.png",
+          "caption": "forecourt morning east"
+        },
+        {
+          "id": "phone-arrival-forecourt-morning-north",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/forecourt-morning-north.png",
+          "caption": "forecourt morning north"
+        },
+        {
+          "id": "phone-arrival-forecourt-morning-phone",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/forecourt-morning-phone.png",
+          "caption": "forecourt morning phone"
+        },
+        {
+          "id": "phone-arrival-forecourt-morning-south",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/forecourt-morning-south.png",
+          "caption": "forecourt morning south"
+        },
+        {
+          "id": "phone-arrival-forecourt-morning-west",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/forecourt-morning-west.png",
+          "caption": "forecourt morning west"
+        },
+        {
+          "id": "phone-arrival-walk-forecourt-evening-main-walk",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/walk/forecourt-evening-main-walk.png",
+          "caption": "walk forecourt evening main walk"
+        },
+        {
+          "id": "phone-arrival-walk-forecourt-evening-overview",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/walk/forecourt-evening-overview.png",
+          "caption": "walk forecourt evening overview"
+        },
+        {
+          "id": "phone-arrival-walk-forecourt-evening-return-approach",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/walk/forecourt-evening-return-approach.png",
+          "caption": "walk forecourt evening return approach"
+        },
+        {
+          "id": "phone-arrival-walk-forecourt-evening-station-door",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/walk/forecourt-evening-station-door.png",
+          "caption": "walk forecourt evening station door"
+        },
+        {
+          "id": "phone-arrival-walk-forecourt-evening-step-north",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/walk/forecourt-evening-step-north.png",
+          "caption": "walk forecourt evening step north"
+        },
+        {
+          "id": "phone-arrival-walk-forecourt-morning-main-walk",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/walk/forecourt-morning-main-walk.png",
+          "caption": "walk forecourt morning main walk"
+        },
+        {
+          "id": "phone-arrival-walk-forecourt-morning-overview",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/walk/forecourt-morning-overview.png",
+          "caption": "walk forecourt morning overview"
+        },
+        {
+          "id": "phone-arrival-walk-forecourt-morning-return-approach",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/walk/forecourt-morning-return-approach.png",
+          "caption": "walk forecourt morning return approach"
+        },
+        {
+          "id": "phone-arrival-walk-forecourt-morning-station-door",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/walk/forecourt-morning-station-door.png",
+          "caption": "walk forecourt morning station door"
+        },
+        {
+          "id": "phone-arrival-walk-forecourt-morning-step-north",
+          "image": "game3d/shots/island-day1/forecourt-phone-fix-43/walk/forecourt-morning-step-north.png",
+          "caption": "walk forecourt morning step north"
+        }
+      ]
     }
   ],
   "links": [
@@ -3498,6 +3604,12 @@
     {
       "label": "Visual review",
       "href": "game3d/shots/island-day1/scaled-middle/visual-audit.md"
+    },
+    {
+      "label": "Verification and known issues",
+      "href": "game3d/shots/island-day1/QA.md"
     }
-  ]
+  ],
+  "updated": "2026-10-12T22:12:33.989033+00:00",
+  "commit": "21b71de8a"
 }
