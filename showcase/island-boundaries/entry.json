@@ -1,0 +1,2395 @@
+{
+  "title": "Island access boundaries",
+  "date": "2026-10-13",
+  "by": "codex-island-boundaries",
+  "caption": "The northwest station staff entrance and unfinished northern sports and works lawns now have visible fences, matching maps and safe recovery for old day-two saves.",
+  "commit": [
+    "e9a8f7ac94c772fc785451c7fcc3f5fc39db9f60",
+    "f7541d34a8572b5d44bccc599f7f7ac8698f9549",
+    "dc4a05341e862f915b6d96550ba74257fc7ef775"
+  ],
+  "result": [
+    "camera-after-a--1366-forecourt-morning-near-gate",
+    "map-after-a--390-forecourt-morning-approach",
+    "after-b-final--1366-sports-morning-grove",
+    "after-b-final--390-works-morning-factory-east"
+  ],
+  "sections": [
+    {
+      "title": "Northwest entrance — after",
+      "caption": "The closed staff gate and continuous side fences, morning and evening, from both sides. Desktop approach framing is investigated in the camera comparison below.",
+      "images": [
+        {
+          "id": "after-a--1366-campus-evening-gate-reverse",
+          "image": "game3d/shots/island-boundaries/after-a/1366-campus-evening-gate-reverse.png",
+          "caption": "Desktop 1366 × 860 — campus evening gate reverse."
+        },
+        {
+          "id": "after-a--1366-campus-evening-gate-west",
+          "image": "game3d/shots/island-boundaries/after-a/1366-campus-evening-gate-west.png",
+          "caption": "Desktop 1366 × 860 — campus evening gate west."
+        },
+        {
+          "id": "after-a--1366-campus-morning-gate-reverse",
+          "image": "game3d/shots/island-boundaries/after-a/1366-campus-morning-gate-reverse.png",
+          "caption": "Desktop 1366 × 860 — campus morning gate reverse."
+        },
+        {
+          "id": "after-a--1366-campus-morning-gate-west",
+          "image": "game3d/shots/island-boundaries/after-a/1366-campus-morning-gate-west.png",
+          "caption": "Desktop 1366 × 860 — campus morning gate west."
+        },
+        {
+          "id": "after-a--1366-forecourt-evening-approach",
+          "image": "game3d/shots/island-boundaries/after-a/1366-forecourt-evening-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening approach."
+        },
+        {
+          "id": "after-a--1366-forecourt-evening-east-tie",
+          "image": "game3d/shots/island-boundaries/after-a/1366-forecourt-evening-east-tie.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening east tie."
+        },
+        {
+          "id": "after-a--1366-forecourt-evening-far",
+          "image": "game3d/shots/island-boundaries/after-a/1366-forecourt-evening-far.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening far."
+        },
+        {
+          "id": "after-a--1366-forecourt-evening-west-return",
+          "image": "game3d/shots/island-boundaries/after-a/1366-forecourt-evening-west-return.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening west return."
+        },
+        {
+          "id": "after-a--1366-forecourt-morning-approach",
+          "image": "game3d/shots/island-boundaries/after-a/1366-forecourt-morning-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning approach."
+        },
+        {
+          "id": "after-a--1366-forecourt-morning-east-tie",
+          "image": "game3d/shots/island-boundaries/after-a/1366-forecourt-morning-east-tie.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning east tie."
+        },
+        {
+          "id": "after-a--1366-forecourt-morning-far",
+          "image": "game3d/shots/island-boundaries/after-a/1366-forecourt-morning-far.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning far."
+        },
+        {
+          "id": "after-a--1366-forecourt-morning-west-return",
+          "image": "game3d/shots/island-boundaries/after-a/1366-forecourt-morning-west-return.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning west return."
+        },
+        {
+          "id": "after-a--390-campus-evening-gate-reverse",
+          "image": "game3d/shots/island-boundaries/after-a/390-campus-evening-gate-reverse.png",
+          "caption": "Phone 390 × 844 — campus evening gate reverse."
+        },
+        {
+          "id": "after-a--390-campus-evening-gate-west",
+          "image": "game3d/shots/island-boundaries/after-a/390-campus-evening-gate-west.png",
+          "caption": "Phone 390 × 844 — campus evening gate west."
+        },
+        {
+          "id": "after-a--390-campus-morning-gate-reverse",
+          "image": "game3d/shots/island-boundaries/after-a/390-campus-morning-gate-reverse.png",
+          "caption": "Phone 390 × 844 — campus morning gate reverse."
+        },
+        {
+          "id": "after-a--390-campus-morning-gate-west",
+          "image": "game3d/shots/island-boundaries/after-a/390-campus-morning-gate-west.png",
+          "caption": "Phone 390 × 844 — campus morning gate west."
+        },
+        {
+          "id": "after-a--390-forecourt-evening-approach",
+          "image": "game3d/shots/island-boundaries/after-a/390-forecourt-evening-approach.png",
+          "caption": "Phone 390 × 844 — forecourt evening approach."
+        },
+        {
+          "id": "after-a--390-forecourt-evening-east-tie",
+          "image": "game3d/shots/island-boundaries/after-a/390-forecourt-evening-east-tie.png",
+          "caption": "Phone 390 × 844 — forecourt evening east tie."
+        },
+        {
+          "id": "after-a--390-forecourt-evening-far",
+          "image": "game3d/shots/island-boundaries/after-a/390-forecourt-evening-far.png",
+          "caption": "Phone 390 × 844 — forecourt evening far."
+        },
+        {
+          "id": "after-a--390-forecourt-evening-west-return",
+          "image": "game3d/shots/island-boundaries/after-a/390-forecourt-evening-west-return.png",
+          "caption": "Phone 390 × 844 — forecourt evening west return."
+        },
+        {
+          "id": "after-a--390-forecourt-morning-approach",
+          "image": "game3d/shots/island-boundaries/after-a/390-forecourt-morning-approach.png",
+          "caption": "Phone 390 × 844 — forecourt morning approach."
+        },
+        {
+          "id": "after-a--390-forecourt-morning-east-tie",
+          "image": "game3d/shots/island-boundaries/after-a/390-forecourt-morning-east-tie.png",
+          "caption": "Phone 390 × 844 — forecourt morning east tie."
+        },
+        {
+          "id": "after-a--390-forecourt-morning-far",
+          "image": "game3d/shots/island-boundaries/after-a/390-forecourt-morning-far.png",
+          "caption": "Phone 390 × 844 — forecourt morning far."
+        },
+        {
+          "id": "after-a--390-forecourt-morning-west-return",
+          "image": "game3d/shots/island-boundaries/after-a/390-forecourt-morning-west-return.png",
+          "caption": "Phone 390 × 844 — forecourt morning west return."
+        }
+      ]
+    },
+    {
+      "title": "Northern sports and works grounds — final",
+      "caption": "Final morning/evening approaches, building ties, reverse-side views and full maps. The sports grove bench and the works chimney and weather-station nooks remain accessible. Protected-side views are collision inspection positions.",
+      "images": [
+        {
+          "id": "after-b-final--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-final--1366-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-evening-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-final--1366-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-final--1366-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-evening-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-final--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "after-b-final--1366-sports-map",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-map.png",
+          "caption": "Desktop 1366 × 860 — sports map."
+        },
+        {
+          "id": "after-b-final--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "after-b-final--1366-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-morning-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-final--1366-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-final--1366-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-morning-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-final--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        },
+        {
+          "id": "after-b-final--1366-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-evening-chimney.png",
+          "caption": "Desktop 1366 × 860 — works evening chimney."
+        },
+        {
+          "id": "after-b-final--1366-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-evening-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east tie."
+        },
+        {
+          "id": "after-b-final--1366-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-evening-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east."
+        },
+        {
+          "id": "after-b-final--1366-works-evening-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-evening-factory-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory tie."
+        },
+        {
+          "id": "after-b-final--1366-works-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — works evening north reverse."
+        },
+        {
+          "id": "after-b-final--1366-works-evening-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-evening-plant-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening plant tie."
+        },
+        {
+          "id": "after-b-final--1366-works-evening-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-evening-research-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening research tie."
+        },
+        {
+          "id": "after-b-final--1366-works-evening-research",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-evening-research.png",
+          "caption": "Desktop 1366 × 860 — works evening research."
+        },
+        {
+          "id": "after-b-final--1366-works-map",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-map.png",
+          "caption": "Desktop 1366 × 860 — works map."
+        },
+        {
+          "id": "after-b-final--1366-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-morning-chimney.png",
+          "caption": "Desktop 1366 × 860 — works morning chimney."
+        },
+        {
+          "id": "after-b-final--1366-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-morning-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east tie."
+        },
+        {
+          "id": "after-b-final--1366-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-morning-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east."
+        },
+        {
+          "id": "after-b-final--1366-works-morning-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-morning-factory-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory tie."
+        },
+        {
+          "id": "after-b-final--1366-works-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — works morning north reverse."
+        },
+        {
+          "id": "after-b-final--1366-works-morning-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-morning-plant-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning plant tie."
+        },
+        {
+          "id": "after-b-final--1366-works-morning-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-morning-research-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning research tie."
+        },
+        {
+          "id": "after-b-final--1366-works-morning-research",
+          "image": "game3d/shots/island-boundaries/after-b-final/1366-works-morning-research.png",
+          "caption": "Desktop 1366 × 860 — works morning research."
+        },
+        {
+          "id": "after-b-final--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-final--390-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-evening-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-final--390-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-final--390-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-evening-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-final--390-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-evening-pool-head.png",
+          "caption": "Phone 390 × 844 — sports evening pool head."
+        },
+        {
+          "id": "after-b-final--390-sports-map",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-map.png",
+          "caption": "Phone 390 × 844 — sports map."
+        },
+        {
+          "id": "after-b-final--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        },
+        {
+          "id": "after-b-final--390-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-morning-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-final--390-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-final--390-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-morning-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-final--390-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-sports-morning-pool-head.png",
+          "caption": "Phone 390 × 844 — sports morning pool head."
+        },
+        {
+          "id": "after-b-final--390-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-evening-chimney.png",
+          "caption": "Phone 390 × 844 — works evening chimney."
+        },
+        {
+          "id": "after-b-final--390-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-evening-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory east tie."
+        },
+        {
+          "id": "after-b-final--390-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-evening-factory-east.png",
+          "caption": "Phone 390 × 844 — works evening factory east."
+        },
+        {
+          "id": "after-b-final--390-works-evening-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-evening-factory-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory tie."
+        },
+        {
+          "id": "after-b-final--390-works-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — works evening north reverse."
+        },
+        {
+          "id": "after-b-final--390-works-evening-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-evening-plant-tie.png",
+          "caption": "Phone 390 × 844 — works evening plant tie."
+        },
+        {
+          "id": "after-b-final--390-works-evening-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-evening-research-tie.png",
+          "caption": "Phone 390 × 844 — works evening research tie."
+        },
+        {
+          "id": "after-b-final--390-works-evening-research",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-evening-research.png",
+          "caption": "Phone 390 × 844 — works evening research."
+        },
+        {
+          "id": "after-b-final--390-works-map",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-map.png",
+          "caption": "Phone 390 × 844 — works map."
+        },
+        {
+          "id": "after-b-final--390-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-morning-chimney.png",
+          "caption": "Phone 390 × 844 — works morning chimney."
+        },
+        {
+          "id": "after-b-final--390-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-morning-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory east tie."
+        },
+        {
+          "id": "after-b-final--390-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-morning-factory-east.png",
+          "caption": "Phone 390 × 844 — works morning factory east."
+        },
+        {
+          "id": "after-b-final--390-works-morning-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-morning-factory-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory tie."
+        },
+        {
+          "id": "after-b-final--390-works-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — works morning north reverse."
+        },
+        {
+          "id": "after-b-final--390-works-morning-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-morning-plant-tie.png",
+          "caption": "Phone 390 × 844 — works morning plant tie."
+        },
+        {
+          "id": "after-b-final--390-works-morning-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-morning-research-tie.png",
+          "caption": "Phone 390 × 844 — works morning research tie."
+        },
+        {
+          "id": "after-b-final--390-works-morning-research",
+          "image": "game3d/shots/island-boundaries/after-b-final/390-works-morning-research.png",
+          "caption": "Phone 390 × 844 — works morning research."
+        }
+      ]
+    },
+    {
+      "title": "Northwest entrance — before",
+      "caption": "Baseline forecourt and campus-side views before the staff gate was closed. The low chain bollards did not physically restrict jumping.",
+      "images": [
+        {
+          "id": "before-a--1366-campus-evening-gate-reverse",
+          "image": "game3d/shots/island-boundaries/before-a/1366-campus-evening-gate-reverse.png",
+          "caption": "Desktop 1366 × 860 — campus evening gate reverse."
+        },
+        {
+          "id": "before-a--1366-campus-evening-gate-west",
+          "image": "game3d/shots/island-boundaries/before-a/1366-campus-evening-gate-west.png",
+          "caption": "Desktop 1366 × 860 — campus evening gate west."
+        },
+        {
+          "id": "before-a--1366-campus-morning-gate-reverse",
+          "image": "game3d/shots/island-boundaries/before-a/1366-campus-morning-gate-reverse.png",
+          "caption": "Desktop 1366 × 860 — campus morning gate reverse."
+        },
+        {
+          "id": "before-a--1366-campus-morning-gate-west",
+          "image": "game3d/shots/island-boundaries/before-a/1366-campus-morning-gate-west.png",
+          "caption": "Desktop 1366 × 860 — campus morning gate west."
+        },
+        {
+          "id": "before-a--1366-forecourt-evening-approach",
+          "image": "game3d/shots/island-boundaries/before-a/1366-forecourt-evening-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening approach."
+        },
+        {
+          "id": "before-a--1366-forecourt-evening-east-tie",
+          "image": "game3d/shots/island-boundaries/before-a/1366-forecourt-evening-east-tie.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening east tie."
+        },
+        {
+          "id": "before-a--1366-forecourt-evening-far",
+          "image": "game3d/shots/island-boundaries/before-a/1366-forecourt-evening-far.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening far."
+        },
+        {
+          "id": "before-a--1366-forecourt-evening-west-return",
+          "image": "game3d/shots/island-boundaries/before-a/1366-forecourt-evening-west-return.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening west return."
+        },
+        {
+          "id": "before-a--1366-forecourt-morning-approach",
+          "image": "game3d/shots/island-boundaries/before-a/1366-forecourt-morning-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning approach."
+        },
+        {
+          "id": "before-a--1366-forecourt-morning-east-tie",
+          "image": "game3d/shots/island-boundaries/before-a/1366-forecourt-morning-east-tie.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning east tie."
+        },
+        {
+          "id": "before-a--1366-forecourt-morning-far",
+          "image": "game3d/shots/island-boundaries/before-a/1366-forecourt-morning-far.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning far."
+        },
+        {
+          "id": "before-a--1366-forecourt-morning-west-return",
+          "image": "game3d/shots/island-boundaries/before-a/1366-forecourt-morning-west-return.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning west return."
+        },
+        {
+          "id": "before-a--390-campus-evening-gate-reverse",
+          "image": "game3d/shots/island-boundaries/before-a/390-campus-evening-gate-reverse.png",
+          "caption": "Phone 390 × 844 — campus evening gate reverse."
+        },
+        {
+          "id": "before-a--390-campus-evening-gate-west",
+          "image": "game3d/shots/island-boundaries/before-a/390-campus-evening-gate-west.png",
+          "caption": "Phone 390 × 844 — campus evening gate west."
+        },
+        {
+          "id": "before-a--390-campus-morning-gate-reverse",
+          "image": "game3d/shots/island-boundaries/before-a/390-campus-morning-gate-reverse.png",
+          "caption": "Phone 390 × 844 — campus morning gate reverse."
+        },
+        {
+          "id": "before-a--390-campus-morning-gate-west",
+          "image": "game3d/shots/island-boundaries/before-a/390-campus-morning-gate-west.png",
+          "caption": "Phone 390 × 844 — campus morning gate west."
+        },
+        {
+          "id": "before-a--390-forecourt-evening-approach",
+          "image": "game3d/shots/island-boundaries/before-a/390-forecourt-evening-approach.png",
+          "caption": "Phone 390 × 844 — forecourt evening approach."
+        },
+        {
+          "id": "before-a--390-forecourt-evening-east-tie",
+          "image": "game3d/shots/island-boundaries/before-a/390-forecourt-evening-east-tie.png",
+          "caption": "Phone 390 × 844 — forecourt evening east tie."
+        },
+        {
+          "id": "before-a--390-forecourt-evening-far",
+          "image": "game3d/shots/island-boundaries/before-a/390-forecourt-evening-far.png",
+          "caption": "Phone 390 × 844 — forecourt evening far."
+        },
+        {
+          "id": "before-a--390-forecourt-evening-west-return",
+          "image": "game3d/shots/island-boundaries/before-a/390-forecourt-evening-west-return.png",
+          "caption": "Phone 390 × 844 — forecourt evening west return."
+        },
+        {
+          "id": "before-a--390-forecourt-morning-approach",
+          "image": "game3d/shots/island-boundaries/before-a/390-forecourt-morning-approach.png",
+          "caption": "Phone 390 × 844 — forecourt morning approach."
+        },
+        {
+          "id": "before-a--390-forecourt-morning-east-tie",
+          "image": "game3d/shots/island-boundaries/before-a/390-forecourt-morning-east-tie.png",
+          "caption": "Phone 390 × 844 — forecourt morning east tie."
+        },
+        {
+          "id": "before-a--390-forecourt-morning-far",
+          "image": "game3d/shots/island-boundaries/before-a/390-forecourt-morning-far.png",
+          "caption": "Phone 390 × 844 — forecourt morning far."
+        },
+        {
+          "id": "before-a--390-forecourt-morning-west-return",
+          "image": "game3d/shots/island-boundaries/before-a/390-forecourt-morning-west-return.png",
+          "caption": "Phone 390 × 844 — forecourt morning west return."
+        }
+      ]
+    },
+    {
+      "title": "Northwest entrance — before map and minimap evidence",
+      "caption": "Matching baseline map, minimap and forecourt views before the route and visible boundary were updated.",
+      "images": [
+        {
+          "id": "map-before-a--1366-forecourt-evening-approach",
+          "image": "game3d/shots/island-boundaries/map-before-a/1366-forecourt-evening-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening approach."
+        },
+        {
+          "id": "map-before-a--1366-forecourt-evening-east-tie",
+          "image": "game3d/shots/island-boundaries/map-before-a/1366-forecourt-evening-east-tie.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening east tie."
+        },
+        {
+          "id": "map-before-a--1366-forecourt-evening-far",
+          "image": "game3d/shots/island-boundaries/map-before-a/1366-forecourt-evening-far.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening far."
+        },
+        {
+          "id": "map-before-a--1366-forecourt-evening-west-return",
+          "image": "game3d/shots/island-boundaries/map-before-a/1366-forecourt-evening-west-return.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening west return."
+        },
+        {
+          "id": "map-before-a--1366-forecourt-morning-approach",
+          "image": "game3d/shots/island-boundaries/map-before-a/1366-forecourt-morning-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning approach."
+        },
+        {
+          "id": "map-before-a--1366-forecourt-morning-east-tie",
+          "image": "game3d/shots/island-boundaries/map-before-a/1366-forecourt-morning-east-tie.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning east tie."
+        },
+        {
+          "id": "map-before-a--1366-forecourt-morning-far",
+          "image": "game3d/shots/island-boundaries/map-before-a/1366-forecourt-morning-far.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning far."
+        },
+        {
+          "id": "map-before-a--1366-forecourt-morning-west-return",
+          "image": "game3d/shots/island-boundaries/map-before-a/1366-forecourt-morning-west-return.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning west return."
+        },
+        {
+          "id": "map-before-a--1366-map-campus",
+          "image": "game3d/shots/island-boundaries/map-before-a/1366-map-campus.png",
+          "caption": "Desktop 1366 × 860 — map campus."
+        },
+        {
+          "id": "map-before-a--1366-map",
+          "image": "game3d/shots/island-boundaries/map-before-a/1366-map.png",
+          "caption": "Desktop 1366 × 860 — map."
+        },
+        {
+          "id": "map-before-a--390-forecourt-evening-approach",
+          "image": "game3d/shots/island-boundaries/map-before-a/390-forecourt-evening-approach.png",
+          "caption": "Phone 390 × 844 — forecourt evening approach."
+        },
+        {
+          "id": "map-before-a--390-forecourt-evening-east-tie",
+          "image": "game3d/shots/island-boundaries/map-before-a/390-forecourt-evening-east-tie.png",
+          "caption": "Phone 390 × 844 — forecourt evening east tie."
+        },
+        {
+          "id": "map-before-a--390-forecourt-evening-far",
+          "image": "game3d/shots/island-boundaries/map-before-a/390-forecourt-evening-far.png",
+          "caption": "Phone 390 × 844 — forecourt evening far."
+        },
+        {
+          "id": "map-before-a--390-forecourt-evening-west-return",
+          "image": "game3d/shots/island-boundaries/map-before-a/390-forecourt-evening-west-return.png",
+          "caption": "Phone 390 × 844 — forecourt evening west return."
+        },
+        {
+          "id": "map-before-a--390-forecourt-morning-approach",
+          "image": "game3d/shots/island-boundaries/map-before-a/390-forecourt-morning-approach.png",
+          "caption": "Phone 390 × 844 — forecourt morning approach."
+        },
+        {
+          "id": "map-before-a--390-forecourt-morning-east-tie",
+          "image": "game3d/shots/island-boundaries/map-before-a/390-forecourt-morning-east-tie.png",
+          "caption": "Phone 390 × 844 — forecourt morning east tie."
+        },
+        {
+          "id": "map-before-a--390-forecourt-morning-far",
+          "image": "game3d/shots/island-boundaries/map-before-a/390-forecourt-morning-far.png",
+          "caption": "Phone 390 × 844 — forecourt morning far."
+        },
+        {
+          "id": "map-before-a--390-forecourt-morning-west-return",
+          "image": "game3d/shots/island-boundaries/map-before-a/390-forecourt-morning-west-return.png",
+          "caption": "Phone 390 × 844 — forecourt morning west return."
+        },
+        {
+          "id": "map-before-a--390-map-campus",
+          "image": "game3d/shots/island-boundaries/map-before-a/390-map-campus.png",
+          "caption": "Phone 390 × 844 — map campus."
+        },
+        {
+          "id": "map-before-a--390-map",
+          "image": "game3d/shots/island-boundaries/map-before-a/390-map.png",
+          "caption": "Phone 390 × 844 — map."
+        }
+      ]
+    },
+    {
+      "title": "Northwest entrance — final map and minimap evidence",
+      "caption": "The visible staff boundary also appears on full maps and minimaps; the former forecourt–campus route is removed. All mandatory routes remain available.",
+      "images": [
+        {
+          "id": "map-after-a--1366-forecourt-evening-approach",
+          "image": "game3d/shots/island-boundaries/map-after-a/1366-forecourt-evening-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening approach."
+        },
+        {
+          "id": "map-after-a--1366-forecourt-evening-east-tie",
+          "image": "game3d/shots/island-boundaries/map-after-a/1366-forecourt-evening-east-tie.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening east tie."
+        },
+        {
+          "id": "map-after-a--1366-forecourt-evening-far",
+          "image": "game3d/shots/island-boundaries/map-after-a/1366-forecourt-evening-far.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening far."
+        },
+        {
+          "id": "map-after-a--1366-forecourt-evening-west-return",
+          "image": "game3d/shots/island-boundaries/map-after-a/1366-forecourt-evening-west-return.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening west return."
+        },
+        {
+          "id": "map-after-a--1366-forecourt-morning-approach",
+          "image": "game3d/shots/island-boundaries/map-after-a/1366-forecourt-morning-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning approach."
+        },
+        {
+          "id": "map-after-a--1366-forecourt-morning-east-tie",
+          "image": "game3d/shots/island-boundaries/map-after-a/1366-forecourt-morning-east-tie.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning east tie."
+        },
+        {
+          "id": "map-after-a--1366-forecourt-morning-far",
+          "image": "game3d/shots/island-boundaries/map-after-a/1366-forecourt-morning-far.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning far."
+        },
+        {
+          "id": "map-after-a--1366-forecourt-morning-west-return",
+          "image": "game3d/shots/island-boundaries/map-after-a/1366-forecourt-morning-west-return.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning west return."
+        },
+        {
+          "id": "map-after-a--1366-map-campus",
+          "image": "game3d/shots/island-boundaries/map-after-a/1366-map-campus.png",
+          "caption": "Desktop 1366 × 860 — map campus."
+        },
+        {
+          "id": "map-after-a--1366-map",
+          "image": "game3d/shots/island-boundaries/map-after-a/1366-map.png",
+          "caption": "Desktop 1366 × 860 — map."
+        },
+        {
+          "id": "map-after-a--390-forecourt-evening-approach",
+          "image": "game3d/shots/island-boundaries/map-after-a/390-forecourt-evening-approach.png",
+          "caption": "Phone 390 × 844 — forecourt evening approach."
+        },
+        {
+          "id": "map-after-a--390-forecourt-evening-east-tie",
+          "image": "game3d/shots/island-boundaries/map-after-a/390-forecourt-evening-east-tie.png",
+          "caption": "Phone 390 × 844 — forecourt evening east tie."
+        },
+        {
+          "id": "map-after-a--390-forecourt-evening-far",
+          "image": "game3d/shots/island-boundaries/map-after-a/390-forecourt-evening-far.png",
+          "caption": "Phone 390 × 844 — forecourt evening far."
+        },
+        {
+          "id": "map-after-a--390-forecourt-evening-west-return",
+          "image": "game3d/shots/island-boundaries/map-after-a/390-forecourt-evening-west-return.png",
+          "caption": "Phone 390 × 844 — forecourt evening west return."
+        },
+        {
+          "id": "map-after-a--390-forecourt-morning-approach",
+          "image": "game3d/shots/island-boundaries/map-after-a/390-forecourt-morning-approach.png",
+          "caption": "Phone 390 × 844 — forecourt morning approach."
+        },
+        {
+          "id": "map-after-a--390-forecourt-morning-east-tie",
+          "image": "game3d/shots/island-boundaries/map-after-a/390-forecourt-morning-east-tie.png",
+          "caption": "Phone 390 × 844 — forecourt morning east tie."
+        },
+        {
+          "id": "map-after-a--390-forecourt-morning-far",
+          "image": "game3d/shots/island-boundaries/map-after-a/390-forecourt-morning-far.png",
+          "caption": "Phone 390 × 844 — forecourt morning far."
+        },
+        {
+          "id": "map-after-a--390-forecourt-morning-west-return",
+          "image": "game3d/shots/island-boundaries/map-after-a/390-forecourt-morning-west-return.png",
+          "caption": "Phone 390 × 844 — forecourt morning west return."
+        },
+        {
+          "id": "map-after-a--390-map-campus",
+          "image": "game3d/shots/island-boundaries/map-after-a/390-map-campus.png",
+          "caption": "Phone 390 × 844 — map campus."
+        },
+        {
+          "id": "map-after-a--390-map",
+          "image": "game3d/shots/island-boundaries/map-after-a/390-map.png",
+          "caption": "Phone 390 × 844 — map."
+        }
+      ]
+    },
+    {
+      "title": "Northwest entrance — before camera diagnosis",
+      "caption": "Exact matching baseline desktop views. The short camera arm and missing actor in the original approach framing also occur before the fence change.",
+      "images": [
+        {
+          "id": "camera-before-a--1366-forecourt-evening-approach",
+          "image": "game3d/shots/island-boundaries/camera-before-a/1366-forecourt-evening-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening approach."
+        },
+        {
+          "id": "camera-before-a--1366-forecourt-evening-mid-approach",
+          "image": "game3d/shots/island-boundaries/camera-before-a/1366-forecourt-evening-mid-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening mid approach."
+        },
+        {
+          "id": "camera-before-a--1366-forecourt-evening-near-gate",
+          "image": "game3d/shots/island-boundaries/camera-before-a/1366-forecourt-evening-near-gate.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening near gate."
+        },
+        {
+          "id": "camera-before-a--1366-forecourt-morning-approach",
+          "image": "game3d/shots/island-boundaries/camera-before-a/1366-forecourt-morning-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning approach."
+        },
+        {
+          "id": "camera-before-a--1366-forecourt-morning-mid-approach",
+          "image": "game3d/shots/island-boundaries/camera-before-a/1366-forecourt-morning-mid-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning mid approach."
+        },
+        {
+          "id": "camera-before-a--1366-forecourt-morning-near-gate",
+          "image": "game3d/shots/island-boundaries/camera-before-a/1366-forecourt-morning-near-gate.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning near gate."
+        }
+      ]
+    },
+    {
+      "title": "Northwest entrance — after camera diagnosis and endpoints",
+      "caption": "Desktop morning/evening approach, midpoint and near-gate comparison plus native collision endpoints. The near-gate follow view shows the actor. The approach camera arm matches the original baseline; no camera-engine change was made.",
+      "images": [
+        {
+          "id": "camera-after-a--1366-forecourt-east-fence-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-east-fence-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — forecourt east fence running jump endpoint."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-east-fence-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-east-fence-walk-end.png",
+          "caption": "Desktop 1366 × 860 — forecourt east fence walking endpoint."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-evening-approach",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-evening-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening approach."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-evening-mid-approach",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-evening-mid-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening mid approach."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-evening-near-gate",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-evening-near-gate.png",
+          "caption": "Desktop 1366 × 860 — forecourt evening near gate."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-gate-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-gate-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — forecourt gate running jump endpoint."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-gate-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-gate-walk-end.png",
+          "caption": "Desktop 1366 × 860 — forecourt gate walking endpoint."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-morning-approach",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-morning-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning approach."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-morning-mid-approach",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-morning-mid-approach.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning mid approach."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-morning-near-gate",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-morning-near-gate.png",
+          "caption": "Desktop 1366 × 860 — forecourt morning near gate."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-station-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-station-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — forecourt station tie running jump endpoint."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-station-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-station-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — forecourt station tie walking endpoint."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-west-fence-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-west-fence-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — forecourt west fence running jump endpoint."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-west-fence-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-west-fence-walk-end.png",
+          "caption": "Desktop 1366 × 860 — forecourt west fence walking endpoint."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-wing-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-wing-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — forecourt wing tie running jump endpoint."
+        },
+        {
+          "id": "camera-after-a--1366-forecourt-wing-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/camera-after-a/1366-forecourt-wing-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — forecourt wing tie walking endpoint."
+        }
+      ]
+    },
+    {
+      "title": "Northern grounds — matching before views and maps",
+      "caption": "Exact pre-milestone-B baseline f7541d34a. Matches the final capture positions except the two revised tie views provided in the next section. Original roof and transformer camera occlusion is retained here.",
+      "images": [
+        {
+          "id": "before-b-matched--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "before-b-matched--1366-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-evening-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening gym tie."
+        },
+        {
+          "id": "before-b-matched--1366-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports evening north reverse."
+        },
+        {
+          "id": "before-b-matched--1366-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-evening-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening pavilion tie."
+        },
+        {
+          "id": "before-b-matched--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "before-b-matched--1366-sports-map",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-map.png",
+          "caption": "Desktop 1366 × 860 — sports map."
+        },
+        {
+          "id": "before-b-matched--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "before-b-matched--1366-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-morning-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning gym tie."
+        },
+        {
+          "id": "before-b-matched--1366-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports morning north reverse."
+        },
+        {
+          "id": "before-b-matched--1366-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-morning-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning pavilion tie."
+        },
+        {
+          "id": "before-b-matched--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        },
+        {
+          "id": "before-b-matched--1366-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-evening-chimney.png",
+          "caption": "Desktop 1366 × 860 — works evening chimney."
+        },
+        {
+          "id": "before-b-matched--1366-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-evening-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east tie."
+        },
+        {
+          "id": "before-b-matched--1366-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-evening-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east."
+        },
+        {
+          "id": "before-b-matched--1366-works-evening-factory-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-evening-factory-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory tie."
+        },
+        {
+          "id": "before-b-matched--1366-works-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — works evening north reverse."
+        },
+        {
+          "id": "before-b-matched--1366-works-evening-plant-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-evening-plant-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening plant tie."
+        },
+        {
+          "id": "before-b-matched--1366-works-evening-research-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-evening-research-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening research tie."
+        },
+        {
+          "id": "before-b-matched--1366-works-evening-research",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-evening-research.png",
+          "caption": "Desktop 1366 × 860 — works evening research."
+        },
+        {
+          "id": "before-b-matched--1366-works-map",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-map.png",
+          "caption": "Desktop 1366 × 860 — works map."
+        },
+        {
+          "id": "before-b-matched--1366-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-morning-chimney.png",
+          "caption": "Desktop 1366 × 860 — works morning chimney."
+        },
+        {
+          "id": "before-b-matched--1366-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-morning-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east tie."
+        },
+        {
+          "id": "before-b-matched--1366-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-morning-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east."
+        },
+        {
+          "id": "before-b-matched--1366-works-morning-factory-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-morning-factory-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory tie."
+        },
+        {
+          "id": "before-b-matched--1366-works-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — works morning north reverse."
+        },
+        {
+          "id": "before-b-matched--1366-works-morning-plant-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-morning-plant-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning plant tie."
+        },
+        {
+          "id": "before-b-matched--1366-works-morning-research-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-morning-research-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning research tie."
+        },
+        {
+          "id": "before-b-matched--1366-works-morning-research",
+          "image": "game3d/shots/island-boundaries/before-b-matched/1366-works-morning-research.png",
+          "caption": "Desktop 1366 × 860 — works morning research."
+        },
+        {
+          "id": "before-b-matched--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "before-b-matched--390-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-evening-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports evening gym tie."
+        },
+        {
+          "id": "before-b-matched--390-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports evening north reverse."
+        },
+        {
+          "id": "before-b-matched--390-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-evening-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports evening pavilion tie."
+        },
+        {
+          "id": "before-b-matched--390-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-evening-pool-head.png",
+          "caption": "Phone 390 × 844 — sports evening pool head."
+        },
+        {
+          "id": "before-b-matched--390-sports-map",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-map.png",
+          "caption": "Phone 390 × 844 — sports map."
+        },
+        {
+          "id": "before-b-matched--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        },
+        {
+          "id": "before-b-matched--390-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-morning-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports morning gym tie."
+        },
+        {
+          "id": "before-b-matched--390-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports morning north reverse."
+        },
+        {
+          "id": "before-b-matched--390-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-morning-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports morning pavilion tie."
+        },
+        {
+          "id": "before-b-matched--390-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-sports-morning-pool-head.png",
+          "caption": "Phone 390 × 844 — sports morning pool head."
+        },
+        {
+          "id": "before-b-matched--390-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-evening-chimney.png",
+          "caption": "Phone 390 × 844 — works evening chimney."
+        },
+        {
+          "id": "before-b-matched--390-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-evening-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory east tie."
+        },
+        {
+          "id": "before-b-matched--390-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-evening-factory-east.png",
+          "caption": "Phone 390 × 844 — works evening factory east."
+        },
+        {
+          "id": "before-b-matched--390-works-evening-factory-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-evening-factory-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory tie."
+        },
+        {
+          "id": "before-b-matched--390-works-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — works evening north reverse."
+        },
+        {
+          "id": "before-b-matched--390-works-evening-plant-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-evening-plant-tie.png",
+          "caption": "Phone 390 × 844 — works evening plant tie."
+        },
+        {
+          "id": "before-b-matched--390-works-evening-research-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-evening-research-tie.png",
+          "caption": "Phone 390 × 844 — works evening research tie."
+        },
+        {
+          "id": "before-b-matched--390-works-evening-research",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-evening-research.png",
+          "caption": "Phone 390 × 844 — works evening research."
+        },
+        {
+          "id": "before-b-matched--390-works-map",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-map.png",
+          "caption": "Phone 390 × 844 — works map."
+        },
+        {
+          "id": "before-b-matched--390-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-morning-chimney.png",
+          "caption": "Phone 390 × 844 — works morning chimney."
+        },
+        {
+          "id": "before-b-matched--390-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-morning-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory east tie."
+        },
+        {
+          "id": "before-b-matched--390-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-morning-factory-east.png",
+          "caption": "Phone 390 × 844 — works morning factory east."
+        },
+        {
+          "id": "before-b-matched--390-works-morning-factory-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-morning-factory-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory tie."
+        },
+        {
+          "id": "before-b-matched--390-works-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — works morning north reverse."
+        },
+        {
+          "id": "before-b-matched--390-works-morning-plant-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-morning-plant-tie.png",
+          "caption": "Phone 390 × 844 — works morning plant tie."
+        },
+        {
+          "id": "before-b-matched--390-works-morning-research-tie",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-morning-research-tie.png",
+          "caption": "Phone 390 × 844 — works morning research tie."
+        },
+        {
+          "id": "before-b-matched--390-works-morning-research",
+          "image": "game3d/shots/island-boundaries/before-b-matched/390-works-morning-research.png",
+          "caption": "Phone 390 × 844 — works morning research."
+        }
+      ]
+    },
+    {
+      "title": "Northern grounds — revised matching before tie views",
+      "caption": "Baseline captures at the improved gym and factory-east tie camera positions, matching the final after set.",
+      "images": [
+        {
+          "id": "before-b-ties-final--1366-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-ties-final/1366-sports-evening-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening gym tie."
+        },
+        {
+          "id": "before-b-ties-final--1366-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-ties-final/1366-sports-morning-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning gym tie."
+        },
+        {
+          "id": "before-b-ties-final--1366-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-ties-final/1366-works-evening-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east tie."
+        },
+        {
+          "id": "before-b-ties-final--1366-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-ties-final/1366-works-morning-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east tie."
+        },
+        {
+          "id": "before-b-ties-final--390-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-ties-final/390-sports-evening-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports evening gym tie."
+        },
+        {
+          "id": "before-b-ties-final--390-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/before-b-ties-final/390-sports-morning-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports morning gym tie."
+        },
+        {
+          "id": "before-b-ties-final--390-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-ties-final/390-works-evening-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory east tie."
+        },
+        {
+          "id": "before-b-ties-final--390-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/before-b-ties-final/390-works-morning-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory east tie."
+        }
+      ]
+    },
+    {
+      "title": "Northern grounds — interrupted first baseline attempt",
+      "caption": "All eight retained desktop sports captures from the first audit. The job stopped when its works fixture used the wrong day; the corrected complete audit follows. These are baseline images, not final results.",
+      "images": [
+        {
+          "id": "before-b--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/before-b/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "before-b--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "before-b--1366-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b/1366-sports-grove-west-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west running jump endpoint."
+        },
+        {
+          "id": "before-b--1366-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b/1366-sports-grove-west-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west walking endpoint."
+        },
+        {
+          "id": "before-b--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/before-b/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "before-b--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        },
+        {
+          "id": "before-b--1366-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b/1366-sports-pool-head-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head running jump endpoint."
+        },
+        {
+          "id": "before-b--1366-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b/1366-sports-pool-head-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head walking endpoint."
+        }
+      ]
+    },
+    {
+      "title": "Northern grounds and onsen — corrected baseline audit",
+      "caption": "Both sizes, morning/evening and native movement endpoints. Sports and works tests exposed access into bare northern ground. Existing onsen planting stopped the tested approaches; onsen geometry remains unchanged.",
+      "images": [
+        {
+          "id": "before-b-2--1366-east_coast-evening-onsen-gate",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-east_coast-evening-onsen-gate.png",
+          "caption": "Desktop 1366 × 860 — east coast evening onsen gate."
+        },
+        {
+          "id": "before-b-2--1366-east_coast-evening-onsen-west",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-east_coast-evening-onsen-west.png",
+          "caption": "Desktop 1366 × 860 — east coast evening onsen west."
+        },
+        {
+          "id": "before-b-2--1366-east_coast-morning-onsen-gate",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-east_coast-morning-onsen-gate.png",
+          "caption": "Desktop 1366 × 860 — east coast morning onsen gate."
+        },
+        {
+          "id": "before-b-2--1366-east_coast-morning-onsen-west",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-east_coast-morning-onsen-west.png",
+          "caption": "Desktop 1366 × 860 — east coast morning onsen west."
+        },
+        {
+          "id": "before-b-2--1366-east_coast-onsen-gate-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-east_coast-onsen-gate-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — east coast onsen gate running jump endpoint."
+        },
+        {
+          "id": "before-b-2--1366-east_coast-onsen-gate-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-east_coast-onsen-gate-walk-end.png",
+          "caption": "Desktop 1366 × 860 — east coast onsen gate walking endpoint."
+        },
+        {
+          "id": "before-b-2--1366-east_coast-onsen-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-east_coast-onsen-west-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — east coast onsen west running jump endpoint."
+        },
+        {
+          "id": "before-b-2--1366-east_coast-onsen-west-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-east_coast-onsen-west-walk-end.png",
+          "caption": "Desktop 1366 × 860 — east coast onsen west walking endpoint."
+        },
+        {
+          "id": "before-b-2--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "before-b-2--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "before-b-2--1366-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-sports-grove-west-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west running jump endpoint."
+        },
+        {
+          "id": "before-b-2--1366-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-sports-grove-west-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west walking endpoint."
+        },
+        {
+          "id": "before-b-2--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "before-b-2--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        },
+        {
+          "id": "before-b-2--1366-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-sports-pool-head-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head running jump endpoint."
+        },
+        {
+          "id": "before-b-2--1366-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-sports-pool-head-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head walking endpoint."
+        },
+        {
+          "id": "before-b-2--1366-works-chimney-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-chimney-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works chimney running jump endpoint."
+        },
+        {
+          "id": "before-b-2--1366-works-chimney-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-chimney-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works chimney walking endpoint."
+        },
+        {
+          "id": "before-b-2--1366-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-evening-chimney.png",
+          "caption": "Desktop 1366 × 860 — works evening chimney."
+        },
+        {
+          "id": "before-b-2--1366-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-evening-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east."
+        },
+        {
+          "id": "before-b-2--1366-works-evening-research",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-evening-research.png",
+          "caption": "Desktop 1366 × 860 — works evening research."
+        },
+        {
+          "id": "before-b-2--1366-works-factory-east-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-factory-east-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east running jump endpoint."
+        },
+        {
+          "id": "before-b-2--1366-works-factory-east-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-factory-east-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east walking endpoint."
+        },
+        {
+          "id": "before-b-2--1366-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-morning-chimney.png",
+          "caption": "Desktop 1366 × 860 — works morning chimney."
+        },
+        {
+          "id": "before-b-2--1366-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-morning-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east."
+        },
+        {
+          "id": "before-b-2--1366-works-morning-research",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-morning-research.png",
+          "caption": "Desktop 1366 × 860 — works morning research."
+        },
+        {
+          "id": "before-b-2--1366-works-research-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-research-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works research running jump endpoint."
+        },
+        {
+          "id": "before-b-2--1366-works-research-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/1366-works-research-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works research walking endpoint."
+        },
+        {
+          "id": "before-b-2--390-east_coast-evening-onsen-gate",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-east_coast-evening-onsen-gate.png",
+          "caption": "Phone 390 × 844 — east coast evening onsen gate."
+        },
+        {
+          "id": "before-b-2--390-east_coast-evening-onsen-west",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-east_coast-evening-onsen-west.png",
+          "caption": "Phone 390 × 844 — east coast evening onsen west."
+        },
+        {
+          "id": "before-b-2--390-east_coast-morning-onsen-gate",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-east_coast-morning-onsen-gate.png",
+          "caption": "Phone 390 × 844 — east coast morning onsen gate."
+        },
+        {
+          "id": "before-b-2--390-east_coast-morning-onsen-west",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-east_coast-morning-onsen-west.png",
+          "caption": "Phone 390 × 844 — east coast morning onsen west."
+        },
+        {
+          "id": "before-b-2--390-east_coast-onsen-gate-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-east_coast-onsen-gate-run-jump-end.png",
+          "caption": "Phone 390 × 844 — east coast onsen gate running jump endpoint."
+        },
+        {
+          "id": "before-b-2--390-east_coast-onsen-gate-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-east_coast-onsen-gate-walk-end.png",
+          "caption": "Phone 390 × 844 — east coast onsen gate walking endpoint."
+        },
+        {
+          "id": "before-b-2--390-east_coast-onsen-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-east_coast-onsen-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — east coast onsen west running jump endpoint."
+        },
+        {
+          "id": "before-b-2--390-east_coast-onsen-west-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-east_coast-onsen-west-walk-end.png",
+          "caption": "Phone 390 × 844 — east coast onsen west walking endpoint."
+        },
+        {
+          "id": "before-b-2--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "before-b-2--390-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-sports-evening-pool-head.png",
+          "caption": "Phone 390 × 844 — sports evening pool head."
+        },
+        {
+          "id": "before-b-2--390-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-sports-grove-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove west running jump endpoint."
+        },
+        {
+          "id": "before-b-2--390-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-sports-grove-west-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove west walking endpoint."
+        },
+        {
+          "id": "before-b-2--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        },
+        {
+          "id": "before-b-2--390-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-sports-morning-pool-head.png",
+          "caption": "Phone 390 × 844 — sports morning pool head."
+        },
+        {
+          "id": "before-b-2--390-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-sports-pool-head-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pool head running jump endpoint."
+        },
+        {
+          "id": "before-b-2--390-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-sports-pool-head-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pool head walking endpoint."
+        },
+        {
+          "id": "before-b-2--390-works-chimney-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-chimney-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works chimney running jump endpoint."
+        },
+        {
+          "id": "before-b-2--390-works-chimney-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-chimney-walk-end.png",
+          "caption": "Phone 390 × 844 — works chimney walking endpoint."
+        },
+        {
+          "id": "before-b-2--390-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-evening-chimney.png",
+          "caption": "Phone 390 × 844 — works evening chimney."
+        },
+        {
+          "id": "before-b-2--390-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-evening-factory-east.png",
+          "caption": "Phone 390 × 844 — works evening factory east."
+        },
+        {
+          "id": "before-b-2--390-works-evening-research",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-evening-research.png",
+          "caption": "Phone 390 × 844 — works evening research."
+        },
+        {
+          "id": "before-b-2--390-works-factory-east-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-factory-east-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works factory east running jump endpoint."
+        },
+        {
+          "id": "before-b-2--390-works-factory-east-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-factory-east-walk-end.png",
+          "caption": "Phone 390 × 844 — works factory east walking endpoint."
+        },
+        {
+          "id": "before-b-2--390-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-morning-chimney.png",
+          "caption": "Phone 390 × 844 — works morning chimney."
+        },
+        {
+          "id": "before-b-2--390-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-morning-factory-east.png",
+          "caption": "Phone 390 × 844 — works morning factory east."
+        },
+        {
+          "id": "before-b-2--390-works-morning-research",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-morning-research.png",
+          "caption": "Phone 390 × 844 — works morning research."
+        },
+        {
+          "id": "before-b-2--390-works-research-run-jump-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-research-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works research running jump endpoint."
+        },
+        {
+          "id": "before-b-2--390-works-research-walk-end",
+          "image": "game3d/shots/island-boundaries/before-b-2/390-works-research-walk-end.png",
+          "caption": "Phone 390 × 844 — works research walking endpoint."
+        }
+      ]
+    },
+    {
+      "title": "Northern grounds — first after captures and native attempts",
+      "caption": "Same final fence geometry. Includes all 68 native walking and running-jump endpoint captures: all tested middles, corners, ends and reverse approaches stopped at the visible barrier. Reverse probes deliberately start outside the public boundary; some cameras sit behind opaque panels. Two building-tie camera positions were improved in the final set.",
+      "images": [
+        {
+          "id": "after-b-initial--1366-sports-corner-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-corner-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports corner running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-corner-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-corner-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports corner walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-evening-grove.png",
+          "caption": "Desktop 1366 × 860 — sports evening grove."
+        },
+        {
+          "id": "after-b-initial--1366-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-evening-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-initial--1366-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-initial--1366-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-evening-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-initial--1366-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-evening-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports evening pool head."
+        },
+        {
+          "id": "after-b-initial--1366-sports-grove-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-grove-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove reverse running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-grove-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-grove-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove reverse walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-grove-west-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-grove-west-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports grove west walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-gym-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-gym-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports gym tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-gym-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-gym-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports gym tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-morning-grove.png",
+          "caption": "Desktop 1366 × 860 — sports morning grove."
+        },
+        {
+          "id": "after-b-initial--1366-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-morning-gym-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-initial--1366-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-initial--1366-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-morning-pavilion-tie.png",
+          "caption": "Desktop 1366 × 860 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-initial--1366-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-morning-pool-head.png",
+          "caption": "Desktop 1366 × 860 — sports morning pool head."
+        },
+        {
+          "id": "after-b-initial--1366-sports-north-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-north-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports north reverse running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-north-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-north-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports north reverse walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-pavilion-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-pavilion-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pavilion tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-pavilion-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-pavilion-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pavilion tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-pool-head-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-sports-pool-head-walk-end.png",
+          "caption": "Desktop 1366 × 860 — sports pool head walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-chimney-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-chimney-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works chimney reverse running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-chimney-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-chimney-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works chimney reverse walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-chimney-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-chimney-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works chimney running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-chimney-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-chimney-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works chimney walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-evening-chimney.png",
+          "caption": "Desktop 1366 × 860 — works evening chimney."
+        },
+        {
+          "id": "after-b-initial--1366-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-evening-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east tie."
+        },
+        {
+          "id": "after-b-initial--1366-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-evening-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works evening factory east."
+        },
+        {
+          "id": "after-b-initial--1366-works-evening-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-evening-factory-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening factory tie."
+        },
+        {
+          "id": "after-b-initial--1366-works-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-evening-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — works evening north reverse."
+        },
+        {
+          "id": "after-b-initial--1366-works-evening-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-evening-plant-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening plant tie."
+        },
+        {
+          "id": "after-b-initial--1366-works-evening-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-evening-research-tie.png",
+          "caption": "Desktop 1366 × 860 — works evening research tie."
+        },
+        {
+          "id": "after-b-initial--1366-works-evening-research",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-evening-research.png",
+          "caption": "Desktop 1366 × 860 — works evening research."
+        },
+        {
+          "id": "after-b-initial--1366-works-factory-east-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-factory-east-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east reverse running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-factory-east-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-factory-east-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east reverse walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-factory-east-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-factory-east-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-factory-east-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-factory-east-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-factory-east-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-factory-east-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-factory-east-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-factory-east-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works factory east walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-factory-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-factory-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works factory tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-factory-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-factory-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works factory tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-morning-chimney.png",
+          "caption": "Desktop 1366 × 860 — works morning chimney."
+        },
+        {
+          "id": "after-b-initial--1366-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-morning-factory-east-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east tie."
+        },
+        {
+          "id": "after-b-initial--1366-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-morning-factory-east.png",
+          "caption": "Desktop 1366 × 860 — works morning factory east."
+        },
+        {
+          "id": "after-b-initial--1366-works-morning-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-morning-factory-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning factory tie."
+        },
+        {
+          "id": "after-b-initial--1366-works-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-morning-north-reverse.png",
+          "caption": "Desktop 1366 × 860 — works morning north reverse."
+        },
+        {
+          "id": "after-b-initial--1366-works-morning-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-morning-plant-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning plant tie."
+        },
+        {
+          "id": "after-b-initial--1366-works-morning-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-morning-research-tie.png",
+          "caption": "Desktop 1366 × 860 — works morning research tie."
+        },
+        {
+          "id": "after-b-initial--1366-works-morning-research",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-morning-research.png",
+          "caption": "Desktop 1366 × 860 — works morning research."
+        },
+        {
+          "id": "after-b-initial--1366-works-plant-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-plant-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works plant tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-plant-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-plant-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works plant tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-research-return-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-research-return-reverse-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works research return reverse running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-research-return-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-research-return-reverse-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works research return reverse walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-research-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-research-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works research running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-research-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-research-tie-run-jump-end.png",
+          "caption": "Desktop 1366 × 860 — works research tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-research-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-research-tie-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works research tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--1366-works-research-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/1366-works-research-walk-end.png",
+          "caption": "Desktop 1366 × 860 — works research walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-corner-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-corner-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports corner running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-corner-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-corner-walk-end.png",
+          "caption": "Phone 390 × 844 — sports corner walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-evening-grove",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-evening-grove.png",
+          "caption": "Phone 390 × 844 — sports evening grove."
+        },
+        {
+          "id": "after-b-initial--390-sports-evening-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-evening-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports evening gym tie."
+        },
+        {
+          "id": "after-b-initial--390-sports-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports evening north reverse."
+        },
+        {
+          "id": "after-b-initial--390-sports-evening-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-evening-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports evening pavilion tie."
+        },
+        {
+          "id": "after-b-initial--390-sports-evening-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-evening-pool-head.png",
+          "caption": "Phone 390 × 844 — sports evening pool head."
+        },
+        {
+          "id": "after-b-initial--390-sports-grove-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-grove-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove reverse running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-grove-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-grove-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove reverse walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-grove-west-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-grove-west-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports grove west running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-grove-west-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-grove-west-walk-end.png",
+          "caption": "Phone 390 × 844 — sports grove west walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-gym-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-gym-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports gym tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-gym-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-gym-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — sports gym tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-morning-grove",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-morning-grove.png",
+          "caption": "Phone 390 × 844 — sports morning grove."
+        },
+        {
+          "id": "after-b-initial--390-sports-morning-gym-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-morning-gym-tie.png",
+          "caption": "Phone 390 × 844 — sports morning gym tie."
+        },
+        {
+          "id": "after-b-initial--390-sports-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — sports morning north reverse."
+        },
+        {
+          "id": "after-b-initial--390-sports-morning-pavilion-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-morning-pavilion-tie.png",
+          "caption": "Phone 390 × 844 — sports morning pavilion tie."
+        },
+        {
+          "id": "after-b-initial--390-sports-morning-pool-head",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-morning-pool-head.png",
+          "caption": "Phone 390 × 844 — sports morning pool head."
+        },
+        {
+          "id": "after-b-initial--390-sports-north-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-north-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports north reverse running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-north-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-north-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — sports north reverse walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-pavilion-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-pavilion-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pavilion tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-pavilion-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-pavilion-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pavilion tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-pool-head-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-pool-head-run-jump-end.png",
+          "caption": "Phone 390 × 844 — sports pool head running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-sports-pool-head-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-sports-pool-head-walk-end.png",
+          "caption": "Phone 390 × 844 — sports pool head walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-chimney-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-chimney-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works chimney reverse running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-chimney-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-chimney-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — works chimney reverse walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-chimney-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-chimney-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works chimney running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-chimney-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-chimney-walk-end.png",
+          "caption": "Phone 390 × 844 — works chimney walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-evening-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-evening-chimney.png",
+          "caption": "Phone 390 × 844 — works evening chimney."
+        },
+        {
+          "id": "after-b-initial--390-works-evening-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-evening-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory east tie."
+        },
+        {
+          "id": "after-b-initial--390-works-evening-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-evening-factory-east.png",
+          "caption": "Phone 390 × 844 — works evening factory east."
+        },
+        {
+          "id": "after-b-initial--390-works-evening-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-evening-factory-tie.png",
+          "caption": "Phone 390 × 844 — works evening factory tie."
+        },
+        {
+          "id": "after-b-initial--390-works-evening-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-evening-north-reverse.png",
+          "caption": "Phone 390 × 844 — works evening north reverse."
+        },
+        {
+          "id": "after-b-initial--390-works-evening-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-evening-plant-tie.png",
+          "caption": "Phone 390 × 844 — works evening plant tie."
+        },
+        {
+          "id": "after-b-initial--390-works-evening-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-evening-research-tie.png",
+          "caption": "Phone 390 × 844 — works evening research tie."
+        },
+        {
+          "id": "after-b-initial--390-works-evening-research",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-evening-research.png",
+          "caption": "Phone 390 × 844 — works evening research."
+        },
+        {
+          "id": "after-b-initial--390-works-factory-east-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-factory-east-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works factory east reverse running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-factory-east-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-factory-east-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — works factory east reverse walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-factory-east-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-factory-east-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works factory east running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-factory-east-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-factory-east-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works factory east tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-factory-east-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-factory-east-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — works factory east tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-factory-east-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-factory-east-walk-end.png",
+          "caption": "Phone 390 × 844 — works factory east walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-factory-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-factory-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works factory tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-factory-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-factory-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — works factory tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-morning-chimney",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-morning-chimney.png",
+          "caption": "Phone 390 × 844 — works morning chimney."
+        },
+        {
+          "id": "after-b-initial--390-works-morning-factory-east-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-morning-factory-east-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory east tie."
+        },
+        {
+          "id": "after-b-initial--390-works-morning-factory-east",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-morning-factory-east.png",
+          "caption": "Phone 390 × 844 — works morning factory east."
+        },
+        {
+          "id": "after-b-initial--390-works-morning-factory-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-morning-factory-tie.png",
+          "caption": "Phone 390 × 844 — works morning factory tie."
+        },
+        {
+          "id": "after-b-initial--390-works-morning-north-reverse",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-morning-north-reverse.png",
+          "caption": "Phone 390 × 844 — works morning north reverse."
+        },
+        {
+          "id": "after-b-initial--390-works-morning-plant-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-morning-plant-tie.png",
+          "caption": "Phone 390 × 844 — works morning plant tie."
+        },
+        {
+          "id": "after-b-initial--390-works-morning-research-tie",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-morning-research-tie.png",
+          "caption": "Phone 390 × 844 — works morning research tie."
+        },
+        {
+          "id": "after-b-initial--390-works-morning-research",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-morning-research.png",
+          "caption": "Phone 390 × 844 — works morning research."
+        },
+        {
+          "id": "after-b-initial--390-works-plant-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-plant-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works plant tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-plant-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-plant-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — works plant tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-research-return-reverse-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-research-return-reverse-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works research return reverse running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-research-return-reverse-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-research-return-reverse-walk-end.png",
+          "caption": "Phone 390 × 844 — works research return reverse walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-research-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-research-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works research running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-research-tie-run-jump-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-research-tie-run-jump-end.png",
+          "caption": "Phone 390 × 844 — works research tie running jump endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-research-tie-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-research-tie-walk-end.png",
+          "caption": "Phone 390 × 844 — works research tie walking endpoint."
+        },
+        {
+          "id": "after-b-initial--390-works-research-walk-end",
+          "image": "game3d/shots/island-boundaries/after-b-initial/390-works-research-walk-end.png",
+          "caption": "Phone 390 × 844 — works research walking endpoint."
+        }
+      ]
+    },
+    {
+      "title": "Old day-two saves — first recovery capture attempt",
+      "caption": "All ten first recovery captures are retained. These caught the HUD fade before it finished; the final recovery set below shows the visible interface. They are diagnostic attempts, not final results.",
+      "images": [
+        {
+          "id": "recovery-a--1366-recovered-campus",
+          "image": "game3d/shots/island-boundaries/recovery-a/1366-recovered-campus.png",
+          "caption": "Desktop 1366 × 860 — recovered campus."
+        },
+        {
+          "id": "recovery-a--1366-recovered-ferry_terminal",
+          "image": "game3d/shots/island-boundaries/recovery-a/1366-recovered-ferry_terminal.png",
+          "caption": "Desktop 1366 × 860 — recovered ferry terminal."
+        },
+        {
+          "id": "recovery-a--1366-recovered-harbour",
+          "image": "game3d/shots/island-boundaries/recovery-a/1366-recovered-harbour.png",
+          "caption": "Desktop 1366 × 860 — recovered harbour."
+        },
+        {
+          "id": "recovery-a--1366-recovered-office_quarter",
+          "image": "game3d/shots/island-boundaries/recovery-a/1366-recovered-office_quarter.png",
+          "caption": "Desktop 1366 × 860 — recovered office quarter."
+        },
+        {
+          "id": "recovery-a--1366-recovered-print_shop",
+          "image": "game3d/shots/island-boundaries/recovery-a/1366-recovered-print_shop.png",
+          "caption": "Desktop 1366 × 860 — recovered print shop."
+        },
+        {
+          "id": "recovery-a--390-recovered-campus",
+          "image": "game3d/shots/island-boundaries/recovery-a/390-recovered-campus.png",
+          "caption": "Phone 390 × 844 — recovered campus."
+        },
+        {
+          "id": "recovery-a--390-recovered-ferry_terminal",
+          "image": "game3d/shots/island-boundaries/recovery-a/390-recovered-ferry_terminal.png",
+          "caption": "Phone 390 × 844 — recovered ferry terminal."
+        },
+        {
+          "id": "recovery-a--390-recovered-harbour",
+          "image": "game3d/shots/island-boundaries/recovery-a/390-recovered-harbour.png",
+          "caption": "Phone 390 × 844 — recovered harbour."
+        },
+        {
+          "id": "recovery-a--390-recovered-office_quarter",
+          "image": "game3d/shots/island-boundaries/recovery-a/390-recovered-office_quarter.png",
+          "caption": "Phone 390 × 844 — recovered office quarter."
+        },
+        {
+          "id": "recovery-a--390-recovered-print_shop",
+          "image": "game3d/shots/island-boundaries/recovery-a/390-recovered-print_shop.png",
+          "caption": "Phone 390 × 844 — recovered print shop."
+        }
+      ]
+    },
+    {
+      "title": "Old day-two saves — protected-region recovery",
+      "caption": "Actual Continue loads old unfinished day-two saves from campus, office quarter, harbour, print shop and ferry terminal to the accessible station forecourt, at both sizes. Durable progress is preserved and the existing recovery notice explains the move.",
+      "images": [
+        {
+          "id": "recovery-a-final--1366-recovered-campus",
+          "image": "game3d/shots/island-boundaries/recovery-a-final/1366-recovered-campus.png",
+          "caption": "Desktop 1366 × 860 — recovered campus."
+        },
+        {
+          "id": "recovery-a-final--1366-recovered-ferry_terminal",
+          "image": "game3d/shots/island-boundaries/recovery-a-final/1366-recovered-ferry_terminal.png",
+          "caption": "Desktop 1366 × 860 — recovered ferry terminal."
+        },
+        {
+          "id": "recovery-a-final--1366-recovered-harbour",
+          "image": "game3d/shots/island-boundaries/recovery-a-final/1366-recovered-harbour.png",
+          "caption": "Desktop 1366 × 860 — recovered harbour."
+        },
+        {
+          "id": "recovery-a-final--1366-recovered-office_quarter",
+          "image": "game3d/shots/island-boundaries/recovery-a-final/1366-recovered-office_quarter.png",
+          "caption": "Desktop 1366 × 860 — recovered office quarter."
+        },
+        {
+          "id": "recovery-a-final--1366-recovered-print_shop",
+          "image": "game3d/shots/island-boundaries/recovery-a-final/1366-recovered-print_shop.png",
+          "caption": "Desktop 1366 × 860 — recovered print shop."
+        },
+        {
+          "id": "recovery-a-final--390-recovered-campus",
+          "image": "game3d/shots/island-boundaries/recovery-a-final/390-recovered-campus.png",
+          "caption": "Phone 390 × 844 — recovered campus."
+        },
+        {
+          "id": "recovery-a-final--390-recovered-ferry_terminal",
+          "image": "game3d/shots/island-boundaries/recovery-a-final/390-recovered-ferry_terminal.png",
+          "caption": "Phone 390 × 844 — recovered ferry terminal."
+        },
+        {
+          "id": "recovery-a-final--390-recovered-harbour",
+          "image": "game3d/shots/island-boundaries/recovery-a-final/390-recovered-harbour.png",
+          "caption": "Phone 390 × 844 — recovered harbour."
+        },
+        {
+          "id": "recovery-a-final--390-recovered-office_quarter",
+          "image": "game3d/shots/island-boundaries/recovery-a-final/390-recovered-office_quarter.png",
+          "caption": "Phone 390 × 844 — recovered office quarter."
+        },
+        {
+          "id": "recovery-a-final--390-recovered-print_shop",
+          "image": "game3d/shots/island-boundaries/recovery-a-final/390-recovered-print_shop.png",
+          "caption": "Phone 390 × 844 — recovered print shop."
+        }
+      ]
+    },
+    {
+      "title": "Old route checkpoints — first capture attempt",
+      "caption": "All six retained actual Continue captures for a saved route checkpoint, leaving transition and arriving transition. Captured before the HUD fade completed; superseded by the visible-interface set.",
+      "images": [
+        {
+          "id": "recovery-checkpoint--1366-arriving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint/1366-arriving.png",
+          "caption": "Desktop 1366 × 860 — arriving."
+        },
+        {
+          "id": "recovery-checkpoint--1366-checkpoint",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint/1366-checkpoint.png",
+          "caption": "Desktop 1366 × 860 — checkpoint."
+        },
+        {
+          "id": "recovery-checkpoint--1366-leaving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint/1366-leaving.png",
+          "caption": "Desktop 1366 × 860 — leaving."
+        },
+        {
+          "id": "recovery-checkpoint--390-arriving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint/390-arriving.png",
+          "caption": "Phone 390 × 844 — arriving."
+        },
+        {
+          "id": "recovery-checkpoint--390-checkpoint",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint/390-checkpoint.png",
+          "caption": "Phone 390 × 844 — checkpoint."
+        },
+        {
+          "id": "recovery-checkpoint--390-leaving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint/390-leaving.png",
+          "caption": "Phone 390 × 844 — leaving."
+        }
+      ]
+    },
+    {
+      "title": "Old route checkpoints — second capture attempt",
+      "caption": "All six retained checkpoint/transition recovery captures. The interface was still fading; final visible-interface evidence follows.",
+      "images": [
+        {
+          "id": "recovery-checkpoint-final--1366-arriving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-final/1366-arriving.png",
+          "caption": "Desktop 1366 × 860 — arriving."
+        },
+        {
+          "id": "recovery-checkpoint-final--1366-checkpoint",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-final/1366-checkpoint.png",
+          "caption": "Desktop 1366 × 860 — checkpoint."
+        },
+        {
+          "id": "recovery-checkpoint-final--1366-leaving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-final/1366-leaving.png",
+          "caption": "Desktop 1366 × 860 — leaving."
+        },
+        {
+          "id": "recovery-checkpoint-final--390-arriving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-final/390-arriving.png",
+          "caption": "Phone 390 × 844 — arriving."
+        },
+        {
+          "id": "recovery-checkpoint-final--390-checkpoint",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-final/390-checkpoint.png",
+          "caption": "Phone 390 × 844 — checkpoint."
+        },
+        {
+          "id": "recovery-checkpoint-final--390-leaving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-final/390-leaving.png",
+          "caption": "Phone 390 × 844 — leaving."
+        }
+      ]
+    },
+    {
+      "title": "Old route checkpoints — final visible recovery evidence",
+      "caption": "Actual Continue → Autosave loads the three historical checkpoint/transition cases at both sizes. Each resumes playable station forecourt with the recovery notice and mandatory goal visible.",
+      "images": [
+        {
+          "id": "recovery-checkpoint-visible--1366-arriving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-visible/1366-arriving.png",
+          "caption": "Desktop 1366 × 860 — arriving."
+        },
+        {
+          "id": "recovery-checkpoint-visible--1366-checkpoint",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-visible/1366-checkpoint.png",
+          "caption": "Desktop 1366 × 860 — checkpoint."
+        },
+        {
+          "id": "recovery-checkpoint-visible--1366-leaving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-visible/1366-leaving.png",
+          "caption": "Desktop 1366 × 860 — leaving."
+        },
+        {
+          "id": "recovery-checkpoint-visible--390-arriving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-visible/390-arriving.png",
+          "caption": "Phone 390 × 844 — arriving."
+        },
+        {
+          "id": "recovery-checkpoint-visible--390-checkpoint",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-visible/390-checkpoint.png",
+          "caption": "Phone 390 × 844 — checkpoint."
+        },
+        {
+          "id": "recovery-checkpoint-visible--390-leaving",
+          "image": "game3d/shots/island-boundaries/recovery-checkpoint-visible/390-leaving.png",
+          "caption": "Phone 390 × 844 — leaving."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play Amakawa",
+      "href": "game3d/"
+    },
+    {
+      "label": "Northwest gate, maps and save-recovery evidence",
+      "href": "game3d/shots/island-boundaries/proof-a.md"
+    },
+    {
+      "label": "Northern grounds before/after and native collision evidence",
+      "href": "game3d/shots/island-boundaries/proof-b.md"
+    }
+  ]
+}
