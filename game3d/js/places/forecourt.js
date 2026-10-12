@@ -18,8 +18,8 @@ import { gardenCat } from './garden-cat.js';
 import { fallenBikes } from './fallen-bikes.js';
 import { attachForecourtFraming } from './forecourt-camera.js';
 
-// the phone's view out of the station: looking east, lower, a little further out, Eric low in the frame
-const EAST = { elev: 33, zoom: 1.36, lead: -6.3 };
+// The phone looks east over the station-side crowns, a little further out, with Eric low in the frame.
+const EAST = { elev: 43, zoom: 1.36, lead: -6.3 };
 
 export async function forecourtPlace(game) {
   const w = await sliced(forecourtSteps()); // in slices between frames: it's built while the gate room is played
