@@ -113,3 +113,15 @@ test('platform sibling follows moving place frame while retaining world support'
  station.position.x=2;t.refresh();
  assert.ok(Math.abs(t.support(4,0,.3))<1e-6);
 });
+
+
+test('a route query sees a door opened since the last movement frame',()=>{
+ const space=new T.Group(),material=new T.MeshStandardMaterial();
+ const floor=new T.Mesh(new T.BoxGeometry(4,.1,4),material);floor.position.y=-.05;space.add(floor);
+ const door=new T.Mesh(new T.BoxGeometry(1.2,.8,.1),material);door.position.y=.4;space.add(door);
+ const t=createTraversal({space}),a=[.2,.7],b=[0,-1];
+ assert.equal(t.clear(a,b,0,1),false);
+ door.position.x=-.65;door.rotation.y=Math.PI/2;
+ const path=t.route(a,[b],0,1);
+ let previous=a;for(const next of path){assert.equal(t.clear(previous,next,0,1),true);previous=next;}
+});

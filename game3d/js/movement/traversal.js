@@ -255,6 +255,7 @@ export function createTraversal(place, excluded = []) {
     return true;
   }
   function route(from, path, feet, scale) {
+    refresh(); // A story may have opened a door since the last free movement frame.
     if (!path) return null;
     const result = [];
     let a = from;
