@@ -19,6 +19,7 @@ export function walkStep(game, w, dt, list, eric, wide) {
     P = game.place,
     K = P.charScale || 1,
     me = ME * K;
+  w.yieldingToPlayer = false;
   // while a scene plays, nobody heads for a door Eric is at or going to (the dorm hall's stairs): they wait,
   // stepping out of his way, until the scene is over
   if (wide && eric && w.toDoor) {
@@ -69,6 +70,7 @@ export function walkStep(game, w, dt, list, eric, wide) {
     }
   }
   if (ahead) {
+    w.yieldingToPlayer = ahead === eric;
     const lead = followSpeed(ahead, fx, fz, ad - ahead.r - me);
     speed = lead !== null ? Math.min(speed, lead) : speed * 0.5;
   }
@@ -86,6 +88,7 @@ export function walkStep(game, w, dt, list, eric, wide) {
     const [sx, sz] = slideStep(ox, oz, x, z, b, rr, fx, fz, s, !crowd || isHard(b));
     if (sx === x && sz === z) continue;
     by = b;
+    if (b === eric) w.yieldingToPlayer = true;
     x = sx;
     z = sz;
   }

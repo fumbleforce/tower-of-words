@@ -3,3 +3,8 @@
 .crowd-name { display: block; color: #afcbe9; font-size: 12px; margin-bottom: 4px; }
 .crowd-words { font-size: 17px; line-height: 1.45; }
 .crowd-close { position: absolute; right: 9px; top: 7px; color: #aebbd0; }
+
+.crowd-words .gx { display: inline-block; color: #8d96a6; filter: blur(2.6px); opacity: .6; transform: translateY(1px); font-weight: 500; }
+.crowd-words .jp.clear { color: var(--jp); filter: none; }
+.crowd-words .gl { color: var(--ink-dim); font-size: .8em; }
+.crowd-words .heardico { display: inline-block; width: 18px; height: 14px; margin-right: 8px; vertical-align: -1px; border-radius: 3px; background: linear-gradient(90deg, #6f7a8c 0 3px, transparent 3px 6px, #6f7a8c 6px 9px, transparent 9px 12px, #6f7a8c 12px 15px); opacity: .7; }

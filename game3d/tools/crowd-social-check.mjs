@@ -41,28 +41,49 @@ await withBrowserJob('crowd-social-' + width, async browser => {
       registered: P.crowdSocial.people.every(p => P.things[p.id]?.act && P.extras[p.id] === p.r) };
   });
   assert(target.registered); results.push({ coverage: target });
-  // Real keyboard jump moving sideways so Space cannot pick the nearby person.
-  await page.keyboard.down('d'); await page.keyboard.down('Space');
-  await page.waitForFunction(() => globalThis.__game.jump.air);
-  await page.keyboard.up('d'); await page.keyboard.up('Space');
+  // Use each screen's native jump control.
+  if (width < 700) await page.getByRole('button', { name: 'Jump', exact: true }).tap();
+  else {
+    await page.keyboard.down('d'); await page.keyboard.down('Space');
+    await page.waitForFunction(() => globalThis.__game.jump.air);
+    await page.keyboard.up('d'); await page.keyboard.up('Space');
+  }
   await page.locator('.crowd-reaction:not([hidden])').waitFor({ timeout: 15000 }).catch(async error => { await shot('failure'); console.log(await page.evaluate(() => ({ place: globalThis.__game.place.name, busy: globalThis.__game.busy, active: globalThis.__game.place.crowdSocial.view.active?.id, player: globalThis.__game.player.root.position.toArray(), person: globalThis.__crowdFixture.r.root.position.toArray(), bubble: globalThis.document.querySelector('.crowd-reaction')?.outerHTML }))); throw error; });
   await shot('jump-reaction');
-  assert(await page.locator('.crowd-reaction .unk').count() || await page.locator('.crowd-reaction .heardico').count());
+  assert(await page.locator('.crowd-reaction .gx').count());
+  assert.match(await page.locator('.crowd-reaction .gx').first().evaluate(el => globalThis.getComputedStyle(el).filter), /blur\(/);
   await page.waitForTimeout(4000);
   assert(await page.locator('.crowd-reaction').isVisible(), 'reaction must not expire on a timer');
   await page.locator('.crowd-reaction').click();
   assert(await page.locator('.crowd-reaction').isHidden());
-  results.push({ jump: 'real Space input, blurred persistent reaction, dismiss works' });
+  results.push({ jump: `${width < 700 ? 'touch Jump' : 'Space'} input, blurred persistent reaction, dismiss works` });
   // Use the real near-person E interaction, leave before typing, then return and practise.
   await page.evaluate(() => { const g = globalThis.__game, p = globalThis.__crowdFixture.r.root.position; g.player.root.position.set(p.x, 0, p.z + 0.8); g.walker.sync(); });
   await page.waitForFunction(id => globalThis.__game.near?.id === id, target.id);
-  await page.keyboard.press('e');
+  async function interact() {
+    if (width >= 700) return page.keyboard.press('e');
+    const xy = await page.evaluate(id => {
+      const m = globalThis.__game.markers.list.find(m => m.id === id);
+      const b = m.el.getBoundingClientRect(); return [b.x + b.width / 2, b.y + b.height / 2];
+    }, target.id);
+    await page.touchscreen.tap(...xy);
+    await page.waitForFunction(() => globalThis.__game.ui._cur?.voiceKey === globalThis.__crowdFixture.profile.hello.voice || !!globalThis.document.querySelector('#talk .chips.menu .chip'));
+    if (await page.locator('#talk .chips.menu .chip').count()) {
+      await page.waitForTimeout(950);
+      await page.locator('#talk .chips.menu .chip').first().tap();
+    }
+  }
+  await interact();
   await page.locator('#talk:not([hidden])').waitFor();
   await shot('conversation');
   await advance();
+  await page.getByText('Leave', { exact: true }).waitFor();
+  await page.waitForTimeout(width < 700 ? 950 : 400);
   await page.getByText('Leave', { exact: true }).click(); await ready();
   const learnedBefore = await page.evaluate(async id => (await import('./js/lang.js')).known.has(id), target.word);
-  await page.keyboard.press('e'); await page.locator('#talk:not([hidden])').waitFor(); await advance();
+  await interact(); await page.locator('#talk:not([hidden])').waitFor(); await advance();
+  await page.getByText('Leave', { exact: true }).waitFor();
+  await page.waitForTimeout(width < 700 ? 950 : 400);
   await page.locator('#talk .chip').first().click();
   await page.locator('.tp-in').waitFor(); await shot('practice');
   const ro = await page.evaluate(async id => (await import('./js/lang.js')).WORDS[id].ro, target.word);
@@ -72,7 +93,7 @@ await withBrowserJob('crowd-social-' + width, async browser => {
   await advance(); await ready();
   assert(await page.evaluate(async id => (await import('./js/lang.js')).known.has(id), target.word));
   assert.equal(await page.evaluate(() => globalThis.__crowdFixture.r.socialHold), false);
-  results.push({ talk: 'E, leave, optional typed reply, learned word, releases person', learnedBefore });
+  results.push({ talk: `${width < 700 ? 'touch marker' : 'E'}, leave, optional typed reply, learned word, releases person`, learnedBefore });
   // Actual path attempted into the player. Constrain the fixture to a narrow straight approach.
   await page.evaluate(() => {
     const g = globalThis.__game, b = globalThis.__crowdBody, p = b.r.root.position;
@@ -83,6 +104,22 @@ await withBrowserJob('crowd-social-' + width, async browser => {
   });
   await page.locator('.crowd-reaction:not([hidden])').waitFor({ timeout: 15000 }).catch(async error => { await shot('failure'); console.log(await page.evaluate(() => ({ place: globalThis.__game.place.name, busy: globalThis.__game.busy, active: globalThis.__game.place.crowdSocial.view.active?.id, player: globalThis.__game.player.root.position.toArray(), person: globalThis.__crowdFixture.r.root.position.toArray(), bubble: globalThis.document.querySelector('.crowd-reaction')?.outerHTML }))); throw error; });
   await shot('obstruction'); results.push({ obstruction: 'attempted route request visible' });
+  await page.evaluate(() => globalThis.__game.place.leave());
+  assert.equal(await page.locator('.crowd-reaction').count(), 0, 'leaving removes reaction UI');
+  await waitForGame(page, 180000, () => page.goto(base + '/index.html?place=gate&q=0'), 'play');
+  const station = await page.evaluate(() => {
+    const g = globalThis.__game, P = g.place;
+    const ids = ['worker_a', 'worker_b', 'commuter_1', 'commuter_2', 'commuter_3'];
+    return ids.map(id => {
+      const p = P.crowdSocial.people.find(p => p.id === id), r = P.extras[id];
+      const before = r.root.visible; r.root.visible = true;
+      const row = { id, attached: p?.r === r, enabled: P.things[id].enabled(), talk: typeof P.things[id].act === 'function',
+        pins: g.markers.list.filter(m => m.id === id).length, profile: p.profile.speaker };
+      r.root.visible = before; return row;
+    });
+  });
+  assert(station.every(p => p.attached && p.enabled && p.talk && p.pins === 1));
+  results.push({ station });
   assert.deepEqual(errors, []);
   fs.writeFileSync(out + 'result.json', JSON.stringify(results, null, 2));
   await page.close();

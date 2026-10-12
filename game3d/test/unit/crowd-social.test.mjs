@@ -42,3 +42,27 @@ test('every profile offers two non-hostile variants and fully voiced blurred con
     assert(!p.jump.some(l => l.text.includes('ばか')));
   }
 });
+
+test('background extras use free reachable approaches around furniture', async () => {
+  const { registerHooks } = await import('node:module');
+  const vendor = new URL('../../vendor/three/three.module.js', import.meta.url).href;
+  const hooks = registerHooks({ resolve(s, c, next) {
+    return s === 'three' ? { url: vendor, shortCircuit: true } : next(s, c);
+  } });
+  try {
+    const THREE = await import(vendor);
+    const { approachSpot } = await import('../../js/movement/targets.js');
+    const { Nav } = await import('../../js/movement/navigation.js');
+    const space = new THREE.Group(), player = { root: new THREE.Group() }, npc = { root: new THREE.Group(), seated: true };
+    space.add(player.root, npc.root);
+    player.root.position.set(0, 0, -3);
+    const nav = new Nav(-5, 5, -5, 5), originalFree = nav.free.bind(nav);
+    // A bench back blocks the direct approach from Eric's side; the open front remains reachable.
+    nav.free = (x, z, r) => originalFree(x, z, r) && !(Math.abs(x) < 1 && z < 0 && z > -1);
+    const game = { player, place: { space, extras: { passer: npc }, crowd: [npc], people: {}, nav, charScale: 1 } };
+    const spot = approachSpot(game, { id: 'passer', kind: 'person' });
+    assert(spot, 'extras must resolve a reachable talking position');
+    assert(nav.free(...spot), 'approach must be outside the blocked bench back');
+    assert(spot[1] >= 0 || Math.abs(spot[0]) >= 1);
+  } finally { hooks.deregister(); }
+});

@@ -161,8 +161,9 @@ export function attachCrowdSocial(game, place, pool = []) {
       p.previous = q;
       const commuter = place._commuters?.find((c) => c.r === r);
       const target = b?.state === 'walk' && !b.stopped ? b.line?.[b.i] : commuter?.path?.[0];
-      p.blocked = available && !r.socialHold && blocking(q, me, target, speed, K) ? p.blocked + dt : 0;
-      if (p.blocked >= 0.8 && !view.active) {
+      const yielding = b?.state === 'walk' && !b.stopped && b.yieldingToPlayer;
+      p.blocked = available && !r.socialHold && (yielding || blocking(q, me, target, speed, K)) ? p.blocked + dt : 0;
+      if (p.blocked >= 0.4 && !view.active) {
         react(p, 'block');
         p.blocked = -4;
       }
@@ -176,7 +177,7 @@ export function attachCrowdSocial(game, place, pool = []) {
   };
   const leave = place.leave?.bind(place);
   place.leave = () => {
-    view.clear();
+    view.dispose();
     for (const p of people) p.r.socialHold = false;
     leave?.();
   };

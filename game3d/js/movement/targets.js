@@ -81,7 +81,7 @@ export function approachSpot(game, item) {
   if (!P || !item || !(item.rig || /person/.test(item.kind || ''))) return null;
   // A counter can require an authored visitor position, even for a standing person.
   if (item.fixedSpot) return item.spot?.() || null;
-  const r = item.rig ? item.rig() : P.people && P.people[item.id];
+  const r = item.rig ? item.rig() : P.people?.[item.id] || P.extras?.[item.id];
   if (!r || !r.root || !r.root.visible) return null;
   const seatedNow = !!r.seated || (!!r.hips && r.root.position.y > 0.05);
   const nav = P.nav,
