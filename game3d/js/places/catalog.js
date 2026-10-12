@@ -44,7 +44,6 @@ export const PLACE_DETAILS = {
   },
   campus: {
     things: {
-      forecourt: { label: 'Head office', kind: 'thing', verb: 'Go' },
       office_quarter: { label: 'Office street', kind: 'thing', verb: 'Go' },
       office_shed: { label: 'Office street', kind: 'thing', verb: 'Go' },
       harbour: { label: 'Harbour walk', kind: 'thing', verb: 'Go' },
@@ -53,7 +52,7 @@ export const PLACE_DETAILS = {
     },
     spots: ['campus_in', 'print_door'],
     seats: ['campus_bench'],
-    zones: ['forecourt_exit', 'office_quarter_exit', 'office_shed_exit', 'harbour_exit'],
+    zones: ['office_quarter_exit', 'office_shed_exit', 'harbour_exit'],
     people: [],
     hooks: [],
   },
@@ -187,7 +186,6 @@ export const PLACE_DETAILS = {
   },
   forecourt: {
     things: {
-      campus: { label: 'North campus', kind: 'thing', verb: 'Go' },
       station_exit: { label: 'Station', kind: 'thing' },
       office_entrance: { label: 'Head office', kind: 'thing' },
       lift: { label: 'Lift to B2', kind: 'thing' },
@@ -223,7 +221,7 @@ export const PLACE_DETAILS = {
       'lobby_umbrella',
     ],
     seats: ['garden_bench'],
-    zones: ['campus_exit', 'lift_front', 'station_exit', 'plaza_lane', 'shop_exit', 'reception_office'],
+    zones: ['lift_front', 'station_exit', 'plaza_lane', 'shop_exit', 'reception_office'],
     people: ['kuro', 'tama'],
     hooks: ['liftOpen', 'liftClose', 'gardenCat', 'bicycle'],
   },

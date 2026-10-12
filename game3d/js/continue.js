@@ -13,7 +13,9 @@ import { migrateDay2Save } from './saves/day2.js';
 export function createContinue(game, { enter, travel, startScene, PLACES }) {
   const ui = game.ui;
   return async function continueFrom(saved) {
+    const previousPlace = saved.place;
     saved = migrateDay2Save(saved);
+    const recoveredAccess = previousPlace !== saved.place && saved.place === 'forecourt';
     game.busy = true;
     restore(game, saved);
     await enter(saved.place || 'train', { persist: false, resuming: true });
@@ -48,6 +50,7 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
     game.restoreZones?.(saved);
     game.busy = false;
     game.saveEnabled = true;
+    if (recoveredAccess) ui.toast('The northwest staff entrance is closed. You’re back at the station forecourt.');
     const transition = saved.transition;
     if (saved.ended) {
       showEnd(game);

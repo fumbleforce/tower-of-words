@@ -341,7 +341,7 @@ test('forecourt: the ground reaches the garden court, the bench bays, the shed s
     gravelCourt: [FP.GARDEN_COURT[0] + 1.6, FP.GARDEN_COURT[2] + 1.2],
     gravelWay: [(FP.GARDEN_PATH[0] + FP.GARDEN_PATH[1]) / 2, FP.STRIP_S[3]],
     bay: [FG.BAY_X[0] - 0.6, FG.BAYS[0][2] + 0.22],
-    campus: FP.CAMPUS_EXIT.lane,
+    staffGate: [(FP.SHED_ST[0] + FP.SHED_ST[1]) / 2, FP.BARRIER_Z + 0.5],
     plaza: [29.4, FP.LANE_Z],
     serviceGate: [7.5, FP.HZ - 0.05],
     bikes: [10, 7.5],

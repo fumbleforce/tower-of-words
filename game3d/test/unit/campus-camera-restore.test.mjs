@@ -119,7 +119,7 @@ test("campus Continue applies the local camera pose before the real save restore
       const restore = canteenSave(
         f.game,
         { free: () => true },
-        EXITS.forecourt.in,
+        EXITS.office_shed.in,
         f.cam,
         {},
       ).restore;
@@ -148,7 +148,7 @@ test("campus Continue applies the local camera pose before the real save restore
 test("campus arrival close shots keep their framing through the first update and release", () => {
   for (const aspect of [390 / 844, 1366 / 860])
     for (const point of [
-      EXITS.forecourt.arrive,
+      EXITS.office_shed.arrive,
       EXITS.office_quarter.arrive,
       PRINT_STEP,
       pt([-16, -16.6]),

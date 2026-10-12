@@ -8,7 +8,7 @@ import clinic from './clinic.js';
 // is the clinic (each day's plaza story has its door).
 export function campusRoutes(stories) {
  const out={office_quarter:campusDistrict('office_quarter',!!stories.sports),harbour:campusDistrict('harbour'),...stories,campus,print_shop,ferry_terminal,clinic};
- for(const [place,targets] of Object.entries({forecourt:['campus'],office_quarter:['campus_shed','campus_quarter'],harbour:['campus']})) {
+ for(const [place,targets] of Object.entries({office_quarter:['campus_shed','campus_quarter'],harbour:['campus']})) {
   const old=out[place],on={...old.on};
   for(const target of targets){on['talk:'+target]='to_campus';on['zone:'+target+'_exit']='to_campus';}
   out[place]={...old,on,nodes:{...old.nodes,to_campus:[{do:'trip',to:'campus'}]}};

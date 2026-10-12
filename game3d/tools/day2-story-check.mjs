@@ -193,12 +193,19 @@ for (const submitted of [false, true]) {
   resumed.tickets.close('T-0002'); resumed.fire('talk:my_chair');
   assert.equal(resumed.tickets.status('T-0002'), 'done', 'Queue setup reopened an already-closed request');
 }
-// The route graph must support every optional detour and a return home in both periods.
+// The closed northwest staff gate protects this optional district on day two.
+// Every active place still reaches every main-day goal and home in both periods.
+const protectedPlaces = ['office_quarter', 'harbour', 'campus', 'print_shop', 'ferry_terminal'];
+const activePlaces = OPEN_PLACES.filter(place => !protectedPlaces.includes(place));
+assert(protectedPlaces.every(place => OPEN_PLACES.includes(place)));
 for (const period of PERIODS) for (const start of OPEN_PLACES) {
   const seen = new Set([start]), queue = [start];
   while (queue.length) for (const next of TRIPS[queue.shift()]) if (!seen.has(next)) { seen.add(next); queue.push(next); }
-  assert.equal(seen.size, OPEN_PLACES.length, `${period}: stranded at ${start}`);
+  const expected = protectedPlaces.includes(start) ? protectedPlaces : activePlaces;
+  assert.deepEqual([...seen].sort(), [...expected].sort(), `${period}: wrong access from ${start}`);
 }
+for (const [from, to] of Object.entries({ campus: ['office_quarter', 'harbour', 'print_shop'], office_quarter: ['campus', 'harbour'], harbour: ['campus', 'office_quarter', 'ferry_terminal'], print_shop: ['campus'], ferry_terminal: ['harbour'] }))
+  assert.deepEqual([...TRIPS[from]].sort(), [...to].sort(), `${from}: protected links changed`);
 // A return after any completed milestone must point toward the next unfinished action.
 const milestones = [
   [{}, /station|train doors/i],

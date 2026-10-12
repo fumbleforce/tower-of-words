@@ -13,6 +13,7 @@ import { T, at, DOOR_U } from '../head-office/frame.js';
 import { BUILDINGS, toLocal } from '../island-layout.js';
 import { CROSS, STREET_W } from './cross-plan.js';
 import { doorAt } from '../outdoor/block-face.js';
+import { STAFF_GATE, STAFF_FENCE } from './access-plan.js';
 export { CROSS, STREET_W };
 
 export { STATION, DOOR_X };
@@ -63,13 +64,12 @@ export const WING = box('head_office_wing'),
   E1 = box('office_e1');
 export const SHED_ST = [X0, X0 + STREET_W, CROSS[2] - 4, HZ]; // it runs on north past the junction, out of view
 export const JUNCTION = [SHED_ST[0], SHED_ST[1], CROSS[2], CROSS[3]];
-// a few steps up the shed street he can walk, to the chained bollards that close it; they stand far enough in that
-// the court's trees never hide them from the camera
-export const BARRIER_Z = HZ - 3.3;
-// the shed street he walks, its full width, from the court to a step past the bollards (where the campus trip starts)
-export const SHED_WALK = [SHED_ST[0], SHED_ST[1], BARRIER_Z - 1.2, HZ];
+// The public approach ends at the closed staff entrance, clear of the court’s trees.
+export const BARRIER_Z = toLocal('forecourt', ...STAFF_GATE[0])[1];
+// The forecourt approach stops at the gate’s southern face.
+export const SHED_WALK = [SHED_ST[0], SHED_ST[1], BARRIER_Z + 0.1, HZ];
 export const WING_PLOT = [SHED_ST[1], SERVICE[0], CROSS[3], HZ];
-// the wing's staff door (its west face's middle bay, past the chains) and its path from the shed street, 1.6 wide;
+// the wing's staff door (its west face's middle bay, past the gate) and its path from the shed street, 1.6 wide;
 // the staff bike shelter on the lawn behind the wing, its paved floor and the path to it (forecourt/north.js). All
 // walkable from the campus (campus/plan.js WALKS); the shelter's bikes stand in SHELTER_BIKES.
 export const WING_DOOR = doorAt(WING, 'w', (WING[2] + WING[3]) / 2);
@@ -105,10 +105,13 @@ export const NOOKS = [
   { id: 'forecourt_staff_gate', kit: 'gate', at: [7.4, -2.6], face: Math.PI, back: 1.3, half: 1.25, bike: 1 },
 ];
 
-// Shared pedestrian seam with the campus; both scenes use the forecourt coordinate frame.
-export const CAMPUS_EXIT = {
-  edge: [(SHED_ST[0] + SHED_ST[1]) / 2, BARRIER_Z + 0.5],
-  lane: [(SHED_ST[0] + SHED_ST[1]) / 2, BARRIER_Z + 1.7],
-  in: [(SHED_ST[0] + SHED_ST[1]) / 2, BARRIER_Z + 3],
-  zone: [SHED_WALK[0], SHED_WALK[1], BARRIER_Z - 1, BARRIER_Z + 1.9],
-};
+// The closed entrance is identical in the two scenes, which share a coordinate frame.
+const localLine = (line) => line.map((p) => toLocal('forecourt', ...p));
+export const ACCESS_GATE = localLine(STAFF_GATE);
+export const ACCESS_FENCE = STAFF_FENCE.map(localLine);
+export const ACCESS_BLOCKS = [...ACCESS_FENCE, ACCESS_GATE].map(([a, b]) => [
+  Math.min(a[0], b[0]) - 0.1,
+  Math.max(a[0], b[0]) + 0.1,
+  Math.min(a[1], b[1]) - 0.1,
+  Math.max(a[1], b[1]) + 0.1,
+]);

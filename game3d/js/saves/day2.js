@@ -2,6 +2,7 @@ import { flagKeys } from '../narrative/engine-flags.js';
 import { seedVisited } from '../travel/visited.js';
 const KEYS = flagKeys('game3d/js/saves/day2.js');
 const REVISION = 2;
+const PROTECTED = new Set(['office_quarter', 'harbour', 'campus', 'print_shop', 'ferry_terminal']);
 // These conversations moved from the outdoor bench into the restaurant.
 const PARTY_NODES = new Set([
   'd2_after_work',
@@ -39,18 +40,22 @@ const PARTY_NODES = new Set([
 // Old checkpoints index the previous scripts. Resume at the place's progress-aware
 // opening instead of interpreting those indices against revised dialogue.
 export function migrateDay2Save(saved) {
-  if (saved.day !== 2 || saved.flags?.[KEYS.d2_content_revision] === REVISION || saved.ended) return saved;
+  if (saved.day !== 2 || saved.ended) return saved;
+  // The closed staff gate leaves this optional district without a day-two return.
+  const recoverAccess = PROTECTED.has(saved.place);
+  if (!recoverAccess && saved.flags?.[KEYS.d2_content_revision] === REVISION) return saved;
   const nodes = [...(saved.runner?.execution?.frames || []), ...(saved.runner?.queued || [])].map(
     (frame) => frame.node,
   );
   const moveParty =
     saved.place === 'shotengai' &&
     (nodes.some((node) => PARTY_NODES.has(node)) || (saved.flags?.d2_ate && !saved.flags?.d2_party_done));
-  const restart = moveParty || nodes.some((node) => typeof node === 'string' && node.startsWith('d2_'));
+  const restart =
+    recoverAccess || moveParty || nodes.some((node) => typeof node === 'string' && node.startsWith('d2_'));
   const flags = { ...saved.flags };
   flags[KEYS.d2_content_revision] = REVISION;
   if (!restart) return { ...saved, flags };
-  const place = moveParty ? 'izakaya' : saved.place;
+  const place = recoverAccess ? 'forecourt' : moveParty ? 'izakaya' : saved.place;
   flags[KEYS.place] = place;
   return {
     ...saved,
@@ -59,6 +64,7 @@ export function migrateDay2Save(saved) {
     pendingStart: place,
     world: null,
     transition: null,
+    ...(recoverAccess ? { zones: null, surface: null } : {}),
     visited: [...new Set([...(saved.visited || seedVisited(saved)), place])],
     runner: { ...saved.runner, execution: null, queued: [] },
     ui: { ...saved.ui, hold: null, goal: '' },

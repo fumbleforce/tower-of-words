@@ -36,14 +36,13 @@ test('campus paths connect every exit, print door and the usable bench approach'
 });
 
 const L=await import('../../js/scenes/island-layout.js');
-const F=await import('../../js/scenes/forecourt/plan.js');
 const O=await import('../../js/scenes/office-quarter/plan.js');
 const H=await import('../../js/scenes/harbour/plan.js');
 const {canTravel}=await import('../../js/places/definitions.js');
 const {storyPath}=await import('../../js/days.js');
 test('each pedestrian seam has the identical island endpoint and arrivals land beyond its own trigger',()=>{
  const global=(chunk,p)=>L.toIsland(chunk,...p);
- for(const [campus,chunk,other]of [[P.EXITS.forecourt,'forecourt',F.CAMPUS_EXIT],[P.EXITS.office_quarter,'office_quarter',O.CAMPUS_EXITS.quarter],[P.EXITS.office_shed,'office_quarter',O.CAMPUS_EXITS.shed],[P.EXITS.harbour,'harbour',H.CAMPUS_EXIT]]){
+ for(const [campus,chunk,other]of [[P.EXITS.office_quarter,'office_quarter',O.CAMPUS_EXITS.quarter],[P.EXITS.office_shed,'office_quarter',O.CAMPUS_EXITS.shed],[P.EXITS.harbour,'harbour',H.CAMPUS_EXIT]]){
   const a=global('campus',campus.edge),b=global(chunk,other.edge);
   assert.ok(Math.hypot(a[0]-b[0],a[1]-b[1])<1e-8,`${chunk} no position jump`);
   assert.equal(P.inRect(...campus.in,campus.zone),false);
@@ -51,7 +50,7 @@ test('each pedestrian seam has the identical island endpoint and arrivals land b
  }
 });
 test('opening and continuing weeks retain native campus routes at real loader paths',async()=>{
- for(const day of [1,2,3,4,5,6,17,32])for(const [from,to,target]of [['forecourt','campus','campus'],['campus','office_quarter','office_shed'],['office_quarter','campus','campus_quarter'],['harbour','campus','campus'],['campus','print_shop','print_shop'],['print_shop','campus','print_exit']]){
+ for(const day of [1,2,3,4,5,6,17,32])for(const [from,to,target]of [['campus','office_quarter','office_shed'],['office_quarter','campus','campus_quarter'],['harbour','campus','campus'],['campus','print_shop','print_shop'],['print_shop','campus','print_exit']]){
   const story=(await import(new URL('../../js/'+storyPath(from,day),import.meta.url))).default;
   const node=story.on['talk:'+target];assert.ok(node,`${day} ${from} ${target}`);
   assert.equal(story.nodes[node][0].to,to);assert.ok(canTravel(from,to,day));

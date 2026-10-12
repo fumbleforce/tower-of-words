@@ -31,7 +31,7 @@ export const OPEN_PLACES = Object.keys(STORIES);
 // Same small area throughout day 2. Period changes never take away the route back to room 203.
 export const PERIODS = ['morning', 'evening'];
 export const TRIPS = {
-  campus: ['forecourt', 'office_quarter', 'harbour', 'print_shop'],
+  campus: ['office_quarter', 'harbour', 'print_shop'],
   print_shop: ['campus'],
   office_quarter: ['campus', 'harbour'],
   harbour: ['campus', 'office_quarter', 'ferry_terminal'],
@@ -43,7 +43,7 @@ export const TRIPS = {
   canteen: ['plaza'],
   clinic: ['plaza'],
   plaza: ['forecourt', 'east_lane', 'shotengai', 'canteen', 'clinic'],
-  forecourt: ['gate', 'office', 'plaza', 'shotengai', 'campus'],
+  forecourt: ['gate', 'office', 'plaza', 'shotengai'],
   gate: ['train', 'forecourt'],
   train: ['gate'],
   office: ['forecourt'],

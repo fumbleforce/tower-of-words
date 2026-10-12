@@ -18,7 +18,7 @@ export const PRINT_STEP = pt([-23.35, -43.3]);
 export const BENCH = { x: pt([-37, -33.25])[0], z: pt([-37, -33.25])[1], top: 0.34, ry: 0, out: pt([-37, -32.5]) };
 export const WALKS = [
   ...paths,
-  [F.SHED_ST[0], F.SHED_ST[1], F.SHED_ST[2], F.BARRIER_Z + 1.5],
+  [F.SHED_ST[0], F.SHED_ST[1], F.SHED_ST[2], F.BARRIER_Z - 0.1],
   F.CROSS,
   F.STAFF_PATH, // to the wing's staff door
   F.SHELTER_FLOOR, // the bike shelter's floor and its path (its bikes: F.SHELTER_BIKES)
@@ -34,18 +34,11 @@ const exit = (edge, lane, arrive, inside, zone) => ({
 const shedX = (F.SHED_ST[0] + F.SHED_ST[1]) / 2 + AT[0],
   foreZ = F.BARRIER_Z + AT[1];
 export const EXITS = {
-  forecourt: exit(
-    [shedX, foreZ + 0.5],
-    [shedX, foreZ - 0.8],
-    [shedX, foreZ + 0.5],
-    [shedX, foreZ - 3],
-    [shedX - 1.4, shedX + 1.4, foreZ - 1.1, foreZ + 1],
-  ),
   office_quarter: exit([4.5, -49.5], [4.5, -48], [4.5, -49.5], [4.5, -46.5], [3, 6, -50, -47.8]),
   office_shed: exit([-19.25, -49.5], [-19.25, -48], [-19.25, -49.5], [-19.25, -46.5], [-20.75, -17.75, -50, -47.8]),
   harbour: exit([-41.6, -37], [-41.6, -35.8], [-41.6, -37], [-41.6, -34.2], [-42.6, -40.6, -39, -35.5]),
 };
-export const IN = EXITS.forecourt.in;
+export const IN = pt([shedX, foreZ - 3]);
 export const BOUNDS = WALKS.reduce(
   (a, r) => [Math.min(a[0], r[0]), Math.max(a[1], r[1]), Math.min(a[2], r[2]), Math.max(a[3], r[3])],
   [Infinity, -Infinity, Infinity, -Infinity],

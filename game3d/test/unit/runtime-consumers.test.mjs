@@ -50,7 +50,10 @@ test('actual asset scanner preserves portraits and all previous prop labels and 
   for (const prop of propsBefore) assert.deepEqual(actual.get(prop.id_), prop);
   // Four quoted labels and two nested anchor expressions were missed by the old regex.
   const added = data.props.filter(prop => !propsBefore.some(old => old.id_ === prop.id_)).sort((a, b) => a.id_.localeCompare(b.id_));
-  assert.deepEqual(added, propsAdded);
+  // #548 removes only the two tap targets across the closed staff entrance.
+  const removed = new Set(['prop/campus/forecourt', 'prop/forecourt/campus']);
+  assert.deepEqual(added, propsAdded.filter(prop => !removed.has(prop.id_)));
+  for (const id of removed) assert.equal(actual.has(id), false);
 
 });
 

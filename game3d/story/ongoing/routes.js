@@ -17,7 +17,6 @@ export const ROUTES = {
     ]
   },
   "forecourt": {
-    "campus": ["talk:campus", "zone:campus_exit"],
     "shotengai": [
       "talk:shop_lane",
       "zone:shop_exit"
@@ -215,7 +214,6 @@ export const ROUTES = {
     ]
   },
   "campus": {
-    "forecourt": ["talk:forecourt", "zone:forecourt_exit"],
     "office_quarter": ["talk:office_quarter", "zone:office_quarter_exit", "talk:office_shed", "zone:office_shed_exit"],
     "harbour": ["talk:harbour", "zone:harbour_exit"],
     "print_shop": ["talk:print_shop"]

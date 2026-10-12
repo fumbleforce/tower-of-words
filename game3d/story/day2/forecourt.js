@@ -4,7 +4,6 @@ export default {
   speakers: { kuro: { name: 'Receptionist' } },
   labels: { kuro: 'Receptionist' },
   on: {
-    'talk:campus':'to_campus','zone:campus_exit':'to_campus',
     'talk:shop_lane': 'd2_to_shotengai', 'zone:shop_exit': 'd2_to_shotengai',
     'talk:kuro': [{ if: "period == 'evening' && know_watashi && !d2_kuro_evening_seen", node: 'd2_kuro_evening' }, 'd2_kuro_talk'],
     'say:ohayo:kuro': 'd2_kuro_greet',
@@ -15,7 +14,6 @@ export default {
     ...sayFallbacks,
   },
   nodes: {
-    to_campus:[{do:'trip',to:'campus'}],
     d2_to_shotengai: [{ do: 'trip', to: 'shotengai' }],
     d2_kuro_talk: [
       { do: 'face', who: 'kuro', to: 'eric' },

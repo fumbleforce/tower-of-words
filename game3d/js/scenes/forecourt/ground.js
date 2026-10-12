@@ -9,7 +9,7 @@ import { WALKS as NORTH_WALKS } from '../campus/plan.js';
 import { RUNS_ON, BUILDINGS as NORTH_BUILDINGS } from '../campus/ground.js';
 import * as P from './plan.js';
 
-const { STATION, DOOR_X, X0, ZN, HZ, SHED_ST: SH, SERVICE, LANE, STRIP_S: S } = P;
+const { STATION, DOOR_X, X0, ZN, HZ, SERVICE, LANE, STRIP_S: S } = P;
 // the walk grid's area: north to the tower's north wall (the lobby's back rooms), east to where the plaza trip
 // starts on the lane
 export const WALK_AREA = [X0 - 0.6, P.LANE_WALK, HZ - 9.8, 12.75];
@@ -44,7 +44,7 @@ export function ground() {
     // the campus's streets, seen past the court's north bed: walkable there, drawn the same way here
     backdrop: NORTH_WALKS,
     indoor: [TOWER],
-    cut: [NORTH_BED],
+    cut: [NORTH_BED, ...P.ACCESS_BLOCKS],
     barriers: [
       // raised beds behind their own low walls
       { kind: 'wall', rect: NORTH_BED },
@@ -58,8 +58,8 @@ export function ground() {
         kind: 'gate',
         rect: [SERVICE[0], SERVICE[1], SERVICE[2], YARD_MOUTH[2]],
       },
-      // where trips start: the campus up the shed street, the plaza along the lane, the shops down the south link
-      { kind: 'open', rect: [SH[0], SH[1], SH[2] - 10, P.SHED_WALK[2]] },
+      // The staff entrance is visibly closed. Public trips continue east and south.
+      ...P.ACCESS_BLOCKS.map((rect) => ({ kind: 'gate', rect })),
       { kind: 'open', rect: [52, 80, LANE[2], LANE[3]] },
       { kind: 'open', rect: [link[0], link[1], link[3], link[3] + 10] },
       // the campus's buildings and its own trips' starts, past the streets seen from here

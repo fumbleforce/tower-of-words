@@ -3,7 +3,8 @@
 //   fence(p, { from: [x, z], to: [x, z], variant, y })   posts at both ends and at an even pitch between
 // Variants: mesh (a green weld-mesh fence, a school's or a court's), bars (a park railing of steel bars between two
 // rails), slats (a timber fence of horizontal boards with gaps), bamboo (a kenninji-gaki: split bamboo close
-// together, tied to three dark rails), rail (a low guard rail: two round rails on posts, by a ramp or a drop).
+// together, tied to three dark rails), rail (a low guard rail: two round rails on posts, by a ramp or a drop), service (a tall steel staff fence with
+// solid lower panels and close vertical bars).
 // The bamboo and the boards vary a little each, by the seed. Reports the strip it stands on as blocked.
 import { piece } from '../core/piece.js';
 import { STEEL, PAINT, TIMBER } from '../core/palette.js';
@@ -23,6 +24,7 @@ export const fence = piece({
     slats: { h: 1.5, pitch: 1.8, color: TIMBER.mid, board: 0.12, gap: 0.03 },
     bamboo: { h: 1.4, pitch: 1.8, color: '#3d3a33', pole: 0.045 },
     rail: { h: 0.9, pitch: 1.4, color: STEEL.mid },
+    service: { h: 2.4, pitch: 1.8, color: STEEL.dark, panel: 1.15, gap: 0.12 },
   },
   vary: { tone: 0.04, wear: [0, 0.35] },
   build(k, o) {
@@ -33,7 +35,20 @@ export const fence = piece({
     const post = (u, w = 0.06, hh = h + 0.04, c = color) =>
       k.box(c, w, hh, w, u, 0, 0, { round: 0.008, surf: 'metal' });
     const rail = (y, th = 0.04, d = 0.04, c = color, surf = 'metal') => k.box(c, len, th, d, 0, y, 0, { surf });
-    if (o.variant === 'mesh') {
+    if (o.variant === 'service') {
+      // Solid lower sheets and close vertical bars keep this boundary physical on both detail levels.
+      for (const u of posts) post(u, 0.09, h + 0.04);
+      for (let i = 0; i < n; i++) {
+        const a = posts[i],
+          b = posts[i + 1];
+        k.box(color, b - a, o.panel, 0.08, (a + b) / 2, 0, 0, { surf: 'metal' });
+        if (!k.phone) k.box(STEEL.mid, b - a - 0.16, 0.025, 0.012, (a + b) / 2, o.panel - 0.12, 0.045, { cast: false });
+      }
+      for (const y of [o.panel, h - 0.06]) rail(y, 0.065, 0.09);
+      const m = Math.ceil(len / o.gap);
+      for (let i = 1; i < m; i++)
+        k.box(color, 0.025, h - o.panel - 0.05, 0.025, -len / 2 + (len * i) / m, o.panel, 0, { cast: false });
+    } else if (o.variant === 'mesh') {
       for (const u of posts) post(u, 0.06);
       rail(h - 0.04);
       rail(0.06);

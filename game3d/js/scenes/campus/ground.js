@@ -3,6 +3,7 @@
 // drawn kerbs both come from it. The forecourt draws the same streets, seen past its court (forecourt/ground.js).
 import { walkGround } from '../../movement/walk-ground.js';
 import * as P from './plan.js';
+import { ACCESS_BLOCKS } from '../forecourt/plan.js';
 
 // the walk grid's area (scenes/campus.js)
 export const WALK_AREA = [P.BOUNDS[0] - 0.3, P.BOUNDS[1] + 0.3, P.BOUNDS[2] - 0.3, P.BOUNDS[3] + 0.3];
@@ -39,8 +40,13 @@ export const YARD_GATE = { kind: 'gate', rect: [P.LANE_END[0], P.LANE_END[0] + 0
 export function ground() {
   return walkGround({
     walk: P.WALKS,
-    cut: P.SOLIDS,
-    barriers: [...BUILDINGS, YARD_GATE, ...RUNS_ON.map(({ rect }) => ({ kind: 'open', rect }))],
+    cut: [...P.SOLIDS, ...ACCESS_BLOCKS],
+    barriers: [
+      ...BUILDINGS,
+      YARD_GATE,
+      ...ACCESS_BLOCKS.map((rect) => ({ kind: 'gate', rect })),
+      ...RUNS_ON.map(({ rect }) => ({ kind: 'open', rect })),
+    ],
     bounds: WALK_AREA,
   });
 }

@@ -85,11 +85,19 @@ for (const mc of Object.values(PROTAGONISTS)) {
   const expanded = expandMc(structuredClone({ STORIES, CLUBS, TICKETS }), mc);
   assert(!JSON.stringify(expanded).includes('{mc.'), `Unresolved token for ${mc.id}`);
 }
-// Every open place remains reachable from home, and can reach home again.
-for (const from of Object.keys(STORIES)) {
+// The northwest staff gate prevents entry to this optional district from home.
+// Its existing office-street exit still lets an older save return to the main day.
+const protectedPlaces = ['office_quarter', 'harbour', 'campus', 'print_shop', 'ferry_terminal'];
+const places = Object.keys(STORIES), activePlaces = places.filter(place => !protectedPlaces.includes(place));
+assert(protectedPlaces.every(place => places.includes(place)));
+for (const from of places) {
   const reached = new Set(), visit = p => { if (reached.has(p)) return; reached.add(p); TRIPS[p].forEach(visit); };
-  visit(from); assert.equal(reached.size, Object.keys(STORIES).length, `Disconnected route from ${from}`);
+  visit(from);
+  const expected = protectedPlaces.includes(from) ? places : activePlaces;
+  assert.deepEqual([...reached].sort(), [...expected].sort(), `Wrong access from ${from}`);
 }
+for (const [from, to] of Object.entries({ campus: ['office_quarter', 'harbour', 'print_shop'], office_quarter: ['campus', 'harbour', 'sports'], harbour: ['campus', 'office_quarter', 'ferry_terminal'], print_shop: ['campus'], ferry_terminal: ['harbour'] }))
+  assert.deepEqual([...TRIPS[from]].sort(), [...to].sort(), `${from}: protected links changed`);
 
 class Play {
   constructor(where, flags = {}) {

@@ -3,7 +3,7 @@
 //
 //   the shed street: north from the court's north-west corner, up the platform shed's east side, laid like the lane
 //   (outdoor/lane.js), a verge and an avenue on each side. Where it leaves the court, a soldier band across it; a
-//   few steps up, three bollards with yellow-and-black chains between them close it (he can walk up to them).
+//   a closed steel service gate stands between full-height returns to the wing and station.
 //   the cross street: east off the shed street at a square junction, behind the wing and the tower, to office_e1's
 //   door. A verge and avenue on its north side, a grove of trees in the lawn beyond; on its south side the wing's
 //   hedge, then a pale pavement along the tower's back with the refuse store's collection doors and the tower's
@@ -14,13 +14,12 @@
 //   of staff bikes on the lawn behind it.
 //   office_e1: the same kind of block, its door closing the cross street's axis.
 //   the tower's wall along the service yard: windows and a vent (towerYardWall).
-import * as THREE from 'three';
 import { Parts } from '../outdoor/parts.js';
 import { paver, GRANITE } from '../outdoor/paving.js';
 import { kerb } from '../outdoor/edges.js';
 import { laneField, verge, LANE_BORDER } from '../outdoor/lane.js';
 import { keyaki, sakura, ginkgo, cluster, hedge, bed, gravel, treePit } from '../outdoor/planting.js';
-import { lamps, bollard, STEEL } from '../outdoor/furniture.js';
+import { lamps, STEEL } from '../outdoor/furniture.js';
 import { blockSets, buildBlockSets, officeBlock, doorAt, BLOCK } from '../outdoor/block.js';
 import { BUILDINGS, CHUNKS } from '../island-layout.js';
 import { QUARTER_OPENING, JUNCTION_TREE } from './quarter-planting-plan.js';
@@ -29,8 +28,9 @@ import { shedGarden } from '../campus/shed-garden.js';
 import { TOWN } from '../town.js';
 import { bikeRow } from './details.js';
 import * as P from './plan.js';
+import { accessGate } from './access-gate.js';
 
-const { HZ, TE, TN, SERVICE, WING, E1, CROSS, SHED_ST: SH, JUNCTION: J, WING_PLOT, BARRIER_Z } = P;
+const { HZ, TE, TN, SERVICE, WING, E1, CROSS, SHED_ST: SH, JUNCTION: J, WING_PLOT } = P;
 const layoutOf = (id) => BUILDINGS.find((b) => b.id === id);
 const YARD_DOOR = doorAt(WING, 'e', WING[2] + 1.2);
 // the staff door, its path and the bike shelter's are the plan's (forecourt/plan.js), so they are walkable ground
@@ -147,32 +147,6 @@ function streets(p, q, set) {
   );
 }
 
-// where the shed street is closed: three bollards across it with a hanging chain between each two, in yellow and
-// black links as on any Japanese site barrier
-function barrier(p) {
-  const z = BARRIER_Z,
-    xs = [SH[0] + 0.55, (SH[0] + SH[1]) / 2, SH[1] - 0.55];
-  for (const x of xs) bollard(p, x, z);
-  for (let i = 0; i + 1 < xs.length; i++) {
-    const [a, b] = [xs[i], xs[i + 1]],
-      n = 7;
-    for (let k = 0; k < n; k++) {
-      const t0 = k / n,
-        t1 = (k + 1) / n,
-        sag = (t) => 0.4 - 0.16 * Math.sin(Math.PI * t);
-      const [x0, y0, x1, y1] = [a + (b - a) * t0, sag(t0), a + (b - a) * t1, sag(t1)];
-      const L = Math.hypot(x1 - x0, y1 - y0);
-      p.geo(
-        k % 2 ? '#2f3238' : '#d8b83c',
-        new THREE.BoxGeometry(L, 0.04, 0.04)
-          .rotateZ(Math.atan2(y1 - y0, x1 - x0))
-          .translate((x0 + x1) / 2, (y0 + y1) / 2, z),
-        { cast: false },
-      );
-    }
-  }
-}
-
 // the wing's grounds: a gravel drip strip at the foot of its south face behind a low clipped hedge, and lawn from
 // there to the court's bed; a hedge along the west face either side of the staff door. Its back hedge is the cross
 // street's south verge.
@@ -277,7 +251,7 @@ export function* northSteps(root, set, { closed = true, planting = null } = {}) 
     CHUNKS.forecourt.at.map((v) => -v),
   );
   yield;
-  if (closed) barrier(p);
+  if (closed) accessGate(p);
   wingGrounds(p);
   towerBack(q);
   bikeShelter(root, q);

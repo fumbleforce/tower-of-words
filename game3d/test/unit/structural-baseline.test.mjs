@@ -9,7 +9,13 @@ import baseline from '../fixtures/structural-baseline.json' with { type: 'json' 
 import declarations from '../fixtures/declarations-before.json' with { type: 'json' };
 
 test('shared literals and complete place registrations match the pre-extraction runtime', () => {
-  assert.deepEqual({ DEFAULT_SPEAKERS, PORTRAITS, ITEMS, places: PLACE_DETAILS }, declarations);
+  const expected = structuredClone(declarations);
+  // #548 closes this one staff entrance; every other registered target remains.
+  delete expected.places.forecourt.things.campus;
+  delete expected.places.campus.things.forecourt;
+  expected.places.forecourt.zones = expected.places.forecourt.zones.filter(id => id !== 'campus_exit');
+  expected.places.campus.zones = expected.places.campus.zones.filter(id => id !== 'forecourt_exit');
+  assert.deepEqual({ DEFAULT_SPEAKERS, PORTRAITS, ITEMS, places: PLACE_DETAILS }, expected);
 });
 
 test('structural migration preserves ordered graph IDs, edges and engine declarations', async () => {
@@ -72,6 +78,10 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   for (const flag of ['sender_state', 'sender_offered', 'sender_partial', 'sender_compared', 'sender_delivered']) expected.engine.exact[flag] = ['game3d/js/investigations/sender/state.js'];
   for (const flag of ['sender_action_ok', 'sender_available', 'sender_complaint_heard', 'sender_remark_heard', 'sender_failed', 'sender_wants_mori']) expected.engine.exact[flag] = ['game3d/js/investigations/sender/index.js'];
   for (const flag of ['sender_action_ok', 'sender_available']) expected.engine.exact[flag].unshift('game3d/js/investigations/sender/hook.js');
+  // #548 removes both authored directions through the visibly closed staff gate.
+  const closed = new Set(['forecourt:to_campus', 'campus:to_forecourt']);
+  expected.nodes = expected.nodes.filter(id => !closed.has(id));
+  expected.edges = expected.edges.filter(edge => !closed.has(edge.from) && !closed.has(edge.to));
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {

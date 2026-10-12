@@ -5,6 +5,7 @@
 import { MAP_PATHS as PATHS } from './paths.js';
 import { drawLandCover, drawPlanting, drawSea, crown } from './terrain.js';
 import { drawGardens } from './gardens.js';
+import { drawBoundaries } from './boundaries.js';
 import { mapFootprints, drawRoof, drawGroundLandmarks } from './landmarks.js';
 import { BUILDINGS, GREEN, COAST, SAND, footprint } from '../../scenes/island-layout.js';
 
@@ -146,6 +147,7 @@ export function drawBase(ctx, v) {
   drawPlanting(ctx, v.detail !== false);
   drawGardens(ctx, crown, v.detail !== false);
   drawGroundLandmarks(ctx, v.detail !== false);
+  drawBoundaries(ctx, v.scale);
   ctx.save();
   ctx.translate(0.7, 0.9);
   ctx.fillStyle = INK.shadow;

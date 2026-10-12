@@ -20,12 +20,6 @@ export async function campusPlace(game) {
   const save = canteenSave(game, w.nav, w.start, cam, w.seats);
   const seat = w.seats.campus_bench;
   const things = {
-    forecourt: {
-      ...PLACE_DETAILS.campus.things.forecourt,
-      anchor: (v) => v.set(e.forecourt.lane[0], 1.1, e.forecourt.lane[1]),
-      spot: () => e.forecourt.lane,
-      face: () => e.forecourt.edge,
-    },
     office_quarter: {
       ...PLACE_DETAILS.campus.things.office_quarter,
       anchor: (v) => v.set(e.office_quarter.lane[0], 1.1, e.office_quarter.lane[1]),
@@ -75,7 +69,6 @@ export async function campusPlace(game) {
     people: {},
     hooks: {},
     zones: {
-      forecourt_exit: (x, z) => inRect(x, z, e.forecourt.zone),
       office_quarter_exit: (x, z) => inRect(x, z, e.office_quarter.zone),
       office_shed_exit: (x, z) => inRect(x, z, e.office_shed.zone),
       harbour_exit: (x, z) => inRect(x, z, e.harbour.zone),
@@ -98,7 +91,7 @@ export async function campusPlace(game) {
     },
     snapshotState: save.snapshot,
     restoreState: save.restore,
-    tripIn: (g) => walkIn(g, cam, e.forecourt.arrive, e.forecourt.in, Math.PI),
+    tripIn: (g) => walkIn(g, cam, e.office_shed.arrive, e.office_shed.in, 0),
     tripInFrom: {
       office_quarter: (g) => {
         const x = quarter[viaOf(g, 'quarter')] || quarter.quarter;
@@ -108,7 +101,6 @@ export async function campusPlace(game) {
       print_shop: (g) => walkIn(g, cam, PRINT_DOOR, PRINT_STEP, Math.PI / 2),
     },
     tripOutTo: {
-      forecourt: (g) => walkOut(g, cam, e.forecourt.lane, e.forecourt.edge),
       office_quarter: (g) => walkOutNearest(g, cam, quarter),
       harbour: (g) => walkOut(g, cam, e.harbour.lane, e.harbour.edge),
       print_shop: (g) => walkOut(g, cam, PRINT_STEP, PRINT_DOOR),

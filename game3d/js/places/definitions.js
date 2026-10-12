@@ -85,11 +85,11 @@ export const NEXT = {
 // the karaoke box's front desk through its door off the arcade, and its booth up the stairs; the clinic through its
 // glass door at the head of the plaza's cross walk.
 export const TRIPS = {
-  forecourt: ['plaza', 'shotengai', 'campus'],
+  forecourt: ['plaza', 'shotengai'],
   plaza: ['forecourt', 'dorm_court', 'shotengai', 'east_lane', 'canteen', 'clinic'],
   canteen: ['plaza'],
   clinic: ['plaza'],
-  campus: ['forecourt', 'office_quarter', 'harbour', 'print_shop'],
+  campus: ['office_quarter', 'harbour', 'print_shop'],
   print_shop: ['campus'],
   office: ['forecourt'],
   shotengai: ['plaza', 'dorm_court', 'karaoke', 'forecourt'],
