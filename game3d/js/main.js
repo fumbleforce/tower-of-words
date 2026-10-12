@@ -355,7 +355,7 @@ if (CAP)
   window.__advance = (sec) => {
     for (let t = sec; t > 1e-6; t -= 1 / 30) step(Math.min(1 / 30, t));
   };
-const frame = guardedLoop(tick); // an error in one frame never stops the loop (perf/gl-guard.js)
+const frame = guardedLoop(tick, view.due); // an error never stops it; due: the frame cap (perf/)
 function tick() {
   followCamera.refresh();
   const now = performance.now();

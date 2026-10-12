@@ -835,3 +835,22 @@ The forecourt's before is the coordinator's run on main 9486b0ea. A carried bag'
 Every character skin is 2048x2048, 21 MB as a mipmapped texture, and a place holds up to eleven of them. `tools/characters/skin_sizes.py` writes `base-1024.webp` and `base-512.webp` next to each 2048 skin (the originals stay; push the copies with tools/assets/sync.py). `js/perf/skin-tex.js` (`loadSkin`) picks the file: on the phone 1024 (5 MB), and 512 (1.3 MB) for the two background crowd models in js/crowd/approved-models.js, which are only ever seen small; desktop keeps 2048. A skin is loaded once per file and shared. `?fullphone` loads the 2048 skins on a phone too.
 
 Phone texture MB, before (stage 1 table) and after: train 147 to 46, gate 142 to 44, forecourt 162 to 59, plaza 134 to 45, office 177 to 63, shop street 246 to 72, izakaya 113 to 29, karaoke booth 99 to 32, east lane 113 to 40, east coast 211 to 55, dorm commons 130 to 47, sports 136 to 51, pool 118 to 53, gym 118 to 34, office quarter 109 to 36, harbour 102 to 29. Every place is under the phone's 96 MB and the phone texture exceptions are gone. On the desktop (2048 kept) shop street is 248 MB, the east coast 214 and the office 222 against 192, so their exceptions stay.
+
+## Laptops without a graphics card (2026-10-12)
+
+A colleague's laptop with integrated graphics ran very hot. 'auto' quality gave every desktop GPU that isn't
+software GL the high tier: full AO with 16 samples, at pixel ratio up to 2, at the screen's full refresh rate.
+Changes:
+
+- `js/perf/gpu.js` sorts the renderer's name into software and integrated (Intel HD/UHD/Iris/Xe/Arc Graphics, AMD
+  Radeon Graphics/Vega/7x0M APUs, plain Apple M chips; Arc A/B cards, Radeon RX and Apple Pro/Max/Ultra count as
+  discrete). `renderer.userData.integrated` holds it; unit test `game3d/test/unit/gpu-class.test.mjs`.
+- 'auto' quality picks medium on an integrated GPU (settings.js `qualityTier`), and medium there drops AO the same
+  way it does on phones (perf/phone.js `phoneTier`): GTAO draws the scene again for its normals.
+- A frame cap (Settings > Graphics > Frame rate limit; `settings.frameCap`, `frameCap()`): 'auto' is 60, or 30 at
+  low; 30, 60 and None can be picked. A 120 or 144 Hz screen no longer draws (and steps the world) at its full rate.
+  The title stays at 30 at most, and a paused world now draws at most 20 a second (it drew every refresh).
+  `?fps=N` overrides (0 = no cap); `?cap` stills draw every frame. The gate is `view.due` (perf/view.js), run by
+  `guardedLoop` (perf/gl-guard.js) before the tick, so a skipped frame costs nothing and its time goes to the next.
+- The metrics overlay and the fast test's frame times count drawn frames only (`view.draws`), so they show the
+  real drawn rate under the cap.

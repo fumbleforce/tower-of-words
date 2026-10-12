@@ -74,7 +74,10 @@ export const phoneTiles = () => (on() ? { cell: 8, max: 2000, rest: 4000 } : {})
 // The medium tier on a phone (what 'auto' picks there, settings.js): no ambient occlusion. GTAO draws the whole scene
 // a second time for its normals, which about doubled the phone's draw calls at medium (office 218 to 448 a frame).
 // Bloom, the tilt-shift, the outline, the pixel ratio and the sharper shadows stay. High keeps it on phones too.
-export const phoneTier = (q) => (on() && q === 1 ? { ao: false } : {});
+// An integrated laptop GPU (perf/gpu.js, also given medium by 'auto') drops it the same way: it shares the CPU's
+// power and cooling, and AO's second scene pass and full-screen samples were the costliest part of the frame.
+export const phoneTier = (q) =>
+  (on() || window.__game?.renderer?.userData?.integrated) && q === 1 ? { ao: false } : {};
 
 // A pass that is off (AO on low, and on medium on a phone; bloom on low) keeps its full-screen targets at 1x1, so a
 // phone doesn't hold GPU memory for nothing (the S23 lost its 3D view, perf/gl-guard.js). Wraps each pass's setSize;

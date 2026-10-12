@@ -5,7 +5,7 @@
 // Keys: Tab moves through everything, Up and Down go from row to row (and tab to tab on the rail), Left and Right
 // change the focused choice, slider or switch, PageUp and PageDown change section, Esc closes (menu.js).
 import '../full.js';
-import { settings, setSetting, onSettings, qualityTier } from '../settings.js';
+import { settings, setSetting, onSettings, qualityTier, frameCap } from '../settings.js';
 import { sfx, keyLabel } from '../ui.js';
 import { browserSpeechAvailable, prepareVoice } from '../speech.js';
 import { el } from './dom.js';
@@ -68,6 +68,17 @@ const SECTIONS = [
           ['low', 'Low'],
           ['medium', 'Medium'],
           ['high', 'High'],
+        ],
+        ' ',
+      ),
+      seg(
+        'frameCap',
+        'Frame rate limit',
+        [
+          ['auto', 'Auto'],
+          ['30', '30'],
+          ['60', '60'],
+          ['off', 'None'],
         ],
         ' ',
       ),
@@ -356,6 +367,10 @@ export function settingsView({ openLayer, closeLayer, trap }) {
     if (!/Downloading/.test(vn.textContent)) vn.textContent = VOICE_NOTE[settings.voiceInput] || '';
     help('quality').textContent =
       settings.quality === 'auto' ? `Auto picks ${qualityTier()} on this device` : 'Changes at once';
+    const cap = frameCap();
+    help('frameCap').textContent =
+      (settings.frameCap === 'auto' ? `Auto: ${cap} frames a second here. ` : '') +
+      'A lower limit keeps a laptop cooler and its battery longer';
   }
   onSettings(sync);
 

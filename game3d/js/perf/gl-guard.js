@@ -60,11 +60,14 @@ export function onResizeFrame(fn) {
 
 // a requestAnimationFrame loop that keeps running: each distinct error is rethrown once, outside the frame, so it
 // still shows as a page error (the fast test fails on it) without stopping the game
-export function guardedLoop(tick) {
+// due(now), when given, says whether this display frame is drawn (perf/view.js, the frame cap); a skipped frame's time
+// goes to the next one
+export function guardedLoop(tick, due) {
   const seen = new Set();
   return function frame() {
     requestAnimationFrame(frame);
     try {
+      if (due && !due(performance.now())) return;
       tick();
     } catch (e) {
       const key = String(e && e.message);

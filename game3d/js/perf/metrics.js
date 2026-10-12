@@ -74,6 +74,7 @@ export function installMetrics(game, qualityNow = () => null) {
 
   let lastPlace = null;
   let last = 0,
+    lastDrawn = -1,
     frame = 0,
     armed = false,
     running = false,
@@ -93,6 +94,10 @@ export function installMetrics(game, qualityNow = () => null) {
       return;
     }
     requestAnimationFrame(tick);
+    // the frame cap (perf/view.js due) skips some display frames: only the ones the game drew count
+    const drawn = game.view ? game.view.draws : frame + 1;
+    if (drawn === lastDrawn) return;
+    lastDrawn = drawn;
     const dt = last ? now - last : 0;
     last = now;
     frame++;

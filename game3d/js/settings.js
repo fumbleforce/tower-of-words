@@ -37,6 +37,7 @@ export const DEFAULTS = {
   ambience: 0.8, // 0..1
   voiceOn: true,
   quality: 'auto', // 'auto' | 'low' | 'medium' | 'high' (post.js reads the tier; see qualityTier())
+  frameCap: 'auto', // 'auto' | '30' | '60' | 'off': the most frames a second (see frameCap(), perf/view.js)
   surfaces: true, // Surface detail: patterns in floors, walls, fabric and metal (look/procedural.js)
   chibi: false, // the Meshy chibis, from the next load (chibi.js; ?chibi=1 forces them). Off: Jørgen dropped the look, 2026-10-04
   reduceMotion: reduceDefault,
@@ -113,12 +114,23 @@ export function resetSettings() {
   for (const k of Object.keys(DEFAULTS)) setSetting(k, DEFAULTS[k]);
 }
 
-// The tier the renderer should use. 'auto' picks low for software GL, medium on phones, high otherwise.
+// The tier the renderer should use. 'auto' picks low for software GL, medium on phones and integrated GPUs (a laptop
+// without a graphics card ran hot at high, perf/gpu.js), high otherwise.
 export function qualityTier() {
   if (settings.quality !== 'auto') return settings.quality;
   const r = window.__game && window.__game.renderer;
   if (r && r.userData && r.userData.software) return 'low';
-  return isPhone() ? 'medium' : 'high';
+  return isPhone() || r?.userData?.integrated ? 'medium' : 'high';
+}
+// The most frames a second the game draws. 'auto': 30 at low quality, 60 otherwise; a 120 or 144 Hz screen at its
+// full rate made the GPU draw two or more times the frames for no visible gain. ?fps=N overrides (0: no cap).
+export function frameCap() {
+  const q = new URLSearchParams(location.search);
+  if (q.has('fps')) return +q.get('fps') || 0;
+  const s = settings.frameCap;
+  if (s === 'off') return 0;
+  if (s !== 'auto') return +s || 60;
+  return qualityTier() === 'low' ? 30 : 60;
 }
 // the phone layout (body.phone) or a phone-sized screen: the tier above and the lighter phone places (perf/phone.js)
 export const isPhone = () => document.body.classList.contains('phone') || Math.min(innerWidth, innerHeight) < 600;

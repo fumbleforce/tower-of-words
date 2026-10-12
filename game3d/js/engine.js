@@ -10,6 +10,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { gpuClass } from './perf/gpu.js';
 
 export const Q = new URLSearchParams(location.search);
 
@@ -29,7 +30,7 @@ export function createRenderer(canvas) {
   const gl = renderer.getContext();
   const dbg = gl.getExtension('WEBGL_debug_renderer_info');
   const gpu = dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : 'unknown';
-  renderer.userData = { gpu, software: /swiftshader|llvmpipe|software/i.test(gpu) };
+  renderer.userData = { gpu, ...gpuClass(gpu) }; // software, integrated (perf/gpu.js)
   return renderer;
 }
 

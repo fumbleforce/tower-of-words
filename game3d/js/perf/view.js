@@ -3,6 +3,7 @@
 //   const view = createView(game, renderer, canvas, save); view.setComposer(place); view.render(); view.outline
 import * as THREE from 'three';
 import { Q } from '../engine.js';
+import { frameCap } from '../settings.js';
 import { makePost, GRADE } from '../post.js';
 import { styleGrade, currentStyle } from '../style/index.js';
 import { liftPeople } from '../look/char-lift.js';
@@ -13,6 +14,7 @@ import { installGlGuard, lighterAfterLoss, onResizeFrame, validSize, disposePost
 // quality tier 0 low, 1 medium, 2 high (post.js). ?q= forces it; otherwise Settings > Graphics (window.__qualityTier),
 // a tier lighter for each time this tab already lost its 3D view
 const TIER = { low: 0, medium: 1, high: 2 };
+const CAP_MODE = Q.has('cap'); // stills and frame sequences step time exactly: every frame is drawn
 
 export function createView(game, renderer, canvas, save) {
   const tierNow = () =>
@@ -21,7 +23,8 @@ export function createView(game, renderer, canvas, save) {
       : lighterAfterLoss(
           window.__qualityTier ? (TIER[window.__qualityTier()] ?? 1) : renderer.userData.software ? 0 : 2,
         );
-  const view = { quality: tierNow(), composer: null, post: null, outline: null, place: null };
+  const view = { quality: tierNow(), composer: null, post: null, outline: null, place: null, draws: 0 };
+  game.view = view; // its draws count is what the metrics overlay times (perf/metrics.js)
   const size = () => [+(Q.get('w') || window.innerWidth), +(Q.get('h') || window.innerHeight)];
   function setComposer(place) {
     disposePost(view.composer, [view.place?.beforeAO]); // the last place's chain; its own pass stays with it
@@ -80,18 +83,30 @@ export function createView(game, renderer, canvas, save) {
   }
   onResizeFrame(resize);
   const guard = installGlGuard({ canvas, renderer, save, resize: () => resize() });
-  // The title's shot moves only by a slow sway, so it draws at most 30 frames a second: at the screen's full rate it
-  // kept the GPU busy for nothing (Jørgen, 2026-10-05: an RTX 3080 at about 80 % load with only the title open).
-  const TITLE_GAP = 1000 / 30 - 3; // ms; the slack lets a 60 Hz screen draw every other frame
-  let lastDraw = 0;
+  // Frame pacing: due(now) says whether this display frame should be drawn (and the world stepped). The cap
+  // (settings.js frameCap: 60, or 30 at low) keeps a 120 or 144 Hz screen from drawing every refresh. The title's
+  // shot moves only by a slow sway, so it draws at most 30 a second (Jørgen, 2026-10-05: an RTX 3080 at about 80 %
+  // load with only the title open), and a paused world, which doesn't move, at most 20. A frame counts as due a few
+  // ms early so a 60 Hz screen under a 30 cap draws every other refresh rather than drifting.
+  const SLACK = 3; // ms
+  let cap = frameCap(),
+    lastDue = 0;
+  function due(now) {
+    if (CAP_MODE) return true;
+    const paused = game.paused && !game.mapOpen;
+    let fps = cap;
+    if (document.body.classList.contains('at-title')) fps = fps ? Math.min(fps, 30) : 30;
+    if (paused) fps = fps ? Math.min(fps, 20) : 20;
+    if (fps && now - lastDue < 1000 / fps - SLACK) return false;
+    lastDue = now;
+    return true;
+  }
   function render() {
     if (!view.composer || !game.place) return;
-    const now = performance.now();
-    if (now - lastDraw < TITLE_GAP && document.body.classList.contains('at-title')) return;
-    lastDraw = now;
     game.place.beforeRender?.();
     renderer.shadowMap.needsUpdate = true;
     view.post.render();
+    view.draws++;
     guard.afterRender();
   }
   game.setQuality = (q) => {
@@ -103,6 +118,7 @@ export function createView(game, renderer, canvas, save) {
       view.quality = tierNow();
       applyQuality();
     }
+    if (e.detail && (e.detail.key === 'quality' || e.detail.key === 'frameCap')) cap = frameCap();
   });
   // a change of period while in a place (kit/light/ lightPlace): its new grade and the people's lift, live
   game.regrade = () => {
@@ -110,5 +126,5 @@ export function createView(game, renderer, canvas, save) {
     view.post.setGrade(styleGrade({ ...GRADE, ...(view.place.grade || {}) }, currentStyle()));
     liftPeople(game, view.place);
   };
-  return Object.assign(view, { setComposer, applyQuality, resize, size, render });
+  return Object.assign(view, { setComposer, applyQuality, resize, size, render, due });
 }
