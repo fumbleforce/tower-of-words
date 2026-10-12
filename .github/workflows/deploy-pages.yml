@@ -1,0 +1,76 @@
+name: Deploy Pages
+
+# Publishes the game to GitHub Pages the same way `sh game3d/tools/deploy-pages.sh --push` does on a dev machine: the
+# committed tree plus the locked binaries, which this job first pulls from Cloudflare R2, built into one orphan commit
+# force-pushed to gh-pages. Pages must serve the gh-pages branch (Settings > Pages > Deploy from a branch).
+#
+# Repository secrets (Settings > Secrets and variables > Actions), read-only access to the bucket is enough:
+#   R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET
+#
+# Runs on a push to main that changes the game or the asset lock file, and by hand (Actions > Deploy Pages > Run
+# workflow, on any branch: it deploys the branch you pick).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'game3d/**'
+      - 'tools/assets/assets.lock.json'
+      - 'tools/bible/**'
+      - 'tools/creator/**'
+      - 'reviews/**'
+      - 'showcase/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      R2_BUCKET: ${{ secrets.R2_BUCKET }}
+    steps:
+      - name: Check the R2 secrets are set
+        run: |
+          for v in R2_ACCOUNT_ID R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_BUCKET; do
+            [ -n "${!v}" ] || { echo "::error::repository secret $v is not set"; exit 1; }
+          done
+
+      # the assets are about 8 GB and the site is built next to them: free the runner's preinstalled toolchains first
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h /
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python packages
+        run: pip install pillow pyyaml
+
+      - name: Pull the locked assets from R2
+        run: python3 tools/assets/sync.py pull
+
+      - name: Build and push gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          sh game3d/tools/deploy-pages.sh --push
