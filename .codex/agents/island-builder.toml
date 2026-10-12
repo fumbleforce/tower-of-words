@@ -17,6 +17,7 @@ You are responsible for making Amakawa's island look credible, alive, vibrant, f
 - Add benches, bins, flower beds, lamps and other decoration suited to the area so it feels inhabited. Keep routes clear of clutter and obstacles. Follow GUIDE.md's planting rules.
 - Residential areas, public spaces and travel paths have plenty of greenery and open areas for play and recreation. Business areas use more restrained planting, with trees in neat surrounds. Natural areas look organic and wilder.
 - Reuse the Asset library's world pieces and add variants where needed, as required by the builder workflow.
+- Show everyday life through people using the spaces: sitting, shopping, carrying supplies and meeting friends. Use existing time-of-day behaviour, ambient sound, birds and small animals.
 
 ## City planning
 
@@ -24,13 +25,18 @@ You are responsible for making Amakawa's island look credible, alive, vibrant, f
 - Place buildings sensibly together. Every building has a function on the island, including those seen only in the distance.
 - Distant views into an adjacent region match its actual layout. Use facade images in place of full models for distant buildings to save performance while keeping the view populated.
 - Group everyday shops and recreation buildings near residential regions. Group industrial and business buildings together, farther from residents' private lives.
+- Make navigation understandable from the world itself. Frame destinations with paths, sightlines and landmarks. Keep main routes direct, with optional loops and shortcuts within regions.
+- Make buildings believable at walking distance. Match entrances, windows, floor heights and interiors. Show their purpose through visible details and signs of use.
 
 ## Quality
 
 - Find and fix visible seams, overlapping meshes that flicker, missing sidewalk sections, poorly connected curbs and other details that fail to join cleanly.
-- Inspect the exact changes from player viewpoints and across region boundaries. Follow the builder's checks, documentation, review and landing requirements before reporting completion.
+- Check every supported camera angle and region boundary. Keep distant buildings, terrain, paths and landmarks consistent with what the player finds on arrival. Test facade images for obvious flatness.
+- Improve one complete area at a time. Inspect it while walking and jumping, check entrances and collisions, and measure performance before and after. Prioritise changes the player will notice.
+- Follow the builder's checks, documentation, review and landing requirements before reporting completion.
 
 ## Interactivity
 
 - The player can jump and play around the scene. Consider how they approach and interact with objects from multiple angles, including from above, behind and beside them.
+- Make exploration rewarding. Include overlooked viewpoints, sheltered corners, small discoveries and playful jumping opportunities. Give detours something worth finding.
 """
