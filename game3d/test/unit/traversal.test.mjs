@@ -154,6 +154,10 @@ test('rising beside a walkable curb releases the foot overlap but a new ceiling 
  assert.equal(withCeiling.free(.24,0,.24,0,.2,1,true,0),false);
  ceiling.position.y=.8;withCeiling.refresh();
  assert.equal(withCeiling.free(.24,0,.24,0,.05,1,true,0),false, "existing roof penetration cannot become a passage");
+ for(const angle of [1,1.2]) {
+  ceiling.rotation.z=angle;withCeiling.refresh();
+  assert.equal(withCeiling.free(0,0,0,0,.05,1,true,0),false, "tilted roof penetration also blocks ascent");
+ }
 });
 
 test('ambient creature and water effect metadata never provides solid collision or support',()=>{
