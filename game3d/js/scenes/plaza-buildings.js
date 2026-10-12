@@ -15,7 +15,7 @@ import { shopWindow, shopShell } from './shotengai/facades.js';
 import { rearFacade } from './shotengai/rear-facades.js';
 import { FRONT_IDS, displayCenters } from './shotengai/shopfront-plan.js';
 import { recessedShopWall, shopfront } from './shotengai/shopfronts.js';
-import { MARKET_ROUTE as M, splitMarketSpan } from './market-route.js';
+import { MARKET_ROUTE as M, splitMarketBays } from './market-route.js';
 
 // parts merged into one mesh of one material (the parts are disposed)
 export function merged(parts, material, { cast = true } = {}) {
@@ -195,7 +195,8 @@ export function* shopStreetSteps(
   const AWN = ['#6e7f8c', '#7d7a8c', '#6f8474'];
   const bayW = bays.w,
     uOf = (i) => bays.u0 + bayW * i;
-  const split = (u0, u1) => splitMarketSpan(a[0] + u0, a[0] + u1).map(([x0, x1]) => [x0 - a[0], x1 - a[0]]); // a bay's west side
+  const islandX = (u) => bays.x0 + u - bays.u0;
+  const split = (u0, u1) => splitMarketBays(bays, u0, u1);
   const rows = {
     north: { v0: 0, front: depth, back: 0, dirF: 1 }, // its front (+z) faces the arcade
     south: { v0: depth * 2, front: depth * 2, back: depth * 3, dirF: -1 }, // its front (-z) faces the arcade
@@ -282,8 +283,8 @@ export function* shopStreetSteps(
         }
         // the rows' end walls, seen from the walks past them: a window either side on every floor
         for (const [end, ue] of [
-          [i0 === 0 || Math.abs(a[0] + ua - M.x1) < 0.01, ua - 0.03],
-          [i1 === bays.n - 1 || Math.abs(a[0] + ub - M.x0) < 0.01, ub + 0.03],
+          [i0 === 0 || Math.abs(islandX(ua) - M.x1) < 0.01, ua - 0.03],
+          [i1 === bays.n - 1 || Math.abs(islandX(ub) - M.x0) < 0.01, ub + 0.03],
         ])
           for (let s = 0; end && s < storeys; s++)
             for (const o of [-1.1, 1.1]) {
@@ -301,7 +302,7 @@ export function* shopStreetSteps(
   yield;
   const posts = [];
   for (let u = uMin + 1; u < uMax; u += bayW)
-    if (a[0] + u < M.x0 - 0.15 || a[0] + u > M.x1 + 0.15)
+    if (islandX(u) < M.x0 - 0.15 || islandX(u) > M.x1 + 0.15)
       for (const v of [depth + 0.35, depth * 2 - 0.35]) posts.push(box(0.1, H + 0.1, 0.1, u, 0, v));
   walls.forEach((parts, k) => {
     if (!parts.length) return;

@@ -23,6 +23,7 @@ import { shopStreetSteps } from './plaza-buildings.js';
 import { frontsSteps } from './plaza/east-fronts.js';
 import { BLOCKS as EAST_BLOCKS } from './plaza/east-plan.js';
 import { seafrontSteps } from './outdoor/seafront.js';
+import { coastalSea } from './outdoor/sea.js';
 import { placeIn } from './dorm-court/cluster.js';
 import { coastLand } from './island-west.js';
 import { signSet } from './shop-signs.js';
@@ -58,7 +59,7 @@ export function* shotengaiSteps() {
   // furniture or what stands in front of the shops
   const [wx0, wx1, wz0, wz1] = LAYOUT.CHUNKS[CHUNK].walk;
   const nav = new Nav(
-    Math.min(wx0, GARDEN_BOUNDS[0], rect(P.BEACH_WALK)[0] - 0.3),
+    Math.min(wx0, GARDEN_BOUNDS[0], rect(P.BEACH_ACCESS)[0] - 0.3),
     Math.max(wx1, GARDEN_BOUNDS[1]),
     Math.min(wz0, GARDEN_BOUNDS[2]),
     wz1 + 2.1,
@@ -124,6 +125,7 @@ export function* shotengaiSteps() {
   const eastLit = eastLights.build(pf, { poolY: 0.03 });
   yield;
   const front = yield* seafrontSteps(isl, { at: (x, z) => [x, z] });
+  const sea = coastalSea(root, sun.position.clone().normalize());
   p.build(isl);
   const lit = lights.build(isl, { poolY: 0.03 });
   const doorCards = cards.build(isl);
@@ -157,7 +159,10 @@ export function* shotengaiSteps() {
   const edgeZ = local(P.EDGE)[1];
   const alleys = P.ALLEYS.map(rect);
   return {
-    update: plazaContext.update,
+    update: (t) => {
+      plazaContext.update(t);
+      sea.update(t);
+    },
     garden,
     nooks: nooks.spots,
     root,

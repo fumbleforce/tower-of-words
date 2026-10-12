@@ -58,14 +58,8 @@ export function mapOnly(object, layer, tag) {
 
 // what stands on the beach (island data in scenes/island-south.js): trodden sand from each flight's foot to the
 // water, outcrops at the wall's foot midway between flights, the lifeguard's chair, the beach huts
-function* beachThings(p, at) {
-  const shoreZ = (x) => {
-    const s = S.SHORELINE;
-    for (let i = 0; i + 1 < s.length; i++)
-      if (x >= s[i][0] && x <= s[i + 1][0])
-        return s[i][1] + ((x - s[i][0]) / (s[i + 1][0] - s[i][0])) * (s[i + 1][1] - s[i][1]);
-    return WALL_Z + 4;
-  };
+function* beachThings(p, at, clear) {
+  const shoreZ = S.beachShoreZ;
   // the wall's shadow on the sand (the map draws no sun shadow this far out)
   const [sx0, sz] = at(-13.6, WALL_Z + 0.3),
     sx1 = at(BEACH_E, 0)[0];
@@ -76,11 +70,12 @@ function* beachThings(p, at) {
     for (let j = 0; j < 5; j++) {
       const a = j * 1.3 + hash2(x, j, 97),
         [rx, rz] = at(x + Math.cos(a) * 0.5 * Math.sqrt(j), z + Math.sin(a) * 0.45 * Math.sqrt(j));
-      boulder(p, rx, rz, (j ? 0.3 : 0.55) * (0.8 + hash2(rx, j, 101) * 0.5), -0.16);
+      const r = (j ? 0.3 : 0.55) * (0.8 + hash2(rx, j, 101) * 0.5);
+      if (!clear(rx, rz, r + 0.2)) boulder(p, rx, rz, r, -0.16);
     }
     for (let j = 0; j < 6; j++) {
       const [gx, gz] = at(x - 1.6 + hash2(j, x, 105) * 3.2, z - 1.2 + hash2(x, j, 107) * 2.4);
-      grass(p, gx, gz, { h: 0.35, color: DUNE, seed: j + Math.round(x) });
+      if (!clear(gx, gz, 0.5)) grass(p, gx, gz, { h: 0.35, color: DUNE, seed: j + Math.round(x) });
     }
     yield;
   }
@@ -285,10 +280,11 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
   // line on the water's edge and patches of foam beyond it; boulders in groups, most at the water's edge and in the
   // shallows (each with a ring of foam), a few up the sand; trodden sand from each flight of stairs to the water;
   // outcrops at the wall's foot between the flights; a lifeguard's chair and three beach huts
-  yield* beachThings(p, at);
+  const clearRects = [S.BEACH_MAT, S.BEACH_ACCESS].map(R);
+  const clear = (x, z, radius) =>
+    clearRects.some(([a, b, c, d]) => x + radius > a && x - radius < b && z + radius > c && z - radius < d);
+  yield* beachThings(p, at, clear);
   const shore = S.SHORELINE.map(([x, z]) => at(x, z));
-  const [routeX, routeStart] = at((entry[0] + entry[2]) / 2, entry[1]),
-    routeEnd = at(0, matEnd + 0.5)[1];
   for (let i = 0; i + 1 < shore.length; i++) {
     const a = shore[i],
       b = shore[i + 1],
@@ -315,7 +311,7 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
         const a = (j / k) * 6.3 + hash2(j, u, 79),
           [rx, rz] = Q(u + Math.cos(a) * 0.4 * Math.sqrt(j), off + Math.sin(a) * 0.35 * Math.sqrt(j));
         const r = (j ? 0.32 : 0.6) * (0.7 + hash2(rx, rz, 81) * 0.6);
-        if (Math.abs(rx - routeX) < matWidth / 2 + r + 0.3 && rz > routeStart && rz < routeEnd) continue;
+        if (clear(rx, rz, r + 0.3)) continue;
         boulder(p, rx, rz, r, -0.2);
         if (off > 0)
           p.geo(SURF, new THREE.CylinderGeometry(r * 1.35, r * 1.35, 0.02, 9).translate(rx, -0.18, rz), FOAM);

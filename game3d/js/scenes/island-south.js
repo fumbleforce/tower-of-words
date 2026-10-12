@@ -119,6 +119,17 @@ export const SHORE = [
   ]),
 ];
 export const SHORELINE = SHORE.slice(0, 8); // round the beach only
+export function beachShoreZ(x) {
+  for (let i = 0; i + 1 < SHORELINE.length; i++) {
+    const [a, za] = SHORELINE[i],
+      [b, zb] = SHORELINE[i + 1];
+    if (x >= a && x <= b) return za + ((x - a) / (b - a)) * (zb - za);
+  }
+  return WALL_Z + 4;
+}
+export const BEACH_MAT = [M.x - 1.35, BEACH_ENTRY[3], M.x + 1.35, 42.2];
+// Dry sand remains safely inland of the wet shore over the whole accessible width.
+export const BEACH_ACCESS = [M.x - 5, 38, M.x + 5, Math.min(beachShoreZ(M.x - 5), beachShoreZ(M.x + 5)) - 1.4];
 export const SOUTH_SAND = [
   {
     id: 'beach',

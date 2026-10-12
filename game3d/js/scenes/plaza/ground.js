@@ -18,7 +18,7 @@ const ORIGIN = [F[0], LZ - HALF];
 function lanes(pv) {
   laneField(pv, LANE.w, { origin: ORIGIN });
   eastLaneField(pv);
-  laneField(pv, P.MARKET, { along: 'z', origin: [P.MARKET[0], P.MARKET[2]] });
+  laneField(pv, P.MARKET_VIEW, { along: 'z', origin: [P.MARKET[0], P.MARKET[2]] });
   laneField(pv, LINK, { along: 'z', origin: ORIGIN });
 }
 // the lane out east to the jog, which the east lane's chunk (scenes/east-lane.js) lays too

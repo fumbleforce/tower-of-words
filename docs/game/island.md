@@ -89,7 +89,7 @@ The shop rows keep their fifteen-bay grid, numbered 0 to 14 from the west (islan
 | `izakaya` | Izakaya (居酒屋) | `izakaya` | Three storeys at the shop street's east end, a red lantern by the door; front built, the door shut. Where people drink after work. | Door on the walk out of the arcade's east mouth | Enter | The menu on the wall and ordering: すみません, とりあえずビール, 乾杯. |
 | `ramen` | Ramen shop (ラーメン屋) | `ramen` | Across the dorm street from the izakaya: eight stools at a counter. | Door on the dorm street | Enter | The ticket machine, then how firm: かため, ふつう, やわらかめ. |
 | `promenade` | Seafront promenade (海辺の遊歩道) | `promenade` | Built in `shotengai`: walked from the alleys and the mouths' walks. Benches and lamps, people walking in the evening. | The station walk at the west end, the arcade walk at the east end, the three alleys | Outside | A fingerpost with places and minutes: 駅, 浜辺, 5分. |
-| `beach` | Beach (浜辺) | `beach` | Built in `shotengai` with three beach huts. The central stairs and a timber access mat toward the water are walkable; lower sand also follows physical traversal, while the three older stairs remain chained. | Direct central path from the fountain through the market and promenade | Outside | The beach rules board: 遊泳, 禁止, the hours. |
+| `beach` | Beach (浜辺) | `beach` | Built in `shotengai` with three beach huts. The central stairs, a timber access mat and the dry sand around its foot are walkable with a safe margin before the wet shore; lower sand also follows physical traversal, while the three older stairs remain chained. | Direct central path from the fountain through the market and promenade | Outside | The beach rules board: 遊泳, 禁止, the hours. |
 
 ### East lane
 

@@ -7,11 +7,15 @@ import { circleSteps } from '../plaza/ground.js';
 import { ringSteps } from '../plaza/green.js';
 import { buildBenches, buildNoticeBoard, buildLamps } from '../plaza/furniture.js';
 import { fountain } from '../plaza/fountain.js';
-import { F, BASIN, MARKET } from '../plaza/plan.js';
+import { F, BASIN, MARKET, local } from '../plaza/plan.js';
+import { MARKET_ROUTE as M } from '../market-route.js';
 
 export function* plazaContextSteps(root) {
   const paving = paver();
-  laneField(paving, MARKET, { along: 'z', origin: [MARKET[0], MARKET[2]] });
+  laneField(paving, [...MARKET.slice(0, 3), local([M.x, M.seamZ - 1.6])[1]], {
+    along: 'z',
+    origin: [MARKET[0], MARKET[2]],
+  });
   paving.build(root);
   yield* circleSteps(root);
   const parts = new Parts(),

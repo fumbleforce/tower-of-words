@@ -67,7 +67,8 @@ export const DORM_IN = [SHOP_WALK[2] - 3.2, WALK_Z];
 export const EDGE = [M.x, M.seamZ];
 export const IN = [M.x, M.seamZ + 2];
 export const MARKET_WALK = [M.x0, M.seamZ - 1.6, M.x1, WALL_Z];
-export const BEACH_WALK = [M.x0 + 0.9, S.BEACH_ENTRY[1], M.x1 - 0.9, 42.2];
+export const BEACH_WALK = [S.BEACH_MAT[0], S.BEACH_ENTRY[1], S.BEACH_MAT[2], S.BEACH_MAT[3]];
+export const BEACH_ACCESS = S.BEACH_ACCESS;
 export const EXIT_X = SHOP_WALK[2] - 0.6; // island x past which he is leaving
 
 // the chained heads of the beach stairs: [x0, x1] each, on the wall's line
@@ -115,12 +116,13 @@ export const NOOKS = [
   },
 ];
 export const WALKS = [
-  ...[ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PROM, MARKET_WALK, BEACH_WALK].map(rect),
+  ...[ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PROM, MARKET_WALK, BEACH_WALK, BEACH_ACCESS].map(rect),
   ...nookWalks(NOOKS),
   ...WALKS_LOCAL,
 ];
 export const STREET_END = rect([SHOP_WALK[2] - 0.1, SHOP_WALK[1], DORM_STREET[2], SHOP_WALK[3]]); // out onto the street
 export const FURNITURE = [
+  ...S.UMBRELLAS.map(([x, z]) => [x - 0.2, z - 0.2, x + 0.2, z + 0.2]),
   ...[S.BEACH_ENTRY[0] + 0.1, S.BEACH_ENTRY[2] - 0.1].map((x) => [
     x - 0.11,
     S.BEACH_ENTRY[1],

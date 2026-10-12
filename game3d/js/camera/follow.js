@@ -19,7 +19,8 @@ export function followCamera(game, place) {
     pivot = new THREE.Vector3();
   const target = new THREE.Vector3(),
     desired = new THREE.Vector3(),
-    local = new THREE.Vector3();
+    local = new THREE.Vector3(),
+    lifted = new THREE.Vector3();
   const rotation = new THREE.Quaternion();
   const actors = new Set([
     player,
@@ -125,7 +126,15 @@ export function followCamera(game, place) {
       desired.copy(local);
       place.space.localToWorld(desired);
       const collisionStart = performance.now();
+      lifted.copy(desired);
       api.blocked = obstruct(pivot, desired);
+      // A narrow outdoor passage can still fit the third-person lens above its
+      // compressed arm. Opted-in districts try that clearance before fading Eric.
+      if (api.blocked && place.followCameraLift && desired.distanceTo(pivot) < 2.1 * (place.charScale || 1)) {
+        lifted.y += place.followCameraLift;
+        obstruct(pivot, lifted);
+        if (lifted.distanceToSquared(pivot) > desired.distanceToSquared(pivot)) desired.copy(lifted);
+      }
       api.collisionMs = performance.now() - collisionStart;
       api.distance = desired.distanceTo(pivot);
       camera.position.copy(desired);

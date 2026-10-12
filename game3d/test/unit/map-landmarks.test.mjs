@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { BUILDINGS, footprint } from '../../js/scenes/island-layout.js';
-import { ALLEYS, BAYS, ROWS_Z } from '../../js/scenes/island-south.js';
-import { MARKET_ROUTE, marketFootprints } from '../../js/scenes/market-route.js';
+import { ALLEYS, BAYS, ROWS_Z, BEACH_ACCESS, beachShoreZ } from '../../js/scenes/island-south.js';
+import { MARKET_ROUTE, marketFootprints, splitMarketBays } from '../../js/scenes/market-route.js';
 import { mapFootprints } from '../../js/ui/map/landmarks.js';
 
 const mapped = mapFootprints(BUILDINGS, footprint);
@@ -36,4 +36,19 @@ test('the fountain to shore route stays open in all market footprints', () => {
     for (const b of [...proxies, ...mapped.filter((b) => b.id.startsWith(id))])
       assert.ok(b.rect[2] <= MARKET_ROUTE.x0 || b.rect[0] >= MARKET_ROUTE.x1, `${id} bridges the route`);
   }
+});
+
+test('market builder cuts use canonical bay coordinates in every caller frame', () => {
+  const bays = { ...BAYS, u0: 1 };
+  assert.deepEqual(splitMarketBays(bays, 1, 68.5), [
+    [1, MARKET_ROUTE.x0 + 4],
+    [MARKET_ROUTE.x1 + 4, 68.5],
+  ]);
+});
+
+test('the dry sand access stops before the wet shore at both edges', () => {
+  const [x0, z0, x1, z1] = BEACH_ACCESS;
+  assert.equal(x1 - x0, 10);
+  assert.equal(z0, 38);
+  for (const x of [x0, (x0 + x1) / 2, x1]) assert.ok(beachShoreZ(x) - z1 >= 1.399);
 });

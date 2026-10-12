@@ -70,6 +70,7 @@ export const TERRACE_S = TERRACE[3];
 // the link from the terrace to the circle, on the door's axis
 export const LINK = [DOOR_X - HALF, DOOR_X + HALF, TERRACE_S, F[1] - Math.sqrt(R * R - HALF * HALF) + 1.0];
 export const MARKET = [F[0] - M.w / 2, F[0] + M.w / 2, F[1] + R - 1, local([M.x, M.seamZ + 1.6])[1]];
+export const MARKET_VIEW = [...MARKET.slice(0, 3), local([M.x, M.shoreZ])[1]];
 export const LANE_RECTS = [LANE.w, LANE.e, LINK, MARKET];
 
 // the ring bed round the circle, outside its border: its width, and the arcs it runs over (radians from east

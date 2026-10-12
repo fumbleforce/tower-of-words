@@ -112,6 +112,30 @@ await withBrowserJob(
         timeout: 60000,
       });
       await shot('market-entry');
+      if (width > 700) {
+        for (const [name, yaw] of [
+          ['east', 0],
+          ['west', Math.PI],
+          ['shore', -Math.PI / 2],
+          ['fountain', Math.PI / 2],
+        ]) {
+          await page.evaluate((yaw) => globalThis.__game.followCamera.aim(yaw, -0.12), yaw);
+          await page.waitForTimeout(700);
+          const framing = await page.evaluate(() => ({
+            distance: globalThis.__game.followCamera.distance,
+            scale: globalThis.__game.place.charScale,
+            visible: globalThis.__game.player.root.visible,
+            blocked: globalThis.__game.followCamera.blocked,
+          }));
+          assert.ok(
+            framing.distance / framing.scale > 2.1,
+            `third person clearance ${name}: ${JSON.stringify(framing)}`,
+          );
+          assert.equal(framing.visible, true, `player visible looking ${name}`);
+          data['view-' + name] = framing;
+          await page.screenshot({ path: `${out}/${width}-entry-look-${name}.png` });
+        }
+      }
       for (const [name, z] of [
         ['crossing', 20.15],
         ['promenade', 30],

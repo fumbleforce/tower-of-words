@@ -22,3 +22,9 @@ export function marketFootprints(building) {
   const [x0, z0, x1, z1] = building.rect;
   return splitMarketSpan(x0, x1).map(([a, b]) => ({ ...building, rect: [a, z0, b, z1] }));
 }
+
+// Builder callers may use island or plaza-local origins; the bay grid stays canonical.
+export function splitMarketBays(bays, u0, u1) {
+  const shift = bays.x0 - bays.u0;
+  return splitMarketSpan(u0 + shift, u1 + shift).map(([a, b]) => [a - shift, b - shift]);
+}

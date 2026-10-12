@@ -28,11 +28,18 @@ export async function shotengaiPlace(game) {
   const flat = cam.elev;
   const routeZ = shopLocal([MARKET_ROUTE.x, 20.15])[1];
   const turn = turningCam(cam, (x, z) => {
-    const t = THREE.MathUtils.clamp((5 - Math.abs(z - routeZ)) / 3.2, 0, 1);
+    const t = THREE.MathUtils.clamp((8 - Math.abs(z - routeZ)) / 4, 0, 1);
     const blend = t * t * (3 - 2 * t);
+    // Keep island south toward screen bottom, as in the plaza. Centre the crossing
+    // rather than leading toward the fountain, so onward floor remains visible.
+    cam.lead = (cam.camera.aspect >= 1 ? -1.4 : -3.4) * (1 - blend);
+    cam.goalLean.x *= 1 - blend;
+    cam.goalLean.z *= 1 - blend;
     return {
-      yaw: (Math.PI / 2) * blend,
-      elev: (w.steep(x, z) ? STEEP : flat) * (1 - blend) + THREE.MathUtils.degToRad(68) * blend,
+      yaw: (-Math.PI / 2) * blend,
+      elev:
+        (w.steep(x, z) ? STEEP : flat) * (1 - blend) +
+        (Math.abs(z - routeZ) > MARKET_ROUTE.w / 2 - 0.3 ? STEEP : THREE.MathUtils.degToRad(68)) * blend,
     };
   });
   const snap = cam.snap.bind(cam);
@@ -160,6 +167,7 @@ export async function shotengaiPlace(game) {
     sun: w.sun,
     light: w.light, // the light for every period (scenes/shotengai.js, kit/light/)
     charScale: K,
+    followCameraLift: 2.0, // retain a third-person view beside the crossing’s shop walls
     start: w.in,
     startFacing: w.face,
     music: 'calm',
