@@ -2,13 +2,18 @@ import * as THREE from 'three';
 import { wall, door } from '../../props.js';
 import { patchMaterial, setSurface } from '../../look/procedural.js';
 
+// A neutral follow lens sits at 2.8. Leave room above it without stretching the overview cutaway.
+export const INTERIOR_CEILING = 3.3;
+export const ceilingHeight = (room) => Math.max(room.ceilingHeight ?? room.h, INTERIOR_CEILING);
+
 // The overview keeps its authored cutaway. Free interior cameras get the missing physical wall
 // above that cut and a ceiling at the room's real height. Navigation and apertures are unchanged.
 export function roomEnclosure(root, R, { color = '#ddd9d0', ceiling = '#d4d5d2' } = {}) {
+  const height = ceilingHeight(R);
   const full = new THREE.Group();
   full.name = 'follow-interior';
   full.visible = false;
-  full.userData.followEnclosure = { height: R.h };
+  full.userData.followEnclosure = { height };
   full.userData.noLook = true; // Hidden walls must not change the overview's baked occlusion.
   full.userData.perfAnchor = true; // merged under this group by the draw-call pass, so they show and hide with it
   const materials = new Map();
@@ -36,13 +41,13 @@ export function roomEnclosure(root, R, { color = '#ddd9d0', ceiling = '#d4d5d2' 
     new THREE.MeshStandardMaterial({ color: ceiling, roughness: 0.95, emissive: ceiling, emissiveIntensity: 0.08 }),
   );
   top.rotation.x = Math.PI / 2;
-  top.position.set((R.x0 + R.x1) / 2, R.h, (R.z0 + R.z1) / 2);
+  top.position.set((R.x0 + R.x1) / 2, height, (R.z0 + R.z1) / 2);
   put(top);
   return {
     group: full,
     add: put,
     wall(axis, a, b, c, cutHeight, t, { holes = [], top: trim } = {}, apertureHeight = 1.95) {
-      if (cutHeight >= R.h) return;
+      if (cutHeight >= height) return;
       const openings = holes
         .map(([lo, hi, bottom, height]) => [
           lo,
@@ -51,7 +56,7 @@ export function roomEnclosure(root, R, { color = '#ddd9d0', ceiling = '#d4d5d2' 
           Math.max(0, (height === cutHeight ? apertureHeight : height) - cutHeight),
         ])
         .filter((hole) => hole[3] > hole[2]);
-      const extension = wall(axis, a, b, c, R.h - cutHeight, t, { color, top: trim || color, holes: openings });
+      const extension = wall(axis, a, b, c, height - cutHeight, t, { color, top: trim || color, holes: openings });
       extension.position.y = cutHeight;
       put(extension);
     },

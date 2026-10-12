@@ -44,9 +44,10 @@ export function shopDetails(root, follow) {
   for (let i = 0; i < 18; i++) k.box('#617b88', 0.018, 0.2, 0.016, -0.94 + i * 0.05, 2.04, -4.3, { surf: 'metal' });
   k.flush(root);
   const lamps = new Kit();
+  const ceiling = follow.userData.followEnclosure.height;
   for (const z of [-1, -2.7]) {
-    lamps.box('#657c8d', 0.92, 0.045, 0.18, 0, 2.22, z, { surf: 'metal' });
-    lamps.box('#e6eee7', 0.82, 0.018, 0.14, 0, 2.205, z, { surf: 'glass', cast: false });
+    lamps.box('#657c8d', 0.92, 0.045, 0.18, 0, ceiling - 0.06, z, { surf: 'metal' });
+    lamps.box('#e6eee7', 0.82, 0.018, 0.14, 0, ceiling - 0.075, z, { surf: 'glass', cast: false });
   }
   const g = new THREE.Group();
   lamps.flush(g);

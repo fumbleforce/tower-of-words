@@ -13,6 +13,11 @@ export function dormEnclosures(root, front, levels) {
     const copy = source.clone(true);
     copy.visible = true;
     room.add(copy);
+    // The authored front keeps its doorway and glazing. Continue every perimeter wall above its cut.
+    room.wall('x', x0 - T, x1 + T, BACK - T / 2, H, T);
+    room.wall('x', x0 - T, x1 + T, NEAR + T / 2, H, T);
+    room.wall('z', BACK, NEAR, x0 - T / 2, H, T);
+    room.wall('z', BACK, NEAR, x1 + T / 2, H, T);
     return room;
   };
   const own = add(root, X0, X1, front);

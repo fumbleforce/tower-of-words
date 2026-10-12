@@ -3,6 +3,7 @@
 // examination bay, a hand-washing poster over the children's corner, a flu-jab poster and a mask notice over the
 // waiting bench, a clock, skirting, and the ceiling's light panels for the close follow view.
 import * as THREE from 'three';
+import { ceilingHeight } from '../rooms/enclosure.js';
 import { Kit } from '../dorms/kit.js';
 import { signBoard } from '../plaza-buildings.js';
 import { textTexture, plane, clock, JP_FONT } from '../../props.js';
@@ -181,8 +182,8 @@ export function clinicDetails(root, k, R) {
     [2.6, -4.7],
     [2.6, -1.9],
   ]) {
-    lamps.box('#8fa0a3', 1.0, 0.04, 0.42, x, R.h - 0.05, z, { surf: 'metal' });
-    lamps.box('#f2f5ee', 0.92, 0.012, 0.34, x, R.h - 0.062, z, { surf: 'glass', cast: false });
+    lamps.box('#8fa0a3', 1.0, 0.04, 0.42, x, ceilingHeight(R) - 0.05, z, { surf: 'metal' });
+    lamps.box('#f2f5ee', 0.92, 0.012, 0.34, x, ceilingHeight(R) - 0.062, z, { surf: 'glass', cast: false });
   }
   const g = new THREE.Group();
   lamps.flush(g);

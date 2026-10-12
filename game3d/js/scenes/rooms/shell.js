@@ -27,6 +27,9 @@ export function shell(root, R, { holes = {}, color, top, entryDoor = false } = {
   root.add(wall('z', z0, z1, x1 + t / 2, h, t, o('e')));
   root.add(wall('x', x0 - t, x1 + t, z1 + t / 2, near, t, o('s')));
   const enclosure = roomEnclosure(root, R, { color });
+  enclosure.wall('x', x0 - t, x1 + t, z0 - t / 2, h, t, o('n'));
+  enclosure.wall('z', z0, z1, x0 - t / 2, h, t, o('w'));
+  enclosure.wall('z', z0, z1, x1 + t / 2, h, t, o('e'));
   const doorHeight = Math.min(1.95, h - 0.12);
   enclosure.wall('x', x0 - t, x1 + t, z1 + t / 2, near, t, o('s'), doorHeight);
   if (entryDoor)

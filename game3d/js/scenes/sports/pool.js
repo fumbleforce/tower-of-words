@@ -306,7 +306,7 @@ export function* poolSteps(root, p, q, pv, signs, lights, { interior = false } =
   yield;
   const glow = [];
   if (interior) {
-    buildChangingRoom(p, pv, signs, lights);
+    buildChangingRoom(p, pv, signs, lights, root);
     p.box(STEEL.mid, 0.07, D.CLOCK[1], 0.07, D.CLOCK[0], 0, D.CLOCK[2]); // clock support with pavilion front cut away
   } else pavilion(p, glow, signs, lights);
   const glass = new THREE.MeshStandardMaterial({

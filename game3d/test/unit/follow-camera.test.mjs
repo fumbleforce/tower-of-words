@@ -160,7 +160,7 @@ test('interior closure preserves doorway aperture and releases its ceiling for o
   assert.equal(ray.intersectObject(enclosure.group,true).length,0,'door aperture remains open');
   ray.ray.origin.x=1;assert.ok(ray.intersectObject(enclosure.group,true).length>0,'wall beside doorway is solid');
   ray.ray.origin.set(0,2.15,-1);assert.ok(ray.intersectObject(enclosure.group,true).length>0,'door header is solid');
-  follow.update();assert.ok(camera.position.y<=2.24+.001);follow.restore();follow.setActive(false);
+  follow.update();assert.ok(camera.position.y>=2.79 && camera.position.y<=3.14+.001);follow.restore();follow.setActive(false);
   assert.equal(enclosure.group.visible,false);assert.equal(camera.fov,22);
 });
 test('separate dorm room ceilings activate in their own translated frame only', async () => {
@@ -173,7 +173,7 @@ test('separate dorm room ceilings activate in their own translated frame only', 
   const follow=followCamera(game,place);scene.updateMatrixWorld(true);
   game.player.root.position.set(0,0,-1);follow.setActive(true);
   assert.equal(a.group.visible,true);assert.equal(b.group.visible,false);
-  follow.update();assert.ok(camera.position.y<=1.39+.001);follow.restore();
+  follow.update();assert.ok(camera.position.y>=2.79 && camera.position.y<=3.14+.001);follow.restore();
   game.player.root.position.set(20,0,-1);scene.updateMatrixWorld(true);follow.setActive(true);
   assert.equal(a.group.visible,false);assert.equal(b.group.visible,true);
   game.player.root.position.z=2;scene.updateMatrixWorld(true);follow.setActive(true);

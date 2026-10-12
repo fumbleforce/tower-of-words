@@ -1,6 +1,7 @@
 // The pavilion's actual rooms, in island coordinates. A common entrance/corridor reaches either changing room;
 // only the protagonist's own room is walkable. The roof/front wall are cut away in the pool place only.
 import * as THREE from 'three';
+import { roomEnclosure } from '../rooms/enclosure.js';
 import { PAVILION, PAV_DOOR_Z, pt, rect } from './plan.js';
 import { MEN_X, WOMEN_X, DOOR_Z } from './deck-plan.js';
 import { bench, STEEL } from '../outdoor/furniture.js';
@@ -45,7 +46,16 @@ function wall(p, a, b, h = 0.65) {
     surf: 'concrete',
   });
 }
-export function buildChangingRoom(p, pv, signs, lights) {
+export function buildChangingRoom(p, pv, signs, lights, root) {
+  const enclosure = roomEnclosure(root, { x0, x1, z0, z1, h: 2.7 }, { color: '#d9ddd8' });
+  enclosure.group.userData.followEnclosure.region = [x0, x1, z0, z1];
+  enclosure.wall('x', x0, x1, z0, 2.7, 0.14);
+  enclosure.wall('z', z0, z1, x1, 2.7, 0.14);
+  enclosure.wall('z', z0, z1, x0, 0.65, 0.14, { holes: [[PAV_DOOR_Z - 0.65, PAV_DOOR_Z + 0.65, 0, 2.1]] });
+  enclosure.wall('z', corridorZ, z1, lobbyX, 0.65, 0.14);
+  enclosure.wall('z', corridorZ, z1, split, 0.65, 0.14);
+  enclosure.wall('x', x0, x1, z1, 0.65, 0.14, { holes: [MEN_X, WOMEN_X].map((x) => [x - 0.6, x + 0.6, 0, 2.1]) });
+  wall(p, [x0, z1], [lobbyX, z1]);
   pv.field([x0, x1, z0, z1], {
     pattern: 'grid',
     module: [0.45, 0.45],
@@ -66,10 +76,15 @@ export function buildChangingRoom(p, pv, signs, lights) {
       right = woman ? x1 - 0.15 : split - 0.12,
       doorX = woman ? WOMEN_X : MEN_X,
       roomDoor = (left + right) / 2;
-    wall(p, [left, corridorZ], [roomDoor - 0.6, corridorZ]);
-    wall(p, [roomDoor + 0.6, corridorZ], [right, corridorZ]);
-    wall(p, [left, z1], [doorX - 0.6, z1]);
-    wall(p, [doorX + 0.6, z1], [right, z1]);
+    const wallLeft = woman ? split : lobbyX,
+      wallRight = woman ? x1 : split;
+    enclosure.wall('x', wallLeft, wallRight, corridorZ, 0.65, 0.14, {
+      holes: [[roomDoor - 0.6, roomDoor + 0.6, 0, 2.1]],
+    });
+    wall(p, [wallLeft, corridorZ], [roomDoor - 0.6, corridorZ]);
+    wall(p, [roomDoor + 0.6, corridorZ], [wallRight, corridorZ]);
+    wall(p, [wallLeft, z1], [doorX - 0.6, z1]);
+    wall(p, [doorX + 0.6, z1], [wallRight, z1]);
     // Numbered lockers, a slatted bench, and a tiled rinse area on the way to the deck.
     let n = 1;
     for (let x = left + 0.38; x < right - 0.3; x += 0.55) {

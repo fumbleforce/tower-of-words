@@ -1,3 +1,4 @@
+import { ceilingHeight } from '../rooms/enclosure.js';
 import { Kit } from '../dorms/kit.js';
 import { signBoard } from '../plaza-buildings.js';
 import { clock, rbox } from '../../props.js';
@@ -75,10 +76,10 @@ export function terminalDetails(root) {
   // Real ceiling fixtures stay with the enclosure; overview lights are represented by their soft floor pools.
   const full = root.getObjectByName('follow-interior');
   for (const x of [-4, 4]) {
-    const light = rbox(1.8, 0.055, 0.16, '#cedad8', { y: R.h - 0.035, x, z: -4 });
+    const light = rbox(1.8, 0.055, 0.16, '#cedad8', { y: ceilingHeight(R) - 0.035, x, z: -4 });
     light.userData.noBatch = true;
     full.add(light);
-    const diffuser = rbox(1.68, 0.018, 0.115, '#ecf2db', { y: R.h - 0.071, x, z: -4 });
+    const diffuser = rbox(1.68, 0.018, 0.115, '#ecf2db', { y: ceilingHeight(R) - 0.071, x, z: -4 });
     diffuser.userData.noBatch = true;
     full.add(diffuser);
   }
