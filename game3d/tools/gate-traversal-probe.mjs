@@ -42,5 +42,15 @@ await withBrowserJob('gate-traversal-'+width,async browser=>{
  assert.ok(held.steer&&held.p[2]<-1,'held pointer routes through opened flap');
  console.log('PASS held gate steering',JSON.stringify(held));
 
+ // Approach from the right reader using an actual floor click/tap, with the gate already open.
+ await page.evaluate(()=>{const g=globalThis.__game;g.walker.stop();g.jump.reset();g.player.root.position.set(1.485,0,.532);g.walker.sync();globalThis.__advance(.6);});
+ const exitPoint=await page.evaluate(async()=>{const T=await import('three'),g=globalThis.__game,p=new T.Vector3(0,0,-2).applyMatrix4(g.place.space.matrixWorld).project(g.place.camera);return {x:(p.x+1)*globalThis.innerWidth/2,y:(1-p.y)*globalThis.innerHeight/2};});
+ if(touch){await touch.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[exitPoint]});await touch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});}
+ else await page.mouse.click(exitPoint.x,exitPoint.y);
+ await page.evaluate(()=>globalThis.__advance(6));
+ const clicked=await page.evaluate(()=>({p:globalThis.__game.player.root.position.toArray(),busy:globalThis.__game.busy,path:globalThis.__game.walker.path}));
+ assert.ok(clicked.p[2]<-.8,'native floor destination clears the right reader and open flap');
+ console.log('PASS right-reader native destination',JSON.stringify(clicked));
+
  await page.close();
 },{...gpuWaitOptions(900),timeoutMs:300000});

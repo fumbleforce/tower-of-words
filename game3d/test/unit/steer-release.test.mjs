@@ -46,6 +46,12 @@ test('letting go of a steer stops Eric after a detour round someone', async () =
     other.position.set(0, 0, 0.48);
     const person = { x: 0, z: 0.48, r: 0.24, root: other, id: 'staff', rig: { _noAvoid: true } };
     const walker = new SmoothWalker(eric, nav, { others: () => [person] });
+    let repaired = 0;
+    walker.traversal = {
+      clear: (...args) => nav.clear(...args),
+      collide: (...args) => nav.collide(...args),
+      route: (_from, path) => { repaired++; return path; },
+    };
     const camera = new THREE.PerspectiveCamera();
     const game = {
       walker,
@@ -59,14 +65,16 @@ test('letting go of a steer stops Eric after a detour round someone', async () =
     const t0 = performance.now();
     while (performance.now() - t0 < 260); // past the hold time
     const dt = 1 / 60;
-    let detoured = false;
+    let detoured = false, repairedBefore = 0;
     for (let f = 0; f < 240 && !detoured; f++) {
       steer.update(dt);
       const before = walker.path;
+      repairedBefore = repaired;
       walker.update(dt, camera);
       detoured = !!before && !!walker.path && walker.path !== before && walker.blockT < 0;
     }
     assert.ok(detoured, 'the walker planned round the person while steering');
+    assert.ok(repaired > repairedBefore, 'the crowd detour retains physical geometry clearance');
     for (const f of listeners.pointerup) f({ pointerId: 1 });
     const at = [eric.position.x, eric.position.z];
     for (let f = 0; f < 120; f++) walker.update(dt, camera);

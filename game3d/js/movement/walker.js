@@ -347,7 +347,7 @@ export class SmoothWalker extends Walker {
           );
         // the new route stays what the old one was (a steer's route, a scene's walk), so letting go still ends it
         if (alt)
-          this.path = Object.assign(alt, {
+          this.path = Object.assign(!this.path.scripted && this.traversal ? this.traversal.route([ox, oz], alt) : alt, {
             steer: this.path.steer,
             scripted: this.path.scripted,
           });
