@@ -8,14 +8,13 @@ import { showEnd } from './end.js';
 import { nextDaySave, sampleDayEnd } from './days.js';
 import { restoreGoal } from './saves/zones.js';
 import { restoreMet } from './saves/met.js';
-import { migrateDay2Save } from './saves/day2.js';
+import { migrateDay2Save, needsDay2AccessRecovery } from './saves/day2.js';
 
 export function createContinue(game, { enter, travel, startScene, PLACES }) {
   const ui = game.ui;
   return async function continueFrom(saved) {
-    const previousPlace = saved.place;
+    const recoveredAccess = needsDay2AccessRecovery(saved);
     saved = migrateDay2Save(saved);
-    const recoveredAccess = previousPlace !== saved.place && saved.place === 'forecourt';
     game.busy = true;
     restore(game, saved);
     await enter(saved.place || 'train', { persist: false, resuming: true });

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { migrateDay2Save } from '../../js/saves/day2.js';
+import { migrateDay2Save, needsDay2AccessRecovery } from '../../js/saves/day2.js';
+import { newFrame, readCheckpoint } from '../../js/narrative/checkpoint.js';
 
 function oldSave(node, extra = {}) {
   return { day: 2, place: 'shotengai', flags: { d2_ate: true, d2_ticket_done: true },
@@ -69,5 +70,49 @@ for (const place of ['office_quarter', 'harbour', 'campus', 'print_shop', 'ferry
 test('closed-district recovery preserves finished saves, other days and current active saves exactly', () => {
   for (const extra of [{ place: 'campus', ended: true }, { day: 1, place: 'campus' }, { day: 3, place: 'campus' }, { place: 'forecourt', flags: { d2_content_revision: 2 } }]) {
     const saved = oldSave('sit', extra); assert.equal(migrateDay2Save(saved), saved);
+  }
+});
+
+for (const [from, to, node, trigger] of [
+  ['forecourt', 'campus', 'to_campus', 'zone:campus_exit'],
+  ['campus', 'forecourt', 'to_forecourt', 'zone:forecourt_exit'],
+]) {
+  const steps = [{ do: 'trip', to }];
+  const frame = newFrame(node, steps, trigger);
+  const execution = { v: 3, place: from, frames: [frame] };
+  assert.ok(readCheckpoint(execution, from, { nodes: { [node]: steps } }), 'fixture was a valid historical checkpoint');
+  for (const [label, place, runner, transition] of [
+    ['checkpoint', from, { execution }, null],
+    ['checkpoint and leaving transition', from, { execution }, { from, to, phase: 'leaving' }],
+    ['queued route', from, { queued: [frame] }, null],
+    ['leaving transition', from, {}, { from, to, phase: 'leaving' }],
+    ['arriving transition', to, {}, { from, to, phase: 'arriving' }],
+    ['arrived checkpoint', to, { execution }, null],
+  ]) test(`removed ${from}→${to} ${label} recovers before the current revision shortcut`, () => {
+    const saved = oldSave(node, { place, flags: { d2_content_revision: 2, d2_ticket_done: true },
+      runner: { ...runner, onceDone: ['one'] }, transition, zones: { [trigger]: true }, surface: { x: 1, z: 2 } });
+    const snapshot = structuredClone(saved);
+    assert.equal(needsDay2AccessRecovery(saved), true);
+    const after = migrateDay2Save(saved);
+    assert.equal(after.place, 'forecourt'); assert.equal(after.pendingStart, 'forecourt');
+    for (const key of ['world', 'zones', 'surface', 'transition']) assert.equal(after[key], null, key);
+    assert.equal(after.runner.execution, null); assert.deepEqual(after.runner.queued, []);
+    assert.deepEqual(after.runner.onceDone, ['one']);
+    for (const key of ['known', 'yen', 'met', 'inv', 'tickets']) assert.deepEqual(after[key], saved[key]);
+    assert.equal(after.flags.d2_ticket_done, true); assert.deepEqual(saved, snapshot);
+    assert.equal(needsDay2AccessRecovery(after), false); assert.equal(migrateDay2Save(after), after);
+  });
+}
+test('current unrelated route checkpoints and transitions remain untouched', () => {
+  for (const extra of [
+    { runner: { execution: { v: 3, place: 'forecourt', frames: [newFrame('to_plaza', [{ do: 'trip', to: 'plaza' }])] } } },
+    { runner: { queued: [newFrame('to_campus', [])] }, place: 'sports' },
+    { transition: { from: 'forecourt', to: 'plaza', phase: 'leaving' } },
+    { transition: { from: 'office_quarter', to: 'campus', phase: 'arriving' } },
+    { day: 3, transition: { from: 'forecourt', to: 'campus', phase: 'leaving' } },
+    { ended: true, transition: { from: 'forecourt', to: 'campus', phase: 'leaving' } },
+  ]) {
+    const saved = oldSave('sit', { place: 'forecourt', flags: { d2_content_revision: 2 }, ...extra });
+    assert.equal(needsDay2AccessRecovery(saved), false); assert.equal(migrateDay2Save(saved), saved);
   }
 });

@@ -39,10 +39,28 @@ const PARTY_NODES = new Set([
 
 // Old checkpoints index the previous scripts. Resume at the place's progress-aware
 // opening instead of interpreting those indices against revised dialogue.
+export function needsDay2AccessRecovery(saved) {
+  if (saved.day !== 2 || saved.ended) return false;
+  if (PROTECTED.has(saved.place)) return true;
+  const transition = saved.transition;
+  if (
+    (transition?.from === 'forecourt' && transition.to === 'campus') ||
+    (transition?.from === 'campus' && transition.to === 'forecourt')
+  )
+    return true;
+  const removedRoute = (place, frame) =>
+    (place === 'forecourt' && frame.node === 'to_campus') || (place === 'campus' && frame.node === 'to_forecourt');
+  return (
+    (saved.runner?.execution?.frames || []).some((frame) =>
+      removedRoute(saved.runner.execution.place || saved.place, frame),
+    ) || (saved.runner?.queued || []).some((frame) => removedRoute(saved.place, frame))
+  );
+}
+
 export function migrateDay2Save(saved) {
   if (saved.day !== 2 || saved.ended) return saved;
   // The closed staff gate leaves this optional district without a day-two return.
-  const recoverAccess = PROTECTED.has(saved.place);
+  const recoverAccess = needsDay2AccessRecovery(saved);
   if (!recoverAccess && saved.flags?.[KEYS.d2_content_revision] === REVISION) return saved;
   const nodes = [...(saved.runner?.execution?.frames || []), ...(saved.runner?.queued || [])].map(
     (frame) => frame.node,
