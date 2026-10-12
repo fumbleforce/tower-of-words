@@ -16,6 +16,7 @@ import * as S from '../island-south.js';
 import { LOOKOUT_GAP } from '../outdoor/seafront.js';
 import { WALKS_LOCAL, BENCH_BLOCKS, TOOL_BLOCK } from '../station-garden/plan.js';
 import { MARKET_ROUTE as M } from '../market-route.js';
+import { WALKS_LOCAL as SOUTHWEST_WALKS, BLOCKS as SOUTHWEST_BLOCKS } from '../southwest/plan.js';
 import { nookWalks } from '../outdoor/nook-walks.js';
 
 export const CHUNK = 'shotengai';
@@ -119,6 +120,7 @@ export const WALKS = [
   ...[ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PROM, MARKET_WALK, BEACH_WALK, BEACH_ACCESS].map(rect),
   ...nookWalks(NOOKS),
   ...WALKS_LOCAL,
+  ...SOUTHWEST_WALKS,
 ];
 export const STREET_END = rect([SHOP_WALK[2] - 0.1, SHOP_WALK[1], DORM_STREET[2], SHOP_WALK[3]]); // out onto the street
 export const FURNITURE = [
@@ -134,5 +136,5 @@ export const FURNITURE = [
   ...S.BENCH_X.filter((_, i) => i % 2).map((x) => [x + 0.95, S.BENCH_Z - 0.25, x + 1.85, S.BENCH_Z + 0.25]),
 ]
   .map(rect)
-  .concat(BENCH_BLOCKS, [TOOL_BLOCK]);
+  .concat(BENCH_BLOCKS, [TOOL_BLOCK], SOUTHWEST_BLOCKS);
 export const inRect = (x, z, [x0, x1, z0, z1], m = 0) => x > x0 + m && x < x1 - m && z > z0 + m && z < z1 - m;

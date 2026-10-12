@@ -159,7 +159,7 @@ function shoreRibbon(p, shore, color, lanes, y) {
   });
 }
 
-export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
+export function* seafrontSteps(root, { at, layer = null, backWalk = false, westJoin = null }) {
   const group = new THREE.Group();
   root.add(group);
   // an island rect [x0, z0, x1, z1] in the place's frame as the kit's [x0, x1, z0, z1]
@@ -244,7 +244,12 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
   // kerbs where paving meets lawn: the promenade's west end and its north edge west and east of the rows, the west
   // walk's outer sides, the east walk's east side
   const kerbs = [
-    [P[0], P[1], P[0], WALL_Z - 0.3],
+    ...(westJoin
+      ? [
+          [P[0], P[1], P[0], westJoin[0]],
+          [P[0], westJoin[1], P[0], WALL_Z - 0.3],
+        ]
+      : [[P[0], P[1], P[0], WALL_Z - 0.3]]),
     [-14.1, P[1], LINKS.west[0], P[1]],
     [LINKS.west[0], LINKS.west[1], LINKS.west[0], LINKS.west[3]],
     [LINKS.east[2], LINKS.east[1], LINKS.east[2], LINKS.east[3]],

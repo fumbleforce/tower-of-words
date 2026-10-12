@@ -70,7 +70,7 @@ const TERRACE = '#a19d94'; // the terraces' paler stone, so they read as places 
 export const WALKS = {
   coast_path: { rect: [-42.6, -27.4, -40.6, 8] },
   coast_lookout: { rect: [-46.1, 8, -40.6, 12], terrace: 'w', look: -Math.PI / 2, slabs: true },
-  coast_path_south: { rect: [-42.6, 12, -40.6, 21] },
+  coast_path_south: { rect: [-42.6, 12, -40.6, 16.5] },
   // a bay off the walk's sea side halfway along it, two benches looking out over the wall
   coast_bay: {
     rect: [-44.6, -11.4, -42.6, -8.4],
@@ -80,7 +80,12 @@ export const WALKS = {
       [-43.9, -9.15, -Math.PI / 2],
     ],
   },
-  south_lookout: { rect: [-46.1, 21, -40.6, 26.2], terrace: 'ws', look: -Math.PI / 4, slabs: true },
+  south_lookout: { rect: [-46.1, 16.5, -40.6, 20.5], terrace: 'w', look: -Math.PI / 4, slabs: true },
+  // The promenade continues seaward of the station garden's planted western end.
+  southwest_promenade: { rect: [-40.6, 28.8, -16.1, 30.8], open: 'e' },
+  southwest_turn: { rect: [-44, 26.2, -38.2, 28.8] },
+  southwest_coast_turn: { rect: [-44, 20.5, -42, 26.2] },
+  southwest_rest: { rect: [-26.5, 30.8, -21.5, 33.8], slabs: true },
   coast_path_east: { rect: [-40.6, -27.4, -20.75, -25.4] },
   shed_street_north: {
     rect: [-20.75, -27.4, -17.75, -22.1],
@@ -113,7 +118,11 @@ const DETAIL = {
   coast_path_south: 'The coast walk on south from the lookout to the corner terrace.',
   coast_bay: 'A paved bay off the coast walk’s sea side, two benches looking out over the wall.',
   south_lookout:
-    'A terrace on the corner where the coast turns east, over the rocks: the monorail comes in off the bay in front of it.',
+    'An open sea terrace north of the curved tracks, over the rocks: the monorail comes in off the bay beside it.',
+  southwest_promenade: 'The promenade continues west, seaward of the station garden, to the coastal lookouts.',
+  southwest_turn: 'The promenade turns toward the coastal walk, clear of the railway piers.',
+  southwest_coast_turn: 'The coast-side path leads north around the support to the open sea terrace.',
+  southwest_rest: 'A paved resting bay south of the promenade, sheltered by coastal pines.',
   coast_path_east: 'The coast walk’s leg east past the shed’s north end, to the head of the shed street.',
   shed_street_north:
     'The shed street’s last stretch north (3 wide on the station’s west face line, as forecourt/plan.js lays it), out of the forecourt’s view, to the coast walk.',
@@ -229,16 +238,16 @@ export const WEST_DRIFTS = [
   [-23, -18, 24.8, 26.4, 's'],
   // either side of the line south of the shed, either side of the walk: what the train passes over as it comes in
   [-34.8, -31.4, 17.6, 21.8, 's'],
-  [-34.8, -31.4, 25.2, 31, 'n'],
+  [-34.8, -31.4, 25.2, 28.1, 'n'],
   [-25.8, -23.8, 17.6, 21.8, 's'],
-  [-25.8, -23.8, 25.2, 32, 'n'],
+  [-25.8, -23.8, 25.2, 28.1, 'n'],
   // in the longer grass where the coast widens, and west of the line along the south walk
   [-51, -46.4, -8.4, -6.4, 'n'],
   [-50.4, -46.6, -19.4, -17.6, 's'],
   [-39.6, -34.8, 20.4, 22.2, 'n'],
   // on the lawn south of the walk, in the wedge between the line and the wall
-  [-37.6, -32.6, 27, 28.8, 's'],
-  [-24.4, -19.4, 32.2, 34, 's'],
+  [-37.6, -32.6, 26.2, 28.0, 's'],
+  [-24.4, -19.4, 34.5, 36.3, 's'],
   // The public garden ends before the station's covered approach. Planting closes the former path's axis.
   [AXIS[0], AXIS[1], WALKWAY_S + 0.3, 19.5, 'n'],
   // Loose low planting follows the railway verge across the removed paving spur.
@@ -280,14 +289,15 @@ export const WEST_TREES = [
   ['pine', -38.6, 20.2, 1.4],
   // clipped pines in the beds along the line's east side, seen from the train as it comes in
   ['pine', -24.6, 19.6, 1.05],
-  ['pine', -24.6, 27.4, 1.1],
-  ['pine', -24.6, 30.8, 1.0],
-  ...row('pine', -33.2, 18.5, 2, 1.3, 10), // between the two tracks south of the shed, either side of the walk
+  ['pine', -24.6, 25.4, 1.1],
+  ['pine', -24.6, 35.1, 1.0],
+  ...row('pine', -33.2, 18.5, 1, 1.3, 10),
+  ['pine', -35.0, 25.2, 1.3], // inland of the coastal promenade, clear of its walking line
   // the garden: a row of zelkovas between it and the line, a cherry in each panel, zelkovas south of the walk
-  ...[20.6, 28.4].map((z) => ['keyaki', -23.4, z, 1.2]),
+  ...[20.6, 25.5].map((z) => ['keyaki', -23.4, z, 1.2]),
   ['sakura', -20.2, 20.9, 1.25],
   ['sakura', -8.8, 20.9, 1.2],
-  ['keyaki', -19.6, 29.2, 1.25],
+  ['keyaki', -19.6, 33.9, 1.25],
   ['keyaki', -9.6, 25.8, 1.0],
 ];
 export const WEST_SHRUBS = [

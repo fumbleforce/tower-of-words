@@ -210,6 +210,7 @@ export const CROWD = {
       arcade_w: [0, -76.5],
       prom_e: [-9.5, 5.0],
       prom_w: [-9.5, -76.0],
+      coast: [10.15, -106.5],
     },
     periods: {
       early: {
@@ -218,8 +219,8 @@ export const CROWD = {
         flows: [
           ['arcade_w', 'street', 3],
           ['street', 'arcade_w', 2],
-          ['prom_w', 'prom_e', 2, 'jog'],
-          ['prom_e', 'prom_w', 1, 'stroll'],
+          ['coast', 'prom_e', 2, 'jog'],
+          ['prom_e', 'coast', 1, 'stroll'],
           ['prom_e', 'arcade_w', 1],
         ],
         sit: 1,
@@ -233,7 +234,7 @@ export const CROWD = {
         flows: [
           ['street', 'arcade_w', 1],
           ['arcade_w', 'street', 1],
-          ['prom_e', 'prom_w', 1, 'stroll'],
+          ['prom_e', 'coast', 1, 'stroll'],
         ],
         sit: 2,
         chat: 1,
@@ -246,8 +247,8 @@ export const CROWD = {
         flows: [
           ['street', 'arcade_w', 4],
           ['arcade_w', 'street', 4],
-          ['prom_e', 'prom_w', 1, 'stroll'],
-          ['prom_w', 'prom_e', 1, 'stroll'],
+          ['prom_e', 'coast', 1, 'stroll'],
+          ['coast', 'prom_e', 1, 'stroll'],
           ['street', 'prom_w', 1],
         ],
         sit: 4,
@@ -261,7 +262,7 @@ export const CROWD = {
         flows: [
           ['street', 'arcade_w', 1],
           ['arcade_w', 'street', 1],
-          ['prom_w', 'prom_e', 1, 'stroll'],
+          ['coast', 'prom_e', 1, 'stroll'],
         ],
         sit: 2,
         chat: 1,
@@ -275,7 +276,7 @@ export const CROWD = {
           ['street', 'arcade_w', 4],
           ['arcade_w', 'street', 3],
           ['prom_e', 'prom_w', 2, 'stroll'],
-          ['prom_w', 'prom_e', 1, 'jog'],
+          ['coast', 'prom_e', 1, 'jog'],
           ['prom_w', 'street', 1],
         ],
         sit: 3,

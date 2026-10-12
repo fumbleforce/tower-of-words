@@ -889,6 +889,10 @@
         }
       },
       "spots": [
+        "southwest_corner",
+        "southwest_west_view",
+        "southwest_pine_rest",
+        "southwest_stones",
         "station_garden",
         "station_garden_approach",
         "garden_free_bench",
@@ -903,6 +907,10 @@
         "party_mio"
       ],
       "nooks": [
+        "southwest_corner",
+        "southwest_west_view",
+        "southwest_pine_rest",
+        "southwest_stones",
         "station_garden",
         "station_garden_approach",
         "shotengai_shrine",
@@ -913,7 +921,13 @@
         "garden_bench_1",
         "garden_bench_2",
         "party_seat",
-        "party_mori"
+        "party_mori",
+        "southwest_bench_1",
+        "southwest_bench_2",
+        "southwest_bench_3",
+        "southwest_bench_4",
+        "southwest_bench_5",
+        "southwest_bench_6"
       ],
       "zones": [
         "office_exit",

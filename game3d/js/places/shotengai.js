@@ -17,6 +17,7 @@ import { shotengaiParty } from './shotengai-party.js';
 import { stationGarden } from './station-garden/index.js';
 import { day3Place } from './day3/place.js';
 import { turningCam } from './turning-cam.js';
+import { SPOTS as SOUTHWEST_SPOTS, BENCHES as SOUTHWEST_BENCHES } from '../scenes/southwest/plan.js';
 import { MARKET_ROUTE } from '../scenes/market-route.js';
 
 // The shop street and seafront are reached directly south from the fountain plaza. The east arcade mouth
@@ -173,6 +174,10 @@ export async function shotengaiPlace(game) {
     music: 'calm',
     things,
     spots: {
+      southwest_corner: SOUTHWEST_SPOTS.southwest_corner,
+      southwest_west_view: SOUTHWEST_SPOTS.southwest_west_view,
+      southwest_pine_rest: SOUTHWEST_SPOTS.southwest_pine_rest,
+      southwest_stones: SOUTHWEST_SPOTS.southwest_stones,
       station_garden: garden.spots.station_garden,
       station_garden_approach: garden.spots.station_garden_approach,
       garden_free_bench: garden.spots.garden_free_bench,
@@ -191,6 +196,12 @@ export async function shotengaiPlace(game) {
       garden_bench_2: garden.seats.garden_bench_2,
       party_seat: party.seats.party_seat,
       party_mori: party.seats.party_mori,
+      southwest_bench_1: SOUTHWEST_BENCHES.southwest_bench_1,
+      southwest_bench_2: SOUTHWEST_BENCHES.southwest_bench_2,
+      southwest_bench_3: SOUTHWEST_BENCHES.southwest_bench_3,
+      southwest_bench_4: SOUTHWEST_BENCHES.southwest_bench_4,
+      southwest_bench_5: SOUTHWEST_BENCHES.southwest_bench_5,
+      southwest_bench_6: SOUTHWEST_BENCHES.southwest_bench_6,
     },
     people: {
       station_worker: garden.people.station_worker,
@@ -224,7 +235,7 @@ export async function shotengaiPlace(game) {
             new THREE.Vector3(0, 0, 4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-22, 8.4, az0 - 8, az1 + 6], lead: -1.4, limY: 0.96 },
+          { follow: true, clamp: [-22, 11.7, -113, az1 + 6], lead: -1.4, limY: 0.96 },
         );
       else
         cam.fit(
@@ -236,7 +247,7 @@ export async function shotengaiPlace(game) {
             new THREE.Vector3(0, 1.2, 4.8),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-22, 8.4, az0 - 9, az1 + 7.5], lead: -3.4 },
+          { follow: true, clamp: [-22, 11.7, -113, az1 + 7.5], lead: -3.4 },
         );
     },
     pick(rc) {

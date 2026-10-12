@@ -138,8 +138,8 @@ export const CHUNKS = {
     turn: 270, // looking west down the arcade from its east mouth; view: the rows' backs to the beach
     scale: 1,
     level: 0,
-    walk: [-12.25, 9.15, -94.0, 9.5],
-    view: [-27, 20, -100, 13.5],
+    walk: [-14, 12.15, -111, 9.5],
+    view: [-27, 20, -119, 13.5],
     anchor: 'the middle of the arcade’s east mouth, between the two shop rows as drawn',
   },
   karaoke: {

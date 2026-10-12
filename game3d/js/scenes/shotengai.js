@@ -38,6 +38,8 @@ import { bandSteps } from './bands.js';
 import { bikeCourtBackdrop } from './forecourt/court.js';
 import { gardenSteps } from './station-garden/build.js';
 import { BOUNDS as GARDEN_BOUNDS } from './station-garden/plan.js';
+import { southwestSteps } from './southwest/build.js';
+import { BOUNDS as SOUTHWEST_BOUNDS } from './southwest/plan.js';
 import { buildSouthLink } from './forecourt/south-link.js';
 
 const { CHUNK, local, rect, inRect } = P;
@@ -60,8 +62,8 @@ export function* shotengaiSteps() {
   const [wx0, wx1, wz0, wz1] = LAYOUT.CHUNKS[CHUNK].walk;
   const nav = new Nav(
     Math.min(wx0, GARDEN_BOUNDS[0], rect(P.BEACH_ACCESS)[0] - 0.3),
-    Math.max(wx1, GARDEN_BOUNDS[1]),
-    Math.min(wz0, GARDEN_BOUNDS[2]),
+    Math.max(wx1, GARDEN_BOUNDS[1], SOUTHWEST_BOUNDS[1]),
+    Math.min(wz0, GARDEN_BOUNDS[2], SOUTHWEST_BOUNDS[2]),
     wz1 + 2.1,
     0.1,
   );
@@ -124,13 +126,14 @@ export function* shotengaiSteps() {
   const curtainCard = curtain.build(pf);
   const eastLit = eastLights.build(pf, { poolY: 0.03 });
   yield;
-  const front = yield* seafrontSteps(isl, { at: (x, z) => [x, z] });
+  const front = yield* seafrontSteps(isl, { at: (x, z) => [x, z], westJoin: [28.8, 30.8] });
   const sea = coastalSea(root, sun.position.clone().normalize());
   p.build(isl);
   const lit = lights.build(isl, { poolY: 0.03 });
   const doorCards = cards.build(isl);
   yield;
   const garden = yield* gardenSteps(isl, root);
+  const southwest = yield* southwestSteps(isl);
   const bands = yield* bandSteps(root, CHUNK); // the ground past the exits, as the neighbours build it (bands.js)
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
@@ -155,6 +158,7 @@ export function* shotengaiSteps() {
   // what lights up after dark
   light.glow.add(
     plazaContext.glows,
+    southwest.glows,
     bands.glows,
     nooks.glows,
     lit.glows,
