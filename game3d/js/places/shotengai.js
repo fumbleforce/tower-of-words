@@ -8,6 +8,7 @@ import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { lightPlace } from '../kit/light/rig.js';
 import { sim } from '../sim.js';
+import { flags } from '../narrative/state.js';
 import { addOccluder, updateOccluders, footprint } from '../scenes/occluders.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
@@ -15,17 +16,33 @@ import { walkOut, walkIn } from './edge-walk.js';
 import { shotengaiParty } from './shotengai-party.js';
 import { stationGarden } from './station-garden/index.js';
 import { day3Place } from './day3/place.js';
+import { turningCam } from './turning-cam.js';
+import { MARKET_ROUTE } from '../scenes/market-route.js';
 
-// The shop street and the seafront (scenes/shotengai.js): reached from the plaza down the cross walk and along the
-// south walk, it comes in at the arcade's east mouth off the dorm street; it also loads with ?place=shotengai. The
-// shops are shut for now (their doors say so), but the karaoke box's door opens onto its front desk
-// (places/karaoke.js). Out the east end goes back to the plaza, or after work up the dorm
-// street to the dorm courtyard.
+// The shop street and seafront are reached directly south from the fountain plaza. The east arcade mouth
+// still connects to the dorm street. The central crossing runs through both shop rows to the beach.
 const STEEP = (84 * Math.PI) / 180; // the camera's elevation in the alleys and down the rows' west end
 export async function shotengaiPlace(game) {
   const w = await sliced(shotengaiSteps()); // in slices between frames: it's built while the plaza is played
   const cam = new RoomCam(w.camera);
   const flat = cam.elev;
+  const routeZ = shopLocal([MARKET_ROUTE.x, 20.15])[1];
+  const turn = turningCam(cam, (x, z) => {
+    const t = THREE.MathUtils.clamp((5 - Math.abs(z - routeZ)) / 3.2, 0, 1);
+    const blend = t * t * (3 - 2 * t);
+    return {
+      yaw: (Math.PI / 2) * blend,
+      elev: (w.steep(x, z) ? STEEP : flat) * (1 - blend) + THREE.MathUtils.degToRad(68) * blend,
+    };
+  });
+  const snap = cam.snap.bind(cam);
+  cam.snap = (position) => {
+    if (position) {
+      turn.reset();
+      turn.steer(position, 0);
+    }
+    snap(position);
+  };
   const southLink = southLinkFrame('shotengai');
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const [, , az0, az1] = w.arcade;
@@ -51,9 +68,16 @@ export async function shotengaiPlace(game) {
     },
     plaza_lane: {
       ...PLACE_DETAILS.shotengai.things.plaza_lane,
-      anchor: (v) => v.set(w.edge[0], 1.1, w.edge[1] - 1.2),
-      spot: () => [w.edge[0], w.edge[1] - 1.6],
+      anchor: (v) => v.set(w.in[0], 1.1, w.in[1]),
+      spot: () => w.in,
       face: () => w.edge,
+    },
+    dorm_lane: {
+      ...PLACE_DETAILS.shotengai.things.dorm_lane,
+      anchor: (v) => v.set(w.dormIn[0], 1.1, w.dormIn[1]),
+      spot: () => w.dormIn,
+      face: () => w.dormEdge,
+      enabled: () => sim.day >= 2 || !!flags.going_home,
     },
     office_lane: {
       ...PLACE_DETAILS.shotengai.things.office_lane,
@@ -169,7 +193,11 @@ export async function shotengaiPlace(game) {
       kuro: d3.people.kuro,
       rei: d3.people.rei,
     },
-    zones: { office_exit: southLink.exit, plaza_exit: (x, z) => z > w.exitZ },
+    zones: {
+      office_exit: southLink.exit,
+      plaza_exit: w.plazaExit,
+      dorm_exit: (x, z) => (sim.day >= 2 || !!flags.going_home) && z > w.exitZ,
+    },
     hooks: {
       gardenWorker: garden.hooks.gardenWorker,
       partySetup: party.hooks.partySetup,
@@ -188,7 +216,7 @@ export async function shotengaiPlace(game) {
             new THREE.Vector3(0, 0, 4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-6.5, 8.4, az0 - 8, az1 + 6], lead: -1.4, limY: 0.96 },
+          { follow: true, clamp: [-22, 8.4, az0 - 8, az1 + 6], lead: -1.4, limY: 0.96 },
         );
       else
         cam.fit(
@@ -200,23 +228,24 @@ export async function shotengaiPlace(game) {
             new THREE.Vector3(0, 1.2, 2.4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-10, 8.4, az0 - 9, az1 + 7.5], lead: -3.4 },
+          { follow: true, clamp: [-22, 8.4, az0 - 9, az1 + 7.5], lead: -3.4 },
         );
     },
     pick(rc) {
       const point = new THREE.Vector3();
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
-    update(dt) {
+    update(dt, t) {
+      w.update(t);
       d3.update(dt);
       const p = game.player.root.position;
+      if (!game.player.seated && !game.player.scripted) p.y = w.groundHeight(p.x);
       w.follow(p.x, p.z);
       updateOccluders(P, p, dt);
       const [kx, kz] = dk('karaoke').step;
       if (Math.hypot(p.x - kx, p.z - kz) < 7 && !game.prepared.karaoke) game.prepare?.('karaoke');
       // steeper over the alleys and the rows' west end, where the rows would hide him
-      const want = w.steep(p.x, p.z) ? STEEP : flat;
-      cam.elev += (want - cam.elev) * Math.min(1, dt * 3);
+      turn.steer(p, dt);
     },
     // what a period changes here besides the light (the rig's)
     onPeriod(period) {
@@ -235,9 +264,11 @@ export async function shotengaiPlace(game) {
     },
     // in off the dorm street onto the shop walk, the arcade ahead; out the same way
     tripIn: (g) => walkIn(g, cam, w.edge, w.in, w.face),
-    tripOut: (g) => walkOut(g, cam, [w.edge[0], w.edge[1] - 1.6], w.edge),
+    tripOut: (g) => walkOut(g, cam, w.in, w.edge),
     // the karaoke box: in at its door off the arcade, and back out of it onto the arcade
     tripInFrom: {
+      east_lane: (g) => walkIn(g, cam, w.dormEdge, w.dormIn, Math.PI),
+      dorm_court: (g) => walkIn(g, cam, w.dormEdge, w.dormIn, Math.PI),
       konbini: (g) => walkIn(g, cam, dk('store').local, dk('store').step, outOf('store')),
       bakery: (g) => walkIn(g, cam, dk('bakery').local, dk('bakery').step, outOf('bakery')),
       forecourt: (g) => walkIn(g, cam, southLink.edge, southLink.inside, -Math.PI / 2),
@@ -245,6 +276,8 @@ export async function shotengaiPlace(game) {
       karaoke: (g) => walkIn(g, cam, dk('karaoke').local, dk('karaoke').step, outOf('karaoke')),
     },
     tripOutTo: {
+      east_lane: (g) => walkOut(g, cam, w.dormIn, w.dormEdge),
+      dorm_court: (g) => walkOut(g, cam, w.dormIn, w.dormEdge),
       konbini: (g) => walkOut(g, cam, dk('store').step, dk('store').local),
       bakery: (g) => walkOut(g, cam, dk('bakery').step, dk('bakery').local),
       forecourt: (g) => walkOut(g, cam, southLink.lane, southLink.edge),

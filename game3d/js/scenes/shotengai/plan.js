@@ -4,17 +4,18 @@
 // arcade: local north is island west, local east is island north.
 //
 //   the arcade: the walk between the two shop rows, from the west mouth to the east mouth, between the rows' posts
-//   the shop walk: on east out of the arcade past the izakaya's door to the dorm street, where Eric comes in from
-//   the plaza and leaves for it (or, after work, for the dorm courtyard up the street)
+//   the central crossing: directly south from the fountain, through both rows and onto the beach access mat
+//   the shop walk: east out of the arcade past the izakaya door to the dorm street
 //   the mouths' walks: from head office's bicycle court down the rows' west end to the arcade and promenade,
 //   and down from the shop walk to the promenade's east end
 //   the alleys: three, one bay wide, through the south row from the arcade to the promenade
 //   the promenade: from the walk down from the station (not walked) east to the lookout; the stairs down to the beach
-//   are chained off at their heads, the beach is seen and not walked
+//   at the old heads are chained; the new central stair leads onto a safe dry-sand access mat
 import * as LAYOUT from '../island-layout.js';
 import * as S from '../island-south.js';
 import { LOOKOUT_GAP } from '../outdoor/seafront.js';
 import { WALKS_LOCAL, BENCH_BLOCKS, TOOL_BLOCK } from '../station-garden/plan.js';
+import { MARKET_ROUTE as M } from '../market-route.js';
 import { nookWalks } from '../outdoor/nook-walks.js';
 
 export const CHUNK = 'shotengai';
@@ -44,7 +45,8 @@ export { ALLEYS };
 // the fronts)
 export const POSTS = [];
 for (let x = ROW_W + 1; x < ROW_E; x += BAYS.w)
-  for (const z of [ROWS_Z.arcade + 0.35, ROWS_Z.south - 0.35]) POSTS.push([x, z]);
+  if (x < M.x0 - 0.15 || x > M.x1 + 0.15)
+    for (const z of [ROWS_Z.arcade + 0.35, ROWS_Z.south - 0.35]) POSTS.push([x, z]);
 
 // the doors of the shops with a name, each { id, at: [x, z] on the front, out: the way the door faces (+1 south,
 // -1 north) }: the shop rows' from island-south.js SHOPS, the izakaya's on the shop walk
@@ -57,16 +59,19 @@ export const DOORS = [
   (({ rect: [x0, , x1, z1] }) => ({ id: 'izakaya', at: [(x0 + x1) / 2, z1], out: 1 }))(building('izakaya')),
 ];
 
-// where Eric comes in from the plaza (the dorm street's edge) and the point on the shop walk he walks to; the exit
-// zone: on the dorm street, past the shop walk's end
+// Separate physical endpoints: the central fountain seam and the arcade's east dorm-street mouth.
 export const STREET_X = (DORM_STREET[0] + DORM_STREET[2]) / 2;
 export const WALK_Z = (SHOP_WALK[1] + SHOP_WALK[3]) / 2;
-export const EDGE = [STREET_X, WALK_Z];
-export const IN = [SHOP_WALK[2] - 3.2, WALK_Z];
+export const DORM_EDGE = [STREET_X, WALK_Z];
+export const DORM_IN = [SHOP_WALK[2] - 3.2, WALK_Z];
+export const EDGE = [M.x, M.seamZ];
+export const IN = [M.x, M.seamZ + 2];
+export const MARKET_WALK = [M.x0, M.seamZ - 1.6, M.x1, WALL_Z];
+export const BEACH_WALK = [M.x0 + 0.9, S.BEACH_ENTRY[1], M.x1 - 0.9, 42.2];
 export const EXIT_X = SHOP_WALK[2] - 0.6; // island x past which he is leaving
 
 // the chained heads of the beach stairs: [x0, x1] each, on the wall's line
-export const CHAINS = S.STAIRS.map(([x0, , x1]) => [x0, x1]);
+export const CHAINS = S.STAIRS.filter((s) => s !== S.BEACH_ENTRY).map(([x0, , x1]) => [x0, x1]);
 
 // the walkable rects in the chunk's frame, and the promenade's furniture to keep clear of
 // the nooks (outdoor/nooks.js), in the chunk's frame: a roadside shrine on the lawn at the arcade's west mouth, its
@@ -110,12 +115,18 @@ export const NOOKS = [
   },
 ];
 export const WALKS = [
-  ...[ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PROM].map(rect),
+  ...[ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PROM, MARKET_WALK, BEACH_WALK].map(rect),
   ...nookWalks(NOOKS),
   ...WALKS_LOCAL,
 ];
 export const STREET_END = rect([SHOP_WALK[2] - 0.1, SHOP_WALK[1], DORM_STREET[2], SHOP_WALK[3]]); // out onto the street
 export const FURNITURE = [
+  ...[S.BEACH_ENTRY[0] + 0.1, S.BEACH_ENTRY[2] - 0.1].map((x) => [
+    x - 0.11,
+    S.BEACH_ENTRY[1],
+    x + 0.11,
+    S.BEACH_ENTRY[3],
+  ]),
   ...S.LAMP_X.map((x) => [x - 0.15, S.FURNITURE_Z - 0.15, x + 0.15, S.FURNITURE_Z + 0.15]),
   ...S.BENCH_X.map((x) => [x - 0.95, S.BENCH_Z - 0.75, x + 0.95, S.BENCH_Z + 0.55]),
   ...S.BENCH_X.filter((_, i) => i % 2).map((x) => [x + 0.95, S.BENCH_Z - 0.25, x + 1.85, S.BENCH_Z + 0.25]),

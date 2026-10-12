@@ -6,8 +6,10 @@ export default withStationGarden({
     'talk:bakery_door': 'd2_shut',
     'talk:office_lane': 'd2_to_forecourt',
     'zone:office_exit': 'd2_to_forecourt',
-    'talk:plaza_lane': 'd2_to_lane',
-    'zone:plaza_exit': 'd2_to_lane',
+    'talk:plaza_lane': 'd2_to_plaza',
+    'zone:plaza_exit': 'd2_to_plaza',
+    'talk:dorm_lane': 'd2_to_lane',
+    'zone:dorm_exit': 'd2_to_lane',
     'talk:bike_shop': 'd2_shut',
     'talk:store': 'd2_shut',
     'talk:bakery': [{ if: '!d2_bakery_seen', node: 'd2_bakery' }, 'd2_shut'],
@@ -19,7 +21,7 @@ export default withStationGarden({
   },
   goal: { kenji: 'd2_shift_done && !d2_met_kenji && !d2_party_done', izakaya: 'd2_met_kenji && !d2_party_done' },
   nodes: {
-    d2_arrive: [{ do: 'partySetup' }, ...direction('office_lane', 'office_lane', 'izakaya', 'plaza_lane')],
+    d2_arrive: [{ do: 'partySetup' }, ...direction('office_lane', 'office_lane', 'izakaya', 'dorm_lane')],
     d2_meet_kenji: [
       { say: 'kenji', emo: 'bright', text: 'あ、{mc.name_jp}さん！こちらです。', overheard: true },
       { do: 'gesture', who: 'kenji', kind: 'point', to: 'izakaya' },
@@ -28,9 +30,13 @@ export default withStationGarden({
       { do: 'goal', text: 'Join the department inside the izakaya.', at: 'izakaya' },
       { do: 'save' },
     ],
-    d2_kenji_wait: [{ say: 'kenji', voice: 'kenji-douzo', emo: 'polite', text: 'どうぞ、どうぞ。', overheard: true }, { say: 'kenji', emo: 'bright', text: 'Mori-san... table.' }],
+    d2_kenji_wait: [
+      { say: 'kenji', voice: 'kenji-douzo', emo: 'polite', text: 'どうぞ、どうぞ。', overheard: true },
+      { say: 'kenji', emo: 'bright', text: 'Mori-san... table.' },
+    ],
     d2_izakaya: [{ if: 'd2_shift_done', then: [{ set: 'd2_met_kenji' }, { do: 'trip', to: 'izakaya' }], else: shut }],
     d2_to_forecourt: [{ do: 'trip', to: 'forecourt' }],
+    d2_to_plaza: [{ do: 'trip', to: 'plaza' }],
     d2_to_lane: [{ do: 'trip', to: 'east_lane' }],
     d2_bakery: [
       { do: 'cam', on: 'bakery', zoom: 1.2 },

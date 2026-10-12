@@ -3150,6 +3150,29 @@
     ]
   },
   {
+    "id_": "prop/shotengai/dorm_lane",
+    "kind": "prop",
+    "name": "To the dorm street",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.dorm_lane",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'To the dorm street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/shotengai/game_centre",
     "kind": "prop",
     "name": "Game centre",

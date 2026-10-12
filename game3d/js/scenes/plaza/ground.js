@@ -18,13 +18,14 @@ const ORIGIN = [F[0], LZ - HALF];
 function lanes(pv) {
   laneField(pv, LANE.w, { origin: ORIGIN });
   eastLaneField(pv);
+  laneField(pv, P.MARKET, { along: 'z', origin: [P.MARKET[0], P.MARKET[2]] });
   laneField(pv, LINK, { along: 'z', origin: ORIGIN });
 }
 // the lane out east to the jog, which the east lane's chunk (scenes/east-lane.js) lays too
 export const eastLaneField = (pv) => laneField(pv, LANE.e, { origin: ORIGIN });
 
 // the round plaza, whole: the paths run in under its border ring
-function* circle(root) {
+export function* circleSteps(root) {
   const rp = roundPaver(F, { y: 0.014 });
   rp.ring(BASIN - 0.05, BASIN + 0.75, { course: 0.4, stone: 0.5, tones: WARM, seed: 3 });
   rp.ring(BASIN + 0.75, BASIN + 1.05, { course: 0.3, stone: 0.32, tones: GRANITE.dark, seed: 4 });
@@ -65,9 +66,18 @@ export function* groundSteps(root) {
   yield;
   terrace(pv);
   // the footpath along the shops' backs
-  pv.field(FOOTPATH, { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid, origin: [F[0], FOOTPATH[2]] });
+  for (const [a, b] of [
+    [FOOTPATH[0], P.MARKET[0]],
+    [P.MARKET[1], FOOTPATH[1]],
+  ])
+    pv.field([a, b, FOOTPATH[2], FOOTPATH[3]], {
+      pattern: 'grid',
+      module: [0.6, 0.6],
+      tones: GRANITE.mid,
+      origin: [F[0], FOOTPATH[2]],
+    });
   yield;
   pv.build(root);
   yield;
-  yield* circle(root);
+  yield* circleSteps(root);
 }

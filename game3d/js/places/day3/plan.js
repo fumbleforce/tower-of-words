@@ -29,7 +29,7 @@ export const PLANS = {
   office: { emi: {}, kenji: {}, mori: {}, aoi: {}, rei: {}, tama: {} },
   // the board in the morning until her scene; Tama asleep in the seat bay's shade at lunch
   plaza: {
-    aoi: { morning: { if: '!d3_aoi_intro', at: [-1.0, 9.3], face: [-0.5, 10.46] } },
+    aoi: { morning: { if: '!d3_aoi_intro', at: [-5.0, 8.3], face: [-4.5, 9.33] } },
     tama: { lunch: { at: [19.15, -6.35], yaw: -2.2, pose: 'sleep' } },
   },
   // the shop street's east side, its fronts at x 2.25: Mori shopping for dinner in the morning; at lunch Kenji with

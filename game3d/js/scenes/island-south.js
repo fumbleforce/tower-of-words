@@ -16,6 +16,7 @@
 //   foot, east of the beach on armour rocks in the sea like the west's
 //   the beach: sand from the wall to the shoreline, boulders in groups, foam along the water
 import { WEST_RETURN } from './island-west.js';
+import { MARKET_ROUTE as M } from './market-route.js';
 
 const pairs = (f) => f.reduce((a, v, i) => (i % 2 ? a[a.length - 1].push(v) : a.push([v]), a), []);
 
@@ -32,12 +33,11 @@ export const WALL_Z = PROMENADE[3];
 export const BAND = 1.4; // the darker band along the wall
 const STAIR_W = 2.4,
   STAIR_D = 3.2;
-export const STAIRS = BAYS.alleys.map((i) => [
-  bayMid(i) - STAIR_W / 2,
-  WALL_Z,
-  bayMid(i) + STAIR_W / 2,
-  WALL_Z + STAIR_D,
-]);
+export const BEACH_ENTRY = [M.x - 1.5, WALL_Z, M.x + 1.5, WALL_Z + STAIR_D];
+export const STAIRS = [
+  ...BAYS.alleys.map((i) => [bayMid(i) - STAIR_W / 2, WALL_Z, bayMid(i) + STAIR_W / 2, WALL_Z + STAIR_D]),
+  BEACH_ENTRY,
+].sort((a, b) => a[0] - b[0]);
 export const ALLEYS = BAYS.alleys.map((i) => [bayMid(i) - 1, ROWS_Z.south, bayMid(i) + 1, ROWS_Z.back]);
 // the footpath along the north row's backs, as the plaza lays it (plaza/plan.js FOOTPATH), for the forecourt's tile
 export const BACK_WALK = [ROW_W - 2.5, ROWS_Z.north - 1.7, 17.5, ROWS_Z.north];
@@ -53,6 +53,12 @@ const WALL_E = 80;
 const ALLEY =
   'An alley through the south row from the arcade to the promenade, opposite a flight of stairs to the beach.';
 export const SOUTH_PATHS = [
+  {
+    id: 'market_crossing',
+    kind: 'lane',
+    rect: [M.x0, M.northZ, M.x1, WALL_Z],
+    detail: 'Direct south from the fountain through the open market crossing to the beach stairs.',
+  },
   {
     id: 'office_south_walk',
     kind: 'path',
@@ -160,7 +166,7 @@ export const UMBRELLAS = [
   [14, 38.5],
   [17.2, 39.4],
   [34.5, 40.2],
-  [37.6, 39],
+  [40.2, 39],
   [-3.5, 37.4],
 ];
 export const HUTS = [-11.8, -9.4, -7].map((x) => [x, 34.6]);
@@ -169,7 +175,7 @@ export const EAST_BED = [ROW_E, ROWS_Z.south, LINKS.east[0], ROWS_Z.back];
 // The promenade's furniture in the band along the wall, x each (scenes/outdoor/seafront.js builds it, the shop
 // street's chunk keeps Eric off it): lamps flank each flight of stairs, one more midway between flights; pairs of
 // benches back to back face the sea and the shops between them, bins beside every other pair
-export const LAMP_X = [-7.5, 1.5, 6, 15, 24, 28.5, 37.5, 46.5, 51, 60, 69];
+export const LAMP_X = [-7.5, 1.5, 6, 15, 24, 28.5, 40.4, 46.5, 51, 60, 69];
 export const BENCH_X = [-3, 10.5, 19.5, 33, 42, 55.5, 66];
 export const FURNITURE_Z = WALL_Z - BAND / 2 - 0.15;
 // Paired seats need usable knee/approach space on the sea side as well as the shops side.

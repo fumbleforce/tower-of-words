@@ -76,11 +76,11 @@ One row per place. Where: the building ids in island-layout.js (or island-plan.j
 
 ### Shop street and seafront
 
-The shop rows have fifteen bays each, numbered 0 to 14 from the west (island-south.js BAYS).
+The shop rows keep their fifteen-bay grid, numbered 0 to 14 from the west (island-south.js BAYS). A 4.5-unit crossing on the fountain’s south axis divides both rows and the arcade into west and east halves, then continues to the shore and an open beach stair (Jørgen, 2026-10-12).
 
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
-| `shotengai` | Shop street (商店街) | `shops_north`, `arcade`, `shops_south` | Built as `shotengai` ([places.md](places.md)): two rows of small shops facing each other under a glass arcade. Some bays have their shutters down. Busiest after work. | West mouth from the station walk, east mouth to the dorm street, three alleys down to the promenade | Built | Shop signs in kana and katakana, read bay by bay. |
+| `shotengai` | Shop street (商店街) | `shops_north`, `arcade`, `shops_south` | Built as `shotengai` ([places.md](places.md)): two rows of small shops facing each other under a glass arcade. Some bays have their shutters down. Busiest after work. | Central path from the fountain, west mouth from the station walk, east mouth to the dorm street, three alleys down to the promenade | Built | Shop signs in kana and katakana, read bay by bay. |
 | `store` | Konbini, 100-yen and drugstore (コンビニ) | north row, bay 7 | The island's one combined konbini, 100-yen shop and drugstore; its front is built, the door shut. Open late, a clerk at the till. | Door on the arcade | Enter | At the till: 袋いりますか, 温めますか, paying in 円. |
 | `bakery` | Bakery (パン屋) | north row, bay 10 | Front built, the door shut; its flyer is in Eric's mailbox. Trays and tongs, breads labelled in katakana. | Door on the arcade | Enter | Picking breads by their katakana labels: メロンパン, カレーパン. |
 | `bike_shop` | Bike shop (自転車屋) | north row, bay 2 | At the station end; front built, the door shut. Repairs, tyres and the company bikes' servicing; an old mechanic. | Door on the arcade | Enter | Saying what is wrong: パンク, ブレーキ, いくらですか. |
@@ -89,7 +89,7 @@ The shop rows have fifteen bays each, numbered 0 to 14 from the west (island-sou
 | `izakaya` | Izakaya (居酒屋) | `izakaya` | Three storeys at the shop street's east end, a red lantern by the door; front built, the door shut. Where people drink after work. | Door on the walk out of the arcade's east mouth | Enter | The menu on the wall and ordering: すみません, とりあえずビール, 乾杯. |
 | `ramen` | Ramen shop (ラーメン屋) | `ramen` | Across the dorm street from the izakaya: eight stools at a counter. | Door on the dorm street | Enter | The ticket machine, then how firm: かため, ふつう, やわらかめ. |
 | `promenade` | Seafront promenade (海辺の遊歩道) | `promenade` | Built in `shotengai`: walked from the alleys and the mouths' walks. Benches and lamps, people walking in the evening. | The station walk at the west end, the arcade walk at the east end, the three alleys | Outside | A fingerpost with places and minutes: 駅, 浜辺, 5分. |
-| `beach` | Beach (浜辺) | `beach` | Built in `shotengai` with three beach huts; reachable lower sand follows physical traversal, while the stairs retain their visible chains. | Three flights of stairs down from the promenade | Outside | The beach rules board: 遊泳, 禁止, the hours. |
+| `beach` | Beach (浜辺) | `beach` | Built in `shotengai` with three beach huts. The central stairs and a timber access mat toward the water are walkable; lower sand also follows physical traversal, while the three older stairs remain chained. | Direct central path from the fountain through the market and promenade | Outside | The beach rules board: 遊泳, 禁止, the hours. |
 
 ### East lane
 

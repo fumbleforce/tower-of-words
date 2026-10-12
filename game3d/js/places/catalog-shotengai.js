@@ -5,6 +5,7 @@ export const SHOTENGAI_DETAILS = {
     garden_bench_1: { label: 'Garden bench', kind: 'thing', verb: 'Sit' },
     garden_bench_2: { label: 'Garden bench', kind: 'thing', verb: 'Sit' },
     plaza_lane: { label: 'To the plaza', kind: 'thing', verb: 'Go' },
+    dorm_lane: { label: 'To the dorm street', kind: 'thing', verb: 'Go' },
     office_lane: { label: 'To head office', kind: 'thing', verb: 'Go' },
     bike_shop: { label: 'Bike shop', kind: 'thing', verb: 'Go in' },
     store: { label: 'Store window', kind: 'thing', verb: 'Look', pin: 'near' },
@@ -51,7 +52,7 @@ export const SHOTENGAI_DETAILS = {
     'shotengai_pine_bench',
   ], // docs/game/places.md, "Nooks"
   seats: ['garden_bench_1', 'garden_bench_2', 'party_seat', 'party_mori'],
-  zones: ['office_exit', 'plaza_exit'],
+  zones: ['office_exit', 'plaza_exit', 'dorm_exit'],
   people: ['station_worker', 'mori', 'kenji', 'kuroda', 'aoi', 'kuro', 'rei'],
   hooks: ['gardenWorker', 'partySetup', 'partyFood'],
 };

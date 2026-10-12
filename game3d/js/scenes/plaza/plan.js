@@ -15,6 +15,7 @@
 //   the lane verges: a kerbed bed with a low hedge along both sides of each lane, the zelkovas behind it
 //   the footpath along the shop street's backs, south of the lawn
 import * as LAYOUT from '../island-layout.js';
+import { MARKET_ROUTE as M } from '../market-route.js';
 
 const CHUNK = 'plaza';
 export const local = ([x, z]) => LAYOUT.toLocal(CHUNK, x, z);
@@ -68,7 +69,8 @@ export const TERRACE = [CANTEEN[0] + 2.6, CANTEEN[2] - 0.2, CANTEEN[3], CANTEEN[
 export const TERRACE_S = TERRACE[3];
 // the link from the terrace to the circle, on the door's axis
 export const LINK = [DOOR_X - HALF, DOOR_X + HALF, TERRACE_S, F[1] - Math.sqrt(R * R - HALF * HALF) + 1.0];
-export const LANE_RECTS = [LANE.w, LANE.e, LINK];
+export const MARKET = [F[0] - M.w / 2, F[0] + M.w / 2, F[1] + R - 1, local([M.x, M.seamZ + 1.6])[1]];
+export const LANE_RECTS = [LANE.w, LANE.e, LINK, MARKET];
 
 // the ring bed round the circle, outside its border: its width, and the arcs it runs over (radians from east
 // toward south). Openings: the lanes (east and west) and the link (north), each where its edges cross the circle.
@@ -80,9 +82,11 @@ export const OPEN = {
   east: [-side - GAP, side + GAP],
   west: [Math.PI - side - GAP, Math.PI + side + GAP],
   north: [north(LINK[0]) - GAP, north(LINK[1]) + GAP],
+  south: [Math.acos(M.w / 2 / R) - GAP, Math.acos(-M.w / 2 / R) + GAP],
 };
 export const ARCS = {
-  s: [OPEN.east[1], OPEN.west[0]],
+  se: [OPEN.east[1], OPEN.south[0]],
+  sw: [OPEN.south[1], OPEN.west[0]],
   nw: [OPEN.west[1], OPEN.north[0]],
   ne: [OPEN.north[1], OPEN.east[0] + 2 * Math.PI],
 };

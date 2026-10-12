@@ -28,11 +28,11 @@ const COSMOS = ['#d59aae', '#ece6e3', '#b86f8e', '#dcb3c6'];
 // (plaza/furniture.js), a pair in each quarter, with a lamp between each pair: north-west, north-east, then their
 // mirrors south-west and south-east; maples flank the link, cherries everywhere else.
 const PITCH = 22.5;
-const TREE_DEG = Array.from({ length: 16 }, (_, i) => i * PITCH).filter((d) => d % 90 !== 0 || d === 90);
+const TREE_DEG = Array.from({ length: 16 }, (_, i) => i * PITCH).filter((d) => d % 90 !== 0);
 export const BENCH_ANGLES = [202.5, 225, 315, 337.5, 157.5, 135, 45, 22.5].map(rad);
 export const RING_LAMPS = [213.75, 326.25, 146.25, 33.75].map(rad);
 // the lamp pair either side of the notice board, as far off the axis as the pair either side of the link
-export const SOUTH_PAIR = [-(P.HALF + 0.5), P.HALF + 0.5];
+export const SOUTH_PAIR = [-(P.MARKET[1] + 0.5), P.MARKET[1] + 0.5];
 const MAPLES = [247.5, 292.5];
 
 // cosmos: a low mound of leaves with small flowers dotted over its top
@@ -72,7 +72,7 @@ function ringArc(p, [a0, a1]) {
   arcBox(p, LEAF.mid, F, r1 - 0.6, r1 - 0.22, a0 + pad, a1 - pad, { y: 0.51, h: 0.04, cast: false, surf: null });
 }
 
-function* ring(p) {
+export function* ringSteps(p) {
   for (const arc of Object.values(ARCS)) {
     ringArc(p, arc);
     yield;
@@ -96,6 +96,8 @@ function* ring(p) {
   );
   for (let d = PITCH / 2; d < 180; d += PITCH)
     for (const k of [-1, 0, 1]) {
+      const angle = rad(d + k * 3.2);
+      if (angle > P.OPEN.south[0] && angle < P.OPEN.south[1]) continue;
       if (lampDeg.some((l) => Math.abs(d + k * 3.2 - l) < 2.6)) continue;
       const [x, z] = polar(rad(d + k * 3.2), R + 0.45);
       if (k === 0 && Math.round(d) % 2) grass(p, x, z, { seed: Math.round(d), h: 0.45 });
@@ -157,7 +159,7 @@ function* terraceEdges(p) {
 
 // a generator that yields every few trees and flowers, so the plaza builds in slices (js/perf/slice.js)
 export function* greenSteps(p) {
-  yield* ring(p);
+  yield* ringSteps(p);
   yield* verges(p);
   yield* terraceEdges(p);
   yield* groveSteps(p);

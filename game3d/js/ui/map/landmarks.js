@@ -1,5 +1,6 @@
 // Map geometry comes from the same roof groups and bay grid as the built street.
 // In particular, the south row's three alleys must never read as solid buildings.
+import { splitMarketSpan } from '../../scenes/market-route.js';
 import { BLOCKS } from '../../scenes/shop-roof-plan.js';
 import { BAYS, ROWS_Z } from '../../scenes/island-south.js';
 import { rectPts } from './shapes.js';
@@ -9,17 +10,22 @@ import { CXS, CZ, L, W } from '../../scenes/sports/court-plan.js';
 export function mapFootprints(buildings, footprint) {
   return buildings.flatMap((b) => {
     const row = b.id === 'shops_north' ? 'north' : b.id === 'shops_south' ? 'south' : null;
+    if (b.id === 'arcade')
+      return splitMarketSpan(b.rect[0], b.rect[2]).map(([a, c], i) => {
+        const rect = [a, b.rect[1], c, b.rect[3]];
+        return { ...b, id: `${b.id}_${i}`, rect, points: rectPts(rect) };
+      });
     if (!row) return [{ ...b, points: footprint(b) }];
     const z = row === 'north' ? ROWS_Z.north : ROWS_Z.south;
-    return BLOCKS[row].map(([a, last, roof], i) => {
+    return BLOCKS[row].flatMap(([a, last, roof], i) => {
       const rect = [BAYS.x0 + a * BAYS.w, z, BAYS.x0 + (last + 1) * BAYS.w, z + BAYS.w];
-      return {
+      return splitMarketSpan(rect[0], rect[2]).map(([a, c], j) => ({
         ...b,
-        id: `${b.id}_${i}`,
+        id: `${b.id}_${i}_${j}`,
         roofType: roof,
-        rect,
-        points: rectPts(rect),
-      };
+        rect: [a, rect[1], c, rect[3]],
+        points: rectPts([a, rect[1], c, rect[3]]),
+      }));
     });
   });
 }

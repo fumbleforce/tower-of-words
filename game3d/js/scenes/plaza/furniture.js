@@ -104,7 +104,7 @@ export function buildBenches(p, nav) {
 // posts under a small pitched hood, a pale cork panel with notices pinned on both faces
 const NOTES = ['#f1efe8', '#e6d9a8', '#c9dbe5', '#f1efe8', '#e8c8c8', '#d5e2c6'];
 export function buildNoticeBoard(p, nav) {
-  const [x, z] = polar(Math.PI / 2, SEAT_R + 0.2);
+  const [x, z] = [F[0] - 4.5, F[1] + 9.6];
   const W = 1.5,
     H = 0.9,
     Y = 0.75;
@@ -222,8 +222,8 @@ export function buildTerrace(root, nav) {
 // clear; one other bicycle is left on its stand by the north-east benches.
 export function buildBikes(root, nav) {
   for (const [bay, count] of [
-    [8, 3],
-    [9, 2],
+    [7, 3],
+    [10, 2],
   ]) {
     const row = bikeRow(count, { seed: 4 + bay });
     // Bay centers follow the same island grid as shopStreetSteps. The midpoint

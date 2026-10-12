@@ -806,6 +806,11 @@
           "kind": "thing",
           "verb": "Go"
         },
+        "dorm_lane": {
+          "label": "To the dorm street",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "office_lane": {
           "label": "To head office",
           "kind": "thing",
@@ -912,7 +917,8 @@
       ],
       "zones": [
         "office_exit",
-        "plaza_exit"
+        "plaza_exit",
+        "dorm_exit"
       ],
       "people": [
         "station_worker",

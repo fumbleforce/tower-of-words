@@ -12,17 +12,43 @@ import office from './office.js';
 import shotengai from './shotengai.js';
 import izakaya from './izakaya.js';
 import east_coast from './east_coast.js';
-export const STORIES = campusRoutes({ dorms, dorm_court, east_lane, plaza, canteen, forecourt, gate, train, office, shotengai, izakaya, east_coast });
+export const STORIES = campusRoutes({
+  dorms,
+  dorm_court,
+  east_lane,
+  plaza,
+  canteen,
+  forecourt,
+  gate,
+  train,
+  office,
+  shotengai,
+  izakaya,
+  east_coast,
+});
 export { WORDS, BASE, FORM_NAME, FORM_NOTE } from './words.js';
 export const OPEN_PLACES = Object.keys(STORIES);
 // Same small area throughout day 2. Period changes never take away the route back to room 203.
 export const PERIODS = ['morning', 'evening'];
 export const TRIPS = {
- campus:['forecourt','office_quarter','harbour','print_shop'],print_shop:['campus'],office_quarter:['campus','harbour'],harbour:['campus','office_quarter','ferry_terminal'],ferry_terminal:['harbour'],
-  dorms: ['dorm_court'], dorm_court: ['dorms', 'east_lane'],
-  east_lane: ['plaza', 'shotengai', 'dorm_court', 'east_coast'], east_coast: ['east_lane'],
-  canteen: ['plaza'], clinic: ['plaza'], plaza: ['forecourt', 'east_lane', 'shotengai', 'canteen', 'clinic'], forecourt: ['gate', 'office', 'plaza', 'shotengai', 'campus'],
-  gate: ['train', 'forecourt'], train: ['gate'], office: ['forecourt'], shotengai: ['east_lane', 'forecourt', 'izakaya'], izakaya: ['shotengai'],
+  campus: ['forecourt', 'office_quarter', 'harbour', 'print_shop'],
+  print_shop: ['campus'],
+  office_quarter: ['campus', 'harbour'],
+  harbour: ['campus', 'office_quarter', 'ferry_terminal'],
+  ferry_terminal: ['harbour'],
+  dorms: ['dorm_court'],
+  dorm_court: ['dorms', 'east_lane'],
+  east_lane: ['plaza', 'shotengai', 'dorm_court', 'east_coast'],
+  east_coast: ['east_lane'],
+  canteen: ['plaza'],
+  clinic: ['plaza'],
+  plaza: ['forecourt', 'east_lane', 'shotengai', 'canteen', 'clinic'],
+  forecourt: ['gate', 'office', 'plaza', 'shotengai', 'campus'],
+  gate: ['train', 'forecourt'],
+  train: ['gate'],
+  office: ['forecourt'],
+  shotengai: ['east_lane', 'forecourt', 'izakaya', 'plaza'],
+  izakaya: ['shotengai'],
 };
 // These are explicit requests, not engine registrations. The draft checker treats undeclared ids as errors.
 export const NEEDS = {
@@ -34,10 +60,12 @@ export const NEEDS = {
   office: { hooks: ['officeDay2'] },
   shotengai: { people: ['kenji'], things: ['kenji'], hooks: ['partySetup'] },
   izakaya: {
-    people: ['mio', 'mori', 'kenji', 'emi'], things: ['mio', 'mori', 'kenji', 'emi', 'party_seat', 'izakaya_exit'],
+    people: ['mio', 'mori', 'kenji', 'emi'],
+    things: ['mio', 'mori', 'kenji', 'emi', 'party_seat', 'izakaya_exit'],
     spots: ['party_group', 'party_food', 'party_mio', 'party_kenji', 'party_emi', 'service_counter'],
     seats: ['party_seat', 'party_mori', 'party_mio', 'party_kenji', 'party_emi'],
-    hooks: ['partySetup', 'partyFood'], zones: ['izakaya_exit'],
+    hooks: ['partySetup', 'partyFood'],
+    zones: ['izakaya_exit'],
   },
   east_coast: { people: ['kuroda'], things: ['lookout', 'kuroda'], spots: ['lookout_view'], hooks: ['coastVisit'] },
 };

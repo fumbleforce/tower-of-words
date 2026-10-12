@@ -1,7 +1,6 @@
 // The shop street and the seafront (shotengai), the first district of the island's south half built to walk
 // (docs/game/island.md, "Shop street and seafront"; Jørgen's pick on Review island-half-1). The chunk is turned so
-// its camera looks west down the arcade from its east mouth, where Eric comes in from the plaza along the dorm
-// street. What is where: shotengai/plan.js. Built on the shared kit, the same builders the plaza and the forecourt
+// its overview looks west along the arcade, then turns south with the direct fountain-to-beach crossing. What is where: shotengai/plan.js. Built on the shared kit, the same builders the plaza and the forecourt
 // use for this street as backdrop: the two shop rows and the arcade (plaza-buildings.js shopStreet, its named
 // shops' signs from island-south.js SHOPS), the promenade, the sea wall and the beach (outdoor/seafront.js), the
 // izakaya and the ramen shop (plaza/east-fronts.js), the town around from the layout (skyline.js). Its own ground
@@ -9,6 +8,7 @@
 // shotengai/street.js. The arcade's glass roof fades while Eric walks under it (scenes/occluders.js, through the
 // place). Evening: the shops' glass and signs, the lanterns and the promenade's lamps light up.
 import * as THREE from 'three';
+import { MARKET_ROUTE as M } from './market-route.js';
 import { Nav } from '../movement/navigation.js';
 import { TOWN, groundPatches } from './town.js';
 import { lightRig } from '../kit/light/rig.js';
@@ -28,6 +28,7 @@ import { coastLand } from './island-west.js';
 import { signSet } from './shop-signs.js';
 import { BAYS, SHOPS, WALL_Z } from './island-south.js';
 import { streetSteps } from './shotengai/street.js';
+import { plazaContextSteps } from './shotengai/plaza-context.js';
 import * as P from './shotengai/plan.js';
 import { buildNooks } from './outdoor/nooks.js';
 import { shopDoor } from './plaza/east-shops.js';
@@ -57,7 +58,7 @@ export function* shotengaiSteps() {
   // furniture or what stands in front of the shops
   const [wx0, wx1, wz0, wz1] = LAYOUT.CHUNKS[CHUNK].walk;
   const nav = new Nav(
-    Math.min(wx0, GARDEN_BOUNDS[0]),
+    Math.min(wx0, GARDEN_BOUNDS[0], rect(P.BEACH_WALK)[0] - 0.3),
     Math.max(wx1, GARDEN_BOUNDS[1]),
     Math.min(wz0, GARDEN_BOUNDS[2]),
     wz1 + 2.1,
@@ -78,6 +79,7 @@ export function* shotengaiSteps() {
   const pf = new THREE.Group();
   pf.position.set(LAYOUT.CHUNKS.plaza.at[0], 0, LAYOUT.CHUNKS.plaza.at[1]);
   isl.add(pf);
+  const plazaContext = yield* plazaContextSteps(pf);
   // lawn under the district, down to the sea wall; the skyline's ground lies under it
   groundPatches(isl, [[-24, 84, 6, WALL_Z, TOWN.grass]]);
   yield;
@@ -140,6 +142,7 @@ export function* shotengaiSteps() {
   yield* nav.buildSteps();
   // what lights up after dark
   light.glow.add(
+    plazaContext.glows,
     bands.glows,
     nooks.glows,
     lit.glows,
@@ -154,6 +157,7 @@ export function* shotengaiSteps() {
   const edgeZ = local(P.EDGE)[1];
   const alleys = P.ALLEYS.map(rect);
   return {
+    update: plazaContext.update,
     garden,
     nooks: nooks.spots,
     root,
@@ -172,8 +176,12 @@ export function* shotengaiSteps() {
     edge: local(P.EDGE), // on the dorm street, where he comes in and goes out
     in: local(P.IN), // on the shop walk, the arcade ahead
     exitZ: local([P.EXIT_X, 0])[1],
+    plazaExit: (x, z) => x > local([M.x, M.seamZ + 0.8])[0] && Math.abs(z - local(P.EDGE)[1]) < M.w / 2,
     edgeZ,
-    face: Math.PI, // walking in: west, local north
+    face: -Math.PI / 2, // walking in: island south, local west
+    dormEdge: local(P.DORM_EDGE),
+    dormIn: local(P.DORM_IN),
+    groundHeight: (x) => -0.15 * THREE.MathUtils.clamp((local([0, WALL_Z])[0] - x) / 3.2, 0, 1),
     doors: P.DOORS.map((d) => ({ ...d, local: local(d.at), step: local([d.at[0], d.at[1] + d.out * 0.85]) })),
     camera: { elev: 40, fov: 24 }, // a little lower than the plaza's, to see the shopfronts under the awnings
     // the door cards for the day and the time (shop-signs.js WHEN)

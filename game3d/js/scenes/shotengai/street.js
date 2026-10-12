@@ -14,6 +14,7 @@ import { lamps, bench, bins, STEEL } from '../outdoor/furniture.js';
 import { cluster, LEAF } from '../outdoor/planting.js';
 import { bikeRow } from '../forecourt/details.js';
 import * as S from '../island-south.js';
+import { MARKET_ROUTE as M, splitMarketSpan } from '../market-route.js';
 import * as P from './plan.js';
 import { crane } from './wares.js';
 import { displayKeep } from './shopfront-plan.js';
@@ -33,28 +34,32 @@ function* floor(group) {
   const pv = paver(),
     [x0, z0, x1, z1] = ARCADE,
     zc = (z0 + z1) / 2;
-  pv.field([x0, x1, z0, zc - SPINE / 2], {
-    pattern: 'grid',
-    module: [0.6, 0.6],
-    tones: GRANITE.pale,
-    origin: [x0, z0],
-  });
-  pv.field([x0, x1, zc + SPINE / 2, z1], {
-    pattern: 'grid',
-    module: [0.6, 0.6],
-    tones: GRANITE.pale,
-    origin: [x0, z0],
-  });
-  pv.field([x0, x1, zc - SPINE / 2, zc + SPINE / 2], {
-    pattern: 'bondZ',
-    module: [0.5, 0.25],
-    tones: GRANITE.mid,
-    vary: 0.015,
-    origin: [x0, zc],
-  });
+  for (const [a, b] of splitMarketSpan(x0, x1)) {
+    pv.field([a, b, z0, zc - SPINE / 2], {
+      pattern: 'grid',
+      module: [0.6, 0.6],
+      tones: GRANITE.pale,
+      origin: [x0, z0],
+    });
+    pv.field([a, b, zc + SPINE / 2, z1], {
+      pattern: 'grid',
+      module: [0.6, 0.6],
+      tones: GRANITE.pale,
+      origin: [x0, z0],
+    });
+    pv.field([a, b, zc - SPINE / 2, zc + SPINE / 2], {
+      pattern: 'bondZ',
+      module: [0.5, 0.25],
+      tones: GRANITE.mid,
+      vary: 0.015,
+      origin: [x0, zc],
+    });
+  }
+  laneField(pv, [M.x0, M.x1, M.seamZ - 1.6, S.ROWS_Z.back], { along: 'z', origin: [M.x0, M.northZ] });
   // (2 mm over the seafront's dark course, 0.007, where their ends run onto it)
   for (let x = ROW_W; x <= ROW_E + 0.01; x += BAYS.w)
-    pv.field([x - 0.08, x + 0.08, z0, z1], { pattern: 'grid', module: [0.16, 0.3], tones: GRANITE.dark, h: 0.009 });
+    if (x < M.x0 || x > M.x1)
+      pv.field([x - 0.08, x + 0.08, z0, z1], { pattern: 'grid', module: [0.16, 0.3], tones: GRANITE.dark, h: 0.009 });
   yield;
   const [w0, wz0, w1, wz1] = SHOP_WALK;
   pv.field([w0, w1, wz0, wz1], { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid, origin: [w0, wz0] });
@@ -148,6 +153,7 @@ export function* streetSteps(group, p, lights, signs) {
       ['north', ROWS_Z.arcade + 0.3],
       ['south', ROWS_Z.south - 0.3],
     ]) {
+      if (Math.abs(ROW_W + BAYS.w * i - M.x) < M.w / 2 + 0.4) continue;
       if (named.has(row + i) || named.has(row + (i - 1)) || (row === 'south' && S.BAYS.alleys.includes(i))) continue;
       const x = ROW_W + BAYS.w * i;
       p.box('#8f9196', 0.6, 0.4, 0.4, x, 0, z);

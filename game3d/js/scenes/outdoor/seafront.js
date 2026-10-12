@@ -244,6 +244,19 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
     for (const x of [x0 + 0.1, x1 - 0.1]) p.box(STONE.cheek, 0.22, 0.25, z1 - z0, x, -0.05, (z0 + z1) / 2);
     p.box(STONE.tread, x1 - x0 + 0.6, 0.03, 1.2, cx, -0.15, z1 + 0.6, { cast: false }); // a landing on the sand
   }
+  // A fitted timber access mat carries the central stair onto the dry sand.
+  // Its visible edges match the walk grid, leaving the wet shore beyond it.
+  const entry = S.BEACH_ENTRY,
+    matEnd = 42.2,
+    matWidth = 2.7;
+  for (let z = entry[3]; z < matEnd; z += 0.28) {
+    const [x, zz] = at((entry[0] + entry[2]) / 2, z + 0.13);
+    p.box('#a4a297', matWidth, 0.035, 0.255, x, -0.15, zz, { cast: false, surf: 'wood' });
+  }
+  for (const side of [-1, 1]) {
+    const [x, z] = at((entry[0] + entry[2]) / 2 + side * (matWidth / 2 - 0.04), (entry[3] + matEnd) / 2);
+    p.box('#7c837e', 0.08, 0.045, matEnd - entry[3], x, -0.15, z, { cast: false, surf: 'wood' });
+  }
   yield;
   // the lookout at the promenade's east end, over the rocks: a rail on its seaward sides
   rail(p, at(BEACH_E, WALL_Z - 0.25), at(P[2] - 0.15, WALL_Z - 0.25));
@@ -274,6 +287,8 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
   // outcrops at the wall's foot between the flights; a lifeguard's chair and three beach huts
   yield* beachThings(p, at);
   const shore = S.SHORELINE.map(([x, z]) => at(x, z));
+  const [routeX, routeStart] = at((entry[0] + entry[2]) / 2, entry[1]),
+    routeEnd = at(0, matEnd + 0.5)[1];
   for (let i = 0; i + 1 < shore.length; i++) {
     const a = shore[i],
       b = shore[i + 1],
@@ -300,6 +315,7 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
         const a = (j / k) * 6.3 + hash2(j, u, 79),
           [rx, rz] = Q(u + Math.cos(a) * 0.4 * Math.sqrt(j), off + Math.sin(a) * 0.35 * Math.sqrt(j));
         const r = (j ? 0.32 : 0.6) * (0.7 + hash2(rx, rz, 81) * 0.6);
+        if (Math.abs(rx - routeX) < matWidth / 2 + r + 0.3 && rz > routeStart && rz < routeEnd) continue;
         boulder(p, rx, rz, r, -0.2);
         if (off > 0)
           p.geo(SURF, new THREE.CylinderGeometry(r * 1.35, r * 1.35, 0.02, 9).translate(rx, -0.18, rz), FOAM);

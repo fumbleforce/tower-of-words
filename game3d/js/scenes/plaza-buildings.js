@@ -15,6 +15,7 @@ import { shopWindow, shopShell } from './shotengai/facades.js';
 import { rearFacade } from './shotengai/rear-facades.js';
 import { FRONT_IDS, displayCenters } from './shotengai/shopfront-plan.js';
 import { recessedShopWall, shopfront } from './shotengai/shopfronts.js';
+import { MARKET_ROUTE as M, splitMarketSpan } from './market-route.js';
 
 // parts merged into one mesh of one material (the parts are disposed)
 export function merged(parts, material, { cast = true } = {}) {
@@ -193,7 +194,8 @@ export function* shopStreetSteps(
     fittings = new Parts();
   const AWN = ['#6e7f8c', '#7d7a8c', '#6f8474'];
   const bayW = bays.w,
-    uOf = (i) => bays.u0 + bayW * i; // a bay's west side
+    uOf = (i) => bays.u0 + bayW * i;
+  const split = (u0, u1) => splitMarketSpan(a[0] + u0, a[0] + u1).map(([x0, x1]) => [x0 - a[0], x1 - a[0]]); // a bay's west side
   const rows = {
     north: { v0: 0, front: depth, back: 0, dirF: 1 }, // its front (+z) faces the arcade
     south: { v0: depth * 2, front: depth * 2, back: depth * 3, dirF: -1 }, // its front (-z) faces the arcade
@@ -206,90 +208,101 @@ export function* shopStreetSteps(
   let uMin = Infinity,
     uMax = -Infinity;
   for (const [name, row] of Object.entries(rows))
-    for (const [bi, [i0, i1, kind, dh]] of BLOCKS[name].entries()) {
-      const ua = uOf(i0),
-        ub = uOf(i1 + 1);
-      if (ub <= from || ua >= to) continue;
-      uMin = Math.min(uMin, ua);
-      uMax = Math.max(uMax, ub);
-      const ri = name === 'north' ? 0 : 1,
-        storeys = dh > 1 ? 3 : 2, // an extra height over a storey's is a third storey
-        h = storeys === 3 ? storeyH * 3 : H + dh,
-        vc = row.v0 + depth / 2,
-        f = row.front + row.dirF * 0.03,
-        b = row.back - row.dirF * 0.03;
-      const fronts = shops.filter((s) => s.row === name && FRONT_IDS.includes(s.id) && s.door >= i0 && s.door <= i1);
-      walls[(bi * 3 + ri) % 4].push(
-        ...recessedShopWall(box, {
+    for (const [bi, [i0, i1, kind, dh]] of BLOCKS[name].entries())
+      for (const [ua, ub] of split(uOf(i0), uOf(i1 + 1))) {
+        if (ub <= from || ua >= to) continue;
+        uMin = Math.min(uMin, ua);
+        uMax = Math.max(uMax, ub);
+        const ri = name === 'north' ? 0 : 1,
+          storeys = dh > 1 ? 3 : 2, // an extra height over a storey's is a third storey
+          h = storeys === 3 ? storeyH * 3 : H + dh,
+          vc = row.v0 + depth / 2,
+          f = row.front + row.dirF * 0.03,
+          b = row.back - row.dirF * 0.03;
+        const fronts = shops.filter((s) => s.row === name && FRONT_IDS.includes(s.id) && s.door >= i0 && s.door <= i1);
+        walls[(bi * 3 + ri) % 4].push(
+          ...recessedShopWall(box, {
+            ua,
+            ub,
+            h,
+            depth,
+            v0: row.v0,
+            n: row.dirF,
+            centers: fronts.flatMap((s) => displayCenters(uOf(s.door) + bayW / 2)),
+          }),
+        );
+        shopShell(fittings, {
           ua,
           ub,
-          h,
-          depth,
           v0: row.v0,
+          depth,
+          h,
+          floorH: storeyH,
+          front: f,
+          back: b,
           n: row.dirF,
-          centers: fronts.flatMap((s) => displayCenters(uOf(s.door) + bayW / 2)),
-        }),
-      );
-      shopShell(fittings, {
-        ua,
-        ub,
-        v0: row.v0,
-        depth,
-        h,
-        floorH: storeyH,
-        front: f,
-        back: b,
-        n: row.dirF,
-      });
-      trims.push(box(ub - ua - 0.06, 0.22, 0.12, (ua + ub) / 2, H - 0.02, row.front + row.dirF * 0.02));
-      roof(ri ? far : top, kind, ua + 0.03, ub - 0.03, row.v0, row.v0 + depth, h, bi * 7 + ri, ri ? 1 : -1);
-      for (let i = i0; i <= i1; i++) {
-        const u = uOf(i) + bayW / 2;
-        // ground floor: a shopfront or a shutter; an awning; upper-floor windows
-        const front = fronts.find((s) => s.door === i);
-        if (front) shopfront(fittings, front.id, u, row.front, row.dirF);
-        else if ((i + ri) % 5 === 3 && !named.has(name + i))
-          shutters.push(box(bayW - 0.9, storeyH * 0.76, 0.05, u, 0.05, f));
-        else panes.push(box(bayW - 0.9, storeyH * 0.72, 0.05, u, 0.12, f));
-        // the named shops' door bays have no awning, so the door shows from the street
-        if (!doors.has(name + i))
-          awnings[(i + ri) % 3].push(
-            new THREE.BoxGeometry(bayW - 0.5, 0.05, 0.8)
-              .rotateX(row.dirF * 0.35)
-              .translate(u, storeyH * 0.9, row.front + row.dirF * 0.4),
-          );
-        for (let s = 1; s < storeys; s++)
-          for (const o of [-1, 1]) {
-            const wy = storeyH * (s + 0.28);
-            panes.push(box(1.2, storeyH * 0.45, 0.05, u + o * 1.05, wy, f));
-            shopWindow(fittings, u + o * 1.05, wy, f, 1.2, storeyH * 0.45, {
-              n: row.dirF,
-            });
+        });
+        trims.push(box(ub - ua - 0.06, 0.22, 0.12, (ua + ub) / 2, H - 0.02, row.front + row.dirF * 0.02));
+        roof(ri ? far : top, kind, ua + 0.03, ub - 0.03, row.v0, row.v0 + depth, h, bi * 7 + ri, ri ? 1 : -1);
+        for (let i = i0; i <= i1; i++) {
+          const start = Math.max(ua, uOf(i)),
+            end = Math.min(ub, uOf(i + 1));
+          if (end - start < 0.5) continue;
+          const u = (start + end) / 2,
+            width = end - start,
+            offset = Math.min(1.05, width * 0.24),
+            windowW = Math.min(1.2, width * 0.28);
+          // ground floor: a shopfront or a shutter; an awning; upper-floor windows
+          const front = fronts.find((s) => s.door === i);
+          if (front) shopfront(fittings, front.id, u, row.front, row.dirF);
+          else if ((i + ri) % 5 === 3 && !named.has(name + i))
+            shutters.push(box(width - 0.9, storeyH * 0.76, 0.05, u, 0.05, f));
+          else panes.push(box(width - 0.9, storeyH * 0.72, 0.05, u, 0.12, f));
+          // the named shops' door bays have no awning, so the door shows from the street
+          if (!doors.has(name + i))
+            awnings[(i + ri) % 3].push(
+              new THREE.BoxGeometry(width - 0.5, 0.05, 0.8)
+                .rotateX(row.dirF * 0.35)
+                .translate(u, storeyH * 0.9, row.front + row.dirF * 0.4),
+            );
+          for (let s = 1; s < storeys; s++)
+            for (const o of [-1, 1]) {
+              const wy = storeyH * (s + 0.28);
+              panes.push(box(windowW, storeyH * 0.45, 0.05, u + o * offset, wy, f));
+              shopWindow(fittings, u + o * offset, wy, f, windowW, storeyH * 0.45, {
+                n: row.dirF,
+              });
+            }
+          if (width > bayW - 0.1)
+            rearFacade(fittings, panes, box, { u, back: b, n: -row.dirF, floorH: storeyH, storeys, bay: i });
+          else {
+            panes.push(box(width - 0.7, 0.85, 0.05, u, storeyH + 0.5, b));
+            shopWindow(fittings, u, storeyH + 0.5, b, width - 0.7, 0.85, { n: -row.dirF });
           }
-        rearFacade(fittings, panes, box, { u, back: b, n: -row.dirF, floorH: storeyH, storeys, bay: i });
+        }
+        // the rows' end walls, seen from the walks past them: a window either side on every floor
+        for (const [end, ue] of [
+          [i0 === 0 || Math.abs(a[0] + ua - M.x1) < 0.01, ua - 0.03],
+          [i1 === bays.n - 1 || Math.abs(a[0] + ub - M.x0) < 0.01, ub + 0.03],
+        ])
+          for (let s = 0; end && s < storeys; s++)
+            for (const o of [-1.1, 1.1]) {
+              const wy = storeyH * (s + (s ? 0.3 : 0.36));
+              panes.push(box(0.05, storeyH * 0.42, 1.0, ue, wy, vc + o));
+              shopWindow(fittings, ue, wy, vc + o, 1, storeyH * 0.42, {
+                side: true,
+                n: ue < ua ? -1 : 1,
+              });
+            }
+        yield;
       }
-      // the rows' end walls, seen from the walks past them: a window either side on every floor
-      for (const [end, ue] of [
-        [i0 === 0, ua - 0.03],
-        [i1 === bays.n - 1, ub + 0.03],
-      ])
-        for (let s = 0; end && s < storeys; s++)
-          for (const o of [-1.1, 1.1]) {
-            const wy = storeyH * (s + (s ? 0.3 : 0.36));
-            panes.push(box(0.05, storeyH * 0.42, 1.0, ue, wy, vc + o));
-            shopWindow(fittings, ue, wy, vc + o, 1, storeyH * 0.42, {
-              side: true,
-              n: ue < ua ? -1 : 1,
-            });
-          }
-      yield;
-    }
   // the arcade's glass roof over the walk between the rows, on thin posts
-  arcadeRoof(arc, uMin, uMax, depth, depth * 2, H + 0.1, far);
+  for (const [u0, u1] of split(uMin, uMax)) arcadeRoof(arc, u0, u1, depth, depth * 2, H + 0.1, far);
   yield;
   const posts = [];
   for (let u = uMin + 1; u < uMax; u += bayW)
-    for (const v of [depth + 0.35, depth * 2 - 0.35]) posts.push(box(0.1, H + 0.1, 0.1, u, 0, v));
+    if (a[0] + u < M.x0 - 0.15 || a[0] + u > M.x1 + 0.15)
+      for (const v of [depth + 0.35, depth * 2 - 0.35]) posts.push(box(0.1, H + 0.1, 0.1, u, 0, v));
   walls.forEach((parts, k) => {
     if (!parts.length) return;
     const mesh = merged(parts, mat(TOWN.walls[k]));

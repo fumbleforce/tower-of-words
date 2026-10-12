@@ -46,6 +46,7 @@ import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
 import { seafrontSteps } from './outdoor/seafront.js';
 import { BAYS, SHOPS as NAMED_SHOPS } from './island-south.js';
 import { coastLand } from './island-west.js';
+import { MARKET_ROUTE as M } from './market-route.js';
 import { MAP_LAYER } from '../map/render.js';
 
 const { F, R, BASIN, LZ, HALF, LINK, CANTEEN, SHOPS, DOOR_X, TERRACE, TERRACE_S, building, onLane, inRect } = P;
@@ -61,11 +62,9 @@ const CROSS_N = [CROSS[0], CROSS[1], CLINIC.rect[3], LZ]; // the cross walk from
 // and down from the lane to the south walk, which leads east to the dorm street and on to the shop street
 // (scenes/shotengai.js): he walks onto the south walk's first stretch, past which he is on his way there
 const CROSS_S = [CROSS[0], CROSS[1], LZ, SOUTH_WALK[3]];
-const SHOP_START = [CROSS[0], CROSS[1] + 3.8, SOUTH_WALK[2], SOUTH_WALK[3]]; // on past shopEdge, where the walk out ends
-const SW_Z = (SOUTH_WALK[2] + SOUTH_WALK[3]) / 2;
 const WEST_X = F[0] - R - 2.5, // on the lane west of the circle: walking on past it goes back to the forecourt
   EAST_X = CROSS[1] + 1.4; // and on the lane east of the cross walk, on toward the dorms
-const NAV = [WEST_X - 3.4, EAST_X + 3.4, CANTEEN[3] + 0.3, F[1] + R + 0.2];
+const NAV = [WEST_X - 3.4, EAST_X + 3.4, CANTEEN[3] + 0.3, P.MARKET[3] + 0.2];
 
 // buildPlaza() builds it at once; plazaSteps() yields between parts, for building in slices (js/perf/slice.js)
 export const buildPlaza = () => drain(plazaSteps());
@@ -96,7 +95,6 @@ export function* plazaSteps() {
       inRect(x, z, link, 0.25) ||
       inRect(x, z, CROSS_N, 0.25) ||
       inRect(x, z, CROSS_S, 0.25) ||
-      inRect(x, z, SHOP_START, 0.25) ||
       NOOK_WALKS.some((r) => inRect(x, z, r))
     );
   };
@@ -194,10 +192,11 @@ export function* plazaSteps() {
     dormEdge: lanePoint(EAST_X + 2.2),
     // the south walk east of the cross walk's foot, on the way to the shop street: where he starts down it, and
     // where the walk out ends (the same, walking in); past shopX he is leaving
-    shopWalk: [CROSS[1] + 0.9, SW_Z],
-    shopEdge: [CROSS[1] + 3.2, SW_Z],
-    shopX: CROSS[1] + 1.6,
-    swZ: SOUTH_WALK[2] - 0.3,
+    shopWalk: P.local([M.x, M.seamZ - 1.6]),
+    shopEdge: P.local([M.x, M.seamZ]),
+    shopX: P.F[0],
+    swZ: P.local([M.x, M.seamZ - 0.8])[1],
+    shopHalf: M.w / 2,
     westX: WEST_X,
     eastX: EAST_X,
     laneZ,
