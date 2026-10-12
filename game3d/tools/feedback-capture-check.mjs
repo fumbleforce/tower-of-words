@@ -37,10 +37,25 @@ await withBrowserJob(`feedback-capture-${width}`, async browser => {
       setSetting('frameCap', cap);
       globalThis.window.__game.paused = paused;
     }, { cap, paused });
+    await page.locator('#minimap').waitFor({ state: 'visible' });
+    const minimap = await page.locator('#minimap canvas').evaluate(canvas => {
+      const r = canvas.getBoundingClientRect(), { data } = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+      const samples = [];
+      // Top half of the actual map canvas, away from its north label and lower Map badge.
+      for (let y = .2; y <= .5; y += .1) for (let x = .25; x <= .75; x += .1) {
+        const i = (Math.floor(y * canvas.height) * canvas.width + Math.floor(x * canvas.width)) * 4;
+        samples.push({ x: r.left + x * r.width, y: r.top + y * r.height, rgb: [...data.slice(i, i + 3)] });
+      }
+      return samples;
+    });
+    const previousShot = await page.evaluate(() => globalThis.document.querySelector('.fb-shot img')?.src || '');
     await page.keyboard.press('F8');
     await page.locator('#feedback:not([hidden])').waitFor();
-    await page.waitForFunction(() => globalThis.document.querySelector('.fb-shot img')?.naturalWidth > 0);
-    const result = await page.locator('.fb-shot img').evaluate(async img => {
+    await page.waitForFunction(previous => {
+      const img = globalThis.document.querySelector('.fb-shot img');
+      return img?.src !== previous && img?.complete && img?.naturalWidth > 0;
+    }, previousShot);
+    const result = await page.locator('.fb-shot img').evaluate(async (img, minimap) => {
       const cv = globalThis.document.createElement('canvas');
       cv.width = img.naturalWidth; cv.height = img.naturalHeight;
       const ctx = cv.getContext('2d'); ctx.drawImage(img, 0, 0);
@@ -62,14 +77,19 @@ await withBrowserJob(`feedback-capture-${width}`, async browser => {
           const i = (y * cv.width + x) * 4;
           if (pixels[i] > 150 && pixels[i+1] > 150 && pixels[i+2] > 150) hudLight++;
         }
+      const mapMatches = minimap.filter(sample => {
+        const i = (Math.floor(sample.y * scale) * cv.width + Math.floor(sample.x * scale)) * 4;
+        return sample.rgb.every((v, j) => Math.abs(v - pixels[i+j]) < 18);
+      }).length / minimap.length;
       const bytes = Array.from(new Uint8Array(await (await fetch(img.src)).arrayBuffer()));
-      return { colors: colors.size, bright: bright / count, hudLight, bytes };
-    });
+      return { colors: colors.size, bright: bright / count, hudLight, mapMatches, bytes };
+    }, minimap);
     fs.writeFileSync(`${out}/${key}-attachment.png`, Buffer.from(result.bytes));
     delete result.bytes; reports.push({ key, ...result });
     console.log(key, result);
     assert(result.colors > 100 && result.bright > .15, 'attachment contains rendered world pixels');
     assert(result.hudLight > 15, 'attachment contains HUD icon pixels');
+    assert(result.mapMatches > .75, 'attachment preserves the actual minimap canvas');
     await page.screenshot({ path: `${out}/${key}-feedback.png` });
     await page.keyboard.press('Escape');
     assert.equal(await page.evaluate(() => !!globalThis.window.__game.paused), paused, 'prior pause state restored');

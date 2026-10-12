@@ -7,35 +7,32 @@
 // capture(skip) resolves to { blob, w, h } (a PNG) or null; `skip` is an element left out (the window itself).
 const $ = (s, r = document) => r.querySelector(s);
 let layer = null;
-export function capture(skip = null) {
+export async function capture(skip = null) {
   layer = skip;
-  return new Promise((res) =>
-    setTimeout(() =>
-      requestAnimationFrame(async () => {
-        try {
-          const k = Math.min(devicePixelRatio || 1, 2);
-          const cv = document.createElement('canvas');
-          cv.width = Math.round(innerWidth * k);
-          cv.height = Math.round(innerHeight * k);
-          const x = cv.getContext('2d');
-          x.fillStyle = getComputedStyle(document.body).backgroundColor;
-          x.fillRect(0, 0, cv.width, cv.height);
-          window.__game?.view?.render(); // draw even when paused or covered by the map; never advance time
-          const c = $('#c');
-          if (c && c.width) {
-            const r = c.getBoundingClientRect();
-            x.drawImage(c, r.left * k, r.top * k, r.width * k, r.height * k);
-          }
-          const ops = collect();
-          await paint(x, ops, k);
-          cv.toBlob((blob) => res(blob ? { blob, w: cv.width, h: cv.height } : null), 'image/png');
-        } catch (err) {
-          console.warn('feedback: screenshot failed', err);
-          res(null);
-        }
-      }),
-    ),
-  );
+  try {
+    const k = Math.min(devicePixelRatio || 1, 2);
+    const cv = document.createElement('canvas');
+    cv.width = Math.round(innerWidth * k);
+    cv.height = Math.round(innerHeight * k);
+    const x = cv.getContext('2d');
+    x.fillStyle = getComputedStyle(document.body).backgroundColor;
+    x.fillRect(0, 0, cv.width, cv.height);
+    window.__game?.view?.render(); // draw even when paused or covered by the map; never advance time
+    const c = $('#c');
+    if (c && c.width) {
+      const r = c.getBoundingClientRect();
+      x.drawImage(c, r.left * k, r.top * k, r.width * k, r.height * k);
+    }
+    // Snapshot the HUD before yielding: its animation loops may hide controls after feedback pauses play.
+    const ops = collect();
+    await paint(x, ops, k);
+    return await new Promise((res) =>
+      cv.toBlob((blob) => res(blob ? { blob, w: cv.width, h: cv.height } : null), 'image/png'),
+    );
+  } catch (err) {
+    console.warn('feedback: screenshot failed', err);
+    return null;
+  }
 }
 
 const alphaOf = (c) => {
