@@ -201,6 +201,7 @@ The fountain plaza's board (places.md, `noticeboard`) is the one place to find w
 - Reading it holds its posts up close: from day 3 first the club posters and single events, then the neighbours' notes (game3d/story/finds.js), six at most. A story's `talk:noticeboard` node runs first and opens the board itself (`noticeboard`), so there is one board at a time; without one the board opens straight away.
 - A club poster shows the club's name in Japanese with its reading and the English, 募集 (boshū, members wanted), 日時 (nichiji, when) with the next meeting and the weekday's kanji beside the English (土曜日 Saturday 3 Oct, evening), 場所 (basho, where), one line, and a slip: 入会 (nyūkai) Take a slip. The labels carry their reading and English; they are poster labels, not taught words. Later meetings replace dates that have passed.
 - A single event's poster has its name, 日時, 場所 and a line, and no slip. It stays up until its day has passed.
+- The board and its slips receive pointer input above the scene’s wait layer, including while its story is waiting for it to close. Escape or a tap outside a slip closes the board and releases that scene.
 - Tapping a slip joins the club: the slip is stamped Joined and a notice says "Joined the Swimming club · Saturday 3 Oct, evening, Outdoor pool".
 - Taught on the board: while Eric is in no club, the line under it reads "Take a slip to join a club. Your clubs are listed under People. Tap anywhere else to close."
 - Code: game3d/js/clubs/index.js (the posts and joining), ui/finds-view.js (the board up close), css/clubs.css.

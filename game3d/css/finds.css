@@ -17,6 +17,10 @@
 #photosPanel .paper-row { display: block; width: 100%; text-align: left; margin: 0 0 10px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--panel-edge); background: #252a33; cursor: pointer; }
 #photosPanel .paper-row:hover { border-color: rgba(111, 208, 198, .45); }
 
+/* Awaited finds and notices must receive input above the busy scene click-catcher. */
+#photosPanel, #findView, #boardView { z-index: 4; }
+body:has(#boardView:not([hidden])) #toast { z-index: 5; }
+
 /* the close looks: tap anywhere to close */
 .panel.look { background: rgba(10, 12, 16, .72); cursor: pointer; }
 .panel.look.in > * { animation: find-in .28s ease-out; }
