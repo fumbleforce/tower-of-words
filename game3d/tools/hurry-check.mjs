@@ -30,6 +30,7 @@ await withBrowserJob('hurry-'+(baseline?'baseline':'fixed'),async browser=>{
   const speed=duration?hurryWalk.reduce((n,x)=>n+x.distance,0)/duration:0, clock=duration?hurryWalk.reduce((n,x)=>n+x.dt,0)/duration:0;
   const ratios=data.filter(x=>x.busy&&x.hurry&&x.moving&&!x.scripted&&x.walkerDt>0).map(x=>({input:x.dt/x.walkerDt,mixer:x.mixerDelta/x.walkerDt}));
   console.log(JSON.stringify({dest,activated,speed,clock,hurryFrames:hurryWalk.length,ratios,data,walk}));
+  if(!baseline&&!process.env.MAIN_FIXTURE)assert.ok(ratios.length>0&&hurryWalk.length>10,'actual moving arrival window was observed');
   if(!baseline&&!process.env.MAIN_FIXTURE)assert.ok(ratios.every(x=>Math.abs(x.input-1)<1e-5&&Math.abs(x.mixer-1)<1e-4),'manual gait and displacement share the same unhurried clock');
   if(!baseline&&hurryWalk.length>10)assert.ok(speed<=1.6&&clock<=1.2,'busy arrival manual movement stays at ordinary speed');
   if(!baseline)assert.ok(data.filter(x=>!x.busy).every(x=>!x.hurry&&x.scale===1),'Every free movement frame must have normal clock');
