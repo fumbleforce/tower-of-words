@@ -27,6 +27,8 @@ import { LINK_E } from '../office-quarter/plan.js';
 import * as P from './plan.js';
 import { arrivalGardens } from './arrival-gardens.js';
 import { BED_FLUSH } from '../outdoor/walk-edges.js';
+import { PROTECTED_EDGES } from '../outdoor/protected-edges.js';
+import { fence } from '../../kit/street/fence.js';
 
 const PLAZA = LAYOUT.CHUNKS.plaza.at;
 const ORIGIN = [PLAZA_LANE.e[0] + PLAZA[0], PLAZA_LANE.e[2] + PLAZA[1]]; // the lane's brick runs on from the plaza's
@@ -179,6 +181,7 @@ const lightBox = (x, y, z) => new THREE.BoxGeometry(0.26, 0.04, 0.26).translate(
 
 export function* groundsSteps(c, lights, signs, signRoot) {
   yield* paving(c.paver);
+  for (const [from, to] of PROTECTED_EDGES.sports) fence(c.parts, { from, to, variant: 'service', seed: 552 });
   yield* planting(c.parts, lights, signRoot);
   arrivalGardens(c.parts);
   yield;

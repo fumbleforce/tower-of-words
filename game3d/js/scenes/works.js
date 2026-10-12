@@ -35,6 +35,7 @@ import { buildingsSteps } from './works/buildings.js';
 import { propsSteps } from './works/props.js';
 import { groundsSteps } from './works/grounds.js';
 import * as P from './works/plan.js';
+import { PROTECTED_EDGES, edgeBlocks } from './outdoor/protected-edges.js';
 
 const { CHUNK, inRect } = P;
 
@@ -53,6 +54,7 @@ export function* worksSteps() {
   const nav = new Nav(bx0 - 0.2, bx1 + 0.2, bz0 - 0.2, bz1 + 0.2, 0.14);
   nav.extra = (x, z) => P.WALKS.some((r) => inRect(x, z, r, -0.02));
   for (const r of P.FURNITURE) nav.block(...r);
+  for (const r of edgeBlocks(PROTECTED_EDGES.works)) nav.block(...P.rect(r));
 
   // everything of its own is laid in the island frame, in a group moved into the chunk's
   const isl = placeIn(new THREE.Group(), CHUNK);

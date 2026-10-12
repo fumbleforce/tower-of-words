@@ -5,6 +5,7 @@
 import { walkGround } from '../../movement/walk-ground.js';
 import * as P from './plan.js';
 import * as CP from './court-plan.js';
+import { PROTECTED_EDGES, edgeBlocks } from '../outdoor/protected-edges.js';
 
 export const WALKS = [...P.WALKS, ...P.BAY_WALKS, ...CP.WALKS];
 // the walk grid's area (scenes/sports.js)
@@ -51,7 +52,13 @@ export function ground() {
   return walkGround({
     walk: WALKS,
     backdrop: BACKDROP,
-    barriers: [...BUILDINGS, ...FENCE, ...RUNS_ON.map(({ rect }) => ({ kind: 'open', rect })), BACK_LANE],
+    barriers: [
+      ...BUILDINGS,
+      ...FENCE,
+      ...edgeBlocks(PROTECTED_EDGES.sports).map((r) => ({ kind: 'wall', rect: P.rect(r) })),
+      ...RUNS_ON.map(({ rect }) => ({ kind: 'open', rect })),
+      BACK_LANE,
+    ],
     bounds: WALK_AREA,
   });
 }

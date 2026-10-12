@@ -28,17 +28,27 @@ const views = {
   sports: [
     ['pool-head', [58.2, -89.5], Math.PI],
     ['grove', [55.4, -82.1], Math.PI],
+    ['pavilion-tie', [58.7, -90.4], Math.PI],
+    ['gym-tie', [55.5, -79.2], -Math.PI/2],
+    ['north-reverse', [58.2, -93.2], 0],
   ],
   works: [
     ['chimney', [-82.4, -117.6], Math.PI],
     ['factory-east', [-49.8, -108], Math.PI],
     ['research', [-42, -107.8], Math.PI],
+    ['plant-tie', [-84.5, -117.5], Math.PI],
+    ['factory-tie', [-77.4, -117.5], Math.PI],
+    ['research-tie', [-36, -108.3], Math.PI],
+    ['factory-east-tie', [-50.8, -112.2], -Math.PI/2],
+    ['north-reverse', [-47, -112.2], 0],
   ],
   east_coast: [
     ['onsen-west', [106, -81], Math.PI],
     ['onsen-gate', [123.1, -82.7], Math.PI],
   ],
 };
+
+if (process.env.VIEWS) for (const place of places) views[place] = views[place].filter(([id]) => process.env.VIEWS.split(',').includes(id));
 
 if (process.env.CAMERA === '1') views.forecourt = [
   ['approach', [-19.25, -4.9], Math.PI],
@@ -57,14 +67,26 @@ const approaches = {
   sports: [
     ['pool-head', [58.2, -90.5], [0, -1], 1, -91.7, 1],
     ['grove-west', [55.4, -82.1], [-1, 0], 0, 54.2, 1],
+    ['pavilion-tie', [59.1, -90.4], [0,-1], 1, -91.7, 1],
+    ['gym-tie', [55.2, -76.8], [-1,0], 0, 54.2, 1],
+    ['corner', [54.8, -91.1], [-1,-1], 1, -91.7, 1],
+    ['grove-reverse', [53.3,-82.1], [1,0], 0, 54.2, -1],
+    ['north-reverse', [58.2,-93.2], [0,1], 1, -91.7, -1],
   ],
   works: [
     ['chimney', [-82.4, -117.6], [0, -1], 1, -119.1, 1],
-    ['factory-east', [-49.8, -108], [0, -1], 1, -110.4, 1],
+    ['factory-east', [-49.8, -108], [0, -1], 1, -111, 1],
+    ['plant-tie', [-84.9,-117.8], [0,-1], 1, -119.1, 1],
+    ['factory-tie', [-77.2,-117.8], [0,-1], 1, -119.1, 1],
+    ['research-tie', [-36,-107.4], [1,0], 0, -35.15, -1],
+    ['factory-east-tie', [-51.5,-114.2], [-1,0], 0, -52.45, 1],
+    ['chimney-reverse', [-84,-120.4], [0,1], 1, -119.1, -1],
+    ['factory-east-reverse', [-48,-112], [0,1], 1, -111, -1],
+    ['research-return-reverse', [-34,-109], [-1,0], 0, -35.15, 1],
     ['research', [-42, -107.8], [0, -1], 1, -110.4, 1],
   ],
   east_coast: [
-    ['onsen-west', [106, -87], [0, -1], 1, -100, 1],
+    ['onsen-west', [106, -81], [0, -1], 1, -100, 1, 10000],
     ['onsen-gate', [123.1, -82.7], [0, -1], 1, -100, 1],
   ],
   campus: [
@@ -75,7 +97,7 @@ const approaches = {
 };
 
 async function nativeCheck(page, place, width) {
-  for (const [id, start, direction, axis, line, side] of approaches[place] || []) {
+  for (const [id, start, direction, axis, line, side, duration] of approaches[place] || []) {
     for (const mode of ['walk', 'run-jump']) {
       const keys = await page.evaluate(async ({ place, start, direction }) => {
         const g = globalThis.__game, L = await import('./js/scenes/island-layout.js');
@@ -99,7 +121,7 @@ async function nativeCheck(page, place, width) {
       for (const key of keys) await page.keyboard.down(key);
       await page.waitForTimeout(200);
       if (mode === 'run-jump') await page.keyboard.down('Space');
-      await page.waitForTimeout(mode === 'walk' ? 1600 : 2100);
+      await page.waitForTimeout(duration || (mode === 'walk' ? 1600 : 2100));
       await page.keyboard.up('Space');
       for (const key of keys) await page.keyboard.up(key);
       await page.keyboard.up('Shift');
@@ -140,7 +162,8 @@ await withBrowserJob('island-boundaries', async (browser) => {
           reports.push({ width, from: place, to: 'forecourt', file });
           continue;
         }
-        await waitForGame(page, 120000, () => page.goto(`http://127.0.0.1:8771/${base}/index.html?day=3&place=${place}&q=${phone ? 0 : 2}`), 'play');
+        const day = process.env.DAY || (place === 'works' ? 1 : 3);
+        await waitForGame(page, 120000, () => page.goto(`http://127.0.0.1:8771/${base}/index.html?day=${day}&place=${place}&q=${phone ? 0 : 2}`), 'play');
         await page.waitForFunction(() => globalThis.__done && !globalThis.__game.busy);
         for (const period of ['morning', 'evening']) {
           await page.evaluate((to) => globalThis.__game.hooks.period({ to }), period);
@@ -166,6 +189,12 @@ await withBrowserJob('island-boundaries', async (browser) => {
             await page.screenshot({ path: `${out}/${file}` });
             reports.push({ width, place, period, file, ...state });
           }
+        }
+        if (maps && place !== 'forecourt') {
+          await page.locator('#minimap').click();
+          await page.waitForTimeout(500);
+          await page.screenshot({ path: `${out}/${width}-${place}-map.png` });
+          await page.locator('#mapView .mv-close').click();
         }
         if (maps && place === 'forecourt') {
           await page.locator('#minimap').click();

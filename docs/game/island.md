@@ -120,6 +120,8 @@ The shop rows keep their fifteen-bay grid, numbered 0 to 14 from the west (islan
 
 ### Sports and baths
 
+The public pool walk and grove end at a visible service fence tied into the pavilion and gym. The undeveloped northern lawn beyond it remains backdrop.
+
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
 | `gym` | Gym (体育館) | `gym` | The arched hall: badminton and basketball courts, a weights room, changing rooms. Clubs in the evening. Its outside is built and its front walked past in `sports` and `office_quarter` ([places.md](places.md)); inside the main doors its entrance lobby (reception, shoe lockers, the changing rooms' doors) and the hall behind its glass wall are walked as `gym`. | Main door on the sports lane | Enter | The club board and booking sheet: 曜日, 時間, club names. |
@@ -137,6 +139,8 @@ The shop rows keep their fifteen-bay grid, numbered 0 to 14 from the west (islan
 | `harbour_office` | Harbour office (港の事務所) | `works_orange` | Two storeys on the supply yard's north edge by the landing: the harbourmaster and the ferry's paperwork. Its front is built in `harbour`, the door shut. | Door on the yard, beside the works lane's mouth | Enter | The weather board: 晴れ, 雨, 風, 欠航. |
 
 ### Old works
+
+The northern lawns are behind service fences tied into the power plant, factory and research building. The chimney nook and weather enclosure remain on the public side.
 
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|

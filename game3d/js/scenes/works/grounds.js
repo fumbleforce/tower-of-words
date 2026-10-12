@@ -21,6 +21,8 @@ import { fence } from './props.js';
 import * as P from './plan.js';
 import { vergeSteps } from './verges.js';
 import { laneBeds, yardSurface } from './yard-details.js';
+import { PROTECTED_EDGES } from '../outdoor/protected-edges.js';
+import { fence as serviceFence } from '../../kit/street/fence.js';
 
 const WORN = ['#8b8984', '#84827d', '#918e88', '#7e7c77'];
 const ASPHALT = ['#5d6065', '#595c61', '#62656a'];
@@ -193,6 +195,7 @@ function* furniture(p, lights, signRoot) {
 
 // the fences: the old works' chain-link down the street's west side, behind the poles, with a gate chained shut
 function* fences(p, mesh) {
+  for (const [from, to] of PROTECTED_EDGES.works) serviceFence(p, { from, to, variant: 'service', seed: 553 });
   fence(p, mesh, [S[0] - 2.4, -96], [S[0] - 2.4, -64], { h: 1.8, gaps: [[14, 17.6]] });
   const gz = -96 + 14;
   for (const s of [0, 1]) p.box(STEEL.mid, 0.04, 1.7, 1.8, S[0] - 2.4, 0.05, gz + 0.9 + s * 1.8);
