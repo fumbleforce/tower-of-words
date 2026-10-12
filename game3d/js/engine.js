@@ -311,6 +311,17 @@ export class Markers {
           m.el.setAttribute('aria-label', t.text);
         }
       }
+      if (m.pinText) {
+        const text = m.pinText(near === m);
+        const pin = m.el.querySelector('.pin');
+        if (pin.dataset.text !== text) {
+          pin.dataset.text = text;
+          if (text) pin.textContent = text;
+          else pin.innerHTML = PIN_GLYPHS[pinGlyph(m)];
+          m.el.classList.toggle('pin-text', !!text);
+          m.el.setAttribute('aria-label', text ? `${text}: ${m.label}` : tipOf(m).text);
+        }
+      }
       if (m.icon) setIcon(m);
       m.el.classList.toggle('near', near === m);
       const isGoal = markerGoal(m, goalState);

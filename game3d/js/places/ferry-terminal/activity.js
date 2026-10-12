@@ -37,11 +37,11 @@ export function terminalActivity(game, P) {
     pose(reader, READER);
     if (reader.headK) reader.headK.rotation.y = readerDown ? 0 : -0.26;
     props.root.attach(props.reader);
-    props.reader.position.set(-5.7, 0.61, -5.55);
+    props.reader.position.set(READER.x, 0.61, READER.z + 0.25);
     props.reader.rotation.x = 0;
     readerHand = null;
     if (holdReader && !readerDown) {
-      readerHand = hands.hold(reader, props.reader, [-5.52, 0.77, -5.48]);
+      readerHand = hands.hold(reader, props.reader, [READER.x + 0.18, 0.77, READER.z + 0.32]);
       props.reader.rotation.x = 0.16;
     }
     phase = 'idle';
@@ -191,7 +191,7 @@ export function terminalActivity(game, P) {
             if (reader.headK) reader.headK.rotation.y = 0;
             if (readerHand) hands.stop(readerHand);
             readerHand = null;
-            props.reader.position.set(-5.7, 0.61, -5.55);
+            props.reader.position.set(READER.x, 0.61, READER.z + 0.25);
             props.reader.rotation.x = 0;
             frame('ferry_reader');
           } else if (state === 'window') {
@@ -200,7 +200,7 @@ export function terminalActivity(game, P) {
             await job.wait(game.wait(750));
           } else if (state === 'readerSeat') await point(job, reader, [-5.32, 0.71, -5.64], 'reader-seat');
           else if (state === 'restKnee') {
-            await point(job, traveller, [-5.48, 0.55, -3.04], 'traveller-knee');
+            await point(job, traveller, [TRAVELLER.x + 0.22, 0.55, TRAVELLER.z - 0.24], 'traveller-knee');
           } else if (state === 'end') {
             readerDown = false;
             reset();

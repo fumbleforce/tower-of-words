@@ -167,3 +167,5 @@ Jørgen, 2026-10-05: "I want a minimap I can click, giving me a full interactive
 - The game targets desktop first; Android comes later.
 
 Holding movement while an area finishes loading uses the ordinary walking speed, even when Space hurried the preceding travel animation. The walking animation uses that same ordinary clock. Hurry still accelerates scripted travel during the remaining crossfade.
+
+Empty seats show **Sit** on their nearby pin. While sitting, the same pin reads **Stand up**; story seats read **Seated** and keep their existing action menu. Moving also gets up.

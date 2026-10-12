@@ -63,7 +63,7 @@ await withBrowserJob(`seating-${width}`, async browser => {
     if(width<700)await page.touchscreen.tap(...target);else await page.mouse.click(...target);
     await page.waitForFunction(id=>globalThis.__game.player.seated&&globalThis.__game.player.freeSeat?.id===id,info.id);
     await page.waitForTimeout(400);
-    const contact=await page.evaluate(()=>{
+    const contact=await page.evaluate(async()=>{
       const g=globalThis.__game,P=g.place,s=P.seating.seats.get(g.player.freeSeat.id);
       const p=g.player.root.position;
       const state=P.snapshotState();
@@ -78,13 +78,25 @@ await withBrowserJob(`seating-${width}`, async browser => {
         const old={p:npc.root.position.clone(),visible:npc.root.visible,seated:npc.seated};
         npc.root.position.set(s.x,s.floor,s.z); npc.root.visible=true; npc.seated=true;
         if(P.seating.available(s))throw Error('Occupied seat offered');
+        npc.root.position.copy(old.p);npc.root.visible=old.visible;npc.seated=old.seated;
+        const root=g.player.root.clone(false),occupant={root,seated:true};
+        root.position.set(s.x,s.floor,s.z);root.visible=true;P.space.add(root);(P.crowd||=[]).push(occupant);
         P.restoreState({world:state,flags:{}});
         if(g.player.seated||g.player.freeSeat)throw Error('Occupied saved seat was restored');
-        npc.root.position.copy(old.p);npc.root.visible=old.visible;npc.seated=old.seated;
+        P.crowd.splice(P.crowd.indexOf(occupant),1);root.removeFromParent();
         P.restoreState({world:state,flags:{}});
       }
+      g.player.freeSeat={place:P.name,id:'removed-seat',out:s.out||g.player.seatOut,floor:s.floor};
+      const {extraOptions}=await import(new URL('js/gameplay/interact-menu.js',globalThis.location.href));
+      const leave=extraOptions(g,g.markers.list.find(m=>m.id===s.id)).find(o=>o.label==='Stand up');
+      if(!leave)throw Error('No Stand up option at current seat');
+      await leave.run();
+      if(g.player.seated||g.player.freeSeat)throw Error('Stale previous seat prevented Stand up');
+      P.restoreState({world:state,flags:{}});
       return {rootY:p.y,top:s.top,exit:s.out||g.player.seatOut};
     });
+    await page.evaluate(()=>{const g=globalThis.__game;g.place.cam.release?.();g.place.cam.snap?.(g.player.root.position);});
+    await page.waitForTimeout(300);
     await page.screenshot({path:out+name+'.png'});
     if (process.env.RELOAD && name === places[0]) {
       await waitForGame(page,90000,()=>page.goto(`http://127.0.0.1:8771/${base}/index.html`),'title');

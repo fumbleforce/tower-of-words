@@ -62,7 +62,15 @@ export function attachSeating(game, place) {
     if (persist) save(game);
     return true;
   };
-  place.seating = { seats, seatFor, sit, stand, available, reachable };
+  place.seating = {
+    seats,
+    seatFor,
+    sit,
+    stand,
+    available,
+    reachable,
+    sittingAt: (id) => !!seatFor(id) && sittingOn(seatFor(id)),
+  };
   place.seats ||= {};
   for (const [id, s] of seats) {
     if (protectedSeat(s)) continue;
@@ -81,6 +89,7 @@ export function attachSeating(game, place) {
     };
     if (own) {
       own.anchor = anchor;
+      own.pinText = () => (sittingOn(s) ? 'Seated' : '');
       continue;
     }
     place.things[id] = {
@@ -89,6 +98,7 @@ export function attachSeating(game, place) {
       verb: 'Sit',
       pin: 'near',
       seatAction: true,
+      pinText: (near) => (sittingOn(s) ? 'Stand up' : near ? 'Sit' : ''),
       anchor,
       spot: () => seatExit(place, s),
       face: () => [s.x, s.z],
@@ -109,7 +119,7 @@ export function attachSeating(game, place) {
       return {
         label: 'Stand up',
         run: () => {
-          game.player.freeSeat ||= {
+          game.player.freeSeat = {
             place: place.name,
             id: s.id,
             out: game.player.seatOut || seatExit(place, s),

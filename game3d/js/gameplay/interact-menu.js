@@ -118,12 +118,14 @@ export function planInteract(game, item, { person = false } = {}) {
   const topic = person ? game.topicFor?.(item.id) : null;
   const topics = topic ? [topic] : [];
   const extra = extraOptions(game, item);
+  const verb = verbOf(item);
+  const plainLabel = game.place?.seating?.sittingAt(item.id) && /^Sit$/i.test(verb) ? 'At this seat' : verb;
   // the plain use, when no story beat matches (a talk: list's later entries assume the earlier conditions failed, so
   // it is never offered beside the beat); a person's only when they have no topics either
   const plain =
     story || (person && topics.length) || (item.seatAction && extra.length)
       ? null
-      : { label: person ? 'Talk' : verbOf(item) || 'Look', use: true };
+      : { label: person ? 'Talk' : plainLabel || 'Look', use: true };
   return { person, story, topics, extra, plain };
 }
 

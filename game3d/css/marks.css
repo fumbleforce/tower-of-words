@@ -160,3 +160,11 @@ body.phone #marks .mark.goal.below.flip .pin { left: -60px; }
 body.phone #pinTip { max-width: 86vw; padding: 7px 12px; border-radius: 10px; font-size: 16px; }
 /* a long press on a pin previews it: no callout or zoom */
 #marks .mark .pin { -webkit-touch-callout: none; touch-action: manipulation; }
+
+/* A usable seat names its action in the existing pin so its pose reads even from overhead. */
+#marks .mark.pin-text .pin {
+  width: max-content; min-width: 36px; padding: 0 8px; border-radius: 14px;
+  left: 0; transform: translateX(-50%); font: 600 12px/1 var(--font); white-space: nowrap;
+}
+#marks .mark.pin-text.below .pin { left: 24px; transform: none; }
+#marks .mark.pin-text.below.flip .pin { left: auto; right: 24px; }
