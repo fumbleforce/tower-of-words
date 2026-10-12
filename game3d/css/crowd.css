@@ -8,3 +8,5 @@
 .crowd-words .jp.clear { color: var(--jp); filter: none; }
 .crowd-words .gl { color: var(--ink-dim); font-size: .8em; }
 .crowd-words .heardico { display: inline-block; width: 18px; height: 14px; margin-right: 8px; vertical-align: -1px; border-radius: 3px; background: linear-gradient(90deg, #6f7a8c 0 3px, transparent 3px 6px, #6f7a8c 6px 9px, transparent 9px 12px, #6f7a8c 12px 15px); opacity: .7; }
+/* A nearby response already identifies its speaker; the pin's hover preview must not sit behind it. */
+body:has(.crowd-reaction:not([hidden])) #pinTip { display: none; }
