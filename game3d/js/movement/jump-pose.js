@@ -125,12 +125,13 @@ export function installJumpPose(hop, player) {
     turn('Spine', (airborne ? 0.1 + tuck * 0.32 : 0.15) * weight);
   }
   const originalUpdate = player.update;
-  player.update = function (...args) {
+  const update = function (...args) {
     undo();
     const result = originalUpdate.apply(this, args);
     apply();
     return result;
   };
+  player.update = update;
   function reset() {
     undo();
     active = airborne = wasAirborne = flip = false;
@@ -165,6 +166,10 @@ export function installJumpPose(hop, player) {
       wasAirborne = air;
     },
     reset,
+    activate() {
+      player.update = update;
+    },
+    body,
     pivot,
     get active() {
       return active;
