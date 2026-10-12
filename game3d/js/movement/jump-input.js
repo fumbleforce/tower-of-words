@@ -38,6 +38,7 @@ export function installJump(game, { shadow, ui }) {
     shadow,
     canJump: free,
     onAir: (h) => falls.check(h),
+    onVoid: () => falls.recover(),
   });
   falls = installFalls(game, { jump, shadow, ui });
   game.jump = jump;

@@ -1,0 +1,51 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { withBrowserJob, gpuWaitOptions } from '../../tools/lib/browser-job.mjs';
+import { waitForGame } from '../test/support/wait-ready.mjs';
+const width = +(process.argv[2] || 1366), height = width < 700 ? 844 : 860;
+const base = process.env.BASE_URL || 'http://127.0.0.1:8771/.claude/worktrees/codex-traversal-fix/game3d';
+const out = new URL('../shots/traversal/', import.meta.url).pathname;
+fs.mkdirSync(out, { recursive: true });
+await withBrowserJob('traversal-' + width, async browser => {
+ const page = await browser.newPage({ viewport: { width, height }, hasTouch: width < 700, isMobile: width < 700 });
+ await page.route('**/api/plugins', r => r.fulfill({json: []}));
+ await page.route(/\/private\//, r => r.abort());
+ await page.addInitScript(() => globalThis.localStorage.setItem('amakawa-settings', JSON.stringify({privateMode:false,textSpeed:'instant',voiceOn:false})));
+ const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+ await waitForGame(page, 240000, () => page.goto(base+'/index.html?place=shotengai&q=0'), 'play');
+ await page.waitForFunction(() => !globalThis.document.querySelector('#boot') && !globalThis.__game.busy && globalThis.__game.walker.traversal, null,{timeout:240000});
+ const info = await page.evaluate(async()=>{
+  const { BENCHES }=await import('./js/scenes/station-garden/plan.js');
+  const {createTraversal}=await import('./js/movement/traversal.js');
+  const g=globalThis.__game, t=createTraversal(g.place,[g.player.root,...Object.values(g.place.people).map(p=>p.root)]);
+  return {benches:BENCHES,scale:g.player.root.scale.x, count:t.count, supports:Object.values(BENCHES).map(b=>[b.x,b.z,t.support(b.x,b.z,2)])};
+ });
+ console.log(JSON.stringify(info));
+ const bench=Object.values(info.benches)[0];
+ await page.evaluate(b=>{const g=globalThis.__game;g.player.root.position.set(b.x-0.7,0,b.z);g.walker.sync();g.walker.keyFrame=null;g.place.camera.position.set(b.x-8,6,b.z);g.place.camera.lookAt(b.x,0,b.z);},bench);
+ await page.keyboard.down('KeyW');
+ await page.waitForFunction(()=>globalThis.__game.walker.keyFrame);
+ await page.evaluate(()=>globalThis.__game.walker.keyFrame.set(1,0,0));
+ if (width < 700) {
+  const r=await page.locator('#jumpBtn').boundingBox();
+  await page.mouse.move(r.x+r.width/2,r.y+r.height/2); await page.mouse.down();
+ } else await page.keyboard.down('Space');
+ await page.waitForFunction(x=>globalThis.__game.player.root.position.x>x-0.35, bench.x, {timeout:8000});
+ await page.keyboard.up('KeyW');
+ if(width<700) await page.mouse.up(); else await page.keyboard.up('Space');
+ await page.waitForTimeout(700);
+ const result=await page.evaluate(()=>({p:globalThis.__game.player.root.position.toArray(),h:globalThis.__game.jump.height,air:globalThis.__game.jump.air,near:globalThis.__game.near,errors:globalThis.document.querySelector('.err')?.textContent}));
+ console.log('bench',JSON.stringify(result));
+ assert.ok(result.h>0.25 && result.h<0.45 && !result.air,'jump must land on the real bench');
+ await page.screenshot({path:out+width+'-bench.png'});
+ const scan=await page.evaluate(async()=>{
+  const {local}=await import('./js/scenes/shotengai/plan.js');
+  const {createTraversal}=await import('./js/movement/traversal.js');
+  const g=globalThis.__game,t=createTraversal(g.place,[g.player.root,...Object.values(g.place.people).map(p=>p.root),...(g.place.crowd||[]).map(p=>p.root)]);
+  const beach=local([12,35]), stairs=local([3.75,32]);
+  const points=[beach,stairs,[-8,-76],[-8,-78],[-6,-77.5]];
+  return {points:points.map(p=>({p,y:t.support(...p,2),nav:g.place.nav.free(...p)})),count:t.count};
+ }); console.log('terrain',JSON.stringify(scan));
+ assert.equal(errors.length,0,errors.join('\n'));
+ await page.close();
+}, { ...gpuWaitOptions(900), timeoutMs:300000 });

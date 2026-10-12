@@ -34,6 +34,7 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
       await game.hooks.ongoingSetup();
       game.place.restoreState?.(saved);
     }
+    if (saved.surface && !saved.runner?.execution && !saved.transition) game.jump?.restoreSurface(saved.surface);
     ui.refreshWords();
     ui.refreshPeople(sim.met.size);
     ui.refreshBag(sim);

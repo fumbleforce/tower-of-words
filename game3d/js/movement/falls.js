@@ -74,5 +74,21 @@ export function installFalls(game, { jump, shadow, ui }) {
     // can't be reached he picks himself up where he jumped from.
     if (!g.travel || !(await sendToClinic(g, from))) ui.unfade();
   }
-  return { check };
+  async function recover() {
+    if (game.falling) return;
+    game.falling = true;
+    game.busy = true;
+    game.walker.stop();
+    game.walker.locked = true;
+    await ui.fade('', '', 250);
+    jump.reset();
+    game.falling = false;
+    game.busy = false;
+    game.walker.locked = false;
+    if (!game.travel || !(await sendToClinic(game, game.place.name))) {
+      game.player.root.position.set(...[game.place.start[0], game.place.floorY || 0, game.place.start[1]]);
+      ui.unfade();
+    }
+  }
+  return { check, recover };
 }

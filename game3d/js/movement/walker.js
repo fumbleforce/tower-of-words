@@ -89,7 +89,7 @@ export class SmoothWalker extends Walker {
   steerDirect(p, dt) {
     const s = this.steer,
       k = this.body.scale.x || 1;
-    if (this.nav.clear([p.x, p.z], [s.x, s.z])) {
+    if (this.traversal?.clear([p.x, p.z], [s.x, s.z]) || this.nav.clear([p.x, p.z], [s.x, s.z])) {
       if (this.path?.steer) this.path = null;
       return true;
     }
@@ -146,7 +146,8 @@ export class SmoothWalker extends Walker {
       tx = on.x + ((from.x - on.x) / d) * (on.r + myR + 0.1);
       tz = on.z + ((from.z - on.z) / d) * (on.r + myR + 0.1);
     }
-    let path = inside ? N.path(from.x, from.z, tx, tz) : null;
+    const direct = this.traversal?.clear([from.x, from.z], [tx, tz]);
+    let path = direct ? [[tx, tz]] : inside ? N.path(from.x, from.z, tx, tz) : null;
     let last = path && path.length ? path[path.length - 1] : null;
     // the tap is somewhere he can't stand (inside furniture, a closed room): walk to the nearest floor he can reach
     if (inside && (!last || Math.hypot(last[0] - tx, last[1] - tz) > 0.8)) {
@@ -313,7 +314,8 @@ export class SmoothWalker extends Walker {
         step = this.v * dt;
       const ox = p.x,
         oz = p.z;
-      let [nx, nz] = this.nav.collide(ox + (this.vx / dl) * step, oz + (this.vz / dl) * step, ox, oz);
+      const collision = !window.__game?.busy && !this.path?.scripted && this.traversal ? this.traversal : this.nav;
+      let [nx, nz] = collision.collide(ox + (this.vx / dl) * step, oz + (this.vz / dl) * step, ox, oz);
       // people: never step into someone; slide round them, keep right when meeting head-on
       const tl = Math.hypot(this.vx, this.vz) || 1,
         fx = this.vx / tl,
@@ -324,7 +326,7 @@ export class SmoothWalker extends Walker {
         const [sx, sz] = slideStep(ox, oz, nx, nz, o, o.r + R, fx, fz, step, isHard(o));
         if (sx === nx && sz === nz) continue;
         blockedBy = o;
-        [nx, nz] = this.nav.collide(sx, sz, ox, oz);
+        [nx, nz] = collision.collide(sx, sz, ox, oz);
       }
       // pressing into someone with no headway (a doorway, a corner): slip past them after a moment
       if (keys || this.steer || this.path)
@@ -342,7 +344,11 @@ export class SmoothWalker extends Walker {
             R,
           );
         // the new route stays what the old one was (a steer's route, a scene's walk), so letting go still ends it
-        if (alt) this.path = Object.assign(alt, { steer: this.path.steer, scripted: this.path.scripted });
+        if (alt)
+          this.path = Object.assign(alt, {
+            steer: this.path.steer,
+            scripted: this.path.scripted,
+          });
       }
       p.x = nx;
       p.z = nz;

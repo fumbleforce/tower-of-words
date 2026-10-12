@@ -7,7 +7,9 @@ Jørgen, 2026-10-09: "the terrain should also make it very clear what areas are 
 - Each outdoor place said twice where he can walk: a list of rectangles for the walk grid (`nav.extra`, which tested only his centre) and separate hand-placed kerbs. The two drifted apart. Where a paved path met lawn with no kerb, he hit an invisible wall; some kerbs had gaps for openings that weren't walkable (the lane's bench bays, the paths to the wing) or stood where nothing stopped him.
 - Planted beds were slabs raised 6 cm with a dark soil face, and the garden drifts stacked two offset slabs, so the lawn showed steps and dark lines everywhere. Two kerbs ran side by side at the court's east edge with a dark gap between them.
 
-## The rule
+## The original paving rule (superseded for player collision)
+
+The 2026-10-12 movement rule in [GUIDE.md](../GUIDE.md#visual-design) supersedes the player restrictions below. This grid still plans NPC and scripted routes and defines paving edges. Player movement uses visible support and solid geometry (movement/traversal.js), so a kerb or the edge of this route grid does not fence off lawns, bench tops or beaches.
 
 He walks on paving and gravel. Lawn and planting are never walkable. Wherever walkable ground meets anything else there is exactly one visible edge, and he is stopped exactly there:
 

@@ -116,6 +116,10 @@ Game first, learning light (docs/game/setting.md) overrides these where they con
 
 ## Visual design
 
+- Crowd members react to nearby jumping and being blocked, and everyone in the crowd offers a short conversation with everyday Japanese practice (Jørgen, 2026-10-12).
+
+- Movement follows visible geometry: low curbs, bench tops and reachable beach terrain are traversable; no invisible walls (Jørgen, 2026-10-12).
+
 No text on timers, the first screen (controls only), a goal line that stays, separate phone and desktop layouts, no brown, gold or serif, the flat-shaded 3D world (never paper or cut-out), and how review pages lay out options.
 
 - Scenes need visible staging of characters and actions; no audio-only scenes (Jørgen, 2026-10-06).
@@ -193,7 +197,7 @@ One home per fact, one task per agent, the main thread never waits, validate fix
 - One focused task per agent (Jørgen, 2026-09-28): different kinds of work go to separate, fresh agents.
 - Work tracker (Jørgen, 2026-09-30: "that stuff just gets stuck half done and it doesnt surface"). Every task, request, decision follow-up and parked item is a GitHub issue (https://github.com/fumbleforce/tower-of-words/issues?q=label%3Awork), kept with `python3 tools/work.py` (its `--help` has the rules). Update the issue when you start, park or finish something; a commit that finishes one says "Fixes #N"; run `python3 tools/work.py stale` before reporting. Review items hold his question and answer, issues hold the work; they link, never copy. The repo is public: nothing private in an issue.
 - Remote review (Jørgen, 2026-10-05: "can main push the bible reviews to the public site so I can handle it there, as I am now remote"). Review and Showcase are on https://fumbleforce.github.io/tower-of-words/bible/#review with every deploy; Send there opens a GitHub issue, and python3 tools/review.py pull imports it at each check (reviews/README.md, "Answering from the public site").
-- The main thread coordinates and never blocks on waiting; long work goes to background subagents with clear file ownership (notes/PRODUCTION.md).
+- The main thread coordinates; implementation runs in subagents (Jørgen, 2026-10-12: "please do work in subagents so you remain the coordinator"). It never blocks on waiting; long work goes to background subagents with clear file ownership (notes/PRODUCTION.md).
 - Codex runs at most four implementation lanes at once, chosen by Claude. When one finishes, ask Claude for the next assignment. Short requested reviews do not count as lanes; parked work stays parked until reassigned (Jørgen, 2026-10-09).
 - Claude's help with existing Codex work does not transfer responsibility for finishing it: Codex coordinates the help, resolves blockers, completes verification and gets the work landed (Jørgen, 2026-10-10). Judge Codex's parallel work by completed, usable features; Codex owns integrating the pieces and must not leave Jørgen to chase unfinished work (Jørgen, 2026-10-11).
 - After finishing the existing work, Codex's primary responsibility is quality control: code structure and quality, plans, narratives, gaps in the project, and improvements to the project and its processes. Produce focused reports backed by evidence; track actionable defects as work issues and put decisions needing Jørgen's judgment in Review (Jørgen, 2026-10-10).

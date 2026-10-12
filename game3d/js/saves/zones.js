@@ -20,6 +20,15 @@ export function snapshotPlace(game) {
     ...(game.transition ? { transition: { ...game.transition } } : {}),
     goalDestination: snapshotGoalDestination(game),
     pendingStart: game.pendingStart || null,
+    ...(!game.busy && !game.player?.seated && !game.player?.scripted && game.jump
+      ? {
+          surface: {
+            x: game.player.root.position.x,
+            z: game.player.root.position.z,
+            y: game.player.root.position.y + game.jump.supportHeight,
+          },
+        }
+      : {}),
     ...(game.snapshotZones ? { zones: game.snapshotZones() } : {}),
   };
 }

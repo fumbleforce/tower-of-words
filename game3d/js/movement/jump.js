@@ -4,9 +4,8 @@
 // at the top and comes down faster than he went up; a running jump goes a little higher. Stretched on the way up,
 // squashed on landing with a puff of dust, the legs held mid-stride in the air, and the shadow stays on the ground,
 // shrinking as he rises. A press just before landing jumps again as he lands.
-// Only the body rises: a group between his root and his model (installJump makes it), so the walk grid, seating,
-// the camera and everyone's "is he standing" checks never see a jump. Walls and people still stop him; he can't jump
-// onto or over anything, except a parapet he jumps at, which is a fall (falls.js).
+// Feet follow the visible scene surfaces: low steps, bench tops and lower ground. The route grid never becomes
+// an invisible wall; traversal.js checks the body against solid geometry.
 //   const jump = createJump(game, { shadow, canJump, onAir })   shadow: the blob under him (engine.js blob); jump-input.js
 //                                                         makes it, with the key, the phone's button and the falls
 //   jump.press() / jump.release()     the button, from a key or a tap
@@ -16,6 +15,7 @@
 import * as THREE from 'three';
 import { dust, jumpSound, landSound } from './jump-fx.js';
 import { RUN } from './walker.js';
+import { createTraversal } from './traversal.js';
 
 const HIGH = 0.78, // the top of a held jump, m (times the character scale)
   RISE_T = 0.34, // and how long it takes to get there
@@ -30,7 +30,7 @@ const HIGH = 0.78, // the top of a held jump, m (times the character scale)
   BUFFER = 0.13, // s: a press this long before landing jumps on landing
   LEAN = 0.16; // rad, his lean into a moving jump
 
-export function createJump(game, { shadow, canJump = () => true, onAir } = {}) {
+export function createJump(game, { shadow, canJump = () => true, onAir, onVoid } = {}) {
   const P = game.player,
     root = P.root;
   // the group the body rises in: everything on him but his shadow
@@ -51,7 +51,30 @@ export function createJump(game, { shadow, canJump = () => true, onAir } = {}) {
     lean: 0,
     down: false, // the button itself, held or not
   };
+  let place = null,
+    ground = 0,
+    physical = null,
+    inactive = false;
   const scale = () => root.scale.x || 1;
+  function terrain() {
+    if (place !== game.place || !physical) {
+      place = game.place;
+      ground = 0;
+      physical = place
+        ? createTraversal(place, [
+            root,
+            ...Object.values(place.people || {}).map((p) => p.root),
+            ...(place.crowd || []).map((p) => p.root),
+          ])
+        : null;
+      if (game.walker)
+        game.walker.traversal = {
+          collide: (x, z, ox, oz) => physical.collide(x, z, ox, oz, root.position.y + s.h, scale(), s.air),
+          clear: (a, b) => physical.clear(a, b, root.position.y + s.h, scale()),
+        };
+    }
+    return physical;
+  }
   const speedK = () => {
     const w = game.walker;
     return w ? THREE.MathUtils.clamp(w.v / (w.speed * RUN), 0, 1) : 0;
@@ -71,7 +94,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir } = {}) {
     const k = scale(),
       impact = Math.min(1.4, -s.vy / (V0 * k));
     s.air = false;
-    s.h = 0;
+    s.h = ground;
     s.vy = 0;
     s.sqv -= 7 * impact; // the squash
     dust(game, root, 0.7 + 0.5 * impact);
@@ -92,7 +115,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir } = {}) {
     pose();
   }
   function pose() {
-    hop.position.y = s.h;
+    hop.position.y = s.h / scale();
     // squash and stretch about his feet, keeping his volume
     const sy = 1 + THREE.MathUtils.clamp(s.sq, -0.35, 0.35),
       sx = 1 / Math.sqrt(sy);
@@ -107,8 +130,26 @@ export function createJump(game, { shadow, canJump = () => true, onAir } = {}) {
   }
 
   const api = {
+    restoreSurface(saved) {
+      terrain();
+      const p = root.position;
+      const y = physical?.support(saved.x, saved.z, saved.y + 0.22 * scale(), 0.6 * scale());
+      if (y == null) return false;
+      p.x = saved.x;
+      p.z = saved.z;
+      s.h = ground = y - p.y;
+      s.air = false;
+      s.vy = 0;
+      pose();
+      game.walker?.sync();
+      game.place.cam?.snap?.(p);
+      return true;
+    },
     get air() {
       return s.air;
+    },
+    get supportHeight() {
+      return ground;
     },
     get height() {
       return s.h;
@@ -130,10 +171,34 @@ export function createJump(game, { shadow, canJump = () => true, onAir } = {}) {
     // something else took him (a scene, a trip, a seat): back on the ground, no squash left over
     reset,
     update(dt) {
+      if (game.busy || P.seated || P.scripted) {
+        if (!game.falling && (s.h || s.air)) reset();
+        inactive = true;
+      } else {
+        if (inactive) {
+          physical = null;
+          inactive = false;
+        }
+        terrain();
+      }
       if (game.falling) return; // a fall moves him itself (falls.js)
       if (game.walker) game.walker.air = s.air; // his grip in the air (walker.js)
       if (s.buffer > 0) s.buffer -= dt;
       const k = scale();
+      if (physical && !P.seated && !P.scripted && !game.busy) {
+        const y = physical.support(
+          root.position.x,
+          root.position.z,
+          root.position.y + s.h + (s.air ? 0.035 : 0.22) * k,
+        );
+        ground = y === null ? s.h - 8 * k : y - root.position.y;
+        if (!s.air) {
+          if (ground < s.h - 0.25 * k) {
+            s.air = true;
+            s.vy = 0;
+          } else s.h = ground;
+        }
+      }
       if (s.air) {
         if (P.seated || P.scripted || game.busy) {
           if (!game.falling) reset();
@@ -145,7 +210,11 @@ export function createJump(game, { shadow, canJump = () => true, onAir } = {}) {
         else if (s.vy < 0) g *= FALL;
         s.vy = Math.max(-TERMINAL * k, s.vy - g * dt);
         s.h += s.vy * dt;
-        if (s.h <= 0) land();
+        if (s.h < -3 * k && ground < s.h - k) {
+          onVoid?.();
+          return;
+        }
+        if (s.h <= ground && s.vy <= 0) land();
         else if (onAir?.(s.h)) return; // in the air he went over something, and falls (falls.js)
       }
       // the squash-and-stretch spring; in the air it leans toward a stretch while rising
@@ -155,7 +224,7 @@ export function createJump(game, { shadow, canJump = () => true, onAir } = {}) {
       const leanTo = s.air && s.vy > -V0 * k * 0.4 ? LEAN * speedK() : 0;
       s.lean += (leanTo - s.lean) * (1 - Math.exp(-dt * 10));
       if (!s.air && Math.abs(s.sq) < 1e-4 && Math.abs(s.sqv) < 1e-3 && Math.abs(s.lean) < 1e-4) {
-        if (hop.position.y !== 0 || hop.scale.y !== 1) reset();
+        pose();
         return;
       }
       pose();
