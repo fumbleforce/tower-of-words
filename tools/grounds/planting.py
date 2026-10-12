@@ -165,23 +165,52 @@ def roots(sk, base, n, reach, r, seed):
         sk.limb(base, [mid, end], r * 0.7, r * 0.18)
 
 
-def skin(name, sk, faces):
+def joined_skeleton(name, sk):
+    """Union tapered limbs before simplifying. Skin leaves holes at crowded forks."""
     bm = bmesh.new()
-    for p in sk.pts:
-        bm.verts.new(p)
-    bm.verts.ensure_lookup_table()
     for a, b in sk.edges:
-        bm.edges.new((bm.verts[a], bm.verts[b]))
+        start, end = sk.pts[a], sk.pts[b]
+        axis = end - start
+        rotation = Vector((0, 0, 1)).rotation_difference(axis.normalized()).to_matrix().to_4x4()
+        transform = Matrix.Translation((start + end) * 0.5) @ rotation
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+                              radius1=sk.rad[a], radius2=sk.rad[b], depth=axis.length, matrix=transform)
+    for point, radius in zip(sk.pts, sk.rad):
+        bmesh.ops.create_icosphere(bm, subdivisions=2, radius=radius * 1.08,
+                                  matrix=Matrix.Translation(point))
     ob = obj_from_bm(name, bm)
-    m = ob.modifiers.new('skin', 'SKIN')
-    m.use_smooth_shade = False
-    m.branch_smoothing = 0.6
-    for i, v in enumerate(ob.data.skin_vertices[0].data):
-        v.radius = (sk.rad[i], sk.rad[i])
-        v.use_root = i == 0
-    s = ob.modifiers.new('sub', 'SUBSURF')
-    s.levels = 2
+    remesh = ob.modifiers.new('continuous forks', 'REMESH')
+    remesh.mode = 'VOXEL'
+    remesh.voxel_size = 0.007
+    remesh.use_smooth_shade = False
     apply_mods(ob)
+    smooth = ob.modifiers.new('branch collars', 'SMOOTH')
+    smooth.factor = 0.7
+    smooth.iterations = 3
+    apply_mods(ob)
+    return ob
+
+
+def skin(name, sk, faces):
+    if name.startswith('trunk_keyaki'):
+        ob = joined_skeleton(name, sk)
+    else:
+        bm = bmesh.new()
+        for p in sk.pts:
+            bm.verts.new(p)
+        bm.verts.ensure_lookup_table()
+        for a, b in sk.edges:
+            bm.edges.new((bm.verts[a], bm.verts[b]))
+        ob = obj_from_bm(name, bm)
+        m = ob.modifiers.new('skin', 'SKIN')
+        m.use_smooth_shade = False
+        m.branch_smoothing = 0.6
+        for i, v in enumerate(ob.data.skin_vertices[0].data):
+            v.radius = (sk.rad[i], sk.rad[i])
+            v.use_root = i == 0
+        s = ob.modifiers.new('sub', 'SUBSURF')
+        s.levels = 2
+        apply_mods(ob)
     # bark: furrows running along the trunk (noise stretched along y), deeper low down where the bark is old
     me = ob.data
     me.calc_loop_triangles()
@@ -618,4 +647,5 @@ def main():
     print('wrote', OUT, os.path.getsize(OUT), 'bytes')
 
 
-main()
+if __name__ == '__main__':
+    main()

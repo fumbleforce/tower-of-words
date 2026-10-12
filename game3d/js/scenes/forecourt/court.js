@@ -78,7 +78,8 @@ function northBed(p, block) {
   wallRect(p, NB);
   bed(p, [NB[0] + 0.2, NB[1] - 0.2, NB[2] + 0.2, NB[3] - 0.2], { y: 0.33 });
   hedge(p, [NB[0] + 0.45, NB[2] + 0.42], [NB[1] - 0.45, NB[2] + 0.42], { w: 0.42, h: 0.5, y: 0.33, seed: 2 });
-  const trees = along([NB[0], NB[3] - 0.5], [NB[1], NB[3] - 0.5], { pitch: 3, inset: 0.9 });
+  const treeZ = (NB[2] + NB[3]) / 2;
+  const trees = along([NB[0], treeZ], [NB[1], treeZ], { pitch: 3, inset: 0.9 });
   trees.forEach(({ x, z }, i) => keyaki(p, x, z, 0.95 + (i % 2) * 0.08, i + 3));
   for (let i = 0; i + 1 < trees.length; i++) {
     const x = (trees[i].x + trees[i + 1].x) / 2;

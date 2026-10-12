@@ -3,7 +3,8 @@ import * as THREE from 'three';
 // Read the collector's already-authored low planting surface. A root on a raised
 // bed must meet that surface, while a lawn tree stays at lawn height.
 function groundAt(p, x, z) {
-  let height = 0.015;
+  let height = 0.015,
+    clearance = Infinity;
   // a collector that passes its pieces on (a cell or band wrapper) holds no sets to read
   for (const set of p.sets?.values() || []) {
     if (!['soil', 'grass', 'foliage'].includes(set.surf)) continue;
@@ -12,26 +13,32 @@ function groundAt(p, x, z) {
       const b = geometry.boundingBox;
       if (b.max.y > 0.65 || b.max.y - b.min.y > 0.12 || x < b.min.x || x > b.max.x || z < b.min.z || z > b.max.z)
         continue;
-      height = Math.max(height, b.max.y);
+      if (b.max.y >= height) {
+        height = b.max.y;
+        clearance = Math.min(x - b.min.x, b.max.x - x, z - b.min.z, b.max.z - z);
+      }
     }
   }
-  return height;
+  return { height, clearance };
 }
 
 // codeTrunk: also lay the code-built root flare (off when the Blender-built trunk brings its own roots)
 // cover: the leaf cards over the soil (none on a phone, scenes/forecourt.js)
 export function rootBed(p, x, z, scale, seed, { codeTrunk = true, cover = true } = {}) {
-  const y = groundAt(p, x, z),
-    radius = 0.43 * scale;
+  const { height: y, clearance } = groundAt(p, x, z),
+    // Keep the whole ring inside an authored planting surface, including narrow beds.
+    footprint = Math.min(0.485 * scale, Math.max(0.18 * scale, clearance - 0.025)),
+    ringWidth = Math.min(0.055 * scale, footprint * 0.12),
+    radius = footprint - ringWidth;
   const soil = new THREE.CylinderGeometry(radius, radius * 1.04, 0.025, 12);
   soil.translate(x, y + 0.012, z);
   p.geo('#514736', soil, { cast: false, surf: 'mulch' });
-  const ring = new THREE.RingGeometry(radius, radius + 0.055 * scale, 12);
+  const ring = new THREE.RingGeometry(radius, footprint, 12);
   ring.rotateX(-Math.PI / 2).translate(x, y + 0.027, z);
   p.geo('#80745f', ring, { cast: false, surf: 'stone' });
   if (codeTrunk) rootFlare(p, x, y, z, scale, seed);
   // the cover's leaf cards need their uvs set in the collector's own set (below)
-  if (cover && p.sets) groundCover(p, x, y, z, radius, scale, seed);
+  if (cover && p.sets) groundCover(p, x, y, z, radius, Math.min(scale, radius / 0.43), seed);
   return y;
 }
 

@@ -14731,7 +14731,7 @@
   "game3d/assets/opening/window/eric-window.webp": {"size": 137648, "sha256": "59871b8d9898dd093f8f361433b31c3948a61b3f87d6780704ae3f939031cbe2", "type": "image/webp"},
   "game3d/assets/opening/window/mio-window-look.webp": {"size": 181524, "sha256": "739af2760fd5b5a88df74534d4d99bf7f2975d4131b4721c1dfcae149a6c97f5", "type": "image/webp"},
   "game3d/assets/opening/window/mio-window-phone.webp": {"size": 177578, "sha256": "37b3f5aec9988351f973bb6974a84fb507ad1b121ebd5e77e220885678631b33", "type": "image/webp"},
-  "game3d/assets/outdoor/planting.glb": {"size": 128456, "sha256": "ec0b55b8c2cace1acbc22a22877291b2d004ca70bb7eafb513f743034d1f6f19", "type": "model/gltf-binary"},
+  "game3d/assets/outdoor/planting.glb": {"size": 127080, "sha256": "f69bb9109a0b675de3ed89fba231e74784bbeaafff81933d2e69eb187eccb606", "type": "model/gltf-binary"},
   "game3d/assets/photos/cat-thumb.webp": {"size": 7906, "sha256": "5b46da53b26eb11311882bbd9894393aabd6f19f72465a41ed2d7da144483c45", "type": "image/webp"},
   "game3d/assets/photos/cat.webp": {"size": 42322, "sha256": "029c0a68cf62fae26bef9a73fb079be22f8e8d5570046042f5f7352219b85fcf", "type": "image/webp"},
   "game3d/assets/photos/cherry-thumb.webp": {"size": 14366, "sha256": "3a8f557f824a0ca269c45e4925df6fdb8c3765e24ce446a6c446084d3a88929a", "type": "image/webp"},
