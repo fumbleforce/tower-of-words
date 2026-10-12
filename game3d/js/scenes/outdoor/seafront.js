@@ -15,7 +15,7 @@ import { paver, GRANITE } from './paving.js';
 import { kerb } from './edges.js';
 import { lamps, bench, bins, lightSet, STEEL } from './furniture.js';
 import { bed, cluster, grass } from './planting.js';
-import { coastSteps, rail, along } from './coast.js';
+import { coastSteps, rail } from './coast.js';
 import { SAND } from '../skyline.js';
 import * as S from '../island-south.js';
 
@@ -29,9 +29,6 @@ const WET = new THREE.Color(SAND).multiplyScalar(0.9).getStyle();
 const SURF = '#b9c6cc'; // as the west coast's (outdoor/coast.js)
 const FOAM = { cast: false, opts: { transparent: true, opacity: 0.3, depthWrite: false } };
 const ROCKS = ['#5f666e', '#6b7279', '#585e66', '#737a82'];
-const SHALLOW = '#6c8794';
-const SHALLOWS = { cast: false, opts: { transparent: true, opacity: 0.3, depthWrite: false } };
-const FOAM_LINE = { cast: false, opts: { transparent: true, opacity: 0.85, depthWrite: false } };
 const SHADE = new THREE.Color(SAND).multiplyScalar(0.8).getStyle();
 const DUNE = '#7a8460';
 const CANVAS = '#3f6f77'; // the canteen's awning teal (plaza-buildings.js AWNING)
@@ -116,6 +113,50 @@ function boulder(p, x, z, r, y) {
     .scale(1.15, 0.6, 1)
     .translate(x, y + r * 0.2, z);
   p.geo(ROCKS[Math.floor(hash2(z, x, 85) * 4)], g, { cast: false });
+}
+
+// Connected, softly fading bands follow the beach instead of overlapping rectangular
+// wet-sand and shallow-water tiles. Parts carries the opacity in each vertex.
+function shoreRibbon(p, shore, color, lanes, y) {
+  const points = [];
+  for (let i = 0; i + 1 < shore.length; i++) {
+    const a = shore[i],
+      b = shore[i + 1],
+      count = Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.6);
+    for (let j = 0; j < count; j++)
+      points.push([a[0] + ((b[0] - a[0]) * j) / count, a[1] + ((b[1] - a[1]) * j) / count]);
+  }
+  points.push(shore.at(-1));
+  const rows = points.map((a, i) => {
+    const prev = points[Math.max(0, i - 1)],
+      next = points[Math.min(points.length - 1, i + 1)],
+      length = Math.hypot(next[0] - prev[0], next[1] - prev[1]),
+      n = [-(next[1] - prev[1]) / length, (next[0] - prev[0]) / length],
+      wave = 0.07 * Math.sin(i * 0.53) + 0.035 * Math.sin(i * 1.17);
+    return lanes.map(([offset, alpha]) => [a[0] + n[0] * (offset + wave), y, a[1] + n[1] * (offset + wave), alpha]);
+  });
+  const position = [],
+    alpha = [];
+  for (let i = 0; i + 1 < rows.length; i++)
+    for (let j = 0; j + 1 < lanes.length; j++)
+      for (const v of [
+        rows[i][j],
+        rows[i + 1][j],
+        rows[i][j + 1],
+        rows[i][j + 1],
+        rows[i + 1][j],
+        rows[i + 1][j + 1],
+      ]) {
+        position.push(...v.slice(0, 3));
+        alpha.push(v[3]);
+      }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(position, 3));
+  p.geo(color, g, {
+    cast: false,
+    opts: { transparent: true, depthWrite: false, side: THREE.DoubleSide },
+    alpha,
+  });
 }
 
 export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
@@ -285,6 +326,28 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
     clearRects.some(([a, b, c, d]) => x + radius > a && x - radius < b && z + radius > c && z - radius < d);
   yield* beachThings(p, at, clear);
   const shore = S.SHORELINE.map(([x, z]) => at(x, z));
+  shoreRibbon(
+    p,
+    shore,
+    WET,
+    [
+      [-2.1, 0],
+      [-0.65, 0.45],
+      [0, 0.65],
+    ],
+    -0.142,
+  );
+  shoreRibbon(
+    p,
+    shore,
+    SURF,
+    [
+      [-0.04, 0],
+      [0.18, 0.6],
+      [0.6, 0],
+    ],
+    -0.172,
+  );
   for (let i = 0; i + 1 < shore.length; i++) {
     const a = shore[i],
       b = shore[i + 1],
@@ -292,16 +355,6 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
       d = [(b[0] - a[0]) / L, (b[1] - a[1]) / L],
       n = [-d[1], d[0]], // toward the sea
       Q = (u, o) => [a[0] + d[0] * u + n[0] * o, a[1] + d[1] * u + n[1] * o];
-    along(p, WET, Q(L / 2, -0.8), d, L + 0.5, 1.6, -0.16, -0.143, { cast: false });
-    along(p, SHALLOW, Q(L / 2, 1.3), d, L + 0.2, 2.2, -0.2, -0.19, SHALLOWS);
-    along(p, SURF, Q(L / 2, 0.2), d, L + 0.4, 0.45, -0.19, -0.172, FOAM_LINE);
-    for (let u = 0.6; u < L - 0.4; u += 1.1 + hash2(u, i, 61) * 1.2) {
-      const f = new THREE.DodecahedronGeometry(0.6 + hash2(i, u, 63) * 0.5, 0)
-        .scale(2.2, 0.03, 0.8)
-        .rotateY(Math.atan2(-d[1], d[0]));
-      const [fx, fz] = Q(u, 0.35 + hash2(u, i, 65) * 0.5);
-      p.geo(SURF, f.translate(fx, -0.18, fz), FOAM);
-    }
     for (let u = 1.5 + hash2(i, 0, 67) * 2; u < L - 0.6; u += 3.5 + hash2(u, i, 69) * 3) {
       const h = hash2(u, i, 71),
         off =

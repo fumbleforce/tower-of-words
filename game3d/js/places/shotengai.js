@@ -230,10 +230,10 @@ export async function shotengaiPlace(game) {
         cam.fit(
           aspect,
           [
-            new THREE.Vector3(-2.9, 0, 0),
-            new THREE.Vector3(2.9, 0, 0),
-            new THREE.Vector3(0, 0, -2.6),
-            new THREE.Vector3(0, 1.2, 2.4),
+            new THREE.Vector3(-4.8, 0, 0),
+            new THREE.Vector3(4.8, 0, 0),
+            new THREE.Vector3(0, 0, -4.8),
+            new THREE.Vector3(0, 1.2, 4.8),
           ],
           new THREE.Vector3(0, 0, 0),
           { follow: true, clamp: [-22, 8.4, az0 - 9, az1 + 7.5], lead: -3.4 },
