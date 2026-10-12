@@ -1,4 +1,5 @@
 // Scenario setup only. Callers own their route actions, assertions and capture policy.
+// url (then URL) is an exact page address; otherwise BASE/PORT select a served checkout.
 import { waitForGame } from './wait-ready.mjs';
 
 export async function openGame(browser, {
@@ -19,8 +20,10 @@ export async function openGame(browser, {
       localStorage.setItem('amakawa-onboard', JSON.stringify(value));
     }, initialOnboarding);
     if (beforeNavigate) await beforeNavigate(page, context);
-    const target = new URL(url || `http://127.0.0.1:${process.env.PORT || 8771}/game3d/index.html`);
-    if (!url) {
+    const explicitUrl = url || process.env.URL;
+    const base = (process.env.BASE || 'game3d').replace(/^\/+|\/+$/g, '');
+    const target = new URL(explicitUrl || `http://127.0.0.1:${process.env.PORT || 8771}/${base}/index.html`);
+    if (!explicitUrl) {
       target.searchParams.set('q', String(quality));
       if (mode === 'fast') target.searchParams.set('test', 'fast');
       if (route) target.searchParams.set('route', route);

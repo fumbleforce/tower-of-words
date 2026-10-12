@@ -1,6 +1,6 @@
 // Real train/lift continuations outside a Runner scene, plus pending openings and the end card.
 import assert from 'node:assert/strict';
-import { withBrowserJob } from '../lib/browser-job.mjs';
+import { withBrowserJob, gpuWaitOptions } from '../lib/browser-job.mjs';
 import { openGame } from '../../game3d/test/support/open-game.mjs';
 import fixture from '../../game3d/test/fixtures/save-v1.json' with { type: 'json' };
 
@@ -74,7 +74,7 @@ try {
           else await page.waitForFunction(() => window.__game.transition?.phase === 'leaving'
             && !window.__game.runner.frames.length && !!window.__game.ui._advance, null, { timeout: 60000 });
           const captured = await page.evaluate(async scenario => {
-            const g = window.__game, S = await import('/game3d/js/sim.js');
+            const g = window.__game, S = await import(new URL('js/sim.js', document.baseURI).href);
             g.paused = true;
             if (scenario === 'lift-arriving') {
               localStorage.setItem('amakawa-day1-save', JSON.stringify(window.__arrivingSave));
@@ -128,7 +128,7 @@ try {
         throw error;
       } finally { await opened.close(); }
     }
-  }, { timeoutMs: 285000 });
+  }, gpuWaitOptions(60, 285000));
 } catch (error) {
   console.error(`${error.code === 'LOAD_DEFERRED' ? 'DEFERRED' : 'FAIL'} transitions: ${error.stack || error.message}`);
   process.exitCode = error.code === 'LOAD_DEFERRED' ? 75 : 1;

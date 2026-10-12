@@ -1,6 +1,6 @@
 // Actual title and pause Load paths, including the reload used by manual slots.
 import assert from 'node:assert/strict';
-import { withBrowserJob } from '../lib/browser-job.mjs';
+import { withBrowserJob, gpuWaitOptions } from '../lib/browser-job.mjs';
 import { openGame } from '../../game3d/test/support/open-game.mjs';
 import fixture from '../../game3d/test/fixtures/save-v1.json' with { type: 'json' };
 
@@ -61,7 +61,7 @@ try {
         let capturedWorld;
         if (mode === 'moving') {
           const pending = await page.evaluate(async () => {
-            const g = window.__game, S = await import('/game3d/js/sim.js');
+            const g = window.__game, S = await import(new URL('js/sim.js', document.baseURI).href);
             await g.hooks.walk({ who: 'mori', to: 'chief_desk', wait: false });
             g.paused = true;
             S.save(g);
@@ -83,7 +83,7 @@ try {
           assert.equal(arrived.seated, true);
           assert.deepEqual([arrived.position[0], arrived.position[2]], [2.16, -3.36]);
           const contact = await page.evaluate(async () => {
-            const g = window.__game, { seatContact } = await import('/game3d/test/support/seat-contact.mjs');
+            const g = window.__game, { seatContact } = await import(new URL('test/support/seat-contact.mjs', document.baseURI).href);
             const busy = g.busy, cam = g.place.cam;
             g.busy = true;
             try {
@@ -99,7 +99,7 @@ try {
         }
         if (mode === 'roundtrip') {
           if (place === 'office') await page.evaluate(async () => {
-            const g = window.__game, S = await import('/game3d/js/sim.js');
+            const g = window.__game, S = await import(new URL('js/sim.js', document.baseURI).href);
             g.setHurry(true);
             await g.place.walkPerson('mori', g.posOf('chief_desk'));
             g.setHurry(false);
@@ -113,7 +113,7 @@ try {
         }
         const state = await page.evaluate(async () => {
           const g = window.__game;
-          const S = await import('/game3d/js/sim.js');
+          const S = await import(new URL('js/sim.js', document.baseURI).href);
           S.save(g);
           return { data: S.loadSave(), bodyPlace: document.body.dataset.place, runnerPlace: g.runner.place === g.place,
             playerPosition: g.player.root.position.toArray(),
@@ -122,7 +122,10 @@ try {
         });
         const { world, ...data } = state.data;
         assert.deepEqual(data, {
-          ...saved, pendingStart: null, runner: { ...saved.runner, execution: null },
+          ...saved, pendingStart: null, goalDestination: null,
+          // Day-one legacy saves know the day of their known words, without inventing a place or period.
+          learned: { ugoite: { day: 1 }, ohayo: { day: 1 } },
+          runner: { ...saved.runner, execution: null },
           zones: { place, consumed: [] },
           // Office restoration initializes its lunch availability; day 1 has no offer.
           flags: { ...saved.flags, ...(place === 'office' ? { mio_lunch_offer: 0 } : {}) },
@@ -168,7 +171,7 @@ try {
       } catch (error) { failures.push(error.message); console.error(`FAIL Continue ${place}/${mode}: ${error.message}`); }
       finally { if (opened) await opened.close(); }
     }
-  }, { timeoutMs: 240000 });
+  }, gpuWaitOptions(60, 240000));
   process.exitCode = failures.length ? 1 : 0;
 } catch (error) {
   console.error(`${error.code === 'LOAD_DEFERRED' ? 'DEFERRED' : 'FAIL'} Continue: ${error.message}`);

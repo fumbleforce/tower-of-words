@@ -3,6 +3,15 @@ import { EventEmitter } from 'node:events';
 import { test } from 'node:test';
 import { openGame } from '../support/open-game.mjs';
 
+function setEnv(t, key, value) {
+  const previous = process.env[key];
+  process.env[key] = value;
+  t.after(() => {
+    if (previous === undefined) delete process.env[key];
+    else process.env[key] = previous;
+  });
+}
+
 function browserFixture({ http = 200, closeFails = false } = {}) {
   const page = new EventEmitter(), calls = { modes: [], init: [], clicked: 0, tapped: 0, closed: 0 };
   page.addInitScript = async (fn, data) => calls.init.push({ fn, data });
@@ -66,4 +75,34 @@ test('trace setup runs before navigation and its failure closes the context', as
   } }), /trace setup failed/);
   assert.equal(calls.closed, 1);
   assert.equal(calls.url, undefined);
+});
+
+
+test('BASE and PORT select a worktree while retaining generated startup parameters', async t => {
+  setEnv(t, 'BASE', '/.claude/worktrees/candidate/game3d/');
+  setEnv(t, 'PORT', '9881');
+  setEnv(t, 'URL', '');
+  const { browser, calls } = browserFixture();
+  const opened = await openGame(browser, { mode: 'fast', quality: 2, route: 'office' });
+  assert.equal(calls.url.href, 'http://127.0.0.1:9881/.claude/worktrees/candidate/game3d/index.html?q=2&test=fast&route=office');
+  await opened.close();
+});
+
+test('environment URL overrides BASE and keeps its explicit query', async t => {
+  setEnv(t, 'BASE', 'wrong/game3d');
+  setEnv(t, 'URL', 'http://127.0.0.1:8771/candidate/game3d/index.html?q=2&probe=1');
+  const { browser, calls } = browserFixture();
+  const opened = await openGame(browser, { mode: 'title', quality: 0 });
+  assert.equal(calls.url.href, process.env.URL);
+  await opened.close();
+});
+
+test('caller URL overrides environment URL and BASE unchanged', async t => {
+  setEnv(t, 'BASE', 'wrong/game3d');
+  setEnv(t, 'URL', 'http://127.0.0.1:8771/also-wrong/index.html');
+  const { browser, calls } = browserFixture();
+  const url = 'http://127.0.0.1:8771/chosen/game3d/index.html?q=1';
+  const opened = await openGame(browser, { url, mode: 'title' });
+  assert.equal(calls.url.href, url);
+  await opened.close();
 });
